@@ -1,3 +1,5 @@
 ﻿{
-  "item.shape-shifter-curse.cursed_book_of_shape_shifter": "Strange book"
+  "item.shape-shifter-curse.cursed_book_of_shape_shifter": ["Strange book"],
+  "screen.shape-shifter-curse.start_book.start_button_text": ["TestButton"],
+  "item.spawn_egg.custom_bat_spawn_egg": ["Bat? Spawn Egg"]
 }

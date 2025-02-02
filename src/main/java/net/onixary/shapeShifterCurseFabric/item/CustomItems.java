@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.items;
+package net.onixary.shapeShifterCurseFabric.item;
 
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;

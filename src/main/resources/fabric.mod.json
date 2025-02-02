@@ -13,16 +13,11 @@
 
   "environment": "client",
   "entrypoints": {
-    "client": ["net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient"],
     "main": ["net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric"]
   },
 
   "mixins": [
     "shape-shifter-curse.mixins.json"
-    ,{
-      "config": "shape-shifter-curse.client.mixins.json",
-      "environment": "client"
-    }
   ],
 
   "depends": {

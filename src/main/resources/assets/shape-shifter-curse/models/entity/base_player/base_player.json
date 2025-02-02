@@ -1,0 +1,7 @@
+﻿{
+  "parent": "minecraft:entity/player",
+  "textures": {
+    "layer0": "shape-shifter-curse:entity/base_player/ssc_base_skin",
+    "layer1": "shape-shifter-curse:entity/base_player/ssc_base_skin"
+  }
+}

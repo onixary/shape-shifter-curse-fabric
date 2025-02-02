@@ -1,0 +1,38 @@
+﻿<owo-ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.gitmirror.com/wisp-forest/owo-lib/1.20/owo-ui.xsd">
+    <components>
+        <flow-layout direction="vertical">
+            <children> <!---->
+                <flow-layout direction="vertical"> <!---->
+                    <children>
+                        <button id="the-button"> <!---->
+                            <text translate="true">
+                                screen.shape-shifter-curse.start_book.start_button_text
+                            </text> <!---->
+                        </button>
+                    </children>
+
+                    <horizontal-alignment>center</horizontal-alignment>
+                    <vertical-alignment>center</vertical-alignment>
+
+                    <!---->
+                    <padding>
+                        <all>10</all>
+                    </padding>
+
+                    <surface>
+                        <panel dark="true"/>
+                    </surface>
+                </flow-layout>
+            </children>
+
+            <vertical-alignment>center</vertical-alignment>
+            <horizontal-alignment>center</horizontal-alignment>
+
+            <!---->
+            <surface>
+                <vanilla-translucent/>
+            </surface>
+        </flow-layout>
+    </components>
+</owo-ui>
