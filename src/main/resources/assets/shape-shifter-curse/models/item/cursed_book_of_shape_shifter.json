@@ -1,0 +1,42 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "shape-shifter-curse:item/cursed_book_of_shape_shifter",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "shape-shifter-curse:item/cursed_book_of_shape_shifter"
+	},
+	"gui_light": "front",
+	"elements": [
+		{
+			"from": [5, 4, 7],
+			"to": [12, 11, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 7]},
+			"faces": {
+				"north": {"uv": [0, 0, 6, 5.5], "texture": "#0"},
+				"east": {"uv": [6, 2, 7, 7.5], "texture": "#0"},
+				"south": {"uv": [0, 5.5, 6, 11], "texture": "#0"},
+				"west": {"uv": [7, 2, 8, 7.5], "texture": "#0"},
+				"up": {"uv": [12, 1, 6, 0], "texture": "#0"},
+				"down": {"uv": [12, 1, 6, 2], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [93.75, 0, 0],
+			"translation": [-0.25, -2, 0]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [92.25, 0, 0],
+			"translation": [0, -2.25, 0]
+		},
+		"firstperson_righthand": {
+			"rotation": [-180, 82.75, -180],
+			"translation": [0.5, 2.75, 0]
+		},
+		"firstperson_lefthand": {
+			"rotation": [-180, 57.5, 180],
+			"translation": [0, 3.75, 0]
+		}
+	}
+}
