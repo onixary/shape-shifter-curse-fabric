@@ -38,15 +38,17 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
         if(PlayerDataStorage.loadPlayerDataAsBoolean("isEnableContent") && !ShapeShifterCurseFabric.CONFIG.keepOriginalSkin())
         {
             // 渲染手臂
+
             Identifier CUSTOM_SKIN =
                     new Identifier(ShapeShifterCurseFabric.MOD_ID, "textures/entity/base_player/ssc_base_skin.png");
-            MinecraftClient.getInstance().getTextureManager().bindTexture(CUSTOM_SKIN);
             RenderSystem.disableCull();
-            VertexConsumer vertexConsumerArm = vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(CUSTOM_SKIN));
+            MinecraftClient.getInstance().getTextureManager().bindTexture(CUSTOM_SKIN);
+            VertexConsumer vertexConsumerArm = vertexConsumers.getBuffer(RenderLayer.getEntitySolid(CUSTOM_SKIN));
             arm.render(matrices, vertexConsumerArm, light, OverlayTexture.DEFAULT_UV);
-            sleeve.render(matrices, vertexConsumerArm, light, OverlayTexture.DEFAULT_UV);
+            VertexConsumer vertexConsumerSleeve = vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(CUSTOM_SKIN));
+            sleeve.render(matrices, vertexConsumerSleeve, light, OverlayTexture.DEFAULT_UV);
             RenderSystem.enableCull();
-            ci.cancel(); // 取消默认渲染}
+            ci.cancel(); // 取消默认渲染
         }
     }
 }

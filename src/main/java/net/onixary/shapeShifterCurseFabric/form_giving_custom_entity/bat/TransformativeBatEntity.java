@@ -5,17 +5,26 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.BatEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
+import net.onixary.shapeShifterCurseFabric.status_effects.TStatusApplier;
 
 public class TransformativeBatEntity extends BatEntity {
 
     public TransformativeBatEntity(EntityType<? extends BatEntity> entityType, World world) {
         super(entityType, world);
     }
+
+    public static DefaultAttributeContainer.Builder createTBatAttributes() {
+        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0);
+    }
+
     // 20 ticks = 1 second
     private static final float ATTACK_COOLDOWN = 100.0F;
 
@@ -46,7 +55,9 @@ public class TransformativeBatEntity extends BatEntity {
             double distance = this.squaredDistanceTo(player);
             if (distance <= StaticParams.CUSTOM_MOB_DEFAULT_ATTACK_RANGE * StaticParams.CUSTOM_MOB_DEFAULT_ATTACK_RANGE) {
                 // 对玩家造成伤害
-                player.damage(this.getDamageSources().mobAttack(this), StaticParams.CUSTOM_MOB_DEFAULT_DAMAGE);
+                tryAttack(player);
+                // 概率施加效果
+                TStatusApplier.applyStatusFromTMob(this, player);
                 // 重置冷却时间
                 cooldown = ATTACK_COOLDOWN;
             }
@@ -54,23 +65,26 @@ public class TransformativeBatEntity extends BatEntity {
 
         // 生成粒子效果
         if (this.getWorld().isClient) {
-            for (int i = 0; i < 2; i++) {
-                this.getWorld().addParticle(ParticleTypes.ENTITY_EFFECT,
+            for (int i = 0; i < 1; i++) {
+                this.getWorld().addParticle(StaticParams.CUSTOM_MOB_DEFAULT_PARTICLE,
                         this.getX() + (this.random.nextDouble() - 0.5) * 0.5,
                         this.getY() + this.random.nextDouble() * 1.5,
                         this.getZ() + (this.random.nextDouble() - 0.5) * 0.5,
-                        0, 0.5, 0);
+                        0, 0, 0);
             }
         }
     }
 
     @Override
     public boolean tryAttack(Entity target) {
-        // 对目标造成伤害
-        boolean attacked = target.damage(this.getDamageSources().mobAttack(this), StaticParams.CUSTOM_MOB_DEFAULT_DAMAGE);
-        if (attacked) {
-            this.applyDamageEffects(this, target);
+        // 只对玩家造成伤害
+        if(target instanceof PlayerEntity) {
+            boolean attacked = target.damage(this.getDamageSources().mobAttack(this), StaticParams.CUSTOM_MOB_DEFAULT_DAMAGE);
+            if (attacked) {
+                this.applyDamageEffects(this, target);
+            }
+            return attacked;
         }
-        return attacked;
+        return false;
     }
 }

@@ -10,15 +10,17 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
+import static net.minecraft.item.Items.register;
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.T_BAT;
 
 public class RegEntitySpawnEgg {
+    private RegEntitySpawnEgg(){}
     // 注册刷怪蛋
     //public static final Item T_BAT_SPAWN_EGG = new SpawnEggItem(
     //        T_BAT, 0x1F1F1F, 0x8B8B8B, new Item.Settings()
     //);
 
-    public static final Item T_BAT_SPAWN_EGG = register("custom_bat_spawn_egg.json", new SpawnEggItem(
+    public static final Item T_BAT_SPAWN_EGG = register("custom_bat_spawn_egg", new SpawnEggItem(
             T_BAT, 0x1F1F1F, 0x8B8B8B, new FabricItemSettings()
     ));
 
@@ -27,6 +29,7 @@ public class RegEntitySpawnEgg {
     }
 
     public static void initialize() {
+        //Registry.register(Registries.ITEM, new Identifier(ShapeShifterCurseFabric.MOD_ID, "custom_bat_spawn_egg"), T_BAT_SPAWN_EGG);
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(content -> {
             content.add(T_BAT_SPAWN_EGG);
         });

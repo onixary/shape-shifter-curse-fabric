@@ -1,5 +1,24 @@
 ﻿{
   "item.shape-shifter-curse.cursed_book_of_shape_shifter": ["Strange book"],
   "screen.shape-shifter-curse.start_book.start_button_text": ["TestButton"],
-  "item.spawn_egg.custom_bat_spawn_egg": ["Bat? Spawn Egg"]
+  "entity.shape-shifter-curse.t_bat": ["Bat?"],
+  "item.shape-shifter-curse.custom_bat_spawn_egg": ["Bat? Spawn Egg"],
+  "effect.shape-shifter-curse.to_bat_0_effect": [
+    "...that strange",
+    {
+      "text": "bat", "color": "#0096FF"
+    },
+    "?"
+  ],
+  "effect.shape-shifter-curse.to_bat_0_effect.description": [
+    "You suddenly feel very",
+    {
+      "text": "sleepy", "color": "#0096FF"
+    },
+    ", maybe you should",
+    {
+      "text": "take a nap", "color": "yellow"
+    },
+    "?"
+  ]
 }

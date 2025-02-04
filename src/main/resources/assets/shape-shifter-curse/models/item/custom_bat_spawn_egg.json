@@ -1,7 +1,3 @@
 ﻿{
-  "parent": "minecraft:item/template_spawn_egg",
-  "textures": {
-    "layer0": "shape-shifter-curse:item/custom_bat_spawn_egg",
-    "layer1": "shape-shifter-curse:item/custom_bat_spawn_egg_overlay"
-  }
+  "parent": "minecraft:item/template_spawn_egg"
 }

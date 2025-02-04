@@ -1,5 +1,24 @@
 {
   "item.shape-shifter-curse.cursed_book_of_shape_shifter": ["奇怪的书"],
   "screen.shape-shifter-curse.start_book.start_button_text": ["测试按钮"],
-  "item.spawn_egg.custom_bat_spawn_egg": ["蝙蝠？刷怪蛋"]
+  "entity.shape-shifter-curse.t_bat": ["蝙蝠？"],
+  "item.shape-shifter-curse.custom_bat_spawn_egg": ["蝙蝠？刷怪蛋"],
+  "effect.shape-shifter-curse.to_bat_0_effect": [
+    "...奇怪的",
+    {
+      "text": "蝙蝠", "color": "#0096FF"
+    },
+    "?"
+  ],
+  "effect.shape-shifter-curse.to_bat_0_effect.description": [
+    "你突然感到很",
+    {
+      "text": "困倦", "color": "#0096FF"
+    },
+    "，也许你应该去",
+    {
+      "text": "睡一觉", "color": "yellow"
+    },
+    "?"
+  ]
 }
