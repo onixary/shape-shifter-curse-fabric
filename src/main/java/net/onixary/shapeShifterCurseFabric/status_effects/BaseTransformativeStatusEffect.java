@@ -3,12 +3,7 @@ package net.onixary.shapeShifterCurseFabric.status_effects;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.data.PlayerForms;
-import net.onixary.shapeShifterCurseFabric.status_effects.effects.ToBatStatus0;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 
 // 自定义药水效果基类（含类型和回调）
 public class BaseTransformativeStatusEffect extends StatusEffect {

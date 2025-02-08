@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.data;
+package net.onixary.shapeShifterCurseFabric.player_form;
 
 public enum PlayerForms {
     ORIGINAL_BEFORE_ENABLE,

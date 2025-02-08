@@ -5,9 +5,11 @@ import io.wispforest.owo.ui.component.Components;
 import io.wispforest.owo.ui.container.Containers;
 import io.wispforest.owo.ui.container.FlowLayout;
 import io.wispforest.owo.ui.core.*;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
-import net.onixary.shapeShifterCurseFabric.data.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
 
 public class StartBookScreen extends BaseOwoScreen<FlowLayout> {
     // 出于翻译与动态文本的考量，不使用XML来构建
+    public PlayerEntity currentPlayer;
 
     @Override
     protected @NotNull OwoUIAdapter<FlowLayout> createAdapter() {
@@ -39,13 +42,11 @@ public class StartBookScreen extends BaseOwoScreen<FlowLayout> {
                                         button ->
                                         {
                                             // toggle skin override
-                                            if(!PlayerDataStorage.loadPlayerDataAsBoolean("isEnableContent")){
-                                                PlayerDataStorage.savePlayerData("isEnableContent", true);
-                                                PlayerDataStorage.savePlayerForm("playerForm", PlayerForms.ORIGINAL_SHIFTER);
+                                            if(FormAbilityManager.getForm(currentPlayer) == PlayerForms.ORIGINAL_BEFORE_ENABLE){
+                                                FormAbilityManager.applyForm(currentPlayer, PlayerForms.ORIGINAL_SHIFTER);
                                             }
                                             else{
-                                                PlayerDataStorage.savePlayerData("isEnableContent", false);
-                                                PlayerDataStorage.savePlayerForm("playerForm", PlayerForms.ORIGINAL_BEFORE_ENABLE);
+                                                FormAbilityManager.applyForm(currentPlayer, PlayerForms.ORIGINAL_BEFORE_ENABLE);
                                             }
 
                                         }

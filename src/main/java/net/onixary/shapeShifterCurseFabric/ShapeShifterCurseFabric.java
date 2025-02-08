@@ -1,14 +1,10 @@
 package net.onixary.shapeShifterCurseFabric;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -22,28 +18,34 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.profiler.Profiler;
 import net.onixary.shapeShifterCurseFabric.data.ConfigSSC;
 import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegEntitySpawnEgg;
-import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.BatEntityModel;
-import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.BatEntityRenderer;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.TEntitySpawnHandler;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.item.CustomItems;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormAbilities;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
+import net.onixary.shapeShifterCurseFabric.data.PlayerEventHandler;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.savePlayerFormComponent;
+import static net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager.saveForm;
 import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.*;
 
 
 public class ShapeShifterCurseFabric implements ModInitializer {
 
     public static final String MOD_ID = "shape-shifter-curse";
+    // 用于调试的 UUID，打包中需要将其设为 null
+    public static final String DEBUG_UUID = "testUUID-3d9ab571-1ea5-360b-bc9d-77cd0b2f72a9";
 
     // This logger is used to write text to the console and the log file.
     // It is considered best practice to use your mod id as the logger's name.
@@ -71,14 +73,22 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         CustomItems.initialize();
         RegEntitySpawnEgg.initialize();
         RegTStatusEffect.initialize();
+        PlayerEventHandler.register();
+        TEntitySpawnHandler.register();
+        RegFormAbilities.register();
+        RegFormConfig.register();
         save_timer = 0;
+        // Reg origins content
+
         // Reg custom entities model and renderer
-        FabricDefaultAttributeRegistry.register(T_BAT, TransformativeBatEntity.createTBatAttributes());
+        /*FabricDefaultAttributeRegistry.register(T_BAT, TransformativeBatEntity.createTBatAttributes());
         EntityRendererRegistry.register(T_BAT, (context) -> {
             return new BatEntityRenderer(context);
-        });
+        });*/
         // load and save attached
-        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+        // use PlayerEventHandler
+
+        /*ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             PlayerEntity player = handler.player;
             boolean hasAttachment = loadCurrentAttachment(player);
             if(!hasAttachment) {
@@ -87,12 +97,16 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             else{
                 LOGGER.info("Attachment loaded ");
             }
-        });
+        });*/
+
+        // do not reset effect when player respawn or enter hell
+
 
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
             PlayerEntity player = handler.player;
             LOGGER.info("Player disconnect, save attachment");
             saveCurrentAttachment(player);
+            saveForm(player);
         });
 
         // Reg listeners
@@ -112,14 +126,28 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             return null;
         });
 
-        EntityModelLayerRegistry.registerModelLayer(T_BAT_LAYER, BatEntityModel::getTexturedModelData);
+        /*HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
+            PlayerEntity player = MinecraftClient.getInstance().player;
+            if (player != null) {
+                for (StatusEffectInstance effect : player.getStatusEffects()) {
+                    if (effect.getEffectType() instanceof BaseTransformativeStatusEffect) {
+                        Text description = Text.translatable(effect.getEffectType().getTranslationKey() + ".description");
+                        drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, description, 0, 0, 0xFFFFFF);
+                    }
+                }
+            }
+        });*/
+        //TStatusHUDHandler.register();
+
+        /*EntityModelLayerRegistry.registerModelLayer(T_BAT_LAYER, BatEntityModel::getTexturedModelData);
+
         // entity spawn replacer
-        /*ClientEntityEvents.ENTITY_LOAD.register((entity, world) -> {
+        ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
             if (entity instanceof BatEntity) {
                 // 50% 概率替换为自定义蝙蝠
                 if (world.getRandom().nextFloat() < 0.5f) {
                     TransformativeBatEntity customBat = new TransformativeBatEntity(
-                            RegTransformativeEntity.T_BAT, world
+                            T_BAT, world
                     );
                     customBat.refreshPositionAndAngles(
                             entity.getX(), entity.getY(), entity.getZ(),
@@ -132,7 +160,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         });*/
 
 
-        LOGGER.info(CONFIG.keepOriginalSkin() ? "Original skin will be kept." : "Override skin");
+        //LOGGER.info(CONFIG.keepOriginalSkin() ? "Original skin will be kept." : "Override skin");
     }
 
     private void onPlayerEndSleeping(LivingEntity entity, BlockPos world) {
@@ -165,11 +193,12 @@ public class ShapeShifterCurseFabric implements ModInitializer {
                 }
             }
 
-            // save attachment every 5 sec
+            // save every 5 sec
             save_timer += 1;
             if(save_timer >= 100) {
                 LOGGER.info("Player paused, save attachment");
                 saveCurrentAttachment(player);
+                saveForm(player);
                 save_timer = 0;
             }
         }

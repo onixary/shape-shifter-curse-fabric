@@ -2,9 +2,12 @@ package net.onixary.shapeShifterCurseFabric.mixin;
 
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -24,9 +27,12 @@ public abstract class OverrideSkinThirdPersonMixin {
     )
     private void onGetTexture(Entity entity, CallbackInfoReturnable<Identifier> cir) {
         // 在这里可以添加自定义逻辑来决定是否使用自定义皮肤
-        if (PlayerDataStorage.loadPlayerDataAsBoolean("isEnableContent") && !ShapeShifterCurseFabric.CONFIG.keepOriginalSkin()) {
-            cir.setReturnValue(CUSTOM_SKIN);
-            cir.cancel();
+        if(entity instanceof PlayerEntity player) {
+            if (RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm() != PlayerForms.ORIGINAL_BEFORE_ENABLE && !ShapeShifterCurseFabric.CONFIG.keepOriginalSkin()) {
+                cir.setReturnValue(CUSTOM_SKIN);
+                cir.cancel();
+            }
         }
+
     }
 }

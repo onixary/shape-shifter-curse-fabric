@@ -16,6 +16,8 @@ import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.ConfigSSC;
 import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -35,7 +37,7 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
     )
 
     private void onRenderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
-        if(PlayerDataStorage.loadPlayerDataAsBoolean("isEnableContent") && !ShapeShifterCurseFabric.CONFIG.keepOriginalSkin())
+        if(RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm() != PlayerForms.ORIGINAL_BEFORE_ENABLE && !ShapeShifterCurseFabric.CONFIG.keepOriginalSkin())
         {
             // 渲染手臂
 
