@@ -1,0 +1,238 @@
+{
+  "origin.origins.human.name": "Mens",
+  "origin.origins.human.description": "Een normaal mens. Je gebruikelijke Minecraft-ervaring wacht op je.",
+
+  "origin.origins.merling.name": "Meermin",
+  "origin.origins.merling.description": "Deze natuurlijke bewoners van de oceaan zijn niet gewend aan lang boven water te blijven.",
+
+  "origin.origins.arachnid.name": "Spinachtige",
+  "origin.origins.arachnid.description": "Hun klim-capaciteiten en de gave hun vijanden in webben vast te binden maken spinachtigen perfecte jagers.",
+
+  "origin.origins.blazeborn.name": "Blazegeboren",
+  "origin.origins.blazeborn.description": "Verre nakomelingen van de Blaze zijn de Blazegeboren van nature immuun voor de gevaren van de Nether.",
+
+  "origin.origins.avian.name": "Gevleugelde",
+  "origin.origins.avian.description": "Het Gevleugelde ras heeft zijn vaardigheid om te vliegen lang geleden verloren. Nu kunnen deze vredige gediertes al zwevend door de lucht gespot worden.",
+
+  "origin.origins.phantom.name": "Phantoom",
+  "origin.origins.phantom.description": "Als half-mens, half-phantoom kroost kunnen deze wezens wisselen tussen een normaal gestalte en een Phantoom-vorm.",
+
+  "origin.origins.feline.name": "Katachtige",
+  "origin.origins.feline.description": "Met hun kattig uiterlijk jagen de Katachtigen creepers ver weg. En soepeltjes als een kat komen ze altijd op hun pootjes terecht.",
+
+  "origin.origins.elytrian.name": "Elytriaan",
+  "origin.origins.elytrian.description": "Vaak rondvliegend in de wind zijn de Elytrianen oncomfortabel als ze eens niet zo veel hoofdruimte hebben.",
+
+  "origin.origins.enderian.name": "Enderiaan",
+  "origin.origins.enderian.description": "Geboren als zonen en dochters van de Enderdraak zijn Enderianen teleporteer-vaardig maar kwetsbaar voor water.",
+
+  "origin.origins.shulk.name": "Shulk",
+  "origin.origins.shulk.description": "Verwant met Shulkers zijn de lichamen van de Shulk bedekt met een stevig soort schelp-achtig schild.",
+
+  "power.origins.water_breathing.name": "Kieuwen",
+  "power.origins.water_breathing.description": "Je kan onder water ademen, maar niet op het droge.",
+
+  "power.origins.aqua_affinity.name": "Aqua Affiniteit",
+  "power.origins.aqua_affinity.description": "Jij kan onderwater blokken net zo makkelijk breken als anderen op het land.",
+
+  "power.origins.water_vision.name": "Natte Ogen",
+  "power.origins.water_vision.description": "Jouw visie onder water is perfect.",
+
+  "power.origins.swim_speed.name": "Vinnen",
+  "power.origins.swim_speed.description": "Je onderwatersnelheid is verhoogd.",
+
+  "power.origins.like_water.name": "Als Water",
+  "power.origins.like_water.description": "Wanneer je onder water bent zink je niet tenzij je het zelf wilt.",
+
+  "power.origins.fragile.name": "Fragiel",
+  "power.origins.fragile.description": "Je hebt 3 levens minder dan mensen.",
+
+  "power.origins.webbing.name": "Webbend",
+  "power.origins.webbing.description": "Wanneer je een vijand in melee raakt, komen ze klem te zitten in spinnenwebben.",
+
+  "power.origins.climbing.name": "Klimmend",
+  "power.origins.climbing.description": "Je kan elke soort muur beklimmen, niet enkel ladders.",
+
+  "power.origins.carnivore.name": "Carnivoor",
+  "power.origins.carnivore.description": "Jouw dieet is beperkt tot vlees, je kan geen groenten eten.",
+
+  "power.origins.fire_immunity.name": "Vuurimmuniteit",
+  "power.origins.fire_immunity.description": "Je bent immuun tegen elke soort vuurschade.",
+
+  "power.origins.nether_spawn.name": "Nether Bewoner",
+  "power.origins.nether_spawn.description": "Jouw natuurlijke spawn zal in de Nether zijn.",
+
+  "power.origins.burning_wrath.name": "Kokende Woede",
+  "power.origins.burning_wrath.description": "Wanneer je zelf brand, doe je extra veel schade tegen vijanden.",
+
+  "power.origins.hotblooded.name": "Heetbloedig",
+  "power.origins.hotblooded.description": "Vanwege je hete lichaam verschrompeld gif, waardoor je immuun bent voor vergiftiging of honger effecten.",
+
+  "power.origins.water_vulnerability.name": "Hydrofobie",
+  "power.origins.water_vulnerability.description": "Als je in contact bent met water ontvang je langzaam schade.",
+
+  "power.origins.tailwind.name": "Wind in de Rug",
+  "power.origins.tailwind.description": "Je bent te voet net iets sneller dan anderen.",
+
+  "power.origins.slow_falling.name": "Licht als een Veertje",
+  "power.origins.slow_falling.description": "Je valt zo rustig als een veertje, tenzij je bukt.",
+
+  "power.origins.vegetarian.name": "Vegetariër",
+  "power.origins.vegetarian.description": "Je kan geen vlees verteren.",
+
+  "power.origins.fresh_air.name": "Frisse Lucht",
+  "power.origins.fresh_air.description": "Als je slaapt moet je bed op een hoogte van ten minste 86 blokken staan, zodat je de frisse lucht in kan ademen.",
+
+  "power.origins.phasing.name": "Geestig",
+  "power.origins.phasing.description": "Wanneer je gephantomiseerd bent kan je door vast materiaal lopen, behalve Obsidiaan.",
+
+  "power.origins.invisibility.name": "Onzichtbaarheid",
+  "power.origins.invisibility.description": "Wanneer je gephantomiseerd bent, ben je onzichtbaar.",
+
+  "power.origins.hunger_over_time.name": "Snelle Stofwisseling",
+  "power.origins.hunger_over_time.description": "Gephantomiseerd zijn zorgt ervoor dat je honger krijgt.",
+
+  "power.origins.burn_in_daylight.name": "Photoallergisch",
+  "power.origins.burn_in_daylight.description": "Je verbrandt in daglicht, tenzij je onzichtbaar bent.",
+
+  "power.origins.fall_immunity.name": "Acrobatiek",
+  "power.origins.fall_immunity.description": "Je krijgt nooit schade van een val, hoe ver je ook valt.",
+
+  "power.origins.sprint_jump.name": "Sterke Beenspieren",
+  "power.origins.sprint_jump.description": "Je kan extra hoog springen door te springen terwijl je aan het rennen bent.",
+
+  "power.origins.nine_lives.name": "Negen Levens",
+  "power.origins.nine_lives.description": "Je hebt 1 hartje minder dan de gemiddelde mens.",
+
+  "power.origins.cat_vision.name": "Nachtwezen",
+  "power.origins.cat_vision.description": "Je kan iets beter zien in het donker, boven water.",
+
+  "power.origins.weak_arms.name": "Zwakke Armen",
+  "power.origins.weak_arms.description": "Wanneer je niet onder het effect van een Kracht-drank bent, kan je natuurlijke steen alleen hakken als er niet meer dan 2 andere blokjes steen aan vast zitten.",
+
+  "power.origins.scare_creepers.name": "Kattig Uiterlijk",
+  "power.origins.scare_creepers.description": "Creepers zijn bang voor je en ontploffen alleen als jij hen eerst aanvalt.",
+
+  "power.origins.launch_into_air.name": "Gift van de Wind",
+  "power.origins.launch_into_air.description": "Iedere 30 seconden kan je jezelf zo'n 20 blokken de lucht in lanceren.",
+
+  "power.origins.elytra.name": "Gevleugeld",
+  "power.origins.elytra.description": "Je hebt Elytra vleugels zonder ze te hoeven equippen.",
+
+  "power.origins.light_armor.name": "Need for Mobility",
+  "power.origins.light_armor.description": "Je kan geen zware harnassen dragen (armor met meer bescherming dan maliën).",
+
+  "power.origins.claustrophobia.name": "Claustrofobisch",
+  "power.origins.claustrophobia.description": "Als je te lang ergens met een laag dak bent, verzwak en vertraag je.",
+
+  "power.origins.more_kinetic_damage.name": "Fragiele Botten",
+  "power.origins.more_kinetic_damage.description": "Je krijgt meer schade van het vallen en vliegen tegen blokken.",
+
+  "power.origins.aerial_combatant.name": "Luchtige Vechter",
+  "power.origins.aerial_combatant.description": "Je doet behoorlijk wat meer schade in een Elytra-vlucht.",
+
+  "power.origins.throw_ender_pearl.name": "Teleportatie",
+  "power.origins.throw_ender_pearl.description": "Wanneer je ook wilt, kan je een ender parel gooien die geen schade doet, waardoor je kan teleporteren.",
+
+  "power.origins.pumpkin_hate.name": "Vrees voor Kalebassen",
+  "power.origins.pumpkin_hate.description": "Je bent bang voor pompoenen. Voor een goede reden.",
+
+  "power.origins.extra_reach.name": "Lang Lichaam",
+  "power.origins.extra_reach.description": "Je kan van verder weg bij blokken en entiteiten.",
+
+  "power.origins.shulker_inventory.name": "Hamsteraar",
+  "power.origins.shulker_inventory.description": "Je hebt beschikking over 9 extra vakken voor je inventaris, die zelfs na de dood items blijven bewaren.",
+
+  "power.origins.natural_armor.name": "Stevige Huid",
+  "power.origins.natural_armor.description": "Zelfs zonder een harnas te dragen, biedt je huid natuurlijke bescherming.",
+
+  "power.origins.more_exhaustion.name": "Grote Trek",
+  "power.origins.more_exhaustion.description": "Je put jezelf sneller uit, waardoor je meer moet eten.",
+
+  "power.origins.no_shield.name": "Onhandig",
+  "power.origins.no_shield.description": "De manier waarop je handen gevormd zijn zorgen ervoor dat het onmogelijk is een schild rechtop te houden.",
+
+  "power.origins.strong_arms.name": "Sterke Armen",
+  "power.origins.strong_arms.description": "Je bent sterk genoeg natuurlijke steen te breken zonder een pikhouweel.",
+
+  "power.origins.translucent.name": "Doorschijnend",
+  "power.origins.translucent.description": "Jouw huid is doorschijnend.",
+
+  "category.origins": "Origins",
+  "key.origins.primary_active": "Actieve Kracht",
+  "key.origins.view_origin": "Zie Origin",
+
+  "text.autoconfig.origins.title": "Origins Configuratie",
+  "text.autoconfig.origins.option.xOffset": "Cooldown Balk X-Offset",
+  "text.autoconfig.origins.option.yOffset": "Cooldown Balk Y-Offset",
+  "text.autoconfig.origins.option.phantomizedOverlayStrength": "Gephantomiseerd Overlay Sterkte",
+
+  "item.origins.orb_of_origin": "Orb van Origin",
+
+  "enchantment.origins.water_protection": "Water Bescherming",
+
+  "container.shulker_inventory_power": "Shulker Inventaris",
+
+  "origins.gui.select": "Selecteer",
+  "origins.gui.close": "Sluit",
+  "origins.gui.choose_origin.title": "Kies jouw %s.",
+  "origins.gui.view_origin.title": "Dit is jouw %s.",
+  "origins.gui.impact.impact": "Impact",
+  "origins.gui.impact.none": "Geen",
+  "origins.gui.impact.low": "Laag",
+  "origins.gui.impact.medium": "Middel",
+  "origins.gui.impact.high": "Hoog",
+
+  "layer.origins.origin": "Origin",
+
+  "death.attack.no_water_for_gills": "%s was als een vis op het droge.",
+  "death.attack.hurt_by_water": "%s was iets te lekker aan het zwemmen.",
+
+  "commands.origin.origin_not_found": "Onbekende origin: %s",
+  "commands.origin.set.success.single": "Origin van %s naar %s gezet.",
+  "commands.origin.set.success.multiple": "Origin van %s targets naar %s gezet.",
+  "power.origins.end_spawn.name": "End Inhabitant",
+  "power.origins.end_spawn.description": "Your journey begins in the End.",
+  "power.origins.master_of_webs.name": "Master of Webs",
+  "power.origins.master_of_webs.description": "You navigate cobweb perfectly, and are able to climb in them. When you hit an enemy in melee, they get stuck in cobweb for a while. Non-arthropods stuck in cobweb will be sensed by you. You are able to craft cobweb from string.",
+  "power.origins.lay_eggs.name": "Oviparous",
+  "power.origins.lay_eggs.description": "Whenever you wake up in the morning, you will lay an egg.",
+  "power.origins.phantomize.name": "Phantom Form",
+  "power.origins.phantomize.description": "You can switch between human and phantom form at will, but only while you are saturated enough to sprint.",
+  "power.origins.like_air.name": "Like Air",
+  "power.origins.like_air.description": "Modifiers to your walking speed also apply while you're airborne.",
+  "power.origins.velvet_paws.name": "Velvet Paws",
+  "power.origins.velvet_paws.description": "Your footsteps don't cause any vibrations which could otherwise be picked up by nearby lifeforms.",
+  "key.origins.secondary_active": "Active Power (Secondary)",
+  "item.origins.orb_of_origin.layer_generic": "Lets you choose a new %s.",
+  "item.origins.orb_of_origin.layer_specific": "Sets your %1$s to \"%2$s\".",
+  "origins.gui.choose": "Choose",
+  "origins.gui.view_origin.empty": "You can not have any Origins.",
+  "origins.gui.view_origin.not_installed": "The server does not have Origins installed.",
+  "origins.gui.version_mismatch": "This server is running a different version of Origins (v%1$s) which is incompatible with the one you have installed (v%2$s).",
+  "origins.gui.badge.active": "Active ability, use with %s.",
+  "origins.gui.badge.toggle": "Toggle with %s.",
+  "origins.gui.unbound_key": "§ounbound§r",
+  "origin.origins.random.name": "Random",
+  "origin.origins.random.description": "You'll be assigned one of the following:",
+  "layer.origins.origin.name": "Origin",
+  "origin.origins.empty.name": "Missing",
+  "origin.origins.empty.description": "You do not have an Origin.",
+  "death.attack.no_water_for_gills.player": "%1$s didn't manage to keep wet because they were fighting %2$s",
+  "death.attack.hurt_by_water.player": "%1$s was put underwater by %2$s",
+  "death.attack.genericDamageOverTime": "%1$s died to a damage over time effect",
+  "death.attack.genericDamageOverTime.player": "%1$s died to a damage over time effect whilst fighting %2$s",
+  "commands.origin.get.result": "%s has the following %s: %s (%s)",
+  "commands.origin.gui.all": "Opened the selection GUI for %s players.",
+  "commands.origin.gui.layer": "Opened the \"%2$s\" selection GUI for %1$s players.",
+  "origins.avian_sleep_fail": "You need fresh air to sleep",
+  "enchantment.origins.water_protection.desc": "Delays damage from hydrophobia.",
+  "origins.gui.badge.recipe.crafting.shaped": "Crafting recipe (Shaped) provided by the power:",
+  "origins.gui.badge.recipe.crafting.shapeless": "Crafting recipe (Shapeless) provided by the power:",
+  "commands.origin.layer_not_found": "Unknown layer: %s",
+  "commands.origin.unregistered_in_layer": "Origin %1$s is not registered in layer %2$s!",
+  "commands.origin.random.all": "Randomly assigned an origin to %1$s targets in %2$s layers",
+  "commands.origin.random.not_allowed": "The layer %1$s does not allow for random origins!",
+  "commands.origin.random.success.multiple": "Randomly assigned an origin to %1$s targets in layer %2$s",
+  "commands.origin.random.success.single": "Randomly assigned the origin %2$s to %1$s in layer %3$s"
+}

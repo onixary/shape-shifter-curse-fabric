@@ -1,0 +1,25 @@
+{
+  "type": "origins:phasing",
+  "blacklist": true,
+  "render_type": "blindness",
+  "view_distance": 10,
+  "block_condition": {
+    "type": "origins:in_tag",
+    "tag": "origins:unphasable"
+  },
+  "phase_down_condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:sneaking"
+      },
+      {
+        "type": "origins:on_block"
+      }
+    ]
+  },
+  "condition": {
+    "type": "origins:power_active",
+    "power": "*:phantomize"
+  }
+}
