@@ -1,0 +1,127 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "bipedHead",
+					"pivot": [0, 24, 0]
+				},
+				{
+					"name": "bipedBody",
+					"pivot": [0, 12, 0]
+				},
+				{
+					"name": "tail_1",
+					"parent": "bipedBody",
+					"pivot": [0, 14.5, -1.25],
+					"rotation": [120, 0, -180],
+					"cubes": [
+						{
+							"origin": [-1.5, 13.86603, -1.88397],
+							"size": [3, 2, 9],
+							"uv": {
+								"north": {"uv": [20, 6], "uv_size": [3, 2]},
+								"east": {"uv": [20, 0], "uv_size": [9, 2]},
+								"south": {"uv": [20, 8], "uv_size": [3, 2]},
+								"west": {"uv": [20, 2], "uv_size": [9, 2]},
+								"up": {"uv": [16, 11], "uv_size": [3, 9]},
+								"down": {"uv": [19, 20], "uv_size": [3, -9]}
+							}
+						},
+						{
+							"origin": [-5, 14.86603, -1.88397],
+							"size": [10, 0, 11],
+							"uv": {
+								"up": {"uv": [0, 0], "uv_size": [10, 11]}
+							}
+						}
+					]
+				},
+				{
+					"name": "tail_2",
+					"parent": "tail_1",
+					"pivot": [0, 14.86603, 7.11603],
+					"rotation": [12.5, 0, 0],
+					"cubes": [
+						{
+							"origin": [-1, 14.36603, 6.11603],
+							"size": [2, 1, 8],
+							"uv": {
+								"north": {"uv": [20, 10], "uv_size": [2, 1]},
+								"east": {"uv": [20, 4], "uv_size": [8, 1]},
+								"south": {"uv": [20, 20], "uv_size": [2, 1]},
+								"west": {"uv": [20, 5], "uv_size": [8, 1]},
+								"up": {"uv": [16, 20], "uv_size": [2, 8]},
+								"down": {"uv": [18, 28], "uv_size": [2, -8]}
+							}
+						},
+						{
+							"origin": [-4, 14.86603, 7.11603],
+							"size": [8, 0, 10],
+							"uv": {
+								"up": {"uv": [0, 11], "uv_size": [8, 10]}
+							}
+						}
+					]
+				},
+				{
+					"name": "back_feather_0_elytra_hides_chestplate_hides",
+					"parent": "bipedBody",
+					"pivot": [0, 24, -2],
+					"cubes": [
+						{
+							"origin": [-10, 24, -14],
+							"size": [20, 0, 12],
+							"pivot": [0, 24, -2],
+							"rotation": [55, 0, 0],
+							"uv": {
+								"up": {"uv": [41, 37], "uv_size": [-20, -12]}
+							}
+						}
+					]
+				},
+				{
+					"name": "back_feather_1_elytra_hides_chestplate_hides",
+					"parent": "bipedBody",
+					"pivot": [0, 24, -2],
+					"cubes": [
+						{
+							"origin": [-10, 24, -10],
+							"size": [20, 0, 8],
+							"pivot": [0, 24, -2],
+							"rotation": [35, 0, 0],
+							"uv": {
+								"up": {"uv": [41, 45], "uv_size": [-20, -8]}
+							}
+						}
+					]
+				},
+				{
+					"name": "bipedRightArm",
+					"pivot": [4, 24, 0]
+				},
+				{
+					"name": "bipedLeftArm",
+					"pivot": [-4, 24, 0]
+				},
+				{
+					"name": "bipedLeftLeg",
+					"pivot": [2, 12, 0]
+				},
+				{
+					"name": "bipedRightLeg",
+					"pivot": [-2, 12, 0]
+				}
+			]
+		}
+	]
+}

@@ -16,9 +16,9 @@ public class RegFormConfig {
         CONFIGS.put(PlayerForms.ORIGINAL_BEFORE_ENABLE,
                 new FormConfig(defaultLayerID, "form_original_before_enable", 1.0f));
         CONFIGS.put(PlayerForms.ORIGINAL_SHIFTER,
-                new FormConfig(defaultLayerID, "form_original_shifter", 0.5f));
+                new FormConfig(defaultLayerID, "form_original_shifter", 1.0f));
         CONFIGS.put(PlayerForms.BAT_0,
-                new FormConfig(defaultLayerID, "form_bat_0", 0.8f));
+                new FormConfig(defaultLayerID, "form_bat_0", 0.9f));
         CONFIGS.put(PlayerForms.BAT_1,
                 new FormConfig(defaultLayerID, "form_bat_1", 1.0f));
         CONFIGS.put(PlayerForms.BAT_2,

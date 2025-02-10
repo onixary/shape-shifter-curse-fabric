@@ -1,0 +1,7 @@
+{
+  "model": "orif-defaults:geo/merling.geo.json",
+  "texture": "orif-defaults:textures/merling.png",
+  "elytraTexture": "orif-defaults:textures/merling_elytra.png",
+  "overlay": "orif-defaults:textures/merling_skin.png",
+  "overlay_slim": "orif-defaults:textures/merling_skin_thin.png"
+}

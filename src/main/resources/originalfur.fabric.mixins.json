@@ -1,0 +1,23 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "net.onixary.shapeShifterCurseFabric.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "GeoBoneMixin",
+    "OriginsRegistryMixin",
+    "PlayerEntityMixin$ServerPlayerEntityMixin",
+    "PlayerEntityRendererMixin$ElytraRendererMixin"
+  ],
+  "client": [
+    "ItemRendererMixin",
+    "Mojang_ModelPartMixin",
+    "PlayerEntityMixin",
+    "PlayerEntityMixin$ChangeElytraTextureMixin",
+    "PlayerEntityMixin$OtherClientPlayerEntityMixin",
+    "PlayerEntityRendererMixin",
+    "PlayerEntityRendererMixin$LivingEntityRendererMixin$HidePlayerModelIfNeeded",
+    "PlayerEntityRendererMixin$PlayerEntityModel$RootModel$Mixin"
+  ],
+  "mixinPriority": 99999
+}

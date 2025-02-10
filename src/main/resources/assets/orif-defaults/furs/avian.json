@@ -1,0 +1,7 @@
+{
+  "model": "orif-defaults:geo/avian.geo.json",
+  "texture": "orif-defaults:textures/avian/avian.png",
+  "animation": "orif-defaults:animations/avian.animation.json",
+  "elytraTexture": "orif-defaults:textures/avian/avian_elytra.png",
+  "overlay": "orif-defaults:textures/avian/avian_skin.png"
+}

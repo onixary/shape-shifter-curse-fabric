@@ -79,8 +79,10 @@ public class FormAbilityManager {
     }
 
     private static void applyScale(PlayerEntity player, float scale) {
-        ScaleData scaleData = ScaleTypes.BASE.getScaleData(player);
-        scaleData.setScale(scale);
+        ScaleData scaleDataWidth = ScaleTypes.WIDTH.getScaleData(player);
+        ScaleData scaleDataHeight = ScaleTypes.HEIGHT.getScaleData(player);
+        scaleDataWidth.setScale(scale);
+        scaleDataHeight.setScale(scale);
     }
 
     private static void applyFormOrigin(PlayerEntity playerEntity, String originLayerId, String originId) {

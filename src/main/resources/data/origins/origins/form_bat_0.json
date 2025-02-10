@@ -1,4 +1,9 @@
 {
+	"powers": [
+		"origins:form_dark_speed_up",
+		"origins:form_meat_food_up",
+		"origins:form_disable_chest_armor"
+	],
 	"icon": {
 		"item": "minecraft:player_head"
 	},

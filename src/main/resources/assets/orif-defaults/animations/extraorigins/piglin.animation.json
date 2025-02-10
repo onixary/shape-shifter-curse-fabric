@@ -1,0 +1,39 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"idle": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"bpL": {
+					"rotation": {
+						"0.0": {
+								"vector": [0, 0, 15]
+						},
+						"2.0": {
+								"vector": [0, 0, 7.5],
+								"easing": "easeInOutQuad"
+						},
+						"4.0": {
+								"vector": [0, 0, 15]
+						}
+					}
+				},
+				"bpR": {
+					"rotation": {
+						"0.0": {
+								"vector": [0, 0, -15]
+						},
+						"2.0": {
+								"vector": [0, 0, -17.5],
+								"easing": "easeInOutQuad"
+						},
+						"4.0": {
+								"vector": [0, 0, -15]
+						}
+					}
+				}
+			}
+		}
+	}
+}

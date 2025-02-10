@@ -1,0 +1,9 @@
+{
+  "model": "orif-defaults:geo/enderian.geo.json",
+  "texture": "orif-defaults:textures/enderian.png",
+  "overlay": "orif-defaults:textures/enderian_skin.png",
+  "rendering_offsets": {
+    "left": [0,0,-0.3],
+    "right": [0,0,-0.3]
+  }
+}

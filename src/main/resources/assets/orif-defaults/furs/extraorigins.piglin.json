@@ -1,0 +1,5 @@
+{
+  "model": "orif-defaults:geo/extraorigins.piglin.geo.json",
+  "texture": "orif-defaults:textures/mod_extra_origins/piglin.png",
+  "animation": "orif-defaults:animations/extraorigins/piglin.animation.json"
+}

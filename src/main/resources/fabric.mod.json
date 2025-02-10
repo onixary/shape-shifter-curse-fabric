@@ -15,8 +15,10 @@
   "entrypoints": {
     "main": [
       "net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric",
-      "net.onixary.shapeShifterCurseFabric.integration.origins.Origins"],
-    "client": ["net.onixary.shapeShifterCurseFabric.integration.origins.OriginsClient"],
+      "net.onixary.shapeShifterCurseFabric.integration.origins.Origins",
+      "net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFur"],
+    "client": ["net.onixary.shapeShifterCurseFabric.integration.origins.OriginsClient",
+      "net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFurClient"],
     "modmenu": [
       "net.onixary.shapeShifterCurseFabric.integration.origins.integration.ModMenuIntegration"
     ],
@@ -31,7 +33,8 @@
 
   "mixins": [
     "shape-shifter-curse.mixins.json",
-    "origins.mixins.json"
+    "origins.mixins.json",
+    "originalfur.fabric.mixins.json"
   ],
 
   "custom": {
