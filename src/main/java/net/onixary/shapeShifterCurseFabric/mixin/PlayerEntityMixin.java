@@ -130,10 +130,10 @@ public class PlayerEntityMixin implements IPlayerEntityMixins {
                 id = Identifier.of(id.getNamespace(), id.getPath().replace('/', '.').replace('\\', '.'));
                 var opt = OriginalFurClient.FUR_REGISTRY.get(id);
                 if (opt == null) {
-                    //opt = OriginalFurClient.FUR_REGISTRY.get(Identifier.of("origins", id.getPath()));
+                    opt = OriginalFurClient.FUR_REGISTRY.get(Identifier.of("origins", id.getPath()));
                     // todo: 测试语句记得改回来
                     // 手动处理ID映射
-                    opt = OriginalFurClient.FUR_REGISTRY.get(Identifier.of("origins", "phantom"));
+                    //opt = OriginalFurClient.FUR_REGISTRY.get(Identifier.of("origins", "phantom"));
                     if (opt == null) {
                         System.out.println("[Origin Furs] Fur was null in entity mixin: " + id + ". This should NEVER happen! Report this to the devs!");
                         System.out.println(OriginalFurClient.FUR_REGISTRY.keySet());

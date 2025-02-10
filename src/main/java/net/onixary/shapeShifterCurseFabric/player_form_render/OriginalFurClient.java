@@ -22,10 +22,14 @@ import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+
+import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
 public class OriginalFurClient implements ClientModInitializer {
 
@@ -136,7 +140,32 @@ public class OriginalFurClient implements ClientModInitializer {
                         FUR_RESOURCES.put(id, resources.get(res));
                     }
                 }
-                assert FabricLoader.getInstance().isModLoaded("origins");
+                // 手动处理各形态的映射关系：
+                if(FabricLoader.getInstance().isModLoaded(MOD_ID)){
+                    RegFormConfig.CONFIGS.forEach((FORM, formConfig) -> {
+                        Identifier id = new Identifier("origins", formConfig.getFormOriginID());
+                        var fur = OriginalFurClient.FUR_RESOURCES.getOrDefault(id, null);
+                        if(fur == null){
+                            fur = OriginalFurClient.FUR_RESOURCES.getOrDefault(id, null);
+                        }
+                        if (fur == null) {
+                            OriginalFurClient.FUR_REGISTRY.put(id, new OriginFur(JsonParser.parseString("{}").getAsJsonObject()));
+                        }
+                        else{
+                            try{
+                                OriginalFurClient.FUR_REGISTRY.put(id, new OriginFur(JsonParser.parseString(new String(fur.getInputStream().readAllBytes())).getAsJsonObject()));
+                                System.out.println(FUR_REGISTRY.get(id));
+                                System.out.println(id.getPath());
+                            } catch (IOException e) {
+                                System.err.println(e.getMessage());
+                            }
+                        }
+
+                    });
+                }
+
+
+                /*assert FabricLoader.getInstance().isModLoaded("origins");
                 try {
                     OriginRegistry.entries().forEach(identifierOriginEntry -> {
                         var oID = identifierOriginEntry.getKey();
@@ -168,7 +197,7 @@ public class OriginalFurClient implements ClientModInitializer {
                 } catch(Exception e) {
                     System.out.println("[ORIF] Failed to load origins registry! Ensure the Origins mod is loaded! Some models may not work, and crashes may occur!");
                     e.printStackTrace();
-                }
+                }*/
             }
         });
     }

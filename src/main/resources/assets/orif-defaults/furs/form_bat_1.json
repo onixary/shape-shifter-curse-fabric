@@ -1,0 +1,8 @@
+{
+  "model": "orif-defaults:geo/phantom.geo.json",
+  "texture": "orif-defaults:textures/phantom/phantom_2.png",
+  "overlay": "orif-defaults:textures/phantom_overlay.png",
+  "overlay_slim": "orif-defaults:textures/phantom_overlay_slim.png",
+  "animation": "orif-defaults:animations/phantom.animation.json",
+  "elytraTexture": "orif-defaults:textures/phantom/phantom_elytra.png"
+}

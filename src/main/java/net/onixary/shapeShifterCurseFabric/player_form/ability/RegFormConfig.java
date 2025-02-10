@@ -9,7 +9,7 @@ import java.util.Map;
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
 public class RegFormConfig {
-    private static final Map<PlayerForms, FormConfig> CONFIGS = new HashMap<>();
+    public static final Map<PlayerForms, FormConfig> CONFIGS = new HashMap<>();
     private static final String defaultLayerID = "origin";
 
     public static void register() {
@@ -23,6 +23,8 @@ public class RegFormConfig {
                 new FormConfig(defaultLayerID, "form_bat_1", 1.0f));
         CONFIGS.put(PlayerForms.BAT_2,
                 new FormConfig(defaultLayerID, "form_bat_2", 1.0f));
+
+        //CONFIGS.get(PlayerForms.BAT_0).getFormOriginID();
     }
 
     public static FormConfig getConfig(PlayerForms form) {
