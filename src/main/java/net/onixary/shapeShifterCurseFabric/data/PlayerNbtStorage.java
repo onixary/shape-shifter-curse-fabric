@@ -4,6 +4,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.instinct.PlayerInstinctComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 
 import java.io.IOException;
@@ -64,6 +65,33 @@ public class PlayerNbtStorage {
         } catch (IOException e) {
             ShapeShifterCurseFabric.LOGGER.error("Failed to load player form for player: " + playerId, e);
             return null;
+        }
+    }
+
+    public static PlayerInstinctComponent loadPlayerInstinctComponent(String playerId) {
+        try {
+            Path savePath = SAVE_DIR.resolve(playerId + "_instinct.json");
+            if (!Files.exists(savePath)) return null;
+            NbtCompound nbt = NbtIo.read(savePath.toFile());
+            if (nbt == null) return null;
+            PlayerInstinctComponent instinctComponent = new PlayerInstinctComponent();
+            instinctComponent.readFromNbt(nbt);
+            return instinctComponent;
+        } catch (IOException e) {
+            ShapeShifterCurseFabric.LOGGER.error("Failed to load player instinct for player: " + playerId, e);
+            return null;
+        }
+    }
+
+    public static void savePlayerInstinctComponent(String playerId, PlayerInstinctComponent instinctComponent) {
+        try {
+            Files.createDirectories(SAVE_DIR);
+            Path savePath = SAVE_DIR.resolve(playerId + "_instinct.json");
+            NbtCompound nbt = new NbtCompound();
+            instinctComponent.writeToNbt(nbt);
+            NbtIo.write(nbt, savePath.toFile());
+        } catch (IOException e) {
+            ShapeShifterCurseFabric.LOGGER.error("Failed to save player instinct for player: " + playerId, e);
         }
     }
 }

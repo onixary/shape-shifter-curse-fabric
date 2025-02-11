@@ -16,15 +16,18 @@
     "main": [
       "net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric",
       "net.onixary.shapeShifterCurseFabric.integration.origins.Origins",
-      "net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFur"],
+      "net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFur"
+    ],
     "client": ["net.onixary.shapeShifterCurseFabric.integration.origins.OriginsClient",
-      "net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFurClient"],
+      "net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFurClient"
+    ],
     "modmenu": [
       "net.onixary.shapeShifterCurseFabric.integration.origins.integration.ModMenuIntegration"
     ],
     "cardinal-components-entity": [
       "net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents",
-        "net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent"
+      "net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent",
+      "net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent"
     ],
     "calio:ordered-resource-listener": [
       "net.onixary.shapeShifterCurseFabric.integration.origins.Origins"
@@ -40,7 +43,8 @@
   "custom": {
     "cardinal-components": [
       "origins:origin",
-      "shape-shifter-curse:player_form"
+      "shape-shifter-curse:player_form",
+      "shape-shifter-curse:player_instinct_component"
     ]
   },
 

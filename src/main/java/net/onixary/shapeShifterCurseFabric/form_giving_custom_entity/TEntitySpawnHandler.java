@@ -14,6 +14,7 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.Transfo
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.T_BAT;
+import static net.onixary.shapeShifterCurseFabric.data.StaticParams.T_BAT_REPLACE_PROBABILITY;
 
 public class TEntitySpawnHandler {
     public static final EntityModelLayer T_BAT_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_bat"), "main");
@@ -36,8 +37,7 @@ public class TEntitySpawnHandler {
     }
 
     private static void TBatSpawnHandler(BatEntity entity, World serverWorld) {
-        // 50% 概率替换为自定义蝙蝠
-        if (serverWorld.getRandom().nextFloat() < 0.5f) {
+        if (serverWorld.getRandom().nextFloat() < T_BAT_REPLACE_PROBABILITY) {
             TransformativeBatEntity customBat = new TransformativeBatEntity(
                     T_BAT, serverWorld
             );

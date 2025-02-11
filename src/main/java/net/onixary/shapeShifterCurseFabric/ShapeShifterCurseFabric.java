@@ -27,6 +27,9 @@ import net.onixary.shapeShifterCurseFabric.item.CustomItems;
 import net.onixary.shapeShifterCurseFabric.player_animation.RegPlayerAnimation;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctDebugHUD;
+import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
+import net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.data.PlayerEventHandler;
@@ -37,7 +40,9 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.savePlayerFormComponent;
+import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.savePlayerInstinctComponent;
 import static net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager.saveForm;
+import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.saveInstinctComp;
 import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.*;
 
 
@@ -107,6 +112,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             LOGGER.info("Player disconnect, save attachment");
             saveCurrentAttachment(player);
             saveForm(player);
+            saveInstinctComp(player);
         });
 
         // Reg listeners
@@ -125,6 +131,9 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             }
             return null;
         });
+
+        // Debug instinct
+        InstinctDebugHUD.register();
 
         /*HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
             PlayerEntity player = MinecraftClient.getInstance().player;
@@ -180,9 +189,11 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         List<ServerPlayerEntity> players = minecraftServer.getPlayerManager().getPlayerList();
         if (players.isEmpty()) return;
 
-        // handle transformative effects
-        //LOGGER.info("onPlayerTick");
         for(ServerPlayerEntity player : players) {
+            // handle instinct tick
+            InstinctTicker.tick(player);
+
+            // handle transformative effects tick
             PlayerEffectAttachment attachment = player.getAttached(EffectManager.EFFECT_ATTACHMENT);
             if (attachment != null && attachment.currentEffect != null) {
                 //LOGGER.info("Effect tick");

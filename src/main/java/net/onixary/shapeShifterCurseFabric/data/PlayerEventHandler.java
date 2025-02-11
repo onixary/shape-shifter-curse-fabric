@@ -13,6 +13,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComp
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 
+import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker.loadInstinct;
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.removeEffects;
 import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.*;
 
@@ -36,6 +37,9 @@ public class PlayerEventHandler {
             else{
                 ShapeShifterCurseFabric.LOGGER.info("Attachment loaded ");
             }
+
+            // load instinct
+            loadInstinct(player);
         });
         // copy event
         ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
