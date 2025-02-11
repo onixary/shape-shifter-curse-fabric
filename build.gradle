@@ -79,6 +79,12 @@ repositories {
     maven {
         url = "https://maven.terraformersmc.com"
     }
+
+    // player animator
+    maven {
+        name "KosmX's maven"
+        url 'https://maven.kosmx.dev/'
+    }
 }
 
 dependencies {
@@ -144,6 +150,9 @@ dependencies {
     include modApi("com.jamieswhiteshirt:reach-entity-attributes:${project.reach_version}")
     //  Modmenu
     modImplementation "com.terraformersmc:modmenu:${project.mod_menu_version}"
+    // Player Anim
+    include modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:${project.player_anim}")
+
 
     //modImplementation "com.github.eggohito:eggolib:${project.eggolib_version}"
     //include "com.github.eggohito:eggolib:${project.eggolib_version}"

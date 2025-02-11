@@ -24,6 +24,7 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegEntitySp
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.TEntitySpawnHandler;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.item.CustomItems;
+import net.onixary.shapeShifterCurseFabric.player_animation.RegPlayerAnimation;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
@@ -75,6 +76,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         PlayerEventHandler.register();
         TEntitySpawnHandler.register();
         RegFormConfig.register();
+        RegPlayerAnimation.register();
         save_timer = 0;
         // Reg origins content
 

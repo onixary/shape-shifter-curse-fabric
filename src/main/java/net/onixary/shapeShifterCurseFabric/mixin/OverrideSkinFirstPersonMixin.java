@@ -39,6 +39,7 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
     private void onRenderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
         if(RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm() != PlayerForms.ORIGINAL_BEFORE_ENABLE && !ShapeShifterCurseFabric.CONFIG.keepOriginalSkin())
         {
+
             // 渲染手臂
 
             Identifier CUSTOM_SKIN =
