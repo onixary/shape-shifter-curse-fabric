@@ -6,7 +6,8 @@
   "mixins": [
     "OverrideSkinFirstPersonMixin",
     "OverrideSkinThirdPersonMixin",
-    "MinecraftClientMixin"
+    "MinecraftClientMixin",
+    "InstinctBarMixin"
   ],
   "injectors": {
     "defaultRequire": 1

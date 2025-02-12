@@ -2,6 +2,7 @@ package net.onixary.shapeShifterCurseFabric.player_form.instinct;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormPhase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
@@ -9,13 +10,21 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormCompone
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 
+import static net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager.getForm;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.loadInstinctComp;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.saveInstinctComp;
 import static net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager.handleProgressiveTransform;
 
 public class InstinctTicker {
-    //public static final float BASE_GROWTH_RATE = 0.1f; // 每秒增长6单位（0.1*20tick）
-    //public static final float MAX_VALUE = 100f;
+    public static float currentInstinctValue = 0.0f;
+    public static float currentInstinctRate;
+    public static boolean showInstinctBar = false;
+    public static boolean isInstinctIncreasing = false;
+    public static boolean isInstinctDecreasing = false;
+    public static boolean isInstinctLock = false;
+    public static boolean isUnderCursedMoon = false;
+
+
     public static void loadInstinct(PlayerEntity player) {
         PlayerInstinctComponent comp = loadInstinctComp(player);
         if(comp != null){
@@ -33,15 +42,20 @@ public class InstinctTicker {
         processImmediateEffects(comp);
 
         // 计算当前速率
-        float currentRate = calculateCurrentRate(player, comp);
+        currentInstinctRate = calculateCurrentRate(player, comp);
 
+        //ShapeShifterCurseFabric.LOGGER.info("currentInstinct: " + comp.instinctValue + currentRate);
         // 应用持续增长
         comp.instinctValue = MathHelper.clamp(
-                comp.instinctValue + currentRate,
+                comp.instinctValue + currentInstinctRate,
                 0f,
                 StaticParams.INSTINCT_MAX
         );
+        //ShapeShifterCurseFabric.LOGGER.info("currentInstinctFromComp: " + comp.instinctValue);
+        // 判断当前状态
+        judgeInstinctState(player, currentInstinctRate);
 
+        currentInstinctValue = comp.instinctValue;
         // 检查触发条件
         checkThreshold(player, comp);
     }
@@ -63,6 +77,33 @@ public class InstinctTicker {
         return 0.0f;
     }
 
+    private static void judgeInstinctState(PlayerEntity player, float instinctRate){
+        // 判断当前状态，供进度条使用
+        showInstinctBar = !(getForm(player) == PlayerForms.ORIGINAL_BEFORE_ENABLE || getForm(player) == PlayerForms.ORIGINAL_SHIFTER);
+
+        float baseRate = judgeInstinctGrowRate(player);
+        if(instinctRate > baseRate){
+            isInstinctIncreasing = true;
+            isInstinctDecreasing = false;
+        }
+        else if(instinctRate < baseRate){
+            isInstinctIncreasing = false;
+            isInstinctDecreasing = true;
+        }
+        else{
+            isInstinctIncreasing = false;
+            isInstinctDecreasing = false;
+        }
+
+        if(getForm(player).getIndex() < 2){
+            isInstinctLock = false;
+        }
+        else{
+            isInstinctLock = true;
+        }
+
+        // todo: cursed moon judgement
+    }
 
     private static void processImmediateEffects(PlayerInstinctComponent comp) {
         while (!comp.immediateEffects.isEmpty()) {
@@ -80,13 +121,15 @@ public class InstinctTicker {
         for (InstinctEffectType effect : comp.sustainedEffects) {
             rate += effect.getRateModifier();
         }
-        return rate / 20f; // 转换为每tick增长量
+        return rate;
     }
 
     private static void checkThreshold(PlayerEntity player, PlayerInstinctComponent comp) {
         if (comp.instinctValue >= StaticParams.INSTINCT_MAX) {
             // 这里放置满instinct时要触发的逻辑
-            handleProgressiveTransform(player, false);
+            if(getForm(player).getIndex() < 2){
+                handleProgressiveTransform(player, false);
+            }
             comp.instinctValue = 0f;
         }
     }

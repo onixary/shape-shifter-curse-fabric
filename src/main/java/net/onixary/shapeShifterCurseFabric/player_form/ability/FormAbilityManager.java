@@ -5,6 +5,7 @@ import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.PowerTypeRegistry;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage;
@@ -25,10 +26,15 @@ import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.DEBUG_
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
 public class FormAbilityManager {
+    private static ServerWorld world;
 
     public static PlayerForms getForm(PlayerEntity player) {
         PlayerFormComponent component = RegPlayerFormComponent.PLAYER_FORM.get(player);
         return component.getCurrentForm();
+    }
+
+    public static void getServerWorld(ServerWorld world) {
+        FormAbilityManager.world = world;
     }
 
     public static void applyForm(PlayerEntity player, PlayerForms newForm) {
@@ -48,7 +54,7 @@ public class FormAbilityManager {
 
         component.setCurrentForm(newForm);
         // 存储
-        PlayerNbtStorage.savePlayerFormComponent(DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID, component);
+        PlayerNbtStorage.savePlayerFormComponent(world, DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID, component);
     }
 
     public static void loadForm(PlayerEntity player) {
@@ -62,12 +68,12 @@ public class FormAbilityManager {
     public static void saveForm(PlayerEntity player) {
         PlayerFormComponent component = RegPlayerFormComponent.PLAYER_FORM.get(player);
         // 存储
-        PlayerNbtStorage.savePlayerFormComponent(DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID, component);
+        PlayerNbtStorage.savePlayerFormComponent(world, DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID, component);
     }
 
     private static PlayerForms loadSavedForm(PlayerEntity player) {
         // 从存储中加载保存的 form
-        PlayerFormComponent formComponent = PlayerNbtStorage.loadPlayerFormComponent(DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID);
+        PlayerFormComponent formComponent = PlayerNbtStorage.loadPlayerFormComponent(world, DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID);
         return formComponent != null ? formComponent.getCurrentForm() : null;
     }
 

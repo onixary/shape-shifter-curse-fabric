@@ -15,13 +15,11 @@ public class PlayerEffectAttachment{
     // used in present potion effect
     public BaseTransformativeStatusEffect currentRegEffect;
     // instinct value
-    public float currentInstinct = 0.0f;
 
     public PlayerEffectAttachment() {
         this.currentToForm = null;
         this.remainingTicks = 0;
         this.currentEffect = null;
-        this.currentInstinct = 0.0f;
         currentRegEffect = null;
     }
 
@@ -37,7 +35,6 @@ public class PlayerEffectAttachment{
         if(currentRegEffect != null){
             nbt.putString("currentRegEffect", Registries.STATUS_EFFECT.getId(currentRegEffect).toString());
         }
-        nbt.putFloat("currentInstinct", currentInstinct);
         return nbt;
     }
 
@@ -55,7 +52,6 @@ public class PlayerEffectAttachment{
             Identifier effectId = new Identifier(nbt.getString("currentRegEffect"));
             attachment.currentRegEffect = (BaseTransformativeStatusEffect) Registries.STATUS_EFFECT.get(effectId);
         }
-        attachment.currentInstinct = nbt.getFloat("currentInstinct");
         return attachment;
     }
 }

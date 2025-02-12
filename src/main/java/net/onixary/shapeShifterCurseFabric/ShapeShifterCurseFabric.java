@@ -39,8 +39,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.savePlayerFormComponent;
-import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.savePlayerInstinctComponent;
 import static net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager.saveForm;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.saveInstinctComp;
 import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.*;
@@ -110,7 +108,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
             PlayerEntity player = handler.player;
             LOGGER.info("Player disconnect, save attachment");
-            saveCurrentAttachment(player);
+            saveCurrentAttachment(server.getOverworld(), player);
             saveForm(player);
             saveInstinctComp(player);
         });
@@ -208,7 +206,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             save_timer += 1;
             if(save_timer >= 100) {
                 LOGGER.info("Player paused, save attachment");
-                saveCurrentAttachment(player);
+                saveCurrentAttachment(minecraftServer.getOverworld(), player);
                 saveForm(player);
                 save_timer = 0;
             }

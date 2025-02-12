@@ -1,12 +1,18 @@
 package net.onixary.shapeShifterCurseFabric.player_form.instinct;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.DEBUG_UUID;
 import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.loadPlayerInstinctComponent;
 import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.savePlayerInstinctComponent;
 
 public class InstinctManager {
+    private static ServerWorld world;
+
+    public static void getServerWorld(ServerWorld world) {
+        InstinctManager.world = world;
+    }
     // 添加立即效果
     public static void applyImmediateEffect(PlayerEntity player, InstinctEffectType effect) {
         if (!effect.isSustained()) {
@@ -31,10 +37,11 @@ public class InstinctManager {
 
     public static void saveInstinctComp(PlayerEntity player) {
         PlayerInstinctComponent comp = RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.get(player);
-        savePlayerInstinctComponent(DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID, comp);
+        comp.instinctValue = InstinctTicker.currentInstinctValue;
+        savePlayerInstinctComponent(world, DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID, comp);
     }
 
     public static PlayerInstinctComponent loadInstinctComp(PlayerEntity player) {
-        return loadPlayerInstinctComponent(DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID);
+        return loadPlayerInstinctComponent(world, DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID);
     }
 }

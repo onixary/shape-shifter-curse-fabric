@@ -2,6 +2,7 @@ package net.onixary.shapeShifterCurseFabric.data;
 
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
+import net.minecraft.server.world.ServerWorld;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.PlayerInstinctComponent;
@@ -15,10 +16,15 @@ import java.nio.file.Paths;
 public class PlayerNbtStorage {
     private static final Path SAVE_DIR = Paths.get("config", "shape_shifter_curse_fabric");
 
-    public static void saveAttachment(String playerId, PlayerEffectAttachment attachment) {
+    private static Path getWorldSaveDir(ServerWorld world) {
+        return SAVE_DIR.resolve(world.getServer().getSaveProperties().getLevelName());
+    }
+
+    public static void saveAttachment(ServerWorld world, String playerId, PlayerEffectAttachment attachment) {
         try {
-            Files.createDirectories(SAVE_DIR);
-            Path savePath = SAVE_DIR.resolve(playerId + "_attachment.json");
+            Path worldSaveDir = getWorldSaveDir(world);
+            Files.createDirectories(worldSaveDir);
+            Path savePath = worldSaveDir.resolve(playerId + "_attachment.dat");
             NbtCompound nbt = attachment.writeNbt();
             NbtIo.write(nbt, savePath.toFile());
         } catch (IOException e) {
@@ -27,9 +33,9 @@ public class PlayerNbtStorage {
         }
     }
 
-    public static PlayerEffectAttachment loadAttachment(String playerId) {
+    public static PlayerEffectAttachment loadAttachment(ServerWorld world, String playerId) {
         try {
-            Path savePath = SAVE_DIR.resolve(playerId + "_attachment.json");
+            Path savePath = getWorldSaveDir(world).resolve(playerId + "_attachment.json");
             if (!Files.exists(savePath)) return null;
             NbtCompound nbt = NbtIo.read(savePath.toFile());
             if (nbt == null) return null;
@@ -41,10 +47,11 @@ public class PlayerNbtStorage {
         }
     }
 
-    public static void savePlayerFormComponent(String playerId, PlayerFormComponent formComponent) {
+    public static void savePlayerFormComponent(ServerWorld world, String playerId, PlayerFormComponent formComponent) {
         try {
-            Files.createDirectories(SAVE_DIR);
-            Path savePath = SAVE_DIR.resolve(playerId + "_form.json");
+            Path saveDir = getWorldSaveDir(world);
+            Files.createDirectories(saveDir);
+            Path savePath = saveDir.resolve(playerId + "_form.dat");
             NbtCompound nbt = new NbtCompound();
             formComponent.writeToNbt(nbt);
             NbtIo.write(nbt, savePath.toFile());
@@ -53,9 +60,9 @@ public class PlayerNbtStorage {
         }
     }
 
-    public static PlayerFormComponent loadPlayerFormComponent(String playerId) {
+    public static PlayerFormComponent loadPlayerFormComponent(ServerWorld world, String playerId) {
         try {
-            Path savePath = SAVE_DIR.resolve(playerId + "_form.json");
+            Path savePath = getWorldSaveDir(world).resolve(playerId + "_form.dat");
             if (!Files.exists(savePath)) return null;
             NbtCompound nbt = NbtIo.read(savePath.toFile());
             if (nbt == null) return null;
@@ -68,9 +75,9 @@ public class PlayerNbtStorage {
         }
     }
 
-    public static PlayerInstinctComponent loadPlayerInstinctComponent(String playerId) {
+    public static PlayerInstinctComponent loadPlayerInstinctComponent(ServerWorld world, String playerId) {
         try {
-            Path savePath = SAVE_DIR.resolve(playerId + "_instinct.json");
+            Path savePath = getWorldSaveDir(world).resolve(playerId + "_instinct.dat");
             if (!Files.exists(savePath)) return null;
             NbtCompound nbt = NbtIo.read(savePath.toFile());
             if (nbt == null) return null;
@@ -83,10 +90,11 @@ public class PlayerNbtStorage {
         }
     }
 
-    public static void savePlayerInstinctComponent(String playerId, PlayerInstinctComponent instinctComponent) {
+    public static void savePlayerInstinctComponent(ServerWorld world, String playerId, PlayerInstinctComponent instinctComponent) {
         try {
-            Files.createDirectories(SAVE_DIR);
-            Path savePath = SAVE_DIR.resolve(playerId + "_instinct.json");
+            Path saveDir = getWorldSaveDir(world);
+            Files.createDirectories(saveDir);
+            Path savePath = saveDir.resolve(playerId + "_instinct.dat");
             NbtCompound nbt = new NbtCompound();
             instinctComponent.writeToNbt(nbt);
             NbtIo.write(nbt, savePath.toFile());

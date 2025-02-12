@@ -12,8 +12,8 @@ public class StaticParams {
     // instinct setting
     public static final float INSTINCT_MAX = 100.0f;
     // per tick instinct increase
-    public static final float INSTINCT_INCREASE_RATE_0 = (INSTINCT_MAX / 1200.0f) / 20.0f;
-    public static final float INSTINCT_INCREASE_RATE_1 = (INSTINCT_MAX / 600.0f) / 20.0f;
+    public static final float INSTINCT_INCREASE_RATE_0 = (INSTINCT_MAX / 200.0f) / 20.0f;
+    public static final float INSTINCT_INCREASE_RATE_1 = (INSTINCT_MAX / 100.0f) / 20.0f;
     // ----------------------------------------
     // transformative mob settings
     // transformative mob default attack damage

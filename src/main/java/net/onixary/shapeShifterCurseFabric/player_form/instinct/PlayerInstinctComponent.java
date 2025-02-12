@@ -4,6 +4,7 @@ import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 
 import java.util.ArrayDeque;
@@ -34,6 +35,7 @@ public class PlayerInstinctComponent implements AutoSyncedComponent {
         }
 
         // 读取 instinctValue
+        ShapeShifterCurseFabric.LOGGER.info("loading instinctValue: " + nbtCompound.getFloat("instinctValue"));
         this.instinctValue = nbtCompound.getFloat("instinctValue");
     }
 
@@ -54,6 +56,7 @@ public class PlayerInstinctComponent implements AutoSyncedComponent {
         nbtCompound.put("sustainedEffects", sustainedEffectsList);
 
         // 写入 instinctValue
+        ShapeShifterCurseFabric.LOGGER.info("saving instinctValue: " + this.instinctValue);
         nbtCompound.putFloat("instinctValue", this.instinctValue);
     }
 }

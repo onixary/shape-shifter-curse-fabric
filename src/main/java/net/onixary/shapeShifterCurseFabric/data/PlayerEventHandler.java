@@ -10,6 +10,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 
@@ -24,13 +25,14 @@ public class PlayerEventHandler {
             if (handler.player.getWorld().isClient()) return;
 
             // load form
+            FormAbilityManager.getServerWorld(server.getOverworld());
             PlayerEntity player = handler.player;
             FormAbilityManager.loadForm(player);
             //PlayerFormComponent component = RegPlayerFormComponent.PLAYER_FORM.get(player);
             //FormAbilityManager.applyForm(player, component.getCurrentForm());
 
             // load attachment
-            boolean hasAttachment = loadCurrentAttachment(player);
+            boolean hasAttachment = loadCurrentAttachment(server.getOverworld(), player);
             if(!hasAttachment) {
                 resetAttachment(player);
             }
@@ -39,6 +41,7 @@ public class PlayerEventHandler {
             }
 
             // load instinct
+            InstinctManager.getServerWorld(server.getOverworld());
             loadInstinct(player);
         });
         // copy event

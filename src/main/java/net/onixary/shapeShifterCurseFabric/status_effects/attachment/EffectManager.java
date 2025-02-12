@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
@@ -59,12 +60,12 @@ public class EffectManager {
         return player.getAttached(EFFECT_ATTACHMENT);
     }
 
-    public static boolean saveCurrentAttachment(PlayerEntity player) {
+    public static boolean saveCurrentAttachment(ServerWorld world, PlayerEntity player) {
         PlayerEffectAttachment attachment = player.getAttached(EFFECT_ATTACHMENT);
         if(attachment != null) {
             // todo: 构建环境中UUID会变化，测试时使用固定的testUUID，发布时要改回
             //saveAttachment(String.valueOf((player.getUuid())), attachment);
-            saveAttachment(DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID, attachment);
+            saveAttachment(world, DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID, attachment);
             LOGGER.info("save attachment success, currentToForm: " + attachment.currentToForm);
             return true;
         }
@@ -74,9 +75,9 @@ public class EffectManager {
         }
     }
 
-    public static boolean loadCurrentAttachment(PlayerEntity player) {
+    public static boolean loadCurrentAttachment(ServerWorld world, PlayerEntity player) {
         // todo: 构建环境中UUID会变化，测试时使用固定的testUUID，发布时要改回
-        PlayerEffectAttachment attachment = loadAttachment(DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID);
+        PlayerEffectAttachment attachment = loadAttachment(world, DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID);
         player.setAttached(EffectManager.EFFECT_ATTACHMENT, attachment);
         if(attachment == null){
             LOGGER.info("no attachment found in file");

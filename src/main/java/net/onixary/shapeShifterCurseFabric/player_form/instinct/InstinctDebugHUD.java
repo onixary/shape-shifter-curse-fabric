@@ -8,6 +8,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
@@ -18,15 +19,14 @@ public class InstinctDebugHUD {
         HudRenderCallback.EVENT.register((context, tickDelta) -> {
             if (MinecraftClient.getInstance().player == null) return;
 
-            int baseX = 120;
-            int baseY = 50;
+            int baseX = 240;
+            int baseY = 150;
 
             PlayerEntity player = MinecraftClient.getInstance().player;
             PlayerInstinctComponent comp = RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.get(player);
-
-            String text = String.format("Instinct: %.1f (+%.2f/s)",
-                    comp.instinctValue,
-                    InstinctTicker.calculateCurrentRate(player, comp) * 20);
+            String text = String.format("Instinct: %.3f (+%.3f/s)",
+                    InstinctTicker.currentInstinctValue,
+                    InstinctTicker.currentInstinctRate * 20);
 
             MatrixStack matrices = context.getMatrices();
             matrices.push();
