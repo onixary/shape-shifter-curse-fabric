@@ -35,6 +35,30 @@
 					]
 				},
 				{
+					"name": "tail1_0",
+					"parent": "bipedBody",
+					"pivot": [0, 19, -2],
+					"cubes": [
+						{"origin": [-1, 18, -8], "size": [2, 2, 7], "uv": [32, 21]}
+					]
+				},
+				{
+					"name": "tail1_1",
+					"parent": "tail1_0",
+					"pivot": [0, 19, -7],
+					"cubes": [
+						{"origin": [-1, 18, -14], "size": [2, 2, 7], "uv": [36, 37]}
+					]
+				},
+				{
+					"name": "tail1_2",
+					"parent": "tail1_1",
+					"pivot": [0, 19, -13],
+					"cubes": [
+						{"origin": [-1, 18, -22], "size": [2, 2, 10], "uv": [41, 40]}
+					]
+				},
+				{
 					"name": "bipedLeftArm",
 					"pivot": [-5, 22, 0],
 					"cubes": [

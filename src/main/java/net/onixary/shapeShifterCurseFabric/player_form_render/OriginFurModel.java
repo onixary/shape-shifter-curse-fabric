@@ -1,5 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.player_form_render;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dev.kosmx.playerAnim.core.util.Vec3f;
@@ -31,6 +33,7 @@ import org.joml.Matrix4f;
 import org.joml.Vector3d;
 import org.joml.Vector4f;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
@@ -436,22 +439,32 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
         // first tail part
         float SWAY_RATE = 0.33333334F * 0.5F;
         float SWAY_SCALE = 0.05F;
-        var tail = this.getCachedGeoBone("tail_0");
-        if (tail != null) {
-            float tailSway = SWAY_SCALE * MathHelper.cos(age * SWAY_RATE + (((float)Math.PI / 3.0F) * 0.75f));
-            float tailBalance = MathHelper.cos(limbAngle * 0.6662F) * 0.325F * limbDistance;
-            tail.setRotY(-MathHelper.lerp(limbDistance, tailSway, tailBalance) - tailDragAmount * 0.75F);
+        JsonObject tailChain = json.getAsJsonObject("tail_chain");
+        // Iterate over all members of tail_chain
+        for (Map.Entry<String, JsonElement> entry : tailChain.entrySet()) {
+            String memberName = entry.getKey();
+            JsonArray memberArray = entry.getValue().getAsJsonArray();
+            int indexCount = memberArray.size();
 
-            float offset = 0.0F;
-            for(int i = 1; i < 6; i++){
-                var bone = this.getCachedGeoBone("tail_" + i);
-                if (bone == null) {continue;}
-                bone.setRotY(- MathHelper.lerp(limbDistance, SWAY_SCALE * MathHelper.cos(age * SWAY_RATE -
-                        (((float)Math.PI / 3.0F) * offset)), 0.0f) - tailDragAmount * 0.75F);
+            var tail = this.getCachedGeoBone(memberName + "_" + 0);
+            if (tail != null) {
+                float tailSway = SWAY_SCALE * MathHelper.cos(age * SWAY_RATE + (((float)Math.PI / 3.0F) * 0.75f));
+                float tailBalance = MathHelper.cos(limbAngle * 0.6662F) * 0.325F * limbDistance;
+                tail.setRotY(-MathHelper.lerp(limbDistance, tailSway, tailBalance) - tailDragAmount * 0.75F);
 
-                offset += 0.75F;
+                float offset = 0.0F;
+                for(int i = 1; i < indexCount; i++){
+                    var bone = this.getCachedGeoBone(memberName + "_" + i);
+                    if (bone == null) {continue;}
+                    bone.setRotY(- MathHelper.lerp(limbDistance, SWAY_SCALE * MathHelper.cos(age * SWAY_RATE -
+                            (((float)Math.PI / 3.0F) * offset)), 0.0f) - tailDragAmount * 0.75F);
+
+                    offset += 0.75F;
+                }
             }
         }
+
+
 
     }
 
