@@ -24,11 +24,20 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
     public FurRenderFeature(FeatureRendererContext<T, M> context) {
         super(context);
     }
+    // add dynamic tail effect:
+    static float tailDragAmount = 0.0F;
+    static float tailDragAmountO;
+    static float currentTailDragAmount = 0.0F;
 
     @Unique
     private int getOverlayMixin(LivingEntity entity, float whiteOverlayProgress) {
         return OverlayTexture.packUv(OverlayTexture.getU(whiteOverlayProgress), OverlayTexture.getV(entity.hurtTime > 0 || entity.deathTime > 0));
     }
+
+    private void updateTailDragAmount(float targetValue, float lerpSpeed) {
+        currentTailDragAmount = MathHelper.lerp(lerpSpeed, currentTailDragAmount, targetValue);
+    }
+
     public static class ModelTransformation {
         public Vec3d position, rotation;
         public ModelTransformation(Vec3f pos, Vec3f rot) {
@@ -100,6 +109,21 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
                 m.translatePositionForBone("bipedRightLeg", new Vec3d(2, 12, 0));
                 matrixStack.translate(-0.5, -0.5, -0.5);
                 m.setRotationForBone("bipedBody", ((IMojModelPart) (Object) eR.getModel().body).originfurs$getRotation());
+
+                float targetDrag = MathHelper.lerp(tickDelta, tailDragAmountO, tailDragAmount);
+                // adjust tail drag back speed
+                updateTailDragAmount(targetDrag, 0.04F);
+                m.setRotationForTailBones(limbAngle, limbDistance, entity.age, currentTailDragAmount);
+
+                tailDragAmountO = tailDragAmount;
+
+
+                tailDragAmount *= 0.75F;
+                // adjust tail drag curvature scale
+                tailDragAmount -= (float) (Math.toRadians((entity.bodyYaw - entity.prevBodyYaw)) * 0.55F);
+                // clamp tail drag curvature
+                tailDragAmount = MathHelper.clamp(tailDragAmount, -1.6F, 1.6F);
+
                 m.invertRotForPart("bipedBody", false, true, false);
                 m.setRotationForBone("bipedLeftArm", ((IMojModelPart) (Object) eR.getModel().leftArm).originfurs$getRotation());
                 m.setRotationForBone("bipedRightArm", ((IMojModelPart) (Object) eR.getModel().rightArm).originfurs$getRotation());
@@ -114,6 +138,9 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
                 fur.render(matrixStack, a, vertexConsumerProvider, RenderLayer.getEntityTranslucentEmissive(m.getFullbrightTextureResource(a)), null, Integer.MAX_VALUE - 1);
                 matrixStack.pop();
             }
+
+
         }
     }
+
 }

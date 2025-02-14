@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.player_form;
 import java.util.Arrays;
 
 public enum PlayerForms {
+    // group: form kind, index: form phase, 2 is max
     ORIGINAL_BEFORE_ENABLE("original_form", 0),
     ORIGINAL_SHIFTER("base_form", 0),
     BAT_0("bat_form", 0),

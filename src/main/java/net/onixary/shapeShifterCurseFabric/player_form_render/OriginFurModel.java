@@ -6,6 +6,7 @@ import dev.kosmx.playerAnim.core.util.Vec3f;
 import io.github.apace100.apoli.power.PowerTypeRegistry;
 import mod.azure.azurelib.cache.object.GeoBone;
 import mod.azure.azurelib.model.GeoModel;
+import net.minecraft.util.math.MathHelper;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import it.unimi.dsi.fastutil.longs.Long2ReferenceLinkedOpenHashMap;
 
@@ -426,6 +427,35 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
         b.setRotZ((float)rot.z * (iZ ? -1 : 1));
         return (GeoBone) b;
     }
+
+    public final void setRotationForTailBones(float limbAngle, float limbDistance, float age, float tailDragAmount){
+        // logic fetched from minecraft Changed mod
+        // tail bone name as "tail_0", "tail_1", "tail_2", "tail_3", "tail_4", "tail_5"
+        // max num is 6
+        // need to inverse the y rotation of the tail bones
+        // first tail part
+        float SWAY_RATE = 0.33333334F * 0.5F;
+        float SWAY_SCALE = 0.05F;
+        var tail = this.getCachedGeoBone("tail_0");
+        if (tail != null) {
+            float tailSway = SWAY_SCALE * MathHelper.cos(age * SWAY_RATE + (((float)Math.PI / 3.0F) * 0.75f));
+            float tailBalance = MathHelper.cos(limbAngle * 0.6662F) * 0.325F * limbDistance;
+            tail.setRotY(-MathHelper.lerp(limbDistance, tailSway, tailBalance) - tailDragAmount * 0.75F);
+
+            float offset = 0.0F;
+            for(int i = 1; i < 6; i++){
+                var bone = this.getCachedGeoBone("tail_" + i);
+                if (bone == null) {continue;}
+                bone.setRotY(- MathHelper.lerp(limbDistance, SWAY_SCALE * MathHelper.cos(age * SWAY_RATE -
+                        (((float)Math.PI / 3.0F) * offset)), 0.0f) - tailDragAmount * 0.75F);
+
+                offset += 0.75F;
+            }
+        }
+
+    }
+
+
     public final GeoBone setScaleForBone(String bone_name, Vec3d scale) {
         var b = this.getCachedGeoBone(bone_name);
         if (b == null) {
