@@ -2,7 +2,6 @@
   "model": "orif-defaults:geo/form_bat_0.geo.json",
   "texture": "orif-defaults:textures/form_bat_0/form_bat_0.png",
   "tail_chain": {
-    "tail": [0],
-    "tail1": [0,1,2]
+    "tail": [0]
   }
 }

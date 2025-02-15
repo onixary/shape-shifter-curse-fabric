@@ -440,6 +440,7 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
         float SWAY_RATE = 0.33333334F * 0.5F;
         float SWAY_SCALE = 0.05F;
         JsonObject tailChain = json.getAsJsonObject("tail_chain");
+        if(tailChain == null) {return;}
         // Iterate over all members of tail_chain
         for (Map.Entry<String, JsonElement> entry : tailChain.entrySet()) {
             String memberName = entry.getKey();

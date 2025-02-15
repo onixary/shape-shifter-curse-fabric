@@ -25,7 +25,7 @@ public abstract class OverrideSkinThirdPersonMixin {
             at = @At("HEAD"),
             cancellable = true
     )
-    private void onGetTexture(Entity entity, CallbackInfoReturnable<Identifier> cir) {
+    private void shape_shifter_curse$onGetTexture(Entity entity, CallbackInfoReturnable<Identifier> cir) {
         // 在这里可以添加自定义逻辑来决定是否使用自定义皮肤
         if(entity instanceof PlayerEntity player) {
             if (RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm() != PlayerForms.ORIGINAL_BEFORE_ENABLE && !ShapeShifterCurseFabric.CONFIG.keepOriginalSkin()) {
