@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.data;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.WorldSavePath;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.PlayerInstinctComponent;
@@ -17,7 +18,11 @@ public class PlayerNbtStorage {
     private static final Path SAVE_DIR = Paths.get("config", "shape_shifter_curse_fabric");
 
     private static Path getWorldSaveDir(ServerWorld world) {
-        return SAVE_DIR.resolve(world.getServer().getSaveProperties().getLevelName());
+
+        Path worldSavePath = world.getServer().getSavePath(WorldSavePath.ROOT);
+        String worldName = worldSavePath.getName(worldSavePath.getNameCount() - 2).toString();
+        ShapeShifterCurseFabric.LOGGER.info("World save name: " + worldName);
+        return SAVE_DIR.resolve(worldName);
     }
 
     public static void saveAttachment(ServerWorld world, String playerId, PlayerEffectAttachment attachment) {

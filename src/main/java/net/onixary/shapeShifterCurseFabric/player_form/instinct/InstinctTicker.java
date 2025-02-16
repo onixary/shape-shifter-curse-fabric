@@ -36,7 +36,7 @@ public class InstinctTicker {
     }
 
     public static void tick(PlayerEntity player) {
-        PlayerInstinctComponent comp = RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.get(player);
+        PlayerInstinctComponent comp = player.getComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
 
         // 处理立即效果
         processImmediateEffects(comp);
@@ -51,6 +51,7 @@ public class InstinctTicker {
                 0f,
                 StaticParams.INSTINCT_MAX
         );
+        RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.sync(player);
         //ShapeShifterCurseFabric.LOGGER.info("currentInstinctFromComp: " + comp.instinctValue);
         // 判断当前状态
         judgeInstinctState(player, currentInstinctRate);
@@ -61,7 +62,7 @@ public class InstinctTicker {
     }
 
     private static float judgeInstinctGrowRate(PlayerEntity player){
-        PlayerFormComponent formComp = RegPlayerFormComponent.PLAYER_FORM.get(player);
+        PlayerFormComponent formComp = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
         PlayerFormPhase currentPhase = RegFormConfig.CONFIGS.get(formComp.getCurrentForm()).getPhase();
         switch (currentPhase){
             case PHASE_CLEAR:
@@ -113,6 +114,7 @@ public class InstinctTicker {
                     0f,
                     StaticParams.INSTINCT_MAX
             );
+
         }
     }
 

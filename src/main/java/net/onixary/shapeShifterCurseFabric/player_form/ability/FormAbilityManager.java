@@ -29,7 +29,7 @@ public class FormAbilityManager {
     private static ServerWorld world;
 
     public static PlayerForms getForm(PlayerEntity player) {
-        PlayerFormComponent component = RegPlayerFormComponent.PLAYER_FORM.get(player);
+        PlayerFormComponent component = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
         return component.getCurrentForm();
     }
 
@@ -38,7 +38,7 @@ public class FormAbilityManager {
     }
 
     public static void applyForm(PlayerEntity player, PlayerForms newForm) {
-        PlayerFormComponent component = RegPlayerFormComponent.PLAYER_FORM.get(player);
+        PlayerFormComponent component = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
         PlayerForms oldForm = component.getCurrentForm();
 
         // 清理旧状态能力
@@ -53,12 +53,13 @@ public class FormAbilityManager {
         //applyPower(player, config.getPowerId());
 
         component.setCurrentForm(newForm);
+        RegPlayerFormComponent.PLAYER_FORM.sync(player);
         // 存储
         PlayerNbtStorage.savePlayerFormComponent(world, DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID, component);
     }
 
     public static void loadForm(PlayerEntity player) {
-        PlayerFormComponent component = RegPlayerFormComponent.PLAYER_FORM.get(player);
+        PlayerFormComponent component = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
         PlayerForms savedForm = loadSavedForm(player);
         if (savedForm != null) {
             applyForm(player, savedForm);
@@ -66,7 +67,7 @@ public class FormAbilityManager {
     }
 
     public static void saveForm(PlayerEntity player) {
-        PlayerFormComponent component = RegPlayerFormComponent.PLAYER_FORM.get(player);
+        PlayerFormComponent component = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
         // 存储
         PlayerNbtStorage.savePlayerFormComponent(world, DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID, component);
     }

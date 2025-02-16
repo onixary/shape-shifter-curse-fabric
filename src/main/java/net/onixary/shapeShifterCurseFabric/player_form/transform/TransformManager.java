@@ -11,7 +11,7 @@ public class TransformManager {
     }
 
     public static void handleProgressiveTransform(PlayerEntity player, boolean isByCursedMoon){
-        PlayerForms currentForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+        PlayerForms currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
         int currentFormIndex = currentForm.getIndex();
         String currentFormGroup = currentForm.getGroup();
         PlayerForms toForm = null;
@@ -39,6 +39,7 @@ public class TransformManager {
         // todo: 效果相关逻辑
         FormAbilityManager.applyForm(player, toForm);
 
+        RegPlayerFormComponent.PLAYER_FORM.sync(player);
     }
 
     public static void handleDirectTransform(PlayerEntity player, PlayerForms toForm){

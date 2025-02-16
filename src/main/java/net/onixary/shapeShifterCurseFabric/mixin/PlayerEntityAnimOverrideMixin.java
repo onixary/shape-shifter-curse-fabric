@@ -26,6 +26,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationPlayerBat1;
+import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationPlayerBat2;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.spongepowered.asm.mixin.Mixin;
@@ -48,6 +49,10 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         PlayerAnimationAccess.getPlayerAnimLayer((AbstractClientPlayerEntity) (Object) this).addAnimLayer(1, CONTAINER);
         // register all form animations here
         AnimationPlayerBat1.registerAnims();
+        AnimationPlayerBat2.registerAnims();
+
+        currentAnimation = null;
+        CONTAINER.setAnimation(null);
     }
 
     public PlayerAnimState currentState = PlayerAnimState.NONE;
@@ -231,12 +236,20 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
             case BAT_1:
                 animToPlay = AnimationPlayerBat1.getFormAnimToPlay(currentState);
                 break;
+            case BAT_2:
+                animToPlay = AnimationPlayerBat2.getFormAnimToPlay(currentState);
+                break;
             default:
                 break;
         }
 
         if (animToPlay != null){
+            //ShapeShifterCurseFabric.LOGGER.info("Playing animation: " + animToPlay.getAnimation());
             playAnimation(animToPlay.getAnimation(), animToPlay.getSpeed(), animToPlay.getFade());
+        }
+        else{
+            CONTAINER.setAnimation(null);
+            currentAnimation = null;
         }
 
     }
@@ -273,5 +286,6 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                 new KeyframeAnimationPlayer(anim));
 
         container.setupAnim(1.0f / 20.0f);
+
     }
 }

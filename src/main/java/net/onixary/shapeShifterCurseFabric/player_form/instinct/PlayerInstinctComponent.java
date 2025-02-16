@@ -35,7 +35,7 @@ public class PlayerInstinctComponent implements AutoSyncedComponent {
         }
 
         // 读取 instinctValue
-        ShapeShifterCurseFabric.LOGGER.info("loading instinctValue: " + nbtCompound.getFloat("instinctValue"));
+        //ShapeShifterCurseFabric.LOGGER.info("loading instinctValue: " + nbtCompound.getFloat("instinctValue"));
         this.instinctValue = nbtCompound.getFloat("instinctValue");
     }
 
@@ -56,7 +56,7 @@ public class PlayerInstinctComponent implements AutoSyncedComponent {
         nbtCompound.put("sustainedEffects", sustainedEffectsList);
 
         // 写入 instinctValue
-        ShapeShifterCurseFabric.LOGGER.info("saving instinctValue: " + this.instinctValue);
+        //ShapeShifterCurseFabric.LOGGER.info("saving instinctValue: " + this.instinctValue);
         nbtCompound.putFloat("instinctValue", this.instinctValue);
     }
 }

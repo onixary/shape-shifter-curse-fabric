@@ -5,6 +5,8 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
@@ -23,10 +25,13 @@ public class InstinctBarRenderer{
         if (MinecraftClient.getInstance().player == null) return;
 
         PlayerEntity player = MinecraftClient.getInstance().player;
+        PlayerForms curForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+        boolean showInstinctBar = !(curForm == PlayerForms.ORIGINAL_BEFORE_ENABLE || curForm == PlayerForms.ORIGINAL_SHIFTER);
+
         if (!mc.options.hudHidden
                 && mc.interactionManager != null
                 && mc.interactionManager.hasStatusBars()
-                && InstinctTicker.showInstinctBar) {
+                && showInstinctBar) {
             int width = mc.getWindow().getScaledWidth();
             int height = mc.getWindow().getScaledHeight();
             float x = (float) width / 2 + 11;

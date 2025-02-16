@@ -1,18 +1,13 @@
 package net.onixary.shapeShifterCurseFabric.player_animation.form_animation;
 
-import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
-import net.onixary.shapeShifterCurseFabric.player_animation.AbstractFormAnimationPlayer;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 
-import java.util.EnumSet;
-
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
-public class AnimationPlayerBat1{
-    private AnimationPlayerBat1() {
+public class AnimationPlayerBat2 {
+    private AnimationPlayerBat2() {
     }
 
     private static AnimationHolder anim_sneak_idle = AnimationHolder.EMPTY;

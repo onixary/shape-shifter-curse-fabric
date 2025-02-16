@@ -32,12 +32,12 @@ public class RegFormConfig {
         CONFIGS.put(PlayerForms.BAT_1,
                 new FormConfig(defaultLayerID,
                         "form_bat_1",
-                        1.0f,
+                        0.75f,
                         PlayerFormPhase.PHASE_1));
         CONFIGS.put(PlayerForms.BAT_2,
                 new FormConfig(defaultLayerID,
                         "form_bat_2",
-                        1.0f,
+                        0.5f,
                         PlayerFormPhase.PHASE_2));
 
         //CONFIGS.get(PlayerForms.BAT_0).getFormOriginID();
