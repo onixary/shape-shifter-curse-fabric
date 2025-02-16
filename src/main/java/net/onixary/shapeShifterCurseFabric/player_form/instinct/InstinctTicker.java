@@ -23,6 +23,7 @@ public class InstinctTicker {
     public static boolean isInstinctDecreasing = false;
     public static boolean isInstinctLock = false;
     public static boolean isUnderCursedMoon = false;
+    public static boolean isPausing = false;
 
 
     public static void loadInstinct(PlayerEntity player) {
@@ -32,6 +33,7 @@ public class InstinctTicker {
             thisComp.instinctValue = comp.instinctValue;
             thisComp.immediateEffects = comp.immediateEffects;
             thisComp.sustainedEffects = comp.sustainedEffects;
+            isPausing = false;
         }
     }
 
@@ -42,7 +44,7 @@ public class InstinctTicker {
         processImmediateEffects(comp);
 
         // 计算当前速率
-        currentInstinctRate = calculateCurrentRate(player, comp);
+        currentInstinctRate = isPausing? 0.0f : calculateCurrentRate(player, comp);
 
         //ShapeShifterCurseFabric.LOGGER.info("currentInstinct: " + comp.instinctValue + currentRate);
         // 应用持续增长

@@ -15,6 +15,10 @@ public class StaticParams {
     public static final float INSTINCT_INCREASE_RATE_0 = (INSTINCT_MAX / 20.0f) / 20.0f;
     public static final float INSTINCT_INCREASE_RATE_1 = (INSTINCT_MAX / 20.0f) / 20.0f;
     // ----------------------------------------
+    // FX settings
+    public static final int TRANSFORM_FX_DURATION_IN = 5 * 20; // 1 seconds
+    public static final int TRANSFORM_FX_DURATION_OUT = 7 * 20; // 2 seconds
+    // ----------------------------------------
     // transformative mob settings
     // transformative mob default attack damage
     public static final float CUSTOM_MOB_DEFAULT_DAMAGE = 0.5F;

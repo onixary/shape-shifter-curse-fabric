@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric;
 
+import ladysnake.satin.api.event.ShaderEffectRenderCallback;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
@@ -30,6 +31,8 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComp
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctDebugHUD;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
+import net.onixary.shapeShifterCurseFabric.post_effect.TransformFX;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.data.PlayerEventHandler;
@@ -80,6 +83,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         TEntitySpawnHandler.register();
         RegFormConfig.register();
         RegPlayerAnimation.register();
+
+        TransformFX.INSTANCE.registerCallbacks();
         save_timer = 0;
         // Reg origins content
 
@@ -190,6 +195,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         for(ServerPlayerEntity player : players) {
             // handle instinct tick
             InstinctTicker.tick(player);
+            // handle transform manager update
+            TransformManager.update();
 
             // handle transformative effects tick
             PlayerEffectAttachment attachment = player.getAttached(EffectManager.EFFECT_ATTACHMENT);

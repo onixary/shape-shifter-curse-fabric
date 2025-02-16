@@ -1,0 +1,17 @@
+﻿{
+  "targets": [
+    "swap"
+  ],
+  "passes": [
+    {
+      "name": "shape-shifter-curse:transform_effect",
+      "intarget": "minecraft:main",
+      "outtarget": "swap"
+    },
+    {
+      "name": "blit",
+      "intarget": "swap",
+      "outtarget": "minecraft:main"
+    }
+  ]
+}
