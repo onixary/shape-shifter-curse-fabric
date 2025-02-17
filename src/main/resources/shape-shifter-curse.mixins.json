@@ -8,7 +8,8 @@
     "OverrideSkinThirdPersonMixin",
     "MinecraftClientMixin",
     "InstinctBarMixin",
-    "PlayerEntityAnimOverrideMixin"
+    "PlayerEntityAnimOverrideMixin",
+    "GameRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

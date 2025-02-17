@@ -7,9 +7,10 @@ import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
+import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
 
-import static net.onixary.shapeShifterCurseFabric.post_effect.TransformFX.beginTransformEffect;
-import static net.onixary.shapeShifterCurseFabric.post_effect.TransformFX.endTransformEffect;
+import static net.onixary.shapeShifterCurseFabric.screen_effect.TransformFX.beginTransformEffect;
+import static net.onixary.shapeShifterCurseFabric.screen_effect.TransformFX.endTransformEffect;
 
 public class TransformManager {
     private TransformManager() {
@@ -21,6 +22,9 @@ public class TransformManager {
     private static boolean isEndEffectActive = false;
     private static PlayerEntity curPlayer = null;
     private static PlayerForms curToForm = null;
+
+    private static float nauesaStrength = 0.0f;
+    private static float blackStrength = 0.0f;
 
     public static void handleProgressiveTransform(PlayerEntity player, boolean isByCursedMoon){
         PlayerForms currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
@@ -59,7 +63,18 @@ public class TransformManager {
 
     public static void update() {
         if(isEffectActive){
+            // handle overlay effect
+            nauesaStrength = 1.0f - (beginTransformEffectTicks / (float)StaticParams.TRANSFORM_FX_DURATION_IN);
+            if(nauesaStrength > 0.6f){
+                blackStrength = (nauesaStrength - 0.6f) / 0.4f;
+            }
+            else{
+                blackStrength = 0.0f;
+            }
+            TransformOverlay.INSTANCE.setNauesaStrength(nauesaStrength);
+            TransformOverlay.INSTANCE.setBlackStrength(blackStrength);
             beginTransformEffectTicks--;
+
             if(beginTransformEffectTicks <= 0){
                 isEffectActive = false;
                 isEndEffectActive = true;
@@ -73,10 +88,22 @@ public class TransformManager {
             }
         }
         else if(isEndEffectActive){
+            // handle overlay fade effect
+            nauesaStrength = endTransformEffectTicks / (float)StaticParams.TRANSFORM_FX_DURATION_OUT;
+            if(nauesaStrength > 0.6f){
+                blackStrength = 1.0f;
+            }
+            else{
+                blackStrength = nauesaStrength / 0.6f;
+            }
+            TransformOverlay.INSTANCE.setNauesaStrength(nauesaStrength);
+            TransformOverlay.INSTANCE.setBlackStrength(blackStrength);
+
             endTransformEffectTicks--;
             if(endTransformEffectTicks <= 0){
                 // todo: 结束时的相关逻辑放在这里
                 InstinctTicker.isPausing = false;
+                TransformOverlay.INSTANCE.setEnableOverlay(false);
                 isEndEffectActive = false;
                 beginTransformEffectTicks = 0;
                 endTransformEffectTicks = 0;
@@ -99,5 +126,6 @@ public class TransformManager {
         endTransformEffectTicks = StaticParams.TRANSFORM_FX_DURATION_OUT;
         isEffectActive = true;
         InstinctTicker.isPausing = true;
+        TransformOverlay.INSTANCE.setEnableOverlay(true);
     }
 }

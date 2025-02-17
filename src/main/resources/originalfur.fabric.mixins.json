@@ -19,5 +19,5 @@
     "PlayerEntityRendererMixin$LivingEntityRendererMixin$HidePlayerModelIfNeeded",
     "PlayerEntityRendererMixin$PlayerEntityModel$RootModel$Mixin"
   ],
-  "mixinPriority": 99999
+  "mixinPriority": 9999999
 }

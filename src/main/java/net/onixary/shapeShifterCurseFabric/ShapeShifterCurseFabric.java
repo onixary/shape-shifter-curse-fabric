@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric;
 
-import ladysnake.satin.api.event.ShaderEffectRenderCallback;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
@@ -27,12 +26,10 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.Transfo
 import net.onixary.shapeShifterCurseFabric.item.CustomItems;
 import net.onixary.shapeShifterCurseFabric.player_animation.RegPlayerAnimation;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctDebugHUD;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
-import net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
-import net.onixary.shapeShifterCurseFabric.post_effect.TransformFX;
+import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.data.PlayerEventHandler;
@@ -84,7 +81,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         RegFormConfig.register();
         RegPlayerAnimation.register();
 
-        TransformFX.INSTANCE.registerCallbacks();
+        //TransformFX.INSTANCE.registerCallbacks();
+        TransformOverlay.INSTANCE.init();
         save_timer = 0;
         // Reg origins content
 
