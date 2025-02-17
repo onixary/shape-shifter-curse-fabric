@@ -152,7 +152,7 @@ public class PlayerEntityRendererMixin {
         // dirty fix for hidden player model part by shift by -2, may cause conflicts
         @Inject(method="render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
                 at=@At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/model/EntityModel;render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;IIFFFF)V",
-                        shift = At.Shift.BY, by = -99))
+                        shift = At.Shift.BEFORE))
         private void renderPreProcessMixin(T livingEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci){
             if (livingEntity instanceof AbstractClientPlayerEntity abstractClientPlayerEntity) {
                 isInvisible = false;
@@ -175,18 +175,18 @@ public class PlayerEntityRendererMixin {
                         if (!isInvisible) {
                             var p = m_Model.getHiddenParts();
                             var model = (PlayerEntityModel<?>) this.getModel();
-                            model.hat.hidden = p.contains(OriginFurModel.VMP.hat);
-                            model.head.hidden = p.contains(OriginFurModel.VMP.head);
-                            model.body.hidden = p.contains(OriginFurModel.VMP.body);
-                            model.jacket.hidden = p.contains(OriginFurModel.VMP.jacket);
-                            model.leftArm.hidden = p.contains(OriginFurModel.VMP.leftArm);
-                            model.leftSleeve.hidden = p.contains(OriginFurModel.VMP.leftSleeve);
-                            model.rightArm.hidden = p.contains(OriginFurModel.VMP.rightArm);
-                            model.rightSleeve.hidden = p.contains(OriginFurModel.VMP.rightSleeve);
-                            model.leftLeg.hidden = p.contains(OriginFurModel.VMP.leftLeg);
-                            model.leftPants.hidden = p.contains(OriginFurModel.VMP.leftPants);
-                            model.rightLeg.hidden = p.contains(OriginFurModel.VMP.rightLeg);
-                            model.rightPants.hidden = p.contains(OriginFurModel.VMP.rightPants);
+                            model.hat.visible = !p.contains(OriginFurModel.VMP.hat);
+                            model.head.visible = !p.contains(OriginFurModel.VMP.head);
+                            model.body.visible = !p.contains(OriginFurModel.VMP.body);
+                            model.jacket.visible = !p.contains(OriginFurModel.VMP.jacket);
+                            model.leftArm.visible = !p.contains(OriginFurModel.VMP.leftArm);
+                            model.leftSleeve.visible = !p.contains(OriginFurModel.VMP.leftSleeve);
+                            model.rightArm.visible = !p.contains(OriginFurModel.VMP.rightArm);
+                            model.rightSleeve.visible = !p.contains(OriginFurModel.VMP.rightSleeve);
+                            model.leftLeg.visible = !p.contains(OriginFurModel.VMP.leftLeg);
+                            model.leftPants.visible = !p.contains(OriginFurModel.VMP.leftPants);
+                            model.rightLeg.visible = !p.contains(OriginFurModel.VMP.rightLeg);
+                            model.rightPants.visible = !p.contains(OriginFurModel.VMP.rightPants);
                         }
                     }
                 }
