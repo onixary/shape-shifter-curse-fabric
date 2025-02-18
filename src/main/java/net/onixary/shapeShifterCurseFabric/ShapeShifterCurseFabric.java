@@ -1,11 +1,16 @@
 package net.onixary.shapeShifterCurseFabric;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.command.argument.serialize.ConstantArgumentSerializer;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -18,6 +23,8 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.onixary.shapeShifterCurseFabric.command.FormArgumentType;
+import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
 import net.onixary.shapeShifterCurseFabric.data.ConfigSSC;
 import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegEntitySpawnEgg;
@@ -30,10 +37,12 @@ import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctDebugHUD
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
+import net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
-import net.onixary.shapeShifterCurseFabric.data.PlayerEventHandler;
+import net.onixary.shapeShifterCurseFabric.util.PlayerEventHandler;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
+import net.onixary.shapeShifterCurseFabric.util.TickManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -80,6 +89,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         TEntitySpawnHandler.register();
         RegFormConfig.register();
         RegPlayerAnimation.register();
+        RegOtherStatusEffects.initialize();
 
         //TransformFX.INSTANCE.registerCallbacks();
         TransformOverlay.INSTANCE.init();
@@ -107,6 +117,14 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
         // do not reset effect when player respawn or enter hell
 
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+            ShapeShifterCurseCommand.register(dispatcher);
+        });
+        ArgumentTypeRegistry.registerArgumentType(
+                Identifier.of(MOD_ID, "form_argument_type"),
+                FormArgumentType.class,
+                ConstantArgumentSerializer.of(FormArgumentType::new)
+        );
 
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
             PlayerEntity player = handler.player;
@@ -118,6 +136,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
         // Reg listeners
         ServerTickEvents.END_SERVER_TICK.register(this::onPlayerServerTick);
+        ClientTickEvents.END_CLIENT_TICK.register(this::onClientTick);
         EntitySleepEvents.STOP_SLEEPING.register((entity, world) -> {
             if (entity instanceof PlayerEntity) {
                 onPlayerEndSleeping(entity, world);
@@ -195,6 +214,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             InstinctTicker.tick(player);
             // handle transform manager update
             TransformManager.update();
+            TickManager.tickServerAll();
 
             // handle transformative effects tick
             PlayerEffectAttachment attachment = player.getAttached(EffectManager.EFFECT_ATTACHMENT);
@@ -216,5 +236,9 @@ public class ShapeShifterCurseFabric implements ModInitializer {
                 save_timer = 0;
             }
         }
+    }
+
+    private void onClientTick(MinecraftClient minecraftClient){
+        TickManager.tickClientAll();
     }
 }

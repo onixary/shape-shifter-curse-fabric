@@ -1,6 +1,8 @@
 package net.onixary.shapeShifterCurseFabric.player_form.transform;
 
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
@@ -9,6 +11,8 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComp
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
 import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
 
+import static net.onixary.shapeShifterCurseFabric.player_form.effect.PlayerEffectManager.*;
+import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker.clearInstinct;
 import static net.onixary.shapeShifterCurseFabric.screen_effect.TransformFX.beginTransformEffect;
 import static net.onixary.shapeShifterCurseFabric.screen_effect.TransformFX.endTransformEffect;
 
@@ -57,6 +61,7 @@ public class TransformManager {
         curPlayer = player;
         curToForm = toForm;
         ShapeShifterCurseFabric.LOGGER.info("Cur Player: " + curPlayer + " To Form: " + curToForm);
+        applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);
         handleTransformEffect();
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
     }
@@ -65,8 +70,8 @@ public class TransformManager {
         if(isEffectActive){
             // handle overlay effect
             nauesaStrength = 1.0f - (beginTransformEffectTicks / (float)StaticParams.TRANSFORM_FX_DURATION_IN);
-            if(nauesaStrength > 0.6f){
-                blackStrength = (nauesaStrength - 0.6f) / 0.4f;
+            if(nauesaStrength > 0.8f){
+                blackStrength = (nauesaStrength - 0.8f) / 0.2f;
             }
             else{
                 blackStrength = 0.0f;
@@ -81,9 +86,11 @@ public class TransformManager {
                 if (curPlayer != null) {
                     FormAbilityManager.applyForm(curPlayer, curToForm);
                     RegPlayerFormComponent.PLAYER_FORM.sync(curPlayer);
+                    clearInstinct(curPlayer);
                 } else {
                     ShapeShifterCurseFabric.LOGGER.error("curPlayer is null when trying to apply form!");
                 }
+                applyEndTransformEffect((ServerPlayerEntity) curPlayer, StaticParams.TRANSFORM_FX_DURATION_OUT);
                 endTransformEffect();
             }
         }
@@ -102,6 +109,7 @@ public class TransformManager {
             endTransformEffectTicks--;
             if(endTransformEffectTicks <= 0){
                 // todo: 结束时的相关逻辑放在这里
+                applyFinaleTransformEffect((ServerPlayerEntity) curPlayer, 5);
                 InstinctTicker.isPausing = false;
                 TransformOverlay.INSTANCE.setEnableOverlay(false);
                 isEndEffectActive = false;
@@ -117,6 +125,7 @@ public class TransformManager {
         curToForm = toForm;
         ShapeShifterCurseFabric.LOGGER.info("Cur Player: " + curPlayer + " To Form: " + curToForm);
         handleTransformEffect();
+        applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);
         // FormAbilityManager.applyForm(player, toForm);
     }
 
@@ -127,5 +136,13 @@ public class TransformManager {
         isEffectActive = true;
         InstinctTicker.isPausing = true;
         TransformOverlay.INSTANCE.setEnableOverlay(true);
+    }
+
+    public static void setFormDirectly(PlayerEntity player, PlayerForms toForm){
+        curPlayer = player;
+        curToForm = toForm;
+        FormAbilityManager.applyForm(curPlayer, curToForm);
+        clearInstinct(curPlayer);
+        RegPlayerFormComponent.PLAYER_FORM.sync(curPlayer);
     }
 }

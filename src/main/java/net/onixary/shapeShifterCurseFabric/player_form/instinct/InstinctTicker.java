@@ -37,6 +37,14 @@ public class InstinctTicker {
         }
     }
 
+    public static void clearInstinct(PlayerEntity player) {
+        PlayerInstinctComponent comp = player.getComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
+        comp.instinctValue = 0.0f;
+        comp.immediateEffects.clear();
+        comp.sustainedEffects.clear();
+        RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.sync(player);
+    }
+
     public static void tick(PlayerEntity player) {
         PlayerInstinctComponent comp = player.getComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
 

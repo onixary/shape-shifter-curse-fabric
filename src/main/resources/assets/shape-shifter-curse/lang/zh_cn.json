@@ -20,5 +20,6 @@
       "text": "睡一觉", "color": "yellow"
     },
     "?"
-  ]
+  ],
+  "commands.shape_shifter_curse.form_not_found": ["未找到指定的形态！"]
 }

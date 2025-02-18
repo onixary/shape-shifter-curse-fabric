@@ -11,7 +11,7 @@ import io.github.apace100.calio.mixin.CriteriaRegistryInvoker;
 import io.github.apace100.calio.resource.OrderedResourceListenerInitializer;
 import io.github.apace100.calio.resource.OrderedResourceListenerManager;
 import net.onixary.shapeShifterCurseFabric.integration.origins.badge.BadgeManager;
-import net.onixary.shapeShifterCurseFabric.integration.origins.command.OriginCommand;
+//import net.onixary.shapeShifterCurseFabric.integration.origins.command.OriginCommand;
 import net.onixary.shapeShifterCurseFabric.integration.origins.networking.ModPacketsC2S;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayers;
@@ -92,7 +92,7 @@ public class Origins implements ModInitializer, OrderedResourceListenerInitializ
 		Origin.init();
 
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
-			OriginCommand.register(dispatcher);
+			//OriginCommand.register(dispatcher);
 		});
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register((content) -> {
 			content.add(ModItems.ORB_OF_ORIGIN);

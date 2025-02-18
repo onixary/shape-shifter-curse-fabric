@@ -20,5 +20,6 @@
       "text": "take a nap", "color": "yellow"
     },
     "?"
-  ]
+  ],
+  "commands.shape_shifter_curse.form_not_found": ["Form not found!"]
 }
