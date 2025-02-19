@@ -29,6 +29,11 @@ public class TransformManager {
 
     private static float nauesaStrength = 0.0f;
     private static float blackStrength = 0.0f;
+    private static boolean isTransforming = false;
+
+    public static boolean isTransforming(){
+        return isTransforming;
+    }
 
     public static void handleProgressiveTransform(PlayerEntity player, boolean isByCursedMoon){
         PlayerForms currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
@@ -112,6 +117,7 @@ public class TransformManager {
                 applyFinaleTransformEffect((ServerPlayerEntity) curPlayer, 5);
                 InstinctTicker.isPausing = false;
                 TransformOverlay.INSTANCE.setEnableOverlay(false);
+                isTransforming = false;
                 isEndEffectActive = false;
                 beginTransformEffectTicks = 0;
                 endTransformEffectTicks = 0;
@@ -130,6 +136,7 @@ public class TransformManager {
     }
 
     private static void handleTransformEffect(){
+        isTransforming = true;
         beginTransformEffect();
         beginTransformEffectTicks = StaticParams.TRANSFORM_FX_DURATION_IN;
         endTransformEffectTicks = StaticParams.TRANSFORM_FX_DURATION_OUT;

@@ -20,13 +20,13 @@ public class PlayerEffectManager {
         if(clientPlayer == null){
             return;
         }
-        // similar to DOTween in Unity
-        for (int i = 0; i < 5; i++) {
+
+        for (int i = 0; i < 1; i++) {
             clientPlayer.getWorld().addParticle(StaticParams.PLAYER_TRANSFORM_PARTICLE,
-                    clientPlayer.getX() + (clientPlayer.getRandom().nextDouble() - 0.5) * 0.9,
-                    clientPlayer.getY() + clientPlayer.getRandom().nextDouble() * 1.5 + 1,
-                    clientPlayer.getZ() + (clientPlayer.getRandom().nextDouble() - 0.5) * 0.9,
-                    0, 1, 0);
+                    clientPlayer.getX() + (clientPlayer.getRandom().nextDouble() - 0.5) * 0.5,
+                    clientPlayer.getY() + clientPlayer.getRandom().nextDouble() * 1,
+                    clientPlayer.getZ() + (clientPlayer.getRandom().nextDouble() - 0.5) * 0.5,
+                    0, 1, 0.5);
         }
     }
 

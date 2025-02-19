@@ -27,8 +27,10 @@ import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationPlayerBat1;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationPlayerBat2;
+import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationTransform;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -48,6 +50,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
     private void shape_shifter_curse$init(ClientWorld level, GameProfile profile, CallbackInfo info) {
         PlayerAnimationAccess.getPlayerAnimLayer((AbstractClientPlayerEntity) (Object) this).addAnimLayer(1, CONTAINER);
         // register all form animations here
+        AnimationTransform.registerAnims();
         AnimationPlayerBat1.registerAnims();
         AnimationPlayerBat2.registerAnims();
 
@@ -220,6 +223,12 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                 }
             }
         }
+        // isTransforming
+        if(TransformManager.isTransforming()){
+            //ShapeShifterCurseFabric.LOGGER.info("Player is transforming");
+            currentState = PlayerAnimState.ANIM_ON_TRANSFORM;
+        }
+
         lastPos = new Vec3d(pos.x, pos.y, pos.z);
         lastOnGround = onGround;
         if (previousState != currentState)
@@ -232,16 +241,22 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         // judge form animation
         curForm = RegPlayerFormComponent.PLAYER_FORM.get(this).getCurrentForm();
         AnimationHolder animToPlay = null;
-        switch (curForm) {
-            case BAT_1:
-                animToPlay = AnimationPlayerBat1.getFormAnimToPlay(currentState);
-                break;
-            case BAT_2:
-                animToPlay = AnimationPlayerBat2.getFormAnimToPlay(currentState);
-                break;
-            default:
-                break;
+        if(currentState == PlayerAnimState.ANIM_ON_TRANSFORM){
+            animToPlay = AnimationTransform.getFormAnimToPlay(PlayerAnimState.ANIM_ON_TRANSFORM);
         }
+        else{
+            switch (curForm) {
+                case BAT_1:
+                    animToPlay = AnimationPlayerBat1.getFormAnimToPlay(currentState);
+                    break;
+                case BAT_2:
+                    animToPlay = AnimationPlayerBat2.getFormAnimToPlay(currentState);
+                    break;
+                default:
+                    break;
+            }
+        }
+
 
         if (animToPlay != null){
             //ShapeShifterCurseFabric.LOGGER.info("Playing animation: " + animToPlay.getAnimation());

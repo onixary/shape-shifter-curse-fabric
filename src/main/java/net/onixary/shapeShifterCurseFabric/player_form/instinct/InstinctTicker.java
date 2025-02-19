@@ -11,6 +11,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 
 import static net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager.getForm;
+import static net.onixary.shapeShifterCurseFabric.player_form.effect.PlayerEffectManager.applyInstinctThresholdEffect;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.loadInstinctComp;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.saveInstinctComp;
 import static net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager.handleProgressiveTransform;
@@ -62,6 +63,10 @@ public class InstinctTicker {
                 StaticParams.INSTINCT_MAX
         );
         RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.sync(player);
+
+        if(comp.instinctValue >= 80.0f && comp.instinctValue < 99.99f){
+            applyInstinctThresholdEffect();
+        }
         //ShapeShifterCurseFabric.LOGGER.info("currentInstinctFromComp: " + comp.instinctValue);
         // 判断当前状态
         judgeInstinctState(player, currentInstinctRate);
