@@ -81,11 +81,11 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         }
         tickCounter++;
         if (tickCounter == 20) {
-            if (this.hasStatusEffect(StatusEffects.SLOW_FALLING)) {
+            /*if (this.hasStatusEffect(StatusEffects.SLOW_FALLING)) {
                 hasSlowFall = true;
             } else {
                 hasSlowFall = false;
-            }
+            }*/
             tickCounter = 0;
         }
         World world = this.getEntityWorld();
@@ -197,13 +197,13 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
             }
             else
             {
-                if (this.fallDistance > 1)
-                {
-                    if (this.fallDistance > 3)
-                    {
-                        currentState = PlayerAnimState.ANIM_FALLING;
-                    }
-                }
+                //if (this.fallDistance > 1)
+                //{
+                //    if (this.fallDistance > 3)
+                //    {
+                //       currentState = PlayerAnimState.ANIM_FALLING;
+                //    }
+                //}
 
                 if (!isOnGround() && getVelocity().y < 0 && hasSlowFall)
                 {
@@ -248,9 +248,11 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
             switch (curForm) {
                 case BAT_1:
                     animToPlay = AnimationPlayerBat1.getFormAnimToPlay(currentState);
+                    hasSlowFall = false;
                     break;
                 case BAT_2:
                     animToPlay = AnimationPlayerBat2.getFormAnimToPlay(currentState);
+                    hasSlowFall = true;
                     break;
                 default:
                     break;

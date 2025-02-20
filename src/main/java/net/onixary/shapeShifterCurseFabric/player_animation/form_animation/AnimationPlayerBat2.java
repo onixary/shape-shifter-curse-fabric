@@ -12,14 +12,20 @@ public class AnimationPlayerBat2 {
 
     private static AnimationHolder anim_sneak_idle = AnimationHolder.EMPTY;
     private static AnimationHolder anim_jump = AnimationHolder.EMPTY;
+    private static AnimationHolder anim_slow_falling = AnimationHolder.EMPTY;
 
 
     public static AnimationHolder getFormAnimToPlay(PlayerAnimState currentState) {
         switch (currentState) {
             case ANIM_SNEAK_IDLE:
                 return anim_sneak_idle;
+
                 case ANIM_JUMP:
                 return anim_jump;
+
+                case ANIM_SLOW_FALLING:
+                return anim_slow_falling;
+
             default:
                 return null;
         }
@@ -28,5 +34,6 @@ public class AnimationPlayerBat2 {
     public static void registerAnims() {
         anim_sneak_idle = new AnimationHolder(new Identifier(MOD_ID, "bat_1_sneak_idle"), true);
         anim_jump = new AnimationHolder(new Identifier(MOD_ID, "bat_2_jump"), true);
+        anim_slow_falling = new AnimationHolder(new Identifier(MOD_ID, "bat_2_slow_falling"), true);
     }
 }

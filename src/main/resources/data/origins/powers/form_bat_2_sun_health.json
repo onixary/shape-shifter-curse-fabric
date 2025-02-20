@@ -1,0 +1,13 @@
+{
+  "type": "origins:conditioned_attribute",
+  "modifier": {
+    "name": "Reduced health in the sun",
+    "attribute": "minecraft:generic.max_health",
+    "value": -14.0,
+    "operation": "addition"
+  },
+  "tick_rate": 20,
+  "condition": {
+    "type": "origins:exposed_to_sun"
+  }
+}

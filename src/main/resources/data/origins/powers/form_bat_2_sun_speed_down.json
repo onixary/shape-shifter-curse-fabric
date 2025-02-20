@@ -3,12 +3,11 @@
   "modifier": {
     "attribute": "minecraft:generic.movement_speed",
     "operation": "multiply_total",
-    "value": 0.35,
-    "name": "Increased speed when dark"
+    "value": -0.1,
+    "name": "Decrease speed when under the sun"
   },
   "tick_rate": 20,
   "condition": {
-    "type": "origins:exposed_to_sun",
-    "inverted": true
+    "type": "origins:exposed_to_sun"
   }
 }
