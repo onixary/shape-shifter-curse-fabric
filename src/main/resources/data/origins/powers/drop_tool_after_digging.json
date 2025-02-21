@@ -1,0 +1,14 @@
+﻿{
+  "type": "origins:action_on_block_break",
+  "entity_action": {
+    "type": "origins:drop_inventory",
+    "item_condition": {
+      "type": "origins:harvest_level",
+      "comparison": ">",
+      "compare_to": 1
+    },
+    "slots": [
+      "weapon.mainhand"
+    ]
+  }
+}

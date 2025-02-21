@@ -1,0 +1,15 @@
+﻿{
+  "type": "origins:self_action_on_hit",
+  "entity_action": {
+    "type": "origins:drop_inventory",
+    "item_condition": {
+      "type": "origins:harvest_level",
+      "comparison": ">",
+      "compare_to": 1
+    },
+    "slots": [
+      "weapon.mainhand"
+    ]
+
+  }
+}

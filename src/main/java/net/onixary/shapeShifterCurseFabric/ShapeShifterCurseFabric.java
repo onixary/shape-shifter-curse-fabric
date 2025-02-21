@@ -23,6 +23,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalEntityConditions;
 import net.onixary.shapeShifterCurseFabric.command.FormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
 import net.onixary.shapeShifterCurseFabric.data.ConfigSSC;
@@ -90,6 +91,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         RegFormConfig.register();
         RegPlayerAnimation.register();
         RegOtherStatusEffects.initialize();
+        AdditionalEntityConditions.register();
 
         //TransformFX.INSTANCE.registerCallbacks();
         TransformOverlay.INSTANCE.init();
@@ -148,8 +150,11 @@ public class ShapeShifterCurseFabric implements ModInitializer {
                 if(RegTStatusEffect.hasAnyEffect((PlayerEntity) entity)) {
                     return ActionResult.success(true);
                 }
+                else{
+                    return ActionResult.PASS;
+                }
             }
-            return null;
+            return ActionResult.PASS;
         });
 
         // Debug instinct

@@ -12,7 +12,12 @@
 		"origins:form_dark_speed_up",
 		"origins:form_bat_2_sun_speed_down",
 		"origins:prevent_ranged_weapon_use",
-		"origins:vegetarian"
+		"origins:vegetarian",
+		"origins:drop_tool_after_digging",
+		"origins:drop_weapon_after_hit",
+		"origins:damage_up",
+		"origins:barehand_digging_speed_up",
+		"origins:barehand_harvest"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

@@ -1,0 +1,10 @@
+﻿{
+  "type": "origins:modify_break_speed",
+  "condition": {
+    "type": "origins:barehand_digging"
+  },
+  "modifier": {
+    "operation": "multiply_base",
+    "value": 5.0
+  }
+}

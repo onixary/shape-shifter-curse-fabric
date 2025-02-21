@@ -3,7 +3,7 @@
     "item_condition": {
         "type": "origins:ingredient",
         "ingredient": {
-            "tag": "origins:ranged_weapon"
+            "tag": "origins:ranged_weapons"
         }
     }
 }
