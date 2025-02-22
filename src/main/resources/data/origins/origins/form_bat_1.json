@@ -1,4 +1,16 @@
 {
+	"powers":[
+		"origins:bat_vision",
+		"origins:form_disable_chest_armor",
+		"origins:form_disable_feet_armor",
+		"origins:damage_up",
+		"origins:high_jump_2",
+		"origins:form_dark_speed_up",
+		"origins:form_bat_1_sun_speed_down",
+		"origins:form_bat_1_sun_health",
+		"origins:prevent_ranged_weapon_use",
+		"origins:form_meat_food_down"
+	],
 	"icon": {
 		"item": "minecraft:player_head"
 	},

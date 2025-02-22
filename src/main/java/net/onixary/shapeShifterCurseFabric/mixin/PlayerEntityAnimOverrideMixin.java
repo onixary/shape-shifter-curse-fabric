@@ -18,6 +18,8 @@ import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.item.FlintAndSteelItem;
+import net.minecraft.util.Hand;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -304,5 +306,16 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
         container.setupAnim(1.0f / 20.0f);
 
+    }
+
+    @Override
+    public void swingHand(Hand hand) {
+        super.swingHand(hand);
+
+        if (getActiveItem().getItem() instanceof FlintAndSteelItem && isUsingItem()) {
+            return;
+        }
+
+        currentState = PlayerAnimState.ANIM_TOOL_SWING;
     }
 }
