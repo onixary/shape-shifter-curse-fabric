@@ -32,7 +32,8 @@ public class StartBookScreen extends BaseOwoScreen<FlowLayout> {
                 .verticalAlignment(VerticalAlignment.CENTER);
 
         rootComponent.child(
-                Containers.verticalFlow(Sizing.fixed(200), Sizing.fill(80)).children(
+                Containers.verticalFlow(Sizing.fixed(200), Sizing.fill(80))
+                        .children(
                         List.of(
                                 Components.label(
                                         Text.literal("Hello, World!")
