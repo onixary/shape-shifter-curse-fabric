@@ -7,21 +7,33 @@ import io.wispforest.owo.ui.container.FlowLayout;
 import io.wispforest.owo.ui.core.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import net.onixary.shapeShifterCurseFabric.custom_ui.util.ScaledLabelComponent;
+import net.onixary.shapeShifterCurseFabric.data.CodexData;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+
+import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
 public class BookOfShapeShifterScreen extends BaseOwoScreen<FlowLayout> {
     // player
     public PlayerEntity currentPlayer;
     // font scale
-    private float textScale = 0.75f;
+    private float textScale = 0.5f;
     // layout
     private FlowLayout leftPage;
     private FlowLayout rightPage1;
-    private FlowLayout rightPage2;
     private FlowLayout bookArea;
     private FlowLayout rightArea;
+    private FlowLayout pageArea1;
+    private FlowLayout pageArea2;
+    private FlowLayout pageButtonContainer;
     private boolean showingPage1 = true;
+
+    private static final Identifier page1_texID = new Identifier(MOD_ID,"textures/gui/codex_page_1.png");
+    private static final Identifier page2_texID = new Identifier(MOD_ID,"textures/gui/codex_page_2.png");
 
 
     @Override
@@ -47,104 +59,298 @@ public class BookOfShapeShifterScreen extends BaseOwoScreen<FlowLayout> {
                         .verticalAlignment(VerticalAlignment.TOP)
         );*/
 
-        bookArea = Containers.horizontalFlow(Sizing.fixed(300), Sizing.fixed(220));
+        bookArea = Containers.horizontalFlow(Sizing.fixed(350), Sizing.fixed(220));
         root.child(bookArea
-                .surface(Surface.DARK_PANEL)
+                .surface(Surface.tiled(page1_texID, 350, 220))
+                .horizontalAlignment(HorizontalAlignment.CENTER)
+                .verticalAlignment(VerticalAlignment.CENTER));
+
+        // Page Area 1
+        pageArea1 = Containers.horizontalFlow(Sizing.fixed(330), Sizing.fill(100));
+        bookArea.child(pageArea1
+                .surface(Surface.BLANK)
                 .horizontalAlignment(HorizontalAlignment.CENTER)
                 .verticalAlignment(VerticalAlignment.CENTER));
 
         // Left page - vertical flow with three modules
         leftPage = Containers.verticalFlow(Sizing.fixed(120), Sizing.fixed(210));
-        bookArea.child(leftPage
-                .surface(Surface.PANEL)
+        pageArea1.child(leftPage
+                .surface(Surface.BLANK)
                 .horizontalAlignment(HorizontalAlignment.CENTER)
                 .verticalAlignment(VerticalAlignment.TOP)
                 .padding(Insets.of(5))
-                .margins(Insets.of(5, 5, 0, 5)));
+                .margins(Insets.of(5, 5, 2, 3)));
 
 
-        // First module: a placeholder for the player doll
+        // Player Doll
         leftPage.child(Components.entity(Sizing.fixed(80), currentPlayer)
+                .scale(calculatePlayerScale(currentPlayer))
                 .lookAtCursor(false)
                 .allowMouseRotation(true)
                 .transform(matrices -> {
                     matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(currentPlayer.getYaw() + 45));
                     matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-35f));
-                })
-                .scaleToFit(true));
+                }));
 
-        // Second module: text module
+        // Title Content
         FlowLayout titleLayout = Containers.verticalFlow(Sizing.fill(100), Sizing.fixed(50));
         leftPage.child(titleLayout
-                .surface(Surface.PANEL)
+                .surface(Surface.BLANK)
                 .horizontalAlignment(HorizontalAlignment.LEFT)
                 .verticalAlignment(VerticalAlignment.TOP)
                 .padding(Insets.of(5)));
+        titleLayout.child(new ScaledLabelComponent(CodexData.getContentText(CodexData.ContentType.TITLE, currentPlayer), textScale)
+                .maxWidth(getScaledWidth(100))
+                .color(Color.ofRgb(0x2b2d30)));
 
-        titleLayout.child(new ScaledLabelComponent(Text.literal("整体而言，如果设法隐藏掉你身上的那些异常之处的话，\n其他人会认为你是一个有点奇怪的人类"), textScale).maxWidth(getScaledWidth(100)));
+        // Status Header
+        FlowLayout statusHeaderHolder = Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(12));
+        leftPage.child(statusHeaderHolder
+                .surface(Surface.BLANK)
+                .horizontalAlignment(HorizontalAlignment.CENTER)
+                .verticalAlignment(VerticalAlignment.CENTER)
+                .padding(Insets.of(1)));
 
-        FlowLayout statusLayout = Containers.verticalFlow(Sizing.fill(100), Sizing.fixed(70));
+        FlowLayout statusHeaderLayout = Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(10));
+        statusHeaderHolder.child(statusHeaderLayout
+                .surface(Surface.BLANK)
+                .horizontalAlignment(HorizontalAlignment.CENTER)
+                .verticalAlignment(VerticalAlignment.CENTER));
+        statusHeaderLayout.child(new ScaledLabelComponent(CodexData.headerStatus, 0.8f)
+                .maxWidth(getScaledWidth(100))
+                .verticalTextAlignment(VerticalAlignment.CENTER)
+                .shadow(true));
+
+        // Status Content
+        FlowLayout statusLayout = Containers.verticalFlow(Sizing.fill(100), Sizing.fixed(58));
         leftPage.child(statusLayout
-                .surface(Surface.PANEL)
+                .surface(Surface.BLANK)
                 .horizontalAlignment(HorizontalAlignment.LEFT)
                 .verticalAlignment(VerticalAlignment.TOP)
                 .padding(Insets.of(5)));
-        // Third module: text module
-        statusLayout.child(new ScaledLabelComponent(Text.literal("你身上没有什么特别的状态"), textScale).maxWidth(getScaledWidth(100)));
+        statusLayout.child(new ScaledLabelComponent(CodexData.getPlayerStatusText(currentPlayer), textScale)
+                .maxWidth(getScaledWidth(100))
+                .color(Color.ofRgb(0x2b2d30)));
 
-        rightArea = Containers.verticalFlow(Sizing.fixed(170), Sizing.fixed(210));
-        bookArea.child(rightArea
-                .surface(Surface.PANEL)
+        // Right Area
+        rightArea = Containers.verticalFlow(Sizing.fixed(190), Sizing.fixed(210));
+        pageArea1.child(rightArea
+                .surface(Surface.BLANK)
+                .horizontalAlignment(HorizontalAlignment.CENTER)
+                .verticalAlignment(VerticalAlignment.TOP)
+                .padding(Insets.of(5))
+                .margins(Insets.of(5, 5, 3, 2)));
+
+        // Right page 1
+        rightPage1 = Containers.verticalFlow(Sizing.fixed(180), Sizing.fill(100));
+        rightArea.child(rightPage1
+                .surface(Surface.BLANK)
+                .horizontalAlignment(HorizontalAlignment.CENTER)
+                .verticalAlignment(VerticalAlignment.TOP));
+
+        // Appearance Header
+        FlowLayout appearanceHeaderHolder = Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(12));
+        rightPage1.child(appearanceHeaderHolder
+                .surface(Surface.BLANK)
+                .horizontalAlignment(HorizontalAlignment.CENTER)
+                .verticalAlignment(VerticalAlignment.CENTER)
+                .padding(Insets.of(1)));
+
+        FlowLayout appearanceHeaderLayout = Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(10));
+        appearanceHeaderHolder.child(appearanceHeaderLayout
+                .surface(Surface.BLANK)
+                .horizontalAlignment(HorizontalAlignment.CENTER)
+                .verticalAlignment(VerticalAlignment.CENTER));
+        appearanceHeaderLayout.child(new ScaledLabelComponent(CodexData.headerAppearance, 0.8f)
+                .maxWidth(getScaledWidth(100))
+                .verticalTextAlignment(VerticalAlignment.CENTER)
+                .shadow(true));
+
+        // Appearance Content
+        FlowLayout appearanceLayout = Containers.verticalFlow(Sizing.fixed(182), Sizing.fixed(190));
+        rightPage1.child(appearanceLayout
+                .surface(Surface.BLANK)
+                .horizontalAlignment(HorizontalAlignment.LEFT)
+                .verticalAlignment(VerticalAlignment.TOP)
+                .padding(Insets.of(7)));
+
+        appearanceLayout.child(new ScaledLabelComponent(CodexData.getDescText(CodexData.ContentType.APPEARANCE, currentPlayer), textScale)
+                .maxWidth(getScaledWidth(170)));
+
+        appearanceLayout.child(new ScaledLabelComponent(CodexData.getContentText(CodexData.ContentType.APPEARANCE, currentPlayer), textScale)
+                .maxWidth(getScaledWidth(170))
+                .color(Color.ofRgb(0x2b2d30)));
+
+
+        // Page Area 2
+        pageArea2 = Containers.horizontalFlow(Sizing.fixed(330), Sizing.fill(100));
+        bookArea.child(pageArea2
+                .surface(Surface.BLANK)
+                .horizontalAlignment(HorizontalAlignment.CENTER)
+                .verticalAlignment(VerticalAlignment.TOP)
+                .margins(Insets.of(0)));
+
+        // Page 2 - Pro Holder
+        FlowLayout proHolder = Containers.verticalFlow(Sizing.fixed(100), Sizing.fixed(220));
+        pageArea2.child(proHolder
+                .surface(Surface.BLANK)
                 .horizontalAlignment(HorizontalAlignment.LEFT)
                 .verticalAlignment(VerticalAlignment.TOP)
                 .padding(Insets.of(5))
                 .margins(Insets.of(5, 5, 5, 0)));
-        /*
-        // Right page 1: single text module
-        rightPage1 = Containers.verticalFlow(Sizing.fixed(150), Sizing.fill(100))
-                .child(Components.label(Text.literal("Page 1 - single text module")));
-        bookArea.child(rightPage1)
+
+        // Page2 - Pro Header
+        FlowLayout proHeaderHolder = Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(12));
+        proHolder.child(proHeaderHolder
                 .surface(Surface.BLANK)
                 .horizontalAlignment(HorizontalAlignment.CENTER)
-                .verticalAlignment(VerticalAlignment.TOP)
-                .padding(Insets.of(10));
+                .verticalAlignment(VerticalAlignment.CENTER)
+                .padding(Insets.of(1)));
 
-        // Right page 2: vertical flow => first child is a horizontal flow with two text modules
-        // second child is another text module placed below
-        rightPage2 = Containers.verticalFlow(Sizing.fixed(150), Sizing.fill(100));
-        bookArea.child(rightPage2)
+        FlowLayout proHeaderLayout = Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(10));
+        proHeaderHolder.child(proHeaderLayout
                 .surface(Surface.BLANK)
                 .horizontalAlignment(HorizontalAlignment.CENTER)
+                .verticalAlignment(VerticalAlignment.CENTER));
+        proHeaderLayout.child(new ScaledLabelComponent(CodexData.headerPros, 0.8f)
+                .maxWidth(getScaledWidth(100))
+                .verticalTextAlignment(VerticalAlignment.CENTER)
+                .shadow(true));
+
+        // Page2 - Pro Content
+        FlowLayout proLayout = Containers.verticalFlow(Sizing.fill(100), Sizing.fixed(190));
+        proHolder.child(proLayout
+                .surface(Surface.BLANK)
+                .horizontalAlignment(HorizontalAlignment.LEFT)
                 .verticalAlignment(VerticalAlignment.TOP)
-                .padding(Insets.of(10));
+                .padding(Insets.of(5)));
+        proLayout.child(new ScaledLabelComponent(CodexData.getDescText(CodexData.ContentType.PROS, currentPlayer), textScale)
+                .maxWidth(getScaledWidth(80)));
 
-        FlowLayout rightPage2Top = Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(30));
-        rightPage2Top.child(Components.label(Text.literal("Page 2 - Module A")));
-        rightPage2Top.child(Components.label(Text.literal("Page 2 - Module B")));
-        rightPage2.child(rightPage2Top);
-        rightPage2.child(Components.label(Text.literal("Page 2 - Module C (below)")));
+        proLayout.child(new ScaledLabelComponent(CodexData.getContentText(CodexData.ContentType.PROS, currentPlayer), textScale)
+                .maxWidth(getScaledWidth(80))
+                .color(Color.ofRgb(0x2b2d30)));
 
-        // A button to toggle between right pages
-        FlowLayout toggleContainer = Containers.verticalFlow(Sizing.content(), Sizing.content());
-        toggleContainer.child(Components.button(Text.literal("Toggle Page"), b -> {
+        // Page 2 - Con Holder
+        FlowLayout conHolder = Containers.verticalFlow(Sizing.fixed(100), Sizing.fixed(220));
+        pageArea2.child(conHolder
+                .surface(Surface.BLANK)
+                .horizontalAlignment(HorizontalAlignment.LEFT)
+                .verticalAlignment(VerticalAlignment.TOP)
+                .padding(Insets.of(5))
+                .margins(Insets.of(5, 5, 0, 5)));
+
+        // Page2 - Con Header
+        FlowLayout conHeaderHolder = Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(12));
+        conHolder.child(conHeaderHolder
+                .surface(Surface.BLANK)
+                .horizontalAlignment(HorizontalAlignment.CENTER)
+                .verticalAlignment(VerticalAlignment.CENTER)
+                .padding(Insets.of(1)));
+
+        FlowLayout conHeaderLayout = Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(10));
+        conHeaderHolder.child(conHeaderLayout
+                .surface(Surface.BLANK)
+                .horizontalAlignment(HorizontalAlignment.CENTER)
+                .verticalAlignment(VerticalAlignment.CENTER));
+        conHeaderLayout.child(new ScaledLabelComponent(CodexData.headerCons, 0.8f)
+                .maxWidth(getScaledWidth(100))
+                .verticalTextAlignment(VerticalAlignment.CENTER)
+                .shadow(true));
+
+        // Page2 - Con Content
+        FlowLayout conLayout = Containers.verticalFlow(Sizing.fill(100), Sizing.fixed(190));
+        conHolder.child(conLayout
+                .surface(Surface.BLANK)
+                .horizontalAlignment(HorizontalAlignment.LEFT)
+                .verticalAlignment(VerticalAlignment.TOP)
+                .padding(Insets.of(5)));
+        conLayout.child(new ScaledLabelComponent(CodexData.getDescText(CodexData.ContentType.CONS, currentPlayer), textScale)
+                .maxWidth(getScaledWidth(80)));
+        conLayout.child(new ScaledLabelComponent(CodexData.getContentText(CodexData.ContentType.CONS, currentPlayer), textScale)
+                .maxWidth(getScaledWidth(80))
+                .color(Color.ofRgb(0x2b2d30)));
+
+        // Page 2 - Instinct Holder
+        FlowLayout instinctHolder = Containers.verticalFlow(Sizing.fixed(120), Sizing.fixed(220));
+        pageArea2.child(instinctHolder
+                .surface(Surface.BLANK)
+                .horizontalAlignment(HorizontalAlignment.LEFT)
+                .verticalAlignment(VerticalAlignment.TOP)
+                .padding(Insets.of(5))
+                .margins(Insets.of(5, 5, 5, 5)));
+
+        // Page2 - Instinct Header
+        FlowLayout instinctHeaderHolder = Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(12));
+        instinctHolder.child(instinctHeaderHolder
+                .surface(Surface.BLANK)
+                .horizontalAlignment(HorizontalAlignment.CENTER)
+                .verticalAlignment(VerticalAlignment.CENTER)
+                .padding(Insets.of(1)));
+
+        FlowLayout instinctHeaderLayout = Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(10));
+        instinctHeaderHolder.child(instinctHeaderLayout
+                .surface(Surface.BLANK)
+                .horizontalAlignment(HorizontalAlignment.CENTER)
+                .verticalAlignment(VerticalAlignment.CENTER));
+        instinctHeaderLayout.child(new ScaledLabelComponent(CodexData.headerInstincts, 0.8f)
+                .maxWidth(getScaledWidth(100))
+                .verticalTextAlignment(VerticalAlignment.CENTER)
+                .shadow(true));
+
+        // Page2 - Instinct Content
+        FlowLayout instinctLayout = Containers.verticalFlow(Sizing.fill(100), Sizing.fixed(140));
+        instinctHolder.child(instinctLayout
+                .surface(Surface.BLANK)
+                .horizontalAlignment(HorizontalAlignment.LEFT)
+                .verticalAlignment(VerticalAlignment.TOP)
+                .padding(Insets.of(5)));
+        instinctLayout.child(new ScaledLabelComponent(CodexData.getDescText(CodexData.ContentType.INSTINCTS, currentPlayer), textScale)
+                .maxWidth(getScaledWidth(100)));
+        instinctLayout.child(new ScaledLabelComponent(CodexData.getContentText(CodexData.ContentType.INSTINCTS, currentPlayer), textScale)
+                .maxWidth(getScaledWidth(100))
+                .color(Color.ofRgb(0x2b2d30)));
+
+        // A button to toggle between pages
+        pageButtonContainer = Containers.horizontalFlow(Sizing.content(), Sizing.content());
+        pageButtonContainer.child(Components.button(Text.literal(">"), b -> {
             showingPage1 = !showingPage1;
             rebuildRightPage(root);
-        }));
-        // Put the toggle button in a small container on the right, under or above the pages
-        // Adjust the alignment/positioning as desired
-        rightArea.child(toggleContainer);*/
+        })
+                .margins(Insets.of(0, 0, 0, 0)));
+
+        // rebuild
+        bookArea.clearChildren();
+        bookArea.surface(Surface.tiled(page1_texID, 350, 220))
+                .horizontalAlignment(HorizontalAlignment.CENTER)
+                .verticalAlignment(VerticalAlignment.CENTER);
+        bookArea.child(pageArea1);
+        bookArea.child(pageButtonContainer);
     }
 
     private void rebuildRightPage(FlowLayout root) {
         // Remove both pages
-        bookArea.removeChild(rightPage1);
-        bookArea.removeChild(rightPage2);
+        bookArea.clearChildren();
         // Add the page currently showing
         if (showingPage1) {
-            bookArea.child(rightPage1);
+            bookArea.surface(Surface.tiled(page1_texID, 350, 220))
+                    .horizontalAlignment(HorizontalAlignment.CENTER)
+                    .verticalAlignment(VerticalAlignment.CENTER);
+            bookArea.child(pageArea1);
         } else {
-            bookArea.child(rightPage2);
+            bookArea.surface(Surface.tiled(page2_texID, 350, 220))
+                    .horizontalAlignment(HorizontalAlignment.CENTER)
+                    .verticalAlignment(VerticalAlignment.CENTER);
+            bookArea.child(pageArea2);
         }
+        bookArea.child(pageButtonContainer);
+    }
+
+    private float calculatePlayerScale(PlayerEntity player) {
+        float BASE_SCALE_FACTOR = 0.25f;
+        PlayerFormComponent formComp = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
+        float formScale = RegFormConfig.CONFIGS.get(formComp.getCurrentForm()).getScale();
+        return BASE_SCALE_FACTOR * (1.0f / formScale);
     }
 
     @Override
