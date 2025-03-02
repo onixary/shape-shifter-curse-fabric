@@ -9,7 +9,10 @@
     "MinecraftClientMixin",
     "InstinctBarMixin",
     "PlayerEntityAnimOverrideMixin",
-    "GameRendererMixin"
+    "GameRendererMixin",
+    "CursedMoonWorldMixin",
+    "MoonPhaseRenderMixin",
+    "CursedMoonLightmapMixin"
   ],
   "injectors": {
     "defaultRequire": 1

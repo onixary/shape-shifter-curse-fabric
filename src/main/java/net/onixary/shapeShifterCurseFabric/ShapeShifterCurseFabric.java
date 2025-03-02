@@ -23,10 +23,12 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.GameRules;
 import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalEntityConditions;
 import net.onixary.shapeShifterCurseFabric.command.FormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
 import net.onixary.shapeShifterCurseFabric.data.ConfigSSC;
+import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
 import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegEntitySpawnEgg;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.TEntitySpawnHandler;
@@ -66,6 +68,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static final ConfigSSC CONFIG = ConfigSSC.createAndLoad();
 
+    public static CursedMoonData cursedMoonData = new CursedMoonData();
+
     // Reg custom entities
     // Bat
     public static final EntityType<TransformativeBatEntity> T_BAT = Registry.register(
@@ -92,6 +96,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         RegPlayerAnimation.register();
         RegOtherStatusEffects.initialize();
         AdditionalEntityConditions.register();
+        cursedMoonData = new CursedMoonData();
 
         //TransformFX.INSTANCE.registerCallbacks();
         TransformOverlay.INSTANCE.init();
@@ -134,6 +139,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             saveCurrentAttachment(server.getOverworld(), player);
             saveForm(player);
             saveInstinctComp(player);
+            // save cursed moon data
+            ShapeShifterCurseFabric.cursedMoonData.getInstance().save(server.getOverworld());
         });
 
         // Reg listeners

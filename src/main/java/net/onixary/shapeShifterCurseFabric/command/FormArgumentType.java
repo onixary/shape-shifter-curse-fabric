@@ -26,7 +26,7 @@ import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID
 public class FormArgumentType implements ArgumentType<Identifier> {
 
    public static final DynamicCommandExceptionType FORM_NOT_FOUND = new DynamicCommandExceptionType(
-       o -> Text.translatable("commands.shape_shifter_curse.form_not_found", o)
+       o -> Text.translatable("commands.shape-shifter-curse.form_not_found", o)
    );
 
    public static FormArgumentType form() {

@@ -6,7 +6,9 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.world.GameRules;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
@@ -43,6 +45,21 @@ public class PlayerEventHandler {
             // load instinct
             InstinctManager.getServerWorld(server.getOverworld());
             loadInstinct(player);
+
+            // load cursed moon data
+            ShapeShifterCurseFabric.cursedMoonData.getInstance().load(server.getOverworld());
+            if(FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_BEFORE_ENABLE){
+                ShapeShifterCurseFabric.LOGGER.info("Cursed moon disabled");
+                ShapeShifterCurseFabric.cursedMoonData.getInstance().disableCursedMoon(server.getOverworld());
+            }
+            else{
+                ShapeShifterCurseFabric.LOGGER.info("Cursed moon enabled");
+                ShapeShifterCurseFabric.cursedMoonData.getInstance().enableCursedMoon(server.getOverworld());
+            }
+            ShapeShifterCurseFabric.cursedMoonData.getInstance().save(server.getOverworld());
+
+            // Set doDaylightCycle to true forced
+            server.getGameRules().get(GameRules.DO_DAYLIGHT_CYCLE).set(true, server);
         });
         // copy event
         ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {

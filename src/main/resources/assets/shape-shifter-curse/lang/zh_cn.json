@@ -1,6 +1,8 @@
 {
   "item.shape-shifter-curse.cursed_book_of_shape_shifter": ["奇怪的书"],
   "screen.shape-shifter-curse.start_book.start_button_text": ["测试按钮"],
+  "info.shape-shifter-curse.before_cursed_moon": ["你感觉到体内的魔法正在涌动，下一个夜晚，诅咒之月将会升起..."],
+  "info.shape-shifter-curse.on_cursed_moon": ["你体内的魔法开始激荡，诅咒之月升起了"],
   "entity.shape-shifter-curse.t_bat": ["蝙蝠？"],
   "item.shape-shifter-curse.custom_bat_spawn_egg": ["蝙蝠？刷怪蛋"],
   "effect.shape-shifter-curse.to_bat_0_effect": [
@@ -21,7 +23,7 @@
     },
     "?"
   ],
-  "commands.shape_shifter_curse.form_not_found": ["未找到指定的形态！"],
+  "commands.shape-shifter-curse.form_not_found": ["未找到指定的形态！"],
   "codex.header.status": ["状态"],
   "codex.header.appearance": ["外观"],
   "codex.header.pros": ["能力"],

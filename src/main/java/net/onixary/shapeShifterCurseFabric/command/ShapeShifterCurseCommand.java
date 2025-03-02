@@ -6,6 +6,8 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 
 import java.util.Collection;
@@ -33,6 +35,9 @@ public class ShapeShifterCurseCommand {
                                         )
                                 )
                         )
+                        .then(literal("jump_to_next_cursed_moon")
+                                .executes(ShapeShifterCurseCommand::jumpToNextCursedMoon)
+                        )
         );
     }
 
@@ -58,5 +63,11 @@ public class ShapeShifterCurseCommand {
 
         return 1;
 
+    }
+
+    private static int jumpToNextCursedMoon(CommandContext<ServerCommandSource> commandContext) {
+        ServerWorld world = commandContext.getSource().getWorld();
+        CursedMoon.jumpToNextCursedMoon(world);
+        return 1;
     }
 }

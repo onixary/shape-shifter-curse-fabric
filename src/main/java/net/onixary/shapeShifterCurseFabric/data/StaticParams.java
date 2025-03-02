@@ -6,6 +6,8 @@ import net.minecraft.particle.ParticleTypes;
 public class StaticParams {
     private StaticParams() {
     }
+    // cursed moon data
+    public static final int CURSED_MOON_INTERVAL_DAY = 3;
     // transformative effect default duration
     public static final int T_EFFECT_DEFAULT_DURATION = 400 * 20; // 400 seconds
     // ----------------------------------------

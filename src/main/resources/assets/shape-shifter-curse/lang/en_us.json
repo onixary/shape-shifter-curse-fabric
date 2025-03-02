@@ -1,6 +1,8 @@
 ﻿{
   "item.shape-shifter-curse.cursed_book_of_shape_shifter": ["Strange book"],
   "screen.shape-shifter-curse.start_book.start_button_text": ["TestButton"],
+  "info.shape-shifter-curse.before_cursed_moon": ["You feel that the magic in your body is surging. The next night, the cursed moon will rise..."],
+  "info.shape-shifter-curse.on_cursed_moon": ["The magic in your body has begun to surge. The cursed moon has risen"],
   "entity.shape-shifter-curse.t_bat": ["Bat?"],
   "item.shape-shifter-curse.custom_bat_spawn_egg": ["Bat? Spawn Egg"],
   "effect.shape-shifter-curse.to_bat_0_effect": [
@@ -21,7 +23,7 @@
     },
     "?"
   ],
-  "commands.shape_shifter_curse.form_not_found": ["Form not found!"],
+  "commands.shape-shifter-curse.form_not_found": ["Form not found!"],
   "codex.header.status": ["Status"],
   "codex.header.appearance": ["Appearance"],
   "codex.header.pros": ["Pros"],
