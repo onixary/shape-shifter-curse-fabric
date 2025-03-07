@@ -1,17 +1,19 @@
 package net.onixary.shapeShifterCurseFabric.player_form.transform;
 
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
+import net.onixary.shapeShifterCurseFabric.player_form.FormRandomSelector;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
 import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
+import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
+import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 
-import static net.onixary.shapeShifterCurseFabric.player_form.effect.PlayerEffectManager.*;
+import static net.onixary.shapeShifterCurseFabric.player_form.effect.PlayerTransformEffectManager.*;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker.clearInstinct;
 import static net.onixary.shapeShifterCurseFabric.screen_effect.TransformFX.beginTransformEffect;
 import static net.onixary.shapeShifterCurseFabric.screen_effect.TransformFX.endTransformEffect;
@@ -41,6 +43,13 @@ public class TransformManager {
         String currentFormGroup = currentForm.getGroup();
         PlayerForms toForm = null;
         switch (currentFormIndex) {
+            case -2:
+                // 未激活mod内容，不做任何事
+                break;
+            case -1:
+                // 如果没有buff则随机选择一个形态，如果有buff则buff形态+1
+                toForm = getRandomOrBuffForm(player);
+                break;
             case 0:
                 toForm = PlayerForms.getFormsByGroup(currentFormGroup)[1];
                 break;
@@ -69,6 +78,16 @@ public class TransformManager {
         applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);
         handleTransformEffect();
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
+    }
+
+    static PlayerForms getRandomOrBuffForm(PlayerEntity player){
+        PlayerEffectAttachment currentTransformEffect = EffectManager.getCurrentEffectAttachment(player);
+        if(currentTransformEffect != null){
+            return currentTransformEffect.currentToForm;
+        }
+        else{
+            return FormRandomSelector.getRandomFormWithIndexZero();
+        }
     }
 
     public static void update() {

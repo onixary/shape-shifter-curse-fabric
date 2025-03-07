@@ -2,7 +2,7 @@ package net.onixary.shapeShifterCurseFabric.player_form.instinct;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormPhase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
@@ -11,9 +11,8 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 
 import static net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager.getForm;
-import static net.onixary.shapeShifterCurseFabric.player_form.effect.PlayerEffectManager.applyInstinctThresholdEffect;
+import static net.onixary.shapeShifterCurseFabric.player_form.effect.PlayerTransformEffectManager.applyInstinctThresholdEffect;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.loadInstinctComp;
-import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.saveInstinctComp;
 import static net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager.handleProgressiveTransform;
 
 public class InstinctTicker {
@@ -49,6 +48,13 @@ public class InstinctTicker {
     public static void tick(PlayerEntity player) {
         PlayerInstinctComponent comp = player.getComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
 
+        if(CursedMoon.isCursedMoon() && CursedMoon.isNight()){
+            isUnderCursedMoon = true;
+        }
+        else{
+            isUnderCursedMoon = false;
+        }
+
         // 处理立即效果
         processImmediateEffects(comp);
 
@@ -62,6 +68,10 @@ public class InstinctTicker {
                 0f,
                 StaticParams.INSTINCT_MAX
         );
+        // 如果在CursedMoon下，不会增长
+        if(isUnderCursedMoon){
+            currentInstinctRate = comp.instinctValue = 0.0f;
+        }
         RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.sync(player);
 
         if(comp.instinctValue >= 80.0f && comp.instinctValue < 99.99f){
@@ -112,7 +122,12 @@ public class InstinctTicker {
         }
 
         if(getForm(player).getIndex() < 2){
-            isInstinctLock = false;
+            if(isUnderCursedMoon){
+                isInstinctLock = true;
+            }
+            else{
+                isInstinctLock = false;
+            }
         }
         else{
             isInstinctLock = true;

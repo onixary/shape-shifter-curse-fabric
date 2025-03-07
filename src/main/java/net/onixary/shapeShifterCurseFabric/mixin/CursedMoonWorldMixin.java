@@ -9,6 +9,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -38,12 +40,17 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
     public <T extends Entity> void tickEntity(Consumer<T> tickConsumer, T entity, CallbackInfo info) {
         if(entity instanceof ServerPlayerEntity player){
             long timeDayMoon = CursedMoon.day_time - (CursedMoon.day -1)*24000L;
-            if(CursedMoon.isCursedMoon() || CursedMoon.isNight()){
-                if(player.isSleeping()){
+            if(CursedMoon.isCursedMoon()){
+                if(CursedMoon.isNight() && player.isSleeping()){
                     player.wakeUp();
                 }
+                shape_shifter_curse$OnCursedMoon(player,timeDayMoon);
             }
-            shape_shifter_curse$OnCursedMoon(player,timeDayMoon);
+            else{
+                if(CursedMoon.moon_effect_applied){
+                    CursedMoon.moon_effect_applied = false;
+                }
+            }
         }
     }
 
@@ -56,13 +63,13 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
     public void shape_shifter_curse$OnCursedMoon(ServerPlayerEntity player,long time) {
         if(time == 6000L){
             // 处于中午时的逻辑
-            player.sendMessage(Text.translatable("info.shape-shifter-curse.before_cursed_moon").formatted(Formatting.LIGHT_PURPLE));
+            if(FormAbilityManager.getForm(player) != PlayerForms.ORIGINAL_BEFORE_ENABLE){
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.before_cursed_moon").formatted(Formatting.LIGHT_PURPLE));
+            }
         }
-        else if(time == 12000L){
-            // 处于Cursed Moon时的逻辑
-            player.sendMessage(Text.translatable("info.shape-shifter-curse.on_cursed_moon").formatted(Formatting.LIGHT_PURPLE));
-
-            ShapeShifterCurseFabric.LOGGER.info("Cursed Moon rises!");
+        else if(time >= 13000L){
+            CursedMoon.applyMoonEffect(player);
         }
+        ShapeShifterCurseFabric.LOGGER.info("Cursed Moon rises!");
     }
 }

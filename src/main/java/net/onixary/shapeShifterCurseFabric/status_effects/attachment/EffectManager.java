@@ -56,7 +56,7 @@ public class EffectManager {
         }
     }
 
-    public PlayerEffectAttachment getCurrentEffectAttachment(PlayerEntity player) {
+    public static PlayerEffectAttachment getCurrentEffectAttachment(PlayerEntity player) {
         return player.getAttached(EFFECT_ATTACHMENT);
     }
 

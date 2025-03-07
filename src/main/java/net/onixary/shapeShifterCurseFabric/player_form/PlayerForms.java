@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public enum PlayerForms {
     // group: form kind, index: form phase, 2 is max
-    ORIGINAL_BEFORE_ENABLE("original_form", 0),
-    ORIGINAL_SHIFTER("base_form", 0),
+    ORIGINAL_BEFORE_ENABLE("original_form", -2),
+    ORIGINAL_SHIFTER("base_form", -1),
     BAT_0("bat_form", 0),
     BAT_1("bat_form", 1),
     BAT_2("bat_form", 2);

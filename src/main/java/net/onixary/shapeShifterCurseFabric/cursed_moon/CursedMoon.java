@@ -1,11 +1,17 @@
 package net.onixary.shapeShifterCurseFabric.cursed_moon;
 
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
+import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import org.spongepowered.asm.mixin.Unique;
 
 
@@ -15,6 +21,7 @@ import org.spongepowered.asm.mixin.Unique;
 public class CursedMoon {
     public static long day_time = 0;
     public static int day = 0;
+    public static boolean moon_effect_applied = false;
 
     // Cursed Moon rises every 3 days
     public static boolean isCursedMoon() {
@@ -50,5 +57,20 @@ public class CursedMoon {
         ShapeShifterCurseFabric.cursedMoonData.getInstance().save(world);
     }
 
-
+    public static void applyMoonEffect(ServerPlayerEntity player){
+        // 处于Cursed Moon时的逻辑
+        // 文本提示
+        if(!CursedMoon.moon_effect_applied){
+            if(FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_BEFORE_ENABLE){
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.on_cursed_moon_before_enable").formatted(Formatting.LIGHT_PURPLE));
+            }
+            else{
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.on_cursed_moon").formatted(Formatting.LIGHT_PURPLE));
+            }
+            ShapeShifterCurseFabric.LOGGER.info("Cursed Moon rises!");
+            // transform
+            TransformManager.handleProgressiveTransform(player,true);
+            CursedMoon.moon_effect_applied =true;
+        }
+    }
 }

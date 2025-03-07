@@ -2,18 +2,13 @@ package net.onixary.shapeShifterCurseFabric.player_form.effect;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
-import net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects;
-import net.onixary.shapeShifterCurseFabric.status_effects.other_effects.ImmobilityEffect;
 import net.onixary.shapeShifterCurseFabric.util.ClientTicker;
 
-public class PlayerEffectManager {
+public class PlayerTransformEffectManager {
 
     public static void applyInstinctThresholdEffect() {
         ClientPlayerEntity clientPlayer = MinecraftClient.getInstance().player;
