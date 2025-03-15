@@ -17,7 +17,8 @@
 		"origins:drop_weapon_after_hit",
 		"origins:damage_up",
 		"origins:barehand_digging_speed_up",
-		"origins:always_harvest"
+		"origins:always_harvest",
+		"origins:form_vegetarian_food_up"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

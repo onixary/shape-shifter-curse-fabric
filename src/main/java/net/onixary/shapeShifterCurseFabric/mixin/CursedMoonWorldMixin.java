@@ -70,6 +70,5 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
         else if(time >= 13000L){
             CursedMoon.applyMoonEffect(player);
         }
-        ShapeShifterCurseFabric.LOGGER.info("Cursed Moon rises!");
     }
 }

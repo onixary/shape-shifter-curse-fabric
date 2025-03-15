@@ -3,7 +3,7 @@
   "modifier": {
     "attribute": "minecraft:generic.movement_speed",
     "operation": "multiply_total",
-    "value": -0.2,
+    "value": -0.02,
     "name": "Decrease speed when under the sun"
   },
   "tick_rate": 20,

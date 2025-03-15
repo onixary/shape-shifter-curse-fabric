@@ -1,0 +1,24 @@
+{
+  "type": "origins:action_on_item_use",
+  "entity_action": {
+    "type": "origins:feed",
+    "food": 4.0,
+    "saturation" : 0.6
+  },
+  "item_condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:ingredient",
+        "ingredient": {
+          "tag": "origins:meat"
+        },
+        "inverted": true
+      },
+      {
+        "type": "origins:meat",
+        "inverted": true
+      }
+    ]
+  }
+}

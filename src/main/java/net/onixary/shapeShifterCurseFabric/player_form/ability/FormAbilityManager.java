@@ -64,6 +64,9 @@ public class FormAbilityManager {
         if (savedForm != null) {
             applyForm(player, savedForm);
         }
+        else{
+            applyForm(player, PlayerForms.ORIGINAL_BEFORE_ENABLE);
+        }
     }
 
     public static void saveForm(PlayerEntity player) {

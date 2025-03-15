@@ -91,7 +91,7 @@
     "Due to the shift in your center of gravity, you now squat on the ground involuntarily when crouching."
   ],
   "codex.form.bat1.pros": [
-    "You can now clearly distinguish objects in the dark.\nYour arms have become stronger, enhancing your melee attack power.\nThough still unable to fly, flapping your membranes allows you to jump higher.\nWhen in shadowed areas, you feel more agile and swift."
+    "You can now clearly distinguish objects in the dark.\nYour arms have become stronger, enhancing your melee attack power.\nThough still unable to fly, flapping your membranes allows you to jump higher.\nYour body now absorbs non-meat foods more efficiently, they provide more satiety.\nWhen in shadowed areas, you feel more agile and swift."
   ],
   "codex.form.bat1.cons": [
     "Your finger structure now makes using bows or crossbows nearly impossible.\nThe membranes and new toe structure prevent wearing chest armor or shoes.\nIn sunlight, you feel weaker and slower.\nYour body no longer efficiently digests meat; they provide less satiety."
@@ -129,7 +129,7 @@
     "Your ears now dominate your head, allowing detection of the faintest sounds.\nYour face has developed into a short muzzle with sharp small teeth visible.\nYour arms have become part of the membrane. While still too heavy for flight, they suffice for controlled descents and dives.\nYour forelimbs are no longer suited for tool or weapon use; their strength is in their hardness and sharpness.\nNew claws, digitigrade legs, and a balancing tail make you well-suited for diving and gliding. You can still run with effort.\nSquatting on the ground is your most natural posture.\nIn cold caves, your fur helps maintain warmth."
   ],
   "codex.form.bat2.pros": [
-    "You can distinguish objects in darkness. In shadowed areas, you feel more agile and swift.\nYour forelimbs are hard and strong, allowing significant unarmed damage. They also enable fast blockbreaking and harvesting of ores normally.\nThough still unable to fly, flapping membranes allows higher jumps and controlled descents from any height; they can function as elytra.\nYou are now small enough to fit through one-block spaces; though larger than other similar creatures."
+    "You can distinguish objects in darkness. In shadowed areas, you feel more agile and swift.\nYour forelimbs are hard and strong, allowing significant unarmed damage. They also enable fast blockbreaking and harvesting of ores normally.\nThough still unable to fly, flapping membranes allows higher jumps and controlled descents from any height; they can function as elytra.\nYour body now absorbs non-meat foods more efficiently, they provide more satiety.\nYou are now small enough to fit through one-block spaces; though larger than other similar creatures."
   ],
   "codex.form.bat2.cons": [
     "Your forelimbs cannot grip heavy tools or weapons; using them on hard blocks or attacking causes them to slip off.\nUsing using bows or crossbows is impossible with your current claw structure.\nThe membrane and digitigrade legs prevent wearing chestplate, leggings, or boots. They also slightly slow ground movement.\nSunlight weakens and slows you considerably.\nYou can no longer eat meat; your body cannot digest it."

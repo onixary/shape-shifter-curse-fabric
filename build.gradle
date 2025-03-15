@@ -1,6 +1,7 @@
 plugins {
     id 'fabric-loom' version '1.9-SNAPSHOT'
     id 'maven-publish'
+    //id("com.gradleup.shadow") version "8.3.6"
 }
 
 version = project.mod_version
@@ -85,6 +86,12 @@ repositories {
         name "KosmX's maven"
         url 'https://maven.kosmx.dev/'
     }
+
+    maven {
+        name = "Fuzs Mod Resources"
+        url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
+    }
+    mavenLocal()
 }
 
 dependencies {
@@ -156,6 +163,9 @@ dependencies {
     // Player Anim
     include modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:${project.player_anim}")
 
+    // Fabric forge config api port
+    //modLocalRuntime "fuzs.forgeconfigscreens:forgeconfigscreens-fabric:8.0.0"
+
 
     //modImplementation "com.github.eggohito:eggolib:${project.eggolib_version}"
     //include "com.github.eggohito:eggolib:${project.eggolib_version}"
@@ -206,6 +216,7 @@ java {
     // If you remove this line, sources will not be generated.
     withSourcesJar()
 }
+
 
 jar {
     from("LICENSE") {

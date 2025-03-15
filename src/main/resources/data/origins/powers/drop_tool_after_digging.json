@@ -13,7 +13,7 @@
   },
   "block_condition": {
     "type": "origins:blast_resistance",
-    "comparison": ">=",
-    "compare_to": 2
+    "comparison": ">",
+    "compare_to": 0.2
   }
 }

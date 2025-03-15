@@ -61,7 +61,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final String MOD_ID = "shape-shifter-curse";
     // 用于调试的 UUID，打包中需要将其设为 null
     public static final String DEBUG_UUID = "testUUID-3d9ab571-1ea5-360b-bc9d-77cd0b2f72a9";
-
+    //public static final String DEBUG_UUID = null;
     // This logger is used to write text to the console and the log file.
     // It is considered best practice to use your mod id as the logger's name.
     // That way, it's clear which mod wrote info, warnings, and errors.

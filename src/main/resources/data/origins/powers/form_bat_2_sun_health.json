@@ -3,7 +3,7 @@
   "modifier": {
     "name": "Reduced health in the sun",
     "attribute": "minecraft:generic.max_health",
-    "value": -14.0,
+    "value": -10.0,
     "operation": "addition"
   },
   "tick_rate": 20,
