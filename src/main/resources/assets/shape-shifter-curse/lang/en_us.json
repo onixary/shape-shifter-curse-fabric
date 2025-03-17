@@ -4,6 +4,8 @@
   "info.shape-shifter-curse.before_cursed_moon": ["You feel that the magic in your body is surging. The next night, the cursed moon will rise..."],
   "info.shape-shifter-curse.on_cursed_moon": ["The magic in your body has begun to surge. The cursed moon has risen"],
   "info.shape-shifter-curse.on_cursed_moon_before_enable": ["Tonight's moon looks a bit strange, with some blue flowers you've never seen before appearing in the moonlight..."],
+  "info.shape-shifter-curse.end_cursed_moon": ["The influence of the cursed moon has faded. The magic in your body tends to calm down, allowing you to return to the state before the cursed moon"],
+  "info.shape-shifter-curse.end_cursed_moon_by_cure": ["The influence of the cursed moon has faded. However, due to the power of gold, your current form has stabilized"],
   "entity.shape-shifter-curse.t_bat": ["Bat?"],
   "item.shape-shifter-curse.custom_bat_spawn_egg": ["Bat? Spawn Egg"],
   "effect.shape-shifter-curse.to_bat_0_effect": [

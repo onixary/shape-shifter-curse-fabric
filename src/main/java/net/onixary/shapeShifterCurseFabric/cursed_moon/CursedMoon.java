@@ -11,6 +11,8 @@ import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import org.spongepowered.asm.mixin.Unique;
 
@@ -22,6 +24,7 @@ public class CursedMoon {
     public static long day_time = 0;
     public static int day = 0;
     public static boolean moon_effect_applied = false;
+    public static boolean end_moon_effect_applied = false;
 
     // Cursed Moon rises every 3 days
     public static boolean isCursedMoon() {
@@ -69,8 +72,43 @@ public class CursedMoon {
             }
             ShapeShifterCurseFabric.LOGGER.info("Cursed Moon rises!");
             // transform
-            TransformManager.handleProgressiveTransform(player,true);
+            // if form already triggered by cursed moon or triggered by cure, do not trigger again
+            if(!RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon() && !RegPlayerFormComponent.PLAYER_FORM.get(player).isByCure()){
+                TransformManager.handleProgressiveTransform(player,true);
+            }
             CursedMoon.moon_effect_applied =true;
         }
+    }
+
+    public static void applyEndMoonEffect(ServerPlayerEntity player){
+        // 结束Cursed Moon时的逻辑
+        if(!CursedMoon.end_moon_effect_applied){
+            if(FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_BEFORE_ENABLE){
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon_before_enable").formatted(Formatting.LIGHT_PURPLE));
+            }
+            else{
+                // 判断形态flag
+                PlayerFormComponent currentFormComponent = RegPlayerFormComponent.PLAYER_FORM.get(player);
+                if(currentFormComponent.isByCursedMoon()){
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon").formatted(Formatting.LIGHT_PURPLE));
+                }
+                else if(currentFormComponent.isByCure()){
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon_by_cure").formatted(Formatting.LIGHT_PURPLE));
+                }
+            }
+            ShapeShifterCurseFabric.LOGGER.info("Cursed Moon ends!");
+            // transform
+            if(RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon() || RegPlayerFormComponent.PLAYER_FORM.get(player).isByCure()){
+                TransformManager.handleMoonEndTransform(player);
+            }
+            TransformManager.clearFormFlag(player);
+            CursedMoon.end_moon_effect_applied =true;
+        }
+    }
+
+    public static void resetMoonEffect(){
+        // when player exit game, reset moon effect so that it can be triggered again
+        CursedMoon.moon_effect_applied = false;
+        CursedMoon.end_moon_effect_applied = false;
     }
 }

@@ -59,7 +59,7 @@ public class ShapeShifterCurseCommand {
         PlayerForms form = FormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
 
-        handleDirectTransform(target, form);
+        handleDirectTransform(target, form, false);
 
         return 1;
 

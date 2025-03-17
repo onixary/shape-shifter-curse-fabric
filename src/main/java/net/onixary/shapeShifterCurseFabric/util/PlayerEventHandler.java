@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.GameRules;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
@@ -57,6 +58,9 @@ public class PlayerEventHandler {
                 ShapeShifterCurseFabric.cursedMoonData.getInstance().enableCursedMoon(server.getOverworld());
             }
             ShapeShifterCurseFabric.cursedMoonData.getInstance().save(server.getOverworld());
+
+            // reset moon effect
+            CursedMoon.resetMoonEffect();
 
             // Set doDaylightCycle to true forced
             server.getGameRules().get(GameRules.DO_DAYLIGHT_CYCLE).set(true, server);

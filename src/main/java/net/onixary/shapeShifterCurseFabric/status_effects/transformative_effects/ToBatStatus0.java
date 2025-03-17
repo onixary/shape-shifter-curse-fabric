@@ -19,7 +19,7 @@ public class ToBatStatus0 extends BaseTransformativeStatusEffect {
         // todo: form logic
         ShapeShifterCurseFabric.LOGGER.info("ToBatStatus0 onEffect Applied");
         //FormAbilityManager.applyForm(player, PlayerForms.BAT_0);
-        TransformManager.handleDirectTransform(player, PlayerForms.BAT_0);
+        TransformManager.handleDirectTransform(player, PlayerForms.BAT_0, false);
         removeEffects(player);
     }
 

@@ -67,8 +67,11 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.before_cursed_moon").formatted(Formatting.LIGHT_PURPLE));
             }
         }
-        else if(time >= 13000L){
+        else if(time >= 12500L && time < 23000L){
             CursedMoon.applyMoonEffect(player);
+        }
+        else if(time >= 23000L){
+            CursedMoon.applyEndMoonEffect(player);
         }
     }
 }
