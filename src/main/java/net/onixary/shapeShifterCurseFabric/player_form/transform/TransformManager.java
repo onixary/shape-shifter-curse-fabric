@@ -200,7 +200,7 @@ public class TransformManager {
     public static void handleDirectTransform(PlayerEntity player, PlayerForms toForm, boolean isByCure){
         curPlayer = player;
         curToForm = toForm;
-        _isByCursedMoon = isByCure;
+        _isByCure = isByCure;
         ShapeShifterCurseFabric.LOGGER.info("Cur Player: " + curPlayer + " To Form: " + curToForm);
         handleTransformEffect();
         applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);

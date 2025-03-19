@@ -12,7 +12,8 @@
     "GameRendererMixin",
     "CursedMoonWorldMixin",
     "MoonPhaseRenderMixin",
-    "CursedMoonLightmapMixin"
+    "CursedMoonLightmapMixin",
+    "ItemStackMixin"
   ],
   "injectors": {
     "defaultRequire": 1

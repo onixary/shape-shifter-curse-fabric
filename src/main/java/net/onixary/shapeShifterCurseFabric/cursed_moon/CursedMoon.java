@@ -89,11 +89,11 @@ public class CursedMoon {
             else{
                 // 判断形态flag
                 PlayerFormComponent currentFormComponent = RegPlayerFormComponent.PLAYER_FORM.get(player);
-                if(currentFormComponent.isByCursedMoon()){
-                    player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon").formatted(Formatting.LIGHT_PURPLE));
-                }
-                else if(currentFormComponent.isByCure()){
+                if(currentFormComponent.isByCure()){
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon_by_cure").formatted(Formatting.LIGHT_PURPLE));
+                }
+                else if(currentFormComponent.isByCursedMoon()){
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon").formatted(Formatting.LIGHT_PURPLE));
                 }
             }
             ShapeShifterCurseFabric.LOGGER.info("Cursed Moon ends!");

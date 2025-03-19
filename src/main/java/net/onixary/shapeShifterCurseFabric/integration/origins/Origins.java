@@ -95,7 +95,7 @@ public class Origins implements ModInitializer, OrderedResourceListenerInitializ
 			//OriginCommand.register(dispatcher);
 		});
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register((content) -> {
-			content.add(ModItems.ORB_OF_ORIGIN);
+			//content.add(ModItems.ORB_OF_ORIGIN);
 		});
 
 		CriteriaRegistryInvoker.callRegister(ChoseOriginCriterion.INSTANCE);

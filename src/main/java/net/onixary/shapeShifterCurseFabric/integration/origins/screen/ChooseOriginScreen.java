@@ -125,7 +125,7 @@ public class ChooseOriginScreen extends OriginDisplayScreen {
 	}
 
 	private void initRandomOrigin() {
-		this.randomOrigin = new Origin(Origins.identifier("random"), new ItemStack(ModItems.ORB_OF_ORIGIN), Impact.NONE, -1, Integer.MAX_VALUE);
+		this.randomOrigin = new Origin(Origins.identifier("random"), new ItemStack(Items.GOLDEN_APPLE), Impact.NONE, -1, Integer.MAX_VALUE);
 		MutableText randomOriginText = (MutableText)Text.of("");
 		List<Identifier> randoms = layerList.get(currentLayerIndex).getRandomOrigins(MinecraftClient.getInstance().player);
 		randoms.sort((ia, ib) -> {

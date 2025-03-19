@@ -7,6 +7,7 @@ import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 
@@ -68,6 +69,8 @@ public class ShapeShifterCurseCommand {
     private static int jumpToNextCursedMoon(CommandContext<ServerCommandSource> commandContext) {
         ServerWorld world = commandContext.getSource().getWorld();
         CursedMoon.jumpToNextCursedMoon(world);
+        ServerCommandSource serverCommandSource = commandContext.getSource();
+        serverCommandSource.sendFeedback(() -> Text.literal("Set cursed moon to next night!"), true);
         return 1;
     }
 }

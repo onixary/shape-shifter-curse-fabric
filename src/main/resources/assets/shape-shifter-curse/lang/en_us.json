@@ -6,8 +6,22 @@
   "info.shape-shifter-curse.on_cursed_moon_before_enable": ["Tonight's moon looks a bit strange, with some blue flowers you've never seen before appearing in the moonlight..."],
   "info.shape-shifter-curse.end_cursed_moon": ["The influence of the cursed moon has faded. The magic in your body tends to calm down, allowing you to return to the state before the cursed moon"],
   "info.shape-shifter-curse.end_cursed_moon_by_cure": ["The influence of the cursed moon has faded. However, due to the power of gold, your current form has stabilized"],
-  "entity.shape-shifter-curse.t_bat": ["Bat?"],
-  "item.shape-shifter-curse.custom_bat_spawn_egg": ["Bat? Spawn Egg"],
+  "info.shape-shifter-curse.origin_form_used_cure": ["The power of gold has calmed the magic in your body for a moment, but it quickly returned to 'normal'. To truly dispel it, you may need to find another way..."],
+  "info.shape-shifter-curse.transformed_by_cure": ["The power of gold has successfully reversed your transformation! Although only a part of it..."],
+  "info.shape-shifter-curse.max_form_used_cure": ["The power of gold has no effect on your current form... It seems that only some more",
+    {
+      "text": "powerful influence",
+      "color": "#ed721d"
+    },
+    "may be able to reverse it"],
+  "info.shape-shifter-curse.origin_form_used_cure_final": ["Disappointingly, the magic in your body returned to 'normal' after calming down for a moment. \nIt seems that the power of gold is not enough to completely dispel the curse's influence on you..."],
+  "info.shape-shifter-curse.transformed_by_cure_final": ["The powerful power of gold has almost completely reversed your transformation! But you can still feel the dormant magic in your body, waiting for the next opportunity..."],
+  "info.shape-shifter-curse.max_form_used_cure_final": ["It worked! The more powerful power of gold has successfully reversed a part of the changes in your body"],
+  "info.shape-shifter-curse.origin_form_used_catalyst": ["Affected by the catalyst, the magic in your body is a bit restless, but it eventually calms down. It seems that they lack a more clear direction...?"],
+  "info.shape-shifter-curse.transformed_by_catalyst": ["Affected by the catalyst, the magic in your body has further changed you..."],
+  "info.shape-shifter-curse.max_form_used_catalyst": ["Your current form has been changed so thoroughly that even the catalyst is difficult to produce further effects..\n(Don't be disappointed, I may add what you're thinking of in the mod later!)"],
+  "entity.shape-shifter-curse.t_bat": ["Charm Bat"],
+  "item.shape-shifter-curse.custom_bat_spawn_egg": ["Charm Bat Spawn Egg"],
   "effect.shape-shifter-curse.to_bat_0_effect": [
     "...that strange",
     {

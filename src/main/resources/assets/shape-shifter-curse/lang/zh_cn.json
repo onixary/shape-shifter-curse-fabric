@@ -6,8 +6,22 @@
   "info.shape-shifter-curse.on_cursed_moon_before_enable": ["今夜的月亮看起来有些奇怪，有一些你之前未曾见过的蓝色花朵在月光下显现了出来..."],
   "info.shape-shifter-curse.end_cursed_moon": ["诅咒之月的影响消退了。你体内的魔法趋于平静，让你回复到了诅咒之月升起前的形态"],
   "info.shape-shifter-curse.end_cursed_moon_by_cure": ["诅咒之月的影响消退了。由于黄金的魔力，你当前的形态得以稳定下来"],
-  "entity.shape-shifter-curse.t_bat": ["蝙蝠？"],
-  "item.shape-shifter-curse.custom_bat_spawn_egg": ["蝙蝠？刷怪蛋"],
+  "info.shape-shifter-curse.origin_form_used_cure": ["黄金的魔力让你体内的魔法稍微平息了一瞬，但很快又恢复如常。要确实驱散它的话，你可能需要寻找其他方式..."],
+  "info.shape-shifter-curse.transformed_by_cure": ["黄金的魔力成功逆转了你的变化！虽然只有一部分..."],
+  "info.shape-shifter-curse.max_form_used_cure": ["黄金的魔力对你目前的形态没有任何效果...似乎只有某种更",
+    {
+      "text": "强大的影响",
+      "color": "#ed721d"
+    },
+    "才可能将其逆转"],
+  "info.shape-shifter-curse.origin_form_used_cure_final": ["失望的是，你体内的魔法在稍微平息了一刻之后又恢复如常。似乎黄金的魔力并不足以彻底驱散咒文对你的影响..."],
+  "info.shape-shifter-curse.transformed_by_cure_final": ["强大的黄金魔力几乎完全逆转了你的变化！但是你依然能够感觉到体内蛰伏的魔法，正在等待下一个契机..."],
+  "info.shape-shifter-curse.max_form_used_cure_final": ["生效了！更加强大的黄金魔力成功逆转了你身体的一部分变化"],
+  "info.shape-shifter-curse.origin_form_used_catalyst": ["受到催化剂的影响，你体内的魔法有些动荡不安，不过最后依然恢复了平静。似乎它们缺少一个更加明确的倾向...？"],
+  "info.shape-shifter-curse.transformed_by_catalyst": ["受到催化剂的影响，你体内的魔法将你进一步地改变了..."],
+  "info.shape-shifter-curse.max_form_used_catalyst": ["你当前的形态被改变的如此彻底，即使催化剂也难以产生进一步的效果..\n（别失望，我也许之后就会在mod里面加入你在想的那个事情！）"],
+  "entity.shape-shifter-curse.t_bat": ["咒文蝙蝠"],
+  "item.shape-shifter-curse.custom_bat_spawn_egg": ["咒文蝙蝠刷怪蛋"],
   "effect.shape-shifter-curse.to_bat_0_effect": [
     "...奇怪的",
     {

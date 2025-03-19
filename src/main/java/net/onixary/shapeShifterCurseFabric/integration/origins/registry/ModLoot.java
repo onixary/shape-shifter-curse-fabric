@@ -34,7 +34,7 @@ public class ModLoot {
     }
 
     public static void registerLootTables() {
-        NbtCompound waterProtectionLevel1 = createEnchantmentTag(ModEnchantments.WATER_PROTECTION, 1);
+        /*NbtCompound waterProtectionLevel1 = createEnchantmentTag(ModEnchantments.WATER_PROTECTION, 1);
         NbtCompound waterProtectionLevel2 = createEnchantmentTag(ModEnchantments.WATER_PROTECTION, 2);
         NbtCompound waterProtectionLevel3 = createEnchantmentTag(ModEnchantments.WATER_PROTECTION, 3);
         LootTableEvents.MODIFY.register(((resourceManager, lootManager, identifier, tableBuilder, source) -> {
@@ -86,7 +86,7 @@ public class ModLoot {
                     .with(EmptyEntry.builder().weight(110));
                 tableBuilder.pool(lootPool);
             }
-        }));
+        }));*/
     }
 
     private static NbtCompound createEnchantmentTag(Enchantment enchantment, int level) {
