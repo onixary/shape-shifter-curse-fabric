@@ -3,7 +3,6 @@ package net.onixary.shapeShifterCurseFabric.player_form.instinct;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 
-import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.DEBUG_UUID;
 import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.loadPlayerInstinctComponent;
 import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.savePlayerInstinctComponent;
 
@@ -41,10 +40,10 @@ public class InstinctManager {
     public static void saveInstinctComp(PlayerEntity player) {
         PlayerInstinctComponent comp = player.getComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
         comp.instinctValue = InstinctTicker.currentInstinctValue;
-        savePlayerInstinctComponent(world, DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID, comp);
+        savePlayerInstinctComponent(world, player.getUuid().toString(), comp);
     }
 
     public static PlayerInstinctComponent loadInstinctComp(PlayerEntity player) {
-        return loadPlayerInstinctComponent(world, DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID);
+        return loadPlayerInstinctComponent(world, player.getUuid().toString());
     }
 }

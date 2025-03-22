@@ -1,6 +1,8 @@
 ﻿{
   "item.shape-shifter-curse.cursed_book_of_shape_shifter": ["Strange book"],
   "screen.shape-shifter-curse.start_book.start_button_text": ["TestButton"],
+  "item.shape-shifter-curse.book_of_shape_shifter": ["Book of Shape Shifter"],
+  "item.shape-shifter-curse.book_of_shape_shifter.tooltip": ["'The secrets of this book will only be revealed to shape shifters'"],
   "info.shape-shifter-curse.before_cursed_moon": ["You feel that the magic in your body is surging. The next night, the cursed moon will rise..."],
   "info.shape-shifter-curse.on_cursed_moon": ["The magic in your body has begun to surge. The cursed moon has risen"],
   "info.shape-shifter-curse.on_cursed_moon_before_enable": ["Tonight's moon looks a bit strange, with some blue flowers you've never seen before appearing in the moonlight..."],
@@ -61,7 +63,7 @@
     "?"],
   "codex.status.before_moon": ["You feel that the magic in your body is surging, and the next night, the cursed moon will rise..."],
   "codex.status.under_moon": ["The influence of the cursed moon has changed your body...\nAs the night ends, this influence will also fade. But... maybe you should take advantage of this opportunity?"],
-  "codex.desc.appearance_normal": ["Your body feels no different from usual. Perhaps the chant you recited needs some kind of trigger to take effect?"],
+  "codex.desc.appearance_normal": ["Your body feels no different from usual. Perhaps the magic in your body needs some kind of trigger to take effect?"],
   "codex.desc.pros_normal": ["Currently, the magic in your body has not brought you any perceivable benefits"],
   "codex.desc.cons_normal": ["Currently, the magic in your body has not brought you any disadvantages"],
   "codex.desc.instincts_normal": ["Examine your heart, you do perceive some kind of magic in your body, but that's all.\nYour heart is calm, maintaining a perception of the surrounding environment"],
@@ -99,15 +101,14 @@
     {
       "text":"uncomfortable", "color":"red"
     }],
-  "codex.form.bat1.title": ["Overall, the abnormalities on your body are now too obvious to hide. Others might think you belong to an alien race."],
+  "codex.form.bat1.title": ["Overall, others might think you belong to an alien race."],
   "codex.form.bat1.appearance": [
     "Your ears are now located on top of your head, large and pointed, facing forward.\n",
     "The membrane-covered appendages on your arms have grown longer. When you jump, you find yourself involuntarily flapping them.\n",
     "Your fingers have become claw-like, making fine manipulations difficult. However, you can still grasp items normally.\n",
     "Your toes have elongated and spread outward.\n",
     "Your tail has grown significantly longer.\n",
-    "You seem to have shrunk in size slightly.\n",
-    "Due to the shift in your center of gravity, you now squat on the ground involuntarily when crouching."
+    "You seem to have shrunk in size slightly.\n"
   ],
   "codex.form.bat1.pros": [
     "You can now clearly distinguish objects in the dark.\nYour arms have become stronger, enhancing your melee attack power.\nThough still unable to fly, flapping your membranes allows you to jump higher.\nYour body now absorbs non-meat foods more efficiently, they provide more satiety.\nWhen in shadowed areas, you feel more agile and swift."
@@ -145,10 +146,10 @@
     "Overall, others would see you as a large, strange bat."
   ],
   "codex.form.bat2.appearance": [
-    "Your ears now dominate your head, allowing detection of the faintest sounds.\nYour face has developed into a short muzzle with sharp small teeth visible.\nYour arms have become part of the membrane. While still too heavy for flight, they suffice for controlled descents and dives.\nYour forelimbs are no longer suited for tool or weapon use; their strength is in their hardness and sharpness.\nNew claws, digitigrade legs, and a balancing tail make you well-suited for diving and gliding. You can still run with effort.\nSquatting on the ground is your most natural posture.\nIn cold caves, your fur helps maintain warmth."
+    "Your ears now dominate your head, allowing detection of the faintest sounds.\nYour face has developed into a short muzzle with sharp small teeth visible.\nYour arms have become part of the membrane. While still too heavy for flight, they suffice for controlled descents and dives.\nYour forelimbs are no longer suited for heave tool or weapon use.\nNew claws, digitigrade legs, and a balancing tail make you well-suited for diving and gliding. You can still run with effort.\nIn cold caves, your fur helps maintain warmth."
   ],
   "codex.form.bat2.pros": [
-    "You can distinguish objects in darkness. In shadowed areas, you feel more agile and swift.\nYour forelimbs are hard and strong, allowing significant unarmed damage. They also enable fast blockbreaking and harvesting of ores normally.\nThough still unable to fly, flapping membranes allows higher jumps and controlled descents from any height; they can function as elytra.\nYour body now absorbs non-meat foods more efficiently, they provide more satiety.\nYou are now small enough to fit through one-block spaces; though larger than other similar creatures."
+    "You can distinguish objects in darkness. In shadowed areas, you feel more agile and swift.\nYour forelimbs are hard and strong, allowing significant unarmed damage. They also enable fast blockbreaking and harvesting of ores normally.\nThough still unable to fly, flapping membranes allows higher jumps and controlled descents from any height; they can function as elytra too.\nYour body now absorbs non-meat foods more efficiently, they provide more satiety.\nYou are now small enough to fit through one-block spaces; though larger than other similar creatures."
   ],
   "codex.form.bat2.cons": [
     "Your forelimbs cannot grip heavy tools or weapons; using them on hard blocks or attacking causes them to slip off.\nUsing using bows or crossbows is impossible with your current claw structure.\nThe membrane and digitigrade legs prevent wearing chestplate, leggings, or boots. They also slightly slow ground movement.\nSunlight weakens and slows you considerably.\nYou can no longer eat meat; your body cannot digest it."

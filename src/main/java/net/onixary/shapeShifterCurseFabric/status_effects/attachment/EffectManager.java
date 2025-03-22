@@ -67,7 +67,7 @@ public class EffectManager {
         if(attachment != null) {
             // todo: 构建环境中UUID会变化，测试时使用固定的testUUID，发布时要改回
             //saveAttachment(String.valueOf((player.getUuid())), attachment);
-            saveAttachment(world, DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID, attachment);
+            saveAttachment(world, player.getUuid().toString(), attachment);
             LOGGER.info("save attachment success, currentToForm: " + attachment.currentToForm);
             return true;
         }
@@ -79,7 +79,7 @@ public class EffectManager {
 
     public static boolean loadCurrentAttachment(ServerWorld world, PlayerEntity player) {
         // todo: 构建环境中UUID会变化，测试时使用固定的testUUID，发布时要改回
-        PlayerEffectAttachment attachment = loadAttachment(world, DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID);
+        PlayerEffectAttachment attachment = loadAttachment(world, player.getUuid().toString());
         player.setAttached(EffectManager.EFFECT_ATTACHMENT, attachment);
         if(attachment == null){
             LOGGER.info("no attachment found in file");

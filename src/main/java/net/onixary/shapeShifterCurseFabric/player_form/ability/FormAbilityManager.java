@@ -22,7 +22,6 @@ import virtuoel.pehkui.api.ScaleTypes;
 
 import java.util.Objects;
 
-import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.DEBUG_UUID;
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
 public class FormAbilityManager {
@@ -55,7 +54,7 @@ public class FormAbilityManager {
         component.setCurrentForm(newForm);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
         // 存储
-        PlayerNbtStorage.savePlayerFormComponent(world, DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID, component);
+        PlayerNbtStorage.savePlayerFormComponent(world, player.getUuid().toString(), component);
     }
 
     public static void loadForm(PlayerEntity player) {
@@ -72,12 +71,12 @@ public class FormAbilityManager {
     public static void saveForm(PlayerEntity player) {
         PlayerFormComponent component = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
         // 存储
-        PlayerNbtStorage.savePlayerFormComponent(world, DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID, component);
+        PlayerNbtStorage.savePlayerFormComponent(world, player.getUuid().toString(), component);
     }
 
     private static PlayerForms loadSavedForm(PlayerEntity player) {
         // 从存储中加载保存的 form
-        PlayerFormComponent formComponent = PlayerNbtStorage.loadPlayerFormComponent(world, DEBUG_UUID == null? player.getUuid().toString() : DEBUG_UUID);
+        PlayerFormComponent formComponent = PlayerNbtStorage.loadPlayerFormComponent(world, player.getUuid().toString());
         return formComponent != null ? formComponent.getCurrentForm() : null;
     }
 
