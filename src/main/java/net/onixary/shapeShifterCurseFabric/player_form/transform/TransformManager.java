@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.player_form.transform;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.FormRandomSelector;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
@@ -74,7 +75,7 @@ public class TransformManager {
                 break;
         }
         if (toForm == null) {
-            ShapeShifterCurseFabric.LOGGER.info("No next form found, this should not happen!");
+            ShapeShifterCurseFabric.LOGGER.info("No next form found, unless you haven't unlock mod contents, then this should not happen!");
             return;
         }
         curPlayer = player;
@@ -129,7 +130,7 @@ public class TransformManager {
 
     static PlayerForms getRandomOrBuffForm(PlayerEntity player){
         PlayerEffectAttachment currentTransformEffect = EffectManager.getCurrentEffectAttachment(player);
-        if(currentTransformEffect != null){
+        if(currentTransformEffect != null && currentTransformEffect.currentEffect != null){
             return currentTransformEffect.currentToForm;
         }
         else{
@@ -201,6 +202,10 @@ public class TransformManager {
         curPlayer = player;
         curToForm = toForm;
         _isByCure = isByCure;
+        // 检查cure应用时是否处于Cursed Moon，如果没有，则不设置flag
+        if(!CursedMoon.isCursedMoon()){
+            _isByCure = false;
+        }
         ShapeShifterCurseFabric.LOGGER.info("Cur Player: " + curPlayer + " To Form: " + curToForm);
         handleTransformEffect();
         applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);

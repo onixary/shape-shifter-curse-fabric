@@ -20,7 +20,7 @@ public abstract class ItemStackMixin {
      */
     @Inject(
             method = "finishUsing",
-            at = @At("TAIL") // 在方法执行完毕后注入
+            at = @At("HEAD")
     )
     private void shape_shifter_curse$onFinishUsing(World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
         // 仅在服务端且使用者为玩家时处理

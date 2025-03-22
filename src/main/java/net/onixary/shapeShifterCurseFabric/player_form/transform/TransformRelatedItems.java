@@ -9,8 +9,11 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
+import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 
 import static net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager.handleDirectTransform;
+import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.EFFECT_ATTACHMENT;
 
 public class TransformRelatedItems {
     private TransformRelatedItems() {
@@ -102,8 +105,15 @@ public class TransformRelatedItems {
                 // 无用
                 break;
             case -1:
-                // 无用
-                player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_used_catalyst").formatted(Formatting.YELLOW));
+                // 查看当前是否有在生效的效果，有的话则应用，没有的话则无用
+                PlayerEffectAttachment attachment = player.getAttached(EFFECT_ATTACHMENT);
+                if (attachment != null && attachment.currentEffect != null){
+                    EffectManager.applyEffect(player);
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_used_catalyst_attached").formatted(Formatting.YELLOW));
+                }
+                else{
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_used_catalyst").formatted(Formatting.YELLOW));
+                }
                 break;
             case 0:
                 toForm = PlayerForms.getFormsByGroup(currentFormGroup)[1];

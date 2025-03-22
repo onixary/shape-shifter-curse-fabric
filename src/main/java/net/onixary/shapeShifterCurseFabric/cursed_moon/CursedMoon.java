@@ -98,7 +98,7 @@ public class CursedMoon {
             }
             ShapeShifterCurseFabric.LOGGER.info("Cursed Moon ends!");
             // transform
-            if(RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon() || RegPlayerFormComponent.PLAYER_FORM.get(player).isByCure()){
+            if(RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon() && !RegPlayerFormComponent.PLAYER_FORM.get(player).isByCure()){
                 TransformManager.handleMoonEndTransform(player);
             }
             TransformManager.clearFormFlag(player);

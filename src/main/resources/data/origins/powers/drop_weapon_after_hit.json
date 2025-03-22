@@ -3,9 +3,21 @@
   "entity_action": {
     "type": "origins:drop_inventory",
     "item_condition": {
-      "type": "origins:harvest_level",
-      "comparison": ">",
-      "compare_to": 1
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "origins:melee_weapons"
+          }
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "origins:tools"
+          }
+        }
+      ]
     },
     "slots": [
       "weapon.mainhand"

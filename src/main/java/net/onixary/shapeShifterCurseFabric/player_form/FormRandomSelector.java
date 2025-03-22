@@ -1,5 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.player_form;
 
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -16,7 +18,8 @@ public class FormRandomSelector {
         if (formsWithIndexZero.isEmpty()) {
             throw new IllegalStateException("No forms with index 0 found");
         }
-
-        return formsWithIndexZero.get(RANDOM.nextInt(formsWithIndexZero.size()));
+        PlayerForms randomToForm = formsWithIndexZero.get(RANDOM.nextInt(formsWithIndexZero.size()));
+        ShapeShifterCurseFabric.LOGGER.info("Random form with index 0 selected: " + randomToForm);
+        return randomToForm;
     }
 }

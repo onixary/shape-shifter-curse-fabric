@@ -20,7 +20,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
@@ -214,6 +216,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             //LOGGER.info(attachment == null? "attachment is null" : attachment.currentEffect.toString());
             if (RegTStatusEffect.hasAnyEffect(player)) {
                 EffectManager.applyEffect(player);
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_sleep_when_attached").formatted(Formatting.LIGHT_PURPLE));
             }
         }
     }
