@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.command.argument.serialize.ConstantArgumentSerializer;
@@ -27,6 +28,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalEntityConditions;
+import net.onixary.shapeShifterCurseFabric.advancement.OnEnableMod;
 import net.onixary.shapeShifterCurseFabric.command.FormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
@@ -37,6 +39,9 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegEntitySp
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.TEntitySpawnHandler;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.item.RegCustomItem;
+import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_animation.RegPlayerAnimation;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctDebugHUD;
@@ -71,6 +76,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final ConfigSSC CONFIG = ConfigSSC.createAndLoad();
 
     public static CursedMoonData cursedMoonData = new CursedMoonData();
+    // Reg custom advancement criterion
+    public static OnEnableMod ON_ENABLE_MOD = Criteria.register(new OnEnableMod());
 
     // Reg custom entities
     // Bat
@@ -98,6 +105,9 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         RegPlayerAnimation.register();
         RegOtherStatusEffects.initialize();
         AdditionalEntityConditions.register();
+        // network package
+        ModPacketsC2S.register();
+        ModPacketsS2C.register();
         cursedMoonData = new CursedMoonData();
 
         //TransformFX.INSTANCE.registerCallbacks();

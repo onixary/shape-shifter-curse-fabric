@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:bat_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.shape-shifter-curse.on_enable_mod.title"
+    },
+    "description": {
+      "translate": "advancements.shape-shifter-curse.on_enable_mod.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "on_enable_mod": {
+      "trigger": "shape-shifter-curse:on_enable_mod"
+    }
+  },
+  "requirements": []
+}

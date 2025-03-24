@@ -2,6 +2,8 @@ package net.onixary.shapeShifterCurseFabric.player_form.transform;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
@@ -28,6 +30,7 @@ public class TransformManager {
     private static boolean isEffectActive = false;
     private static boolean isEndEffectActive = false;
     private static PlayerEntity curPlayer = null;
+    private static PlayerForms curFromForm = null;
     private static PlayerForms curToForm = null;
     private static boolean _isByCursedMoon = false;
     private static boolean _isRegressedFromFinal = false;
@@ -186,7 +189,12 @@ public class TransformManager {
 
             endTransformEffectTicks--;
             if(endTransformEffectTicks <= 0){
-                // todo: 结束时的相关逻辑放在这里
+                // 结束时的相关逻辑放在这里
+                // 如果curFromForm为ORIGINAL_BEFORE_ENABLE，则代表玩家第一次开启mod，触发info
+                if(curFromForm == PlayerForms.ORIGINAL_BEFORE_ENABLE){
+                    // info
+                    curPlayer.sendMessage(Text.translatable("info.shape-shifter-curse.on_enable_mod_after").formatted(Formatting.LIGHT_PURPLE));
+                }
                 applyFinaleTransformEffect((ServerPlayerEntity) curPlayer, 5);
                 InstinctTicker.isPausing = false;
                 TransformOverlay.INSTANCE.setEnableOverlay(false);
@@ -201,6 +209,7 @@ public class TransformManager {
     public static void handleDirectTransform(PlayerEntity player, PlayerForms toForm, boolean isByCure){
         curPlayer = player;
         curToForm = toForm;
+        curFromForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
         _isByCure = isByCure;
         // 检查cure应用时是否处于Cursed Moon，如果没有，则不设置flag
         if(!CursedMoon.isCursedMoon()){

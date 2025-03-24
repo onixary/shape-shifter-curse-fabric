@@ -1,23 +1,36 @@
 package net.onixary.shapeShifterCurseFabric.custom_ui;
 
+import io.netty.buffer.Unpooled;
 import io.wispforest.owo.ui.base.BaseOwoScreen;
 import io.wispforest.owo.ui.component.Components;
 import io.wispforest.owo.ui.container.Containers;
 import io.wispforest.owo.ui.container.FlowLayout;
 import io.wispforest.owo.ui.core.*;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
+import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
+import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+
+import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
 
 public class StartBookScreen extends BaseOwoScreen<FlowLayout> {
     // 出于翻译与动态文本的考量，不使用XML来构建
     public PlayerEntity currentPlayer;
+
+    private static final Identifier StartBook_TexID = new Identifier(MOD_ID,"textures/gui/start_book.png");
 
     @Override
     protected @NotNull OwoUIAdapter<FlowLayout> createAdapter() {
@@ -32,30 +45,36 @@ public class StartBookScreen extends BaseOwoScreen<FlowLayout> {
                 .verticalAlignment(VerticalAlignment.CENTER);
 
         rootComponent.child(
-                Containers.verticalFlow(Sizing.fixed(200), Sizing.fill(80))
+                Containers.verticalFlow(Sizing.fixed(240), Sizing.fixed(220))
                         .children(
                         List.of(
                                 Components.label(
-                                        Text.literal("Hello, World!")
-                                ),
+                                        Text.translatable("screen.shape-shifter-curse.book_of_shape_shifter.start_content_text")
+                                )
+                                        .maxWidth(170)
+                                        .margins(Insets.of(0, 15, 0, 0))
+                                ,
                                 Components.button(
-                                        Text.translatable("screen.shape-shifter-curse.start_book.start_button_text"),
+                                        Text.translatable("screen.shape-shifter-curse.book_of_shape_shifter.start_button_text"),
                                         button ->
                                         {
-                                            // toggle skin override
-                                            if(FormAbilityManager.getForm(currentPlayer) == PlayerForms.ORIGINAL_BEFORE_ENABLE){
-                                                FormAbilityManager.applyForm(currentPlayer, PlayerForms.ORIGINAL_SHIFTER);
-                                            }
-                                            else{
-                                                FormAbilityManager.applyForm(currentPlayer, PlayerForms.ORIGINAL_BEFORE_ENABLE);
-                                            }
+                                            //TransformManager.handleDirectTransform(currentPlayer, PlayerForms.ORIGINAL_SHIFTER, false);
+                                            PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+                                            buf.writeUuid(currentPlayer.getUuid());
+                                            // 发送到服务端
+                                            ClientPlayNetworking.send(ModPackets.VALIDATE_START_BOOK_BUTTON, buf);
 
+                                            // disable book screen
+                                            if(MinecraftClient.getInstance().currentScreen instanceof StartBookScreen){
+                                                MinecraftClient.getInstance().setScreen(null);
+                                            }
                                         }
                                 ))
                         )
-                        .surface(Surface.DARK_PANEL)
+                        .surface(Surface.tiled(StartBook_TexID, 240, 220))
                         .horizontalAlignment(HorizontalAlignment.CENTER)
                         .verticalAlignment(VerticalAlignment.CENTER)
+                        .padding(Insets.of(20))
                 );
     }
 

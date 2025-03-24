@@ -1,8 +1,28 @@
 {
+  "advancements.shape-shifter-curse.on_enable_mod.title": ["未知的篇章"],
+  "advancements.shape-shifter-curse.on_enable_mod.description": ["发生了什么？"],
   "item.shape-shifter-curse.cursed_book_of_shape_shifter": ["奇怪的书"],
   "item.shape-shifter-curse.book_of_shape_shifter": ["幻形者之书"],
   "item.shape-shifter-curse.book_of_shape_shifter.tooltip": ["'本书的奥秘只会向幻形者展现'"],
-  "screen.shape-shifter-curse.start_book.start_button_text": ["测试按钮"],
+  "screen.shape-shifter-curse.book_of_shape_shifter.start_content_text":
+  [
+    "当你试图翻开这本书时，你感觉到伴随着一阵微弱的刺痛，从书中溢出的奇特魔法从指尖流进了你的身体，让你如同触电一般将手缩了回去\n",
+  "这可能是某种",{
+    "text": "诅咒",
+    "color": "#0096FF"
+  }, "么？你不知道\n",
+  "不过你可以确信的是继续打开这本书会导致一些", {
+    "text": "未知的后果\n\n",
+    "color": "#0096FF"
+  },
+    {
+      "text": "注意：\n这会开启幻形者诅咒的模组内容\n这并不算是一个适合所有人的模组，在继续前，请确保你了解其主题与玩法",
+      "color": "#ed721d"
+    }
+  ],
+  "screen.shape-shifter-curse.book_of_shape_shifter.start_button_text": ["翻开幻形者之书"],
+  "info.shape-shifter-curse.on_enable_mod": ["随着书页的开启，书中封印的强大魔法涌入了你的身体！"],
+  "info.shape-shifter-curse.on_enable_mod_after": ["回过神时，你发现自己...似乎没什么变化？\n也许你应该检查一下书中的内容.."],
   "info.shape-shifter-curse.before_cursed_moon": ["你感觉到体内的魔法正在涌动，下一个夜晚，诅咒之月将会升起..."],
   "info.shape-shifter-curse.on_cursed_moon": ["你体内的魔法开始激荡，诅咒之月升起了"],
   "info.shape-shifter-curse.on_cursed_moon_before_enable": ["今夜的月亮看起来有些奇怪，有一些你之前未曾见过的蓝色花朵在月光下显现了出来..."],
