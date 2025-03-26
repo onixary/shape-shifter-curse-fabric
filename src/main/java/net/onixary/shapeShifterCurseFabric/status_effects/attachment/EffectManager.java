@@ -4,10 +4,12 @@ import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 
@@ -43,6 +45,8 @@ public class EffectManager {
         // 添加原版药水效果（用于渲染）
         // 呈现必须使用注册过的类，因此将其手动传入
         player.addStatusEffect(new StatusEffectInstance(regEffect, StaticParams.T_EFFECT_DEFAULT_DURATION));
+        // 触发自定义成就
+        ON_GET_TRANSFORM_EFFECT.trigger((ServerPlayerEntity) player);
     }
 
     // 强制结束当前效果
@@ -55,6 +59,8 @@ public class EffectManager {
             attachment.currentToForm = null;
             attachment.remainingTicks = 0;
             attachment.currentEffect = null;
+            // 触发自定义成就
+            ON_SLEEP_WHEN_HAVE_TRANSFORM_EFFECT.trigger((ServerPlayerEntity) player);
         }
     }
 

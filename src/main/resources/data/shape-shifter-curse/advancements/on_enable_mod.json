@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:bat_spawn_egg"
+      "item": "shape-shifter-curse:book_of_shape_shifter"
     },
     "title": {
       "translate": "advancements.shape-shifter-curse.on_enable_mod.title"

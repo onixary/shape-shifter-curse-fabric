@@ -59,6 +59,8 @@ public class TransformManager {
             case -1:
                 // 如果没有buff则随机选择一个形态，如果有buff则buff形态+1
                 toForm = getRandomOrBuffForm(player);
+                // 触发自定义成就
+                ShapeShifterCurseFabric.ON_TRANSFORM_0.trigger((ServerPlayerEntity) player);
                 break;
             case 0:
                 toForm = PlayerForms.getFormsByGroup(currentFormGroup)[1];
@@ -70,6 +72,8 @@ public class TransformManager {
                 if(isByCursedMoon){
                     toForm = PlayerForms.getFormsByGroup(currentFormGroup)[0];
                     _isRegressedFromFinal = true;
+                    // 触发自定义成就
+                    ShapeShifterCurseFabric.ON_TRIGGER_CURSED_MOON_FORM_2.trigger((ServerPlayerEntity) player);
                 }
                 else{
                     ShapeShifterCurseFabric.LOGGER.info("Triggered transformation when at max phase, this should not happen!");
@@ -215,6 +219,24 @@ public class TransformManager {
         if(!CursedMoon.isCursedMoon()){
             _isByCure = false;
         }
+        // 根据index触发自定义成就
+        int toFormIndex = curToForm.getIndex();
+        if(!isByCure){
+            switch(toFormIndex){
+                case 0:
+                    ShapeShifterCurseFabric.ON_TRANSFORM_0.trigger((ServerPlayerEntity) player);
+                    break;
+                case 1:
+                    ShapeShifterCurseFabric.ON_TRANSFORM_1.trigger((ServerPlayerEntity) player);
+                    break;
+                case 2:
+                    ShapeShifterCurseFabric.ON_TRANSFORM_2.trigger((ServerPlayerEntity) player);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         ShapeShifterCurseFabric.LOGGER.info("Cur Player: " + curPlayer + " To Form: " + curToForm);
         handleTransformEffect();
         applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);

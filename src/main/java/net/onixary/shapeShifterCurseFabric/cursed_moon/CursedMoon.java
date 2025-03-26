@@ -69,6 +69,8 @@ public class CursedMoon {
             }
             else{
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.on_cursed_moon").formatted(Formatting.LIGHT_PURPLE));
+                // 触发自定义成就
+                ShapeShifterCurseFabric.ON_TRIGGER_CURSED_MOON.trigger(player);
             }
             ShapeShifterCurseFabric.LOGGER.info("Cursed Moon rises!");
             // transform
@@ -91,9 +93,18 @@ public class CursedMoon {
                 PlayerFormComponent currentFormComponent = RegPlayerFormComponent.PLAYER_FORM.get(player);
                 if(currentFormComponent.isByCure()){
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon_by_cure").formatted(Formatting.LIGHT_PURPLE));
+                    // 触发自定义成就
+                    ShapeShifterCurseFabric.ON_END_CURSED_MOON_CURED.trigger(player);
+                    if(currentFormComponent.getCurrentForm().getIndex() == -1){
+                        // 如果在cure的基础上形态index为-1，则一定为2形态进入cursed moon
+                        // 触发自定义成就
+                        ShapeShifterCurseFabric.ON_END_CURSED_MOON_CURED_FORM_2.trigger(player);
+                    }
                 }
                 else if(currentFormComponent.isByCursedMoon()){
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon").formatted(Formatting.LIGHT_PURPLE));
+                    // 触发自定义成就
+                    ShapeShifterCurseFabric.ON_END_CURSED_MOON.trigger(player);
                 }
             }
             ShapeShifterCurseFabric.LOGGER.info("Cursed Moon ends!");

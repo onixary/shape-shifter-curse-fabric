@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.player_form.transform;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
@@ -41,10 +42,14 @@ public class TransformRelatedItems {
             case 0:
                 toForm = PlayerForms.ORIGINAL_SHIFTER;
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure").formatted(Formatting.YELLOW));
+                // 触发自定义成就
+                ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger((ServerPlayerEntity) player);
                 break;
             case 1:
                 toForm = PlayerForms.getFormsByGroup(currentFormGroup)[0];
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure").formatted(Formatting.YELLOW));
+                // 触发自定义成就
+                ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger((ServerPlayerEntity) player);
                 break;
             case 2:
                 // 不会生效
@@ -76,14 +81,22 @@ public class TransformRelatedItems {
             case 0:
                 toForm = PlayerForms.ORIGINAL_SHIFTER;
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure_final").formatted(Formatting.YELLOW));
+                // 触发自定义成就
+                ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger((ServerPlayerEntity) player);
                 break;
             case 1:
                 toForm = PlayerForms.ORIGINAL_SHIFTER;
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure_final").formatted(Formatting.YELLOW));
+                // 触发自定义成就
+                ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger((ServerPlayerEntity) player);
                 break;
             case 2:
                 toForm = PlayerForms.getFormsByGroup(currentFormGroup)[1];
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.max_form_used_cure_final").formatted(Formatting.YELLOW));
+                // 触发自定义成就
+                ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE_FINAL.trigger((ServerPlayerEntity) player);
+                // 触发自定义成就
+                ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger((ServerPlayerEntity) player);
             default:
                 break;
         }
@@ -110,6 +123,8 @@ public class TransformRelatedItems {
                 if (attachment != null && attachment.currentEffect != null){
                     EffectManager.applyEffect(player);
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_used_catalyst_attached").formatted(Formatting.YELLOW));
+                    // 触发自定义成就
+                    ShapeShifterCurseFabric.ON_TRANSFORM_BY_CATALYST.trigger((ServerPlayerEntity) player);
                 }
                 else{
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_used_catalyst").formatted(Formatting.YELLOW));
@@ -118,10 +133,14 @@ public class TransformRelatedItems {
             case 0:
                 toForm = PlayerForms.getFormsByGroup(currentFormGroup)[1];
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_catalyst").formatted(Formatting.YELLOW));
+                // 触发自定义成就
+                ShapeShifterCurseFabric.ON_TRANSFORM_BY_CATALYST.trigger((ServerPlayerEntity) player);
                 break;
             case 1:
                 toForm = PlayerForms.getFormsByGroup(currentFormGroup)[2];
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_catalyst").formatted(Formatting.YELLOW));
+                // 触发自定义成就
+                ShapeShifterCurseFabric.ON_TRANSFORM_BY_CATALYST.trigger((ServerPlayerEntity) player);
                 break;
             case 2:
                 // todo: 也许之后会有额外阶段的逻辑..类似于彻底改变游戏玩法，但是在死亡后回退的

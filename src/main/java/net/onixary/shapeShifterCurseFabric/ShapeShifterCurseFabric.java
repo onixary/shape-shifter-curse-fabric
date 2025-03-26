@@ -28,7 +28,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalEntityConditions;
-import net.onixary.shapeShifterCurseFabric.advancement.OnEnableMod;
+import net.onixary.shapeShifterCurseFabric.advancement.*;
 import net.onixary.shapeShifterCurseFabric.command.FormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
@@ -78,6 +78,20 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static CursedMoonData cursedMoonData = new CursedMoonData();
     // Reg custom advancement criterion
     public static OnEnableMod ON_ENABLE_MOD = Criteria.register(new OnEnableMod());
+    public static final OnEndCursedMoon ON_END_CURSED_MOON = Criteria.register(new OnEndCursedMoon());
+    public static final OnEndCursedMoonCured ON_END_CURSED_MOON_CURED = Criteria.register(new OnEndCursedMoonCured());
+    public static final OnEndCursedMoonCuredForm2 ON_END_CURSED_MOON_CURED_FORM_2 = Criteria.register(new OnEndCursedMoonCuredForm2());
+    public static final OnGetTransformEffect ON_GET_TRANSFORM_EFFECT = Criteria.register(new OnGetTransformEffect());
+    public static final OnSleepWhenHaveTransformEffect ON_SLEEP_WHEN_HAVE_TRANSFORM_EFFECT = Criteria.register(new OnSleepWhenHaveTransformEffect());
+    public static final OnTransform0 ON_TRANSFORM_0 = Criteria.register(new OnTransform0());
+    public static final OnTransform1 ON_TRANSFORM_1 = Criteria.register(new OnTransform1());
+    public static final OnTransform2 ON_TRANSFORM_2 = Criteria.register(new OnTransform2());
+    public static final OnTransformByCatalyst ON_TRANSFORM_BY_CATALYST = Criteria.register(new OnTransformByCatalyst());
+    public static final OnTransformByCure ON_TRANSFORM_BY_CURE = Criteria.register(new OnTransformByCure());
+    public static final OnTransformByCureFinal ON_TRANSFORM_BY_CURE_FINAL = Criteria.register(new OnTransformByCureFinal());
+    public static final OnTransformEffectFade ON_TRANSFORM_EFFECT_FADE = Criteria.register(new OnTransformEffectFade());
+    public static final OnTriggerCursedMoon ON_TRIGGER_CURSED_MOON = Criteria.register(new OnTriggerCursedMoon());
+    public static final OnTriggerCursedMoonForm2 ON_TRIGGER_CURSED_MOON_FORM_2 = Criteria.register(new OnTriggerCursedMoonForm2());
 
     // Reg custom entities
     // Bat
@@ -247,15 +261,16 @@ public class ShapeShifterCurseFabric implements ModInitializer {
                 //LOGGER.info("Effect tick");
                 attachment.remainingTicks--;
                 if (attachment.remainingTicks <= 0) {
-                    //LOGGER.info("Effect tick over");
-                    EffectManager.applyEffect(player);
+                    // 自然结束时不做任何事
+                    // 触发自定义成就
+                    ShapeShifterCurseFabric.ON_TRANSFORM_EFFECT_FADE.trigger(player);
                 }
             }
 
             // save every 5 sec
             save_timer += 1;
             if(save_timer >= 100) {
-                LOGGER.info("Player paused, save attachment");
+                //LOGGER.info("Player paused, save attachment");
                 saveCurrentAttachment(minecraftServer.getOverworld(), player);
                 saveForm(player);
                 save_timer = 0;
