@@ -50,6 +50,9 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
                 if(CursedMoon.moon_effect_applied){
                     CursedMoon.moon_effect_applied = false;
                 }
+                if(CursedMoon.end_moon_effect_applied){
+                    CursedMoon.end_moon_effect_applied = false;
+                }
             }
         }
     }

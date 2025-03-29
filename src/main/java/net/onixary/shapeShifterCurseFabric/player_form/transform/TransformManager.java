@@ -257,6 +257,7 @@ public class TransformManager {
         curPlayer = player;
         curToForm = toForm;
         FormAbilityManager.applyForm(curPlayer, curToForm);
+        clearFormFlag(curPlayer);
         clearInstinct(curPlayer);
         RegPlayerFormComponent.PLAYER_FORM.sync(curPlayer);
     }

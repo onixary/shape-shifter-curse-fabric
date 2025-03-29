@@ -17,6 +17,7 @@ import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLaye
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginRegistry;
 import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
 import virtuoel.pehkui.api.ScaleData;
 import virtuoel.pehkui.api.ScaleTypes;
 
@@ -50,6 +51,8 @@ public class FormAbilityManager {
         applyScale(player, config.getScale());
         applyFormOrigin(player, config.getFormOriginLayerID(), config.getFormOriginID());
         //applyPower(player, config.getPowerId());
+        // 清空Status
+        RegTStatusEffect.removeEffects(player);
 
         component.setCurrentForm(newForm);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);

@@ -28,6 +28,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalEntityConditions;
+import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalPowers;
 import net.onixary.shapeShifterCurseFabric.advancement.*;
 import net.onixary.shapeShifterCurseFabric.command.FormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
@@ -77,7 +78,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
     public static CursedMoonData cursedMoonData = new CursedMoonData();
     // Reg custom advancement criterion
-    public static OnEnableMod ON_ENABLE_MOD = Criteria.register(new OnEnableMod());
+    public static final OnEnableMod ON_ENABLE_MOD = Criteria.register(new OnEnableMod());
+    public static final OnOpenBookOfShapeShifter ON_OPEN_BOOK_OF_SHAPE_SHIFTER = Criteria.register(new OnOpenBookOfShapeShifter());
     public static final OnEndCursedMoon ON_END_CURSED_MOON = Criteria.register(new OnEndCursedMoon());
     public static final OnEndCursedMoonCured ON_END_CURSED_MOON_CURED = Criteria.register(new OnEndCursedMoonCured());
     public static final OnEndCursedMoonCuredForm2 ON_END_CURSED_MOON_CURED_FORM_2 = Criteria.register(new OnEndCursedMoonCuredForm2());
@@ -119,6 +121,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         RegPlayerAnimation.register();
         RegOtherStatusEffects.initialize();
         AdditionalEntityConditions.register();
+        AdditionalPowers.register();
         // network package
         ModPacketsC2S.register();
         ModPacketsS2C.register();

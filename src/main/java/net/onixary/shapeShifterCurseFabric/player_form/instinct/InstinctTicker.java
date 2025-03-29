@@ -2,6 +2,7 @@ package net.onixary.shapeShifterCurseFabric.player_form.instinct;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormPhase;
@@ -10,9 +11,12 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormCompone
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 
+import java.util.Iterator;
+
 import static net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager.getForm;
 import static net.onixary.shapeShifterCurseFabric.player_form.effect.PlayerTransformEffectManager.applyInstinctThresholdEffect;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.loadInstinctComp;
+import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.removeSustainedEffect;
 import static net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager.handleProgressiveTransform;
 
 public class InstinctTicker {
@@ -59,19 +63,14 @@ public class InstinctTicker {
         processImmediateEffects(comp);
 
         // 计算当前速率
-        currentInstinctRate = isPausing? 0.0f : calculateCurrentRate(player, comp);
+        currentInstinctRate = (isPausing || isUnderCursedMoon) ? 0.0f : calculateCurrentRate(player, comp);
 
-        //ShapeShifterCurseFabric.LOGGER.info("currentInstinct: " + comp.instinctValue + currentRate);
         // 应用持续增长
         comp.instinctValue = MathHelper.clamp(
                 comp.instinctValue + currentInstinctRate,
                 0f,
                 StaticParams.INSTINCT_MAX
         );
-        // 如果在CursedMoon下，不会增长
-        if(isUnderCursedMoon){
-            currentInstinctRate = comp.instinctValue = 0.0f;
-        }
         RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.sync(player);
 
         if(comp.instinctValue >= 80.0f && comp.instinctValue < 99.99f){
@@ -150,8 +149,11 @@ public class InstinctTicker {
 
     public static float calculateCurrentRate(PlayerEntity player, PlayerInstinctComponent comp) {
         float rate = judgeInstinctGrowRate(player);
-        for (InstinctEffectType effect : comp.sustainedEffects) {
+        Iterator<InstinctEffectType> iterator = comp.sustainedEffects.iterator();
+        while (iterator.hasNext()) {
+            InstinctEffectType effect = iterator.next();
             rate += effect.getRateModifier();
+            iterator.remove();
         }
         return rate;
     }

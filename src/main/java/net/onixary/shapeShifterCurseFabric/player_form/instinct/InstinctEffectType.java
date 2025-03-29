@@ -6,8 +6,8 @@ public enum InstinctEffectType {
     POTION_CALM(-20f),
 
     // 持续效果（速率类型）
-    ENVIRONMENT_DANGER(0.2f),
-    BUFF_RELAX(-0.1f);
+    FORM_BAT_IN_DARK(0.005f),
+    FORM_BAT_EAT_FRUIT(0.05f);
 
     private final float value;
 
@@ -16,7 +16,8 @@ public enum InstinctEffectType {
     }
 
     public boolean isSustained() {
-        return this == ENVIRONMENT_DANGER || this == BUFF_RELAX;
+        return this == FORM_BAT_IN_DARK
+                || this == FORM_BAT_EAT_FRUIT;
     }
 
     public float getValue() {

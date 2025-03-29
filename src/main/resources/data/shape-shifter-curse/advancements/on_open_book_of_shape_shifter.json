@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "shape-shifter-curse:book_of_shape_shifter"
+    },
+    "title": {
+      "translate": "advancements.shape-shifter-curse.on_open_book_of_shape_shifter.title"
+    },
+    "description": {
+      "translate": "advancements.shape-shifter-curse.on_open_book_of_shape_shifter.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "shape-shifter-curse:on_enable_mod",
+  "criteria": {
+    "on_open_book_of_shape_shifter": {
+      "trigger": "shape-shifter-curse:on_open_book_of_shape_shifter"
+    }
+  },
+  "requirements": []
+}

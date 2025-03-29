@@ -14,11 +14,14 @@ public class InstinctBarRenderer{
     private static final Identifier instinctBarTexFullID = new Identifier(MOD_ID, "textures/gui/instinct_bar_full.png");
     private static final Identifier instinctBarTexEmptyID = new Identifier(MOD_ID, "textures/gui/instinct_bar_empty.png");
     private static final Identifier instinctBarTexIncreaseID = new Identifier(MOD_ID, "textures/gui/instinct_bar_increase.png");
+    private static final Identifier instinctBarTexIncreaseEmptyID = new Identifier(MOD_ID, "textures/gui/instinct_bar_increase_empty.png");
     private static final Identifier instinctBarTexDecreaseID = new Identifier(MOD_ID, "textures/gui/instinct_bar_decrease.png");
+    private static final Identifier instinctBarTexDecreaseEmptyID = new Identifier(MOD_ID, "textures/gui/instinct_bar_decrease_empty.png");
     private static final Identifier instinctBarTexLockID = new Identifier(MOD_ID, "textures/gui/instinct_bar_lock.png");
     private static final Identifier cursedMoonLogoTexID = new Identifier(MOD_ID, "textures/gui/cursed_moon_logo.png");
 
     private static Identifier currentBarID = instinctBarTexFullID;
+    private static Identifier currentBarEmptyID = instinctBarTexEmptyID;
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 
     public void render(DrawContext context, float tickDelta) {
@@ -46,12 +49,15 @@ public class InstinctBarRenderer{
     public void updateBarTextures(PlayerEntity player) {
         if (!InstinctTicker.isInstinctIncreasing && !InstinctTicker.isInstinctDecreasing) {
             currentBarID = instinctBarTexFullID;
+            currentBarEmptyID = instinctBarTexEmptyID;
         }
         else if (InstinctTicker.isInstinctIncreasing && !InstinctTicker.isInstinctDecreasing) {
             currentBarID = instinctBarTexIncreaseID;
+            currentBarEmptyID = instinctBarTexIncreaseEmptyID;
         }
         else{
             currentBarID = instinctBarTexDecreaseID;
+            currentBarEmptyID = instinctBarTexDecreaseEmptyID;
         }
     }
 
@@ -67,7 +73,7 @@ public class InstinctBarRenderer{
         //if (healthProportion + intermediateProportion > 1) intermediateProportion = 1 - healthProportion;
         int instinctWidth = (int) Math.ceil(80 * instinctProportion);
         // Display empty part
-        context.drawTexture(instinctBarTexEmptyID,
+        context.drawTexture(currentBarEmptyID,
                 x, y,
                 0, 0,
                 80 - instinctWidth, 5,

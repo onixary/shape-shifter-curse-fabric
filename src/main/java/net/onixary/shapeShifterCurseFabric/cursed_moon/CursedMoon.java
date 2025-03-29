@@ -16,6 +16,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComp
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import org.spongepowered.asm.mixin.Unique;
 
+import static net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager.clearFormFlag;
 
 
 // Logic from Magic Moon mod
@@ -72,6 +73,9 @@ public class CursedMoon {
                 // 触发自定义成就
                 ShapeShifterCurseFabric.ON_TRIGGER_CURSED_MOON.trigger(player);
             }
+            // 将byCure标记为false 纯纯的史山
+            RegPlayerFormComponent.PLAYER_FORM.get(player).setByCure(false);
+            RegPlayerFormComponent.PLAYER_FORM.sync(player);
             ShapeShifterCurseFabric.LOGGER.info("Cursed Moon rises!");
             // transform
             // if form already triggered by cursed moon or triggered by cure, do not trigger again
@@ -112,7 +116,7 @@ public class CursedMoon {
             if(RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon() && !RegPlayerFormComponent.PLAYER_FORM.get(player).isByCure()){
                 TransformManager.handleMoonEndTransform(player);
             }
-            TransformManager.clearFormFlag(player);
+            clearFormFlag(player);
             CursedMoon.end_moon_effect_applied =true;
         }
     }
