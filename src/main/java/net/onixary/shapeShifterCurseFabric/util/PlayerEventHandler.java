@@ -9,6 +9,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.GameRules;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
@@ -29,7 +30,7 @@ public class PlayerEventHandler {
 
             // load form
             FormAbilityManager.getServerWorld(server.getOverworld());
-            PlayerEntity player = handler.player;
+            ServerPlayerEntity player = handler.player;
             FormAbilityManager.loadForm(player);
             //PlayerFormComponent component = RegPlayerFormComponent.PLAYER_FORM.get(player);
             //FormAbilityManager.applyForm(player, component.getCurrentForm());
@@ -42,6 +43,7 @@ public class PlayerEventHandler {
             else{
                 ShapeShifterCurseFabric.LOGGER.info("Attachment loaded ");
             }
+            ModPacketsS2C.sendSyncEffectAttachment(player, player.getAttached(EffectManager.EFFECT_ATTACHMENT));
 
             // load instinct
             InstinctManager.getServerWorld(server.getOverworld());

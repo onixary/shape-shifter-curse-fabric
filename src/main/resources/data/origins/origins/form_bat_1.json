@@ -10,7 +10,12 @@
 		"origins:form_bat_1_sun_health",
 		"origins:prevent_ranged_weapon_use",
 		"origins:form_meat_food_down",
-		"origins:form_vegetarian_food_up"
+		"origins:form_vegetarian_food_up",
+		"origins:form_bat_instinct_in_dark",
+		"origins:form_bat_instinct_eat_fruit",
+		"origins:form_bat_instinct_near_dripstone",
+		"origins:form_instinct_use_catalyst",
+		"origins:form_instinct_use_inhibitor"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

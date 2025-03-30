@@ -7,6 +7,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.item.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
@@ -22,8 +23,7 @@ public class TransformRelatedItems {
 
     public static final Item TRANSFORM_CURE = Items.GOLDEN_APPLE;
     public static final Item TRANSFORM_CURE_FINAL = Items.ENCHANTED_GOLDEN_APPLE;
-    // todo: 之后使用自定义物品，目前暂时用蜘蛛眼占位
-    public static final Item TRANSFORM_CATALYST = Items.SPIDER_EYE;
+    public static final Item TRANSFORM_CATALYST = RegCustomItem.CATALYST;
 
     public static void OnUseCure(PlayerEntity player) {
         // 如果不是最终阶段，则回退一个阶段
@@ -108,7 +108,7 @@ public class TransformRelatedItems {
     }
 
     public static void OnUseCatalyst(PlayerEntity player) {
-        // 直接增加一个阶段
+        // 在origin power中处理instinct相关逻辑，这里只显示提示与特殊逻辑
         PlayerForms currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
         int currentFormIndex = currentForm.getIndex();
         String currentFormGroup = currentForm.getGroup();
@@ -118,7 +118,7 @@ public class TransformRelatedItems {
                 // 无用
                 break;
             case -1:
-                // 查看当前是否有在生效的效果，有的话则应用，没有的话则无用
+                // 特殊逻辑：查看当前是否有在生效的效果，有的话则应用，没有的话则无用
                 PlayerEffectAttachment attachment = player.getAttached(EFFECT_ATTACHMENT);
                 if (attachment != null && attachment.currentEffect != null){
                     EffectManager.applyEffect(player);
@@ -131,16 +131,12 @@ public class TransformRelatedItems {
                 }
                 break;
             case 0:
-                toForm = PlayerForms.getFormsByGroup(currentFormGroup)[1];
-                player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_catalyst").formatted(Formatting.YELLOW));
-                // 触发自定义成就
-                ShapeShifterCurseFabric.ON_TRANSFORM_BY_CATALYST.trigger((ServerPlayerEntity) player);
+                //toForm = PlayerForms.getFormsByGroup(currentFormGroup)[1];
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.use_catalyst").formatted(Formatting.YELLOW));
                 break;
             case 1:
-                toForm = PlayerForms.getFormsByGroup(currentFormGroup)[2];
-                player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_catalyst").formatted(Formatting.YELLOW));
-                // 触发自定义成就
-                ShapeShifterCurseFabric.ON_TRANSFORM_BY_CATALYST.trigger((ServerPlayerEntity) player);
+                //toForm = PlayerForms.getFormsByGroup(currentFormGroup)[2];
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.use_catalyst").formatted(Formatting.YELLOW));
                 break;
             case 2:
                 // todo: 也许之后会有额外阶段的逻辑..类似于彻底改变游戏玩法，但是在死亡后回退的
@@ -151,7 +147,6 @@ public class TransformRelatedItems {
         if (toForm == null) {
             return;
         }
-
         handleDirectTransform(player, toForm, false);
     }
 }

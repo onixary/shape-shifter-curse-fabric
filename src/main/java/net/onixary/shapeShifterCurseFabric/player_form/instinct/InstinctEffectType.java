@@ -6,8 +6,13 @@ public enum InstinctEffectType {
     POTION_CALM(-20f),
 
     // 持续效果（速率类型）
-    FORM_BAT_IN_DARK(0.005f),
-    FORM_BAT_EAT_FRUIT(0.05f);
+    // 催化剂与抑制剂的生效时间都是2秒
+    FORM_USE_INHIBITOR(-0.625f / 2),
+    FORM_USE_CATALYST(1.25f / 2),
+
+    FORM_BAT_IN_DARK(0.004f),
+    FORM_BAT_EAT_FRUIT(0.1f),
+    FORM_BAT_NEAR_DRIPSTONE(0.006f),;
 
     private final float value;
 
@@ -17,7 +22,10 @@ public enum InstinctEffectType {
 
     public boolean isSustained() {
         return this == FORM_BAT_IN_DARK
-                || this == FORM_BAT_EAT_FRUIT;
+                || this == FORM_BAT_EAT_FRUIT
+                || this == FORM_BAT_NEAR_DRIPSTONE
+                || this == FORM_USE_INHIBITOR
+                || this == FORM_USE_CATALYST;
     }
 
     public float getValue() {

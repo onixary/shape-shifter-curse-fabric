@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:goat_horn"
+    },
+    "title": {
+      "translate": "advancements.shape-shifter-curse.on_transform_effect_fade.title"
+    },
+    "description": {
+      "translate": "advancements.shape-shifter-curse.on_transform_effect_fade.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "shape-shifter-curse:on_get_transform_effect",
+  "criteria": {
+    "on_transform_effect_fade": {
+      "trigger": "shape-shifter-curse:on_transform_effect_fade"
+    }
+  },
+  "requirements": []
+}

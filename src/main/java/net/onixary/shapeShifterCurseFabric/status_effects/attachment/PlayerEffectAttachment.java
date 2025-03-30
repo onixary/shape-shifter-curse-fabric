@@ -23,17 +23,26 @@ public class PlayerEffectAttachment{
         currentRegEffect = null;
     }
 
-    public NbtCompound writeNbt() {
+    public NbtCompound toNbt() {
         NbtCompound nbt = new NbtCompound();
         if (currentToForm != null) {
             nbt.putString("currentToForm", currentToForm.name());
+        }
+        else{
+            nbt.putString("currentToForm", "null");
         }
         nbt.putInt("remainingTicks", remainingTicks);
         if (currentEffect != null) {
             nbt.putString("currentEffect", Registries.STATUS_EFFECT.getId(currentEffect).toString());
         }
+        else{
+            nbt.putString("currentEffect", "null");
+        }
         if(currentRegEffect != null){
             nbt.putString("currentRegEffect", Registries.STATUS_EFFECT.getId(currentRegEffect).toString());
+        }
+        else{
+            nbt.putString("currentRegEffect", "null");
         }
         return nbt;
     }
@@ -41,17 +50,33 @@ public class PlayerEffectAttachment{
     public static PlayerEffectAttachment fromNbt(NbtCompound nbt) {
         PlayerEffectAttachment attachment = new PlayerEffectAttachment();
         if (nbt.contains("currentToForm", NbtElement.STRING_TYPE)) {
-            attachment.currentToForm = PlayerForms.valueOf(nbt.getString("currentToForm"));
+            if(nbt.getString("currentToForm").equals("null")){
+                attachment.currentToForm = null;
+            }
+            else {
+                attachment.currentToForm = PlayerForms.valueOf(nbt.getString("currentToForm"));
+            }
         }
         attachment.remainingTicks = nbt.getInt("remainingTicks");
         if (nbt.contains("currentEffect", NbtElement.STRING_TYPE)) {
-            Identifier effectId = new Identifier(nbt.getString("currentEffect"));
-            attachment.currentEffect = (BaseTransformativeStatusEffect) Registries.STATUS_EFFECT.get(effectId);
+            if(nbt.getString("currentEffect").equals("null")){
+                attachment.currentEffect = null;
+            }
+            else {
+                Identifier effectId = new Identifier(nbt.getString("currentEffect"));
+                attachment.currentEffect = (BaseTransformativeStatusEffect) Registries.STATUS_EFFECT.get(effectId);
+            }
         }
         if (nbt.contains("currentRegEffect", NbtElement.STRING_TYPE)) {
+            if(nbt.getString("currentRegEffect").equals("null")){
+                attachment.currentRegEffect = null;
+            }
+            else {
             Identifier effectId = new Identifier(nbt.getString("currentRegEffect"));
             attachment.currentRegEffect = (BaseTransformativeStatusEffect) Registries.STATUS_EFFECT.get(effectId);
+            }
         }
         return attachment;
     }
+
 }

@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:blue_bed"
+    },
+    "title": {
+      "translate": "advancements.shape-shifter-curse.on_sleep_when_have_transform_effect.title"
+    },
+    "description": {
+      "translate": "advancements.shape-shifter-curse.on_sleep_when_have_transform_effect.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "shape-shifter-curse:on_get_transform_effect",
+  "criteria": {
+    "on_sleep_when_have_transform_effect": {
+      "trigger": "shape-shifter-curse:on_sleep_when_have_transform_effect"
+    }
+  },
+  "requirements": []
+}

@@ -1,0 +1,18 @@
+{
+  "parent": "shape-shifter-curse:on_enable_mod",
+  "criteria": {
+    "has_untreated_moon_dust": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["shape-shifter-curse:untreated_moondust"]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "recipes": ["shape-shifter-curse:moondust_matrix"]
+  }
+}

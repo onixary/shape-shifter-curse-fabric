@@ -33,6 +33,7 @@ public class TransformManager {
     private static PlayerForms curFromForm = null;
     private static PlayerForms curToForm = null;
     private static boolean _isByCursedMoon = false;
+    private static boolean _isByCursedMoonEnd = false;
     private static boolean _isRegressedFromFinal = false;
     private static boolean _isByCure = false;
 
@@ -131,6 +132,7 @@ public class TransformManager {
         curToForm = toForm;
         ShapeShifterCurseFabric.LOGGER.info("Cur Player: " + curPlayer + " To Form: " + curToForm);
         applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);
+        _isByCursedMoonEnd = true;
         handleTransformEffect();
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
     }
@@ -168,7 +170,7 @@ public class TransformManager {
                     RegPlayerFormComponent.PLAYER_FORM.get(curPlayer).setRegressedFromFinal(_isRegressedFromFinal);
                     RegPlayerFormComponent.PLAYER_FORM.get(curPlayer).setByCure(_isByCure);
                     RegPlayerFormComponent.PLAYER_FORM.sync(curPlayer);
-                    if(!_isByCursedMoon){
+                    if(!_isByCursedMoon || !_isByCursedMoonEnd){
                         clearInstinct(curPlayer);
                     }
 
@@ -267,6 +269,7 @@ public class TransformManager {
         _isByCursedMoon = false;
         _isRegressedFromFinal = false;
         _isByCure = false;
+        _isByCursedMoonEnd = false;
         RegPlayerFormComponent.PLAYER_FORM.get(player).setByCursedMoon(false);
         RegPlayerFormComponent.PLAYER_FORM.get(player).setRegressedFromFinal(false);
         RegPlayerFormComponent.PLAYER_FORM.get(player).setByCure(false);

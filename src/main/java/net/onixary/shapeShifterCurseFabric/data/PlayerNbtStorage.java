@@ -30,7 +30,7 @@ public class PlayerNbtStorage {
             Path worldSaveDir = getWorldSaveDir(world);
             Files.createDirectories(worldSaveDir);
             Path savePath = worldSaveDir.resolve(playerId + "_attachment.dat");
-            NbtCompound nbt = attachment.writeNbt();
+            NbtCompound nbt = attachment.toNbt();
             NbtIo.write(nbt, savePath.toFile());
         } catch (IOException e) {
             // 错误处理
@@ -40,7 +40,7 @@ public class PlayerNbtStorage {
 
     public static PlayerEffectAttachment loadAttachment(ServerWorld world, String playerId) {
         try {
-            Path savePath = getWorldSaveDir(world).resolve(playerId + "_attachment.json");
+            Path savePath = getWorldSaveDir(world).resolve(playerId + "_attachment.dat");
             if (!Files.exists(savePath)) return null;
             NbtCompound nbt = NbtIo.read(savePath.toFile());
             if (nbt == null) return null;

@@ -4,7 +4,8 @@
 		"origins:form_disable_chest_armor",
 		"origins:form_bat_0_sun_health",
 		"origins:form_bat_instinct_in_dark",
-		"origins:form_bat_instinct_eat_fruit"
+		"origins:form_instinct_use_catalyst",
+		"origins:form_instinct_use_inhibitor"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

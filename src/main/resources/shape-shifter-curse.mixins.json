@@ -13,7 +13,8 @@
     "CursedMoonWorldMixin",
     "MoonPhaseRenderMixin",
     "CursedMoonLightmapMixin",
-    "ItemStackMixin"
+    "ItemStackMixin",
+    "LivingEntityDeathMixin"
   ],
   "injectors": {
     "defaultRequire": 1

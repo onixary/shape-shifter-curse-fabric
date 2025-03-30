@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "title": {
+      "translate": "advancements.shape-shifter-curse.on_transform_2.title"
+    },
+    "description": {
+      "translate": "advancements.shape-shifter-curse.on_transform_2.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "shape-shifter-curse:on_transform_1",
+  "criteria": {
+    "on_transform_2": {
+      "trigger": "shape-shifter-curse:on_transform_2"
+    }
+  },
+  "requirements": []
+}

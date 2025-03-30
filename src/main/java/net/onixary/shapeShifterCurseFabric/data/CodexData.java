@@ -1,12 +1,22 @@
 package net.onixary.shapeShifterCurseFabric.data;
 
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
+import net.onixary.shapeShifterCurseFabric.networking.ClientEffectAttachmentCache;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormPhase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
+import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
+import net.minecraft.client.resource.language.I18n;
+
+import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.EFFECT_ATTACHMENT;
 
 public class CodexData {
     // 集中管理Codex的数据
@@ -20,7 +30,6 @@ public class CodexData {
     }
     // static texts
     // headers
-    // todo: 暂时放在这里，之后要替换为翻译键
     public static final Text headerStatus = Text.translatable("codex.header.status");
     public static final Text headerAppearance = Text.translatable("codex.header.appearance");
     public static final Text headerPros = Text.translatable("codex.header.pros");
@@ -74,8 +83,36 @@ public class CodexData {
     private static final Text bat_2_instincts = Text.translatable("codex.form.bat2.instincts");
 
     public static Text getPlayerStatusText(PlayerEntity player){
-        // todo
-        return statusNormal;
+        // 根据当前角色状态与环境返回对应的状态文本
+        String statusTextContent = "";
+        boolean hasAnyStatus = false;
+
+        PlayerEffectAttachment currentTransformEffect = (player instanceof ClientPlayerEntity) ?
+                ClientEffectAttachmentCache.getAttachment() :
+                player.getAttached(EFFECT_ATTACHMENT);
+
+        if(currentTransformEffect != null && currentTransformEffect.currentToForm != null){
+            ShapeShifterCurseFabric.LOGGER.info("current effect successfully receive: " + currentTransformEffect.currentEffect);
+            statusTextContent += net.minecraft.client.resource.language.I18n.translate(statusInfected.getString());
+            hasAnyStatus = true;
+        }
+
+        if(CursedMoon.isCursedMoon()){
+            if(CursedMoon.isNight()){
+                statusTextContent += net.minecraft.client.resource.language.I18n.translate(statusUnderMoon.getString());
+                hasAnyStatus = true;
+            }
+            else{
+                statusTextContent += net.minecraft.client.resource.language.I18n.translate(statusBeforeMoon.getString());
+                hasAnyStatus = true;
+            }
+        }
+
+        if(!hasAnyStatus){
+            statusTextContent = net.minecraft.client.resource.language.I18n.translate(statusNormal.getString());
+        }
+
+        return Text.literal(statusTextContent);
     }
 
     public static Text getDescText(ContentType type, PlayerEntity player){

@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:spider_eye"
+    },
+    "title": {
+      "translate": "advancements.shape-shifter-curse.on_transform_by_catalyst.title"
+    },
+    "description": {
+      "translate": "advancements.shape-shifter-curse.on_transform_by_catalyst.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "shape-shifter-curse:on_transform_0",
+  "criteria": {
+    "on_transform_by_catalyst": {
+      "trigger": "shape-shifter-curse:on_transform_by_catalyst"
+    }
+  },
+  "requirements": []
+}

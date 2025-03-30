@@ -13,8 +13,14 @@ import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID
 public class InstinctBarRenderer{
     private static final Identifier instinctBarTexFullID = new Identifier(MOD_ID, "textures/gui/instinct_bar_full.png");
     private static final Identifier instinctBarTexEmptyID = new Identifier(MOD_ID, "textures/gui/instinct_bar_empty.png");
-    private static final Identifier instinctBarTexIncreaseID = new Identifier(MOD_ID, "textures/gui/instinct_bar_increase.png");
-    private static final Identifier instinctBarTexIncreaseEmptyID = new Identifier(MOD_ID, "textures/gui/instinct_bar_increase_empty.png");
+    private static final Identifier instinctBarTexIncrease0ID = new Identifier(MOD_ID, "textures/gui/instinct_bar_increase0.png");
+    private static final Identifier instinctBarTexIncrease0EmptyID = new Identifier(MOD_ID, "textures/gui/instinct_bar_increase0_empty.png");
+    private static final Identifier instinctBarTexIncrease1ID = new Identifier(MOD_ID, "textures/gui/instinct_bar_increase1.png");
+    private static final Identifier instinctBarTexIncrease1EmptyID = new Identifier(MOD_ID, "textures/gui/instinct_bar_increase1_empty.png");
+    private static final Identifier instinctBarTexIncrease2ID = new Identifier(MOD_ID, "textures/gui/instinct_bar_increase2.png");
+    private static final Identifier instinctBarTexIncrease2EmptyID = new Identifier(MOD_ID, "textures/gui/instinct_bar_increase2_empty.png");
+    private static final Identifier instinctBarTexIncrease3ID = new Identifier(MOD_ID, "textures/gui/instinct_bar_increase3.png");
+    private static final Identifier instinctBarTexIncrease3EmptyID = new Identifier(MOD_ID, "textures/gui/instinct_bar_increase3_empty.png");
     private static final Identifier instinctBarTexDecreaseID = new Identifier(MOD_ID, "textures/gui/instinct_bar_decrease.png");
     private static final Identifier instinctBarTexDecreaseEmptyID = new Identifier(MOD_ID, "textures/gui/instinct_bar_decrease_empty.png");
     private static final Identifier instinctBarTexLockID = new Identifier(MOD_ID, "textures/gui/instinct_bar_lock.png");
@@ -23,6 +29,10 @@ public class InstinctBarRenderer{
     private static Identifier currentBarID = instinctBarTexFullID;
     private static Identifier currentBarEmptyID = instinctBarTexEmptyID;
     private static final MinecraftClient mc = MinecraftClient.getInstance();
+
+    private static final float increase1Threshold = StaticParams.INSTINCT_INCREASE_RATE_0 + 0.005f;
+    private static final float increase2Threshold = StaticParams.INSTINCT_INCREASE_RATE_0 + 0.01f;
+    private static final float increase3Threshold = StaticParams.INSTINCT_INCREASE_RATE_0 + 0.1f;
 
     public void render(DrawContext context, float tickDelta) {
         if (MinecraftClient.getInstance().player == null) return;
@@ -52,8 +62,23 @@ public class InstinctBarRenderer{
             currentBarEmptyID = instinctBarTexEmptyID;
         }
         else if (InstinctTicker.isInstinctIncreasing && !InstinctTicker.isInstinctDecreasing) {
-            currentBarID = instinctBarTexIncreaseID;
-            currentBarEmptyID = instinctBarTexIncreaseEmptyID;
+            // 判断增长速率并应用不同的贴图
+            if (InstinctTicker.currentInstinctRate < increase1Threshold) {
+                currentBarID = instinctBarTexIncrease0ID;
+                currentBarEmptyID = instinctBarTexIncrease0EmptyID;
+            }
+            else if (InstinctTicker.currentInstinctRate < increase2Threshold) {
+                currentBarID = instinctBarTexIncrease1ID;
+                currentBarEmptyID = instinctBarTexIncrease1EmptyID;
+            }
+            else if (InstinctTicker.currentInstinctRate < increase3Threshold) {
+                currentBarID = instinctBarTexIncrease2ID;
+                currentBarEmptyID = instinctBarTexIncrease2EmptyID;
+            }
+            else {
+                currentBarID = instinctBarTexIncrease3ID;
+                currentBarEmptyID = instinctBarTexIncrease3EmptyID;
+            }
         }
         else{
             currentBarID = instinctBarTexDecreaseID;

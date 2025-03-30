@@ -17,6 +17,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.Potion;
+import net.minecraft.recipe.BrewingRecipeRegistry;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.server.MinecraftServer;
@@ -40,6 +42,7 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegEntitySp
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.TEntitySpawnHandler;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.item.RegCustomItem;
+import net.onixary.shapeShifterCurseFabric.item.RegCustomPotions;
 import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
@@ -130,6 +133,10 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         //TransformFX.INSTANCE.registerCallbacks();
         TransformOverlay.INSTANCE.init();
         save_timer = 0;
+
+        // Reg potions
+        RegCustomPotions.registerPotions();
+        RegCustomPotions.registerPotionsRecipes();
         // Reg origins content
 
         // Reg custom entities model and renderer
@@ -242,6 +249,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             //LOGGER.info(attachment == null? "attachment is null" : attachment.currentEffect.toString());
             if (RegTStatusEffect.hasAnyEffect(player)) {
                 EffectManager.applyEffect(player);
+                // 触发自定义成就
+                ON_SLEEP_WHEN_HAVE_TRANSFORM_EFFECT.trigger((ServerPlayerEntity) player);
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_sleep_when_attached").formatted(Formatting.LIGHT_PURPLE));
             }
         }

@@ -13,6 +13,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.TStatusApplier;
 
 public class TransformativeBatEntity extends BatEntity {
@@ -79,11 +83,15 @@ public class TransformativeBatEntity extends BatEntity {
     public boolean tryAttack(Entity target) {
         // 只对玩家造成伤害
         if(target instanceof PlayerEntity) {
-            boolean attacked = target.damage(this.getDamageSources().mobAttack(this), StaticParams.CUSTOM_MOB_DEFAULT_DAMAGE);
-            if (attacked) {
-                this.applyDamageEffects(this, target);
+            PlayerForms currentForm = target.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+            if (currentForm == PlayerForms.ORIGINAL_SHIFTER) {
+                boolean attacked = target.damage(this.getDamageSources().mobAttack(this), StaticParams.CUSTOM_MOB_DEFAULT_DAMAGE);
+                if (attacked) {
+                    this.applyDamageEffects(this, target);
+                }
+                return attacked;
             }
-            return attacked;
+            return false;
         }
         return false;
     }

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:gold_nugget"
+    },
+    {
+      "item": "shape-shifter-curse:moondust_matrix"
+    },
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "result": {
+    "item": "shape-shifter-curse:inhibitor",
+    "count": 1
+  }
+}

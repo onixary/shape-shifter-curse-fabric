@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:enchanted_golden_apple"
+    },
+    "title": {
+      "translate": "advancements.shape-shifter-curse.on_transform_by_cure_final.title"
+    },
+    "description": {
+      "translate": "advancements.shape-shifter-curse.on_transform_by_cure_final.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "shape-shifter-curse:on_transform_2",
+  "criteria": {
+    "on_transform_by_cure_final": {
+      "trigger": "shape-shifter-curse:on_transform_by_cure_final"
+    }
+  },
+  "requirements": []
+}

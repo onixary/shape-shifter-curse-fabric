@@ -11,6 +11,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
@@ -47,6 +48,21 @@ public class EffectManager {
         player.addStatusEffect(new StatusEffectInstance(regEffect, StaticParams.T_EFFECT_DEFAULT_DURATION));
         // 触发自定义成就
         ON_GET_TRANSFORM_EFFECT.trigger((ServerPlayerEntity) player);
+
+        // 判断是否为服务端玩家并发送同步包
+        if (player instanceof ServerPlayerEntity serverPlayer) {
+            ModPacketsS2C.sendSyncEffectAttachment(serverPlayer, attachment);
+        }
+    }
+
+    public static void loadEffect(PlayerEntity player, PlayerEffectAttachment loadedAttachment) {
+        player.addStatusEffect(new StatusEffectInstance(loadedAttachment.currentRegEffect, loadedAttachment.remainingTicks));
+
+        // 判断是否为服务端玩家并发送同步包
+        if (player instanceof ServerPlayerEntity serverPlayer) {
+            ModPacketsS2C.sendSyncEffectAttachment(serverPlayer, loadedAttachment);
+            LOGGER.info("sended sync effect attachment, currentToForm: " + loadedAttachment.currentToForm);
+        }
     }
 
     // 强制结束当前效果
@@ -59,8 +75,6 @@ public class EffectManager {
             attachment.currentToForm = null;
             attachment.remainingTicks = 0;
             attachment.currentEffect = null;
-            // 触发自定义成就
-            ON_SLEEP_WHEN_HAVE_TRANSFORM_EFFECT.trigger((ServerPlayerEntity) player);
         }
     }
 
@@ -71,10 +85,14 @@ public class EffectManager {
     public static boolean saveCurrentAttachment(ServerWorld world, PlayerEntity player) {
         PlayerEffectAttachment attachment = player.getAttached(EFFECT_ATTACHMENT);
         if(attachment != null) {
-            // todo: 构建环境中UUID会变化，测试时使用固定的testUUID，发布时要改回
             //saveAttachment(String.valueOf((player.getUuid())), attachment);
             saveAttachment(world, player.getUuid().toString(), attachment);
             LOGGER.info("save attachment success, currentToForm: " + attachment.currentToForm);
+            // 判断是否为服务端玩家并发送同步包
+            if (player instanceof ServerPlayerEntity serverPlayer) {
+                ModPacketsS2C.sendSyncEffectAttachment(serverPlayer, attachment);
+                LOGGER.info("sended sync effect attachment, currentToForm: " + attachment.currentToForm);
+            }
             return true;
         }
         else{
@@ -84,14 +102,21 @@ public class EffectManager {
     }
 
     public static boolean loadCurrentAttachment(ServerWorld world, PlayerEntity player) {
-        // todo: 构建环境中UUID会变化，测试时使用固定的testUUID，发布时要改回
         PlayerEffectAttachment attachment = loadAttachment(world, player.getUuid().toString());
         player.setAttached(EffectManager.EFFECT_ATTACHMENT, attachment);
         if(attachment == null){
             LOGGER.info("no attachment found in file");
             return false;
         }
-        return true;
+        else if(attachment.currentToForm != null){
+            LOGGER.info("load attachment success, currentToForm: " + attachment.currentToForm);
+            loadEffect(player, attachment);
+            return true;
+        }
+        else{
+            LOGGER.info("loaded attachment is empty, reset attachment");
+            return false;
+        }
     }
 
     public static void resetAttachment(PlayerEntity player) {
