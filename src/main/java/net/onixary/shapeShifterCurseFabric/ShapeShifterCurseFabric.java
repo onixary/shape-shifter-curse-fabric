@@ -284,6 +284,12 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             save_timer += 1;
             if(save_timer >= 100) {
                 //LOGGER.info("Player paused, save attachment");
+                // 重新给与玩家视觉效果，以防其被奶桶等消除
+                if(attachment != null && attachment.currentToForm != null){
+                    if(!player.hasStatusEffect(attachment.currentRegEffect)){
+                        loadEffect(player, attachment);
+                    }
+                }
                 saveCurrentAttachment(minecraftServer.getOverworld(), player);
                 saveForm(player);
                 save_timer = 0;
