@@ -8,7 +8,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.GameRules;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.advancement.OnFirstJoinWithMod;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
+import net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
@@ -27,6 +29,16 @@ public class PlayerEventHandler {
         // join event
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             if (handler.player.getWorld().isClient()) return;
+
+            // check if first join with mod
+            if(!PlayerNbtStorage.loadBooleanValue(handler.player.getServerWorld(), handler.player.getUuid().toString(), "first_join_with_mod")){
+                ShapeShifterCurseFabric.LOGGER.info("First join with mod");
+                // trigger advancement
+                ShapeShifterCurseFabric.ON_FIRST_JOIN_WITH_MOD.trigger((ServerPlayerEntity) handler.player);
+                // set first join with mod to false
+                PlayerNbtStorage.saveBooleanValue(handler.player.getServerWorld(), handler.player.getUuid().toString(), "first_join_with_mod", true);
+            }
+
 
             // load form
             FormAbilityManager.getServerWorld(server.getOverworld());

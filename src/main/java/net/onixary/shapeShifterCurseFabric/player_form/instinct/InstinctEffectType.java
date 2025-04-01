@@ -6,8 +6,8 @@ public enum InstinctEffectType {
     POTION_CALM(-20f),
 
     // 持续效果（速率类型）
-    // 催化剂与抑制剂的生效时间都是2秒
-    FORM_USE_INHIBITOR(-0.625f / 2),
+    // 催化剂与金苹果的生效时间都是2秒
+    FORM_USE_GOLDEN_APPLE(-4.25f / 2),
     FORM_USE_CATALYST(1.25f / 2),
 
     FORM_BAT_IN_DARK(0.004f),
@@ -24,7 +24,7 @@ public enum InstinctEffectType {
         return this == FORM_BAT_IN_DARK
                 || this == FORM_BAT_EAT_FRUIT
                 || this == FORM_BAT_NEAR_DRIPSTONE
-                || this == FORM_USE_INHIBITOR
+                || this == FORM_USE_GOLDEN_APPLE
                 || this == FORM_USE_CATALYST;
     }
 

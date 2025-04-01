@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
+import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.item.RegCustomItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -47,7 +48,7 @@ public abstract class LivingEntityDeathMixin {
     @Unique
     private void handleMobDeathDrop(MobEntity mob, ServerPlayerEntity player) {
         // 概率掉落未加工的月之尘
-        if (Math.random() < 0.35) {
+        if (Math.random() < StaticParams.MOONDUST_DROP_PROBABILITY) {
             ItemStack stack = new ItemStack(RegCustomItem.UNTREATED_MOONDUST);
             mob.getWorld().spawnEntity(
                     new ItemEntity(

@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "minecraft:golden_apple"
+      "item": "minecraft:enchanted_golden_apple"
     },
     {
       "item": "shape-shifter-curse:moondust_matrix"
@@ -13,7 +13,7 @@
     }
   ],
   "result": {
-    "item": "shape-shifter-curse:inhibitor",
+    "item": "shape-shifter-curse:powerful_inhibitor",
     "count": 1
   }
 }

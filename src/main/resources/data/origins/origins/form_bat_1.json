@@ -15,7 +15,7 @@
 		"origins:form_bat_instinct_eat_fruit",
 		"origins:form_bat_instinct_near_dripstone",
 		"origins:form_instinct_use_catalyst",
-		"origins:form_instinct_use_inhibitor"
+		"origins:form_instinct_use_golden_apple"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

@@ -6,13 +6,13 @@
       "conditions": {
         "items": [
           {
-            "items": ["shape-shifter-curse:moondust_matrix"]
+            "items": ["shape-shifter-curse:untreated_moondust"]
           }
         ]
       }
     }
   },
   "rewards": {
-    "recipes": ["shape-shifter-curse:inhibitor", "shape-shifter-curse:catalyst", "shape-shifter-curse:powerful_inhibitor"]
+    "recipes": ["shape-shifter-curse:book_of_shape_shifter"]
   }
 }

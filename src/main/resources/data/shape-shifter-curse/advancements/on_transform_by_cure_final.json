@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:enchanted_golden_apple"
+      "item": "shape-shifter-curse:powerful_inhibitor"
     },
     "title": {
       "translate": "advancements.shape-shifter-curse.on_transform_by_cure_final.title"

@@ -21,8 +21,8 @@ public class TransformRelatedItems {
     private TransformRelatedItems() {
     }
 
-    public static final Item TRANSFORM_CURE = Items.GOLDEN_APPLE;
-    public static final Item TRANSFORM_CURE_FINAL = Items.ENCHANTED_GOLDEN_APPLE;
+    public static final Item TRANSFORM_CURE = RegCustomItem.INHIBITOR;
+    public static final Item TRANSFORM_CURE_FINAL = RegCustomItem.POWERFUL_INHIBITOR;
     public static final Item TRANSFORM_CATALYST = RegCustomItem.CATALYST;
 
     public static void OnUseCure(PlayerEntity player) {

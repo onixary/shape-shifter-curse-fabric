@@ -6,6 +6,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
@@ -65,11 +66,20 @@ public class CursedMoon {
         // 处于Cursed Moon时的逻辑
         // 文本提示
         if(!CursedMoon.moon_effect_applied){
+            boolean isOverworld = player.getWorld().getRegistryKey() == World.OVERWORLD;
             if(FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_BEFORE_ENABLE){
-                player.sendMessage(Text.translatable("info.shape-shifter-curse.on_cursed_moon_before_enable").formatted(Formatting.LIGHT_PURPLE));
+                if(isOverworld){
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.on_cursed_moon_before_enable").formatted(Formatting.LIGHT_PURPLE));
+                }
             }
             else{
-                player.sendMessage(Text.translatable("info.shape-shifter-curse.on_cursed_moon").formatted(Formatting.LIGHT_PURPLE));
+                if(isOverworld){
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.on_cursed_moon").formatted(Formatting.LIGHT_PURPLE));
+                }
+                else{
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.on_cursed_moon_nether").formatted(Formatting.LIGHT_PURPLE));
+                }
+
                 // 触发自定义成就
                 ShapeShifterCurseFabric.ON_TRIGGER_CURSED_MOON.trigger(player);
             }

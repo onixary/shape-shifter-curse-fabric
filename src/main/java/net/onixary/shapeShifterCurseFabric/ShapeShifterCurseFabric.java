@@ -97,6 +97,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final OnTransformEffectFade ON_TRANSFORM_EFFECT_FADE = Criteria.register(new OnTransformEffectFade());
     public static final OnTriggerCursedMoon ON_TRIGGER_CURSED_MOON = Criteria.register(new OnTriggerCursedMoon());
     public static final OnTriggerCursedMoonForm2 ON_TRIGGER_CURSED_MOON_FORM_2 = Criteria.register(new OnTriggerCursedMoonForm2());
+    public static final OnFirstJoinWithMod ON_FIRST_JOIN_WITH_MOD = Criteria.register(new OnFirstJoinWithMod());
 
     // Reg custom entities
     // Bat

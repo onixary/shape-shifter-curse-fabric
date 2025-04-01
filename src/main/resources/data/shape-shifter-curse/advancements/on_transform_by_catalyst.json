@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:spider_eye"
+      "item": "shape-shifter-curse:catalyst"
     },
     "title": {
       "translate": "advancements.shape-shifter-curse.on_transform_by_catalyst.title"

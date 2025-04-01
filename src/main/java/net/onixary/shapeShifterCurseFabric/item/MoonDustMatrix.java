@@ -18,6 +18,6 @@ public class MoonDustMatrix  extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("item.shape-shifter-curse.moondust_matrix.tooltip", Formatting.LIGHT_PURPLE));
+        tooltip.add(Text.translatable("item.shape-shifter-curse.moondust_matrix.tooltip").formatted(Formatting.GRAY));
     }
 }

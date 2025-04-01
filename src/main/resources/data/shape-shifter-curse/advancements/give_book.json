@@ -1,0 +1,10 @@
+{
+  "criteria": {
+    "first_join": {
+      "trigger": "shape-shifter-curse:on_first_join_with_mod"
+    }
+  },
+  "rewards": {
+    "function": "shape-shifter-curse:delay_give_book"
+  }
+}

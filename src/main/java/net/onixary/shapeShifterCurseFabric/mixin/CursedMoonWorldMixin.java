@@ -67,7 +67,12 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
         if(time == 6000L){
             // 处于中午时的逻辑
             if(FormAbilityManager.getForm(player) != PlayerForms.ORIGINAL_BEFORE_ENABLE){
-                player.sendMessage(Text.translatable("info.shape-shifter-curse.before_cursed_moon").formatted(Formatting.LIGHT_PURPLE));
+                if(player.getWorld().getRegistryKey() != World.OVERWORLD){
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.before_cursed_moon_nether").formatted(Formatting.LIGHT_PURPLE));
+                }
+                else{
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.before_cursed_moon").formatted(Formatting.LIGHT_PURPLE));
+                }
             }
         }
         else if(time >= 12500L && time < 23000L){

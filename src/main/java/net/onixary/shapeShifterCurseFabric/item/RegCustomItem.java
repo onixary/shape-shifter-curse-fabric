@@ -15,6 +15,7 @@ public class RegCustomItem {
     public static final Item BOOK_OF_SHAPE_SHIFTER = register("book_of_shape_shifter", new BookOfShapeShifter(new BookOfShapeShifter.Settings()));
     public static final Item UNTREATED_MOONDUST = register("untreated_moondust", new UntreatedMoonDust(new Item.Settings()));
     public static final Item INHIBITOR = register("inhibitor", new Inhibitor(new Item.Settings()));
+    public static final Item POWERFUL_INHIBITOR = register("powerful_inhibitor", new PowerfulInhibitor(new Item.Settings()));
     public static final Item CATALYST = register("catalyst", new Catalyst(new Item.Settings()));
     public static final Item MOONDUST_MATRIX = register("moondust_matrix", new MoonDustMatrix(new Item.Settings()));
 

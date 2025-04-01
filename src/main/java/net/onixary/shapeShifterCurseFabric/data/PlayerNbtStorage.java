@@ -107,4 +107,29 @@ public class PlayerNbtStorage {
             ShapeShifterCurseFabric.LOGGER.error("Failed to save player instinct for player: " + playerId, e);
         }
     }
+
+    public static void saveBooleanValue(ServerWorld world, String playerId, String key, boolean value) {
+        try {
+            Path saveDir = getWorldSaveDir(world);
+            Files.createDirectories(saveDir);
+            Path savePath = saveDir.resolve(playerId + "_data.dat");
+            NbtCompound nbt = Files.exists(savePath) ? NbtIo.read(savePath.toFile()) : new NbtCompound();
+            nbt.putBoolean(key, value);
+            NbtIo.write(nbt, savePath.toFile());
+        } catch (IOException e) {
+            ShapeShifterCurseFabric.LOGGER.error("Failed to save boolean value for player: " + playerId, e);
+        }
+    }
+
+    public static boolean loadBooleanValue(ServerWorld world, String playerId, String key) {
+        try {
+            Path savePath = getWorldSaveDir(world).resolve(playerId + "_data.dat");
+            if (!Files.exists(savePath)) return false;
+            NbtCompound nbt = NbtIo.read(savePath.toFile());
+            return nbt != null && nbt.getBoolean(key);
+        } catch (IOException e) {
+            ShapeShifterCurseFabric.LOGGER.error("Failed to load boolean value for player: " + playerId, e);
+            return false;
+        }
+    }
 }
