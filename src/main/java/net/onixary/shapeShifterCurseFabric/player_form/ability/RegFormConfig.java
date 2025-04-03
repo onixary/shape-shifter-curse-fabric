@@ -39,6 +39,21 @@ public class RegFormConfig {
                         "form_bat_2",
                         0.5f,
                         PlayerFormPhase.PHASE_2));
+        CONFIGS.put(PlayerForms.AXOLOTL_0,
+                new FormConfig(defaultLayerID,
+                        "form_axolotl_0",
+                        1.0f,
+                        PlayerFormPhase.PHASE_0));
+        CONFIGS.put(PlayerForms.AXOLOTL_1,
+                new FormConfig(defaultLayerID,
+                        "form_axolotl_1",
+                        1.0f,
+                        PlayerFormPhase.PHASE_1));
+        CONFIGS.put(PlayerForms.AXOLOTL_2,
+                new FormConfig(defaultLayerID,
+                        "form_axolotl_2",
+                        0.9f,
+                        PlayerFormPhase.PHASE_2));
 
         //CONFIGS.get(PlayerForms.BAT_0).getFormOriginID();
     }

@@ -13,7 +13,11 @@
     "ScareCreepersMixin",
     "SelectionInvulnerabilityMixin",
     "WaterBreathingMixin$CanBreatheInWater",
-    "WaterBreathingMixin$UpdateAir"
+    "WaterBreathingMixin$UpdateAir",
+    "WaterBreathingSlowMixin$CanBreatheInWater",
+    "WaterBreathingSlowMixin$UpdateAir",
+    "HoldBreathMixin$UpdateAir",
+    "BreathingUnderWaterMixin$UpdateAir"
   ],
   "client": [
     "DrawContextAccessor",

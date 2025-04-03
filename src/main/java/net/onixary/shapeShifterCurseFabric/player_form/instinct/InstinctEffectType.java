@@ -12,7 +12,11 @@ public enum InstinctEffectType {
 
     FORM_BAT_IN_DARK(0.004f),
     FORM_BAT_EAT_FRUIT(0.1f),
-    FORM_BAT_NEAR_DRIPSTONE(0.006f),;
+    FORM_BAT_NEAR_DRIPSTONE(0.006f),
+
+    FORM_AXOLOTL_IN_WATER(0.006f),
+    FORM_AXOLOTL_EAT_FISH(0.1f),
+    FORM_AXOLOTL_NEAR_DRIPLEAF(0.008f);
 
     private final float value;
 
@@ -24,6 +28,8 @@ public enum InstinctEffectType {
         return this == FORM_BAT_IN_DARK
                 || this == FORM_BAT_EAT_FRUIT
                 || this == FORM_BAT_NEAR_DRIPSTONE
+                || this == FORM_AXOLOTL_IN_WATER
+                || this == FORM_AXOLOTL_NEAR_DRIPLEAF
                 || this == FORM_USE_GOLDEN_APPLE
                 || this == FORM_USE_CATALYST;
     }

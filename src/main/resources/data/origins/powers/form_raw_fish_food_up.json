@@ -1,14 +1,14 @@
 {
   "type": "origins:action_on_item_use",
-  "hidden": true,
+  "entity_action": {
+    "type": "origins:feed",
+    "food": 2.5,
+    "saturation" : 0.4
+  },
   "item_condition": {
     "type": "origins:ingredient",
     "ingredient": {
-      "item": "minecraft:potion"
+      "tag": "origins:meat"
     }
-  },
-  "entity_action": {
-    "type": "origins:gain_air",
-    "value": 300
   }
 }

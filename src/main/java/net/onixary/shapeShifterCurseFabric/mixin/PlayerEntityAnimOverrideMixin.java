@@ -10,6 +10,7 @@ import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
 import dev.kosmx.playerAnim.core.util.Ease;
 import dev.kosmx.playerAnim.core.util.Vec3f;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.block.Block;
 import net.minecraft.block.LadderBlock;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -38,6 +39,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.Comparator;
 
 @Mixin(AbstractClientPlayerEntity.class)
 public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {

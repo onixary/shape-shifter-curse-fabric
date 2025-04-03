@@ -22,6 +22,10 @@ public class OriginsPowerTypes {
     public static final PowerType<?> NO_COBWEB_SLOWDOWN = new PowerTypeReference<>(Origins.identifier("no_cobweb_slowdown"));
     public static final PowerType<?> MASTER_OF_WEBS_NO_SLOWDOWN = new PowerTypeReference<>(Origins.identifier("master_of_webs_no_slowdown"));
     public static final PowerType<?> CONDUIT_POWER_ON_LAND = new PowerTypeReference<>(Origins.identifier("conduit_power_on_land"));
+    // shape-shifter-curse new powers
+    public static final PowerType<?> WATER_BREATHING_SLOW = new PowerTypeReference<>(Origins.identifier("water_breathing_slow"));
+    public static final PowerType<?> HOLD_BREATH = new PowerTypeReference<>(Origins.identifier("hold_breath"));
+    public static final PowerType<?> BREATHING_UNDER_WATER = new PowerTypeReference<>(Origins.identifier("breathing_under_water"));
 
     public static void register() {
         register(new PowerFactory<>(Origins.identifier("action_on_callback"),

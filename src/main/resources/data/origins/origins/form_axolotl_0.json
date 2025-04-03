@@ -1,0 +1,17 @@
+{
+	"powers": [
+		"origins:hold_breath",
+		"origins:form_axolotl_0_sand_speed_down",
+		"origins:form_axolotl_0_swim_speed",
+
+		"origins:form_axolotl_instinct_in_water",
+		"origins:form_instinct_use_catalyst",
+		"origins:form_instinct_use_golden_apple"
+	],
+	"icon": {
+		"item": "minecraft:player_head"
+	},
+	"order": 0,
+	"unchoosable": true,
+	"impact": 0
+}

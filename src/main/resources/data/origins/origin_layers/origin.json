@@ -3,25 +3,17 @@
   "order": 0,
   "enabled": true,
   "origins": [
-    "origins:arachnid",
-    "origins:avian",
-    "origins:blazeborn",
-    "origins:elytrian",
-    "origins:enderian",
-    "origins:feline",
-    "origins:human",
-    "origins:merling",
-    "origins:phantom",
-    "origins:shulk",
     "origins:form_original_before_enable",
     "origins:form_original_shifter",
     "origins:form_bat_2",
     "origins:form_bat_1",
-    "origins:form_bat_0"
+    "origins:form_bat_0",
+    "origins:form_axolotl_0",
+    "origins:form_axolotl_1",
+    "origins:form_axolotl_2"
   ],
   "allow_random": true,
   "exclude_random": [
-    "origins:human"
   ],
   "allow_random_unchoosable": false,
   "hidden": false

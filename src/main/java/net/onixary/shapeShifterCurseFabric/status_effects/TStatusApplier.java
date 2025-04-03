@@ -22,6 +22,7 @@ public class TStatusApplier {
         if (fromMob instanceof TransformativeBatEntity) {
             applyStatusByChance(T_BAT_STATUS_CHANCE, player, TO_BAT_0_EFFECT);
         }
+        // todo: axolotl mob status
     }
 
     private static void applyStatusByChance(float chance, PlayerEntity player, BaseTransformativeStatusEffect regStatusEffect) {

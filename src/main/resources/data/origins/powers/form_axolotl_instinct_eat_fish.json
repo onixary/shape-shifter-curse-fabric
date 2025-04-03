@@ -1,0 +1,15 @@
+{
+  "type": "origins:add_sustained_instinct_in_time",
+  "instinct_effect_type": "FORM_AXOLOTL_EAT_FISH",
+  "duration": 20,
+  "is_on_item_finished": true,
+  "condition": {
+    "type": "origins:using_item",
+    "item_condition": {
+      "type": "origins:ingredient",
+      "ingredient": {
+        "tag": "origins:fish"
+      }
+    }
+  }
+}

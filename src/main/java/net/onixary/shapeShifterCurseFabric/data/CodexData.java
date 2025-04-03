@@ -81,6 +81,23 @@ public class CodexData {
     private static final Text bat_2_pros = Text.translatable("codex.form.bat2.pros");
     private static final Text bat_2_cons = Text.translatable("codex.form.bat2.cons");
     private static final Text bat_2_instincts = Text.translatable("codex.form.bat2.instincts");
+    // form axolotl
+    private static final Text axolotl_0_title = Text.translatable("codex.form.axolotl0.title");
+    private static final Text axolotl_0_appearance = Text.translatable("codex.form.axolotl0.appearance");
+    private static final Text axolotl_0_pros = Text.translatable("codex.form.axolotl0.pros");
+    private static final Text axolotl_0_cons = Text.translatable("codex.form.axolotl0.cons");
+    private static final Text axolotl_0_instincts = Text.translatable("codex.form.axolotl0.instincts");
+    private static final Text axolotl_1_title = Text.translatable("codex.form.axolotl1.title");
+    private static final Text axolotl_1_appearance = Text.translatable("codex.form.axolotl1.appearance");
+    private static final Text axolotl_1_pros = Text.translatable("codex.form.axolotl1.pros");
+    private static final Text axolotl_1_cons = Text.translatable("codex.form.axolotl1.cons");
+    private static final Text axolotl_1_instincts = Text.translatable("codex.form.axolotl1.instincts");
+    private static final Text axolotl_2_title = Text.translatable("codex.form.axolotl2.title");
+    private static final Text axolotl_2_appearance = Text.translatable("codex.form.axolotl2.appearance");
+    private static final Text axolotl_2_pros = Text.translatable("codex.form.axolotl2.pros");
+    private static final Text axolotl_2_cons = Text.translatable("codex.form.axolotl2.cons");
+    private static final Text axolotl_2_instincts = Text.translatable("codex.form.axolotl2.instincts");
+
 
     public static Text getPlayerStatusText(PlayerEntity player){
         // 根据当前角色状态与环境返回对应的状态文本
@@ -188,6 +205,30 @@ public class CodexData {
                     case PROS -> bat_2_pros;
                     case CONS -> bat_2_cons;
                     case INSTINCTS -> bat_2_instincts;
+                };
+            case AXOLOTL_0:
+                return switch (type) {
+                    case TITLE -> axolotl_0_title;
+                    case APPEARANCE -> axolotl_0_appearance;
+                    case PROS -> axolotl_0_pros;
+                    case CONS -> axolotl_0_cons;
+                    case INSTINCTS -> axolotl_0_instincts;
+                };
+            case AXOLOTL_1:
+                return switch (type) {
+                    case TITLE -> axolotl_1_title;
+                    case APPEARANCE -> axolotl_1_appearance;
+                    case PROS -> axolotl_1_pros;
+                    case CONS -> axolotl_1_cons;
+                    case INSTINCTS -> axolotl_1_instincts;
+                };
+            case AXOLOTL_2:
+                return switch (type) {
+                    case TITLE -> axolotl_2_title;
+                    case APPEARANCE -> axolotl_2_appearance;
+                    case PROS -> axolotl_2_pros;
+                    case CONS -> axolotl_2_cons;
+                    case INSTINCTS -> axolotl_2_instincts;
                 };
         }
         return Text.empty();

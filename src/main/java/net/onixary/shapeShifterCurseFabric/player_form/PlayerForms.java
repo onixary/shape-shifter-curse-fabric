@@ -8,7 +8,10 @@ public enum PlayerForms {
     ORIGINAL_SHIFTER("base_form", -1),
     BAT_0("bat_form", 0),
     BAT_1("bat_form", 1),
-    BAT_2("bat_form", 2);
+    BAT_2("bat_form", 2),
+    AXOLOTL_0("axolotl_form", 0),
+    AXOLOTL_1("axolotl_form", 1),
+    AXOLOTL_2("axolotl_form", 2);
 
     private final String group;
     private final int index;

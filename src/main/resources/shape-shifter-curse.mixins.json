@@ -14,7 +14,8 @@
     "MoonPhaseRenderMixin",
     "CursedMoonLightmapMixin",
     "ItemStackMixin",
-    "LivingEntityDeathMixin"
+    "LivingEntityDeathMixin",
+    "PlayerEntityPoseMixin"
   ],
   "injectors": {
     "defaultRequire": 1
