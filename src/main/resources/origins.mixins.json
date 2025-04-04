@@ -16,8 +16,9 @@
     "WaterBreathingMixin$UpdateAir",
     "WaterBreathingSlowMixin$CanBreatheInWater",
     "WaterBreathingSlowMixin$UpdateAir",
-    "HoldBreathMixin$UpdateAir",
-    "BreathingUnderWaterMixin$UpdateAir"
+
+    "HoldBreathMixin$GetNextAirUnderWater",
+    "BreathingUnderWaterMixin$GetNextAirUnderWater"
   ],
   "client": [
     "DrawContextAccessor",

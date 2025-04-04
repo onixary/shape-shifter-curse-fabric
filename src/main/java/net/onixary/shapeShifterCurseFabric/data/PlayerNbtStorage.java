@@ -21,7 +21,7 @@ public class PlayerNbtStorage {
 
         Path worldSavePath = world.getServer().getSavePath(WorldSavePath.ROOT);
         String worldName = worldSavePath.getName(worldSavePath.getNameCount() - 2).toString();
-        ShapeShifterCurseFabric.LOGGER.info("World save name: " + worldName);
+        //ShapeShifterCurseFabric.LOGGER.info("World save name: " + worldName);
         return SAVE_DIR.resolve(worldName);
     }
 

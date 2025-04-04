@@ -2,15 +2,19 @@
   "type":"origins:active_self",
   "entity_action":{
     "type":"origins:add_velocity",
-    "z":2,
+    "y":0.8,
     "space":"local"
   },
-  "cooldown":200,
-  "hud_render":{
-    "bar_index":1
+  "cooldown":5,
+  "hud_render": {
+    "should_render": false
+  },
+  "key": {
+    "key": "key.jump",
+    "continuous": true
   },
   "condition":{
-    "type":"origins:or",
+    "type":"origins:and",
     "conditions":[
       {
         "type":"origins:fluid_height",
@@ -19,7 +23,10 @@
         "compare_to":0
       },
       {
-        "type":"origins:in_rain"
+        "type":"origins:fluid_height",
+        "fluid":"minecraft:water",
+        "comparison":"<",
+        "compare_to":0.2
       }
     ]
   }

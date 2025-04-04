@@ -464,9 +464,43 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
                 }
             }
         }
+    }
 
+    public final void setRotationForHeadTailBones(float headAngle, float age, float tailDragAmount){
+        // When tail bone is attached on head:
 
+        // logic fetched from minecraft Changed mod
+        // tail bone name as "tail_head_0", "tail_head_1", "tail_head_2", "tail_head_3", "tail_head_4", "tail_head_5"
+        // max num is 6
+        // need to inverse the y rotation of the tail bones
+        // first tail part
+        float SWAY_RATE = 0.33333334F * 0.5F;
+        float SWAY_SCALE = 0.05F;
+        JsonObject tailChain = json.getAsJsonObject("tail_chain_head");
+        if(tailChain == null) {return;}
+        // Iterate over all members of tail_chain
+        for (Map.Entry<String, JsonElement> entry : tailChain.entrySet()) {
+            String memberName = entry.getKey();
+            JsonArray memberArray = entry.getValue().getAsJsonArray();
+            int indexCount = memberArray.size();
 
+            var tail = this.getCachedGeoBone(memberName + "_" + 0);
+            if (tail != null) {
+                float tailSway = SWAY_SCALE * MathHelper.cos(age * SWAY_RATE + (((float)Math.PI / 3.0F) * 0.75f));
+                float tailBalance = MathHelper.cos(headAngle * 0.6662F) * 0.325F * 0.1f;
+                tail.setRotY(-MathHelper.lerp(0.1f, tailSway, tailBalance) - tailDragAmount * 0.75F);
+
+                float offset = 0.0F;
+                for(int i = 1; i < indexCount; i++){
+                    var bone = this.getCachedGeoBone(memberName + "_" + i);
+                    if (bone == null) {continue;}
+                    bone.setRotY(- MathHelper.lerp(0.1f, SWAY_SCALE * MathHelper.cos(age * SWAY_RATE -
+                            (((float)Math.PI / 3.0F) * offset)), 0.0f) - tailDragAmount * 0.75F);
+
+                    offset += 0.75F;
+                }
+            }
+        }
     }
 
 

@@ -1,12 +1,13 @@
 package net.onixary.shapeShifterCurseFabric.status_effects;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 
 // 自定义药水效果基类（含类型和回调）
-public class BaseTransformativeStatusEffect extends StatusEffect {
+public abstract class BaseTransformativeStatusEffect extends StatusEffect {
     public boolean IS_INSTANT = false;
     private final PlayerForms toForm;
 
@@ -20,7 +21,7 @@ public class BaseTransformativeStatusEffect extends StatusEffect {
         return toForm;
     }
 
-    // 抽象方法：效果结束时的回调
+    // 抽象方法：效果应用时的回调
     public void onEffectApplied(PlayerEntity player){
 
     };

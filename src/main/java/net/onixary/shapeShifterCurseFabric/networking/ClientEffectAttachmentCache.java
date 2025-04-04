@@ -8,9 +8,9 @@ public class ClientEffectAttachmentCache {
     private static PlayerEffectAttachment cachedAttachment = new PlayerEffectAttachment();
 
     public static void update(NbtCompound nbt) {
-        ShapeShifterCurseFabric.LOGGER.info("Attachment cache updated, get nbt: " + nbt);
+        //ShapeShifterCurseFabric.LOGGER.info("Attachment cache updated, get nbt: " + nbt);
         cachedAttachment = PlayerEffectAttachment.fromNbt(nbt);
-        ShapeShifterCurseFabric.LOGGER.info("Attachment cache updated: " + cachedAttachment.currentToForm);
+        //ShapeShifterCurseFabric.LOGGER.info("Attachment cache updated: " + cachedAttachment.currentToForm);
     }
 
     public static PlayerEffectAttachment getAttachment() {

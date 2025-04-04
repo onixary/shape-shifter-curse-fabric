@@ -15,6 +15,8 @@ public enum PlayerAnimState {
     ANIM_SWIM_IDLE,
     ANIM_BOAT_IDLE,
     ANIM_ELYTRA_FLY,
+    ANIM_CRAWLING,
+    ANIM_CRAWLING_IDLE,
     // form special anims
     ANIM_ON_TRANSFORM,
     ANIM_SLOW_FALLING,

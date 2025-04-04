@@ -29,8 +29,10 @@ public abstract class PlayerEntityPoseMixin extends LivingEntity implements Name
                 .stream()
                 .max(Comparator.comparing(PosePower::getPriority))
                 .ifPresent(p -> {
-                    this.setPose(p.getPose());
-                    ci.cancel();
+                    if(isSneaking()){
+                        this.setPose(p.getPose());
+                        ci.cancel();
+                    }
                 });
 
     }

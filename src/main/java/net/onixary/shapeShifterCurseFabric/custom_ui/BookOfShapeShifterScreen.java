@@ -101,8 +101,7 @@ public class BookOfShapeShifterScreen extends BaseOwoScreen<FlowLayout> {
                 .padding(Insets.of(5)));
         titleLayout.child(new ScaledLabelComponent(CodexData.getContentText(CodexData.ContentType.TITLE, currentPlayer), textScale)
                 .maxWidth(getScaledWidth(100))
-                .color(Color.ofRgb(0x2b2d30))
-                .shadow(true));
+                .color(Color.ofRgb(0x2b2d30)));
 
         // Status Header
         FlowLayout statusHeaderHolder = Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(12));
@@ -132,7 +131,7 @@ public class BookOfShapeShifterScreen extends BaseOwoScreen<FlowLayout> {
         statusLayout.child(new ScaledLabelComponent(CodexData.getPlayerStatusText(currentPlayer), textScale)
                 .maxWidth(getScaledWidth(100))
                 .color(Color.ofRgb(0x2b2d30))
-                .shadow(true));
+                );
 
         // Right Area
         rightArea = Containers.verticalFlow(Sizing.fixed(190), Sizing.fixed(210));
@@ -182,7 +181,7 @@ public class BookOfShapeShifterScreen extends BaseOwoScreen<FlowLayout> {
         appearanceLayout.child(new ScaledLabelComponent(CodexData.getContentText(CodexData.ContentType.APPEARANCE, currentPlayer), textScale)
                 .maxWidth(getScaledWidth(170))
                 .color(Color.ofRgb(0x2b2d30))
-                .shadow(true));
+                );
 
 
         // Page Area 2
@@ -233,7 +232,7 @@ public class BookOfShapeShifterScreen extends BaseOwoScreen<FlowLayout> {
         proLayout.child(new ScaledLabelComponent(CodexData.getContentText(CodexData.ContentType.PROS, currentPlayer), textScale)
                 .maxWidth(getScaledWidth(80))
                 .color(Color.ofRgb(0x2b2d30))
-                .shadow(true));
+                );
 
         // Page 2 - Con Holder
         FlowLayout conHolder = Containers.verticalFlow(Sizing.fixed(100), Sizing.fixed(220));
@@ -274,7 +273,7 @@ public class BookOfShapeShifterScreen extends BaseOwoScreen<FlowLayout> {
         conLayout.child(new ScaledLabelComponent(CodexData.getContentText(CodexData.ContentType.CONS, currentPlayer), textScale)
                 .maxWidth(getScaledWidth(80))
                 .color(Color.ofRgb(0x2b2d30))
-                .shadow(true));
+                );
 
         // Page 2 - Instinct Holder
         FlowLayout instinctHolder = Containers.verticalFlow(Sizing.fixed(120), Sizing.fixed(220));
@@ -314,8 +313,7 @@ public class BookOfShapeShifterScreen extends BaseOwoScreen<FlowLayout> {
                 .maxWidth(getScaledWidth(100)));
         instinctLayout.child(new ScaledLabelComponent(CodexData.getContentText(CodexData.ContentType.INSTINCTS, currentPlayer), textScale)
                 .maxWidth(getScaledWidth(100))
-                .color(Color.ofRgb(0x2b2d30))
-                .shadow(true));
+                .color(Color.ofRgb(0x2b2d30)));
 
         // A button to toggle between pages
         pageButtonContainer = Containers.horizontalFlow(Sizing.content(), Sizing.content());

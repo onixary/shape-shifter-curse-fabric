@@ -1,8 +1,15 @@
 {
-  "model": "orif-defaults:geo/phantom.geo.json",
-  "texture": "orif-defaults:textures/phantom/phantom_2.png",
-  "overlay": "orif-defaults:textures/phantom_overlay.png",
-  "overlay_slim": "orif-defaults:textures/phantom_overlay_slim.png",
-  "animation": "orif-defaults:animations/phantom.animation.json",
-  "elytraTexture": "orif-defaults:textures/phantom/phantom_elytra.png"
+  "model": "orif-defaults:geo/form_axolotl_2.geo.json",
+  "texture": "orif-defaults:textures/form_axolotl_2/form_axolotl_2.png",
+  "tail_chain": {
+    "tail": [0, 1, 2]
+  },
+  "tail_chain_head": {
+    "tail_head_a": [0, 1],
+    "tail_head_b": [0, 1],
+    "tail_head_c": [0, 1],
+    "tail_head_d": [0, 1],
+    "tail_head_e": [0],
+    "tail_head_f": [0]
+  }
 }

@@ -31,6 +31,12 @@
   "advancements.shape-shifter-curse.on_trigger_cursed_moon.description": ["当不同颜色的月亮升起时，你感觉体内的魔法与之发生了共鸣.."],
   "advancements.shape-shifter-curse.on_trigger_cursed_moon_form_2.title": ["两面性"],
   "advancements.shape-shifter-curse.on_trigger_cursed_moon_form_2.description": ["你恢复了之前的形态..至少在月之魔力消退之前。也许你应该抓住这次机会"],
+  "item.minecraft.potion.effect.moondust_potion": ["月尘药水"],
+  "effect.shape-shifter-curse.moondust_potion": ["月之尘的精华在其中翻涌，它需要进一步加工"],
+  "item.minecraft.potion.effect.to_bat_0_potion": ["蝙蝠咒文药水"],
+  "effect.shape-shifter-curse.to_bat_0_potion": ["吱吱！"],
+  "item.minecraft.potion.effect.to_axolotl_0_potion": ["美西螈咒文药水"],
+  "effect.shape-shifter-curse.to_axolotl_0_potion": ["最好保持湿润"],
   "item.shape-shifter-curse.cursed_book_of_shape_shifter": ["奇怪的书"],
   "item.shape-shifter-curse.book_of_shape_shifter": ["幻形者之书"],
   "item.shape-shifter-curse.book_of_shape_shifter.tooltip": ["'本书的奥秘只会向幻形者展现'"],
@@ -93,6 +99,13 @@
     "...奇怪的",
     {
       "text": "蝙蝠", "color": "#0096FF"
+    },
+    "?"
+  ],
+  "effect.shape-shifter-curse.to_axolotl_0_effect": [
+    "...奇怪的",
+    {
+      "text": "美西螈", "color": "#0096FF"
     },
     "?"
   ],

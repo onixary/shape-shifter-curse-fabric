@@ -54,7 +54,9 @@ public final class WaterBreathingSlowMixin {
         @Inject(at = @At("TAIL"), method = "tick")
         private void tick(CallbackInfo info) {
             if(OriginsPowerTypes.WATER_BREATHING_SLOW.isActive(this)) {
-                if(!this.isSubmergedIn(FluidTags.WATER) && !this.hasStatusEffect(StatusEffects.WATER_BREATHING) && !this.hasStatusEffect(StatusEffects.CONDUIT_POWER)) {
+                if(!this.isSubmergedIn(FluidTags.WATER)
+                        && !this.hasStatusEffect(StatusEffects.WATER_BREATHING)
+                        && !this.hasStatusEffect(StatusEffects.CONDUIT_POWER)) {
                     if(!((EntityAccessor) this).callIsBeingRainedOn()) {
                         int landGain = this.getNextAirOnLand(0);
                         this.setAir(this.getNextAirUnderwaterSlow(this.getAir(), 24) - landGain);
@@ -64,6 +66,11 @@ public final class WaterBreathingSlowMixin {
                     }
                 } else if(this.getAir() < this.getMaxAir()){
                     this.setAir(this.getNextAirOnLand(this.getAir()));
+                }
+
+                if (this.getAir() < 0) {
+                    // 没有氧气（湿润度）时设为-1定值来便于判定
+                    this.setAir(-1);
                 }
             }
         }

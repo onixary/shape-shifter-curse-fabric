@@ -1,5 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.status_effects;
 
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
@@ -7,6 +9,7 @@ import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects
 import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.ToBatStatus0;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.ToBatStatusPotion;
 
 public class RegTStatusEffect {
     private RegTStatusEffect(){}

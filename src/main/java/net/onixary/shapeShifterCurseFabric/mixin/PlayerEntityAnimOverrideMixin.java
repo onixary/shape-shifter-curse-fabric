@@ -28,6 +28,7 @@ import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
+import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationPlayerAxolotl2;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationPlayerBat1;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationPlayerBat2;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationTransform;
@@ -58,6 +59,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         AnimationTransform.registerAnims();
         AnimationPlayerBat1.registerAnims();
         AnimationPlayerBat2.registerAnims();
+        AnimationPlayerAxolotl2.registerAnims();
 
         currentAnimation = null;
         CONTAINER.setAnimation(null);
@@ -216,7 +218,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                     currentState = PlayerAnimState.ANIM_SLOW_FALLING;
                 }
             }
-            if (isInsideWaterOrBubbleColumn() || isInLava())
+            if (isSubmergedInWater() || isInLava())
             {
                 if (this.isSwimming() || this.isSprinting())
                 {
@@ -225,6 +227,13 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                 else
                 {
                     currentState = PlayerAnimState.ANIM_SWIM_IDLE;
+                }
+            }
+            else if (isCrawling()) {
+                if (isWalking) {
+                    currentState = PlayerAnimState.ANIM_CRAWLING;
+                } else {
+                    currentState = PlayerAnimState.ANIM_CRAWLING_IDLE;
                 }
             }
         }
@@ -258,6 +267,11 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                 case BAT_2:
                     animToPlay = AnimationPlayerBat2.getFormAnimToPlay(currentState);
                     hasSlowFall = true;
+                    break;
+
+                case AXOLOTL_2:
+                    animToPlay = AnimationPlayerAxolotl2.getFormAnimToPlay(currentState);
+                    hasSlowFall = false;
                     break;
                 default:
                     break;

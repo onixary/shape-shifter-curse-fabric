@@ -39,7 +39,7 @@ public class ModPacketsS2C {
     public static void sendSyncEffectAttachment(ServerPlayerEntity player, PlayerEffectAttachment attachment) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeNbt(attachment.toNbt());
-        ShapeShifterCurseFabric.LOGGER.info("Attachment sent, nbt: " + attachment.toNbt());
+        //ShapeShifterCurseFabric.LOGGER.info("Attachment sent, nbt: " + attachment.toNbt());
         ServerPlayNetworking.send(player, ModPackets.SYNC_EFFECT_ATTACHMENT, buf);
     }
 }

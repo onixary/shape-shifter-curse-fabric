@@ -54,6 +54,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManage
 import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
+import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusPotionEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.util.PlayerEventHandler;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
@@ -119,6 +120,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         RegCustomItem.initialize();
         RegEntitySpawnEgg.initialize();
         RegTStatusEffect.initialize();
+        RegTStatusPotionEffect.initialize();
         PlayerEventHandler.register();
         TEntitySpawnHandler.register();
         RegFormConfig.register();

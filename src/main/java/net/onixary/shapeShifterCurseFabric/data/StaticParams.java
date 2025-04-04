@@ -20,8 +20,8 @@ public class StaticParams {
     // per tick instinct increase
     //public static final float INSTINCT_INCREASE_RATE_0 = (INSTINCT_MAX / 2000.0f) / 20.0f;
     //public static final float INSTINCT_INCREASE_RATE_1 = (INSTINCT_MAX / 2000.0f) / 20.0f;
-    public static final float INSTINCT_INCREASE_RATE_0 = (INSTINCT_MAX / 6000.0f) / 20.0f;
-    public static final float INSTINCT_INCREASE_RATE_1 = (INSTINCT_MAX / 6000.0f) / 20.0f;
+    public static final float INSTINCT_INCREASE_RATE_0 = (INSTINCT_MAX / 9000.0f) / 20.0f;
+    public static final float INSTINCT_INCREASE_RATE_1 = (INSTINCT_MAX / 9000.0f) / 20.0f;
     // ----------------------------------------
     // FX settings
     public static final int TRANSFORM_FX_DURATION_IN = 3 * 20; // 2 seconds

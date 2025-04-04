@@ -56,12 +56,14 @@ public class EffectManager {
     }
 
     public static void loadEffect(PlayerEntity player, PlayerEffectAttachment loadedAttachment) {
-        player.addStatusEffect(new StatusEffectInstance(loadedAttachment.currentRegEffect, loadedAttachment.remainingTicks));
+        if (loadedAttachment.currentRegEffect != null) {
+            player.addStatusEffect(new StatusEffectInstance(loadedAttachment.currentRegEffect, loadedAttachment.remainingTicks));
+        }
 
         // 判断是否为服务端玩家并发送同步包
         if (player instanceof ServerPlayerEntity serverPlayer) {
             ModPacketsS2C.sendSyncEffectAttachment(serverPlayer, loadedAttachment);
-            LOGGER.info("sended sync effect attachment, currentToForm: " + loadedAttachment.currentToForm);
+            //LOGGER.info("sended sync effect attachment, currentToForm: " + loadedAttachment.currentToForm);
         }
     }
 
@@ -87,11 +89,11 @@ public class EffectManager {
         if(attachment != null) {
             //saveAttachment(String.valueOf((player.getUuid())), attachment);
             saveAttachment(world, player.getUuid().toString(), attachment);
-            LOGGER.info("save attachment success, currentToForm: " + attachment.currentToForm);
+            //LOGGER.info("save attachment success, currentToForm: " + attachment.currentToForm);
             // 判断是否为服务端玩家并发送同步包
             if (player instanceof ServerPlayerEntity serverPlayer) {
                 ModPacketsS2C.sendSyncEffectAttachment(serverPlayer, attachment);
-                LOGGER.info("sended sync effect attachment, currentToForm: " + attachment.currentToForm);
+                //LOGGER.info("sended sync effect attachment, currentToForm: " + attachment.currentToForm);
             }
             return true;
         }

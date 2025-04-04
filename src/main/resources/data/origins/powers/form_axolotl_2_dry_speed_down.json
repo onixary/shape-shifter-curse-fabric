@@ -9,7 +9,7 @@
   "tick_rate": 20,
   "condition": {
     "type": "origins:air",
-    "comparison": "==",
+    "comparison": "<=",
     "compare_to": 0
   }
 }

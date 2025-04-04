@@ -1,8 +1,7 @@
 {
-  "model": "orif-defaults:geo/phantom.geo.json",
-  "texture": "orif-defaults:textures/phantom/phantom_2.png",
-  "overlay": "orif-defaults:textures/phantom_overlay.png",
-  "overlay_slim": "orif-defaults:textures/phantom_overlay_slim.png",
-  "animation": "orif-defaults:animations/phantom.animation.json",
-  "elytraTexture": "orif-defaults:textures/phantom/phantom_elytra.png"
+  "model": "orif-defaults:geo/form_axolotl_0.geo.json",
+  "texture": "orif-defaults:textures/form_axolotl_0/form_axolotl_0.png",
+  "tail_chain": {
+    "tail": [0]
+  }
 }

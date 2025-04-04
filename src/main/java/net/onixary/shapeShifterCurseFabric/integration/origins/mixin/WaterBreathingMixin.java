@@ -47,7 +47,10 @@ public final class WaterBreathingMixin {
         @Inject(at = @At("TAIL"), method = "tick")
         private void tick(CallbackInfo info) {
             if(OriginsPowerTypes.WATER_BREATHING.isActive(this)) {
-                if(!this.isSubmergedIn(FluidTags.WATER) && !this.hasStatusEffect(StatusEffects.WATER_BREATHING) && !this.hasStatusEffect(StatusEffects.CONDUIT_POWER)) {
+                if(!this.isSubmergedIn(FluidTags.WATER)
+                        && !this.hasStatusEffect(StatusEffects.WATER_BREATHING)
+                        && !this.hasStatusEffect(StatusEffects.CONDUIT_POWER))
+                {
                     if(!((EntityAccessor) this).callIsBeingRainedOn()) {
                         int landGain = this.getNextAirOnLand(0);
                         this.setAir(this.getNextAirUnderwater(this.getAir()) - landGain);

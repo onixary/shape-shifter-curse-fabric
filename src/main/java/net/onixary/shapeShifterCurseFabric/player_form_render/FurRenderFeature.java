@@ -114,7 +114,7 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
                 // adjust tail drag back speed
                 updateTailDragAmount(targetDrag, 0.04F);
                 m.setRotationForTailBones(limbAngle, limbDistance, entity.age, currentTailDragAmount);
-
+                m.setRotationForHeadTailBones(headYaw, entity.age, currentTailDragAmount);
                 tailDragAmountO = tailDragAmount;
 
 
