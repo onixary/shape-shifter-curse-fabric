@@ -131,8 +131,6 @@ public class InstinctTicker {
         else{
             isInstinctLock = true;
         }
-
-        // todo: cursed moon judgement
     }
 
     private static void processImmediateEffects(PlayerInstinctComponent comp) {

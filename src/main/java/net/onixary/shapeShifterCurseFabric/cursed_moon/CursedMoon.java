@@ -126,7 +126,6 @@ public class CursedMoon {
             if(RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon() && !RegPlayerFormComponent.PLAYER_FORM.get(player).isByCure()){
                 TransformManager.handleMoonEndTransform(player);
             }
-            clearFormFlag(player);
             CursedMoon.end_moon_effect_applied =true;
         }
     }

@@ -131,8 +131,8 @@ public class TransformManager {
         curPlayer = player;
         curToForm = toForm;
         ShapeShifterCurseFabric.LOGGER.info("Cur Player: " + curPlayer + " To Form: " + curToForm);
-        applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);
         _isByCursedMoonEnd = true;
+        applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);
         handleTransformEffect();
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
     }
@@ -165,18 +165,19 @@ public class TransformManager {
                 isEffectActive = false;
                 isEndEffectActive = true;
                 if (curPlayer != null) {
+                    if(!_isByCursedMoon || !_isByCursedMoonEnd){
+                        clearInstinct(curPlayer);
+                    }
                     FormAbilityManager.applyForm(curPlayer, curToForm);
                     RegPlayerFormComponent.PLAYER_FORM.get(curPlayer).setByCursedMoon(_isByCursedMoon);
                     RegPlayerFormComponent.PLAYER_FORM.get(curPlayer).setRegressedFromFinal(_isRegressedFromFinal);
                     RegPlayerFormComponent.PLAYER_FORM.get(curPlayer).setByCure(_isByCure);
                     RegPlayerFormComponent.PLAYER_FORM.sync(curPlayer);
-                    if(!_isByCursedMoon || !_isByCursedMoonEnd){
-                        clearInstinct(curPlayer);
-                    }
 
                 } else {
                     ShapeShifterCurseFabric.LOGGER.error("curPlayer is null when trying to apply form!");
                 }
+                clearFormFlag(curPlayer);
                 applyEndTransformEffect((ServerPlayerEntity) curPlayer, StaticParams.TRANSFORM_FX_DURATION_OUT);
                 endTransformEffect();
             }

@@ -30,6 +30,7 @@ public enum InstinctEffectType {
                 || this == FORM_BAT_NEAR_DRIPSTONE
                 || this == FORM_AXOLOTL_IN_WATER
                 || this == FORM_AXOLOTL_NEAR_DRIPLEAF
+                || this == FORM_AXOLOTL_EAT_FISH
                 || this == FORM_USE_GOLDEN_APPLE
                 || this == FORM_USE_CATALYST;
     }

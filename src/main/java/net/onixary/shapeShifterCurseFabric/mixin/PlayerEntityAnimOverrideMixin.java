@@ -28,10 +28,7 @@ import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
-import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationPlayerAxolotl2;
-import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationPlayerBat1;
-import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationPlayerBat2;
-import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationTransform;
+import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.*;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
@@ -60,6 +57,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         AnimationPlayerBat1.registerAnims();
         AnimationPlayerBat2.registerAnims();
         AnimationPlayerAxolotl2.registerAnims();
+        AnimationPlayerAxolotl1.registerAnims();
 
         currentAnimation = null;
         CONTAINER.setAnimation(null);
@@ -267,6 +265,11 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                 case BAT_2:
                     animToPlay = AnimationPlayerBat2.getFormAnimToPlay(currentState);
                     hasSlowFall = true;
+                    break;
+
+                case AXOLOTL_1:
+                    animToPlay = AnimationPlayerAxolotl1.getFormAnimToPlay(currentState);
+                    hasSlowFall = false;
                     break;
 
                 case AXOLOTL_2:
