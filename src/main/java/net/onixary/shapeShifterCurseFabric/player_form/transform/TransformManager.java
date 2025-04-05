@@ -177,7 +177,6 @@ public class TransformManager {
                 } else {
                     ShapeShifterCurseFabric.LOGGER.error("curPlayer is null when trying to apply form!");
                 }
-                clearFormFlag(curPlayer);
                 applyEndTransformEffect((ServerPlayerEntity) curPlayer, StaticParams.TRANSFORM_FX_DURATION_OUT);
                 endTransformEffect();
             }
