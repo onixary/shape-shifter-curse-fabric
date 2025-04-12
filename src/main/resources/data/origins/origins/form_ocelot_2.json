@@ -1,0 +1,30 @@
+{
+	"powers": [
+		"origins:scare_creepers",
+		"origins:fall_immunity",
+		"origins:barehand_attack_up",
+		"origins:form_ocelot_2_health",
+		"origins:form_raw_meat_food_up",
+		"origins:light_armor",
+		"origins:cat_vision",
+		"origins:form_ocelot_2_sneaking_jump_far",
+		"origins:form_ocelot_2_sneaking_jump_high",
+		"origins:form_ocelot_2_sneaking_speed_up",
+		"origins:hotblooded",
+		"origins:no_shield",
+		"origins:velvet_paws",
+		"origins:more_exhaustion",
+		"origins:prevent_sprinting",
+		"origins:form_ocelot_2_water_speed_down",
+		"origins:form_ocelot_2_climb_wood",
+		"origins:form_ocelot_2_raw_meat_only",
+		"origins:form_ocelot_2_sneaking_hunger"
+
+	],
+	"icon": {
+		"item": "minecraft:player_head"
+	},
+	"order": 0,
+	"unchoosable": true,
+	"impact": 0
+}

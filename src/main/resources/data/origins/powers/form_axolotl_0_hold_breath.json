@@ -1,9 +1,0 @@
-{
-  "type": "origins:attribute",
-  "modifier": {
-    "name": "Hold breath underwater",
-    "attribute": "minecraft:oxygen_bonus",
-    "value": 1,
-    "operation": "addition"
-  }
-}

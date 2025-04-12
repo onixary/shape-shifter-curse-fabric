@@ -102,6 +102,11 @@ public class CursedMoon {
             if(FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_BEFORE_ENABLE){
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon_before_enable").formatted(Formatting.LIGHT_PURPLE));
             }
+            else if(FormAbilityManager.getForm(player).getIndex() == 0 &&
+                    !RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon()){
+                // 触发Bug成就（特性！）
+                ShapeShifterCurseFabric.ON_END_CURSED_MOON_BUGGED_FORM_2.trigger(player);
+            }
             else{
                 // 判断形态flag
                 PlayerFormComponent currentFormComponent = RegPlayerFormComponent.PLAYER_FORM.get(player);

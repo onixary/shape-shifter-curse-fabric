@@ -58,6 +58,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         AnimationPlayerBat2.registerAnims();
         AnimationPlayerAxolotl2.registerAnims();
         AnimationPlayerAxolotl1.registerAnims();
+        AnimationPlayerOcelot2.registerAnims();
 
         currentAnimation = null;
         CONTAINER.setAnimation(null);
@@ -98,8 +99,17 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         float delta = 1.0f / 20.0f;
         Vec3d pos = getPos();
 
+        curForm = RegPlayerFormComponent.PLAYER_FORM.get(this).getCurrentForm();
+
         if (!isOnGround() && lastOnGround && getVelocity().y > 0) {
             currentState = PlayerAnimState.ANIM_JUMP;
+        }
+
+        if(!isOnGround() && lastOnGround && (Math.abs(getVelocity().z) > 0.15 || Math.abs(getVelocity().x) > 0.15)){
+            // 特殊处理Ocelot的rush jump
+            if(curForm == PlayerForms.OCELOT_2){
+                currentState = PlayerAnimState.ANIM_RUSH_JUMP;
+            }
         }
         Block standingBlock = world.getBlockState(getBlockPos().down()).getBlock();
 
@@ -182,7 +192,19 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
                     if (isWalking || turnDelta != 0)
                     {
-                        currentState = PlayerAnimState.ANIM_SNEAK_WALK;
+                        // 特殊处理Ocelot的sneak rush
+                        if(curForm == PlayerForms.OCELOT_2){
+                            if(this.getHungerManager().getFoodLevel() > 6){
+                                currentState = PlayerAnimState.ANIM_SNEAK_RUSH;
+                            }
+                            else{
+                                currentState = PlayerAnimState.ANIM_SNEAK_WALK;
+                            }
+                        }
+                        else{
+                            currentState = PlayerAnimState.ANIM_SNEAK_WALK;
+                        }
+
                     }
                 }
                 else
@@ -251,7 +273,6 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         }
 
         // judge form animation
-        curForm = RegPlayerFormComponent.PLAYER_FORM.get(this).getCurrentForm();
         AnimationHolder animToPlay = null;
         if(currentState == PlayerAnimState.ANIM_ON_TRANSFORM){
             animToPlay = AnimationTransform.getFormAnimToPlay(PlayerAnimState.ANIM_ON_TRANSFORM);
@@ -274,6 +295,11 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
                 case AXOLOTL_2:
                     animToPlay = AnimationPlayerAxolotl2.getFormAnimToPlay(currentState);
+                    hasSlowFall = false;
+                    break;
+
+                case OCELOT_2:
+                    animToPlay = AnimationPlayerOcelot2.getFormAnimToPlay(currentState);
                     hasSlowFall = false;
                     break;
                 default:

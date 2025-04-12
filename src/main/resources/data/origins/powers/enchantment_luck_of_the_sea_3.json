@@ -1,8 +1,0 @@
-{
-  "type": "origins:modify_enchantment_level",
-  "enchantment": "minecraft:luck_of_the_sea",
-  "modifier": {
-    "operation": "set_total",
-    "value": 3
-  }
-}

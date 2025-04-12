@@ -1,0 +1,13 @@
+{
+    "type": "origins:conditioned_attribute",
+    "modifier": {
+        "attribute": "minecraft:generic.movement_speed",
+        "operation": "multiply_total",
+        "value": -0.2,
+        "name": "Decrease sprinting speed"
+    },
+    "tick_rate": 1,
+    "condition": {
+        "type": "origins:sprinting"
+    }
+}

@@ -9,6 +9,8 @@
   "advancements.shape-shifter-curse.on_end_cursed_moon_cured.description": ["我的理论是..黄金的魔力具有强大的稳定性"],
   "advancements.shape-shifter-curse.on_end_cursed_moon_cured_form_2.title": ["另一种方法"],
   "advancements.shape-shifter-curse.on_end_cursed_moon_cured_form_2.description": ["成功借用诅咒之月的魔力恢复原本的形态"],
+  "advancements.shape-shifter-curse.on_end_cursed_moon_bugged_form_2.title": ["这是特性"],
+  "advancements.shape-shifter-curse.on_end_cursed_moon_bugged_form_2.description": ["是的，这是月之魔力的特性，绝对不是什么bug"],
   "advancements.shape-shifter-curse.on_get_transform_effect.title": ["那个生物不太一样！"],
   "advancements.shape-shifter-curse.on_get_transform_effect.description": ["尝试靠近散发着咒文的生物，并获取它们所施加的效果"],
   "advancements.shape-shifter-curse.on_sleep_when_have_transform_effect.title": ["昏昏欲睡？"],
@@ -37,6 +39,8 @@
   "effect.shape-shifter-curse.to_bat_0_potion": ["吱吱！"],
   "item.minecraft.potion.effect.to_axolotl_0_potion": ["美西螈咒文药水"],
   "effect.shape-shifter-curse.to_axolotl_0_potion": ["最好保持湿润"],
+  "item.minecraft.potion.effect.to_ocelot_0_potion": ["豹猫咒文药水"],
+  "effect.shape-shifter-curse.to_ocelot_0_potion": ["你会想要储备一点生肉的"],
   "item.shape-shifter-curse.cursed_book_of_shape_shifter": ["奇怪的书"],
   "item.shape-shifter-curse.book_of_shape_shifter": ["幻形者之书"],
   "item.shape-shifter-curse.book_of_shape_shifter.tooltip": ["'本书的奥秘只会向幻形者展现'"],
@@ -95,6 +99,8 @@
   "info.shape-shifter-curse.max_form_used_catalyst": ["你当前的形态被改变的如此彻底，即使催化剂也难以产生进一步的效果..\n（别失望，我也许之后就会在mod里面加入你在想的那个事情！）"],
   "entity.shape-shifter-curse.t_bat": ["咒文蝙蝠"],
   "item.shape-shifter-curse.custom_bat_spawn_egg": ["咒文蝙蝠刷怪蛋"],
+  "entity.shape-shifter-curse.t_axolotl": ["咒文美西螈"],
+  "item.shape-shifter-curse.custom_axolotl_spawn_egg": ["咒文美西螈刷怪蛋"],
   "effect.shape-shifter-curse.to_bat_0_effect": [
     "...奇怪的",
     {
@@ -106,6 +112,13 @@
     "...奇怪的",
     {
       "text": "美西螈", "color": "#0096FF"
+    },
+    "?"
+  ],
+  "effect.shape-shifter-curse.to_ocelot_0_effect": [
+    "...奇怪的",
+    {
+      "text": "豹猫", "color": "#0096FF"
     },
     "?"
   ],

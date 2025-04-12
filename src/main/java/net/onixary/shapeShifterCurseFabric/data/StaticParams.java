@@ -40,5 +40,6 @@ public class StaticParams {
     // ----------------------------------------
     // mod data
     // bat
-    public static final float T_BAT_REPLACE_PROBABILITY = 0.15F;
+    //public static final float T_BAT_REPLACE_PROBABILITY = 0.15F;
+    //public static final float T_AXOLOTL_REPLACE_PROBABILITY = 0.4F;
 }

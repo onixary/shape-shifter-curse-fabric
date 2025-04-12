@@ -11,6 +11,7 @@ import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 import static net.minecraft.item.Items.register;
+import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.T_AXOLOTL;
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.T_BAT;
 
 public class RegEntitySpawnEgg {
@@ -24,6 +25,10 @@ public class RegEntitySpawnEgg {
             T_BAT, 0x1F1F1F, 0x8B8B8B, new FabricItemSettings()
     ));
 
+    public static final Item T_AXOLOTL_SPAWN_EGG = register("custom_axolotl_spawn_egg", new SpawnEggItem(
+            T_AXOLOTL, 0xe4a7ae, 0x8B8B8B, new FabricItemSettings()
+    ));
+
     public static <T extends Item> T register(String path, T item) {
         return Registry.register(Registries.ITEM, new Identifier(ShapeShifterCurseFabric.MOD_ID, path), item);
     }
@@ -32,6 +37,7 @@ public class RegEntitySpawnEgg {
         //Registry.register(Registries.ITEM, new Identifier(ShapeShifterCurseFabric.MOD_ID, "custom_bat_spawn_egg"), T_BAT_SPAWN_EGG);
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(content -> {
             content.add(T_BAT_SPAWN_EGG);
+            content.add(T_AXOLOTL_SPAWN_EGG);
         });
     }
 }

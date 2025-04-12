@@ -1,0 +1,18 @@
+{
+	"powers": [
+		"origins:scare_creepers",
+		"origins:sneaking_speed_up_low",
+		"origins:form_ocelot_0_health",
+		"origins:form_vegetarian_food_down",
+
+		"origins:form_instinct_use_catalyst",
+		"origins:form_instinct_use_golden_apple",
+		"origins:form_ocelot_instinct_eat_raw_meat"
+	],
+	"icon": {
+		"item": "minecraft:player_head"
+	},
+	"order": 0,
+	"unchoosable": true,
+	"impact": 0
+}

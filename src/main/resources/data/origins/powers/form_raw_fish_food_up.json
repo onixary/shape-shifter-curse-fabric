@@ -3,12 +3,12 @@
   "entity_action": {
     "type": "origins:feed",
     "food": 4.5,
-    "saturation" : 0.6
+    "saturation" : 1.2
   },
   "item_condition": {
     "type": "origins:ingredient",
     "ingredient": {
-      "tag": "origins:meat"
+      "tag": "origins:raw_fish"
     }
   }
 }

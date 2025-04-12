@@ -8,7 +8,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.GameRules;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.advancement.OnFirstJoinWithMod;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
@@ -21,7 +20,7 @@ import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManag
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker.loadInstinct;
-import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.removeEffects;
+import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.removeVisualEffects;
 import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.*;
 
 public class PlayerEventHandler {
@@ -110,7 +109,7 @@ public class PlayerEventHandler {
         // reapply potion effect
         if (newAttachment.currentEffect != null && currentRegEffect != null) {
             ShapeShifterCurseFabric.LOGGER.info("re-apply potion effect here");
-            removeEffects(newPlayer);
+            removeVisualEffects(newPlayer);
             newPlayer.addStatusEffect(new StatusEffectInstance(
                     currentRegEffect,
                     newAttachment.remainingTicks

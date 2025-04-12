@@ -1,0 +1,11 @@
+{
+  "type": "origins:self_action_on_hit",
+  "entity_action": {
+    "type": "origins:add_instinct",
+    "instinct_effect_type": "FORM_OCELOT_ATTACK_LIVESTOCK"
+  },
+  "target_condition": {
+    "type": "origins:in_tag",
+    "tag": "origins:livestock"
+  }
+}

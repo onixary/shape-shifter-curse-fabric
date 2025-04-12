@@ -10,7 +10,10 @@
     "origins:form_bat_0",
     "origins:form_axolotl_0",
     "origins:form_axolotl_1",
-    "origins:form_axolotl_2"
+    "origins:form_axolotl_2",
+    "origins:form_ocelot_0",
+    "origins:form_ocelot_1",
+    "origins:form_ocelot_2"
   ],
   "allow_random": true,
   "exclude_random": [

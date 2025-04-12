@@ -1,0 +1,27 @@
+{
+	"powers": [
+		"origins:scare_creepers",
+		"origins:sneaking_speed_up",
+		"origins:fall_immunity",
+		"origins:barehand_attack_up",
+		"origins:form_ocelot_1_health",
+		"origins:form_raw_meat_food_up",
+		"origins:carnivore",
+		"origins:light_armor",
+		"origins:sprint_speed_down",
+		"origins:velvet_paws",
+		"origins:form_ocelot_2_climb_wood",
+
+		"origins:form_instinct_use_catalyst",
+		"origins:form_instinct_use_golden_apple",
+		"origins:form_ocelot_instinct_on_leaf",
+		"origins:form_ocelot_instinct_attack_livestock",
+		"origins:form_ocelot_instinct_eat_raw_meat"
+	],
+	"icon": {
+		"item": "minecraft:player_head"
+	},
+	"order": 0,
+	"unchoosable": true,
+	"impact": 0
+}

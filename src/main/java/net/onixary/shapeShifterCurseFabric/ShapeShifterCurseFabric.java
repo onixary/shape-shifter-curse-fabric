@@ -29,6 +29,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
+import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalEntityActions;
 import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalEntityConditions;
 import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalPowers;
 import net.onixary.shapeShifterCurseFabric.advancement.*;
@@ -40,6 +41,7 @@ import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
 import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegEntitySpawnEgg;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.TEntitySpawnHandler;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.item.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.item.RegCustomPotions;
@@ -99,6 +101,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final OnTriggerCursedMoon ON_TRIGGER_CURSED_MOON = Criteria.register(new OnTriggerCursedMoon());
     public static final OnTriggerCursedMoonForm2 ON_TRIGGER_CURSED_MOON_FORM_2 = Criteria.register(new OnTriggerCursedMoonForm2());
     public static final OnFirstJoinWithMod ON_FIRST_JOIN_WITH_MOD = Criteria.register(new OnFirstJoinWithMod());
+    public static final OnEndCursedMoonBuggedForm2 ON_END_CURSED_MOON_BUGGED_FORM_2 = Criteria.register(new OnEndCursedMoonBuggedForm2());
 
     // Reg custom entities
     // Bat
@@ -110,6 +113,14 @@ public class ShapeShifterCurseFabric implements ModInitializer {
                     .build()
     );
     public static final EntityModelLayer T_BAT_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_bat"), "main");
+    // Axolotl
+    public static final EntityType<TransformativeAxolotlEntity> T_AXOLOTL = Registry.register(
+            Registries.ENTITY_TYPE,
+            new Identifier(ShapeShifterCurseFabric.MOD_ID, "t_axolotl"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TransformativeAxolotlEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
+                    .build()
+    );
 
     private int save_timer = 0;
 
@@ -128,6 +139,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         RegOtherStatusEffects.initialize();
         AdditionalEntityConditions.register();
         AdditionalPowers.register();
+        AdditionalEntityActions.register();
         // network package
         ModPacketsC2S.register();
         ModPacketsS2C.register();
@@ -250,11 +262,14 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             //LOGGER.info(EffectManager.EFFECT_ATTACHMENT.toString());
             //PlayerEffectAttachment attachment = player.getAttached(EffectManager.EFFECT_ATTACHMENT);
             //LOGGER.info(attachment == null? "attachment is null" : attachment.currentEffect.toString());
-            if (RegTStatusEffect.hasAnyEffect(player)) {
-                EffectManager.applyEffect(player);
-                // 触发自定义成就
-                ON_SLEEP_WHEN_HAVE_TRANSFORM_EFFECT.trigger((ServerPlayerEntity) player);
-                player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_sleep_when_attached").formatted(Formatting.LIGHT_PURPLE));
+            // 不用检测诅咒之月状态--作为一个特性还挺有意思的
+            if(/*!(CursedMoon.isCursedMoon() && CursedMoon.isNight())*/true){
+                if (RegTStatusEffect.hasAnyEffect(player)) {
+                    EffectManager.applyEffect(player);
+                    // 触发自定义成就
+                    ON_SLEEP_WHEN_HAVE_TRANSFORM_EFFECT.trigger((ServerPlayerEntity) player);
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_sleep_when_attached").formatted(Formatting.LIGHT_PURPLE));
+                }
             }
         }
     }

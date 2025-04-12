@@ -1,0 +1,41 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"ocelot_2_rush_jump": {
+			"loop": true,
+			"bones": {
+				"torso": {
+					"rotation": {
+						"vector": [40, 0, 0]
+					}
+				},
+				"rightArm": {
+					"rotation": {
+						"vector": [-72.46163, -8.64917, 59.61874]
+					}
+				},
+				"leftArm": {
+					"rotation": {
+						"vector": [-67.87056, 5.68547, -56.583]
+					}
+				},
+				"rightLeg": {
+					"rotation": {
+						"vector": [24.76198, -5.94383, 4.58217]
+					},
+					"position": {
+						"vector": [0, 3, 7]
+					}
+				},
+				"leftLeg": {
+					"rotation": {
+						"vector": [37.31092, 6.79382, -3.18458]
+					},
+					"position": {
+						"vector": [0, 3, 7]
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,8 +1,0 @@
-{
-  "type": "origins:modify_enchantment_level",
-  "enchantment": "minecraft:lure",
-  "modifier": {
-    "operation": "add_base_early",
-    "value": 2
-  }
-}

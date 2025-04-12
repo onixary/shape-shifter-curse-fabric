@@ -3,7 +3,6 @@ package net.onixary.shapeShifterCurseFabric.player_form.ability;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.PowerTypeRegistry;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
@@ -21,9 +20,7 @@ import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
 import virtuoel.pehkui.api.ScaleData;
 import virtuoel.pehkui.api.ScaleTypes;
 
-import java.util.Objects;
-
-import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
+import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.cancelEffect;
 
 public class FormAbilityManager {
     private static ServerWorld world;
@@ -52,7 +49,7 @@ public class FormAbilityManager {
         applyFormOrigin(player, config.getFormOriginLayerID(), config.getFormOriginID());
         //applyPower(player, config.getPowerId());
         // 清空Status
-        RegTStatusEffect.removeEffects(player);
+        cancelEffect(player);
 
         component.setCurrentForm(newForm);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);

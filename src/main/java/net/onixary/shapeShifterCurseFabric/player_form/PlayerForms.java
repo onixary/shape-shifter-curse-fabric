@@ -11,7 +11,11 @@ public enum PlayerForms {
     BAT_2("bat_form", 2),
     AXOLOTL_0("axolotl_form", 0),
     AXOLOTL_1("axolotl_form", 1),
-    AXOLOTL_2("axolotl_form", 2);
+    AXOLOTL_2("axolotl_form", 2),
+    OCELOT_0("ocelot_form", 0),
+    OCELOT_1("ocelot_form", 1),
+    OCELOT_2("ocelot_form", 2);
+
 
     private final String group;
     private final int index;

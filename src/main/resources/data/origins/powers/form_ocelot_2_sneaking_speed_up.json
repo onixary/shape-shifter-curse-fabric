@@ -1,0 +1,30 @@
+{
+  "type": "origins:conditioned_attribute",
+  "modifier": {
+    "attribute": "minecraft:generic.movement_speed",
+    "operation": "addition",
+    "value": 0.65,
+    "name": "Sneaking rush"
+  },
+  "tick_rate": 1,
+  "condition":{
+    "type":"origins:and",
+    "conditions":[
+      {
+        "type":"origins:fluid_height",
+        "fluid":"minecraft:water",
+        "comparison":"<=",
+        "compare_to":0
+      },
+      {
+        "type": "origins:sneaking"
+      }
+      ,
+      {
+        "type": "origins:food_level",
+        "comparison": ">=",
+        "compare_to": 6
+      }
+    ]
+  }
+}

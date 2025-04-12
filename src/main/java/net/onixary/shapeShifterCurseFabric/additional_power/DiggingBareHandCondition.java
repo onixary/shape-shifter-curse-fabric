@@ -24,7 +24,6 @@ public class DiggingBareHandCondition {
             return false;
         }
 
-        BlockState miningBlockState;
         if (playerEntity instanceof ServerPlayerEntity serverPlayerEntity) {
 
             ServerPlayerInteractionManagerAccessor interactionManager = (ServerPlayerInteractionManagerAccessor) serverPlayerEntity.interactionManager;
@@ -32,16 +31,12 @@ public class DiggingBareHandCondition {
                 return false;
             }
 
-            miningBlockState = entity.getWorld().getBlockState(interactionManager.getMiningPos());
-
         } else if (playerEntity instanceof ClientPlayerEntity) {
 
             ClientPlayerInteractionManagerAccessor interactionManager = (ClientPlayerInteractionManagerAccessor) MinecraftClient.getInstance().interactionManager;
             if (interactionManager == null || !interactionManager.getBreakingBlock()) {
                 return false;
             }
-
-            miningBlockState = entity.getWorld().getBlockState(interactionManager.getCurrentBreakingPos());
 
         } else {
             return false;

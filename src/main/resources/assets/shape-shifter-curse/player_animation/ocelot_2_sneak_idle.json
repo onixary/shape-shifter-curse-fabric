@@ -1,0 +1,55 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"ocelot_2_sneak_idle": {
+			"loop": true,
+			"bones": {
+				"head": {
+					"position": {
+						"vector": [0, -10, 1]
+					}
+				},
+				"torso": {
+					"rotation": {
+						"vector": [32.5, 0, 0]
+					},
+					"position": {
+						"vector": [0, -10, 3]
+					}
+				},
+				"rightArm": {
+					"rotation": {
+						"vector": [-1.45754, -19.50013, -10.74481]
+					},
+					"position": {
+						"vector": [2, -10, 0]
+					}
+				},
+				"leftArm": {
+					"rotation": {
+						"vector": [-1.45754, 19.50013, 10.74481]
+					},
+					"position": {
+						"vector": [-2, -10, 0]
+					}
+				},
+				"rightLeg": {
+					"rotation": {
+						"vector": [-74.66569, -4, 9]
+					},
+					"position": {
+						"vector": [-2, -6, 12]
+					}
+				},
+				"leftLeg": {
+					"rotation": {
+						"vector": [-74.66569, 4, -9]
+					},
+					"position": {
+						"vector": [2, -6, 12]
+					}
+				}
+			}
+		}
+	}
+}

@@ -6,16 +6,13 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
-import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.removeEffects;
+import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.removeVisualEffects;
 import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.loadAttachment;
 import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.saveAttachment;
 
@@ -67,13 +64,26 @@ public class EffectManager {
         }
     }
 
-    // 强制结束当前效果
+    // 强制应用当前效果
     public static void applyEffect(PlayerEntity player) {
         PlayerEffectAttachment attachment = player.getAttached(EFFECT_ATTACHMENT);
         LOGGER.info(attachment == null? "attachment is null" : "attachment is not null");
         if (attachment != null && attachment.currentEffect != null) {
             currentRegEffect = attachment.currentRegEffect = null;
             attachment.currentEffect.onEffectApplied(player);
+            attachment.currentToForm = null;
+            attachment.remainingTicks = 0;
+            attachment.currentEffect = null;
+        }
+    }
+
+    // 强制结束当前效果
+    public static void cancelEffect(PlayerEntity player) {
+        PlayerEffectAttachment attachment = player.getAttached(EFFECT_ATTACHMENT);
+        LOGGER.info(attachment == null? "attachment is null" : "attachment is not null");
+        if (attachment != null && attachment.currentEffect != null) {
+            currentRegEffect = attachment.currentRegEffect = null;
+            attachment.currentEffect.onEffectCanceled(player);
             attachment.currentToForm = null;
             attachment.remainingTicks = 0;
             attachment.currentEffect = null;
@@ -123,6 +133,6 @@ public class EffectManager {
 
     public static void resetAttachment(PlayerEntity player) {
         player.setAttached(EffectManager.EFFECT_ATTACHMENT, new PlayerEffectAttachment());
-        removeEffects(player);
+        removeVisualEffects(player);
     }
 }

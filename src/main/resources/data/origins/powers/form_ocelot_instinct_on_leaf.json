@@ -1,0 +1,11 @@
+{
+  "type": "origins:add_sustained_instinct",
+  "instinct_effect_type": "FORM_OCELOT_ON_LEAF",
+  "condition": {
+    "type": "origins:on_block",
+    "block_condition": {
+      "type": "origins:in_tag",
+      "tag": "origins:leaves"
+    }
+  }
+}

@@ -16,7 +16,11 @@ public enum InstinctEffectType {
 
     FORM_AXOLOTL_IN_WATER(0.004f),
     FORM_AXOLOTL_EAT_FISH(0.1f),
-    FORM_AXOLOTL_NEAR_DRIPLEAF(0.008f);
+    FORM_AXOLOTL_NEAR_DRIPLEAF(0.008f),
+
+    FORM_OCELOT_EAT_RAW_MEAT(0.1f),
+    FORM_OCELOT_ON_LEAF(0.008f),
+    FORM_OCELOT_ATTACK_LIVESTOCK(0.07f);
 
     private final float value;
 
@@ -32,7 +36,9 @@ public enum InstinctEffectType {
                 || this == FORM_AXOLOTL_NEAR_DRIPLEAF
                 || this == FORM_AXOLOTL_EAT_FISH
                 || this == FORM_USE_GOLDEN_APPLE
-                || this == FORM_USE_CATALYST;
+                || this == FORM_USE_CATALYST
+                || this == FORM_OCELOT_EAT_RAW_MEAT
+                || this == FORM_OCELOT_ON_LEAF;
     }
 
     public float getValue() {

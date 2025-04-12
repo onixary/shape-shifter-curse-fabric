@@ -10,4 +10,6 @@ public class ConfigModelSSC {
     // transformative mob setting
     // bat mob
     public float transformativeBatSpawnChance = 0.2f;
+    // axolotl mob
+    public float transformativeAxolotlSpawnChance = 0.4f;
 }

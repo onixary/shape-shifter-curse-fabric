@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "shape-shifter-curse:icon_cursed_moon"
+    },
+    "title": {
+      "translate": "advancements.shape-shifter-curse.on_end_cursed_moon_bugged_form_2.title"
+    },
+    "description": {
+      "translate": "advancements.shape-shifter-curse.on_end_cursed_moon_bugged_form_2.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "shape-shifter-curse:on_transform_2",
+  "criteria": {
+    "on_end_cursed_moon_bugged_form_2": {
+      "trigger": "shape-shifter-curse:on_end_cursed_moon_bugged_form_2"
+    }
+  },
+  "requirements": []
+}

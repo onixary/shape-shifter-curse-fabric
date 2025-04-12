@@ -1,0 +1,8 @@
+{
+  "type": "origins:exhaust",
+  "interval": 10,
+  "exhaustion": 0.5,
+  "condition": {
+    "type": "origins:sneaking"
+  }
+}
