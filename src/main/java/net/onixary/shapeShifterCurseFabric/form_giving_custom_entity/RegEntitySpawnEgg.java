@@ -29,6 +29,10 @@ public class RegEntitySpawnEgg {
             T_AXOLOTL, 0xe4a7ae, 0x8B8B8B, new FabricItemSettings()
     ));
 
+    public static final Item T_OCELOT_SPAWN_EGG = register("custom_ocelot_spawn_egg", new SpawnEggItem(
+            ShapeShifterCurseFabric.T_OCELOT, 0xfc801d, 0x8B8B8B, new FabricItemSettings()
+    ));
+
     public static <T extends Item> T register(String path, T item) {
         return Registry.register(Registries.ITEM, new Identifier(ShapeShifterCurseFabric.MOD_ID, path), item);
     }
@@ -38,6 +42,7 @@ public class RegEntitySpawnEgg {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(content -> {
             content.add(T_BAT_SPAWN_EGG);
             content.add(T_AXOLOTL_SPAWN_EGG);
+            content.add(T_OCELOT_SPAWN_EGG);
         });
     }
 }

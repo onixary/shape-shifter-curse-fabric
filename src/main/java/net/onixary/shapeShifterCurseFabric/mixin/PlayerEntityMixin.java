@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import sun.misc.Unsafe;
+import sun.misc   .Unsafe;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

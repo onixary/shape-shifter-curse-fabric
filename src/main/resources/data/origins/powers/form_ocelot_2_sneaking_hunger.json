@@ -3,6 +3,15 @@
   "interval": 10,
   "exhaustion": 0.5,
   "condition": {
-    "type": "origins:sneaking"
+    "type": "origins:and",
+    "conditions":
+    [
+      {
+        "type": "origins:sneaking"
+      },
+      {
+        "type": "origins:moving"
+      }
+    ]
   }
 }

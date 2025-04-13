@@ -9,6 +9,7 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.AxolotlEntity;
 import net.minecraft.entity.passive.BatEntity;
+import net.minecraft.entity.passive.OcelotEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
@@ -17,6 +18,8 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.Tra
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.BatEntityModel;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.BatEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TOcelotEntityRenderer;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
 //import static net.onixary.shapeShifterCurseFabric.data.StaticParams.T_AXOLOTL_REPLACE_PROBABILITY;
@@ -25,6 +28,7 @@ import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
 public class TEntitySpawnHandler {
     public static final EntityModelLayer T_BAT_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_bat"), "main");
     public static final EntityModelLayer T_AXOLOTL_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_axolotl"), "main");
+    public static final EntityModelLayer T_OCELOT_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_ocelot"), "main");
 
     public static void register() {
         // Reg custom entities model and renderer
@@ -40,15 +44,26 @@ public class TEntitySpawnHandler {
             return new TAxolotlEntityRenderer(context);
         });
         EntityModelLayerRegistry.registerModelLayer(T_AXOLOTL_LAYER, BatEntityModel::getTexturedModelData);
+        // ocelot
+        FabricDefaultAttributeRegistry.register(T_OCELOT, TransformativeBatEntity.createTBatAttributes());
+        EntityRendererRegistry.register(T_OCELOT, (context) -> {
+            return new TOcelotEntityRenderer(context);
+        });
+
 
         // handle entity spawn
         ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
-            if (entity instanceof BatEntity) {
-                TBatSpawnHandler((BatEntity) entity, world);
-            }
-            else if (entity instanceof AxolotlEntity) {
-                if(!((AxolotlEntity) entity).isFromBucket()){
-                    TAxolotlSpawnHandler((AxolotlEntity) entity, world);
+            if(!entity.hasCustomName()){
+                if (entity instanceof BatEntity) {
+                    TBatSpawnHandler((BatEntity) entity, world);
+                }
+                else if (entity instanceof AxolotlEntity) {
+                    if(!((AxolotlEntity) entity).isFromBucket()){
+                        TAxolotlSpawnHandler((AxolotlEntity) entity, world);
+                    }
+                }
+                else if (entity instanceof OcelotEntity) {
+                    TOcelotSpawnHandler((OcelotEntity) entity, world);
                 }
             }
         });
@@ -78,6 +93,20 @@ public class TEntitySpawnHandler {
                     entity.getYaw(), entity.getPitch()
             );
             serverWorld.spawnEntity(customAxolotl);
+            entity.discard();
+        }
+    }
+
+    private static void TOcelotSpawnHandler(OcelotEntity entity, World serverWorld) {
+        if (serverWorld.getRandom().nextFloat() < CONFIG.transformativeOcelotSpawnChance()) {
+            TransformativeOcelotEntity customOcelot = new TransformativeOcelotEntity(
+                    T_OCELOT, serverWorld
+            );
+            customOcelot.refreshPositionAndAngles(
+                    entity.getX(), entity.getY(), entity.getZ(),
+                    entity.getYaw(), entity.getPitch()
+            );
+            serverWorld.spawnEntity(customOcelot);
             entity.discard();
         }
     }

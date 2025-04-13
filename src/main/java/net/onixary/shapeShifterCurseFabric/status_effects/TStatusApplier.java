@@ -5,14 +5,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 
 import java.util.Objects;
 
-import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_AXOLOTL_0_EFFECT;
-import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_BAT_0_EFFECT;
+import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.*;
 import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.EFFECT_ATTACHMENT;
 
 public class TStatusApplier {
@@ -20,6 +20,7 @@ public class TStatusApplier {
 
     public static float T_BAT_STATUS_CHANCE = 0.5f;
     public static float T_AXOLOTL_STATUS_CHANCE = 0.7f;
+    public static float T_OCELOT_STATUS_CHANCE = 0.5f;
 
     public static void applyStatusFromTMob(MobEntity fromMob, PlayerEntity player) {
         if (fromMob instanceof TransformativeBatEntity) {
@@ -27,6 +28,9 @@ public class TStatusApplier {
         }
         else if(fromMob instanceof TransformativeAxolotlEntity) {
             applyStatusByChance(T_AXOLOTL_STATUS_CHANCE, player, TO_AXOLOTL_0_EFFECT);
+        }
+        else if(fromMob instanceof TransformativeOcelotEntity){
+            applyStatusByChance(T_OCELOT_STATUS_CHANCE, player, TO_OCELOT_0_EFFECT);
         }
     }
 

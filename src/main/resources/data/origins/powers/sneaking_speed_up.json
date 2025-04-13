@@ -3,10 +3,10 @@
   "modifier": {
     "attribute": "minecraft:generic.movement_speed",
     "operation": "addition",
-    "value": 0.2,
+    "value": 0.35,
     "name": "Increased sprinting speed"
   },
-  "tick_rate": 5,
+  "tick_rate": 1,
   "condition":{
     "type":"origins:and",
     "conditions":[

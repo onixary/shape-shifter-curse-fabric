@@ -43,6 +43,7 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegEntitySp
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.TEntitySpawnHandler;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
 import net.onixary.shapeShifterCurseFabric.item.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.item.RegCustomPotions;
 import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
@@ -118,6 +119,14 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             Registries.ENTITY_TYPE,
             new Identifier(ShapeShifterCurseFabric.MOD_ID, "t_axolotl"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TransformativeAxolotlEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
+                    .build()
+    );
+    // Ocelot
+    public static final EntityType<TransformativeOcelotEntity> T_OCELOT = Registry.register(
+            Registries.ENTITY_TYPE,
+            new Identifier(ShapeShifterCurseFabric.MOD_ID, "t_ocelot"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TransformativeOcelotEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
                     .build()
     );

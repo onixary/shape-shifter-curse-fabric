@@ -12,4 +12,6 @@ public class ConfigModelSSC {
     public float transformativeBatSpawnChance = 0.2f;
     // axolotl mob
     public float transformativeAxolotlSpawnChance = 0.4f;
+    // ocelot mob
+    public float transformativeOcelotSpawnChance = 0.4f;
 }

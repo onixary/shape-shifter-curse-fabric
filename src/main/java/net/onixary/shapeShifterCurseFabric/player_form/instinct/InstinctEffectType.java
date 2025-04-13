@@ -2,8 +2,7 @@ package net.onixary.shapeShifterCurseFabric.player_form.instinct;
 
 public enum InstinctEffectType {
     // 立即效果（值类型）
-    COMBAT_HIT(15f),
-    POTION_CALM(-20f),
+    FORM_OCELOT_ATTACK_LIVESTOCK(3.0f),
 
     // 持续效果（速率类型）
     // 催化剂与金苹果的生效时间都是2秒
@@ -19,8 +18,7 @@ public enum InstinctEffectType {
     FORM_AXOLOTL_NEAR_DRIPLEAF(0.008f),
 
     FORM_OCELOT_EAT_RAW_MEAT(0.1f),
-    FORM_OCELOT_ON_LEAF(0.008f),
-    FORM_OCELOT_ATTACK_LIVESTOCK(0.07f);
+    FORM_OCELOT_ON_LEAF(0.008f);
 
     private final float value;
 

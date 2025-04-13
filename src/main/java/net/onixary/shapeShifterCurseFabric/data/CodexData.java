@@ -97,6 +97,22 @@ public class CodexData {
     private static final Text axolotl_2_pros = Text.translatable("codex.form.axolotl2.pros");
     private static final Text axolotl_2_cons = Text.translatable("codex.form.axolotl2.cons");
     private static final Text axolotl_2_instincts = Text.translatable("codex.form.axolotl2.instincts");
+    // form ocelot
+    private static final Text ocelot_0_title = Text.translatable("codex.form.ocelot0.title");
+    private static final Text ocelot_0_appearance = Text.translatable("codex.form.ocelot0.appearance");
+    private static final Text ocelot_0_pros = Text.translatable("codex.form.ocelot0.pros");
+    private static final Text ocelot_0_cons = Text.translatable("codex.form.ocelot0.cons");
+    private static final Text ocelot_0_instincts = Text.translatable("codex.form.ocelot0.instincts");
+    private static final Text ocelot_1_title = Text.translatable("codex.form.ocelot1.title");
+    private static final Text ocelot_1_appearance = Text.translatable("codex.form.ocelot1.appearance");
+    private static final Text ocelot_1_pros = Text.translatable("codex.form.ocelot1.pros");
+    private static final Text ocelot_1_cons = Text.translatable("codex.form.ocelot1.cons");
+    private static final Text ocelot_1_instincts = Text.translatable("codex.form.ocelot1.instincts");
+    private static final Text ocelot_2_title = Text.translatable("codex.form.ocelot2.title");
+    private static final Text ocelot_2_appearance = Text.translatable("codex.form.ocelot2.appearance");
+    private static final Text ocelot_2_pros = Text.translatable("codex.form.ocelot2.pros");
+    private static final Text ocelot_2_cons = Text.translatable("codex.form.ocelot2.cons");
+    private static final Text ocelot_2_instincts = Text.translatable("codex.form.ocelot2.instincts");
 
 
     public static Text getPlayerStatusText(PlayerEntity player){
@@ -229,6 +245,30 @@ public class CodexData {
                     case PROS -> axolotl_2_pros;
                     case CONS -> axolotl_2_cons;
                     case INSTINCTS -> axolotl_2_instincts;
+                };
+            case OCELOT_0:
+                return switch (type) {
+                    case TITLE -> ocelot_0_title;
+                    case APPEARANCE -> ocelot_0_appearance;
+                    case PROS -> ocelot_0_pros;
+                    case CONS -> ocelot_0_cons;
+                    case INSTINCTS -> ocelot_0_instincts;
+                };
+            case OCELOT_1:
+                return switch (type) {
+                    case TITLE -> ocelot_1_title;
+                    case APPEARANCE -> ocelot_1_appearance;
+                    case PROS -> ocelot_1_pros;
+                    case CONS -> ocelot_1_cons;
+                    case INSTINCTS -> ocelot_1_instincts;
+                };
+            case OCELOT_2:
+                return switch (type) {
+                    case TITLE -> ocelot_2_title;
+                    case APPEARANCE -> ocelot_2_appearance;
+                    case PROS -> ocelot_2_pros;
+                    case CONS -> ocelot_2_cons;
+                    case INSTINCTS -> ocelot_2_instincts;
                 };
         }
         return Text.empty();
