@@ -3,7 +3,8 @@ package net.onixary.shapeShifterCurseFabric.player_form;
 import java.util.Arrays;
 
 public enum PlayerForms {
-    // group: form kind, index: form phase, 2 is max
+    // group: form kind, index: form phase
+    // SP form index is 5
     ORIGINAL_BEFORE_ENABLE("original_form", -2),
     ORIGINAL_SHIFTER("base_form", -1),
     BAT_0("bat_form", 0),
@@ -14,7 +15,8 @@ public enum PlayerForms {
     AXOLOTL_2("axolotl_form", 2),
     OCELOT_0("ocelot_form", 0),
     OCELOT_1("ocelot_form", 1),
-    OCELOT_2("ocelot_form", 2);
+    OCELOT_2("ocelot_form", 2),
+    ALLEY_SP("alley_form", 5);
 
 
     private final String group;

@@ -1,0 +1,13 @@
+{
+  "type": "origins:self_action_when_hit",
+  "entity_action": {
+    "type": "origins:play_sound",
+    "sound": "minecraft:entity.cat.hurt",
+    "pitch": 0.5,
+    "volume": 0.7
+  },
+  "condition": {
+    "type": "origins:chance",
+    "chance": 0.8
+  }
+}

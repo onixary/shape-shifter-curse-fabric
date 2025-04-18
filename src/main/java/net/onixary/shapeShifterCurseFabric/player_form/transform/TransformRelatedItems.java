@@ -41,7 +41,7 @@ public class TransformRelatedItems {
                 break;
             case 0:
                 toForm = PlayerForms.ORIGINAL_SHIFTER;
-                player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure").formatted(Formatting.YELLOW));
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure_0").formatted(Formatting.YELLOW));
                 // 触发自定义成就
                 ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger((ServerPlayerEntity) player);
                 break;
@@ -54,6 +54,12 @@ public class TransformRelatedItems {
             case 2:
                 // 不会生效
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.max_form_used_cure").formatted(Formatting.YELLOW));
+                break;
+            case 5:
+                // SP form可以随时被治愈
+                toForm = PlayerForms.ORIGINAL_SHIFTER;
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure_0").formatted(Formatting.YELLOW));
+                break;
             default:
                 break;
         }
@@ -141,6 +147,10 @@ public class TransformRelatedItems {
             case 2:
                 // todo: 也许之后会有额外阶段的逻辑..类似于彻底改变游戏玩法，但是在死亡后回退的
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.max_form_used_catalyst").formatted(Formatting.YELLOW));
+                break;
+            case 5:
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.sp_form_used_catalyst").formatted(Formatting.YELLOW));
+                break;
             default:
                 break;
         }

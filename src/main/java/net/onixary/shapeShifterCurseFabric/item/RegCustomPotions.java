@@ -30,6 +30,9 @@ public class RegCustomPotions {
     public static final Potion OCELOT_FORM_POTION =
             Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_ocelot_0_potion"),
                     new Potion(new StatusEffectInstance(TO_OCELOT_0_POTION)));
+    public static final Potion ALLEY_FORM_POTION =
+            Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_alley_sp_potion"),
+                    new Potion(new StatusEffectInstance(TO_ALLEY_SP_POTION)));
 
 
     public static void registerPotions(){
@@ -42,5 +45,6 @@ public class RegCustomPotions {
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.POINTED_DRIPSTONE, BAT_FORM_POTION);
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.BIG_DRIPLEAF, AXOLOTL_FORM_POTION);
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.CHICKEN, OCELOT_FORM_POTION);
+        BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.AMETHYST_SHARD, ALLEY_FORM_POTION);
     }
 }

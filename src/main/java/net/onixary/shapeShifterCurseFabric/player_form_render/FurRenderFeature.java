@@ -28,6 +28,10 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
     static float tailDragAmount = 0.0F;
     static float tailDragAmountO;
     static float currentTailDragAmount = 0.0F;
+    // X轴向的drag
+    static float tailDragAmountVertical = 0.0F;
+    static float tailDragAmountVerticalO;
+    static float currentTailDragAmountVertical = 0.0F;
 
     @Unique
     private int getOverlayMixin(LivingEntity entity, float whiteOverlayProgress) {
@@ -36,6 +40,10 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
 
     private void updateTailDragAmount(float targetValue, float lerpSpeed) {
         currentTailDragAmount = MathHelper.lerp(lerpSpeed, currentTailDragAmount, targetValue);
+    }
+
+    private void updateVerticalTailDrag(float targetValue, float lerpSpeed) {
+        currentTailDragAmountVertical = MathHelper.lerp(lerpSpeed, currentTailDragAmountVertical, targetValue);
     }
 
     public static class ModelTransformation {
@@ -113,8 +121,8 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
                 float targetDrag = MathHelper.lerp(tickDelta, tailDragAmountO, tailDragAmount);
                 // adjust tail drag back speed
                 updateTailDragAmount(targetDrag, 0.04F);
-                m.setRotationForTailBones(limbAngle, limbDistance, entity.age, currentTailDragAmount);
-                m.setRotationForHeadTailBones(headYaw, entity.age, currentTailDragAmount);
+                m.setRotationForTailBones(limbAngle, limbDistance, entity.age, currentTailDragAmount, tailDragAmountVertical);
+                m.setRotationForHeadTailBones(headYaw, entity.age, currentTailDragAmount, tailDragAmountVertical);
                 tailDragAmountO = tailDragAmount;
 
 
@@ -123,6 +131,20 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
                 tailDragAmount -= (float) (Math.toRadians((entity.bodyYaw - entity.prevBodyYaw)) * 0.55F);
                 // clamp tail drag curvature
                 tailDragAmount = MathHelper.clamp(tailDragAmount, -1.6F, 1.6F);
+
+                // 获取实体垂直速度（转换为角度变化量）
+                float verticalSpeed = (float) entity.getVelocity().y;
+                float targetVerticalDrag = MathHelper.clamp(verticalSpeed * 1.5f, -1.6f, 1.6f);
+
+                // 更新垂直拖拽量
+                float targetDragVertical = MathHelper.lerp(tickDelta, tailDragAmountVerticalO, tailDragAmountVertical);
+                updateVerticalTailDrag(targetDragVertical, 0.04F);
+
+                // 衰减和限制垂直拖拽量
+                tailDragAmountVertical *= 0.8F;
+                tailDragAmountVertical += targetVerticalDrag * 0.15F;
+                tailDragAmountVertical = MathHelper.clamp(tailDragAmountVertical, -1.6f, 1.6f);
+                tailDragAmountVerticalO = tailDragAmountVertical;
 
                 m.invertRotForPart("bipedBody", false, true, false);
                 m.setRotationForBone("bipedLeftArm", ((IMojModelPart) (Object) eR.getModel().leftArm).originfurs$getRotation());

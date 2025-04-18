@@ -1,0 +1,14 @@
+{
+  "type": "origins:action_over_time",
+  "entity_action": {
+    "type": "origins:play_sound",
+    "sound": "minecraft:entity.bat.ambient",
+    "pitch": 0.5,
+    "volume": 0.15
+  },
+  "interval": 200,
+  "condition": {
+    "type": "origins:chance",
+    "chance": 0.3
+  }
+}

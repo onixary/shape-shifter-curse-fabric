@@ -18,7 +18,10 @@
 		"origins:damage_up",
 		"origins:barehand_digging_speed_up",
 		"origins:always_harvest",
-		"origins:form_vegetarian_food_up"
+		"origins:form_vegetarian_food_up",
+
+		"origins:form_bat_sound",
+		"origins:form_bat_sound_hurt"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

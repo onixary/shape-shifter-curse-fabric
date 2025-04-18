@@ -68,6 +68,7 @@ public class FormArgumentType implements ArgumentType<Identifier> {
             availableForms.add(new Identifier(MOD_ID, "ocelot_0"));
             availableForms.add(new Identifier(MOD_ID, "ocelot_1"));
             availableForms.add(new Identifier(MOD_ID, "ocelot_2"));
+            availableForms.add(new Identifier(MOD_ID, "alley_sp"));
 
       }
 

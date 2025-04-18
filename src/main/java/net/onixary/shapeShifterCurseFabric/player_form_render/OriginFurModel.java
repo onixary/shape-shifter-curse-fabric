@@ -431,7 +431,7 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
         return (GeoBone) b;
     }
 
-    public final void setRotationForTailBones(float limbAngle, float limbDistance, float age, float tailDragAmount){
+    public final void setRotationForTailBones(float limbAngle, float limbDistance, float age, float tailDragAmount, float tailDragAmountVertical){
         // logic fetched from minecraft Changed mod
         // tail bone name as "tail_0", "tail_1", "tail_2", "tail_3", "tail_4", "tail_5"
         // max num is 6
@@ -452,6 +452,7 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
                 float tailSway = SWAY_SCALE * MathHelper.cos(age * SWAY_RATE + (((float)Math.PI / 3.0F) * 0.75f));
                 float tailBalance = MathHelper.cos(limbAngle * 0.6662F) * 0.325F * limbDistance;
                 tail.setRotY(-MathHelper.lerp(limbDistance, tailSway, tailBalance) - tailDragAmount * 0.75F);
+                tail.setRotX(-tailDragAmountVertical * 0.75f);
 
                 float offset = 0.0F;
                 for(int i = 1; i < indexCount; i++){
@@ -459,6 +460,7 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
                     if (bone == null) {continue;}
                     bone.setRotY(- MathHelper.lerp(limbDistance, SWAY_SCALE * MathHelper.cos(age * SWAY_RATE -
                             (((float)Math.PI / 3.0F) * offset)), 0.0f) - tailDragAmount * 0.75F);
+                    bone.setRotX(-tailDragAmountVertical * 0.75f * (offset + 0.75f));
 
                     offset += 0.75F;
                 }
@@ -466,7 +468,7 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
         }
     }
 
-    public final void setRotationForHeadTailBones(float headAngle, float age, float tailDragAmount){
+    public final void setRotationForHeadTailBones(float headAngle, float age, float tailDragAmount, float tailDragAmountVertical){
         // When tail bone is attached on head:
 
         // logic fetched from minecraft Changed mod
@@ -489,6 +491,7 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
                 float tailSway = SWAY_SCALE * MathHelper.cos(age * SWAY_RATE + (((float)Math.PI / 3.0F) * 0.75f));
                 float tailBalance = MathHelper.cos(headAngle * 0.6662F) * 0.325F * 0.1f;
                 tail.setRotY(-MathHelper.lerp(0.1f, tailSway, tailBalance) - tailDragAmount * 0.75F);
+                tail.setRotX(-tailDragAmountVertical * 0.75f);
 
                 float offset = 0.0F;
                 for(int i = 1; i < indexCount; i++){
@@ -496,6 +499,7 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
                     if (bone == null) {continue;}
                     bone.setRotY(- MathHelper.lerp(0.1f, SWAY_SCALE * MathHelper.cos(age * SWAY_RATE -
                             (((float)Math.PI / 3.0F) * offset)), 0.0f) - tailDragAmount * 0.75F);
+                    bone.setRotX(-tailDragAmountVertical * 0.75f * (offset + 0.75f));
 
                     offset += 0.75F;
                 }

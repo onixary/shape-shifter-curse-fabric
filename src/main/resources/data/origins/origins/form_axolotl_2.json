@@ -18,7 +18,10 @@
 		"origins:sneaking_speed_up",
 		"origins:air_from_potions",
 		"origins:form_instinct_use_catalyst",
-		"origins:form_instinct_use_golden_apple"
+		"origins:form_instinct_use_golden_apple",
+
+		"origins:form_axolotl_sound",
+		"origins:form_axolotl_sound_hurt"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

@@ -79,6 +79,11 @@ public class TransformManager {
                 else{
                     ShapeShifterCurseFabric.LOGGER.info("Triggered transformation when at max phase, this should not happen!");
                 }
+            case 5:
+                // SP形态只有一个阶段，回到初始形态
+                if(isByCursedMoon){
+                    toForm = PlayerForms.ORIGINAL_SHIFTER;
+                }
             default:
                 break;
         }
@@ -105,8 +110,9 @@ public class TransformManager {
                 ShapeShifterCurseFabric.LOGGER.error("Moon end transformation triggered when mod is not enabled, this should not happen!");
                 break;
             case -1:
-                // 不应该触发
-                ShapeShifterCurseFabric.LOGGER.error("Moon end transformation triggered when has original form, this should not happen!");
+                // 回到之前的SP form
+                toForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getPreviousForm();
+                //ShapeShifterCurseFabric.LOGGER.error("Moon end transformation triggered when has original form, this should not happen!");
                 break;
             case 0:
                 if(player.getComponent(RegPlayerFormComponent.PLAYER_FORM).isRegressedFromFinal()){

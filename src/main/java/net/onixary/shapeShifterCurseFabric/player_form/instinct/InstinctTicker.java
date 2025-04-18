@@ -98,6 +98,9 @@ public class InstinctTicker {
             case PHASE_2:
                 // 立刻涨满
                 return 100.0f;
+            case PHASE_SP:
+                // 立刻涨满
+                return 100.0f;
         }
         return 0.0f;
     }

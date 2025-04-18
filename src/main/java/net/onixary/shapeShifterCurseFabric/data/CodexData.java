@@ -113,6 +113,13 @@ public class CodexData {
     private static final Text ocelot_2_pros = Text.translatable("codex.form.ocelot2.pros");
     private static final Text ocelot_2_cons = Text.translatable("codex.form.ocelot2.cons");
     private static final Text ocelot_2_instincts = Text.translatable("codex.form.ocelot2.instincts");
+    // sp form alley
+    private static final Text alley_sp_title = Text.translatable("codex.form.alley_sp.title");
+    private static final Text alley_sp_appearance = Text.translatable("codex.form.alley_sp.appearance");
+    private static final Text alley_sp_pros = Text.translatable("codex.form.alley_sp.pros");
+    private static final Text alley_sp_cons = Text.translatable("codex.form.alley_sp.cons");
+    private static final Text alley_sp_instincts = Text.translatable("codex.form.alley_sp.instincts");
+
 
 
     public static Text getPlayerStatusText(PlayerEntity player){
@@ -160,6 +167,7 @@ public class CodexData {
                     case PHASE_0 -> descAppearance_0;
                     case PHASE_1 -> descAppearance_1;
                     case PHASE_2 -> descAppearance_2;
+                    case PHASE_SP -> Text.empty();
                 };
             case PROS:
                 return switch (currentPhase) {
@@ -167,6 +175,7 @@ public class CodexData {
                     case PHASE_0 -> descPros_0;
                     case PHASE_1 -> descPros_1;
                     case PHASE_2 -> descPros_2;
+                    case PHASE_SP -> Text.empty();
                 };
             case CONS:
                 return switch (currentPhase) {
@@ -174,6 +183,7 @@ public class CodexData {
                     case PHASE_0 -> descCons_0;
                     case PHASE_1 -> descCons_1;
                     case PHASE_2 -> descCons_2;
+                    case PHASE_SP -> Text.empty();
                 };
             case INSTINCTS:
                 return switch (currentPhase) {
@@ -181,6 +191,7 @@ public class CodexData {
                     case PHASE_0 -> descInstincts_0;
                     case PHASE_1 -> descInstincts_1;
                     case PHASE_2 -> descInstincts_2;
+                    case PHASE_SP -> Text.empty();
                 };
         }
         return Text.empty();
@@ -269,6 +280,15 @@ public class CodexData {
                     case PROS -> ocelot_2_pros;
                     case CONS -> ocelot_2_cons;
                     case INSTINCTS -> ocelot_2_instincts;
+                };
+
+            case ALLEY_SP:
+                return switch (type) {
+                    case TITLE -> alley_sp_title;
+                    case APPEARANCE -> alley_sp_appearance;
+                    case PROS -> alley_sp_pros;
+                    case CONS -> alley_sp_cons;
+                    case INSTINCTS -> alley_sp_instincts;
                 };
         }
         return Text.empty();

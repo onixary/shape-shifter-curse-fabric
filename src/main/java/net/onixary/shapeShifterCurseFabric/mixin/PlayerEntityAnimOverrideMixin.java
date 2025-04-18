@@ -194,7 +194,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                     {
                         // 特殊处理Ocelot的sneak rush
                         if(curForm == PlayerForms.OCELOT_2){
-                            if(this.getHungerManager().getFoodLevel() > 6){
+                            if(this.getHungerManager().getFoodLevel() >= 6){
                                 currentState = PlayerAnimState.ANIM_SNEAK_RUSH;
                             }
                             else{

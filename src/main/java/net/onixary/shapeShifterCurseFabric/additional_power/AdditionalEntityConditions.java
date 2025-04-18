@@ -11,9 +11,11 @@ import net.minecraft.world.World;
 public class AdditionalEntityConditions {
     public static void register() {
         register(DiggingBareHandCondition.getFactory());
+        register(ChanceCondition.getFactory());
     }
 
     private static void register(ConditionFactory<Entity> conditionFactory) {
         Registry.register(ApoliRegistries.ENTITY_CONDITION, conditionFactory.getSerializerId(), conditionFactory);
+
     }
 }

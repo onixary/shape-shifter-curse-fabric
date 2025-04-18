@@ -18,7 +18,10 @@
 		"origins:form_ocelot_2_water_speed_down",
 		"origins:form_ocelot_2_climb_wood",
 		"origins:form_ocelot_2_raw_meat_only",
-		"origins:form_ocelot_2_sneaking_hunger"
+		"origins:form_ocelot_2_sneaking_hunger",
+
+		"origins:form_ocelot_sound",
+		"origins:form_ocelot_sound_hurt"
 
 	],
 	"icon": {
