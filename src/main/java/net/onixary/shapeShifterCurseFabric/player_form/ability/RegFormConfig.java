@@ -1,13 +1,10 @@
 package net.onixary.shapeShifterCurseFabric.player_form.ability;
 
-import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormPhase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
 public class RegFormConfig {
     public static final Map<PlayerForms, FormConfig> CONFIGS = new HashMap<>();
@@ -58,9 +55,9 @@ public class RegFormConfig {
                 new FormConfig(defaultLayerID,
                         "form_ocelot_2",
                         PlayerFormPhase.PHASE_2));
-        CONFIGS.put(PlayerForms.ALLEY_SP,
+        CONFIGS.put(PlayerForms.ALLAY_SP,
                 new FormConfig(defaultLayerID,
-                        "form_alley_sp",
+                        "form_allay_sp",
                         PlayerFormPhase.PHASE_SP));
 
         //CONFIGS.get(PlayerForms.BAT_0).getFormOriginID();

@@ -16,7 +16,7 @@ public enum PlayerForms {
     OCELOT_0("ocelot_form", 0),
     OCELOT_1("ocelot_form", 1),
     OCELOT_2("ocelot_form", 2),
-    ALLEY_SP("alley_form", 5);
+    ALLAY_SP("allay_form", 5);
 
 
     private final String group;

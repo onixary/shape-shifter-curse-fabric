@@ -12,8 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_ALLEY_SP_EFFECT;
-import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_OCELOT_0_EFFECT;
+import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_ALLAY_SP_EFFECT;
 import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.EFFECT_ATTACHMENT;
 
 public class ToAlleyStatusPotion extends StatusEffect {
@@ -36,8 +35,8 @@ public class ToAlleyStatusPotion extends StatusEffect {
     {
         if (source instanceof ServerPlayerEntity player) {
             PlayerForms curToForm = Objects.requireNonNull(player.getAttached(EFFECT_ATTACHMENT)).currentToForm;
-            if (curToForm != TO_ALLEY_SP_EFFECT.getToForm() && FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_SHIFTER){
-                EffectManager.overrideEffect(player, TO_ALLEY_SP_EFFECT);
+            if (curToForm != TO_ALLAY_SP_EFFECT.getToForm() && FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_SHIFTER){
+                EffectManager.overrideEffect(player, TO_ALLAY_SP_EFFECT);
             }
         }
     }

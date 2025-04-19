@@ -2,7 +2,6 @@ package net.onixary.shapeShifterCurseFabric.data;
 
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
@@ -12,9 +11,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
-import net.minecraft.client.resource.language.I18n;
 
 import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.EFFECT_ATTACHMENT;
 
@@ -114,11 +111,11 @@ public class CodexData {
     private static final Text ocelot_2_cons = Text.translatable("codex.form.ocelot2.cons");
     private static final Text ocelot_2_instincts = Text.translatable("codex.form.ocelot2.instincts");
     // sp form alley
-    private static final Text alley_sp_title = Text.translatable("codex.form.alley_sp.title");
-    private static final Text alley_sp_appearance = Text.translatable("codex.form.alley_sp.appearance");
-    private static final Text alley_sp_pros = Text.translatable("codex.form.alley_sp.pros");
-    private static final Text alley_sp_cons = Text.translatable("codex.form.alley_sp.cons");
-    private static final Text alley_sp_instincts = Text.translatable("codex.form.alley_sp.instincts");
+    private static final Text allay_sp_title = Text.translatable("codex.form.allay_sp.title");
+    private static final Text allay_sp_appearance = Text.translatable("codex.form.allay_sp.appearance");
+    private static final Text allay_sp_pros = Text.translatable("codex.form.allay_sp.pros");
+    private static final Text allay_sp_cons = Text.translatable("codex.form.allay_sp.cons");
+    private static final Text allay_sp_instincts = Text.translatable("codex.form.allay_sp.instincts");
 
 
 
@@ -282,13 +279,13 @@ public class CodexData {
                     case INSTINCTS -> ocelot_2_instincts;
                 };
 
-            case ALLEY_SP:
+            case ALLAY_SP:
                 return switch (type) {
-                    case TITLE -> alley_sp_title;
-                    case APPEARANCE -> alley_sp_appearance;
-                    case PROS -> alley_sp_pros;
-                    case CONS -> alley_sp_cons;
-                    case INSTINCTS -> alley_sp_instincts;
+                    case TITLE -> allay_sp_title;
+                    case APPEARANCE -> allay_sp_appearance;
+                    case PROS -> allay_sp_pros;
+                    case CONS -> allay_sp_cons;
+                    case INSTINCTS -> allay_sp_instincts;
                 };
         }
         return Text.empty();

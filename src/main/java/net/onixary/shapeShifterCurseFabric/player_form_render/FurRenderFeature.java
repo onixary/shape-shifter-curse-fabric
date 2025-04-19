@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.player_form_render;
 import dev.kosmx.playerAnim.api.TransformType;
 import dev.kosmx.playerAnim.api.layered.IAnimation;
 import dev.kosmx.playerAnim.core.util.Vec3f;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -33,6 +34,8 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
     static float tailDragAmountVerticalO;
     static float currentTailDragAmountVertical = 0.0F;
 
+    //static float wingFlapAmount = 0.0f;
+
     @Unique
     private int getOverlayMixin(LivingEntity entity, float whiteOverlayProgress) {
         return OverlayTexture.packUv(OverlayTexture.getU(whiteOverlayProgress), OverlayTexture.getV(entity.hurtTime > 0 || entity.deathTime > 0));
@@ -45,6 +48,18 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
     private void updateVerticalTailDrag(float targetValue, float lerpSpeed) {
         currentTailDragAmountVertical = MathHelper.lerp(lerpSpeed, currentTailDragAmountVertical, targetValue);
     }
+    /*
+    private void updateWingFlapParams(T entity) {
+        // 获取速度绝对值（忽略方向）
+        float horizontalSpeed = (float) entity.getVelocity().horizontalLength();
+        //ShapeShifterCurseFabric.LOGGER.info("horizontal speed: " + horizontalSpeed);
+        float horizontalSpeedClamped = MathHelper.clamp(horizontalSpeed * 8.5f, 0.0f, 1.0f);
+        // 根据速度调节翅膀振动
+        wingFlapAmount = MathHelper.clamp(horizontalSpeedClamped, 0.2f, 1.0f);
+
+        // 应用平滑
+        wingFlapAmount = MathHelper.lerp(0.2f, wingFlapAmount, wingFlapAmount);
+    }*/
 
     public static class ModelTransformation {
         public Vec3d position, rotation;
@@ -123,6 +138,7 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
                 updateTailDragAmount(targetDrag, 0.04F);
                 m.setRotationForTailBones(limbAngle, limbDistance, entity.age, currentTailDragAmount, tailDragAmountVertical);
                 m.setRotationForHeadTailBones(headYaw, entity.age, currentTailDragAmount, tailDragAmountVertical);
+                m.setRotationForWingBones(limbAngle, limbDistance, entity.age, tailDragAmountVertical);
                 tailDragAmountO = tailDragAmount;
 
 
@@ -145,6 +161,8 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
                 tailDragAmountVertical += targetVerticalDrag * 0.15F;
                 tailDragAmountVertical = MathHelper.clamp(tailDragAmountVertical, -1.6f, 1.6f);
                 tailDragAmountVerticalO = tailDragAmountVertical;
+
+                //updateWingFlapParams(entity);
 
                 m.invertRotForPart("bipedBody", false, true, false);
                 m.setRotationForBone("bipedLeftArm", ((IMojModelPart) (Object) eR.getModel().leftArm).originfurs$getRotation());

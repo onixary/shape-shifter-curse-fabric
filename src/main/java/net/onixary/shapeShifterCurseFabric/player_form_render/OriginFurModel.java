@@ -507,6 +507,66 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
         }
     }
 
+    public final void setRotationForWingBones(float limbAngle, float limbDistance, float age, float tailDragAmountVertical){
+        // json define as wing_chain_l and wing_chain_r
+        // wing bone name as "wing_l_0", "wing_l_1", "wing_l_2", "wing_r_0", "wing_r_1", "wing_r_2"
+        // max num is 6
+
+        float swayAngle = age * 20.0F * (float) (Math.PI / 180.0) + limbAngle;
+        float sway_base = MathHelper.cos(swayAngle) * (float) Math.PI * 0.15F + limbDistance;
+        float sway_l = (float) -(Math.PI / 4) + sway_base;
+        float sway_r = (float) (Math.PI / 4) - sway_base;
+
+        JsonObject wingChainL = json.getAsJsonObject("wing_chain_l");
+        if(wingChainL == null) {return;}
+        // Iterate over all members of wing_chain
+        for (Map.Entry<String, JsonElement> entry : wingChainL.entrySet()) {
+            String memberName = entry.getKey();
+            JsonArray memberArray = entry.getValue().getAsJsonArray();
+            int indexCount = memberArray.size();
+
+            var wing = this.getCachedGeoBone(memberName + "_" + 0);
+            if (wing != null) {
+                wing.setRotY(sway_l);
+                wing.setRotX(-tailDragAmountVertical * 0.35f);
+
+                float offset = 0.0F;
+                for(int i = 1; i < indexCount; i++){
+                    var bone = this.getCachedGeoBone(memberName + "_" + i);
+                    if (bone == null) {continue;}
+                    bone.setRotX(-tailDragAmountVertical * 0.75f * offset);
+
+                    offset += 0.75F;
+                }
+            }
+        }
+        JsonObject wingChainR = json.getAsJsonObject("wing_chain_r");
+        if(wingChainR == null) {return;}
+        // Iterate over all members of wing_chain
+        for (Map.Entry<String, JsonElement> entry : wingChainR.entrySet()) {
+            String memberName = entry.getKey();
+            JsonArray memberArray = entry.getValue().getAsJsonArray();
+            int indexCount = memberArray.size();
+
+            var wing = this.getCachedGeoBone(memberName + "_" + 0);
+            if (wing != null) {
+                wing.setRotY(sway_r);
+                wing.setRotX(-tailDragAmountVertical * 0.35f);
+
+                float offset = 0.0F;
+                for(int i = 1; i < indexCount; i++){
+                    var bone = this.getCachedGeoBone(memberName + "_" + i);
+                    if (bone == null) {continue;}
+                    bone.setRotX(-tailDragAmountVertical * 0.75f * offset);
+
+                    offset += 0.75F;
+                }
+            }
+        }
+    }
+
+
+
 
     public final GeoBone setScaleForBone(String bone_name, Vec3d scale) {
         var b = this.getCachedGeoBone(bone_name);

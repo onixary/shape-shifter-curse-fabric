@@ -9,23 +9,23 @@ import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStat
 
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.removeVisualEffects;
 
-public class ToAlleyStatusSP extends BaseTransformativeStatusEffect {
-    public ToAlleyStatusSP() {
-        super(PlayerForms.ALLEY_SP, StatusEffectCategory.NEUTRAL, 0xFFFFFF, false);
+public class ToAllayStatusSP extends BaseTransformativeStatusEffect {
+    public ToAllayStatusSP() {
+        super(PlayerForms.ALLAY_SP, StatusEffectCategory.NEUTRAL, 0xFFFFFF, false);
     }
 
     @Override
     public void onEffectApplied(PlayerEntity player) {
         // todo: form logic
-        ShapeShifterCurseFabric.LOGGER.info("ToAxolotlStatus0 onEffect Applied");
+        ShapeShifterCurseFabric.LOGGER.info("ToAllay onEffect Applied");
         //FormAbilityManager.applyForm(player, PlayerForms.BAT_0);
-        TransformManager.handleDirectTransform(player, PlayerForms.ALLEY_SP, false);
+        TransformManager.handleDirectTransform(player, PlayerForms.ALLAY_SP, false);
         removeVisualEffects(player);
     }
 
     @Override
     public void onEffectCanceled(PlayerEntity player) {
-        ShapeShifterCurseFabric.LOGGER.info("ToAxolotlStatus0 effect Canceled");
+        ShapeShifterCurseFabric.LOGGER.info("ToAllay effect Canceled");
         removeVisualEffects(player);
     }
 

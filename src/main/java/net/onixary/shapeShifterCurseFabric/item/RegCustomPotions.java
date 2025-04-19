@@ -1,7 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.item;
 
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
@@ -10,11 +8,8 @@ import net.minecraft.recipe.BrewingRecipeRegistry;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.ToBatStatus0;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
-import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_AXOLOTL_0_EFFECT;
-import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_BAT_0_EFFECT;
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusPotionEffect.*;
 
 public class RegCustomPotions {
@@ -32,7 +27,7 @@ public class RegCustomPotions {
                     new Potion(new StatusEffectInstance(TO_OCELOT_0_POTION)));
     public static final Potion ALLEY_FORM_POTION =
             Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_alley_sp_potion"),
-                    new Potion(new StatusEffectInstance(TO_ALLEY_SP_POTION)));
+                    new Potion(new StatusEffectInstance(TO_ALLAY_SP_POTION)));
 
 
     public static void registerPotions(){
