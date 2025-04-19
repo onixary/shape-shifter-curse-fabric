@@ -353,7 +353,8 @@ public class BookOfShapeShifterScreen extends BaseOwoScreen<FlowLayout> {
     private float calculatePlayerScale(PlayerEntity player) {
         float BASE_SCALE_FACTOR = 0.25f;
         PlayerFormComponent formComp = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
-        float formScale = RegFormConfig.CONFIGS.get(formComp.getCurrentForm()).getScale();
+        //float formScale = RegFormConfig.CONFIGS.get(formComp.getCurrentForm()).getScale();
+        float formScale = 1;
         return BASE_SCALE_FACTOR * (1.0f / formScale);
     }
 

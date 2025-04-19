@@ -1,5 +1,6 @@
 {
 	"powers": [
+		"origins:form_bat_0_scale",
 		"origins:form_dark_speed_up",
 		"origins:form_disable_chest_armor",
 		"origins:form_bat_0_sun_health",

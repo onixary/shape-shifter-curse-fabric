@@ -1,5 +1,7 @@
 {
 	"powers": [
+		"origins:form_axolotl_2_scale",
+
 		"origins:water_breathing_slow",
 		"origins:aqua_affinity",
 		"origins:like_water",

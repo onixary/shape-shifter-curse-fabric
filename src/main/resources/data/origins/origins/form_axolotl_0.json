@@ -1,5 +1,7 @@
 {
 	"powers": [
+		"origins:form_base_scale",
+
 		"origins:hold_breath",
 		"origins:form_axolotl_0_sand_speed_down",
 		"origins:form_axolotl_0_swim_speed",

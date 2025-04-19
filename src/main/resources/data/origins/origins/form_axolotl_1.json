@@ -1,5 +1,7 @@
 {
 	"powers": [
+		"origins:form_base_scale",
+
 		"origins:aquatic",
 		"origins:form_axolotl_1_swim_speed",
 		"origins:breathing_under_water",

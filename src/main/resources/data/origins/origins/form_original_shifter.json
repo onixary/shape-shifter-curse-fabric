@@ -1,4 +1,7 @@
 {
+	"powers": [
+		"origins:form_base_scale"
+	],
 	"icon": {
 		"item": "minecraft:player_head"
 	},

@@ -1,5 +1,6 @@
 {
 	"powers":[
+		"origins:form_bat_2_scale",
 		"origins:elytra_no_render",
 		"origins:bat_vision",
 		"origins:form_disable_chest_armor",

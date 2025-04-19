@@ -13,6 +13,7 @@ public class AdditionalPowers {
         register(AddSustainedInstinctInTimePower.getFactory());
         register(PosePower.getFactory());
         register(CrawlingPower.getFactory());
+        register(ScalePower.getFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

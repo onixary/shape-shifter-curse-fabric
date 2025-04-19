@@ -1,6 +1,6 @@
 {
 	"powers": [
-
+		"origins:form_alley_sp_scale"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

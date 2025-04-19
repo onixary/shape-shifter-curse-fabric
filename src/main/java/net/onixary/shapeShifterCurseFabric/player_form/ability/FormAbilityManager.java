@@ -45,7 +45,8 @@ public class FormAbilityManager {
         FormConfig config = RegFormConfig.getConfig(newForm);
         //applyHealth(player, config.getMaxHealth());
         //applyArmor(player, config.getArmor());
-        applyScale(player, config.getScale());
+        // 已被弃用，使用json定义的scale power
+        //applyScale(player, config.getScale());
         applyFormOrigin(player, config.getFormOriginLayerID(), config.getFormOriginID());
         //applyPower(player, config.getPowerId());
         // 清空Status

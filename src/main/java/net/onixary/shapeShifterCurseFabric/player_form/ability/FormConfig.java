@@ -11,19 +11,19 @@ public class FormConfig {
     //private final float armor;
     private final String formOriginLayerID;
     private final String formOriginID;
-    private final float scale;
+    //private final float scale;
     private PlayerFormPhase phase;
     // mark witch anim states to override
     //private final Identifier powerId;
 
-    public FormConfig(String formOriginLayerID,String formOriginID, float scale, PlayerFormPhase phase) {
+    public FormConfig(String formOriginLayerID,String formOriginID, PlayerFormPhase phase) {
         this.formOriginLayerID = formOriginLayerID;
         this.formOriginID = formOriginID;
-        this.scale = scale;
+        //this.scale = scale;
         this.phase = phase;
     }
 
-    public float getScale() { return scale; }
+    //public float getScale() { return scale; }
     public String getFormOriginLayerID() { return formOriginLayerID; }
     public String getFormOriginID() { return formOriginID; }
     public PlayerFormPhase getPhase() { return phase; }
