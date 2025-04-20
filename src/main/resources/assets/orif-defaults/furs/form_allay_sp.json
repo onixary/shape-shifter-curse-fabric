@@ -1,17 +1,27 @@
 {
-  "model": "orif-defaults:geo/form_axolotl_2.geo.json",
-  "texture": "orif-defaults:textures/form_axolotl_2/form_axolotl_2.png",
+  "model": "orif-defaults:geo/form_allay_sp.geo.json",
+  "texture": "orif-defaults:textures/form_allay_sp/form_allay_sp.png",
+  "overlay": "orif-defaults:textures/form_allay_sp/form_allay_sp_overlay.png",
+  "hidden": [
+    "leftLeg",
+    "rightLeg",
+    "rightPants",
+    "leftPants",
+    "body",
+    "jacket"
+  ],
   "tail_chain": {
-    "tail": [0, 1, 2]
+    "tail_l": [0, 1, 2],
+    "tail_r": [0, 1, 2]
   },
   "wing_chain_l": {
-    "tail_head_b": [0, 1],
-    "tail_head_d": [0, 1],
-    "tail_head_f": [0]
+    "wing_l": [0, 1]
   },
-    "wing_chain_r": {
-        "tail_head_a": [0, 1],
-        "tail_head_c": [0, 1],
-        "tail_head_e": [0]
-    }
+  "wing_chain_r": {
+    "wing_r": [0, 1]
+  },
+  "tail_chain_head": {
+    "head_tail_l": [0, 1],
+    "head_tail_r": [0, 1]
+  }
 }

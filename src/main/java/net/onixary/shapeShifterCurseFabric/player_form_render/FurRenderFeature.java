@@ -175,6 +175,7 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
                 m.invertRotForPart("bipedRightLeg", false, true, true);
                 m.invertRotForPart("bipedLeftLeg", false, true, true);
                 fur.render(matrixStack, a, vertexConsumerProvider, RenderLayer.getEntityTranslucent(m.getTextureResource(a)), null, light);
+                //fur.render(matrixStack, a, vertexConsumerProvider, RenderLayer.getEntityTranslucentEmissive(m.getTextureResource(a)), null, light);
                 fur.render(matrixStack, a, vertexConsumerProvider, RenderLayer.getEntityTranslucentEmissive(m.getFullbrightTextureResource(a)), null, Integer.MAX_VALUE - 1);
                 matrixStack.pop();
             }

@@ -1,6 +1,26 @@
 {
 	"powers": [
-		"origins:form_alley_sp_scale"
+		"origins:form_allay_sp_scale",
+		"origins:form_allay_sp_fly_hunger",
+		"origins:form_allay_sp_projectile_damage_up",
+		"origins:form_allay_sp_attack_heal",
+		"origins:form_allay_sp_melee_damage_down",
+		"origins:slow_falling",
+		"origins:form_allay_sp_amethyst_shard_only",
+		"origins:form_allay_sp_mob_glow_in_range",
+		"origins:form_allay_sp_prevent_digging_when_fly",
+		"origins:form_allay_sp_levitate_speed_up",
+		"origins:form_allay_sp_digging_speed_down",
+		"origins:no_exhaustion",
+		"origins:form_disable_leg_armor",
+		"origins:form_disable_feet_armor",
+		"origins:velvet_paws",
+		"origins:form_allay_sp_sound",
+		"origins:form_allay_sp_sound_hurt",
+		"origins:form_allay_sp_jukebox_heal",
+		"origins:form_allay_sp_levitate",
+		"origins:form_allay_sp_amethyst_shard_from_block"
+
 	],
 	"icon": {
 		"item": "minecraft:player_head"

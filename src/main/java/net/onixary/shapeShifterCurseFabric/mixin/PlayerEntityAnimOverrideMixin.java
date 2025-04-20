@@ -11,6 +11,7 @@ import dev.kosmx.playerAnim.core.util.Ease;
 import dev.kosmx.playerAnim.core.util.Vec3f;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
 import io.github.apace100.apoli.component.PowerHolderComponent;
+import io.github.apace100.apoli.mixin.ServerPlayerInteractionManagerAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.block.LadderBlock;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -20,6 +21,9 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.item.FlintAndSteelItem;
+import net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket;
+import net.minecraft.server.world.ServerChunkManager;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.MathHelper;
@@ -59,6 +63,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         AnimationPlayerAxolotl2.registerAnims();
         AnimationPlayerAxolotl1.registerAnims();
         AnimationPlayerOcelot2.registerAnims();
+        AnimationPlayerAllaySP.registerAnims();
 
         currentAnimation = null;
         CONTAINER.setAnimation(null);
@@ -76,10 +81,28 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
     private PlayerForms curForm;
     KeyframeAnimation currentAnimation = null;
+    boolean overrideHandAnim = false;
+    AnimationHolder animToPlay = null;
+    boolean shouldContinueSwingAnim = false;
+    int continueSwingAnimCounter = 0;
 
     @Override
     public void tick() {
         super.tick();
+        // 将tool swing状态时间做少许延迟来避免挖掘覆盖动画被Idle中断
+        if(currentState == PlayerAnimState.ANIM_TOOL_SWING){
+            if(continueSwingAnimCounter < 10){
+                continueSwingAnimCounter++;
+                shouldContinueSwingAnim = true;
+            }
+            else{
+                shouldContinueSwingAnim = false;
+            }
+        }
+        else{
+            continueSwingAnimCounter = 0;
+            shouldContinueSwingAnim =false;
+        }
 
         // judge current anim state
         if (getVehicle() != null && !(getVehicle() instanceof BoatEntity)) {
@@ -176,7 +199,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
             {
                 currentState = PlayerAnimState.ANIM_ELYTRA_FLY;
             }
-            else if (isOnGround() || onGroundInWater)
+            else if ((isOnGround() || onGroundInWater) && !shouldContinueSwingAnim)
             {
                 currentState = PlayerAnimState.ANIM_IDLE;
                 if ((isInsideWaterOrBubbleColumn() || isInLava()) && !onGroundInWater)
@@ -273,7 +296,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         }
 
         // judge form animation
-        AnimationHolder animToPlay = null;
+        animToPlay = null;
         if(currentState == PlayerAnimState.ANIM_ON_TRANSFORM){
             animToPlay = AnimationTransform.getFormAnimToPlay(PlayerAnimState.ANIM_ON_TRANSFORM);
         }
@@ -282,25 +305,36 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                 case BAT_1:
                     animToPlay = AnimationPlayerBat1.getFormAnimToPlay(currentState);
                     hasSlowFall = false;
+                    overrideHandAnim = false;
                     break;
                 case BAT_2:
                     animToPlay = AnimationPlayerBat2.getFormAnimToPlay(currentState);
                     hasSlowFall = true;
+                    overrideHandAnim = true;
                     break;
 
                 case AXOLOTL_1:
                     animToPlay = AnimationPlayerAxolotl1.getFormAnimToPlay(currentState);
                     hasSlowFall = false;
+                    overrideHandAnim = false;
                     break;
 
                 case AXOLOTL_2:
                     animToPlay = AnimationPlayerAxolotl2.getFormAnimToPlay(currentState);
                     hasSlowFall = false;
+                    overrideHandAnim = false;
                     break;
 
                 case OCELOT_2:
                     animToPlay = AnimationPlayerOcelot2.getFormAnimToPlay(currentState);
                     hasSlowFall = false;
+                    overrideHandAnim = false;
+                    break;
+
+                case ALLAY_SP:
+                    animToPlay = AnimationPlayerAllaySP.getFormAnimToPlay(currentState);
+                    hasSlowFall = true;
+                    overrideHandAnim = true;
                     break;
                 default:
                     break;
@@ -363,5 +397,31 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         }
 
         currentState = PlayerAnimState.ANIM_TOOL_SWING;
+    }
+
+    public void disableArmAnimations() {
+        if (currentAnimation != null && armAnimationsEnabled) {
+            armAnimationsEnabled = false;
+            ModifierLayer<IAnimation> animationContainer = CONTAINER;
+
+            var builder = currentAnimation.mutableCopy();
+
+            builder.leftArm.setEnabled(false);
+            builder.rightArm.setEnabled(false);
+
+            currentAnimation = builder.build();
+
+            if (modified) {
+                animationContainer.removeModifier(0);
+            }
+
+            modified = true;
+
+            animationContainer.addModifierBefore(new SpeedModifier(1));
+            animationContainer.replaceAnimationWithFade(AbstractFadeModifier.standardFadeIn(5, Ease.LINEAR),
+                    new KeyframeAnimationPlayer(currentAnimation));
+            animationContainer.setupAnim(1.0f / 20.0f);
+            animationContainer.tick();
+        }
     }
 }

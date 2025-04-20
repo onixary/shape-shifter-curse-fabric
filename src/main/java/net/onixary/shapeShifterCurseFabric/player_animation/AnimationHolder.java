@@ -25,6 +25,10 @@ public class AnimationHolder {
         this(PlayerAnimationRegistry.getAnimation(animation_id), isEnabled, 1.0f, 2);
     }
 
+    public AnimationHolder(Identifier animation_id, boolean isEnabled, float speed, int fade) {
+        this(PlayerAnimationRegistry.getAnimation(animation_id), isEnabled, speed, fade);
+    }
+
     public AnimationHolder(@Nullable KeyframeAnimation animation, boolean isEnabled, float speed, int fade) {
         this.isEnabled = isEnabled;
         this.animation = animation;

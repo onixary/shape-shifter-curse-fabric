@@ -1,0 +1,16 @@
+{
+  "type": "origins:conditioned_attribute",
+  "modifier": {
+    "attribute": "minecraft:generic.movement_speed",
+    "operation": "multiply_total",
+    "value": 0.08,
+    "name": "Inc speed when flying"
+  },
+  "tick_rate": 1,
+  "condition": {
+    "condition": {
+      "type": "origins:power_active",
+      "power": "origins:form_allay_sp_levitate"
+    }
+  }
+}

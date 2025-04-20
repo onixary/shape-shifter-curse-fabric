@@ -1,0 +1,9 @@
+{
+  "type": "origins:exhaust",
+  "interval": 5,
+  "exhaustion": 1.333,
+  "condition": {
+      "type": "origins:power_active",
+      "power": "origins:form_allay_sp_levitate"
+  }
+}

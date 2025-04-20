@@ -1,0 +1,9 @@
+{
+  "type": "origins:levitate",
+  "ascent_speed": 0.3,
+  "max_ascend_duration" : 40,
+  "key": {
+    "key": "key.jump",
+    "continuous": true
+  }
+}

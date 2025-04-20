@@ -1,0 +1,23 @@
+{
+  "type": "origins:conditioned_attribute",
+  "modifier": {
+    "attribute": "minecraft:generic.movement_speed",
+    "operation": "multiply_total",
+    "value": -0.25,
+    "name": "Decrease speed when flying"
+  },
+  "tick_rate": 1,
+  "condition": {
+    "type":"origins:and",
+    "conditions":[
+      {
+        "type": "origins:creative_flying"
+      },
+      {
+        "type": "origins:food_level",
+        "comparison": "<",
+        "compare_to": 6
+      }
+    ]
+  }
+}

@@ -15,7 +15,9 @@
     "CursedMoonLightmapMixin",
     "ItemStackMixin",
     "LivingEntityDeathMixin",
-    "PlayerEntityPoseMixin"
+    "PlayerEntityPoseMixin",
+    "CustomEdibleItemMixin",
+    "CancelEntityStepSoundMixin"
   ],
   "injectors": {
     "defaultRequire": 1

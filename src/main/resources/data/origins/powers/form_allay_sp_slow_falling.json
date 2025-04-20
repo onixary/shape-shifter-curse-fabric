@@ -1,6 +1,6 @@
 {
   "type": "apoli:modify_falling",
-  "velocity": 0.01,
+  "velocity": 0.015,
   "take_fall_damage": false,
   "condition": {
     "type": "origins:or",

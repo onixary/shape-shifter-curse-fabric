@@ -10,6 +10,8 @@ import io.github.apace100.calio.data.SerializableDataType;
 import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.passive.ParrotEntity;
+import net.minecraft.entity.player.PlayerEntity;
 
 public class PosePower extends Power implements Prioritized<PosePower> {
 

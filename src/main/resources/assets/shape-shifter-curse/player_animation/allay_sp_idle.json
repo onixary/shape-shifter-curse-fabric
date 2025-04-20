@@ -1,0 +1,36 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"allay_sp_idle": {
+			"loop": true,
+			"bones": {
+				"head": {
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"torso": {
+					"rotation": {
+						"vector": [5, 0, 0]
+					}
+				},
+				"rightArm": {
+					"rotation": {
+						"vector": [-21.81282, 8.80348, 8.90928]
+					},
+					"position": {
+						"vector": [1, 0, -1]
+					}
+				},
+				"leftArm": {
+					"rotation": {
+						"vector": [-16.81282, -8.80348, -8.90928]
+					},
+					"position": {
+						"vector": [-1, 0, -1]
+					}
+				}
+			}
+		}
+	}
+}
