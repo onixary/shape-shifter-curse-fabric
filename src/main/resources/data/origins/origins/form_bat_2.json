@@ -21,7 +21,6 @@
 		"origins:always_harvest",
 		"origins:form_vegetarian_food_up",
 
-		"origins:form_bat_sound",
 		"origins:form_bat_sound_hurt"
 	],
 	"icon": {

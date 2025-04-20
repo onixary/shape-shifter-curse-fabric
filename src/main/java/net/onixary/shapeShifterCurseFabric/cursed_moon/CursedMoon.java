@@ -120,6 +120,9 @@ public class CursedMoon {
                         ShapeShifterCurseFabric.ON_END_CURSED_MOON_CURED_FORM_2.trigger(player);
                     }
                 }
+                else if(FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_SHIFTER){
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon_special").formatted(Formatting.LIGHT_PURPLE));
+                }
                 else if(currentFormComponent.isByCursedMoon()){
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon").formatted(Formatting.LIGHT_PURPLE));
                     // 触发自定义成就

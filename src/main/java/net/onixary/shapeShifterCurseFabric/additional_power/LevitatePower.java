@@ -106,7 +106,7 @@ public class LevitatePower extends Power implements Active {
 
     @Override
     public boolean isActive() {
-        ShapeShifterCurseFabric.LOGGER.info("isLev: " + isLevitate);
+        //ShapeShifterCurseFabric.LOGGER.info("isLev: " + isLevitate);
         return this.isLevitate && super.isActive();
     }
 
