@@ -69,7 +69,18 @@ public class FormArgumentType implements ArgumentType<Identifier> {
             availableForms.add(new Identifier(MOD_ID, "ocelot_1"));
             availableForms.add(new Identifier(MOD_ID, "ocelot_2"));
             availableForms.add(new Identifier(MOD_ID, "allay_sp"));
-
+            availableForms.add(new Identifier(MOD_ID, "alpha_0"));
+            availableForms.add(new Identifier(MOD_ID, "alpha_1"));
+            availableForms.add(new Identifier(MOD_ID, "alpha_2"));
+            availableForms.add(new Identifier(MOD_ID, "beta_0"));
+            availableForms.add(new Identifier(MOD_ID, "beta_1"));
+            availableForms.add(new Identifier(MOD_ID, "beta_2"));
+            availableForms.add(new Identifier(MOD_ID, "gamma_0"));
+            availableForms.add(new Identifier(MOD_ID, "gamma_1"));
+            availableForms.add(new Identifier(MOD_ID, "gamma_2"));
+            availableForms.add(new Identifier(MOD_ID, "omega_sp"));
+            availableForms.add(new Identifier(MOD_ID, "psi_sp"));
+            availableForms.add(new Identifier(MOD_ID, "chi_sp"));
       }
 
       catch(IllegalArgumentException ignored) {}

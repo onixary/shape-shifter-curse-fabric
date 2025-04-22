@@ -224,8 +224,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             return ActionResult.PASS;
         });
 
-        // Debug instinct
-        InstinctDebugHUD.register();
+        /// Debug instinct: unregister this to see instinct debug info
+        //InstinctDebugHUD.register();
 
         /*HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
             PlayerEntity player = MinecraftClient.getInstance().player;

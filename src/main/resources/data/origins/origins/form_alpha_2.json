@@ -1,0 +1,12 @@
+{
+	"powers": [
+		"origins:form_base_scale"
+	],
+	"icon": {
+		"item": "minecraft:player_head"
+	},
+	"order": 0,
+	"unchoosable": true,
+	"impact": 0,
+	"loading_priority": 0
+}

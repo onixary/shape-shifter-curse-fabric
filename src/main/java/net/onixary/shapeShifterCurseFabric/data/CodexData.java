@@ -116,6 +116,67 @@ public class CodexData {
     private static final Text allay_sp_pros = Text.translatable("codex.form.allay_sp.pros");
     private static final Text allay_sp_cons = Text.translatable("codex.form.allay_sp.cons");
     private static final Text allay_sp_instincts = Text.translatable("codex.form.allay_sp.instincts");
+    // custom empty forms
+    private static final Text alpha_0_title = Text.translatable("codex.form.alpha0.title");
+    private static final Text alpha_0_appearance = Text.translatable("codex.form.alpha0.appearance");
+    private static final Text alpha_0_pros = Text.translatable("codex.form.alpha0.pros");
+    private static final Text alpha_0_cons = Text.translatable("codex.form.alpha0.cons");
+    private static final Text alpha_0_instincts = Text.translatable("codex.form.alpha0.instincts");
+    private static final Text alpha_1_title = Text.translatable("codex.form.alpha1.title");
+    private static final Text alpha_1_appearance = Text.translatable("codex.form.alpha1.appearance");
+    private static final Text alpha_1_pros = Text.translatable("codex.form.alpha1.pros");
+    private static final Text alpha_1_cons = Text.translatable("codex.form.alpha1.cons");
+    private static final Text alpha_1_instincts = Text.translatable("codex.form.alpha1.instincts");
+    private static final Text alpha_2_title = Text.translatable("codex.form.alpha2.title");
+    private static final Text alpha_2_appearance = Text.translatable("codex.form.alpha2.appearance");
+    private static final Text alpha_2_pros = Text.translatable("codex.form.alpha2.pros");
+    private static final Text alpha_2_cons = Text.translatable("codex.form.alpha2.cons");
+    private static final Text alpha_2_instincts = Text.translatable("codex.form.alpha2.instincts");
+    private static final Text beta_0_title = Text.translatable("codex.form.beta0.title");
+    private static final Text beta_0_appearance = Text.translatable("codex.form.beta0.appearance");
+    private static final Text beta_0_pros = Text.translatable("codex.form.beta0.pros");
+    private static final Text beta_0_cons = Text.translatable("codex.form.beta0.cons");
+    private static final Text beta_0_instincts = Text.translatable("codex.form.beta0.instincts");
+    private static final Text beta_1_title = Text.translatable("codex.form.beta1.title");
+    private static final Text beta_1_appearance = Text.translatable("codex.form.beta1.appearance");
+    private static final Text beta_1_pros = Text.translatable("codex.form.beta1.pros");
+    private static final Text beta_1_cons = Text.translatable("codex.form.beta1.cons");
+    private static final Text beta_1_instincts = Text.translatable("codex.form.beta1.instincts");
+    private static final Text beta_2_title = Text.translatable("codex.form.beta2.title");
+    private static final Text beta_2_appearance = Text.translatable("codex.form.beta2.appearance");
+    private static final Text beta_2_pros = Text.translatable("codex.form.beta2.pros");
+    private static final Text beta_2_cons = Text.translatable("codex.form.beta2.cons");
+    private static final Text beta_2_instincts = Text.translatable("codex.form.beta2.instincts");
+    private static final Text gamma_0_title = Text.translatable("codex.form.gamma0.title");
+    private static final Text gamma_0_appearance = Text.translatable("codex.form.gamma0.appearance");
+    private static final Text gamma_0_pros = Text.translatable("codex.form.gamma0.pros");
+    private static final Text gamma_0_cons = Text.translatable("codex.form.gamma0.cons");
+    private static final Text gamma_0_instincts = Text.translatable("codex.form.gamma0.instincts");
+    private static final Text gamma_1_title = Text.translatable("codex.form.gamma1.title");
+    private static final Text gamma_1_appearance = Text.translatable("codex.form.gamma1.appearance");
+    private static final Text gamma_1_pros = Text.translatable("codex.form.gamma1.pros");
+    private static final Text gamma_1_cons = Text.translatable("codex.form.gamma1.cons");
+    private static final Text gamma_1_instincts = Text.translatable("codex.form.gamma1.instincts");
+    private static final Text gamma_2_title = Text.translatable("codex.form.gamma2.title");
+    private static final Text gamma_2_appearance = Text.translatable("codex.form.gamma2.appearance");
+    private static final Text gamma_2_pros = Text.translatable("codex.form.gamma2.pros");
+    private static final Text gamma_2_cons = Text.translatable("codex.form.gamma2.cons");
+    private static final Text gamma_2_instincts = Text.translatable("codex.form.gamma2.instincts");
+    private static final Text omega_sp_title = Text.translatable("codex.form.omega_sp.title");
+    private static final Text omega_sp_appearance = Text.translatable("codex.form.omega_sp.appearance");
+    private static final Text omega_sp_pros = Text.translatable("codex.form.omega_sp.pros");
+    private static final Text omega_sp_cons = Text.translatable("codex.form.omega_sp.cons");
+    private static final Text omega_sp_instincts = Text.translatable("codex.form.omega_sp.instincts");
+    private static final Text psi_sp_title = Text.translatable("codex.form.psi_sp.title");
+    private static final Text psi_sp_appearance = Text.translatable("codex.form.psi_sp.appearance");
+    private static final Text psi_sp_pros = Text.translatable("codex.form.psi_sp.pros");
+    private static final Text psi_sp_cons = Text.translatable("codex.form.psi_sp.cons");
+    private static final Text psi_sp_instincts = Text.translatable("codex.form.psi_sp.instincts");
+    private static final Text chi_sp_title = Text.translatable("codex.form.chi_sp.title");
+    private static final Text chi_sp_appearance = Text.translatable("codex.form.chi_sp.appearance");
+    private static final Text chi_sp_pros = Text.translatable("codex.form.chi_sp.pros");
+    private static final Text chi_sp_cons = Text.translatable("codex.form.chi_sp.cons");
+    private static final Text chi_sp_instincts = Text.translatable("codex.form.chi_sp.instincts");
 
 
 
@@ -286,6 +347,104 @@ public class CodexData {
                     case PROS -> allay_sp_pros;
                     case CONS -> allay_sp_cons;
                     case INSTINCTS -> allay_sp_instincts;
+                };
+
+                // custom empty forms
+            case ALPHA_0:
+                return switch (type) {
+                    case TITLE -> alpha_0_title;
+                    case APPEARANCE -> alpha_0_appearance;
+                    case PROS -> alpha_0_pros;
+                    case CONS -> alpha_0_cons;
+                    case INSTINCTS -> alpha_0_instincts;
+                };
+            case ALPHA_1:
+                return switch (type) {
+                    case TITLE -> alpha_1_title;
+                    case APPEARANCE -> alpha_1_appearance;
+                    case PROS -> alpha_1_pros;
+                    case CONS -> alpha_1_cons;
+                    case INSTINCTS -> alpha_1_instincts;
+                };
+            case ALPHA_2:
+                return switch (type) {
+                    case TITLE -> alpha_2_title;
+                    case APPEARANCE -> alpha_2_appearance;
+                    case PROS -> alpha_2_pros;
+                    case CONS -> alpha_2_cons;
+                    case INSTINCTS -> alpha_2_instincts;
+                };
+            case BETA_0:
+                return switch (type) {
+                    case TITLE -> beta_0_title;
+                    case APPEARANCE -> beta_0_appearance;
+                    case PROS -> beta_0_pros;
+                    case CONS -> beta_0_cons;
+                    case INSTINCTS -> beta_0_instincts;
+                };
+            case BETA_1:
+                return switch (type) {
+                    case TITLE -> beta_1_title;
+                    case APPEARANCE -> beta_1_appearance;
+                    case PROS -> beta_1_pros;
+                    case CONS -> beta_1_cons;
+                    case INSTINCTS -> beta_1_instincts;
+                };
+            case BETA_2:
+                return switch (type) {
+                    case TITLE -> beta_2_title;
+                    case APPEARANCE -> beta_2_appearance;
+                    case PROS -> beta_2_pros;
+                    case CONS -> beta_2_cons;
+                    case INSTINCTS -> beta_2_instincts;
+                };
+            case GAMMA_0:
+                return switch (type) {
+                    case TITLE -> gamma_0_title;
+                    case APPEARANCE -> gamma_0_appearance;
+                    case PROS -> gamma_0_pros;
+                    case CONS -> gamma_0_cons;
+                    case INSTINCTS -> gamma_0_instincts;
+                };
+            case GAMMA_1:
+                return switch (type) {
+                    case TITLE -> gamma_1_title;
+                    case APPEARANCE -> gamma_1_appearance;
+                    case PROS -> gamma_1_pros;
+                    case CONS -> gamma_1_cons;
+                    case INSTINCTS -> gamma_1_instincts;
+                };
+            case GAMMA_2:
+                return switch (type) {
+                    case TITLE -> gamma_2_title;
+                    case APPEARANCE -> gamma_2_appearance;
+                    case PROS -> gamma_2_pros;
+                    case CONS -> gamma_2_cons;
+                    case INSTINCTS -> gamma_2_instincts;
+                };
+            case OMEGA_SP:
+                return switch (type) {
+                    case TITLE -> omega_sp_title;
+                    case APPEARANCE -> omega_sp_appearance;
+                    case PROS -> omega_sp_pros;
+                    case CONS -> omega_sp_cons;
+                    case INSTINCTS -> omega_sp_instincts;
+                };
+            case PSI_SP:
+                return switch (type) {
+                    case TITLE -> psi_sp_title;
+                    case APPEARANCE -> psi_sp_appearance;
+                    case PROS -> psi_sp_pros;
+                    case CONS -> psi_sp_cons;
+                    case INSTINCTS -> psi_sp_instincts;
+                };
+            case CHI_SP:
+                return switch (type) {
+                    case TITLE -> chi_sp_title;
+                    case APPEARANCE -> chi_sp_appearance;
+                    case PROS -> chi_sp_pros;
+                    case CONS -> chi_sp_cons;
+                    case INSTINCTS -> chi_sp_instincts;
                 };
         }
         return Text.empty();

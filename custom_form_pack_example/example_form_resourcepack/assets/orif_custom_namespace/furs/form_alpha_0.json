@@ -1,0 +1,17 @@
+{
+    "model": "orif_custom_namespace:geo/form_alpha_0.geo.json",
+  "texture": "orif_custom_namespace:textures/form_alpha_0/form_alpha_0.png",
+  "hidden": [
+    "leftArm",
+    "rightArm",
+    "leftLeg",
+    "rightLeg",
+    "leftSleeve",
+    "rightSleeve",
+    "rightPants",
+    "leftPants"
+  ],
+  "tail_chain": {
+    "tail": [0, 1, 2, 3]
+  }
+}

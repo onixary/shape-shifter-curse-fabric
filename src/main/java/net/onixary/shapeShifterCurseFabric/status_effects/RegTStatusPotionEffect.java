@@ -14,6 +14,13 @@ public class RegTStatusPotionEffect {
     public static final StatusEffect TO_AXOLOTL_0_POTION = register("to_axolotl_0_potion", new ToAxolotlStatusPotion());
     public static final StatusEffect TO_OCELOT_0_POTION = register("to_ocelot_0_potion", new ToOcelotStatusPotion());
     public static final StatusEffect TO_ALLAY_SP_POTION = register("to_allay_sp_potion", new ToAlleyStatusPotion());
+    // empty custom forms
+    public static final StatusEffect TO_ALPHA_0_POTION = register("to_alpha_0_potion", new ToAlphaStatusPotion());
+    public static final StatusEffect TO_BETA_0_POTION = register("to_beta_0_potion", new ToBetaStatusPotion());
+    public static final StatusEffect TO_GAMMA_0_POTION = register("to_gamma_0_potion", new ToGammaStatusPotion());
+    public static final StatusEffect TO_OMEGA_SP_POTION = register("to_omega_sp_potion", new ToOmegaStatusPotion());
+    public static final StatusEffect TO_PSI_SP_POTION = register("to_psi_sp_potion", new ToPsiStatusPotion());
+    public static final StatusEffect TO_CHI_SP_POTION = register("to_chi_sp_potion", new ToChiStatusPotion());
 
     public static <T extends StatusEffect> T register(String path, T effect) {
         return Registry.register(Registries.STATUS_EFFECT, new Identifier(ShapeShifterCurseFabric.MOD_ID, path), effect);

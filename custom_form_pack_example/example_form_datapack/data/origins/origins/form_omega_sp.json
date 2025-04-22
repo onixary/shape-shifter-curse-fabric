@@ -1,0 +1,13 @@
+{
+	"powers": [
+		"origins:form_bat_2_scale",
+		"origins:slow_falling"
+	],
+	"icon": {
+		"item": "minecraft:player_head"
+	},
+	"order": 0,
+	"unchoosable": true,
+	"impact": 2,
+	"loading_priority" : 5
+}

@@ -1,0 +1,16 @@
+{
+	"powers": [
+		"origins:form_bat_2_scale",
+		"origins:slow_falling",
+
+		"origins:form_instinct_use_catalyst",
+		"origins:form_instinct_use_golden_apple"
+	],
+	"icon": {
+		"item": "minecraft:player_head"
+	},
+	"order": 0,
+	"unchoosable": true,
+	"impact": 2,
+	"loading_priority" : 5
+}

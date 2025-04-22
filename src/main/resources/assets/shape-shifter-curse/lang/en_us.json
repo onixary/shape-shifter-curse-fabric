@@ -1,210 +1,389 @@
 ﻿{
-  "advancements.shape-shifter-curse.on_enable_mod.title": ["未知的篇章"],
-  "advancements.shape-shifter-curse.on_enable_mod.description": ["发生了什么？"],
-  "advancements.shape-shifter-curse.on_open_book_of_shape_shifter.title": ["阅读时间"],
-  "advancements.shape-shifter-curse.on_open_book_of_shape_shifter.description": ["打开幻形者之书"],
-  "advancements.shape-shifter-curse.on_end_cursed_moon.title": ["有点眼熟的桥段"],
-  "advancements.shape-shifter-curse.on_end_cursed_moon.description": ["所以它不是永久的。很高兴知道那个"],
-  "advancements.shape-shifter-curse.on_end_cursed_moon_cured.title": ["魔力调和"],
-  "advancements.shape-shifter-curse.on_end_cursed_moon_cured.description": ["我的理论是..黄金的魔力具有强大的稳定性"],
-  "advancements.shape-shifter-curse.on_end_cursed_moon_cured_form_2.title": ["另一种方法"],
-  "advancements.shape-shifter-curse.on_end_cursed_moon_cured_form_2.description": ["嗯。听起来很合理"],
-  "advancements.shape-shifter-curse.on_get_transform_effect.title": ["那个生物不太一样！"],
-  "advancements.shape-shifter-curse.on_get_transform_effect.description": ["尝试靠近散发着咒文的生物，并获取它们所施加的效果"],
-  "advancements.shape-shifter-curse.on_sleep_when_have_transform_effect.title": ["昏昏欲睡？"],
-  "advancements.shape-shifter-curse.on_sleep_when_have_transform_effect.description": ["在咒文效果生效的过程中去睡一觉。又能出什么问题呢？"],
-  "advancements.shape-shifter-curse.on_transform_0.title": ["噢…不妙"],
-  "advancements.shape-shifter-curse.on_transform_0.description": ["所以，这就是你体内的魔法会产生的作用.."],
-  "advancements.shape-shifter-curse.on_transform_1.title": ["只是开始"],
-  "advancements.shape-shifter-curse.on_transform_1.description": ["它不会在这一阶段停下"],
-  "advancements.shape-shifter-curse.on_transform_2.title": ["恭喜！这是永久性的"],
-  "advancements.shape-shifter-curse.on_transform_2.description": ["你目前的形态被改变的如此彻底，已经无法逆转了…是吗？"],
-  "advancements.shape-shifter-curse.on_transform_by_catalyst.title": ["来都来了"],
-  "advancements.shape-shifter-curse.on_transform_by_catalyst.description": ["催化剂”…那是做什么的？"],
-  "advancements.shape-shifter-curse.on_transform_by_cure.title": ["解药"],
-  "advancements.shape-shifter-curse.on_transform_by_cure.description": ["另一种截然不同的魔力"],
-  "advancements.shape-shifter-curse.on_transform_by_cure_final.title": ["那绝对值得"],
-  "advancements.shape-shifter-curse.on_transform_by_cure_final.description": ["黄金的魔力——加强版"],
-  "advancements.shape-shifter-curse.on_transform_effect_fade.title": ["这次不行"],
-  "advancements.shape-shifter-curse.on_transform_effect_fade.description": ["嗯…我感觉我还是喜欢我现在的样子"],
-  "advancements.shape-shifter-curse.on_trigger_cursed_moon.title": ["在紫红色的月光下"],
-  "advancements.shape-shifter-curse.on_trigger_cursed_moon.description": ["当不同颜色的月亮升起时，你感觉体内的魔法与之发生了共鸣.."],
-  "advancements.shape-shifter-curse.on_trigger_cursed_moon_form_2.title": ["两面性"],
-  "advancements.shape-shifter-curse.on_trigger_cursed_moon_form_2.description": ["你恢复了之前的形态..至少在月之魔力消退之前。也许你应该抓住这次机会"],
-  "item.shape-shifter-curse.cursed_book_of_shape_shifter": ["Strange book"],
-  "item.shape-shifter-curse.book_of_shape_shifter": ["Book of Shape Shifter"],
-  "item.shape-shifter-curse.book_of_shape_shifter.tooltip": ["'The secrets of this book will only be revealed to shape shifters'"],
+  "advancements.shape-shifter-curse.on_enable_mod.title": ["Unknown Chapter"],
+  "advancements.shape-shifter-curse.on_enable_mod.description": ["What happened?"],
+  "advancements.shape-shifter-curse.on_open_book_of_shape_shifter.title": ["Reading Time"],
+  "advancements.shape-shifter-curse.on_open_book_of_shape_shifter.description": ["Open the Book of the Shapeshifter"],
+  "advancements.shape-shifter-curse.on_end_cursed_moon.title": ["A Familiar Trope"],
+  "advancements.shape-shifter-curse.on_end_cursed_moon.description": ["So it's not permanent. Good to know"],
+  "advancements.shape-shifter-curse.on_end_cursed_moon_cured.title": ["Magical Harmony"],
+  "advancements.shape-shifter-curse.on_end_cursed_moon_cured.description": ["My theory is... golden magic possesses powerful stability"],
+  "advancements.shape-shifter-curse.on_end_cursed_moon_cured_form_2.title": ["Alternative Approach"],
+  "advancements.shape-shifter-curse.on_end_cursed_moon_cured_form_2.description": ["Successfully borrowed the cursed moon's magic to restore original form"],
+  "advancements.shape-shifter-curse.on_end_cursed_moon_bugged_form_2.title": ["It's a Feature"],
+  "advancements.shape-shifter-curse.on_end_cursed_moon_bugged_form_2.description": ["Yes, this is a characteristic of lunar magic, definitely not a bug"],
+  "advancements.shape-shifter-curse.on_get_transform_effect.title": ["That Creature is Different!"],
+  "advancements.shape-shifter-curse.on_get_transform_effect.description": ["Attempt to approach creatures emanating cursed sigils and obtain their effects"],
+  "advancements.shape-shifter-curse.on_sleep_when_have_transform_effect.title": ["Feeling Drowsy?"],
+  "advancements.shape-shifter-curse.on_sleep_when_have_transform_effect.description": ["Sleep while under the curse's effect. What could possibly go wrong?"],
+  "advancements.shape-shifter-curse.on_transform_0.title": ["Oh... This is Bad"],
+  "advancements.shape-shifter-curse.on_transform_0.description": ["So this is what the magic within you does..."],
+  "advancements.shape-shifter-curse.on_transform_1.title": ["Just the Beginning"],
+  "advancements.shape-shifter-curse.on_transform_1.description": ["It won't stop at this stage"],
+  "advancements.shape-shifter-curse.on_transform_2.title": ["No Returns Accepted"],
+  "advancements.shape-shifter-curse.on_transform_2.description": ["Your current form has been altered so thoroughly that reversal seems impossible... or is it?"],
+  "advancements.shape-shifter-curse.on_transform_by_catalyst.title": ["Activation"],
+  "advancements.shape-shifter-curse.on_transform_by_catalyst.description": ["Use a catalyst while under the curse's effect"],
+  "advancements.shape-shifter-curse.on_transform_by_cure.title": ["Antidote"],
+  "advancements.shape-shifter-curse.on_transform_by_cure.description": ["A completely different type of magic"],
+  "advancements.shape-shifter-curse.on_transform_by_cure_final.title": ["Totally Worth It"],
+  "advancements.shape-shifter-curse.on_transform_by_cure_final.description": ["Golden magic - enhanced edition"],
+  "advancements.shape-shifter-curse.on_transform_effect_fade.title": ["Not This Time"],
+  "advancements.shape-shifter-curse.on_transform_effect_fade.description": ["Hmm... I think I prefer my current form"],
+  "advancements.shape-shifter-curse.on_trigger_cursed_moon.title": ["Under Crimson Moonlight"],
+  "advancements.shape-shifter-curse.on_trigger_cursed_moon.description": ["As the differently colored moon rises, you feel the magic within you resonating with it..."],
+  "advancements.shape-shifter-curse.on_trigger_cursed_moon_form_2.title": ["Duality"],
+  "advancements.shape-shifter-curse.on_trigger_cursed_moon_form_2.description": ["You've regained your previous form... at least until the lunar magic fades. Perhaps you should seize this opportunity"],
+
+  "item.minecraft.potion.effect.moondust_potion": ["Potion of Moondust"],
+  "effect.shape-shifter-curse.moondust_potion": ["The essence of moondust surges within, it requires further processing"],
+  "item.minecraft.potion.effect.to_bat_0_potion": ["Bat Curse Potion"],
+  "effect.shape-shifter-curse.to_bat_0_potion": ["Squeak!"],
+  "item.minecraft.potion.effect.to_allay_sp_potion": ["Allay Sigil Potion"],
+  "effect.shape-shifter-curse.to_allay_sp_potion": ["Amethyst shards! They'll be important"],
+  "item.minecraft.potion.effect.to_axolotl_0_potion": ["Axolotl Curse Potion"],
+  "effect.shape-shifter-curse.to_axolotl_0_potion": ["Better stay moist"],
+  "item.minecraft.potion.effect.to_ocelot_0_potion": ["Ocelot Curse Potion"],
+  "effect.shape-shifter-curse.to_ocelot_0_potion": ["You'll want to stock up on raw meat"],
+  "item.minecraft.potion.effect.to_alpha_0_potion": ["ALPHA"],
+  "effect.shape-shifter-curse.to_alpha_0_potion": ["empty custom alpha form"],
+  "item.minecraft.potion.effect.to_beta_0_potion": ["BETA"],
+  "effect.shape-shifter-curse.to_beta_0_potion": ["empty custom beta form"],
+  "item.minecraft.potion.effect.to_gamma_0_potion": ["GAMMA"],
+  "effect.shape-shifter-curse.to_gamma_0_potion": ["empty custom gamma form"],
+  "item.minecraft.potion.effect.to_omega_sp_potion": ["OMEGA"],
+  "effect.shape-shifter-curse.to_omega_sp_potion": ["empty custom omega special form"],
+  "item.minecraft.potion.effect.to_psi_sp_potion": ["PSI"],
+  "effect.shape-shifter-curse.to_psi_sp_potion": ["empty custom psi special form"],
+  "item.minecraft.potion.effect.to_chi_sp_potion": ["CHI"],
+  "effect.shape-shifter-curse.to_chi_sp_potion": ["empty custom chi special form"],
+
+  "item.shape-shifter-curse.cursed_book_of_shape_shifter": ["Strange Book"],
+  "item.shape-shifter-curse.book_of_shape_shifter": ["Book of the Shapeshifter"],
+  "item.shape-shifter-curse.book_of_shape_shifter.tooltip": ["'This book's secrets are only revealed to shapeshifters'"],
+  "item.shape-shifter-curse.untreated_moondust": ["Untreated Moondust"],
+  "item.shape-shifter-curse.untreated_moondust.tooltip": ["A strange substance dropped by certain creatures during cursed moons"],
+  "item.shape-shifter-curse.moondust_matrix": ["Moondust Matrix"],
+  "item.shape-shifter-curse.moondust_matrix.tooltip": ["Moondust suspended in honey"],
+  "item.shape-shifter-curse.catalyst": ["Catalyst"],
+  "item.shape-shifter-curse.catalyst.tooltip": ["The magic within you seems to react when you touch this"],
+  "item.shape-shifter-curse.inhibitor": ["Inhibitor"],
+  "item.shape-shifter-curse.inhibitor.tooltip": ["The magic within you seems to calm when you touch this"],
+  "item.shape-shifter-curse.powerful_inhibitor": ["Powerful Inhibitor"],
+  "item.shape-shifter-curse.powerful_inhibitor.tooltip": ["Contains enhanced golden magic"],
+
   "screen.shape-shifter-curse.book_of_shape_shifter.start_content_text":
   [
-    "当你试图翻开这本书时，你感觉到伴随着一阵微弱的刺痛，从书中溢出的奇特魔法从指尖流进了你的身体，让你如同触电一般将手缩了回去\n",
-    "这可能是某种",{
-    "text": "诅咒",
-    "color": "#0096FF"
-  }, "么？你不知道\n",
-    "不过你可以确信的是继续打开这本书会导致一些", {
-    "text": "未知的后果\n\n",
-    "color": "#0096FF"
-  },
+    "As you attempt to open the book, you feel strange magic flowing into your body through your fingertips with a faint tingling sensation, making you jerk your hand back instinctively\n",
+    "Could this be some kind of",
     {
-      "text": "注意：\n这会开启幻形者诅咒的模组内容\n这并不算是一个适合所有人的模组，在继续前，请确保你了解其主题与玩法",
+      "text": "curse",
+      "color": "#0096FF"
+    },
+    "? You're not sure\n",
+    "However, you're certain that continuing to open this book will lead to ",
+    {
+      "text": "unknown consequences\n\n",
+      "color": "#0096FF"
+    },
+    {
+      "text": "Warning:\nThis will activate the Shapeshifter's Curse mod content\nThis mod isn't for everyone. Before proceeding, ensure you understand its themes and gameplay",
       "color": "#ed721d"
     }
   ],
-  "screen.shape-shifter-curse.book_of_shape_shifter.start_button_text": ["Open the book of the shape shifter"],
-  "info.shape-shifter-curse.on_enable_mod": ["随着书页的开启，书中封印的强大魔法涌入了你的身体！"],
-  "info.shape-shifter-curse.on_enable_mod_after": ["回过神时，你发现自己...似乎没什么变化？\n也许你应该检查一下书中的内容.."],
-  "info.shape-shifter-curse.before_cursed_moon": ["You feel that the magic in your body is surging. The next night, the cursed moon will rise..."],
-  "info.shape-shifter-curse.on_cursed_moon": ["The magic in your body has begun to surge. The cursed moon has risen"],
-  "info.shape-shifter-curse.on_cursed_moon_before_enable": ["Tonight's moon looks a bit strange, with some blue flowers you've never seen before appearing in the moonlight..."],
-  "info.shape-shifter-curse.end_cursed_moon": ["The influence of the cursed moon has faded. The magic in your body tends to calm down, allowing you to return to the state before the cursed moon"],
-  "info.shape-shifter-curse.end_cursed_moon_by_cure": ["The influence of the cursed moon has faded. However, due to the power of gold, your current form has stabilized"],
-  "info.shape-shifter-curse.origin_form_sleep_when_attached": ["In your sleep, the curse you received has intensified the magic in your body, causing your body to change..."],
-  "info.shape-shifter-curse.origin_form_time_end_when_attached": ["The curse you received gradually faded, and the magic in your body returned to calm"],
-  "info.shape-shifter-curse.origin_form_used_cure": ["The power of gold has calmed the magic in your body for a moment, but it quickly returned to 'normal'. To truly dispel it, you may need to find another way..."],
-  "info.shape-shifter-curse.transformed_by_cure": ["The power of gold has successfully reversed your transformation! Although only a part of it..."],
-  "info.shape-shifter-curse.max_form_used_cure": ["The power of gold has no effect on your current form... It seems that only some more",
+  "screen.shape-shifter-curse.book_of_shape_shifter.start_button_text": ["Open the Book of the Shapeshifter"],
+
+  "info.shape-shifter-curse.on_enable_mod": ["As the pages open, powerful magic sealed within the book floods into your body!"],
+  "info.shape-shifter-curse.on_enable_mod_after": ["When you regain your senses, you notice... you seem unchanged?\nPerhaps you should check the book's contents.."],
+  "info.shape-shifter-curse.before_cursed_moon": ["You feel magic stirring within you. The cursed moon will rise next night..."],
+  "info.shape-shifter-curse.before_cursed_moon_nether": ["You feel magic stirring within you. The cursed moon will rise somewhere soon—even in other dimensions, you can't escape its influence"],
+  "info.shape-shifter-curse.on_cursed_moon": ["The magic within you surges—the cursed moon has risen"],
+  "info.shape-shifter-curse.on_cursed_moon_nether": ["The magic within you surges—the cursed moon has risen somewhere"],
+  "info.shape-shifter-curse.on_cursed_moon_special": ["Strangely, it doesn't seem to visibly affect your current [special] form..."],
+  "info.shape-shifter-curse.on_cursed_moon_before_enable": ["Tonight's moon looks peculiar. Whether due to its influence or not, monsters have become restless"],
+  "info.shape-shifter-curse.end_cursed_moon": ["The cursed moon's influence fades. Your magic calms, returning you to your pre-moon form"],
+  "info.shape-shifter-curse.end_cursed_moon_special": ["The cursed moon's influence fades. Your magic calms"],
+  "info.shape-shifter-curse.origin_form_sleep_when_attached": ["In your sleep, the curse's magic intensified, altering your body..."],
+  "info.shape-shifter-curse.origin_form_time_end_when_attached": ["The curse's effects fade. The magic within you quiets down"],
+  "info.shape-shifter-curse.end_cursed_moon_by_cure": ["The cursed moon's influence fades. Golden magic stabilizes your current form"],
+  "info.shape-shifter-curse.origin_form_used_cure": ["Golden magic briefly quiets your magic, but it soon resurges. To truly dispel it, you might need other methods..."],
+  "info.shape-shifter-curse.transformed_by_cure_0": ["Golden magic successfully reversed your transformation! Your magic stabilizes"],
+  "info.shape-shifter-curse.transformed_by_cure": ["Golden magic partially reversed your transformation!"],
+  "info.shape-shifter-curse.max_form_used_cure": ["Golden magic has no effect on your current form... Only some ",
     {
-      "text": "powerful influence",
+      "text": "greater influence",
       "color": "#ed721d"
     },
-    "may be able to reverse it"],
-  "info.shape-shifter-curse.origin_form_used_cure_final": ["Disappointingly, the magic in your body returned to 'normal' after calming down for a moment. \nIt seems that the power of gold is not enough to completely dispel the curse's influence on you..."],
-  "info.shape-shifter-curse.transformed_by_cure_final": ["The powerful power of gold has almost completely reversed your transformation! But you can still feel the dormant magic in your body, waiting for the next opportunity..."],
-  "info.shape-shifter-curse.max_form_used_cure_final": ["It worked! The more powerful power of gold has successfully reversed a part of the changes in your body"],
-  "info.shape-shifter-curse.origin_form_used_catalyst": ["Affected by the catalyst, the magic in your body is a bit restless, but it eventually calms down. It seems that they lack a more clear direction...?"],
-  "info.shape-shifter-curse.origin_form_used_catalyst_attached": ["The effects of the curse you received have been activated by the catalyst, causing your body to change..."],
-  "info.shape-shifter-curse.transformed_by_catalyst": ["Affected by the catalyst, the magic in your body has further changed you..."],
-  "info.shape-shifter-curse.max_form_used_catalyst": ["Your current form has been changed so thoroughly that even the catalyst is difficult to produce further effects..\n(Don't be disappointed, I may add what you're thinking of in the mod later!)"],
-  "entity.shape-shifter-curse.t_bat": ["Charm Bat"],
-  "item.shape-shifter-curse.custom_bat_spawn_egg": ["Charm Bat Spawn Egg"],
+    " might reverse it"],
+  "info.shape-shifter-curse.origin_form_used_cure_final": ["Disappointingly, the magic briefly calms then resurges. It seems golden magic isn't sufficient to fully dispel the curse..."],
+  "info.shape-shifter-curse.transformed_by_cure_final": ["Powerful golden magic nearly completely reversed your transformation! The magic within lies dormant, awaiting the next opportunity..."],
+  "info.shape-shifter-curse.max_form_used_cure_final": ["It worked! Enhanced golden magic reversed part of your transformation"],
+  "info.shape-shifter-curse.origin_form_used_catalyst": ["The catalyst agitates your magic, which eventually settles. It seems they need clearer direction..."],
+  "info.shape-shifter-curse.origin_form_used_catalyst_attached": ["The catalyst activated the curse's magic, altering your body..."],
+  "info.shape-shifter-curse.use_catalyst": ["The catalyst further excites the magic within..."],
+  "info.shape-shifter-curse.max_form_used_catalyst": ["Your current form is so thoroughly altered that even catalysts have minimal effect..\n(Don't worry, maybe I'll add that feature you're thinking of later!)"],
+  "info.shape-shifter-curse.sp_form_used_catalyst": ["Your current form contains special magic that catalysts can't influence..."],
+
+  "entity.shape-shifter-curse.t_bat": ["Cursed Bat"],
+  "item.shape-shifter-curse.custom_bat_spawn_egg": ["Cursed Bat Spawn Egg"],
+  "entity.shape-shifter-curse.t_axolotl": ["Cursed Axolotl"],
+  "item.shape-shifter-curse.custom_axolotl_spawn_egg": ["Cursed Axolotl Spawn Egg"],
+  "entity.shape-shifter-curse.t_ocelot": ["Cursed Ocelot"],
+  "item.shape-shifter-curse.custom_ocelot_spawn_egg": ["Cursed Ocelot Spawn Egg"],
+
   "effect.shape-shifter-curse.to_bat_0_effect": [
-    "...that strange",
+    "...Strange ",
     {
-      "text": "bat", "color": "#0096FF"
+      "text": "bat",
+      "color": "#0096FF"
     },
     "?"
+  ],
+  "effect.shape-shifter-curse.to_axolotl_0_effect": [
+    "...Strange ",
+    {
+      "text": "axolotl",
+      "color": "#0096FF"
+    },
+    "?"
+  ],
+  "effect.shape-shifter-curse.to_ocelot_0_effect": [
+    "...Strange ",
+    {
+      "text": "ocelot",
+      "color": "#0096FF"
+    },
+    "?"
+  ],
+  "effect.shape-shifter-curse.to_allay_sp_effect": [
+    {
+      "text": "Allay",
+      "color": "#0096FF"
+    },
+    " sigil...?"
   ],
   "effect.shape-shifter-curse.to_bat_0_effect.description": [
-    "You suddenly feel very",
+    "You suddenly feel extremely ",
     {
-      "text": "sleepy", "color": "#0096FF"
+      "text": "drowsy",
+      "color": "#0096FF"
     },
-    ", maybe you should",
+    ", maybe you should ",
     {
-      "text": "take a nap", "color": "yellow"
+      "text": "sleep",
+      "color": "yellow"
     },
     "?"
   ],
-  "commands.shape-shifter-curse.form_not_found": ["Form not found!"],
+  "effect.shape-shifter-curse.to_alpha_0_effect": ["ALPHA"],
+  "effect.shape-shifter-curse.to_beta_0_effect": ["BETA"],
+  "effect.shape-shifter-curse.to_gamma_0_effect": ["GAMMA"],
+  "effect.shape-shifter-curse.to_omega_sp_effect": ["OMEGA"],
+  "effect.shape-shifter-curse.to_psi_sp_effect": ["PSI"],
+  "effect.shape-shifter-curse.to_chi_sp_effect": ["CHI"],
+
+  "commands.shape-shifter-curse.form_not_found": ["Specified form not found!"],
+
   "codex.header.status": ["Status"],
   "codex.header.appearance": ["Appearance"],
-  "codex.header.pros": ["Pros"],
-  "codex.header.cons": ["Cons"],
+  "codex.header.pros": ["Abilities"],
+  "codex.header.cons": ["Drawbacks"],
   "codex.header.instincts": ["Instincts"],
-  "codex.status.normal": ["Currently, you feel nothing special"],
-  "codex.status.infected": ["For some reason, you suddenly feel a strange",
+
+  "codex.status.normal": ["Currently, you feel nothing unusual\n"],
+  "codex.status.infected": ["For unknown reasons, you're overwhelmed by sudden ",
     {
-      "text": "drowsiness", "color": "#0096FF"
+      "text": "drowsiness",
+      "color": "#0096FF"
     },
-    ", and you feel that the magic in your body is changing\nMaybe you should",
+    ", while sensing magical changes within\nPerhaps you should ",
     {
-      "text": "take a nap", "color": "yellow"
+      "text": "sleep",
+      "color": "yellow"
     },
-    "?"],
-  "codex.status.before_moon": ["You feel that the magic in your body is surging, and the next night, the cursed moon will rise..."],
-  "codex.status.under_moon": ["The influence of the cursed moon has changed your body...\nAs the night ends, this influence will also fade. But... maybe you should take advantage of this opportunity?"],
-  "codex.desc.appearance_normal": ["Your body feels no different from usual. Perhaps the magic in your body needs some kind of trigger to take effect?"],
-  "codex.desc.pros_normal": ["Currently, the magic in your body has not brought you any perceivable benefits"],
-  "codex.desc.cons_normal": ["Currently, the magic in your body has not brought you any disadvantages"],
-  "codex.desc.instincts_normal": ["Examine your heart, you do perceive some kind of magic in your body, but that's all.\nYour heart is calm, maintaining a perception of the surrounding environment"],
-  "codex.desc.appearance_0": ["Due to the resonance of the magic in your body with other creatures, your body has undergone some changes. At this stage, a golden apple is enough to completely reverse it..."],
-  "codex.desc.pros_0": ["Your new form gives you some additional abilities..."],
-  "codex.desc.cons_0": ["At the same time, your new form also brings some inconveniences..."],
-  "codex.desc.instincts_0": ["Instincts from other creatures invade your heart\nIf you insist on resisting them, the unstable magic in your body may further change your body..."],
-  "codex.desc.appearance_1": ["The intensified magic has further changed your body. You perceive that it is trying to reach a new equilibrium, a state that is completely different from your original self.\nPerhaps it is a good idea to reverse it with a golden apple before it enters the next stage..."],
-  "codex.desc.pros_1": ["Your new form gives you more additional abilities..."],
-  "codex.desc.cons_1": ["At the same time, your new form also brings some new inconveniences..."],
-  "codex.desc.instincts_1": ["The influence of the instincts of other creatures in your heart is becoming more and more obvious\nIf you insist on resisting them, the unstable magic in your body may further change your body..."],
-  "codex.desc.appearance_2": ["The magic in your body has almost completely changed you. It has reached a new stable state, and even a golden apple is of no avail..."],
-  "codex.desc.pros_2": ["Your form has these powers"],
-  "codex.desc.cons_2": ["At the same time, your form also has some inconvenient places..."],
-  "codex.desc.instincts_2": ["Your instincts no longer bother you, they have become a part of you"],
-  "codex.form.original.title": ["Overall, in the eyes of others, you are a completely normal human"],
+    "?\n"],
+  "codex.status.before_moon": ["You feel magic stirring within. The cursed moon will rise next night...\n"],
+  "codex.status.under_moon": ["The cursed moon alters your body...\nIts effects fade at dawn. But... perhaps you should utilize this opportunity?\n"],
+
+  "codex.desc.appearance_normal": ["Your body feels no different than usual. Maybe your internal magic needs certain triggers to manifest?"],
+  "codex.desc.pros_normal": ["Currently, the magic within grants no noticeable benefits"],
+  "codex.desc.cons_normal": ["Currently, the magic within causes no negative effects"],
+  "codex.desc.instincts_normal": ["Examining yourself, you sense magic within your body, but nothing more.\nYour mind remains calm, maintaining awareness of surroundings"],
+
+  "codex.desc.appearance_0": ["Magical resonance with creatures causes physical changes. At this stage, a golden apple can completely reverse them..."],
+  "codex.desc.pros_0": ["Your new form grants special abilities..."],
+  "codex.desc.cons_0": ["Your new form brings inconveniences..."],
+  "codex.desc.instincts_0": ["New thoughts emerge in your mind..."],
+
+  "codex.desc.appearance_1": ["Intensified magic further alters your body. You sense it seeking new equilibrium - completely different from your original self.\nUsing a golden apple before progression might be wise..."],
+  "codex.desc.pros_1": ["Your form grants enhanced abilities..."],
+  "codex.desc.cons_1": ["Your form brings new limitations..."],
+  "codex.desc.instincts_1": ["Creature instincts grow stronger... Maybe resist them"],
+
+  "codex.desc.appearance_2": ["The magic has nearly remade you. It's stabilized - even golden apples can't help...\nUnless some ",
+    {
+      "text": "greater influence",
+      "color": "#ed721d"
+    },
+    " reignites its flow..."],
+  "codex.desc.pros_2": ["Your form possesses these strengths"],
+  "codex.desc.cons_2": ["Your form has these limitations..."],
+  "codex.desc.instincts_2": ["Instincts no longer disturb you - they've become part of you"],
+
+  "codex.form.original.title": ["\nOverall, you are a normal human being"],
   "codex.form.original.appearance": [" "],
   "codex.form.original.pros": [" "],
   "codex.form.original.cons": [" "],
   "codex.form.original.instincts": [" "],
-  "codex.form.bat0.title": ["Overall, if you manage to hide the anomalies on your body, others will think you are a bit of a strange human"],
-  "codex.form.bat0.appearance": ["Your arms extend membranous appendages on the outside, feeling a bit like a bat\nYour coccyx also protrudes outward to form a small tail\nBut other than that, they seem to have little practical function"],
-  "codex.form.bat0.pros": ["When in the dark, you feel more agile in your actions"],
-  "codex.form.bat0.cons": ["You can no longer wear chest armor: your new appendages make them ill-fitting."],
-  "codex.form.bat0.instincts": ["Stay in the dark makes you feel",
+
+  "codex.form.axolotl0.title": ["\nThe curse has caused some visible changes to your body. Additionally, you feel an impulse to immerse yourself in water."],
+  "codex.form.axolotl0.appearance": ["Pale red tufts have grown on both sides of your cheeks, always moist and seemingly helping you absorb some oxygen\nYou notice wavy translucent fin membranes beginning to form at the ends of your limbs and on your newly grown tail\nYour skin appears to have become somewhat damp"],
+  "codex.form.axolotl0.pros": ["Thanks to the new oxygen supply, you can stay underwater longer\nYour skin creates less drag underwater, allowing slightly faster movement in water"],
+  "codex.form.axolotl0.cons": ["Your skin more easily collects sand, slightly slowing your movement on sandy terrain"],
+  "codex.form.axolotl0.instincts": ["You begin to desire to",
     {
-      "text":"comfortable", "color":"green"
-    },"\n\nThe idea of eating fruit makes you feel",
-    {
-      "text":"comfortable", "color":"green"
-    },"\n\nThe idea of being surrounded by dripping stones or stalactites makes you feel",
-    {
-      "text":"comfortable", "color":"green"
-    },"\n\nThe idea of staying in the sun makes you feel",
-    {
-      "text":"uncomfortable", "color":"red"
+      "text":"stay in water", "color":"#c67681"
     }],
-  "codex.form.bat1.title": ["Overall, others might think you belong to an alien race."],
-  "codex.form.bat1.appearance": [
-    "Your ears are now located on top of your head, large and pointed, facing forward.\n",
-    "The membrane-covered appendages on your arms have grown longer. When you jump, you find yourself involuntarily flapping them.\n",
-    "Your fingers have become claw-like, making fine manipulations difficult. However, you can still grasp items normally.\n",
-    "Your toes have elongated and spread outward.\n",
-    "Your tail has grown significantly longer.\n",
-    "You seem to have shrunk in size slightly.\n"
-  ],
-  "codex.form.bat1.pros": [
-    "You can now clearly distinguish objects in the dark.\nYour arms have become stronger, enhancing your melee attack power.\nThough still unable to fly, flapping your membranes allows you to jump higher.\nYour body now absorbs non-meat foods more efficiently, they provide more satiety.\nWhen in shadowed areas, you feel more agile and swift."
-  ],
-  "codex.form.bat1.cons": [
-    "Your finger structure now makes using bows or crossbows nearly impossible.\nThe membranes and new toe structure prevent wearing chest armor or shoes.\nIn sunlight, you feel weaker and slower.\nYour body no longer efficiently digests meat; they provide less satiety."
-  ],
-  "codex.form.bat1.instincts": [
-    "The thought of staying in the dark makes you feel",
+  "codex.form.axolotl1.title": ["\nYour developed gills and powerful tail allow you to freely explore submerged structures. Freshly caught fish are now your ideal food"],
+  "codex.form.axolotl1.appearance": ["The gill tufts on your cheeks have grown further. In water, they can supply nearly all the oxygen you need\nThe fin membranes on your body have expanded, covering more areas. Their colors appear more vibrant\nYour tail has lengthened further and grown stronger\nYour neck has sprouted highly absorbent white fuzz"],
+  "codex.form.axolotl1.pros": ["With your more developed gills, you can breathe underwater without needing air\nYour movement in water is slightly faster\nYour body digests raw fish more efficiently, gaining more satiation from them\nYour powerful tail lets you leap from water surfaces to reach higher places"],
+  "codex.form.axolotl1.cons": ["You can no longer wear helmets: your gills cannot tolerate foreign objects touching them\nYour skin more easily collects sand, slightly slowing movement on sandy terrain\nYour current digestive system can no longer process non-meat foods"],
+  "codex.form.axolotl1.instincts": ["You increasingly want to",
     {
-      "text": "comfortable", "color": "green"
+      "text":"stay in water", "color":"#c67681"
     },
-    "\nThe idea of eating some fruit makes you feel",
     {
-      "text": "comfortable", "color": "green"
+      "text":"\nEat more raw fish", "color":"#c67681"
+    },"The thought begins to attract you",
+    {
+      "text":"\nWander among dripstone clusters", "color":"#c67681"
+    },"The thought begins to attract you"],
+  "codex.form.axolotl2.title": ["\nAs an amphibian, you're a predator in water while still capable of land movement - just remember to stay moist"],
+  "codex.form.axolotl2.appearance": ["Your tail now resembles an extension of your torso, occupying nearly half your height\nDeveloped gill tufts take up much space on your head. They almost replace lungs - as long as they stay moist, you can get ample oxygen without breathing\nTranslucent fin membranes have spread across most of your body. Underwater, they rhythmically undulate with the currents\nWhite fuzz nearly covers your chest and back. Like sponges, they store water to keep you moist on land for extended periods"],
+  "codex.form.axolotl2.pros": ["Due to reliance on gill respiration, you must stay moist at all times -\nYour oxygen meter now indicates moisture level. It replenishes in water and slowly depletes on land\nDrinking water bottles or any potions also replenishes moisture\n\nYour body draws strength from water. When moisture isn't zero, your max health increases significantly\n\nRaw fish provides greater satiation\nDeveloped fin membranes and strong tail let you move faster in water. They allow leaping from water and help you hover without sinking\nBlunt claws at limb ends enhance underwater grip, letting you break blocks underwater without hindrance\nBody changes allow crawling quickly through tight spaces"],
+  "codex.form.axolotl2.cons": ["Moisture is now your lifeline. When depleted, your max health and movement speed decrease dramatically, making movement nearly impossible\n\nYou can no longer wear helmets\nYour movement is slower on sandy terrain\nYou can only eat meat"],
+  "codex.form.axolotl2.instincts": [" "],
+
+  "codex.form.ocelot0.title": ["\nThe curse has caused some visible changes. You notice your body moves more naturally when sneaking"],
+  "codex.form.ocelot0.appearance": ["Your ears have moved to the top of your head, covered in mottled fur, shaped between triangles and semicircles - somewhat resembling a feline's\nYour limb extremities are covered in spotted white fur, resembling thick gloves or socks. Underneath, your fingers seem altered - stronger than before\nFur also grows around your neck, resembling a scarf from afar\nShort dense fur covers your abdomen, providing warmth\nA small tail extends from your tailbone, covered in gray-white fur. When moving, it slightly affects your balance"],
+  "codex.form.ocelot0.pros": ["Your body is more coordinated, increasing sneaking speed\nRotten flesh is trivial for your new digestive system. You no longer get abnormal hunger\nCreepers seem strangely afraid of you"],
+  "codex.form.ocelot0.cons": ["Your body isn't as strong as before - max health slightly decreased\nYour digestive system adapts less to non-meat foods - they provide less satiation"],
+  "codex.form.ocelot0.instincts": ["You begin to desire",
+    {
+      "text":"eating more raw meat", "color":"#c67681"
+    }],
+  "codex.form.ocelot1.title": ["\nMore feline traits let you climb trees freely and deliver deadly blows with powerful forepaws. Raw meat now seems more appealing than cooked"],
+  "codex.form.ocelot1.appearance": ["Mottled fur now covers most of your chest, abdomen and back. Connecting to your neck fur, it resembles a cloak\nSpotted white fur extends further up your limbs. Underneath, your hands and feet structure becomes more feline - retractable claws and cushioning pads\nWhile lengthening, your tail grows more flexible and powerful. It helps mid-air balance but increasingly affects your walking/running posture"],
+  "codex.form.ocelot1.pros": ["Your claws become deadly, dealing heavy damage barehanded and letting you climb trees and leaves freely\nThe longer tail helps balance when crouching, allowing near-running sneaking speed and unimpeded jumping\nYour footsteps become nearly silent\nYour digestive system strengthens - fresh raw meat provides more satiation, rotten flesh won't cause hunger\nCreepers avoid you\nYou excel at mid-air posture adjustment, preventing fall damage from any height"],
+  "codex.form.ocelot1.cons": ["A strange uncoordinated feeling slows your sprinting, as if your body prefers different movement\nWhile more lethal, your body becomes more fragile. Max health decreases further\nOther armor feels too heavy. You can only wear leather or chainmail\nYou can no longer digest non-meat foods"],
+  "codex.form.ocelot1.instincts": ["You increasingly want to",
+    {
+      "text":"eat more raw meat", "color":"#c67681"
     },
-    "\nThe thought of being surrounded by dripstone or stalagmites makes you feel",
+    "\nYou feel an inner urge to",
     {
-      "text": "comfortable", "color": "green"
+      "text":"hunt more livestock", "color":"#c67681"
     },
-    "\n\nThe idea of staying in sunlight makes you feel",
+    "\nYou feel an inner urge to",
     {
-      "text": "uncomfortable", "color": "red"
+      "text":"climb to treetops", "color":"#c67681"
+    }],
+  "codex.form.ocelot2.title": ["\nQuadrupedal movement now feels most natural. When crouching, you're nearly indistinguishable from certain large felines"],
+  "codex.form.ocelot2.appearance": ["Your head ears grow larger and more flexible - you notice they automatically turn toward sound sources\nYour entire body now sports black-spotted fur. Very warm - you'd hate it getting wet\nYour hind legs fully become digitigrade, though you can still stand upright barely\nWith powerful quadruped claws and a tail nearly matching torso length, you can low-center sprint and pounce across fields and forests rapidly. No prey escapes your claws"],
+  "codex.form.ocelot2.pros": ["Thanks to body changes, sneaking enters a quadrupedal hunting stance\nIn hunting stance, you sprint extremely fast and enter 1-block-high spaces\nIn hunting stance, jumps become pounces covering great distances\n\nFeline eyes let you see clearly even at night\nBarehanded forepaws deal heavy damage\nYour claws enable climbing trees and leaves\nYou make no footsteps and take no fall damage\nFresh raw meat provides more satiation\nYour body grants strong immunity - no hunger or poison effects\nCreepers avoid you"],
+  "codex.form.ocelot2.cons": ["In hunting stance, enhanced physicality rapidly consumes satiation. Below threshold, you can't maintain stance\n\nDigitigrade hind legs make bipedal sprinting impossible\nBecoming smaller and lighter further reduces max health\nAs a swift lethal hunter, you can only wear leather/chainmail. You also can't effectively block damage with shields\nFaster metabolism increases natural satiation depletion\nYour digestive system changes further - raw meat becomes your only edible food"],
+  "codex.form.ocelot2.instincts": [" "],
+
+  "codex.form.bat0.title": ["\nThe curse has affected your body, making you resemble certain chiropterans. You feel darkness attracting you."],
+  "codex.form.bat0.appearance": ["Membranous appendages extend from your arms' outer sides\nYour tailbone protrudes outward forming a small tail\nBeyond this, they seem functionally limited"],
+  "codex.form.bat0.pros": ["In darkness, you feel more agile"],
+  "codex.form.bat0.cons": ["You can't wear chestplates: new appendages make them incompatible"],
+  "codex.form.bat0.instincts": ["You begin to desire to",
+    {
+      "text":"stay in darkness", "color":"#c67681"
+    }],
+  "codex.form.bat1.title": ["\nNew vision and strength make you adept in caves and nighttime darkness. Just thinking about sunlight now discomforts you."],
+  "codex.form.bat1.appearance": ["Your ears now crown your head - large, pointed and forward-facing\nArm membranes have grown further - when jumping you instinctively flap them\nYour fingers now somewhat resemble claws, preventing delicate operations though you can still grasp items\nYour toes have elongated - thin and long\nYour tail has lengthened further\nYou seem slightly smaller"],
+  "codex.form.bat1.pros": ["You now see clearly in darkness\nYour arms grow stronger, increasing melee damage\nWhile still flightless, membrane flapping lets you jump higher\nYour body absorbs non-meat foods more efficiently - increased satiation\nIn darkness, you feel more agile"],
+  "codex.form.bat1.cons": ["Your new finger structure makes using bows/crossbows impossible\nMembranes and new toe structure prevent wearing chestplates and boots\nIn sunlight, you feel weaker and slower\nYour body adapts less to meat - it provides less satiation"],
+  "codex.form.bat1.instincts": ["You increasingly want to",
+    {
+      "text":"stay in darkness", "color":"#c67681"
     },
-    "\nThe thought of eating meat makes you feel",
     {
-      "text": "uncomfortable", "color": "red"
-    },
-    "\nThe idea of sleeping and wasting a beautiful night makes you feel",
+      "text":"\nEat more fruits", "color":"#c67681"
+    },"The thought begins to attract you",
     {
-      "text": "uncomfortable", "color": "red"
-    }
-  ],
-  "codex.form.bat2.title": [
-    "Overall, others would see you as a large, strange bat."
-  ],
-  "codex.form.bat2.appearance": [
-    "Your ears now dominate your head, allowing detection of the faintest sounds.\nYour face has developed into a short muzzle with sharp small teeth visible.\nYour arms have become part of the membrane. While still too heavy for flight, they suffice for controlled descents and dives.\nYour forelimbs are no longer suited for heave tool or weapon use.\nNew claws, digitigrade legs, and a balancing tail make you well-suited for diving and gliding. You can still run with effort.\nIn cold caves, your fur helps maintain warmth."
-  ],
-  "codex.form.bat2.pros": [
-    "You can distinguish objects in darkness. In shadowed areas, you feel more agile and swift.\nYour forelimbs are hard and strong, allowing significant unarmed damage. They also enable fast blockbreaking and harvesting of ores normally.\nThough still unable to fly, flapping membranes allows higher jumps and controlled descents from any height; they can function as elytra too.\nYour body now absorbs non-meat foods more efficiently, they provide more satiety.\nYou are now small enough to fit through one-block spaces; though larger than other similar creatures."
-  ],
-  "codex.form.bat2.cons": [
-    "Your forelimbs cannot grip heavy tools or weapons; using them on hard blocks or attacking causes them to slip off.\nUsing using bows or crossbows is impossible with your current claw structure.\nThe membrane and digitigrade legs prevent wearing chestplate, leggings, or boots. They also slightly slow ground movement.\nSunlight weakens and slows you considerably.\nYou can no longer eat meat; your body cannot digest it."
-  ],
-  "codex.form.bat2.instincts": [
-    " "
-  ]
+      "text":"\nBe surrounded by dripstones", "color":"#c67681"
+    },"The thought begins to attract you"],
+  "codex.form.bat2.title": ["\nAs a chiropteran, you enjoy gliding through night skies with your kind."],
+  "codex.form.bat2.appearance": ["Your ears now dominate much head space, detecting minute sounds\nYour face extends forward forming a short muzzle with sharp tiny teeth\nYour arms fully integrate with wing membranes. Though still too heavy for free flight, they suffice for gliding and diving\nYour foreclaws can't handle bulky tools/weapons\nNew foot claws, digitigrade legs and balancing long tail suit diving/gliding. With effort, you can still run\nBody fuzz maintains warmth in chilly caves"],
+  "codex.form.bat2.pros": ["You now see clearly in darkness. In darkness, you also feel more agile\nYour foreclaws are hard and strong, dealing decent barehanded damage. They let you rapidly break blocks and normally harvest ores\nWhile still flightless, membrane flapping boosts jump height and enables slow descent from any height. They function like elytra\nYour body absorbs non-meat foods more efficiently - increased satiation\nYour size lets you squeeze into 1-block spaces"],
+  "codex.form.bat2.cons": ["Your foreclaws can't grip bulky tools/weapons. When breaking hard blocks or hitting mobs, they just drop\nYour foreclaws struggle to even lift bows/crossbows, let alone use them\nMembranes and digitigrade legs prevent wearing chestplates, leggings and boots. They slightly slow ground movement\nIn sunlight, you feel extremely weak and slow\nYou can't eat meat - your body can't digest it anymore"],
+  "codex.form.bat2.instincts": [" "],
+  "codex.form.allay_sp.title": ["\nYou now closely resemble a friendly spectral creature, though unclear if due to internal magic, you exhibit some unique features"],
+  "codex.form.allay_sp.appearance": ["Your body now consists of light blue translucent gauze-like substance. Extremely light, letting you float\nFeathery antenna-like structures grow from your forehead - very flexible. They grant new senses detecting nearby creatures' locations\nBranch-like wings sprout from your back. With them, you can hover through skies. Below wings, two ribbon-like extensions emerge - purpose unclear, possibly compensating lost leg functions"],
+  "codex.form.allay_sp.pros": ["Your more spectral physique grants new abilities -\nYour actions now barely consume satiation\nHolding jump lets you ascend and hover freely midair. You also descend slowly\n\nFloating means no footsteps\nAmethyst resonates strangely with you: in inventory, you can \"use\" one amethyst block on another to create amethyst shards\nYou sense other creatures' energy: detecting entities within range. Damaging others lets you siphon some health\nEnhanced perception increases bow damage\nYour tiny size lets you enter 1-block spaces easily, and projectiles miss you more often"],
+  "codex.form.allay_sp.cons": ["Your semi-spectral nature brings disadvantages -\nHovering rapidly depletes satiation\nYour body can't derive energy from food - only amethyst shards restore satiation. You also heal less from satiation\nYour weaker body requires both hands for tools/weapons. You break hard materials slower and deal reduced melee damage\nFloating increases inertia, making stopping harder\nYour lower torso vanished - you can't wear leggings or boots"],
+  "codex.form.allay_sp.instincts": ["\n\n\nCompared to other forms, you notice this one seems \"special\": it barely affects your mind and feels less stable. If desired, you could likely revert it relatively easily"],
+
+  "codex.form.alpha0.title": [" "],
+  "codex.form.alpha0.appearance": [" "],
+  "codex.form.alpha0.pros": [" "],
+  "codex.form.alpha0.cons": [" "],
+  "codex.form.alpha0.instincts": [" "],
+  "codex.form.alpha1.title": [" "],
+  "codex.form.alpha1.appearance": [" "],
+  "codex.form.alpha1.pros": [" "],
+  "codex.form.alpha1.cons": [" "],
+  "codex.form.alpha1.instincts": [" "],
+  "codex.form.alpha2.title": [" "],
+  "codex.form.alpha2.appearance": [" "],
+  "codex.form.alpha2.pros": [" "],
+  "codex.form.alpha2.cons": [" "],
+  "codex.form.alpha2.instincts": [" "],
+  "codex.form.beta0.title": [" "],
+  "codex.form.beta0.appearance": [" "],
+  "codex.form.beta0.pros": [" "],
+  "codex.form.beta0.cons": [" "],
+  "codex.form.beta0.instincts": [" "],
+  "codex.form.beta1.title": [" "],
+  "codex.form.beta1.appearance": [" "],
+  "codex.form.beta1.pros": [" "],
+  "codex.form.beta1.cons": [" "],
+  "codex.form.beta1.instincts": [" "],
+  "codex.form.beta2.title": [" "],
+  "codex.form.beta2.appearance": [" "],
+  "codex.form.beta2.pros": [" "],
+  "codex.form.beta2.cons": [" "],
+  "codex.form.beta2.instincts": [" "],
+  "codex.form.gamma0.title": [" "],
+  "codex.form.gamma0.appearance": [" "],
+  "codex.form.gamma0.pros": [" "],
+  "codex.form.gamma0.cons": [" "],
+  "codex.form.gamma0.instincts": [" "],
+  "codex.form.gamma1.title": [" "],
+  "codex.form.gamma1.appearance": [" "],
+  "codex.form.gamma1.pros": [" "],
+  "codex.form.gamma1.cons": [" "],
+  "codex.form.gamma1.instincts": [" "],
+  "codex.form.gamma2.title": [" "],
+  "codex.form.gamma2.appearance": [" "],
+  "codex.form.gamma2.pros": [" "],
+  "codex.form.gamma2.cons": [" "],
+  "codex.form.gamma2.instincts": [" "],
+  "codex.form.omega_sp.title": [" "],
+  "codex.form.omega_sp.appearance": [" "],
+  "codex.form.omega_sp.pros": [" "],
+  "codex.form.omega_sp.cons": [" "],
+  "codex.form.omega_sp.instincts": ["\n\n\nCompared to other forms, you notice this one seems \"special\": it barely affects your mind and feels less stable. If desired, you could likely revert it relatively easily"],
+  "codex.form.psi_sp.title": [" "],
+  "codex.form.psi_sp.appearance": [" "],
+  "codex.form.psi_sp.pros": [" "],
+  "codex.form.psi_sp.cons": [" "],
+  "codex.form.psi_sp.instincts": ["\n\n\nCompared to other forms, you notice this one seems \"special\": it barely affects your mind and feels less stable. If desired, you could likely revert it relatively easily"],
+  "codex.form.chi_sp.title": [" "],
+  "codex.form.chi_sp.appearance": [" "],
+  "codex.form.chi_sp.pros": [" "],
+  "codex.form.chi_sp.cons": [" "],
+  "codex.form.chi_sp.instincts": ["\n\n\nCompared to other forms, you notice this one seems \"special\": it barely affects your mind and feels less stable. If desired, you could likely revert it relatively easily"]
 }

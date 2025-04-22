@@ -60,6 +60,56 @@ public class RegFormConfig {
                         "form_allay_sp",
                         PlayerFormPhase.PHASE_SP));
 
+        // Custom empty forms
+        CONFIGS.put(PlayerForms.ALPHA_0,
+                new FormConfig(defaultLayerID,
+                        "form_alpha_0",
+                        PlayerFormPhase.PHASE_0));
+        CONFIGS.put(PlayerForms.ALPHA_1,
+                new FormConfig(defaultLayerID,
+                        "form_alpha_1",
+                        PlayerFormPhase.PHASE_1));
+        CONFIGS.put(PlayerForms.ALPHA_2,
+                new FormConfig(defaultLayerID,
+                        "form_alpha_2",
+                        PlayerFormPhase.PHASE_2));
+        CONFIGS.put(PlayerForms.BETA_0,
+                new FormConfig(defaultLayerID,
+                        "form_beta_0",
+                        PlayerFormPhase.PHASE_0));
+        CONFIGS.put(PlayerForms.BETA_1,
+                new FormConfig(defaultLayerID,
+                        "form_beta_1",
+                        PlayerFormPhase.PHASE_1));
+        CONFIGS.put(PlayerForms.BETA_2,
+                new FormConfig(defaultLayerID,
+                        "form_beta_2",
+                        PlayerFormPhase.PHASE_2));
+        CONFIGS.put(PlayerForms.GAMMA_0,
+                new FormConfig(defaultLayerID,
+                        "form_gamma_0",
+                        PlayerFormPhase.PHASE_0));
+        CONFIGS.put(PlayerForms.GAMMA_1,
+                new FormConfig(defaultLayerID,
+                        "form_gamma_1",
+                        PlayerFormPhase.PHASE_1));
+        CONFIGS.put(PlayerForms.GAMMA_2,
+                new FormConfig(defaultLayerID,
+                        "form_gamma_2",
+                        PlayerFormPhase.PHASE_2));
+        CONFIGS.put(PlayerForms.OMEGA_SP,
+                new FormConfig(defaultLayerID,
+                        "form_omega_sp",
+                        PlayerFormPhase.PHASE_SP));
+        CONFIGS.put(PlayerForms.PSI_SP,
+                new FormConfig(defaultLayerID,
+                        "form_psi_sp",
+                        PlayerFormPhase.PHASE_SP));
+        CONFIGS.put(PlayerForms.CHI_SP,
+                new FormConfig(defaultLayerID,
+                        "form_chi_sp",
+                        PlayerFormPhase.PHASE_SP));
+
         //CONFIGS.get(PlayerForms.BAT_0).getFormOriginID();
     }
 

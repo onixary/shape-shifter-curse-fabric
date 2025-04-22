@@ -29,7 +29,7 @@ public abstract class CustomEdibleItemMixin {
 
     @Unique
     private static final FoodComponent ALLAY_AMETHYST_SHARD_FOOD = new FoodComponent.Builder()
-            .hunger(16)
+            .hunger(10)
             .alwaysEdible()
             .saturationModifier(0.0f)
             .build();
@@ -102,11 +102,9 @@ public abstract class CustomEdibleItemMixin {
             PlayerForms currentForm = FormAbilityManager.getForm((PlayerEntity) user);
             if ((stack.getItem() == Items.AMETHYST_SHARD) && (currentForm == PlayerForms.ALLAY_SP)) {
                 if (user instanceof PlayerEntity player) {
-
                     player.getHungerManager().add(ALLAY_AMETHYST_SHARD_FOOD.getHunger(), ALLAY_AMETHYST_SHARD_FOOD.getSaturationModifier());
-
                     world.playSound(null, player.getX(), player.getY(), player.getZ(),
-                            SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.NEUTRAL,
+                            SoundEvents.BLOCK_AMETHYST_BLOCK_BREAK, SoundCategory.NEUTRAL,
                             1.0F, 1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.4F);
 
                     if (!player.getAbilities().creativeMode) {
