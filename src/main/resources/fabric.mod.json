@@ -11,7 +11,7 @@
   "license": "MIT",
   "icon": "assets/shape-shifter-curse/icon.png",
 
-  "environment": "client",
+  "environment": "*",
   "entrypoints": {
     "main": [
       "net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric",
@@ -63,7 +63,8 @@
     "azurelib": ">=2.0.41",
     "pehkui": ">=3.7.8",
     "forgeconfigapiport": ">=8.0.0",
-    "satin": ">=1.14.0"
+    "satin": ">=1.14.0",
+    "owo-lib": ">=0.11.2"
   },
   "breaks": {
     "origins": ">0.0.0",

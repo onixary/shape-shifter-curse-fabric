@@ -20,7 +20,8 @@
 		"origins:form_allay_sp_jukebox_heal",
 		"origins:form_allay_sp_levitate",
 		"origins:form_allay_sp_amethyst_shard_from_block",
-		"origins:form_allay_sp_slipperiness"
+		"origins:form_allay_sp_slipperiness",
+		"origins:form_allay_sp_health"
 
 	],
 	"icon": {
