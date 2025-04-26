@@ -38,7 +38,9 @@ public class OriginsClient implements ClientModInitializer {
 
         ModPacketsS2C.register();
 
-        usePrimaryActivePowerKeybind = new KeyBinding("key.origins.primary_active", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_G, "category." + Origins.MODID);
+        // 暂时不需要主动技能按键绑定
+        // 添加额外的主动技能按键并不是一个很好的设计
+        /*usePrimaryActivePowerKeybind = new KeyBinding("key.origins.primary_active", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_G, "category." + Origins.MODID);
         useSecondaryActivePowerKeybind = new KeyBinding("key.origins.secondary_active", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + Origins.MODID);
         viewCurrentOriginKeybind = new KeyBinding("key.origins.view_origin", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_O, "category." + Origins.MODID);
 
@@ -52,7 +54,7 @@ public class OriginsClient implements ClientModInitializer {
 
         KeyBindingHelper.registerKeyBinding(usePrimaryActivePowerKeybind);
         KeyBindingHelper.registerKeyBinding(useSecondaryActivePowerKeybind);
-        KeyBindingHelper.registerKeyBinding(viewCurrentOriginKeybind);
+        KeyBindingHelper.registerKeyBinding(viewCurrentOriginKeybind);*/
 
         ClientTickEvents.START_CLIENT_TICK.register(tick -> {
             // 用于显示当前的起源信息，不需要，将其注释掉

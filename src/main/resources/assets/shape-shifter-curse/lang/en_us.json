@@ -25,6 +25,8 @@
   "advancements.shape-shifter-curse.on_transform_by_catalyst.description": ["Use a catalyst while under the curse's effect"],
   "advancements.shape-shifter-curse.on_transform_by_cure.title": ["Antidote"],
   "advancements.shape-shifter-curse.on_transform_by_cure.description": ["A completely different type of magic"],
+  "advancements.shape-shifter-curse.on_use_golden_apple.title": ["Temporary Relief"],
+  "advancements.shape-shifter-curse.on_use_golden_apple.description": ["Use a golden apple to counteract the effects of instincts"],
   "advancements.shape-shifter-curse.on_transform_by_cure_final.title": ["Totally Worth It"],
   "advancements.shape-shifter-curse.on_transform_by_cure_final.description": ["Golden magic - enhanced edition"],
   "advancements.shape-shifter-curse.on_transform_effect_fade.title": ["Not This Time"],
@@ -86,7 +88,7 @@
       "color": "#0096FF"
     },
     {
-      "text": "Warning:\nThis will activate the Shapeshifter's Curse mod content\nThis mod isn't for everyone. Before proceeding, ensure you understand its themes and gameplay",
+      "text": "Note:\nThis will activate the Shapeshifter's Curse mod content\nThis mod may not be a mod for everyone. Before proceeding, ensure you understand its themes and gameplay",
       "color": "#ed721d"
     }
   ],
@@ -181,6 +183,10 @@
   "effect.shape-shifter-curse.to_psi_sp_effect": ["PSI"],
   "effect.shape-shifter-curse.to_chi_sp_effect": ["CHI"],
 
+  "power.origins.form_allay_sp_amethyst_shard_only.name": ["amethyst consumer"],
+  "power.origins.form_ocelot_2_raw_meat_only.name": ["raw meat consumer"],
+  "power.origins.vegetarian.name": ["vegetarian"],
+
   "commands.shape-shifter-curse.form_not_found": ["Specified form not found!"],
 
   "codex.header.status": ["Status"],
@@ -245,7 +251,7 @@
     }],
   "codex.form.axolotl1.title": ["\nYour developed gills and powerful tail allow you to freely explore submerged structures. Freshly caught fish are now your ideal food"],
   "codex.form.axolotl1.appearance": ["The gill tufts on your cheeks have grown further. In water, they can supply nearly all the oxygen you need\nThe fin membranes on your body have expanded, covering more areas. Their colors appear more vibrant\nYour tail has lengthened further and grown stronger\nYour neck has sprouted highly absorbent white fuzz"],
-  "codex.form.axolotl1.pros": ["With your more developed gills, you can breathe underwater without needing air\nYour movement in water is slightly faster\nYour body digests raw fish more efficiently, gaining more satiation from them\nYour powerful tail lets you leap from water surfaces to reach higher places"],
+  "codex.form.axolotl1.pros": ["With your more developed gills, you can breathe underwater without needing air\nYour movement in water is slightly faster\nYour body digests raw fish more efficiently, gaining more satiation from them\nYou have strong regeneration abilities; as long as your hunger level is above 3 bars, your health can slowly recover over time\nYour powerful tail lets you leap from water surfaces to reach higher places"],
   "codex.form.axolotl1.cons": ["You can no longer wear helmets: your gills cannot tolerate foreign objects touching them\nYour skin more easily collects sand, slightly slowing movement on sandy terrain\nYour current digestive system can no longer process non-meat foods"],
   "codex.form.axolotl1.instincts": ["You increasingly want to",
     {
@@ -259,7 +265,7 @@
     },"The thought begins to attract you"],
   "codex.form.axolotl2.title": ["\nAs an amphibian, you're a predator in water while still capable of land movement - just remember to stay moist"],
   "codex.form.axolotl2.appearance": ["Your tail now resembles an extension of your torso, occupying nearly half your height\nDeveloped gill tufts take up much space on your head. They almost replace lungs - as long as they stay moist, you can get ample oxygen without breathing\nTranslucent fin membranes have spread across most of your body. Underwater, they rhythmically undulate with the currents\nWhite fuzz nearly covers your chest and back. Like sponges, they store water to keep you moist on land for extended periods"],
-  "codex.form.axolotl2.pros": ["Due to reliance on gill respiration, you must stay moist at all times -\nYour oxygen meter now indicates moisture level. It replenishes in water and slowly depletes on land\nDrinking water bottles or any potions also replenishes moisture\n\nYour body draws strength from water. When moisture isn't zero, your max health increases significantly\n\nRaw fish provides greater satiation\nDeveloped fin membranes and strong tail let you move faster in water. They allow leaping from water and help you hover without sinking\nBlunt claws at limb ends enhance underwater grip, letting you break blocks underwater without hindrance\nBody changes allow crawling quickly through tight spaces"],
+  "codex.form.axolotl2.pros": ["Due to reliance on gill respiration, you must stay moist at all times -\nYour oxygen meter now indicates moisture level. It replenishes in water and slowly depletes on land\nDrinking water bottles or any potions also replenishes moisture\n\nYour body draws strength from water. When moisture isn't zero, your max health increases significantly\nYou have strong regeneration abilities; as long as your hunger level is above 3 bars, your health can slowly recover over time\n\nRaw fish provides greater satiation\nDeveloped fin membranes and strong tail let you move faster in water. They allow leaping from water and help you hover without sinking\nBlunt claws at limb ends enhance underwater grip, letting you break blocks underwater without hindrance\nBody changes allow crawling quickly through tight spaces"],
   "codex.form.axolotl2.cons": ["Moisture is now your lifeline. When depleted, your max health and movement speed decrease dramatically, making movement nearly impossible\n\nYou can no longer wear helmets\nYour movement is slower on sandy terrain\nYou can only eat meat"],
   "codex.form.axolotl2.instincts": [" "],
 
@@ -323,7 +329,7 @@
   "codex.form.allay_sp.title": ["\nYou now closely resemble a friendly spectral creature, though unclear if due to internal magic, you exhibit some unique features"],
   "codex.form.allay_sp.appearance": ["Your body now consists of light blue translucent gauze-like substance. Extremely light, letting you float\nFeathery antenna-like structures grow from your forehead - very flexible. They grant new senses detecting nearby creatures' locations\nBranch-like wings sprout from your back. With them, you can hover through skies. Below wings, two ribbon-like extensions emerge - purpose unclear, possibly compensating lost leg functions"],
   "codex.form.allay_sp.pros": ["Your more spectral physique grants new abilities -\nYour actions now barely consume satiation\nHolding jump lets you ascend and hover freely midair. You also descend slowly\n\nFloating means no footsteps\nAmethyst resonates strangely with you: in inventory, you can \"use\" one amethyst block on another to create amethyst shards\nYou sense other creatures' energy: detecting entities within range. Damaging others lets you siphon some health\nEnhanced perception increases bow damage\nYour tiny size lets you enter 1-block spaces easily, and projectiles miss you more often"],
-  "codex.form.allay_sp.cons": ["Your semi-spectral nature brings disadvantages -\nHovering rapidly depletes satiation\nYour body can't derive energy from food - only amethyst shards restore satiation. You also heal less from satiation\nYour weaker body requires both hands for tools/weapons. You break hard materials slower and deal reduced melee damage\nFloating increases inertia, making stopping harder\nYour lower torso vanished - you can't wear leggings or boots"],
+  "codex.form.allay_sp.cons": ["Your semi-spectral nature brings disadvantages -\nHovering rapidly depletes satiation\nYour body can't derive energy from food - only amethyst shards restore satiation. You also heal less from satiation\nYour weaker body requires both hands for tools/weapons. You break hard materials slower and deal reduced melee damage.Your max health has reduced greatly either\nFloating increases inertia, making stopping harder\nYour lower torso vanished - you can't wear leggings or boots"],
   "codex.form.allay_sp.instincts": ["\n\n\nCompared to other forms, you notice this one seems \"special\": it barely affects your mind and feels less stable. If desired, you could likely revert it relatively easily"],
 
   "codex.form.alpha0.title": [" "],

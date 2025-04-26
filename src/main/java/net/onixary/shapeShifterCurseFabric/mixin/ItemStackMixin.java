@@ -2,8 +2,12 @@ package net.onixary.shapeShifterCurseFabric.mixin;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformRelatedItems;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -29,14 +33,17 @@ public abstract class ItemStackMixin {
 
             if(stack.getItem() == TransformRelatedItems.TRANSFORM_CURE){
                 TransformRelatedItems.OnUseCure(player);
-            }
-
-            if(stack.getItem() == TransformRelatedItems.TRANSFORM_CURE_FINAL){
+            }else if(stack.getItem() == TransformRelatedItems.TRANSFORM_CURE_FINAL){
                 TransformRelatedItems.OnUseCureFinal(player);
-            }
-
-            if(stack.getItem() == TransformRelatedItems.TRANSFORM_CATALYST){
+            }else if(stack.getItem() == TransformRelatedItems.TRANSFORM_CATALYST){
                 TransformRelatedItems.OnUseCatalyst(player);
+            } else if(stack.getItem() == Items.GOLDEN_APPLE){
+                PlayerForms currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+                int currentFormIndex = currentForm.getIndex();
+                if(currentFormIndex == 0 || currentFormIndex == 1){
+                    // 触发自定义成就
+                    ShapeShifterCurseFabric.ON_USE_GOLDEN_APPLE.trigger(player);
+                }
             }
         }
     }
