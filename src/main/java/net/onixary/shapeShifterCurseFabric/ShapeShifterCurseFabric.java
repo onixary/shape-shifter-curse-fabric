@@ -301,7 +301,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
                 //LOGGER.info("Effect tick");
                 attachment.remainingTicks--;
                 if (attachment.remainingTicks <= 0) {
-                    // 自然结束时不做任何事
+                    // 取消效果
+                    cancelEffect(player);
                     // 触发自定义成就
                     ShapeShifterCurseFabric.ON_TRANSFORM_EFFECT_FADE.trigger(player);
                 }
