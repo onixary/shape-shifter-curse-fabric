@@ -45,13 +45,13 @@ public class StartBookScreen extends BaseOwoScreen<FlowLayout> {
                 .verticalAlignment(VerticalAlignment.CENTER);
 
         rootComponent.child(
-                Containers.verticalFlow(Sizing.fixed(240), Sizing.fixed(220))
+                Containers.verticalFlow(Sizing.fixed(360), Sizing.fixed(330))
                         .children(
                         List.of(
                                 Components.label(
                                         Text.translatable("screen.shape-shifter-curse.book_of_shape_shifter.start_content_text")
                                 )
-                                        .maxWidth(170)
+                                        .maxWidth(270)
                                         .margins(Insets.of(0, 15, 0, 0))
                                 ,
                                 Components.button(
@@ -71,11 +71,11 @@ public class StartBookScreen extends BaseOwoScreen<FlowLayout> {
                                         }
                                 ))
                         )
-                        .surface(Surface.tiled(StartBook_TexID, 240, 220))
+                        .surface(Surface.tiled(StartBook_TexID, 360, 330))
                         .horizontalAlignment(HorizontalAlignment.CENTER)
                         .verticalAlignment(VerticalAlignment.CENTER)
                         .padding(Insets.of(20))
-                );
+                ).allowOverflow(true);
     }
 
     @Override
