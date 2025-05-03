@@ -4,6 +4,8 @@ import io.wispforest.owo.ui.base.BaseOwoScreen;
 import io.wispforest.owo.ui.component.Components;
 import io.wispforest.owo.ui.container.Containers;
 import io.wispforest.owo.ui.container.FlowLayout;
+import io.wispforest.owo.ui.container.OverlayContainer;
+import io.wispforest.owo.ui.container.ScrollContainer;
 import io.wispforest.owo.ui.core.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
@@ -12,7 +14,6 @@ import net.minecraft.util.math.RotationAxis;
 import net.onixary.shapeShifterCurseFabric.custom_ui.util.ScaledLabelComponent;
 import net.onixary.shapeShifterCurseFabric.data.CodexData;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
@@ -31,6 +32,7 @@ public class BookOfShapeShifterScreen extends BaseOwoScreen<FlowLayout> {
     private FlowLayout pageArea2;
     private FlowLayout pageButtonContainer;
     private boolean showingPage1 = true;
+    private OverlayContainer<FlowLayout> fullscreenContainer;
 
     private static final Identifier page1_texID = new Identifier(MOD_ID,"textures/gui/codex_page_1.png");
     private static final Identifier page2_texID = new Identifier(MOD_ID,"textures/gui/codex_page_2.png");
@@ -99,9 +101,17 @@ public class BookOfShapeShifterScreen extends BaseOwoScreen<FlowLayout> {
                 .horizontalAlignment(HorizontalAlignment.LEFT)
                 .verticalAlignment(VerticalAlignment.TOP)
                 .padding(Insets.of(5)));
+        Component titleDetailsButton = Components.button(
+                Text.literal("+"),
+                button -> showDetailScreen(CodexData.ContentType.TITLE)
+        ).sizing(Sizing.fixed(10));
+        titleLayout.child(titleDetailsButton.margins(Insets.of(0)));
+
         titleLayout.child(new ScaledLabelComponent(CodexData.getContentText(CodexData.ContentType.TITLE, currentPlayer), textScale)
                 .maxWidth(getScaledWidth(100))
                 .color(Color.ofRgb(0x2b2d30)));
+
+
 
         // Status Header
         FlowLayout statusHeaderHolder = Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(12));
@@ -132,6 +142,12 @@ public class BookOfShapeShifterScreen extends BaseOwoScreen<FlowLayout> {
                 .maxWidth(getScaledWidth(100))
                 .color(Color.ofRgb(0x2b2d30))
                 );
+
+        Component statusDetailsButton = Components.button(
+                Text.literal("+"),
+                button -> showDetailScreenWithText(CodexData.getPlayerStatusText(currentPlayer))
+        ).sizing(Sizing.fixed(10));
+        statusHeaderLayout.child(statusDetailsButton.margins(Insets.of(0)));
 
         // Right Area
         rightArea = Containers.verticalFlow(Sizing.fixed(190), Sizing.fixed(210));
@@ -182,6 +198,12 @@ public class BookOfShapeShifterScreen extends BaseOwoScreen<FlowLayout> {
                 .maxWidth(getScaledWidth(170))
                 .color(Color.ofRgb(0x2b2d30))
                 );
+        // 在appearanceLayout添加按钮
+        Component appearanceDetailsButton = Components.button(
+                Text.literal("+"),
+                button -> showDetailScreen(CodexData.ContentType.APPEARANCE)
+        ).sizing(Sizing.fixed(10));
+        appearanceHeaderLayout.child(appearanceDetailsButton.margins(Insets.of(0)));
 
 
         // Page Area 2
@@ -234,6 +256,13 @@ public class BookOfShapeShifterScreen extends BaseOwoScreen<FlowLayout> {
                 .color(Color.ofRgb(0x2b2d30))
                 );
 
+        // 在proLayout添加按钮
+        Component proDetailsButton = Components.button(
+                Text.literal("+"),
+                button -> showDetailScreen(CodexData.ContentType.PROS)
+        ).sizing(Sizing.fixed(10));
+        proHeaderLayout.child(proDetailsButton.margins(Insets.of(0)));
+
         // Page 2 - Con Holder
         FlowLayout conHolder = Containers.verticalFlow(Sizing.fixed(100), Sizing.fixed(220));
         pageArea2.child(conHolder
@@ -275,6 +304,13 @@ public class BookOfShapeShifterScreen extends BaseOwoScreen<FlowLayout> {
                 .color(Color.ofRgb(0x2b2d30))
                 );
 
+        // 在conLayout添加按钮
+        Component conDetailsButton = Components.button(
+                Text.literal("+"),
+                button -> showDetailScreen(CodexData.ContentType.CONS)
+        ).sizing(Sizing.fixed(10));
+        conHeaderLayout.child(conDetailsButton.margins(Insets.of(0)));
+
         // Page 2 - Instinct Holder
         FlowLayout instinctHolder = Containers.verticalFlow(Sizing.fixed(120), Sizing.fixed(220));
         pageArea2.child(instinctHolder
@@ -314,6 +350,13 @@ public class BookOfShapeShifterScreen extends BaseOwoScreen<FlowLayout> {
         instinctLayout.child(new ScaledLabelComponent(CodexData.getContentText(CodexData.ContentType.INSTINCTS, currentPlayer), textScale)
                 .maxWidth(getScaledWidth(100))
                 .color(Color.ofRgb(0x2b2d30)));
+
+        // 在instinctLayout添加按钮
+        Component instinctDetailsButton = Components.button(
+                Text.literal("+"),
+                button -> showDetailScreen(CodexData.ContentType.INSTINCTS)
+        ).sizing(Sizing.fixed(10));
+        instinctHeaderLayout.child(instinctDetailsButton.margins(Insets.of(0)));
 
         // A button to toggle between pages
         pageButtonContainer = Containers.horizontalFlow(Sizing.content(), Sizing.content());
@@ -357,6 +400,71 @@ public class BookOfShapeShifterScreen extends BaseOwoScreen<FlowLayout> {
         float formScale = 1;
         return BASE_SCALE_FACTOR * (1.0f / formScale);
     }
+
+    private void showDetailScreen(CodexData.ContentType contentType) {
+        // 移除可能已存在的全屏容器
+        if (fullscreenContainer != null) {
+            this.uiAdapter.rootComponent.removeChild(fullscreenContainer);
+        }
+
+        FlowLayout textContainer = Containers.verticalFlow(
+                Sizing.fill(95),
+                Sizing.fill(95)
+        );
+        textContainer.padding(Insets.of(10));
+
+        // 添加文本
+        textContainer.child(
+                new ScaledLabelComponent(CodexData.getContentText(contentType, currentPlayer), 0.8f)
+                        .maxWidth((int) (360 / 0.8f))
+                        .color(Color.WHITE)
+        );
+
+        // 创建全屏overlay
+        fullscreenContainer = Containers.overlay(textContainer);
+        fullscreenContainer
+                .surface(Surface.flat(0xDD000000)) // 半透明黑色背景
+                .horizontalAlignment(HorizontalAlignment.CENTER)
+                .verticalAlignment(VerticalAlignment.CENTER)
+                .zIndex(300);
+        fullscreenContainer.child(textContainer);
+
+        // 添加到根容器
+        this.uiAdapter.rootComponent.child(fullscreenContainer);
+    }
+
+    private void showDetailScreenWithText(Text contentText) {
+        // 移除可能已存在的全屏容器
+        if (fullscreenContainer != null) {
+            this.uiAdapter.rootComponent.removeChild(fullscreenContainer);
+        }
+
+        FlowLayout textContainer = Containers.verticalFlow(
+                Sizing.fill(95),
+                Sizing.fill(95)
+        );
+        textContainer.padding(Insets.of(10));
+
+        // 添加文本
+        textContainer.child(
+                new ScaledLabelComponent(contentText, 0.8f)
+                        .maxWidth((int) (360 / 0.8f))
+                        .color(Color.WHITE)
+        );
+
+        // 创建全屏overlay
+        fullscreenContainer = Containers.overlay(textContainer);
+        fullscreenContainer
+                .surface(Surface.flat(0xDD000000)) // 半透明黑色背景
+                .horizontalAlignment(HorizontalAlignment.CENTER)
+                .verticalAlignment(VerticalAlignment.CENTER)
+                .zIndex(300);
+        fullscreenContainer.child(textContainer);
+
+        // 添加到根容器
+        this.uiAdapter.rootComponent.child(fullscreenContainer);
+    }
+
 
     @Override
     public boolean shouldPause() {
