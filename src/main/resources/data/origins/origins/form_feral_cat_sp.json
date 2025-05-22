@@ -1,0 +1,14 @@
+{
+	"powers": [
+		"origins:form_feral_cat_sp_scale",
+		"origins:form_disable_leg_armor",
+		"origins:form_disable_feet_armor",
+		"origins:velvet_paws"
+	],
+	"icon": {
+		"item": "minecraft:player_head"
+	},
+	"order": 0,
+	"unchoosable": true,
+	"impact": 0
+}

@@ -17,6 +17,7 @@ public enum PlayerForms {
     OCELOT_1("ocelot_form", 1),
     OCELOT_2("ocelot_form", 2),
     ALLAY_SP("allay_form", 5),
+    FERAL_CAT_SP("feral_cat_form", 5),
 
     // Custom empty forms
     ALPHA_0("alpha_form", 0),

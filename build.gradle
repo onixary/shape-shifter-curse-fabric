@@ -176,6 +176,7 @@ dependencies {
     modCompileOnly "maven.modrinth:bendy-lib:DFxVCaiC"
     modCompileOnly "maven.modrinth:better-combat:MxaoPSMy"
     modCompileOnly "maven.modrinth:playeranimator:cfkAgcOh"
+    modCompileOnly "maven.modrinth:first-person-model:mquWPSix"
 
     annotationProcessor(files("libs/mixinextras-fabric-0.2.0-beta.8.jar"))
 
