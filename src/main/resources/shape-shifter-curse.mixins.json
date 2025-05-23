@@ -17,7 +17,8 @@
     "LivingEntityDeathMixin",
     "PlayerEntityPoseMixin",
     "CustomEdibleItemMixin",
-    "CancelEntityStepSoundMixin"
+    "CancelEntityStepSoundMixin",
+    "AdjustItemHoldPlayerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
