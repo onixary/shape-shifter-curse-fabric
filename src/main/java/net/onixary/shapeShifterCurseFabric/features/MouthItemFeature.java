@@ -15,6 +15,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.math.RotationAxis;
+import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
@@ -22,7 +23,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> & ModelWithHead> extends FeatureRenderer<T, M> {
+public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
     private final HeldItemRenderer heldItemRenderer;
 
     public MouthItemFeature(FeatureRendererContext<T, M> context, HeldItemRenderer heldItemRenderer) {
@@ -33,7 +34,7 @@ public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> &
     @Override
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l) {
         //ShapeShifterCurseFabric.LOGGER.info("Item render mixin is working");
-        if (livingEntity instanceof ClientPlayerEntity player) {
+        if (livingEntity instanceof ClientPlayerEntity player && !MinecraftClient.getInstance().options.getPerspective().isFirstPerson()) {
             PlayerForms curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
             boolean isFeral = RegFormConfig.getConfig(curForm).getBodyType() == PlayerFormBodyType.FERAL;
             //ShapeShifterCurseFabric.LOGGER.info("Is Feral Form : " + isFeral);
@@ -47,11 +48,13 @@ public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> &
                 var eR = (PlayerEntityRenderer) MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(player);
                 var head = eR.getModel().head;
 
-                matrixStack.translate(head.pivotX / 16.0F, (head.pivotY) / 16.0F, head.pivotZ / 16.0F);
+                //Vec3d playerHeadPivot = new Vec3d(0.0F, -3F, 0.0F);
+                matrixStack.translate(head.pivotX / 16.0F, head.pivotY / 16.0F, head.pivotZ / 16.0F);
                 matrixStack.multiply(RotationAxis.POSITIVE_Z.rotation(0.0F));
                 matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(k));
                 matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(l));
-                matrixStack.translate(0.06F, 0.27F, -0.5D);
+                matrixStack.translate(0.06F, 0.085F, -0.35D);
+                matrixStack.scale(1.25F,1.25F,1.25F);
 
                 matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0F));
 
@@ -64,4 +67,6 @@ public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> &
             }
         }
     }
+
+
 }

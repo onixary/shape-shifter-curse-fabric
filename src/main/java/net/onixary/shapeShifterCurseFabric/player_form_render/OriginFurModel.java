@@ -29,6 +29,10 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.math.Vec3d;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.joml.Matrix4f;
 import org.joml.Vector3d;
 import org.joml.Vector4f;
@@ -437,6 +441,10 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
         // max num is 6
         // need to inverse the y rotation of the tail bones
         // first tail part
+
+        // 由于Feral形态的尾部旋转了90度，因此需要修改rotZ而不是rotY
+        PlayerForms curForm = RegPlayerFormComponent.PLAYER_FORM.get(entity).getCurrentForm();
+        boolean isFeral = RegFormConfig.getConfig(curForm).getBodyType() == PlayerFormBodyType.FERAL;
         float SWAY_RATE = 0.33333334F * 0.5F;
         float SWAY_SCALE = 0.05F;
         JsonObject tailChain = json.getAsJsonObject("tail_chain");
@@ -451,15 +459,28 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
             if (tail != null) {
                 float tailSway = SWAY_SCALE * MathHelper.cos(age * SWAY_RATE + (((float)Math.PI / 3.0F) * 0.75f));
                 float tailBalance = MathHelper.cos(limbAngle * 0.6662F) * 0.325F * limbDistance;
-                tail.setRotY(-MathHelper.lerp(limbDistance, tailSway, tailBalance) - tailDragAmount * 0.75F);
+                if(!isFeral){
+                    tail.setRotY(-MathHelper.lerp(limbDistance, tailSway, tailBalance) - tailDragAmount * 0.75F);
+                }
+                else{
+                    tail.setRotZ(MathHelper.lerp(limbDistance, tailSway, tailBalance) + tailDragAmount * 0.75F);
+                }
+
                 tail.setRotX(-tailDragAmountVertical * 0.75f);
 
                 float offset = 0.0F;
                 for(int i = 1; i < indexCount; i++){
                     var bone = this.getCachedGeoBone(memberName + "_" + i);
                     if (bone == null) {continue;}
-                    bone.setRotY(- MathHelper.lerp(limbDistance, SWAY_SCALE * MathHelper.cos(age * SWAY_RATE -
-                            (((float)Math.PI / 3.0F) * offset)), 0.0f) - tailDragAmount * 0.75F);
+
+                    if(!isFeral){
+                        bone.setRotY(- MathHelper.lerp(limbDistance, SWAY_SCALE * MathHelper.cos(age * SWAY_RATE -
+                                (((float)Math.PI / 3.0F) * offset)), 0.0f) - tailDragAmount * 0.75F);
+                    }
+                    else{
+                        bone.setRotZ(MathHelper.lerp(limbDistance, SWAY_SCALE * MathHelper.cos(age * SWAY_RATE -
+                                (((float)Math.PI / 3.0F) * offset)), 0.0f) + tailDragAmount * 0.75F);
+                    }
                     bone.setRotX(-tailDragAmountVertical * 0.75f * (offset + 0.75f));
 
                     offset += 0.75F;

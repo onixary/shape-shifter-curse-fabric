@@ -41,6 +41,47 @@
 					}
 				}
 			}
+		},
+		"form_feral_common_idle": {
+			"loop": true,
+			"animation_length": 0.5,
+			"bones": {
+				"torso": {
+					"rotation": {
+						"0.0": {
+							"vector": [90, 0, 0]
+						},
+						"0.3333": {
+							"vector": [90, 0, 0]
+						}
+					}
+				},
+				"leftLeg": {
+					"position": {
+						"0.0": {
+							"vector": [0, 14, 12]
+						},
+						"0.3333": {
+							"vector": [0, 14, 12]
+						}
+					}
+				},
+				"rightLeg": {
+					"position": {
+						"0.0": {
+							"vector": [0, 14, 12]
+						},
+						"0.3333": {
+							"vector": [0, 14, 12]
+						}
+					}
+				},
+				"body": {
+					"position": {
+						"vector": [0, -11, 0]
+					}
+				}
+			}
 		}
 	}
 }

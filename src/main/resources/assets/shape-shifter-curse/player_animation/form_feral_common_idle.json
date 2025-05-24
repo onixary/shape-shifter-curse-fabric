@@ -1,0 +1,57 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"form_feral_common_idle": {
+			"loop": true,
+			"animation_length": 0.5,
+			"bones": {
+				"torso": {
+					"rotation": {
+						"0.0": {
+							"vector": [90, 0, 0]
+						},
+						"0.3333": {
+							"vector": [90, 0, 0]
+						}
+					}
+				},
+				"rightLeg": {
+					"position": {
+						"0.0": {
+							"vector": [-1, 13, 15]
+						},
+						"0.3333": {
+							"vector": [-1, 13, 15]
+						}
+					}
+				},
+				"leftLeg": {
+					"position": {
+						"0.0": {
+							"vector": [1, 13, 15]
+						},
+						"0.3333": {
+							"vector": [1, 13, 15]
+						}
+					}
+				},
+				"rightArm": {
+					"position": {
+						"vector": [1.2, 2, 1]
+					}
+				},
+				"leftArm": {
+					"position": {
+						"vector": [-1.2, 2, 1]
+					}
+				},
+				"body": {
+					"position": {
+						"vector": [0, -13, 0]
+					}
+				}
+			}
+		}
+	},
+	"azurelib_format_version": 2
+}

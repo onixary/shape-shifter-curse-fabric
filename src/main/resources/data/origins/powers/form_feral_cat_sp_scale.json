@@ -1,4 +1,5 @@
 {
   "type": "origins:scale",
-  "scale" : 0.55
+  "scale" : 0.55,
+  "is_feral" : true
 }

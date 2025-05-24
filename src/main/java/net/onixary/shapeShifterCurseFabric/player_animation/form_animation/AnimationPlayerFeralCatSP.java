@@ -27,7 +27,7 @@ public class AnimationPlayerFeralCatSP {
     }
 
     public static void registerAnims() {
-        anim_idle = new AnimationHolder(new Identifier(MOD_ID, "feral_cat_sp_idle"), true);
+        anim_idle = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_idle"), true);
         anim_sneak_idle = new AnimationHolder(new Identifier(MOD_ID, "ocelot_2_sneak_idle"), true);
         anim_sneak_rush = new AnimationHolder(new Identifier(MOD_ID, "ocelot_2_sneak_rush"), true);
         anim_rush_jump = new AnimationHolder(new Identifier(MOD_ID, "ocelot_2_rush_jump"), true);

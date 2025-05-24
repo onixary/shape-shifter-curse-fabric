@@ -18,7 +18,9 @@
     "PlayerEntityPoseMixin",
     "CustomEdibleItemMixin",
     "CancelEntityStepSoundMixin",
-    "AdjustItemHoldPlayerRendererMixin"
+    "AdjustItemHoldPlayerRendererMixin",
+    "AdjustItemHoldFeatureRendererMixin",
+    "EntityRenderDispatcherMixin"
   ],
   "injectors": {
     "defaultRequire": 1

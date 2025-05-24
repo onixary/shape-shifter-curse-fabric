@@ -17,7 +17,7 @@ import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctM
 
 public class ScalePower extends Power {
 
-    public ScalePower(PowerType<?> type, LivingEntity entity, float scale) {
+    public ScalePower(PowerType<?> type, LivingEntity entity, float scale, boolean isFeral) {
         super(type, entity);
         if(entity instanceof ServerPlayerEntity) {
             ScaleData scaleDataWidth = ScaleTypes.WIDTH.getScaleData(entity);
@@ -26,6 +26,20 @@ public class ScalePower extends Power {
             scaleDataWidth.setPersistence(true);
             scaleDataHeight.setScale(scale);
             scaleDataHeight.setPersistence(true);
+            ScaleData scaleDataEyeHeight = ScaleTypes.EYE_HEIGHT.getScaleData(entity);
+            ScaleData scaleDataHitboxHeight = ScaleTypes.HITBOX_HEIGHT.getScaleData(entity);
+            if(isFeral) {
+                scaleDataEyeHeight.setScale(0.6f);
+                scaleDataEyeHeight.setPersistence(true);
+                scaleDataHitboxHeight.setScale(0.6f);
+                scaleDataHitboxHeight.setPersistence(true);
+            }
+            else{
+                scaleDataEyeHeight.setScale(1);
+                scaleDataEyeHeight.setPersistence(true);
+                scaleDataHitboxHeight.setScale(1);
+                scaleDataHitboxHeight.setPersistence(true);
+            }
         }
     }
 
@@ -33,11 +47,13 @@ public class ScalePower extends Power {
         return new PowerFactory<>(
             Apoli.identifier("scale"),
             new SerializableData()
-                .add("scale", SerializableDataTypes.FLOAT),
+                .add("scale", SerializableDataTypes.FLOAT)
+                    .add("is_feral", SerializableDataTypes.BOOLEAN, false),
             data -> (powerType, livingEntity) -> new ScalePower(
                 powerType,
                 livingEntity,
-                data.getFloat("scale")
+                data.getFloat("scale"),
+                data.getBoolean("is_feral")
             )
         ).allowCondition();
     }

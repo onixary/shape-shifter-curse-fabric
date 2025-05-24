@@ -1,13 +1,19 @@
 {
-  "model": "orif-defaults:geo/form_ocelot_2.geo.json",
-  "texture": "orif-defaults:textures/form_ocelot_2/form_ocelot_2.png",
+  "model": "orif-defaults:geo/form_feral_cat_sp.geo.json",
+  "texture": "orif-defaults:textures/form_feral_cat_sp/form_feral_cat_sp.png",
   "hidden": [
     "leftLeg",
     "rightLeg",
     "rightPants",
     "leftPants",
     "leftSleeve",
-    "rightSleeve"
+    "rightSleeve",
+    "leftArm",
+    "rightArm",
+    "body",
+    "jacket",
+    "head",
+    "hat"
   ],
   "tail_chain": {
     "tail": [0, 1, 2, 3]
