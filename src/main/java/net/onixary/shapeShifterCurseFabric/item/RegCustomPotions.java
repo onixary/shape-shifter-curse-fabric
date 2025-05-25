@@ -28,6 +28,9 @@ public class RegCustomPotions {
     public static final Potion ALLEY_FORM_POTION =
             Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_allay_sp_potion"),
                     new Potion(new StatusEffectInstance(TO_ALLAY_SP_POTION)));
+    public static final Potion FERAL_CAT_FORM_POTION =
+            Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_feral_cat_sp_potion"),
+                    new Potion(new StatusEffectInstance(TO_FERAL_CAT_SP_POTION)));
     // custom empty forms
     public static final Potion ALPHA_FORM_POTION =
             Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_alpha_0_potion"),
@@ -60,6 +63,7 @@ public class RegCustomPotions {
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.BIG_DRIPLEAF, AXOLOTL_FORM_POTION);
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.CHICKEN, OCELOT_FORM_POTION);
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.AMETHYST_SHARD, ALLEY_FORM_POTION);
+        BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.COD_BUCKET, FERAL_CAT_FORM_POTION);
         // custom empty forms
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.RED_DYE, ALPHA_FORM_POTION);
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.YELLOW_DYE, BETA_FORM_POTION);

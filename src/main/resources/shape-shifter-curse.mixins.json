@@ -18,8 +18,9 @@
     "PlayerEntityPoseMixin",
     "CustomEdibleItemMixin",
     "CancelEntityStepSoundMixin",
-    "AdjustItemHoldPlayerRendererMixin",
     "AdjustItemHoldFeatureRendererMixin",
+    "AdjustItemHoldPlayerRendererMixin",
+
     "EntityRenderDispatcherMixin",
     "FeralPlayerEntityRendererMixin"
   ],

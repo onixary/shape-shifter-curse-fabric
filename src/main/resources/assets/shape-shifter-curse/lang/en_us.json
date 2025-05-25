@@ -46,6 +46,8 @@
   "effect.shape-shifter-curse.to_axolotl_0_potion": ["Better stay moist"],
   "item.minecraft.potion.effect.to_ocelot_0_potion": ["Ocelot Curse Potion"],
   "effect.shape-shifter-curse.to_ocelot_0_potion": ["You'll want to stock up on raw meat"],
+  "item.minecraft.potion.effect.to_feral_cat_sp_potion": ["Feral Cat Curse Potion"],
+  "effect.shape-shifter-curse.to_feral_cat_sp_potion": ["Meow？"],
   "item.minecraft.potion.effect.to_alpha_0_potion": ["ALPHA"],
   "effect.shape-shifter-curse.to_alpha_0_potion": ["empty custom alpha form"],
   "item.minecraft.potion.effect.to_beta_0_potion": ["BETA"],
@@ -158,10 +160,16 @@
   ],
   "effect.shape-shifter-curse.to_allay_sp_effect": [
     {
-      "text": "Allay",
+      "text": "allay",
       "color": "#0096FF"
     },
-    " sigil...?"
+    " charm...?"
+  ],
+  "effect.shape-shifter-curse.to_feral_cat_sp_effect": [
+    {
+      "text": "feral cat", "color": "#0096FF"
+    },
+    "charm...?"
   ],
   "effect.shape-shifter-curse.to_bat_0_effect.description": [
     "You suddenly feel extremely ",
@@ -331,6 +339,11 @@
   "codex.form.allay_sp.pros": ["Your more spectral physique grants new abilities -\nYour actions now barely consume satiation\nHolding jump lets you ascend and hover freely midair. You also descend slowly\n\nFloating means no footsteps\nAmethyst resonates strangely with you: in inventory, you can \"use\" one amethyst block on another to create amethyst shards\nYou sense other creatures' energy: detecting entities within range. Damaging others lets you siphon some health\nEnhanced perception increases bow damage\nYour tiny size lets you enter 1-block spaces easily, and projectiles miss you more often"],
   "codex.form.allay_sp.cons": ["Your semi-spectral nature brings disadvantages -\nHovering rapidly depletes satiation\nYour body can't derive energy from food - only amethyst shards restore satiation. You also heal less from satiation\nYour weaker body requires both hands for tools/weapons. You break hard materials slower and deal reduced melee damage.Your max health has reduced greatly either\nFloating increases inertia, making stopping harder\nYour lower torso vanished - you can't wear leggings or boots"],
   "codex.form.allay_sp.instincts": ["\n\n\nCompared to other forms, you notice this one seems \"special\": it barely affects your mind and feels less stable. If desired, you could likely revert it relatively easily"],
+  "codex.form.feral_cat_sp.title": ["Meow.."],
+  "codex.form.feral_cat_sp.appearance": ["Meow？"],
+  "codex.form.feral_cat_sp.pros": ["Meowwwww..."],
+  "codex.form.feral_cat_sp.cons": ["Meow...Meowor？"],
+  "codex.form.feral_cat_sp.instincts": ["Meow...."],
 
   "codex.form.alpha0.title": [" "],
   "codex.form.alpha0.appearance": [" "],

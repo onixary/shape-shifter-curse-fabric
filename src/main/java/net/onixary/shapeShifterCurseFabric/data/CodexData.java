@@ -116,6 +116,12 @@ public class CodexData {
     private static final Text allay_sp_pros = Text.translatable("codex.form.allay_sp.pros");
     private static final Text allay_sp_cons = Text.translatable("codex.form.allay_sp.cons");
     private static final Text allay_sp_instincts = Text.translatable("codex.form.allay_sp.instincts");
+    // sp form feral cat
+    private static final Text feral_cat_sp_title = Text.translatable("codex.form.feral_cat_sp.title");
+    private static final Text feral_cat_sp_appearance = Text.translatable("codex.form.feral_cat_sp.appearance");
+    private static final Text feral_cat_sp_pros = Text.translatable("codex.form.feral_cat_sp.pros");
+    private static final Text feral_cat_sp_cons = Text.translatable("codex.form.feral_cat_sp.cons");
+    private static final Text feral_cat_sp_instincts = Text.translatable("codex.form.feral_cat_sp.instincts");
     // custom empty forms
     private static final Text alpha_0_title = Text.translatable("codex.form.alpha0.title");
     private static final Text alpha_0_appearance = Text.translatable("codex.form.alpha0.appearance");
@@ -347,6 +353,14 @@ public class CodexData {
                     case PROS -> allay_sp_pros;
                     case CONS -> allay_sp_cons;
                     case INSTINCTS -> allay_sp_instincts;
+                };
+            case FERAL_CAT_SP:
+                return switch (type) {
+                    case TITLE -> feral_cat_sp_title;
+                    case APPEARANCE -> feral_cat_sp_appearance;
+                    case PROS -> feral_cat_sp_pros;
+                    case CONS -> feral_cat_sp_cons;
+                    case INSTINCTS -> feral_cat_sp_instincts;
                 };
 
                 // custom empty forms

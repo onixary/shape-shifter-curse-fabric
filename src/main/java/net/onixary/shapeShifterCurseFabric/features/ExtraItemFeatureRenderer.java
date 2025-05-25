@@ -22,6 +22,10 @@ import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.RotationCalculator;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.joml.Quaternionf;
 
 @Environment(EnvType.CLIENT)
@@ -49,7 +53,10 @@ public class ExtraItemFeatureRenderer <T extends LivingEntity, M extends EntityM
     ) {
 
         if (livingEntity instanceof ClientPlayerEntity player) {
-            if (MinecraftClient.getInstance().options.getPerspective().isFirstPerson()) {
+            PlayerForms curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+            boolean isFeral = RegFormConfig.getConfig(curForm).getBodyType() == PlayerFormBodyType.FERAL;
+
+            if (isFeral && MinecraftClient.getInstance().options.getPerspective().isFirstPerson()) {
                 matrices.push();
 
                 //var eR = (PlayerEntityRenderer) MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(player);

@@ -45,6 +45,8 @@
   "effect.shape-shifter-curse.to_axolotl_0_potion": ["最好保持湿润"],
   "item.minecraft.potion.effect.to_ocelot_0_potion": ["豹猫咒文药水"],
   "effect.shape-shifter-curse.to_ocelot_0_potion": ["你会想要储备一点生肉的"],
+  "item.minecraft.potion.effect.to_feral_cat_sp_potion": ["野性猫之咒文药水"],
+  "effect.shape-shifter-curse.to_feral_cat_sp_potion": ["喵？"],
   "item.minecraft.potion.effect.to_alpha_0_potion": ["ALPHA"],
   "effect.shape-shifter-curse.to_alpha_0_potion": ["empty custom alpha form"],
   "item.minecraft.potion.effect.to_beta_0_potion": ["BETA"],
@@ -148,6 +150,12 @@
   "effect.shape-shifter-curse.to_allay_sp_effect": [
     {
       "text": "悦灵", "color": "#0096FF"
+    },
+    "咒文...?"
+  ],
+  "effect.shape-shifter-curse.to_feral_cat_sp_effect": [
+    {
+      "text": "野性猫之", "color": "#0096FF"
     },
     "咒文...?"
   ],
@@ -303,6 +311,12 @@
   "codex.form.allay_sp.pros": ["更加接近于灵体的体质给与了你一些全新的能力——\n你的各种动作现在几乎不会消耗饱食度\n通过长按跳跃键，你可以飞上高空，以及在空中自由悬浮移动。在下落时你也会缓慢飘落\n\n由于漂浮在空中，你自然不会发出脚步声\n紫水晶与你的身体产生了奇特的共鸣：在物品栏中，你可以对着一个紫水晶块“使用”另一个紫水晶块来创造紫水晶碎片\n你可以感应到其他生物的能量并加以利用：你可以感知到一定范围内实体的方位。当对其他生物造成伤害时，你也可以从其身上吸取一定的生命值\n由于增强的感知能力，你可以使用弓箭带来更高的伤害\n你现在非常小，可以轻易进入一格高的空间，投射物也更难命中你"],
   "codex.form.allay_sp.cons": ["介于灵体与实体之间的体质也为你带来了一些劣势——\n在使用悬浮能力时，你的饱食度会快速消耗\n你的身体无法从食物中获取能量，只有紫水晶碎片可以恢复你的饱食度。你也很难通过饱食度回复失去的生命值\n你的身体更加弱小，使用双手才能挥动工具与武器。你的生命值上限变得更低，挖掘坚硬材质的速度更慢，造成的近战伤害也大量减少\n由于漂浮在空中，你移动的惯性更大，让你更难停下\n你躯干的下半部分消失了，你不再能装备腿甲与鞋"],
   "codex.form.allay_sp.instincts": ["\n\n\n与其它形态相比，你觉察到你当前的形态似乎有些“特别之处”：它并没有对你的内心造成太多影响，似乎也没有那么稳定。如果你希望的话，应该可以较为容易地将其逆转"],
+  "codex.form.feral_cat_sp.title": ["喵.."],
+  "codex.form.feral_cat_sp.appearance": ["喵？"],
+  "codex.form.feral_cat_sp.pros": ["喵呜嗷..."],
+  "codex.form.feral_cat_sp.cons": ["喵...喵？"],
+  "codex.form.feral_cat_sp.instincts": ["喵...."],
+
 
   "codex.form.alpha0.title": [" "],
   "codex.form.alpha0.appearance": [" "],
