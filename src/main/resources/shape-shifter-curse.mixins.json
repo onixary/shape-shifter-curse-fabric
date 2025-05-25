@@ -20,7 +20,7 @@
     "CancelEntityStepSoundMixin",
     "AdjustItemHoldFeatureRendererMixin",
     "AdjustItemHoldPlayerRendererMixin",
-
+    "IEntityRenderDispatcherAccessor",
     "EntityRenderDispatcherMixin",
     "FeralPlayerEntityRendererMixin"
   ],

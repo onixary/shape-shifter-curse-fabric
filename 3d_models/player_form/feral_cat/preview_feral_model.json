@@ -1,0 +1,41 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"PreviewFeralModel": {
+			"loop": true,
+			"bones": {
+				"bipedHead": {
+					"position": {
+						"vector": [0, 1, 0]
+					}
+				},
+				"bipedBody": {
+					"rotation": {
+						"vector": [-90, 0, 0]
+					}
+				},
+				"bipedLeftArm": {
+					"position": {
+						"vector": [1.2, 2, -3]
+					}
+				},
+				"bipedRightArm": {
+					"position": {
+						"vector": [-1.2, 2, -3]
+					}
+				},
+				"bipedRightLeg": {
+					"position": {
+						"vector": [0, 13, -16]
+					}
+				},
+				"bipedLeftLeg": {
+					"position": {
+						"vector": [0, 13, -16]
+					}
+				}
+			}
+		}
+	},
+	"azurelib_format_version": 2
+}

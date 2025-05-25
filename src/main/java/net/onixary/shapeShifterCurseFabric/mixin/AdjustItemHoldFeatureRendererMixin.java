@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Environment(EnvType.CLIENT)
-@Mixin(value = HeldItemFeatureRenderer.class, priority = 99999)
+@Mixin(value = HeldItemFeatureRenderer.class, priority = 99999999)
 public abstract class AdjustItemHoldFeatureRendererMixin<T extends LivingEntity, M extends EntityModel<T> & ModelWithArms> {
     /*private LivingEntity cachedEntity; // 缓存 livingEntity
 

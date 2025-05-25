@@ -11,7 +11,6 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.onixary.shapeShifterCurseFabric.features.ExtraItemFeatureRenderer;
 import net.onixary.shapeShifterCurseFabric.features.MouthItemFeature;
-import net.onixary.shapeShifterCurseFabric.accessors.IEntityRenderDispatcherAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
