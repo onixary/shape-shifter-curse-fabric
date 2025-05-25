@@ -170,7 +170,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
             handSwingDuration = this.hasStatusEffect(StatusEffects.MINING_FATIGUE) ? 6 + (1 + this.getStatusEffect(StatusEffects.MINING_FATIGUE).getAmplifier()) * 2 : 6;
         }
 
-        if (!this.handSwinging || this.handSwingTicks >= handSwingDuration / 2 || this.handSwingTicks < 0)
+        if (!this.handSwinging)
         {
             if (getVehicle() != null && getVehicle() instanceof BoatEntity)
             {
@@ -279,6 +279,12 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                 } else {
                     currentState = PlayerAnimState.ANIM_CRAWLING_IDLE;
                 }
+            }
+        }
+        else{
+            if (!(getActiveItem().getItem() instanceof FlintAndSteelItem && isUsingItem()))
+            {
+                currentState = PlayerAnimState.ANIM_TOOL_SWING;
             }
         }
         // isTransforming
@@ -402,7 +408,6 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         if (getActiveItem().getItem() instanceof FlintAndSteelItem && isUsingItem()) {
             return;
         }
-
         currentState = PlayerAnimState.ANIM_TOOL_SWING;
     }
 
