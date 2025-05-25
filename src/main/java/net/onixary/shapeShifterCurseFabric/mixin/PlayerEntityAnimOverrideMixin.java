@@ -87,6 +87,9 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
     boolean shouldContinueSwingAnim = false;
     int continueSwingAnimCounter = 0;
 
+    PlayerForms transformCurrentForm;
+    PlayerForms transformToForm;
+
     @Override
     public void tick() {
         super.tick();
@@ -290,6 +293,8 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         // isTransforming
         if(TransformManager.isTransforming()){
             //ShapeShifterCurseFabric.LOGGER.info("Player is transforming");
+            transformCurrentForm = TransformManager.curFromForm;
+            transformToForm = TransformManager.curToForm;
             currentState = PlayerAnimState.ANIM_ON_TRANSFORM;
         }
 
@@ -305,7 +310,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         // judge form animation
         animToPlay = null;
         if(currentState == PlayerAnimState.ANIM_ON_TRANSFORM){
-            animToPlay = AnimationTransform.getFormAnimToPlay(PlayerAnimState.ANIM_ON_TRANSFORM);
+            animToPlay = AnimationTransform.getFormAnimToPlay(transformCurrentForm, transformToForm);
         }
         else{
             switch (curForm) {

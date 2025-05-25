@@ -30,8 +30,8 @@ public class TransformManager {
     private static boolean isEffectActive = false;
     private static boolean isEndEffectActive = false;
     private static PlayerEntity curPlayer = null;
-    private static PlayerForms curFromForm = null;
-    private static PlayerForms curToForm = null;
+    public static PlayerForms curFromForm = null;
+    public static PlayerForms curToForm = null;
     private static boolean _isByCursedMoon = false;
     private static boolean _isByCursedMoonEnd = false;
     private static boolean _isRegressedFromFinal = false;
