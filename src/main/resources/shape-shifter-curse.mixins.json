@@ -20,7 +20,8 @@
     "CancelEntityStepSoundMixin",
     "AdjustItemHoldPlayerRendererMixin",
     "AdjustItemHoldFeatureRendererMixin",
-    "EntityRenderDispatcherMixin"
+    "EntityRenderDispatcherMixin",
+    "FeralPlayerEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

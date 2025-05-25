@@ -245,7 +245,9 @@ public class CustomFeralItemRenderer {
 		float g = MathHelper.sqrt(swingProgress);
 		float h = -0.3F * MathHelper.sin(g * (float) Math.PI);
 		float i = 0.4F * MathHelper.sin(g * (float) (Math.PI * 2));
-		float j = -0.4F * MathHelper.sin(swingProgress * (float) Math.PI);
+		// 减少摆动幅度
+		//float j = -0.4F * MathHelper.sin(swingProgress * (float) Math.PI);
+		float j = -0.1F * MathHelper.sin(swingProgress * (float) Math.PI);
 		matrices.translate(f * (h + 0.64000005F), i + -0.6F + equipProgress * -0.6F, j + -0.71999997F);
 		matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(f * 45.0F));
 		float k = MathHelper.sin(swingProgress * swingProgress * (float) Math.PI);

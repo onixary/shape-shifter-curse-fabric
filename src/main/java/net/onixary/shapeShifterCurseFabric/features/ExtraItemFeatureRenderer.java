@@ -19,7 +19,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
+import net.minecraft.util.math.RotationCalculator;
 import net.minecraft.util.math.Vec3d;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import org.joml.Quaternionf;
 
 @Environment(EnvType.CLIENT)
 public class ExtraItemFeatureRenderer <T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
@@ -46,19 +49,26 @@ public class ExtraItemFeatureRenderer <T extends LivingEntity, M extends EntityM
     ) {
 
         if (livingEntity instanceof ClientPlayerEntity player) {
-            if (true) {
+            if (MinecraftClient.getInstance().options.getPerspective().isFirstPerson()) {
                 matrices.push();
 
                 //var eR = (PlayerEntityRenderer) MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(player);
                 //var head = eR.getModel().head;
 
                 // FirstPerson Mod会直接将head.pivot移动到某个非常远的位置来“隐藏”头部，所以需要直接定义好一个固定位置
-                Vec3d playerHeadPivot = new Vec3d(0.0F, -3F, 0.0F);
-                matrices.translate(playerHeadPivot.x / 16.0F, playerHeadPivot.y / 16.0F, playerHeadPivot.z / 16.0F);
+                // Vec3d posOffset = new Vec3d(0.0F, 0.0F, 0.0F);
+                // Vec3d rotCenter = ShapeShifterCurseFabric.feralItemCenter;
+                Vec3d rotCenter = new Vec3d(0.0F, -4.0F, -6.0F);
+                matrices.translate(rotCenter.x / 16.0F, rotCenter.y / 16.0F, rotCenter.z / 16.0F);
 
-                matrices.multiply(RotationAxis.POSITIVE_Z.rotation(0.0F));
+                //Vec3d posOffset = ShapeShifterCurseFabric.feralItemPosOffset;
+                Vec3d posOffset = new Vec3d(-12.0F, 15.0F, 4.0F);
                 matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(headYaw));
                 matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(headPitch));
+                matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(240.0F));
+
+                matrices.translate(posOffset.x / 16.0F, posOffset.y / 16.0F, posOffset.z / 16.0F);
+
 
                 float pitch = MathHelper.lerp(tickDelta, player.prevPitch, player.getPitch());
                 float equipProgress = 1.0F - MathHelper.lerp(tickDelta, customFeralItemRenderer.prevEquipProgressMainHand, customFeralItemRenderer.equipProgressMainHand);

@@ -28,6 +28,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalEntityActions;
 import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalEntityConditions;
@@ -77,11 +78,12 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final String MOD_ID = "shape-shifter-curse";
     // 使用AuthMe模组获取真实的持久UUID来记录保存，因此不需要使用之前很蠢的测试UUID了
     // public static final String DEBUG_UUID = "testUUID-3d9ab571-1ea5-360b-bc9d-77cd0b2f72a9";
-    // This logger is used to write text to the console and the log file.
-    // It is considered best practice to use your mod id as the logger's name.
-    // That way, it's clear which mod wrote info, warnings, and errors.
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static final ConfigSSC CONFIG = ConfigSSC.createAndLoad();
+    // 用于在游戏内测试调参用的临时变量
+    public static Vec3d feralItemCenter = new Vec3d(0.0F, 0.0F, 0.0F);
+    public static Vec3d feralItemPosOffset = new Vec3d(0.0F, 0.0F, 0.0F);
+    public static float feralItemEulerX = 0.0F;
 
     public static CursedMoonData cursedMoonData = new CursedMoonData();
     // Reg custom advancement criterion

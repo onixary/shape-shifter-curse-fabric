@@ -33,6 +33,6 @@ public abstract class AdjustItemHoldPlayerRendererMixin extends LivingEntityRend
     public void init(EntityRendererFactory.Context ctx, boolean slim, CallbackInfo ci) {
         this.addFeature(new MouthItemFeature<>(this, this.dispatcher.getHeldItemRenderer()));
         ItemRenderer itemRenderer = ((IEntityRenderDispatcherAccessor) this.dispatcher).getItemRenderer();
-        //this.addFeature(new ExtraItemFeatureRenderer<>(this, this.dispatcher, itemRenderer));
+        this.addFeature(new ExtraItemFeatureRenderer<>(this, this.dispatcher, itemRenderer));
     }
 }

@@ -1,13 +1,17 @@
 package net.onixary.shapeShifterCurseFabric.command;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.argument.EntityArgumentType;
+import net.minecraft.command.argument.Vec3ArgumentType;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.Vec3d;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 
@@ -38,6 +42,15 @@ public class ShapeShifterCurseCommand {
                         )
                         .then(literal("jump_to_next_cursed_moon")
                                 .executes(ShapeShifterCurseCommand::jumpToNextCursedMoon)
+                        )
+                        .then(literal("adjust_feral_item_loc")
+                                .then(argument("rot_center", Vec3ArgumentType.vec3())
+                                        .then(argument("pos_offset", Vec3ArgumentType.vec3())
+                                                .then(argument("euler_x", FloatArgumentType.floatArg())
+                                                        .executes(ShapeShifterCurseCommand::adjustFeralItemLoc)
+                                                )
+                                        )
+                                )
                         )
         );
     }
@@ -71,6 +84,18 @@ public class ShapeShifterCurseCommand {
         CursedMoon.jumpToNextCursedMoon(world);
         ServerCommandSource serverCommandSource = commandContext.getSource();
         serverCommandSource.sendFeedback(() -> Text.literal("Set cursed moon to next night!"), true);
+        return 1;
+    }
+
+    private static int adjustFeralItemLoc(CommandContext<ServerCommandSource> commandContext) {
+        Vec3d rotCenter = Vec3ArgumentType.getVec3(commandContext, "rot_center");
+        Vec3d posOffset = Vec3ArgumentType.getVec3(commandContext, "pos_offset");
+        float eulerX = FloatArgumentType.getFloat(commandContext, "euler_x");
+        ShapeShifterCurseFabric.feralItemCenter = rotCenter;
+        ShapeShifterCurseFabric.feralItemPosOffset = posOffset;
+        ShapeShifterCurseFabric.feralItemEulerX = eulerX;
+        ServerCommandSource serverCommandSource = commandContext.getSource();
+        serverCommandSource.sendFeedback(() -> Text.literal("Location adjusted! Center : " + rotCenter + " Offset: " + posOffset + " RotationX : " + eulerX), true);
         return 1;
     }
 }

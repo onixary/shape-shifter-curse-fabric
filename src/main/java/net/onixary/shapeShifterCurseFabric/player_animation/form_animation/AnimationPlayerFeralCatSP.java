@@ -20,7 +20,8 @@ public class AnimationPlayerFeralCatSP {
         switch (currentState) {
             case ANIM_IDLE:
                 return anim_idle;
-
+            case ANIM_SNEAK_IDLE:
+                return anim_sneak_idle;
             default:
                 return anim_idle;
         }
@@ -28,7 +29,7 @@ public class AnimationPlayerFeralCatSP {
 
     public static void registerAnims() {
         anim_idle = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_idle"), true);
-        anim_sneak_idle = new AnimationHolder(new Identifier(MOD_ID, "ocelot_2_sneak_idle"), true);
+        anim_sneak_idle = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sneak_idle"), true);
         anim_sneak_rush = new AnimationHolder(new Identifier(MOD_ID, "ocelot_2_sneak_rush"), true);
         anim_rush_jump = new AnimationHolder(new Identifier(MOD_ID, "ocelot_2_rush_jump"), true);
         anim_climbing = new AnimationHolder(new Identifier(MOD_ID, "ocelot_2_climbing"), true);
