@@ -1,7 +1,9 @@
 package net.onixary.shapeShifterCurseFabric.features;
 
+import dev.tr7zw.firstperson.FirstPersonModelCore;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.TexturedRenderLayers;
@@ -32,6 +34,7 @@ import org.joml.Quaternionf;
 public class ExtraItemFeatureRenderer <T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
     //private final HeldItemRenderer heldItemRenderer;
     private final CustomFeralItemRenderer customFeralItemRenderer;
+    private static final boolean IS_FIRST_PERSON_MOD_LOADED = FabricLoader.getInstance().isModLoaded("firstperson");
 
     public ExtraItemFeatureRenderer(FeatureRendererContext<T, M> context, EntityRenderDispatcher entityRenderDispatcher, ItemRenderer itemRenderer) {
         super(context);
@@ -57,8 +60,15 @@ public class ExtraItemFeatureRenderer <T extends LivingEntity, M extends EntityM
             boolean isFeral = RegFormConfig.getConfig(curForm).getBodyType() == PlayerFormBodyType.FERAL;
 
             if (isFeral && MinecraftClient.getInstance().options.getPerspective().isFirstPerson()) {
-                matrices.push();
 
+                if(IS_FIRST_PERSON_MOD_LOADED){
+                    // Feral形态的forstperson配置必须固定为-25 offset，否则会导致物品位置不正确以及模型看不到
+                    FirstPersonModelCore fpm = FirstPersonModelCore.instance;
+                    fpm.getConfig().xOffset = -25;
+                    fpm.getConfig().sitXOffset = -25;
+                    fpm.getConfig().sneakXOffset = -25;
+                }
+                matrices.push();
                 //var eR = (PlayerEntityRenderer) MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(player);
                 //var head = eR.getModel().head;
 

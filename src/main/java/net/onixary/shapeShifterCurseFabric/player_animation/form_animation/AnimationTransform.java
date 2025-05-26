@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.player_animation.form_animation;
 
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
@@ -19,6 +20,12 @@ public class AnimationTransform {
 
     public static AnimationHolder getFormAnimToPlay(PlayerForms curForm, PlayerForms toForm) {
         // 适配Feral，根据当前形态和目标形态返回对应的动画
+        // 添加null捕获防止恶性bug
+        if(curForm == null || toForm == null){
+            ShapeShifterCurseFabric.LOGGER.info("getFormAnimToPlay called with null curForm or null toForm, returning default animation.");
+            return anim_on_transform_default;
+        }
+
         boolean curIsFeral = RegFormConfig.CONFIGS.get(curForm).getBodyType() == PlayerFormBodyType.FERAL;
         boolean toIsFeral = RegFormConfig.CONFIGS.get(toForm).getBodyType() == PlayerFormBodyType.FERAL;
 

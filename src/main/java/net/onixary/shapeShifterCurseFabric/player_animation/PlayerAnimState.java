@@ -23,6 +23,7 @@ public enum PlayerAnimState {
     ANIM_FLYING,
     ANIM_BAREHANDED_ATTACK,
     ANIM_TOOL_SWING,
+    ANIM_ATTACK_ONCE,
     ANIM_SNEAK_RUSH,
     ANIM_RUSH_JUMP
 }

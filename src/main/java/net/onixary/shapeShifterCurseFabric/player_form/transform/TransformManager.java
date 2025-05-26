@@ -1,5 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.player_form.transform;
 
+import dev.tr7zw.firstperson.FirstPersonModelCore;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -44,6 +46,8 @@ public class TransformManager {
     public static boolean isTransforming(){
         return isTransforming;
     }
+
+    private static final boolean IS_FIRST_PERSON_MOD_LOADED = FabricLoader.getInstance().isModLoaded("firstperson");
 
     public static void handleProgressiveTransform(PlayerEntity player, boolean isByCursedMoon){
         _isByCursedMoon = isByCursedMoon;
@@ -208,6 +212,13 @@ public class TransformManager {
                 if(curFromForm == PlayerForms.ORIGINAL_BEFORE_ENABLE){
                     // info
                     curPlayer.sendMessage(Text.translatable("info.shape-shifter-curse.on_enable_mod_after").formatted(Formatting.LIGHT_PURPLE));
+                }
+                // transform时重置firstperson offset
+                if(IS_FIRST_PERSON_MOD_LOADED){
+                    FirstPersonModelCore fpm = FirstPersonModelCore.instance;
+                    fpm.getConfig().xOffset = 0;
+                    fpm.getConfig().sitXOffset = 0;
+                    fpm.getConfig().sneakXOffset = 0;
                 }
                 applyFinaleTransformEffect((ServerPlayerEntity) curPlayer, 5);
                 InstinctTicker.isPausing = false;

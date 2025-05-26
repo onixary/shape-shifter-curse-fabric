@@ -17,6 +17,7 @@ public class AnimationPlayerAllaySP {
     private static AnimationHolder anim_digging = AnimationHolder.EMPTY;
     private static AnimationHolder anim_flying = AnimationHolder.EMPTY;
     private static AnimationHolder anim_idle = AnimationHolder.EMPTY;
+    private static AnimationHolder anim_attack = AnimationHolder.EMPTY;
 
     public static AnimationHolder getFormAnimToPlay(PlayerAnimState currentState) {
         switch (currentState) {
@@ -43,6 +44,9 @@ public class AnimationPlayerAllaySP {
 
             case ANIM_TOOL_SWING:
                 return anim_digging;
+
+            case ANIM_ATTACK_ONCE:
+                return anim_attack;
             default:
                 return null;
         }
@@ -56,5 +60,6 @@ public class AnimationPlayerAllaySP {
         anim_digging = new AnimationHolder(new Identifier(MOD_ID, "allay_sp_digging"), true);
         anim_flying = new AnimationHolder(new Identifier(MOD_ID, "allay_sp_fly"), true);
         anim_idle = new AnimationHolder(new Identifier(MOD_ID, "allay_sp_idle"), true, 1, 0);
+        anim_attack = new AnimationHolder(new Identifier(MOD_ID, "allay_sp_attack"), true, 1, 0);
     }
 }

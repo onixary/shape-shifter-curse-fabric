@@ -10,8 +10,6 @@ import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
 import dev.kosmx.playerAnim.core.util.Ease;
 import dev.kosmx.playerAnim.core.util.Vec3f;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
-import io.github.apace100.apoli.component.PowerHolderComponent;
-import io.github.apace100.apoli.mixin.ServerPlayerInteractionManagerAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.block.LadderBlock;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -21,15 +19,11 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.item.FlintAndSteelItem;
-import net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket;
-import net.minecraft.server.world.ServerChunkManager;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.*;
@@ -41,8 +35,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.Comparator;
 
 @Mixin(AbstractClientPlayerEntity.class)
 public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
@@ -84,7 +76,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
     KeyframeAnimation currentAnimation = null;
     boolean overrideHandAnim = false;
     AnimationHolder animToPlay = null;
-    boolean shouldContinueSwingAnim = false;
+    boolean isAttackAnim = false;
     int continueSwingAnimCounter = 0;
 
     PlayerForms transformCurrentForm;
@@ -93,20 +85,20 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
     @Override
     public void tick() {
         super.tick();
-        // 将tool swing状态时间做少许延迟来避免挖掘覆盖动画被Idle中断
-        if(currentState == PlayerAnimState.ANIM_TOOL_SWING){
+        // 计时来决定是挖掘还是攻击
+        /*if(this.handSwinging){
             if(continueSwingAnimCounter < 10){
                 continueSwingAnimCounter++;
-                shouldContinueSwingAnim = true;
+                isAttackAnim = true;
             }
             else{
-                shouldContinueSwingAnim = false;
+                isAttackAnim = false;
             }
         }
         else{
             continueSwingAnimCounter = 0;
-            shouldContinueSwingAnim =false;
-        }
+            isAttackAnim =false;
+        }*/
 
         // judge current anim state
         if (getVehicle() != null && !(getVehicle() instanceof BoatEntity)) {
@@ -203,7 +195,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
             {
                 currentState = PlayerAnimState.ANIM_ELYTRA_FLY;
             }
-            else if ((isOnGround() || onGroundInWater) && !shouldContinueSwingAnim)
+            else if ((isOnGround() || onGroundInWater) && !isAttackAnim)
             {
                 currentState = PlayerAnimState.ANIM_IDLE;
                 if ((isInsideWaterOrBubbleColumn() || isInLava()) && !onGroundInWater)
@@ -283,10 +275,16 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                     currentState = PlayerAnimState.ANIM_CRAWLING_IDLE;
                 }
             }
+            continueSwingAnimCounter = 0; // 重置挖掘动画计数器
         }
-        else{
-            if (!(getActiveItem().getItem() instanceof FlintAndSteelItem && isUsingItem()))
-            {
+        else
+        {
+            // 需要判断是挖掘（长按）还是攻击（短按）
+            // 挖掘动画为loop，攻击动画为单次
+            if (continueSwingAnimCounter < 10) {
+                continueSwingAnimCounter++;
+                currentState = PlayerAnimState.ANIM_ATTACK_ONCE;
+            } else {
                 currentState = PlayerAnimState.ANIM_TOOL_SWING;
             }
         }

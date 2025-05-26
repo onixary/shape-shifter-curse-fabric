@@ -3,7 +3,12 @@
 		"origins:form_feral_cat_sp_scale",
 		"origins:form_disable_leg_armor",
 		"origins:form_disable_feet_armor",
-		"origins:velvet_paws"
+		"origins:velvet_paws",
+		"origins:scare_creepers",
+		"origins:fall_immunity",
+
+		"origins:form_ocelot_sound",
+		"origins:form_ocelot_sound_hurt"
 	],
 	"icon": {
 		"item": "minecraft:player_head"
