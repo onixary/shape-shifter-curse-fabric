@@ -60,6 +60,8 @@
   "effect.shape-shifter-curse.to_psi_sp_potion": ["empty custom psi special form"],
   "item.minecraft.potion.effect.to_chi_sp_potion": ["CHI"],
   "effect.shape-shifter-curse.to_chi_sp_potion": ["empty custom chi special form"],
+  "item.minecraft.potion.effect.to_phi_sp_potion": ["PHI"],
+  "effect.shape-shifter-curse.to_phi_sp_potion": ["empty custom phi special form"],
 
   "item.shape-shifter-curse.cursed_book_of_shape_shifter": ["Strange Book"],
   "item.shape-shifter-curse.book_of_shape_shifter": ["Book of the Shapeshifter"],
@@ -190,6 +192,7 @@
   "effect.shape-shifter-curse.to_omega_sp_effect": ["OMEGA"],
   "effect.shape-shifter-curse.to_psi_sp_effect": ["PSI"],
   "effect.shape-shifter-curse.to_chi_sp_effect": ["CHI"],
+  "effect.shape-shifter-curse.to_phi_sp_effect": ["PHI"],
 
   "power.origins.form_allay_sp_amethyst_shard_only.name": ["amethyst consumer"],
   "power.origins.form_ocelot_2_raw_meat_only.name": ["raw meat consumer"],
@@ -404,5 +407,10 @@
   "codex.form.chi_sp.appearance": [" "],
   "codex.form.chi_sp.pros": [" "],
   "codex.form.chi_sp.cons": [" "],
-  "codex.form.chi_sp.instincts": ["\n\n\nCompared to other forms, you notice this one seems \"special\": it barely affects your mind and feels less stable. If desired, you could likely revert it relatively easily"]
+  "codex.form.chi_sp.instincts": ["\n\n\nCompared to other forms, you notice this one seems \"special\": it barely affects your mind and feels less stable. If desired, you could likely revert it relatively easily"],
+  "codex.form.phi_sp.title": [" "],
+  "codex.form.phi_sp.appearance": [" "],
+  "codex.form.phi_sp.pros": [" "],
+  "codex.form.phi_sp.cons": [" "],
+  "codex.form.phi_sp.instincts": ["\n\n\nCompared to other forms, you notice this one seems \"special\": it barely affects your mind and feels less stable. If desired, you could likely revert it relatively easily"]
 }

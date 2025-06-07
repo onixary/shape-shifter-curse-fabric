@@ -50,6 +50,9 @@ public class RegCustomPotions {
     public static final Potion CHI_FORM_POTION =
             Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_chi_sp_potion"),
                     new Potion(new StatusEffectInstance(TO_CHI_SP_POTION)));
+    public static final Potion PHI_FORM_POTION =
+            Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_phi_sp_potion"),
+                    new Potion(new StatusEffectInstance(TO_PHI_SP_POTION)));
 
 
     public static void registerPotions(){
@@ -71,5 +74,6 @@ public class RegCustomPotions {
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.GREEN_DYE, OMEGA_FORM_POTION);
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.ORANGE_DYE, PSI_FORM_POTION);
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.PURPLE_DYE, CHI_FORM_POTION);
+        BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.WHITE_DYE, PHI_FORM_POTION);
     }
 }

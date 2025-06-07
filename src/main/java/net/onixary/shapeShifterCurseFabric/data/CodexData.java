@@ -183,6 +183,11 @@ public class CodexData {
     private static final Text chi_sp_pros = Text.translatable("codex.form.chi_sp.pros");
     private static final Text chi_sp_cons = Text.translatable("codex.form.chi_sp.cons");
     private static final Text chi_sp_instincts = Text.translatable("codex.form.chi_sp.instincts");
+    private static final Text phi_sp_title = Text.translatable("codex.form.phi_sp.title");
+    private static final Text phi_sp_appearance = Text.translatable("codex.form.phi_sp.appearance");
+    private static final Text phi_sp_pros = Text.translatable("codex.form.phi_sp.pros");
+    private static final Text phi_sp_cons = Text.translatable("codex.form.phi_sp.cons");
+    private static final Text phi_sp_instincts = Text.translatable("codex.form.phi_sp.instincts");
 
 
 
@@ -459,6 +464,14 @@ public class CodexData {
                     case PROS -> chi_sp_pros;
                     case CONS -> chi_sp_cons;
                     case INSTINCTS -> chi_sp_instincts;
+                };
+            case PHI_SP:
+                return switch (type) {
+                    case TITLE -> phi_sp_title;
+                    case APPEARANCE -> phi_sp_appearance;
+                    case PROS -> phi_sp_pros;
+                    case CONS -> phi_sp_cons;
+                    case INSTINCTS -> phi_sp_instincts;
                 };
         }
         return Text.empty();

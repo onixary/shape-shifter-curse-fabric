@@ -22,6 +22,7 @@ public class RegTStatusEffect {
     public static final BaseTransformativeStatusEffect TO_OMEGA_SP_EFFECT = register("to_omega_sp_effect",new ToOmegaStatusSP());
     public static final BaseTransformativeStatusEffect TO_PSI_SP_EFFECT = register("to_psi_sp_effect",new ToPsiStatusSP());
     public static final BaseTransformativeStatusEffect TO_CHI_SP_EFFECT = register("to_chi_sp_effect",new ToChiStatusSP());
+    public static final BaseTransformativeStatusEffect TO_PHI_SP_EFFECT = register("to_phi_sp_effect",new ToPhiStatusSP());
 
     public static <T extends BaseTransformativeStatusEffect> T register(String path, T effect) {
         return Registry.register(Registries.STATUS_EFFECT, new Identifier(ShapeShifterCurseFabric.MOD_ID, path), effect);
@@ -39,7 +40,8 @@ public class RegTStatusEffect {
                 || player.hasStatusEffect(TO_GAMMA_0_EFFECT)
                 || player.hasStatusEffect(TO_OMEGA_SP_EFFECT)
                 || player.hasStatusEffect(TO_PSI_SP_EFFECT)
-                || player.hasStatusEffect(TO_CHI_SP_EFFECT);
+                || player.hasStatusEffect(TO_CHI_SP_EFFECT)
+                || player.hasStatusEffect(TO_PHI_SP_EFFECT);
     }
 
     public static void removeVisualEffects(PlayerEntity player) {
@@ -55,6 +57,7 @@ public class RegTStatusEffect {
         player.removeStatusEffect(TO_OMEGA_SP_EFFECT);
         player.removeStatusEffect(TO_PSI_SP_EFFECT);
         player.removeStatusEffect(TO_CHI_SP_EFFECT);
+        player.removeStatusEffect(TO_PHI_SP_EFFECT);
     }
 
     public static void initialize() {}

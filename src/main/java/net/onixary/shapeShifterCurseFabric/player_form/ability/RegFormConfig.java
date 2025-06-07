@@ -114,6 +114,10 @@ public class RegFormConfig {
                 new FormConfig(defaultLayerID,
                         "form_chi_sp",
                         PlayerFormPhase.PHASE_SP,PlayerFormBodyType.NORMAL));
+        CONFIGS.put(PlayerForms.PHI_SP,
+                new FormConfig(defaultLayerID,
+                        "form_phi_sp",
+                        PlayerFormPhase.PHASE_SP,PlayerFormBodyType.FERAL));
 
         //CONFIGS.get(PlayerForms.BAT_0).getFormOriginID();
     }

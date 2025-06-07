@@ -32,7 +32,8 @@ public enum PlayerForms {
     // Custom empty special forms
     OMEGA_SP("omega_sp_form", 5),
     PSI_SP("psi_sp_form", 5),
-    CHI_SP("chi_sp_form", 5);
+    CHI_SP("chi_sp_form", 5),
+    PHI_SP("phi_sp_form", 5);
 
 
     private final String group;

@@ -27,7 +27,8 @@
     "origins:form_gamma_2",
     "origins:form_omega_sp",
     "origins:form_psi_sp",
-    "origins:form_chi_sp"
+    "origins:form_chi_sp",
+    "origins:form_phi_sp"
   ],
   "allow_random": true,
   "exclude_random": [

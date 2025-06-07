@@ -1,6 +1,8 @@
 package net.onixary.shapeShifterCurseFabric.item;
 
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -27,5 +29,17 @@ public class RegCustomItem {
     }
 
     public static void initialize() {
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
+            entries.add(BOOK_OF_SHAPE_SHIFTER);
+        });
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
+            entries.add(UNTREATED_MOONDUST);
+            entries.add(MOONDUST_MATRIX);
+        });
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
+            entries.add(INHIBITOR);
+            entries.add(POWERFUL_INHIBITOR);
+            entries.add(CATALYST);
+        });
     }
 }
