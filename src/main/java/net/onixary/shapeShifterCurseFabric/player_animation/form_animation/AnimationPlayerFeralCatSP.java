@@ -21,6 +21,7 @@ public class AnimationPlayerFeralCatSP {
     private static AnimationHolder anim_climb = AnimationHolder.EMPTY;
     private static AnimationHolder anim_fall = AnimationHolder.EMPTY;
     private static AnimationHolder anim_attack = AnimationHolder.EMPTY;
+    private static AnimationHolder anim_sleep = AnimationHolder.EMPTY;
 
 
     public static AnimationHolder getFormAnimToPlay(PlayerAnimState currentState) {
@@ -49,6 +50,8 @@ public class AnimationPlayerFeralCatSP {
                 return anim_climb;
             case ANIM_FALLING:
                 return anim_fall;
+            case ANIM_SLEEPING:
+                return anim_sleep;
 
             case ANIM_ATTACK_ONCE:
                 return anim_attack;
@@ -71,5 +74,6 @@ public class AnimationPlayerFeralCatSP {
         anim_climb = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_climb"), true);
         anim_fall = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_fall"), true);
         anim_attack = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_attack"), true);
+        anim_sleep = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sleep"), true);
     }
 }

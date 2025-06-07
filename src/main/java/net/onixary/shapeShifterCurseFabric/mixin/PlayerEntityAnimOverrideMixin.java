@@ -198,7 +198,13 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
             }
             else if ((isOnGround() || onGroundInWater) && !isAttackAnim)
             {
-                currentState = PlayerAnimState.ANIM_IDLE;
+                if(isSleeping()){
+                    currentState = PlayerAnimState.ANIM_SLEEPING;
+                }
+                else{
+                    currentState = PlayerAnimState.ANIM_IDLE;
+                }
+
                 if ((isInsideWaterOrBubbleColumn() || isInLava()) && !onGroundInWater)
                 {
                     if (this.isSwimming() || this.isSprinting())
@@ -286,7 +292,12 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                 continueSwingAnimCounter++;
                 currentState = PlayerAnimState.ANIM_ATTACK_ONCE;
             } else {
-                currentState = PlayerAnimState.ANIM_TOOL_SWING;
+                if(isSleeping()){
+                    currentState = PlayerAnimState.ANIM_SLEEPING;
+                }
+                else{
+                    currentState = PlayerAnimState.ANIM_TOOL_SWING;
+                }
             }
         }
         // isTransforming
