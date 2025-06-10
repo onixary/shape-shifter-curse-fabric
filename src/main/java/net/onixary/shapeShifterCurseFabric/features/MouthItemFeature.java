@@ -23,6 +23,9 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.feralItemEulerX;
+import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.feralItemPosOffset;
+
 public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
     private final HeldItemRenderer heldItemRenderer;
 
@@ -43,7 +46,6 @@ public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T>> 
             }
             else{
                 //ShapeShifterCurseFabric.LOGGER.info("Feral form render item");
-                // todo: 这里需要在确定好标准高度之后进一步调节
                 matrixStack.push();
                 var eR = (PlayerEntityRenderer) MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(player);
                 var head = eR.getModel().head;
@@ -64,6 +66,22 @@ public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T>> 
                 ItemStack itemstack = player.getMainHandStack();
                 heldItemRenderer.renderItem(livingEntity, itemstack, ModelTransformationMode.GROUND, false, matrixStack, vertexConsumerProvider, i);
                 matrixStack.pop();
+
+                // 副装备栏放在背部
+                matrixStack.push();
+                var eR2 = (PlayerEntityRenderer) MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(player);
+                var body = eR.getModel().body;
+                body.rotate(matrixStack);
+
+                matrixStack.translate(body.pivotX / 16.0F, body.pivotY / 16.0F, body.pivotZ / 16.0F);
+                matrixStack.translate(0.0F, 0.5F, 0.25F);
+                matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(0.0F));
+                matrixStack.scale(1.5F, 1.5F, 1.5F);
+
+                ItemStack offHandStack = player.getOffHandStack();
+                heldItemRenderer.renderItem(livingEntity, offHandStack, ModelTransformationMode.GROUND, false, matrixStack, vertexConsumerProvider, i);
+                matrixStack.pop();
+
             }
         }
     }
