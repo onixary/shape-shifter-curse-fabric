@@ -34,7 +34,7 @@ public class ToPsiStatusPotion extends StatusEffect {
     @Override
     public void applyInstantEffect(@Nullable Entity source, @Nullable Entity attacker, LivingEntity target, int amplifier, double proximity)
     {
-        if (source instanceof ServerPlayerEntity player) {
+        if (!target.getWorld().isClient() && target instanceof ServerPlayerEntity player) {
             PlayerForms curToForm = Objects.requireNonNull(player.getAttached(EFFECT_ATTACHMENT)).currentToForm;
             if (curToForm != TO_PSI_SP_EFFECT.getToForm() && FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_SHIFTER){
                 EffectManager.overrideEffect(player, TO_PSI_SP_EFFECT);

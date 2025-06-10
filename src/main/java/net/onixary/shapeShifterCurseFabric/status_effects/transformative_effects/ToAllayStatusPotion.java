@@ -15,8 +15,8 @@ import java.util.Objects;
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_ALLAY_SP_EFFECT;
 import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.EFFECT_ATTACHMENT;
 
-public class ToAlleyStatusPotion extends StatusEffect {
-    public ToAlleyStatusPotion() {
+public class ToAllayStatusPotion extends StatusEffect {
+    public ToAllayStatusPotion() {
         super(StatusEffectCategory.NEUTRAL, 0xFFFFFF);
     }
 
@@ -33,12 +33,11 @@ public class ToAlleyStatusPotion extends StatusEffect {
     @Override
     public void applyInstantEffect(@Nullable Entity source, @Nullable Entity attacker, LivingEntity target, int amplifier, double proximity)
     {
-        if (source instanceof ServerPlayerEntity player) {
+        if (!target.getWorld().isClient() && target instanceof ServerPlayerEntity player) {
             PlayerForms curToForm = Objects.requireNonNull(player.getAttached(EFFECT_ATTACHMENT)).currentToForm;
             if (curToForm != TO_ALLAY_SP_EFFECT.getToForm() && FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_SHIFTER){
                 EffectManager.overrideEffect(player, TO_ALLAY_SP_EFFECT);
             }
         }
     }
-
 }

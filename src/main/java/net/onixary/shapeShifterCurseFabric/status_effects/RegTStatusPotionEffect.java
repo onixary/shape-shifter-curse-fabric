@@ -13,7 +13,7 @@ public class RegTStatusPotionEffect {
     public static final StatusEffect TO_BAT_0_POTION = register("to_bat_0_potion",new ToBatStatusPotion());
     public static final StatusEffect TO_AXOLOTL_0_POTION = register("to_axolotl_0_potion", new ToAxolotlStatusPotion());
     public static final StatusEffect TO_OCELOT_0_POTION = register("to_ocelot_0_potion", new ToOcelotStatusPotion());
-    public static final StatusEffect TO_ALLAY_SP_POTION = register("to_allay_sp_potion", new ToAlleyStatusPotion());
+    public static final StatusEffect TO_ALLAY_SP_POTION = register("to_allay_sp_potion", new ToAllayStatusPotion());
     public static final StatusEffect TO_FERAL_CAT_SP_POTION = register("to_feral_cat_sp_potion", new ToFeralCatStatusPotion());
     // empty custom forms
     public static final StatusEffect TO_ALPHA_0_POTION = register("to_alpha_0_potion", new ToAlphaStatusPotion());
