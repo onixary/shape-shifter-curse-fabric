@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.GameRules;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
@@ -18,6 +19,8 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComp
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
+import net.onixary.shapeShifterCurseFabric.team.MobTeamManager;
+import net.onixary.shapeShifterCurseFabric.team.PlayerTeamHandler;
 
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker.loadInstinct;
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.removeVisualEffects;
@@ -77,6 +80,9 @@ public class PlayerEventHandler {
 
             // Set doDaylightCycle to true forced
             server.getGameRules().get(GameRules.DO_DAYLIGHT_CYCLE).set(true, server);
+
+            // update team
+            PlayerTeamHandler.updatePlayerTeam(player);
         });
         // copy event
         ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
@@ -85,13 +91,17 @@ public class PlayerEventHandler {
 
             copyTransformativeEffect(oldPlayer, newPlayer);
             copyFormAndAbility(oldPlayer, newPlayer);
+            PlayerTeamHandler.updatePlayerTeam(newPlayer);
         });
 
         //load event
         ServerWorldEvents.LOAD.register((server, world) -> {
-            for (PlayerEntity player : world.getPlayers()) {
+            for (ServerPlayerEntity player : world.getPlayers()) {
                 PlayerFormComponent component = RegPlayerFormComponent.PLAYER_FORM.get(player);
                 FormAbilityManager.applyForm(player, component.getCurrentForm());
+
+                MobTeamManager.registerTeam(world);
+                PlayerTeamHandler.updatePlayerTeam(player);
             }
         });
     }

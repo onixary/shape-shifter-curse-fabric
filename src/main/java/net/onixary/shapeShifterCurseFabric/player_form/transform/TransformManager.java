@@ -17,6 +17,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
 import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
+import net.onixary.shapeShifterCurseFabric.team.PlayerTeamHandler;
 
 import static net.onixary.shapeShifterCurseFabric.player_form.effect.PlayerTransformEffectManager.*;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker.clearInstinct;
@@ -220,6 +221,7 @@ public class TransformManager {
                     fpm.getConfig().sitXOffset = 0;
                     fpm.getConfig().sneakXOffset = 0;
                 }
+                PlayerTeamHandler.updatePlayerTeam((ServerPlayerEntity) curPlayer);
                 applyFinaleTransformEffect((ServerPlayerEntity) curPlayer, 5);
                 InstinctTicker.isPausing = false;
                 TransformOverlay.INSTANCE.setEnableOverlay(false);
@@ -280,6 +282,13 @@ public class TransformManager {
         FormAbilityManager.applyForm(curPlayer, curToForm);
         clearFormFlag(curPlayer);
         clearInstinct(curPlayer);
+        PlayerTeamHandler.updatePlayerTeam((ServerPlayerEntity) curPlayer);
+        if(IS_FIRST_PERSON_MOD_LOADED){
+            FirstPersonModelCore fpm = FirstPersonModelCore.instance;
+            fpm.getConfig().xOffset = 0;
+            fpm.getConfig().sitXOffset = 0;
+            fpm.getConfig().sneakXOffset = 0;
+        }
         RegPlayerFormComponent.PLAYER_FORM.sync(curPlayer);
     }
 

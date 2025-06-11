@@ -1,0 +1,56 @@
+{
+  "type": "origins:action_over_time",
+  "entity_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:add_velocity",
+        "z": 0.05,
+        "space": "local_horizontal_normalized"
+      },
+      {
+        "type": "origins:apply_effect",
+        "effect": {
+          "effect": "minecraft:nausea",
+          "amplifier": 1,
+          "duration": 80
+        }
+      }
+    ]
+  },
+  "interval": 1,
+  "condition": {
+    "type": "origins:raycast",
+    "distance": 20,
+    "block": false,
+    "entity": true,
+    "shape_type": "visual",
+    "fluid_handling": "any",
+    "hit_bientity_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:target_condition",
+          "condition": {
+            "type": "origins:or",
+            "conditions": [
+              {
+                "type": "origins:entity_type",
+                "entity_type": "minecraft:witch"
+              },
+              {
+                "type": "origins:entity_type",
+                "entity_type": "minecraft:evoker"
+              }
+            ]
+          }
+        },
+        {
+          "type": "origins:distance",
+          "comparison": ">=",
+          "compare_to": 1.5
+        }
+      ]
+    }
+  }
+}

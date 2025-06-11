@@ -1,0 +1,27 @@
+{
+	"powers": [
+		"origins:form_familiar_fox_2_scale",
+		"origins:form_familiar_fox_2_particle",
+		"origins:form_familiar_fox_2_craft_healing_potion",
+		"origins:form_familiar_fox_2_craft_harming_potion",
+		"origins:form_familiar_fox_2_craft_poison_potion",
+		"origins:form_sprint_speed_up",
+		"origins:form_familiar_fox_2_water_speed_down",
+		"origins:form_familiar_fox_2_digging_speed_down",
+		"origins:form_familiar_fox_2_mob_glow_in_range",
+		"origins:form_familiar_fox_2_health",
+		"origins:form_familiar_fox_2_no_buff_effect",
+		"origins:fire_and_lava_immunity",
+		"origins:form_familiar_fox_2_no_attack_witch",
+		"origins:form_familiar_fox_2_attract_to_witch",
+		"origins:form_disable_leg_armor",
+		"origins:form_disable_feet_armor"
+	],
+	"icon": {
+		"item": "minecraft:player_head"
+	},
+	"order": 0,
+	"unchoosable": true,
+	"impact": 0,
+	"loading_priority": 0
+}

@@ -1,0 +1,34 @@
+{
+  "type": "origins:target_action_on_hit",
+  "entity_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:heal",
+        "amount": 20.0
+      },
+      {
+        "type": "origins:play_sound",
+        "sound": "minecraft:block.note_block.cow_bell"
+      }
+    ]
+  },
+  "target_condition": {
+    "type": "origins:or",
+    "conditions": [
+      {
+        "type": "origins:entity_type",
+        "entity_type": "minecraft:witch"
+      },
+      {
+        "type": "origins:entity_type",
+        "entity_type": "minecraft:vex"
+      },
+      {
+        "type": "origins:entity_type",
+        "entity_type": "minecraft:evoker"
+      }
+    ]
+  },
+  "cooldown": 10
+}

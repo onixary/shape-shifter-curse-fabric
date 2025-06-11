@@ -22,7 +22,13 @@
     "AdjustItemHoldPlayerRendererMixin",
     "IEntityRenderDispatcherAccessor",
     "EntityRenderDispatcherMixin",
-    "FeralPlayerEntityRendererMixin"
+    "FeralPlayerEntityRendererMixin",
+    "accessor.ActiveTargetGoalAccessor",
+    "mob.WitchEntityMixin",
+    "mob.VexEntityMixin",
+    "mob.EvokerEntityMixin",
+    "mob.VillagerHostilesSensorMixin",
+    "block.SweetBerryBushBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1
