@@ -161,6 +161,13 @@
     },
     "咒文...?"
   ],
+  "effect.shape-shifter-curse.to_familiar_fox_0_effect": [
+    "女巫的",
+    {
+      "text": "奇怪药水", "color": "#0096FF"
+    },
+    "...?"
+  ],
   "effect.shape-shifter-curse.to_alpha_0_effect": ["ALPHA"],
   "effect.shape-shifter-curse.to_beta_0_effect": ["BETA"],
   "effect.shape-shifter-curse.to_gamma_0_effect": ["GAMMA"],

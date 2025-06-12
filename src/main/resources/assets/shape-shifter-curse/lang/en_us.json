@@ -167,6 +167,13 @@
     },
     " charm...?"
   ],
+  "effect.shape-shifter-curse.to_familiar_fox_0_effect": [
+    "Witch's",
+    {
+      "text": "potion", "color": "#0096FF"
+    },
+    "...?"
+  ],
   "effect.shape-shifter-curse.to_feral_cat_sp_effect": [
     {
       "text": "feral cat", "color": "#0096FF"

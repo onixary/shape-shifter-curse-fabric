@@ -1,24 +1,21 @@
 {
-  "type": "origins:action_on_hit",
-  "bientity_action": {
-    "type": "origins:target_action",
-    "action": {
-      "type": "origins:and",
-      "actions": [
-        {
-          "type": "origins:heal",
-          "amount": 20.0
-        },
-        {
-          "type": "origins:play_sound",
-          "sound": "minecraft:block.note_block.cow_bell"
-        }
-      ]
-    }
+  "type": "origins:self_action_on_hit",
+  "entity_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:heal",
+        "amount": -1
+    },
+      {
+        "type": "origins:add_velocity",
+        "z": -0.5,
+        "y" : 0.5,
+        "space": "local_horizontal_normalized"
+      }
+    ]
   },
-  "bientity_condition": {
-    "type": "origins:target_condition",
-    "condition": {
+  "target_condition": {
       "type": "origins:or",
       "conditions": [
         {
@@ -50,7 +47,6 @@
           "entity_type": "minecraft:ravager"
         }
       ]
-    }
   },
   "cooldown": 10
 }

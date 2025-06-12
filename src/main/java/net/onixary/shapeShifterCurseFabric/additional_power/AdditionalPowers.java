@@ -13,6 +13,7 @@ public class AdditionalPowers {
         register(CrawlingPower.getFactory());
         register(ScalePower.getFactory());
         register(LevitatePower.getFactory());
+        register(AttractByEntityPower.getFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

@@ -28,6 +28,9 @@
     "mob.VexEntityMixin",
     "mob.EvokerEntityMixin",
     "mob.VillagerHostilesSensorMixin",
+    "mob.PillagerEntityMixin",
+    "mob.RavagerEntityMixin",
+    "mob.VindicatorEntityMixin",
     "block.SweetBerryBushBlockMixin"
   ],
   "injectors": {

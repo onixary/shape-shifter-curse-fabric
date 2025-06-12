@@ -25,6 +25,9 @@ public class RegCustomPotions {
     public static final Potion OCELOT_FORM_POTION =
             Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_ocelot_0_potion"),
                     new Potion(new StatusEffectInstance(TO_OCELOT_0_POTION)));
+    public static final Potion FAMILIAR_FOX_FORM_POTION =
+            Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_familiar_fox_0_potion"),
+                    new Potion(new StatusEffectInstance(TO_FAMILIAR_FOX_0_POTION)));
     public static final Potion ALLEY_FORM_POTION =
             Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_allay_sp_potion"),
                     new Potion(new StatusEffectInstance(TO_ALLAY_SP_POTION)));
@@ -65,6 +68,7 @@ public class RegCustomPotions {
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.POINTED_DRIPSTONE, BAT_FORM_POTION);
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.BIG_DRIPLEAF, AXOLOTL_FORM_POTION);
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.CHICKEN, OCELOT_FORM_POTION);
+        // familiar fox只能通过女巫发射的溅射药水给与，没有配方
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.AMETHYST_SHARD, ALLEY_FORM_POTION);
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.COD_BUCKET, FERAL_CAT_FORM_POTION);
         // custom empty forms
