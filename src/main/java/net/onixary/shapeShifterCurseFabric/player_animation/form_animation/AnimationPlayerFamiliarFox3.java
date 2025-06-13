@@ -6,8 +6,8 @@ import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
-public class AnimationPlayerFamiliarFox2 {
-    private AnimationPlayerFamiliarFox2() {
+public class AnimationPlayerFamiliarFox3 {
+    private AnimationPlayerFamiliarFox3() {
     }
     private static AnimationHolder anim_idle = AnimationHolder.EMPTY;
     private static AnimationHolder anim_sneak_idle = AnimationHolder.EMPTY;

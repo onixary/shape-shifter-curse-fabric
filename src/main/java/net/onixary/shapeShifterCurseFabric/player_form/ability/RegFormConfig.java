@@ -67,7 +67,11 @@ public class RegFormConfig {
         CONFIGS.put(PlayerForms.FAMILIAR_FOX_2,
                 new FormConfig(defaultLayerID,
                         "form_familiar_fox_2",
-                        PlayerFormPhase.PHASE_2,PlayerFormBodyType.FERAL));
+                        PlayerFormPhase.PHASE_2,PlayerFormBodyType.NORMAL));
+        CONFIGS.put(PlayerForms.FAMILIAR_FOX_3,
+                new FormConfig(defaultLayerID,
+                        "form_familiar_fox_3",
+                        PlayerFormPhase.PHASE_3,PlayerFormBodyType.FERAL));
         CONFIGS.put(PlayerForms.ALLAY_SP,
                 new FormConfig(defaultLayerID,
                         "form_allay_sp",

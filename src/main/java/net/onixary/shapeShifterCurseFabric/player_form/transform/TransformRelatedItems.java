@@ -24,6 +24,7 @@ public class TransformRelatedItems {
     public static final Item TRANSFORM_CURE = RegCustomItem.INHIBITOR;
     public static final Item TRANSFORM_CURE_FINAL = RegCustomItem.POWERFUL_INHIBITOR;
     public static final Item TRANSFORM_CATALYST = RegCustomItem.CATALYST;
+    public static final Item TRANSFORM_POWERFUL_CATALYST = RegCustomItem.POWERFUL_CATALYST;
 
     public static void OnUseCure(PlayerEntity player) {
         // 如果不是最终阶段，则回退一个阶段
@@ -145,11 +146,50 @@ public class TransformRelatedItems {
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.use_catalyst").formatted(Formatting.YELLOW));
                 break;
             case 2:
-                // todo: 也许之后会有额外阶段的逻辑..类似于彻底改变游戏玩法，但是在死亡后回退的
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.max_form_used_catalyst").formatted(Formatting.YELLOW));
                 break;
             case 5:
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.sp_form_used_catalyst").formatted(Formatting.YELLOW));
+                break;
+            default:
+                break;
+        }
+        if (toForm == null) {
+            return;
+        }
+        handleDirectTransform(player, toForm, false);
+    }
+
+    public static void OnUsePowerfulCatalyst(PlayerEntity player) {
+        // 在origin power中处理instinct相关逻辑，这里只显示提示与特殊逻辑
+        PlayerForms currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+        int currentFormIndex = currentForm.getIndex();
+        String currentFormGroup = currentForm.getGroup();
+        PlayerForms toForm = null;
+        switch (currentFormIndex) {
+            case -2:
+                // 无用
+                break;
+            case -1:
+            case 0:
+            case 1:
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.form_used_powerful_catalyst_failed").formatted(Formatting.YELLOW));
+                break;
+            case 2:
+                if (PlayerForms.getFormsByGroup(currentFormGroup).length > 3) {
+                    toForm = PlayerForms.getFormsByGroup(currentFormGroup)[3];
+                } else {
+                    toForm = null;
+                }
+                if(toForm != null){
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.max_form_used_powerful_catalyst").formatted(Formatting.YELLOW));
+                }
+                else{
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.form_used_powerful_catalyst_failed").formatted(Formatting.YELLOW));
+                }
+                break;
+            case 5:
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.form_used_powerful_catalyst_failed").formatted(Formatting.YELLOW));
                 break;
             default:
                 break;

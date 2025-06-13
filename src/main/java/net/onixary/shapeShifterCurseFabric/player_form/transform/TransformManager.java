@@ -85,6 +85,9 @@ public class TransformManager {
                     ShapeShifterCurseFabric.LOGGER.info("Triggered transformation when at max phase, this should not happen!");
                 }
                 break;
+            case 3:
+                // 永久形态，不做任何事
+                break;
             case 5:
                 // SP形态只有一个阶段，不会受到CursedMoon影响
                 if(isByCursedMoon){
@@ -134,6 +137,10 @@ public class TransformManager {
                 break;
             case 2:
                 toForm = PlayerForms.getFormsByGroup(currentFormGroup)[1];
+            case 3:
+            case 5:
+                // 永久形态或SP形态不会受到CursedMoon影响
+                break;
             default:
                 break;
         }

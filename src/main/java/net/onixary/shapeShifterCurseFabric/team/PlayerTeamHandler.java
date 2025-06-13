@@ -14,13 +14,12 @@ public class PlayerTeamHandler {
 
 
     private static void updateSorceryTeam(ServerPlayerEntity player) {
-        // todo: 与Form相关的判定
         if(MobTeamManager.sorceryTeam == null) {
             // 确保队伍已注册
             MobTeamManager.registerTeam(player.getServerWorld());
         }
 
-        if (currentForm == PlayerForms.FAMILIAR_FOX_2) {
+        if (currentForm == PlayerForms.FAMILIAR_FOX_3 || currentForm == PlayerForms.FAMILIAR_FOX_2 || currentForm == PlayerForms.FAMILIAR_FOX_1) {
             player.getScoreboard().addPlayerToTeam(player.getEntityName(), MobTeamManager.sorceryTeam);
         } else {
             // 从队伍中移除（如果是成员）

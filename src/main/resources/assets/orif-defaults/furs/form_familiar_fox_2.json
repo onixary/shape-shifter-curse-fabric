@@ -1,23 +1,16 @@
 {
-  "model": "orif-defaults:geo/form_familiar_fox_2.geo.json",
-  "texture": "orif-defaults:textures/form_familiar_fox_2/form_familiar_fox_2.png",
+  "model": "orif-defaults:geo/form_ocelot_2.geo.json",
+  "texture": "orif-defaults:textures/form_ocelot_2/form_ocelot_2.png",
   "hidden": [
     "leftLeg",
     "rightLeg",
     "rightPants",
     "leftPants",
     "leftSleeve",
-    "rightSleeve",
-    "leftArm",
-    "rightArm",
-    "body",
-    "jacket",
-    "head",
-    "hat"
+    "rightSleeve"
   ],
   "tail_chain": {
-    "tail_l": [0, 1, 2, 3, 4],
-    "tail_r": [0, 1, 2, 3, 4]
+    "tail": [0, 1, 2, 3]
   },
   "tail_chain_head": {
     "ear_a": [0],

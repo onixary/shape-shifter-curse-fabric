@@ -19,6 +19,7 @@ public class RegCustomItem {
     public static final Item INHIBITOR = register("inhibitor", new Inhibitor(new Item.Settings()));
     public static final Item POWERFUL_INHIBITOR = register("powerful_inhibitor", new PowerfulInhibitor(new Item.Settings()));
     public static final Item CATALYST = register("catalyst", new Catalyst(new Item.Settings()));
+    public static final Item POWERFUL_CATALYST = register("powerful_catalyst", new PowerfulCatalyst(new Item.Settings()));
     public static final Item MOONDUST_MATRIX = register("moondust_matrix", new MoonDustMatrix(new Item.Settings()));
 
     // 用于成就图标的占位物品
@@ -40,6 +41,7 @@ public class RegCustomItem {
             entries.add(INHIBITOR);
             entries.add(POWERFUL_INHIBITOR);
             entries.add(CATALYST);
+            entries.add(POWERFUL_CATALYST);
         });
     }
 }
