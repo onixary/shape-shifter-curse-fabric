@@ -58,7 +58,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         AnimationPlayerAllaySP.registerAnims();
         AnimationPlayerFeralCatSP.registerAnims();
         AnimationPlayerPhiSP.registerAnims();
-        AnimationPlayerFamiliarFox2.registerAnims();
+        AnimationPlayerFamiliarFox3.registerAnims();
 
         currentAnimation = null;
         CONTAINER.setAnimation(null);
@@ -372,8 +372,8 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                     overrideHandAnim = true;
                     break;
 
-                case FAMILIAR_FOX_2:
-                    animToPlay = AnimationPlayerFamiliarFox2.getFormAnimToPlay(currentState);
+                case FAMILIAR_FOX_3:
+                    animToPlay = AnimationPlayerFamiliarFox3.getFormAnimToPlay(currentState);
                     hasSlowFall = false;
                     overrideHandAnim = false;
                     break;

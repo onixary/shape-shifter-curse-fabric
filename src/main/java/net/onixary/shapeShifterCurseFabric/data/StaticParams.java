@@ -15,6 +15,7 @@ public class StaticParams {
     // items related
     // ----------------------------------------
     public static final float MOONDUST_DROP_PROBABILITY = 0.45F;
+    public static final float FAMILIAR_CURSE_POTION_DROP_PROBABILITY = 0.35F;
     // instinct setting
     public static final float INSTINCT_MAX = 100.0f;
     // per tick instinct increase

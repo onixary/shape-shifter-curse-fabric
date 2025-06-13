@@ -37,7 +37,11 @@ public abstract class ItemStackMixin {
                 TransformRelatedItems.OnUseCureFinal(player);
             }else if(stack.getItem() == TransformRelatedItems.TRANSFORM_CATALYST){
                 TransformRelatedItems.OnUseCatalyst(player);
-            } else if(stack.getItem() == Items.GOLDEN_APPLE){
+            }
+            else if(stack.getItem() == TransformRelatedItems.TRANSFORM_POWERFUL_CATALYST){
+                TransformRelatedItems.OnUsePowerfulCatalyst(player);
+            }
+            else if(stack.getItem() == Items.GOLDEN_APPLE){
                 PlayerForms currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
                 int currentFormIndex = currentForm.getIndex();
                 if(currentFormIndex == 0 || currentFormIndex == 1){

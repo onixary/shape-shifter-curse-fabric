@@ -98,6 +98,9 @@ public class InstinctTicker {
             case PHASE_2:
                 // 立刻涨满
                 return 100.0f;
+            case PHASE_3:
+                // 立刻涨满
+                return 100.0f;
             case PHASE_SP:
                 // 立刻涨满
                 return 100.0f;
@@ -107,7 +110,9 @@ public class InstinctTicker {
 
     private static void judgeInstinctState(PlayerEntity player, float instinctRate){
         // 判断当前状态，供进度条使用
-        showInstinctBar = !(getForm(player) == PlayerForms.ORIGINAL_BEFORE_ENABLE || getForm(player) == PlayerForms.ORIGINAL_SHIFTER);
+        PlayerForms form = getForm(player);
+        PlayerFormPhase currentPhase = RegFormConfig.CONFIGS.get(form).getPhase();
+        showInstinctBar = !(currentPhase == PlayerFormPhase.PHASE_CLEAR || currentPhase == PlayerFormPhase.PHASE_3);
 
         float baseRate = judgeInstinctGrowRate(player);
         if(instinctRate > baseRate){

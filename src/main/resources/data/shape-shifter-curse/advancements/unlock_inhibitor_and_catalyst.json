@@ -13,6 +13,6 @@
     }
   },
   "rewards": {
-    "recipes": ["shape-shifter-curse:inhibitor", "shape-shifter-curse:catalyst", "shape-shifter-curse:powerful_inhibitor"]
+    "recipes": ["shape-shifter-curse:inhibitor", "shape-shifter-curse:catalyst", "shape-shifter-curse:powerful_inhibitor", "shape-shifter-curse:powerful_catalyst"]
   }
 }

@@ -54,6 +54,10 @@ public class CodexData {
     private static final Text descPros_2 = Text.translatable("codex.desc.pros_2");
     private static final Text descCons_2 = Text.translatable("codex.desc.cons_2");
     private static final Text descInstincts_2 = Text.translatable("codex.desc.instincts_2");
+    private static final Text descAppearance_3 = Text.translatable("codex.desc.appearance_3");
+    private static final Text descPros_3 = Text.translatable("codex.desc.pros_3");
+    private static final Text descCons_3 = Text.translatable("codex.desc.cons_3");
+    private static final Text descInstincts_3 = Text.translatable("codex.desc.instincts_3");
 
     // form related text
     // original
@@ -110,6 +114,27 @@ public class CodexData {
     private static final Text ocelot_2_pros = Text.translatable("codex.form.ocelot2.pros");
     private static final Text ocelot_2_cons = Text.translatable("codex.form.ocelot2.cons");
     private static final Text ocelot_2_instincts = Text.translatable("codex.form.ocelot2.instincts");
+    // form familiar fox
+    private static final Text familiar_fox_0_title = Text.translatable("codex.form.familiar_fox0.title");
+    private static final Text familiar_fox_0_appearance = Text.translatable("codex.form.familiar_fox0.appearance");
+    private static final Text familiar_fox_0_pros = Text.translatable("codex.form.familiar_fox0.pros");
+    private static final Text familiar_fox_0_cons = Text.translatable("codex.form.familiar_fox0.cons");
+    private static final Text familiar_fox_0_instincts = Text.translatable("codex.form.familiar_fox0.instincts");
+    private static final Text familiar_fox_1_title = Text.translatable("codex.form.familiar_fox1.title");
+    private static final Text familiar_fox_1_appearance = Text.translatable("codex.form.familiar_fox1.appearance");
+    private static final Text familiar_fox_1_pros = Text.translatable("codex.form.familiar_fox1.pros");
+    private static final Text familiar_fox_1_cons = Text.translatable("codex.form.familiar_fox1.cons");
+    private static final Text familiar_fox_1_instincts = Text.translatable("codex.form.familiar_fox1.instincts");
+    private static final Text familiar_fox_2_title = Text.translatable("codex.form.familiar_fox2.title");
+    private static final Text familiar_fox_2_appearance = Text.translatable("codex.form.familiar_fox2.appearance");
+    private static final Text familiar_fox_2_pros = Text.translatable("codex.form.familiar_fox2.pros");
+    private static final Text familiar_fox_2_cons = Text.translatable("codex.form.familiar_fox2.cons");
+    private static final Text familiar_fox_2_instincts = Text.translatable("codex.form.familiar_fox2.instincts");
+    private static final Text familiar_fox_3_title = Text.translatable("codex.form.familiar_fox3.title");
+    private static final Text familiar_fox_3_appearance = Text.translatable("codex.form.familiar_fox3.appearance");
+    private static final Text familiar_fox_3_pros = Text.translatable("codex.form.familiar_fox3.pros");
+    private static final Text familiar_fox_3_cons = Text.translatable("codex.form.familiar_fox3.cons");
+    private static final Text familiar_fox_3_instincts = Text.translatable("codex.form.familiar_fox3.instincts");
     // sp form alley
     private static final Text allay_sp_title = Text.translatable("codex.form.allay_sp.title");
     private static final Text allay_sp_appearance = Text.translatable("codex.form.allay_sp.appearance");
@@ -236,6 +261,7 @@ public class CodexData {
                     case PHASE_0 -> descAppearance_0;
                     case PHASE_1 -> descAppearance_1;
                     case PHASE_2 -> descAppearance_2;
+                    case PHASE_3 -> descAppearance_3;
                     case PHASE_SP -> Text.empty();
                 };
             case PROS:
@@ -244,6 +270,7 @@ public class CodexData {
                     case PHASE_0 -> descPros_0;
                     case PHASE_1 -> descPros_1;
                     case PHASE_2 -> descPros_2;
+                    case PHASE_3 -> descPros_3;
                     case PHASE_SP -> Text.empty();
                 };
             case CONS:
@@ -252,6 +279,7 @@ public class CodexData {
                     case PHASE_0 -> descCons_0;
                     case PHASE_1 -> descCons_1;
                     case PHASE_2 -> descCons_2;
+                    case PHASE_3 -> descCons_3;
                     case PHASE_SP -> Text.empty();
                 };
             case INSTINCTS:
@@ -260,6 +288,7 @@ public class CodexData {
                     case PHASE_0 -> descInstincts_0;
                     case PHASE_1 -> descInstincts_1;
                     case PHASE_2 -> descInstincts_2;
+                    case PHASE_3 -> descInstincts_3;
                     case PHASE_SP -> Text.empty();
                 };
         }
@@ -349,6 +378,38 @@ public class CodexData {
                     case PROS -> ocelot_2_pros;
                     case CONS -> ocelot_2_cons;
                     case INSTINCTS -> ocelot_2_instincts;
+                };
+            case FAMILIAR_FOX_0:
+                return switch (type) {
+                    case TITLE -> familiar_fox_0_title;
+                    case APPEARANCE -> familiar_fox_0_appearance;
+                    case PROS -> familiar_fox_0_pros;
+                    case CONS -> familiar_fox_0_cons;
+                    case INSTINCTS -> familiar_fox_0_instincts;
+                };
+            case FAMILIAR_FOX_1:
+                return switch (type) {
+                    case TITLE -> familiar_fox_1_title;
+                    case APPEARANCE -> familiar_fox_1_appearance;
+                    case PROS -> familiar_fox_1_pros;
+                    case CONS -> familiar_fox_1_cons;
+                    case INSTINCTS -> familiar_fox_1_instincts;
+                };
+            case FAMILIAR_FOX_2:
+                return switch (type) {
+                    case TITLE -> familiar_fox_2_title;
+                    case APPEARANCE -> familiar_fox_2_appearance;
+                    case PROS -> familiar_fox_2_pros;
+                    case CONS -> familiar_fox_2_cons;
+                    case INSTINCTS -> familiar_fox_2_instincts;
+                };
+            case FAMILIAR_FOX_3:
+                return switch (type) {
+                    case TITLE -> familiar_fox_3_title;
+                    case APPEARANCE -> familiar_fox_3_appearance;
+                    case PROS -> familiar_fox_3_pros;
+                    case CONS -> familiar_fox_3_cons;
+                    case INSTINCTS -> familiar_fox_3_instincts;
                 };
 
             case ALLAY_SP:

@@ -35,7 +35,7 @@
   },
   "attraction_speed" : 0.4,
   "attraction_radius": 15.0,
-  "stop_radius" : 1.5,
+  "stop_radius" : 2.5,
   "escape_attraction_speed" : 0.01,
   "escape_angle": 180
 }

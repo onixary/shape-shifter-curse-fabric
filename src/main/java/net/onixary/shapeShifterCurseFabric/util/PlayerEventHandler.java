@@ -3,8 +3,12 @@ package net.onixary.shapeShifterCurseFabric.util;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.scoreboard.Scoreboard;
+import net.minecraft.scoreboard.Team;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.GameRules;
@@ -102,6 +106,7 @@ public class PlayerEventHandler {
 
                 MobTeamManager.registerTeam(world);
                 PlayerTeamHandler.updatePlayerTeam(player);
+                handleEntityTeam(world);
             }
         });
     }
@@ -133,5 +138,23 @@ public class PlayerEventHandler {
         newComponent.setCurrentForm(oldComponent.getCurrentForm());
         newComponent.setCurrentForm(oldComponent.getCurrentForm());
         FormAbilityManager.applyForm(newPlayer, newComponent.getCurrentForm());
+    }
+
+    private static void handleEntityTeam(ServerWorld world){
+        Scoreboard scoreboard = world.getScoreboard();
+        Team sorceryTeam = scoreboard.getTeam(MobTeamManager.SORCERY_TEAM_NAME);
+        for (Entity entity : world.iterateEntities()) {
+            // Sorcery Team
+            if (entity.getType() == EntityType.EVOKER
+            || entity.getType() == EntityType.WITCH
+            || entity.getType() == EntityType.VINDICATOR
+            || entity.getType() == EntityType.PILLAGER
+            || entity.getType() == EntityType.RAVAGER)
+            {
+                if (sorceryTeam != null) {
+                    scoreboard.addPlayerToTeam(entity.getEntityName(), sorceryTeam);
+                }
+            }
+        }
     }
 }

@@ -16,9 +16,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.entity.vehicle.MinecartEntity;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.RaycastContext;
 
 import java.util.Comparator;
 import java.util.List;
@@ -34,6 +36,8 @@ public class AttractByEntityPower extends Power{
     private final float stopRadius;
     private final float escapeAttractionSpeed;
     private final float escapeAngleThreshold;
+
+    private int tickCounter = 0;
 
     private Entity targetEntity;
 
@@ -64,29 +68,42 @@ public class AttractByEntityPower extends Power{
             return;
         }
 
-        // 1. 检测范围内的所有实体
-        Box searchBox = Box.from(player.getPos()).expand(attractionRadius);
-        List<Entity> entities = player.getWorld().getOtherEntities(
-                player,
-                searchBox,
-                e -> entityCondition.test(e)
-        );
+        if (tickCounter++ % 5 == 0) {
+            // 1. 检测范围内的所有实体
+            Box searchBox = Box.from(player.getPos()).expand(attractionRadius);
+            List<Entity> entities = player.getWorld().getOtherEntities(
+                    player,
+                    searchBox,
+                    e -> entityCondition.test(e)
+            );
 
-        // 2. 找到最近的符合条件的实体
-        targetEntity = entities.stream()
-                .filter(entity -> entity.isAlive() && !entity.isSpectator())
-                .min(Comparator.comparingDouble(e -> e.squaredDistanceTo(player)))
-                .orElse(null);
+            // 2. 找到最近的符合条件的实体
+            targetEntity = entities.stream()
+                    .filter(entity -> entity.isAlive() && !entity.isSpectator())
+                    .min(Comparator.comparingDouble(e -> e.squaredDistanceTo(player)))
+                    .orElse(null);
 
-        // 如果目标实体存在且距离小于停止半径，则不进行吸引
-        if (targetEntity != null && player.squaredDistanceTo(targetEntity) < stopRadius * stopRadius) {
-            targetEntity = null; // 重置目标实体
+            // 如果目标实体存在且距离小于停止半径，则不进行吸引
+            if (targetEntity != null && player.squaredDistanceTo(targetEntity) < stopRadius * stopRadius) {
+                targetEntity = null; // 重置目标实体
+            }
+
+            if (isPlayerInVehicle(player) || !player.isOnGround()) {
+                targetEntity = null; // 清除目标
+                return;
+            }
+
+            // 射线检测是否可以看到
+            if (targetEntity != null) {
+                Vec3d actorEyePos = entity.getEyePos();
+                Vec3d targetEyePos = targetEntity.getEyePos();
+                RaycastContext context = new RaycastContext(actorEyePos, targetEyePos, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, entity);
+                if(entity.getWorld().raycast(context).getType() == HitResult.Type.BLOCK){
+                    targetEntity = null;
+                }
+            }
         }
 
-        if (isPlayerInVehicle(player) || !player.isOnGround()) {
-            targetEntity = null; // 清除目标
-            return;
-        }
 
         // 3. 应用吸引效果
         if (targetEntity != null) {
