@@ -1,0 +1,25 @@
+{
+  "model": "orif-defaults:geo/form_ocelot_3.geo.json",
+  "texture": "orif-defaults:textures/form_ocelot_3/form_ocelot_3.png",
+  "hidden": [
+    "leftLeg",
+    "rightLeg",
+    "rightPants",
+    "leftPants",
+    "leftSleeve",
+    "rightSleeve",
+    "leftArm",
+    "rightArm",
+    "body",
+    "jacket",
+    "head",
+    "hat"
+  ],
+  "tail_chain": {
+    "tail": [0, 1, 2, 3]
+  },
+  "tail_chain_head": {
+    "ear_a": [0],
+    "ear_b": [0]
+  }
+}

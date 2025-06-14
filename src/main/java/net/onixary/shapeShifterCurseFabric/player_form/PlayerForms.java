@@ -16,6 +16,7 @@ public enum PlayerForms {
     OCELOT_0("ocelot_form", 0),
     OCELOT_1("ocelot_form", 1),
     OCELOT_2("ocelot_form", 2),
+    OCELOT_3("ocelot_form", 3),
     FAMILIAR_FOX_0("familiar_fox_form", 0),
     FAMILIAR_FOX_1("familiar_fox_form", 1),
     FAMILIAR_FOX_2("familiar_fox_form", 2),

@@ -17,9 +17,6 @@
     "type":"origins:and",
     "conditions":[
       {
-        "type": "origins:sneaking"
-      },
-      {
         "type": "origins:food_level",
         "comparison": ">=",
         "compare_to": 6

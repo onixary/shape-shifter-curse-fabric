@@ -114,6 +114,11 @@ public class CodexData {
     private static final Text ocelot_2_pros = Text.translatable("codex.form.ocelot2.pros");
     private static final Text ocelot_2_cons = Text.translatable("codex.form.ocelot2.cons");
     private static final Text ocelot_2_instincts = Text.translatable("codex.form.ocelot2.instincts");
+    private static final Text ocelot_3_title = Text.translatable("codex.form.ocelot3.title");
+    private static final Text ocelot_3_appearance = Text.translatable("codex.form.ocelot3.appearance");
+    private static final Text ocelot_3_pros = Text.translatable("codex.form.ocelot3.pros");
+    private static final Text ocelot_3_cons = Text.translatable("codex.form.ocelot3.cons");
+    private static final Text ocelot_3_instincts = Text.translatable("codex.form.ocelot3.instincts");
     // form familiar fox
     private static final Text familiar_fox_0_title = Text.translatable("codex.form.familiar_fox0.title");
     private static final Text familiar_fox_0_appearance = Text.translatable("codex.form.familiar_fox0.appearance");
@@ -378,6 +383,14 @@ public class CodexData {
                     case PROS -> ocelot_2_pros;
                     case CONS -> ocelot_2_cons;
                     case INSTINCTS -> ocelot_2_instincts;
+                };
+            case OCELOT_3:
+                return switch (type) {
+                    case TITLE -> ocelot_3_title;
+                    case APPEARANCE -> ocelot_3_appearance;
+                    case PROS -> ocelot_3_pros;
+                    case CONS -> ocelot_3_cons;
+                    case INSTINCTS -> ocelot_3_instincts;
                 };
             case FAMILIAR_FOX_0:
                 return switch (type) {

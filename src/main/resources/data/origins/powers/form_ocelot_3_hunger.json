@@ -1,0 +1,5 @@
+{
+  "type": "origins:exhaust",
+  "interval": 1,
+  "exhaustion": 0.002
+}

@@ -23,6 +23,8 @@
     "IEntityRenderDispatcherAccessor",
     "EntityRenderDispatcherMixin",
     "FeralPlayerEntityRendererMixin",
+    "ElytraEntityModelMixin",
+    "PlayerEntityRendererFallFlyingMixin",
     "accessor.ActiveTargetGoalAccessor",
     "mob.WitchEntityMixin",
     "mob.VexEntityMixin",

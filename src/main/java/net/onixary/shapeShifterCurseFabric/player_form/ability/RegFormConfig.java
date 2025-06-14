@@ -56,6 +56,10 @@ public class RegFormConfig {
                 new FormConfig(defaultLayerID,
                         "form_ocelot_2",
                         PlayerFormPhase.PHASE_2,PlayerFormBodyType.NORMAL));
+        CONFIGS.put(PlayerForms.OCELOT_3,
+                new FormConfig(defaultLayerID,
+                        "form_ocelot_3",
+                        PlayerFormPhase.PHASE_3,PlayerFormBodyType.FERAL));
         CONFIGS.put(PlayerForms.FAMILIAR_FOX_0,
                 new FormConfig(defaultLayerID,
                         "form_familiar_fox_0",

@@ -22,6 +22,7 @@ public class AnimationPlayerFeralCatSP {
     private static AnimationHolder anim_fall = AnimationHolder.EMPTY;
     private static AnimationHolder anim_attack = AnimationHolder.EMPTY;
     private static AnimationHolder anim_sleep = AnimationHolder.EMPTY;
+    private static AnimationHolder anim_elytra_fly = AnimationHolder.EMPTY;
 
 
     public static AnimationHolder getFormAnimToPlay(PlayerAnimState currentState) {
@@ -55,6 +56,8 @@ public class AnimationPlayerFeralCatSP {
 
             case ANIM_ATTACK_ONCE:
                 return anim_attack;
+            case ANIM_ELYTRA_FLY:
+                return anim_elytra_fly;
 
             default:
                 return anim_idle;
@@ -75,5 +78,6 @@ public class AnimationPlayerFeralCatSP {
         anim_fall = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_fall"), true);
         anim_attack = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_attack"), true);
         anim_sleep = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sleep"), true);
+        anim_elytra_fly = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_elytra_fly"), true);
     }
 }

@@ -55,6 +55,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         AnimationPlayerAxolotl2.registerAnims();
         AnimationPlayerAxolotl1.registerAnims();
         AnimationPlayerOcelot2.registerAnims();
+        AnimationPlayerOcelot3.registerAnims();
         AnimationPlayerAllaySP.registerAnims();
         AnimationPlayerFeralCatSP.registerAnims();
         AnimationPlayerPhiSP.registerAnims();
@@ -220,7 +221,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                     if (isWalking || turnDelta != 0)
                     {
                         // 特殊处理Ocelot的sneak rush
-                        if(curForm == PlayerForms.OCELOT_2){
+                        if(curForm == PlayerForms.OCELOT_2 || curForm == PlayerForms.OCELOT_3){
                             if(this.getHungerManager().getFoodLevel() >= 6){
                                 currentState = PlayerAnimState.ANIM_SNEAK_RUSH;
                             }
@@ -350,6 +351,12 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
                 case OCELOT_2:
                     animToPlay = AnimationPlayerOcelot2.getFormAnimToPlay(currentState);
+                    hasSlowFall = false;
+                    overrideHandAnim = false;
+                    break;
+
+                case OCELOT_3:
+                    animToPlay = AnimationPlayerOcelot3.getFormAnimToPlay(currentState);
                     hasSlowFall = false;
                     overrideHandAnim = false;
                     break;
