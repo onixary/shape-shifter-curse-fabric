@@ -44,7 +44,7 @@ public abstract class SweetBerryBushBlockMixin {
         // 如果是玩家则跳过减速
         if ((entity instanceof PlayerEntity)) {
             PlayerForms curForm = RegPlayerFormComponent.PLAYER_FORM.get(entity).getCurrentForm();
-            if(curForm != PlayerForms.FAMILIAR_FOX_2){
+            if(curForm != PlayerForms.FAMILIAR_FOX_2 && curForm != PlayerForms.FAMILIAR_FOX_3){
                 entity.slowMovement(state, multiplier);
             }
         }

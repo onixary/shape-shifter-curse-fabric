@@ -22,6 +22,6 @@
   },
   "entity_action": {
     "type": "origins:execute_command",
-    "command": "/give @p minecraft:splash_potion{Potion:\"minecraft:healing\"}"
+    "command": "/give @p minecraft:splash_potion{Potion:\"minecraft:strong_healing\"}"
   }
 }

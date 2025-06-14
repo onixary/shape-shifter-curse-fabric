@@ -11,7 +11,7 @@
         },
         {
           "type": "origins:play_sound",
-          "sound": "minecraft:block.note_block.cow_bell"
+          "sound": "minecraft:entity.ender_eye.death"
         }
       ]
     }

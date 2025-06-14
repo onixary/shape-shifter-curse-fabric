@@ -15,8 +15,14 @@
 		"origins:form_familiar_fox_3_no_attack_witch",
 		"origins:form_familiar_fox_3_attract_to_witch2",
 		"origins:form_familiar_fox_3_hurt_when_attack_witch",
+		"origins:form_familiar_fox_3_no_food",
+		"origins:form_familiar_fox_3_use_normal_creature",
+		"origins:form_familiar_fox_3_use_human_creature",
+		"origins:form_familiar_fox_3_use_sorcery_creature",
+		"origins:form_familiar_fox_3_use_illager_creature",
 		"origins:form_disable_leg_armor",
-		"origins:form_disable_feet_armor"
+		"origins:form_disable_feet_armor",
+		"origins:form_familiar_fox_sound_hurt"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

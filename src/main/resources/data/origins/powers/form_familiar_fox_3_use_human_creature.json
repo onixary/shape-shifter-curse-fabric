@@ -1,0 +1,49 @@
+{
+  "type": "origins:action_on_entity_use",
+  "bientity_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:target_action",
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:heal",
+              "amount": -10
+            },
+            {
+              "type": "origins:execute_command",
+              "command": "particle soul_fire_flame ~ ~0.5 ~ 0.3 0.3 0.3 0.009 10 normal @a"
+            },
+            {
+              "type": "origins:play_sound",
+              "sound": "minecraft:entity.evoker.cast_spell"
+            }
+          ]
+        }
+      },
+      {
+        "type": "origins:actor_action",
+        "action": {
+          "type": "origins:feed",
+          "food": 9,
+          "saturation": 0.4
+        }
+      }
+    ]
+  },
+  "bientity_condition": {
+    "type": "origins:target_condition",
+    "condition": {
+      "type": "origins:in_tag",
+      "tag": "origins:familiar_human_target"
+    }
+  },
+  "item_condition": {
+    "type": "origins:empty"
+  },
+  "hands": [
+    "main_hand"
+  ]
+}

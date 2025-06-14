@@ -266,7 +266,7 @@
   "codex.desc.appearance_normal": ["Your body feels no different than usual. Maybe your internal magic needs certain triggers to manifest?"],
   "codex.desc.pros_normal": ["Currently, the magic within grants no noticeable benefits"],
   "codex.desc.cons_normal": ["Currently, the magic within causes no negative effects"],
-  "codex.desc.instincts_normal": ["Examining yourself, you sense magic within your body, but nothing more.\nYour mind remains calm, maintaining awareness of surroundings"],
+  "codex.desc.instincts_normal": ["Examining yourself, you sense shifting magic within your body, but nothing more.\nYour mind remains calm, maintaining awareness of surroundings"],
 
   "codex.desc.appearance_0": ["Magical resonance with creatures causes physical changes. At this stage, a golden apple can completely reverse them..."],
   "codex.desc.pros_0": ["Your new form grants special abilities..."],
@@ -287,6 +287,8 @@
   "codex.desc.pros_2": ["Your form possesses these strengths"],
   "codex.desc.cons_2": ["Your form has these limitations..."],
   "codex.desc.instincts_2": ["Instincts no longer disturb you - they've become part of you"],
+  "codex.desc.instincts_3": ["Examining yourself, you feel the ever-shifting magic within you has reached a new state of stability - unshaken even by the cursed moon\nYour form has been permanently altered"],
+
 
   "codex.form.original.title": ["\nOverall, you are a normal human being"],
   "codex.form.original.appearance": [" "],
@@ -379,7 +381,14 @@
   "codex.form.bat2.pros": ["You now see clearly in darkness. In darkness, you also feel more agile\nYour foreclaws are hard and strong, dealing decent barehanded damage. They let you rapidly break blocks and normally harvest ores\nWhile still flightless, membrane flapping boosts jump height and enables slow descent from any height. They function like elytra\nYour body absorbs non-meat foods more efficiently - increased satiation\nYour size lets you squeeze into 1-block spaces"],
   "codex.form.bat2.cons": ["Your foreclaws can't grip bulky tools/weapons. When breaking hard blocks or hitting mobs, they just drop\nYour foreclaws struggle to even lift bows/crossbows, let alone use them\nMembranes and digitigrade legs prevent wearing chestplates, leggings and boots. They slightly slow ground movement\nIn sunlight, you feel extremely weak and slow\nYou can't eat meat - your body can't digest it anymore"],
   "codex.form.bat2.instincts": [" "],
-  "codex.form.allay_sp.title": ["\nYou now closely resemble a friendly spectral creature, though unclear if due to internal magic, you exhibit some unique features"],
+
+  "codex.form.familiar_fox3.title": ["\n'Shape shifters can make perfect familiars. Magically attuned yet sufficiently intelligent...\nIt seems we've found the correct approach'"],
+  "codex.form.familiar_fox3.appearance": ["You appear nearly indistinguishable from a feral red fox - save for the two unusually large tails swaying behind you\nYour eyes now unmistakably belong to a wild creature. In sunlight, your pupils contract into narrow slits\nYou realize the nature of magic within you has completely changed. The shifting magic has solidified, permanently transformed into something else - something more befitting a familiar...\nAzure flames occasionally manifest around your body before slowly fading. These mark your status as a familiar\n\nIt seems this will be your new life from now on"],
+  "codex.form.familiar_fox3.pros": ["Illagers recognize you as an ally and will no longer attack you\nYour running speed has increased. Your small size makes you harder to hit with ranged attacks\nDue to enhanced familiar magic, you can brew strong splash potions of poison, healing and harming directly in your inventory by right-clicking water bottles on corresponding ingredients\nYour magical senses allow you to detect nearby creatures through walls\nYour thick fur protects you from sweet berry bushes\nFamiliar magic grants immunity to fire and lava damage. Most status effects no longer affect you, whether beneficial or harmful"],
+  "codex.form.familiar_fox3.cons": ["Witches and evokers' magic links with your familiar essence. They forbid you from harming illagers and will attempt to control your actions...\nAs a familiar, normal food no longer sustains you. You must right-click while empty-handed to drain energy from neutral creatures to restore hunger\nIntelligent creatures provide more nourishment. Besides, witches seem eager to supply their energy\nMaybe you should stay near them...\n\nYour health is reduced. Without proper hands for tools, your block-breaking speed is slower\nLeg armor no longer fits your quadrupedal form, and your swimming speed is reduced\nVillagers fear you and will actively avoid you"],
+  "codex.form.familiar_fox3.instincts": [""],
+
+"codex.form.allay_sp.title": ["\nYou now closely resemble a friendly spectral creature, though unclear if due to internal magic, you exhibit some unique features"],
   "codex.form.allay_sp.appearance": ["Your body now consists of light blue translucent gauze-like substance. Extremely light, letting you float\nFeathery antenna-like structures grow from your forehead - very flexible. They grant new senses detecting nearby creatures' locations\nBranch-like wings sprout from your back. With them, you can hover through skies. Below wings, two ribbon-like extensions emerge - purpose unclear, possibly compensating lost leg functions"],
   "codex.form.allay_sp.pros": ["Your more spectral physique grants new abilities -\nYour actions now barely consume satiation\nHolding jump lets you ascend and hover freely midair. You also descend slowly\n\nFloating means no footsteps\nAmethyst resonates strangely with you: in inventory, you can \"use\" one amethyst block on another to create amethyst shards\nYou sense other creatures' energy: detecting entities within range. Damaging others lets you siphon some health\nEnhanced perception increases bow damage\nYour tiny size lets you enter 1-block spaces easily, and projectiles miss you more often"],
   "codex.form.allay_sp.cons": ["Your semi-spectral nature brings disadvantages -\nHovering rapidly depletes satiation\nYour body can't derive energy from food - only amethyst shards restore satiation. You also heal less from satiation\nYour weaker body requires both hands for tools/weapons. You break hard materials slower and deal reduced melee damage.Your max health has reduced greatly either\nFloating increases inertia, making stopping harder\nYour lower torso vanished - you can't wear leggings or boots"],
