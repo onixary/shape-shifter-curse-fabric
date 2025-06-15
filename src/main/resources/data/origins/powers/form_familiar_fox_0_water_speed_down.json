@@ -3,7 +3,7 @@
   "modifier": {
     "attribute": "minecraft:generic.movement_speed",
     "operation": "addition",
-    "value": -0.35,
+    "value": -0.15,
     "name": "water speed down"
   },
   "tick_rate": 5,

@@ -5,7 +5,7 @@
     "actions": [
       {
         "type": "origins:add_velocity",
-        "z": 0.05,
+        "z": 0.085,
         "space": "local_horizontal_normalized"
       },
       {

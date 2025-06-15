@@ -1,0 +1,32 @@
+{
+  "type": "origins:add_sustained_instinct",
+  "instinct_effect_type": "FORM_FAMILIAR_FOX_MOVING_ON_SNOW",
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:or",
+        "conditions": [
+          {
+            "type": "origins:on_block",
+            "block_condition": {
+              "type": "origins:block",
+              "block": "minecraft:snow_block"
+            }
+          },
+          {
+            "type": "origins:on_block",
+            "block_condition": {
+              "type": "origins:block_state",
+              "property": "snowy",
+              "value": true
+            }
+          }
+        ]
+      },
+      {
+        "type": "origins:moving"
+      }
+    ]
+  }
+}

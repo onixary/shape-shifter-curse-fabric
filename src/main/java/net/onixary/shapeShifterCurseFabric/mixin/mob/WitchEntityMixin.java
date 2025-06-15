@@ -76,6 +76,9 @@ public abstract class WitchEntityMixin {
                     ci.cancel();
                 }
             }
+            else if(curForm == PlayerForms.FAMILIAR_FOX_0){
+                ci.cancel();
+            }
         }
     }
 

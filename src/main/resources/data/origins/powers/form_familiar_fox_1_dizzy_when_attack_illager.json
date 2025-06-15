@@ -1,0 +1,64 @@
+{
+  "type": "origins:self_action_on_hit",
+  "entity_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:apply_effect",
+        "effect": {
+          "effect": "minecraft:nausea",
+          "amplifier": 1,
+          "duration": 120
+        }
+    },
+      {
+        "type": "origins:apply_effect",
+        "effect": {
+          "effect": "minecraft:darkness",
+          "amplifier": 1,
+          "duration": 60
+        }
+      },
+      {
+        "type": "origins:add_velocity",
+        "z": -0.5,
+        "y" : 0.5,
+        "space": "local_horizontal_normalized"
+      }
+    ]
+  },
+  "target_condition": {
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:entity_type",
+          "entity_type": "minecraft:witch"
+        },
+        {
+          "type": "origins:entity_type",
+          "entity_type": "minecraft:vex"
+        },
+        {
+          "type": "origins:entity_type",
+          "entity_type": "minecraft:evoker"
+        },
+        {
+          "type": "origins:entity_type",
+          "entity_type": "minecraft:illusioner"
+        },
+        {
+          "type": "origins:entity_type",
+          "entity_type": "minecraft:pillager"
+        },
+        {
+          "type": "origins:entity_type",
+          "entity_type": "minecraft:vindicator"
+        },
+        {
+          "type": "origins:entity_type",
+          "entity_type": "minecraft:ravager"
+        }
+      ]
+  },
+  "cooldown": 10
+}

@@ -1,9 +1,16 @@
 {
 	"powers": [
-		"origins:form_base_scale",
+		"origins:form_familiar_fox_0_scale",
+		"origins:form_familiar_fox_0_sprint_speed_up",
+		"origins:form_familiar_fox_0_looting",
+		"origins:form_familiar_fox_0_water_speed_down",
+		"origins:form_familiar_fox_0_dizzy_when_attack_witch",
+
 
 		"origins:form_instinct_use_catalyst",
-		"origins:form_instinct_use_golden_apple"
+		"origins:form_instinct_use_golden_apple",
+		"origins:form_familiar_fox_instinct_moving_on_snow",
+		"origins:form_familiar_fox_instinct_eat_berry"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

@@ -1,0 +1,28 @@
+{
+  "type": "origins:add_sustained_instinct",
+  "instinct_effect_type": "FORM_FAMILIAR_FOX_LOOKING_WITCH",
+  "condition": {
+    "type": "origins:raycast",
+    "distance": 20,
+    "block": false,
+    "entity": true,
+    "shape_type": "visual",
+    "fluid_handling": "any",
+    "hit_bientity_condition": {
+      "type": "origins:target_condition",
+      "condition": {
+        "type": "origins:or",
+        "conditions": [
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:witch"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:evoker"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -26,9 +26,18 @@
       {
         "type": "origins:actor_action",
         "action": {
-          "type": "origins:feed",
-          "food": 6,
-          "saturation": 0.3
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:add_instinct",
+              "instinct_effect_type": "FORM_FAMILIAR_FOX_ABSORB_ENERGY"
+            },
+            {
+              "type": "origins:feed",
+              "food": 6,
+              "saturation": 0.3
+            }
+          ]
         }
       }
     ]

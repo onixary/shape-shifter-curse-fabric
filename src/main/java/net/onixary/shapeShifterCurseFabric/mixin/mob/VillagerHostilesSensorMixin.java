@@ -16,7 +16,7 @@ public abstract class VillagerHostilesSensorMixin {
     private void isCloseEnoughForDanger(LivingEntity villager, LivingEntity hostile, CallbackInfoReturnable<Boolean> callback) {
         if (hostile instanceof PlayerEntity) {
             PlayerForms curForm = RegPlayerFormComponent.PLAYER_FORM.get(hostile).getCurrentForm();
-            if(curForm == PlayerForms.FAMILIAR_FOX_2){
+            if(curForm == PlayerForms.FAMILIAR_FOX_2 || curForm == PlayerForms.FAMILIAR_FOX_3) {
                 callback.setReturnValue(hostile.distanceTo(villager) <= 8.0);
             }
         }
@@ -26,7 +26,7 @@ public abstract class VillagerHostilesSensorMixin {
     private void isHostile(LivingEntity hostile, CallbackInfoReturnable<Boolean> callback) {
         if (hostile instanceof PlayerEntity) {
             PlayerForms curForm = RegPlayerFormComponent.PLAYER_FORM.get(hostile).getCurrentForm();
-            if(curForm == PlayerForms.FAMILIAR_FOX_2){
+            if(curForm == PlayerForms.FAMILIAR_FOX_2 || curForm == PlayerForms.FAMILIAR_FOX_3) {
                 callback.setReturnValue(true);
             }
         }

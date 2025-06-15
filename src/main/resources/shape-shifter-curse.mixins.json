@@ -22,6 +22,7 @@
     "AdjustItemHoldPlayerRendererMixin",
     "IEntityRenderDispatcherAccessor",
     "EntityRenderDispatcherMixin",
+    "EntityLootingMixin",
     "FeralPlayerEntityRendererMixin",
     "ElytraEntityModelMixin",
     "PlayerEntityRendererFallFlyingMixin",

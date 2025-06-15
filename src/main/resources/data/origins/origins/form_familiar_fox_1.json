@@ -1,9 +1,18 @@
 {
 	"powers": [
-		"origins:form_base_scale",
+		"origins:form_familiar_fox_1_scale",
+		"origins:form_familiar_fox_0_sprint_speed_up",
+		"origins:form_familiar_fox_1_looting",
+		"origins:form_familiar_fox_1_use_normal_creature",
+		"origins:form_familiar_fox_1_dizzy_when_attack_illager",
+		"origins:form_all_food_down",
+		"origins:form_familiar_fox_0_water_speed_down",
+		"origins:form_familiar_fox_1_health",
 
 		"origins:form_instinct_use_catalyst",
-		"origins:form_instinct_use_golden_apple"
+		"origins:form_instinct_use_golden_apple",
+		"origins:form_familiar_fox_instinct_in_berry_bush",
+		"origins:form_familiar_fox_instinct_looking_witch"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

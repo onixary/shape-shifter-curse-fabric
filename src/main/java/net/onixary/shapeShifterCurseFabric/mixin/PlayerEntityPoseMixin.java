@@ -54,7 +54,8 @@ public abstract class PlayerEntityPoseMixin extends LivingEntity implements Name
             if(isSwimming()){
                 this.setPose(EntityPose.STANDING);
             }
-            else if(isSleeping()){
+
+            if(isSleeping()){
                 this.setPose(EntityPose.STANDING);
             }
             //else if(this.isFallFlying()){

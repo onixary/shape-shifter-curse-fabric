@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.player_form.instinct;
 public enum InstinctEffectType {
     // 立即效果（值类型）
     FORM_OCELOT_ATTACK_LIVESTOCK(3.0f),
+    FORM_FAMILIAR_FOX_ABSORB_ENERGY(2.5f),
     // 供自定义形态使用的效果
     FORM_INSTANT_INSTINCT_MEDIUM(3.0f),
     FORM_INSTANT_INSTINCT_LARGE(5.0f),
@@ -10,11 +11,16 @@ public enum InstinctEffectType {
     // 持续效果（速率类型）
     // 催化剂与金苹果的生效时间都是2秒
     FORM_USE_GOLDEN_APPLE(-4.25f / 2),
-    FORM_USE_CATALYST(1.25f / 2),
+    FORM_USE_CATALYST(1.95f / 2),
 
     FORM_BAT_IN_DARK(0.004f),
     FORM_BAT_EAT_FRUIT(0.1f),
     FORM_BAT_NEAR_DRIPSTONE(0.006f),
+
+    FORM_FAMILIAR_FOX_EAT_BERRY(0.15f),
+    FORM_FAMILIAR_FOX_IN_BERRY_BUSH(0.008f),
+    FORM_FAMILIAR_FOX_MOVING_ON_SNOW(0.008f),
+    FORM_FAMILIAR_FOX_LOOKING_WITCH(0.013f),
 
     FORM_AXOLOTL_IN_WATER(0.004f),
     FORM_AXOLOTL_EAT_FISH(0.1f),
@@ -37,6 +43,10 @@ public enum InstinctEffectType {
     public boolean isSustained() {
         return this == FORM_BAT_IN_DARK
                 || this == FORM_BAT_EAT_FRUIT
+                || this == FORM_FAMILIAR_FOX_EAT_BERRY
+                || this == FORM_FAMILIAR_FOX_IN_BERRY_BUSH
+                || this == FORM_FAMILIAR_FOX_MOVING_ON_SNOW
+                || this == FORM_FAMILIAR_FOX_LOOKING_WITCH
                 || this == FORM_BAT_NEAR_DRIPSTONE
                 || this == FORM_AXOLOTL_IN_WATER
                 || this == FORM_AXOLOTL_NEAR_DRIPLEAF
