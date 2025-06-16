@@ -55,6 +55,9 @@ public class TransformManager {
         _isRegressedFromFinal = false;
         _isByCure = false;
         PlayerForms currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+        RegPlayerFormComponent.PLAYER_FORM.get(player).setByCursedMoon(isByCursedMoon);
+        RegPlayerFormComponent.PLAYER_FORM.sync(player);
+        ShapeShifterCurseFabric.LOGGER.info("Progressive transform started, isByCursedMoon: " + isByCursedMoon);
         int currentFormIndex = currentForm.getIndex();
         String currentFormGroup = currentForm.getGroup();
         PlayerForms toForm = null;
@@ -152,9 +155,14 @@ public class TransformManager {
         curToForm = toForm;
         ShapeShifterCurseFabric.LOGGER.info("Cur Player: " + curPlayer + " To Form: " + curToForm);
         _isByCursedMoonEnd = true;
+        _isByCursedMoon = true;
+        RegPlayerFormComponent.PLAYER_FORM.get(player).setByCursedMoon(true);
+        RegPlayerFormComponent.PLAYER_FORM.sync(player);  // 立即同步组件
         applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);
         handleTransformEffect();
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
+        ShapeShifterCurseFabric.LOGGER.info("Moon end transform，_isByCursedMoonEnd=" + _isByCursedMoonEnd +
+                "，component isByCursedMoon=" + RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon());
     }
 
     static PlayerForms getRandomOrBuffForm(PlayerEntity player){
@@ -185,15 +193,23 @@ public class TransformManager {
                 isEffectActive = false;
                 isEndEffectActive = true;
                 if (curPlayer != null) {
-                    if(!_isByCursedMoon || !_isByCursedMoonEnd){
+                    // 只在非诅咒月亮变形时清除本能
+                    boolean isCursedMoonRelated  = RegPlayerFormComponent.PLAYER_FORM.get(curPlayer).isByCursedMoon()
+                            || _isByCursedMoonEnd
+                            || _isByCursedMoon;
+
+                    // 只有当不是诅咒月亮相关变形时才清除本能
+                    if(!isCursedMoonRelated ){
                         clearInstinct(curPlayer);
                     }
+
                     FormAbilityManager.applyForm(curPlayer, curToForm);
-                    RegPlayerFormComponent.PLAYER_FORM.get(curPlayer).setByCursedMoon(_isByCursedMoon);
+
+                    // 不要覆盖组件中的诅咒月亮状态
+                    // 只设置其他标志
                     RegPlayerFormComponent.PLAYER_FORM.get(curPlayer).setRegressedFromFinal(_isRegressedFromFinal);
                     RegPlayerFormComponent.PLAYER_FORM.get(curPlayer).setByCure(_isByCure);
                     RegPlayerFormComponent.PLAYER_FORM.sync(curPlayer);
-
                 } else {
                     ShapeShifterCurseFabric.LOGGER.error("curPlayer is null when trying to apply form!");
                 }
@@ -232,6 +248,13 @@ public class TransformManager {
                 applyFinaleTransformEffect((ServerPlayerEntity) curPlayer, 5);
                 InstinctTicker.isPausing = false;
                 TransformOverlay.INSTANCE.setEnableOverlay(false);
+                if (_isByCursedMoonEnd) {
+                    ShapeShifterCurseFabric.LOGGER.info("Finalizing moon end transform");
+                    _isByCursedMoon = false;
+                    RegPlayerFormComponent.PLAYER_FORM.get(curPlayer).setByCursedMoon(false);
+                    RegPlayerFormComponent.PLAYER_FORM.sync(curPlayer);
+                    _isByCursedMoonEnd = false;
+                }
                 isTransforming = false;
                 isEndEffectActive = false;
                 beginTransformEffectTicks = 0;
@@ -300,14 +323,57 @@ public class TransformManager {
     }
 
     public static void clearFormFlag(PlayerEntity player){
-        // when cursed moon ends, clear all flags
-        _isByCursedMoon = false;
+        // 完全修复重置逻辑
+        boolean wasByCursedMoon = RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon();
+
+        // 记录操作，便于调试
+        ShapeShifterCurseFabric.LOGGER.info("Clearing form flags, wasByCursedMoon: " + wasByCursedMoon +
+                ", _isByCursedMoonEnd: " + _isByCursedMoonEnd);
+
+        // 只在诅咒月亮结束时才重置诅咒月亮标志
+        if (_isByCursedMoonEnd) {
+            _isByCursedMoon = false;
+            RegPlayerFormComponent.PLAYER_FORM.get(player).setByCursedMoon(false);
+            ShapeShifterCurseFabric.LOGGER.info("Cleared cursed moon flag due to moon end");
+        }
+
+        // 重置其他标志
         _isRegressedFromFinal = false;
         _isByCure = false;
         _isByCursedMoonEnd = false;
-        RegPlayerFormComponent.PLAYER_FORM.get(player).setByCursedMoon(false);
+
         RegPlayerFormComponent.PLAYER_FORM.get(player).setRegressedFromFinal(false);
         RegPlayerFormComponent.PLAYER_FORM.get(player).setByCure(false);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
+    }
+
+    // 添加一个安全的方法，专门用于月亮结束变形后清除标记
+    public static void setIsByCursedMoonEnd(boolean value) {
+        _isByCursedMoonEnd = value;
+        ShapeShifterCurseFabric.LOGGER.info("设置_isByCursedMoonEnd=" + value);
+    }
+
+    public static void clearMoonEndFlags(PlayerEntity player) {
+        ShapeShifterCurseFabric.LOGGER.info("安全清除月亮结束标记");
+
+        // 记录清除前的状态
+        boolean wasByCursedMoon = RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon();
+
+        if (_isByCursedMoonEnd) {
+            ShapeShifterCurseFabric.LOGGER.info("Clearing moon end flags (instinct should be preserved)");
+            _isByCursedMoon = false;
+            _isByCursedMoonEnd = false;
+            RegPlayerFormComponent.PLAYER_FORM.get(player).setByCursedMoon(false);
+            RegPlayerFormComponent.PLAYER_FORM.sync(player);
+        }
+        // 只清除状态标记，不影响instinct
+        _isRegressedFromFinal = false;
+        _isByCure = false;
+
+        RegPlayerFormComponent.PLAYER_FORM.get(player).setRegressedFromFinal(false);
+        RegPlayerFormComponent.PLAYER_FORM.get(player).setByCure(false);
+        RegPlayerFormComponent.PLAYER_FORM.sync(player);
+
+        ShapeShifterCurseFabric.LOGGER.info("月亮标记已清除，原状态：" + wasByCursedMoon);
     }
 }

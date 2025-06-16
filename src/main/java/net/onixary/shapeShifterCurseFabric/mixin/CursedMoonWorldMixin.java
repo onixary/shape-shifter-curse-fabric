@@ -11,6 +11,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -80,6 +81,21 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
         }
         else if(time >= 23000L){
             CursedMoon.applyEndMoonEffect(player);
+        }
+        else if(time > 6000L) {
+
+            // 使用游戏刻来控制频率（20刻 = 1秒）
+            if (player.getWorld().getTime() % 20 == 0) {
+                boolean wasByCursedMoon = RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon();
+                if (wasByCursedMoon) {
+                    // 只有当标记存在时才记录日志，避免过多日志
+                    ShapeShifterCurseFabric.LOGGER.info("Forced clear of cursed moon flag for player " +
+                            player.getName().getString() + " during non-cursed-moon period");
+
+                    RegPlayerFormComponent.PLAYER_FORM.get(player).setByCursedMoon(false);
+                    RegPlayerFormComponent.PLAYER_FORM.sync(player);
+                }
+            }
         }
     }
 }

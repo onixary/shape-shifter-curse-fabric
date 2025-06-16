@@ -99,6 +99,8 @@ public class CursedMoon {
     public static void applyEndMoonEffect(ServerPlayerEntity player){
         // 结束Cursed Moon时的逻辑
         if(!CursedMoon.end_moon_effect_applied){
+            boolean wasByCursedMoon = RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon();
+            ShapeShifterCurseFabric.LOGGER.info("is player form by cursed moon? : " + wasByCursedMoon);
             if(FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_BEFORE_ENABLE){
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon_before_enable").formatted(Formatting.LIGHT_PURPLE));
             }
@@ -130,11 +132,15 @@ public class CursedMoon {
                 }
             }
             ShapeShifterCurseFabric.LOGGER.info("Cursed Moon ends!");
+            TransformManager.setIsByCursedMoonEnd(true);
+            RegPlayerFormComponent.PLAYER_FORM.get(player).setByCursedMoon(true);
+            RegPlayerFormComponent.PLAYER_FORM.sync(player);
             // transform
-            if(RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon() && !RegPlayerFormComponent.PLAYER_FORM.get(player).isByCure()){
+            if(wasByCursedMoon && !RegPlayerFormComponent.PLAYER_FORM.get(player).isByCure()){
                 TransformManager.handleMoonEndTransform(player);
             }
-            clearFormFlag(player);
+            //clearFormFlag(player);
+            //TransformManager.clearMoonEndFlags(player);
             CursedMoon.end_moon_effect_applied =true;
         }
     }

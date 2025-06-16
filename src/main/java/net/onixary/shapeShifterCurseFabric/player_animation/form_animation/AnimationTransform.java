@@ -22,7 +22,7 @@ public class AnimationTransform {
         // 适配Feral，根据当前形态和目标形态返回对应的动画
         // 添加null捕获防止恶性bug
         if(curForm == null || toForm == null){
-            ShapeShifterCurseFabric.LOGGER.info("getFormAnimToPlay called with null curForm or null toForm, returning default animation.");
+            //ShapeShifterCurseFabric.LOGGER.info("getFormAnimToPlay called with null curForm or null toForm, returning default animation.");
             return anim_on_transform_default;
         }
 
