@@ -22,19 +22,42 @@
       {
         "type": "origins:actor_action",
         "action": {
-          "type": "origins:feed",
-          "food": 9,
-          "saturation": 0.4
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:feed",
+              "food": 9,
+              "saturation": 0.4
+            },
+            {
+              "type": "origins:trigger_cooldown",
+              "power": "origins:form_familiar_fox_use_entity_cooldown"
+            }
+          ]
         }
       }
     ]
   },
   "bientity_condition": {
-    "type": "origins:target_condition",
-    "condition": {
-      "type": "origins:in_tag",
-      "tag": "origins:familiar_sorcery_target"
-    }
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:target_condition",
+        "condition": {
+          "type": "origins:in_tag",
+          "tag": "origins:familiar_illager_target"
+        }
+      },
+      {
+        "type": "origins:actor_condition",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "origins:form_familiar_fox_use_entity_cooldown",
+          "comparison": "<",
+          "compare_to": 1
+        }
+      }
+    ]
   },
   "item_condition": {
     "type": "origins:empty"

@@ -13,10 +13,6 @@
               "command": "particle soul_fire_flame ~ ~0.5 ~ 0.3 0.3 0.3 0.009 10 normal @a"
             },
             {
-              "type": "origins:execute_command",
-              "command": "particle heart ~ ~0.5 ~ 0.3 0.3 0.3 0.009 3 normal @a"
-            },
-            {
               "type": "origins:play_sound",
               "sound": "minecraft:entity.evoker.cast_spell"
             }
@@ -30,8 +26,32 @@
           "actions": [
             {
               "type": "origins:feed",
-              "food": 15,
-              "saturation": 0.4
+              "food": 6,
+              "saturation": 0.3
+            },
+            {
+              "type": "origins:apply_effect",
+              "effect": {
+                "effect": "minecraft:blindness",
+                "amplifier": 1,
+                "duration": 80
+              }
+            },
+            {
+              "type": "origins:apply_effect",
+              "effect": {
+                "effect": "minecraft:slowness",
+                "amplifier": 3,
+                "duration": 80
+              }
+            },
+            {
+              "type": "origins:apply_effect",
+              "effect": {
+                "effect": "minecraft:weakness",
+                "amplifier": 1,
+                "duration": 200
+              }
             },
             {
               "type": "origins:trigger_cooldown",
@@ -49,7 +69,7 @@
         "type": "origins:target_condition",
         "condition": {
           "type": "origins:in_tag",
-          "tag": "origins:familiar_sorcery_target"
+          "tag": "origins:familiar_enemy_target"
         }
       },
       {

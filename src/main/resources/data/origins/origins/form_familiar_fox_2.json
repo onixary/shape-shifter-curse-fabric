@@ -6,6 +6,8 @@
 		"origins:form_familiar_fox_3_mob_glow_in_range",
 		"origins:form_familiar_fox_3_use_normal_creature",
 		"origins:form_familiar_fox_3_use_human_creature",
+		"origins:form_familiar_fox_3_use_enemy_creature",
+		"origins:form_familiar_fox_use_entity_cooldown",
 		"origins:form_familiar_fox_2_health",
 		"origins:form_all_food_down2",
 		"origins:form_disable_leg_armor",

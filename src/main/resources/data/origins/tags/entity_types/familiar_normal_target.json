@@ -13,6 +13,10 @@
     "minecraft:camel",
     "minecraft:cod",
     "minecraft:salmon",
-    "minecraft:tropical_fish"
+    "minecraft:tropical_fish",
+    "minecraft:pufferfish",
+    "minecraft:axolotl",
+    "minecraft:rabbit",
+    "minecraft:polar_bear"
   ]
 }

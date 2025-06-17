@@ -70,8 +70,7 @@ public class RegCustomPotions {
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.CHICKEN, OCELOT_FORM_POTION);
         // familiar fox只能通过女巫发射的溅射药水给与，没有配方
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.AMETHYST_SHARD, ALLEY_FORM_POTION);
-        // 取消Feral Cat Potion配方
-        //BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.COD_BUCKET, FERAL_CAT_FORM_POTION);
+        BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.COD_BUCKET, FERAL_CAT_FORM_POTION);
         // custom empty forms
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.RED_DYE, ALPHA_FORM_POTION);
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.YELLOW_DYE, BETA_FORM_POTION);
