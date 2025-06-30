@@ -18,7 +18,8 @@ public class ToFamiliarFoxStatus0 extends BaseTransformativeStatusEffect {
     public void onEffectApplied(PlayerEntity player) {
         ShapeShifterCurseFabric.LOGGER.info("ToFamiliarFoxStatus0 onEffect Applied");
         //FormAbilityManager.applyForm(player, PlayerForms.BAT_0);
-        TransformManager.handleDirectTransform(player, PlayerForms.FAMILIAR_FOX_0, false);
+        if(player.getWorld().isClient)
+            TransformManager.handleDirectTransform(player, PlayerForms.FAMILIAR_FOX_0, false);
         removeVisualEffects(player);
     }
 

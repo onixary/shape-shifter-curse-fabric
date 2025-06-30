@@ -4,12 +4,14 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.server.MinecraftServer;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
 
 public class PlayerDataStorage {
     private static final Gson GSON = new Gson();
@@ -102,7 +104,7 @@ public class PlayerDataStorage {
     }
 
     private static File getDataFile() {
-        return new File(MinecraftClient.getInstance().runDirectory, DATA_FILE_NAME);
+        return new File(Path.of("./").toFile(), DATA_FILE_NAME);
     }
 
     private static JsonObject getCachedData() {

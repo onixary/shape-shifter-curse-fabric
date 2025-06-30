@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.player_form.transform;
 
 import dev.tr7zw.firstperson.FirstPersonModelCore;
+import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -48,7 +49,7 @@ public class TransformManager {
         return isTransforming;
     }
 
-    private static final boolean IS_FIRST_PERSON_MOD_LOADED = FabricLoader.getInstance().isModLoaded("firstperson");
+    private static final boolean IS_FIRST_PERSON_MOD_LOADED = FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT && FabricLoader.getInstance().isModLoaded("firstperson");
 
     public static void handleProgressiveTransform(PlayerEntity player, boolean isByCursedMoon){
         _isByCursedMoon = isByCursedMoon;
@@ -108,7 +109,7 @@ public class TransformManager {
         curToForm = toForm;
         ShapeShifterCurseFabric.LOGGER.info("Cur Player: " + curPlayer + " To Form: " + curToForm);
         applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);
-        handleTransformEffect();
+        handleTransformEffect(false);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
     }
 
@@ -159,7 +160,7 @@ public class TransformManager {
         RegPlayerFormComponent.PLAYER_FORM.get(player).setByCursedMoon(true);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);  // 立即同步组件
         applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);
-        handleTransformEffect();
+        handleTransformEffect(false);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
         ShapeShifterCurseFabric.LOGGER.info("Moon end transform，_isByCursedMoonEnd=" + _isByCursedMoonEnd +
                 "，component isByCursedMoon=" + RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon());
@@ -214,7 +215,7 @@ public class TransformManager {
                     ShapeShifterCurseFabric.LOGGER.error("curPlayer is null when trying to apply form!");
                 }
                 applyEndTransformEffect((ServerPlayerEntity) curPlayer, StaticParams.TRANSFORM_FX_DURATION_OUT);
-                endTransformEffect();
+                //endTransformEffect();
             }
         }
         else if(isEndEffectActive){
@@ -238,7 +239,7 @@ public class TransformManager {
                     curPlayer.sendMessage(Text.translatable("info.shape-shifter-curse.on_enable_mod_after").formatted(Formatting.LIGHT_PURPLE));
                 }
                 // transform时重置firstperson offset
-                if(IS_FIRST_PERSON_MOD_LOADED){
+                if(IS_FIRST_PERSON_MOD_LOADED) {
                     FirstPersonModelCore fpm = FirstPersonModelCore.instance;
                     fpm.getConfig().xOffset = 0;
                     fpm.getConfig().sitXOffset = 0;
@@ -291,19 +292,21 @@ public class TransformManager {
         }
 
         ShapeShifterCurseFabric.LOGGER.info("Cur Player: " + curPlayer + " To Form: " + curToForm);
-        handleTransformEffect();
+        handleTransformEffect(player.getWorld().isClient);
         applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);
         // FormAbilityManager.applyForm(player, toForm);
     }
 
-    private static void handleTransformEffect(){
+    private static void handleTransformEffect(boolean client) {
         isTransforming = true;
-        beginTransformEffect();
         beginTransformEffectTicks = StaticParams.TRANSFORM_FX_DURATION_IN;
         endTransformEffectTicks = StaticParams.TRANSFORM_FX_DURATION_OUT;
         isEffectActive = true;
         InstinctTicker.isPausing = true;
-        TransformOverlay.INSTANCE.setEnableOverlay(true);
+        if(client) {
+            beginTransformEffect();
+            TransformOverlay.INSTANCE.setEnableOverlay(true);
+        }
     }
 
     public static void setFormDirectly(PlayerEntity player, PlayerForms toForm){

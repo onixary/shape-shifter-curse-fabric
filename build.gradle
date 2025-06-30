@@ -11,6 +11,14 @@ base {
     archivesName = project.archives_base_name
 }
 
+loom {
+    runs {
+        client {
+            programArgs(["--username", "Dev"])
+        }
+    }
+}
+
 repositories {
     // Add repositories to retrieve artifacts from in here.
     // You should only use this when depending on other mods because
@@ -164,7 +172,7 @@ dependencies {
     include modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:${project.player_anim}")
 
     // Fabric forge config api port
-    //modLocalRuntime "fuzs.forgeconfigscreens:forgeconfigscreens-fabric:8.0.0"
+    modLocalRuntime "fuzs.forgeconfigscreens:forgeconfigscreens-fabric:8.0.0"
 
 
     //modImplementation "com.github.eggohito:eggolib:${project.eggolib_version}"
@@ -177,6 +185,7 @@ dependencies {
     modCompileOnly "maven.modrinth:better-combat:MxaoPSMy"
     modCompileOnly "maven.modrinth:playeranimator:cfkAgcOh"
     modCompileOnly "maven.modrinth:first-person-model:mquWPSix"
+    modRuntimeOnly "maven.modrinth:first-person-model:mquWPSix"
 
     annotationProcessor(files("libs/mixinextras-fabric-0.2.0-beta.8.jar"))
 

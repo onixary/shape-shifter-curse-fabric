@@ -2,7 +2,6 @@ package net.onixary.shapeShifterCurseFabric.player_form.instinct;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormPhase;
@@ -13,10 +12,9 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComp
 
 import java.util.Iterator;
 
+import static net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.applyInstinctThresholdEffect;
 import static net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager.getForm;
-import static net.onixary.shapeShifterCurseFabric.player_form.effect.PlayerTransformEffectManager.applyInstinctThresholdEffect;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.loadInstinctComp;
-import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.removeSustainedEffect;
 import static net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager.handleProgressiveTransform;
 
 public class InstinctTicker {
@@ -73,7 +71,7 @@ public class InstinctTicker {
         );
         RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.sync(player);
 
-        if(comp.instinctValue >= 80.0f && comp.instinctValue < 99.99f){
+        if(comp.instinctValue >= 80.0f && comp.instinctValue < 99.99f && player.getWorld().isClient) {
             applyInstinctThresholdEffect();
         }
         //ShapeShifterCurseFabric.LOGGER.info("currentInstinctFromComp: " + comp.instinctValue);

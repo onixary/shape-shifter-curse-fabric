@@ -5,25 +5,11 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.util.ClientTicker;
 
 public class PlayerTransformEffectManager {
-
-    public static void applyInstinctThresholdEffect() {
-        ClientPlayerEntity clientPlayer = MinecraftClient.getInstance().player;
-        if(clientPlayer == null){
-            return;
-        }
-
-        for (int i = 0; i < 1; i++) {
-            clientPlayer.getWorld().addParticle(StaticParams.PLAYER_TRANSFORM_PARTICLE,
-                    clientPlayer.getX() + (clientPlayer.getRandom().nextDouble() - 0.5) * 0.5,
-                    clientPlayer.getY() + clientPlayer.getRandom().nextDouble() * 1,
-                    clientPlayer.getZ() + (clientPlayer.getRandom().nextDouble() - 0.5) * 0.5,
-                    0, 1, 0.5);
-        }
-    }
 
     public static void applyStartTransformEffect(ServerPlayerEntity player, int duration) {
         // add darkness effect
@@ -38,28 +24,8 @@ public class PlayerTransformEffectManager {
         StatusEffectInstance preventJumpEffect = new StatusEffectInstance(StatusEffects.JUMP_BOOST, duration, 137);
         player.addStatusEffect(preventJumpEffect);
 
-        ClientPlayerEntity clientPlayer = MinecraftClient.getInstance().player;
-        if(clientPlayer == null){
-            return;
-        }
-
-
-        Runnable particleTask = () -> {
-            for (int i = 0; i < 5; i++) {
-                clientPlayer.getWorld().addParticle(StaticParams.PLAYER_TRANSFORM_PARTICLE,
-                        clientPlayer.getX() + (clientPlayer.getRandom().nextDouble() - 0.5) * 0.9,
-                        clientPlayer.getY() + clientPlayer.getRandom().nextDouble() * 1.5 + 1,
-                        clientPlayer.getZ() + (clientPlayer.getRandom().nextDouble() - 0.5) * 0.9,
-                        0, -1, 0);
-                //ShapeShifterCurseFabric.LOGGER.info("Particle effect emitted");
-            }
-        };
-
-        // Get the Minecraft client instance
-        MinecraftClient client = MinecraftClient.getInstance();
-        // Create and start the client ticker
-        ClientTicker ticker = new ClientTicker(client, particleTask, duration);
-        ticker.start();
+        // TODO transfer whatever this code to run clientside only, running this serverside will crash
+        //ShapeShifterCurseFabricClient.emitTransformParticle(duration);
     }
 
     public static void applyEndTransformEffect(ServerPlayerEntity player, int duration) {
@@ -75,29 +41,8 @@ public class PlayerTransformEffectManager {
         StatusEffectInstance preventJumpEffect = new StatusEffectInstance(StatusEffects.JUMP_BOOST, duration, 137);
         player.addStatusEffect(preventJumpEffect);
 
-        ClientPlayerEntity clientPlayer = MinecraftClient.getInstance().player;
-        if(clientPlayer == null){
-            return;
-        }
-
-
-        // similar to DOTween in Unity
-        Runnable particleTask = () -> {
-            for (int i = 0; i < 2; i++) {
-                clientPlayer.getWorld().addParticle(StaticParams.PLAYER_TRANSFORM_PARTICLE,
-                        clientPlayer.getX() + (clientPlayer.getRandom().nextDouble() - 0.5) * 0.9,
-                        clientPlayer.getY() + clientPlayer.getRandom().nextDouble() * 1.5 + 1,
-                        clientPlayer.getZ() + (clientPlayer.getRandom().nextDouble() - 0.5) * 0.9,
-                        0, -1, 0);
-                //ShapeShifterCurseFabric.LOGGER.info("Particle effect emitted");
-            }
-        };
-
-        // Get the Minecraft client instance
-        MinecraftClient client = MinecraftClient.getInstance();
-        // Create and start the client ticker
-        ClientTicker ticker = new ClientTicker(client, particleTask, duration);
-        ticker.start();
+        // TODO transfer whatever this code to run clientside only, running this serverside will crash
+        //ShapeShifterCurseFabricClient.emitTransformParticle(duration);
     }
 
     public static void applyFinaleTransformEffect(ServerPlayerEntity player, int duration){
