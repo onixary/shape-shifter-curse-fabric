@@ -22,7 +22,9 @@
       "net.onixary.shapeShifterCurseFabric.integration.origins.Origins",
       "net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFur"
     ],
-    "client": ["net.onixary.shapeShifterCurseFabric.integration.origins.OriginsClient",
+    "client": [
+      "net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient",
+      "net.onixary.shapeShifterCurseFabric.integration.origins.OriginsClient",
       "net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFurClient"
     ],
     "modmenu": [

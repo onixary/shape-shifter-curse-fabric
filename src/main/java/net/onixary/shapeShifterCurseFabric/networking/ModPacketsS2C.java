@@ -10,23 +10,17 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 
 public class ModPacketsS2C {
-    public static void register() {
-        // 新增附件同步包处理器
-        ClientPlayNetworking.registerGlobalReceiver(
-                ModPackets.SYNC_EFFECT_ATTACHMENT,
-                ModPacketsS2C::handleSyncEffectAttachment
-        );
-    }
 
-    private static void handleSyncEffectAttachment(
-            MinecraftClient client,
-            ClientPlayNetworkHandler handler,
-            PacketByteBuf buf,
-            PacketSender sender
-    ) {
+    public static void handleSyncEffectAttachment(
+		MinecraftClient client,
+		ClientPlayNetworkHandler handler,
+		PacketByteBuf buf,
+		PacketSender sender
+	) {
         // 从数据包读取NBT
         NbtCompound nbt = buf.readNbt();
         client.execute(() -> {

@@ -116,7 +116,6 @@ public class ShapeShifterCurseFabric implements ModInitializer {
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
                     .build()
     );
-    public static final EntityModelLayer T_BAT_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_bat"), "main");
     // Axolotl
     public static final EntityType<TransformativeAxolotlEntity> T_AXOLOTL = Registry.register(
             Registries.ENTITY_TYPE,
@@ -136,7 +135,6 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
     private int save_timer = 0;
 
-
     @Override
     public void onInitialize() {
         PlayerDataStorage.initialize();
@@ -147,14 +145,12 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         PlayerEventHandler.register();
         TEntitySpawnHandler.register();
         RegFormConfig.register();
-        RegPlayerAnimation.register();
         RegOtherStatusEffects.initialize();
         AdditionalEntityConditions.register();
         AdditionalPowers.register();
         AdditionalEntityActions.register();
         // network package
         ModPacketsC2S.register();
-        ModPacketsS2C.register();
         cursedMoonData = new CursedMoonData();
 
         //TransformFX.INSTANCE.registerCallbacks();
@@ -165,25 +161,6 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         RegCustomPotions.registerPotions();
         RegCustomPotions.registerPotionsRecipes();
         // Reg origins content
-
-        // Reg custom entities model and renderer
-        /*FabricDefaultAttributeRegistry.register(T_BAT, TransformativeBatEntity.createTBatAttributes());
-        EntityRendererRegistry.register(T_BAT, (context) -> {
-            return new BatEntityRenderer(context);
-        });*/
-        // load and save attached
-        // use PlayerEventHandler
-
-        /*ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
-            PlayerEntity player = handler.player;
-            boolean hasAttachment = loadCurrentAttachment(player);
-            if(!hasAttachment) {
-                resetAttachment(player);
-            }
-            else{
-                LOGGER.info("Attachment loaded ");
-            }
-        });*/
 
         // do not reset effect when player respawn or enter hell
 
@@ -208,7 +185,6 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
         // Reg listeners
         ServerTickEvents.END_SERVER_TICK.register(this::onPlayerServerTick);
-        ClientTickEvents.END_CLIENT_TICK.register(this::onClientTick);
         EntitySleepEvents.STOP_SLEEPING.register((entity, world) -> {
             if (entity instanceof PlayerEntity) {
                 onPlayerEndSleeping(entity, world);
@@ -325,9 +301,5 @@ public class ShapeShifterCurseFabric implements ModInitializer {
                 save_timer = 0;
             }
         }
-    }
-
-    private void onClientTick(MinecraftClient minecraftClient){
-        TickManager.tickClientAll();
     }
 }
