@@ -38,13 +38,9 @@ public class FormAbilityManager {
         PlayerFormComponent component = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
         PlayerForms oldForm = component.getCurrentForm();
 
-        // 清理旧状态能力
         clearFormEffects(player, oldForm);
 
-        // 应用新状态能力
         FormConfig config = RegFormConfig.getConfig(newForm);
-        //applyHealth(player, config.getMaxHealth());
-        //applyArmor(player, config.getArmor());
         // 已被弃用，使用json定义的scale power
         //applyScale(player, config.getScale());
         applyFormOrigin(player, config.getFormOriginLayerID(), config.getFormOriginID());

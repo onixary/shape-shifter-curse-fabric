@@ -47,10 +47,11 @@ public class InstinctBarRenderer{
                 && showInstinctBar) {
             int width = mc.getWindow().getScaledWidth();
             int height = mc.getWindow().getScaledHeight();
-            float x = (float) width / 2 + 11;
+            //float x = (float) width / 2 + 11;
+            float x = (float)width / 2 - 40;
             // 39 is the height of the health bar
             float y = height - 39;
-            y -= 8;
+            y += 16;
             updateBarTextures(player);
             renderInstinctBar(context, tickDelta, (int) x, (int) y, player);
         }

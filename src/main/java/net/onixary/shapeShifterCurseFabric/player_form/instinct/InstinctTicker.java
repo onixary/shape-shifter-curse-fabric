@@ -1,9 +1,14 @@
 package net.onixary.shapeShifterCurseFabric.player_form.instinct;
 
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
+import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormPhase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
@@ -58,12 +63,15 @@ public class InstinctTicker {
         }
 
         // 处理立即效果
+        // Process immediate effects
         processImmediateEffects(comp);
 
         // 计算当前速率
+        // Calculate the current instinct growth rate
         currentInstinctRate = (isPausing || isUnderCursedMoon) ? 0.0f : calculateCurrentRate(player, comp);
 
         // 应用持续增长
+        // Apply the instinct growth rate
         comp.instinctValue = MathHelper.clamp(
                 comp.instinctValue + currentInstinctRate,
                 0f,
@@ -71,15 +79,23 @@ public class InstinctTicker {
         );
         RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.sync(player);
 
-        if(comp.instinctValue >= 80.0f && comp.instinctValue < 99.99f && player.getWorld().isClient) {
+        /*if(comp.instinctValue >= 80.0f && comp.instinctValue < 99.99f && player.getWorld().isClient) {
             applyInstinctThresholdEffect();
+        }*/
+        // 切换为使用数据包触发
+        // If the instinct value is between 80 and 99.99, send a packet to the server
+        if (comp.instinctValue >= 80.0f && comp.instinctValue < 99.99f && !player.getWorld().isClient && player instanceof ServerPlayerEntity) {
+            PacketByteBuf buf = PacketByteBufs.create();
+            ServerPlayNetworking.send((ServerPlayerEntity) player, ModPackets.INSTINCT_THRESHOLD_EFFECT_ID, buf);
         }
         //ShapeShifterCurseFabric.LOGGER.info("currentInstinctFromComp: " + comp.instinctValue);
         // 判断当前状态
+        // Judge the current state
         judgeInstinctState(player, currentInstinctRate);
 
         currentInstinctValue = comp.instinctValue;
         // 检查触发条件
+        // Check if the instinct value meets the threshold
         checkThreshold(player, comp);
     }
 
@@ -108,6 +124,7 @@ public class InstinctTicker {
 
     private static void judgeInstinctState(PlayerEntity player, float instinctRate){
         // 判断当前状态，供进度条使用
+        // Judge the current state for the progress bar
         PlayerForms form = getForm(player);
         PlayerFormPhase currentPhase = RegFormConfig.CONFIGS.get(form).getPhase();
         showInstinctBar = !(currentPhase == PlayerFormPhase.PHASE_CLEAR || currentPhase == PlayerFormPhase.PHASE_3);
@@ -165,6 +182,7 @@ public class InstinctTicker {
     private static void checkThreshold(PlayerEntity player, PlayerInstinctComponent comp) {
         if (comp.instinctValue >= StaticParams.INSTINCT_MAX) {
             // 这里放置满instinct时要触发的逻辑
+            // Here is the logic to be triggered when the instinct is full
             if(getForm(player).getIndex() < 2){
                 handleProgressiveTransform(player, false);
             }

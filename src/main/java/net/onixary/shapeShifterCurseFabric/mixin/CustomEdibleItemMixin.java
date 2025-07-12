@@ -34,9 +34,6 @@ public abstract class CustomEdibleItemMixin {
             .saturationModifier(0.0f)
             .build();
 
-    /**
-     * 重写获取食物组件的方法
-     */
     @Inject(method = "getFoodComponent", at = @At("HEAD"), cancellable = true)
     private void onGetFoodComponent(CallbackInfoReturnable<FoodComponent> cir) {
 
@@ -46,9 +43,6 @@ public abstract class CustomEdibleItemMixin {
         }
     }
 
-    /**
-     * 修改物品使用方法
-     */
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void onUse(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         ItemStack stack = user.getStackInHand(hand);

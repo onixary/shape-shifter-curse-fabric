@@ -13,13 +13,11 @@
     "EntityLootingMixin",
     "accessor.ActiveTargetGoalAccessor",
     "mob.WitchEntityMixin",
-    "mob.VexEntityMixin",
-    "mob.EvokerEntityMixin",
     "mob.VillagerHostilesSensorMixin",
-    "mob.PillagerEntityMixin",
-    "mob.RavagerEntityMixin",
-    "mob.VindicatorEntityMixin",
-    "block.SweetBerryBushBlockMixin"
+    "block.SweetBerryBushBlockMixin",
+    "PotionStackMixin",
+    "ThrowablePotionStackMixin",
+    "mob.MobEntityTeamMixin"
   ],
   "client": [
     "IEntityRenderDispatcherAccessor",
@@ -36,7 +34,8 @@
     "FeralPlayerEntityRendererMixin",
     "MinecraftClientMixin",
     "ElytraEntityModelMixin",
-    "AdjustItemHoldFeatureRendererMixin"
+    "AdjustItemHoldFeatureRendererMixin",
+    "InGameHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1

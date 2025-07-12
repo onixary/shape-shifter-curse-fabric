@@ -2,14 +2,21 @@ package net.onixary.shapeShifterCurseFabric.player_form.transform;
 
 import dev.tr7zw.firstperson.FirstPersonModelCore;
 import net.fabricmc.api.EnvType;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
+import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_form.FormRandomSelector;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
@@ -65,11 +72,14 @@ public class TransformManager {
         switch (currentFormIndex) {
             case -2:
                 // 未激活mod内容，不做任何事
+                // Mod content not activated, do nothing
                 break;
             case -1:
                 // 如果没有buff则随机选择一个形态，如果有buff则buff形态+1
+                // If there is no buff, randomly select a form; if there is a buff, buff form +1
                 toForm = getRandomOrBuffForm(player);
                 // 触发自定义成就
+                // Trigger custom achievement
                 ShapeShifterCurseFabric.ON_TRANSFORM_0.trigger((ServerPlayerEntity) player);
                 break;
             case 0:
@@ -83,6 +93,7 @@ public class TransformManager {
                     toForm = PlayerForms.getFormsByGroup(currentFormGroup)[0];
                     _isRegressedFromFinal = true;
                     // 触发自定义成就
+                    // Trigger custom achievement
                     ShapeShifterCurseFabric.ON_TRIGGER_CURSED_MOON_FORM_2.trigger((ServerPlayerEntity) player);
                 }
                 else{
@@ -90,10 +101,13 @@ public class TransformManager {
                 }
                 break;
             case 3:
-                // 永久形态，不做任何事
+                // 永久形态，不受影响
+                // Permanent form, not affected
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.on_cursed_moon_permanent").formatted(Formatting.YELLOW));
                 break;
             case 5:
                 // SP形态只有一个阶段，不会受到CursedMoon影响
+                // SP form has only one stage, not affected by CursedMoon
                 if(isByCursedMoon){
                     //toForm = PlayerForms.ORIGINAL_SHIFTER;
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.on_cursed_moon_special").formatted(Formatting.YELLOW));
@@ -109,8 +123,10 @@ public class TransformManager {
         curToForm = toForm;
         ShapeShifterCurseFabric.LOGGER.info("Cur Player: " + curPlayer + " To Form: " + curToForm);
         applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);
-        handleTransformEffect(false);
+        handleTransformEffect(player);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
+        MinecraftServer server = player.getServer();
+        syncCursedMoonData(player, server);
     }
 
     public static void handleMoonEndTransform(PlayerEntity player){
@@ -121,10 +137,12 @@ public class TransformManager {
         switch (currentFormIndex) {
             case -2:
                 // 不应该触发
+                // Should not trigger
                 ShapeShifterCurseFabric.LOGGER.error("Moon end transformation triggered when mod is not enabled, this should not happen!");
                 break;
             case -1:
                 // 回到之前的SP form
+                // go back to the previous SP form
                 //toForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getPreviousForm();
                 //ShapeShifterCurseFabric.LOGGER.error("Moon end transformation triggered when has original form, this should not happen!");
                 break;
@@ -160,10 +178,12 @@ public class TransformManager {
         RegPlayerFormComponent.PLAYER_FORM.get(player).setByCursedMoon(true);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);  // 立即同步组件
         applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);
-        handleTransformEffect(false);
+        handleTransformEffect(player);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
         ShapeShifterCurseFabric.LOGGER.info("Moon end transform，_isByCursedMoonEnd=" + _isByCursedMoonEnd +
                 "，component isByCursedMoon=" + RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon());
+        MinecraftServer server = player.getServer();
+        syncCursedMoonData(player, server);
     }
 
     static PlayerForms getRandomOrBuffForm(PlayerEntity player){
@@ -195,11 +215,13 @@ public class TransformManager {
                 isEndEffectActive = true;
                 if (curPlayer != null) {
                     // 只在非诅咒月亮变形时清除本能
+                    // Only clear instinct when not transforming by Cursed Moon
                     boolean isCursedMoonRelated  = RegPlayerFormComponent.PLAYER_FORM.get(curPlayer).isByCursedMoon()
                             || _isByCursedMoonEnd
                             || _isByCursedMoon;
 
                     // 只有当不是诅咒月亮相关变形时才清除本能
+                    // Only clear instinct when not related to Cursed Moon
                     if(!isCursedMoonRelated ){
                         clearInstinct(curPlayer);
                     }
@@ -208,6 +230,8 @@ public class TransformManager {
 
                     // 不要覆盖组件中的诅咒月亮状态
                     // 只设置其他标志
+                    // do not override the Cursed Moon state in the component
+                    // only set other flags
                     RegPlayerFormComponent.PLAYER_FORM.get(curPlayer).setRegressedFromFinal(_isRegressedFromFinal);
                     RegPlayerFormComponent.PLAYER_FORM.get(curPlayer).setByCure(_isByCure);
                     RegPlayerFormComponent.PLAYER_FORM.sync(curPlayer);
@@ -234,18 +258,20 @@ public class TransformManager {
             if(endTransformEffectTicks <= 0){
                 // 结束时的相关逻辑放在这里
                 // 如果curFromForm为ORIGINAL_BEFORE_ENABLE，则代表玩家第一次开启mod，触发info
+                // If curFromForm is ORIGINAL_BEFORE_ENABLE, it means the player is enabling the mod for the first time, trigger info
                 if(curFromForm == PlayerForms.ORIGINAL_BEFORE_ENABLE){
                     // info
                     curPlayer.sendMessage(Text.translatable("info.shape-shifter-curse.on_enable_mod_after").formatted(Formatting.LIGHT_PURPLE));
                 }
                 // transform时重置firstperson offset
+                // Reset firstperson offset when transforming
                 if(IS_FIRST_PERSON_MOD_LOADED) {
                     FirstPersonModelCore fpm = FirstPersonModelCore.instance;
                     fpm.getConfig().xOffset = 0;
                     fpm.getConfig().sitXOffset = 0;
                     fpm.getConfig().sneakXOffset = 0;
                 }
-                PlayerTeamHandler.updatePlayerTeam((ServerPlayerEntity) curPlayer);
+                //PlayerTeamHandler.updatePlayerTeam((ServerPlayerEntity) curPlayer);
                 applyFinaleTransformEffect((ServerPlayerEntity) curPlayer, 5);
                 InstinctTicker.isPausing = false;
                 TransformOverlay.INSTANCE.setEnableOverlay(false);
@@ -270,10 +296,12 @@ public class TransformManager {
         curFromForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
         _isByCure = isByCure;
         // 检查cure应用时是否处于Cursed Moon，如果没有，则不设置flag
+        // Check if the cure is applied during Cursed Moon, if not, do not set the flag
         if(!CursedMoon.isCursedMoon()){
             _isByCure = false;
         }
         // 根据index触发自定义成就
+        // Trigger custom achievement based on index
         int toFormIndex = curToForm.getIndex();
         if(!isByCure){
             switch(toFormIndex){
@@ -292,21 +320,58 @@ public class TransformManager {
         }
 
         ShapeShifterCurseFabric.LOGGER.info("Cur Player: " + curPlayer + " To Form: " + curToForm);
-        handleTransformEffect(player.getWorld().isClient);
+        handleTransformEffect(player);
         applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);
         // FormAbilityManager.applyForm(player, toForm);
+        MinecraftServer server = player.getServer();
+        syncCursedMoonData(player, server);
     }
 
-    private static void handleTransformEffect(boolean client) {
+    private static void syncCursedMoonData(PlayerEntity player, MinecraftServer server){
+        if(FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_BEFORE_ENABLE){
+            ShapeShifterCurseFabric.LOGGER.info("Cursed moon disabled");
+            ShapeShifterCurseFabric.cursedMoonData.getInstance().disableCursedMoon(server.getOverworld());
+        }
+        else{
+            ShapeShifterCurseFabric.LOGGER.info("Cursed moon enabled");
+            ShapeShifterCurseFabric.cursedMoonData.getInstance().enableCursedMoon(server.getOverworld());
+        }
+        ShapeShifterCurseFabric.cursedMoonData.getInstance().save(server.getOverworld());
+    }
+
+    private static void handleTransformEffect(PlayerEntity player) {
         isTransforming = true;
         beginTransformEffectTicks = StaticParams.TRANSFORM_FX_DURATION_IN;
         endTransformEffectTicks = StaticParams.TRANSFORM_FX_DURATION_OUT;
         isEffectActive = true;
         InstinctTicker.isPausing = true;
-        if(client) {
-            beginTransformEffect();
-            TransformOverlay.INSTANCE.setEnableOverlay(true);
+        //if(client) {
+        //    beginTransformEffect();
+        //    TransformOverlay.INSTANCE.setEnableOverlay(true);
+        //}
+        if (!player.getWorld().isClient && player instanceof ServerPlayerEntity) {
+            // 创建一个空的数据包，因为我们只需要一个触发信号
+            PacketByteBuf buf = PacketByteBufs.create();
+            ServerPlayNetworking.send((ServerPlayerEntity) player, ModPackets.TRANSFORM_EFFECT_ID, buf);
         }
+    }
+
+    public static void playClientTransformEffect() {
+        // 再次确认这是在客户端环境
+        if (FabricLoader.getInstance().getEnvironmentType() != EnvType.CLIENT) {
+            return;
+        }
+
+        // 将原先handleTransformEffect中客户端独有的逻辑移到这里
+        // 并设置那些在客户端update()方法中需要的状态变量
+        isTransforming = true;
+        beginTransformEffectTicks = StaticParams.TRANSFORM_FX_DURATION_IN;
+        endTransformEffectTicks = StaticParams.TRANSFORM_FX_DURATION_OUT;
+        isEffectActive = true;
+        InstinctTicker.isPausing = true;
+        ShapeShifterCurseFabricClient.emitTransformParticle(StaticParams.TRANSFORM_FX_DURATION_IN);
+        beginTransformEffect();
+        TransformOverlay.INSTANCE.setEnableOverlay(true);
     }
 
     public static void setFormDirectly(PlayerEntity player, PlayerForms toForm){
@@ -315,7 +380,7 @@ public class TransformManager {
         FormAbilityManager.applyForm(curPlayer, curToForm);
         clearFormFlag(curPlayer);
         clearInstinct(curPlayer);
-        PlayerTeamHandler.updatePlayerTeam((ServerPlayerEntity) curPlayer);
+        //PlayerTeamHandler.updatePlayerTeam((ServerPlayerEntity) curPlayer);
         if(IS_FIRST_PERSON_MOD_LOADED){
             FirstPersonModelCore fpm = FirstPersonModelCore.instance;
             fpm.getConfig().xOffset = 0;
@@ -323,17 +388,18 @@ public class TransformManager {
             fpm.getConfig().sneakXOffset = 0;
         }
         RegPlayerFormComponent.PLAYER_FORM.sync(curPlayer);
+        MinecraftServer server = player.getServer();
+        syncCursedMoonData(player, server);
     }
 
     public static void clearFormFlag(PlayerEntity player){
-        // 完全修复重置逻辑
         boolean wasByCursedMoon = RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon();
 
-        // 记录操作，便于调试
         ShapeShifterCurseFabric.LOGGER.info("Clearing form flags, wasByCursedMoon: " + wasByCursedMoon +
                 ", _isByCursedMoonEnd: " + _isByCursedMoonEnd);
 
-        // 只在诅咒月亮结束时才重置诅咒月亮标志
+        // 只在诅咒月亮结束时才重置诅咒月亮标志\
+        // Only reset the Cursed Moon flag when the Cursed Moon ends
         if (_isByCursedMoonEnd) {
             _isByCursedMoon = false;
             RegPlayerFormComponent.PLAYER_FORM.get(player).setByCursedMoon(false);
@@ -341,6 +407,7 @@ public class TransformManager {
         }
 
         // 重置其他标志
+        // Reset other flags
         _isRegressedFromFinal = false;
         _isByCure = false;
         _isByCursedMoonEnd = false;
@@ -350,7 +417,6 @@ public class TransformManager {
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
     }
 
-    // 添加一个安全的方法，专门用于月亮结束变形后清除标记
     public static void setIsByCursedMoonEnd(boolean value) {
         _isByCursedMoonEnd = value;
         ShapeShifterCurseFabric.LOGGER.info("设置_isByCursedMoonEnd=" + value);
@@ -360,6 +426,7 @@ public class TransformManager {
         ShapeShifterCurseFabric.LOGGER.info("安全清除月亮结束标记");
 
         // 记录清除前的状态
+        // Record the state before clearing
         boolean wasByCursedMoon = RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon();
 
         if (_isByCursedMoonEnd) {
@@ -370,6 +437,7 @@ public class TransformManager {
             RegPlayerFormComponent.PLAYER_FORM.sync(player);
         }
         // 只清除状态标记，不影响instinct
+        // Only clear the state flags, do not affect instinct
         _isRegressedFromFinal = false;
         _isByCure = false;
 

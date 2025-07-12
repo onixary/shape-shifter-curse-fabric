@@ -9,38 +9,22 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.PotionEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionUtil;
-import net.minecraft.potion.Potions;
-import net.minecraft.scoreboard.Scoreboard;
-import net.minecraft.scoreboard.Team;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.item.RegCustomPotions;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.team.MobTeamManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(WitchEntity.class)
 public abstract class WitchEntityMixin {
 
     private static final float POTION_REPLACE_CHANCE = 0.6f;
-
-    @Inject(method = "<init>", at = @At("TAIL"))
-    private void addToSorceryTeam(EntityType<? extends HostileEntity> entityType, World world, CallbackInfo ci) {
-        if (!world.isClient) {
-            Entity entity = (Entity)(Object)this;
-            Scoreboard scoreboard = world.getScoreboard();
-
-            Team sorceryTeam = scoreboard.getTeam(MobTeamManager.SORCERY_TEAM_NAME);
-            if (sorceryTeam != null) {
-                scoreboard.addPlayerToTeam(entity.getEntityName(), sorceryTeam);
-            }
-        }
-    }
 
     @Inject(method = "attack", at = @At("HEAD"), cancellable = true)
     private void injectCustomPotionAttack(LivingEntity target, float pullProgress, CallbackInfo ci) {
@@ -76,7 +60,8 @@ public abstract class WitchEntityMixin {
                     ci.cancel();
                 }
             }
-            else if(curForm == PlayerForms.FAMILIAR_FOX_0){
+            else if(curForm == PlayerForms.FAMILIAR_FOX_0 || curForm == PlayerForms.FAMILIAR_FOX_1
+                    || curForm == PlayerForms.FAMILIAR_FOX_2 || curForm == PlayerForms.FAMILIAR_FOX_3){
                 ci.cancel();
             }
         }

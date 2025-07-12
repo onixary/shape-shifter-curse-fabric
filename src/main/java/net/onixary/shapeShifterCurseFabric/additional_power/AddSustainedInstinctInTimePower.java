@@ -43,6 +43,10 @@ public class AddSustainedInstinctInTimePower extends Power {
     public void tick() {
         // 食用食物的时间是30tick，直接在这里写死
         // 非常屎山的写法，暂时先这样
+
+        // The time to consume food is 30 ticks, hardcoded here
+        // Very hacky implementation, just for now
+
         if(isActive()){
             if(isOnItemFinished){
                 currentTicks++;

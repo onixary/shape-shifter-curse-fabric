@@ -41,6 +41,11 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
     public <T extends Entity> void tickEntity(Consumer<T> tickConsumer, T entity, CallbackInfo info) {
         if(entity instanceof ServerPlayerEntity player){
             long timeDayMoon = CursedMoon.day_time - (CursedMoon.day -1)*24000L;
+
+            if (timeDayMoon < 20 && CursedMoon.midday_message_sent) {
+                CursedMoon.midday_message_sent = false;
+            }
+
             if(CursedMoon.isCursedMoon()){
                 if(CursedMoon.isNight() && player.isSleeping()){
                     player.wakeUp();
@@ -65,7 +70,9 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
 
     @Unique
     public void shape_shifter_curse$OnCursedMoon(ServerPlayerEntity player,long time) {
-        if(time == 6000L){
+        if(time >= 6000L && time < 12500L && !CursedMoon.midday_message_sent){
+            CursedMoon.midday_message_sent = true;
+
             // 处于中午时的逻辑
             if(FormAbilityManager.getForm(player) != PlayerForms.ORIGINAL_BEFORE_ENABLE){
                 if(player.getWorld().getRegistryKey() != World.OVERWORLD){
@@ -78,9 +85,11 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
         }
         else if(time >= 12500L && time < 23000L){
             CursedMoon.applyMoonEffect(player);
+            CursedMoon.midday_message_sent = false;
         }
         else if(time >= 23000L){
             CursedMoon.applyEndMoonEffect(player);
+            CursedMoon.midday_message_sent = false;
         }
         else if(time > 6000L) {
 

@@ -20,6 +20,8 @@
     "minecraft:zoglin",
     "minecraft:zombie",
     "minecraft:zombie_villager",
+    "minecraft:zombified_piglin",
+    "minecraft:magma_cube",
     "minecraft:drowned",
     "minecraft:cave_spider"
   ]

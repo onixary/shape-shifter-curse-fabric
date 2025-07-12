@@ -13,7 +13,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_FAMILIAR_FOX_0_EFFECT;
-import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_FERAL_CAT_SP_EFFECT;
 import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.EFFECT_ATTACHMENT;
 
 public class ToFamiliarFoxStatusPotion extends StatusEffect {

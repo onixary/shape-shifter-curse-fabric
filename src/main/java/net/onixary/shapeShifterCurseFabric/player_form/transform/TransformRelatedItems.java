@@ -28,6 +28,7 @@ public class TransformRelatedItems {
 
     public static void OnUseCure(PlayerEntity player) {
         // 如果不是最终阶段，则回退一个阶段
+        // If not the final stage, revert one stage
         PlayerForms currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
         int currentFormIndex = currentForm.getIndex();
         String currentFormGroup = currentForm.getGroup();
@@ -35,29 +36,39 @@ public class TransformRelatedItems {
         switch (currentFormIndex) {
             case -2:
                 // 无用
+                // Useless
                 break;
             case -1:
                 // 无用
+                // Useless
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_used_cure").formatted(Formatting.YELLOW));
                 break;
             case 0:
                 toForm = PlayerForms.ORIGINAL_SHIFTER;
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure_0").formatted(Formatting.YELLOW));
                 // 触发自定义成就
+                // Trigger custom achievement
                 ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger((ServerPlayerEntity) player);
                 break;
             case 1:
                 toForm = PlayerForms.getFormsByGroup(currentFormGroup)[0];
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure").formatted(Formatting.YELLOW));
                 // 触发自定义成就
+                // Trigger custom achievement
                 ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger((ServerPlayerEntity) player);
                 break;
             case 2:
                 // 不会生效
+                // Useless
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.max_form_used_cure").formatted(Formatting.YELLOW));
                 break;
+            case 3:
+                // 永久形态不会生效
+                // Permanent form will not be affected
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.permanent_form_used_cure").formatted(Formatting.YELLOW));
             case 5:
                 // SP form可以随时被治愈
+                // SP form can be cured at any time
                 toForm = PlayerForms.ORIGINAL_SHIFTER;
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure_0").formatted(Formatting.YELLOW));
                 break;
@@ -80,30 +91,38 @@ public class TransformRelatedItems {
         switch (currentFormIndex) {
             case -2:
                 // 无用
+                // Useless
                 break;
             case -1:
                 // 无用
+                // Useless
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_used_cure_final").formatted(Formatting.YELLOW));
                 break;
             case 0:
                 toForm = PlayerForms.ORIGINAL_SHIFTER;
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure_final").formatted(Formatting.YELLOW));
                 // 触发自定义成就
+                // Trigger custom achievement
                 ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger((ServerPlayerEntity) player);
                 break;
             case 1:
                 toForm = PlayerForms.ORIGINAL_SHIFTER;
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure_final").formatted(Formatting.YELLOW));
                 // 触发自定义成就
+                // Trigger custom achievement
                 ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger((ServerPlayerEntity) player);
                 break;
             case 2:
                 toForm = PlayerForms.getFormsByGroup(currentFormGroup)[1];
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.max_form_used_cure_final").formatted(Formatting.YELLOW));
                 // 触发自定义成就
+                // Trigger custom achievement
                 ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE_FINAL.trigger((ServerPlayerEntity) player);
-                // 触发自定义成就
                 ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger((ServerPlayerEntity) player);
+            case 3:
+                // 永久形态不会生效
+                // Permanent form will not be affected
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.permanent_form_used_cure_final").formatted(Formatting.YELLOW));
             default:
                 break;
         }
@@ -116,21 +135,22 @@ public class TransformRelatedItems {
 
     public static void OnUseCatalyst(PlayerEntity player) {
         // 在origin power中处理instinct相关逻辑，这里只显示提示与特殊逻辑
+        // Instinct-related logic is handled in origin power, here only shows prompt and special logic
         PlayerForms currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
         int currentFormIndex = currentForm.getIndex();
         String currentFormGroup = currentForm.getGroup();
         PlayerForms toForm = null;
         switch (currentFormIndex) {
             case -2:
-                // 无用
                 break;
             case -1:
                 // 特殊逻辑：查看当前是否有在生效的效果，有的话则应用，没有的话则无用
+                // Special logic: check if there is an active effect, if so, apply it, otherwise useless
+
                 PlayerEffectAttachment attachment = player.getAttached(EFFECT_ATTACHMENT);
                 if (attachment != null && attachment.currentEffect != null){
                     EffectManager.applyEffect(player);
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_used_catalyst_attached").formatted(Formatting.YELLOW));
-                    // 触发自定义成就
                     ShapeShifterCurseFabric.ON_TRANSFORM_BY_CATALYST.trigger((ServerPlayerEntity) player);
                 }
                 else{
@@ -162,6 +182,7 @@ public class TransformRelatedItems {
 
     public static void OnUsePowerfulCatalyst(PlayerEntity player) {
         // 在origin power中处理instinct相关逻辑，这里只显示提示与特殊逻辑
+        // Instinct-related logic is handled in origin power, here only shows hint text and special logic
         PlayerForms currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
         int currentFormIndex = currentForm.getIndex();
         String currentFormGroup = currentForm.getGroup();

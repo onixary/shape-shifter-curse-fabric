@@ -24,7 +24,6 @@ import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 import net.onixary.shapeShifterCurseFabric.team.MobTeamManager;
-import net.onixary.shapeShifterCurseFabric.team.PlayerTeamHandler;
 
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker.loadInstinct;
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.removeVisualEffects;
@@ -86,7 +85,7 @@ public class PlayerEventHandler {
             server.getGameRules().get(GameRules.DO_DAYLIGHT_CYCLE).set(true, server);
 
             // update team
-            PlayerTeamHandler.updatePlayerTeam(player);
+            //PlayerTeamHandler.updatePlayerTeam(player);
         });
         // copy event
         ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
@@ -95,7 +94,7 @@ public class PlayerEventHandler {
 
             copyTransformativeEffect(oldPlayer, newPlayer);
             copyFormAndAbility(oldPlayer, newPlayer);
-            PlayerTeamHandler.updatePlayerTeam(newPlayer);
+            //PlayerTeamHandler.updatePlayerTeam(newPlayer);
         });
 
         //load event
@@ -105,8 +104,8 @@ public class PlayerEventHandler {
                 FormAbilityManager.applyForm(player, component.getCurrentForm());
 
                 MobTeamManager.registerTeam(world);
-                PlayerTeamHandler.updatePlayerTeam(player);
-                handleEntityTeam(world);
+                //PlayerTeamHandler.updatePlayerTeam(player);
+                //handleEntityTeam(world);
             }
         });
     }

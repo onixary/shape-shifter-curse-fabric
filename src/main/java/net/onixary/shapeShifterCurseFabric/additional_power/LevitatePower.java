@@ -52,6 +52,8 @@ public class LevitatePower extends Power implements Active {
         }
     }
 
+
+
     @Override
     public void tick() {
         if (entity instanceof PlayerEntity player) {

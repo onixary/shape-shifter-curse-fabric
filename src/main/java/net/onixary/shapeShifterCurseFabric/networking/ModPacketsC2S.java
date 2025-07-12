@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.networking;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.*;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
@@ -23,6 +24,9 @@ public class ModPacketsC2S {
         ServerPlayNetworking.registerGlobalReceiver(
                 ModPackets.VALIDATE_START_BOOK_BUTTON,
                 net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S::onPressStartBookButton);
+
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.TRANSFORM_EFFECT_ID, ModPacketsS2C::receiveTransformEffect);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.INSTINCT_THRESHOLD_EFFECT_ID, ModPacketsS2C::receiveInstinctThresholdEffect);
     }
 
     private static void onPressStartBookButton(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender){

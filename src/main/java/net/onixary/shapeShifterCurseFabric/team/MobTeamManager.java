@@ -4,6 +4,8 @@ import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.server.world.ServerWorld;
 
+// 为了避免与Team功能冲突已弃用，替换为其他逻辑
+// Deprecated to avoid conflicts with Team functionality, replaced with other logic
 public class MobTeamManager {
     public static final String SORCERY_TEAM_NAME = "sorcery_team";
     public static Team sorceryTeam;

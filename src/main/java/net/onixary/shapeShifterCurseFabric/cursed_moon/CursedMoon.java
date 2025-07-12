@@ -27,6 +27,7 @@ public class CursedMoon {
     public static int day = 0;
     public static boolean moon_effect_applied = false;
     public static boolean end_moon_effect_applied = false;
+    public static boolean midday_message_sent = false;
 
     // Cursed Moon rises every 3 days
     public static boolean isCursedMoon() {
@@ -124,6 +125,9 @@ public class CursedMoon {
                 }
                 else if(FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_SHIFTER){
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon_special").formatted(Formatting.LIGHT_PURPLE));
+                }
+                else if(FormAbilityManager.getForm(player).getIndex() == 3){
+                    // 永久形态
                 }
                 else if(currentFormComponent.isByCursedMoon()){
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon").formatted(Formatting.LIGHT_PURPLE));

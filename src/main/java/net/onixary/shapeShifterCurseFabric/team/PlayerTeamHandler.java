@@ -5,6 +5,9 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 
+// 为了避免与Team功能冲突已弃用，替换为其他逻辑
+// Deprecated to avoid conflicts with Team functionality, replaced with other logic
+
 public class PlayerTeamHandler {
     private static PlayerForms currentForm;
     public static void updatePlayerTeam(ServerPlayerEntity player) {

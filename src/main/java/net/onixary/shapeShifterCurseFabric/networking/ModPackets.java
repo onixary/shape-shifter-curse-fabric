@@ -9,5 +9,10 @@ public class ModPackets {
     public static final Identifier VALIDATE_START_BOOK_BUTTON = new Identifier(ShapeShifterCurseFabric.MOD_ID, "validate_start_book_button");
 
     // 新增服务端到客户端的附件同步包
+    // New server-to-client attachment sync packet
     public static final Identifier SYNC_EFFECT_ATTACHMENT = new Identifier(ShapeShifterCurseFabric.MOD_ID, "sync_effect_attachment");
+
+    public static final Identifier TRANSFORM_EFFECT_ID = new Identifier(ShapeShifterCurseFabric.MOD_ID, "transform_effect");
+
+    public static final Identifier INSTINCT_THRESHOLD_EFFECT_ID = new Identifier(ShapeShifterCurseFabric.MOD_ID, "instinct_threshold_effect");
 }

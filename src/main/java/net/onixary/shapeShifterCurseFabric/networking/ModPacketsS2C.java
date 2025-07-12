@@ -11,6 +11,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
+import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 
 public class ModPacketsS2C {
@@ -29,11 +30,26 @@ public class ModPacketsS2C {
         });
     }
 
-    // 服务端发送方法（可选，可直接在服务端调用）
     public static void sendSyncEffectAttachment(ServerPlayerEntity player, PlayerEffectAttachment attachment) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeNbt(attachment.toNbt());
         //ShapeShifterCurseFabric.LOGGER.info("Attachment sent, nbt: " + attachment.toNbt());
         ServerPlayNetworking.send(player, ModPackets.SYNC_EFFECT_ATTACHMENT, buf);
+    }
+
+    public static void receiveTransformEffect(MinecraftClient client, ClientPlayNetworkHandler handler,
+                                              PacketByteBuf buf, PacketSender responseSender) {
+        client.execute(() -> {
+            // 当客户端收到这个数据包时，调用TransformManager中的新方法来播放特效
+            TransformManager.playClientTransformEffect();
+        });
+    }
+
+    public static void receiveInstinctThresholdEffect(MinecraftClient client, ClientPlayNetworkHandler handler,
+                                                      PacketByteBuf buf, PacketSender responseSender) {
+        client.execute(() -> {
+            // 当客户端收到这个数据包时，调用TransformManager中的新方法来播放特效
+            ShapeShifterCurseFabricClient.applyInstinctThresholdEffect();
+        });
     }
 }
