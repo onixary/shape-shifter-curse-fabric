@@ -66,6 +66,7 @@ public class TransformRelatedItems {
                 // 永久形态不会生效
                 // Permanent form will not be affected
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.permanent_form_used_cure").formatted(Formatting.YELLOW));
+                break;
             case 5:
                 // SP form可以随时被治愈
                 // SP form can be cured at any time
@@ -119,10 +120,12 @@ public class TransformRelatedItems {
                 // Trigger custom achievement
                 ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE_FINAL.trigger((ServerPlayerEntity) player);
                 ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger((ServerPlayerEntity) player);
+                break;
             case 3:
                 // 永久形态不会生效
                 // Permanent form will not be affected
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.permanent_form_used_cure_final").formatted(Formatting.YELLOW));
+                break;
             default:
                 break;
         }
