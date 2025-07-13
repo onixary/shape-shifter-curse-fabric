@@ -1,30 +1,19 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
 import io.github.apace100.apoli.Apoli;
-import io.github.apace100.apoli.ApoliClient;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Active;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
-import io.github.apace100.apoli.power.Prioritized;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.apoli.util.HudRender;
 import io.github.apace100.calio.data.SerializableData;
-import io.github.apace100.calio.data.SerializableDataType;
 import io.github.apace100.calio.data.SerializableDataTypes;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import org.lwjgl.glfw.GLFW;
-
-import static me.shedaniel.cloth.clothconfig.shadowed.org.yaml.snakeyaml.tokens.Token.ID.Key;
 
 public class LevitatePower extends Power implements Active {
     // 配置参数

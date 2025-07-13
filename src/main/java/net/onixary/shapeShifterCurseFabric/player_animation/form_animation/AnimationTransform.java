@@ -26,18 +26,35 @@ public class AnimationTransform {
             return anim_on_transform_default;
         }
 
-        boolean curIsFeral = RegFormConfig.CONFIGS.get(curForm).getBodyType() == PlayerFormBodyType.FERAL;
-        boolean toIsFeral = RegFormConfig.CONFIGS.get(toForm).getBodyType() == PlayerFormBodyType.FERAL;
+        try {
+            // 确保 RegFormConfig.CONFIGS 已经被正确初始化
+            if (RegFormConfig.CONFIGS.isEmpty()) {
+                ShapeShifterCurseFabric.LOGGER.warn("RegFormConfig.CONFIGS is empty, returning default animation");
+                return anim_on_transform_default;
+            }
 
-        if(!curIsFeral && toIsFeral)
-        {
-            return anim_on_transform_normal_to_feral;
+            // 检查当前形态和目标形态是否存在于配置中
+            if (!RegFormConfig.CONFIGS.containsKey(curForm) || !RegFormConfig.CONFIGS.containsKey(toForm)) {
+                ShapeShifterCurseFabric.LOGGER.warn("Form not found in configs - curForm: " + curForm + ", toForm: " + toForm);
+                return anim_on_transform_default;
+            }
+
+            boolean curIsFeral = RegFormConfig.CONFIGS.get(curForm).getBodyType() == PlayerFormBodyType.FERAL;
+            boolean toIsFeral = RegFormConfig.CONFIGS.get(toForm).getBodyType() == PlayerFormBodyType.FERAL;
+
+            if(!curIsFeral && toIsFeral)
+            {
+                return anim_on_transform_normal_to_feral;
+            }
+            else if(curIsFeral && !toIsFeral)
+            {
+                return anim_on_transform_feral_to_normal;
+            }
+            return anim_on_transform_default;
+        } catch (Exception e) {
+            ShapeShifterCurseFabric.LOGGER.error("Error in getFormAnimToPlay: " + e.getMessage());
+            return anim_on_transform_default;
         }
-        else if(curIsFeral && !toIsFeral)
-        {
-            return anim_on_transform_feral_to_normal;
-        }
-        return anim_on_transform_default;
     }
 
     public static void registerAnims() {

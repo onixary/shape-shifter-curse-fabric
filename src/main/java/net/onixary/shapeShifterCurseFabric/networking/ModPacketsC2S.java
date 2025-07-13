@@ -18,15 +18,14 @@ import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManage
 
 import java.util.UUID;
 
+// 应仅在服务器端注册
+// This class should only be registered on the server side
 public class ModPacketsC2S {
 
     public static void register() {
         ServerPlayNetworking.registerGlobalReceiver(
                 ModPackets.VALIDATE_START_BOOK_BUTTON,
                 net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S::onPressStartBookButton);
-
-        ClientPlayNetworking.registerGlobalReceiver(ModPackets.TRANSFORM_EFFECT_ID, ModPacketsS2C::receiveTransformEffect);
-        ClientPlayNetworking.registerGlobalReceiver(ModPackets.INSTINCT_THRESHOLD_EFFECT_ID, ModPacketsS2C::receiveInstinctThresholdEffect);
     }
 
     private static void onPressStartBookButton(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender){

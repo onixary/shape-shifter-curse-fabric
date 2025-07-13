@@ -14,6 +14,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.GameRules;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
+import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
 import net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
@@ -35,22 +36,25 @@ public class PlayerEventHandler {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             if (handler.player.getWorld().isClient()) return;
 
-            // check if first join with mod
-            if(!PlayerNbtStorage.loadBooleanValue(handler.player.getServerWorld(), handler.player.getUuid().toString(), "first_join_with_mod")){
+            // 初始化 PlayerDataStorage（只在第一次有服务器实例时执行）
+            PlayerDataStorage.initialize(server);
+
+            ServerPlayerEntity player = handler.player;
+
+            // load form first
+            FormAbilityManager.getServerWorld(server.getOverworld());
+            FormAbilityManager.loadForm(player);
+
+            // check if first join with mod using PlayerFormComponent
+            PlayerFormComponent formComponent = RegPlayerFormComponent.PLAYER_FORM.get(player);
+            if(formComponent.isFirstJoin()){
                 ShapeShifterCurseFabric.LOGGER.info("First join with mod");
                 // trigger advancement
-                ShapeShifterCurseFabric.ON_FIRST_JOIN_WITH_MOD.trigger((ServerPlayerEntity) handler.player);
-                // set first join with mod to false
-                PlayerNbtStorage.saveBooleanValue(handler.player.getServerWorld(), handler.player.getUuid().toString(), "first_join_with_mod", true);
+                ShapeShifterCurseFabric.ON_FIRST_JOIN_WITH_MOD.trigger(player);
+                // set first join to false
+                formComponent.setFirstJoin(false);
+                RegPlayerFormComponent.PLAYER_FORM.sync(player);
             }
-
-
-            // load form
-            FormAbilityManager.getServerWorld(server.getOverworld());
-            ServerPlayerEntity player = handler.player;
-            FormAbilityManager.loadForm(player);
-            //PlayerFormComponent component = RegPlayerFormComponent.PLAYER_FORM.get(player);
-            //FormAbilityManager.applyForm(player, component.getCurrentForm());
 
             // load attachment
             boolean hasAttachment = loadCurrentAttachment(server.getOverworld(), player);
@@ -79,7 +83,7 @@ public class PlayerEventHandler {
             ShapeShifterCurseFabric.cursedMoonData.getInstance().save(server.getOverworld());
 
             // reset moon effect
-            CursedMoon.resetMoonEffect();
+            CursedMoon.resetMoonEffect(player);
 
             // Set doDaylightCycle to true forced
             server.getGameRules().get(GameRules.DO_DAYLIGHT_CYCLE).set(true, server);

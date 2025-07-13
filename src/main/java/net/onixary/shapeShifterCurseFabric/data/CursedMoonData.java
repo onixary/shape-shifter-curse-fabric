@@ -15,17 +15,19 @@ public class CursedMoonData {
     public int perDay = 3;
     public boolean isActive = false;
 
-    private static final Path SAVE_DIR = Paths.get("config", "shape_shifter_curse_fabric");
+    private static final Path LEGACY_SAVE_DIR = Paths.get("config", "shape_shifter_curse_fabric");
 
     public CursedMoonData() {
     }
 
-    private static Path getWorldSaveDir(ServerWorld world) {
+    private static Path getSaveDir(ServerWorld world) {
+        return world.getServer().getSavePath(WorldSavePath.ROOT).resolve(ShapeShifterCurseFabric.MOD_ID);
+    }
 
+    private static Path getLegacyWorldSaveDir(ServerWorld world) {
         Path worldSavePath = world.getServer().getSavePath(WorldSavePath.ROOT);
-        String worldName = worldSavePath.getName(worldSavePath.getNameCount() - 2).toString();
-        ShapeShifterCurseFabric.LOGGER.info("World save name: " + worldName);
-        return SAVE_DIR.resolve(worldName);
+        String worldName = worldSavePath.getFileName().toString();
+        return LEGACY_SAVE_DIR.resolve(worldName);
     }
 
     private NbtCompound serialize(){
@@ -53,32 +55,41 @@ public class CursedMoonData {
 
     public void save(ServerWorld world){
         try {
-            Path worldSaveDir = getWorldSaveDir(world);
+            Path worldSaveDir = getSaveDir(world);
+            if (!worldSaveDir.toFile().exists()) {
+                worldSaveDir.toFile().mkdirs();
+            }
             NbtCompound nbt = serialize();
             NbtIo.write(nbt, worldSaveDir.resolve("cursed_moon_data.dat").toFile());
         } catch (Exception e) {
-            // 错误处理
             ShapeShifterCurseFabric.LOGGER.error("Failed to save Cursed Moon Data", e);
         }
     }
 
     public void load(ServerWorld world){
         try {
-            Path savePath = getWorldSaveDir(world).resolve("cursed_moon_data.dat");
-            if (!savePath.toFile().exists()){
-                ShapeShifterCurseFabric.LOGGER.warn("Cursed Moon Data file location not found, creating new data");
-                instance.save(world);
+            Path saveDir = getSaveDir(world);
+            Path legacySaveDir = getLegacyWorldSaveDir(world);
+            Path dataFile = saveDir.resolve("cursed_moon_data.dat");
+            Path legacyDataFile = legacySaveDir.resolve("cursed_moon_data.dat");
+
+            NbtCompound nbt = null;
+            if (dataFile.toFile().exists()) {
+                nbt = NbtIo.read(dataFile.toFile());
+            } else if (legacyDataFile.toFile().exists()) {
+                ShapeShifterCurseFabric.LOGGER.info("Migrating Cursed Moon Data for world: " + world.getServer().getSavePath(WorldSavePath.ROOT).getFileName().toString());
+                nbt = NbtIo.read(legacyDataFile.toFile());
+                if (nbt != null) {
+                    deserialize(nbt);
+                    save(world); // Save to new location
+                    legacyDataFile.toFile().delete(); // Delete old file
+                }
             }
 
-            NbtCompound nbt = NbtIo.read(savePath.toFile());
-            if (nbt == null) {
-                ShapeShifterCurseFabric.LOGGER.warn("Failed to read Cursed Moon Data Nbt, creating new data");
-                instance.save(world);
+            if (nbt != null) {
+                deserialize(nbt);
             }
-
-            instance.deserialize(nbt);
         } catch (Exception e) {
-            // 错误处理
             ShapeShifterCurseFabric.LOGGER.error("Failed to load Cursed Moon Data", e);
         }
     }

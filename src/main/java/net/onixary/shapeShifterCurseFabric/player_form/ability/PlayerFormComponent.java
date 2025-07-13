@@ -14,6 +14,10 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     // is current form caused by cure
     // used to handle when player cured self when under cursed moon
     private boolean isByCure = false;
+    private boolean moonEffectApplied = false;
+    private boolean endMoonEffectApplied = false;
+    private boolean isByCursedMoonEnd = false;
+    private boolean firstJoin = true; // 默认为true，表示首次加入
 
     @Override
     public void readFromNbt(NbtCompound nbtCompound) {
@@ -24,22 +28,34 @@ public class PlayerFormComponent implements AutoSyncedComponent {
             this.isByCursedMoon = nbtCompound.getBoolean("isByCursedMoon");
             this.isRegressedFromFinal = nbtCompound.getBoolean("isRegressedFromFinal");
             this.isByCure = nbtCompound.getBoolean("isByCure");
+            this.moonEffectApplied = nbtCompound.getBoolean("moonEffectApplied");
+            this.endMoonEffectApplied = nbtCompound.getBoolean("endMoonEffectApplied");
+            this.isByCursedMoonEnd = nbtCompound.getBoolean("isByCursedMoonEnd");
+            this.firstJoin = nbtCompound.getBoolean("firstJoin");
         } catch (IllegalArgumentException e) {
             this.currentForm = PlayerForms.ORIGINAL_BEFORE_ENABLE;
             this.previousForm = PlayerForms.ORIGINAL_BEFORE_ENABLE;
             this.isByCursedMoon = false;
             this.isRegressedFromFinal = false;
             this.isByCure = false;
+            this.moonEffectApplied = false;
+            this.endMoonEffectApplied = false;
+            this.isByCursedMoonEnd = false;
+            this.firstJoin = true;
         }
     }
 
     @Override
     public void writeToNbt(NbtCompound nbtCompound) {
-        nbtCompound.putString("currentForm", currentForm.name());
-        nbtCompound.putString("previousForm", previousForm.name());
-        nbtCompound.putBoolean("isByCursedMoon", isByCursedMoon);
-        nbtCompound.putBoolean("isRegressedFromFinal", isRegressedFromFinal);
-        nbtCompound.putBoolean("isByCure", isByCure);
+        nbtCompound.putString("currentForm", this.currentForm.name());
+        nbtCompound.putString("previousForm", this.previousForm.name());
+        nbtCompound.putBoolean("isByCursedMoon", this.isByCursedMoon);
+        nbtCompound.putBoolean("isRegressedFromFinal", this.isRegressedFromFinal);
+        nbtCompound.putBoolean("isByCure", this.isByCure);
+        nbtCompound.putBoolean("moonEffectApplied", this.moonEffectApplied);
+        nbtCompound.putBoolean("endMoonEffectApplied", this.endMoonEffectApplied);
+        nbtCompound.putBoolean("isByCursedMoonEnd", this.isByCursedMoonEnd);
+        nbtCompound.putBoolean("firstJoin", this.firstJoin);
     }
 
     public PlayerForms getCurrentForm() {
@@ -77,5 +93,37 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     public void setCurrentForm(PlayerForms form) {
         this.previousForm = this.currentForm;
         this.currentForm = form;
+    }
+
+    public boolean isMoonEffectApplied() {
+        return moonEffectApplied;
+    }
+
+    public void setMoonEffectApplied(boolean moonEffectApplied) {
+        this.moonEffectApplied = moonEffectApplied;
+    }
+
+    public boolean isEndMoonEffectApplied() {
+        return endMoonEffectApplied;
+    }
+
+    public void setEndMoonEffectApplied(boolean endMoonEffectApplied) {
+        this.endMoonEffectApplied = endMoonEffectApplied;
+    }
+
+    public boolean isByCursedMoonEnd() {
+        return isByCursedMoonEnd;
+    }
+
+    public void setByCursedMoonEnd(boolean byCursedMoonEnd) {
+        isByCursedMoonEnd = byCursedMoonEnd;
+    }
+
+    public boolean isFirstJoin() {
+        return firstJoin;
+    }
+
+    public void setFirstJoin(boolean firstJoin) {
+        this.firstJoin = firstJoin;
     }
 }

@@ -25,8 +25,8 @@ public class InstinctDebugHUD {
             PlayerEntity player = MinecraftClient.getInstance().player;
             PlayerInstinctComponent comp = RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.get(player);
             String text = String.format("Instinct: %.3f (+%.3f/s)",
-                    InstinctTicker.currentInstinctValue,
-                    InstinctTicker.currentInstinctRate * 20);
+                    comp.instinctValue,
+                    comp.currentInstinctRate * 20);
 
             MatrixStack matrices = context.getMatrices();
             matrices.push();

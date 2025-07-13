@@ -9,8 +9,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
@@ -42,22 +44,37 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
         if(entity instanceof ServerPlayerEntity player){
             long timeDayMoon = CursedMoon.day_time - (CursedMoon.day -1)*24000L;
 
+            // 新的一天开始时重置月亮效果标志
+            if (timeDayMoon < 20 && !CursedMoon.midday_message_sent) {
+                CursedMoon.resetMoonEffectForNewDay(player);
+                CursedMoon.midday_message_sent = true;
+            }
             if (timeDayMoon < 20 && CursedMoon.midday_message_sent) {
                 CursedMoon.midday_message_sent = false;
             }
 
-            if(CursedMoon.isCursedMoon()){
-                if(CursedMoon.isNight() && player.isSleeping()){
+            boolean currentIsCursedMoon = CursedMoon.isCursedMoon();
+            boolean currentIsNight = CursedMoon.isNight();
+
+            // 每20刻（1秒）同步一次CursedMoon状态到客户端
+            if (player.getWorld().getTime() % 20 == 0) {
+                ModPacketsS2C.sendCursedMoonData(player, CursedMoon.day_time, CursedMoon.day, currentIsCursedMoon, currentIsNight);
+            }
+
+            if(currentIsCursedMoon){
+                if(currentIsNight && player.isSleeping()){
                     player.wakeUp();
                 }
                 shape_shifter_curse$OnCursedMoon(player,timeDayMoon);
             }
             else{
-                if(CursedMoon.moon_effect_applied){
-                    CursedMoon.moon_effect_applied = false;
-                }
-                if(CursedMoon.end_moon_effect_applied){
-                    CursedMoon.end_moon_effect_applied = false;
+                // CursedMoon结束时的处理
+                PlayerFormComponent formComp = RegPlayerFormComponent.PLAYER_FORM.get(player);
+                if (formComp.isMoonEffectApplied() || formComp.isEndMoonEffectApplied()) {
+                    // 立即向客户端同步CursedMoon结束状态
+                    ModPacketsS2C.sendCursedMoonData(player, CursedMoon.day_time, CursedMoon.day, false, currentIsNight);
+                    // 重置该玩家的状态
+                    CursedMoon.resetMoonEffect(player);
                 }
             }
         }

@@ -24,8 +24,6 @@ public class PlayerTransformEffectManager {
         StatusEffectInstance preventJumpEffect = new StatusEffectInstance(StatusEffects.JUMP_BOOST, duration, 137);
         player.addStatusEffect(preventJumpEffect);
 
-        // TODO transfer whatever this code to run clientside only, running this serverside will crash
-        //ShapeShifterCurseFabricClient.emitTransformParticle(duration);
     }
 
     public static void applyEndTransformEffect(ServerPlayerEntity player, int duration) {
@@ -41,8 +39,6 @@ public class PlayerTransformEffectManager {
         StatusEffectInstance preventJumpEffect = new StatusEffectInstance(StatusEffects.JUMP_BOOST, duration, 137);
         player.addStatusEffect(preventJumpEffect);
 
-        // TODO transfer whatever this code to run clientside only, running this serverside will crash
-        //ShapeShifterCurseFabricClient.emitTransformParticle(duration);
     }
 
     public static void applyFinaleTransformEffect(ServerPlayerEntity player, int duration){

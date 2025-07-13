@@ -24,10 +24,7 @@ import static net.onixary.shapeShifterCurseFabric.player_form.transform.Transfor
 
 public class InstinctTicker {
     public static float currentInstinctValue = 0.0f;
-    public static float currentInstinctRate;
     public static boolean showInstinctBar = false;
-    public static boolean isInstinctIncreasing = false;
-    public static boolean isInstinctDecreasing = false;
     public static boolean isInstinctLock = false;
     public static boolean isUnderCursedMoon = false;
     public static boolean isPausing = false;
@@ -68,16 +65,15 @@ public class InstinctTicker {
 
         // 计算当前速率
         // Calculate the current instinct growth rate
-        currentInstinctRate = (isPausing || isUnderCursedMoon) ? 0.0f : calculateCurrentRate(player, comp);
+        comp.currentInstinctRate = (isPausing || isUnderCursedMoon) ? 0.0f : calculateCurrentRate(player, comp);
 
         // 应用持续增长
         // Apply the instinct growth rate
         comp.instinctValue = MathHelper.clamp(
-                comp.instinctValue + currentInstinctRate,
+                comp.instinctValue + comp.currentInstinctRate,
                 0f,
                 StaticParams.INSTINCT_MAX
         );
-        RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.sync(player);
 
         /*if(comp.instinctValue >= 80.0f && comp.instinctValue < 99.99f && player.getWorld().isClient) {
             applyInstinctThresholdEffect();
@@ -91,12 +87,13 @@ public class InstinctTicker {
         //ShapeShifterCurseFabric.LOGGER.info("currentInstinctFromComp: " + comp.instinctValue);
         // 判断当前状态
         // Judge the current state
-        judgeInstinctState(player, currentInstinctRate);
+        judgeInstinctState(player, comp);
 
         currentInstinctValue = comp.instinctValue;
         // 检查触发条件
         // Check if the instinct value meets the threshold
         checkThreshold(player, comp);
+        player.syncComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
     }
 
     private static float judgeInstinctGrowRate(PlayerEntity player){
@@ -122,7 +119,7 @@ public class InstinctTicker {
         return 0.0f;
     }
 
-    private static void judgeInstinctState(PlayerEntity player, float instinctRate){
+    private static void judgeInstinctState(PlayerEntity player, PlayerInstinctComponent comp){
         // 判断当前状态，供进度条使用
         // Judge the current state for the progress bar
         PlayerForms form = getForm(player);
@@ -130,17 +127,17 @@ public class InstinctTicker {
         showInstinctBar = !(currentPhase == PlayerFormPhase.PHASE_CLEAR || currentPhase == PlayerFormPhase.PHASE_3);
 
         float baseRate = judgeInstinctGrowRate(player);
-        if(instinctRate > baseRate){
-            isInstinctIncreasing = true;
-            isInstinctDecreasing = false;
+        if(comp.currentInstinctRate > baseRate){
+            comp.isInstinctIncreasing = true;
+            comp.isInstinctDecreasing = false;
         }
-        else if(instinctRate < baseRate){
-            isInstinctIncreasing = false;
-            isInstinctDecreasing = true;
+        else if(comp.currentInstinctRate < baseRate){
+            comp.isInstinctIncreasing = false;
+            comp.isInstinctDecreasing = true;
         }
         else{
-            isInstinctIncreasing = false;
-            isInstinctDecreasing = false;
+            comp.isInstinctIncreasing = false;
+            comp.isInstinctDecreasing = false;
         }
 
         if(getForm(player).getIndex() < 2){

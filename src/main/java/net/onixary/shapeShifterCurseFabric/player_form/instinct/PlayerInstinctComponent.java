@@ -14,6 +14,9 @@ import java.util.Set;
 
 public class PlayerInstinctComponent implements AutoSyncedComponent {
     public float instinctValue = 0f;
+    public float currentInstinctRate = 0f;
+    public boolean isInstinctIncreasing = false;
+    public boolean isInstinctDecreasing = false;
     public Queue<InstinctEffectType> immediateEffects = new ArrayDeque<>();
     public Set<InstinctEffectType> sustainedEffects = new HashSet<>();
 
@@ -37,6 +40,9 @@ public class PlayerInstinctComponent implements AutoSyncedComponent {
         // 读取 instinctValue
         //ShapeShifterCurseFabric.LOGGER.info("loading instinctValue: " + nbtCompound.getFloat("instinctValue"));
         this.instinctValue = nbtCompound.getFloat("instinctValue");
+        this.currentInstinctRate = nbtCompound.getFloat("currentInstinctRate");
+        this.isInstinctIncreasing = nbtCompound.getBoolean("isInstinctIncreasing");
+        this.isInstinctDecreasing = nbtCompound.getBoolean("isInstinctDecreasing");
     }
 
     @Override
@@ -58,5 +64,8 @@ public class PlayerInstinctComponent implements AutoSyncedComponent {
         // 写入 instinctValue
         //ShapeShifterCurseFabric.LOGGER.info("saving instinctValue: " + this.instinctValue);
         nbtCompound.putFloat("instinctValue", this.instinctValue);
+        nbtCompound.putFloat("currentInstinctRate", this.currentInstinctRate);
+        nbtCompound.putBoolean("isInstinctIncreasing", this.isInstinctIncreasing);
+        nbtCompound.putBoolean("isInstinctDecreasing", this.isInstinctDecreasing);
     }
 }

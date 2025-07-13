@@ -3,122 +3,148 @@ package net.onixary.shapeShifterCurseFabric.data;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.WorldSavePath;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PlayerDataStorage {
     private static final Gson GSON = new Gson();
-    private static final String DATA_FILE_NAME = "config/player_data.json";
-    private static JsonObject cachedData = null;
+    private static final String DATA_FILE_NAME = "player_data.json";
+    private static final String MOD_DATA_DIR = ShapeShifterCurseFabric.MOD_ID;
+    private static final Map<Path, JsonObject> cachedData = new ConcurrentHashMap<>();
 
-    public static void initialize() {
-        cachedData = loadData();
+    public static void initialize(MinecraftServer server) {
+        // 这会触发数据迁移和缓存加载
+        getCachedData(server);
+        ShapeShifterCurseFabric.LOGGER.info("PlayerDataStorage initialized for server.");
     }
 
-    public static void savePlayerData(String key, int value) {
-        JsonObject data = getCachedData();
+    private static Path getNewSavePath(MinecraftServer server) {
+        return server.getSavePath(WorldSavePath.ROOT).resolve("data").resolve(MOD_DATA_DIR).resolve(DATA_FILE_NAME);
+    }
+
+    private static Path getOldSavePath() {
+        return Path.of("config", DATA_FILE_NAME);
+    }
+
+    private static void migrateData(MinecraftServer server) {
+        Path oldPath = getOldSavePath();
+        Path newPath = getNewSavePath(server);
+        if (Files.exists(oldPath) && !Files.exists(newPath)) {
+            try {
+                Files.createDirectories(newPath.getParent());
+                Files.copy(oldPath, newPath, StandardCopyOption.REPLACE_EXISTING);
+                ShapeShifterCurseFabric.LOGGER.info("Migrated global player data from '{}' to world-specific '{}'", oldPath, newPath);
+            } catch (IOException e) {
+                ShapeShifterCurseFabric.LOGGER.error("Failed to migrate player data.", e);
+            }
+        }
+    }
+
+    public static void savePlayerData(MinecraftServer server, String key, int value) {
+        JsonObject data = getCachedData(server);
         data.addProperty(key, value);
-        updateCache(data);
+        updateCache(server, data);
     }
 
-    public static void savePlayerData(String key, boolean value) {
-        JsonObject data = getCachedData();
+    public static void savePlayerData(MinecraftServer server, String key, boolean value) {
+        JsonObject data = getCachedData(server);
         data.addProperty(key, value);
-        updateCache(data);
+        updateCache(server, data);
     }
 
-    public static void savePlayerData(String key, String value) {
-        JsonObject data = getCachedData();
+    public static void savePlayerData(MinecraftServer server, String key, String value) {
+        JsonObject data = getCachedData(server);
         data.addProperty(key, value);
-        updateCache(data);
+        updateCache(server, data);
     }
 
-    public static void savePlayerData(String key, float value) {
-        JsonObject data = getCachedData();
+    public static void savePlayerData(MinecraftServer server, String key, float value) {
+        JsonObject data = getCachedData(server);
         data.addProperty(key, value);
-        updateCache(data);
+        updateCache(server, data);
     }
 
-    public static void savePlayerData(String key, JsonObject value) {
-        JsonObject data = getCachedData();
+    public static void savePlayerData(MinecraftServer server, String key, JsonObject value) {
+        JsonObject data = getCachedData(server);
         data.add(key, value);
-        updateCache(data);
+        updateCache(server, data);
     }
 
-    public static void savePlayerData(String key, JsonArray value) {
-        JsonObject data = getCachedData();
+    public static void savePlayerData(MinecraftServer server, String key, JsonArray value) {
+        JsonObject data = getCachedData(server);
         data.add(key, value);
-        updateCache(data);
+        updateCache(server, data);
     }
 
-    public static void savePlayerData(String key, Enum<?> value) {
-        JsonObject data = getCachedData();
+    public static void savePlayerData(MinecraftServer server, String key, Enum<?> value) {
+        JsonObject data = getCachedData(server);
         data.addProperty(key, value.name());
-        updateCache(data);
+        updateCache(server, data);
     }
 
-    public static void savePlayerForm(String key, PlayerForms state) {
-        savePlayerData(key, state);
+    public static void savePlayerForm(MinecraftServer server, String key, PlayerForms state) {
+        savePlayerData(server, key, state);
     }
 
-    public static PlayerForms loadPlayerForm(String key){
-        JsonObject data = getCachedData();
+    public static PlayerForms loadPlayerForm(MinecraftServer server, String key){
+        JsonObject data = getCachedData(server);
         return data.has(key)? PlayerForms.valueOf(data.get(key).getAsString()) : PlayerForms.ORIGINAL_SHIFTER;
     }
 
-    public static int loadPlayerDataAsInt(String key) {
-        JsonObject data = getCachedData();
+    public static int loadPlayerDataAsInt(MinecraftServer server, String key) {
+        JsonObject data = getCachedData(server);
         return data.has(key) ? data.get(key).getAsInt() : 0;
     }
 
-    public static boolean loadPlayerDataAsBoolean(String key) {
-        JsonObject data = getCachedData();
+    public static boolean loadPlayerDataAsBoolean(MinecraftServer server, String key) {
+        JsonObject data = getCachedData(server);
         return data.has(key) && data.get(key).getAsBoolean();
     }
 
-    public static String loadPlayerDataAsString(String key) {
-        JsonObject data = getCachedData();
+    public static String loadPlayerDataAsString(MinecraftServer server, String key) {
+        JsonObject data = getCachedData(server);
         return data.has(key) ? data.get(key).getAsString() : "";
     }
 
-    public static JsonObject loadPlayerDataAsJsonObject(String key) {
-        JsonObject data = getCachedData();
+    public static JsonObject loadPlayerDataAsJsonObject(MinecraftServer server, String key) {
+        JsonObject data = getCachedData(server);
         return data.has(key) ? data.get(key).getAsJsonObject() : new JsonObject();
     }
 
-    public static JsonArray loadPlayerDataAsJsonArray(String key) {
-        JsonObject data = getCachedData();
+    public static JsonArray loadPlayerDataAsJsonArray(MinecraftServer server, String key) {
+        JsonObject data = getCachedData(server);
         return data.has(key) ? data.get(key).getAsJsonArray() : new JsonArray();
     }
 
-    public static <T extends Enum<T>> T loadPlayerDataAsEnum(String key, Class<T> enumClass) {
-        JsonObject data = getCachedData();
+    public static <T extends Enum<T>> T loadPlayerDataAsEnum(MinecraftServer server, String key, Class<T> enumClass) {
+        JsonObject data = getCachedData(server);
         return data.has(key) ? Enum.valueOf(enumClass, data.get(key).getAsString()) : null;
     }
 
-    private static File getDataFile() {
-        return new File(Path.of("./").toFile(), DATA_FILE_NAME);
+    private static JsonObject getCachedData(MinecraftServer server) {
+        Path savePath = getNewSavePath(server);
+        return cachedData.computeIfAbsent(savePath, path -> loadData(server));
     }
 
-    private static JsonObject getCachedData() {
-        if (cachedData == null) {
-            cachedData = loadData();
-        }
-        return cachedData;
-    }
-
-    private static JsonObject loadData() {
-        File dataFile = getDataFile();
-        if (dataFile.exists()) {
-            try (FileReader reader = new FileReader(dataFile)) {
-                return GSON.fromJson(reader, JsonObject.class);
+    private static JsonObject loadData(MinecraftServer server) {
+        migrateData(server);
+        Path dataFile = getNewSavePath(server);
+        if (Files.exists(dataFile)) {
+            try (FileReader reader = new FileReader(dataFile.toFile())) {
+                JsonObject data = GSON.fromJson(reader, JsonObject.class);
+                return data != null ? data : new JsonObject();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -126,15 +152,19 @@ public class PlayerDataStorage {
         return new JsonObject();
     }
 
-    private static void updateCache(JsonObject data) {
-        cachedData = data;
-        saveDataToFile(data);
+    private static void updateCache(MinecraftServer server, JsonObject data) {
+        Path savePath = getNewSavePath(server);
+        cachedData.put(savePath, data);
+        saveDataToFile(server, data);
     }
 
-    private static void saveDataToFile(JsonObject data) {
-        File dataFile = getDataFile();
-        try (FileWriter writer = new FileWriter(dataFile)) {
-            GSON.toJson(data, writer);
+    private static void saveDataToFile(MinecraftServer server, JsonObject data) {
+        Path dataFile = getNewSavePath(server);
+        try {
+            Files.createDirectories(dataFile.getParent());
+            try (FileWriter writer = new FileWriter(dataFile.toFile())) {
+                GSON.toJson(data, writer);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

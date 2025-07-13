@@ -1,7 +1,6 @@
 package net.onixary.shapeShifterCurseFabric;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
@@ -9,16 +8,12 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.command.argument.serialize.ConstantArgumentSerializer;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.potion.Potion;
-import net.minecraft.recipe.BrewingRecipeRegistry;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.server.MinecraftServer;
@@ -29,14 +24,12 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.GameRules;
 import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalEntityActions;
 import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalEntityConditions;
 import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalPowers;
 import net.onixary.shapeShifterCurseFabric.advancement.*;
 import net.onixary.shapeShifterCurseFabric.command.FormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
-import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.ConfigSSC;
 import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
 import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
@@ -47,12 +40,9 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.Transfo
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
 import net.onixary.shapeShifterCurseFabric.item.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.item.RegCustomPotions;
-import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S;
-import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
-import net.onixary.shapeShifterCurseFabric.player_animation.RegPlayerAnimation;
+import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationTransform;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
-import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctDebugHUD;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
@@ -135,9 +125,23 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
     private int save_timer = 0;
 
+    /**
+     * 注册动画系统
+     * 这个方法需要在服务端也执行，以确保变换动画能够正确同步
+     */
+    private static void registerAnimations() {
+        try {
+            // 注册变换动画
+            AnimationTransform.registerAnims();
+            LOGGER.info("Transform animations registered successfully");
+        } catch (Exception e) {
+            LOGGER.warn("Failed to register transform animations: " + e.getMessage());
+        }
+    }
+
     @Override
     public void onInitialize() {
-        PlayerDataStorage.initialize();
+        // PlayerDataStorage.initialize(); // 移除这行，因为这里还没有服务器实例
         RegCustomItem.initialize();
         RegEntitySpawnEgg.initialize();
         RegTStatusEffect.initialize();
@@ -146,6 +150,10 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         TEntitySpawnHandler.register();
         RegFormConfig.register();
         RegOtherStatusEffects.initialize();
+
+        // 注册动画（需要在服务端也执行以支持变换动画的同步）
+        registerAnimations();
+
         AdditionalEntityConditions.register();
         AdditionalPowers.register();
         AdditionalEntityActions.register();

@@ -13,7 +13,6 @@ public class AnimationPlayerOcelot2 {
     private static AnimationHolder anim_sneak_idle = AnimationHolder.EMPTY;
     private static AnimationHolder anim_sneak_rush = AnimationHolder.EMPTY;
     private static AnimationHolder anim_rush_jump = AnimationHolder.EMPTY;
-    private static AnimationHolder anim_climbing = AnimationHolder.EMPTY;
 
 
     public static AnimationHolder getFormAnimToPlay(PlayerAnimState currentState) {
@@ -24,8 +23,6 @@ public class AnimationPlayerOcelot2 {
                 return anim_sneak_rush;
             case ANIM_RUSH_JUMP:
                 return anim_rush_jump;
-            case ANIM_CLIMBING:
-                return anim_climbing;
 
             default:
                 return null;
@@ -34,8 +31,7 @@ public class AnimationPlayerOcelot2 {
 
     public static void registerAnims() {
         anim_sneak_idle = new AnimationHolder(new Identifier(MOD_ID, "ocelot_2_sneak_idle"), true);
-        anim_sneak_rush = new AnimationHolder(new Identifier(MOD_ID, "ocelot_2_sneak_rush"), true);
+        anim_sneak_rush = new AnimationHolder(new Identifier(MOD_ID, "ocelot_2_sneak_rush_2"), true, 3.3f);
         anim_rush_jump = new AnimationHolder(new Identifier(MOD_ID, "ocelot_2_rush_jump"), true);
-        anim_climbing = new AnimationHolder(new Identifier(MOD_ID, "ocelot_2_climbing"), true);
     }
 }

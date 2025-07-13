@@ -362,7 +362,7 @@
   "codex.form.ocelot3.title": ["\n'There have been reports of an unusually large white ocelot spotted in the area. Best be cautious when approaching the forest'"],
   "codex.form.ocelot3.appearance": ["Apart from your fur color and body size, you're nearly indistinguishable from a wild ocelot\nYou're the apex predator of the dense jungle. With your keen eyes and razor-sharp claws, every creature is potential prey"],
   "codex.form.ocelot3.pros": [
-    "Your body has fully adapted to quadrupedal structure, significantly enhancing your leaping ability\n",
+    "Your body has fully adapted to quadrupedal structure, significantly enhancing your leaping ability. Additionally, maintaining Hunting Stance has been made easier, it no longer accelerates your hunger consumption\n",
     "Your strengthened claws allow climbing on nearly any surface\n",
     "Sprinting is replaced with stealth - while sneaking, you can dash forward at tremendous speed and pounce across great distances\n",
     "Your keen senses let you instinctively dodge incoming projectiles\n",

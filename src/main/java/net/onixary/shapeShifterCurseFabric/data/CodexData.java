@@ -1,5 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.data;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
@@ -223,35 +225,52 @@ public class CodexData {
 
     public static Text getPlayerStatusText(PlayerEntity player){
         // 根据当前角色状态与环境返回对应的状态文本
-        String statusTextContent = "";
+        StringBuilder statusTextBuilder = new StringBuilder();
         boolean hasAnyStatus = false;
 
-        PlayerEffectAttachment currentTransformEffect = (player instanceof ClientPlayerEntity) ?
-                ClientEffectAttachmentCache.getAttachment() :
-                player.getAttached(EFFECT_ATTACHMENT);
+        PlayerEffectAttachment currentTransformEffect;
+
+        // 使用环境检测而不是玩家类型检测
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT && player instanceof ClientPlayerEntity) {
+            currentTransformEffect = ClientEffectAttachmentCache.getAttachment();
+        } else {
+            currentTransformEffect = player.getAttached(EFFECT_ATTACHMENT);
+        }
 
         if(currentTransformEffect != null && currentTransformEffect.currentToForm != null){
             ShapeShifterCurseFabric.LOGGER.info("current effect successfully receive: " + currentTransformEffect.currentEffect);
-            statusTextContent += net.minecraft.client.resource.language.I18n.translate(statusInfected.getString());
+            statusTextBuilder.append(statusInfected.getString());
             hasAnyStatus = true;
         }
 
-        if(CursedMoon.isCursedMoon()){
-            if(CursedMoon.isNight()){
-                statusTextContent += net.minecraft.client.resource.language.I18n.translate(statusUnderMoon.getString());
+        // 使用环境检测来正确获取CursedMoon状态
+        boolean isCursedMoon, isNight;
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+            // 客户端使用同步的状态
+            isCursedMoon = CursedMoon.clientIsCursedMoon;
+            isNight = CursedMoon.clientIsNight;
+        } else {
+            // 服务端使用原始逻辑
+            isCursedMoon = CursedMoon.isCursedMoon();
+            isNight = CursedMoon.isNight();
+        }
+
+        if(isCursedMoon){
+            if(isNight){
+                statusTextBuilder.append(statusUnderMoon.getString());
                 hasAnyStatus = true;
             }
             else{
-                statusTextContent += net.minecraft.client.resource.language.I18n.translate(statusBeforeMoon.getString());
+                statusTextBuilder.append(statusBeforeMoon.getString());
                 hasAnyStatus = true;
             }
         }
 
         if(!hasAnyStatus){
-            statusTextContent = net.minecraft.client.resource.language.I18n.translate(statusNormal.getString());
+            statusTextBuilder.append(statusNormal.getString());
         }
 
-        return Text.literal(statusTextContent);
+        return Text.literal(statusTextBuilder.toString());
     }
 
     public static Text getDescText(ContentType type, PlayerEntity player){

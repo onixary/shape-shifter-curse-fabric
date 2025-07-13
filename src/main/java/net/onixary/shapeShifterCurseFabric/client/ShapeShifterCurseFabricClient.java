@@ -107,10 +107,25 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		RegPlayerAnimation.register();
 		registerEntityModels();
+
+		// 注册所有服务端到客户端的数据包处理器
 		ClientPlayNetworking.registerGlobalReceiver(
 			ModPackets.SYNC_EFFECT_ATTACHMENT,
 			ModPacketsS2C::handleSyncEffectAttachment
 		);
+		ClientPlayNetworking.registerGlobalReceiver(
+			ModPackets.TRANSFORM_EFFECT_ID,
+			ModPacketsS2C::receiveTransformEffect
+		);
+		ClientPlayNetworking.registerGlobalReceiver(
+			ModPackets.INSTINCT_THRESHOLD_EFFECT_ID,
+			ModPacketsS2C::receiveInstinctThresholdEffect
+		);
+		ClientPlayNetworking.registerGlobalReceiver(
+			ModPackets.SYNC_CURSED_MOON_DATA,
+			ModPacketsS2C::receiveCursedMoonData
+		);
+
 		ClientTickEvents.END_CLIENT_TICK.register(ShapeShifterCurseFabricClient::onClientTick);
 	}
 }

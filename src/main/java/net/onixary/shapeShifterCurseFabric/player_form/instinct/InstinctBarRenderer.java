@@ -1,16 +1,21 @@
 package net.onixary.shapeShifterCurseFabric.player_form.instinct;
 
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
+import net.onixary.shapeShifterCurseFabric.player_form.instinct.PlayerInstinctComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
-public class InstinctBarRenderer{
+public class InstinctBarRenderer  {
     private static final Identifier instinctBarTexFullID = new Identifier(MOD_ID, "textures/gui/instinct_bar_full.png");
     private static final Identifier instinctBarTexEmptyID = new Identifier(MOD_ID, "textures/gui/instinct_bar_empty.png");
     private static final Identifier instinctBarTexIncrease0ID = new Identifier(MOD_ID, "textures/gui/instinct_bar_increase0.png");
@@ -58,21 +63,22 @@ public class InstinctBarRenderer{
     }
 
     public void updateBarTextures(PlayerEntity player) {
-        if (!InstinctTicker.isInstinctIncreasing && !InstinctTicker.isInstinctDecreasing) {
+        PlayerInstinctComponent comp = player.getComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
+        if (!comp.isInstinctIncreasing && !comp.isInstinctDecreasing) {
             currentBarID = instinctBarTexFullID;
             currentBarEmptyID = instinctBarTexEmptyID;
         }
-        else if (InstinctTicker.isInstinctIncreasing && !InstinctTicker.isInstinctDecreasing) {
+        else if (comp.isInstinctIncreasing && !comp.isInstinctDecreasing) {
             // 判断增长速率并应用不同的贴图
-            if (InstinctTicker.currentInstinctRate < increase1Threshold) {
+            if (comp.currentInstinctRate < increase1Threshold) {
                 currentBarID = instinctBarTexIncrease0ID;
                 currentBarEmptyID = instinctBarTexIncrease0EmptyID;
             }
-            else if (InstinctTicker.currentInstinctRate < increase2Threshold) {
+            else if (comp.currentInstinctRate < increase2Threshold) {
                 currentBarID = instinctBarTexIncrease1ID;
                 currentBarEmptyID = instinctBarTexIncrease1EmptyID;
             }
-            else if (InstinctTicker.currentInstinctRate < increase3Threshold) {
+            else if (comp.currentInstinctRate < increase3Threshold) {
                 currentBarID = instinctBarTexIncrease2ID;
                 currentBarEmptyID = instinctBarTexIncrease2EmptyID;
             }
@@ -89,8 +95,9 @@ public class InstinctBarRenderer{
 
 
     private void renderInstinctBar(DrawContext context, float tickDelta, int x, int y, PlayerEntity player) {
+        PlayerInstinctComponent comp = player.getComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
         float maxInstinct = StaticParams.INSTINCT_MAX;
-        float currentInstinct = Math.min(InstinctTicker.currentInstinctValue, maxInstinct);
+        float currentInstinct = Math.min(comp.instinctValue, maxInstinct);
         // Calculate bar proportions
         float instinctProportion;
 

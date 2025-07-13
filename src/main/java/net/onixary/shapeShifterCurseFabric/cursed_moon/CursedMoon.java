@@ -1,5 +1,8 @@
 package net.onixary.shapeShifterCurseFabric.cursed_moon;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
@@ -25,13 +28,20 @@ import static net.onixary.shapeShifterCurseFabric.player_form.transform.Transfor
 public class CursedMoon {
     public static long day_time = 0;
     public static int day = 0;
-    public static boolean moon_effect_applied = false;
-    public static boolean end_moon_effect_applied = false;
     public static boolean midday_message_sent = false;
+
+    // 客户端同步的状态变量
+    public static boolean clientIsCursedMoon = false;
+    public static boolean clientIsNight = false;
 
     // Cursed Moon rises every 3 days
     public static boolean isCursedMoon() {
+        // 如果在客户端，使用同步的状态
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+            return clientIsCursedMoon;
+        }
 
+        // 服务端逻辑保持不变
         CursedMoonData currentData = ShapeShifterCurseFabric.cursedMoonData.getInstance();
         if(currentData.isActive){
             return day == currentData.startDay
@@ -43,6 +53,12 @@ public class CursedMoon {
     }
 
     public static boolean isNight(){
+        // 如果在客户端，使用同步的状态
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+            return clientIsNight;
+        }
+
+        // 服务端逻辑保持不变
         long timeDayMoon = CursedMoon.day_time - (CursedMoon.day -1)*24000L;
         //6:0,7:1,8:2,9:3,10:4,11:5,12:6,13:7,14:8,
         // 15:9000L, 16:10000L, 17:11000L, 18:12000L, 19:13000L, 20:14000L, 21:15000L
@@ -56,17 +72,55 @@ public class CursedMoon {
     }
 
     public static void jumpToNextCursedMoon(ServerWorld world){
-        // 让下一晚变成Cursed Moon
-        int newStartDay = (int)(day / StaticParams.CURSED_MOON_INTERVAL_DAY) * StaticParams.CURSED_MOON_INTERVAL_DAY +
-                (day % StaticParams.CURSED_MOON_INTERVAL_DAY);
-        ShapeShifterCurseFabric.cursedMoonData.getInstance().startDay = newStartDay;
-        ShapeShifterCurseFabric.cursedMoonData.getInstance().save(world);
+        // 获取数据实例
+        CursedMoonData cursedMoonData = ShapeShifterCurseFabric.cursedMoonData.getInstance();
+
+        // 核心逻辑修正：计算下一个诅咒之月的日期
+        int newStartDay;
+        long timeDayMoon = CursedMoon.day_time - (CursedMoon.day - 1) * 24000L;
+        boolean isCurrentlyNight = timeDayMoon > 12000L && timeDayMoon < 23000L;
+
+        // 如果当前是夜晚，并且不是诅咒之月，则将今晚设为诅咒之月
+        if (isCurrentlyNight && !isCursedMoon()) {
+            newStartDay = day;
+        } else {
+            // 否则，计算下一个周期
+            // (day / 3) * 3 会得到当前周期的起始日
+            // + CURSED_MOON_INTERVAL_DAY 则跳到下一个周期
+            newStartDay = (day / StaticParams.CURSED_MOON_INTERVAL_DAY) * StaticParams.CURSED_MOON_INTERVAL_DAY + StaticParams.CURSED_MOON_INTERVAL_DAY;
+        }
+
+        cursedMoonData.startDay = newStartDay;
+        cursedMoonData.save(world);
+
+        ShapeShifterCurseFabric.LOGGER.info("Jump to next Cursed Moon. New startDay set to: " + newStartDay);
+
+        // 强制重新加载数据以确保一致性
+        cursedMoonData.load(world);
+        ShapeShifterCurseFabric.LOGGER.info("After reload: startDay=" + cursedMoonData.startDay + " day: " + day);
+
+        // 立即向所有在线玩家同步CursedMoon状态
+        // 直接计算CursedMoon状态，避免环境检测问题
+        CursedMoonData finalData = ShapeShifterCurseFabric.cursedMoonData.getInstance();
+        boolean currentIsCursedMoon = finalData.isActive && (day == finalData.startDay
+                || ((day - finalData.startDay) % finalData.perDay == 0 && day >= finalData.startDay));
+        // 使用直接计算的结果而不是isNight()方法，避免环境检测问题
+        boolean currentIsNight = isCurrentlyNight;
+
+        ShapeShifterCurseFabric.LOGGER.info("Sync status: isCursedMoon=" + currentIsCursedMoon + ", isNight=" + currentIsNight);
+
+        for (net.minecraft.server.network.ServerPlayerEntity player : world.getServer().getPlayerManager().getPlayerList()) {
+            net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C.sendCursedMoonData(
+                player, day_time, day, currentIsCursedMoon, currentIsNight
+            );
+        }
     }
 
     public static void applyMoonEffect(ServerPlayerEntity player){
         // 处于Cursed Moon时的逻辑
         // 文本提示
-        if(!CursedMoon.moon_effect_applied){
+        PlayerFormComponent formComp = RegPlayerFormComponent.PLAYER_FORM.get(player);
+        if(!formComp.isMoonEffectApplied()){
             boolean isOverworld = player.getWorld().getRegistryKey() == World.OVERWORLD;
             if(FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_BEFORE_ENABLE){
                 if(isOverworld){
@@ -93,13 +147,15 @@ public class CursedMoon {
             if(!RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon() && !RegPlayerFormComponent.PLAYER_FORM.get(player).isByCure()){
                 TransformManager.handleProgressiveTransform(player,true);
             }
-            CursedMoon.moon_effect_applied =true;
+            formComp.setMoonEffectApplied(true);
+            RegPlayerFormComponent.PLAYER_FORM.sync(player);
         }
     }
 
     public static void applyEndMoonEffect(ServerPlayerEntity player){
         // 结束Cursed Moon时的逻辑
-        if(!CursedMoon.end_moon_effect_applied){
+        PlayerFormComponent formComp = RegPlayerFormComponent.PLAYER_FORM.get(player);
+        if(!formComp.isEndMoonEffectApplied()){
             boolean wasByCursedMoon = RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon();
             ShapeShifterCurseFabric.LOGGER.info("is player form by cursed moon? : " + wasByCursedMoon);
             if(FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_BEFORE_ENABLE){
@@ -145,13 +201,25 @@ public class CursedMoon {
             }
             //clearFormFlag(player);
             //TransformManager.clearMoonEndFlags(player);
-            CursedMoon.end_moon_effect_applied =true;
+            formComp.setEndMoonEffectApplied(true);
+            RegPlayerFormComponent.PLAYER_FORM.sync(player);
         }
     }
 
-    public static void resetMoonEffect(){
+    public static void resetMoonEffect(ServerPlayerEntity player){
         // when player exit game, reset moon effect so that it can be triggered again
-        CursedMoon.moon_effect_applied = false;
-        CursedMoon.end_moon_effect_applied = false;
+        PlayerFormComponent formComp = RegPlayerFormComponent.PLAYER_FORM.get(player);
+        formComp.setEndMoonEffectApplied(false);
+        formComp.setMoonEffectApplied(false);
+        RegPlayerFormComponent.PLAYER_FORM.sync(player);
+    }
+
+    public static void resetMoonEffectForNewDay(ServerPlayerEntity player){
+        // 当新的一天开始时，重置月亮效果标志，允许下一次 CursedMoon 事件触发
+        PlayerFormComponent formComp = RegPlayerFormComponent.PLAYER_FORM.get(player);
+        formComp.setEndMoonEffectApplied(false);
+        formComp.setMoonEffectApplied(false);
+        RegPlayerFormComponent.PLAYER_FORM.sync(player);
+        ShapeShifterCurseFabric.LOGGER.info("Reset moon effect flags for new day for player: " + player.getGameProfile().getName());
     }
 }

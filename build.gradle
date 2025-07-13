@@ -15,9 +15,14 @@ loom {
     runs {
         client {
             programArgs(["--username", "Dev"])
+            runDir "run/client"
+        }
+        server {
+            runDir "run/server"
         }
     }
 }
+
 
 repositories {
     // Add repositories to retrieve artifacts from in here.

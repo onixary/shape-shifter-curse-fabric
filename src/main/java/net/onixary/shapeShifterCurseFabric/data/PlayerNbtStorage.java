@@ -13,21 +13,53 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class PlayerNbtStorage {
-    private static final Path SAVE_DIR = Paths.get("config", "shape_shifter_curse_fabric");
+    private static final String MOD_DATA_DIR = ShapeShifterCurseFabric.MOD_ID;
+    private static final Path OLD_SAVE_DIR_ROOT = Paths.get("config", "shape_shifter_curse_fabric");
 
-    private static Path getWorldSaveDir(ServerWorld world) {
+    private static Path getNewWorldSaveDir(ServerWorld world) {
+        // 正确的路径应为：saves/<world_name>/data/<mod_id>
+        return world.getServer().getSavePath(WorldSavePath.ROOT).resolve("data").resolve(MOD_DATA_DIR);
+    }
 
-        Path worldSavePath = world.getServer().getSavePath(WorldSavePath.ROOT);
-        String worldName = worldSavePath.getName(worldSavePath.getNameCount() - 2).toString();
-        //ShapeShifterCurseFabric.LOGGER.info("World save name: " + worldName);
-        return SAVE_DIR.resolve(worldName);
+    private static Path getOldWorldSaveDir(ServerWorld world) {
+        // 旧路径为：config/shape_shifter_curse_fabric/<world_name>
+        String worldName = world.getServer().getSavePath(WorldSavePath.ROOT).getFileName().toString();
+        return OLD_SAVE_DIR_ROOT.resolve(worldName);
+    }
+
+    private static void migrateData(ServerWorld world, String fileName) {
+        try {
+            Path oldDir = getOldWorldSaveDir(world);
+            Path newDir = getNewWorldSaveDir(world);
+            Path oldFile = oldDir.resolve(fileName);
+            Path newFile = newDir.resolve(fileName);
+
+            ShapeShifterCurseFabric.LOGGER.info("Checking for migration: oldFile={}, newFile={}", oldFile, newFile);
+
+            if (Files.exists(oldFile) && !Files.exists(newFile)) {
+                Files.createDirectories(newDir);
+                // 使用 copy 而不是 move，确保操作的可靠性
+                Files.copy(oldFile, newFile, StandardCopyOption.REPLACE_EXISTING);
+                ShapeShifterCurseFabric.LOGGER.info("Migrated player data '{}' from old location to new location.", fileName);
+                ShapeShifterCurseFabric.LOGGER.info("Migration completed: newFile exists = {}, size = {}", Files.exists(newFile), Files.size(newFile));
+                // 迁移成功后删除旧文件
+                Files.delete(oldFile);
+            } else if (Files.exists(newFile)) {
+                ShapeShifterCurseFabric.LOGGER.info("New file already exists, skipping migration: {}", newFile);
+            } else {
+                ShapeShifterCurseFabric.LOGGER.info("No old file found for migration: {}", oldFile);
+            }
+        } catch (IOException e) {
+            ShapeShifterCurseFabric.LOGGER.error("Failed to migrate player data file: " + fileName, e);
+        }
     }
 
     public static void saveAttachment(ServerWorld world, String playerId, PlayerEffectAttachment attachment) {
         try {
-            Path worldSaveDir = getWorldSaveDir(world);
+            Path worldSaveDir = getNewWorldSaveDir(world);
             Files.createDirectories(worldSaveDir);
             Path savePath = worldSaveDir.resolve(playerId + "_attachment.dat");
             NbtCompound nbt = attachment.toNbt();
@@ -39,97 +71,89 @@ public class PlayerNbtStorage {
     }
 
     public static PlayerEffectAttachment loadAttachment(ServerWorld world, String playerId) {
+        String fileName = playerId + "_attachment.dat";
+        migrateData(world, fileName);
         try {
-            Path savePath = getWorldSaveDir(world).resolve(playerId + "_attachment.dat");
+            Path savePath = getNewWorldSaveDir(world).resolve(fileName);
             if (!Files.exists(savePath)) return null;
             NbtCompound nbt = NbtIo.read(savePath.toFile());
             if (nbt == null) return null;
             return PlayerEffectAttachment.fromNbt(nbt);
         } catch (IOException e) {
-            // 错误处理
             ShapeShifterCurseFabric.LOGGER.error("Failed to load attachment for player: " + playerId, e);
             return null;
         }
     }
 
-    public static void savePlayerFormComponent(ServerWorld world, String playerId, PlayerFormComponent formComponent) {
+    public static void savePlayerFormComponent(ServerWorld world, String playerId, PlayerFormComponent component) {
         try {
-            Path saveDir = getWorldSaveDir(world);
-            Files.createDirectories(saveDir);
-            Path savePath = saveDir.resolve(playerId + "_form.dat");
+            Path worldSaveDir = getNewWorldSaveDir(world);
+            Files.createDirectories(worldSaveDir);
+            Path savePath = worldSaveDir.resolve(playerId + "_form.dat");
             NbtCompound nbt = new NbtCompound();
-            formComponent.writeToNbt(nbt);
+            component.writeToNbt(nbt);
             NbtIo.write(nbt, savePath.toFile());
         } catch (IOException e) {
-            ShapeShifterCurseFabric.LOGGER.error("Failed to save player form for player: " + playerId, e);
+            ShapeShifterCurseFabric.LOGGER.error("Failed to save PlayerFormComponent for player: " + playerId, e);
         }
     }
 
     public static PlayerFormComponent loadPlayerFormComponent(ServerWorld world, String playerId) {
+        String fileName = playerId + "_form.dat";
+        migrateData(world, fileName);
         try {
-            Path savePath = getWorldSaveDir(world).resolve(playerId + "_form.dat");
-            if (!Files.exists(savePath)) return null;
-            NbtCompound nbt = NbtIo.read(savePath.toFile());
-            if (nbt == null) return null;
-            PlayerFormComponent formComponent = new PlayerFormComponent();
-            formComponent.readFromNbt(nbt);
-            return formComponent;
+            Path savePath = getNewWorldSaveDir(world).resolve(fileName);
+            ShapeShifterCurseFabric.LOGGER.info("Loading PlayerFormComponent: file exists = {}, path = {}", Files.exists(savePath), savePath);
+            if (Files.exists(savePath)) {
+                NbtCompound nbt = NbtIo.read(savePath.toFile());
+                ShapeShifterCurseFabric.LOGGER.info("NBT loaded: nbt != null = {}, nbt.isEmpty() = {}", nbt != null, nbt != null ? nbt.isEmpty() : "null");
+                if (nbt != null && !nbt.isEmpty()) {
+                    PlayerFormComponent component = new PlayerFormComponent();
+                    component.readFromNbt(nbt);
+                    ShapeShifterCurseFabric.LOGGER.info("PlayerFormComponent loaded successfully");
+                    return component;
+                }
+            }
         } catch (IOException e) {
-            ShapeShifterCurseFabric.LOGGER.error("Failed to load player form for player: " + playerId, e);
-            return null;
+            ShapeShifterCurseFabric.LOGGER.error("Failed to load PlayerFormComponent for player: " + playerId, e);
+        }
+        ShapeShifterCurseFabric.LOGGER.info("PlayerFormComponent load failed, returning null");
+        return null;
+    }
+
+    public static void savePlayerInstinctComponent(ServerWorld world, String playerId, PlayerInstinctComponent component) {
+        try {
+            Path worldSaveDir = getNewWorldSaveDir(world);
+            Files.createDirectories(worldSaveDir);
+            Path savePath = worldSaveDir.resolve(playerId + "_instinct.dat");
+            NbtCompound nbt = new NbtCompound();
+            component.writeToNbt(nbt);
+            NbtIo.write(nbt, savePath.toFile());
+        } catch (IOException e) {
+            ShapeShifterCurseFabric.LOGGER.error("Failed to save PlayerInstinctComponent for player: " + playerId, e);
         }
     }
 
     public static PlayerInstinctComponent loadPlayerInstinctComponent(ServerWorld world, String playerId) {
+        String fileName = playerId + "_instinct.dat";
+        migrateData(world, fileName);
         try {
-            Path savePath = getWorldSaveDir(world).resolve(playerId + "_instinct.dat");
-            if (!Files.exists(savePath)) return null;
-            NbtCompound nbt = NbtIo.read(savePath.toFile());
-            if (nbt == null) return null;
-            PlayerInstinctComponent instinctComponent = new PlayerInstinctComponent();
-            instinctComponent.readFromNbt(nbt);
-            return instinctComponent;
+            Path savePath = getNewWorldSaveDir(world).resolve(fileName);
+            ShapeShifterCurseFabric.LOGGER.info("Loading PlayerInstinctComponent: file exists = {}, path = {}", Files.exists(savePath), savePath);
+            if (Files.exists(savePath)) {
+                NbtCompound nbt = NbtIo.read(savePath.toFile());
+                ShapeShifterCurseFabric.LOGGER.info("NBT loaded: nbt != null = {}, nbt.isEmpty() = {}", nbt != null, nbt != null ? nbt.isEmpty() : "null");
+                if (nbt != null && !nbt.isEmpty()) {
+                    PlayerInstinctComponent component = new PlayerInstinctComponent();
+                    component.readFromNbt(nbt);
+                    ShapeShifterCurseFabric.LOGGER.info("PlayerInstinctComponent loaded successfully");
+                    return component;
+                }
+            }
         } catch (IOException e) {
-            ShapeShifterCurseFabric.LOGGER.error("Failed to load player instinct for player: " + playerId, e);
-            return null;
+            ShapeShifterCurseFabric.LOGGER.error("Failed to load PlayerInstinctComponent for player: " + playerId, e);
         }
-    }
-
-    public static void savePlayerInstinctComponent(ServerWorld world, String playerId, PlayerInstinctComponent instinctComponent) {
-        try {
-            Path saveDir = getWorldSaveDir(world);
-            Files.createDirectories(saveDir);
-            Path savePath = saveDir.resolve(playerId + "_instinct.dat");
-            NbtCompound nbt = new NbtCompound();
-            instinctComponent.writeToNbt(nbt);
-            NbtIo.write(nbt, savePath.toFile());
-        } catch (IOException e) {
-            ShapeShifterCurseFabric.LOGGER.error("Failed to save player instinct for player: " + playerId, e);
-        }
-    }
-
-    public static void saveBooleanValue(ServerWorld world, String playerId, String key, boolean value) {
-        try {
-            Path saveDir = getWorldSaveDir(world);
-            Files.createDirectories(saveDir);
-            Path savePath = saveDir.resolve(playerId + "_data.dat");
-            NbtCompound nbt = Files.exists(savePath) ? NbtIo.read(savePath.toFile()) : new NbtCompound();
-            nbt.putBoolean(key, value);
-            NbtIo.write(nbt, savePath.toFile());
-        } catch (IOException e) {
-            ShapeShifterCurseFabric.LOGGER.error("Failed to save boolean value for player: " + playerId, e);
-        }
-    }
-
-    public static boolean loadBooleanValue(ServerWorld world, String playerId, String key) {
-        try {
-            Path savePath = getWorldSaveDir(world).resolve(playerId + "_data.dat");
-            if (!Files.exists(savePath)) return false;
-            NbtCompound nbt = NbtIo.read(savePath.toFile());
-            return nbt != null && nbt.getBoolean(key);
-        } catch (IOException e) {
-            ShapeShifterCurseFabric.LOGGER.error("Failed to load boolean value for player: " + playerId, e);
-            return false;
-        }
+        ShapeShifterCurseFabric.LOGGER.info("PlayerInstinctComponent load failed, returning null");
+        return null;
     }
 }

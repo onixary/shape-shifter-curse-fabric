@@ -15,4 +15,6 @@ public class ModPackets {
     public static final Identifier TRANSFORM_EFFECT_ID = new Identifier(ShapeShifterCurseFabric.MOD_ID, "transform_effect");
 
     public static final Identifier INSTINCT_THRESHOLD_EFFECT_ID = new Identifier(ShapeShifterCurseFabric.MOD_ID, "instinct_threshold_effect");
+
+    public static final Identifier SYNC_CURSED_MOON_DATA = new Identifier(ShapeShifterCurseFabric.MOD_ID, "sync_cursed_moon_data");
 }
