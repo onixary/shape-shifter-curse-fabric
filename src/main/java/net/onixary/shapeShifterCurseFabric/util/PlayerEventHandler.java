@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.util;
 
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.entity.Entity;
@@ -12,12 +13,11 @@ import net.minecraft.scoreboard.Team;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.GameRules;
+import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
-import net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
@@ -26,6 +26,7 @@ import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManag
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 import net.onixary.shapeShifterCurseFabric.team.MobTeamManager;
 
+import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.cursedMoonData;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker.loadInstinct;
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.removeVisualEffects;
 import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.*;
@@ -71,16 +72,19 @@ public class PlayerEventHandler {
             loadInstinct(player);
 
             // load cursed moon data
-            ShapeShifterCurseFabric.cursedMoonData.getInstance().load(server.getOverworld());
-            if(FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_BEFORE_ENABLE){
-                ShapeShifterCurseFabric.LOGGER.info("Cursed moon disabled");
-                ShapeShifterCurseFabric.cursedMoonData.getInstance().disableCursedMoon(server.getOverworld());
-            }
-            else{
-                ShapeShifterCurseFabric.LOGGER.info("Cursed moon enabled");
-                ShapeShifterCurseFabric.cursedMoonData.getInstance().enableCursedMoon(server.getOverworld());
-            }
-            ShapeShifterCurseFabric.cursedMoonData.getInstance().save(server.getOverworld());
+            ShapeShifterCurseFabric.LOGGER.info("Cursed moon enabled");
+            cursedMoonData.getInstance().load(server.getOverworld());
+            cursedMoonData.getInstance().enableCursedMoon(server.getOverworld());
+            boolean currentIsCursedMoon = cursedMoonData.getInstance().isTonightCursedMoon;
+            boolean currentIsNight = CursedMoon.isNight();
+
+            // 立即同步当前状态给玩家
+            ModPacketsS2C.sendCursedMoonData(player, CursedMoon.day_time, CursedMoon.day,
+                    currentIsCursedMoon, currentIsNight);
+
+            ShapeShifterCurseFabric.LOGGER.info("向玩家同步诅咒之月状态: " + currentIsCursedMoon);
+            cursedMoonData.getInstance().loadPlayerStates(server.getOverworld(), player);
+            cursedMoonData.getInstance().save(server.getOverworld());
 
             // reset moon effect
             CursedMoon.resetMoonEffect(player);
@@ -110,6 +114,19 @@ public class PlayerEventHandler {
                 MobTeamManager.registerTeam(world);
                 //PlayerTeamHandler.updatePlayerTeam(player);
                 //handleEntityTeam(world);
+            }
+        });
+
+        ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
+            for (ServerWorld world : server.getWorlds()) {
+                if (world.getRegistryKey() == World.OVERWORLD) {
+                    ShapeShifterCurseFabric.LOGGER.info("Cursed moon data saved by server stop");
+                    cursedMoonData.getInstance().save(world);
+                    // 保存所有玩家状态
+                    for (ServerPlayerEntity player : world.getPlayers()) {
+                        cursedMoonData.getInstance().savePlayerStates(world, player);
+                    }
+                }
             }
         });
     }

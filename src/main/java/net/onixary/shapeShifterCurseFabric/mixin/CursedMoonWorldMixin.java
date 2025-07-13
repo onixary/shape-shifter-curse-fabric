@@ -2,6 +2,7 @@ package net.onixary.shapeShifterCurseFabric.mixin;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.MutableWorldProperties;
@@ -9,6 +10,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
+import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
@@ -20,6 +22,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.function.Consumer;
+
+import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.cursedMoonData;
 
 @Mixin(World.class)
 public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable {
@@ -36,43 +40,77 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
     public void tickBlockEntities(CallbackInfo info) {
         CursedMoon.day_time = getTimeOfDay();
         CursedMoon.day = (int)(getTimeOfDay()/ 24000L)+1;
-        //ShapeShifterCurseFabric.LOGGER.info("Day: "+CursedMoon.day + "Time: "+CursedMoon.day_time);
+
+        World self = (World) (Object) this;
+        if (self.isClient()) return;
+
+        ServerWorld world = (ServerWorld) self;
+        long worldTime = world.getTimeOfDay();
+        int currentDay = (int) (worldTime / 24000L) + 1;
+
+        CursedMoonData data = ShapeShifterCurseFabric.cursedMoonData.getInstance();
+
+        if(data.lastCheckedDay <= 0){
+            data.load(world);
+        }
+
+        // 新的一天重置逻辑
+        if (currentDay > data.lastCheckedDay) {
+            data.lastCheckedDay = currentDay;
+            CursedMoon.resetCursedMoonForNewDay(world);
+            ShapeShifterCurseFabric.LOGGER.info("Cursed moon data saved by CursedMoonWorldMixin new day reset");
+            data.save(world);
+
+            // 重置所有玩家的效果状态
+            for (ServerPlayerEntity player : world.getPlayers()) {
+                CursedMoon.resetMoonEffectForNewDay(player);
+            }
+        }
+
+        // 概率检查（白天）
+        if (world.getTime() % 20 == 0 && CursedMoon.isDaytime(world)) {
+            CursedMoon.checkCursedMoonProbability(world);
+        }
+
+        // 同步所有玩家状态
+        if (world.getTime() % 100 == 0) { // 每5秒同步一次
+            boolean isCursed = CursedMoon.isCursedMoon();
+            boolean isNight = CursedMoon.isNight(world);
+
+            for (ServerPlayerEntity player : world.getPlayers()) {
+                ModPacketsS2C.sendCursedMoonData(player, worldTime, currentDay, isCursed, isNight);
+            }
+        }
     }
 
     @Inject(at=@At("HEAD"), method = "tickEntity")
     public <T extends Entity> void tickEntity(Consumer<T> tickConsumer, T entity, CallbackInfo info) {
         if(entity instanceof ServerPlayerEntity player){
-            long timeDayMoon = CursedMoon.day_time - (CursedMoon.day -1)*24000L;
 
-            // 新的一天开始时重置月亮效果标志
-            if (timeDayMoon < 20 && !CursedMoon.midday_message_sent) {
-                CursedMoon.resetMoonEffectForNewDay(player);
-                CursedMoon.midday_message_sent = true;
-            }
-            if (timeDayMoon < 20 && CursedMoon.midday_message_sent) {
-                CursedMoon.midday_message_sent = false;
-            }
-
-            boolean currentIsCursedMoon = CursedMoon.isCursedMoon();
-            boolean currentIsNight = CursedMoon.isNight();
+            World world = player.getWorld();
+            // 获取当前世界时间
+            long worldTime = world.getTimeOfDay();
+            int currentDay = (int) (worldTime / 24000L) + 1;
+            long timeOfDay = worldTime % 24000L;
 
             // 每20刻（1秒）同步一次CursedMoon状态到客户端
             if (player.getWorld().getTime() % 20 == 0) {
+                boolean currentIsCursedMoon = CursedMoon.isCursedMoon();
+                boolean currentIsNight = CursedMoon.isNight();
                 ModPacketsS2C.sendCursedMoonData(player, CursedMoon.day_time, CursedMoon.day, currentIsCursedMoon, currentIsNight);
             }
 
-            if(currentIsCursedMoon){
-                if(currentIsNight && player.isSleeping()){
+            if(CursedMoon.isCursedMoon()){
+                if(player.isSleeping()){
                     player.wakeUp();
                 }
-                shape_shifter_curse$OnCursedMoon(player,timeDayMoon);
+                shape_shifter_curse$OnCursedMoon(player,timeOfDay);
             }
             else{
                 // CursedMoon结束时的处理
                 PlayerFormComponent formComp = RegPlayerFormComponent.PLAYER_FORM.get(player);
                 if (formComp.isMoonEffectApplied() || formComp.isEndMoonEffectApplied()) {
-                    // 立即向客户端同步CursedMoon结束状态
-                    ModPacketsS2C.sendCursedMoonData(player, CursedMoon.day_time, CursedMoon.day, false, currentIsNight);
+                    //ModPacketsS2C.sendCursedMoonData(player, CursedMoon.day_time, CursedMoon.day, false, false);
                     // 重置该玩家的状态
                     CursedMoon.resetMoonEffect(player);
                 }

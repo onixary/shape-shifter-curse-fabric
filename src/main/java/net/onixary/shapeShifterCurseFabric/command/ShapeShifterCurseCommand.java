@@ -81,7 +81,7 @@ public class ShapeShifterCurseCommand {
 
     private static int jumpToNextCursedMoon(CommandContext<ServerCommandSource> commandContext) {
         ServerWorld world = commandContext.getSource().getWorld();
-        CursedMoon.jumpToNextCursedMoon(world);
+        CursedMoon.forceTriggerCursedMoon(world);
         ServerCommandSource serverCommandSource = commandContext.getSource();
         serverCommandSource.sendFeedback(() -> Text.literal("Set cursed moon to next night!"), true);
         return 1;

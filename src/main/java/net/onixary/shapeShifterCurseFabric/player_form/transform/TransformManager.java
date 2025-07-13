@@ -336,6 +336,7 @@ public class TransformManager {
             ShapeShifterCurseFabric.LOGGER.info("Cursed moon enabled");
             ShapeShifterCurseFabric.cursedMoonData.getInstance().enableCursedMoon(server.getOverworld());
         }
+        ShapeShifterCurseFabric.LOGGER.info("Cursed moon data saved by syncCursedMoonData");
         ShapeShifterCurseFabric.cursedMoonData.getInstance().save(server.getOverworld());
     }
 
