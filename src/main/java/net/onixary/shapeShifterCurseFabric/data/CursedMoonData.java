@@ -97,7 +97,7 @@ public class CursedMoonData {
             }
             NbtCompound nbt = serialize();
             NbtIo.write(nbt, worldSaveDir.resolve("cursed_moon_data.dat").toFile());
-            ShapeShifterCurseFabric.LOGGER.info("Cursed Moon Data saved successfully");
+            //ShapeShifterCurseFabric.LOGGER.info("Cursed Moon Data saved successfully");
         } catch (Exception e) {
             ShapeShifterCurseFabric.LOGGER.error("Failed to save Cursed Moon Data", e);
         }

@@ -24,6 +24,7 @@ import net.minecraft.util.UseAction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.*;
@@ -303,12 +304,36 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                 }
             }
         }
-        // isTransforming
-        if(TransformManager.isTransforming()){
+        // isTransforming - 使用客户端同步的状态
+        if(net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.isClientTransforming()){
             //ShapeShifterCurseFabric.LOGGER.info("Player is transforming");
-            transformCurrentForm = TransformManager.curFromForm;
-            transformToForm = TransformManager.curToForm;
+            // 使用客户端同步的变身信息
+            String fromFormName = net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.getClientTransformFromForm();
+            String toFormName = net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.getClientTransformToForm();
+
+            // 尝试解析形态名称为 PlayerForms 枚举
+            try {
+                transformCurrentForm = fromFormName != null ? PlayerForms.valueOf(fromFormName) : null;
+                transformToForm = toFormName != null ? PlayerForms.valueOf(toFormName) : null;
+            } catch (IllegalArgumentException e) {
+                // 如果解析失败，使用当前形态作为 fallback
+                transformCurrentForm = curForm;
+                transformToForm = curForm;
+            }
+
             currentState = PlayerAnimState.ANIM_ON_TRANSFORM;
+        }
+        // 在变身结束后，强制更新 curForm 以确保动画系统使用最新的形态
+        else {
+            // 检查是否刚刚结束变身，如果是则强制刷新当前形态
+            if (previousState == PlayerAnimState.ANIM_ON_TRANSFORM) {
+                // 强制重新获取当前形态，确保使用最新的数据
+                PlayerForms latestForm = RegPlayerFormComponent.PLAYER_FORM.get(this).getCurrentForm();
+                if (latestForm != curForm) {
+                    curForm = latestForm;
+                    ShapeShifterCurseFabric.LOGGER.info("Animation system updated curForm after transform: " + curForm);
+                }
+            }
         }
 
         lastPos = new Vec3d(pos.x, pos.y, pos.z);

@@ -4,6 +4,7 @@ import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.PowerTypeRegistry;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
@@ -52,6 +53,13 @@ public class FormAbilityManager {
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
         // 存储
         PlayerNbtStorage.savePlayerFormComponent(world, player.getUuid().toString(), component);
+
+        // 添加网络同步：通知客户端形态已变化
+        if (player instanceof ServerPlayerEntity serverPlayer) {
+            net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C.sendFormChange(
+                serverPlayer, newForm.name());
+            ShapeShifterCurseFabric.LOGGER.info("Sent form change notification to client: " + newForm.name());
+        }
     }
 
     public static void loadForm(PlayerEntity player) {

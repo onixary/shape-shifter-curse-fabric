@@ -103,6 +103,42 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		}
 	}
 
+	// 添加动画刷新方法
+	public static void refreshPlayerAnimations() {
+		MinecraftClient client = MinecraftClient.getInstance();
+		if (client.player != null) {
+			ShapeShifterCurseFabric.LOGGER.info("Refreshing player animations on client");
+			// 强制重新初始化动画系统
+			// 这里可以触发动画重新注册或刷新
+		}
+	}
+
+	// 添加变身状态更新方法
+	private static boolean clientIsTransforming = false;
+	private static String clientTransformFromForm = null;
+	private static String clientTransformToForm = null;
+
+	public static void updateTransformState(boolean isTransforming, String fromForm, String toForm) {
+		clientIsTransforming = isTransforming;
+		clientTransformFromForm = fromForm;
+		clientTransformToForm = toForm;
+		ShapeShifterCurseFabric.LOGGER.info("Updated client transform state: " + isTransforming +
+											", from: " + fromForm + ", to: " + toForm);
+	}
+
+	// 获取客户端变身状态的方法（供动画系统使用）
+	public static boolean isClientTransforming() {
+		return clientIsTransforming;
+	}
+
+	public static String getClientTransformFromForm() {
+		return clientTransformFromForm;
+	}
+
+	public static String getClientTransformToForm() {
+		return clientTransformToForm;
+	}
+
 	@Override
 	public void onInitializeClient() {
 		RegPlayerAnimation.register();
@@ -124,6 +160,33 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		ClientPlayNetworking.registerGlobalReceiver(
 			ModPackets.SYNC_CURSED_MOON_DATA,
 			ModPacketsS2C::receiveCursedMoonData
+		);
+		// 注册新添加的网络包
+		ClientPlayNetworking.registerGlobalReceiver(
+			ModPackets.SYNC_FORM_CHANGE,
+			ModPacketsS2C::receiveFormChange
+		);
+		ClientPlayNetworking.registerGlobalReceiver(
+			ModPackets.SYNC_TRANSFORM_STATE,
+			ModPacketsS2C::receiveTransformState
+		);
+
+		// 注册新添加的TransformOverlay和FirstPerson相关的网络包处理器
+		ClientPlayNetworking.registerGlobalReceiver(
+			ModPackets.UPDATE_OVERLAY_EFFECT,
+			ModPacketsS2C::receiveUpdateOverlayEffect
+		);
+		ClientPlayNetworking.registerGlobalReceiver(
+			ModPackets.UPDATE_OVERLAY_FADE_EFFECT,
+			ModPacketsS2C::receiveUpdateOverlayFadeEffect
+		);
+		ClientPlayNetworking.registerGlobalReceiver(
+			ModPackets.TRANSFORM_COMPLETE_EFFECT,
+			ModPacketsS2C::receiveTransformCompleteEffect
+		);
+		ClientPlayNetworking.registerGlobalReceiver(
+			ModPackets.RESET_FIRST_PERSON,
+			ModPacketsS2C::receiveResetFirstPerson
 		);
 
 		ClientTickEvents.END_CLIENT_TICK.register(ShapeShifterCurseFabricClient::onClientTick);

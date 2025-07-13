@@ -147,8 +147,8 @@ public class CursedMoon {
             data.save(world);
 
             // 调试日志
-            ShapeShifterCurseFabric.LOGGER.info("CursedMoon probability check failed. Random: " + random +
-                                              ", currentPerSecondProbability: " + data.currentPerSecondProbability);
+            //ShapeShifterCurseFabric.LOGGER.info("CursedMoon probability check failed. Random: " + random +
+            //                                  ", currentPerSecondProbability: " + data.currentPerSecondProbability);
         }
     }
 

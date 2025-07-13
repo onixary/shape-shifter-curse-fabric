@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
+import net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
@@ -44,18 +45,33 @@ public class PlayerEventHandler {
 
             // load form first
             FormAbilityManager.getServerWorld(server.getOverworld());
-            FormAbilityManager.loadForm(player);
 
             // check if first join with mod using PlayerFormComponent
-            PlayerFormComponent formComponent = RegPlayerFormComponent.PLAYER_FORM.get(player);
-            if(formComponent.isFirstJoin()){
-                ShapeShifterCurseFabric.LOGGER.info("First join with mod");
-                // trigger advancement
+            //PlayerFormComponent formComponent = RegPlayerFormComponent.PLAYER_FORM.get(player);
+
+            // 检查是否存在保存的数据来判断是否首次加入
+            PlayerFormComponent savedComponent = PlayerNbtStorage.loadPlayerFormComponent(server.getOverworld(), player.getUuid().toString());
+
+            if (savedComponent != null) {
+                // 如果有保存的数据，说明不是首次加入，使用保存的数据
+                //formComponent.readFromNbt(savedComponent.writeToNbt(new net.minecraft.nbt.NbtCompound()));
+                RegPlayerFormComponent.PLAYER_FORM.sync(player);
+                ShapeShifterCurseFabric.LOGGER.info("Loaded existing player data, not first join");
+            } else {
+                // 如果没有保存的数据，说明是首次加入
+                ShapeShifterCurseFabric.LOGGER.info("No saved data found, this is first join with mod");
+                PlayerFormComponent formComponent = RegPlayerFormComponent.PLAYER_FORM.get(player);
+                // 确保 firstJoin 为 true
+                formComponent.setFirstJoin(true);
+                // 触发首次加入成就
                 ShapeShifterCurseFabric.ON_FIRST_JOIN_WITH_MOD.trigger(player);
-                // set first join to false
+                // 设置为 false 并保存
                 formComponent.setFirstJoin(false);
                 RegPlayerFormComponent.PLAYER_FORM.sync(player);
+                // 立即保存以防止重复触发
+                PlayerNbtStorage.savePlayerFormComponent(server.getOverworld(), player.getUuid().toString(), formComponent);
             }
+            FormAbilityManager.loadForm(player);
 
             // load attachment
             boolean hasAttachment = loadCurrentAttachment(server.getOverworld(), player);
