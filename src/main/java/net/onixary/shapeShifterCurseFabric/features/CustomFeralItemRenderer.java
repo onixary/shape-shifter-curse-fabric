@@ -399,9 +399,11 @@ public class CustomFeralItemRenderer {
 			Arm arm = bl ? player.getMainArm() : player.getMainArm().getOpposite();
 			matrices.push();
 			if (item.isEmpty()) {
-				if (bl && !player.isInvisible()) {
-					this.renderArmHoldingItem(matrices, vertexConsumers, light, equipProgress, swingProgress, arm);
-				}
+				// do not render arm
+
+				//if (bl && !player.isInvisible()) {
+				//	this.renderArmHoldingItem(matrices, vertexConsumers, light, equipProgress, swingProgress, arm);
+				//}
 			} else if (item.isOf(Items.FILLED_MAP)) {
 				if (bl && this.offHand.isEmpty()) {
 					this.renderMapInBothHands(matrices, vertexConsumers, light, pitch, equipProgress, swingProgress);

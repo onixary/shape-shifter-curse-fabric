@@ -33,7 +33,8 @@
     "cardinal-components-entity": [
       "net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents",
       "net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent",
-      "net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent"
+      "net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent",
+      "net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent"
     ],
     "calio:ordered-resource-listener": [
       "net.onixary.shapeShifterCurseFabric.integration.origins.Origins"
@@ -50,7 +51,8 @@
     "cardinal-components": [
       "origins:origin",
       "shape-shifter-curse:player_form",
-      "shape-shifter-curse:player_instinct_component"
+      "shape-shifter-curse:player_instinct_component",
+      "shape-shifter-curse:skin_settings"
     ]
   },
 

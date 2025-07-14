@@ -23,6 +23,8 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManage
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager;
+import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 import net.onixary.shapeShifterCurseFabric.team.MobTeamManager;
@@ -48,6 +50,9 @@ public class PlayerEventHandler {
 
             // check if first join with mod using PlayerFormComponent
             //PlayerFormComponent formComponent = RegPlayerFormComponent.PLAYER_FORM.get(player);
+
+            PlayerSkinComponent skinComponent = RegPlayerSkinComponent.SKIN_SETTINGS.get(player);
+            RegPlayerSkinComponent.SKIN_SETTINGS.sync(player);
 
             // 检查是否存在保存的数据来判断是否首次加入
             PlayerFormComponent savedComponent = PlayerNbtStorage.loadPlayerFormComponent(server.getOverworld(), player.getUuid().toString());

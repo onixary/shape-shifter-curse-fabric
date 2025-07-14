@@ -18,6 +18,7 @@ import net.onixary.shapeShifterCurseFabric.data.ConfigSSC;
 import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -37,21 +38,22 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
     )
 
     private void shape_shifter_curse$onRenderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
-        if(RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm() != PlayerForms.ORIGINAL_BEFORE_ENABLE && !ShapeShifterCurseFabric.CONFIG.keepOriginalSkin())
+        if(RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm() != PlayerForms.ORIGINAL_BEFORE_ENABLE )
         {
-
-            // 渲染手臂
-
-            Identifier CUSTOM_SKIN =
-                    new Identifier(ShapeShifterCurseFabric.MOD_ID, "textures/entity/base_player/ssc_base_skin.png");
-            RenderSystem.disableCull();
-            MinecraftClient.getInstance().getTextureManager().bindTexture(CUSTOM_SKIN);
-            VertexConsumer vertexConsumerArm = vertexConsumers.getBuffer(RenderLayer.getEntitySolid(CUSTOM_SKIN));
-            arm.render(matrices, vertexConsumerArm, light, OverlayTexture.DEFAULT_UV);
-            VertexConsumer vertexConsumerSleeve = vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(CUSTOM_SKIN));
-            sleeve.render(matrices, vertexConsumerSleeve, light, OverlayTexture.DEFAULT_UV);
-            RenderSystem.enableCull();
-            ci.cancel(); // 取消默认渲染
+            boolean keepOriginalSkin = RegPlayerSkinComponent.SKIN_SETTINGS.get(player).shouldKeepOriginalSkin();
+            if(!keepOriginalSkin){
+                // 渲染手臂
+                Identifier CUSTOM_SKIN =
+                        new Identifier(ShapeShifterCurseFabric.MOD_ID, "textures/entity/base_player/ssc_base_skin.png");
+                RenderSystem.disableCull();
+                MinecraftClient.getInstance().getTextureManager().bindTexture(CUSTOM_SKIN);
+                VertexConsumer vertexConsumerArm = vertexConsumers.getBuffer(RenderLayer.getEntitySolid(CUSTOM_SKIN));
+                arm.render(matrices, vertexConsumerArm, light, OverlayTexture.DEFAULT_UV);
+                VertexConsumer vertexConsumerSleeve = vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(CUSTOM_SKIN));
+                sleeve.render(matrices, vertexConsumerSleeve, light, OverlayTexture.DEFAULT_UV);
+                RenderSystem.enableCull();
+                ci.cancel(); // 取消默认渲染
+            }
         }
     }
 }
