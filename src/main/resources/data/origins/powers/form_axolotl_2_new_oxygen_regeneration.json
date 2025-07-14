@@ -1,0 +1,28 @@
+{
+  "type": "origins:action_over_time",
+  "entity_action": {
+    "type": "origins:heal",
+    "amount": 1
+  },
+  "interval": 200,
+  "condition":{
+    "type":"origins:and",
+    "conditions":[
+      {
+        "type": "origins:food_level",
+        "comparison": ">=",
+        "compare_to": 6
+      },
+      {
+        "type": "origins:health",
+        "comparison": "<",
+        "compare_to": 32
+      },
+      {
+        "type": "origins:air",
+        "comparison": ">",
+        "compare_to": 150
+      }
+    ]
+  }
+}

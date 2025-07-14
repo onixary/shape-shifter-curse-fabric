@@ -302,32 +302,32 @@
   "codex.form.original.cons": [" "],
   "codex.form.original.instincts": [" "],
 
-  "codex.form.axolotl0.title": ["\nThe curse has caused some visible changes to your body. Additionally, you feel an impulse to immerse yourself in water."],
-  "codex.form.axolotl0.appearance": ["Pale red tufts have grown on both sides of your cheeks, always moist and seemingly helping you absorb some oxygen\nYou notice wavy translucent fin membranes beginning to form at the ends of your limbs and on your newly grown tail\nYour skin appears to have become somewhat damp"],
-  "codex.form.axolotl0.pros": ["Thanks to the new oxygen supply, you can stay underwater longer\nYour skin creates less drag underwater, allowing slightly faster movement in water"],
-  "codex.form.axolotl0.cons": ["Your skin more easily collects sand, slightly slowing your movement on sandy terrain"],
-  "codex.form.axolotl0.instincts": ["You begin to desire to",
+  "codex.form.axolotl0.title": ["\nThe curse has caused visible changes to your body. Additionally, you feel an urge to immerse yourself in water."],
+  "codex.form.axolotl0.appearance": ["Pale red frond-like structures have grown on both sides of your cheeks. They remain constantly moist and seem to supplement your oxygen supply\nYou notice wavy translucent fins forming at your extremities and on the newly grown tail\nYour skin has begun to feel noticeably damp"],
+  "codex.form.axolotl0.pros": ["Thanks to additional oxygen absorption, you can stay underwater longer\nYour skin offers less resistance underwater, allowing slightly faster movement in aquatic environments"],
+  "codex.form.axolotl0.cons": ["Your skin easily accumulates particles and dust, slightly slowing your movement on loose terrain"],
+  "codex.form.axolotl0.instincts": ["You begin craving",
     {
-      "text":"stay in water", "color":"#c67681"
+      "text":"to stay in water", "color":"#c67681"
     }],
-  "codex.form.axolotl1.title": ["\nYour developed gills and powerful tail allow you to freely explore submerged structures. Freshly caught fish are now your ideal food"],
-  "codex.form.axolotl1.appearance": ["The gill tufts on your cheeks have grown further. In water, they can supply nearly all the oxygen you need\nThe fin membranes on your body have expanded, covering more areas. Their colors appear more vibrant\nYour tail has lengthened further and grown stronger\nYour neck has sprouted highly absorbent white fuzz"],
-  "codex.form.axolotl1.pros": ["With your more developed gills, you can breathe underwater without needing air\nYour movement in water is slightly faster\nYour body digests raw fish more efficiently, gaining more satiation from them\nYou have strong regeneration abilities; as long as your hunger level is above 3 bars, your health can slowly recover over time\nYour powerful tail lets you leap from water surfaces to reach higher places"],
-  "codex.form.axolotl1.cons": ["You can no longer wear helmets: your gills cannot tolerate foreign objects touching them\nYour skin more easily collects sand, slightly slowing movement on sandy terrain\nYour current digestive system can no longer process non-meat foods"],
-  "codex.form.axolotl1.instincts": ["You increasingly want to",
+  "codex.form.axolotl1.title": ["\nYour enlarged gills and powerful tail enable free exploration of submerged structures. Freshly caught fish make ideal nourishment"],
+  "codex.form.axolotl1.appearance": ["The gill fronds on your cheeks have expanded further. When submerged, they can supply nearly all your oxygen needs\nFins now cover more of your body, their colors growing more vibrant\nYour tail has lengthened and strengthened\nWater-absorbent white filaments have grown around your neck"],
+  "codex.form.axolotl1.pros": ["With enhanced gills, you can breathe underwater indefinitely\nYou move slightly faster in water. Your new fins and slick skin harness currents, granting swift movement against water flow\nYour body efficiently digests raw fish, providing greater satiation\nStrong regeneration slowly restores health when hunger is above 3 bars\nUsing your powerful tail, you can leap from water surfaces to higher ground"],
+  "codex.form.axolotl1.cons": ["Helmet equipment is impossible - your gills reject foreign contact\nSkin and fins easily accumulate particles/sand, reducing speed on loose ground\nYour digestive system can no longer process non-meat foods"],
+  "codex.form.axolotl1.instincts": ["The desire to",
     {
-      "text":"stay in water", "color":"#c67681"
+      "text":"remain in water", "color":"#c67681"
     },
     {
-      "text":"\nEat more raw fish", "color":"#c67681"
-    },"The thought begins to attract you",
+      "text":"\nConsume more raw fish", "color":"#c67681"
+    },"grows stronger",
     {
-      "text":"\nWander among dripstone clusters", "color":"#c67681"
-    },"The thought begins to attract you"],
-  "codex.form.axolotl2.title": ["\nAs an amphibian, you're a predator in water while still capable of land movement - just remember to stay moist"],
-  "codex.form.axolotl2.appearance": ["Your tail now resembles an extension of your torso, occupying nearly half your height\nDeveloped gill tufts take up much space on your head. They almost replace lungs - as long as they stay moist, you can get ample oxygen without breathing\nTranslucent fin membranes have spread across most of your body. Underwater, they rhythmically undulate with the currents\nWhite fuzz nearly covers your chest and back. Like sponges, they store water to keep you moist on land for extended periods"],
-  "codex.form.axolotl2.pros": ["Due to reliance on gill respiration, you must stay moist at all times -\nYour oxygen meter now indicates moisture level. It replenishes in water and slowly depletes on land\nDrinking water bottles or any potions also replenishes moisture\n\nYour body draws strength from water. When moisture isn't zero, your max health increases significantly\nYou have strong regeneration abilities; as long as your hunger level is above 3 bars, your health can slowly recover over time\n\nRaw fish provides greater satiation\nDeveloped fin membranes and strong tail let you move faster in water. They allow leaping from water and help you hover without sinking\nBlunt claws at limb ends enhance underwater grip, letting you break blocks underwater without hindrance\nBody changes allow crawling quickly through tight spaces"],
-  "codex.form.axolotl2.cons": ["Moisture is now your lifeline. When depleted, your max health and movement speed decrease dramatically, making movement nearly impossible\n\nYou can no longer wear helmets\nYour movement is slower on sandy terrain\nYou can only eat meat"],
+      "text":"\nThe urge to wander through drip-leaf clusters", "color":"#c67681"
+    },"intensifies"],
+  "codex.form.axolotl2.title": ["\nAs an amphibious predator, you dominate aquatic environments while remaining functional on land - though moisture must be maintained"],
+  "codex.form.axolotl2.appearance": ["Your tail now functions as a true extension of your torso, comprising nearly half your height\nProminent gill fronds occupy significant head space. When moistened, they provide abundant oxygen, eliminating lung dependency\nTranslucent fins extend across most of your body, rhythmically undulating underwater\nWhite filaments cover your chest and back like a spongy layer, storing moisture for extended land excursions"],
+  "codex.form.axolotl2.pros": ["Your gill-dependent physiology requires constant moisture—\nYour oxygen bar now indicates moisture level. It replenishes in water and depletes slowly on land\nConsuming water bottles or any potions also restores moisture\n\nYour body draws strength from water. Maximum health now scales with moisture level\nPowerful regeneration slowly heals you when well-hydrated and above 3 hunger bars\nRaw fish provide greater satiation\n\nYour powerful tail enables faster aquatic movement. You can leap freely from water surfaces and sprint forward underwater by pressing sprint\nFully developed fins act like sails, harnessing water currents for rapid travel\nBlunt claws provide exceptional grip for unobstructed block breaking underwater\nYour streamlined body allows swift crawling through tight spaces"],
+  "codex.form.axolotl2.cons": ["Moisture is now your lifeline. When dehydrated, maximum health and movement speed drastically decrease, nearly immobilizing you\n\nHelmet equipment remains impossible\nMoist skin/fins gather particles/dust, slowing movement on loose terrain\nYou can only consume meat"],
   "codex.form.axolotl2.instincts": [" "],
 
   "codex.form.ocelot0.title": ["\nThe curse has caused some visible changes. You notice your body moves more naturally when sneaking"],

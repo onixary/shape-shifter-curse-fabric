@@ -17,7 +17,8 @@
     "block.SweetBerryBushBlockMixin",
     "PotionStackMixin",
     "ThrowablePotionStackMixin",
-    "mob.MobEntityTeamMixin"
+    "mob.MobEntityTeamMixin",
+    "WaterFlexibilityMixin"
   ],
   "client": [
     "IEntityRenderDispatcherAccessor",

@@ -1,0 +1,30 @@
+{
+  "type": "origins:conditioned_attribute",
+  "modifier": {
+    "attribute": "minecraft:generic.movement_speed",
+    "operation": "multiply_total",
+    "value": -0.2,
+    "name": "Decreased speed on sand"
+  },
+  "tick_rate": 20,
+  "condition": {
+    "type": "origins:or",
+    "conditions": [
+      {
+        "type": "origins:on_block",
+        "block_condition": {
+          "type": "origins:in_tag",
+          "tag": "origins:puff_block"
+        }
+      },
+      {
+        "type": "origins:on_block",
+        "block_condition": {
+          "type": "origins:block_state",
+          "property": "snowy",
+          "value": true
+        }
+      }
+    ]
+  }
+}

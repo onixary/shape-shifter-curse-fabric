@@ -1,0 +1,27 @@
+{
+  "type":"origins:active_self",
+  "entity_action":{
+    "type":"origins:add_velocity",
+    "z":1.6,
+    "space":"local"
+  },
+  "cooldown":100,
+  "hud_render": {
+    "should_render": false
+  },
+  "key": {
+    "key": "key.sprint",
+    "continuous": false
+  },
+  "condition":{
+    "type":"origins:and",
+    "conditions":[
+      {
+        "type":"origins:fluid_height",
+        "fluid":"minecraft:water",
+        "comparison":">=",
+        "compare_to":1
+      }
+    ]
+  }
+}

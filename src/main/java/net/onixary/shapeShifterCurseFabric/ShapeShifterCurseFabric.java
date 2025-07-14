@@ -66,8 +66,6 @@ import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.Effe
 public class ShapeShifterCurseFabric implements ModInitializer {
 
     public static final String MOD_ID = "shape-shifter-curse";
-    // 使用AuthMe模组获取真实的持久UUID来记录保存，因此不需要使用之前很蠢的测试UUID了
-    // public static final String DEBUG_UUID = "testUUID-3d9ab571-1ea5-360b-bc9d-77cd0b2f72a9";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static final ConfigSSC CONFIG = ConfigSSC.createAndLoad();
     // 用于在游戏内测试调参用的临时变量
