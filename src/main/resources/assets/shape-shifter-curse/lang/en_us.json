@@ -319,7 +319,7 @@
       "text":"remain in water", "color":"#c67681"
     },
     {
-      "text":"\nConsume more raw fish", "color":"#c67681"
+      "text":"\nHunt down and consume more raw fish", "color":"#c67681"
     },"grows stronger",
     {
       "text":"\nThe urge to wander through drip-leaf clusters", "color":"#c67681"
@@ -348,7 +348,7 @@
     },
     "\nYou feel an inner urge to",
     {
-      "text":"hunt more livestock", "color":"#c67681"
+      "text":"hunt more mobs using your bare claw", "color":"#c67681"
     },
     "\nYou feel an inner urge to",
     {
@@ -390,13 +390,18 @@
   "codex.form.bat1.instincts": ["You increasingly want to",
     {
       "text":"stay in darkness", "color":"#c67681"
-    },
+    },"\nThe thought of ",
     {
-      "text":"\nEat more fruits", "color":"#c67681"
-    },"The thought begins to attract you",
+      "text":"eat more fruits", "color":"#c67681"
+    }," begins to attract you",
+    "\nThe thought of ",
     {
-      "text":"\nBe surrounded by dripstones", "color":"#c67681"
-    },"The thought begins to attract you"],
+      "text":"jump into air", "color":"#c67681"
+    }," begins to attract you",
+    "\nThe thought of ",
+    {
+      "text":"be surrounded by dripstones", "color":"#c67681"
+    }," begins to attract you"],
   "codex.form.bat2.title": ["\nAs a chiropteran, you enjoy gliding through night skies with your kind."],
   "codex.form.bat2.appearance": ["Your ears now dominate much head space, detecting minute sounds\nYour face extends forward forming a short muzzle with sharp tiny teeth\nYour arms fully integrate with wing membranes. Though still too heavy for free flight, they suffice for gliding and diving\nYour foreclaws can't handle bulky tools/weapons\nNew foot claws, digitigrade legs and balancing long tail suit diving/gliding. With effort, you can still run\nBody fuzz maintains warmth in chilly caves"],
   "codex.form.bat2.pros": ["You now see clearly in darkness. In darkness, you also feel more agile\nYour foreclaws are hard and strong, dealing decent barehanded damage. They let you rapidly break blocks and normally harvest ores\nWhile still flightless, membrane flapping boosts jump height and enables slow descent from any height. They function like elytra\nYour body absorbs non-meat foods more efficiently - increased satiation\nYour size lets you squeeze into 1-block spaces"],

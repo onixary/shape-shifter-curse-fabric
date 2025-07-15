@@ -2,8 +2,9 @@ package net.onixary.shapeShifterCurseFabric.player_form.instinct;
 
 public enum InstinctEffectType {
     // 立即效果（值类型）
-    FORM_OCELOT_ATTACK_LIVESTOCK(3.0f),
+    FORM_OCELOT_ATTACK_LIVESTOCK(0.8f),
     FORM_FAMILIAR_FOX_ABSORB_ENERGY(2.5f),
+    FORM_AXOLOTL_ATTACK_FISH(0.8f),
     // 供自定义形态使用的效果
     FORM_INSTANT_INSTINCT_MEDIUM(3.0f),
     FORM_INSTANT_INSTINCT_LARGE(5.0f),
@@ -14,6 +15,7 @@ public enum InstinctEffectType {
     FORM_USE_CATALYST(1.95f / 2),
 
     FORM_BAT_IN_DARK(0.004f),
+    FORM_BAT_IN_AIR(0.008f),
     FORM_BAT_EAT_FRUIT(0.1f),
     FORM_BAT_NEAR_DRIPSTONE(0.006f),
 
@@ -54,7 +56,8 @@ public enum InstinctEffectType {
                 || this == FORM_USE_GOLDEN_APPLE
                 || this == FORM_USE_CATALYST
                 || this == FORM_OCELOT_EAT_RAW_MEAT
-                || this == FORM_OCELOT_ON_LEAF;
+                || this == FORM_OCELOT_ON_LEAF
+                || this == FORM_BAT_IN_AIR;
     }
 
     public float getValue() {

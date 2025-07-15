@@ -214,7 +214,7 @@ public class TransformManager {
             return currentTransformEffect.currentToForm;
         }
         else{
-            return FormRandomSelector.getRandomFormWithIndexZero();
+            return FormRandomSelector.getRandomFormFromPredefined();
         }
     }
 

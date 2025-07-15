@@ -1,0 +1,25 @@
+﻿{
+  "type": "origins:conditioned_attribute",
+  "modifier": {
+    "attribute": "minecraft:generic.safe_fall_distance",
+    "operation": "addition",
+    "value": 1.5,
+    "name": "Increased sprinting speed"
+  },
+  "tick_rate": 10,
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:fluid_height",
+        "fluid": "minecraft:water",
+        "comparison": "<=",
+        "compare_to": 0
+      },
+      {
+        "type": "origins:on_block",
+        "inverted": true
+      }
+    ]
+  }
+}
