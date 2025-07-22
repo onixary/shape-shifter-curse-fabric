@@ -8,6 +8,7 @@ public class StaticParams {
     }
     // cursed moon data
     public static final int CURSED_MOON_INTERVAL_DAY = 5;
+    // 概率期望时间约为1720秒 约等于3天
     public static final float CURSED_MOON_BASE_PROBABILITY = 0.0001f;
     public static final float CURSED_MOON_PROBABILITY_INCREASE = 0.00000042f;
     //public static final float CURSED_MOON_PROBABILITY_INCREASE = 0.0001f;

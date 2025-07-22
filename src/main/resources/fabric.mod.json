@@ -77,7 +77,6 @@
   "breaks": {
     "origins": ">0.0.0",
     "optifabric": "<=1.11.18",
-    "identity": "<1.14.2-beta",
-    "geckolib": ">0.0.0"
+    "identity": "<1.14.2-beta"
   }
 }
