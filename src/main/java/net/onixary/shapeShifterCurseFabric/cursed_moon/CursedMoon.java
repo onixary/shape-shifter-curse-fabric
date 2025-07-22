@@ -101,15 +101,27 @@ public class CursedMoon {
             return;
         }
 
-        // 每秒进行概率判定
-        float random = world.getRandom().nextFloat();
-
         // 调试日志（可选，避免过多日志）
         if (world.getTime() % 200 == 0) { // 每10秒输出一次调试信息
             ShapeShifterCurseFabric.LOGGER.info("CursedMoon probability check: currentPerSecondProbability=" +
                                               data.currentPerSecondProbability + ", multiplier=" + data.probabilityIncrease);
         }
+        // 增强概率控制，保证诅咒之月事件间隔时间不小于2天
+        if((data.currentPerSecondProbability - data.basePerSecondProbability) / data.probabilityIncrease < 1200){
+            // 增加概率
+            data.currentPerSecondProbability += data.probabilityIncrease;
+            // 限制最大概率
+            if (data.currentPerSecondProbability > CURSED_MOON_PROBABILITY_MAX) {
+                data.currentPerSecondProbability = CURSED_MOON_PROBABILITY_MAX;
+            }
 
+            //ShapeShifterCurseFabric.LOGGER.info("CursedMoon probability too low to trigger. " +
+            //                                  "Current second: " + (data.currentPerSecondProbability - data.basePerSecondProbability) / data.probabilityIncrease);
+            return;
+        }
+
+        // 每秒进行概率判定
+        float random = world.getRandom().nextFloat();
         if (random < data.currentPerSecondProbability) {
             // 判定成功，今晚将是诅咒之月
             data.isTonightCursedMoon = true;
