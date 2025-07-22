@@ -2,11 +2,16 @@ package net.onixary.shapeShifterCurseFabric.data;
 
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.WorldSavePath;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.PlayerInstinctComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent;
+import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 
 import java.io.IOException;
@@ -155,5 +160,17 @@ public class PlayerNbtStorage {
         }
         ShapeShifterCurseFabric.LOGGER.info("PlayerInstinctComponent load failed, returning null");
         return null;
+    }
+
+    public static void saveAll(ServerWorld world, ServerPlayerEntity player) {
+        FormAbilityManager.saveForm(player);
+        PlayerNbtStorage.savePlayerFormComponent(world, player.getUuid().toString(),
+                RegPlayerFormComponent.PLAYER_FORM.get(player));
+        PlayerEffectAttachment attachment = player.getAttached(EffectManager.EFFECT_ATTACHMENT);
+        if (attachment != null) {
+            PlayerNbtStorage.saveAttachment(world, player.getUuid().toString(),attachment);
+        }
+        PlayerInstinctComponent comp = player.getComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
+        savePlayerInstinctComponent(world, player.getUuid().toString(), comp);
     }
 }

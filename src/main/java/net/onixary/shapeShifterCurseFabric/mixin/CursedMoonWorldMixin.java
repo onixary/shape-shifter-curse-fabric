@@ -63,7 +63,7 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
 
             // 重置所有玩家的效果状态
             for (ServerPlayerEntity player : world.getPlayers()) {
-                CursedMoon.resetMoonEffectForNewDay(player);
+                CursedMoon.resetMoonEffect(player);
             }
         }
 
@@ -158,6 +158,7 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
 
                     RegPlayerFormComponent.PLAYER_FORM.get(player).setByCursedMoon(false);
                     RegPlayerFormComponent.PLAYER_FORM.sync(player);
+                    FormAbilityManager.saveForm(player);
                 }
             }
         }

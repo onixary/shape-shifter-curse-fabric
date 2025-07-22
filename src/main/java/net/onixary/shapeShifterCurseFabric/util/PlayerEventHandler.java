@@ -23,6 +23,9 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManage
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager;
+import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
+import net.onixary.shapeShifterCurseFabric.player_form.instinct.PlayerInstinctComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
@@ -30,6 +33,7 @@ import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffec
 import net.onixary.shapeShifterCurseFabric.team.MobTeamManager;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.cursedMoonData;
+import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.savePlayerInstinctComponent;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker.loadInstinct;
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.removeVisualEffects;
 import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.*;
@@ -123,18 +127,50 @@ public class PlayerEventHandler {
 
             copyTransformativeEffect(oldPlayer, newPlayer);
             copyFormAndAbility(oldPlayer, newPlayer);
+            PlayerNbtStorage.saveAll(newPlayer.getServerWorld(), newPlayer);
             //PlayerTeamHandler.updatePlayerTeam(newPlayer);
         });
 
         //load event
         ServerWorldEvents.LOAD.register((server, world) -> {
             for (ServerPlayerEntity player : world.getPlayers()) {
-                PlayerFormComponent component = RegPlayerFormComponent.PLAYER_FORM.get(player);
-                FormAbilityManager.applyForm(player, component.getCurrentForm());
+                FormAbilityManager.loadForm(player);
 
+                // load attachment
+                boolean hasAttachment = loadCurrentAttachment(server.getOverworld(), player);
+                if(!hasAttachment) {
+                    resetAttachment(player);
+                }
+                else{
+                    ShapeShifterCurseFabric.LOGGER.info("Attachment loaded ");
+                }
+                ModPacketsS2C.sendSyncEffectAttachment(player, player.getAttached(EffectManager.EFFECT_ATTACHMENT));
+
+                // load instinct
+                InstinctManager.getServerWorld(server.getOverworld());
+                loadInstinct(player);
+
+                // load cursed moon data
+                ShapeShifterCurseFabric.LOGGER.info("Cursed moon enabled");
+                cursedMoonData.getInstance().load(server.getOverworld());
+                cursedMoonData.getInstance().enableCursedMoon(server.getOverworld());
+                boolean currentIsCursedMoon = cursedMoonData.getInstance().isTonightCursedMoon;
+                boolean currentIsNight = CursedMoon.isNight();
+
+                // 立即同步当前状态给玩家
+                ModPacketsS2C.sendCursedMoonData(player, CursedMoon.day_time, CursedMoon.day,
+                        currentIsCursedMoon, currentIsNight);
+
+                ShapeShifterCurseFabric.LOGGER.info("向玩家同步诅咒之月状态: " + currentIsCursedMoon);
+                cursedMoonData.getInstance().loadPlayerStates(server.getOverworld(), player);
+                cursedMoonData.getInstance().save(server.getOverworld());
+
+                // reset moon effect
+                CursedMoon.resetMoonEffect(player);
+
+                // Set doDaylightCycle to true forced
+                server.getGameRules().get(GameRules.DO_DAYLIGHT_CYCLE).set(true, server);
                 MobTeamManager.registerTeam(world);
-                //PlayerTeamHandler.updatePlayerTeam(player);
-                //handleEntityTeam(world);
             }
         });
 
@@ -146,6 +182,7 @@ public class PlayerEventHandler {
                     // 保存所有玩家状态
                     for (ServerPlayerEntity player : world.getPlayers()) {
                         cursedMoonData.getInstance().savePlayerStates(world, player);
+                        PlayerNbtStorage.saveAll(world, player);
                     }
                 }
             }

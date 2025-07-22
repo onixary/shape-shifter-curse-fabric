@@ -52,7 +52,7 @@ public class FormAbilityManager {
         component.setCurrentForm(newForm);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
         // 存储
-        PlayerNbtStorage.savePlayerFormComponent(world, player.getUuid().toString(), component);
+        FormAbilityManager.saveForm(player);
 
         // 添加网络同步：通知客户端形态已变化
         if (player instanceof ServerPlayerEntity serverPlayer) {

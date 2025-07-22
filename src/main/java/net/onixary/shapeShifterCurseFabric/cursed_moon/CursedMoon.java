@@ -11,6 +11,7 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
+import net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
@@ -284,6 +285,7 @@ public class CursedMoon {
             ShapeShifterCurseFabric.LOGGER.info("Cursed Moon ends!");
             TransformManager.setIsByCursedMoonEnd(true);
             RegPlayerFormComponent.PLAYER_FORM.get(player).setByCursedMoon(true);
+            FormAbilityManager.saveForm(player);
             RegPlayerFormComponent.PLAYER_FORM.sync(player);
             // transform
             if(wasByCursedMoon && !RegPlayerFormComponent.PLAYER_FORM.get(player).isByCure()){
@@ -292,25 +294,19 @@ public class CursedMoon {
             //clearFormFlag(player);
             //TransformManager.clearMoonEndFlags(player);
             formComp.setEndMoonEffectApplied(true);
+            FormAbilityManager.saveForm(player);
             RegPlayerFormComponent.PLAYER_FORM.sync(player);
+            FormAbilityManager.saveForm(player);
         }
     }
 
     public static void resetMoonEffect(ServerPlayerEntity player){
-        // when player exit game, reset moon effect so that it can be triggered again
+        // reset moon effect so that it can be triggered again
         PlayerFormComponent formComp = RegPlayerFormComponent.PLAYER_FORM.get(player);
         formComp.setEndMoonEffectApplied(false);
         formComp.setMoonEffectApplied(false);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
-    }
-
-    public static void resetMoonEffectForNewDay(ServerPlayerEntity player){
-        // 当新的一天开始时，重置月亮效果标志，允许下一次 CursedMoon 事件触发
-        PlayerFormComponent formComp = RegPlayerFormComponent.PLAYER_FORM.get(player);
-        formComp.setEndMoonEffectApplied(false);
-        formComp.setMoonEffectApplied(false);
-        RegPlayerFormComponent.PLAYER_FORM.sync(player);
-        ShapeShifterCurseFabric.LOGGER.info("Reset moon effect flags for new day for player: " + player.getGameProfile().getName());
+        FormAbilityManager.saveForm(player);
     }
 
     public static void resetCursedMoonForNewDay(ServerWorld world) {
