@@ -1,5 +1,5 @@
 {
-  "type": "origins:arrow_dodge",
+  "type": "origins:projectile_dodge",
   "range": 7.0,
   "trigger_distance" : 7.0,
   "dodge_speed": 2,

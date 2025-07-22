@@ -15,7 +15,7 @@ public class AdditionalPowers {
         register(LevitatePower.getFactory());
         register(AttractByEntityPower.getFactory());
         register(LootingPower.createFactory());
-        register(ArrowDodgePower.createFactory());
+        register(ProjectileDodgePower.createFactory());
         register(WaterFlexibilityPower.createFactory());
     }
 
