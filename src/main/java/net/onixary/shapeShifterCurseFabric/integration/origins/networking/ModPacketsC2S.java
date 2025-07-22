@@ -97,7 +97,10 @@ public class ModPacketsC2S {
     }
 
     private static void handleHandshakeReply(MinecraftServer minecraftServer, ServerLoginNetworkHandler serverLoginNetworkHandler, boolean understood, PacketByteBuf packetByteBuf, ServerLoginNetworking.LoginSynchronizer loginSynchronizer, PacketSender packetSender) {
-        if (understood) {
+        // Origins mod被嵌入在mod中，跳过版本检测：
+        // Origins mod is embedded in the mod, skipping version check
+
+        /*if (understood) {
             int clientSemVerLength = packetByteBuf.readInt();
             int[] clientSemVer = new int[clientSemVerLength];
             boolean mismatch = clientSemVerLength != Origins.SEMVER.length;
@@ -119,7 +122,7 @@ public class ModPacketsC2S {
             }
         } else {
             serverLoginNetworkHandler.disconnect(Text.of("This server requires you to install the Origins mod (v" + Origins.VERSION + ") to play."));
-        }
+        }*/
     }
 
     private static void handshake(ServerLoginNetworkHandler serverLoginNetworkHandler, MinecraftServer minecraftServer, PacketSender packetSender, ServerLoginNetworking.LoginSynchronizer loginSynchronizer) {
