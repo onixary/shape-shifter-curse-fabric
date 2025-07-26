@@ -5,6 +5,13 @@
     "minecraft:chorus_fruit",
     "minecraft:melon_slice",
     "minecraft:sweet_berries",
-    "minecraft:glow_berries"
+    "minecraft:glow_berries",
+    "farmersdelight:apple_pie",
+    "farmersdelight:apple_pie_slice",
+    "farmersdelight:glow_berry_custard",
+    "farmersdelight:melon_popsicle",
+    "farmersdelight:sweet_berry_cheesecake",
+    "farmersdelight:sweet_berry_cheesecake_slice",
+    "farmersdelight:sweet_berry_cookie"
   ]
 }

@@ -4,6 +4,8 @@
     "minecraft:cod",
     "minecraft:tropical_fish",
     "minecraft:pufferfish",
-    "minecraft:salmon"
+    "minecraft:salmon",
+    "farmersdelight:cod_slice",
+    "farmersdelight:salmon_slice"
   ]
 }
