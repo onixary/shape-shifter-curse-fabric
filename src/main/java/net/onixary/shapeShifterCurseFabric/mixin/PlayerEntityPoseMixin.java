@@ -6,6 +6,7 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandOutput;
 import net.minecraft.util.Nameable;
@@ -51,17 +52,47 @@ public abstract class PlayerEntityPoseMixin extends LivingEntity implements Name
         PlayerForms curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
         boolean isFeral = RegFormConfig.getConfig(curForm).getBodyType() == PlayerFormBodyType.FERAL;
         if(isFeral){
-            if(isSwimming()){
+            if (this.wouldPoseNotCollide(EntityPose.SWIMMING)) {
+                EntityPose entityPose;
+                if (this.isFallFlying()) {
+                    entityPose = EntityPose.FALL_FLYING;
+                } else if (this.isSleeping()) {
+                    entityPose = EntityPose.STANDING;
+                } else if (this.isSwimming()) {
+                    entityPose = EntityPose.SWIMMING;
+                } else if (this.isUsingRiptide()) {
+                    entityPose = EntityPose.SPIN_ATTACK;
+                } else if (this.isSneaking()) {
+                    entityPose = EntityPose.CROUCHING;
+                } else {
+                    entityPose = EntityPose.STANDING;
+                }
+
+                EntityPose entityPose2;
+                if (!this.isSpectator() && !this.hasVehicle() && !this.wouldPoseNotCollide(entityPose)) {
+                    if (this.wouldPoseNotCollide(EntityPose.CROUCHING)) {
+                        entityPose2 = EntityPose.CROUCHING;
+                    } else {
+                        entityPose2 = EntityPose.STANDING;
+                    }
+                } else {
+                    entityPose2 = entityPose;
+                }
+
+                this.setPose(entityPose2);
+            }
+            ci.cancel();
+
+            /*if(isSwimming()){
                 this.setPose(EntityPose.STANDING);
             }
-
             if(isSleeping()){
                 this.setPose(EntityPose.STANDING);
-            }
+            }*/
             //else if(this.isFallFlying()){
             //    this.setPose(EntityPose.STANDING);
             //}
-            ci.cancel();
+            //ci.cancel();
         }
     }
 }
