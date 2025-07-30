@@ -1,0 +1,64 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"axolotl_2_crawling_idle_new": {
+			"loop": true,
+			"bones": {
+				"head": {
+					"position": {
+						"vector": [0, 0, 2]
+					}
+				},
+				"torso": {
+					"rotation": {
+						"vector": [-2.03186, -2.27497, -1.47225]
+					},
+					"position": {
+						"vector": [0, 0, -0.5]
+					}
+				},
+				"rightArm": {
+					"rotation": {
+						"vector": [196.83273, 10.41101, -18.1722]
+					},
+					"position": {
+						"vector": [0.90094, -0.28975, -1.60935]
+					}
+				},
+				"leftArm": {
+					"rotation": {
+						"vector": [-168.29679, -16.7923, 21.01447]
+					},
+					"position": {
+						"vector": [-1.05896, 0.55046, -0.47901]
+					}
+				},
+				"rightLeg": {
+					"rotation": {
+						"vector": [-7.99572, 0.06526, 7.49972]
+					},
+					"position": {
+						"vector": [0, 0.99124, -0.69131]
+					}
+				},
+				"leftLeg": {
+					"rotation": {
+						"vector": [-7.5, 0, -7.5]
+					},
+					"position": {
+						"vector": [0, 0.9, -1.1]
+					}
+				},
+				"body": {
+					"rotation": {
+						"vector": [90, 0, 0]
+					},
+					"position": {
+						"vector": [0, -5, 12]
+					}
+				}
+			}
+		}
+	},
+	"azurelib_format_version": 2
+}

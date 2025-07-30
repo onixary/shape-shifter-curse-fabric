@@ -11,8 +11,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandOutput;
 import net.minecraft.util.Nameable;
 import net.minecraft.world.World;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.additional_power.PosePower;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
@@ -35,19 +33,7 @@ public abstract class PlayerEntityPoseMixin extends LivingEntity implements Name
     }
 
     @Inject(method = "updatePose", at = @At("HEAD"), cancellable = true)
-    private void eggolib$forcePose(CallbackInfo ci) {
-
-        PowerHolderComponent.getPowers(this, PosePower.class)
-                .stream()
-                .max(Comparator.comparing(PosePower::getPriority))
-                .ifPresent(p -> {
-                    if(isSneaking()){
-                        this.setPose(p.getPose());
-                        ci.cancel();
-                    }
-                });
-
-
+    private void forcePose(CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity) (Object) this;
         PlayerForms curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
         boolean isFeral = RegFormConfig.getConfig(curForm).getBodyType() == PlayerFormBodyType.FERAL;

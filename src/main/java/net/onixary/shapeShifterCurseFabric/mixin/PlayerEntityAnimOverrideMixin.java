@@ -126,7 +126,13 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         curForm = RegPlayerFormComponent.PLAYER_FORM.get(this).getCurrentForm();
 
         if (!isOnGround() && lastOnGround && getVelocity().y > 0) {
-            currentState = PlayerAnimState.ANIM_JUMP;
+            if(isSneaking()){
+                currentState = PlayerAnimState.ANIM_SNEAK_JUMP;
+            }
+            else{
+                currentState = PlayerAnimState.ANIM_JUMP;
+            }
+
         }
 
         if(!isOnGround() && lastOnGround && (Math.abs(getVelocity().z) > 0.15 || Math.abs(getVelocity().x) > 0.15)){
@@ -294,13 +300,24 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
             // 挖掘动画为loop，攻击动画为单次
             if (continueSwingAnimCounter < 10) {
                 continueSwingAnimCounter++;
-                currentState = PlayerAnimState.ANIM_ATTACK_ONCE;
+                if(isSneaking()){
+                    currentState = PlayerAnimState.ANIM_SNEAK_ATTACK_ONCE;
+                }
+                else{
+                    currentState = PlayerAnimState.ANIM_ATTACK_ONCE;
+                }
+
             } else {
                 if(isSleeping()){
                     currentState = PlayerAnimState.ANIM_SLEEPING;
                 }
                 else{
-                    currentState = PlayerAnimState.ANIM_TOOL_SWING;
+                    if(isSneaking()){
+                        currentState = PlayerAnimState.ANIM_SNEAK_TOOL_SWING;
+                    }
+                    else{
+                        currentState = PlayerAnimState.ANIM_TOOL_SWING;
+                    }
                 }
             }
         }

@@ -53,7 +53,7 @@ public abstract class EntityLootingMixin {
         int totalLooting = toolLooting + powerLooting;
 
         // 如果没有效果，跳过
-        if (totalLooting <= 0) return;
+        if (totalLooting <= 0 || powerLooting <= 0) return;
 
         // 获取实体的战利品表ID
         EntityType<?> entityType = entity.getType();
