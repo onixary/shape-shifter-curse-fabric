@@ -30,7 +30,6 @@ import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.*;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -185,10 +184,10 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
             if (world.getBlockState(getBlockPos()).getBlock() instanceof LadderBlock && !isOnGround() && !jumping)
             {
-                currentState = PlayerAnimState.ANIM_CLIMBING_IDLE;
+                currentState = PlayerAnimState.ANIM_CLIMB_IDLE;
                 if (getVelocity().y > 0)
                 {
-                    currentState = PlayerAnimState.ANIM_CLIMBING;
+                    currentState = PlayerAnimState.ANIM_CLIMB;
                 }
             }
             else if (isUsingItem())
@@ -202,6 +201,10 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                     //todo
                 }
             }
+            else if (this.getAbilities().flying)
+            {
+                currentState = PlayerAnimState.ANIM_CREATIVE_FLY;
+            }
             else if (isFallFlying())
             {
                 currentState = PlayerAnimState.ANIM_ELYTRA_FLY;
@@ -209,7 +212,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
             else if ((isOnGround() || onGroundInWater) && !isAttackAnim)
             {
                 if(isSleeping()){
-                    currentState = PlayerAnimState.ANIM_SLEEPING;
+                    currentState = PlayerAnimState.ANIM_SLEEP;
                 }
                 else{
                     currentState = PlayerAnimState.ANIM_IDLE;
@@ -219,7 +222,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                 {
                     if (this.isSwimming() || this.isSprinting())
                     {
-                        currentState = PlayerAnimState.ANIM_SWIMMING;
+                        currentState = PlayerAnimState.ANIM_SWIM;
                     }
                 }
                 else if (isSneaking())
@@ -270,15 +273,14 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
                 if (!isOnGround() && getVelocity().y < 0 && hasSlowFall)
                 {
-                    // todo: hasSlowFall之后他要替换成form相关的逻辑
-                    currentState = PlayerAnimState.ANIM_SLOW_FALLING;
+                    currentState = PlayerAnimState.ANIM_SLOW_FALL;
                 }
             }
             if (isSubmergedInWater() || isInLava())
             {
                 if (this.isSwimming() || this.isSprinting())
                 {
-                    currentState = PlayerAnimState.ANIM_SWIMMING;
+                    currentState = PlayerAnimState.ANIM_SWIM;
                 }
                 else
                 {
@@ -287,9 +289,9 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
             }
             else if (isCrawling()) {
                 if (isWalking) {
-                    currentState = PlayerAnimState.ANIM_CRAWLING;
+                    currentState = PlayerAnimState.ANIM_CRAWL;
                 } else {
-                    currentState = PlayerAnimState.ANIM_CRAWLING_IDLE;
+                    currentState = PlayerAnimState.ANIM_CRAWL_IDLE;
                 }
             }
             continueSwingAnimCounter = 0; // 重置挖掘动画计数器
@@ -309,7 +311,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
             } else {
                 if(isSleeping()){
-                    currentState = PlayerAnimState.ANIM_SLEEPING;
+                    currentState = PlayerAnimState.ANIM_SLEEP;
                 }
                 else{
                     if(isSneaking()){

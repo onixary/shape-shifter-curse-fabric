@@ -43,23 +43,27 @@ public class AnimationPlayerOcelot3 {
                 return anim_run;
             case ANIM_SWIM_IDLE:
                 return anim_float;
-            case ANIM_SWIMMING:
+            case ANIM_SWIM:
                 return anim_swim;
             case ANIM_TOOL_SWING:
+            case ANIM_SNEAK_TOOL_SWING:
                 return anim_dig;
             case ANIM_JUMP:
+            case ANIM_SNEAK_JUMP:
                 return anim_jump;
-            case ANIM_CLIMBING_IDLE:
-            case ANIM_CLIMBING:
+            case ANIM_CLIMB_IDLE:
+            case ANIM_CLIMB:
                 return anim_climb;
-            case ANIM_FALLING:
+            case ANIM_FALL:
                 return anim_fall;
-            case ANIM_SLEEPING:
+            case ANIM_SLEEP:
                 return anim_sleep;
             case ANIM_ELYTRA_FLY:
+            case ANIM_CREATIVE_FLY:
                 return anim_elytra_fly;
 
             case ANIM_ATTACK_ONCE:
+            case ANIM_SNEAK_ATTACK_ONCE:
                 return anim_attack;
 
             default:

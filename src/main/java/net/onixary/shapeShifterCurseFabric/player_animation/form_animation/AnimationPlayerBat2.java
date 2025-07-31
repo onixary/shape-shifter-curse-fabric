@@ -22,16 +22,19 @@ public class AnimationPlayerBat2 {
             case ANIM_SNEAK_IDLE:
                 return anim_sneak_idle;
 
-                case ANIM_JUMP:
+            case ANIM_JUMP:
                 return anim_jump;
 
-                case ANIM_SLOW_FALLING:
+            case ANIM_SLOW_FALL:
+            case ANIM_CREATIVE_FLY:
                 return anim_slow_falling;
 
-                case ANIM_TOOL_SWING:
+            case ANIM_TOOL_SWING:
+            case ANIM_SNEAK_TOOL_SWING:
                 return anim_tool_swing;
 
-                case ANIM_ATTACK_ONCE:
+            case ANIM_ATTACK_ONCE:
+            case ANIM_SNEAK_ATTACK_ONCE:
                 return anim_attack;
 
             default:

@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Catalyst  extends Item {
+public class Catalyst extends Item {
     public Catalyst(Settings settings) {
         super(settings
                 .maxCount(16)
@@ -42,7 +42,24 @@ public class Catalyst  extends Item {
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         // 实际效果在Origin的Power json中进行处理
-        return super.finishUsing(stack, world, user);
+        super.finishUsing(stack, world, user);
+
+        if (user instanceof PlayerEntity playerEntity) {
+            if (playerEntity.getAbilities().creativeMode) {
+                return stack;
+            }
+        }
+
+        if (stack.isEmpty()) {
+            return new ItemStack(Items.BOWL);
+        } else {
+            if (user instanceof PlayerEntity playerEntity) {
+                if (!playerEntity.getInventory().insertStack(new ItemStack(Items.BOWL))) {
+                    playerEntity.dropItem(new ItemStack(Items.BOWL), false);
+                }
+            }
+            return stack;
+        }
     }
 
     @Override

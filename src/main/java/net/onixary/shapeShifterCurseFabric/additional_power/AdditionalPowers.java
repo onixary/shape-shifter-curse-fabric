@@ -16,6 +16,7 @@ public class AdditionalPowers {
         register(LootingPower.createFactory());
         register(ProjectileDodgePower.createFactory());
         register(WaterFlexibilityPower.createFactory());
+        register(AlwaysSweepingPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

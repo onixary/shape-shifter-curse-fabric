@@ -22,6 +22,7 @@ public class AnimationPlayerPhiSP {
     private static AnimationHolder anim_fall = AnimationHolder.EMPTY;
     private static AnimationHolder anim_attack = AnimationHolder.EMPTY;
     private static AnimationHolder anim_sleep = AnimationHolder.EMPTY;
+    private static AnimationHolder anim_elytra_fly = AnimationHolder.EMPTY;
 
 
     public static AnimationHolder getFormAnimToPlay(PlayerAnimState currentState) {
@@ -39,22 +40,28 @@ public class AnimationPlayerPhiSP {
                 return anim_run;
             case ANIM_SWIM_IDLE:
                 return anim_float;
-            case ANIM_SWIMMING:
+            case ANIM_SWIM:
                 return anim_swim;
             case ANIM_TOOL_SWING:
+            case ANIM_SNEAK_TOOL_SWING:
                 return anim_dig;
             case ANIM_JUMP:
+            case ANIM_SNEAK_JUMP:
                 return anim_jump;
-            case ANIM_CLIMBING_IDLE:
-            case ANIM_CLIMBING:
+            case ANIM_CLIMB_IDLE:
+            case ANIM_CLIMB:
                 return anim_climb;
-            case ANIM_FALLING:
+            case ANIM_FALL:
                 return anim_fall;
-            case ANIM_SLEEPING:
+            case ANIM_SLEEP:
                 return anim_sleep;
 
             case ANIM_ATTACK_ONCE:
+            case ANIM_SNEAK_ATTACK_ONCE:
                 return anim_attack;
+            case ANIM_ELYTRA_FLY:
+            case ANIM_CREATIVE_FLY:
+                return anim_elytra_fly;
 
             default:
                 return anim_idle;
@@ -75,5 +82,6 @@ public class AnimationPlayerPhiSP {
         anim_fall = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_fall"), true);
         anim_attack = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_attack"), true);
         anim_sleep = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sleep"), true);
+        anim_elytra_fly = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_elytra_fly"), true);
     }
 }

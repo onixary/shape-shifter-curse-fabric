@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
@@ -40,7 +41,23 @@ public class PowerfulCatalyst extends Item {
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         // 实际效果在Origin的Power json中进行处理
-        return super.finishUsing(stack, world, user);
+        super.finishUsing(stack, world, user);
+        if (user instanceof PlayerEntity playerEntity) {
+            if (playerEntity.getAbilities().creativeMode) {
+                return stack;
+            }
+        }
+
+        if (stack.isEmpty()) {
+            return new ItemStack(Items.BOWL);
+        } else {
+            if (user instanceof PlayerEntity playerEntity) {
+                if (!playerEntity.getInventory().insertStack(new ItemStack(Items.BOWL))) {
+                    playerEntity.dropItem(new ItemStack(Items.BOWL), false);
+                }
+            }
+            return stack;
+        }
     }
 
     @Override

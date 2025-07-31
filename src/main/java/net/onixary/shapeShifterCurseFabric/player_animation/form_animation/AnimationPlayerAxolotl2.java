@@ -21,7 +21,7 @@ public class AnimationPlayerAxolotl2 {
 
     public static AnimationHolder getFormAnimToPlay(PlayerAnimState currentState) {
         switch (currentState) {
-            case ANIM_SWIMMING:
+            case ANIM_SWIM:
                 return anim_swimming;
 
             case ANIM_SWIM_IDLE:

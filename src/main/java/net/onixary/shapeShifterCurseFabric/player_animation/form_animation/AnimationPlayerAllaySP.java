@@ -36,10 +36,10 @@ public class AnimationPlayerAllaySP {
             case ANIM_IDLE:
                 return anim_idle;
 
-            case ANIM_FLYING:
+            case ANIM_FLY:
             case ANIM_JUMP:
-            case ANIM_FALLING:
-            case ANIM_SLOW_FALLING:
+            case ANIM_FALL:
+            case ANIM_SLOW_FALL:
                 return anim_flying;
 
             case ANIM_TOOL_SWING:

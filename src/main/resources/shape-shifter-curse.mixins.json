@@ -18,7 +18,8 @@
     "PotionStackMixin",
     "ThrowablePotionStackMixin",
     "mob.MobEntityTeamMixin",
-    "WaterFlexibilityMixin"
+    "WaterFlexibilityMixin",
+    "PlayerEntityAttackMixin"
   ],
   "client": [
     "IEntityRenderDispatcherAccessor",
