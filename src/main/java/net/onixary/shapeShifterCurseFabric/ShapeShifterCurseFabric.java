@@ -32,9 +32,9 @@ import net.onixary.shapeShifterCurseFabric.command.FormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
 import net.onixary.shapeShifterCurseFabric.data.ConfigSSC;
 import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
-import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
-import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegEntitySpawnEgg;
-import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.TEntitySpawnHandler;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntitySpawnEgg;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntity;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.TransformativeEntitySpawning;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
@@ -141,13 +141,14 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public void onInitialize() {
         // PlayerDataStorage.initialize(); // 移除这行，因为这里还没有服务器实例
         RegCustomItem.initialize();
-        RegEntitySpawnEgg.initialize();
+        RegTransformativeEntitySpawnEgg.initialize();
         RegTStatusEffect.initialize();
         RegTStatusPotionEffect.initialize();
         PlayerEventHandler.register();
-        TEntitySpawnHandler.register();
+        RegTransformativeEntity.register();
         RegFormConfig.register();
         RegOtherStatusEffects.initialize();
+        TransformativeEntitySpawning.addEntitySpawns();
 
         // 注册动画（需要在服务端也执行以支持变换动画的同步）
         registerAnimations();

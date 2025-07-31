@@ -14,8 +14,8 @@ import static net.minecraft.item.Items.register;
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.T_AXOLOTL;
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.T_BAT;
 
-public class RegEntitySpawnEgg {
-    private RegEntitySpawnEgg(){}
+public class RegTransformativeEntitySpawnEgg {
+    private RegTransformativeEntitySpawnEgg(){}
     // 注册刷怪蛋
     //public static final Item T_BAT_SPAWN_EGG = new SpawnEggItem(
     //        T_BAT, 0x1F1F1F, 0x8B8B8B, new Item.Settings()

@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -11,7 +12,10 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.BatEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
@@ -34,6 +38,20 @@ public class TransformativeBatEntity extends BatEntity {
 
     // 当前冷却时间
     private float cooldown = 0;
+
+    public static boolean canCustomSpawn(EntityType<TransformativeBatEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        if (pos.getY() >= world.getSeaLevel()) {
+            return false;
+        } else {
+            int i = world.getLightLevel(pos);
+            int j = 4;
+            if (random.nextBoolean()) {
+                return false;
+            }
+
+            return i > random.nextInt(j) ? false : canMobSpawn(type, world, spawnReason, pos, random);
+        }
+    }
 
     @Override
     protected void initGoals() {

@@ -1,19 +1,17 @@
 package net.onixary.shapeShifterCurseFabric.form_giving_custom_entity;
 
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.passive.AxolotlEntity;
 import net.minecraft.entity.passive.BatEntity;
 import net.minecraft.entity.passive.OcelotEntity;
 import net.minecraft.world.World;
-import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
 
-public class TEntitySpawnHandler {
+public class RegTransformativeEntity {
 
     public static void register() {
         // Reg custom entities model and renderer
@@ -24,9 +22,9 @@ public class TEntitySpawnHandler {
         // ocelot
         FabricDefaultAttributeRegistry.register(T_OCELOT, TransformativeBatEntity.createTBatAttributes());
 
-
+        // obsolete, use vanilla spawning logic
         // handle entity spawn
-        ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
+        /*ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
             if(!entity.hasCustomName()){
                 if (entity instanceof BatEntity) {
                     TBatSpawnHandler((BatEntity) entity, world);
@@ -40,10 +38,10 @@ public class TEntitySpawnHandler {
                     TOcelotSpawnHandler((OcelotEntity) entity, world);
                 }
             }
-        });
+        });*/
     }
 
-    private static void TBatSpawnHandler(BatEntity entity, World serverWorld) {
+    /*private static void TBatSpawnHandler(BatEntity entity, World serverWorld) {
         if (serverWorld.getRandom().nextFloat() < CONFIG.transformativeBatSpawnChance()) {
             TransformativeBatEntity customBat = new TransformativeBatEntity(
                     T_BAT, serverWorld
@@ -83,5 +81,5 @@ public class TEntitySpawnHandler {
             serverWorld.spawnEntity(customOcelot);
             entity.discard();
         }
-    }
+    }*/
 }
