@@ -37,7 +37,8 @@
     "MinecraftClientMixin",
     "ElytraEntityModelMixin",
     "AdjustItemHoldFeatureRendererMixin",
-    "InGameHudMixin"
+    "InGameHudMixin",
+    "PlayerEntitySpeedFOVMixin"
   ],
   "injectors": {
     "defaultRequire": 1
