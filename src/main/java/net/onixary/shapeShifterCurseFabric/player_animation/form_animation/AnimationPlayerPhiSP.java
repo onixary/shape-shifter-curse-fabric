@@ -31,6 +31,7 @@ public class AnimationPlayerPhiSP {
                 return anim_idle;
             case ANIM_SNEAK_IDLE:
             case ANIM_BOAT_IDLE:
+            case ANIM_RIDE_IDLE:
                 return anim_sneak_idle;
             case ANIM_WALK:
                 return anim_walk;

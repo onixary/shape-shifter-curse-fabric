@@ -18,6 +18,7 @@ public class AnimationPlayerOcelot2 {
     public static AnimationHolder getFormAnimToPlay(PlayerAnimState currentState) {
         switch (currentState) {
             case ANIM_SNEAK_IDLE:
+            case ANIM_RIDE_IDLE:
                 return anim_sneak_idle;
             case ANIM_SNEAK_RUSH:
                 return anim_sneak_rush;

@@ -32,6 +32,7 @@ public class AnimationPlayerOcelot3 {
                 return anim_idle;
             case ANIM_SNEAK_IDLE:
             case ANIM_BOAT_IDLE:
+            case ANIM_RIDE_IDLE:
                 return anim_sneak_idle;
             case ANIM_SNEAK_RUSH:
                 return anim_sneak_rush;

@@ -14,6 +14,7 @@ public enum PlayerAnimState {
     ANIM_SWIM,
     ANIM_SWIM_IDLE,
     ANIM_BOAT_IDLE,
+    ANIM_RIDE_IDLE,
     ANIM_ELYTRA_FLY,
     ANIM_CREATIVE_FLY,
     ANIM_CRAWL,

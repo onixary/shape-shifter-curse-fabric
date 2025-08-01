@@ -105,9 +105,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         }*/
 
         // judge current anim state
-        if (getVehicle() != null && !(getVehicle() instanceof BoatEntity)) {
-            return;
-        }
+
         tickCounter++;
         if (tickCounter == 20) {
             /*if (this.hasStatusEffect(StatusEffects.SLOW_FALLING)) {
@@ -177,9 +175,15 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
         if (!this.handSwinging)
         {
-            if (getVehicle() != null && getVehicle() instanceof BoatEntity)
+            if (getVehicle() != null)
             {
-                currentState = PlayerAnimState.ANIM_BOAT_IDLE;
+                if(getVehicle() instanceof BoatEntity){
+                    currentState = PlayerAnimState.ANIM_BOAT_IDLE;
+                }
+                else{
+                    currentState = PlayerAnimState.ANIM_RIDE_IDLE;
+                }
+
             }
 
             if (world.getBlockState(getBlockPos()).getBlock() instanceof LadderBlock && !isOnGround() && !jumping)
