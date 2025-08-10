@@ -9,13 +9,16 @@
     "minecraft:beef",
     "minecraft:chicken",
     "minecraft:mutton",
-    "minecraft:rabbit",
+    "minecraft:rabbit"
+  ],
+  "optional": [
     "farmersdelight:cod_slice",
     "farmersdelight:salmon_slice",
     "farmersdelight:bacon",
     "farmersdelight:minced_beef",
     "farmersdelight:chicken_cuts",
     "farmersdelight:mutton_chops",
-    "farmersdelight:dog_food"
+    "farmersdelight:dog_food",
+    "farmersdelight:ham"
   ]
 }

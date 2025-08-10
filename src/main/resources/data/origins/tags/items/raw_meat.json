@@ -10,7 +10,9 @@
     "minecraft:chicken",
     "minecraft:mutton",
     "minecraft:rabbit",
-    "minecraft:rotten_flesh",
+    "minecraft:rotten_flesh"
+  ],
+  "optional": [
     "farmersdelight:cod_slice",
     "farmersdelight:salmon_slice",
     "farmersdelight:bacon",

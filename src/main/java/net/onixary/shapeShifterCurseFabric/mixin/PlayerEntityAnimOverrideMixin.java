@@ -173,7 +173,11 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
             handSwingDuration = this.hasStatusEffect(StatusEffects.MINING_FATIGUE) ? 6 + (1 + this.getStatusEffect(StatusEffects.MINING_FATIGUE).getAmplifier()) * 2 : 6;
         }
 
-        if (!this.handSwinging)
+        if (isUsingItem()){
+            // todo: using item anim here if needed
+            currentState = PlayerAnimState.ANIM_IDLE;
+        }
+        else if (!this.handSwinging)
         {
             if (getVehicle() != null)
             {

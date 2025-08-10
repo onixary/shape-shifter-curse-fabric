@@ -6,7 +6,9 @@
     "minecraft:pufferfish",
     "minecraft:salmon",
     "minecraft:cooked_cod",
-    "minecraft:cooked_salmon",
+    "minecraft:cooked_salmon"
+  ],
+  "optional": [
     "farmersdelight:cod_slice",
     "farmersdelight:salmon_slice",
     "farmersdelight:cooked_cod_slice",

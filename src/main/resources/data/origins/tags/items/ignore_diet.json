@@ -8,5 +8,11 @@
     "shape-shifter-curse:catalyst",
     "shape-shifter-curse:powerful_catalyst",
     "shape-shifter-curse:powerful_inhibitor"
+  ],
+  "optional": [
+    "farmersdelight:milk_bottle",
+    "farmersdelight:apple_cider",
+    "farmersdelight:melon_juice",
+    "farmersdelight:hot_cocoa"
   ]
 }
