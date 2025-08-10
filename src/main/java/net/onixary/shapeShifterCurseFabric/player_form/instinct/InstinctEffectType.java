@@ -18,18 +18,22 @@ public enum InstinctEffectType {
     FORM_BAT_IN_AIR(0.008f),
     FORM_BAT_EAT_FRUIT(0.1f),
     FORM_BAT_NEAR_DRIPSTONE(0.006f),
+    FORM_BAT_BIOME(0.002f),
 
     FORM_FAMILIAR_FOX_EAT_BERRY(0.15f),
     FORM_FAMILIAR_FOX_IN_BERRY_BUSH(0.008f),
     FORM_FAMILIAR_FOX_MOVING_ON_SNOW(0.008f),
     FORM_FAMILIAR_FOX_LOOKING_WITCH(0.013f),
+    FORM_FAMILIAR_FOX_BIOME(0.002f),
 
     FORM_AXOLOTL_IN_WATER(0.004f),
     FORM_AXOLOTL_EAT_FISH(0.1f),
     FORM_AXOLOTL_NEAR_DRIPLEAF(0.008f),
+    FORM_AXOLOTL_BIOME(0.003f),
 
     FORM_OCELOT_EAT_RAW_MEAT(0.1f),
     FORM_OCELOT_ON_LEAF(0.008f),
+    FORM_OCELOT_BIOME(0.003f),
 
     // 供自定义形态使用的效果
     FORM_SUSTAINED_INSTINCT_ENVIRONMENT_MEDIUM(0.004f),
@@ -57,7 +61,11 @@ public enum InstinctEffectType {
                 || this == FORM_USE_CATALYST
                 || this == FORM_OCELOT_EAT_RAW_MEAT
                 || this == FORM_OCELOT_ON_LEAF
-                || this == FORM_BAT_IN_AIR;
+                || this == FORM_BAT_IN_AIR
+                || this == FORM_BAT_BIOME
+                || this == FORM_FAMILIAR_FOX_BIOME
+                || this == FORM_AXOLOTL_BIOME
+                || this == FORM_OCELOT_BIOME;
     }
 
     public float getValue() {

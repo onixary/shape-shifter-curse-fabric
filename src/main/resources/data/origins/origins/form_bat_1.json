@@ -17,7 +17,8 @@
 		"origins:form_bat_instinct_in_air",
 		"origins:form_bat_instinct_near_dripstone",
 		"origins:form_instinct_use_catalyst",
-		"origins:form_instinct_use_golden_apple"
+		"origins:form_instinct_use_golden_apple",
+		"origins:form_bat_instinct_biome"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

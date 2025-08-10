@@ -19,7 +19,8 @@
 		"origins:form_instinct_use_golden_apple",
 		"origins:form_ocelot_instinct_on_leaf",
 		"origins:form_ocelot_instinct_attack_barepaw",
-		"origins:form_ocelot_instinct_eat_raw_meat"
+		"origins:form_ocelot_instinct_eat_raw_meat",
+		"origins:form_ocelot_instinct_biome"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

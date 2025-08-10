@@ -6,7 +6,8 @@
 		"origins:form_bat_0_sun_health",
 		"origins:form_bat_instinct_in_dark",
 		"origins:form_instinct_use_catalyst",
-		"origins:form_instinct_use_golden_apple"
+		"origins:form_instinct_use_golden_apple",
+		"origins:form_bat_instinct_biome"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

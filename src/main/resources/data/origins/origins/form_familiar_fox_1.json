@@ -13,7 +13,8 @@
 		"origins:form_instinct_use_catalyst",
 		"origins:form_instinct_use_golden_apple",
 		"origins:form_familiar_fox_instinct_in_berry_bush",
-		"origins:form_familiar_fox_instinct_looking_witch"
+		"origins:form_familiar_fox_instinct_looking_witch",
+		"origins:form_familiar_fox_instinct_biome"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

@@ -314,6 +314,10 @@
   "codex.form.axolotl0.instincts": ["You begin craving",
     {
       "text":"to stay in water", "color":"#c67681"
+    },
+    "\nYou begin to desire",
+    {
+      "text":" to stay in lush cave biomes", "color":"#c67681"
     }],
   "codex.form.axolotl1.title": ["\nYour enlarged gills and powerful tail enable free exploration of submerged structures. Freshly caught fish make ideal nourishment"],
   "codex.form.axolotl1.appearance": ["The gill fronds on your cheeks have expanded further. When submerged, they can supply nearly all your oxygen needs\nFins now cover more of your body, their colors growing more vibrant\nYour tail has lengthened and strengthened\nWater-absorbent white filaments have grown around your neck"],
@@ -322,6 +326,10 @@
   "codex.form.axolotl1.instincts": ["The desire to",
     {
       "text":"remain in water", "color":"#c67681"
+    },
+    "\nYou begin to desire",
+    {
+      "text":" to stay in lush cave biomes", "color":"#c67681"
     },
     {
       "text":"\nHunt down and consume more raw fish", "color":"#c67681"
@@ -342,6 +350,10 @@
   "codex.form.ocelot0.instincts": ["You begin to desire",
     {
       "text":"eating more raw meat", "color":"#c67681"
+    },
+    "\nYou begin to desire",
+    {
+      "text":" to stay in jungle biomes", "color":"#c67681"
     }],
   "codex.form.ocelot1.title": ["\nMore feline traits let you climb trees freely and deliver deadly blows with powerful forepaws. Raw meat now seems more appealing than cooked"],
   "codex.form.ocelot1.appearance": ["Mottled fur now covers most of your chest, abdomen and back. Connecting to your neck fur, it resembles a cloak\nSpotted white fur extends further up your limbs. Underneath, your hands and feet structure becomes more feline - retractable claws and cushioning pads\nWhile lengthening, your tail grows more flexible and powerful. It helps mid-air balance but increasingly affects your walking/running posture"],
@@ -350,6 +362,10 @@
   "codex.form.ocelot1.instincts": ["You increasingly want to",
     {
       "text":"eat more raw meat", "color":"#c67681"
+    },
+    "\nYou begin to desire",
+    {
+      "text":" to stay in jungle biomes", "color":"#c67681"
     },
     "\nYou feel an inner urge to",
     {
@@ -387,6 +403,10 @@
   "codex.form.bat0.instincts": ["You begin to desire to",
     {
       "text":"stay in darkness", "color":"#c67681"
+    },
+    "\nYou begin to desire",
+    {
+      "text":" to stay in dripstone caves biomes", "color":"#c67681"
     }],
   "codex.form.bat1.title": ["\nNew vision and strength make you adept in caves and nighttime darkness. Just thinking about sunlight now discomforts you."],
   "codex.form.bat1.appearance": ["Your ears now crown your head - large, pointed and forward-facing\nArm membranes have grown further - when jumping you instinctively flap them\nYour fingers now somewhat resemble claws, preventing delicate operations though you can still grasp items\nYour toes have elongated - thin and long\nYour tail has lengthened further\nYou seem slightly smaller"],
@@ -395,7 +415,12 @@
   "codex.form.bat1.instincts": ["You increasingly want to",
     {
       "text":"stay in darkness", "color":"#c67681"
-    },"\nThe thought of ",
+    },
+    "\nYou begin to desire",
+    {
+      "text":" to stay in dripstone caves biomes", "color":"#c67681"
+    },
+    "\nThe thought of ",
     {
       "text":"eat more fruits", "color":"#c67681"
     }," begins to attract you",
@@ -422,6 +447,10 @@
     },"\nYou begin to desire to",
     {
       "text":" running across snow", "color":"#c67681"
+    },
+    "\nYou begin to desire",
+    {
+      "text":" to stay in taiga biomes", "color":"#c67681"
     }],
   "codex.form.familiar_fox1.title": ["\nOrange-red fur continues spreading across your body as a fluffy red tail sways behind you"],
   "codex.form.familiar_fox1.appearance": ["The orange-red pelt expands further across your body, nearly covering your limbs and upper torso with thick fur\nYour triangular ears have enlarged, sharpening your hearing. Red fur growing from their base now covers parts of your head and face like a mask\nYour hands and feet have grown larger, becoming more claw-like\nThe fur tuft at your tailbone has developed into a full fluffy tail that sways slowly\n\nWorryingly, beyond the usual shifting magic, you detect a new type of magic blending within you..."],
@@ -431,6 +460,10 @@
     {
       "text":"Thoughts of draining energy from creatures", "color":"#c67681"
     },"begin attracting you\n",
+    "You begin to desire",
+    {
+      "text":" to stay in taiga biomes\n", "color":"#c67681"
+    },
     {
       "text":"Thoughts of staying in sweet berry bushes", "color":"#c67681"
     },"begin attracting you\nThe magic of witches and evokers draws you in - you feel compelled to",
