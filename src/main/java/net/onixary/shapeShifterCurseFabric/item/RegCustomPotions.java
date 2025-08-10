@@ -10,6 +10,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
+import static net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects.FEED_EFFECT;
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusPotionEffect.*;
 
 public class RegCustomPotions {
@@ -56,7 +57,11 @@ public class RegCustomPotions {
     public static final Potion PHI_FORM_POTION =
             Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_phi_sp_potion"),
                     new Potion(new StatusEffectInstance(TO_PHI_SP_POTION)));
-
+    // other custom potions
+    // feed potion can only be obtained via familiar_fox_2 and familiar_fox_3, no recipe
+    public static final Potion FEED_POTION =
+            Registry.register(Registries.POTION, new Identifier(MOD_ID, "feed_potion"),
+                    new Potion(new StatusEffectInstance(FEED_EFFECT)));
 
     public static void registerPotions(){
 

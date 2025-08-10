@@ -16,9 +16,7 @@ public class ToAllayStatusSP extends BaseTransformativeStatusEffect {
 
     @Override
     public void onEffectApplied(PlayerEntity player) {
-        // todo: form logic
         ShapeShifterCurseFabric.LOGGER.info("ToAllay onEffect Applied");
-        //FormAbilityManager.applyForm(player, PlayerForms.BAT_0);
         TransformManager.handleDirectTransform(player, PlayerForms.ALLAY_SP, false);
         removeVisualEffects(player);
     }

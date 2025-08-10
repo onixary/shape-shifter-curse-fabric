@@ -9,6 +9,10 @@
           "type": "origins:and",
           "actions": [
             {
+              "type": "origins:heal",
+              "amount": -6
+            },
+            {
               "type": "origins:execute_command",
               "command": "particle soul_fire_flame ~ ~0.5 ~ 0.3 0.3 0.3 0.009 10 normal @a"
             },
@@ -40,23 +44,12 @@
   "bientity_condition": {
     "type": "origins:and",
     "conditions": [
-      {"type": "origins:or",
-        "conditions": [
-          {
-            "type": "origins:target_condition",
-            "condition": {
-              "type": "origins:in_tag",
-              "tag": "origins:familiar_illager_target"
-            }
-          },
-          {
-            "type": "origins:target_condition",
-            "condition": {
-              "type": "origins:in_tag",
-              "tag": "origins:familiar_sorcery_target"
-            }
-          }
-        ]
+      {
+        "type": "origins:target_condition",
+        "condition": {
+          "type": "origins:in_tag",
+          "tag": "origins:familiar_human_target"
+        }
       },
       {
         "type": "origins:actor_condition",

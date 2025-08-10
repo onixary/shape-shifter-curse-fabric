@@ -3,8 +3,6 @@
   "effects": [
     "minecraft:poison",
     "minecraft:hunger",
-    "minecraft:slowness",
-    "minecraft:weakness",
     "minecraft:speed",
     "minecraft:haste",
     "minecraft:strength",
