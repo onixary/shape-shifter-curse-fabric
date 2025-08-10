@@ -12,13 +12,6 @@
           "tag": "origins:ignore_diet"
         },
         "inverted": true
-      },
-      {
-        "type": "origins:ingredient",
-        "ingredient": {
-          "item": "minecraft:amethyst_shard"
-        },
-        "inverted": true
       }
     ]
   }

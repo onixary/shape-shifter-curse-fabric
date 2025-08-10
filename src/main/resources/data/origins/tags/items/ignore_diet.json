@@ -3,13 +3,10 @@
   "values": [
     "minecraft:golden_apple",
     "minecraft:enchanted_golden_apple",
+    "minecraft:milk_bucket",
     "shape-shifter-curse:inhibitor",
     "shape-shifter-curse:catalyst",
     "shape-shifter-curse:powerful_catalyst",
-    "shape-shifter-curse:powerful_inhibitor",
-    "farmersdelight:milk_bottle",
-    "farmersdelight:apple_cider",
-    "farmersdelight:melon_juice",
-    "farmersdelight:hot_cocoa"
+    "shape-shifter-curse:powerful_inhibitor"
   ]
 }
