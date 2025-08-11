@@ -21,6 +21,10 @@ public enum PlayerForms {
     FAMILIAR_FOX_1("familiar_fox_form", 1),
     FAMILIAR_FOX_2("familiar_fox_form", 2),
     FAMILIAR_FOX_3("familiar_fox_form", 3),
+    SNOW_FOX_0("snow_fox_form", 0),
+    SNOW_FOX_1("snow_fox_form", 1),
+    SNOW_FOX_2("snow_fox_form", 2),
+    SNOW_FOX_3("snow_fox_form", 3),
     ALLAY_SP("allay_form", 5),
     FERAL_CAT_SP("feral_cat_form", 5),
 

@@ -76,6 +76,22 @@ public class RegFormConfig {
                 new FormConfig(defaultLayerID,
                         "form_familiar_fox_3",
                         PlayerFormPhase.PHASE_3,PlayerFormBodyType.FERAL));
+        CONFIGS.put(PlayerForms.SNOW_FOX_0,
+                new FormConfig(defaultLayerID,
+                        "form_snow_fox_0",
+                        PlayerFormPhase.PHASE_0,PlayerFormBodyType.NORMAL));
+        CONFIGS.put(PlayerForms.SNOW_FOX_1,
+                new FormConfig(defaultLayerID,
+                        "form_snow_fox_1",
+                        PlayerFormPhase.PHASE_1,PlayerFormBodyType.NORMAL));
+        CONFIGS.put(PlayerForms.SNOW_FOX_2,
+                new FormConfig(defaultLayerID,
+                        "form_snow_fox_2",
+                        PlayerFormPhase.PHASE_2,PlayerFormBodyType.NORMAL));
+        CONFIGS.put(PlayerForms.SNOW_FOX_3,
+                new FormConfig(defaultLayerID,
+                        "form_snow_fox_3",
+                        PlayerFormPhase.PHASE_3,PlayerFormBodyType.FERAL));
         CONFIGS.put(PlayerForms.ALLAY_SP,
                 new FormConfig(defaultLayerID,
                         "form_allay_sp",

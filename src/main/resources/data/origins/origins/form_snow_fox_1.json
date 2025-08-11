@@ -1,0 +1,19 @@
+{
+	"powers": [
+		"origins:form_familiar_fox_1_scale",
+		"origins:form_familiar_fox_0_sprint_speed_up",
+		"origins:form_familiar_fox_0_water_speed_down",
+
+		"origins:form_instinct_use_catalyst",
+		"origins:form_instinct_use_golden_apple",
+		"origins:form_familiar_fox_instinct_in_berry_bush",
+		"origins:form_familiar_fox_instinct_biome"
+	],
+	"icon": {
+		"item": "minecraft:player_head"
+	},
+	"order": 0,
+	"unchoosable": true,
+	"impact": 0,
+	"loading_priority": 0
+}

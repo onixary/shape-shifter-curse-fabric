@@ -1,0 +1,14 @@
+{
+  "model": "orif-defaults:geo/form_snow_fox_0.geo.json",
+  "texture": "orif-defaults:textures/form_snow_fox_0/form_snow_fox_0.png",
+  "hidden": [
+
+  ],
+  "tail_chain": {
+    "tail": [0, 1]
+  },
+  "tail_chain_head": {
+    "ear_a": [0],
+    "ear_b": [0]
+  }
+}

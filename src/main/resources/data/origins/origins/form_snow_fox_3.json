@@ -1,0 +1,19 @@
+{
+	"powers": [
+		"origins:form_familiar_fox_3_scale",
+		"origins:form_sprint_speed_up",
+		"origins:form_familiar_fox_3_water_speed_down",
+
+		"origins:form_disable_leg_armor",
+		"origins:form_disable_feet_armor",
+		"origins:form_familiar_fox_sound_hurt",
+		"origins:form_familiar_fox_sound"
+	],
+	"icon": {
+		"item": "minecraft:player_head"
+	},
+	"order": 0,
+	"unchoosable": true,
+	"impact": 0,
+	"loading_priority": 0
+}

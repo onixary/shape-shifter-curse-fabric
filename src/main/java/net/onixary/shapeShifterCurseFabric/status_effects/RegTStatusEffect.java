@@ -14,6 +14,7 @@ public class RegTStatusEffect {
     public static final BaseTransformativeStatusEffect TO_AXOLOTL_0_EFFECT = register("to_axolotl_0_effect",new ToAxolotlStatus0());
     public static final BaseTransformativeStatusEffect TO_OCELOT_0_EFFECT = register("to_ocelot_0_effect",new ToOcelotStatus0());
     public static final BaseTransformativeStatusEffect TO_FAMILIAR_FOX_0_EFFECT = register("to_familiar_fox_0_effect",new ToFamiliarFoxStatus0());
+    public static final BaseTransformativeStatusEffect TO_SNOW_FOX_0_EFFECT = register("to_snow_fox_0_effect",new ToSnowFoxStatus0());
     public static final BaseTransformativeStatusEffect TO_ALLAY_SP_EFFECT = register("to_allay_sp_effect",new ToAllayStatusSP());
     public static final BaseTransformativeStatusEffect TO_FERAL_CAT_SP_EFFECT = register("to_feral_cat_sp_effect",new ToFeralCatStatusSP());
     // empty custom forms
@@ -36,6 +37,7 @@ public class RegTStatusEffect {
                 || player.hasStatusEffect(TO_OCELOT_0_EFFECT)
                 || player.hasStatusEffect(TO_ALLAY_SP_EFFECT)
                 || player.hasStatusEffect(TO_FAMILIAR_FOX_0_EFFECT)
+                || player.hasStatusEffect(TO_SNOW_FOX_0_EFFECT)
                 || player.hasStatusEffect(TO_FERAL_CAT_SP_EFFECT)
                 || player.hasStatusEffect(TO_ALPHA_0_EFFECT)
                 || player.hasStatusEffect(TO_BETA_0_EFFECT)
@@ -61,6 +63,7 @@ public class RegTStatusEffect {
         player.removeStatusEffect(TO_CHI_SP_EFFECT);
         player.removeStatusEffect(TO_PHI_SP_EFFECT);
         player.removeStatusEffect(TO_FAMILIAR_FOX_0_EFFECT);
+        player.removeStatusEffect(TO_SNOW_FOX_0_EFFECT);
     }
 
     public static void initialize() {}
