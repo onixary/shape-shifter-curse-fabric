@@ -3,6 +3,13 @@
 		"origins:form_familiar_fox_3_scale",
 		"origins:form_sprint_speed_up",
 		"origins:form_familiar_fox_3_water_speed_down",
+		"origins:form_snow_fox_3_enhanced_falling_attack",
+		"origins:form_snow_fox_3_triple_jump",
+		"origins:form_snow_fox_3_falling_protection",
+		"origins:form_snow_fox_3_falling_bouncing",
+		"origins:form_snow_fox_3_air_speed",
+		"origins:form_snow_fox_3_fall_speed",
+		"origins:form_snow_fox_bounce_cooldown",
 
 		"origins:form_disable_leg_armor",
 		"origins:form_disable_feet_armor",

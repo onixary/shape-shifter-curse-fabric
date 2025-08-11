@@ -6,7 +6,7 @@
   "mixins": [
     "CursedMoonWorldMixin",
     "ItemStackMixin",
-    "LivingEntityDeathMixin",
+    "LivingEntityMixin",
     "PlayerEntityPoseMixin",
     "CustomEdibleItemMixin",
     "CancelEntityStepSoundMixin",
@@ -19,7 +19,8 @@
     "ThrowablePotionStackMixin",
     "mob.MobEntityTeamMixin",
     "WaterFlexibilityMixin",
-    "PlayerEntityAttackMixin"
+    "PlayerEntityAttackMixin",
+    "LivingEntityJumpMixin"
   ],
   "client": [
     "IEntityRenderDispatcherAccessor",

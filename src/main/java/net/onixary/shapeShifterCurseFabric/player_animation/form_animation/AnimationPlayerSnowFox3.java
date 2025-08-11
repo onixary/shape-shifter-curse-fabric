@@ -80,7 +80,7 @@ public class AnimationPlayerSnowFox3 {
         anim_dig = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_dig"), true);
         anim_jump = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_jump"), true);
         anim_climb = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_climb"), true);
-        anim_fall = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_fall"), true);
+        anim_fall = new AnimationHolder(new Identifier(MOD_ID, "form_snow_fox_3_fall"), true, 1.0f, 4);
         anim_attack = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_attack"), true);
         anim_sleep = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sleep"), true);
         anim_elytra_fly = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_elytra_fly"), true);

@@ -273,17 +273,16 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
             }
             else
             {
-                //if (this.fallDistance > 1)
-                //{
-                //    if (this.fallDistance > 3)
-                //    {
-                //       currentState = PlayerAnimState.ANIM_FALLING;
-                //    }
-                //}
-
-                if (!isOnGround() && getVelocity().y < 0 && hasSlowFall)
+                if (!isOnGround() && getVelocity().y < 0)
                 {
-                    currentState = PlayerAnimState.ANIM_SLOW_FALL;
+                    if(hasSlowFall){
+                        currentState = PlayerAnimState.ANIM_SLOW_FALL;
+                    }
+                    else if (this.fallDistance > 0.6f)
+                    {
+                        currentState = PlayerAnimState.ANIM_FALL;
+                    }
+
                 }
             }
             if (isSubmergedInWater() || isInLava())
@@ -322,6 +321,9 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
             } else {
                 if(isSleeping()){
                     currentState = PlayerAnimState.ANIM_SLEEP;
+                }
+                else if(!isOnGround()){
+                    currentState = PlayerAnimState.ANIM_FALL;
                 }
                 else{
                     if(isSneaking()){

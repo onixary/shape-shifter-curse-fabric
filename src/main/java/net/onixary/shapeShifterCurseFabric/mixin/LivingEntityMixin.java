@@ -1,7 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -13,6 +13,7 @@ import net.minecraft.item.Items;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
+import net.onixary.shapeShifterCurseFabric.additional_power.FallingProtectionPower;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.item.RegCustomItem;
@@ -21,10 +22,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.List;
+
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityDeathMixin {
+public abstract class LivingEntityMixin {
     @Inject(
             method = "onDeath",
             at = @At(
@@ -83,5 +87,34 @@ public abstract class LivingEntityDeathMixin {
                     )
             );
         }
+    }
+
+    /**
+     * Injects into the fall damage calculation method to modify the fall distance
+     * used for damage computation, without affecting the original fall distance value
+     * used in form's falling protection powers.
+     */
+    @ModifyVariable(
+            method = "computeFallDamage(FF)I",
+            at = @At("HEAD"),
+            argsOnly = true,
+            ordinal = 0
+    )
+    private float modifyFallDistanceForDamageCalc(float fallDistance) {
+        LivingEntity self = (LivingEntity) (Object) this;
+
+        List<FallingProtectionPower> powers = PowerHolderComponent.getPowers(self, FallingProtectionPower.class);
+        if (powers.isEmpty()) {
+            return fallDistance;
+        }
+
+        float maxProtection = 0f;
+        for (FallingProtectionPower power : powers) {
+            if (power.isActive() && power.getFallDistance() > maxProtection) {
+                maxProtection = power.getFallDistance();
+            }
+        }
+
+        return Math.max(0f, fallDistance - maxProtection);
     }
 }
