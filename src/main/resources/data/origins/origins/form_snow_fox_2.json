@@ -5,6 +5,17 @@
 		"origins:form_disable_leg_armor",
 		"origins:form_disable_feet_armor",
 		"origins:form_familiar_fox_3_water_speed_down",
+		"origins:form_snow_fox_3_fox_friendly",
+		"origins:form_snow_fox_2_triple_jump",
+		"origins:form_snow_fox_2_falling_protection",
+		"origins:form_snow_fox_walk_on_powder_snow",
+		"origins:form_snow_fox_3_enhanced_falling_attack",
+		"origins:form_snow_fox_3_sweet_berry_up",
+
+		"origins:form_snow_fox_3_burn_damage_up",
+		"origins:form_snow_fox_3_near_lava_damage",
+		"origins:form_snow_fox_2_desert_health",
+		"origins:form_snow_fox_2_plain_health",
 
 		"origins:form_familiar_fox_sound_hurt"
 	],

@@ -1,8 +1,8 @@
 {
   "type": "origins:triple_jump",
   "first_jump_multiplier": 1.4,
-  "second_jump_multiplier": 1.6,
-  "third_jump_multiplier": 2.0,
+  "second_jump_multiplier": 1.5,
+  "third_jump_multiplier": 1.65,
   "first_jump_action": {
     "type": "origins:and",
     "actions": [

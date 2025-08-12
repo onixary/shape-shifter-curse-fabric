@@ -1,0 +1,49 @@
+{
+  "type": "origins:conditioned_attribute",
+  "modifier": {
+    "attribute": "minecraft:generic.max_health",
+    "value": -4.0,
+    "operation": "addition"
+  },
+  "tick_rate": 20,
+  "condition": {
+    "type": "origins:or",
+    "conditions": [
+      {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:biome",
+            "condition": {
+              "type": "origins:temperature",
+              "comparison": ">=",
+              "compare_to": 1
+            }
+          },
+          {
+            "type": "origins:and",
+            "conditions": [
+              {
+                "type": "origins:time_of_day",
+                "comparison": ">=",
+                "compare_to": 1000
+              },
+              {
+                "type": "origins:time_of_day",
+                "comparison": "<=",
+                "compare_to": 12000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "origins:biome",
+        "condition": {
+          "type": "origins:in_tag",
+          "tag": "minecraft:is_nether"
+        }
+      }
+    ]
+  }
+}

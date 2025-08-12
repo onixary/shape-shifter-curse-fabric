@@ -1,19 +1,14 @@
 {
   "type": "origins:triple_jump",
   "first_jump_multiplier": 1.4,
-  "second_jump_multiplier": 1.6,
-  "third_jump_multiplier": 2.0,
+  "second_jump_multiplier": 1.4,
+  "third_jump_multiplier": 1.4,
   "first_jump_action": {
     "type": "origins:and",
     "actions": [
       {
         "type": "origins:execute_command",
         "command": "particle minecraft:crit ~ ~0.5 ~ 0.2 0.2 0.2 0 5"
-      },
-      {
-        "type": "origins:play_sound",
-        "sound": "minecraft:block.note_block.bass",
-        "pitch": 1.0
       },
       {
         "type": "origins:play_sound",
@@ -25,18 +20,8 @@
     "type": "origins:and",
     "actions": [
       {
-        "type":"origins:add_velocity",
-        "y":1.3,
-        "space":"world"
-      },
-      {
         "type": "origins:execute_command",
         "command": "particle minecraft:crit ~ ~0.5 ~ 0.2 0.2 0.2 0 5"
-      },
-      {
-        "type": "origins:play_sound",
-        "sound": "minecraft:block.note_block.bass",
-        "pitch": 1.19
       },
       {
         "type": "origins:play_sound",
@@ -48,18 +33,8 @@
     "type": "origins:and",
     "actions": [
       {
-        "type":"origins:add_velocity",
-        "y":1.3,
-        "space":"world"
-      },
-      {
         "type": "origins:execute_command",
         "command": "particle minecraft:crit ~ ~0.5 ~ 0.2 0.2 0.2 0 5"
-      },
-      {
-        "type": "origins:play_sound",
-        "sound": "minecraft:block.note_block.bass",
-        "pitch": 1.414
       },
       {
         "type": "origins:play_sound",

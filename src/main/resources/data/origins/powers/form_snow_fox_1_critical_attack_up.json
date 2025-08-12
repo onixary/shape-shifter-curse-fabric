@@ -1,0 +1,8 @@
+{
+  "type": "origins:critical_damage_modifier",
+  "action": {
+    "type": "origins:add_instinct",
+    "instinct_effect_type": "FORM_SNOW_FOX_CRITICAL_ATTACK"
+  },
+  "multiplier": 1.5
+}

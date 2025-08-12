@@ -20,6 +20,10 @@ public class AdditionalPowers {
         register(FallingProtectionPower.createFactory());
         register(EnhancedFallingAttackPower.createFactory());
         register(TripleJumpPower.createFactory());
+        register(PowderSnowWalkerPower.createFactory());
+        register(FoxFriendlyPower.createFactory());
+        register(BurnDamageModifierPower.createFactory());
+        register(CriticalDamageModifierPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

@@ -3,11 +3,18 @@
 		"origins:form_familiar_fox_1_scale",
 		"origins:form_familiar_fox_0_sprint_speed_up",
 		"origins:form_familiar_fox_0_water_speed_down",
+		"origins:form_snow_fox_3_sweet_berry_up",
+		"origins:form_snow_fox_3_fox_friendly",
+		"origins:form_snow_fox_1_triple_jump",
+		"origins:form_snow_fox_1_critical_attack_up",
+		"origins:form_snow_fox_3_near_lava_damage",
+		"origins:form_snow_fox_1_desert_health",
 
 		"origins:form_instinct_use_catalyst",
 		"origins:form_instinct_use_golden_apple",
 		"origins:form_familiar_fox_instinct_in_berry_bush",
-		"origins:form_familiar_fox_instinct_biome"
+		"origins:form_familiar_fox_instinct_biome",
+		"origins:form_snow_fox_instinct_sprint_jump"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

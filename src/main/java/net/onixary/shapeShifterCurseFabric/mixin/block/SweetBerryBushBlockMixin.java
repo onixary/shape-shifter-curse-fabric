@@ -26,7 +26,13 @@ public abstract class SweetBerryBushBlockMixin {
         // 如果是玩家则跳过伤害
         if (entity instanceof PlayerEntity) {
             PlayerForms curForm = RegPlayerFormComponent.PLAYER_FORM.get(entity).getCurrentForm();
-            if(curForm == PlayerForms.FAMILIAR_FOX_2 || curForm == PlayerForms.FAMILIAR_FOX_3 || curForm == PlayerForms.FAMILIAR_FOX_1){
+            if(curForm == PlayerForms.FAMILIAR_FOX_2
+                    || curForm == PlayerForms.FAMILIAR_FOX_3
+                    || curForm == PlayerForms.FAMILIAR_FOX_1
+                    || curForm == PlayerForms.SNOW_FOX_1
+                    || curForm == PlayerForms.SNOW_FOX_2
+                    || curForm == PlayerForms.SNOW_FOX_3)
+            {
                 return false;
             }
         }
@@ -44,7 +50,8 @@ public abstract class SweetBerryBushBlockMixin {
         // 如果是玩家则跳过减速
         if ((entity instanceof PlayerEntity)) {
             PlayerForms curForm = RegPlayerFormComponent.PLAYER_FORM.get(entity).getCurrentForm();
-            if(curForm != PlayerForms.FAMILIAR_FOX_1 &&curForm != PlayerForms.FAMILIAR_FOX_2 && curForm != PlayerForms.FAMILIAR_FOX_3){
+            if(curForm != PlayerForms.FAMILIAR_FOX_1 && curForm != PlayerForms.FAMILIAR_FOX_2 && curForm != PlayerForms.FAMILIAR_FOX_3
+            && curForm != PlayerForms.SNOW_FOX_1 && curForm != PlayerForms.SNOW_FOX_2 && curForm != PlayerForms.SNOW_FOX_3) {
                 entity.slowMovement(state, multiplier);
             }
         }

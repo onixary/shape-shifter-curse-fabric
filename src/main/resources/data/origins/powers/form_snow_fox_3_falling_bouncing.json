@@ -15,7 +15,7 @@
       {
         "type": "origins:fall_distance",
         "comparison": ">=",
-        "compare_to": 0.6
+        "compare_to": 0.5
       }
     ]
   },
@@ -24,8 +24,9 @@
     "actions": [
       {
         "type":"origins:add_velocity",
-        "y":1.1,
-        "space":"world"
+        "y":0.65,
+        "space":"world",
+        "set": true
       },
       {
         "type": "origins:execute_command",

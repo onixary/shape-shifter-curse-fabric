@@ -5,6 +5,7 @@ public enum InstinctEffectType {
     FORM_OCELOT_ATTACK_LIVESTOCK(0.8f),
     FORM_FAMILIAR_FOX_ABSORB_ENERGY(2.5f),
     FORM_AXOLOTL_ATTACK_FISH(0.8f),
+    FORM_SNOW_FOX_CRITICAL_ATTACK(1.0f),
     // 供自定义形态使用的效果
     FORM_INSTANT_INSTINCT_MEDIUM(3.0f),
     FORM_INSTANT_INSTINCT_LARGE(5.0f),
@@ -34,6 +35,8 @@ public enum InstinctEffectType {
     FORM_OCELOT_EAT_RAW_MEAT(0.1f),
     FORM_OCELOT_ON_LEAF(0.008f),
     FORM_OCELOT_BIOME(0.003f),
+
+    FORM_SNOW_FOX_SPRINT_JUMP(0.008f),
 
     // 供自定义形态使用的效果
     FORM_SUSTAINED_INSTINCT_ENVIRONMENT_MEDIUM(0.004f),
@@ -65,7 +68,8 @@ public enum InstinctEffectType {
                 || this == FORM_BAT_BIOME
                 || this == FORM_FAMILIAR_FOX_BIOME
                 || this == FORM_AXOLOTL_BIOME
-                || this == FORM_OCELOT_BIOME;
+                || this == FORM_OCELOT_BIOME
+                || this == FORM_SNOW_FOX_SPRINT_JUMP;
     }
 
     public float getValue() {

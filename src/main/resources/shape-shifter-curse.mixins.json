@@ -20,7 +20,10 @@
     "mob.MobEntityTeamMixin",
     "WaterFlexibilityMixin",
     "PlayerEntityAttackMixin",
-    "LivingEntityJumpMixin"
+    "LivingEntityJumpMixin",
+    "block.PowderSnowBlockMixin",
+    "mob.FoxEntityMixin",
+    "LivingEntityBurnDamageMixin"
   ],
   "client": [
     "IEntityRenderDispatcherAccessor",
