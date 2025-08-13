@@ -62,7 +62,11 @@
   "item.minecraft.potion.effect.to_familiar_fox_0_potion": ["狐之使魔咒文药水"],
   "item.minecraft.splash_potion.effect.to_familiar_fox_0_potion": ["喷溅型狐之使魔咒文药水"],
   "item.minecraft.lingering_potion.effect.to_familiar_fox_0_potion": ["滞留型狐之使魔咒文药水"],
-  "effect.shape-shifter-curse.to_familiar_fox_0_potion": ["那些女巫们究竟想要对你做什么..？"],
+  "effect.shape-shifter-curse.to_familiar_fox_0_potion": ["其中的魔力被修改了..也许可以用金粒来净化它？"],
+  "item.minecraft.potion.effect.to_snow_fox_0_potion": ["雪狐咒文药水"],
+  "item.minecraft.splash_potion.effect.to_snow_fox_0_potion": ["喷溅型雪狐咒文药水"],
+  "item.minecraft.lingering_potion.effect.to_snow_fox_0_potion": ["滞留型雪狐咒文药水"],
+  "effect.shape-shifter-curse.to_snow_fox_0_potion": ["净化之后，你感觉它摸起来有点冰凉"],
 
   "item.minecraft.potion.effect.feed_potion": ["压缩能量药水"],
   "item.minecraft.splash_potion.effect.feed_potion": ["喷溅型压缩能量药水"],
@@ -210,6 +214,13 @@
     "女巫的",
     {
       "text": "奇怪药水", "color": "#0096FF"
+    },
+    "...?"
+  ],
+  "effect.shape-shifter-curse.to_snow_fox_0_effect": [
+    "净化后的",
+    {
+      "text": "女巫药水", "color": "#0096FF"
     },
     "...?"
   ],

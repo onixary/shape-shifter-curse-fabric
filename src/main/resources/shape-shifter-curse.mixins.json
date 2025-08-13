@@ -23,7 +23,8 @@
     "LivingEntityJumpMixin",
     "block.PowderSnowBlockMixin",
     "mob.FoxEntityMixin",
-    "LivingEntityBurnDamageMixin"
+    "LivingEntityBurnDamageMixin",
+    "projectile.EntitySnowballTransformMixin"
   ],
   "client": [
     "IEntityRenderDispatcherAccessor",

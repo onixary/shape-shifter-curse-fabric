@@ -24,6 +24,7 @@ public class AdditionalPowers {
         register(FoxFriendlyPower.createFactory());
         register(BurnDamageModifierPower.createFactory());
         register(CriticalDamageModifierPower.createFactory());
+        register(SnowballBlockTransformPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

@@ -63,7 +63,11 @@
   "item.minecraft.potion.effect.to_familiar_fox_0_potion": ["Familiar Fox Curse Potion"],
   "item.minecraft.splash_potion.effect.to_familiar_fox_0_potion": ["Splash Familiar Fox Curse Potion"],
   "item.minecraft.lingering_potion.effect.to_familiar_fox_0_potion": ["Lingering Familiar Fox Curse Potion"],
-  "effect.shape-shifter-curse.to_familiar_fox_0_potion": ["What do these witches want to do to you..？"],
+  "effect.shape-shifter-curse.to_familiar_fox_0_potion": ["It has been altered.. maybe use a gold nuggets to purify it?"],
+  "item.minecraft.potion.effect.to_snow_fox_0_potion": ["Snow Fox Curse Potion"],
+  "item.minecraft.splash_potion.effect.to_snow_fox_0_potion": ["Splash Snow Fox Curse Potion"],
+  "item.minecraft.lingering_potion.effect.to_snow_fox_0_potion": ["Lingering Snow Fox Curse Potion"],
+  "effect.shape-shifter-curse.to_snow_fox_0_potion": ["After purification, you feel it's slightly cold to the touch"],
 
   "item.minecraft.potion.effect.feed_potion": ["Compressed Energy Potion"],
   "item.minecraft.splash_potion.effect.feed_potion": ["Splash Compressed Energy Potion"],
@@ -213,9 +217,16 @@
     " charm...?"
   ],
   "effect.shape-shifter-curse.to_familiar_fox_0_effect": [
-    "Witch's",
+    "Witch's ",
     {
       "text": "potion", "color": "#0096FF"
+    },
+    "...?"
+  ],
+  "effect.shape-shifter-curse.to_snow_fox_0_effect": [
+    "Purified ",
+    {
+      "text": "witch's potion", "color": "#0096FF"
     },
     "...?"
   ],
