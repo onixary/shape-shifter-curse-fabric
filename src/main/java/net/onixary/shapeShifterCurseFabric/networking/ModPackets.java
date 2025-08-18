@@ -29,4 +29,11 @@ public class ModPackets {
     public static final Identifier UPDATE_OVERLAY_FADE_EFFECT = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_overlay_fade_effect");
     public static final Identifier TRANSFORM_COMPLETE_EFFECT = new Identifier(ShapeShifterCurseFabric.MOD_ID, "transform_complete_effect");
     public static final Identifier RESET_FIRST_PERSON = new Identifier(ShapeShifterCurseFabric.MOD_ID, "reset_first_person");
+
+    // Bat attach power sync packet
+    public static final Identifier SYNC_BAT_ATTACH_STATE = new Identifier(ShapeShifterCurseFabric.MOD_ID, "sync_bat_attach_state");
+    public static final Identifier JUMP_DETACH_REQUEST_ID = new Identifier(ShapeShifterCurseFabric.MOD_ID, "jump_detach_request");
+
+    // jump_event packets
+    public static final Identifier JUMP_EVENT_ID = new Identifier(ShapeShifterCurseFabric.MOD_ID, "jump_event");
 }

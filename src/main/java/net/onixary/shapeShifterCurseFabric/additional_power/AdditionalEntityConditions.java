@@ -12,6 +12,7 @@ public class AdditionalEntityConditions {
     public static void register() {
         register(DiggingBareHandCondition.getFactory());
         register(ChanceCondition.getFactory());
+        register(JumpEventCondition.getFactory());
     }
 
     private static void register(ConditionFactory<Entity> conditionFactory) {

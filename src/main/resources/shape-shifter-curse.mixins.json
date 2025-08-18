@@ -24,7 +24,8 @@
     "block.PowderSnowBlockMixin",
     "mob.FoxEntityMixin",
     "LivingEntityBurnDamageMixin",
-    "projectile.EntitySnowballTransformMixin"
+    "projectile.EntitySnowballTransformMixin",
+    "PlayerMovementControlMixin"
   ],
   "client": [
     "IEntityRenderDispatcherAccessor",
@@ -43,7 +44,8 @@
     "ElytraEntityModelMixin",
     "AdjustItemHoldFeatureRendererMixin",
     "InGameHudMixin",
-    "PlayerEntitySpeedFOVMixin"
+    "PlayerEntitySpeedFOVMixin",
+    "PlayerRotationRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

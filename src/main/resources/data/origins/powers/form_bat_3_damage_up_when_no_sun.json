@@ -1,0 +1,13 @@
+﻿{
+  "type": "origins:modify_damage_dealt",
+
+    "condition": {
+      "type": "origins:exposed_to_sun",
+      "inverted": true
+    }
+  ,
+  "modifier": {
+    "operation": "addition",
+    "value": 6.0
+  }
+}

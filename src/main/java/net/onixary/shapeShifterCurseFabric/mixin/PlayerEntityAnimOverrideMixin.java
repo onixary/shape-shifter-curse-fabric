@@ -10,6 +10,7 @@ import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
 import dev.kosmx.playerAnim.core.util.Ease;
 import dev.kosmx.playerAnim.core.util.Vec3f;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.block.Block;
 import net.minecraft.block.LadderBlock;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -25,6 +26,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.*;
@@ -52,6 +54,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         AnimationTransform.registerAnims();
         AnimationPlayerBat1.registerAnims();
         AnimationPlayerBat2.registerAnims();
+        AnimationPlayerBat3.registerAnims();
         AnimationPlayerAxolotl2.registerAnims();
         AnimationPlayerAxolotl1.registerAnims();
         AnimationPlayerOcelot2.registerAnims();
@@ -91,22 +94,6 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
     @Override
     public void tick() {
         super.tick();
-        // 计时来决定是挖掘还是攻击
-        /*if(this.handSwinging){
-            if(continueSwingAnimCounter < 10){
-                continueSwingAnimCounter++;
-                isAttackAnim = true;
-            }
-            else{
-                isAttackAnim = false;
-            }
-        }
-        else{
-            continueSwingAnimCounter = 0;
-            isAttackAnim =false;
-        }*/
-
-        // judge current anim state
 
         tickCounter++;
         if (tickCounter == 20) {
@@ -335,6 +322,19 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                 }
             }
         }
+        // bat form attach animation
+        io.github.apace100.apoli.component.PowerHolderComponent.getPowers(this, BatBlockAttachPower.class)
+                .stream()
+                .filter(power -> power.isAttached())
+                .findFirst()
+                .ifPresent(attachPower -> {
+                    if (attachPower.getAttachType() == BatBlockAttachPower.AttachType.SIDE) {
+                        currentState = PlayerAnimState.ANIM_ATTACH_SIDE;
+                    } else if (attachPower.getAttachType() == BatBlockAttachPower.AttachType.BOTTOM) {
+                        currentState = PlayerAnimState.ANIM_ATTACH_BOTTOM;
+                    }
+                });
+
         // isTransforming - 使用客户端同步的状态
         if(net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.isClientTransforming()){
             //ShapeShifterCurseFabric.LOGGER.info("Player is transforming");
@@ -390,6 +390,12 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                     break;
                 case BAT_2:
                     animToPlay = AnimationPlayerBat2.getFormAnimToPlay(currentState);
+                    hasSlowFall = true;
+                    overrideHandAnim = true;
+                    break;
+
+                case BAT_3:
+                    animToPlay = AnimationPlayerBat3.getFormAnimToPlay(currentState);
                     hasSlowFall = true;
                     overrideHandAnim = true;
                     break;

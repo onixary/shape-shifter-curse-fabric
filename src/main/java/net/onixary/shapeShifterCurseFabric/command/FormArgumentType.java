@@ -62,6 +62,7 @@ public class FormArgumentType implements ArgumentType<Identifier> {
             availableForms.add(new Identifier(MOD_ID, "bat_0"));
             availableForms.add(new Identifier(MOD_ID, "bat_1"));
             availableForms.add(new Identifier(MOD_ID, "bat_2"));
+            availableForms.add(new Identifier(MOD_ID, "bat_3"));
             availableForms.add(new Identifier(MOD_ID, "axolotl_0"));
             availableForms.add(new Identifier(MOD_ID, "axolotl_1"));
             availableForms.add(new Identifier(MOD_ID, "axolotl_2"));
@@ -79,20 +80,6 @@ public class FormArgumentType implements ArgumentType<Identifier> {
             availableForms.add(new Identifier(MOD_ID, "snow_fox_3"));
             availableForms.add(new Identifier(MOD_ID, "allay_sp"));
             availableForms.add(new Identifier(MOD_ID, "feral_cat_sp"));
-
-            availableForms.add(new Identifier(MOD_ID, "alpha_0"));
-            availableForms.add(new Identifier(MOD_ID, "alpha_1"));
-            availableForms.add(new Identifier(MOD_ID, "alpha_2"));
-            availableForms.add(new Identifier(MOD_ID, "beta_0"));
-            availableForms.add(new Identifier(MOD_ID, "beta_1"));
-            availableForms.add(new Identifier(MOD_ID, "beta_2"));
-            availableForms.add(new Identifier(MOD_ID, "gamma_0"));
-            availableForms.add(new Identifier(MOD_ID, "gamma_1"));
-            availableForms.add(new Identifier(MOD_ID, "gamma_2"));
-            availableForms.add(new Identifier(MOD_ID, "omega_sp"));
-            availableForms.add(new Identifier(MOD_ID, "psi_sp"));
-            availableForms.add(new Identifier(MOD_ID, "chi_sp"));
-            availableForms.add(new Identifier(MOD_ID, "phi_sp"));
       }
 
       catch(IllegalArgumentException ignored) {}

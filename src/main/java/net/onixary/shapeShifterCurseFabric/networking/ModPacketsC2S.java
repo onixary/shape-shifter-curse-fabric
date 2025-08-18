@@ -1,6 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.networking;
 
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.fabricmc.fabric.api.networking.v1.*;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
@@ -10,16 +10,18 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.advancement.OnEnableMod;
-import net.onixary.shapeShifterCurseFabric.integration.origins.Origins;
+import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnJumpPower;
+import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
+import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 
 import java.util.UUID;
+
+import static net.onixary.shapeShifterCurseFabric.networking.ModPackets.JUMP_DETACH_REQUEST_ID;
+import static net.onixary.shapeShifterCurseFabric.networking.ModPackets.JUMP_EVENT_ID;
 
 // 应仅在服务器端注册
 // This class should only be registered on the server side
@@ -41,6 +43,35 @@ public class ModPacketsC2S {
                     });
                 }
         );
+
+        ServerPlayNetworking.registerGlobalReceiver(JUMP_DETACH_REQUEST_ID, (server, player, handler, buf, responseSender) -> {
+            server.execute(() -> {
+                BatBlockAttachPower attachPower = PowerHolderComponent.getPowers(player, BatBlockAttachPower.class)
+                        .stream()
+                        .filter(BatBlockAttachPower::isAttached)
+                        .findFirst()
+                        .orElse(null);
+
+                if (attachPower != null) {
+                    attachPower.handleJump(player);
+                }
+            });
+        });
+
+        // jump_event condition handle
+        ServerPlayNetworking.registerGlobalReceiver(JUMP_EVENT_ID, (server, player, handler, buf, responseSender) -> {
+            UUID playerUuid = buf.readUuid();
+
+            server.execute(() -> {
+                // 在服务器端设置跳跃状态
+                if (player.getUuid().equals(playerUuid)) {
+                    JumpEventCondition.setJumping(player, true);
+                }
+
+                PowerHolderComponent.getPowers(player, ActionOnJumpPower.class)
+                        .forEach(ActionOnJumpPower::executeAction);
+            });
+        });
     }
 
     private static void onPressStartBookButton(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender){
@@ -56,5 +87,12 @@ public class ModPacketsC2S {
                 targetPlayer.sendMessage(Text.translatable("info.shape-shifter-curse.on_enable_mod").formatted(Formatting.LIGHT_PURPLE));
             }
         });
+    }
+
+    public static void sendDetachRequest(ServerPlayerEntity player) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        // 不需要额外数据，只是一个解除吸附的信号
+
+        ServerPlayNetworking.send(player, JUMP_DETACH_REQUEST_ID, buf);
     }
 }

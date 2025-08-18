@@ -10,6 +10,7 @@ public enum PlayerForms {
     BAT_0("bat_form", 0),
     BAT_1("bat_form", 1),
     BAT_2("bat_form", 2),
+    BAT_3("bat_form", 3),
     AXOLOTL_0("axolotl_form", 0),
     AXOLOTL_1("axolotl_form", 1),
     AXOLOTL_2("axolotl_form", 2),

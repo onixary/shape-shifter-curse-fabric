@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.advancement.criterion.Criteria;
@@ -27,7 +28,9 @@ import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalEntityActions;
 import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalEntityConditions;
 import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalPowers;
+import net.onixary.shapeShifterCurseFabric.additional_power.BatAttachEventHandler;
 import net.onixary.shapeShifterCurseFabric.advancement.*;
+import net.onixary.shapeShifterCurseFabric.command.CustomFormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.FormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
 import net.onixary.shapeShifterCurseFabric.data.ConfigSSC;
@@ -149,7 +152,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         RegFormConfig.register();
         RegOtherStatusEffects.initialize();
         TransformativeEntitySpawning.addEntitySpawns();
-
+        BatAttachEventHandler.register();
         // 注册动画（需要在服务端也执行以支持变换动画的同步）
         registerAnimations();
 
@@ -178,6 +181,11 @@ public class ShapeShifterCurseFabric implements ModInitializer {
                 Identifier.of(MOD_ID, "form_argument_type"),
                 FormArgumentType.class,
                 ConstantArgumentSerializer.of(FormArgumentType::new)
+        );
+        ArgumentTypeRegistry.registerArgumentType(
+                Identifier.of(MOD_ID, "custom_form_argument_type"),
+                CustomFormArgumentType.class,
+                ConstantArgumentSerializer.of(CustomFormArgumentType::new)
         );
 
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {

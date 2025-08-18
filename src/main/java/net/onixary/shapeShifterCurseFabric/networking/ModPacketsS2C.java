@@ -10,7 +10,10 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
@@ -25,6 +28,12 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_CURSED_MOON_DATA, ModPacketsS2C::receiveCursedMoonData);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_FORM_CHANGE, ModPacketsS2C::receiveFormChange);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_TRANSFORM_STATE, ModPacketsS2C::receiveTransformState);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_BAT_ATTACH_STATE, ModPacketsS2C::receiveBatAttachState);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_EFFECT_ATTACHMENT, ModPacketsS2C::handleSyncEffectAttachment);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_OVERLAY_EFFECT, ModPacketsS2C::receiveUpdateOverlayEffect);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_OVERLAY_FADE_EFFECT, ModPacketsS2C::receiveUpdateOverlayFadeEffect);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.TRANSFORM_COMPLETE_EFFECT, ModPacketsS2C::receiveTransformCompleteEffect);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.RESET_FIRST_PERSON, ModPacketsS2C::receiveResetFirstPerson);
     }
 
     public static void handleSyncEffectAttachment(
@@ -172,5 +181,57 @@ public class ModPacketsS2C {
     public static void receiveResetFirstPerson(MinecraftClient client, ClientPlayNetworkHandler handler,
                                              PacketByteBuf buf, PacketSender responseSender) {
         client.execute(TransformManager::executeClientFirstPersonReset);
+    }
+
+    // 发送蝙蝠吸附状态同步包
+    public static void sendBatAttachState(ServerPlayerEntity player, boolean isAttached,
+                                          int attachType, BlockPos attachedPos, Direction attachedSide) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeBoolean(isAttached);
+        buf.writeInt(attachType); // AttachType枚举的ordinal值
+
+        if (attachedPos != null) {
+            buf.writeBoolean(true);
+            buf.writeBlockPos(attachedPos);
+        } else {
+            buf.writeBoolean(false);
+        }
+
+        if (attachedSide != null) {
+            buf.writeBoolean(true);
+            buf.writeInt(attachedSide.getId());
+        } else {
+            buf.writeBoolean(false);
+        }
+
+        ServerPlayNetworking.send(player, ModPackets.SYNC_BAT_ATTACH_STATE, buf);
+    }
+
+    // 接收蝙蝠吸附状态同步包
+    public static void receiveBatAttachState(MinecraftClient client, ClientPlayNetworkHandler handler,
+                                             PacketByteBuf buf, PacketSender responseSender) {
+        boolean isAttached = buf.readBoolean();
+        int attachTypeOrdinal = buf.readInt();
+
+        BlockPos attachedPos;
+        if (buf.readBoolean()) {
+            attachedPos = buf.readBlockPos();
+        } else {
+            attachedPos = null;
+        }
+
+        Direction attachedSide;
+        if (buf.readBoolean()) {
+            attachedSide = Direction.byId(buf.readInt());
+        } else {
+            attachedSide = null;
+        }
+
+        client.execute(() -> {
+            if (client.player != null) {
+                // 获取客户端的BatBlockAttachPower并同步状态
+                BatBlockAttachPower.syncClientState(client.player, isAttached, attachTypeOrdinal, attachedPos, attachedSide);
+            }
+        });
     }
 }

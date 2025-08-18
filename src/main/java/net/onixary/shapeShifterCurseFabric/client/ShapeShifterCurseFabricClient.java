@@ -171,6 +171,11 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 			ModPacketsS2C::receiveTransformState
 		);
 
+		ClientPlayNetworking.registerGlobalReceiver(
+				ModPackets.SYNC_BAT_ATTACH_STATE,
+				ModPacketsS2C::receiveBatAttachState
+		);
+
 		// 注册新添加的TransformOverlay和FirstPerson相关的网络包处理器
 		ClientPlayNetworking.registerGlobalReceiver(
 			ModPackets.UPDATE_OVERLAY_EFFECT,

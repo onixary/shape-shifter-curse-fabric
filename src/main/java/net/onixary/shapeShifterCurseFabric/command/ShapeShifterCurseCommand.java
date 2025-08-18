@@ -42,6 +42,20 @@ public class ShapeShifterCurseCommand {
                                         )
                                 )
                         )
+                        .then(literal("set_custom_form").requires(cs -> cs.hasPermissionLevel(2))
+                                .then(argument("target", EntityArgumentType.player())
+                                        .then(argument("form", CustomFormArgumentType.form())
+                                                .executes(ShapeShifterCurseCommand::setCustomForm)
+                                        )
+                                )
+                        )
+                        .then(literal("transform_to_custom_form").requires(cs -> cs.hasPermissionLevel(2))
+                                .then(argument("target", EntityArgumentType.player())
+                                        .then(argument("form", CustomFormArgumentType.form())
+                                                .executes(ShapeShifterCurseCommand::transformToCustomForm)
+                                        )
+                                )
+                        )
                         .then(literal("jump_to_next_cursed_moon").requires(cs -> cs.hasPermissionLevel(2))
                                 .executes(ShapeShifterCurseCommand::jumpToNextCursedMoon)
                         )
@@ -78,6 +92,30 @@ public class ShapeShifterCurseCommand {
         // this with transform effect
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
         PlayerForms form = FormArgumentType.getForm(commandContext, "form");
+        ServerCommandSource serverCommandSource = commandContext.getSource();
+
+        handleDirectTransform(target, form, false);
+
+        return 1;
+
+    }
+
+    private static int setCustomForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        // set form without transform effect
+        ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
+        PlayerForms form = CustomFormArgumentType.getForm(commandContext, "form");
+        ServerCommandSource serverCommandSource = commandContext.getSource();
+
+        setFormDirectly(target, form);
+
+        return 1;
+
+    }
+
+    private static int transformToCustomForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        // this with transform effect
+        ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
+        PlayerForms form = CustomFormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
 
         handleDirectTransform(target, form, false);
