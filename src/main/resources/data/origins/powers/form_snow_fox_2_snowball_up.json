@@ -6,7 +6,7 @@
   },
   "modifier": {
     "operation": "addition",
-    "value": 7.5
+    "value": 5.0
   },
   "target_action": {
     "type": "origins:execute_command",

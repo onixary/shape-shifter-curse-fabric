@@ -84,6 +84,12 @@ public class CodexData {
     private static final Text bat_2_pros = Text.translatable("codex.form.bat2.pros");
     private static final Text bat_2_cons = Text.translatable("codex.form.bat2.cons");
     private static final Text bat_2_instincts = Text.translatable("codex.form.bat2.instincts");
+    private static final Text bat_3_title = Text.translatable("codex.form.bat3.title");
+    private static final Text bat_3_appearance = Text.translatable("codex.form.bat3.appearance");
+    private static final Text bat_3_pros = Text.translatable("codex.form.bat3.pros");
+    private static final Text bat_3_cons = Text.translatable("codex.form.bat3.cons");
+    private static final Text bat_3_instincts = Text.translatable("codex.form.bat3.instincts");
+
     // form axolotl
     private static final Text axolotl_0_title = Text.translatable("codex.form.axolotl0.title");
     private static final Text axolotl_0_appearance = Text.translatable("codex.form.axolotl0.appearance");
@@ -142,6 +148,27 @@ public class CodexData {
     private static final Text familiar_fox_3_pros = Text.translatable("codex.form.familiar_fox3.pros");
     private static final Text familiar_fox_3_cons = Text.translatable("codex.form.familiar_fox3.cons");
     private static final Text familiar_fox_3_instincts = Text.translatable("codex.form.familiar_fox3.instincts");
+    // form snow fox
+    private static final Text snow_fox_0_title = Text.translatable("codex.form.snow_fox0.title");
+    private static final Text snow_fox_0_appearance = Text.translatable("codex.form.snow_fox0.appearance");
+    private static final Text snow_fox_0_pros = Text.translatable("codex.form.snow_fox0.pros");
+    private static final Text snow_fox_0_cons = Text.translatable("codex.form.snow_fox0.cons");
+    private static final Text snow_fox_0_instincts = Text.translatable("codex.form.snow_fox0.instincts");
+    private static final Text snow_fox_1_title = Text.translatable("codex.form.snow_fox1.title");
+    private static final Text snow_fox_1_appearance = Text.translatable("codex.form.snow_fox1.appearance");
+    private static final Text snow_fox_1_pros = Text.translatable("codex.form.snow_fox1.pros");
+    private static final Text snow_fox_1_cons = Text.translatable("codex.form.snow_fox1.cons");
+    private static final Text snow_fox_1_instincts = Text.translatable("codex.form.snow_fox1.instincts");
+    private static final Text snow_fox_2_title = Text.translatable("codex.form.snow_fox2.title");
+    private static final Text snow_fox_2_appearance = Text.translatable("codex.form.snow_fox2.appearance");
+    private static final Text snow_fox_2_pros = Text.translatable("codex.form.snow_fox2.pros");
+    private static final Text snow_fox_2_cons = Text.translatable("codex.form.snow_fox2.cons");
+    private static final Text snow_fox_2_instincts = Text.translatable("codex.form.snow_fox2.instincts");
+    private static final Text snow_fox_3_title = Text.translatable("codex.form.snow_fox3.title");
+    private static final Text snow_fox_3_appearance = Text.translatable("codex.form.snow_fox3.appearance");
+    private static final Text snow_fox_3_pros = Text.translatable("codex.form.snow_fox3.pros");
+    private static final Text snow_fox_3_cons = Text.translatable("codex.form.snow_fox3.cons");
+    private static final Text snow_fox_3_instincts = Text.translatable("codex.form.snow_fox3.instincts");
     // sp form alley
     private static final Text allay_sp_title = Text.translatable("codex.form.allay_sp.title");
     private static final Text allay_sp_appearance = Text.translatable("codex.form.allay_sp.appearance");
@@ -355,6 +382,14 @@ public class CodexData {
                     case CONS -> bat_2_cons;
                     case INSTINCTS -> bat_2_instincts;
                 };
+            case BAT_3:
+                return switch (type) {
+                    case TITLE -> bat_3_title;
+                    case APPEARANCE -> bat_3_appearance;
+                    case PROS -> bat_3_pros;
+                    case CONS -> bat_3_cons;
+                    case INSTINCTS -> bat_3_instincts;
+                };
             case AXOLOTL_0:
                 return switch (type) {
                     case TITLE -> axolotl_0_title;
@@ -442,6 +477,38 @@ public class CodexData {
                     case PROS -> familiar_fox_3_pros;
                     case CONS -> familiar_fox_3_cons;
                     case INSTINCTS -> familiar_fox_3_instincts;
+                };
+            case SNOW_FOX_0:
+                return switch (type) {
+                    case TITLE -> snow_fox_0_title;
+                    case APPEARANCE -> snow_fox_0_appearance;
+                    case PROS -> snow_fox_0_pros;
+                    case CONS -> snow_fox_0_cons;
+                    case INSTINCTS -> snow_fox_0_instincts;
+                };
+            case SNOW_FOX_1:
+                return switch (type) {
+                    case TITLE -> snow_fox_1_title;
+                    case APPEARANCE -> snow_fox_1_appearance;
+                    case PROS -> snow_fox_1_pros;
+                    case CONS -> snow_fox_1_cons;
+                    case INSTINCTS -> snow_fox_1_instincts;
+                };
+            case SNOW_FOX_2:
+                return switch (type) {
+                    case TITLE -> snow_fox_2_title;
+                    case APPEARANCE -> snow_fox_2_appearance;
+                    case PROS -> snow_fox_2_pros;
+                    case CONS -> snow_fox_2_cons;
+                    case INSTINCTS -> snow_fox_2_instincts;
+                };
+            case SNOW_FOX_3:
+                return switch (type) {
+                    case TITLE -> snow_fox_3_title;
+                    case APPEARANCE -> snow_fox_3_appearance;
+                    case PROS -> snow_fox_3_pros;
+                    case CONS -> snow_fox_3_cons;
+                    case INSTINCTS -> snow_fox_3_instincts;
                 };
 
             case ALLAY_SP:
