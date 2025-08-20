@@ -21,6 +21,7 @@ import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
 import net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
@@ -52,7 +53,7 @@ public class PlayerEventHandler {
             ServerPlayerEntity player = handler.player;
 
             // load form first
-            FormAbilityManager.getServerWorld(server.getOverworld());
+            FormAbilityManager.getServerWorld(player.getServerWorld());
 
             // check if first join with mod using PlayerFormComponent
             //PlayerFormComponent formComponent = RegPlayerFormComponent.PLAYER_FORM.get(player);
@@ -82,7 +83,13 @@ public class PlayerEventHandler {
                 // 立即保存以防止重复触发
                 PlayerNbtStorage.savePlayerFormComponent(server.getOverworld(), player.getUuid().toString(), formComponent);
             }
-            FormAbilityManager.loadForm(player);
+            server.execute(() -> {
+                try {
+                    FormAbilityManager.loadForm(player);
+                } catch (Exception e) {
+                    ShapeShifterCurseFabric.LOGGER.error("Error loading player form: ", e);
+                }
+            });
 
             // load attachment
             boolean hasAttachment = loadCurrentAttachment(server.getOverworld(), player);
@@ -92,7 +99,7 @@ public class PlayerEventHandler {
             else{
                 ShapeShifterCurseFabric.LOGGER.info("Attachment loaded ");
             }
-            ModPacketsS2C.sendSyncEffectAttachment(player, player.getAttached(EffectManager.EFFECT_ATTACHMENT));
+            ModPacketsS2CServer.sendSyncEffectAttachment(player, player.getAttached(EffectManager.EFFECT_ATTACHMENT));
 
             // load instinct
             InstinctManager.getServerWorld(server.getOverworld());
@@ -102,14 +109,45 @@ public class PlayerEventHandler {
             ShapeShifterCurseFabric.LOGGER.info("Cursed moon enabled");
             cursedMoonData.getInstance().load(server.getOverworld());
             cursedMoonData.getInstance().enableCursedMoon(server.getOverworld());
-            boolean currentIsCursedMoon = cursedMoonData.getInstance().isTonightCursedMoon;
-            boolean currentIsNight = CursedMoon.isNight();
+            // 修改为使用新的月相判定系统
+            ServerWorld world = server.getOverworld();
+            boolean currentIsCursedMoon = CursedMoon.isCursedMoon(world); // 使用新的月相判定
+            boolean currentIsNight = CursedMoon.isNight(world);
 
             // 立即同步当前状态给玩家
-            ModPacketsS2C.sendCursedMoonData(player, CursedMoon.day_time, CursedMoon.day,
+            ModPacketsS2CServer.sendCursedMoonData(player, world.getTimeOfDay(), CursedMoon.getDay(world),
                     currentIsCursedMoon, currentIsNight);
 
-            ShapeShifterCurseFabric.LOGGER.info("向玩家同步诅咒之月状态: " + currentIsCursedMoon);
+            ShapeShifterCurseFabric.LOGGER.info("向玩家同步诅咒之月状态: " + currentIsCursedMoon + ", 月相: " + world.getMoonPhase());
+            // 添加延迟同步，确保客户端完全加载后再次发送状态
+            server.execute(() -> {
+                // 延迟40个tick（2秒）再次同步
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+
+                    // 在主线程中执行同步
+                    server.execute(() -> {
+                        if (player.networkHandler != null && !player.isDisconnected()) {
+                            ServerWorld currentWorld = player.getServerWorld();
+                            boolean delayedIsCursedMoon = CursedMoon.isCursedMoonByPhase(currentWorld); // 直接使用月相判定
+                            boolean delayedIsNight = CursedMoon.isNight(currentWorld);
+
+                            ModPacketsS2CServer.sendCursedMoonData(player, currentWorld.getTimeOfDay(), CursedMoon.getDay(currentWorld),
+                                    delayedIsCursedMoon, delayedIsNight);
+
+                            ShapeShifterCurseFabric.LOGGER.info("延迟同步诅咒之月状态: " + delayedIsCursedMoon +
+                                    ", 月相: " + currentWorld.getMoonPhase() +
+                                    ", 玩家: " + player.getName().getString());
+                        }
+                    });
+                }).start();
+            });
+
+
             cursedMoonData.getInstance().loadPlayerStates(server.getOverworld(), player);
             cursedMoonData.getInstance().save(server.getOverworld());
 
@@ -146,7 +184,7 @@ public class PlayerEventHandler {
                 else{
                     ShapeShifterCurseFabric.LOGGER.info("Attachment loaded ");
                 }
-                ModPacketsS2C.sendSyncEffectAttachment(player, player.getAttached(EffectManager.EFFECT_ATTACHMENT));
+                ModPacketsS2CServer.sendSyncEffectAttachment(player, player.getAttached(EffectManager.EFFECT_ATTACHMENT));
 
                 // load instinct
                 InstinctManager.getServerWorld(server.getOverworld());
@@ -156,14 +194,16 @@ public class PlayerEventHandler {
                 ShapeShifterCurseFabric.LOGGER.info("Cursed moon enabled");
                 cursedMoonData.getInstance().load(server.getOverworld());
                 cursedMoonData.getInstance().enableCursedMoon(server.getOverworld());
-                boolean currentIsCursedMoon = cursedMoonData.getInstance().isTonightCursedMoon;
-                boolean currentIsNight = CursedMoon.isNight();
+
+                // 修改为使用新的月相判定系统
+                boolean currentIsCursedMoon = CursedMoon.isCursedMoon(world); // 使用新的月相判定
+                boolean currentIsNight = CursedMoon.isNight(world);
 
                 // 立即同步当前状态给玩家
-                ModPacketsS2C.sendCursedMoonData(player, CursedMoon.day_time, CursedMoon.day,
+                ModPacketsS2CServer.sendCursedMoonData(player, world.getTimeOfDay(), CursedMoon.getDay(world),
                         currentIsCursedMoon, currentIsNight);
 
-                ShapeShifterCurseFabric.LOGGER.info("向玩家同步诅咒之月状态: " + currentIsCursedMoon);
+                ShapeShifterCurseFabric.LOGGER.info("向玩家同步诅咒之月状态: " + currentIsCursedMoon + ", 月相: " + world.getMoonPhase());
                 cursedMoonData.getInstance().loadPlayerStates(server.getOverworld(), player);
                 cursedMoonData.getInstance().save(server.getOverworld());
 

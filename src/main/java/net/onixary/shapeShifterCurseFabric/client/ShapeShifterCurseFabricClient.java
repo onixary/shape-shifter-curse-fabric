@@ -143,56 +143,7 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		RegPlayerAnimation.register();
 		registerEntityModels();
-
-		// 注册所有服务端到客户端的数据包处理器
-		ClientPlayNetworking.registerGlobalReceiver(
-			ModPackets.SYNC_EFFECT_ATTACHMENT,
-			ModPacketsS2C::handleSyncEffectAttachment
-		);
-		ClientPlayNetworking.registerGlobalReceiver(
-			ModPackets.TRANSFORM_EFFECT_ID,
-			ModPacketsS2C::receiveTransformEffect
-		);
-		ClientPlayNetworking.registerGlobalReceiver(
-			ModPackets.INSTINCT_THRESHOLD_EFFECT_ID,
-			ModPacketsS2C::receiveInstinctThresholdEffect
-		);
-		ClientPlayNetworking.registerGlobalReceiver(
-			ModPackets.SYNC_CURSED_MOON_DATA,
-			ModPacketsS2C::receiveCursedMoonData
-		);
-		// 注册新添加的网络包
-		ClientPlayNetworking.registerGlobalReceiver(
-			ModPackets.SYNC_FORM_CHANGE,
-			ModPacketsS2C::receiveFormChange
-		);
-		ClientPlayNetworking.registerGlobalReceiver(
-			ModPackets.SYNC_TRANSFORM_STATE,
-			ModPacketsS2C::receiveTransformState
-		);
-
-		ClientPlayNetworking.registerGlobalReceiver(
-				ModPackets.SYNC_BAT_ATTACH_STATE,
-				ModPacketsS2C::receiveBatAttachState
-		);
-
-		// 注册新添加的TransformOverlay和FirstPerson相关的网络包处理器
-		ClientPlayNetworking.registerGlobalReceiver(
-			ModPackets.UPDATE_OVERLAY_EFFECT,
-			ModPacketsS2C::receiveUpdateOverlayEffect
-		);
-		ClientPlayNetworking.registerGlobalReceiver(
-			ModPackets.UPDATE_OVERLAY_FADE_EFFECT,
-			ModPacketsS2C::receiveUpdateOverlayFadeEffect
-		);
-		ClientPlayNetworking.registerGlobalReceiver(
-			ModPackets.TRANSFORM_COMPLETE_EFFECT,
-			ModPacketsS2C::receiveTransformCompleteEffect
-		);
-		ClientPlayNetworking.registerGlobalReceiver(
-			ModPackets.RESET_FIRST_PERSON,
-			ModPacketsS2C::receiveResetFirstPerson
-		);
+		ModPacketsS2C.register();
 
 		ClientTickEvents.END_CLIENT_TICK.register(ShapeShifterCurseFabricClient::onClientTick);
 	}

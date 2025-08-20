@@ -17,6 +17,7 @@ import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.FormRandomSelector;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
@@ -64,7 +65,7 @@ public class TransformManager {
             String fromFormName = curFromForm != null ? curFromForm.name() : null;
             String toFormName = curToForm != null ? curToForm.name() : null;
 
-            ModPacketsS2C.sendTransformState(serverPlayer, transforming, fromFormName, toFormName);
+            ModPacketsS2CServer.sendTransformState(serverPlayer, transforming, fromFormName, toFormName);
             ShapeShifterCurseFabric.LOGGER.info("Sent transform state to client: " + transforming +
                                               ", from: " + fromFormName + ", to: " + toFormName);
         }
@@ -415,7 +416,7 @@ public class TransformManager {
         _isByCure = isByCure;
         // 检查cure应用时是否处于Cursed Moon，如果没有，则不设置flag
         // Check if the cure is applied during Cursed Moon, if not, do not set the flag
-        if(!CursedMoon.isCursedMoon()){
+        if(!CursedMoon.isCursedMoon(player.getWorld())){
             _isByCure = false;
         }
         // 根据index触发自定义成就

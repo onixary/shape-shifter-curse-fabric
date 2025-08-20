@@ -9,6 +9,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
@@ -48,7 +49,7 @@ public class EffectManager {
 
         // 判断是否为服务端玩家并发送同步包
         if (player instanceof ServerPlayerEntity serverPlayer) {
-            ModPacketsS2C.sendSyncEffectAttachment(serverPlayer, attachment);
+            ModPacketsS2CServer.sendSyncEffectAttachment(serverPlayer, attachment);
         }
     }
 
@@ -59,7 +60,7 @@ public class EffectManager {
 
         // 判断是否为服务端玩家并发送同步包
         if (player instanceof ServerPlayerEntity serverPlayer) {
-            ModPacketsS2C.sendSyncEffectAttachment(serverPlayer, loadedAttachment);
+            ModPacketsS2CServer.sendSyncEffectAttachment(serverPlayer, loadedAttachment);
             //LOGGER.info("sended sync effect attachment, currentToForm: " + loadedAttachment.currentToForm);
         }
     }
@@ -102,7 +103,7 @@ public class EffectManager {
             //LOGGER.info("save attachment success, currentToForm: " + attachment.currentToForm);
             // 判断是否为服务端玩家并发送同步包
             if (player instanceof ServerPlayerEntity serverPlayer) {
-                ModPacketsS2C.sendSyncEffectAttachment(serverPlayer, attachment);
+                ModPacketsS2CServer.sendSyncEffectAttachment(serverPlayer, attachment);
                 //LOGGER.info("sended sync effect attachment, currentToForm: " + attachment.currentToForm);
             }
             return true;

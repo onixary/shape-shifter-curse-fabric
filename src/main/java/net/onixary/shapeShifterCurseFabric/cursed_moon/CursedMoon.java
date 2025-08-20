@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
 import net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
@@ -54,7 +55,7 @@ public class CursedMoon {
     }
 
     // 新的概率系统判断逻辑
-    public static boolean isCursedMoon() {
+    /*public static boolean isCursedMoon() {
         // 如果在客户端，使用同步的状态
         if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
             return clientIsCursedMoon;
@@ -68,6 +69,28 @@ public class CursedMoon {
         } else {
             return false;
         }
+    }*/
+
+    public static boolean isCursedMoon(World world) {
+        // 如果在客户端，使用同步的状态
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+            return clientIsCursedMoon;
+        }
+
+        // 服务端逻辑：基于月相系统判断
+        CursedMoonData currentData = ShapeShifterCurseFabric.cursedMoonData.getInstance();
+        if (currentData.isActive) {
+            return isCursedMoonByPhase(world);
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean isCursedMoonByPhase(World world) {
+        int moonPhase = world.getMoonPhase();
+        // 月相为1、4、7时触发诅咒之月
+        // Cursed Moon is triggered when moon phase is 1, 4, or 7
+        return moonPhase == 1 || moonPhase == 4 || moonPhase == 7;
     }
 
     public static boolean isNight(){
@@ -145,7 +168,7 @@ public class CursedMoon {
             // 向所有在线玩家同步状态
             //boolean currentIsNight = isNight();
             for (ServerPlayerEntity player : world.getServer().getPlayerManager().getPlayerList()) {
-                ModPacketsS2C.sendCursedMoonData(player, day_time, day, true, false);
+                ModPacketsS2CServer.sendCursedMoonData(player, day_time, day, true, false);
             }
         }
         else{
@@ -166,7 +189,7 @@ public class CursedMoon {
     }
 
     // 废弃原有的 jumpToNextCursedMoon 方法，替换为手动触发方法
-    public static void forceTriggerCursedMoon(ServerWorld world) {
+    /*public static void forceTriggerCursedMoon(ServerWorld world) {
         CursedMoonData data = ShapeShifterCurseFabric.cursedMoonData.getInstance();
 
         if (!data.isActive) {
@@ -193,10 +216,59 @@ public class CursedMoon {
         for (ServerPlayerEntity player : world.getServer().getPlayerManager().getPlayerList()) {
             ModPacketsS2C.sendCursedMoonData(player, day_time, day, true, currentIsNight);
         }
+    }*/
+
+    public static void forceTriggerCursedMoon(ServerWorld world) {
+        CursedMoonData data = ShapeShifterCurseFabric.cursedMoonData.getInstance();
+
+        if (!data.isActive) {
+            ShapeShifterCurseFabric.LOGGER.warn("Cannot trigger CursedMoon: system is not active");
+            return;
+        }
+
+        // 获取当前月相
+        int currentPhase = world.getMoonPhase();
+        int targetPhase = -1;
+
+        // 找到下一个诅咒月相
+        if (currentPhase < 1) {
+            targetPhase = 1;
+        } else if (currentPhase < 4) {
+            targetPhase = 4;
+        } else if (currentPhase < 7) {
+            targetPhase = 7;
+        } else {
+            targetPhase = 1; // 回到下一个周期
+        }
+
+        // 计算需要跳过的天数来达到目标月相
+        int daysToSkip = (targetPhase - currentPhase + 8) % 8;
+        if (daysToSkip == 0) daysToSkip = 8; // 如果已经是诅咒月相，跳到下一个
+
+        // 调整世界时间到目标月相
+        long currentTime = world.getTimeOfDay();
+        long newTime = currentTime + (daysToSkip * 24000L);
+        world.setTimeOfDay(newTime);
+
+        data.save(world);
+
+        ShapeShifterCurseFabric.LOGGER.info("CursedMoon manually triggered! Skipped " + daysToSkip + " days to reach moon phase " + targetPhase);
+
+        // 向所有玩家发送消息
+        for (ServerPlayerEntity player : world.getServer().getPlayerManager().getPlayerList()) {
+            if (FormAbilityManager.getForm(player) != PlayerForms.ORIGINAL_BEFORE_ENABLE) {
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.cursed_moon_forced").formatted(Formatting.DARK_PURPLE));
+            }
+        }
+
+        // 立即向所有在线玩家同步状态
+        boolean currentIsNight = isNight(world);
+        for (ServerPlayerEntity player : world.getServer().getPlayerManager().getPlayerList()) {
+            ModPacketsS2CServer.sendCursedMoonData(player, newTime, getDay(world), true, currentIsNight);
+        }
     }
 
-    // 跳过今晚的诅咒之月（如果已经被触发）
-    public static void skipTonightCursedMoon(ServerWorld world) {
+    /*public static void skipTonightCursedMoon(ServerWorld world) {
         CursedMoonData data = ShapeShifterCurseFabric.cursedMoonData.getInstance();
 
         if (data.isTonightCursedMoon) {
@@ -211,12 +283,7 @@ public class CursedMoon {
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.cursed_moon_skipped").formatted(Formatting.GRAY));
             }
         }
-    }
-
-    @Unique
-    public static boolean checkIfOutdoor(ServerWorld world, BlockPos.Mutable pos) {
-        return pos.getY() > 63 && pos.getY() >= world.getTopY(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1;
-    }
+    }*/
 
 
     public static void applyMoonEffect(ServerPlayerEntity player){
@@ -321,7 +388,7 @@ public class CursedMoon {
         FormAbilityManager.saveForm(player);
     }
 
-    public static void resetCursedMoonForNewDay(ServerWorld world) {
+    /*public static void resetCursedMoonForNewDay(ServerWorld world) {
         CursedMoonData data = ShapeShifterCurseFabric.cursedMoonData.getInstance();
         // 如果今天已经被标记为诅咒之月，在新的一天开始时将其重置
         if (data.isTonightCursedMoon) {
@@ -331,6 +398,16 @@ public class CursedMoon {
         }
         clientIsCursedMoon = false;
         clientIsNight = false;
+    }*/
+
+    public static void resetCursedMoonForNewDay(ServerWorld world) {
+        // 基于月相的系统不需要特殊的重置逻辑
+        // 只需要重置客户端状态
+        clientIsCursedMoon = isCursedMoonByPhase(world);
+        clientIsNight = isNight(world);
+
+        ShapeShifterCurseFabric.LOGGER.info("Updated Cursed Moon status for new day: " + day + ", Moon Phase: " + world.getMoonPhase() + ", Is Cursed: " + clientIsCursedMoon);
     }
+
 
 }

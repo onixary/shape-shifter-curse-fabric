@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
@@ -19,6 +20,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
@@ -45,6 +47,7 @@ import net.onixary.shapeShifterCurseFabric.item.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.item.RegCustomPotions;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationTransform;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
@@ -170,6 +173,12 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         // Reg potions
         RegCustomPotions.registerPotions();
         RegCustomPotions.registerPotionsRecipes();
+
+        ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+            // 获取主世界作为默认世界
+            ServerWorld overworld = server.getOverworld();
+            FormAbilityManager.getServerWorld(overworld);
+        });
         // Reg origins content
 
         // do not reset effect when player respawn or enter hell

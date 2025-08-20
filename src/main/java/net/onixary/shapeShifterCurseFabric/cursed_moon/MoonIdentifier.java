@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.cursed_moon;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Identifier;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
@@ -14,7 +15,12 @@ public class MoonIdentifier extends Identifier {
     }
 
     public Identifier getIdentifier() {
-        return CursedMoon.isCursedMoon()? CURSED_MOON_PHASES : MOON_PHASES;
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.world != null) {
+            return CursedMoon.isCursedMoon(client.world) ? CURSED_MOON_PHASES : MOON_PHASES;
+        }
+        // fallback to client state
+        return CursedMoon.clientIsCursedMoon ? CURSED_MOON_PHASES : MOON_PHASES;
     }
 
     public String getPath() {

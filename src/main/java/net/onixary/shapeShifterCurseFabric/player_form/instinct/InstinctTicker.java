@@ -52,7 +52,7 @@ public class InstinctTicker {
     public static void tick(PlayerEntity player) {
         PlayerInstinctComponent comp = player.getComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
 
-        if(CursedMoon.isCursedMoon() && CursedMoon.isNight()){
+        if(CursedMoon.isCursedMoon(player.getWorld()) && CursedMoon.isNight()){
             isUnderCursedMoon = true;
         }
         else{

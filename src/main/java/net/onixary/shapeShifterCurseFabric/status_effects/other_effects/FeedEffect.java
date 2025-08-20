@@ -21,9 +21,20 @@ public class FeedEffect extends StatusEffect {
     public void applyInstantEffect(@Nullable Entity source, @Nullable Entity attacker, LivingEntity target, int amplifier, double proximity) {
         // 检查目标是否为玩家
         if (target instanceof PlayerEntity player) {
-            int foodToAdd = 8;
-            float saturationToAdd = 0.6f;
+            // 基础数值
+            int baseFoodToAdd = 8;
+            float baseSaturationToAdd = 0.6f;
+
+            // 根据proximity计算距离衰减
+            // proximity: 1.0 = 爆炸中心，0.0 = 最远距离
+            double distanceMultiplier = Math.max(0.5, proximity);
+
+            // 应用距离衰减
+            int foodToAdd = (int) Math.ceil(baseFoodToAdd * distanceMultiplier);
+            float saturationToAdd = (float) (baseSaturationToAdd * distanceMultiplier);
+
             player.getHungerManager().add(foodToAdd, saturationToAdd);
+
         }
         super.applyInstantEffect(source, attacker, target, amplifier, proximity);
     }
