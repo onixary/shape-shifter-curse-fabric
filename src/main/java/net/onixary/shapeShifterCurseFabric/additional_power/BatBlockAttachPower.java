@@ -21,6 +21,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 
 import java.util.function.Consumer;
@@ -166,7 +167,7 @@ public class BatBlockAttachPower extends Power {
         if (attached && !player.getWorld().isClient() && player instanceof ServerPlayerEntity serverPlayer) {
             // 添加小延迟确保位置设置生效
             player.getWorld().getServer().execute(() -> {
-                ModPacketsS2C.sendBatAttachState(serverPlayer, isAttached, attachType.ordinal(),
+                ModPacketsS2CServer.sendBatAttachState(serverPlayer, isAttached, attachType.ordinal(),
                         attachedBlockPos, attachedSide);
                 //System.out.println("Debug: Sent sync packet to client");
             });
@@ -250,7 +251,7 @@ public class BatBlockAttachPower extends Power {
 
         // 同步到客户端
         if (player instanceof ServerPlayerEntity serverPlayer) {
-            ModPacketsS2C.sendBatAttachState(serverPlayer, false, AttachType.NONE.ordinal(), null, null);
+            ModPacketsS2CServer.sendBatAttachState(serverPlayer, false, AttachType.NONE.ordinal(), null, null);
         }
     }
 

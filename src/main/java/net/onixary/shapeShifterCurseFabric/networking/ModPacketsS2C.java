@@ -20,6 +20,8 @@ import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffec
 
 // 应仅在客户端注册
 // This class should only be registered on the client side
+// 纯客户端类，所有的receive方法都只在这里调用
+// This is a pure client-side class, all receive methods are called only here
 public class ModPacketsS2C {
 
     public static void register() {
@@ -48,13 +50,6 @@ public class ModPacketsS2C {
             // 更新客户端缓存
             ClientEffectAttachmentCache.update(nbt);
         });
-    }
-
-    public static void sendSyncEffectAttachment(ServerPlayerEntity player, PlayerEffectAttachment attachment) {
-        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-        buf.writeNbt(attachment.toNbt());
-        //ShapeShifterCurseFabric.LOGGER.info("Attachment sent, nbt: " + attachment.toNbt());
-        ServerPlayNetworking.send(player, ModPackets.SYNC_EFFECT_ATTACHMENT, buf);
     }
 
     public static void receiveTransformEffect(MinecraftClient client, ClientPlayNetworkHandler handler,
@@ -89,23 +84,6 @@ public class ModPacketsS2C {
         });
     }
 
-    public static void sendCursedMoonData(ServerPlayerEntity player, long dayTime, int day, boolean isCursedMoon, boolean isNight) {
-        PacketByteBuf buf = PacketByteBufs.create();
-        buf.writeLong(dayTime);
-        buf.writeInt(day);
-        buf.writeBoolean(isCursedMoon);
-        buf.writeBoolean(isNight);
-        ServerPlayNetworking.send(player, ModPackets.SYNC_CURSED_MOON_DATA, buf);
-    }
-
-    // 发送形态变化同步包
-    public static void sendFormChange(ServerPlayerEntity player, String newFormName) {
-        PacketByteBuf buf = PacketByteBufs.create();
-        buf.writeString(newFormName);
-        ServerPlayNetworking.send(player, ModPackets.SYNC_FORM_CHANGE, buf);
-        ShapeShifterCurseFabric.LOGGER.info("Sent form change to client: " + newFormName);
-    }
-
     // 接收形态变化同步包
     public static void receiveFormChange(MinecraftClient client, ClientPlayNetworkHandler handler,
                                        PacketByteBuf buf, PacketSender responseSender) {
@@ -119,17 +97,6 @@ public class ModPacketsS2C {
                 net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.refreshPlayerAnimations();
             }
         });
-    }
-
-    // 发送变身状态同步包
-    public static void sendTransformState(ServerPlayerEntity player, boolean isTransforming,
-                                        String fromForm, String toForm) {
-        PacketByteBuf buf = PacketByteBufs.create();
-        buf.writeBoolean(isTransforming);
-        buf.writeString(fromForm != null ? fromForm : "");
-        buf.writeString(toForm != null ? toForm : "");
-        ServerPlayNetworking.send(player, ModPackets.SYNC_TRANSFORM_STATE, buf);
-        ShapeShifterCurseFabric.LOGGER.info("Sent transform state to client: isTransforming=" + isTransforming);
     }
 
     // 接收变身状态同步包
@@ -181,30 +148,6 @@ public class ModPacketsS2C {
     public static void receiveResetFirstPerson(MinecraftClient client, ClientPlayNetworkHandler handler,
                                              PacketByteBuf buf, PacketSender responseSender) {
         client.execute(TransformManager::executeClientFirstPersonReset);
-    }
-
-    // 发送蝙蝠吸附状态同步包
-    public static void sendBatAttachState(ServerPlayerEntity player, boolean isAttached,
-                                          int attachType, BlockPos attachedPos, Direction attachedSide) {
-        PacketByteBuf buf = PacketByteBufs.create();
-        buf.writeBoolean(isAttached);
-        buf.writeInt(attachType); // AttachType枚举的ordinal值
-
-        if (attachedPos != null) {
-            buf.writeBoolean(true);
-            buf.writeBlockPos(attachedPos);
-        } else {
-            buf.writeBoolean(false);
-        }
-
-        if (attachedSide != null) {
-            buf.writeBoolean(true);
-            buf.writeInt(attachedSide.getId());
-        } else {
-            buf.writeBoolean(false);
-        }
-
-        ServerPlayNetworking.send(player, ModPackets.SYNC_BAT_ATTACH_STATE, buf);
     }
 
     // 接收蝙蝠吸附状态同步包

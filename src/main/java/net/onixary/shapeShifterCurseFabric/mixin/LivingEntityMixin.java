@@ -60,7 +60,7 @@ public abstract class LivingEntityMixin {
             }
         }
 
-        if(!(CursedMoon.isCursedMoon() && CursedMoon.isNight())){
+        if(!(CursedMoon.isCursedMoon(world) && CursedMoon.isNight())){
             return;
         }
 

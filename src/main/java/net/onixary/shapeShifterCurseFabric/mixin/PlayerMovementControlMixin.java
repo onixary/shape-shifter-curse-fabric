@@ -23,6 +23,12 @@ public class PlayerMovementControlMixin {
     private void preventTravelWhenAttached(Vec3d movementInput, CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
+        // 添加空值检查
+        PowerHolderComponent component = PowerHolderComponent.KEY.getNullable(player);
+        if (component == null) {
+            return; // 组件未初始化，跳过处理
+        }
+
         BatBlockAttachPower attachPower = PowerHolderComponent.getPowers(player, BatBlockAttachPower.class)
                 .stream()
                 .filter(BatBlockAttachPower::isAttached)
@@ -40,6 +46,12 @@ public class PlayerMovementControlMixin {
     private void zeroMovementSpeedWhenAttached(CallbackInfoReturnable<Float> cir) {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
+        // 添加空值检查
+        PowerHolderComponent component = PowerHolderComponent.KEY.getNullable(player);
+        if (component == null) {
+            return; // 组件未初始化，跳过处理
+        }
+
         BatBlockAttachPower attachPower = PowerHolderComponent.getPowers(player, BatBlockAttachPower.class)
                 .stream()
                 .filter(BatBlockAttachPower::isAttached)
@@ -55,6 +67,12 @@ public class PlayerMovementControlMixin {
     private void handleJump(CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
+        // 添加空值检查
+        PowerHolderComponent component = PowerHolderComponent.KEY.getNullable(player);
+        if (component == null) {
+            return; // 组件未初始化，跳过处理
+        }
+
         BatBlockAttachPower attachPower = PowerHolderComponent.getPowers(player, BatBlockAttachPower.class)
                 .stream()
                 .filter(BatBlockAttachPower::isAttached)
@@ -63,8 +81,10 @@ public class PlayerMovementControlMixin {
 
         if (attachPower != null) {
             // 处理跳跃取消吸附
-            PacketByteBuf buf = PacketByteBufs.create();
-            ClientPlayNetworking.send(ModPackets.JUMP_DETACH_REQUEST_ID, buf);
+            if (player.getWorld().isClient()) {
+                PacketByteBuf buf = PacketByteBufs.create();
+                ClientPlayNetworking.send(ModPackets.JUMP_DETACH_REQUEST_ID, buf);
+            }
             ci.cancel();
         }
 
@@ -82,6 +102,12 @@ public class PlayerMovementControlMixin {
     @Inject(method = "checkFallFlying", at = @At("HEAD"), cancellable = true)
     private void preventElytraCheckWhenAttached(CallbackInfoReturnable<Boolean> cir) {
         PlayerEntity player = (PlayerEntity) (Object) this;
+
+        // 添加空值检查
+        PowerHolderComponent component = PowerHolderComponent.KEY.getNullable(player);
+        if (component == null) {
+            return; // 组件未初始化，跳过处理
+        }
 
         BatBlockAttachPower attachPower = PowerHolderComponent.getPowers(player, BatBlockAttachPower.class)
                 .stream()

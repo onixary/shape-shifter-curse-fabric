@@ -16,6 +16,8 @@ import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLaye
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayers;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginRegistry;
 import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
 import virtuoel.pehkui.api.ScaleData;
@@ -55,10 +57,13 @@ public class FormAbilityManager {
         FormAbilityManager.saveForm(player);
 
         // 添加网络同步：通知客户端形态已变化
-        if (player instanceof ServerPlayerEntity serverPlayer) {
-            net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C.sendFormChange(
-                serverPlayer, newForm.name());
-            ShapeShifterCurseFabric.LOGGER.info("Sent form change notification to client: " + newForm.name());
+        if (!player.getWorld().isClient() && player instanceof ServerPlayerEntity serverPlayer) {
+            try {
+                ModPacketsS2CServer.sendFormChange(serverPlayer, newForm.name());
+                ShapeShifterCurseFabric.LOGGER.info("Sent form change notification to client: " + newForm.name());
+            } catch (Exception e) {
+                ShapeShifterCurseFabric.LOGGER.error("Failed to send form change notification: ", e);
+            }
         }
     }
 
@@ -74,9 +79,17 @@ public class FormAbilityManager {
     }
 
     public static void saveForm(PlayerEntity player) {
-        PlayerFormComponent component = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
-        // 存储
-        PlayerNbtStorage.savePlayerFormComponent(world, player.getUuid().toString(), component);
+        // 添加世界检查
+        if (world == null && player instanceof ServerPlayerEntity serverPlayer) {
+            world = serverPlayer.getServerWorld();
+        }
+
+        if (world != null) {
+            PlayerFormComponent component = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
+            PlayerNbtStorage.savePlayerFormComponent(world, player.getUuid().toString(), component);
+        } else {
+            ShapeShifterCurseFabric.LOGGER.warn("Cannot save form: world is null");
+        }
     }
 
     private static PlayerForms loadSavedForm(PlayerEntity player) {

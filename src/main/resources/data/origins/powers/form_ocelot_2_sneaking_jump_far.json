@@ -1,19 +1,11 @@
 {
-  "type":"origins:active_self",
+  "type":"origins:action_on_jump",
   "entity_action":{
     "type":"origins:add_velocity",
     "z":0.8,
     "space":"local"
   },
-  "cooldown":10,
-  "hud_render": {
-    "should_render": false
-  },
-  "key": {
-    "key": "key.jump",
-    "continuous": false
-  },
-  "condition": {
+  "entity_condition": {
     "type":"origins:and",
     "conditions":[
       {
