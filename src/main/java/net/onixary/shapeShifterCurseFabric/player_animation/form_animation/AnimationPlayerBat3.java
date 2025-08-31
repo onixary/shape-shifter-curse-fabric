@@ -72,10 +72,10 @@ public class AnimationPlayerBat3 {
         anim_tool_swing = new AnimationHolder(new Identifier(MOD_ID, "bat_3_digging"), true, 1.5f, 2);
         anim_attack = new AnimationHolder(new Identifier(MOD_ID, "bat_3_attack"), true,1.5f, 2);
         anim_idle = new AnimationHolder(new Identifier(MOD_ID, "bat_3_idle"), true);
-        anim_walk = new AnimationHolder(new Identifier(MOD_ID, "bat_3_walk"), true, 2, 4);
+        anim_walk = new AnimationHolder(new Identifier(MOD_ID, "bat_3_walk"), true, 1.7f, 4);
         anim_sneak_walk = new AnimationHolder(new Identifier(MOD_ID, "bat_3_sneak_walk"), true);
         anim_attach_side = new AnimationHolder(new Identifier(MOD_ID, "bat_3_attach_side"), true);
         anim_attach_bottom = new AnimationHolder(new Identifier(MOD_ID, "bat_3_attach_bottom"), true);
-        anim_run = new AnimationHolder(new Identifier(MOD_ID, "bat_3_walk"), true, 3, 4);
+        anim_run = new AnimationHolder(new Identifier(MOD_ID, "bat_3_walk"), true, 2.4f, 4);
     }
 }

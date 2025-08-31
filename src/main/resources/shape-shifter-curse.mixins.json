@@ -46,7 +46,8 @@
     "InGameHudMixin",
     "PlayerEntitySpeedFOVMixin",
     "PlayerRotationRendererMixin",
-    "PlayerMovementControlMixin"
+    "PlayerMovementControlMixin",
+    "CapeFeatureRendererMixin"
 
   ],
   "injectors": {
