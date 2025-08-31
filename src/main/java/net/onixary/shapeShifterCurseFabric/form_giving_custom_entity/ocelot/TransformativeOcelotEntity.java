@@ -28,6 +28,13 @@ public class TransformativeOcelotEntity extends OcelotEntity {
     // 当前冷却时间
     private float cooldown = 0;
 
+    @Override
+    protected void initGoals() {
+        super.initGoals();
+        // 添加攻击目标（玩家）
+        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+    }
+
     public static boolean canCustomSpawn(EntityType<TransformativeOcelotEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
         return random.nextInt(3) != 0;
     }
