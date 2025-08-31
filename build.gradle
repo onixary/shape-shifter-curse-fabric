@@ -192,6 +192,7 @@ dependencies {
     modCompileOnly "maven.modrinth:first-person-model:mquWPSix"
     modRuntimeOnly "maven.modrinth:first-person-model:mquWPSix"
 
+    modCompileOnly "maven.modrinth:vivecraft:9Sa2NEEb"
     annotationProcessor(files("libs/mixinextras-fabric-0.2.0-beta.8.jar"))
 
 }
