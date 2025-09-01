@@ -54,6 +54,14 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
                 RenderSystem.enableCull();
                 ci.cancel(); // 取消默认渲染
             }
+            else {
+                // 临时解决方法
+                RenderSystem.disableCull();
+                arm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntitySolid(player.getSkinTexture())), light, OverlayTexture.DEFAULT_UV);
+                sleeve.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(player.getSkinTexture())), light, OverlayTexture.DEFAULT_UV);
+                RenderSystem.enableCull();
+                ci.cancel();
+            }
         }
     }
 }
