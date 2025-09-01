@@ -36,11 +36,19 @@ public class FeedEffect extends StatusEffect {
             player.getHungerManager().add(foodToAdd, saturationToAdd);
 
         }
-        super.applyInstantEffect(source, attacker, target, amplifier, proximity);
+        // 原版会对 [瞬间恢复 瞬间伤害] 以外的的效果调用 this.applyUpdateEffect 导致重复加饱食度
+        // super.applyInstantEffect(source, attacker, target, amplifier, proximity);
     }
 
     @Override
     public boolean canApplyUpdateEffect(int duration, int amplifier) {
-        return false;
+        return duration >= 1;
+    }
+
+    @Override
+    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+        if (entity instanceof PlayerEntity player) {
+            player.getHungerManager().add(8, 0.6f);
+        }
     }
 }
