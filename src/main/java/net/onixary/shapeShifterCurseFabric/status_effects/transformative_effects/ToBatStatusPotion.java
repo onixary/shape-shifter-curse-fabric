@@ -28,7 +28,13 @@ public class ToBatStatusPotion extends StatusEffect {
 
     @Override
     public boolean canApplyUpdateEffect(int duration, int amplifier) {
-        return false;
+        return duration >= 1;
+    }
+
+    @Override
+    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+        this.applyInstantEffect(null, null, entity, amplifier, 0);
+        entity.removeStatusEffect(this);
     }
 
     @Override
