@@ -144,6 +144,7 @@
   "info.shape-shifter-curse.on_enable_mod_after": ["When you regain your senses, you notice... you seem unchanged?\nPerhaps you should check the book's contents.."],
   "info.shape-shifter-curse.before_cursed_moon": ["You feel magic stirring within you. The cursed moon will rise next night..."],
   "info.shape-shifter-curse.before_cursed_moon_nether": ["You feel magic stirring within you. The cursed moon will rise somewhere soon—even in other dimensions, you can't get rid of it"],
+  "info.shape-shifter-curse.cursed_moon_forced": ["You feel a strange force pushing time forward. The cursed moon will rise next night..."],
   "info.shape-shifter-curse.on_cursed_moon": ["The magic within you surges—the cursed moon has risen"],
   "info.shape-shifter-curse.on_cursed_moon_nether": ["The magic within you surges—the cursed moon has risen somewhere"],
   "info.shape-shifter-curse.on_cursed_moon_special": ["Strangely, it doesn't seem to visibly affect your current [special] form..."],
@@ -152,6 +153,7 @@
   "info.shape-shifter-curse.end_cursed_moon": ["The cursed moon's influence fades. Your magic calms, returning you to your pre-moon form"],
   "info.shape-shifter-curse.end_cursed_moon_special": ["The cursed moon's influence fades. Your magic calms"],
   "info.shape-shifter-curse.end_cursed_moon_permanent": ["The cursed moon has set, and its influence on other creatures fades away with it"],
+  "info.shape-shifter-curse.end_cursed_moon_before_enable": ["The peculiar moon has set, and its influence on other creatures fades away with it"],
 
 "info.shape-shifter-curse.origin_form_sleep_when_attached": ["In your sleep, the curse's magic intensified, altering your body..."],
   "info.shape-shifter-curse.origin_form_time_end_when_attached": ["The curse's effects fade. The magic within you quiets down"],

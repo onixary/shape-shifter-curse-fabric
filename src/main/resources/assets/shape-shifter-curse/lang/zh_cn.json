@@ -138,6 +138,7 @@
   "info.shape-shifter-curse.on_enable_mod_after": ["回过神时，你发现自己...似乎没什么变化？\n也许你应该检查一下书中的内容.."],
   "info.shape-shifter-curse.before_cursed_moon": ["你感觉到体内的魔法正在涌动，下一个夜晚，诅咒之月将会升起..."],
   "info.shape-shifter-curse.before_cursed_moon_nether": ["你感觉到体内的魔法正在涌动，一段时间后，诅咒之月将会在某处升起————似乎即使在其它位面，你依然无法远离它"],
+  "info.shape-shifter-curse.cursed_moon_forced": ["你感觉到奇怪的力量在推动时间，下一个夜晚，诅咒之月将会升起..."],
   "info.shape-shifter-curse.on_cursed_moon": ["你体内的魔法开始激荡，诅咒之月升起了"],
   "info.shape-shifter-curse.on_cursed_moon_nether": ["你体内的魔法开始激荡，诅咒之月在某处升起了"],
   "info.shape-shifter-curse.on_cursed_moon_special": ["奇怪的是，它似乎没有对你的身体产生可见的影响..也许你当前的形态比较[特殊]？"],
@@ -146,6 +147,7 @@
   "info.shape-shifter-curse.end_cursed_moon": ["诅咒之月的影响消退了。你体内的魔法趋于平静，让你回复到了诅咒之月升起前的形态"],
   "info.shape-shifter-curse.end_cursed_moon_special": ["诅咒之月的影响消退了,你体内的魔法趋于平静"],
   "info.shape-shifter-curse.end_cursed_moon_permanent": ["诅咒之月落下了，它带给其他生物的影响也随之消退"],
+  "info.shape-shifter-curse.end_cursed_moon_before_enable": ["奇怪的月亮落下了，它带给其他生物的影响也随之消退"],
 
   "info.shape-shifter-curse.origin_form_sleep_when_attached": ["在睡梦中，你所受到的咒文效果激化了你体内的魔法，让你的身体发生了变化..."],
   "info.shape-shifter-curse.origin_form_time_end_when_attached": ["你所受到的咒文效果逐渐消退，你体内的魔法恢复了平静"],
