@@ -32,7 +32,7 @@ public abstract class PotionStackMixin {
             if (itemStack.getItem() instanceof PotionItem) {
                 PlayerForms currentForm = FormAbilityManager.getForm(player);
                 if (currentForm == PlayerForms.FAMILIAR_FOX_2 || currentForm == PlayerForms.FAMILIAR_FOX_3) {
-                    return 3;
+                    return Math.max(3, itemStack.getMaxCount());
                 }
             }
         }
