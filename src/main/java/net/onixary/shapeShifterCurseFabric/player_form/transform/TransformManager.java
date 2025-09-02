@@ -537,6 +537,18 @@ public class TransformManager {
             fpm.getConfig().xOffset = 0;
             fpm.getConfig().sitXOffset = 0;
             fpm.getConfig().sneakXOffset = 0;
+
+            // 1s 后再次重置 防止 ExtraItemFeatureRenderer 未同步玩家变形状态
+            new Thread(() -> {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+                fpm.getConfig().xOffset = 0;
+                fpm.getConfig().sitXOffset = 0;
+                fpm.getConfig().sneakXOffset = 0;
+            }).start();
         }
     }
 
