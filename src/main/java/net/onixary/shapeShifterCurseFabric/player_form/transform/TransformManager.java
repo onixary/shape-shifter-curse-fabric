@@ -538,16 +538,16 @@ public class TransformManager {
             fpm.getConfig().sitXOffset = 0;
             fpm.getConfig().sneakXOffset = 0;
 
-            // 1s 后再次重置 防止 ExtraItemFeatureRenderer 未同步玩家变形状态
+            // 0.05s 0.1s 0.2s 1s 后重置 防止 ExtraItemFeatureRenderer 未同步玩家变形状态 减少玩家感知未同步
             new Thread(() -> {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
-                fpm.getConfig().xOffset = 0;
-                fpm.getConfig().sitXOffset = 0;
-                fpm.getConfig().sneakXOffset = 0;
+                try { Thread.sleep(50); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }  // 0.05s
+                fpm.getConfig().xOffset = 0; fpm.getConfig().sitXOffset = 0; fpm.getConfig().sneakXOffset = 0;
+                try { Thread.sleep(50); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }  // 0.1s
+                fpm.getConfig().xOffset = 0; fpm.getConfig().sitXOffset = 0; fpm.getConfig().sneakXOffset = 0;
+                try { Thread.sleep(100); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }  // 0.2s
+                fpm.getConfig().xOffset = 0; fpm.getConfig().sitXOffset = 0; fpm.getConfig().sneakXOffset = 0;
+                try { Thread.sleep(800); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }  // 1s  最终修复 大部分均在1s内恢复同步
+                fpm.getConfig().xOffset = 0; fpm.getConfig().sitXOffset = 0; fpm.getConfig().sneakXOffset = 0;
             }).start();
         }
     }
