@@ -16,10 +16,13 @@ import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.ConfigSSC;
 import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -31,6 +34,9 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
         super(ctx, model, shadowSize);
     }
 
+    @Shadow
+    private void setModelPose(AbstractClientPlayerEntity player) {}
+
     @Inject(
             method =  "renderArm",
             at = @At("HEAD"),
@@ -38,30 +44,33 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
     )
 
     private void shape_shifter_curse$onRenderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
-        if(RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm() != PlayerForms.ORIGINAL_BEFORE_ENABLE )
+        PlayerForms CurrentForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+        if (CurrentForm != PlayerForms.ORIGINAL_BEFORE_ENABLE)  // 仅当玩家激活Mod后才进行修改
         {
-            boolean keepOriginalSkin = RegPlayerSkinComponent.SKIN_SETTINGS.get(player).shouldKeepOriginalSkin();
-            if(!keepOriginalSkin){
-                // 渲染手臂
-                Identifier CUSTOM_SKIN =
-                        new Identifier(ShapeShifterCurseFabric.MOD_ID, "textures/entity/base_player/ssc_base_skin.png");
-                RenderSystem.disableCull();
-                MinecraftClient.getInstance().getTextureManager().bindTexture(CUSTOM_SKIN);
-                VertexConsumer vertexConsumerArm = vertexConsumers.getBuffer(RenderLayer.getEntitySolid(CUSTOM_SKIN));
-                arm.render(matrices, vertexConsumerArm, light, OverlayTexture.DEFAULT_UV);
-                VertexConsumer vertexConsumerSleeve = vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(CUSTOM_SKIN));
-                sleeve.render(matrices, vertexConsumerSleeve, light, OverlayTexture.DEFAULT_UV);
-                RenderSystem.enableCull();
-                ci.cancel(); // 取消默认渲染
+            if (RegFormConfig.getConfig(CurrentForm).getBodyType() == PlayerFormBodyType.FERAL) {  // 不渲染手臂情况
+                ci.cancel();
+                return;
+            }
+            Identifier Skin = null;
+            if (!RegPlayerSkinComponent.SKIN_SETTINGS.get(player).shouldKeepOriginalSkin()) {
+                Skin = new Identifier(ShapeShifterCurseFabric.MOD_ID, "textures/entity/base_player/ssc_base_skin.png");
+                MinecraftClient.getInstance().getTextureManager().bindTexture(Skin);
             }
             else {
-                // 临时解决方法
-                RenderSystem.disableCull();
-                arm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntitySolid(player.getSkinTexture())), light, OverlayTexture.DEFAULT_UV);
-                sleeve.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(player.getSkinTexture())), light, OverlayTexture.DEFAULT_UV);
-                RenderSystem.enableCull();
-                ci.cancel();
+                Skin = player.getSkinTexture();
             }
+            // 原版渲染 仅修改注释位置
+            PlayerEntityModel playerEntityModel = (PlayerEntityModel)this.getModel();
+            this.setModelPose(player);
+            playerEntityModel.handSwingProgress = 0.0f;
+            playerEntityModel.sneaking = false;
+            playerEntityModel.leaningPitch = 0.0f;
+            playerEntityModel.setAngles(player, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+            arm.pitch = 0.0f;
+            arm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntitySolid(Skin)), light, OverlayTexture.DEFAULT_UV);  // 修改SKIN位置
+            sleeve.pitch = 0.0f;
+            sleeve.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(Skin)), light, OverlayTexture.DEFAULT_UV);  // 修改SKIN位置
+            ci.cancel();  // 取消默认渲染 或许可以用Invoke Mixin getSkinTexture 来增加兼容性
         }
     }
 }
