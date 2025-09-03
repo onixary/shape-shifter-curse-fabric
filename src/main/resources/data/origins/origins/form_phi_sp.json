@@ -1,5 +1,6 @@
 {
 	"powers": [
+		"origins:no_render_arm",
 		"origins:form_feral_cat_sp_scale"
 	],
 	"icon": {

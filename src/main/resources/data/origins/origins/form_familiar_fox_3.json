@@ -1,5 +1,6 @@
 {
 	"powers": [
+		"origins:no_render_arm",
 		"origins:form_familiar_fox_3_scale",
 		"origins:form_familiar_fox_3_particle",
 		"origins:form_familiar_fox_3_craft_healing_potion",

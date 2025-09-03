@@ -1,5 +1,6 @@
 {
 	"powers": [
+		"origins:no_render_arm_when_sneaking",
 		"origins:form_ocelot_2_scale",
 		"origins:scare_creepers",
 		"origins:fall_immunity",

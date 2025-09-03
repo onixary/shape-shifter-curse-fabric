@@ -1,5 +1,6 @@
 {
 	"powers":[
+		"origins:no_render_arm",
 		"origins:form_bat_2_scale",
 		"origins:elytra_no_render",
 		"origins:bat_vision",

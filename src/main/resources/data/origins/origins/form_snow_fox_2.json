@@ -1,5 +1,6 @@
 {
 	"powers": [
+		"origins:no_render_arm_when_sneaking",
 		"origins:form_familiar_fox_2_scale",
 		"origins:form_sprint_speed_up",
 		"origins:form_disable_leg_armor",

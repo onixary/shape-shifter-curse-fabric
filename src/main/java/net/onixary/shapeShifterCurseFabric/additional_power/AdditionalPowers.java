@@ -27,6 +27,7 @@ public class AdditionalPowers {
         register(SnowballBlockTransformPower.createFactory());
         register(BatBlockAttachPower.createFactory());
         register(ActionOnJumpPower.createFactory());
+        register(NoRenderArmPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {
