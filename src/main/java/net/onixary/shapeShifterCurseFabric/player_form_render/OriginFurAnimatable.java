@@ -23,7 +23,7 @@ public class OriginFurAnimatable implements GeoAnimatable {
         }));
     }
 
-    PlayerEntity e;
+    public PlayerEntity e;
 
     public void setPlayer(PlayerEntity e) {
         this.e = e;

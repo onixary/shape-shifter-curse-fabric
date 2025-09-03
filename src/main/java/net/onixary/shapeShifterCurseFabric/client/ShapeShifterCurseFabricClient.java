@@ -3,12 +3,20 @@ package net.onixary.shapeShifterCurseFabric.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.ShaderProgram;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.custom_ui.BookOfShapeShifterScreen;
@@ -21,8 +29,11 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TOce
 import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_animation.RegPlayerAnimation;
+import net.onixary.shapeShifterCurseFabric.render.render_layer.FurGradientRenderLayer;
 import net.onixary.shapeShifterCurseFabric.util.ClientTicker;
 import net.onixary.shapeShifterCurseFabric.util.TickManager;
+
+import java.io.IOException;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
 
@@ -34,6 +45,7 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 	public static MinecraftClient getClient() {
 		return MinecraftClient.getInstance();
 	}
+	private static ShaderProgram furGradientShader;
 
 	public static void openBookScreen(PlayerEntity user) {
 		if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreen)) {
@@ -139,12 +151,35 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		return clientTransformToForm;
 	}
 
+	private void registerShaderResource()
+	{
+		CoreShaderRegistrationCallback.EVENT.register(context -> {
+			// 1. 定义着色器的 Identifier
+			Identifier shaderId = new Identifier(ShapeShifterCurseFabric.MOD_ID, "fur_gradient_remap");
+
+			// 2. 使用 context.register 方法注册
+			//    这个方法会处理底层的加载逻辑
+			context.register(shaderId, VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL, program -> {
+				// 3. 将加载好的 ShaderProgram 实例保存到我们的静态变量中
+				ShapeShifterCurseFabricClient.furGradientShader = program;
+			});
+		});
+	}
+
 	@Override
 	public void onInitializeClient() {
 		RegPlayerAnimation.register();
 		registerEntityModels();
 		ModPacketsS2C.register();
 
+		registerShaderResource();
+		FurGradientRenderLayer.onInitializeClient();
+
 		ClientTickEvents.END_CLIENT_TICK.register(ShapeShifterCurseFabricClient::onClientTick);
 	}
+
+	public static ShaderProgram getFurGradientShader() {
+		return furGradientShader;
+	}
+
 }

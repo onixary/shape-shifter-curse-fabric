@@ -18,7 +18,10 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.onixary.shapeShifterCurseFabric.render.render_layer.FurColorGradientRenderLayer;
+import net.onixary.shapeShifterCurseFabric.render.render_layer.FurGradientRenderLayer;
 import org.joml.Quaternionf;
+import org.joml.Vector4f;
 import org.spongepowered.asm.mixin.Unique;
 
 public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityModel<T>, A extends BipedEntityModel<T>> extends FeatureRenderer<T, M> {
@@ -174,9 +177,18 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
                 m.invertRotForPart("bipedLeftArm", false, true, true);
                 m.invertRotForPart("bipedRightLeg", false, true, true);
                 m.invertRotForPart("bipedLeftLeg", false, true, true);
+
+                // 用Core Shader渲染的尝试，但这玩意儿不兼容Iris，:(
+                // Core shader fur render implementation, but not capable with iris, :(
+                //RenderLayer myLayer = FurGradientRenderLayer.furGradientRemap.getRenderLayer(RenderLayer.getEntityTranslucent(m.getTextureResource(a)));
+                //RenderLayer testFurLayer = FurColorGradientRenderLayer.getFurLayer(m.getTextureResource(a), new Vector4f(1.0f, 1.0f ,1.0f, 1.0f), new Vector4f(0.8f, 0.8f, 0.8f, 1.0f));
                 fur.render(matrixStack, a, vertexConsumerProvider, RenderLayer.getEntityTranslucent(m.getTextureResource(a)), null, light);
-                //fur.render(matrixStack, a, vertexConsumerProvider, RenderLayer.getEntityTranslucentEmissive(m.getTextureResource(a)), null, light);
-                fur.render(matrixStack, a, vertexConsumerProvider, RenderLayer.getEntityTranslucentEmissive(m.getFullbrightTextureResource(a)), null, Integer.MAX_VALUE - 1);
+
+                // 用Core Shader渲染的尝试，但这玩意儿不兼容Iris，:(
+                // Core shader fur render implementation, but not capable with iris, :(
+                //RenderLayer myLayer2 = FurGradientRenderLayer.furGradientRemap.getRenderLayer(RenderLayer.getEntityTranslucentEmissive(m.getFullbrightTextureResource(a)));
+                //RenderLayer testFurLayer2 = FurColorGradientRenderLayer.getFurLayer(m.getFullbrightTextureResource(a), new Vector4f(1.0f, 1.0f ,1.0f, 1.0f), new Vector4f(0.8f, 0.8f, 0.8f, 1.0f));
+                fur.render(matrixStack, a, vertexConsumerProvider, RenderLayer.getEntityTranslucentEmissive(m.getTextureResource(a)), null, light);
                 matrixStack.pop();
             }
 
