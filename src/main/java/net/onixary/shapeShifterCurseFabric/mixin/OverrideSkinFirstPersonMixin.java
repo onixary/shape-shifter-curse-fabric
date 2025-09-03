@@ -1,34 +1,36 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.apace100.apoli.component.PowerHolderComponent;
+import mod.azure.azurelib.cache.object.BakedGeoModel;
+import mod.azure.azurelib.cache.object.GeoBone;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.*;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.LivingEntityRenderer;
-import net.minecraft.client.render.entity.PlayerEntityRenderer;
+import net.minecraft.client.render.entity.*;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.NoRenderArmPower;
-import net.onixary.shapeShifterCurseFabric.data.ConfigSSC;
-import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
+import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
+import net.onixary.shapeShifterCurseFabric.player_form_render.*;
+import org.joml.Quaternionf;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.Optional;
+
 // issue: OverrideSkinFirstPersonMixin会与某些其他mod不兼容，需要寻找原因所在
 @Mixin(PlayerEntityRenderer.class)
 public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
@@ -40,17 +42,107 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
     // 自定义皮肤路径
     private static final Identifier CUSTOM_SKIN = new Identifier(ShapeShifterCurseFabric.MOD_ID, "textures/entity/base_player/ssc_base_skin.png");
 
-    @Inject(
-            method =  "renderArm",
-            at = @At("HEAD"),
-            cancellable = true
-    )
-
-    private void shape_shifter_curse$onRenderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
+    @Inject(method = "renderArm", at = @At("HEAD"), cancellable = true)
+    private void shape_shifter_curse$RenderArm_HEAD(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
+        if (RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm() == PlayerForms.ORIGINAL_BEFORE_ENABLE) {return;}  // 仅当玩家激活Mod后才进行修改
         if (PowerHolderComponent.hasPower(player, NoRenderArmPower.class)) {  // 不渲染手臂情况
             ci.cancel();
         }
     }
+
+    @Inject(method = "renderArm", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/PlayerEntityRenderer;setModelPose(Lnet/minecraft/client/network/AbstractClientPlayerEntity;)V", shift = At.Shift.AFTER))
+    private void shape_shifter_curse$RenderArm_setModelPose_AFTER(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
+        // 渲染变身模型-根据模型设置修改手臂组件渲染
+        if (RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm() == PlayerForms.ORIGINAL_BEFORE_ENABLE) {return;}  // 仅当玩家激活Mod后才进行修改
+        for (OriginalFurClient.OriginFur fur : ((IPlayerEntityMixins) player).originalFur$getCurrentFurs()) {
+            OriginFurModel OFModel = (OriginFurModel) fur.getGeoModel();
+            boolean IsRenderRight = arm.equals(this.getModel().rightArm);
+            // 设置手臂组件是否显示
+            if (IsRenderRight) {
+                arm.visible = !OFModel.hiddenParts.contains(OriginFurModel.VMP.rightArm);
+                sleeve.visible = !OFModel.hiddenParts.contains(OriginFurModel.VMP.rightSleeve);
+            }
+            else {
+                arm.visible = !OFModel.hiddenParts.contains(OriginFurModel.VMP.leftArm);
+                sleeve.visible = !OFModel.hiddenParts.contains(OriginFurModel.VMP.leftSleeve);
+            }
+        }
+    }
+
+    @Inject(method = "renderArm", at = @At("RETURN"), cancellable = true)
+    private void shape_shifter_curse$RenderArm_RETURN(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
+        // 渲染变身模型
+        if (RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm() == PlayerForms.ORIGINAL_BEFORE_ENABLE) {return;}  // 仅当玩家激活Mod后才进行修改
+        boolean IsRenderRight = arm.equals(this.getModel().rightArm);
+        String GeoBoneName = IsRenderRight ? "bipedRightArm" : "bipedLeftArm";
+        for (OriginalFurClient.OriginFur fur : ((IPlayerEntityMixins) player).originalFur$getCurrentFurs()) {
+            if (fur == null) {return;}
+            Origin origin = fur.currentAssociatedOrigin;
+            if (origin == null) {return;}
+            PlayerEntityRenderer EntityRender = (PlayerEntityRenderer) MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(player);
+            OriginFurModel OFModel = (OriginFurModel) fur.getGeoModel();
+            OriginFurAnimatable OFAnimatable = (OriginFurAnimatable) fur.getAnimatable();
+            Optional<GeoBone> OptionalGeoBone = OFModel.getBone(GeoBoneName);
+            if (OptionalGeoBone.isEmpty()) {
+                // 有时AzureLib 未能及时注册 GeoBone 因此需要手动注册
+                if (OFModel.getAnimationProcessor().getRegisteredBones().isEmpty()) {
+                    ShapeShifterCurseFabric.LOGGER.info("GeoBone 未注册, 尝试重新注册模型");
+                    BakedGeoModel bakedGeoModel = OFModel.getBakedModel(OFModel.getModelResource(OFAnimatable));
+                    OFModel.getAnimationProcessor().setActiveModel(bakedGeoModel);
+                }
+                return;
+            }
+            var eRA = (IPlayerEntityMixins) EntityRender;
+            var acc = (ModelRootAccessor) EntityRender.getModel();
+            OriginFurModel m = (OriginFurModel) fur.getGeoModel();
+            m.getAnimationProcessor().getRegisteredBones().forEach(coreGeoBone -> {
+                if (((IGeoBone) coreGeoBone).originfurs$isHiddenByDefault()) {
+                    return;
+                }
+                m.preprocess(origin, EntityRender, eRA, acc, player);
+            });
+            GeoBone geoBone = OptionalGeoBone.get();
+            fur.setPlayer(player);
+            matrices.push();
+            matrices.multiply(new Quaternionf().rotateX(180 * MathHelper.RADIANS_PER_DEGREE));
+            matrices.translate(0, -1.51f, 0);
+            OFModel.resetBone(GeoBoneName);
+            OFModel.translatePositionForBone(GeoBoneName, ((IMojModelPart) (Object) arm).originfurs$getPosition());
+            OFModel.translatePositionForBone(GeoBoneName, new Vec3d(5 * (IsRenderRight ? -1.0 : 1.0), 2, 0));
+            OFModel.setRotationForBone(GeoBoneName, ((IMojModelPart) (Object) arm).originfurs$getRotation());
+            OFModel.invertRotForPart(GeoBoneName, false, true, true);
+            RenderLayer renderLayerNormal = RenderLayer.getEntityTranslucent(OFModel.getTextureResource(OFAnimatable));
+            this.RenderOFModelBone(fur, geoBone, matrices, OFAnimatable, vertexConsumers, renderLayerNormal, vertexConsumers.getBuffer(renderLayerNormal), light, 1.0f, 1.0f, 1.0f, 1.0f);
+            // fur.renderBone(GeoBoneName, matrices, vertexConsumers, renderLayerNormal, null, light);
+            RenderLayer renderLayerFullBright = RenderLayer.getEntityTranslucent(OFModel.getFullbrightTextureResource(OFAnimatable));
+            this.RenderOFModelBone(fur, geoBone, matrices, OFAnimatable, vertexConsumers, renderLayerFullBright, vertexConsumers.getBuffer(renderLayerFullBright), Integer.MAX_VALUE - 1, 1.0f, 1.0f, 1.0f, 1.0f);
+            // fur.renderBone(GeoBoneName, matrices, vertexConsumers, renderLayerFullBright, null, Integer.MAX_VALUE - 1);
+            matrices.pop();
+        }
+    }
+// 不知道为什么 fur.renderBone 在大型模型会严重卡顿 因此手动实现渲染逻辑
+
+// 模拟fur.render 但只渲染特定GeoBone 使用AzureLib默认渲染渲染逻辑
+    @Unique
+    private void RenderOFModelBone(OriginalFurClient.OriginFur OFRender, GeoBone geoBone, MatrixStack poseStack, OriginFurAnimatable animatable, VertexConsumerProvider bufferSource, RenderLayer renderType, VertexConsumer buffer, int packedLight, float R, float G, float B, float A) {
+        OriginFurModel OFModel = (OriginFurModel) OFRender.getGeoModel();
+        BakedGeoModel bakedGeoModel = OFModel.getBakedModel(OFModel.getModelResource(animatable));
+        float TickDelta = MinecraftClient.getInstance().getTickDelta();
+        int packedOverlay = OFRender.getPackedOverlay(animatable, 0.0F, MinecraftClient.getInstance().getTickDelta());
+        poseStack.translate(-0.5, -0.51, -0.5); // 在 GeoObjectRenderer.preRender 中会 poseStack.translate(0.5, 0.51, 0.5) 因此需要手动调整
+        OFRender.preRender(poseStack, animatable, bakedGeoModel, bufferSource, bufferSource.getBuffer(renderType), false, TickDelta, packedLight, packedOverlay, R, G, B, A);
+        if (OFRender.firePreRenderEvent(poseStack, bakedGeoModel, bufferSource, TickDelta, packedLight)) {
+            OFRender.preApplyRenderLayers(poseStack, animatable, bakedGeoModel, renderType, bufferSource, buffer, (float)packedLight, packedLight, packedOverlay);
+            poseStack.push();
+            OFRender.updateAnimatedTextureFrame(animatable);
+            OFRender.renderRecursively(poseStack, animatable, geoBone, renderType, bufferSource, buffer, false, TickDelta, packedLight, packedOverlay, R, G, B, A);
+            poseStack.pop();
+            OFRender.applyRenderLayers(poseStack, animatable, bakedGeoModel, renderType, bufferSource, buffer, TickDelta, packedLight, packedOverlay);
+            OFRender.postRender(poseStack, animatable, bakedGeoModel, bufferSource, buffer, false, TickDelta, packedLight, packedOverlay, R, G, B, A);
+            OFRender.firePostRenderEvent(poseStack, bakedGeoModel, bufferSource, TickDelta, packedLight);
+        }
+    }
+
 
     @Redirect(method="renderArm", at= @At(value="INVOKE", target = "Lnet/minecraft/client/network/AbstractClientPlayerEntity;getSkinTexture()Lnet/minecraft/util/Identifier;"))
     private Identifier shape_shifter_curse$getSkinTexture(AbstractClientPlayerEntity player) {
