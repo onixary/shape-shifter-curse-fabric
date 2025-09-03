@@ -1,0 +1,11 @@
+{
+  "type": "origins:no_render_arm",
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:sneaking"
+      }
+    ]
+  }
+}

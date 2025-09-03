@@ -1,5 +1,6 @@
 {
 	"powers": [
+		"origins:no_render_arm",
 		"origins:form_familiar_fox_3_scale",
 		"origins:form_sprint_speed_up",
 		"origins:form_familiar_fox_3_water_speed_down",

@@ -1,5 +1,6 @@
 {
 	"powers": [
+		"origins:no_render_arm_when_sneaking",
 		"origins:form_axolotl_2_scale",
 
 		"origins:water_breathing_slow",

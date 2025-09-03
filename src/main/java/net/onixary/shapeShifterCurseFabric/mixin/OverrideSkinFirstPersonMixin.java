@@ -2,6 +2,7 @@ package net.onixary.shapeShifterCurseFabric.mixin;
 
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -14,6 +15,7 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.additional_power.NoRenderArmPower;
 import net.onixary.shapeShifterCurseFabric.data.ConfigSSC;
 import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
@@ -47,7 +49,7 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
         PlayerForms CurrentForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
         if (CurrentForm != PlayerForms.ORIGINAL_BEFORE_ENABLE)  // 仅当玩家激活Mod后才进行修改
         {
-            if (RegFormConfig.getConfig(CurrentForm).getBodyType() == PlayerFormBodyType.FERAL) {  // 不渲染手臂情况
+            if (PowerHolderComponent.hasPower(player, NoRenderArmPower.class)) {  // 不渲染手臂情况
                 ci.cancel();
                 return;
             }
