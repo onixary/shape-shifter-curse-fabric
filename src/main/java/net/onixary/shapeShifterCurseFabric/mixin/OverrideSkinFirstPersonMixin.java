@@ -27,6 +27,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 // issue: OverrideSkinFirstPersonMixin会与某些其他mod不兼容，需要寻找原因所在
 @Mixin(PlayerEntityRenderer.class)
@@ -36,8 +37,8 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
         super(ctx, model, shadowSize);
     }
 
-    @Shadow
-    private void setModelPose(AbstractClientPlayerEntity player) {}
+    // 自定义皮肤路径
+    private static final Identifier CUSTOM_SKIN = new Identifier(ShapeShifterCurseFabric.MOD_ID, "textures/entity/base_player/ssc_base_skin.png");
 
     @Inject(
             method =  "renderArm",
@@ -46,33 +47,19 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
     )
 
     private void shape_shifter_curse$onRenderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
-        PlayerForms CurrentForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
-        if (CurrentForm != PlayerForms.ORIGINAL_BEFORE_ENABLE)  // 仅当玩家激活Mod后才进行修改
-        {
-            if (PowerHolderComponent.hasPower(player, NoRenderArmPower.class)) {  // 不渲染手臂情况
-                ci.cancel();
-                return;
-            }
-            Identifier Skin = null;
-            if (!RegPlayerSkinComponent.SKIN_SETTINGS.get(player).shouldKeepOriginalSkin()) {
-                Skin = new Identifier(ShapeShifterCurseFabric.MOD_ID, "textures/entity/base_player/ssc_base_skin.png");
-                MinecraftClient.getInstance().getTextureManager().bindTexture(Skin);
-            }
-            else {
-                Skin = player.getSkinTexture();
-            }
-            // 原版渲染 仅修改注释位置
-            PlayerEntityModel playerEntityModel = (PlayerEntityModel)this.getModel();
-            this.setModelPose(player);
-            playerEntityModel.handSwingProgress = 0.0f;
-            playerEntityModel.sneaking = false;
-            playerEntityModel.leaningPitch = 0.0f;
-            playerEntityModel.setAngles(player, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-            arm.pitch = 0.0f;
-            arm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntitySolid(Skin)), light, OverlayTexture.DEFAULT_UV);  // 修改SKIN位置
-            sleeve.pitch = 0.0f;
-            sleeve.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(Skin)), light, OverlayTexture.DEFAULT_UV);  // 修改SKIN位置
-            ci.cancel();  // 取消默认渲染 或许可以用Invoke Mixin getSkinTexture 来增加兼容性
+        if (PowerHolderComponent.hasPower(player, NoRenderArmPower.class)) {  // 不渲染手臂情况
+            ci.cancel();
         }
+    }
+
+    @Redirect(method="renderArm", at= @At(value="INVOKE", target = "Lnet/minecraft/client/network/AbstractClientPlayerEntity;getSkinTexture()Lnet/minecraft/util/Identifier;"))
+    private Identifier shape_shifter_curse$getSkinTexture(AbstractClientPlayerEntity player) {
+        if (RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm() != PlayerForms.ORIGINAL_BEFORE_ENABLE)  // 仅当玩家激活Mod后才进行修改
+        {
+            if (!RegPlayerSkinComponent.SKIN_SETTINGS.get(player).shouldKeepOriginalSkin()) {
+                return CUSTOM_SKIN;
+            }
+        }
+        return player.getSkinTexture();
     }
 }
