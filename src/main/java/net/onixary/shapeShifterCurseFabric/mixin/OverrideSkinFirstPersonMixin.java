@@ -26,7 +26,6 @@ import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinCompone
 import net.onixary.shapeShifterCurseFabric.player_form_render.*;
 import org.joml.Quaternionf;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -38,8 +37,6 @@ import java.util.Optional;
 // issue: OverrideSkinFirstPersonMixin会与某些其他mod不兼容，需要寻找原因所在
 @Mixin(PlayerEntityRenderer.class)
 public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
-
-    @Shadow protected abstract void setModelPose(AbstractClientPlayerEntity player);
 
     protected OverrideSkinFirstPersonMixin(EntityRendererFactory.Context ctx, PlayerEntityModel<AbstractClientPlayerEntity> model, float shadowSize) {
         super(ctx, model, shadowSize);
