@@ -21,6 +21,7 @@ loom {
             runDir "run/server"
         }
     }
+    accessWidenerPath = file("src/main/resources/shape-shifter-curse.accesswidener")
 }
 
 
