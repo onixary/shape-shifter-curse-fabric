@@ -28,6 +28,13 @@ public class AdditionalPowers {
         register(BatBlockAttachPower.createFactory());
         register(ActionOnJumpPower.createFactory());
         register(NoRenderArmPower.createFactory());
+        register(CanEatAmethystShardPower.createFactory());
+        register(NoStepSoundPower.createFactory());
+        register(PillagerFriendlyPower.createFactory());
+        register(PreventBerryEffectPower.createFactory());
+        register(WitchFriendlyPower.createFactory());
+        register(ScareVillagerPower.createFactory());
+        register(ModifyPotionStackPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

@@ -21,8 +21,10 @@
 		"origins:form_allay_sp_levitate",
 		"origins:form_allay_sp_amethyst_shard_from_block",
 		"origins:form_allay_sp_slipperiness",
-		"origins:form_allay_sp_health"
+		"origins:form_allay_sp_health",
 
+		"origins:no_step_sound",
+		"origins:can_eat_amethyst_shard"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

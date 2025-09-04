@@ -27,8 +27,9 @@
 		"origins:form_ocelot_2_barepaw_sweeping",
 
 		"origins:form_ocelot_sound",
-		"origins:form_ocelot_sound_hurt"
+		"origins:form_ocelot_sound_hurt",
 
+		"origins:no_step_sound"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

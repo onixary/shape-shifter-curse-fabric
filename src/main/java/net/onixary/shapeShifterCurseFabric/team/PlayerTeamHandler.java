@@ -1,7 +1,9 @@
 package net.onixary.shapeShifterCurseFabric.team;
 
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.onixary.shapeShifterCurseFabric.additional_power.PillagerFriendlyPower;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 
@@ -22,7 +24,8 @@ public class PlayerTeamHandler {
             MobTeamManager.registerTeam(player.getServerWorld());
         }
 
-        if (currentForm == PlayerForms.FAMILIAR_FOX_3 || currentForm == PlayerForms.FAMILIAR_FOX_2 || currentForm == PlayerForms.FAMILIAR_FOX_1) {
+//        if (currentForm == PlayerForms.FAMILIAR_FOX_3 || currentForm == PlayerForms.FAMILIAR_FOX_2 || currentForm == PlayerForms.FAMILIAR_FOX_1) {
+        if (PowerHolderComponent.hasPower(player, PillagerFriendlyPower.class)) {
             player.getScoreboard().addPlayerToTeam(player.getEntityName(), MobTeamManager.sorceryTeam);
         } else {
             // 从队伍中移除（如果是成员）

@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -7,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PotionItem;
 import net.minecraft.screen.slot.Slot;
+import net.onixary.shapeShifterCurseFabric.additional_power.ModifyPotionStackPower;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import org.spongepowered.asm.mixin.Final;
@@ -31,7 +33,10 @@ public abstract class PotionStackMixin {
 
             if (itemStack.getItem() instanceof PotionItem) {
                 PlayerForms currentForm = FormAbilityManager.getForm(player);
-                if (currentForm == PlayerForms.FAMILIAR_FOX_2 || currentForm == PlayerForms.FAMILIAR_FOX_3) {
+//                if (currentForm == PlayerForms.FAMILIAR_FOX_2 || currentForm == PlayerForms.FAMILIAR_FOX_3) {
+//                    return Math.max(3, itemStack.getMaxCount());
+//                }
+                if (PowerHolderComponent.hasPower(player, ModifyPotionStackPower.class)) {
                     return Math.max(3, itemStack.getMaxCount());
                 }
             }

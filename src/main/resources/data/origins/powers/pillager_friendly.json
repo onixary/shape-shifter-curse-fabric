@@ -1,0 +1,7 @@
+{
+  "type": "origins:pillager_friendly",
+  "condition": {
+    "type": "origins:constant",
+    "value": true
+  }
+}

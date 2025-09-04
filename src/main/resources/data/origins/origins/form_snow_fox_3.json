@@ -30,7 +30,9 @@
 		"origins:form_disable_leg_armor",
 		"origins:form_disable_feet_armor",
 		"origins:form_familiar_fox_sound_hurt",
-		"origins:form_familiar_fox_sound"
+		"origins:form_familiar_fox_sound",
+
+		"origins:prevent_berry_effect"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

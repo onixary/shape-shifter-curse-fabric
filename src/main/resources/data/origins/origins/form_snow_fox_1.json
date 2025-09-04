@@ -15,7 +15,9 @@
 		"origins:form_instinct_use_golden_apple",
 		"origins:form_familiar_fox_instinct_in_berry_bush",
 		"origins:form_familiar_fox_instinct_biome",
-		"origins:form_snow_fox_instinct_sprint_jump"
+		"origins:form_snow_fox_instinct_sprint_jump",
+
+		"origins:prevent_berry_effect"
 	],
 	"icon": {
 		"item": "minecraft:player_head"
