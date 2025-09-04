@@ -5,6 +5,7 @@ import io.github.apace100.apoli.component.PowerHolderComponent;
 import me.shedaniel.autoconfig.AutoConfig;
 import mod.azure.azurelib.cache.object.BakedGeoModel;
 import mod.azure.azurelib.cache.object.GeoBone;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -25,6 +26,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinCompone
 import net.onixary.shapeShifterCurseFabric.player_form_render.*;
 import org.joml.Quaternionf;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -36,6 +38,8 @@ import java.util.Optional;
 // issue: OverrideSkinFirstPersonMixin会与某些其他mod不兼容，需要寻找原因所在
 @Mixin(PlayerEntityRenderer.class)
 public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
+
+    @Shadow protected abstract void setModelPose(AbstractClientPlayerEntity player);
 
     protected OverrideSkinFirstPersonMixin(EntityRendererFactory.Context ctx, PlayerEntityModel<AbstractClientPlayerEntity> model, float shadowSize) {
         super(ctx, model, shadowSize);
@@ -123,6 +127,22 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
             this.RenderOFModelBone(fur, geoBone, matrices, OFAnimatable, vertexConsumers, renderLayerFullBright, vertexConsumers.getBuffer(renderLayerFullBright), Integer.MAX_VALUE - 1);
             // fur.renderBone(GeoBoneName, matrices, vertexConsumers, renderLayerFullBright, null, Integer.MAX_VALUE - 1);
             matrices.pop();
+            // Render Overlay 藏得够深的 要不是发现悦灵手臂无法显示我都不会发现
+            // 从 PlayerEntityRenderer.renderOverlayTexture 提取的代码并进行修改
+            Identifier OverlayTextureID = OFModel.getOverlayTexture(acc.originalFur$isSlim());
+            if (OverlayTextureID != null) {
+                // 玩家看自己绝对是非隐身
+                // boolean bl = this.isVisible(player);
+                // boolean bl2 = !bl && !player.isInvisibleTo(MinecraftClient.getInstance().player);
+                RenderLayer OverlayLayer = null;
+                if (OriginalFurClient.isRenderingInWorld && FabricLoader.getInstance().isModLoaded("iris")) {
+                    OverlayLayer = RenderLayer.getEntityCutoutNoCullZOffset(OverlayTextureID);
+                } else {
+                    OverlayLayer = RenderLayer.getEntityCutout(OverlayTextureID);
+                }
+                int OverlayInt = OverlayTexture.packUv(OverlayTexture.getU(this.getAnimationCounter(player, MinecraftClient.getInstance().getTickDelta())), OverlayTexture.getV(player.hurtTime > 0 || player.deathTime > 0));
+                arm.render(matrices, vertexConsumers.getBuffer(OverlayLayer), light, OverlayInt, 1.0f, 1.0f, 1.0f, 1.0F);
+            }
         }
     }
     // fur.renderBone 因为没有缓存机制 在大型模型会严重卡顿(每秒渲染FPS次) 因此手动实现渲染逻辑
