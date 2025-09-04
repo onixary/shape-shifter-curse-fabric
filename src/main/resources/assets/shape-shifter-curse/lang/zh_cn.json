@@ -597,5 +597,8 @@
   "codex.form.phi_sp.appearance": [" "],
   "codex.form.phi_sp.pros": [" "],
   "codex.form.phi_sp.cons": [" "],
-  "codex.form.phi_sp.instincts": ["\n\n\n与其它形态相比，你觉察到你当前的形态似乎有些“特别之处”：它并没有对你的内心造成太多影响，似乎也没有那么稳定。如果你希望的话，应该可以较为容易地将其逆转"]
+  "codex.form.phi_sp.instincts": ["\n\n\n与其它形态相比，你觉察到你当前的形态似乎有些“特别之处”：它并没有对你的内心造成太多影响，似乎也没有那么稳定。如果你希望的话，应该可以较为容易地将其逆转"],
+
+  "text.autoconfig.shape-shifter-curse-client.title": "幻形者诅咒 - 客户端配置",
+  "text.autoconfig.shape-shifter-curse-client.option.enableFormModelOnVanillaFirstPersonRender": "原版第一人称下启用形态模型渲染"
 }
