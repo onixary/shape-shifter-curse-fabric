@@ -1,0 +1,7 @@
+{
+  "type": "origins:can_eat_amethyst_shard",
+  "condition": {
+    "type": "origins:constant",
+    "value": true
+  }
+}
