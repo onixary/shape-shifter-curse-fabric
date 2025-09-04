@@ -47,6 +47,8 @@
     "originalfur.fabric.mixins.json"
   ],
 
+  "accessWidener": "shape-shifter-curse.accesswidener",
+
   "custom": {
     "cardinal-components": [
       "origins:origin",
