@@ -188,8 +188,7 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
                 // Core shader fur render implementation, but not capable with iris, :(
                 //RenderLayer myLayer2 = FurGradientRenderLayer.furGradientRemap.getRenderLayer(RenderLayer.getEntityTranslucentEmissive(m.getFullbrightTextureResource(a)));
                 //RenderLayer testFurLayer2 = FurColorGradientRenderLayer.getFurLayer(m.getFullbrightTextureResource(a), new Vector4f(1.0f, 1.0f ,1.0f, 1.0f), new Vector4f(0.8f, 0.8f, 0.8f, 1.0f));
-                fur.render(matrixStack, a, vertexConsumerProvider, RenderLayer.getEntityTranslucentEmissive(m.getTextureResource(a)), null, light);
-                matrixStack.pop();
+                fur.render(matrixStack, a, vertexConsumerProvider, RenderLayer.getEntityTranslucentEmissive(m.getFullbrightTextureResource(a)), null, Integer.MAX_VALUE - 1);                matrixStack.pop();
             }
 
 
