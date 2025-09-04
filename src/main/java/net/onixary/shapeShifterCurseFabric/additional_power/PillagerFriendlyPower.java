@@ -18,7 +18,7 @@ public class PillagerFriendlyPower extends Power {
         return new PowerFactory<>(
                 Apoli.identifier("pillager_friendly"),
                 new SerializableData(),
-                data -> (type, entity) -> new FoxFriendlyPower(type, entity)
+                data -> (type, entity) -> new PillagerFriendlyPower(type, entity)
         ).allowCondition();
     }
 }

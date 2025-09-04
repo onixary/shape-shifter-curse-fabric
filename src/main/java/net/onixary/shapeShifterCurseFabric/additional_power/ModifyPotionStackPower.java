@@ -7,17 +7,17 @@ import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.calio.data.SerializableData;
 import net.minecraft.entity.LivingEntity;
 
-public class ScareVillagerPower extends Power {
+public class ModifyPotionStackPower extends Power {
 
-    public ScareVillagerPower(PowerType<?> type, LivingEntity entity) {
+    public ModifyPotionStackPower(PowerType<?> type, LivingEntity entity) {
         super(type, entity);
     }
 
     public static PowerFactory createFactory() {
         return new PowerFactory<>(
-                Apoli.identifier("scare_villager"),
+                Apoli.identifier("modify_potion_stack"),
                 new SerializableData(),
-                data -> (type, entity) -> new ScareVillagerPower(type, entity)
+                data -> (type, entity) -> new ModifyPotionStackPower(type, entity)
         ).allowCondition();
     }
 }

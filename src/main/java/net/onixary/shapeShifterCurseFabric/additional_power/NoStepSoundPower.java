@@ -17,7 +17,7 @@ public class NoStepSoundPower extends Power {
         return new PowerFactory<>(
                 Apoli.identifier("no_step_sound"),
                 new SerializableData(),
-                data -> (type, entity) -> new FoxFriendlyPower(type, entity)
+                data -> (type, entity) -> new NoStepSoundPower(type, entity)
         ).allowCondition();
     }
 }

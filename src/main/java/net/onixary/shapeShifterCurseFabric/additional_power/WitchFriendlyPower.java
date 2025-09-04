@@ -17,7 +17,7 @@ public class WitchFriendlyPower extends Power {
         return new PowerFactory<>(
                 Apoli.identifier("witch_friendly"),
                 new SerializableData(),
-                data -> (type, entity) -> new FoxFriendlyPower(type, entity)
+                data -> (type, entity) -> new WitchFriendlyPower(type, entity)
         ).allowCondition();
     }
 }

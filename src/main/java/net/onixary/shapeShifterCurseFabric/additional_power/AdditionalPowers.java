@@ -34,6 +34,7 @@ public class AdditionalPowers {
         register(PreventBerryEffectPower.createFactory());
         register(WitchFriendlyPower.createFactory());
         register(ScareVillagerPower.createFactory());
+        register(ModifyPotionStackPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {
