@@ -1,0 +1,7 @@
+{
+  "type": "origins:witch_friendly",
+  "condition": {
+    "type": "origins:constant",
+    "value": true
+  }
+}

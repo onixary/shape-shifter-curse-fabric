@@ -32,6 +32,7 @@ public class AdditionalPowers {
         register(NoStepSoundPower.createFactory());
         register(PillagerFriendlyPower.createFactory());
         register(PreventBerryEffectPower.createFactory());
+        register(WitchFriendlyPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {
