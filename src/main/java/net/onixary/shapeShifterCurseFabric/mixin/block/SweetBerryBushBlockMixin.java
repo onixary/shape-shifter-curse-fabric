@@ -1,11 +1,13 @@
 package net.onixary.shapeShifterCurseFabric.mixin.block;
 
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Vec3d;
+import net.onixary.shapeShifterCurseFabric.additional_power.PreventBerryEffectPower;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,13 +28,16 @@ public abstract class SweetBerryBushBlockMixin {
         // 如果是玩家则跳过伤害
         if (entity instanceof PlayerEntity) {
             PlayerForms curForm = RegPlayerFormComponent.PLAYER_FORM.get(entity).getCurrentForm();
-            if(curForm == PlayerForms.FAMILIAR_FOX_2
-                    || curForm == PlayerForms.FAMILIAR_FOX_3
-                    || curForm == PlayerForms.FAMILIAR_FOX_1
-                    || curForm == PlayerForms.SNOW_FOX_1
-                    || curForm == PlayerForms.SNOW_FOX_2
-                    || curForm == PlayerForms.SNOW_FOX_3)
-            {
+//            if(curForm == PlayerForms.FAMILIAR_FOX_2
+//                    || curForm == PlayerForms.FAMILIAR_FOX_3
+//                    || curForm == PlayerForms.FAMILIAR_FOX_1
+//                    || curForm == PlayerForms.SNOW_FOX_1
+//                    || curForm == PlayerForms.SNOW_FOX_2
+//                    || curForm == PlayerForms.SNOW_FOX_3)
+//            {
+//                return false;
+//            }
+            if (PowerHolderComponent.hasPower((PlayerEntity)entity, PreventBerryEffectPower.class)) {
                 return false;
             }
         }
@@ -50,8 +55,11 @@ public abstract class SweetBerryBushBlockMixin {
         // 如果是玩家则跳过减速
         if ((entity instanceof PlayerEntity)) {
             PlayerForms curForm = RegPlayerFormComponent.PLAYER_FORM.get(entity).getCurrentForm();
-            if(curForm != PlayerForms.FAMILIAR_FOX_1 && curForm != PlayerForms.FAMILIAR_FOX_2 && curForm != PlayerForms.FAMILIAR_FOX_3
-            && curForm != PlayerForms.SNOW_FOX_1 && curForm != PlayerForms.SNOW_FOX_2 && curForm != PlayerForms.SNOW_FOX_3) {
+//            if(curForm != PlayerForms.FAMILIAR_FOX_1 && curForm != PlayerForms.FAMILIAR_FOX_2 && curForm != PlayerForms.FAMILIAR_FOX_3
+//            && curForm != PlayerForms.SNOW_FOX_1 && curForm != PlayerForms.SNOW_FOX_2 && curForm != PlayerForms.SNOW_FOX_3) {
+//                entity.slowMovement(state, multiplier);
+//            }
+            if (!PowerHolderComponent.hasPower((PlayerEntity)entity, PreventBerryEffectPower.class)) {
                 entity.slowMovement(state, multiplier);
             }
         }

@@ -31,7 +31,13 @@
 		"origins:form_disable_leg_armor",
 		"origins:form_disable_feet_armor",
 		"origins:form_familiar_fox_sound_hurt",
-		"origins:form_familiar_fox_sound"
+		"origins:form_familiar_fox_sound",
+
+		"origins:witch_friendly",
+		"origins:prevent_berry_effect",
+		"origins:pillager_friendly",
+		"origins:scare_villager",
+		"origins:modify_potion_stack_3"
 	],
 	"icon": {
 		"item": "minecraft:player_head"

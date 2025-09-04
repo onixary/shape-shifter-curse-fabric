@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FoodComponent;
@@ -14,6 +15,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
+import net.onixary.shapeShifterCurseFabric.additional_power.CanEatAmethystShardPower;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import org.spongepowered.asm.mixin.Mixin;
@@ -50,7 +52,8 @@ public abstract class CustomEdibleItemMixin {
         canConsumeCustomFood = false;
         if(currentForm != null){
 
-            if (stack.getItem() == Items.AMETHYST_SHARD && currentForm == PlayerForms.ALLAY_SP) {
+//            if (stack.getItem() == Items.AMETHYST_SHARD && currentForm == PlayerForms.ALLAY_SP) {
+            if (stack.getItem() == Items.AMETHYST_SHARD && PowerHolderComponent.hasPower(user, CanEatAmethystShardPower.class)) {
                 if (user.canConsume(ALLAY_AMETHYST_SHARD_FOOD.isAlwaysEdible())) {
                     user.setCurrentHand(hand);
                     canConsumeCustomFood = true;
@@ -94,7 +97,8 @@ public abstract class CustomEdibleItemMixin {
     private void onFinishUsing(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
         if(user instanceof PlayerEntity){
             PlayerForms currentForm = FormAbilityManager.getForm((PlayerEntity) user);
-            if ((stack.getItem() == Items.AMETHYST_SHARD) && (currentForm == PlayerForms.ALLAY_SP)) {
+//            if ((stack.getItem() == Items.AMETHYST_SHARD) && (currentForm == PlayerForms.ALLAY_SP)) {
+            if ((stack.getItem() == Items.AMETHYST_SHARD) && (PowerHolderComponent.hasPower(user, CanEatAmethystShardPower.class))) {
                 if (user instanceof PlayerEntity player) {
                     player.getHungerManager().add(ALLAY_AMETHYST_SHARD_FOOD.getHunger(), ALLAY_AMETHYST_SHARD_FOOD.getSaturationModifier());
                     world.playSound(null, player.getX(), player.getY(), player.getZ(),

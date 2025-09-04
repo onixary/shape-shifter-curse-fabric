@@ -17,7 +17,7 @@ public class CanEatAmethystShardPower extends Power {
         return new PowerFactory<>(
                 Apoli.identifier("can_eat_amethyst_shard"),
                 new SerializableData(),
-                data -> (type, entity) -> new FoxFriendlyPower(type, entity)
+                data -> (type, entity) -> new CanEatAmethystShardPower(type, entity)
         ).allowCondition();
     }
 }

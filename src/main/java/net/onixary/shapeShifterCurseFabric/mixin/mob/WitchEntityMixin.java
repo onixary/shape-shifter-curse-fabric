@@ -1,9 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.mixin.mob;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.WitchEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.PotionEntity;
@@ -12,6 +10,7 @@ import net.minecraft.potion.PotionUtil;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.onixary.shapeShifterCurseFabric.additional_power.WitchFriendlyPower;
 import net.onixary.shapeShifterCurseFabric.item.RegCustomPotions;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
@@ -19,7 +18,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(WitchEntity.class)
 public abstract class WitchEntityMixin {
@@ -60,8 +58,11 @@ public abstract class WitchEntityMixin {
                     ci.cancel();
                 }
             }
-            else if(curForm == PlayerForms.FAMILIAR_FOX_0 || curForm == PlayerForms.FAMILIAR_FOX_1
-                    || curForm == PlayerForms.FAMILIAR_FOX_2 || curForm == PlayerForms.FAMILIAR_FOX_3){
+//            else if(curForm == PlayerForms.FAMILIAR_FOX_0 || curForm == PlayerForms.FAMILIAR_FOX_1
+//                    || curForm == PlayerForms.FAMILIAR_FOX_2 || curForm == PlayerForms.FAMILIAR_FOX_3){
+//                ci.cancel();
+//            }
+            else if (PowerHolderComponent.hasPower((PlayerEntity)target, WitchFriendlyPower.class)) {
                 ci.cancel();
             }
         }

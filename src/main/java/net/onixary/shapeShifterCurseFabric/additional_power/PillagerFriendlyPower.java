@@ -6,7 +6,6 @@ import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.calio.data.SerializableData;
 import net.minecraft.entity.LivingEntity;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 public class PillagerFriendlyPower extends Power {
 

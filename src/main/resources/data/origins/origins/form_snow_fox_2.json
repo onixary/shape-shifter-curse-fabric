@@ -20,7 +20,9 @@
 		"origins:form_snow_fox_2_desert_health",
 		"origins:form_snow_fox_2_plain_health",
 
-		"origins:form_familiar_fox_sound_hurt"
+		"origins:form_familiar_fox_sound_hurt",
+
+		"origins:prevent_berry_effect"
 	],
 	"icon": {
 		"item": "minecraft:player_head"
