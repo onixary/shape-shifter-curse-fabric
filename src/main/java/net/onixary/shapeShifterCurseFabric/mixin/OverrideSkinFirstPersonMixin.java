@@ -42,6 +42,7 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
     }
 
     // 自定义皮肤路径
+    @Unique
     private static final Identifier CUSTOM_SKIN = new Identifier(ShapeShifterCurseFabric.MOD_ID, "textures/entity/base_player/ssc_base_skin.png");
 
     @Inject(method = "renderArm", at = @At("HEAD"), cancellable = true)
@@ -72,7 +73,7 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
         }
     }
 
-    @Inject(method = "renderArm", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "renderArm", at = @At("RETURN"))
     private void shape_shifter_curse$RenderArm_RETURN(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
         // 渲染变身模型
         if (RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm() == PlayerForms.ORIGINAL_BEFORE_ENABLE) {return;}  // 仅当玩家激活Mod后才进行修改
@@ -85,7 +86,7 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
             if (origin == null) {return;}
             PlayerEntityRenderer EntityRender = (PlayerEntityRenderer) MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(player);
             OriginFurModel OFModel = (OriginFurModel) fur.getGeoModel();
-            OriginFurAnimatable OFAnimatable = (OriginFurAnimatable) fur.getAnimatable();
+            OriginFurAnimatable OFAnimatable = fur.getAnimatable();
             Optional<GeoBone> OptionalGeoBone = OFModel.getBone(GeoBoneName);
             if (OptionalGeoBone.isEmpty()) {
                 // 有时AzureLib 未能及时注册 GeoBone 因此需要手动注册
@@ -116,17 +117,22 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
             OFModel.setRotationForBone(GeoBoneName, ((IMojModelPart) (Object) arm).originfurs$getRotation());
             OFModel.invertRotForPart(GeoBoneName, false, true, true);
             RenderLayer renderLayerNormal = RenderLayer.getEntityTranslucent(OFModel.getTextureResource(OFAnimatable));
-            this.RenderOFModelBone(fur, geoBone, matrices, OFAnimatable, vertexConsumers, renderLayerNormal, vertexConsumers.getBuffer(renderLayerNormal), light, 1.0f, 1.0f, 1.0f, 1.0f);
+            this.RenderOFModelBone(fur, geoBone, matrices, OFAnimatable, vertexConsumers, renderLayerNormal, vertexConsumers.getBuffer(renderLayerNormal), light);
             // fur.renderBone(GeoBoneName, matrices, vertexConsumers, renderLayerNormal, null, light);
             RenderLayer renderLayerFullBright = RenderLayer.getEntityTranslucent(OFModel.getFullbrightTextureResource(OFAnimatable));
-            this.RenderOFModelBone(fur, geoBone, matrices, OFAnimatable, vertexConsumers, renderLayerFullBright, vertexConsumers.getBuffer(renderLayerFullBright), Integer.MAX_VALUE - 1, 1.0f, 1.0f, 1.0f, 1.0f);
+            this.RenderOFModelBone(fur, geoBone, matrices, OFAnimatable, vertexConsumers, renderLayerFullBright, vertexConsumers.getBuffer(renderLayerFullBright), Integer.MAX_VALUE - 1);
             // fur.renderBone(GeoBoneName, matrices, vertexConsumers, renderLayerFullBright, null, Integer.MAX_VALUE - 1);
             matrices.pop();
         }
     }
-// 不知道为什么 fur.renderBone 在大型模型会严重卡顿 因此手动实现渲染逻辑
+    // fur.renderBone 因为没有缓存机制 在大型模型会严重卡顿(每秒渲染FPS次) 因此手动实现渲染逻辑
 
-// 模拟fur.render 但只渲染特定GeoBone 使用AzureLib默认渲染渲染逻辑
+    // 模拟fur.render 但只渲染特定GeoBone 使用AzureLib默认渲染渲染逻辑
+    @Unique
+    private void RenderOFModelBone(OriginalFurClient.OriginFur OFRender, GeoBone geoBone, MatrixStack poseStack, OriginFurAnimatable animatable, VertexConsumerProvider bufferSource, RenderLayer renderType, VertexConsumer buffer, int packedLight) {
+        this.RenderOFModelBone(OFRender, geoBone, poseStack, animatable, bufferSource, renderType, buffer, packedLight, 1.0f, 1.0f, 1.0f, 1.0f);
+    }
+
     @Unique
     private void RenderOFModelBone(OriginalFurClient.OriginFur OFRender, GeoBone geoBone, MatrixStack poseStack, OriginFurAnimatable animatable, VertexConsumerProvider bufferSource, RenderLayer renderType, VertexConsumer buffer, int packedLight, float R, float G, float B, float A) {
         OriginFurModel OFModel = (OriginFurModel) OFRender.getGeoModel();
