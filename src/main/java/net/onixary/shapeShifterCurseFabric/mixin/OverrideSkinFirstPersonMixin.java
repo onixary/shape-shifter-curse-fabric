@@ -2,6 +2,7 @@ package net.onixary.shapeShifterCurseFabric.mixin;
 
 
 import io.github.apace100.apoli.component.PowerHolderComponent;
+import me.shedaniel.autoconfig.AutoConfig;
 import mod.azure.azurelib.cache.object.BakedGeoModel;
 import mod.azure.azurelib.cache.object.GeoBone;
 import net.minecraft.client.MinecraftClient;
@@ -16,6 +17,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.NoRenderArmPower;
+import net.onixary.shapeShifterCurseFabric.config.ClientConfig;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
@@ -54,6 +56,7 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
     private void shape_shifter_curse$RenderArm_setModelPose_AFTER(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
         // 渲染变身模型-根据模型设置修改手臂组件渲染
         if (RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm() == PlayerForms.ORIGINAL_BEFORE_ENABLE) {return;}  // 仅当玩家激活Mod后才进行修改
+        if (!AutoConfig.getConfigHolder(ClientConfig.class).getConfig().enableFormModelOnVanillaFirstPersonRender) {return;}  // 仅当启用自定义第一人称渲染时才进行修改
         for (OriginalFurClient.OriginFur fur : ((IPlayerEntityMixins) player).originalFur$getCurrentFurs()) {
             OriginFurModel OFModel = (OriginFurModel) fur.getGeoModel();
             boolean IsRenderRight = arm.equals(this.getModel().rightArm);
@@ -73,6 +76,7 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
     private void shape_shifter_curse$RenderArm_RETURN(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
         // 渲染变身模型
         if (RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm() == PlayerForms.ORIGINAL_BEFORE_ENABLE) {return;}  // 仅当玩家激活Mod后才进行修改
+        if (!AutoConfig.getConfigHolder(ClientConfig.class).getConfig().enableFormModelOnVanillaFirstPersonRender) {return;}  // 仅当启用自定义第一人称渲染时才进行修改
         boolean IsRenderRight = arm.equals(this.getModel().rightArm);
         String GeoBoneName = IsRenderRight ? "bipedRightArm" : "bipedLeftArm";
         for (OriginalFurClient.OriginFur fur : ((IPlayerEntityMixins) player).originalFur$getCurrentFurs()) {

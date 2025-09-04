@@ -1,5 +1,7 @@
 package net.onixary.shapeShifterCurseFabric;
 
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -35,6 +37,7 @@ import net.onixary.shapeShifterCurseFabric.advancement.*;
 import net.onixary.shapeShifterCurseFabric.command.CustomFormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.FormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
+import net.onixary.shapeShifterCurseFabric.config.ClientConfig;
 import net.onixary.shapeShifterCurseFabric.data.ConfigSSC;
 import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntitySpawnEgg;
@@ -162,6 +165,10 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         AdditionalEntityConditions.register();
         AdditionalPowers.register();
         AdditionalEntityActions.register();
+
+        // 注册配置文件
+        AutoConfig.register(ClientConfig.class, Toml4jConfigSerializer::new);  // 客户端配置
+
         // network package
         ModPacketsC2S.register();
         cursedMoonData = new CursedMoonData();

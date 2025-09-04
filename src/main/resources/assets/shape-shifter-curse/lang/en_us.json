@@ -636,5 +636,8 @@
   "codex.form.phi_sp.appearance": [" "],
   "codex.form.phi_sp.pros": [" "],
   "codex.form.phi_sp.cons": [" "],
-  "codex.form.phi_sp.instincts": ["\n\n\nCompared to other forms, you notice this one seems \"special\": it barely affects your mind and feels less stable. If desired, you could likely revert it relatively easily"]
+  "codex.form.phi_sp.instincts": ["\n\n\nCompared to other forms, you notice this one seems \"special\": it barely affects your mind and feels less stable. If desired, you could likely revert it relatively easily"],
+
+  "text.autoconfig.shape-shifter-curse-client.title": "Shape Shifter Curse - Client Config",
+  "text.autoconfig.shape-shifter-curse-client.option.enableFormModelOnVanillaFirstPersonRender": "Enable Render form model on vanilla first person render"
 }
