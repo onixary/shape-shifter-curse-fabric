@@ -125,7 +125,7 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
             // fur.renderBone(GeoBoneName, matrices, vertexConsumers, renderLayerFullBright, null, Integer.MAX_VALUE - 1);
             matrices.pop();
             // Render Overlay 藏得够深的 要不是发现悦灵手臂无法显示我都不会发现
-            // 从 PlayerEntityRenderer.renderOverlayTexture 提取的代码并进行修改
+            // 从 PlayerEntityRendererMixin.renderOverlayTexture 提取的代码并进行修改
             Identifier OverlayTextureID = OFModel.getOverlayTexture(acc.originalFur$isSlim());
             if (OverlayTextureID != null) {
                 // 玩家看自己绝对是非隐身
