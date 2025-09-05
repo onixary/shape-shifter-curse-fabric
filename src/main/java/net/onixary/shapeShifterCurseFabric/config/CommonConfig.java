@@ -25,6 +25,6 @@ public class CommonConfig implements ConfigData {
 
     // 开发用
     @ConfigEntry.Category("InDevelopment")
-    @Comment("PLACEHOLDER Default: false")
-    public boolean inDevelopmentConfigPlaceHolder = false;  // 占位符 添加新项目时请删除
+    @Comment("Only Developer Use Default: false")
+    public boolean enableNewStartBook = false;  // 新版启动书
 }
