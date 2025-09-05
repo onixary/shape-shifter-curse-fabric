@@ -638,6 +638,16 @@
   "codex.form.phi_sp.cons": [" "],
   "codex.form.phi_sp.instincts": ["\n\n\nCompared to other forms, you notice this one seems \"special\": it barely affects your mind and feels less stable. If desired, you could likely revert it relatively easily"],
 
+  "text.shape-shifter-curse.config.title": "Shape Shifter Curse Config Menu",
+  "text.shape-shifter-curse.config.close": "Cancel",
   "text.autoconfig.shape-shifter-curse-client.title": "Shape Shifter Curse - Client Config",
-  "text.autoconfig.shape-shifter-curse-client.option.enableFormModelOnVanillaFirstPersonRender": "Enable Render form model on vanilla first person render"
+  "text.autoconfig.shape-shifter-curse-client.category.General": "General",
+  "text.autoconfig.shape-shifter-curse-client.option.enableFormModelOnVanillaFirstPersonRender": "Enable Render form model on vanilla first person render",
+  "text.autoconfig.shape-shifter-curse-client.category.InDevelopment": "In Development",
+  "text.autoconfig.shape-shifter-curse-client.option.inDevelopmentConfigPlaceHolder": "In Development Config Placeholder",
+  "text.autoconfig.shape-shifter-curse-common.title": "Shape Shifter Curse - Common Config",
+  "text.autoconfig.shape-shifter-curse-common.category.General": "General",
+  "text.autoconfig.shape-shifter-curse-common.option.generalConfigPlaceHolder": "Placeholder",
+  "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "In Development",
+  "text.autoconfig.shape-shifter-curse-common.option.inDevelopmentConfigPlaceHolder": "In Development Config Placeholder"
 }
