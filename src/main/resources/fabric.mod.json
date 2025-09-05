@@ -28,8 +28,7 @@
       "net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFurClient"
     ],
     "modmenu": [
-      "net.onixary.shapeShifterCurseFabric.integration.origins.integration.ModMenuIntegration",
-      "net.onixary.shapeShifterCurseFabric.config.ClientConfigIntegration"
+      "net.onixary.shapeShifterCurseFabric.config.ConfigIntegration"
     ],
     "cardinal-components-entity": [
       "net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents",

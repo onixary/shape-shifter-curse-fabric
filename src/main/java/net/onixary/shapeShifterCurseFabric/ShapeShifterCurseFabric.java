@@ -38,6 +38,7 @@ import net.onixary.shapeShifterCurseFabric.command.CustomFormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.FormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
 import net.onixary.shapeShifterCurseFabric.config.ClientConfig;
+import net.onixary.shapeShifterCurseFabric.config.CommonConfig;
 import net.onixary.shapeShifterCurseFabric.data.ConfigSSC;
 import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntitySpawnEgg;
@@ -168,6 +169,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
         // 注册配置文件
         AutoConfig.register(ClientConfig.class, Toml4jConfigSerializer::new);  // 客户端配置
+        AutoConfig.register(CommonConfig.class, Toml4jConfigSerializer::new);  // 双端配置
 
         // network package
         ModPacketsC2S.register();
