@@ -647,7 +647,9 @@
   "text.autoconfig.shape-shifter-curse-client.option.inDevelopmentConfigPlaceHolder": "In Development Config Placeholder",
   "text.autoconfig.shape-shifter-curse-common.title": "Shape Shifter Curse - Common Config",
   "text.autoconfig.shape-shifter-curse-common.category.General": "General",
-  "text.autoconfig.shape-shifter-curse-common.option.generalConfigPlaceHolder": "Placeholder",
+  "text.autoconfig.shape-shifter-curse-common.option.transformativeBatSpawnChance": "Transformative Bat Spawn Success Rate",
+  "text.autoconfig.shape-shifter-curse-common.option.transformativeAxolotlSpawnChance": "Transformative Axolotl Spawn Success Rate",
+  "text.autoconfig.shape-shifter-curse-common.option.transformativeOcelotSpawnChance": "Transformative Ocelot Spawn Success Rate",
   "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "In Development",
   "text.autoconfig.shape-shifter-curse-common.option.inDevelopmentConfigPlaceHolder": "In Development Config Placeholder"
 }

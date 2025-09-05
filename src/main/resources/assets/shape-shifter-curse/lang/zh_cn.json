@@ -608,7 +608,9 @@
   "text.autoconfig.shape-shifter-curse-client.option.inDevelopmentConfigPlaceHolder": "开发中配置占位符",
   "text.autoconfig.shape-shifter-curse-common.title": "幻形者诅咒 - 通用配置",
   "text.autoconfig.shape-shifter-curse-common.category.General": "常规配置",
-  "text.autoconfig.shape-shifter-curse-common.option.generalConfigPlaceHolder": "配置占位符",
+  "text.autoconfig.shape-shifter-curse-common.option.transformativeBatSpawnChance": "咒文蝙蝠刷新成功率",
+  "text.autoconfig.shape-shifter-curse-common.option.transformativeAxolotlSpawnChance": "咒文美西螈刷新成功率",
+  "text.autoconfig.shape-shifter-curse-common.option.transformativeOcelotSpawnChance": "咒文豹猫刷新成功率",
   "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "开发中配置",
   "text.autoconfig.shape-shifter-curse-common.option.inDevelopmentConfigPlaceHolder": "开发中配置占位符"
 }

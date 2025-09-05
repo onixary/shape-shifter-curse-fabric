@@ -11,6 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
@@ -36,7 +37,11 @@ public class TransformativeOcelotEntity extends OcelotEntity {
     }
 
     public static boolean canCustomSpawn(EntityType<TransformativeOcelotEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return random.nextInt(3) != 0;
+//        return random.nextInt(3) != 0;  // ~67% 刷新成功率
+        float Chance = ShapeShifterCurseFabric.commonConfig.transformativeOcelotSpawnChance;
+        if (Chance <= 0.0f) { return false; }
+        if (Chance >= 1.0f) { return true; }
+        return random.nextFloat() < Chance;
     }
 
     @Override
