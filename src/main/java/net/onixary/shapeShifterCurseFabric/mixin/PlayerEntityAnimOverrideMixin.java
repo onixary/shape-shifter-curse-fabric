@@ -179,7 +179,9 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
             }
 
-            if (world.getBlockState(getBlockPos()).getBlock() instanceof LadderBlock && !isOnGround() && !jumping)
+            // if ((world.getBlockState(getBlockPos()).getBlock() instanceof LadderBlock && !isOnGround() && !jumping))
+            // 直接使用isClimbing()判断是否在攀爬
+            if (this.isClimbing())
             {
                 currentState = PlayerAnimState.ANIM_CLIMB_IDLE;
                 if (getVelocity().y > 0)
