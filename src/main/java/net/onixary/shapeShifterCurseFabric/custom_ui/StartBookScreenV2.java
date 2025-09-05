@@ -54,6 +54,7 @@ public class StartBookScreenV2 extends Screen {
                     if(MinecraftClient.getInstance().currentScreen instanceof StartBookScreen){
                         MinecraftClient.getInstance().setScreen(null);
                     }
+                    this.close(); // 关闭当前界面
                 }
         ).size(ButtonSizeX, ButtonSizeY).position(ButtonPosX, ButtonPosY).build());
     }
