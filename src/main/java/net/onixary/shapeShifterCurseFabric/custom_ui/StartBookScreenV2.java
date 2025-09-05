@@ -37,8 +37,8 @@ public class StartBookScreenV2 extends Screen {
         // 渲染文字
         int TextPosX = width / 2 - TextSizeX / 2;
         int TextPosY = height / 2 - TextSizeY / 2;
-        MultilineTextWidget StartBookLabel = new MultilineTextWidget(TextPosX, TextPosY, Text.translatable("screen.shape-shifter-curse.book_of_shape_shifter.start_content_text"), client.textRenderer);
-        StartBookLabel.maxWidth = OptionalInt.of(TextSizeX);
+        MultilineTextWidget StartBookLabel = new MultilineTextWidget(TextPosX, TextPosY, Text.translatable("screen.shape-shifter-curse.book_of_shape_shifter.start_content_text"), textRenderer);
+        StartBookLabel.setMaxWidth(TextSizeX);
         this.addDrawableChild(StartBookLabel);
         // 渲染按钮
         int BookBottomY = height / 2 + BookSizeY / 2;
