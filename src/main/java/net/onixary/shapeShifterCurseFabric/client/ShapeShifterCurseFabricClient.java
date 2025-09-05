@@ -14,6 +14,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.custom_ui.BookOfShapeShifterScreen;
+import net.onixary.shapeShifterCurseFabric.custom_ui.BookOfShapeShifterScreenV2_P1;
 import net.onixary.shapeShifterCurseFabric.custom_ui.StartBookScreenV2;
 import net.onixary.shapeShifterCurseFabric.custom_ui.StartBookScreen;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
@@ -40,10 +41,19 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 	private static ShaderProgram furGradientShader;
 
 	public static void openBookScreen(PlayerEntity user) {
-		if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreen)) {
-			BookOfShapeShifterScreen bookScreen = new BookOfShapeShifterScreen();
-			bookScreen.currentPlayer = user;
-			MinecraftClient.getInstance().setScreen(bookScreen);
+		if (commonConfig.enableNewStartBook) {
+			if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreenV2_P1)) {
+				BookOfShapeShifterScreenV2_P1 bookScreen = new BookOfShapeShifterScreenV2_P1();
+				bookScreen.currentPlayer = user;
+				MinecraftClient.getInstance().setScreen(bookScreen);
+			}
+		}
+		else {
+			if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreen)) {
+				BookOfShapeShifterScreen bookScreen = new BookOfShapeShifterScreen();
+				bookScreen.currentPlayer = user;
+				MinecraftClient.getInstance().setScreen(bookScreen);
+			}
 		}
 	}
 	public static void openStartBookScreen(PlayerEntity user) {
