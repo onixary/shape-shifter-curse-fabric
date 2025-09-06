@@ -2,38 +2,31 @@ package net.onixary.shapeShifterCurseFabric.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderProgram;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.custom_ui.BookOfShapeShifterScreen;
+import net.onixary.shapeShifterCurseFabric.custom_ui.BookOfShapeShifterScreenV2_P1;
+import net.onixary.shapeShifterCurseFabric.custom_ui.StartBookScreenV2;
 import net.onixary.shapeShifterCurseFabric.custom_ui.StartBookScreen;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TAxolotlEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.BatEntityModel;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.BatEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TOcelotEntityRenderer;
-import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_animation.RegPlayerAnimation;
 import net.onixary.shapeShifterCurseFabric.render.render_layer.FurGradientRenderLayer;
 import net.onixary.shapeShifterCurseFabric.util.ClientTicker;
 import net.onixary.shapeShifterCurseFabric.util.TickManager;
-
-import java.io.IOException;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
 
@@ -48,17 +41,35 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 	private static ShaderProgram furGradientShader;
 
 	public static void openBookScreen(PlayerEntity user) {
-		if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreen)) {
-			BookOfShapeShifterScreen bookScreen = new BookOfShapeShifterScreen();
-			bookScreen.currentPlayer = user;
-			MinecraftClient.getInstance().setScreen(bookScreen);
+		if (commonConfig.enableNewStartBook) {
+			if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreenV2_P1)) {
+				BookOfShapeShifterScreenV2_P1 bookScreen = new BookOfShapeShifterScreenV2_P1();
+				bookScreen.currentPlayer = user;
+				MinecraftClient.getInstance().setScreen(bookScreen);
+			}
+		}
+		else {
+			if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreen)) {
+				BookOfShapeShifterScreen bookScreen = new BookOfShapeShifterScreen();
+				bookScreen.currentPlayer = user;
+				MinecraftClient.getInstance().setScreen(bookScreen);
+			}
 		}
 	}
 	public static void openStartBookScreen(PlayerEntity user) {
-		if (!(MinecraftClient.getInstance().currentScreen instanceof StartBookScreen)) {
-			StartBookScreen startScreen = new StartBookScreen();
-			startScreen.currentPlayer = user;
-			MinecraftClient.getInstance().setScreen(startScreen);
+		if (commonConfig.enableNewStartBook) {
+			if (!(MinecraftClient.getInstance().currentScreen instanceof StartBookScreenV2)) {
+				StartBookScreenV2 startScreen = new StartBookScreenV2();
+				startScreen.currentPlayer = user;
+				MinecraftClient.getInstance().setScreen(startScreen);
+			}
+		}
+		else {
+			if (!(MinecraftClient.getInstance().currentScreen instanceof StartBookScreen)) {
+				StartBookScreen startScreen = new StartBookScreen();
+				startScreen.currentPlayer = user;
+				MinecraftClient.getInstance().setScreen(startScreen);
+			}
 		}
 	}
 

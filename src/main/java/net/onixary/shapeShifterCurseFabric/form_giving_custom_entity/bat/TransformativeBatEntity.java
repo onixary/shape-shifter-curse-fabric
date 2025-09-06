@@ -11,15 +11,13 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.BatEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.TStatusApplier;
 
@@ -45,9 +43,13 @@ public class TransformativeBatEntity extends BatEntity {
         } else {
             int i = world.getLightLevel(pos);
             int j = 4;
-            if (random.nextBoolean()) {
-                return false;
-            }
+//            if (random.nextBoolean()) {  // ~ 50% 成功率
+//                return false;
+//            }
+            float Chance = ShapeShifterCurseFabric.commonConfig.transformativeBatSpawnChance;
+            if (Chance <= 0) { return false; }
+            if (Chance >= 1) { return true; }
+            if (random.nextFloat() > Chance) { return false; }
 
             return i > random.nextInt(j) ? false : canMobSpawn(type, world, spawnReason, pos, random);
         }

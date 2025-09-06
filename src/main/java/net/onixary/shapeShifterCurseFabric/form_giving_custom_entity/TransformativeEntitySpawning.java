@@ -2,13 +2,8 @@ package net.onixary.shapeShifterCurseFabric.form_giving_custom_entity;
 
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnRestriction;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.AxolotlEntity;
-import net.minecraft.entity.passive.BatEntity;
-import net.minecraft.entity.passive.OcelotEntity;
 import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.BiomeKeys;
@@ -42,7 +37,7 @@ public class TransformativeEntitySpawning {
                 ShapeShifterCurseFabric.T_AXOLOTL,
                 SpawnRestriction.Location.IN_WATER,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                TransformativeAxolotlEntity::canSpawn
+                TransformativeAxolotlEntity::canCustomSpawn
         );
         BiomeModifications.addSpawn(
                 BiomeSelectors.includeByKey(BiomeKeys.LUSH_CAVES),

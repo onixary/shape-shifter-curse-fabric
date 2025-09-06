@@ -2,13 +2,14 @@ package net.onixary.shapeShifterCurseFabric;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.advancement.criterion.Criteria;
@@ -78,6 +79,10 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final String MOD_ID = "shape-shifter-curse";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static final ConfigSSC CONFIG = ConfigSSC.createAndLoad();
+
+    public static ClientConfig clientConfig;
+    public static CommonConfig commonConfig;
+
     // 用于在游戏内测试调参用的临时变量
     public static Vec3d feralItemCenter = new Vec3d(0.0F, 0.0F, 0.0F);
     public static Vec3d feralItemPosOffset = new Vec3d(0.0F, 0.0F, 0.0F);
@@ -169,7 +174,9 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
         // 注册配置文件
         AutoConfig.register(ClientConfig.class, Toml4jConfigSerializer::new);  // 客户端配置
+        clientConfig = AutoConfig.getConfigHolder(ClientConfig.class).getConfig();
         AutoConfig.register(CommonConfig.class, Toml4jConfigSerializer::new);  // 双端配置
+        commonConfig = AutoConfig.getConfigHolder(CommonConfig.class).getConfig();
 
         // network package
         ModPacketsC2S.register();

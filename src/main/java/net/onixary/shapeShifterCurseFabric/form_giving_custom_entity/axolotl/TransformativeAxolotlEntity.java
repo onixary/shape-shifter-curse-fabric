@@ -1,19 +1,19 @@
 package net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl;
 
-import net.minecraft.entity.Bucketable;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AxolotlEntity;
-import net.minecraft.entity.passive.BatEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
@@ -26,6 +26,15 @@ public class TransformativeAxolotlEntity extends AxolotlEntity {
 
     public static DefaultAttributeContainer.Builder createTAxolotlAttributes() {
         return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0);
+    }
+
+    public static boolean canCustomSpawn(EntityType<TransformativeAxolotlEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        // ~100% 刷新成功率
+        float Chance = ShapeShifterCurseFabric.commonConfig.transformativeAxolotlSpawnChance;
+        if (Chance <= 0.0f) { return false; }
+        if (Chance >= 1.0f) { return true; }
+        if (random.nextFloat() < Chance) { return true; }
+        return canSpawn(type, world, spawnReason, pos, random);
     }
 
     // 20 ticks = 1 second

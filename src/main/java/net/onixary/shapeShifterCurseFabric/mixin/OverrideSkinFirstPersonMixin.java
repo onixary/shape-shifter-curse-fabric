@@ -58,7 +58,7 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
     private void shape_shifter_curse$RenderArm_setModelPose_AFTER(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
         // 渲染变身模型-根据模型设置修改手臂组件渲染
         if (RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm() == PlayerForms.ORIGINAL_BEFORE_ENABLE) {return;}  // 仅当玩家激活Mod后才进行修改
-        if (!AutoConfig.getConfigHolder(ClientConfig.class).getConfig().enableFormModelOnVanillaFirstPersonRender) {return;}  // 仅当启用自定义第一人称渲染时才进行修改
+        if (!ShapeShifterCurseFabric.clientConfig.enableFormModelOnVanillaFirstPersonRender) {return;}  // 仅当启用自定义第一人称渲染时才进行修改
         for (OriginalFurClient.OriginFur fur : ((IPlayerEntityMixins) player).originalFur$getCurrentFurs()) {
             OriginFurModel OFModel = (OriginFurModel) fur.getGeoModel();
             boolean IsRenderRight = arm.equals(this.getModel().rightArm);
@@ -78,7 +78,7 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
     private void shape_shifter_curse$RenderArm_RETURN(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
         // 渲染变身模型
         if (RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm() == PlayerForms.ORIGINAL_BEFORE_ENABLE) {return;}  // 仅当玩家激活Mod后才进行修改
-        if (!AutoConfig.getConfigHolder(ClientConfig.class).getConfig().enableFormModelOnVanillaFirstPersonRender) {return;}  // 仅当启用自定义第一人称渲染时才进行修改
+        if (!ShapeShifterCurseFabric.clientConfig.enableFormModelOnVanillaFirstPersonRender) {return;}  // 仅当启用自定义第一人称渲染时才进行修改
         boolean IsRenderRight = arm.equals(this.getModel().rightArm);
         String GeoBoneName = IsRenderRight ? "bipedRightArm" : "bipedLeftArm";
         for (OriginalFurClient.OriginFur fur : ((IPlayerEntityMixins) player).originalFur$getCurrentFurs()) {
