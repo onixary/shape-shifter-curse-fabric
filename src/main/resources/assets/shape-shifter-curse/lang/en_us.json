@@ -651,5 +651,5 @@
   "text.autoconfig.shape-shifter-curse-common.option.transformativeAxolotlSpawnChance": "Transformative Axolotl Spawn Success Rate",
   "text.autoconfig.shape-shifter-curse-common.option.transformativeOcelotSpawnChance": "Transformative Ocelot Spawn Success Rate",
   "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "In Development",
-  "text.autoconfig.shape-shifter-curse-common.option.inDevelopmentConfigPlaceHolder": "In Development Config Placeholder"
+  "text.autoconfig.shape-shifter-curse-common.option.enableNewStartBook": "Enable The New Version of Start Book Interface"
 }
