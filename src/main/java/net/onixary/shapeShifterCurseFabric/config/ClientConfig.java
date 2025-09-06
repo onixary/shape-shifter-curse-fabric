@@ -12,11 +12,13 @@ public class ClientConfig implements ConfigData {
 
     // Comment 不知道如何本地化
     @ConfigEntry.Category("General")
-    @Comment("Enable form model on vanilla first person render Default: true")
+    @Comment("Enable form model on vanilla first person render. Default: true")
     public boolean enableFormModelOnVanillaFirstPersonRender = true;  // 原版第一人称下启用形态模型渲染
 
-    // 开发用
-    @ConfigEntry.Category("InDevelopment")
-    @Comment("In Development Default: false")
+    @ConfigEntry.Category("General")
+    @Comment("Use Bigger(2x) Start Book Interface. Default: false")
     public boolean newStartBookForBiggerScreen = false;  // 菜单缩放至少为4
+
+    // 开发用
+    // @ConfigEntry.Category("InDevelopment")
 }
