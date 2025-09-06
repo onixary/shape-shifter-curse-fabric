@@ -612,5 +612,5 @@
   "text.autoconfig.shape-shifter-curse-common.option.transformativeAxolotlSpawnChance": "咒文美西螈刷新成功率",
   "text.autoconfig.shape-shifter-curse-common.option.transformativeOcelotSpawnChance": "咒文豹猫刷新成功率",
   "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "开发中配置",
-  "text.autoconfig.shape-shifter-curse-common.option.inDevelopmentConfigPlaceHolder": "开发中配置占位符"
+  "text.autoconfig.shape-shifter-curse-common.option.enableNewStartBook": "启用新版幻形者之书界面"
 }
