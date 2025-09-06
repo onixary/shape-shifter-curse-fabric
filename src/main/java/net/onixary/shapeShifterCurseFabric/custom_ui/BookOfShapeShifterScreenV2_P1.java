@@ -35,19 +35,22 @@ public class BookOfShapeShifterScreenV2_P1 extends Screen {
         int BookPosX = width / 2 - BookSizeX / 2;
         int BookPosY = height / 2 - BookSizeY / 2;
         int DefaultTextColor = 0xFFFFFF;  // 这里的颜色属于乘法模式 (float)(R1*R2,G1*G2,B1*B2) 需要在lang中修改
+        float Scale = 0.5f;
+        ScaleTextRenderer scaleTextRenderer = new ScaleTextRenderer(textRenderer);
+        scaleTextRenderer.Scale = Scale;
         // Title
         // Size -> (108, 48) Pos -> (17, 92)
-        MultilineTextWidget TitleLabel = new MultilineTextWidget(BookPosX + 17, BookPosY + 92, CodexData.getContentText(CodexData.ContentType.TITLE, currentPlayer), textRenderer).setMaxWidth(108).setTextColor(DefaultTextColor);
+        MultilineTextWidget TitleLabel = new ScaleMultilineTextWidget(BookPosX + 17, BookPosY + 92, CodexData.getContentText(CodexData.ContentType.TITLE, currentPlayer), scaleTextRenderer, Scale).setMaxWidth(108).setTextColor(DefaultTextColor);
         this.addDrawableChild(TitleLabel);
         // Status
         // Size -> (107, 56) Pos -> (17, 153)
         this.addDrawableChild(new TextWidget(BookPosX + 17, BookPosY + 153 - 10, 107, 8, CodexData.headerStatus, textRenderer).setTextColor(DefaultTextColor));
-        MultilineTextWidget StatusLabel = new MultilineTextWidget(BookPosX + 17, BookPosY + 153, CodexData.getPlayerStatusText(currentPlayer), textRenderer).setMaxWidth(107).setTextColor(DefaultTextColor);
+        MultilineTextWidget StatusLabel = new ScaleMultilineTextWidget(BookPosX + 17, BookPosY + 153, CodexData.getPlayerStatusText(currentPlayer), scaleTextRenderer, Scale).setMaxWidth(107).setTextColor(DefaultTextColor);
         this.addDrawableChild(StatusLabel);
         // Appearance
         // Size -> (176, 184) Pos -> (142, 23)
         this.addDrawableChild(new TextWidget(BookPosX + 142, BookPosY + 23 - 10, 176, 8, CodexData.headerAppearance, textRenderer).setTextColor(DefaultTextColor));
-        MultilineTextWidget AppearanceLabel = new MultilineTextWidget(BookPosX + 142, BookPosY + 23, CodexData.getContentText(CodexData.ContentType.APPEARANCE, currentPlayer), textRenderer).setMaxWidth(176).setTextColor(DefaultTextColor);
+        MultilineTextWidget AppearanceLabel = new ScaleMultilineTextWidget(BookPosX + 142, BookPosY + 23, CodexData.getContentText(CodexData.ContentType.APPEARANCE, currentPlayer), scaleTextRenderer, Scale).setMaxWidth(176).setTextColor(DefaultTextColor);
         this.addDrawableChild(AppearanceLabel);
         // 下一页按钮
         int NextPage_ButtonSizeX = 15;
@@ -103,7 +106,7 @@ public class BookOfShapeShifterScreenV2_P1 extends Screen {
         // 实体渲染原点为实体中心脚下
         // Size -> (70, 66) Pos -> (35, 15)
         int PlayerX = BookPosX + 70;
-        int PlayerY = BookPosY + 70;
+        int PlayerY = BookPosY + 75;
         this.RenderEntity(context, PlayerX, PlayerY, 30, PlayerX - mouseX, PlayerY - 37 - mouseY, currentPlayer);
         super.render(context, mouseX, mouseY, delta);
     }

@@ -1,1 +1,10 @@
 accessWidener   v1  named
+accessible method net/minecraft/client/font/TextRenderer tweakTransparency (I)I
+accessible method net/minecraft/client/font/TextRenderer drawLayer (Ljava/lang/String;FFIZLorg/joml/Matrix4f;Lnet/minecraft/client/render/VertexConsumerProvider;Lnet/minecraft/client/font/TextRenderer$TextLayerType;II)F
+accessible method net/minecraft/client/font/TextRenderer drawLayer (Lnet/minecraft/text/OrderedText;FFIZLorg/joml/Matrix4f;Lnet/minecraft/client/render/VertexConsumerProvider;Lnet/minecraft/client/font/TextRenderer$TextLayerType;II)F
+accessible field net/minecraft/client/font/TextRenderer fontStorageAccessor Ljava/util/function/Function;
+accessible field net/minecraft/client/font/TextRenderer validateAdvance Z
+accessible field net/minecraft/client/font/TextRenderer handler Lnet/minecraft/client/font/TextHandler;
+accessible field net/minecraft/client/gui/widget/MultilineTextWidget cacheKeyToText Lnet/minecraft/util/CachedMapper;
+accessible field net/minecraft/client/gui/widget/MultilineTextWidget centered Z
+accessible method net/minecraft/client/gui/widget/MultilineTextWidget getCacheKey ()Lnet/minecraft/client/gui/widget/MultilineTextWidget$CacheKey;
