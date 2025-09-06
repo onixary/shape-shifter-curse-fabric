@@ -36,14 +36,14 @@ public class StartBookScreenV2 extends Screen {
     public void init() {
         // 渲染文字
         int TextPosX = width / 2 - TextSizeX / 2;
-        int TextPosY = height / 2 - TextSizeY / 2;
+        int TextPosY = height / 2 - TextSizeY / 2 + 75;
         MultilineTextWidget StartBookLabel = new MultilineTextWidget(TextPosX, TextPosY, Text.translatable("screen.shape-shifter-curse.book_of_shape_shifter.start_content_text"), textRenderer);
         StartBookLabel.setMaxWidth(TextSizeX);
         this.addDrawableChild(StartBookLabel);
         // 渲染按钮
         int BookBottomY = height / 2 + BookSizeY / 2;
         int ButtonPosX = width / 2 - ButtonSizeX / 2;
-        int ButtonPosY = BookBottomY - 50;
+        int ButtonPosY = BookBottomY - 100;
         this.addDrawableChild(ButtonWidget.builder(
                 Text.translatable("screen.shape-shifter-curse.book_of_shape_shifter.start_button_text"),
                 button -> {
