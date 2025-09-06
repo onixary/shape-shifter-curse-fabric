@@ -17,6 +17,6 @@ public class ClientConfig implements ConfigData {
 
     // 开发用
     @ConfigEntry.Category("InDevelopment")
-    @Comment("PLACEHOLDER Default: false")
-    public boolean inDevelopmentConfigPlaceHolder = false;  // 占位符 添加新项目时请删除
+    @Comment("In Development Default: false")
+    public boolean newStartBookForBiggerScreen = false;  // 菜单缩放至少为4
 }

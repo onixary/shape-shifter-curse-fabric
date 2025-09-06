@@ -11,6 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
 
 import java.util.OptionalInt;
@@ -34,16 +35,22 @@ public class StartBookScreenV2 extends Screen {
 
     @Override
     public void init() {
+        int TextPosYFix = 75;
+        int ButtonPosYFix = -100;
+        if (ShapeShifterCurseFabric.clientConfig.newStartBookForBiggerScreen) {
+            TextPosYFix = 0;
+            ButtonPosYFix = -50;
+        }
         // 渲染文字
         int TextPosX = width / 2 - TextSizeX / 2;
-        int TextPosY = height / 2 - TextSizeY / 2 + 75;
+        int TextPosY = height / 2 - TextSizeY / 2 + TextPosYFix;
         MultilineTextWidget StartBookLabel = new MultilineTextWidget(TextPosX, TextPosY, Text.translatable("screen.shape-shifter-curse.book_of_shape_shifter.start_content_text"), textRenderer);
         StartBookLabel.setMaxWidth(TextSizeX);
         this.addDrawableChild(StartBookLabel);
         // 渲染按钮
         int BookBottomY = height / 2 + BookSizeY / 2;
         int ButtonPosX = width / 2 - ButtonSizeX / 2;
-        int ButtonPosY = BookBottomY - 100;
+        int ButtonPosY = BookBottomY + ButtonPosYFix;
         this.addDrawableChild(ButtonWidget.builder(
                 Text.translatable("screen.shape-shifter-curse.book_of_shape_shifter.start_button_text"),
                 button -> {
