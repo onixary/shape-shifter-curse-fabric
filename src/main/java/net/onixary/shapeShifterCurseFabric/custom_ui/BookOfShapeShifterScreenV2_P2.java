@@ -34,23 +34,24 @@ public class BookOfShapeShifterScreenV2_P2 extends Screen {
         }
         int BookPosX = width / 2 - (BookSizeX * BookScale) / 2;
         int BookPosY = height / 2 - (BookSizeY * BookScale) / 2;
-        int DefaultTextColor = 0xFFFFFF;  // 这里的颜色属于乘法模式 (float)(R1*R2,G1*G2,B1*B2) 需要在lang中修改
+        int DefaultTextColor = 0x222222;   // 这里的颜色属于乘法模式 (float)(R1*R2,G1*G2,B1*B2) 需要在lang中修改
+        int HeaderTextColor = 0xDDDDDD;
         ScaleTextRenderer scaleTextRenderer = new ScaleTextRenderer(textRenderer);
         scaleTextRenderer.Scale = Scale;
         // Pros
         // Size -> (83, 181) Pos -> (13, 26)
-        this.addDrawableChild(new TextWidget(BookPosX + 26 * BookScale, BookPosY + 10 * BookScale, 53 * BookScale, 11 * BookScale, CodexData.headerPros, textRenderer).setTextColor(DefaultTextColor));
-        MultilineTextWidget Pros = new ScaleMultilineTextWidget(BookPosX + 13 * BookScale, BookPosY + 26 * BookScale, CodexData.getContentText(CodexData.ContentType.PROS, currentPlayer), scaleTextRenderer, Scale).setMaxWidth(83 * BookScale).setTextColor(DefaultTextColor);
+        this.addDrawableChild(new TextWidget(BookPosX + 26 * BookScale, BookPosY + 10 * BookScale, 53 * BookScale, 11 * BookScale, CodexData.headerPros, textRenderer).setTextColor(HeaderTextColor));
+        MultilineTextWidget Pros = new ScaleMultilineTextWidget(BookPosX + 13 * BookScale, BookPosY + 26 * BookScale, CodexData.getContentText(CodexData.ContentType.PROS, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(83 * BookScale).setTextColor(DefaultTextColor);
         this.addDrawableChild(Pros);
         // Cons
         // Size -> (82, 182) Pos -> (110, 26)
-        this.addDrawableChild(new TextWidget(BookPosX + 120 * BookScale, BookPosY + 10 * BookScale, 63 * BookScale, 11 * BookScale, CodexData.headerCons, textRenderer).setTextColor(DefaultTextColor));
-        MultilineTextWidget Cons = new ScaleMultilineTextWidget(BookPosX + 110 * BookScale, BookPosY + 26 * BookScale, CodexData.getContentText(CodexData.ContentType.CONS, currentPlayer), scaleTextRenderer, Scale).setMaxWidth(82 * BookScale).setTextColor(DefaultTextColor);
+        this.addDrawableChild(new TextWidget(BookPosX + 120 * BookScale, BookPosY + 10 * BookScale, 63 * BookScale, 11 * BookScale, CodexData.headerCons, textRenderer).setTextColor(HeaderTextColor));
+        MultilineTextWidget Cons = new ScaleMultilineTextWidget(BookPosX + 110 * BookScale, BookPosY + 26 * BookScale, CodexData.getContentText(CodexData.ContentType.CONS, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(82 * BookScale).setTextColor(DefaultTextColor);
         this.addDrawableChild(Cons);
         // Instincts
         // Size -> (106, 136) Pos -> (220, 24)
-        this.addDrawableChild(new TextWidget(BookPosX + 242 * BookScale, BookPosY + 10 * BookScale, 63 * BookScale, 12 * BookScale, CodexData.headerInstincts, textRenderer).setTextColor(DefaultTextColor));
-        MultilineTextWidget Instincts = new ScaleMultilineTextWidget(BookPosX + 220 * BookScale, BookPosY + 24 * BookScale, CodexData.getContentText(CodexData.ContentType.INSTINCTS, currentPlayer), scaleTextRenderer, Scale).setMaxWidth(106 * BookScale).setTextColor(DefaultTextColor);
+        this.addDrawableChild(new TextWidget(BookPosX + 242 * BookScale, BookPosY + 10 * BookScale, 63 * BookScale, 12 * BookScale, CodexData.headerInstincts, textRenderer).setTextColor(HeaderTextColor));
+        MultilineTextWidget Instincts = new ScaleMultilineTextWidget(BookPosX + 220 * BookScale, BookPosY + 24 * BookScale, CodexData.getContentText(CodexData.ContentType.INSTINCTS, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(106 * BookScale).setTextColor(DefaultTextColor);
         this.addDrawableChild(Instincts);
         // 下一页按钮
         int NextPage_ButtonSizeX = 15 * BookScale;

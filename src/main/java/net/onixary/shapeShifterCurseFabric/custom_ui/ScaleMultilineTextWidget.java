@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.custom_ui;
 
+import io.wispforest.owo.ui.component.LabelComponent;
 import net.minecraft.client.font.MultilineText;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
@@ -10,9 +11,20 @@ import java.util.Objects;
 
 public class ScaleMultilineTextWidget extends MultilineTextWidget {
     private final float Scale;
+    protected boolean shadow;
+
+    public ScaleMultilineTextWidget shadow(boolean shadow) {
+        this.shadow = shadow;
+        return this;
+    }
+    public boolean shadow() {
+        return this.shadow;
+    }
+
     public ScaleMultilineTextWidget(int x, int y, Text message, TextRenderer textRenderer, float Scale) {
         super(x, y, message, textRenderer);
         this.Scale = Scale;
+        this.shadow = false;
     }
 
     public MultilineTextWidget setMaxWidth(int maxWidth) {
@@ -38,7 +50,12 @@ public class ScaleMultilineTextWidget extends MultilineTextWidget {
         if (this.centered) {
             multilineText.drawCenterWithShadow(context, i + this.getWidth() / 2, j, k, l);
         } else {
-            multilineText.drawWithShadow(context, i, j, k, l);
+            if(this.shadow){
+                multilineText.drawWithShadow(context, i, j, k, l);
+            }
+            else{
+                multilineText.draw(context, i, j, k, l);
+            }
         }
     }
 }

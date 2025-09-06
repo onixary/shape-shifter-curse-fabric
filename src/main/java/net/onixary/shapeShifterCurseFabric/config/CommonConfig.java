@@ -26,5 +26,5 @@ public class CommonConfig implements ConfigData {
     // 开发用
     @ConfigEntry.Category("InDevelopment")
     @Comment("In Development Default: false")
-    public boolean enableNewStartBook = false;  // 新版启动书
+    public boolean enableNewStartBook = true;  // 新版启动书
 }

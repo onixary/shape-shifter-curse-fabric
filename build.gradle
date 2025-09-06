@@ -132,9 +132,11 @@ dependencies {
 
 
     //Owo
-    modImplementation "io.wispforest:owo-lib:${project.owo_version}"
-    include "io.wispforest:owo-sentinel:${project.owo_version}"
-    annotationProcessor modImplementation("io.wispforest:owo-lib:${project.owo_version}")
+    //modImplementation "io.wispforest:owo-lib:${project.owo_version}"
+    //include "io.wispforest:owo-sentinel:${project.owo_version}"
+    //annotationProcessor modImplementation("io.wispforest:owo-lib:${project.owo_version}")
+    modCompileOnly "io.wispforest:owo-lib:${owo_version}"
+    modRuntimeOnly "io.wispforest:owo-lib:${owo_version}"
 
     // satin shader
     modImplementation "org.ladysnake:satin:${satin_version}"

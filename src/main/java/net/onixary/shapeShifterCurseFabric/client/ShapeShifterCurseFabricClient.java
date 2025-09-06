@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderProgram;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -49,10 +50,21 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 			}
 		}
 		else {
-			if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreen)) {
-				BookOfShapeShifterScreen bookScreen = new BookOfShapeShifterScreen();
-				bookScreen.currentPlayer = user;
-				MinecraftClient.getInstance().setScreen(bookScreen);
+			// 仅当owo_lib加载时才能调用旧版页面，否则回退回新版
+			if(FabricLoader.getInstance().isModLoaded("owo")){
+				if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreen)) {
+					BookOfShapeShifterScreen bookScreen = new BookOfShapeShifterScreen();
+					bookScreen.currentPlayer = user;
+					MinecraftClient.getInstance().setScreen(bookScreen);
+				}
+			}
+			else {
+				LOGGER.error("Owo lib is not installed! Old book screen is unavailable, opening new book screen instead.");
+				if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreenV2_P1)) {
+					BookOfShapeShifterScreenV2_P1 bookScreen = new BookOfShapeShifterScreenV2_P1();
+					bookScreen.currentPlayer = user;
+					MinecraftClient.getInstance().setScreen(bookScreen);
+				}
 			}
 		}
 	}
