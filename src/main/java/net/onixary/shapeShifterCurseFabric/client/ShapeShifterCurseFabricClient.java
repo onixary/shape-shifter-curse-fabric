@@ -42,7 +42,12 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 	private static ShaderProgram furGradientShader;
 
 	public static void openBookScreen(PlayerEntity user) {
-		if (commonConfig.enableNewStartBook) {
+		// 仅当owo_lib加载时才能调用旧版页面，否则回退回新版
+		if (commonConfig.enableNewStartBook | !FabricLoader.getInstance().isModLoaded("owo")) {
+			if (!commonConfig.enableNewStartBook) {
+				// 以未安装owo_lib为理由进入新版页面时打印日志
+				LOGGER.error("Owo lib is not installed! Old book screen is unavailable, opening new book screen instead.");
+			}
 			if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreenV2_P1)) {
 				BookOfShapeShifterScreenV2_P1 bookScreen = new BookOfShapeShifterScreenV2_P1();
 				bookScreen.currentPlayer = user;
@@ -50,26 +55,20 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 			}
 		}
 		else {
-			// 仅当owo_lib加载时才能调用旧版页面，否则回退回新版
-			if(FabricLoader.getInstance().isModLoaded("owo")){
-				if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreen)) {
-					BookOfShapeShifterScreen bookScreen = new BookOfShapeShifterScreen();
-					bookScreen.currentPlayer = user;
-					MinecraftClient.getInstance().setScreen(bookScreen);
-				}
-			}
-			else {
-				LOGGER.error("Owo lib is not installed! Old book screen is unavailable, opening new book screen instead.");
-				if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreenV2_P1)) {
-					BookOfShapeShifterScreenV2_P1 bookScreen = new BookOfShapeShifterScreenV2_P1();
-					bookScreen.currentPlayer = user;
-					MinecraftClient.getInstance().setScreen(bookScreen);
-				}
+			if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreen)) {
+				BookOfShapeShifterScreen bookScreen = new BookOfShapeShifterScreen();
+				bookScreen.currentPlayer = user;
+				MinecraftClient.getInstance().setScreen(bookScreen);
 			}
 		}
 	}
 	public static void openStartBookScreen(PlayerEntity user) {
-		if (commonConfig.enableNewStartBook) {
+		// 仅当owo_lib加载时才能调用旧版页面，否则回退回新版
+		if (commonConfig.enableNewStartBook | !FabricLoader.getInstance().isModLoaded("owo")) {
+			if (!commonConfig.enableNewStartBook) {
+				// 以未安装owo_lib为理由进入新版页面时打印日志
+				LOGGER.error("Owo lib is not installed! Old book screen is unavailable, opening new book screen instead.");
+			}
 			if (!(MinecraftClient.getInstance().currentScreen instanceof StartBookScreenV2)) {
 				StartBookScreenV2 startScreen = new StartBookScreenV2();
 				startScreen.currentPlayer = user;
