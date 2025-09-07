@@ -39,17 +39,23 @@ public class BookOfShapeShifterScreenV2_P2 extends Screen {
         ScaleTextRenderer scaleTextRenderer = new ScaleTextRenderer(textRenderer);
         scaleTextRenderer.Scale = Scale;
         // Pros
+        // D -> (8, 8), (81, 13)
         // Size -> (83, 181) Pos -> (13, 26)
+        this.addDrawableChild(BuildDetailScreenButton(81, 13, 8, 8, CodexData.getContentText(CodexData.ContentType.PROS, currentPlayer)));
         this.addDrawableChild(new TextWidget(BookPosX + 26 * BookScale, BookPosY + 10 * BookScale, 53 * BookScale, 11 * BookScale, CodexData.headerPros, textRenderer).setTextColor(HeaderTextColor));
         MultilineTextWidget Pros = new ScaleMultilineTextWidget(BookPosX + 13 * BookScale, BookPosY + 26 * BookScale, CodexData.getContentText(CodexData.ContentType.PROS, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(83 * BookScale).setTextColor(DefaultTextColor);
         this.addDrawableChild(Pros);
         // Cons
+        // D -> (8, 8), (186, 13)
         // Size -> (82, 182) Pos -> (110, 26)
+        this.addDrawableChild(BuildDetailScreenButton(186, 13, 8, 8, CodexData.getContentText(CodexData.ContentType.CONS, currentPlayer)));
         this.addDrawableChild(new TextWidget(BookPosX + 120 * BookScale, BookPosY + 10 * BookScale, 63 * BookScale, 11 * BookScale, CodexData.headerCons, textRenderer).setTextColor(HeaderTextColor));
         MultilineTextWidget Cons = new ScaleMultilineTextWidget(BookPosX + 110 * BookScale, BookPosY + 26 * BookScale, CodexData.getContentText(CodexData.ContentType.CONS, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(82 * BookScale).setTextColor(DefaultTextColor);
         this.addDrawableChild(Cons);
         // Instincts
+        // D -> (8, 8), (309, 14)
         // Size -> (106, 136) Pos -> (220, 24)
+        this.addDrawableChild(BuildDetailScreenButton(309, 14, 8, 8, CodexData.getContentText(CodexData.ContentType.INSTINCTS, currentPlayer)));
         this.addDrawableChild(new TextWidget(BookPosX + 242 * BookScale, BookPosY + 10 * BookScale, 63 * BookScale, 12 * BookScale, CodexData.headerInstincts, textRenderer).setTextColor(HeaderTextColor));
         MultilineTextWidget Instincts = new ScaleMultilineTextWidget(BookPosX + 220 * BookScale, BookPosY + 24 * BookScale, CodexData.getContentText(CodexData.ContentType.INSTINCTS, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(106 * BookScale).setTextColor(DefaultTextColor);
         this.addDrawableChild(Instincts);
@@ -81,9 +87,30 @@ public class BookOfShapeShifterScreenV2_P2 extends Screen {
         MinecraftClient.getInstance().setScreen(NextPage);
     }
 
+    private ButtonWidget BuildDetailScreenButton(int InBookPosX, int InBookPosY, int SizeX, int SizeY, Text DetailText) {
+        int BookScale = 1;
+        if (ShapeShifterCurseFabric.clientConfig.newStartBookForBiggerScreen) {
+            BookScale = 2;
+        }
+        int BookPosX = width / 2 - (BookSizeX * BookScale) / 2;
+        int BookPosY = height / 2 - (BookSizeY * BookScale) / 2;
+        int FixedPosX = BookPosX + InBookPosX * BookScale;
+        int FixedPosY = BookPosY + InBookPosY * BookScale;
+        int FixedSizeX = SizeX * BookScale;
+        int FixedSizeY = SizeY * BookScale;
+        return ButtonWidget.builder(Text.of("+"), button -> {
+            MinecraftClient.getInstance().setScreen(new DetailScreen(this, DetailText));
+        }).size(FixedSizeX, FixedSizeY).position(FixedPosX, FixedPosY).build();
+    }
+
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         this.RenderBook(context);
         super.render(context, mouseX, mouseY, delta);
+    }
+
+    @Override
+    public boolean shouldPause() {
+        return false;
     }
 }

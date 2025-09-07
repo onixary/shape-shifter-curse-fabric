@@ -77,4 +77,9 @@ public class StartBookScreenV2 extends Screen {
         this.RenderBook(context);
         super.render(context, mouseX, mouseY, delta);
     }
+
+    @Override
+    public boolean shouldPause() {
+        return false;
+    }
 }

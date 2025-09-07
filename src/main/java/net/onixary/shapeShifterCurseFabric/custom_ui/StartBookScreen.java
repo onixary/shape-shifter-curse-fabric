@@ -82,4 +82,8 @@ public class StartBookScreen extends BaseOwoScreen<FlowLayout> {
     public boolean shouldPause() {
         return false; // 核心控制
     }
+
+    public void setCurrentPlayer(PlayerEntity player){
+        this.currentPlayer = player;
+    }
 }

@@ -8,16 +8,15 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderProgram;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.custom_ui.BookOfShapeShifterScreen;
 import net.onixary.shapeShifterCurseFabric.custom_ui.BookOfShapeShifterScreenV2_P1;
 import net.onixary.shapeShifterCurseFabric.custom_ui.StartBookScreenV2;
-import net.onixary.shapeShifterCurseFabric.custom_ui.StartBookScreen;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TAxolotlEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.BatEntityModel;
@@ -28,6 +27,8 @@ import net.onixary.shapeShifterCurseFabric.player_animation.RegPlayerAnimation;
 import net.onixary.shapeShifterCurseFabric.render.render_layer.FurGradientRenderLayer;
 import net.onixary.shapeShifterCurseFabric.util.ClientTicker;
 import net.onixary.shapeShifterCurseFabric.util.TickManager;
+
+import java.lang.reflect.InvocationTargetException;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
 
@@ -55,11 +56,22 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 			}
 		}
 		else {
-			if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreen)) {
-				BookOfShapeShifterScreen bookScreen = new BookOfShapeShifterScreen();
-				bookScreen.currentPlayer = user;
-				MinecraftClient.getInstance().setScreen(bookScreen);
+			// 反射
+			try {
+				Class<?> ScreenClass = Class.forName("net.onixary.shapeShifterCurseFabric.custom_ui.BookOfShapeShifterScreen");
+				Object startScreen = ScreenClass.getDeclaredConstructor().newInstance();
+				startScreen.getClass().getMethod("setCurrentPlayer", PlayerEntity.class).invoke(startScreen, user);
+				MinecraftClient.getInstance().setScreen((Screen) startScreen);
 			}
+			catch (ClassNotFoundException | InvocationTargetException | IllegalAccessException | InstantiationException | NoSuchMethodException e) {
+				LOGGER.error("Failed to open old book screen!");
+				return;
+			}
+//			if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreen)) {
+//				BookOfShapeShifterScreen bookScreen = new BookOfShapeShifterScreen();
+//				bookScreen.currentPlayer = user;
+//				MinecraftClient.getInstance().setScreen(bookScreen);
+//			}
 		}
 	}
 	public static void openStartBookScreen(PlayerEntity user) {
@@ -76,11 +88,22 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 			}
 		}
 		else {
-			if (!(MinecraftClient.getInstance().currentScreen instanceof StartBookScreen)) {
-				StartBookScreen startScreen = new StartBookScreen();
-				startScreen.currentPlayer = user;
-				MinecraftClient.getInstance().setScreen(startScreen);
+			// 反射
+			try {
+				Class<?> ScreenClass = Class.forName("net.onixary.shapeShifterCurseFabric.custom_ui.StartBookScreen");
+				Object startScreen = ScreenClass.getDeclaredConstructor().newInstance();
+				startScreen.getClass().getMethod("setCurrentPlayer", PlayerEntity.class).invoke(startScreen, user);
+				MinecraftClient.getInstance().setScreen((Screen) startScreen);
 			}
+			catch (ClassNotFoundException | InvocationTargetException | IllegalAccessException | InstantiationException | NoSuchMethodException e) {
+				LOGGER.error("Failed to open old book screen!");
+				return;
+			}
+//			if (!(MinecraftClient.getInstance().currentScreen instanceof StartBookScreen)) {
+//				StartBookScreen startScreen = new StartBookScreen();
+//				startScreen.currentPlayer = user;
+//				MinecraftClient.getInstance().setScreen(startScreen);
+//			}
 		}
 	}
 
