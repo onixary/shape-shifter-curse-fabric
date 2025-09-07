@@ -72,4 +72,44 @@ public class ModPacketsS2CServer {
 
         ServerPlayNetworking.send(player, ModPackets.SYNC_BAT_ATTACH_STATE, buf);
     }
+
+    // 广播给附近其他玩家的蝙蝠吸附状态
+    public static void broadcastBatAttachState(ServerPlayerEntity targetPlayer, boolean isAttached,
+                                               int attachType, BlockPos attachedPos, Direction attachedSide) {
+        // 获取附近的所有玩家（64格范围内）
+        targetPlayer.getServerWorld().getPlayers(player ->
+                player != targetPlayer &&
+                        player.squaredDistanceTo(targetPlayer) <= 64 * 64
+        ).forEach(nearbyPlayer -> {
+            // 发送目标玩家的吸附状态给附近玩家
+            sendOtherPlayerBatAttachState(nearbyPlayer, targetPlayer.getUuid(),
+                    isAttached, attachType, attachedPos, attachedSide);
+        });
+    }
+
+    // 发送其他玩家的蝙蝠吸附状态
+    public static void sendOtherPlayerBatAttachState(ServerPlayerEntity receiver, java.util.UUID targetPlayerUuid,
+                                                     boolean isAttached, int attachType,
+                                                     BlockPos attachedPos, Direction attachedSide) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeUuid(targetPlayerUuid);
+        buf.writeBoolean(isAttached);
+        buf.writeInt(attachType);
+
+        if (attachedPos != null) {
+            buf.writeBoolean(true);
+            buf.writeBlockPos(attachedPos);
+        } else {
+            buf.writeBoolean(false);
+        }
+
+        if (attachedSide != null) {
+            buf.writeBoolean(true);
+            buf.writeInt(attachedSide.getId());
+        } else {
+            buf.writeBoolean(false);
+        }
+
+        ServerPlayNetworking.send(receiver, ModPackets.SYNC_OTHER_PLAYER_BAT_ATTACH_STATE, buf);
+    }
 }

@@ -169,7 +169,9 @@ public class BatBlockAttachPower extends Power {
             player.getWorld().getServer().execute(() -> {
                 ModPacketsS2CServer.sendBatAttachState(serverPlayer, isAttached, attachType.ordinal(),
                         attachedBlockPos, attachedSide);
-                //System.out.println("Debug: Sent sync packet to client");
+                // 广播给附近的其他玩家
+                ModPacketsS2CServer.broadcastBatAttachState(serverPlayer, isAttached, attachType.ordinal(),
+                        attachedBlockPos, attachedSide);
             });
         }
 
@@ -252,6 +254,8 @@ public class BatBlockAttachPower extends Power {
         // 同步到客户端
         if (player instanceof ServerPlayerEntity serverPlayer) {
             ModPacketsS2CServer.sendBatAttachState(serverPlayer, false, AttachType.NONE.ordinal(), null, null);
+            // 广播给附近的其他玩家
+            ModPacketsS2CServer.broadcastBatAttachState(serverPlayer, false, AttachType.NONE.ordinal(), null, null);
         }
     }
 

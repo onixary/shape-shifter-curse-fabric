@@ -126,6 +126,12 @@ public class TransformRelatedItems {
                 // Permanent form will not be affected
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.permanent_form_used_cure_final").formatted(Formatting.YELLOW));
                 break;
+            case 5:
+                // SP form可以随时被治愈
+                // SP form can be cured at any time
+                toForm = PlayerForms.ORIGINAL_SHIFTER;
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure_0").formatted(Formatting.YELLOW));
+                break;
             default:
                 break;
         }

@@ -33,7 +33,10 @@ public class ModPackets {
     // Bat attach power sync packet
     public static final Identifier SYNC_BAT_ATTACH_STATE = new Identifier(ShapeShifterCurseFabric.MOD_ID, "sync_bat_attach_state");
     public static final Identifier JUMP_DETACH_REQUEST_ID = new Identifier(ShapeShifterCurseFabric.MOD_ID, "jump_detach_request");
+    public static final Identifier SYNC_OTHER_PLAYER_BAT_ATTACH_STATE = new Identifier(ShapeShifterCurseFabric.MOD_ID, "sync_other_player_bat_attach_state");
 
     // jump_event packets
     public static final Identifier JUMP_EVENT_ID = new Identifier(ShapeShifterCurseFabric.MOD_ID, "jump_event");
+
+
 }

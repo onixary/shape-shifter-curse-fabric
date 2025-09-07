@@ -14,9 +14,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
+import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
+
+import java.util.UUID;
 
 // 应仅在客户端注册
 // This class should only be registered on the client side
@@ -36,6 +39,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_OVERLAY_FADE_EFFECT, ModPacketsS2C::receiveUpdateOverlayFadeEffect);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.TRANSFORM_COMPLETE_EFFECT, ModPacketsS2C::receiveTransformCompleteEffect);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.RESET_FIRST_PERSON, ModPacketsS2C::receiveResetFirstPerson);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_OTHER_PLAYER_BAT_ATTACH_STATE, ModPacketsS2C::receiveOtherPlayerBatAttachState);
     }
 
     public static void handleSyncEffectAttachment(
@@ -175,6 +179,34 @@ public class ModPacketsS2C {
                 // 获取客户端的BatBlockAttachPower并同步状态
                 BatBlockAttachPower.syncClientState(client.player, isAttached, attachTypeOrdinal, attachedPos, attachedSide);
             }
+        });
+    }
+
+    // 接收其他玩家的蝙蝠吸附状态同步包
+    public static void receiveOtherPlayerBatAttachState(MinecraftClient client, ClientPlayNetworkHandler handler,
+                                                        PacketByteBuf buf, PacketSender responseSender) {
+        UUID targetPlayerUuid = buf.readUuid();
+        boolean isAttached = buf.readBoolean();
+        int attachType = buf.readInt();
+
+        BlockPos attachedPos;
+        Direction attachedSide;
+
+        if (buf.readBoolean()) {
+            attachedPos = buf.readBlockPos();
+        } else {
+            attachedPos = null;
+        }
+
+        if (buf.readBoolean()) {
+            attachedSide = Direction.byId(buf.readInt());
+        } else {
+            attachedSide = null;
+        }
+
+        client.execute(() -> {
+            ClientPlayerStateManager.updatePlayerAttachState(targetPlayerUuid, isAttached,
+                    attachType, attachedPos, attachedSide);
         });
     }
 }

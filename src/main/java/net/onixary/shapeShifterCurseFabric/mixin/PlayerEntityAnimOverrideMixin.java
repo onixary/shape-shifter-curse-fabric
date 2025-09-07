@@ -10,9 +10,7 @@ import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
 import dev.kosmx.playerAnim.core.util.Ease;
 import dev.kosmx.playerAnim.core.util.Vec3f;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
-import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.block.Block;
-import net.minecraft.block.LadderBlock;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.effect.StatusEffectUtil;
@@ -27,6 +25,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
+import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.*;
@@ -37,6 +36,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Mixin(AbstractClientPlayerEntity.class)
 public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
@@ -324,7 +325,9 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                 }
             }
         }
-        // bat form attach animation
+
+        AtomicBoolean foundLocalPower = new AtomicBoolean(false);
+        // 首先检查本地玩家的Power状态
         io.github.apace100.apoli.component.PowerHolderComponent.getPowers(this, BatBlockAttachPower.class)
                 .stream()
                 .filter(power -> power.isAttached())
@@ -335,7 +338,21 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                     } else if (attachPower.getAttachType() == BatBlockAttachPower.AttachType.BOTTOM) {
                         currentState = PlayerAnimState.ANIM_ATTACH_BOTTOM;
                     }
+                    foundLocalPower.set(true);
                 });
+
+        // 如果没有找到本地Power状态，检查客户端状态管理器（用于其他玩家）
+        if (!foundLocalPower.get()) {
+            ClientPlayerStateManager.PlayerAttachState otherPlayerState =
+                    ClientPlayerStateManager.getPlayerAttachState(this.getUuid());
+            if (otherPlayerState != null && otherPlayerState.isAttached) {
+                if (otherPlayerState.attachType == BatBlockAttachPower.AttachType.SIDE) {
+                    currentState = PlayerAnimState.ANIM_ATTACH_SIDE;
+                } else if (otherPlayerState.attachType == BatBlockAttachPower.AttachType.BOTTOM) {
+                    currentState = PlayerAnimState.ANIM_ATTACH_BOTTOM;
+                }
+            }
+        }
 
         // isTransforming - 使用客户端同步的状态
         if(net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.isClientTransforming()){
