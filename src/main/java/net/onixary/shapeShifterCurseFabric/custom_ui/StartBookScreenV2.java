@@ -58,7 +58,7 @@ public class StartBookScreenV2 extends Screen {
                     buf.writeUuid(currentPlayer.getUuid());
                     // 发送到服务端
                     ClientPlayNetworking.send(ModPackets.VALIDATE_START_BOOK_BUTTON, buf);
-                    if(MinecraftClient.getInstance().currentScreen instanceof StartBookScreen){
+                    if(MinecraftClient.getInstance().currentScreen instanceof StartBookScreenV2){
                         MinecraftClient.getInstance().setScreen(null);
                     }
                     this.close(); // 关闭当前界面
