@@ -11,6 +11,7 @@ import dev.kosmx.playerAnim.core.util.Ease;
 import dev.kosmx.playerAnim.core.util.Vec3f;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.effect.StatusEffectUtil;
@@ -20,6 +21,8 @@ import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.item.FlintAndSteelItem;
 import net.minecraft.util.Hand;
 import net.minecraft.util.UseAction;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -43,6 +46,24 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
     @Unique
     private final ModifierLayer<IAnimation> CONTAINER = new ModifierLayer<>();
+
+    @Unique
+    private boolean CanClimbAnim() {
+        if (!this.isClimbing() || this.isOnGround()) {
+            return false;
+        }
+        // 检测碰撞箱 防止出现身体与地面穿模 如果卡顿可以直接可以修改为 return true
+        BlockPos down1pos = this.getBlockPos().down();
+        BlockState down1block = this.getWorld().getBlockState(down1pos);
+        Vec3d ClimbAnimTestPoint = this.getPos().add(0f, -0.6f, 0f);  // 检测点在身体中心下方0.6个方块是否有碰撞箱
+        BlockHitResult HitResult = down1block.getCollisionShape(this.getWorld(), down1pos).raycast(this.getPos(), ClimbAnimTestPoint, down1pos);
+        if (HitResult == null) { // 没有碰撞箱时
+            return true;
+        }
+        else {
+            return HitResult.getType() == BlockHitResult.Type.MISS;
+        }
+    }
 
     public PlayerEntityAnimOverrideMixin(ClientWorld world, GameProfile gameProfile) {
         super(world, world.getSpawnPos(), world.getSpawnAngle(), gameProfile);
@@ -182,7 +203,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
             // if ((world.getBlockState(getBlockPos()).getBlock() instanceof LadderBlock && !isOnGround() && !jumping))
             // 直接使用isClimbing()判断是否在攀爬
-            if (this.isClimbing())
+            if (this.CanClimbAnim())
             {
                 currentState = PlayerAnimState.ANIM_CLIMB_IDLE;
                 if (getVelocity().y > 0)
