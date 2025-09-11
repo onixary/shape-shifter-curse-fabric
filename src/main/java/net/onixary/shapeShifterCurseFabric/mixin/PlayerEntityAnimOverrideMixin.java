@@ -49,7 +49,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
     @Unique
     private boolean CanClimbAnim() {
-        if (!this.isClimbing() || this.isOnGround()) {
+        if (!this.isClimbing() || this.isOnGround() || this.getAbilities().flying || isFallFlying()) {
             return false;
         }
         // 检测碰撞箱 防止出现身体与地面穿模 如果卡顿可以直接可以修改为 return true
