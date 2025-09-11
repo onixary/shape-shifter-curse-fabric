@@ -27,6 +27,10 @@ public class CommonConfig implements ConfigData {
     @Comment("Use The New Start Book Interface. Default: true")
     public boolean enableNewStartBook = true;  // 新版启动书
 
+    @ConfigEntry.Category("General")
+    @Comment("Curse Moon Phase (0 ~ 7). Default: [1, 4, 7]")
+    public int[] curseMoonPhase = {1, 4, 7};
+
     // 开发用
     // @ConfigEntry.Category("InDevelopment")
 }

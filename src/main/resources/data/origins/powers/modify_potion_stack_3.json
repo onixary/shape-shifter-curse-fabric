@@ -3,5 +3,6 @@
   "condition": {
     "type": "origins:constant",
     "value": true
-  }
+  },
+  "count": 3
 }

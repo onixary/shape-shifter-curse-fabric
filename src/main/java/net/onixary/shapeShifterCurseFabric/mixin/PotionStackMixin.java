@@ -4,7 +4,6 @@ import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PotionItem;
 import net.minecraft.screen.slot.Slot;
@@ -36,9 +35,11 @@ public abstract class PotionStackMixin {
 //                if (currentForm == PlayerForms.FAMILIAR_FOX_2 || currentForm == PlayerForms.FAMILIAR_FOX_3) {
 //                    return Math.max(3, itemStack.getMaxCount());
 //                }
-                if (PowerHolderComponent.hasPower(player, ModifyPotionStackPower.class)) {
-                    return Math.max(3, itemStack.getMaxCount());
-                }
+                int StackCount = PowerHolderComponent.getPowers(player, ModifyPotionStackPower.class)
+                        .stream()
+                        .mapToInt(ModifyPotionStackPower::getCount)
+                        .max().orElseGet(() -> 1);
+                return Math.max(StackCount, itemStack.getMaxCount());
             }
         }
 
