@@ -452,6 +452,7 @@
   "text.autoconfig.shape-shifter-curse-common.option.transformativeBatSpawnChance": "变形蝙蝠生成成功率",
   "text.autoconfig.shape-shifter-curse-common.option.transformativeAxolotlSpawnChance": "变形美西螈生成成功率",
   "text.autoconfig.shape-shifter-curse-common.option.transformativeOcelotSpawnChance": "变形豹猫生成成功率",
-  "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "开发中",
-  "text.autoconfig.shape-shifter-curse-common.option.enableNewStartBook": "启用新版开始书籍界面"
+  "text.autoconfig.shape-shifter-curse-common.option.enableNewStartBook": "启用新版开始书籍界面",
+  "text.autoconfig.shape-shifter-curse-common.option.curseMoonPhase": "诅咒之月月相",
+  "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "开发中"
 }

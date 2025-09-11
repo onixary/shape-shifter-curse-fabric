@@ -650,6 +650,7 @@
   "text.autoconfig.shape-shifter-curse-common.option.transformativeBatSpawnChance": "Transformative Bat Spawn Success Rate",
   "text.autoconfig.shape-shifter-curse-common.option.transformativeAxolotlSpawnChance": "Transformative Axolotl Spawn Success Rate",
   "text.autoconfig.shape-shifter-curse-common.option.transformativeOcelotSpawnChance": "Transformative Ocelot Spawn Success Rate",
-  "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "In Development",
-  "text.autoconfig.shape-shifter-curse-common.option.enableNewStartBook": "Enable The New Version of Start Book Interface"
+  "text.autoconfig.shape-shifter-curse-common.option.enableNewStartBook": "Enable The New Version of Start Book Interface",
+  "text.autoconfig.shape-shifter-curse-common.option.curseMoonPhase": "Curse Moon Phase",
+  "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "In Development"
 }

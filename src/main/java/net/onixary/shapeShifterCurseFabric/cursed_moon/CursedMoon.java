@@ -6,21 +6,18 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
-import net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
-import org.spongepowered.asm.mixin.Unique;
 
-import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
+import java.util.Arrays;
+import java.util.Optional;
 
 import static net.onixary.shapeShifterCurseFabric.data.StaticParams.CURSED_MOON_PROBABILITY_MAX;
 
@@ -86,11 +83,17 @@ public class CursedMoon {
         }
     }
 
+    public static boolean isCursedMoonByPhase(int moonPhase) {
+        int[] curseMoonPhase = ShapeShifterCurseFabric.commonConfig.curseMoonPhase;
+        return Arrays.stream(curseMoonPhase).anyMatch(phase -> phase == moonPhase);
+    }
+
     public static boolean isCursedMoonByPhase(World world) {
         int moonPhase = world.getMoonPhase();
         // 月相为1、4、7时触发诅咒之月
         // Cursed Moon is triggered when moon phase is 1, 4, or 7
-        return moonPhase == 1 || moonPhase == 4 || moonPhase == 7;
+        // return moonPhase == 1 || moonPhase == 4 || moonPhase == 7;
+        return isCursedMoonByPhase(moonPhase);
     }
 
     public static boolean isNight(){
@@ -218,6 +221,17 @@ public class CursedMoon {
         }
     }*/
 
+    public static Optional<Integer> getNextCurseMoonPhase(int NowPhase) {
+        int MoonPhaseCount = 8;
+        for (int DaySkip = 0; DaySkip < MoonPhaseCount; DaySkip++) {
+            int CurrentPhase = (NowPhase + DaySkip) % MoonPhaseCount;
+            if (isCursedMoonByPhase(CurrentPhase)) {
+                return Optional.of(CurrentPhase);
+            }
+        }
+        return Optional.empty();
+    }
+
     public static void forceTriggerCursedMoon(ServerWorld world) {
         CursedMoonData data = ShapeShifterCurseFabric.cursedMoonData.getInstance();
 
@@ -226,20 +240,26 @@ public class CursedMoon {
             return;
         }
 
-        // 获取当前月相
+//        // 获取当前月相
         int currentPhase = world.getMoonPhase();
-        int targetPhase = -1;
-
-        // 找到下一个诅咒月相
-        if (currentPhase < 1) {
-            targetPhase = 1;
-        } else if (currentPhase < 4) {
-            targetPhase = 4;
-        } else if (currentPhase < 7) {
-            targetPhase = 7;
-        } else {
-            targetPhase = 1; // 回到下一个周期
+//        int targetPhase = -1;
+//
+//        // 找到下一个诅咒月相
+//        if (currentPhase < 1) {
+//            targetPhase = 1;
+//        } else if (currentPhase < 4) {
+//            targetPhase = 4;
+//        } else if (currentPhase < 7) {
+//            targetPhase = 7;
+//        } else {
+//            targetPhase = 1; // 回到下一个周期
+//        }
+        Optional<Integer> nextCursedPhase = getNextCurseMoonPhase(currentPhase);
+        if (nextCursedPhase.isEmpty()) {
+            ShapeShifterCurseFabric.LOGGER.warn("Cannot trigger CursedMoon: no next cursed phase found");
+            return;
         }
+        int targetPhase = nextCursedPhase.get();
 
         // 计算需要跳过的天数来达到目标月相
         int daysToSkip = (targetPhase - currentPhase + 8) % 8;
