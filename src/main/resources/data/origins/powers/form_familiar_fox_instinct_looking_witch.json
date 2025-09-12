@@ -1,6 +1,8 @@
 {
   "type": "origins:add_sustained_instinct",
-  "instinct_effect_type": "FORM_FAMILIAR_FOX_LOOKING_WITCH",
+  "instinct_effect_id": "FORM_FAMILIAR_FOX_LOOKING_WITCH",
+  "value": 0.013,
+  "duration": 1,
   "condition": {
     "type": "origins:raycast",
     "distance": 20,

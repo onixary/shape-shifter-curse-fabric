@@ -1,6 +1,8 @@
 {
   "type": "origins:add_sustained_instinct",
-  "instinct_effect_type": "FORM_AXOLOTL_IN_WATER",
+  "instinct_effect_id": "FORM_AXOLOTL_IN_WATER",
+  "value": 0.004,
+  "duration": 1,
   "condition": {
     "type": "origins:fluid_height",
     "fluid": "minecraft:water",

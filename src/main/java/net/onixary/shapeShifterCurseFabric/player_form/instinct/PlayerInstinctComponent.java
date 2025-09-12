@@ -17,8 +17,8 @@ public class PlayerInstinctComponent implements AutoSyncedComponent {
     public float currentInstinctRate = 0f;
     public boolean isInstinctIncreasing = false;
     public boolean isInstinctDecreasing = false;
-    public Queue<InstinctEffectType> immediateEffects = new ArrayDeque<>();
-    public Set<InstinctEffectType> sustainedEffects = new HashSet<>();
+    public Queue<InstinctEffect> immediateEffects = new ArrayDeque<>();
+    public Set<InstinctEffect> sustainedEffects = new HashSet<>();
 
     @Override
     public void readFromNbt(NbtCompound nbtCompound) {
@@ -26,15 +26,15 @@ public class PlayerInstinctComponent implements AutoSyncedComponent {
         this.sustainedEffects.clear();
 
         // 读取 immediateEffects
-        var immediateEffectsList = nbtCompound.getList("immediateEffects", 8); // 8 是 NBT 字符串的 ID
+        var immediateEffectsList = nbtCompound.getList("immediateEffects", 10);
         for (int i = 0; i < immediateEffectsList.size(); i++) {
-            this.immediateEffects.add(InstinctEffectType.valueOf(immediateEffectsList.getString(i)));
+            this.immediateEffects.add(InstinctEffect.FromNBT(immediateEffectsList.getCompound(i)));
         }
 
         // 读取 sustainedEffects
-        var sustainedEffectsList = nbtCompound.getList("sustainedEffects", 8);
+        var sustainedEffectsList = nbtCompound.getList("sustainedEffects", 10);
         for (int i = 0; i < sustainedEffectsList.size(); i++) {
-            this.sustainedEffects.add(InstinctEffectType.valueOf(sustainedEffectsList.getString(i)));
+            this.sustainedEffects.add(InstinctEffect.FromNBT(sustainedEffectsList.getCompound(i)));
         }
 
         // 读取 instinctValue
@@ -49,15 +49,15 @@ public class PlayerInstinctComponent implements AutoSyncedComponent {
     public void writeToNbt(NbtCompound nbtCompound) {
         // 写入 immediateEffects
         var immediateEffectsList = new NbtList();
-        for (InstinctEffectType effect : this.immediateEffects) {
-            immediateEffectsList.add(NbtString.of(effect.name()));
+        for (InstinctEffect effect : this.immediateEffects) {
+            immediateEffectsList.add(effect.ToNBT());
         }
         nbtCompound.put("immediateEffects", immediateEffectsList);
 
         // 写入 sustainedEffects
         var sustainedEffectsList = new NbtList();
-        for (InstinctEffectType effect : this.sustainedEffects) {
-            sustainedEffectsList.add(NbtString.of(effect.name()));
+        for (InstinctEffect effect : this.sustainedEffects) {
+            sustainedEffectsList.add(effect.ToNBT());
         }
         nbtCompound.put("sustainedEffects", sustainedEffectsList);
 
