@@ -30,7 +30,9 @@
           "actions": [
             {
               "type": "origins:add_instinct",
-              "instinct_effect_type": "FORM_FAMILIAR_FOX_ABSORB_ENERGY"
+              "instinct_effect_id": "FORM_FAMILIAR_FOX_ABSORB_ENERGY",
+              "value": 2.5,
+              "duration": 0
             },
             {
               "type": "origins:feed",

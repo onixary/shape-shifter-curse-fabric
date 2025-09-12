@@ -17,7 +17,6 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComp
 
 import java.util.Iterator;
 
-import static net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.applyInstinctThresholdEffect;
 import static net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager.getForm;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.loadInstinctComp;
 import static net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager.handleProgressiveTransform;
@@ -155,7 +154,7 @@ public class InstinctTicker {
 
     private static void processImmediateEffects(PlayerInstinctComponent comp) {
         while (!comp.immediateEffects.isEmpty()) {
-            InstinctEffectType effect = comp.immediateEffects.poll();
+            InstinctEffect effect = comp.immediateEffects.poll();
             comp.instinctValue = MathHelper.clamp(
                     comp.instinctValue + effect.getValue(),
                     0f,
@@ -167,11 +166,15 @@ public class InstinctTicker {
 
     public static float calculateCurrentRate(PlayerEntity player, PlayerInstinctComponent comp) {
         float rate = judgeInstinctGrowRate(player);
-        Iterator<InstinctEffectType> iterator = comp.sustainedEffects.iterator();
+        Iterator<InstinctEffect> iterator = comp.sustainedEffects.iterator();
         while (iterator.hasNext()) {
-            InstinctEffectType effect = iterator.next();
-            rate += effect.getRateModifier();
-            iterator.remove();
+            InstinctEffect effect = iterator.next();
+            if (effect.IsEffectExist()) {
+                rate += effect.getRateModifier();
+            }
+            else {
+                iterator.remove();
+            }
         }
         return rate;
     }

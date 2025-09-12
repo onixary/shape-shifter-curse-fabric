@@ -444,6 +444,7 @@
   "text.autoconfig.shape-shifter-curse-client.title": "幻形者诅咒 - 客户端配置",
   "text.autoconfig.shape-shifter-curse-client.category.General": "通用",
   "text.autoconfig.shape-shifter-curse-client.option.enableFormModelOnVanillaFirstPersonRender": "在原生第一人称渲染时启用形态模型",
+  "text.autoconfig.shape-shifter-curse-client.option.ignoreNoRenderArmPower": "忽略不渲染手臂的能力",
   "text.autoconfig.shape-shifter-curse-client.category.InDevelopment": "开发中",
   "text.autoconfig.shape-shifter-curse-client.option.newStartBookForBiggerScreen": "使新版开始书籍界面更大",
 

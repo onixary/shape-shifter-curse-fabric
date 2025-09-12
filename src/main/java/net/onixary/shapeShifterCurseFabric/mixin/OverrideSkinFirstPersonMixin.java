@@ -49,7 +49,7 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
     @Inject(method = "renderArm", at = @At("HEAD"), cancellable = true)
     private void shape_shifter_curse$RenderArm_HEAD(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
         if (RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm() == PlayerForms.ORIGINAL_BEFORE_ENABLE) {return;}  // 仅当玩家激活Mod后才进行修改
-        if (PowerHolderComponent.hasPower(player, NoRenderArmPower.class)) {  // 不渲染手臂情况
+        if (!ShapeShifterCurseFabric.clientConfig.ignoreNoRenderArmPower && PowerHolderComponent.hasPower(player, NoRenderArmPower.class)) {  // 不渲染手臂情况
             ci.cancel();
         }
     }

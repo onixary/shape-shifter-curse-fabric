@@ -8,7 +8,6 @@ public class AdditionalPowers {
     public static void register() {
         register(AddSustainedInstinctPower.getFactory());
         register(AddImmediateInstinctPower.getFactory());
-        register(AddSustainedInstinctInTimePower.getFactory());
         register(CrawlingPower.getFactory());
         register(ScalePower.getFactory());
         register(LevitatePower.getFactory());

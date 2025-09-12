@@ -16,6 +16,10 @@ public class ClientConfig implements ConfigData {
     public boolean enableFormModelOnVanillaFirstPersonRender = true;  // 原版第一人称下启用形态模型渲染
 
     @ConfigEntry.Category("General")
+    @Comment("Ignore noRender arm power. Default: false")
+    public boolean ignoreNoRenderArmPower = false;  // 忽略不渲染手臂的Power
+
+    @ConfigEntry.Category("General")
     @Comment("Use Bigger(2x) Start Book Interface. Default: false")
     public boolean newStartBookForBiggerScreen = false;  // 菜单缩放至少为4
 

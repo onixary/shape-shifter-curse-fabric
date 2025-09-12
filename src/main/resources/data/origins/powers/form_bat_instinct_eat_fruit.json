@@ -1,15 +1,15 @@
 {
-  "type": "origins:add_sustained_instinct_in_time",
-  "instinct_effect_type": "FORM_BAT_EAT_FRUIT",
-  "duration": 20,
-  "is_on_item_finished": true,
-  "condition": {
-    "type": "origins:using_item",
-    "item_condition": {
-      "type": "origins:ingredient",
-      "ingredient": {
-        "tag": "origins:fruit"
-      }
+  "type": "origins:action_on_item_use",
+  "entity_action": {
+    "type": "origins:add_instinct",
+    "instinct_effect_id": "FORM_BAT_EAT_FRUIT",
+    "value": 0.1,
+    "duration": 20
+  },
+  "item_condition": {
+    "type": "origins:ingredient",
+    "ingredient": {
+      "tag": "origins:fruit"
     }
   }
 }

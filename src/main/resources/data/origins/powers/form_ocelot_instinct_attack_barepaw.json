@@ -33,7 +33,9 @@
     "type": "origins:actor_action",
     "action": {
       "type": "origins:add_instinct",
-      "instinct_effect_type": "FORM_OCELOT_ATTACK_LIVESTOCK"
+      "instinct_effect_id": "FORM_OCELOT_ATTACK_LIVESTOCK",
+      "value": 0.8,
+      "duration": 0
     }
   }
 }

@@ -1,6 +1,8 @@
 {
   "type": "origins:add_sustained_instinct",
-  "instinct_effect_type": "FORM_BAT_NEAR_DRIPSTONE",
+  "instinct_effect_id": "FORM_BAT_NEAR_DRIPSTONE",
+  "value": 0.006,
+  "duration": 1,
   "condition": {
     "type": "origins:block_in_radius",
     "block_condition": {
