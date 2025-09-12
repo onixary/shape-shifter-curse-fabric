@@ -437,6 +437,7 @@
   "text.autoconfig.shape-shifter-curse-client.title": "Shape Shifter Curse - Client Config",
   "text.autoconfig.shape-shifter-curse-client.category.General": "General",
   "text.autoconfig.shape-shifter-curse-client.option.enableFormModelOnVanillaFirstPersonRender": "Enable Render form model on vanilla first person render",
+  "text.autoconfig.shape-shifter-curse-client.option.ignoreNoRenderArmPower": "Ignore NoRenderArm Power",
   "text.autoconfig.shape-shifter-curse-client.category.InDevelopment": "In Development",
   "text.autoconfig.shape-shifter-curse-client.option.newStartBookForBiggerScreen": "Make The New Version of Start Book Interface Bigger",
   "text.autoconfig.shape-shifter-curse-common.title": "Shape Shifter Curse - Common Config",
