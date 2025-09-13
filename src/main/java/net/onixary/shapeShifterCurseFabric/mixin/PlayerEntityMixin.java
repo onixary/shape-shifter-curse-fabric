@@ -15,7 +15,6 @@ import net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFurClient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Unique;
-import sun.misc.Unsafe;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -78,7 +77,7 @@ public class PlayerEntityMixin implements IPlayerEntityMixins {
             }
         }
 
-        @Unique
+        /*@Unique
         private static Unsafe unsafe;
 
         static{
@@ -96,7 +95,7 @@ public class PlayerEntityMixin implements IPlayerEntityMixins {
             long fieldOffset = unsafe.staticFieldOffset(field);
 
             unsafe.putObject(fieldBase, fieldOffset, value);
-        }
+        }*/
         /*@ModifyReturnValue(method="getSkinTextures", at=@At("RETURN"))
         private SkinTextures getElytraTextureMixin(SkinTextures original) throws Exception {
             boolean hE = false;
