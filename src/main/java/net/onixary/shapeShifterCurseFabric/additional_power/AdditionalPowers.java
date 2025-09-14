@@ -34,6 +34,9 @@ public class AdditionalPowers {
         register(WitchFriendlyPower.createFactory());
         register(ScareVillagerPower.createFactory());
         register(ModifyPotionStackPower.createFactory());
+        register(BreathingUnderWaterPower.getFactory());
+        register(HoldBreathPower.getFactory());
+        register(CustomWaterBreathingPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

@@ -1,19 +1,20 @@
-package net.onixary.shapeShifterCurseFabric.integration.origins.mixin;
+package net.onixary.shapeShifterCurseFabric.mixin;
 
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.mixin.EntityAccessor;
-import net.minecraft.enchantment.EnchantmentHelper;
+import io.github.apace100.apoli.power.Power;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.world.World;
+import net.onixary.shapeShifterCurseFabric.additional_power.CustomWaterBreathingPower;
+import net.onixary.shapeShifterCurseFabric.additional_power.LootingPower;
 import net.onixary.shapeShifterCurseFabric.integration.origins.power.OriginsPowerTypes;
-import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModDamageSources;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-public final class WaterBreathingSlowMixin {
+public final class CustomWaterBreathingMixin {
 
     @Mixin(LivingEntity.class)
     public static abstract class CanBreatheInWater extends Entity {
@@ -33,7 +34,7 @@ public final class WaterBreathingSlowMixin {
 
         @Inject(at = @At("HEAD"), method = "canBreatheInWater", cancellable = true)
         public void doWaterBreathing(CallbackInfoReturnable<Boolean> info) {
-            if(OriginsPowerTypes.WATER_BREATHING_SLOW.isActive(this)) {
+            if(PowerHolderComponent.getPowers(this, CustomWaterBreathingPower.class).stream().anyMatch(Power::isActive)) {
                 info.setReturnValue(true);
             }
         }
@@ -51,15 +52,22 @@ public final class WaterBreathingSlowMixin {
             return i > 0 && this.random.nextInt(i + 1) > 0 ? air : air - 1;
         }
 
+        // 使用原版水下呼吸逻辑的反向来实现陆地上慢速失去氧气
+        // 水下呼吸等级越大，陆地上失去氧气的速度越慢
+        // 24级为体验相对较好的数值
         @Inject(at = @At("TAIL"), method = "tick")
         private void tick(CallbackInfo info) {
-            if(OriginsPowerTypes.WATER_BREATHING_SLOW.isActive(this)) {
+            if(PowerHolderComponent.getPowers(this, CustomWaterBreathingPower.class).stream().anyMatch(Power::isActive)) {
                 if(!this.isSubmergedIn(FluidTags.WATER)
                         && !this.hasStatusEffect(StatusEffects.WATER_BREATHING)
                         && !this.hasStatusEffect(StatusEffects.CONDUIT_POWER)) {
                     if(!((EntityAccessor) this).callIsBeingRainedOn()) {
+                        int landWaterBreathLevel = PowerHolderComponent.getPowers(this, CustomWaterBreathingPower.class)
+                                .stream()
+                                .mapToInt(CustomWaterBreathingPower::getLandWaterBreathLevel).sum();
+
                         int landGain = this.getNextAirOnLand(0);
-                        this.setAir(this.getNextAirUnderwaterSlow(this.getAir(), 24) - landGain);
+                        this.setAir(this.getNextAirUnderwaterSlow(this.getAir(), landWaterBreathLevel) - landGain);
                     } else {
                         int landGain = this.getNextAirOnLand(0);
                         this.setAir(this.getAir() - landGain);
@@ -78,7 +86,7 @@ public final class WaterBreathingSlowMixin {
         @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;isSubmergedIn(Lnet/minecraft/registry/tag/TagKey;)Z"), method = "updateTurtleHelmet")
         public boolean isSubmergedInProxy(PlayerEntity player, TagKey<Fluid> fluidTag) {
             boolean submerged = this.isSubmergedIn(fluidTag);
-            if(OriginsPowerTypes.WATER_BREATHING_SLOW.isActive(this)) {
+            if(PowerHolderComponent.getPowers(this, CustomWaterBreathingPower.class).stream().anyMatch(Power::isActive)) {
                 return !submerged;
             }
             return submerged;

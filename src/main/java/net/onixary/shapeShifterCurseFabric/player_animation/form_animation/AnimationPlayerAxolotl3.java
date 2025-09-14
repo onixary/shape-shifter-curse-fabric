@@ -10,6 +10,8 @@ public class AnimationPlayerAxolotl3 {
     private AnimationPlayerAxolotl3() {
     }
 
+    private static AnimationHolder anim_walking = AnimationHolder.EMPTY;
+    private static AnimationHolder anim_running = AnimationHolder.EMPTY;
     private static AnimationHolder anim_swimming = AnimationHolder.EMPTY;
     private static AnimationHolder anim_swimming_idle = AnimationHolder.EMPTY;
     private static AnimationHolder anim_crawling = AnimationHolder.EMPTY;
@@ -21,6 +23,11 @@ public class AnimationPlayerAxolotl3 {
 
     public static AnimationHolder getFormAnimToPlay(PlayerAnimState currentState) {
         switch (currentState) {
+            case ANIM_WALK:
+                return anim_walking;
+            case ANIM_RUN:
+                return anim_running;
+
             case ANIM_SWIM:
                 return anim_swimming;
 
@@ -55,5 +62,7 @@ public class AnimationPlayerAxolotl3 {
         anim_crawling_attack_once = new AnimationHolder(new Identifier(MOD_ID, "axolotl_2_crawling_attack_once"), true);
         anim_crawling_tool_swing = new AnimationHolder(new Identifier(MOD_ID, "axolotl_2_crawling_tool_swing"), true);
         anim_crawling_jump = new AnimationHolder(new Identifier(MOD_ID, "axolotl_2_crawling_jump"), true);
+        anim_walking = new AnimationHolder(new Identifier(MOD_ID, "axolotl_3_walk"), true);
+        anim_running = new AnimationHolder(new Identifier(MOD_ID, "axolotl_3_run"), true);
     }
 }

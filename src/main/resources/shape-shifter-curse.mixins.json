@@ -25,7 +25,11 @@
     "block.PowderSnowBlockMixin",
     "mob.FoxEntityMixin",
     "LivingEntityBurnDamageMixin",
-    "projectile.EntitySnowballTransformMixin"
+    "projectile.EntitySnowballTransformMixin",
+    "BreathingUnderWaterMixin$GetNextAirUnderWater",
+    "HoldBreathMixin$GetNextAirUnderWater",
+    "CustomWaterBreathingMixin$CanBreatheInWater",
+    "CustomWaterBreathingMixin$UpdateAir"
   ],
   "client": [
     "IEntityRenderDispatcherAccessor",
