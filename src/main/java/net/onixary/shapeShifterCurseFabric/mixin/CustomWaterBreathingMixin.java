@@ -9,12 +9,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.additional_power.CustomWaterBreathingPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.LootingPower;
 import net.onixary.shapeShifterCurseFabric.integration.origins.power.OriginsPowerTypes;
+import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModDamageSources;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -76,10 +78,34 @@ public final class CustomWaterBreathingMixin {
                     this.setAir(this.getNextAirOnLand(this.getAir()));
                 }
 
-                if (this.getAir() < 0) {
-                    // 没有氧气（湿润度）时设为-1定值来便于判定
-                    this.setAir(-1);
+                boolean isDamageWhenNoAir = PowerHolderComponent.getPowers(this, CustomWaterBreathingPower.class)
+                        .stream()
+                        .anyMatch(CustomWaterBreathingPower::isDamage_when_no_air);
+
+                if(isDamageWhenNoAir)
+                {
+                    // 正常造成溺水伤害
+                    if (this.getAir() == -20) {
+                        this.setAir(0);
+
+                        for(int i = 0; i < 8; ++i) {
+                            double f = this.random.nextDouble() - this.random.nextDouble();
+                            double g = this.random.nextDouble() - this.random.nextDouble();
+                            double h = this.random.nextDouble() - this.random.nextDouble();
+                            this.getWorld().addParticle(ParticleTypes.BUBBLE, this.getParticleX(0.5), this.getEyeY() + this.random.nextGaussian() * 0.08D, this.getParticleZ(0.5), f * 0.5F, g * 0.5F + 0.25F, h * 0.5F);
+                        }
+
+                        this.damage(ModDamageSources.getSource(getDamageSources(), ModDamageSources.NO_WATER_FOR_GILLS), 2.0F);
+                    }
                 }
+                else{
+                    // 不造成溺水伤害
+                    if (this.getAir() < 0) {
+                        // 没有氧气（湿润度）时设为-1定值来便于判定
+                        this.setAir(-1);
+                    }
+                }
+
             }
         }
 

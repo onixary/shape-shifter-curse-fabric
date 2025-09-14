@@ -13,26 +13,34 @@ public class CustomWaterBreathingPower extends Power {
     // 水下呼吸等级越大，陆地上失去氧气的速度越慢
     // 24级为体验相对较好的数值
     private final int landWaterBreathLevel;
+    private boolean damage_when_no_air = false;
 
-    public CustomWaterBreathingPower(PowerType<?> type, LivingEntity entity, int landWaterBreathLevel) {
+    public CustomWaterBreathingPower(PowerType<?> type, LivingEntity entity, int landWaterBreathLevel, boolean damage_when_no_air) {
         super(type, entity);
         this.landWaterBreathLevel = landWaterBreathLevel;
+        this.damage_when_no_air = damage_when_no_air;
     }
 
     public static PowerFactory<?> createFactory() {
         return new PowerFactory<>(
                 Apoli.identifier("custom_water_breathing"),
                 new SerializableData()
-                        .add("land_water_breathing_level", SerializableDataTypes.INT, 24),
+                        .add("land_water_breathing_level", SerializableDataTypes.INT, 24)
+                        .add("damage_when_no_air", SerializableDataTypes.BOOLEAN, false),
                 data -> (powerType, entity) -> new CustomWaterBreathingPower(
                         powerType,
                         entity,
-                        data.getInt("land_water_breathing_level")
+                        data.getInt("land_water_breathing_level"),
+                        data.getBoolean("damage_when_no_air")
                 )
         ).allowCondition();
     }
 
     public int getLandWaterBreathLevel() {
         return landWaterBreathLevel;
+    }
+
+    public boolean isDamage_when_no_air() {
+        return damage_when_no_air;
     }
 }
