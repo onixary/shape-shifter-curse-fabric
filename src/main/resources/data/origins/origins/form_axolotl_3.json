@@ -1,0 +1,49 @@
+{
+	"powers": [
+		"origins:no_render_arm_when_sneaking",
+		"origins:form_axolotl_2_scale",
+
+		"origins:water_breathing_slow",
+		"origins:aqua_affinity",
+		"origins:like_water",
+		"origins:aquatic",
+		"origins:form_axolotl_1_swim_speed",
+		"origins:form_axolotl_2_regeneration",
+		"origins:form_axolotl_2_dry_speed_down",
+		"origins:form_axolotl_2_new_water_flexibility",
+		"origins:form_axolotl_2_water_spurt",
+		"origins:form_axolotl_2_falling_protection",
+
+		"origins:form_axolotl_2_new_oxygen_health_0",
+		"origins:form_axolotl_2_new_oxygen_health_1",
+		"origins:form_axolotl_2_new_oxygen_health_2",
+		"origins:form_axolotl_2_new_oxygen_health_3",
+		"origins:form_axolotl_2_new_oxygen_health_4",
+		"origins:form_axolotl_2_new_oxygen_health_5",
+		"origins:form_axolotl_2_new_oxygen_health_6",
+		"origins:form_axolotl_2_new_oxygen_health_7",
+		"origins:form_axolotl_2_new_oxygen_health_8",
+		"origins:form_axolotl_2_new_oxygen_health_9",
+
+		"origins:form_raw_fish_food_up",
+
+		"origins:jump_out_water",
+		"origins:form_axolotl_0_new_puff_speed_down",
+		"origins:form_disable_head_armor",
+		"origins:carnivore",
+		"origins:crawling",
+		"origins:sneaking_speed_up",
+		"origins:air_from_potions",
+		"origins:form_instinct_use_catalyst",
+		"origins:form_instinct_use_golden_apple",
+
+		"origins:form_axolotl_sound",
+		"origins:form_axolotl_sound_hurt"
+	],
+	"icon": {
+		"item": "minecraft:player_head"
+	},
+	"order": 0,
+	"unchoosable": true,
+	"impact": 0
+}

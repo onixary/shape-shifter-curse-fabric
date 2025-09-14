@@ -79,6 +79,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         AnimationPlayerBat3.registerAnims();
         AnimationPlayerAxolotl2.registerAnims();
         AnimationPlayerAxolotl1.registerAnims();
+        AnimationPlayerAxolotl3.registerAnims();
         AnimationPlayerOcelot2.registerAnims();
         AnimationPlayerOcelot3.registerAnims();
         AnimationPlayerAllaySP.registerAnims();
@@ -448,6 +449,12 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
                 case AXOLOTL_2:
                     animToPlay = AnimationPlayerAxolotl2.getFormAnimToPlay(currentState);
+                    hasSlowFall = false;
+                    overrideHandAnim = false;
+                    break;
+
+                case AXOLOTL_3:
+                    animToPlay = AnimationPlayerAxolotl3.getFormAnimToPlay(currentState);
                     hasSlowFall = false;
                     overrideHandAnim = false;
                     break;

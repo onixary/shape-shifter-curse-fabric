@@ -260,6 +260,12 @@
   "codex.form.axolotl2.cons": "Moisture is now your lifeline. When dehydrated, maximum health and movement speed drastically decrease, nearly immobilizing you\n\nHelmet equipment remains impossible\nMoist skin/fins gather particles/dust, slowing movement on loose terrain\nYou can only consume meat",
   "codex.form.axolotl2.instincts": " ",
 
+  "codex.form.axolotl3.appearance": "",
+  "codex.form.axolotl3.title": "",
+  "codex.form.axolotl3.pros": "",
+  "codex.form.axolotl3.cons": "",
+  "codex.form.axolotl3.instincts": "",
+
   "codex.form.ocelot0.title": "\nThe curse has caused some visible changes. You notice your body moves more naturally when sneaking",
   "codex.form.ocelot0.appearance": "Your ears have moved to the top of your head, covered in mottled fur, shaped between triangles and semicircles - somewhat resembling a feline's\nYour limb extremities are covered in spotted white fur, resembling thick gloves or socks. Underneath, your fingers seem altered - stronger than before\nFur also grows around your neck, resembling a scarf from afar\nShort dense fur covers your abdomen, providing warmth\nA small tail extends from your tailbone, covered in gray-white fur. When moving, it slightly affects your balance",
   "codex.form.ocelot0.pros": "Your body is more coordinated, increasing sneaking speed\nRotten flesh is trivial for your new digestive system. You no longer get abnormal hunger\nCreepers seem strangely afraid of you",

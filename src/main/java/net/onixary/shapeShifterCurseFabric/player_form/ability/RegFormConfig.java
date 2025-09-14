@@ -16,10 +16,12 @@ public class RegFormConfig {
                 new FormConfig(defaultLayerID,
                         "form_original_before_enable",
                         PlayerFormPhase.PHASE_CLEAR, PlayerFormBodyType.NORMAL));
+
         CONFIGS.put(PlayerForms.ORIGINAL_SHIFTER,
                 new FormConfig(defaultLayerID,
                         "form_original_shifter",
                         PlayerFormPhase.PHASE_CLEAR,PlayerFormBodyType.NORMAL));
+
         CONFIGS.put(PlayerForms.BAT_0,
                 new FormConfig(defaultLayerID,
                         "form_bat_0",
@@ -49,6 +51,11 @@ public class RegFormConfig {
                 new FormConfig(defaultLayerID,
                         "form_axolotl_2",
                         PlayerFormPhase.PHASE_2,PlayerFormBodyType.NORMAL));
+        CONFIGS.put(PlayerForms.AXOLOTL_3,
+                new FormConfig(defaultLayerID,
+                        "form_axolotl_3",
+                        PlayerFormPhase.PHASE_3,PlayerFormBodyType.NORMAL));
+
         CONFIGS.put(PlayerForms.OCELOT_0,
                 new FormConfig(defaultLayerID,
                         "form_ocelot_0",
@@ -65,6 +72,7 @@ public class RegFormConfig {
                 new FormConfig(defaultLayerID,
                         "form_ocelot_3",
                         PlayerFormPhase.PHASE_3,PlayerFormBodyType.FERAL));
+
         CONFIGS.put(PlayerForms.FAMILIAR_FOX_0,
                 new FormConfig(defaultLayerID,
                         "form_familiar_fox_0",
@@ -81,6 +89,7 @@ public class RegFormConfig {
                 new FormConfig(defaultLayerID,
                         "form_familiar_fox_3",
                         PlayerFormPhase.PHASE_3,PlayerFormBodyType.FERAL));
+
         CONFIGS.put(PlayerForms.SNOW_FOX_0,
                 new FormConfig(defaultLayerID,
                         "form_snow_fox_0",
@@ -97,10 +106,12 @@ public class RegFormConfig {
                 new FormConfig(defaultLayerID,
                         "form_snow_fox_3",
                         PlayerFormPhase.PHASE_3,PlayerFormBodyType.FERAL));
+
         CONFIGS.put(PlayerForms.ALLAY_SP,
                 new FormConfig(defaultLayerID,
                         "form_allay_sp",
                         PlayerFormPhase.PHASE_SP,PlayerFormBodyType.NORMAL));
+
         CONFIGS.put(PlayerForms.FERAL_CAT_SP,
                 new FormConfig(defaultLayerID,
                         "form_feral_cat_sp",
@@ -119,6 +130,7 @@ public class RegFormConfig {
                 new FormConfig(defaultLayerID,
                         "form_alpha_2",
                         PlayerFormPhase.PHASE_2,PlayerFormBodyType.NORMAL));
+
         CONFIGS.put(PlayerForms.BETA_0,
                 new FormConfig(defaultLayerID,
                         "form_beta_0",
@@ -131,6 +143,7 @@ public class RegFormConfig {
                 new FormConfig(defaultLayerID,
                         "form_beta_2",
                         PlayerFormPhase.PHASE_2,PlayerFormBodyType.NORMAL));
+
         CONFIGS.put(PlayerForms.GAMMA_0,
                 new FormConfig(defaultLayerID,
                         "form_gamma_0",
@@ -143,18 +156,22 @@ public class RegFormConfig {
                 new FormConfig(defaultLayerID,
                         "form_gamma_2",
                         PlayerFormPhase.PHASE_2,PlayerFormBodyType.NORMAL));
+
         CONFIGS.put(PlayerForms.OMEGA_SP,
                 new FormConfig(defaultLayerID,
                         "form_omega_sp",
                         PlayerFormPhase.PHASE_SP,PlayerFormBodyType.NORMAL));
+
         CONFIGS.put(PlayerForms.PSI_SP,
                 new FormConfig(defaultLayerID,
                         "form_psi_sp",
                         PlayerFormPhase.PHASE_SP,PlayerFormBodyType.NORMAL));
+
         CONFIGS.put(PlayerForms.CHI_SP,
                 new FormConfig(defaultLayerID,
                         "form_chi_sp",
                         PlayerFormPhase.PHASE_SP,PlayerFormBodyType.NORMAL));
+
         CONFIGS.put(PlayerForms.PHI_SP,
                 new FormConfig(defaultLayerID,
                         "form_phi_sp",

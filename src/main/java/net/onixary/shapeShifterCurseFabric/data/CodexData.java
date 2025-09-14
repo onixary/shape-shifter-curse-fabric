@@ -106,6 +106,11 @@ public class CodexData {
     private static final Text axolotl_2_pros = Text.translatable("codex.form.axolotl2.pros");
     private static final Text axolotl_2_cons = Text.translatable("codex.form.axolotl2.cons");
     private static final Text axolotl_2_instincts = Text.translatable("codex.form.axolotl2.instincts");
+    private static final Text axolotl_3_title = Text.translatable("codex.form.axolotl3.title");
+    private static final Text axolotl_3_appearance = Text.translatable("codex.form.axolotl3.appearance");
+    private static final Text axolotl_3_pros = Text.translatable("codex.form.axolotl3.pros");
+    private static final Text axolotl_3_cons = Text.translatable("codex.form.axolotl3.cons");
+    private static final Text axolotl_3_instincts = Text.translatable("codex.form.axolotl3.instincts");
     // form ocelot
     private static final Text ocelot_0_title = Text.translatable("codex.form.ocelot0.title");
     private static final Text ocelot_0_appearance = Text.translatable("codex.form.ocelot0.appearance");
@@ -413,6 +418,14 @@ public class CodexData {
                     case PROS -> axolotl_2_pros;
                     case CONS -> axolotl_2_cons;
                     case INSTINCTS -> axolotl_2_instincts;
+                };
+            case AXOLOTL_3:
+                return switch (type) {
+                    case TITLE -> axolotl_3_title;
+                    case APPEARANCE -> axolotl_3_appearance;
+                    case PROS -> axolotl_3_pros;
+                    case CONS -> axolotl_3_cons;
+                    case INSTINCTS -> axolotl_3_instincts;
                 };
             case OCELOT_0:
                 return switch (type) {
