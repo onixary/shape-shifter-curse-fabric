@@ -37,6 +37,7 @@ public class AdditionalPowers {
         register(BreathingUnderWaterPower.getFactory());
         register(HoldBreathPower.getFactory());
         register(CustomWaterBreathingPower.createFactory());
+        register(DelayAttributePower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {
