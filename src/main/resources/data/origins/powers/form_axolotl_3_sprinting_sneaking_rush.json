@@ -1,0 +1,35 @@
+{
+  "type": "origins:action_on_sprinting_to_sneaking",
+  "entity_action":{
+    "type":"origins:and",
+    "actions":[
+      {
+        "type":"origins:add_velocity",
+        "z":1.4,
+        "y":0.6,
+        "space":"local_horizontal_normalized"
+      },
+      {
+        "type":"origins:execute_command",
+        "command":"playsound minecraft:entity.axolotl.splash player @s ~ ~ ~ 1 1"
+      },
+      {
+        "type": "origins:gain_air",
+        "value": -10
+      }
+    ]
+  },
+  "entity_condition": {
+    "type":"origins:and",
+    "conditions":[
+      {
+        "type": "origins:on_block"
+      },
+      {
+        "type": "origins:air",
+        "comparison": ">",
+        "compare_to": 0
+      }
+    ]
+  }
+}

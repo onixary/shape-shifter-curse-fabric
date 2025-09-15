@@ -174,6 +174,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         momentum = MathHelper.lerp(delta * 2 * sprint_multiplier, momentum, (walk_sign) * sprint_multiplier);
 
         boolean onGroundInWater = isSubmergedInWater() && this.getLandingBlockState().getCollisionShape(this.getWorld(), this.getBlockPos()).isEmpty();
+        boolean isInShallowWater = isInsideWaterOrBubbleColumn() && !isSubmergedInWater() && isOnGround();
         // getHandSwingDuration() is a private method, so we have to calculate it ourselves
         int handSwingDuration = 0;
         if (StatusEffectUtil.hasHaste(this))
@@ -240,7 +241,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                     currentState = PlayerAnimState.ANIM_IDLE;
                 }
 
-                if ((isInsideWaterOrBubbleColumn() || isInLava()) && !onGroundInWater)
+                if ((isInsideWaterOrBubbleColumn() || isInLava()) && !onGroundInWater && !isInShallowWater)
                 {
                     if (this.isSwimming() || this.isSprinting())
                     {
@@ -292,12 +293,17 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                     }
                     else if (this.fallDistance > 0.6f)
                     {
-                        currentState = PlayerAnimState.ANIM_FALL;
+                        if(isSneaking()){
+                            currentState = PlayerAnimState.ANIM_SNEAK_FALL;
+                        }
+                        else{
+                            currentState = PlayerAnimState.ANIM_FALL;
+                        }
                     }
 
                 }
             }
-            if (isSubmergedInWater() || isInLava())
+            if ((isSubmergedInWater() || isInLava()) && !onGroundInWater && !isInShallowWater)
             {
                 if (this.isSwimming() || this.isSprinting())
                 {

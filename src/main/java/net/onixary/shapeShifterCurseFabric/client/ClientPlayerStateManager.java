@@ -10,6 +10,7 @@ import java.util.UUID;
 
 public class ClientPlayerStateManager {
     private static final Map<UUID, PlayerAttachState> PLAYER_ATTACH_STATES = new HashMap<>();
+    public static boolean shouldForceSneak = false;
 
     public static class PlayerAttachState {
         public boolean isAttached;
