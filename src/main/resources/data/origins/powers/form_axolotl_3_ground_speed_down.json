@@ -3,7 +3,7 @@
   "modifier": {
     "attribute": "minecraft:generic.movement_speed",
     "operation": "multiply_total",
-    "value": -0.4
+    "value": -0.3
   },
   "tick_rate": 5,
   "condition": {
@@ -22,6 +22,9 @@
       },
       {
         "type": "origins:sneaking",
+        "inverted": true
+      },{
+        "type": "origins:sprinting",
         "inverted": true
       }
     ]

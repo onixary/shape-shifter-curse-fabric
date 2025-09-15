@@ -11,6 +11,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnJumpPower;
+import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnSprintingToSneakingPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
@@ -20,8 +21,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManage
 
 import java.util.UUID;
 
-import static net.onixary.shapeShifterCurseFabric.networking.ModPackets.JUMP_DETACH_REQUEST_ID;
-import static net.onixary.shapeShifterCurseFabric.networking.ModPackets.JUMP_EVENT_ID;
+import static net.onixary.shapeShifterCurseFabric.networking.ModPackets.*;
 
 // 应仅在服务器端注册
 // This class should only be registered on the server side
@@ -70,6 +70,19 @@ public class ModPacketsC2S {
 
                 PowerHolderComponent.getPowers(player, ActionOnJumpPower.class)
                         .forEach(ActionOnJumpPower::executeAction);
+            });
+        });
+
+        // SPRINTING_TO_SNEAKING_EVENT condition handle
+        ServerPlayNetworking.registerGlobalReceiver(SPRINTING_TO_SNEAKING_EVENT_ID, (server, player, handler, buf, responseSender) -> {
+            UUID playerUuid = buf.readUuid();
+
+            server.execute(() -> {
+                // 在服务器端处理疾跑转潜行事件
+                if (player.getUuid().equals(playerUuid)) {
+                    PowerHolderComponent.getPowers(player, ActionOnSprintingToSneakingPower.class)
+                            .forEach(ActionOnSprintingToSneakingPower::executeAction);
+                }
             });
         });
     }

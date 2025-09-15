@@ -1,0 +1,38 @@
+{
+  "type": "origins:action_over_time",
+  "entity_action": {
+    "type": "origins:spawn_particles",
+    "particle": "minecraft:falling_water",
+    "count": 8,
+    "speed": 0.0,
+    "force": true,
+    "spread": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  "interval": 5,
+  "condition":{
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:sprinting"
+      },
+      {
+        "type": "origins:fluid_height",
+        "fluid": "minecraft:water",
+        "comparison": "<=",
+        "compare_to": 0
+      },
+      {
+        "type": "origins:on_block"
+      },
+      {
+        "type": "origins:air",
+        "comparison": ">",
+        "compare_to": 0
+      }
+    ]
+  }
+}

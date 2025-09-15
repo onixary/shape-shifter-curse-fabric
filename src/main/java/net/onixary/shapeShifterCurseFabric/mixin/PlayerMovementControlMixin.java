@@ -5,11 +5,15 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.Vec3d;
-import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnJumpPower;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
+import net.onixary.shapeShifterCurseFabric.additional_power.KeepSneakingPower;
+import net.onixary.shapeShifterCurseFabric.additional_power.SprintingStateTracker;
 import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -129,5 +133,38 @@ public class PlayerMovementControlMixin {
             // 取消鞘翅检测
             cir.setReturnValue(false);
         }
+    }
+
+    @Inject(method = "tick", at = @At("TAIL"))
+    private void trackSprintingState(CallbackInfo ci) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+
+        boolean wasSprintingLastTick = SprintingStateTracker.wasSprintingLastTick(player);
+        boolean isCurrentlySprinting = player.isSprinting();
+        boolean isCurrentlySneaking = player.isSneaking();
+
+        // 先更新疾跑状态（这会在开始疾跑时重置触发标志）
+        SprintingStateTracker.updateSprintingState(player, isCurrentlySprinting);
+
+        // 检查从疾跑转为潜行的条件
+        if (wasSprintingLastTick  && isCurrentlySneaking && SprintingStateTracker.canTrigger(player)) {
+            ShapeShifterCurseFabric.LOGGER.info("Triggering sprint-to-sneak action for player: {}", player.getName().getString());
+
+            // 设置已触发标志
+            SprintingStateTracker.setTriggered(player);
+
+            // 发送网络包到服务器
+            if (player.getWorld().isClient()) {
+                PacketByteBuf buf = PacketByteBufs.create();
+                buf.writeUuid(player.getUuid());
+                ClientPlayNetworking.send(ModPackets.SPRINTING_TO_SNEAKING_EVENT_ID, buf);
+            }
+        }
+    }
+
+    @Inject(method = "remove", at = @At("HEAD"))
+    private void cleanupSprintingState(CallbackInfo ci) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        SprintingStateTracker.removePlayer(player);
     }
 }

@@ -40,6 +40,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.TRANSFORM_COMPLETE_EFFECT, ModPacketsS2C::receiveTransformCompleteEffect);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.RESET_FIRST_PERSON, ModPacketsS2C::receiveResetFirstPerson);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_OTHER_PLAYER_BAT_ATTACH_STATE, ModPacketsS2C::receiveOtherPlayerBatAttachState);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_FORCE_SNEAK_STATE, ModPacketsS2C::receiveForceSneakState);
     }
 
     public static void handleSyncEffectAttachment(
@@ -207,6 +208,13 @@ public class ModPacketsS2C {
         client.execute(() -> {
             ClientPlayerStateManager.updatePlayerAttachState(targetPlayerUuid, isAttached,
                     attachType, attachedPos, attachedSide);
+        });
+    }
+
+    private static void receiveForceSneakState(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        boolean shouldForce = buf.readBoolean();
+        client.execute(() -> {
+            ClientPlayerStateManager.shouldForceSneak = shouldForce;
         });
     }
 }

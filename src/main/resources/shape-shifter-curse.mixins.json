@@ -29,7 +29,9 @@
     "BreathingUnderWaterMixin$GetNextAirUnderWater",
     "HoldBreathMixin$GetNextAirUnderWater",
     "CustomWaterBreathingMixin$CanBreatheInWater",
-    "CustomWaterBreathingMixin$UpdateAir"
+    "CustomWaterBreathingMixin$UpdateAir",
+    "EntitySlipperinessMixin",
+    "ServerPlayerEntityForceInputMixin"
   ],
   "client": [
     "IEntityRenderDispatcherAccessor",
@@ -51,7 +53,8 @@
     "PlayerEntitySpeedFOVMixin",
     "PlayerRotationRendererMixin",
     "PlayerMovementControlMixin",
-    "CapeFeatureRendererMixin"
+    "CapeFeatureRendererMixin",
+    "KeyboardInputMixin"
 
   ],
   "injectors": {

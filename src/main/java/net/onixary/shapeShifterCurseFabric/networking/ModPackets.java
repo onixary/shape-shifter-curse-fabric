@@ -38,5 +38,9 @@ public class ModPackets {
     // jump_event packets
     public static final Identifier JUMP_EVENT_ID = new Identifier(ShapeShifterCurseFabric.MOD_ID, "jump_event");
 
+    public static final Identifier SPRINTING_TO_SNEAKING_EVENT_ID = new Identifier(ShapeShifterCurseFabric.MOD_ID, "sprinting_to_sneaking_event");
+
+    public static final Identifier SYNC_FORCE_SNEAK_STATE = new Identifier(ShapeShifterCurseFabric.MOD_ID, "sync_force_sneak_state");
+
 
 }

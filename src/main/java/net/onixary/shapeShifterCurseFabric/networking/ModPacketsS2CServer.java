@@ -112,4 +112,11 @@ public class ModPacketsS2CServer {
 
         ServerPlayNetworking.send(receiver, ModPackets.SYNC_OTHER_PLAYER_BAT_ATTACH_STATE, buf);
     }
+
+    // 发送强制潜行状态同步包
+    public static void sendForceSneakState(ServerPlayerEntity player, boolean shouldForceSneak) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeBoolean(shouldForceSneak);
+        ServerPlayNetworking.send(player, ModPackets.SYNC_FORCE_SNEAK_STATE, buf);
+    }
 }

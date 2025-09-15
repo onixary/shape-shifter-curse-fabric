@@ -37,7 +37,12 @@ public class AdditionalPowers {
         register(BreathingUnderWaterPower.getFactory());
         register(HoldBreathPower.getFactory());
         register(CustomWaterBreathingPower.createFactory());
+        register(ConditionedModifySlipperinessPower.getFactory());
+        register(ActionOnSprintingToSneakingPower.createFactory());
+        register(ModifyStepHeightPower.getFactory());
+        register(KeepSneakingPower.getFactory());
         register(DelayAttributePower.createFactory());
+
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {
