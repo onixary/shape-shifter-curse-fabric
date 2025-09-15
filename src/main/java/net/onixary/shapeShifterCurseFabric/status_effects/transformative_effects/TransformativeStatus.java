@@ -8,14 +8,14 @@ import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStat
 
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.removeVisualEffects;
 
-public class ToPsiStatusSP extends BaseTransformativeStatusEffect {
-    public ToPsiStatusSP() {
-        super(PlayerForms.PSI_SP, StatusEffectCategory.NEUTRAL, 0xFFFFFF, false);
+public class TransformativeStatus extends BaseTransformativeStatusEffect {
+    public TransformativeStatus(PlayerForms toForm) {
+        super(toForm, StatusEffectCategory.NEUTRAL, 0xFFFFFF, false);
     }
 
     @Override
     public void onEffectApplied(PlayerEntity player) {
-        TransformManager.handleDirectTransform(player, PlayerForms.PSI_SP, false);
+        TransformManager.handleDirectTransform(player, this.getToForm(), false);
         removeVisualEffects(player);
     }
 
@@ -23,5 +23,4 @@ public class ToPsiStatusSP extends BaseTransformativeStatusEffect {
     public void onEffectCanceled(PlayerEntity player) {
         removeVisualEffects(player);
     }
-
 }

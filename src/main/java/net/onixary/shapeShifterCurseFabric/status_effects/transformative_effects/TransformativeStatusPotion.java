@@ -7,18 +7,20 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
+import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_GAMMA_0_EFFECT;
-import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_OMEGA_SP_EFFECT;
 import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.EFFECT_ATTACHMENT;
 
-public class ToOmegaStatusPotion extends StatusEffect {
-    public ToOmegaStatusPotion() {
+public class TransformativeStatusPotion extends StatusEffect {
+    public BaseTransformativeStatusEffect TransformativeStatusEffect;
+
+    public TransformativeStatusPotion(BaseTransformativeStatusEffect TransformativeStatusEffect) {
         super(StatusEffectCategory.NEUTRAL, 0xFFFFFF);
+        this.TransformativeStatusEffect = TransformativeStatusEffect;
     }
 
     @Override
@@ -42,10 +44,9 @@ public class ToOmegaStatusPotion extends StatusEffect {
     {
         if (!target.getWorld().isClient() && target instanceof ServerPlayerEntity player) {
             PlayerForms curToForm = Objects.requireNonNull(player.getAttached(EFFECT_ATTACHMENT)).currentToForm;
-            if (curToForm != TO_OMEGA_SP_EFFECT.getToForm() && FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_SHIFTER){
-                EffectManager.overrideEffect(player, TO_OMEGA_SP_EFFECT);
+            if (curToForm != this.TransformativeStatusEffect.getToForm() && FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_SHIFTER){
+                EffectManager.overrideEffect(player, this.TransformativeStatusEffect);
             }
         }
     }
-
 }
