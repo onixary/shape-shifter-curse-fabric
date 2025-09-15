@@ -41,6 +41,8 @@ public class AdditionalPowers {
         register(ActionOnSprintingToSneakingPower.createFactory());
         register(ModifyStepHeightPower.getFactory());
         register(KeepSneakingPower.getFactory());
+        register(DelayAttributePower.createFactory());
+
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {
