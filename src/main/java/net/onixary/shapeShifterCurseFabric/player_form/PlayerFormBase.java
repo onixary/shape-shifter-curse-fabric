@@ -100,12 +100,25 @@ public class PlayerFormBase {
         FormIndex = formIndex;
     }
 
-    public Vec3d getCapeIdleVec3d(AbstractClientPlayerEntity player) {
+    public Vec3d getCapeIdleLoc(AbstractClientPlayerEntity player) {
         if (GetBodyType() == PlayerFormBodyType.FERAL) {
             return new Vec3d(0.0f, -0.2f, 0.3f);
         }
         else {
             return new Vec3d(0.0, 0.0, 0.125);
         }
+    }
+
+    public float getCapeBaseRotateAngle(AbstractClientPlayerEntity player) {
+        if (GetBodyType() == PlayerFormBodyType.FERAL) {
+            return 90.0f;
+        }
+        else {
+            return 0.0f;
+        }
+    }
+
+    public boolean NeedModifyXRotationAngle() {
+        return GetBodyType() == PlayerFormBodyType.FERAL;
     }
 }

@@ -84,12 +84,22 @@ public class Form_Bat3 extends PlayerFormBase {
     }
 
     @Override
-    public Vec3d getCapeIdleVec3d(AbstractClientPlayerEntity player) {
+    public Vec3d getCapeIdleLoc(AbstractClientPlayerEntity player) {
         if (player.isOnGround()) {
             return new Vec3d(0.0f, 0.7f, 0.2f);
         }
         else {
             return new Vec3d(0.0, 0.0, 0.125);
         }
+    }
+
+    @Override
+    public float getCapeBaseRotateAngle(AbstractClientPlayerEntity player) {
+        return 100.0f;
+    }
+
+    @Override
+    public boolean NeedModifyXRotationAngle() {
+        return true;
     }
 }
