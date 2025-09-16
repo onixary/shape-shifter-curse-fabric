@@ -16,6 +16,7 @@ public class PlayerFormBase {
     private boolean HasSlowFall = false;
     private boolean OverrideHandAnim = false;
     private boolean CanSneakRush = false;
+    private boolean CanRushJump = false;
 
     public PlayerFormBase(Identifier formID) {
         FormID = formID;
@@ -77,6 +78,15 @@ public class PlayerFormBase {
 
     public PlayerFormBase SetCanSneakRush(boolean canSneakRush) {
         CanSneakRush = canSneakRush;
+        return this;
+    }
+
+    public boolean GetCanRushJump() {
+        return CanRushJump;
+    }
+
+    public PlayerFormBase SetCanRushJump(boolean canRushJump) {
+        CanRushJump = canRushJump;
         return this;
     }
 

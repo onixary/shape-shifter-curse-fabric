@@ -4,6 +4,7 @@ import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
@@ -12,6 +13,7 @@ import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID
 public class Form_FeralBase extends PlayerFormBase {
     public Form_FeralBase(Identifier formID) {
         super(formID);
+        this.SetBodyType(PlayerFormBodyType.FERAL);
     }
 
     private static AnimationHolder anim_idle = AnimationHolder.EMPTY;
