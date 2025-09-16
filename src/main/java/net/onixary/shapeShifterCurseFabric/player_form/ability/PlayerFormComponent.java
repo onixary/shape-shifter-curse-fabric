@@ -2,11 +2,13 @@ package net.onixary.shapeShifterCurseFabric.player_form.ability;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.nbt.NbtCompound;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 
 public class PlayerFormComponent implements AutoSyncedComponent {
-    private PlayerForms currentForm = PlayerForms.ORIGINAL_BEFORE_ENABLE;
-    private PlayerForms previousForm = PlayerForms.ORIGINAL_BEFORE_ENABLE;
+    private PlayerFormBase currentForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
+    private PlayerFormBase previousForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
     // is current form caused by cursed moon
     private boolean isByCursedMoon = false;
     // is current form regressed from final form by cursed moon
@@ -23,8 +25,8 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     public void readFromNbt(NbtCompound nbtCompound) {
         // 读取状态枚举
         try {
-            this.currentForm = PlayerForms.valueOf(nbtCompound.getString("currentForm"));
-            this.previousForm = PlayerForms.valueOf(nbtCompound.getString("previousForm"));
+            this.currentForm = RegPlayerForms.playerForms.get(Identifier.tryParse(nbtCompound.getString("currentForm")));
+            this.previousForm = RegPlayerForms.playerForms.get(Identifier.tryParse(nbtCompound.getString("previousForm")));
             this.isByCursedMoon = nbtCompound.getBoolean("isByCursedMoon");
             this.isRegressedFromFinal = nbtCompound.getBoolean("isRegressedFromFinal");
             this.isByCure = nbtCompound.getBoolean("isByCure");
@@ -33,8 +35,8 @@ public class PlayerFormComponent implements AutoSyncedComponent {
             this.isByCursedMoonEnd = nbtCompound.getBoolean("isByCursedMoonEnd");
             this.firstJoin = nbtCompound.getBoolean("firstJoin");
         } catch (IllegalArgumentException e) {
-            this.currentForm = PlayerForms.ORIGINAL_BEFORE_ENABLE;
-            this.previousForm = PlayerForms.ORIGINAL_BEFORE_ENABLE;
+            this.currentForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
+            this.previousForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
             this.isByCursedMoon = false;
             this.isRegressedFromFinal = false;
             this.isByCure = false;
@@ -47,8 +49,8 @@ public class PlayerFormComponent implements AutoSyncedComponent {
 
     @Override
     public void writeToNbt(NbtCompound nbtCompound) {
-        nbtCompound.putString("currentForm", this.currentForm.name());
-        nbtCompound.putString("previousForm", this.previousForm.name());
+        nbtCompound.putString("currentForm", this.currentForm.FormID.toString());
+        nbtCompound.putString("previousForm", this.previousForm.FormID.toString());
         nbtCompound.putBoolean("isByCursedMoon", this.isByCursedMoon);
         nbtCompound.putBoolean("isRegressedFromFinal", this.isRegressedFromFinal);
         nbtCompound.putBoolean("isByCure", this.isByCure);
@@ -58,11 +60,11 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         nbtCompound.putBoolean("firstJoin", this.firstJoin);
     }
 
-    public PlayerForms getCurrentForm() {
+    public PlayerFormBase getCurrentForm() {
         return currentForm;
     }
 
-    public PlayerForms getPreviousForm() {
+    public PlayerFormBase getPreviousForm() {
         return previousForm;
     }
 
@@ -90,7 +92,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         isByCure = byCure;
     }
 
-    public void setCurrentForm(PlayerForms form) {
+    public void setCurrentForm(PlayerFormBase form) {
         this.previousForm = this.currentForm;
         this.currentForm = form;
     }
