@@ -1,6 +1,8 @@
 package net.onixary.shapeShifterCurseFabric.player_form.forms;
 
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
@@ -79,5 +81,15 @@ public class Form_Bat3 extends PlayerFormBase {
         anim_attach_side = new AnimationHolder(new Identifier(MOD_ID, "bat_3_attach_side"), true);
         anim_attach_bottom = new AnimationHolder(new Identifier(MOD_ID, "bat_3_attach_bottom"), true);
         anim_run = new AnimationHolder(new Identifier(MOD_ID, "bat_3_walk"), true, 2.4f, 4);
+    }
+
+    @Override
+    public Vec3d getCapeIdleVec3d(AbstractClientPlayerEntity player) {
+        if (player.isOnGround()) {
+            return new Vec3d(0.0f, 0.7f, 0.2f);
+        }
+        else {
+            return new Vec3d(0.0, 0.0, 0.125);
+        }
     }
 }

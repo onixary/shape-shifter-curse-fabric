@@ -1,7 +1,9 @@
 package net.onixary.shapeShifterCurseFabric.player_form;
 
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.data.CodexData;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
@@ -96,5 +98,14 @@ public class PlayerFormBase {
         }
         Group = group;
         FormIndex = formIndex;
+    }
+
+    public Vec3d getCapeIdleVec3d(AbstractClientPlayerEntity player) {
+        if (GetBodyType() == PlayerFormBodyType.FERAL) {
+            return new Vec3d(0.0f, -0.2f, 0.3f);
+        }
+        else {
+            return new Vec3d(0.0, 0.0, 0.125);
+        }
     }
 }
