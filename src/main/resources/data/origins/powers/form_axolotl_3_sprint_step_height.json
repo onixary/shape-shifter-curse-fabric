@@ -1,0 +1,7 @@
+﻿{
+  "type": "origins:modify_step_height",
+  "step_height_scale": 2.0,
+  "condition": {
+    "type": "origins:sprinting"
+  }
+}
