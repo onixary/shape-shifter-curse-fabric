@@ -1,13 +1,11 @@
 package net.onixary.shapeShifterCurseFabric.status_effects;
 
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.status_effects.other_effects.FeedEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.other_effects.ImmobilityEffect;
-import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.ToBatStatus0;
 
 public class RegOtherStatusEffects {
     private RegOtherStatusEffects(){}
