@@ -8,10 +8,8 @@ import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
-
-// 通用四足形态
-public class Form_FeralBase extends PlayerFormBase {
-    public Form_FeralBase(Identifier formID) {
+public class Form_Ocelot3 extends PlayerFormBase {
+    public Form_Ocelot3(Identifier formID) {
         super(formID);
         this.SetBodyType(PlayerFormBodyType.FERAL);
     }
@@ -84,7 +82,7 @@ public class Form_FeralBase extends PlayerFormBase {
         anim_sneak_idle = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sneak_idle"), true);
         anim_walk = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_walk"), true, 1.2f, 2);
         anim_sneak_walk = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sneak_walk"), true);
-        anim_run = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_run"), true, 2.3f);
+        anim_run = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_run"), true, 3.3f);
         anim_float = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_float"), true);
         anim_swim = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_swim"), true);
         anim_dig = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_dig"), true);
@@ -94,6 +92,6 @@ public class Form_FeralBase extends PlayerFormBase {
         anim_attack = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_attack"), true);
         anim_sleep = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sleep"), true);
         anim_elytra_fly = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_elytra_fly"), true);
-        anim_sneak_rush = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_run"), true, 2.3f);
+        anim_sneak_rush = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_run"), true, 3.3f);
     }
 }

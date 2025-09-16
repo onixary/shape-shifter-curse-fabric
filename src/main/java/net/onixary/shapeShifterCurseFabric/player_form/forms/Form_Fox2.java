@@ -7,8 +7,8 @@ import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
-public class Form_FamiliarFox2 extends PlayerFormBase {
-    public Form_FamiliarFox2(Identifier formID) {
+public class Form_Fox2 extends PlayerFormBase {
+    public Form_Fox2(Identifier formID) {
         super(formID);
     }
 
