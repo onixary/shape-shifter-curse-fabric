@@ -80,12 +80,4 @@ public class Form_Bat3 extends PlayerFormBase {
         anim_attach_bottom = new AnimationHolder(new Identifier(MOD_ID, "bat_3_attach_bottom"), true);
         anim_run = new AnimationHolder(new Identifier(MOD_ID, "bat_3_walk"), true, 2.4f, 4);
     }
-
-    public boolean Anim_HasSlowFall() {
-        return true;
-    }
-
-    public boolean Anim_OverrideHandAnim() {
-        return true;
-    }
 }

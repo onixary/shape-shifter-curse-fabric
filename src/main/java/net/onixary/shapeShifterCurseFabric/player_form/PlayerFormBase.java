@@ -13,6 +13,9 @@ public class PlayerFormBase {
 
     private PlayerFormPhase Phase = PlayerFormPhase.PHASE_CLEAR;
     private PlayerFormBodyType BodyType = PlayerFormBodyType.NORMAL;
+    private boolean HasSlowFall = false;
+    private boolean OverrideHandAnim = false;
+    private boolean CanSneakRush = false;
 
     public PlayerFormBase(Identifier formID) {
         FormID = formID;
@@ -50,16 +53,31 @@ public class PlayerFormBase {
         return null;
     }
 
-    public boolean Anim_HasSlowFall() {
-        return false;
+    public boolean GetHasSlowFall() {
+        return HasSlowFall;
     }
 
-    public boolean Anim_OverrideHandAnim() {
-        return false;
+    public PlayerFormBase SetHasSlowFall(boolean hasSlowFall) {
+        HasSlowFall = hasSlowFall;
+        return this;
     }
 
-    public boolean Anim_CanSneakRush() {
-        return false;
+    public boolean GetOverrideHandAnim() {
+        return OverrideHandAnim;
+    }
+
+    public PlayerFormBase SetOverrideHandAnim(boolean overrideHandAnim) {
+        OverrideHandAnim = overrideHandAnim;
+        return this;
+    }
+
+    public boolean GetCanSneakRush() {
+        return CanSneakRush;
+    }
+
+    public PlayerFormBase SetCanSneakRush(boolean canSneakRush) {
+        CanSneakRush = canSneakRush;
+        return this;
     }
 
     public void SetGroup(PlayerFormGroup group, int formIndex) {

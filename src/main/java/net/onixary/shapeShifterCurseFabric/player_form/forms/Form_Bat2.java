@@ -52,12 +52,4 @@ public class Form_Bat2 extends PlayerFormBase {
         anim_tool_swing = new AnimationHolder(new Identifier(MOD_ID, "bat_2_digging"), true);
         anim_attack = new AnimationHolder(new Identifier(MOD_ID, "bat_2_attack"), true);
     }
-
-    public boolean Anim_HasSlowFall() {
-        return true;
-    }
-
-    public boolean Anim_OverrideHandAnim() {
-        return true;
-    }
 }
