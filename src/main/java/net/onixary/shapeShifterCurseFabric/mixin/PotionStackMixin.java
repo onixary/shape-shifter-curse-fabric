@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.PotionItem;
 import net.minecraft.screen.slot.Slot;
 import net.onixary.shapeShifterCurseFabric.additional_power.ModifyPotionStackPower;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,10 +30,6 @@ public abstract class PotionStackMixin {
             PlayerEntity player = ((PlayerInventory) this.inventory).player;
 
             if (itemStack.getItem() instanceof PotionItem) {
-                PlayerForms currentForm = FormAbilityManager.getForm(player);
-//                if (currentForm == PlayerForms.FAMILIAR_FOX_2 || currentForm == PlayerForms.FAMILIAR_FOX_3) {
-//                    return Math.max(3, itemStack.getMaxCount());
-//                }
                 int StackCount = PowerHolderComponent.getPowers(player, ModifyPotionStackPower.class)
                         .stream()
                         .mapToInt(ModifyPotionStackPower::getCount)

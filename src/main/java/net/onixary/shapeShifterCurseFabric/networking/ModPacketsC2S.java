@@ -14,7 +14,6 @@ import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnJumpPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnSprintingToSneakingPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;

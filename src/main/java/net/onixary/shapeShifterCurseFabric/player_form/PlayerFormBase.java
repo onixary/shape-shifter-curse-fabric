@@ -19,6 +19,7 @@ public class PlayerFormBase {
     private boolean OverrideHandAnim = false;
     private boolean CanSneakRush = false;
     private boolean CanRushJump = false;
+    private boolean IsCustomForm = false;
 
     public PlayerFormBase(Identifier formID) {
         FormID = formID;
@@ -92,6 +93,15 @@ public class PlayerFormBase {
         return this;
     }
 
+    public boolean GetIsCustomForm() {
+        return IsCustomForm;
+    }
+
+    public PlayerFormBase SetIsCustomForm(boolean isCustomForm) {
+        IsCustomForm = isCustomForm;
+        return this;
+    }
+
     public PlayerFormGroup getGroup() {
         return Group;
     }
@@ -140,5 +150,9 @@ public class PlayerFormBase {
 
     public String name() {
         return FormID.toString();
+    }
+
+    public String getFormOriginID() {
+        return "form_" + FormID.getPath();
     }
 }

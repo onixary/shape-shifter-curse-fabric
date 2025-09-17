@@ -3,9 +3,6 @@ package net.onixary.shapeShifterCurseFabric.player_form.instinct;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
-import net.minecraft.nbt.NbtString;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 
 import java.util.ArrayDeque;
 import java.util.HashSet;

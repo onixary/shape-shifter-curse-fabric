@@ -7,7 +7,6 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.Tra
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
@@ -38,6 +37,7 @@ public class TStatusApplier {
 
     private static void applyStatusByChance(float chance, PlayerEntity player, BaseTransformativeStatusEffect regStatusEffect) {
         PlayerFormBase curToForm = Objects.requireNonNull(player.getAttached(EFFECT_ATTACHMENT)).currentToForm;
+        if (curToForm == null){ curToForm = RegPlayerForms.NULL_FORM; }
         ShapeShifterCurseFabric.LOGGER.info("current dest form: " + curToForm + " when applyStatusByChance");
         if(player.getAttached(EFFECT_ATTACHMENT) == null){
             ShapeShifterCurseFabric.LOGGER.info("attach is null when applyStatusByChance");

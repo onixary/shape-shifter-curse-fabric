@@ -25,8 +25,8 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     public void readFromNbt(NbtCompound nbtCompound) {
         // 读取状态枚举
         try {
-            this.currentForm = RegPlayerForms.getPlayerForm(nbtCompound.getString("currentForm"));
-            this.previousForm = RegPlayerForms.getPlayerForm(nbtCompound.getString("previousForm"));
+            this.currentForm = RegPlayerForms.getPlayerFormOrThrow(nbtCompound.getString("currentForm"));
+            this.previousForm = RegPlayerForms.getPlayerFormOrThrow(nbtCompound.getString("previousForm"));
             this.isByCursedMoon = nbtCompound.getBoolean("isByCursedMoon");
             this.isRegressedFromFinal = nbtCompound.getBoolean("isRegressedFromFinal");
             this.isByCure = nbtCompound.getBoolean("isByCure");

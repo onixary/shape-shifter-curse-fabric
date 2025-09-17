@@ -1,26 +1,16 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
 import mod.azure.azurelib.core.animatable.GeoAnimatable;
-import mod.azure.azurelib.core.object.Color;
 import mod.azure.azurelib.renderer.GeoRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.Identifier;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form_render.OriginFurAnimatable;
 import net.onixary.shapeShifterCurseFabric.render.render_layer.FurGradientRenderLayer;
-import org.joml.Vector4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Environment(EnvType.CLIENT)
 // 将 value 修改为你的 GeoRenderer 实现类，例如 FurRenderer.class

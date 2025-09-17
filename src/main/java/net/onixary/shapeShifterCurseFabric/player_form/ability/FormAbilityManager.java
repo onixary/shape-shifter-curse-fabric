@@ -43,7 +43,7 @@ public class FormAbilityManager {
         clearFormEffects(player, oldForm);
         // 已被弃用，使用json定义的scale power
         //applyScale(player, config.getScale());
-        applyFormOrigin(player, newForm.FormID.getPath(), "origin");
+        applyFormOrigin(player, "origin", newForm.getFormOriginID());
         //applyPower(player, config.getPowerId());
         // 清空Status
         cancelEffect(player);

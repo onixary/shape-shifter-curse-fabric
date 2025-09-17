@@ -6,7 +6,6 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
@@ -46,6 +45,7 @@ public class TransformativeStatusPotion extends StatusEffect {
     {
         if (!target.getWorld().isClient() && target instanceof ServerPlayerEntity player) {
             PlayerFormBase curToForm = Objects.requireNonNull(player.getAttached(EFFECT_ATTACHMENT)).currentToForm;
+            if (curToForm == null){ curToForm = RegPlayerForms.NULL_FORM; }
             if (!curToForm.equals(this.TransformativeStatusEffect.getToForm()) && FormAbilityManager.getForm(player).equals(RegPlayerForms.ORIGINAL_SHIFTER)){
                 EffectManager.overrideEffect(player, this.TransformativeStatusEffect);
             }

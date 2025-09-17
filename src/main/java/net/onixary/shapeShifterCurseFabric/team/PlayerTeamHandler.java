@@ -4,14 +4,14 @@ import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.additional_power.PillagerFriendlyPower;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 
 // 为了避免与Team功能冲突已弃用，替换为其他逻辑
 // Deprecated to avoid conflicts with Team functionality, replaced with other logic
 
 public class PlayerTeamHandler {
-    private static PlayerForms currentForm;
+    private static PlayerFormBase currentForm;
     public static void updatePlayerTeam(ServerPlayerEntity player) {
         currentForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
         updateSorceryTeam(player);
@@ -23,8 +23,6 @@ public class PlayerTeamHandler {
             // 确保队伍已注册
             MobTeamManager.registerTeam(player.getServerWorld());
         }
-
-//        if (currentForm == PlayerForms.FAMILIAR_FOX_3 || currentForm == PlayerForms.FAMILIAR_FOX_2 || currentForm == PlayerForms.FAMILIAR_FOX_1) {
         if (PowerHolderComponent.hasPower(player, PillagerFriendlyPower.class)) {
             player.getScoreboard().addPlayerToTeam(player.getEntityName(), MobTeamManager.sorceryTeam);
         } else {

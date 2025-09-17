@@ -5,7 +5,6 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 
@@ -56,7 +55,7 @@ public class PlayerEffectAttachment{
                 attachment.currentToForm = null;
             }
             else {
-                attachment.currentToForm = RegPlayerForms.getPlayerForm(nbt.getString("currentToForm"));
+                attachment.currentToForm = RegPlayerForms.getPlayerFormOrThrow(nbt.getString("currentToForm"));
             }
         }
         attachment.remainingTicks = nbt.getInt("remainingTicks");
