@@ -45,7 +45,7 @@ public class PlayerFormBase {
     // 暂时在PlayerForm实现文本
     public Text getContentText(CodexData.ContentType type) {
         // Lang 格式 codex.form.<ModID>.<FormId>.<type>
-        return Text.translatable("codex.form." + FormID.getNamespace() + "." + FormID.getPath() + "." + type.toString());
+        return Text.translatable("codex.form." + FormID.getNamespace() + "." + FormID.getPath() + "." + type.toString().toLowerCase());
     }
 
     // 动画
