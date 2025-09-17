@@ -1,6 +1,6 @@
 {
   "type": "origins:water_flexibility",
-  "water_flex": 1.0,
+  "water_flex": 0.93,
   "condition": {
     "type": "origins:in_block",
     "block_condition": {

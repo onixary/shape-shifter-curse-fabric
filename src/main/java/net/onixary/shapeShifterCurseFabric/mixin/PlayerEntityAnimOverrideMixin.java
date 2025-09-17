@@ -290,7 +290,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
                 }
             }
-            if ((isSubmergedInWater() || isInLava()) && !onGroundInWater && !isInShallowWater)
+            if ((isSubmergedInWater() || isInLava()))
             {
                 if (this.isSwimming() || this.isSprinting())
                 {

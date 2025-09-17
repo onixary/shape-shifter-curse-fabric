@@ -7,7 +7,6 @@ import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.apoli.power.factory.condition.ConditionFactory;
 import io.github.apace100.calio.data.SerializableData;
-import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 
@@ -29,7 +28,7 @@ public class KeepSneakingPower extends Power {
         return (condition == null || condition.test(entity));
     }
 
-    public static PowerFactory getFactory() {
+    public static PowerFactory createFactory() {
         return new PowerFactory<>(
                 Apoli.identifier("keep_sneaking"),
                 new SerializableData()

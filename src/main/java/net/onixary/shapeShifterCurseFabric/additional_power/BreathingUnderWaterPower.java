@@ -13,11 +13,11 @@ public class BreathingUnderWaterPower extends Power {
         super(type, entity);
     }
 
-    public static PowerFactory<?> getFactory() {
+    public static PowerFactory<?> createFactory() {
         return new PowerFactory<>(
                 Apoli.identifier("breathing_under_water"),
                 new SerializableData(),
-                data -> (powerType, livingEntity) -> new CrawlingPower(
+                data -> (powerType, livingEntity) -> new BreathingUnderWaterPower(
                         powerType,
                         livingEntity
                 )

@@ -34,13 +34,13 @@ public class AdditionalPowers {
         register(WitchFriendlyPower.createFactory());
         register(ScareVillagerPower.createFactory());
         register(ModifyPotionStackPower.createFactory());
-        register(BreathingUnderWaterPower.getFactory());
-        register(HoldBreathPower.getFactory());
+        register(BreathingUnderWaterPower.createFactory());
+        register(HoldBreathPower.createFactory());
         register(CustomWaterBreathingPower.createFactory());
-        register(ConditionedModifySlipperinessPower.getFactory());
+        register(ConditionedModifySlipperinessPower.createFactory());
         register(ActionOnSprintingToSneakingPower.createFactory());
-        register(ModifyStepHeightPower.getFactory());
-        register(KeepSneakingPower.getFactory());
+        register(ModifyStepHeightPower.createFactory());
+        register(KeepSneakingPower.createFactory());
         register(DelayAttributePower.createFactory());
 
     }

@@ -45,7 +45,7 @@ public class ModifyStepHeightPower extends Power {
         }
     }
 
-    public static PowerFactory getFactory() {
+    public static PowerFactory createFactory() {
         return new PowerFactory<>(
                 Apoli.identifier("modify_step_height"),
                 new SerializableData()

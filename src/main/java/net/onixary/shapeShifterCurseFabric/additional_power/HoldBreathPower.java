@@ -13,11 +13,11 @@ public class HoldBreathPower extends Power {
         super(type, entity);
     }
 
-    public static PowerFactory<?> getFactory() {
+    public static PowerFactory<?> createFactory() {
         return new PowerFactory<>(
                 Apoli.identifier("hold_breath"),
                 new SerializableData(),
-                data -> (powerType, livingEntity) -> new CrawlingPower(
+                data -> (powerType, livingEntity) -> new HoldBreathPower(
                         powerType,
                         livingEntity
                 )
