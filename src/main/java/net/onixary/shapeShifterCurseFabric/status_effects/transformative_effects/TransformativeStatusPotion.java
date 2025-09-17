@@ -5,7 +5,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
@@ -43,8 +44,9 @@ public class TransformativeStatusPotion extends StatusEffect {
     public void applyInstantEffect(@Nullable Entity source, @Nullable Entity attacker, LivingEntity target, int amplifier, double proximity)
     {
         if (!target.getWorld().isClient() && target instanceof ServerPlayerEntity player) {
-            PlayerForms curToForm = Objects.requireNonNull(player.getAttached(EFFECT_ATTACHMENT)).currentToForm;
-            if (curToForm != this.TransformativeStatusEffect.getToForm() && FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_SHIFTER){
+            PlayerFormBase curToForm = Objects.requireNonNull(player.getAttached(EFFECT_ATTACHMENT)).currentToForm;
+            if (curToForm == null){ curToForm = RegPlayerForms.NULL_FORM; }
+            if (!curToForm.equals(this.TransformativeStatusEffect.getToForm()) && FormAbilityManager.getForm(player).equals(RegPlayerForms.ORIGINAL_SHIFTER)){
                 EffectManager.overrideEffect(player, this.TransformativeStatusEffect);
             }
         }

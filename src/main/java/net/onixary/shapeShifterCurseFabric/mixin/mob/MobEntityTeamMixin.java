@@ -2,11 +2,8 @@ package net.onixary.shapeShifterCurseFabric.mixin.mob;
 
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.mob.EvokerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.additional_power.PillagerFriendlyPower;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -27,14 +24,6 @@ public abstract class MobEntityTeamMixin {
                     self instanceof net.minecraft.entity.mob.PillagerEntity ||
                     self instanceof net.minecraft.entity.mob.WitchEntity)
             {
-//                PlayerForms curForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
-//                boolean isFamiliarFox = curForm == PlayerForms.FAMILIAR_FOX_1
-//                        || curForm == PlayerForms.FAMILIAR_FOX_2
-//                        || curForm == PlayerForms.FAMILIAR_FOX_3;
-//
-//                if (isFamiliarFox) {
-//                    cir.setReturnValue(true);
-//                }
                 if (PowerHolderComponent.hasPower(player, PillagerFriendlyPower.class)) {
                     cir.setReturnValue(true);
                 }

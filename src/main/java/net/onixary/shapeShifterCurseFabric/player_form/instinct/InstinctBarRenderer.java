@@ -7,11 +7,9 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
-import net.onixary.shapeShifterCurseFabric.player_form.instinct.PlayerInstinctComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
@@ -43,8 +41,8 @@ public class InstinctBarRenderer  {
         if (MinecraftClient.getInstance().player == null) return;
 
         PlayerEntity player = MinecraftClient.getInstance().player;
-        PlayerForms curForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
-        boolean showInstinctBar = !(curForm == PlayerForms.ORIGINAL_BEFORE_ENABLE || curForm == PlayerForms.ORIGINAL_SHIFTER);
+        PlayerFormBase curForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+        boolean showInstinctBar = !(curForm.equals(RegPlayerForms.ORIGINAL_BEFORE_ENABLE) || curForm.equals(RegPlayerForms.ORIGINAL_SHIFTER));
 
         if (!mc.options.hudHidden
                 && mc.interactionManager != null

@@ -5,7 +5,6 @@ import com.google.gson.JsonParser;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationFactory;
 import mod.azure.azurelib.renderer.GeoObjectRenderer;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
-import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -22,8 +21,7 @@ import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -142,8 +140,8 @@ public class OriginalFurClient implements ClientModInitializer {
                 }
                 // 手动处理各形态的映射关系：
                 if(FabricLoader.getInstance().isModLoaded(MOD_ID)){
-                    RegFormConfig.CONFIGS.forEach((FORM, formConfig) -> {
-                        Identifier id = new Identifier("origins", formConfig.getFormOriginID());
+                    RegPlayerForms.playerForms.forEach(playerFormBase -> {
+                        var id = new Identifier("origins", playerFormBase.getFormOriginID());
                         var fur = OriginalFurClient.FUR_RESOURCES.getOrDefault(id, null);
                         if(fur == null){
                             fur = OriginalFurClient.FUR_RESOURCES.getOrDefault(id, null);
@@ -160,7 +158,6 @@ public class OriginalFurClient implements ClientModInitializer {
                                 System.err.println(e.getMessage());
                             }
                         }
-
                     });
                 }
 

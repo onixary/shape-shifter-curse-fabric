@@ -16,10 +16,9 @@ import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLaye
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayers;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginRegistry;
 import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents;
-import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
-import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import virtuoel.pehkui.api.ScaleData;
 import virtuoel.pehkui.api.ScaleTypes;
 
@@ -28,7 +27,7 @@ import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.Effe
 public class FormAbilityManager {
     private static ServerWorld world;
 
-    public static PlayerForms getForm(PlayerEntity player) {
+    public static PlayerFormBase getForm(PlayerEntity player) {
         PlayerFormComponent component = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
         return component.getCurrentForm();
     }
@@ -37,16 +36,14 @@ public class FormAbilityManager {
         FormAbilityManager.world = world;
     }
 
-    public static void applyForm(PlayerEntity player, PlayerForms newForm) {
+    public static void applyForm(PlayerEntity player, PlayerFormBase newForm) {
         PlayerFormComponent component = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
-        PlayerForms oldForm = component.getCurrentForm();
+        PlayerFormBase oldForm = component.getCurrentForm();
 
         clearFormEffects(player, oldForm);
-
-        FormConfig config = RegFormConfig.getConfig(newForm);
         // 已被弃用，使用json定义的scale power
         //applyScale(player, config.getScale());
-        applyFormOrigin(player, config.getFormOriginLayerID(), config.getFormOriginID());
+        applyFormOrigin(player, "origin", newForm.getFormOriginID());
         //applyPower(player, config.getPowerId());
         // 清空Status
         cancelEffect(player);
@@ -69,12 +66,12 @@ public class FormAbilityManager {
 
     public static void loadForm(PlayerEntity player) {
         PlayerFormComponent component = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
-        PlayerForms savedForm = loadSavedForm(player);
+        PlayerFormBase savedForm = loadSavedForm(player);
         if (savedForm != null) {
             applyForm(player, savedForm);
         }
         else{
-            applyForm(player, PlayerForms.ORIGINAL_BEFORE_ENABLE);
+            applyForm(player, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
         }
     }
 
@@ -92,14 +89,13 @@ public class FormAbilityManager {
         }
     }
 
-    private static PlayerForms loadSavedForm(PlayerEntity player) {
+    private static PlayerFormBase loadSavedForm(PlayerEntity player) {
         // 从存储中加载保存的 form
         PlayerFormComponent formComponent = PlayerNbtStorage.loadPlayerFormComponent(world, player.getUuid().toString());
         return formComponent != null ? formComponent.getCurrentForm() : null;
     }
 
-    private static void clearFormEffects(PlayerEntity player, PlayerForms oldForm) {
-        FormConfig oldConfig = RegFormConfig.getConfig(oldForm);
+    private static void clearFormEffects(PlayerEntity player, PlayerFormBase oldForm) {
         // 移除 Pehkui 缩放
         ScaleData scaleData = ScaleTypes.BASE.getScaleData(player);
         scaleData.setScale(1.0f);

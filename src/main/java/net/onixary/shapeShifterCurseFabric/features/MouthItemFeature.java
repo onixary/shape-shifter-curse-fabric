@@ -8,27 +8,18 @@ import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.ModelWithArms;
-import net.minecraft.client.render.entity.model.ModelWithHead;
 import net.minecraft.client.render.item.HeldItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
-import net.minecraft.util.Arm;
 import net.minecraft.util.Hand;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.RotationAxis;
-import net.minecraft.util.math.Vec3d;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.feralItemEulerX;
-import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.feralItemPosOffset;
 
 public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> & ModelWithArms> extends FeatureRenderer<T, M> {
     private final HeldItemRenderer heldItemRenderer;
@@ -44,8 +35,8 @@ public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> &
             return;
         }
 
-        PlayerForms curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
-        if (RegFormConfig.getConfig(curForm).getBodyType() != PlayerFormBodyType.FERAL) {
+        PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+        if (curForm.getBodyType() != PlayerFormBodyType.FERAL) {
             return;
         }
 

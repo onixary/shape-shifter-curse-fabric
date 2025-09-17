@@ -11,13 +11,13 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
 public class CustomFormArgumentType implements ArgumentType<Identifier> {
 
@@ -33,12 +33,12 @@ public class CustomFormArgumentType implements ArgumentType<Identifier> {
       return Identifier.fromCommandInput(stringReader);
    }
 
-   public static PlayerForms getForm(CommandContext<ServerCommandSource> context, String argumentName) throws CommandSyntaxException {
+   public static PlayerFormBase getForm(CommandContext<ServerCommandSource> context, String argumentName) throws CommandSyntaxException {
 
       Identifier id = context.getArgument(argumentName, Identifier.class);
 
       try {
-            return PlayerForms.valueOf(id.getPath().toUpperCase());
+            return RegPlayerForms.playerForms.get(id);
       }
 
       catch(IllegalArgumentException e) {
@@ -53,19 +53,11 @@ public class CustomFormArgumentType implements ArgumentType<Identifier> {
       List<Identifier> availableForms = new ArrayList<>();
 
       try {
-            availableForms.add(new Identifier(MOD_ID, "alpha_0"));
-            availableForms.add(new Identifier(MOD_ID, "alpha_1"));
-            availableForms.add(new Identifier(MOD_ID, "alpha_2"));
-            availableForms.add(new Identifier(MOD_ID, "beta_0"));
-            availableForms.add(new Identifier(MOD_ID, "beta_1"));
-            availableForms.add(new Identifier(MOD_ID, "beta_2"));
-            availableForms.add(new Identifier(MOD_ID, "gamma_0"));
-            availableForms.add(new Identifier(MOD_ID, "gamma_1"));
-            availableForms.add(new Identifier(MOD_ID, "gamma_2"));
-            availableForms.add(new Identifier(MOD_ID, "omega_sp"));
-            availableForms.add(new Identifier(MOD_ID, "psi_sp"));
-            availableForms.add(new Identifier(MOD_ID, "chi_sp"));
-            availableForms.add(new Identifier(MOD_ID, "phi_sp"));
+            RegPlayerForms.playerForms.forEach((form) -> {
+                if (form.GetIsCustomForm()) {
+                    availableForms.add(form.FormID);
+                }
+            });
       }
 
       catch(IllegalArgumentException ignored) {}

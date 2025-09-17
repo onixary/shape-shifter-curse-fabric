@@ -14,7 +14,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 
 import java.util.Collection;
@@ -79,7 +79,7 @@ public class ShapeShifterCurseCommand {
     private static int setForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
         // set form without transform effect
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
-        PlayerForms form = FormArgumentType.getForm(commandContext, "form");
+        PlayerFormBase form = FormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
 
         setFormDirectly(target, form);
@@ -91,7 +91,7 @@ public class ShapeShifterCurseCommand {
     private static int transformToForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
         // this with transform effect
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
-        PlayerForms form = FormArgumentType.getForm(commandContext, "form");
+        PlayerFormBase form = FormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
 
         handleDirectTransform(target, form, false);
@@ -103,7 +103,7 @@ public class ShapeShifterCurseCommand {
     private static int setCustomForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
         // set form without transform effect
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
-        PlayerForms form = CustomFormArgumentType.getForm(commandContext, "form");
+        PlayerFormBase form = CustomFormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
 
         setFormDirectly(target, form);
@@ -115,7 +115,7 @@ public class ShapeShifterCurseCommand {
     private static int transformToCustomForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
         // this with transform effect
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
-        PlayerForms form = CustomFormArgumentType.getForm(commandContext, "form");
+        PlayerFormBase form = CustomFormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
 
         handleDirectTransform(target, form, false);

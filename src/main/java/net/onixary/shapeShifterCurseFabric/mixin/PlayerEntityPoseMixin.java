@@ -1,19 +1,14 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
-import io.github.apace100.apoli.component.PowerHolderComponent;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandOutput;
 import net.minecraft.util.Nameable;
 import net.minecraft.world.World;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -35,8 +30,8 @@ public abstract class PlayerEntityPoseMixin extends LivingEntity implements Name
     @Inject(method = "updatePose", at = @At("HEAD"), cancellable = true)
     private void forcePose(CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity) (Object) this;
-        PlayerForms curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
-        boolean isFeral = RegFormConfig.getConfig(curForm).getBodyType() == PlayerFormBodyType.FERAL;
+        PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+        boolean isFeral = curForm.getBodyType() == PlayerFormBodyType.FERAL;
         if(isFeral){
             if (this.wouldPoseNotCollide(EntityPose.SWIMMING)) {
                 EntityPose entityPose;

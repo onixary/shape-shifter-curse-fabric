@@ -4,11 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.WorldSavePath;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -94,13 +95,13 @@ public class PlayerDataStorage {
         updateCache(server, data);
     }
 
-    public static void savePlayerForm(MinecraftServer server, String key, PlayerForms state) {
-        savePlayerData(server, key, state);
+    public static void savePlayerForm(MinecraftServer server, String key, PlayerFormBase state) {
+        savePlayerData(server, key, state.FormID.toString());
     }
 
-    public static PlayerForms loadPlayerForm(MinecraftServer server, String key){
+    public static PlayerFormBase loadPlayerForm(MinecraftServer server, String key){
         JsonObject data = getCachedData(server);
-        return data.has(key)? PlayerForms.valueOf(data.get(key).getAsString()) : PlayerForms.ORIGINAL_SHIFTER;
+        return data.has(key)? RegPlayerForms.getPlayerForm(data.get(key).getAsString()) : RegPlayerForms.ORIGINAL_SHIFTER;
     }
 
     public static int loadPlayerDataAsInt(MinecraftServer server, String key) {

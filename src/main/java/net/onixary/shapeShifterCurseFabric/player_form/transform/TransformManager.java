@@ -18,8 +18,7 @@ import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
-import net.onixary.shapeShifterCurseFabric.player_form.FormRandomSelector;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.*;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
@@ -41,8 +40,8 @@ public class TransformManager {
     private static boolean isEffectActive = false;
     private static boolean isEndEffectActive = false;
     private static PlayerEntity curPlayer = null;
-    public static PlayerForms curFromForm = null;
-    public static PlayerForms curToForm = null;
+    public static PlayerFormBase curFromForm = null;
+    public static PlayerFormBase curToForm = null;
     private static boolean _isByCursedMoon = false;
     private static boolean _isByCursedMoonEnd = false;
     private static boolean _isRegressedFromFinal = false;
@@ -77,7 +76,7 @@ public class TransformManager {
         _isByCursedMoon = isByCursedMoon;
         _isRegressedFromFinal = false;
         _isByCure = false;
-        PlayerForms currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+        PlayerFormBase currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
 
         // 设置变身的起始形态
         curFromForm = currentForm;
@@ -87,8 +86,8 @@ public class TransformManager {
         FormAbilityManager.saveForm(player);
         ShapeShifterCurseFabric.LOGGER.info("Progressive transform started, isByCursedMoon: " + isByCursedMoon + ", from: " + curFromForm);
         int currentFormIndex = currentForm.getIndex();
-        String currentFormGroup = currentForm.getGroup();
-        PlayerForms toForm = null;
+        PlayerFormGroup currentFormGroup = currentForm.getGroup();
+        PlayerFormBase toForm = null;
         switch (currentFormIndex) {
             case -2:
                 // 未激活mod内容，不做任何事
@@ -103,14 +102,14 @@ public class TransformManager {
                 ShapeShifterCurseFabric.ON_TRANSFORM_0.trigger((ServerPlayerEntity) player);
                 break;
             case 0:
-                toForm = PlayerForms.getFormsByGroup(currentFormGroup)[1];
+                toForm = currentFormGroup.getForm(1);
                 break;
             case 1:
-                toForm = PlayerForms.getFormsByGroup(currentFormGroup)[2];
+                toForm = currentFormGroup.getForm(2);
                 break;
             case 2:
                 if(isByCursedMoon){
-                    toForm = PlayerForms.getFormsByGroup(currentFormGroup)[0];
+                    toForm = currentFormGroup.getForm(0);
                     _isRegressedFromFinal = true;
                     // 触发自定义成就
                     // Trigger custom achievement
@@ -151,14 +150,14 @@ public class TransformManager {
     }
 
     public static void handleMoonEndTransform(PlayerEntity player){
-        PlayerForms currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+        PlayerFormBase currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
 
         // 设置变身的起始形态
         curFromForm = currentForm;
 
         int currentFormIndex = currentForm.getIndex();
-        String currentFormGroup = currentForm.getGroup();
-        PlayerForms toForm = null;
+        PlayerFormGroup currentFormGroup = currentForm.getGroup();
+        PlayerFormBase toForm = null;
         switch (currentFormIndex) {
             case -2:
                 // 不应该触发
@@ -173,17 +172,17 @@ public class TransformManager {
                 break;
             case 0:
                 if(player.getComponent(RegPlayerFormComponent.PLAYER_FORM).isRegressedFromFinal()){
-                    toForm = PlayerForms.getFormsByGroup(currentFormGroup)[2];
+                    toForm = currentFormGroup.getForm(2);
                 }
                 else{
-                    toForm = PlayerForms.ORIGINAL_SHIFTER;
+                    toForm = RegPlayerForms.ORIGINAL_SHIFTER;
                 }
                 break;
             case 1:
-                toForm = PlayerForms.getFormsByGroup(currentFormGroup)[0];
+                toForm = currentFormGroup.getForm(0);
                 break;
             case 2:
-                toForm = PlayerForms.getFormsByGroup(currentFormGroup)[1];
+                toForm = currentFormGroup.getForm(1);
             case 3:
             case 5:
                 // 永久形态或SP形态不会受到CursedMoon影响
@@ -211,7 +210,7 @@ public class TransformManager {
         syncCursedMoonData(player, server);
     }
 
-    static PlayerForms getRandomOrBuffForm(PlayerEntity player){
+    static PlayerFormBase getRandomOrBuffForm(PlayerEntity player){
         PlayerEffectAttachment currentTransformEffect = EffectManager.getCurrentEffectAttachment(player);
         if(currentTransformEffect != null && currentTransformEffect.currentEffect != null){
             return currentTransformEffect.currentToForm;
@@ -269,7 +268,7 @@ public class TransformManager {
                 // 结束时的相关逻辑放在这里
                 // 如果curFromForm为ORIGINAL_BEFORE_ENABLE，则代表玩家第一次开启mod，触发info
                 // If curFromForm is ORIGINAL_BEFORE_ENABLE, it means the player is enabling the mod for the first time, trigger info
-                if(curFromForm == PlayerForms.ORIGINAL_BEFORE_ENABLE){
+                if(curFromForm.equals(RegPlayerForms.ORIGINAL_BEFORE_ENABLE)){
                     // info
                     curPlayer.sendMessage(Text.translatable("info.shape-shifter-curse.on_enable_mod_after").formatted(Formatting.LIGHT_PURPLE));
                 }
@@ -409,7 +408,7 @@ public class TransformManager {
         TransformOverlay.INSTANCE.setBlackStrength(blackStrength);
     }
 
-    public static void handleDirectTransform(PlayerEntity player, PlayerForms toForm, boolean isByCure){
+    public static void handleDirectTransform(PlayerEntity player, PlayerFormBase toForm, boolean isByCure){
         curPlayer = player;
         curToForm = toForm;
         curFromForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
@@ -498,7 +497,7 @@ public class TransformManager {
         TransformOverlay.INSTANCE.setEnableOverlay(true);
     }
 
-    public static void setFormDirectly(PlayerEntity player, PlayerForms toForm){
+    public static void setFormDirectly(PlayerEntity player, PlayerFormBase toForm){
         curPlayer = player;
         curToForm = toForm;
         FormAbilityManager.applyForm(curPlayer, curToForm);

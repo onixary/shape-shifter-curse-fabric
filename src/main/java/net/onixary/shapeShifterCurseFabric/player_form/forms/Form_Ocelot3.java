@@ -1,18 +1,24 @@
-package net.onixary.shapeShifterCurseFabric.player_animation.form_animation;
+package net.onixary.shapeShifterCurseFabric.player_form.forms;
 
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
-public class AnimationPlayerFamiliarFox3 {
-    private AnimationPlayerFamiliarFox3() {
+public class Form_Ocelot3 extends PlayerFormBase {
+    public Form_Ocelot3(Identifier formID) {
+        super(formID);
+        this.setBodyType(PlayerFormBodyType.FERAL);
     }
+
     private static AnimationHolder anim_idle = AnimationHolder.EMPTY;
     private static AnimationHolder anim_sneak_idle = AnimationHolder.EMPTY;
     private static AnimationHolder anim_walk = AnimationHolder.EMPTY;
     private static AnimationHolder anim_sneak_walk = AnimationHolder.EMPTY;
+    private static AnimationHolder anim_sneak_rush = AnimationHolder.EMPTY;
     private static AnimationHolder anim_run = AnimationHolder.EMPTY;
     private static AnimationHolder anim_float = AnimationHolder.EMPTY;
     private static AnimationHolder anim_swim = AnimationHolder.EMPTY;
@@ -25,7 +31,7 @@ public class AnimationPlayerFamiliarFox3 {
     private static AnimationHolder anim_elytra_fly = AnimationHolder.EMPTY;
 
 
-    public static AnimationHolder getFormAnimToPlay(PlayerAnimState currentState) {
+    public AnimationHolder Anim_getFormAnimToPlay(PlayerAnimState currentState) {
         switch (currentState) {
             case ANIM_IDLE:
                 return anim_idle;
@@ -37,6 +43,8 @@ public class AnimationPlayerFamiliarFox3 {
                 return anim_walk;
             case ANIM_SNEAK_WALK:
                 return anim_sneak_walk;
+            case ANIM_SNEAK_RUSH:
+                return anim_sneak_rush;
             case ANIM_RUN:
                 return anim_run;
             case ANIM_SWIM_IDLE:
@@ -69,12 +77,12 @@ public class AnimationPlayerFamiliarFox3 {
         }
     }
 
-    public static void registerAnims() {
+    public void Anim_registerAnims() {
         anim_idle = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_idle"), true);
         anim_sneak_idle = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sneak_idle"), true);
         anim_walk = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_walk"), true, 1.2f, 2);
         anim_sneak_walk = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sneak_walk"), true);
-        anim_run = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_run"), true, 2.3f);
+        anim_run = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_run"), true, 3.3f);
         anim_float = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_float"), true);
         anim_swim = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_swim"), true);
         anim_dig = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_dig"), true);
@@ -84,5 +92,6 @@ public class AnimationPlayerFamiliarFox3 {
         anim_attack = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_attack"), true);
         anim_sleep = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sleep"), true);
         anim_elytra_fly = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_elytra_fly"), true);
+        anim_sneak_rush = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_run"), true, 3.3f);
     }
 }

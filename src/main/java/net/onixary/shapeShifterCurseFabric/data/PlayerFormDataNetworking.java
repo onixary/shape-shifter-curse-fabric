@@ -1,18 +1,19 @@
 package net.onixary.shapeShifterCurseFabric.data;
 
 import net.minecraft.nbt.NbtCompound;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 
 import java.util.UUID;
 
 public class PlayerFormDataNetworking {
-    public PlayerFormDataNetworking(UUID playerId, PlayerForms currentForm) {
+    public PlayerFormDataNetworking(UUID playerId, PlayerFormBase currentForm) {
         this.playerId = playerId;
         this.currentForm = currentForm;
     }
 
     private final UUID playerId;
-    private final PlayerForms currentForm;
+    private final PlayerFormBase currentForm;
 
     // 序列化到 NBT
     public NbtCompound toNbt() {
@@ -26,7 +27,7 @@ public class PlayerFormDataNetworking {
     public static PlayerFormDataNetworking fromNbt(NbtCompound nbt) {
         return new PlayerFormDataNetworking(
                 nbt.getUuid("PlayerId"),
-                PlayerForms.valueOf(nbt.getString("CurrentForm"))
+                RegPlayerForms.getPlayerForm(nbt.getString("CurrentForm"))
         );
     }
 }

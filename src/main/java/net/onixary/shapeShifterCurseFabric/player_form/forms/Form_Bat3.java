@@ -1,13 +1,17 @@
-package net.onixary.shapeShifterCurseFabric.player_animation.form_animation;
+package net.onixary.shapeShifterCurseFabric.player_form.forms;
 
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
-public class AnimationPlayerBat3 {
-    private AnimationPlayerBat3() {
+public class Form_Bat3 extends PlayerFormBase {
+    public Form_Bat3(Identifier formID) {
+        super(formID);
     }
 
     private static AnimationHolder anim_sneak_idle = AnimationHolder.EMPTY;
@@ -23,7 +27,7 @@ public class AnimationPlayerBat3 {
     private static AnimationHolder anim_attach_bottom = AnimationHolder.EMPTY;
 
 
-    public static AnimationHolder getFormAnimToPlay(PlayerAnimState currentState) {
+    public AnimationHolder Anim_getFormAnimToPlay(PlayerAnimState currentState) {
         switch (currentState) {
             case ANIM_SNEAK_IDLE:
             case ANIM_RIDE_IDLE:
@@ -65,7 +69,7 @@ public class AnimationPlayerBat3 {
         }
     }
 
-    public static void registerAnims() {
+    public void Anim_registerAnims() {
         anim_sneak_idle = new AnimationHolder(new Identifier(MOD_ID, "bat_1_sneak_idle"), true);
         anim_jump = new AnimationHolder(new Identifier(MOD_ID, "bat_3_jump"), true, 1.5f, 2);
         anim_slow_falling = new AnimationHolder(new Identifier(MOD_ID, "bat_2_slow_falling"), true);
@@ -77,5 +81,25 @@ public class AnimationPlayerBat3 {
         anim_attach_side = new AnimationHolder(new Identifier(MOD_ID, "bat_3_attach_side"), true);
         anim_attach_bottom = new AnimationHolder(new Identifier(MOD_ID, "bat_3_attach_bottom"), true);
         anim_run = new AnimationHolder(new Identifier(MOD_ID, "bat_3_walk"), true, 2.4f, 4);
+    }
+
+    @Override
+    public Vec3d getCapeIdleLoc(AbstractClientPlayerEntity player) {
+        if (player.isOnGround()) {
+            return new Vec3d(0.0f, 0.7f, 0.2f);
+        }
+        else {
+            return new Vec3d(0.0, 0.0, 0.125);
+        }
+    }
+
+    @Override
+    public float getCapeBaseRotateAngle(AbstractClientPlayerEntity player) {
+        return 100.0f;
+    }
+
+    @Override
+    public boolean NeedModifyXRotationAngle() {
+        return true;
     }
 }

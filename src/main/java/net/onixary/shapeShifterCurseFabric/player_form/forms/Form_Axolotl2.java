@@ -1,19 +1,17 @@
-package net.onixary.shapeShifterCurseFabric.player_animation.form_animation;
+package net.onixary.shapeShifterCurseFabric.player_form.forms;
 
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
-public class AnimationPlayerAxolotl3 {
-    private AnimationPlayerAxolotl3() {
+public class Form_Axolotl2 extends PlayerFormBase {
+    public Form_Axolotl2(Identifier formID) {
+        super(formID);
     }
 
-    private static AnimationHolder anim_idle = new AnimationHolder();
-    private static AnimationHolder anim_walking = AnimationHolder.EMPTY;
-    private static AnimationHolder anim_running = AnimationHolder.EMPTY;
-    private static AnimationHolder anim_jump = AnimationHolder.EMPTY;
     private static AnimationHolder anim_swimming = AnimationHolder.EMPTY;
     private static AnimationHolder anim_swimming_idle = AnimationHolder.EMPTY;
     private static AnimationHolder anim_crawling = AnimationHolder.EMPTY;
@@ -23,25 +21,11 @@ public class AnimationPlayerAxolotl3 {
     private static AnimationHolder anim_crawling_jump = AnimationHolder.EMPTY;
 
 
-    public static AnimationHolder getFormAnimToPlay(PlayerAnimState currentState) {
+    public AnimationHolder Anim_getFormAnimToPlay(PlayerAnimState currentState) {
         switch (currentState) {
-            case ANIM_JUMP:
-            case ANIM_FALL:
-                return anim_jump;
-            case ANIM_SNEAK_JUMP:
-                return anim_crawling_jump;
-            case ANIM_SNEAK_FALL:
-                return anim_crawling_idle;
-
-            case ANIM_WALK:
-                return anim_walking;
-            case ANIM_RUN:
-                return anim_running;
-            case ANIM_IDLE:
-                return anim_idle;
-
             case ANIM_SWIM:
                 return anim_swimming;
+
             case ANIM_SWIM_IDLE:
                 return anim_swimming_idle;
 
@@ -50,6 +34,9 @@ public class AnimationPlayerAxolotl3 {
 
             case ANIM_SNEAK_IDLE:
                 return anim_crawling_idle;
+
+            case ANIM_SNEAK_JUMP:
+                return anim_crawling_jump;
 
             case ANIM_SNEAK_ATTACK_ONCE:
                 return anim_crawling_attack_once;
@@ -62,17 +49,13 @@ public class AnimationPlayerAxolotl3 {
         }
     }
 
-    public static void registerAnims() {
+    public void Anim_registerAnims() {
         anim_swimming = new AnimationHolder(new Identifier(MOD_ID, "axolotl_2_swimming"), true);
         anim_swimming_idle = new AnimationHolder(new Identifier(MOD_ID, "axolotl_2_swimming_idle"), true);
-        anim_crawling = new AnimationHolder(new Identifier(MOD_ID, "axolotl_3_crawling"), true);
-        anim_crawling_idle = new AnimationHolder(new Identifier(MOD_ID, "axolotl_3_crawling_idle"), true);
+        anim_crawling = new AnimationHolder(new Identifier(MOD_ID, "axolotl_2_crawling_new"), true);
+        anim_crawling_idle = new AnimationHolder(new Identifier(MOD_ID, "axolotl_2_crawling_idle_new"), true);
         anim_crawling_attack_once = new AnimationHolder(new Identifier(MOD_ID, "axolotl_2_crawling_attack_once"), true);
         anim_crawling_tool_swing = new AnimationHolder(new Identifier(MOD_ID, "axolotl_2_crawling_tool_swing"), true);
         anim_crawling_jump = new AnimationHolder(new Identifier(MOD_ID, "axolotl_2_crawling_jump"), true);
-        anim_walking = new AnimationHolder(new Identifier(MOD_ID, "axolotl_3_walk"), true);
-        anim_running = new AnimationHolder(new Identifier(MOD_ID, "axolotl_3_run"), true);
-        anim_jump = new AnimationHolder(new Identifier(MOD_ID, "axolotl_3_jump"), true);
-        anim_idle = new AnimationHolder(new Identifier(MOD_ID, "axolotl_3_idle"), true);
     }
 }

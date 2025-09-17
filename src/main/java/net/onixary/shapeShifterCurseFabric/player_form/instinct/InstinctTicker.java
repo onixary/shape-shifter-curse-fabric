@@ -9,10 +9,9 @@ import net.minecraft.util.math.MathHelper;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormPhase;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 
 import java.util.Iterator;
@@ -97,7 +96,7 @@ public class InstinctTicker {
 
     private static float judgeInstinctGrowRate(PlayerEntity player){
         PlayerFormComponent formComp = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
-        PlayerFormPhase currentPhase = RegFormConfig.CONFIGS.get(formComp.getCurrentForm()).getPhase();
+        PlayerFormPhase currentPhase = formComp.getCurrentForm().getPhase();
         switch (currentPhase){
             case PHASE_CLEAR:
                 return 0.0f;
@@ -121,8 +120,8 @@ public class InstinctTicker {
     private static void judgeInstinctState(PlayerEntity player, PlayerInstinctComponent comp){
         // 判断当前状态，供进度条使用
         // Judge the current state for the progress bar
-        PlayerForms form = getForm(player);
-        PlayerFormPhase currentPhase = RegFormConfig.CONFIGS.get(form).getPhase();
+        PlayerFormBase form = getForm(player);
+        PlayerFormPhase currentPhase = form.getPhase();
         showInstinctBar = !(currentPhase == PlayerFormPhase.PHASE_CLEAR || currentPhase == PlayerFormPhase.PHASE_3);
 
         float baseRate = judgeInstinctGrowRate(player);
@@ -139,7 +138,7 @@ public class InstinctTicker {
             comp.isInstinctDecreasing = false;
         }
 
-        if(getForm(player).getIndex() < 2){
+        if(getForm(player).FormIndex < 2){
             if(isUnderCursedMoon){
                 isInstinctLock = true;
             }
@@ -183,7 +182,7 @@ public class InstinctTicker {
         if (comp.instinctValue >= StaticParams.INSTINCT_MAX) {
             // 这里放置满instinct时要触发的逻辑
             // Here is the logic to be triggered when the instinct is full
-            if(getForm(player).getIndex() < 2){
+            if(getForm(player).FormIndex < 2){
                 handleProgressiveTransform(player, false);
             }
             comp.instinctValue = 0f;

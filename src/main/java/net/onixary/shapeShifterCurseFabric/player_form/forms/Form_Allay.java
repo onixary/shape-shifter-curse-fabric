@@ -1,13 +1,15 @@
-package net.onixary.shapeShifterCurseFabric.player_animation.form_animation;
+package net.onixary.shapeShifterCurseFabric.player_form.forms;
 
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
-public class AnimationPlayerAllaySP {
-    private AnimationPlayerAllaySP() {
+public class Form_Allay extends PlayerFormBase {
+    public Form_Allay(Identifier formID) {
+        super(formID);
     }
 
     private static AnimationHolder anim_walk = AnimationHolder.EMPTY;
@@ -19,7 +21,7 @@ public class AnimationPlayerAllaySP {
     private static AnimationHolder anim_idle = AnimationHolder.EMPTY;
     private static AnimationHolder anim_attack = AnimationHolder.EMPTY;
 
-    public static AnimationHolder getFormAnimToPlay(PlayerAnimState currentState) {
+    public AnimationHolder Anim_getFormAnimToPlay(PlayerAnimState currentState) {
         switch (currentState) {
             case ANIM_WALK:
                 return anim_walk;
@@ -52,7 +54,7 @@ public class AnimationPlayerAllaySP {
         }
     }
 
-    public static void registerAnims() {
+    public void Anim_registerAnims() {
         anim_walk = new AnimationHolder(new Identifier(MOD_ID, "allay_sp_moving"), true);
         anim_run = new AnimationHolder(new Identifier(MOD_ID, "allay_sp_run"), true);
         anim_sneak_idle = new AnimationHolder(new Identifier(MOD_ID, "allay_sp_sneaking"), true);

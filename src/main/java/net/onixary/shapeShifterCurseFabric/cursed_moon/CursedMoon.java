@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
@@ -158,7 +158,7 @@ public class CursedMoon {
 
             // 向所有玩家发送消息
             for (ServerPlayerEntity player : world.getServer().getPlayerManager().getPlayerList()) {
-                if (FormAbilityManager.getForm(player) != PlayerForms.ORIGINAL_BEFORE_ENABLE) {
+                if (!FormAbilityManager.getForm(player).equals(RegPlayerForms.ORIGINAL_BEFORE_ENABLE)) {
                     if(player.getWorld().getRegistryKey() == World.OVERWORLD){
                         player.sendMessage(Text.translatable("info.shape-shifter-curse.before_cursed_moon").formatted(Formatting.DARK_PURPLE));
                     }
@@ -276,7 +276,7 @@ public class CursedMoon {
 
         // 向所有玩家发送消息
         for (ServerPlayerEntity player : world.getServer().getPlayerManager().getPlayerList()) {
-            if (FormAbilityManager.getForm(player) != PlayerForms.ORIGINAL_BEFORE_ENABLE) {
+            if (!FormAbilityManager.getForm(player).equals(RegPlayerForms.ORIGINAL_BEFORE_ENABLE)) {
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.cursed_moon_forced").formatted(Formatting.DARK_PURPLE));
             }
         }
@@ -312,7 +312,7 @@ public class CursedMoon {
         PlayerFormComponent formComp = RegPlayerFormComponent.PLAYER_FORM.get(player);
         if(!formComp.isMoonEffectApplied()){
             boolean isOverworld = player.getWorld().getRegistryKey() == World.OVERWORLD;
-            if(FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_BEFORE_ENABLE){
+            if(FormAbilityManager.getForm(player).equals(RegPlayerForms.ORIGINAL_BEFORE_ENABLE)){
                 if(isOverworld){
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.on_cursed_moon_before_enable").formatted(Formatting.LIGHT_PURPLE));
                 }
@@ -348,7 +348,7 @@ public class CursedMoon {
         if(!formComp.isEndMoonEffectApplied()){
             boolean wasByCursedMoon = RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon();
             ShapeShifterCurseFabric.LOGGER.info("is player form by cursed moon? : " + wasByCursedMoon);
-            if(FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_BEFORE_ENABLE){
+            if(FormAbilityManager.getForm(player).equals(RegPlayerForms.ORIGINAL_BEFORE_ENABLE)) {
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon_before_enable").formatted(Formatting.LIGHT_PURPLE));
             }
             else if(FormAbilityManager.getForm(player).getIndex() == 0 &&
@@ -369,7 +369,7 @@ public class CursedMoon {
                         ShapeShifterCurseFabric.ON_END_CURSED_MOON_CURED_FORM_2.trigger(player);
                     }
                 }
-                else if(FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_SHIFTER){
+                else if(FormAbilityManager.getForm(player).equals(RegPlayerForms.ORIGINAL_SHIFTER)){
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon_special").formatted(Formatting.LIGHT_PURPLE));
                 }
                 else if(FormAbilityManager.getForm(player).getIndex() == 3){

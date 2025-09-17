@@ -1,23 +1,22 @@
 package net.onixary.shapeShifterCurseFabric.status_effects;
 
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 
 // 自定义药水效果基类（含类型和回调）
 public abstract class BaseTransformativeStatusEffect extends StatusEffect {
     public boolean IS_INSTANT = false;
-    private final PlayerForms toForm;
+    private final PlayerFormBase toForm;
 
-    public BaseTransformativeStatusEffect(PlayerForms toForm, StatusEffectCategory category, int color, boolean isInstant) {
+    public BaseTransformativeStatusEffect(PlayerFormBase toForm, StatusEffectCategory category, int color, boolean isInstant) {
         super(category, color);
         IS_INSTANT = isInstant;
         this.toForm = toForm;
     }
 
-    public PlayerForms getToForm() {
+    public PlayerFormBase getToForm() {
         return toForm;
     }
 

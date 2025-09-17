@@ -16,7 +16,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.additional_power.CanEatAmethystShardPower;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -48,7 +48,7 @@ public abstract class CustomEdibleItemMixin {
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void onUse(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         ItemStack stack = user.getStackInHand(hand);
-        PlayerForms currentForm = FormAbilityManager.getForm(user);
+        PlayerFormBase currentForm = FormAbilityManager.getForm(user);
         canConsumeCustomFood = false;
         if(currentForm != null){
 
@@ -96,7 +96,7 @@ public abstract class CustomEdibleItemMixin {
     @Inject(method = "finishUsing", at = @At("HEAD"), cancellable = true)
     private void onFinishUsing(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
         if(user instanceof PlayerEntity){
-            PlayerForms currentForm = FormAbilityManager.getForm((PlayerEntity) user);
+            PlayerFormBase currentForm = FormAbilityManager.getForm((PlayerEntity) user);
 //            if ((stack.getItem() == Items.AMETHYST_SHARD) && (currentForm == PlayerForms.ALLAY_SP)) {
             if ((stack.getItem() == Items.AMETHYST_SHARD) && (PowerHolderComponent.hasPower(user, CanEatAmethystShardPower.class))) {
                 if (user instanceof PlayerEntity player) {

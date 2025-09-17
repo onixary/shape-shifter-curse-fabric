@@ -11,17 +11,13 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
-import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayer;
-import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayers;
-import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginRegistry;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
 public class FormArgumentType implements ArgumentType<Identifier> {
 
@@ -37,12 +33,12 @@ public class FormArgumentType implements ArgumentType<Identifier> {
       return Identifier.fromCommandInput(stringReader);
    }
 
-   public static PlayerForms getForm(CommandContext<ServerCommandSource> context, String argumentName) throws CommandSyntaxException {
+   public static PlayerFormBase getForm(CommandContext<ServerCommandSource> context, String argumentName) throws CommandSyntaxException {
 
       Identifier id = context.getArgument(argumentName, Identifier.class);
 
       try {
-            return PlayerForms.valueOf(id.getPath().toUpperCase());
+            return RegPlayerForms.playerForms.get(id);
       }
 
       catch(IllegalArgumentException e) {
@@ -57,30 +53,11 @@ public class FormArgumentType implements ArgumentType<Identifier> {
       List<Identifier> availableForms = new ArrayList<>();
 
       try {
-            availableForms.add(new Identifier(MOD_ID, "original_before_enable"));
-            availableForms.add(new Identifier(MOD_ID, "original_shifter"));
-            availableForms.add(new Identifier(MOD_ID, "bat_0"));
-            availableForms.add(new Identifier(MOD_ID, "bat_1"));
-            availableForms.add(new Identifier(MOD_ID, "bat_2"));
-            availableForms.add(new Identifier(MOD_ID, "bat_3"));
-            availableForms.add(new Identifier(MOD_ID, "axolotl_0"));
-            availableForms.add(new Identifier(MOD_ID, "axolotl_1"));
-            availableForms.add(new Identifier(MOD_ID, "axolotl_2"));
-            availableForms.add(new Identifier(MOD_ID, "axolotl_3"));
-            availableForms.add(new Identifier(MOD_ID, "ocelot_0"));
-            availableForms.add(new Identifier(MOD_ID, "ocelot_1"));
-            availableForms.add(new Identifier(MOD_ID, "ocelot_2"));
-            availableForms.add(new Identifier(MOD_ID, "ocelot_3"));
-            availableForms.add(new Identifier(MOD_ID, "familiar_fox_0"));
-            availableForms.add(new Identifier(MOD_ID, "familiar_fox_1"));
-            availableForms.add(new Identifier(MOD_ID, "familiar_fox_2"));
-            availableForms.add(new Identifier(MOD_ID, "familiar_fox_3"));
-            availableForms.add(new Identifier(MOD_ID, "snow_fox_0"));
-            availableForms.add(new Identifier(MOD_ID, "snow_fox_1"));
-            availableForms.add(new Identifier(MOD_ID, "snow_fox_2"));
-            availableForms.add(new Identifier(MOD_ID, "snow_fox_3"));
-            availableForms.add(new Identifier(MOD_ID, "allay_sp"));
-            availableForms.add(new Identifier(MOD_ID, "feral_cat_sp"));
+          RegPlayerForms.playerForms.forEach((form) -> {
+              if (!form.GetIsCustomForm()) {
+                  availableForms.add(form.FormID);
+              }
+          });
       }
 
       catch(IllegalArgumentException ignored) {}
