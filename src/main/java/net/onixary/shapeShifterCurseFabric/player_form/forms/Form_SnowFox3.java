@@ -11,7 +11,7 @@ import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID
 public class Form_SnowFox3 extends PlayerFormBase {
     public Form_SnowFox3(Identifier formID) {
         super(formID);
-        this.SetBodyType(PlayerFormBodyType.FERAL);
+        this.setBodyType(PlayerFormBodyType.FERAL);
     }
 
     private static AnimationHolder anim_idle = AnimationHolder.EMPTY;

@@ -25,18 +25,18 @@ public class PlayerFormBase {
     }
 
     // 从 FormConfig 迁移
-    public PlayerFormBodyType GetBodyType() {
+    public PlayerFormBodyType getBodyType() {
         return BodyType;
     };
-    public PlayerFormBase SetBodyType(PlayerFormBodyType bodyType) {
+    public PlayerFormBase setBodyType(PlayerFormBodyType bodyType) {
         BodyType = bodyType;
         return this;
     }
 
-    public PlayerFormPhase GetPhase() {
+    public PlayerFormPhase getPhase() {
         return Phase;
     }
-    public PlayerFormBase SetPhase(PlayerFormPhase phase) {
+    public PlayerFormBase setPhase(PlayerFormPhase phase) {
         Phase = phase;
         return this;
     }
@@ -92,7 +92,15 @@ public class PlayerFormBase {
         return this;
     }
 
-    public void SetGroup(PlayerFormGroup group, int formIndex) {
+    public PlayerFormGroup getGroup() {
+        return Group;
+    }
+
+    public int getIndex() {
+        return FormIndex;
+    }
+
+    public void setGroup(PlayerFormGroup group, int formIndex) {
         if (Group != null) {
             throw new IllegalArgumentException("Group already set");
         }
@@ -101,7 +109,7 @@ public class PlayerFormBase {
     }
 
     public Vec3d getCapeIdleLoc(AbstractClientPlayerEntity player) {
-        if (GetBodyType() == PlayerFormBodyType.FERAL) {
+        if (getBodyType() == PlayerFormBodyType.FERAL) {
             return new Vec3d(0.0f, -0.2f, 0.3f);
         }
         else {
@@ -110,7 +118,7 @@ public class PlayerFormBase {
     }
 
     public float getCapeBaseRotateAngle(AbstractClientPlayerEntity player) {
-        if (GetBodyType() == PlayerFormBodyType.FERAL) {
+        if (getBodyType() == PlayerFormBodyType.FERAL) {
             return 90.0f;
         }
         else {
@@ -119,6 +127,18 @@ public class PlayerFormBase {
     }
 
     public boolean NeedModifyXRotationAngle() {
-        return GetBodyType() == PlayerFormBodyType.FERAL;
+        return getBodyType() == PlayerFormBodyType.FERAL;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof PlayerFormBase) {
+            return ((PlayerFormBase)o).FormID.equals(FormID);
+        }
+        return false;
+    }
+
+    public String name() {
+        return FormID.toString();
     }
 }

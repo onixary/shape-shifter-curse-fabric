@@ -11,9 +11,8 @@ import net.minecraft.world.WorldAccess;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
-import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
@@ -24,7 +23,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.function.Consumer;
 
-import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.cursedMoonData;
 
 @Mixin(World.class)
 public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable {
@@ -159,7 +157,7 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
                 if (timeOfDay >= 6000L && timeOfDay < 6100L && !CursedMoon.midday_message_sent) {
                     // 在中午时段发送预警消息
                     for (ServerPlayerEntity player : world.getPlayers()) {
-                        if (FormAbilityManager.getForm(player) != PlayerForms.ORIGINAL_BEFORE_ENABLE) {
+                        if (!FormAbilityManager.getForm(player).equals(RegPlayerForms.ORIGINAL_BEFORE_ENABLE)) {
                             if(player.getWorld().getRegistryKey() == World.OVERWORLD){
                                 player.sendMessage(Text.translatable("info.shape-shifter-curse.before_cursed_moon").formatted(Formatting.DARK_PURPLE));
                             }
@@ -229,7 +227,7 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
             CursedMoon.midday_message_sent = true;
 
             // 处于中午时的逻辑
-            if(FormAbilityManager.getForm(player) != PlayerForms.ORIGINAL_BEFORE_ENABLE){
+            if(FormAbilityManager.getForm(player).equals(RegPlayerForms.ORIGINAL_BEFORE_ENABLE)){
                 if(player.getWorld().getRegistryKey() != World.OVERWORLD){
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.before_cursed_moon_nether").formatted(Formatting.LIGHT_PURPLE));
                 }

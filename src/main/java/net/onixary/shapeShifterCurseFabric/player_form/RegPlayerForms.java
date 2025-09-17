@@ -21,49 +21,49 @@ public class RegPlayerForms {
     public static PlayerFormBase ORIGINAL_BEFORE_ENABLE = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_original_before_enable")));
     public static PlayerFormBase ORIGINAL_SHIFTER = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_original_shifter")));
     // Bat
-    public static PlayerFormBase BAT_0 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_bat_0")).SetPhase(PlayerFormPhase.PHASE_0));
-    public static PlayerFormBase BAT_1 = registerPlayerForm(new Form_Bat1(new Identifier(Origins.MODID, "form_bat_1")).SetPhase(PlayerFormPhase.PHASE_1));
-    public static PlayerFormBase BAT_2 = registerPlayerForm(new Form_Bat2(new Identifier(Origins.MODID, "form_bat_2")).SetPhase(PlayerFormPhase.PHASE_2).SetHasSlowFall(true).SetOverrideHandAnim(true));
-    public static PlayerFormBase BAT_3 = registerPlayerForm(new Form_Bat3(new Identifier(Origins.MODID, "form_bat_3")).SetPhase(PlayerFormPhase.PHASE_3).SetHasSlowFall(true).SetOverrideHandAnim(true));
+    public static PlayerFormBase BAT_0 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_bat_0")).setPhase(PlayerFormPhase.PHASE_0));
+    public static PlayerFormBase BAT_1 = registerPlayerForm(new Form_Bat1(new Identifier(Origins.MODID, "form_bat_1")).setPhase(PlayerFormPhase.PHASE_1));
+    public static PlayerFormBase BAT_2 = registerPlayerForm(new Form_Bat2(new Identifier(Origins.MODID, "form_bat_2")).setPhase(PlayerFormPhase.PHASE_2).SetHasSlowFall(true).SetOverrideHandAnim(true));
+    public static PlayerFormBase BAT_3 = registerPlayerForm(new Form_Bat3(new Identifier(Origins.MODID, "form_bat_3")).setPhase(PlayerFormPhase.PHASE_3).SetHasSlowFall(true).SetOverrideHandAnim(true));
     // Axolotl
-    public static PlayerFormBase AXOLOTL_0 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_axolotl_0")).SetPhase(PlayerFormPhase.PHASE_0));
-    public static PlayerFormBase AXOLOTL_1 = registerPlayerForm(new Form_Axolotl1(new Identifier(Origins.MODID, "form_axolotl_1")).SetPhase(PlayerFormPhase.PHASE_1));
-    public static PlayerFormBase AXOLOTL_2 = registerPlayerForm(new Form_Axolotl2(new Identifier(Origins.MODID, "form_axolotl_2")).SetPhase(PlayerFormPhase.PHASE_2));
-    public static PlayerFormBase AXOLOTL_3 = registerPlayerForm(new Form_Axolotl3(new Identifier(Origins.MODID, "form_axolotl_3")).SetPhase(PlayerFormPhase.PHASE_3));
+    public static PlayerFormBase AXOLOTL_0 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_axolotl_0")).setPhase(PlayerFormPhase.PHASE_0));
+    public static PlayerFormBase AXOLOTL_1 = registerPlayerForm(new Form_Axolotl1(new Identifier(Origins.MODID, "form_axolotl_1")).setPhase(PlayerFormPhase.PHASE_1));
+    public static PlayerFormBase AXOLOTL_2 = registerPlayerForm(new Form_Axolotl2(new Identifier(Origins.MODID, "form_axolotl_2")).setPhase(PlayerFormPhase.PHASE_2));
+    public static PlayerFormBase AXOLOTL_3 = registerPlayerForm(new Form_Axolotl3(new Identifier(Origins.MODID, "form_axolotl_3")).setPhase(PlayerFormPhase.PHASE_3));
     // Ocelot
-    public static PlayerFormBase OCELOT_0 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_ocelot_0")).SetPhase(PlayerFormPhase.PHASE_0));
-    public static PlayerFormBase OCELOT_1 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_ocelot_1")).SetPhase(PlayerFormPhase.PHASE_1));
-    public static PlayerFormBase OCELOT_2 = registerPlayerForm(new Form_Ocelot2(new Identifier(Origins.MODID, "form_ocelot_2")).SetPhase(PlayerFormPhase.PHASE_2).SetCanSneakRush(true).SetCanRushJump(true));
-    public static PlayerFormBase OCELOT_3 = registerPlayerForm(new Form_Ocelot3(new Identifier(Origins.MODID, "form_ocelot_3")).SetPhase(PlayerFormPhase.PHASE_3).SetCanSneakRush(true));
+    public static PlayerFormBase OCELOT_0 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_ocelot_0")).setPhase(PlayerFormPhase.PHASE_0));
+    public static PlayerFormBase OCELOT_1 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_ocelot_1")).setPhase(PlayerFormPhase.PHASE_1));
+    public static PlayerFormBase OCELOT_2 = registerPlayerForm(new Form_Ocelot2(new Identifier(Origins.MODID, "form_ocelot_2")).setPhase(PlayerFormPhase.PHASE_2).SetCanSneakRush(true).SetCanRushJump(true));
+    public static PlayerFormBase OCELOT_3 = registerPlayerForm(new Form_Ocelot3(new Identifier(Origins.MODID, "form_ocelot_3")).setPhase(PlayerFormPhase.PHASE_3).SetCanSneakRush(true));
     // FamiliarFox
-    public static PlayerFormBase FAMILIAR_FOX_0 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_familiar_fox_0")).SetPhase(PlayerFormPhase.PHASE_0));
-    public static PlayerFormBase FAMILIAR_FOX_1 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_familiar_fox_1")).SetPhase(PlayerFormPhase.PHASE_1));
-    public static PlayerFormBase FAMILIAR_FOX_2 = registerPlayerForm(new Form_Fox2(new Identifier(Origins.MODID, "form_familiar_fox_2")).SetPhase(PlayerFormPhase.PHASE_2));
-    public static PlayerFormBase FAMILIAR_FOX_3 = registerPlayerForm(new Form_FeralBase(new Identifier(Origins.MODID, "form_familiar_fox_3")).SetPhase(PlayerFormPhase.PHASE_3));
+    public static PlayerFormBase FAMILIAR_FOX_0 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_familiar_fox_0")).setPhase(PlayerFormPhase.PHASE_0));
+    public static PlayerFormBase FAMILIAR_FOX_1 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_familiar_fox_1")).setPhase(PlayerFormPhase.PHASE_1));
+    public static PlayerFormBase FAMILIAR_FOX_2 = registerPlayerForm(new Form_Fox2(new Identifier(Origins.MODID, "form_familiar_fox_2")).setPhase(PlayerFormPhase.PHASE_2));
+    public static PlayerFormBase FAMILIAR_FOX_3 = registerPlayerForm(new Form_FeralBase(new Identifier(Origins.MODID, "form_familiar_fox_3")).setPhase(PlayerFormPhase.PHASE_3));
     // SnowFox
-    public static PlayerFormBase SNOW_FOX_0 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_snow_fox_0")).SetPhase(PlayerFormPhase.PHASE_0));
-    public static PlayerFormBase SNOW_FOX_1 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_snow_fox_1")).SetPhase(PlayerFormPhase.PHASE_1));
-    public static PlayerFormBase SNOW_FOX_2 = registerPlayerForm(new Form_Fox2(new Identifier(Origins.MODID, "form_snow_fox_2")).SetPhase(PlayerFormPhase.PHASE_2));
-    public static PlayerFormBase SNOW_FOX_3 = registerPlayerForm(new Form_SnowFox3(new Identifier(Origins.MODID, "form_snow_fox_3")).SetPhase(PlayerFormPhase.PHASE_3));
+    public static PlayerFormBase SNOW_FOX_0 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_snow_fox_0")).setPhase(PlayerFormPhase.PHASE_0));
+    public static PlayerFormBase SNOW_FOX_1 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_snow_fox_1")).setPhase(PlayerFormPhase.PHASE_1));
+    public static PlayerFormBase SNOW_FOX_2 = registerPlayerForm(new Form_Fox2(new Identifier(Origins.MODID, "form_snow_fox_2")).setPhase(PlayerFormPhase.PHASE_2));
+    public static PlayerFormBase SNOW_FOX_3 = registerPlayerForm(new Form_SnowFox3(new Identifier(Origins.MODID, "form_snow_fox_3")).setPhase(PlayerFormPhase.PHASE_3));
     // ALLAY_SP
-    public static PlayerFormBase ALLAY_SP = registerPlayerForm(new Form_Allay(new Identifier(Origins.MODID, "form_allay_sp")).SetPhase(PlayerFormPhase.PHASE_SP));
+    public static PlayerFormBase ALLAY_SP = registerPlayerForm(new Form_Allay(new Identifier(Origins.MODID, "form_allay_sp")).setPhase(PlayerFormPhase.PHASE_SP));
     // FERAL_CAT_SP
-    public static PlayerFormBase FERAL_CAT_SP = registerPlayerForm(new Form_FeralBase(new Identifier(Origins.MODID, "form_feral_cat_sp")).SetPhase(PlayerFormPhase.PHASE_SP));
+    public static PlayerFormBase FERAL_CAT_SP = registerPlayerForm(new Form_FeralBase(new Identifier(Origins.MODID, "form_feral_cat_sp")).setPhase(PlayerFormPhase.PHASE_SP));
 
     // Custom Form
-    public static PlayerFormBase ALPHA_0 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_alpha_0")).SetPhase(PlayerFormPhase.PHASE_0));
-    public static PlayerFormBase ALPHA_1 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_alpha_1")).SetPhase(PlayerFormPhase.PHASE_1));
-    public static PlayerFormBase ALPHA_2 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_alpha_2")).SetPhase(PlayerFormPhase.PHASE_2));
-    public static PlayerFormBase BETA_0 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_beta_0")).SetPhase(PlayerFormPhase.PHASE_0));
-    public static PlayerFormBase BETA_1 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_beta_1")).SetPhase(PlayerFormPhase.PHASE_1));
-    public static PlayerFormBase BETA_2 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_beta_2")).SetPhase(PlayerFormPhase.PHASE_2));
-    public static PlayerFormBase GAMMA_0 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_gamma_0")).SetPhase(PlayerFormPhase.PHASE_0));
-    public static PlayerFormBase GAMMA_1 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_gamma_2")).SetPhase(PlayerFormPhase.PHASE_1));
-    public static PlayerFormBase GAMMA_2 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_gamma_2")).SetPhase(PlayerFormPhase.PHASE_2));
-    public static PlayerFormBase OMEGA_SP = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_omega_sp")).SetPhase(PlayerFormPhase.PHASE_SP));
-    public static PlayerFormBase PSI_SP = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_psi_sp")).SetPhase(PlayerFormPhase.PHASE_SP));
-    public static PlayerFormBase CHI_SP = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_chi_sp")).SetPhase(PlayerFormPhase.PHASE_SP));
-    public static PlayerFormBase PHI_SP = registerPlayerForm(new Form_FeralBase(new Identifier(Origins.MODID, "form_phi_sp")).SetPhase(PlayerFormPhase.PHASE_SP));
+    public static PlayerFormBase ALPHA_0 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_alpha_0")).setPhase(PlayerFormPhase.PHASE_0));
+    public static PlayerFormBase ALPHA_1 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_alpha_1")).setPhase(PlayerFormPhase.PHASE_1));
+    public static PlayerFormBase ALPHA_2 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_alpha_2")).setPhase(PlayerFormPhase.PHASE_2));
+    public static PlayerFormBase BETA_0 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_beta_0")).setPhase(PlayerFormPhase.PHASE_0));
+    public static PlayerFormBase BETA_1 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_beta_1")).setPhase(PlayerFormPhase.PHASE_1));
+    public static PlayerFormBase BETA_2 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_beta_2")).setPhase(PlayerFormPhase.PHASE_2));
+    public static PlayerFormBase GAMMA_0 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_gamma_0")).setPhase(PlayerFormPhase.PHASE_0));
+    public static PlayerFormBase GAMMA_1 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_gamma_2")).setPhase(PlayerFormPhase.PHASE_1));
+    public static PlayerFormBase GAMMA_2 = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_gamma_2")).setPhase(PlayerFormPhase.PHASE_2));
+    public static PlayerFormBase OMEGA_SP = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_omega_sp")).setPhase(PlayerFormPhase.PHASE_SP));
+    public static PlayerFormBase PSI_SP = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_psi_sp")).setPhase(PlayerFormPhase.PHASE_SP));
+    public static PlayerFormBase CHI_SP = registerPlayerForm(new PlayerFormBase(new Identifier(Origins.MODID, "form_chi_sp")).setPhase(PlayerFormPhase.PHASE_SP));
+    public static PlayerFormBase PHI_SP = registerPlayerForm(new Form_FeralBase(new Identifier(Origins.MODID, "form_phi_sp")).setPhase(PlayerFormPhase.PHASE_SP));
 
     // Builtin PlayerFormGroups
     public static PlayerFormGroup ORIGINAL_FORM = registerPlayerFormGroup(new PlayerFormGroup(new Identifier(ShapeShifterCurseFabric.MOD_ID, "original_form")).addForm(ORIGINAL_BEFORE_ENABLE, -2));
@@ -92,5 +92,21 @@ public class RegPlayerForms {
 
     public static <T extends PlayerFormGroup> T registerPlayerFormGroup(T formGroup) {
         return Registry.register(playerFormGroups, formGroup.GroupID, formGroup);
+    }
+
+    public static PlayerFormBase getPlayerForm(Identifier id) {
+        return playerForms.get(id);
+    }
+
+    public static PlayerFormBase getPlayerForm(String id) {
+        return playerForms.get(Identifier.tryParse(id));
+    }
+
+    public static PlayerFormGroup getPlayerFormGroup(Identifier id) {
+        return playerFormGroups.get(id);
+    }
+
+    public static PlayerFormGroup getPlayerFormGroup(String id) {
+        return playerFormGroups.get(Identifier.tryParse(id));
     }
 }

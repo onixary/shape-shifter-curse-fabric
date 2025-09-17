@@ -32,7 +32,8 @@ import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.*;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -104,15 +105,15 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
     public boolean hasSlowFall = false;
     private int tickCounter = 0;
 
-    private PlayerForms curForm;
+    private PlayerFormBase curForm;
     KeyframeAnimation currentAnimation = null;
     boolean overrideHandAnim = false;
     AnimationHolder animToPlay = null;
     boolean isAttackAnim = false;
     int continueSwingAnimCounter = 0;
 
-    PlayerForms transformCurrentForm;
-    PlayerForms transformToForm;
+    PlayerFormBase transformCurrentForm;
+    PlayerFormBase transformToForm;
 
     @Override
     public void tick() {
@@ -146,7 +147,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
         if(!isOnGround() && lastOnGround && (Math.abs(getVelocity().z) > 0.15 || Math.abs(getVelocity().x) > 0.15)){
             // 特殊处理Ocelot的rush jump
-            if(curForm == PlayerForms.OCELOT_2){
+            if(curForm.GetCanRushJump()){
                 currentState = PlayerAnimState.ANIM_RUSH_JUMP;
             }
         }
@@ -255,7 +256,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                     if (isWalking || turnDelta != 0)
                     {
                         // 特殊处理Ocelot的sneak rush
-                        if(curForm == PlayerForms.OCELOT_2 || curForm == PlayerForms.OCELOT_3){
+                        if(curForm.GetCanSneakRush()){
                             if(this.getHungerManager().getFoodLevel() >= 6){
                                 currentState = PlayerAnimState.ANIM_SNEAK_RUSH;
                             }
@@ -391,8 +392,8 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
             // 尝试解析形态名称为 PlayerForms 枚举
             try {
-                transformCurrentForm = fromFormName != null ? PlayerForms.valueOf(fromFormName) : null;
-                transformToForm = toFormName != null ? PlayerForms.valueOf(toFormName) : null;
+                transformCurrentForm = fromFormName != null ? RegPlayerForms.getPlayerForm(fromFormName) : null;
+                transformToForm = toFormName != null ? RegPlayerForms.getPlayerForm(toFormName) : null;
             } catch (IllegalArgumentException e) {
                 // 如果解析失败，使用当前形态作为 fallback
                 transformCurrentForm = curForm;
@@ -406,8 +407,8 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
             // 检查是否刚刚结束变身，如果是则强制刷新当前形态
             if (previousState == PlayerAnimState.ANIM_ON_TRANSFORM) {
                 // 强制重新获取当前形态，确保使用最新的数据
-                PlayerForms latestForm = RegPlayerFormComponent.PLAYER_FORM.get(this).getCurrentForm();
-                if (latestForm != curForm) {
+                PlayerFormBase latestForm = RegPlayerFormComponent.PLAYER_FORM.get(this).getCurrentForm();
+                if (!latestForm.equals(curForm)) {
                     curForm = latestForm;
                     ShapeShifterCurseFabric.LOGGER.info("Animation system updated curForm after transform: " + curForm);
                 }
@@ -429,97 +430,9 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
             animToPlay = AnimationTransform.getFormAnimToPlay(transformCurrentForm, transformToForm);
         }
         else{
-            switch (curForm) {
-                case BAT_1:
-                    animToPlay = AnimationPlayerBat1.getFormAnimToPlay(currentState);
-                    hasSlowFall = false;
-                    overrideHandAnim = false;
-                    break;
-                case BAT_2:
-                    animToPlay = AnimationPlayerBat2.getFormAnimToPlay(currentState);
-                    hasSlowFall = true;
-                    overrideHandAnim = true;
-                    break;
-
-                case BAT_3:
-                    animToPlay = AnimationPlayerBat3.getFormAnimToPlay(currentState);
-                    hasSlowFall = true;
-                    overrideHandAnim = true;
-                    break;
-
-                case AXOLOTL_1:
-                    animToPlay = AnimationPlayerAxolotl1.getFormAnimToPlay(currentState);
-                    hasSlowFall = false;
-                    overrideHandAnim = false;
-                    break;
-
-                case AXOLOTL_2:
-                    animToPlay = AnimationPlayerAxolotl2.getFormAnimToPlay(currentState);
-                    hasSlowFall = false;
-                    overrideHandAnim = false;
-                    break;
-
-                case AXOLOTL_3:
-                    animToPlay = AnimationPlayerAxolotl3.getFormAnimToPlay(currentState);
-                    hasSlowFall = false;
-                    overrideHandAnim = false;
-                    break;
-
-                case OCELOT_2:
-                    animToPlay = AnimationPlayerOcelot2.getFormAnimToPlay(currentState);
-                    hasSlowFall = false;
-                    overrideHandAnim = false;
-                    break;
-
-                case OCELOT_3:
-                    animToPlay = AnimationPlayerOcelot3.getFormAnimToPlay(currentState);
-                    hasSlowFall = false;
-                    overrideHandAnim = false;
-                    break;
-
-                case ALLAY_SP:
-                    animToPlay = AnimationPlayerAllaySP.getFormAnimToPlay(currentState);
-                    hasSlowFall = true;
-                    overrideHandAnim = true;
-                    break;
-
-                case FERAL_CAT_SP:
-                    animToPlay = AnimationPlayerFeralCatSP.getFormAnimToPlay(currentState);
-                    hasSlowFall = false;
-                    overrideHandAnim = true;
-                    break;
-
-                case PHI_SP:
-                    animToPlay = AnimationPlayerPhiSP.getFormAnimToPlay(currentState);
-                    hasSlowFall = false;
-                    overrideHandAnim = true;
-                    break;
-
-                case FAMILIAR_FOX_2:
-                    animToPlay = AnimationPlayerFamiliarFox2.getFormAnimToPlay(currentState);
-                    hasSlowFall = false;
-                    overrideHandAnim = false;
-                    break;
-
-                case FAMILIAR_FOX_3:
-                    animToPlay = AnimationPlayerFamiliarFox3.getFormAnimToPlay(currentState);
-                    hasSlowFall = false;
-                    overrideHandAnim = false;
-                    break;
-
-                case SNOW_FOX_2:
-                    animToPlay = AnimationPlayerSnowFox2.getFormAnimToPlay(currentState);
-                    hasSlowFall = false;
-                    overrideHandAnim = false;
-                    break;
-                case SNOW_FOX_3:
-                    animToPlay = AnimationPlayerSnowFox3.getFormAnimToPlay(currentState);
-                    hasSlowFall = false;
-                    overrideHandAnim = false;
-                    break;
-                default:
-                    break;
-            }
+            animToPlay = curForm.Anim_getFormAnimToPlay(currentState);
+            hasSlowFall = curForm.GetHasSlowFall();
+            overrideHandAnim = curForm.GetOverrideHandAnim();
         }
 
 

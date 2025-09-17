@@ -13,7 +13,7 @@ import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID
 public class Form_FeralBase extends PlayerFormBase {
     public Form_FeralBase(Identifier formID) {
         super(formID);
-        this.SetBodyType(PlayerFormBodyType.FERAL);
+        this.setBodyType(PlayerFormBodyType.FERAL);
     }
 
     private static AnimationHolder anim_idle = AnimationHolder.EMPTY;

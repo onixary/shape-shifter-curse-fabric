@@ -6,7 +6,9 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 
@@ -35,13 +37,13 @@ public class TStatusApplier {
     }
 
     private static void applyStatusByChance(float chance, PlayerEntity player, BaseTransformativeStatusEffect regStatusEffect) {
-        PlayerForms curToForm = Objects.requireNonNull(player.getAttached(EFFECT_ATTACHMENT)).currentToForm;
+        PlayerFormBase curToForm = Objects.requireNonNull(player.getAttached(EFFECT_ATTACHMENT)).currentToForm;
         ShapeShifterCurseFabric.LOGGER.info("current dest form: " + curToForm + " when applyStatusByChance");
         if(player.getAttached(EFFECT_ATTACHMENT) == null){
             ShapeShifterCurseFabric.LOGGER.info("attach is null when applyStatusByChance");
         }
         // 只有不同种类的效果才会互相覆盖
-        if (Math.random() < chance && curToForm != regStatusEffect.getToForm() && FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_SHIFTER) {
+        if (Math.random() < chance && !curToForm.equals(regStatusEffect.getToForm()) && FormAbilityManager.getForm(player).equals(RegPlayerForms.ORIGINAL_SHIFTER)) {
             ShapeShifterCurseFabric.LOGGER.info("TStatusApplier applyStatusByChance");
             EffectManager.overrideEffect(player, regStatusEffect);
         }

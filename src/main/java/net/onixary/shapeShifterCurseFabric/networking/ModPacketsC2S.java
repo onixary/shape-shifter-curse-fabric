@@ -15,6 +15,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnSprintingToS
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
@@ -93,7 +94,7 @@ public class ModPacketsC2S {
             // 通过 UUID 获取玩家实例
             ServerPlayerEntity targetPlayer = minecraftServer.getPlayerManager().getPlayer(playerUuid);
             if (targetPlayer != null) {
-                TransformManager.handleDirectTransform(targetPlayer, PlayerForms.ORIGINAL_SHIFTER, false);
+                TransformManager.handleDirectTransform(targetPlayer, RegPlayerForms.ORIGINAL_SHIFTER, false);
                 // 触发自定义成就
                 ShapeShifterCurseFabric.ON_ENABLE_MOD.trigger(targetPlayer);
                 // info

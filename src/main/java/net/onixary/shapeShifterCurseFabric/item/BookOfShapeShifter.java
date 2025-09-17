@@ -12,7 +12,8 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,15 +26,15 @@ public class BookOfShapeShifter extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        PlayerForms currentForm = user.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+        PlayerFormBase currentForm = user.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
         if (world.isClient) {
             // 客户端逻辑：仅处理打开界面
-            if (currentForm == PlayerForms.ORIGINAL_BEFORE_ENABLE)
+            if (currentForm.equals(RegPlayerForms.ORIGINAL_BEFORE_ENABLE))
                 ShapeShifterCurseFabricClient.openStartBookScreen(user);
             else ShapeShifterCurseFabricClient.openBookScreen(user);
         } else {
             // 服务端逻辑：触发成就
-            if (currentForm != PlayerForms.ORIGINAL_BEFORE_ENABLE) {
+            if (!currentForm.equals(RegPlayerForms.ORIGINAL_BEFORE_ENABLE)) {
                 if (user instanceof ServerPlayerEntity serverPlayer) {
                     ShapeShifterCurseFabric.ON_OPEN_BOOK_OF_SHAPE_SHIFTER.trigger(serverPlayer);
                 }

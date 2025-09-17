@@ -56,8 +56,8 @@ public class FormAbilityManager {
         // 添加网络同步：通知客户端形态已变化
         if (!player.getWorld().isClient() && player instanceof ServerPlayerEntity serverPlayer) {
             try {
-                ModPacketsS2CServer.sendFormChange(serverPlayer, newForm.FormID.toString());
-                ShapeShifterCurseFabric.LOGGER.info("Sent form change notification to client: " + newForm.FormID.toString());
+                ModPacketsS2CServer.sendFormChange(serverPlayer, newForm.name());
+                ShapeShifterCurseFabric.LOGGER.info("Sent form change notification to client: " + newForm.name());
             } catch (Exception e) {
                 ShapeShifterCurseFabric.LOGGER.error("Failed to send form change notification: ", e);
             }

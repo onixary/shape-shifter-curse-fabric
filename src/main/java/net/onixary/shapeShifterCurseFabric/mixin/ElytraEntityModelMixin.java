@@ -5,12 +5,9 @@ import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.model.ElytraEntityModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegFormConfig;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,8 +15,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.feralItemCenter;
 
 @Mixin(ElytraEntityModel.class)
 public abstract class ElytraEntityModelMixin<T extends LivingEntity> {
@@ -65,8 +60,8 @@ public abstract class ElytraEntityModelMixin<T extends LivingEntity> {
             abstractClientPlayerEntity.elytraYaw += (n - abstractClientPlayerEntity.elytraYaw) * 0.1f;
             abstractClientPlayerEntity.elytraRoll += (l - abstractClientPlayerEntity.elytraRoll) * 0.1f;
 
-            PlayerForms curForm = RegPlayerFormComponent.PLAYER_FORM.get(entity).getCurrentForm();
-            boolean isFeral = RegFormConfig.getConfig(curForm).getBodyType() == PlayerFormBodyType.FERAL;
+            PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(entity).getCurrentForm();
+            boolean isFeral = curForm.getBodyType() == PlayerFormBodyType.FERAL;
             if(isFeral){
                 this.leftWing.pitch = k + (float)Math.toRadians(70.0);
                 this.leftWing.roll = l+ (float)Math.toRadians(70.0);

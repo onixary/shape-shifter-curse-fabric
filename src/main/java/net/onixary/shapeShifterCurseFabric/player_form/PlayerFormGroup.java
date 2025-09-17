@@ -2,6 +2,7 @@ package net.onixary.shapeShifterCurseFabric.player_form;
 
 import net.minecraft.util.Identifier;
 
+import javax.swing.text.html.Option;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -16,7 +17,7 @@ public class PlayerFormGroup {
 
     public PlayerFormGroup addForm(PlayerFormBase form, int Index) {
         Forms.put(Index, form);
-        form.SetGroup(this, Index);
+        form.setGroup(this, Index);
         return this;
     }
 
@@ -25,16 +26,28 @@ public class PlayerFormGroup {
     }
 
     public Optional<Integer> getFormIndex(PlayerFormBase form) {
+        return getFormIndex(form.FormID);
+    }
+
+    public Optional<Integer> getFormIndex(Identifier formID) {
         for (Map.Entry<Integer, PlayerFormBase> entry : Forms.entrySet()) {
-            if (entry.getValue().FormID == form.FormID) {
+            if (entry.getValue().FormID.equals(formID)) {
                 return Optional.of(entry.getKey());
             }
         }
         return Optional.empty();
     }
 
+    public boolean hasForm(Identifier formID) {
+        return getFormIndex(formID).isPresent();
+    }
+
     public boolean hasForm(PlayerFormBase form) {
         return getFormIndex(form).isPresent();
+    }
+
+    public boolean hasForm(int Index) {
+        return Forms.containsKey(Index);
     }
 
     public PlayerFormBase getNextForm(PlayerFormBase form) {

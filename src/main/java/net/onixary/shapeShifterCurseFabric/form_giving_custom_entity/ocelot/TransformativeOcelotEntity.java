@@ -13,7 +13,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.TStatusApplier;
 
@@ -85,8 +86,8 @@ public class TransformativeOcelotEntity extends OcelotEntity {
     public boolean tryAttack(Entity target) {
         // 只对玩家造成伤害
         if(target instanceof PlayerEntity) {
-            PlayerForms currentForm = target.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
-            if (currentForm == PlayerForms.ORIGINAL_SHIFTER) {
+            PlayerFormBase currentForm = target.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+            if (currentForm.equals(RegPlayerForms.ORIGINAL_SHIFTER)) {
                 boolean attacked = target.damage(this.getDamageSources().mobAttack(this), StaticParams.CUSTOM_MOB_DEFAULT_DAMAGE);
                 if (attacked) {
                     this.applyDamageEffects(this, target);

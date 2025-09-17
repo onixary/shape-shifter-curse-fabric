@@ -25,8 +25,8 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     public void readFromNbt(NbtCompound nbtCompound) {
         // 读取状态枚举
         try {
-            this.currentForm = RegPlayerForms.playerForms.get(Identifier.tryParse(nbtCompound.getString("currentForm")));
-            this.previousForm = RegPlayerForms.playerForms.get(Identifier.tryParse(nbtCompound.getString("previousForm")));
+            this.currentForm = RegPlayerForms.getPlayerForm(nbtCompound.getString("currentForm"));
+            this.previousForm = RegPlayerForms.getPlayerForm(nbtCompound.getString("previousForm"));
             this.isByCursedMoon = nbtCompound.getBoolean("isByCursedMoon");
             this.isRegressedFromFinal = nbtCompound.getBoolean("isRegressedFromFinal");
             this.isByCure = nbtCompound.getBoolean("isByCure");
@@ -49,8 +49,8 @@ public class PlayerFormComponent implements AutoSyncedComponent {
 
     @Override
     public void writeToNbt(NbtCompound nbtCompound) {
-        nbtCompound.putString("currentForm", this.currentForm.FormID.toString());
-        nbtCompound.putString("previousForm", this.previousForm.FormID.toString());
+        nbtCompound.putString("currentForm", this.currentForm.name());
+        nbtCompound.putString("previousForm", this.previousForm.name());
         nbtCompound.putBoolean("isByCursedMoon", this.isByCursedMoon);
         nbtCompound.putBoolean("isRegressedFromFinal", this.isRegressedFromFinal);
         nbtCompound.putBoolean("isByCure", this.isByCure);

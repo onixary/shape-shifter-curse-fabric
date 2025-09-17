@@ -2,14 +2,14 @@ package net.onixary.shapeShifterCurseFabric.player_form.transform;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.item.RegCustomItem;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormGroup;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
@@ -29,10 +29,10 @@ public class TransformRelatedItems {
     public static void OnUseCure(PlayerEntity player) {
         // 如果不是最终阶段，则回退一个阶段
         // If not the final stage, revert one stage
-        PlayerForms currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+        PlayerFormBase currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
         int currentFormIndex = currentForm.getIndex();
-        String currentFormGroup = currentForm.getGroup();
-        PlayerForms toForm = null;
+        PlayerFormGroup currentFormGroup = currentForm.getGroup();
+        PlayerFormBase toForm = null;
         switch (currentFormIndex) {
             case -2:
                 // 无用
@@ -44,14 +44,14 @@ public class TransformRelatedItems {
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_used_cure").formatted(Formatting.YELLOW));
                 break;
             case 0:
-                toForm = PlayerForms.ORIGINAL_SHIFTER;
+                toForm = RegPlayerForms.ORIGINAL_SHIFTER;
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure_0").formatted(Formatting.YELLOW));
                 // 触发自定义成就
                 // Trigger custom achievement
                 ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger((ServerPlayerEntity) player);
                 break;
             case 1:
-                toForm = PlayerForms.getFormsByGroup(currentFormGroup)[0];
+                toForm = currentFormGroup.getForm(0);
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure").formatted(Formatting.YELLOW));
                 // 触发自定义成就
                 // Trigger custom achievement
@@ -70,7 +70,7 @@ public class TransformRelatedItems {
             case 5:
                 // SP form可以随时被治愈
                 // SP form can be cured at any time
-                toForm = PlayerForms.ORIGINAL_SHIFTER;
+                toForm = RegPlayerForms.ORIGINAL_SHIFTER;
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure_0").formatted(Formatting.YELLOW));
                 break;
             default:
@@ -85,10 +85,10 @@ public class TransformRelatedItems {
 
     public static void OnUseCureFinal(PlayerEntity player) {
         // 可以回退到最初阶段
-        PlayerForms currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+        PlayerFormBase currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
         int currentFormIndex = currentForm.getIndex();
-        String currentFormGroup = currentForm.getGroup();
-        PlayerForms toForm = null;
+        PlayerFormGroup currentFormGroup = currentForm.getGroup();
+        PlayerFormBase toForm = null;
         switch (currentFormIndex) {
             case -2:
                 // 无用
@@ -100,21 +100,21 @@ public class TransformRelatedItems {
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_used_cure_final").formatted(Formatting.YELLOW));
                 break;
             case 0:
-                toForm = PlayerForms.ORIGINAL_SHIFTER;
+                toForm = RegPlayerForms.ORIGINAL_SHIFTER;
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure_final").formatted(Formatting.YELLOW));
                 // 触发自定义成就
                 // Trigger custom achievement
                 ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger((ServerPlayerEntity) player);
                 break;
             case 1:
-                toForm = PlayerForms.ORIGINAL_SHIFTER;
+                toForm = RegPlayerForms.ORIGINAL_SHIFTER;
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure_final").formatted(Formatting.YELLOW));
                 // 触发自定义成就
                 // Trigger custom achievement
                 ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger((ServerPlayerEntity) player);
                 break;
             case 2:
-                toForm = PlayerForms.getFormsByGroup(currentFormGroup)[1];
+                toForm = currentFormGroup.getForm(1);
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.max_form_used_cure_final").formatted(Formatting.YELLOW));
                 // 触发自定义成就
                 // Trigger custom achievement
@@ -129,7 +129,7 @@ public class TransformRelatedItems {
             case 5:
                 // SP form可以随时被治愈
                 // SP form can be cured at any time
-                toForm = PlayerForms.ORIGINAL_SHIFTER;
+                toForm = RegPlayerForms.ORIGINAL_SHIFTER;
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure_0").formatted(Formatting.YELLOW));
                 break;
             default:
@@ -145,10 +145,10 @@ public class TransformRelatedItems {
     public static void OnUseCatalyst(PlayerEntity player) {
         // 在origin power中处理instinct相关逻辑，这里只显示提示与特殊逻辑
         // Instinct-related logic is handled in origin power, here only shows prompt and special logic
-        PlayerForms currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+        PlayerFormBase currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
         int currentFormIndex = currentForm.getIndex();
-        String currentFormGroup = currentForm.getGroup();
-        PlayerForms toForm = null;
+        PlayerFormGroup currentFormGroup = currentForm.getGroup();
+        PlayerFormBase toForm = null;
         switch (currentFormIndex) {
             case -2:
                 break;
@@ -192,10 +192,10 @@ public class TransformRelatedItems {
     public static void OnUsePowerfulCatalyst(PlayerEntity player) {
         // 在origin power中处理instinct相关逻辑，这里只显示提示与特殊逻辑
         // Instinct-related logic is handled in origin power, here only shows hint text and special logic
-        PlayerForms currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+        PlayerFormBase currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
         int currentFormIndex = currentForm.getIndex();
-        String currentFormGroup = currentForm.getGroup();
-        PlayerForms toForm = null;
+        PlayerFormGroup currentFormGroup = currentForm.getGroup();
+        PlayerFormBase toForm = null;
         switch (currentFormIndex) {
             case -2:
                 // 无用
@@ -206,10 +206,8 @@ public class TransformRelatedItems {
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.form_used_powerful_catalyst_failed").formatted(Formatting.YELLOW));
                 break;
             case 2:
-                if (PlayerForms.getFormsByGroup(currentFormGroup).length > 3) {
-                    toForm = PlayerForms.getFormsByGroup(currentFormGroup)[3];
-                } else {
-                    toForm = null;
+                if (currentFormGroup.hasForm(3)) {
+                    toForm = currentFormGroup.getForm(3);
                 }
                 if(toForm != null){
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.max_form_used_powerful_catalyst").formatted(Formatting.YELLOW));
