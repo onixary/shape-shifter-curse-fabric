@@ -132,7 +132,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         }
 
         if(!isOnGround() && lastOnGround && (Math.abs(getVelocity().z) > 0.15 || Math.abs(getVelocity().x) > 0.15)){
-            // 特殊处理Ocelot的rush jump
+            // rush jump
             if(curForm.GetCanRushJump()){
                 currentState = PlayerAnimState.ANIM_RUSH_JUMP;
             }

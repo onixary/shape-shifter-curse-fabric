@@ -31,7 +31,8 @@
     "CustomWaterBreathingMixin$CanBreatheInWater",
     "CustomWaterBreathingMixin$UpdateAir",
     "EntitySlipperinessMixin",
-    "ServerPlayerEntityForceInputMixin"
+    "ServerPlayerEntityForceInputMixin",
+    "PlayerEntitySprintSwimmingMixin"
   ],
   "client": [
     "IEntityRenderDispatcherAccessor",

@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Environment(EnvType.CLIENT)
-// 将 value 修改为你的 GeoRenderer 实现类，例如 FurRenderer.class
-// 同时，由于 GeoRenderer 是一个接口，你的 Mixin 目标也应该是一个具体的类
+// 基于RenderLayer与自定义Core Shader的方法在光影环境下无法使用
+// 这是不可接受的。弃用这一方法
 @Mixin(value = GeoRenderer.class, remap = false)
 public abstract class CustomFurColorMixin <T extends GeoAnimatable> implements GeoRenderer<T> {
 
@@ -25,14 +25,11 @@ public abstract class CustomFurColorMixin <T extends GeoAnimatable> implements G
             ordinal = 0
     )
     private RenderLayer modifyRenderLayer(RenderLayer originalLayer, MatrixStack poseStack, T animatable) {
-        // 检查当前渲染的实体是否是我们想要修改的目标
         if (animatable instanceof OriginFurAnimatable fur) {
 
             var texture = this.getTextureLocation(animatable);
             return FurGradientRenderLayer.furGradientRemap.getRenderLayer(originalLayer);
         }
-
-        // 如果不是我们的目标实体，则返回原始的 RenderLayer，不做任何修改
         return originalLayer;
     }
 }

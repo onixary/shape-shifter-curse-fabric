@@ -23,6 +23,7 @@ public class Form_Axolotl3 extends PlayerFormBase {
     private static AnimationHolder anim_crawling_attack_once = AnimationHolder.EMPTY;
     private static AnimationHolder anim_crawling_tool_swing = AnimationHolder.EMPTY;
     private static AnimationHolder anim_crawling_jump = AnimationHolder.EMPTY;
+    private static AnimationHolder anim_rush_jump = AnimationHolder.EMPTY;
 
 
     public AnimationHolder Anim_getFormAnimToPlay(PlayerAnimState currentState) {
@@ -34,6 +35,8 @@ public class Form_Axolotl3 extends PlayerFormBase {
                 return anim_crawling_jump;
             case ANIM_SNEAK_FALL:
                 return anim_crawling_idle;
+            case ANIM_RUSH_JUMP:
+                return anim_rush_jump;
 
             case ANIM_WALK:
                 return anim_walking;
@@ -76,5 +79,6 @@ public class Form_Axolotl3 extends PlayerFormBase {
         anim_running = new AnimationHolder(new Identifier(MOD_ID, "axolotl_3_run"), true);
         anim_jump = new AnimationHolder(new Identifier(MOD_ID, "axolotl_3_jump"), true);
         anim_idle = new AnimationHolder(new Identifier(MOD_ID, "axolotl_3_idle"), true);
+        anim_rush_jump = new AnimationHolder(new Identifier(MOD_ID, "axolotl_3_rush_jump"), true, 1, 10);
     }
 }

@@ -42,7 +42,7 @@ public class AdditionalPowers {
         register(ModifyStepHeightPower.createFactory());
         register(KeepSneakingPower.createFactory());
         register(DelayAttributePower.createFactory());
-
+        register(AlwaysSprintSwimmingPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

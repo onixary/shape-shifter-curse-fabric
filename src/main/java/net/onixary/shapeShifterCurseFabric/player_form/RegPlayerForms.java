@@ -31,7 +31,7 @@ public class RegPlayerForms {
     public static PlayerFormBase AXOLOTL_0 = registerPlayerForm(new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "axolotl_0")).setPhase(PlayerFormPhase.PHASE_0));
     public static PlayerFormBase AXOLOTL_1 = registerPlayerForm(new Form_Axolotl1(new Identifier(ShapeShifterCurseFabric.MOD_ID, "axolotl_1")).setPhase(PlayerFormPhase.PHASE_1));
     public static PlayerFormBase AXOLOTL_2 = registerPlayerForm(new Form_Axolotl2(new Identifier(ShapeShifterCurseFabric.MOD_ID, "axolotl_2")).setPhase(PlayerFormPhase.PHASE_2));
-    public static PlayerFormBase AXOLOTL_3 = registerPlayerForm(new Form_Axolotl3(new Identifier(ShapeShifterCurseFabric.MOD_ID, "axolotl_3")).setPhase(PlayerFormPhase.PHASE_3));
+    public static PlayerFormBase AXOLOTL_3 = registerPlayerForm(new Form_Axolotl3(new Identifier(ShapeShifterCurseFabric.MOD_ID, "axolotl_3")).setPhase(PlayerFormPhase.PHASE_3)).SetCanRushJump(true);
     // Ocelot
     public static PlayerFormBase OCELOT_0 = registerPlayerForm(new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "ocelot_0")).setPhase(PlayerFormPhase.PHASE_0));
     public static PlayerFormBase OCELOT_1 = registerPlayerForm(new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "ocelot_1")).setPhase(PlayerFormPhase.PHASE_1));
