@@ -45,8 +45,7 @@ public class TransformativeStatusPotion extends StatusEffect {
     {
         if (!target.getWorld().isClient() && target instanceof ServerPlayerEntity player) {
             PlayerFormBase curToForm = Objects.requireNonNull(player.getAttached(EFFECT_ATTACHMENT)).currentToForm;
-            if (curToForm == null){ curToForm = RegPlayerForms.NULL_FORM; }
-            if (!curToForm.equals(this.TransformativeStatusEffect.getToForm()) && FormAbilityManager.getForm(player).equals(RegPlayerForms.ORIGINAL_SHIFTER)){
+            if (!RegPlayerForms.IsPlayerFormEqual(curToForm,this.TransformativeStatusEffect.getToForm()) && FormAbilityManager.getForm(player).equals(RegPlayerForms.ORIGINAL_SHIFTER)){
                 EffectManager.overrideEffect(player, this.TransformativeStatusEffect);
             }
         }

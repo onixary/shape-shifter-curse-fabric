@@ -37,13 +37,12 @@ public class TStatusApplier {
 
     private static void applyStatusByChance(float chance, PlayerEntity player, BaseTransformativeStatusEffect regStatusEffect) {
         PlayerFormBase curToForm = Objects.requireNonNull(player.getAttached(EFFECT_ATTACHMENT)).currentToForm;
-        if (curToForm == null){ curToForm = RegPlayerForms.NULL_FORM; }
         ShapeShifterCurseFabric.LOGGER.info("current dest form: " + curToForm + " when applyStatusByChance");
         if(player.getAttached(EFFECT_ATTACHMENT) == null){
             ShapeShifterCurseFabric.LOGGER.info("attach is null when applyStatusByChance");
         }
         // 只有不同种类的效果才会互相覆盖
-        if (Math.random() < chance && !curToForm.equals(regStatusEffect.getToForm()) && FormAbilityManager.getForm(player).equals(RegPlayerForms.ORIGINAL_SHIFTER)) {
+        if (Math.random() < chance && !RegPlayerForms.IsPlayerFormEqual(curToForm,regStatusEffect.getToForm()) && FormAbilityManager.getForm(player).equals(RegPlayerForms.ORIGINAL_SHIFTER)) {
             ShapeShifterCurseFabric.LOGGER.info("TStatusApplier applyStatusByChance");
             EffectManager.overrideEffect(player, regStatusEffect);
         }
