@@ -81,7 +81,10 @@ public class ShapeShifterCurseCommand {
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
         PlayerFormBase form = FormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
-
+        if (form == null) {
+            commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
+            return 0;
+        }
         setFormDirectly(target, form);
 
         return 1;
@@ -93,7 +96,10 @@ public class ShapeShifterCurseCommand {
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
         PlayerFormBase form = FormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
-
+        if (form == null) {
+            commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
+            return 0;
+        }
         handleDirectTransform(target, form, false);
 
         return 1;
@@ -105,7 +111,10 @@ public class ShapeShifterCurseCommand {
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
         PlayerFormBase form = CustomFormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
-
+        if (form == null) {
+            commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
+            return 0;
+        }
         setFormDirectly(target, form);
 
         return 1;
@@ -117,7 +126,10 @@ public class ShapeShifterCurseCommand {
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
         PlayerFormBase form = CustomFormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
-
+        if (form == null) {
+            commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
+            return 0;
+        }
         handleDirectTransform(target, form, false);
 
         return 1;

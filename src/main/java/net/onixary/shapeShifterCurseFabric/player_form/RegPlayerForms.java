@@ -18,7 +18,6 @@ public class RegPlayerForms {
 
     // Builtin PlayerForms
     // 在Java中null不能使用equals方法
-    public static PlayerFormBase NULL_FORM = new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "null_form"));
     // Original
     public static PlayerFormBase ORIGINAL_BEFORE_ENABLE = registerPlayerForm(new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "original_before_enable")));
     public static PlayerFormBase ORIGINAL_SHIFTER = registerPlayerForm(new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "original_shifter")));
@@ -114,6 +113,27 @@ public class RegPlayerForms {
 
     public static PlayerFormBase getPlayerFormOrThrow(String id) {
         return getPlayerFormOrThrow(Identifier.tryParse(id));
+    }
+
+    public static PlayerFormBase getPlayerFormOrDefault(Identifier id, PlayerFormBase defaultForm) {
+        PlayerFormBase form = getPlayerForm(id);
+        if (form == null) {
+            return defaultForm;
+
+        }
+        return form;
+    }
+
+    public static PlayerFormBase getPlayerFormOrDefault(String id, PlayerFormBase defaultForm) {
+        return getPlayerFormOrDefault(Identifier.tryParse(id), defaultForm);
+    }
+
+    // 比较两个PlayerForm是否相等 支持null
+    public static Boolean IsPlayerFormEqual(PlayerFormBase form1, PlayerFormBase form2) {
+        if (form1 == null || form2 == null) {
+            return form1 == null && form2 == null;
+        }
+        return form1.equals(form2);
     }
 
     public static PlayerFormGroup getPlayerFormGroup(Identifier id) {
