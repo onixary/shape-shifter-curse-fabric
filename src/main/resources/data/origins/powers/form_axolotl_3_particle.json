@@ -1,16 +1,34 @@
 {
   "type": "origins:action_over_time",
   "entity_action": {
-    "type": "origins:spawn_particles",
-    "particle": "minecraft:falling_water",
-    "count": 8,
-    "speed": 0.0,
-    "force": true,
-    "spread": {
-      "x": 0.5,
-      "y": 0.5,
-      "z": 0.5
-    }
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:spawn_particles",
+        "particle": "minecraft:nautilus",
+        "count": 8,
+        "speed": 0.0,
+        "force": true,
+        "spread": {
+          "x": 0.5,
+          "y": 0.5,
+          "z": 0.5
+        }
+      },
+      {
+        "type": "origins:spawn_particles",
+        "particle": "minecraft:splash",
+        "count": 8,
+        "speed": 0.0,
+        "force": true,
+        "spread": {
+          "x": 0.5,
+          "y": 0.1,
+          "z": 0.5
+        }
+      }
+    ]
+
   },
   "interval": 5,
   "condition":{
