@@ -57,7 +57,10 @@ public class BookOfShapeShifterScreenV2_P2 extends Screen {
         // Size -> (106, 136) Pos -> (220, 24)
         this.addDrawableChild(BuildDetailScreenButton(309, 14, 8, 8, CodexData.getContentText(CodexData.ContentType.INSTINCTS, currentPlayer)));
         this.addDrawableChild(new TextWidget(BookPosX + 242 * BookScale, BookPosY + 10 * BookScale, 63 * BookScale, 12 * BookScale, CodexData.headerInstincts, textRenderer).setTextColor(HeaderTextColor));
-        MultilineTextWidget Instincts = new ScaleMultilineTextWidget(BookPosX + 220 * BookScale, BookPosY + 24 * BookScale, CodexData.getContentText(CodexData.ContentType.INSTINCTS, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(106 * BookScale).setTextColor(DefaultTextColor);
+        // 在 BookOfShapeShifterScreen 未上色
+        MultilineTextWidget InstinctsDesc = new ScaleMultilineTextWidget(BookPosX + 220 * BookScale, BookPosY + 24 * BookScale, CodexData.getDescText(CodexData.ContentType.INSTINCTS, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(106 * BookScale);
+        this.addDrawableChild(InstinctsDesc);
+        MultilineTextWidget Instincts = new ScaleMultilineTextWidget(BookPosX + 220 * BookScale, BookPosY + 24 * BookScale + InstinctsDesc.getHeight() + Math.round(9 * Scale), CodexData.getContentText(CodexData.ContentType.INSTINCTS, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(106 * BookScale).setTextColor(DefaultTextColor);
         this.addDrawableChild(Instincts);
         // 下一页按钮
         int NextPage_ButtonSizeX = 15 * BookScale;
