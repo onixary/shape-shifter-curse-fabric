@@ -155,7 +155,7 @@ public class PlayerEventHandler {
             CursedMoon.resetMoonEffect(player);
 
             // Set doDaylightCycle to true forced
-            server.getGameRules().get(GameRules.DO_DAYLIGHT_CYCLE).set(true, server);
+            //server.getGameRules().get(GameRules.DO_DAYLIGHT_CYCLE).set(true, server);
 
             // update team
             //PlayerTeamHandler.updatePlayerTeam(player);
