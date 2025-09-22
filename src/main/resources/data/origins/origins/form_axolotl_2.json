@@ -1,6 +1,6 @@
 {
 	"powers": [
-		"origins:no_render_arm_when_sneaking",
+		"origins:form_axolotl_2_no_render_arm",
 		"origins:form_axolotl_2_scale",
 
 		"origins:form_axolotl_2_water_breathing",
@@ -22,7 +22,7 @@
 		"origins:form_axolotl_0_new_puff_speed_down",
 		"origins:form_disable_head_armor",
 		"origins:carnivore",
-		"origins:crawling",
+		"origins:form_axolotl_2_crawling",
 		"origins:sneaking_speed_up",
 		"origins:air_from_potions",
 		"origins:form_instinct_use_catalyst",

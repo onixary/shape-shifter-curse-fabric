@@ -1,0 +1,16 @@
+{
+  "type": "origins:no_render_arm",
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:sneaking"
+      },
+      {
+        "type": "origins:submerged_in",
+        "inverted": true,
+        "fluid": "minecraft:water"
+      }
+    ]
+  }
+}

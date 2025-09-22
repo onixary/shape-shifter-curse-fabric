@@ -1,0 +1,13 @@
+{
+  "type": "origins:crawling",
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:submerged_in",
+        "inverted": true,
+        "fluid": "minecraft:water"
+      }
+    ]
+  }
+}
