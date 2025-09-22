@@ -5,6 +5,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.data.CodexData;
+import net.onixary.shapeShifterCurseFabric.integration.origins.Origins;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 
@@ -22,7 +23,7 @@ public class PlayerFormBase {
     private boolean IsCustomForm = false;
 
     public String Origin_NameSpace_OverWrite = null;
-    public String OriginLayerName = null;  // Default: "origin"
+    public Identifier OriginLayer_OverWrite = null; // Default: "origins:origin"
 
     public PlayerFormBase(Identifier formID) {
         FormID = formID;
@@ -160,14 +161,17 @@ public class PlayerFormBase {
         return this;
     }
 
+    public PlayerFormBase setOriginLayerOverWrite(Identifier OriginLayerID) {
+        OriginLayer_OverWrite = OriginLayerID;
+        return this;
+    }
+
     public Identifier getFormOriginID() {
         String NameSpace = Origin_NameSpace_OverWrite != null ? Origin_NameSpace_OverWrite : FormID.getNamespace();
         return new Identifier(NameSpace, "form_" + FormID.getPath());
     }
 
     public Identifier getFormOriginLayerID() {
-        String NameSpace = Origin_NameSpace_OverWrite != null ? Origin_NameSpace_OverWrite : FormID.getNamespace();
-        String LayerName = OriginLayerName != null ? OriginLayerName : "origin";
-        return new Identifier(NameSpace, LayerName);
+        return OriginLayer_OverWrite != null ? OriginLayer_OverWrite : new Identifier(Origins.MODID, "origin");
     }
 }
