@@ -21,6 +21,9 @@ public class PlayerFormBase {
     private boolean CanRushJump = false;
     private boolean IsCustomForm = false;
 
+    public String Origin_NameSpace_OverWrite = null;
+    public String OriginLayerName = null;  // Default: "origin"
+
     public PlayerFormBase(Identifier formID) {
         FormID = formID;
     }
@@ -152,7 +155,19 @@ public class PlayerFormBase {
         return FormID.toString();
     }
 
-    public String getFormOriginID() {
-        return "form_" + FormID.getPath();
+    public PlayerFormBase setOriginNameSpaceOverWrite(String nameSpace) {
+        Origin_NameSpace_OverWrite = nameSpace;
+        return this;
+    }
+
+    public Identifier getFormOriginID() {
+        String NameSpace = Origin_NameSpace_OverWrite != null ? Origin_NameSpace_OverWrite : FormID.getNamespace();
+        return new Identifier(NameSpace, "form_" + FormID.getPath());
+    }
+
+    public Identifier getFormOriginLayerID() {
+        String NameSpace = Origin_NameSpace_OverWrite != null ? Origin_NameSpace_OverWrite : FormID.getNamespace();
+        String LayerName = OriginLayerName != null ? OriginLayerName : "origin";
+        return new Identifier(NameSpace, LayerName);
     }
 }

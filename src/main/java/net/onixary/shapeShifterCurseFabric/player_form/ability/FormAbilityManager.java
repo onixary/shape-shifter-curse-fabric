@@ -43,7 +43,7 @@ public class FormAbilityManager {
         clearFormEffects(player, oldForm);
         // 已被弃用，使用json定义的scale power
         //applyScale(player, config.getScale());
-        applyFormOrigin(player, "origin", newForm.getFormOriginID());
+        applyFormOrigin(player, newForm);
         //applyPower(player, config.getPowerId());
         // 清空Status
         cancelEffect(player);
@@ -110,17 +110,17 @@ public class FormAbilityManager {
         scaleDataHeight.setPersistence(true);
     }
 
-    private static void applyFormOrigin(PlayerEntity playerEntity, String originLayerId, String originId) {
+    private static void applyFormOrigin(PlayerEntity playerEntity, PlayerFormBase newForm) {
         // Origins引用的Identifier需要使用Origins.MODID
         OriginComponent component = ModComponents.ORIGIN.get(playerEntity);
-        OriginLayer layer = OriginLayers.getLayer(Identifier.of(Origins.MODID, originLayerId));
-        Identifier id = Identifier.of(Origins.MODID, originId);
+        OriginLayer layer = OriginLayers.getLayer(newForm.getFormOriginLayerID());
+        Identifier id = newForm.getFormOriginID();
         if (layer != null && id != null) {
             Origin origin = OriginRegistry.get(id);
             if(layer.contains(origin, playerEntity)){
                 component.setOrigin(layer, origin);
                 component.sync();
-                ShapeShifterCurseFabric.LOGGER.info("Set form origin " + originId + " for player " + playerEntity.getName());
+                ShapeShifterCurseFabric.LOGGER.info("Set form origin " + id.toString() + " for player " + playerEntity.getName());
             }
         }
     }

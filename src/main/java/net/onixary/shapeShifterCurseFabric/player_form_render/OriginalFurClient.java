@@ -141,7 +141,7 @@ public class OriginalFurClient implements ClientModInitializer {
                 // 手动处理各形态的映射关系：
                 if(FabricLoader.getInstance().isModLoaded(MOD_ID)){
                     RegPlayerForms.playerForms.forEach(playerFormBase -> {
-                        var id = new Identifier("origins", playerFormBase.getFormOriginID());
+                        var id = playerFormBase.getFormOriginID();
                         var fur = OriginalFurClient.FUR_RESOURCES.getOrDefault(id, null);
                         if(fur == null){
                             fur = OriginalFurClient.FUR_RESOURCES.getOrDefault(id, null);
