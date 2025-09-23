@@ -1,0 +1,14 @@
+{
+  "type": "origins:no_render_arm",
+  "condition": {
+    "type": "origins:or",
+    "conditions": [
+      {
+        "type": "origins:sneaking"
+      },
+      {
+        "type": "origins:swimming"
+      }
+    ]
+  }
+}

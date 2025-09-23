@@ -10,6 +10,7 @@ import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
 import dev.kosmx.playerAnim.core.util.Ease;
 import dev.kosmx.playerAnim.core.util.Vec3f;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -28,6 +29,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
+import net.onixary.shapeShifterCurseFabric.additional_power.CrawlingPower;
+import net.onixary.shapeShifterCurseFabric.additional_power.NoRenderArmPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
@@ -290,7 +293,14 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
                 }
             }
-            if ((isSubmergedInWater() || isInLava()))
+            if (isCrawling() || (PowerHolderComponent.hasPower(this, CrawlingPower.class) && isSneaking() && !isSwimming())) {
+                if (isWalking) {
+                    currentState = PlayerAnimState.ANIM_CRAWL;
+                } else {
+                    currentState = PlayerAnimState.ANIM_CRAWL_IDLE;
+                }
+            }
+            else if ((isSubmergedInWater() || isInLava()))
             {
                 if (this.isSwimming() || this.isSprinting())
                 {
@@ -299,13 +309,6 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                 else
                 {
                     currentState = PlayerAnimState.ANIM_SWIM_IDLE;
-                }
-            }
-            else if (isCrawling()) {
-                if (isWalking) {
-                    currentState = PlayerAnimState.ANIM_CRAWL;
-                } else {
-                    currentState = PlayerAnimState.ANIM_CRAWL_IDLE;
                 }
             }
             continueSwingAnimCounter = 0; // 重置挖掘动画计数器
