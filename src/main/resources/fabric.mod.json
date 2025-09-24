@@ -78,5 +78,9 @@
     "origins": ">0.0.0",
     "optifabric": "<=1.11.18",
     "identity": "<1.14.2-beta"
+  },
+  "recommends": {
+    "rich_translatable_text": ">=1.0.1",
+    "firstperson": "*"
   }
 }
