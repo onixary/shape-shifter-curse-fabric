@@ -1,4 +1,4 @@
-﻿{
+{
   "advancements.shape-shifter-curse.on_enable_mod.title": "Неизвестная глава",
   "advancements.shape-shifter-curse.on_enable_mod.description": "Что случилось?",
   "advancements.shape-shifter-curse.on_open_book_of_shape_shifter.title": "Время для чтения",
@@ -243,16 +243,16 @@
   "codex.form.original.instincts": " ",
 
   "codex.form.axolotl0.title": "\nПроклятие видоизменило ваше тело. Вы чувствуете сильную тягу к воде",
-  "codex.form.axolotl0.appearance": "Бледно-красные образования, похожие на листья водорослей, выросли по бокам щёк. Они постоянно влажные и, похоже, помогают вам дышать в водной среде\nНа конечностях и новом хвосте вы можете заметить полупрозрачные плавники\nВаша кожа покрыта влагой",
+  "codex.form.axolotl0.appearance": "Бледно-красные образования, похожие на листья водорослей или жвабры, выросли по бокам щёк. Они постоянно влажные и, похоже, помогают вам дышать в водной среде\nНа конечностях и новом хвосте вы можете заметить полупрозрачные плавники\nВаша кожа покрыта влагой",
   "codex.form.axolotl0.pros": "Благодаря изменениям в вашей дыхательной системы вы можете дольше находиться под водой\nВы слегка быстрее передвигаетесь в воде, чем раньше",
   "codex.form.axolotl0.cons": "К вашей коже постоянно прилипают частицы пыли. Из-за этого вы медленнее передвигаетесь по суше",
   "codex.form.axolotl0.instincts": "Вы жаждите окунуться в воду\nВы очень сильно хотите находиться в пышных пещерах",
 
-  "codex.form.axolotl1.title": "\nYour enlarged gills and powerful tail enable free exploration of submerged structures. Freshly caught fish make ideal nourishment",
-  "codex.form.axolotl1.appearance": "The gill fronds on your cheeks have expanded further. When submerged, they can supply nearly all your oxygen needs\nFins now cover more of your body, their colors growing more vibrant\nYour tail has lengthened and strengthened\nWater-absorbent white filaments have grown around your neck",
-  "codex.form.axolotl1.pros": "With enhanced gills, you can breathe underwater indefinitely\nYou move slightly faster in water. Your new fins and slick skin harness currents, granting swift movement against water flow\nYour body efficiently digests raw fish, providing greater satiation\nStrong regeneration slowly restores health when hunger is above 3 bars\nUsing your powerful tail, you can leap from water surfaces to higher ground",
-  "codex.form.axolotl1.cons": "Helmet equipment is impossible - your gills reject foreign contact\nSkin and fins easily accumulate particles/sand, reducing speed on loose ground\nYour digestive system can no longer process non-meat foods",
-  "codex.form.axolotl1.instincts": "The desire to remain in water\nYou begin to desire to stay in lush cave biomes\nHunt down and consume more raw fish grows stronger\nThe urge to wander through drip-leaf clusters intensifies",
+  "codex.form.axolotl1.title": "\nВаши разросшиеся жабры и сильный хвост помогают вам исследовать подводные глубины. Свежепойманная рыба - идеальная еда для вас",
+  "codex.form.axolotl1.appearance": "Жвабры стали больше. Когда вы погружаетесь под воду, они помогают вам извлекать кислород из воды\nПлавники теперь покрывают большую часть ващего тела. Их цвет стал более ярким\nВаш хвост стал длиннее и сильнее\nНа шее выросли белые волокна, впитывающие воду",
+  "codex.form.axolotl1.pros": "Благодаря жабрам вы можете дышать под водой сколько угодно\nВы двигаетесь слегка быстрее в воде. Ваши новые плавники и склизкая кожа позволяют вам свободно двигаться против течения\nСырая рыба теперь лучше утоляет голод\nУсиленная регенерация медленно востанавливает ваше здоровье, если уровень голода выше трех единиц\nИспользуя свой сильный хвост, вы можете, выскочив из воды, запрыгнуть на возвышенность",
+  "codex.form.axolotl1.cons": "Вы больше не можете носить шлемы: они мешают вашим органам дыхания\nК коже и плавникам постоянно липнут пыль и песок, замедляя вас, когда вы ходите по суше\nВаша пищеварительная система отторгает любые немясные продукты",
+  "codex.form.axolotl1.instincts": "Ваша мечта - не покидать воды\nВы очень сильно хотите остаться в пышных пещерах\nЖелание охотиться под водой и есть сырую рыбу становится всё сильнее\nВы желаете быть ближе к зарослям подземных растений",
 
   "codex.form.axolotl2.title": "\nAs an amphibious predator, you dominate aquatic environments while remaining functional on land - though moisture must be maintained",
   "codex.form.axolotl2.appearance": "Your tail now functions as a true extension of your torso, comprising nearly half your height\nProminent gill fronds occupy significant head space. When moistened, they provide abundant oxygen, eliminating lung dependency\nTranslucent fins extend across most of your body, rhythmically undulating underwater\nWhite filaments cover your chest and back like a spongy layer, storing moisture for extended land excursions",
@@ -453,5 +453,3 @@
   "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "В разработке",
   "text.autoconfig.shape-shifter-curse-common.option.enableNewStartBook": "Включить новую версию интерфейса стартовой книги"
 }
-
-
