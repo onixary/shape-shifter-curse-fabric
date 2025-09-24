@@ -12,11 +12,11 @@ public class CommonConfig implements ConfigData {
 
     // Cloth Config 没有浮点的边界检查 只有整数的
     @ConfigEntry.Category("General")
-    @Comment("Transformative Ocelot Spawn Chance, 0 For Disable Spawn. Default: 0.5f [0.0f ~ 1.0f]")
+    @Comment("Transformative Bat Spawn Chance, 0 For Disable Spawn. Default: 0.5f [0.0f ~ 1.0f]")
     public float transformativeBatSpawnChance = 0.5f;
 
     @ConfigEntry.Category("General")
-    @Comment("Transformative Ocelot Spawn Chance, 0 For Disable Spawn. Default: 1.0f [0.0f ~ 1.0f]")
+    @Comment("Transformative Axolotl Spawn Chance, 0 For Disable Spawn. Default: 1.0f [0.0f ~ 1.0f]")
     public float transformativeAxolotlSpawnChance = 1.0f;
 
     @ConfigEntry.Category("General")

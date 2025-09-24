@@ -70,9 +70,10 @@ public final class CustomWaterBreathingMixin {
 
                         int landGain = this.getNextAirOnLand(0);
                         this.setAir(this.getNextAirUnderwaterSlow(this.getAir(), landWaterBreathLevel) - landGain);
-                    } else {
-                        int landGain = this.getNextAirOnLand(0);
-                        this.setAir(this.getAir() - landGain);
+                    } else if(this.getAir() < this.getMaxAir()){
+                        //int landGain = this.getNextAirOnLand(0);
+                        //this.setAir(this.getAir() - landGain);
+                        this.setAir(this.getNextAirOnLand(this.getAir()));
                     }
                 } else if(this.getAir() < this.getMaxAir()){
                     this.setAir(this.getNextAirOnLand(this.getAir()));
