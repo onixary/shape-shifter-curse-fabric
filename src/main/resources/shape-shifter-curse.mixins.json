@@ -32,7 +32,8 @@
     "CustomWaterBreathingMixin$UpdateAir",
     "EntitySlipperinessMixin",
     "ServerPlayerEntityForceInputMixin",
-    "PlayerEntitySprintSwimmingMixin"
+    "PlayerEntitySprintSwimmingMixin",
+    "projectile.PotionEntityMixin"
   ],
   "client": [
     "IEntityRenderDispatcherAccessor",

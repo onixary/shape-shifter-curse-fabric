@@ -41,6 +41,7 @@
         "origins:carnivore",
         "shape-shifter-curse:crawling",
         "origins:air_from_potions",
+        "shape-shifter-curse:air_from_splash_potions",
         "shape-shifter-curse:form_axolotl_sound",
         "shape-shifter-curse:form_axolotl_sound_hurt"
     ],

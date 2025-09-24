@@ -1,0 +1,8 @@
+{
+  "type": "shape-shifter-curse:action_on_splash_potion_take_effect",
+  "trigger_on_no_effect": true,
+  "entity_action": {
+    "type": "origins:gain_air",
+    "value": 150
+  }
+}
