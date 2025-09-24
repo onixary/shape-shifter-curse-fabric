@@ -134,6 +134,9 @@
   "item.shape-shifter-curse.inhibitor.tooltip": ["The magic within you seems to calm when you touch this"],
   "item.shape-shifter-curse.powerful_inhibitor": ["Powerful Inhibitor"],
   "item.shape-shifter-curse.powerful_inhibitor.tooltip": ["Contains enhanced golden magic"],
+  "item.shape-shifter-curse.creative_inhibitor": ["Extreme Inhibitor"],
+  "item.shape-shifter-curse.creative_inhibitor.tooltip": ["(Creative Item) Crafted by powers beyond this world, capable of reversing permanent forms"],
+
 
   "screen.shape-shifter-curse.book_of_shape_shifter.start_content_text":
   [

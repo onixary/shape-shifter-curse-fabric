@@ -130,6 +130,8 @@
     "item.shape-shifter-curse.inhibitor.tooltip": "当你接触它时，你体内的魔法似乎平静了一些",
     "item.shape-shifter-curse.powerful_inhibitor": "强效抑制剂",
     "item.shape-shifter-curse.powerful_inhibitor.tooltip": "蕴含着更强力的黄金魔力",
+    "item.shape-shifter-curse.creative_inhibitor": "极效抑制剂",
+    "item.shape-shifter-curse.creative_inhibitor.tooltip": "(创造模式物品)由超越这个世界的力量制成，可以逆转永久形态",
     "screen.shape-shifter-curse.book_of_shape_shifter.start_content_text": "当你试图翻开这本书时，你感觉到伴随着一阵微弱的刺痛，从书中溢出的奇特魔法从指尖流进了你的身体，让你如同触电一般将手缩了回去\n这可能是某种诅咒么？你不知道\n不过你可以确信的是继续打开这本书会导致一些未知的后果\n\n注意：\n这会开启幻形者诅咒的模组内容\n这并不算是一个适合所有人的模组，在继续前，请确保你了解其主题与玩法",
     "screen.shape-shifter-curse.book_of_shape_shifter.start_button_text": "翻开幻形者之书",
     "info.shape-shifter-curse.on_enable_mod": "随着书页的开启，书中封印的强大魔法涌入了你的身体！",

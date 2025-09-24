@@ -133,6 +133,9 @@
   "item.shape-shifter-curse.inhibitor.tooltip": ["当你接触它时，你体内的魔法似乎平静了一些"],
   "item.shape-shifter-curse.powerful_inhibitor": ["强效抑制剂"],
   "item.shape-shifter-curse.powerful_inhibitor.tooltip": ["蕴含着更强力的黄金魔力"],
+  "item.shape-shifter-curse.creative_inhibitor": ["极效抑制剂"],
+  "item.shape-shifter-curse.creative_inhibitor.tooltip": ["(创造模式物品)由超越这个世界的力量制成，可以逆转永久形态"],
+
   "screen.shape-shifter-curse.book_of_shape_shifter.start_content_text":
   [
     "当你试图翻开这本书时，你感觉到伴随着一阵微弱的刺痛，从书中溢出的奇特魔法从指尖流进了你的身体，让你如同触电一般将手缩了回去\n",

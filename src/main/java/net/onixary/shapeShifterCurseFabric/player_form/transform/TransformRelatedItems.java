@@ -23,6 +23,7 @@ public class TransformRelatedItems {
 
     public static final Item TRANSFORM_CURE = RegCustomItem.INHIBITOR;
     public static final Item TRANSFORM_CURE_FINAL = RegCustomItem.POWERFUL_INHIBITOR;
+    public static final Item TRANSFORM_CURE_CREATIVE = RegCustomItem.CREATIVE_INHIBITOR;
     public static final Item TRANSFORM_CATALYST = RegCustomItem.CATALYST;
     public static final Item TRANSFORM_POWERFUL_CATALYST = RegCustomItem.POWERFUL_CATALYST;
 
@@ -140,6 +141,15 @@ public class TransformRelatedItems {
         }
 
         handleDirectTransform(player, toForm, true);
+    }
+
+    public static void OnUseCreativeCure(PlayerEntity player){
+        // 创造模式下才能获取的抑制剂，可以将永久形态回退到最初阶段
+        // The inhibitor that can only be obtained in creative mode can revert the permanent form to the original stage
+        PlayerFormBase currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+        if(currentForm != RegPlayerForms.ORIGINAL_SHIFTER && currentForm != RegPlayerForms.ORIGINAL_BEFORE_ENABLE){
+            handleDirectTransform(player, RegPlayerForms.ORIGINAL_SHIFTER, true);
+        }
     }
 
     public static void OnUseCatalyst(PlayerEntity player) {

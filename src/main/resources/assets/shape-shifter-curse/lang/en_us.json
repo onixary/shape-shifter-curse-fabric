@@ -130,6 +130,8 @@
     "item.shape-shifter-curse.inhibitor.tooltip": "The magic within you seems to calm when you touch this",
     "item.shape-shifter-curse.powerful_inhibitor": "Powerful Inhibitor",
     "item.shape-shifter-curse.powerful_inhibitor.tooltip": "Contains enhanced golden magic",
+    "item.shape-shifter-curse.creative_inhibitor": "Extreme Inhibitor",
+    "item.shape-shifter-curse.creative_inhibitor.tooltip": "(Creative Item) Crafted by powers beyond this world, capable of reversing permanent forms",
     "screen.shape-shifter-curse.book_of_shape_shifter.start_content_text": "As you attempt to open the book, you feel strange magic flowing into your body through your fingertips with a faint tingling sensation, making you jerk your hand back instinctively\nCould this be some kind ofcurse? You're not sure\nHowever, you're certain that continuing to open this book will lead to unknown consequences\n\nNote:\nThis will activate the Shapeshifter's Curse mod content\nThis mod may not be a mod for everyone. Before proceeding, ensure you understand its themes and gameplay",
     "screen.shape-shifter-curse.book_of_shape_shifter.start_button_text": "Open the Book of the Shapeshifter",
     "info.shape-shifter-curse.on_enable_mod": "As the pages open, powerful magic sealed within the book floods into your body!",
@@ -413,4 +415,5 @@
     "text.autoconfig.shape-shifter-curse-common.option.enableNewStartBook": "Enable The New Version of Start Book Interface",
     "text.autoconfig.shape-shifter-curse-common.option.curseMoonPhase": "Curse Moon Phase",
     "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "In Development"
+
 }

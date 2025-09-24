@@ -40,7 +40,7 @@ public class PowerfulCatalyst extends Item {
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        // 实际效果在Origin的Power json中进行处理
+        // 实际效果在ItemStackMixin的注入中进行处理
         super.finishUsing(stack, world, user);
         if (user instanceof PlayerEntity playerEntity) {
             if (playerEntity.getAbilities().creativeMode) {
