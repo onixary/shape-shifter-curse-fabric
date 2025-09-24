@@ -1,21 +1,20 @@
 {
-	"powers": [
-		"origins:form_ocelot_0_scale",
-		"origins:scare_creepers",
-		"origins:sneaking_speed_up_low",
-		"origins:form_ocelot_0_health",
-		"origins:form_vegetarian_food_down",
-		"origins:hunger_immunity",
-
-		"origins:form_instinct_use_catalyst",
-		"origins:form_instinct_use_golden_apple",
-		"origins:form_ocelot_instinct_eat_raw_meat",
-		"origins:form_ocelot_instinct_biome"
-	],
-	"icon": {
-		"item": "minecraft:player_head"
-	},
-	"order": 0,
-	"unchoosable": true,
-	"impact": 0
+    "powers": [
+        "shape-shifter-curse:form_ocelot_0_scale",
+        "origins:scare_creepers",
+        "shape-shifter-curse:sneaking_speed_up_low",
+        "shape-shifter-curse:form_ocelot_0_health",
+        "shape-shifter-curse:form_vegetarian_food_down",
+        "shape-shifter-curse:hunger_immunity",
+        "shape-shifter-curse:form_instinct_use_catalyst",
+        "shape-shifter-curse:form_instinct_use_golden_apple",
+        "shape-shifter-curse:form_ocelot_instinct_eat_raw_meat",
+        "shape-shifter-curse:form_ocelot_instinct_biome"
+    ],
+    "icon": {
+        "item": "minecraft:player_head"
+    },
+    "order": 0,
+    "unchoosable": true,
+    "impact": 0
 }

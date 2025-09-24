@@ -1,7 +1,0 @@
-{
-  "type": "origins:prevent_berry_effect",
-  "condition": {
-    "type": "origins:constant",
-    "value": true
-  }
-}

@@ -1,13 +1,12 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 public class LootingPower extends Power {
 
@@ -25,7 +24,7 @@ public class LootingPower extends Power {
     // 工厂方法
     public static PowerFactory<?> createFactory() {
         return new PowerFactory<>(
-                Apoli.identifier("simple_looting"),
+                ShapeShifterCurseFabric.identifier("simple_looting"),
                 new SerializableData()
                         .add("level", SerializableDataTypes.INT, 1),
                 data -> (powerType, entity) -> new LootingPower(

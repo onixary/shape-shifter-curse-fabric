@@ -1,0 +1,7 @@
+{
+    "type": "shape-shifter-curse:enhanced_falling_attack",
+    "self_action_on_critical_hit": {
+        "type": "shape-shifter-curse:set_falling_distance",
+        "distance": 0.0
+    }
+}

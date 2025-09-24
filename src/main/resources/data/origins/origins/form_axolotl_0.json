@@ -1,20 +1,18 @@
 {
-	"powers": [
-		"origins:form_base_scale",
-
-		"origins:hold_breath",
-		"origins:form_axolotl_0_new_puff_speed_down",
-		"origins:form_axolotl_0_swim_speed",
-
-		"origins:form_axolotl_instinct_in_water",
-		"origins:form_axolotl_instinct_biome",
-		"origins:form_instinct_use_catalyst",
-		"origins:form_instinct_use_golden_apple"
-	],
-	"icon": {
-		"item": "minecraft:player_head"
-	},
-	"order": 0,
-	"unchoosable": true,
-	"impact": 0
+    "powers": [
+        "shape-shifter-curse:form_base_scale",
+        "shape-shifter-curse:hold_breath",
+        "shape-shifter-curse:form_axolotl_0_new_puff_speed_down",
+        "shape-shifter-curse:form_axolotl_0_swim_speed",
+        "shape-shifter-curse:form_axolotl_instinct_in_water",
+        "shape-shifter-curse:form_axolotl_instinct_biome",
+        "shape-shifter-curse:form_instinct_use_catalyst",
+        "shape-shifter-curse:form_instinct_use_golden_apple"
+    ],
+    "icon": {
+        "item": "minecraft:player_head"
+    },
+    "order": 0,
+    "unchoosable": true,
+    "impact": 0
 }

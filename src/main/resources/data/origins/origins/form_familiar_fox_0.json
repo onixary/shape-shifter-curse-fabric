@@ -1,25 +1,22 @@
 {
-	"powers": [
-		"origins:form_familiar_fox_0_scale",
-		"origins:form_familiar_fox_0_sprint_speed_up",
-		"origins:form_familiar_fox_0_looting",
-		"origins:form_familiar_fox_0_water_speed_down",
-		"origins:form_familiar_fox_0_dizzy_when_attack_witch",
-
-
-		"origins:form_instinct_use_catalyst",
-		"origins:form_instinct_use_golden_apple",
-		"origins:form_familiar_fox_instinct_moving_on_snow",
-		"origins:form_familiar_fox_instinct_eat_berry",
-		"origins:form_familiar_fox_instinct_biome",
-
-		"origins:witch_friendly"
-	],
-	"icon": {
-		"item": "minecraft:player_head"
-	},
-	"order": 0,
-	"unchoosable": true,
-	"impact": 0,
-	"loading_priority": 0
+    "powers": [
+        "shape-shifter-curse:form_familiar_fox_0_scale",
+        "shape-shifter-curse:form_familiar_fox_0_sprint_speed_up",
+        "shape-shifter-curse:form_familiar_fox_0_looting",
+        "shape-shifter-curse:form_familiar_fox_0_water_speed_down",
+        "shape-shifter-curse:form_familiar_fox_0_dizzy_when_attack_witch",
+        "shape-shifter-curse:form_instinct_use_catalyst",
+        "shape-shifter-curse:form_instinct_use_golden_apple",
+        "shape-shifter-curse:form_familiar_fox_instinct_moving_on_snow",
+        "shape-shifter-curse:form_familiar_fox_instinct_eat_berry",
+        "shape-shifter-curse:form_familiar_fox_instinct_biome",
+        "shape-shifter-curse:witch_friendly"
+    ],
+    "icon": {
+        "item": "minecraft:player_head"
+    },
+    "order": 0,
+    "unchoosable": true,
+    "impact": 0,
+    "loading_priority": 0
 }

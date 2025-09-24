@@ -1,0 +1,12 @@
+{
+    "type": "origins:action_over_time",
+    "entity_action": {
+        "type": "origins:play_sound",
+        "sound": "entity.allay.ambient_without_item"
+    },
+    "interval": 200,
+    "condition": {
+        "type": "shape-shifter-curse:chance",
+        "chance": 0.3
+    }
+}

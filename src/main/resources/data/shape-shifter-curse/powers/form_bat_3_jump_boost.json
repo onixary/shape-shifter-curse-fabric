@@ -1,0 +1,11 @@
+{
+    "type": "shape-shifter-curse:action_on_jump",
+    "entity_action": {
+        "type": "origins:add_velocity",
+        "space": "local_horizontal_normalized",
+        "z": 0.35
+    },
+    "entity_condition": {
+        "type": "origins:sprinting"
+    }
+}

@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.power.factory.action.ActionFactory;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
@@ -10,7 +9,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 public class SetFallingDistanceAction {
     public static ActionFactory<Entity> createFactory() {
         return new ActionFactory<>(
-                Apoli.identifier("set_falling_distance"),
+                ShapeShifterCurseFabric.identifier("set_falling_distance"),
                 new SerializableData()
                         .add("distance", SerializableDataTypes.FLOAT, 0.0f), // 定义一个名为 "distance" 的浮点数参数，默认值为 0.0
                 (data, entity) -> {

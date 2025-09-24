@@ -1,13 +1,12 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.calio.data.SerializableData;
-import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import virtuoel.pehkui.api.ScaleData;
 import virtuoel.pehkui.api.ScaleTypes;
 
@@ -47,7 +46,7 @@ public class CrawlingPower extends Power {
 
     public static PowerFactory<?> getFactory() {
         return new PowerFactory<>(
-                Apoli.identifier("crawling"),
+                ShapeShifterCurseFabric.identifier("crawling"),
                 new SerializableData(),
                 data -> (powerType, livingEntity) -> new CrawlingPower(
                         powerType,

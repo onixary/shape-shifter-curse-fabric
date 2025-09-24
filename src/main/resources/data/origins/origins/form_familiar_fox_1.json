@@ -1,30 +1,28 @@
 {
-	"powers": [
-		"origins:form_familiar_fox_1_scale",
-		"origins:form_familiar_fox_0_sprint_speed_up",
-		"origins:form_familiar_fox_1_looting",
-		"origins:form_familiar_fox_1_use_normal_creature",
-		"origins:form_familiar_fox_1_dizzy_when_attack_illager",
-		"origins:form_familiar_fox_use_entity_cooldown",
-		"origins:form_all_food_down",
-		"origins:form_familiar_fox_0_water_speed_down",
-		"origins:form_familiar_fox_1_health",
-
-		"origins:form_instinct_use_catalyst",
-		"origins:form_instinct_use_golden_apple",
-		"origins:form_familiar_fox_instinct_in_berry_bush",
-		"origins:form_familiar_fox_instinct_looking_witch",
-		"origins:form_familiar_fox_instinct_biome",
-
-		"origins:witch_friendly",
-		"origins:prevent_berry_effect",
-		"origins:pillager_friendly"
-	],
-	"icon": {
-		"item": "minecraft:player_head"
-	},
-	"order": 0,
-	"unchoosable": true,
-	"impact": 0,
-	"loading_priority": 0
+    "powers": [
+        "shape-shifter-curse:form_familiar_fox_1_scale",
+        "shape-shifter-curse:form_familiar_fox_0_sprint_speed_up",
+        "shape-shifter-curse:form_familiar_fox_1_looting",
+        "shape-shifter-curse:form_familiar_fox_1_use_normal_creature",
+        "shape-shifter-curse:form_familiar_fox_1_dizzy_when_attack_illager",
+        "shape-shifter-curse:form_familiar_fox_use_entity_cooldown",
+        "shape-shifter-curse:form_all_food_down",
+        "shape-shifter-curse:form_familiar_fox_0_water_speed_down",
+        "shape-shifter-curse:form_familiar_fox_1_health",
+        "shape-shifter-curse:form_instinct_use_catalyst",
+        "shape-shifter-curse:form_instinct_use_golden_apple",
+        "shape-shifter-curse:form_familiar_fox_instinct_in_berry_bush",
+        "shape-shifter-curse:form_familiar_fox_instinct_looking_witch",
+        "shape-shifter-curse:form_familiar_fox_instinct_biome",
+        "shape-shifter-curse:witch_friendly",
+        "shape-shifter-curse:prevent_berry_effect",
+        "shape-shifter-curse:pillager_friendly"
+    ],
+    "icon": {
+        "item": "minecraft:player_head"
+    },
+    "order": 0,
+    "unchoosable": true,
+    "impact": 0,
+    "loading_priority": 0
 }

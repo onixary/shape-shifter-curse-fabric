@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.ValueModifyingPower;
@@ -12,6 +11,7 @@ import net.minecraft.block.pattern.CachedBlockPosition;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldView;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 import java.util.function.Predicate;
 
@@ -39,7 +39,7 @@ public class ConditionedModifySlipperinessPower extends ValueModifyingPower {
 
     public static PowerFactory<?> createFactory() {
         return new PowerFactory<>(
-                Apoli.identifier("conditioned_modify_slipperiness"),
+                ShapeShifterCurseFabric.identifier("conditioned_modify_slipperiness"),
                 new SerializableData()
                         .add("block_condition", ApoliDataTypes.BLOCK_CONDITION, null)
                         .add("entity_condition", ApoliDataTypes.ENTITY_CONDITION, null)

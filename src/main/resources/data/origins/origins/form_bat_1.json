@@ -1,30 +1,30 @@
 {
-	"powers":[
-		"origins:form_bat_1_scale",
-		"origins:bat_vision",
-		"origins:form_disable_chest_armor",
-		"origins:form_disable_feet_armor",
-		"origins:damage_up",
-		"origins:high_jump_2",
-		"origins:form_dark_speed_up",
-		"origins:form_bat_1_sun_speed_down",
-		"origins:form_bat_1_sun_health",
-		"origins:form_bat_1_falling_protection",
-		"origins:prevent_ranged_weapon_use",
-		"origins:form_meat_food_down",
-		"origins:form_vegetarian_food_up",
-		"origins:form_bat_instinct_in_dark",
-		"origins:form_bat_instinct_eat_fruit",
-		"origins:form_bat_instinct_in_air",
-		"origins:form_bat_instinct_near_dripstone",
-		"origins:form_instinct_use_catalyst",
-		"origins:form_instinct_use_golden_apple",
-		"origins:form_bat_instinct_biome"
-	],
-	"icon": {
-		"item": "minecraft:player_head"
-	},
-	"order": 0,
-	"unchoosable": true,
-	"impact": 0
+    "powers": [
+        "shape-shifter-curse:form_bat_1_scale",
+        "shape-shifter-curse:bat_vision",
+        "shape-shifter-curse:form_disable_chest_armor",
+        "shape-shifter-curse:form_disable_feet_armor",
+        "shape-shifter-curse:damage_up",
+        "shape-shifter-curse:high_jump_2",
+        "shape-shifter-curse:form_dark_speed_up",
+        "shape-shifter-curse:form_bat_1_sun_speed_down",
+        "shape-shifter-curse:form_bat_1_sun_health",
+        "shape-shifter-curse:form_bat_1_falling_protection",
+        "shape-shifter-curse:prevent_ranged_weapon_use",
+        "shape-shifter-curse:form_meat_food_down",
+        "shape-shifter-curse:form_vegetarian_food_up",
+        "shape-shifter-curse:form_bat_instinct_in_dark",
+        "shape-shifter-curse:form_bat_instinct_eat_fruit",
+        "shape-shifter-curse:form_bat_instinct_in_air",
+        "shape-shifter-curse:form_bat_instinct_near_dripstone",
+        "shape-shifter-curse:form_instinct_use_catalyst",
+        "shape-shifter-curse:form_instinct_use_golden_apple",
+        "shape-shifter-curse:form_bat_instinct_biome"
+    ],
+    "icon": {
+        "item": "minecraft:player_head"
+    },
+    "order": 0,
+    "unchoosable": true,
+    "impact": 0
 }

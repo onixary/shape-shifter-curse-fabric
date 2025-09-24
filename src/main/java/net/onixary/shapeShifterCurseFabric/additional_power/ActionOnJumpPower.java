@@ -11,6 +11,7 @@ import io.github.apace100.calio.data.SerializableData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 import java.util.function.Predicate;
 
@@ -39,7 +40,7 @@ public class ActionOnJumpPower extends Power {
 
     public static PowerFactory<?> createFactory() {
         return new PowerFactory<>(
-                Apoli.identifier("action_on_jump"),
+                ShapeShifterCurseFabric.identifier("action_on_jump"),
                 new SerializableData()
                         .add("entity_action", ApoliDataTypes.ENTITY_ACTION, null)
                         .add("entity_condition", ApoliDataTypes.ENTITY_CONDITION, null),

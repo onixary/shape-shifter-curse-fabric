@@ -1,0 +1,30 @@
+{
+    "type": "origins:modify_jump",
+    "modifier": {
+        "name": "Bonus jump force while sneaking",
+        "operation": "multiply_base",
+        "value": 0.1
+    },
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:sprinting"
+            },
+            {
+                "type": "origins:fluid_height",
+                "fluid": "minecraft:water",
+                "comparison": "<=",
+                "compare_to": 0
+            },
+            {
+                "type": "origins:on_block"
+            },
+            {
+                "type": "origins:air",
+                "comparison": ">",
+                "compare_to": 0
+            }
+        ]
+    }
+}

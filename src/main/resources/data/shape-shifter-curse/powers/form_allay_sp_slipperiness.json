@@ -1,0 +1,12 @@
+{
+    "type": "origins:modify_slipperiness",
+    "modifier": {
+        "operation": "multiply_total",
+        "value": 0.3
+    },
+    "block_condition": {
+        "type": "origins:in_tag",
+        "tag": "minecraft:ice",
+        "inverted": true
+    }
+}

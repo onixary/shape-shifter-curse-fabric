@@ -1,14 +1,11 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.apoli.power.factory.action.ActionFactory;
-import io.github.apace100.apoli.power.factory.condition.ConditionFactory;
-import io.github.apace100.apoli.util.HudRender;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.Entity;
@@ -21,6 +18,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 import java.util.Comparator;
 import java.util.List;
@@ -197,7 +195,7 @@ public class AttractByEntityPower extends Power{
     // 工厂方法
     public static PowerFactory<?> getFactory() {
         return new PowerFactory<>(
-                Apoli.identifier("attract_by_entity"),
+                ShapeShifterCurseFabric.identifier("attract_by_entity"),
                 new SerializableData()
                         .add("entity_condition", ApoliDataTypes.ENTITY_CONDITION, null)
                         .add("entity_action", ApoliDataTypes.ENTITY_ACTION, null)

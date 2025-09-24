@@ -1,0 +1,22 @@
+{
+    "type": "shape-shifter-curse:water_flexibility",
+    "water_flex": 0.93,
+    "condition": {
+        "type": "origins:in_block",
+        "block_condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:block",
+                    "block": "minecraft:water"
+                },
+                {
+                    "type": "origins:block_state",
+                    "property": "level",
+                    "comparison": ">",
+                    "compare_to": 0
+                }
+            ]
+        }
+    }
+}

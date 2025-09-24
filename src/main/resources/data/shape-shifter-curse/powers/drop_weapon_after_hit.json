@@ -1,0 +1,26 @@
+{
+    "type": "origins:self_action_on_hit",
+    "entity_action": {
+        "type": "origins:drop_inventory",
+        "item_condition": {
+            "type": "origins:or",
+            "conditions": [
+                {
+                    "type": "origins:ingredient",
+                    "ingredient": {
+                        "tag": "origins:melee_weapons"
+                    }
+                },
+                {
+                    "type": "origins:ingredient",
+                    "ingredient": {
+                        "tag": "origins:tools"
+                    }
+                }
+            ]
+        },
+        "slots": [
+            "weapon.mainhand"
+        ]
+    }
+}

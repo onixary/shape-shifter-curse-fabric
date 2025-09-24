@@ -1,8 +1,0 @@
-{
-  "type": "origins:modify_potion_stack",
-  "condition": {
-    "type": "origins:constant",
-    "value": true
-  },
-  "count": 3
-}

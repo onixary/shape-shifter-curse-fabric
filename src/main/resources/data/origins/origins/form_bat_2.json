@@ -1,32 +1,31 @@
 {
-	"powers":[
-		"origins:form_bat_2_scale",
-		"origins:elytra_no_render",
-		"origins:bat_vision",
-		"origins:form_disable_chest_armor",
-		"origins:form_disable_leg_armor",
-		"origins:form_disable_feet_armor",
-		"origins:slow_falling",
-		"origins:high_jump_2",
-		"origins:form_bat_2_sun_health",
-		"origins:speed_down",
-		"origins:form_dark_speed_up",
-		"origins:form_bat_2_sun_speed_down",
-		"origins:prevent_ranged_weapon_use",
-		"origins:vegetarian",
-		"origins:drop_tool_after_digging",
-		"origins:drop_weapon_after_hit",
-		"origins:damage_up",
-		"origins:barehand_digging_speed_up",
-		"origins:always_harvest",
-		"origins:form_vegetarian_food_up",
-
-		"origins:form_bat_sound_hurt"
-	],
-	"icon": {
-		"item": "minecraft:player_head"
-	},
-	"order": 0,
-	"unchoosable": true,
-	"impact": 0
+    "powers": [
+        "shape-shifter-curse:form_bat_2_scale",
+        "shape-shifter-curse:elytra_no_render",
+        "shape-shifter-curse:bat_vision",
+        "shape-shifter-curse:form_disable_chest_armor",
+        "shape-shifter-curse:form_disable_leg_armor",
+        "shape-shifter-curse:form_disable_feet_armor",
+        "origins:slow_falling",
+        "shape-shifter-curse:high_jump_2",
+        "shape-shifter-curse:form_bat_2_sun_health",
+        "shape-shifter-curse:speed_down",
+        "shape-shifter-curse:form_dark_speed_up",
+        "shape-shifter-curse:form_bat_2_sun_speed_down",
+        "shape-shifter-curse:prevent_ranged_weapon_use",
+        "origins:vegetarian",
+        "shape-shifter-curse:drop_tool_after_digging",
+        "shape-shifter-curse:drop_weapon_after_hit",
+        "shape-shifter-curse:damage_up",
+        "shape-shifter-curse:barehand_digging_speed_up",
+        "shape-shifter-curse:always_harvest",
+        "shape-shifter-curse:form_vegetarian_food_up",
+        "shape-shifter-curse:form_bat_sound_hurt"
+    ],
+    "icon": {
+        "item": "minecraft:player_head"
+    },
+    "order": 0,
+    "unchoosable": true,
+    "impact": 0
 }
