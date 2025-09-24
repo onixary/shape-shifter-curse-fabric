@@ -1,0 +1,13 @@
+{
+    "type": "shape-shifter-curse:keep_sneaking",
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:air",
+                "comparison": "<=",
+                "compare_to": 0
+            }
+        ]
+    }
+}

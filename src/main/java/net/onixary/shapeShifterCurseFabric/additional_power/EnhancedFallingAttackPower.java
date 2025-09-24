@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
@@ -9,6 +8,7 @@ import io.github.apace100.apoli.power.factory.action.ActionFactory;
 import io.github.apace100.calio.data.SerializableData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 public class EnhancedFallingAttackPower extends Power {
 
@@ -35,7 +35,7 @@ public class EnhancedFallingAttackPower extends Power {
 
     public static PowerFactory createFactory() {
         return new PowerFactory<>(
-                Apoli.identifier("enhanced_falling_attack"),
+                ShapeShifterCurseFabric.identifier("enhanced_falling_attack"),
                 new SerializableData()
                         .add("target_action_on_critical_hit", ApoliDataTypes.ENTITY_ACTION, null)
                         .add("self_action_on_critical_hit", ApoliDataTypes.ENTITY_ACTION, null),

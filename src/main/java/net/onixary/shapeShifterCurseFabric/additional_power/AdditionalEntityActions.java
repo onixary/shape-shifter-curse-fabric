@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.factory.action.ActionFactory;
 import io.github.apace100.apoli.registry.ApoliRegistries;
 import net.minecraft.entity.Entity;

@@ -1,0 +1,8 @@
+{
+    "type": "origins:modify_jump",
+    "modifier": {
+        "name": "Bonus jump force",
+        "operation": "multiply_base",
+        "value": 0.25
+    }
+}

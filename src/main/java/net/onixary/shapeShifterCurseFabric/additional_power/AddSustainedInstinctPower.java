@@ -1,7 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
 import io.github.apace100.apoli.Apoli;
-import io.github.apace100.apoli.power.BurnPower;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
@@ -11,7 +10,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
-import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.applyImmediateEffect;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.applySustainedEffect;
 
 public class AddSustainedInstinctPower extends Power {
@@ -61,7 +59,7 @@ public class AddSustainedInstinctPower extends Power {
 
     public static PowerFactory getFactory() {
         return new PowerFactory<>(
-            Apoli.identifier("add_sustained_instinct"),
+            ShapeShifterCurseFabric.identifier("add_sustained_instinct"),
             new SerializableData()
                 .add("instinct_effect_id", SerializableDataTypes.STRING)
                 .add("value", SerializableDataTypes.FLOAT, 0.0f)

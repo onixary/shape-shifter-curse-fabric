@@ -1,8 +1,0 @@
-﻿{
-  "type": "origins:modify_damage_dealt",
-  "modifier": {
-    "name": "Extra damage when submerged",
-    "operation": "addition",
-    "value": 6.0
-  }
-}

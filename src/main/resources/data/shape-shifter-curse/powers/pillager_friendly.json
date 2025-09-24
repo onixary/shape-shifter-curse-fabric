@@ -1,0 +1,7 @@
+{
+    "type": "shape-shifter-curse:pillager_friendly",
+    "condition": {
+        "type": "origins:constant",
+        "value": true
+    }
+}

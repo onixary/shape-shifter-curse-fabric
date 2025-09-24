@@ -1,0 +1,10 @@
+{
+    "type": "origins:modify_break_speed",
+    "condition": {
+        "type": "shape-shifter-curse:barehand_digging"
+    },
+    "modifier": {
+        "operation": "multiply_base",
+        "value": 6.5
+    }
+}

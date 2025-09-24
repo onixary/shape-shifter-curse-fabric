@@ -1,0 +1,11 @@
+{
+    "type": "origins:action_over_time",
+    "entity_action": {
+        "type": "origins:set_on_fire",
+        "duration": 4
+    },
+    "interval": 20,
+    "condition": {
+        "type": "origins:on_fire"
+    }
+}

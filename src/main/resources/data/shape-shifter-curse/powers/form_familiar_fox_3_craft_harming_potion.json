@@ -1,0 +1,27 @@
+{
+    "type": "origins:item_on_item",
+    "using_item_condition": {
+        "type": "origins:ingredient",
+        "ingredient": {
+            "item": "minecraft:potion"
+        }
+    },
+    "on_item_condition": {
+        "type": "origins:ingredient",
+        "ingredient": {
+            "item": "minecraft:fermented_spider_eye"
+        }
+    },
+    "using_item_action": {
+        "type": "origins:consume",
+        "amount": 1
+    },
+    "on_item_action": {
+        "type": "origins:consume",
+        "amount": 1
+    },
+    "entity_action": {
+        "type": "origins:execute_command",
+        "command": "/give @p minecraft:splash_potion{Potion:\"minecraft:strong_harming\"}"
+    }
+}

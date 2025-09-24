@@ -1,0 +1,15 @@
+{
+    "type": "origins:conditioned_attribute",
+    "modifier": {
+        "name": "Decrease speed when not having air(moist)",
+        "attribute": "minecraft:generic.movement_speed",
+        "operation": "multiply_total",
+        "value": -0.5
+    },
+    "tick_rate": 20,
+    "condition": {
+        "type": "origins:air",
+        "comparison": "<=",
+        "compare_to": 0
+    }
+}

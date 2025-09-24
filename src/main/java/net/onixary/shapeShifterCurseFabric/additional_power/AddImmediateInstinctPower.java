@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
@@ -48,7 +47,7 @@ public class AddImmediateInstinctPower extends Power {
 
     public static PowerFactory getFactory() {
         return new PowerFactory<>(
-            Apoli.identifier("add_immediate_instinct"),
+            ShapeShifterCurseFabric.identifier("add_immediate_instinct"),
             new SerializableData()
                 .add("instinct_effect_id", SerializableDataTypes.STRING)
                     .add("value", SerializableDataTypes.FLOAT, 0.0f),

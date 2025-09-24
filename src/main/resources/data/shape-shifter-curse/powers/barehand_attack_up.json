@@ -1,0 +1,37 @@
+{
+    "type": "origins:action_on_hit",
+    "bientity_condition": {
+        "type": "origins:actor_condition",
+        "condition": {
+            "type": "origins:or",
+            "conditions": [
+                {
+                    "type": "origins:inventory",
+                    "process_mode": "items",
+                    "item_condition": {
+                        "type": "origins:harvest_level",
+                        "comparison": "<=",
+                        "compare_to": 1
+                    },
+                    "slots": [
+                        "weapon.mainhand"
+                    ]
+                },
+                {
+                    "type": "origins:inventory",
+                    "process_mode": "items",
+                    "comparison": "==",
+                    "compare_to": 0,
+                    "slots": [
+                        "weapon.mainhand"
+                    ]
+                }
+            ]
+        }
+    },
+    "bientity_action": {
+        "type": "origins:damage",
+        "amount": 7,
+        "damage_type": "minecraft:cramming"
+    }
+}

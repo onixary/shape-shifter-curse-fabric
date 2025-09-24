@@ -1,0 +1,7 @@
+{
+    "type": "shape-shifter-curse:prevent_berry_effect",
+    "condition": {
+        "type": "origins:constant",
+        "value": true
+    }
+}

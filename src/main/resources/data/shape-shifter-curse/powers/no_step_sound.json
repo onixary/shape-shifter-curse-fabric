@@ -1,0 +1,7 @@
+{
+    "type": "shape-shifter-curse:no_step_sound",
+    "condition": {
+        "type": "origins:constant",
+        "value": true
+    }
+}

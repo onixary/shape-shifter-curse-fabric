@@ -1,18 +1,18 @@
 {
-	"powers": [
-		"origins:form_bat_0_scale",
-		"origins:form_dark_speed_up",
-		"origins:form_disable_chest_armor",
-		"origins:form_bat_0_sun_health",
-		"origins:form_bat_instinct_in_dark",
-		"origins:form_instinct_use_catalyst",
-		"origins:form_instinct_use_golden_apple",
-		"origins:form_bat_instinct_biome"
-	],
-	"icon": {
-		"item": "minecraft:player_head"
-	},
-	"order": 0,
-	"unchoosable": true,
-	"impact": 0
+    "powers": [
+        "shape-shifter-curse:form_bat_0_scale",
+        "shape-shifter-curse:form_dark_speed_up",
+        "shape-shifter-curse:form_disable_chest_armor",
+        "shape-shifter-curse:form_bat_0_sun_health",
+        "shape-shifter-curse:form_bat_instinct_in_dark",
+        "shape-shifter-curse:form_instinct_use_catalyst",
+        "shape-shifter-curse:form_instinct_use_golden_apple",
+        "shape-shifter-curse:form_bat_instinct_biome"
+    ],
+    "icon": {
+        "item": "minecraft:player_head"
+    },
+    "order": 0,
+    "unchoosable": true,
+    "impact": 0
 }

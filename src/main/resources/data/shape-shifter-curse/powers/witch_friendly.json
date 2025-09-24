@@ -1,0 +1,7 @@
+{
+    "type": "shape-shifter-curse:witch_friendly",
+    "condition": {
+        "type": "origins:constant",
+        "value": true
+    }
+}

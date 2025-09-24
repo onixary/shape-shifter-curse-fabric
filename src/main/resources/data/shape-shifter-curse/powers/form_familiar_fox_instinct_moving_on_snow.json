@@ -1,0 +1,34 @@
+{
+    "type": "shape-shifter-curse:add_sustained_instinct",
+    "instinct_effect_id": "FORM_FAMILIAR_FOX_MOVING_ON_SNOW",
+    "value": 0.008,
+    "duration": 1,
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:or",
+                "conditions": [
+                    {
+                        "type": "origins:on_block",
+                        "block_condition": {
+                            "type": "origins:block",
+                            "block": "minecraft:snow_block"
+                        }
+                    },
+                    {
+                        "type": "origins:on_block",
+                        "block_condition": {
+                            "type": "origins:block_state",
+                            "property": "snowy",
+                            "value": true
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "origins:moving"
+            }
+        ]
+    }
+}

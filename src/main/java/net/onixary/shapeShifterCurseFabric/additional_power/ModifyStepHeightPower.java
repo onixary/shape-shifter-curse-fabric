@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
@@ -10,6 +9,7 @@ import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import virtuoel.pehkui.api.ScaleData;
 import virtuoel.pehkui.api.ScaleTypes;
 
@@ -47,7 +47,7 @@ public class ModifyStepHeightPower extends Power {
 
     public static PowerFactory createFactory() {
         return new PowerFactory<>(
-                Apoli.identifier("modify_step_height"),
+                ShapeShifterCurseFabric.identifier("modify_step_height"),
                 new SerializableData()
                         .add("step_height_scale", SerializableDataTypes.FLOAT)
                         .add("condition", ApoliDataTypes.ENTITY_CONDITION, null),

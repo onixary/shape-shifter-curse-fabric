@@ -1,0 +1,15 @@
+{
+    "type": "origins:conditioned_attribute",
+    "modifier": {
+        "name": "Oxygen health",
+        "attribute": "minecraft:generic.max_health",
+        "value": 12.0,
+        "operation": "addition"
+    },
+    "tick_rate": 20,
+    "condition": {
+        "type": "origins:air",
+        "comparison": ">=",
+        "compare_to": 270
+    }
+}

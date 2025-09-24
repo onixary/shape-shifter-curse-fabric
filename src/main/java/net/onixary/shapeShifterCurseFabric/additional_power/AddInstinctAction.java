@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.power.factory.action.ActionFactory;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
@@ -44,7 +43,7 @@ public class AddInstinctAction{
 
     public static ActionFactory<Entity> getFactory() {
         return new ActionFactory<>(
-                Apoli.identifier("add_instinct"),
+                ShapeShifterCurseFabric.identifier("add_instinct"),
                 new SerializableData()
                         .add("instinct_effect_id", SerializableDataTypes.STRING)
                         .add("value", SerializableDataTypes.FLOAT, 0.0f)

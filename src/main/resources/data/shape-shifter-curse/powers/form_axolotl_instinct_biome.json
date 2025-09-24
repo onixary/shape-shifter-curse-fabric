@@ -1,0 +1,10 @@
+{
+    "type": "shape-shifter-curse:add_sustained_instinct",
+    "instinct_effect_id": "FORM_AXOLOTL_BIOME",
+    "value": 0.003,
+    "duration": 1,
+    "condition": {
+        "type": "origins:biome",
+        "biome": "minecraft:lush_caves"
+    }
+}

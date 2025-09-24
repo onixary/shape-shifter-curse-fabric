@@ -135,6 +135,12 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
     private int save_timer = 0;
 
+
+    public static Identifier identifier(String path) {
+        return new Identifier(MOD_ID, path);
+    }
+
+
     /**
      * 注册动画系统
      * 这个方法需要在服务端也执行，以确保变换动画能够正确同步
