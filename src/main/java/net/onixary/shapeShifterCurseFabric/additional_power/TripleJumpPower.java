@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
@@ -11,8 +10,6 @@ import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-
-import java.util.function.Consumer;
 
 public class TripleJumpPower extends Power {
 
@@ -104,7 +101,7 @@ public class TripleJumpPower extends Power {
 
     public static PowerFactory createFactory() {
         return new PowerFactory<>(
-                Apoli.identifier("triple_jump"),
+                ShapeShifterCurseFabric.identifier("triple_jump"),
                 new SerializableData()
                         .add("first_jump_action", ApoliDataTypes.ENTITY_ACTION, null)
                         .add("second_jump_action", ApoliDataTypes.ENTITY_ACTION, null)

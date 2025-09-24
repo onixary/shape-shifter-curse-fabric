@@ -1,0 +1,15 @@
+{
+    "type": "origins:conditioned_attribute",
+    "modifier": {
+        "name": "Gain health when having air(moist)",
+        "attribute": "minecraft:generic.max_health",
+        "value": 6.0,
+        "operation": "addition"
+    },
+    "tick_rate": 40,
+    "condition": {
+        "type": "origins:air",
+        "comparison": ">",
+        "compare_to": 0
+    }
+}

@@ -1,10 +1,11 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.power.factory.condition.ConditionFactory;
 import io.github.apace100.calio.data.SerializableData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,7 +40,7 @@ public class JumpEventCondition {
 
     public static ConditionFactory<Entity> getFactory() {
         return new ConditionFactory<>(
-                Apoli.identifier("jump_event"),
+                ShapeShifterCurseFabric.identifier("jump_event"),
                 new SerializableData(),
                 JumpEventCondition::condition
         );

@@ -1,0 +1,22 @@
+{
+    "type": "origins:exhaust",
+    "interval": 10,
+    "exhaustion": 0.5,
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:sneaking"
+            },
+            {
+                "type": "origins:moving"
+            },
+            {
+                "type": "origins:fluid_height",
+                "fluid": "minecraft:water",
+                "comparison": "<=",
+                "compare_to": 0
+            }
+        ]
+    }
+}

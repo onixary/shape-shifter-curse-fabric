@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
@@ -12,6 +11,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -129,7 +129,7 @@ public class DelayAttributePower extends Power {
 
     public static PowerFactory<?> createFactory() {
         return new PowerFactory<>(
-                Apoli.identifier("delay_attribute"),
+                ShapeShifterCurseFabric.identifier("delay_attribute"),
                 new SerializableData()
                     .add("tick_rate", SerializableDataTypes.INT, 1)
                     .add("updateHealth", SerializableDataTypes.BOOLEAN, true)

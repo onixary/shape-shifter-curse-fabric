@@ -1,0 +1,41 @@
+{
+    "type": "shape-shifter-curse:attract_by_entity",
+    "entity_condition": {
+        "type": "origins:or",
+        "conditions": [
+            {
+                "type": "origins:entity_type",
+                "entity_type": "minecraft:witch"
+            },
+            {
+                "type": "origins:entity_type",
+                "entity_type": "minecraft:evoker"
+            }
+        ]
+    },
+    "self_action": {
+        "type": "origins:apply_effect",
+        "effect": {
+            "effect": "minecraft:nausea",
+            "amplifier": 1,
+            "duration": 80
+        }
+    },
+    "entity_action": {
+        "type": "origins:spawn_particles",
+        "particle": "minecraft:soul_fire_flame",
+        "count": 1,
+        "speed": 0.0,
+        "force": true,
+        "spread": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "attraction_speed": 0.4,
+    "attraction_radius": 15.0,
+    "stop_radius": 2.5,
+    "escape_attraction_speed": 0.01,
+    "escape_angle": 180
+}

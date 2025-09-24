@@ -1,0 +1,13 @@
+{
+    "type": "origins:conditioned_attribute",
+    "modifier": {
+        "attribute": "minecraft:generic.movement_speed",
+        "operation": "multiply_total",
+        "value": 0.35,
+        "name": "Increased speed when sprinting"
+    },
+    "tick_rate": 4,
+    "condition": {
+        "type": "origins:sprinting"
+    }
+}

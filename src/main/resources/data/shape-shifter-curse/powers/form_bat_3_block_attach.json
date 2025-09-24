@@ -1,0 +1,30 @@
+{
+    "type": "shape-shifter-curse:bat_block_attach",
+    "block_condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:replacable",
+                "inverted": true
+            }
+        ]
+    },
+    "side_attach_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "origins:execute_command",
+                "command": "particle minecraft:crit ~ ~0.5 ~ 0.2 0.2 0.2 0 5"
+            },
+            {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.goat.long_jump"
+            }
+        ]
+    },
+    "bottom_attach_action": {
+        "type": "origins:heal",
+        "amount": 1
+    },
+    "bottom_attach_interval": 40
+}

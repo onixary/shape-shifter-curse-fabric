@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
@@ -35,7 +34,7 @@ public class BurnDamageModifierPower extends Power {
 
     public static PowerFactory createFactory() {
         return new PowerFactory<>(
-                Apoli.identifier("burn_damage_modifier"),
+                ShapeShifterCurseFabric.identifier("burn_damage_modifier"),
                 new SerializableData()
                         .add("modifier", SerializableDataTypes.FLOAT, 1.0f)
                         .add("action", ApoliDataTypes.ENTITY_ACTION, null),

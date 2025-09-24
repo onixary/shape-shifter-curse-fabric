@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
@@ -10,6 +9,7 @@ import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 public class CriticalDamageModifierPower extends Power {
 
@@ -34,7 +34,7 @@ public class CriticalDamageModifierPower extends Power {
 
     public static PowerFactory createFactory() {
         return new PowerFactory<>(
-                Apoli.identifier("critical_damage_modifier"),
+                ShapeShifterCurseFabric.identifier("critical_damage_modifier"),
                 new SerializableData()
                         .add("action", ApoliDataTypes.ENTITY_ACTION, null)
                         .add("multiplier", SerializableDataTypes.FLOAT, 1.5f),

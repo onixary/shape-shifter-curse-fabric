@@ -1,0 +1,13 @@
+{
+    "type": "origins:modify_food",
+    "food_modifier": {
+        "name": "Decreased food points",
+        "operation": "multiply_base_multiplicative",
+        "value": -0.2
+    },
+    "saturation_modifier": {
+        "name": "Decreased saturation points",
+        "operation": "multiply_base_multiplicative",
+        "value": -0.15
+    }
+}

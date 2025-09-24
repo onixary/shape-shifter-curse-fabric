@@ -1,0 +1,15 @@
+{
+    "type": "origins:action_on_item_use",
+    "entity_action": {
+        "type": "shape-shifter-curse:add_instinct",
+        "instinct_effect_id": "FORM_USE_CATALYST",
+        "value": 0.975,
+        "duration": 40
+    },
+    "item_condition": {
+        "type": "origins:ingredient",
+        "ingredient": {
+            "item": "shape-shifter-curse:catalyst"
+        }
+    }
+}

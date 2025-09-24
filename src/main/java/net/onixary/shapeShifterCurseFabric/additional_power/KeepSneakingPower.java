@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
@@ -9,6 +8,7 @@ import io.github.apace100.apoli.power.factory.condition.ConditionFactory;
 import io.github.apace100.calio.data.SerializableData;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 public class KeepSneakingPower extends Power {
 
@@ -30,7 +30,7 @@ public class KeepSneakingPower extends Power {
 
     public static PowerFactory createFactory() {
         return new PowerFactory<>(
-                Apoli.identifier("keep_sneaking"),
+                ShapeShifterCurseFabric.identifier("keep_sneaking"),
                 new SerializableData()
                         .add("condition", ApoliDataTypes.ENTITY_CONDITION, null),
                 data -> (powerType, livingEntity) -> new KeepSneakingPower(

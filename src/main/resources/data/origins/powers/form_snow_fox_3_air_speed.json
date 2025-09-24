@@ -1,7 +1,0 @@
-{
-  "type": "origins:modify_air_speed",
-  "modifier": {
-    "operation": "multiply_total",
-    "value": 1.25
-  }
-}

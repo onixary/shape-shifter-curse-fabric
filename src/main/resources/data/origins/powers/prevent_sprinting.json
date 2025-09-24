@@ -1,7 +1,0 @@
-{
-  "type": "origins:prevent_sprinting",
-  "condition": {
-    "type": "origins:constant",
-    "value": true
-  }
-}

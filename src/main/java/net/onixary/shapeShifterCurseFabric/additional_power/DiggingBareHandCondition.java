@@ -1,20 +1,16 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.mixin.ClientPlayerInteractionManagerAccessor;
 import io.github.apace100.apoli.mixin.ServerPlayerInteractionManagerAccessor;
 import io.github.apace100.apoli.power.factory.condition.ConditionFactory;
 import io.github.apace100.calio.data.SerializableData;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ToolItem;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Identifier;
-
-import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 public class DiggingBareHandCondition {
 
@@ -55,7 +51,7 @@ public class DiggingBareHandCondition {
 
     public static ConditionFactory<Entity> getFactory() {
         return new ConditionFactory<>(
-                Apoli.identifier("barehand_digging"),
+                ShapeShifterCurseFabric.identifier("barehand_digging"),
                 new SerializableData(),
                 DiggingBareHandCondition::condition
         );

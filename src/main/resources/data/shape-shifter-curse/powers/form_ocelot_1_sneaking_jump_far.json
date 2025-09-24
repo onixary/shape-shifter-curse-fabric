@@ -1,0 +1,29 @@
+{
+    "type": "origins:active_self",
+    "entity_action": {
+        "type": "origins:add_velocity",
+        "z": 0.25,
+        "space": "local"
+    },
+    "cooldown": 10,
+    "hud_render": {
+        "should_render": false
+    },
+    "key": {
+        "key": "key.jump",
+        "continuous": false
+    },
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:sneaking"
+            },
+            {
+                "type": "origins:food_level",
+                "comparison": ">=",
+                "compare_to": 6
+            }
+        ]
+    }
+}

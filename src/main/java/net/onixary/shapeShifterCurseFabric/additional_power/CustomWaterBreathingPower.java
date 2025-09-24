@@ -1,12 +1,12 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.LivingEntity;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 public class CustomWaterBreathingPower extends Power {
     // 使用原版水下呼吸逻辑的反向来实现陆地上慢速失去氧气
@@ -23,7 +23,7 @@ public class CustomWaterBreathingPower extends Power {
 
     public static PowerFactory<?> createFactory() {
         return new PowerFactory<>(
-                Apoli.identifier("custom_water_breathing"),
+                ShapeShifterCurseFabric.identifier("custom_water_breathing"),
                 new SerializableData()
                         .add("land_water_breathing_level", SerializableDataTypes.INT, 24)
                         .add("damage_when_no_air", SerializableDataTypes.BOOLEAN, false),

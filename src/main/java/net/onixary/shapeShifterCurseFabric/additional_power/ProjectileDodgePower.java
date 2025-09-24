@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
@@ -144,7 +143,7 @@ public class ProjectileDodgePower extends Power {
 
     public static PowerFactory<?> createFactory() {
         return new PowerFactory<>(
-                Apoli.identifier("projectile_dodge"),
+                ShapeShifterCurseFabric.identifier("projectile_dodge"),
                 new SerializableData()
                         .add("action", ApoliDataTypes.ENTITY_ACTION, null)
                         .add("entity_condition", ApoliDataTypes.ENTITY_CONDITION, null)

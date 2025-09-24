@@ -1,0 +1,28 @@
+{
+    "type": "origins:conditioned_attribute",
+    "modifier": {
+        "attribute": "minecraft:generic.movement_speed",
+        "operation": "addition",
+        "value": 0.2
+    },
+    "tick_rate": 1,
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:fluid_height",
+                "fluid": "minecraft:water",
+                "comparison": "<=",
+                "compare_to": 0
+            },
+            {
+                "type": "origins:sneaking"
+            },
+            {
+                "type": "origins:air",
+                "comparison": ">",
+                "compare_to": 0
+            }
+        ]
+    }
+}

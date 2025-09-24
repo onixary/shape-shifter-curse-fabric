@@ -1,30 +1,28 @@
 {
-	"powers": [
-		"origins:form_base_scale",
-
-		"origins:aquatic",
-		"origins:form_axolotl_1_swim_speed",
-		"origins:breathing_under_water",
-		"origins:form_raw_fish_food_up",
-		"origins:jump_out_water",
-		"origins:form_axolotl_2_regeneration",
-		"origins:form_axolotl_1_new_water_flexibility",
-
-		"origins:form_axolotl_0_new_puff_speed_down",
-		"origins:form_disable_head_armor",
-		"origins:carnivore",
-		"origins:form_axolotl_instinct_in_water",
-		"origins:form_axolotl_instinct_eat_fish",
-		"origins:form_axolotl_instinct_biome",
-		"origins:form_axolotl_instinct_near_dripleaf",
-		"origins:form_axolotl_instinct_attack_fish",
-		"origins:form_instinct_use_catalyst",
-		"origins:form_instinct_use_golden_apple"
-	],
-	"icon": {
-		"item": "minecraft:player_head"
-	},
-	"order": 0,
-	"unchoosable": true,
-	"impact": 0
+    "powers": [
+        "shape-shifter-curse:form_base_scale",
+        "origins:aquatic",
+        "shape-shifter-curse:form_axolotl_1_swim_speed",
+        "shape-shifter-curse:breathing_under_water",
+        "shape-shifter-curse:form_raw_fish_food_up",
+        "shape-shifter-curse:jump_out_water",
+        "shape-shifter-curse:form_axolotl_2_regeneration",
+        "shape-shifter-curse:form_axolotl_1_new_water_flexibility",
+        "shape-shifter-curse:form_axolotl_0_new_puff_speed_down",
+        "shape-shifter-curse:form_disable_head_armor",
+        "origins:carnivore",
+        "shape-shifter-curse:form_axolotl_instinct_in_water",
+        "shape-shifter-curse:form_axolotl_instinct_eat_fish",
+        "shape-shifter-curse:form_axolotl_instinct_biome",
+        "shape-shifter-curse:form_axolotl_instinct_near_dripleaf",
+        "shape-shifter-curse:form_axolotl_instinct_attack_fish",
+        "shape-shifter-curse:form_instinct_use_catalyst",
+        "shape-shifter-curse:form_instinct_use_golden_apple"
+    ],
+    "icon": {
+        "item": "minecraft:player_head"
+    },
+    "order": 0,
+    "unchoosable": true,
+    "impact": 0
 }

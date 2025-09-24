@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
@@ -16,7 +15,7 @@ public class SnowballBlockTransformPower extends Power {
 
     public static PowerFactory createFactory() {
         return new PowerFactory<>(
-                Apoli.identifier("snowball_block_transform"),
+                ShapeShifterCurseFabric.identifier("snowball_block_transform"),
                 new SerializableData(),
                 data -> (type, entity) -> new SnowballBlockTransformPower(type, entity)
         ).allowCondition();

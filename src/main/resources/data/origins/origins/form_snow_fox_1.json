@@ -1,29 +1,27 @@
 {
-	"powers": [
-		"origins:form_familiar_fox_1_scale",
-		"origins:form_familiar_fox_0_sprint_speed_up",
-		"origins:form_familiar_fox_0_water_speed_down",
-		"origins:form_snow_fox_3_sweet_berry_up",
-		"origins:form_snow_fox_3_fox_friendly",
-		"origins:form_snow_fox_1_triple_jump",
-		"origins:form_snow_fox_1_critical_attack_up",
-		"origins:form_snow_fox_3_near_lava_damage",
-		"origins:form_snow_fox_1_desert_health",
-		"origins:form_snow_fox_3_snowball_up",
-
-		"origins:form_instinct_use_catalyst",
-		"origins:form_instinct_use_golden_apple",
-		"origins:form_familiar_fox_instinct_in_berry_bush",
-		"origins:form_familiar_fox_instinct_biome",
-		"origins:form_snow_fox_instinct_sprint_jump",
-
-		"origins:prevent_berry_effect"
-	],
-	"icon": {
-		"item": "minecraft:player_head"
-	},
-	"order": 0,
-	"unchoosable": true,
-	"impact": 0,
-	"loading_priority": 0
+    "powers": [
+        "shape-shifter-curse:form_familiar_fox_1_scale",
+        "shape-shifter-curse:form_familiar_fox_0_sprint_speed_up",
+        "shape-shifter-curse:form_familiar_fox_0_water_speed_down",
+        "shape-shifter-curse:form_snow_fox_3_sweet_berry_up",
+        "shape-shifter-curse:form_snow_fox_3_fox_friendly",
+        "shape-shifter-curse:form_snow_fox_1_triple_jump",
+        "shape-shifter-curse:form_snow_fox_1_critical_attack_up",
+        "shape-shifter-curse:form_snow_fox_3_near_lava_damage",
+        "shape-shifter-curse:form_snow_fox_1_desert_health",
+        "shape-shifter-curse:form_snow_fox_3_snowball_up",
+        "shape-shifter-curse:form_instinct_use_catalyst",
+        "shape-shifter-curse:form_instinct_use_golden_apple",
+        "shape-shifter-curse:form_familiar_fox_instinct_in_berry_bush",
+        "shape-shifter-curse:form_familiar_fox_instinct_biome",
+        "shape-shifter-curse:form_snow_fox_instinct_sprint_jump",
+        "shape-shifter-curse:prevent_berry_effect"
+    ],
+    "icon": {
+        "item": "minecraft:player_head"
+    },
+    "order": 0,
+    "unchoosable": true,
+    "impact": 0,
+    "loading_priority": 0
 }

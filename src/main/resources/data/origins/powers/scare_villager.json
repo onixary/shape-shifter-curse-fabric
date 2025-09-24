@@ -1,7 +1,0 @@
-{
-  "type": "origins:scare_villager",
-  "condition": {
-    "type": "origins:constant",
-    "value": true
-  }
-}

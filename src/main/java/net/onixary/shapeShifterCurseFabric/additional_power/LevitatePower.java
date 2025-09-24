@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Active;
@@ -14,6 +13,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.Vec3d;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 public class LevitatePower extends Power implements Active {
     // 配置参数
@@ -104,7 +104,7 @@ public class LevitatePower extends Power implements Active {
     // 工厂方法
     public static PowerFactory<?> getFactory() {
         return new PowerFactory<>(
-                Apoli.identifier("levitate"),
+                ShapeShifterCurseFabric.identifier("levitate"),
                 new SerializableData()
                         .add("ascent_speed", SerializableDataTypes.FLOAT, 0.5f)
                         .add("max_ascend_duration", SerializableDataTypes.INT, 40)

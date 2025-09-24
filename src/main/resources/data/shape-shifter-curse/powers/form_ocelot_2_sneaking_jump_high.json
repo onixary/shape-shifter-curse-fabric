@@ -1,0 +1,21 @@
+{
+    "type": "origins:modify_jump",
+    "modifier": {
+        "name": "Bonus jump force while sneaking",
+        "operation": "multiply_base",
+        "value": 0.15
+    },
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:sneaking"
+            },
+            {
+                "type": "origins:food_level",
+                "comparison": ">=",
+                "compare_to": 6
+            }
+        ]
+    }
+}

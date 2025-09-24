@@ -1,0 +1,19 @@
+{
+    "type": "origins:effect_immunity",
+    "effects": [
+        "minecraft:poison",
+        "minecraft:hunger",
+        "minecraft:speed",
+        "minecraft:haste",
+        "minecraft:strength",
+        "minecraft:regeneration",
+        "minecraft:fire_resistance",
+        "minecraft:water_breathing",
+        "minecraft:night_vision",
+        "minecraft:resistance",
+        "minecraft:invisibility",
+        "minecraft:health_boost",
+        "minecraft:wither",
+        "minecraft:absorption"
+    ]
+}

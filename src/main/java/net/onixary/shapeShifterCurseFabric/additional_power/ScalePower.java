@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
@@ -11,8 +10,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import virtuoel.pehkui.api.ScaleData;
 import virtuoel.pehkui.api.ScaleTypes;
-
-import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.applySustainedEffect;
 
 public class ScalePower extends Power {
 
@@ -44,7 +41,7 @@ public class ScalePower extends Power {
 
     public static PowerFactory getFactory() {
         return new PowerFactory<>(
-            Apoli.identifier("scale"),
+            ShapeShifterCurseFabric.identifier("scale"),
             new SerializableData()
                 .add("scale", SerializableDataTypes.FLOAT)
                     .add("is_feral", SerializableDataTypes.BOOLEAN, false),
