@@ -112,7 +112,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final EntityType<TransformativeBatEntity> T_BAT = Registry.register(
             Registries.ENTITY_TYPE,
             new Identifier(ShapeShifterCurseFabric.MOD_ID, "t_bat"),
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TransformativeBatEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.AMBIENT, TransformativeBatEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
                     .build()
     );
@@ -120,7 +120,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final EntityType<TransformativeAxolotlEntity> T_AXOLOTL = Registry.register(
             Registries.ENTITY_TYPE,
             new Identifier(ShapeShifterCurseFabric.MOD_ID, "t_axolotl"),
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TransformativeAxolotlEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.AXOLOTLS, TransformativeAxolotlEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
                     .build()
     );
@@ -128,7 +128,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final EntityType<TransformativeOcelotEntity> T_OCELOT = Registry.register(
             Registries.ENTITY_TYPE,
             new Identifier(ShapeShifterCurseFabric.MOD_ID, "t_ocelot"),
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TransformativeOcelotEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TransformativeOcelotEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
                     .build()
     );
