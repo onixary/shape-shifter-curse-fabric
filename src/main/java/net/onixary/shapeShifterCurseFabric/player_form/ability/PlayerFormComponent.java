@@ -47,6 +47,11 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         }
     }
 
+    public PlayerFormComponent clear() {
+        this.readFromNbt(new NbtCompound());
+        return this;
+    }
+
     @Override
     public void writeToNbt(NbtCompound nbtCompound) {
         nbtCompound.putString("currentForm", this.currentForm.name());

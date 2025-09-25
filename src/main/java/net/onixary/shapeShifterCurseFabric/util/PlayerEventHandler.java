@@ -73,6 +73,8 @@ public class PlayerEventHandler {
                 // 如果没有保存的数据，说明是首次加入
                 ShapeShifterCurseFabric.LOGGER.info("No saved data found, this is first join with mod");
                 PlayerFormComponent formComponent = RegPlayerFormComponent.PLAYER_FORM.get(player);
+                // 还原到默认值 根据Wiki描述 如果删除data/shape-shifter-curse/{uuid}_*.dat则玩家会回到启用Mod之前的状态
+                formComponent.clear();
                 // 确保 firstJoin 为 true
                 formComponent.setFirstJoin(true);
                 // 触发首次加入成就
