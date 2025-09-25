@@ -44,6 +44,7 @@ public class AdditionalPowers {
         register(DelayAttributePower.createFactory());
         register(AlwaysSprintSwimmingPower.createFactory());
         register(ActionOnSplashPotionTakeEffect.createFactory());
+        register(ConditionScalePower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {
