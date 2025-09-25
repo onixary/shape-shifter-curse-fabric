@@ -2,6 +2,7 @@
     "powers": [
         "shape-shifter-curse:no_render_arm_when_sneaking",
         "shape-shifter-curse:form_ocelot_2_scale",
+        "shape-shifter-curse:form_ocelot_2_sneaking_scale",
         "origins:scare_creepers",
         "origins:fall_immunity",
         "shape-shifter-curse:barehand_attack_up",
