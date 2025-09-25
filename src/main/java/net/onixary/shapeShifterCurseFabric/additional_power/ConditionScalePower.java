@@ -72,12 +72,6 @@ public class ConditionScalePower extends Power {
         this.IsPowerActive = false;
     }
 
-    public void onRemoved() {
-        if (this.IsPowerActive) {
-            this.RemoveScale();
-        }
-    }
-
     public static PowerFactory createFactory() {
         return new PowerFactory<>(
                 ShapeShifterCurseFabric.identifier("condition_scale"),
