@@ -22,7 +22,7 @@ public class ConditionScalePower extends Power {
     private float scale;
     private float eye_scale;
 
-    private boolean IsActive = false;
+    private boolean IsPowerActive = false;
 
     public ConditionScalePower(PowerType<?> type, LivingEntity entity, float scale, float eye_scale, float original_scale, float original_eye_scale) {
         super(type, entity);
@@ -41,9 +41,9 @@ public class ConditionScalePower extends Power {
 
     @Override
     public void tick() {
-        if (this.isActive() && !this.IsActive)  {
+        if (this.isActive() && !this.IsPowerActive)  {
             this.ApplyScale();
-        } else if (!this.isActive() && this.IsActive) {
+        } else if (!this.isActive() && this.IsPowerActive) {
             this.RemoveScale();
         }
     }
@@ -57,7 +57,7 @@ public class ConditionScalePower extends Power {
         this.scaleDataEyeHeight.setPersistence(true);
         this.scaleDataHitboxHeight.setScale(eye_scale);
         this.scaleDataHitboxHeight.setPersistence(true);
-        this.IsActive = true;
+        this.IsPowerActive = true;
     }
 
     public void RemoveScale() {
@@ -69,11 +69,7 @@ public class ConditionScalePower extends Power {
         this.scaleDataEyeHeight.setPersistence(true);
         this.scaleDataHitboxHeight.setScale(original_eye_scale);
         this.scaleDataHitboxHeight.setPersistence(true);
-        this.IsActive = false;
-    }
-
-    public void onRemoved() {
-        this.RemoveScale();
+        this.IsPowerActive = false;
     }
 
     public static PowerFactory createFactory() {

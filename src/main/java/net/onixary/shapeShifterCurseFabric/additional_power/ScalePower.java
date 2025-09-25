@@ -13,7 +13,7 @@ import virtuoel.pehkui.api.ScaleTypes;
 
 public class ScalePower extends Power {
 
-    public ScalePower(PowerType<?> type, LivingEntity entity, float scale, boolean isFeral) {
+    public ScalePower(PowerType<?> type, LivingEntity entity, float scale, float eye_scale) {
         super(type, entity);
         if(entity instanceof ServerPlayerEntity) {
             ScaleData scaleDataWidth = ScaleTypes.WIDTH.getScaleData(entity);
@@ -24,18 +24,10 @@ public class ScalePower extends Power {
             scaleDataHeight.setPersistence(true);
             ScaleData scaleDataEyeHeight = ScaleTypes.EYE_HEIGHT.getScaleData(entity);
             ScaleData scaleDataHitboxHeight = ScaleTypes.HITBOX_HEIGHT.getScaleData(entity);
-            if(isFeral) {
-                scaleDataEyeHeight.setScale(0.6f);
-                scaleDataEyeHeight.setPersistence(true);
-                scaleDataHitboxHeight.setScale(0.6f);
-                scaleDataHitboxHeight.setPersistence(true);
-            }
-            else{
-                scaleDataEyeHeight.setScale(1);
-                scaleDataEyeHeight.setPersistence(true);
-                scaleDataHitboxHeight.setScale(1);
-                scaleDataHitboxHeight.setPersistence(true);
-            }
+            scaleDataEyeHeight.setScale(eye_scale);
+            scaleDataEyeHeight.setPersistence(true);
+            scaleDataHitboxHeight.setScale(eye_scale);
+            scaleDataHitboxHeight.setPersistence(true);
         }
     }
 
@@ -43,13 +35,13 @@ public class ScalePower extends Power {
         return new PowerFactory<>(
             ShapeShifterCurseFabric.identifier("scale"),
             new SerializableData()
-                .add("scale", SerializableDataTypes.FLOAT)
-                    .add("is_feral", SerializableDataTypes.BOOLEAN, false),
+                .add("scale", SerializableDataTypes.FLOAT, 1.0f)
+                .add("eye_scale", SerializableDataTypes.FLOAT, 1.0f),
             data -> (powerType, livingEntity) -> new ScalePower(
                 powerType,
                 livingEntity,
                 data.getFloat("scale"),
-                data.getBoolean("is_feral")
+                data.getFloat("eye_scale")
             )
         ).allowCondition();
     }
