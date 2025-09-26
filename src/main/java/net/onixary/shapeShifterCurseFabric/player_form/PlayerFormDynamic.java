@@ -184,8 +184,8 @@ public class PlayerFormDynamic extends PlayerFormBase{
         if (this.defaultAnim_Builder != null) {
             data.add("animDefault", saveAnim(null, this.defaultAnim_Builder));
         }
-        if (this.Group != null) {
-            data.addProperty("groupID", this.Group.GroupID.toString());
+        if (this.getGroup() != null) {
+            data.addProperty("groupID", this.getGroup().GroupID.toString());
             data.addProperty("groupIndex", this.FormIndex);
         }
         return data;
