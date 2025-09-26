@@ -8,10 +8,10 @@ import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 
 // 此Utils仅供测试使用 会随时删除
 public class TestUtils {
-    static class PlayerFormDyanmic extends PlayerFormBase {
+    static class PlayerFormDynamic extends PlayerFormBase {
         Identifier formOriginID;
 
-        public PlayerFormDyanmic(Identifier formID, Identifier formOriginID) {
+        public PlayerFormDynamic(Identifier formID, Identifier formOriginID) {
             super(formID);
             this.formOriginID = formOriginID;
         }
@@ -24,11 +24,11 @@ public class TestUtils {
 
 
     public static PlayerFormBase CreateDynamicPlayerForm(Identifier formID, Identifier formOriginID, boolean NeedRegister) {
-        PlayerFormBase form = new PlayerFormDyanmic(formID, formOriginID);
-        PlayerFormGroup group = new PlayerFormGroup(formID).addForm(form, 0);
+        PlayerFormBase form = new PlayerFormDynamic(formID, formOriginID);
+        PlayerFormGroup group = new PlayerFormGroup(formID).addForm(form, 5);
         if (NeedRegister) {
-            RegPlayerForms.registerPlayerForm(form);
-            RegPlayerForms.registerPlayerFormGroup(group);
+            RegPlayerForms.registerDynamicPlayerForm(form);
+            RegPlayerForms.registerDynamicPlayerFormGroup(group);
         }
         return form;
     }
@@ -38,6 +38,8 @@ public class TestUtils {
             ShapeShifterCurseFabric.LOGGER.warn("RemovePlayerForm: formID is not registered");
             return;
         }
-        RegPlayerForms.playerForms.remove(formID);
+        PlayerFormBase form = RegPlayerForms.playerForms.get(formID);
+        RegPlayerForms.removeDynamicPlayerForm(form.FormID);
+        RegPlayerForms.removeDynamicPlayerFormGroup(form.getGroup().GroupID);
     }
 }
