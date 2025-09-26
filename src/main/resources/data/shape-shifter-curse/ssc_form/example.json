@@ -1,0 +1,35 @@
+{
+  "__comment__": "具体看PlayerFormBase",
+  "groupID": "shape-shifter-curse:example_group",
+  "__groupID_comment__": "组ID 用于注册组",
+  "groupIndex": 5,
+  "__groupIndex_comment__": "组内索引 用于变形逻辑",
+  "phase": "PHASE_SP",
+  "__Phase_comment__": "变形阶段一般和groupIndex一样 Enum:[PHASE_CLEAR, PHASE_0, PHASE_1, PHASE_2, PHASE_3, PHASE_SP]",
+  "bodyType": "NORMAL",
+  "__BodyType_comment__": "身体类型 Enum:[NORMAL, FERAL]",
+  "isCustomForm": false,
+  "originID": "shape-shifter-curse:form_snow_fox_2",
+  "__originID_comment__": "OriginID 与Origin联动 **必须在 data/***/origins 里注册**",
+  "originLayerID": "origins:origin",
+  "__originLayerID_comment__": "OriginLayerID 与OriginFur联动 **极度不推荐修改**",
+  "hasSlowFall": false,
+  "overrideHandAnim": false,
+  "canSneakRush": false,
+  "canRushJump": false,
+  "anim": [
+    {
+      "state": "ANIM_SNEAK_IDLE",
+      "ID": "shape-shifter-curse:ocelot_2_sneak_idle",
+      "speed": 1.0,
+      "fade": 2
+    },
+    {
+      "State": "ANIM_RIDE_IDLE",
+      "animID": "shape-shifter-curse:ocelot_2_sneak_idle",
+      "speed": 1.0,
+      "fade": 2
+    }
+  ],
+  "__anim_comment__": "动画列表 具体看Form_Fox2 State 在 PlayerAnimState 中定义"
+}
