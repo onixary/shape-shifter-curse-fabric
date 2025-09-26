@@ -1,6 +1,6 @@
 {
-  "model": "orif-defaults:geo/form_feral_cat_sp.geo.json",
-  "texture": "orif-defaults:textures/form_feral_cat_sp/form_feral_cat_sp.png",
+  "model": "orif-defaults:geo/form_example.geo.json",
+  "texture": "orif-defaults:textures/form_example.png",
   "hidden": [
     "leftLeg",
     "rightLeg",

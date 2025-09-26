@@ -1,0 +1,7 @@
+{
+  "codex.form.example_namespace.example.title": [{"text":"Example TITLE", "color":"#c67681"}],
+  "codex.form.example_namespace.example.appearance": [{"text":"Example Appearance", "color":"#c67681"}],
+  "codex.form.example_namespace.example.pros": [{"text":"Example Pros", "color":"#c67681"}],
+  "codex.form.example_namespace.example.cons": [{"text":"Example Cons", "color":"#c67681"}],
+  "codex.form.example_namespace.example.instincts": [{"text":"Example Instincts", "color":"#c67681"}]
+}

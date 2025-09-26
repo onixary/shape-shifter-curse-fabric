@@ -1,6 +1,6 @@
 {
   "__comment__": "具体看PlayerFormBase",
-  "groupID": "shape-shifter-curse:example_group",
+  "groupID": "example_namespace:example_group",
   "__groupID_comment__": "组ID 用于注册组",
   "groupIndex": 5,
   "__groupIndex_comment__": "组内索引 用于变形逻辑",
@@ -9,7 +9,7 @@
   "bodyType": "NORMAL",
   "__BodyType_comment__": "身体类型 Enum:[NORMAL, FERAL]",
   "isCustomForm": false,
-  "originID": "shape-shifter-curse:form_example",
+  "originID": "example_namespace:form_example",
   "__originID_comment__": "OriginID 与Origin联动 **必须在 data/[NameSpace]/origins 里注册**",
   "originLayerID": "origins:origin",
   "__originLayerID_comment__": "OriginLayerID 与OriginFur联动 **极度不推荐修改**",
