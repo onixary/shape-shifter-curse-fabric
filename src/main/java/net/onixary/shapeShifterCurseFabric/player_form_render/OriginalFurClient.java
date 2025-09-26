@@ -21,6 +21,7 @@ import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginRegistry;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import org.jetbrains.annotations.Nullable;
@@ -137,9 +138,19 @@ public class OriginalFurClient implements ClientModInitializer {
                     } else {
                         //System.out.println(id);
                         FUR_RESOURCES.put(id, resources.get(res));
+                        // 原来的为了防止漏加载，现在不需要了
+                        try {
+                            OriginalFurClient.FUR_REGISTRY.put(id, new OriginFur(JsonParser.parseString(new String(resources.get(res).getInputStream().readAllBytes())).getAsJsonObject()));
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 }
+                // 添加 Origins 默认的形态 正常运行不需要注册
+                OriginalFurClient.FUR_REGISTRY.put(Origin.EMPTY.getIdentifier(), new OriginFur(JsonParser.parseString("{}").getAsJsonObject()));
+
                 // 手动处理各形态的映射关系：
+                /*
                 if(FabricLoader.getInstance().isModLoaded(MOD_ID)){
                     RegPlayerForms.playerForms.forEach((playerFormBaseID, playerFormBase) -> {
                         var id = playerFormBase.getFormOriginID();
@@ -161,9 +172,10 @@ public class OriginalFurClient implements ClientModInitializer {
                         }
                     });
                 }
+                 */
 
-
-                /*assert FabricLoader.getInstance().isModLoaded("origins");
+                // 旧的加载方法由于加载顺序失效
+                /* assert FabricLoader.getInstance().isModLoaded("origins");
                 try {
                     OriginRegistry.entries().forEach(identifierOriginEntry -> {
                         var oID = identifierOriginEntry.getKey();
@@ -171,9 +183,7 @@ public class OriginalFurClient implements ClientModInitializer {
                         Identifier id = oID;
                         var fur = OriginalFurClient.FUR_RESOURCES.getOrDefault(id, null);
                         if (fur == null) {
-                            //id = Identifier.of("origins", oID.getPath());
-                            // 在这里手动注册各形态的ID
-                            id = new Identifier("origins", "phantom");
+                            id = Identifier.of("origins", oID.getPath());
                             fur = OriginalFurClient.FUR_RESOURCES.getOrDefault(id, null);
                         }
                         if (fur == null) {
@@ -195,7 +205,8 @@ public class OriginalFurClient implements ClientModInitializer {
                 } catch(Exception e) {
                     System.out.println("[ORIF] Failed to load origins registry! Ensure the Origins mod is loaded! Some models may not work, and crashes may occur!");
                     e.printStackTrace();
-                }*/
+                }
+                 */
             }
         });
     }

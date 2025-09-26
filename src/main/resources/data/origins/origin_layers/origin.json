@@ -39,7 +39,8 @@
     "shape-shifter-curse:form_omega_sp",
     "shape-shifter-curse:form_psi_sp",
     "shape-shifter-curse:form_chi_sp",
-    "shape-shifter-curse:form_phi_sp"
+    "shape-shifter-curse:form_phi_sp",
+    "shape-shifter-curse:form_example"
   ],
   "allow_random": true,
   "exclude_random": [
