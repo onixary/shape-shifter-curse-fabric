@@ -111,6 +111,8 @@ public class OriginalFurClient implements ClientModInitializer {
             final String r_M = "\\/([A-Za-z0-9_.-]+)\\.json";
             @Override
             public void reload(ResourceManager manager) {
+                FUR_REGISTRY.clear();
+                FUR_RESOURCES.clear();
                 var resources = manager.findResources("furs", identifier -> identifier.getPath().endsWith(".json"));
                 for (var res : resources.keySet()) {
                     String itemName = res.getPath().substring(res.getPath().indexOf('/')+1, res.getPath().lastIndexOf('.'));

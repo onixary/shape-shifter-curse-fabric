@@ -50,6 +50,7 @@ public class PlayerFormDynamic extends PlayerFormBase{
 
     @Override
     public void Anim_registerAnims() {
+        this.getAnimMap().clear();
         for (PlayerAnimState state : this.animMap_Builder.keySet()) {
             this.getAnimMap().put(state, this.animMap_Builder.get(state).build());
         }
