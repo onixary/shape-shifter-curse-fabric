@@ -37,5 +37,5 @@
     "speed": 1.0,
     "fade": 2
   },
-  "__animDefault_comment__": "默认动画 如果没有可以添加此键"
+  "__animDefault_comment__": "默认动画 如果没有可以不用添加此键"
 }
