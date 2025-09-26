@@ -10,11 +10,15 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.integration.origins.Origins;
 import net.onixary.shapeShifterCurseFabric.player_form.forms.*;
 
+import java.util.LinkedHashMap;
+
 public class RegPlayerForms {
-    private static final Identifier playerForms_REGISTRY_ID = new Identifier(ShapeShifterCurseFabric.MOD_ID, "player_form");
-    public static Registry<PlayerFormBase> playerForms = new SimpleRegistry<PlayerFormBase>(RegistryKey.ofRegistry(playerForms_REGISTRY_ID), Lifecycle.stable());
-    private static final Identifier playerFormGroups_REGISTRY_ID = new Identifier(ShapeShifterCurseFabric.MOD_ID, "player_form_group");
-    public static Registry<PlayerFormGroup> playerFormGroups = new SimpleRegistry<PlayerFormGroup>(RegistryKey.ofRegistry(playerFormGroups_REGISTRY_ID), Lifecycle.stable());
+//    private static final Identifier playerForms_REGISTRY_ID = new Identifier(ShapeShifterCurseFabric.MOD_ID, "player_form");
+//    public static Registry<PlayerFormBase> playerForms = new SimpleRegistry<PlayerFormBase>(RegistryKey.ofRegistry(playerForms_REGISTRY_ID), Lifecycle.stable());
+//    private static final Identifier playerFormGroups_REGISTRY_ID = new Identifier(ShapeShifterCurseFabric.MOD_ID, "player_form_group");
+//    public static Registry<PlayerFormGroup> playerFormGroups = new SimpleRegistry<PlayerFormGroup>(RegistryKey.ofRegistry(playerFormGroups_REGISTRY_ID), Lifecycle.stable());
+    public static LinkedHashMap<Identifier, PlayerFormBase> playerForms = new LinkedHashMap<>();
+    public static LinkedHashMap<Identifier, PlayerFormGroup> playerFormGroups = new LinkedHashMap<>();
 
     // Builtin PlayerForms
     // 在Java中null不能使用equals方法
@@ -88,11 +92,15 @@ public class RegPlayerForms {
 
 
     public static <T extends PlayerFormBase> T registerPlayerForm(T form) {
-        return Registry.register(playerForms, form.FormID, form);
+//        return Registry.register(playerForms, form.FormID, form);
+        playerForms.put(form.FormID, form);
+        return form;
     }
 
     public static <T extends PlayerFormGroup> T registerPlayerFormGroup(T formGroup) {
-        return Registry.register(playerFormGroups, formGroup.GroupID, formGroup);
+//        return Registry.register(playerFormGroups, formGroup.GroupID, formGroup);
+        playerFormGroups.put(formGroup.GroupID, formGroup);
+        return formGroup;
     }
 
     public static PlayerFormBase getPlayerForm(Identifier id) {

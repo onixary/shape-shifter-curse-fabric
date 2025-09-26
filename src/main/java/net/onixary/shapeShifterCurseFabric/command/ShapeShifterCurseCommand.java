@@ -6,16 +6,20 @@ import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.argument.EntityArgumentType;
+import net.minecraft.command.argument.IdentifierArgumentType;
 import net.minecraft.command.argument.Vec3ArgumentType;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
+import net.onixary.shapeShifterCurseFabric.util.TestUtils;
 
 import java.util.Collection;
 
@@ -73,7 +77,36 @@ public class ShapeShifterCurseCommand {
                                         .executes(ShapeShifterCurseCommand::setPlayerSkin)
                                 )
                         )
+                        .then(literal("dev_set_form").requires(cs -> cs.hasPermissionLevel(2))
+                                .then(argument("target", EntityArgumentType.player())
+                                        .then(argument("form", IdentifierArgumentType.identifier())
+                                                .executes(ShapeShifterCurseCommand::devSetForm)
+                                        )
+                                )
+                        )
+                        .then(literal("dev_remove_form").requires(cs -> cs.hasPermissionLevel(2))
+                                .then(argument("form", IdentifierArgumentType.identifier())
+                                        .executes(ShapeShifterCurseCommand::devRemoveForm)
+                                )
+                        )
         );
+    }
+
+    private static int devSetForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        // set form without transform effect
+        ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
+        Identifier formID = IdentifierArgumentType.getIdentifier(commandContext, "form");
+        ServerCommandSource serverCommandSource = commandContext.getSource();
+        PlayerFormBase form = TestUtils.CreateDynamicPlayerForm(formID, RegPlayerForms.SNOW_FOX_0.getFormOriginID(), true);
+        setFormDirectly(target, form);
+        return 1;
+
+    }
+
+    private static int devRemoveForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        Identifier formID = IdentifierArgumentType.getIdentifier(commandContext, "form");
+        TestUtils.RemovePlayerForm(formID);
+        return 1;
     }
 
     private static int setForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {

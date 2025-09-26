@@ -78,7 +78,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         PlayerAnimationAccess.getPlayerAnimLayer((AbstractClientPlayerEntity) (Object) this).addAnimLayer(1, CONTAINER);
         // register all form animations here
         AnimationTransform.registerAnims();
-        RegPlayerForms.playerForms.forEach(PlayerFormBase::Anim_registerAnims);
+        RegPlayerForms.playerForms.forEach((formID, form) -> {form.Anim_registerAnims();});
 
         currentAnimation = null;
         CONTAINER.setAnimation(null);

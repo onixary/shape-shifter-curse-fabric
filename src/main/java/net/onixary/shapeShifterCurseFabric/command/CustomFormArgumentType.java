@@ -53,7 +53,7 @@ public class CustomFormArgumentType implements ArgumentType<Identifier> {
       List<Identifier> availableForms = new ArrayList<>();
 
       try {
-            RegPlayerForms.playerForms.forEach((form) -> {
+            RegPlayerForms.playerForms.forEach((formID, form) -> {
                 if (form.GetIsCustomForm()) {
                     availableForms.add(form.FormID);
                 }

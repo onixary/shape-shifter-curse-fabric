@@ -21,6 +21,7 @@ import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import org.jetbrains.annotations.Nullable;
 
@@ -140,7 +141,7 @@ public class OriginalFurClient implements ClientModInitializer {
                 }
                 // 手动处理各形态的映射关系：
                 if(FabricLoader.getInstance().isModLoaded(MOD_ID)){
-                    RegPlayerForms.playerForms.forEach(playerFormBase -> {
+                    RegPlayerForms.playerForms.forEach((playerFormBaseID, playerFormBase) -> {
                         var id = playerFormBase.getFormOriginID();
                         var fur = OriginalFurClient.FUR_RESOURCES.getOrDefault(id, null);
                         if(fur == null){
