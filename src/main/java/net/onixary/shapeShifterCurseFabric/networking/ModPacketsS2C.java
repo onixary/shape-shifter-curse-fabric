@@ -220,10 +220,16 @@ public class ModPacketsS2C {
 
     private static void handleUpdateDynamicForm(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         // 读取String -> JsonObject
-        String jsonStr = buf.readString();
-        JsonObject jsonObject = new Gson().fromJson(jsonStr, JsonObject.class);
+        JsonObject allFrom = new JsonObject();
+        int formCount = buf.readInt();
+        for (int i = 0; i < formCount; i++) {
+            String formName = buf.readString();
+            String jsonStr = buf.readString();
+            JsonObject jsonObject = new Gson().fromJson(jsonStr, JsonObject.class);
+            allFrom.add(formName, jsonObject);
+        }
         client.execute(() -> {
-            RegPlayerForms.ApplyDynamicPlayerForms(jsonObject);
+            RegPlayerForms.ApplyDynamicPlayerForms(allFrom);
         });
     }
 }

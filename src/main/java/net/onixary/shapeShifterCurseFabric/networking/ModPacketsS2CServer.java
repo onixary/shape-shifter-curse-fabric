@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.networking;
 
+import com.google.gson.JsonObject;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -121,11 +122,15 @@ public class ModPacketsS2CServer {
         ServerPlayNetworking.send(player, ModPackets.SYNC_FORCE_SNEAK_STATE, buf);
     }
 
-    // 发送动态Form同步包
+    // 发送动态Form同步包 旧的最大32K 本来以为挺多的，结果发现单个就快4K
     public static void sendUpdateDynamicForm(ServerPlayerEntity player) {
         PacketByteBuf buf = PacketByteBufs.create();
-        // 暂时打包发送所有动态Form
-        buf.writeString(RegPlayerForms.DumpDynamicPlayerForms().toString());
+        JsonObject forms = RegPlayerForms.DumpDynamicPlayerForms();
+        buf.writeInt(forms.size()); // 发送动态Form数量
+        for (String formName : forms.keySet()) {
+            buf.writeString(formName);
+            buf.writeString(forms.get(formName).getAsString());
+        }
         ServerPlayNetworking.send(player, ModPackets.UPDATE_DYNAMIC_FORM, buf);
     }
 }
