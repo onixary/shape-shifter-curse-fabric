@@ -102,13 +102,17 @@ public class RegPlayerForms {
     }
 
     public static void removeDynamicPlayerFormsExcept(List<Identifier> except) {
+        List<Identifier> NeedRemove = new ArrayList<>();
         for (Identifier id : dynamicPlayerForms) {
             for (Identifier exceptID : except) {
                 if (id.equals(exceptID)) {
                     continue;
                 }
-                removeDynamicPlayerForm(id);
+                NeedRemove.add(id);
             }
+        }
+        for (Identifier id : NeedRemove) {
+            removeDynamicPlayerForm(id, true);
         }
     }
 
@@ -150,7 +154,7 @@ public class RegPlayerForms {
         return registerPlayerFormGroup(formGroup);
     }
 
-    public static boolean removeDynamicPlayerForm(Identifier id) {
+    public static boolean removeDynamicPlayerForm(Identifier id, boolean RemoveDynamicRegistry) {
         if (!dynamicPlayerForms.contains(id)) {
             ShapeShifterCurseFabric.LOGGER.warn("Attempted to remove non-dynamic player form: " + id);
             return false;
@@ -158,11 +162,14 @@ public class RegPlayerForms {
         if (!playerForms.containsKey(id)) {
             ShapeShifterCurseFabric.LOGGER.warn("Attempted to remove non-existent player form: " + id);
         }
+        if (RemoveDynamicRegistry) {
+            dynamicPlayerForms.remove(id);
+        }
         playerForms.remove(id);
         return true;
     }
 
-    public static boolean removeDynamicPlayerFormGroup(Identifier id) {
+    public static boolean removeDynamicPlayerFormGroup(Identifier id, boolean RemoveDynamicRegistry) {
         if (!dynamicPlayerFormGroups.contains(id)) {
             ShapeShifterCurseFabric.LOGGER.warn("Attempted to remove non-dynamic player form group: " + id);
             return false;
@@ -170,17 +177,20 @@ public class RegPlayerForms {
         if (!playerFormGroups.containsKey(id)) {
             ShapeShifterCurseFabric.LOGGER.warn("Attempted to remove non-existent player form group: " + id);
         }
+        if (RemoveDynamicRegistry) {
+            dynamicPlayerFormGroups.remove(id);
+        }
         playerFormGroups.remove(id);
         return true;
     }
 
     public static void ClearAllDynamicPlayerForms() {
         for (Identifier id : dynamicPlayerForms) {
-            removeDynamicPlayerForm(id);
+            removeDynamicPlayerForm(id, false);
         }
         dynamicPlayerForms.clear();
         for (Identifier id : dynamicPlayerFormGroups) {
-            removeDynamicPlayerFormGroup(id);
+            removeDynamicPlayerFormGroup(id, false);
         }
         dynamicPlayerFormGroups.clear();
     }

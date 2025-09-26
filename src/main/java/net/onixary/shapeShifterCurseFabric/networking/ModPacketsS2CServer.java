@@ -141,7 +141,7 @@ public class ModPacketsS2CServer {
         buf.writeInt(forms.size()); // 发送动态Form数量
         for (String formName : forms.keySet()) {
             buf.writeString(formName);
-            buf.writeString(forms.get(formName).getAsString());
+            buf.writeString(forms.get(formName).toString());
         }
         ServerPlayNetworking.send(player, ModPackets.UPDATE_DYNAMIC_FORM, buf);
     }
