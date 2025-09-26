@@ -50,6 +50,7 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.Tran
 import net.onixary.shapeShifterCurseFabric.item.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.item.RegCustomPotions;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationTransform;
 import net.onixary.shapeShifterCurseFabric.player_form.FormDataPackReloadListener;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
@@ -200,6 +201,9 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         });
         // 获取动态Form(DataPack)
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new FormDataPackReloadListener());
+        ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, resourceManager, success) -> {
+            server.getPlayerManager().getPlayerList().forEach(ModPacketsS2CServer::sendUpdateDynamicForm);
+        });
 
         // Reg origins content
 

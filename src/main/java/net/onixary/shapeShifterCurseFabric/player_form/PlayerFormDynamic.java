@@ -28,10 +28,8 @@ public class PlayerFormDynamic extends PlayerFormBase{
 
     private final HashMap<PlayerAnimState, AnimationHolderData> animMap_Builder = new HashMap<>();
     public static final HashMap<Identifier, HashMap<PlayerAnimState, AnimationHolder>> animMap = new HashMap<>();
-//    public HashMap<PlayerAnimState, AnimationHolder> animMap = new HashMap<>();
     private AnimationHolderData defaultAnim_Builder = null;
     public static final HashMap<Identifier, AnimationHolder> defaultAnim = new HashMap<>();
-//    public AnimationHolder defaultAnim = null;
 
     // 覆写数据
     private Identifier originID = null;
