@@ -54,7 +54,7 @@ public class FormArgumentType implements ArgumentType<Identifier> {
 
       try {
           RegPlayerForms.playerForms.forEach((formID, form) -> {
-              if (!form.GetIsCustomForm()) {
+              if (!form.getIsCustomForm()) {
                   availableForms.add(form.FormID);
               }
           });

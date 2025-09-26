@@ -8,6 +8,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 
 // 纯服务端类，所有send方法都只在这里调用
@@ -118,5 +119,13 @@ public class ModPacketsS2CServer {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeBoolean(shouldForceSneak);
         ServerPlayNetworking.send(player, ModPackets.SYNC_FORCE_SNEAK_STATE, buf);
+    }
+
+    // 发送动态Form同步包
+    public static void sendUpdateDynamicForm(ServerPlayerEntity player) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        // 暂时打包发送所有动态Form
+        buf.writeString(RegPlayerForms.DumpDynamicPlayerForms().toString());
+        ServerPlayNetworking.send(player, ModPackets.UPDATE_DYNAMIC_FORM, buf);
     }
 }

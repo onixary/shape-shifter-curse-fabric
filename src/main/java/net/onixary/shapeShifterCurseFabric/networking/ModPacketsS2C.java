@@ -1,23 +1,22 @@
 package net.onixary.shapeShifterCurseFabric.networking;
 
-import io.netty.buffer.Unpooled;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
-import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 
 import java.util.UUID;
 
@@ -41,6 +40,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.RESET_FIRST_PERSON, ModPacketsS2C::receiveResetFirstPerson);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_OTHER_PLAYER_BAT_ATTACH_STATE, ModPacketsS2C::receiveOtherPlayerBatAttachState);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_FORCE_SNEAK_STATE, ModPacketsS2C::receiveForceSneakState);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_DYNAMIC_FORM, ModPacketsS2C::handleUpdateDynamicForm);
     }
 
     public static void handleSyncEffectAttachment(
@@ -215,6 +215,15 @@ public class ModPacketsS2C {
         boolean shouldForce = buf.readBoolean();
         client.execute(() -> {
             ClientPlayerStateManager.shouldForceSneak = shouldForce;
+        });
+    }
+
+    private static void handleUpdateDynamicForm(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        // 读取String -> JsonObject
+        String jsonStr = buf.readString();
+        JsonObject jsonObject = new Gson().fromJson(jsonStr, JsonObject.class);
+        client.execute(() -> {
+            RegPlayerForms.ApplyDynamicPlayerForms(jsonObject);
         });
     }
 }

@@ -54,8 +54,8 @@ public class PlayerFormComponent implements AutoSyncedComponent {
 
     @Override
     public void writeToNbt(NbtCompound nbtCompound) {
-        nbtCompound.putString("currentForm", this.currentForm.toString());
-        nbtCompound.putString("previousForm", this.previousForm.toString());
+        nbtCompound.putString("currentForm", this.currentForm == null ? RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID.toString() : this.currentForm.toString());
+        nbtCompound.putString("previousForm", this.previousForm == null ? RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID.toString() : this.previousForm.toString());
         nbtCompound.putBoolean("isByCursedMoon", this.isByCursedMoon);
         nbtCompound.putBoolean("isRegressedFromFinal", this.isRegressedFromFinal);
         nbtCompound.putBoolean("isByCure", this.isByCure);
