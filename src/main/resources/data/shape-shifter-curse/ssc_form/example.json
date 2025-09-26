@@ -25,7 +25,7 @@
       "fade": 2
     },
     {
-      "State": "ANIM_RIDE_IDLE",
+      "state": "ANIM_RIDE_IDLE",
       "animID": "shape-shifter-curse:ocelot_2_sneak_idle",
       "speed": 1.0,
       "fade": 2
@@ -33,7 +33,7 @@
   ],
   "__anim_comment__": "动画列表 具体看Form_Fox2 State 在 PlayerAnimState 中定义",
   "animDefault": {
-    "animID": "shape-shifter-curse:ocelot_2_sneak_idle",
+    "animID": "shape-shifter-curse:form_feral_common_idle",
     "speed": 1.0,
     "fade": 2
   },

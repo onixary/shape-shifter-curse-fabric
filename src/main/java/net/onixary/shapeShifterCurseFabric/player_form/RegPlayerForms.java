@@ -166,6 +166,17 @@ public class RegPlayerForms {
         return true;
     }
 
+    public static void ClearAllDynamicPlayerForms() {
+        for (Identifier id : dynamicPlayerForms) {
+            removeDynamicPlayerForm(id);
+        }
+        dynamicPlayerForms.clear();
+        for (Identifier id : dynamicPlayerFormGroups) {
+            removeDynamicPlayerFormGroup(id);
+        }
+        dynamicPlayerFormGroups.clear();
+    }
+
     public static PlayerFormBase getPlayerForm(Identifier id) {
         return playerForms.get(id);
     }

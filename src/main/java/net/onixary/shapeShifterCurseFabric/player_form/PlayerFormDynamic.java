@@ -26,10 +26,12 @@ public class PlayerFormDynamic extends PlayerFormBase{
         }
     }
 
-    private final HashMap<PlayerAnimState, AnimationHolderData> animMap_Building = new HashMap<>();
-    public HashMap<PlayerAnimState, AnimationHolder> animMap = new HashMap<>();
-    private AnimationHolderData defaultAnim_Building = null;
-    public AnimationHolder defaultAnim = null;
+    private final HashMap<PlayerAnimState, AnimationHolderData> animMap_Builder = new HashMap<>();
+    public static final HashMap<Identifier, HashMap<PlayerAnimState, AnimationHolder>> animMap = new HashMap<>();
+//    public HashMap<PlayerAnimState, AnimationHolder> animMap = new HashMap<>();
+    private AnimationHolderData defaultAnim_Builder = null;
+    public static final HashMap<Identifier, AnimationHolder> defaultAnim = new HashMap<>();
+//    public AnimationHolder defaultAnim = null;
 
     // 覆写数据
     private Identifier originID = null;
@@ -41,13 +43,20 @@ public class PlayerFormDynamic extends PlayerFormBase{
 
     @Override
     public AnimationHolder Anim_getFormAnimToPlay(PlayerAnimState currentState) {
-        return animMap.getOrDefault(currentState, defaultAnim);
+        return this.getAnimMap().getOrDefault(currentState, defaultAnim.get(this.FormID));
+    }
+
+    public HashMap<PlayerAnimState, AnimationHolder> getAnimMap() {
+        return animMap.computeIfAbsent(this.FormID, k -> new HashMap<>());
     }
 
     @Override
     public void Anim_registerAnims() {
-        for (PlayerAnimState state : animMap_Building.keySet()) {
-            animMap.put(state, animMap_Building.get(state).build());
+        for (PlayerAnimState state : this.animMap_Builder.keySet()) {
+            this.getAnimMap().put(state, this.animMap_Builder.get(state).build());
+        }
+        if (this.defaultAnim_Builder != null) {
+            defaultAnim.put(this.FormID, defaultAnim_Builder.build());
         }
     }
 
@@ -85,7 +94,7 @@ public class PlayerFormDynamic extends PlayerFormBase{
     public void registerAnim(JsonObject animData) {
         try {
             PlayerAnimState State = PlayerAnimState.valueOf(animData.get("state").getAsString());
-            animMap_Building.put(State, loadAnim(animData));
+            this.animMap_Builder.put(State, loadAnim(animData));
         }
         catch(Exception e) {
             ShapeShifterCurseFabric.LOGGER.warn("Error while register player animation: " + e.getMessage());
@@ -138,7 +147,7 @@ public class PlayerFormDynamic extends PlayerFormBase{
                 }
             }
             if (formData.has("animDefault")) {
-                this.defaultAnim_Building = loadAnim(formData.get("animDefault").getAsJsonObject());
+                this.defaultAnim_Builder = loadAnim(formData.get("animDefault").getAsJsonObject());
             }
             Identifier GroupID = Identifier.tryParse(_Gson_GetString(formData, "groupID", this.FormID.toString()));
             int GroupIndex = _Gson_GetInt(formData, "groupIndex", 0);
@@ -169,12 +178,12 @@ public class PlayerFormDynamic extends PlayerFormBase{
             data.addProperty("originLayerID", this.originLayerID.toString());
         }
         JsonArray anims = new JsonArray();
-        for (Map.Entry<PlayerAnimState, AnimationHolderData> entry : animMap_Building.entrySet()) {
+        for (Map.Entry<PlayerAnimState, AnimationHolderData> entry : animMap_Builder.entrySet()) {
             anims.add(saveAnim(entry.getKey(), entry.getValue()));
         }
         data.add("anim", anims);
-        if (this.defaultAnim_Building != null) {
-            data.add("animDefault", saveAnim(null, this.defaultAnim_Building));
+        if (this.defaultAnim_Builder != null) {
+            data.add("animDefault", saveAnim(null, this.defaultAnim_Builder));
         }
         if (this.Group != null) {
             data.addProperty("groupID", this.Group.GroupID.toString());
@@ -187,5 +196,15 @@ public class PlayerFormDynamic extends PlayerFormBase{
         PlayerFormDynamic form = new PlayerFormDynamic(id);
         form.load(formData);
         return form;
+    }
+
+    @Override
+    public Identifier getFormOriginID() {
+        return this.originID != null ? this.originID : super.getFormOriginID();
+    }
+
+    @Override
+    public Identifier getFormOriginLayerID() {
+        return this.originLayerID != null ? this.originLayerID : super.getFormOriginLayerID();
     }
 }

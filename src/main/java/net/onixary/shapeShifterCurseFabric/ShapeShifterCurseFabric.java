@@ -2,8 +2,6 @@ package net.onixary.shapeShifterCurseFabric;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -12,6 +10,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.command.argument.serialize.ConstantArgumentSerializer;
 import net.minecraft.entity.EntityDimensions;
@@ -21,6 +20,7 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.resource.ResourceType;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -51,6 +51,7 @@ import net.onixary.shapeShifterCurseFabric.item.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.item.RegCustomPotions;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationTransform;
+import net.onixary.shapeShifterCurseFabric.player_form.FormDataPackReloadListener;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
@@ -197,6 +198,9 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             ServerWorld overworld = server.getOverworld();
             FormAbilityManager.getServerWorld(overworld);
         });
+        // 获取动态Form(DataPack)
+        ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new FormDataPackReloadListener());
+
         // Reg origins content
 
         // do not reset effect when player respawn or enter hell

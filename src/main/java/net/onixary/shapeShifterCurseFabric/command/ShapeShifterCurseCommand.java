@@ -83,7 +83,13 @@ public class ShapeShifterCurseCommand {
             commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
             return 0;
         }
-        setFormDirectly(target, form);
+        try {
+            setFormDirectly(target, form);
+        }
+        catch (Exception e){
+            // 调试时在此打断点
+            throw e;
+        }
 
         return 1;
 
@@ -113,7 +119,13 @@ public class ShapeShifterCurseCommand {
             commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
             return 0;
         }
-        setFormDirectly(target, form);
+        try {
+            setFormDirectly(target, form);
+        }
+        catch (Exception e){
+            // 调试时在此打断点
+            throw e;
+        }
 
         return 1;
 
