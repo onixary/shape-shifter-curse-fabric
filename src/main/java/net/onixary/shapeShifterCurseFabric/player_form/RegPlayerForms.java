@@ -6,10 +6,7 @@ import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.forms.*;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class RegPlayerForms {
     public static List<Identifier> dynamicPlayerForms = new ArrayList<>();
@@ -104,6 +101,17 @@ public class RegPlayerForms {
         return PlayerFormDynamic.of(id, dynamicPlayerForm);
     }
 
+    public static void removeDynamicPlayerFormsExcept(List<Identifier> except) {
+        for (Identifier id : dynamicPlayerForms) {
+            for (Identifier exceptID : except) {
+                if (id.equals(exceptID)) {
+                    continue;
+                }
+                removeDynamicPlayerForm(id);
+            }
+        }
+    }
+
     public static void ApplyDynamicPlayerForms(JsonObject dynamicPlayerFormList) {
         for (Map.Entry<String, JsonElement> entry : dynamicPlayerFormList.entrySet()) {
             Identifier ID = Identifier.tryParse(entry.getKey());
@@ -117,11 +125,11 @@ public class RegPlayerForms {
     }
 
     // 每次Reload调用
-    public static JsonObject DumpDynamicPlayerForms() {
-        JsonObject dynamicPlayerFormMap = new JsonObject();
+    public static HashMap<Identifier, PlayerFormDynamic> DumpDynamicPlayerForms() {
+        HashMap<Identifier, PlayerFormDynamic> dynamicPlayerFormMap = new HashMap<Identifier, PlayerFormDynamic>();
         for (Identifier id : dynamicPlayerForms) {
             if (playerForms.get(id) instanceof PlayerFormDynamic playerFormDynamic) {
-                dynamicPlayerFormMap.add(id.toString(), playerFormDynamic.save());
+                dynamicPlayerFormMap.put(id, playerFormDynamic);
             }
             else {
                 ShapeShifterCurseFabric.LOGGER.warn("Attempted to save non-dynamic player form: " + id);

@@ -9,6 +9,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
@@ -18,6 +19,8 @@ import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 // 应仅在客户端注册
@@ -41,6 +44,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_OTHER_PLAYER_BAT_ATTACH_STATE, ModPacketsS2C::receiveOtherPlayerBatAttachState);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_FORCE_SNEAK_STATE, ModPacketsS2C::receiveForceSneakState);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_DYNAMIC_FORM, ModPacketsS2C::handleUpdateDynamicForm);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.REMOVE_DYNAMIC_FORM_EXCEPT, ModPacketsS2C::handleRemoveDynamicExcept);
     }
 
     public static void handleSyncEffectAttachment(
@@ -230,6 +234,19 @@ public class ModPacketsS2C {
         }
         client.execute(() -> {
             RegPlayerForms.ApplyDynamicPlayerForms(allFrom);
+        });
+    }
+
+    private static void handleRemoveDynamicExcept(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        // 读取String -> JsonObject
+        List<Identifier> except = new ArrayList<>();
+        int formCount = buf.readInt();
+        for (int i = 0; i < formCount; i++) {
+            String formName = buf.readString();
+            except.add(Identifier.tryParse(formName));
+        }
+        client.execute(() -> {
+            RegPlayerForms.removeDynamicPlayerFormsExcept(except);
         });
     }
 }

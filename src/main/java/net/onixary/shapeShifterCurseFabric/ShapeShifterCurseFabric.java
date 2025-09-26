@@ -205,7 +205,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new FormDataPackReloadListener());
         ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, resourceManager, success) -> {
             server.getPlayerManager().getPlayerList().forEach((player) -> {
-                ModPacketsS2CServer.sendUpdateDynamicForm(player);
+                ModPacketsS2CServer.updateDynamicForm(player);
                 if (!player.getComponent(RegPlayerFormComponent.PLAYER_FORM).isCurrentFormExist()) {
                     FormAbilityManager.applyForm(player, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
                 }

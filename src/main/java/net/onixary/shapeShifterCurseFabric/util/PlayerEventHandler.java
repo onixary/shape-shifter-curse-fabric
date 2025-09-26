@@ -83,7 +83,7 @@ public class PlayerEventHandler {
             // 同步动态Form
             server.execute(() -> {
                 try {
-                    ModPacketsS2CServer.sendUpdateDynamicForm(player);
+                    ModPacketsS2CServer.updateDynamicForm(player);
                 } catch (Exception e) {
                     ShapeShifterCurseFabric.LOGGER.error("Error sending update dynamic form: ", e);
                 }
