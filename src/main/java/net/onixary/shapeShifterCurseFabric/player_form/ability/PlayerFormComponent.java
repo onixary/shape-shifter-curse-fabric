@@ -69,6 +69,10 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         return RegPlayerForms.getPlayerFormOrDefault(this.currentForm, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
     }
 
+    public boolean isCurrentFormExist() {
+        return RegPlayerForms.playerForms.containsKey(this.currentForm);
+    }
+
     public PlayerFormBase getPreviousForm() {
         return RegPlayerForms.getPlayerFormOrDefault(this.previousForm, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
     }
