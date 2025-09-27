@@ -64,14 +64,15 @@ public class FormTextureUtils {
     public static int ColorMul(int ColorA, int ColorB, int Mask) {
         // Mask <= 0xFF
         int Div = 0xFF * 0xFF;
-        int Result = 0;
-        Result |= (int) (((ColorA & 0xFF000000) >> 24) * ((ColorA & 0xFF000000) >> 24) * Mask / Div) & 0xFF;  // R
-        Result <<= 8;
-        Result |= (int) (((ColorA & 0x00FF0000) >> 16) * ((ColorA & 0x00FF0000) >> 16) * Mask / Div) & 0xFF;  // G
-        Result <<= 8;
-        Result |= (int) (((ColorA & 0x0000FF00) >> 8) * ((ColorA & 0x0000FF00) >> 8) * Mask / Div) & 0xFF;  // B
-        Result <<= 8;
-        Result |= (int) (((ColorA & 0x000000FF)) * ((ColorA & 0x000000FF)) * Mask / Div) & 0xFF;  // A
+        int Result = 0xFFFFFFFF;
+        // TODO 实现优化过的相乘
+//        Result |= (int) (((ColorA & 0xFF000000) >> 24) * ((ColorB & 0xFF000000) >> 24) * Mask / Div) & 0xFF;  // R
+//        Result <<= 8;
+//        Result |= (int) (((ColorA & 0x00FF0000) >> 16) * ((ColorB & 0x00FF0000) >> 16) * Mask / Div) & 0xFF;  // G
+//        Result <<= 8;
+//        Result |= (int) (((ColorA & 0x0000FF00) >> 8) * ((ColorB & 0x0000FF00) >> 8) * Mask / Div) & 0xFF;  // B
+//        Result <<= 8;
+//        Result |= (int) (((ColorA & 0x000000FF)) * ((ColorB & 0x000000FF)) * Mask / Div) & 0xFF;  // A
         return Result;
     }
 

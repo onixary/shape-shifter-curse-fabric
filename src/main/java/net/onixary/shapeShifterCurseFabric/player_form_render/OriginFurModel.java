@@ -773,7 +773,8 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
     }
     @Override
     public Identifier getTextureResource(OriginFurAnimatable geoAnimatable) {
-        return dTR(json);
+        return FormTextureUtils.getBakedTexture(this, new FormTextureUtils.ColorSetting(0xFF0000FF, 0x00FF00FF, 0x0000FFFF));
+        // return dTR(json);
     }
     @Override
     public Identifier getAnimationResource(OriginFurAnimatable geoAnimatable) {
