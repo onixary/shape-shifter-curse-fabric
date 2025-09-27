@@ -99,8 +99,7 @@ public class FormTextureUtils {
             }
         }
         TextureManager TM = MinecraftClient.getInstance().getTextureManager();
-        TM.registerDynamicTexture("masked_texture_", new NativeImageBackedTexture(textureImage));
-        return null;
+        return TM.registerDynamicTexture("masked_texture_", new NativeImageBackedTexture(textureImage));
     }
 
     public static Identifier getBakedTexture(OriginFurModel model, ColorSetting colorSetting) {
