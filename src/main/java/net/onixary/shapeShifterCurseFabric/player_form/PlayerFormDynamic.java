@@ -59,10 +59,6 @@ public class PlayerFormDynamic extends PlayerFormBase{
 
     @Override
     public void Anim_registerAnims() {
-        // 如果未加载模型则不修改动画
-        if (!this.isModelExist()) {
-            return;
-        }
         this.getAnimMap().clear();
         for (PlayerAnimState state : this.animMap_Builder.keySet()) {
             this.getAnimMap().put(state, this.animMap_Builder.get(state).build());
