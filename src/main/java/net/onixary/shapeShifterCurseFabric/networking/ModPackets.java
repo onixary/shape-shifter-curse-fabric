@@ -42,5 +42,6 @@ public class ModPackets {
 
     public static final Identifier SYNC_FORCE_SNEAK_STATE = new Identifier(ShapeShifterCurseFabric.MOD_ID, "sync_force_sneak_state");
 
-
+    public static final Identifier UPDATE_DYNAMIC_FORM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_dynamic_form");
+    public static final Identifier REMOVE_DYNAMIC_FORM_EXCEPT = new Identifier(ShapeShifterCurseFabric.MOD_ID, "remove_dynamic_form_except");
 }

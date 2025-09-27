@@ -1,0 +1,116 @@
+{
+  "__comment__": "具体看PlayerFormBase",
+  "groupID": "example_namespace:example_group",
+  "__groupID_comment__": "组ID 用于注册组",
+  "groupIndex": 5,
+  "__groupIndex_comment__": "组内索引 用于变形逻辑",
+  "phase": "PHASE_SP",
+  "__Phase_comment__": "变形阶段一般和groupIndex一样 Enum:[PHASE_CLEAR, PHASE_0, PHASE_1, PHASE_2, PHASE_3, PHASE_SP]",
+  "bodyType": "NORMAL",
+  "__BodyType_comment__": "身体类型 Enum:[NORMAL, FERAL]",
+  "isCustomForm": false,
+  "originID": "example_namespace:form_example",
+  "__originID_comment__": "OriginID 与Origin联动 **必须在 data/[NameSpace]/origins 里注册**",
+  "originLayerID": "origins:origin",
+  "__originLayerID_comment__": "OriginLayerID 与OriginFur联动 **极度不推荐修改**",
+  "hasSlowFall": false,
+  "overrideHandAnim": false,
+  "canSneakRush": false,
+  "canRushJump": false,
+  "anim": [
+    {
+      "state": "ANIM_IDLE",
+      "animID": "shape-shifter-curse:form_feral_common_idle"
+    },
+    {
+      "state": "ANIM_SNEAK_IDLE",
+      "animID": "shape-shifter-curse:form_feral_common_sneak_idle"
+    },
+    {
+      "state": "ANIM_BOAT_IDLE",
+      "animID": "shape-shifter-curse:form_feral_common_sneak_idle"
+    },
+    {
+      "state": "ANIM_RIDE_IDLE",
+      "animID": "shape-shifter-curse:form_feral_common_sneak_idle"
+    },
+    {
+      "state": "ANIM_WALK",
+      "animID": "shape-shifter-curse:form_feral_common_walk",
+      "speed": 1.2,
+      "fade": 2
+    },
+    {
+      "state": "ANIM_SNEAK_WALK",
+      "animID": "shape-shifter-curse:form_feral_common_sneak_walk"
+    },
+    {
+      "state": "ANIM_RUN",
+      "animID": "shape-shifter-curse:form_feral_common_run",
+      "speed": 2.3
+    },
+    {
+      "state": "ANIM_SWIM_IDLE",
+      "animID": "shape-shifter-curse:form_feral_common_float"
+    },
+    {
+      "state": "ANIM_SWIM",
+      "animID": "shape-shifter-curse:form_feral_common_swim"
+    },
+    {
+      "state": "ANIM_TOOL_SWING",
+      "animID": "shape-shifter-curse:form_feral_common_dig"
+    },
+    {
+      "state": "ANIM_SNEAK_TOOL_SWING",
+      "animID": "shape-shifter-curse:form_feral_common_dig"
+    },
+    {
+      "state": "ANIM_JUMP",
+      "animID": "shape-shifter-curse:form_feral_common_jump"
+    },
+    {
+      "state": "ANIM_SNEAK_JUMP",
+      "animID": "shape-shifter-curse:form_feral_common_jump"
+    },
+    {
+      "state": "ANIM_CLIMB_IDLE",
+      "animID": "shape-shifter-curse:form_feral_common_climb"
+    },
+    {
+      "state": "ANIM_CLIMB",
+      "animID": "shape-shifter-curse:form_feral_common_climb"
+    },
+    {
+      "state": "ANIM_FALL",
+      "animID": "shape-shifter-curse:form_feral_common_fall"
+    },
+    {
+      "state": "ANIM_SLEEP",
+      "animID": "shape-shifter-curse:form_feral_common_sleep"
+    },
+    {
+      "state": "ANIM_ATTACK_ONCE",
+      "animID": "shape-shifter-curse:form_feral_common_attack"
+    },
+    {
+      "state": "ANIM_SNEAK_ATTACK_ONCE",
+      "animID": "shape-shifter-curse:form_feral_common_attack"
+    },
+    {
+      "state": "ANIM_ELYTRA_FLY",
+      "animID": "shape-shifter-curse:form_feral_common_elytra_fly"
+    },
+    {
+      "state": "ANIM_CREATIVE_FLY",
+      "animID": "shape-shifter-curse:form_feral_common_elytra_fly"
+    }
+  ],
+  "__anim_comment__": "动画列表 State 在 PlayerAnimState 中定义",
+  "animDefault": {
+    "animID": "shape-shifter-curse:form_feral_common_idle",
+    "speed": 1.0,
+    "fade": 2
+  },
+  "__animDefault_comment__": "默认动画 如果没有可以不用添加此键"
+}

@@ -1,14 +1,20 @@
 package net.onixary.shapeShifterCurseFabric.networking;
 
+import com.google.gson.JsonObject;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
+
+import java.util.HashMap;
 
 // 纯服务端类，所有send方法都只在这里调用
 // This is a pure server-side class, all send methods are called only here
@@ -118,5 +124,40 @@ public class ModPacketsS2CServer {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeBoolean(shouldForceSneak);
         ServerPlayNetworking.send(player, ModPackets.SYNC_FORCE_SNEAK_STATE, buf);
+    }
+
+    private static void sendRemoveDynamicFormExcept(ServerPlayerEntity player) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeInt(RegPlayerForms.dynamicPlayerForms.size());
+        for (Identifier formId : RegPlayerForms.dynamicPlayerForms) {
+            buf.writeString(formId.toString());
+        }
+        ServerPlayNetworking.send(player, ModPackets.REMOVE_DYNAMIC_FORM_EXCEPT, buf);
+    }
+
+    // 发送动态Form同步包 旧的最大32K 本来以为挺多的，结果发现单个就快4K
+    public static void sendUpdateDynamicForm(ServerPlayerEntity player, JsonObject forms) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeInt(forms.size()); // 发送动态Form数量
+        for (String formName : forms.keySet()) {
+            buf.writeString(formName);
+            buf.writeString(forms.get(formName).toString());
+        }
+        ServerPlayNetworking.send(player, ModPackets.UPDATE_DYNAMIC_FORM, buf);
+    }
+
+    // 现在理论 单包32K Form数量无限
+    public static void updateDynamicForm(ServerPlayerEntity player) {
+        int MaxFormPerPacket = 63;  // 2M / 32K - 1
+        HashMap<Identifier, PlayerFormDynamic> forms = RegPlayerForms.DumpDynamicPlayerForms();
+        sendRemoveDynamicFormExcept(player);
+        for (int i = 0; i < forms.size(); i += MaxFormPerPacket) {
+            JsonObject jsonForms = new JsonObject();
+            for (int j = 0; j < MaxFormPerPacket && i + j < forms.size(); j++) {
+                Identifier formId = RegPlayerForms.dynamicPlayerForms.get(i + j);
+                jsonForms.add(formId.toString(), forms.get(formId).save());
+            }
+            sendUpdateDynamicForm(player, jsonForms);
+        }
     }
 }

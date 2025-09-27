@@ -17,8 +17,6 @@ import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 
-import java.util.Collection;
-
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 import static net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager.handleDirectTransform;
@@ -85,7 +83,13 @@ public class ShapeShifterCurseCommand {
             commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
             return 0;
         }
-        setFormDirectly(target, form);
+        try {
+            setFormDirectly(target, form);
+        }
+        catch (Exception e){
+            // 调试时在此打断点
+            throw e;
+        }
 
         return 1;
 
@@ -115,7 +119,13 @@ public class ShapeShifterCurseCommand {
             commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
             return 0;
         }
-        setFormDirectly(target, form);
+        try {
+            setFormDirectly(target, form);
+        }
+        catch (Exception e){
+            // 调试时在此打断点
+            throw e;
+        }
 
         return 1;
 
