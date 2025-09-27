@@ -7,6 +7,7 @@ import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
+import net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFurClient;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,8 +40,16 @@ public class PlayerFormDynamic extends PlayerFormBase{
         super(id);
     }
 
+    public boolean isModelExist() {
+        return OriginalFurClient.FUR_RESOURCES.containsKey(this.getFormOriginID());
+    }
+
     @Override
     public AnimationHolder Anim_getFormAnimToPlay(PlayerAnimState currentState) {
+        // 如果未加载模型则不修改动画
+        if (!this.isModelExist()) {
+            return null;
+        }
         return this.getAnimMap().getOrDefault(currentState, defaultAnim.get(this.FormID));
     }
 
@@ -50,6 +59,10 @@ public class PlayerFormDynamic extends PlayerFormBase{
 
     @Override
     public void Anim_registerAnims() {
+        // 如果未加载模型则不修改动画
+        if (!this.isModelExist()) {
+            return;
+        }
         this.getAnimMap().clear();
         for (PlayerAnimState state : this.animMap_Builder.keySet()) {
             this.getAnimMap().put(state, this.animMap_Builder.get(state).build());
