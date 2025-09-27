@@ -161,6 +161,7 @@ public class RegPlayerForms {
         }
         if (!playerForms.containsKey(id)) {
             ShapeShifterCurseFabric.LOGGER.warn("Attempted to remove non-existent player form: " + id);
+            return false;
         }
         if (RemoveDynamicRegistry) {
             dynamicPlayerForms.remove(id);
@@ -176,6 +177,7 @@ public class RegPlayerForms {
         }
         if (!playerFormGroups.containsKey(id)) {
             ShapeShifterCurseFabric.LOGGER.warn("Attempted to remove non-existent player form group: " + id);
+            return false;
         }
         if (RemoveDynamicRegistry) {
             dynamicPlayerFormGroups.remove(id);

@@ -161,7 +161,7 @@ public class PlayerFormDynamic extends PlayerFormBase{
             int GroupIndex = _Gson_GetInt(formData, "groupIndex", 0);
             PlayerFormGroup group = RegPlayerForms.getPlayerFormGroup(GroupID);
             if (group == null) {
-                group = RegPlayerForms.registerPlayerFormGroup(new PlayerFormGroup(GroupID));
+                group = RegPlayerForms.registerDynamicPlayerFormGroup(new PlayerFormGroup(GroupID));
             }
             this.setGroup(group, GroupIndex);
         }
