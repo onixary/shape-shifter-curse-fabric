@@ -20,7 +20,7 @@ public class FormTextureUtils {
 
     // onixary: 加入每个通道的覆盖强度overrideStrength的float参数，范围0.0~1.0
     // 一些形态原版的贴图过黑，转换为灰度后无法看出自定义颜色，
-    // 应用后的灰度 = lerp(原灰度, 1.0, overrideStrength)
+    // 应用后的灰度 = max(原灰度 + overrideStrength*255, 255)
     public record ColorSetting(int primaryColor, int accentColor1, int accentColor2
             , float primaryOverrideStrength, float accent1OverrideStrength, float accent2OverrideStrength) {
         public int getPrimaryColor() {
@@ -162,12 +162,8 @@ public class FormTextureUtils {
     }
 
     // onixary: 加入overrideStrength参数影响
-    public static float lerp(float a, float b, float t) {
-        return a + t * (b - a);
-    }
-
-    public static int lerp(int a, int b, float t) {
-        return (int)(a + t * (b - a));
+    public static int overrideGreyScale(int a, int b, float t) {
+        return Math.min(a + (int)(t * b), 255);
     }
 
     public static int ProcessPixel(int Color, int Mask, ColorSetting colorSetting) {
@@ -177,19 +173,19 @@ public class FormTextureUtils {
         int L = getLight(Color);
         int B = (Mask >> 16) & 0xFF;
         if (B > 0) {
-            int adjustedL = lerp(L, 255, colorSetting.getAccent2OverrideStrength());
+            int adjustedL = overrideGreyScale(L, 255, colorSetting.getAccent2OverrideStrength());
             B = (adjustedL * B) / 255;
             return ColorMulBytes(colorSetting.accentColor2, B);
         }
         int G = (Mask >> 8) & 0xFF;
         if (G > 0) {
-            int adjustedL1 = lerp(L, 255, colorSetting.getAccent1OverrideStrength());
+            int adjustedL1 = overrideGreyScale(L, 255, colorSetting.getAccent1OverrideStrength());
             G = (adjustedL1 * G) / 255;
             return ColorMulBytes(colorSetting.accentColor1, G);
         }
         int R = Mask & 0xFF;
         if (R > 0) {
-            int adjustedL2 = lerp(L, 255, colorSetting.getPrimaryOverrideStrength());
+            int adjustedL2 = overrideGreyScale(L, 255, colorSetting.getPrimaryOverrideStrength());
             R = (adjustedL2 * R) / 255;
             return ColorMulBytes(colorSetting.primaryColor, R);
         }
