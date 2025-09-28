@@ -1,6 +1,7 @@
 {
   "model": "orif-defaults:geo/form_bat_2.geo.json",
   "texture": "orif-defaults:textures/form_bat_2/form_bat_2.png",
+  "texture_mask": "orif-defaults:textures/form_bat_2/form_bat_2_colormask.png",
   "hidden": [
     "leftArm",
     "rightArm",

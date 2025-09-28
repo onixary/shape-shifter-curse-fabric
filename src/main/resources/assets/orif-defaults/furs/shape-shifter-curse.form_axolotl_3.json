@@ -1,6 +1,7 @@
 {
   "model": "orif-defaults:geo/form_axolotl_3.geo.json",
   "texture": "orif-defaults:textures/form_axolotl_3/form_axolotl_3.png",
+  "texture_mask": "orif-defaults:textures/form_axolotl_3/form_axolotl_3_colormask.png",
   "hidden": [
     "leftLeg",
     "rightLeg",

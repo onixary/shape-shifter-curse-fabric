@@ -18,7 +18,11 @@ import java.io.InputStream;
 // 尽量少在Origin Fur中修改 减少后续工作量
 public class FormTextureUtils {
 
-    public record ColorSetting(int primaryColor, int accentColor1, int accentColor2) {
+    // onixary: 加入每个通道的覆盖强度overrideStrength的float参数，范围0.0~1.0
+    // 一些形态原版的贴图过黑，转换为灰度后无法看出自定义颜色，
+    // 应用后的灰度 = lerp(原灰度, 1.0, overrideStrength)
+    public record ColorSetting(int primaryColor, int accentColor1, int accentColor2
+            , float primaryOverrideStrength, float accent1OverrideStrength, float accent2OverrideStrength) {
         public int getPrimaryColor() {
             return this.primaryColor;
         }
@@ -27,6 +31,15 @@ public class FormTextureUtils {
         }
         public int getAccentColor2() {
             return this.accentColor2;
+        }
+        public float getPrimaryOverrideStrength() {
+            return this.primaryOverrideStrength;
+        }
+        public float getAccent1OverrideStrength() {
+            return this.accent1OverrideStrength;
+        }
+        public float getAccent2OverrideStrength() {
+            return this.accent2OverrideStrength;
         }
     }
 
@@ -148,6 +161,15 @@ public class FormTextureUtils {
         return (R*28 + G*151 + B*77) >> 8;
     }
 
+    // onixary: 加入overrideStrength参数影响
+    public static float lerp(float a, float b, float t) {
+        return a + t * (b - a);
+    }
+
+    public static int lerp(int a, int b, float t) {
+        return (int)(a + t * (b - a));
+    }
+
     public static int ProcessPixel(int Color, int Mask, ColorSetting colorSetting) {
         // ABGR顺序
         // int A = (Mask >> 24);
@@ -155,17 +177,20 @@ public class FormTextureUtils {
         int L = getLight(Color);
         int B = (Mask >> 16) & 0xFF;
         if (B > 0) {
-            B = (L * B) / 255;
+            int adjustedL = lerp(L, 255, colorSetting.getAccent2OverrideStrength());
+            B = (adjustedL * B) / 255;
             return ColorMulBytes(colorSetting.accentColor2, B);
         }
         int G = (Mask >> 8) & 0xFF;
         if (G > 0) {
-            G = (L * G) / 255;
+            int adjustedL1 = lerp(L, 255, colorSetting.getAccent1OverrideStrength());
+            G = (adjustedL1 * G) / 255;
             return ColorMulBytes(colorSetting.accentColor1, G);
         }
         int R = Mask & 0xFF;
         if (R > 0) {
-            R = (L * R) / 255;
+            int adjustedL2 = lerp(L, 255, colorSetting.getPrimaryOverrideStrength());
+            R = (adjustedL2 * R) / 255;
             return ColorMulBytes(colorSetting.primaryColor, R);
         }
         return Color;
