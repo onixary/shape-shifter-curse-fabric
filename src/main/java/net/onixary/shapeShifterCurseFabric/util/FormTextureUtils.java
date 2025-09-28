@@ -125,14 +125,25 @@ public class FormTextureUtils {
                (((ColorA & 0xFF) * (ColorB & 0xFF)) / 255); // Blue
     }
 
+    public static int ColorMulBytes(int ColorA, int Bytes) {
+        // 保留ColorA的Alpha通道(>>>24)，只混合RGB通道
+        return (ColorA & 0xFF000000) | // Alpha通道
+               ((((ColorA >> 16) & 0xFF) * Bytes) / 255 << 16) | // Red
+               ((((ColorA >> 8) & 0xFF) * Bytes) / 255 << 8) | // Green
+               (((ColorA & 0xFF) * Bytes) / 255); // Blue
+    }
+
+    public static int ColorOverlay(int ColorA, int ColorOverlay) {
+        int OverlayA = (ColorOverlay >> 24) & 0xFF;
+        return ColorMix(ColorA, ColorOverlay, OverlayA);
+    }
+
     public static int getLight(int color) {
         // 提取RGB通道（忽略Alpha通道）
-        int r = (color >> 16) & 0xFF;
-        int g = (color >> 8) & 0xFF;
-        int b = color & 0xFF;
-        // 使用ITU-R BT.709亮度系数计算感知亮度
-        int l = (int)(0.2126 * r + 0.7152 * g + 0.0722 * b);
-        return 0xFF000000 | (l << 16) | (l << 8) | l;
+        int R = (color >> 16) & 0xFF;
+        int G = (color >> 8) & 0xFF;
+        int B = color & 0xFF;
+        return (R*28 + G*151 + B*77) >> 8;
     }
 
     public static int ProcessPixel(int Color, int Mask, ColorSetting colorSetting) {
@@ -142,25 +153,25 @@ public class FormTextureUtils {
         int G = (Mask >> 8) & 0xFF;
         int B = (Mask >> 16) & 0xFF;
         int L = getLight(Color);
-        // int Pixel = ColorMix(Color, colorSetting.primaryColor, (Mask >> 16) & 0xFF);
-        // Pixel = ColorMix(Pixel, colorSetting.accentColor1, (Mask >> 8) & 0xFF);
-        // Pixel = ColorMix(Pixel, colorSetting.accentColor2, (Mask & 0xFF));
-        if (B > 0) {
-            // return ColorMix(Color, colorSetting.accentColor2, B);
-            return ColorMul(L, colorSetting.accentColor2);
-        }
-        else if (G > 0) {
-            // return ColorMix(Color, colorSetting.accentColor1, G);
-            return ColorMul(L, colorSetting.accentColor1);
-        }
-        else if (R > 0) {
-            // return ColorMix(Color, colorSetting.primaryColor, R);
-            return ColorMul(L, colorSetting.primaryColor);
-        }
-        else {
-            return Color;
-        }
-        // return Pixel;
+        int Pixel = ColorOverlay(Color, ((ColorMulBytes(colorSetting.primaryColor, L) & 0x00FFFFFF) | (R << 24)));
+        Pixel = ColorOverlay(Pixel, ((ColorMulBytes(colorSetting.accentColor1, L) & 0x00FFFFFF) | (G << 24)));
+        Pixel = ColorOverlay(Pixel, ((ColorMulBytes(colorSetting.accentColor2, L) & 0x00FFFFFF) | (B << 24)));
+        return Pixel;
+        // if (B > 0) {
+        //     // return ColorMix(Color, colorSetting.accentColor2, B);
+        //     return ColorMulBytes(ColorMulBytes(colorSetting.accentColor2, L), B);
+        // }
+        // else if (G > 0) {
+        //     // return ColorMix(Color, colorSetting.accentColor1, G);
+        //     return ColorMulBytes(ColorMulBytes(colorSetting.accentColor1, L), G);
+        // }
+        // else if (R > 0) {
+        //     // return ColorMix(Color, colorSetting.primaryColor, R);
+        //     return ColorMulBytes(ColorMulBytes(colorSetting.primaryColor, L), R);
+        // }
+        // else {
+        //     return Color;
+        // }
     }
 
     public static Identifier BakeTexture(Identifier texture, Identifier mask, ColorSetting colorSetting)  {
