@@ -1,6 +1,7 @@
 {
   "model": "orif-defaults:geo/form_ocelot_3.geo.json",
   "texture": "orif-defaults:textures/form_ocelot_3/form_ocelot_3.png",
+  "texture_mask": "orif-defaults:textures/form_ocelot_3/ocelot_3_colormask.png",
   "hidden": [
     "leftLeg",
     "rightLeg",
