@@ -103,7 +103,7 @@ public class FormTextureUtils {
     //     return (((x) + 1 + (((x) + 1) >> 8)) >> 8);
     // }
 
-    public static int ColorMul(int ColorA, int ColorB, int Mask) {
+    public static int ColorMix(int ColorA, int ColorB, int Mask) {
         // 颜色通道 ColorA -> 63 ColorB -> 127 M -> 127 Result -> 95
         // Mask <= 0xFF
         if(Mask <= 0) return ColorA;
@@ -117,23 +117,45 @@ public class FormTextureUtils {
                (((ColorA & 0xFF) * invMask + (ColorB & 0xFF) * Mask) / 255); // Blue
     }
 
+    public static int ColorMul(int ColorA, int ColorB) {
+        // 保留ColorA的Alpha通道(>>>24)，只混合RGB通道
+        return (ColorA & 0xFF000000) | // Alpha通道
+               ((((ColorA >> 16) & 0xFF) * ((ColorB >> 16) & 0xFF)) / 255 << 16) | // Red
+               ((((ColorA >> 8) & 0xFF) * ((ColorB >> 8) & 0xFF)) / 255 << 8) | // Green
+               (((ColorA & 0xFF) * (ColorB & 0xFF)) / 255); // Blue
+    }
+
+    public static int getLight(int color) {
+        // 提取RGB通道（忽略Alpha通道）
+        int r = (color >> 16) & 0xFF;
+        int g = (color >> 8) & 0xFF;
+        int b = color & 0xFF;
+        // 使用ITU-R BT.709亮度系数计算感知亮度
+        int l = (int)(0.2126 * r + 0.7152 * g + 0.0722 * b);
+        return 0xFF000000 | (l << 16) | (l << 8) | l;
+    }
+
     public static int ProcessPixel(int Color, int Mask, ColorSetting colorSetting) {
         // ABGR顺序
         // int A = (Mask >> 24);
         int R = Mask & 0xFF;
         int G = (Mask >> 8) & 0xFF;
         int B = (Mask >> 16) & 0xFF;
-        // int Pixel = ColorMul(Color, colorSetting.primaryColor, (Mask >> 16) & 0xFF);
-        // Pixel = ColorMul(Pixel, colorSetting.accentColor1, (Mask >> 8) & 0xFF);
-        // Pixel = ColorMul(Pixel, colorSetting.accentColor2, (Mask & 0xFF));
+        int L = getLight(Color);
+        // int Pixel = ColorMix(Color, colorSetting.primaryColor, (Mask >> 16) & 0xFF);
+        // Pixel = ColorMix(Pixel, colorSetting.accentColor1, (Mask >> 8) & 0xFF);
+        // Pixel = ColorMix(Pixel, colorSetting.accentColor2, (Mask & 0xFF));
         if (B > 0) {
-            return ColorMul(Color, colorSetting.accentColor2, B);
+            // return ColorMix(Color, colorSetting.accentColor2, B);
+            return ColorMul(L, colorSetting.accentColor2);
         }
         else if (G > 0) {
-            return ColorMul(Color, colorSetting.accentColor1, G);
+            // return ColorMix(Color, colorSetting.accentColor1, G);
+            return ColorMul(L, colorSetting.accentColor1);
         }
         else if (R > 0) {
-            return ColorMul(Color, colorSetting.primaryColor, R);
+            // return ColorMix(Color, colorSetting.primaryColor, R);
+            return ColorMul(L, colorSetting.primaryColor);
         }
         else {
             return Color;
