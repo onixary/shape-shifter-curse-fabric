@@ -3,6 +3,8 @@ package net.onixary.shapeShifterCurseFabric.command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.FloatArgumentType;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.argument.EntityArgumentType;
@@ -69,6 +71,18 @@ public class ShapeShifterCurseCommand {
                         .then(literal("keep_original_skin").requires(cs -> cs.hasPermissionLevel(0))
                                 .then(argument("value", BoolArgumentType.bool())
                                         .executes(ShapeShifterCurseCommand::setPlayerSkin)
+                                )
+                        )
+                        .then(literal("set_form_color").requires(cs -> cs.hasPermissionLevel(0))
+                                .then(argument("enable", BoolArgumentType.bool())
+                                        .executes(ShapeShifterCurseCommand::setFormColorEnable)
+                                        .then(argument("primaryColorRGBA", StringArgumentType.string())
+                                                .then(argument("accentColor1RGBA", StringArgumentType.string())
+                                                        .then(argument("accentColor2RGBA", StringArgumentType.string())
+                                                                .executes(ShapeShifterCurseCommand::setFormColor)
+                                                        )
+                                                )
+                                        )
                                 )
                         )
         );
@@ -182,6 +196,51 @@ public class ShapeShifterCurseCommand {
             // 处理其他可能的错误
             commandContext.getSource().sendError(Text.literal("Error when change player skin: " + e.getMessage()));
             ShapeShifterCurseFabric.LOGGER.error("Error when change player skin: ", e);
+            return 0;
+        }
+    }
+
+    private static int setFormColorEnable(CommandContext<ServerCommandSource> commandContext) {
+        try {
+            ServerPlayerEntity player = commandContext.getSource().getPlayer();
+            if (player == null) {
+                commandContext.getSource().sendError(Text.literal("Must be a player!"));
+                return 0;
+            }
+            boolean enable = BoolArgumentType.getBool(commandContext, "enable");
+            RegPlayerSkinComponent.SKIN_SETTINGS.get(player).setEnableFormColor(enable);
+            RegPlayerSkinComponent.SKIN_SETTINGS.sync(player);
+            return 1;
+        } catch (Exception e) {
+            // 处理其他可能的错误
+            commandContext.getSource().sendError(Text.literal("Error when change player form color: " + e.getMessage()));
+            ShapeShifterCurseFabric.LOGGER.error("Error when change player form color: ", e);
+            return 0;
+        }
+    }
+
+    private static int setFormColor(CommandContext<ServerCommandSource> commandContext) {
+        try {
+            ServerPlayerEntity player = commandContext.getSource().getPlayer();
+            if (player == null) {
+                commandContext.getSource().sendError(Text.literal("Must be a player!"));
+                return 0;
+            }
+            boolean enable = BoolArgumentType.getBool(commandContext, "enable");
+            String primaryColorRGBA = StringArgumentType.getString(commandContext, "primaryColorRGBA");
+            String accentColor1RGBA = StringArgumentType.getString(commandContext, "accentColor1RGBA");
+            String accentColor2RGBA = StringArgumentType.getString(commandContext, "accentColor2RGBA");
+            if (!RegPlayerSkinComponent.SKIN_SETTINGS.get(player).setFormColor(primaryColorRGBA, accentColor1RGBA, accentColor2RGBA)) {
+                commandContext.getSource().sendError(Text.literal("Invalid color format!"));
+                return 0;
+            }
+            RegPlayerSkinComponent.SKIN_SETTINGS.get(player).setEnableFormColor(enable);
+            RegPlayerSkinComponent.SKIN_SETTINGS.sync(player);
+            return 1;
+        } catch (Exception e) {
+            // 处理其他可能的错误
+            commandContext.getSource().sendError(Text.literal("Error when change player form color: " + e.getMessage()));
+            ShapeShifterCurseFabric.LOGGER.error("Error when change player form color: ", e);
             return 0;
         }
     }

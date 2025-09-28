@@ -31,6 +31,8 @@ import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.joml.Matrix4f;
 import org.joml.Vector3d;
@@ -213,25 +215,39 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
         return alib.VectorFromJson(json.getAsJsonObject("rendering_offsets").get("right"));
     }
     public final Identifier getOverlayTexture(boolean slim) {
+        PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(entity);
         if (!slim || !json.has("overlay_slim")) {
             if (json.has("overlay")) {
+                if (component.isEnableFormColor()) {
+                    FormTextureUtils.getBakedOverlayTexture(this, component.getFormColor(), false);
+                }
                 return Identifier.tryParse(JsonHelper.getString(json, "overlay"));
             }
         } else {
             if (json.has("overlay_slim")) {
+                if (component.isEnableFormColor()) {
+                    FormTextureUtils.getBakedOverlayTexture(this, component.getFormColor(), true);
+                }
                 return Identifier.tryParse(JsonHelper.getString(json, "overlay_slim"));
             }
         }
         return null;
     }
     public final Identifier getEmissiveTexture(boolean slim) {
+        PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(entity);
         if (!slim || !json.has("emissive_overlay_slim")) {
             if (json.has("emissive_overlay")) {
+                if (component.isEnableFormColor()) {
+                    FormTextureUtils.getBakedEmissiveTexture(this, component.getFormColor(), false);
+                }
                 return Identifier.tryParse(JsonHelper.getString(json, "emissive_overlay"));
             }
         } else {
 
             if (json.has("emissive_overlay_slim")) {
+                if (component.isEnableFormColor()) {
+                    FormTextureUtils.getBakedEmissiveTexture(this, component.getFormColor(), true);
+                }
                 return Identifier.tryParse(JsonHelper.getString(json, "emissive_overlay_slim"));
             }
         }
@@ -773,8 +789,11 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
     }
     @Override
     public Identifier getTextureResource(OriginFurAnimatable geoAnimatable) {
-        return FormTextureUtils.getBakedTexture(this, new FormTextureUtils.ColorSetting(0xFF0000FF, 0x00FF00FF, 0x0000FFFF));
-        // return dTR(json);
+        PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(entity);
+        if (component.isEnableFormColor()) {
+            return FormTextureUtils.getBakedTexture(this, component.getFormColor());
+        }
+        return dTR(json);
     }
     @Override
     public Identifier getAnimationResource(OriginFurAnimatable geoAnimatable) {
