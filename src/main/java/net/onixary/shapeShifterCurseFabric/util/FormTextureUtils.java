@@ -103,40 +103,42 @@ public class FormTextureUtils {
     //     return (((x) + 1 + (((x) + 1) >> 8)) >> 8);
     // }
 
-    public static int ColorMix(int ColorA, int ColorB, int Mask) {
-        // 颜色通道 ColorA -> 63 ColorB -> 127 M -> 127 Result -> 95
-        // Mask <= 0xFF
-        if(Mask <= 0) return ColorA;
-        if(Mask >= 255) return ColorB;
+    //public static int ColorMix(int ColorA, int ColorB, int Mask) {
+    //    // 颜色通道 ColorA -> 63 ColorB -> 127 M -> 127 Result -> 95
+    //    // Mask <= 0xFF
+    //    if(Mask <= 0) return ColorA;
+    //    if(Mask >= 255) return ColorB;
+    //    int invMask = 255 - Mask;
+    //    // 保留ColorA的Alpha通道(>>>24)，只混合RGB通道
+    //    return (ColorA & 0xFF000000) | // Alpha通道
+    //           ((((ColorA >> 16) & 0xFF) * invMask + ((ColorB >> 16) & 0xFF) * Mask) / 255 << 16) | // Red
+    //           ((((ColorA >> 8) & 0xFF) * invMask + ((ColorB >> 8) & 0xFF) * Mask) / 255 << 8) | // Green
+    //           (((ColorA & 0xFF) * invMask + (ColorB & 0xFF) * Mask) / 255); // Blue
+    //}
 
-        int invMask = 255 - Mask;
-        // 保留ColorA的Alpha通道(>>>24)，只混合RGB通道
-        return (ColorA & 0xFF000000) | // Alpha通道
-               ((((ColorA >> 16) & 0xFF) * invMask + ((ColorB >> 16) & 0xFF) * Mask) / 255 << 16) | // Red
-               ((((ColorA >> 8) & 0xFF) * invMask + ((ColorB >> 8) & 0xFF) * Mask) / 255 << 8) | // Green
-               (((ColorA & 0xFF) * invMask + (ColorB & 0xFF) * Mask) / 255); // Blue
-    }
-
-    public static int ColorMul(int ColorA, int ColorB) {
-        // 保留ColorA的Alpha通道(>>>24)，只混合RGB通道
-        return (ColorA & 0xFF000000) | // Alpha通道
-               ((((ColorA >> 16) & 0xFF) * ((ColorB >> 16) & 0xFF)) / 255 << 16) | // Red
-               ((((ColorA >> 8) & 0xFF) * ((ColorB >> 8) & 0xFF)) / 255 << 8) | // Green
-               (((ColorA & 0xFF) * (ColorB & 0xFF)) / 255); // Blue
-    }
+    // public static int ColorMul(int ColorA, int ColorB) {
+    //     // 保留ColorA的Alpha通道(>>>24)，只混合RGB通道
+    //     return (ColorA & 0xFF000000) | // Alpha通道
+    //            ((((ColorA >> 16) & 0xFF) * ((ColorB >> 16) & 0xFF)) / 255 << 16) | // Red
+    //            ((((ColorA >> 8) & 0xFF) * ((ColorB >> 8) & 0xFF)) / 255 << 8) | // Green
+    //            (((ColorA & 0xFF) * (ColorB & 0xFF)) / 255); // Blue
+    // }
 
     public static int ColorMulBytes(int ColorA, int Bytes) {
         // 保留ColorA的Alpha通道(>>>24)，只混合RGB通道
+        // 几乎大部分情况不会超过255
+        // if(Mask <= 0) return ColorA;
+        // if(Mask >= 255) return ColorB;
         return (ColorA & 0xFF000000) | // Alpha通道
                ((((ColorA >> 16) & 0xFF) * Bytes) / 255 << 16) | // Red
                ((((ColorA >> 8) & 0xFF) * Bytes) / 255 << 8) | // Green
                (((ColorA & 0xFF) * Bytes) / 255); // Blue
     }
 
-    public static int ColorOverlay(int ColorA, int ColorOverlay) {
-        int OverlayA = (ColorOverlay >> 24) & 0xFF;
-        return ColorMix(ColorA, ColorOverlay, OverlayA);
-    }
+    // public static int ColorOverlay(int ColorA, int ColorOverlay) {
+    //     int OverlayA = (ColorOverlay >> 24) & 0xFF;
+    //     return ColorMix(ColorA, ColorOverlay, OverlayA);
+    // }
 
     public static int getLight(int color) {
         // 提取RGB通道（忽略Alpha通道）
@@ -149,29 +151,24 @@ public class FormTextureUtils {
     public static int ProcessPixel(int Color, int Mask, ColorSetting colorSetting) {
         // ABGR顺序
         // int A = (Mask >> 24);
-        int R = Mask & 0xFF;
-        int G = (Mask >> 8) & 0xFF;
-        int B = (Mask >> 16) & 0xFF;
+        if (Mask == 0) return Color;
         int L = getLight(Color);
-        int Pixel = ColorOverlay(Color, ((ColorMulBytes(colorSetting.primaryColor, L) & 0x00FFFFFF) | (R << 24)));
-        Pixel = ColorOverlay(Pixel, ((ColorMulBytes(colorSetting.accentColor1, L) & 0x00FFFFFF) | (G << 24)));
-        Pixel = ColorOverlay(Pixel, ((ColorMulBytes(colorSetting.accentColor2, L) & 0x00FFFFFF) | (B << 24)));
-        return Pixel;
-        // if (B > 0) {
-        //     // return ColorMix(Color, colorSetting.accentColor2, B);
-        //     return ColorMulBytes(ColorMulBytes(colorSetting.accentColor2, L), B);
-        // }
-        // else if (G > 0) {
-        //     // return ColorMix(Color, colorSetting.accentColor1, G);
-        //     return ColorMulBytes(ColorMulBytes(colorSetting.accentColor1, L), G);
-        // }
-        // else if (R > 0) {
-        //     // return ColorMix(Color, colorSetting.primaryColor, R);
-        //     return ColorMulBytes(ColorMulBytes(colorSetting.primaryColor, L), R);
-        // }
-        // else {
-        //     return Color;
-        // }
+        int B = (Mask >> 16) & 0xFF;
+        if (B > 0) {
+            B = (L * B) / 255;
+            return ColorMulBytes(colorSetting.accentColor2, B);
+        }
+        int G = (Mask >> 8) & 0xFF;
+        if (G > 0) {
+            G = (L * G) / 255;
+            return ColorMulBytes(colorSetting.accentColor1, G);
+        }
+        int R = Mask & 0xFF;
+        if (R > 0) {
+            R = (L * R) / 255;
+            return ColorMulBytes(colorSetting.primaryColor, R);
+        }
+        return Color;
     }
 
     public static Identifier BakeTexture(Identifier texture, Identifier mask, ColorSetting colorSetting)  {
