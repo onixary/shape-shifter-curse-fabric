@@ -170,24 +170,29 @@ public class FormTextureUtils {
         // ABGR顺序
         // int A = (Mask >> 24);
         if (Mask == 0) return Color;
+        // 提取原始颜色的 alpha 值
+        int originalAlpha = Color & 0xFF000000;
         int L = getLight(Color);
         int B = (Mask >> 16) & 0xFF;
         if (B > 0) {
             int adjustedL = overrideGreyScale(L, 255, colorSetting.getAccent2OverrideStrength());
             B = (adjustedL * B) / 255;
-            return ColorMulBytes(colorSetting.accentColor2, B);
+            int result = ColorMulBytes(colorSetting.accentColor2, B);
+            return (result & 0x00FFFFFF) | originalAlpha;
         }
         int G = (Mask >> 8) & 0xFF;
         if (G > 0) {
             int adjustedL1 = overrideGreyScale(L, 255, colorSetting.getAccent1OverrideStrength());
             G = (adjustedL1 * G) / 255;
-            return ColorMulBytes(colorSetting.accentColor1, G);
+            int result = ColorMulBytes(colorSetting.accentColor1, G);
+            return (result & 0x00FFFFFF) | originalAlpha;
         }
         int R = Mask & 0xFF;
         if (R > 0) {
             int adjustedL2 = overrideGreyScale(L, 255, colorSetting.getPrimaryOverrideStrength());
             R = (adjustedL2 * R) / 255;
-            return ColorMulBytes(colorSetting.primaryColor, R);
+            int result = ColorMulBytes(colorSetting.primaryColor, R);
+            return (result & 0x00FFFFFF) | originalAlpha;
         }
         return Color;
     }
