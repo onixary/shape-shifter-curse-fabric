@@ -3,7 +3,7 @@
     "entity_action": {
         "type": "origins:add_velocity",
         "y": 0.8,
-        "space": "local"
+        "space": "world"
     },
     "cooldown": 5,
     "hud_render": {
