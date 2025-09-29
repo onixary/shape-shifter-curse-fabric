@@ -662,5 +662,15 @@
   "text.autoconfig.shape-shifter-curse-common.option.transformativeOcelotSpawnChance": "Transformative Ocelot Spawn Success Rate",
   "text.autoconfig.shape-shifter-curse-common.option.enableNewStartBook": "Enable The New Version of Start Book Interface",
   "text.autoconfig.shape-shifter-curse-common.option.curseMoonPhase": "Curse Moon Phase",
-  "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "In Development"
+  "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "In Development",
+  "text.autoconfig.shape-shifter-curse-custom.title": "Shape Shifter Curse - Player Custom Config",
+  "text.autoconfig.shape-shifter-curse-custom.option.keep_original_skin": "Keep Original Skin",
+  "text.autoconfig.shape-shifter-curse-custom.option.enable_form_color": "Enable Form Custom Color System",
+  "text.autoconfig.shape-shifter-curse-custom.option.primaryColor": "Primary Color",
+  "text.autoconfig.shape-shifter-curse-custom.option.accentColor1Color": "Accent Color 1",
+  "text.autoconfig.shape-shifter-curse-custom.option.accentColor2Color": "Accent Color 2",
+  "text.autoconfig.shape-shifter-curse-custom.option.eyeColor": "Eye Color",
+  "text.autoconfig.shape-shifter-curse-custom.option.primaryOverrideStrength": "Primary Grayscale Enhancement",
+  "text.autoconfig.shape-shifter-curse-custom.option.accent1OverrideStrength": "Accent 1 Grayscale Enhancement",
+  "text.autoconfig.shape-shifter-curse-custom.option.accent2OverrideStrength": "Accent 2 Grayscale Enhancement"
 }

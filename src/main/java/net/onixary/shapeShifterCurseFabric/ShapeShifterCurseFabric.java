@@ -40,6 +40,7 @@ import net.onixary.shapeShifterCurseFabric.command.FormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
 import net.onixary.shapeShifterCurseFabric.config.ClientConfig;
 import net.onixary.shapeShifterCurseFabric.config.CommonConfig;
+import net.onixary.shapeShifterCurseFabric.config.PlayerCustomConfig;
 import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntitySpawnEgg;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntity;
@@ -81,6 +82,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final String MOD_ID = "shape-shifter-curse";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+    public static PlayerCustomConfig playerCustomConfig;
     public static ClientConfig clientConfig;
     public static CommonConfig commonConfig;
 
@@ -179,6 +181,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         AdditionalEntityActions.register();
 
         // 注册配置文件
+        AutoConfig.register(PlayerCustomConfig.class, Toml4jConfigSerializer::new);  // 客户端配置
+        playerCustomConfig = AutoConfig.getConfigHolder(PlayerCustomConfig.class).getConfig();
         AutoConfig.register(ClientConfig.class, Toml4jConfigSerializer::new);  // 客户端配置
         clientConfig = AutoConfig.getConfigHolder(ClientConfig.class).getConfig();
         AutoConfig.register(CommonConfig.class, Toml4jConfigSerializer::new);  // 双端配置
