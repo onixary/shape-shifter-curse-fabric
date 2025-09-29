@@ -221,7 +221,6 @@ public class FormTextureUtils {
         return CachedTexture;
     }
 
-    // todo: 当前的OverlayTexture换色方法无效，看了下渲染需要传递Identifier，没敢动它
     public static Identifier getBakedOverlayTexture(OriginFurModel model, ColorSetting colorSetting, boolean Slim) {
         if (!Slim) {
             Identifier CachedTexture = model.ColorMask_Baked_OverlayTexture.get(colorSetting);
