@@ -21,7 +21,7 @@ public class FormTextureUtils {
     // onixary: 加入每个通道的覆盖强度overrideStrength的float参数，范围0.0~1.0
     // 一些形态原版的贴图过黑，转换为灰度后无法看出自定义颜色，
     // 应用后的灰度 = max(原灰度 + overrideStrength*255, 255)
-    public record ColorSetting(int primaryColor, int accentColor1, int accentColor2
+    public record ColorSetting(int primaryColor, int accentColor1, int accentColor2, int eyeColor
             , float primaryOverrideStrength, float accent1OverrideStrength, float accent2OverrideStrength) {
         public int getPrimaryColor() {
             return this.primaryColor;
@@ -31,6 +31,9 @@ public class FormTextureUtils {
         }
         public int getAccentColor2() {
             return this.accentColor2;
+        }
+        public int getEyeColor() {
+            return this.eyeColor;
         }
         public float getPrimaryOverrideStrength() {
             return this.primaryOverrideStrength;
@@ -169,7 +172,17 @@ public class FormTextureUtils {
     public static int ProcessPixel(int Color, int Mask, ColorSetting colorSetting) {
         // ABGR顺序
         // int A = (Mask >> 24);
+
+        // 检查Mask的Alpha通道是否在0-16范围内，如果是则使用eyeColor
+        int maskAlpha = Mask & 0xFF000000;
+        if (maskAlpha >= 0 && maskAlpha < 16) {
+            // 使用eyeColor替换颜色，但保留原始颜色的Alpha通道
+            int originalAlpha = Color & 0xFF000000;
+            return (colorSetting.getEyeColor() & 0x00FFFFFF) | originalAlpha;
+        }
+
         if (Mask == 0) return Color;
+        
         // 提取原始颜色的 alpha 值
         int originalAlpha = Color & 0xFF000000;
         int L = getLight(Color);

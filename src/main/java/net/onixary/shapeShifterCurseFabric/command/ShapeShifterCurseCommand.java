@@ -79,10 +79,12 @@ public class ShapeShifterCurseCommand {
                                         .then(argument("primaryColorRGBA", StringArgumentType.string())
                                                 .then(argument("accentColor1RGBA", StringArgumentType.string())
                                                         .then(argument("accentColor2RGBA", StringArgumentType.string())
-                                                                .then(argument("primaryOverrideStrength", FloatArgumentType.floatArg())
-                                                                        .then(argument("accent1OverrideStrength", FloatArgumentType.floatArg())
-                                                                                .then(argument("accent2OverrideStrength", FloatArgumentType.floatArg())
-                                                                                        .executes(ShapeShifterCurseCommand::setFormColor)
+                                                                .then(argument("eyeColor", StringArgumentType.string())
+                                                                        .then(argument("primaryOverrideStrength", FloatArgumentType.floatArg())
+                                                                                .then(argument("accent1OverrideStrength", FloatArgumentType.floatArg())
+                                                                                        .then(argument("accent2OverrideStrength", FloatArgumentType.floatArg())
+                                                                                                .executes(ShapeShifterCurseCommand::setFormColor)
+                                                                                        )
                                                                                 )
                                                                         )
                                                                 )
@@ -236,13 +238,14 @@ public class ShapeShifterCurseCommand {
             String primaryColorRGBA = StringArgumentType.getString(commandContext, "primaryColorRGBA");
             String accentColor1RGBA = StringArgumentType.getString(commandContext, "accentColor1RGBA");
             String accentColor2RGBA = StringArgumentType.getString(commandContext, "accentColor2RGBA");
+            String eyeColor = StringArgumentType.getString(commandContext, "eyeColor");
             float primaryOverrideStrength = FloatArgumentType.getFloat(commandContext, "primaryOverrideStrength");
             float accent1OverrideStrength = FloatArgumentType.getFloat(commandContext, "accent1OverrideStrength");
             float accent2OverrideStrength = FloatArgumentType.getFloat(commandContext, "accent2OverrideStrength");
             primaryOverrideStrength = Math.max(0.0f, Math.min(1.0f, primaryOverrideStrength));
             accent1OverrideStrength = Math.max(0.0f, Math.min(1.0f, accent1OverrideStrength));
             accent2OverrideStrength = Math.max(0.0f, Math.min(1.0f, accent2OverrideStrength));
-            if (!RegPlayerSkinComponent.SKIN_SETTINGS.get(player).setFormColor(primaryColorRGBA, accentColor1RGBA, accentColor2RGBA
+            if (!RegPlayerSkinComponent.SKIN_SETTINGS.get(player).setFormColor(primaryColorRGBA, accentColor1RGBA, accentColor2RGBA, eyeColor
                     , primaryOverrideStrength, accent1OverrideStrength, accent2OverrideStrength)) {
                 commandContext.getSource().sendError(Text.literal("Invalid color format!"));
                 return 0;
