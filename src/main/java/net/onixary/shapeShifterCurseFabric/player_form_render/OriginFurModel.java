@@ -219,14 +219,14 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
         if (!slim || !json.has("overlay_slim")) {
             if (json.has("overlay")) {
                 if (component.isEnableFormColor()) {
-                    FormTextureUtils.getBakedOverlayTexture(this, component.getFormColor(), false);
+                    return FormTextureUtils.getBakedOverlayTexture(this, component.getFormColor(), false);
                 }
                 return Identifier.tryParse(JsonHelper.getString(json, "overlay"));
             }
         } else {
             if (json.has("overlay_slim")) {
                 if (component.isEnableFormColor()) {
-                    FormTextureUtils.getBakedOverlayTexture(this, component.getFormColor(), true);
+                    return FormTextureUtils.getBakedOverlayTexture(this, component.getFormColor(), true);
                 }
                 return Identifier.tryParse(JsonHelper.getString(json, "overlay_slim"));
             }
@@ -238,15 +238,14 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
         if (!slim || !json.has("emissive_overlay_slim")) {
             if (json.has("emissive_overlay")) {
                 if (component.isEnableFormColor()) {
-                    FormTextureUtils.getBakedEmissiveTexture(this, component.getFormColor(), false);
+                    return FormTextureUtils.getBakedEmissiveTexture(this, component.getFormColor(), false);
                 }
                 return Identifier.tryParse(JsonHelper.getString(json, "emissive_overlay"));
             }
         } else {
-
             if (json.has("emissive_overlay_slim")) {
                 if (component.isEnableFormColor()) {
-                    FormTextureUtils.getBakedEmissiveTexture(this, component.getFormColor(), true);
+                    return FormTextureUtils.getBakedEmissiveTexture(this, component.getFormColor(), true);
                 }
                 return Identifier.tryParse(JsonHelper.getString(json, "emissive_overlay_slim"));
             }
