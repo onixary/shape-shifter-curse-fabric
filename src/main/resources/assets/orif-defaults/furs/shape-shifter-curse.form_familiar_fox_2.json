@@ -1,7 +1,9 @@
 {
   "model": "orif-defaults:geo/form_familiar_fox_2.geo.json",
   "texture": "orif-defaults:textures/form_familiar_fox_2/form_familiar_fox_2.png",
+  "texture_mask": "orif-defaults:textures/form_familiar_fox_2/form_familiar_fox_2_colormask.png",
   "overlay": "orif-defaults:textures/form_familiar_fox_2/form_familiar_fox_2_overlay.png",
+  "overlay_mask": "orif-defaults:textures/form_familiar_fox_2/form_familiar_fox_2_overlay_colormask.png",
   "hidden": [
     "leftLeg",
     "rightLeg",

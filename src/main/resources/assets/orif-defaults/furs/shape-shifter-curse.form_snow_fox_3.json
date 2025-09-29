@@ -1,6 +1,7 @@
 {
   "model": "orif-defaults:geo/form_snow_fox_3.geo.json",
   "texture": "orif-defaults:textures/form_snow_fox_3/form_snow_fox_3.png",
+  "texture_mask": "orif-defaults:textures/form_snow_fox_3/form_snow_fox_3_colormask.png",
   "hidden": [
     "leftLeg",
     "rightLeg",
