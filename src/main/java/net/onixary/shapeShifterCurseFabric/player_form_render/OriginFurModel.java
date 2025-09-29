@@ -5,7 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dev.kosmx.playerAnim.core.util.Vec3f;
-import io.github.apace100.apoli.power.PowerTypeRegistry;
 import mod.azure.azurelib.cache.object.GeoBone;
 import mod.azure.azurelib.model.GeoModel;
 import net.minecraft.util.math.MathHelper;
@@ -215,17 +214,22 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
         return alib.VectorFromJson(json.getAsJsonObject("rendering_offsets").get("right"));
     }
     public final Identifier getOverlayTexture(boolean slim) {
-        PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(entity);
+        PlayerSkinComponent component = null;
+        try {
+            component = RegPlayerSkinComponent.SKIN_SETTINGS.get(entity);
+        }
+        catch (NullPointerException ignored) {
+        }
         if (!slim || !json.has("overlay_slim")) {
             if (json.has("overlay")) {
-                if (component.isEnableFormColor()) {
+                if (component != null && component.isEnableFormColor()) {
                     return FormTextureUtils.getBakedOverlayTexture(this, component.getFormColor(), false);
                 }
                 return Identifier.tryParse(JsonHelper.getString(json, "overlay"));
             }
         } else {
             if (json.has("overlay_slim")) {
-                if (component.isEnableFormColor()) {
+                if (component != null && component.isEnableFormColor()) {
                     return FormTextureUtils.getBakedOverlayTexture(this, component.getFormColor(), true);
                 }
                 return Identifier.tryParse(JsonHelper.getString(json, "overlay_slim"));
@@ -234,17 +238,22 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
         return null;
     }
     public final Identifier getEmissiveTexture(boolean slim) {
-        PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(entity);
+        PlayerSkinComponent component = null;
+        try {
+            component = RegPlayerSkinComponent.SKIN_SETTINGS.get(entity);
+        }
+        catch (NullPointerException ignored) {
+        }
         if (!slim || !json.has("emissive_overlay_slim")) {
             if (json.has("emissive_overlay")) {
-                if (component.isEnableFormColor()) {
+                if (component != null && component.isEnableFormColor()) {
                     return FormTextureUtils.getBakedEmissiveTexture(this, component.getFormColor(), false);
                 }
                 return Identifier.tryParse(JsonHelper.getString(json, "emissive_overlay"));
             }
         } else {
             if (json.has("emissive_overlay_slim")) {
-                if (component.isEnableFormColor()) {
+                if (component != null && component.isEnableFormColor()) {
                     return FormTextureUtils.getBakedEmissiveTexture(this, component.getFormColor(), true);
                 }
                 return Identifier.tryParse(JsonHelper.getString(json, "emissive_overlay_slim"));
@@ -788,9 +797,13 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
     }
     @Override
     public Identifier getTextureResource(OriginFurAnimatable geoAnimatable) {
-        PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(entity);
-        if (component.isEnableFormColor()) {
-            return FormTextureUtils.getBakedTexture(this, component.getFormColor());
+        try {
+            PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(entity);
+            if (component.isEnableFormColor()) {
+                return FormTextureUtils.getBakedTexture(this, component.getFormColor());
+            }
+        }
+        catch (NullPointerException ignored) {
         }
         return dTR(json);
     }
