@@ -33,7 +33,8 @@
     "EntitySlipperinessMixin",
     "ServerPlayerEntityForceInputMixin",
     "PlayerEntitySprintSwimmingMixin",
-    "projectile.PotionEntityMixin"
+    "projectile.PotionEntityMixin",
+    "LoginMixin"
   ],
   "client": [
     "IEntityRenderDispatcherAccessor",

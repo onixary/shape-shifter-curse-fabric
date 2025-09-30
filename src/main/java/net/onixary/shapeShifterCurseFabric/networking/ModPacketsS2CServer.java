@@ -160,4 +160,10 @@ public class ModPacketsS2CServer {
             sendUpdateDynamicForm(player, jsonForms);
         }
     }
+
+    // 我暂时没找到玩家进入服务去时的Hook，所以暂时由服务器询问来代替
+    public static void sendPlayerLogin(ServerPlayerEntity player) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        ServerPlayNetworking.send(player, ModPackets.LOGIN_PACKET, buf);
+    }
 }

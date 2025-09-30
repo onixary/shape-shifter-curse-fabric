@@ -623,5 +623,15 @@
   "text.autoconfig.shape-shifter-curse-common.option.transformativeOcelotSpawnChance": "咒文豹猫刷新成功率",
   "text.autoconfig.shape-shifter-curse-common.option.enableNewStartBook": "启用新版幻形者之书界面",
   "text.autoconfig.shape-shifter-curse-common.option.curseMoonPhase": "诅咒之月月相",
-  "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "开发中配置"
+  "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "开发中配置",
+  "text.autoconfig.shape-shifter-curse-custom.title": "幻形者诅咒 - 玩家自定义配置",
+  "text.autoconfig.shape-shifter-curse-custom.option.keep_original_skin": "保留原版皮肤",
+  "text.autoconfig.shape-shifter-curse-custom.option.enable_form_color": "启用Form自定义颜色系统",
+  "text.autoconfig.shape-shifter-curse-custom.option.primaryColor": "主要色",
+  "text.autoconfig.shape-shifter-curse-custom.option.accentColor1Color": "重点色1",
+  "text.autoconfig.shape-shifter-curse-custom.option.accentColor2Color": "重点色2",
+  "text.autoconfig.shape-shifter-curse-custom.option.eyeColor": "眼睛颜色",
+  "text.autoconfig.shape-shifter-curse-custom.option.primaryOverrideStrength": "主要色灰度增强",
+  "text.autoconfig.shape-shifter-curse-custom.option.accent1OverrideStrength": "重点色1灰度增强",
+  "text.autoconfig.shape-shifter-curse-custom.option.accent2OverrideStrength": "重点色2灰度增强"
 }

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
@@ -18,10 +19,13 @@ import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
+import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static net.onixary.shapeShifterCurseFabric.networking.ModPackets.UPDATE_CUSTOM_SETTING;
 
 // 应仅在客户端注册
 // This class should only be registered on the client side
@@ -45,6 +49,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_FORCE_SNEAK_STATE, ModPacketsS2C::receiveForceSneakState);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_DYNAMIC_FORM, ModPacketsS2C::handleUpdateDynamicForm);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.REMOVE_DYNAMIC_FORM_EXCEPT, ModPacketsS2C::handleRemoveDynamicExcept);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.LOGIN_PACKET, ModPacketsS2C::onPlayerConnectServer);
     }
 
     public static void handleSyncEffectAttachment(
@@ -248,5 +253,37 @@ public class ModPacketsS2C {
         client.execute(() -> {
             RegPlayerForms.removeDynamicPlayerFormsExcept(except);
         });
+    }
+
+    public static void onPlayerConnectServer(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        new Thread(() -> {
+            // 延时5s, 等待服务器component加载完成
+            try {
+                Thread.sleep(5000);
+                sendUpdateCustomSetting();
+            } catch (Exception e) {
+                ShapeShifterCurseFabric.LOGGER.error("Error while sending custom setting to server", e);
+            }
+        }).start();
+    }
+
+    // 临时先放这里，以后再整理
+    public static void sendUpdateCustomSetting() {
+        PacketByteBuf buf = PacketByteBufs.create();
+        int AGBRInt = 0;
+        buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.keep_original_skin);
+        buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.enable_form_color);
+        AGBRInt = FormTextureUtils.RGB2ABGR(ShapeShifterCurseFabric.playerCustomConfig.primaryColor);
+        buf.writeInt(AGBRInt);
+        AGBRInt = FormTextureUtils.RGB2ABGR(ShapeShifterCurseFabric.playerCustomConfig.accentColor1Color);
+        buf.writeInt(AGBRInt);
+        AGBRInt = FormTextureUtils.RGB2ABGR(ShapeShifterCurseFabric.playerCustomConfig.accentColor2Color);
+        buf.writeInt(AGBRInt);
+        AGBRInt = FormTextureUtils.RGB2ABGR(ShapeShifterCurseFabric.playerCustomConfig.eyeColor);
+        buf.writeInt(AGBRInt);
+        buf.writeInt(ShapeShifterCurseFabric.playerCustomConfig.primaryOverrideStrength);
+        buf.writeInt(ShapeShifterCurseFabric.playerCustomConfig.accent1OverrideStrength);
+        buf.writeInt(ShapeShifterCurseFabric.playerCustomConfig.accent2OverrideStrength);
+        ClientPlayNetworking.send(UPDATE_CUSTOM_SETTING, buf);
     }
 }

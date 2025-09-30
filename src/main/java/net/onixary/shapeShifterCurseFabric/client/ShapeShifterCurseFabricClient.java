@@ -221,6 +221,8 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		FurGradientRenderLayer.onInitializeClient();
 
 		ClientTickEvents.END_CLIENT_TICK.register(ShapeShifterCurseFabricClient::onClientTick);
+
+
 	}
 
 	public static ShaderProgram getFurGradientShader() {

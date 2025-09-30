@@ -18,6 +18,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
+import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 
 import java.util.UUID;
 
@@ -85,6 +86,10 @@ public class ModPacketsC2S {
                 }
             });
         });
+
+        ServerPlayNetworking.registerGlobalReceiver(
+                UPDATE_CUSTOM_SETTING,
+                net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S::onUpdatePlayerCustomConfig);
     }
 
     private static void onPressStartBookButton(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender){
@@ -107,5 +112,29 @@ public class ModPacketsC2S {
         // 不需要额外数据，只是一个解除吸附的信号
 
         ServerPlayNetworking.send(player, JUMP_DETACH_REQUEST_ID, buf);
+    }
+
+    private static void onUpdatePlayerCustomConfig(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender){
+        boolean keepOriginalSkin = packetByteBuf.readBoolean();
+        boolean enableFormColor = packetByteBuf.readBoolean();
+        int primaryColor = packetByteBuf.readInt();
+        int accentColor1Color = packetByteBuf.readInt();
+        int accentColor2Color = packetByteBuf.readInt();
+        int eyeColor = packetByteBuf.readInt();
+        float primaryOverrideStrength = (float) packetByteBuf.readInt() / 255;
+        float accent1OverrideStrength = (float) packetByteBuf.readInt() / 255;
+        float accent2OverrideStrength = (float) packetByteBuf.readInt() / 255;
+        minecraftServer.execute(() -> {
+            try {
+                PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(playerEntity);
+                component.setKeepOriginalSkin(keepOriginalSkin);
+                component.setEnableFormColor(enableFormColor);
+                component.setFormColor(new FormTextureUtils.ColorSetting(primaryColor, accentColor1Color, accentColor2Color, eyeColor, primaryOverrideStrength, accent1OverrideStrength, accent2OverrideStrength));
+                RegPlayerSkinComponent.SKIN_SETTINGS.sync(playerEntity);
+            }
+            catch (Exception e){
+                ShapeShifterCurseFabric.LOGGER.error("Error while updating player custom config", e);
+            }
+        });
     }
 }
