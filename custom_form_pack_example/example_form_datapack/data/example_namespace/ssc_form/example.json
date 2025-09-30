@@ -1,5 +1,7 @@
 {
   "__comment__": "具体看PlayerFormBase",
+  "FormID": "example_namespace:example",
+  "__FormID_comment__": "FormID覆写 **不推荐覆盖**",
   "groupID": "example_namespace:example_group",
   "__groupID_comment__": "组ID 用于注册组",
   "groupIndex": 5,

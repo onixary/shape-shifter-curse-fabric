@@ -114,21 +114,21 @@ public class PlayerFormDynamic extends PlayerFormBase{
         }
     }
 
-    private String _Gson_GetString(JsonObject data, String key, String defaultValue) {
+    private static String _Gson_GetString(JsonObject data, String key, String defaultValue) {
         if (data.has(key)) {
             return data.get(key).getAsString();
         }
         return defaultValue;
     }
 
-    private int _Gson_GetInt(JsonObject data, String key, int defaultValue) {
+    private static int _Gson_GetInt(JsonObject data, String key, int defaultValue) {
         if (data.has(key)) {
             return data.get(key).getAsInt();
         }
         return defaultValue;
     }
 
-    private boolean _Gson_GetBoolean(JsonObject data, String key, boolean defaultValue) {
+    private static boolean _Gson_GetBoolean(JsonObject data, String key, boolean defaultValue) {
         if (data.has(key)) {
             return data.get(key).getAsBoolean();
         }
@@ -137,6 +137,9 @@ public class PlayerFormDynamic extends PlayerFormBase{
 
     public void load(JsonObject formData) {
         try {
+            if (formData.has("FormID")) {
+                this.FormID = Identifier.tryParse(formData.get("FormID").getAsString());
+            }
             this.setPhase(PlayerFormPhase.valueOf(_Gson_GetString(formData, "phase", "PHASE_CLEAR")));
             this.setBodyType(PlayerFormBodyType.valueOf(_Gson_GetString(formData, "bodyType", "NORMAL")));
             this.setHasSlowFall(_Gson_GetBoolean(formData, "hasSlowFall", false));
@@ -209,6 +212,15 @@ public class PlayerFormDynamic extends PlayerFormBase{
     public static PlayerFormDynamic of(Identifier id, JsonObject formData) {
         PlayerFormDynamic form = new PlayerFormDynamic(id);
         form.load(formData);
+        return form;
+    }
+
+    public static PlayerFormDynamic of(JsonObject formData) throws IllegalArgumentException {
+        PlayerFormDynamic form = new PlayerFormDynamic(null);
+        form.load(formData);
+        if (form.FormID == null) {
+            throw new IllegalArgumentException("FormID is required");
+        }
         return form;
     }
 
