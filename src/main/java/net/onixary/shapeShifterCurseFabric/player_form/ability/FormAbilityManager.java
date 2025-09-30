@@ -18,6 +18,7 @@ import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginRegi
 import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import virtuoel.pehkui.api.ScaleData;
 import virtuoel.pehkui.api.ScaleTypes;
@@ -44,6 +45,7 @@ public class FormAbilityManager {
         // 已被弃用，使用json定义的scale power
         //applyScale(player, config.getScale());
         applyFormOrigin(player, newForm);
+        applyExtraPower(player, oldForm, newForm);
         //applyPower(player, config.getPowerId());
         // 清空Status
         cancelEffect(player);
@@ -125,11 +127,25 @@ public class FormAbilityManager {
         }
     }
 
-    private static void applyPower(PlayerEntity player, Identifier powerId) {
+    private static void applyPower(PlayerEntity player, Identifier powerId, Identifier powerSource) {
         PowerType<?> powerType = PowerTypeRegistry.get(powerId);
         if (powerType != null) {
             PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
-            powerHolder.addPower(powerType, powerId);
+            powerHolder.addPower(powerType, powerSource);
+        }
+    }
+
+    public static void applyExtraPower(PlayerEntity playerEntity, PlayerFormBase oldForm, PlayerFormBase newForm) {
+        PowerHolderComponent powerComponent = PowerHolderComponent.KEY.get(playerEntity);
+        // 移除旧形态的额外能力
+        if (oldForm instanceof PlayerFormDynamic pfd) {
+            powerComponent.removeAllPowersFromSource(pfd.FormID);
+        }
+        // 添加新形态的额外能力
+        if (newForm instanceof PlayerFormDynamic pfd) {
+            for (Identifier powerID: pfd.ExtraPower) {
+                applyPower(playerEntity, powerID, pfd.FormID);
+            }
         }
     }
 }

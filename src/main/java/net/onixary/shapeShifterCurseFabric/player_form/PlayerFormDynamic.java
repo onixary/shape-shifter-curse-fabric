@@ -3,14 +3,14 @@ package net.onixary.shapeShifterCurseFabric.player_form;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFurClient;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class PlayerFormDynamic extends PlayerFormBase{
     static class AnimationHolderData {
@@ -26,6 +26,11 @@ public class PlayerFormDynamic extends PlayerFormBase{
             return new AnimationHolder(AnimID, true, Speed, Fade);
         }
     }
+
+    public Identifier FurModelID = null;
+    public List<Identifier> ExtraPower = new LinkedList<Identifier>();
+    public boolean IsPatronForm = false;  // 可以使用特殊物品直接变形
+    public List<UUID> PlayerUUIDs = new ArrayList<UUID>();
 
     private final HashMap<PlayerAnimState, AnimationHolderData> animMap_Builder = new HashMap<>();
     public static final HashMap<Identifier, HashMap<PlayerAnimState, AnimationHolder>> animMap = new HashMap<>();
@@ -164,6 +169,7 @@ public class PlayerFormDynamic extends PlayerFormBase{
                 group = RegPlayerForms.registerDynamicPlayerFormGroup(new PlayerFormGroup(GroupID));
             }
             this.setGroup(group, GroupIndex);
+
         }
         catch(Exception e) {
             ShapeShifterCurseFabric.LOGGER.error("Error while loading player form: {}", e.getMessage());
@@ -214,5 +220,10 @@ public class PlayerFormDynamic extends PlayerFormBase{
     @Override
     public Identifier getFormOriginLayerID() {
         return this.originLayerID != null ? this.originLayerID : super.getFormOriginLayerID();
+    }
+
+    // 添加在玩家自选Form的UI判断
+    public boolean IsPlayerCanUse(PlayerEntity player) {
+        return PlayerUUIDs.isEmpty() || PlayerUUIDs.contains(player.getUuid());
     }
 }
