@@ -112,5 +112,13 @@
     "speed": 1.0,
     "fade": 2
   },
-  "__animDefault_comment__": "默认动画 如果没有可以不用添加此键"
+  "__animDefault_comment__": "默认动画 如果没有可以不用添加此键",
+  "FurModelID": "",
+  "__FurModelID_comment__": "FurModel 为赞助者形态设计 非赞助者形态请修改originID 由于无法动态添加起源 **未实现**",
+  "ExtraPower": [],
+  "__ExtraPower_comment__": "额外能力 为赞助者形态设计 非赞助者形态请修改originID 由于无法动态添加起源 **未实现**",
+  "IsPatronForm": false,
+  "__IsPatronForm_comment__": "是否为赞助者形态 为赞助者形态设计 可以使用特殊物品直接变形 **未实现**",
+  "PlayerUUID": [],
+  "__PlayerUUID_comment__": "仅个别UUID可使用 为赞助者形态设计 空为全体可用 **未实现**"
 }
