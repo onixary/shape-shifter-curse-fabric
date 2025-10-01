@@ -121,15 +121,15 @@ public class ModPacketsC2S {
         int accentColor1Color = packetByteBuf.readInt();
         int accentColor2Color = packetByteBuf.readInt();
         int eyeColor = packetByteBuf.readInt();
-        float primaryOverrideStrength = (float) packetByteBuf.readInt() / 255;
-        float accent1OverrideStrength = (float) packetByteBuf.readInt() / 255;
-        float accent2OverrideStrength = (float) packetByteBuf.readInt() / 255;
+        boolean primaryGreyReverse = packetByteBuf.readBoolean();
+        boolean accent1GreyReverse = packetByteBuf.readBoolean();
+        boolean accent2GreyReverse = packetByteBuf.readBoolean();
         minecraftServer.execute(() -> {
             try {
                 PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(playerEntity);
                 component.setKeepOriginalSkin(keepOriginalSkin);
                 component.setEnableFormColor(enableFormColor);
-                component.setFormColor(new FormTextureUtils.ColorSetting(primaryColor, accentColor1Color, accentColor2Color, eyeColor, primaryOverrideStrength, accent1OverrideStrength, accent2OverrideStrength));
+                component.setFormColor(new FormTextureUtils.ColorSetting(primaryColor, accentColor1Color, accentColor2Color, eyeColor, primaryGreyReverse, accent1GreyReverse, accent2GreyReverse));
                 RegPlayerSkinComponent.SKIN_SETTINGS.sync(playerEntity);
             }
             catch (Exception e){

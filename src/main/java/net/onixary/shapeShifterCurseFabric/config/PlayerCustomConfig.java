@@ -25,13 +25,19 @@ public class PlayerCustomConfig implements ConfigData {
     @Comment("Eye color (RGB). Default: black")
     public int eyeColor = 0x000000;
 
-    @Comment("Primary color override grey strength (0~255). Default: 0")
-    @ConfigEntry.BoundedDiscrete(min = 0, max = 255)
-    public int primaryOverrideStrength = 0;
-    @Comment("Accent color 1 override grey strength (0~255). Default: 0")
-    @ConfigEntry.BoundedDiscrete(min = 0, max = 255)
-    public int accent1OverrideStrength = 0;
-    @Comment("Accent color 2 override grey strength (0~255). Default: 0")
-    @ConfigEntry.BoundedDiscrete(min = 0, max = 255)
-    public int accent2OverrideStrength = 0;
+    // @Comment("Primary color override grey strength (0~255). Default: 0")
+    // @ConfigEntry.BoundedDiscrete(min = 0, max = 255)
+    // public int primaryOverrideStrength = 0;
+    // @Comment("Accent color 1 override grey strength (0~255). Default: 0")
+    // @ConfigEntry.BoundedDiscrete(min = 0, max = 255)
+    // public int accent1OverrideStrength = 0;
+    // @Comment("Accent color 2 override grey strength (0~255). Default: 0")
+    // @ConfigEntry.BoundedDiscrete(min = 0, max = 255)
+    // public int accent2OverrideStrength = 0;
+    @Comment("Primary color reverse grey scale mul. Default: false")
+    public boolean primaryGreyReverse = false;
+    @Comment("Accent color 1 reverse grey scale mul. Default: false")
+    public boolean accent1GreyReverse = false;
+    @Comment("Accent color 2 reverse grey scale mul. Default: false")
+    public boolean accent2GreyReverse = false;
 }
