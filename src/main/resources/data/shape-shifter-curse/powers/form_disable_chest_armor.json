@@ -14,6 +14,13 @@
                     "item": "minecraft:elytra"
                 },
                 "inverted": true
+            },
+            {
+              "type": "origins:ingredient",
+              "ingredient": {
+                "item": "shape-shifter-curse:morphscale_vest"
+              },
+              "inverted": true
             }
         ]
     }
