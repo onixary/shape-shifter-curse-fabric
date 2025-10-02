@@ -203,7 +203,7 @@ public class FormTextureUtils {
                 }
             }
         }
-        return new ImmutableTriple<>((int)R/RC, (int)G/GC, (int)B/BC);
+        return new ImmutableTriple<>((RC == 0 ? 255 : (int)R/RC), (GC == 0 ? 255 : (int)G/GC), (BC == 0 ? 255 : (int)B/BC));
     }
 
     public static int ProcessMaskChannel(int Color, int Mask, int ColorSetting, int AverageGreyScale, boolean ReverseGreyScale) {

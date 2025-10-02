@@ -1,0 +1,13 @@
+{
+    "type": "origins:restrict_armor",
+    "feet": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:armor_value",
+          "comparison": ">",
+          "compare_to": -1
+        }
+      ]
+    }
+}
