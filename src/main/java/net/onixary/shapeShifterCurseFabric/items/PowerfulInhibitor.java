@@ -1,33 +1,31 @@
-package net.onixary.shapeShifterCurseFabric.item;
+package net.onixary.shapeShifterCurseFabric.items;
 
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.item.FoodComponent;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Catalyst extends Item {
-    public Catalyst(Settings settings) {
-        super(settings
-                .maxCount(16)
+public class PowerfulInhibitor extends Item {
+    public PowerfulInhibitor(Settings settings) {
+        super(settings.maxCount(16)
                 .food(
-                        new FoodComponent.Builder()
-                                .hunger(2)
-                                .saturationModifier(0.3f)
-                                .alwaysEdible()
-                                .build()
-                ));
+                new FoodComponent.Builder()
+                        .hunger(2)
+                        .saturationModifier(0.3f)
+                        .alwaysEdible()
+                        .build()
+        ));
     }
 
     @Override
@@ -43,7 +41,6 @@ public class Catalyst extends Item {
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         // 实际效果在ItemStackMixin的注入中进行处理
         super.finishUsing(stack, world, user);
-
         if (user instanceof PlayerEntity playerEntity) {
             if (playerEntity.getAbilities().creativeMode) {
                 return stack;
@@ -64,6 +61,6 @@ public class Catalyst extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("item.shape-shifter-curse.catalyst.tooltip").formatted(Formatting.LIGHT_PURPLE));
+        tooltip.add(Text.translatable("item.shape-shifter-curse.powerful_inhibitor.tooltip").formatted(Formatting.YELLOW));
     }
 }

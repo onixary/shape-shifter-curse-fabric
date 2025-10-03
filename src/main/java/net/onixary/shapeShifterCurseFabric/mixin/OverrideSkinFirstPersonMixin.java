@@ -99,12 +99,7 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
             var eRA = (IPlayerEntityMixins) EntityRender;
             var acc = (ModelRootAccessor) EntityRender.getModel();
             OriginFurModel m = (OriginFurModel) fur.getGeoModel();
-            m.getAnimationProcessor().getRegisteredBones().forEach(coreGeoBone -> {
-                if (((IGeoBone) coreGeoBone).originfurs$isHiddenByDefault()) {
-                    return;
-                }
-                m.preprocess(origin, EntityRender, eRA, acc, player);
-            });
+            m.preprocess(origin, EntityRender, eRA, acc, player);
             GeoBone geoBone = OptionalGeoBone.get();
             fur.setPlayer(player);
             matrices.push();

@@ -1,7 +1,6 @@
-package net.onixary.shapeShifterCurseFabric.item;
+package net.onixary.shapeShifterCurseFabric.items;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

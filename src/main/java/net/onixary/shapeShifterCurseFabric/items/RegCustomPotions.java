@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.item;
+package net.onixary.shapeShifterCurseFabric.items;
 
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.Items;

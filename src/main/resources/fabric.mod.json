@@ -69,7 +69,7 @@
     "cardinal-components-base": ">=3.0.0",
     "cardinal-components-entity": ">=3.0.0",
     "cloth-config2": ">=5.0.0",
-    "azurelib": ">=2.0.41",
+    "azurelib": ">=3.0.0",
     "pehkui": ">=3.7.8",
     "forgeconfigapiport": ">=8.0.0",
     "satin": ">=1.14.0"

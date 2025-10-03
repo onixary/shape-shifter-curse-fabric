@@ -18,6 +18,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
+import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -74,15 +75,16 @@ public class ShapeShifterCurseCommand {
                                 )
                         )
                         .then(literal("set_form_color").requires(cs -> cs.hasPermissionLevel(0))
+                                .executes(ShapeShifterCurseCommand::logFormColorSetting)
                                 .then(argument("enable", BoolArgumentType.bool())
                                         .executes(ShapeShifterCurseCommand::setFormColorEnable)
                                         .then(argument("primaryColorRGBA", StringArgumentType.string())
                                                 .then(argument("accentColor1RGBA", StringArgumentType.string())
                                                         .then(argument("accentColor2RGBA", StringArgumentType.string())
                                                                 .then(argument("eyeColor", StringArgumentType.string())
-                                                                        .then(argument("primaryOverrideStrength", FloatArgumentType.floatArg())
-                                                                                .then(argument("accent1OverrideStrength", FloatArgumentType.floatArg())
-                                                                                        .then(argument("accent2OverrideStrength", FloatArgumentType.floatArg())
+                                                                        .then(argument("primaryGreyReverse", BoolArgumentType.bool())
+                                                                                .then(argument("accent1GreyReverse", BoolArgumentType.bool())
+                                                                                        .then(argument("accent2GreyReverse", BoolArgumentType.bool())
                                                                                                 .executes(ShapeShifterCurseCommand::setFormColor)
                                                                                         )
                                                                                 )
@@ -208,6 +210,33 @@ public class ShapeShifterCurseCommand {
         }
     }
 
+    private static int logFormColorSetting(CommandContext<ServerCommandSource> commandContext) {
+        try {
+            ServerPlayerEntity player = commandContext.getSource().getPlayer();
+            if (player == null) {
+                commandContext.getSource().sendError(Text.literal("Must be a player!"));
+                return 0;
+            }
+            String message = "Form color setting: \n";
+            message += "Enable: " + RegPlayerSkinComponent.SKIN_SETTINGS.get(player).isEnableFormColor() + "\n";
+            message += "Primary Color RGBA: " + Integer.toHexString((FormTextureUtils.ABGR2RGBA(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getPrimaryColor()))) + "\n";
+            message += "Accent Color 1 RGBA: " + Integer.toHexString((FormTextureUtils.ABGR2RGBA(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getAccentColor1()))) + "\n";
+            message += "Accent Color 2 RGBA: " + Integer.toHexString((FormTextureUtils.ABGR2RGBA(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getAccentColor2()))) + "\n";
+            message += "Eye Color: " + Integer.toHexString((FormTextureUtils.ABGR2RGBA(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getEyeColor()))) + "\n";
+            message += "Primary Grey Reverse: " + RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getPrimaryGreyReverse() + "\n";
+            message += "Accent 1 Grey Reverse: " + RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getAccent1GreyReverse() + "\n";
+            message += "Accent 2 Grey Reverse: " + RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getAccent2GreyReverse() + "\n";
+            player.sendMessage(Text.literal(message), false);
+            return 1;
+        }
+        catch (Exception e) {
+            // 处理其他可能的错误
+            commandContext.getSource().sendError(Text.literal("Error when log player form color: " + e.getMessage()));
+            ShapeShifterCurseFabric.LOGGER.error("Error when log player form color: ", e);
+            return 0;
+        }
+    }
+
     private static int setFormColorEnable(CommandContext<ServerCommandSource> commandContext) {
         try {
             ServerPlayerEntity player = commandContext.getSource().getPlayer();
@@ -239,14 +268,7 @@ public class ShapeShifterCurseCommand {
             String accentColor1RGBA = StringArgumentType.getString(commandContext, "accentColor1RGBA");
             String accentColor2RGBA = StringArgumentType.getString(commandContext, "accentColor2RGBA");
             String eyeColor = StringArgumentType.getString(commandContext, "eyeColor");
-            float primaryOverrideStrength = FloatArgumentType.getFloat(commandContext, "primaryOverrideStrength");
-            float accent1OverrideStrength = FloatArgumentType.getFloat(commandContext, "accent1OverrideStrength");
-            float accent2OverrideStrength = FloatArgumentType.getFloat(commandContext, "accent2OverrideStrength");
-            primaryOverrideStrength = Math.max(0.0f, Math.min(1.0f, primaryOverrideStrength));
-            accent1OverrideStrength = Math.max(0.0f, Math.min(1.0f, accent1OverrideStrength));
-            accent2OverrideStrength = Math.max(0.0f, Math.min(1.0f, accent2OverrideStrength));
-            if (!RegPlayerSkinComponent.SKIN_SETTINGS.get(player).setFormColor(primaryColorRGBA, accentColor1RGBA, accentColor2RGBA, eyeColor
-                    , primaryOverrideStrength, accent1OverrideStrength, accent2OverrideStrength)) {
+            if (!RegPlayerSkinComponent.SKIN_SETTINGS.get(player).setFormColor(primaryColorRGBA, accentColor1RGBA, accentColor2RGBA, eyeColor, BoolArgumentType.getBool(commandContext, "primaryGreyReverse"), BoolArgumentType.getBool(commandContext, "accent1GreyReverse"), BoolArgumentType.getBool(commandContext, "accent2GreyReverse"))) {
                 commandContext.getSource().sendError(Text.literal("Invalid color format!"));
                 return 0;
             }

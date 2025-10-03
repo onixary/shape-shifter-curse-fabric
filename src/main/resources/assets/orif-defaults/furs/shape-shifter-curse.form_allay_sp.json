@@ -13,8 +13,8 @@
     "jacket"
   ],
   "tail_chain": {
-    "tail_l": [0, 1, 2],
-    "tail_r": [0, 1, 2]
+    "tail_l": [0],
+    "tail_r": [0]
   },
   "wing_chain_l": {
     "wing_l": [0, 1]

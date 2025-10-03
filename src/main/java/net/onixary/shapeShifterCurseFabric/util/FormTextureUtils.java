@@ -10,6 +10,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form_render.OriginFurModel;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
+import org.apache.commons.lang3.tuple.Triple;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +24,7 @@ public class FormTextureUtils {
     // 一些形态原版的贴图过黑，转换为灰度后无法看出自定义颜色，
     // 应用后的灰度 = max(原灰度 + overrideStrength*255, 255)
     public record ColorSetting(int primaryColor, int accentColor1, int accentColor2, int eyeColor
-            , float primaryOverrideStrength, float accent1OverrideStrength, float accent2OverrideStrength) {
+            , boolean primaryGreyReverse, boolean accent1GreyReverse, boolean accent2GreyReverse) {
         public int getPrimaryColor() {
             return this.primaryColor;
         }
@@ -35,14 +37,14 @@ public class FormTextureUtils {
         public int getEyeColor() {
             return this.eyeColor;
         }
-        public float getPrimaryOverrideStrength() {
-            return this.primaryOverrideStrength;
+        public boolean getPrimaryGreyReverse() {
+            return this.primaryGreyReverse;
         }
-        public float getAccent1OverrideStrength() {
-            return this.accent1OverrideStrength;
+        public boolean getAccent1GreyReverse() {
+            return this.accent1GreyReverse;
         }
-        public float getAccent2OverrideStrength() {
-            return this.accent2OverrideStrength;
+        public boolean getAccent2GreyReverse() {
+            return this.accent2GreyReverse;
         }
     }
 
@@ -151,12 +153,21 @@ public class FormTextureUtils {
                (((ColorA & 0xFF) * Bytes) / 255); // Blue
     }
 
+    public static int GreyScaleMul(int Color, float GreyScale) {
+        // ABGR顺序
+        int R = Math.min(255, Math.max((int)(GreyScale * (Color & 0xFF)), 0));
+        int G = Math.min(255, Math.max((int)(GreyScale * ((Color >> 8) & 0xFF)), 0));
+        int B = Math.min(255, Math.max((int)(GreyScale * ((Color >> 16) & 0xFF)), 0));
+        // Math.clamp 是Java 21的方法
+        return 0xFF000000 | (B << 16) | (G << 8) | R;
+    }
+
     // public static int ColorOverlay(int ColorA, int ColorOverlay) {
     //     int OverlayA = (ColorOverlay >> 24) & 0xFF;
     //     return ColorMix(ColorA, ColorOverlay, OverlayA);
     // }
 
-    public static int getLight(int color) {
+    public static int getGreyScale(int color) {
         // 提取RGB通道（忽略Alpha通道）
         int R = (color >> 16) & 0xFF;
         int G = (color >> 8) & 0xFF;
@@ -169,7 +180,39 @@ public class FormTextureUtils {
         return Math.min(a + (int)(t * b), 255);
     }
 
-    public static int ProcessPixel(int Color, int Mask, ColorSetting colorSetting) {
+    public static Triple<Integer, Integer, Integer> getAverageGreyScale(NativeImage image, NativeImage maskImage) {
+        // ABGR顺序
+        int textureWidth = image.getWidth();
+        int textureHeight = image.getHeight();
+        long R = 0, G = 0, B = 0;
+        int RC = 0, GC = 0, BC = 0;
+        for (int x = 0; x < textureWidth; x++) {
+            for (int y = 0; y < textureHeight; y++) {
+                int Mask = maskImage.getColor(x, y);
+                if ((Mask & 0x00FF0000) > 0) {
+                    B += getGreyScale(image.getColor(x, y));
+                    BC ++;
+                }
+                else if ((Mask & 0x0000FF00) > 0) {
+                    G += getGreyScale(image.getColor(x, y));
+                    GC ++;
+                }
+                else if ((Mask & 0x000000FF) > 0) {
+                    R += getGreyScale(image.getColor(x, y));
+                    RC ++;
+                }
+            }
+        }
+        return new ImmutableTriple<>((RC == 0 ? 255 : (int)R/RC), (GC == 0 ? 255 : (int)G/GC), (BC == 0 ? 255 : (int)B/BC));
+    }
+
+    public static int ProcessMaskChannel(int Color, int Mask, int ColorSetting, int AverageGreyScale, boolean ReverseGreyScale) {
+        int GreyScaleAdd = ReverseGreyScale ? AverageGreyScale - getGreyScale(Color) : getGreyScale(Color) - AverageGreyScale;
+        Color = GreyScaleMul(ColorSetting, 1.0f + (float)GreyScaleAdd / 255.0f);
+        return ColorMulBytes(Color, Mask);
+    }
+
+    public static int ProcessPixel(int Color, int Mask, ColorSetting colorSetting, Triple<Integer, Integer, Integer> MaskLayerAverageGreyScale) {
         // ABGR顺序
         // int A = (Mask >> 24);
 
@@ -177,35 +220,26 @@ public class FormTextureUtils {
         int maskAlpha = Mask & 0xFF000000;
         if (maskAlpha >= 0 && maskAlpha < 16) {
             // 使用eyeColor替换颜色，但保留原始颜色的Alpha通道
-            int originalAlpha = Color & 0xFF000000;
-            return (colorSetting.getEyeColor() & 0x00FFFFFF) | originalAlpha;
+            return (colorSetting.eyeColor & 0x00FFFFFF) | (Color & 0xFF000000);
         }
 
         if (Mask == 0) return Color;
         
         // 提取原始颜色的 alpha 值
-        int originalAlpha = Color & 0xFF000000;
-        int L = getLight(Color);
         int B = (Mask >> 16) & 0xFF;
         if (B > 0) {
-            int adjustedL = overrideGreyScale(L, 255, colorSetting.getAccent2OverrideStrength());
-            B = (adjustedL * B) / 255;
-            int result = ColorMulBytes(colorSetting.accentColor2, B);
-            return (result & 0x00FFFFFF) | originalAlpha;
+            int result = ProcessMaskChannel(Color, B, colorSetting.accentColor2, MaskLayerAverageGreyScale.getRight(), colorSetting.accent2GreyReverse);
+            return (result & 0x00FFFFFF) | (Color & 0xFF000000);
         }
         int G = (Mask >> 8) & 0xFF;
         if (G > 0) {
-            int adjustedL1 = overrideGreyScale(L, 255, colorSetting.getAccent1OverrideStrength());
-            G = (adjustedL1 * G) / 255;
-            int result = ColorMulBytes(colorSetting.accentColor1, G);
-            return (result & 0x00FFFFFF) | originalAlpha;
+            int result = ProcessMaskChannel(Color, G, colorSetting.accentColor1, MaskLayerAverageGreyScale.getMiddle(), colorSetting.accent1GreyReverse);
+            return (result & 0x00FFFFFF) | (Color & 0xFF000000);
         }
         int R = Mask & 0xFF;
         if (R > 0) {
-            int adjustedL2 = overrideGreyScale(L, 255, colorSetting.getPrimaryOverrideStrength());
-            R = (adjustedL2 * R) / 255;
-            int result = ColorMulBytes(colorSetting.primaryColor, R);
-            return (result & 0x00FFFFFF) | originalAlpha;
+            int result = ProcessMaskChannel(Color, R, colorSetting.primaryColor, MaskLayerAverageGreyScale.getLeft(), colorSetting.primaryGreyReverse);
+            return (result & 0x00FFFFFF) | (Color & 0xFF000000);
         }
         return Color;
     }
@@ -216,9 +250,10 @@ public class FormTextureUtils {
         NativeImage maskImage = toNativeImage(mask);
         int textureWidth = textureImage.getWidth();
         int textureHeight = textureImage.getHeight();
+        Triple<Integer, Integer, Integer> MaskLayerAverageGreyScale = getAverageGreyScale(textureImage, maskImage);
         for (int x = 0; x < textureWidth; x++) {
             for (int y = 0; y < textureHeight; y++) {
-                textureImage.setColor(x, y, ProcessPixel(textureImage.getColor(x, y), maskImage.getColor(x, y), colorSetting));
+                textureImage.setColor(x, y, ProcessPixel(textureImage.getColor(x, y), maskImage.getColor(x, y), colorSetting, MaskLayerAverageGreyScale));
             }
         }
         TextureManager TM = MinecraftClient.getInstance().getTextureManager();

@@ -20,13 +20,11 @@
     "tail": [0, 1, 2, 3]
   },
   "tail_chain_head": {
-    "tail_head_a": [0, 1],
-    "tail_head_b": [0, 1],
-    "tail_head_c": [0, 1],
-    "tail_head_d": [0, 1],
+    "tail_head_a": [0],
+    "tail_head_b": [0],
+    "tail_head_c": [0],
+    "tail_head_d": [0],
     "tail_head_e": [0],
-    "tail_head_f": [0],
-    "tail_head_g": [0, 1],
-    "tail_head_h": [0, 1]
+    "tail_head_f": [0]
   }
 }

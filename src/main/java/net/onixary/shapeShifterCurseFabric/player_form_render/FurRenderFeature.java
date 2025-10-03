@@ -104,12 +104,7 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
                 var a = fur.getAnimatable();
                 OriginFurModel m = (OriginFurModel) fur.getGeoModel();
                 Origin finalO = o;
-                m.getAnimationProcessor().getRegisteredBones().forEach(coreGeoBone -> {
-                    if (((IGeoBone) coreGeoBone).originfurs$isHiddenByDefault()) {
-                        return;
-                    }
-                    m.preprocess(finalO, eR, eRA, acc, abstractClientPlayerEntity);
-                });
+                m.preprocess(finalO, eR, eRA, acc, abstractClientPlayerEntity);
                 fur.setPlayer(abstractClientPlayerEntity);
                 matrixStack.push();
                 matrixStack.multiply(new Quaternionf().rotateX(180 * MathHelper.RADIANS_PER_DEGREE));

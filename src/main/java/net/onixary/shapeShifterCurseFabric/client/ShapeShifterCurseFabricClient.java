@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.client;
 
+import mod.azure.azurelib.rewrite.render.armor.AzArmorRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
@@ -22,6 +23,8 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TAx
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.BatEntityModel;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.BatEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TOcelotEntityRenderer;
+import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
+import net.onixary.shapeShifterCurseFabric.items.armors.MorphscaleArmorRenderer;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_animation.RegPlayerAnimation;
 import net.onixary.shapeShifterCurseFabric.render.render_layer.FurGradientRenderLayer;
@@ -114,6 +117,16 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		EntityModelLayerRegistry.registerModelLayer(T_AXOLOTL_LAYER, BatEntityModel::getTexturedModelData);
 		EntityRendererRegistry.register(T_OCELOT, TOcelotEntityRenderer::new); // i dont know why T_OCELOT_LAYER is unused, but im not gonna change that
 	}
+
+    public static void registerAzureArmorGeo(){
+        AzArmorRendererRegistry.register(
+                MorphscaleArmorRenderer::new,
+                RegCustomItem.MORPHSCALE_HEADRING,
+                RegCustomItem.MORPHSCALE_VEST,
+                RegCustomItem.MORPHSCALE_CUISH,
+                RegCustomItem.MORPHSCALE_ANKLET
+        );
+    }
 
 	private static void onClientTick(MinecraftClient minecraftClient){
 		TickManager.tickClientAll();
@@ -219,6 +232,7 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 
 		registerShaderResource();
 		FurGradientRenderLayer.onInitializeClient();
+        registerAzureArmorGeo();
 
 		ClientTickEvents.END_CLIENT_TICK.register(ShapeShifterCurseFabricClient::onClientTick);
 

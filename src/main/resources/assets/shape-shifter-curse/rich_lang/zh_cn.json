@@ -135,6 +135,11 @@
   "item.shape-shifter-curse.powerful_inhibitor.tooltip": ["蕴含着更强力的黄金魔力"],
   "item.shape-shifter-curse.creative_inhibitor": ["极效抑制剂"],
   "item.shape-shifter-curse.creative_inhibitor.tooltip": ["(创造模式物品)由超越这个世界的力量制成，可以逆转永久形态"],
+  "item.shape-shifter-curse.morphscale_headring": ["塑形头环"],
+  "item.shape-shifter-curse.morphscale_vest": ["塑形身甲"],
+  "item.shape-shifter-curse.morphscale_cuish": ["塑形绑腿"],
+  "item.shape-shifter-curse.morphscale_anklet": ["塑形脚镯"],
+  "item.shape-shifter-curse.morphscale_armor.tooltip": ["这些护甲中融入的月尘魔法可以自动适应你的形态"],
 
   "screen.shape-shifter-curse.book_of_shape_shifter.start_content_text":
   [
@@ -631,7 +636,7 @@
   "text.autoconfig.shape-shifter-curse-custom.option.accentColor1Color": "重点色1",
   "text.autoconfig.shape-shifter-curse-custom.option.accentColor2Color": "重点色2",
   "text.autoconfig.shape-shifter-curse-custom.option.eyeColor": "眼睛颜色",
-  "text.autoconfig.shape-shifter-curse-custom.option.primaryOverrideStrength": "主要色灰度增强",
-  "text.autoconfig.shape-shifter-curse-custom.option.accent1OverrideStrength": "重点色1灰度增强",
-  "text.autoconfig.shape-shifter-curse-custom.option.accent2OverrideStrength": "重点色2灰度增强"
+  "text.autoconfig.shape-shifter-curse-custom.option.primaryGreyReverse": "主要色灰度反转",
+  "text.autoconfig.shape-shifter-curse-custom.option.accent1GreyReverse": "重点色1灰度反转",
+  "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "重点色2灰度反转"
 }

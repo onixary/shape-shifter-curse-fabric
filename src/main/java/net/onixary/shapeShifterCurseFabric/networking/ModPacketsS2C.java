@@ -281,9 +281,9 @@ public class ModPacketsS2C {
         buf.writeInt(AGBRInt);
         AGBRInt = FormTextureUtils.RGB2ABGR(ShapeShifterCurseFabric.playerCustomConfig.eyeColor);
         buf.writeInt(AGBRInt);
-        buf.writeInt(ShapeShifterCurseFabric.playerCustomConfig.primaryOverrideStrength);
-        buf.writeInt(ShapeShifterCurseFabric.playerCustomConfig.accent1OverrideStrength);
-        buf.writeInt(ShapeShifterCurseFabric.playerCustomConfig.accent2OverrideStrength);
+        buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.primaryGreyReverse);
+        buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.accent1GreyReverse);
+        buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.accent2GreyReverse);
         ClientPlayNetworking.send(UPDATE_CUSTOM_SETTING, buf);
     }
 }

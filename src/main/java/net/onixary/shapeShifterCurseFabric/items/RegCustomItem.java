@@ -1,12 +1,14 @@
-package net.onixary.shapeShifterCurseFabric.item;
+package net.onixary.shapeShifterCurseFabric.items;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.items.armors.MorphScaleArmor;
 
 import static net.minecraft.item.Items.register;
 
@@ -22,6 +24,11 @@ public class RegCustomItem {
     public static final Item CATALYST = register("catalyst", new Catalyst(new Item.Settings()));
     public static final Item POWERFUL_CATALYST = register("powerful_catalyst", new PowerfulCatalyst(new Item.Settings()));
     public static final Item MOONDUST_MATRIX = register("moondust_matrix", new MoonDustMatrix(new Item.Settings()));
+    // morphscale armor
+    public static final Item MORPHSCALE_HEADRING = register("morphscale_headring", new MorphScaleArmor(ArmorItem.Type.HELMET));
+    public static final Item MORPHSCALE_VEST = register("morphscale_vest", new MorphScaleArmor(ArmorItem.Type.CHESTPLATE));
+    public static final Item MORPHSCALE_CUISH = register("morphscale_cuish", new MorphScaleArmor(ArmorItem.Type.LEGGINGS));
+    public static final Item MORPHSCALE_ANKLET = register("morphscale_anklet", new MorphScaleArmor(ArmorItem.Type.BOOTS));
 
     // 用于成就图标的占位物品
     public static final Item ICON_CURSED_MOON = register("icon_cursed_moon", new Item(new Item.Settings()));
@@ -44,6 +51,12 @@ public class RegCustomItem {
             entries.add(CREATIVE_INHIBITOR);
             entries.add(CATALYST);
             entries.add(POWERFUL_CATALYST);
+        });
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
+            entries.add(MORPHSCALE_HEADRING);
+            entries.add(MORPHSCALE_VEST);
+            entries.add(MORPHSCALE_CUISH);
+            entries.add(MORPHSCALE_ANKLET);
         });
     }
 }
