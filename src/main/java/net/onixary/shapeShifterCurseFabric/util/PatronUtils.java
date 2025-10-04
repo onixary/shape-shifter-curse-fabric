@@ -1,8 +1,10 @@
 package net.onixary.shapeShifterCurseFabric.util;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -14,6 +16,8 @@ import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,14 +25,26 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class PatronUtils {
-    private static String DataPackUrl = "localhost:8888/DataPack.zip";  // 后续由Common Config 提供
-    private static String ResourcePackUrl = "localhost:8888/ResourcePack.zip";  // 后续由Common Config 提供
+    private static String DataPackVersionUrl = "http://localhost:1234/data_version.txt";  // 后续由Common Config 提供
+    private static String DataPackUrl = "http://localhost:1234/data.zip";  // 后续由Common Config 提供
+    private static String ResourcePackVersionUrl = "http://localhost:1234/resource_version.txt";  // 后续由Common Config 提供
+    private static String ResourcePackUrl = "http://localhost:1234/resource.zip";  // 后续由Common Config 提供
+
+    private static final String DataPackVersionName = "SSC-Patron-Data-Version.txt";
+    private static final String DataPackName = "SSC-Patron-Data.zip";
+    private static final String ResourcePackVersionName = "SSC-Patron-Resource-Version.txt";
+    private static final String ResourcePackName = "SSC-Patron-Resource.zip";
+
+    private static final Path ResourcePackPath = Path.of("resourcepacks").resolve(ResourcePackName);
 
     private static int DataPackVersion = -1;
     private static int ResourcePackVersion = -1;
 
     private static List<JsonObject> ReadDataPackZip(byte[] dataPackZip) {
         // 单层 <ID.json>
+        if (dataPackZip == null) {
+            return new LinkedList<>();
+        }
         List<JsonObject> jsonObjects = new LinkedList<JsonObject>();
         try {
             ZipInputStream zipInputStream = new ZipInputStream(new ByteArrayInputStream(dataPackZip));
@@ -43,9 +59,14 @@ public class PatronUtils {
                     else {
                         try {
                             // 读取json文件
-                            byte[] bytes = new byte[32767];  // 最大支持32K String
-                            int Size = zipInputStream.read(bytes);
-                            if (zipInputStream.read(new byte[1]) != -1) {
+                            byte[] bytesChunk = new byte[1024 * 32];
+                            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                            int bytesRead;
+                            while ((bytesRead = zipInputStream.read(bytesChunk)) > 0) {
+                                outputStream.write(bytesChunk, 0, bytesRead);
+                            }
+                            byte[] bytes = outputStream.toByteArray();
+                            if (bytes.length > 32767) {
                                 ShapeShifterCurseFabric.LOGGER.error("DataPack zip contains too large json file: {}", fileName);
                                 throw new Exception("DataPack zip contains too large json file");
                             }
@@ -57,9 +78,9 @@ public class PatronUtils {
                             ShapeShifterCurseFabric.LOGGER.error("Failed to read json file: {}", fileName, e);
                         }
                     }
-                    zipInputStream.closeEntry();
-                    zipEntry = zipInputStream.getNextEntry();
                 }
+                zipInputStream.closeEntry();
+                zipEntry = zipInputStream.getNextEntry();
             }
             zipInputStream.close();
             return jsonObjects;
@@ -87,36 +108,136 @@ public class PatronUtils {
         return outputStream.toByteArray();
     }
 
+    public static int getVersion(String urlString) {
+        try {
+            URL url = new URL(urlString);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+            String versionStr = reader.readLine();
+            return Integer.parseInt(versionStr);
+        } catch (IOException e) {
+            ShapeShifterCurseFabric.LOGGER.error("Failed to get version from {}", urlString, e);
+            return -1;
+        }
+    }
+
+    public static int getVersionLocal(String LocalPath) {
+        Path LocalDataPackVersion = ShapeShifterCurseFabric.MOD_LOCAL_DATA_STORAGE.resolve(LocalPath);
+        if (!LocalDataPackVersion.toFile().exists()) {
+            return -1;
+        }
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(LocalDataPackVersion.toFile()));
+            String versionStr = reader.readLine();
+            return Integer.parseInt(versionStr);
+        } catch (IOException e) {
+            ShapeShifterCurseFabric.LOGGER.error("Failed to get version from {}", LocalPath, e);
+            return -1;
+        }
+    }
+
+    // TODO 挂载逻辑 添加每24h更新 + 服务器启动时更新
+    public static void CheckDataPackUpdate(MinecraftServer server) {
+        if (NeedUpdateDataPack()) {
+            UpdateDataPack(server);
+        }
+    }
+
     public static boolean NeedUpdateDataPack() {
         // 如果无法获取版本号 则默认不需要(没法)更新
-        int WebDataPackVersion = -1;
-        // TODO 版本获取
+        int WebDataPackVersion = getVersion(DataPackVersionUrl);
+        DataPackVersion = getVersionLocal(DataPackVersionName);
         return WebDataPackVersion > DataPackVersion;
     }
 
     public static byte[] getNewestDataPack() {
-        // TODO 本地缓存
         // **** 此DataPack非标准数据包 为单层 <id>.json 的ssc_form文件 !!!! 不可以放在数据包文件夹 !!!! ****
         // !!!! 如果发现缓存到数据包文件夹 请及时通知修改代码 !!!!
-        return downloadFormURL(DataPackUrl);
+        Path LocalDataPack = ShapeShifterCurseFabric.MOD_LOCAL_DATA_STORAGE.resolve(DataPackName);
+        if (LocalDataPack.toFile().exists()) {
+            try {
+                return Files.readAllBytes(LocalDataPack);
+            }
+            catch (IOException e) {
+                ShapeShifterCurseFabric.LOGGER.error("Failed to read local DataPack", e);
+            }
+        }
+        Path LocalDataPackVersion = ShapeShifterCurseFabric.MOD_LOCAL_DATA_STORAGE.resolve(DataPackVersionName);
+        int WebDataPackVersion = getVersion(DataPackVersionUrl);
+        if (WebDataPackVersion != -1) {
+            byte[] dataPackZip = downloadFormURL(DataPackUrl);
+            if (dataPackZip != null) {
+                try {
+                    Files.write(LocalDataPack, dataPackZip);
+                    Files.writeString(LocalDataPackVersion, String.valueOf(WebDataPackVersion));
+                } catch (IOException e) {
+                    ShapeShifterCurseFabric.LOGGER.error("Failed to write local DataPack", e);
+                }
+            }
+            return dataPackZip;
+        }
+        return null;
     }
 
     public static boolean NeedUpdateResourcePack() {
         // 如果无法获取版本号 则默认不需要(没法)更新
-        int WebResourcePackVersion = -1;
-        // TODO 版本获取
+        int WebResourcePackVersion = getVersion(ResourcePackVersionUrl);
+        ResourcePackVersion = getVersionLocal(ResourcePackVersionName);
         return WebResourcePackVersion > ResourcePackVersion;
     }
 
     public static void ApplyNewestResourcePack() {
-        if (!NeedUpdateResourcePack()) {
-            // TODO 本地下载到资源包文件夹
+        if (NeedUpdateResourcePack()) {
+            Path ResourcePackVersion = ShapeShifterCurseFabric.MOD_LOCAL_DATA_STORAGE.resolve(ResourcePackVersionName);
+            int WebResourcePackVersion = getVersion(ResourcePackVersionUrl);
+            if (WebResourcePackVersion != -1) {
+                byte[] resourcePackZip = downloadFormURL(ResourcePackUrl);
+                if (resourcePackZip != null) {
+                    try {
+                        Files.write(ResourcePackPath, resourcePackZip);
+                        Files.writeString(ResourcePackVersion, String.valueOf(WebResourcePackVersion));
+                    } catch (IOException e) {
+                        ShapeShifterCurseFabric.LOGGER.error("Failed to write local ResourcePack", e);
+                    }
+                }
+            }
+            else {
+                ShapeShifterCurseFabric.LOGGER.error("Failed to get resource pack");
+                return;
+            }
         }
-        // TODO 应用资源包
+        ApplyResourcePack("file/" + ResourcePackName);
         return;
     }
 
-    // TODO 挂载逻辑 添加每24h更新 + 服务器启动时更新
+    public static void ApplyResourcePack(String ResourcePackName) {
+        Path GameConfig = Path.of("options.txt");
+        if (!GameConfig.toFile().exists()) {
+            ShapeShifterCurseFabric.LOGGER.error("Failed to find options.txt, It Should Not Happen!");
+            return;
+        }
+        try {
+            List<String> configLines = Files.readAllLines(GameConfig);
+            for (int i = 0; i < configLines.size(); i++) {
+                if (!configLines.get(i).startsWith("resourcePacks")) {
+                    continue;
+                }
+                String ResourcePackList = configLines.get(i).replaceFirst("resourcePacks:", "");
+                List<String> ResourcePackListArray = new Gson().fromJson(ResourcePackList, new TypeToken<List<String>>(){}.getType());
+                if (ResourcePackListArray.contains(ResourcePackName)) {
+                    return;
+                }
+                ResourcePackListArray.add(ResourcePackName);
+                configLines.set(i, "resourcePacks:" + new Gson().toJson(ResourcePackListArray));
+                Files.write(GameConfig, configLines);
+                ShapeShifterCurseFabric.LOGGER.info("Resource Pack Applied");
+                return;
+            }
+        } catch (IOException e) {
+            ShapeShifterCurseFabric.LOGGER.error("Failed to modify options.txt", e);
+            return;
+        }
+    }
+
     // **** 此DataPack非标准数据包 为单层 <id>.json 的ssc_form文件 ****
     public static void UpdateDataPack(MinecraftServer server) {
         List<JsonObject> jsonObjects = ReadDataPackZip(getNewestDataPack());

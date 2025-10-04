@@ -14,7 +14,7 @@ public class RegPlayerForms {
     public static LinkedHashMap<Identifier, PlayerFormBase> playerForms = new LinkedHashMap<>();
     public static LinkedHashMap<Identifier, PlayerFormGroup> playerFormGroups = new LinkedHashMap<>();
 
-    public static String PatronNameSpace = "shape-shifter-curse-patron";  // 在更新数据包时保留
+    public static String PatronNameSpace = "ssc-patron";  // 在更新数据包时保留
 
     // Builtin PlayerForms
     // 在Java中null不能使用equals方法

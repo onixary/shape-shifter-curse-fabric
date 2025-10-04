@@ -172,7 +172,25 @@ public class PlayerFormDynamic extends PlayerFormBase{
                 group = RegPlayerForms.registerDynamicPlayerFormGroup(new PlayerFormGroup(GroupID));
             }
             this.setGroup(group, GroupIndex);
-
+            String IDStr = _Gson_GetString(formData, "FurModelID", null);
+            FurModelID = IDStr == null ? null : Identifier.tryParse(IDStr);
+            if (formData.has("ExtraPower")) {
+                for (JsonElement extraPower : formData.get("ExtraPower").getAsJsonArray()) {
+                    Identifier PowerID = Identifier.tryParse(extraPower.getAsString());
+                    if (PowerID != null) {
+                        ExtraPower.add(PowerID);
+                    }
+                }
+            }
+            IsPatronForm = _Gson_GetBoolean(formData, "IsPatronForm", false);
+            if (formData.has("PlayerUUID")) {
+                for (JsonElement uuidJson : formData.get("PlayerUUID").getAsJsonArray()) {
+                    UUID uuid = UUID.fromString(uuidJson.getAsString());
+                    if (uuid != null) {
+                        PlayerUUIDs.add(uuid);
+                    }
+                }
+            }
         }
         catch(Exception e) {
             ShapeShifterCurseFabric.LOGGER.error("Error while loading player form: {}", e.getMessage());
@@ -205,6 +223,24 @@ public class PlayerFormDynamic extends PlayerFormBase{
         if (this.getGroup() != null) {
             data.addProperty("groupID", this.getGroup().GroupID.toString());
             data.addProperty("groupIndex", this.FormIndex);
+        }
+        if (this.FurModelID != null) {
+            data.addProperty("FurModelID", this.FurModelID.toString());
+        }
+        if (!ExtraPower.isEmpty()) {
+            JsonArray extraPowers = new JsonArray();
+            for (Identifier powerID : ExtraPower) {
+                extraPowers.add(powerID.toString());
+            }
+            data.add("ExtraPower", extraPowers);
+        }
+        data.addProperty("IsPatronForm", this.IsPatronForm);
+        if (!PlayerUUIDs.isEmpty()) {
+            JsonArray uuids = new JsonArray();
+            for (UUID uuid : PlayerUUIDs) {
+                uuids.add(uuid.toString());
+            }
+            data.add("PlayerUUID", uuids);
         }
         return data;
     }

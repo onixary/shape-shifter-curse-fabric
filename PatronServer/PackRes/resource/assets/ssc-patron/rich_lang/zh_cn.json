@@ -1,0 +1,7 @@
+{
+  "codex.form.example_namespace.example.title": [{"text":"样例TITLE", "color":"#c67681"}],
+  "codex.form.example_namespace.example.appearance": [{"text":"样例Appearance", "color":"#c67681"}],
+  "codex.form.example_namespace.example.pros": [{"text":"样例Pros", "color":"#c67681"}],
+  "codex.form.example_namespace.example.cons": [{"text":"样例Cons", "color":"#c67681"}],
+  "codex.form.example_namespace.example.instincts": [{"text":"样例Instincts", "color":"#c67681"}]
+}

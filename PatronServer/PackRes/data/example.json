@@ -1,0 +1,122 @@
+{
+  "FormID": "ssc-patron:example",
+  "groupID": "ssc-patron:example",
+  "groupIndex": 5,
+  "phase": "PHASE_SP",
+  "bodyType": "FERAL",
+  "isCustomForm": false,
+  "originID": "shape-shifter-curse:form_original_before_enable",
+  "originLayerID": "origins:origin",
+  "hasSlowFall": false,
+  "overrideHandAnim": false,
+  "canSneakRush": false,
+  "canRushJump": false,
+  "anim": [
+    {
+      "state": "ANIM_IDLE",
+      "animID": "shape-shifter-curse:form_feral_common_idle"
+    },
+    {
+      "state": "ANIM_SNEAK_IDLE",
+      "animID": "shape-shifter-curse:form_feral_common_sneak_idle"
+    },
+    {
+      "state": "ANIM_BOAT_IDLE",
+      "animID": "shape-shifter-curse:form_feral_common_sneak_idle"
+    },
+    {
+      "state": "ANIM_RIDE_IDLE",
+      "animID": "shape-shifter-curse:form_feral_common_sneak_idle"
+    },
+    {
+      "state": "ANIM_WALK",
+      "animID": "shape-shifter-curse:form_feral_common_walk",
+      "speed": 1.2,
+      "fade": 2
+    },
+    {
+      "state": "ANIM_SNEAK_WALK",
+      "animID": "shape-shifter-curse:form_feral_common_sneak_walk"
+    },
+    {
+      "state": "ANIM_RUN",
+      "animID": "shape-shifter-curse:form_feral_common_run",
+      "speed": 2.3
+    },
+    {
+      "state": "ANIM_SWIM_IDLE",
+      "animID": "shape-shifter-curse:form_feral_common_float"
+    },
+    {
+      "state": "ANIM_SWIM",
+      "animID": "shape-shifter-curse:form_feral_common_swim"
+    },
+    {
+      "state": "ANIM_TOOL_SWING",
+      "animID": "shape-shifter-curse:form_feral_common_dig"
+    },
+    {
+      "state": "ANIM_SNEAK_TOOL_SWING",
+      "animID": "shape-shifter-curse:form_feral_common_dig"
+    },
+    {
+      "state": "ANIM_JUMP",
+      "animID": "shape-shifter-curse:form_feral_common_jump"
+    },
+    {
+      "state": "ANIM_SNEAK_JUMP",
+      "animID": "shape-shifter-curse:form_feral_common_jump"
+    },
+    {
+      "state": "ANIM_CLIMB_IDLE",
+      "animID": "shape-shifter-curse:form_feral_common_climb"
+    },
+    {
+      "state": "ANIM_CLIMB",
+      "animID": "shape-shifter-curse:form_feral_common_climb"
+    },
+    {
+      "state": "ANIM_FALL",
+      "animID": "shape-shifter-curse:form_feral_common_fall"
+    },
+    {
+      "state": "ANIM_SLEEP",
+      "animID": "shape-shifter-curse:form_feral_common_sleep"
+    },
+    {
+      "state": "ANIM_ATTACK_ONCE",
+      "animID": "shape-shifter-curse:form_feral_common_attack"
+    },
+    {
+      "state": "ANIM_SNEAK_ATTACK_ONCE",
+      "animID": "shape-shifter-curse:form_feral_common_attack"
+    },
+    {
+      "state": "ANIM_ELYTRA_FLY",
+      "animID": "shape-shifter-curse:form_feral_common_elytra_fly"
+    },
+    {
+      "state": "ANIM_CREATIVE_FLY",
+      "animID": "shape-shifter-curse:form_feral_common_elytra_fly"
+    }
+  ],
+  "animDefault": {
+    "animID": "shape-shifter-curse:form_feral_common_idle",
+    "speed": 1.0,
+    "fade": 2
+  },
+  "FurModelID": "ssc-patron:form_example",
+  "ExtraPower": [
+    "shape-shifter-curse:no_render_arm",
+    "shape-shifter-curse:form_feral_cat_sp_scale",
+    "shape-shifter-curse:form_disable_leg_armor",
+    "shape-shifter-curse:form_disable_feet_armor",
+    "origins:velvet_paws",
+    "origins:scare_creepers",
+    "origins:fall_immunity",
+    "shape-shifter-curse:form_ocelot_sound",
+    "shape-shifter-curse:form_ocelot_sound_hurt"
+  ],
+  "IsPatronForm": true,
+  "PlayerUUID": []
+}
