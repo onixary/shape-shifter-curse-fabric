@@ -331,7 +331,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             // handle instinct tick
             InstinctTicker.tick(player);
             // handle transform manager update
-            TransformManager.update();
+            TransformManager.update(player);
             TickManager.tickServerAll();
 
             // handle transformative effects tick
