@@ -236,8 +236,7 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
         registerAzureArmorGeo();
 
 		ClientTickEvents.END_CLIENT_TICK.register(ShapeShifterCurseFabricClient::onClientTick);
-
-		PatronUtils.ApplyNewestResourcePack();
+		PatronUtils.OnClientInit();
 	}
 
 	public static ShaderProgram getFurGradientShader() {

@@ -212,7 +212,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             ServerWorld overworld = server.getOverworld();
             FormAbilityManager.getServerWorld(overworld);
             // 更新Patron状态
-            PatronUtils.UpdateDataPack(server);
+            PatronUtils.OnServerLoad(server);
         });
         // 获取动态Form(DataPack)
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new FormDataPackReloadListener());

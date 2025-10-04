@@ -1,9 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.util;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -24,11 +22,9 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.commonConfig;
+
 public class PatronUtils {
-    private static String DataPackVersionUrl = "http://localhost:1234/data_version.txt";  // 后续由Common Config 提供
-    private static String DataPackUrl = "http://localhost:1234/data.zip";  // 后续由Common Config 提供
-    private static String ResourcePackVersionUrl = "http://localhost:1234/resource_version.txt";  // 后续由Common Config 提供
-    private static String ResourcePackUrl = "http://localhost:1234/resource.zip";  // 后续由Common Config 提供
 
     private static final String DataPackVersionName = "SSC-Patron-Data-Version.txt";
     private static final String DataPackName = "SSC-Patron-Data.zip";
@@ -39,6 +35,32 @@ public class PatronUtils {
 
     private static int DataPackVersion = -1;
     private static int ResourcePackVersion = -1;
+
+    public static void OnClientInit() {
+        if (commonConfig.enablePatronFormSystem) {
+            PatronUtils.ApplyNewestResourcePack();
+        }
+    }
+
+    public static void OnServerLoad(MinecraftServer server) {
+        if (commonConfig.enablePatronFormSystem) {
+            PatronUtils.UpdateDataPack(server);
+            Thread thread = new Thread(() -> {
+                try {
+                    long SleepTime = commonConfig.CheckUpdateInterval;
+                    if (SleepTime <= 0) {
+                        return;
+                    }
+                    Thread.sleep(SleepTime * 1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                if (commonConfig.enablePatronFormSystem) {
+                    PatronUtils.UpdateDataPack(server);
+                }
+            });
+        }
+    }
 
     private static List<JsonObject> ReadDataPackZip(byte[] dataPackZip) {
         // 单层 <ID.json>
@@ -135,7 +157,6 @@ public class PatronUtils {
         }
     }
 
-    // TODO 挂载逻辑 添加每24h更新 + 服务器启动时更新
     public static void CheckDataPackUpdate(MinecraftServer server) {
         if (NeedUpdateDataPack()) {
             UpdateDataPack(server);
@@ -144,7 +165,7 @@ public class PatronUtils {
 
     public static boolean NeedUpdateDataPack() {
         // 如果无法获取版本号 则默认不需要(没法)更新
-        int WebDataPackVersion = getVersion(DataPackVersionUrl);
+        int WebDataPackVersion = getVersion(commonConfig.DataPackVersionUrl);
         DataPackVersion = getVersionLocal(DataPackVersionName);
         return WebDataPackVersion > DataPackVersion;
     }
@@ -162,9 +183,9 @@ public class PatronUtils {
             }
         }
         Path LocalDataPackVersion = ShapeShifterCurseFabric.MOD_LOCAL_DATA_STORAGE.resolve(DataPackVersionName);
-        int WebDataPackVersion = getVersion(DataPackVersionUrl);
+        int WebDataPackVersion = getVersion(commonConfig.DataPackVersionUrl);
         if (WebDataPackVersion != -1) {
-            byte[] dataPackZip = downloadFormURL(DataPackUrl);
+            byte[] dataPackZip = downloadFormURL(commonConfig.DataPackUrl);
             if (dataPackZip != null) {
                 try {
                     Files.write(LocalDataPack, dataPackZip);
@@ -180,7 +201,7 @@ public class PatronUtils {
 
     public static boolean NeedUpdateResourcePack() {
         // 如果无法获取版本号 则默认不需要(没法)更新
-        int WebResourcePackVersion = getVersion(ResourcePackVersionUrl);
+        int WebResourcePackVersion = getVersion(commonConfig.ResourcePackVersionUrl);
         ResourcePackVersion = getVersionLocal(ResourcePackVersionName);
         return WebResourcePackVersion > ResourcePackVersion;
     }
@@ -188,9 +209,9 @@ public class PatronUtils {
     public static void ApplyNewestResourcePack() {
         if (NeedUpdateResourcePack()) {
             Path ResourcePackVersion = ShapeShifterCurseFabric.MOD_LOCAL_DATA_STORAGE.resolve(ResourcePackVersionName);
-            int WebResourcePackVersion = getVersion(ResourcePackVersionUrl);
+            int WebResourcePackVersion = getVersion(commonConfig.ResourcePackVersionUrl);
             if (WebResourcePackVersion != -1) {
-                byte[] resourcePackZip = downloadFormURL(ResourcePackUrl);
+                byte[] resourcePackZip = downloadFormURL(commonConfig.ResourcePackUrl);
                 if (resourcePackZip != null) {
                     try {
                         Files.write(ResourcePackPath, resourcePackZip);
