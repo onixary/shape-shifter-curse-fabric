@@ -289,11 +289,11 @@
   "codex.form.shape-shifter-curse.ocelot_3.cons": "Единственный пригодный для вас вид пищи - сырое мясо. Из-за невероятно быстрого метаболизма вы чувствуете голод, даже когда сидите на одном месте. Вам придётся постоянно охотиться.\n\nБроня слишком тяжела для вас. Вы можете носить лишь шлемы.\nВы не можете использовать щиты.",
   "codex.form.shape-shifter-curse.ocelot_3.instincts": "",
 
-  "codex.form.shape-shifter-curse.bat_0.title": "\nThe curse has affected your body, making you resemble certain chiropterans. You feel darkness attracting you.",
-  "codex.form.shape-shifter-curse.bat_0.appearance": "Membranous appendages extend from your arms' outer sides\nYour tailbone protrudes outward forming a small tail\nBeyond this, they seem functionally limited",
-  "codex.form.shape-shifter-curse.bat_0.pros": "In darkness, you feel more agile",
-  "codex.form.shape-shifter-curse.bat_0.cons": "You can't wear chestplates: new appendages make them incompatible",
-  "codex.form.shape-shifter-curse.bat_0.instincts": "You begin to desire to stay in darkness\nYou begin to desire to stay in dripstone caves biomes",
+  "codex.form.shape-shifter-curse.bat_0.title": "\nПроклятие изменило ваше тело, сделав вас похожим на летучую мышь. Тьма привлекает вас.",
+  "codex.form.shape-shifter-curse.bat_0.appearance": "Из ваших рук выросли мембранные придатки.\nИз вашего копчика вырос небольшой хвост.\nНесмотря на это, они, похоже, ничем не помогают вам.",
+  "codex.form.shape-shifter-curse.bat_0.pros": "Во тьме вы чувствуете себя более комфортно.",
+  "codex.form.shape-shifter-curse.bat_0.cons": "Из-за мебранных образований вы не можете носить нагрудник.",
+  "codex.form.shape-shifter-curse.bat_0.instincts": "Вы мечтаете оставаться во тьме.\nВы мечтаете остаться в кастровых пещерах.",
 
   "codex.form.shape-shifter-curse.bat_1.title": "\nNew vision and strength make you adept in caves and nighttime darkness. Just thinking about sunlight now discomforts you.",
   "codex.form.shape-shifter-curse.bat_1.appearance": "Your ears now crown your head - large, pointed and forward-facing\nArm membranes have grown further - when jumping you instinctively flap them\nYour fingers now somewhat resemble claws, preventing delicate operations though you can still grasp items\nYour toes have elongated - thin and long\nYour tail has lengthened further\nYou seem slightly smaller",
