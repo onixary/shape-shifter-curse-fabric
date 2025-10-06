@@ -1,0 +1,13 @@
+{
+    "powers": [
+        "shape-shifter-curse:form_base_scale",
+        "example_namespace:to_example_form"
+    ],
+    "icon": {
+        "item": "minecraft:player_head"
+    },
+    "order": 0,
+    "unchoosable": true,
+    "impact": 0,
+    "loading_priority": 1000
+}

@@ -1,18 +1,18 @@
 {
-  "__comment__": "具体看PlayerFormBase | See PlayerFormBase for details",
+  "__comment__": "具体看PlayerFormBase",
   "groupID": "example_namespace:example_group",
-  "__groupID_comment__": "组ID 用于注册组 与数据包结构相对应 | Group ID used for registering groups, corresponding to the datapack structure",
+  "__groupID_comment__": "组ID 用于注册组",
   "groupIndex": 5,
-  "__groupIndex_comment__": "组内索引 用于变形逻辑 | Index within group used for transformation logic",
+  "__groupIndex_comment__": "组内索引 用于变形逻辑",
   "phase": "PHASE_SP",
-  "__Phase_comment__": "变形阶段一般和groupIndex一样 Enum:[PHASE_CLEAR, PHASE_0, PHASE_1, PHASE_2, PHASE_3, PHASE_SP] | Transformation phase usually matches groupIndex. Enum:[PHASE_CLEAR, PHASE_0, PHASE_1, PHASE_2, PHASE_3, PHASE_SP]",
-  "bodyType": "NORMAL",
-  "__BodyType_comment__": "身体类型 Enum:[NORMAL, FERAL] | Body type. Enum:[NORMAL, FERAL]",
+  "__Phase_comment__": "变形阶段一般和groupIndex一样 Enum:[PHASE_CLEAR, PHASE_0, PHASE_1, PHASE_2, PHASE_3, PHASE_SP]",
+  "bodyType": "FERAL",
+  "__BodyType_comment__": "身体类型 Enum:[NORMAL, FERAL]",
   "isCustomForm": false,
   "originID": "example_namespace:form_example",
-  "__originID_comment__": "OriginID 与内置的Origin mod联动 与数据包结构相对应 **必须在 data/[NameSpace]/origins 里注册** | OriginID works with the built-in Origin mod, corresponding to the datapack structure. **Must be registered in data/[NameSpace]/origins**",
+  "__originID_comment__": "OriginID 与Origin联动 **必须在 data/[NameSpace]/origins 里注册**",
   "originLayerID": "origins:origin",
-  "__originLayerID_comment__": "OriginLayerID 与内置的OriginFur mod联动 **极度不推荐修改** | OriginLayerID works with OriginFur **Highly not recommended to modify**",
+  "__originLayerID_comment__": "OriginLayerID 与OriginFur联动 **极度不推荐修改**",
   "hasSlowFall": false,
   "overrideHandAnim": false,
   "canSneakRush": false,
@@ -106,11 +106,11 @@
       "animID": "shape-shifter-curse:form_feral_common_elytra_fly"
     }
   ],
-  "__anim_comment__": "动画列表 State 在 PlayerAnimState 中定义 | Animation list. State is defined in PlayerAnimState",
+  "__anim_comment__": "动画列表 State 在 PlayerAnimState 中定义",
   "animDefault": {
     "animID": "shape-shifter-curse:form_feral_common_idle",
     "speed": 1.0,
     "fade": 2
   },
-  "__animDefault_comment__": "默认动画 如果没有可以不用添加此键 | Default animation. If not present, this key can be omitted"
+  "__animDefault_comment__": "默认动画 如果没有可以不用添加此键"
 }
