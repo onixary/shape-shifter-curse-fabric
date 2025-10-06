@@ -331,7 +331,15 @@ public class TransformManager {
     private static void updateClientOverlayEffect(ServerPlayerEntity player) {
         PlayerTransformData data = getPlayerTransformData(player);
         if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-            handleClientOverlayUpdate(1.0f - (data.beginTransformEffectTicks / (float)StaticParams.TRANSFORM_FX_DURATION_IN), data.beginTransformEffectTicks);
+            data.nauesaStrength = 1.0f - (data.beginTransformEffectTicks / (float)StaticParams.TRANSFORM_FX_DURATION_IN);
+            if(data.nauesaStrength > 0.8f){
+                data.blackStrength = (data.nauesaStrength - 0.8f) / 0.2f;
+            }
+            else{
+                data.blackStrength = 0.0f;
+            }
+            TransformOverlay.INSTANCE.setNauesaStrength(data.nauesaStrength);
+            TransformOverlay.INSTANCE.setBlackStrength(data.blackStrength);
             return;
         }
         // 在服务端，通过网络包发送overlay状态到客户端
@@ -346,7 +354,15 @@ public class TransformManager {
     private static void updateClientOverlayFadeEffect(ServerPlayerEntity player) {
         PlayerTransformData data = getPlayerTransformData(player);
         if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-            handleClientOverlayFadeUpdate(data.nauesaStrength, data.endTransformEffectTicks);
+            data.nauesaStrength = data.endTransformEffectTicks / (float)StaticParams.TRANSFORM_FX_DURATION_OUT;
+            if(data.nauesaStrength > 0.6f){
+                data.blackStrength = 1.0f;
+            }
+            else{
+                data.blackStrength = data.nauesaStrength / 0.6f;
+            }
+            TransformOverlay.INSTANCE.setNauesaStrength(data.nauesaStrength);
+            TransformOverlay.INSTANCE.setBlackStrength(data.blackStrength);
             return;
         }
         // 在服务端，通过网络包发送overlay淡出状态到客户端
