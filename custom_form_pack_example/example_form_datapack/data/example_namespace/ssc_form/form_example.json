@@ -10,7 +10,7 @@
   "__BodyType_comment__": "身体类型 Enum:[NORMAL, FERAL] | Body type. Enum:[NORMAL, FERAL]",
   "isCustomForm": false,
   "originID": "example_namespace:form_example",
-  "__originID_comment__": "OriginID 与内置的Origin mod联动 与数据包结构相对应 **必须在 data/[NameSpace]/origins 里注册** | OriginID works with the built-in Origin mod, corresponding to the datapack structure. **Must be registered in data/[NameSpace]/origins**",
+  "__originID_comment__": "OriginID 与内置的Origin mod联动 与origin_layer的名称相对应 **必须在 data/[NameSpace]/origins 里注册** | OriginID works with the built-in Origin mod, corresponding to the origin layer name. **Must be registered in data/[NameSpace]/origins**",
   "originLayerID": "origins:origin",
   "__originLayerID_comment__": "OriginLayerID 与内置的OriginFur mod联动 **极度不推荐修改** | OriginLayerID works with OriginFur **Highly not recommended to modify**",
   "hasSlowFall": false,
