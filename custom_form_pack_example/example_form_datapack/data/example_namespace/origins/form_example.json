@@ -8,7 +8,10 @@
     "origins:scare_creepers",
     "origins:fall_immunity",
     "shape-shifter-curse:form_ocelot_sound",
-    "shape-shifter-curse:form_ocelot_sound_hurt"
+    "shape-shifter-curse:form_ocelot_sound_hurt",
+
+    "example_namespace: custom_eat_amethyst_shard",
+    "example_namespace: custom_night_vision"
   ],
   "icon": {
     "item": "minecraft:player_head"
