@@ -6,16 +6,35 @@
         "saturation": 0.4
     },
     "item_condition": {
-        "type": "origins:or",
+        "type": "origins:and",
         "conditions": [
+            {
+                "type": "origins:or",
+                "conditions": [
+                    {
+                        "type": "origins:ingredient",
+                        "ingredient": {
+                            "tag": "origins:meat"
+                        }
+                    },
+                    {
+                        "type": "origins:meat"
+                    }
+                ]
+            },
             {
                 "type": "origins:ingredient",
                 "ingredient": {
-                    "tag": "origins:meat"
-                }
+                    "tag": "origins:ignore_diet"
+                },
+                "inverted": true
             },
             {
-                "type": "origins:meat"
+                "type": "origins:ingredient",
+                "ingredient": {
+                    "tag": "shape-shifter-curse:ignore_vc_eat"
+                },
+                "inverted": true
             }
         ]
     }

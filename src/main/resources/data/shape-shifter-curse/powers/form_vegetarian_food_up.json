@@ -18,6 +18,20 @@
             {
                 "type": "origins:meat",
                 "inverted": true
+            },
+            {
+                "type": "origins:ingredient",
+                "ingredient": {
+                    "tag": "origins:ignore_diet"
+                },
+                "inverted": true
+            },
+            {
+                "type": "origins:ingredient",
+                "ingredient": {
+                    "tag": "shape-shifter-curse:ignore_vc_eat"
+                },
+                "inverted": true
             }
         ]
     }
