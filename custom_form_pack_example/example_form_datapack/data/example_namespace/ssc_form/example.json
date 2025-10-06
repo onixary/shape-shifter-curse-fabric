@@ -20,7 +20,7 @@
   "anim": [
     {
       "state": "ANIM_IDLE",
-      "animID": "shape-shifter-curse:form_feral_common_idle"
+      "animID": "example_namespace:form_example_idle"
     },
     {
       "state": "ANIM_SNEAK_IDLE",
