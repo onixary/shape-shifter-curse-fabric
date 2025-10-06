@@ -273,6 +273,8 @@
   "power.shape-shifter-curse.form_allay_sp_amethyst_shard_only.name": ["水晶食性"],
   "power.shape-shifter-curse.form_ocelot_2_raw_meat_only.name": ["生肉食性"],
   "power.shape-shifter-curse.form_familiar_fox_3_no_food.name": ["使魔体质"],
+  "power.shape-shifter-curse.prevent_ranged_weapon_use.name": ["禁用弓弩"],
+  "power.shape-shifter-curse.form_vegetarian.name": ["素食者"],
   "power.origins.vegetarian.name": ["素食者"],
   "codex.header.status": ["状态"],
   "codex.header.appearance": ["外观"],

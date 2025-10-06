@@ -286,6 +286,8 @@
   "power.shape-shifter-curse.form_ocelot_2_raw_meat_only.name": ["raw meat consumer"],
   "power.origins.vegetarian.name": ["vegetarian"],
   "power.shape-shifter-curse.form_familiar_fox_3_no_food.name": ["Familiar Constitution"],
+  "power.shape-shifter-curse.prevent_ranged_weapon_use.name": ["Prevent Ranged Weapon"],
+  "power.shape-shifter-curse.form_vegetarian.name": ["vegetarian"],
 
   "commands.shape-shifter-curse.form_not_found": ["Specified form not found!"],
 

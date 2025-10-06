@@ -346,7 +346,7 @@ public class TransformManager {
     private static void updateClientOverlayFadeEffect(ServerPlayerEntity player) {
         PlayerTransformData data = getPlayerTransformData(player);
         if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-            handleClientOverlayFadeUpdate(data.nauesaStrength, data.endTransformEffectTicks);
+            handleClientOverlayFadeUpdate(data.endTransformEffectTicks / (float)StaticParams.TRANSFORM_FX_DURATION_OUT, data.endTransformEffectTicks);
             return;
         }
         // 在服务端，通过网络包发送overlay淡出状态到客户端

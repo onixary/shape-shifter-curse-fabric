@@ -1,9 +1,14 @@
 {
-    "type": "origins:action_on_item_use",
-    "entity_action": {
-        "type": "origins:feed",
-        "food": -2.5,
-        "saturation": 0.0
+    "type": "origins:modify_food",
+    "food_modifier": {
+        "name": "Decreased food points",
+        "operation": "multiply_base_multiplicative",
+        "value": -0.5
+    },
+    "saturation_modifier": {
+        "name": "Decreased saturation points",
+        "operation": "multiply_base_multiplicative",
+        "value": -0.5
     },
     "item_condition": {
         "type": "origins:and",
@@ -17,6 +22,20 @@
             },
             {
                 "type": "origins:meat",
+                "inverted": true
+            },
+            {
+                "type": "origins:ingredient",
+                "ingredient": {
+                    "tag": "origins:ignore_diet"
+                },
+                "inverted": true
+            },
+            {
+                "type": "origins:ingredient",
+                "ingredient": {
+                    "tag": "shape-shifter-curse:ignore_vc_eat"
+                },
                 "inverted": true
             }
         ]
