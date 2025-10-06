@@ -6,7 +6,7 @@
   "__groupIndex_comment__": "组内索引 用于变形逻辑 | Index within group used for transformation logic",
   "phase": "PHASE_SP",
   "__Phase_comment__": "变形阶段一般和groupIndex一样 Enum:[PHASE_CLEAR, PHASE_0, PHASE_1, PHASE_2, PHASE_3, PHASE_SP] | Transformation phase usually matches groupIndex. Enum:[PHASE_CLEAR, PHASE_0, PHASE_1, PHASE_2, PHASE_3, PHASE_SP]",
-  "bodyType": "NORMAL",
+  "bodyType": "FERAL",
   "__BodyType_comment__": "身体类型 Enum:[NORMAL, FERAL] | Body type. Enum:[NORMAL, FERAL]",
   "isCustomForm": true,
   "originID": "example_namespace:form_example",
