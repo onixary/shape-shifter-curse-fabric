@@ -9,6 +9,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFurClient;
+import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
 import java.util.*;
 
@@ -27,9 +28,12 @@ public class PlayerFormDynamic extends PlayerFormBase{
         }
     }
 
+    public static final UUID PublicUUID = UUID.fromString("00000000-0000-0000-0000-000000000000");
+
     public Identifier FurModelID = null;
     public List<Identifier> ExtraPower = new LinkedList<Identifier>();
     public boolean IsPatronForm = false;  // 可以使用特殊物品直接变形
+    public int RequirePatronLevel = 0;  // 需要的赞助等级
     public List<UUID> PlayerUUIDs = new ArrayList<UUID>();
 
     private final HashMap<PlayerAnimState, AnimationHolderData> animMap_Builder = new HashMap<>();
@@ -173,24 +177,26 @@ public class PlayerFormDynamic extends PlayerFormBase{
             }
             this.setGroup(group, GroupIndex);
             String IDStr = _Gson_GetString(formData, "FurModelID", null);
-            FurModelID = IDStr == null ? null : Identifier.tryParse(IDStr);
+            this.FurModelID = IDStr == null ? null : Identifier.tryParse(IDStr);
             if (formData.has("ExtraPower")) {
                 for (JsonElement extraPower : formData.get("ExtraPower").getAsJsonArray()) {
                     Identifier PowerID = Identifier.tryParse(extraPower.getAsString());
                     if (PowerID != null) {
-                        ExtraPower.add(PowerID);
+                        this.ExtraPower.add(PowerID);
                     }
                 }
             }
-            IsPatronForm = _Gson_GetBoolean(formData, "IsPatronForm", false);
+            this.IsPatronForm = _Gson_GetBoolean(formData, "IsPatronForm", false);
+            this.PlayerUUIDs.clear();
             if (formData.has("PlayerUUID")) {
                 for (JsonElement uuidJson : formData.get("PlayerUUID").getAsJsonArray()) {
                     UUID uuid = UUID.fromString(uuidJson.getAsString());
                     if (uuid != null) {
-                        PlayerUUIDs.add(uuid);
+                        this.PlayerUUIDs.add(uuid);
                     }
                 }
             }
+            this.RequirePatronLevel = _Gson_GetInt(formData, "RequirePatronLevel", 0);
         }
         catch(Exception e) {
             ShapeShifterCurseFabric.LOGGER.error("Error while loading player form: {}", e.getMessage());
@@ -242,6 +248,7 @@ public class PlayerFormDynamic extends PlayerFormBase{
             }
             data.add("PlayerUUID", uuids);
         }
+        data.addProperty("RequirePatronLevel", this.RequirePatronLevel);
         return data;
     }
 
@@ -272,6 +279,10 @@ public class PlayerFormDynamic extends PlayerFormBase{
 
     // 添加在玩家自选Form的UI判断
     public boolean IsPlayerCanUse(PlayerEntity player) {
-        return PlayerUUIDs.isEmpty() || PlayerUUIDs.contains(player.getUuid());
+        // PlayerUUIDs 为白名单 为空则无限制
+        if (this.PlayerUUIDs.contains(player.getUuid())) {
+            return true;
+        }
+        return (this.PlayerUUIDs.isEmpty() || this.PlayerUUIDs.contains(PublicUUID)) && (PatronUtils.PatronLevels.getOrDefault(player.getUuid(), 0) >= this.RequirePatronLevel);
     }
 }

@@ -5,6 +5,7 @@ import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -14,9 +15,12 @@ import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
+import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 // 纯服务端类，所有send方法都只在这里调用
 // This is a pure server-side class, all send methods are called only here
@@ -200,6 +204,20 @@ public class ModPacketsS2CServer {
         }
         if (RemainPacket > 0) {
             sendUpdateDynamicForm(player, jsonForms);
+        }
+    }
+
+    public static void updatePatronLevel(MinecraftServer server) {
+        HashMap<UUID, Integer> patronLevels = PatronUtils.PatronLevels;
+        int PairCount = patronLevels.size();
+        for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
+            PacketByteBuf buf = PacketByteBufs.create();
+            buf.writeInt(PairCount);
+            for (Map.Entry<UUID, Integer> entry : patronLevels.entrySet()) {
+                buf.writeUuid(entry.getKey());
+                buf.writeInt(entry.getValue());
+            }
+            ServerPlayNetworking.send(player, ModPackets.UPDATE_PATRON_LEVEL, buf);
         }
     }
 }

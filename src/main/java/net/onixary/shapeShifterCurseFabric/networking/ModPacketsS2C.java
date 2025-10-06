@@ -20,8 +20,10 @@ import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
+import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,6 +52,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_DYNAMIC_FORM, ModPacketsS2C::handleUpdateDynamicForm);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.REMOVE_DYNAMIC_FORM_EXCEPT, ModPacketsS2C::handleRemoveDynamicExcept);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.LOGIN_PACKET, ModPacketsS2C::onPlayerConnectServer);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_PATRON_LEVEL, ModPacketsS2C::receiveUpdatePatronLevel);
     }
 
     public static void handleSyncEffectAttachment(
@@ -285,5 +288,18 @@ public class ModPacketsS2C {
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.accent1GreyReverse);
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.accent2GreyReverse);
         ClientPlayNetworking.send(UPDATE_CUSTOM_SETTING, buf);
+    }
+
+    public static void receiveUpdatePatronLevel(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        int PairCount = buf.readInt();
+        HashMap<UUID, Integer> map = new HashMap<>();
+        for (int i = 0; i < PairCount; i++) {
+            UUID uuid = buf.readUuid();
+            int level = buf.readInt();
+            map.put(uuid, level);
+        }
+        client.execute(() -> {
+            PatronUtils.ApplyPatronLevel(map);
+        });
     }
 }

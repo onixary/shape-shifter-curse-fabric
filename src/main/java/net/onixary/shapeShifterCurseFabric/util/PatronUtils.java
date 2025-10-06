@@ -1,6 +1,8 @@
 package net.onixary.shapeShifterCurseFabric.util;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import net.minecraft.server.MinecraftServer;
@@ -16,9 +18,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -27,14 +27,17 @@ import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.common
 public class PatronUtils {
 
     private static final String DataPackVersionName = "SSC-Patron-Data-Version.txt";
-    private static final String DataPackName = "SSC-Patron-Data.zip";
+    private static final String DataPackName = "SSC-Patron-DataPack.zip";
     private static final String ResourcePackVersionName = "SSC-Patron-Resource-Version.txt";
-    private static final String ResourcePackName = "SSC-Patron-Resource.zip";
+    private static final String ResourcePackName = "SSC-Patron-ResourcePack.zip";
+    private static final String PatronDataName = "SSC-Patron-Data.json";
 
     private static final Path ResourcePackPath = Path.of("resourcepacks").resolve(ResourcePackName);
 
     private static int DataPackVersion = -1;
     private static int ResourcePackVersion = -1;
+
+    public static HashMap<UUID, Integer> PatronLevels = new HashMap<>();  // 服务端客户端缓存 通过网络同步
 
     public static void OnClientInit() {
         if (commonConfig.enablePatronFormSystem) {
@@ -43,23 +46,25 @@ public class PatronUtils {
     }
 
     public static void OnServerLoad(MinecraftServer server) {
+        PatronUtils.UpdatePatronData(server);
         if (commonConfig.enablePatronFormSystem) {
-            PatronUtils.UpdateDataPack(server);
-            Thread thread = new Thread(() -> {
-                try {
-                    long SleepTime = commonConfig.CheckUpdateInterval;
-                    if (SleepTime <= 0) {
-                        return;
-                    }
-                    Thread.sleep(SleepTime * 1000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                if (commonConfig.enablePatronFormSystem) {
-                    PatronUtils.UpdateDataPack(server);
-                }
-            });
+            PatronUtils.CheckDataPackUpdate(server);
         }
+        Thread thread = new Thread(() -> {
+            try {
+                long SleepTime = commonConfig.CheckUpdateInterval;
+                if (SleepTime <= 0) {
+                    return;
+                }
+                Thread.sleep(SleepTime * 1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            PatronUtils.UpdatePatronData(server);
+            if (commonConfig.enablePatronFormSystem) {
+                PatronUtils.CheckDataPackUpdate(server);
+            }
+        });
     }
 
     private static List<JsonObject> ReadDataPackZip(byte[] dataPackZip) {
@@ -174,17 +179,9 @@ public class PatronUtils {
         // **** 此DataPack非标准数据包 为单层 <id>.json 的ssc_form文件 !!!! 不可以放在数据包文件夹 !!!! ****
         // !!!! 如果发现缓存到数据包文件夹 请及时通知修改代码 !!!!
         Path LocalDataPack = ShapeShifterCurseFabric.MOD_LOCAL_DATA_STORAGE.resolve(DataPackName);
-        if (LocalDataPack.toFile().exists()) {
-            try {
-                return Files.readAllBytes(LocalDataPack);
-            }
-            catch (IOException e) {
-                ShapeShifterCurseFabric.LOGGER.error("Failed to read local DataPack", e);
-            }
-        }
         Path LocalDataPackVersion = ShapeShifterCurseFabric.MOD_LOCAL_DATA_STORAGE.resolve(DataPackVersionName);
         int WebDataPackVersion = getVersion(commonConfig.DataPackVersionUrl);
-        if (WebDataPackVersion != -1) {
+        if (WebDataPackVersion > DataPackVersion) {
             byte[] dataPackZip = downloadFormURL(commonConfig.DataPackUrl);
             if (dataPackZip != null) {
                 try {
@@ -195,6 +192,14 @@ public class PatronUtils {
                 }
             }
             return dataPackZip;
+        }
+        if (LocalDataPack.toFile().exists()) {
+            try {
+                return Files.readAllBytes(LocalDataPack);
+            }
+            catch (IOException e) {
+                ShapeShifterCurseFabric.LOGGER.error("Failed to read local DataPack", e);
+            }
         }
         return null;
     }
@@ -288,6 +293,66 @@ public class PatronUtils {
         }
         else {
             ShapeShifterCurseFabric.LOGGER.error("Failed to Update Patron Forms");
+        }
+    }
+
+    // 仅服务端
+    public static void UpdatePatronData(MinecraftServer server) {
+        /*
+            样例:
+            {
+              "patron_level": [
+                {
+                  "uuid": "12345678-1234-1234-1234-123456789012",
+                  "level": 4
+                }
+              ]
+            }
+         */
+        byte[] PatronDataByte = downloadFormURL(commonConfig.PatronDataUrl);
+        if (PatronDataByte != null) {
+            try {
+                Files.write(ShapeShifterCurseFabric.MOD_LOCAL_DATA_STORAGE.resolve(PatronDataName), PatronDataByte);
+            } catch (IOException e) {
+                ShapeShifterCurseFabric.LOGGER.error("Failed to write local PatronData", e);
+            }
+        }
+        else {
+            ShapeShifterCurseFabric.LOGGER.error("Failed to get patron data");
+            try {
+                PatronDataByte = Files.readAllBytes(ShapeShifterCurseFabric.MOD_LOCAL_DATA_STORAGE.resolve(PatronDataName));
+            } catch (IOException e) {
+                ShapeShifterCurseFabric.LOGGER.error("Failed to read local PatronData", e);
+            }
+        }
+        if (PatronDataByte != null) {
+            try {
+                JsonObject PatronData = new Gson().fromJson(new String(PatronDataByte), JsonObject.class);
+                JsonArray PatronLevelList = PatronData.getAsJsonArray("patron_level");
+                for (JsonElement PatronLevel : PatronLevelList) {
+                    if (PatronLevel.isJsonObject()) {
+                        JsonObject PatronLevelObject = PatronLevel.getAsJsonObject();
+                        UUID PlayerUUID = UUID.fromString(PatronLevelObject.get("uuid").getAsString());
+                        int Level = PatronLevelObject.get("level").getAsInt();
+                        PatronLevels.put(PlayerUUID, Level);
+                    }
+                }
+                ModPacketsS2CServer.updatePatronLevel(server);
+            }
+            catch (Exception e) {
+                ShapeShifterCurseFabric.LOGGER.error("Failed to parse PatronData", e);
+                return;
+            }
+        }
+    }
+
+    // 仅客户端
+    public static void ApplyPatronLevel(HashMap<UUID, Integer> NewPatronLevels) {
+        PatronLevels.clear();
+        for (Map.Entry<UUID, Integer> entry : NewPatronLevels.entrySet()) {
+            if (entry.getValue() > 0) {
+                PatronLevels.put(entry.getKey(), entry.getValue());
+            }
         }
     }
 }

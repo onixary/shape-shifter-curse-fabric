@@ -118,5 +118,6 @@
     "shape-shifter-curse:form_ocelot_sound_hurt"
   ],
   "IsPatronForm": true,
+  "RequirePatronLevel": 4,
   "PlayerUUID": []
 }

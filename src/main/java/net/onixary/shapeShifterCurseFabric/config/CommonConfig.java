@@ -52,6 +52,10 @@ public class CommonConfig implements ConfigData {
     public String ResourcePackUrl = "http://localhost:1234/resource.zip";  // 资源包下载URL
 
     @ConfigEntry.Category("Patron")
+    @Comment("Patron Data Url. Default: ")
+    public String PatronDataUrl = "http://localhost:1234/patron_data.json";  // 捐助者数据存储URL
+
+    @ConfigEntry.Category("Patron")
     @Comment("Check Update Interval (Seconds). Default: 86400 (1 Day)")
     public int CheckUpdateInterval = 60 * 60 * 24;
 
