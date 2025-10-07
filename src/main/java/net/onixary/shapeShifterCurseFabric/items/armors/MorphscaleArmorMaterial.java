@@ -11,7 +11,7 @@ import net.minecraft.sound.SoundEvents;
 public class MorphscaleArmorMaterial  implements ArmorMaterial {
     public static final MorphscaleArmorMaterial INSTANCE = new MorphscaleArmorMaterial();
 
-    private static final int[] BASE_DURABILITY = new int[] {11, 16, 15, 13};
+    private static final int[] BASE_DURABILITY = new int[] {13, 15, 16, 11};
     private static final int[] PROTECTION_VALUES = new int[] {2, 4, 6, 1};
 
     @Override
