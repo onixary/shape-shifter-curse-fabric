@@ -37,6 +37,7 @@
     "LoginMixin"
   ],
   "client": [
+    "InventoryScreenMixin",
     "IEntityRenderDispatcherAccessor",
     "CursedMoonLightmapMixin",
     "MoonPhaseRenderMixin",
