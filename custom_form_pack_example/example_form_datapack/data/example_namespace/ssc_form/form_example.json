@@ -108,7 +108,7 @@
   ],
   "__anim_comment__": "动画列表 State 在 PlayerAnimState 中定义 | Animation list. State is defined in PlayerAnimState",
   "animDefault": {
-    "animID": "shape-shifter-curse:form_feral_common_idle",
+    "animID": "example_namespace:form_example_idle",
     "speed": 1.0,
     "fade": 2
   },
