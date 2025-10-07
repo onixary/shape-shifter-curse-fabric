@@ -5,6 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
@@ -60,7 +61,7 @@ public class TransformManager {
 
     // 仅服务器端 - 获取PlayerTransformData
     public static PlayerTransformData getPlayerTransformData(PlayerEntity player) {
-        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT && (player instanceof ClientPlayerEntity || player == null)) {
             if (player != null) {
                 LocalPlayerTransformData.curPlayer = player;
             }
@@ -328,9 +329,9 @@ public class TransformManager {
 
     // 新增：客户端特定的overlay更新逻辑
     // 仅服务端
-    private static void updateClientOverlayEffect(ServerPlayerEntity player) {
+    private static void updateClientOverlayEffect(PlayerEntity player) {
         PlayerTransformData data = getPlayerTransformData(player);
-        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT && player instanceof ClientPlayerEntity) {
             handleClientOverlayUpdate(1.0f - (data.beginTransformEffectTicks / (float)StaticParams.TRANSFORM_FX_DURATION_IN), data.beginTransformEffectTicks);
             return;
         }
@@ -343,9 +344,9 @@ public class TransformManager {
 
     // 新增：客户端特定的overlay淡出更新逻辑
     // 仅服务端
-    private static void updateClientOverlayFadeEffect(ServerPlayerEntity player) {
+    private static void updateClientOverlayFadeEffect(PlayerEntity player) {
         PlayerTransformData data = getPlayerTransformData(player);
-        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT && player instanceof ClientPlayerEntity) {
             handleClientOverlayFadeUpdate(data.endTransformEffectTicks / (float)StaticParams.TRANSFORM_FX_DURATION_OUT, data.endTransformEffectTicks);
             return;
         }
@@ -358,9 +359,9 @@ public class TransformManager {
 
     // 新增：发送客户端变身完成效果
     // 仅服务端
-    private static void sendClientTransformCompleteEffect(ServerPlayerEntity player) {
+    private static void sendClientTransformCompleteEffect(PlayerEntity player) {
         PlayerTransformData data = getPlayerTransformData(player);
-        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT && player instanceof ClientPlayerEntity) {
             executeClientTransformCompleteEffect();
             return;
         }
@@ -534,7 +535,7 @@ public class TransformManager {
     // 仅服务端
     private static void sendClientFirstPersonReset(PlayerEntity player) {
         PlayerTransformData data = getPlayerTransformData(player);
-        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT && player instanceof ClientPlayerEntity) {
             // 客户端直接执行
             executeClientFirstPersonReset();
         } else if (data.curPlayer instanceof ServerPlayerEntity) {
