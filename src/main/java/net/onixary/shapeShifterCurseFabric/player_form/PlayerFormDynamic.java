@@ -173,6 +173,7 @@ public class PlayerFormDynamic extends PlayerFormBase{
         catch(Exception e) {
             ShapeShifterCurseFabric.LOGGER.error("Error while loading player form: {}", e.getMessage());
         }
+        isAnimRegistered.put(this.FormID, false);
     }
 
     public JsonObject save() {
