@@ -1,0 +1,14 @@
+{
+  "type": "origins:action_on_item_use",
+  "entity_action": {
+    "type": "shape-shifter-curse:transform_to_form",
+    "form_id": "example_namespace:example",
+    "instant": true
+  },
+  "item_condition": {
+    "type": "origins:ingredient",
+    "ingredient": {
+      "tag": "origins:fish"
+    }
+  }
+}
