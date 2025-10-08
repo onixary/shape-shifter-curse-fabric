@@ -25,6 +25,7 @@ public class RegCustomItem {
     public static final Item POWERFUL_CATALYST = register("powerful_catalyst", new PowerfulCatalyst(new Item.Settings()));
     public static final Item MOONDUST_MATRIX = register("moondust_matrix", new MoonDustMatrix(new Item.Settings()));
     // morphscale armor
+    public static final Item MORPHSCALE_CORE = register("morphscale_core", new Item(new Item.Settings()));
     public static final Item MORPHSCALE_HEADRING = register("morphscale_headring", new MorphScaleArmor(ArmorItem.Type.HELMET));
     public static final Item MORPHSCALE_VEST = register("morphscale_vest", new MorphScaleArmor(ArmorItem.Type.CHESTPLATE));
     public static final Item MORPHSCALE_CUISH = register("morphscale_cuish", new MorphScaleArmor(ArmorItem.Type.LEGGINGS));
@@ -44,6 +45,7 @@ public class RegCustomItem {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.add(UNTREATED_MOONDUST);
             entries.add(MOONDUST_MATRIX);
+            entries.add(MORPHSCALE_CORE);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
             entries.add(INHIBITOR);

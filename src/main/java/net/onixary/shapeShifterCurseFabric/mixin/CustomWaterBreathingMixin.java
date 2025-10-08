@@ -18,6 +18,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.LootingPower;
 import net.onixary.shapeShifterCurseFabric.integration.origins.power.OriginsPowerTypes;
 import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModDamageSources;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -45,6 +46,9 @@ public final class CustomWaterBreathingMixin {
 
     @Mixin(PlayerEntity.class)
     public static abstract class UpdateAir extends LivingEntity {
+        @Shadow
+        public abstract boolean isCreative();
+
         protected UpdateAir(EntityType<? extends LivingEntity> entityType, World world) {
             super(entityType, world);
         }
@@ -59,6 +63,13 @@ public final class CustomWaterBreathingMixin {
         // 24级为体验相对较好的数值
         @Inject(at = @At("TAIL"), method = "tick")
         private void tick(CallbackInfo info) {
+            if (this.isCreative()) {
+                if (this.getAir() < this.getMaxAir()) {
+                    this.setAir(this.getMaxAir());
+                }
+                return; // 创造模式玩家不需要处理其他氧气逻辑
+            }
+
             if(PowerHolderComponent.getPowers(this, CustomWaterBreathingPower.class).stream().anyMatch(Power::isActive)) {
                 if(!this.isSubmergedIn(FluidTags.WATER)
                         && !this.hasStatusEffect(StatusEffects.WATER_BREATHING)

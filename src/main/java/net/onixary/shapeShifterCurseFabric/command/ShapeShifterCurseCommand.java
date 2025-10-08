@@ -220,6 +220,15 @@ public class ShapeShifterCurseCommand {
         }
     }
 
+    private static String getColorHexFormABGR(int color) {
+        int ARGB = FormTextureUtils.ABGR2ARGB(color);
+        String String = Integer.toHexString(ARGB);
+        if (String.length() < 8) {
+            return "00000000".substring(0, 8 - String.length()) + String;
+        }
+        return String;
+    }
+
     private static int logFormColorSetting(CommandContext<ServerCommandSource> commandContext) {
         try {
             ServerPlayerEntity player = commandContext.getSource().getPlayer();
@@ -229,10 +238,10 @@ public class ShapeShifterCurseCommand {
             }
             String message = "Form color setting: \n";
             message += "Enable: " + RegPlayerSkinComponent.SKIN_SETTINGS.get(player).isEnableFormColor() + "\n";
-            message += "Primary Color RGBA: " + Integer.toHexString((FormTextureUtils.ABGR2RGBA(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getPrimaryColor()))) + "\n";
-            message += "Accent Color 1 RGBA: " + Integer.toHexString((FormTextureUtils.ABGR2RGBA(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getAccentColor1()))) + "\n";
-            message += "Accent Color 2 RGBA: " + Integer.toHexString((FormTextureUtils.ABGR2RGBA(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getAccentColor2()))) + "\n";
-            message += "Eye Color: " + Integer.toHexString((FormTextureUtils.ABGR2RGBA(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getEyeColor()))) + "\n";
+            message += "Primary Color ARGB: " + getColorHexFormABGR(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getPrimaryColor()) + "\n";
+            message += "Accent Color 1 ARGB: " + getColorHexFormABGR(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getAccentColor1()) + "\n";
+            message += "Accent Color 2 ARGB: " + getColorHexFormABGR(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getAccentColor2()) + "\n";
+            message += "Eye Color ARGB: " + getColorHexFormABGR(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getEyeColor()) + "\n";
             message += "Primary Grey Reverse: " + RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getPrimaryGreyReverse() + "\n";
             message += "Accent 1 Grey Reverse: " + RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getAccent1GreyReverse() + "\n";
             message += "Accent 2 Grey Reverse: " + RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getAccent2GreyReverse() + "\n";

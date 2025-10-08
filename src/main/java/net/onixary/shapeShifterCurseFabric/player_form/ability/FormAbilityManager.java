@@ -23,10 +23,45 @@ import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import virtuoel.pehkui.api.ScaleData;
 import virtuoel.pehkui.api.ScaleTypes;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+
 import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.cancelEffect;
 
 public class FormAbilityManager {
     private static ServerWorld world;
+
+    public record OriginExtraPower(Identifier OriginID, List<Identifier> PowerIDs) {
+        public Identifier getOriginID() {
+            return OriginID;
+        }
+        public List<Identifier> getPowerIDs() {
+            return PowerIDs;
+        }
+    }
+
+    public static HashMap<Identifier, OriginExtraPower> OriginExtraPowerRegistry = new HashMap<>();
+
+    public static void RegisterOriginExtraPower(Identifier ID, Identifier OriginID,  List<Identifier> originExtraPower) {
+        OriginExtraPowerRegistry.put(ID, new OriginExtraPower(OriginID, originExtraPower));
+    }
+
+    public static List<Identifier> getOriginExtraPower(Identifier OriginID) {
+        List<Identifier> powerIDs = new LinkedList<>();
+        for (OriginExtraPower originExtraPower : OriginExtraPowerRegistry.values()) {
+            if (originExtraPower.getOriginID().equals(OriginID)) {
+                powerIDs.addAll(originExtraPower.getPowerIDs());
+            }
+        }
+        return powerIDs;
+    }
+
+    public static void ApplyOriginExtraPower(PlayerEntity player, Identifier OriginID) {
+        for (Identifier powerID : getOriginExtraPower(OriginID)) {
+            applyPower(player, powerID, OriginID);
+        }
+    }
 
     public static PlayerFormBase getForm(PlayerEntity player) {
         PlayerFormComponent component = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
@@ -46,6 +81,13 @@ public class FormAbilityManager {
         //applyScale(player, config.getScale());
         applyFormOrigin(player, newForm);
         applyExtraPower(player, oldForm, newForm);
+        try {
+            ApplyOriginExtraPower(player, ModComponents.ORIGIN.get(player).getOrigin(OriginLayers.getLayer(newForm.getFormOriginLayerID())).getIdentifier());
+        }
+        catch (Exception e) {
+            // 一般是没有对应的origin
+            ShapeShifterCurseFabric.LOGGER.error("Failed to apply origin extra power: ", e);
+        }
         //applyPower(player, config.getPowerId());
         // 清空Status
         cancelEffect(player);
@@ -131,6 +173,7 @@ public class FormAbilityManager {
         PowerType<?> powerType = PowerTypeRegistry.get(powerId);
         if (powerType != null) {
             PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
+            powerHolder.addPower(powerType, powerSource);
             powerHolder.addPower(powerType, powerSource);
         }
     }

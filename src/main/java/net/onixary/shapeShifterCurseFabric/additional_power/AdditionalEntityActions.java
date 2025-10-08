@@ -7,9 +7,9 @@ import net.minecraft.registry.Registry;
 
 public class AdditionalEntityActions {
     public static void register() {
-
         register(AddInstinctAction.getFactory());
         register(SetFallingDistanceAction.createFactory());
+        register(TransformAction.createFactory());
     }
 
     public static ActionFactory<Entity> register(ActionFactory<Entity> actionFactory) {

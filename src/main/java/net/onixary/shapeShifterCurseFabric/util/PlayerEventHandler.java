@@ -246,9 +246,11 @@ public class PlayerEventHandler {
         newPlayer.setAttached(EffectManager.EFFECT_ATTACHMENT, new PlayerEffectAttachment());
         PlayerEffectAttachment newAttachment = newPlayer.getAttached(EffectManager.EFFECT_ATTACHMENT);
 
-        newAttachment.currentToForm = oldAttachment.currentToForm;
-        newAttachment.remainingTicks = oldAttachment.remainingTicks;
-        newAttachment.currentEffect = oldAttachment.currentEffect;
+        if (oldAttachment != null)  {
+            newAttachment.currentToForm = oldAttachment.currentToForm;
+            newAttachment.remainingTicks = oldAttachment.remainingTicks;
+            newAttachment.currentEffect = oldAttachment.currentEffect;
+        }
 
         // reapply potion effect
         if (newAttachment.currentEffect != null && currentRegEffect != null) {

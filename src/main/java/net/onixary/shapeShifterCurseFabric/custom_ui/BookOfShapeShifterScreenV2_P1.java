@@ -15,8 +15,6 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.CodexData;
 import org.joml.Quaternionf;
 
-import java.util.OptionalInt;
-
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
 public class BookOfShapeShifterScreenV2_P1 extends Screen {
@@ -84,13 +82,16 @@ public class BookOfShapeShifterScreenV2_P1 extends Screen {
         float j = entity.getPitch();
         float k = entity.prevHeadYaw;
         float l = entity.headYaw;
+        float m = entity.prevYaw;
         entity.bodyYaw = 180.0F + f * 20.0F;
+        entity.prevBodyYaw = entity.bodyYaw;
         entity.setYaw(180.0F + f * 40.0F);
         entity.setPitch(-g * 20.0F);
         entity.headYaw = entity.getYaw();
         entity.prevHeadYaw = entity.getYaw();
         InventoryScreen.drawEntity(context, x, y, size, quaternionf, quaternionf2, entity);
         entity.bodyYaw = h;
+        entity.prevBodyYaw = m;
         entity.setYaw(i);
         entity.setPitch(j);
         entity.prevHeadYaw = k;

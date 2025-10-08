@@ -40,6 +40,7 @@ public class PlayerFormDynamic extends PlayerFormBase{
     public static final HashMap<Identifier, HashMap<PlayerAnimState, AnimationHolder>> animMap = new HashMap<>();
     private AnimationHolderData defaultAnim_Builder = null;
     public static final HashMap<Identifier, AnimationHolder> defaultAnim = new HashMap<>();
+    public static final HashMap<Identifier, Boolean> isAnimRegistered = new HashMap<>();
 
     // 覆写数据
     private Identifier originID = null;
@@ -59,6 +60,9 @@ public class PlayerFormDynamic extends PlayerFormBase{
         if (!this.isModelExist()) {
             return null;
         }
+        if (!isAnimRegistered.getOrDefault(this.FormID, false)) {
+            Anim_registerAnims();
+        }
         return this.getAnimMap().getOrDefault(currentState, defaultAnim.get(this.FormID));
     }
 
@@ -75,6 +79,7 @@ public class PlayerFormDynamic extends PlayerFormBase{
         if (this.defaultAnim_Builder != null) {
             defaultAnim.put(this.FormID, defaultAnim_Builder.build());
         }
+        isAnimRegistered.put(this.FormID, true);
     }
 
 
@@ -201,6 +206,7 @@ public class PlayerFormDynamic extends PlayerFormBase{
         catch(Exception e) {
             ShapeShifterCurseFabric.LOGGER.error("Error while loading player form: {}", e.getMessage());
         }
+        isAnimRegistered.put(this.FormID, false);
     }
 
     public JsonObject save() {
