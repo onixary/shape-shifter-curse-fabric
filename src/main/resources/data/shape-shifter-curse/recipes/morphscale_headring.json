@@ -1,27 +1,15 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "equipment",
-  "key": {
-    "M": {
-      "item": "shape-shifter-curse:untreated_moondust"
-    },
-    "A": {
-      "item": "minecraft:diamond_helmet"
-    },
-    "S": {
-      "item": "minecraft:amethyst_shard"
-    },
-    "G": {
-      "item": "minecraft:gold_ingot"
-    }
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "shape-shifter-curse:morphscale_core"
   },
-  "pattern": [
-    "SMS",
-    "MAM",
-    "GGG"
-  ],
+  "base": {
+    "item": "minecraft:diamond_helmet"
+  },
+  "addition": {
+    "item": "shape-shifter-curse:untreated_moondust"
+  },
   "result": {
     "item": "shape-shifter-curse:morphscale_headring"
-  },
-  "show_notification": true
+  }
 }

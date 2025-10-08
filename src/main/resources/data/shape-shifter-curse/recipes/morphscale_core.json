@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "shape-shifter-curse:untreated_moondust"
+    },
+    "A": {
+      "item": "minecraft:diamond"
+    },
+    "S": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    "SMS",
+    "MAM",
+    "GGG"
+  ],
+  "result": {
+    "item": "shape-shifter-curse:morphscale_core",
+    "count": 1
+  },
+  "show_notification": true
+}
