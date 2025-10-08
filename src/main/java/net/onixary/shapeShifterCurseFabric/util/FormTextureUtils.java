@@ -118,7 +118,7 @@ public class FormTextureUtils {
     }
 
     public static int ABGR2RGB(int color) {
-        return ABGR2RGBA(color) >> 8;
+        return (ABGR2RGBA(color) >> 8) & 0x00FFFFFF;
     }
 
     public static int ABGR2ARGB(int color) {
