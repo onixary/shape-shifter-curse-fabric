@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"form_feral_common_idle": {
+		"form_example_idle": {
 			"loop": true,
 			"animation_length": 0.5,
 			"bones": {
