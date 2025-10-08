@@ -49,4 +49,6 @@ public class ModPackets {
     public static final Identifier UPDATE_CUSTOM_SETTING = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_custom_setting");
 
     public static final Identifier UPDATE_PATRON_LEVEL = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_patron_level");
+    public static final Identifier OPEN_PATRON_FORM_SELECT_MENU = new Identifier(ShapeShifterCurseFabric.MOD_ID, "open_patron_form_select_menu");
+    public static final Identifier SET_PATRON_FORM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "set_patron_form");
 }

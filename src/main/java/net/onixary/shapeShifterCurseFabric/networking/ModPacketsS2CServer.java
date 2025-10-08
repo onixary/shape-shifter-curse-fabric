@@ -220,4 +220,9 @@ public class ModPacketsS2CServer {
             ServerPlayNetworking.send(player, ModPackets.UPDATE_PATRON_LEVEL, buf);
         }
     }
+
+    public static void OpenPatronFormSelectMenu(ServerPlayerEntity player) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        ServerPlayNetworking.send(player, ModPackets.OPEN_PATRON_FORM_SELECT_MENU, buf);
+    }
 }
