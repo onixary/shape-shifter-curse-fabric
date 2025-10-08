@@ -20,15 +20,11 @@ import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
 import net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage;
-import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager;
-import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
-import net.onixary.shapeShifterCurseFabric.player_form.instinct.PlayerInstinctComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
@@ -36,7 +32,6 @@ import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffec
 import net.onixary.shapeShifterCurseFabric.team.MobTeamManager;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.cursedMoonData;
-import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.savePlayerInstinctComponent;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker.loadInstinct;
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.removeVisualEffects;
 import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.*;
@@ -73,6 +68,8 @@ public class PlayerEventHandler {
                 // 如果没有保存的数据，说明是首次加入
                 ShapeShifterCurseFabric.LOGGER.info("No saved data found, this is first join with mod");
                 PlayerFormComponent formComponent = RegPlayerFormComponent.PLAYER_FORM.get(player);
+                // 还原到默认值 根据Wiki描述 如果删除data/shape-shifter-curse/{uuid}_*.dat则玩家会回到启用Mod之前的状态
+                formComponent.clear();
                 // 确保 firstJoin 为 true
                 formComponent.setFirstJoin(true);
                 // 触发首次加入成就
@@ -83,6 +80,14 @@ public class PlayerEventHandler {
                 // 立即保存以防止重复触发
                 PlayerNbtStorage.savePlayerFormComponent(server.getOverworld(), player.getUuid().toString(), formComponent);
             }
+            // 同步动态Form
+            server.execute(() -> {
+                try {
+                    ModPacketsS2CServer.updateDynamicForm(player);
+                } catch (Exception e) {
+                    ShapeShifterCurseFabric.LOGGER.error("Error sending update dynamic form: ", e);
+                }
+            });
             server.execute(() -> {
                 try {
                     FormAbilityManager.loadForm(player);
@@ -241,9 +246,11 @@ public class PlayerEventHandler {
         newPlayer.setAttached(EffectManager.EFFECT_ATTACHMENT, new PlayerEffectAttachment());
         PlayerEffectAttachment newAttachment = newPlayer.getAttached(EffectManager.EFFECT_ATTACHMENT);
 
-        newAttachment.currentToForm = oldAttachment.currentToForm;
-        newAttachment.remainingTicks = oldAttachment.remainingTicks;
-        newAttachment.currentEffect = oldAttachment.currentEffect;
+        if (oldAttachment != null)  {
+            newAttachment.currentToForm = oldAttachment.currentToForm;
+            newAttachment.remainingTicks = oldAttachment.remainingTicks;
+            newAttachment.currentEffect = oldAttachment.currentEffect;
+        }
 
         // reapply potion effect
         if (newAttachment.currentEffect != null && currentRegEffect != null) {

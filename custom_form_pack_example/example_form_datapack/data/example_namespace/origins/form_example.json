@@ -1,0 +1,22 @@
+{
+  "powers": [
+    "shape-shifter-curse:no_render_arm",
+    "shape-shifter-curse:form_feral_cat_sp_scale",
+    "shape-shifter-curse:form_disable_leg_armor",
+    "shape-shifter-curse:form_disable_feet_armor",
+    "origins:velvet_paws",
+    "origins:scare_creepers",
+    "origins:fall_immunity",
+    "shape-shifter-curse:form_ocelot_sound",
+    "shape-shifter-curse:form_ocelot_sound_hurt",
+
+    "example_namespace:custom_eat_amethyst_shard",
+    "example_namespace:custom_night_vision"
+  ],
+  "icon": {
+    "item": "minecraft:player_head"
+  },
+  "order": 0,
+  "unchoosable": true,
+  "impact": 0
+}

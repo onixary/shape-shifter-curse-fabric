@@ -30,7 +30,6 @@ import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.CrawlingPower;
-import net.onixary.shapeShifterCurseFabric.additional_power.NoRenderArmPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
@@ -78,7 +77,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         PlayerAnimationAccess.getPlayerAnimLayer((AbstractClientPlayerEntity) (Object) this).addAnimLayer(1, CONTAINER);
         // register all form animations here
         AnimationTransform.registerAnims();
-        RegPlayerForms.playerForms.forEach(PlayerFormBase::Anim_registerAnims);
+        RegPlayerForms.playerForms.forEach((formID, form) -> {form.Anim_registerAnims();});
 
         currentAnimation = null;
         CONTAINER.setAnimation(null);
@@ -136,7 +135,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
         if(!isOnGround() && lastOnGround && (Math.abs(getVelocity().z) > 0.15 || Math.abs(getVelocity().x) > 0.15)){
             // rush jump
-            if(curForm.GetCanRushJump()){
+            if(curForm.getCanRushJump()){
                 currentState = PlayerAnimState.ANIM_RUSH_JUMP;
             }
         }
@@ -245,7 +244,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                     if (isWalking || turnDelta != 0)
                     {
                         // 特殊处理Ocelot的sneak rush
-                        if(curForm.GetCanSneakRush()){
+                        if(curForm.getCanSneakRush()){
                             if(this.getHungerManager().getFoodLevel() >= 6){
                                 currentState = PlayerAnimState.ANIM_SNEAK_RUSH;
                             }
@@ -420,8 +419,8 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         }
         else{
             animToPlay = curForm.Anim_getFormAnimToPlay(currentState);
-            hasSlowFall = curForm.GetHasSlowFall();
-            overrideHandAnim = curForm.GetOverrideHandAnim();
+            hasSlowFall = curForm.getHasSlowFall();
+            overrideHandAnim = curForm.getOverrideHandAnim();
         }
 
 

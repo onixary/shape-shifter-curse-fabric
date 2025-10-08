@@ -1,0 +1,15 @@
+{
+    "type": "shape-shifter-curse:condition_scale",
+    "scale": 0.65,
+    "eye_scale": 0.6,
+    "original_scale": 0.65,
+    "original_eye_scale": 1.0,
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:sneaking"
+            }
+        ]
+    }
+}

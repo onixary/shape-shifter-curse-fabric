@@ -1,0 +1,8 @@
+{
+  "model": "orif-defaults:geo/form_axolotl_0.geo.json",
+  "texture": "orif-defaults:textures/form_axolotl_0/form_axolotl_0.png",
+  "texture_mask": "orif-defaults:textures/form_axolotl_0/form_axolotl_0_colormask.png",
+  "tail_chain": {
+    "tail": [0]
+  }
+}

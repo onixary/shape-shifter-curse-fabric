@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
+import com.google.gson.JsonParser;
 import net.onixary.shapeShifterCurseFabric.integration.origins.component.PlayerOriginComponent;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginRegistry;
@@ -134,6 +135,8 @@ public class PlayerEntityMixin implements IPlayerEntityMixins {
                         System.out.println("[Origin Furs] Listed all registered furs. Please include the previous line!");
                         System.out.println("[Origin Furs] Please copy all mods, and this log file and create an issue:");
                         System.out.println("[Origin Furs] https://github.com/avetharun/OriginalFur/issues/new");
+                        // 防止重复报错
+                        OriginalFurClient.FUR_REGISTRY.put(id, new OriginalFurClient.OriginFur(JsonParser.parseString("{}").getAsJsonObject()));
                         continue;
                     }
                 }

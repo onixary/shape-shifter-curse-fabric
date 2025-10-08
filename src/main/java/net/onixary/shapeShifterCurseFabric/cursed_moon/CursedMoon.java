@@ -382,7 +382,7 @@ public class CursedMoon {
                 }
             }
             ShapeShifterCurseFabric.LOGGER.info("Cursed Moon ends!");
-            TransformManager.setIsByCursedMoonEnd(true);
+            TransformManager.setIsByCursedMoonEnd(player, true);
             RegPlayerFormComponent.PLAYER_FORM.get(player).setByCursedMoon(true);
             FormAbilityManager.saveForm(player);
             RegPlayerFormComponent.PLAYER_FORM.sync(player);

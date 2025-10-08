@@ -1,5 +1,5 @@
 {
     "type": "shape-shifter-curse:scale",
     "scale": 0.75,
-    "is_feral": true
+    "eye_scale": 0.6
 }

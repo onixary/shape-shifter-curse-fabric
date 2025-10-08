@@ -32,9 +32,12 @@
     "CustomWaterBreathingMixin$UpdateAir",
     "EntitySlipperinessMixin",
     "ServerPlayerEntityForceInputMixin",
-    "PlayerEntitySprintSwimmingMixin"
+    "PlayerEntitySprintSwimmingMixin",
+    "projectile.PotionEntityMixin",
+    "LoginMixin"
   ],
   "client": [
+    "InventoryScreenMixin",
     "IEntityRenderDispatcherAccessor",
     "CursedMoonLightmapMixin",
     "MoonPhaseRenderMixin",

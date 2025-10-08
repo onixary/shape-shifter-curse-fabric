@@ -134,6 +134,14 @@
   "item.shape-shifter-curse.inhibitor.tooltip": ["The magic within you seems to calm when you touch this"],
   "item.shape-shifter-curse.powerful_inhibitor": ["Powerful Inhibitor"],
   "item.shape-shifter-curse.powerful_inhibitor.tooltip": ["Contains enhanced golden magic"],
+  "item.shape-shifter-curse.creative_inhibitor": ["Extreme Inhibitor"],
+  "item.shape-shifter-curse.creative_inhibitor.tooltip": ["(Creative Item) Crafted by powers beyond this world, capable of reversing permanent forms"],
+  "item.shape-shifter-curse.morphscale_core": ["Morphscale Core"],
+  "item.shape-shifter-curse.morphscale_headring": ["Morphscale Headring"],
+  "item.shape-shifter-curse.morphscale_vest": ["Morphscale Vest"],
+  "item.shape-shifter-curse.morphscale_cuish": ["Morphscale Cuish"],
+  "item.shape-shifter-curse.morphscale_anklet": ["Morphscale Anklet"],
+  "item.shape-shifter-curse.morphscale_armor.tooltip": ["The moon-dust magic infused in these armors automatically adapts to your form"],
 
   "screen.shape-shifter-curse.book_of_shape_shifter.start_content_text":
   [
@@ -275,10 +283,12 @@
   "effect.shape-shifter-curse.to_chi_sp_effect": ["CHI"],
   "effect.shape-shifter-curse.to_phi_sp_effect": ["PHI"],
 
-  "power.origins.form_allay_sp_amethyst_shard_only.name": ["amethyst consumer"],
-  "power.origins.form_ocelot_2_raw_meat_only.name": ["raw meat consumer"],
+  "power.shape-shifter-curse.form_allay_sp_amethyst_shard_only.name": ["amethyst consumer"],
+  "power.shape-shifter-curse.form_ocelot_2_raw_meat_only.name": ["raw meat consumer"],
   "power.origins.vegetarian.name": ["vegetarian"],
-  "power.origins.form_familiar_fox_3_no_food.name": ["Familiar Constitution"],
+  "power.shape-shifter-curse.form_familiar_fox_3_no_food.name": ["Familiar Constitution"],
+  "power.shape-shifter-curse.prevent_ranged_weapon_use.name": ["Prevent Ranged Weapon"],
+  "power.shape-shifter-curse.form_vegetarian.name": ["vegetarian"],
 
   "commands.shape-shifter-curse.form_not_found": ["Specified form not found!"],
 
@@ -471,7 +481,7 @@
   "codex.form.shape-shifter-curse.bat_2.appearance": ["Your ears now dominate much head space, detecting minute sounds\nYour face extends forward forming a short muzzle with sharp tiny teeth\nYour arms fully integrate with wing membranes. Though still too heavy for free flight, they suffice for gliding and diving\nYour foreclaws can't handle bulky tools/weapons\nNew foot claws, digitigrade legs and balancing long tail suit diving/gliding. With effort, you can still run\nBody fuzz maintains warmth in chilly caves"],
   "codex.form.shape-shifter-curse.bat_2.pros": ["You now see clearly in darkness. In darkness, you also feel more agile\nYour foreclaws are hard and strong, dealing decent barehanded damage. They let you rapidly break blocks and normally harvest ores\nWhile still flightless, membrane flapping boosts jump height and enables slow descent from any height. They function like elytra\nYour body absorbs non-meat foods more efficiently - increased satiation\nYour size lets you squeeze into 1-block spaces"],
   "codex.form.shape-shifter-curse.bat_2.cons": ["Your foreclaws can't grip bulky tools/weapons. When breaking hard blocks or hitting mobs, they just drop\nYour foreclaws struggle to even lift bows/crossbows, let alone use them\nMembranes and digitigrade legs prevent wearing chestplates, leggings and boots. They slightly slow ground movement\nIn sunlight, you feel extremely weak and slow\nYou can't eat meat - your body can't digest it anymore"],
-  "codex.form.shape-shifter-curse.bat_2.instincts": [" "],
+  "codex.form.shape-shifter-curse.bat_2.instincts": ["Something inside you stirs... your transformation hasn't reached its end...\nA echo catalyst could take your transformation to the next stage... though this process would likely be permanent\nYou're NOT actually considering this, are you?"],
   "codex.form.shape-shifter-curse.bat_3.title": ["\nFor you now, a cool and dark cavern might be more suitable as your new home.."],
   "codex.form.shape-shifter-curse.bat_3.appearance": ["Fine, dense fur completely covers your body. Ears nearly as large as your head help you locate your surroundings, ensuring you don't miss even the faintest sounds.\nYour forelimbs have extended further to make space for the expansive membrane wings. If you wish, you could wrap your entire body within these wings.\nFore claws and hind paws equipped with hooks allow you to cling to walls or hang upside-down from cave ceilings, just like your kind.\nYour body is now fully specialized for flight and gliding. Your hind legs can no longer support your body weight, forcing you to move slowly on the ground in a near-quadrupedal stance."],
   "codex.form.shape-shifter-curse.bat_3.pros": ["Newly formed hooks grant you the ability to cling and hang upside-down:\n\nWhile airborne, you can right-click 'use' the side face of a block while empty-handed to cling to it. While clinging, press jump while aiming in a direction to kick off for a high-speed glide in that direction.\nWhile airborne, you can right-click 'use' the underside of a block while empty-handed to hang yourself upside-down from it. While hanging upside-down, your health will slowly regenerate.\nLarge membrane wings enable you to glide swiftly through the air. Press jump while sprinting to launch into high-speed forward flight. Even while airborne, you can press the sprint key to increase your glide speed.\nYou can now clearly discern things in darkness.\nHardened and powerful fore claws enhance your melee damage. Additionally, they allow you to dig blocks at high speed barehanded and harvest drops normally.\nBy flapping your wing membranes, you can jump higher and descend slowly from heights. Naturally, they can also serve as elytra.\nYour body now absorbs non-meat foods more effectively, granting higher saturation."],
@@ -659,5 +669,15 @@
   "text.autoconfig.shape-shifter-curse-common.option.transformativeOcelotSpawnChance": "Transformative Ocelot Spawn Success Rate",
   "text.autoconfig.shape-shifter-curse-common.option.enableNewStartBook": "Enable The New Version of Start Book Interface",
   "text.autoconfig.shape-shifter-curse-common.option.curseMoonPhase": "Curse Moon Phase",
-  "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "In Development"
+  "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "In Development",
+  "text.autoconfig.shape-shifter-curse-custom.title": "Shape Shifter Curse - Player Custom Config",
+  "text.autoconfig.shape-shifter-curse-custom.option.keep_original_skin": "Keep Original Skin",
+  "text.autoconfig.shape-shifter-curse-custom.option.enable_form_color": "Enable Form Custom Color System",
+  "text.autoconfig.shape-shifter-curse-custom.option.primaryColor": "Primary Color",
+  "text.autoconfig.shape-shifter-curse-custom.option.accentColor1Color": "Accent Color 1",
+  "text.autoconfig.shape-shifter-curse-custom.option.accentColor2Color": "Accent Color 2",
+  "text.autoconfig.shape-shifter-curse-custom.option.eyeColor": "Eye Color",
+  "text.autoconfig.shape-shifter-curse-custom.option.primaryGreyReverse": "Primary Grayscale Reverse",
+  "text.autoconfig.shape-shifter-curse-custom.option.accent1GreyReverse": "Accent 1 Grayscale Reverse",
+  "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "Accent 2 Grayscale Reverse"
 }

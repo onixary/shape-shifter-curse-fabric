@@ -42,5 +42,9 @@ public class ModPackets {
 
     public static final Identifier SYNC_FORCE_SNEAK_STATE = new Identifier(ShapeShifterCurseFabric.MOD_ID, "sync_force_sneak_state");
 
+    public static final Identifier UPDATE_DYNAMIC_FORM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_dynamic_form");
+    public static final Identifier REMOVE_DYNAMIC_FORM_EXCEPT = new Identifier(ShapeShifterCurseFabric.MOD_ID, "remove_dynamic_form_except");
 
+    public static final Identifier LOGIN_PACKET = new Identifier(ShapeShifterCurseFabric.MOD_ID, "login_packet");  // 我暂时没找到玩家进入服务去时的Hook，所以暂时由服务器询问来代替
+    public static final Identifier UPDATE_CUSTOM_SETTING = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_custom_setting");
 }

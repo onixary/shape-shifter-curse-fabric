@@ -1,0 +1,37 @@
+{
+    "powers": [
+        "shape-shifter-curse:no_render_arm_when_sneaking",
+        "shape-shifter-curse:form_ocelot_2_scale",
+        "shape-shifter-curse:form_ocelot_2_sneaking_scale",
+        "origins:scare_creepers",
+        "origins:fall_immunity",
+        "shape-shifter-curse:barehand_attack_up",
+        "shape-shifter-curse:form_ocelot_2_health",
+        "shape-shifter-curse:form_raw_meat_food_up",
+        "shape-shifter-curse:form_ocelot_2_light_armor",
+        "origins:cat_vision",
+        "shape-shifter-curse:form_ocelot_2_sneaking_jump_far",
+        "shape-shifter-curse:form_ocelot_2_sneaking_jump_high",
+        "shape-shifter-curse:form_ocelot_2_sneaking_speed_up",
+        "origins:hotblooded",
+        "origins:no_shield",
+        "origins:velvet_paws",
+        "origins:more_exhaustion",
+        "shape-shifter-curse:prevent_sprinting",
+        "shape-shifter-curse:form_ocelot_2_water_speed_down",
+        "shape-shifter-curse:form_ocelot_2_climb_wood",
+        "shape-shifter-curse:form_ocelot_2_raw_meat_only",
+        "shape-shifter-curse:form_ocelot_2_sneaking_hunger",
+        "shape-shifter-curse:form_ocelot_2_arrow_dodge",
+        "shape-shifter-curse:form_ocelot_2_barepaw_sweeping",
+        "shape-shifter-curse:form_ocelot_sound",
+        "shape-shifter-curse:form_ocelot_sound_hurt",
+        "shape-shifter-curse:no_step_sound"
+    ],
+    "icon": {
+        "item": "minecraft:player_head"
+    },
+    "order": 0,
+    "unchoosable": true,
+    "impact": 0
+}

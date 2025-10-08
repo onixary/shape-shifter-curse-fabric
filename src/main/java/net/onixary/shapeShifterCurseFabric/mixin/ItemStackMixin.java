@@ -35,7 +35,10 @@ public abstract class ItemStackMixin {
                 TransformRelatedItems.OnUseCure(player);
             }else if(stack.getItem() == TransformRelatedItems.TRANSFORM_CURE_FINAL){
                 TransformRelatedItems.OnUseCureFinal(player);
-            }else if(stack.getItem() == TransformRelatedItems.TRANSFORM_CATALYST){
+            }else if(stack.getItem() == TransformRelatedItems.TRANSFORM_CURE_CREATIVE){
+                TransformRelatedItems.OnUseCreativeCure(player);
+            }
+            else if(stack.getItem() == TransformRelatedItems.TRANSFORM_CATALYST){
                 TransformRelatedItems.OnUseCatalyst(player);
             }
             else if(stack.getItem() == TransformRelatedItems.TRANSFORM_POWERFUL_CATALYST){

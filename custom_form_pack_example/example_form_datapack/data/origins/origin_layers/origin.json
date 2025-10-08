@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "order": 0,
+  "enabled": true,
+  "origins": [
+    "example_namespace:form_example"
+  ],
+  "allow_random": true,
+  "exclude_random": [
+  ],
+  "allow_random_unchoosable": false,
+  "hidden": false
+}

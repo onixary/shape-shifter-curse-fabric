@@ -1,8 +1,20 @@
 {
     "type": "origins:restrict_armor",
     "head": {
-        "type": "origins:armor_value",
-        "comparison": ">",
-        "compare_to": -1
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:armor_value",
+          "comparison": ">",
+          "compare_to": -1
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "item": "shape-shifter-curse:morphscale_headring"
+          },
+          "inverted": true
+        }
+      ]
     }
 }

@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.player_form;
 
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 import javax.swing.text.html.Option;
 import java.util.HashMap;
@@ -22,6 +23,12 @@ public class PlayerFormGroup {
     }
 
     public PlayerFormBase getForm(int Index) {
+        PlayerFormBase form = Forms.get(Index);
+        if (!RegPlayerForms.playerForms.containsKey(form.FormID) && !(form.getGroup() == this) && !(form.getIndex() == Index)) {
+            Forms.remove(Index);
+            ShapeShifterCurseFabric.LOGGER.warn("Form {} is not registered in the registry, removing it from group {}", form.FormID, GroupID);
+            return null;
+        }
         return Forms.get(Index);
     }
 
@@ -31,7 +38,7 @@ public class PlayerFormGroup {
 
     public Optional<Integer> getFormIndex(Identifier formID) {
         for (Map.Entry<Integer, PlayerFormBase> entry : Forms.entrySet()) {
-            if (entry.getValue().FormID.equals(formID)) {
+            if (entry.getValue().FormID.equals(formID) && getForm(entry.getKey()) != null) {
                 return Optional.of(entry.getKey());
             }
         }

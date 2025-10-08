@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "shape-shifter-curse:morphscale_core"
+  },
+  "base": {
+    "item": "minecraft:diamond_boots"
+  },
+  "addition": {
+    "item": "shape-shifter-curse:untreated_moondust"
+  },
+  "result": {
+    "item": "shape-shifter-curse:morphscale_anklet"
+  }
+}

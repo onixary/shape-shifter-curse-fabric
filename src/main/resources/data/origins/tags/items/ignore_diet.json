@@ -7,7 +7,8 @@
     "shape-shifter-curse:inhibitor",
     "shape-shifter-curse:catalyst",
     "shape-shifter-curse:powerful_catalyst",
-    "shape-shifter-curse:powerful_inhibitor"
+    "shape-shifter-curse:powerful_inhibitor",
+    "shape-shifter-curse:creative_inhibitor"
   ],
   "optional": [
     "farmersdelight:milk_bottle",

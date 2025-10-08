@@ -32,7 +32,8 @@ public class PlayerFormBase {
     // 从 FormConfig 迁移
     public PlayerFormBodyType getBodyType() {
         return BodyType;
-    };
+    }
+
     public PlayerFormBase setBodyType(PlayerFormBodyType bodyType) {
         BodyType = bodyType;
         return this;
@@ -61,47 +62,47 @@ public class PlayerFormBase {
         return null;
     }
 
-    public boolean GetHasSlowFall() {
+    public boolean getHasSlowFall() {
         return HasSlowFall;
     }
 
-    public PlayerFormBase SetHasSlowFall(boolean hasSlowFall) {
+    public PlayerFormBase setHasSlowFall(boolean hasSlowFall) {
         HasSlowFall = hasSlowFall;
         return this;
     }
 
-    public boolean GetOverrideHandAnim() {
+    public boolean getOverrideHandAnim() {
         return OverrideHandAnim;
     }
 
-    public PlayerFormBase SetOverrideHandAnim(boolean overrideHandAnim) {
+    public PlayerFormBase setOverrideHandAnim(boolean overrideHandAnim) {
         OverrideHandAnim = overrideHandAnim;
         return this;
     }
 
-    public boolean GetCanSneakRush() {
+    public boolean getCanSneakRush() {
         return CanSneakRush;
     }
 
-    public PlayerFormBase SetCanSneakRush(boolean canSneakRush) {
+    public PlayerFormBase setCanSneakRush(boolean canSneakRush) {
         CanSneakRush = canSneakRush;
         return this;
     }
 
-    public boolean GetCanRushJump() {
+    public boolean getCanRushJump() {
         return CanRushJump;
     }
 
-    public PlayerFormBase SetCanRushJump(boolean canRushJump) {
+    public PlayerFormBase setCanRushJump(boolean canRushJump) {
         CanRushJump = canRushJump;
         return this;
     }
 
-    public boolean GetIsCustomForm() {
+    public boolean getIsCustomForm() {
         return IsCustomForm;
     }
 
-    public PlayerFormBase SetIsCustomForm(boolean isCustomForm) {
+    public PlayerFormBase setIsCustomForm(boolean isCustomForm) {
         IsCustomForm = isCustomForm;
         return this;
     }

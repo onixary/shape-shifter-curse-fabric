@@ -43,6 +43,8 @@ public class AdditionalPowers {
         register(KeepSneakingPower.createFactory());
         register(DelayAttributePower.createFactory());
         register(AlwaysSprintSwimmingPower.createFactory());
+        register(ActionOnSplashPotionTakeEffect.createFactory());
+        register(ConditionScalePower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

@@ -1,0 +1,18 @@
+{
+  "parent": "shape-shifter-curse:on_enable_mod",
+  "criteria": {
+    "has_untreated_moon_dust": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:diamond"]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "recipes": ["shape-shifter-curse:morphscale_headring", "shape-shifter-curse:morphscale_cuish", "shape-shifter-curse:morphscale_vest", "shape-shifter-curse:morphscale_anklet"]
+  }
+}

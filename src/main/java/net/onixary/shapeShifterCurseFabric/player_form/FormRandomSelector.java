@@ -17,8 +17,7 @@ public class FormRandomSelector {
     );
 
     public static PlayerFormBase getRandomFormWithIndexZero() {
-        List<PlayerFormBase> formsWithIndexZero = RegPlayerForms.playerForms.getKeys().stream().filter(key -> RegPlayerForms.playerForms.getOrThrow(key).getIndex() == 0).map(RegPlayerForms.playerForms::getOrThrow).toList();
-
+        List<PlayerFormBase> formsWithIndexZero = RegPlayerForms.playerForms.values().stream().filter(form -> form.getIndex() == 0).toList();
         if (formsWithIndexZero.isEmpty()) {
             throw new IllegalStateException("No forms with index 0 found");
         }

@@ -2,8 +2,6 @@ package net.onixary.shapeShifterCurseFabric;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -12,6 +10,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.command.argument.serialize.ConstantArgumentSerializer;
 import net.minecraft.entity.EntityDimensions;
@@ -21,6 +20,7 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.resource.ResourceType;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -40,6 +40,7 @@ import net.onixary.shapeShifterCurseFabric.command.FormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
 import net.onixary.shapeShifterCurseFabric.config.ClientConfig;
 import net.onixary.shapeShifterCurseFabric.config.CommonConfig;
+import net.onixary.shapeShifterCurseFabric.config.PlayerCustomConfig;
 import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntitySpawnEgg;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntity;
@@ -47,11 +48,15 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.Transformat
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
-import net.onixary.shapeShifterCurseFabric.item.RegCustomItem;
-import net.onixary.shapeShifterCurseFabric.item.RegCustomPotions;
+import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
+import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationTransform;
+import net.onixary.shapeShifterCurseFabric.player_form.FormDataPackReloadListener;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
@@ -77,6 +82,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final String MOD_ID = "shape-shifter-curse";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+    public static PlayerCustomConfig playerCustomConfig;
     public static ClientConfig clientConfig;
     public static CommonConfig commonConfig;
 
@@ -112,7 +118,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final EntityType<TransformativeBatEntity> T_BAT = Registry.register(
             Registries.ENTITY_TYPE,
             new Identifier(ShapeShifterCurseFabric.MOD_ID, "t_bat"),
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TransformativeBatEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.AMBIENT, TransformativeBatEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
                     .build()
     );
@@ -120,7 +126,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final EntityType<TransformativeAxolotlEntity> T_AXOLOTL = Registry.register(
             Registries.ENTITY_TYPE,
             new Identifier(ShapeShifterCurseFabric.MOD_ID, "t_axolotl"),
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TransformativeAxolotlEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.AXOLOTLS, TransformativeAxolotlEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
                     .build()
     );
@@ -128,7 +134,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final EntityType<TransformativeOcelotEntity> T_OCELOT = Registry.register(
             Registries.ENTITY_TYPE,
             new Identifier(ShapeShifterCurseFabric.MOD_ID, "t_ocelot"),
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TransformativeOcelotEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TransformativeOcelotEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
                     .build()
     );
@@ -175,6 +181,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         AdditionalEntityActions.register();
 
         // 注册配置文件
+        AutoConfig.register(PlayerCustomConfig.class, Toml4jConfigSerializer::new);  // 客户端配置
+        playerCustomConfig = AutoConfig.getConfigHolder(PlayerCustomConfig.class).getConfig();
         AutoConfig.register(ClientConfig.class, Toml4jConfigSerializer::new);  // 客户端配置
         clientConfig = AutoConfig.getConfigHolder(ClientConfig.class).getConfig();
         AutoConfig.register(CommonConfig.class, Toml4jConfigSerializer::new);  // 双端配置
@@ -197,6 +205,17 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             ServerWorld overworld = server.getOverworld();
             FormAbilityManager.getServerWorld(overworld);
         });
+        // 获取动态Form(DataPack)
+        ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new FormDataPackReloadListener());
+        ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, resourceManager, success) -> {
+            server.getPlayerManager().getPlayerList().forEach((player) -> {
+                ModPacketsS2CServer.updateDynamicForm(player);
+                if (!player.getComponent(RegPlayerFormComponent.PLAYER_FORM).isCurrentFormExist()) {
+                    FormAbilityManager.applyForm(player, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
+                }
+            });
+        });
+
         // Reg origins content
 
         // do not reset effect when player respawn or enter hell
@@ -312,7 +331,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             // handle instinct tick
             InstinctTicker.tick(player);
             // handle transform manager update
-            TransformManager.update();
+            TransformManager.update(player);
             TickManager.tickServerAll();
 
             // handle transformative effects tick

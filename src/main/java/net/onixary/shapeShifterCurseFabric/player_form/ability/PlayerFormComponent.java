@@ -7,8 +7,8 @@ import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 
 public class PlayerFormComponent implements AutoSyncedComponent {
-    private PlayerFormBase currentForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
-    private PlayerFormBase previousForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
+    private Identifier currentForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID;
+    private Identifier previousForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID;
     // is current form caused by cursed moon
     private boolean isByCursedMoon = false;
     // is current form regressed from final form by cursed moon
@@ -25,8 +25,8 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     public void readFromNbt(NbtCompound nbtCompound) {
         // 读取状态枚举
         try {
-            this.currentForm = RegPlayerForms.getPlayerFormOrDefault(nbtCompound.getString("currentForm"), RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
-            this.previousForm = RegPlayerForms.getPlayerFormOrDefault(nbtCompound.getString("previousForm"), RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
+            this.currentForm = Identifier.tryParse(nbtCompound.getString("currentForm"));
+            this.previousForm = Identifier.tryParse(nbtCompound.getString("previousForm"));
             this.isByCursedMoon = nbtCompound.getBoolean("isByCursedMoon");
             this.isRegressedFromFinal = nbtCompound.getBoolean("isRegressedFromFinal");
             this.isByCure = nbtCompound.getBoolean("isByCure");
@@ -35,8 +35,8 @@ public class PlayerFormComponent implements AutoSyncedComponent {
             this.isByCursedMoonEnd = nbtCompound.getBoolean("isByCursedMoonEnd");
             this.firstJoin = nbtCompound.getBoolean("firstJoin");
         } catch (IllegalArgumentException e) {
-            this.currentForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
-            this.previousForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
+            this.currentForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID;
+            this.previousForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID;
             this.isByCursedMoon = false;
             this.isRegressedFromFinal = false;
             this.isByCure = false;
@@ -47,10 +47,15 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         }
     }
 
+    public PlayerFormComponent clear() {
+        this.readFromNbt(new NbtCompound());
+        return this;
+    }
+
     @Override
     public void writeToNbt(NbtCompound nbtCompound) {
-        nbtCompound.putString("currentForm", this.currentForm.name());
-        nbtCompound.putString("previousForm", this.previousForm.name());
+        nbtCompound.putString("currentForm", this.currentForm == null ? RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID.toString() : this.currentForm.toString());
+        nbtCompound.putString("previousForm", this.previousForm == null ? RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID.toString() : this.previousForm.toString());
         nbtCompound.putBoolean("isByCursedMoon", this.isByCursedMoon);
         nbtCompound.putBoolean("isRegressedFromFinal", this.isRegressedFromFinal);
         nbtCompound.putBoolean("isByCure", this.isByCure);
@@ -61,11 +66,15 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     }
 
     public PlayerFormBase getCurrentForm() {
-        return currentForm;
+        return RegPlayerForms.getPlayerFormOrDefault(this.currentForm, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
+    }
+
+    public boolean isCurrentFormExist() {
+        return RegPlayerForms.playerForms.containsKey(this.currentForm);
     }
 
     public PlayerFormBase getPreviousForm() {
-        return previousForm;
+        return RegPlayerForms.getPlayerFormOrDefault(this.previousForm, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
     }
 
     public boolean isByCursedMoon() {
@@ -94,7 +103,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
 
     public void setCurrentForm(PlayerFormBase form) {
         this.previousForm = this.currentForm;
-        this.currentForm = form;
+        this.currentForm = form.FormID;
     }
 
     public boolean isMoonEffectApplied() {
