@@ -13,6 +13,7 @@ import net.onixary.shapeShifterCurseFabric.player_form_render.OriginFurModel;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.lang3.tuple.Triple;
 
+import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -103,6 +104,11 @@ public class FormTextureUtils {
         return RGBA2ABGR((color<<8) | 0xFF);
     }
 
+    public static int ARGB2ABGR(int color) {
+        int Alpha = (color >> 24) & 0xFF;
+        return RGBA2ABGR((color << 8) | Alpha);
+    }
+
     public static int ABGR2RGBA(int color) {
         int R = color & 0xFF;
         int G = (color >> 8) & 0xFF;
@@ -113,6 +119,10 @@ public class FormTextureUtils {
 
     public static int ABGR2RGB(int color) {
         return ABGR2RGBA(color) >> 8;
+    }
+
+    public static int ABGR2ARGB(int color) {
+        return ABGR2RGB(color) | (color & 0XFF000000);
     }
 
     // 除非编译为inline 否则对性能提升不大 而java只支持动态inline
@@ -207,8 +217,9 @@ public class FormTextureUtils {
     }
 
     public static int ProcessMaskChannel(int Color, int Mask, int ColorSetting, int AverageGreyScale, boolean ReverseGreyScale) {
+        if (((ColorSetting >> 24) & 0xFF) == 0) return Color;
         int GreyScaleAdd = ReverseGreyScale ? AverageGreyScale - getGreyScale(Color) : getGreyScale(Color) - AverageGreyScale;
-        Color = GreyScaleMul(ColorSetting, 1.0f + (float)GreyScaleAdd / 255.0f);
+        Color = GreyScaleMul(ColorSetting | 0xFF000000, 1.0f + (float)GreyScaleAdd / 255.0f);
         return ColorMulBytes(Color, Mask);
     }
 
@@ -220,6 +231,9 @@ public class FormTextureUtils {
         int maskAlpha = Mask & 0xFF000000;
         if (maskAlpha >= 0 && maskAlpha < 16) {
             // 使用eyeColor替换颜色，但保留原始颜色的Alpha通道
+            if (((colorSetting.eyeColor >> 24) & 0xFF) == 0) {
+                return Color;
+            }
             return (colorSetting.eyeColor & 0x00FFFFFF) | (Color & 0xFF000000);
         }
 

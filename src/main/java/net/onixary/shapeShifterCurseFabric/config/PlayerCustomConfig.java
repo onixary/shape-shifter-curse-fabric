@@ -12,18 +12,18 @@ public class PlayerCustomConfig implements ConfigData {
 
     @Comment("Enable form color. Default: false")
     public boolean enable_form_color = false;
-    @ConfigEntry.ColorPicker
-    @Comment("Primary color (RGB). Default: white")
-    public int primaryColor = 0xFFFFFF;
-    @ConfigEntry.ColorPicker
-    @Comment("Accent color 1 (RGB). Default: white")
-    public int accentColor1Color = 0xFFFFFF;
-    @ConfigEntry.ColorPicker
-    @Comment("Accent color 2 (RGB). Default: white")
-    public int accentColor2Color = 0xFFFFFF;
-    @ConfigEntry.ColorPicker
-    @Comment("Eye color (RGB). Default: black")
-    public int eyeColor = 0x000000;
+    @ConfigEntry.ColorPicker(allowAlpha = true)
+    @Comment("Primary color (RGBA). Default: white")
+    public int primaryColor = 0xFFFFFFFF;
+    @ConfigEntry.ColorPicker(allowAlpha = true)
+    @Comment("Accent color 1 (RGBA). Default: white")
+    public int accentColor1Color = 0xFFFFFFFF;
+    @ConfigEntry.ColorPicker(allowAlpha = true)
+    @Comment("Accent color 2 (RGBA). Default: white")
+    public int accentColor2Color = 0xFFFFFFFF;
+    @ConfigEntry.ColorPicker(allowAlpha = true)
+    @Comment("Eye color (RGBA). Default: black")
+    public int eyeColor = 0x00000000;
 
     // @Comment("Primary color override grey strength (0~255). Default: 0")
     // @ConfigEntry.BoundedDiscrete(min = 0, max = 255)
