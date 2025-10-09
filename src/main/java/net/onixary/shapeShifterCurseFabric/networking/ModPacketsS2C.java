@@ -309,8 +309,10 @@ public class ModPacketsS2C {
     }
 
     public static void receiveOpenPatronFormSelectMenu(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
-        Screen screen = new PatronFormSelectScreen(Text.literal("PatronFromSelectScreen"), client.player);
-        client.setScreen(screen);
+        client.execute(() -> {
+            Screen screen = new PatronFormSelectScreen(Text.literal("PatronFromSelectScreen"), client.player);
+            client.setScreen(screen);
+        });
     }
 
     public static void sendSetPatronForm(Identifier formID) {

@@ -9,7 +9,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage;
-import net.onixary.shapeShifterCurseFabric.integration.origins.Origins;
 import net.onixary.shapeShifterCurseFabric.integration.origins.component.OriginComponent;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayer;
@@ -100,8 +99,8 @@ public class FormAbilityManager {
         // 添加网络同步：通知客户端形态已变化
         if (!player.getWorld().isClient() && player instanceof ServerPlayerEntity serverPlayer) {
             try {
-                ModPacketsS2CServer.sendFormChange(serverPlayer, newForm.name());
-                ShapeShifterCurseFabric.LOGGER.info("Sent form change notification to client: " + newForm.name());
+                ModPacketsS2CServer.sendFormChange(serverPlayer, newForm.getIDString());
+                ShapeShifterCurseFabric.LOGGER.info("Sent form change notification to client: " + newForm.getIDString());
             } catch (Exception e) {
                 ShapeShifterCurseFabric.LOGGER.error("Failed to send form change notification: ", e);
             }

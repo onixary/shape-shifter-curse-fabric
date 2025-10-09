@@ -83,8 +83,8 @@ public class TransformManager {
 
         // 如果在服务端，同步状态到客户端
         if (player instanceof ServerPlayerEntity serverPlayer) {
-            String fromFormName = data.curFromForm != null ? data.curFromForm.name() : null;
-            String toFormName = data.curToForm != null ? data.curToForm.name() : null;
+            String fromFormName = data.curFromForm != null ? data.curFromForm.getIDString() : null;
+            String toFormName = data.curToForm != null ? data.curToForm.getIDString() : null;
 
             ModPacketsS2CServer.sendTransformState(serverPlayer, transforming, fromFormName, toFormName);
             ShapeShifterCurseFabric.LOGGER.info("Sent transform state to client: " + transforming +

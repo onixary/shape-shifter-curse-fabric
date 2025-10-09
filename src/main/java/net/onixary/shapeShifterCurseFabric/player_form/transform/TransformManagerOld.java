@@ -16,7 +16,6 @@ import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
-import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.*;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
@@ -29,7 +28,6 @@ import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffec
 import static net.onixary.shapeShifterCurseFabric.player_form.effect.PlayerTransformEffectManager.*;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker.clearInstinct;
 import static net.onixary.shapeShifterCurseFabric.screen_effect.TransformFX.beginTransformEffect;
-import static net.onixary.shapeShifterCurseFabric.screen_effect.TransformFX.endTransformEffect;
 
 // 老的TransformManager
 public class TransformManagerOld {
@@ -62,8 +60,8 @@ public class TransformManagerOld {
 
         // 如果在服务端，同步状态到客户端
         if (player instanceof ServerPlayerEntity serverPlayer) {
-            String fromFormName = curFromForm != null ? curFromForm.name() : null;
-            String toFormName = curToForm != null ? curToForm.name() : null;
+            String fromFormName = curFromForm != null ? curFromForm.getIDString() : null;
+            String toFormName = curToForm != null ? curToForm.getIDString() : null;
 
             ModPacketsS2CServer.sendTransformState(serverPlayer, transforming, fromFormName, toFormName);
             ShapeShifterCurseFabric.LOGGER.info("Sent transform state to client: " + transforming +

@@ -48,7 +48,8 @@ public class PatronUtils {
     public static void OnServerLoad(MinecraftServer server) {
         PatronUtils.UpdatePatronData(server);
         if (commonConfig.enablePatronFormSystem) {
-            PatronUtils.CheckDataPackUpdate(server);
+            // 开启服务器时无论如何都要更新一次
+            PatronUtils.UpdateDataPack(server);
         }
         Thread thread = new Thread(() -> {
             try {
@@ -298,17 +299,6 @@ public class PatronUtils {
 
     // 仅服务端
     public static void UpdatePatronData(MinecraftServer server) {
-        /*
-            样例:
-            {
-              "patron_level": [
-                {
-                  "uuid": "12345678-1234-1234-1234-123456789012",
-                  "level": 4
-                }
-              ]
-            }
-         */
         byte[] PatronDataByte = downloadFormURL(commonConfig.PatronDataUrl);
         if (PatronDataByte != null) {
             try {
