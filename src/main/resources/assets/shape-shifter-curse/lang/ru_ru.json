@@ -291,15 +291,15 @@
 
   "codex.form.shape-shifter-curse.bat_0.title": "\nПроклятие изменило ваше тело, сделав вас похожим на летучую мышь. Тьма привлекает вас.",
   "codex.form.shape-shifter-curse.bat_0.appearance": "Из ваших рук выросли мембранные придатки.\nИз вашего копчика вырос небольшой хвост.\nНесмотря на это, они, похоже, ничем не помогают вам.",
-  "codex.form.shape-shifter-curse.bat_0.pros": "Во тьме вы чувствуете себя более комфортно.",
+  "codex.form.shape-shifter-curse.bat_0.pros": "Во тьме вы чувствуете себя более свободно.",
   "codex.form.shape-shifter-curse.bat_0.cons": "Из-за мебранных образований вы не можете носить нагрудник.",
   "codex.form.shape-shifter-curse.bat_0.instincts": "Вы мечтаете оставаться во тьме.\nВы мечтаете остаться в кастровых пещерах.",
 
-  "codex.form.shape-shifter-curse.bat_1.title": "\nNew vision and strength make you adept in caves and nighttime darkness. Just thinking about sunlight now discomforts you.",
-  "codex.form.shape-shifter-curse.bat_1.appearance": "Your ears now crown your head - large, pointed and forward-facing\nArm membranes have grown further - when jumping you instinctively flap them\nYour fingers now somewhat resemble claws, preventing delicate operations though you can still grasp items\nYour toes have elongated - thin and long\nYour tail has lengthened further\nYou seem slightly smaller",
-  "codex.form.shape-shifter-curse.bat_1.pros": "You now see clearly in darkness\nYour arms grow stronger, increasing melee damage\nWhile still flightless, membrane flapping lets you jump higher\nYour body absorbs non-meat foods more efficiently - increased satiation\nIn darkness, you feel more agile",
-  "codex.form.shape-shifter-curse.bat_1.cons": "Your new finger structure makes using bows/crossbows impossible\nMembranes and new toe structure prevent wearing chestplates and boots\nIn sunlight, you feel weaker and slower\nYour body adapts less to meat - it provides less satiation",
-  "codex.form.shape-shifter-curse.bat_1.instincts": "You increasingly want to stay in darkness\nYou begin to desire to stay in dripstone caves biomes\nThe thought of eat more fruits begins to attract you\nThe thought of jump into air begins to attract you\nThe thought of be surrounded by dripstones begins to attract you",
+  "codex.form.shape-shifter-curse.bat_1.title": "\nНовые силы сделали вас адептом тьмы. Одна только мысль о солнечном свете вызывают у вас неприятное чувство.",
+  "codex.form.shape-shifter-curse.bat_1.appearance": "Вашу голову венчают огромные, остроконечные уши, направленные вперёд.\nМембранные образования на руках стали больше. При прыжке вы инстинктивно махаете ими.\nВаши пальцы теперь чем-то напоминают когти. Это может помешать там, где нужна тонкая работа. Однако вы всё ещё можете хватать предметы.\nПальцы ног стали длиннее и тоньше.\nВаш хвост стал ещё длиннее.\nВы выглядите слегка меньше, чем раньше.",
+  "codex.form.shape-shifter-curse.bat_1.pros": "Вы совершенно ясно видите во тьме.\nВаши руки стали сильнее. Из-за этого вы бьёте больнее.\nХотя мембранные придатки и не позволяют вам летать, но вы можете высоко прыгать.\nВаше тело лучше усваивает немясные продукты.\nВ темноте вы чувствуете себя свободнее.",
+  "codex.form.shape-shifter-curse.bat_1.cons": "Строение ваших новых рук делает невозможным использование луков/арбалетов.\nМембранные образования и новое строение ног не позволяют вам экипировать нагрудники и ботинки.\nПри свете солнца вы чувствуете себя слабее. Уровень максимального здоровья и скорость передвижения понижены.\nМясо хуже утоляет голод.",
+  "codex.form.shape-shifter-curse.bat_1.instincts": "Желание не покидать тёмные места становится всё сильнее.\nВы хотите остаться в кастровых пещерах.\nВас привлекает идея есть больше фруктов.\nВас привлекает мысль высоко прыгать.\nВы хотите быть ближе к натёчным камням и капельникам.",
 
   "codex.form.shape-shifter-curse.bat_2.title": "\nAs a chiropteran, you enjoy gliding through night skies with your kind.",
   "codex.form.shape-shifter-curse.bat_2.appearance": "Your ears now dominate much head space, detecting minute sounds\nYour face extends forward forming a short muzzle with sharp tiny teeth\nYour arms fully integrate with wing membranes. Though still too heavy for free flight, they suffice for gliding and diving\nYour foreclaws can't handle bulky tools/weapons\nNew foot claws, digitigrade legs and balancing long tail suit diving/gliding. With effort, you can still run\nBody fuzz maintains warmth in chilly caves",
@@ -452,6 +452,6 @@
   "text.autoconfig.shape-shifter-curse-common.option.transformativeAxolotlSpawnChance": "Вероятность появления проклятого акселотля",
   "text.autoconfig.shape-shifter-curse-common.option.transformativeOcelotSpawnChance": "Вероятность появления проклятого оцелота",
   "text.autoconfig.shape-shifter-curse-common.option.enableNewStartBook": "Включить новую версию интерфейса стартовой книги",
-  "text.autoconfig.shape-shifter-curse-common.option.curseMoonPhase": "Curse Moon Phase",
+  "text.autoconfig.shape-shifter-curse-common.option.curseMoonPhase": "Фаза проклятой луны",
   "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "В разработке"
 }
