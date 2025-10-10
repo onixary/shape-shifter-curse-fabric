@@ -10,8 +10,6 @@ ContentTypeAdd = False
 
 # Global Variable
 FilesCache = {}
-ErrorCache = {}
-ErrorPageList = [400, 401, 403, 404, 500, 501, 502, 503, 520, 521, 523]
 
 
 def GenerateIndexPage(FolderPath: str, WebFolderPath: str) -> bytes:
@@ -42,16 +40,6 @@ def GetFiles(WebPath: str) -> tuple[bytes | None, str | None]:
     # FilesCache[WebPath] = FilesRaw
     return FilesRaw, None
 
-
-def GetErrorPage(ErrorCode: int) -> bytes:
-    if ErrorCode in ErrorCache:
-        return ErrorCache[ErrorCode]
-    if ErrorCode not in ErrorPageList:
-        return b""
-    with open(f"./ErrorPages/{ErrorCode}.html", 'rb') as ErrorPage:
-        ErrorPageRaw = ErrorPage.read()
-    ErrorCache[ErrorCode] = ErrorPageRaw
-    return ErrorPageRaw
 
 
 ContentTypesDictionary: dict[str, str] = {
@@ -119,7 +107,6 @@ class StaticServerHandler(BaseHTTPRequestHandler):
             ErrorCode = 404
             self.send_response(ErrorCode)
             self.end_headers()
-            self.wfile.write(GetErrorPage(ErrorCode))
         else:
             self.send_response(200)
             if ContentTypeAdd:
