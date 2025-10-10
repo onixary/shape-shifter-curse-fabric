@@ -157,10 +157,18 @@ public class ModPacketsC2S {
                     TransformManager.handleDirectTransform(playerEntity, pfd, false);
                 }
                 else {
-                    // 一般情况下，这里不会执行，因为客户端在发送请求前已经进行了检查 如果触发了这里，说明客户端和服务器之间的数据不同步 或者是客户端作弊
+                    // 一般情况下，这里不会执行，因为客户端在发送请求前已经进行了检查 如果触发了这里，说明客户端和服务器之间的数据不同步(小概率 如果不同步早就掉线了) 或者是客户端作弊(大概率)
                     ShapeShifterCurseFabric.LOGGER.warn("Player {} tried to use form {} but they are not allowed", playerEntity.getDisplayName().getString(), formId.toString());
                 }
             });
+        }
+        else if (form != null){
+            // 如果是已发布版本 100% 是客户端作弊 一般只会在测试时触发(因为测试版需要填充所有表单用来测试UI)
+            ShapeShifterCurseFabric.LOGGER.warn("Player {} tried to use form {} but it is not a dynamic form", playerEntity.getDisplayName().getString(), formId.toString());
+        }
+        else {
+            // 可能是不同步问题
+            ShapeShifterCurseFabric.LOGGER.warn("Player {} tried to use form {} but it does not exist", playerEntity.getDisplayName().getString(), formId.toString());
         }
         return;
     }
