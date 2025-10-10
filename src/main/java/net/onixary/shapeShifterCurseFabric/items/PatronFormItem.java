@@ -9,8 +9,8 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 
-public class PatronSelectItem extends Item {
-    public PatronSelectItem(Settings settings) {
+public class PatronFormItem extends Item {
+    public PatronFormItem(Settings settings) {
         super(settings);
     }
 

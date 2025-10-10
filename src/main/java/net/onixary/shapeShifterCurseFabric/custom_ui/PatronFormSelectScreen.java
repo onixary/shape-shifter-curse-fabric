@@ -15,7 +15,10 @@ import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
+
 public class PatronFormSelectScreen extends Screen {
+    private static final Identifier page_texID = new Identifier(MOD_ID,"textures/gui/patron_form_select_menu.png");
     private final ClientPlayerEntity player;
 
     private List<Identifier> availableForms;
@@ -148,8 +151,17 @@ public class PatronFormSelectScreen extends Screen {
         super.close();
     }
 
+    private void renderTexture(DrawContext context) {
+        // 最小 UI 420x227 翻页按钮 [80,207 20x20] [320,207 20x20] 按钮
+        int TexturePosX = width / 2 - 210;
+        int TexturePosY = height / 2 - 112;
+        context.drawTexture(page_texID, TexturePosX, TexturePosY, 0, 0, 420, 227, 420, 227);
+    }
+
+
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        this.renderTexture(context);
         super.render(context, mouseX, mouseY, delta);
     }
 
