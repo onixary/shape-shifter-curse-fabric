@@ -29,6 +29,7 @@ import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_animation.RegPlayerAnimation;
 import net.onixary.shapeShifterCurseFabric.render.render_layer.FurGradientRenderLayer;
 import net.onixary.shapeShifterCurseFabric.util.ClientTicker;
+import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 import net.onixary.shapeShifterCurseFabric.util.TickManager;
 
 import java.lang.reflect.InvocationTargetException;
@@ -235,8 +236,7 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
         registerAzureArmorGeo();
 
 		ClientTickEvents.END_CLIENT_TICK.register(ShapeShifterCurseFabricClient::onClientTick);
-
-
+		PatronUtils.OnClientInit();
 	}
 
 	public static ShaderProgram getFurGradientShader() {

@@ -9,7 +9,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage;
-import net.onixary.shapeShifterCurseFabric.integration.origins.Origins;
 import net.onixary.shapeShifterCurseFabric.integration.origins.component.OriginComponent;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayer;
@@ -80,6 +79,7 @@ public class FormAbilityManager {
         // 已被弃用，使用json定义的scale power
         //applyScale(player, config.getScale());
         applyFormOrigin(player, newForm);
+        applyExtraPower(player, oldForm, newForm);
         try {
             ApplyOriginExtraPower(player, ModComponents.ORIGIN.get(player).getOrigin(OriginLayers.getLayer(newForm.getFormOriginLayerID())).getIdentifier());
         }
@@ -99,8 +99,8 @@ public class FormAbilityManager {
         // 添加网络同步：通知客户端形态已变化
         if (!player.getWorld().isClient() && player instanceof ServerPlayerEntity serverPlayer) {
             try {
-                ModPacketsS2CServer.sendFormChange(serverPlayer, newForm.name());
-                ShapeShifterCurseFabric.LOGGER.info("Sent form change notification to client: " + newForm.name());
+                ModPacketsS2CServer.sendFormChange(serverPlayer, newForm.getIDString());
+                ShapeShifterCurseFabric.LOGGER.info("Sent form change notification to client: " + newForm.getIDString());
             } catch (Exception e) {
                 ShapeShifterCurseFabric.LOGGER.error("Failed to send form change notification: ", e);
             }
@@ -173,6 +173,21 @@ public class FormAbilityManager {
         if (powerType != null) {
             PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
             powerHolder.addPower(powerType, powerSource);
+            powerHolder.addPower(powerType, powerSource);
+        }
+    }
+
+    public static void applyExtraPower(PlayerEntity playerEntity, PlayerFormBase oldForm, PlayerFormBase newForm) {
+        PowerHolderComponent powerComponent = PowerHolderComponent.KEY.get(playerEntity);
+        // 移除旧形态的额外能力
+        if (oldForm instanceof PlayerFormDynamic pfd) {
+            powerComponent.removeAllPowersFromSource(pfd.FormID);
+        }
+        // 添加新形态的额外能力
+        if (newForm instanceof PlayerFormDynamic pfd) {
+            for (Identifier powerID: pfd.ExtraPower) {
+                applyPower(playerEntity, powerID, pfd.FormID);
+            }
         }
     }
 }

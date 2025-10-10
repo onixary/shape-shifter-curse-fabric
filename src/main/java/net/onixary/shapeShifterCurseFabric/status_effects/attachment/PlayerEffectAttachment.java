@@ -27,7 +27,7 @@ public class PlayerEffectAttachment{
     public NbtCompound toNbt() {
         NbtCompound nbt = new NbtCompound();
         if (currentToForm != null) {
-            nbt.putString("currentToForm", currentToForm.name());
+            nbt.putString("currentToForm", currentToForm.getIDString());
         }
         else{
             nbt.putString("currentToForm", "null");

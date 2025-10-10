@@ -31,6 +31,8 @@ public class RegCustomItem {
     public static final Item MORPHSCALE_CUISH = register("morphscale_cuish", new MorphScaleArmor(ArmorItem.Type.LEGGINGS));
     public static final Item MORPHSCALE_ANKLET = register("morphscale_anklet", new MorphScaleArmor(ArmorItem.Type.BOOTS));
 
+    public static final Item PATRON_FORM_ITEM = register("patron_form_item", new PatronFormItem(new Item.Settings()));
+
     // 用于成就图标的占位物品
     public static final Item ICON_CURSED_MOON = register("icon_cursed_moon", new Item(new Item.Settings()));
 
@@ -41,6 +43,7 @@ public class RegCustomItem {
     public static void initialize() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
             entries.add(BOOK_OF_SHAPE_SHIFTER);
+            entries.add(PATRON_FORM_ITEM);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.add(UNTREATED_MOONDUST);

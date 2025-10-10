@@ -1,0 +1,8 @@
+{
+  "codex.form.ssc-patron.example.title": [{"text":"样例TITLE", "color":"#c67681"}],
+  "codex.form.ssc-patron.example.appearance": [{"text":"样例Appearance", "color":"#c67681"}],
+  "codex.form.ssc-patron.example.pros": [{"text":"样例Pros", "color":"#c67681"}],
+  "codex.form.ssc-patron.example.cons": [{"text":"样例Cons", "color":"#c67681"}],
+  "codex.form.ssc-patron.example.instincts": [{"text":"样例Instincts", "color":"#c67681"}],
+  "codex.form.ssc-patron.example.name": [{"text":"样例赞助者形态", "color":"#c67681"}]
+}

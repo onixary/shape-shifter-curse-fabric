@@ -14,6 +14,8 @@ import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnJumpPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnSprintingToSneakingPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
@@ -90,6 +92,10 @@ public class ModPacketsC2S {
         ServerPlayNetworking.registerGlobalReceiver(
                 UPDATE_CUSTOM_SETTING,
                 net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S::onUpdatePlayerCustomConfig);
+
+        ServerPlayNetworking.registerGlobalReceiver(
+                SET_PATRON_FORM,
+                net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S::receiveSetPatronForm);
     }
 
     private static void onPressStartBookButton(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender){
@@ -136,5 +142,26 @@ public class ModPacketsC2S {
                 ShapeShifterCurseFabric.LOGGER.error("Error while updating player custom config", e);
             }
         });
+    }
+
+    private static void receiveSetPatronForm(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
+        Identifier formId = packetByteBuf.readIdentifier();
+        PlayerFormBase form = RegPlayerForms.getPlayerForm(formId);
+        if (form instanceof PlayerFormDynamic pfd) {
+            minecraftServer.execute(() -> {
+                if (playerEntity == null) {
+                    ShapeShifterCurseFabric.LOGGER.warn("[SetPatronForm] Player is null");
+                    return;
+                }
+                if (pfd.IsPlayerCanUse(playerEntity)) {
+                    TransformManager.handleDirectTransform(playerEntity, pfd, false);
+                }
+                else {
+                    // 一般情况下，这里不会执行，因为客户端在发送请求前已经进行了检查 如果触发了这里，说明客户端和服务器之间的数据不同步 或者是客户端作弊
+                    ShapeShifterCurseFabric.LOGGER.warn("Player {} tried to use form {} but they are not allowed", playerEntity.getDisplayName().getString(), formId.toString());
+                }
+            });
+        }
+        return;
     }
 }

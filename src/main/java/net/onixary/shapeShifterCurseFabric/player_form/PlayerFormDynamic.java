@@ -3,14 +3,15 @@ package net.onixary.shapeShifterCurseFabric.player_form;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFurClient;
+import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class PlayerFormDynamic extends PlayerFormBase{
     static class AnimationHolderData {
@@ -26,6 +27,14 @@ public class PlayerFormDynamic extends PlayerFormBase{
             return new AnimationHolder(AnimID, true, Speed, Fade);
         }
     }
+
+    public static final UUID PublicUUID = UUID.fromString("00000000-0000-0000-0000-000000000000");
+
+    public Identifier FurModelID = null;
+    public List<Identifier> ExtraPower = new LinkedList<Identifier>();
+    public boolean IsPatronForm = false;  // 可以使用特殊物品直接变形
+    public int RequirePatronLevel = 0;  // 需要的赞助等级
+    public List<UUID> PlayerUUIDs = new ArrayList<UUID>();
 
     private final HashMap<PlayerAnimState, AnimationHolderData> animMap_Builder = new HashMap<>();
     public static final HashMap<Identifier, HashMap<PlayerAnimState, AnimationHolder>> animMap = new HashMap<>();
@@ -114,21 +123,21 @@ public class PlayerFormDynamic extends PlayerFormBase{
         }
     }
 
-    private String _Gson_GetString(JsonObject data, String key, String defaultValue) {
+    private static String _Gson_GetString(JsonObject data, String key, String defaultValue) {
         if (data.has(key)) {
             return data.get(key).getAsString();
         }
         return defaultValue;
     }
 
-    private int _Gson_GetInt(JsonObject data, String key, int defaultValue) {
+    private static int _Gson_GetInt(JsonObject data, String key, int defaultValue) {
         if (data.has(key)) {
             return data.get(key).getAsInt();
         }
         return defaultValue;
     }
 
-    private boolean _Gson_GetBoolean(JsonObject data, String key, boolean defaultValue) {
+    private static boolean _Gson_GetBoolean(JsonObject data, String key, boolean defaultValue) {
         if (data.has(key)) {
             return data.get(key).getAsBoolean();
         }
@@ -137,6 +146,9 @@ public class PlayerFormDynamic extends PlayerFormBase{
 
     public void load(JsonObject formData) {
         try {
+            if (formData.has("FormID")) {
+                this.FormID = Identifier.tryParse(formData.get("FormID").getAsString());
+            }
             this.setPhase(PlayerFormPhase.valueOf(_Gson_GetString(formData, "phase", "PHASE_CLEAR")));
             this.setBodyType(PlayerFormBodyType.valueOf(_Gson_GetString(formData, "bodyType", "NORMAL")));
             this.setHasSlowFall(_Gson_GetBoolean(formData, "hasSlowFall", false));
@@ -169,6 +181,27 @@ public class PlayerFormDynamic extends PlayerFormBase{
                 group = RegPlayerForms.registerDynamicPlayerFormGroup(new PlayerFormGroup(GroupID));
             }
             this.setGroup(group, GroupIndex);
+            String IDStr = _Gson_GetString(formData, "FurModelID", null);
+            this.FurModelID = IDStr == null ? null : Identifier.tryParse(IDStr);
+            if (formData.has("ExtraPower")) {
+                for (JsonElement extraPower : formData.get("ExtraPower").getAsJsonArray()) {
+                    Identifier PowerID = Identifier.tryParse(extraPower.getAsString());
+                    if (PowerID != null) {
+                        this.ExtraPower.add(PowerID);
+                    }
+                }
+            }
+            this.IsPatronForm = _Gson_GetBoolean(formData, "IsPatronForm", false);
+            this.PlayerUUIDs.clear();
+            if (formData.has("PlayerUUID")) {
+                for (JsonElement uuidJson : formData.get("PlayerUUID").getAsJsonArray()) {
+                    UUID uuid = UUID.fromString(uuidJson.getAsString());
+                    if (uuid != null) {
+                        this.PlayerUUIDs.add(uuid);
+                    }
+                }
+            }
+            this.RequirePatronLevel = _Gson_GetInt(formData, "RequirePatronLevel", 0);
         }
         catch(Exception e) {
             ShapeShifterCurseFabric.LOGGER.error("Error while loading player form: {}", e.getMessage());
@@ -203,12 +236,40 @@ public class PlayerFormDynamic extends PlayerFormBase{
             data.addProperty("groupID", this.getGroup().GroupID.toString());
             data.addProperty("groupIndex", this.FormIndex);
         }
+        if (this.FurModelID != null) {
+            data.addProperty("FurModelID", this.FurModelID.toString());
+        }
+        if (!ExtraPower.isEmpty()) {
+            JsonArray extraPowers = new JsonArray();
+            for (Identifier powerID : ExtraPower) {
+                extraPowers.add(powerID.toString());
+            }
+            data.add("ExtraPower", extraPowers);
+        }
+        data.addProperty("IsPatronForm", this.IsPatronForm);
+        if (!PlayerUUIDs.isEmpty()) {
+            JsonArray uuids = new JsonArray();
+            for (UUID uuid : PlayerUUIDs) {
+                uuids.add(uuid.toString());
+            }
+            data.add("PlayerUUID", uuids);
+        }
+        data.addProperty("RequirePatronLevel", this.RequirePatronLevel);
         return data;
     }
 
     public static PlayerFormDynamic of(Identifier id, JsonObject formData) {
         PlayerFormDynamic form = new PlayerFormDynamic(id);
         form.load(formData);
+        return form;
+    }
+
+    public static PlayerFormDynamic of(JsonObject formData) throws IllegalArgumentException {
+        PlayerFormDynamic form = new PlayerFormDynamic(null);
+        form.load(formData);
+        if (form.FormID == null) {
+            throw new IllegalArgumentException("FormID is required");
+        }
         return form;
     }
 
@@ -220,5 +281,14 @@ public class PlayerFormDynamic extends PlayerFormBase{
     @Override
     public Identifier getFormOriginLayerID() {
         return this.originLayerID != null ? this.originLayerID : super.getFormOriginLayerID();
+    }
+
+    // 添加在玩家自选Form的UI判断
+    public boolean IsPlayerCanUse(PlayerEntity player) {
+        // PlayerUUIDs 为白名单 为空则无限制
+        if (this.PlayerUUIDs.contains(player.getUuid())) {
+            return true;
+        }
+        return (this.PlayerUUIDs.isEmpty() || this.PlayerUUIDs.contains(PublicUUID)) && (PatronUtils.PatronLevels.getOrDefault(player.getUuid(), 0) >= this.RequirePatronLevel);
     }
 }

@@ -14,6 +14,8 @@ public class RegPlayerForms {
     public static LinkedHashMap<Identifier, PlayerFormBase> playerForms = new LinkedHashMap<>();
     public static LinkedHashMap<Identifier, PlayerFormGroup> playerFormGroups = new LinkedHashMap<>();
 
+    public static String PatronNameSpace = "ssc-patron";  // 在更新数据包时保留
+
     // Builtin PlayerForms
     // 在Java中null不能使用equals方法
     // Original
@@ -101,11 +103,15 @@ public class RegPlayerForms {
         return PlayerFormDynamic.of(id, dynamicPlayerForm);
     }
 
+    // 实现更大的数据包后移除 目前怕包顺序错误
     public static void removeDynamicPlayerFormsExcept(List<Identifier> except) {
         List<Identifier> NeedRemove = new ArrayList<>();
         for (Identifier id : dynamicPlayerForms) {
             for (Identifier exceptID : except) {
                 if (id.equals(exceptID)) {
+                    continue;
+                }
+                if (id.getNamespace().equals(PatronNameSpace)) {
                     continue;
                 }
                 NeedRemove.add(id);
@@ -188,11 +194,15 @@ public class RegPlayerForms {
 
     public static void ClearAllDynamicPlayerForms() {
         for (Identifier id : dynamicPlayerForms) {
-            removeDynamicPlayerForm(id, false);
+            if (!id.getNamespace().equals(PatronNameSpace)) {
+                removeDynamicPlayerForm(id, false);
+            }
         }
         dynamicPlayerForms.clear();
         for (Identifier id : dynamicPlayerFormGroups) {
-            removeDynamicPlayerFormGroup(id, false);
+            if (!id.getNamespace().equals(PatronNameSpace)) {
+                removeDynamicPlayerFormGroup(id, false);
+            }
         }
         dynamicPlayerFormGroups.clear();
     }

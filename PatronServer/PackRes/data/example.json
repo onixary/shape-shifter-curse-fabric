@@ -1,20 +1,12 @@
 {
-  "__comment__": "具体看PlayerFormBase | See PlayerFormBase for details",
-  "FormID": "example_namespace:example",
-  "__FormID_comment__": "FormID覆写 **不推荐覆盖**",
-  "groupID": "example_namespace:example_group",
-  "__groupID_comment__": "组ID 用于注册组 与数据包结构相对应 | Group ID used for registering groups, corresponding to the datapack structure",
+  "FormID": "ssc-patron:example",
+  "groupID": "ssc-patron:example",
   "groupIndex": 5,
-  "__groupIndex_comment__": "组内索引 用于变形逻辑 | Index within group used for transformation logic",
   "phase": "PHASE_SP",
-  "__Phase_comment__": "变形阶段一般和groupIndex一样 Enum:[PHASE_CLEAR, PHASE_0, PHASE_1, PHASE_2, PHASE_3, PHASE_SP] | Transformation phase usually matches groupIndex. Enum:[PHASE_CLEAR, PHASE_0, PHASE_1, PHASE_2, PHASE_3, PHASE_SP]",
   "bodyType": "FERAL",
-  "__BodyType_comment__": "身体类型 Enum:[NORMAL, FERAL] | Body type. Enum:[NORMAL, FERAL]",
-  "isCustomForm": true,
-  "originID": "example_namespace:form_example",
-  "__originID_comment__": "OriginID 与内置的Origin mod联动 与origin_layer的名称相对应 **必须在 data/[NameSpace]/origins 里注册** | OriginID works with the built-in Origin mod, corresponding to the origin layer name. **Must be registered in data/[NameSpace]/origins**",
+  "isCustomForm": false,
+  "originID": "shape-shifter-curse:form_original_before_enable",
   "originLayerID": "origins:origin",
-  "__originLayerID_comment__": "OriginLayerID 与内置的OriginFur mod联动 **极度不推荐修改** | OriginLayerID works with OriginFur **Highly not recommended to modify**",
   "hasSlowFall": false,
   "overrideHandAnim": false,
   "canSneakRush": false,
@@ -22,7 +14,7 @@
   "anim": [
     {
       "state": "ANIM_IDLE",
-      "animID": "example_namespace:form_example_idle"
+      "animID": "shape-shifter-curse:form_feral_common_idle"
     },
     {
       "state": "ANIM_SNEAK_IDLE",
@@ -108,19 +100,24 @@
       "animID": "shape-shifter-curse:form_feral_common_elytra_fly"
     }
   ],
-  "__anim_comment__": "动画列表 State 在 PlayerAnimState 中定义 | Animation list. State is defined in PlayerAnimState",
   "animDefault": {
-    "animID": "example_namespace:form_example_idle",
+    "animID": "shape-shifter-curse:form_feral_common_idle",
     "speed": 1.0,
     "fade": 2
   },
-  "__animDefault_comment__": "默认动画 如果没有可以不用添加此键 | Default animation. If not present, this key can be omitted",
-  "FurModelID": "",
-  "__FurModelID_comment__": "FurModel 为赞助者形态设计 非赞助者形态请修改originID 由于无法动态添加起源 **开发中**",
-  "ExtraPower": [],
-  "__ExtraPower_comment__": "额外能力 为赞助者形态设计 非赞助者形态请修改originID 由于无法动态添加起源 **开发中**",
-  "IsPatronForm": false,
-  "__IsPatronForm_comment__": "是否为赞助者形态 为赞助者形态设计 可以使用特殊物品直接变形 **未实现**",
-  "PlayerUUID": [],
-  "__PlayerUUID_comment__": "仅个别UUID可使用 为赞助者形态设计 空为全体可用 **未实现**"
+  "FurModelID": "ssc-patron:form_example",
+  "ExtraPower": [
+    "shape-shifter-curse:no_render_arm",
+    "shape-shifter-curse:form_feral_cat_sp_scale",
+    "shape-shifter-curse:form_disable_leg_armor",
+    "shape-shifter-curse:form_disable_feet_armor",
+    "origins:velvet_paws",
+    "origins:scare_creepers",
+    "origins:fall_immunity",
+    "shape-shifter-curse:form_ocelot_sound",
+    "shape-shifter-curse:form_ocelot_sound_hurt"
+  ],
+  "IsPatronForm": true,
+  "RequirePatronLevel": 4,
+  "PlayerUUID": []
 }
