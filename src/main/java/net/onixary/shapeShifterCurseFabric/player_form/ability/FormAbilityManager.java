@@ -78,6 +78,7 @@ public class FormAbilityManager {
         clearFormEffects(player, oldForm);
         // 已被弃用，使用json定义的scale power
         //applyScale(player, config.getScale());
+        // applyFormOrigin必须最先执行 因为它同时负责清除上个形态的power数据
         applyFormOrigin(player, newForm);
         applyExtraPower(player, oldForm, newForm);
         try {
@@ -180,13 +181,13 @@ public class FormAbilityManager {
     public static void applyExtraPower(PlayerEntity playerEntity, PlayerFormBase oldForm, PlayerFormBase newForm) {
         PowerHolderComponent powerComponent = PowerHolderComponent.KEY.get(playerEntity);
         // 移除旧形态的额外能力
-        if (oldForm instanceof PlayerFormDynamic pfd) {
-            powerComponent.removeAllPowersFromSource(pfd.FormID);
-        }
+        // if (oldForm instanceof PlayerFormDynamic pfd) {
+        //     powerComponent.removeAllPowersFromSource(pfd.FormID);
+        // }
         // 添加新形态的额外能力
         if (newForm instanceof PlayerFormDynamic pfd) {
             for (Identifier powerID: pfd.ExtraPower) {
-                applyPower(playerEntity, powerID, pfd.FormID);
+                applyPower(playerEntity, powerID, pfd.getFormOriginID());
             }
         }
     }
