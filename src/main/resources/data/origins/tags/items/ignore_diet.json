@@ -1,19 +1,27 @@
 {
   "replace": false,
   "values": [
-    "minecraft:golden_apple",
     "minecraft:enchanted_golden_apple",
+    "minecraft:golden_apple",
     "minecraft:milk_bucket",
-    "shape-shifter-curse:inhibitor",
     "shape-shifter-curse:catalyst",
+    "shape-shifter-curse:creative_inhibitor",
+    "shape-shifter-curse:inhibitor",
     "shape-shifter-curse:powerful_catalyst",
-    "shape-shifter-curse:powerful_inhibitor",
-    "shape-shifter-curse:creative_inhibitor"
+    "shape-shifter-curse:powerful_inhibitor"
   ],
   "optional": [
-    "farmersdelight:milk_bottle",
     "farmersdelight:apple_cider",
+    "farmersdelight:bone_broth",
+    "farmersdelight:cabbage_rolls",
+    "farmersdelight:chocolate_pie",
+    "farmersdelight:glow_berry_custard",
+    "farmersdelight:hot_cocoa",
+    "farmersdelight:honey_cookie",
+    "farmersdelight:milk_bottle",
     "farmersdelight:melon_juice",
-    "farmersdelight:hot_cocoa"
+    "farmersdelight:melon_popsicle",
+    "farmersdelight:egg_sandwich",
+    "farmersdelight:fried_egg"
   ]
 }

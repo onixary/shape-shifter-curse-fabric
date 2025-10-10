@@ -1,24 +1,24 @@
 {
   "replace": false,
   "values": [
-    "minecraft:cod",
-    "minecraft:tropical_fish",
-    "minecraft:pufferfish",
-    "minecraft:salmon",
-    "minecraft:porkchop",
     "minecraft:beef",
     "minecraft:chicken",
+    "minecraft:cod",
     "minecraft:mutton",
-    "minecraft:rabbit"
+    "minecraft:porkchop",
+    "minecraft:pufferfish",
+    "minecraft:rabbit",
+    "minecraft:salmon",
+    "minecraft:tropical_fish"
   ],
   "optional": [
-    "farmersdelight:cod_slice",
-    "farmersdelight:salmon_slice",
     "farmersdelight:bacon",
-    "farmersdelight:minced_beef",
     "farmersdelight:chicken_cuts",
-    "farmersdelight:mutton_chops",
+    "farmersdelight:cod_slice",
     "farmersdelight:dog_food",
-    "farmersdelight:ham"
+    "farmersdelight:ham",
+    "farmersdelight:minced_beef",
+    "farmersdelight:mutton_chops",
+    "farmersdelight:salmon_slice"
   ]
 }

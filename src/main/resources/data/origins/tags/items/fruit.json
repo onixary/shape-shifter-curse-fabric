@@ -3,17 +3,20 @@
   "values": [
     "minecraft:apple",
     "minecraft:chorus_fruit",
+    "minecraft:glow_berries",
     "minecraft:melon_slice",
-    "minecraft:sweet_berries",
-    "minecraft:glow_berries"
+    "minecraft:sweet_berries"
   ],
   "optional": [
     "farmersdelight:apple_pie",
     "farmersdelight:apple_pie_slice",
+    "farmersdelight:fruit_salad",
     "farmersdelight:glow_berry_custard",
     "farmersdelight:melon_popsicle",
     "farmersdelight:sweet_berry_cheesecake",
     "farmersdelight:sweet_berry_cheesecake_slice",
-    "farmersdelight:sweet_berry_cookie"
+    "farmersdelight:sweet_berry_cookie",
+    "farmersdelight:tomato",
+    "farmersdelight:tomato_sauce"
   ]
 }

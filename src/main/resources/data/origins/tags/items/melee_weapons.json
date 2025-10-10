@@ -1,18 +1,18 @@
-﻿{
+{
   "replace": false,
   "values": [
-    "minecraft:wooden_axe",
-    "minecraft:stone_axe",
-    "minecraft:iron_axe",
-    "minecraft:golden_axe",
     "minecraft:diamond_axe",
-    "minecraft:netherite_axe",
-    "minecraft:wooden_sword",
-    "minecraft:stone_sword",
-    "minecraft:iron_sword",
-    "minecraft:golden_sword",
     "minecraft:diamond_sword",
+    "minecraft:golden_axe",
+    "minecraft:golden_sword",
+    "minecraft:iron_axe",
+    "minecraft:iron_sword",
+    "minecraft:netherite_axe",
     "minecraft:netherite_sword",
-    "minecraft:trident"
+    "minecraft:stone_axe",
+    "minecraft:stone_sword",
+    "minecraft:trident",
+    "minecraft:wooden_axe",
+    "minecraft:wooden_sword"
   ]
 }
