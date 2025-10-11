@@ -50,10 +50,10 @@ public class Form_Axolotl3 extends PlayerFormBase {
             case ANIM_SWIM_IDLE:
                 return anim_swimming_idle;
 
-            case ANIM_SNEAK_WALK, ANIM_CRAWL:
+            case ANIM_SNEAK_WALK:
                 return anim_crawling;
 
-            case ANIM_SNEAK_IDLE, ANIM_CRAWL_IDLE:
+            case ANIM_SNEAK_IDLE:
                 return anim_crawling_idle;
 
             case ANIM_SNEAK_ATTACK_ONCE:

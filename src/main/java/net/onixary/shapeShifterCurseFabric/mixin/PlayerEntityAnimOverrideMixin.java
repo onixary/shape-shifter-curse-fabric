@@ -29,7 +29,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
-import net.onixary.shapeShifterCurseFabric.additional_power.CrawlingPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
@@ -292,7 +291,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
                 }
             }
-            if (isCrawling() || (PowerHolderComponent.hasPower(this, CrawlingPower.class) && isSneaking() && !isSwimming())) {
+            if (isCrawling()) {
                 if (isWalking) {
                     currentState = PlayerAnimState.ANIM_CRAWL;
                 } else {
