@@ -220,7 +220,8 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
             {
                 currentState = PlayerAnimState.ANIM_ELYTRA_FLY;
             }
-            else if ((isOnGround() || onGroundInWater) && !isAttackAnim)
+            // 攀爬逻辑在上面CanClimbAnim决定 由于只要在可攀爬的方块上，isClimbing就会为true 并且 isOnGround()为false 所以这里需要额外判断
+            else if ((isOnGround() || onGroundInWater || this.isClimbing()) && !isAttackAnim)
             {
                 if(isSleeping()){
                     currentState = PlayerAnimState.ANIM_SLEEP;
