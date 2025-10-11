@@ -283,6 +283,7 @@
   "effect.shape-shifter-curse.to_chi_sp_effect": ["CHI"],
   "effect.shape-shifter-curse.to_phi_sp_effect": ["PHI"],
 
+  "power.shape-shifter-curse.carnivore.name":["Carnivore"],
   "power.shape-shifter-curse.form_allay_sp_amethyst_shard_only.name": ["amethyst consumer"],
   "power.shape-shifter-curse.form_ocelot_2_raw_meat_only.name": ["raw meat consumer"],
   "power.origins.vegetarian.name": ["vegetarian"],
