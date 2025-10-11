@@ -91,6 +91,9 @@ public class FormAbilityManager {
         // 清空Status
         cancelEffect(player);
 
+        // 重置gravity，修复allay在悬浮时触发变形会卡在空中的问题
+        player.setNoGravity(false);
+
         component.setCurrentForm(newForm);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
         // 存储
