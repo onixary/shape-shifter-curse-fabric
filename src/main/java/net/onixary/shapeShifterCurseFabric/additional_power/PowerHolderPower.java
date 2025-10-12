@@ -18,7 +18,10 @@ public class PowerHolderPower extends Power {
     public Power TargetPower = null;
 
     public PowerHolderPower(PowerType<?> type, LivingEntity entity, SerializableData.Instance data) {
-        // TODO 注入 PowerHolderComponent.getPowers 为返回值添加 PowerHolderPower.TargetPower
+        /* TODO 注入 PowerHolderComponent里的 withPower getPowers hasPower 带class参数的 为返回值添加 PowerHolderPower.TargetPower
+         * 目前Mod仅使用 getPowers hasPower
+         * 或许也可以在applyForm里动态创建Power 应该也会同步 我先研究一下
+         */
         super(type, entity);
         if (data.get("power_data_index") == null) {
             ShapeShifterCurseFabric.LOGGER.warn("Power Data Index is null!");

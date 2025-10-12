@@ -175,7 +175,6 @@ public class FormAbilityManager {
         if (powerType != null) {
             PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
             powerHolder.addPower(powerType, powerSource);
-            powerHolder.addPower(powerType, powerSource);
         }
     }
 
