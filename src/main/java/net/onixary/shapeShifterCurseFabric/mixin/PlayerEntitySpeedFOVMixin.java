@@ -3,9 +3,14 @@ package net.onixary.shapeShifterCurseFabric.mixin;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributes;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Environment(EnvType.CLIENT)
@@ -17,22 +22,38 @@ public abstract class PlayerEntitySpeedFOVMixin {
      * 这可以精确地控制因速度变化引起的FOV缩放效果，而不会影响其他FOV修改（如望远镜）。
      *
      * @param cir 回调信息，用于修改返回值。
-     */
-    @Inject(method = "getFovMultiplier", at = @At("RETURN"), cancellable = true)
-    private void shape_shifter_curse$limitFovMultiplier(CallbackInfoReturnable<Float> cir) {
-        float originalMultiplier = cir.getReturnValue();
+     * @Inject(method = "getFovMultiplier", at = @At("RETURN"), cancellable = true)
+     * private void shape_shifter_curse$limitFovMultiplier(CallbackInfoReturnable<Float> cir) {
+     *     float originalMultiplier = cir.getReturnValue();
+     *     float minMultiplier = 0.95f;
+     *     float maxMultiplier = 1.25f;
+     *     float clampedMultiplier = originalMultiplier;
+     *     if (clampedMultiplier > maxMultiplier) {
+     *         clampedMultiplier = maxMultiplier;
+     *     }
+     *     if (clampedMultiplier < minMultiplier) {
+     *         clampedMultiplier = minMultiplier;
+     *     }
+     *     cir.setReturnValue(clampedMultiplier);
+     * }
+    */
 
-        float minMultiplier = 0.95f;
-        float maxMultiplier = 1.25f;
+    @Unique
+    private float shape_shifter_curse$originalWalkSpeed;
 
-        float clampedMultiplier = originalMultiplier;
-        if (clampedMultiplier > maxMultiplier) {
-            clampedMultiplier = maxMultiplier;
-        }
-        if (clampedMultiplier < minMultiplier) {
-            clampedMultiplier = minMultiplier;
-        }
+    // 旧的会破坏望远镜等FOV修改 尝试用新的方法 为了减少冲突不用重定向
+    // f *= ((float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED) / this.getAbilities().getWalkSpeed() + 1.0F) / 2.0F;
+    @Inject(method = "getFovMultiplier", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerAbilities;getWalkSpeed()F"))
+    private void shape_shifter_curse$modifyWalkSpeed(CallbackInfoReturnable<Float> cir) {
+        shape_shifter_curse$originalWalkSpeed = ((AbstractClientPlayerEntity) (Object) this).getAbilities().getWalkSpeed();
+        float nowSpeed = (float)(((AbstractClientPlayerEntity) (Object) this).getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
+        // 0.45(0.95-0.5) <= nowSpeed / targetWalkSpeed <= 0.75(1.25-0.5)
+        float targetWalkSpeed = Math.min(0.75f * nowSpeed, Math.max(0.45f * nowSpeed, shape_shifter_curse$originalWalkSpeed));
+        ((AbstractClientPlayerEntity) (Object) this).getAbilities().setWalkSpeed(targetWalkSpeed);
+    }
 
-        cir.setReturnValue(clampedMultiplier);
+    @Inject(method = "getFovMultiplier", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerAbilities;getWalkSpeed()F", shift = At.Shift.AFTER))
+    private void shape_shifter_curse$restoreWalkSpeed(CallbackInfoReturnable<Float> cir) {
+        ((AbstractClientPlayerEntity) (Object) this).getAbilities().setWalkSpeed(shape_shifter_curse$originalWalkSpeed);
     }
 }

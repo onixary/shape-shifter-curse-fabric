@@ -101,6 +101,11 @@ public class LevitatePower extends Power implements Active {
         return this.isLevitate && super.isActive();
     }
 
+    @Override
+    public void onRemoved() {
+        entity.setNoGravity(false);
+    }
+
     // 工厂方法
     public static PowerFactory<?> getFactory() {
         return new PowerFactory<>(
