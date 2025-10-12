@@ -75,12 +75,6 @@ public class FormAbilityManager {
         PlayerFormComponent component = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
         PlayerFormBase oldForm = component.getCurrentForm();
 
-        // 提前设置形态 以便读取PowerData
-        component.setCurrentForm(newForm);
-        RegPlayerFormComponent.PLAYER_FORM.sync(player);
-        // 存储
-        FormAbilityManager.saveForm(player);
-
         clearFormEffects(player, oldForm);
         // 已被弃用，使用json定义的scale power
         //applyScale(player, config.getScale());
@@ -97,6 +91,11 @@ public class FormAbilityManager {
         //applyPower(player, config.getPowerId());
         // 清空Status
         cancelEffect(player);
+
+        component.setCurrentForm(newForm);
+        RegPlayerFormComponent.PLAYER_FORM.sync(player);
+        // 存储
+        FormAbilityManager.saveForm(player);
 
         // 添加网络同步：通知客户端形态已变化
         if (!player.getWorld().isClient() && player instanceof ServerPlayerEntity serverPlayer) {
@@ -171,10 +170,39 @@ public class FormAbilityManager {
     }
 
     private static void applyPower(PlayerEntity player, Identifier powerId, Identifier powerSource) {
-        PowerType<?> powerType = PowerTypeRegistry.get(powerId);
-        if (powerType != null) {
-            PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
-            powerHolder.addPower(powerType, powerSource);
+        if (PowerTypeRegistry.contains(powerId)) {
+            PowerType<?> powerType = PowerTypeRegistry.get(powerId);
+            if (powerType != null) {
+                PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
+                powerHolder.addPower(powerType, powerSource);
+            }
+        }
+        else {
+            // 每0.1秒最多20次尝试应用能力 (ExtraPower中注册太慢)
+            new Thread(() -> {
+                try {
+                    boolean FoundPower = false;
+                    for (int i = 0; i < 20; i++) {
+                        Thread.sleep(100);
+                        if (PowerTypeRegistry.contains(powerId)) {
+                            FoundPower = true;
+                            break;
+                        }
+                    }
+                    if (FoundPower) {
+                        PowerType<?> powerType = PowerTypeRegistry.get(powerId);
+                        if (powerType != null) {
+                            PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
+                            powerHolder.addPower(powerType, powerSource);
+                        }
+                    }
+                    else {
+                        ShapeShifterCurseFabric.LOGGER.warn("Failed to apply power " + powerId.toString() + " for player " + player.getName() + " after 2 seconds");
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
         }
     }
 
@@ -186,7 +214,7 @@ public class FormAbilityManager {
         // }
         // 添加新形态的额外能力
         if (newForm instanceof PlayerFormDynamic pfd) {
-            for (Identifier powerID: pfd.ExtraPower) {
+            for (Identifier powerID: pfd.getExtraPower()) {
                 applyPower(playerEntity, powerID, pfd.getFormOriginID());
             }
         }

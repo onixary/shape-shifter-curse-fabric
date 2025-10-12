@@ -117,24 +117,20 @@
   "__animDefault_comment__": "默认动画 如果没有可以不用添加此键 | Default animation. If not present, this key can be omitted",
   "FurModelID": "",
   "__FurModelID_comment__": "FurModel 为赞助者形态设计 非赞助者形态请修改originID 由于无法动态添加起源",
-  "ExtraPower": [],
+  "ExtraPower": [
+    {
+      "type": "origins:attribute",
+      "modifier": {
+        "name": "Nine lives health reduction",
+        "attribute": "minecraft:generic.max_health",
+        "value": -10.0,
+        "operation": "addition"
+      }
+    }
+  ],
   "__ExtraPower_comment__": "额外能力 为赞助者形态设计 非赞助者形态请修改originID 由于无法动态添加起源",
   "IsPatronForm": false,
   "__IsPatronForm_comment__": "是否为赞助者形态 为赞助者形态设计 可以使用特殊物品直接变形",
   "PlayerUUID": [],
-  "__PlayerUUID_comment__": "仅个别UUID可使用 为赞助者形态设计 空为全体可用",
-  "PowerData": [
-    {
-      "type": "origins:attribute",
-      "data": {
-        "modifier": {
-          "name": "add hp",
-          "attribute": "minecraft:generic.max_health",
-          "value": 10.0,
-          "operation": "addition"
-        }
-      }
-    }
-  ],
-  "__PowerData_comment__": "能力数据 用于PowerHolderPower 不推荐用于非赞助者形态 **开发中**"
+  "__PlayerUUID_comment__": "仅个别UUID可使用 为赞助者形态设计 空为全体可用"
 }

@@ -158,18 +158,16 @@ public class ModPacketsS2CServer {
         HashMap<Identifier, PlayerFormDynamic> forms = RegPlayerForms.DumpDynamicPlayerForms();
         sendRemoveDynamicFormExcept(player);
         int NowPacket = 0;
-        int RemainPacket = forms.size();
         JsonObject jsonForms = new JsonObject();
         for (Identifier formId : forms.keySet()) {
             jsonForms.add(formId.toString(), forms.get(formId).save());
             NowPacket ++;
-            RemainPacket --;
             if (NowPacket % MaxFormPerPacket == 0) {
                 sendUpdateDynamicForm(player, jsonForms);
                 jsonForms = new JsonObject();
             }
         }
-        if (RemainPacket > 0) {
+        if (!jsonForms.isEmpty()) {
             sendUpdateDynamicForm(player, jsonForms);
         }
     }

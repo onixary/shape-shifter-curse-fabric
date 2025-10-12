@@ -130,7 +130,7 @@ public class PatronUtils {
                 outputStream.write(chunk, 0, bytesRead);
             }
         } catch (IOException e) {
-            ShapeShifterCurseFabric.LOGGER.error("Failed to download file from {}", urlString, e);
+            ShapeShifterCurseFabric.LOGGER.error("Failed to download file from {}", urlString);
             return null;
         }
         return outputStream.toByteArray();
@@ -143,7 +143,7 @@ public class PatronUtils {
             String versionStr = reader.readLine();
             return Integer.parseInt(versionStr);
         } catch (IOException e) {
-            ShapeShifterCurseFabric.LOGGER.error("Failed to get version from {}", urlString, e);
+            ShapeShifterCurseFabric.LOGGER.error("Failed to get version from {}", urlString);
             return -1;
         }
     }
@@ -158,7 +158,7 @@ public class PatronUtils {
             String versionStr = reader.readLine();
             return Integer.parseInt(versionStr);
         } catch (IOException e) {
-            ShapeShifterCurseFabric.LOGGER.error("Failed to get version from {}", LocalPath, e);
+            ShapeShifterCurseFabric.LOGGER.error("Failed to get version from {}", LocalPath);
             return -1;
         }
     }

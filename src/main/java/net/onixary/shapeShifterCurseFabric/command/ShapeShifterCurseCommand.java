@@ -131,6 +131,7 @@ public class ShapeShifterCurseCommand {
         }
         catch (Exception e){
             // 调试时在此打断点
+            ShapeShifterCurseFabric.LOGGER.error("Exception when set form", e);
             throw e;
         }
 
@@ -167,6 +168,7 @@ public class ShapeShifterCurseCommand {
         }
         catch (Exception e){
             // 调试时在此打断点
+            ShapeShifterCurseFabric.LOGGER.error("Exception when set custom form", e);
             throw e;
         }
 
