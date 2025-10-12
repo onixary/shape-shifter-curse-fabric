@@ -35,6 +35,7 @@ public class PlayerFormDynamic extends PlayerFormBase{
     public boolean IsPatronForm = false;  // 可以使用特殊物品直接变形
     public int RequirePatronLevel = 0;  // 需要的赞助等级
     public List<UUID> PlayerUUIDs = new ArrayList<UUID>();
+    public List<JsonObject> PowerData = new ArrayList<>();
 
     private final HashMap<PlayerAnimState, AnimationHolderData> animMap_Builder = new HashMap<>();
     public static final HashMap<Identifier, HashMap<PlayerAnimState, AnimationHolder>> animMap = new HashMap<>();
@@ -202,6 +203,14 @@ public class PlayerFormDynamic extends PlayerFormBase{
                 }
             }
             this.RequirePatronLevel = _Gson_GetInt(formData, "RequirePatronLevel", 0);
+            this.PowerData.clear();
+            if (formData.has("PowerData")) {
+                for (JsonElement powerData : formData.get("PowerData").getAsJsonArray()) {
+                    if (powerData.isJsonObject()) {
+                        this.PowerData.add(powerData.getAsJsonObject());
+                    }
+                }
+            }
         }
         catch(Exception e) {
             ShapeShifterCurseFabric.LOGGER.error("Error while loading player form: {}", e.getMessage());
@@ -255,6 +264,13 @@ public class PlayerFormDynamic extends PlayerFormBase{
             data.add("PlayerUUID", uuids);
         }
         data.addProperty("RequirePatronLevel", this.RequirePatronLevel);
+        if (!PowerData.isEmpty()) {
+            JsonArray powerDataArray = new JsonArray();
+            for (JsonObject powerData : PowerData) {
+                powerDataArray.add(powerData);
+            }
+            data.add("PowerData", powerDataArray);
+        }
         return data;
     }
 

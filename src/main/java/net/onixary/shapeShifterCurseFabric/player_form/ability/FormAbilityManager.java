@@ -75,6 +75,12 @@ public class FormAbilityManager {
         PlayerFormComponent component = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
         PlayerFormBase oldForm = component.getCurrentForm();
 
+        // 提前设置形态 以便读取PowerData
+        component.setCurrentForm(newForm);
+        RegPlayerFormComponent.PLAYER_FORM.sync(player);
+        // 存储
+        FormAbilityManager.saveForm(player);
+
         clearFormEffects(player, oldForm);
         // 已被弃用，使用json定义的scale power
         //applyScale(player, config.getScale());
@@ -91,11 +97,6 @@ public class FormAbilityManager {
         //applyPower(player, config.getPowerId());
         // 清空Status
         cancelEffect(player);
-
-        component.setCurrentForm(newForm);
-        RegPlayerFormComponent.PLAYER_FORM.sync(player);
-        // 存储
-        FormAbilityManager.saveForm(player);
 
         // 添加网络同步：通知客户端形态已变化
         if (!player.getWorld().isClient() && player instanceof ServerPlayerEntity serverPlayer) {
