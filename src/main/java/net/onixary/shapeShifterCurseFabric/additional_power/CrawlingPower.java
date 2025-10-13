@@ -30,7 +30,7 @@ public class CrawlingPower extends Power {
     @Override
     public void tick() {
         if (entity instanceof ServerPlayerEntity player) {
-            if(player.isSneaking() && this.isActive()) {
+            if(this.isActive()) {
                 ScaleData scaleDataEyeHeight = ScaleTypes.EYE_HEIGHT.getScaleData(player);
                 ScaleData scaleDataHitboxHeight = ScaleTypes.HITBOX_HEIGHT.getScaleData(player);
                 scaleDataEyeHeight.setScale(CRAWL_EYE_HEIGHT_SCALE);
