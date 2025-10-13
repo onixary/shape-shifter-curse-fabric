@@ -92,9 +92,6 @@ public class FormAbilityManager {
         // 清空Status
         cancelEffect(player);
 
-        // 重置gravity，修复allay在悬浮时触发变形会卡在空中的问题
-        player.setNoGravity(false);
-
         component.setCurrentForm(newForm);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
         // 存储
@@ -173,11 +170,39 @@ public class FormAbilityManager {
     }
 
     private static void applyPower(PlayerEntity player, Identifier powerId, Identifier powerSource) {
-        PowerType<?> powerType = PowerTypeRegistry.get(powerId);
-        if (powerType != null) {
-            PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
-            powerHolder.addPower(powerType, powerSource);
-            powerHolder.addPower(powerType, powerSource);
+        if (PowerTypeRegistry.contains(powerId)) {
+            PowerType<?> powerType = PowerTypeRegistry.get(powerId);
+            if (powerType != null) {
+                PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
+                powerHolder.addPower(powerType, powerSource);
+            }
+        }
+        else {
+            // 每0.1秒最多20次尝试应用能力 (ExtraPower中注册太慢)
+            new Thread(() -> {
+                try {
+                    boolean FoundPower = false;
+                    for (int i = 0; i < 20; i++) {
+                        Thread.sleep(100);
+                        if (PowerTypeRegistry.contains(powerId)) {
+                            FoundPower = true;
+                            break;
+                        }
+                    }
+                    if (FoundPower) {
+                        PowerType<?> powerType = PowerTypeRegistry.get(powerId);
+                        if (powerType != null) {
+                            PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
+                            powerHolder.addPower(powerType, powerSource);
+                        }
+                    }
+                    else {
+                        ShapeShifterCurseFabric.LOGGER.warn("Failed to apply power " + powerId.toString() + " for player " + player.getName() + " after 2 seconds");
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
         }
     }
 
@@ -189,7 +214,7 @@ public class FormAbilityManager {
         // }
         // 添加新形态的额外能力
         if (newForm instanceof PlayerFormDynamic pfd) {
-            for (Identifier powerID: pfd.ExtraPower) {
+            for (Identifier powerID: pfd.getExtraPower()) {
                 applyPower(playerEntity, powerID, pfd.getFormOriginID());
             }
         }

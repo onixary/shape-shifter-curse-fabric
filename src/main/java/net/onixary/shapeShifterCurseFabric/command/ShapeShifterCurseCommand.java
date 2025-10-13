@@ -15,6 +15,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
@@ -66,6 +67,14 @@ public class ShapeShifterCurseCommand {
                         )
                         .then(literal("jump_to_next_cursed_moon").requires(cs -> cs.hasPermissionLevel(2))
                                 .executes(ShapeShifterCurseCommand::jumpToNextCursedMoon)
+                        )
+                        .then(literal("world_time").requires(cs -> cs.hasPermissionLevel(2))
+                                .then(literal("set").then(argument("time", IntegerArgumentType.integer())
+                                        .executes(ShapeShifterCurseCommand::setWorldTime))
+                                )
+                                .then(literal("add").then(argument("time", IntegerArgumentType.integer())
+                                        .executes(ShapeShifterCurseCommand::addWorldTime))
+                                )
                         )
                         .then(literal("adjust_feral_item_loc").requires(cs -> cs.hasPermissionLevel(2))
                                 .then(argument("rot_center", Vec3ArgumentType.vec3())
@@ -122,6 +131,7 @@ public class ShapeShifterCurseCommand {
         }
         catch (Exception e){
             // 调试时在此打断点
+            ShapeShifterCurseFabric.LOGGER.error("Exception when set form", e);
             throw e;
         }
 
@@ -158,6 +168,7 @@ public class ShapeShifterCurseCommand {
         }
         catch (Exception e){
             // 调试时在此打断点
+            ShapeShifterCurseFabric.LOGGER.error("Exception when set custom form", e);
             throw e;
         }
 
@@ -340,5 +351,20 @@ public class ShapeShifterCurseCommand {
             }
         }
         return availableForms;
+    }
+
+    private static int setWorldTime(CommandContext<ServerCommandSource> commandContext) {
+        ServerWorld world = commandContext.getSource().getWorld();
+        world.setTimeOfDay(IntegerArgumentType.getInteger(commandContext, "time"));
+        commandContext.getSource().sendFeedback(() -> {return Text.literal("World time set to " + commandContext.getSource().getWorld().getTimeOfDay());}, false);
+        return 1;
+    }
+
+    private static int addWorldTime(CommandContext<ServerCommandSource> commandContext) {
+        ServerWorld world = commandContext.getSource().getWorld();
+        long TargetTime = world.getTimeOfDay() + IntegerArgumentType.getInteger(commandContext, "time");
+        world.setTimeOfDay(TargetTime);
+        commandContext.getSource().sendFeedback(() -> {return Text.literal("World time set to " + TargetTime);}, false);
+        return 1;
     }
 }

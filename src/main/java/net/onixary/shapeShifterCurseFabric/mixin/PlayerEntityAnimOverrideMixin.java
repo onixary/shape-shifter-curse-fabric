@@ -29,7 +29,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
-import net.onixary.shapeShifterCurseFabric.additional_power.CrawlingPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
@@ -221,7 +220,8 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
             {
                 currentState = PlayerAnimState.ANIM_ELYTRA_FLY;
             }
-            else if ((isOnGround() || onGroundInWater) && !isAttackAnim)
+            // 攀爬逻辑在上面CanClimbAnim决定 由于只要在可攀爬的方块上，isClimbing就会为true 并且 isOnGround()为false 所以这里需要额外判断
+            else if ((isOnGround() || onGroundInWater || this.isClimbing()) && !isAttackAnim)
             {
                 if(isSleeping()){
                     currentState = PlayerAnimState.ANIM_SLEEP;
@@ -292,7 +292,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
                 }
             }
-            if (isCrawling() || (PowerHolderComponent.hasPower(this, CrawlingPower.class) && isSneaking() && !isSwimming())) {
+            if (isCrawling()) {
                 if (isWalking) {
                     currentState = PlayerAnimState.ANIM_CRAWL;
                 } else {
