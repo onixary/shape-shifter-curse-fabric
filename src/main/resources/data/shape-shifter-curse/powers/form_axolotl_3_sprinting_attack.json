@@ -5,8 +5,7 @@
         "actions": [
             {
                 "type": "origins:add_velocity",
-                "z": 4.0,
-                "y": 8.0
+                "z": 4.0
             },
             {
                 "type": "origins:target_action",
