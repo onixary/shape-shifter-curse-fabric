@@ -345,7 +345,7 @@ public class CursedMoon {
     public static void applyEndMoonEffect(ServerPlayerEntity player){
         // 结束Cursed Moon时的逻辑
         PlayerFormComponent formComp = RegPlayerFormComponent.PLAYER_FORM.get(player);
-        if(!formComp.isEndMoonEffectApplied()){
+        if(!formComp.isEndMoonEffectApplied() && formComp.isMoonEffectApplied()){
             boolean wasByCursedMoon = RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon();
             ShapeShifterCurseFabric.LOGGER.info("is player form by cursed moon? : " + wasByCursedMoon);
             if(FormAbilityManager.getForm(player).equals(RegPlayerForms.ORIGINAL_BEFORE_ENABLE)) {

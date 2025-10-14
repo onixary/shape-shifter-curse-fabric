@@ -8,3 +8,4 @@ accessible field net/minecraft/client/font/TextRenderer handler Lnet/minecraft/c
 accessible field net/minecraft/client/gui/widget/MultilineTextWidget cacheKeyToText Lnet/minecraft/util/CachedMapper;
 accessible field net/minecraft/client/gui/widget/MultilineTextWidget centered Z
 accessible method net/minecraft/client/gui/widget/MultilineTextWidget getCacheKey ()Lnet/minecraft/client/gui/widget/MultilineTextWidget$CacheKey;
+accessible method net/minecraft/entity/Entity wouldPoseNotCollide (Lnet/minecraft/entity/EntityPose;)Z

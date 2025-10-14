@@ -31,6 +31,10 @@ public class CommonConfig implements ConfigData {
     @Comment("Curse Moon Phase (0 ~ 7). Default: [1, 5]")
     public int[] curseMoonPhase = {1, 5};
 
+    @ConfigEntry.Category("General")
+    @Comment("Allow players to sleep during Cursed Moon. Default: false")
+    public boolean allowSleepInCursedMoon = false;
+
     // 开发用
     // @ConfigEntry.Category("InDevelopment")
 }
