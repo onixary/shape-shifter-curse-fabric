@@ -76,7 +76,7 @@
   },
   "breaks": {
     "origins": ">0.0.0",
-    "optifabric": "<=1.11.18",
+    "optifabric": "*",
     "identity": "<1.14.2-beta"
   },
   "recommends": {
