@@ -144,6 +144,11 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
 
             // 重置所有玩家的效果状态
             for (ServerPlayerEntity player : world.getPlayers()) {
+                PlayerFormComponent formComp = RegPlayerFormComponent.PLAYER_FORM.get(player);
+                if (formComp.isMoonEffectApplied() && !formComp.isEndMoonEffectApplied()) {
+                    CursedMoon.applyEndMoonEffect(player);
+                    CursedMoon.midday_message_sent = false;
+                }
                 CursedMoon.resetMoonEffect(player);
             }
         }
@@ -200,18 +205,14 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
             }
 
             if(CursedMoon.isCursedMoon(world)){ // 使用带参数的版本
-                if(player.isSleeping()){
+                if(player.isSleeping() && !ShapeShifterCurseFabric.commonConfig.allowSleepInCursedMoon){
                     player.wakeUp();
                 }
                 shape_shifter_curse$OnCursedMoon(player,timeOfDay);
             }
             else{
                 // CursedMoon结束时的处理
-                PlayerFormComponent formComp = RegPlayerFormComponent.PLAYER_FORM.get(player);
-                if (formComp.isMoonEffectApplied() || formComp.isEndMoonEffectApplied()) {
-                    // 重置该玩家的状态
-                    CursedMoon.resetMoonEffect(player);
-                }
+                shape_shifter_curse$OnNoCursedMoon(player,timeOfDay);
             }
         }
     }
@@ -222,7 +223,26 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
     }
 
     @Unique
-    public void shape_shifter_curse$OnCursedMoon(ServerPlayerEntity player,long time) {
+    public void shape_shifter_curse$OnNoCursedMoon(ServerPlayerEntity player, long time) {
+//        if (time % 20 != 0) {
+//            return;
+//        }
+        PlayerFormComponent formComp = RegPlayerFormComponent.PLAYER_FORM.get(player);
+        if (formComp.isMoonEffectApplied() || formComp.isEndMoonEffectApplied()) {
+            // 重置该玩家的状态
+            CursedMoon.resetMoonEffect(player);
+        }
+        else if (formComp.isMoonEffectApplied() && !formComp.isEndMoonEffectApplied()) {
+            CursedMoon.applyEndMoonEffect(player);
+            CursedMoon.midday_message_sent = false;
+        }
+    }
+
+    @Unique
+    public void shape_shifter_curse$OnCursedMoon(ServerPlayerEntity player, long time) {
+//        if (time % 20 != 0) {
+//            return;
+//        }
         if(time >= 6000L && time < 12500L && !CursedMoon.midday_message_sent){
             CursedMoon.midday_message_sent = true;
 
@@ -240,7 +260,7 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
             CursedMoon.applyMoonEffect(player);
             CursedMoon.midday_message_sent = false;
         }
-        else if(time >= 23000L){
+        else if(time >= 23000L || time < 6000L){
             CursedMoon.applyEndMoonEffect(player);
             CursedMoon.midday_message_sent = false;
         }

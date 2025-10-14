@@ -1,0 +1,6 @@
+{
+    "type": "shape-shifter-curse:keep_sneaking",
+    "condition": {
+        "type": "shape-shifter-curse:must_crawling"
+    }
+}
