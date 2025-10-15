@@ -34,7 +34,8 @@
     "ServerPlayerEntityForceInputMixin",
     "PlayerEntitySprintSwimmingMixin",
     "projectile.PotionEntityMixin",
-    "LoginMixin"
+    "LoginMixin",
+    "SneakEdgeCheckMixin"
   ],
   "client": [
     "InventoryScreenMixin",

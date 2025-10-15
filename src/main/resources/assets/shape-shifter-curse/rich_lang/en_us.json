@@ -431,7 +431,7 @@
   "codex.form.shape-shifter-curse.ocelot_3.pros": [
     "Your body has fully adapted to quadrupedal structure, significantly enhancing your leaping ability. Additionally, maintaining Hunting Stance has been made easier, it no longer accelerates your hunger consumption\n",
     "Your strengthened claws allow climbing on nearly any surface\n",
-    "Sprinting is replaced with stealth - while sneaking, you can dash forward at tremendous speed and pounce across great distances\n",
+    "Sprinting is replaced with stealth - while sneaking, you can dash forward at tremendous speed and pounce across great distances. While dashing, you can automatically step over one-block-high blocks.\nIf you collide with enemies during a mid-air pounce, you can deal pounce damage to them.\n",
     "Your keen senses let you instinctively dodge incoming projectiles\n",
     "Night vision grants perfect sight in darkness\n",
     "You can deal heavy sweeping damage with your bare-forepaws\n",

@@ -1,3 +1,4 @@
+// ModifyStepHeightPower.java
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
 import io.github.apace100.apoli.data.ApoliDataTypes;
@@ -17,11 +18,13 @@ public class ModifyStepHeightPower extends Power {
 
     private final float stepHeightScale;
     private final ConditionFactory<LivingEntity>.Instance condition;
+    private final boolean affectSneak;
 
-    public ModifyStepHeightPower(PowerType<?> type, LivingEntity entity, float stepHeightScale, ConditionFactory<LivingEntity>.Instance condition) {
+    public ModifyStepHeightPower(PowerType<?> type, LivingEntity entity, float stepHeightScale, ConditionFactory<LivingEntity>.Instance condition, boolean affectSneak) {
         super(type, entity);
         this.stepHeightScale = stepHeightScale;
         this.condition = condition;
+        this.affectSneak = affectSneak;
         this.setTicking(true);
     }
 
@@ -45,19 +48,24 @@ public class ModifyStepHeightPower extends Power {
         }
     }
 
+    public boolean shouldAffectSneak() {
+        return affectSneak;
+    }
+
     public static PowerFactory createFactory() {
         return new PowerFactory<>(
                 ShapeShifterCurseFabric.identifier("modify_step_height"),
                 new SerializableData()
                         .add("step_height_scale", SerializableDataTypes.FLOAT)
-                        .add("condition", ApoliDataTypes.ENTITY_CONDITION, null),
+                        .add("condition", ApoliDataTypes.ENTITY_CONDITION, null)
+                        .add("affect_sneak", SerializableDataTypes.BOOLEAN, true),
                 data -> (powerType, livingEntity) -> new ModifyStepHeightPower(
                         powerType,
                         livingEntity,
                         data.getFloat("step_height_scale"),
-                        data.get("condition")
+                        data.get("condition"),
+                        data.getBoolean("affect_sneak")
                 )
         ).allowCondition();
     }
 }
-
