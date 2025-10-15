@@ -271,7 +271,7 @@
     "?"
   ],
   "commands.shape-shifter-curse.form_not_found": ["未找到指定的形态！"],
-  "power.shape-shifter-curse.carnivore.name":["肉食者"],
+  "power.shape-shifter-curse.form_carnivore.name":["肉食者"],
   "power.shape-shifter-curse.form_allay_sp_amethyst_shard_only.name": ["水晶食性"],
   "power.shape-shifter-curse.form_ocelot_2_raw_meat_only.name": ["生肉食性"],
   "power.shape-shifter-curse.form_familiar_fox_3_no_food.name": ["使魔体质"],
