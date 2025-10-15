@@ -30,10 +30,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalEntityActions;
-import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalEntityConditions;
-import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalPowers;
-import net.onixary.shapeShifterCurseFabric.additional_power.BatAttachEventHandler;
+import net.onixary.shapeShifterCurseFabric.additional_power.*;
 import net.onixary.shapeShifterCurseFabric.advancement.*;
 import net.onixary.shapeShifterCurseFabric.command.CustomFormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.FormArgumentType;
@@ -177,6 +174,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         registerAnimations();
 
         AdditionalEntityConditions.register();
+        AdditionalItemCondition.register();
         AdditionalPowers.register();
         AdditionalEntityActions.register();
 

@@ -16,10 +16,7 @@
                 "inverted": true
             },
             {
-              "type": "origins:ingredient",
-              "ingredient": {
-                "item": "shape-shifter-curse:morphscale_vest"
-              },
+              "type": "shape-shifter-curse:is_morph_scale_item",
               "inverted": true
             }
         ]
