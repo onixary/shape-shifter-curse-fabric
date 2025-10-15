@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "shape-shifter-curse:morphscale_headring",
+    "shape-shifter-curse:morphscale_vest",
+    "shape-shifter-curse:morphscale_cuish",
+    "shape-shifter-curse:morphscale_anklet"
+  ],
+  "optional": [
+  ]
+}

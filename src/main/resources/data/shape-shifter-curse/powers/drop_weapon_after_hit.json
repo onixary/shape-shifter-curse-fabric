@@ -3,19 +3,28 @@
     "entity_action": {
         "type": "origins:drop_inventory",
         "item_condition": {
-            "type": "origins:or",
+            "type": "origins:and",
             "conditions": [
                 {
-                    "type": "origins:ingredient",
-                    "ingredient": {
-                        "tag": "origins:melee_weapons"
-                    }
+                    "type": "origins:or",
+                    "conditions": [
+                        {
+                            "type": "origins:ingredient",
+                            "ingredient": {
+                                "tag": "origins:melee_weapons"
+                            }
+                        },
+                        {
+                            "type": "origins:ingredient",
+                            "ingredient": {
+                                "tag": "origins:tools"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "type": "origins:ingredient",
-                    "ingredient": {
-                        "tag": "origins:tools"
-                    }
+                    "type": "shape-shifter-curse:is_morph_scale_item",
+                    "inverted": true
                 }
             ]
         },
