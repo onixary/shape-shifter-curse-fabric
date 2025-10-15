@@ -9,10 +9,7 @@
           "compare_to": -1
         },
         {
-          "type": "origins:ingredient",
-          "ingredient": {
-            "item": "shape-shifter-curse:morphscale_headring"
-          },
+          "type": "shape-shifter-curse:is_morph_scale_item",
           "inverted": true
         }
       ]
