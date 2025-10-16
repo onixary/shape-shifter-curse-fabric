@@ -10,7 +10,7 @@ import java.util.OptionalInt;
 public class PlayerSkinComponent implements Component, AutoSyncedComponent {
     private boolean keepOriginalSkin = false;
     private boolean enableFormColor = false;
-    private FormTextureUtils.ColorSetting formColor = new FormTextureUtils.ColorSetting(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFF000000, false, false, false);
+    private FormTextureUtils.ColorSetting formColor = new FormTextureUtils.ColorSetting(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFF000000, 0xFF000000, false, false, false);
 
     public boolean shouldKeepOriginalSkin() {
         return keepOriginalSkin;
@@ -36,8 +36,8 @@ public class PlayerSkinComponent implements Component, AutoSyncedComponent {
         this.formColor = formColor;
     }
 
-    public void setFormColor(int primaryColorRGBA, int accentColor1RGBA, int accentColor2RGBA, int eyeColor, boolean primaryGreyReverse, boolean accent1GreyReverse, boolean accent2GreyReverse) {
-        this.formColor = new FormTextureUtils.ColorSetting(FormTextureUtils.RGBA2ABGR(primaryColorRGBA), FormTextureUtils.RGBA2ABGR(accentColor1RGBA), FormTextureUtils.RGBA2ABGR(accentColor2RGBA), FormTextureUtils.RGBA2ABGR(eyeColor), primaryGreyReverse, accent1GreyReverse, accent2GreyReverse);
+    public void setFormColor(int primaryColorRGBA, int accentColor1RGBA, int accentColor2RGBA, int eyeColorA, int eyeColorB, boolean primaryGreyReverse, boolean accent1GreyReverse, boolean accent2GreyReverse) {
+        this.formColor = new FormTextureUtils.ColorSetting(FormTextureUtils.RGBA2ABGR(primaryColorRGBA), FormTextureUtils.RGBA2ABGR(accentColor1RGBA), FormTextureUtils.RGBA2ABGR(accentColor2RGBA), FormTextureUtils.RGBA2ABGR(eyeColorA), FormTextureUtils.RGBA2ABGR(eyeColorB), primaryGreyReverse, accent1GreyReverse, accent2GreyReverse);
     }
 
     public OptionalInt RGBA_Str2RGBA(String rgbaStr) {
@@ -54,14 +54,15 @@ public class PlayerSkinComponent implements Component, AutoSyncedComponent {
         }
     }
 
-    public boolean setFormColor(String primaryColorRGBAHex, String accentColor1RGBAHex, String accentColor2RGBAHex, String eyeColorHex, boolean primaryGreyReverse, boolean accent1GreyReverse, boolean accent2GreyReverse) {
+    public boolean setFormColor(String primaryColorRGBAHex, String accentColor1RGBAHex, String accentColor2RGBAHex, String eyeColorAHex, String eyeColorBHex, boolean primaryGreyReverse, boolean accent1GreyReverse, boolean accent2GreyReverse) {
         // FFE189 FBD972 F0AD32
         OptionalInt primaryColorRGBA = RGBA_Str2RGBA(primaryColorRGBAHex);
         OptionalInt accentColor1RGBA = RGBA_Str2RGBA(accentColor1RGBAHex);
         OptionalInt accentColor2RGBA = RGBA_Str2RGBA(accentColor2RGBAHex);
-        OptionalInt eyeColor = RGBA_Str2RGBA(eyeColorHex);
-        if (primaryColorRGBA.isPresent() && accentColor1RGBA.isPresent() && accentColor2RGBA.isPresent() && eyeColor.isPresent()) {
-            setFormColor(primaryColorRGBA.getAsInt(), accentColor1RGBA.getAsInt(), accentColor2RGBA.getAsInt(), eyeColor.getAsInt(), primaryGreyReverse, accent1GreyReverse, accent2GreyReverse);
+        OptionalInt eyeColorA = RGBA_Str2RGBA(eyeColorAHex);
+        OptionalInt eyeColorB = RGBA_Str2RGBA(eyeColorBHex);
+        if (primaryColorRGBA.isPresent() && accentColor1RGBA.isPresent() && accentColor2RGBA.isPresent() && eyeColorA.isPresent() && eyeColorB.isPresent()) {
+            setFormColor(primaryColorRGBA.getAsInt(), accentColor1RGBA.getAsInt(), accentColor2RGBA.getAsInt(), eyeColorA.getAsInt(), eyeColorB.getAsInt(), primaryGreyReverse, accent1GreyReverse, accent2GreyReverse);
             return true;
         }
         else {
@@ -74,14 +75,14 @@ public class PlayerSkinComponent implements Component, AutoSyncedComponent {
         try {
             this.keepOriginalSkin = tag.getBoolean("KeepOriginalSkin");
             this.enableFormColor = tag.getBoolean("EnableFormColor");
-            this.formColor = new FormTextureUtils.ColorSetting(FormTextureUtils.RGBA2ABGR(tag.getInt("PrimaryColor")), FormTextureUtils.RGBA2ABGR(tag.getInt("AccentColor1")), FormTextureUtils.RGBA2ABGR(tag.getInt("AccentColor2")), FormTextureUtils.RGBA2ABGR(tag.getInt("EyeColor")),
+            this.formColor = new FormTextureUtils.ColorSetting(FormTextureUtils.RGBA2ABGR(tag.getInt("PrimaryColor")), FormTextureUtils.RGBA2ABGR(tag.getInt("AccentColor1")), FormTextureUtils.RGBA2ABGR(tag.getInt("AccentColor2")), FormTextureUtils.RGBA2ABGR(tag.getInt("EyeColorA")), FormTextureUtils.RGBA2ABGR(tag.getInt("EyeColorB")),
                     tag.getBoolean("PrimaryGreyReverse"), tag.getBoolean("Accent1GreyReverse"), tag.getBoolean("Accent2GreyReverse"));
         }
         catch(IllegalArgumentException e)
         {
             this.keepOriginalSkin = false; // Default to false
             this.enableFormColor = false; // Default to false
-            this.formColor = new FormTextureUtils.ColorSetting(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, false, false, false); // Default to default color
+            this.formColor = new FormTextureUtils.ColorSetting(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, false, false, false); // Default to default color
         }
     }
 
@@ -92,7 +93,8 @@ public class PlayerSkinComponent implements Component, AutoSyncedComponent {
         tag.putInt("PrimaryColor", FormTextureUtils.ABGR2RGBA(this.formColor.getPrimaryColor()));
         tag.putInt("AccentColor1", FormTextureUtils.ABGR2RGBA(this.formColor.getAccentColor1()));
         tag.putInt("AccentColor2", FormTextureUtils.ABGR2RGBA(this.formColor.getAccentColor2()));
-        tag.putInt("EyeColor", FormTextureUtils.ABGR2RGBA(this.formColor.getEyeColor()));
+        tag.putInt("EyeColorA", FormTextureUtils.ABGR2RGBA(this.formColor.getEyeColorA()));
+        tag.putInt("EyeColorB", FormTextureUtils.ABGR2RGBA(this.formColor.getEyeColorB()));
         tag.putBoolean("PrimaryGreyReverse", this.formColor.getPrimaryGreyReverse());
         tag.putBoolean("Accent1GreyReverse", this.formColor.getAccent1GreyReverse());
         tag.putBoolean("Accent2GreyReverse", this.formColor.getAccent2GreyReverse());
