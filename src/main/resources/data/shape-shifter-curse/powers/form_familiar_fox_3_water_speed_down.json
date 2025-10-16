@@ -2,8 +2,8 @@
     "type": "origins:conditioned_attribute",
     "modifier": {
         "attribute": "minecraft:generic.movement_speed",
-        "operation": "addition",
-        "value": -0.35,
+        "operation": "multiply_total",
+        "value": -0.8,
         "name": "water speed down"
     },
     "tick_rate": 5,

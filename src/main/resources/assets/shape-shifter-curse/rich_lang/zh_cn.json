@@ -642,7 +642,8 @@
   "text.autoconfig.shape-shifter-curse-custom.option.primaryColor": "主要色",
   "text.autoconfig.shape-shifter-curse-custom.option.accentColor1Color": "重点色1",
   "text.autoconfig.shape-shifter-curse-custom.option.accentColor2Color": "重点色2",
-  "text.autoconfig.shape-shifter-curse-custom.option.eyeColor": "眼睛颜色",
+  "text.autoconfig.shape-shifter-curse-custom.option.eyeColorA": "眼睛颜色 A",
+  "text.autoconfig.shape-shifter-curse-custom.option.eyeColorB": "眼睛颜色 B",
   "text.autoconfig.shape-shifter-curse-custom.option.primaryGreyReverse": "主要色灰度反转",
   "text.autoconfig.shape-shifter-curse-custom.option.accent1GreyReverse": "重点色1灰度反转",
   "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "重点色2灰度反转"

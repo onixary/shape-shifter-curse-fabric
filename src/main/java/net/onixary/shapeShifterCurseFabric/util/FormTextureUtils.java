@@ -24,7 +24,7 @@ public class FormTextureUtils {
     // onixary: 加入每个通道的覆盖强度overrideStrength的float参数，范围0.0~1.0
     // 一些形态原版的贴图过黑，转换为灰度后无法看出自定义颜色，
     // 应用后的灰度 = max(原灰度 + overrideStrength*255, 255)
-    public record ColorSetting(int primaryColor, int accentColor1, int accentColor2, int eyeColor
+    public record ColorSetting(int primaryColor, int accentColor1, int accentColor2, int eyeColorA, int eyeColorB
             , boolean primaryGreyReverse, boolean accent1GreyReverse, boolean accent2GreyReverse) {
         public int getPrimaryColor() {
             return this.primaryColor;
@@ -35,8 +35,11 @@ public class FormTextureUtils {
         public int getAccentColor2() {
             return this.accentColor2;
         }
-        public int getEyeColor() {
-            return this.eyeColor;
+        public int getEyeColorA() {
+            return this.eyeColorA;
+        }
+        public int getEyeColorB() {
+            return this.eyeColorB;
         }
         public boolean getPrimaryGreyReverse() {
             return this.primaryGreyReverse;
@@ -227,14 +230,20 @@ public class FormTextureUtils {
         // ABGR顺序
         // int A = (Mask >> 24);
 
-        // 检查Mask的Alpha通道是否在0-16范围内，如果是则使用eyeColor
-        int maskAlpha = Mask & 0xFF000000;
-        if (maskAlpha >= 0 && maskAlpha < 16) {
+        // Alpha: 0 -> eyeColorA | 1 -> eyeColorB
+        int maskAlpha = Mask >>> 24;
+        if (maskAlpha == 0) {
             // 使用eyeColor替换颜色，但保留原始颜色的Alpha通道
-            if (((colorSetting.eyeColor >> 24) & 0xFF) == 0) {
+            if ((colorSetting.eyeColorA >>> 24) == 0) {
                 return Color;
             }
-            return (colorSetting.eyeColor & 0x00FFFFFF) | (Color & 0xFF000000);
+            return (colorSetting.eyeColorA & 0x00FFFFFF) | (Color & 0xFF000000);
+        }
+        else if (maskAlpha == 1) {
+            if ((colorSetting.eyeColorB >>> 24) == 0) {
+                return Color;
+            }
+            return (colorSetting.eyeColorB & 0x00FFFFFF) | (Color & 0xFF000000);
         }
 
         if (Mask == 0) return Color;

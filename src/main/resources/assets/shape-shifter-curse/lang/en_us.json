@@ -433,7 +433,8 @@
   "text.autoconfig.shape-shifter-curse-custom.option.primaryColor": "Primary Color",
   "text.autoconfig.shape-shifter-curse-custom.option.accentColor1Color": "Accent Color 1",
   "text.autoconfig.shape-shifter-curse-custom.option.accentColor2Color": "Accent Color 2",
-  "text.autoconfig.shape-shifter-curse-custom.option.eyeColor": "Eye Color",
+  "text.autoconfig.shape-shifter-curse-custom.option.eyeColorA": "Eye Color A",
+  "text.autoconfig.shape-shifter-curse-custom.option.eyeColorB": "Eye Color B",
   "text.autoconfig.shape-shifter-curse-custom.option.primaryGreyReverse": "Primary Grayscale Reverse",
   "text.autoconfig.shape-shifter-curse-custom.option.accent1GreyReverse": "Accent 1 Grayscale Reverse",
   "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "Accent 2 Grayscale Reverse"

@@ -279,7 +279,9 @@ public class ModPacketsS2C {
         buf.writeInt(AGBRInt);
         AGBRInt = FormTextureUtils.ARGB2ABGR(ShapeShifterCurseFabric.playerCustomConfig.accentColor2Color);
         buf.writeInt(AGBRInt);
-        AGBRInt = FormTextureUtils.ARGB2ABGR(ShapeShifterCurseFabric.playerCustomConfig.eyeColor);
+        AGBRInt = FormTextureUtils.ARGB2ABGR(ShapeShifterCurseFabric.playerCustomConfig.eyeColorA);
+        buf.writeInt(AGBRInt);
+        AGBRInt = FormTextureUtils.ARGB2ABGR(ShapeShifterCurseFabric.playerCustomConfig.eyeColorB);
         buf.writeInt(AGBRInt);
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.primaryGreyReverse);
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.accent1GreyReverse);
