@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
 import io.github.apace100.apoli.component.PowerHolderComponent;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
@@ -16,6 +17,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnSplashPotionTakeEffect;
 import net.onixary.shapeShifterCurseFabric.additional_power.FallingProtectionPower;
@@ -24,6 +27,7 @@ import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -35,6 +39,10 @@ import java.util.List;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
+    @Shadow public abstract float getMovementSpeed();
+
+    @Shadow protected abstract void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition);
+
     @Inject(
             method = "onDeath",
             at = @At(
@@ -135,5 +143,20 @@ public abstract class LivingEntityMixin {
                         .forEach(ActionOnSplashPotionTakeEffect::executeAction);
             }
         }
+    }
+
+    @Unique
+    private boolean hasModifyWaterSpeed;
+
+    @Inject(method = "travel", at = @At("HEAD"))
+    private void onTravel(Vec3d movementInput, CallbackInfo ci) {
+        this.hasModifyWaterSpeed = false;
+    }
+
+    @ModifyVariable(method = "travel", at = @At("STORE"), name = "g")
+    private float modifyInWaterSpeed(float g) {
+        if (this.hasModifyWaterSpeed) { return g; }
+        this.hasModifyWaterSpeed = true;
+        return this.getMovementSpeed() * 0.2f;  // g * (this.getMovementSpeed() / 0.1f) 或者 0.10000000149011612f g = 0.02f
     }
 }
