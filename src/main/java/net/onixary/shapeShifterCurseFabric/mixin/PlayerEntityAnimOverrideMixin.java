@@ -180,6 +180,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         }
         else if (!this.handSwinging)
         {
+            // 既然已经在载具上了 就没有必要判断其他动作了
             if (getVehicle() != null)
             {
                 if(getVehicle() instanceof BoatEntity){
@@ -193,7 +194,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
             // if ((world.getBlockState(getBlockPos()).getBlock() instanceof LadderBlock && !isOnGround() && !jumping))
             // 直接使用isClimbing()判断是否在攀爬
-            if (this.CanClimbAnim())
+            else if (this.CanClimbAnim())
             {
                 currentState = PlayerAnimState.ANIM_CLIMB_IDLE;
                 if (getVelocity().y > 0)
