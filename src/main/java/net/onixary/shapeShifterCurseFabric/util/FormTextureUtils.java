@@ -230,20 +230,22 @@ public class FormTextureUtils {
         // ABGR顺序
         // int A = (Mask >> 24);
 
-        // Alpha: 0 -> eyeColorA | 1 -> eyeColorB
+        // Alpha: 1 -> eyeColorA | 2 -> eyeColorB 255 -> 非特殊像素 0 -> 无处理(防止一些软件默认像素透明度为0)
         int maskAlpha = Mask >>> 24;
-        if (maskAlpha == 0) {
-            // 使用eyeColor替换颜色，但保留原始颜色的Alpha通道
-            if ((colorSetting.eyeColorA >>> 24) == 0) {
-                return Color;
+        if (maskAlpha != 255) {
+            if (maskAlpha == 1) {
+                // 使用eyeColor替换颜色，但保留原始颜色的Alpha通道
+                if ((colorSetting.eyeColorA >>> 24) == 0) {
+                    return Color;
+                }
+                return (colorSetting.eyeColorA & 0x00FFFFFF) | (Color & 0xFF000000);
             }
-            return (colorSetting.eyeColorA & 0x00FFFFFF) | (Color & 0xFF000000);
-        }
-        else if (maskAlpha == 1) {
-            if ((colorSetting.eyeColorB >>> 24) == 0) {
-                return Color;
+            if (maskAlpha == 2) {
+                if ((colorSetting.eyeColorB >>> 24) == 0) {
+                    return Color;
+                }
+                return (colorSetting.eyeColorB & 0x00FFFFFF) | (Color & 0xFF000000);
             }
-            return (colorSetting.eyeColorB & 0x00FFFFFF) | (Color & 0xFF000000);
         }
 
         if (Mask == 0) return Color;
