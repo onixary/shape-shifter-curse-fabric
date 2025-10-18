@@ -77,11 +77,11 @@
   "item.minecraft.tipped_arrow.effect.to_snow_fox_0_potion": "Стрела проклятия полярной лисицы",
   "effect.shape-shifter-curse.to_snow_fox_0_potion": "Вы ощущаете слабый холодок, исходящий от жидкости.",
 
-  "item.minecraft.potion.effect.feed_potion": "Compressed Energy Potion",
-  "item.minecraft.splash_potion.effect.feed_potion": "Splash Compressed Energy Potion",
-  "item.minecraft.lingering_potion.effect.feed_potion": "Lingering Compressed Energy Potion",
-  "item.minecraft.tipped_arrow.effect.feed_potion": "Arrow of Compressed Energy",
-  "effect.shape-shifter-curse.feed_effect": "Bottled high-density energy, capable of restoring satiety",
+  "item.minecraft.potion.effect.feed_potion": "Зелье сжатой энергии",
+  "item.minecraft.splash_potion.effect.feed_potion": "Взрывное зелье сжатой энергии",
+  "item.minecraft.lingering_potion.effect.feed_potion": "Оседающее зелье сжатой энергии",
+  "item.minecraft.tipped_arrow.effect.feed_potion": "Стрела сжатой энергии",
+  "effect.shape-shifter-curse.feed_effect": "Бутылированная сжатая энергия, способная утолить ваш голод.",
 
   "item.minecraft.potion.effect.to_alpha_0_potion": "ALPHA",
   "item.minecraft.splash_potion.effect.to_alpha_0_potion": "ALPHA",
@@ -205,14 +205,14 @@
   "effect.shape-shifter-curse.to_chi_sp_effect": "CHI",
   "effect.shape-shifter-curse.to_phi_sp_effect": "PHI",
 
-  "power.shape-shifter-curse.form_carnivore.name":"Carnivore",
+  "power.shape-shifter-curse.form_carnivore.name":"Мясоед",
   "power.shape-shifter-curse.form_allay_sp_amethyst_shard_only.name": "amethyst consumer",
   "power.shape-shifter-curse.form_ocelot_2_raw_meat_only.name": "только сырое мясо",
   "power.origins.vegetarian.name": "вегетарианец",
   "power.origins.form_familiar_fox_3_no_food.name": "Familiar Constitution",
   "power.shape-shifter-curse.prevent_ranged_weapon_use.name": "Невозможно использовать дальнобойное оружие",
-  "power.shape-shifter-curse.no_shield.name": "Unwieldy",
-  "power.shape-shifter-curse.no_shield.description": "The way your hands are formed provide no way of holding a shield upright.",
+  "power.shape-shifter-curse.no_shield.name": "Громоздкий",
+  "power.shape-shifter-curse.no_shield.description": "Ваши лапы не могут удержать тяжёлый щит.",
   "power.shape-shifter-curse.form_vegetarian.name": "вегетарианец",
 
   "commands.shape-shifter-curse.form_not_found": "Указанная форма не найдена!",
@@ -300,7 +300,7 @@
 
   "codex.form.shape-shifter-curse.ocelot_3.title": "\n\"До нас дошли слухи о том, что где-то поблизости замечен необычный белый оцелот огромных размеров. Будьте предельно осторожны и ни в коем случае не заходите в чащу леса\".",
   "codex.form.shape-shifter-curse.ocelot_3.appearance": "Если не считать цвет шерсти и размер вашего тела, вас почти не отличить от оцелота.\nВы хищник, выслеживающий свою жертву в густых джунглях. Ваши зоркие глаза и острые, как бритва, когти не оставят и шанса ей на спасение. Любое существо - ваша потенциальная добыча.",
-  "codex.form.shape-shifter-curse.ocelot_3.pros": "Теперь вы четвероногое существо. Благодаря этому вы стали слегка выше прыгать. Также в позе охотника вы тратите меньше сил.\nВаши новые когти позволяют вам лазить почти по любой поверхности.\nКогда вы принимаете позу охотника, вы развиваете невероятную скорость и можете, совершив прыжок, оторваться от земли и пролететь некоторое расстояние.\nВы инстинктивно уклоняетесь от летящих в вашу сторону снарядов.\nВаши зелёные глаза помогают вам ясно видеть в темноте.\nВы можете наносить смертельные удыры своими острыми когтями.\nВы передвигаетесь совершенно бесшумно, и вам не страшны падения с большой высоты.\nСырое мясо лучше утоляет голод.\nВы невосприимчивы к эффектам голода и отравления.\nКриперы убегают прочь, завидев вас.",
+  "codex.form.shape-shifter-curse.ocelot_3.pros": "Теперь вы четвероногое существо. Благодаря этому вы стали слегка выше прыгать. Также в позе охотника вы тратите меньше сил.\nВаши новые когти позволяют вам лазить почти по любой поверхности.\nКогда вы принимаете позу охотника, вы развиваете невероятную скорость и можете, совершив прыжок, оторваться от земли и пролететь некоторое расстояние. Также в этой позе вы переступаете через препятствия в один блок.\nЕсли столкнуться с мобом при прыжке, вы нанесёте ему урон.\nВы инстинктивно уклоняетесь от летящих в вашу сторону снарядов.\nВаши зелёные глаза помогают вам ясно видеть в темноте.\nВы можете наносить смертельные удыры своими острыми когтями.\nВы передвигаетесь совершенно бесшумно, и вам не страшны падения с большой высоты.\nСырое мясо лучше утоляет голод.\nВы невосприимчивы к эффектам голода и отравления.\nКриперы убегают прочь, завидев вас.",
   "codex.form.shape-shifter-curse.ocelot_3.cons": "Единственный пригодный для вас вид пищи - сырое мясо. Из-за невероятно быстрого метаболизма вы чувствуете голод, даже когда сидите на одном месте. Вам придётся постоянно охотиться.\n\nБроня слишком тяжела для вас. Вы можете носить лишь шлемы.\nВы не можете использовать щиты.",
   "codex.form.shape-shifter-curse.ocelot_3.instincts": "",
 
@@ -360,12 +360,12 @@
   
   "codex.form.shape-shifter-curse.familiar_fox_1.title": "\nОранжевая шерсть покрывает всё большую часть вашего тела. Сзади покачивается из стороны в сторону пушистый хвостик.",
   "codex.form.shape-shifter-curse.familiar_fox_1.appearance": "Густая оранжевая шерсть теперь покрывает ваши руки и ноги, а также спину и грудную клетку.\nВаши уши стали больше - слух стал острее. Оранжевая шерсть покрывает также голову и лицо, создавая что-то наподобие маски.\nВаши кисти и стопы увеличились в размерах. Теперь они напоминают чем-то когти.\nПучок шерсти с костями развился в полноценный пушистый хвостик.\n\nПомимо обычной магии оборотня, вы ощущаете присутствие в своём теле какой-то иной магии...",
-  "codex.form.shape-shifter-curse.familiar_fox_1.pros": "Чужеродная магия даёт вам новые способности: нажав правую кнопку мыши, вы можете высушить жизненную энергию из слабых существ, чтобы утолить голод.\n\nРазбойники больше не атакуют вас.\nСкорость бега увеличена, а новая шерсть защищает вас от колючек ягодных кустов.\nОбострённое чутьё помогает вам находить больше предметов (как если бы вы использовали зачарование \"Добыча II\")",
-  "codex.form.shape-shifter-curse.familiar_fox_1.cons": "The foreign magic affects your digestion, reducing hunger gained from food\nYour health is slightly reduced\nYour fur slows swimming slightly\nAttacking illagers now also start causes unusual dizziness",
-  "codex.form.shape-shifter-curse.familiar_fox_1.instincts": "Thoughts of draining energy from creaturesbegin attracting you\nYou begin to desire to stay in taiga biomes\nThoughts of staying in sweet berry bushesbegin attracting you\nThe magic of witches and evokers draws you in - you feel compelled toapproach and observe them",
+  "codex.form.shape-shifter-curse.familiar_fox_1.pros": "Чужеродная магия даёт вам новые способности: нажав правую кнопку мыши, вы можете высушить жизненную энергию из слабых существ, чтобы утолить голод (у вас в руках не должно быть предметов).\n\nРазбойники больше не атакуют вас.\nСкорость бега увеличена, а новая шерсть защищает вас от колючек ягодных кустов.\nОбострённое чутьё помогает вам находить больше предметов (как если бы вы использовали зачарование \"Добыча II\")",
+  "codex.form.shape-shifter-curse.familiar_fox_1.cons": "Из-за чужеродной магии пища хуже утоляет ваш голод.\nУровень максимального здоровья слегка понижен.\nВаша пушистая шерсть мешает вам быстро плавать.\nЕсли атаковать разбойника или ему подобное существо, вы внезапно почувствуете головокружение.",
+  "codex.form.shape-shifter-curse.familiar_fox_1.instincts": "Вам хочется высушить жизненную энергию из других существ.\nВы мечтаете остаться в тайге.\nВам хочется быть ближе к кустам сладких ягод.\nМагия ведьм и заклинателей привлекает вас. Вы ощущаете необходимость быть к ним ближе.",
   
-  "codex.form.shape-shifter-curse.familiar_fox_2.title": "You now closely resemble an upright-walking red fox, but something feels distinctly wrong...",
-  "codex.form.shape-shifter-curse.familiar_fox_2.appearance": "Your hind legs have completely transformed into digitigrade structure, and your face has protruded forward to form a short muzzle, making you appear more beast-like\nExcept for your black paws, triangular ears on your head, and the white soft fur on your lower face and chest, your body is now completely covered in thick orange-red fur\nTwo fluffy red tails sway behind you... Wait, two? That's certainly unusual\nAzure-blue flames occasionally appear around your body before slowly fading away\n\nIt's become clear that the magic inherent in this form has been altered by someone else...",
+  "codex.form.shape-shifter-curse.familiar_fox_2.title": "Вы теперь похожи на прямоходящую лисицу. Однако вы ощущаете, что что-то не так...",
+  "codex.form.shape-shifter-curse.familiar_fox_2.appearance": "Структура ваших задних конечностей изменилась так, что теперь вы передвигаетесь не целой стопой, а пальцами. Ваше лицо расширилось вперёд, образовав небольшую мородочку.\nЕсли не считать чёрные лапы и триугольные уши, а также белую мягкую шерсть на грудной клетке, всё ваше тело покрыто оранжевой шерстью.\nДва пушистых хвоста... Стоп, два? Это довольно странно.\nВозле вашего тела случайно появляются огоньки голубого пламени.\n\nОчевидно, что магия этой формы была кем-то изменена...",
   "codex.form.shape-shifter-curse.familiar_fox_2.pros": "The foreign magic within you has grown stronger. Now you can absorb more saturation from stronger creatures by right-clicking while empty-handed. It also allows you to sense the location of creatures within a certain radius\nAs a last resort, you can drain energy from hostile creatures - though their energy will weaken you...\nIntelligent creatures seem to possess more energy, you can store their energy in empty bottles for later use - perhaps you should try other targets...\n\nThe illagers now regard you as an ally and will no longer attack you\nYour running speed has increased further, and you can move unhindered through sweet berry bushes\nYour enhanced perception helps you find more dropped items, roughly equivalent to the Looting II enchantment\nThanks to the blended magic in your form, you can now brew splash potions of poison, healing and harming directly in your inventory by right-clicking water bottles on corresponding ingredients. You can now stack up to three identical potions.",
   "codex.form.shape-shifter-curse.familiar_fox_2.cons": "The foreign magic has further affected your digestive system - most foods now provide significantly less saturation. You'll need to find alternative ways to replenish it\n\nYour health has decreased slightly more\nLeg armor and boots no longer suit your new body structure\nYour fluffy pelt slows your movement in water even further\nWhen attempting to attack illagers, the foreign magic within you prevents you from harming them\nFor some reason, villagers have begun fearing you and will actively avoid you\nYou've noticed that when you look at witches and evokers, you find yourself unconsciously drawn to their magic...",
   "codex.form.shape-shifter-curse.familiar_fox_2.instincts": "Something inside you stirs... your transformation hasn't reached its end...\nA echo catalyst could take your transformation to the next stage... though this process would likely be permanent\nYou're NOT actually considering this, are you?",
