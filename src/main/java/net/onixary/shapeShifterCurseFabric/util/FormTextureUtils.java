@@ -224,8 +224,10 @@ public class FormTextureUtils {
 
     public static int ProcessMaskChannel(int Color, int Mask, int ColorSetting, int AverageGreyScale, boolean ReverseGreyScale) {
         if (((ColorSetting >> 24) & 0xFF) == 0) return Color;
-        int GreyScaleAdd = ReverseGreyScale ? AverageGreyScale - getGreyScale(Color) : getGreyScale(Color) - AverageGreyScale;
-        Color = GreyScaleMul(ColorSetting | 0xFF000000, 1.0f + (float)GreyScaleAdd / 255.0f);
+        int ColorGreyScale = getGreyScale(Color);
+        int GreyScaleOffset = ReverseGreyScale ? AverageGreyScale - ColorGreyScale : ColorGreyScale - AverageGreyScale;
+        int TargetGreyScale = Math.min(255, Math.max(AverageGreyScale + GreyScaleOffset, 0));
+        Color = GreyScaleMul(ColorSetting | 0xFF000000,  (float)TargetGreyScale / ColorGreyScale);
         return ColorMulBytes(Color, Mask);
     }
 
