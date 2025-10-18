@@ -9,16 +9,362 @@
     "minecraft:pufferfish",
     "minecraft:rabbit",
     "minecraft:salmon",
-    "minecraft:tropical_fish"
-  ],
-  "optional": [
-    "farmersdelight:bacon",
-    "farmersdelight:chicken_cuts",
-    "farmersdelight:cod_slice",
-    "farmersdelight:dog_food",
-    "farmersdelight:ham",
-    "farmersdelight:minced_beef",
-    "farmersdelight:mutton_chops",
-    "farmersdelight:salmon_slice"
+    "minecraft:tropical_fish",
+    {
+      "id": "farmersdelight:bacon",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:chicken_cuts",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:cod_slice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:dog_food",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:ham",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:minced_beef",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:mutton_chops",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:salmon_slice",
+      "required": false
+    },
+    {
+      "id": "tide:mint_carp",
+      "required": false
+    },
+    {
+      "id": "tide:trout",
+      "required": false
+    },
+    {
+      "id": "tide:angelfish",
+      "required": false
+    },
+    {
+      "id": "tide:barracuda",
+      "required": false
+    },
+    {
+      "id": "tide:sailfish",
+      "required": false
+    },
+    {
+      "id": "tide:catfish",
+      "required": false
+    },
+    {
+      "id": "tide:pike",
+      "required": false
+    },
+    {
+      "id": "tide:bass",
+      "required": false
+    },
+    {
+      "id": "tide:tuna",
+      "required": false
+    },
+    {
+      "id": "tide:yellow_perch",
+      "required": false
+    },
+    {
+      "id": "tide:ocean_perch",
+      "required": false
+    },
+    {
+      "id": "tide:bluegill",
+      "required": false
+    },
+    {
+      "id": "tide:mackerel",
+      "required": false
+    },
+    {
+      "id": "tide:glowfish",
+      "required": false
+    },
+    {
+      "id": "tide:anglerfish",
+      "required": false
+    },
+    {
+      "id": "tide:cave_crawler",
+      "required": false
+    },
+    {
+      "id": "tide:abyss_angler",
+      "required": false
+    },
+    {
+      "id": "tide:shadow_snapper",
+      "required": false
+    },
+    {
+      "id": "tide:deep_grouper",
+      "required": false
+    },
+    {
+      "id": "tide:fish_slice",
+      "required": false
+    },
+    {
+      "id": "oceansdelight:fugu_roll",
+      "required": false
+    },
+    {
+      "id": "oceansdelight:fugu_slice",
+      "required": false
+    },
+    {
+      "id": "oceansdelight:stuffed_cod",
+      "required": false
+    },
+    {
+      "id": "oceansdelight:cabbage_wrapped_elder_guardian",
+      "required": false
+    },
+    {
+      "id": "oceansdelight:elder_guardian_roll",
+      "required": false
+    },
+    {
+      "id": "oceansdelight:elder_guardian_slice",
+      "required": false
+    },
+    {
+      "id": "oceansdelight:elder_guardian_slab",
+      "required": false
+    },
+    {
+      "id": "oceansdelight:guardian_tail",
+      "required": false
+    },
+    {
+      "id": "oceansdelight:tentacle_on_a_stick",
+      "required": false
+    },
+    {
+      "id": "oceansdelight:cut_tentacles",
+      "required": false
+    },
+    {
+      "id": "oceansdelight:tentacles",
+      "required": false
+    },
+    {
+      "id": "nethersdelight:hoglin_loin",
+      "required": false
+    },
+    {
+      "id": "nethersdelight:strider_slice",
+      "required": false
+    },
+    {
+      "id": "nethersdelight:ground_strider",
+      "required": false
+    },
+    {
+      "id": "tide:clayfish",
+      "required": false
+    },
+    {
+      "id": "tide:hardened_clayfish",
+      "required": false
+    },
+    {
+      "id": "tide:guppy",
+      "required": false
+    },
+    {
+      "id": "tide:cave_eel",
+      "required": false
+    },
+    {
+      "id": "tide:crystal_shrimp",
+      "required": false
+    },
+    {
+      "id": "tide:iron_tetra",
+      "required": false
+    },
+    {
+      "id": "tide:gilded_minnow",
+      "required": false
+    },
+    {
+      "id": "tide:crystalline_carp",
+      "required": false
+    },
+    {
+      "id": "tide:lapis_lanternfish",
+      "required": false
+    },
+    {
+      "id": "tide:luminescent_jellyfish",
+      "required": false
+    },
+    {
+      "id": "tide:bedrock_tetra",
+      "required": false
+    },
+    {
+      "id": "tide:endstone_perch",
+      "required": false
+    },
+    {
+      "id": "tide:enderfin",
+      "required": false
+    },
+    {
+      "id": "tide:endergazer",
+      "required": false
+    },
+    {
+      "id": "tide:purpur_pike",
+      "required": false
+    },
+    {
+      "id": "tide:chorus_cod",
+      "required": false
+    },
+    {
+      "id": "tide:elytrout",
+      "required": false
+    },
+    {
+      "id": "tide:prarie_pike",
+      "required": false
+    },
+    {
+      "id": "tide:sandskipper",
+      "required": false
+    },
+    {
+      "id": "tide:blossom_bass",
+      "required": false
+    },
+    {
+      "id": "tide:oakfish",
+      "required": false
+    },
+    {
+      "id": "tide:frostbite_flounder",
+      "required": false
+    },
+    {
+      "id": "tide:mirage_catfish",
+      "required": false
+    },
+    {
+      "id": "tide:echofin_snapper",
+      "required": false
+    },
+    {
+      "id": "tide:sunspike_goby",
+      "required": false
+    },
+    {
+      "id": "tide:birch_trout",
+      "required": false
+    },
+    {
+      "id": "tide:stonefish",
+      "required": false
+    },
+    {
+      "id": "tide:dripstone_darter",
+      "required": false
+    },
+    {
+      "id": "tide:slimefin_snapper",
+      "required": false
+    },
+    {
+      "id": "tide:sporestalker",
+      "required": false
+    },
+    {
+      "id": "tide:leafback",
+      "required": false
+    },
+    {
+      "id": "tide:fluttergill",
+      "required": false
+    },
+    {
+      "id": "tide:pine_perch",
+      "required": false
+    },
+    {
+      "id": "tide:ember_koi",
+      "required": false
+    },
+    {
+      "id": "tide:inferno_guppy",
+      "required": false
+    },
+    {
+      "id": "tide:obsidian_pike",
+      "required": false
+    },
+    {
+      "id": "tide:volcano_tuna",
+      "required": false
+    },
+    {
+      "id": "tide:magma_mackerel",
+      "required": false
+    },
+    {
+      "id": "tide:warped_guppy",
+      "required": false
+    },
+    {
+      "id": "tide:crimson_fangjaw",
+      "required": false
+    },
+    {
+      "id": "tide:ashen_perch",
+      "required": false
+    },
+    {
+      "id": "tide:witherfin",
+      "required": false
+    },
+    {
+      "id": "tide:soulscaler",
+      "required": false
+    },
+    {
+      "id": "tide:aquathorn",
+      "required": false
+    },
+    {
+      "id": "tide:midas_fish",
+      "required": false
+    },
+    {
+      "id": "tide:voidseeker",
+      "required": false
+    },
+    {
+      "id": "tide:shooting_starfish",
+      "required": false
+    }
   ]
 }
