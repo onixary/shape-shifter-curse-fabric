@@ -95,11 +95,12 @@ public class FormTextureUtils {
 
     public static int RGBA2ABGR(int color) {
         // Native Image 获取的像素为ABGR顺序 但是大众习惯为RGBA
-        int R = (color >> 24) & 0xFF;
-        int G = (color >> 16) & 0xFF;
-        int B = (color >> 8) & 0xFF;
-        int A = color & 0xFF;
-        return (A << 24) | (B << 16) | (G << 8) | R;
+        // int R = (color >> 24) & 0xFF;
+        // int G = (color >> 16) & 0xFF;
+        // int B = (color >> 8) & 0xFF;
+        // int A = color & 0xFF;
+        // return (A << 24) | (B << 16) | (G << 8) | R;
+        return (color << 24) | ((color << 8) & 0x00FF0000) | ((color >> 8) & 0x0000FF00) | (color >>> 24);
     }
 
     public static int RGB2ABGR(int color) {
@@ -113,15 +114,17 @@ public class FormTextureUtils {
     }
 
     public static int ABGR2RGBA(int color) {
-        int R = color & 0xFF;
-        int G = (color >> 8) & 0xFF;
-        int B = (color >> 16) & 0xFF;
-        int A = (color >> 24) & 0xFF;
-        return R << 24 | G << 16 | B << 8 | A;
+        // int R = color & 0xFF;
+        // int G = (color >> 8) & 0xFF;
+        // int B = (color >> 16) & 0xFF;
+        // int A = (color >> 24) & 0xFF;
+        // return R << 24 | G << 16 | B << 8 | A;
+        return (color << 24) | ((color << 8) & 0x00FF0000) | ((color >> 8) & 0x0000FF00) | (color >>> 24);
     }
 
     public static int ABGR2RGB(int color) {
-        return (ABGR2RGBA(color) >> 8) & 0x00FFFFFF;
+        // return (ABGR2RGBA(color) >> 8) & 0x00FFFFFF;
+        return ABGR2RGBA(color) >>> 8;
     }
 
     public static int ABGR2ARGB(int color) {
@@ -221,32 +224,37 @@ public class FormTextureUtils {
 
     public static int ProcessMaskChannel(int Color, int Mask, int ColorSetting, int AverageGreyScale, boolean ReverseGreyScale) {
         if (((ColorSetting >> 24) & 0xFF) == 0) return Color;
-        int GreyScaleAdd = ReverseGreyScale ? AverageGreyScale - getGreyScale(Color) : getGreyScale(Color) - AverageGreyScale;
-        Color = GreyScaleMul(ColorSetting | 0xFF000000, 1.0f + (float)GreyScaleAdd / 255.0f);
+        int ColorGreyScale = getGreyScale(Color);
+        int GreyScaleOffset = ReverseGreyScale ? AverageGreyScale - ColorGreyScale : ColorGreyScale - AverageGreyScale;
+        int TargetGreyScale = Math.min(255, Math.max(AverageGreyScale + GreyScaleOffset, 0));
+        Color = GreyScaleMul(ColorSetting | 0xFF000000,  (float)TargetGreyScale / ColorGreyScale);
         return ColorMulBytes(Color, Mask);
     }
 
     public static int ProcessPixel(int Color, int Mask, ColorSetting colorSetting, Triple<Integer, Integer, Integer> MaskLayerAverageGreyScale) {
         // ABGR顺序
-        // int A = (Mask >> 24);
 
-        // Alpha: 0 -> eyeColorA | 1 -> eyeColorB
-        int maskAlpha = Mask >>> 24;
-        if (maskAlpha == 0) {
-            // 使用eyeColor替换颜色，但保留原始颜色的Alpha通道
-            if ((colorSetting.eyeColorA >>> 24) == 0) {
-                return Color;
-            }
-            return (colorSetting.eyeColorA & 0x00FFFFFF) | (Color & 0xFF000000);
-        }
-        else if (maskAlpha == 1) {
-            if ((colorSetting.eyeColorB >>> 24) == 0) {
-                return Color;
-            }
-            return (colorSetting.eyeColorB & 0x00FFFFFF) | (Color & 0xFF000000);
-        }
-
+        // 如果Mask为0 那么RGB通道都为0 并且也不是特殊像素
         if (Mask == 0) return Color;
+
+        // int A = (Mask >> 24);
+        // Alpha: 1 -> eyeColorA | 2 -> eyeColorB 255 -> 非特殊像素 0 -> 无处理(防止一些软件默认像素透明度为0)
+        int maskAlpha = Mask >>> 24;
+        if (maskAlpha != 255) {
+            if (maskAlpha == 1) {
+                // 使用eyeColor替换颜色，但保留原始颜色的Alpha通道
+                if ((colorSetting.eyeColorA >>> 24) == 0) {
+                    return Color;
+                }
+                return (colorSetting.eyeColorA & 0x00FFFFFF) | (Color & 0xFF000000);
+            }
+            if (maskAlpha == 2) {
+                if ((colorSetting.eyeColorB >>> 24) == 0) {
+                    return Color;
+                }
+                return (colorSetting.eyeColorB & 0x00FFFFFF) | (Color & 0xFF000000);
+            }
+        }
         
         // 提取原始颜色的 alpha 值
         int B = (Mask >> 16) & 0xFF;
