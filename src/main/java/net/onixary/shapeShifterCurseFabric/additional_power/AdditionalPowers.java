@@ -46,6 +46,7 @@ public class AdditionalPowers {
         register(ActionOnSplashPotionTakeEffect.createFactory());
         register(ConditionScalePower.createFactory());
         register(SneakingJumpClashPower.createFactory());
+        register(InWaterSpeedModifierPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {
