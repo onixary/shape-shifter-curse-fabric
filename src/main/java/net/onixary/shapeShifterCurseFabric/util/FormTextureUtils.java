@@ -164,9 +164,9 @@ public class FormTextureUtils {
         // if(Mask <= 0) return ColorA;
         // if(Mask >= 255) return ColorB;
         return (ColorA & 0xFF000000) | // Alpha通道
-               ((((ColorA >> 16) & 0xFF) * Bytes) / 255 << 16) | // Red
-               ((((ColorA >> 8) & 0xFF) * Bytes) / 255 << 8) | // Green
-               (((ColorA & 0xFF) * Bytes) / 255); // Blue
+                ((((ColorA >> 16) & 0xFF) * Bytes) / 255 << 16) | // Red
+                ((((ColorA >> 8) & 0xFF) * Bytes) / 255 << 8) | // Green
+                (((ColorA & 0xFF) * Bytes) / 255); // Blue
     }
 
     public static int GreyScaleMul(int Color, float GreyScale) {
@@ -226,12 +226,13 @@ public class FormTextureUtils {
         if (((ColorSetting >> 24) & 0xFF) == 0) return Color;
         int ColorGreyScale = getGreyScale(Color);
         int GreyScaleOffset = ReverseGreyScale ? AverageGreyScale - ColorGreyScale : ColorGreyScale - AverageGreyScale;
-        int TargetGreyScale = Math.min(255, Math.max(AverageGreyScale + GreyScaleOffset, 0));
-        Color = GreyScaleMul(ColorSetting | 0xFF000000,  (float)TargetGreyScale / ColorGreyScale);
-        return ColorMulBytes(Color, Mask);
+        int ColorSettingGreyScale = getGreyScale(ColorSetting);
+        int TargetGreyScale = Math.min(255, Math.max(ColorSettingGreyScale + GreyScaleOffset, 0));
+        int ColorResult = GreyScaleMul(ColorSetting | 0xFF000000,  (float)TargetGreyScale / ColorSettingGreyScale);
+        return ColorMulBytes(ColorResult, Mask);
     }
 
-    public static int ProcessPixel(int Color, int Mask, ColorSetting colorSetting, Triple<Integer, Integer, Integer> MaskLayerAverageGreyScale) {
+    public static int ProcessPixel(int Color, int Mask, ColorSetting colorSetting, Triple<Integer, Integer, Integer> MaskLayerAverageGreyScale, boolean OnlyMultiply) {
         // ABGR顺序
 
         // 如果Mask为0 那么RGB通道都为0 并且也不是特殊像素
@@ -255,27 +256,36 @@ public class FormTextureUtils {
                 return (colorSetting.eyeColorB & 0x00FFFFFF) | (Color & 0xFF000000);
             }
         }
-        
+
         // 提取原始颜色的 alpha 值
         int B = (Mask >> 16) & 0xFF;
         if (B > 0) {
+            if (OnlyMultiply) {
+                return (ColorMulBytes(colorSetting.accentColor2, B) & 0x00FFFFFF) | (Color & 0xFF000000);
+            }
             int result = ProcessMaskChannel(Color, B, colorSetting.accentColor2, MaskLayerAverageGreyScale.getRight(), colorSetting.accent2GreyReverse);
             return (result & 0x00FFFFFF) | (Color & 0xFF000000);
         }
         int G = (Mask >> 8) & 0xFF;
         if (G > 0) {
+            if (OnlyMultiply) {
+                return (ColorMulBytes(colorSetting.accentColor1, G) & 0x00FFFFFF) | (Color & 0xFF000000);
+            }
             int result = ProcessMaskChannel(Color, G, colorSetting.accentColor1, MaskLayerAverageGreyScale.getMiddle(), colorSetting.accent1GreyReverse);
             return (result & 0x00FFFFFF) | (Color & 0xFF000000);
         }
         int R = Mask & 0xFF;
         if (R > 0) {
+            if (OnlyMultiply) {
+                return (ColorMulBytes(colorSetting.primaryColor, R) & 0x00FFFFFF) | (Color & 0xFF000000);
+            }
             int result = ProcessMaskChannel(Color, R, colorSetting.primaryColor, MaskLayerAverageGreyScale.getLeft(), colorSetting.primaryGreyReverse);
             return (result & 0x00FFFFFF) | (Color & 0xFF000000);
         }
         return Color;
     }
 
-    public static Identifier BakeTexture(Identifier texture, Identifier mask, ColorSetting colorSetting)  {
+    public static Identifier BakeTexture(Identifier texture, Identifier mask, ColorSetting colorSetting, boolean OnlyMultiply)  {
         if (texture == null || mask == null) return null;
         NativeImage textureImage = toNativeImage(texture);
         NativeImage maskImage = toNativeImage(mask);
@@ -284,7 +294,7 @@ public class FormTextureUtils {
         Triple<Integer, Integer, Integer> MaskLayerAverageGreyScale = getAverageGreyScale(textureImage, maskImage);
         for (int x = 0; x < textureWidth; x++) {
             for (int y = 0; y < textureHeight; y++) {
-                textureImage.setColor(x, y, ProcessPixel(textureImage.getColor(x, y), maskImage.getColor(x, y), colorSetting, MaskLayerAverageGreyScale));
+                textureImage.setColor(x, y, ProcessPixel(textureImage.getColor(x, y), maskImage.getColor(x, y), colorSetting, MaskLayerAverageGreyScale, OnlyMultiply));
             }
         }
         TextureManager TM = MinecraftClient.getInstance().getTextureManager();
@@ -297,7 +307,7 @@ public class FormTextureUtils {
         if (CachedTexture != null) {
             return CachedTexture;
         }
-        CachedTexture = BakeTexture(OriginFurModel.dTR(model.json), getColorMask_Texture(model), colorSetting);
+        CachedTexture = BakeTexture(OriginFurModel.dTR(model.json), getColorMask_Texture(model), colorSetting, IsModelUseMultiply(model));
         if (CachedTexture == null) {
             CachedTexture = OriginFurModel.dTR(model.json);
         }
@@ -311,7 +321,7 @@ public class FormTextureUtils {
             if (CachedTexture != null) {
                 return CachedTexture;
             }
-            CachedTexture = BakeTexture(Identifier.tryParse(JsonHelper.getString(model.json, "overlay", null)), getColorMask_OverlayTexture(model, Slim), colorSetting);
+            CachedTexture = BakeTexture(Identifier.tryParse(JsonHelper.getString(model.json, "overlay", null)), getColorMask_OverlayTexture(model, Slim), colorSetting, IsModelUseMultiply(model));
             if (CachedTexture == null) {
                 CachedTexture = Identifier.tryParse(JsonHelper.getString(model.json, "overlay", null));
             }
@@ -323,7 +333,7 @@ public class FormTextureUtils {
             if (CachedTexture != null) {
                 return CachedTexture;
             }
-            CachedTexture = BakeTexture(Identifier.tryParse(JsonHelper.getString(model.json, "overlay_slim", null)), getColorMask_OverlayTexture(model, Slim), colorSetting);
+            CachedTexture = BakeTexture(Identifier.tryParse(JsonHelper.getString(model.json, "overlay_slim", null)), getColorMask_OverlayTexture(model, Slim), colorSetting, IsModelUseMultiply(model));
             if (CachedTexture == null) {
                 CachedTexture = Identifier.tryParse(JsonHelper.getString(model.json, "overlay_slim", null));
             }
@@ -338,7 +348,7 @@ public class FormTextureUtils {
             if (CachedTexture != null) {
                 return CachedTexture;
             }
-            CachedTexture = BakeTexture(Identifier.tryParse(JsonHelper.getString(model.json, "emissive_overlay", null)), getColorMask_EmissiveTexture(model, Slim), colorSetting);
+            CachedTexture = BakeTexture(Identifier.tryParse(JsonHelper.getString(model.json, "emissive_overlay", null)), getColorMask_EmissiveTexture(model, Slim), colorSetting, IsModelUseMultiply(model));
             if (CachedTexture == null) {
                 CachedTexture = Identifier.tryParse(JsonHelper.getString(model.json, "emissive_overlay", null));
             }
@@ -349,12 +359,17 @@ public class FormTextureUtils {
             if (CachedTexture != null) {
                 return CachedTexture;
             }
-            CachedTexture = BakeTexture(Identifier.tryParse(JsonHelper.getString(model.json, "emissive_overlay_slim", null)), getColorMask_EmissiveTexture(model, Slim), colorSetting);
+            CachedTexture = BakeTexture(Identifier.tryParse(JsonHelper.getString(model.json, "emissive_overlay_slim", null)), getColorMask_EmissiveTexture(model, Slim), colorSetting, IsModelUseMultiply(model));
             if (CachedTexture == null) {
                 CachedTexture = Identifier.tryParse(JsonHelper.getString(model.json, "emissive_overlay_slim", null));
             }
             model.ColorMask_Baked_EmissiveTexture_Slim.put(colorSetting, CachedTexture);
             return CachedTexture;
         }
+    }
+
+    // 当Json中IsMultiplyMask为true时 直接使用正片叠底混合模式 否则使用灰度修正模式
+    private static boolean IsModelUseMultiply(OriginFurModel model) {
+        return JsonHelper.getBoolean(model.json, "IsMultiplyMask", false);
     }
 }
