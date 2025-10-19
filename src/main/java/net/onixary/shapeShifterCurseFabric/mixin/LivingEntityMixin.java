@@ -2,6 +2,7 @@ package net.onixary.shapeShifterCurseFabric.mixin;
 
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.block.BlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
@@ -21,7 +22,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnSplashPotionTakeEffect;
+import net.onixary.shapeShifterCurseFabric.additional_power.BurnDamageModifierPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.FallingProtectionPower;
+import net.onixary.shapeShifterCurseFabric.additional_power.InWaterSpeedModifierPower;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
@@ -31,6 +34,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -161,4 +165,34 @@ public abstract class LivingEntityMixin {
         this.hasModifyWaterSpeed = true;
         return this.getMovementSpeed() * 0.2f;  // g * (this.getMovementSpeed() / 0.1f) 或者 0.10000000149011612f g = 0.02f
     }*/
+
+    @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;updateVelocity(FLnet/minecraft/util/math/Vec3d;)V"), index = 0)
+    private float ModifyInWaterSpeed(float g) {
+        if ((LivingEntity)(Object)this instanceof PlayerEntity player) {
+            // g -> 水中速度
+            // g 范围 0.02 -> PlayerSpeed
+            // 目标 PlayerSpeed * 0.2 -> PlayerSpeed
+            // 会让所有其他修改水中速度失效
+            // float PlayerSpeed = player.getMovementSpeed();
+            // float newG = PlayerSpeed * 0.2f;
+            // float h = (float) EnchantmentHelper.getDepthStrider(player);
+            // if (h > 3.0F) {
+            //     h = 3.0f;
+            // }
+            // if (!player.isOnGround()) {
+            //     h *= 0.5F;
+            // }
+            // if (h > 0.0F) {
+            //     newG += (this.getMovementSpeed() - newG) * h / 3.0F;
+            // }
+            // return newG;
+            List<InWaterSpeedModifierPower> powers = PowerHolderComponent.getPowers(player, InWaterSpeedModifierPower.class);
+            float totalSpeedModifier = powers
+                    .stream()
+                    .map(InWaterSpeedModifierPower::getSpeedModifier)
+                    .reduce(1.0f, (a, b) -> a * b);
+            return g * totalSpeedModifier;
+        }
+        return g;
+    }
 }
