@@ -145,6 +145,8 @@ public abstract class LivingEntityMixin {
         }
     }
 
+    // todo: 直接强制修改hasModifyWaterSpeed似乎会导致广泛的与其他模组的mixin冲突，暂时禁用
+    /*
     @Unique
     private boolean hasModifyWaterSpeed;
 
@@ -158,5 +160,5 @@ public abstract class LivingEntityMixin {
         if (this.hasModifyWaterSpeed) { return g; }
         this.hasModifyWaterSpeed = true;
         return this.getMovementSpeed() * 0.2f;  // g * (this.getMovementSpeed() / 0.1f) 或者 0.10000000149011612f g = 0.02f
-    }
+    }*/
 }
