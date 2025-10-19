@@ -176,7 +176,17 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
         if (isUsingItem()){
             // todo: using item anim here if needed
-            currentState = PlayerAnimState.ANIM_IDLE;
+            if (isSneaking()) {
+                if (isWalking) {
+                    currentState = PlayerAnimState.ANIM_SNEAK_WALK;
+                }
+                else {
+                    currentState = PlayerAnimState.ANIM_SNEAK_IDLE;
+                }
+            }
+            else {
+                currentState = PlayerAnimState.ANIM_IDLE;
+            }
         }
         else if (!this.handSwinging)
         {
@@ -202,17 +212,18 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                     currentState = PlayerAnimState.ANIM_CLIMB;
                 }
             }
-            else if (isUsingItem())
-            {
-                if (getMainHandStack().getItem().isFood())
-                {
-                    //todo
-                }
-                if (getMainHandStack().getUseAction() == UseAction.DRINK)
-                {
-                    //todo
-                }
-            }
+            // 这条分支永远不会执行 因为上面已经判断了isUsingItem()
+            // else if (isUsingItem())
+            // {
+            //     if (getMainHandStack().getItem().isFood())
+            //     {
+            //         //todo
+            //     }
+            //     if (getMainHandStack().getUseAction() == UseAction.DRINK)
+            //     {
+            //         //todo
+            //     }
+            // }
             else if (this.getAbilities().flying)
             {
                 currentState = PlayerAnimState.ANIM_CREATIVE_FLY;
