@@ -12,7 +12,7 @@ public class MorphscaleArmorMaterial  implements ArmorMaterial {
     public static final MorphscaleArmorMaterial INSTANCE = new MorphscaleArmorMaterial();
 
     private static final int[] BASE_DURABILITY = new int[] {13, 15, 16, 11};
-    private static final int[] PROTECTION_VALUES = new int[] {2, 4, 6, 1};
+    private static final int[] PROTECTION_VALUES = new int[] {2, 6, 7, 2};
 
     @Override
     public int getDurability(ArmorItem.Type type) {
