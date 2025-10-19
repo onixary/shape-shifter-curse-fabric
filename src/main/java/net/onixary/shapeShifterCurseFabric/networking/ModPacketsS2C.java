@@ -116,6 +116,7 @@ public class ModPacketsS2C {
     // 接收变身状态同步包
     public static void receiveTransformState(MinecraftClient client, ClientPlayNetworkHandler handler,
                                            PacketByteBuf buf, PacketSender responseSender) {
+        UUID playerUuid = buf.readUuid();
         boolean isTransforming = buf.readBoolean();
         String fromForm = buf.readString();
         String toForm = buf.readString();
@@ -125,7 +126,7 @@ public class ModPacketsS2C {
                 ShapeShifterCurseFabric.LOGGER.info("Client received transform state: isTransforming=" + isTransforming);
                 // 更新客户端的变身状态
                 net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.updateTransformState(
-                    isTransforming, fromForm.isEmpty() ? null : fromForm, toForm.isEmpty() ? null : toForm);
+                        playerUuid, isTransforming, fromForm.isEmpty() ? null : fromForm, toForm.isEmpty() ? null : toForm);
             }
         });
     }

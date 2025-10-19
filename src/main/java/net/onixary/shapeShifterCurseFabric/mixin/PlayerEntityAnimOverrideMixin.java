@@ -373,11 +373,11 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         }
 
         // isTransforming - 使用客户端同步的状态
-        if(net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.isClientTransforming()){
+        if(net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.isClientTransforming(this.getUuid())){
             //ShapeShifterCurseFabric.LOGGER.info("Player is transforming");
             // 使用客户端同步的变身信息
-            String fromFormName = net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.getClientTransformFromForm();
-            String toFormName = net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.getClientTransformToForm();
+            String fromFormName = net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.getClientTransformFromForm(this.getUuid());
+            String toFormName = net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.getClientTransformToForm(this.getUuid());
 
             // 尝试解析形态名称为 PlayerForms 枚举
             try {

@@ -32,6 +32,8 @@ import net.onixary.shapeShifterCurseFabric.util.ClientTicker;
 import net.onixary.shapeShifterCurseFabric.util.TickManager;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.UUID;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
 
@@ -183,30 +185,45 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		}
 	}
 
-	// 添加变身状态更新方法
-	private static boolean clientIsTransforming = false;
-	private static String clientTransformFromForm = null;
-	private static String clientTransformToForm = null;
+	// 原先的仅考虑到当前玩家变身动作 其他玩家变身动作不会更新
+	public static class TransformingStage {
+		public boolean IsTransforming = false;
+        public String TransformFromForm = null;
+        public String TransformToForm = null;
+	}
 
-	public static void updateTransformState(boolean isTransforming, String fromForm, String toForm) {
-		clientIsTransforming = isTransforming;
-		clientTransformFromForm = fromForm;
-		clientTransformToForm = toForm;
+	public static HashMap<UUID, TransformingStage> clientTransformState = new HashMap<>();
+
+	public static TransformingStage getClientTransformState(UUID playerUuid) {
+		if (!clientTransformState.containsKey(playerUuid)) {
+			clientTransformState.put(playerUuid, new TransformingStage());
+		}
+		return clientTransformState.get(playerUuid);
+	}
+
+	public static void updateTransformState(UUID playerUuid, boolean isTransforming, String fromForm, String toForm) {
+		if (!clientTransformState.containsKey(playerUuid)) {
+			clientTransformState.put(playerUuid, new TransformingStage());
+		}
+		TransformingStage stage = clientTransformState.get(playerUuid);
+		stage.IsTransforming = isTransforming;
+		stage.TransformFromForm = fromForm;
+		stage.TransformToForm = toForm;
 		ShapeShifterCurseFabric.LOGGER.info("Updated client transform state: " + isTransforming +
 											", from: " + fromForm + ", to: " + toForm);
 	}
 
 	// 获取客户端变身状态的方法（供动画系统使用）
-	public static boolean isClientTransforming() {
-		return clientIsTransforming;
+	public static boolean isClientTransforming(UUID playerUuid) {
+		return getClientTransformState(playerUuid).IsTransforming;
 	}
 
-	public static String getClientTransformFromForm() {
-		return clientTransformFromForm;
+	public static String getClientTransformFromForm(UUID playerUuid) {
+		return getClientTransformState(playerUuid).TransformFromForm;
 	}
 
-	public static String getClientTransformToForm() {
-		return clientTransformToForm;
+	public static String getClientTransformToForm(UUID playerUuid) {
+		return getClientTransformState(playerUuid).TransformToForm;
 	}
 
 	private void registerShaderResource()

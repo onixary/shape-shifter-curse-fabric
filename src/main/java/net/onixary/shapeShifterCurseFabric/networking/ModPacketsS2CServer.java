@@ -48,10 +48,15 @@ public class ModPacketsS2CServer {
     public static void sendTransformState(ServerPlayerEntity player, boolean isTransforming,
                                           String fromForm, String toForm) {
         PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeUuid(player.getUuid());
         buf.writeBoolean(isTransforming);
         buf.writeString(fromForm != null ? fromForm : "");
         buf.writeString(toForm != null ? toForm : "");
-        ServerPlayNetworking.send(player, ModPackets.SYNC_TRANSFORM_STATE, buf);
+//        ServerPlayNetworking.send(player, ModPackets.SYNC_TRANSFORM_STATE, buf);
+        // 广播给所有玩家 用于同步动作
+        for (ServerPlayerEntity p : player.getServerWorld().getPlayers()) {
+            ServerPlayNetworking.send(p, ModPackets.SYNC_TRANSFORM_STATE, buf);
+        }
         ShapeShifterCurseFabric.LOGGER.info("Sent transform state to client: isTransforming=" + isTransforming);
     }
 
