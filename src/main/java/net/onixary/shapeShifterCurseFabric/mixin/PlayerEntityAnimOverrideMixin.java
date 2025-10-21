@@ -85,18 +85,18 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
     public PlayerAnimState currentState = PlayerAnimState.NONE;
     public PlayerAnimState previousState = PlayerAnimState.NONE;
 
-    public float momentum = 0;
-    public float turnDelta = 0;
+    public float momentum = 0;  // 无用
+    public float turnDelta = 0;  // 无用
     public Vec3d lastPos = new Vec3d(0, 0, 0);
     public boolean lastOnGround = false;
-    public boolean hasSlowFall = false;
-    private int tickCounter = 0;
+    public boolean hasSlowFall = false;  // 无用
+    private int tickCounter = 0;  // 无用
 
     private PlayerFormBase curForm;
     KeyframeAnimation currentAnimation = null;
-    boolean overrideHandAnim = false;
+    boolean overrideHandAnim = false;  // 无用
     AnimationHolder animToPlay = null;
-    boolean isAttackAnim = false;
+    boolean isAttackAnim = false;  // 无用
     int continueSwingAnimCounter = 0;
 
     PlayerFormBase transformCurrentForm;
@@ -138,18 +138,25 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                 currentState = PlayerAnimState.ANIM_RUSH_JUMP;
             }
         }
+        // 没用变量
         Block standingBlock = world.getBlockState(getBlockPos().down()).getBlock();
 
+        // 没用变量
         Vec3f movementVector = new Vec3f((float) (pos.x - lastPos.x), 0, (float) (pos.z - lastPos.z));
+
+        // 没用变量
         Vec3f lookVector = new Vec3f((float) Math.cos(Math.toRadians(bodyYaw + 90)), 0,
                 (float) Math.sin(Math.toRadians(bodyYaw + 90)));
 
+        // 没用变量
         float movementLength = (float) Math.sqrt(movementVector.getX() * movementVector.getX() +
                 movementVector.getY() * movementVector.getY() +
                 movementVector.getZ() * movementVector.getZ());
 
+        // 直接比较Pos一不一样就行
         boolean isWalking = movementLength > 0;
 
+        // 无用 Start
         float dotProduct = movementVector.getX() * lookVector.getX() +
                 movementVector.getY() * lookVector.getY() +
                 movementVector.getZ() * lookVector.getZ();
@@ -160,6 +167,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
         float sprint_multiplier = ((isSprinting() && isWalkingForwards) ? 2 : 1);
         momentum = MathHelper.lerp(delta * 2 * sprint_multiplier, momentum, (walk_sign) * sprint_multiplier);
+        // 无用 End
 
         boolean onGroundInWater = isSubmergedInWater() && this.getLandingBlockState().getCollisionShape(this.getWorld(), this.getBlockPos()).isEmpty();
         boolean isInShallowWater = isInsideWaterOrBubbleColumn() && !isSubmergedInWater() && isOnGround();
@@ -338,9 +346,11 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
                 }
 
             } else {
+                // 不会触发 不用管
                 if(isSleeping()){
                     currentState = PlayerAnimState.ANIM_SLEEP;
                 }
+                // 不会触发 不用管
                 else if(!isOnGround()){
                     currentState = PlayerAnimState.ANIM_FALL;
                 }
