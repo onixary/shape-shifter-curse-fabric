@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.additional_power;
 import io.github.apace100.apoli.power.factory.condition.ConditionFactory;
 import io.github.apace100.calio.data.SerializableData;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.ScaffoldingBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.util.hit.BlockHitResult;
@@ -16,6 +17,12 @@ public class MustCrawlingCondition {
         // 检测碰撞箱 防止出现身体与地面穿模 如果卡顿可以直接可以修改为 return true
         BlockPos up1pos = e.getBlockPos().up();
         BlockState up1block = e.getWorld().getBlockState(up1pos);
+        
+        // 排除脚手架方块
+        if (up1block.getBlock() instanceof ScaffoldingBlock) {
+            return true;
+        }
+        
         Vec3d CollideTestPoint = e.getPos().add(0f, 1.5f, 0f); // 蹲下高度为1.5
         BlockHitResult HitResult = up1block.getCollisionShape(e.getWorld(), up1pos).raycast(e.getPos(), CollideTestPoint, up1pos);
         if (HitResult == null) { // 没有碰撞箱时
