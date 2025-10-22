@@ -113,7 +113,6 @@ public class AnimationControllerInstance {
         Controller_Sneaking.RegisterAnimControllerCell(conditionID, cell);
     }
 
-    // TODO 在Init挂Hook
     public static void RegisterAnimCell() {
         RegisterAnimCellToAllController(AnimC_IsTransforming, (player, animDataHolder) -> new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_ON_TRANSFORM));
         RegisterAnimCellToAllController(AnimC_Power,
@@ -228,5 +227,15 @@ public class AnimationControllerInstance {
             }
             return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SNEAK_WALK);
         });
+    }
+
+    // 使用这个方法来获取动画 animDataHolder需要在Mixin中存储 如果没有直接new一个
+    public static AnimationHolder getAnim(PlayerEntity playerEntity, AnimationController.PlayerAnimDataHolder animDataHolder) {
+        if (playerEntity.isSneaking()) {
+            return Controller_Sneaking.getAnim(playerEntity, animDataHolder);
+        }
+        else {
+            return Controller_Normal.getAnim(playerEntity, animDataHolder);
+        }
     }
 }
