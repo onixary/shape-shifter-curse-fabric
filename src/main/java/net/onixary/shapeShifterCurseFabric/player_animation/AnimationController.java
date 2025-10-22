@@ -21,6 +21,7 @@ public class AnimationController {
     // 由PlayerAnimDataHolder存储全部动画数据
     public static class PlayerAnimDataHolder {
         // 跟随PlayerEntity Object
+        PlayerFormBase playerForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
         PlayerAnimState prevAnimState = null;
         public Vec3d lastPos = new Vec3d(0, 0, 0);
         int continueSwingAnimCounter = 0;
@@ -68,6 +69,7 @@ public class AnimationController {
     public void DataHolderPreTick(PlayerEntity player, PlayerAnimDataHolder animDataHolder) {
         // 可复用变量
         animDataHolder.IsWalk = !player.getPos().equals(animDataHolder.lastPos);
+        animDataHolder.playerForm = RegPlayerFormComponent.PLAYER_FORM.get(this).getCurrentForm();
     }
 
     public void DataHolderTick(PlayerEntity player, PlayerAnimDataHolder animDataHolder) {
@@ -82,7 +84,6 @@ public class AnimationController {
     }
 
     public AnimationHolder getAnim(PlayerEntity player, PlayerAnimDataHolder animDataHolder) {
-        PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(this).getCurrentForm();
         this.DataHolderPreTick(player, animDataHolder);
         PlayerAnimState animState = this.getAnimState(player, animDataHolder);
         // 先判断后处理变量
@@ -101,12 +102,12 @@ public class AnimationController {
                     transformToForm = toFormName != null ? RegPlayerForms.getPlayerForm(toFormName) : null;
                 } catch (IllegalArgumentException e) {
                     // 如果解析失败，使用当前形态作为 fallback
-                    transformCurrentForm = curForm;
-                    transformToForm = curForm;
+                    transformCurrentForm = animDataHolder.playerForm;
+                    transformToForm = animDataHolder.playerForm;
                 }
                 return AnimationTransform.getFormAnimToPlay(transformCurrentForm, transformToForm);
             default:
-                return curForm.Anim_getFormAnimToPlay(animState);
+                return animDataHolder.playerForm.Anim_getFormAnimToPlay(animState);
         }
     }
 

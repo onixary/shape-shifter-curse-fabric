@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -64,7 +65,7 @@ public class AnimationControllerInstance {
 
     public static Identifier AnimC_Swim = AnimationController.RegisterAnimationStateCondition(
             ShapeShifterCurseFabric.identifier("anim_c_swim"),
-            (playerEntity, animDataHolder) -> playerEntity.isTouchingWater() && playerEntity.isSwimming()
+            (playerEntity, animDataHolder) -> playerEntity.isTouchingWater()
     );  // 没必要判断是否奔跑
 
     public static Identifier AnimC_Flying = AnimationController.RegisterAnimationStateCondition(
@@ -152,7 +153,80 @@ public class AnimationControllerInstance {
                     }
                 }
         );  // 从PlayerEntityAnimOverrideMixin 中复制过来的
-        // TODO 填充动作控制器Cell
-
+        RegisterAnimCellToAllController(AnimC_Sleep, (player, animDataHolder) -> new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SLEEP));
+        RegisterAnimCellToAllController(AnimC_Ride, ((playerEntity, animDataHolder) -> {
+            if (playerEntity.getVehicle() instanceof BoatEntity) {
+                return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_BOAT_IDLE);
+            }
+            return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_RIDE_IDLE);
+        }));
+        RegisterAnimCellToAllController(AnimC_Climb, ((playerEntity, animDataHolder) -> {
+            if (playerEntity.getVelocity().y > 0)
+            {
+                return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_CLIMB);
+            }
+            return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_CLIMB_IDLE);
+        }));
+        RegisterAnimCellToAllController(AnimC_Swim, (playerEntity, animDataHolder) -> {
+            if (playerEntity.isSwimming()) {
+                return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SWIM);
+            }
+            // 我认为应该修改为检测移动 或者在默认动画中设置 Sneak情况下应该会出BUG 毕竟这个动作没有进行游泳 有可能会出现Sneak情况
+            return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SWIM_IDLE);
+        });
+        RegisterAnimCellToAllController(AnimC_Flying, (playerEntity, animDataHolder) -> new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_CREATIVE_FLY));
+        RegisterAnimCellToAllController(AnimC_FallFlying, (playerEntity, animDataHolder) -> new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_ELYTRA_FLY));
+        Controller_Normal.RegisterAnimControllerCell(AnimC_Fall, (playerEntity, animDataHolder) -> {
+            if (animDataHolder.playerForm.getHasSlowFall()) {
+                return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SLOW_FALL);
+            } else if (playerEntity.fallDistance > 0.6f) {
+                return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_FALL);
+            }
+            return new Pair<>(AnimationControllerCellResult.NOT_MATCH, PlayerAnimState.NONE);
+        });
+        Controller_Sneaking.RegisterAnimControllerCell(AnimC_Fall, (playerEntity, animDataHolder) -> {
+            if (animDataHolder.playerForm.getHasSlowFall()) {
+                return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SLOW_FALL);
+            } else if (playerEntity.fallDistance > 0.6f) {
+                return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SNEAK_FALL);
+            }
+            return new Pair<>(AnimationControllerCellResult.NOT_MATCH, PlayerAnimState.NONE);
+        });
+        Controller_Normal.RegisterAnimControllerCell(AnimC_Jump, (playerEntity, animDataHolder) -> {
+            if ((Math.abs(playerEntity.getVelocity().z) > 0.15 || Math.abs(playerEntity.getVelocity().x) > 0.15) && animDataHolder.playerForm.getCanSneakRush()) {
+                return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_RUSH_JUMP);
+            }
+            return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_JUMP);
+        });
+        Controller_Sneaking.RegisterAnimControllerCell(AnimC_Jump, (playerEntity, animDataHolder) -> {
+            if ((Math.abs(playerEntity.getVelocity().z) > 0.15 || Math.abs(playerEntity.getVelocity().x) > 0.15) && animDataHolder.playerForm.getCanSneakRush()) {
+                return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_RUSH_JUMP);
+            }
+            return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SNEAK_JUMP);
+        });
+        Controller_Normal.RegisterAnimControllerCell(AnimC_UseItem, (playerEntity, animDataHolder) -> new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_IDLE));
+        Controller_Sneaking.RegisterAnimControllerCell(AnimC_UseItem, (playerEntity, animDataHolder) -> {
+            // 需要新的动画 类似潜行行走但腿不动 由于ANIM_SNEAK_IDLE是坐下的动画 所以这里需要新的动画
+            if (animDataHolder.IsWalk) {
+                return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SNEAK_WALK);
+            }
+            return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SNEAK_IDLE);
+        });
+        Controller_Normal.RegisterAnimControllerCell(AnimC_Mining, (playerEntity, animDataHolder) -> new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_TOOL_SWING));
+        Controller_Sneaking.RegisterAnimControllerCell(AnimC_Mining, (playerEntity, animDataHolder) -> new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SNEAK_TOOL_SWING));
+        Controller_Normal.RegisterAnimControllerCell(AnimC_Attack, (playerEntity, animDataHolder) -> new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_ATTACK_ONCE));
+        Controller_Sneaking.RegisterAnimControllerCell(AnimC_Attack, (playerEntity, animDataHolder) -> new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SNEAK_ATTACK_ONCE));
+        Controller_Normal.RegisterAnimControllerCell(AnimC_Walk, (playerEntity, animDataHolder) -> {
+            if (playerEntity.isSprinting()) {
+                return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_RUN);
+            }
+            return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_WALK);
+        });
+        Controller_Sneaking.RegisterAnimControllerCell(AnimC_Walk, (playerEntity, animDataHolder) -> {
+            if (animDataHolder.playerForm.getCanSneakRush() && playerEntity.getHungerManager().getFoodLevel() >= 6) {
+                return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SNEAK_RUSH);
+            }
+            return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SNEAK_WALK);
+        });
     }
 }
