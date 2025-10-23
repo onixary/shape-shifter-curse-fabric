@@ -113,7 +113,7 @@ public class AnimationControllerInstance {
         Controller_Sneaking.RegisterAnimControllerCell(conditionID, cell);
     }
 
-    public static void RegisterAnimCell() {
+    static {
         RegisterAnimCellToAllController(AnimC_IsTransforming, (player, animDataHolder) -> new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_ON_TRANSFORM));
         RegisterAnimCellToAllController(AnimC_Power,
                 (player, animDataHolder) -> {

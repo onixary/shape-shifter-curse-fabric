@@ -69,7 +69,7 @@ public class AnimationController {
     public void DataHolderPreTick(PlayerEntity player, PlayerAnimDataHolder animDataHolder) {
         // 可复用变量
         animDataHolder.IsWalk = !player.getPos().equals(animDataHolder.lastPos);
-        animDataHolder.playerForm = RegPlayerFormComponent.PLAYER_FORM.get(this).getCurrentForm();
+        animDataHolder.playerForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
     }
 
     public void DataHolderTick(PlayerEntity player, PlayerAnimDataHolder animDataHolder) {

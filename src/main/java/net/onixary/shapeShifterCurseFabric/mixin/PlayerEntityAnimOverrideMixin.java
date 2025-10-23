@@ -30,6 +30,8 @@ import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
+import net.onixary.shapeShifterCurseFabric.player_animation.AnimationController;
+import net.onixary.shapeShifterCurseFabric.player_animation.AnimationControllerInstance;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.*;
@@ -102,359 +104,374 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
     PlayerFormBase transformCurrentForm;
     PlayerFormBase transformToForm;
 
+//    @Override
+//    public void tick() {
+//        super.tick();
+//
+//        tickCounter++;
+//        if (tickCounter == 20) {
+//            /*if (this.hasStatusEffect(StatusEffects.SLOW_FALLING)) {
+//                hasSlowFall = true;
+//            } else {
+//                hasSlowFall = false;
+//            }*/
+//            tickCounter = 0;
+//        }
+//        World world = this.getEntityWorld();
+//        boolean onGround = this.isOnGround();
+//        float delta = 1.0f / 20.0f;
+//        Vec3d pos = getPos();
+//
+//        curForm = RegPlayerFormComponent.PLAYER_FORM.get(this).getCurrentForm();
+//
+//        if (!isOnGround() && lastOnGround && getVelocity().y > 0) {
+//            if(isSneaking()){
+//                currentState = PlayerAnimState.ANIM_SNEAK_JUMP;
+//            }
+//            else{
+//                currentState = PlayerAnimState.ANIM_JUMP;
+//            }
+//
+//        }
+//
+//        if(!isOnGround() && lastOnGround && (Math.abs(getVelocity().z) > 0.15 || Math.abs(getVelocity().x) > 0.15)){
+//            // rush jump
+//            if(curForm.getCanRushJump()){
+//                currentState = PlayerAnimState.ANIM_RUSH_JUMP;
+//            }
+//        }
+//        // 没用变量
+//        Block standingBlock = world.getBlockState(getBlockPos().down()).getBlock();
+//
+//        // 没用变量
+//        Vec3f movementVector = new Vec3f((float) (pos.x - lastPos.x), 0, (float) (pos.z - lastPos.z));
+//
+//        // 没用变量
+//        Vec3f lookVector = new Vec3f((float) Math.cos(Math.toRadians(bodyYaw + 90)), 0,
+//                (float) Math.sin(Math.toRadians(bodyYaw + 90)));
+//
+//        // 没用变量
+//        float movementLength = (float) Math.sqrt(movementVector.getX() * movementVector.getX() +
+//                movementVector.getY() * movementVector.getY() +
+//                movementVector.getZ() * movementVector.getZ());
+//
+//        // 直接比较Pos一不一样就行
+//        boolean isWalking = movementLength > 0;
+//
+//        // 无用 Start
+//        float dotProduct = movementVector.getX() * lookVector.getX() +
+//                movementVector.getY() * lookVector.getY() +
+//                movementVector.getZ() * lookVector.getZ();
+//
+//        boolean isWalkingForwards = isWalking && dotProduct > 0;
+//
+//        float walk_sign = isWalking ? isWalkingForwards ? 1 : -1 : 0;
+//
+//        float sprint_multiplier = ((isSprinting() && isWalkingForwards) ? 2 : 1);
+//        momentum = MathHelper.lerp(delta * 2 * sprint_multiplier, momentum, (walk_sign) * sprint_multiplier);
+//        // 无用 End
+//
+//        boolean onGroundInWater = isSubmergedInWater() && this.getLandingBlockState().getCollisionShape(this.getWorld(), this.getBlockPos()).isEmpty();
+//        boolean isInShallowWater = isInsideWaterOrBubbleColumn() && !isSubmergedInWater() && isOnGround();
+//        // getHandSwingDuration() is a private method, so we have to calculate it ourselves
+//        int handSwingDuration = 0;
+//        if (StatusEffectUtil.hasHaste(this))
+//        {
+//            handSwingDuration = 6 - (1 + StatusEffectUtil.getHasteAmplifier(this));
+//        }
+//        else
+//        {
+//            handSwingDuration = this.hasStatusEffect(StatusEffects.MINING_FATIGUE) ? 6 + (1 + this.getStatusEffect(StatusEffects.MINING_FATIGUE).getAmplifier()) * 2 : 6;
+//        }
+//
+//        if (isUsingItem()){
+//            // todo: using item anim here if needed
+//            if (isSneaking()) {
+//                if (isWalking) {
+//                    currentState = PlayerAnimState.ANIM_SNEAK_WALK;
+//                }
+//                else {
+//                    currentState = PlayerAnimState.ANIM_SNEAK_IDLE;
+//                }
+//            }
+//            else {
+//                currentState = PlayerAnimState.ANIM_IDLE;
+//            }
+//        }
+//        else if (!this.handSwinging)
+//        {
+//            // 既然已经在载具上了 就没有必要判断其他动作了
+//            if (getVehicle() != null)
+//            {
+//                if(getVehicle() instanceof BoatEntity){
+//                    currentState = PlayerAnimState.ANIM_BOAT_IDLE;
+//                }
+//                else{
+//                    currentState = PlayerAnimState.ANIM_RIDE_IDLE;
+//                }
+//
+//            }
+//
+//            // if ((world.getBlockState(getBlockPos()).getBlock() instanceof LadderBlock && !isOnGround() && !jumping))
+//            // 直接使用isClimbing()判断是否在攀爬
+//            else if (this.CanClimbAnim())
+//            {
+//                currentState = PlayerAnimState.ANIM_CLIMB_IDLE;
+//                if (getVelocity().y > 0)
+//                {
+//                    currentState = PlayerAnimState.ANIM_CLIMB;
+//                }
+//            }
+//            // 这条分支永远不会执行 因为上面已经判断了isUsingItem()
+//            // else if (isUsingItem())
+//            // {
+//            //     if (getMainHandStack().getItem().isFood())
+//            //     {
+//            //         //todo
+//            //     }
+//            //     if (getMainHandStack().getUseAction() == UseAction.DRINK)
+//            //     {
+//            //         //todo
+//            //     }
+//            // }
+//            else if (this.getAbilities().flying)
+//            {
+//                currentState = PlayerAnimState.ANIM_CREATIVE_FLY;
+//            }
+//            else if (isFallFlying())
+//            {
+//                currentState = PlayerAnimState.ANIM_ELYTRA_FLY;
+//            }
+//            // 攀爬逻辑在上面CanClimbAnim决定 由于只要在可攀爬的方块上，isClimbing就会为true 并且 isOnGround()为false 所以这里需要额外判断
+//            else if ((isOnGround() || onGroundInWater || this.isClimbing()) && !isAttackAnim)
+//            {
+//                if(isSleeping()){
+//                    currentState = PlayerAnimState.ANIM_SLEEP;
+//                }
+//                else{
+//                    currentState = PlayerAnimState.ANIM_IDLE;
+//                }
+//
+//                if ((isInsideWaterOrBubbleColumn() || isInLava()) && !onGroundInWater && !isInShallowWater)
+//                {
+//                    if (this.isSwimming() || this.isSprinting())
+//                    {
+//                        currentState = PlayerAnimState.ANIM_SWIM;
+//                    }
+//                }
+//                else if (isSneaking())
+//                {
+//                    currentState = PlayerAnimState.ANIM_SNEAK_IDLE;
+//
+//                    if (isWalking || turnDelta != 0)
+//                    {
+//                        // 特殊处理Ocelot的sneak rush
+//                        if(curForm.getCanSneakRush()){
+//                            if(this.getHungerManager().getFoodLevel() >= 6){
+//                                currentState = PlayerAnimState.ANIM_SNEAK_RUSH;
+//                            }
+//                            else{
+//                                currentState = PlayerAnimState.ANIM_SNEAK_WALK;
+//                            }
+//                        }
+//                        else{
+//                            currentState = PlayerAnimState.ANIM_SNEAK_WALK;
+//                        }
+//
+//                    }
+//                }
+//                else
+//                {
+//                    if (isWalking)
+//                    {
+//                        if (isSprinting() && !isUsingItem())
+//                        {
+//                            currentState = PlayerAnimState.ANIM_RUN;
+//                        }
+//                        else
+//                        {
+//                            currentState = PlayerAnimState.ANIM_WALK;
+//                        }
+//                    }
+//                }
+//            }
+//            else
+//            {
+//                if (!isOnGround() && getVelocity().y < 0)
+//                {
+//                    if(hasSlowFall){
+//                        currentState = PlayerAnimState.ANIM_SLOW_FALL;
+//                    }
+//                    else if (this.fallDistance > 0.6f)
+//                    {
+//                        if(isSneaking()){
+//                            currentState = PlayerAnimState.ANIM_SNEAK_FALL;
+//                        }
+//                        else{
+//                            currentState = PlayerAnimState.ANIM_FALL;
+//                        }
+//                    }
+//
+//                }
+//            }
+//            if (isCrawling()) {
+//                if (isWalking) {
+//                    currentState = PlayerAnimState.ANIM_CRAWL;
+//                } else {
+//                    currentState = PlayerAnimState.ANIM_CRAWL_IDLE;
+//                }
+//            }
+//            else if ((isSubmergedInWater() || isInLava()))
+//            {
+//                if (this.isSwimming() || this.isSprinting())
+//                {
+//                    currentState = PlayerAnimState.ANIM_SWIM;
+//                }
+//                else
+//                {
+//                    currentState = PlayerAnimState.ANIM_SWIM_IDLE;
+//                }
+//            }
+//            continueSwingAnimCounter = 0; // 重置挖掘动画计数器
+//        }
+//        else
+//        {
+//            // 需要判断是挖掘（长按）还是攻击（短按）
+//            // 挖掘动画为loop，攻击动画为单次
+//            if (continueSwingAnimCounter < 10) {
+//                continueSwingAnimCounter++;
+//                if(isSneaking()){
+//                    currentState = PlayerAnimState.ANIM_SNEAK_ATTACK_ONCE;
+//                }
+//                else{
+//                    currentState = PlayerAnimState.ANIM_ATTACK_ONCE;
+//                }
+//
+//            } else {
+//                // 不会触发 不用管
+//                if(isSleeping()){
+//                    currentState = PlayerAnimState.ANIM_SLEEP;
+//                }
+//                // 不会触发 不用管
+//                else if(!isOnGround()){
+//                    currentState = PlayerAnimState.ANIM_FALL;
+//                }
+//                else{
+//                    if(isSneaking()){
+//                        currentState = PlayerAnimState.ANIM_SNEAK_TOOL_SWING;
+//                    }
+//                    else{
+//                        currentState = PlayerAnimState.ANIM_TOOL_SWING;
+//                    }
+//                }
+//            }
+//        }
+//
+//        AtomicBoolean foundLocalPower = new AtomicBoolean(false);
+//        // 首先检查本地玩家的Power状态
+//        io.github.apace100.apoli.component.PowerHolderComponent.getPowers(this, BatBlockAttachPower.class)
+//                .stream()
+//                .filter(power -> power.isAttached())
+//                .findFirst()
+//                .ifPresent(attachPower -> {
+//                    if (attachPower.getAttachType() == BatBlockAttachPower.AttachType.SIDE) {
+//                        currentState = PlayerAnimState.ANIM_ATTACH_SIDE;
+//                    } else if (attachPower.getAttachType() == BatBlockAttachPower.AttachType.BOTTOM) {
+//                        currentState = PlayerAnimState.ANIM_ATTACH_BOTTOM;
+//                    }
+//                    foundLocalPower.set(true);
+//                });
+//
+//        // 如果没有找到本地Power状态，检查客户端状态管理器（用于其他玩家）
+//        if (!foundLocalPower.get()) {
+//            ClientPlayerStateManager.PlayerAttachState otherPlayerState =
+//                    ClientPlayerStateManager.getPlayerAttachState(this.getUuid());
+//            if (otherPlayerState != null && otherPlayerState.isAttached) {
+//                if (otherPlayerState.attachType == BatBlockAttachPower.AttachType.SIDE) {
+//                    currentState = PlayerAnimState.ANIM_ATTACH_SIDE;
+//                } else if (otherPlayerState.attachType == BatBlockAttachPower.AttachType.BOTTOM) {
+//                    currentState = PlayerAnimState.ANIM_ATTACH_BOTTOM;
+//                }
+//            }
+//        }
+//
+//        // isTransforming - 使用客户端同步的状态
+//        if(net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.isClientTransforming(this.getUuid())){
+//            //ShapeShifterCurseFabric.LOGGER.info("Player is transforming");
+//            // 使用客户端同步的变身信息
+//            String fromFormName = net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.getClientTransformFromForm(this.getUuid());
+//            String toFormName = net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.getClientTransformToForm(this.getUuid());
+//
+//            // 尝试解析形态名称为 PlayerForms 枚举
+//            try {
+//                transformCurrentForm = fromFormName != null ? RegPlayerForms.getPlayerForm(fromFormName) : null;
+//                transformToForm = toFormName != null ? RegPlayerForms.getPlayerForm(toFormName) : null;
+//            } catch (IllegalArgumentException e) {
+//                // 如果解析失败，使用当前形态作为 fallback
+//                transformCurrentForm = curForm;
+//                transformToForm = curForm;
+//            }
+//
+//            currentState = PlayerAnimState.ANIM_ON_TRANSFORM;
+//        }
+//        // 在变身结束后，强制更新 curForm 以确保动画系统使用最新的形态
+//        else {
+//            // 检查是否刚刚结束变身，如果是则强制刷新当前形态
+//            if (previousState == PlayerAnimState.ANIM_ON_TRANSFORM) {
+//                // 强制重新获取当前形态，确保使用最新的数据
+//                PlayerFormBase latestForm = RegPlayerFormComponent.PLAYER_FORM.get(this).getCurrentForm();
+//                if (!latestForm.equals(curForm)) {
+//                    curForm = latestForm;
+//                    ShapeShifterCurseFabric.LOGGER.info("Animation system updated curForm after transform: " + curForm);
+//                }
+//            }
+//        }
+//
+//        lastPos = new Vec3d(pos.x, pos.y, pos.z);
+//        lastOnGround = onGround;
+//        if (previousState != currentState)
+//        {
+//            //ShapeShifterCurseFabric.LOGGER.info("PlayerAnimState: " + currentState);
+//            // todo: previousState related logic here
+//            previousState = currentState;
+//        }
+//
+//        // judge form animation
+//        animToPlay = null;
+//        if(currentState == PlayerAnimState.ANIM_ON_TRANSFORM){
+//            animToPlay = AnimationTransform.getFormAnimToPlay(transformCurrentForm, transformToForm);
+//        }
+//        else{
+//            animToPlay = curForm.Anim_getFormAnimToPlay(currentState);
+//            hasSlowFall = curForm.getHasSlowFall();
+//            overrideHandAnim = curForm.getOverrideHandAnim();
+//        }
+//
+//
+//        if (animToPlay != null){
+//            //ShapeShifterCurseFabric.LOGGER.info("Playing animation: " + animToPlay.getAnimation());
+//            playAnimation(animToPlay.getAnimation(), animToPlay.getSpeed(), animToPlay.getFade());
+//        }
+//        else{
+//            CONTAINER.setAnimation(null);
+//            currentAnimation = null;
+//        }
+//
+//    }
+
+    @Unique
+    AnimationController.PlayerAnimDataHolder AnimDataHolder = new AnimationController.PlayerAnimDataHolder();
+
     @Override
     public void tick() {
         super.tick();
-
-        tickCounter++;
-        if (tickCounter == 20) {
-            /*if (this.hasStatusEffect(StatusEffects.SLOW_FALLING)) {
-                hasSlowFall = true;
-            } else {
-                hasSlowFall = false;
-            }*/
-            tickCounter = 0;
-        }
-        World world = this.getEntityWorld();
-        boolean onGround = this.isOnGround();
-        float delta = 1.0f / 20.0f;
-        Vec3d pos = getPos();
-
-        curForm = RegPlayerFormComponent.PLAYER_FORM.get(this).getCurrentForm();
-
-        if (!isOnGround() && lastOnGround && getVelocity().y > 0) {
-            if(isSneaking()){
-                currentState = PlayerAnimState.ANIM_SNEAK_JUMP;
-            }
-            else{
-                currentState = PlayerAnimState.ANIM_JUMP;
-            }
-
-        }
-
-        if(!isOnGround() && lastOnGround && (Math.abs(getVelocity().z) > 0.15 || Math.abs(getVelocity().x) > 0.15)){
-            // rush jump
-            if(curForm.getCanRushJump()){
-                currentState = PlayerAnimState.ANIM_RUSH_JUMP;
-            }
-        }
-        // 没用变量
-        Block standingBlock = world.getBlockState(getBlockPos().down()).getBlock();
-
-        // 没用变量
-        Vec3f movementVector = new Vec3f((float) (pos.x - lastPos.x), 0, (float) (pos.z - lastPos.z));
-
-        // 没用变量
-        Vec3f lookVector = new Vec3f((float) Math.cos(Math.toRadians(bodyYaw + 90)), 0,
-                (float) Math.sin(Math.toRadians(bodyYaw + 90)));
-
-        // 没用变量
-        float movementLength = (float) Math.sqrt(movementVector.getX() * movementVector.getX() +
-                movementVector.getY() * movementVector.getY() +
-                movementVector.getZ() * movementVector.getZ());
-
-        // 直接比较Pos一不一样就行
-        boolean isWalking = movementLength > 0;
-
-        // 无用 Start
-        float dotProduct = movementVector.getX() * lookVector.getX() +
-                movementVector.getY() * lookVector.getY() +
-                movementVector.getZ() * lookVector.getZ();
-
-        boolean isWalkingForwards = isWalking && dotProduct > 0;
-
-        float walk_sign = isWalking ? isWalkingForwards ? 1 : -1 : 0;
-
-        float sprint_multiplier = ((isSprinting() && isWalkingForwards) ? 2 : 1);
-        momentum = MathHelper.lerp(delta * 2 * sprint_multiplier, momentum, (walk_sign) * sprint_multiplier);
-        // 无用 End
-
-        boolean onGroundInWater = isSubmergedInWater() && this.getLandingBlockState().getCollisionShape(this.getWorld(), this.getBlockPos()).isEmpty();
-        boolean isInShallowWater = isInsideWaterOrBubbleColumn() && !isSubmergedInWater() && isOnGround();
-        // getHandSwingDuration() is a private method, so we have to calculate it ourselves
-        int handSwingDuration = 0;
-        if (StatusEffectUtil.hasHaste(this))
-        {
-            handSwingDuration = 6 - (1 + StatusEffectUtil.getHasteAmplifier(this));
-        }
-        else
-        {
-            handSwingDuration = this.hasStatusEffect(StatusEffects.MINING_FATIGUE) ? 6 + (1 + this.getStatusEffect(StatusEffects.MINING_FATIGUE).getAmplifier()) * 2 : 6;
-        }
-
-        if (isUsingItem()){
-            // todo: using item anim here if needed
-            if (isSneaking()) {
-                if (isWalking) {
-                    currentState = PlayerAnimState.ANIM_SNEAK_WALK;
-                }
-                else {
-                    currentState = PlayerAnimState.ANIM_SNEAK_IDLE;
-                }
-            }
-            else {
-                currentState = PlayerAnimState.ANIM_IDLE;
-            }
-        }
-        else if (!this.handSwinging)
-        {
-            // 既然已经在载具上了 就没有必要判断其他动作了
-            if (getVehicle() != null)
-            {
-                if(getVehicle() instanceof BoatEntity){
-                    currentState = PlayerAnimState.ANIM_BOAT_IDLE;
-                }
-                else{
-                    currentState = PlayerAnimState.ANIM_RIDE_IDLE;
-                }
-
-            }
-
-            // if ((world.getBlockState(getBlockPos()).getBlock() instanceof LadderBlock && !isOnGround() && !jumping))
-            // 直接使用isClimbing()判断是否在攀爬
-            else if (this.CanClimbAnim())
-            {
-                currentState = PlayerAnimState.ANIM_CLIMB_IDLE;
-                if (getVelocity().y > 0)
-                {
-                    currentState = PlayerAnimState.ANIM_CLIMB;
-                }
-            }
-            // 这条分支永远不会执行 因为上面已经判断了isUsingItem()
-            // else if (isUsingItem())
-            // {
-            //     if (getMainHandStack().getItem().isFood())
-            //     {
-            //         //todo
-            //     }
-            //     if (getMainHandStack().getUseAction() == UseAction.DRINK)
-            //     {
-            //         //todo
-            //     }
-            // }
-            else if (this.getAbilities().flying)
-            {
-                currentState = PlayerAnimState.ANIM_CREATIVE_FLY;
-            }
-            else if (isFallFlying())
-            {
-                currentState = PlayerAnimState.ANIM_ELYTRA_FLY;
-            }
-            // 攀爬逻辑在上面CanClimbAnim决定 由于只要在可攀爬的方块上，isClimbing就会为true 并且 isOnGround()为false 所以这里需要额外判断
-            else if ((isOnGround() || onGroundInWater || this.isClimbing()) && !isAttackAnim)
-            {
-                if(isSleeping()){
-                    currentState = PlayerAnimState.ANIM_SLEEP;
-                }
-                else{
-                    currentState = PlayerAnimState.ANIM_IDLE;
-                }
-
-                if ((isInsideWaterOrBubbleColumn() || isInLava()) && !onGroundInWater && !isInShallowWater)
-                {
-                    if (this.isSwimming() || this.isSprinting())
-                    {
-                        currentState = PlayerAnimState.ANIM_SWIM;
-                    }
-                }
-                else if (isSneaking())
-                {
-                    currentState = PlayerAnimState.ANIM_SNEAK_IDLE;
-
-                    if (isWalking || turnDelta != 0)
-                    {
-                        // 特殊处理Ocelot的sneak rush
-                        if(curForm.getCanSneakRush()){
-                            if(this.getHungerManager().getFoodLevel() >= 6){
-                                currentState = PlayerAnimState.ANIM_SNEAK_RUSH;
-                            }
-                            else{
-                                currentState = PlayerAnimState.ANIM_SNEAK_WALK;
-                            }
-                        }
-                        else{
-                            currentState = PlayerAnimState.ANIM_SNEAK_WALK;
-                        }
-
-                    }
-                }
-                else
-                {
-                    if (isWalking)
-                    {
-                        if (isSprinting() && !isUsingItem())
-                        {
-                            currentState = PlayerAnimState.ANIM_RUN;
-                        }
-                        else
-                        {
-                            currentState = PlayerAnimState.ANIM_WALK;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (!isOnGround() && getVelocity().y < 0)
-                {
-                    if(hasSlowFall){
-                        currentState = PlayerAnimState.ANIM_SLOW_FALL;
-                    }
-                    else if (this.fallDistance > 0.6f)
-                    {
-                        if(isSneaking()){
-                            currentState = PlayerAnimState.ANIM_SNEAK_FALL;
-                        }
-                        else{
-                            currentState = PlayerAnimState.ANIM_FALL;
-                        }
-                    }
-
-                }
-            }
-            if (isCrawling()) {
-                if (isWalking) {
-                    currentState = PlayerAnimState.ANIM_CRAWL;
-                } else {
-                    currentState = PlayerAnimState.ANIM_CRAWL_IDLE;
-                }
-            }
-            else if ((isSubmergedInWater() || isInLava()))
-            {
-                if (this.isSwimming() || this.isSprinting())
-                {
-                    currentState = PlayerAnimState.ANIM_SWIM;
-                }
-                else
-                {
-                    currentState = PlayerAnimState.ANIM_SWIM_IDLE;
-                }
-            }
-            continueSwingAnimCounter = 0; // 重置挖掘动画计数器
-        }
-        else
-        {
-            // 需要判断是挖掘（长按）还是攻击（短按）
-            // 挖掘动画为loop，攻击动画为单次
-            if (continueSwingAnimCounter < 10) {
-                continueSwingAnimCounter++;
-                if(isSneaking()){
-                    currentState = PlayerAnimState.ANIM_SNEAK_ATTACK_ONCE;
-                }
-                else{
-                    currentState = PlayerAnimState.ANIM_ATTACK_ONCE;
-                }
-
-            } else {
-                // 不会触发 不用管
-                if(isSleeping()){
-                    currentState = PlayerAnimState.ANIM_SLEEP;
-                }
-                // 不会触发 不用管
-                else if(!isOnGround()){
-                    currentState = PlayerAnimState.ANIM_FALL;
-                }
-                else{
-                    if(isSneaking()){
-                        currentState = PlayerAnimState.ANIM_SNEAK_TOOL_SWING;
-                    }
-                    else{
-                        currentState = PlayerAnimState.ANIM_TOOL_SWING;
-                    }
-                }
-            }
-        }
-
-        AtomicBoolean foundLocalPower = new AtomicBoolean(false);
-        // 首先检查本地玩家的Power状态
-        io.github.apace100.apoli.component.PowerHolderComponent.getPowers(this, BatBlockAttachPower.class)
-                .stream()
-                .filter(power -> power.isAttached())
-                .findFirst()
-                .ifPresent(attachPower -> {
-                    if (attachPower.getAttachType() == BatBlockAttachPower.AttachType.SIDE) {
-                        currentState = PlayerAnimState.ANIM_ATTACH_SIDE;
-                    } else if (attachPower.getAttachType() == BatBlockAttachPower.AttachType.BOTTOM) {
-                        currentState = PlayerAnimState.ANIM_ATTACH_BOTTOM;
-                    }
-                    foundLocalPower.set(true);
-                });
-
-        // 如果没有找到本地Power状态，检查客户端状态管理器（用于其他玩家）
-        if (!foundLocalPower.get()) {
-            ClientPlayerStateManager.PlayerAttachState otherPlayerState =
-                    ClientPlayerStateManager.getPlayerAttachState(this.getUuid());
-            if (otherPlayerState != null && otherPlayerState.isAttached) {
-                if (otherPlayerState.attachType == BatBlockAttachPower.AttachType.SIDE) {
-                    currentState = PlayerAnimState.ANIM_ATTACH_SIDE;
-                } else if (otherPlayerState.attachType == BatBlockAttachPower.AttachType.BOTTOM) {
-                    currentState = PlayerAnimState.ANIM_ATTACH_BOTTOM;
-                }
-            }
-        }
-
-        // isTransforming - 使用客户端同步的状态
-        if(net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.isClientTransforming(this.getUuid())){
-            //ShapeShifterCurseFabric.LOGGER.info("Player is transforming");
-            // 使用客户端同步的变身信息
-            String fromFormName = net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.getClientTransformFromForm(this.getUuid());
-            String toFormName = net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.getClientTransformToForm(this.getUuid());
-
-            // 尝试解析形态名称为 PlayerForms 枚举
-            try {
-                transformCurrentForm = fromFormName != null ? RegPlayerForms.getPlayerForm(fromFormName) : null;
-                transformToForm = toFormName != null ? RegPlayerForms.getPlayerForm(toFormName) : null;
-            } catch (IllegalArgumentException e) {
-                // 如果解析失败，使用当前形态作为 fallback
-                transformCurrentForm = curForm;
-                transformToForm = curForm;
-            }
-
-            currentState = PlayerAnimState.ANIM_ON_TRANSFORM;
-        }
-        // 在变身结束后，强制更新 curForm 以确保动画系统使用最新的形态
-        else {
-            // 检查是否刚刚结束变身，如果是则强制刷新当前形态
-            if (previousState == PlayerAnimState.ANIM_ON_TRANSFORM) {
-                // 强制重新获取当前形态，确保使用最新的数据
-                PlayerFormBase latestForm = RegPlayerFormComponent.PLAYER_FORM.get(this).getCurrentForm();
-                if (!latestForm.equals(curForm)) {
-                    curForm = latestForm;
-                    ShapeShifterCurseFabric.LOGGER.info("Animation system updated curForm after transform: " + curForm);
-                }
-            }
-        }
-
-        lastPos = new Vec3d(pos.x, pos.y, pos.z);
-        lastOnGround = onGround;
-        if (previousState != currentState)
-        {
-            //ShapeShifterCurseFabric.LOGGER.info("PlayerAnimState: " + currentState);
-            // todo: previousState related logic here
-            previousState = currentState;
-        }
-
-        // judge form animation
-        animToPlay = null;
-        if(currentState == PlayerAnimState.ANIM_ON_TRANSFORM){
-            animToPlay = AnimationTransform.getFormAnimToPlay(transformCurrentForm, transformToForm);
-        }
-        else{
-            animToPlay = curForm.Anim_getFormAnimToPlay(currentState);
-            hasSlowFall = curForm.getHasSlowFall();
-            overrideHandAnim = curForm.getOverrideHandAnim();
-        }
-
-
+        animToPlay = AnimationControllerInstance.getAnim(this, this.AnimDataHolder);
         if (animToPlay != null){
-            //ShapeShifterCurseFabric.LOGGER.info("Playing animation: " + animToPlay.getAnimation());
             playAnimation(animToPlay.getAnimation(), animToPlay.getSpeed(), animToPlay.getFade());
         }
         else{
             CONTAINER.setAnimation(null);
-            currentAnimation = null;
         }
-
     }
 
     public void playAnimation(KeyframeAnimation anim) {
