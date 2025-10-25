@@ -53,50 +53,48 @@ public class ExtraItemFeatureRenderer <T extends LivingEntity, M extends EntityM
 
             if (isFeral && MinecraftClient.getInstance().options.getPerspective().isFirstPerson()) {
 
-                if(IS_FIRST_PERSON_MOD_LOADED){
+                if(IS_FIRST_PERSON_MOD_LOADED) {
                     // Feral形态的forstperson配置必须固定为-25 offset，否则会导致物品位置不正确以及模型看不到
                     FirstPersonModelCore fpm = FirstPersonModelCore.instance;
                     fpm.getConfig().xOffset = -25;
                     fpm.getConfig().sitXOffset = -25;
                     fpm.getConfig().sneakXOffset = -25;
+
+                    // 已知Bug 在开启 FirstPersonModel 并启用时 且在第一人称时 物品位置不对
+                    if (fpm.isEnabled()) {
+                        // 仅限开启FirstPersonModel时渲染额外物品
+                        matrices.push();
+                        //var eR = (PlayerEntityRenderer) MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(player);
+                        //var head = eR.getModel().head;
+                        // FirstPerson Mod会直接将head.pivot移动到某个非常远的位置来“隐藏”头部，所以需要直接定义好一个固定位置
+                        // Vec3d posOffset = new Vec3d(0.0F, 0.0F, 0.0F);
+                        // Vec3d rotCenter = ShapeShifterCurseFabric.feralItemCenter;
+                        Vec3d rotCenter = new Vec3d(0.0F, -4.0F, -6.0F);
+                        matrices.translate(rotCenter.x / 16.0F, rotCenter.y / 16.0F, rotCenter.z / 16.0F);
+                        //Vec3d posOffset = ShapeShifterCurseFabric.feralItemPosOffset;
+                        Vec3d posOffset = new Vec3d(-12.0F, 15.0F, 4.0F);
+                        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(headYaw));
+                        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(headPitch));
+                        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(240.0F));
+                        matrices.translate(posOffset.x / 16.0F, posOffset.y / 16.0F, posOffset.z / 16.0F);
+                        float pitch = MathHelper.lerp(tickDelta, player.prevPitch, player.getPitch());
+                        float equipProgress = 1.0F - MathHelper.lerp(tickDelta, customFeralItemRenderer.prevEquipProgressMainHand, customFeralItemRenderer.equipProgressMainHand);
+                        // 调用第一人称物品渲染逻辑
+                        customFeralItemRenderer.renderFirstPersonItem(
+                                player,
+                                tickDelta,
+                                pitch,
+                                Hand.MAIN_HAND,
+                                player.getHandSwingProgress(tickDelta),
+                                player.getMainHandStack(),
+                                equipProgress,
+                                matrices,
+                                vertexConsumers,
+                                light
+                        );
+                        matrices.pop();
+                    }
                 }
-                matrices.push();
-                //var eR = (PlayerEntityRenderer) MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(player);
-                //var head = eR.getModel().head;
-
-                // FirstPerson Mod会直接将head.pivot移动到某个非常远的位置来“隐藏”头部，所以需要直接定义好一个固定位置
-                // Vec3d posOffset = new Vec3d(0.0F, 0.0F, 0.0F);
-                // Vec3d rotCenter = ShapeShifterCurseFabric.feralItemCenter;
-                Vec3d rotCenter = new Vec3d(0.0F, -4.0F, -6.0F);
-                matrices.translate(rotCenter.x / 16.0F, rotCenter.y / 16.0F, rotCenter.z / 16.0F);
-
-                //Vec3d posOffset = ShapeShifterCurseFabric.feralItemPosOffset;
-                Vec3d posOffset = new Vec3d(-12.0F, 15.0F, 4.0F);
-                matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(headYaw));
-                matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(headPitch));
-                matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(240.0F));
-
-                matrices.translate(posOffset.x / 16.0F, posOffset.y / 16.0F, posOffset.z / 16.0F);
-
-
-                float pitch = MathHelper.lerp(tickDelta, player.prevPitch, player.getPitch());
-                float equipProgress = 1.0F - MathHelper.lerp(tickDelta, customFeralItemRenderer.prevEquipProgressMainHand, customFeralItemRenderer.equipProgressMainHand);
-
-                // 调用第一人称物品渲染逻辑
-                customFeralItemRenderer.renderFirstPersonItem(
-                        player,
-                        tickDelta,
-                        pitch,
-                        Hand.MAIN_HAND,
-                        player.getHandSwingProgress(tickDelta),
-                        player.getMainHandStack(),
-                        equipProgress,
-                        matrices,
-                        vertexConsumers,
-                        light
-                );
-
-                matrices.pop();
             }
         }
     }
