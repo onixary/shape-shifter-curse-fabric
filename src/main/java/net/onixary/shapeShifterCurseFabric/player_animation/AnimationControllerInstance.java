@@ -20,8 +20,8 @@ import java.util.function.BiFunction;
 
 public class AnimationControllerInstance {
     // 动画控制器注册
-    public static AnimationController Controller_Normal = new AnimationController((player, animDataHolder) -> PlayerAnimState.ANIM_IDLE);
-    public static AnimationController Controller_Sneaking = new AnimationController((player, animDataHolder) -> PlayerAnimState.ANIM_SNEAK_IDLE);
+    public static AnimationController Controller_Normal = new AnimationController((player, animDataHolder) -> animDataHolder.prevAnimState);
+    public static AnimationController Controller_Sneaking = new AnimationController((player, animDataHolder) -> animDataHolder.prevAnimState);
     // 注册动画条件 越早的越优先
     public static Identifier AnimC_IsTransforming = AnimationController.RegisterAnimationStateCondition(
             ShapeShifterCurseFabric.identifier("anim_c_is_transforming"),
@@ -80,12 +80,12 @@ public class AnimationControllerInstance {
 
     public static Identifier AnimC_Fall = AnimationController.RegisterAnimationStateCondition(
             ShapeShifterCurseFabric.identifier("anim_c_fall"),
-            (playerEntity, animDataHolder) -> !playerEntity.isOnGround() && playerEntity.getVelocity().y < 0
+            (playerEntity, animDataHolder) -> !playerEntity.isOnGround() && playerEntity.getVelocity().y < 0.0
     );  // 与hasSlowFall合并 需要为Sneak单独实现
 
     public static Identifier AnimC_Jump = AnimationController.RegisterAnimationStateCondition(
             ShapeShifterCurseFabric.identifier("anim_c_jump"),
-            (playerEntity, animDataHolder) -> !playerEntity.isOnGround() && animDataHolder.lastOnGround && playerEntity.getVelocity().y > 0
+            (playerEntity, animDataHolder) -> !playerEntity.isOnGround() && playerEntity.getVelocity().y >= 0.0
     );  // 与RushJump 合并 需要为Sneak单独实现
 
     public static Identifier AnimC_UseItem = AnimationController.RegisterAnimationStateCondition(
@@ -105,8 +105,13 @@ public class AnimationControllerInstance {
 
     public static Identifier AnimC_Walk = AnimationController.RegisterAnimationStateCondition(
             ShapeShifterCurseFabric.identifier("anim_c_walk"),
-            (playerEntity, animDataHolder) -> animDataHolder.IsWalk
+            (playerEntity, animDataHolder) -> animDataHolder.IsWalk && playerEntity.isOnGround()
     );  // 和奔跑合并 如果逻辑复杂 可以把奔跑分离  需要为Sneak单独实现
+
+    public static Identifier AnimC_Idle = AnimationController.RegisterAnimationStateCondition(
+            ShapeShifterCurseFabric.identifier("anim_c_idle"),
+            (playerEntity, animDataHolder) -> !animDataHolder.IsWalk && playerEntity.isOnGround()
+    );
 
     public static void RegisterAnimCellToAllController(Identifier conditionID, BiFunction<PlayerEntity, AnimationController.PlayerAnimDataHolder, Pair<AnimationControllerCellResult, PlayerAnimState>> cell) {
         Controller_Normal.RegisterAnimControllerCell(conditionID, cell);
@@ -227,6 +232,8 @@ public class AnimationControllerInstance {
             }
             return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SNEAK_WALK);
         });
+        Controller_Normal.RegisterAnimControllerCell(AnimC_Idle, (playerEntity, animDataHolder) -> new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_IDLE));
+        Controller_Sneaking.RegisterAnimControllerCell(AnimC_Idle, (playerEntity, animDataHolder) -> new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SNEAK_IDLE));
     }
 
     // 使用这个方法来获取动画 animDataHolder需要在Mixin中存储 如果没有直接new一个

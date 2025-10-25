@@ -89,6 +89,9 @@ public class AnimationController {
         // 先判断后处理变量
         this.DataHolderTick(player, animDataHolder);
         animDataHolder.prevAnimState = animState;
+        if (animState == null) {
+            return null;
+        }
         // 获取具体动画
         switch (animState) {
             // 特殊动画在这里修改
