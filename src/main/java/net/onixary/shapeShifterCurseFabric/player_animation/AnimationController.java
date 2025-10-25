@@ -88,6 +88,9 @@ public class AnimationController {
         PlayerAnimState animState = this.getAnimState(player, animDataHolder);
         // 先判断后处理变量
         this.DataHolderTick(player, animDataHolder);
+        if(animState == null){
+            animState = PlayerAnimState.ANIM_IDLE;
+        }
         animDataHolder.prevAnimState = animState;
         // 获取具体动画
         switch (animState) {
