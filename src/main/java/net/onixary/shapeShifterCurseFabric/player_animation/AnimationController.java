@@ -88,11 +88,12 @@ public class AnimationController {
         PlayerAnimState animState = this.getAnimState(player, animDataHolder);
         // 先判断后处理变量
         this.DataHolderTick(player, animDataHolder);
-        if(animState == null){
-            animState = PlayerAnimState.ANIM_IDLE;
-        }
         animDataHolder.prevAnimState = animState;
         // 获取具体动画
+        // 由于switch无法处理null的情况 所以这里需要单独处理
+        if(animState == null){
+            return animDataHolder.playerForm.Anim_getFormAnimToPlay(animState);
+        }
         switch (animState) {
             // 特殊动画在这里修改
             case ANIM_ON_TRANSFORM:
