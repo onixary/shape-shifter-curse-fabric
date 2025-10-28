@@ -121,6 +121,8 @@ repositories {
         name = "Fuzs Mod Resources"
         url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
     }
+    maven { url "https://maven.ryanliptak.com/" }
+
     mavenLocal()
 }
 
@@ -213,6 +215,10 @@ dependencies {
     modCompileOnly "maven.modrinth:playeranimator:cfkAgcOh"
     modCompileOnly "maven.modrinth:first-person-model:mquWPSix"
     modRuntimeOnly "maven.modrinth:first-person-model:mquWPSix"
+
+    // AppleSkin
+    modCompileOnly "squeek.appleskin:appleskin-fabric:mc1.20-2.5.1"
+    modLocalRuntime "squeek.appleskin:appleskin-fabric:mc1.20-2.5.1"
 
     modCompileOnly "maven.modrinth:vivecraft:9Sa2NEEb"
     annotationProcessor(files("libs/mixinextras-fabric-0.2.0-beta.8.jar"))

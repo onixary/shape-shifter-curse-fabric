@@ -35,7 +35,8 @@
     "PlayerEntitySprintSwimmingMixin",
     "projectile.PotionEntityMixin",
     "LoginMixin",
-    "SneakEdgeCheckMixin"
+    "SneakEdgeCheckMixin",
+    "integration.AppleSkin"
   ],
   "client": [
     "InventoryScreenMixin",
