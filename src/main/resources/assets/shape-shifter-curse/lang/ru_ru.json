@@ -206,7 +206,7 @@
   "effect.shape-shifter-curse.to_phi_sp_effect": "PHI",
 
   "power.shape-shifter-curse.form_carnivore.name":"Мясоед",
-  "power.shape-shifter-curse.form_allay_sp_amethyst_shard_only.name": "amethyst consumer",
+  "power.shape-shifter-curse.form_allay_sp_amethyst_shard_only.name": "только аметист",
   "power.shape-shifter-curse.form_ocelot_2_raw_meat_only.name": "только сырое мясо",
   "power.origins.vegetarian.name": "вегетарианец",
   "power.origins.form_familiar_fox_3_no_food.name": "Слабость фамильяра",
@@ -462,7 +462,7 @@
   "text.autoconfig.shape-shifter-curse-client.option.ignoreNoRenderArmPower": "Игнорировать настройку \"Не отображать руку\"",
   "text.autoconfig.shape-shifter-curse-client.category.InDevelopment": "В разработке",
   "text.autoconfig.shape-shifter-curse-client.option.newStartBookForBiggerScreen": "Сделать интерфейс новой версии стартовой книги больше",
-  "text.autoconfig.shape-shifter-curse-common.title": "Shape Shifter Curse - общие настройки",
+  "text.autoconfig.shape-shifter-curse-common.title": "Shape Shifter Curse - Общие настройки",
   "text.autoconfig.shape-shifter-curse-common.category.General": "Общие",
   "text.autoconfig.shape-shifter-curse-common.option.transformativeBatSpawnChance": "Вероятность появления проклятой летучей мыши",
   "text.autoconfig.shape-shifter-curse-common.option.transformativeAxolotlSpawnChance": "Вероятность появления проклятого аксолотля",
