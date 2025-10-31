@@ -59,6 +59,7 @@ public class LevitatePower extends Power implements Active {
                     player.setVelocity(player.getVelocity().x, 0, player.getVelocity().z);
                     player.setNoGravity(true);
                     player.setVelocity(player.getVelocity().x, ascentSpeed, player.getVelocity().z);
+                    player.velocityModified = true;
                     ascendProgress ++;
                     //ShapeShifterCurseFabric.LOGGER.info("Ascending Progress: " + ascendProgress);
                 }
@@ -66,6 +67,7 @@ public class LevitatePower extends Power implements Active {
                     player.setNoGravity(true);
                     Vec3d velocity = player.getVelocity();
                     player.setVelocity(velocity.x, 0, velocity.z);
+                    player.velocityModified = true;
                 }
             }
             else if(!isKeyActive && !wasActiveLastTick){
