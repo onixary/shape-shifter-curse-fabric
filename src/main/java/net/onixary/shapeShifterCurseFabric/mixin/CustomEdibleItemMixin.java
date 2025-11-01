@@ -33,7 +33,7 @@ public abstract class CustomEdibleItemMixin {
     private static final FoodComponent ALLAY_AMETHYST_SHARD_FOOD = new FoodComponent.Builder()
             .hunger(10)
             .alwaysEdible()
-            .saturationModifier(0.0f)
+            .saturationModifier(0.3f)
             .build();
 
     @Inject(method = "getFoodComponent", at = @At("HEAD"), cancellable = true)

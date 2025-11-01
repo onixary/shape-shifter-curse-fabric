@@ -26,6 +26,7 @@ public class LevitatePower extends Power implements Active {
     private boolean wasActiveLastTick = false;
     private boolean isKeyActive = false;
     private boolean isLevitate = false;
+    private boolean HasModifyUpVelocity = false;
 
     public LevitatePower(PowerType<?> type, LivingEntity entity) {
         super(type, entity);
@@ -36,49 +37,69 @@ public class LevitatePower extends Power implements Active {
     public void onUse() {
         if (entity instanceof PlayerEntity player) {
             //handleLevitationInput(player);
-            isKeyActive = true;
+            this.isKeyActive = true;
             PowerHolderComponent.syncPower(entity, this.type);
         }
     }
 
+    // 恢复ascendProgress
+    private void resetLevitateState() {
+        this.isLevitate = false;
+        this.ascendProgress = 0;
+        this.HasModifyUpVelocity = false;
+    }
 
+    // 当按键按下时的处理
+    private void processLevitate(PlayerEntity player) {
+        Vec3d velocity = player.getVelocity();
+        this.isLevitate = true;
+        if(this.ascendProgress < this.maxAscendDuration) {
+            player.setNoGravity(true);
+            if (!this.HasModifyUpVelocity) {
+                player.setVelocity(velocity.x, this.ascentSpeed, velocity.z);
+                player.velocityModified = true;
+                this.HasModifyUpVelocity = true;
+            }
+            this.ascendProgress++;
+        }
+        else {
+            player.setNoGravity(true);
+            if (velocity.y != 0) {
+                player.setVelocity(velocity.x, 0, velocity.z);
+                player.velocityModified = true;
+            }
+            this.HasModifyUpVelocity = false;
+        }
+    }
+
+    // 空中缓降
+    private void processStopLevitate(PlayerEntity player) {
+        this.isLevitate = false;
+        player.setNoGravity(false);
+        this.HasModifyUpVelocity = false;
+    }
 
     @Override
     public void tick() {
         if (entity instanceof PlayerEntity player) {
             if(player.getFluidHeight(FluidTags.WATER) > 0.0F || player.getFluidHeight(FluidTags.LAVA) > 0.0F){
-                isLevitate = false;
-                ascendProgress = 0;
+                this.resetLevitateState();
                 return;
             }
 
-            //ShapeShifterCurseFabric.LOGGER.info("IsAscending: " + isAscending);
-            if(isKeyActive){
-                isLevitate = true;
-                if(ascendProgress < maxAscendDuration){
-                    player.setVelocity(player.getVelocity().x, 0, player.getVelocity().z);
-                    player.setNoGravity(true);
-                    player.setVelocity(player.getVelocity().x, ascentSpeed, player.getVelocity().z);
-                    ascendProgress ++;
-                    //ShapeShifterCurseFabric.LOGGER.info("Ascending Progress: " + ascendProgress);
-                }
-                else{
-                    player.setNoGravity(true);
-                    Vec3d velocity = player.getVelocity();
-                    player.setVelocity(velocity.x, 0, velocity.z);
-                }
+            if(this.isKeyActive || this.wasActiveLastTick){
+                this.processLevitate(player);
             }
-            else if(!isKeyActive && !wasActiveLastTick){
-                isLevitate = false;
-                player.setNoGravity(false);
+            else {
+                this.processStopLevitate(player);
             }
+
             player.fallDistance = 0;
 
-            wasActiveLastTick = isKeyActive;
-            isKeyActive = false;
+            this.wasActiveLastTick = this.isKeyActive;
+            this.isKeyActive = false;
             if(entity.isOnGround()){
-                isLevitate = false;
-                ascendProgress = 0;
+                this.resetLevitateState();
             }
             PowerHolderComponent.syncPower(entity, this.type);
         }

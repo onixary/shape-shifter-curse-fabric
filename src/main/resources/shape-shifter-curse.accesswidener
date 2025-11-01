@@ -9,3 +9,4 @@ accessible field net/minecraft/client/gui/widget/MultilineTextWidget cacheKeyToT
 accessible field net/minecraft/client/gui/widget/MultilineTextWidget centered Z
 accessible method net/minecraft/client/gui/widget/MultilineTextWidget getCacheKey ()Lnet/minecraft/client/gui/widget/MultilineTextWidget$CacheKey;
 accessible method net/minecraft/entity/Entity wouldPoseNotCollide (Lnet/minecraft/entity/EntityPose;)Z
+accessible field net/minecraft/client/render/WorldRenderer bufferBuilders Lnet/minecraft/client/render/BufferBuilderStorage;
