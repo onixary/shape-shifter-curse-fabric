@@ -60,8 +60,8 @@
     "PlayerRotationRendererMixin",
     "PlayerMovementControlMixin",
     "CapeFeatureRendererMixin",
-    "KeyboardInputMixin"
-
+    "KeyboardInputMixin",
+    "accessor.ApoliClientAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
