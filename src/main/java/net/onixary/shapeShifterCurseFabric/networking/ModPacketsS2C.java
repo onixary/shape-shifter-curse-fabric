@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.nbt.NbtCompound;
@@ -257,6 +258,8 @@ public class ModPacketsS2C {
     }
 
     public static void onPlayerConnectServer(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        // 还原FPM设置 或许可以通过注入式修改配置来减少此类Bug 比如在FPM读取offset时修改返回值
+        TransformManager.executeClientFirstPersonReset();
         new Thread(() -> {
             // 延时5s, 等待服务器component加载完成
             try {
@@ -269,8 +272,12 @@ public class ModPacketsS2C {
     }
 
     // 临时先放这里，以后再整理
-    public static void sendUpdateCustomSetting() {
+    public static void sendUpdateCustomSetting(boolean ForceUpdate) {
         PacketByteBuf buf = PacketByteBufs.create();
+        boolean autoSyncConfig = ShapeShifterCurseFabric.playerCustomConfig.auto_sync_config;
+        if (!ForceUpdate && !autoSyncConfig) {
+            return;
+        }
         int AGBRInt = 0;
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.keep_original_skin);
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.enable_form_color);
@@ -288,5 +295,9 @@ public class ModPacketsS2C {
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.accent1GreyReverse);
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.accent2GreyReverse);
         ClientPlayNetworking.send(UPDATE_CUSTOM_SETTING, buf);
+    }
+
+    public static void sendUpdateCustomSetting() {
+        sendUpdateCustomSetting(false);
     }
 }

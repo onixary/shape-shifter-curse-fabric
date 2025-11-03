@@ -699,8 +699,10 @@
   "text.autoconfig.shape-shifter-curse-custom.option.primaryColor": "Основной цвет",
   "text.autoconfig.shape-shifter-curse-custom.option.accentColor1Color": "Дополнительный цвет 1",
   "text.autoconfig.shape-shifter-curse-custom.option.accentColor2Color": "Дополнительный цвет 2",
-  "text.autoconfig.shape-shifter-curse-custom.option.eyeColor": "Цвет глаз",
+  "text.autoconfig.shape-shifter-curse-custom.option.eyeColorA": "Цвет глаз A",
+  "text.autoconfig.shape-shifter-curse-custom.option.eyeColorB": "Цвет глаз B",
   "text.autoconfig.shape-shifter-curse-custom.option.primaryGreyReverse": "Реверсировать основной цвет в чёрно-белый",
   "text.autoconfig.shape-shifter-curse-custom.option.accent1GreyReverse": "Реверсировать дополнительный цвет 1 в чёрно-белый",
-  "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "Реверсировать дополнительный цвет 2 в чёрно-белый"
+  "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "Реверсировать дополнительный цвет 2 в чёрно-белый",
+  "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_config": "Auto Sync Config"
 }
