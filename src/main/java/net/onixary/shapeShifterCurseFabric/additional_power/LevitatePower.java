@@ -27,6 +27,7 @@ public class LevitatePower extends Power implements Active {
     private boolean isKeyActive = false;
     private boolean isLevitate = false;
     private boolean HasModifyUpVelocity = false;
+    private Vec3d currentVelocity = Vec3d.ZERO;
 
     public LevitatePower(PowerType<?> type, LivingEntity entity) {
         super(type, entity);
@@ -49,23 +50,30 @@ public class LevitatePower extends Power implements Active {
         this.HasModifyUpVelocity = false;
     }
 
+    private float easeOutQuadProgress(){
+        float a = (1 - ((float)this.ascendProgress / (float)this.maxAscendDuration));
+        //ShapeShifterCurseFabric.LOGGER.info("a: " + a);
+        return a * a;
+    }
+
     // 当按键按下时的处理
     private void processLevitate(PlayerEntity player) {
-        Vec3d velocity = player.getVelocity();
+        //Vec3d velocity = player.getVelocity();
         this.isLevitate = true;
         if(this.ascendProgress < this.maxAscendDuration) {
+            // todo: 加入了easing来实现平滑过渡，不过在NoGravity进入时似乎会重置XZ的速度输入
             player.setNoGravity(true);
-            if (!this.HasModifyUpVelocity) {
-                player.setVelocity(velocity.x, this.ascentSpeed, velocity.z);
+            if (true) {
+                player.setVelocity(this.currentVelocity.x, this.ascentSpeed * easeOutQuadProgress(), this.currentVelocity.z);
                 player.velocityModified = true;
-                this.HasModifyUpVelocity = true;
+                //this.HasModifyUpVelocity = true;
             }
             this.ascendProgress++;
         }
         else {
             player.setNoGravity(true);
-            if (velocity.y != 0) {
-                player.setVelocity(velocity.x, 0, velocity.z);
+            if (this.currentVelocity.y != 0) {
+                player.setVelocity(this.currentVelocity.x, 0, this.currentVelocity.z);
                 player.velocityModified = true;
             }
             this.HasModifyUpVelocity = false;
@@ -86,6 +94,7 @@ public class LevitatePower extends Power implements Active {
                 this.resetLevitateState();
                 return;
             }
+            this.currentVelocity = player.getVelocity();
 
             if(this.isKeyActive || this.wasActiveLastTick){
                 this.processLevitate(player);
