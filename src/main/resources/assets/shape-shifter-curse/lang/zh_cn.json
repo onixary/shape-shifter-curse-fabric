@@ -437,5 +437,6 @@
   "text.autoconfig.shape-shifter-curse-custom.option.eyeColorB": "眼睛颜色 B",
   "text.autoconfig.shape-shifter-curse-custom.option.primaryGreyReverse": "主要色灰度反转",
   "text.autoconfig.shape-shifter-curse-custom.option.accent1GreyReverse": "重点色1灰度反转",
-  "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "重点色2灰度反转"
+  "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "重点色2灰度反转",
+  "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_config": "自动向服务器同步配置"
 }

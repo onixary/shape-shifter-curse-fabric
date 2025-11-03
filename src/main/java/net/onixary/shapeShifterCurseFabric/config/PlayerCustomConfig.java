@@ -7,6 +7,9 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
 @Config(name = "shape-shifter-curse-custom")
 public class PlayerCustomConfig implements ConfigData {
+    @Comment("Enable Auto Sync Config. Default: true")
+    public boolean auto_sync_config = true;
+
     @Comment("Keep original skin. Default: false")
     public boolean keep_original_skin = false;
 
