@@ -134,7 +134,7 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
                 if (hasOutline) {
                     // 渲染模型后动作会还原 很神奇
                     ProcessModel(m, eR, entity, limbAngle, limbDistance, headYaw, headPitch);
-                    fur.render(matrixStack, a, vertexConsumerProvider, RenderLayer.getOutline(m.getTextureResource(a)), null, light);
+                    fur.render(matrixStack, a, vertexConsumerProvider, RenderLayer.getOutline(m.getTextureResource(a)), vertexConsumerProvider.getBuffer(RenderLayer.getOutline(m.getTextureResource(a))), light);
                 }
 
                 matrixStack.pop();
