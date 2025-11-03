@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.client;
 
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import mod.azure.azurelib.rewrite.render.armor.AzArmorRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -16,6 +17,7 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.additional_power.LevitatePower;
 import net.onixary.shapeShifterCurseFabric.custom_ui.BookOfShapeShifterScreenV2_P1;
 import net.onixary.shapeShifterCurseFabric.custom_ui.StartBookScreenV2;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
@@ -33,6 +35,7 @@ import net.onixary.shapeShifterCurseFabric.util.TickManager;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
@@ -252,8 +255,21 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
         registerAzureArmorGeo();
 
 		ClientTickEvents.END_CLIENT_TICK.register(ShapeShifterCurseFabricClient::onClientTick);
-
-
+		// 客户端能力处理
+		ClientTickEvents.START_CLIENT_TICK.register((minecraftClient) -> {
+			ClientPlayerEntity clientPlayer = minecraftClient.player;
+			if(clientPlayer == null){
+				return;
+			}
+			// 由于LevitatePower覆写了isActive没法通过getPowers获取到
+			// List<LevitatePower> clientLevitatePower = PowerHolderComponent.getPowers(clientPlayer, LevitatePower.class);
+			// if (!clientLevitatePower.isEmpty()) {
+			// 	// getFirst是Java21的新特性 Java17没有
+			// 	LevitatePower power = clientLevitatePower.get(0);
+			// 	power.clientTick(clientPlayer);
+			// }
+			PowerHolderComponent.KEY.get(clientPlayer).getPowers().stream().filter(p -> p instanceof LevitatePower).forEach(p -> ((LevitatePower) p).clientTick(clientPlayer));
+		});
 	}
 
 	public static ShaderProgram getFurGradientShader() {
