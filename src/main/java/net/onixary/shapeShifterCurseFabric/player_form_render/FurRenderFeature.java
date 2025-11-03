@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.player_form_render;
 import dev.kosmx.playerAnim.api.TransformType;
 import dev.kosmx.playerAnim.api.layered.IAnimation;
 import dev.kosmx.playerAnim.core.util.Vec3f;
+import net.fabricmc.loader.api.FabricLoader;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import net.minecraft.client.MinecraftClient;
@@ -36,6 +37,8 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
     static float tailDragAmountVertical = 0.0F;
     static float tailDragAmountVerticalO;
     static float currentTailDragAmountVertical = 0.0F;
+
+    private static final boolean IS_FIRST_PERSON_MOD_LOADED = FabricLoader.getInstance().isModLoaded("firstperson");
 
     //static float wingFlapAmount = 0.0f;
 
@@ -89,6 +92,11 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         if (entity instanceof AbstractClientPlayerEntity abstractClientPlayerEntity) {
             boolean hasOutline = MinecraftClient.getInstance().hasOutline(abstractClientPlayerEntity);
+            if (MinecraftClient.getInstance().options.getPerspective().isFirstPerson() && IS_FIRST_PERSON_MOD_LOADED) {
+                if (abstractClientPlayerEntity == MinecraftClient.getInstance().player) {
+                    hasOutline = false;
+                }
+            }
             if (abstractClientPlayerEntity.isInvisible() || abstractClientPlayerEntity.isSpectator()) {return;}
             var iPEM = (IPlayerEntityMixins) abstractClientPlayerEntity;
             for (var fur : iPEM.originalFur$getCurrentFurs()) {
