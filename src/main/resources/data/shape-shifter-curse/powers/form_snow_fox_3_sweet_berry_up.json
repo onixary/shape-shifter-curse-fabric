@@ -1,4 +1,4 @@
-{
+snow{
     "type": "origins:action_on_item_use",
     "entity_action": {
         "type": "origins:feed",
