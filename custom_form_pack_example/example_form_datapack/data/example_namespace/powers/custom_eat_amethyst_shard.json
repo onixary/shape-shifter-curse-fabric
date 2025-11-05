@@ -1,7 +1,9 @@
 {
-    "type": "shape-shifter-curse:can_eat_amethyst_shard",
-    "condition": {
-        "type": "origins:constant",
-        "value": true
-    }
+    "type": "shape-shifter-curse:custom_edible",
+    "item_id_list": [
+        "minecraft:amethyst_shard"
+    ],
+    "hunger": 10,
+    "saturation_modifier": 0.3,
+    "always_edible": true
 }

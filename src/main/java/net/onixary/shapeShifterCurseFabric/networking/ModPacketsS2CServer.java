@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.item.FoodComponent;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -13,8 +14,10 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
+import net.onixary.shapeShifterCurseFabric.util.CustomEdibleUtils;
 
 import java.util.HashMap;
+import java.util.List;
 
 // 纯服务端类，所有send方法都只在这里调用
 // This is a pure server-side class, all send methods are called only here
@@ -170,5 +173,26 @@ public class ModPacketsS2CServer {
     public static void sendPlayerLogin(ServerPlayerEntity player) {
         PacketByteBuf buf = PacketByteBufs.create();
         ServerPlayNetworking.send(player, ModPackets.LOGIN_PACKET, buf);
+    }
+
+    public static void sendCustomEdibleList(ServerPlayerEntity player, List<Identifier> Items, FoodComponent foodComponent) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeInt(1);  // 添加CustomEdible
+        buf.writeInt(Items.size());
+        for (Identifier id : Items) {
+            buf.writeIdentifier(id);
+        }
+        CustomEdibleUtils.WriteFoodComponent(buf, foodComponent);
+        ServerPlayNetworking.send(player, ModPackets.UPDATE_CUSTOM_EDIBLE_DATA, buf);
+    }
+
+    public static void sendClearEdibleList(ServerPlayerEntity player, List<Identifier> Items) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeInt(0);  // 清空CustomEdible
+        buf.writeInt(Items.size());
+        for (Identifier id : Items) {
+            buf.writeIdentifier(id);
+        }
+        ServerPlayNetworking.send(player, ModPackets.UPDATE_CUSTOM_EDIBLE_DATA, buf);
     }
 }

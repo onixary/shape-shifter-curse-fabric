@@ -11,6 +11,8 @@
     "LivingEntityMixin",
     "PlayerEntityPoseMixin",
     "CustomEdibleItemMixin",
+    "CustomEdiblePlayerAMixin",
+    "CustomEdiblePlayerBMixin",
     "CancelEntityStepSoundMixin",
     "accessor.ActiveTargetGoalAccessor",
     "mob.WitchEntityMixin",
@@ -61,7 +63,8 @@
     "PlayerMovementControlMixin",
     "CapeFeatureRendererMixin",
     "KeyboardInputMixin",
-    "accessor.ApoliClientAccessor"
+    "accessor.ApoliClientAccessor",
+    "CustomEdibleHeldItemRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
