@@ -178,8 +178,9 @@
 			"scale": [1.5, 1, 1.5]
 		},
 		"gui": {
-			"rotation": [90, -45, 0],
-			"scale": [2, 1, 2]
+			"rotation": [60, -45, 0],
+			"translation": [0.25, 6.5, 0],
+			"scale": [3, 3, 3]
 		},
 		"fixed": {
 			"rotation": [-90, -45, 0],
