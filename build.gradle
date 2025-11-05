@@ -201,7 +201,7 @@ dependencies {
     include modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:${project.player_anim}")
 
     // Fabric forge config api port
-    modLocalRuntime "fuzs.forgeconfigscreens:forgeconfigscreens-fabric:8.0.0"
+    // modLocalRuntime "fuzs.forgeconfigscreens:forgeconfigscreens-fabric:8.0.0"
 
 
     //modImplementation "com.github.eggohito:eggolib:${project.eggolib_version}"
