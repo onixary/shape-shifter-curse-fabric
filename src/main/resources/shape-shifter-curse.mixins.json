@@ -11,6 +11,7 @@
     "LivingEntityMixin",
     "PlayerEntityPoseMixin",
     "CustomEdibleItemMixin",
+    "CustomEdiblePlayerMixin",
     "CancelEntityStepSoundMixin",
     "accessor.ActiveTargetGoalAccessor",
     "mob.WitchEntityMixin",

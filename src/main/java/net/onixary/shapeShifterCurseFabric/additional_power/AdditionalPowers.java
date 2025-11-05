@@ -27,7 +27,7 @@ public class AdditionalPowers {
         register(BatBlockAttachPower.createFactory());
         register(ActionOnJumpPower.createFactory());
         register(NoRenderArmPower.createFactory());
-        register(CanEatAmethystShardPower.createFactory());
+        register(CustomEdiblePower.createFactory());
         register(NoStepSoundPower.createFactory());
         register(PillagerFriendlyPower.createFactory());
         register(PreventBerryEffectPower.createFactory());
