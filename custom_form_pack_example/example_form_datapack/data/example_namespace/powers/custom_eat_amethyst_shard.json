@@ -5,5 +5,14 @@
     ],
     "hunger": 10,
     "saturation_modifier": 0.3,
-    "always_edible": true
+    "always_edible": true,
+    "status_effects": [
+        {
+            "effect": "minecraft:strength",
+            "duration": 200,
+            "amplifier": 1,
+            "show_particles": false,
+            "show_icon": true
+        }
+    ]
 }
