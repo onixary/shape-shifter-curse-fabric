@@ -1,9 +1,14 @@
 {
-    "type": "origins:action_on_item_use",
-    "entity_action": {
-        "type": "origins:feed",
-        "food": 2.5,
-        "saturation": 0.4
+    "type": "origins:modify_food",
+    "food_modifier": {
+        "name": "increase food points",
+        "operation": "multiply_base_multiplicative",
+        "value": 1.0
+    },
+    "saturation_modifier": {
+        "name": "increase food points",
+        "operation": "multiply_base_multiplicative",
+        "value": 1.0
     },
     "item_condition": {
         "type": "origins:and",
