@@ -4,6 +4,6 @@
         "minecraft:amethyst_shard"
     ],
     "hunger": 10,
-    "saturationModifier": 0.3,
-    "alwaysEdible": true
+    "saturation_modifier": 0.3,
+    "always_edible": true
 }

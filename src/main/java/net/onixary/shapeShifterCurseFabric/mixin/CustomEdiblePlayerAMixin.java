@@ -14,14 +14,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import static net.onixary.shapeShifterCurseFabric.util.CustomEdibleUtils.getPowerFoodComponent;
 
 @Mixin(LivingEntity.class)
-public class CustomEdiblePlayerMixin {
+public class CustomEdiblePlayerAMixin {
     @Shadow
     protected ItemStack activeItemStack;
 
     @ModifyExpressionValue(method = "eatFood", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isFood()Z"))
     private boolean eatFood$isFood(boolean original, World world, ItemStack stack) {
         if ((Object)this instanceof PlayerEntity playerEntity) {
-            return getPowerFoodComponent(playerEntity, stack) != null;
+            return getPowerFoodComponent(playerEntity, stack) != null || original;
         }
         return original;
     }
@@ -29,7 +29,7 @@ public class CustomEdiblePlayerMixin {
     @ModifyExpressionValue(method = "applyFoodEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item;isFood()Z"))
     private boolean applyFoodEffects$isFood(boolean original, ItemStack stack, World world, LivingEntity targetEntity) {
         if ((Object)this instanceof PlayerEntity playerEntity) {
-            return getPowerFoodComponent(playerEntity, stack) != null;
+            return getPowerFoodComponent(playerEntity, stack) != null || original;
         }
         return original;
     }
@@ -60,6 +60,18 @@ public class CustomEdiblePlayerMixin {
 
     @ModifyExpressionValue(method = "onTrackedDataSet", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getMaxUseTime()I"))
     private int onTrackedDataSet$getMaxUseTime(int original) {
+        if ((Object)this instanceof PlayerEntity playerEntity) {
+            FoodComponent fc = getPowerFoodComponent(playerEntity, activeItemStack);
+            if (fc == null) {
+                return original;
+            }
+            return fc.isSnack() ? 16 : 32;
+        }
+        return original;
+    }
+
+    @ModifyExpressionValue(method = "setCurrentHand", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getMaxUseTime()I"))
+    private int setCurrentHand$getMaxUseTime(int original) {
         if ((Object)this instanceof PlayerEntity playerEntity) {
             FoodComponent fc = getPowerFoodComponent(playerEntity, activeItemStack);
             if (fc == null) {

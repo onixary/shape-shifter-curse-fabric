@@ -47,4 +47,6 @@ public class ModPackets {
 
     public static final Identifier LOGIN_PACKET = new Identifier(ShapeShifterCurseFabric.MOD_ID, "login_packet");  // 我暂时没找到玩家进入服务去时的Hook，所以暂时由服务器询问来代替
     public static final Identifier UPDATE_CUSTOM_SETTING = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_custom_setting");
+
+    public static final Identifier UPDATE_CUSTOM_EDIBLE_DATA = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_custom_edible_data");
 }

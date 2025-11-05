@@ -1,16 +1,21 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
+import io.github.apace100.apoli.ApoliClient;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FoodComponent;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.util.CustomEdibleUtils;
 
 import java.util.List;
@@ -19,6 +24,7 @@ public class CustomEdiblePower extends Power {
 
     private final FoodComponent foodComponent;
     private final List<Identifier> ItemIdList;
+
 
     public CustomEdiblePower(PowerType<?> type, LivingEntity entity, SerializableData.Instance data) {
         super(type, entity);
@@ -53,20 +59,43 @@ public class CustomEdiblePower extends Power {
         return this.foodComponent;
     }
 
-    // TODO 挂载能力
-    public void OnAddedPowerBothSide() {
-        ShapeShifterCurseFabric.LOGGER.info("Added power custom_edible to {}. IsClient: {}", this.entity.getName(), this.entity.getWorld().isClient);
+    public void AddRegistry() {
+        // ShapeShifterCurseFabric.LOGGER.info("Added power custom_edible to {}", this.entity.getName());
         if (this.entity instanceof PlayerEntity playerEntity) {
             CustomEdibleUtils.addCustomEdibleWithList(playerEntity, this.getItemIdList(), this.getFoodComponent());
+            if (playerEntity instanceof ServerPlayerEntity serverPlayerEntity) {
+                ModPacketsS2CServer.sendCustomEdibleList(serverPlayerEntity, this.getItemIdList(), this.getFoodComponent());
+            }
         }
     }
 
-    // TODO 移除能力
-    public void onRemovedPowerBothSide() {
-        ShapeShifterCurseFabric.LOGGER.info("Removed power custom_edible from {}. IsClient: {}", this.entity.getName(), this.entity.getWorld().isClient);
+    public void ClearRegistry() {
+        // ShapeShifterCurseFabric.LOGGER.info("Removed power custom_edible from {}", this.entity.getName());
         if (this.entity instanceof PlayerEntity playerEntity) {
             CustomEdibleUtils.clearCustomEdibleWithList(playerEntity, this.getItemIdList());
+            if (playerEntity instanceof ServerPlayerEntity serverPlayerEntity) {
+                ModPacketsS2CServer.sendClearEdibleList(serverPlayerEntity, this.getItemIdList());
+            }
         }
+    }
+
+    public void onAdded() {
+        super.onAdded();
+        // 由于修改能力时先添加能力后删除能力 所以这里延迟1秒 防止删除能力时清空不该清空的数据
+        // 如果之后不用Power驱动 改为形态驱动这个1秒可以去掉
+        new Thread(() -> {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            this.AddRegistry();
+        }).start();
+    }
+
+    public void onRemoved() {
+        super.onRemoved();
+        this.ClearRegistry();
     }
 
     public static PowerFactory createFactory() {
