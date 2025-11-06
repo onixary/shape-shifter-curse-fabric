@@ -41,6 +41,7 @@ public class Form_Allay extends PlayerFormBase {
             case ANIM_FLY:
             case ANIM_JUMP:
             case ANIM_FALL:
+            case ANIM_SNEAK_FALL:
             case ANIM_SLOW_FALL:
                 return anim_flying;
 

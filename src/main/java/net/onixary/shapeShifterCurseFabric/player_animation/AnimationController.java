@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationTransform;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
@@ -88,6 +89,10 @@ public class AnimationController {
         PlayerAnimState animState = this.getAnimState(player, animDataHolder);
         // 先判断后处理变量
         this.DataHolderTick(player, animDataHolder);
+        // 动画异常请把下面的日志打开
+        // if (animState != animDataHolder.prevAnimState) {
+        //     ShapeShifterCurseFabric.LOGGER.info("Animation State Changed: " + animState.name());
+        // }
         animDataHolder.prevAnimState = animState;
         // 获取具体动画
         // 由于switch无法处理null的情况 所以这里需要单独处理

@@ -58,6 +58,7 @@ public class Form_SnowFox3 extends PlayerFormBase {
             case ANIM_CLIMB:
                 return anim_climb;
             case ANIM_FALL:
+            case ANIM_SNEAK_FALL:
                 return anim_fall;
             case ANIM_SLEEP:
                 return anim_sleep;
