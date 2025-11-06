@@ -85,7 +85,7 @@ public class AnimationControllerInstance {
 
     public static Identifier AnimC_Jump = AnimationController.RegisterAnimationStateCondition(
             ShapeShifterCurseFabric.identifier("anim_c_jump"),
-            (playerEntity, animDataHolder) -> !playerEntity.isOnGround() && playerEntity.getVelocity().y >= 0.0
+            (playerEntity, animDataHolder) -> !playerEntity.isOnGround()
     );  // 与RushJump 合并 需要为Sneak单独实现
 
     public static Identifier AnimC_UseItem = AnimationController.RegisterAnimationStateCondition(
@@ -200,13 +200,19 @@ public class AnimationControllerInstance {
             if ((Math.abs(playerEntity.getVelocity().z) > 0.15 || Math.abs(playerEntity.getVelocity().x) > 0.15) && animDataHolder.playerForm.getCanSneakRush()) {
                 return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_RUSH_JUMP);
             }
-            return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_JUMP);
+            if (playerEntity.getVelocity().y >= 0.0) {
+                return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_JUMP);
+            }
+            return new Pair<>(AnimationControllerCellResult.NOT_MATCH, PlayerAnimState.NONE);
         });
         Controller_Sneaking.RegisterAnimControllerCell(AnimC_Jump, (playerEntity, animDataHolder) -> {
             if ((Math.abs(playerEntity.getVelocity().z) > 0.15 || Math.abs(playerEntity.getVelocity().x) > 0.15) && animDataHolder.playerForm.getCanSneakRush()) {
                 return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_RUSH_JUMP);
             }
-            return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SNEAK_JUMP);
+            if (playerEntity.getVelocity().y >= 0.0) {
+                return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SNEAK_JUMP);
+            }
+            return new Pair<>(AnimationControllerCellResult.NOT_MATCH, PlayerAnimState.NONE);
         });
         Controller_Normal.RegisterAnimControllerCell(AnimC_UseItem, (playerEntity, animDataHolder) -> new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_IDLE));
         Controller_Sneaking.RegisterAnimControllerCell(AnimC_UseItem, (playerEntity, animDataHolder) -> {
