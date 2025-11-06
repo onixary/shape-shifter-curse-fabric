@@ -55,7 +55,6 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_DYNAMIC_FORM, ModPacketsS2C::handleUpdateDynamicForm);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.REMOVE_DYNAMIC_FORM_EXCEPT, ModPacketsS2C::handleRemoveDynamicExcept);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.LOGIN_PACKET, ModPacketsS2C::onPlayerConnectServer);
-        ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_CUSTOM_EDIBLE_DATA, ModPacketsS2C::handleUpdateCustomEdibleData);
     }
 
     public static void handleSyncEffectAttachment(
@@ -304,24 +303,5 @@ public class ModPacketsS2C {
 
     public static void sendUpdateCustomSetting() {
         sendUpdateCustomSetting(false);
-    }
-
-    public static void handleUpdateCustomEdibleData(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
-        int UpdateType = buf.readInt();
-        if (client.player == null) return;
-        List<Identifier> items = new LinkedList<>();
-        int itemCount = buf.readInt();
-        for (int i = 0; i < itemCount; i++) {
-            items.add(Identifier.tryParse(buf.readString()));
-        }
-        switch (UpdateType) {
-            case 0:  // Clear
-                CustomEdibleUtils.clearCustomEdibleWithList(client.player, items);
-                return;
-            case 1:  // Add
-                FoodComponent foodComponent = CustomEdibleUtils.ReadFoodComponent(buf);
-                CustomEdibleUtils.addCustomEdibleWithList(client.player, items, foodComponent);
-                return;
-        }
     }
 }

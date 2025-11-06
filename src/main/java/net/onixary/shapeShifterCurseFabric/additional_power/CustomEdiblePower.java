@@ -1,13 +1,12 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.ApoliClient;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
 import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,7 +14,6 @@ import net.minecraft.item.FoodComponent;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.util.CustomEdibleUtils;
 
 import java.util.List;
@@ -59,51 +57,28 @@ public class CustomEdiblePower extends Power {
         return this.foodComponent;
     }
 
-    public void AddRegistry() {
-        // ShapeShifterCurseFabric.LOGGER.info("Added power custom_edible to {}", this.entity.getName());
-        if (this.entity instanceof PlayerEntity playerEntity) {
-            CustomEdibleUtils.addCustomEdibleWithList(playerEntity, this.getItemIdList(), this.getFoodComponent());
-            if (playerEntity instanceof ServerPlayerEntity serverPlayerEntity) {
-                ModPacketsS2CServer.sendCustomEdibleList(serverPlayerEntity, this.getItemIdList(), this.getFoodComponent());
-            }
+    // 每Tick仅会运行一次 无论多少个Power
+    public static void OnClientTick(PlayerEntity player) {
+        // 5s 更新1次 会导致悦灵变形到其他形态时还可以吃一个紫水晶碎片(在特定时机)
+        if (player.age % 100 == 0) {
+            CustomEdibleUtils.ReloadPlayerCustomEdible(player);
+            // 如果启用这个和服务器端的Logger后发现Server和Client的Logger同时输出 不用想肯定是Bug
+            // ShapeShifterCurseFabric.LOGGER.info("Reload Player Custom Edible For {} In Client", player.getName().getString());
         }
     }
 
-    public void ClearRegistry() {
-        // ShapeShifterCurseFabric.LOGGER.info("Removed power custom_edible from {}", this.entity.getName());
-        if (this.entity instanceof PlayerEntity playerEntity) {
-            CustomEdibleUtils.clearCustomEdibleWithList(playerEntity, this.getItemIdList());
-            if (playerEntity instanceof ServerPlayerEntity serverPlayerEntity) {
-                ModPacketsS2CServer.sendClearEdibleList(serverPlayerEntity, this.getItemIdList());
-            }
+    // 每Tick仅会运行玩家数量次 无论多少个Power
+    public static void OnServerTick(ServerPlayerEntity player) {
+        // 防止在单人游戏里运行两次
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+            return;
         }
-    }
-
-    public void onAdded() {
-        super.onAdded();
-        // 由于修改能力时先添加能力后删除能力 所以这里延迟2秒 防止删除能力时清空不该清空的数据
-        // 如果之后不用Power驱动 改为形态驱动这个2秒可以去掉
-        new Thread(() -> {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            this.AddRegistry();
-        }).start();
-    }
-
-    public void onRemoved() {
-        super.onRemoved();
-        // 由于onRemoved可能触发过早 可能在ServerPlayNetworking.send中触发NullPointerException 所以这里延迟1秒
-        new Thread(() -> {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            this.ClearRegistry();
-        }).start();
+        // 5s 更新1次 会导致悦灵变形到其他形态时还可以吃一个紫水晶碎片(在特定时机)
+        if (player.age % 100 == 0) {
+            CustomEdibleUtils.ReloadPlayerCustomEdible(player);
+            // 如果启用这个和客户端的Logger后发现Server和Client的Logger同时输出 不用想肯定是Bug
+            // ShapeShifterCurseFabric.LOGGER.info("Reload Player Custom Edible For {} In Server", player.getName().getString());
+        }
     }
 
     public static PowerFactory createFactory() {

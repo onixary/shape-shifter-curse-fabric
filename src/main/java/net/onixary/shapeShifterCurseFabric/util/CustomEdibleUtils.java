@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.util;
 
 import com.mojang.datafixers.util.Pair;
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FoodComponent;
@@ -10,6 +11,7 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.additional_power.CustomEdiblePower;
 
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +50,22 @@ public class CustomEdibleUtils {
             for (Identifier itemId : itemIdList) {
                 customEdible.remove(itemId);
             }
+        }
+    }
+
+    public static void ReloadPlayerCustomEdible(PlayerEntity user) {
+        try {
+            customEdibleMap.computeIfAbsent(user.getUuid(), k -> new HashMap<>()).clear();
+            HashMap<Identifier, FoodComponent> customEdible = customEdibleMap.get(user.getUuid());
+            PowerHolderComponent.getPowers(user, CustomEdiblePower.class).forEach(
+                    customEdiblePower -> {
+                        for (Identifier itemId : customEdiblePower.getItemIdList()) {
+                            customEdible.put(itemId, customEdiblePower.getFoodComponent());
+                        }
+                    }
+            );
+        } catch (Exception e) {
+            // ShapeShifterCurseFabric.LOGGER.error("Reload Player Custom Edible Failed", e);
         }
     }
 
