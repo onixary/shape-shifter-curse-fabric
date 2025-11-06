@@ -116,7 +116,7 @@ public abstract class CustomEdibleItemMixin {
 
     @ModifyExpressionValue(method = "finishUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item;isFood()Z"))
     private boolean finishUsing$isFood(boolean original, ItemStack stack, World world, LivingEntity user) {
-        return getPowerFoodComponent((PlayerEntity) user, stack) != null;
+        return getPowerFoodComponent((PlayerEntity) user, stack) != null || original;
     }
 
 }

@@ -81,11 +81,11 @@ public class CustomEdiblePower extends Power {
 
     public void onAdded() {
         super.onAdded();
-        // 由于修改能力时先添加能力后删除能力 所以这里延迟1秒 防止删除能力时清空不该清空的数据
-        // 如果之后不用Power驱动 改为形态驱动这个1秒可以去掉
+        // 由于修改能力时先添加能力后删除能力 所以这里延迟2秒 防止删除能力时清空不该清空的数据
+        // 如果之后不用Power驱动 改为形态驱动这个2秒可以去掉
         new Thread(() -> {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -95,7 +95,15 @@ public class CustomEdiblePower extends Power {
 
     public void onRemoved() {
         super.onRemoved();
-        this.ClearRegistry();
+        // 由于onRemoved可能触发过早 可能在ServerPlayNetworking.send中触发NullPointerException 所以这里延迟1秒
+        new Thread(() -> {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            this.ClearRegistry();
+        }).start();
     }
 
     public static PowerFactory createFactory() {
