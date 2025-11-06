@@ -332,6 +332,9 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             TransformManager.update(player);
             TickManager.tickServerAll();
 
+            // CustomEdiblePower Tick
+            CustomEdiblePower.OnServerTick(player);
+
             // handle transformative effects tick
             PlayerEffectAttachment attachment = player.getAttached(EffectManager.EFFECT_ATTACHMENT);
             if (attachment != null && attachment.currentEffect != null) {

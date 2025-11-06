@@ -175,24 +175,4 @@ public class ModPacketsS2CServer {
         ServerPlayNetworking.send(player, ModPackets.LOGIN_PACKET, buf);
     }
 
-    public static void sendCustomEdibleList(ServerPlayerEntity player, List<Identifier> Items, FoodComponent foodComponent) {
-        PacketByteBuf buf = PacketByteBufs.create();
-        buf.writeInt(1);  // 添加CustomEdible
-        buf.writeInt(Items.size());
-        for (Identifier id : Items) {
-            buf.writeIdentifier(id);
-        }
-        CustomEdibleUtils.WriteFoodComponent(buf, foodComponent);
-        ServerPlayNetworking.send(player, ModPackets.UPDATE_CUSTOM_EDIBLE_DATA, buf);
-    }
-
-    public static void sendClearEdibleList(ServerPlayerEntity player, List<Identifier> Items) {
-        PacketByteBuf buf = PacketByteBufs.create();
-        buf.writeInt(0);  // 清空CustomEdible
-        buf.writeInt(Items.size());
-        for (Identifier id : Items) {
-            buf.writeIdentifier(id);
-        }
-        ServerPlayNetworking.send(player, ModPackets.UPDATE_CUSTOM_EDIBLE_DATA, buf);
-    }
 }
