@@ -471,6 +471,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         }
         else{
             CONTAINER.setAnimation(null);
+            currentAnimation = null;
         }
     }
 
