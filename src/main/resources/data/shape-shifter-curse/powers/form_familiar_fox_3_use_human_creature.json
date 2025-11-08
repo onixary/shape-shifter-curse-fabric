@@ -49,8 +49,16 @@
                 "type": "origins:target_condition",
                 "condition": {
                     "type": "origins:in_tag",
-                    "tag": "origins:familiar_human_target"
+                    "tag": "shape-shifter-curse:familiar_human_target"
                 }
+            },
+            {
+                "type": "origins:target_condition",
+                "condition": {
+                    "type": "origins:in_tag",
+                    "tag": "shape-shifter-curse:familiar_human_onlyhand_blacklist"
+                },
+                "inverted": true
             },
             {
                 "type": "origins:actor_condition",
