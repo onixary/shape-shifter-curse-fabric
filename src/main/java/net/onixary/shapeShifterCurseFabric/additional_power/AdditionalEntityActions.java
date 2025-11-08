@@ -10,6 +10,7 @@ public class AdditionalEntityActions {
         register(AddInstinctAction.getFactory());
         register(SetFallingDistanceAction.createFactory());
         register(TransformAction.createFactory());
+        register(ExplosionDamageEntityAction.createFactory());
     }
 
     public static ActionFactory<Entity> register(ActionFactory<Entity> actionFactory) {
