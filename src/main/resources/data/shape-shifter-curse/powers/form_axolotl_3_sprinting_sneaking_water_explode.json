@@ -22,11 +22,13 @@
                 "pitch": 0.8
             },
             {
-                "type": "origins:explode",
+                "type": "shape-shifter-curse:explosion_damage_entity",
                 "power": 2,
-                "destruction_type": "none",
-                "damage_self": false,
-                "create_fire": false
+                "entity_condition": {
+                    "type": "origins:in_tag",
+                    "tag": "shape-shifter-curse:water_explode_immune",
+                    "inverted": true
+                }
             },
             {
                 "type": "origins:gain_air",

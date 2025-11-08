@@ -95,7 +95,7 @@ public class CustomEdiblePlayerAMixin {
     }
 
     @ModifyExpressionValue(method = "spawnConsumptionEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getUseAction()Lnet/minecraft/util/UseAction;"))
-    private UseAction applyFoodEffects$isFood(UseAction original, ItemStack stack, int particleCount) {
+    private UseAction spawnConsumptionEffects$getUseAction(UseAction original, ItemStack stack, int particleCount) {
         if ((Object)this instanceof PlayerEntity playerEntity) {
             FoodComponent fc = getPowerFoodComponent(playerEntity, activeItemStack);
             if (fc == null) {
