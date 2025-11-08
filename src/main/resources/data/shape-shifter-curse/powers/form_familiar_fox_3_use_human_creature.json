@@ -60,6 +60,13 @@
                     "comparison": "<",
                     "compare_to": 1
                 }
+            },
+            {
+                "type": "origins:actor_condition",
+                "condition": {
+                    "type": "origins:sneaking",
+                    "inverted": true
+                }
             }
         ]
     },
