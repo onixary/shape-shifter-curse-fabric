@@ -22,11 +22,6 @@ jobs:
           path: gradle.properties
           properties: 'mod_version archives_base_name minecraft_version'
 
-      - name: 获取版本信息
-        id: 'version'
-        run:
-          echo "version=${{ step.properties.outputs.mod_version }}-${{ env.channel }}.${{ env.build_version }}" >> $GITHUB_OUTPUT
-
       - name: 配置Java环境 使用Java17 # 由于Java版本在build.gradle中写的 无法获取到 如果修改了build.gradle需要手动修改下面的java-version
         uses: actions/setup-java@v4
         with:
@@ -46,5 +41,5 @@ jobs:
       - name: 发布构建产物 # 如果没有Action中没有发布Jar 请检查Gradle配置文件
         uses: actions/upload-artifact@v4.3.3
         with:
-          name: "${{ steps.properties.outputs.archives_base_name }}-${{ steps.version.outputs.version }}"
-          path: build/libs/${{ steps.properties.outputs.archives_base_name }}-${{ steps.version.outputs.version }}.jar
+          name: "${{ steps.properties.outputs.archives_base_name }}-${{ step.properties.outputs.mod_version }}-${{ env.channel }}.${{ env.build_version }}"
+          path: build/libs/${{ steps.properties.outputs.archives_base_name }}-${{ step.properties.outputs.mod_version }}-${{ env.channel }}.${{ env.build_version }}.jar
