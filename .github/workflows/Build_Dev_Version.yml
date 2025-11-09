@@ -4,7 +4,7 @@
 name: 开发版 | Dev Version  # 开发版 在解决Issues或开发新功能后使用 用于其他玩家测试
 on:
   workflow_dispatch:  # 手动触发 目前开发人员较少 不用Nightly Build(有时1天一个Commit都没有) 写完一个功能后手动触发一次即可
-    # inputs: # 手动触发时需要输入的参数 没用到
+  # inputs: # 手动触发时需要输入的参数 没用到
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,7 +25,7 @@ jobs:
       - name: 获取版本信息
         id: 'version'
         run:
-          echo "version=${{ step.properties.mod_version }}-${{ env.channel }}.${{ env.build_version }}" >> $GITHUB_OUTPUT
+          echo "version=${{ step.properties.outputs.mod_version }}-${{ env.channel }}.${{ env.build_version }}" >> $GITHUB_OUTPUT
 
       - name: 配置Java环境 使用Java17 # 由于Java版本在build.gradle中写的 无法获取到 如果修改了build.gradle需要手动修改下面的java-version
         uses: actions/setup-java@v4
