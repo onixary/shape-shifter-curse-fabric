@@ -84,7 +84,7 @@ public class CustomEdiblePlayerAMixin {
 
     @ModifyExpressionValue(method = "shouldSpawnConsumptionEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item;getFoodComponent()Lnet/minecraft/item/FoodComponent;"))
     private FoodComponent shouldSpawnConsumptionEffects$getFoodComponent(FoodComponent original) {
-        if ((Object) this instanceof PlayerEntity playerEntity) {
+        if ((Object)this instanceof PlayerEntity playerEntity) {
             FoodComponent fc = getPowerFoodComponent(playerEntity, activeItemStack);
             if (fc == null) {
                 return original;

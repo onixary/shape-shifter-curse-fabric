@@ -22,6 +22,9 @@ public class CustomEdibleUtils {
     public static HashMap<UUID, HashMap<Identifier, FoodComponent>> customEdibleMap = new HashMap<>();
 
     public static FoodComponent getPowerFoodComponent(PlayerEntity user, ItemStack itemStack) {
+        if (user == null || itemStack == null || itemStack.isEmpty()) {
+            return null;
+        }
         HashMap<Identifier, FoodComponent> customEdible = customEdibleMap.computeIfAbsent(user.getUuid(), k -> new HashMap<>());
         return customEdible.getOrDefault(Registries.ITEM.getId(itemStack.getItem()), null);
     }
