@@ -7,6 +7,13 @@ plugins {
 version = project.mod_version
 group = project.maven_group
 
+// 从Github Action 环境获取构建Channel和BuildVersion
+def channel = System.getenv('channel')
+def build_version = System.getenv('build_version')
+if (channel != null) {
+    version = "${project.mod_version}-${channel}.${build_version}"
+}
+
 base {
     archivesName = project.archives_base_name
 }
