@@ -119,7 +119,7 @@ public abstract class CustomEdibleItemMixin {
         if (user instanceof PlayerEntity) {
             return getPowerFoodComponent((PlayerEntity) user, stack) != null || original;
         }
-    return true;
+    return original;
     }
 
 }
