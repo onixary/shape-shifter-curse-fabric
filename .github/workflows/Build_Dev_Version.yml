@@ -41,5 +41,5 @@ jobs:
       - name: 发布构建产物 # 如果没有Action中没有发布Jar 请检查Gradle配置文件
         uses: actions/upload-artifact@v4.3.3
         with:
-          name: "${{ steps.properties.outputs.archives_base_name }}-${{ step.properties.outputs.mod_version }}-${{ env.channel }}.${{ env.build_version }}"
-          path: build/libs/${{ steps.properties.outputs.archives_base_name }}-${{ step.properties.outputs.mod_version }}-${{ env.channel }}.${{ env.build_version }}.jar
+          name: "${{ steps.properties.outputs.archives_base_name }}-${{ steps.properties.outputs.mod_version }}-${{ env.channel }}.${{ env.build_version }}"
+          path: build/libs/${{ steps.properties.outputs.archives_base_name }}-${{ steps.properties.outputs.mod_version }}-${{ env.channel }}.${{ env.build_version }}.jar
