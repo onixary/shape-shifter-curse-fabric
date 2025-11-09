@@ -118,9 +118,8 @@ public abstract class CustomEdibleItemMixin {
     private boolean finishUsing$isFood(boolean original, ItemStack stack, World world, LivingEntity user) {
         if (user instanceof PlayerEntity) {
             return getPowerFoodComponent((PlayerEntity) user, stack) != null || original;
-        } else {
+        } 
         return original;
-        }
     }
 
 }
