@@ -197,7 +197,7 @@ public class AnimationControllerInstance {
             return new Pair<>(AnimationControllerCellResult.NOT_MATCH, PlayerAnimState.NONE);
         });
         Controller_Normal.RegisterAnimControllerCell(AnimC_Jump, (playerEntity, animDataHolder) -> {
-            if ((Math.abs(playerEntity.getVelocity().z) > 0.15 || Math.abs(playerEntity.getVelocity().x) > 0.15) && animDataHolder.playerForm.getCanSneakRush()) {
+            if ((Math.abs(playerEntity.getVelocity().z) > 0.15 || Math.abs(playerEntity.getVelocity().x) > 0.15) && animDataHolder.playerForm.getCanRushJump()) {
                 return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_RUSH_JUMP);
             }
             if (playerEntity.getVelocity().y >= 0.0) {
@@ -206,8 +206,8 @@ public class AnimationControllerInstance {
             return new Pair<>(AnimationControllerCellResult.NOT_MATCH, PlayerAnimState.NONE);
         });
         Controller_Sneaking.RegisterAnimControllerCell(AnimC_Jump, (playerEntity, animDataHolder) -> {
-            if ((Math.abs(playerEntity.getVelocity().z) > 0.15 || Math.abs(playerEntity.getVelocity().x) > 0.15) && animDataHolder.playerForm.getCanSneakRush()) {
-                return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_RUSH_JUMP);
+            if ((Math.abs(playerEntity.getVelocity().z) > 0.15 || Math.abs(playerEntity.getVelocity().x) > 0.15) && animDataHolder.playerForm.getCanRushJump()) {
+                return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SNEAK_RUSH_JUMP);
             }
             if (playerEntity.getVelocity().y >= 0.0) {
                 return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SNEAK_JUMP);

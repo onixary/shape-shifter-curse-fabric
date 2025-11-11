@@ -57,6 +57,7 @@ public class Form_Ocelot3 extends PlayerFormBase {
             case ANIM_JUMP:
             case ANIM_SNEAK_JUMP:
             case ANIM_RUSH_JUMP:
+            case ANIM_SNEAK_RUSH_JUMP:
                 return anim_jump;
             case ANIM_CLIMB_IDLE:
             case ANIM_CLIMB:

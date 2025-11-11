@@ -21,10 +21,14 @@ public class Form_Ocelot2 extends PlayerFormBase {
         switch (currentState) {
             case ANIM_SNEAK_IDLE:
             case ANIM_RIDE_IDLE:
+            case ANIM_BOAT_IDLE:
                 return anim_sneak_idle;
             case ANIM_SNEAK_RUSH:
                 return anim_sneak_rush;
-            case ANIM_RUSH_JUMP:
+            // case ANIM_RUSH_JUMP:
+            case ANIM_SNEAK_FALL:  // TODO 先临时使用 rush_jump 的动作
+            case ANIM_SNEAK_JUMP:
+            case ANIM_SNEAK_RUSH_JUMP:
                 return anim_rush_jump;
             default:
                 return null;

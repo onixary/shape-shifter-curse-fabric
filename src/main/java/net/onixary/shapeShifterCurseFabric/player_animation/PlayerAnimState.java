@@ -28,6 +28,7 @@ public enum PlayerAnimState {
     ANIM_ATTACK_ONCE,
     ANIM_SNEAK_RUSH,
     ANIM_RUSH_JUMP,
+    ANIM_SNEAK_RUSH_JUMP,
     ANIM_SLEEP,
     ANIM_SNEAK_JUMP,
     ANIM_SNEAK_FALL,

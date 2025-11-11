@@ -23,6 +23,7 @@ public class Form_Bat2 extends PlayerFormBase {
         switch (currentState) {
             case ANIM_SNEAK_IDLE:
             case ANIM_RIDE_IDLE:
+            case ANIM_BOAT_IDLE:
                 return anim_sneak_idle;
 
             case ANIM_JUMP:
