@@ -26,6 +26,7 @@ public class Form_Ocelot2 extends PlayerFormBase {
             case ANIM_SNEAK_RUSH:
                 return anim_sneak_rush;
             case ANIM_RUSH_JUMP:
+            case ANIM_SNEAK_JUMP:
                 return anim_rush_jump;
             default:
                 return null;
