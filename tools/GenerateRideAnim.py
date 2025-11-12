@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-import math
+
 # File          : GenerateRideAnim.py
 # Author        : XuHaoNan
 
@@ -11,6 +11,7 @@ import math
 import os
 import json
 import typing
+import math
 
 FormRideAnimationMap = {
 	"shape-shifter-curse:form_bat_2": "shape-shifter-curse:bat_1_sneak_idle",
