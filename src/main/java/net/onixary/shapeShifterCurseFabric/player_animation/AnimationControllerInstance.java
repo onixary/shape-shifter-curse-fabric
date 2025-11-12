@@ -3,8 +3,10 @@ package net.onixary.shapeShifterCurseFabric.player_animation;
 import com.mojang.datafixers.util.Pair;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.entity.vehicle.MinecartEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -159,8 +161,9 @@ public class AnimationControllerInstance {
         );  // 从PlayerEntityAnimOverrideMixin 中复制过来的
         RegisterAnimCellToAllController(AnimC_Sleep, (player, animDataHolder) -> new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_SLEEP));
         RegisterAnimCellToAllController(AnimC_Ride, ((playerEntity, animDataHolder) -> {
-            if (playerEntity.getVehicle() instanceof BoatEntity) {
-                return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_BOAT_IDLE);
+            Entity Vehicle = playerEntity.getVehicle();
+            if (Vehicle instanceof BoatEntity || Vehicle instanceof MinecartEntity)  {
+                return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_RIDE_VEHICLE_IDLE);
             }
             return new Pair<>(AnimationControllerCellResult.MATCH, PlayerAnimState.ANIM_RIDE_IDLE);
         }));

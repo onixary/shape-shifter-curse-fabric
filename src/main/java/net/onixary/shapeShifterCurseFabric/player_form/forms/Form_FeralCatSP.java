@@ -4,14 +4,12 @@ import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
-public class Form_Ocelot3 extends PlayerFormBase {
-    public Form_Ocelot3(Identifier formID) {
+public class Form_FeralCatSP extends PlayerFormBase {
+    public Form_FeralCatSP(Identifier formID) {
         super(formID);
-        this.setBodyType(PlayerFormBodyType.FERAL);
     }
 
     private static AnimationHolder anim_idle = AnimationHolder.EMPTY;
@@ -58,8 +56,6 @@ public class Form_Ocelot3 extends PlayerFormBase {
                 return anim_dig;
             case ANIM_JUMP:
             case ANIM_SNEAK_JUMP:
-            case ANIM_RUSH_JUMP:
-            case ANIM_SNEAK_RUSH_JUMP:
                 return anim_jump;
             case ANIM_CLIMB_IDLE:
             case ANIM_CLIMB:
@@ -85,10 +81,10 @@ public class Form_Ocelot3 extends PlayerFormBase {
     public void Anim_registerAnims() {
         anim_idle = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_idle"), true);
         anim_sneak_idle = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sneak_idle"), true);
-        anim_ride = new AnimationHolder(new Identifier(MOD_ID, "ocelot_3_riding"), true);
+        anim_ride = new AnimationHolder(new Identifier(MOD_ID, "feral_cat_sp_riding"), true);
         anim_walk = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_walk"), true, 1.2f, 2);
         anim_sneak_walk = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sneak_walk"), true);
-        anim_run = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_run"), true, 3.3f);
+        anim_run = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_run"), true, 2.3f);
         anim_float = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_float"), true);
         anim_swim = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_swim"), true);
         anim_dig = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_dig"), true);
@@ -98,6 +94,6 @@ public class Form_Ocelot3 extends PlayerFormBase {
         anim_attack = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_attack"), true);
         anim_sleep = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sleep"), true);
         anim_elytra_fly = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_elytra_fly"), true);
-        anim_sneak_rush = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_run"), true, 3.3f);
+        anim_sneak_rush = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_run"), true, 2.3f);
     }
 }
