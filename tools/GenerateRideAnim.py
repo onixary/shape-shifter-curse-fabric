@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-
+import math
 # File          : GenerateRideAnim.py
 # Author        : XuHaoNan
 
@@ -95,7 +95,7 @@ def getFormRideAnimation(originID: str) -> typing.Optional[str]:
 
 def generateRideAnimation(baseRideAnimation: dict[str, any], scale: tuple[float, float]) -> dict[str, any]:
 	animationLength = baseRideAnimation.get("animation_length", -1.0)
-	FixedY = 5 * scale[0] * scale[1]
+	FixedY = max(((0.9 * (scale[0] * scale[1])) - 0.25) * 16, 1.0)
 	for boneName in baseRideAnimation["bones"]:
 		BoneData = baseRideAnimation["bones"][boneName]
 		if "position" not in BoneData:
