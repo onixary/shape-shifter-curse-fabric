@@ -38,7 +38,8 @@
     "projectile.PotionEntityMixin",
     "LoginMixin",
     "SneakEdgeCheckMixin",
-    "integration.AppleSkin"
+    "integration.AppleSkin",
+    "integration.AzureLib_AzProvider"
   ],
   "client": [
     "InventoryScreenMixin",
