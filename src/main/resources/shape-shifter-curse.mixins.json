@@ -65,7 +65,8 @@
     "CapeFeatureRendererMixin",
     "KeyboardInputMixin",
     "accessor.ApoliClientAccessor",
-    "CustomEdibleHeldItemRendererMixin"
+    "CustomEdibleHeldItemRendererMixin",
+    "EffectCommandMixin"
   ],
   "injectors": {
     "defaultRequire": 1
