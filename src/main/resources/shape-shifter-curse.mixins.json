@@ -69,6 +69,10 @@
     "PlayerMovementControlMixin",
     "PlayerRotationRendererMixin",
     "accessor.ApoliClientAccessor"
+    "CapeFeatureRendererMixin",
+    "KeyboardInputMixin",
+    "CustomEdibleHeldItemRendererMixin",
+    "EffectCommandMixin"
   ],
   "injectors": {
     "defaultRequire": 1

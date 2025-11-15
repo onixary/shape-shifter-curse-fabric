@@ -25,9 +25,21 @@
                 "type": "shape-shifter-curse:explosion_damage_entity",
                 "power": 2,
                 "entity_condition": {
-                    "type": "origins:in_tag",
-                    "tag": "shape-shifter-curse:water_explode_immune",
-                    "inverted": true
+                    "type": "origins:and",
+                    "conditions": [
+                        {
+                            "type": "origins:target_condition",
+                            "condition": {
+                                "type": "origins:in_tag",
+                                "tag": "shape-shifter-curse:water_explode_immune"
+                            },
+                            "inverted": true
+                        },
+                        {
+                            "type": "origins:owner",
+                            "inverted": true
+                        }
+                    ]
                 }
             },
             {

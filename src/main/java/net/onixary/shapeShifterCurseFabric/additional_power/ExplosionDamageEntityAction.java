@@ -12,6 +12,7 @@ import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageSources;
 import net.minecraft.entity.damage.DamageTypes;
+import net.minecraft.util.Pair;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -26,11 +27,11 @@ public class ExplosionDamageEntityAction {
         // 仅实现爆炸伤害实体的能力
         // 参数 power -> 威力 entity_condition -> 实体条件
         int Power = data.getInt("power");
-        ConditionFactory<Entity>.Instance entityCondition = data.get("entity_condition");
+        ConditionFactory<Pair<Entity, Entity>>.Instance entityCondition = data.get("entity_condition");
         explosion(entity, Power, entityCondition);
     }
 
-    private static void explosion(Entity entity, int power, ConditionFactory<Entity>.Instance entityCondition) {
+    private static void explosion(Entity entity, int power, ConditionFactory<Pair<Entity, Entity>>.Instance entityCondition) {
         Vec3d ExplosionPos = entity.getPos();
         DamageSource source = entity.getWorld().getDamageSources().explosion(entity, entity);
         entity.getWorld().emitGameEvent(entity, GameEvent.EXPLODE, new Vec3d(ExplosionPos.getX(), ExplosionPos.getY(), ExplosionPos.getZ()));
@@ -46,7 +47,7 @@ public class ExplosionDamageEntityAction {
         List<Entity> list = entity.getWorld().getOtherEntities(entity, new Box((double)k, (double)r, (double)t, (double)l, (double)s, (double)u));
         for(int v = 0; v < list.size(); ++v) {
             Entity target_entity = (Entity) list.get(v);
-            if (!target_entity.isImmuneToExplosion() && (entityCondition == null || entityCondition.test(target_entity)))  {
+            if (!target_entity.isImmuneToExplosion() && (entityCondition == null || entityCondition.test(new Pair<>(entity, target_entity)))) {
                 double w = Math.sqrt(target_entity.squaredDistanceTo(ExplosionPos)) / (double)q;
                 if (w <= 1.0) {
                     double x = target_entity.getX() - ExplosionPos.getX();
@@ -82,7 +83,7 @@ public class ExplosionDamageEntityAction {
                 ShapeShifterCurseFabric.identifier("explosion_damage_entity"),
                 new SerializableData()
                         .add("power", SerializableDataTypes.INT, 0)
-                        .add("entity_condition", ApoliDataTypes.ENTITY_CONDITION, null),
+                        .add("entity_condition", ApoliDataTypes.BIENTITY_CONDITION, null),
                 ExplosionDamageEntityAction::action
         );
     }

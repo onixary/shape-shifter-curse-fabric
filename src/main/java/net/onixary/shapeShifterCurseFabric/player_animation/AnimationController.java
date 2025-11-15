@@ -4,7 +4,6 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationTransform;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
@@ -27,7 +26,7 @@ public class AnimationController {
         public Vec3d lastPos = new Vec3d(0, 0, 0);
         int continueSwingAnimCounter = 0;
         boolean lastOnGround = false;
-
+        long LastPosYChange = 0;
         // 计算缓存数据 常用变量
         boolean IsWalk;  // 有必要缓存么? 缓存仅减少几个equal判断
     }
@@ -71,6 +70,14 @@ public class AnimationController {
         // 可复用变量
         animDataHolder.IsWalk = !player.getPos().equals(animDataHolder.lastPos);
         animDataHolder.playerForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+        // 理论上不需要设置上限 2^63次方 / 20 秒后才会溢出
+        if (player.getPos().getY() == animDataHolder.lastPos.getY()) {
+            animDataHolder.LastPosYChange += 1;
+        }
+        else {
+            animDataHolder.LastPosYChange = 0;
+        }
+
     }
 
     public void DataHolderTick(PlayerEntity player, PlayerAnimDataHolder animDataHolder) {

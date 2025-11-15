@@ -107,12 +107,12 @@ public class AnimationControllerInstance {
 
     public static Identifier AnimC_Walk = AnimationController.RegisterAnimationStateCondition(
             ShapeShifterCurseFabric.identifier("anim_c_walk"),
-            (playerEntity, animDataHolder) -> animDataHolder.IsWalk && playerEntity.isOnGround()
+            (playerEntity, animDataHolder) -> animDataHolder.IsWalk && (playerEntity.isOnGround() || animDataHolder.LastPosYChange > 10)
     );  // 和奔跑合并 如果逻辑复杂 可以把奔跑分离  需要为Sneak单独实现
 
     public static Identifier AnimC_Idle = AnimationController.RegisterAnimationStateCondition(
             ShapeShifterCurseFabric.identifier("anim_c_idle"),
-            (playerEntity, animDataHolder) -> !animDataHolder.IsWalk && playerEntity.isOnGround()
+            (playerEntity, animDataHolder) -> !animDataHolder.IsWalk && (playerEntity.isOnGround() || animDataHolder.LastPosYChange > 10)
     );
 
     public static void RegisterAnimCellToAllController(Identifier conditionID, BiFunction<PlayerEntity, AnimationController.PlayerAnimDataHolder, Pair<AnimationControllerCellResult, PlayerAnimState>> cell) {
