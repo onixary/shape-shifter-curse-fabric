@@ -21,7 +21,9 @@ import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID
 public class TAxolotlEntityRenderer extends MobEntityRenderer<AxolotlEntity, AxolotlEntityModel<AxolotlEntity>> {
 	private static final Map<Variant, Identifier> TEXTURES = Util.make(Maps.<Variant, Identifier>newHashMap(), variants -> {
 		for (Variant variant : Variant.values()) {
-			variants.put(variant, new Identifier(String.format(Locale.ROOT, "textures/entity/axolotl/axolotl_%s.png", variant.getName())));
+			// 替换变体名称中的非法字符':'为'/'
+			String safeVariantName = variant.getName().replace(':', '/');
+			variants.put(variant, new Identifier(String.format(Locale.ROOT, "textures/entity/axolotl/axolotl_%s.png", safeVariantName)));
 		}
 	});
 
@@ -32,6 +34,6 @@ public class TAxolotlEntityRenderer extends MobEntityRenderer<AxolotlEntity, Axo
 	}
 
 	public Identifier getTexture(AxolotlEntity axolotlEntity) {
-		return (Identifier)TEXTURE;
+		return TEXTURE; //有个多余的 (Identifier) 强制转换，我去掉了
 	}
 }
