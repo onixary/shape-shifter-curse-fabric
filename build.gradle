@@ -144,7 +144,9 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.12.1'
 
-    modImplementation "net.fabricmc.fabric-api:fabric-lifecycle-events-v1:${project.fabric_version}"
+    // 已经包含在 fabric-api 中
+    // modImplementation "net.fabricmc.fabric-api:fabric-lifecycle-events-v1:${project.fabric_version}"
+
     //mappings loom.layered() {
     //    officialMojangMappings()
     //    parchment("org.parchmentmc.data:parchment-1.20.1:2023.09.03@zip")
