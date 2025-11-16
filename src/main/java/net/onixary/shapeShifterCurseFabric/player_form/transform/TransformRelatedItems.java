@@ -15,7 +15,6 @@ import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManag
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 
 import static net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager.handleDirectTransform;
-import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.EFFECT_ATTACHMENT;
 
 public class TransformRelatedItems {
     private TransformRelatedItems() {
@@ -90,6 +89,7 @@ public class TransformRelatedItems {
         int currentFormIndex = currentForm.getIndex();
         PlayerFormGroup currentFormGroup = currentForm.getGroup();
         PlayerFormBase toForm = null;
+        //遇到了魔法数字,意义不明，不敢动，如果重构建议使用 enum+if-else if或者新的switch
         switch (currentFormIndex) {
             case -2:
                 // 无用
@@ -166,8 +166,8 @@ public class TransformRelatedItems {
                 // 特殊逻辑：查看当前是否有在生效的效果，有的话则应用，没有的话则无用
                 // Special logic: check if there is an active effect, if so, apply it, otherwise useless
 
-                PlayerEffectAttachment attachment = player.getAttached(EFFECT_ATTACHMENT);
-                if (attachment != null && attachment.currentEffect != null){
+                PlayerEffectAttachment attachment = EffectManager.getOrCreateAttachment(player);
+                if (attachment.currentEffect != null) {
                     EffectManager.applyEffect(player);
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_used_catalyst_attached").formatted(Formatting.YELLOW));
                     ShapeShifterCurseFabric.ON_TRANSFORM_BY_CATALYST.trigger((ServerPlayerEntity) player);
@@ -206,6 +206,7 @@ public class TransformRelatedItems {
         int currentFormIndex = currentForm.getIndex();
         PlayerFormGroup currentFormGroup = currentForm.getGroup();
         PlayerFormBase toForm = null;
+        //遇到了魔法数字,意义不明，不敢动，如果重构建议使用 enum+if-else if或者新的switch
         switch (currentFormIndex) {
             case -2:
                 // 无用

@@ -134,7 +134,8 @@ repositories {
 }
 
 dependencies {
-    // To change the versions see the gradle.properties file
+
+    //要更改版本，请查看 gradle.properties 文件
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
@@ -143,6 +144,7 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.12.1'
 
+    modImplementation "net.fabricmc.fabric-api:fabric-lifecycle-events-v1:${project.fabric_version}"
     //mappings loom.layered() {
     //    officialMojangMappings()
     //    parchment("org.parchmentmc.data:parchment-1.20.1:2023.09.03@zip")

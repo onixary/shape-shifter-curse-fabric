@@ -8,6 +8,8 @@ import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 
+import java.util.Objects;
+
 public class PlayerEffectAttachment{
 
     public PlayerFormBase currentToForm;
@@ -18,7 +20,7 @@ public class PlayerEffectAttachment{
     // instinct value
 
     public PlayerEffectAttachment() {
-        this.currentToForm = null;
+        this.currentToForm = RegPlayerForms.ORIGINAL_SHIFTER;
         this.remainingTicks = 0;
         this.currentEffect = null;
         currentRegEffect = null;
@@ -34,13 +36,13 @@ public class PlayerEffectAttachment{
         }
         nbt.putInt("remainingTicks", remainingTicks);
         if (currentEffect != null) {
-            nbt.putString("currentEffect", Registries.STATUS_EFFECT.getId(currentEffect).toString());
+            nbt.putString("currentEffect", Objects.requireNonNull(Registries.STATUS_EFFECT.getId(currentEffect)).toString());
         }
         else{
             nbt.putString("currentEffect", "null");
         }
         if(currentRegEffect != null){
-            nbt.putString("currentRegEffect", Registries.STATUS_EFFECT.getId(currentRegEffect).toString());
+            nbt.putString("currentRegEffect", Objects.requireNonNull(Registries.STATUS_EFFECT.getId(currentRegEffect)).toString());
         }
         else{
             nbt.putString("currentRegEffect", "null");
