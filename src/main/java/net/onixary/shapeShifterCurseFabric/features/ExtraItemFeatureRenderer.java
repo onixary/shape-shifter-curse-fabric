@@ -45,7 +45,7 @@ public class ExtraItemFeatureRenderer <T extends LivingEntity, M extends EntityM
             try {
                 Optional<ModContainer> FPM_Container = FabricLoader.getInstance().getModContainer("firstperson");
                 if (FPM_Container.isPresent()) {
-                    IS_FIRST_PERSON_MOD_NEW_VERSION = FPM_Container.get().getMetadata().getVersion().compareTo(Version.parse("2.5.0")) >= 0;
+                    IS_FIRST_PERSON_MOD_NEW_VERSION = FPM_Container.get().getMetadata().getVersion().compareTo(Version.parse("2.6.0")) >= 0;
                 }
             } catch (Exception e) {
                 ShapeShifterCurseFabric.LOGGER.error("Failed to check FirstPerson Mod version");
