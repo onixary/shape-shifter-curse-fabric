@@ -4,6 +4,8 @@ import dev.tr7zw.firstperson.FirstPersonModelCore;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
+import net.fabricmc.loader.api.Version;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -18,19 +20,38 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+
+import java.util.Optional;
 
 @Environment(EnvType.CLIENT)
 public class ExtraItemFeatureRenderer <T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
     //private final HeldItemRenderer heldItemRenderer;
     private final CustomFeralItemRenderer customFeralItemRenderer;
     private static final boolean IS_FIRST_PERSON_MOD_LOADED = FabricLoader.getInstance().isModLoaded("firstperson");
+    private static boolean IS_FIRST_PERSON_MOD_NEW_VERSION = false;
+    private static boolean IS_FIRST_PERSON_MOD_VERSION_CHECK_FAIL = false;
 
     public ExtraItemFeatureRenderer(FeatureRendererContext<T, M> context, EntityRenderDispatcher entityRenderDispatcher, ItemRenderer itemRenderer) {
         super(context);
         this.customFeralItemRenderer = new CustomFeralItemRenderer(MinecraftClient.getInstance(), entityRenderDispatcher, itemRenderer);
+    }
+
+    static {
+        if (IS_FIRST_PERSON_MOD_LOADED) {
+            try {
+                Optional<ModContainer> FPM_Container = FabricLoader.getInstance().getModContainer("firstperson");
+                if (FPM_Container.isPresent()) {
+                    IS_FIRST_PERSON_MOD_NEW_VERSION = FPM_Container.get().getMetadata().getVersion().compareTo(Version.parse("2.5.0")) >= 0;
+                }
+            } catch (Exception e) {
+                ShapeShifterCurseFabric.LOGGER.error("Failed to check FirstPerson Mod version");
+                IS_FIRST_PERSON_MOD_VERSION_CHECK_FAIL = true;
+            }
+        }
     }
 
     @Override
@@ -56,9 +77,17 @@ public class ExtraItemFeatureRenderer <T extends LivingEntity, M extends EntityM
                 if(IS_FIRST_PERSON_MOD_LOADED) {
                     // Feral形态的forstperson配置必须固定为-25 offset，否则会导致物品位置不正确以及模型看不到
                     FirstPersonModelCore fpm = FirstPersonModelCore.instance;
-                    fpm.getConfig().xOffset = -25;
-                    fpm.getConfig().sitXOffset = -25;
-                    fpm.getConfig().sneakXOffset = -25;
+                    if (!IS_FIRST_PERSON_MOD_VERSION_CHECK_FAIL) {
+                        if (IS_FIRST_PERSON_MOD_NEW_VERSION) {
+                            fpm.getConfig().xOffset = 12;
+                            fpm.getConfig().sitXOffset = 12;
+                            fpm.getConfig().sneakXOffset = 12;
+                        } else {
+                            fpm.getConfig().xOffset = -25;
+                            fpm.getConfig().sitXOffset = -25;
+                            fpm.getConfig().sneakXOffset = -25;
+                        }
+                    }
 
                     // 已知Bug 在开启 FirstPersonModel 并启用时 且在第一人称时 物品位置不对
                     if (fpm.isEnabled()) {
