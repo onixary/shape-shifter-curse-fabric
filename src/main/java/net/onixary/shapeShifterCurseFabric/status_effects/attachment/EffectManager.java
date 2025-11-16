@@ -8,132 +8,209 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
-import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
-import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.removeVisualEffects;
 import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.loadAttachment;
 import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.saveAttachment;
+import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.removeVisualEffects;
 
 public class EffectManager {
-    // 注册玩家附身
     public static final AttachmentType<PlayerEffectAttachment> EFFECT_ATTACHMENT =
             AttachmentRegistry.create(new Identifier(MOD_ID, "effect_data"));
 
-    //static String testUUID = "testUUID-3d9ab571-1ea5-360b-bc9d-77cd0b2f72a9";
-    public static BaseTransformativeStatusEffect currentRegEffect;
+    // 移除静态的 currentRegEffect，因为它可能与多个玩家的状态冲突
+    // 应该只使用 attachment 中的 currentRegEffect
 
     // 覆盖新的效果
     public static void overrideEffect(PlayerEntity player, BaseTransformativeStatusEffect regEffect) {
-        LOGGER.info("get attach here");
-        PlayerEffectAttachment attachment = player.getAttached(EFFECT_ATTACHMENT);
-        LOGGER.info("remove old effect here");
+        LOGGER.info("Applying new transformative effect to player: {}", player.getName().getString());
+
+        PlayerEffectAttachment attachment = getOrCreateAttachment(player);
+
         // 移除旧效果
         if (attachment.currentEffect != null && attachment.currentEffect.getToForm() != regEffect.getToForm()) {
             attachment.currentEffect.onEffectCanceled(player);
         }
-        LOGGER.info("apply new effect here");
+
         // 应用新效果
-        currentRegEffect = attachment.currentRegEffect = regEffect;
+        attachment.currentRegEffect = regEffect;
         attachment.currentToForm = regEffect.getToForm();
         attachment.remainingTicks = StaticParams.T_EFFECT_DEFAULT_DURATION;
         attachment.currentEffect = regEffect;
-        LOGGER.info("apply potion effect here");
-        // 添加原版药水效果（用于渲染）
-        // 呈现必须使用注册过的类，因此将其手动传入
-        player.addStatusEffect(new StatusEffectInstance(regEffect, StaticParams.T_EFFECT_DEFAULT_DURATION));
-        // 触发自定义成就
-        ON_GET_TRANSFORM_EFFECT.trigger((ServerPlayerEntity) player);
 
-        // 判断是否为服务端玩家并发送同步包
+        // 添加原版药水效果
+        player.addStatusEffect(new StatusEffectInstance(regEffect, StaticParams.T_EFFECT_DEFAULT_DURATION));
+
+        // 触发自定义成就
         if (player instanceof ServerPlayerEntity serverPlayer) {
+            ON_GET_TRANSFORM_EFFECT.trigger(serverPlayer);
             ModPacketsS2CServer.sendSyncEffectAttachment(serverPlayer, attachment);
         }
+
+        LOGGER.info("Successfully applied effect: {}", regEffect.getToForm());
     }
 
     public static void loadEffect(PlayerEntity player, PlayerEffectAttachment loadedAttachment) {
         if (loadedAttachment.currentRegEffect != null) {
-            player.addStatusEffect(new StatusEffectInstance(loadedAttachment.currentRegEffect, loadedAttachment.remainingTicks));
+            player.addStatusEffect(new StatusEffectInstance(
+                    loadedAttachment.currentRegEffect,
+                    loadedAttachment.remainingTicks
+            ));
         }
 
-        // 判断是否为服务端玩家并发送同步包
         if (player instanceof ServerPlayerEntity serverPlayer) {
             ModPacketsS2CServer.sendSyncEffectAttachment(serverPlayer, loadedAttachment);
-            //LOGGER.info("sended sync effect attachment, currentToForm: " + loadedAttachment.currentToForm);
         }
     }
 
     // 强制应用当前效果
     public static void applyEffect(PlayerEntity player) {
-        PlayerEffectAttachment attachment = player.getAttached(EFFECT_ATTACHMENT);
-        LOGGER.info(attachment == null? "attachment is null" : "attachment is not null");
-        if (attachment != null && attachment.currentEffect != null) {
-            currentRegEffect = attachment.currentRegEffect = null;
+        PlayerEffectAttachment attachment = getOrCreateAttachment(player);
+        if (attachment.currentEffect != null) {
+            LOGGER.info("Applying effect for player: {}", player.getName().getString());
             attachment.currentEffect.onEffectApplied(player);
-            attachment.currentToForm = null;
-            attachment.remainingTicks = 0;
-            attachment.currentEffect = null;
+            clearAttachmentData(attachment);
         }
     }
 
     // 强制结束当前效果
     public static void cancelEffect(PlayerEntity player) {
-        PlayerEffectAttachment attachment = player.getAttached(EFFECT_ATTACHMENT);
-        LOGGER.info(attachment == null? "attachment is null" : "attachment is not null");
-        if (attachment != null && attachment.currentEffect != null) {
-            currentRegEffect = attachment.currentRegEffect = null;
+        PlayerEffectAttachment attachment = getOrCreateAttachment(player);
+        if (attachment.currentEffect != null) {
+            LOGGER.info("Canceling effect for player: {}", player.getName().getString());
             attachment.currentEffect.onEffectCanceled(player);
-            attachment.currentToForm = null;
-            attachment.remainingTicks = 0;
-            attachment.currentEffect = null;
+            clearAttachmentData(attachment);
+
+            // 同步到客户端
+            if (player instanceof ServerPlayerEntity serverPlayer) {
+                ModPacketsS2CServer.sendSyncEffectAttachment(serverPlayer, attachment);
+            }
         }
     }
 
     public static PlayerEffectAttachment getCurrentEffectAttachment(PlayerEntity player) {
-        return player.getAttached(EFFECT_ATTACHMENT);
+        return getOrCreateAttachment(player);
     }
 
-    public static boolean saveCurrentAttachment(ServerWorld world, PlayerEntity player) {
-        PlayerEffectAttachment attachment = player.getAttached(EFFECT_ATTACHMENT);
-        if(attachment != null) {
-            //saveAttachment(String.valueOf((player.getUuid())), attachment);
-            saveAttachment(world, player.getUuid().toString(), attachment);
-            //LOGGER.info("save attachment success, currentToForm: " + attachment.currentToForm);
-            // 判断是否为服务端玩家并发送同步包
-            if (player instanceof ServerPlayerEntity serverPlayer) {
-                ModPacketsS2CServer.sendSyncEffectAttachment(serverPlayer, attachment);
-                //LOGGER.info("sended sync effect attachment, currentToForm: " + attachment.currentToForm);
-            }
-            return true;
-        }
-        else{
-            LOGGER.info("save attachment failed");
-            return false;
+    public static void saveCurrentAttachment(ServerWorld world, PlayerEntity player) {
+        PlayerEffectAttachment attachment = getOrCreateAttachment(player);
+        saveAttachment(world, player.getUuid().toString(), attachment);
+
+        if (player instanceof ServerPlayerEntity serverPlayer) {
+            ModPacketsS2CServer.sendSyncEffectAttachment(serverPlayer, attachment);
         }
     }
 
     public static boolean loadCurrentAttachment(ServerWorld world, PlayerEntity player) {
         PlayerEffectAttachment attachment = loadAttachment(world, player.getUuid().toString());
         player.setAttached(EffectManager.EFFECT_ATTACHMENT, attachment);
-        if(attachment == null){
-            LOGGER.info("no attachment found in file");
+
+        if (attachment == null) {
+            LOGGER.info("No attachment found for player: {}", player.getName().getString());
             return false;
-        }
-        else if(attachment.currentToForm != null){
-            LOGGER.info("load attachment success, currentToForm: " + attachment.currentToForm);
+        } else if (attachment.currentToForm != null) {
+            LOGGER.info("Loaded attachment for player: {}, form: {}",
+                    player.getName().getString(), attachment.currentToForm);
             loadEffect(player, attachment);
             return true;
-        }
-        else{
-            LOGGER.info("loaded attachment is empty, reset attachment");
+        } else {
+            LOGGER.info("Loaded empty attachment for player: {}, resetting", player.getName().getString());
             return false;
         }
     }
 
+    public static void safeResetAttachment(PlayerEntity player) {
+        PlayerEffectAttachment attachment = getCurrentEffectAttachment(player);
+
+        // 检查是否需要清理
+        boolean hasTransformEffect = hasTransformativeEffect(player);
+        boolean hasAttachmentData = attachment.currentEffect != null || attachment.currentRegEffect != null;
+
+        if (!hasTransformEffect && hasAttachmentData) {
+            LOGGER.info("Safely resetting effect attachment for player: {}", player.getName().getString());
+            resetAttachment(player);
+
+            // 如果是服务端玩家，同步到客户端
+            if (player instanceof ServerPlayerEntity serverPlayer) {
+                ModPacketsS2CServer.sendSyncEffectAttachment(serverPlayer, getCurrentEffectAttachment(player));
+            }
+        }
+    }
+
     public static void resetAttachment(PlayerEntity player) {
-        player.setAttached(EffectManager.EFFECT_ATTACHMENT, new PlayerEffectAttachment());
+        PlayerEffectAttachment attachment = getOrCreateAttachment(player);
+        boolean hadEffect = attachment.currentEffect != null;
+
+        // 清空附件数据
+        clearAttachmentData(attachment);
+
+        // 移除相关的原版状态效果
+        removeTransformativeEffects(player);
         removeVisualEffects(player);
+
+        // 重新设置清理后的附件
+        player.setAttached(EffectManager.EFFECT_ATTACHMENT, attachment);
+
+        if (hadEffect) {
+            LOGGER.info("Successfully reset effect attachment for player: {}", player.getName().getString());
+        }
+    }
+
+    public static void verifyAndCleanAttachment(PlayerEntity player) {
+        boolean hasTransformEffect = hasTransformativeEffect(player);
+        PlayerEffectAttachment attachment = getCurrentEffectAttachment(player);
+        boolean hasAttachmentData = attachment.currentEffect != null || attachment.currentRegEffect != null;
+
+        // 如果数据不一致，进行清理
+        if (!hasTransformEffect && hasAttachmentData) {
+            LOGGER.warn("Detected inconsistent effect state for player: {}, cleaning up",
+                    player.getName().getString());
+            safeResetAttachment(player);
+        }
+    }
+
+    /**
+     * 获取玩家的 PlayerEffectAttachment，如果不存在则创建新的
+     */
+    public static PlayerEffectAttachment getOrCreateAttachment(PlayerEntity player) {
+        PlayerEffectAttachment attachment = player.getAttached(EFFECT_ATTACHMENT);
+        if (attachment == null) {
+            attachment = new PlayerEffectAttachment();
+            player.setAttached(EFFECT_ATTACHMENT, attachment);
+            LOGGER.debug("Created new EffectAttachment for player: {}", player.getName().getString());
+        }
+        return attachment;
+    }
+
+    // ========== 私有辅助方法 ==========
+
+    /**
+     * 检查玩家是否有变形效果
+     */
+    private static boolean hasTransformativeEffect(PlayerEntity player) {
+        return player.getStatusEffects().stream()
+                .anyMatch(effect -> effect.getEffectType() instanceof BaseTransformativeStatusEffect);
+    }
+
+    /**
+     * 清空附件数据
+     */
+    private static void clearAttachmentData(PlayerEffectAttachment attachment) {
+        attachment.currentToForm = RegPlayerForms.ORIGINAL_SHIFTER;
+        attachment.remainingTicks = 0;
+        attachment.currentEffect = null;
+        attachment.currentRegEffect = null;
+    }
+
+    /**
+     * 移除所有变形相关的原版状态效果
+     */
+    private static void removeTransformativeEffects(PlayerEntity player) {
+        player.getStatusEffects().stream()
+                .filter(effect -> effect.getEffectType() instanceof BaseTransformativeStatusEffect)
+                .forEach(effect -> player.removeStatusEffect(effect.getEffectType()));
     }
 }

@@ -11,10 +11,8 @@ import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 
-import java.util.Objects;
-
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.*;
-import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.EFFECT_ATTACHMENT;
+import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.getOrCreateAttachment;
 
 public class TStatusApplier {
     private TStatusApplier() {}
@@ -36,13 +34,12 @@ public class TStatusApplier {
     }
 
     private static void applyStatusByChance(float chance, PlayerEntity player, BaseTransformativeStatusEffect regStatusEffect) {
-        PlayerFormBase curToForm = Objects.requireNonNull(player.getAttached(EFFECT_ATTACHMENT)).currentToForm;
-        ShapeShifterCurseFabric.LOGGER.info("current dest form: " + curToForm + " when applyStatusByChance");
-        if(player.getAttached(EFFECT_ATTACHMENT) == null){
-            ShapeShifterCurseFabric.LOGGER.info("attach is null when applyStatusByChance");
-        }
+        PlayerFormBase curToForm = getOrCreateAttachment(player).currentToForm;
+        ShapeShifterCurseFabric.LOGGER.info("current dest form: {} when applyStatusByChance", curToForm);
         // 只有不同种类的效果才会互相覆盖
-        if (Math.random() < chance && !RegPlayerForms.IsPlayerFormEqual(curToForm,regStatusEffect.getToForm()) && FormAbilityManager.getForm(player).equals(RegPlayerForms.ORIGINAL_SHIFTER)) {
+        if (Math.random() < chance &&
+                !RegPlayerForms.IsPlayerFormEqual(curToForm, regStatusEffect.getToForm()) &&
+                FormAbilityManager.getForm(player).equals(RegPlayerForms.ORIGINAL_SHIFTER)) {
             ShapeShifterCurseFabric.LOGGER.info("TStatusApplier applyStatusByChance");
             EffectManager.overrideEffect(player, regStatusEffect);
         }

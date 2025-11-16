@@ -7,8 +7,8 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -34,7 +34,8 @@ import net.onixary.shapeShifterCurseFabric.team.MobTeamManager;
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.cursedMoonData;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker.loadInstinct;
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.removeVisualEffects;
-import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.*;
+import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.loadCurrentAttachment;
+import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.resetAttachment;
 
 public class PlayerEventHandler {
     public static void register() {
@@ -104,7 +105,7 @@ public class PlayerEventHandler {
             else{
                 ShapeShifterCurseFabric.LOGGER.info("Attachment loaded ");
             }
-            ModPacketsS2CServer.sendSyncEffectAttachment(player, player.getAttached(EffectManager.EFFECT_ATTACHMENT));
+            ModPacketsS2CServer.sendSyncEffectAttachment(player, EffectManager.getOrCreateAttachment(player));
 
             // load instinct
             InstinctManager.getServerWorld(server.getOverworld());
@@ -189,7 +190,7 @@ public class PlayerEventHandler {
                 else{
                     ShapeShifterCurseFabric.LOGGER.info("Attachment loaded ");
                 }
-                ModPacketsS2CServer.sendSyncEffectAttachment(player, player.getAttached(EffectManager.EFFECT_ATTACHMENT));
+                ModPacketsS2CServer.sendSyncEffectAttachment(player, EffectManager.getOrCreateAttachment(player));
 
                 // load instinct
                 InstinctManager.getServerWorld(server.getOverworld());
@@ -235,9 +236,7 @@ public class PlayerEventHandler {
             }
         });
 
-        ServerTickEvents.END_SERVER_TICK.register(server -> {
-            JumpEventCondition.tick();
-        });
+        ServerTickEvents.END_SERVER_TICK.register(server -> JumpEventCondition.tick());
     }
 
     private static void copyTransformativeEffect(ServerPlayerEntity oldPlayer, ServerPlayerEntity newPlayer) {
@@ -253,11 +252,16 @@ public class PlayerEventHandler {
         }
 
         // reapply potion effect
-        if (newAttachment.currentEffect != null && currentRegEffect != null) {
-            ShapeShifterCurseFabric.LOGGER.info("re-apply potion effect here");
+        // 从 oldAttachment 中获取要重新施加的效果
+        StatusEffect effectToApply = oldAttachment != null ? oldAttachment.currentEffect : null;
+
+        if (effectToApply != null) {
+            ShapeShifterCurseFabric.LOGGER.info("re-apply potion effect here: {}", effectToApply.getName());
+            // 我不建议在复制效果时先移除，除非有特殊视觉问题
             removeVisualEffects(newPlayer);
+
             newPlayer.addStatusEffect(new StatusEffectInstance(
-                    currentRegEffect,
+                    effectToApply,          // 使用从旧玩家获取的效果
                     newAttachment.remainingTicks
             ));
         }
