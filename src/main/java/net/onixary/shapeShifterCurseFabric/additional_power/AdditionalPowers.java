@@ -47,6 +47,7 @@ public class AdditionalPowers {
         register(ConditionScalePower.createFactory());
         register(SneakingJumpClashPower.createFactory());
         register(InWaterSpeedModifierPower.createFactory());
+        register(VirtualTotemPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

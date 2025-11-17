@@ -42,7 +42,8 @@
     "mob.VillagerHostilesSensorMixin",
     "mob.WitchEntityMixin",
     "projectile.EntitySnowballTransformMixin",
-    "projectile.PotionEntityMixin"
+    "projectile.PotionEntityMixin",
+    "VirtualTotemMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",
