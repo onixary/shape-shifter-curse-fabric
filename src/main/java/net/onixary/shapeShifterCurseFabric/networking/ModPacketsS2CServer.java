@@ -11,6 +11,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
@@ -173,6 +174,17 @@ public class ModPacketsS2CServer {
     public static void sendPlayerLogin(ServerPlayerEntity player) {
         PacketByteBuf buf = PacketByteBufs.create();
         ServerPlayNetworking.send(player, ModPackets.LOGIN_PACKET, buf);
+    }
+
+    public static void sendActiveVirtualTotem(ServerPlayerEntity player, VirtualTotemPower virtualTotemPower) {
+        player.getServerWorld().getPlayers(near_player -> near_player.squaredDistanceTo(player) <= 64 * 64).forEach(
+                nearPlayer -> {
+                    PacketByteBuf buf = virtualTotemPower.create_packet_byte_buf();
+                    if (buf != null) {
+                        ServerPlayNetworking.send(nearPlayer, ModPackets.ACTIVE_VIRTUAL_TOTEM, buf);
+                    }
+                }
+        );
     }
 
 }

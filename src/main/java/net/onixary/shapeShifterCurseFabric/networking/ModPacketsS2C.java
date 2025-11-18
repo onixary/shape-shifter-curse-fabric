@@ -10,7 +10,9 @@ import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FoodComponent;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
@@ -18,6 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
+import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
@@ -55,6 +58,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_DYNAMIC_FORM, ModPacketsS2C::handleUpdateDynamicForm);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.REMOVE_DYNAMIC_FORM_EXCEPT, ModPacketsS2C::handleRemoveDynamicExcept);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.LOGIN_PACKET, ModPacketsS2C::onPlayerConnectServer);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.ACTIVE_VIRTUAL_TOTEM, ModPacketsS2C::receiveActiveVirtualTotem);
     }
 
     public static void handleSyncEffectAttachment(
@@ -303,5 +307,21 @@ public class ModPacketsS2C {
 
     public static void sendUpdateCustomSetting() {
         sendUpdateCustomSetting(false);
+    }
+
+    public static void receiveActiveVirtualTotem(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        // LivingEntity entity, int virtualTotemType, ItemStack totemStack
+        if (client.world == null) {
+            ShapeShifterCurseFabric.LOGGER.error("World is null when receiving active virtual totem packet");
+            return;
+        }
+        PlayerEntity playerEntity = client.world.getPlayerByUuid(buf.readUuid());
+        if (playerEntity == null) {
+            ShapeShifterCurseFabric.LOGGER.warn("Can't find player entity when receiving active virtual totem packet");
+            return;
+        }
+        int virtualTotemType = buf.readInt();
+        ItemStack totemStack = buf.readItemStack();
+        VirtualTotemPower.process_virtual_totem_type(playerEntity, virtualTotemType, totemStack);
     }
 }
