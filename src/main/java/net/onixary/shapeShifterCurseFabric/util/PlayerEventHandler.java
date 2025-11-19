@@ -28,14 +28,11 @@ import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
-import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
+import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.TransformativeStatusInstance;
 import net.onixary.shapeShifterCurseFabric.team.MobTeamManager;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.cursedMoonData;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker.loadInstinct;
-import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.removeVisualEffects;
-import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.loadCurrentAttachment;
-import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.resetAttachment;
 
 public class PlayerEventHandler {
     public static void register() {
@@ -97,6 +94,7 @@ public class PlayerEventHandler {
                 }
             });
 
+            /* 重构后不需要了 仅用于参考旧实现逻辑
             // load attachment
             boolean hasAttachment = loadCurrentAttachment(server.getOverworld(), player);
             if(!hasAttachment) {
@@ -106,6 +104,7 @@ public class PlayerEventHandler {
                 ShapeShifterCurseFabric.LOGGER.info("Attachment loaded ");
             }
             ModPacketsS2CServer.sendSyncEffectAttachment(player, EffectManager.getOrCreateAttachment(player));
+             */
 
             // load instinct
             InstinctManager.getServerWorld(server.getOverworld());
@@ -182,6 +181,7 @@ public class PlayerEventHandler {
             for (ServerPlayerEntity player : world.getPlayers()) {
                 FormAbilityManager.loadForm(player);
 
+                /* 重构后不需要了 仅用于参考旧实现逻辑
                 // load attachment
                 boolean hasAttachment = loadCurrentAttachment(server.getOverworld(), player);
                 if(!hasAttachment) {
@@ -191,6 +191,7 @@ public class PlayerEventHandler {
                     ShapeShifterCurseFabric.LOGGER.info("Attachment loaded ");
                 }
                 ModPacketsS2CServer.sendSyncEffectAttachment(player, EffectManager.getOrCreateAttachment(player));
+                 */
 
                 // load instinct
                 InstinctManager.getServerWorld(server.getOverworld());
@@ -240,6 +241,7 @@ public class PlayerEventHandler {
     }
 
     private static void copyTransformativeEffect(ServerPlayerEntity oldPlayer, ServerPlayerEntity newPlayer) {
+        /* 重构后不需要了 仅用于参考旧实现逻辑
         // transformative effect attachment
         PlayerEffectAttachment oldAttachment = oldPlayer.getAttached(EffectManager.EFFECT_ATTACHMENT);
         newPlayer.setAttached(EffectManager.EFFECT_ATTACHMENT, new PlayerEffectAttachment());
@@ -265,6 +267,13 @@ public class PlayerEventHandler {
                     newAttachment.remainingTicks
             ));
         }
+         */
+        TransformativeStatusInstance transformativeStatusInstance = EffectManager.getTransformativeEffect(oldPlayer);
+        if (transformativeStatusInstance == null) {
+            return;
+        }
+        EffectManager.clearTransformativeEffect(newPlayer);
+        newPlayer.addStatusEffect(transformativeStatusInstance);
     }
 
     private static void copyFormAndAbility(ServerPlayerEntity oldPlayer, ServerPlayerEntity newPlayer) {

@@ -1,10 +1,8 @@
 package net.onixary.shapeShifterCurseFabric.networking;
 
 import com.google.gson.JsonObject;
-import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.item.FoodComponent;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -14,11 +12,8 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
-import net.onixary.shapeShifterCurseFabric.util.CustomEdibleUtils;
 
 import java.util.HashMap;
-import java.util.List;
 
 // 纯服务端类，所有send方法都只在这里调用
 // This is a pure server-side class, all send methods are called only here
@@ -41,12 +36,14 @@ public class ModPacketsS2CServer {
         ShapeShifterCurseFabric.LOGGER.info("Sent form change to client: " + newFormName);
     }
 
+    /* 重构后不需要了 仅用于参考旧实现逻辑
     public static void sendSyncEffectAttachment(ServerPlayerEntity player, PlayerEffectAttachment attachment) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeNbt(attachment.toNbt());
         //ShapeShifterCurseFabric.LOGGER.info("Attachment sent, nbt: " + attachment.toNbt());
         ServerPlayNetworking.send(player, ModPackets.SYNC_EFFECT_ATTACHMENT, buf);
     }
+     */
 
     // 发送变身状态同步包
     public static void sendTransformState(ServerPlayerEntity player, boolean isTransforming,

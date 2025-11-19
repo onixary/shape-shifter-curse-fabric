@@ -48,7 +48,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_FORM_CHANGE, ModPacketsS2C::receiveFormChange);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_TRANSFORM_STATE, ModPacketsS2C::receiveTransformState);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_BAT_ATTACH_STATE, ModPacketsS2C::receiveBatAttachState);
-        ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_EFFECT_ATTACHMENT, ModPacketsS2C::handleSyncEffectAttachment);
+        // ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_EFFECT_ATTACHMENT, ModPacketsS2C::handleSyncEffectAttachment);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_OVERLAY_EFFECT, ModPacketsS2C::receiveUpdateOverlayEffect);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_OVERLAY_FADE_EFFECT, ModPacketsS2C::receiveUpdateOverlayFadeEffect);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.TRANSFORM_COMPLETE_EFFECT, ModPacketsS2C::receiveTransformCompleteEffect);
@@ -61,6 +61,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.ACTIVE_VIRTUAL_TOTEM, ModPacketsS2C::receiveActiveVirtualTotem);
     }
 
+    /* 重构后不需要了 仅用于参考旧实现逻辑
     public static void handleSyncEffectAttachment(
 		MinecraftClient client,
 		ClientPlayNetworkHandler handler,
@@ -74,6 +75,7 @@ public class ModPacketsS2C {
             ClientEffectAttachmentCache.update(nbt);
         });
     }
+     */
 
     public static void receiveTransformEffect(MinecraftClient client, ClientPlayNetworkHandler handler,
                                               PacketByteBuf buf, PacketSender responseSender) {

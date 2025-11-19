@@ -20,14 +20,13 @@ import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
+import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import virtuoel.pehkui.api.ScaleData;
 import virtuoel.pehkui.api.ScaleTypes;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-
-import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.cancelEffect;
 
 public class FormAbilityManager {
     private static ServerWorld world;
@@ -89,7 +88,7 @@ public class FormAbilityManager {
         }
         //applyPower(player, config.getPowerId());
         // 清空Status
-        cancelEffect(player);
+        EffectManager.clearTransformativeEffect(player);
 
         component.setCurrentForm(newForm);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);

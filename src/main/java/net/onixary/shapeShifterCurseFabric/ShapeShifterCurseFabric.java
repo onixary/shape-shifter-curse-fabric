@@ -60,7 +60,6 @@ import net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusPotionEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
-import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 import net.onixary.shapeShifterCurseFabric.util.PlayerEventHandler;
 import net.onixary.shapeShifterCurseFabric.util.TickManager;
 import org.slf4j.Logger;
@@ -230,7 +229,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
             PlayerEntity player = handler.player;
             LOGGER.info("Player disconnect, save attachment");
-            saveCurrentAttachment(server.getOverworld(), player);
+            // saveCurrentAttachment(server.getOverworld(), player);
             saveForm(player);
             saveInstinctComp(player);
             // save cursed moon data
@@ -247,7 +246,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         // allow sleep when status effect is active
         EntitySleepEvents.ALLOW_SLEEP_TIME.register((entity, world, pos) -> {
             if (entity instanceof PlayerEntity) {
-                if (RegTStatusEffect.hasAnyEffect(entity)) {
+                if (EffectManager.hasTransformativeEffect(entity)) {
                     return ActionResult.success(true);
                 }
                 else{
@@ -304,8 +303,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             //PlayerEffectAttachment attachment = player.getAttached(EffectManager.EFFECT_ATTACHMENT);
             //LOGGER.info(attachment == null? "attachment is null" : attachment.currentEffect.toString());
             // 不用检测诅咒之月状态--作为一个特性还挺有意思的
-            if (RegTStatusEffect.hasAnyEffect(player)) {
-                EffectManager.applyEffect(player);
+            if (EffectManager.hasTransformativeEffect(player)) {
+                EffectManager.ActiveTransformativeEffect(player);
                 // 触发自定义成就
                 ON_SLEEP_WHEN_HAVE_TRANSFORM_EFFECT.trigger(player);
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_sleep_when_attached").formatted(Formatting.LIGHT_PURPLE));
@@ -327,6 +326,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             // CustomEdiblePower Tick
             CustomEdiblePower.OnServerTick(player);
 
+            /* 重构后不需要了 仅用于参考旧实现逻辑
             // handle transformative effects tick
             PlayerEffectAttachment attachment = player.getAttached(EffectManager.EFFECT_ATTACHMENT);
             if (attachment != null && attachment.currentEffect != null) {
@@ -354,6 +354,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
                 saveForm(player);
                 save_timer = 0;
             }
+             */
         }
     }
 }

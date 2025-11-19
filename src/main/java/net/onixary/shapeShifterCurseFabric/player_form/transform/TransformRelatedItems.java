@@ -12,7 +12,6 @@ import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormGroup;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
-import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 
 import static net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager.handleDirectTransform;
 
@@ -152,7 +151,7 @@ public class TransformRelatedItems {
         }
     }
 
-    public static void OnUseCatalyst(PlayerEntity player) {
+    public static void OnUseCatalyst(ServerPlayerEntity player) {
         // 在origin power中处理instinct相关逻辑，这里只显示提示与特殊逻辑
         // Instinct-related logic is handled in origin power, here only shows prompt and special logic
         PlayerFormBase currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
@@ -165,10 +164,8 @@ public class TransformRelatedItems {
             case -1:
                 // 特殊逻辑：查看当前是否有在生效的效果，有的话则应用，没有的话则无用
                 // Special logic: check if there is an active effect, if so, apply it, otherwise useless
-
-                PlayerEffectAttachment attachment = EffectManager.getOrCreateAttachment(player);
-                if (attachment.currentEffect != null) {
-                    EffectManager.applyEffect(player);
+                if (EffectManager.hasTransformativeEffect(player)) {
+                    EffectManager.ActiveTransformativeEffect(player);
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_used_catalyst_attached").formatted(Formatting.YELLOW));
                     ShapeShifterCurseFabric.ON_TRANSFORM_BY_CATALYST.trigger((ServerPlayerEntity) player);
                 }
