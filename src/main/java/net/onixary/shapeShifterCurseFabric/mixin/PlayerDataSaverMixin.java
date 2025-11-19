@@ -11,6 +11,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+// TODO 重构EffectManager时记得删掉这个Mixin
+// 其实可以使用 Cardinal-Components-Api 反正之后要删除掉 就不改了
 @Mixin(PlayerEntity.class)
 public abstract class PlayerDataSaverMixin {
 

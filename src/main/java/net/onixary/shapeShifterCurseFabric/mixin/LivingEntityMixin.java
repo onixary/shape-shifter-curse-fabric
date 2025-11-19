@@ -29,6 +29,8 @@ import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
+import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
+import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -194,5 +196,24 @@ public abstract class LivingEntityMixin {
             return g * totalSpeedModifier;
         }
         return g;
+    }
+
+    // TODO 重构EffectManager时记得删掉这个Inject
+    @Inject(method = "onStatusEffectRemoved", at = @At("HEAD"))
+    private void onStatusEffectRemoved(StatusEffectInstance effect, CallbackInfo ci) {
+        if ((Object) this instanceof ServerPlayerEntity player) {
+            // 检查移除的是否是变形效果
+            if (effect.getEffectType() instanceof BaseTransformativeStatusEffect) {
+                player.getServer().execute(() -> {
+                    // 延迟检查，确保效果确实被移除
+                    boolean stillHasTransformEffect = player.getStatusEffects().stream()
+                            .anyMatch(e -> e.getEffectType() instanceof BaseTransformativeStatusEffect);
+
+                    if (!stillHasTransformEffect) {
+                        EffectManager.safeResetAttachment(player);
+                    }
+                });
+            }
+        }
     }
 }
