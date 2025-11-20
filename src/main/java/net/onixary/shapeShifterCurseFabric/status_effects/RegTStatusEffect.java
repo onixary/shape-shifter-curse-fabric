@@ -45,6 +45,7 @@ public class RegTStatusEffect {
         return Registry.register(Registries.STATUS_EFFECT, path, effect);
     }
 
+    /* 使用EffectManager.hasTransformativeEffect(PlayerEntity)代替
     public static boolean hasAnyEffect(PlayerEntity player) {
         // is player has any transformative effect
         for (Identifier id : TRANSFORMATIVE_STATUS_EFFECTS) {
@@ -54,13 +55,16 @@ public class RegTStatusEffect {
         }
         return false;
     }
+     */
 
+    /* 使用EffectManager.clearTransformativeEffect(PlayerEntity)代替
     public static void removeVisualEffects(PlayerEntity player) {
         // remove all transformative effects potion icon
         for (Identifier id : TRANSFORMATIVE_STATUS_EFFECTS) {
             player.removeStatusEffect(Registries.STATUS_EFFECT.get(id));
         }
     }
+     */
 
     public static void initialize() {}
 }

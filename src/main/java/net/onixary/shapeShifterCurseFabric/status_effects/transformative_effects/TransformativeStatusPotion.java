@@ -5,12 +5,10 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
-import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 import org.jetbrains.annotations.Nullable;
 
 public class TransformativeStatusPotion extends StatusEffect {
@@ -40,6 +38,7 @@ public class TransformativeStatusPotion extends StatusEffect {
     @Override
     public void applyInstantEffect(@Nullable Entity source, @Nullable Entity attacker, LivingEntity target, int amplifier, double proximity) {
         if (!target.getWorld().isClient() && target instanceof ServerPlayerEntity player) {
+            /* 重构后不需要了 仅用于参考旧实现逻辑
             PlayerEffectAttachment attachment = EffectManager.getOrCreateAttachment(player);
 
             // 安全获取 currentToForm，为空则设为原始形态
@@ -59,6 +58,14 @@ public class TransformativeStatusPotion extends StatusEffect {
             if (!RegPlayerForms.IsPlayerFormEqual(curToForm, this.TransformativeStatusEffect.getToForm())
                     && playerCurrentForm.equals(RegPlayerForms.ORIGINAL_SHIFTER)) {
                 EffectManager.overrideEffect(player, this.TransformativeStatusEffect);
+            }
+             */
+            // 从TStatusApplier中提取的代码
+            TransformativeStatusInstance instance = EffectManager.getTransformativeEffect(player);
+            if (instance == null || instance.getTransformativeEffectType() == null || !instance.getTransformativeEffectType().getToForm().equals(this.TransformativeStatusEffect.getToForm())) {  // 如果当前效果的形态与regStatusEffect不同
+                if (RegPlayerForms.ORIGINAL_SHIFTER.equals(FormAbilityManager.getForm(player))) {
+                    EffectManager.overrideEffect(player, this.TransformativeStatusEffect);
+                }
             }
         }
     }

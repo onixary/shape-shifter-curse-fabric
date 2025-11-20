@@ -47,7 +47,7 @@ public class InstinctTicker {
         RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.sync(player);
     }
 
-    public static void tick(PlayerEntity player) {
+    public static void tick(ServerPlayerEntity player) {
         PlayerInstinctComponent comp = player.getComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
 
         if(CursedMoon.isCursedMoon(player.getWorld()) && CursedMoon.isNight()){
@@ -178,7 +178,7 @@ public class InstinctTicker {
         return rate;
     }
 
-    private static void checkThreshold(PlayerEntity player, PlayerInstinctComponent comp) {
+    private static void checkThreshold(ServerPlayerEntity player, PlayerInstinctComponent comp) {
         if (comp.instinctValue >= StaticParams.INSTINCT_MAX) {
             // 这里放置满instinct时要触发的逻辑
             // Here is the logic to be triggered when the instinct is full

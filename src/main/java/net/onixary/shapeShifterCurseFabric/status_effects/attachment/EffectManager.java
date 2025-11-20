@@ -1,30 +1,34 @@
 package net.onixary.shapeShifterCurseFabric.status_effects.attachment;
 
-import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
-import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
-import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
+import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.TransformativeStatusInstance;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Iterator;
+import java.util.Map;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
-import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.loadAttachment;
-import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.saveAttachment;
-import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.removeVisualEffects;
 
 public class EffectManager {
-    public static final AttachmentType<PlayerEffectAttachment> EFFECT_ATTACHMENT =
-            AttachmentRegistry.create(new Identifier(MOD_ID, "effect_data"));
+    // public static final AttachmentType<PlayerEffectAttachment> EFFECT_ATTACHMENT =
+    //         AttachmentRegistry.create(new Identifier(MOD_ID, "effect_data"));
 
     // 移除静态的 currentRegEffect，因为它可能与多个玩家的状态冲突
     // 应该只使用 attachment 中的 currentRegEffect
 
     // 覆盖新的效果
+    /*
+
     public static void overrideEffect(PlayerEntity player, BaseTransformativeStatusEffect regEffect) {
         LOGGER.info("Applying new transformative effect to player: {}", player.getName().getString());
 
@@ -32,7 +36,7 @@ public class EffectManager {
 
         // 移除旧效果
         if (attachment.currentEffect != null && attachment.currentEffect.getToForm() != regEffect.getToForm()) {
-            attachment.currentEffect.onEffectCanceled(player);
+            // attachment.currentEffect.onEffectCanceled(player);
         }
 
         // 应用新效果
@@ -53,6 +57,7 @@ public class EffectManager {
         LOGGER.info("Successfully applied effect: {}", regEffect.getToForm());
     }
 
+
     public static void loadEffect(PlayerEntity player, PlayerEffectAttachment loadedAttachment) {
         if (loadedAttachment.currentRegEffect != null) {
             player.addStatusEffect(new StatusEffectInstance(
@@ -71,7 +76,7 @@ public class EffectManager {
         PlayerEffectAttachment attachment = getOrCreateAttachment(player);
         if (attachment.currentEffect != null) {
             LOGGER.info("Applying effect for player: {}", player.getName().getString());
-            attachment.currentEffect.onEffectApplied(player);
+            attachment.currentEffect.ActiveEffect(player);
             clearAttachmentData(attachment);
         }
     }
@@ -81,7 +86,7 @@ public class EffectManager {
         PlayerEffectAttachment attachment = getOrCreateAttachment(player);
         if (attachment.currentEffect != null) {
             LOGGER.info("Canceling effect for player: {}", player.getName().getString());
-            attachment.currentEffect.onEffectCanceled(player);
+            // attachment.currentEffect.onEffectCanceled(player);
             clearAttachmentData(attachment);
 
             // 同步到客户端
@@ -171,10 +176,12 @@ public class EffectManager {
             safeResetAttachment(player);
         }
     }
+     */
 
     /**
      * 获取玩家的 PlayerEffectAttachment，如果不存在则创建新的
      */
+    /*
     public static PlayerEffectAttachment getOrCreateAttachment(PlayerEntity player) {
         PlayerEffectAttachment attachment = player.getAttached(EFFECT_ATTACHMENT);
         if (attachment == null) {
@@ -184,33 +191,155 @@ public class EffectManager {
         }
         return attachment;
     }
+     */
 
     // ========== 私有辅助方法 ==========
 
     /**
      * 检查玩家是否有变形效果
      */
-    private static boolean hasTransformativeEffect(PlayerEntity player) {
-        return player.getStatusEffects().stream()
-                .anyMatch(effect -> effect.getEffectType() instanceof BaseTransformativeStatusEffect);
-    }
+    // private static boolean hasTransformativeEffect(PlayerEntity player) {
+    //     return player.getStatusEffects().stream()
+    //             .anyMatch(effect -> effect.getEffectType() instanceof BaseTransformativeStatusEffect);
+    // }
 
     /**
      * 清空附件数据
      */
-    private static void clearAttachmentData(PlayerEffectAttachment attachment) {
-        attachment.currentToForm = RegPlayerForms.ORIGINAL_SHIFTER;
-        attachment.remainingTicks = 0;
-        attachment.currentEffect = null;
-        attachment.currentRegEffect = null;
-    }
+    // private static void clearAttachmentData(PlayerEffectAttachment attachment) {
+    //     attachment.currentToForm = RegPlayerForms.ORIGINAL_SHIFTER;
+    //     attachment.remainingTicks = 0;
+    //     attachment.currentEffect = null;
+    //     attachment.currentRegEffect = null;
+    // }
 
     /**
      * 移除所有变形相关的原版状态效果
      */
-    private static void removeTransformativeEffects(PlayerEntity player) {
-        player.getStatusEffects().stream()
-                .filter(effect -> effect.getEffectType() instanceof BaseTransformativeStatusEffect)
-                .forEach(effect -> player.removeStatusEffect(effect.getEffectType()));
+    // private static void removeTransformativeEffects(PlayerEntity player) {
+    //     player.getStatusEffects().stream()
+    //             .filter(effect -> effect.getEffectType() instanceof BaseTransformativeStatusEffect)
+    //             .forEach(effect -> player.removeStatusEffect(effect.getEffectType()));
+    // }
+
+    // 从这里开始重构
+    // 客户端 -> 玩家效果 Map<StatusEffect, StatusEffectInstance>
+    // 服务器端 -> 玩家效果 Map<StatusEffect, StatusEffectInstance | TransformativeStatusInstance>
+
+    // 客户端+服务端
+    public static boolean clearTransformativeEffect(PlayerEntity player) {
+        if (player == null) {
+            ShapeShifterCurseFabric.LOGGER.error("Attempted to clear effect with null player");
+            return false;
+        }
+        Iterator<StatusEffectInstance> iterator = player.getStatusEffects().iterator();
+        boolean hasEffect = false;
+        for(hasEffect = false; iterator.hasNext(); hasEffect = true) {
+            StatusEffectInstance effectInstance = iterator.next();
+            if (effectInstance instanceof TransformativeStatusInstance || effectInstance.getEffectType() instanceof BaseTransformativeStatusEffect) {
+                player.onStatusEffectRemoved(effectInstance);
+                iterator.remove();
+            }
+        }
+        return hasEffect;
+    }
+
+    // 客户端+服务端 但应该在服务器端调用
+    public static void overrideEffect(PlayerEntity player, BaseTransformativeStatusEffect regEffect) {
+        if (player == null || regEffect == null) {
+            ShapeShifterCurseFabric.LOGGER.error("Attempted to override effect with null player or effect");
+            return;
+        }
+        if (!CanHaveTransformativeEffect(player, null)) {
+            ShapeShifterCurseFabric.LOGGER.error("Attempted to override effect with player that cannot have one");
+            return;
+        }
+        clearTransformativeEffect(player);
+        TransformativeStatusInstance instance = new TransformativeStatusInstance(regEffect, StaticParams.T_EFFECT_DEFAULT_DURATION);
+        player.addStatusEffect(instance);
+        if (player instanceof ServerPlayerEntity serverPlayer) {
+            ON_GET_TRANSFORM_EFFECT.trigger(serverPlayer);
+        }
+    }
+
+    // 客户端+服务端 重新加载玩家状态效果 StatusEffectInstance -> TransformativeStatusInstance 但应该在服务器端调用
+    public static void ReloadPlayerEffect(PlayerEntity player) {
+        if (player == null) {
+            ShapeShifterCurseFabric.LOGGER.error("Attempted to reload effect with null player");
+            return;
+        }
+        Map<StatusEffect, StatusEffectInstance> effects = player.getActiveStatusEffects();
+        for (Map.Entry<StatusEffect, StatusEffectInstance> entry : effects.entrySet()) {
+            if (entry.getValue() instanceof TransformativeStatusInstance) {
+                continue;
+            }
+            if (entry.getKey() instanceof BaseTransformativeStatusEffect) {
+                TransformativeStatusInstance instance = TransformativeStatusInstance.formStatusEffectInstance(entry.getValue());
+                if (instance == null) {
+                    ShapeShifterCurseFabric.LOGGER.error("Failed to convert status effect instance to TransformativeStatusInstance: {}", entry.getValue());
+                    continue;
+                }
+                effects.put(entry.getKey(), instance);
+            }
+        }
+    }
+
+    public static void checkAndClearTransformativeEffect(PlayerEntity player, @Nullable PlayerFormBase newForm) {
+        if (player == null) {
+            ShapeShifterCurseFabric.LOGGER.error("Attempted to check effect with null player");
+            return;
+        }
+        if (!CanHaveTransformativeEffect(player, newForm)) {
+            clearTransformativeEffect(player);
+        }
+    }
+
+    // 客户端+服务端
+    public static @Nullable TransformativeStatusInstance getTransformativeEffect(PlayerEntity player) {
+        if (player == null) {
+            ShapeShifterCurseFabric.LOGGER.error("Attempted to check effect with null player");
+            return null;
+        }
+        for (StatusEffectInstance effectInstance : player.getStatusEffects()) {
+            if (effectInstance instanceof TransformativeStatusInstance transformativeStatusInstance) {
+                return transformativeStatusInstance;
+            }
+            if (effectInstance.getEffectType() instanceof BaseTransformativeStatusEffect) {
+                return TransformativeStatusInstance.formStatusEffectInstance(effectInstance);
+            }
+        }
+        return null;
+    }
+
+    // 客户端+服务端
+    public static boolean hasTransformativeEffect(PlayerEntity player) {
+        if (player == null) {
+            ShapeShifterCurseFabric.LOGGER.error("Attempted to check effect with null player");
+            return false;
+        }
+        return player.getStatusEffects().stream().anyMatch(effect -> effect.getEffectType() instanceof BaseTransformativeStatusEffect);
+    }
+
+    // 服务端
+    public static boolean ActiveTransformativeEffect(ServerPlayerEntity player) {
+        TransformativeStatusInstance transformativeStatusInstance = getTransformativeEffect(player);
+        if (transformativeStatusInstance == null) {
+            return false;
+        }
+        transformativeStatusInstance.ActiveEffect(player);
+        clearTransformativeEffect(player);
+        return true;
+    }
+
+    private static PlayerFormBase getPlayerForm(PlayerEntity player) {
+        try {
+            return player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+        } catch (Exception e)  {
+            return null;
+        }
+    }
+
+    private static boolean CanHaveTransformativeEffect(PlayerEntity player, @Nullable PlayerFormBase newForm) {
+        return RegPlayerForms.ORIGINAL_SHIFTER.equals(newForm == null ? getPlayerForm(player) : newForm);
     }
 }

@@ -197,23 +197,4 @@ public abstract class LivingEntityMixin {
         }
         return g;
     }
-
-    // TODO 重构EffectManager时记得删掉这个Inject
-    @Inject(method = "onStatusEffectRemoved", at = @At("HEAD"))
-    private void onStatusEffectRemoved(StatusEffectInstance effect, CallbackInfo ci) {
-        if ((Object) this instanceof ServerPlayerEntity player) {
-            // 检查移除的是否是变形效果
-            if (effect.getEffectType() instanceof BaseTransformativeStatusEffect) {
-                player.getServer().execute(() -> {
-                    // 延迟检查，确保效果确实被移除
-                    boolean stillHasTransformEffect = player.getStatusEffects().stream()
-                            .anyMatch(e -> e.getEffectType() instanceof BaseTransformativeStatusEffect);
-
-                    if (!stillHasTransformEffect) {
-                        EffectManager.safeResetAttachment(player);
-                    }
-                });
-            }
-        }
-    }
 }
