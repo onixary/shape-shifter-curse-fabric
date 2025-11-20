@@ -6,6 +6,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.TransformativeStatusInstance;
 import org.jetbrains.annotations.Nullable;
@@ -246,6 +250,10 @@ public class EffectManager {
             ShapeShifterCurseFabric.LOGGER.error("Attempted to override effect with null player or effect");
             return;
         }
+        if (!CanHaveTransformativeEffect(player, null)) {
+            ShapeShifterCurseFabric.LOGGER.error("Attempted to override effect with player that cannot have one");
+            return;
+        }
         clearTransformativeEffect(player);
         TransformativeStatusInstance instance = new TransformativeStatusInstance(regEffect, StaticParams.T_EFFECT_DEFAULT_DURATION);
         player.addStatusEffect(instance);
@@ -273,6 +281,16 @@ public class EffectManager {
                 }
                 effects.put(entry.getKey(), instance);
             }
+        }
+    }
+
+    public static void checkAndClearTransformativeEffect(PlayerEntity player, @Nullable PlayerFormBase newForm) {
+        if (player == null) {
+            ShapeShifterCurseFabric.LOGGER.error("Attempted to check effect with null player");
+            return;
+        }
+        if (!CanHaveTransformativeEffect(player, newForm)) {
+            clearTransformativeEffect(player);
         }
     }
 
@@ -309,6 +327,19 @@ public class EffectManager {
             return false;
         }
         transformativeStatusInstance.ActiveEffect(player);
+        clearTransformativeEffect(player);
         return true;
+    }
+
+    private static PlayerFormBase getPlayerForm(PlayerEntity player) {
+        try {
+            return player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+        } catch (Exception e)  {
+            return null;
+        }
+    }
+
+    private static boolean CanHaveTransformativeEffect(PlayerEntity player, @Nullable PlayerFormBase newForm) {
+        return RegPlayerForms.ORIGINAL_SHIFTER.equals(newForm == null ? getPlayerForm(player) : newForm);
     }
 }

@@ -87,8 +87,9 @@ public class FormAbilityManager {
             ShapeShifterCurseFabric.LOGGER.error("Failed to apply origin extra power: ", e);
         }
         //applyPower(player, config.getPowerId());
-        // 清空Status
-        EffectManager.clearTransformativeEffect(player);
+        // EffectManager.clearTransformativeEffect(player);
+        // 清空Status 如果新形态无法获得变形效果
+        EffectManager.checkAndClearTransformativeEffect(player, newForm);
 
         component.setCurrentForm(newForm);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);

@@ -270,6 +270,7 @@ public class TransformManager {
                         clearInstinct(data.curPlayer);
                     }
 
+                    EffectManager.clearTransformativeEffect(player);
                     FormAbilityManager.applyForm(data.curPlayer, data.curToForm);
 
                     // 不要覆盖组件中的诅咒月亮状态
@@ -518,6 +519,7 @@ public class TransformManager {
         PlayerTransformData data = getPlayerTransformData(player);
         data.curPlayer = player;
         data.curToForm = toForm;
+        EffectManager.clearTransformativeEffect(player);
         FormAbilityManager.applyForm(data.curPlayer, data.curToForm);
         clearFormFlag(data.curPlayer);
         clearInstinct(data.curPlayer);
