@@ -42,22 +42,22 @@ public class BookOfShapeShifterScreenV2_P1 extends Screen {
         ScaleTextRenderer scaleTextRenderer = new ScaleTextRenderer(textRenderer);
         scaleTextRenderer.Scale = Scale;
         // Title
-        // D -> (8, 8), (20, 96)
+        // D -> (9, 9), (19, 95)
         // Size -> (108, 48) Pos -> (17, 92)
-        this.addDrawableChild(BuildDetailScreenButton(20, 96, 8, 8, CodexData.getContentText(CodexData.ContentType.TITLE, currentPlayer)));
+        this.addDrawableChild(BuildDetailScreenButton(19, 95, 9, 9, CodexData.getContentText(CodexData.ContentType.TITLE, currentPlayer)));
         MultilineTextWidget TitleLabel = new ScaleMultilineTextWidget(BookPosX + 17 * BookScale, BookPosY + 105 * BookScale, CodexData.getContentText(CodexData.ContentType.TITLE, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(108 * BookScale).setTextColor(DefaultTextColor);
         this.addDrawableChild(TitleLabel);
         // Status
-        // D -> (8, 8), (117, 144)
+        // D -> (9, 9), (116, 143)
         // Size -> (107, 56) Pos -> (17, 153)
-        this.addDrawableChild(BuildDetailScreenButton(117, 144, 8, 8, CodexData.getPlayerStatusText(currentPlayer)));
+        this.addDrawableChild(BuildDetailScreenButton(116, 143, 9, 9, CodexData.getPlayerStatusText(currentPlayer)));
         this.addDrawableChild(new TextWidget(BookPosX + 17 * BookScale, BookPosY + 143 * BookScale, 107 * BookScale, 8 * BookScale, CodexData.headerStatus, textRenderer).setTextColor(HeaderTextColor));
         MultilineTextWidget StatusLabel = new ScaleMultilineTextWidget(BookPosX + 17 * BookScale, BookPosY + 153 * BookScale, CodexData.getPlayerStatusText(currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(107 * BookScale).setTextColor(DefaultTextColor);
         this.addDrawableChild(StatusLabel);
         // Appearance
-        // D -> (8, 8), (312, 14)
+        // D -> (9, 9), (311, 13)
         // Size -> (176, 184) Pos -> (142, 23)
-        this.addDrawableChild(BuildDetailScreenButton(312, 14, 8, 8, CodexData.getContentText(CodexData.ContentType.APPEARANCE, currentPlayer)));
+        this.addDrawableChild(BuildDetailScreenButton(311, 13, 9, 9, CodexData.getContentText(CodexData.ContentType.APPEARANCE, currentPlayer)));
         this.addDrawableChild(new TextWidget(BookPosX + 142 * BookScale, BookPosY + 11 * BookScale, 176 * BookScale, 8 * BookScale, CodexData.headerAppearance, textRenderer).setTextColor(HeaderTextColor));
         MultilineTextWidget AppearanceLabel = new ScaleMultilineTextWidget(BookPosX + 142 * BookScale, BookPosY + 26 * BookScale, CodexData.getContentText(CodexData.ContentType.APPEARANCE, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(176 * BookScale).setTextColor(DefaultTextColor);
         this.addDrawableChild(AppearanceLabel);
