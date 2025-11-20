@@ -105,6 +105,8 @@ public class PlayerEventHandler {
             }
             ModPacketsS2CServer.sendSyncEffectAttachment(player, EffectManager.getOrCreateAttachment(player));
              */
+            // 将 StatusEffectInstance 转换为 TransformativeStatusInstance
+            EffectManager.ReloadPlayerEffect(player);
 
             // load instinct
             InstinctManager.getServerWorld(server.getOverworld());
@@ -192,6 +194,8 @@ public class PlayerEventHandler {
                 }
                 ModPacketsS2CServer.sendSyncEffectAttachment(player, EffectManager.getOrCreateAttachment(player));
                  */
+                // 将 StatusEffectInstance 转换为 TransformativeStatusInstance
+                EffectManager.ReloadPlayerEffect(player);
 
                 // load instinct
                 InstinctManager.getServerWorld(server.getOverworld());

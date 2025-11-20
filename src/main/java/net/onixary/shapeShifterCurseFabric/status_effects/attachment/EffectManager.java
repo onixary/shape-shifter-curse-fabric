@@ -1,21 +1,17 @@
 package net.onixary.shapeShifterCurseFabric.status_effects.attachment;
 
-import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
-import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
-import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
-import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.TransformativeStatusInstance;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
+import java.util.Map;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
 
@@ -223,6 +219,9 @@ public class EffectManager {
     // }
 
     // 从这里开始重构
+    // 客户端 -> 玩家效果 Map<StatusEffect, StatusEffectInstance>
+    // 服务器端 -> 玩家效果 Map<StatusEffect, StatusEffectInstance | TransformativeStatusInstance>
+
     // 客户端+服务端
     public static boolean clearTransformativeEffect(PlayerEntity player) {
         if (player == null) {
@@ -255,30 +254,38 @@ public class EffectManager {
         }
     }
 
-    // 服务端
-    public static @Nullable TransformativeStatusInstance getTransformativeEffect(ServerPlayerEntity player) {
+    // 客户端+服务端 重新加载玩家状态效果 StatusEffectInstance -> TransformativeStatusInstance 但应该在服务器端调用
+    public static void ReloadPlayerEffect(PlayerEntity player) {
         if (player == null) {
-            ShapeShifterCurseFabric.LOGGER.error("Attempted to check effect with null player");
-            return null;
+            ShapeShifterCurseFabric.LOGGER.error("Attempted to reload effect with null player");
+            return;
         }
-        for (StatusEffectInstance effectInstance : player.getStatusEffects()) {
-            if (effectInstance instanceof TransformativeStatusInstance) {
-                return (TransformativeStatusInstance) effectInstance;
+        Map<StatusEffect, StatusEffectInstance> effects = player.getActiveStatusEffects();
+        for (Map.Entry<StatusEffect, StatusEffectInstance> entry : effects.entrySet()) {
+            if (entry.getValue() instanceof TransformativeStatusInstance) {
+                continue;
+            }
+            if (entry.getKey() instanceof BaseTransformativeStatusEffect) {
+                TransformativeStatusInstance instance = TransformativeStatusInstance.formStatusEffectInstance(entry.getValue());
+                if (instance == null) {
+                    ShapeShifterCurseFabric.LOGGER.error("Failed to convert status effect instance to TransformativeStatusInstance: {}", entry.getValue());
+                    continue;
+                }
+                effects.put(entry.getKey(), instance);
             }
         }
-        return null;
     }
 
-    // 客户端+服务端 不太推荐这种方式 getTransformativeEffect(ServerPlayerEntity player)慢
+    // 客户端+服务端
     public static @Nullable TransformativeStatusInstance getTransformativeEffect(PlayerEntity player) {
         if (player == null) {
             ShapeShifterCurseFabric.LOGGER.error("Attempted to check effect with null player");
             return null;
         }
-        if (player instanceof ServerPlayerEntity) {
-            return getTransformativeEffect((ServerPlayerEntity) player);
-        }
         for (StatusEffectInstance effectInstance : player.getStatusEffects()) {
+            if (effectInstance instanceof TransformativeStatusInstance transformativeStatusInstance) {
+                return transformativeStatusInstance;
+            }
             if (effectInstance.getEffectType() instanceof BaseTransformativeStatusEffect) {
                 return TransformativeStatusInstance.formStatusEffectInstance(effectInstance);
             }
