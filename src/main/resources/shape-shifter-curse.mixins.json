@@ -41,7 +41,8 @@
     "mob.WitchEntityMixin",
     "projectile.EntitySnowballTransformMixin",
     "projectile.PotionEntityMixin",
-    "VirtualTotemMixin"
+    "VirtualTotemMixin",
+    "MinionPlayerEntityMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",
