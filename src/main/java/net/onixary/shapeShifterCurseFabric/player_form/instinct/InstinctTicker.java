@@ -22,8 +22,8 @@ import static net.onixary.shapeShifterCurseFabric.player_form.transform.Transfor
 
 public class InstinctTicker {
     public static float currentInstinctValue = 0.0f;
-    public static boolean showInstinctBar = false;
-    public static boolean isInstinctLock = false;
+    // public static boolean showInstinctBar = false;
+    // public static boolean isInstinctLock = false;
     public static boolean isUnderCursedMoon = false;
     public static boolean isPausing = false;
 
@@ -120,9 +120,9 @@ public class InstinctTicker {
     private static void judgeInstinctState(PlayerEntity player, PlayerInstinctComponent comp){
         // 判断当前状态，供进度条使用
         // Judge the current state for the progress bar
-        PlayerFormBase form = getForm(player);
-        PlayerFormPhase currentPhase = form.getPhase();
-        showInstinctBar = !(currentPhase == PlayerFormPhase.PHASE_CLEAR || currentPhase == PlayerFormPhase.PHASE_3);
+        // PlayerFormBase form = getForm(player);
+        // PlayerFormPhase currentPhase = form.getPhase();
+        // showInstinctBar = !(currentPhase == PlayerFormPhase.PHASE_CLEAR || currentPhase == PlayerFormPhase.PHASE_3);
 
         float baseRate = judgeInstinctGrowRate(player);
         if(comp.currentInstinctRate > baseRate){
@@ -138,17 +138,17 @@ public class InstinctTicker {
             comp.isInstinctDecreasing = false;
         }
 
-        if(getForm(player).FormIndex < 2){
-            if(isUnderCursedMoon){
-                isInstinctLock = true;
-            }
-            else{
-                isInstinctLock = false;
-            }
-        }
-        else{
-            isInstinctLock = true;
-        }
+        // if(getForm(player).FormIndex < 2){
+        //     if(isUnderCursedMoon){
+        //         isInstinctLock = true;
+        //     }
+        //     else{
+        //         isInstinctLock = false;
+        //     }
+        // }
+        // else{
+        //     isInstinctLock = true;
+        // }
     }
 
     private static void processImmediateEffects(PlayerInstinctComponent comp) {

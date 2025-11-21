@@ -1,14 +1,13 @@
 package net.onixary.shapeShifterCurseFabric.player_form.instinct;
 
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormPhase;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
@@ -37,12 +36,26 @@ public class InstinctBarRenderer  {
     private static final float increase2Threshold = StaticParams.INSTINCT_INCREASE_RATE_0 + 0.01f;
     private static final float increase3Threshold = StaticParams.INSTINCT_INCREASE_RATE_0 + 0.1f;
 
+    private boolean isInstinctLock = false;
+
     public void render(DrawContext context, float tickDelta) {
         if (MinecraftClient.getInstance().player == null) return;
 
         PlayerEntity player = MinecraftClient.getInstance().player;
         PlayerFormBase curForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
-        boolean showInstinctBar = !(curForm.equals(RegPlayerForms.ORIGINAL_BEFORE_ENABLE) || curForm.equals(RegPlayerForms.ORIGINAL_SHIFTER));
+        PlayerFormPhase currentPhase = curForm.getPhase();
+        boolean showInstinctBar = !(currentPhase == PlayerFormPhase.PHASE_CLEAR || currentPhase == PlayerFormPhase.PHASE_3);;
+        if(curForm.FormIndex < 2){
+            if(CursedMoon.isCursedMoon(player.getWorld()) && CursedMoon.isNight()){
+                this.isInstinctLock = true;
+            }
+            else{
+                this.isInstinctLock = false;
+            }
+        }
+        else{
+            this.isInstinctLock = true;
+        }
 
         if (!mc.options.hudHidden
                 && mc.interactionManager != null
@@ -114,7 +127,7 @@ public class InstinctBarRenderer  {
                 80 - instinctWidth, 0,
                 instinctWidth, 5,
                 80, 5);
-        if(InstinctTicker.isInstinctLock){
+        if(this.isInstinctLock){
             context.drawTexture(instinctBarTexLockID,
                     x, y,
                     0, 0,
