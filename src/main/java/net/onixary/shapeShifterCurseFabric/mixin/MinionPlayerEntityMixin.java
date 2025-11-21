@@ -1,14 +1,13 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.minion.IPlayerEntityMinion;
-import net.onixary.shapeShifterCurseFabric.minion.MinionBase;
-import net.onixary.shapeShifterCurseFabric.minion.PlayerMinionComponent;
-import net.onixary.shapeShifterCurseFabric.minion.RegPlayerMinionComponent;
+import net.onixary.shapeShifterCurseFabric.minion.*;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -18,8 +17,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Mixin(PlayerEntity.class)
 public abstract class MinionPlayerEntityMixin implements IPlayerEntityMinion {
@@ -45,17 +45,17 @@ public abstract class MinionPlayerEntityMixin implements IPlayerEntityMinion {
     }
 
     @Override
-    public HashMap<Identifier, List<UUID>> shape_shifter_curse$getAllMinions() {
+    public ConcurrentHashMap<Identifier, ArrayList<UUID>> shape_shifter_curse$getAllMinions() {
         PlayerMinionComponent playerMinionComponent = this.getPlayerMinionComponent();
         if (playerMinionComponent != null) {
             return playerMinionComponent.minions;
         } else {
-            return new HashMap<>();
+            return new ConcurrentHashMap<Identifier, ArrayList<UUID>>();
         }
     }
 
     @Override
-    public List<UUID> shape_shifter_curse$getMinionsByMinionID(Identifier MinionID) {
+    public ArrayList<UUID> shape_shifter_curse$getMinionsByMinionID(Identifier MinionID) {
         return this.shape_shifter_curse$getAllMinions().computeIfAbsent(MinionID, k -> new ArrayList<>());
     }
 
@@ -86,9 +86,9 @@ public abstract class MinionPlayerEntityMixin implements IPlayerEntityMinion {
     }
 
     @Override
-    public boolean shape_shifter_curse$addMinion(MinionBase minionBase) {
-        this.shape_shifter_curse$getMinionsByMinionID(minionBase.minionTypeID).add(minionBase.getUuid());
-        minionBase.setOwner((PlayerEntity)(Object)this);
+    public <T extends IMinion<? extends LivingEntity>> boolean shape_shifter_curse$addMinion(T minion) {
+        this.shape_shifter_curse$getMinionsByMinionID(minion.getMinionTypeID()).add(minion.getSelf().getUuid());
+        minion.setOwner((PlayerEntity)(Object)this);
         this.syncPlayerMinionComponent();
         return true;
     }
@@ -96,13 +96,17 @@ public abstract class MinionPlayerEntityMixin implements IPlayerEntityMinion {
     // 检查召唤物是否存在
     @Unique
     private void checkMinion(PlayerEntity realThis, ServerWorld world) {
-        HashMap<Identifier, List<UUID>> minions = this.shape_shifter_curse$getAllMinions();
+        ConcurrentHashMap<Identifier, ArrayList<UUID>> minions = this.shape_shifter_curse$getAllMinions();
+        LinkedList<Pair<Identifier, UUID>> minionsToRemove = new LinkedList<>();
         for (Identifier minionID : minions.keySet()) {
             for (UUID minionUUID : minions.get(minionID)) {
                 if (world.getEntity(minionUUID) == null) {
-                    this.shape_shifter_curse$removeMinion(minionID, minionUUID);
+                    minionsToRemove.add(new Pair<>(minionID, minionUUID));
                 }
             }
+        }
+        for (Pair<Identifier, UUID> minionToRemove : minionsToRemove) {
+            this.shape_shifter_curse$removeMinion(minionToRemove.getLeft(), minionToRemove.getRight());
         }
     }
 

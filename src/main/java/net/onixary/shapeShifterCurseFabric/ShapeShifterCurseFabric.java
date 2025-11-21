@@ -46,6 +46,7 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.Transfo
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
+import net.onixary.shapeShifterCurseFabric.minion.MinionRegister;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationTransform;
@@ -175,6 +176,9 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         AdditionalItemCondition.register();
         AdditionalPowers.register();
         AdditionalEntityActions.register();
+
+        // 注册召唤物属性
+        MinionRegister.register();
 
         // 注册配置文件
         AutoConfig.register(PlayerCustomConfig.class, Toml4jConfigSerializer::new);  // 客户端配置

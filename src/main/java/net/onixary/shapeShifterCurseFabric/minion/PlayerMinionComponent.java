@@ -9,12 +9,12 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PlayerMinionComponent implements Component, AutoSyncedComponent {
-    public HashMap<Identifier, List<UUID>> minions = new HashMap<>();
+    public ConcurrentHashMap<Identifier, ArrayList<UUID>> minions = new ConcurrentHashMap<>();
 
     @Override
     public void readFromNbt(NbtCompound nbtCompound) {
@@ -22,14 +22,17 @@ public class PlayerMinionComponent implements Component, AutoSyncedComponent {
             NbtCompound minionsNbt = nbtCompound.getCompound("minions");
             for (String key : minionsNbt.getKeys()) {
                 NbtList uuidList = minionsNbt.getList(key, 11);
-                List<UUID> uuids = uuidList.stream().map(nbt -> NbtHelper.toUuid((NbtIntArray) nbt)).toList();
+                ArrayList<UUID> uuids = new ArrayList<>();
+                for (net.minecraft.nbt.NbtElement nbtElement : uuidList) {
+                    uuids.add(NbtHelper.toUuid(nbtElement));
+                }
                 this.minions.put(new Identifier(key), uuids);
             }
         } catch (IllegalArgumentException e) {
-            this.minions = new HashMap<>();
+            this.minions = new ConcurrentHashMap<>();
         } catch (Exception e) {
             ShapeShifterCurseFabric.LOGGER.error("Error reading minions from NBT", e);
-            this.minions = new HashMap<>();
+            this.minions = new ConcurrentHashMap<>();
         }
     }
 

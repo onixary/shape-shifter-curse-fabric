@@ -1,15 +1,16 @@
 package net.onixary.shapeShifterCurseFabric.minion;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public interface IPlayerEntityMinion {
-    public HashMap<Identifier, List<UUID>> shape_shifter_curse$getAllMinions();
+    public ConcurrentHashMap<Identifier, ArrayList<UUID>> shape_shifter_curse$getAllMinions();
 
-    public List<UUID> shape_shifter_curse$getMinionsByMinionID(Identifier MinionID);
+    public ArrayList<UUID> shape_shifter_curse$getMinionsByMinionID(Identifier MinionID);
 
     public int shape_shifter_curse$getMinionsCount();
 
@@ -19,6 +20,6 @@ public interface IPlayerEntityMinion {
 
     public boolean shape_shifter_curse$removeMinion(Identifier MinionID, UUID minionUUID);
 
-    public boolean shape_shifter_curse$addMinion(MinionBase minionBase);
+    public <T extends IMinion<? extends LivingEntity>> boolean shape_shifter_curse$addMinion(T minion);
 
 }
