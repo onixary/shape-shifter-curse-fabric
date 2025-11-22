@@ -27,7 +27,7 @@ import net.onixary.shapeShifterCurseFabric.minion.IPlayerEntityMinion;
 import java.util.UUID;
 
 public class WolfMinion extends WolfEntity implements IMinion<WolfMinion> {
-    private static final Identifier MinionID = ShapeShifterCurseFabric.identifier("wolf_minion");
+    public static final Identifier MinionID = ShapeShifterCurseFabric.identifier("wolf_minion");
 
     public WolfMinion(EntityType<? extends WolfMinion> entityType, World world) {
         super(entityType, world);
@@ -83,7 +83,6 @@ public class WolfMinion extends WolfEntity implements IMinion<WolfMinion> {
         super.setOwner(player);
     }
 
-    @Override
     public Identifier getMinionTypeID() {
         return MinionID;
     }
