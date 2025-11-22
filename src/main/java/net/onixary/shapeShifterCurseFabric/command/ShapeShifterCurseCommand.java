@@ -17,6 +17,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
+import net.onixary.shapeShifterCurseFabric.minion.MinionRegister;
+import net.onixary.shapeShifterCurseFabric.minion.mobs.WolfMinion;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
@@ -103,6 +105,9 @@ public class ShapeShifterCurseCommand {
                                                 )
                                         )
                                 )
+                        )
+                        .then(literal("dev_command").requires(cs -> cs.hasPermissionLevel(2))
+                                .executes(ShapeShifterCurseCommand::devCommand)
                         )
         );
     }
@@ -316,5 +321,21 @@ public class ShapeShifterCurseCommand {
         world.setTimeOfDay(TargetTime);
         commandContext.getSource().sendFeedback(() -> {return Text.literal("World time set to " + TargetTime);}, false);
         return 1;
+    }
+
+    private static int devCommand(CommandContext<ServerCommandSource> commandContext) {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        ServerWorld world = commandContext.getSource().getWorld();
+        if (player == null) {
+            return 1;
+        }
+        try {
+            WolfMinion wolfMinion = MinionRegister.SpawnMinion(MinionRegister.WOLF_MINION, world, player.getBlockPos(), player);
+            wolfMinion.setMinionLevel(3);
+        } catch (Exception e) {
+            ShapeShifterCurseFabric.LOGGER.error("Error when spawn minion: ", e);
+            return 0;
+        }
+        return 0;
     }
 }
