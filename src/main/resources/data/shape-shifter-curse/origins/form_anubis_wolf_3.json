@@ -1,0 +1,13 @@
+{
+    "powers": [
+        "shape-shifter-curse:no_render_arm",
+        "shape-shifter-curse:form_anubis_wolf_3_scale"
+    ],
+    "icon": {
+        "item": "minecraft:player_head"
+    },
+    "order": 0,
+    "unchoosable": true,
+    "impact": 0,
+    "loading_priority": 0
+}

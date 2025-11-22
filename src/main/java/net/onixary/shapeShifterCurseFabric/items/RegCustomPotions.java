@@ -32,6 +32,9 @@ public class RegCustomPotions {
     public static final Potion SNOW_FOX_FORM_POTION =
             Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_snow_fox_0_potion"),
                     new Potion(new StatusEffectInstance(TO_SNOW_FOX_0_POTION)));
+    public static final Potion ANUBIS_WOLF_FORM_POTION =
+            Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_anubis_wolf_0_potion"),
+                    new Potion(new StatusEffectInstance(TO_ANUBIS_WOLF_0_POTION)));
     public static final Potion ALLEY_FORM_POTION =
             Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_allay_sp_potion"),
                     new Potion(new StatusEffectInstance(TO_ALLAY_SP_POTION)));
@@ -78,6 +81,7 @@ public class RegCustomPotions {
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.CHICKEN, OCELOT_FORM_POTION);
         // familiar fox只能通过女巫发射或掉落的溅射药水给与，没有配方
         // The familiar fox can only be obtained via splash potions thrown or drop by witches, no recipe available
+        // todo: anubis wolf 药水配方待定，可能是狼灵的特殊掉落物
         // snow fox 需要通过净化familiar fox药水来得到
         // snow fox can be obtained by purifying familiar fox potion
         BrewingRecipeRegistry.registerPotionRecipe(FAMILIAR_FOX_FORM_POTION, Items.GOLD_NUGGET, SNOW_FOX_FORM_POTION);
