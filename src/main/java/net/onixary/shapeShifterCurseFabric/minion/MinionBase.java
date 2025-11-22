@@ -58,10 +58,13 @@ public abstract class MinionBase extends TameableEntity implements IMinion<Minio
     }
 
     public double getMinionDisappearRange() {
-        return 128.0d;  // 128格外自动消失 如果不需要这个功能可以填Double.MAX_VALUE 如果没有让召唤物强制传送功能必须要设置一个合理的值 否则召唤物可能会卸载
+        return 1024.0d;  // 32格外自动消失 如果不需要这个功能可以填Double.MAX_VALUE 如果没有让召唤物强制传送功能必须要设置一个合理的值 否则召唤物可能会卸载
     }
 
     public boolean shouldExist() {
+        if (this.getWorld().isClient) {
+            return true;
+        }
         if (this.getMinionOwnerUUID() == null) {
             return false;
         }
@@ -69,11 +72,11 @@ public abstract class MinionBase extends TameableEntity implements IMinion<Minio
         if (owner == null) {
             return false;
         }
+        if (this.squaredDistanceTo(owner) > this.getMinionDisappearRange()) {
+            return false;
+        }
         if (owner instanceof IPlayerEntityMinion iPlayerEntityMinion) {
             return iPlayerEntityMinion.shape_shifter_curse$minionExist(this.getMinionTypeID(), this.getUuid());
-        }
-        if (this.squaredDistanceTo(owner) > this.getMinionDisappearRange()) {
-            return true;
         }
         return false;
     }
@@ -92,13 +95,11 @@ public abstract class MinionBase extends TameableEntity implements IMinion<Minio
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
-        nbt.putUuid("ownerUUID", this.getMinionOwnerUUID());
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
-        this.setMinionOwnerUUID(nbt.getUuid("ownerUUID"));
     }
 
     @Override
@@ -115,6 +116,7 @@ public abstract class MinionBase extends TameableEntity implements IMinion<Minio
         if (this.getMinionOwnerUUID() != null && this.getWorld().getPlayerByUuid(this.getMinionOwnerUUID()) instanceof IPlayerEntityMinion iPlayerEntityMinion) {
             iPlayerEntityMinion.shape_shifter_curse$removeMinion(this.getMinionTypeID(), this.getUuid());
         }
+        this.setOwner(null);
         super.onDeath(source);
     }
 }

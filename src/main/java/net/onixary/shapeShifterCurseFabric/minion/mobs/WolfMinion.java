@@ -14,10 +14,11 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.minion.IMinion;
@@ -46,7 +47,7 @@ public class WolfMinion extends WolfEntity implements IMinion<WolfMinion> {
         this.goalSelector.add(1, new WolfMinionEscapeDangerGoal(1.5));
         this.goalSelector.add(4, new PounceAtTargetGoal(this, 0.4F));
         this.goalSelector.add(5, new MeleeAttackGoal(this, 1.0, true));
-        this.goalSelector.add(6, new FollowOwnerGoal(this, 1.0, 10.0F, 2.0F, false));
+        this.goalSelector.add(6, new FollowOwnerGoalNoTP(this, 1.0, 10.0F, 2.0F, false));
         this.goalSelector.add(7, new AnimalMateGoal(this, 1.0));
         this.goalSelector.add(8, new WanderAroundFarGoal(this, 1.0));
         this.goalSelector.add(10, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
@@ -129,14 +130,40 @@ public class WolfMinion extends WolfEntity implements IMinion<WolfMinion> {
 
     @Override
     public void tick() {
-        if (!this.getWorld().isClient && !this.shouldExist()) {
-            this.setHealth(0.0f);  // 自动死亡
-        }
-        if (!this.hasStatusEffect(StatusEffects.WITHER)) {
-            this.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, -1, 0));
+        if (!this.getWorld().isClient) {
+            if (!this.shouldExist()) {
+                this.setHealth(0.0f);  // 自动死亡
+            }
+            if (!this.hasStatusEffect(StatusEffects.WITHER)) {
+                this.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, -1, 0));
+            }
         }
         super.tick();
+        // processAnim();
     }
+    /* 弃用 不会做AzureLib模型 原先的模型不兼容 连测试都没法测试
+    public void processAnim() {
+        if (this.isAttacking()) {
+            WolfMinionAnimator.ATTACK_COMMAND.sendForEntity(this);
+        } else if (this.isTouchingWater()) {
+            WolfMinionAnimator.FLOAT_COMMAND.sendForEntity(this);
+        } else if (!this.isOnGround()) {
+            if (this.getVelocity().getY() > 0.0) {
+                WolfMinionAnimator.JUMP_COMMAND.sendForEntity(this);
+            }
+            else {
+                WolfMinionAnimator.FALL_COMMAND.sendForEntity(this);
+            }
+        } else {
+            if (this.getVelocity().getX() != 0 || this.getVelocity().getZ() != 0) {
+                WolfMinionAnimator.WALK_COMMAND.sendForEntity(this);
+            }
+            else {
+                WolfMinionAnimator.IDLE_COMMAND.sendForEntity(this);
+            }
+        }
+    }
+     */
 
     @Override
     public void applyDamageEffects(LivingEntity attacker, Entity target) {
@@ -155,22 +182,22 @@ public class WolfMinion extends WolfEntity implements IMinion<WolfMinion> {
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putInt("MinionLevel", this.MinionLevel);
-        nbt.putUuid("ownerUUID", this.getMinionOwnerUUID());
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
         this.MinionLevel = nbt.getInt("MinionLevel");
-        this.setMinionOwnerUUID(nbt.getUuid("ownerUUID"));
     }
 
     public double getMinionDisappearRange() {
-        return 128.0d;  // 128格外自动消失 如果不需要这个功能可以填Double.MAX_VALUE 如果没有让召唤物强制传送功能必须要设置一个合理的值 否则召唤物可能会卸载
+        return 1024.0d;  // 自动消失距离的二次方 如果不需要这个功能可以填Double.MAX_VALUE 如果没有让召唤物强制传送功能必须要设置一个合理的值 否则召唤物可能会卸载
     }
 
-    // TODO 修一下客户端返回False的问题
     public boolean shouldExist() {
+        if (this.getWorld().isClient) {
+            return true;
+        }
         if (this.getMinionOwnerUUID() == null) {
             return false;
         }
@@ -178,13 +205,21 @@ public class WolfMinion extends WolfEntity implements IMinion<WolfMinion> {
         if (owner == null) {
             return false;
         }
+        if (this.squaredDistanceTo(owner) > this.getMinionDisappearRange()) {
+            return false;
+        }
         if (owner instanceof IPlayerEntityMinion iPlayerEntityMinion) {
             return iPlayerEntityMinion.shape_shifter_curse$minionExist(this.getMinionTypeID(), this.getUuid());
         }
-        if (this.squaredDistanceTo(owner) > this.getMinionDisappearRange()) {
-            return true;
-        }
         return false;
+    }
+
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.ENTITY_WITHER_SKELETON_HURT;
+    }
+
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_WITHER_SKELETON_DEATH;
     }
 
     @Override
@@ -192,6 +227,8 @@ public class WolfMinion extends WolfEntity implements IMinion<WolfMinion> {
         if (this.getMinionOwnerUUID() != null && this.getWorld().getPlayerByUuid(this.getMinionOwnerUUID()) instanceof IPlayerEntityMinion iPlayerEntityMinion) {
             iPlayerEntityMinion.shape_shifter_curse$removeMinion(this.getMinionTypeID(), this.getUuid());
         }
+        // 清除死亡Message
+        this.setOwnerUuid(null);
         super.onDeath(source);
     }
 
