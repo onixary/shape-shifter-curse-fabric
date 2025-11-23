@@ -10,6 +10,8 @@ import net.minecraft.registry.Registry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.minion.mobs.WolfMinion;
 import net.onixary.shapeShifterCurseFabric.minion.mobs.WolfMinionRenderer;
@@ -38,6 +40,49 @@ public class MinionRegister {
         if (entity instanceof IMinion<?> minionEntity) {
             minionEntity.InitMinion(player);
             return entity;
+        }
+        return null;
+    }
+
+    private static boolean IsSpaceEmpty(World world, BlockPos pos) {
+        return world.isAir(pos) || world.isWater(pos);
+    }
+
+    private static boolean IsSpaceEmpty(World world, BlockPos pos, int height) {
+        for (int i = 0; i < height; i++) {
+            if (!IsSpaceEmpty(world, pos)) {
+                return false;
+            }
+            pos = pos.up();
+        }
+        return true;
+    }
+
+    private static int RandomInt(Random randomSource, int min, int max) {
+        return randomSource.nextInt(max - min + 1) + min;
+    }
+
+    public static @Nullable BlockPos getNearbyEmptySpace(World world, Random randomSource, BlockPos startPos, int XZRange, int YRange, int SpaceHeight, int MaxTry) {
+        for (int i = 0; i < MaxTry; i++) {
+            int x = RandomInt(randomSource, -XZRange, XZRange);
+            int z = RandomInt(randomSource, -XZRange, XZRange);
+            int y = RandomInt(randomSource, -YRange, YRange);
+            BlockPos pos = startPos.add(x, y, z);
+            for (int j = 0; j < YRange; j++) {
+                if (!IsSpaceEmpty(world, pos)) {
+                    pos = pos.up();
+                }
+                else if (IsSpaceEmpty(world, pos.down())) {
+                    pos = pos.down();
+                }
+                else {
+                    break;
+                }
+            }
+            if (IsSpaceEmpty(world, pos, SpaceHeight)) {
+                return pos;
+            }
+            continue;
         }
         return null;
     }

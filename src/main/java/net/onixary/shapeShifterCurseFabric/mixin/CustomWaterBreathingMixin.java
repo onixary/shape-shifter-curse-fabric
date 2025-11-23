@@ -54,8 +54,10 @@ public final class CustomWaterBreathingMixin {
         }
         @Unique
         private int getNextAirUnderwaterSlow(int air, int waterBreathLevel) {
-            int i = waterBreathLevel;
-            return i > 0 && this.random.nextInt(i + 1) > 0 ? air : air - 1;
+            if (waterBreathLevel >= 1000) {
+                return air;
+            }
+            return waterBreathLevel > 0 && this.random.nextInt(waterBreathLevel + 1) > 0 ? air : air - 1;
         }
 
         // 使用原版水下呼吸逻辑的反向来实现陆地上慢速失去氧气
