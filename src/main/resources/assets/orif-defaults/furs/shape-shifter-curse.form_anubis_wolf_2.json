@@ -2,6 +2,7 @@
   "model": "orif-defaults:geo/form_anubis_wolf_2.geo.json",
   "texture": "orif-defaults:textures/form_anubis_wolf_2/form_anubis_wolf_2.png",
   "texture_mask": "orif-defaults:textures/form_anubis_wolf_2/form_anubis_wolf_2_colormask.png",
+  "overlay": "orif-defaults:textures/form_anubis_wolf_2/form_anubis_wolf_2_overlay.png",
   "hidden": [
     "leftLeg",
     "rightLeg",
@@ -10,7 +11,8 @@
     "leftSleeve",
     "rightSleeve",
     "leftArm",
-    "rightArm"
+    "rightArm",
+    "hat"
   ],
   "tail_chain": {
     "tail": [0, 1, 2, 3, 4]
