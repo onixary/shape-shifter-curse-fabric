@@ -5,7 +5,6 @@ import io.github.apace100.calio.data.SerializableData;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ScaffoldingBlock;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityPose;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -13,7 +12,10 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 // 由于当前apoli版本太旧 不支持最新的支持direction和space组合的raycast 只能用这个方法
 public class MustCrawlingCondition {
-    private static boolean IsHeadCollide(Entity e) {
+    private static boolean IsHeadNotCollide(Entity e) {
+        if (e.noClip || e.isSpectator()) {
+            return true;
+        }
         // 检测碰撞箱 防止出现身体与地面穿模 如果卡顿可以直接可以修改为 return true
         BlockPos up1pos = e.getBlockPos().up();
         BlockState up1block = e.getWorld().getBlockState(up1pos);
@@ -36,7 +38,7 @@ public class MustCrawlingCondition {
     public static boolean condition(SerializableData.Instance data, Entity e) {
         // 由于Crawling的能力为修改碰撞箱 所以不能使用这个方法
         // return (t.wouldPoseNotCollide(EntityPose.SWIMMING)) && (!t.wouldPoseNotCollide(EntityPose.CROUCHING));
-        return !IsHeadCollide(e);
+        return !IsHeadNotCollide(e);
     }
 
     public static ConditionFactory<Entity> getFactory() {
