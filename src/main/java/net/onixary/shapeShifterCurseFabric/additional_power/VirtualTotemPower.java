@@ -62,7 +62,7 @@ public class VirtualTotemPower extends CooldownPower {
         this.entity.setHealth(this.totemHealth);
         if (this.totemStatusEffects != null) {
             for (StatusEffectInstance statusEffectInstance : this.totemStatusEffects) {
-                this.entity.addStatusEffect(statusEffectInstance);
+                this.entity.addStatusEffect(new StatusEffectInstance(statusEffectInstance));
             }
         }
         if (this.entityAction != null) {
