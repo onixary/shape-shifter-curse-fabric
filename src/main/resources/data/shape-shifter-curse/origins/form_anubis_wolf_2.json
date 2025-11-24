@@ -1,6 +1,7 @@
 {
     "powers": [
-        "shape-shifter-curse:form_anubis_wolf_2_scale"
+        "shape-shifter-curse:form_anubis_wolf_2_scale",
+        "shape-shifter-curse:form_anubis_wolf_2_summon_wolf_when_hit"
     ],
     "icon": {
         "item": "minecraft:player_head"

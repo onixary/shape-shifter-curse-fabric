@@ -2,9 +2,9 @@
   "type": "origins:self_action_when_hit",
   "entity_action": {
     "type": "shape-shifter-curse:summon_wolf_minion",
-    "minion_level": 3,
+    "minion_level": 1,
     "count": 1,
-    "max_minion_count": 2,
+    "max_minion_count": 1,
     "cooldown": 200
   },
   "damage_condition": {
