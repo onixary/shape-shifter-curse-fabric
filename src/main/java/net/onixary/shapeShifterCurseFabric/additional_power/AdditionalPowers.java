@@ -50,6 +50,7 @@ public class AdditionalPowers {
         register(VirtualTotemPower.createFactory());
         register(ModifyInstantHealthPower.createFactory());
         register(ModifyInstantDamagePower.createFactory());
+        register(SoulSpeedPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

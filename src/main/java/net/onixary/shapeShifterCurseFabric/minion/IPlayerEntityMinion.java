@@ -22,4 +22,7 @@ public interface IPlayerEntityMinion {
 
     public <T extends IMinion<? extends LivingEntity>> boolean shape_shifter_curse$addMinion(T minion);
 
+    public void shape_shifter_curse$applyCooldown(Identifier MinionID, long time);
+
+    public long shape_shifter_curse$getCooldownTime(Identifier MinionID);
 }

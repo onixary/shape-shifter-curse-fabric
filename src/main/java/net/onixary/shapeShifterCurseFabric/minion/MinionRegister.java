@@ -4,11 +4,12 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.*;
-import net.minecraft.entity.passive.TameableEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
@@ -42,6 +43,22 @@ public class MinionRegister {
             return entity;
         }
         return null;
+    }
+
+    public static void SetCoolDown(Identifier MinionID, PlayerEntity player) {
+        if (player instanceof IPlayerEntityMinion minionPlayer) {
+            minionPlayer.shape_shifter_curse$applyCooldown(MinionID, player.age);
+        }
+    }
+
+    public static boolean IsInCoolDown(Identifier MinionID, PlayerEntity player, int Cooldown) {
+        if (Cooldown <= 0) {
+            return false;
+        }
+        if (player instanceof IPlayerEntityMinion minionPlayer) {
+            return minionPlayer.shape_shifter_curse$getCooldownTime(MinionID) + Cooldown >= player.age;
+        }
+        return true;
     }
 
     private static boolean IsSpaceEmpty(World world, BlockPos pos) {

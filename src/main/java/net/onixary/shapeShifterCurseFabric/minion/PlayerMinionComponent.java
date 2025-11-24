@@ -15,6 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class PlayerMinionComponent implements Component, AutoSyncedComponent {
     public ConcurrentHashMap<Identifier, ArrayList<UUID>> minions = new ConcurrentHashMap<>();
+    public ConcurrentHashMap<Identifier, Long> minionsCooldown = new ConcurrentHashMap<>();
 
     @Override
     public void readFromNbt(NbtCompound nbtCompound) {
@@ -28,8 +29,13 @@ public class PlayerMinionComponent implements Component, AutoSyncedComponent {
                 }
                 this.minions.put(new Identifier(key), uuids);
             }
+            NbtCompound minionsCooldownNbt = nbtCompound.getCompound("minionsCooldown");
+            for (String key : minionsCooldownNbt.getKeys()) {
+                this.minionsCooldown.put(new Identifier(key), minionsCooldownNbt.getLong(key));
+            }
         } catch (IllegalArgumentException e) {
             this.minions = new ConcurrentHashMap<>();
+            this.minionsCooldown = new ConcurrentHashMap<>();
         } catch (Exception e) {
             ShapeShifterCurseFabric.LOGGER.error("Error reading minions from NBT", e);
             this.minions = new ConcurrentHashMap<>();
@@ -48,5 +54,10 @@ public class PlayerMinionComponent implements Component, AutoSyncedComponent {
             minionsNbt.put(key.toString(), uuidList);
         }
         nbtCompound.put("minions", minionsNbt);
+        NbtCompound minionsCooldownNbt = new NbtCompound();
+        for (Identifier key : this.minionsCooldown.keySet()) {
+            minionsCooldownNbt.putLong(key.toString(), this.minionsCooldown.get(key));
+        }
+        nbtCompound.put("minionsCooldown", minionsCooldownNbt);
     }
 }
