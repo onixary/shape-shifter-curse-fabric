@@ -3,6 +3,7 @@
   "texture": "orif-defaults:textures/form_anubis_wolf_2/form_anubis_wolf_2.png",
   "texture_mask": "orif-defaults:textures/form_anubis_wolf_2/form_anubis_wolf_2_colormask.png",
   "overlay": "orif-defaults:textures/form_anubis_wolf_2/form_anubis_wolf_2_overlay.png",
+  "overlay_mask": "orif-defaults:textures/form_anubis_wolf_2/form_anubis_wolf_2_overlay_colormask.png",
   "hidden": [
     "leftLeg",
     "rightLeg",
