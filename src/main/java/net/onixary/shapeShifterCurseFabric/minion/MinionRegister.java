@@ -56,9 +56,23 @@ public class MinionRegister {
             return false;
         }
         if (player instanceof IPlayerEntityMinion minionPlayer) {
-            return minionPlayer.shape_shifter_curse$getCooldownTime(MinionID) + Cooldown >= player.age;
+            long LastCooldown = minionPlayer.shape_shifter_curse$getCooldownTime(MinionID);
+            if (LastCooldown == 0) {  // 没召唤过
+                return false;
+            }
+            if (LastCooldown > player.age) {
+                minionPlayer.shape_shifter_curse$applyCooldown(MinionID, 0);  // player.age会刷新
+                return false;
+            }
+            return LastCooldown + Cooldown >= player.age;
         }
         return true;
+    }
+
+    public static void ResetPlayerCoolDown(PlayerEntity player) {
+        if (player instanceof IPlayerEntityMinion minionPlayer) {
+            minionPlayer.shape_shifter_curse$resetAllCooldown();
+        }
     }
 
     private static boolean IsSpaceEmpty(World world, BlockPos pos) {

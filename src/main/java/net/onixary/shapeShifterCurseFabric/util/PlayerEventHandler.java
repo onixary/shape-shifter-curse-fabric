@@ -20,6 +20,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
 import net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage;
+import net.onixary.shapeShifterCurseFabric.minion.MinionRegister;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
@@ -166,6 +167,9 @@ public class PlayerEventHandler {
 
             // update team
             //PlayerTeamHandler.updatePlayerTeam(player);
+
+            // 清空玩家召唤冷却
+            MinionRegister.ResetPlayerCoolDown(player);
         });
         // copy event
         ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {

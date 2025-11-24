@@ -112,6 +112,17 @@ public abstract class MinionPlayerEntityMixin implements IPlayerEntityMinion {
         return playerMinionComponent.minionsCooldown.getOrDefault(MinionID, 0L);  // 拿不到就返回0 表示没有冷却
     }
 
+    @Override
+    public void shape_shifter_curse$resetAllCooldown() {
+        PlayerMinionComponent playerMinionComponent = this.getPlayerMinionComponent();
+        if (playerMinionComponent == null) {
+            return;
+        }
+        playerMinionComponent.minionsCooldown.clear();
+        this.syncPlayerMinionComponent();
+        return;
+    }
+
     // 检查召唤物是否存在
     @Unique
     private void checkMinion(PlayerEntity realThis, ServerWorld world) {
