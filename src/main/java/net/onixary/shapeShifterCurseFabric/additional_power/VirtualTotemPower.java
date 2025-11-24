@@ -88,9 +88,9 @@ public class VirtualTotemPower extends CooldownPower {
     }
 
     public static void process_virtual_totem_type(@NotNull PlayerEntity entity, int virtualTotemType, @Nullable ItemStack totemStack) {
+        MinecraftClient client = MinecraftClient.getInstance();
         switch (virtualTotemType) {
             case 0:
-                MinecraftClient client = MinecraftClient.getInstance();
                 if (totemStack == null) {
                     totemStack = new ItemStack(Items.TOTEM_OF_UNDYING, 1);
                 }
@@ -99,6 +99,12 @@ public class VirtualTotemPower extends CooldownPower {
                     client.world.playSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_TOTEM_USE, entity.getSoundCategory(), 1.0f, 1.0f, false);
                     if (entity != client.player) break;
                     client.gameRenderer.showFloatingItem(totemStack);
+                }
+                break;
+            case 1:  // 凋零不死能力
+                if (client.world != null) {
+                    client.particleManager.addEmitter(entity, ParticleTypes.SMOKE, 30);
+                    client.world.playSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ENTITY_WITHER_DEATH, entity.getSoundCategory(), 0.75f, 0.8f, false);
                 }
                 break;
             default:

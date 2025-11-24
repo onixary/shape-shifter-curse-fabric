@@ -24,10 +24,15 @@ public class SummonMinionWolfNearbyAction {
         int MinionLevel = data.getInt("minion_level");
         int MinionCount = data.getInt("count");
         int MaxMinionCount = data.getInt("max_minion_count");
+        int Cooldown = data.getInt("cooldown");
         if (Owner instanceof ServerPlayerEntity player) {
+            boolean IsSummonSuccess = false;
             for (int i = 0; i < MinionCount; i++) {
                 if (player instanceof IPlayerEntityMinion playerEntityMinion) {
                     if (playerEntityMinion.shape_shifter_curse$getMinionsCount(WolfMinion.MinionID) >= MaxMinionCount) {
+                        return;
+                    }
+                    if (MinionRegister.IsInCoolDown(WolfMinion.MinionID, player, Cooldown)) {
                         return;
                     }
                 }
@@ -35,7 +40,7 @@ public class SummonMinionWolfNearbyAction {
                     ShapeShifterCurseFabric.LOGGER.warn("Can't spawn minion, player is not IPlayerEntityMinion");
                     return;
                 }
-                BlockPos targetPos = MinionRegister.getNearbyEmptySpace(SpawnNearbyTarget.getWorld(), player.getRandom(), SpawnNearbyTarget.getBlockPos(), 3, 1, 1, 4);;
+                BlockPos targetPos = MinionRegister.getNearbyEmptySpace(SpawnNearbyTarget.getWorld(), player.getRandom(), SpawnNearbyTarget.getBlockPos(), 3, 1, 1, 4);
                 if (targetPos == null) {
                     targetPos = SpawnNearbyTarget.getBlockPos();
                 }
@@ -43,12 +48,16 @@ public class SummonMinionWolfNearbyAction {
                     WolfMinion wolfMinion = MinionRegister.SpawnMinion(MinionRegister.WOLF_MINION, world, targetPos, player);
                     if (wolfMinion != null) {
                         wolfMinion.setMinionLevel(MinionLevel);
+                        IsSummonSuccess = true;
                     } else {
                         ShapeShifterCurseFabric.LOGGER.warn("Can't spawn minion, wolfMinion is null");
                     }
                 } else {
                     ShapeShifterCurseFabric.LOGGER.warn("Can't spawn minion, world is not ServerWorld");
                 }
+            }
+            if (IsSummonSuccess) {
+                MinionRegister.SetCoolDown(WolfMinion.MinionID, player);
             }
         }
     }
@@ -60,6 +69,7 @@ public class SummonMinionWolfNearbyAction {
                         .add("minion_level", SerializableDataTypes.INT, 1)
                         .add("count", SerializableDataTypes.INT, 1)
                         .add("max_minion_count", SerializableDataTypes.INT, Integer.MAX_VALUE)
+                        .add("cooldown", SerializableDataTypes.INT, 0)
                         .add("reverse", SerializableDataTypes.BOOLEAN, false),
                 SummonMinionWolfNearbyAction::action
         );
@@ -71,7 +81,8 @@ public class SummonMinionWolfNearbyAction {
                 new SerializableData()
                         .add("minion_level", SerializableDataTypes.INT, 1)
                         .add("count", SerializableDataTypes.INT, 1)
-                        .add("max_minion_count", SerializableDataTypes.INT, Integer.MAX_VALUE),
+                        .add("max_minion_count", SerializableDataTypes.INT, Integer.MAX_VALUE)
+                        .add("cooldown", SerializableDataTypes.INT, 0),
                 (data, entity) -> {action(data, new Pair<>(entity, entity));}
         );
     }

@@ -16,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -91,6 +90,37 @@ public abstract class MinionPlayerEntityMixin implements IPlayerEntityMinion {
         minion.setOwner((PlayerEntity)(Object)this);
         this.syncPlayerMinionComponent();
         return true;
+    }
+
+    @Override
+    public void shape_shifter_curse$applyCooldown(Identifier MinionID, long time) {
+        PlayerMinionComponent playerMinionComponent = this.getPlayerMinionComponent();
+        if (playerMinionComponent == null) {
+            return;
+        }
+        playerMinionComponent.minionsCooldown.put(MinionID, time);
+        this.syncPlayerMinionComponent();
+        return;
+    }
+
+    @Override
+    public long shape_shifter_curse$getCooldownTime(Identifier MinionID) {
+        PlayerMinionComponent playerMinionComponent = this.getPlayerMinionComponent();
+        if (playerMinionComponent == null) {
+            return Long.MAX_VALUE;  // 拿不到组件就返回最大值 表示没有完成冷却
+        }
+        return playerMinionComponent.minionsCooldown.getOrDefault(MinionID, 0L);  // 拿不到就返回0 表示没有冷却
+    }
+
+    @Override
+    public void shape_shifter_curse$resetAllCooldown() {
+        PlayerMinionComponent playerMinionComponent = this.getPlayerMinionComponent();
+        if (playerMinionComponent == null) {
+            return;
+        }
+        playerMinionComponent.minionsCooldown.clear();
+        this.syncPlayerMinionComponent();
+        return;
     }
 
     // 检查召唤物是否存在

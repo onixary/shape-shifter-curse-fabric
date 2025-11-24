@@ -8,12 +8,11 @@ import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.LivingEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
-public class LootingPower extends Power {
-
+public class SoulSpeedPower extends Power {
     private final int level;
     private final int maxLevel;
 
-    public LootingPower(PowerType<?> type, LivingEntity entity, int level, int maxLevel)  {
+    public SoulSpeedPower(PowerType<?> type, LivingEntity entity, int level, int maxLevel) {
         super(type, entity);
         this.level = level;
         this.maxLevel = maxLevel;
@@ -34,11 +33,11 @@ public class LootingPower extends Power {
     // 工厂方法
     public static PowerFactory<?> createFactory() {
         return new PowerFactory<>(
-                ShapeShifterCurseFabric.identifier("simple_looting"),
+                ShapeShifterCurseFabric.identifier("soul_speed"),
                 new SerializableData()
                         .add("level", SerializableDataTypes.INT, 1)
                         .add("max_level", SerializableDataTypes.INT, Integer.MAX_VALUE),
-                data -> (powerType, entity) -> new LootingPower(
+                data -> (powerType, entity) -> new SoulSpeedPower(
                         powerType,
                         entity,
                         data.getInt("level"),

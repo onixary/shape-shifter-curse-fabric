@@ -1,12 +1,14 @@
 package net.onixary.shapeShifterCurseFabric.minion.mobs;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
@@ -92,10 +94,26 @@ public class WolfMinion extends WolfEntity implements IMinion<WolfMinion> {
         return this;
     }
 
+    @Override
+    public boolean isUndead() {
+        return true;
+    }
+
+    @Override
+    public boolean canBreatheInWater() {
+        return true;
+    }
+
+    @Override
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        StatusEffect statusEffect = effect.getEffectType();
+        return statusEffect != StatusEffects.REGENERATION && statusEffect != StatusEffects.POISON;
+    }
+
     public static DefaultAttributeContainer.Builder createWolfMinionAttributes() {
         // 速度0.3
-        // 生命10
-        // 攻击2
+        // 生命10/16/24
+        // 攻击2/3/4
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.30000001192092896)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0)
@@ -114,9 +132,11 @@ public class WolfMinion extends WolfEntity implements IMinion<WolfMinion> {
                 break;
             case 2:
                 health.setBaseValue(16.0d);
+                attack_damage.setBaseValue(3.0d);
                 break;
             case 3:
                 health.setBaseValue(24.0d);
+                attack_damage.setBaseValue(4.0d);
                 break;
             default:
                 ShapeShifterCurseFabric.LOGGER.error("wolf minion level error");

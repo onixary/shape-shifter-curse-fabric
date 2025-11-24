@@ -1,0 +1,10 @@
+{
+  "type": "origins:action_when_hit",
+  "bientity_action": {
+    "type": "shape-shifter-curse:bi_summon_wolf_minion",
+    "minion_level": 3,
+    "count": 1,
+    "max_minion_count": 2,
+    "cooldown": 200
+  }
+}
