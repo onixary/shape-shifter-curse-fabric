@@ -24,6 +24,20 @@
       "show_icon": true
     },
     {
+      "effect": "minecraft:fire_resistance",
+      "duration": 800,
+      "amplifier": 0,
+      "show_particles": false,
+      "show_icon": true
+    },
+    {
+      "effect": "minecraft:absorption",
+      "duration": 100,
+      "amplifier": 1,
+      "show_particles": false,
+      "show_icon": true
+    },
+    {
       "effect": "minecraft:weakness",
       "duration": 2400,
       "amplifier": 0,
