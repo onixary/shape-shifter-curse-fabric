@@ -27,7 +27,7 @@ public class AdditionalPowers {
         register(BatBlockAttachPower.createFactory());
         register(ActionOnJumpPower.createFactory());
         register(NoRenderArmPower.createFactory());
-        register(CanEatAmethystShardPower.createFactory());
+        register(CustomEdiblePower.createFactory());
         register(NoStepSoundPower.createFactory());
         register(PillagerFriendlyPower.createFactory());
         register(PreventBerryEffectPower.createFactory());
@@ -45,6 +45,12 @@ public class AdditionalPowers {
         register(AlwaysSprintSwimmingPower.createFactory());
         register(ActionOnSplashPotionTakeEffect.createFactory());
         register(ConditionScalePower.createFactory());
+        register(SneakingJumpClashPower.createFactory());
+        register(InWaterSpeedModifierPower.createFactory());
+        register(VirtualTotemPower.createFactory());
+        register(ModifyInstantHealthPower.createFactory());
+        register(ModifyInstantDamagePower.createFactory());
+        register(SoulSpeedPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

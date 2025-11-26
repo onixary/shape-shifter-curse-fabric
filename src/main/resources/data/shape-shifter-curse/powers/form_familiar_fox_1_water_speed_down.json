@@ -1,16 +1,4 @@
 {
-    "type": "origins:conditioned_attribute",
-    "modifier": {
-        "attribute": "minecraft:generic.movement_speed",
-        "operation": "addition",
-        "value": -0.25,
-        "name": "water speed down"
-    },
-    "tick_rate": 5,
-    "condition": {
-        "type": "origins:fluid_height",
-        "fluid": "minecraft:water",
-        "comparison": ">",
-        "compare_to": 0
-    }
+    "type": "shape-shifter-curse:in_water_speed_modifier",
+    "modifier": 0.85
 }

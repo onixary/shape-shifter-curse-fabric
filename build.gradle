@@ -7,6 +7,13 @@ plugins {
 version = project.mod_version
 group = project.maven_group
 
+// 从Github Action 环境获取构建Channel和BuildVersion
+def channel = System.getenv('channel')
+def build_version = System.getenv('build_version')
+if (channel != null) {
+    version = "${project.mod_version}-${channel}.${build_version}"
+}
+
 base {
     archivesName = project.archives_base_name
 }
@@ -121,11 +128,14 @@ repositories {
         name = "Fuzs Mod Resources"
         url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
     }
+    maven { url "https://maven.ryanliptak.com/" }
+
     mavenLocal()
 }
 
 dependencies {
-    // To change the versions see the gradle.properties file
+
+    //要更改版本，请查看 gradle.properties 文件
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
@@ -133,6 +143,9 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     implementation 'com.google.code.gson:gson:2.12.1'
+
+    // 已经包含在 fabric-api 中
+    // modImplementation "net.fabricmc.fabric-api:fabric-lifecycle-events-v1:${project.fabric_version}"
 
     //mappings loom.layered() {
     //    officialMojangMappings()
@@ -199,7 +212,7 @@ dependencies {
     include modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:${project.player_anim}")
 
     // Fabric forge config api port
-    modLocalRuntime "fuzs.forgeconfigscreens:forgeconfigscreens-fabric:8.0.0"
+    // modLocalRuntime "fuzs.forgeconfigscreens:forgeconfigscreens-fabric:8.0.0"
 
 
     //modImplementation "com.github.eggohito:eggolib:${project.eggolib_version}"
@@ -213,6 +226,10 @@ dependencies {
     modCompileOnly "maven.modrinth:playeranimator:cfkAgcOh"
     modCompileOnly "maven.modrinth:first-person-model:mquWPSix"
     modRuntimeOnly "maven.modrinth:first-person-model:mquWPSix"
+
+    // AppleSkin
+    modCompileOnly "squeek.appleskin:appleskin-fabric:mc1.20-2.5.1"
+    modLocalRuntime "squeek.appleskin:appleskin-fabric:mc1.20-2.5.1"
 
     modCompileOnly "maven.modrinth:vivecraft:9Sa2NEEb"
     annotationProcessor(files("libs/mixinextras-fabric-0.2.0-beta.8.jar"))

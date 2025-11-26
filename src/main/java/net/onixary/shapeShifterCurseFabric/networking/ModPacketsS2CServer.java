@@ -1,7 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.networking;
 
 import com.google.gson.JsonObject;
-import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
@@ -11,10 +10,10 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
 import java.util.HashMap;
@@ -43,21 +42,28 @@ public class ModPacketsS2CServer {
         ShapeShifterCurseFabric.LOGGER.info("Sent form change to client: " + newFormName);
     }
 
+    /* 重构后不需要了 仅用于参考旧实现逻辑
     public static void sendSyncEffectAttachment(ServerPlayerEntity player, PlayerEffectAttachment attachment) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeNbt(attachment.toNbt());
         //ShapeShifterCurseFabric.LOGGER.info("Attachment sent, nbt: " + attachment.toNbt());
         ServerPlayNetworking.send(player, ModPackets.SYNC_EFFECT_ATTACHMENT, buf);
     }
+     */
 
     // 发送变身状态同步包
     public static void sendTransformState(ServerPlayerEntity player, boolean isTransforming,
                                           String fromForm, String toForm) {
         PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeUuid(player.getUuid());
         buf.writeBoolean(isTransforming);
         buf.writeString(fromForm != null ? fromForm : "");
         buf.writeString(toForm != null ? toForm : "");
-        ServerPlayNetworking.send(player, ModPackets.SYNC_TRANSFORM_STATE, buf);
+//        ServerPlayNetworking.send(player, ModPackets.SYNC_TRANSFORM_STATE, buf);
+        // 广播给所有玩家 用于同步动作
+        for (ServerPlayerEntity p : player.getServerWorld().getPlayers()) {
+            ServerPlayNetworking.send(p, ModPackets.SYNC_TRANSFORM_STATE, buf);
+        }
         ShapeShifterCurseFabric.LOGGER.info("Sent transform state to client: isTransforming=" + isTransforming);
     }
 
@@ -152,22 +158,17 @@ public class ModPacketsS2CServer {
         ServerPlayNetworking.send(player, ModPackets.UPDATE_DYNAMIC_FORM, buf);
     }
 
-    // 现在理论 单包32K Form数量无限   重新修改逻辑 **需要测试**
+    // 现在理论 单包32K Form数量无限
     public static void updateDynamicForm(ServerPlayerEntity player) {
         int MaxFormPerPacket = 63;  // 2M / 32K - 1
         HashMap<Identifier, PlayerFormDynamic> forms = RegPlayerForms.DumpDynamicPlayerForms();
         sendRemoveDynamicFormExcept(player);
-        int NowPacket = 0;
-        JsonObject jsonForms = new JsonObject();
-        for (Identifier formId : forms.keySet()) {
-            jsonForms.add(formId.toString(), forms.get(formId).save());
-            NowPacket ++;
-            if (NowPacket % MaxFormPerPacket == 0) {
-                sendUpdateDynamicForm(player, jsonForms);
-                jsonForms = new JsonObject();
+        for (int i = 0; i < forms.size(); i += MaxFormPerPacket) {
+            JsonObject jsonForms = new JsonObject();
+            for (int j = 0; j < MaxFormPerPacket && i + j < forms.size(); j++) {
+                Identifier formId = RegPlayerForms.dynamicPlayerForms.get(i + j);
+                jsonForms.add(formId.toString(), forms.get(formId).save());
             }
-        }
-        if (!jsonForms.isEmpty()) {
             sendUpdateDynamicForm(player, jsonForms);
         }
     }
@@ -223,4 +224,16 @@ public class ModPacketsS2CServer {
         PacketByteBuf buf = PacketByteBufs.create();
         ServerPlayNetworking.send(player, ModPackets.OPEN_PATRON_FORM_SELECT_MENU, buf);
     }
+
+    public static void sendActiveVirtualTotem(ServerPlayerEntity player, VirtualTotemPower virtualTotemPower) {
+        player.getServerWorld().getPlayers(near_player -> near_player.squaredDistanceTo(player) <= 64 * 64).forEach(
+                nearPlayer -> {
+                    PacketByteBuf buf = virtualTotemPower.create_packet_byte_buf();
+                    if (buf != null) {
+                        ServerPlayNetworking.send(nearPlayer, ModPackets.ACTIVE_VIRTUAL_TOTEM, buf);
+                    }
+                }
+        );
+    }
+
 }

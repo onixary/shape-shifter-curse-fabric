@@ -1,7 +1,7 @@
 {
     "type": "shape-shifter-curse:levitate",
     "ascent_speed": 0.3,
-    "max_ascend_duration": 30,
+    "max_ascend_duration": 80,
     "key": {
         "key": "key.jump",
         "continuous": true

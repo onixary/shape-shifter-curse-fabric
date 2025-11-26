@@ -1,0 +1,15 @@
+{
+    "powers": [
+        "shape-shifter-curse:form_anubis_wolf_0_scale",
+
+        "shape-shifter-curse:form_instinct_use_catalyst",
+        "shape-shifter-curse:form_instinct_use_golden_apple"
+    ],
+    "icon": {
+        "item": "minecraft:player_head"
+    },
+    "order": 0,
+    "unchoosable": true,
+    "impact": 0,
+    "loading_priority": 0
+}

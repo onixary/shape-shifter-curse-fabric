@@ -1,0 +1,15 @@
+{
+    "type": "shape-shifter-curse:keep_sneaking",
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "shape-shifter-curse:must_crawling"
+            },
+            {
+                "type": "origins:swimming",
+                "inverted": true
+            }
+        ]
+    }
+}

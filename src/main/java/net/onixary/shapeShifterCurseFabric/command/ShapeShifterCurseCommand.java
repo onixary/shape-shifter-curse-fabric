@@ -18,6 +18,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
+import net.onixary.shapeShifterCurseFabric.minion.MinionRegister;
+import net.onixary.shapeShifterCurseFabric.minion.mobs.WolfMinion;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
@@ -110,6 +112,9 @@ public class ShapeShifterCurseCommand {
                                                 )
                                         )
                                 )
+                        )
+                        .then(literal("dev_command").requires(cs -> cs.hasPermissionLevel(2))
+                                .executes(ShapeShifterCurseCommand::devCommand)
                         )
                         .then(literal("patron_info").requires(cs -> cs.hasPermissionLevel(0))
                                 .executes(ShapeShifterCurseCommand::logPatronInfo)
@@ -252,7 +257,8 @@ public class ShapeShifterCurseCommand {
             message += "Primary Color ARGB: " + getColorHexFormABGR(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getPrimaryColor()) + "\n";
             message += "Accent Color 1 ARGB: " + getColorHexFormABGR(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getAccentColor1()) + "\n";
             message += "Accent Color 2 ARGB: " + getColorHexFormABGR(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getAccentColor2()) + "\n";
-            message += "Eye Color ARGB: " + getColorHexFormABGR(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getEyeColor()) + "\n";
+            message += "Eye Color A ARGB: " + getColorHexFormABGR(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getEyeColorA()) + "\n";
+            message += "Eye Color B ARGB: " + getColorHexFormABGR(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getEyeColorB()) + "\n";
             message += "Primary Grey Reverse: " + RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getPrimaryGreyReverse() + "\n";
             message += "Accent 1 Grey Reverse: " + RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getAccent1GreyReverse() + "\n";
             message += "Accent 2 Grey Reverse: " + RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor().getAccent2GreyReverse() + "\n";
@@ -297,8 +303,9 @@ public class ShapeShifterCurseCommand {
             String primaryColorRGBA = StringArgumentType.getString(commandContext, "primaryColorRGBA");
             String accentColor1RGBA = StringArgumentType.getString(commandContext, "accentColor1RGBA");
             String accentColor2RGBA = StringArgumentType.getString(commandContext, "accentColor2RGBA");
-            String eyeColor = StringArgumentType.getString(commandContext, "eyeColor");
-            if (!RegPlayerSkinComponent.SKIN_SETTINGS.get(player).setFormColor(primaryColorRGBA, accentColor1RGBA, accentColor2RGBA, eyeColor, BoolArgumentType.getBool(commandContext, "primaryGreyReverse"), BoolArgumentType.getBool(commandContext, "accent1GreyReverse"), BoolArgumentType.getBool(commandContext, "accent2GreyReverse"))) {
+            String eyeColorA = StringArgumentType.getString(commandContext, "eyeColorA");
+            String eyeColorB = StringArgumentType.getString(commandContext, "eyeColorB");
+            if (!RegPlayerSkinComponent.SKIN_SETTINGS.get(player).setFormColor(primaryColorRGBA, accentColor1RGBA, accentColor2RGBA, eyeColorA, eyeColorB, BoolArgumentType.getBool(commandContext, "primaryGreyReverse"), BoolArgumentType.getBool(commandContext, "accent1GreyReverse"), BoolArgumentType.getBool(commandContext, "accent2GreyReverse"))) {
                 commandContext.getSource().sendError(Text.literal("Invalid color format!"));
                 return 0;
             }
@@ -366,5 +373,21 @@ public class ShapeShifterCurseCommand {
         world.setTimeOfDay(TargetTime);
         commandContext.getSource().sendFeedback(() -> {return Text.literal("World time set to " + TargetTime);}, false);
         return 1;
+    }
+
+    private static int devCommand(CommandContext<ServerCommandSource> commandContext) {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        ServerWorld world = commandContext.getSource().getWorld();
+        if (player == null) {
+            return 1;
+        }
+        try {
+            WolfMinion wolfMinion = MinionRegister.SpawnMinion(MinionRegister.WOLF_MINION, world, player.getBlockPos(), player);
+            wolfMinion.setMinionLevel(3);
+        } catch (Exception e) {
+            ShapeShifterCurseFabric.LOGGER.error("Error when spawn minion: ", e);
+            return 0;
+        }
+        return 0;
     }
 }

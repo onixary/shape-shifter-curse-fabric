@@ -39,17 +39,22 @@ public class RegPlayerForms {
     // FamiliarFox
     public static PlayerFormBase FAMILIAR_FOX_0 = registerPlayerForm(new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "familiar_fox_0")).setPhase(PlayerFormPhase.PHASE_0));
     public static PlayerFormBase FAMILIAR_FOX_1 = registerPlayerForm(new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "familiar_fox_1")).setPhase(PlayerFormPhase.PHASE_1));
-    public static PlayerFormBase FAMILIAR_FOX_2 = registerPlayerForm(new Form_Fox2(new Identifier(ShapeShifterCurseFabric.MOD_ID, "familiar_fox_2")).setPhase(PlayerFormPhase.PHASE_2));
-    public static PlayerFormBase FAMILIAR_FOX_3 = registerPlayerForm(new Form_FeralBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "familiar_fox_3")).setPhase(PlayerFormPhase.PHASE_3));
+    public static PlayerFormBase FAMILIAR_FOX_2 = registerPlayerForm(new Form_FamiliarFox2(new Identifier(ShapeShifterCurseFabric.MOD_ID, "familiar_fox_2")).setPhase(PlayerFormPhase.PHASE_2));
+    public static PlayerFormBase FAMILIAR_FOX_3 = registerPlayerForm(new Form_FamiliarFox3(new Identifier(ShapeShifterCurseFabric.MOD_ID, "familiar_fox_3")).setPhase(PlayerFormPhase.PHASE_3));
     // SnowFox
     public static PlayerFormBase SNOW_FOX_0 = registerPlayerForm(new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "snow_fox_0")).setPhase(PlayerFormPhase.PHASE_0));
     public static PlayerFormBase SNOW_FOX_1 = registerPlayerForm(new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "snow_fox_1")).setPhase(PlayerFormPhase.PHASE_1));
-    public static PlayerFormBase SNOW_FOX_2 = registerPlayerForm(new Form_Fox2(new Identifier(ShapeShifterCurseFabric.MOD_ID, "snow_fox_2")).setPhase(PlayerFormPhase.PHASE_2));
+    public static PlayerFormBase SNOW_FOX_2 = registerPlayerForm(new Form_SnowFox2(new Identifier(ShapeShifterCurseFabric.MOD_ID, "snow_fox_2")).setPhase(PlayerFormPhase.PHASE_2));
     public static PlayerFormBase SNOW_FOX_3 = registerPlayerForm(new Form_SnowFox3(new Identifier(ShapeShifterCurseFabric.MOD_ID, "snow_fox_3")).setPhase(PlayerFormPhase.PHASE_3));
+    // AnubisWolf
+    public static PlayerFormBase ANUBIS_WOLF_0 = registerPlayerForm(new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "anubis_wolf_0")).setPhase(PlayerFormPhase.PHASE_0));
+    public static PlayerFormBase ANUBIS_WOLF_1 = registerPlayerForm(new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "anubis_wolf_1")).setPhase(PlayerFormPhase.PHASE_1));
+    public static PlayerFormBase ANUBIS_WOLF_2 = registerPlayerForm(new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "anubis_wolf_2")).setPhase(PlayerFormPhase.PHASE_2));
+    public static PlayerFormBase ANUBIS_WOLF_3 = registerPlayerForm(new Form_AnubisWolf3(new Identifier(ShapeShifterCurseFabric.MOD_ID, "anubis_wolf_3")).setPhase(PlayerFormPhase.PHASE_3));
     // ALLAY_SP
     public static PlayerFormBase ALLAY_SP = registerPlayerForm(new Form_Allay(new Identifier(ShapeShifterCurseFabric.MOD_ID, "allay_sp")).setPhase(PlayerFormPhase.PHASE_SP));
     // FERAL_CAT_SP
-    public static PlayerFormBase FERAL_CAT_SP = registerPlayerForm(new Form_FeralBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "feral_cat_sp")).setPhase(PlayerFormPhase.PHASE_SP));
+    public static PlayerFormBase FERAL_CAT_SP = registerPlayerForm(new Form_FeralCatSP(new Identifier(ShapeShifterCurseFabric.MOD_ID, "feral_cat_sp")).setPhase(PlayerFormPhase.PHASE_SP));
 
     // Custom Form
     public static PlayerFormBase ALPHA_0 = registerPlayerForm(new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "alpha_0")).setPhase(PlayerFormPhase.PHASE_0).setIsCustomForm(true));
@@ -76,6 +81,7 @@ public class RegPlayerForms {
     public static PlayerFormGroup SNOW_FOX_FORM = registerPlayerFormGroup(new PlayerFormGroup(new Identifier(ShapeShifterCurseFabric.MOD_ID, "snow_fox_form")).addForm(SNOW_FOX_0, 0).addForm(SNOW_FOX_1, 1).addForm(SNOW_FOX_2, 2).addForm(SNOW_FOX_3, 3));
     public static PlayerFormGroup ALLAY_FORM = registerPlayerFormGroup(new PlayerFormGroup(new Identifier(ShapeShifterCurseFabric.MOD_ID, "allay_form")).addForm(ALLAY_SP, 5));
     public static PlayerFormGroup FERAL_CAT_FORM = registerPlayerFormGroup(new PlayerFormGroup(new Identifier(ShapeShifterCurseFabric.MOD_ID, "feral_cat_form")).addForm(FERAL_CAT_SP, 5));
+    public static PlayerFormGroup ANUBIS_WOLF_FORM = registerPlayerFormGroup(new PlayerFormGroup(new Identifier(ShapeShifterCurseFabric.MOD_ID, "anubis_wolf_form")).addForm(ANUBIS_WOLF_0, 0).addForm(ANUBIS_WOLF_1, 1).addForm(ANUBIS_WOLF_2, 2).addForm(ANUBIS_WOLF_3, 3));
 
     // Custom Form
     public static PlayerFormGroup ALPHA_FORM = registerPlayerFormGroup(new PlayerFormGroup(new Identifier(ShapeShifterCurseFabric.MOD_ID, "alpha_form")).addForm(ALPHA_0, 0).addForm(ALPHA_1, 1).addForm(ALPHA_2, 2));

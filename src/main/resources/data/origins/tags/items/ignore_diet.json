@@ -8,20 +8,66 @@
     "shape-shifter-curse:creative_inhibitor",
     "shape-shifter-curse:inhibitor",
     "shape-shifter-curse:powerful_catalyst",
-    "shape-shifter-curse:powerful_inhibitor"
-  ],
-  "optional": [
-    "farmersdelight:apple_cider",
-    "farmersdelight:bone_broth",
-    "farmersdelight:cabbage_rolls",
-    "farmersdelight:chocolate_pie",
-    "farmersdelight:glow_berry_custard",
-    "farmersdelight:hot_cocoa",
-    "farmersdelight:honey_cookie",
-    "farmersdelight:milk_bottle",
-    "farmersdelight:melon_juice",
-    "farmersdelight:melon_popsicle",
-    "farmersdelight:egg_sandwich",
-    "farmersdelight:fried_egg"
+    "shape-shifter-curse:powerful_inhibitor",
+    {
+      "id": "farmersdelight:apple_cider",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:bone_broth",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:cabbage_rolls",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:chocolate_pie",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:glow_berry_custard",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:hot_cocoa",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:honey_cookie",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:milk_bottle",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:melon_juice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:melon_popsicle",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:egg_sandwich",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:fried_egg",
+      "required": false
+    },
+    {
+      "id": "oceansdelight:honey_fried_kelp",
+      "required": false
+    },
+    {
+      "id": "nethersdelight:propelpearl",
+      "required": false
+    },
+    {
+      "id": "nethersdelight:magma_gelatin",
+      "required": false
+    }
   ]
 }

@@ -151,6 +151,10 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
             }
         });
     }
+    public void setPlayer(PlayerEntity player) {
+        this.entity = player;
+    }
+
     public void preRender$mixinOnly(PlayerEntity player) {
         this.entity = player;
         this.currentOverride = this.getPredicateResources(player);

@@ -24,7 +24,7 @@ public class FormTextureUtils {
     // onixary: 加入每个通道的覆盖强度overrideStrength的float参数，范围0.0~1.0
     // 一些形态原版的贴图过黑，转换为灰度后无法看出自定义颜色，
     // 应用后的灰度 = max(原灰度 + overrideStrength*255, 255)
-    public record ColorSetting(int primaryColor, int accentColor1, int accentColor2, int eyeColor
+    public record ColorSetting(int primaryColor, int accentColor1, int accentColor2, int eyeColorA, int eyeColorB
             , boolean primaryGreyReverse, boolean accent1GreyReverse, boolean accent2GreyReverse) {
         public int getPrimaryColor() {
             return this.primaryColor;
@@ -35,8 +35,11 @@ public class FormTextureUtils {
         public int getAccentColor2() {
             return this.accentColor2;
         }
-        public int getEyeColor() {
-            return this.eyeColor;
+        public int getEyeColorA() {
+            return this.eyeColorA;
+        }
+        public int getEyeColorB() {
+            return this.eyeColorB;
         }
         public boolean getPrimaryGreyReverse() {
             return this.primaryGreyReverse;
@@ -92,11 +95,12 @@ public class FormTextureUtils {
 
     public static int RGBA2ABGR(int color) {
         // Native Image 获取的像素为ABGR顺序 但是大众习惯为RGBA
-        int R = (color >> 24) & 0xFF;
-        int G = (color >> 16) & 0xFF;
-        int B = (color >> 8) & 0xFF;
-        int A = color & 0xFF;
-        return (A << 24) | (B << 16) | (G << 8) | R;
+        // int R = (color >> 24) & 0xFF;
+        // int G = (color >> 16) & 0xFF;
+        // int B = (color >> 8) & 0xFF;
+        // int A = color & 0xFF;
+        // return (A << 24) | (B << 16) | (G << 8) | R;
+        return (color << 24) | ((color << 8) & 0x00FF0000) | ((color >> 8) & 0x0000FF00) | (color >>> 24);
     }
 
     public static int RGB2ABGR(int color) {
@@ -110,15 +114,17 @@ public class FormTextureUtils {
     }
 
     public static int ABGR2RGBA(int color) {
-        int R = color & 0xFF;
-        int G = (color >> 8) & 0xFF;
-        int B = (color >> 16) & 0xFF;
-        int A = (color >> 24) & 0xFF;
-        return R << 24 | G << 16 | B << 8 | A;
+        // int R = color & 0xFF;
+        // int G = (color >> 8) & 0xFF;
+        // int B = (color >> 16) & 0xFF;
+        // int A = (color >> 24) & 0xFF;
+        // return R << 24 | G << 16 | B << 8 | A;
+        return (color << 24) | ((color << 8) & 0x00FF0000) | ((color >> 8) & 0x0000FF00) | (color >>> 24);
     }
 
     public static int ABGR2RGB(int color) {
-        return (ABGR2RGBA(color) >> 8) & 0x00FFFFFF;
+        // return (ABGR2RGBA(color) >> 8) & 0x00FFFFFF;
+        return ABGR2RGBA(color) >>> 8;
     }
 
     public static int ABGR2ARGB(int color) {
@@ -158,9 +164,9 @@ public class FormTextureUtils {
         // if(Mask <= 0) return ColorA;
         // if(Mask >= 255) return ColorB;
         return (ColorA & 0xFF000000) | // Alpha通道
-               ((((ColorA >> 16) & 0xFF) * Bytes) / 255 << 16) | // Red
-               ((((ColorA >> 8) & 0xFF) * Bytes) / 255 << 8) | // Green
-               (((ColorA & 0xFF) * Bytes) / 255); // Blue
+                ((((ColorA >> 16) & 0xFF) * Bytes) / 255 << 16) | // Red
+                ((((ColorA >> 8) & 0xFF) * Bytes) / 255 << 8) | // Green
+                (((ColorA & 0xFF) * Bytes) / 255); // Blue
     }
 
     public static int GreyScaleMul(int Color, float GreyScale) {
@@ -218,47 +224,68 @@ public class FormTextureUtils {
 
     public static int ProcessMaskChannel(int Color, int Mask, int ColorSetting, int AverageGreyScale, boolean ReverseGreyScale) {
         if (((ColorSetting >> 24) & 0xFF) == 0) return Color;
-        int GreyScaleAdd = ReverseGreyScale ? AverageGreyScale - getGreyScale(Color) : getGreyScale(Color) - AverageGreyScale;
-        Color = GreyScaleMul(ColorSetting | 0xFF000000, 1.0f + (float)GreyScaleAdd / 255.0f);
-        return ColorMulBytes(Color, Mask);
+        int ColorGreyScale = getGreyScale(Color);
+        int GreyScaleOffset = ReverseGreyScale ? AverageGreyScale - ColorGreyScale : ColorGreyScale - AverageGreyScale;
+        int ColorSettingGreyScale = getGreyScale(ColorSetting);
+        int TargetGreyScale = Math.min(255, Math.max(ColorSettingGreyScale + GreyScaleOffset, 0));
+        int ColorResult = GreyScaleMul(ColorSetting | 0xFF000000,  (float)TargetGreyScale / ColorSettingGreyScale);
+        return ColorMulBytes(ColorResult, Mask);
     }
 
-    public static int ProcessPixel(int Color, int Mask, ColorSetting colorSetting, Triple<Integer, Integer, Integer> MaskLayerAverageGreyScale) {
+    public static int ProcessPixel(int Color, int Mask, ColorSetting colorSetting, Triple<Integer, Integer, Integer> MaskLayerAverageGreyScale, boolean OnlyMultiply) {
         // ABGR顺序
-        // int A = (Mask >> 24);
 
-        // 检查Mask的Alpha通道是否在0-16范围内，如果是则使用eyeColor
-        int maskAlpha = Mask & 0xFF000000;
-        if (maskAlpha >= 0 && maskAlpha < 16) {
-            // 使用eyeColor替换颜色，但保留原始颜色的Alpha通道
-            if (((colorSetting.eyeColor >> 24) & 0xFF) == 0) {
-                return Color;
+        // 如果Mask为0 那么RGB通道都为0 并且也不是特殊像素
+        if (Mask == 0) return Color;
+
+        // int A = (Mask >> 24);
+        // Alpha: 1 -> eyeColorA | 2 -> eyeColorB 255 -> 非特殊像素 0 -> 无处理(防止一些软件默认像素透明度为0)
+        int maskAlpha = Mask >>> 24;
+        if (maskAlpha != 255) {
+            if (maskAlpha == 1) {
+                // 使用eyeColor替换颜色，但保留原始颜色的Alpha通道
+                if ((colorSetting.eyeColorA >>> 24) == 0) {
+                    return Color;
+                }
+                return (colorSetting.eyeColorA & 0x00FFFFFF) | (Color & 0xFF000000);
             }
-            return (colorSetting.eyeColor & 0x00FFFFFF) | (Color & 0xFF000000);
+            if (maskAlpha == 2) {
+                if ((colorSetting.eyeColorB >>> 24) == 0) {
+                    return Color;
+                }
+                return (colorSetting.eyeColorB & 0x00FFFFFF) | (Color & 0xFF000000);
+            }
         }
 
-        if (Mask == 0) return Color;
-        
         // 提取原始颜色的 alpha 值
         int B = (Mask >> 16) & 0xFF;
         if (B > 0) {
+            if (OnlyMultiply) {
+                return (ColorMulBytes(colorSetting.accentColor2, B) & 0x00FFFFFF) | (Color & 0xFF000000);
+            }
             int result = ProcessMaskChannel(Color, B, colorSetting.accentColor2, MaskLayerAverageGreyScale.getRight(), colorSetting.accent2GreyReverse);
             return (result & 0x00FFFFFF) | (Color & 0xFF000000);
         }
         int G = (Mask >> 8) & 0xFF;
         if (G > 0) {
+            if (OnlyMultiply) {
+                return (ColorMulBytes(colorSetting.accentColor1, G) & 0x00FFFFFF) | (Color & 0xFF000000);
+            }
             int result = ProcessMaskChannel(Color, G, colorSetting.accentColor1, MaskLayerAverageGreyScale.getMiddle(), colorSetting.accent1GreyReverse);
             return (result & 0x00FFFFFF) | (Color & 0xFF000000);
         }
         int R = Mask & 0xFF;
         if (R > 0) {
+            if (OnlyMultiply) {
+                return (ColorMulBytes(colorSetting.primaryColor, R) & 0x00FFFFFF) | (Color & 0xFF000000);
+            }
             int result = ProcessMaskChannel(Color, R, colorSetting.primaryColor, MaskLayerAverageGreyScale.getLeft(), colorSetting.primaryGreyReverse);
             return (result & 0x00FFFFFF) | (Color & 0xFF000000);
         }
         return Color;
     }
 
-    public static Identifier BakeTexture(Identifier texture, Identifier mask, ColorSetting colorSetting)  {
+    public static Identifier BakeTexture(Identifier texture, Identifier mask, ColorSetting colorSetting, boolean OnlyMultiply)  {
         if (texture == null || mask == null) return null;
         NativeImage textureImage = toNativeImage(texture);
         NativeImage maskImage = toNativeImage(mask);
@@ -267,7 +294,7 @@ public class FormTextureUtils {
         Triple<Integer, Integer, Integer> MaskLayerAverageGreyScale = getAverageGreyScale(textureImage, maskImage);
         for (int x = 0; x < textureWidth; x++) {
             for (int y = 0; y < textureHeight; y++) {
-                textureImage.setColor(x, y, ProcessPixel(textureImage.getColor(x, y), maskImage.getColor(x, y), colorSetting, MaskLayerAverageGreyScale));
+                textureImage.setColor(x, y, ProcessPixel(textureImage.getColor(x, y), maskImage.getColor(x, y), colorSetting, MaskLayerAverageGreyScale, OnlyMultiply));
             }
         }
         TextureManager TM = MinecraftClient.getInstance().getTextureManager();
@@ -280,7 +307,7 @@ public class FormTextureUtils {
         if (CachedTexture != null) {
             return CachedTexture;
         }
-        CachedTexture = BakeTexture(OriginFurModel.dTR(model.json), getColorMask_Texture(model), colorSetting);
+        CachedTexture = BakeTexture(OriginFurModel.dTR(model.json), getColorMask_Texture(model), colorSetting, IsModelUseMultiply(model));
         if (CachedTexture == null) {
             CachedTexture = OriginFurModel.dTR(model.json);
         }
@@ -294,7 +321,7 @@ public class FormTextureUtils {
             if (CachedTexture != null) {
                 return CachedTexture;
             }
-            CachedTexture = BakeTexture(Identifier.tryParse(JsonHelper.getString(model.json, "overlay", null)), getColorMask_OverlayTexture(model, Slim), colorSetting);
+            CachedTexture = BakeTexture(Identifier.tryParse(JsonHelper.getString(model.json, "overlay", null)), getColorMask_OverlayTexture(model, Slim), colorSetting, IsModelUseMultiply(model));
             if (CachedTexture == null) {
                 CachedTexture = Identifier.tryParse(JsonHelper.getString(model.json, "overlay", null));
             }
@@ -306,7 +333,7 @@ public class FormTextureUtils {
             if (CachedTexture != null) {
                 return CachedTexture;
             }
-            CachedTexture = BakeTexture(Identifier.tryParse(JsonHelper.getString(model.json, "overlay_slim", null)), getColorMask_OverlayTexture(model, Slim), colorSetting);
+            CachedTexture = BakeTexture(Identifier.tryParse(JsonHelper.getString(model.json, "overlay_slim", null)), getColorMask_OverlayTexture(model, Slim), colorSetting, IsModelUseMultiply(model));
             if (CachedTexture == null) {
                 CachedTexture = Identifier.tryParse(JsonHelper.getString(model.json, "overlay_slim", null));
             }
@@ -321,7 +348,7 @@ public class FormTextureUtils {
             if (CachedTexture != null) {
                 return CachedTexture;
             }
-            CachedTexture = BakeTexture(Identifier.tryParse(JsonHelper.getString(model.json, "emissive_overlay", null)), getColorMask_EmissiveTexture(model, Slim), colorSetting);
+            CachedTexture = BakeTexture(Identifier.tryParse(JsonHelper.getString(model.json, "emissive_overlay", null)), getColorMask_EmissiveTexture(model, Slim), colorSetting, IsModelUseMultiply(model));
             if (CachedTexture == null) {
                 CachedTexture = Identifier.tryParse(JsonHelper.getString(model.json, "emissive_overlay", null));
             }
@@ -332,12 +359,17 @@ public class FormTextureUtils {
             if (CachedTexture != null) {
                 return CachedTexture;
             }
-            CachedTexture = BakeTexture(Identifier.tryParse(JsonHelper.getString(model.json, "emissive_overlay_slim", null)), getColorMask_EmissiveTexture(model, Slim), colorSetting);
+            CachedTexture = BakeTexture(Identifier.tryParse(JsonHelper.getString(model.json, "emissive_overlay_slim", null)), getColorMask_EmissiveTexture(model, Slim), colorSetting, IsModelUseMultiply(model));
             if (CachedTexture == null) {
                 CachedTexture = Identifier.tryParse(JsonHelper.getString(model.json, "emissive_overlay_slim", null));
             }
             model.ColorMask_Baked_EmissiveTexture_Slim.put(colorSetting, CachedTexture);
             return CachedTexture;
         }
+    }
+
+    // 当Json中IsMultiplyMask为true时 直接使用正片叠底混合模式 否则使用灰度修正模式
+    private static boolean IsModelUseMultiply(OriginFurModel model) {
+        return JsonHelper.getBoolean(model.json, "IsMultiplyMask", false);
     }
 }

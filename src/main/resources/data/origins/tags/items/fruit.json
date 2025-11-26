@@ -5,18 +5,46 @@
     "minecraft:chorus_fruit",
     "minecraft:glow_berries",
     "minecraft:melon_slice",
-    "minecraft:sweet_berries"
-  ],
-  "optional": [
-    "farmersdelight:apple_pie",
-    "farmersdelight:apple_pie_slice",
-    "farmersdelight:fruit_salad",
-    "farmersdelight:glow_berry_custard",
-    "farmersdelight:melon_popsicle",
-    "farmersdelight:sweet_berry_cheesecake",
-    "farmersdelight:sweet_berry_cheesecake_slice",
-    "farmersdelight:sweet_berry_cookie",
-    "farmersdelight:tomato",
-    "farmersdelight:tomato_sauce"
+    "minecraft:sweet_berries",
+    {
+      "id": "farmersdelight:apple_pie",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:apple_pie_slice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:fruit_salad",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:glow_berry_custard",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:melon_popsicle",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:sweet_berry_cheesecake",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:sweet_berry_cheesecake_slice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:sweet_berry_cookie",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:tomato",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:tomato_sauce",
+      "required": false
+    }
   ]
 }

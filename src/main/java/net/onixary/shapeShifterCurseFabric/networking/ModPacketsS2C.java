@@ -3,12 +3,17 @@ package net.onixary.shapeShifterCurseFabric.networking;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.terraformersmc.modmenu.util.mod.Mod;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.FoodComponent;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
@@ -17,15 +22,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
+import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.custom_ui.PatronFormSelectScreen;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
+import net.onixary.shapeShifterCurseFabric.util.CustomEdibleUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -46,7 +54,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_FORM_CHANGE, ModPacketsS2C::receiveFormChange);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_TRANSFORM_STATE, ModPacketsS2C::receiveTransformState);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_BAT_ATTACH_STATE, ModPacketsS2C::receiveBatAttachState);
-        ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_EFFECT_ATTACHMENT, ModPacketsS2C::handleSyncEffectAttachment);
+        // ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_EFFECT_ATTACHMENT, ModPacketsS2C::handleSyncEffectAttachment);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_OVERLAY_EFFECT, ModPacketsS2C::receiveUpdateOverlayEffect);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_OVERLAY_FADE_EFFECT, ModPacketsS2C::receiveUpdateOverlayFadeEffect);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.TRANSFORM_COMPLETE_EFFECT, ModPacketsS2C::receiveTransformCompleteEffect);
@@ -56,10 +64,12 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_DYNAMIC_FORM, ModPacketsS2C::handleUpdateDynamicForm);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.REMOVE_DYNAMIC_FORM_EXCEPT, ModPacketsS2C::handleRemoveDynamicExcept);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.LOGIN_PACKET, ModPacketsS2C::onPlayerConnectServer);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.ACTIVE_VIRTUAL_TOTEM, ModPacketsS2C::receiveActiveVirtualTotem);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_PATRON_LEVEL, ModPacketsS2C::receiveUpdatePatronLevel);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.OPEN_PATRON_FORM_SELECT_MENU, ModPacketsS2C::receiveOpenPatronFormSelectMenu);
     }
 
+    /* 重构后不需要了 仅用于参考旧实现逻辑
     public static void handleSyncEffectAttachment(
 		MinecraftClient client,
 		ClientPlayNetworkHandler handler,
@@ -73,6 +83,7 @@ public class ModPacketsS2C {
             ClientEffectAttachmentCache.update(nbt);
         });
     }
+     */
 
     public static void receiveTransformEffect(MinecraftClient client, ClientPlayNetworkHandler handler,
                                               PacketByteBuf buf, PacketSender responseSender) {
@@ -124,6 +135,7 @@ public class ModPacketsS2C {
     // 接收变身状态同步包
     public static void receiveTransformState(MinecraftClient client, ClientPlayNetworkHandler handler,
                                            PacketByteBuf buf, PacketSender responseSender) {
+        UUID playerUuid = buf.readUuid();
         boolean isTransforming = buf.readBoolean();
         String fromForm = buf.readString();
         String toForm = buf.readString();
@@ -133,7 +145,7 @@ public class ModPacketsS2C {
                 ShapeShifterCurseFabric.LOGGER.info("Client received transform state: isTransforming=" + isTransforming);
                 // 更新客户端的变身状态
                 net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.updateTransformState(
-                    isTransforming, fromForm.isEmpty() ? null : fromForm, toForm.isEmpty() ? null : toForm);
+                        playerUuid, isTransforming, fromForm.isEmpty() ? null : fromForm, toForm.isEmpty() ? null : toForm);
             }
         });
     }
@@ -264,6 +276,8 @@ public class ModPacketsS2C {
     }
 
     public static void onPlayerConnectServer(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        // 还原FPM设置 或许可以通过注入式修改配置来减少此类Bug 比如在FPM读取offset时修改返回值
+        TransformManager.executeClientFirstPersonReset();
         new Thread(() -> {
             // 延时5s, 等待服务器component加载完成
             try {
@@ -276,8 +290,12 @@ public class ModPacketsS2C {
     }
 
     // 临时先放这里，以后再整理
-    public static void sendUpdateCustomSetting() {
+    public static void sendUpdateCustomSetting(boolean ForceUpdate) {
         PacketByteBuf buf = PacketByteBufs.create();
+        boolean autoSyncConfig = ShapeShifterCurseFabric.playerCustomConfig.auto_sync_config;
+        if (!ForceUpdate && !autoSyncConfig) {
+            return;
+        }
         int AGBRInt = 0;
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.keep_original_skin);
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.enable_form_color);
@@ -287,12 +305,34 @@ public class ModPacketsS2C {
         buf.writeInt(AGBRInt);
         AGBRInt = FormTextureUtils.ARGB2ABGR(ShapeShifterCurseFabric.playerCustomConfig.accentColor2Color);
         buf.writeInt(AGBRInt);
-        AGBRInt = FormTextureUtils.ARGB2ABGR(ShapeShifterCurseFabric.playerCustomConfig.eyeColor);
+        AGBRInt = FormTextureUtils.ARGB2ABGR(ShapeShifterCurseFabric.playerCustomConfig.eyeColorA);
+        buf.writeInt(AGBRInt);
+        AGBRInt = FormTextureUtils.ARGB2ABGR(ShapeShifterCurseFabric.playerCustomConfig.eyeColorB);
         buf.writeInt(AGBRInt);
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.primaryGreyReverse);
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.accent1GreyReverse);
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.accent2GreyReverse);
         ClientPlayNetworking.send(UPDATE_CUSTOM_SETTING, buf);
+    }
+
+    public static void sendUpdateCustomSetting() {
+        sendUpdateCustomSetting(false);
+    }
+
+    public static void receiveActiveVirtualTotem(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        // LivingEntity entity, int virtualTotemType, ItemStack totemStack
+        if (client.world == null) {
+            ShapeShifterCurseFabric.LOGGER.error("World is null when receiving active virtual totem packet");
+            return;
+        }
+        PlayerEntity playerEntity = client.world.getPlayerByUuid(buf.readUuid());
+        if (playerEntity == null) {
+            ShapeShifterCurseFabric.LOGGER.warn("Can't find player entity when receiving active virtual totem packet");
+            return;
+        }
+        int virtualTotemType = buf.readInt();
+        ItemStack totemStack = buf.readItemStack();
+        VirtualTotemPower.process_virtual_totem_type(playerEntity, virtualTotemType, totemStack);
     }
 
     public static void receiveUpdatePatronLevel(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {

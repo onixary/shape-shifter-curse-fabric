@@ -7,8 +7,8 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -20,6 +20,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
 import net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage;
+import net.onixary.shapeShifterCurseFabric.minion.MinionRegister;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
@@ -28,13 +29,11 @@ import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
-import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
+import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.TransformativeStatusInstance;
 import net.onixary.shapeShifterCurseFabric.team.MobTeamManager;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.cursedMoonData;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker.loadInstinct;
-import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.removeVisualEffects;
-import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.*;
 
 public class PlayerEventHandler {
     public static void register() {
@@ -94,6 +93,7 @@ public class PlayerEventHandler {
                 }
             });
 
+            /* 重构后不需要了 仅用于参考旧实现逻辑
             // load attachment
             boolean hasAttachment = loadCurrentAttachment(server.getOverworld(), player);
             if(!hasAttachment) {
@@ -102,7 +102,10 @@ public class PlayerEventHandler {
             else{
                 ShapeShifterCurseFabric.LOGGER.info("Attachment loaded ");
             }
-            ModPacketsS2CServer.sendSyncEffectAttachment(player, player.getAttached(EffectManager.EFFECT_ATTACHMENT));
+            ModPacketsS2CServer.sendSyncEffectAttachment(player, EffectManager.getOrCreateAttachment(player));
+             */
+            // 将 StatusEffectInstance 转换为 TransformativeStatusInstance
+            EffectManager.ReloadPlayerEffect(player);
 
             // load instinct
             InstinctManager.getServerWorld(server.getOverworld());
@@ -162,6 +165,9 @@ public class PlayerEventHandler {
 
             // update team
             //PlayerTeamHandler.updatePlayerTeam(player);
+
+            // 清空玩家召唤冷却
+            MinionRegister.ResetPlayerCoolDown(player);
         });
         // copy event
         ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
@@ -179,6 +185,7 @@ public class PlayerEventHandler {
             for (ServerPlayerEntity player : world.getPlayers()) {
                 FormAbilityManager.loadForm(player);
 
+                /* 重构后不需要了 仅用于参考旧实现逻辑
                 // load attachment
                 boolean hasAttachment = loadCurrentAttachment(server.getOverworld(), player);
                 if(!hasAttachment) {
@@ -187,7 +194,10 @@ public class PlayerEventHandler {
                 else{
                     ShapeShifterCurseFabric.LOGGER.info("Attachment loaded ");
                 }
-                ModPacketsS2CServer.sendSyncEffectAttachment(player, player.getAttached(EffectManager.EFFECT_ATTACHMENT));
+                ModPacketsS2CServer.sendSyncEffectAttachment(player, EffectManager.getOrCreateAttachment(player));
+                 */
+                // 将 StatusEffectInstance 转换为 TransformativeStatusInstance
+                EffectManager.ReloadPlayerEffect(player);
 
                 // load instinct
                 InstinctManager.getServerWorld(server.getOverworld());
@@ -233,12 +243,11 @@ public class PlayerEventHandler {
             }
         });
 
-        ServerTickEvents.END_SERVER_TICK.register(server -> {
-            JumpEventCondition.tick();
-        });
+        ServerTickEvents.END_SERVER_TICK.register(server -> JumpEventCondition.tick());
     }
 
     private static void copyTransformativeEffect(ServerPlayerEntity oldPlayer, ServerPlayerEntity newPlayer) {
+        /* 重构后不需要了 仅用于参考旧实现逻辑
         // transformative effect attachment
         PlayerEffectAttachment oldAttachment = oldPlayer.getAttached(EffectManager.EFFECT_ATTACHMENT);
         newPlayer.setAttached(EffectManager.EFFECT_ATTACHMENT, new PlayerEffectAttachment());
@@ -251,14 +260,26 @@ public class PlayerEventHandler {
         }
 
         // reapply potion effect
-        if (newAttachment.currentEffect != null && currentRegEffect != null) {
-            ShapeShifterCurseFabric.LOGGER.info("re-apply potion effect here");
+        // 从 oldAttachment 中获取要重新施加的效果
+        StatusEffect effectToApply = oldAttachment != null ? oldAttachment.currentEffect : null;
+
+        if (effectToApply != null) {
+            ShapeShifterCurseFabric.LOGGER.info("re-apply potion effect here: {}", effectToApply.getName());
+            // 我不建议在复制效果时先移除，除非有特殊视觉问题
             removeVisualEffects(newPlayer);
+
             newPlayer.addStatusEffect(new StatusEffectInstance(
-                    currentRegEffect,
+                    effectToApply,          // 使用从旧玩家获取的效果
                     newAttachment.remainingTicks
             ));
         }
+         */
+        TransformativeStatusInstance transformativeStatusInstance = EffectManager.getTransformativeEffect(oldPlayer);
+        if (transformativeStatusInstance == null) {
+            return;
+        }
+        EffectManager.clearTransformativeEffect(newPlayer);
+        newPlayer.addStatusEffect(transformativeStatusInstance);
     }
 
     private static void copyFormAndAbility(ServerPlayerEntity oldPlayer, ServerPlayerEntity newPlayer) {

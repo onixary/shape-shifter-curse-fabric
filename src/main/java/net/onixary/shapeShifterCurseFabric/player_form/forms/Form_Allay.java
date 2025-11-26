@@ -41,6 +41,7 @@ public class Form_Allay extends PlayerFormBase {
             case ANIM_FLY:
             case ANIM_JUMP:
             case ANIM_FALL:
+            case ANIM_SNEAK_FALL:
             case ANIM_SLOW_FALL:
                 return anim_flying;
 
@@ -61,7 +62,7 @@ public class Form_Allay extends PlayerFormBase {
         anim_sneak_walk = new AnimationHolder(new Identifier(MOD_ID, "allay_sp_sneaking_walk"), true);
         anim_digging = new AnimationHolder(new Identifier(MOD_ID, "allay_sp_digging"), true);
         anim_flying = new AnimationHolder(new Identifier(MOD_ID, "allay_sp_fly"), true);
-        anim_idle = new AnimationHolder(new Identifier(MOD_ID, "allay_sp_idle"), true, 1, 0);
-        anim_attack = new AnimationHolder(new Identifier(MOD_ID, "allay_sp_attack"), true, 1, 0);
+        anim_idle = new AnimationHolder(new Identifier(MOD_ID, "allay_sp_idle"), true);
+        anim_attack = new AnimationHolder(new Identifier(MOD_ID, "allay_sp_attack"), true);
     }
 }

@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.player_form_render;
 import dev.kosmx.playerAnim.api.TransformType;
 import dev.kosmx.playerAnim.api.layered.IAnimation;
 import dev.kosmx.playerAnim.core.util.Vec3f;
+import net.fabricmc.loader.api.FabricLoader;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import net.minecraft.client.MinecraftClient;
@@ -36,6 +37,8 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
     static float tailDragAmountVertical = 0.0F;
     static float tailDragAmountVerticalO;
     static float currentTailDragAmountVertical = 0.0F;
+
+    private static final boolean IS_FIRST_PERSON_MOD_LOADED = FabricLoader.getInstance().isModLoaded("firstperson");
 
     //static float wingFlapAmount = 0.0f;
 
@@ -88,6 +91,12 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
     @Override
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         if (entity instanceof AbstractClientPlayerEntity abstractClientPlayerEntity) {
+            boolean hasOutline = MinecraftClient.getInstance().hasOutline(abstractClientPlayerEntity);
+            if (MinecraftClient.getInstance().options.getPerspective().isFirstPerson() && IS_FIRST_PERSON_MOD_LOADED) {
+                if (abstractClientPlayerEntity == MinecraftClient.getInstance().player) {
+                    hasOutline = false;
+                }
+            }
             if (abstractClientPlayerEntity.isInvisible() || abstractClientPlayerEntity.isSpectator()) {return;}
             var iPEM = (IPlayerEntityMixins) abstractClientPlayerEntity;
             for (var fur : iPEM.originalFur$getCurrentFurs()) {
@@ -109,69 +118,14 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
                 matrixStack.push();
                 matrixStack.multiply(new Quaternionf().rotateX(180 * MathHelper.RADIANS_PER_DEGREE));
                 matrixStack.translate(0, -1.51f, 0);
-                //
-                m.resetBone("bipedHead");
-                m.resetBone("bipedBody");
-                m.resetBone("bipedLeftArm");
-                m.resetBone("bipedRightArm");
-                m.resetBone("bipedLeftLeg");
-                m.resetBone("bipedRightLeg");
-
-                m.setRotationForBone("bipedHead", ((IMojModelPart) (Object) eR.getModel().head).originfurs$getRotation());
-                m.translatePositionForBone("bipedHead", ((IMojModelPart) (Object) eR.getModel().head).originfurs$getPosition());
-                m.translatePositionForBone("bipedBody", ((IMojModelPart) (Object) eR.getModel().body).originfurs$getPosition());
-                m.translatePositionForBone("bipedLeftArm", ((IMojModelPart) (Object) eR.getModel().leftArm).originfurs$getPosition());
-                m.translatePositionForBone("bipedRightArm", ((IMojModelPart) (Object) eR.getModel().rightArm).originfurs$getPosition());
-                m.translatePositionForBone("bipedLeftLeg", ((IMojModelPart) (Object) eR.getModel().rightLeg).originfurs$getPosition());
-                m.translatePositionForBone("bipedRightLeg", ((IMojModelPart) (Object) eR.getModel().leftLeg).originfurs$getPosition());
-                m.translatePositionForBone("bipedLeftArm", new Vec3d(5, 2, 0));
-                m.translatePositionForBone("bipedRightArm", new Vec3d(-5, 2, 0));
-                m.translatePositionForBone("bipedLeftLeg", new Vec3d(-2, 12, 0));
-                m.translatePositionForBone("bipedRightLeg", new Vec3d(2, 12, 0));
                 matrixStack.translate(-0.5, -0.5, -0.5);
-                m.setRotationForBone("bipedBody", ((IMojModelPart) (Object) eR.getModel().body).originfurs$getRotation());
 
                 float targetDrag = MathHelper.lerp(tickDelta, tailDragAmountO, tailDragAmount);
                 // adjust tail drag back speed
                 updateTailDragAmount(targetDrag, 0.04F);
-                m.setRotationForTailBones(limbAngle, limbDistance, entity.age, currentTailDragAmount, tailDragAmountVertical);
-                m.setRotationForHeadTailBones(headYaw, entity.age, currentTailDragAmount, tailDragAmountVertical);
-                m.setRotationForWingBones(limbAngle, limbDistance, entity.age, tailDragAmountVertical);
-                tailDragAmountO = tailDragAmount;
+                // 原先在这里设置尾巴旋转 旋转完后才计算尾巴数据 所以把计算尾巴数据往后移了一下
 
-
-                tailDragAmount *= 0.75F;
-                // adjust tail drag curvature scale
-                tailDragAmount -= (float) (Math.toRadians((entity.bodyYaw - entity.prevBodyYaw)) * 0.55F);
-                // clamp tail drag curvature
-                tailDragAmount = MathHelper.clamp(tailDragAmount, -1.6F, 1.6F);
-
-                // 获取实体垂直速度（转换为角度变化量）
-                float verticalSpeed = (float) entity.getVelocity().y;
-                float targetVerticalDrag = MathHelper.clamp(verticalSpeed * 1.5f, -1.6f, 1.6f);
-
-                // 更新垂直拖拽量
-                float targetDragVertical = MathHelper.lerp(tickDelta, tailDragAmountVerticalO, tailDragAmountVertical);
-                updateVerticalTailDrag(targetDragVertical, 0.04F);
-
-                // 衰减和限制垂直拖拽量
-                tailDragAmountVertical *= 0.8F;
-                tailDragAmountVertical += targetVerticalDrag * 0.15F;
-                tailDragAmountVertical = MathHelper.clamp(tailDragAmountVertical, -1.6f, 1.6f);
-                tailDragAmountVerticalO = tailDragAmountVertical;
-
-                //updateWingFlapParams(entity);
-
-                m.invertRotForPart("bipedBody", false, true, false);
-                m.setRotationForBone("bipedLeftArm", ((IMojModelPart) (Object) eR.getModel().leftArm).originfurs$getRotation());
-                m.setRotationForBone("bipedRightArm", ((IMojModelPart) (Object) eR.getModel().rightArm).originfurs$getRotation());
-                m.setRotationForBone("bipedLeftLeg", ((IMojModelPart) (Object) eR.getModel().rightLeg).originfurs$getRotation());
-                m.setRotationForBone("bipedRightLeg", ((IMojModelPart) (Object) eR.getModel().leftLeg).originfurs$getRotation());
-                m.invertRotForPart("bipedHead", false, true, true);
-                m.invertRotForPart("bipedRightArm", false, true, true);
-                m.invertRotForPart("bipedLeftArm", false, true, true);
-                m.invertRotForPart("bipedRightLeg", false, true, true);
-                m.invertRotForPart("bipedLeftLeg", false, true, true);
+                ProcessModel(m, eR, entity, limbAngle, limbDistance, headYaw, headPitch);
 
                 // 用Core Shader渲染的尝试，但这玩意儿不兼容Iris，:(
                 // Core shader fur render implementation, but not capable with iris, :(
@@ -183,11 +137,73 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
                 // Core shader fur render implementation, but not capable with iris, :(
                 //RenderLayer myLayer2 = FurGradientRenderLayer.furGradientRemap.getRenderLayer(RenderLayer.getEntityTranslucentEmissive(m.getFullbrightTextureResource(a)));
                 //RenderLayer testFurLayer2 = FurColorGradientRenderLayer.getFurLayer(m.getFullbrightTextureResource(a), new Vector4f(1.0f, 1.0f ,1.0f, 1.0f), new Vector4f(0.8f, 0.8f, 0.8f, 1.0f));
-                fur.render(matrixStack, a, vertexConsumerProvider, RenderLayer.getEntityTranslucentEmissive(m.getFullbrightTextureResource(a)), null, Integer.MAX_VALUE - 1);                matrixStack.pop();
+                fur.render(matrixStack, a, vertexConsumerProvider, RenderLayer.getEntityTranslucentEmissive(m.getFullbrightTextureResource(a)), null, Integer.MAX_VALUE - 1);
+
+                if (hasOutline) {
+                    // 渲染模型后动作会还原 很神奇
+                    ProcessModel(m, eR, entity, limbAngle, limbDistance, headYaw, headPitch);
+                    fur.render(matrixStack, a, vertexConsumerProvider, RenderLayer.getOutline(m.getTextureResource(a)), vertexConsumerProvider.getBuffer(RenderLayer.getOutline(m.getTextureResource(a))), light);
+                }
+
+                matrixStack.pop();
+
+                // 计算尾巴数据
+                tailDragAmountO = tailDragAmount;
+                tailDragAmount *= 0.75F;
+                // adjust tail drag curvature scale
+                tailDragAmount -= (float) (Math.toRadians((entity.bodyYaw - entity.prevBodyYaw)) * 0.55F);
+                // clamp tail drag curvature
+                tailDragAmount = MathHelper.clamp(tailDragAmount, -1.6F, 1.6F);
+                // 获取实体垂直速度（转换为角度变化量）
+                float verticalSpeed = (float) entity.getVelocity().y;
+                float targetVerticalDrag = MathHelper.clamp(verticalSpeed * 1.5f, -1.6f, 1.6f);
+                // 更新垂直拖拽量
+                float targetDragVertical = MathHelper.lerp(tickDelta, tailDragAmountVerticalO, tailDragAmountVertical);
+                updateVerticalTailDrag(targetDragVertical, 0.04F);
+                // 衰减和限制垂直拖拽量
+                tailDragAmountVertical *= 0.8F;
+                tailDragAmountVertical += targetVerticalDrag * 0.15F;
+                tailDragAmountVertical = MathHelper.clamp(tailDragAmountVertical, -1.6f, 1.6f);
+                tailDragAmountVerticalO = tailDragAmountVertical;
             }
-
-
         }
     }
 
+    // 将修改模型提取出来 不知道为什么渲染模型和渲染模型发光会冲突(模型旋转会重置)
+    private void ProcessModel(OriginFurModel m, PlayerEntityRenderer eR, T entity, float limbAngle, float limbDistance, float headYaw, float headPitch) {
+        m.resetBone("bipedHead");
+        m.resetBone("bipedBody");
+        m.resetBone("bipedLeftArm");
+        m.resetBone("bipedRightArm");
+        m.resetBone("bipedLeftLeg");
+        m.resetBone("bipedRightLeg");
+
+        m.setRotationForBone("bipedHead", ((IMojModelPart) (Object) eR.getModel().head).originfurs$getRotation());
+        m.translatePositionForBone("bipedHead", ((IMojModelPart) (Object) eR.getModel().head).originfurs$getPosition());
+        m.translatePositionForBone("bipedBody", ((IMojModelPart) (Object) eR.getModel().body).originfurs$getPosition());
+        m.translatePositionForBone("bipedLeftArm", ((IMojModelPart) (Object) eR.getModel().leftArm).originfurs$getPosition());
+        m.translatePositionForBone("bipedRightArm", ((IMojModelPart) (Object) eR.getModel().rightArm).originfurs$getPosition());
+        m.translatePositionForBone("bipedLeftLeg", ((IMojModelPart) (Object) eR.getModel().rightLeg).originfurs$getPosition());
+        m.translatePositionForBone("bipedRightLeg", ((IMojModelPart) (Object) eR.getModel().leftLeg).originfurs$getPosition());
+        m.translatePositionForBone("bipedLeftArm", new Vec3d(5, 2, 0));
+        m.translatePositionForBone("bipedRightArm", new Vec3d(-5, 2, 0));
+        m.translatePositionForBone("bipedLeftLeg", new Vec3d(-2, 12, 0));
+        m.translatePositionForBone("bipedRightLeg", new Vec3d(2, 12, 0));
+        m.setRotationForBone("bipedBody", ((IMojModelPart) (Object) eR.getModel().body).originfurs$getRotation());
+
+        m.setRotationForTailBones(limbAngle, limbDistance, entity.age, currentTailDragAmount, tailDragAmountVertical);
+        m.setRotationForHeadTailBones(headYaw, entity.age, currentTailDragAmount, tailDragAmountVertical);
+        m.setRotationForWingBones(limbAngle, limbDistance, entity.age, tailDragAmountVertical);
+
+        m.invertRotForPart("bipedBody", false, true, false);
+        m.setRotationForBone("bipedLeftArm", ((IMojModelPart) (Object) eR.getModel().leftArm).originfurs$getRotation());
+        m.setRotationForBone("bipedRightArm", ((IMojModelPart) (Object) eR.getModel().rightArm).originfurs$getRotation());
+        m.setRotationForBone("bipedLeftLeg", ((IMojModelPart) (Object) eR.getModel().rightLeg).originfurs$getRotation());
+        m.setRotationForBone("bipedRightLeg", ((IMojModelPart) (Object) eR.getModel().leftLeg).originfurs$getRotation());
+        m.invertRotForPart("bipedHead", false, true, true);
+        m.invertRotForPart("bipedRightArm", false, true, true);
+        m.invertRotForPart("bipedLeftArm", false, true, true);
+        m.invertRotForPart("bipedRightLeg", false, true, true);
+        m.invertRotForPart("bipedLeftLeg", false, true, true);
+    }
 }

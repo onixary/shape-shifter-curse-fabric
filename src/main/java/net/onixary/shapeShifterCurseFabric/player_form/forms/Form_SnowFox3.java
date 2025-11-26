@@ -16,6 +16,7 @@ public class Form_SnowFox3 extends PlayerFormBase {
 
     private static AnimationHolder anim_idle = AnimationHolder.EMPTY;
     private static AnimationHolder anim_sneak_idle = AnimationHolder.EMPTY;
+    private static AnimationHolder anim_ride = AnimationHolder.EMPTY;
     private static AnimationHolder anim_walk = AnimationHolder.EMPTY;
     private static AnimationHolder anim_sneak_walk = AnimationHolder.EMPTY;
     private static AnimationHolder anim_run = AnimationHolder.EMPTY;
@@ -35,9 +36,10 @@ public class Form_SnowFox3 extends PlayerFormBase {
             case ANIM_IDLE:
                 return anim_idle;
             case ANIM_SNEAK_IDLE:
-            case ANIM_BOAT_IDLE:
-            case ANIM_RIDE_IDLE:
+            case ANIM_RIDE_VEHICLE_IDLE:
                 return anim_sneak_idle;
+            case ANIM_RIDE_IDLE:
+                return anim_ride;
             case ANIM_WALK:
                 return anim_walk;
             case ANIM_SNEAK_WALK:
@@ -58,6 +60,7 @@ public class Form_SnowFox3 extends PlayerFormBase {
             case ANIM_CLIMB:
                 return anim_climb;
             case ANIM_FALL:
+            case ANIM_SNEAK_FALL:
                 return anim_fall;
             case ANIM_SLEEP:
                 return anim_sleep;
@@ -77,6 +80,7 @@ public class Form_SnowFox3 extends PlayerFormBase {
     public void Anim_registerAnims() {
         anim_idle = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_idle"), true);
         anim_sneak_idle = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sneak_idle"), true);
+        anim_ride = new AnimationHolder(new Identifier(MOD_ID, "snow_fox_3_riding"), true);
         anim_walk = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_walk"), true, 1.2f, 2);
         anim_sneak_walk = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sneak_walk"), true);
         anim_run = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_run"), true, 2.3f);

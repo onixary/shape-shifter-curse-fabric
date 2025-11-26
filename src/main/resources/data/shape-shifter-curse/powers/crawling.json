@@ -1,3 +1,6 @@
 {
-    "type": "shape-shifter-curse:crawling"
+    "type": "shape-shifter-curse:crawling",
+    "condition": {
+        "type": "apoli:sneaking"
+    }
 }

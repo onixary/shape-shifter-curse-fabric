@@ -3,9 +3,18 @@
     "entity_action": {
         "type": "origins:drop_inventory",
         "item_condition": {
-            "type": "origins:harvest_level",
-            "comparison": ">",
-            "compare_to": 1
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:harvest_level",
+                    "comparison": ">",
+                    "compare_to": 1
+                },
+                {
+                    "type": "shape-shifter-curse:is_morph_scale_item",
+                    "inverted": true
+                }
+            ]
         },
         "slots": [
             "weapon.mainhand"

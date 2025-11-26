@@ -1,9 +1,18 @@
 {
     "type": "origins:prevent_item_use",
     "item_condition": {
-        "type": "origins:ingredient",
-        "ingredient": {
-            "tag": "origins:ranged_weapons"
-        }
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:ingredient",
+                "ingredient": {
+                    "tag": "origins:ranged_weapons"
+                }
+            },
+            {
+                "type": "shape-shifter-curse:is_morph_scale_item",
+                "inverted": true
+            }
+        ]
     }
 }
