@@ -48,7 +48,7 @@
                 "type": "origins:target_condition",
                 "condition": {
                     "type": "origins:in_tag",
-                    "tag": "origins:familiar_sorcery_target"
+                    "tag": "shape-shifter-curse:familiar_sorcery_target"
                 }
             },
             {

@@ -45,7 +45,7 @@
                 "type": "origins:target_condition",
                 "condition": {
                     "type": "origins:in_tag",
-                    "tag": "origins:familiar_illager_target"
+                    "tag": "shape-shifter-curse:familiar_illager_target"
                 }
             },
             {

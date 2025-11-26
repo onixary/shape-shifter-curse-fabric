@@ -126,7 +126,8 @@ public class ModPacketsC2S {
         int primaryColor = packetByteBuf.readInt();
         int accentColor1Color = packetByteBuf.readInt();
         int accentColor2Color = packetByteBuf.readInt();
-        int eyeColor = packetByteBuf.readInt();
+        int eyeColorA = packetByteBuf.readInt();
+        int eyeColorB = packetByteBuf.readInt();
         boolean primaryGreyReverse = packetByteBuf.readBoolean();
         boolean accent1GreyReverse = packetByteBuf.readBoolean();
         boolean accent2GreyReverse = packetByteBuf.readBoolean();
@@ -135,7 +136,7 @@ public class ModPacketsC2S {
                 PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(playerEntity);
                 component.setKeepOriginalSkin(keepOriginalSkin);
                 component.setEnableFormColor(enableFormColor);
-                component.setFormColor(new FormTextureUtils.ColorSetting(primaryColor, accentColor1Color, accentColor2Color, eyeColor, primaryGreyReverse, accent1GreyReverse, accent2GreyReverse));
+                component.setFormColor(new FormTextureUtils.ColorSetting(primaryColor, accentColor1Color, accentColor2Color, eyeColorA, eyeColorB, primaryGreyReverse, accent1GreyReverse, accent2GreyReverse));
                 RegPlayerSkinComponent.SKIN_SETTINGS.sync(playerEntity);
             }
             catch (Exception e){

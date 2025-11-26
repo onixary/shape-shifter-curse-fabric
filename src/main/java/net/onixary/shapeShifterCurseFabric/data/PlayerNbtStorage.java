@@ -11,8 +11,6 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormCompone
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.PlayerInstinctComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent;
-import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
-import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -62,6 +60,7 @@ public class PlayerNbtStorage {
         }
     }
 
+    /* 重构后不需要了 仅用于参考旧实现逻辑
     public static void saveAttachment(ServerWorld world, String playerId, PlayerEffectAttachment attachment) {
         try {
             Path worldSaveDir = getNewWorldSaveDir(world);
@@ -89,6 +88,7 @@ public class PlayerNbtStorage {
             return null;
         }
     }
+     */
 
     public static void savePlayerFormComponent(ServerWorld world, String playerId, PlayerFormComponent component) {
         try {
@@ -166,10 +166,12 @@ public class PlayerNbtStorage {
         FormAbilityManager.saveForm(player);
         PlayerNbtStorage.savePlayerFormComponent(world, player.getUuid().toString(),
                 RegPlayerFormComponent.PLAYER_FORM.get(player));
+        /* 重构后不需要了 仅用于参考旧实现逻辑
         PlayerEffectAttachment attachment = player.getAttached(EffectManager.EFFECT_ATTACHMENT);
         if (attachment != null) {
             PlayerNbtStorage.saveAttachment(world, player.getUuid().toString(),attachment);
         }
+         */
         PlayerInstinctComponent comp = player.getComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
         savePlayerInstinctComponent(world, player.getUuid().toString(), comp);
     }

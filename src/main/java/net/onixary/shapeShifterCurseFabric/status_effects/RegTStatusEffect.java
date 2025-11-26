@@ -22,6 +22,7 @@ public class RegTStatusEffect {
     public static final BaseTransformativeStatusEffect TO_OCELOT_0_EFFECT = register("to_ocelot_0_effect", new TransformativeStatus(RegPlayerForms.OCELOT_0));
     public static final BaseTransformativeStatusEffect TO_FAMILIAR_FOX_0_EFFECT = register("to_familiar_fox_0_effect", new TransformativeStatus(RegPlayerForms.FAMILIAR_FOX_0));
     public static final BaseTransformativeStatusEffect TO_SNOW_FOX_0_EFFECT = register("to_snow_fox_0_effect", new TransformativeStatus(RegPlayerForms.SNOW_FOX_0));
+    public static final BaseTransformativeStatusEffect TO_ANUBIS_WOLF_0_EFFECT = register("to_anubis_wolf_0_effect", new TransformativeStatus(RegPlayerForms.ANUBIS_WOLF_0));
     public static final BaseTransformativeStatusEffect TO_ALLAY_SP_EFFECT = register("to_allay_sp_effect", new TransformativeStatus(RegPlayerForms.ALLAY_SP));
     public static final BaseTransformativeStatusEffect TO_FERAL_CAT_SP_EFFECT = register("to_feral_cat_sp_effect", new TransformativeStatus(RegPlayerForms.FERAL_CAT_SP));
     // empty custom forms
@@ -45,6 +46,7 @@ public class RegTStatusEffect {
         return Registry.register(Registries.STATUS_EFFECT, path, effect);
     }
 
+    /* 使用EffectManager.hasTransformativeEffect(PlayerEntity)代替
     public static boolean hasAnyEffect(PlayerEntity player) {
         // is player has any transformative effect
         for (Identifier id : TRANSFORMATIVE_STATUS_EFFECTS) {
@@ -54,13 +56,16 @@ public class RegTStatusEffect {
         }
         return false;
     }
+     */
 
+    /* 使用EffectManager.clearTransformativeEffect(PlayerEntity)代替
     public static void removeVisualEffects(PlayerEntity player) {
         // remove all transformative effects potion icon
         for (Identifier id : TRANSFORMATIVE_STATUS_EFFECTS) {
             player.removeStatusEffect(Registries.STATUS_EFFECT.get(id));
         }
     }
+     */
 
     public static void initialize() {}
 }

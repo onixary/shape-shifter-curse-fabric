@@ -22,8 +22,8 @@ import static net.onixary.shapeShifterCurseFabric.player_form.transform.Transfor
 
 public class InstinctTicker {
     public static float currentInstinctValue = 0.0f;
-    public static boolean showInstinctBar = false;
-    public static boolean isInstinctLock = false;
+    // public static boolean showInstinctBar = false;
+    // public static boolean isInstinctLock = false;
     public static boolean isUnderCursedMoon = false;
     public static boolean isPausing = false;
 
@@ -47,7 +47,7 @@ public class InstinctTicker {
         RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.sync(player);
     }
 
-    public static void tick(PlayerEntity player) {
+    public static void tick(ServerPlayerEntity player) {
         PlayerInstinctComponent comp = player.getComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
 
         if(CursedMoon.isCursedMoon(player.getWorld()) && CursedMoon.isNight()){
@@ -120,9 +120,9 @@ public class InstinctTicker {
     private static void judgeInstinctState(PlayerEntity player, PlayerInstinctComponent comp){
         // 判断当前状态，供进度条使用
         // Judge the current state for the progress bar
-        PlayerFormBase form = getForm(player);
-        PlayerFormPhase currentPhase = form.getPhase();
-        showInstinctBar = !(currentPhase == PlayerFormPhase.PHASE_CLEAR || currentPhase == PlayerFormPhase.PHASE_3);
+        // PlayerFormBase form = getForm(player);
+        // PlayerFormPhase currentPhase = form.getPhase();
+        // showInstinctBar = !(currentPhase == PlayerFormPhase.PHASE_CLEAR || currentPhase == PlayerFormPhase.PHASE_3);
 
         float baseRate = judgeInstinctGrowRate(player);
         if(comp.currentInstinctRate > baseRate){
@@ -138,17 +138,17 @@ public class InstinctTicker {
             comp.isInstinctDecreasing = false;
         }
 
-        if(getForm(player).FormIndex < 2){
-            if(isUnderCursedMoon){
-                isInstinctLock = true;
-            }
-            else{
-                isInstinctLock = false;
-            }
-        }
-        else{
-            isInstinctLock = true;
-        }
+        // if(getForm(player).FormIndex < 2){
+        //     if(isUnderCursedMoon){
+        //         isInstinctLock = true;
+        //     }
+        //     else{
+        //         isInstinctLock = false;
+        //     }
+        // }
+        // else{
+        //     isInstinctLock = true;
+        // }
     }
 
     private static void processImmediateEffects(PlayerInstinctComponent comp) {
@@ -178,7 +178,7 @@ public class InstinctTicker {
         return rate;
     }
 
-    private static void checkThreshold(PlayerEntity player, PlayerInstinctComponent comp) {
+    private static void checkThreshold(ServerPlayerEntity player, PlayerInstinctComponent comp) {
         if (comp.instinctValue >= StaticParams.INSTINCT_MAX) {
             // 这里放置满instinct时要触发的逻辑
             // Here is the logic to be triggered when the instinct is full

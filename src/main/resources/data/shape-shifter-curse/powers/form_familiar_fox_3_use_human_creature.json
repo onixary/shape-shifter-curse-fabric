@@ -49,8 +49,16 @@
                 "type": "origins:target_condition",
                 "condition": {
                     "type": "origins:in_tag",
-                    "tag": "origins:familiar_human_target"
+                    "tag": "shape-shifter-curse:familiar_human_target"
                 }
+            },
+            {
+                "type": "origins:target_condition",
+                "condition": {
+                    "type": "origins:in_tag",
+                    "tag": "shape-shifter-curse:familiar_human_onlyhand_blacklist"
+                },
+                "inverted": true
             },
             {
                 "type": "origins:actor_condition",
@@ -59,6 +67,13 @@
                     "resource": "shape-shifter-curse:form_familiar_fox_use_entity_cooldown",
                     "comparison": "<",
                     "compare_to": 1
+                }
+            },
+            {
+                "type": "origins:actor_condition",
+                "condition": {
+                    "type": "origins:sneaking",
+                    "inverted": true
                 }
             }
         ]

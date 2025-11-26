@@ -98,10 +98,10 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
             }
             var eRA = (IPlayerEntityMixins) EntityRender;
             var acc = (ModelRootAccessor) EntityRender.getModel();
-            OriginFurModel m = (OriginFurModel) fur.getGeoModel();
-            m.preprocess(origin, EntityRender, eRA, acc, player);
+            OFModel.preprocess(origin, EntityRender, eRA, acc, player);
             GeoBone geoBone = OptionalGeoBone.get();
             fur.setPlayer(player);
+            OFModel.setPlayer(player);
             matrices.push();
             matrices.multiply(new Quaternionf().rotateX(180 * MathHelper.RADIANS_PER_DEGREE));
             matrices.translate(0, -1.51f, 0);

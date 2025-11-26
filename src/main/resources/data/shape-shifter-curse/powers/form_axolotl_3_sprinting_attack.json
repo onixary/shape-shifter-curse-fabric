@@ -5,8 +5,7 @@
         "actions": [
             {
                 "type": "origins:add_velocity",
-                "z": 4.0,
-                "y": 8.0
+                "z": 4.0
             },
             {
                 "type": "origins:target_action",
@@ -84,8 +83,17 @@
         }
     },
     "damage_condition": {
-        "type": "origins:in_tag",
-        "tag": "minecraft:is_explosion",
+        "type": "origins:or",
+        "conditions": [
+            {
+                "type": "origins:in_tag",
+                "tag": "minecraft:is_explosion"
+            },
+            {
+                "type": "origins:in_tag",
+                "tag": "shape-shifter-curse:is_thorns"
+            }
+        ],
         "inverted": true
     }
 }

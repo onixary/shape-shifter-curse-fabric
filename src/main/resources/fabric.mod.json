@@ -34,7 +34,8 @@
       "net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents",
       "net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent",
       "net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent",
-      "net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent"
+      "net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent",
+      "net.onixary.shapeShifterCurseFabric.minion.RegPlayerMinionComponent"
     ],
     "calio:ordered-resource-listener": [
       "net.onixary.shapeShifterCurseFabric.integration.origins.Origins"
@@ -54,7 +55,8 @@
       "origins:origin",
       "shape-shifter-curse:player_form",
       "shape-shifter-curse:player_instinct_component",
-      "shape-shifter-curse:skin_settings"
+      "shape-shifter-curse:skin_settings",
+      "shape-shifter-curse:player_minion_data"
     ]
   },
 
@@ -63,20 +65,13 @@
     "fabricloader": ">=0.12.3",
     "fabric": ">=0.83.0",
     "minecraft": "1.20.1",
-    "apoli": ">=2.9.0",
-    "calio": ">=1.11.0",
-    "playerabilitylib": ">=1.3.0",
-    "cardinal-components-base": ">=3.0.0",
-    "cardinal-components-entity": ">=3.0.0",
-    "cloth-config2": ">=5.0.0",
-    "azurelib": ">=3.0.0",
+    "azurelib": "3.0.x",
     "pehkui": ">=3.7.8",
-    "forgeconfigapiport": ">=8.0.0",
     "satin": ">=1.14.0"
   },
   "breaks": {
     "origins": ">0.0.0",
-    "optifabric": "<=1.11.18",
+    "optifabric": "*",
     "identity": "<1.14.2-beta"
   },
   "recommends": {

@@ -12,13 +12,13 @@ public class MorphscaleArmorMaterial  implements ArmorMaterial {
     public static final MorphscaleArmorMaterial INSTANCE = new MorphscaleArmorMaterial();
 
     private static final int[] BASE_DURABILITY = new int[] {13, 15, 16, 11};
-    private static final int[] PROTECTION_VALUES = new int[] {2, 4, 6, 1};
+    private static final int[] PROTECTION_VALUES = new int[] {2, 6, 7, 2};
 
     @Override
     public int getDurability(ArmorItem.Type type) {
         // Replace this multiplier by a constant value for the durability of the armor.
         // For reference, diamond uses 33 for all armor pieces, whilst leather uses 5.
-        int DURABILITY_MULTIPLIER = 24;
+        int DURABILITY_MULTIPLIER = 33;
         return switch (type) {
             case BOOTS -> BASE_DURABILITY[0] * DURABILITY_MULTIPLIER;
             case LEGGINGS -> BASE_DURABILITY[1] * DURABILITY_MULTIPLIER;

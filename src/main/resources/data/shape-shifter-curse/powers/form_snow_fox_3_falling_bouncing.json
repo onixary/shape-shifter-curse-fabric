@@ -16,6 +16,10 @@
                 "type": "origins:fall_distance",
                 "comparison": ">=",
                 "compare_to": 0.5
+            },
+            {
+                "type": "origins:fall_flying",
+                "inverted": true
             }
         ]
     },

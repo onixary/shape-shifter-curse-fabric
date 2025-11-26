@@ -32,6 +32,7 @@ public class Form_Axolotl3 extends PlayerFormBase {
             case ANIM_FALL:
                 return anim_jump;
             case ANIM_SNEAK_JUMP:
+            case ANIM_SNEAK_RUSH_JUMP:
                 return anim_crawling_jump;
             case ANIM_SNEAK_FALL:
                 return anim_crawling_idle;

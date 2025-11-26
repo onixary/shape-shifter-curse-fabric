@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:armor_stand",
+    "minecraft:item_frame",
+    "minecraft:glow_item_frame",
+    "minecraft:painting",
+    "minecraft:item",
+    "minecraft:experience_orb"
+  ]
+}

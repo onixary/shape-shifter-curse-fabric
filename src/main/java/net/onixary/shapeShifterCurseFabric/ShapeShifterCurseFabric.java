@@ -28,12 +28,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalEntityActions;
-import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalEntityConditions;
-import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalPowers;
-import net.onixary.shapeShifterCurseFabric.additional_power.BatAttachEventHandler;
+import net.onixary.shapeShifterCurseFabric.additional_power.*;
 import net.onixary.shapeShifterCurseFabric.advancement.*;
 import net.onixary.shapeShifterCurseFabric.command.CustomFormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.FormArgumentType;
@@ -42,14 +38,15 @@ import net.onixary.shapeShifterCurseFabric.config.ClientConfig;
 import net.onixary.shapeShifterCurseFabric.config.CommonConfig;
 import net.onixary.shapeShifterCurseFabric.config.PlayerCustomConfig;
 import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
-import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntitySpawnEgg;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntity;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntitySpawnEgg;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.TransformativeEntitySpawning;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
+import net.onixary.shapeShifterCurseFabric.minion.MinionRegister;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationTransform;
@@ -66,7 +63,6 @@ import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusPotionEffect
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 import net.onixary.shapeShifterCurseFabric.util.PlayerEventHandler;
-import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
 import net.onixary.shapeShifterCurseFabric.util.TickManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -184,8 +180,12 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         registerAnimations();
 
         AdditionalEntityConditions.register();
+        AdditionalItemCondition.register();
         AdditionalPowers.register();
         AdditionalEntityActions.register();
+
+        // 注册召唤物属性
+        MinionRegister.register();
 
         // 注册配置文件
         AutoConfig.register(PlayerCustomConfig.class, Toml4jConfigSerializer::new);  // 客户端配置
@@ -216,23 +216,19 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         });
         // 获取动态Form(DataPack)
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new FormDataPackReloadListener());
-        ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, resourceManager, success) -> {
-            server.getPlayerManager().getPlayerList().forEach((player) -> {
-                ModPacketsS2CServer.updateDynamicForm(player);
-                if (!player.getComponent(RegPlayerFormComponent.PLAYER_FORM).isCurrentFormExist()) {
-                    FormAbilityManager.applyForm(player, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
-                }
-            });
-        });
+        ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, resourceManager, success) -> server.getPlayerManager().getPlayerList().forEach((player) -> {
+            ModPacketsS2CServer.updateDynamicForm(player);
+            if (!player.getComponent(RegPlayerFormComponent.PLAYER_FORM).isCurrentFormExist()) {
+                FormAbilityManager.applyForm(player, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
+            }
+        }));
         initLocalDataStorage();
 
         // Reg origins content
 
         // do not reset effect when player respawn or enter hell
 
-        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
-            ShapeShifterCurseCommand.register(dispatcher);
-        });
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> ShapeShifterCurseCommand.register(dispatcher));
         ArgumentTypeRegistry.registerArgumentType(
                 Identifier.of(MOD_ID, "form_argument_type"),
                 FormArgumentType.class,
@@ -247,7 +243,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
             PlayerEntity player = handler.player;
             LOGGER.info("Player disconnect, save attachment");
-            saveCurrentAttachment(server.getOverworld(), player);
+            // saveCurrentAttachment(server.getOverworld(), player);
             saveForm(player);
             saveInstinctComp(player);
             // save cursed moon data
@@ -258,13 +254,13 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         ServerTickEvents.END_SERVER_TICK.register(this::onPlayerServerTick);
         EntitySleepEvents.STOP_SLEEPING.register((entity, world) -> {
             if (entity instanceof PlayerEntity) {
-                onPlayerEndSleeping(entity, world);
+                onPlayerEndSleeping(entity);
             }
         });
         // allow sleep when status effect is active
         EntitySleepEvents.ALLOW_SLEEP_TIME.register((entity, world, pos) -> {
             if (entity instanceof PlayerEntity) {
-                if(RegTStatusEffect.hasAnyEffect((PlayerEntity) entity)) {
+                if (EffectManager.hasTransformativeEffect(entity)) {
                     return ActionResult.success(true);
                 }
                 else{
@@ -325,21 +321,18 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         }
     }
 
-    private void onPlayerEndSleeping(LivingEntity entity, BlockPos world) {
-        if (entity instanceof ServerPlayerEntity) {
+    private void onPlayerEndSleeping(LivingEntity entity) {
+        if (entity instanceof ServerPlayerEntity player) {
             // handle transformative effects
-            ServerPlayerEntity player = (ServerPlayerEntity) entity;
             //LOGGER.info(EffectManager.EFFECT_ATTACHMENT.toString());
             //PlayerEffectAttachment attachment = player.getAttached(EffectManager.EFFECT_ATTACHMENT);
             //LOGGER.info(attachment == null? "attachment is null" : attachment.currentEffect.toString());
             // 不用检测诅咒之月状态--作为一个特性还挺有意思的
-            if(/*!(CursedMoon.isCursedMoon() && CursedMoon.isNight())*/true){
-                if (RegTStatusEffect.hasAnyEffect(player)) {
-                    EffectManager.applyEffect(player);
-                    // 触发自定义成就
-                    ON_SLEEP_WHEN_HAVE_TRANSFORM_EFFECT.trigger((ServerPlayerEntity) player);
-                    player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_sleep_when_attached").formatted(Formatting.LIGHT_PURPLE));
-                }
+            if (EffectManager.hasTransformativeEffect(player)) {
+                EffectManager.ActiveTransformativeEffect(player);
+                // 触发自定义成就
+                ON_SLEEP_WHEN_HAVE_TRANSFORM_EFFECT.trigger(player);
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_sleep_when_attached").formatted(Formatting.LIGHT_PURPLE));
             }
         }
     }
@@ -355,6 +348,10 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             TransformManager.update(player);
             TickManager.tickServerAll();
 
+            // CustomEdiblePower Tick
+            CustomEdiblePower.OnServerTick(player);
+
+            /* 重构后不需要了 仅用于参考旧实现逻辑
             // handle transformative effects tick
             PlayerEffectAttachment attachment = player.getAttached(EffectManager.EFFECT_ATTACHMENT);
             if (attachment != null && attachment.currentEffect != null) {
@@ -382,6 +379,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
                 saveForm(player);
                 save_timer = 0;
             }
+             */
         }
     }
 }

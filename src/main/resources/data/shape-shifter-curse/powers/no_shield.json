@@ -1,0 +1,18 @@
+{
+  "type": "origins:prevent_item_use",
+  "item_condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:ingredient",
+        "ingredient": {
+          "tag": "origins:shields"
+        }
+      },
+      {
+        "type": "shape-shifter-curse:is_morph_scale_item",
+        "inverted": true
+      }
+    ]
+  }
+}

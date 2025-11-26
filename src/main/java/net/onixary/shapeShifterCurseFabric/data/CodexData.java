@@ -2,18 +2,13 @@ package net.onixary.shapeShifterCurseFabric.data;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
-import net.onixary.shapeShifterCurseFabric.networking.ClientEffectAttachmentCache;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormPhase;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
-
-import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.EFFECT_ATTACHMENT;
+import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 
 public class CodexData {
     // 集中管理Codex的数据
@@ -258,6 +253,7 @@ public class CodexData {
         StringBuilder statusTextBuilder = new StringBuilder();
         boolean hasAnyStatus = false;
 
+        /* 重构后不需要了 仅用于参考旧实现逻辑
         PlayerEffectAttachment currentTransformEffect;
 
         // 使用环境检测而不是玩家类型检测
@@ -269,6 +265,11 @@ public class CodexData {
 
         if(currentTransformEffect != null && currentTransformEffect.currentToForm != null){
             ShapeShifterCurseFabric.LOGGER.info("current effect successfully receive: " + currentTransformEffect.currentEffect);
+            statusTextBuilder.append(statusInfected.getString());
+            hasAnyStatus = true;
+        }
+         */
+        if (EffectManager.hasTransformativeEffect(player)) {
             statusTextBuilder.append(statusInfected.getString());
             hasAnyStatus = true;
         }

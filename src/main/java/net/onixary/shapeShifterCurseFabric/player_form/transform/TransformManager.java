@@ -27,7 +27,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComp
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
 import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
-import net.onixary.shapeShifterCurseFabric.status_effects.attachment.PlayerEffectAttachment;
+import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.TransformativeStatusInstance;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -93,7 +93,7 @@ public class TransformManager {
     }
 
     // 仅服务端
-    public static void handleProgressiveTransform(PlayerEntity player, boolean isByCursedMoon){
+    public static void handleProgressiveTransform(ServerPlayerEntity player, boolean isByCursedMoon){
         PlayerTransformData data = getPlayerTransformData(player);
         data._isByCursedMoon = isByCursedMoon;
         data._isRegressedFromFinal = false;
@@ -235,10 +235,10 @@ public class TransformManager {
     }
 
     // 仅服务端
-    static PlayerFormBase getRandomOrBuffForm(PlayerEntity player){
-        PlayerEffectAttachment currentTransformEffect = EffectManager.getCurrentEffectAttachment(player);
-        if(currentTransformEffect != null && currentTransformEffect.currentEffect != null){
-            return currentTransformEffect.currentToForm;
+    static PlayerFormBase getRandomOrBuffForm(ServerPlayerEntity player){
+        TransformativeStatusInstance instance = EffectManager.getTransformativeEffect(player);
+        if(instance != null && instance.getTransformativeEffectType() != null){
+            return instance.getTransformativeEffectType().getToForm();
         }
         else{
             return FormRandomSelector.getRandomFormFromPredefined();
@@ -270,6 +270,7 @@ public class TransformManager {
                         clearInstinct(data.curPlayer);
                     }
 
+                    EffectManager.clearTransformativeEffect(player);
                     FormAbilityManager.applyForm(data.curPlayer, data.curToForm);
 
                     // 不要覆盖组件中的诅咒月亮状态
@@ -518,6 +519,7 @@ public class TransformManager {
         PlayerTransformData data = getPlayerTransformData(player);
         data.curPlayer = player;
         data.curToForm = toForm;
+        EffectManager.clearTransformativeEffect(player);
         FormAbilityManager.applyForm(data.curPlayer, data.curToForm);
         clearFormFlag(data.curPlayer);
         clearInstinct(data.curPlayer);
