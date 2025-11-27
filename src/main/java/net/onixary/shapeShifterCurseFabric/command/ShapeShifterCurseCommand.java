@@ -321,6 +321,10 @@ public class ShapeShifterCurseCommand {
     }
 
     private static int logPatronInfo(CommandContext<ServerCommandSource> commandContext) {
+        if (!PatronUtils.EnablePatronFeature) {
+            commandContext.getSource().sendError(Text.literal("Patron feature is disabled!"));
+            return 0;
+        }
         try {
             ServerPlayerEntity player = commandContext.getSource().getPlayer();
             if (player == null) {

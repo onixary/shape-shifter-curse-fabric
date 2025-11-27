@@ -21,6 +21,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
+import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
 import java.util.UUID;
 
@@ -146,6 +147,10 @@ public class ModPacketsC2S {
     }
 
     private static void receiveSetPatronForm(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
+        if (!PatronUtils.EnablePatronFeature) {
+            ShapeShifterCurseFabric.LOGGER.error("Player {} tried to use patron form but patron feature is disabled", playerEntity.getDisplayName().getString());
+            return;
+        }
         Identifier formId = packetByteBuf.readIdentifier();
         PlayerFormBase form = RegPlayerForms.getPlayerForm(formId);
         if (form instanceof PlayerFormDynamic pfd) {

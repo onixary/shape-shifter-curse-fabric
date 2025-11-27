@@ -25,6 +25,7 @@ import java.util.zip.ZipInputStream;
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.commonConfig;
 
 public class PatronUtils {
+    public static final boolean EnablePatronFeature = false;
 
     private static final String DataPackVersionName = "SSC-Patron-Data-Version.txt";
     private static final String DataPackName = "SSC-Patron-DataPack.zip";
@@ -40,12 +41,18 @@ public class PatronUtils {
     public static HashMap<UUID, Integer> PatronLevels = new HashMap<>();  // 服务端客户端缓存 通过网络同步
 
     public static void OnClientInit() {
+        if (!EnablePatronFeature) {
+            return;
+        }
         if (commonConfig.enablePatronFormSystem) {
             PatronUtils.ApplyNewestResourcePack();
         }
     }
 
     public static void OnServerLoad(MinecraftServer server) {
+        if (!EnablePatronFeature) {
+            return;
+        }
         PatronUtils.UpdatePatronData(server);
         if (commonConfig.enablePatronFormSystem) {
             // 开启服务器时无论如何都要更新一次
@@ -119,7 +126,7 @@ public class PatronUtils {
         return null;
     }
 
-    public static byte[] downloadFormURL(String urlString) {
+    private static byte[] downloadFormURL(String urlString) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
             URL url = new URL(urlString);
@@ -136,7 +143,7 @@ public class PatronUtils {
         return outputStream.toByteArray();
     }
 
-    public static int getVersion(String urlString) {
+    private static int getVersion(String urlString) {
         try {
             URL url = new URL(urlString);
             BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
@@ -148,7 +155,7 @@ public class PatronUtils {
         }
     }
 
-    public static int getVersionLocal(String LocalPath) {
+    private static int getVersionLocal(String LocalPath) {
         Path LocalDataPackVersion = ShapeShifterCurseFabric.MOD_LOCAL_DATA_STORAGE.resolve(LocalPath);
         if (!LocalDataPackVersion.toFile().exists()) {
             return -1;
@@ -163,20 +170,20 @@ public class PatronUtils {
         }
     }
 
-    public static void CheckDataPackUpdate(MinecraftServer server) {
+    private static void CheckDataPackUpdate(MinecraftServer server) {
         if (NeedUpdateDataPack()) {
             UpdateDataPack(server);
         }
     }
 
-    public static boolean NeedUpdateDataPack() {
+    private static boolean NeedUpdateDataPack() {
         // 如果无法获取版本号 则默认不需要(没法)更新
         int WebDataPackVersion = getVersion(commonConfig.DataPackVersionUrl);
         DataPackVersion = getVersionLocal(DataPackVersionName);
         return WebDataPackVersion > DataPackVersion;
     }
 
-    public static byte[] getNewestDataPack() {
+    private static byte[] getNewestDataPack() {
         // **** 此DataPack非标准数据包 为单层 <id>.json 的ssc_form文件 !!!! 不可以放在数据包文件夹 !!!! ****
         // !!!! 如果发现缓存到数据包文件夹 请及时通知修改代码 !!!!
         Path LocalDataPack = ShapeShifterCurseFabric.MOD_LOCAL_DATA_STORAGE.resolve(DataPackName);
@@ -205,14 +212,14 @@ public class PatronUtils {
         return null;
     }
 
-    public static boolean NeedUpdateResourcePack() {
+    private static boolean NeedUpdateResourcePack() {
         // 如果无法获取版本号 则默认不需要(没法)更新
         int WebResourcePackVersion = getVersion(commonConfig.ResourcePackVersionUrl);
         ResourcePackVersion = getVersionLocal(ResourcePackVersionName);
         return WebResourcePackVersion > ResourcePackVersion;
     }
 
-    public static void ApplyNewestResourcePack() {
+    private static void ApplyNewestResourcePack() {
         if (NeedUpdateResourcePack()) {
             Path ResourcePackVersion = ShapeShifterCurseFabric.MOD_LOCAL_DATA_STORAGE.resolve(ResourcePackVersionName);
             int WebResourcePackVersion = getVersion(commonConfig.ResourcePackVersionUrl);
@@ -236,7 +243,7 @@ public class PatronUtils {
         return;
     }
 
-    public static void ApplyResourcePack(String ResourcePackName) {
+    private static void ApplyResourcePack(String ResourcePackName) {
         Path GameConfig = Path.of("options.txt");
         if (!GameConfig.toFile().exists()) {
             ShapeShifterCurseFabric.LOGGER.error("Failed to find options.txt, It Should Not Happen!");
@@ -266,7 +273,7 @@ public class PatronUtils {
     }
 
     // **** 此DataPack非标准数据包 为单层 <id>.json 的ssc_form文件 ****
-    public static void UpdateDataPack(MinecraftServer server) {
+    private static void UpdateDataPack(MinecraftServer server) {
         List<JsonObject> jsonObjects = ReadDataPackZip(getNewestDataPack());
         List<Identifier> patronForms = new ArrayList<>();
         if (jsonObjects != null) {
@@ -298,7 +305,7 @@ public class PatronUtils {
     }
 
     // 仅服务端
-    public static void UpdatePatronData(MinecraftServer server) {
+    private static void UpdatePatronData(MinecraftServer server) {
         byte[] PatronDataByte = downloadFormURL(commonConfig.PatronDataUrl);
         if (PatronDataByte != null) {
             try {
