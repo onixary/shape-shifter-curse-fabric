@@ -102,8 +102,8 @@
 			"translation": [0, 2, 0]
 		},
 		"ground": {
-			"rotation": [90, 0, 0],
-			"translation": [0, -2.5, 4]
+			"rotation": [91, 0, 0],
+			"translation": [0, 3.5, 2.75]
 		},
 		"gui": {
 			"rotation": [60, -45, 0],
