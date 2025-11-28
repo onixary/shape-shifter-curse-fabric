@@ -1,8 +1,10 @@
 package net.onixary.shapeShifterCurseFabric.minion;
 
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
@@ -14,26 +16,31 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.minion.mobs.WolfMinion;
-import net.onixary.shapeShifterCurseFabric.minion.mobs.WolfMinionRenderer;
+import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntity;
+import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntityModel;
+import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntityRenderer;
 import org.jetbrains.annotations.Nullable;
 
+import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
+
 public class MinionRegister {
-    public static final EntityType<WolfMinion> WOLF_MINION = Registry.register(
+    public static final EntityType<AnubisWolfMinionEntity> WOLF_MINION = Registry.register(
             Registries.ENTITY_TYPE,
             ShapeShifterCurseFabric.identifier("minion_wolf"),
             FabricEntityTypeBuilder
-                    .create(SpawnGroup.MISC, WolfMinion::new)
+                    .create(SpawnGroup.MISC, AnubisWolfMinionEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
                     .build()
     );
+    public static final EntityModelLayer WOLF_MINION_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "minion_wolf"), "main");
 
     public static void register() {
-        FabricDefaultAttributeRegistry.register(WOLF_MINION, WolfMinion.createWolfMinionAttributes());
+        FabricDefaultAttributeRegistry.register(WOLF_MINION, AnubisWolfMinionEntity.createWolfMinionAttributes());
     }
 
     public static void registerClient() {
-        EntityRendererRegistry.register(WOLF_MINION, WolfMinionRenderer::new);
+        EntityRendererRegistry.register(WOLF_MINION, AnubisWolfMinionEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(WOLF_MINION_LAYER, AnubisWolfMinionEntityModel::getTexturedModelData);
     }
 
     public static @Nullable <T extends LivingEntity> T SpawnMinion(EntityType<T> minion, ServerWorld world, BlockPos pos, ServerPlayerEntity player) {

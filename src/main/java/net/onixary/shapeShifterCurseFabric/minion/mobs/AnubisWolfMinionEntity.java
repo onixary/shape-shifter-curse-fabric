@@ -1,7 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.minion.mobs;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
@@ -28,10 +27,10 @@ import net.onixary.shapeShifterCurseFabric.minion.IPlayerEntityMinion;
 
 import java.util.UUID;
 
-public class WolfMinion extends WolfEntity implements IMinion<WolfMinion> {
+public class AnubisWolfMinionEntity extends WolfEntity implements IMinion<AnubisWolfMinionEntity> {
     public static final Identifier MinionID = ShapeShifterCurseFabric.identifier("wolf_minion");
 
-    public WolfMinion(EntityType<? extends WolfMinion> entityType, World world) {
+    public AnubisWolfMinionEntity(EntityType<? extends AnubisWolfMinionEntity> entityType, World world) {
         super(entityType, world);
         this.setPathfindingPenalty(PathNodeType.POWDER_SNOW, -1.0F);
         this.setPathfindingPenalty(PathNodeType.DANGER_POWDER_SNOW, -1.0F);
@@ -90,7 +89,7 @@ public class WolfMinion extends WolfEntity implements IMinion<WolfMinion> {
     }
 
     @Override
-    public WolfMinion getSelf() {
+    public AnubisWolfMinionEntity getSelf() {
         return this;
     }
 
@@ -186,7 +185,7 @@ public class WolfMinion extends WolfEntity implements IMinion<WolfMinion> {
 
     @Override
     public void applyDamageEffects(LivingEntity attacker, Entity target) {
-        if (attacker instanceof WolfMinion minion && target instanceof LivingEntity livingEntity)  {
+        if (attacker instanceof AnubisWolfMinionEntity minion && target instanceof LivingEntity livingEntity)  {
             livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 20 * minion.MinionLevel, 2));
         }
         super.applyDamageEffects(attacker, target);
@@ -258,7 +257,7 @@ public class WolfMinion extends WolfEntity implements IMinion<WolfMinion> {
 
     class WolfMinionEscapeDangerGoal extends EscapeDangerGoal {
         public WolfMinionEscapeDangerGoal(double speed) {
-            super(WolfMinion.this, speed);
+            super(AnubisWolfMinionEntity.this, speed);
         }
 
         protected boolean isInDanger() {

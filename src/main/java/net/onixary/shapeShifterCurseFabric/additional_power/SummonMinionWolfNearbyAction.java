@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.minion.IPlayerEntityMinion;
 import net.onixary.shapeShifterCurseFabric.minion.MinionRegister;
-import net.onixary.shapeShifterCurseFabric.minion.mobs.WolfMinion;
+import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntity;
 
 public class SummonMinionWolfNearbyAction {
     public static void action(SerializableData.Instance data, Pair<Entity, Entity> entities) {
@@ -29,10 +29,10 @@ public class SummonMinionWolfNearbyAction {
             boolean IsSummonSuccess = false;
             for (int i = 0; i < MinionCount; i++) {
                 if (player instanceof IPlayerEntityMinion playerEntityMinion) {
-                    if (playerEntityMinion.shape_shifter_curse$getMinionsCount(WolfMinion.MinionID) >= MaxMinionCount) {
+                    if (playerEntityMinion.shape_shifter_curse$getMinionsCount(AnubisWolfMinionEntity.MinionID) >= MaxMinionCount) {
                         return;
                     }
-                    if (MinionRegister.IsInCoolDown(WolfMinion.MinionID, player, Cooldown)) {
+                    if (MinionRegister.IsInCoolDown(AnubisWolfMinionEntity.MinionID, player, Cooldown)) {
                         return;
                     }
                 }
@@ -45,9 +45,9 @@ public class SummonMinionWolfNearbyAction {
                     targetPos = SpawnNearbyTarget.getBlockPos();
                 }
                 if (SpawnNearbyTarget.getWorld() instanceof ServerWorld world) {
-                    WolfMinion wolfMinion = MinionRegister.SpawnMinion(MinionRegister.WOLF_MINION, world, targetPos, player);
-                    if (wolfMinion != null) {
-                        wolfMinion.setMinionLevel(MinionLevel);
+                    AnubisWolfMinionEntity anubisWolfMinionEntity = MinionRegister.SpawnMinion(MinionRegister.WOLF_MINION, world, targetPos, player);
+                    if (anubisWolfMinionEntity != null) {
+                        anubisWolfMinionEntity.setMinionLevel(MinionLevel);
                         IsSummonSuccess = true;
                     } else {
                         ShapeShifterCurseFabric.LOGGER.warn("Can't spawn minion, wolfMinion is null");
@@ -57,7 +57,7 @@ public class SummonMinionWolfNearbyAction {
                 }
             }
             if (IsSummonSuccess) {
-                MinionRegister.SetCoolDown(WolfMinion.MinionID, player);
+                MinionRegister.SetCoolDown(AnubisWolfMinionEntity.MinionID, player);
             }
         }
     }

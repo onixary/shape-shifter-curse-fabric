@@ -64,5 +64,5 @@ public class WolfMinionAnimator extends AzEntityAnimator<WolfMinion> {
 }
  */
 
-public class WolfMinionAnimator {
+public class AnubisWolfMinionEntityAnimator {
 }

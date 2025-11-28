@@ -23,7 +23,6 @@ import net.onixary.shapeShifterCurseFabric.custom_ui.BookOfShapeShifterScreenV2_
 import net.onixary.shapeShifterCurseFabric.custom_ui.StartBookScreenV2;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TAxolotlEntityRenderer;
-import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.BatEntityModel;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.BatEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TOcelotEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
@@ -43,9 +42,10 @@ import java.util.UUID;
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
 
 public class ShapeShifterCurseFabricClient implements ClientModInitializer {
-	public static final EntityModelLayer T_BAT_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_bat"), "main");
-	public static final EntityModelLayer T_AXOLOTL_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_axolotl"), "main");
-	public static final EntityModelLayer T_OCELOT_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_ocelot"), "main");
+	// 由于咒文生物使用的都是原版模型，所以无需注册Layer
+	//public static final EntityModelLayer T_BAT_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_bat"), "main");
+	//public static final EntityModelLayer T_AXOLOTL_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_axolotl"), "main");
+	//public static final EntityModelLayer T_OCELOT_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_ocelot"), "main");
 
 	public static MinecraftClient getClient() {
 		return MinecraftClient.getInstance();
@@ -119,10 +119,8 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 
 	public static void registerEntityModels() {
 		EntityRendererRegistry.register(T_BAT, BatEntityRenderer::new);
-		EntityModelLayerRegistry.registerModelLayer(T_BAT_LAYER, BatEntityModel::getTexturedModelData);
 		EntityRendererRegistry.register(T_AXOLOTL, TAxolotlEntityRenderer::new);
-		EntityModelLayerRegistry.registerModelLayer(T_AXOLOTL_LAYER, BatEntityModel::getTexturedModelData);
-		EntityRendererRegistry.register(T_OCELOT, TOcelotEntityRenderer::new); // i dont know why T_OCELOT_LAYER is unused, but im not gonna change that
+		EntityRendererRegistry.register(T_OCELOT, TOcelotEntityRenderer::new);
 		MinionRegister.registerClient();
 	}
 
