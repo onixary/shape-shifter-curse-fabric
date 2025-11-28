@@ -482,5 +482,12 @@
   "text.autoconfig.shape-shifter-curse-custom.option.primaryGreyReverse": "Реверсировать основной цвет в чёрно-белый",
   "text.autoconfig.shape-shifter-curse-custom.option.accent1GreyReverse": "Реверсировать дополнительный цвет 1 в чёрно-белый",
   "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "Реверсировать дополнительный цвет 2 в чёрно-белый",
-  "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_config": "Auto Sync Config"
+  "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_config": "Auto Sync Config",
+  "text.autoconfig.shape-shifter-curse-common.category.Patron": "Patron Config (Unfinished)",
+  "text.autoconfig.shape-shifter-curse-common.option.enablePatronFormSystem": "Enable Patron Form System (Unfinished)",
+  "text.autoconfig.shape-shifter-curse-common.option.DataPackVersionUrl": "DataPack Version Url (Unfinished)",
+  "text.autoconfig.shape-shifter-curse-common.option.DataPackUrl": "DataPack Download Url (Unfinished)",
+  "text.autoconfig.shape-shifter-curse-common.option.ResourcePackVersionUrl": "ResourcePack Version Url (Unfinished)",
+  "text.autoconfig.shape-shifter-curse-common.option.ResourcePackUrl": "ResourcePack Download Url (Unfinished)",
+  "text.autoconfig.shape-shifter-curse-common.option.CheckUpdateInterval": "Check Update Interval (Seconds) (Unfinished)"
 }

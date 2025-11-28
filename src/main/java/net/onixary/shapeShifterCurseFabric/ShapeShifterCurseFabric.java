@@ -311,6 +311,9 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     }
 
     private void initLocalDataStorage() {
+        if (!PatronUtils.EnablePatronFeature) {
+            return;
+        }
         File dataFolder = MOD_LOCAL_DATA_STORAGE.toFile();
         if (!dataFolder.isDirectory()) {
             try {

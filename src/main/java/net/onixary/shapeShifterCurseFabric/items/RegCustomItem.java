@@ -9,6 +9,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.items.armors.MorphScaleArmor;
+import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
 import static net.minecraft.item.Items.register;
 
@@ -43,7 +44,9 @@ public class RegCustomItem {
     public static void initialize() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
             entries.add(BOOK_OF_SHAPE_SHIFTER);
-            entries.add(PATRON_FORM_ITEM);
+            if (PatronUtils.EnablePatronFeature) {
+                entries.add(PATRON_FORM_ITEM);
+            }
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.add(UNTREATED_MOONDUST);
