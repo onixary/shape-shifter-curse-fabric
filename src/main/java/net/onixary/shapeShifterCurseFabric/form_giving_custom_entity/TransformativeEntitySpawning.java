@@ -4,13 +4,18 @@ import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnRestriction;
+import net.minecraft.registry.BuiltinRegistries;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.StructureSpawns;
 import net.minecraft.world.biome.BiomeKeys;
+import net.minecraft.world.gen.structure.StructureKeys;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.wolf.TransformativeWolfEntity;
 
 public class TransformativeEntitySpawning {
     public static void addEntitySpawns() {
@@ -62,5 +67,14 @@ public class TransformativeEntitySpawning {
                 1,
                 3
         );
+        // T_WOLF
+        SpawnRestriction.register(
+                ShapeShifterCurseFabric.T_WOLF,
+                SpawnRestriction.Location.ON_GROUND,
+                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                TransformativeWolfEntity::canCustomSpawn
+        );
+        // TODO 添加沙漠神殿生成
+
     }
 }
