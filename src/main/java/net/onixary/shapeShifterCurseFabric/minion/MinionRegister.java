@@ -15,31 +15,28 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntity;
 import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntityModel;
 import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntityRenderer;
 import org.jetbrains.annotations.Nullable;
 
-import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
-
 public class MinionRegister {
-    public static final EntityType<AnubisWolfMinionEntity> WOLF_MINION = Registry.register(
+    public static final EntityType<AnubisWolfMinionEntity> ANUBIS_WOLF_MINION = Registry.register(
             Registries.ENTITY_TYPE,
-            ShapeShifterCurseFabric.identifier("minion_wolf"),
+            AnubisWolfMinionEntity.MinionID,
             FabricEntityTypeBuilder
                     .create(SpawnGroup.MISC, AnubisWolfMinionEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
                     .build()
     );
-    public static final EntityModelLayer WOLF_MINION_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "minion_wolf"), "main");
+    public static final EntityModelLayer WOLF_MINION_LAYER = new EntityModelLayer(AnubisWolfMinionEntity.MinionID, "main");
 
     public static void register() {
-        FabricDefaultAttributeRegistry.register(WOLF_MINION, AnubisWolfMinionEntity.createWolfMinionAttributes());
+        FabricDefaultAttributeRegistry.register(ANUBIS_WOLF_MINION, AnubisWolfMinionEntity.createWolfMinionAttributes());
     }
 
     public static void registerClient() {
-        EntityRendererRegistry.register(WOLF_MINION, AnubisWolfMinionEntityRenderer::new);
+        EntityRendererRegistry.register(ANUBIS_WOLF_MINION, AnubisWolfMinionEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(WOLF_MINION_LAYER, AnubisWolfMinionEntityModel::getTexturedModelData);
     }
 

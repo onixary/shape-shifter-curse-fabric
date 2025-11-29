@@ -28,7 +28,7 @@ import net.onixary.shapeShifterCurseFabric.minion.IPlayerEntityMinion;
 import java.util.UUID;
 
 public class AnubisWolfMinionEntity extends WolfEntity implements IMinion<AnubisWolfMinionEntity> {
-    public static final Identifier MinionID = ShapeShifterCurseFabric.identifier("wolf_minion");
+    public static final Identifier MinionID = ShapeShifterCurseFabric.identifier("anubis_wolf_minion");
 
     public AnubisWolfMinionEntity(EntityType<? extends AnubisWolfMinionEntity> entityType, World world) {
         super(entityType, world);

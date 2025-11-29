@@ -45,7 +45,7 @@ public class SummonMinionWolfNearbyAction {
                     targetPos = SpawnNearbyTarget.getBlockPos();
                 }
                 if (SpawnNearbyTarget.getWorld() instanceof ServerWorld world) {
-                    AnubisWolfMinionEntity anubisWolfMinionEntity = MinionRegister.SpawnMinion(MinionRegister.WOLF_MINION, world, targetPos, player);
+                    AnubisWolfMinionEntity anubisWolfMinionEntity = MinionRegister.SpawnMinion(MinionRegister.ANUBIS_WOLF_MINION, world, targetPos, player);
                     if (anubisWolfMinionEntity != null) {
                         anubisWolfMinionEntity.setMinionLevel(MinionLevel);
                         IsSummonSuccess = true;
@@ -64,7 +64,7 @@ public class SummonMinionWolfNearbyAction {
 
     public static ActionFactory<Pair<Entity, Entity>> createBIFactory() {
         return new ActionFactory<>(
-                ShapeShifterCurseFabric.identifier("bi_summon_wolf_minion"),
+                ShapeShifterCurseFabric.identifier("bi_summon_anubis_wolf_minion"),
                 new SerializableData()
                         .add("minion_level", SerializableDataTypes.INT, 1)
                         .add("count", SerializableDataTypes.INT, 1)
@@ -77,7 +77,7 @@ public class SummonMinionWolfNearbyAction {
 
     public static ActionFactory<Entity> createFactory() {
         return new ActionFactory<>(
-                ShapeShifterCurseFabric.identifier("summon_wolf_minion"),
+                ShapeShifterCurseFabric.identifier("summon_anubis_wolf_minion"),
                 new SerializableData()
                         .add("minion_level", SerializableDataTypes.INT, 1)
                         .add("count", SerializableDataTypes.INT, 1)

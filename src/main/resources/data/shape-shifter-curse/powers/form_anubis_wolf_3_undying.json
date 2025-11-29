@@ -7,7 +7,7 @@
   },
   "entity_actions": [
     {
-      "type": "shape-shifter-curse:summon_wolf_minion",
+      "type": "shape-shifter-curse:summon_anubis_wolf_minion",
       "minion_level": 3,
       "count": 2,
       "max_minion_count": 4,

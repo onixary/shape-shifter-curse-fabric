@@ -329,7 +329,7 @@ public class ShapeShifterCurseCommand {
             return 1;
         }
         try {
-            AnubisWolfMinionEntity anubisWolfMinionEntity = MinionRegister.SpawnMinion(MinionRegister.WOLF_MINION, world, player.getBlockPos(), player);
+            AnubisWolfMinionEntity anubisWolfMinionEntity = MinionRegister.SpawnMinion(MinionRegister.ANUBIS_WOLF_MINION, world, player.getBlockPos(), player);
             anubisWolfMinionEntity.setMinionLevel(3);
         } catch (Exception e) {
             ShapeShifterCurseFabric.LOGGER.error("Error when spawn minion: ", e);
