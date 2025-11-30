@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.wolf;
 
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -18,6 +19,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.additional_power.TWolfFriendlyPower;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
@@ -59,6 +61,16 @@ public class TransformativeWolfEntity extends WolfEntity {
         if (Chance <= 0.0f) { return false; }
         if (Chance >= 1.0f) { return true; }
         return random.nextFloat() < Chance;
+    }
+
+    @Override
+    public boolean canTarget(LivingEntity target) {
+        if (target instanceof PlayerEntity playerEntity) {
+            if (PowerHolderComponent.hasPower(playerEntity, TWolfFriendlyPower.class)) {
+                return false;
+            }
+        }
+        return super.canTarget(target);
     }
 
     @Override

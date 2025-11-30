@@ -42,7 +42,8 @@
     "projectile.EntitySnowballTransformMixin",
     "projectile.PotionEntityMixin",
     "VirtualTotemMixin",
-    "MinionPlayerEntityMixin"
+    "MinionPlayerEntityMixin",
+    "HungerManagerMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",
