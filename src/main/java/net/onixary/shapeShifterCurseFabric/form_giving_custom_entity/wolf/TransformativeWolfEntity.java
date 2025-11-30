@@ -6,12 +6,17 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.LlamaEntity;
+import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -39,13 +44,26 @@ public class TransformativeWolfEntity extends WolfEntity {
 
     @Override
     protected void initGoals() {
-        super.initGoals();
-        // 添加攻击目标（玩家）
+        this.goalSelector.add(1, new SwimGoal(this));
+        this.goalSelector.add(1, new WolfEscapeDangerGoal(1.5));
+        this.goalSelector.add(2, new SitGoal(this));
+        this.goalSelector.add(3, new AvoidLlamaGoal(this, LlamaEntity.class, 24.0F, 1.5, 1.5));
+        this.goalSelector.add(4, new PounceAtTargetGoal(this, 0.4F));
+        this.goalSelector.add(5, new MeleeAttackGoal(this, 1.0, true));
+        this.goalSelector.add(6, new AnimalMateGoal(this, 1.0));
+        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0));
+        this.goalSelector.add(8, new WolfBegGoal(this, 8.0F));
+        this.goalSelector.add(10, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(10, new LookAroundGoal(this));
         this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.add(2, (new RevengeGoal(this, new Class[0])).setGroupRevenge(new Class[0]));
+        this.targetSelector.add(3, new UntamedActiveTargetGoal(this, TurtleEntity.class, false, TurtleEntity.BABY_TURTLE_ON_LAND_FILTER));
+        this.targetSelector.add(4, new ActiveTargetGoal(this, AbstractSkeletonEntity.class, false));
+        this.targetSelector.add(5, new UniversalAngerGoal(this, true));
     }
 
     public static DefaultAttributeContainer.Builder createAttributes() {
-        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 12.0).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0);
+        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 12.0).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0);
     }
 
     public static boolean canCustomSpawn(EntityType<TransformativeWolfEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
@@ -112,19 +130,17 @@ public class TransformativeWolfEntity extends WolfEntity {
 
     @Override
     public boolean tryAttack(Entity target) {
-        // 只对玩家造成伤害
         if(target instanceof PlayerEntity) {
             PlayerFormBase currentForm = target.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
             if (currentForm.equals(RegPlayerForms.ORIGINAL_SHIFTER)) {
-                boolean attacked = target.damage(this.getDamageSources().mobAttack(this), StaticParams.CUSTOM_MOB_DEFAULT_DAMAGE);
+                boolean attacked = target.damage(this.getDamageSources().mobAttack(this), (float)this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE));
                 if (attacked) {
                     this.applyDamageEffects(this, target);
                 }
                 return attacked;
             }
-            return false;
         }
-        return false;
+        return super.tryAttack(target);
     }
 
     // 禁止与此生物交互 防止使用Wolf的驯服逻辑

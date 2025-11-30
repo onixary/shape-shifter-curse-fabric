@@ -12,21 +12,6 @@
       "count": 2,
       "max_minion_count": 4,
       "cooldown": 0
-    },
-    {
-      "type": "origins:spawn_particles",
-      "particle": {
-        "type": "minecraft:totem_of_undying",
-        "params": "0.11 0.18 0.69 2"
-      },
-      "count": 16,
-      "speed": 0.0,
-      "force": true,
-      "spread": {
-        "x": 0.5,
-        "y": 0.5,
-        "z": 0.5
-      }
     }
   ],
   "totem_health": 10,

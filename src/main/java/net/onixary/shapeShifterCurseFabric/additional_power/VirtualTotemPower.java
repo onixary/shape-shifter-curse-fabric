@@ -104,6 +104,7 @@ public class VirtualTotemPower extends CooldownPower {
             case 1:  // 凋零不死能力
                 if (client.world != null) {
                     client.particleManager.addEmitter(entity, ParticleTypes.SMOKE, 30);
+                    client.particleManager.addEmitter(entity, ParticleTypes.TOTEM_OF_UNDYING, 30);
                     client.world.playSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ENTITY_WITHER_DEATH, entity.getSoundCategory(), 0.75f, 0.8f, false);
                 }
                 break;

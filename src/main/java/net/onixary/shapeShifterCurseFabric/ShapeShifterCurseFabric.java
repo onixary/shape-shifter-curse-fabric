@@ -139,7 +139,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final EntityType<TransformativeWolfEntity> T_WOLF = Registry.register(
             Registries.ENTITY_TYPE,
             new Identifier(ShapeShifterCurseFabric.MOD_ID, "t_wolf"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TransformativeWolfEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TransformativeWolfEntity::new)
                 .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
                 .build()
     );
