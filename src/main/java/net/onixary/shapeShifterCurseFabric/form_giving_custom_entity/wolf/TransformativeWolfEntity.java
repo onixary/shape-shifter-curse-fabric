@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.wolf;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -46,7 +47,14 @@ public class TransformativeWolfEntity extends WolfEntity {
     }
 
     public static boolean canCustomSpawn(EntityType<TransformativeWolfEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        // TODO 添加逻辑 让狼不会生成在宝藏室
+        BlockPos NowCheckPos = pos;
+        // 脚下如果藏有TNT 则不生成 防止沙漠神殿自爆
+        for (int i = 0; i < 5; i++) {
+            if (world.getBlockState(NowCheckPos).getBlock() == Blocks.TNT) {
+                return false;
+            }
+            NowCheckPos = NowCheckPos.down();
+        }
         float Chance = ShapeShifterCurseFabric.commonConfig.transformativeWolfSpawnChance;
         if (Chance <= 0.0f) { return false; }
         if (Chance >= 1.0f) { return true; }

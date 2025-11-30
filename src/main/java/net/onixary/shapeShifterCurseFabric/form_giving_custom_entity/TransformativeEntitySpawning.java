@@ -7,10 +7,13 @@ import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.registry.BuiltinRegistries;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.BiomeTags;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureSpawns;
 import net.minecraft.world.biome.BiomeKeys;
+import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.gen.structure.StructureKeys;
+import net.minecraft.world.gen.structure.StructureType;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
@@ -74,7 +77,6 @@ public class TransformativeEntitySpawning {
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                 TransformativeWolfEntity::canCustomSpawn
         );
-        // TODO 添加沙漠神殿生成
-
+        // 用数据包的方式来让T_WOLF生成在沙漠神殿 可能会与修改结构的Mod冲突
     }
 }
