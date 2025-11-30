@@ -9,7 +9,7 @@
           "type": "shape-shifter-curse:t_wolf",
           "maxCount": 4,
           "minCount": 2,
-          "weight": 8
+          "weight": 40
         }
       ]
     }

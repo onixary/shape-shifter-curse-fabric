@@ -81,7 +81,7 @@ public class TransformativeEntitySpawning {
                 BiomeSelectors.tag(BiomeTags.DESERT_PYRAMID_HAS_STRUCTURE),
                 SpawnGroup.MONSTER,
                 ShapeShifterCurseFabric.T_WOLF,
-                1,
+                10,  // 末影人级别
                 1,
                 2
         );
