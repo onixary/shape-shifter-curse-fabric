@@ -6,9 +6,9 @@
       {
         "type": "shape-shifter-curse:summon_anubis_wolf_minion",
         "minion_level": 2,
-        "count": 1,
+        "count": 2,
         "max_minion_count": 2,
-        "cooldown": 200
+        "cooldown": 400
       },
       {
         "type": "shape-shifter-curse:add_instinct",

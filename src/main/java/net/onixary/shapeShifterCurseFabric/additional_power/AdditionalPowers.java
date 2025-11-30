@@ -55,6 +55,7 @@ public class AdditionalPowers {
         register(ModifyFoodHealPower.createFactory());
         register(ModifyEntityLootPower.createFactory());
         register(ModifyBlockDropPower.createFactory());
+        register(ActionOnEntityInRangePower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

@@ -4,8 +4,13 @@ import io.github.apace100.apoli.power.factory.action.ActionFactory;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.Entity;
+import net.minecraft.particle.ParticleType;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
@@ -58,6 +63,12 @@ public class SummonMinionWolfNearbyAction {
             }
             if (IsSummonSuccess) {
                 MinionRegister.SetCoolDown(AnubisWolfMinionEntity.MinionID, player);
+                // 添加音效与粒子效果
+                if (!(player.getWorld() instanceof ServerWorld serverWorld)) {
+                    return;
+                }
+                player.getWorld().playSound(null, player.getBlockPos(), SoundEvents.ENTITY_WOLF_GROWL, player.getSoundCategory(), 1.0f, 1.5f);
+                serverWorld.spawnParticles(player, ParticleTypes.SOUL_FIRE_FLAME, true, player.getBlockPos().getX() + 0.5f, player.getBlockPos().getY() + 0.5f, player.getBlockPos().getZ() + 0.5f, 8, 0, 0, 0, 0);
             }
         }
     }

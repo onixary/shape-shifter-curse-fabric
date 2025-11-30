@@ -11,7 +11,7 @@
         {
             "name": "increase food points",
             "operation": "multiply_base_multiplicative",
-            "value": 0.5
+            "value": 1.3
         }
     ],
     "item_condition": {

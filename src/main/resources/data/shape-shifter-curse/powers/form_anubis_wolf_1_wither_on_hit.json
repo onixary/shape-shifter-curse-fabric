@@ -4,7 +4,7 @@
     "type": "origins:apply_effect",
     "effect": {
       "effect": "minecraft:wither",
-      "duration": 80,
+      "duration": 90,
       "amplifier": 0,
       "hide_particles": false
     }

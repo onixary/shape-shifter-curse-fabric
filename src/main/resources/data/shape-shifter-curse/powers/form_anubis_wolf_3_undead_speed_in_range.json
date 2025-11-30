@@ -1,5 +1,5 @@
 {
-    "type": "shape-shifter-curse:attract_by_entity",
+    "type": "shape-shifter-curse:action_on_entity_in_range",
     "entity_condition": {
         "type": "origins:and",
         "conditions": [
@@ -22,9 +22,6 @@
             "amplifier": 1
         }
     },
-    "attraction_speed": 0.0,
-    "attraction_radius": 5.0,
-    "stop_radius": 2.5,
-    "escape_attraction_speed": 0.0,
-    "escape_angle": 360
+    "action_radius": 5.0,
+    "detection_interval": 10
 }

@@ -12,6 +12,11 @@
             ]
         }
     },
+    "damage_condition": {
+        "type": "origins:amount",
+        "comparison": ">=",
+        "compare_to": 2
+    },
     "modifier": {
         "name": "Undead damage down",
         "operation": "add_base_late",

@@ -127,7 +127,10 @@ public class AnubisWolfMinionEntity extends WolfEntity implements IMinion<Anubis
             return;
         }
         switch (MinionLevel) {
+            // 默认参数似乎直接break不会生效，依然要设置下
             case 1:
+                health.setBaseValue(10.0d);
+                attack_damage.setBaseValue(2.0d);
                 break;
             case 2:
                 health.setBaseValue(16.0d);
@@ -186,7 +189,8 @@ public class AnubisWolfMinionEntity extends WolfEntity implements IMinion<Anubis
     @Override
     public void applyDamageEffects(LivingEntity attacker, Entity target) {
         if (attacker instanceof AnubisWolfMinionEntity minion && target instanceof LivingEntity livingEntity)  {
-            livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 20 * minion.MinionLevel, 2));
+            // 额外加5tick防止效果消失在伤害判定边缘
+            livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 20 * minion.MinionLevel + 5, 2));
         }
         super.applyDamageEffects(attacker, target);
     }

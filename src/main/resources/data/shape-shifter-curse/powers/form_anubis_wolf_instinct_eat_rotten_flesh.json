@@ -9,7 +9,7 @@
     "item_condition": {
         "type": "origins:ingredient",
         "ingredient": {
-            "tag": "origins:rotten_flesh"
+            "item": "minecraft:rotten_flesh"
         }
     }
 }
