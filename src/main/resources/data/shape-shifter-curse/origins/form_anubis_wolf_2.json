@@ -6,6 +6,17 @@
         "shape-shifter-curse:form_anubis_wolf_2_food_heal_faster",
         "shape-shifter-curse:form_anubis_wolf_2_meat_to_rotten_flesh",
         "shape-shifter-curse:form_anubis_wolf_2_crop_to_sand"
+        "shape-shifter-curse:form_anubis_wolf_2_summon_wolf_when_hit",
+        "shape-shifter-curse:form_anubis_wolf_2_wither_attack",
+        "shape-shifter-curse:form_anubis_wolf_2_wither_on_hit",
+        "shape-shifter-curse:form_anubis_wolf_can_eat_bone",
+        "shape-shifter-curse:hunger_immunity",
+        "shape-shifter-curse:form_anubis_wolf_rotten_flesh_up",
+        "shape-shifter-curse:form_anubis_wolf_2_undead_damage_down",
+        "shape-shifter-curse:form_anubis_wolf_2_soul_speed",
+        "shape-shifter-curse:form_anubis_wolf_3_reverse_instant_damage",
+        "shape-shifter-curse:form_anubis_wolf_2_vegetarian_saturation_down",
+        "shape-shifter-curse:form_anubis_wolf_2_undead_speed_in_range"
     ],
     "icon": {
         "item": "minecraft:player_head"
