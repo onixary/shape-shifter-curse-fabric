@@ -43,7 +43,9 @@
     "projectile.PotionEntityMixin",
     "VirtualTotemMixin",
     "MinionPlayerEntityMixin",
-    "HungerManagerMixin"
+    "HungerManagerMixin",
+    "EntityLootingMixin",
+    "BlockDropMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",

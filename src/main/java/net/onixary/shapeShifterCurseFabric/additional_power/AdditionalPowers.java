@@ -52,6 +52,9 @@ public class AdditionalPowers {
         register(ModifyInstantDamagePower.createFactory());
         register(SoulSpeedPower.createFactory());
         register(TWolfFriendlyPower.createFactory());
+        register(ModifyFoodHealPower.createFactory());
+        register(ModifyEntityLootPower.createFactory());
+        register(ModifyBlockDropPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {
