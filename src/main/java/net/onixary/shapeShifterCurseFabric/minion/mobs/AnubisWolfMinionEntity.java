@@ -200,12 +200,15 @@ public class AnubisWolfMinionEntity extends WolfEntity implements IMinion<Anubis
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putInt("MinionLevel", this.MinionLevel);
+        nbt.putFloat("MinionHealth", this.getHealth());  // 原版Bug不知道什么时候修
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
         this.MinionLevel = nbt.getInt("MinionLevel");
+        this.ApplyMinionLevel(false);
+        this.setHealth(nbt.getFloat("MinionHealth"));
     }
 
     public double getMinionDisappearRange() {
