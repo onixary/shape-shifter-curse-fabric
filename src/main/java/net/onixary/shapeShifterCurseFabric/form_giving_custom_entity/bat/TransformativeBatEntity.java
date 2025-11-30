@@ -28,8 +28,11 @@ public class TransformativeBatEntity extends BatEntity {
         super(entityType, world);
     }
 
-    public static DefaultAttributeContainer.Builder createTBatAttributes() {
-        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0);
+    public static DefaultAttributeContainer.Builder createAttributes() {
+        return MobEntity.createMobAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, StaticParams.CUSTOM_MOB_DEFAULT_DAMAGE)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0);
     }
 
     // 20 ticks = 1 second
@@ -102,11 +105,10 @@ public class TransformativeBatEntity extends BatEntity {
 
     @Override
     public boolean tryAttack(Entity target) {
-        // 只对玩家造成伤害
         if(target instanceof PlayerEntity) {
             PlayerFormBase currentForm = target.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
             if (currentForm.equals(RegPlayerForms.ORIGINAL_SHIFTER)) {
-                boolean attacked = target.damage(this.getDamageSources().mobAttack(this), StaticParams.CUSTOM_MOB_DEFAULT_DAMAGE);
+                boolean attacked = target.damage(this.getDamageSources().mobAttack(this), (float)this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE));
                 if (attacked) {
                     this.applyDamageEffects(this, target);
                 }
@@ -114,6 +116,6 @@ public class TransformativeBatEntity extends BatEntity {
             }
             return false;
         }
-        return false;
+        return super.tryAttack(target);
     }
 }
