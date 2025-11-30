@@ -137,7 +137,7 @@ public class AnubisWolfMinionEntity extends WolfEntity implements IMinion<Anubis
                 attack_damage.setBaseValue(3.0d);
                 break;
             case 3:
-                health.setBaseValue(24.0d);
+                health.setBaseValue(20.0d);
                 attack_damage.setBaseValue(4.0d);
                 break;
             default:

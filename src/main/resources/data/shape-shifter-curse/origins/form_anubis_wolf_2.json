@@ -16,7 +16,10 @@
         "shape-shifter-curse:form_anubis_wolf_2_soul_speed",
         "shape-shifter-curse:form_anubis_wolf_3_reverse_instant_damage",
         "shape-shifter-curse:form_anubis_wolf_2_vegetarian_saturation_down",
-        "shape-shifter-curse:form_anubis_wolf_2_undead_speed_in_range"
+        "shape-shifter-curse:form_anubis_wolf_2_undead_speed_in_range",
+        "shape-shifter-curse:form_anubis_wolf_2_wither_attack_heal",
+        "shape-shifter-curse:form_disable_leg_armor",
+        "shape-shifter-curse:form_disable_feet_armor"
     ],
     "icon": {
         "item": "minecraft:player_head"

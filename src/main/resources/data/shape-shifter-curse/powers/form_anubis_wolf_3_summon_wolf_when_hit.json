@@ -5,7 +5,7 @@
     "minion_level": 3,
     "count": 2,
     "max_minion_count": 2,
-    "cooldown": 400
+    "cooldown": 600
   },
   "damage_condition": {
     "type": "origins:attacker"

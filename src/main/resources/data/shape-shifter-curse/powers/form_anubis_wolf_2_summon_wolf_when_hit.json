@@ -8,7 +8,7 @@
         "minion_level": 2,
         "count": 2,
         "max_minion_count": 2,
-        "cooldown": 400
+        "cooldown": 600
       },
       {
         "type": "shape-shifter-curse:add_instinct",
