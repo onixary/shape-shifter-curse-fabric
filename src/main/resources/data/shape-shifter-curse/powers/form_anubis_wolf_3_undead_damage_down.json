@@ -1,0 +1,25 @@
+{
+    "type": "origins:modify_damage_dealt",
+    "bientity_condition": {
+        "type": "origins:target_condition",
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:entity_group",
+                    "group": "undead"
+                }
+            ]
+        }
+    },
+    "damage_condition": {
+        "type": "origins:amount",
+        "comparison": ">=",
+        "compare_to": 4
+    },
+    "modifier": {
+        "name": "Undead damage down",
+        "operation": "add_base_late",
+        "value": -3.0
+    }
+}

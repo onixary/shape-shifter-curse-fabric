@@ -1,0 +1,30 @@
+{
+    "type": "shape-shifter-curse:attract_by_entity",
+    "entity_condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:entity_group",
+                "group": "undead"
+            },
+            {
+                "type": "origins:status_effect",
+                "effect": "minecraft:speed",
+                "inverted": true
+            }
+        ]
+    },
+    "entity_action": {
+        "type": "origins:apply_effect",
+        "effect": {
+            "effect": "minecraft:speed",
+            "duration": 20,
+            "amplifier": 1
+        }
+    },
+    "attraction_speed": 0.0,
+    "attraction_radius": 5.0,
+    "stop_radius": 2.5,
+    "escape_attraction_speed": 0.0,
+    "escape_angle": 360
+}

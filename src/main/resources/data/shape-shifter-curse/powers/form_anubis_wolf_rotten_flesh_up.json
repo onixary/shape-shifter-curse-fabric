@@ -1,0 +1,23 @@
+{
+    "type": "origins:modify_food",
+    "food_modifiers": [
+        {
+            "name": "increase food points",
+            "operation": "multiply_base_additive",
+            "value": 1
+        }
+    ],
+    "saturation_modifiers": [
+        {
+            "name": "increase food points",
+            "operation": "multiply_base_multiplicative",
+            "value": 0.5
+        }
+    ],
+    "item_condition": {
+        "type": "origins:ingredient",
+        "ingredient": {
+            "item": "minecraft:rotten_flesh"
+        }
+    }
+}
