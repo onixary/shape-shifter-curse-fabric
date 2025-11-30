@@ -63,7 +63,7 @@ public class TransformativeWolfEntity extends WolfEntity {
     }
 
     public static DefaultAttributeContainer.Builder createAttributes() {
-        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 12.0).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0);
+        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 12.0).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0);
     }
 
     public static boolean canCustomSpawn(EntityType<TransformativeWolfEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
@@ -130,19 +130,17 @@ public class TransformativeWolfEntity extends WolfEntity {
 
     @Override
     public boolean tryAttack(Entity target) {
-        // 只对玩家造成伤害
         if(target instanceof PlayerEntity) {
             PlayerFormBase currentForm = target.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
             if (currentForm.equals(RegPlayerForms.ORIGINAL_SHIFTER)) {
-                boolean attacked = target.damage(this.getDamageSources().mobAttack(this), StaticParams.CUSTOM_MOB_DEFAULT_DAMAGE);
+                boolean attacked = target.damage(this.getDamageSources().mobAttack(this), (float)this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE));
                 if (attacked) {
                     this.applyDamageEffects(this, target);
                 }
                 return attacked;
             }
-            return false;
         }
-        return false;
+        return super.tryAttack(target);
     }
 
     // 禁止与此生物交互 防止使用Wolf的驯服逻辑
