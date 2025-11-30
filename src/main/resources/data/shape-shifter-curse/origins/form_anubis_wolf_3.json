@@ -2,6 +2,7 @@
     "powers": [
         "shape-shifter-curse:no_render_arm",
         "shape-shifter-curse:form_anubis_wolf_3_scale",
+        "shape-shifter-curse:form_anubis_wolf_twolf_friendly",
         "shape-shifter-curse:form_anubis_wolf_3_undying",
         "shape-shifter-curse:form_anubis_wolf_3_summon_wolf_when_hit",
         "shape-shifter-curse:form_anubis_wolf_3_summon_wolf_on_hit",
@@ -18,6 +19,9 @@
         "shape-shifter-curse:form_anubis_wolf_3_wither_on_hit",
         "shape-shifter-curse:form_anubis_wolf_3_immune_instant_heal",
         "shape-shifter-curse:form_anubis_wolf_3_immune_regeneration",
+        "shape-shifter-curse:form_anubis_wolf_3_food_heal_faster",
+        "shape-shifter-curse:form_anubis_wolf_3_meat_to_rotten_flesh",
+        "shape-shifter-curse:form_anubis_wolf_3_crop_to_sand",
         "shape-shifter-curse:form_disable_leg_armor",
         "shape-shifter-curse:form_disable_feet_armor"
     ],

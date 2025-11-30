@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.wolf.TransformativeWolfEntity;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
 
@@ -21,6 +22,8 @@ public class RegTransformativeEntity {
         FabricDefaultAttributeRegistry.register(T_AXOLOTL, TransformativeAxolotlEntity.createTAxolotlAttributes());
         // ocelot
         FabricDefaultAttributeRegistry.register(T_OCELOT, TransformativeBatEntity.createTBatAttributes());
+
+        FabricDefaultAttributeRegistry.register(T_WOLF, TransformativeWolfEntity.createAttributes());
 
         // obsolete, use vanilla spawning logic
         // handle entity spawn

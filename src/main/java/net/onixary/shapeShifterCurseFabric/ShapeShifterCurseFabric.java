@@ -44,6 +44,7 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.Transformat
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.wolf.TransformativeWolfEntity;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
 import net.onixary.shapeShifterCurseFabric.minion.MinionRegister;
@@ -134,6 +135,15 @@ public class ShapeShifterCurseFabric implements ModInitializer {
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
                     .build()
     );
+
+    public static final EntityType<TransformativeWolfEntity> T_WOLF = Registry.register(
+            Registries.ENTITY_TYPE,
+            new Identifier(ShapeShifterCurseFabric.MOD_ID, "t_wolf"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TransformativeWolfEntity::new)
+                .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
+                .build()
+    );
+
 
     private int save_timer = 0;
 
