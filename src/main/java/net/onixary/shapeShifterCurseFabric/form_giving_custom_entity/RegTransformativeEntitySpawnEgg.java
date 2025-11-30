@@ -22,19 +22,19 @@ public class RegTransformativeEntitySpawnEgg {
     //);
 
     public static final Item T_BAT_SPAWN_EGG = register("custom_bat_spawn_egg", new SpawnEggItem(
-            T_BAT, 0x1F1F1F, 0x8B8B8B, new FabricItemSettings()
+            T_BAT,  0x8B8B8B, 0x1F1F1F,new FabricItemSettings()
     ));
 
     public static final Item T_AXOLOTL_SPAWN_EGG = register("custom_axolotl_spawn_egg", new SpawnEggItem(
-            T_AXOLOTL, 0xe4a7ae, 0x8B8B8B, new FabricItemSettings()
+            T_AXOLOTL,  0x8B8B8B,0xe4a7ae, new FabricItemSettings()
     ));
 
     public static final Item T_OCELOT_SPAWN_EGG = register("custom_ocelot_spawn_egg", new SpawnEggItem(
-            ShapeShifterCurseFabric.T_OCELOT, 0xfc801d, 0x8B8B8B, new FabricItemSettings()
+            ShapeShifterCurseFabric.T_OCELOT,  0x8B8B8B,0xfc801d, new FabricItemSettings()
     ));
 
     public static final Item T_WOLF_SPAWN_EGG = register("custom_wolf_spawn_egg", new SpawnEggItem(
-            ShapeShifterCurseFabric.T_WOLF, 0x8B8B8B, 0x8B8B8B, new FabricItemSettings()
+            ShapeShifterCurseFabric.T_WOLF,  0x8B8B8B,0xffd355, new FabricItemSettings()
     ));
 
     public static <T extends Item> T register(String path, T item) {

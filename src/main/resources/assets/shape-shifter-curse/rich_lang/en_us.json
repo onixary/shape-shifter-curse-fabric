@@ -76,6 +76,11 @@
   "item.minecraft.lingering_potion.effect.to_snow_fox_0_potion": ["Lingering Snow Fox Curse Potion"],
   "item.minecraft.tipped_arrow.effect.to_snow_fox_0_potion": ["Arrow of Snow Fox Curse"],
   "effect.shape-shifter-curse.to_snow_fox_0_potion": ["After purification, you feel it's slightly cold to the touch"],
+  "item.minecraft.potion.effect.to_anubis_wolf_0_potion": ["Jackal Curse Potion"],
+  "item.minecraft.splash_potion.effect.to_anubis_wolf_0_potion": ["Splash Jackal Curse Potion"],
+  "item.minecraft.lingering_potion.effect.to_anubis_wolf_0_potion": ["Lingering Jackal Curse Potion"],
+  "item.minecraft.tipped_arrow.effect.to_anubis_wolf_0_potion": ["Arrow of Jackal Curse"],
+  "effect.shape-shifter-curse.to_anubis_wolf_0_potion": ["Dark wraith wandering inside the bottle… It’s a bit unusual."],
 
   "item.minecraft.potion.effect.feed_potion": ["Compressed Energy Potion"],
   "item.minecraft.splash_potion.effect.feed_potion": ["Splash Compressed Energy Potion"],
@@ -262,6 +267,13 @@
     },
     "charm...?"
   ],
+  "effect.shape-shifter-curse.to_anubis_wolf_0_effect": [
+    "...Strange ",
+    {
+      "text": "jackal wraith", "color": "#0096FF"
+    },
+    "?"
+  ],
   "effect.shape-shifter-curse.to_bat_0_effect.description": [
     "You suddenly feel extremely ",
     {
@@ -348,6 +360,30 @@
   "codex.form.shape-shifter-curse.original_shifter.pros": [" "],
   "codex.form.shape-shifter-curse.original_shifter.cons": [" "],
   "codex.form.shape-shifter-curse.original_shifter.instincts": [" "],
+
+  "codex.form.shape-shifter-curse.anubis_wolf_0.title": ["\n"],
+  "codex.form.shape-shifter-curse.anubis_wolf_0.appearance": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_0.pros": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_0.cons": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_0.instincts": [" "],
+
+  "codex.form.shape-shifter-curse.anubis_wolf_1.title": ["\n"],
+  "codex.form.shape-shifter-curse.anubis_wolf_1.appearance": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_1.pros": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_1.cons": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_1.instincts": [" "],
+
+  "codex.form.shape-shifter-curse.anubis_wolf_2.title": ["\n"],
+  "codex.form.shape-shifter-curse.anubis_wolf_2.appearance": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_2.pros": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_2.cons": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_2.instincts": [" "],
+
+  "codex.form.shape-shifter-curse.anubis_wolf_3.title": ["\n"],
+  "codex.form.shape-shifter-curse.anubis_wolf_3.appearance": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_3.pros": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_3.cons": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_3.instincts": [" "],
 
   "codex.form.shape-shifter-curse.axolotl_0.title": ["\nThe curse has caused visible changes to your body. Additionally, you feel an urge to immerse yourself in water."],
   "codex.form.shape-shifter-curse.axolotl_0.appearance": ["Pale red frond-like structures have grown on both sides of your cheeks. They remain constantly moist and seem to supplement your oxygen supply\nYou notice wavy translucent fins forming at your extremities and on the newly grown tail\nYour skin has begun to feel noticeably damp"],

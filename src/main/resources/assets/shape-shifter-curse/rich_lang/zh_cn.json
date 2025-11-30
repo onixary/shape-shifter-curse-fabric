@@ -75,6 +75,11 @@
   "item.minecraft.lingering_potion.effect.to_snow_fox_0_potion": ["滞留型雪狐咒文药水"],
   "item.minecraft.tipped_arrow.effect.to_snow_fox_0_potion": ["雪狐咒文之箭"],
   "effect.shape-shifter-curse.to_snow_fox_0_potion": ["净化之后，你感觉它摸起来有点冰凉"],
+  "item.minecraft.potion.effect.to_anubis_wolf_0_potion": ["胡狼咒文药水"],
+  "item.minecraft.splash_potion.effect.to_anubis_wolf_0_potion": ["喷溅型胡狼咒文药水"],
+  "item.minecraft.lingering_potion.effect.to_anubis_wolf_0_potion": ["滞留型胡狼咒文药水"],
+  "item.minecraft.tipped_arrow.effect.to_anubis_wolf_0_potion": ["胡狼咒文之箭"],
+  "effect.shape-shifter-curse.to_anubis_wolf_0_potion": ["某种暗色的灵体在瓶中游荡..有点不同寻常"],
 
   "item.minecraft.potion.effect.feed_potion": ["压缩能量药水"],
   "item.minecraft.splash_potion.effect.feed_potion": ["喷溅型压缩能量药水"],
@@ -204,6 +209,8 @@
   "item.shape-shifter-curse.custom_axolotl_spawn_egg": ["咒文美西螈刷怪蛋"],
   "entity.shape-shifter-curse.t_ocelot": ["咒文豹猫"],
   "item.shape-shifter-curse.custom_ocelot_spawn_egg": ["咒文豹猫刷怪蛋"],
+  "entity.shape-shifter-curse.t_wolf": ["咒文彷徨狼灵"],
+  "item.shape-shifter-curse.custom_wolf_spawn_egg": ["咒文彷徨狼灵刷怪蛋"],
   "effect.shape-shifter-curse.to_bat_0_effect": [
     "...奇怪的",
     {
@@ -250,6 +257,13 @@
       "text": "女巫药水", "color": "#0096FF"
     },
     "...?"
+  ],
+  "effect.shape-shifter-curse.to_anubis_wolf_0_effect": [
+    "...奇怪的",
+    {
+      "text": "胡狼灵体", "color": "#0096FF"
+    },
+    "?"
   ],
   "effect.shape-shifter-curse.to_alpha_0_effect": ["ALPHA"],
   "effect.shape-shifter-curse.to_beta_0_effect": ["BETA"],
@@ -320,6 +334,30 @@
   "codex.form.shape-shifter-curse.original_shifter.pros": [" "],
   "codex.form.shape-shifter-curse.original_shifter.cons": [" "],
   "codex.form.shape-shifter-curse.original_shifter.instincts": [" "],
+
+  "codex.form.shape-shifter-curse.anubis_wolf_0.title": ["\n"],
+  "codex.form.shape-shifter-curse.anubis_wolf_0.appearance": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_0.pros": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_0.cons": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_0.instincts": [" "],
+
+  "codex.form.shape-shifter-curse.anubis_wolf_1.title": ["\n"],
+  "codex.form.shape-shifter-curse.anubis_wolf_1.appearance": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_1.pros": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_1.cons": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_1.instincts": [" "],
+
+  "codex.form.shape-shifter-curse.anubis_wolf_2.title": ["\n"],
+  "codex.form.shape-shifter-curse.anubis_wolf_2.appearance": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_2.pros": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_2.cons": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_2.instincts": [" "],
+
+  "codex.form.shape-shifter-curse.anubis_wolf_3.title": ["\n"],
+  "codex.form.shape-shifter-curse.anubis_wolf_3.appearance": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_3.pros": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_3.cons": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_3.instincts": [" "],
 
   "codex.form.shape-shifter-curse.axolotl_0.title": ["\n诅咒对你的身体产生了一些可见的影响。除此之外，你有一种想要浸没在水中的冲动。"],
   "codex.form.shape-shifter-curse.axolotl_0.appearance": ["你的脸颊两侧生长出了几丛淡红色的簇状结构，它们总是处于潮湿状态，似乎能帮你补充一部分氧气\n你注意到波浪状的半透明鳍膜开始附着在你四肢的末端与新长出的尾部上\n你的皮肤似乎开始变得有些潮湿"],
@@ -632,6 +670,7 @@
   "text.autoconfig.shape-shifter-curse-common.option.transformativeBatSpawnChance": "咒文蝙蝠刷新成功率",
   "text.autoconfig.shape-shifter-curse-common.option.transformativeAxolotlSpawnChance": "咒文美西螈刷新成功率",
   "text.autoconfig.shape-shifter-curse-common.option.transformativeOcelotSpawnChance": "咒文豹猫刷新成功率",
+  "text.autoconfig.shape-shifter-curse-common.option.transformativeWolfSpawnChance": "咒文彷徨狼灵刷新成功率",
   "text.autoconfig.shape-shifter-curse-common.option.enableNewStartBook": "启用新版幻形者之书界面",
   "text.autoconfig.shape-shifter-curse-common.option.curseMoonPhase": "诅咒之月月相",
   "text.autoconfig.shape-shifter-curse-common.option.allowSleepInCursedMoon": "是否可以在诅咒之月中睡觉",

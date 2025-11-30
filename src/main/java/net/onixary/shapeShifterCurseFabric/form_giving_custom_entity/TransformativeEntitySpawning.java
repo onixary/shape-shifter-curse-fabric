@@ -81,7 +81,7 @@ public class TransformativeEntitySpawning {
                 BiomeSelectors.includeByKey(BiomeKeys.DESERT),
                 SpawnGroup.CREATURE,
                 ShapeShifterCurseFabric.T_WOLF,
-                1,  // 1/4 兔子的权重
+                2,  // 1/4 兔子的权重
                 2,
                 3
         );
