@@ -7,9 +7,9 @@
       "spawns": [
         {
           "type": "shape-shifter-curse:t_wolf",
-          "maxCount": 4,
-          "minCount": 2,
-          "weight": 8
+          "maxCount": 5,
+          "minCount": 3,
+          "weight": 20
         }
       ]
     }
