@@ -78,12 +78,12 @@ public class TransformativeEntitySpawning {
                 TransformativeWolfEntity::canCustomSpawn
         );
         BiomeModifications.addSpawn(
-                BiomeSelectors.tag(BiomeTags.DESERT_PYRAMID_HAS_STRUCTURE),
-                SpawnGroup.MONSTER,
+                BiomeSelectors.includeByKey(BiomeKeys.DESERT),
+                SpawnGroup.CREATURE,
                 ShapeShifterCurseFabric.T_WOLF,
-                1,
-                1,
-                2
+                1,  // 1/4 兔子的权重
+                2,
+                3
         );
         // 用数据包的方式来让T_WOLF生成在沙漠神殿 可能会与修改结构的Mod冲突
     }

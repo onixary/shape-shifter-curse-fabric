@@ -40,6 +40,12 @@ public class MinionRegister {
         EntityModelLayerRegistry.registerModelLayer(WOLF_MINION_LAYER, AnubisWolfMinionEntityModel::getTexturedModelData);
     }
 
+    public static void DisSpawnAllMinion(PlayerEntity player) {
+        if (player instanceof IPlayerEntityMinion minionPlayer) {
+            minionPlayer.shape_shifter_curse$clearAllMinions();
+        }
+    }
+
     public static @Nullable <T extends LivingEntity> T SpawnMinion(EntityType<T> minion, ServerWorld world, BlockPos pos, ServerPlayerEntity player) {
         T entity = minion.spawn(world, pos, SpawnReason.NATURAL);
         if (entity instanceof IMinion<?> minionEntity) {
