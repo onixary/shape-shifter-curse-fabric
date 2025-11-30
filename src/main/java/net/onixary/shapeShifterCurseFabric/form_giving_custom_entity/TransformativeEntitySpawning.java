@@ -79,9 +79,9 @@ public class TransformativeEntitySpawning {
         );
         BiomeModifications.addSpawn(
                 BiomeSelectors.tag(BiomeTags.DESERT_PYRAMID_HAS_STRUCTURE),
-                SpawnGroup.MONSTER,
+                SpawnGroup.CREATURE,
                 ShapeShifterCurseFabric.T_WOLF,
-                10,  // 末影人级别
+                1,  // 1/4 兔子的权重
                 1,
                 2
         );
