@@ -81,10 +81,13 @@ public class TransformativeEntitySpawning {
                 BiomeSelectors.includeByKey(BiomeKeys.DESERT),
                 SpawnGroup.CREATURE,
                 ShapeShifterCurseFabric.T_WOLF,
-                2,  // 1/4 兔子的权重
+                2,  // 1/2 兔子的权重
                 2,
                 3
         );
         // 用数据包的方式来让T_WOLF生成在沙漠神殿 可能会与修改结构的Mod冲突
+        // Weight: 20
+        // MinGroupSize = 3
+        // MaxGroupSize = 5
     }
 }
