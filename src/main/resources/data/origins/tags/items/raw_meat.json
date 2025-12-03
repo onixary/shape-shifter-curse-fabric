@@ -8,7 +8,6 @@
     "minecraft:porkchop",
     "minecraft:pufferfish",
     "minecraft:rabbit",
-    "minecraft:rotten_flesh",
     "minecraft:salmon",
     "minecraft:tropical_fish",
     {
@@ -365,6 +364,70 @@
     },
     {
       "id": "tide:shooting_starfish",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:minced_beef",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:lamb_ham",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:chicken_parts",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:bacon",
+      "required": false
+    },
+    {
+      "id": "meadow:raw_buffalo_meat",
+      "required": false
+    },
+    {
+      "id": "wildernature:bison_meat",
+      "required": false
+    },
+    {
+      "id": "wildernature:cassowary_meat",
+      "required": false
+    },
+    {
+      "id": "wildernature:pelican_meat",
+      "required": false
+    },
+    {
+      "id": "wildernature:turkey_meat",
+      "required": false
+    },
+    {
+      "id": "wildernature:venison",
+      "required": false
+    },
+    {
+      "id": "naturalist:bass",
+      "required": false
+    },
+    {
+      "id": "naturalist:catfish",
+      "required": false
+    },
+    {
+      "id": "naturalist:duck",
+      "required": false
+    },
+    {
+      "id": "naturalist:lizard_tail",
+      "required": false
+    },
+    {
+      "id": "naturalist:venison",
+      "required": false
+    },
+    {
+      "id": "naturalist:bushmeat",
       "required": false
     }
   ]

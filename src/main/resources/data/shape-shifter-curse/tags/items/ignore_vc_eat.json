@@ -1,7 +1,189 @@
 {
   "replace": false,
   "values": [
-  ],
-  "optional": [
+    {
+      "id": "vinery:red_grapejuice",
+      "required": false
+    },
+    {
+      "id": "vinery:white_grapejuice",
+      "required": false
+    },
+    {
+      "id": "vinery:red_savanna_grapejuice",
+      "required": false
+    },
+    {
+      "id": "vinery:white_savanna_grapejuice",
+      "required": false
+    },
+    {
+      "id": "vinery:red_taiga_grapejuice",
+      "required": false
+    },
+    {
+      "id": "vinery:white_taiga_grapejuice",
+      "required": false
+    },
+    {
+      "id": "vinery:red_jungle_grapejuice",
+      "required": false
+    },
+    {
+      "id": "vinery:white_jungle_grapejuice",
+      "required": false
+    },
+    {
+      "id": "vinery:noir_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:red_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:strad_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:cherry_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:cristel_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:lilitu_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:jo_special_mixture",
+      "required": false
+    },
+    {
+      "id": "vinery:bolvar_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:chorus_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:magnetic_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:stal_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:chenet_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:bottle_mojang_noir",
+      "required": false
+    },
+    {
+      "id": "vinery:mellohi_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:glowing_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:solaris_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:creepers_crush",
+      "required": false
+    },
+    {
+      "id": "vinery:kelp_cider",
+      "required": false
+    },
+    {
+      "id": "vinery:eiswein",
+      "required": false
+    },
+    {
+      "id": "vinery:aegis_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:villagers_fright",
+      "required": false
+    },
+    {
+      "id": "vinery:clark_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:jellie_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:apple_cider",
+      "required": false
+    },
+    {
+      "id": "vinery:apple_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:mead",
+      "required": false
+    },
+    {
+      "id": "meadow:piece_of_cheese",
+      "required": false
+    },
+    {
+      "id": "meadow:piece_of_sheep_cheese",
+      "required": false
+    },
+    {
+      "id": "meadow:piece_of_grain_cheese",
+      "required": false
+    },
+    {
+      "id": "meadow:piece_of_amethyst_cheese",
+      "required": false
+    },
+    {
+      "id": "meadow:piece_of_buffalo_cheese",
+      "required": false
+    },
+    {
+      "id": "meadow:piece_of_goat_cheese",
+      "required": false
+    },
+    {
+      "id": "meadow:piece_of_warped_cheese",
+      "required": false
+    },
+    {
+      "id": "naturalist:tortoise_egg",
+      "required": false
+    },
+    {
+      "id": "naturalist:alligator_egg",
+      "required": false
+    },
+    {
+      "id": "naturalist:duck_egg",
+      "required": false
+    },
+    {
+      "id": "naturalist:cooked_egg",
+      "required": false
+    },
+    {
+      "id": "natures_delight:cocada",
+      "required": false
+    }
   ]
 }
