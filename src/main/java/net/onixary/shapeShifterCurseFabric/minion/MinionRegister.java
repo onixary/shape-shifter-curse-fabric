@@ -16,8 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntity;
-import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntityModel;
-import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntityRenderer;
 import org.jetbrains.annotations.Nullable;
 
 public class MinionRegister {
@@ -29,16 +27,11 @@ public class MinionRegister {
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
                     .build()
     );
-    public static final EntityModelLayer WOLF_MINION_LAYER = new EntityModelLayer(AnubisWolfMinionEntity.MinionID, "main");
 
     public static void register() {
         FabricDefaultAttributeRegistry.register(ANUBIS_WOLF_MINION, AnubisWolfMinionEntity.createWolfMinionAttributes());
     }
 
-    public static void registerClient() {
-        EntityRendererRegistry.register(ANUBIS_WOLF_MINION, AnubisWolfMinionEntityRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(WOLF_MINION_LAYER, AnubisWolfMinionEntityModel::getTexturedModelData);
-    }
 
     public static void DisSpawnAllMinion(PlayerEntity player) {
         if (player instanceof IPlayerEntityMinion minionPlayer) {
