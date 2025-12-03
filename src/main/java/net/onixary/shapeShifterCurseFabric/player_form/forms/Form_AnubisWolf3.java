@@ -25,7 +25,6 @@ public class Form_AnubisWolf3 extends PlayerFormBase {
     private static AnimationHolder anim_dig = AnimationHolder.EMPTY;
     private static AnimationHolder anim_jump = AnimationHolder.EMPTY;
     private static AnimationHolder anim_climb = AnimationHolder.EMPTY;
-    private static AnimationHolder anim_fall = AnimationHolder.EMPTY;
     private static AnimationHolder anim_attack = AnimationHolder.EMPTY;
     private static AnimationHolder anim_sleep = AnimationHolder.EMPTY;
     private static AnimationHolder anim_elytra_fly = AnimationHolder.EMPTY;
@@ -55,13 +54,12 @@ public class Form_AnubisWolf3 extends PlayerFormBase {
                 return anim_dig;
             case ANIM_JUMP:
             case ANIM_SNEAK_JUMP:
+            case ANIM_FALL:
+            case ANIM_SNEAK_FALL:
                 return anim_jump;
             case ANIM_CLIMB_IDLE:
             case ANIM_CLIMB:
                 return anim_climb;
-            case ANIM_FALL:
-            case ANIM_SNEAK_FALL:
-                return anim_fall;
             case ANIM_SLEEP:
                 return anim_sleep;
 
@@ -89,7 +87,6 @@ public class Form_AnubisWolf3 extends PlayerFormBase {
         anim_dig = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_dig"), true);
         anim_jump = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_jump"), true);
         anim_climb = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_climb"), true);
-        anim_fall = new AnimationHolder(new Identifier(MOD_ID, "form_snow_fox_3_fall"), true, 1.0f, 4);
         anim_attack = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_attack"), true);
         anim_sleep = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sleep"), true);
         anim_elytra_fly = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_elytra_fly"), true);
