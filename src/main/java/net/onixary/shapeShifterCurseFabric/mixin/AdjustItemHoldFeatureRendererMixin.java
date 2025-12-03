@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.mixin;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.HeldItemFeatureRenderer;
@@ -10,6 +11,7 @@ import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.ModelWithArms;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
@@ -85,18 +87,14 @@ public abstract class AdjustItemHoldFeatureRendererMixin<T extends LivingEntity,
             CallbackInfo ci
     ) {
         // 条件判断：例如隐藏特定玩家或满足条件时
-        if (!(entity instanceof ClientPlayerEntity)) {
-            return;
-        }
 
         if (shouldHideItem(entity)) {
             ci.cancel(); // 取消原版渲染逻辑
-            return;
         }
     }
 
     private boolean shouldHideItem(LivingEntity entity) {
-        if (entity instanceof ClientPlayerEntity player) {
+        if (entity instanceof AbstractClientPlayerEntity player) {
             PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
             boolean isFeral = curForm.getBodyType() == PlayerFormBodyType.FERAL;
             //ShapeShifterCurseFabric.LOGGER.info("Is Feral Form : " + isFeral);
