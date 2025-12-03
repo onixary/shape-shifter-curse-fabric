@@ -27,15 +27,17 @@ public class WolfMinionRenderer extends AzEntityRenderer<WolfMinion> {
 
  */
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.util.Identifier;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
-import static net.onixary.shapeShifterCurseFabric.minion.MinionRegister.WOLF_MINION_LAYER;
+import static net.onixary.shapeShifterCurseFabric.minion.MinionRegisterClient.WOLF_MINION_LAYER;
 
+@Environment(EnvType.CLIENT)
 public class AnubisWolfMinionEntityRenderer extends MobEntityRenderer<WolfEntity, AnubisWolfMinionEntityModel<WolfEntity>> {
     private static final Identifier ANUBIS_WOLF_MINION_TEXTURE = new Identifier(MOD_ID,"textures/entity/mob/anubis_wolf_minion.png");
 
