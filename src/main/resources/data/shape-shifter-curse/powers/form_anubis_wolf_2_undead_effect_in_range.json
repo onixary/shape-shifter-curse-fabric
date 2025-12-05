@@ -9,7 +9,7 @@
             },
             {
                 "type": "origins:status_effect",
-                "effect": "minecraft:speed",
+                "effect": "minecraft:weakness",
                 "inverted": true
             }
         ]
@@ -17,7 +17,7 @@
     "entity_action": {
         "type": "origins:apply_effect",
         "effect": {
-            "effect": "minecraft:speed",
+            "effect": "minecraft:weakness",
             "duration": 20,
             "amplifier": 0
         }

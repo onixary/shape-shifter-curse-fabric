@@ -83,7 +83,7 @@ public class TransformativeEntitySpawning {
                 ShapeShifterCurseFabric.T_WOLF,
                 2,  // 1/2 兔子的权重
                 2,
-                3
+                1
         );
         // 用数据包的方式来让T_WOLF生成在沙漠神殿 可能会与修改结构的Mod冲突
         // Weight: 20

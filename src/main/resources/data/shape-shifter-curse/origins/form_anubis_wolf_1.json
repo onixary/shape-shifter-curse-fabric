@@ -10,17 +10,20 @@
         "shape-shifter-curse:form_anubis_wolf_1_wither_on_hit",
         "shape-shifter-curse:form_anubis_wolf_can_eat_bone",
         "shape-shifter-curse:hunger_immunity",
+        "shape-shifter-curse:poison_immunity",
         "shape-shifter-curse:form_anubis_wolf_rotten_flesh_up",
         "shape-shifter-curse:form_anubis_wolf_1_undead_damage_down",
         "shape-shifter-curse:form_anubis_wolf_1_soul_speed",
         "shape-shifter-curse:form_anubis_wolf_1_vegetarian_saturation_down",
         "shape-shifter-curse:form_anubis_wolf_1_wither_attack_heal",
+        "shape-shifter-curse:form_anubis_wolf_1_wither_health",
 
         "shape-shifter-curse:form_instinct_use_catalyst",
         "shape-shifter-curse:form_instinct_use_golden_apple",
         "shape-shifter-curse:form_anubis_wolf_instinct_eat_rotten_flesh",
         "shape-shifter-curse:form_anubis_wolf_instinct_biome",
-        "shape-shifter-curse:form_anubis_wolf_instinct_wither_effect"
+        "shape-shifter-curse:form_anubis_wolf_instinct_wither_effect",
+        "shape-shifter-curse:no_hurt_pet"
     ],
     "icon": {
         "item": "minecraft:player_head"

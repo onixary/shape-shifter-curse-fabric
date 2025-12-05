@@ -45,7 +45,7 @@
       "show_icon": true
     }
   ],
-  "cooldown": 2400,
+  "cooldown": 12000,
   "hud_render": {
     "should_render": false
   }
