@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.player_form;
 
 import net.minecraft.client.network.AbstractClientPlayerEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
@@ -8,6 +9,9 @@ import net.onixary.shapeShifterCurseFabric.data.CodexData;
 import net.onixary.shapeShifterCurseFabric.integration.origins.Origins;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimRegistry;
+import org.jetbrains.annotations.Nullable;
 
 public class PlayerFormBase {
     public Identifier FormID;
@@ -56,6 +60,11 @@ public class PlayerFormBase {
     // 动画
     public void Anim_registerAnims() {
         return;
+    }
+
+    // TODO ANIM_SYSTEM_V3 未完工
+    public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, Identifier animStateID) {
+        return null;
     }
 
     public AnimationHolder Anim_getFormAnimToPlay(PlayerAnimState currentState) {
