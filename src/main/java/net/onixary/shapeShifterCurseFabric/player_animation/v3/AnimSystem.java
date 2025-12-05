@@ -55,7 +55,7 @@ public class AnimSystem {
 
     }
 
-    private @Nullable Identifier getPowerAnim() {
+    private @Nullable Identifier getPowerAnimStateID() {
         if (this.player instanceof IPlayerAnimController iPlayerAnimController) {
             return iPlayerAnimController.shape_shifter_curse$getPowerAnimationStateID();
         }
@@ -64,9 +64,9 @@ public class AnimSystem {
 
     public AnimationHolder getAnimation() {
         this.PreProcessAnimSystemData();
-        @Nullable Identifier powerAnim = this.getPowerAnim();
+        @Nullable Identifier powerAnimState = this.getPowerAnimStateID();
         Identifier animStateControllerID;
-        if (powerAnim == null) {
+        if (powerAnimState == null) {
             Pair<@Nullable Identifier, @NotNull Identifier> result = this.getAnimFSM().update(this.player, this.data);
             if (result.getLeft() != null) {
                 this.nowAnimFSMID = result.getLeft();
@@ -74,13 +74,16 @@ public class AnimSystem {
             animStateControllerID = result.getRight();
         }
         else {
-            animStateControllerID = powerAnim;
+            animStateControllerID = powerAnimState;
         }
         this.AfterProcessAnimSystemData();
         AbstractAnimStateController animStateController = this.data.playerForm.getAnimStateController(this.player, animStateControllerID);
         if (animStateController == null) {
             AnimRegistry.AnimState resultAnimState = Objects.requireNonNull(AnimRegistry.getAnimState(animStateControllerID));
             animStateController = resultAnimState.defaultController;
+        }
+        if (!animStateController.isRegistered()) {
+            animStateController.registerAnim(this.player, this.data);
         }
         AnimationHolder anim = animStateController.getAnimation(this.player, this.data);
         this.EndProcessAnimSystemData();
