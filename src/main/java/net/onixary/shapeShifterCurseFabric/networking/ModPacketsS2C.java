@@ -14,6 +14,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.NetworkThreadUtils;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -324,6 +325,7 @@ public class ModPacketsS2C {
         }
         int virtualTotemType = buf.readInt();
         ItemStack totemStack = buf.readItemStack();
-        VirtualTotemPower.process_virtual_totem_type(playerEntity, virtualTotemType, totemStack);
+        // ConcurrentModificationException 需要把这个操作放到Client线程而非Network线程
+        client.execute(() -> VirtualTotemPower.process_virtual_totem_type(playerEntity, virtualTotemType, totemStack));
     }
 }
