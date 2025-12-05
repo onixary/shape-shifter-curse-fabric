@@ -150,6 +150,28 @@ public class AnubisWolfMinionEntity extends WolfEntity implements IMinion<Anubis
     }
 
     @Override
+    public boolean tryAttack(Entity target) {
+        boolean IsSuccess = super.tryAttack(target);
+        LivingEntity Owner = this.getOwner();
+        if (Owner == null) {
+            return IsSuccess;
+        }
+        if (IsSuccess) {
+            switch (MinionLevel) {
+                case 1:
+                    break;
+                case 2:
+                    Owner.heal(1.0f);
+                case 3:
+                    Owner.heal(2.0f);
+                default:
+                    break;
+            }
+        }
+        return IsSuccess;
+    }
+
+    @Override
     public void tick() {
         if (!this.getWorld().isClient) {
             if (!this.shouldExist()) {

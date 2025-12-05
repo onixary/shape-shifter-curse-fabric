@@ -1,11 +1,12 @@
 {
-  "type": "origins:self_action_when_hit",
-  "entity_action": {
-    "type": "shape-shifter-curse:summon_anubis_wolf_minion",
+  "type": "origins:action_when_hit",
+  "bientity_action": {
+    "type": "shape-shifter-curse:bi_summon_anubis_wolf_minion",
     "minion_level": 3,
     "count": 2,
     "max_minion_count": 2,
-    "cooldown": 600
+    "cooldown": 600,
+    "reverse": true
   },
   "damage_condition": {
     "type": "origins:attacker"

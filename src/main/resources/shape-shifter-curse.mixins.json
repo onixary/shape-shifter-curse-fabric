@@ -45,7 +45,8 @@
     "MinionPlayerEntityMixin",
     "HungerManagerMixin",
     "EntityLootingMixin",
-    "BlockDropMixin"
+    "BlockDropMixin",
+    "ScareSkeletonMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",
