@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.player_animation.v3;
 
+import com.google.gson.JsonObject;
 import com.mojang.serialization.Lifecycle;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -8,6 +9,7 @@ import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 // 注册包含AnimState AnimStateController AnimFSM的类
@@ -15,29 +17,37 @@ import java.util.function.Supplier;
 // TODO 提供数据包可用的 AnimStateController 补充animState和animFSM
 public class AnimRegistry {
     public static class AnimState {
-        AbstractAnimStateController defaultController;
+        public AbstractAnimStateController defaultController;
+
+        public AnimState(AbstractAnimStateController defaultController) {
+            this.defaultController = defaultController;
+        }
     }
 
     public static RegistryKey<Registry<AnimState>> animStateRegistryKey = RegistryKey.ofRegistry(ShapeShifterCurseFabric.identifier("anim_state"));
     public static Registry<AnimState> animStateRegistry = new SimpleRegistry<>(animStateRegistryKey, Lifecycle.stable());
 
-    public static RegistryKey<Registry<Supplier<AbstractAnimStateController>>> animStateControllerRegistryKey = RegistryKey.ofRegistry(ShapeShifterCurseFabric.identifier("anim_state_controller"));
-    public static Registry<Supplier<AbstractAnimStateController>> animStateControllerRegistry = new SimpleRegistry<>(animStateControllerRegistryKey, Lifecycle.stable());
+    public static RegistryKey<Registry<Function<JsonObject, AbstractAnimStateController>>> animStateControllerRegistryKey = RegistryKey.ofRegistry(ShapeShifterCurseFabric.identifier("anim_state_controller"));
+    public static Registry<Function<JsonObject, AbstractAnimStateController>> animStateControllerRegistry = new SimpleRegistry<>(animStateControllerRegistryKey, Lifecycle.stable());
 
     public static RegistryKey<Registry<AbstractAnimFSM>> animFSMRegistryKey = RegistryKey.ofRegistry(ShapeShifterCurseFabric.identifier("anim_fsm"));
     public static Registry<AbstractAnimFSM> animFSMRegistry = new SimpleRegistry<>(animFSMRegistryKey, Lifecycle.stable());
 
 
-    public static void registerAnimState(Identifier identifier, AnimState animState) {
+    public static Identifier registerAnimState(Identifier identifier, AnimState animState) {
         Registry.register(animStateRegistry, identifier, animState);
+        return identifier;
     }
 
-    public static void registerAnimStateController(Identifier identifier, Supplier<AbstractAnimStateController> animStateController) {
+    // 用于数据包
+    public static Identifier registerAnimStateController(Identifier identifier, Function<JsonObject, AbstractAnimStateController> animStateController) {
         Registry.register(animStateControllerRegistry, identifier, animStateController);
+        return identifier;
     }
 
-    public static void registerAnimFSM(Identifier identifier, AbstractAnimFSM animFSM) {
+    public static Identifier registerAnimFSM(Identifier identifier, AbstractAnimFSM animFSM) {
         Registry.register(animFSMRegistry, identifier, animFSM);
+        return identifier;
     }
 
     public static @Nullable AnimState getAnimState(Identifier identifier) {
@@ -45,15 +55,15 @@ public class AnimRegistry {
     }
 
     // 每个Form里都有一个预设了不同参数的AnimStateController
-    public static @Nullable AbstractAnimStateController getAnimStateController(Identifier identifier) {
-        Supplier<AbstractAnimStateController> animStateController = animStateControllerRegistry.get(identifier);
+    public static @Nullable AbstractAnimStateController getAnimStateController(Identifier identifier, JsonObject jsonData) {
+        Function<JsonObject, AbstractAnimStateController> animStateController = animStateControllerRegistry.get(identifier);
         if (animStateController != null) {
-            return animStateController.get();
+            return animStateController.apply(jsonData);
         }
         return null;
     }
 
-    public static @Nullable Supplier<AbstractAnimStateController> getAnimStateControllerSupplier(Identifier identifier) {
+    public static @Nullable Function<JsonObject, AbstractAnimStateController> getAnimStateControllerSupplier(Identifier identifier) {
         return animStateControllerRegistry.get(identifier);
     }
 
