@@ -8,5 +8,10 @@
     "condition": {
         "type": "shape-shifter-curse:chance",
         "chance": 0.8
+    },
+    "damage_condition": {
+        "type": "origins:type",
+        "damage_type": "minecraft:wither",
+        "inverted": true
     }
 }
