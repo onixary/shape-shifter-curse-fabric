@@ -34,6 +34,7 @@ import net.onixary.shapeShifterCurseFabric.status_effects.TStatusApplier;
 public class TransformativeWolfEntity extends WolfEntity {
     public TransformativeWolfEntity(EntityType<? extends WolfEntity> entityType, World world) {
         super(entityType, world);
+        this.setBaby(false);
     }
 
     // 20 ticks = 1 second
