@@ -35,7 +35,6 @@ import org.jetbrains.annotations.Nullable;
 public class TransformativeWolfEntity extends WolfEntity {
     public TransformativeWolfEntity(EntityType<? extends WolfEntity> entityType, World world) {
         super(entityType, world);
-        this.setBaby(false);
     }
 
     @Override
