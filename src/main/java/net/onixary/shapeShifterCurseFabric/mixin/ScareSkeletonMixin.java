@@ -26,7 +26,7 @@ public abstract class ScareSkeletonMixin extends HostileEntity implements Ranged
 
     @Inject(at = @At("TAIL"), method = "initGoals")
     private void addGoals(CallbackInfo info) {
-        Goal goal = new FleeEntityGoal<>(this, PlayerEntity.class, AdditionalPowers.SCARE_SKELETON::isActive, 6.0F, 1.0D, 1.2D, EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR::test);
+        Goal goal = new FleeEntityGoal<>(this, PlayerEntity.class, AdditionalPowers.SCARE_SKELETON::isActive, 3.0F, 1.0D, 1.2D, EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR::test);
         this.goalSelector.add(3, goal);
     }
 
