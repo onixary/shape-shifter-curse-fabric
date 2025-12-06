@@ -13,4 +13,5 @@ accessible field net/minecraft/client/render/WorldRenderer bufferBuilders Lnet/m
 accessible method net/minecraft/entity/LivingEntity onStatusEffectRemoved (Lnet/minecraft/entity/effect/StatusEffectInstance;)V
 accessible class net/minecraft/entity/passive/WolfEntity$WolfEscapeDangerGoal
 accessible class net/minecraft/entity/passive/WolfEntity$AvoidLlamaGoal
-
+accessible field net/minecraft/entity/passive/PassiveEntity$PassiveData babyAllowed Z
+mutable field net/minecraft/entity/passive/PassiveEntity$PassiveData babyAllowed Z

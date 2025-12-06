@@ -1,8 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.minion.mobs;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.*;
@@ -20,10 +18,13 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.minion.IMinion;
 import net.onixary.shapeShifterCurseFabric.minion.IPlayerEntityMinion;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
@@ -34,6 +35,19 @@ public class AnubisWolfMinionEntity extends WolfEntity implements IMinion<Anubis
         super(entityType, world);
         this.setPathfindingPenalty(PathNodeType.POWDER_SNOW, -1.0F);
         this.setPathfindingPenalty(PathNodeType.DANGER_POWDER_SNOW, -1.0F);
+    }
+
+    @Override
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+        PassiveData data;
+        if (entityData instanceof PassiveData passiveData) {
+            passiveData.babyAllowed = false;
+            data = passiveData;
+        }
+        else {
+            data = new PassiveData(false);
+        }
+        return super.initialize(world, difficulty, spawnReason, data, entityNbt);
     }
 
     public int MinionLevel = 1;

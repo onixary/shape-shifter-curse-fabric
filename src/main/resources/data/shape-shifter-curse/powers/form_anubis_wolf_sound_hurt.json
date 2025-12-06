@@ -10,8 +10,8 @@
         "chance": 0.8
     },
     "damage_condition": {
-        "type": "origins:type",
-        "damage_type": "minecraft:wither",
+        "type": "origins:in_tag",
+        "tag": "shape-shifter-curse:is_wither",
         "inverted": true
     }
 }
