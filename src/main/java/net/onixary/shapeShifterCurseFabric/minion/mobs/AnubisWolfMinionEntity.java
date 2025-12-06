@@ -276,7 +276,7 @@ public class AnubisWolfMinionEntity extends WolfEntity implements IMinion<Anubis
     }
 
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_WITHER_SKELETON_HURT;
+        return SoundEvents.ENTITY_VEX_HURT;
     }
 
     protected SoundEvent getDeathSound() {
