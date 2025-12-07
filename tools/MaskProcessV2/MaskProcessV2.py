@@ -139,7 +139,8 @@ def executeMaskProgram_MergeLayer(ImageName: str, LayersData: typing.Optional[di
 	if not MaskProgram.AllowMerge:
 		print(f"Mask program {MaskProgramID} does not allow merging")
 		return None
-	MaskProgramList = MaskProgram.Program
+	MaskProgramList = MaskProgram.Program.copy()
+	MaskProgramList.reverse()
 	ProgramVariable = MaskProgram.ProgramVariable()
 	ResultImage = Image.new("RGBA", LayersData.get(MaskProgramList[0].LineName).size, MaskEmptyColor)
 	for y in range(ResultImage.height):
