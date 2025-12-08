@@ -54,7 +54,7 @@ public abstract class MinionBase extends TameableEntity implements IMinion<Minio
 
     @Override
     public World method_48926() {
-        return this.getWorld();
+        return super.getWorld();
     }
 
     public double getMinionDisappearRange() {
