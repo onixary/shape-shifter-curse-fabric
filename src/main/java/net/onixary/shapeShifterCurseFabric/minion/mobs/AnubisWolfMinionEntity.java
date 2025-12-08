@@ -295,7 +295,7 @@ public class AnubisWolfMinionEntity extends WolfEntity implements IMinion<Anubis
 
     @Override
     public World method_48926() {
-        return this.getWorld();
+        return super.getWorld();
     }
 
     class WolfMinionEscapeDangerGoal extends EscapeDangerGoal {
