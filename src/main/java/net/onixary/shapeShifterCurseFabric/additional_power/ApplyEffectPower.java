@@ -20,6 +20,9 @@ public class ApplyEffectPower extends Power {
 
     public ApplyEffectPower(PowerType<?> type, LivingEntity entity, List<StatusEffectInstance> effects) {
         super(type, entity);
+        if (effects == null) {
+            effects = new ArrayList<>();
+        }
         this.effects = effects;
         this.storeEffects = new ArrayList<>();
         this.setTicking(true);
