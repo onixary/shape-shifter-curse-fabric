@@ -62,6 +62,7 @@ public class AdditionalPowers {
         register(ModifyEntityLootPower.createFactory());
         register(ModifyBlockDropPower.createFactory());
         register(ActionOnEntityInRangePower.createFactory());
+        register(ApplyEffectPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {
