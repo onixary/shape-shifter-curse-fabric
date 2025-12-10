@@ -18,7 +18,7 @@ public class EmptyController extends AbstractAnimStateControllerDP {
     }
 
     @Override
-    public boolean isRegistered() {
+    public boolean isRegistered(PlayerEntity player, AnimSystem.AnimSystemData data) {
         return true;
     }
 

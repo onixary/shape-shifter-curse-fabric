@@ -9,7 +9,7 @@ public abstract class AbstractAnimStateController {
 
     private boolean isRegistered = false;
 
-    public boolean isRegistered() {
+    public boolean isRegistered(PlayerEntity player, AnimSystem.AnimSystemData data) {
         return isRegistered;
     }
 

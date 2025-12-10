@@ -4,6 +4,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
+import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
@@ -18,11 +19,15 @@ import java.util.Objects;
 public class AnimSystem {
     public static class AnimSystemData {
         public PlayerFormBase playerForm;
+        public boolean IsOnGround = true;
+        public Vec3d LastPosition = Vec3d.ZERO;
+        public long LastPosYChange = 0;
         public NbtCompound customData;  // 用于存储其他拓展Mod的数据 在本模组中不使用
 
-        public AnimSystemData() {
+        public AnimSystemData(PlayerEntity player) {
             this.playerForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
             this.customData = new NbtCompound();
+            this.LastPosition = player.getPos();
         }
     }
     public final PlayerEntity player;  // 玩家实体 理论上如果当前玩家实体被卸载了 那么这个AnimSystem也应该被卸载
@@ -40,15 +45,22 @@ public class AnimSystem {
 
     public AnimSystem(PlayerEntity player) {
         this.player = player;
-        this.data = new AnimSystemData();
+        this.data = new AnimSystemData(player);
     }
 
     private void PreProcessAnimSystemData() {
         this.data.playerForm = RegPlayerFormComponent.PLAYER_FORM.get(this.player).getCurrentForm();
+        if (this.player.getPos().getY() == this.data.LastPosition.getY()) {
+            this.data.LastPosYChange ++;
+        }
+        else {
+            this.data.LastPosYChange = 0;
+        }
+        this.data.IsOnGround = (player.isOnGround() || (!player.getAbilities().flying && this.data.LastPosYChange > 10));
     }
 
     private void AfterProcessAnimSystemData() {
-
+        this.data.LastPosition = this.player.getPos();
     }
 
     private void EndProcessAnimSystemData() {
@@ -82,7 +94,7 @@ public class AnimSystem {
             AnimRegistry.AnimState resultAnimState = Objects.requireNonNull(AnimRegistry.getAnimState(animStateControllerID));
             animStateController = resultAnimState.defaultController;
         }
-        if (!animStateController.isRegistered()) {
+        if (!animStateController.isRegistered(this.player, this.data)) {
             animStateController.registerAnim(this.player, this.data);
         }
         AnimationHolder anim = animStateController.getAnimation(this.player, this.data);
