@@ -74,38 +74,51 @@ public class AnimSystem {
 
     }
 
-    private @Nullable Identifier getPowerAnimStateID() {
+    private @Nullable Identifier getPowerAnimID() {
         if (this.player instanceof IPlayerAnimController iPlayerAnimController) {
-            return iPlayerAnimController.shape_shifter_curse$getPowerAnimationStateID();
+            return iPlayerAnimController.shape_shifter_curse$getPowerAnimationID();
         }
         return null;
     }
 
     public AnimationHolder getAnimation() {
         this.PreProcessAnimSystemData();
-        @Nullable Identifier powerAnimState = this.getPowerAnimStateID();
-        Identifier animStateControllerID;
-        if (powerAnimState == null) {
+        @Nullable Identifier powerAnimID = this.getPowerAnimID();
+        if (powerAnimID != null) {
+            if (!this.data.playerForm.isPowerAnimRegistered(this.player, this.data)) {
+                this.data.playerForm.registerPowerAnim(this.player, this.data);
+            }
+            Pair<Boolean, @Nullable AnimationHolder> result = this.data.playerForm.getPowerAnim(this.player, this.data, powerAnimID);
+            this.AfterProcessAnimSystemData();
+            if (result.getLeft()) {
+                return result.getRight();
+            }
+            @Nullable AnimRegistry.PowerDefaultAnim resultPowerDefaultAnim = AnimRegistry.getPowerDefaultAnim(powerAnimID);
+            if (resultPowerDefaultAnim == null) {
+                return null;
+            }
+            AnimationHolder anim = resultPowerDefaultAnim.ANIM_SYSTEM_GET_CURRENT_ANIM(this.player, this.data);
+            this.EndProcessAnimSystemData();
+            return anim;
+        }
+        else {
             Pair<@Nullable Identifier, @NotNull Identifier> result = this.getAnimFSM().update(this.player, this.data);
             if (result.getLeft() != null) {
                 this.nowAnimFSMID = result.getLeft();
             }
-            animStateControllerID = result.getRight();
+            Identifier animStateControllerID = result.getRight();
+            this.AfterProcessAnimSystemData();
+            AbstractAnimStateController animStateController = this.data.playerForm.getAnimStateController(this.player, this.data, animStateControllerID);
+            if (animStateController == null) {
+                AnimRegistry.AnimState resultAnimState = Objects.requireNonNull(AnimRegistry.getAnimState(animStateControllerID));
+                animStateController = resultAnimState.defaultController;
+            }
+            if (!animStateController.isRegistered(this.player, this.data)) {
+                animStateController.registerAnim(this.player, this.data);
+            }
+            AnimationHolder anim = animStateController.getAnimation(this.player, this.data);
+            this.EndProcessAnimSystemData();
+            return anim;
         }
-        else {
-            animStateControllerID = powerAnimState;
-        }
-        this.AfterProcessAnimSystemData();
-        AbstractAnimStateController animStateController = this.data.playerForm.getAnimStateController(this.player, animStateControllerID);
-        if (animStateController == null) {
-            AnimRegistry.AnimState resultAnimState = Objects.requireNonNull(AnimRegistry.getAnimState(animStateControllerID));
-            animStateController = resultAnimState.defaultController;
-        }
-        if (!animStateController.isRegistered(this.player, this.data)) {
-            animStateController.registerAnim(this.player, this.data);
-        }
-        AnimationHolder anim = animStateController.getAnimation(this.player, this.data);
-        this.EndProcessAnimSystemData();
-        return anim;
     }
 }

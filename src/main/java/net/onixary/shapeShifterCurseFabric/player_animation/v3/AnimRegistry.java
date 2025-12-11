@@ -2,13 +2,16 @@ package net.onixary.shapeShifterCurseFabric.player_animation.v3;
 
 import com.google.gson.JsonObject;
 import com.mojang.serialization.Lifecycle;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.SimpleRegistry;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -24,6 +27,41 @@ public class AnimRegistry {
         }
     }
 
+    public static class PowerDefaultAnim {  // 覆写时的defaultAnimationData应该为null
+        boolean IsRegistered = false;
+        AnimUtils.AnimationHolderData defaultAnimationData = null;
+        AnimationHolder defaultAnimation = null;
+        public PowerDefaultAnim() {
+            this((AnimUtils.AnimationHolderData)null);
+        }
+
+        public PowerDefaultAnim(@Nullable AnimUtils.AnimationHolderData defaultAnimationData) {
+            this.defaultAnimationData = defaultAnimationData;
+        }
+
+        public @Nullable AnimationHolder getAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) {
+            return this.defaultAnimation;
+        }
+
+        public void registerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) {
+            if (this.IsRegistered) {
+                return;
+            }
+            if (this.defaultAnimationData != null) {
+                this.defaultAnimation = this.defaultAnimationData.build();
+            }
+            this.IsRegistered = true;
+        }
+
+        // 用于动画系统 不推荐覆写 修改逻辑推荐覆写getAnim + registerAnim
+        public @Nullable AnimationHolder ANIM_SYSTEM_GET_CURRENT_ANIM(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) {
+            if (!this.IsRegistered) {
+                this.registerAnim(player, animSystemData);
+            }
+            return this.getAnim(player, animSystemData);
+        }
+    }
+
     public static RegistryKey<Registry<AnimState>> animStateRegistryKey = RegistryKey.ofRegistry(ShapeShifterCurseFabric.identifier("anim_state"));
     public static Registry<AnimState> animStateRegistry = new SimpleRegistry<>(animStateRegistryKey, Lifecycle.stable());
 
@@ -33,6 +71,8 @@ public class AnimRegistry {
     public static RegistryKey<Registry<AbstractAnimFSM>> animFSMRegistryKey = RegistryKey.ofRegistry(ShapeShifterCurseFabric.identifier("anim_fsm"));
     public static Registry<AbstractAnimFSM> animFSMRegistry = new SimpleRegistry<>(animFSMRegistryKey, Lifecycle.stable());
 
+    public static RegistryKey<Registry<PowerDefaultAnim>> powerAnimIDRegistryKey = RegistryKey.ofRegistry(ShapeShifterCurseFabric.identifier("power_anim_id"));
+    public static Registry<PowerDefaultAnim> powerAnimIDRegistry = new SimpleRegistry<>(powerAnimIDRegistryKey, Lifecycle.stable());
 
     public static Identifier registerAnimState(Identifier identifier, AnimState animState) {
         Registry.register(animStateRegistry, identifier, animState);
@@ -69,5 +109,9 @@ public class AnimRegistry {
 
     public static @Nullable AbstractAnimFSM getAnimFSM(Identifier identifier) {
         return animFSMRegistry.get(identifier);
+    }
+
+    public static @Nullable PowerDefaultAnim getPowerDefaultAnim(Identifier identifier) {
+        return powerAnimIDRegistry.get(identifier);
     }
 }

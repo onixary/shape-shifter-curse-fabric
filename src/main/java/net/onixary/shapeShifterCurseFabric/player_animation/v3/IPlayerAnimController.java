@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 
 public interface IPlayerAnimController {
     @Nullable
-    Identifier shape_shifter_curse$getPowerAnimationStateID();
+    Identifier shape_shifter_curse$getPowerAnimationID();
 
     // TODO 添加设置动画的方法
 }

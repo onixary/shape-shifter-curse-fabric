@@ -4,6 +4,7 @@ import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.data.CodexData;
 import net.onixary.shapeShifterCurseFabric.integration.origins.Origins;
@@ -11,6 +12,8 @@ import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimRegistry;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class PlayerFormBase {
@@ -63,8 +66,26 @@ public class PlayerFormBase {
     }
 
     // TODO ANIM_SYSTEM_V3 未完工
-    public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, Identifier animStateID) {
+    public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
         return null;
+    }
+
+    // TODO ANIM_SYSTEM_V3 未完工
+    // 注册PowerAnim
+    public void registerPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) {
+        return;
+    }
+
+    // TODO ANIM_SYSTEM_V3 未完工
+    // 是否注册了PowerAnim
+    public boolean isPowerAnimRegistered(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) {
+        return true;
+    }
+
+    // TODO ANIM_SYSTEM_V3 未完工
+    // 获取PowerAnim 输出左为是否匹配(不匹配使用由PowerAnim注册表提供的默认动画) 右为动画
+    public @NotNull Pair<Boolean, @Nullable AnimationHolder> getPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier powerAnimID) {
+        return new Pair<>(false, null);
     }
 
     public AnimationHolder Anim_getFormAnimToPlay(PlayerAnimState currentState) {

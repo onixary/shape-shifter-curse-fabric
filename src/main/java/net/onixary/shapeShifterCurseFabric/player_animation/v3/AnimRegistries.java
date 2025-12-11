@@ -13,7 +13,6 @@ public class AnimRegistries {
     public static Identifier CONTROLLER_EMPTY = AnimRegistry.registerAnimStateController(ShapeShifterCurseFabric.identifier("empty_controller"), EmptyController::new);
     public static Identifier CONTROLLER_USE_OTHER_STATE_ANIM = AnimRegistry.registerAnimStateController(ShapeShifterCurseFabric.identifier("use_other_state_anim_controller"), UseOtherStateAnimController::new);
 
-    public static Identifier ANIM_STATE_POWER = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("power_state"), new AnimRegistry.AnimState(new EmptyController()));
     public static Identifier ANIM_STATE_SLEEP = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("sleep_state"), new AnimRegistry.AnimState(new EmptyController()));
     public static Identifier ANIM_STATE_RIDE = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("ride_state"), new AnimRegistry.AnimState(new EmptyController()));
     public static Identifier ANIM_STATE_RIDE_VEHICLE = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("ride_vehicle_state"), new AnimRegistry.AnimState(new UseOtherStateAnimController(ANIM_STATE_RIDE)));
