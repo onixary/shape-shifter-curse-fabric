@@ -21,7 +21,8 @@ public class AnimSystem {
         public PlayerFormBase playerForm;
         public boolean IsOnGround = true;
         public Vec3d LastPosition = Vec3d.ZERO;
-        public long LastPosYChange = 0;
+        public long LastPosYChange = 0;  // 持续增长使用long防止溢出 顺便可以不用做最大值判断
+        public long ContinueSwingAnimCounter = 0;  // 持续增长使用long防止溢出 顺便可以不用做最大值判断
         public NbtCompound customData;  // 用于存储其他拓展Mod的数据 在本模组中不使用
 
         public AnimSystemData(PlayerEntity player) {
@@ -55,6 +56,12 @@ public class AnimSystem {
         }
         else {
             this.data.LastPosYChange = 0;
+        }
+        if (this.player.handSwinging) {
+            this.data.ContinueSwingAnimCounter ++;
+        }
+        else {
+            this.data.ContinueSwingAnimCounter = 0;
         }
         this.data.IsOnGround = (player.isOnGround() || (!player.getAbilities().flying && this.data.LastPosYChange > 10));
     }

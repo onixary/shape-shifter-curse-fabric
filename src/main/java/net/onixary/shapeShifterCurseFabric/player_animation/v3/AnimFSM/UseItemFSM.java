@@ -24,6 +24,13 @@ public class UseItemFSM extends AbstractAnimFSM {
         if (UniversalStateResult != null) {
             return UniversalStateResult;
         }
-        return null;
+        if (player.isUsingItem()) {
+            return ANIM_STATE_USE_ITEM;
+        }
+        // 到这里player.handSwinging一定是true
+        if (animSystemData.ContinueSwingAnimCounter >= 10) {
+            return ANIM_STATE_MINING;
+        }
+        return ANIM_STATE_ATTACK;
     }
 }

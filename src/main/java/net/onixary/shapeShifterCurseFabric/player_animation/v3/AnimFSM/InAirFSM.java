@@ -24,6 +24,15 @@ public class InAirFSM extends AbstractAnimFSM {
         if (UniversalStateResult != null) {
             return UniversalStateResult;
         }
-        return null;
+        if (player.getAbilities().flying) {
+            return ANIM_STATE_FLYING;
+        }
+        if (player.isFallFlying()) {
+            return ANIM_STATE_FALL_FLYING;
+        }
+        if (player.getVelocity().getY() > 0) {
+            return ANIM_STATE_JUMP;
+        }
+        return ANIM_STATE_FALL;
     }
 }
