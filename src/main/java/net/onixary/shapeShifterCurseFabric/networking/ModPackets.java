@@ -49,4 +49,8 @@ public class ModPackets {
     public static final Identifier UPDATE_CUSTOM_SETTING = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_custom_setting");
 
     public static final Identifier ACTIVE_VIRTUAL_TOTEM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "active_virtual_totem");
+
+    public static final Identifier UPDATE_POWER_ANIM_DATA_TO_CLIENT = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_power_anim_data_to_client");
+    public static final Identifier UPDATE_POWER_ANIM_DATA_TO_SERVER = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_power_anim_data_to_server");
+    public static final Identifier REQUEST_POWER_ANIM_DATA = new Identifier(ShapeShifterCurseFabric.MOD_ID, "request_power_anim_data");
 }

@@ -462,6 +462,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
     @Unique
     AnimationController.PlayerAnimDataHolder AnimDataHolder = new AnimationController.PlayerAnimDataHolder();
 
+    // TODO 改为Inject注入
     @Override
     public void tick() {
         super.tick();
