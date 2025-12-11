@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.player_animation.v3;
 
+import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
@@ -20,7 +21,7 @@ public class AnimSystem {
     public static class AnimSystemData {
         public PlayerFormBase playerForm;
         public boolean IsOnGround = true;
-        public Vec3d LastPosition = Vec3d.ZERO;
+        public Vec3d LastPosition;
         public long LastPosYChange = 0;  // 持续增长使用long防止溢出 顺便可以不用做最大值判断
         public long ContinueSwingAnimCounter = 0;  // 持续增长使用long防止溢出 顺便可以不用做最大值判断
         public NbtCompound customData;  // 用于存储其他拓展Mod的数据 在本模组中不使用
@@ -33,11 +34,16 @@ public class AnimSystem {
     }
     public final PlayerEntity player;  // 玩家实体 理论上如果当前玩家实体被卸载了 那么这个AnimSystem也应该被卸载
 
-    public static final Identifier defaultAnimFSMID = ShapeShifterCurseFabric.identifier("on_ground");
+    public static final Identifier defaultAnimFSMID = AnimRegistries.FSM_ON_GROUND;
 
     public Identifier nowAnimFSMID = defaultAnimFSMID;
 
     public AnimSystemData data;
+
+    public @Nullable Identifier nowPlayingPowerAnimationID = null;
+    public @Nullable KeyframeAnimation nowPlayingPowerAnimation = null;
+    public int NPPA_Length = -1;
+    public int NPPA_NowTick = 0;
 
     public @NotNull AbstractAnimFSM getAnimFSM() {
         // 及时崩溃报错 省的找问题
@@ -64,14 +70,46 @@ public class AnimSystem {
             this.data.ContinueSwingAnimCounter = 0;
         }
         this.data.IsOnGround = (player.isOnGround() || (!player.getAbilities().flying && this.data.LastPosYChange > 10));
-    }
-
-    private void AfterProcessAnimSystemData() {
-        this.data.LastPosition = this.player.getPos();
+        this.NPPA_Tick();
     }
 
     private void EndProcessAnimSystemData() {
+        this.data.LastPosition = this.player.getPos();
+    }
 
+    private void NPPA_Tick() {
+        if (this.player instanceof IPlayerAnimController iPlayerAnimController) {
+            if (this.nowPlayingPowerAnimationID != null && this.NPPA_Length > 0) {
+                this.NPPA_NowTick++;
+                if (this.NPPA_NowTick >= this.NPPA_Length) {
+                    iPlayerAnimController.shape_shifter_curse$animationDoneCallBack(this.nowPlayingPowerAnimationID);
+                    this.NPPA_NowTick = 0;
+                }
+            }
+        }
+    }
+
+    private void NPPA_SetAnimation(@NotNull Identifier animID, @Nullable AnimationHolder anim) {
+        if (animID.equals(this.nowPlayingPowerAnimationID)) {
+            return;
+        }
+        this.nowPlayingPowerAnimationID = animID;
+        this.nowPlayingPowerAnimation = anim == null ? null : anim.getAnimation();
+        if (nowPlayingPowerAnimation == null) {
+            this.NPPA_Length = -1;
+            this.NPPA_NowTick = 0;
+            return;
+        }
+        int AnimLength = this.nowPlayingPowerAnimation.getLength();
+        float Speed = anim.getSpeed();
+        if (Speed == 0) {
+            this.NPPA_Length = -1;
+            this.NPPA_NowTick = 0;
+        }
+        else {
+            this.NPPA_Length = (int) (AnimLength / Speed);
+            this.NPPA_NowTick = 0;
+        }
     }
 
     private @Nullable Identifier getPowerAnimID() {
@@ -81,15 +119,15 @@ public class AnimSystem {
         return null;
     }
 
-    public AnimationHolder getAnimation() {
+    public @Nullable AnimationHolder getAnimation() {  // 每Game Tick(0.05s)调用一次 否则NPPA(nowPlayPowerAnimation)系统会出问题
         this.PreProcessAnimSystemData();
+        @Nullable AnimationHolder anim;
         @Nullable Identifier powerAnimID = this.getPowerAnimID();
         if (powerAnimID != null) {
             if (!this.data.playerForm.isPowerAnimRegistered(this.player, this.data)) {
                 this.data.playerForm.registerPowerAnim(this.player, this.data);
             }
             Pair<Boolean, @Nullable AnimationHolder> result = this.data.playerForm.getPowerAnim(this.player, this.data, powerAnimID);
-            this.AfterProcessAnimSystemData();
             if (result.getLeft()) {
                 return result.getRight();
             }
@@ -97,9 +135,8 @@ public class AnimSystem {
             if (resultPowerDefaultAnim == null) {
                 return null;
             }
-            AnimationHolder anim = resultPowerDefaultAnim.ANIM_SYSTEM_GET_CURRENT_ANIM(this.player, this.data);
-            this.EndProcessAnimSystemData();
-            return anim;
+            anim = resultPowerDefaultAnim.ANIM_SYSTEM_GET_CURRENT_ANIM(this.player, this.data);
+            this.NPPA_SetAnimation(powerAnimID, anim);
         }
         else {
             Pair<@Nullable Identifier, @NotNull Identifier> result = this.getAnimFSM().update(this.player, this.data);
@@ -107,7 +144,6 @@ public class AnimSystem {
                 this.nowAnimFSMID = result.getLeft();
             }
             Identifier animStateControllerID = result.getRight();
-            this.AfterProcessAnimSystemData();
             AbstractAnimStateController animStateController = this.data.playerForm.getAnimStateController(this.player, this.data, animStateControllerID);
             if (animStateController == null) {
                 AnimRegistry.AnimState resultAnimState = Objects.requireNonNull(AnimRegistry.getAnimState(animStateControllerID));
@@ -116,9 +152,9 @@ public class AnimSystem {
             if (!animStateController.isRegistered(this.player, this.data)) {
                 animStateController.registerAnim(this.player, this.data);
             }
-            AnimationHolder anim = animStateController.getAnimation(this.player, this.data);
-            this.EndProcessAnimSystemData();
-            return anim;
+            anim = animStateController.getAnimation(this.player, this.data);
         }
+        this.EndProcessAnimSystemData();
+        return anim;
     }
 }
