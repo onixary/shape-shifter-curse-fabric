@@ -335,7 +335,13 @@ public class ModPacketsS2C {
 
     public static void receivePowerAnimationData(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         UUID playerUuid = buf.readUuid();
-        Identifier animationId = buf.readIdentifier();
+        @Nullable Identifier animationId;
+        if (buf.readBoolean()) {
+            animationId = buf.readIdentifier();
+        }
+        else {
+            animationId = null;
+        }
         int animationCount = buf.readInt();
         int animationLength = buf.readInt();
         if (client.world == null) {
@@ -352,7 +358,13 @@ public class ModPacketsS2C {
 
     public static void sendPowerAnimationDataToServer(@Nullable Identifier animationId, int animationCount, int animationLength) {
         PacketByteBuf buf = PacketByteBufs.create();
-        buf.writeIdentifier(animationId);
+        if (animationId != null) {
+            buf.writeBoolean(true);
+            buf.writeIdentifier(animationId);
+        }
+        else {
+            buf.writeBoolean(false);
+        }
         buf.writeInt(animationCount);
         buf.writeInt(animationLength);
         ClientPlayNetworking.send(UPDATE_POWER_ANIM_DATA_TO_SERVER, buf);

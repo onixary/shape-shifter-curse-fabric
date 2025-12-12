@@ -16,4 +16,9 @@ public abstract class AbstractAnimStateController {
     public void registerAnim(PlayerEntity player, AnimSystem.AnimSystemData data) {
         isRegistered = true;
     }
+
+    // 仅用于特殊系统 比如TransformController 其他系统请勿使用(没对应逻辑)
+    public boolean isEnabled(PlayerEntity player, AnimSystem.AnimSystemData data) {
+        return true;
+    }
 }

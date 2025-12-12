@@ -27,7 +27,7 @@ public abstract class PlayerAnimInterfaceMixin implements IPlayerAnimController 
     private int powerAnimationTime = -1;  // 在服务器端和客户端上处理
 
     @Unique
-    private boolean isAnimationLoop = false;  // 在服务器端上处理同步时使用 用于区分Count Loop还是真Loop
+    private boolean isAnimationLoop = false;  // 在服务器端上处理同步时使用 用于区分Count Loop还是真Loop CountLoop在服务器上不会处理 仅会发送到客户端
 
     @Unique
     private final int updateRate = 100;  // 每多少tick更新一次(5s)
@@ -36,15 +36,16 @@ public abstract class PlayerAnimInterfaceMixin implements IPlayerAnimController 
     private final int updateAdditionalTime = 20;  // 用于无限时长的动画
 
     @Unique
-    private void setAnimation(@Nullable Identifier id, int count, int time) {
+    private void setAnimation(@Nullable Identifier id, int count, int time, Boolean isAnimationLoop)  {
         this.powerAnimationID = id;
         this.powerAnimationCount = count;
         this.powerAnimationTime = time;
+        this.isAnimationLoop = isAnimationLoop;
     }
 
     @Unique
     private void stopAnimation() {
-        this.setAnimation(null, -1, -1);
+        this.setAnimation(null, -1, -1, false);
     }
 
     @Unique
@@ -74,17 +75,16 @@ public abstract class PlayerAnimInterfaceMixin implements IPlayerAnimController 
         }
     }
 
+    // 为带同步的设置动画 其他和setAnimation一样
     @Unique
-    private void setAnimationOnServer(@Nullable Identifier id, int count, int time) {
-        this.powerAnimationID = id;
-        this.powerAnimationCount = count;
-        this.powerAnimationTime = time;
+    private void setAnimationOnServer(@Nullable Identifier id, int count, int time, Boolean isAnimationLoop) {
+        this.setAnimation(id, count, time, isAnimationLoop);
         this.syncToOtherPlayers();
     }
 
     @Unique
     private void stopAnimationOnServer() {
-        this.setAnimationOnServer(null, -1, -1);
+        this.setAnimationOnServer(null, -1, -1, false);
     }
 
     @Override
@@ -110,7 +110,9 @@ public abstract class PlayerAnimInterfaceMixin implements IPlayerAnimController 
             ModPacketsS2C.sendPowerAnimationDataToServer(id, PlayCount, -1);
             return;
         }
-        this.setAnimationOnServer(id, PlayCount, -1);
+        this.setAnimationOnServer(id, PlayCount, -1, false);
+        // 服务器端不处理次数动画 发送到客户端后在服务器端上清除
+        this.stopAnimation();  // 使用客户端清除 不用同步
     }
 
     @Override
@@ -120,7 +122,7 @@ public abstract class PlayerAnimInterfaceMixin implements IPlayerAnimController 
             ModPacketsS2C.sendPowerAnimationDataToServer(id, -1, Time);
             return;
         }
-        this.setAnimationOnServer(id, -1, Time);
+        this.setAnimationOnServer(id, -1, Time, false);
     }
 
     @Override
@@ -130,15 +132,14 @@ public abstract class PlayerAnimInterfaceMixin implements IPlayerAnimController 
             ModPacketsS2C.sendPowerAnimationDataToServer(id, -1, -1);
             return;
         }
-        this.setAnimationOnServer(id, -1, -1);
-        this.isAnimationLoop = true;
+        this.setAnimationOnServer(id, -1, -1, true);
     }
 
     @Override
     public void shape_shifter_curse$stopAnimation() {
         PlayerEntity realThis = (PlayerEntity) (Object) this;
         if (realThis.getWorld().isClient) {
-            // 或许可以补充一个向服务器发包的代码
+            ModPacketsS2C.sendPowerAnimationDataToServer(null, -1, -1);
             return;
         }
         this.stopAnimationOnServer();
@@ -158,9 +159,10 @@ public abstract class PlayerAnimInterfaceMixin implements IPlayerAnimController 
         }
     }
 
+    // 仅在客户端调用 服务器不应该调用
     @Override
     public void shape_shifter_curse$setAnimationData(@Nullable Identifier id, int count, int time) {
-        this.setAnimation(id, count, time);
+        this.setAnimation(id, count, time, false);
     }
 
     @Inject(method = "<init>", at = @At("RETURN"))

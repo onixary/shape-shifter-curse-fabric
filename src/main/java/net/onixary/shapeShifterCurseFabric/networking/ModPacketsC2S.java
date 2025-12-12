@@ -21,6 +21,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
@@ -152,7 +153,12 @@ public class ModPacketsC2S {
     }
 
     private static void onUpdatePowerAnimationData(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
-        Identifier animationId = packetByteBuf.readIdentifier();
+        @Nullable Identifier animationId;
+        if (packetByteBuf.readBoolean()) {
+            animationId = packetByteBuf.readIdentifier();
+        } else {
+            animationId = null;
+        }
         int animationCount = packetByteBuf.readInt();
         int animationLength = packetByteBuf.readInt();
         minecraftServer.execute(() -> {

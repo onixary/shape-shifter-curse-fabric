@@ -193,7 +193,12 @@ public class ModPacketsS2CServer {
     public static void sendPowerAnimationDataToClient(ServerPlayerEntity player, UUID PlayerUUID, @Nullable Identifier animationId, int animationCount, int animationLength) {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeUuid(PlayerUUID);
-        buf.writeIdentifier(animationId);
+        if (animationId != null) {
+            buf.writeBoolean(true);
+            buf.writeIdentifier(animationId);
+        } else {
+            buf.writeBoolean(false);
+        }
         buf.writeInt(animationCount);
         buf.writeInt(animationLength);
         ServerPlayNetworking.send(player, UPDATE_POWER_ANIM_DATA_TO_CLIENT, buf);
