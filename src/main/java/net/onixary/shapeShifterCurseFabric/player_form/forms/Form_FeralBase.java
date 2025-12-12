@@ -1,10 +1,25 @@
 package net.onixary.shapeShifterCurseFabric.player_form.forms;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateController.ConditionAnimController;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.OneAnimController;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.SneakRushAnimController;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.WithSneakAnimController;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateEnum;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.LinkedList;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
@@ -96,5 +111,94 @@ public class Form_FeralBase extends PlayerFormBase {
         anim_sleep = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sleep"), true);
         anim_elytra_fly = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_elytra_fly"), true);
         anim_sneak_rush = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_run"), true, 2.3f);
+    }
+
+    private static final AnimUtils.AnimationHolderData ANIM_IDLE = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_idle"));
+    private static final AnimUtils.AnimationHolderData ANIM_SNEAK_IDLE = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_sneak_idle"));
+    private static final AnimUtils.AnimationHolderData ANIM_WALK = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_walk"), 1.2f, 2);
+    private static final AnimUtils.AnimationHolderData ANIM_SNEAK_WALK = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_sneak_walk"));
+    private static final AnimUtils.AnimationHolderData ANIM_RUN = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_run"), 2.3f);
+    private static final AnimUtils.AnimationHolderData ANIM_FLOAT = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_float"));
+    private static final AnimUtils.AnimationHolderData ANIM_SWIM = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_swim"));
+    private static final AnimUtils.AnimationHolderData ANIM_DIG = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_dig"));
+    private static final AnimUtils.AnimationHolderData ANIM_JUMP = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_jump"));
+    private static final AnimUtils.AnimationHolderData ANIM_CLIMB = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_climb"));
+    private static final AnimUtils.AnimationHolderData ANIM_FALL = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_fall"));
+    private static final AnimUtils.AnimationHolderData ANIM_ATTACK = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_attack"));
+    private static final AnimUtils.AnimationHolderData ANIM_SLEEP = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_sleep"));
+    private static final AnimUtils.AnimationHolderData ANIM_ELYTRA_FLY = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_elytra_fly"));
+    private static final AnimUtils.AnimationHolderData ANIM_SNEAK_RUSH = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_run"), 2.3f);
+
+    public static final AbstractAnimStateController IDLE_CONTROLLER = new WithSneakAnimController(ANIM_IDLE, ANIM_SNEAK_IDLE);
+    public static final AbstractAnimStateController WALK_CONTROLLER = new WithSneakAnimController(ANIM_WALK, ANIM_SNEAK_WALK);
+    public static final AbstractAnimStateController SPRINT_CONTROLLER = new WithSneakAnimController(ANIM_RUN, ANIM_SNEAK_WALK);
+    public static final AbstractAnimStateController WALK_CONTROLLER_SNEAK_RUSH = new SneakRushAnimController(ANIM_WALK, ANIM_SNEAK_WALK, ANIM_SNEAK_RUSH);
+    public static final AbstractAnimStateController SPRINT_CONTROLLER_SNEAK_RUSH = new SneakRushAnimController(ANIM_RUN, ANIM_SNEAK_WALK, ANIM_SNEAK_RUSH);
+    public static final AbstractAnimStateController SWIM_CONTROLLER = new ConditionAnimController(new LinkedList<>() {
+        {
+            this.add(new Pair<>((player, data) -> player.isSwimming(), ANIM_SWIM));
+        }
+    }, ANIM_FLOAT);
+    public static final AbstractAnimStateController MINING_CONTROLLER = new OneAnimController(ANIM_DIG);
+    public static final AbstractAnimStateController ATTACK_CONTROLLER = new OneAnimController(ANIM_ATTACK);
+    public static final AbstractAnimStateController SLEEP_CONTROLLER = new OneAnimController(ANIM_SLEEP);
+    public static final AbstractAnimStateController FALL_FLYING_CONTROLLER = new OneAnimController(ANIM_ELYTRA_FLY);
+    public static final AbstractAnimStateController CLIMB_CONTROLLER = new OneAnimController(ANIM_CLIMB);
+    public static final AbstractAnimStateController JUMP_CONTROLLER = new OneAnimController(ANIM_JUMP);
+    public static final AbstractAnimStateController FALL_CONTROLLER = new OneAnimController(ANIM_FALL);
+    public static final AbstractAnimStateController USE_ITEM_CONTROLLER = new ConditionAnimController(new LinkedList<>() {
+        {
+            this.add(new Pair<>((player, data) -> player.isSneaking() && data.IsWalking, ANIM_SNEAK_WALK));
+            this.add(new Pair<>((player, data) -> player.isSneaking(), ANIM_SNEAK_IDLE));
+        }
+    }, ANIM_IDLE);
+    public static final AbstractAnimStateController RIDE_CONTROLLER = new OneAnimController(ANIM_SNEAK_IDLE);
+
+    public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
+        @Nullable AnimStateEnum animStateEnum = AnimStateEnum.getStateEnum(animStateID);
+        if (animStateEnum != null) {
+            switch (animStateEnum) {
+                case ANIM_STATE_SLEEP:
+                    return SLEEP_CONTROLLER;
+                case ANIM_STATE_CLIMB:
+                    return CLIMB_CONTROLLER;
+                case ANIM_STATE_FALL:
+                    return FALL_CONTROLLER;
+                case ANIM_STATE_JUMP:
+                    return JUMP_CONTROLLER;
+                case ANIM_STATE_RIDE:
+                    return RIDE_CONTROLLER;
+                case ANIM_STATE_SWIM:
+                    return SWIM_CONTROLLER;
+                case ANIM_STATE_USE_ITEM:
+                    return USE_ITEM_CONTROLLER;
+                case ANIM_STATE_WALK:
+                    if (this.getCanSneakRush()) {
+                        return WALK_CONTROLLER_SNEAK_RUSH;
+                    }
+                    else {
+                        return WALK_CONTROLLER;
+                    }
+                case ANIM_STATE_SPRINT:
+                    if (this.getCanSneakRush()) {
+                        return SPRINT_CONTROLLER_SNEAK_RUSH;
+                    }
+                    else {
+                        return SPRINT_CONTROLLER;
+                    }
+                case ANIM_STATE_IDLE:
+                    return IDLE_CONTROLLER;
+                case ANIM_STATE_MINING:
+                    return MINING_CONTROLLER;
+                case ANIM_STATE_ATTACK:
+                    return ATTACK_CONTROLLER;
+                case ANIM_STATE_FLYING:
+                case ANIM_STATE_FALL_FLYING:
+                    return FALL_FLYING_CONTROLLER;
+                default:
+                    return null;
+            }
+        }
+        return null;
     }
 }

@@ -26,7 +26,7 @@ public class UseOtherStateAnimController extends AbstractAnimStateControllerDP {
         if (this.otherStateId == null) {
             return null;
         }
-        return data.playerForm.getAnimStateController(player, this.otherStateId);
+        return data.playerForm.getAnimStateController(player, data, this.otherStateId);
     }
 
     @Override

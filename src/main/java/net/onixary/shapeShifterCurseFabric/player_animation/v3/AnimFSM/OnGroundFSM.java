@@ -26,7 +26,7 @@ public class OnGroundFSM extends AbstractAnimFSM {
         if (UniversalStateResult != null) {
             return UniversalStateResult;
         }
-        if (!player.getPos().equals(animSystemData.LastPosition)) {
+        if (animSystemData.IsWalking) {
             if (player.isSprinting()) {
                 return ANIM_STATE_SPRINT;
             } else {

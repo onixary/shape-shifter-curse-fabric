@@ -27,6 +27,7 @@ public class AnimSystem {
         public Vec3d LastPosition;
         public long LastPosYChange = 0;  // 持续增长使用long防止溢出 顺便可以不用做最大值判断
         public long ContinueSwingAnimCounter = 0;  // 持续增长使用long防止溢出 顺便可以不用做最大值判断
+        public boolean IsWalking = false;
         public NbtCompound customData;  // 用于存储其他拓展Mod的数据 在本模组中不使用
 
         public AnimSystemData(PlayerEntity player) {
@@ -77,6 +78,7 @@ public class AnimSystem {
 
     private void PreProcessAnimSystemData() {
         this.data.playerForm = RegPlayerFormComponent.PLAYER_FORM.get(this.player).getCurrentForm();
+        this.data.IsWalking = !this.data.LastPosition.equals(this.player.getPos());
         if (this.player.getPos().getY() == this.data.LastPosition.getY()) {
             this.data.LastPosYChange ++;
         }

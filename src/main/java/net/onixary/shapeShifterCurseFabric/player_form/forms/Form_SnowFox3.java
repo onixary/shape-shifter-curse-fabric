@@ -1,8 +1,12 @@
 package net.onixary.shapeShifterCurseFabric.player_form.forms;
 
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.RideAnimController;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 
@@ -94,4 +98,6 @@ public class Form_SnowFox3 extends PlayerFormBase {
         anim_sleep = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sleep"), true);
         anim_elytra_fly = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_elytra_fly"), true);
     }
+
+    public static AbstractAnimStateController RIDE_CONTROLLER = new RideAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_sneak_idle")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("snow_fox_3_riding")));
 }

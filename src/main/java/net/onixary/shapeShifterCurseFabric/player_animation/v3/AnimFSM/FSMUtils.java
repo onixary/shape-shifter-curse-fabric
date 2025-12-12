@@ -20,10 +20,6 @@ public class FSMUtils {
             return ANIM_STATE_SLEEP;
         }
         if (player.hasVehicle()) {
-            Entity Vehicle = player.getVehicle();
-            if (Vehicle instanceof BoatEntity || Vehicle instanceof MinecartEntity)  {
-                return ANIM_STATE_RIDE_VEHICLE;
-            }
             return ANIM_STATE_RIDE;
         }
         if (!animSystemData.IsOnGround && IsPlayerClimbing(player, animSystemData)) {

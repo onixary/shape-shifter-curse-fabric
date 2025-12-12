@@ -9,16 +9,29 @@ import org.jetbrains.annotations.Nullable;
 
 public class AnimUtils {
     public static class AnimationHolderData {
-        public Identifier AnimID;
-        public float Speed;
-        public int Fade;
+        public final Identifier AnimID;
+        public final float Speed;
+        public final int Fade;
+        private @Nullable AnimationHolder animationHolder;
         public AnimationHolderData(Identifier AnimID, float Speed, int Fade) {
             this.AnimID = AnimID;
             this.Speed = Speed;
             this.Fade = Fade;
         }
+
+        public AnimationHolderData(Identifier AnimID, float Speed) {
+            this(AnimID, Speed, 2);
+        }
+
+        public AnimationHolderData(Identifier AnimID) {
+            this(AnimID, 1.0f, 2);
+        }
+
         public AnimationHolder build() {
-            return new AnimationHolder(AnimID, true, Speed, Fade);
+            if (animationHolder == null) {
+                animationHolder = new AnimationHolder(AnimID, true, Speed, Fade);
+            }
+            return animationHolder;
         }
     }
 

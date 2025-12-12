@@ -29,6 +29,8 @@ public class PlayerFormBase {
     private boolean CanRushJump = false;
     private boolean IsCustomForm = false;
 
+    private boolean IsRegisteredPowerAnim = false;
+
     public String Origin_NameSpace_OverWrite = null;
     public Identifier OriginLayer_OverWrite = null; // Default: "origins:origin"
 
@@ -65,24 +67,20 @@ public class PlayerFormBase {
         return;
     }
 
-    // TODO ANIM_SYSTEM_V3 未完工
     public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
         return null;
     }
 
-    // TODO ANIM_SYSTEM_V3 未完工
     // 注册PowerAnim
     public void registerPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) {
-        return;
+        this.IsRegisteredPowerAnim = true;
     }
 
-    // TODO ANIM_SYSTEM_V3 未完工
     // 是否注册了PowerAnim
     public boolean isPowerAnimRegistered(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) {
-        return true;
+        return IsRegisteredPowerAnim;
     }
 
-    // TODO ANIM_SYSTEM_V3 未完工
     // 获取PowerAnim 输出左为是否匹配(不匹配使用由PowerAnim注册表提供的默认动画) 右为动画
     public @NotNull Pair<Boolean, @Nullable AnimationHolder> getPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier powerAnimID) {
         return new Pair<>(false, null);
