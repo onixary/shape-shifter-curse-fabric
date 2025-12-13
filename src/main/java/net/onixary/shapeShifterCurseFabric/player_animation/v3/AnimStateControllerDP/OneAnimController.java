@@ -7,19 +7,20 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimState
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateControllerDP;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class OneAnimController extends AbstractAnimStateControllerDP {
-    AnimUtils.AnimationHolderData animationHolderData;
-    AnimationHolder animationHolder = null;
+    private @NotNull AnimUtils.AnimationHolderData animationHolderData = AnimUtils.EMPTY_ANIM;
+    private @Nullable AnimationHolder animationHolder = null;
 
     public OneAnimController(@Nullable JsonObject jsonData) {
         super(jsonData);
     }
 
-    public OneAnimController(AnimUtils.AnimationHolderData animationHolderData) {
+    public OneAnimController(@Nullable AnimUtils.AnimationHolderData animationHolderData) {
         super(null);
-        this.animationHolderData = animationHolderData;
+        this.animationHolderData = AnimUtils.ensureAnimHolderDataNotNull(animationHolderData);
     }
 
     @Override
@@ -35,9 +36,7 @@ public class OneAnimController extends AbstractAnimStateControllerDP {
 
     @Override
     public AbstractAnimStateController loadFormJson(JsonObject jsonObject) {
-        if (jsonObject.has("anim") && jsonObject.get("anim").isJsonObject()) {
-            this.animationHolderData = AnimUtils.readAnim(jsonObject.get("anim").getAsJsonObject());
-        }
+        this.animationHolderData = AnimUtils.readAnimInJson(jsonObject, "anim", null);
         return this;
     }
 }

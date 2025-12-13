@@ -9,22 +9,23 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimState
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateControllerDP;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class RideAnimController extends AbstractAnimStateControllerDP {
-    private AnimUtils.AnimationHolderData animationHolderData;
-    private AnimationHolder animationHolder = null;
-    private AnimUtils.AnimationHolderData RideVehicleAnimationHolderData;
-    private AnimationHolder RideVehicleAnimationHolder = null;
+    private @NotNull AnimUtils.AnimationHolderData animationHolderData = AnimUtils.EMPTY_ANIM;
+    private @Nullable AnimationHolder animationHolder = null;
+    private @NotNull AnimUtils.AnimationHolderData RideVehicleAnimationHolderData = AnimUtils.EMPTY_ANIM;
+    private @Nullable AnimationHolder RideVehicleAnimationHolder = null;
 
     public RideAnimController(@Nullable JsonObject jsonData) {
         super(jsonData);
     }
 
-    public RideAnimController(AnimUtils.AnimationHolderData animationHolderData, AnimUtils.AnimationHolderData RideVehicleAnimationHolderData) {
+    public RideAnimController(@Nullable AnimUtils.AnimationHolderData animationHolderData, @Nullable AnimUtils.AnimationHolderData RideVehicleAnimationHolderData) {
         super(null);
-        this.animationHolderData = animationHolderData;
-        this.RideVehicleAnimationHolderData = RideVehicleAnimationHolderData;
+        this.animationHolderData = AnimUtils.ensureAnimHolderDataNotNull(animationHolderData);
+        this.RideVehicleAnimationHolderData = AnimUtils.ensureAnimHolderDataNotNull(RideVehicleAnimationHolderData);
     }
 
     @Override

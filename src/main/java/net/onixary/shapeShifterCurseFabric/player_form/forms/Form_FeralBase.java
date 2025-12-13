@@ -8,9 +8,7 @@ import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateController.ConditionAnimController;
-import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.OneAnimController;
-import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.SneakRushAnimController;
-import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.WithSneakAnimController;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.*;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateEnum;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
@@ -134,11 +132,14 @@ public class Form_FeralBase extends PlayerFormBase {
     public static final AbstractAnimStateController SPRINT_CONTROLLER = new WithSneakAnimController(ANIM_RUN, ANIM_SNEAK_WALK);
     public static final AbstractAnimStateController WALK_CONTROLLER_SNEAK_RUSH = new SneakRushAnimController(ANIM_WALK, ANIM_SNEAK_WALK, ANIM_SNEAK_RUSH);
     public static final AbstractAnimStateController SPRINT_CONTROLLER_SNEAK_RUSH = new SneakRushAnimController(ANIM_RUN, ANIM_SNEAK_WALK, ANIM_SNEAK_RUSH);
+    /* 还是留一下ConditionAnimController的使用方法把 逻辑有些复杂
     public static final AbstractAnimStateController SWIM_CONTROLLER = new ConditionAnimController(new LinkedList<>() {
         {
             this.add(new Pair<>((player, data) -> player.isSwimming(), ANIM_SWIM));
         }
     }, ANIM_FLOAT);
+     */
+    public static final AbstractAnimStateController SWIM_CONTROLLER = new SwimAnimController(ANIM_FLOAT, ANIM_SWIM);
     public static final AbstractAnimStateController MINING_CONTROLLER = new OneAnimController(ANIM_DIG);
     public static final AbstractAnimStateController ATTACK_CONTROLLER = new OneAnimController(ANIM_ATTACK);
     public static final AbstractAnimStateController SLEEP_CONTROLLER = new OneAnimController(ANIM_SLEEP);
@@ -146,12 +147,8 @@ public class Form_FeralBase extends PlayerFormBase {
     public static final AbstractAnimStateController CLIMB_CONTROLLER = new OneAnimController(ANIM_CLIMB);
     public static final AbstractAnimStateController JUMP_CONTROLLER = new OneAnimController(ANIM_JUMP);
     public static final AbstractAnimStateController FALL_CONTROLLER = new OneAnimController(ANIM_FALL);
-    public static final AbstractAnimStateController USE_ITEM_CONTROLLER = new ConditionAnimController(new LinkedList<>() {
-        {
-            this.add(new Pair<>((player, data) -> player.isSneaking() && data.IsWalking, ANIM_SNEAK_WALK));
-            this.add(new Pair<>((player, data) -> player.isSneaking(), ANIM_SNEAK_IDLE));
-        }
-    }, ANIM_IDLE);
+    // UseItemAnimControllerPro的参数确实是ANIM_IDLE, ANIM_IDLE, ANIM_SNEAK_IDLE, ANIM_SNEAK_WALK 由于ANIM_SNEAK_IDLE为坐下动画 所以SNEAK动画需要区分 如果有单独的动画可以使用WithSneakAnimController
+    public static final AbstractAnimStateController USE_ITEM_CONTROLLER = new UseItemAnimControllerPro(ANIM_IDLE, ANIM_IDLE, ANIM_SNEAK_IDLE, ANIM_SNEAK_WALK);
     public static final AbstractAnimStateController RIDE_CONTROLLER = new OneAnimController(ANIM_SNEAK_IDLE);
 
     public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {

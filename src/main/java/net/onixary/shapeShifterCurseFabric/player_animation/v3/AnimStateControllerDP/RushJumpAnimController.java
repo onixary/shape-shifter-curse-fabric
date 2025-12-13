@@ -10,36 +10,35 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class SneakRushAnimController extends AbstractAnimStateControllerDP {
-
+public class RushJumpAnimController extends AbstractAnimStateControllerDP {
     private @NotNull AnimUtils.AnimationHolderData animationHolderData = AnimUtils.EMPTY_ANIM;
     private @Nullable AnimationHolder animationHolder = null;
     private @NotNull AnimUtils.AnimationHolderData sneakAnimationHolderData = AnimUtils.EMPTY_ANIM;
     private @Nullable AnimationHolder sneakAnimationHolder = null;
-    private @NotNull AnimUtils.AnimationHolderData sneakRushAnimationHolderData = AnimUtils.EMPTY_ANIM;
-    private @Nullable AnimationHolder sneakRushAnimationHolder = null;
+    private @NotNull AnimUtils.AnimationHolderData rushJumpAnimationHolderData = AnimUtils.EMPTY_ANIM;
+    private @Nullable AnimationHolder rushJumpAnimationHolder = null;
 
-    public SneakRushAnimController(@Nullable JsonObject jsonData) {
+    public RushJumpAnimController(@Nullable JsonObject jsonData) {
         super(jsonData);
     }
 
-    public SneakRushAnimController(@Nullable AnimUtils.AnimationHolderData animationHolderData, @Nullable AnimUtils.AnimationHolderData sneakAnimationHolderData, AnimUtils.AnimationHolderData sneakRushAnimationHolderData) {
+    public RushJumpAnimController(@Nullable AnimUtils.AnimationHolderData animationHolderData, @Nullable AnimUtils.AnimationHolderData sneakAnimationHolderData, AnimUtils.AnimationHolderData rushJumpAnimationHolderData) {
         super(null);
         this.animationHolderData = AnimUtils.ensureAnimHolderDataNotNull(animationHolderData);
         this.sneakAnimationHolderData = AnimUtils.ensureAnimHolderDataNotNull(sneakAnimationHolderData);
-        this.sneakRushAnimationHolderData = AnimUtils.ensureAnimHolderDataNotNull(sneakRushAnimationHolderData);
+        this.rushJumpAnimationHolderData = AnimUtils.ensureAnimHolderDataNotNull(rushJumpAnimationHolderData);
     }
 
     @Override
     public @Nullable AnimationHolder getAnimation(PlayerEntity player, AnimSystem.AnimSystemData data) {
-        if (player.isSneaking()) {
-            if (player.getHungerManager().getFoodLevel() >= 6) {
-                return sneakRushAnimationHolder;
-            } else {
-                return sneakAnimationHolder;
-            }
+        if (Math.abs(player.getVelocity().z) > 0.15 || Math.abs(player.getVelocity().x) > 0.15) {
+            return rushJumpAnimationHolder;
         } else {
-            return animationHolder;
+            if (player.isSneaking()) {
+                return sneakAnimationHolder;
+            } else {
+                return animationHolder;
+            }
         }
     }
 
@@ -47,7 +46,7 @@ public class SneakRushAnimController extends AbstractAnimStateControllerDP {
     public void registerAnim(PlayerEntity player, AnimSystem.AnimSystemData data) {
         this.animationHolder = this.animationHolderData.build();
         this.sneakAnimationHolder = this.sneakAnimationHolderData.build();
-        this.sneakRushAnimationHolder = this.sneakRushAnimationHolderData.build();
+        this.rushJumpAnimationHolder = this.rushJumpAnimationHolderData.build();
         super.registerAnim(player, data);
     }
 
@@ -55,7 +54,7 @@ public class SneakRushAnimController extends AbstractAnimStateControllerDP {
     public AbstractAnimStateController loadFormJson(JsonObject jsonObject) {
         this.animationHolderData = AnimUtils.readAnimInJson(jsonObject, "anim", null);
         this.sneakAnimationHolderData = AnimUtils.readAnimInJson(jsonObject, "sneakAnim", null);
-        this.sneakRushAnimationHolderData = AnimUtils.readAnimInJson(jsonObject, "sneakRushAnim", null);
+        this.rushJumpAnimationHolderData = AnimUtils.readAnimInJson(jsonObject, "rushJumpAnim", null);
         return this;
     }
 }

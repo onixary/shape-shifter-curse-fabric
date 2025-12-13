@@ -19,9 +19,9 @@ public class WithSneakAnimController extends AbstractAnimStateControllerDP {
         super(jsonData);
     }
 
-    public WithSneakAnimController(AnimUtils.AnimationHolderData animationHolderData, AnimUtils.AnimationHolderData sneakAnimationHolderData) {
+    public WithSneakAnimController(AnimUtils.AnimationHolderData normalAnimationHolderData, AnimUtils.AnimationHolderData sneakAnimationHolderData) {
         super(null);
-        this.animationHolderData = animationHolderData;
+        this.animationHolderData = normalAnimationHolderData;
         this.sneakAnimationHolderData = sneakAnimationHolderData;
     }
 
@@ -43,12 +43,8 @@ public class WithSneakAnimController extends AbstractAnimStateControllerDP {
 
     @Override
     public AbstractAnimStateController loadFormJson(JsonObject jsonObject) {
-        if (jsonObject.has("anim") && jsonObject.get("anim").isJsonObject()) {
-            this.animationHolderData = AnimUtils.readAnim(jsonObject.get("anim").getAsJsonObject());
-        }
-        if (jsonObject.has("sneakAnim") && jsonObject.get("sneakAnim").isJsonObject()) {
-            this.sneakAnimationHolderData = AnimUtils.readAnim(jsonObject.get("sneakAnim").getAsJsonObject());
-        }
+        this.animationHolderData = AnimUtils.readAnimInJson(jsonObject, "anim", null);
+        this.sneakAnimationHolderData = AnimUtils.readAnimInJson(jsonObject, "sneakAnim", null);
         return this;
     }
 }

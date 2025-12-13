@@ -76,12 +76,12 @@ public class Form_Allay extends PlayerFormBase {
         anim_attack = new AnimationHolder(new Identifier(MOD_ID, "allay_sp_attack"), true);
     }
 
-    private static final AbstractAnimStateController WALK_CONTROLLER = new WithSneakAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("allay_sp_moving")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("allay_sp_sneaking_walk")));
-    private static final AbstractAnimStateController SPRINT_CONTROLLER = new WithSneakAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("allay_sp_run")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("allay_sp_sneaking_walk")));
-    private static final AbstractAnimStateController IDLE_CONTROLLER = new WithSneakAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("allay_sp_idle")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("allay_sp_sneaking")));
-    private static final AbstractAnimStateController MINING_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("allay_sp_digging")));
-    private static final AbstractAnimStateController ATTACK_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("allay_sp_attack")));
-    private static final AbstractAnimStateController FLYING_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("allay_sp_fly")));
+    public static final AbstractAnimStateController WALK_CONTROLLER = new WithSneakAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("allay_sp_moving")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("allay_sp_sneaking_walk")));
+    public static final AbstractAnimStateController SPRINT_CONTROLLER = new WithSneakAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("allay_sp_run")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("allay_sp_sneaking_walk")));
+    public static final AbstractAnimStateController IDLE_CONTROLLER = new WithSneakAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("allay_sp_idle")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("allay_sp_sneaking")));
+    public static final AbstractAnimStateController MINING_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("allay_sp_digging")));
+    public static final AbstractAnimStateController ATTACK_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("allay_sp_attack")));
+    public static final AbstractAnimStateController FLYING_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("allay_sp_fly")));
 
     public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
         @Nullable AnimStateEnum animStateEnum = AnimStateEnum.getStateEnum(animStateID);
