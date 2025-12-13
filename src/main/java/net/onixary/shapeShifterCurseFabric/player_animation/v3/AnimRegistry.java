@@ -90,6 +90,11 @@ public class AnimRegistry {
         return identifier;
     }
 
+    public static Identifier registerPowerDefaultAnim(Identifier identifier, PowerDefaultAnim powerDefaultAnim) {
+        Registry.register(powerAnimIDRegistry, identifier, powerDefaultAnim);
+        return identifier;
+    }
+
     public static @Nullable AnimState getAnimState(Identifier identifier) {
         return animStateRegistry.get(identifier);
     }

@@ -7,22 +7,23 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimState
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateControllerDP;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class WithSneakAnimController extends AbstractAnimStateControllerDP {
-    AnimUtils.AnimationHolderData animationHolderData;
-    AnimationHolder animationHolder = null;
-    AnimUtils.AnimationHolderData sneakAnimationHolderData;
-    AnimationHolder sneakAnimationHolder = null;
+    private @NotNull AnimUtils.AnimationHolderData animationHolderData;
+    private @Nullable AnimationHolder animationHolder = null;
+    private @NotNull AnimUtils.AnimationHolderData sneakAnimationHolderData;
+    private @Nullable AnimationHolder sneakAnimationHolder = null;
 
     public WithSneakAnimController(@Nullable JsonObject jsonData) {
         super(jsonData);
     }
 
-    public WithSneakAnimController(AnimUtils.AnimationHolderData normalAnimationHolderData, AnimUtils.AnimationHolderData sneakAnimationHolderData) {
+    public WithSneakAnimController(@Nullable AnimUtils.AnimationHolderData normalAnimationHolderData, @Nullable AnimUtils.AnimationHolderData sneakAnimationHolderData) {
         super(null);
-        this.animationHolderData = normalAnimationHolderData;
-        this.sneakAnimationHolderData = sneakAnimationHolderData;
+        this.animationHolderData = AnimUtils.ensureAnimHolderDataNotNull(normalAnimationHolderData);
+        this.sneakAnimationHolderData = AnimUtils.ensureAnimHolderDataNotNull(sneakAnimationHolderData);
     }
 
     @Override

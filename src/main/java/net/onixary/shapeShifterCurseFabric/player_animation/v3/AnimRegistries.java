@@ -38,4 +38,8 @@ public class AnimRegistries {
     public static Identifier FSM_ON_GROUND = AnimRegistry.registerAnimFSM(ShapeShifterCurseFabric.identifier("on_ground"), new OnGroundFSM());
     public static Identifier FSM_IN_AIR = AnimRegistry.registerAnimFSM(ShapeShifterCurseFabric.identifier("in_air"), new InAirFSM());
     public static Identifier FSM_USE_ITEM = AnimRegistry.registerAnimFSM(ShapeShifterCurseFabric.identifier("use_item"), new UseItemFSM());
+
+    // Power动画注册
+    public static Identifier POWER_ANIM_ATTACH_SIDE = AnimRegistry.registerPowerDefaultAnim(ShapeShifterCurseFabric.identifier("attach_side"), new AnimRegistry.PowerDefaultAnim(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("bat_3_attach_side"))));
+    public static Identifier POWER_ANIM_ATTACH_BOTTOM = AnimRegistry.registerPowerDefaultAnim(ShapeShifterCurseFabric.identifier("attach_bottom"), new AnimRegistry.PowerDefaultAnim(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("bat_3_attach_bottom"))));
 }
