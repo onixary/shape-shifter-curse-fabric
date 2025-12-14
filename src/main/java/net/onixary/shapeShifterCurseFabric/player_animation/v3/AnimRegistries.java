@@ -17,6 +17,8 @@ public class AnimRegistries {
     public static Identifier CONTROLLER_RUSH_JUMP_ANIM = AnimRegistry.registerAnimStateController(ShapeShifterCurseFabric.identifier("rush_jump_anim_controller"), RushJumpAnimController::new);
     public static Identifier CONTROLLER_SWIM_ANIM = AnimRegistry.registerAnimStateController(ShapeShifterCurseFabric.identifier("swim_anim_controller"), SwimAnimController::new);
     public static Identifier CONTROLLER_USE_ITEM_ANIM = AnimRegistry.registerAnimStateController(ShapeShifterCurseFabric.identifier("use_item_anim_controller"), UseItemAnimControllerPro::new);
+    public static Identifier CONTROLLER_RIDE_ANIM = AnimRegistry.registerAnimStateController(ShapeShifterCurseFabric.identifier("ride_anim_controller"), RideAnimController::new);
+    public static Identifier CONTROLLER_CLIMB_ANIM = AnimRegistry.registerAnimStateController(ShapeShifterCurseFabric.identifier("climb_anim_controller"), ClimbAnimController::new);
 
     // AnimState注册
     public static Identifier ANIM_STATE_SLEEP = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("sleep_state"), new AnimRegistry.AnimState(new EmptyController()));
