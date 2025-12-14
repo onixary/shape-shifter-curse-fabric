@@ -1,5 +1,8 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -99,7 +102,7 @@ public abstract class PlayerAnimInterfaceMixin implements IPlayerAnimController 
     }
 
     @Override
-    public  int shape_shifter_curse$getPowerAnimationTime() {
+    public int shape_shifter_curse$getPowerAnimationTime() {
         return this.powerAnimationTime;
     }
 
@@ -165,11 +168,16 @@ public abstract class PlayerAnimInterfaceMixin implements IPlayerAnimController 
         this.setAnimation(id, count, time, false);
     }
 
+    @Unique
+    private Boolean isLoadedAnim = false;
+
     @Inject(method = "<init>", at = @At("RETURN"))
     private void init(CallbackInfo ci) {
         PlayerEntity realThis = (PlayerEntity) (Object) this;
         if (realThis.getWorld().isClient) {
-            ModPacketsS2C.sendRequestPlayerAnimationData(realThis.getUuid());
+            this.isLoadedAnim = false;
+        } else {
+            this.isLoadedAnim = true;
         }
     }
 
@@ -179,9 +187,15 @@ public abstract class PlayerAnimInterfaceMixin implements IPlayerAnimController 
         if (this.powerAnimationTime >= 0) {
             if (this.powerAnimationTime == 0) {
                 this.stopAnimation();
-            }
-            else {
+            } else {
                 this.powerAnimationTime--;
+            }
+        }
+        // 为什么在这里加载而不是在init中加载呢? 在init加载会导致游戏崩溃 而且崩溃的信息也查不到这个Mixin
+        if (!this.isLoadedAnim) {
+            if (realThis.getWorld().isClient) {
+                ModPacketsS2C.sendRequestPlayerAnimationData(realThis.getUuid());
+                this.isLoadedAnim = true;
             }
         }
         if (!realThis.getWorld().isClient) {

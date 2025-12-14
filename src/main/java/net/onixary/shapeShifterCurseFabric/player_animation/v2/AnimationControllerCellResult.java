@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.player_animation;
+package net.onixary.shapeShifterCurseFabric.player_animation.v2;
 
 public enum AnimationControllerCellResult {
     MATCH,  // 直接返回动画

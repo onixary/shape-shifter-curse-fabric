@@ -9,9 +9,8 @@ import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.data.CodexData;
 import net.onixary.shapeShifterCurseFabric.integration.origins.Origins;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
-import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
+import net.onixary.shapeShifterCurseFabric.player_animation.v2.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
-import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimRegistry;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -62,10 +61,6 @@ public class PlayerFormBase {
         return Text.translatable("codex.form." + FormID.getNamespace() + "." + FormID.getPath() + "." + type.toString().toLowerCase());
     }
 
-    // 动画
-    public void Anim_registerAnims() {
-        return;
-    }
 
     public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
         return null;
@@ -84,6 +79,11 @@ public class PlayerFormBase {
     // 获取PowerAnim 输出左为是否匹配(不匹配使用由PowerAnim注册表提供的默认动画) 右为动画
     public @NotNull Pair<Boolean, @Nullable AnimationHolder> getPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier powerAnimID) {
         return new Pair<>(false, null);
+    }
+
+    // 1代2代动画控制器使用 等3代测试完就删除
+    public void Anim_registerAnims() {
+        return;
     }
 
     public AnimationHolder Anim_getFormAnimToPlay(PlayerAnimState currentState) {

@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.player_animation;
+package net.onixary.shapeShifterCurseFabric.player_animation.v2;
 
 import com.mojang.datafixers.util.Pair;
 import io.github.apace100.apoli.component.PowerHolderComponent;
@@ -15,6 +15,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
+import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
