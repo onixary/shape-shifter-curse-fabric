@@ -152,7 +152,7 @@ public class Form_Bat3 extends PlayerFormBase {
                     return null;
             }
         }
-        return null;
+        return super.getAnimStateController(player, animSystemData, animStateID);
     }
 
     // 虽然已经在AnimRegistries注册过默认值了 但是按照标准来说应该在这里注册 默认值仅为备用

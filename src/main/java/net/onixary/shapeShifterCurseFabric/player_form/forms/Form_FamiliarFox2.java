@@ -1,9 +1,19 @@
 package net.onixary.shapeShifterCurseFabric.player_form.forms;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.RideAnimController;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.WithSneakAnimController;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateEnum;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
@@ -19,8 +29,8 @@ public class Form_FamiliarFox2 extends PlayerFormBase {
     public AnimationHolder Anim_getFormAnimToPlay(PlayerAnimState currentState) {
         switch (currentState) {
             case ANIM_SNEAK_IDLE:
-                return anim_sneak_idle;
             case ANIM_RIDE_VEHICLE_IDLE:
+                return anim_sneak_idle;
             case ANIM_RIDE_IDLE:
                 return anim_ride;
 
@@ -32,5 +42,24 @@ public class Form_FamiliarFox2 extends PlayerFormBase {
     public void Anim_registerAnims() {
         anim_sneak_idle = new AnimationHolder(new Identifier(MOD_ID, "ocelot_2_sneak_idle"), true);
         anim_ride = new AnimationHolder(new Identifier(MOD_ID, "familiar_fox_2_riding"), true);
+    }
+
+    public static final AbstractAnimStateController IDLE_CONTROLLER = new WithSneakAnimController(null, new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("ocelot_2_sneak_idle")));
+    public static final AbstractAnimStateController RIDE_CONTROLLER = new RideAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("familiar_fox_2_riding")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("ocelot_2_sneak_idle")));
+
+    @Override
+    public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
+        @Nullable AnimStateEnum animStateEnum = AnimStateEnum.getStateEnum(animStateID);
+        if (animStateEnum != null) {
+            switch (animStateEnum) {
+                case ANIM_STATE_IDLE:
+                    return IDLE_CONTROLLER;
+                case ANIM_STATE_RIDE:
+                    return RIDE_CONTROLLER;
+                default:
+                    return null;
+            }
+        }
+        return super.getAnimStateController(player, animSystemData, animStateID);
     }
 }

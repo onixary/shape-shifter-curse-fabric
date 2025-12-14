@@ -111,21 +111,22 @@ public class Form_FeralBase extends PlayerFormBase {
         anim_sneak_rush = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_run"), true, 2.3f);
     }
 
-    private static final AnimUtils.AnimationHolderData ANIM_IDLE = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_idle"));
-    private static final AnimUtils.AnimationHolderData ANIM_SNEAK_IDLE = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_sneak_idle"));
-    private static final AnimUtils.AnimationHolderData ANIM_WALK = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_walk"), 1.2f, 2);
-    private static final AnimUtils.AnimationHolderData ANIM_SNEAK_WALK = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_sneak_walk"));
-    private static final AnimUtils.AnimationHolderData ANIM_RUN = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_run"), 2.3f);
-    private static final AnimUtils.AnimationHolderData ANIM_FLOAT = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_float"));
-    private static final AnimUtils.AnimationHolderData ANIM_SWIM = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_swim"));
-    private static final AnimUtils.AnimationHolderData ANIM_DIG = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_dig"));
-    private static final AnimUtils.AnimationHolderData ANIM_JUMP = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_jump"));
-    private static final AnimUtils.AnimationHolderData ANIM_CLIMB = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_climb"));
-    private static final AnimUtils.AnimationHolderData ANIM_FALL = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_fall"));
-    private static final AnimUtils.AnimationHolderData ANIM_ATTACK = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_attack"));
-    private static final AnimUtils.AnimationHolderData ANIM_SLEEP = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_sleep"));
-    private static final AnimUtils.AnimationHolderData ANIM_ELYTRA_FLY = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_elytra_fly"));
-    private static final AnimUtils.AnimationHolderData ANIM_SNEAK_RUSH = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_run"), 2.3f);
+    // 共用动画 其他类尽量使用private
+    public static final AnimUtils.AnimationHolderData ANIM_IDLE = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_idle"));
+    public static final AnimUtils.AnimationHolderData ANIM_SNEAK_IDLE = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_sneak_idle"));
+    public static final AnimUtils.AnimationHolderData ANIM_WALK = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_walk"), 1.2f, 2);
+    public static final AnimUtils.AnimationHolderData ANIM_SNEAK_WALK = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_sneak_walk"));
+    public static final AnimUtils.AnimationHolderData ANIM_RUN = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_run"), 2.3f);
+    public static final AnimUtils.AnimationHolderData ANIM_FLOAT = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_float"));
+    public static final AnimUtils.AnimationHolderData ANIM_SWIM = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_swim"));
+    public static final AnimUtils.AnimationHolderData ANIM_DIG = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_dig"));
+    public static final AnimUtils.AnimationHolderData ANIM_JUMP = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_jump"));
+    public static final AnimUtils.AnimationHolderData ANIM_CLIMB = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_climb"));
+    public static final AnimUtils.AnimationHolderData ANIM_FALL = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_fall"));
+    public static final AnimUtils.AnimationHolderData ANIM_ATTACK = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_attack"));
+    public static final AnimUtils.AnimationHolderData ANIM_SLEEP = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_sleep"));
+    public static final AnimUtils.AnimationHolderData ANIM_ELYTRA_FLY = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_elytra_fly"));
+    public static final AnimUtils.AnimationHolderData ANIM_SNEAK_RUSH = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("form_feral_common_run"), 2.3f);
 
     public static final AbstractAnimStateController IDLE_CONTROLLER = new WithSneakAnimController(ANIM_IDLE, ANIM_SNEAK_IDLE);
     public static final AbstractAnimStateController WALK_CONTROLLER = new WithSneakAnimController(ANIM_WALK, ANIM_SNEAK_WALK);
@@ -193,9 +194,9 @@ public class Form_FeralBase extends PlayerFormBase {
                 case ANIM_STATE_FALL_FLYING:
                     return FALL_FLYING_CONTROLLER;
                 default:
-                    return null;
+                    return Form_FeralBase.IDLE_CONTROLLER;
             }
         }
-        return null;
+        return super.getAnimStateController(player, animSystemData, animStateID);
     }
 }

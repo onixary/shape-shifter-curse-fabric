@@ -12,14 +12,38 @@ import java.util.function.Function;
 
 public class AnimUtils {
     public static class AnimationHolderData {
-        public final Identifier AnimID;
-        public final float Speed;
-        public final int Fade;
+        public Identifier AnimID;
+        public float Speed;
+        public int Fade;
         private @Nullable AnimationHolder animationHolder;
         public AnimationHolderData(Identifier AnimID, float Speed, int Fade) {
             this.AnimID = AnimID;
             this.Speed = Speed;
             this.Fade = Fade;
+        }
+
+        public AnimationHolderData setAnimID(Identifier AnimID) {
+            this.AnimID = AnimID;
+            return this;
+        }
+
+        public AnimationHolderData setAnimID(AnimationHolderData otherAnimationHolder) {
+            this.AnimID = otherAnimationHolder.AnimID;
+            return this;
+        }
+
+        public AnimationHolderData setSpeed(float Speed) {
+            this.Speed = Speed;
+            return this;
+        }
+
+        public AnimationHolderData setFade(int Fade) {
+            this.Fade = Fade;
+            return this;
+        }
+
+        public AnimationHolderData makeCopy() {
+            return new AnimationHolderData(AnimID, Speed, Fade);
         }
 
         public AnimationHolderData(Identifier AnimID, float Speed) {

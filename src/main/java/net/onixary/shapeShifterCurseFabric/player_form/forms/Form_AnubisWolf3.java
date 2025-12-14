@@ -133,9 +133,9 @@ public class Form_AnubisWolf3 extends PlayerFormBase {
                 case ANIM_STATE_FALL_FLYING:
                     return Form_FeralBase.FALL_FLYING_CONTROLLER;
                 default:
-                    return null;
+                    return Form_FeralBase.IDLE_CONTROLLER;
             }
         }
-        return null;
+        return super.getAnimStateController(player, animSystemData, animStateID);
     }
 }

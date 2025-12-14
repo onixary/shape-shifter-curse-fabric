@@ -54,7 +54,7 @@ public class Form_Axolotl1 extends PlayerFormBase {
                     return null;
             }
         }
-        return null;
+        return super.getAnimStateController(player, animSystemData, animStateID);
     }
 
 }

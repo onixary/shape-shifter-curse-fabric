@@ -42,4 +42,8 @@ public class AnimRegistries {
     // Power动画注册
     public static Identifier POWER_ANIM_ATTACH_SIDE = AnimRegistry.registerPowerDefaultAnim(ShapeShifterCurseFabric.identifier("attach_side"), new AnimRegistry.PowerDefaultAnim(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("bat_3_attach_side"))));
     public static Identifier POWER_ANIM_ATTACH_BOTTOM = AnimRegistry.registerPowerDefaultAnim(ShapeShifterCurseFabric.identifier("attach_bottom"), new AnimRegistry.PowerDefaultAnim(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("bat_3_attach_bottom"))));
+
+    public static void register() {
+        return;  // 保证AnimRegistry能够稳定加载AnimRegistries的静态变量
+    }
 }

@@ -17,22 +17,29 @@ public class RushJumpAnimController extends AbstractAnimStateControllerDP {
     private @Nullable AnimationHolder sneakAnimationHolder = null;
     private @NotNull AnimUtils.AnimationHolderData rushJumpAnimationHolderData = AnimUtils.EMPTY_ANIM;
     private @Nullable AnimationHolder rushJumpAnimationHolder = null;
+    private @NotNull AnimUtils.AnimationHolderData sneakRushJumpAnimationHolderData = AnimUtils.EMPTY_ANIM;
+    private @Nullable AnimationHolder sneakRushJumpAnimationHolder = null;
 
     public RushJumpAnimController(@Nullable JsonObject jsonData) {
         super(jsonData);
     }
 
-    public RushJumpAnimController(@Nullable AnimUtils.AnimationHolderData animationHolderData, @Nullable AnimUtils.AnimationHolderData sneakAnimationHolderData, AnimUtils.AnimationHolderData rushJumpAnimationHolderData) {
+    public RushJumpAnimController(@Nullable AnimUtils.AnimationHolderData animationHolderData, @Nullable AnimUtils.AnimationHolderData sneakAnimationHolderData, AnimUtils.AnimationHolderData rushJumpAnimationHolderData, AnimUtils.AnimationHolderData sneakRushJumpAnimationHolder) {
         super(null);
         this.animationHolderData = AnimUtils.ensureAnimHolderDataNotNull(animationHolderData);
         this.sneakAnimationHolderData = AnimUtils.ensureAnimHolderDataNotNull(sneakAnimationHolderData);
         this.rushJumpAnimationHolderData = AnimUtils.ensureAnimHolderDataNotNull(rushJumpAnimationHolderData);
+        this.sneakRushJumpAnimationHolderData = AnimUtils.ensureAnimHolderDataNotNull(sneakRushJumpAnimationHolderData);
     }
 
     @Override
     public @Nullable AnimationHolder getAnimation(PlayerEntity player, AnimSystem.AnimSystemData data) {
         if (Math.abs(player.getVelocity().z) > 0.15 || Math.abs(player.getVelocity().x) > 0.15) {
-            return rushJumpAnimationHolder;
+            if (player.isSneaking()) {
+                return sneakRushJumpAnimationHolder;
+            } else {
+                return rushJumpAnimationHolder;
+            }
         } else {
             if (player.isSneaking()) {
                 return sneakAnimationHolder;
@@ -47,6 +54,7 @@ public class RushJumpAnimController extends AbstractAnimStateControllerDP {
         this.animationHolder = this.animationHolderData.build();
         this.sneakAnimationHolder = this.sneakAnimationHolderData.build();
         this.rushJumpAnimationHolder = this.rushJumpAnimationHolderData.build();
+        this.sneakRushJumpAnimationHolder = this.sneakRushJumpAnimationHolderData.build();
         super.registerAnim(player, data);
     }
 
@@ -55,6 +63,7 @@ public class RushJumpAnimController extends AbstractAnimStateControllerDP {
         this.animationHolderData = AnimUtils.readAnimInJson(jsonObject, "anim", null);
         this.sneakAnimationHolderData = AnimUtils.readAnimInJson(jsonObject, "sneakAnim", null);
         this.rushJumpAnimationHolderData = AnimUtils.readAnimInJson(jsonObject, "rushJumpAnim", null);
+        this.sneakRushJumpAnimationHolderData = AnimUtils.readAnimInJson(jsonObject, "sneakRushJumpAnim", null);
         return this;
     }
 }

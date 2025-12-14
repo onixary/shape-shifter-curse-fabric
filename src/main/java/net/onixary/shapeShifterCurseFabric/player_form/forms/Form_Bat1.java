@@ -54,6 +54,6 @@ public class Form_Bat1 extends PlayerFormBase {
                     return null;
             }
         }
-        return null;
+        return super.getAnimStateController(player, animSystemData, animStateID);
     }
 }

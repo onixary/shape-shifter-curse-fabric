@@ -119,4 +119,8 @@ public class AnimRegistry {
     public static @Nullable PowerDefaultAnim getPowerDefaultAnim(Identifier identifier) {
         return powerAnimIDRegistry.get(identifier);
     }
+
+    static {
+        AnimRegistries.register();  // 注册基础的注册项 空方法体 用于强行加载AnimRegistries 别删
+    }
 }
