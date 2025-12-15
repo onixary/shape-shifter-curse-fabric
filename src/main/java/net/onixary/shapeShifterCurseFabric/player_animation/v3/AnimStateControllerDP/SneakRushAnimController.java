@@ -9,11 +9,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class SneakRushAnimController extends AbstractAnimStateControllerDP {
 
-    private @NotNull AnimUtils.AnimationHolderData animationHolderData = AnimUtils.EMPTY_ANIM;
+    private AnimUtils.AnimationHolderData animationHolderData;
     private @Nullable AnimationHolder animationHolder = null;
-    private @NotNull AnimUtils.AnimationHolderData sneakAnimationHolderData = AnimUtils.EMPTY_ANIM;
+    private AnimUtils.AnimationHolderData sneakAnimationHolderData;
     private @Nullable AnimationHolder sneakAnimationHolder = null;
-    private @NotNull AnimUtils.AnimationHolderData sneakRushAnimationHolderData = AnimUtils.EMPTY_ANIM;
+    private AnimUtils.AnimationHolderData sneakRushAnimationHolderData;
     private @Nullable AnimationHolder sneakRushAnimationHolder = null;
 
     public SneakRushAnimController(@Nullable JsonObject jsonData) {
@@ -21,7 +21,7 @@ public class SneakRushAnimController extends AbstractAnimStateControllerDP {
     }
 
     public SneakRushAnimController(@Nullable AnimUtils.AnimationHolderData animationHolderData, @Nullable AnimUtils.AnimationHolderData sneakAnimationHolderData, AnimUtils.AnimationHolderData sneakRushAnimationHolderData) {
-        super(null);
+        super();
         this.animationHolderData = AnimUtils.ensureAnimHolderDataNotNull(animationHolderData);
         this.sneakAnimationHolderData = AnimUtils.ensureAnimHolderDataNotNull(sneakAnimationHolderData);
         this.sneakRushAnimationHolderData = AnimUtils.ensureAnimHolderDataNotNull(sneakRushAnimationHolderData);

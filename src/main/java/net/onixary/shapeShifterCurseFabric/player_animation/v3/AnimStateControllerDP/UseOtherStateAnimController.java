@@ -14,7 +14,7 @@ public class UseOtherStateAnimController extends AbstractAnimStateControllerDP {
     public @Nullable Identifier otherStateId;
 
     public UseOtherStateAnimController(@Nullable Identifier otherStateId) {
-        this((JsonObject)null);
+        super();
         this.otherStateId = otherStateId;
     }
 

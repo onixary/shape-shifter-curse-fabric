@@ -57,6 +57,9 @@ public class AnimUtils {
         public AnimationHolder build() {
             if (animationHolder == null) {
                 animationHolder = new AnimationHolder(AnimID, true, Speed, Fade);
+                if (ShapeShifterCurseFabric.IsDevelopmentEnvironment() && animationHolder.getAnimation() == null)  {
+                    ShapeShifterCurseFabric.LOGGER.warn("Animation " + AnimID + " not found!");
+                }
             }
             return animationHolder;
         }

@@ -10,9 +10,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class RideAnimController extends AbstractAnimStateControllerDP {
-    private @NotNull AnimUtils.AnimationHolderData animationHolderData = AnimUtils.EMPTY_ANIM;
+    private AnimUtils.AnimationHolderData animationHolderData;
     private @Nullable AnimationHolder animationHolder = null;
-    private @NotNull AnimUtils.AnimationHolderData RideVehicleAnimationHolderData = AnimUtils.EMPTY_ANIM;
+    private AnimUtils.AnimationHolderData RideVehicleAnimationHolderData;
     private @Nullable AnimationHolder RideVehicleAnimationHolder = null;
 
     public RideAnimController(@Nullable JsonObject jsonData) {
@@ -20,7 +20,7 @@ public class RideAnimController extends AbstractAnimStateControllerDP {
     }
 
     public RideAnimController(@Nullable AnimUtils.AnimationHolderData animationHolderData, @Nullable AnimUtils.AnimationHolderData RideVehicleAnimationHolderData) {
-        super(null);
+        super();
         this.animationHolderData = AnimUtils.ensureAnimHolderDataNotNull(animationHolderData);
         this.RideVehicleAnimationHolderData = AnimUtils.ensureAnimHolderDataNotNull(RideVehicleAnimationHolderData);
     }
@@ -43,12 +43,8 @@ public class RideAnimController extends AbstractAnimStateControllerDP {
 
     @Override
     public AbstractAnimStateController loadFormJson(JsonObject jsonObject) {
-        if (jsonObject.has("anim") && jsonObject.get("anim").isJsonObject()) {
-            this.animationHolderData = AnimUtils.readAnim(jsonObject.get("anim").getAsJsonObject());
-        }
-        if (jsonObject.has("rideVehicleAnim") && jsonObject.get("rideVehicleAnim").isJsonObject()) {
-            this.RideVehicleAnimationHolderData = AnimUtils.readAnim(jsonObject.get("rideVehicleAnim").getAsJsonObject());
-        }
+        this.animationHolderData = AnimUtils.readAnimInJson(jsonObject, "anim", null);
+        this.RideVehicleAnimationHolderData = AnimUtils.readAnimInJson(jsonObject, "rideVehicleAnim", null);
         return this;
     }
 }

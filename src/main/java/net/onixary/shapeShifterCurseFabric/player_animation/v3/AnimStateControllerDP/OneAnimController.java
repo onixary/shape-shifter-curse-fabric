@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class OneAnimController extends AbstractAnimStateControllerDP {
-    private @NotNull AnimUtils.AnimationHolderData animationHolderData = AnimUtils.EMPTY_ANIM;
+    private AnimUtils.AnimationHolderData animationHolderData;
     private @Nullable AnimationHolder animationHolder = null;
 
     public OneAnimController(@Nullable JsonObject jsonData) {
@@ -16,7 +16,7 @@ public class OneAnimController extends AbstractAnimStateControllerDP {
     }
 
     public OneAnimController(@Nullable AnimUtils.AnimationHolderData animationHolderData) {
-        super(null);
+        super();
         this.animationHolderData = AnimUtils.ensureAnimHolderDataNotNull(animationHolderData);
     }
 

@@ -8,13 +8,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class RushJumpAnimController extends AbstractAnimStateControllerDP {
-    private @NotNull AnimUtils.AnimationHolderData animationHolderData = AnimUtils.EMPTY_ANIM;
+    private AnimUtils.AnimationHolderData animationHolderData;
     private @Nullable AnimationHolder animationHolder = null;
-    private @NotNull AnimUtils.AnimationHolderData sneakAnimationHolderData = AnimUtils.EMPTY_ANIM;
+    private AnimUtils.AnimationHolderData sneakAnimationHolderData;
     private @Nullable AnimationHolder sneakAnimationHolder = null;
-    private @NotNull AnimUtils.AnimationHolderData rushJumpAnimationHolderData = AnimUtils.EMPTY_ANIM;
+    private AnimUtils.AnimationHolderData rushJumpAnimationHolderData;
     private @Nullable AnimationHolder rushJumpAnimationHolder = null;
-    private @NotNull AnimUtils.AnimationHolderData sneakRushJumpAnimationHolderData = AnimUtils.EMPTY_ANIM;
+    private AnimUtils.AnimationHolderData sneakRushJumpAnimationHolderData;
     private @Nullable AnimationHolder sneakRushJumpAnimationHolder = null;
 
     public RushJumpAnimController(@Nullable JsonObject jsonData) {
@@ -22,7 +22,7 @@ public class RushJumpAnimController extends AbstractAnimStateControllerDP {
     }
 
     public RushJumpAnimController(@Nullable AnimUtils.AnimationHolderData animationHolderData, @Nullable AnimUtils.AnimationHolderData sneakAnimationHolderData, AnimUtils.AnimationHolderData rushJumpAnimationHolderData, AnimUtils.AnimationHolderData sneakRushJumpAnimationHolder) {
-        super(null);
+        super();
         this.animationHolderData = AnimUtils.ensureAnimHolderDataNotNull(animationHolderData);
         this.sneakAnimationHolderData = AnimUtils.ensureAnimHolderDataNotNull(sneakAnimationHolderData);
         this.rushJumpAnimationHolderData = AnimUtils.ensureAnimHolderDataNotNull(rushJumpAnimationHolderData);

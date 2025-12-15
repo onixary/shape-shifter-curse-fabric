@@ -8,17 +8,17 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class SwimAnimController extends AbstractAnimStateControllerDP {
-    private @NotNull AnimUtils.AnimationHolderData animationHolderData1 = AnimUtils.EMPTY_ANIM;
-    private AnimationHolder animationHolder1 = null;
-    private @NotNull AnimUtils.AnimationHolderData animationHolderData2 = AnimUtils.EMPTY_ANIM;
-    private AnimationHolder animationHolder2 = null;
+    private AnimUtils.AnimationHolderData animationHolderData1;
+    private @Nullable AnimationHolder animationHolder1 = null;
+    private AnimUtils.AnimationHolderData animationHolderData2;
+    private @Nullable AnimationHolder animationHolder2 = null;
 
     public SwimAnimController(@Nullable JsonObject jsonData) {
         super(jsonData);
     }
 
     public SwimAnimController(@Nullable AnimUtils.AnimationHolderData animationHolderDataFloat, @Nullable AnimUtils.AnimationHolderData animationHolderDataSwimming) {
-        super(null);
+        super();
         this.animationHolderData1 = AnimUtils.ensureAnimHolderDataNotNull(animationHolderDataFloat);
         this.animationHolderData2 = AnimUtils.ensureAnimHolderDataNotNull(animationHolderDataSwimming);
     }

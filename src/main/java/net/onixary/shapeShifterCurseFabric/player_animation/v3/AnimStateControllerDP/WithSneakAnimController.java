@@ -8,9 +8,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class WithSneakAnimController extends AbstractAnimStateControllerDP {
-    private @NotNull AnimUtils.AnimationHolderData animationHolderData;
+    private AnimUtils.AnimationHolderData animationHolderData;
     private @Nullable AnimationHolder animationHolder = null;
-    private @NotNull AnimUtils.AnimationHolderData sneakAnimationHolderData;
+    private AnimUtils.AnimationHolderData sneakAnimationHolderData;
     private @Nullable AnimationHolder sneakAnimationHolder = null;
 
     public WithSneakAnimController(@Nullable JsonObject jsonData) {
@@ -18,7 +18,7 @@ public class WithSneakAnimController extends AbstractAnimStateControllerDP {
     }
 
     public WithSneakAnimController(@Nullable AnimUtils.AnimationHolderData normalAnimationHolderData, @Nullable AnimUtils.AnimationHolderData sneakAnimationHolderData) {
-        super(null);
+        super();
         this.animationHolderData = AnimUtils.ensureAnimHolderDataNotNull(normalAnimationHolderData);
         this.sneakAnimationHolderData = AnimUtils.ensureAnimHolderDataNotNull(sneakAnimationHolderData);
     }

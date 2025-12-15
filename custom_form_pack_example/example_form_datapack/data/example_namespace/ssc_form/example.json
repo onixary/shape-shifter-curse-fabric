@@ -111,7 +111,7 @@
     "shape-shifter-curse:fall_flying_state": {
       "controllerType": "shape-shifter-curse:one_anim_controller",
       "anim": {
-        "animID": "shape-shifter-curse:form_feral_common_fall_flying"
+        "animID": "shape-shifter-curse:form_feral_common_elytra_fly"
       }
     },
     "shape-shifter-curse:flying_state": {

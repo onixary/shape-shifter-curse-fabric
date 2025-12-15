@@ -7,13 +7,12 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimState
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateControllerDP;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ClimbAnimController extends AbstractAnimStateControllerDP {
-    private @NotNull AnimUtils.AnimationHolderData animationHolderData;
+    private AnimUtils.AnimationHolderData animationHolderData;
     private @Nullable AnimationHolder animationHolder = null;
-    private @NotNull AnimUtils.AnimationHolderData climbAnimationHolderData;
+    private AnimUtils.AnimationHolderData climbAnimationHolderData;
     private @Nullable AnimationHolder climbAnimationHolder = null;
 
     public ClimbAnimController(@Nullable JsonObject jsonData) {
@@ -21,7 +20,7 @@ public class ClimbAnimController extends AbstractAnimStateControllerDP {
     }
 
     public ClimbAnimController(@Nullable AnimUtils.AnimationHolderData normalAnimationHolderData, @Nullable AnimUtils.AnimationHolderData climbAnimationHolderData) {
-        super(null);
+        super();
         this.animationHolderData = AnimUtils.ensureAnimHolderDataNotNull(normalAnimationHolderData);
         this.climbAnimationHolderData = AnimUtils.ensureAnimHolderDataNotNull(climbAnimationHolderData);
     }

@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class EmptyController extends AbstractAnimStateControllerDP {
     public EmptyController() {
-        this(null);
+        super();
     }
 
     public EmptyController(@Nullable JsonObject jsonData) {
