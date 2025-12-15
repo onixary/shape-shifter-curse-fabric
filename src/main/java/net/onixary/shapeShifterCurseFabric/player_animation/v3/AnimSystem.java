@@ -6,6 +6,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.Vec3d;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateController.TransformingController;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
@@ -136,6 +137,8 @@ public class AnimSystem {
     private @Nullable Identifier getPowerAnimID() {
         if (this.player instanceof IPlayerAnimController iPlayerAnimController) {
             return iPlayerAnimController.shape_shifter_curse$getPowerAnimationID();
+        } else {
+            ShapeShifterCurseFabric.LOGGER.error("Player {} is not a IPlayerAnimController when get power anim ID in AnimSystem", this.player.getName());
         }
         return null;
     }

@@ -349,9 +349,12 @@ public class ModPacketsS2C {
             return;
         }
         PlayerEntity playerEntity = client.world.getPlayerByUuid(playerUuid);
+        // ShapeShifterCurseFabric.LOGGER.info("Received power animation data for player " + playerUuid + " animationId " + animationId + " animationCount " + animationCount + " animationLength " + animationLength);
         client.execute(() -> {
             if (playerEntity instanceof IPlayerAnimController animPlayer) {
                 animPlayer.shape_shifter_curse$setAnimationData(animationId, animationCount, animationLength);
+            } else {
+                ShapeShifterCurseFabric.LOGGER.error("Player {} is not a IPlayerAnimController when receiving update power anim data packet", playerEntity.getName());
             }
         });
     }
