@@ -121,9 +121,13 @@
   },
   "__anim_comment__": "动画列表 State 在 PlayerAnimState 中定义 | Animation list. State is defined in PlayerAnimState",
   "animDefault": {
-    "animID": "example_namespace:form_example_idle",
-    "speed": 1.0,
-    "fade": 2
+    "controllerType": "shape-shifter-curse:sneak_anim_controller",
+    "anim": {
+      "animID": "example_namespace:form_example_idle"
+    },
+    "sneakAnim": {
+      "animID": "shape-shifter-curse:form_feral_common_sneak_idle"
+    }
   },
   "__animDefault_comment__": "默认动画 如果没有可以不用添加此键 | Default animation. If not present, this key can be omitted",
   "powerAnim": {
