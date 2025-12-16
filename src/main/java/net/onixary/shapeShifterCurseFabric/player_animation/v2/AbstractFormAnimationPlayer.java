@@ -1,9 +1,6 @@
-package net.onixary.shapeShifterCurseFabric.player_animation;
+package net.onixary.shapeShifterCurseFabric.player_animation.v2;
 
 import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
-import net.minecraft.entity.player.PlayerEntity;
-
-import java.util.Set;
 
 public abstract class AbstractFormAnimationPlayer {
 

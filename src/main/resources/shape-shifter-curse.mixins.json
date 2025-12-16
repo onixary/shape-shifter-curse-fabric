@@ -46,7 +46,8 @@
     "HungerManagerMixin",
     "EntityLootingMixin",
     "BlockDropMixin",
-    "ScareSkeletonMixin"
+    "ScareSkeletonMixin",
+    "PlayerAnimInterfaceMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",

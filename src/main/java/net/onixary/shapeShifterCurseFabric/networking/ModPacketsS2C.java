@@ -7,6 +7,7 @@ import com.terraformersmc.modmenu.util.mod.Mod;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
@@ -24,17 +25,19 @@ import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import net.onixary.shapeShifterCurseFabric.util.CustomEdibleUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import static net.onixary.shapeShifterCurseFabric.networking.ModPackets.UPDATE_CUSTOM_SETTING;
+import static net.onixary.shapeShifterCurseFabric.networking.ModPackets.*;
 
 // 应仅在客户端注册
 // This class should only be registered on the client side
@@ -60,6 +63,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.REMOVE_DYNAMIC_FORM_EXCEPT, ModPacketsS2C::handleRemoveDynamicExcept);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.LOGIN_PACKET, ModPacketsS2C::onPlayerConnectServer);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.ACTIVE_VIRTUAL_TOTEM, ModPacketsS2C::receiveActiveVirtualTotem);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_POWER_ANIM_DATA_TO_CLIENT, ModPacketsS2C::receivePowerAnimationData);
     }
 
     /* 重构后不需要了 仅用于参考旧实现逻辑
@@ -327,5 +331,51 @@ public class ModPacketsS2C {
         ItemStack totemStack = buf.readItemStack();
         // ConcurrentModificationException 需要把这个操作放到Client线程而非Network线程
         client.execute(() -> VirtualTotemPower.process_virtual_totem_type(playerEntity, virtualTotemType, totemStack));
+    }
+
+    public static void receivePowerAnimationData(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        UUID playerUuid = buf.readUuid();
+        @Nullable Identifier animationId;
+        if (buf.readBoolean()) {
+            animationId = buf.readIdentifier();
+        }
+        else {
+            animationId = null;
+        }
+        int animationCount = buf.readInt();
+        int animationLength = buf.readInt();
+        if (client.world == null) {
+            ShapeShifterCurseFabric.LOGGER.error("World is null when receiving update power anim data packet");
+            return;
+        }
+        PlayerEntity playerEntity = client.world.getPlayerByUuid(playerUuid);
+        // ShapeShifterCurseFabric.LOGGER.info("Received power animation data for player " + playerUuid + " animationId " + animationId + " animationCount " + animationCount + " animationLength " + animationLength);
+        client.execute(() -> {
+            if (playerEntity instanceof IPlayerAnimController animPlayer) {
+                animPlayer.shape_shifter_curse$setAnimationData(animationId, animationCount, animationLength);
+            } else {
+                ShapeShifterCurseFabric.LOGGER.error("Player {} is not a IPlayerAnimController when receiving update power anim data packet", playerEntity.getName());
+            }
+        });
+    }
+
+    public static void sendPowerAnimationDataToServer(@Nullable Identifier animationId, int animationCount, int animationLength) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        if (animationId != null) {
+            buf.writeBoolean(true);
+            buf.writeIdentifier(animationId);
+        }
+        else {
+            buf.writeBoolean(false);
+        }
+        buf.writeInt(animationCount);
+        buf.writeInt(animationLength);
+        ClientPlayNetworking.send(UPDATE_POWER_ANIM_DATA_TO_SERVER, buf);
+    }
+
+    public static void sendRequestPlayerAnimationData(UUID targetPlayerUUID) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeUuid(targetPlayerUUID);
+        ClientPlayNetworking.send(REQUEST_POWER_ANIM_DATA, buf);
     }
 }
