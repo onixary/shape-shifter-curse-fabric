@@ -467,7 +467,6 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
     @Unique
     AnimSystem animSystem = new AnimSystem((PlayerEntity) (Object)this);
 
-    // TODO 改为Inject注入
 //    @Override
 //    public void tick() {
 //        super.tick();

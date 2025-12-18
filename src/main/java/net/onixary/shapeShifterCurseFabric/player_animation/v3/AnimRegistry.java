@@ -14,8 +14,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Function;
 
 // 注册包含AnimState AnimStateController AnimFSM的类
-
-// TODO 提供数据包可用的 AnimStateController 补充animState和animFSM
 public class AnimRegistry {
     public static class AnimState {
         public AbstractAnimStateController defaultController;
