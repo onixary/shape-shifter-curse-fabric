@@ -3,7 +3,7 @@ package net.onixary.shapeShifterCurseFabric.features;
 import dev.tr7zw.firstperson.FirstPersonModelCore;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
@@ -14,6 +14,7 @@ import net.minecraft.client.render.item.HeldItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.util.Hand;
@@ -36,7 +37,7 @@ public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> &
     @Override
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l) {
         // 已知Bug 在开启 FirstPersonModel 并启用时 且在第一人称时 物品位置不对
-        if (IS_FIRST_PERSON_MOD_LOADED && MinecraftClient.getInstance().options.getPerspective().isFirstPerson()) {
+        if (IS_FIRST_PERSON_MOD_LOADED && MinecraftClient.getInstance().options.getPerspective().isFirstPerson() && livingEntity == MinecraftClient.getInstance().player) {
             // 防止出现双物品
             FirstPersonModelCore fpm = FirstPersonModelCore.instance;
             if (fpm.isEnabled()) {
@@ -44,7 +45,7 @@ public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> &
             }
         }
 
-        if (!(livingEntity instanceof ClientPlayerEntity player)) {
+        if (!(livingEntity instanceof AbstractClientPlayerEntity player)) {
             return;
         }
 

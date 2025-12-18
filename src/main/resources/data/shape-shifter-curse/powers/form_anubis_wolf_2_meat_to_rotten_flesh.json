@@ -1,0 +1,19 @@
+{
+  "type": "shape-shifter-curse:modify_entity_loot",
+  "from_item_condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:food"
+      },
+      {
+        "type": "origins:ingredient",
+        "ingredient": {
+          "tag": "origins:raw_meat"
+        }
+      }
+    ]
+  },
+  "chance": 0.2,
+  "target_item": "minecraft:rotten_flesh"
+}

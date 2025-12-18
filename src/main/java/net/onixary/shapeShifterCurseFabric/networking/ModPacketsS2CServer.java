@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.networking;
 
 import com.google.gson.JsonObject;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
@@ -14,9 +15,14 @@ import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
+import org.jetbrains.annotations.Nullable;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
 import java.util.HashMap;
+import java.util.UUID;
+
+import static net.onixary.shapeShifterCurseFabric.networking.ModPackets.UPDATE_POWER_ANIM_DATA_TO_CLIENT;
+import static net.onixary.shapeShifterCurseFabric.networking.ModPackets.UPDATE_POWER_ANIM_DATA_TO_SERVER;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -236,4 +242,25 @@ public class ModPacketsS2CServer {
         );
     }
 
+    public static void sendPowerAnimationDataToClient(ServerPlayerEntity player, UUID PlayerUUID, @Nullable Identifier animationId, int animationCount, int animationLength) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeUuid(PlayerUUID);
+        if (animationId != null) {
+            buf.writeBoolean(true);
+            buf.writeIdentifier(animationId);
+        } else {
+            buf.writeBoolean(false);
+        }
+        buf.writeInt(animationCount);
+        buf.writeInt(animationLength);
+        ServerPlayNetworking.send(player, UPDATE_POWER_ANIM_DATA_TO_CLIENT, buf);
+    }
+
+    public static void sendPowerAnimationDataToNearPlayer(ServerPlayerEntity player, @Nullable Identifier animationId, int animationCount, int animationLength) {
+        player.getServerWorld().getPlayers(near_player -> near_player.squaredDistanceTo(player) <= 128 * 128).forEach(
+                nearPlayer -> {
+                    sendPowerAnimationDataToClient(nearPlayer, player.getUuid(), animationId, animationCount, animationLength);
+                }
+        );
+    }
 }

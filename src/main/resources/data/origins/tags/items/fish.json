@@ -378,6 +378,18 @@
     {
       "id": "tide:shooting_starfish",
       "required": false
+    },
+    {
+      "id": "natures_delight:fafaru",
+      "required": false
+    },
+    {
+      "id": "naturalist:cooked_bass",
+      "required": false
+    },
+    {
+      "id": "naturalist:cooked_catfish",
+      "required": false
     }
   ]
 }

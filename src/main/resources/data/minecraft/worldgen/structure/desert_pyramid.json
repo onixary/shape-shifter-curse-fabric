@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:desert_pyramid",
+  "biomes": "#minecraft:has_structure/desert_pyramid",
+  "spawn_overrides": {
+    "creature": {
+      "bounding_box": "piece",
+      "spawns": [
+        {
+          "type": "shape-shifter-curse:t_wolf",
+          "maxCount": 5,
+          "minCount": 3,
+          "weight": 20
+        }
+      ]
+    }
+  },
+  "step": "surface_structures"
+}

@@ -168,6 +168,9 @@ public class PlayerEventHandler {
 
             // 清空玩家召唤冷却
             MinionRegister.ResetPlayerCoolDown(player);
+
+            // 清空玩家召唤物
+            MinionRegister.DisSpawnAllMinion(player);
         });
         // copy event
         ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {

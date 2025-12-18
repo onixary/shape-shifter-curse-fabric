@@ -1,0 +1,73 @@
+{
+    "type": "origins:action_on_hit",
+    "bientity_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "origins:target_action",
+                "action": {
+                    "type": "origins:and",
+                    "actions": [
+                        {
+                            "type": "origins:apply_effect",
+                            "effect": {
+                                "effect": "minecraft:wither",
+                                "duration": 60,
+                                "amplifier": 2
+                            }
+                        },
+                        {
+                            "type": "origins:apply_effect",
+                            "effect": {
+                                "effect": "minecraft:slowness",
+                                "duration": 60,
+                                "amplifier": 1
+                            }
+                        },
+                        {
+                            "type": "origins:spawn_particles",
+                            "particle": {
+                                "type": "minecraft:dust",
+                                "params": "0.07 0.07 0.07 2"
+                            },
+                            "count": 8,
+                            "speed": 0.0,
+                            "force": true,
+                            "spread": {
+                                "x": 0.5,
+                                "y": 0.5,
+                                "z": 0.5
+                            }
+                        },
+                        {
+                            "type": "origins:spawn_particles",
+                            "particle": {
+                                "type": "minecraft:soul_fire_flame"
+                            },
+                            "count": 4,
+                            "speed": 0.0,
+                            "force": true,
+                            "spread": {
+                                "x": 0.5,
+                                "y": 0.5,
+                                "z": 0.5
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "bientity_condition": {
+        "type": "origins:actor_condition",
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:status_effect",
+                    "effect": "minecraft:wither"
+                }
+            ]
+        }
+    }
+}

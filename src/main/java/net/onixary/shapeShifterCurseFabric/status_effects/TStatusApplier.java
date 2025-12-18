@@ -7,6 +7,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.wolf.TransformativeWolfEntity;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
@@ -23,16 +24,21 @@ public class TStatusApplier {
     public static float T_BAT_STATUS_CHANCE = 0.5f;
     public static float T_AXOLOTL_STATUS_CHANCE = 0.7f;
     public static float T_OCELOT_STATUS_CHANCE = 0.5f;
+    public static float T_WOLF_STATUS_CHANCE = 0.5f;
 
     public static void applyStatusFromTMob(MobEntity fromMob, PlayerEntity player) {
+        // 过段时间我把这个逻辑重构进fromMob里
         if (fromMob instanceof TransformativeBatEntity) {
             applyStatusByChance(T_BAT_STATUS_CHANCE, player, TO_BAT_0_EFFECT);
         }
-        else if(fromMob instanceof TransformativeAxolotlEntity) {
+        else if (fromMob instanceof TransformativeAxolotlEntity) {
             applyStatusByChance(T_AXOLOTL_STATUS_CHANCE, player, TO_AXOLOTL_0_EFFECT);
         }
-        else if(fromMob instanceof TransformativeOcelotEntity){
+        else if (fromMob instanceof TransformativeOcelotEntity) {
             applyStatusByChance(T_OCELOT_STATUS_CHANCE, player, TO_OCELOT_0_EFFECT);
+        }
+        else if (fromMob instanceof TransformativeWolfEntity) {
+            applyStatusByChance(T_WOLF_STATUS_CHANCE, player, TO_ANUBIS_WOLF_0_EFFECT);
         }
     }
 

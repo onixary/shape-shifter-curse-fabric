@@ -5,7 +5,6 @@ import mod.azure.azurelib.rewrite.render.armor.AzArmorRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
@@ -13,7 +12,6 @@ import net.minecraft.client.gl.ShaderProgram;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.VertexFormats;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
@@ -23,12 +21,12 @@ import net.onixary.shapeShifterCurseFabric.custom_ui.BookOfShapeShifterScreenV2_
 import net.onixary.shapeShifterCurseFabric.custom_ui.StartBookScreenV2;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TAxolotlEntityRenderer;
-import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.BatEntityModel;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.BatEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TOcelotEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.armors.MorphscaleArmorRenderer;
-import net.onixary.shapeShifterCurseFabric.minion.MinionRegister;
+import net.onixary.shapeShifterCurseFabric.minion.MinionRegisterClient;
+import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_animation.RegPlayerAnimation;
 import net.onixary.shapeShifterCurseFabric.render.render_layer.FurGradientRenderLayer;
@@ -38,15 +36,15 @@ import net.onixary.shapeShifterCurseFabric.util.TickManager;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
 
 public class ShapeShifterCurseFabricClient implements ClientModInitializer {
-	public static final EntityModelLayer T_BAT_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_bat"), "main");
-	public static final EntityModelLayer T_AXOLOTL_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_axolotl"), "main");
-	public static final EntityModelLayer T_OCELOT_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_ocelot"), "main");
+	// 由于咒文生物使用的都是原版模型，所以无需注册Layer
+	//public static final EntityModelLayer T_BAT_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_bat"), "main");
+	//public static final EntityModelLayer T_AXOLOTL_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_axolotl"), "main");
+	//public static final EntityModelLayer T_OCELOT_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_ocelot"), "main");
 
 	public static MinecraftClient getClient() {
 		return MinecraftClient.getInstance();
@@ -120,11 +118,10 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 
 	public static void registerEntityModels() {
 		EntityRendererRegistry.register(T_BAT, BatEntityRenderer::new);
-		EntityModelLayerRegistry.registerModelLayer(T_BAT_LAYER, BatEntityModel::getTexturedModelData);
 		EntityRendererRegistry.register(T_AXOLOTL, TAxolotlEntityRenderer::new);
-		EntityModelLayerRegistry.registerModelLayer(T_AXOLOTL_LAYER, BatEntityModel::getTexturedModelData);
-		EntityRendererRegistry.register(T_OCELOT, TOcelotEntityRenderer::new); // i dont know why T_OCELOT_LAYER is unused, but im not gonna change that
-		MinionRegister.registerClient();
+		EntityRendererRegistry.register(T_OCELOT, TOcelotEntityRenderer::new);
+		EntityRendererRegistry.register(T_WOLF, AnubisWolfMinionEntityRenderer::new);
+		MinionRegisterClient.registerClient();
 	}
 
     public static void registerAzureArmorGeo(){

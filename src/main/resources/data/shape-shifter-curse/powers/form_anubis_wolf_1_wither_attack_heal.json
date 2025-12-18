@@ -1,0 +1,37 @@
+{
+    "type": "origins:action_on_hit",
+    "bientity_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "origins:actor_action",
+                "action": {
+                    "type": "origins:and",
+                    "actions": [
+                        {
+                            "type": "origins:heal",
+                            "amount": 1
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "bientity_condition": {
+        "type": "origins:actor_condition",
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:status_effect",
+                    "effect": "minecraft:wither"
+                }
+            ]
+        }
+    },
+    "damage_condition": {
+        "type": "origins:amount",
+        "comparison": ">",
+        "compare_to": 1
+    }
+}

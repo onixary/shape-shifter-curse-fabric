@@ -13,7 +13,8 @@ public class FormRandomSelector {
             RegPlayerForms.FAMILIAR_FOX_0,
             RegPlayerForms.BAT_0,
             RegPlayerForms.AXOLOTL_0,
-            RegPlayerForms.OCELOT_0
+            RegPlayerForms.OCELOT_0,
+            RegPlayerForms.ANUBIS_WOLF_0
     );
 
     public static PlayerFormBase getRandomFormWithIndexZero() {

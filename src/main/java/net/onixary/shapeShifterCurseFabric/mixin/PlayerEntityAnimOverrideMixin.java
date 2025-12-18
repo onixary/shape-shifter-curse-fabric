@@ -8,43 +8,27 @@ import dev.kosmx.playerAnim.api.layered.modifier.AbstractFadeModifier;
 import dev.kosmx.playerAnim.api.layered.modifier.SpeedModifier;
 import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
 import dev.kosmx.playerAnim.core.util.Ease;
-import dev.kosmx.playerAnim.core.util.Vec3f;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
-import io.github.apace100.apoli.component.PowerHolderComponent;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.effect.StatusEffectUtil;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.item.FlintAndSteelItem;
 import net.minecraft.util.Hand;
-import net.minecraft.util.UseAction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
-import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
-import net.onixary.shapeShifterCurseFabric.player_animation.AnimationController;
-import net.onixary.shapeShifterCurseFabric.player_animation.AnimationControllerInstance;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
-import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
+import net.onixary.shapeShifterCurseFabric.player_animation.v2.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.*;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @Mixin(AbstractClientPlayerEntity.class)
 public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
@@ -77,31 +61,47 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
     private void shape_shifter_curse$init(ClientWorld level, GameProfile profile, CallbackInfo info) {
         PlayerAnimationAccess.getPlayerAnimLayer((AbstractClientPlayerEntity) (Object) this).addAnimLayer(1, CONTAINER);
         // register all form animations here
-        AnimationTransform.registerAnims();
-        RegPlayerForms.playerForms.forEach((formID, form) -> {form.Anim_registerAnims();});
+        // AnimationTransform.registerAnims();
+        // RegPlayerForms.playerForms.forEach((formID, form) -> {form.Anim_registerAnims();});
 
         currentAnimation = null;
         CONTAINER.setAnimation(null);
     }
 
+    @Unique
     public PlayerAnimState currentState = PlayerAnimState.NONE;
+    @Unique
     public PlayerAnimState previousState = PlayerAnimState.NONE;
 
+    @Unique
     public float momentum = 0;  // 无用
+    @Unique
     public float turnDelta = 0;  // 无用
+    @Unique
     public Vec3d lastPos = new Vec3d(0, 0, 0);
+    @Unique
     public boolean lastOnGround = false;
+    @Unique
     public boolean hasSlowFall = false;  // 无用
+    @Unique
     private int tickCounter = 0;  // 无用
 
+    @Unique
     private PlayerFormBase curForm;
+    @Unique
     KeyframeAnimation currentAnimation = null;
+    @Unique
     boolean overrideHandAnim = false;  // 无用
+    @Unique
     AnimationHolder animToPlay = null;
+    @Unique
     boolean isAttackAnim = false;  // 无用
+    @Unique
     int continueSwingAnimCounter = 0;
 
+    @Unique
     PlayerFormBase transformCurrentForm;
+    @Unique
     PlayerFormBase transformToForm;
 
 //    @Override
@@ -459,13 +459,30 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 //
 //    }
 
-    @Unique
-    AnimationController.PlayerAnimDataHolder AnimDataHolder = new AnimationController.PlayerAnimDataHolder();
+    // 2代控制器数据
+    // @Unique
+    // AnimationController.PlayerAnimDataHolder AnimDataHolder = new AnimationController.PlayerAnimDataHolder();
 
-    @Override
-    public void tick() {
-        super.tick();
-        animToPlay = AnimationControllerInstance.getAnim(this, this.AnimDataHolder);
+    // 3代控制器数据
+    @Unique
+    AnimSystem animSystem = new AnimSystem((PlayerEntity) (Object)this);
+
+//    @Override
+//    public void tick() {
+//        super.tick();
+//        animToPlay = AnimationControllerInstance.getAnim(this, this.AnimDataHolder);
+//        if (animToPlay != null){
+//            playAnimation(animToPlay.getAnimation(), animToPlay.getSpeed(), animToPlay.getFade());
+//        }
+//        else{
+//            CONTAINER.setAnimation(null);
+//            currentAnimation = null;
+//        }
+//    }
+
+    @Inject(method = "tick", at = @At("TAIL"))
+    void tick(CallbackInfo ci) {
+        animToPlay = this.animSystem.getAnimation();
         if (animToPlay != null){
             playAnimation(animToPlay.getAnimation(), animToPlay.getSpeed(), animToPlay.getFade());
         }
@@ -475,17 +492,22 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         }
     }
 
+    @Unique
     public void playAnimation(KeyframeAnimation anim) {
         playAnimation(anim, 1.0f, 10);
     }
 
+    @Unique
     private boolean modified = false;
+    @Unique
     private boolean armAnimationsEnabled = true;
 
+    @Unique
     public void playAnimation(KeyframeAnimation anim, float speed, int fade) {
         playAnimation(CONTAINER, anim, speed, fade);
     }
 
+    @Unique
     public void playAnimation(ModifierLayer<IAnimation> container, KeyframeAnimation anim, float speed, int fade) {
         if (currentAnimation == anim || anim == null)
             return;
@@ -510,6 +532,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 
     }
 
+    /*
     @Override
     public void swingHand(Hand hand) {
         super.swingHand(hand);
@@ -519,7 +542,9 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
         }
         currentState = PlayerAnimState.ANIM_TOOL_SWING;
     }
+     */
 
+    @Unique
     public void disableArmAnimations() {
         if (currentAnimation != null && armAnimationsEnabled) {
             armAnimationsEnabled = false;

@@ -1,0 +1,9 @@
+{
+    "type": "shape-shifter-curse:custom_edible",
+    "item_id_list": [
+        "minecraft:bone"
+    ],
+    "hunger": 5,
+    "saturation_modifier": 0.4,
+    "always_edible": true
+}

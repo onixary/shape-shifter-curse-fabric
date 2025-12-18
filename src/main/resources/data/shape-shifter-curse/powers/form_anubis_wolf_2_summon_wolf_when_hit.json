@@ -1,11 +1,18 @@
 {
-  "type": "origins:self_action_when_hit",
-  "entity_action": {
-    "type": "shape-shifter-curse:summon_wolf_minion",
+  "type": "origins:action_when_hit",
+  "bientity_action": {
+    "type": "shape-shifter-curse:bi_summon_anubis_wolf_minion",
     "minion_level": 2,
-    "count": 1,
+    "count": 2,
     "max_minion_count": 2,
-    "cooldown": 200
+    "cooldown": 600,
+    "reverse": true,
+    "owner_action": {
+      "type": "shape-shifter-curse:add_instinct",
+      "instinct_effect_id": "FORM_ANUBIS_WOLF_SUMMON_MINION",
+      "value": 0.3,
+      "duration": 20
+    }
   },
   "damage_condition": {
     "type": "origins:attacker"

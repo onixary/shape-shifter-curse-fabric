@@ -43,7 +43,13 @@
     "projectile.PotionEntityMixin",
     "VirtualTotemMixin",
     "MinionPlayerEntityMixin",
-    "accessor.PowerTypeRegistryAccessor"
+    "accessor.PowerTypeRegistryAccessor",
+    "MinionPlayerEntityMixin",
+    "HungerManagerMixin",
+    "EntityLootingMixin",
+    "BlockDropMixin",
+    "ScareSkeletonMixin",
+    "PlayerAnimInterfaceMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",

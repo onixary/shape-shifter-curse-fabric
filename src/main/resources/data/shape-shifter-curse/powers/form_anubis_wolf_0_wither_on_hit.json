@@ -1,0 +1,15 @@
+{
+  "type": "origins:self_action_when_hit",
+  "entity_action": {
+    "type": "origins:apply_effect",
+    "effect": {
+      "effect": "minecraft:wither",
+      "duration": 50,
+      "amplifier": 0,
+      "hide_particles": false
+    }
+  },
+  "damage_condition": {
+    "type": "origins:attacker"
+  }
+}

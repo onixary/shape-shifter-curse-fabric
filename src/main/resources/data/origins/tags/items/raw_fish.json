@@ -248,6 +248,14 @@
     {
       "id": "oceansdelight:tentacles",
       "required": false
+    },
+    {
+      "id": "naturalist:bass",
+      "required": false
+    },
+    {
+      "id": "naturalist:catfish",
+      "required": false
     }
   ]
 }

@@ -1,0 +1,25 @@
+{
+    "type": "origins:self_action_on_hit",
+    "damage_condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:attacker",
+                "entity_condition": {
+                    "type": "origins:entity_group",
+                    "group": "undead"
+                }
+            },
+            {
+                "type": "origins:amount",
+                "comparison": ">=",
+                "compare_to": 1
+            }
+        ]
+    },
+    "entity_action": {
+        "type": "origins:heal",
+        "amount": 1
+    },
+    "cooldown": 5
+}

@@ -1,8 +1,10 @@
 package net.onixary.shapeShifterCurseFabric.minion;
 
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
@@ -13,27 +15,28 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.minion.mobs.WolfMinion;
-import net.onixary.shapeShifterCurseFabric.minion.mobs.WolfMinionRenderer;
+import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntity;
 import org.jetbrains.annotations.Nullable;
 
 public class MinionRegister {
-    public static final EntityType<WolfMinion> WOLF_MINION = Registry.register(
+    public static final EntityType<AnubisWolfMinionEntity> ANUBIS_WOLF_MINION = Registry.register(
             Registries.ENTITY_TYPE,
-            ShapeShifterCurseFabric.identifier("minion_wolf"),
+            AnubisWolfMinionEntity.MinionID,
             FabricEntityTypeBuilder
-                    .create(SpawnGroup.MISC, WolfMinion::new)
+                    .create(SpawnGroup.MISC, AnubisWolfMinionEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
                     .build()
     );
 
     public static void register() {
-        FabricDefaultAttributeRegistry.register(WOLF_MINION, WolfMinion.createWolfMinionAttributes());
+        FabricDefaultAttributeRegistry.register(ANUBIS_WOLF_MINION, AnubisWolfMinionEntity.createWolfMinionAttributes());
     }
 
-    public static void registerClient() {
-        EntityRendererRegistry.register(WOLF_MINION, WolfMinionRenderer::new);
+
+    public static void DisSpawnAllMinion(PlayerEntity player) {
+        if (player instanceof IPlayerEntityMinion minionPlayer) {
+            minionPlayer.shape_shifter_curse$clearAllMinions();
+        }
     }
 
     public static @Nullable <T extends LivingEntity> T SpawnMinion(EntityType<T> minion, ServerWorld world, BlockPos pos, ServerPlayerEntity player) {
