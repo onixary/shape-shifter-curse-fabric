@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.player_form;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.entity.player.PlayerEntity;
@@ -8,7 +9,6 @@ import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.apoli.registry.ApoliRegistries;
 import io.github.apace100.apoli.util.NamespaceAlias;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
@@ -391,6 +391,7 @@ public class PlayerFormDynamic extends PlayerFormBase{
         }
     }
 
+    /*
     private void saveExtraPower(JsonObject data) {
         JsonArray powerArray = new JsonArray();
         if (!this.ExtraPower.isEmpty()) {
@@ -405,4 +406,5 @@ public class PlayerFormDynamic extends PlayerFormBase{
         }
         data.add("ExtraPower", powerArray);
     }
+     */
 }
