@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.player_animation.v3;
 
 import com.google.gson.JsonObject;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
@@ -8,6 +9,8 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControll
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class AnimUtils {
@@ -133,6 +136,93 @@ public class AnimUtils {
         } catch (Exception e) {
             ShapeShifterCurseFabric.LOGGER.warn("Error while loading player animation: " + e.getMessage());
             return EMPTY_CONTROLLER;
+        }
+    }
+
+    public enum AnimationSendSideType {
+        ONLY_CLIENT((player -> player.getWorld().isClient)),
+        ONLY_SERVER((player -> !player.getWorld().isClient)),
+        NONE((player -> false)),
+        BOTH_SIDE((player -> true));
+
+        private final Function<PlayerEntity, Boolean> canPlayAnimCondition;
+
+        public boolean canPlayAnim(PlayerEntity player) {
+            return this.canPlayAnimCondition.apply(player);
+        }
+
+        AnimationSendSideType(Function<PlayerEntity, Boolean> canPlayAnimCondition) {
+            this.canPlayAnimCondition = canPlayAnimCondition;
+        }
+    }
+
+    public static boolean playPowerAnimWithTime(PlayerEntity playerEntity, Identifier powerAnimID, int animDuration, AnimationSendSideType sendSideType) {
+        if (!sendSideType.canPlayAnim(playerEntity)) {
+            return false;
+        }
+        if (playerEntity instanceof IPlayerAnimController playerAnimController) {
+            playerAnimController.shape_shifter_curse$playAnimationWithTime(powerAnimID, animDuration);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean playPowerAnimWithCount(PlayerEntity playerEntity, Identifier powerAnimID, int animCount, AnimationSendSideType sendSideType) {
+        if (!sendSideType.canPlayAnim(playerEntity)) {
+            return false;
+        }
+        if (playerEntity instanceof IPlayerAnimController playerAnimController) {
+            playerAnimController.shape_shifter_curse$playAnimationWithCount(powerAnimID, animCount);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean playPowerAnimLoop(PlayerEntity playerEntity, Identifier powerAnimID, AnimationSendSideType sendSideType) {
+        if (!sendSideType.canPlayAnim(playerEntity)) {
+            return false;
+        }
+        if (playerEntity instanceof IPlayerAnimController playerAnimController) {
+            playerAnimController.shape_shifter_curse$playAnimationLoop(powerAnimID);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean stopPowerAnim(PlayerEntity playerEntity, AnimationSendSideType sendSideType) {
+        if (!sendSideType.canPlayAnim(playerEntity)) {
+            return false;
+        }
+        if (playerEntity instanceof IPlayerAnimController playerAnimController) {
+            playerAnimController.shape_shifter_curse$stopAnimation();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean stopPowerAnimWithIDs(PlayerEntity playerEntity, AnimationSendSideType sendSideType, List<Identifier> powerAnimIDs) {
+        return stopPowerAnimWithIDs(playerEntity, sendSideType, powerAnimIDs.toArray(new Identifier[0]));
+    }
+
+    public static boolean stopPowerAnimWithIDs(PlayerEntity playerEntity, AnimationSendSideType sendSideType, Identifier... powerAnimIDs) {
+        if (!sendSideType.canPlayAnim(playerEntity)) {
+            return false;
+        }
+        if (playerEntity instanceof IPlayerAnimController playerAnimController) {
+            @Nullable Identifier nowAnimID = playerAnimController.shape_shifter_curse$getPowerAnimationID();
+            for (Identifier powerAnimID : powerAnimIDs) {
+                if (powerAnimID.equals(nowAnimID)) {
+                    stopPowerAnim(playerEntity, sendSideType);
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            return false;
         }
     }
 }
