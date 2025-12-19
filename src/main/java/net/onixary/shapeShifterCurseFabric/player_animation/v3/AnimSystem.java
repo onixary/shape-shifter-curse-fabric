@@ -61,6 +61,15 @@ public class AnimSystem {
         this.data = new AnimSystemData(player);
         this.PreProcessControllers = new ArrayList<>();
         this.initPreProcessControllers();
+        this.registerAllPreProcessControllers();
+    }
+
+    public void registerAllPreProcessControllers() {
+        for (AbstractAnimStateController controller : this.PreProcessControllers) {
+            if (!controller.isRegistered(this.player, this.data)) {
+                controller.registerAnim(this.player, this.data);
+            }
+        }
     }
 
     public void initPreProcessControllers() {
