@@ -21,6 +21,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
+import net.onixary.shapeShifterCurseFabric.util.TrinketUtils;
 import virtuoel.pehkui.api.ScaleData;
 import virtuoel.pehkui.api.ScaleTypes;
 
@@ -86,6 +87,7 @@ public class FormAbilityManager {
             // 一般是没有对应的origin
             ShapeShifterCurseFabric.LOGGER.error("Failed to apply origin extra power: ", e);
         }
+        TrinketUtils.ReApplyAccessoryPowerOnPlayerFormChange(player);
         //applyPower(player, config.getPowerId());
         // EffectManager.clearTransformativeEffect(player);
         // 清空Status 如果新形态无法获得变形效果
