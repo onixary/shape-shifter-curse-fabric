@@ -1,13 +1,19 @@
 package net.onixary.shapeShifterCurseFabric.player_form;
 
 import net.minecraft.client.network.AbstractClientPlayerEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.data.CodexData;
 import net.onixary.shapeShifterCurseFabric.integration.origins.Origins;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
-import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
+import net.onixary.shapeShifterCurseFabric.player_animation.v2.PlayerAnimState;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class PlayerFormBase {
     public Identifier FormID;
@@ -21,6 +27,8 @@ public class PlayerFormBase {
     private boolean CanSneakRush = false;
     private boolean CanRushJump = false;
     private boolean IsCustomForm = false;
+
+    private boolean IsRegisteredPowerAnim = false;
 
     public String Origin_NameSpace_OverWrite = null;
     public Identifier OriginLayer_OverWrite = null; // Default: "origins:origin"
@@ -53,7 +61,27 @@ public class PlayerFormBase {
         return Text.translatable("codex.form." + FormID.getNamespace() + "." + FormID.getPath() + "." + type.toString().toLowerCase());
     }
 
-    // 动画
+
+    public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
+        return null;
+    }
+
+    // 注册PowerAnim
+    public void registerPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) {
+        this.IsRegisteredPowerAnim = true;
+    }
+
+    // 是否注册了PowerAnim
+    public boolean isPowerAnimRegistered(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) {
+        return IsRegisteredPowerAnim;
+    }
+
+    // 获取PowerAnim 输出左为是否匹配(不匹配使用由PowerAnim注册表提供的默认动画) 右为动画
+    public @NotNull Pair<Boolean, @Nullable AnimationHolder> getPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier powerAnimID) {
+        return new Pair<>(false, null);
+    }
+
+    // 1代2代动画控制器使用 等3代测试完就删除
     public void Anim_registerAnims() {
         return;
     }

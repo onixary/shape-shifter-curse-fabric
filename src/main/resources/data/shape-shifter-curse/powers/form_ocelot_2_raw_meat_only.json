@@ -11,6 +11,12 @@
             "ingredient": {
               "tag": "origins:raw_meat"
             }
+          },
+          {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:rotten_flesh"
+            }
           }
         ],
         "inverted": true

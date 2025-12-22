@@ -1,0 +1,33 @@
+{
+  "type": "origins:action_on_hit",
+  "bientity_action": {
+    "type": "origins:target_action",
+    "action": {
+      "type": "origins:damage",
+      "amount": 10,
+      "damage_type": "minecraft:player_attack"
+    }
+  },
+  "bientity_condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:target_condition",
+        "condition": {
+          "type": "origins:and",
+          "conditions": [
+            {
+              "type": "origins:health",
+              "comparison": "<",
+              "compare_to": 10
+            },
+            {
+              "type": "origins:status_effect",
+              "effect": "minecraft:wither"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

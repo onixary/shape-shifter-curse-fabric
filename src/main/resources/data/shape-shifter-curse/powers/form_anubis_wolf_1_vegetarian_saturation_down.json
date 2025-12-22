@@ -1,0 +1,38 @@
+{
+    "type": "origins:modify_food",
+    "saturation_modifier": {
+        "name": "Decreased saturation points",
+        "operation": "multiply_base_multiplicative",
+        "value": -0.2
+    },
+    "item_condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:ingredient",
+                "ingredient": {
+                    "tag": "origins:meat"
+                },
+                "inverted": true
+            },
+            {
+                "type": "origins:meat",
+                "inverted": true
+            },
+            {
+                "type": "origins:ingredient",
+                "ingredient": {
+                    "tag": "origins:ignore_diet"
+                },
+                "inverted": true
+            },
+            {
+                "type": "origins:ingredient",
+                "ingredient": {
+                    "tag": "shape-shifter-curse:ignore_vc_eat"
+                },
+                "inverted": true
+            }
+        ]
+    }
+}

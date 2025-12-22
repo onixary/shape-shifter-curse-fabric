@@ -82,7 +82,7 @@ public class BookOfShapeShifterScreenV2_P1 extends Screen {
         float j = entity.getPitch();
         float k = entity.prevHeadYaw;
         float l = entity.headYaw;
-        float m = entity.prevYaw;
+        float m = entity.prevBodyYaw;
         entity.bodyYaw = 180.0F + f * 20.0F;
         entity.prevBodyYaw = entity.bodyYaw;
         entity.setYaw(180.0F + f * 40.0F);

@@ -486,6 +486,181 @@
     {
       "id": "nethersdelight:plate_of_stuffed_hoglin_roast",
       "required": false
+    },
+    {
+      "id": "farm_and_charm:minced_beef",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:lamb_ham",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:chicken_parts",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:bacon",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:baked_lamb_ham",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:lamb_with_corn",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:goulash",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:beef_patty_with_vegetables",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:potato_with_roast_meat",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:stuffed_chicken",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:roasted_chicken",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:chicken_wrapped_in_bacon",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:cooked_cod",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:cooked_salmon",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:stuffed_rabbit",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:sausage_with_oat_patty",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:bacon_with_eggs",
+      "required": false
+    }
+  ,
+    {
+      "id": "meadow:cooked_buffalo_meat",
+      "required": false
+    }
+  ,
+    {
+      "id": "meadow:raw_buffalo_meat",
+      "required": false
+    }
+  ,
+    {
+      "id": "wildernature:bison_meat",
+      "required": false
+    },
+    {
+      "id": "wildernature:cooked_bison_meat",
+      "required": false
+    },
+    {
+      "id": "wildernature:cassowary_meat",
+      "required": false
+    },
+    {
+      "id": "wildernature:cooked_cassowary_meat",
+      "required": false
+    },
+    {
+      "id": "wildernature:pelican_meat",
+      "required": false
+    },
+    {
+      "id": "wildernature:cooked_pelican_meat",
+      "required": false
+    },
+    {
+      "id": "wildernature:turkey_meat",
+      "required": false
+    },
+    {
+      "id": "wildernature:cooked_turkey_meat",
+      "required": false
+    },
+    {
+      "id": "wildernature:venison",
+      "required": false
+    },
+    {
+      "id": "wildernature:cooked_venison",
+      "required": false
+    },
+    {
+      "id": "naturalist:bass",
+      "required": false
+    },
+    {
+      "id": "naturalist:catfish",
+      "required": false
+    },
+    {
+      "id": "naturalist:cooked_bass",
+      "required": false
+    },
+    {
+      "id": "naturalist:cooked_catfish",
+      "required": false
+    },
+    {
+      "id": "naturalist:duck",
+      "required": false
+    },
+    {
+      "id": "naturalist:cooked_duck",
+      "required": false
+    },
+    {
+      "id": "naturalist:cooked_lizard_tail",
+      "required": false
+    },
+    {
+      "id": "naturalist:lizard_tail",
+      "required": false
+    },
+    {
+      "id": "naturalist:venison",
+      "required": false
+    },
+    {
+      "id": "naturalist:cooked_venison",
+      "required": false
+    },
+    {
+      "id": "naturalist:bushmeat",
+      "required": false
+    },
+    {
+      "id": "naturalist:cooked_bushmeat",
+      "required": false
+    },
+    {
+      "id": "natures_delight:alfredo_pasta",
+      "required": false
+    },
+    {
+      "id": "natures_delight:fafaru",
+      "required": false
     }
   ]
 }

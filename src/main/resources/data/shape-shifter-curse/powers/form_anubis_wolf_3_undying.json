@@ -7,7 +7,7 @@
   },
   "entity_actions": [
     {
-      "type": "shape-shifter-curse:summon_wolf_minion",
+      "type": "shape-shifter-curse:summon_anubis_wolf_minion",
       "minion_level": 3,
       "count": 2,
       "max_minion_count": 4,
@@ -18,7 +18,7 @@
   "totem_status_effects": [
     {
       "effect": "minecraft:wither",
-      "duration": 240,
+      "duration": 440,
       "amplifier": 1,
       "show_particles": false,
       "show_icon": true
@@ -31,13 +31,6 @@
       "show_icon": true
     },
     {
-      "effect": "minecraft:absorption",
-      "duration": 100,
-      "amplifier": 1,
-      "show_particles": false,
-      "show_icon": true
-    },
-    {
       "effect": "minecraft:weakness",
       "duration": 2400,
       "amplifier": 0,
@@ -45,7 +38,7 @@
       "show_icon": true
     }
   ],
-  "cooldown": 2400,
+  "cooldown": 9000,
   "hud_render": {
     "should_render": false
   }

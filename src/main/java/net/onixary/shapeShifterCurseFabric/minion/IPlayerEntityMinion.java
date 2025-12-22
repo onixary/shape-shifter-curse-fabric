@@ -27,4 +27,8 @@ public interface IPlayerEntityMinion {
     public long shape_shifter_curse$getCooldownTime(Identifier MinionID);
 
     public void shape_shifter_curse$resetAllCooldown();
+
+    public void shape_shifter_curse$clearAllMinions();
+
+    public void shape_shifter_curse$clearMinions(Identifier MinionID);
 }

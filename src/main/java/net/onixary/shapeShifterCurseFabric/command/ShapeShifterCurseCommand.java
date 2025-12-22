@@ -15,11 +15,10 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.minion.MinionRegister;
-import net.onixary.shapeShifterCurseFabric.minion.mobs.WolfMinion;
+import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntity;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
@@ -386,8 +385,8 @@ public class ShapeShifterCurseCommand {
             return 1;
         }
         try {
-            WolfMinion wolfMinion = MinionRegister.SpawnMinion(MinionRegister.WOLF_MINION, world, player.getBlockPos(), player);
-            wolfMinion.setMinionLevel(3);
+            AnubisWolfMinionEntity anubisWolfMinionEntity = MinionRegister.SpawnMinion(MinionRegister.ANUBIS_WOLF_MINION, world, player.getBlockPos(), player);
+            anubisWolfMinionEntity.setMinionLevel(3);
         } catch (Exception e) {
             ShapeShifterCurseFabric.LOGGER.error("Error when spawn minion: ", e);
             return 0;

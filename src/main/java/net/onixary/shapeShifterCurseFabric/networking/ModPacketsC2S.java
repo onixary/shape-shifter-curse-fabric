@@ -2,6 +2,7 @@ package net.onixary.shapeShifterCurseFabric.networking;
 
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.fabricmc.fabric.api.networking.v1.*;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
@@ -14,6 +15,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnJumpPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnSprintingToSneakingPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
@@ -21,6 +23,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
+import org.jetbrains.annotations.Nullable;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
 import java.util.UUID;
@@ -92,14 +95,26 @@ public class ModPacketsC2S {
 
         ServerPlayNetworking.registerGlobalReceiver(
                 UPDATE_CUSTOM_SETTING,
-                net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S::onUpdatePlayerCustomConfig);
+                net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S::onUpdatePlayerCustomConfig
+        );
 
         ServerPlayNetworking.registerGlobalReceiver(
                 SET_PATRON_FORM,
                 net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S::receiveSetPatronForm);
+
+
+        ServerPlayNetworking.registerGlobalReceiver(
+                UPDATE_POWER_ANIM_DATA_TO_SERVER,
+                ModPacketsC2S::onUpdatePowerAnimationData
+        );
+
+        ServerPlayNetworking.registerGlobalReceiver(
+                REQUEST_POWER_ANIM_DATA,
+                ModPacketsC2S::onRequestPowerAnimationData
+        );
     }
 
-    private static void onPressStartBookButton(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender){
+    private static void onPressStartBookButton(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
         UUID playerUuid = packetByteBuf.readUuid();
         minecraftServer.execute(() -> {
             // 通过 UUID 获取玩家实例
@@ -121,7 +136,7 @@ public class ModPacketsC2S {
         ServerPlayNetworking.send(player, JUMP_DETACH_REQUEST_ID, buf);
     }
 
-    private static void onUpdatePlayerCustomConfig(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender){
+    private static void onUpdatePlayerCustomConfig(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
         boolean keepOriginalSkin = packetByteBuf.readBoolean();
         boolean enableFormColor = packetByteBuf.readBoolean();
         int primaryColor = packetByteBuf.readInt();
@@ -139,9 +154,47 @@ public class ModPacketsC2S {
                 component.setEnableFormColor(enableFormColor);
                 component.setFormColor(new FormTextureUtils.ColorSetting(primaryColor, accentColor1Color, accentColor2Color, eyeColorA, eyeColorB, primaryGreyReverse, accent1GreyReverse, accent2GreyReverse));
                 RegPlayerSkinComponent.SKIN_SETTINGS.sync(playerEntity);
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 ShapeShifterCurseFabric.LOGGER.error("Error while updating player custom config", e);
+            }
+        });
+    }
+
+    private static void onUpdatePowerAnimationData(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
+        @Nullable Identifier animationId;
+        if (packetByteBuf.readBoolean()) {
+            animationId = packetByteBuf.readIdentifier();
+        } else {
+            animationId = null;
+        }
+        int animationCount = packetByteBuf.readInt();
+        int animationLength = packetByteBuf.readInt();
+        minecraftServer.execute(() -> {
+            if (playerEntity instanceof IPlayerAnimController animPlayer) {
+                if (animationId == null) {
+                    animPlayer.shape_shifter_curse$stopAnimation();
+                }
+                else {
+                    if (animationCount >= 0 && animationLength < 0) {  // >=0 / -1
+                        animPlayer.shape_shifter_curse$playAnimationWithCount(animationId, animationCount);
+                    } else if (animationCount < 0 && animationLength >= 0)  {  // -1 / >=0
+                        animPlayer.shape_shifter_curse$playAnimationWithTime(animationId, animationLength);
+                    } else if (animationCount < 0 && animationLength < 0) {  // -1 / -1
+                        animPlayer.shape_shifter_curse$playAnimationLoop(animationId);
+                    } else {
+                        ShapeShifterCurseFabric.LOGGER.error("Invalid animation data received from player: " + playerEntity.getUuidAsString());
+                    }
+                }
+            }
+        });
+    }
+
+    private static void onRequestPowerAnimationData(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
+        UUID targetPlayerUuid = packetByteBuf.readUuid();
+        PlayerEntity targetPlayer = minecraftServer.getPlayerManager().getPlayer(targetPlayerUuid);
+        minecraftServer.execute(() -> {
+            if (targetPlayer instanceof IPlayerAnimController animPlayer) {
+                ModPacketsS2CServer.sendPowerAnimationDataToClient(playerEntity, targetPlayerUuid, animPlayer.shape_shifter_curse$getPowerAnimationID(), animPlayer.shape_shifter_curse$getPowerAnimationCount(), animPlayer.shape_shifter_curse$getPowerAnimationTime());
             }
         });
     }

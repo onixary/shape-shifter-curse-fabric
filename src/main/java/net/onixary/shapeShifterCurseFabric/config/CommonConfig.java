@@ -24,6 +24,10 @@ public class CommonConfig implements ConfigData {
     public float transformativeOcelotSpawnChance = 0.67f;
 
     @ConfigEntry.Category("General")
+    @Comment("Transformative Wolf Spawn Chance, 0 For Disable Spawn. Default: 0.5f [0.0f ~ 1.0f]")
+    public float transformativeWolfSpawnChance = 0.5f;
+
+    @ConfigEntry.Category("General")
     @Comment("Use The New Start Book Interface. Default: true")
     public boolean enableNewStartBook = true;  // 新版启动书
 

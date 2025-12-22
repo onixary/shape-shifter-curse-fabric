@@ -1,0 +1,10 @@
+{
+    "type": "shape-shifter-curse:add_sustained_instinct",
+    "instinct_effect_id": "FORM_ANUBIS_WOLF_BIOME",
+    "value": 0.003,
+    "duration": 1,
+    "condition": {
+        "type": "origins:biome",
+        "biome": "minecraft:desert"
+    }
+}

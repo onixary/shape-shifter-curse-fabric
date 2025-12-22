@@ -11,99 +11,116 @@
   "overrideHandAnim": false,
   "canSneakRush": false,
   "canRushJump": false,
-  "anim": [
-    {
-      "state": "ANIM_IDLE",
-      "animID": "shape-shifter-curse:form_feral_common_idle"
+  "anim": {
+    "shape-shifter-curse:idle_state": {
+      "controllerType": "shape-shifter-curse:sneak_anim_controller",
+      "anim": {
+        "animID": "example_namespace:form_example_idle"
+      },
+      "sneakAnim": {
+        "animID": "shape-shifter-curse:form_feral_common_sneak_idle"
+      }
     },
-    {
-      "state": "ANIM_SNEAK_IDLE",
-      "animID": "shape-shifter-curse:form_feral_common_sneak_idle"
+    "shape-shifter-curse:ride_state": {
+      "controllerType": "shape-shifter-curse:ride_anim_controller",
+      "anim": {
+        "animID": "shape-shifter-curse:form_feral_common_sneak_idle"
+      },
+      "rideVehicleAnim": {
+        "animID": "shape-shifter-curse:feral_cat_sp_riding"
+      }
     },
-    {
-      "state": "ANIM_BOAT_IDLE",
-      "animID": "shape-shifter-curse:form_feral_common_sneak_idle"
+    "shape-shifter-curse:walk_state": {
+      "controllerType": "shape-shifter-curse:sneak_anim_controller",
+      "anim": {
+        "animID": "shape-shifter-curse:form_feral_common_walk",
+        "speed": 1.2,
+        "fade": 2
+      },
+      "sneakAnim": {
+        "animID": "shape-shifter-curse:form_feral_common_sneak_walk"
+      }
     },
-    {
-      "state": "ANIM_RIDE_IDLE",
-      "animID": "shape-shifter-curse:form_feral_common_sneak_idle"
+    "shape-shifter-curse:sprint_state": {
+      "controllerType": "shape-shifter-curse:sneak_anim_controller",
+      "anim": {
+        "animID": "shape-shifter-curse:form_feral_common_run",
+        "speed": 2.3
+      },
+      "sneakAnim": {
+        "animID": "shape-shifter-curse:form_feral_common_sneak_walk"
+      }
     },
-    {
-      "state": "ANIM_WALK",
-      "animID": "shape-shifter-curse:form_feral_common_walk",
-      "speed": 1.2,
-      "fade": 2
+    "shape-shifter-curse:swim_state": {
+      "controllerType": "shape-shifter-curse:swim_anim_controller",
+      "anim": {
+        "animID": "shape-shifter-curse:form_feral_common_float"
+      },
+      "swimAnim": {
+        "animID": "shape-shifter-curse:form_feral_common_swim"
+      }
     },
-    {
-      "state": "ANIM_SNEAK_WALK",
-      "animID": "shape-shifter-curse:form_feral_common_sneak_walk"
+    "shape-shifter-curse:mining_state": {
+      "controllerType": "shape-shifter-curse:sneak_anim_controller",
+      "anim": {
+        "animID": "shape-shifter-curse:form_feral_common_dig"
+      },
+      "sneakAnim": {
+        "animID": "shape-shifter-curse:form_feral_common_sneak_dig"
+      }
     },
-    {
-      "state": "ANIM_RUN",
-      "animID": "shape-shifter-curse:form_feral_common_run",
-      "speed": 2.3
+    "shape-shifter-curse:jump_state": {
+      "controllerType": "shape-shifter-curse:one_anim_controller",
+      "anim": {
+        "animID": "shape-shifter-curse:form_feral_common_jump"
+      }
     },
-    {
-      "state": "ANIM_SWIM_IDLE",
-      "animID": "shape-shifter-curse:form_feral_common_float"
+    "shape-shifter-curse:climb_state": {
+      "controllerType": "shape-shifter-curse:one_anim_controller",
+      "anim": {
+        "animID": "shape-shifter-curse:form_feral_common_climb"
+      }
     },
-    {
-      "state": "ANIM_SWIM",
-      "animID": "shape-shifter-curse:form_feral_common_swim"
+    "shape-shifter-curse:fall_state": {
+      "controllerType": "shape-shifter-curse:one_anim_controller",
+      "anim": {
+        "animID": "shape-shifter-curse:form_feral_common_fall"
+      }
     },
-    {
-      "state": "ANIM_TOOL_SWING",
-      "animID": "shape-shifter-curse:form_feral_common_dig"
+    "shape-shifter-curse:sleep_state": {
+      "controllerType": "shape-shifter-curse:one_anim_controller",
+      "anim": {
+        "animID": "shape-shifter-curse:form_feral_common_sleep"
+      }
     },
-    {
-      "state": "ANIM_SNEAK_TOOL_SWING",
-      "animID": "shape-shifter-curse:form_feral_common_dig"
+    "shape-shifter-curse:attack_state": {
+      "controllerType": "shape-shifter-curse:sneak_anim_controller",
+      "anim": {
+        "animID": "shape-shifter-curse:form_feral_common_attack"
+      },
+      "sneakAnim": {
+        "animID": "shape-shifter-curse:form_feral_common_sneak_attack"
+      }
     },
-    {
-      "state": "ANIM_JUMP",
-      "animID": "shape-shifter-curse:form_feral_common_jump"
+    "shape-shifter-curse:fall_flying_state": {
+      "controllerType": "shape-shifter-curse:one_anim_controller",
+      "anim": {
+        "animID": "shape-shifter-curse:form_feral_common_elytra_fly"
+      }
     },
-    {
-      "state": "ANIM_SNEAK_JUMP",
-      "animID": "shape-shifter-curse:form_feral_common_jump"
-    },
-    {
-      "state": "ANIM_CLIMB_IDLE",
-      "animID": "shape-shifter-curse:form_feral_common_climb"
-    },
-    {
-      "state": "ANIM_CLIMB",
-      "animID": "shape-shifter-curse:form_feral_common_climb"
-    },
-    {
-      "state": "ANIM_FALL",
-      "animID": "shape-shifter-curse:form_feral_common_fall"
-    },
-    {
-      "state": "ANIM_SLEEP",
-      "animID": "shape-shifter-curse:form_feral_common_sleep"
-    },
-    {
-      "state": "ANIM_ATTACK_ONCE",
-      "animID": "shape-shifter-curse:form_feral_common_attack"
-    },
-    {
-      "state": "ANIM_SNEAK_ATTACK_ONCE",
-      "animID": "shape-shifter-curse:form_feral_common_attack"
-    },
-    {
-      "state": "ANIM_ELYTRA_FLY",
-      "animID": "shape-shifter-curse:form_feral_common_elytra_fly"
-    },
-    {
-      "state": "ANIM_CREATIVE_FLY",
-      "animID": "shape-shifter-curse:form_feral_common_elytra_fly"
+    "shape-shifter-curse:flying_state": {
+      "controllerType": "shape-shifter-curse:use_other_state_anim_controller",
+      "StateControllerId": "shape-shifter-curse:fall_flying_state"
     }
-  ],
+  },
   "animDefault": {
-    "animID": "shape-shifter-curse:form_feral_common_idle",
-    "speed": 1.0,
-    "fade": 2
+    "controllerType": "shape-shifter-curse:sneak_anim_controller",
+    "anim": {
+      "animID": "example_namespace:form_example_idle"
+    },
+    "sneakAnim": {
+      "animID": "shape-shifter-curse:form_feral_common_sneak_idle"
+    }
   },
   "FurModelID": "ssc-patron:form_example",
   "ExtraPower": [

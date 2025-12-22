@@ -1,10 +1,16 @@
 package net.onixary.shapeShifterCurseFabric.player_form.forms;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
-import net.onixary.shapeShifterCurseFabric.player_animation.PlayerAnimState;
+import net.onixary.shapeShifterCurseFabric.player_animation.v2.PlayerAnimState;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateEnum;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
@@ -25,7 +31,6 @@ public class Form_AnubisWolf3 extends PlayerFormBase {
     private static AnimationHolder anim_dig = AnimationHolder.EMPTY;
     private static AnimationHolder anim_jump = AnimationHolder.EMPTY;
     private static AnimationHolder anim_climb = AnimationHolder.EMPTY;
-    private static AnimationHolder anim_fall = AnimationHolder.EMPTY;
     private static AnimationHolder anim_attack = AnimationHolder.EMPTY;
     private static AnimationHolder anim_sleep = AnimationHolder.EMPTY;
     private static AnimationHolder anim_elytra_fly = AnimationHolder.EMPTY;
@@ -55,13 +60,12 @@ public class Form_AnubisWolf3 extends PlayerFormBase {
                 return anim_dig;
             case ANIM_JUMP:
             case ANIM_SNEAK_JUMP:
+            case ANIM_FALL:
+            case ANIM_SNEAK_FALL:
                 return anim_jump;
             case ANIM_CLIMB_IDLE:
             case ANIM_CLIMB:
                 return anim_climb;
-            case ANIM_FALL:
-            case ANIM_SNEAK_FALL:
-                return anim_fall;
             case ANIM_SLEEP:
                 return anim_sleep;
 
@@ -89,9 +93,46 @@ public class Form_AnubisWolf3 extends PlayerFormBase {
         anim_dig = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_dig"), true);
         anim_jump = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_jump"), true);
         anim_climb = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_climb"), true);
-        anim_fall = new AnimationHolder(new Identifier(MOD_ID, "form_snow_fox_3_fall"), true, 1.0f, 4);
         anim_attack = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_attack"), true);
         anim_sleep = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_sleep"), true);
         anim_elytra_fly = new AnimationHolder(new Identifier(MOD_ID, "form_feral_common_elytra_fly"), true);
+    }
+
+    public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
+        @Nullable AnimStateEnum animStateEnum = AnimStateEnum.getStateEnum(animStateID);
+        if (animStateEnum != null) {
+            switch (animStateEnum) {
+                case ANIM_STATE_SLEEP:
+                    return Form_FeralBase.SLEEP_CONTROLLER;
+                case ANIM_STATE_CLIMB:
+                    return Form_FeralBase.CLIMB_CONTROLLER;
+                case ANIM_STATE_FALL:
+                    return Form_FeralBase.FALL_CONTROLLER;
+                case ANIM_STATE_JUMP:
+                    return Form_FeralBase.JUMP_CONTROLLER;
+                case ANIM_STATE_RIDE:
+                    return Form_SnowFox3.RIDE_CONTROLLER;
+                case ANIM_STATE_SWIM:
+                    return Form_FeralBase.SWIM_CONTROLLER;
+                case ANIM_STATE_USE_ITEM:
+                    return Form_FeralBase.USE_ITEM_CONTROLLER;
+                case ANIM_STATE_WALK:
+                    return Form_FeralBase.WALK_CONTROLLER;
+                case ANIM_STATE_SPRINT:
+                    return Form_FeralBase.SPRINT_CONTROLLER;
+                case ANIM_STATE_IDLE:
+                    return Form_FeralBase.IDLE_CONTROLLER;
+                case ANIM_STATE_MINING:
+                    return Form_FeralBase.MINING_CONTROLLER;
+                case ANIM_STATE_ATTACK:
+                    return Form_FeralBase.ATTACK_CONTROLLER;
+                case ANIM_STATE_FLYING:
+                case ANIM_STATE_FALL_FLYING:
+                    return Form_FeralBase.FALL_FLYING_CONTROLLER;
+                default:
+                    return Form_FeralBase.IDLE_CONTROLLER;
+            }
+        }
+        return super.getAnimStateController(player, animSystemData, animStateID);
     }
 }

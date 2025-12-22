@@ -18,11 +18,16 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimRegistries;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import static net.onixary.shapeShifterCurseFabric.additional_power.BatAttachEventHandler.getBatAttachPower;
+
+// XuHaoNan: 之后尝试重构这个逻辑 不过不太着急
 
 public class BatBlockAttachPower extends Power {
 
@@ -187,6 +192,8 @@ public class BatBlockAttachPower extends Power {
         player.velocityDirty = true;
         player.velocityModified = true;
 
+        // 修改动作 最好在服务器端执行 虽然客户端也能执行 但是客户端还是会发送包到服务器进行处理
+        AnimUtils.playPowerAnimLoop(player, AnimRegistries.POWER_ANIM_ATTACH_SIDE, AnimUtils.AnimationSendSideType.ONLY_SERVER);
     }
 
     private void attachToBottom(PlayerEntity player, BlockPos blockPos) {
@@ -203,6 +210,9 @@ public class BatBlockAttachPower extends Power {
         player.setOnGround(true);
         player.velocityDirty = true;
         player.velocityModified = true;
+
+        // 修改动作 最好在服务器端执行 虽然客户端也能执行 但是客户端还是会发送包到服务器进行处理
+        AnimUtils.playPowerAnimLoop(player, AnimRegistries.POWER_ANIM_ATTACH_BOTTOM, AnimUtils.AnimationSendSideType.ONLY_SERVER);
     }
 
 
@@ -252,6 +262,9 @@ public class BatBlockAttachPower extends Power {
             // 广播给附近的其他玩家
             ModPacketsS2CServer.broadcastBatAttachState(serverPlayer, false, AttachType.NONE.ordinal(), null, null);
         }
+
+        // 修改动作 最好在服务器端执行 虽然客户端也能执行 但是客户端还是会发送包到服务器进行处理
+        AnimUtils.stopPowerAnimWithIDs(player, AnimUtils.AnimationSendSideType.ONLY_SERVER, AnimRegistries.POWER_ANIM_ATTACH_SIDE, AnimRegistries.POWER_ANIM_ATTACH_BOTTOM);
     }
 
 

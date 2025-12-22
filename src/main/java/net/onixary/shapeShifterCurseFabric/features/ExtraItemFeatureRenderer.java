@@ -7,6 +7,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.Version;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
@@ -68,11 +69,11 @@ public class ExtraItemFeatureRenderer <T extends LivingEntity, M extends EntityM
             float headPitch
     ) {
 
-        if (livingEntity instanceof ClientPlayerEntity player) {
+        if (livingEntity instanceof AbstractClientPlayerEntity player) {
             PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
             boolean isFeral = curForm.getBodyType() == PlayerFormBodyType.FERAL;
 
-            if (isFeral && MinecraftClient.getInstance().options.getPerspective().isFirstPerson()) {
+            if (isFeral && MinecraftClient.getInstance().options.getPerspective().isFirstPerson() && player == MinecraftClient.getInstance().player) {
 
                 if(IS_FIRST_PERSON_MOD_LOADED) {
                     // Feral形态的forstperson配置必须固定为-25 offset，否则会导致物品位置不正确以及模型看不到

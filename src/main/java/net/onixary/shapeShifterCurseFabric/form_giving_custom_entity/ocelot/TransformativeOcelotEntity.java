@@ -5,6 +5,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.OcelotEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
@@ -29,6 +32,13 @@ public class TransformativeOcelotEntity extends OcelotEntity {
 
     // 当前冷却时间
     private float cooldown = 0;
+
+    public static DefaultAttributeContainer.Builder createAttributes() {
+        return MobEntity.createMobAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, StaticParams.CUSTOM_MOB_DEFAULT_DAMAGE)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3);
+    }
 
     @Override
     protected void initGoals() {
@@ -84,11 +94,10 @@ public class TransformativeOcelotEntity extends OcelotEntity {
 
     @Override
     public boolean tryAttack(Entity target) {
-        // 只对玩家造成伤害
         if(target instanceof PlayerEntity) {
             PlayerFormBase currentForm = target.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
             if (currentForm.equals(RegPlayerForms.ORIGINAL_SHIFTER)) {
-                boolean attacked = target.damage(this.getDamageSources().mobAttack(this), StaticParams.CUSTOM_MOB_DEFAULT_DAMAGE);
+                boolean attacked = target.damage(this.getDamageSources().mobAttack(this), (float)this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE));
                 if (attacked) {
                     this.applyDamageEffects(this, target);
                 }
@@ -96,6 +105,6 @@ public class TransformativeOcelotEntity extends OcelotEntity {
             }
             return false;
         }
-        return false;
+        return super.tryAttack(target);
     }
 }

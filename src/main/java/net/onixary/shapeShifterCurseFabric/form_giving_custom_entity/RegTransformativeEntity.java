@@ -1,13 +1,10 @@
 package net.onixary.shapeShifterCurseFabric.form_giving_custom_entity;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.minecraft.entity.passive.AxolotlEntity;
-import net.minecraft.entity.passive.BatEntity;
-import net.minecraft.entity.passive.OcelotEntity;
-import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.wolf.TransformativeWolfEntity;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
 
@@ -16,11 +13,13 @@ public class RegTransformativeEntity {
     public static void register() {
         // Reg custom entities model and renderer
         // bat
-        FabricDefaultAttributeRegistry.register(T_BAT, TransformativeBatEntity.createTBatAttributes());
+        FabricDefaultAttributeRegistry.register(T_BAT, TransformativeBatEntity.createAttributes());
         // axolotl
-        FabricDefaultAttributeRegistry.register(T_AXOLOTL, TransformativeAxolotlEntity.createTAxolotlAttributes());
+        FabricDefaultAttributeRegistry.register(T_AXOLOTL, TransformativeAxolotlEntity.createAttributes());
         // ocelot
-        FabricDefaultAttributeRegistry.register(T_OCELOT, TransformativeBatEntity.createTBatAttributes());
+        FabricDefaultAttributeRegistry.register(T_OCELOT, TransformativeOcelotEntity.createAttributes());
+
+        FabricDefaultAttributeRegistry.register(T_WOLF, TransformativeWolfEntity.createAttributes());
 
         // obsolete, use vanilla spawning logic
         // handle entity spawn

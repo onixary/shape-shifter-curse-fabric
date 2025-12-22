@@ -123,6 +123,16 @@ public abstract class MinionPlayerEntityMixin implements IPlayerEntityMinion {
         return;
     }
 
+    public void shape_shifter_curse$clearAllMinions() {
+        this.shape_shifter_curse$getAllMinions().clear();
+        this.syncPlayerMinionComponent();
+    }
+
+    public void shape_shifter_curse$clearMinions(Identifier MinionID) {
+        this.shape_shifter_curse$getMinionsByMinionID(MinionID).clear();
+        this.syncPlayerMinionComponent();
+    }
+
     // 检查召唤物是否存在
     @Unique
     private void checkMinion(PlayerEntity realThis, ServerWorld world) {

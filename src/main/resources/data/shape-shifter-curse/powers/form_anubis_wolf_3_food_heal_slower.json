@@ -1,0 +1,5 @@
+{
+  "type": "shape-shifter-curse:modify_food_heal",
+  "food_timer_add_amount": -1,
+  "modify_food_timer_tick_rate": 2
+}

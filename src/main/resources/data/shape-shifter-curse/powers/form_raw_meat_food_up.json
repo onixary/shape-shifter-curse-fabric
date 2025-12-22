@@ -27,7 +27,7 @@
     "item_condition": {
         "type": "origins:ingredient",
         "ingredient": {
-            "tag": "origins:fresh_raw_meat"
+            "tag": "origins:raw_meat"
         }
     }
 }
