@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.util;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.Lifecycle;
 import dev.emi.trinkets.api.SlotReference;
@@ -12,13 +13,11 @@ import io.github.apace100.apoli.power.PowerTypeRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.SimpleRegistry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -211,24 +210,27 @@ public class TrinketUtils {
         }
     }
 
-    public static final RegistryKey<Registry<TrinketPowerData>> accessoryPowerRegistryKey = RegistryKey.ofRegistry(ShapeShifterCurseFabric.identifier("accessory_power"));
-    public static final Registry<TrinketPowerData> accessoryPowerRegistry = new SimpleRegistry<>(accessoryPowerRegistryKey, Lifecycle.stable());
+    public static final HashMap<Identifier, TrinketPowerData> accessoryPowerRegistry = new HashMap<>();
     private static final HashMap<Identifier, Boolean> accessoryMixinAutoRegistry = new HashMap<>();
 
     public static void registerAccessoryPower(Identifier itemIdentifier, TrinketPowerData powerData) {
-        if (accessoryPowerRegistry.containsId(itemIdentifier)) {
-            Objects.requireNonNull(accessoryPowerRegistry.get(itemIdentifier)).Merge(powerData);
+        if (accessoryPowerRegistry.containsKey(itemIdentifier)) {
+            accessoryPowerRegistry.get(itemIdentifier).Merge(powerData);
         } else {
-            Registry.register(accessoryPowerRegistry, itemIdentifier, powerData);
+            accessoryPowerRegistry.put(itemIdentifier, powerData);
         }
+    }
+
+    public static void clearAccessoryPower() {
+        accessoryPowerRegistry.clear();
     }
 
     public static void registerAccessoryMixinAuto(Identifier itemIdentifier, boolean auto) {
         accessoryMixinAutoRegistry.put(itemIdentifier, auto);
     }
 
-    public static Optional<TrinketPowerData> getAccessoryPower(Identifier itemIdentifier) {
-        return accessoryPowerRegistry.getOrEmpty(itemIdentifier);
+    public static @Nullable TrinketPowerData getAccessoryPower(Identifier itemIdentifier) {
+        return accessoryPowerRegistry.get(itemIdentifier);
     }
 
     public static boolean getAccessoryMixinAuto(Identifier itemIdentifier) {
@@ -239,11 +241,11 @@ public class TrinketUtils {
         if (player.getWorld().isClient) {
             return;  // 仅在服务器端执行
         }
-        Optional<TrinketPowerData> powerData = getAccessoryPower(accessoryID);
-        if (powerData.isEmpty()) {
+        TrinketPowerData powerData = getAccessoryPower(accessoryID);
+        if (powerData == null) {
             return;
         }
-        powerData.get().onPlayerFormChangeReApply(player);
+        powerData.onPlayerFormChangeReApply(player);
     }
 
     public static void ReApplyAccessoryPowerOnPlayerFormChange(PlayerEntity player) {
@@ -260,22 +262,38 @@ public class TrinketUtils {
         if (player.getWorld().isClient) {
             return;  // 仅在服务器端执行
         }
-        Optional<TrinketPowerData> powerData = getAccessoryPower(accessoryID);
-        if (powerData.isEmpty()) {
+        TrinketPowerData powerData = getAccessoryPower(accessoryID);
+        if (powerData == null) {
             return;
         }
-        powerData.get().onPlayerEquip(player, accessoryID);
+        powerData.onPlayerEquip(player, accessoryID);
     }
 
     public static void ApplyAccessoryPowerOnUnEquip(PlayerEntity player, Identifier accessoryID) {
         if (player.getWorld().isClient) {
             return;  // 仅在服务器端执行
         }
-        Optional<TrinketPowerData> powerData = getAccessoryPower(accessoryID);
-        if (powerData.isEmpty()) {
+        TrinketPowerData powerData = getAccessoryPower(accessoryID);
+        if (powerData == null) {
             return;
         }
-        powerData.get().onPlayerUnEquip(player, accessoryID);
+        powerData.onPlayerUnEquip(player, accessoryID);
     }
 
+    public static void loadAccessoryPowerData(JsonObject jsonObject) {
+        for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
+            String ItemIDRaw = entry.getKey();
+            Identifier itemID = Identifier.tryParse(ItemIDRaw);
+            if (itemID == null) {
+                continue;
+            }
+            JsonElement jsonElement = entry.getValue();
+            if (!jsonElement.isJsonObject()) {
+                continue;
+            }
+            JsonObject jsonPowerData = jsonElement.getAsJsonObject();
+            TrinketPowerData powerData = new TrinketPowerData(jsonPowerData);
+            registerAccessoryPower(itemID, powerData);
+        }
+    }
 }
