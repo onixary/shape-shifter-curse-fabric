@@ -212,6 +212,10 @@ dependencies {
     // Player Anim
     include modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:${project.player_anim}")
 
+    // Trinkets
+
+    include modImplementation("dev.emi:trinkets:${project.trinkets_version}")
+
     // Fabric forge config api port
     // modLocalRuntime "fuzs.forgeconfigscreens:forgeconfigscreens-fabric:8.0.0"
 

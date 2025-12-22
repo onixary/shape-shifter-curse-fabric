@@ -11,6 +11,7 @@ public class AdditionalEntityConditions {
         register(ChanceCondition.getFactory());
         register(JumpEventCondition.getFactory());
         register(MustCrawlingCondition.getFactory());
+        TrinketsCondition.registerCondition(AdditionalEntityConditions::register);
     }
 
     private static void register(ConditionFactory<Entity> conditionFactory) {
