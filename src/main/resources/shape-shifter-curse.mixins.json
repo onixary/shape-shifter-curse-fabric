@@ -48,7 +48,7 @@
     "BlockDropMixin",
     "ScareSkeletonMixin",
     "PlayerAnimInterfaceMixin",
-    "TrinketInterfaceMixin"
+    "TrinketItemMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",
