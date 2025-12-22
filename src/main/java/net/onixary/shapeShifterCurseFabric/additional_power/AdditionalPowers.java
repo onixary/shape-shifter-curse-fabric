@@ -6,7 +6,6 @@ import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.apoli.registry.ApoliRegistries;
 import net.minecraft.registry.Registry;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.integration.origins.Origins;
 
 public class AdditionalPowers {
     public static final PowerType<?> SCARE_SKELETON = new PowerTypeReference<>(ShapeShifterCurseFabric.identifier("scare_skeleton"));  // 这种应该会比较节省计算资源
@@ -63,6 +62,7 @@ public class AdditionalPowers {
         register(ModifyBlockDropPower.createFactory());
         register(ActionOnEntityInRangePower.createFactory());
         register(ApplyEffectPower.createFactory());
+        register(OptionalEffectImmunityPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {
