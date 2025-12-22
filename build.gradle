@@ -214,7 +214,7 @@ dependencies {
 
     // Trinkets
 
-    include modImplementation("dev.emi:trinkets:${project.trinkets_version}")
+    modImplementation "dev.emi:trinkets:${project.trinkets_version}"
 
     // Fabric forge config api port
     // modLocalRuntime "fuzs.forgeconfigscreens:forgeconfigscreens-fabric:8.0.0"
