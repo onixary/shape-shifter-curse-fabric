@@ -16,6 +16,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
+import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 import net.onixary.shapeShifterCurseFabric.minion.MinionRegister;
 import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntity;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
@@ -329,10 +330,9 @@ public class ShapeShifterCurseCommand {
             return 1;
         }
         try {
-            AnubisWolfMinionEntity anubisWolfMinionEntity = MinionRegister.SpawnMinion(MinionRegister.ANUBIS_WOLF_MINION, world, player.getBlockPos(), player);
-            anubisWolfMinionEntity.setMinionLevel(3);
+            commandContext.getSource().sendFeedback(() -> {return Text.literal("Player Mana Type: " + ManaUtils.getPlayerManaTypeID(player));}, false);
         } catch (Exception e) {
-            ShapeShifterCurseFabric.LOGGER.error("Error when spawn minion: ", e);
+            ShapeShifterCurseFabric.LOGGER.error("Error Dev Command", e);
             return 0;
         }
         return 0;

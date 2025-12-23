@@ -19,12 +19,14 @@ public class ManaTypePower extends Power {
         this.manaType = manaType;
     }
 
+    @Override
     public void onAdded() {
         if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null) {
             ManaUtils.gainManaTypeID(playerEntity, manaType);
         }
     }
 
+    @Override
     public void onRemoved() {
         if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null) {
             ManaUtils.loseManaTypeID(playerEntity, manaType);

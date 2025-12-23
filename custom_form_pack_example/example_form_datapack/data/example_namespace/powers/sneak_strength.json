@@ -1,0 +1,33 @@
+{
+  "type": "origins:active_self",
+  "entity_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:apply_effect",
+        "effect": {
+          "effect": "minecraft:strength",
+          "duration": 200,
+          "amplifier": 4,
+          "hide_particles": false
+        }
+      },
+      {
+        "type": "shape-shifter-curse:consume_mana",
+        "mana": 50.0
+      }
+    ]
+  },
+  "cooldown": 200,
+  "hud_render": {
+    "should_render": false
+  },
+  "key": {
+    "key": "key.sneak",
+    "continuous": false
+  },
+  "condition": {
+    "type": "shape-shifter-curse:has_mana",
+    "mana": 50.0
+  }
+}
