@@ -14,7 +14,7 @@ public class RegManaComponent implements EntityComponentInitializer {
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry entityComponentFactoryRegistry) {
         entityComponentFactoryRegistry.registerForPlayers(
                 MANA,
-                player -> new ManaComponent(),
+                ManaComponent::new,
                 RespawnCopyStrategy.ALWAYS_COPY
         );
     }
