@@ -63,6 +63,8 @@ public class AdditionalPowers {
         register(ActionOnEntityInRangePower.createFactory());
         register(ApplyEffectPower.createFactory());
         register(OptionalEffectImmunityPower.createFactory());
+        register(ManaTypePower.createFactory());
+        register(ManaAttributePower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

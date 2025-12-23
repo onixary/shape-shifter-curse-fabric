@@ -12,6 +12,7 @@ public class AdditionalEntityConditions {
         register(JumpEventCondition.getFactory());
         register(MustCrawlingCondition.getFactory());
         TrinketsCondition.registerCondition(AdditionalEntityConditions::register);
+        ManaUtilsApoli.registerCondition(AdditionalEntityConditions::register);
     }
 
     private static void register(ConditionFactory<Entity> conditionFactory) {

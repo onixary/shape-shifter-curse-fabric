@@ -48,6 +48,7 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.Tran
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.wolf.TransformativeWolfEntity;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
+import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 import net.onixary.shapeShifterCurseFabric.minion.MinionRegister;
 import net.onixary.shapeShifterCurseFabric.minion.RegPlayerMinionComponent;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S;
@@ -344,6 +345,9 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
             // CustomEdiblePower Tick
             CustomEdiblePower.OnServerTick(player);
+
+            // Mana System
+            ManaUtils.manaTick(player);
 
             /* 重构后不需要了 仅用于参考旧实现逻辑
             // handle transformative effects tick
