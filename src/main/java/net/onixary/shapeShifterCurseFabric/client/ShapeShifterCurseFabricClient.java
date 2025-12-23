@@ -25,6 +25,7 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.BatEnti
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TOcelotEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.armors.MorphscaleArmorRenderer;
+import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 import net.onixary.shapeShifterCurseFabric.minion.MinionRegisterClient;
 import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
@@ -135,6 +136,12 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 
 	private static void onClientTick(MinecraftClient minecraftClient){
 		TickManager.tickClientAll();
+		ClientPlayerEntity clientPlayer = minecraftClient.player;
+		if(clientPlayer == null){
+			return;
+		}
+		// Mana System
+		ManaUtils.manaTick(minecraftClient.player);
 	}
 
 	public static void emitTransformParticle(int duration) {

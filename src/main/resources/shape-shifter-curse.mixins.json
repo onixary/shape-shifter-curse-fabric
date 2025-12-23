@@ -62,7 +62,6 @@
     "GameRendererMixin",
     "IEntityRenderDispatcherAccessor",
     "InGameHudMixin",
-    "InstinctBarMixin",
     "InventoryScreenMixin",
     "KeyboardInputMixin",
     "MinecraftClientMixin",
