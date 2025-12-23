@@ -1,0 +1,21 @@
+{
+  "example_namespace:example_trinket": {
+    "accessory_powers": [],
+    "all_form": {
+      "add": [],
+      "remove": []
+    },
+    "forms": {
+      "example_namespace:example": {
+        "add": [
+          "shape-shifter-curse:form_disable_head_armor",
+          "shape-shifter-curse:form_disable_chest_armor"
+        ],
+        "remove": [
+          "shape-shifter-curse:form_disable_leg_armor",
+          "shape-shifter-curse:form_disable_feet_armor"
+        ]
+      }
+    }
+  }
+}
