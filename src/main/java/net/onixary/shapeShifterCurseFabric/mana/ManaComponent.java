@@ -20,8 +20,9 @@ import java.util.Objects;
 
 // 试试这个实验性接口 省的我缓存ModifierList了
 public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaComponent> {
-    private PlayerEntity player;
     public static Identifier LocalManaTypeID = null;  // 仅客户端 怎么想都不会出现在服务器端上 虽然服务器上的数据也会更新 我懒得给readFromNbt写客户端判断了
+
+    private PlayerEntity player;
     public double Mana = 0.0d;
     public Identifier ManaTypeID = null;
     private List<Identifier> ManaTypeArray = new ArrayList<>();
@@ -143,8 +144,16 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
         double remainingRegen = this.tempReganTime * this.tempRegan;
         double totalRegen = remainingRegen + newTempRegen * newTempRegenTime;
         int maxTime = Math.max(this.tempReganTime, newTempRegenTime);
+        // 除0问题
+        if (maxTime == 0) {
+            this.tempRegan = 0.0d;
+            this.tempReganTime = 0;
+            this.Dirty = true;
+            return;
+        }
         this.tempRegan = totalRegen / maxTime;
         this.tempReganTime = maxTime;
+        this.Dirty = true;
     }
 
     @Override
@@ -194,7 +203,6 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
                 }
             }
         }
-
         this.Dirty = true;
     }
 
@@ -268,8 +276,10 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
         this.ManaTypeID = other.ManaTypeID;
         this.ManaTypeArray = other.ManaTypeArray;
         this.MaxManaModifier = other.MaxManaModifier;
+        this.MaxManaModifierPlayerSide = other.MaxManaModifierPlayerSide;
         this.MaxManaClient = other.MaxManaClient;
         this.ManaRegenModifier = other.ManaRegenModifier;
+        this.ManaRegenModifierPlayerSide = other.ManaRegenModifierPlayerSide;
         this.ManaRegenClient = other.ManaRegenClient;
         this.tempRegan = other.tempRegan;
         this.tempReganTime = other.tempReganTime;
