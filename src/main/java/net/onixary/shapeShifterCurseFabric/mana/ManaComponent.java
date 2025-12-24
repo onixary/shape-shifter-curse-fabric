@@ -3,6 +3,8 @@ package net.onixary.shapeShifterCurseFabric.mana;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.sync.PlayerSyncPredicate;
 import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -11,6 +13,7 @@ import net.minecraft.nbt.NbtString;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -87,7 +90,9 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
             return;
         }
         this.ManaTypeID = manaTypeID;
-        LocalManaTypeID = manaTypeID;
+        if (ClientUtils.IsNowPlayingPlayer(this.player)) {
+            LocalManaTypeID = this.ManaTypeID;
+        }
         this.MaxManaModifier.clear();
         this.ManaRegenModifier.clear();
         this.MaxManaModifier = ManaRegistries.getMaxManaModifier(manaTypeID);
@@ -175,7 +180,9 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
         } else {
             this.ManaTypeID = null;
         }
-        LocalManaTypeID = this.ManaTypeID;
+        if (ClientUtils.IsNowPlayingPlayer(this.player)) {
+            LocalManaTypeID = this.ManaTypeID;
+        }
         MaxManaClient = nbtCompound.getDouble("MaxMana");
         ManaRegenClient = nbtCompound.getDouble("ManaRegen");
         tempRegen = nbtCompound.getDouble("tempRegen");
