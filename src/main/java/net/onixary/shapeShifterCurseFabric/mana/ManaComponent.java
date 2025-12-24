@@ -33,8 +33,8 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
     public ManaUtils.ModifierList ManaRegenModifierPlayerSide = new ManaUtils.ModifierList();  // 仅服务器端
     private double ManaRegenClient = 0.0d;  // 仅客户端
     private boolean Dirty = false;  // 仅服务器端 客户端没用
-    private double tempRegan = 0.0d;  // 双端
-    private int tempReganTime = 0;  // 仅服务器端
+    private double tempRegen = 0.0d;  // 双端
+    private int tempRegenTime = 0;  // 仅服务器端
 
     public ManaComponent(PlayerEntity player) {
         this.player = player;
@@ -141,19 +141,21 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
     }
 
     private void mergeTempRegen(double newTempRegen, int newTempRegenTime) {
-        double remainingRegen = this.tempReganTime * this.tempRegan;
+        double remainingRegen = this.tempRegenTime * this.tempRegen;
         double totalRegen = remainingRegen + newTempRegen * newTempRegenTime;
-        int maxTime = Math.max(this.tempReganTime, newTempRegenTime);
+        int maxTime = Math.max(this.tempRegenTime, newTempRegenTime);
         // 除0问题
         if (maxTime == 0) {
-            this.tempRegan = 0.0d;
-            this.tempReganTime = 0;
-            this.Dirty = true;
+            this.tempRegen = 0.0d;
+            this.tempRegenTime = 0;
             return;
         }
-        this.tempRegan = totalRegen / maxTime;
-        this.tempReganTime = maxTime;
-        this.Dirty = true;
+        this.tempRegen = totalRegen / maxTime;
+        if (this.tempRegen == 0.0d) {
+            this.tempRegenTime = 0;
+        } else {
+            this.tempRegenTime = maxTime;
+        }
     }
 
     @Override
@@ -176,8 +178,8 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
         LocalManaTypeID = this.ManaTypeID;
         MaxManaClient = nbtCompound.getDouble("MaxMana");
         ManaRegenClient = nbtCompound.getDouble("ManaRegen");
-        tempRegan = nbtCompound.getDouble("tempRegan");
-        tempReganTime = nbtCompound.getInt("tempReganTime");
+        tempRegen = nbtCompound.getDouble("tempRegen");
+        tempRegenTime = nbtCompound.getInt("tempRegenTime");
 
         if (SaveMode) {
             if (nbtCompound.contains("MaxManaModifier")) {
@@ -221,8 +223,8 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
         this.MaxManaModifier.needSync = false;
         nbtCompound.putDouble("ManaRegen", ManaRegenClient);
         this.ManaRegenModifier.needSync = false;
-        nbtCompound.putDouble("tempRegan", tempRegan);
-        nbtCompound.putInt("tempReganTime", tempReganTime);
+        nbtCompound.putDouble("tempRegen", tempRegen);
+        nbtCompound.putInt("tempRegenTime", tempRegenTime);
         if (SaveMode) {
             NbtCompound maxManaCompound = new NbtCompound();
             this.MaxManaModifier.writeToNbt(maxManaCompound);
@@ -281,8 +283,8 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
         this.ManaRegenModifier = other.ManaRegenModifier;
         this.ManaRegenModifierPlayerSide = other.ManaRegenModifierPlayerSide;
         this.ManaRegenClient = other.ManaRegenClient;
-        this.tempRegan = other.tempRegan;
-        this.tempReganTime = other.tempReganTime;
+        this.tempRegen = other.tempRegen;
+        this.tempRegenTime = other.tempRegenTime;
         this.Dirty = other.Dirty;
     }
 
@@ -291,18 +293,18 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
     }
 
     private void regenMana() {
-        this.__SetMana__(this.Mana + this.getManaRegen() + this.tempRegan);
+        this.__SetMana__(this.Mana + this.getManaRegen() + this.tempRegen);
     }
 
     public void tick() {
         this.MaxManaClient = this.getMaxMana();
         this.ManaRegenClient = this.getManaRegen();
         this.regenMana();
-        if (this.tempRegan != 0) {
-            this.tempReganTime--;
-            if (this.tempReganTime <= 0) {
-                this.tempRegan = 0;
-                this.tempReganTime = 0;
+        if (this.tempRegen != 0) {
+            this.tempRegenTime--;
+            if (this.tempRegenTime <= 0) {
+                this.tempRegen = 0;
+                this.tempRegenTime = 0;
                 this.Dirty = true;
             }
         }
