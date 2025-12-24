@@ -3,6 +3,8 @@ package net.onixary.shapeShifterCurseFabric.mana;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.sync.PlayerSyncPredicate;
 import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -11,6 +13,7 @@ import net.minecraft.nbt.NbtString;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,8 +23,9 @@ import java.util.Objects;
 
 // 试试这个实验性接口 省的我缓存ModifierList了
 public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaComponent> {
-    private PlayerEntity player;
     public static Identifier LocalManaTypeID = null;  // 仅客户端 怎么想都不会出现在服务器端上 虽然服务器上的数据也会更新 我懒得给readFromNbt写客户端判断了
+
+    private PlayerEntity player;
     public double Mana = 0.0d;
     public Identifier ManaTypeID = null;
     private List<Identifier> ManaTypeArray = new ArrayList<>();
@@ -32,8 +36,8 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
     public ManaUtils.ModifierList ManaRegenModifierPlayerSide = new ManaUtils.ModifierList();  // 仅服务器端
     private double ManaRegenClient = 0.0d;  // 仅客户端
     private boolean Dirty = false;  // 仅服务器端 客户端没用
-    private double tempRegan = 0.0d;  // 双端
-    private int tempReganTime = 0;  // 仅服务器端
+    private double tempRegen = 0.0d;  // 双端
+    private int tempRegenTime = 0;  // 仅服务器端
 
     public ManaComponent(PlayerEntity player) {
         this.player = player;
@@ -86,7 +90,9 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
             return;
         }
         this.ManaTypeID = manaTypeID;
-        LocalManaTypeID = manaTypeID;
+        if (ClientUtils.IsNowPlayingPlayer(this.player)) {
+            LocalManaTypeID = this.ManaTypeID;
+        }
         this.MaxManaModifier.clear();
         this.ManaRegenModifier.clear();
         this.MaxManaModifier = ManaRegistries.getMaxManaModifier(manaTypeID);
@@ -140,11 +146,21 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
     }
 
     private void mergeTempRegen(double newTempRegen, int newTempRegenTime) {
-        double remainingRegen = this.tempReganTime * this.tempRegan;
+        double remainingRegen = this.tempRegenTime * this.tempRegen;
         double totalRegen = remainingRegen + newTempRegen * newTempRegenTime;
-        int maxTime = Math.max(this.tempReganTime, newTempRegenTime);
-        this.tempRegan = totalRegen / maxTime;
-        this.tempReganTime = maxTime;
+        int maxTime = Math.max(this.tempRegenTime, newTempRegenTime);
+        // 除0问题
+        if (maxTime == 0) {
+            this.tempRegen = 0.0d;
+            this.tempRegenTime = 0;
+            return;
+        }
+        this.tempRegen = totalRegen / maxTime;
+        if (this.tempRegen == 0.0d) {
+            this.tempRegenTime = 0;
+        } else {
+            this.tempRegenTime = maxTime;
+        }
     }
 
     @Override
@@ -164,11 +180,13 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
         } else {
             this.ManaTypeID = null;
         }
-        LocalManaTypeID = this.ManaTypeID;
+        if (ClientUtils.IsNowPlayingPlayer(this.player)) {
+            LocalManaTypeID = this.ManaTypeID;
+        }
         MaxManaClient = nbtCompound.getDouble("MaxMana");
         ManaRegenClient = nbtCompound.getDouble("ManaRegen");
-        tempRegan = nbtCompound.getDouble("tempRegan");
-        tempReganTime = nbtCompound.getInt("tempReganTime");
+        tempRegen = nbtCompound.getDouble("tempRegen");
+        tempRegenTime = nbtCompound.getInt("tempRegenTime");
 
         if (SaveMode) {
             if (nbtCompound.contains("MaxManaModifier")) {
@@ -194,7 +212,6 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
                 }
             }
         }
-
         this.Dirty = true;
     }
 
@@ -213,8 +230,8 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
         this.MaxManaModifier.needSync = false;
         nbtCompound.putDouble("ManaRegen", ManaRegenClient);
         this.ManaRegenModifier.needSync = false;
-        nbtCompound.putDouble("tempRegan", tempRegan);
-        nbtCompound.putInt("tempReganTime", tempReganTime);
+        nbtCompound.putDouble("tempRegen", tempRegen);
+        nbtCompound.putInt("tempRegenTime", tempRegenTime);
         if (SaveMode) {
             NbtCompound maxManaCompound = new NbtCompound();
             this.MaxManaModifier.writeToNbt(maxManaCompound);
@@ -268,11 +285,13 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
         this.ManaTypeID = other.ManaTypeID;
         this.ManaTypeArray = other.ManaTypeArray;
         this.MaxManaModifier = other.MaxManaModifier;
+        this.MaxManaModifierPlayerSide = other.MaxManaModifierPlayerSide;
         this.MaxManaClient = other.MaxManaClient;
         this.ManaRegenModifier = other.ManaRegenModifier;
+        this.ManaRegenModifierPlayerSide = other.ManaRegenModifierPlayerSide;
         this.ManaRegenClient = other.ManaRegenClient;
-        this.tempRegan = other.tempRegan;
-        this.tempReganTime = other.tempReganTime;
+        this.tempRegen = other.tempRegen;
+        this.tempRegenTime = other.tempRegenTime;
         this.Dirty = other.Dirty;
     }
 
@@ -281,18 +300,18 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
     }
 
     private void regenMana() {
-        this.__SetMana__(this.Mana + this.getManaRegen() + this.tempRegan);
+        this.__SetMana__(this.Mana + this.getManaRegen() + this.tempRegen);
     }
 
     public void tick() {
         this.MaxManaClient = this.getMaxMana();
         this.ManaRegenClient = this.getManaRegen();
         this.regenMana();
-        if (this.tempRegan != 0) {
-            this.tempReganTime--;
-            if (this.tempReganTime <= 0) {
-                this.tempRegan = 0;
-                this.tempReganTime = 0;
+        if (this.tempRegen != 0) {
+            this.tempRegenTime--;
+            if (this.tempRegenTime <= 0) {
+                this.tempRegen = 0;
+                this.tempRegenTime = 0;
                 this.Dirty = true;
             }
         }

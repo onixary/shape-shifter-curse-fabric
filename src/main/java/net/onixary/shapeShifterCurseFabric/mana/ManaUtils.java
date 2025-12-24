@@ -233,7 +233,12 @@ public class ManaUtils {
 
     public static double getPlayerManaPercent(PlayerEntity player) {
         ManaComponent manaComponent = getManaComponent(player);
-        return manaComponent.getMana() / manaComponent.getMaxMana();
+        // 突然想起来，如果maxMana为0，那么会导致除0错误。
+        double maxMana = manaComponent.getMaxMana();
+        if (maxMana == 0.0d) {
+            return 0.0d;
+        }
+        return manaComponent.getMana() / maxMana;
     }
 
     public static Identifier getPlayerManaTypeID(PlayerEntity player) {

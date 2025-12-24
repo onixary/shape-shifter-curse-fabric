@@ -65,7 +65,7 @@ public class ManaUtilsApoli {
 
     public static void registerCondition(Consumer<ConditionFactory<Entity>> registerFunc) {
         registerFunc.accept(new ConditionFactory<Entity>(
-                ShapeShifterCurseFabric.identifier("has_mana"),  // 为了之后写双端不用改 还是使用equip_accessories吧
+                ShapeShifterCurseFabric.identifier("has_mana"),
                 new SerializableData()
                         .add("mana", SerializableDataTypes.DOUBLE, 0.0d)
                         .add("Inverted", SerializableDataTypes.BOOLEAN, false),
@@ -74,6 +74,21 @@ public class ManaUtilsApoli {
                     if (e instanceof PlayerEntity player) {
                         double mana = data.get("mana");
                         boolean manaAbove = ManaUtils.isPlayerManaAbove(player, mana);
+                        return manaAbove ^ inverted;
+                    }
+                    return inverted;
+                }
+        ));
+        registerFunc.accept(new ConditionFactory<Entity>(
+                ShapeShifterCurseFabric.identifier("has_mana_percent"),
+                new SerializableData()
+                        .add("mana_percent", SerializableDataTypes.DOUBLE, 0.0d)
+                        .add("Inverted", SerializableDataTypes.BOOLEAN, false),
+                (data, e) -> {
+                    boolean inverted = data.get("Inverted");
+                    if (e instanceof PlayerEntity player) {
+                        double mana_percent = data.get("mana_percent");
+                        boolean manaAbove = ManaUtils.getPlayerManaPercent(player) >= mana_percent;
                         return manaAbove ^ inverted;
                     }
                     return inverted;
