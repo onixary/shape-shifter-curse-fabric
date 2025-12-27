@@ -30,20 +30,7 @@
     "shape-shifter-curse:form_anubis_wolf_2",
     "shape-shifter-curse:form_anubis_wolf_3",
     "shape-shifter-curse:form_allay_sp",
-    "shape-shifter-curse:form_feral_cat_sp",
-    "shape-shifter-curse:form_alpha_0",
-    "shape-shifter-curse:form_alpha_1",
-    "shape-shifter-curse:form_alpha_2",
-    "shape-shifter-curse:form_beta_0",
-    "shape-shifter-curse:form_beta_1",
-    "shape-shifter-curse:form_beta_2",
-    "shape-shifter-curse:form_gamma_0",
-    "shape-shifter-curse:form_gamma_1",
-    "shape-shifter-curse:form_gamma_2",
-    "shape-shifter-curse:form_omega_sp",
-    "shape-shifter-curse:form_psi_sp",
-    "shape-shifter-curse:form_chi_sp",
-    "shape-shifter-curse:form_phi_sp"
+    "shape-shifter-curse:form_feral_cat_sp"
   ],
   "allow_random": true,
   "exclude_random": [
