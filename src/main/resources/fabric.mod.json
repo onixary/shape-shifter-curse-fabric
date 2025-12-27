@@ -69,7 +69,7 @@
     "minecraft": "1.20.1",
     "pehkui": ">=3.7.8",
     "satin": ">=1.14.0",
-    "trinkets": ">=3.10.0"
+    "trinkets": ">=3.7.2"
   },
   "breaks": {
     "origins": ">0.0.0",
