@@ -1,5 +1,17 @@
 {
-    "type": "origins:prevent_item_use",
+    "type": "origins:modify_food",
+    "food_modifiers": [
+        {
+            "operation": "set_total",
+            "value": 0.0
+        }
+    ],
+    "saturation_modifiers": [
+        {
+            "operation": "set_total",
+            "value": 0.0
+        }
+    ],
     "item_condition": {
         "type": "origins:and",
         "conditions": [

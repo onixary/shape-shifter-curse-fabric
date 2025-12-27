@@ -75,7 +75,7 @@
     "origins": ">0.0.0",
     "optifabric": "*",
     "identity": "<1.14.2-beta",
-    "azurelib": ">3.0.17"
+    "azurelib": ">3.0.19"
   },
   "recommends": {
     "rich_translatable_text": ">=1.0.1",
