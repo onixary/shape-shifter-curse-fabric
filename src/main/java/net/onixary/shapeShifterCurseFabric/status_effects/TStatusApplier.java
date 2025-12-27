@@ -56,7 +56,7 @@ public class TStatusApplier {
          */
         if (player instanceof ServerPlayerEntity playerEntity) {
             TransformativeStatusInstance instance = EffectManager.getTransformativeEffect(playerEntity);
-            if (instance == null || instance.getTransformativeEffectType() == null || !instance.getTransformativeEffectType().getToForm().equals(regStatusEffect.getToForm())) {  // 如果当前效果的形态与regStatusEffect不同
+            if (instance == null || instance.getTransformativeEffectType() == null || !instance.getTransformativeEffectType().getToForm(player).equals(regStatusEffect.getToForm(player))) {  // 如果当前效果的形态与regStatusEffect不同
                 if (Math.random() < chance && RegPlayerForms.ORIGINAL_SHIFTER.equals(FormAbilityManager.getForm(player))) {
                     EffectManager.overrideEffect(player, regStatusEffect);
                 }

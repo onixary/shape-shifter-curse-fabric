@@ -48,7 +48,10 @@
     "BlockDropMixin",
     "ScareSkeletonMixin",
     "PlayerAnimInterfaceMixin",
-    "TrinketItemMixin"
+    "TrinketItemMixin",
+    "PotionItemMixin",
+    "PotionEntityMixin",
+    "AreaEffectCloudEntityMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",

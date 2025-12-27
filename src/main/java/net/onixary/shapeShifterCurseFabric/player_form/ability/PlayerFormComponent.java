@@ -21,30 +21,22 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     private boolean isByCursedMoonEnd = false;
     private boolean firstJoin = true; // 默认为true，表示首次加入
 
+    private Identifier customPotionFormID = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID;
+
     @Override
     public void readFromNbt(NbtCompound nbtCompound) {
         // 读取状态枚举
-        try {
-            this.currentForm = Identifier.tryParse(nbtCompound.getString("currentForm"));
-            this.previousForm = Identifier.tryParse(nbtCompound.getString("previousForm"));
-            this.isByCursedMoon = nbtCompound.getBoolean("isByCursedMoon");
-            this.isRegressedFromFinal = nbtCompound.getBoolean("isRegressedFromFinal");
-            this.isByCure = nbtCompound.getBoolean("isByCure");
-            this.moonEffectApplied = nbtCompound.getBoolean("moonEffectApplied");
-            this.endMoonEffectApplied = nbtCompound.getBoolean("endMoonEffectApplied");
-            this.isByCursedMoonEnd = nbtCompound.getBoolean("isByCursedMoonEnd");
-            this.firstJoin = nbtCompound.getBoolean("firstJoin");
-        } catch (IllegalArgumentException e) {
-            this.currentForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID;
-            this.previousForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID;
-            this.isByCursedMoon = false;
-            this.isRegressedFromFinal = false;
-            this.isByCure = false;
-            this.moonEffectApplied = false;
-            this.endMoonEffectApplied = false;
-            this.isByCursedMoonEnd = false;
-            this.firstJoin = true;
-        }
+        // 先凑活用这种方法 等有空我写一个nbt/json配置解析器
+        this.currentForm = nbtCompound.contains("currentForm") ? Identifier.tryParse(nbtCompound.getString("currentForm")) : RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID;
+        this.previousForm = nbtCompound.contains("previousForm") ? Identifier.tryParse(nbtCompound.getString("previousForm")) : RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID;
+        this.isByCursedMoon = nbtCompound.contains("isByCursedMoon") && nbtCompound.getBoolean("isByCursedMoon");
+        this.isRegressedFromFinal = nbtCompound.contains("isRegressedFromFinal") && nbtCompound.getBoolean("isRegressedFromFinal");
+        this.isByCure = nbtCompound.contains("isByCure") && nbtCompound.getBoolean("isByCure");
+        this.moonEffectApplied = nbtCompound.contains("moonEffectApplied") && nbtCompound.getBoolean("moonEffectApplied");
+        this.endMoonEffectApplied = nbtCompound.contains("endMoonEffectApplied") && nbtCompound.getBoolean("endMoonEffectApplied");
+        this.isByCursedMoonEnd = nbtCompound.contains("isByCursedMoonEnd") && nbtCompound.getBoolean("isByCursedMoonEnd");
+        this.firstJoin = nbtCompound.contains("firstJoin") && nbtCompound.getBoolean("firstJoin");
+        this.customPotionFormID = nbtCompound.contains("customPotionFormID") ? Identifier.tryParse(nbtCompound.getString("customPotionFormID")) : RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID;
     }
 
     public PlayerFormComponent clear() {
@@ -63,6 +55,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         nbtCompound.putBoolean("endMoonEffectApplied", this.endMoonEffectApplied);
         nbtCompound.putBoolean("isByCursedMoonEnd", this.isByCursedMoonEnd);
         nbtCompound.putBoolean("firstJoin", this.firstJoin);
+        nbtCompound.putString("customPotionFormID", this.customPotionFormID == null ? RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID.toString() : this.customPotionFormID.toString());
     }
 
     public PlayerFormBase getCurrentForm() {
@@ -136,5 +129,13 @@ public class PlayerFormComponent implements AutoSyncedComponent {
 
     public void setFirstJoin(boolean firstJoin) {
         this.firstJoin = firstJoin;
+    }
+
+    public Identifier getCustomPotionFormID() {
+        return this.customPotionFormID;
+    }
+
+    public void setCustomPotionFormID(Identifier customPotionFormID) {
+        this.customPotionFormID = customPotionFormID;
     }
 }
