@@ -68,12 +68,14 @@
     "fabric": ">=0.83.0",
     "minecraft": "1.20.1",
     "pehkui": ">=3.7.8",
-    "satin": ">=1.14.0"
+    "satin": ">=1.14.0",
+    "trinkets": ">=3.10.0"
   },
   "breaks": {
     "origins": ">0.0.0",
     "optifabric": "*",
-    "identity": "<1.14.2-beta"
+    "identity": "<1.14.2-beta",
+    "azurelib": ">3.0.17"
   },
   "recommends": {
     "rich_translatable_text": ">=1.0.1",
