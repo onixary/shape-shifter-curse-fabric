@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.items.armors;
 
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Items;
@@ -8,14 +7,16 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 
-public class MorphscaleArmorMaterial  implements ArmorMaterial {
-    public static final MorphscaleArmorMaterial INSTANCE = new MorphscaleArmorMaterial();
+public class NetheriteMorphscaleArmorMaterial implements ArmorMaterial {
+    public static final NetheriteMorphscaleArmorMaterial INSTANCE = new NetheriteMorphscaleArmorMaterial();
 
-    private static final int[] BASE_DURABILITY = new int[] {429, 495, 528, 363};
-    private static final int[] PROTECTION_VALUES = new int[] {2, 6, 7, 2};
+    private static final int[] BASE_DURABILITY = new int[] {462, 592, 555, 481};
+    private static final int[] PROTECTION_VALUES = new int[] {3, 6, 7, 3};
 
     @Override
     public int getDurability(ArmorItem.Type type) {
+        // Replace this multiplier by a constant value for the durability of the armor.
+        // For reference, diamond uses 33 for all armor pieces, whilst leather uses 5.
         return switch (type) {
             case BOOTS -> BASE_DURABILITY[0];
             case LEGGINGS -> BASE_DURABILITY[1];
@@ -62,7 +63,7 @@ public class MorphscaleArmorMaterial  implements ArmorMaterial {
 
     @Override
     public float getToughness() {
-        return 1.0F;
+        return 2.0F;
     }
 
     @Override
