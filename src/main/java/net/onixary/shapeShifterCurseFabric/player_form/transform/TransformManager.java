@@ -241,7 +241,7 @@ public class TransformManager {
             return instance.getTransformativeEffectType().getToForm();
         }
         else{
-            return FormRandomSelector.getRandomFormFromPredefined();
+            return FormRandomSelector.getRandomForm_CurseMoon();
         }
     }
 

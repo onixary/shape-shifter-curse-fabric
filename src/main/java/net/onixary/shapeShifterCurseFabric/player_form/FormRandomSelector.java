@@ -1,38 +1,31 @@
 package net.onixary.shapeShifterCurseFabric.player_form;
 
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Predicate;
 
 public class FormRandomSelector {
     private static final Random RANDOM = new Random();
-    // 避免选择到自定义的空形态，直接定义好一组可选形态
-    private static final List<PlayerFormBase> forms = Arrays.asList(
-            RegPlayerForms.FAMILIAR_FOX_0,
-            RegPlayerForms.BAT_0,
-            RegPlayerForms.AXOLOTL_0,
-            RegPlayerForms.OCELOT_0,
-            RegPlayerForms.ANUBIS_WOLF_0
-    );
 
-    public static PlayerFormBase getRandomFormWithIndexZero() {
-        List<PlayerFormBase> formsWithIndexZero = RegPlayerForms.playerForms.values().stream().filter(form -> form.getIndex() == 0).toList();
-        if (formsWithIndexZero.isEmpty()) {
-            throw new IllegalStateException("No forms with index 0 found");
+    public static @Nullable PlayerFormBase getRandomForm(@NotNull Predicate<PlayerFormBase> filter) {
+        List<PlayerFormBase> flitteredForms = RegPlayerForms.playerForms.values().stream().filter(filter).toList();
+        if (flitteredForms.isEmpty()) {
+            ShapeShifterCurseFabric.LOGGER.warn("No forms found for the given filter");
+            return null;
         }
-        PlayerFormBase randomToForm = formsWithIndexZero.get(RANDOM.nextInt(formsWithIndexZero.size()));
-        ShapeShifterCurseFabric.LOGGER.info("Random form with index 0 selected: " + randomToForm);
-        return randomToForm;
+        return flitteredForms.get(RANDOM.nextInt(flitteredForms.size()));
     }
 
-    public static PlayerFormBase getRandomFormFromPredefined() {
-        if (forms.isEmpty()) {
-            throw new IllegalStateException("No predefined forms available");
+    // 省的每回添加形态后还得在这里的List中添加形态 上回就忘加了
+    public static @NotNull PlayerFormBase getRandomForm_CurseMoon() {
+        PlayerFormBase randomForm = getRandomForm(form -> (form.getPhase() == PlayerFormPhase.PHASE_0 && !form.getIsCustomForm()));
+        if (randomForm == null) {
+            throw new IllegalStateException("No forms available");  // 这只有Bug才会触发 代表形态系统重构没改这里 还是Throw出来比较好
         }
-        PlayerFormBase randomForm = forms.get(RANDOM.nextInt(forms.size()));
-        ShapeShifterCurseFabric.LOGGER.info("Random predefined form selected: " + randomForm);
         return randomForm;
     }
 }
