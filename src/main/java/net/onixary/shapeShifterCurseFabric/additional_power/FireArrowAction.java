@@ -24,6 +24,7 @@ public class FireArrowAction {
         persistentProjectileEntity.setVelocity(owner, owner.getPitch(), owner.getYaw(), 0.0F, Speed, Spread);
         persistentProjectileEntity.setDamage(Damage);
         persistentProjectileEntity.setCritical(true);
+        persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
         owner.getWorld().spawnEntity(persistentProjectileEntity);
     }
 
