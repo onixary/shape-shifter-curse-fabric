@@ -285,6 +285,20 @@
     },
     "?"
   ],
+
+  "item.minecraft.potion.effect.to_custom_statue_potion": ["自定义咒文药水"],
+  "item.minecraft.splash_potion.effect.to_custom_statue_potion": ["喷溅型自定义咒文药水"],
+  "item.minecraft.lingering_potion.effect.to_custom_statue_potion": ["滞留型自定义咒文药水"],
+  "item.minecraft.tipped_arrow.effect.to_custom_statue_potion": ["自定义咒文之箭"],
+  "effect.shape-shifter-curse.to_custom_statue_potion": [""],
+  "effect.shape-shifter-curse.to_custom_statue_effect": [
+    "...奇怪的",
+    {
+      "text": "药水", "color": "#0096FF"
+    },
+    "?"
+  ],
+
   "commands.shape-shifter-curse.form_not_found": ["未找到指定的形态！"],
   "power.shape-shifter-curse.form_carnivore.name":["肉食者"],
   "power.shape-shifter-curse.form_allay_sp_amethyst_shard_only.name": ["水晶食性"],

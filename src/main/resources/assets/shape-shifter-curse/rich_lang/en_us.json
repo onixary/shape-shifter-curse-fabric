@@ -290,6 +290,20 @@
     },
     "?"
   ],
+
+  "item.minecraft.potion.effect.to_custom_statue_potion": ["Custom Form Curse Potion"],
+  "item.minecraft.splash_potion.effect.to_custom_statue_potion": ["Splash Custom Form Curse Potion"],
+  "item.minecraft.lingering_potion.effect.to_custom_statue_potion": ["Lingering Custom Form Curse Potion"],
+  "item.minecraft.tipped_arrow.effect.to_custom_statue_potion": ["Arrow of Custom Form Curse"],
+  "effect.shape-shifter-curse.to_custom_statue_potion": [""],
+  "effect.shape-shifter-curse.to_custom_statue_effect": [
+    "...Strange ",
+    {
+      "text": "Potion", "color": "#0096FF"
+    },
+    "?"
+  ],
+
   "effect.shape-shifter-curse.to_alpha_0_effect": ["ALPHA"],
   "effect.shape-shifter-curse.to_beta_0_effect": ["BETA"],
   "effect.shape-shifter-curse.to_gamma_0_effect": ["GAMMA"],

@@ -51,7 +51,8 @@
     "TrinketItemMixin",
     "PotionItemMixin",
     "PotionEntityMixin",
-    "AreaEffectCloudEntityMixin"
+    "AreaEffectCloudEntityMixin",
+    "ArrowEntityMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",

@@ -59,4 +59,11 @@ public class CTPUtils {
         }
         return null;
     }
+
+    public static void setCTPFormIDToNBT(NbtCompound nbtCompound, Identifier formID) {
+        if (nbtCompound == null) {
+            return;
+        }
+        nbtCompound.putString("targetForm", formID.toString());
+    }
 }
