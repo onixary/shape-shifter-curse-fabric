@@ -626,6 +626,8 @@
   "codex.form.shape-shifter-curse.feral_cat_sp.pros": ["Meowwwww..."],
   "codex.form.shape-shifter-curse.feral_cat_sp.cons": ["Meow...Meowor？"],
   "codex.form.shape-shifter-curse.feral_cat_sp.instincts": ["Meow...."],
+  "tooltip.shape_shifter_curse.morphscale_item": "MorphScaled Item",
+  "itemGroup.shape_shifter_curse.sscitems": "Shape Shifter Curse",
 
   "text.shape-shifter-curse.config.title": "Shape Shifter Curse Config Menu",
   "text.shape-shifter-curse.config.close": "Cancel",

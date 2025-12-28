@@ -1,0 +1,9 @@
+{
+  "type": "shape-shifter-curse:morph_scale_upgrade",
+  "template": {
+    "item": "shape-shifter-curse:morphscale_core"
+  },
+  "addition": {
+    "item": "minecraft:nether_star"
+  }
+}

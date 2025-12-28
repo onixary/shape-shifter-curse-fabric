@@ -379,5 +379,7 @@
     "item.minecraft.lingering_potion.effect.to_custom_statue_potion": "Lingering Custom Form Curse Potion",
     "item.minecraft.tipped_arrow.effect.to_custom_statue_potion": "Arrow of Custom Form Curse",
     "effect.shape-shifter-curse.to_custom_statue_potion": "",
-    "effect.shape-shifter-curse.to_custom_statue_effect": "...Strange Potion?"
+    "effect.shape-shifter-curse.to_custom_statue_effect": "...Strange Potion?",
+    "tooltip.shape_shifter_curse.morphscale_item": "MorphScaled Item",
+    "itemGroup.shape_shifter_curse.sscitems": "Shape Shifter Curse"
 }
