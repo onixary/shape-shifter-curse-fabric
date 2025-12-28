@@ -19,6 +19,8 @@ public class RegTStatusPotionEffect {
     public static final StatusEffect TO_ALLAY_SP_POTION = register("to_allay_sp_potion", new TransformativeStatusPotion(RegTStatusEffect.TO_ALLAY_SP_EFFECT));
     public static final StatusEffect TO_FERAL_CAT_SP_POTION = register("to_feral_cat_sp_potion", new TransformativeStatusPotion(RegTStatusEffect.TO_FERAL_CAT_SP_EFFECT));
 
+    public static final StatusEffect TO_CUSTOM_STATUE_POTION = register("to_custom_statue_potion", new TransformativeStatusPotion(RegTStatusEffect.TO_CUSTOM_STATUE_EFFECT));
+
     /* 未支持数据包时代的占位形态 现在可以使用数据添加形态了
     // empty custom forms
     public static final StatusEffect TO_ALPHA_0_POTION = register("to_alpha_0_potion", new TransformativeStatusPotion(RegTStatusEffect.TO_ALPHA_0_EFFECT));

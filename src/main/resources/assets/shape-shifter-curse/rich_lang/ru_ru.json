@@ -638,5 +638,17 @@
   "text.autoconfig.shape-shifter-curse-custom.option.primaryGreyReverse": "Реверсировать основной цвет в чёрно-белый",
   "text.autoconfig.shape-shifter-curse-custom.option.accent1GreyReverse": "Реверсировать дополнительный цвет 1 в чёрно-белый",
   "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "Реверсировать дополнительный цвет 2 в чёрно-белый",
-  "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_config": "Auto Sync Config"
+  "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_config": "Auto Sync Config",
+  "item.minecraft.potion.effect.to_custom_statue_potion": ["Custom Form Curse Potion"],
+  "item.minecraft.splash_potion.effect.to_custom_statue_potion": ["Splash Custom Form Curse Potion"],
+  "item.minecraft.lingering_potion.effect.to_custom_statue_potion": ["Lingering Custom Form Curse Potion"],
+  "item.minecraft.tipped_arrow.effect.to_custom_statue_potion": ["Arrow of Custom Form Curse"],
+  "effect.shape-shifter-curse.to_custom_statue_potion": [""],
+  "effect.shape-shifter-curse.to_custom_statue_effect": [
+    "...Strange ",
+    {
+      "text": "Potion", "color": "#0096FF"
+    },
+    "?"
+  ]
 }

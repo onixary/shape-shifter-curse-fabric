@@ -41,6 +41,10 @@ public class RegCustomPotions {
     public static final Potion FERAL_CAT_FORM_POTION =
             Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_feral_cat_sp_potion"),
                     new Potion(new StatusEffectInstance(TO_FERAL_CAT_SP_POTION)));
+    public static final Potion CUSTOM_STATUE_FORM_POTION =
+            Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_custom_statue_potion"),
+                    new Potion(new StatusEffectInstance(TO_CUSTOM_STATUE_POTION)));
+
     /* 未支持数据包时代的占位形态 现在可以使用数据添加形态了
     // custom empty forms
     public static final Potion ALPHA_FORM_POTION =

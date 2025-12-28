@@ -259,6 +259,19 @@
     "?"
   ],
 
+  "item.minecraft.potion.effect.to_custom_statue_potion": ["Custom Form Curse Potion"],
+  "item.minecraft.splash_potion.effect.to_custom_statue_potion": ["Splash Custom Form Curse Potion"],
+  "item.minecraft.lingering_potion.effect.to_custom_statue_potion": ["Lingering Custom Form Curse Potion"],
+  "item.minecraft.tipped_arrow.effect.to_custom_statue_potion": ["Arrow of Custom Form Curse"],
+  "effect.shape-shifter-curse.to_custom_statue_potion": [""],
+  "effect.shape-shifter-curse.to_custom_statue_effect": [
+    "...Strange ",
+    {
+      "text": "Potion", "color": "#0096FF"
+    },
+    "?"
+  ],
+
   "power.shape-shifter-curse.form_carnivore.name":["Carnivore"],
   "power.shape-shifter-curse.form_allay_sp_amethyst_shard_only.name": ["amethyst consumer"],
   "power.shape-shifter-curse.form_ocelot_2_raw_meat_only.name": ["raw meat consumer"],
