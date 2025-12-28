@@ -342,6 +342,7 @@
     "codex.form.shape-shifter-curse.feral_cat_sp.pros": "喵呜嗷...",
     "codex.form.shape-shifter-curse.feral_cat_sp.cons": "喵...喵？",
     "codex.form.shape-shifter-curse.feral_cat_sp.instincts": "喵....",
+    "tooltip.shape_shifter_curse.morphscale_item": "塑形物品",
     "text.shape-shifter-curse.config.title": "幻形者诅咒 配置界面",
     "text.shape-shifter-curse.config.close": "取消",
     "text.autoconfig.shape-shifter-curse-client.title": "幻形者诅咒 - 客户端配置",

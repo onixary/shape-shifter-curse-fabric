@@ -650,5 +650,6 @@
       "text": "Potion", "color": "#0096FF"
     },
     "?"
-  ]
+  ],
+  "tooltip.shape_shifter_curse.morphscale_item": "MorphScaled Item"
 }
