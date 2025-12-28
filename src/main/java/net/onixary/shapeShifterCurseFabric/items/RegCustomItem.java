@@ -100,7 +100,8 @@ public class RegCustomItem {
                         RegCustomPotions.ANUBIS_WOLF_FORM_POTION,
                         RegCustomPotions.ALLEY_FORM_POTION,
                         RegCustomPotions.FERAL_CAT_FORM_POTION,
-                        RegCustomPotions.CUSTOM_STATUE_FORM_POTION
+                        RegCustomPotions.CUSTOM_STATUE_FORM_POTION,
+                        RegCustomPotions.FEED_POTION
                 ));
             })
             .build();
