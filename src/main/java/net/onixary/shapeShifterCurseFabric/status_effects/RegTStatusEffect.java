@@ -26,6 +26,8 @@ public class RegTStatusEffect {
     public static final BaseTransformativeStatusEffect TO_ALLAY_SP_EFFECT = register("to_allay_sp_effect", new TransformativeStatus(RegPlayerForms.ALLAY_SP));
     public static final BaseTransformativeStatusEffect TO_FERAL_CAT_SP_EFFECT = register("to_feral_cat_sp_effect", new TransformativeStatus(RegPlayerForms.FERAL_CAT_SP));
 
+    public static final BaseTransformativeStatusEffect TO_CUSTOM_STATUE_EFFECT = register("to_custom_statue_effect", new CustomTransformativeStatue());
+
     /* 未支持数据包时代的占位形态 现在可以使用数据添加形态了
     // empty custom forms
     public static final BaseTransformativeStatusEffect TO_ALPHA_0_EFFECT = register("to_alpha_0_effect", new TransformativeStatus(RegPlayerForms.ALPHA_0));

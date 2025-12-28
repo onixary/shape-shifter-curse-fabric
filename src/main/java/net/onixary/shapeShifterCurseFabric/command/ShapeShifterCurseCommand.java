@@ -9,6 +9,9 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.command.argument.Vec3ArgumentType;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.potion.PotionUtil;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -16,11 +19,11 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
-import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
-import net.onixary.shapeShifterCurseFabric.minion.MinionRegister;
-import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntity;
+import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
+import net.onixary.shapeShifterCurseFabric.status_effects.CTPUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 
 import static net.minecraft.server.command.CommandManager.argument;
@@ -330,7 +333,10 @@ public class ShapeShifterCurseCommand {
             return 1;
         }
         try {
-            commandContext.getSource().sendFeedback(() -> {return Text.literal("Player Mana Type: " + ManaUtils.getPlayerManaTypeID(player));}, false);
+            ItemStack stack = new ItemStack(Items.POTION);
+            PotionUtil.setPotion(stack, RegCustomPotions.CUSTOM_STATUE_FORM_POTION);
+            CTPUtils.setCTPFormIDToNBT(stack.getNbt(), RegPlayerForms.SNOW_FOX_3.FormID);
+            player.giveItemStack(stack);
         } catch (Exception e) {
             ShapeShifterCurseFabric.LOGGER.error("Error Dev Command", e);
             return 0;

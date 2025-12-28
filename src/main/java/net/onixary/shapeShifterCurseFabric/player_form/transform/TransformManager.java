@@ -238,7 +238,7 @@ public class TransformManager {
     static PlayerFormBase getRandomOrBuffForm(ServerPlayerEntity player){
         TransformativeStatusInstance instance = EffectManager.getTransformativeEffect(player);
         if(instance != null && instance.getTransformativeEffectType() != null){
-            return instance.getTransformativeEffectType().getToForm();
+            return instance.getTransformativeEffectType().getToForm(player);
         }
         else{
             return FormRandomSelector.getRandomForm_CurseMoon();
