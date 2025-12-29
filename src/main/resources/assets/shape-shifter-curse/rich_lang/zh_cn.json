@@ -251,7 +251,7 @@
   "item.minecraft.splash_potion.effect.to_custom_statue_potion": ["喷溅型自定义咒文药水"],
   "item.minecraft.lingering_potion.effect.to_custom_statue_potion": ["滞留型自定义咒文药水"],
   "item.minecraft.tipped_arrow.effect.to_custom_statue_potion": ["自定义咒文之箭"],
-  "effect.shape-shifter-curse.to_custom_statue_potion": [""],
+  "effect.shape-shifter-curse.to_custom_statue_potion": ["自定义咒文"],
   "effect.shape-shifter-curse.to_custom_statue_effect": [
     "...奇怪的",
     {
@@ -588,6 +588,7 @@
   "codex.form.shape-shifter-curse.feral_cat_sp.cons": ["喵...喵？"],
   "codex.form.shape-shifter-curse.feral_cat_sp.instincts": ["喵...."],
   "tooltip.shape_shifter_curse.morphscale_item": "塑形物品",
+  "tooltip.shape_shifter_curse.potion_target_form": "目标形态: ",
   "itemGroup.shape_shifter_curse.sscitems": "幻形者诅咒",
   
   "text.shape-shifter-curse.config.title": "幻形者诅咒 配置界面",

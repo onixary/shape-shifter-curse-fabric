@@ -1,0 +1,14 @@
+{
+  "type": "origins:self_action_when_hit",
+  "entity_action": {
+    "type": "shape-shifter-curse:give_custom_transform_effect",
+    "form_id": "example_namespace:example"
+  },
+  "damage_condition": {
+    "type": "origins:attacker",
+    "entity_condition": {
+      "type": "origins:in_tag",
+      "tag": "example_namespace:attack_to_example_effect_entity"
+    }
+  }
+}

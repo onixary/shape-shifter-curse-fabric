@@ -1,6 +1,7 @@
 {
   "TargetOriginsID": "shape-shifter-curse:form_original_shifter",
   "ExtraPowers": [
-    "example_namespace:to_example_form"
+    "example_namespace:to_example_form",
+    "example_namespace:to_example_form_by_effect"
   ]
 }
