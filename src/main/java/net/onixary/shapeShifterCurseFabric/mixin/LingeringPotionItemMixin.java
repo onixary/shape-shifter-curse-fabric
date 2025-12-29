@@ -1,10 +1,8 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.PotionItem;
+import net.minecraft.item.LingeringPotionItem;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -16,22 +14,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-@Mixin(PotionItem.class)
-public class PotionItemMixin {
-    @Inject(method = "finishUsing", at = @At("HEAD"))
-    public void finishUsing(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
-        if (user instanceof PlayerEntity player) {
-            Identifier CTPFormID = CTPUtils.getCTPFormIDFromNBT(stack.getNbt());
-            if (CTPFormID != null) {
-                CTPUtils.setTransformativePotionForm(player, CTPFormID);
-            }
-        }
-    }
-
+@Mixin(LingeringPotionItem.class)
+public class LingeringPotionItemMixin {
     @Inject(method = "appendTooltip", at = @At("RETURN"))
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context, CallbackInfo ci) {
         if (PotionUtil.getPotion(stack) != RegCustomPotions.CUSTOM_STATUE_FORM_POTION) {
@@ -46,4 +33,3 @@ public class PotionItemMixin {
         }
     }
 }
-

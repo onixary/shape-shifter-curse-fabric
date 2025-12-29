@@ -643,7 +643,7 @@
   "item.minecraft.splash_potion.effect.to_custom_statue_potion": ["Splash Custom Form Curse Potion"],
   "item.minecraft.lingering_potion.effect.to_custom_statue_potion": ["Lingering Custom Form Curse Potion"],
   "item.minecraft.tipped_arrow.effect.to_custom_statue_potion": ["Arrow of Custom Form Curse"],
-  "effect.shape-shifter-curse.to_custom_statue_potion": [""],
+  "effect.shape-shifter-curse.to_custom_statue_potion": ["Custom Form Curse"],
   "effect.shape-shifter-curse.to_custom_statue_effect": [
     "...Strange ",
     {
@@ -652,5 +652,6 @@
     "?"
   ],
   "tooltip.shape_shifter_curse.morphscale_item": "MorphScaled Item",
+  "tooltip.shape_shifter_curse.potion_target_form": "Target Form: ",
   "itemGroup.shape_shifter_curse.sscitems": "Shape Shifter Curse"
 }
