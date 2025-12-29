@@ -10,7 +10,7 @@ public class AdditionalEntityActions {
     public static void register() {
         registerAction(AddInstinctAction.getFactory());
         registerAction(SetFallingDistanceAction.createFactory());
-        registerAction(TransformAction.createFactory());
+        TransformAction.registerAction(AdditionalEntityActions::registerAction, AdditionalEntityActions::registerBIAction);
         registerAction(ExplosionDamageEntityAction.createFactory());
         registerAction(SummonMinionWolfNearbyAction.createFactory());
         registerBIAction(SummonMinionWolfNearbyAction.createBIFactory());
