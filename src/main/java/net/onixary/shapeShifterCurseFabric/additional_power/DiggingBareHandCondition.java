@@ -1,11 +1,10 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.mixin.ClientPlayerInteractionManagerAccessor;
-import io.github.apace100.apoli.mixin.ServerPlayerInteractionManagerAccessor;
 import io.github.apace100.apoli.power.factory.condition.ConditionFactory;
 import io.github.apace100.calio.data.SerializableData;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ToolItem;
@@ -21,19 +20,15 @@ public class DiggingBareHandCondition {
         }
 
         if (playerEntity instanceof ServerPlayerEntity serverPlayerEntity) {
-
-            ServerPlayerInteractionManagerAccessor interactionManager = (ServerPlayerInteractionManagerAccessor) serverPlayerEntity.interactionManager;
-            if (!interactionManager.getMining()) {
+            if (!serverPlayerEntity.interactionManager.mining) {
                 return false;
             }
 
         } else if (playerEntity instanceof ClientPlayerEntity) {
-
-            ClientPlayerInteractionManagerAccessor interactionManager = (ClientPlayerInteractionManagerAccessor) MinecraftClient.getInstance().interactionManager;
-            if (interactionManager == null || !interactionManager.getBreakingBlock()) {
+            ClientPlayerInteractionManager interactionManager = MinecraftClient.getInstance().interactionManager;
+            if (interactionManager == null || !interactionManager.isBreakingBlock()) {
                 return false;
             }
-
         } else {
             return false;
         }
