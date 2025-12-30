@@ -182,8 +182,12 @@ dependencies {
     //include "io.github.ladysnake:PlayerAbilityLib:${pal_version}"
 
     // Apoli by Apace100
-    modImplementation "com.github.apace100:apoli:${project.apoli_version}"
-    include "com.github.apace100:apoli:${project.apoli_version}"
+
+    // modImplementation "com.github.apace100:apoli:${project.apoli_version}"
+    // include "com.github.apace100:apoli:${project.apoli_version}"
+    // 使用Ladysnake Mods的源 用正常的版本号
+    modImplementation "io.github.apace100:apoli:${project.apoli_version}"
+    include "io.github.apace100:apoli:${project.apoli_version}"
 
     modApi("com.github.Virtuoel:Pehkui:${pehkui_version}", {
         exclude group: "net.fabricmc.fabric-api"
