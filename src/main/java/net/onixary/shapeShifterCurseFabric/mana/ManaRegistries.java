@@ -43,7 +43,7 @@ public class ManaRegistries {
                             )
                     )
             ),
-            new InstinctBarLikeManaBar()
+            new FamiliarFoxManaBar()
     );
 
     public static Identifier registerManaType(Identifier identifier, ManaUtils.ModifierList defaultMaxManaModifier, ManaUtils.ModifierList defaultManaRegenModifier, @Nullable IManaRender render) {
