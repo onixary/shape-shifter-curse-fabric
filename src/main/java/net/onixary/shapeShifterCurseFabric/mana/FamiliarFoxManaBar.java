@@ -1,11 +1,14 @@
 package net.onixary.shapeShifterCurseFabric.mana;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.Identifier;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
+@Environment(EnvType.CLIENT)
 public class FamiliarFoxManaBar implements IManaRender{
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 
@@ -32,8 +35,8 @@ public class FamiliarFoxManaBar implements IManaRender{
     }
 
     private void renderBar(DrawContext context, float tickDelta, int x, int y) {
-        int instinctWidth = (int) Math.ceil(80 * ManaUtils.getPlayerManaPercent(mc.player));
+        int instinctWidth = (int) Math.ceil(80 * ManaUtils.getPlayerManaPercent(mc.player, 0.0d));
         context.drawTexture(BarTexEmptyID, x, y, 0, 0, 80, 5, 80, 5);
-        context.drawTexture(BarTexFullID, x, y, 80 - instinctWidth, 0, instinctWidth, 5, 80, 5);
+        context.drawTexture(BarTexFullID, x, y, 0, 0, instinctWidth, 5, 80, 5);
     }
 }

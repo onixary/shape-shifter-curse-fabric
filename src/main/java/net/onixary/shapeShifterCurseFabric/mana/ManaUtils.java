@@ -231,14 +231,24 @@ public class ManaUtils {
         return getManaComponent(player).getMana();
     }
 
-    public static double getPlayerManaPercent(PlayerEntity player) {
-        ManaComponent manaComponent = getManaComponent(player);
-        // 突然想起来，如果maxMana为0，那么会导致除0错误。
-        double maxMana = manaComponent.getMaxMana();
+    public static double getPlayerMaxMana(PlayerEntity player) {
+        return getManaComponent(player).getMaxMana();
+    }
+
+    public static double getPlayerManaRegen(PlayerEntity player) {
+        return getManaComponent(player).getManaRegen();
+    }
+
+    public static double getManaPercent(double mana, double maxMana, double if0Result) {
         if (maxMana == 0.0d) {
-            return 0.0d;
+            return if0Result;
         }
-        return manaComponent.getMana() / maxMana;
+        return mana / maxMana;
+    }
+
+    public static double getPlayerManaPercent(PlayerEntity player, double if0Result) {
+        ManaComponent manaComponent = getManaComponent(player);
+        return getManaPercent(manaComponent.getMana(), manaComponent.getMaxMana(), if0Result);
     }
 
     public static Identifier getPlayerManaTypeID(PlayerEntity player) {

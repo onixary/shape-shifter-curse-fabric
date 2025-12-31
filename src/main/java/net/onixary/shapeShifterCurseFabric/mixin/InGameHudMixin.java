@@ -4,7 +4,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.onixary.shapeShifterCurseFabric.mana.IManaRender;
 import net.onixary.shapeShifterCurseFabric.mana.ManaComponent;
-import net.onixary.shapeShifterCurseFabric.mana.ManaRegistries;
+import net.onixary.shapeShifterCurseFabric.mana.ManaRegistriesClient;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctBarRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -22,8 +22,8 @@ public class InGameHudMixin {
         // 在InGameHud.render()方法返回前，调用你的渲染逻辑
         // 这确保了它在渲染完物品栏之后执行
         IManaRender manaRenderer = null;
-        if (ManaRegistries.hasManaRender(ManaComponent.LocalManaTypeID)) {
-            manaRenderer = ManaRegistries.getManaRender(ManaComponent.LocalManaTypeID);
+        if (ManaRegistriesClient.hasManaRender(ManaComponent.LocalManaTypeID)) {
+            manaRenderer = ManaRegistriesClient.getManaRender(ManaComponent.LocalManaTypeID);
         }
         if (manaRenderer == null || !manaRenderer.OverrideInstinctBar()) {
             instinctBarRenderer.render(context, tickDelta);

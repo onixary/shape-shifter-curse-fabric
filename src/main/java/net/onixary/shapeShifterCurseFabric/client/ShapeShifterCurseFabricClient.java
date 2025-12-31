@@ -26,6 +26,7 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TOce
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.armors.MorphscaleArmorRenderer;
 import net.onixary.shapeShifterCurseFabric.items.armors.NetheriteMorphscaleArmorRenderer;
+import net.onixary.shapeShifterCurseFabric.mana.ManaRegistriesClient;
 import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 import net.onixary.shapeShifterCurseFabric.minion.MinionRegisterClient;
 import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntityRenderer;
@@ -268,6 +269,8 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		registerShaderResource();
 		FurGradientRenderLayer.onInitializeClient();
         registerAzureArmorGeo();
+
+		ManaRegistriesClient.register();
 
 		ClientTickEvents.END_CLIENT_TICK.register(ShapeShifterCurseFabricClient::onClientTick);
 		// 客户端能力处理
