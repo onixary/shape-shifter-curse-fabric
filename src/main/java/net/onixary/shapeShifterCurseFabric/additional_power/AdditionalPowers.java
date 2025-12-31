@@ -66,7 +66,6 @@ public class AdditionalPowers {
         register(ManaTypePower.createFactory());
         register(ManaAttributePower.createFactory());
         register(ConditionedManaAttributePower.createFactory());
-        register(EntityGlowWithoutF1Power.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {
