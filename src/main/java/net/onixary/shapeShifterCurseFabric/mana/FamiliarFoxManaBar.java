@@ -1,11 +1,14 @@
 package net.onixary.shapeShifterCurseFabric.mana;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.Identifier;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
+@Environment(EnvType.CLIENT)
 public class FamiliarFoxManaBar implements IManaRender{
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 

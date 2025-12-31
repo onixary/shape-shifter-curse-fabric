@@ -48,9 +48,9 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.Tran
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.wolf.TransformativeWolfEntity;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
+import net.onixary.shapeShifterCurseFabric.mana.ManaRegistries;
 import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 import net.onixary.shapeShifterCurseFabric.minion.MinionRegister;
-import net.onixary.shapeShifterCurseFabric.minion.RegPlayerMinionComponent;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationTransform;
@@ -218,6 +218,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
         // 注册配方
         RecipeSerializerRegister.register();
+
+        ManaRegistries.register();
 
         ServerLifecycleEvents.SERVER_STARTED.register(server -> {
             // 获取主世界作为默认世界
