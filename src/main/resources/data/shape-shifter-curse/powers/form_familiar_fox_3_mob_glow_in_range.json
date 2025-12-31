@@ -1,5 +1,5 @@
 {
-    "type": "origins:entity_glow",
+    "type": "shape-shifter-curse:entity_glow_without_f1",
     "bientity_condition": {
         "type": "origins:distance",
         "comparison": "<=",
