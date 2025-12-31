@@ -88,7 +88,7 @@ public class ManaUtilsApoli {
                     boolean inverted = data.get("Inverted");
                     if (e instanceof PlayerEntity player) {
                         double mana_percent = data.get("mana_percent");
-                        boolean manaAbove = ManaUtils.getPlayerManaPercent(player) >= mana_percent;
+                        boolean manaAbove = ManaUtils.getPlayerManaPercent(player, 0.0d) >= mana_percent;
                         return manaAbove ^ inverted;
                     }
                     return inverted;

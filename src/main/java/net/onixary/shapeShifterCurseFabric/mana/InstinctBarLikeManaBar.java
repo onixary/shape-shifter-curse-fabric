@@ -2,6 +2,7 @@ package net.onixary.shapeShifterCurseFabric.mana;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
@@ -32,8 +33,25 @@ public class InstinctBarLikeManaBar implements IManaRender{
     }
 
     private void renderBar(DrawContext context, float tickDelta, int x, int y) {
-        int instinctWidth = (int) Math.ceil(80 * ManaUtils.getPlayerManaPercent(mc.player));
+        double mana = ManaUtils.getPlayerMana(mc.player);
+        double maxMana = ManaUtils.getPlayerMaxMana(mc.player);
+        double manaRegen = ManaUtils.getPlayerManaRegen(mc.player);
+        int remainTicks = -1;
+        if (manaRegen > 0) {
+            remainTicks = (int) Math.ceil((maxMana - mana) / manaRegen);
+        }
+        int instinctWidth = (int) Math.ceil(80 * ManaUtils.getManaPercent(mana, maxMana, 0.0d));
         context.drawTexture(BarTexEmptyID, x, y, 0, 0, 80, 5, 80, 5);
-        context.drawTexture(BarTexFullID, x, y, 80 - instinctWidth, 0, instinctWidth, 5, 80, 5);
+        context.drawTexture(BarTexFullID, x, y, 0, 0, instinctWidth, 5, 80, 5);
+        StringBuilder manaString = new StringBuilder();
+        manaString.append((int) mana).append("/").append((int) maxMana);
+        if (remainTicks > 0) {
+            manaString.append(" (").append(remainTicks).append(")");
+        } else if (remainTicks == -1) {
+            manaString.append(" (").append("?").append(")");
+        }
+        Text manaText = Text.literal(manaString.toString());
+        int manaTextWidth = mc.textRenderer.getWidth(manaText);
+        context.drawText(mc.textRenderer, manaText, x + (80 - manaTextWidth) / 2, y - 2, 0xFFFFFF, false);
     }
 }

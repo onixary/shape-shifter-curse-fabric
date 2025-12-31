@@ -32,8 +32,8 @@ public class FamiliarFoxManaBar implements IManaRender{
     }
 
     private void renderBar(DrawContext context, float tickDelta, int x, int y) {
-        int instinctWidth = (int) Math.ceil(80 * ManaUtils.getPlayerManaPercent(mc.player));
+        int instinctWidth = (int) Math.ceil(80 * ManaUtils.getPlayerManaPercent(mc.player, 0.0d));
         context.drawTexture(BarTexEmptyID, x, y, 0, 0, 80, 5, 80, 5);
-        context.drawTexture(BarTexFullID, x, y, 80 - instinctWidth, 0, instinctWidth, 5, 80, 5);
+        context.drawTexture(BarTexFullID, x, y, 0, 0, instinctWidth, 5, 80, 5);
     }
 }
