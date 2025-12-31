@@ -47,7 +47,7 @@ public class InstinctBarLikeManaBar implements IManaRender{
         manaString.append((int) mana).append("/").append((int) maxMana);
         if (remainTicks > 0) {
             manaString.append(" (").append(remainTicks).append(")");
-        } else if (remainTicks == -1) {
+        } else if (remainTicks < 0) {
             manaString.append(" (").append("?").append(")");
         }
         Text manaText = Text.literal(manaString.toString());
