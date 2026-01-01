@@ -1,15 +1,24 @@
 {
     "type": "origins:modify_food",
-    "food_modifier": {
-        "name": "increase food points",
-        "operation": "multiply_base_multiplicative",
-        "value": 1.0
-    },
-    "saturation_modifier": {
-        "name": "increase food points",
-        "operation": "multiply_base_multiplicative",
-        "value": 1.0
-    },
+    "food_modifiers": [
+        {
+            "name": "increase food points",
+            "operation": "min_base",
+            "value": 5.0
+        },
+        {
+            "name": "increase food points",
+            "operation": "multiply_base",
+            "value": 0.5
+        }
+    ],
+    "saturation_modifiers": [
+        {
+            "name": "increase food points",
+            "operation": "min_total",
+            "value": 0.6
+        }
+    ],
     "item_condition": {
         "type": "origins:and",
         "conditions": [
