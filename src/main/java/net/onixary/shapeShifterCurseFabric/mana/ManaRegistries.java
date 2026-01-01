@@ -11,6 +11,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -32,6 +34,10 @@ public class ManaRegistries {
                 player.sendMessage(Text.literal("[Server] 魔力值已空!").formatted(Formatting.RED));
             })
             .setImmutable();
+
+    public static final BiConsumer<ManaComponent, PlayerEntity> MH_FUNCTION_FullMana = (component, player) -> {
+        component.gainManaWithTime(Double.MAX_VALUE / 16, 10);
+    };
 
     private static final HashMap<Identifier, Function<PlayerEntity, Boolean>> manaConditionTypeRegistry = new HashMap<>();
     private static final HashMap<Identifier, ManaUtils.ModifierList> maxManaModifierRegistry = new HashMap<>();
@@ -64,7 +70,7 @@ public class ManaRegistries {
                             )
                     )
             ),
-            EMPTY_MANA_HANDLER
+            new ManaHandler().setOnServerInit(MH_FUNCTION_FullMana)
     );
 
     public static Identifier registerManaType(Identifier identifier, ManaUtils.ModifierList defaultMaxManaModifier, ManaUtils.ModifierList defaultManaRegenModifier, @Nullable ManaHandler handler) {

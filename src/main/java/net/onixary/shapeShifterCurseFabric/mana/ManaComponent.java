@@ -141,6 +141,7 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
         this.MaxManaModifier = ManaRegistries.getMaxManaModifier(manaTypeID);
         this.ManaRegenModifier = ManaRegistries.getManaRegenModifier(manaTypeID);
         this.__reloadManaHandler__(manaTypeID);
+        this.onCommonManaBarChange();
         this.Dirty = true;
     }
 
@@ -370,6 +371,23 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
                 this.Dirty = true;
             }
         }
+    }
+
+    public void onCommonManaBarChange() {
+        if (this.manaHandler == ManaRegistries.EMPTY_MANA_HANDLER) return;
+        if (this.isClient) {
+            this.onClientManaBarChange(this.player);
+        } else {
+            this.onServerManaBarChange(this.player);
+        }
+    }
+
+    public void onClientManaBarChange(PlayerEntity clientPlayerEntity) {
+        manaHandler.getOnClientInit().accept(this, clientPlayerEntity);
+    }
+
+    public void onServerManaBarChange(PlayerEntity serverPlayerEntity) {
+        manaHandler.getOnServerInit().accept(this, serverPlayerEntity);
     }
 
     public void onCommonManaChange() {
