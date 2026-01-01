@@ -1,9 +1,20 @@
 {
     "type": "origins:entity_glow",
     "bientity_condition": {
-        "type": "origins:distance",
-        "comparison": "<=",
-        "compare_to": 20
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:distance",
+                "comparison": "<=",
+                "compare_to": 20
+            },
+            {
+                "type": "origins:actor_condition",
+                "condition": {
+                    "type": "shape-shifter-curse:can_render_gui"
+                }
+            }
+        ]
     },
     "use_teams": false,
     "red": 0.55,

@@ -13,4 +13,11 @@ public class ClientUtils {
         // 如果服务器端跑到这里会直接崩溃
         return player == MinecraftClient.getInstance().player;
     }
+
+    public static boolean CanDisplayGUI() {
+        if (FabricLoader.getInstance().getEnvironmentType() != EnvType.CLIENT) {
+            return true;
+        }
+        return !MinecraftClient.getInstance().options.hudHidden;
+    }
 }
