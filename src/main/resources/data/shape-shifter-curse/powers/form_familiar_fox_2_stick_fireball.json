@@ -1,14 +1,53 @@
 {
     "type": "origins:action_on_item_use",
     "entity_action": {
-        "type": "origins:feed",
-        "food": 1.0,
-        "saturation": 1.0
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "origins:fire_projectile",
+                "entity_type": "minecraft:small_fireball",
+                "divergence": 1.0,
+                "count": 1,
+                "projectile_action": {
+                    "type": "origins:and",
+                    "actions": [
+                        {
+                            "type": "origins:spawn_particles",
+                            "particle": "minecraft:soul_fire_flame",
+                            "count": 8,
+                            "speed": 0.0,
+                            "force": false,
+                            "spread": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.blaze.shoot"
+            },
+            {
+                "type": "shape-shifter-curse:consume_mana",
+                "mana": 5.0
+            }
+        ]
+    },
+    "condition": {
+        "type": "shape-shifter-curse:has_mana",
+        "mana": 5.0
     },
     "item_condition": {
         "type": "origins:ingredient",
         "ingredient": {
             "item": "minecraft:stick"
         }
+    },
+    "item_action": {
+        "type": "origins:consume",
+        "amount": 1
     }
 }

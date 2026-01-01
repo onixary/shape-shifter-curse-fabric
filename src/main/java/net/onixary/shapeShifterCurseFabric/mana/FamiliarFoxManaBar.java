@@ -26,10 +26,11 @@ public class FamiliarFoxManaBar implements IManaRender{
             int width = mc.getWindow().getScaledWidth();
             int height = mc.getWindow().getScaledHeight();
             //float x = (float) width / 2 + 11;
-            float x = (float)width / 2 - 40;
+            float x = (float)width / 2 + 100;
             // 39 is the height of the health bar
             float y = height - 39;
-            y += 16;
+            y += 22;
+            // todo: instinct条的位置为 y += 30
             this.renderBar(context, tickDelta, (int) x, (int) y);
         }
     }
