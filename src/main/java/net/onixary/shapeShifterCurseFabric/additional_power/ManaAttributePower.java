@@ -26,7 +26,7 @@ public class ManaAttributePower extends Power {
         this.playerSide = playerSide;
     }
     @Override
-    public void onGained() {
+    public void onAdded() {
         if (modifierID == null) {
             return;
         }

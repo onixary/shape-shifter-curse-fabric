@@ -8,6 +8,7 @@ import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
@@ -15,6 +16,7 @@ import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 public class ManaTypePower extends Power {
     private @Nullable Identifier manaType = null;
     private @Nullable Identifier manaSource = null;
+    private boolean isApplyed = false;
 
     public ManaTypePower(PowerType<?> type, LivingEntity entity, @Nullable Identifier manaType, @Nullable Identifier manaSource) {
         super(type, entity);
@@ -26,13 +28,17 @@ public class ManaTypePower extends Power {
         }
     }
 
-    /*
+
     // 在能力获取 + 玩家进游戏时
     @Override
     public void onAdded() {
-        return;
+        if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null && !isApplyed) {
+            ManaUtils.gainManaTypeID(playerEntity, manaType, manaSource);
+            this.isApplyed = true;
+        }
     }
 
+    /*
     // 在能力移除 + 玩家退游戏时
     @Override
     public void onRemoved() {
@@ -43,10 +49,11 @@ public class ManaTypePower extends Power {
     // 在能力获取
     @Override
     public void onGained() {
-        if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null) {
+        if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null && !isApplyed) {
             if (!ManaUtils.isManaTypeExists(playerEntity, manaType, manaSource)) {
                 ManaUtils.gainManaTypeID(playerEntity, manaType, manaSource);
                 ManaUtils.gainPlayerManaWithTime(playerEntity, Double.MAX_VALUE / 8, 8);  // 没有防溢出 别直接用Double.MAX_VALUE
+                this.isApplyed = true;
             }
         }
     }
@@ -54,8 +61,17 @@ public class ManaTypePower extends Power {
     // 在能力移除
     @Override
     public void onLost() {
-        if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null) {
+        if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null && isApplyed) {
             ManaUtils.loseManaTypeID(playerEntity, manaType, manaSource);
+            this.isApplyed = false;
+        }
+    }
+
+    @Override
+    public void onRespawn() {
+        if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null && !isApplyed) {
+            ManaUtils.gainManaTypeID(playerEntity, manaType, manaSource);
+            this.isApplyed = true;
         }
     }
 
