@@ -59,7 +59,12 @@ public class InstinctTicker {
 
         // 处理立即效果
         // Process immediate effects
-        processImmediateEffects(comp);
+        if (isPausing || isUnderCursedMoon) {
+            // 诅咒之月下不加本能值
+            comp.immediateEffects.clear();
+        } else {
+            processImmediateEffects(comp);
+        }
 
         // 计算当前速率
         // Calculate the current instinct growth rate
