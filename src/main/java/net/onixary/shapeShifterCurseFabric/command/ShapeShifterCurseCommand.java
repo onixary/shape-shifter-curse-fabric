@@ -342,8 +342,6 @@ public class ShapeShifterCurseCommand {
             } else {
                 stringBuilder.append("Mana Type: None\n");
             }
-            stringBuilder.append("rid1: ").append(manaComponent.rid1).append("\n");
-            stringBuilder.append("rid2: ").append(manaComponent.rid2).append("\n");
             stringBuilder.append("Mana: ").append(manaComponent.getMana()).append("\n");
             stringBuilder.append("Max Mana Client: ").append(manaComponent.MaxManaClient).append("\n");
             stringBuilder.append("Mana Regen: ").append(manaComponent.ManaRegenClient).append("\n");

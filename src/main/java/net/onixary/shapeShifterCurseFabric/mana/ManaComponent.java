@@ -10,6 +10,7 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
@@ -35,9 +36,6 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
 
     // 仅客户端 同步时更新
     public static Identifier LocalManaTypeID = null;  // 仅客户端 怎么想都不会出现在服务器端上 虽然服务器上的数据也会更新 我懒得给readFromNbt写客户端判断了 同步时更新
-
-    public int rid1;
-    public int rid2;
 
     public final @NotNull PlayerEntity player;
     public final boolean isClient;
@@ -79,15 +77,11 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
         ShapeShifterCurseFabric.LOGGER.error("ManaComponent: You should not create a ManaComponent without a player entity!");
         this.player = null;
         this.isClient = false;
-        this.rid1 = -1;
-        this.rid2 = -1;
     }
 
     public ManaComponent(PlayerEntity player) {
         this.player = Objects.requireNonNull(player);
         this.isClient = this.player.getWorld().isClient;
-        this.rid1 = this.player.getRandom().nextInt();
-        this.rid2 = this.player.getRandom().nextInt();
     }
 
     public boolean isNeedSync() {
@@ -357,7 +351,6 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
 
     @Override
     public void copyFrom(ManaComponent other) {
-        this.rid2 = other.rid2;
         this.Mana = other.Mana;
         this.ManaTypeID = other.ManaTypeID;
         this.ManaTypeSourceMap = other.ManaTypeSourceMap;
