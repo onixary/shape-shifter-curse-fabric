@@ -1,11 +1,9 @@
-package net.onixary.shapeShifterCurseFabric.items;
+package net.onixary.shapeShifterCurseFabric.items.tools;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.MiningToolItem;
+import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
@@ -13,10 +11,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-// todo: 金刚石握爪的实际逻辑
-public class DiamondMiningClaw extends MiningToolItem {
-    public DiamondMiningClaw(float attackDamage, float attackSpeed, ToolMaterial material, TagKey<Block> effectiveBlocks, Settings settings) {
-        super(attackDamage, attackSpeed, material, effectiveBlocks, settings);
+// 形态专属工具只应用耐久度逻辑，其他逻辑由形态Power+手持道具condition实现
+public class DiamondMiningClaw extends PickaxeItem {
+
+    public DiamondMiningClaw(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
+        super(material, attackDamage, attackSpeed, settings);
     }
 
     @Override
