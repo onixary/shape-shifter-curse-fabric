@@ -38,7 +38,7 @@ public class FeedEffect extends StatusEffect {
             player.getHungerManager().add(foodToAdd, saturationToAdd);
 
             if (ManaRegistries.FAMILIAR_FOX_MANA.equals(ManaUtils.getPlayerManaTypeID(player))) {
-                ManaUtils.gainPlayerMana(player, 50d * distanceMultiplier);
+                ManaUtils.gainPlayerMana(player, 25d * distanceMultiplier);
             }
         }
         // 原版会对 [瞬间恢复 瞬间伤害] 以外的的效果调用 this.applyUpdateEffect 导致重复加饱食度
@@ -55,7 +55,7 @@ public class FeedEffect extends StatusEffect {
         if (entity instanceof PlayerEntity player) {
             player.getHungerManager().add(8, 0.6f);
             if (ManaRegistries.FAMILIAR_FOX_MANA.equals(ManaUtils.getPlayerManaTypeID(player))) {
-                ManaUtils.gainPlayerMana(player, 50d);
+                ManaUtils.gainPlayerMana(player, 25d);
             }
         }
     }
