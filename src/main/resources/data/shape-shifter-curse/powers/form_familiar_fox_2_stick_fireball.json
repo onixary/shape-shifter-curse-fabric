@@ -49,5 +49,6 @@
     "item_action": {
         "type": "origins:consume",
         "amount": 1
-    }
+    },
+    "trigger": "instant"
 }

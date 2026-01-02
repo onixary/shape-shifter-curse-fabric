@@ -17,7 +17,7 @@ public class FamiliarFoxManaBar implements IManaRender{
 
     @Override
     public boolean OverrideInstinctBar() {
-        return true;
+        return false;
     }
 
     @Override

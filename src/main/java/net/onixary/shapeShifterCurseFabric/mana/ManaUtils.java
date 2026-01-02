@@ -280,12 +280,12 @@ public class ManaUtils {
     }
 
     // 用于Power系统
-    public static void gainManaTypeID(PlayerEntity player, Identifier manaTypeID) {
-        getManaComponent(player).gainManaTypeID(manaTypeID);
+    public static void gainManaTypeID(PlayerEntity player, Identifier manaTypeID, Identifier sourceID) {
+        getManaComponent(player).gainManaTypeID(manaTypeID, sourceID);
     }
 
-    public static void loseManaTypeID(PlayerEntity player, Identifier manaTypeID) {
-        getManaComponent(player).loseManaTypeID(manaTypeID);
+    public static void loseManaTypeID(PlayerEntity player, Identifier manaTypeID, Identifier sourceID) {
+        getManaComponent(player).loseManaTypeID(manaTypeID, sourceID);
     }
 
     // 用于其他非Power系统

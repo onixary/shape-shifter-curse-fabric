@@ -25,7 +25,7 @@ public class InGameHudMixin {
         if (ManaRegistriesClient.hasManaRender(ManaComponent.LocalManaTypeID)) {
             manaRenderer = ManaRegistriesClient.getManaRender(ManaComponent.LocalManaTypeID);
         }
-        if (manaRenderer == null || !manaRenderer.OverrideInstinctBar()) {
+        if (!(manaRenderer != null && manaRenderer.OverrideInstinctBar())) {
             instinctBarRenderer.render(context, tickDelta);
         }
         if (manaRenderer != null) {

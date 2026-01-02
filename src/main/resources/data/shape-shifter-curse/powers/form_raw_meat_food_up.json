@@ -4,7 +4,12 @@
         {
             "name": "increase food points",
             "operation": "addition",
-            "value": 5.0
+            "value": 4.0
+        },
+        {
+            "name": "increase food points",
+            "operation": "min_base",
+            "value": 4.0
         },
         {
             "name": "increase food points",
@@ -16,7 +21,7 @@
         {
             "name": "increase food points",
             "operation": "min_total",
-            "value": 0.6
+            "value": 0.7
         }
     ],
     "item_condition": {

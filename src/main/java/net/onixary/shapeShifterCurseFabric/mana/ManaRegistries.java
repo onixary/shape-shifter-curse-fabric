@@ -12,7 +12,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class ManaRegistries {
     // 不可变 防止某些天才操作同时把其他的ManaHandler给修改了 导致程序异常 当然Immutable为可选项 无论是否Immutable都支持注册 推荐为公共ManaHandler加上setImmutable
