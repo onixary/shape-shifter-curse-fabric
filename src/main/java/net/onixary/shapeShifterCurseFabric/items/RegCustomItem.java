@@ -2,7 +2,6 @@ package net.onixary.shapeShifterCurseFabric.items;
 
 import dev.emi.trinkets.api.TrinketItem;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
@@ -13,6 +12,10 @@ import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.items.armors.MorphScaleArmor;
 import net.onixary.shapeShifterCurseFabric.items.armors.NetheriteMorphScaleArmor;
+import net.onixary.shapeShifterCurseFabric.items.tools.BottledSnowfall;
+import net.onixary.shapeShifterCurseFabric.items.tools.BottledSnowfallToolMaterial;
+import net.onixary.shapeShifterCurseFabric.items.tools.DiamondMiningClaw;
+import net.onixary.shapeShifterCurseFabric.items.tools.DiamondMiningClawToolMaterial;
 import net.onixary.shapeShifterCurseFabric.items.trinkets.*;
 
 import java.util.ArrayList;
@@ -20,7 +23,7 @@ import java.util.Collection;
 import java.util.List;
 
 import static net.minecraft.item.Items.register;
-import static net.onixary.shapeShifterCurseFabric.items.RegCustomBlock.MOONDUST_CRYSTAL_GRIT;
+import static net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock.MOONDUST_CRYSTAL_GRIT;
 
 public class RegCustomItem {
     private RegCustomItem(){}
@@ -48,9 +51,8 @@ public class RegCustomItem {
     // 模组自定义物品
     public static final Item MOONDUST_CRYSTAL_SHARD = register("moondust_crystal_shard", new MoonDustCrystalShard(new MoonDustCrystalShard.Settings()));
     public static final Item ECTOPLASM_RAG = register("ectoplasm_rag", new Item(new Item.Settings()));
-    public static final Item BOTTLED_SNOWFALL = register("bottled_snowfall", new BottledSnowfall(new BottledSnowfall.Settings()));
-    // todo: 金刚石握爪的类型不对，还没想好是做成挖掘工具还是power加成，后面再改
-    public static final Item DIAMOND_MINING_CLAW = register("diamond_mining_claw", new Item(new Item.Settings()));
+    public static final ToolItem BOTTLED_SNOWFALL = register("bottled_snowfall", new BottledSnowfall(BottledSnowfallToolMaterial.INSTANCE, 1, 1, new Item.Settings()));
+    public static final ToolItem DIAMOND_MINING_CLAW = register("diamond_mining_claw", new DiamondMiningClaw(DiamondMiningClawToolMaterial.INSTANCE, 1, 1, new Item.Settings()));
     // 模组自定义Trinkets
     public static final TrinketItem AMULET_BRACELET = register("amulet_bracelet", new AmuletBraceletTrinket(new AmuletBraceletTrinket.Settings()));
     public static final Item ATTACH_HOOK = register("attach_hook", new AttachHookTrinket(new AttachHookTrinket.Settings()));

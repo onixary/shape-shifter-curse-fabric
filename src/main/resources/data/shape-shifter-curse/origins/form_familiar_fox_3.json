@@ -28,6 +28,7 @@
         "shape-shifter-curse:form_familiar_fox_3_use_illager_creature_bottle",
         "shape-shifter-curse:form_familiar_fox_3_use_enemy_creature",
         "shape-shifter-curse:form_familiar_fox_use_entity_cooldown",
+        "shape-shifter-curse:form_familiar_fox_fire_arrow_cooldown",
         "shape-shifter-curse:form_familiar_fox_3_jump_high",
         "shape-shifter-curse:form_disable_leg_armor",
         "shape-shifter-curse:form_disable_feet_armor",
@@ -38,7 +39,9 @@
         "shape-shifter-curse:pillager_friendly",
         "shape-shifter-curse:scare_villager",
         "shape-shifter-curse:modify_potion_stack_8",
-        "shape-shifter-curse:form_familiar_fox_3_mana"
+        "shape-shifter-curse:form_familiar_fox_3_mana",
+        "shape-shifter-curse:form_familiar_fox_2_stick_fireball",
+        "shape-shifter-curse:form_familiar_fox_2_stick_fireball_damage"
     ],
     "icon": {
         "item": "minecraft:player_head"

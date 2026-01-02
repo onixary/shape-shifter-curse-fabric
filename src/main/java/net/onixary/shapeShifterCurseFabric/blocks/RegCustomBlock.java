@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.items;
+package net.onixary.shapeShifterCurseFabric.blocks;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
