@@ -23,7 +23,7 @@ import java.util.Collection;
 import java.util.List;
 
 import static net.minecraft.item.Items.register;
-import static net.onixary.shapeShifterCurseFabric.items.RegCustomBlock.MOONDUST_CRYSTAL_GRIT;
+import static net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock.MOONDUST_CRYSTAL_GRIT;
 
 public class RegCustomItem {
     private RegCustomItem(){}

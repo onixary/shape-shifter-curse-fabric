@@ -1,0 +1,11 @@
+{
+    "type": "origins:modify_projectile_damage",
+    "damage_condition": {
+        "type": "origins:projectile",
+        "projectile": "minecraft:small_fireball"
+    },
+    "modifier": {
+        "operation": "set_total",
+        "value": 3.0
+    }
+}

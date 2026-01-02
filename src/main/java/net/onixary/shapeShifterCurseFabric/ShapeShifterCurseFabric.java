@@ -46,7 +46,7 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.Tra
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.wolf.TransformativeWolfEntity;
-import net.onixary.shapeShifterCurseFabric.items.RegCustomBlock;
+import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
 import net.onixary.shapeShifterCurseFabric.mana.ManaRegistries;
@@ -78,7 +78,6 @@ import java.util.List;
 
 import static net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager.saveForm;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.saveInstinctComp;
-import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.*;
 
 
 public class ShapeShifterCurseFabric implements ModInitializer {

@@ -40,7 +40,8 @@
         "shape-shifter-curse:scare_villager",
         "shape-shifter-curse:modify_potion_stack_8",
         "shape-shifter-curse:form_familiar_fox_3_mana",
-        "shape-shifter-curse:form_familiar_fox_2_stick_fireball"
+        "shape-shifter-curse:form_familiar_fox_2_stick_fireball",
+        "shape-shifter-curse:form_familiar_fox_2_stick_fireball_damage"
     ],
     "icon": {
         "item": "minecraft:player_head"
