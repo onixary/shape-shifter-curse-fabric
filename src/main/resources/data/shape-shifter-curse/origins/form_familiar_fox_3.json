@@ -38,7 +38,7 @@
         "shape-shifter-curse:pillager_friendly",
         "shape-shifter-curse:scare_villager",
         "shape-shifter-curse:modify_potion_stack_8",
-        "shape-shifter-curse:familiar_fox_mana"
+        "shape-shifter-curse:form_familiar_fox_3_mana"
     ],
     "icon": {
         "item": "minecraft:player_head"

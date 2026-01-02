@@ -11,10 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class ManaRegistries {
     // 不可变 防止某些天才操作同时把其他的ManaHandler给修改了 导致程序异常 当然Immutable为可选项 无论是否Immutable都支持注册 推荐为公共ManaHandler加上setImmutable
@@ -34,10 +31,6 @@ public class ManaRegistries {
                 player.sendMessage(Text.literal("[Server] 魔力值已空!").formatted(Formatting.RED));
             })
             .setImmutable();
-
-    public static final BiConsumer<ManaComponent, PlayerEntity> MH_FUNCTION_FullMana = (component, player) -> {
-        component.gainManaWithTime(Double.MAX_VALUE / 16, 10);
-    };
 
     private static final HashMap<Identifier, Function<PlayerEntity, Boolean>> manaConditionTypeRegistry = new HashMap<>();
     private static final HashMap<Identifier, ManaUtils.ModifierList> maxManaModifierRegistry = new HashMap<>();
@@ -70,7 +63,7 @@ public class ManaRegistries {
                             )
                     )
             ),
-            new ManaHandler().setOnServerInit(MH_FUNCTION_FullMana)
+            EMPTY_MANA_HANDLER
     );
 
     public static Identifier registerManaType(Identifier identifier, ManaUtils.ModifierList defaultMaxManaModifier, ManaUtils.ModifierList defaultManaRegenModifier, @Nullable ManaHandler handler) {
