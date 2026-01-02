@@ -1,0 +1,121 @@
+{
+    "type": "origins:active_self",
+    "entity_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "shape-shifter-curse:consume_mana",
+                "mana": 23
+            },
+            {
+                "type": "origins:play_sound",
+                "sound": "minecraft:item.firecharge.use",
+                "volume": 0.5
+            },
+            {
+                "type": "origins:play_sound",
+                "sound": "minecraft:block.fire.ambient",
+                "volume": 0.5
+            },
+            {
+                "type": "origins:play_sound",
+                "sound": "entity.evoker.prepare_summon",
+                "volume": 0.5
+            },
+            {
+                "type": "shape-shifter-curse:explosion_damage_entity",
+                "power": 3,
+                "entity_condition": {
+                    "type": "origins:and",
+                    "conditions": [
+                        {
+                            "type": "origins:target_condition",
+                            "condition": {
+                                "type": "origins:in_tag",
+                                "tag": "shape-shifter-curse:water_explode_immune"
+                            },
+                            "inverted": true
+                        },
+                        {
+                            "type": "origins:owner",
+                            "inverted": true
+                        }
+                    ]
+                },
+                "entity_action":
+                {
+                    "type": "origins:and",
+                    "actions": [
+                        {
+                            "type": "origins:set_on_fire",
+                            "duration": 10
+                        },
+                        {
+                            "type": "origins:damage",
+                            "amount": 7,
+                            "damage_type": "minecraft:on_fire"
+                        }
+                    ]
+                },
+                "explosion_damage_entity" : false
+            },
+            {
+                "type": "origins:spawn_particles",
+                "particle": "minecraft:flame",
+                "count": 32,
+                "speed": 0.1,
+                "force": true,
+                "spread": {
+                    "x": 1.0,
+                    "y": 0.4,
+                    "z": 1.0
+                }
+            },
+            {
+                "type": "origins:spawn_particles",
+                "particle": "minecraft:soul_fire_flame",
+                "count": 8,
+                "speed": 0.0,
+                "force": true,
+                "spread": {
+                    "x": 2.0,
+                    "y": 1.0,
+                    "z": 2.0
+                }
+            },
+            {
+                "type": "origins:spawn_particles",
+                "particle": "minecraft:flash",
+                "count": 2,
+                "speed": 0.0,
+                "force": false,
+                "spread": {
+                    "x": 0.1,
+                    "y": 0.1,
+                    "z": 0.1
+                }
+            }
+        ]
+    },
+    "entity_condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "shape-shifter-curse:has_mana",
+                "mana": 23
+            },
+            {
+                "type": "origins:air",
+                "comparison": ">",
+                "compare_to": 0
+            }
+        ]
+    },
+    "cooldown": 40,
+    "hud_render": {
+        "should_render": false
+    },
+    "key": {
+        "key": "key.origins.primary_active"
+    }
+}

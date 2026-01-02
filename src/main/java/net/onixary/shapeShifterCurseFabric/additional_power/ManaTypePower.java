@@ -71,6 +71,8 @@ public class ManaTypePower extends Power {
     public void onRespawn() {
         if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null && !isApplyed) {
             ManaUtils.gainManaTypeID(playerEntity, manaType, manaSource);
+            // 调整：复活时也会补满魔力值
+            ManaUtils.gainPlayerMana(playerEntity, Double.MAX_VALUE / 8);
             this.isApplyed = true;
         }
     }

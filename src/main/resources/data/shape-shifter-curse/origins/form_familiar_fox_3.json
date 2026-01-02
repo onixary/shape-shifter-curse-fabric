@@ -14,11 +14,11 @@
         "shape-shifter-curse:form_familiar_fox_3_no_buff_effect",
         "shape-shifter-curse:form_familiar_fox_3_no_buff_effect_other",
         "shape-shifter-curse:form_familiar_fox_3_looting",
+        "shape-shifter-curse:form_all_food_down3",
         "shape-shifter-curse:fire_and_lava_immunity",
         "shape-shifter-curse:form_familiar_fox_3_no_attack_witch",
         "shape-shifter-curse:form_familiar_fox_3_attract_to_witch2",
         "shape-shifter-curse:form_familiar_fox_3_hurt_when_attack_witch",
-        "shape-shifter-curse:form_familiar_fox_3_no_food",
         "shape-shifter-curse:form_familiar_fox_3_use_normal_creature",
         "shape-shifter-curse:form_familiar_fox_3_use_human_creature",
         "shape-shifter-curse:form_familiar_fox_3_use_sorcery_creature",
@@ -41,7 +41,12 @@
         "shape-shifter-curse:modify_potion_stack_8",
         "shape-shifter-curse:form_familiar_fox_3_mana",
         "shape-shifter-curse:form_familiar_fox_2_stick_fireball",
-        "shape-shifter-curse:form_familiar_fox_2_stick_fireball_damage"
+        "shape-shifter-curse:form_familiar_fox_2_stick_fireball_damage",
+        "shape-shifter-curse:form_familiar_fox_low_mana_exhaustion",
+        "shape-shifter-curse:form_familiar_fox_2_low_mana_debuff",
+        "shape-shifter-curse:form_familiar_fox_3_low_mana_damage",
+        "shape-shifter-curse:form_familiar_fox_3_in_fire_cost_mana",
+        "shape-shifter-curse:form_familiar_fox_3_fire_explode"
     ],
     "icon": {
         "item": "minecraft:player_head"

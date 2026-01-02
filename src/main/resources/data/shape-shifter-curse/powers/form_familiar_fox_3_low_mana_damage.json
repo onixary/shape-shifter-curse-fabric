@@ -1,0 +1,14 @@
+{
+    "type": "origins:action_over_time",
+    "entity_action": {
+        "type": "origins:damage",
+        "amount": 1,
+        "damage_type": "minecraft:starve"
+    },
+    "interval": 60,
+    "condition": {
+        "type": "shape-shifter-curse:has_mana",
+        "mana": 6,
+        "is_smaller_than": true
+    }
+}

@@ -32,7 +32,9 @@
         "shape-shifter-curse:modify_potion_stack_8",
         "shape-shifter-curse:form_familiar_fox_2_stick_fireball",
         "shape-shifter-curse:form_familiar_fox_2_stick_fireball_damage",
-        "shape-shifter-curse:form_familiar_fox_2_mana"
+        "shape-shifter-curse:form_familiar_fox_2_mana",
+        "shape-shifter-curse:form_familiar_fox_low_mana_exhaustion",
+        "shape-shifter-curse:form_familiar_fox_2_low_mana_debuff"
     ],
     "icon": {
         "item": "minecraft:player_head"

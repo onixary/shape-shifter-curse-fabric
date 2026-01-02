@@ -68,9 +68,9 @@ public class ManaUtilsApoli {
                 ShapeShifterCurseFabric.identifier("has_mana"),
                 new SerializableData()
                         .add("mana", SerializableDataTypes.DOUBLE, 0.0d)
-                        .add("Inverted", SerializableDataTypes.BOOLEAN, false),
+                        .add("is_smaller_than", SerializableDataTypes.BOOLEAN, false),
                 (data, e) -> {
-                    boolean inverted = data.get("Inverted");
+                    boolean inverted = data.get("is_smaller_than");
                     if (e instanceof PlayerEntity player) {
                         double mana = data.get("mana");
                         boolean manaAbove = ManaUtils.isPlayerManaAbove(player, mana);
@@ -83,9 +83,9 @@ public class ManaUtilsApoli {
                 ShapeShifterCurseFabric.identifier("has_mana_percent"),
                 new SerializableData()
                         .add("mana_percent", SerializableDataTypes.DOUBLE, 0.0d)
-                        .add("Inverted", SerializableDataTypes.BOOLEAN, false),
+                        .add("is_smaller_than", SerializableDataTypes.BOOLEAN, false),
                 (data, e) -> {
-                    boolean inverted = data.get("Inverted");
+                    boolean inverted = data.get("is_smaller_than");
                     if (e instanceof PlayerEntity player) {
                         double mana_percent = data.get("mana_percent");
                         boolean manaAbove = ManaUtils.getPlayerManaPercent(player, 0.0d) >= mana_percent;
