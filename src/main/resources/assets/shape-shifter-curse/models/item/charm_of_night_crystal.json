@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "shape-shifter-curse:item/charm_of_night_crystal"
+  }
+}
