@@ -26,16 +26,34 @@ public class ManaTypePower extends Power {
         }
     }
 
+    /*
+    // 在能力获取 + 玩家进游戏时
     @Override
     public void onAdded() {
+        return;
+    }
+
+    // 在能力移除 + 玩家退游戏时
+    @Override
+    public void onRemoved() {
+        return;
+    }
+     */
+
+    // 在能力获取
+    @Override
+    public void onGained() {
         if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null) {
-            ManaUtils.gainManaTypeID(playerEntity, manaType, manaSource);
-            ManaUtils.gainPlayerManaWithTime(playerEntity, Double.MAX_VALUE / 8, 8);  // 没有防溢出 别直接用Double.MAX_VALUE
+            if (!ManaUtils.isManaTypeExists(playerEntity, manaType, manaSource)) {
+                ManaUtils.gainManaTypeID(playerEntity, manaType, manaSource);
+                ManaUtils.gainPlayerManaWithTime(playerEntity, Double.MAX_VALUE / 8, 8);  // 没有防溢出 别直接用Double.MAX_VALUE
+            }
         }
     }
 
+    // 在能力移除
     @Override
-    public void onRemoved() {
+    public void onLost() {
         if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null) {
             ManaUtils.loseManaTypeID(playerEntity, manaType, manaSource);
         }

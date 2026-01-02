@@ -128,6 +128,17 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
         this.__setManaTypeID__(manaTypeID);
     }
 
+    public boolean isManaTypeExists(@NotNull Identifier manaTypeID, @Nullable Identifier source) {
+        if (ManaTypeSourceMap.containsKey(manaTypeID)) {
+            if (source == null) {
+                return true;
+            } else {
+                return ManaTypeSourceMap.get(manaTypeID).contains(source);
+            }
+        }
+        return false;
+    }
+
     private void __reloadManaHandler__(@Nullable Identifier manaTypeID) {
         this.manaHandler = ManaRegistries.getManaHandlerOrDefault(manaTypeID);
     }
