@@ -1,0 +1,49 @@
+{
+    "type": "origins:multiple",
+
+    "mining_claw_digging_up": {
+        "type": "origins:modify_break_speed",
+        "condition": {
+            "type": "origins:inventory",
+            "process_mode": "items",
+            "item_condition": {
+                "type": "origins:ingredient",
+                "ingredient": {
+                    "item": "shape-shifter-curse:diamond_mining_claw"
+                }
+            },
+            "slots": [
+                "weapon.mainhand"
+            ]
+        },
+        "hardness_modifier": {
+                "operation": "max_total",
+                "value": 5
+        },
+        "modifier": {
+            "operation": "multiply_base",
+            "value": 12.0
+        }
+    },
+
+    "mining_claw_attack_up": {
+        "type": "origins:modify_damage_dealt",
+        "condition": {
+            "type": "origins:inventory",
+            "process_mode": "items",
+            "item_condition": {
+                "type": "origins:ingredient",
+                "ingredient": {
+                    "item": "shape-shifter-curse:diamond_mining_claw"
+                }
+            },
+            "slots": [
+                "weapon.mainhand"
+            ]
+        },
+        "modifier": {
+            "operation": "addition",
+            "value": 10.0
+        }
+    }
+}

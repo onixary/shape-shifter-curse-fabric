@@ -136,10 +136,12 @@ public class BatBlockAttachPower extends Power {
     }
 
     public boolean tryAttach(PlayerEntity player, BlockHitResult hitResult) {
-        //System.out.println("Debug: tryAttach called - isAttached=" + isAttached +
-        //        ", hasMainHandItem=" + !player.getMainHandStack().isEmpty());
 
-        if (isAttached || !player.getMainHandStack().isEmpty() || player.isOnGround()) {
+        // 空手判定移入condition中来适配物品特例
+//        if (isAttached || !player.getMainHandStack().isEmpty() || player.isOnGround()) {
+//            return false;
+//        }
+        if (isAttached || player.isOnGround()) {
             return false;
         }
 
@@ -239,7 +241,7 @@ public class BatBlockAttachPower extends Power {
         // 重置物理状态
         player.setOnGround(false);
         player.setVelocity(Vec3d.ZERO);
-        player.addVelocity(0, 0.2, 0);
+        player.addVelocity(0, 0.4f, 0);
         if(isByJump){
             // 获取玩家面向方向的水平向量
             float yaw = player.getYaw();
@@ -251,7 +253,8 @@ public class BatBlockAttachPower extends Power {
 
             // 设置推进速度（可以调整0.5这个数值来改变推进力度）
             double jumpSpeed = 1.25f;
-            player.addVelocity(dirX * jumpSpeed, 0, dirZ * jumpSpeed);
+            // 同时添加向上的速度
+            player.addVelocity(dirX * jumpSpeed, 0.4f, dirZ * jumpSpeed);
         }
         player.velocityDirty = true;
         player.velocityModified = true;

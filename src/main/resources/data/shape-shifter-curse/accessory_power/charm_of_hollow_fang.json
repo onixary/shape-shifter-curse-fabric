@@ -1,0 +1,45 @@
+{
+  "shape-shifter-curse:charm_of_hollow_fang": {
+    "accessory_powers": [],
+    "all_form": {
+      "add": [],
+      "remove": []
+    },
+    "forms": {
+      "shape-shifter-curse:bat_0": {
+        "add": [
+          "shape-shifter-curse:form_bat_charm_of_hollow_fang_trinket"
+        ],
+        "remove": [
+        ]
+      },
+      "shape-shifter-curse:bat_1": {
+        "add": [
+          "shape-shifter-curse:form_bat_charm_of_hollow_fang_trinket"
+        ],
+        "remove": [
+          "shape-shifter-curse:form_meat_food_down",
+          "shape-shifter-curse:form_vegetarian_food_up"
+        ]
+      },
+      "shape-shifter-curse:bat_2": {
+        "add": [
+          "shape-shifter-curse:form_bat_charm_of_hollow_fang_trinket"
+        ],
+        "remove": [
+          "shape-shifter-curse:form_vegetarian",
+          "shape-shifter-curse:form_vegetarian_food_up"
+        ]
+      },
+      "shape-shifter-curse:bat_3": {
+        "add": [
+          "shape-shifter-curse:form_bat_charm_of_hollow_fang_trinket"
+        ],
+        "remove": [
+          "shape-shifter-curse:form_vegetarian",
+          "shape-shifter-curse:form_vegetarian_food_up"
+        ]
+      }
+    }
+  }
+}

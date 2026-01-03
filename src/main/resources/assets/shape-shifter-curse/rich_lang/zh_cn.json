@@ -117,7 +117,7 @@
   "item.shape-shifter-curse.amulet_bracelet": ["守御脚环"],
   "item.shape-shifter-curse.amulet_bracelet.tooltip": ["[使魔红狐形态]不再会受到女巫与唤魔者的强制影响，可以从敌对生物吸取魔力"],
   "item.shape-shifter-curse.attach_hook": ["固着抓钩"],
-  "item.shape-shifter-curse.attach_hook.tooltip": ["[蝙蝠形态]武器与工具不再会脱手，不过每次使用的耐久度消耗稍微提高"],
+  "item.shape-shifter-curse.attach_hook.tooltip": ["[蝙蝠形态]武器与工具不再会脱手，不过其耐久度消耗提高"],
   "item.shape-shifter-curse.charm_of_hollow_fang": ["空心牙吊坠"],
   "item.shape-shifter-curse.charm_of_hollow_fang.tooltip": ["[蝙蝠形态]你的攻击可以吸取生命值与饱食度，但是不再能从食物中获取恢复"],
   "item.shape-shifter-curse.charm_of_night_crystal": ["黑夜水晶吊坠"],
@@ -138,9 +138,9 @@
   "item.shape-shifter-curse.moondust_crystal_shard.tooltip": ["精炼后的月尘结晶，可用于制作提升形态能力的饰品与工具"],
   "item.shape-shifter-curse.ectoplasm_rag": ["灵质碎布"],
   "item.shape-shifter-curse.bottled_snowfall": ["瓶装暴雪"],
-  "item.shape-shifter-curse.bottled_snowfall.tooltip": ["[雪狐形态工具]以一些饱食度为代价，这个装置可以利用你的冰之魔力凝结并发射雪球"],
+  "item.shape-shifter-curse.bottled_snowfall.tooltip": ["[雪狐形态工具]需要强大的冰之魔力来使用。以一些饱食度为代价，凝结并发射雪球"],
   "item.shape-shifter-curse.diamond_mining_claw": ["金刚石握爪"],
-  "item.shape-shifter-curse.diamond_mining_claw.tooltip": ["[蝙蝠形态工具]增加挖掘效率与伤害，持有时不会影响你攀附墙壁的能力"],
+  "item.shape-shifter-curse.diamond_mining_claw.tooltip": ["[蝙蝠形态工具]需要有力的前爪来使用。增加挖掘效率与伤害，握持时也可以攀附墙壁"],
   "block.shape-shifter-curse.moondust_crystal_grit": ["月尘晶砾"],
   "screen.shape-shifter-curse.book_of_shape_shifter.start_content_text":
   [

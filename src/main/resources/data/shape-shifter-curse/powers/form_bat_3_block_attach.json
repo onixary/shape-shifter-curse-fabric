@@ -1,5 +1,32 @@
 {
     "type": "shape-shifter-curse:bat_block_attach",
+    "condition": {
+        "type": "origins:or",
+        "conditions": [
+            {
+                "type": "origins:inventory",
+                "process_mode": "items",
+                "item_condition": {
+                    "type": "origins:ingredient",
+                    "ingredient": {
+                        "item": "shape-shifter-curse:diamond_mining_claw"
+                    }
+                },
+                "slots": [
+                    "weapon.mainhand"
+                ]
+            },
+            {
+                "type": "origins:inventory",
+                "process_mode": "items",
+                "comparison": "==",
+                "compare_to": 0,
+                "slots": [
+                    "weapon.mainhand"
+                ]
+            }
+        ]
+    },
     "block_condition": {
         "type": "origins:and",
         "conditions": [
