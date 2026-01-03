@@ -17,35 +17,31 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 public class TrinketsCondition {
-    public static boolean isEquipped(Entity entity, Identifier trinketID, boolean Inverted) {
+    public static boolean isEquipped(Entity entity, Identifier trinketID) {
         if (trinketID == null) {
-            return Inverted;
+            return false;
         }
         Optional<Item>  trinketItem = Registries.ITEM.getOrEmpty(trinketID);
         if (!trinketItem.isPresent()) {
-            return Inverted;
+            return false;
         }
         if (entity instanceof LivingEntity livingEntity) {
             Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(livingEntity);
             if (!component.isPresent()) {
-                return Inverted;
+                return false;
             }
             boolean IsEquipped = component.get().isEquipped(trinketItem.get());
-            if (Inverted) {
-                IsEquipped = !IsEquipped;
-            }
             return IsEquipped;
         }
-        return Inverted;
+        return false;
     }
 
     public static void registerCondition(Consumer<ConditionFactory<Entity>> registerFunc) {
         registerFunc.accept(new ConditionFactory<Entity>(
                 ShapeShifterCurseFabric.identifier("equip_accessory"),  // 为了之后写双端不用改 还是使用equip_accessories吧
                 new SerializableData()
-                        .add("accessory", SerializableDataTypes.IDENTIFIER, null)
-                        .add("Inverted", SerializableDataTypes.BOOLEAN, false),
-                (data, e) -> isEquipped(e, data.get("accessory"), data.get("Inverted"))
+                        .add("accessory", SerializableDataTypes.IDENTIFIER, null),
+                (data, e) -> isEquipped(e, data.get("accessory"))
         ));
     }
 }
