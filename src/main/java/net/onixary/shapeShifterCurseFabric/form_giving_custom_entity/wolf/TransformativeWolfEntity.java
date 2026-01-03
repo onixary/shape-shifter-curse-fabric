@@ -17,6 +17,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
@@ -169,5 +170,10 @@ public class TransformativeWolfEntity extends WolfEntity {
     @Override
     public void setOwner(PlayerEntity player) {
         return;
+    }
+
+    @Override
+    protected Identifier getLootTableId() {
+        return new Identifier(ShapeShifterCurseFabric.MOD_ID, "entities/t_wolf");
     }
 }
