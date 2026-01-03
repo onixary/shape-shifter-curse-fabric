@@ -5,10 +5,14 @@ import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.apoli.power.factory.action.ActionFactory;
+import io.github.apace100.apoli.util.MiscUtil;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageType;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.Box;
@@ -23,6 +27,7 @@ public class SneakingJumpClashPower extends Power {
     private final Consumer<Pair<Entity, Entity>> bientityAction;
     private final int checkDuration;
     private final double expansionDistance;
+    private final float damage;
     
     private boolean isActive = false;
     private int activeTicks = 0;
@@ -30,11 +35,12 @@ public class SneakingJumpClashPower extends Power {
 
     public SneakingJumpClashPower(PowerType<?> type, LivingEntity entity,
                                   Consumer<Pair<Entity, Entity>> bientityAction,
-                                 int checkDuration, double expansionDistance) {
+                                 int checkDuration, double expansionDistance, float damage) {
         super(type, entity);
         this.bientityAction = bientityAction;
         this.checkDuration = checkDuration;
         this.expansionDistance = expansionDistance;
+        this.damage = damage;
         this.setTicking(true);
     }
 
@@ -95,6 +101,9 @@ public class SneakingJumpClashPower extends Power {
             if (bientityAction != null) {
                 this.bientityAction.accept(new Pair<>(player, target));
             }
+
+            // 触发伤害
+            target.damage(player.getDamageSources().playerAttack(player), damage);
             return true; // 发现碰撞，返回true
         }
         
@@ -107,13 +116,15 @@ public class SneakingJumpClashPower extends Power {
                 new SerializableData()
                         .add("bientity_action", ApoliDataTypes.BIENTITY_ACTION, null)
                         .add("check_duration", SerializableDataTypes.INT, 20)
-                        .add("expansion_distance", SerializableDataTypes.DOUBLE, 1.0),
+                        .add("expansion_distance", SerializableDataTypes.DOUBLE, 1.0)
+                        .add("damage", SerializableDataTypes.FLOAT, 1.0f),
                 data -> (type, entity) -> new SneakingJumpClashPower(
                         type,
                         entity,
                         data.get("bientity_action"),
                         data.getInt("check_duration"),
-                        data.getDouble("expansion_distance")
+                        data.getDouble("expansion_distance"),
+                        data.getFloat("damage")
                 )
         ).allowCondition();
     }

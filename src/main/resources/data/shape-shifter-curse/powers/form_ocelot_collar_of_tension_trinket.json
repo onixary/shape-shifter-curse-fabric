@@ -60,11 +60,6 @@
                   "y": 0.5,
                   "z": 0.5
                 }
-              },
-              {
-                "type": "origins:damage",
-                "amount": 9.0,
-                "damage_type": "minecraft:player_attack"
               }
             ]
           }
@@ -109,6 +104,7 @@
       ]
     },
     "check_duration": 15,
-    "expansion_distance": 1.0
+    "expansion_distance": 1.0,
+    "damage": 9
   }
 }
