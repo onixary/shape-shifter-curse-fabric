@@ -8,6 +8,6 @@
     "condition": {
         "type": "shape-shifter-curse:has_mana_percent",
         "mana_percent": 0.333,
-        "is_smaller_than": true
+        "inverted": true
     }
 }

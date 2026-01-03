@@ -5,7 +5,7 @@
         "actions": [
             {
                 "type": "shape-shifter-curse:consume_mana",
-                "mana": 23
+                "mana": 14
             },
             {
                 "type": "origins:play_sound",
@@ -60,16 +60,32 @@
                 "explosion_damage_entity" : false
             },
             {
-                "type": "origins:spawn_particles",
+                "type": "shape-shifter-curse:spawn_particles_in_circle",
                 "particle": "minecraft:flame",
-                "count": 32,
-                "speed": 0.1,
+                "count": 2,
+                "speed": 0,
                 "force": true,
                 "spread": {
-                    "x": 1.0,
-                    "y": 0.4,
-                    "z": 1.0
-                }
+                    "x": 0.4,
+                    "y": 0.6,
+                    "z": 0.4
+                },
+                "radius": 4.0,
+                "sample_count": 32
+            },
+            {
+                "type": "shape-shifter-curse:spawn_particles_in_circle",
+                "particle": "minecraft:flame",
+                "count": 1,
+                "speed": 0.04,
+                "force": true,
+                "spread": {
+                    "x": 0.2,
+                    "y": 0.3,
+                    "z": 0.2
+                },
+                "radius": 1.5,
+                "sample_count": 8
             },
             {
                 "type": "origins:spawn_particles",
@@ -82,18 +98,6 @@
                     "y": 1.0,
                     "z": 2.0
                 }
-            },
-            {
-                "type": "origins:spawn_particles",
-                "particle": "minecraft:flash",
-                "count": 2,
-                "speed": 0.0,
-                "force": false,
-                "spread": {
-                    "x": 0.1,
-                    "y": 0.1,
-                    "z": 0.1
-                }
             }
         ]
     },
@@ -102,7 +106,7 @@
         "conditions": [
             {
                 "type": "shape-shifter-curse:has_mana",
-                "mana": 23
+                "mana": 14
             },
             {
                 "type": "origins:air",
