@@ -13,7 +13,8 @@
     "example_namespace:custom_eat_amethyst_shard",
     "example_namespace:custom_night_vision",
     "example_namespace:familiar_fox_mana",
-    "example_namespace:sneak_strength"
+    "example_namespace:sneak_strength",
+    "example_namespace:hiss_phantom"
   ],
   "icon": {
     "item": "minecraft:player_head"

@@ -55,7 +55,8 @@
     "ArrowEntityMixin",
     "LingeringPotionItemMixin",
     "TippedArrowItemMixin",
-    "BrewingRecipeRegistryMixin"
+    "BrewingRecipeRegistryMixin",
+    "HissPhantomMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",
