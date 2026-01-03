@@ -26,7 +26,8 @@
         "shape-shifter-curse:form_ocelot_2_barepaw_sweeping",
         "shape-shifter-curse:form_ocelot_sound",
         "shape-shifter-curse:form_ocelot_sound_hurt",
-        "shape-shifter-curse:no_step_sound"
+        "shape-shifter-curse:no_step_sound",
+        "shape-shifter-curse:form_ocelot_hiss_phantom"
     ],
     "icon": {
         "item": "minecraft:player_head"
