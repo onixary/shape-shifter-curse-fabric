@@ -30,30 +30,6 @@
                             "saturation": 0.3
                         },
                         {
-                            "type": "origins:apply_effect",
-                            "effect": {
-                                "effect": "minecraft:blindness",
-                                "amplifier": 1,
-                                "duration": 80
-                            }
-                        },
-                        {
-                            "type": "origins:apply_effect",
-                            "effect": {
-                                "effect": "minecraft:slowness",
-                                "amplifier": 3,
-                                "duration": 80
-                            }
-                        },
-                        {
-                            "type": "origins:apply_effect",
-                            "effect": {
-                                "effect": "minecraft:weakness",
-                                "amplifier": 1,
-                                "duration": 200
-                            }
-                        },
-                        {
                             "type": "origins:trigger_cooldown",
                             "power": "shape-shifter-curse:form_familiar_fox_use_entity_cooldown"
                         },

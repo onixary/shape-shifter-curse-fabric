@@ -1,0 +1,46 @@
+{
+  "shape-shifter-curse:amulet_bracelet": {
+    "accessory_powers": [],
+    "all_form": {
+      "add": [],
+      "remove": []
+    },
+    "forms": {
+      "shape-shifter-curse:familiar_fox_0": {
+        "add": [
+        ],
+        "remove": [
+          "shape-shifter-curse:form_familiar_fox_0_dizzy_when_attack_witch"
+        ]
+      },
+      "shape-shifter-curse:familiar_fox_1": {
+        "add": [
+        ],
+        "remove": [
+          "shape-shifter-curse:form_familiar_fox_1_dizzy_when_attack_illager"
+        ]
+      },
+      "shape-shifter-curse:familiar_fox_2": {
+        "add": [
+          "shape-shifter-curse:form_familiar_fox_amulet_bracelet_trinket"
+        ],
+        "remove": [
+          "shape-shifter-curse:form_familiar_fox_2_attract_to_witch",
+          "shape-shifter-curse:form_familiar_fox_3_no_attack_witch",
+          "shape-shifter-curse:form_familiar_fox_3_use_enemy_creature"
+        ]
+      },
+      "shape-shifter-curse:familiar_fox_3": {
+        "add": [
+          "shape-shifter-curse:form_familiar_fox_amulet_bracelet_trinket"
+        ],
+        "remove": [
+          "shape-shifter-curse:form_familiar_fox_3_no_attack_witch",
+          "shape-shifter-curse:form_familiar_fox_3_attract_to_witch2",
+          "shape-shifter-curse:form_familiar_fox_3_hurt_when_attack_witch",
+          "shape-shifter-curse:form_familiar_fox_3_use_enemy_creature"
+        ]
+      }
+    }
+  }
+}

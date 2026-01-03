@@ -47,7 +47,7 @@
         "shape-shifter-curse:form_familiar_fox_2_low_mana_debuff",
         "shape-shifter-curse:form_familiar_fox_3_low_mana_damage",
         "shape-shifter-curse:form_familiar_fox_3_in_fire_cost_mana",
-        "shape-shifter-curse:form_familiar_fox_3_fire_explode"
+        "shape-shifter-curse:form_familiar_fox_3_fire_ring"
     ],
     "icon": {
         "item": "minecraft:player_head"

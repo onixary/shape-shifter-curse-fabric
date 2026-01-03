@@ -115,7 +115,7 @@
   "item.shape-shifter-curse.netherite_morphscale_anklet": ["下界合金塑形脚镯"],
   "item.shape-shifter-curse.morphscale_armor.tooltip": ["这些护甲中融入的月尘魔法可以自动适应你的形态"],
   "item.shape-shifter-curse.amulet_bracelet": ["守御脚环"],
-  "item.shape-shifter-curse.amulet_bracelet.tooltip": ["[使魔红狐形态]不再会受到女巫与唤魔者的强制影响，可以从敌对生物吸取魔力"],
+  "item.shape-shifter-curse.amulet_bracelet.tooltip": ["[使魔红狐形态]你不再会受到女巫与唤魔者的强制影响，从敌对生物吸取魔力时不再受到副作用"],
   "item.shape-shifter-curse.attach_hook": ["固着抓钩"],
   "item.shape-shifter-curse.attach_hook.tooltip": ["[蝙蝠形态]武器与工具不再会脱手，不过其耐久度消耗提高"],
   "item.shape-shifter-curse.charm_of_hollow_fang": ["空心牙吊坠"],

@@ -62,8 +62,8 @@
             {
                 "type": "shape-shifter-curse:spawn_particles_in_circle",
                 "particle": "minecraft:flame",
-                "count": 2,
-                "speed": 0,
+                "count": 1,
+                "speed": 0.01,
                 "force": true,
                 "spread": {
                     "x": 0.4,
@@ -71,7 +71,7 @@
                     "z": 0.4
                 },
                 "radius": 4.0,
-                "sample_count": 32
+                "sample_count": 64
             },
             {
                 "type": "shape-shifter-curse:spawn_particles_in_circle",
