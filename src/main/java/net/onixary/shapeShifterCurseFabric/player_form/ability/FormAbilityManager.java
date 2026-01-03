@@ -87,7 +87,6 @@ public class FormAbilityManager {
             // 一般是没有对应的origin
             ShapeShifterCurseFabric.LOGGER.error("Failed to apply origin extra power: ", e);
         }
-        TrinketUtils.ReApplyAccessoryPowerOnPlayerFormChange(player);
         //applyPower(player, config.getPowerId());
         // EffectManager.clearTransformativeEffect(player);
         // 清空Status 如果新形态无法获得变形效果
@@ -97,6 +96,8 @@ public class FormAbilityManager {
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
         // 存储
         FormAbilityManager.saveForm(player);
+
+        TrinketUtils.ReApplyAccessoryPowerOnPlayerFormChange(player);
 
         // 添加网络同步：通知客户端形态已变化
         if (!player.getWorld().isClient() && player instanceof ServerPlayerEntity serverPlayer) {
