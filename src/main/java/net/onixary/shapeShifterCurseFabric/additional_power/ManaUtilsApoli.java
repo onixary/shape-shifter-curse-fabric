@@ -67,31 +67,27 @@ public class ManaUtilsApoli {
         registerFunc.accept(new ConditionFactory<Entity>(
                 ShapeShifterCurseFabric.identifier("has_mana"),
                 new SerializableData()
-                        .add("mana", SerializableDataTypes.DOUBLE, 0.0d)
-                        .add("is_smaller_than", SerializableDataTypes.BOOLEAN, false),
+                        .add("mana", SerializableDataTypes.DOUBLE, 0.0d),
                 (data, e) -> {
-                    boolean inverted = data.get("is_smaller_than");
                     if (e instanceof PlayerEntity player) {
                         double mana = data.get("mana");
                         boolean manaAbove = ManaUtils.isPlayerManaAbove(player, mana);
-                        return manaAbove ^ inverted;
+                        return manaAbove;
                     }
-                    return inverted;
+                    return false;
                 }
         ));
         registerFunc.accept(new ConditionFactory<Entity>(
                 ShapeShifterCurseFabric.identifier("has_mana_percent"),
                 new SerializableData()
-                        .add("mana_percent", SerializableDataTypes.DOUBLE, 0.0d)
-                        .add("is_smaller_than", SerializableDataTypes.BOOLEAN, false),
+                        .add("mana_percent", SerializableDataTypes.DOUBLE, 0.0d),
                 (data, e) -> {
-                    boolean inverted = data.get("is_smaller_than");
                     if (e instanceof PlayerEntity player) {
                         double mana_percent = data.get("mana_percent");
                         boolean manaAbove = ManaUtils.getPlayerManaPercent(player, 0.0d) >= mana_percent;
-                        return manaAbove ^ inverted;
+                        return manaAbove;
                     }
-                    return inverted;
+                    return false;
                 }
         ));
     }

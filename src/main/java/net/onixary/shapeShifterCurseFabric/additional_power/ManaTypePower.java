@@ -16,7 +16,6 @@ import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 public class ManaTypePower extends Power {
     private @Nullable Identifier manaType = null;
     private @Nullable Identifier manaSource = null;
-    private boolean isApplyed = false;
 
     public ManaTypePower(PowerType<?> type, LivingEntity entity, @Nullable Identifier manaType, @Nullable Identifier manaSource) {
         super(type, entity);
@@ -29,51 +28,48 @@ public class ManaTypePower extends Power {
     }
 
 
-    // 在能力获取 + 玩家进游戏时
     @Override
     public void onAdded() {
-        if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null && !isApplyed) {
-            ManaUtils.gainManaTypeID(playerEntity, manaType, manaSource);
-            this.isApplyed = true;
+        // 写个保底 治标不治本
+        if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null) {
+            if (!ManaUtils.isManaTypeExists(playerEntity, manaType, manaSource)) {
+                ManaUtils.gainManaTypeID(playerEntity, manaType, manaSource);
+            }
         }
     }
-
-    /*
-    // 在能力移除 + 玩家退游戏时
-    @Override
-    public void onRemoved() {
-        return;
-    }
-     */
 
     // 在能力获取
     @Override
     public void onGained() {
-        if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null && !isApplyed) {
+        if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null) {
             if (!ManaUtils.isManaTypeExists(playerEntity, manaType, manaSource)) {
                 ManaUtils.gainManaTypeID(playerEntity, manaType, manaSource);
-                ManaUtils.gainPlayerManaWithTime(playerEntity, Double.MAX_VALUE / 8, 8);  // 没有防溢出 别直接用Double.MAX_VALUE
-                this.isApplyed = true;
             }
+            // 获得 Power 时补满魔力
+            ManaUtils.gainPlayerMana(playerEntity, Double.MAX_VALUE / 8);
         }
     }
 
     // 在能力移除
     @Override
     public void onLost() {
-        if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null && isApplyed) {
-            ManaUtils.loseManaTypeID(playerEntity, manaType, manaSource);
-            this.isApplyed = false;
+        // 不知道为什么有时Apoli会在玩家死亡时调用onLost 而且在我(XuHaoNan)电脑上复现概率极低 没法测具体原因 先写个治标不治本的解决方案
+        if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null) {
+            if (ManaUtils.isManaTypeExists(playerEntity, manaType, manaSource)) {
+                ManaUtils.loseManaTypeID(playerEntity, manaType, manaSource);
+            }
         }
     }
 
     @Override
     public void onRespawn() {
-        if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null && !isApplyed) {
-            ManaUtils.gainManaTypeID(playerEntity, manaType, manaSource);
+        // 写个保底 治标不治本
+        if (this.entity instanceof ServerPlayerEntity playerEntity && manaType != null) {
+            if (!ManaUtils.isManaTypeExists(playerEntity, manaType, manaSource)) {
+                ManaUtils.gainManaTypeID(playerEntity, manaType, manaSource);
+            }
             // 调整：复活时也会补满魔力值
             ManaUtils.gainPlayerMana(playerEntity, Double.MAX_VALUE / 8);
-            this.isApplyed = true;
         }
     }
 

@@ -55,6 +55,13 @@ public class ManaAttributePower extends Power {
         }
     }
 
+
+    @Override
+    public void onRespawn() {
+        // 同样与 ManaTypePower 一样写个保底
+        this.onAdded();
+    }
+
     public static PowerFactory<?> createFactory() {
         return new PowerFactory<>(
                 ShapeShifterCurseFabric.identifier("mana_attribute"),
