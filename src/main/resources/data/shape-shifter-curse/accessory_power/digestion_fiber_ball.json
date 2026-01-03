@@ -1,0 +1,41 @@
+{
+  "shape-shifter-curse:digestion_fiber_ball": {
+    "accessory_powers": [],
+    "all_form": {
+      "add": [],
+      "remove": []
+    },
+    "forms": {
+      "shape-shifter-curse:ocelot_0": {
+        "add": [
+        ],
+        "remove": [
+        ]
+      },
+      "shape-shifter-curse:ocelot_1": {
+        "add": [
+          "shape-shifter-curse:form_ocelot_digestion_fiber_ball_trinket"
+        ],
+        "remove": [
+          "shape-shifter-curse:form_carnivore"
+        ]
+      },
+      "shape-shifter-curse:ocelot_2": {
+        "add": [
+          "shape-shifter-curse:form_ocelot_digestion_fiber_ball_trinket"
+        ],
+        "remove": [
+          "shape-shifter-curse:form_ocelot_2_raw_meat_only"
+        ]
+      },
+      "shape-shifter-curse:ocelot_3": {
+        "add": [
+          "shape-shifter-curse:form_ocelot_digestion_fiber_ball_trinket"
+        ],
+        "remove": [
+          "shape-shifter-curse:form_ocelot_2_raw_meat_only"
+        ]
+      }
+    }
+  }
+}

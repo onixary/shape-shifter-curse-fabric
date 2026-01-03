@@ -1,0 +1,114 @@
+{
+  "type": "origins:multiple",
+
+  "bare_paw_attack": {
+    "type": "origins:modify_damage_dealt",
+    "condition": {
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:inventory",
+          "process_mode": "items",
+          "item_condition": {
+            "type": "origins:harvest_level",
+            "comparison": "<=",
+            "compare_to": 1
+          },
+          "slots": [
+            "weapon.mainhand"
+          ]
+        },
+        {
+          "type": "origins:inventory",
+          "process_mode": "items",
+          "comparison": "==",
+          "compare_to": 0,
+          "slots": [
+            "weapon.mainhand"
+          ]
+        }
+      ]
+    },
+    "modifier": {
+      "operation": "addition",
+      "value": 9.0
+    }
+  },
+
+  "sneaking_jump_clash": {
+    "type": "shape-shifter-curse:sneaking_jump_clash",
+    "bientity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:add_velocity",
+          "z": 2.0
+        },
+        {
+          "type": "origins:target_action",
+          "action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:spawn_particles",
+                "particle": "minecraft:crit",
+                "count": 8,
+                "speed": 0.0,
+                "force": true,
+                "spread": {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "z": 0.5
+                }
+              },
+              {
+                "type": "origins:damage",
+                "amount": 9.0,
+                "damage_type": "minecraft:player_attack"
+              }
+            ]
+          }
+        },
+        {
+          "type": "origins:actor_action",
+          "action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:add_velocity",
+                "z": -0.3,
+                "space": "local_horizontal_normalized"
+              },
+              {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.goat.ram_impact",
+                "volume": 0.5,
+                "pitch": 1.2
+              },
+              {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.player.attack.sweep",
+                "volume": 0.5,
+                "pitch": 1.0
+              },
+              {
+                "type": "origins:spawn_particles",
+                "particle": "minecraft:sweep_attack",
+                "count": 3,
+                "speed": 0.0,
+                "force": true,
+                "spread": {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "z": 0.5
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "check_duration": 15,
+    "expansion_distance": 1.0
+  }
+}
