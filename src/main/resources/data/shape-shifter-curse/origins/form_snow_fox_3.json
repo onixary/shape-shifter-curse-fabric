@@ -29,7 +29,9 @@
         "shape-shifter-curse:form_disable_feet_armor",
         "shape-shifter-curse:form_familiar_fox_sound_hurt",
         "shape-shifter-curse:form_familiar_fox_sound",
-        "shape-shifter-curse:prevent_berry_effect"
+        "shape-shifter-curse:prevent_berry_effect",
+        "shape-shifter-curse:form_snow_fox_bottled_snowfall_tool",
+        "shape-shifter-curse:form_snow_fox_bottled_snowfall_cooldown"
     ],
     "icon": {
         "item": "minecraft:player_head"

@@ -131,7 +131,7 @@
   "item.shape-shifter-curse.digestion_fiber_ball": ["消化毛球"],
   "item.shape-shifter-curse.digestion_fiber_ball.tooltip": ["[豹猫形态]让你可以消化熟肉与素食，不过它们的恢复效率依然较低"],
   "item.shape-shifter-curse.frost_pawglove": ["结霜护爪"],
-  "item.shape-shifter-curse.frost_pawglove.tooltip": ["[雪狐形态]你投掷的雪球在命中时会对击中点周围范围造成迟缓效果，但是伤害有所降低"],
+  "item.shape-shifter-curse.frost_pawglove.tooltip": ["[雪狐形态]需要强大的冰之魔力来发挥作用。你投掷的雪球会对命中范围造成迟缓效果，但是伤害降低"],
   "item.shape-shifter-curse.withered_bandage": ["凋零裹布"],
   "item.shape-shifter-curse.withered_bandage.tooltip": ["[胡狼形态]你受击时获得的凋零效果等级降低，但是持续时间更长"],
   "item.shape-shifter-curse.moondust_crystal_shard": ["月尘纯晶"],
