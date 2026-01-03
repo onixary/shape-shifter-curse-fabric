@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    "GMI",
+    "   "
+  ],
+  "key": {
+    "M": {
+      "item": "shape-shifter-curse:moondust_crystal_shard"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "G": {
+      "item": "minecraft:ghast_tear"
+    },
+    "I": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "result": {
+    "item": "shape-shifter-curse:collar_of_whiskers",
+    "count": 1
+  }
+}
