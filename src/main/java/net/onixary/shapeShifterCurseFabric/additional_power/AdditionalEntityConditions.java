@@ -11,6 +11,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registry;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 
 public class AdditionalEntityConditions {
@@ -27,6 +29,17 @@ public class AdditionalEntityConditions {
                 (data, e) -> {
                     if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
                         return ClientUtils.CanDisplayGUI();
+                    }
+                    return true;
+                }
+        ));
+        register(new ConditionFactory<Entity>(
+                ShapeShifterCurseFabric.identifier("enable_random_sound"),
+                new SerializableData(),
+                (data, e) -> {
+                    if (e instanceof PlayerEntity player) {
+                        PlayerSkinComponent skinComponent = RegPlayerSkinComponent.SKIN_SETTINGS.get(e);
+                        return skinComponent.isEnableFormRandomSound();
                     }
                     return true;
                 }

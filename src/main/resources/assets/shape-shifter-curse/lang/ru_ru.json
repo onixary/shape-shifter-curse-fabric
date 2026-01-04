@@ -384,5 +384,6 @@
     "tooltip.shape_shifter_curse.potion_target_form": "Target Form: ",
     "itemGroup.shape_shifter_curse.sscitems": "Shape Shifter Curse",
     "category.shape-shifter-curse":"Shape Shifter Curse",
-    "key.shape-shifter-curse.make_sound":"Make Sound"
+    "key.shape-shifter-curse.make_sound":"Make Sound",
+    "text.autoconfig.shape-shifter-curse-custom.option.enable_form_random_sound": "Enable Form Random Sound"
 }

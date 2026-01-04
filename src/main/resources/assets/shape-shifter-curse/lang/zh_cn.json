@@ -376,5 +376,6 @@
     "text.autoconfig.shape-shifter-curse-custom.option.primaryGreyReverse": "主要色灰度反转",
     "text.autoconfig.shape-shifter-curse-custom.option.accent1GreyReverse": "重点色1灰度反转",
     "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "重点色2灰度反转",
+    "text.autoconfig.shape-shifter-curse-custom.option.enable_form_random_sound": "启用形态随机叫声",
     "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_config": "自动向服务器同步配置"
 }

@@ -661,5 +661,6 @@
   "text.autoconfig.shape-shifter-curse-custom.option.primaryGreyReverse": "Primary Grayscale Reverse",
   "text.autoconfig.shape-shifter-curse-custom.option.accent1GreyReverse": "Accent 1 Grayscale Reverse",
   "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "Accent 2 Grayscale Reverse",
+  "text.autoconfig.shape-shifter-curse-custom.option.enable_form_random_sound": "Enable Form Random Sound",
   "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_config": "Auto Sync Config"
 }
