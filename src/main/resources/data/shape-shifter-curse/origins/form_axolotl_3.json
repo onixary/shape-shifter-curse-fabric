@@ -45,7 +45,8 @@
         "origins:air_from_potions",
         "shape-shifter-curse:air_from_splash_potions",
         "shape-shifter-curse:form_axolotl_sound",
-        "shape-shifter-curse:form_axolotl_sound_hurt"
+        "shape-shifter-curse:form_axolotl_sound_hurt",
+        "shape-shifter-curse:form_axolotl_sound_key"
     ],
     "icon": {
         "item": "minecraft:player_head"

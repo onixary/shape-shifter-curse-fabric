@@ -17,7 +17,8 @@
         "shape-shifter-curse:form_axolotl_instinct_near_dripleaf",
         "shape-shifter-curse:form_axolotl_instinct_attack_fish",
         "shape-shifter-curse:form_instinct_use_catalyst",
-        "shape-shifter-curse:form_instinct_use_golden_apple"
+        "shape-shifter-curse:form_instinct_use_golden_apple",
+        "shape-shifter-curse:form_axolotl_sound_key"
     ],
     "icon": {
         "item": "minecraft:player_head"

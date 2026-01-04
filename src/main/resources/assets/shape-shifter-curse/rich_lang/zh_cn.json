@@ -617,6 +617,8 @@
   "tooltip.shape_shifter_curse.morphscale_item": "塑形物品",
   "tooltip.shape_shifter_curse.potion_target_form": "目标形态: ",
   "itemGroup.shape_shifter_curse.sscitems": "幻形者诅咒",
+  "category.shape-shifter-curse":"幻形者诅咒",
+  "key.shape-shifter-curse.make_sound":"叫声",
   
   "text.shape-shifter-curse.config.title": "幻形者诅咒 配置界面",
   "text.shape-shifter-curse.config.close": "取消",

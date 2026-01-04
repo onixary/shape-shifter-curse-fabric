@@ -21,7 +21,8 @@
         "shape-shifter-curse:always_harvest",
         "shape-shifter-curse:form_vegetarian_food_up",
         "shape-shifter-curse:form_bat_sound_hurt",
-        "shape-shifter-curse:form_bat_diamond_mining_claw_tool"
+        "shape-shifter-curse:form_bat_diamond_mining_claw_tool",
+        "shape-shifter-curse:form_bat_sound_key"
     ],
     "icon": {
         "item": "minecraft:player_head"

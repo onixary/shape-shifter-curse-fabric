@@ -12,7 +12,8 @@
         "shape-shifter-curse:form_instinct_use_catalyst",
         "shape-shifter-curse:form_instinct_use_golden_apple",
         "shape-shifter-curse:form_anubis_wolf_instinct_eat_rotten_flesh",
-        "shape-shifter-curse:form_anubis_wolf_instinct_biome"
+        "shape-shifter-curse:form_anubis_wolf_instinct_biome",
+        "shape-shifter-curse:form_anubis_wolf_sound_key"
     ],
     "icon": {
         "item": "minecraft:player_head"
