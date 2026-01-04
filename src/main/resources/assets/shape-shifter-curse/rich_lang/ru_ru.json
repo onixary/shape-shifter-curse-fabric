@@ -653,5 +653,7 @@
   ],
   "tooltip.shape_shifter_curse.morphscale_item": "MorphScaled Item",
   "tooltip.shape_shifter_curse.potion_target_form": "Target Form: ",
-  "itemGroup.shape_shifter_curse.sscitems": "Shape Shifter Curse"
+  "itemGroup.shape_shifter_curse.sscitems": "Shape Shifter Curse",
+  "category.shape-shifter-curse":"Shape Shifter Curse",
+  "key.shape-shifter-curse.make_sound":"Make Sound"
 }

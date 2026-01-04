@@ -1,0 +1,42 @@
+{
+    "type": "origins:multiple",
+    "form_ocelot_sound_key_normal": {
+        "type": "origins:active_self",
+        "entity_action": {
+            "type": "origins:play_sound",
+            "sound": "minecraft:entity.cat.ambient",
+            "pitch": 0.5,
+            "volume": 0.7
+        },
+        "cooldown": 5,
+        "hud_render": {
+            "should_render": false
+        },
+        "key": {
+            "key": "key.shape-shifter-curse.make_sound",
+            "continuous": false
+        },
+        "condition": {
+            "type": "origins:sneaking",
+            "inverted": true
+        }
+    },
+    "form_ocelot_sound_key_hiss": {
+        "type": "origins:active_self",
+        "entity_action": {
+            "type": "origins:play_sound",
+            "sound": "minecraft:entity.cat.hiss"
+        },
+        "cooldown": 5,
+        "hud_render": {
+            "should_render": false
+        },
+        "key": {
+            "key": "key.shape-shifter-curse.make_sound",
+            "continuous": false
+        },
+        "condition": {
+            "type": "origins:sneaking"
+        }
+    }
+}

@@ -20,7 +20,8 @@
         "shape-shifter-curse:form_ocelot_instinct_attack_barepaw",
         "shape-shifter-curse:form_ocelot_instinct_eat_raw_meat",
         "shape-shifter-curse:form_ocelot_instinct_biome",
-        "shape-shifter-curse:form_ocelot_hiss_phantom"
+        "shape-shifter-curse:form_ocelot_hiss_phantom",
+        "shape-shifter-curse:form_ocelot_sound_key"
     ],
     "icon": {
         "item": "minecraft:player_head"
