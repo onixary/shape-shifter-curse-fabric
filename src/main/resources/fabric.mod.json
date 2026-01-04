@@ -5,12 +5,58 @@
 
   "name": "Shape Shifter Curse",
   "description": "a mod which focus on gradually transform into different forms based on vanilla creatures, gaining their unique abilities and drawbacks",
-  "authors": ["onixary"],
+  "authors": [
+    {
+      "name": "onixary",
+      "contact": {
+        "github": "https://github.com/onixary"
+      }
+    },
+    {
+      "name": "XuHaoNan",
+      "contact": {
+        "github": "https://github.com/xu233333",
+        "email": "18510478058@163.com"
+      }
+    }
+  ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/shape-shifter-curse",
     "sources": "https://github.com/onixary/shape-shifter-curse-fabric",
     "issues": "https://github.com/onixary/shape-shifter-curse-fabric/issues"
   },
+  "contributors": [
+    {
+      "name": "MaxMobile-ru",
+      "contact": {
+        "github": "https://github.com/MaxMobile-ru"
+      }
+    },
+    {
+      "name": "A cat",
+      "contact": {
+        "github": "https://github.com/wuhenqiubai"
+      }
+    },
+    {
+      "name": "ctmayton",
+      "contact": {
+        "github": "https://github.com/ctmayton"
+      }
+    },
+    {
+      "name": "OregonBanner",
+      "contact": {
+        "github": "https://github.com/OregonBanner"
+      }
+    },
+    {
+      "name": "solunareclipse1",
+      "contact": {
+        "github": "https://github.com/solunareclipse1"
+      }
+    }
+  ],
 
   "license": "MIT",
   "icon": "assets/shape-shifter-curse/icon.png",
