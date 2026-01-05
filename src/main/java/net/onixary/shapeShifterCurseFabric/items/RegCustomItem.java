@@ -64,6 +64,8 @@ public class RegCustomItem {
     public static final Item DIGESTION_FIBER_BALL = register("digestion_fiber_ball", new DigestionFiberBallTrinket(new DigestionFiberBallTrinket.Settings()));
     public static final Item FROST_PAWGLOVE = register("frost_pawglove", new FrostPawgloveTrinket(new FrostPawgloveTrinket.Settings()));
     public static final Item WITHERED_BANDAGE = register("withered_bandage", new WitheredBandageTrinket(new WitheredBandageTrinket.Settings()));
+    public static final Item FOUNTAIN_BELT = register("fountain_belt", new FountainBeltTrinket(new FountainBeltTrinket.Settings()));
+    public static final Item RESONANT_CORE = register("resonant_core", new ResonantCoreTrinket(new ResonantCoreTrinket.Settings()));
     // 用于成就图标的占位物品
     public static final Item ICON_CURSED_MOON = register("icon_cursed_moon", new Item(new Item.Settings()));
 
@@ -138,6 +140,8 @@ public class RegCustomItem {
                 entries.add(DIGESTION_FIBER_BALL);
                 entries.add(FROST_PAWGLOVE);
                 entries.add(WITHERED_BANDAGE);
+                entries.add(FOUNTAIN_BELT);
+                entries.add(RESONANT_CORE);
                 // 方块物品注册
                 entries.add(MOONDUST_CRYSTAL_GRIT);
             })

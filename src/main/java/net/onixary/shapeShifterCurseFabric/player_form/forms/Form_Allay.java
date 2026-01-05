@@ -50,6 +50,7 @@ public class Form_Allay extends PlayerFormBase {
             case ANIM_FALL:
             case ANIM_SNEAK_FALL:
             case ANIM_SLOW_FALL:
+            case ANIM_CREATIVE_FLY:
                 return anim_flying;
 
             case ANIM_TOOL_SWING:
@@ -58,7 +59,7 @@ public class Form_Allay extends PlayerFormBase {
             case ANIM_ATTACK_ONCE:
                 return anim_attack;
             default:
-                return null;
+                return anim_walk;
         }
     }
 
