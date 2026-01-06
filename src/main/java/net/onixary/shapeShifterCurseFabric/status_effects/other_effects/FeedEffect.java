@@ -55,7 +55,7 @@ public class FeedEffect extends StatusEffect {
         if (entity instanceof PlayerEntity player) {
             player.getHungerManager().add(8, 0.6f);
             if (ManaRegistries.FAMILIAR_FOX_MANA.equals(ManaUtils.getPlayerManaTypeID(player))) {
-                ManaUtils.gainPlayerMana(player, 25d);
+                ManaUtils.gainPlayerMana(player, 38d);
             }
         }
     }

@@ -6,6 +6,6 @@
     },
     "modifier": {
         "operation": "set_total",
-        "value": 3.0
+        "value": 5.0
     }
 }

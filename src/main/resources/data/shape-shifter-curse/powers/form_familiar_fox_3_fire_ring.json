@@ -5,7 +5,7 @@
         "actions": [
             {
                 "type": "shape-shifter-curse:consume_mana",
-                "mana": 14
+                "mana": 11
             },
             {
                 "type": "origins:play_sound",
@@ -52,7 +52,7 @@
                         },
                         {
                             "type": "origins:damage",
-                            "amount": 7,
+                            "amount": 8,
                             "damage_type": "minecraft:on_fire"
                         }
                     ]
@@ -110,7 +110,7 @@
         "conditions": [
             {
                 "type": "shape-shifter-curse:has_mana",
-                "mana": 14
+                "mana": 11
             },
             {
                 "type": "origins:resource",
