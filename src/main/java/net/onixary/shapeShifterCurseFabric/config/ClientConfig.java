@@ -25,4 +25,28 @@ public class ClientConfig implements ConfigData {
 
     // 开发用
     // @ConfigEntry.Category("InDevelopment")
+
+    @ConfigEntry.Category("UI")
+    @Comment("Instinct Bar Middle Position Type (1-9). Default: 8")
+    public int instinctBarPosType = 8;  // 本能条中间位置类型 (1-9)
+
+    @ConfigEntry.Category("UI")
+    @Comment("Instinct Bar Position X Offset. Default: 100")
+    public int instinctBarPosOffsetX = 100;  // 本能条中间 X 位置偏移量
+
+    @ConfigEntry.Category("UI")
+    @Comment("Instinct Bar Position Y Offset. Default: -9")
+    public int instinctBarPosOffsetY = -9;  // 本能条中间 Y 位置偏移量
+
+    @ConfigEntry.Category("UI")
+    @Comment("FamiliarFox ManaBar Middle Position Type (1-9). Default: 8")
+    public int familiarFoxManaBarPosType = 8;  // 魔力条中间位置类型 (1-9)
+
+    @ConfigEntry.Category("UI")
+    @Comment("FamiliarFox ManaBar Position X Offset. Default: 100")
+    public int familiarFoxManaBarPosOffsetX = 100;  // 魔力条中间 X 位置偏移量
+
+    @ConfigEntry.Category("UI")
+    @Comment("FamiliarFox ManaBar Position Y Offset. Default: -17")
+    public int familiarFoxManaBarPosOffsetY = -17;  // 魔力条中间 Y 位置偏移量
 }
