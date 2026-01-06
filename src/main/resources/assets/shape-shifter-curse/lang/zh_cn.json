@@ -379,6 +379,7 @@
     "itemGroup.shape_shifter_curse.sscitems": "幻形者诅咒",
     "category.shape-shifter-curse": "幻形者诅咒",
     "key.shape-shifter-curse.make_sound": "叫声",
+    "item.shape-shifter-curse.custom_trinket": "自定义饰品",
     "text.shape-shifter-curse.config.title": "幻形者诅咒 配置界面",
     "text.shape-shifter-curse.config.close": "取消",
     "text.autoconfig.shape-shifter-curse-client.title": "幻形者诅咒 - 客户端配置",

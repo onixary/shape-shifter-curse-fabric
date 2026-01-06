@@ -3,7 +3,6 @@ package net.onixary.shapeShifterCurseFabric.util;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.mojang.serialization.Lifecycle;
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
@@ -22,6 +21,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public class TrinketUtils {
+    public interface CustomPowerTrinketInterface {
+        void onFormChange(ItemStack stack, SlotReference slot, PlayerEntity entity);
+    }
+
     public static class TrinketPowerData {
         public final List<Identifier> accessoryPowers;
         public final List<Identifier> allFormPowerAdd;
@@ -254,7 +257,13 @@ public class TrinketUtils {
             return;
         }
         for (Pair<SlotReference, ItemStack> accessoryPair : component.get().getAllEquipped()) {
-            ApplyAccessoryPowerOnPlayerFormChange(player, Registries.ITEM.getId(accessoryPair.getRight().getItem()));
+            SlotReference slot = accessoryPair.getLeft();
+            ItemStack stack = accessoryPair.getRight();
+            if (stack.getItem() instanceof CustomPowerTrinketInterface cpti) {
+                cpti.onFormChange(stack, slot, player);
+            } else {
+                ApplyAccessoryPowerOnPlayerFormChange(player, Registries.ITEM.getId(stack.getItem()));
+            }
         }
     }
 
