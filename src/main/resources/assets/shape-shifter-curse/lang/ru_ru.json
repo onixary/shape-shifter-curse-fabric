@@ -385,5 +385,13 @@
     "itemGroup.shape_shifter_curse.sscitems": "Shape Shifter Curse",
     "category.shape-shifter-curse": "Shape Shifter Curse",
     "key.shape-shifter-curse.make_sound": "Make Sound",
-    "text.autoconfig.shape-shifter-curse-custom.option.enable_form_random_sound": "Enable Form Random Sound"
+    "item.shape-shifter-curse.custom_trinket": "Custom Trinket",
+    "text.autoconfig.shape-shifter-curse-custom.option.enable_form_random_sound": "Enable Form Random Sound",
+    "text.autoconfig.shape-shifter-curse-client.category.UI": "UI",
+    "text.autoconfig.shape-shifter-curse-client.option.instinctBarPosType": "Instinct Bar Middle Position Type",
+    "text.autoconfig.shape-shifter-curse-client.option.instinctBarPosOffsetX": "Instinct Bar Position X Offset",
+    "text.autoconfig.shape-shifter-curse-client.option.instinctBarPosOffsetY": "Instinct Bar Position Y Offset",
+    "text.autoconfig.shape-shifter-curse-client.option.familiarFoxManaBarPosType": "FamiliarFox ManaBar Middle Position Type",
+    "text.autoconfig.shape-shifter-curse-client.option.familiarFoxManaBarPosOffsetX": "FamiliarFox ManaBar Position X Offset",
+    "text.autoconfig.shape-shifter-curse-client.option.familiarFoxManaBarPosOffsetY": "FamiliarFox ManaBar Position Y Offset"
 }

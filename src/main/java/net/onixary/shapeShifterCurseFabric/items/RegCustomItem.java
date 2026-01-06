@@ -66,6 +66,8 @@ public class RegCustomItem {
     public static final Item WITHERED_BANDAGE = register("withered_bandage", new WitheredBandageTrinket(new WitheredBandageTrinket.Settings()));
     public static final Item FOUNTAIN_BELT = register("fountain_belt", new FountainBeltTrinket(new FountainBeltTrinket.Settings()));
     public static final Item RESONANT_CORE = register("resonant_core", new ResonantCoreTrinket(new ResonantCoreTrinket.Settings()));
+
+    public static final Item CUSTOM_TRINKET = register("custom_trinket", new CustomTrinket(new CustomTrinket.Settings()));
     // 用于成就图标的占位物品
     public static final Item ICON_CURSED_MOON = register("icon_cursed_moon", new Item(new Item.Settings()));
 
@@ -113,19 +115,6 @@ public class RegCustomItem {
                 entries.add(NETHERITE_MORPHSCALE_VEST);
                 entries.add(NETHERITE_MORPHSCALE_CUISH);
                 entries.add(NETHERITE_MORPHSCALE_ANKLET);
-                entries.addAll(buildAllPotions(
-                        RegCustomPotions.MOONDUST_POTION,
-                        RegCustomPotions.BAT_FORM_POTION,
-                        RegCustomPotions.AXOLOTL_FORM_POTION,
-                        RegCustomPotions.OCELOT_FORM_POTION,
-                        RegCustomPotions.FAMILIAR_FOX_FORM_POTION,
-                        RegCustomPotions.SNOW_FOX_FORM_POTION,
-                        RegCustomPotions.ANUBIS_WOLF_FORM_POTION,
-                        RegCustomPotions.ALLEY_FORM_POTION,
-                        RegCustomPotions.FERAL_CAT_FORM_POTION,
-                        RegCustomPotions.CUSTOM_STATUE_FORM_POTION,
-                        RegCustomPotions.FEED_POTION
-                ));
                 entries.add(DIAMOND_MINING_CLAW);
                 entries.add(MOONDUST_CRYSTAL_SHARD);
                 entries.add(ECTOPLASM_RAG);
@@ -142,8 +131,22 @@ public class RegCustomItem {
                 entries.add(WITHERED_BANDAGE);
                 entries.add(FOUNTAIN_BELT);
                 entries.add(RESONANT_CORE);
+                entries.add(CUSTOM_TRINKET);
                 // 方块物品注册
                 entries.add(MOONDUST_CRYSTAL_GRIT);
+                entries.addAll(buildAllPotions(
+                        RegCustomPotions.MOONDUST_POTION,
+                        RegCustomPotions.BAT_FORM_POTION,
+                        RegCustomPotions.AXOLOTL_FORM_POTION,
+                        RegCustomPotions.OCELOT_FORM_POTION,
+                        RegCustomPotions.FAMILIAR_FOX_FORM_POTION,
+                        RegCustomPotions.SNOW_FOX_FORM_POTION,
+                        RegCustomPotions.ANUBIS_WOLF_FORM_POTION,
+                        RegCustomPotions.ALLEY_FORM_POTION,
+                        RegCustomPotions.FERAL_CAT_FORM_POTION,
+                        RegCustomPotions.CUSTOM_STATUE_FORM_POTION,
+                        RegCustomPotions.FEED_POTION
+                ));
             })
             .build();
 

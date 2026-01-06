@@ -5,6 +5,9 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.util.UIPositionUtils;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
@@ -23,15 +26,16 @@ public class FamiliarFoxManaBar implements IManaRender{
     @Override
     public void render(DrawContext context, float tickDelta) {
         if (!mc.options.hudHidden) {
-            int width = mc.getWindow().getScaledWidth();
-            int height = mc.getWindow().getScaledHeight();
-            //float x = (float) width / 2 + 11;
-            float x = (float)width / 2 + 100;
-            // 39 is the height of the health bar
-            float y = height - 39;
-            y += 22;
+            // int width = mc.getWindow().getScaledWidth();
+            // int height = mc.getWindow().getScaledHeight();
+            // //float x = (float) width / 2 + 11;
+            // float x = (float)width / 2 + 100;
+            // // 39 is the height of the health bar
+            // float y = height - 39;
+            // y += 22;
             // todo: instinct条的位置为 y += 30
-            this.renderBar(context, tickDelta, (int) x, (int) y);
+            Pair<Integer, Integer> pos = UIPositionUtils.getCorrectPosition(ShapeShifterCurseFabric.clientConfig.familiarFoxManaBarPosType, ShapeShifterCurseFabric.clientConfig.familiarFoxManaBarPosOffsetX, ShapeShifterCurseFabric.clientConfig.familiarFoxManaBarPosOffsetY);
+            this.renderBar(context, tickDelta, pos.getLeft(), pos.getRight());
         }
     }
 
