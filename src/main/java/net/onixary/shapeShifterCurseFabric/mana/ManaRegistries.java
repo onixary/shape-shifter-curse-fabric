@@ -59,7 +59,7 @@ public class ManaRegistries {
                             ShapeShifterCurseFabric.identifier("cursed_moon"),
                             new Pair<Identifier, ManaUtils.Modifier>(
                                     MC_IsCursedMoon,
-                                    new ManaUtils.Modifier(0.5d, 1.0d, 0d)
+                                    new ManaUtils.Modifier(0.02d, 1.0d, 0d)
                             )
                     )
             ),

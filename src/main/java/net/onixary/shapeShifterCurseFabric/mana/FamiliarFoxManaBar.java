@@ -33,7 +33,6 @@ public class FamiliarFoxManaBar implements IManaRender{
             // // 39 is the height of the health bar
             // float y = height - 39;
             // y += 22;
-            // todo: instinct条的位置为 y += 30
             Pair<Integer, Integer> pos = UIPositionUtils.getCorrectPosition(ShapeShifterCurseFabric.clientConfig.familiarFoxManaBarPosType, ShapeShifterCurseFabric.clientConfig.familiarFoxManaBarPosOffsetX, ShapeShifterCurseFabric.clientConfig.familiarFoxManaBarPosOffsetY);
             this.renderBar(context, tickDelta, pos.getLeft(), pos.getRight());
         }
