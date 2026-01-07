@@ -15,6 +15,7 @@ import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.util.Hand;
@@ -23,6 +24,7 @@ import net.minecraft.util.math.RotationAxis;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.util.FeralRenderUtils;
 
 public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> & ModelWithArms> extends FeatureRenderer<T, M> {
     private final HeldItemRenderer heldItemRenderer;
@@ -57,6 +59,7 @@ public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> &
         ItemStack mainHandStack = player.getMainHandStack();
         ItemStack offHandStack = player.getOffHandStack();
 
+
         boolean isBlocking = player.isUsingItem() && player.getActiveItem().getUseAction() == UseAction.BLOCK;
         Hand activeHand = player.getActiveHand();
 
@@ -90,6 +93,9 @@ public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> &
     }
 
     private void renderItemInMouth(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, ItemStack itemStack, float k, float l) {
+        if (FeralRenderUtils.isFeralMouseItemBlackListed(itemStack)) {
+            return;
+        }
         matrixStack.push();
         var eR = (PlayerEntityRenderer) MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(livingEntity);
         var head = eR.getModel().head;

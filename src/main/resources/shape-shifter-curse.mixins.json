@@ -81,7 +81,9 @@
     "PlayerEntitySpeedFOVMixin",
     "PlayerMovementControlMixin",
     "PlayerRotationRendererMixin",
-    "accessor.ApoliClientAccessor"
+    "accessor.ApoliClientAccessor",
+    "integration.TacZ_Anim",
+    "integration.TacZ_AnimThird"
   ],
   "injectors": {
     "defaultRequire": 1
