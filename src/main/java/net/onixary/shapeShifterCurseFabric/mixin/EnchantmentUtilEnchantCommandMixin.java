@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(EnchantCommand.class)
 public class EnchantmentUtilEnchantCommandMixin {
     @ModifyExpressionValue(method = "execute", at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/Enchantment;isAcceptableItem(Lnet/minecraft/item/ItemStack;)Z"))
-    private static boolean execute(boolean original, @Local ItemStack itemStack, @Local Enchantment enchantment) {
+    private static boolean isAcceptableItem(boolean original, @Local ItemStack itemStack, @Local Enchantment enchantment) {
         if (!original) {
             return EnchantmentUtils.isItemCanEnchantment(enchantment, itemStack);
         }
