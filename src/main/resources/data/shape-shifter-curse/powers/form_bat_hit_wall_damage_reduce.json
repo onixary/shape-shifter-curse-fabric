@@ -1,0 +1,12 @@
+{
+  "type": "origins:modify_damage_taken",
+  "damage_condition": {
+    "type": "origins:in_tag",
+    "tag": "shape-shifter-curse:bat_immune_damage_tag"
+  },
+  "modifier": {
+    "name": "no_hit_wall_damage",
+    "operation": "set_total",
+    "value": 0.0
+  }
+}

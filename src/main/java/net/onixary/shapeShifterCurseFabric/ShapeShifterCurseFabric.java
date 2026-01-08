@@ -38,7 +38,6 @@ import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
 import net.onixary.shapeShifterCurseFabric.config.ClientConfig;
 import net.onixary.shapeShifterCurseFabric.config.CommonConfig;
 import net.onixary.shapeShifterCurseFabric.config.PlayerCustomConfig;
-import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntitySpawnEgg;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.TransformativeEntitySpawning;
@@ -94,7 +93,6 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static Vec3d feralItemPosOffset = new Vec3d(0.0F, 0.0F, 0.0F);
     public static float feralItemEulerX = 0.0F;
 
-    public static CursedMoonData cursedMoonData = new CursedMoonData();
     // Reg custom advancement criterion
     public static final OnEnableMod ON_ENABLE_MOD = Criteria.register(new OnEnableMod());
     public static final OnOpenBookOfShapeShifter ON_OPEN_BOOK_OF_SHAPE_SHIFTER = Criteria.register(new OnOpenBookOfShapeShifter());
@@ -207,7 +205,6 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
         // network package
         ModPacketsC2S.register();
-        cursedMoonData = new CursedMoonData();
 
         //TransformFX.INSTANCE.registerCallbacks();
         TransformOverlay.INSTANCE.init();
@@ -261,8 +258,6 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             // saveCurrentAttachment(server.getOverworld(), player);
             saveForm(player);
             saveInstinctComp(player);
-            // save cursed moon data
-            ShapeShifterCurseFabric.cursedMoonData.getInstance().save(server.getOverworld());
         });
 
         // Reg listeners
