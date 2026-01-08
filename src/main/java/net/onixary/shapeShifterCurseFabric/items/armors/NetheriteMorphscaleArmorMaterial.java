@@ -42,23 +42,23 @@ public class NetheriteMorphscaleArmorMaterial implements ArmorMaterial {
 
     @Override
     public int getEnchantability() {
-        return 10;
+        return 15;
     }
 
     @Override
     public SoundEvent getEquipSound() {
-        return SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
+        return SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE;
     }
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(Items.DIAMOND);
+        return Ingredient.ofItems(Items.NETHERITE_SCRAP);
     }
 
     @Override
     public String getName() {
         // Must be all lowercase
-        return "morphscale";
+        return "netherite_morphscale";
     }
 
     @Override
@@ -68,6 +68,6 @@ public class NetheriteMorphscaleArmorMaterial implements ArmorMaterial {
 
     @Override
     public float getKnockbackResistance() {
-        return 0;
+        return 0.1f;
     }
 }
