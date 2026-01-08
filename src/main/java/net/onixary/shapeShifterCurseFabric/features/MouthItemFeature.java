@@ -14,8 +14,6 @@ import net.minecraft.client.render.item.HeldItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.util.Hand;
@@ -93,7 +91,7 @@ public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> &
     }
 
     private void renderItemInMouth(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, ItemStack itemStack, float k, float l) {
-        if (FeralRenderUtils.isFeralMouseItemBlackListed(itemStack)) {
+        if (FeralRenderUtils.isFeralMouthItemBlackListed(itemStack)) {
             return;
         }
         matrixStack.push();
