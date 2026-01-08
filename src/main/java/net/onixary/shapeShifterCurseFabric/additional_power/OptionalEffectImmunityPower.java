@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class OptionalEffectImmunityPower {
 
-    public static @Nullable StatusEffect getStatueEffect(Identifier effectID) {
+    public static @Nullable StatusEffect getStatusEffect(Identifier effectID) {
         Optional<StatusEffect> result = Registries.STATUS_EFFECT.getOrEmpty(effectID);
         return result.orElse(null);
     }
@@ -30,7 +30,7 @@ public class OptionalEffectImmunityPower {
                 (data) -> (type, player) -> {
                     EffectImmunityPower power = new EffectImmunityPower(type, player, data.get("inverted"));
                     if (data.isPresent("effect")) {
-                        StatusEffect effect = getStatueEffect(data.get("effect"));
+                        StatusEffect effect = getStatusEffect(data.get("effect"));
                         if (effect != null) {
                             power.addEffect(effect);
                         }
@@ -38,7 +38,7 @@ public class OptionalEffectImmunityPower {
                     if (data.isPresent("effects")) {
                         List<Identifier> effectIDs = data.get("effects");
                         for (Identifier effectID : effectIDs) {
-                            StatusEffect effect = getStatueEffect(effectID);
+                            StatusEffect effect = getStatusEffect(effectID);
                             if (effect != null) {
                                 power.addEffect(effect);
                             }
