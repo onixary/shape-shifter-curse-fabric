@@ -278,13 +278,6 @@
     },
     "?"
   ],
-  "effect.shape-shifter-curse.to_alpha_0_effect": ["ALPHA"],
-  "effect.shape-shifter-curse.to_beta_0_effect": ["BETA"],
-  "effect.shape-shifter-curse.to_gamma_0_effect": ["GAMMA"],
-  "effect.shape-shifter-curse.to_omega_sp_effect": ["OMEGA"],
-  "effect.shape-shifter-curse.to_psi_sp_effect": ["PSI"],
-  "effect.shape-shifter-curse.to_chi_sp_effect": ["CHI"],
-  "effect.shape-shifter-curse.to_phi_sp_effect": ["PHI"],
 
   "power.shape-shifter-curse.form_carnivore.name":["Мясоед"],
   "power.shape-shifter-curse.form_allay_sp_amethyst_shard_only.name": ["только аметист"],

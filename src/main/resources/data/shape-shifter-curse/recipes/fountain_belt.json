@@ -3,7 +3,7 @@
   "pattern": [
     "LLL",
     " M ",
-    "BCS"
+    "BCI"
   ],
   "key": {
     "M": {
@@ -17,6 +17,9 @@
     },
     "I": {
       "item": "minecraft:soul_sand"
+    },
+    "C": {
+      "item": "minecraft:conduit"
     }
   },
   "result": {
