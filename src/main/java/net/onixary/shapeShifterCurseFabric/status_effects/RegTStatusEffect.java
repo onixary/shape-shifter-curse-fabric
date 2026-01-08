@@ -28,8 +28,8 @@ public class RegTStatusEffect {
 
     public static final BaseTransformativeStatusEffect TO_CUSTOM_STATUE_EFFECT = register("to_custom_statue_effect", new CustomTransformativeStatue());
 
-    /* 未支持数据包时代的占位形态 现在可以使用数据添加形态了
     // empty custom forms
+    /* 未支持数据包时代的占位形态 现在可以使用数据添加形态了
     public static final BaseTransformativeStatusEffect TO_ALPHA_0_EFFECT = register("to_alpha_0_effect", new TransformativeStatus(RegPlayerForms.ALPHA_0));
     public static final BaseTransformativeStatusEffect TO_BETA_0_EFFECT = register("to_beta_0_effect", new TransformativeStatus(RegPlayerForms.BETA_0));
     public static final BaseTransformativeStatusEffect TO_GAMMA_0_EFFECT = register("to_gamma_0_effect", new TransformativeStatus(RegPlayerForms.GAMMA_0));
