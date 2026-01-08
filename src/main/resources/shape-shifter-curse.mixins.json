@@ -56,7 +56,9 @@
     "LingeringPotionItemMixin",
     "TippedArrowItemMixin",
     "BrewingRecipeRegistryMixin",
-    "HissPhantomMixin"
+    "HissPhantomMixin",
+    "EnchantmentUtilAnvilMixin",
+    "EnchantmentUtilEnchantCommandMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",
