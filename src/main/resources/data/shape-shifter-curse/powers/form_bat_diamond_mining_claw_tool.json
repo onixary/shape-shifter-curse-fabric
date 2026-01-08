@@ -43,7 +43,7 @@
         },
         "modifier": {
             "operation": "addition",
-            "value": 10.0
+            "value": 4.0
         }
     }
 }
