@@ -80,8 +80,8 @@ public class TransformativeWolfEntity extends WolfEntity {
     public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 12.0)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3);
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 0.5f)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2);
     }
 
     public static boolean canCustomSpawn(EntityType<TransformativeWolfEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {

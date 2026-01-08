@@ -12,7 +12,7 @@ import java.util.List;
 
 public class FountainBeltTrinket extends TrinketItem {
     public FountainBeltTrinket(Settings settings) {
-        super(settings);
+        super(settings.maxCount(1));
     }
 
     @Override

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ResonantCoreTrinket extends TrinketItem {
     public ResonantCoreTrinket(Settings settings) {
-        super(settings);
+        super(settings.maxCount(1));
     }
 
     @Override

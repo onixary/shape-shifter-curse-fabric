@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CollarOfTensionTrinket extends TrinketItem {
     public CollarOfTensionTrinket(Settings settings) {
-        super(settings);
+        super(settings.maxCount(1));
     }
 
     @Override

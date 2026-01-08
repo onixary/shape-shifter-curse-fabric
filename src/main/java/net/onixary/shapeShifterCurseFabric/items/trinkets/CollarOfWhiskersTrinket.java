@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CollarOfWhiskersTrinket extends TrinketItem {
     public CollarOfWhiskersTrinket(Settings settings) {
-        super(settings);
+        super(settings.maxCount(1));
     }
 
     @Override

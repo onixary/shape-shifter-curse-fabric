@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DigestionFiberBallTrinket extends TrinketItem {
     public DigestionFiberBallTrinket(Settings settings) {
-        super(settings);
+        super(settings.maxCount(1));
     }
 
     @Override

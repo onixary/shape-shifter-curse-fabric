@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CharmOfHollowFangTrinket extends TrinketItem {
     public CharmOfHollowFangTrinket(Settings settings) {
-        super(settings);
+        super(settings.maxCount(1));
     }
 
     @Override

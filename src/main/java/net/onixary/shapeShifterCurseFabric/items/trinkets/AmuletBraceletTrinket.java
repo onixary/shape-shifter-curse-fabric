@@ -12,7 +12,7 @@ import java.util.List;
 
 public class AmuletBraceletTrinket extends TrinketItem {
     public AmuletBraceletTrinket(Settings settings) {
-        super(settings);
+        super(settings.maxCount(1));
     }
 
     @Override

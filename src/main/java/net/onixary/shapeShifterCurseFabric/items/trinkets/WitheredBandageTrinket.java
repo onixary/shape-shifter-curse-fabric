@@ -12,7 +12,7 @@ import java.util.List;
 
 public class WitheredBandageTrinket extends TrinketItem {
     public WitheredBandageTrinket(Settings settings) {
-        super(settings);
+        super(settings.maxCount(1));
     }
 
     @Override

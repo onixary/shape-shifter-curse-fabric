@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CharmOfReverseThermometerTrinket extends TrinketItem {
     public CharmOfReverseThermometerTrinket(Settings settings) {
-        super(settings);
+        super(settings.maxCount(1));
     }
 
     @Override
