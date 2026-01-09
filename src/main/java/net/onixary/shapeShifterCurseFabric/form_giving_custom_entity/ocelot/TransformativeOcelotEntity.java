@@ -21,7 +21,11 @@ import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.TStatusApplier;
 
+import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_OCELOT_0_EFFECT;
+
 public class TransformativeOcelotEntity extends OcelotEntity {
+
+    public static float T_OCELOT_STATUS_CHANCE = 0.5f;
 
     public TransformativeOcelotEntity(EntityType<? extends OcelotEntity> entityType, World world) {
         super(entityType, world);
@@ -74,7 +78,7 @@ public class TransformativeOcelotEntity extends OcelotEntity {
                 // 对玩家造成伤害
                 tryAttack(player);
                 // 概率施加效果
-                TStatusApplier.applyStatusFromTMob(this, player);
+                TStatusApplier.applyStatusByChance(T_OCELOT_STATUS_CHANCE, player, TO_OCELOT_0_EFFECT);
                 // 重置冷却时间
                 cooldown = ATTACK_COOLDOWN;
             }
