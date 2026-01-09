@@ -950,6 +950,9 @@
   "itemGroup.shape_shifter_curse.sscitems": "幻形者诅咒",
   "category.shape-shifter-curse":"幻形者诅咒",
   "key.shape-shifter-curse.make_sound":"叫声",
+  "key.shape-shifter-curse.toggle_clip_at_ledge": "切换潜行边缘掉落",
+  "message.shape-shifter-curse.clip_at_ledge.on": "潜行边缘掉落: 开启",
+  "message.shape-shifter-curse.clip_at_ledge.off": "潜行边缘掉落: 关闭",
   "item.shape-shifter-curse.custom_trinket": ["自定义饰品"],
   
   "text.shape-shifter-curse.config.title": "幻形者诅咒 配置界面",

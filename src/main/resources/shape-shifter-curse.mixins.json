@@ -85,7 +85,8 @@
     "PlayerRotationRendererMixin",
     "accessor.ApoliClientAccessor",
     "integration.TacZ_Anim",
-    "integration.TacZ_AnimThird"
+    "integration.TacZ_AnimThird",
+    "PlayerClipAtLedgeMixin"
   ],
   "injectors": {
     "defaultRequire": 1
