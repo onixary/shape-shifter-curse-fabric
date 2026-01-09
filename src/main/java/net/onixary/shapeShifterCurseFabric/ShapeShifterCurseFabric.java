@@ -67,6 +67,7 @@ import net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusPotionEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
+import net.onixary.shapeShifterCurseFabric.util.AttackEntityDataTracker;
 import net.onixary.shapeShifterCurseFabric.util.PlayerEventHandler;
 import net.onixary.shapeShifterCurseFabric.util.TickManager;
 import net.onixary.shapeShifterCurseFabric.util.TrinketDataPackReloadListener;
@@ -194,6 +195,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
         // 注册召唤物属性
         MinionRegister.register();
+
+        AttackEntityDataTracker.init();
 
         // 注册配置文件
         AutoConfig.register(PlayerCustomConfig.class, Toml4jConfigSerializer::new);  // 客户端配置
