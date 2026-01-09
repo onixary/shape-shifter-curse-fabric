@@ -10,7 +10,7 @@ public class BottledSnowfallToolMaterial implements ToolMaterial {
 
     @Override
     public int getDurability() {
-        return 200;
+        return 300;
     }
 
     @Override

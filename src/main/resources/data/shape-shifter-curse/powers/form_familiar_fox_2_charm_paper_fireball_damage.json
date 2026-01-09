@@ -1,0 +1,71 @@
+{
+    "type": "origins:modify_projectile_damage",
+    "condition": {
+        "type": "origins:resource",
+        "resource": "shape-shifter-curse:form_familiar_fox_fireball_kind_boolean_resource",
+        "comparison": "==",
+        "compare_to": 1
+    },
+    "damage_condition": {
+        "type": "origins:projectile",
+        "projectile": "minecraft:small_fireball"
+    },
+    "modifier": {
+        "operation": "set_total",
+        "value": 9.0
+    },
+    "target_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "shape-shifter-curse:explosion_damage_entity",
+                "power": 1,
+                "entity_condition": {
+                    "type": "origins:and",
+                    "conditions": [
+                        {
+                            "type": "origins:target_condition",
+                            "condition": {
+                                "type": "origins:in_tag",
+                                "tag": "shape-shifter-curse:water_explode_immune"
+                            },
+                            "inverted": true
+                        },
+                        {
+                            "type": "origins:owner",
+                            "inverted": true
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "origins:spawn_particles",
+                "particle": "minecraft:explosion",
+                "count": 2,
+                "speed": 0.0,
+                "force": false,
+                "spread": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            {
+                "type": "origins:spawn_particles",
+                "particle": "minecraft:soul_fire_flame",
+                "count": 8,
+                "speed": 0.0,
+                "force": false,
+                "spread": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.generic.explode"
+            }
+        ]
+    }
+}

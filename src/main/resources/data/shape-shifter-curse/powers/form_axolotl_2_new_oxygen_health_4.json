@@ -3,7 +3,7 @@
     "modifier": {
         "name": "Oxygen health",
         "attribute": "minecraft:generic.max_health",
-        "value": 4.0,
+        "value": 0.0,
         "operation": "addition"
     },
     "tick_rate": 20,
