@@ -15,7 +15,7 @@ public class DiamondMiningClawToolMaterial implements ToolMaterial {
 
     @Override
     public float getMiningSpeedMultiplier() {
-        return 1.2f;
+        return 4f;   // 石稿速度  蝙蝠为 4 + (4 * 2) = 12  4/3倍下界合金镐
     }
 
     @Override
