@@ -122,6 +122,7 @@
     "optifabric": "*",
     "identity": "<1.14.2-beta",
     "azurelib": ">3.0.19",
+    "azurelibarmor": "<2.0.12",
     "geckolib": "<4.7.0"
   },
   "recommends": {
