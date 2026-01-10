@@ -53,6 +53,7 @@ public class RegCustomItem {
     public static final Item ECTOPLASM_RAG = register("ectoplasm_rag", new Item(new Item.Settings()));
     public static final ToolItem BOTTLED_SNOWFALL = register("bottled_snowfall", new BottledSnowfall(BottledSnowfallToolMaterial.INSTANCE, 1, 1, new Item.Settings()));
     public static final ToolItem DIAMOND_MINING_CLAW = register("diamond_mining_claw", new DiamondMiningClaw(DiamondMiningClawToolMaterial.INSTANCE, 1, 1, new Item.Settings()));
+    public static final Item FIRE_CHARM_PAPER = register("fire_charm_paper", new Item(new Item.Settings()));
     // 模组自定义Trinkets
     public static final TrinketItem AMULET_BRACELET = register("amulet_bracelet", new AmuletBraceletTrinket(new AmuletBraceletTrinket.Settings()));
     public static final Item ATTACH_HOOK = register("attach_hook", new AttachHookTrinket(new AttachHookTrinket.Settings()));
@@ -132,6 +133,7 @@ public class RegCustomItem {
                 entries.add(FOUNTAIN_BELT);
                 entries.add(RESONANT_CORE);
                 entries.add(CUSTOM_TRINKET);
+                entries.add(FIRE_CHARM_PAPER);
                 // 方块物品注册
                 entries.add(MOONDUST_CRYSTAL_GRIT);
                 entries.addAll(buildAllPotions(

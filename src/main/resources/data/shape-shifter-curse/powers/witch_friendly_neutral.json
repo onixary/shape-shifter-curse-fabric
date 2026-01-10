@@ -1,0 +1,8 @@
+{
+    "type": "shape-shifter-curse:witch_friendly",
+    "condition": {
+        "type": "shape-shifter-curse:last_attack_witch_time",
+        "comparison": ">=",
+        "compare_to": "1200"
+    }
+}

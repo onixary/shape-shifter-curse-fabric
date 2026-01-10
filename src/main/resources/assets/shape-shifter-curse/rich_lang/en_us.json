@@ -80,13 +80,13 @@
   "item.minecraft.splash_potion.effect.to_anubis_wolf_0_potion": ["Splash Jackal Curse Potion"],
   "item.minecraft.lingering_potion.effect.to_anubis_wolf_0_potion": ["Lingering Jackal Curse Potion"],
   "item.minecraft.tipped_arrow.effect.to_anubis_wolf_0_potion": ["Arrow of Jackal Curse"],
-  "effect.shape-shifter-curse.to_anubis_wolf_0_potion": ["Dark wraith wandering inside the bottle… It’s a bit unusual."],
+  "effect.shape-shifter-curse.to_anubis_wolf_0_potion": ["Dark wraith wandering inside it… It’s a bit unusual."],
 
   "item.minecraft.potion.effect.feed_potion": ["Compressed Energy Potion"],
   "item.minecraft.splash_potion.effect.feed_potion": ["Splash Compressed Energy Potion"],
   "item.minecraft.lingering_potion.effect.feed_potion": ["Lingering Compressed Energy Potion"],
   "item.minecraft.tipped_arrow.effect.feed_potion": ["Arrow of Compressed Energy"],
-  "effect.shape-shifter-curse.feed_effect": ["Bottled high-density energy, capable of restoring satiety"],
+  "effect.shape-shifter-curse.feed_effect": ["High-density energy, capable of restoring satiety and magic"],
 
   "item.shape-shifter-curse.cursed_book_of_shape_shifter": ["Strange Book"],
   "item.shape-shifter-curse.book_of_shape_shifter": ["Book of the Shapeshifter"],
@@ -146,6 +146,8 @@
   "item.shape-shifter-curse.fountain_belt.tooltip": ["[Axolotl Form Tool] Requires powerful water power. Water burst stop dealing damage, it launches you and nearby entities"],
   "item.shape-shifter-curse.resonant_core": ["Resonant Core"],
   "item.shape-shifter-curse.resonant_core.tooltip": ["[Allay Form] Consuming Amethyst Shards grants regeneration to nearby entities, but no longer restores saturation"],
+  "item.shape-shifter-curse.fire_charm_paper": ["Fire Charm Paper"],
+  "item.shape-shifter-curse.fire_charm_paper.tooltip": ["[Familiar Fox Form]Requires powerful magic source. Consume for casting enhanced fireball magic"],
   "block.shape-shifter-curse.moondust_crystal_grit": ["Moondust Crystal Grit"],
 
   "screen.shape-shifter-curse.book_of_shape_shifter.start_content_text":
@@ -1013,6 +1015,9 @@
   "itemGroup.shape_shifter_curse.sscitems": "Shape Shifter Curse",
   "category.shape-shifter-curse":"Shape Shifter Curse",
   "key.shape-shifter-curse.make_sound":"Make Sound",
+  "key.shape-shifter-curse.toggle_clip_at_ledge": "Toggle Clip At Ledge",
+  "message.shape-shifter-curse.clip_at_ledge.on": "Clip At Ledge: On",
+  "message.shape-shifter-curse.clip_at_ledge.off": "Clip At Ledge: Off",
   "item.shape-shifter-curse.custom_trinket": ["Custom Trinket"],
 
   "text.shape-shifter-curse.config.title": "Shape Shifter Curse Config Menu",

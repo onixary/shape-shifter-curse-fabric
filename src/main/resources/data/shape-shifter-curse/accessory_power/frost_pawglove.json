@@ -20,7 +20,8 @@
       },
       "shape-shifter-curse:snow_fox_2": {
         "add": [
-          "shape-shifter-curse:form_snow_fox_frost_pawglove_trinket"
+          "shape-shifter-curse:form_snow_fox_frost_pawglove_trinket",
+          "shape-shifter-curse:form_snow_fox_snowball_effect_cooldown"
         ],
         "remove": [
           "shape-shifter-curse:form_snow_fox_2_snowball_up"
@@ -28,7 +29,8 @@
       },
       "shape-shifter-curse:snow_fox_3": {
         "add": [
-          "shape-shifter-curse:form_snow_fox_frost_pawglove_trinket"
+          "shape-shifter-curse:form_snow_fox_frost_pawglove_trinket",
+          "shape-shifter-curse:form_snow_fox_snowball_effect_cooldown"
         ],
         "remove": [
           "shape-shifter-curse:form_snow_fox_3_snowball_up"

@@ -17,6 +17,7 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.CustomEdiblePower;
@@ -59,7 +60,11 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 	}
 	private static ShaderProgram furGradientShader;
 
+	public static KeyBinding toggleClipAtLedge;
 	public static KeyBinding makeSound;
+
+	private static boolean toggleClipAtLedgeIsPressed = false;
+	public static boolean isClipAtLedge = true;
 
 	public static void openBookScreen(PlayerEntity user) {
 		// 仅当owo_lib加载时才能调用旧版页面，否则回退回新版
@@ -301,6 +306,22 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		makeSound = new KeyBinding("key.shape-shifter-curse.make_sound", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_GRAVE_ACCENT, "category." + MOD_ID);
 		ApoliClient.registerPowerKeybinding("make_sound", makeSound);
 		KeyBindingHelper.registerKeyBinding(makeSound);
+		toggleClipAtLedge = new KeyBinding("key.shape-shifter-curse.toggle_clip_at_ledge", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + MOD_ID);
+		KeyBindingHelper.registerKeyBinding(toggleClipAtLedge);
+		ClientTickEvents.END_CLIENT_TICK.register((client) -> {
+			if (toggleClipAtLedge.isPressed()) {
+				if (!toggleClipAtLedgeIsPressed) {
+					isClipAtLedge = !isClipAtLedge;
+                    if (client.player != null) {
+                        client.player.sendMessage(Text.translatable("message.shape-shifter-curse.clip_at_ledge." + (isClipAtLedge ? "on" : "off")), true);
+                    }
+				}
+				toggleClipAtLedgeIsPressed = true;
+			} else {
+				toggleClipAtLedgeIsPressed = false;
+			}
+		});
+
 	}
 
 	public static ShaderProgram getFurGradientShader() {
