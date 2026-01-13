@@ -1,6 +1,6 @@
 {
     "type": "shape-shifter-curse:bat_block_attach",
-    "condition": {
+    "attach_condition": {
         "type": "origins:or",
         "conditions": [
             {
