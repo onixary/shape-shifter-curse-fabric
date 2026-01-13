@@ -66,6 +66,9 @@ public class ManaRegistries {
             EMPTY_MANA_HANDLER
     );
 
+    // 给数据包提供一个空 Modifier 资源条吧
+    public static final Identifier DP_MANA = registerManaType(ShapeShifterCurseFabric.identifier("dp_mana"), EMPTY_MAX_MANA_MODIFIER, EMPTY_MANA_REGEN_MODIFIER, EMPTY_MANA_HANDLER);
+
     public static Identifier registerManaType(Identifier identifier, ManaUtils.ModifierList defaultMaxManaModifier, ManaUtils.ModifierList defaultManaRegenModifier, @Nullable ManaHandler handler) {
         if (defaultManaRegenModifier == null) {
             defaultManaRegenModifier = EMPTY_MANA_REGEN_MODIFIER;
