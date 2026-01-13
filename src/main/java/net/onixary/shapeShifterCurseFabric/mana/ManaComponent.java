@@ -203,7 +203,7 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
     }
 
     public boolean isManaAbove(double mana) {
-        return this.Mana > mana;
+        return this.Mana >= mana;
     }
 
     private void mergeTempRegen(double newTempRegen, int newTempRegenTime) {
