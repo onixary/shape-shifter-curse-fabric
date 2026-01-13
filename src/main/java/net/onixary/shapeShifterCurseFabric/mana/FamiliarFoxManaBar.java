@@ -33,7 +33,7 @@ public class FamiliarFoxManaBar implements IManaRender{
             // // 39 is the height of the health bar
             // float y = height - 39;
             // y += 22;
-            Pair<Integer, Integer> pos = UIPositionUtils.getCorrectPosition(ShapeShifterCurseFabric.clientConfig.familiarFoxManaBarPosType, ShapeShifterCurseFabric.clientConfig.familiarFoxManaBarPosOffsetX, ShapeShifterCurseFabric.clientConfig.familiarFoxManaBarPosOffsetY);
+            Pair<Integer, Integer> pos = UIPositionUtils.getCorrectPosition(ShapeShifterCurseFabric.clientConfig.manaBarPosType, ShapeShifterCurseFabric.clientConfig.manaBarPosOffsetX, ShapeShifterCurseFabric.clientConfig.manaBarPosOffsetY);
             this.renderBar(context, tickDelta, pos.getLeft(), pos.getRight());
         }
     }
