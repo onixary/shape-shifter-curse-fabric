@@ -19,7 +19,8 @@
         "shape-shifter-curse:form_bat_instinct_near_dripstone",
         "shape-shifter-curse:form_instinct_use_catalyst",
         "shape-shifter-curse:form_instinct_use_golden_apple",
-        "shape-shifter-curse:form_bat_instinct_biome"
+        "shape-shifter-curse:form_bat_instinct_biome",
+        "shape-shifter-curse:form_bat_sound_key"
     ],
     "icon": {
         "item": "minecraft:player_head"

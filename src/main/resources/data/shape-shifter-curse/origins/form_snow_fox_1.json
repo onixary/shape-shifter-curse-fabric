@@ -15,7 +15,8 @@
         "shape-shifter-curse:form_familiar_fox_instinct_in_berry_bush",
         "shape-shifter-curse:form_familiar_fox_instinct_biome",
         "shape-shifter-curse:form_snow_fox_instinct_sprint_jump",
-        "shape-shifter-curse:prevent_berry_effect"
+        "shape-shifter-curse:prevent_berry_effect",
+        "shape-shifter-curse:form_familiar_fox_sound_key"
     ],
     "icon": {
         "item": "minecraft:player_head"

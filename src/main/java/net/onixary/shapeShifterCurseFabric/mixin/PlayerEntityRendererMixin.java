@@ -173,6 +173,22 @@ public class PlayerEntityRendererMixin {
                 isInvisible = false;
                 PlayerOriginComponent c = (PlayerOriginComponent) ModComponents.ORIGIN.get(abstractClientPlayerEntity);
                 for (var layer : OriginLayers.getLayers()) {
+                    if (abstractClientPlayerEntity.isSpectator()) {
+                        PlayerEntityModel<?> model = (PlayerEntityModel<?>) this.getModel();
+                        model.hat.hidden = false;
+                        model.head.hidden = false;
+                        model.body.hidden = false;
+                        model.jacket.hidden = false;
+                        model.leftArm.hidden = false;
+                        model.leftSleeve.hidden = false;
+                        model.rightArm.hidden = false;
+                        model.rightSleeve.hidden = false;
+                        model.leftLeg.hidden = false;
+                        model.leftPants.hidden = false;
+                        model.rightLeg.hidden = false;
+                        model.rightPants.hidden = false;
+                        return;
+                    }
                     var origin = c.getOrigin(layer);
                     if (origin == null) {
                         return;
@@ -227,6 +243,9 @@ public class PlayerEntityRendererMixin {
                 PlayerOriginComponent c = (PlayerOriginComponent) ModComponents.ORIGIN.get(aCPE);
                 int p = getOverlayMixin(livingEntity, this.getAnimationCounter(livingEntity, g));
                 for (var layer : OriginLayers.getLayers()) {
+                    if (aCPE.isSpectator()) {
+                        return;
+                    }
                     var origin = c.getOrigin(layer);
                     if (origin == null) {
                         return;

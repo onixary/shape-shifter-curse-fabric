@@ -6,7 +6,15 @@
     },
     "interval": 200,
     "condition": {
-        "type": "shape-shifter-curse:chance",
-        "chance": 0.3
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "shape-shifter-curse:enable_random_sound"
+            },
+            {
+                "type": "shape-shifter-curse:chance",
+                "chance": 0.3
+            }
+        ]
     }
 }

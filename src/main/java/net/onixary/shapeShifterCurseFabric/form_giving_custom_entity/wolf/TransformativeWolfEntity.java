@@ -17,6 +17,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
@@ -32,7 +33,12 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComp
 import net.onixary.shapeShifterCurseFabric.status_effects.TStatusApplier;
 import org.jetbrains.annotations.Nullable;
 
+import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_ANUBIS_WOLF_0_EFFECT;
+
 public class TransformativeWolfEntity extends WolfEntity {
+
+    public static float T_WOLF_STATUS_CHANCE = 0.5f;
+
     public TransformativeWolfEntity(EntityType<? extends WolfEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -77,10 +83,11 @@ public class TransformativeWolfEntity extends WolfEntity {
     }
 
     public static DefaultAttributeContainer.Builder createAttributes() {
+        // 我觉得把逆天攻击距离移除之后 攻击力高点也没多大问题
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 12.0)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3);
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0f)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2);
     }
 
     public static boolean canCustomSpawn(EntityType<TransformativeWolfEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
@@ -116,23 +123,6 @@ public class TransformativeWolfEntity extends WolfEntity {
             cooldown--;
         }
 
-        // 检查是否有目标玩家
-        LivingEntity target = this.getTarget();
-        if (target instanceof PlayerEntity && cooldown <= 0) {
-            PlayerEntity player = (PlayerEntity) target;
-
-            // 计算与玩家的距离
-            double distance = this.squaredDistanceTo(player);
-            if (distance <= StaticParams.CUSTOM_MOB_DEFAULT_ATTACK_RANGE * StaticParams.CUSTOM_MOB_DEFAULT_ATTACK_RANGE) {
-                // 对玩家造成伤害
-                tryAttack(player);
-                // 概率施加效果
-                TStatusApplier.applyStatusFromTMob(this, player);
-                // 重置冷却时间
-                cooldown = ATTACK_COOLDOWN;
-            }
-        }
-
         // 生成粒子效果
         if (this.getWorld().isClient) {
             for (int i = 0; i < 1; i++) {
@@ -146,16 +136,21 @@ public class TransformativeWolfEntity extends WolfEntity {
     }
 
     @Override
+    public void applyDamageEffects(LivingEntity attacker, Entity target) {
+        // 在applyStatusByChance里面已经判断形态了 无需在外面判断
+        if (target instanceof PlayerEntity player) {
+            TStatusApplier.applyStatusByChance(T_WOLF_STATUS_CHANCE, player, TO_ANUBIS_WOLF_0_EFFECT);
+        }
+    }
+
+    @Override
     public boolean tryAttack(Entity target) {
         if(target instanceof PlayerEntity) {
-            PlayerFormBase currentForm = target.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
-            if (currentForm.equals(RegPlayerForms.ORIGINAL_SHIFTER)) {
-                boolean attacked = target.damage(this.getDamageSources().mobAttack(this), (float)this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE));
-                if (attacked) {
-                    this.applyDamageEffects(this, target);
-                }
-                return attacked;
+            boolean attacked = target.damage(this.getDamageSources().mobAttack(this), (float)this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE));
+            if (attacked) {
+                this.applyDamageEffects(this, target);
             }
+            return attacked;
         }
         return super.tryAttack(target);
     }
@@ -168,6 +163,16 @@ public class TransformativeWolfEntity extends WolfEntity {
 
     @Override
     public void setOwner(PlayerEntity player) {
+        return;
+    }
+
+    @Override
+    protected Identifier getLootTableId() {
+        return new Identifier(ShapeShifterCurseFabric.MOD_ID, "entities/t_wolf");
+    }
+
+    @Override
+    public void setTamed(boolean tamed) {
         return;
     }
 }

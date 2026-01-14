@@ -1,0 +1,26 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"  C",
+		"MII",
+		"DD "
+	],
+	"key": {
+		"M": {
+			"item": "shape-shifter-curse:moondust_crystal_shard"
+		},
+		"C": {
+			"item": "minecraft:copper_ingot"
+		},
+		"D": {
+			"item": "minecraft:diamond"
+		},
+		"I": {
+			"item": "minecraft:iron_ingot"
+		}
+	},
+	"result": {
+		"item": "shape-shifter-curse:diamond_mining_claw",
+		"count": 1
+	}
+}

@@ -5,6 +5,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
+import net.onixary.shapeShifterCurseFabric.mana.ManaRegistries;
+import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 import org.jetbrains.annotations.Nullable;
 
 public class FeedEffect extends StatusEffect {
@@ -35,6 +37,9 @@ public class FeedEffect extends StatusEffect {
 
             player.getHungerManager().add(foodToAdd, saturationToAdd);
 
+            if (ManaRegistries.FAMILIAR_FOX_MANA.equals(ManaUtils.getPlayerManaTypeID(player))) {
+                ManaUtils.gainPlayerMana(player, 25d * distanceMultiplier);
+            }
         }
         // 原版会对 [瞬间恢复 瞬间伤害] 以外的的效果调用 this.applyUpdateEffect 导致重复加饱食度
         // super.applyInstantEffect(source, attacker, target, amplifier, proximity);
@@ -49,6 +54,9 @@ public class FeedEffect extends StatusEffect {
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
         if (entity instanceof PlayerEntity player) {
             player.getHungerManager().add(8, 0.6f);
+            if (ManaRegistries.FAMILIAR_FOX_MANA.equals(ManaUtils.getPlayerManaTypeID(player))) {
+                ManaUtils.gainPlayerMana(player, 38d);
+            }
         }
     }
 }

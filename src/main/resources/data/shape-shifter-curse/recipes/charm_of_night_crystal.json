@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "AMA",
+    " P "
+  ],
+  "key": {
+    "M": {
+      "item": "shape-shifter-curse:moondust_crystal_shard"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "P": {
+      "item": "minecraft:phantom_membrane"
+    }
+  },
+  "result": {
+    "item": "shape-shifter-curse:charm_of_night_crystal",
+    "count": 1
+  }
+}

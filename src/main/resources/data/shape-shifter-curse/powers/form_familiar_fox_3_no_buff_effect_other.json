@@ -1,0 +1,30 @@
+{
+  "type": "shape-shifter-curse:optional_effect_immunity",
+  "effects": [
+    "aquamirae:strong_armor",
+    "aquamirae:crystallization",
+    "aquamirae:health_decrease",
+    "aquamirae:armor_decrease",
+    "aquamirae:abyss_blindness", 
+    "extraalchemy:piper",
+    "extraalchemy:combustion",
+    "extraalchemy:concentration",
+    "extraalchemy:crumbling",
+    "extraalchemy:detection",
+    "extraalchemy:fuse",
+    "extraalchemy:gravity",
+    "extraalchemy:growing",
+    "extraalchemy:learning",
+    "extraalchemy:magnetism",
+    "extraalchemy:magnetism_disabled",
+    "extraalchemy:pacifism",
+    "extraalchemy:photosynthesis",
+    "extraalchemy:recall",
+    "extraalchemy:sails", 
+    "betterend:end_veil",
+    "frostiful:frost_bite",
+    "dehydration:thirst_effect",
+    "obscure_api:rush",
+    "obscure_api:fury"
+  ]
+}

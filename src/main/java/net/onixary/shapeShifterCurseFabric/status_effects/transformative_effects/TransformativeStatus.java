@@ -13,6 +13,6 @@ public class TransformativeStatus extends BaseTransformativeStatusEffect {
 
     @Override
     public void ActiveEffect(ServerPlayerEntity player) {
-        TransformManager.handleDirectTransform(player, this.getToForm(), false);
+        TransformManager.handleDirectTransform(player, this.getToForm(player), false);
     }
 }

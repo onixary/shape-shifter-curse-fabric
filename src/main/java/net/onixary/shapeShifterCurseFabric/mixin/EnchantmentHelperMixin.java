@@ -1,12 +1,16 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
 import net.onixary.shapeShifterCurseFabric.additional_power.LootingPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.SoulSpeedPower;
+import net.onixary.shapeShifterCurseFabric.util.EnchantmentUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -46,5 +50,13 @@ public class EnchantmentHelperMixin {
             return;
         }
         cir.setReturnValue(!PowerHolderComponent.getPowers(entity, SoulSpeedPower.class).isEmpty());
+    }
+
+    @ModifyExpressionValue(method = "getPossibleEntries", at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/EnchantmentTarget;isAcceptableItem(Lnet/minecraft/item/Item;)Z"))
+    private static boolean isAcceptableItem(boolean original, @Local(ordinal = 0) ItemStack itemStack, @Local Enchantment enchantment) {
+        if (!original) {
+            return EnchantmentUtils.isItemCanEnchantment(enchantment, itemStack);
+        }
+        return original;
     }
 }

@@ -12,6 +12,7 @@
         "shape-shifter-curse:form_familiar_fox_3_use_human_creature_bottle",
         "shape-shifter-curse:form_familiar_fox_2_use_illager_creature_bottle",
         "shape-shifter-curse:form_familiar_fox_use_entity_cooldown",
+        "shape-shifter-curse:form_familiar_fox_fire_arrow_cooldown",
         "shape-shifter-curse:form_familiar_fox_2_health",
         "shape-shifter-curse:form_all_food_down2",
         "shape-shifter-curse:form_disable_leg_armor",
@@ -28,7 +29,16 @@
         "shape-shifter-curse:prevent_berry_effect",
         "shape-shifter-curse:pillager_friendly",
         "shape-shifter-curse:scare_villager",
-        "shape-shifter-curse:modify_potion_stack_3"
+        "shape-shifter-curse:modify_potion_stack_8",
+        "shape-shifter-curse:form_familiar_fox_2_stick_fireball",
+        "shape-shifter-curse:form_familiar_fox_2_stick_fireball_damage",
+        "shape-shifter-curse:form_familiar_fox_2_charm_paper_fireball",
+        "shape-shifter-curse:form_familiar_fox_2_charm_paper_fireball_damage",
+        "shape-shifter-curse:form_familiar_fox_fireball_kind_boolean_resource",
+        "shape-shifter-curse:form_familiar_fox_2_mana",
+        "shape-shifter-curse:form_familiar_fox_low_mana_exhaustion",
+        "shape-shifter-curse:form_familiar_fox_2_low_mana_debuff",
+        "shape-shifter-curse:form_familiar_fox_sound_key"
     ],
     "icon": {
         "item": "minecraft:player_head"

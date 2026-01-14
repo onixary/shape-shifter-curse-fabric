@@ -1,0 +1,24 @@
+{
+    "type": "shape-shifter-curse:apply_effect",
+    "status_effects": [
+        {
+            "effect": "minecraft:blindness",
+            "duration": 1000000000,
+            "amplifier": 0,
+            "show_particles": false,
+            "show_icon": false
+        },
+        {
+            "effect": "minecraft:weakness",
+            "duration": 1000000000,
+            "amplifier": 1,
+            "show_particles": false,
+            "show_icon": false
+        }
+    ],
+    "condition": {
+        "type": "shape-shifter-curse:has_mana_percent",
+        "mana_percent": 0.06,
+        "inverted": true
+    }
+}

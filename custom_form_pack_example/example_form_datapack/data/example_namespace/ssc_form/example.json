@@ -102,12 +102,9 @@
       }
     },
     "shape-shifter-curse:attack_state": {
-      "controllerType": "shape-shifter-curse:sneak_anim_controller",
+      "controllerType": "shape-shifter-curse:one_anim_controller",
       "anim": {
         "animID": "shape-shifter-curse:form_feral_common_attack"
-      },
-      "sneakAnim": {
-        "animID": "shape-shifter-curse:form_feral_common_sneak_attack"
       }
     },
     "shape-shifter-curse:fall_flying_state": {

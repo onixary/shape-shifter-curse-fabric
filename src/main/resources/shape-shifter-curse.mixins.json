@@ -49,7 +49,18 @@
     "EntityLootingMixin",
     "BlockDropMixin",
     "ScareSkeletonMixin",
-    "PlayerAnimInterfaceMixin"
+    "PlayerAnimInterfaceMixin",
+    "TrinketItemMixin",
+    "PotionItemMixin",
+    "PotionEntityMixin",
+    "AreaEffectCloudEntityMixin",
+    "ArrowEntityMixin",
+    "LingeringPotionItemMixin",
+    "TippedArrowItemMixin",
+    "BrewingRecipeRegistryMixin",
+    "HissPhantomMixin",
+    "EnchantmentUtilAnvilMixin",
+    "EnchantmentUtilEnchantCommandMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",
@@ -63,7 +74,6 @@
     "GameRendererMixin",
     "IEntityRenderDispatcherAccessor",
     "InGameHudMixin",
-    "InstinctBarMixin",
     "InventoryScreenMixin",
     "KeyboardInputMixin",
     "MinecraftClientMixin",
@@ -75,7 +85,10 @@
     "PlayerEntitySpeedFOVMixin",
     "PlayerMovementControlMixin",
     "PlayerRotationRendererMixin",
-    "accessor.ApoliClientAccessor"
+    "accessor.ApoliClientAccessor",
+    "integration.TacZ_Anim",
+    "integration.TacZ_AnimThird",
+    "PlayerClipAtLedgeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

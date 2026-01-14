@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  },
+  "base": {
+    "item": "shape-shifter-curse:morphscale_headring"
+  },
+  "addition": {
+    "item": "minecraft:netherite_scrap"
+  },
+  "result": {
+    "item": "shape-shifter-curse:netherite_morphscale_headring"
+  }
+}

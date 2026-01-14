@@ -182,8 +182,12 @@ dependencies {
     //include "io.github.ladysnake:PlayerAbilityLib:${pal_version}"
 
     // Apoli by Apace100
-    modImplementation "com.github.apace100:apoli:${project.apoli_version}"
-    include "com.github.apace100:apoli:${project.apoli_version}"
+
+    // modImplementation "com.github.apace100:apoli:${project.apoli_version}"
+    // include "com.github.apace100:apoli:${project.apoli_version}"
+    // 使用Ladysnake Mods的源 用正常的版本号
+    modImplementation "io.github.apace100:apoli:${project.apoli_version}"
+    include "io.github.apace100:apoli:${project.apoli_version}"
 
     modApi("com.github.Virtuoel:Pehkui:${pehkui_version}", {
         exclude group: "net.fabricmc.fabric-api"
@@ -212,6 +216,10 @@ dependencies {
     // Player Anim
     include modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:${project.player_anim}")
 
+    // Trinkets
+
+    modImplementation "dev.emi:trinkets:${project.trinkets_version}"
+
     // Fabric forge config api port
     // modLocalRuntime "fuzs.forgeconfigscreens:forgeconfigscreens-fabric:8.0.0"
 
@@ -234,6 +242,8 @@ dependencies {
 
     modCompileOnly "maven.modrinth:vivecraft:9Sa2NEEb"
     annotationProcessor(files("libs/mixinextras-fabric-0.2.0-beta.8.jar"))
+
+    modCompileOnly "maven.modrinth:tacz-refabricated:HxQ3IsAZ" // TaCZ: Refabricated 1.20.1-0.4.0-forge1.1.7-hotfix
 
 }
 
