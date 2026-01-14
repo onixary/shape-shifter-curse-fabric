@@ -20,7 +20,12 @@ import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.TStatusApplier;
 
+import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_AXOLOTL_0_EFFECT;
+
 public class TransformativeAxolotlEntity extends AxolotlEntity {
+
+    public static float T_AXOLOTL_STATUS_CHANCE = 0.7f;
+
     public TransformativeAxolotlEntity(EntityType<? extends AxolotlEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -73,7 +78,7 @@ public class TransformativeAxolotlEntity extends AxolotlEntity {
                 // 对玩家造成伤害
                 tryAttack(player);
                 // 概率施加效果
-                TStatusApplier.applyStatusFromTMob(this, player);
+                TStatusApplier.applyStatusByChance(T_AXOLOTL_STATUS_CHANCE, player, TO_AXOLOTL_0_EFFECT);
                 // 重置冷却时间
                 cooldown = ATTACK_COOLDOWN;
             }

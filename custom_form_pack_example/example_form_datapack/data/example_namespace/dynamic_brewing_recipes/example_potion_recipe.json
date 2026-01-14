@@ -1,0 +1,7 @@
+{
+  "type": "potion",
+  "input": "shape-shifter-curse:moondust_potion",
+  "ingredient": "minecraft:bone",
+  "output": "shape-shifter-curse:to_custom_statue_potion",
+  "target_form": "example_namespace:example"
+}

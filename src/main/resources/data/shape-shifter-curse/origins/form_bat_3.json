@@ -3,6 +3,7 @@
         "shape-shifter-curse:no_render_arm",
         "shape-shifter-curse:form_bat_3_scale",
         "shape-shifter-curse:elytra_no_render",
+        "shape-shifter-curse:form_bat_hit_wall_damage_reduce",
         "shape-shifter-curse:bat_vision",
         "shape-shifter-curse:form_disable_chest_armor",
         "shape-shifter-curse:form_disable_leg_armor",
@@ -22,7 +23,9 @@
         "shape-shifter-curse:barehand_digging_speed_up",
         "shape-shifter-curse:always_harvest",
         "shape-shifter-curse:form_vegetarian_food_up",
-        "shape-shifter-curse:form_bat_sound_hurt"
+        "shape-shifter-curse:form_bat_sound_hurt",
+        "shape-shifter-curse:form_bat_diamond_mining_claw_tool",
+        "shape-shifter-curse:form_bat_sound_key"
     ],
     "icon": {
         "item": "minecraft:player_head"

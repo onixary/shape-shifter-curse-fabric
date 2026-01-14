@@ -1,0 +1,42 @@
+{
+  "shape-shifter-curse:collar_of_tension": {
+    "accessory_powers": [],
+    "all_form": {
+      "add": [],
+      "remove": []
+    },
+    "forms": {
+      "shape-shifter-curse:ocelot_0": {
+        "add": [
+        ],
+        "remove": [
+        ]
+      },
+      "shape-shifter-curse:ocelot_1": {
+        "add": [
+        ],
+        "remove": [
+        ]
+      },
+      "shape-shifter-curse:ocelot_2": {
+        "add": [
+          "shape-shifter-curse:form_ocelot_collar_of_tension_trinket"
+        ],
+        "remove": [
+          "shape-shifter-curse:barehand_attack_up",
+          "shape-shifter-curse:form_ocelot_2_arrow_dodge"
+        ]
+      },
+      "shape-shifter-curse:ocelot_3": {
+        "add": [
+          "shape-shifter-curse:form_ocelot_collar_of_tension_trinket"
+        ],
+        "remove": [
+          "shape-shifter-curse:barehand_attack_up",
+          "shape-shifter-curse:form_ocelot_3_sneaking_jump_clash",
+          "shape-shifter-curse:form_ocelot_2_arrow_dodge"
+        ]
+      }
+    }
+  }
+}

@@ -17,8 +17,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
-import net.onixary.shapeShifterCurseFabric.minion.MinionRegister;
-import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntity;
+import net.onixary.shapeShifterCurseFabric.mana.ManaComponent;
+import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
@@ -385,10 +385,26 @@ public class ShapeShifterCurseCommand {
             return 1;
         }
         try {
-            AnubisWolfMinionEntity anubisWolfMinionEntity = MinionRegister.SpawnMinion(MinionRegister.ANUBIS_WOLF_MINION, world, player.getBlockPos(), player);
-            anubisWolfMinionEntity.setMinionLevel(3);
+//            ItemStack stack = new ItemStack(Items.POTION);
+//            PotionUtil.setPotion(stack, RegCustomPotions.CUSTOM_STATUE_FORM_POTION);
+//            CTPUtils.setCTPFormIDToNBT(stack.getNbt(), RegPlayerForms.SNOW_FOX_3.FormID);
+//            player.giveItemStack(stack);
+            ManaComponent manaComponent = ManaUtils.getManaComponent(player);
+            StringBuilder stringBuilder = new StringBuilder("\nMana Data\n");
+            Identifier manaType = manaComponent.getManaTypeID();
+            if (manaType != null) {
+                stringBuilder.append("Mana Type: ").append(manaType.toString()).append("\n");
+            } else {
+                stringBuilder.append("Mana Type: None\n");
+            }
+            stringBuilder.append("Mana: ").append(manaComponent.getMana()).append("\n");
+            stringBuilder.append("Max Mana Client: ").append(manaComponent.MaxManaClient).append("\n");
+            stringBuilder.append("Mana Regen: ").append(manaComponent.ManaRegenClient).append("\n");
+            stringBuilder.append("Max Mana Server: ").append(manaComponent.getMaxMana()).append("\n");
+            stringBuilder.append("Mana Regen Server: ").append(manaComponent.getManaRegen()).append("\n");
+            player.sendMessage(Text.literal(stringBuilder.toString()), false);
         } catch (Exception e) {
-            ShapeShifterCurseFabric.LOGGER.error("Error when spawn minion: ", e);
+            ShapeShifterCurseFabric.LOGGER.error("Error Dev Command", e);
             return 0;
         }
         return 0;

@@ -3,11 +3,11 @@
     "food_modifier": {
         "name": "Decreased food points",
         "operation": "multiply_base_multiplicative",
-        "value": -0.55
+        "value": -0.35
     },
     "saturation_modifier": {
         "name": "Decreased saturation points",
         "operation": "multiply_base_multiplicative",
-        "value": -0.5
+        "value": -0.3
     }
 }

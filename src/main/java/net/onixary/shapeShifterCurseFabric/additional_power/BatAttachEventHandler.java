@@ -18,7 +18,7 @@ public class BatAttachEventHandler {
                 return ActionResult.PASS;
             }
 
-            if (hand != Hand.MAIN_HAND || !player.getMainHandStack().isEmpty()) {
+            if (hand != Hand.MAIN_HAND) {
                 return ActionResult.PASS;
             }
 

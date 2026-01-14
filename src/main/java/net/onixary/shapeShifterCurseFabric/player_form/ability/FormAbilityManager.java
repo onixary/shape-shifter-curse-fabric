@@ -20,6 +20,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
+import net.onixary.shapeShifterCurseFabric.util.TrinketUtils;
 import virtuoel.pehkui.api.ScaleData;
 import virtuoel.pehkui.api.ScaleTypes;
 
@@ -96,6 +97,8 @@ public class FormAbilityManager {
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
         // 存储
         FormAbilityManager.saveForm(player);
+
+        TrinketUtils.ReApplyAccessoryPowerOnPlayerFormChange(player);
 
         // 添加网络同步：通知客户端形态已变化
         if (!player.getWorld().isClient() && player instanceof ServerPlayerEntity serverPlayer) {

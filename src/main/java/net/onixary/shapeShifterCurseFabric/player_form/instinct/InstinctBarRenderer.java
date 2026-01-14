@@ -4,11 +4,14 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormPhase;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.util.UIPositionUtils;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
@@ -46,7 +49,7 @@ public class InstinctBarRenderer  {
         PlayerFormPhase currentPhase = curForm.getPhase();
         boolean showInstinctBar = !(currentPhase == PlayerFormPhase.PHASE_CLEAR || currentPhase == PlayerFormPhase.PHASE_3);;
         if(curForm.FormIndex < 2){
-            if(CursedMoon.isCursedMoon(player.getWorld()) && CursedMoon.isNight()){
+            if(CursedMoon.isCursedMoon(player.getWorld()) && CursedMoon.isNight(player.getWorld())){
                 this.isInstinctLock = true;
             }
             else{
@@ -61,15 +64,16 @@ public class InstinctBarRenderer  {
                 && mc.interactionManager != null
                 && mc.interactionManager.hasStatusBars()
                 && showInstinctBar) {
-            int width = mc.getWindow().getScaledWidth();
-            int height = mc.getWindow().getScaledHeight();
-            //float x = (float) width / 2 + 11;
-            float x = (float)width / 2 - 40;
-            // 39 is the height of the health bar
-            float y = height - 39;
-            y += 16;
+            // int width = mc.getWindow().getScaledWidth();
+            // int height = mc.getWindow().getScaledHeight();
+            // //float x = (float) width / 2 + 11;
+            // float x = (float)width / 2 + 100;
+            // // 39 is the height of the health bar
+            // float y = height - 39;
+            // y += 30;
+            Pair<Integer, Integer> pos = UIPositionUtils.getCorrectPosition(ShapeShifterCurseFabric.clientConfig.instinctBarPosType, ShapeShifterCurseFabric.clientConfig.instinctBarPosOffsetX, ShapeShifterCurseFabric.clientConfig.instinctBarPosOffsetY);
             updateBarTextures(player);
-            renderInstinctBar(context, tickDelta, (int) x, (int) y, player);
+            renderInstinctBar(context, tickDelta, pos.getLeft(), pos.getRight(), player);
         }
     }
 

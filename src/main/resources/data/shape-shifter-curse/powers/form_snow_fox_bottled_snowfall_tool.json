@@ -1,0 +1,75 @@
+{
+    "type": "origins:action_on_item_use",
+    "entity_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "origins:fire_projectile",
+                "entity_type": "minecraft:snowball",
+                "divergence": 0.0,
+                "count": 1,
+                "projectile_action": {
+                    "type": "origins:and",
+                    "actions": [
+                        {
+                            "type": "origins:spawn_particles",
+                            "particle": "minecraft:cloud",
+                            "count": 8,
+                            "speed": 0.0,
+                            "force": false,
+                            "spread": {
+                                "x": 2.0,
+                                "y": 1.0,
+                                "z": 2.0
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.snowball.throw"
+            },
+            {
+                "type": "origins:play_sound",
+                "sound": "minecraft:block.amethyst_block.fall"
+            },
+            {
+                "type": "origins:exhaust",
+                "amount": 2
+            },
+            {
+                "type": "origins:trigger_cooldown",
+                "power": "shape-shifter-curse:form_snow_fox_bottled_snowfall_cooldown"
+            }
+        ]
+    },
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:resource",
+                "resource": "shape-shifter-curse:form_snow_fox_bottled_snowfall_cooldown",
+                "comparison": "<",
+                "compare_to": 1
+            },
+            {
+                "type": "origins:food_level",
+                "comparison": ">",
+                "compare_to": 0
+            }
+        ]
+    },
+    "item_condition": {
+        "type": "origins:ingredient",
+        "ingredient": {
+            "item": "shape-shifter-curse:bottled_snowfall"
+        }
+    },
+    "item_action": {
+        "type": "origins:damage",
+        "amount": 1,
+        "ignore_unbreaking": false
+    },
+    "trigger": "instant"
+}

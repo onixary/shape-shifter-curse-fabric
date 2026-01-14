@@ -1,9 +1,11 @@
 package net.onixary.shapeShifterCurseFabric.client;
 
+import io.github.apace100.apoli.ApoliClient;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import mod.azure.azurelib.rewrite.render.armor.AzArmorRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
@@ -11,8 +13,11 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderProgram;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.CustomEdiblePower;
@@ -23,8 +28,12 @@ import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TAxolotlEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.BatEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TOcelotEntityRenderer;
+import net.onixary.shapeShifterCurseFabric.integration.origins.Origins;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.armors.MorphscaleArmorRenderer;
+import net.onixary.shapeShifterCurseFabric.items.armors.NetheriteMorphscaleArmorRenderer;
+import net.onixary.shapeShifterCurseFabric.mana.ManaRegistriesClient;
+import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 import net.onixary.shapeShifterCurseFabric.minion.MinionRegisterClient;
 import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
@@ -33,6 +42,7 @@ import net.onixary.shapeShifterCurseFabric.render.render_layer.FurGradientRender
 import net.onixary.shapeShifterCurseFabric.util.ClientTicker;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 import net.onixary.shapeShifterCurseFabric.util.TickManager;
+import org.lwjgl.glfw.GLFW;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -50,6 +60,12 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		return MinecraftClient.getInstance();
 	}
 	private static ShaderProgram furGradientShader;
+
+	public static KeyBinding toggleClipAtLedge;
+	public static KeyBinding makeSound;
+
+	private static boolean toggleClipAtLedgeIsPressed = false;
+	public static boolean isClipAtLedge = true;
 
 	public static void openBookScreen(PlayerEntity user) {
 		// 仅当owo_lib加载时才能调用旧版页面，否则回退回新版
@@ -132,10 +148,23 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
                 RegCustomItem.MORPHSCALE_CUISH,
                 RegCustomItem.MORPHSCALE_ANKLET
         );
+		AzArmorRendererRegistry.register(
+				NetheriteMorphscaleArmorRenderer::new,
+				RegCustomItem.NETHERITE_MORPHSCALE_HEADRING,
+				RegCustomItem.NETHERITE_MORPHSCALE_VEST,
+				RegCustomItem.NETHERITE_MORPHSCALE_CUISH,
+				RegCustomItem.NETHERITE_MORPHSCALE_ANKLET
+		);
     }
 
 	private static void onClientTick(MinecraftClient minecraftClient){
 		TickManager.tickClientAll();
+		ClientPlayerEntity clientPlayer = minecraftClient.player;
+		if(clientPlayer == null){
+			return;
+		}
+		// Mana System
+		ManaUtils.manaTick(minecraftClient.player);
 	}
 
 	public static void emitTransformParticle(int duration) {
@@ -255,6 +284,8 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		FurGradientRenderLayer.onInitializeClient();
         registerAzureArmorGeo();
 
+		ManaRegistriesClient.register();
+
 		ClientTickEvents.END_CLIENT_TICK.register(ShapeShifterCurseFabricClient::onClientTick);
 		// 客户端能力处理
 		ClientTickEvents.START_CLIENT_TICK.register((minecraftClient) -> {
@@ -272,6 +303,26 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 			PowerHolderComponent.KEY.get(clientPlayer).getPowers().stream().filter(p -> p instanceof LevitatePower).forEach(p -> ((LevitatePower) p).clientTick(clientPlayer));
 			CustomEdiblePower.OnClientTick(clientPlayer);
 		});
+
+		makeSound = new KeyBinding("key.shape-shifter-curse.make_sound", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_GRAVE_ACCENT, "category." + MOD_ID);
+		ApoliClient.registerPowerKeybinding("make_sound", makeSound);
+		KeyBindingHelper.registerKeyBinding(makeSound);
+		toggleClipAtLedge = new KeyBinding("key.shape-shifter-curse.toggle_clip_at_ledge", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + MOD_ID);
+		KeyBindingHelper.registerKeyBinding(toggleClipAtLedge);
+		ClientTickEvents.END_CLIENT_TICK.register((client) -> {
+			if (toggleClipAtLedge.isPressed()) {
+				if (!toggleClipAtLedgeIsPressed) {
+					isClipAtLedge = !isClipAtLedge;
+                    if (client.player != null) {
+                        client.player.sendMessage(Text.translatable("message.shape-shifter-curse.clip_at_ledge." + (isClipAtLedge ? "on" : "off")), true);
+                    }
+				}
+				toggleClipAtLedgeIsPressed = true;
+			} else {
+				toggleClipAtLedgeIsPressed = false;
+			}
+		});
+
 		PatronUtils.OnClientInit();
 	}
 

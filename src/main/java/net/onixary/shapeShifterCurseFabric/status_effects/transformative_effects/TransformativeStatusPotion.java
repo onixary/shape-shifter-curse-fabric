@@ -62,7 +62,7 @@ public class TransformativeStatusPotion extends StatusEffect {
              */
             // 从TStatusApplier中提取的代码
             TransformativeStatusInstance instance = EffectManager.getTransformativeEffect(player);
-            if (instance == null || instance.getTransformativeEffectType() == null || !instance.getTransformativeEffectType().getToForm().equals(this.TransformativeStatusEffect.getToForm())) {  // 如果当前效果的形态与regStatusEffect不同
+            if (instance == null || instance.getTransformativeEffectType() == null || !instance.getTransformativeEffectType().getToForm(player).equals(this.TransformativeStatusEffect.getToForm(player))) {  // 如果当前效果的形态与regStatusEffect不同
                 if (RegPlayerForms.ORIGINAL_SHIFTER.equals(FormAbilityManager.getForm(player))) {
                     EffectManager.overrideEffect(player, this.TransformativeStatusEffect);
                 }

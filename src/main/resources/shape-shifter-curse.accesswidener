@@ -15,3 +15,11 @@ accessible class net/minecraft/entity/passive/WolfEntity$WolfEscapeDangerGoal
 accessible class net/minecraft/entity/passive/WolfEntity$AvoidLlamaGoal
 accessible field net/minecraft/entity/passive/PassiveEntity$PassiveData babyAllowed Z
 mutable field net/minecraft/entity/passive/PassiveEntity$PassiveData babyAllowed Z
+accessible class net/minecraft/recipe/BrewingRecipeRegistry$Recipe
+accessible field net/minecraft/recipe/BrewingRecipeRegistry POTION_RECIPES Ljava/util/List;
+accessible field net/minecraft/recipe/BrewingRecipeRegistry ITEM_RECIPES Ljava/util/List;
+accessible field net/minecraft/recipe/BrewingRecipeRegistry$Recipe input Ljava/lang/Object;
+accessible field net/minecraft/recipe/BrewingRecipeRegistry$Recipe ingredient Lnet/minecraft/recipe/Ingredient;
+accessible field net/minecraft/recipe/BrewingRecipeRegistry$Recipe output Ljava/lang/Object;
+accessible field net/minecraft/server/network/ServerPlayerInteractionManager mining Z
+accessible field net/minecraft/screen/ForgingScreenHandler input Lnet/minecraft/inventory/Inventory;

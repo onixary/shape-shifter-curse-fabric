@@ -1,0 +1,39 @@
+{
+  "shape-shifter-curse:withered_bandage": {
+    "accessory_powers": [],
+    "all_form": {
+      "add": [],
+      "remove": []
+    },
+    "forms": {
+      "shape-shifter-curse:anubis_wolf_0": {
+        "add": [
+        ],
+        "remove": [
+        ]
+      },
+      "shape-shifter-curse:anubis_wolf_1": {
+        "add": [
+        ],
+        "remove": [
+        ]
+      },
+      "shape-shifter-curse:anubis_wolf_2": {
+        "add": [
+          "shape-shifter-curse:form_anubis_wolf_2_withered_bandage_trinket"
+        ],
+        "remove": [
+          "shape-shifter-curse:form_anubis_wolf_2_wither_on_hit"
+        ]
+      },
+      "shape-shifter-curse:anubis_wolf_3": {
+        "add": [
+          "shape-shifter-curse:form_anubis_wolf_3_withered_bandage_trinket"
+        ],
+        "remove": [
+          "shape-shifter-curse:form_anubis_wolf_3_wither_on_hit"
+        ]
+      }
+    }
+  }
+}

@@ -17,7 +17,7 @@ public abstract class BaseTransformativeStatusEffect extends StatusEffect {
         this.toForm = toForm;
     }
 
-    public PlayerFormBase getToForm() {
+    public PlayerFormBase getToForm(PlayerEntity player) {
         return toForm;
     }
 

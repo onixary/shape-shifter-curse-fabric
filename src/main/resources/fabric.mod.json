@@ -5,12 +5,58 @@
 
   "name": "Shape Shifter Curse",
   "description": "a mod which focus on gradually transform into different forms based on vanilla creatures, gaining their unique abilities and drawbacks",
-  "authors": ["onixary"],
+  "authors": [
+    {
+      "name": "onixary",
+      "contact": {
+        "github": "https://github.com/onixary"
+      }
+    },
+    {
+      "name": "XuHaoNan",
+      "contact": {
+        "github": "https://github.com/xu233333",
+        "email": "18510478058@163.com"
+      }
+    }
+  ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/shape-shifter-curse",
     "sources": "https://github.com/onixary/shape-shifter-curse-fabric",
     "issues": "https://github.com/onixary/shape-shifter-curse-fabric/issues"
   },
+  "contributors": [
+    {
+      "name": "MaxMobile-ru",
+      "contact": {
+        "github": "https://github.com/MaxMobile-ru"
+      }
+    },
+    {
+      "name": "A cat",
+      "contact": {
+        "github": "https://github.com/wuhenqiubai"
+      }
+    },
+    {
+      "name": "ctmayton",
+      "contact": {
+        "github": "https://github.com/ctmayton"
+      }
+    },
+    {
+      "name": "OregonBanner",
+      "contact": {
+        "github": "https://github.com/OregonBanner"
+      }
+    },
+    {
+      "name": "solunareclipse1",
+      "contact": {
+        "github": "https://github.com/solunareclipse1"
+      }
+    }
+  ],
 
   "license": "MIT",
   "icon": "assets/shape-shifter-curse/icon.png",
@@ -35,7 +81,8 @@
       "net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent",
       "net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent",
       "net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent",
-      "net.onixary.shapeShifterCurseFabric.minion.RegPlayerMinionComponent"
+      "net.onixary.shapeShifterCurseFabric.minion.RegPlayerMinionComponent",
+      "net.onixary.shapeShifterCurseFabric.mana.RegManaComponent"
     ],
     "calio:ordered-resource-listener": [
       "net.onixary.shapeShifterCurseFabric.integration.origins.Origins"
@@ -56,7 +103,8 @@
       "shape-shifter-curse:player_form",
       "shape-shifter-curse:player_instinct_component",
       "shape-shifter-curse:skin_settings",
-      "shape-shifter-curse:player_minion_data"
+      "shape-shifter-curse:player_minion_data",
+      "shape-shifter-curse:mana"
     ]
   },
 
@@ -66,12 +114,16 @@
     "fabric": ">=0.83.0",
     "minecraft": "1.20.1",
     "pehkui": ">=3.7.8",
-    "satin": ">=1.14.0"
+    "satin": ">=1.14.0",
+    "trinkets": ">=3.7.2"
   },
   "breaks": {
     "origins": ">0.0.0",
     "optifabric": "*",
-    "identity": "<1.14.2-beta"
+    "identity": "<1.14.2-beta",
+    "azurelib": ">3.0.19",
+    "azurelibarmor": "<2.0.12",
+    "geckolib": "<4.7.0"
   },
   "recommends": {
     "rich_translatable_text": ">=1.0.1",

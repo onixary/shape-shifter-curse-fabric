@@ -36,6 +36,10 @@
                         {
                             "type": "origins:trigger_cooldown",
                             "power": "shape-shifter-curse:form_familiar_fox_use_entity_cooldown"
+                        },
+                        {
+                            "type": "shape-shifter-curse:gain_mana",
+                            "mana": 38
                         }
                     ]
                 }

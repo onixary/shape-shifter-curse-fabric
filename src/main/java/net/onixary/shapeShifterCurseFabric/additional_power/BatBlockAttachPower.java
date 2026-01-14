@@ -8,6 +8,7 @@ import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.pattern.CachedBlockPosition;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -31,6 +32,7 @@ import static net.onixary.shapeShifterCurseFabric.additional_power.BatAttachEven
 
 public class BatBlockAttachPower extends Power {
 
+    private final Predicate<Entity> entityAttachCondition;
     private final Predicate<CachedBlockPosition> blockCondition;
     private final Consumer<LivingEntity> sideAttachAction;
     private final Consumer<LivingEntity> bottomAttachAction;
@@ -48,11 +50,13 @@ public class BatBlockAttachPower extends Power {
     }
 
     public BatBlockAttachPower(PowerType<?> type, LivingEntity entity,
+                               Predicate<Entity> entityAttachCondition,
                                Predicate<CachedBlockPosition> blockCondition,
                                Consumer<LivingEntity> sideAttachAction,
                                Consumer<LivingEntity> bottomAttachAction,
                                int bottomAttachInterval) {
         super(type, entity);
+        this.entityAttachCondition = entityAttachCondition;
         this.blockCondition = blockCondition;
         this.sideAttachAction = sideAttachAction;
         this.bottomAttachAction = bottomAttachAction;
@@ -136,10 +140,11 @@ public class BatBlockAttachPower extends Power {
     }
 
     public boolean tryAttach(PlayerEntity player, BlockHitResult hitResult) {
-        //System.out.println("Debug: tryAttach called - isAttached=" + isAttached +
-        //        ", hasMainHandItem=" + !player.getMainHandStack().isEmpty());
+        if (isAttached || player.isOnGround()) {
+            return false;
+        }
 
-        if (isAttached || !player.getMainHandStack().isEmpty() || player.isOnGround()) {
+        if (this.entityAttachCondition != null && !this.entityAttachCondition.test(player)) {
             return false;
         }
 
@@ -239,7 +244,7 @@ public class BatBlockAttachPower extends Power {
         // 重置物理状态
         player.setOnGround(false);
         player.setVelocity(Vec3d.ZERO);
-        player.addVelocity(0, 0.2, 0);
+        player.addVelocity(0, 0.4f, 0);
         if(isByJump){
             // 获取玩家面向方向的水平向量
             float yaw = player.getYaw();
@@ -251,7 +256,8 @@ public class BatBlockAttachPower extends Power {
 
             // 设置推进速度（可以调整0.5这个数值来改变推进力度）
             double jumpSpeed = 1.25f;
-            player.addVelocity(dirX * jumpSpeed, 0, dirZ * jumpSpeed);
+            // 同时添加向上的速度
+            player.addVelocity(dirX * jumpSpeed, 0.4f, dirZ * jumpSpeed);
         }
         player.velocityDirty = true;
         player.velocityModified = true;
@@ -372,6 +378,7 @@ public class BatBlockAttachPower extends Power {
         return new PowerFactory<>(
                 ShapeShifterCurseFabric.identifier("bat_block_attach"),
                 new SerializableData()
+                        .add("attach_condition", ApoliDataTypes.ENTITY_CONDITION, null)
                         .add("block_condition", ApoliDataTypes.BLOCK_CONDITION, null)
                         .add("side_attach_action", ApoliDataTypes.ENTITY_ACTION, null)
                         .add("bottom_attach_action", ApoliDataTypes.ENTITY_ACTION, null)
@@ -379,6 +386,7 @@ public class BatBlockAttachPower extends Power {
                 data -> (type, entity) -> new BatBlockAttachPower(
                         type,
                         entity,
+                        data.get("attach_condition"),
                         data.get("block_condition"),
                         data.get("side_attach_action"),
                         data.get("bottom_attach_action"),

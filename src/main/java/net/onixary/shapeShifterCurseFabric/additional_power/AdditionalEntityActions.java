@@ -10,11 +10,14 @@ public class AdditionalEntityActions {
     public static void register() {
         registerAction(AddInstinctAction.getFactory());
         registerAction(SetFallingDistanceAction.createFactory());
-        registerAction(TransformAction.createFactory());
+        TransformAction.registerAction(AdditionalEntityActions::registerAction, AdditionalEntityActions::registerBIAction);
         registerAction(ExplosionDamageEntityAction.createFactory());
         registerAction(SummonMinionWolfNearbyAction.createFactory());
         registerBIAction(SummonMinionWolfNearbyAction.createBIFactory());
         PlayPowerAnimationAction.register(AdditionalEntityActions::registerAction, AdditionalEntityActions::registerBIAction);
+        ManaUtilsApoli.registerAction(AdditionalEntityActions::registerAction, AdditionalEntityActions::registerBIAction);
+        FireArrowAction.registerAction(AdditionalEntityActions::registerAction, AdditionalEntityActions::registerBIAction);
+        registerAction(SpawnParticlesInCircleAction.getFactory());
     }
 
     public static ActionFactory<Entity> registerAction(ActionFactory<Entity> actionFactory) {

@@ -21,7 +21,7 @@ public class PlayerTransformEffectManager {
         player.addStatusEffect(immobilityEffect);
 
         // prevent jump
-        StatusEffectInstance preventJumpEffect = new StatusEffectInstance(StatusEffects.JUMP_BOOST, duration, 137);
+        StatusEffectInstance preventJumpEffect = new StatusEffectInstance(StatusEffects.JUMP_BOOST, duration, 250);  // 250级在床上不飞天
         player.addStatusEffect(preventJumpEffect);
 
     }
@@ -36,7 +36,7 @@ public class PlayerTransformEffectManager {
         player.addStatusEffect(immobilityEffect);
 
         // prevent jump
-        StatusEffectInstance preventJumpEffect = new StatusEffectInstance(StatusEffects.JUMP_BOOST, duration, 137);
+        StatusEffectInstance preventJumpEffect = new StatusEffectInstance(StatusEffects.JUMP_BOOST, duration, 250);  // 250级在床上不飞天
         player.addStatusEffect(preventJumpEffect);
 
     }

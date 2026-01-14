@@ -16,7 +16,8 @@
         "shape-shifter-curse:form_familiar_fox_instinct_biome",
         "shape-shifter-curse:witch_friendly",
         "shape-shifter-curse:prevent_berry_effect",
-        "shape-shifter-curse:pillager_friendly"
+        "shape-shifter-curse:pillager_friendly",
+        "shape-shifter-curse:form_familiar_fox_sound_key"
     ],
     "icon": {
         "item": "minecraft:player_head"

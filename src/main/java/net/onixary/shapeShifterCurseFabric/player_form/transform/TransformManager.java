@@ -167,8 +167,6 @@ public class TransformManager {
         handleTransformEffect(player);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
         FormAbilityManager.saveForm(player);
-        MinecraftServer server = player.getServer();
-        syncCursedMoonData(player, server);
     }
 
     // 仅服务端
@@ -230,18 +228,16 @@ public class TransformManager {
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
         ShapeShifterCurseFabric.LOGGER.info("Moon end transform，_isByCursedMoonEnd=" + data._isByCursedMoonEnd +
                 "，component isByCursedMoon=" + RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon());
-        MinecraftServer server = player.getServer();
-        syncCursedMoonData(player, server);
     }
 
     // 仅服务端
     static PlayerFormBase getRandomOrBuffForm(ServerPlayerEntity player){
         TransformativeStatusInstance instance = EffectManager.getTransformativeEffect(player);
         if(instance != null && instance.getTransformativeEffectType() != null){
-            return instance.getTransformativeEffectType().getToForm();
+            return instance.getTransformativeEffectType().getToForm(player);
         }
         else{
-            return FormRandomSelector.getRandomFormFromPredefined();
+            return FormRandomSelector.getRandomForm_CurseMoon();
         }
     }
 
@@ -452,22 +448,6 @@ public class TransformManager {
         handleTransformEffect(player);
         applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);
         // FormAbilityManager.applyForm(player, toForm);
-        MinecraftServer server = player.getServer();
-        syncCursedMoonData(player, server);
-    }
-
-    // 双端 但我觉得是仅服务端 继承于handleDirectTransform
-    private static void syncCursedMoonData(PlayerEntity player, MinecraftServer server){
-        /*if(FormAbilityManager.getForm(player) == PlayerForms.ORIGINAL_BEFORE_ENABLE){
-            ShapeShifterCurseFabric.LOGGER.info("Cursed moon disabled");
-            ShapeShifterCurseFabric.cursedMoonData.getInstance().disableCursedMoon(server.getOverworld());
-        }
-        else{
-            ShapeShifterCurseFabric.LOGGER.info("Cursed moon enabled");
-            ShapeShifterCurseFabric.cursedMoonData.getInstance().enableCursedMoon(server.getOverworld());
-        }*/
-        ShapeShifterCurseFabric.LOGGER.info("Cursed moon data saved by syncCursedMoonData");
-        ShapeShifterCurseFabric.cursedMoonData.getInstance().save(server.getOverworld());
     }
 
     // 双端 但我觉得是仅服务端 继承于handleDirectTransform
@@ -529,8 +509,6 @@ public class TransformManager {
         sendClientFirstPersonReset(player);
 
         RegPlayerFormComponent.PLAYER_FORM.sync(data.curPlayer);
-        MinecraftServer server = player.getServer();
-        syncCursedMoonData(player, server);
     }
 
     // 新增：发送客户端FirstPerson重置

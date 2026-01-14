@@ -1,0 +1,70 @@
+{
+  "type": "origins:multiple",
+
+  "snow_ball_damage_down": {
+    "type": "origins:modify_projectile_damage",
+    "damage_condition": {
+      "type": "origins:projectile",
+      "projectile": "minecraft:snowball"
+    },
+    "modifier": {
+      "operation": "addition",
+      "value": 3.0
+    },
+    "target_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "particle minecraft:crit ~ ~0.5 ~ 0.2 0.2 0.2 0 10"
+        }
+      ]
+    },
+    "self_action": {
+      "type": "origins:play_sound",
+      "sound": "minecraft:entity.firework_rocket.blast_far"
+    }
+  },
+
+  "snow_ball_effect": {
+    "type": "origins:modify_projectile_damage",
+    "damage_condition": {
+      "type": "origins:projectile",
+      "projectile": "minecraft:snowball"
+    },
+    "condition": {
+      "type": "origins:resource",
+      "resource": "shape-shifter-curse:form_snow_fox_snowball_effect_cooldown",
+      "comparison": "<",
+      "compare_to": 1
+    },
+    "target_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:spawn_effect_cloud",
+          "radius": 3.0,
+          "radius_on_use": -1.0,
+          "wait_time": 10,
+          "effect": {
+            "effect": "minecraft:slowness",
+            "amplifier": 2,
+            "duration": 60
+          }
+        }
+      ]
+    },
+    "self_action": {
+      "type": "origins:trigger_cooldown",
+      "power": "shape-shifter-curse:form_snow_fox_snowball_effect_cooldown"
+    }
+  },
+
+  "no_slowness": {
+    "type": "origins:effect_immunity",
+    "effects": [
+      "minecraft:slowness"
+    ]
+  }
+
+}

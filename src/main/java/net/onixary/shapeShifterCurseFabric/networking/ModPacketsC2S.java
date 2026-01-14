@@ -147,12 +147,14 @@ public class ModPacketsC2S {
         boolean primaryGreyReverse = packetByteBuf.readBoolean();
         boolean accent1GreyReverse = packetByteBuf.readBoolean();
         boolean accent2GreyReverse = packetByteBuf.readBoolean();
+        boolean enableFormRandomSound = packetByteBuf.readBoolean();
         minecraftServer.execute(() -> {
             try {
                 PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(playerEntity);
                 component.setKeepOriginalSkin(keepOriginalSkin);
                 component.setEnableFormColor(enableFormColor);
                 component.setFormColor(new FormTextureUtils.ColorSetting(primaryColor, accentColor1Color, accentColor2Color, eyeColorA, eyeColorB, primaryGreyReverse, accent1GreyReverse, accent2GreyReverse));
+                component.setEnableFormRandomSound(enableFormRandomSound);
                 RegPlayerSkinComponent.SKIN_SETTINGS.sync(playerEntity);
             } catch (Exception e) {
                 ShapeShifterCurseFabric.LOGGER.error("Error while updating player custom config", e);

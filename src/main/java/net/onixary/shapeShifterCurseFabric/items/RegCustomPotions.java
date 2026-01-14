@@ -41,6 +41,11 @@ public class RegCustomPotions {
     public static final Potion FERAL_CAT_FORM_POTION =
             Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_feral_cat_sp_potion"),
                     new Potion(new StatusEffectInstance(TO_FERAL_CAT_SP_POTION)));
+    public static final Potion CUSTOM_STATUE_FORM_POTION =
+            Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_custom_statue_potion"),
+                    new Potion(new StatusEffectInstance(TO_CUSTOM_STATUE_POTION)));
+
+    /* 未支持数据包时代的占位形态 现在可以使用数据添加形态了
     // custom empty forms
     public static final Potion ALPHA_FORM_POTION =
             Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_alpha_0_potion"),
@@ -63,6 +68,7 @@ public class RegCustomPotions {
     public static final Potion PHI_FORM_POTION =
             Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_phi_sp_potion"),
                     new Potion(new StatusEffectInstance(TO_PHI_SP_POTION)));
+     */
     // other custom potions
     // feed potion can only be obtained via familiar_fox_2 and familiar_fox_3, no recipe
     public static final Potion FEED_POTION =
@@ -81,12 +87,13 @@ public class RegCustomPotions {
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.CHICKEN, OCELOT_FORM_POTION);
         // familiar fox只能通过女巫发射或掉落的溅射药水给与，没有配方
         // The familiar fox can only be obtained via splash potions thrown or drop by witches, no recipe available
-        // todo: anubis wolf 药水配方待定，可能是狼灵的特殊掉落物
+        BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, RegCustomItem.ECTOPLASM_RAG, ANUBIS_WOLF_FORM_POTION);
         // snow fox 需要通过净化familiar fox药水来得到
         // snow fox can be obtained by purifying familiar fox potion
         BrewingRecipeRegistry.registerPotionRecipe(FAMILIAR_FOX_FORM_POTION, Items.GOLD_NUGGET, SNOW_FOX_FORM_POTION);
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.AMETHYST_SHARD, ALLEY_FORM_POTION);
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.COD_BUCKET, FERAL_CAT_FORM_POTION);
+        /* 未支持数据包时代的占位形态 现在可以使用数据添加形态了
         // custom empty forms
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.RED_DYE, ALPHA_FORM_POTION);
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.YELLOW_DYE, BETA_FORM_POTION);
@@ -95,5 +102,6 @@ public class RegCustomPotions {
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.ORANGE_DYE, PSI_FORM_POTION);
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.PURPLE_DYE, CHI_FORM_POTION);
         BrewingRecipeRegistry.registerPotionRecipe(MOONDUST_POTION, Items.WHITE_DYE, PHI_FORM_POTION);
+        */
     }
 }
