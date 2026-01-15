@@ -39,14 +39,14 @@ public class ClientConfig implements ConfigData {
     public int instinctBarPosOffsetY = -9;  // 本能条中间 Y 位置偏移量
 
     @ConfigEntry.Category("UI")
-    @Comment("FamiliarFox ManaBar Middle Position Type (1-9). Default: 8")
-    public int familiarFoxManaBarPosType = 8;  // 魔力条中间位置类型 (1-9)
+    @Comment("ManaBar Middle Position Type (1-9). Default: 8")
+    public int manaBarPosType = 8;  // 魔力条中间位置类型 (1-9)
 
     @ConfigEntry.Category("UI")
-    @Comment("FamiliarFox ManaBar Position X Offset. Default: 100")
-    public int familiarFoxManaBarPosOffsetX = 100;  // 魔力条中间 X 位置偏移量
+    @Comment("ManaBar Position X Offset. Default: 100")
+    public int manaBarPosOffsetX = 100;  // 魔力条中间 X 位置偏移量
 
     @ConfigEntry.Category("UI")
-    @Comment("FamiliarFox ManaBar Position Y Offset. Default: -17")
-    public int familiarFoxManaBarPosOffsetY = -17;  // 魔力条中间 Y 位置偏移量
+    @Comment("ManaBar Position Y Offset. Default: -17")
+    public int manaBarPosOffsetY = -17;  // 魔力条中间 Y 位置偏移量
 }
