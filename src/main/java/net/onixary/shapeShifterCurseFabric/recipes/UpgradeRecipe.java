@@ -52,7 +52,9 @@ public abstract class UpgradeRecipe implements SmithingRecipe {
     public ItemStack craft(Inventory inventory, DynamicRegistryManager registryManager) {
         ItemStack itemStack = inventory.getStack(1);
         if (this.base.test(itemStack)) {
-            return this.upgradeResult.apply(itemStack.copy());
+            ItemStack outputStack = itemStack.copy();
+            outputStack.setCount(1);
+            return this.upgradeResult.apply(outputStack);
         }
         return ItemStack.EMPTY;
     }
