@@ -13,6 +13,375 @@
     "minecraft:stone_sword",
     "minecraft:trident",
     "minecraft:wooden_axe",
-    "minecraft:wooden_sword"
+    "minecraft:wooden_sword",
+
+    {
+      "id": "betterend:aeternium_sword",
+      "required": false
+    },
+    {
+      "id": "betterend:aeternium_axe",
+      "required": false
+    },
+    {
+      "id": "betterend:aeternium_hammer",
+      "required": false
+    },
+    {
+      "id": "betterend:thallasium_sword",
+      "required": false
+    },
+    {
+      "id": "betterend:thallasium_axe",
+      "required": false
+    },
+    {
+      "id": "betterend:thallasium_hammer",
+      "required": false
+    },
+    {
+      "id": "betterend:terminite_sword",
+      "required": false
+    },
+    {
+      "id": "betterend:terminite_axe",
+      "required": false
+    },
+    {
+      "id": "betterend:terminite_hammer",
+      "required": false
+    },
+    {
+      "id": "betterend:iron_hammer",
+      "required": false
+    },
+    {
+      "id": "betterend:golden_hammer",
+      "required": false
+    },
+    {
+      "id": "betterend:diamond_hammer",
+      "required": false
+    },
+    {
+      "id": "betterend:netherite_hammer",
+      "required": false
+    },
+    {
+      "id": "betternether:cincinnasite_sword",
+      "required": false
+    },
+    {
+      "id": "betternether:cincinnasite_axe",
+      "required": false
+    },
+    {
+      "id": "betternether:nether_ruby_sword",
+      "required": false
+    },
+    {
+      "id": "betternether:nether_ruby_axe",
+      "required": false
+    },
+    {
+      "id": "betternether:cincinnasite_sword_diamond",
+      "required": false
+    },
+    {
+      "id": "betternether:cincinnasite_axe_diamond",
+      "required": false
+    },
+    {
+      "id": "betternether:flaming_ruby_sword",
+      "required": false
+    },
+    {
+      "id": "betternether:flaming_ruby_axe",
+      "required": false
+    },
+    {
+      "id": "deeperdarker:resonarium_sword",
+      "required": false
+    },
+    {
+      "id": "deeperdarker:resonarium_axe",
+      "required": false
+    },
+    {
+      "id": "deeperdarker:warden_sword",
+      "required": false
+    },
+    {
+      "id": "deeperdarker:warden_axe",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:olvite_sword",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:olvite_axe",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:surtrum_sword",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:surtrum_axe",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:glazed_gold_sword",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:glazed_gold_axe",
+      "required": false
+    },
+    {
+      "id": "twilightforest:ironwood_sword",
+      "required": false
+    },
+    {
+      "id": "twilightforest:ironwood_axe",
+      "required": false
+    },
+    {
+      "id": "twilightforest:steeleaf_sword",
+      "required": false
+    },
+    {
+      "id": "twilightforest:steeleaf_axe",
+      "required": false
+    },
+    {
+      "id": "twilightforest:knightmetal_sword",
+      "required": false
+    },
+    {
+      "id": "twilightforest:knightmetal_axe",
+      "required": false
+    },
+    {
+      "id": "twilightforest:fiery_sword",
+      "required": false
+    },
+    {
+      "id": "twilightforest:gold_minotaur_axe",
+      "required": false
+    },
+    {
+      "id": "twilightforest:diamond_minotaur_axe",
+      "required": false
+    },
+    {
+      "id": "twilightforest:glass_sword",
+      "required": false
+    },
+    {
+      "id": "archers:flint_spear",
+      "required": false
+    },
+    {
+      "id": "archers:iron_spear",
+      "required": false
+    },
+    {
+      "id": "archers:golden_spear",
+      "required": false
+    },
+    {
+      "id": "archers:diamond_spear",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_spear",
+      "required": false
+    },
+    {
+      "id": "archers:aeternium_spear",
+      "required": false
+    },
+    {
+      "id": "archers:ruby_spear",
+      "required": false
+    },
+    {
+      "id": "paladins:stone_claymore",
+      "required": false
+    },
+    {
+      "id": "paladins:iron_claymore",
+      "required": false
+    },
+    {
+      "id": "paladins:golden_claymore",
+      "required": false
+    },
+    {
+      "id": "paladins:diamond_claymore",
+      "required": false
+    },
+    {
+      "id": "paladins:netherite_claymore",
+      "required": false
+    },
+    {
+      "id": "paladins:ruby_claymore",
+      "required": false
+    },
+    {
+      "id": "paladins:aeternium_claymore",
+      "required": false
+    },
+    {
+      "id": "paladins:wooden_great_hammer",
+      "required": false
+    },
+    {
+      "id": "paladins:stone_great_hammer",
+      "required": false
+    },
+    {
+      "id": "paladins:iron_great_hammer",
+      "required": false
+    },
+    {
+      "id": "paladins:golden_great_hammer",
+      "required": false
+    },
+    {
+      "id": "paladins:diamond_great_hammer",
+      "required": false
+    },
+    {
+      "id": "paladins:netherite_great_hammer",
+      "required": false
+    },
+    {
+      "id": "paladins:ruby_great_hammer",
+      "required": false
+    },
+    {
+      "id": "paladins:aeternium_great_hammer",
+      "required": false
+    },
+    {
+      "id": "paladins:iron_mace",
+      "required": false
+    },
+    {
+      "id": "paladins:golden_mace",
+      "required": false
+    },
+    {
+      "id": "paladins:diamond_mace",
+      "required": false
+    },
+    {
+      "id": "paladins:netherite_mace",
+      "required": false
+    },
+    {
+      "id": "paladins:ruby_mace",
+      "required": false
+    },
+    {
+      "id": "paladins:aeternium_mace",
+      "required": false
+    },
+    {
+      "id": "rogues:flint_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:iron_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:golden_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:diamond_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:netherite_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:ruby_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:aeternium_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:iron_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:golden_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:diamond_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:netherite_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:ruby_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:aeternium_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:stone_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:iron_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:golden_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:diamond_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:netherite_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:ruby_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:aeternium_double_axe",
+      "required": false
+    },
+    {
+      "id": "tide:sailfish",
+      "required": false
+    },
+    {
+      "id": "tide:swordfish",
+      "required": false
+    },
+    {
+      "id": "tide:blazing_swordfish",
+      "required": false
+    }
   ]
 }
