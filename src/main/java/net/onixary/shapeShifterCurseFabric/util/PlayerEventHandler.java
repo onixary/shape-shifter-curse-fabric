@@ -85,8 +85,6 @@ public class PlayerEventHandler {
                 } catch (Exception e) {
                     ShapeShifterCurseFabric.LOGGER.error("Error sending update dynamic form: ", e);
                 }
-            });
-            server.execute(() -> {
                 try {
                     FormAbilityManager.loadForm(player);
                 } catch (Exception e) {

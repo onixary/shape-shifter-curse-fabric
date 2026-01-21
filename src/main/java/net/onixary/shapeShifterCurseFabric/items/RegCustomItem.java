@@ -21,6 +21,7 @@ import net.onixary.shapeShifterCurseFabric.items.trinkets.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
 import static net.minecraft.item.Items.register;
 import static net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock.MOONDUST_CRYSTAL_GRIT;
@@ -67,6 +68,8 @@ public class RegCustomItem {
     public static final Item WITHERED_BANDAGE = register("withered_bandage", new WitheredBandageTrinket(new WitheredBandageTrinket.Settings()));
     public static final Item FOUNTAIN_BELT = register("fountain_belt", new FountainBeltTrinket(new FountainBeltTrinket.Settings()));
     public static final Item RESONANT_CORE = register("resonant_core", new ResonantCoreTrinket(new ResonantCoreTrinket.Settings()));
+
+    public static final Item PATRON_FORM_ITEM = register("patron_form_item", new PatronFormItem(new Item.Settings()));
 
     public static final Item CUSTOM_TRINKET = register("custom_trinket", new CustomTrinket(new CustomTrinket.Settings()));
     // 用于成就图标的占位物品
@@ -161,6 +164,9 @@ public class RegCustomItem {
         /*
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
             entries.add(BOOK_OF_SHAPE_SHIFTER);
+            if (PatronUtils.EnablePatronFeature) {
+                entries.add(PATRON_FORM_ITEM);
+            }
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.add(UNTREATED_MOONDUST);

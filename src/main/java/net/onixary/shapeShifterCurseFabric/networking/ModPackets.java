@@ -50,6 +50,10 @@ public class ModPackets {
 
     public static final Identifier ACTIVE_VIRTUAL_TOTEM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "active_virtual_totem");
 
+    public static final Identifier UPDATE_PATRON_LEVEL = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_patron_level");
+    public static final Identifier OPEN_PATRON_FORM_SELECT_MENU = new Identifier(ShapeShifterCurseFabric.MOD_ID, "open_patron_form_select_menu");
+    public static final Identifier SET_PATRON_FORM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "set_patron_form");
+
     // S2C 结构: UUID-玩家UUID Boolean-是否启用动画, (仅在启用动画时包含)Identifier-动画ID, Int-动画次数. Int-动画时长
     public static final Identifier UPDATE_POWER_ANIM_DATA_TO_CLIENT = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_power_anim_data_to_client");
     // C2S 结构: Boolean-是否启用动画, (仅在启用动画时包含)Identifier-动画ID, Int-动画次数. Int-动画时长

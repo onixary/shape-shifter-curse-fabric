@@ -5,21 +5,27 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import org.jetbrains.annotations.Nullable;
+import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
 import java.util.HashMap;
 import java.util.UUID;
 
 import static net.onixary.shapeShifterCurseFabric.networking.ModPackets.UPDATE_POWER_ANIM_DATA_TO_CLIENT;
 import static net.onixary.shapeShifterCurseFabric.networking.ModPackets.UPDATE_POWER_ANIM_DATA_TO_SERVER;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 // 纯服务端类，所有send方法都只在这里调用
 // This is a pure server-side class, all send methods are called only here
@@ -177,6 +183,52 @@ public class ModPacketsS2CServer {
     public static void sendPlayerLogin(ServerPlayerEntity player) {
         PacketByteBuf buf = PacketByteBufs.create();
         ServerPlayNetworking.send(player, ModPackets.LOGIN_PACKET, buf);
+    }
+
+    // 仅在获取到 Patron 数据后调用 玩家登录由 updateDynamicForm 负责
+    public static void updatePatronForms(ServerPlayerEntity player, List<Identifier> patronForms) {
+        int MaxFormPerPacket = 63;
+        HashMap<Identifier, PlayerFormDynamic> forms = new HashMap<>();
+        for (Identifier formId : patronForms) {
+            PlayerFormBase form = RegPlayerForms.getPlayerForm(formId);
+            if (form instanceof PlayerFormDynamic pfd) {
+                forms.put(formId, pfd);
+            }
+        }
+        int NowPacket = 0;
+        int RemainPacket = forms.size();
+        JsonObject jsonForms = new JsonObject();
+        for (Identifier formId : forms.keySet()) {
+            jsonForms.add(formId.toString(), forms.get(formId).save());
+            NowPacket ++;
+            RemainPacket --;
+            if (NowPacket % MaxFormPerPacket == 0) {
+                sendUpdateDynamicForm(player, jsonForms);
+                jsonForms = new JsonObject();
+            }
+        }
+        if (RemainPacket > 0) {
+            sendUpdateDynamicForm(player, jsonForms);
+        }
+    }
+
+    public static void updatePatronLevel(MinecraftServer server) {
+        HashMap<UUID, Integer> patronLevels = PatronUtils.PatronLevels;
+        int PairCount = patronLevels.size();
+        for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
+            PacketByteBuf buf = PacketByteBufs.create();
+            buf.writeInt(PairCount);
+            for (Map.Entry<UUID, Integer> entry : patronLevels.entrySet()) {
+                buf.writeUuid(entry.getKey());
+                buf.writeInt(entry.getValue());
+            }
+            ServerPlayNetworking.send(player, ModPackets.UPDATE_PATRON_LEVEL, buf);
+        }
+    }
+
+    public static void OpenPatronFormSelectMenu(ServerPlayerEntity player) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        ServerPlayNetworking.send(player, ModPackets.OPEN_PATRON_FORM_SELECT_MENU, buf);
     }
 
     public static void sendActiveVirtualTotem(ServerPlayerEntity player, VirtualTotemPower virtualTotemPower) {

@@ -40,6 +40,7 @@ import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_animation.RegPlayerAnimation;
 import net.onixary.shapeShifterCurseFabric.render.render_layer.FurGradientRenderLayer;
 import net.onixary.shapeShifterCurseFabric.util.ClientTicker;
+import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 import net.onixary.shapeShifterCurseFabric.util.TickManager;
 import org.lwjgl.glfw.GLFW;
 
@@ -322,6 +323,7 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 			}
 		});
 
+		PatronUtils.OnClientInit();
 	}
 
 	public static ShaderProgram getFurGradientShader() {

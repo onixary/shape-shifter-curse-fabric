@@ -67,6 +67,7 @@ import net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusPotionEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
+import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 import net.onixary.shapeShifterCurseFabric.util.AttackEntityDataTracker;
 import net.onixary.shapeShifterCurseFabric.util.PlayerEventHandler;
 import net.onixary.shapeShifterCurseFabric.util.TickManager;
@@ -74,6 +75,10 @@ import net.onixary.shapeShifterCurseFabric.util.TrinketDataPackReloadListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 import static net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager.saveForm;
@@ -84,6 +89,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
     public static final String MOD_ID = "shape-shifter-curse";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
+    public static final Path MOD_LOCAL_DATA_STORAGE = Path.of("ssc_data");
 
     public static PlayerCustomConfig playerCustomConfig;
     public static ClientConfig clientConfig;
@@ -226,6 +233,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             // 获取主世界作为默认世界
             ServerWorld overworld = server.getOverworld();
             FormAbilityManager.getServerWorld(overworld);
+            // 更新Patron状态
+            PatronUtils.OnServerLoad(server);
         });
         // 获取动态Form(DataPack)
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new FormDataPackReloadListener());
@@ -237,6 +246,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
                 FormAbilityManager.applyForm(player, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
             }
         }));
+        initLocalDataStorage();
 
         // Reg origins content
 
@@ -321,6 +331,20 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
 
         //LOGGER.info(CONFIG.keepOriginalSkin() ? "Original skin will be kept." : "Override skin");
+    }
+
+    private void initLocalDataStorage() {
+        if (!PatronUtils.EnablePatronFeature) {
+            return;
+        }
+        File dataFolder = MOD_LOCAL_DATA_STORAGE.toFile();
+        if (!dataFolder.isDirectory()) {
+            try {
+                Files.createDirectories(dataFolder.toPath());
+            } catch (IOException e) {
+                LOGGER.error("Failed to create local data storage folder", e);
+            }
+        }
     }
 
     private void onPlayerEndSleeping(LivingEntity entity) {
