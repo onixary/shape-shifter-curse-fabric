@@ -10,7 +10,7 @@ import net.minecraft.sound.SoundEvents;
 public class NetheriteMorphscaleArmorMaterial implements ArmorMaterial {
     public static final NetheriteMorphscaleArmorMaterial INSTANCE = new NetheriteMorphscaleArmorMaterial();
 
-    private static final int[] BASE_DURABILITY = new int[] {462, 592, 555, 481};
+    private static final int[] BASE_DURABILITY = new int[] {462, 555, 592, 481};
     private static final int[] PROTECTION_VALUES = new int[] {3, 6, 7, 3};
 
     @Override

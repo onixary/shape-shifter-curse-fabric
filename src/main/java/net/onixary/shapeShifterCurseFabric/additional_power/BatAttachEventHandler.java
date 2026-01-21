@@ -1,6 +1,9 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
 import io.github.apace100.apoli.component.PowerHolderComponent;
+import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.entity.player.PlayerEntity;
@@ -54,6 +57,13 @@ public class BatAttachEventHandler {
                     attachPower.detach(player, false);
 
                 }
+            }
+        });
+
+        ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD.register((player, from, to) -> {
+            BatBlockAttachPower attachPower = getBatAttachPower(player);
+            if (attachPower != null && attachPower.isAttached()) {
+                attachPower.detach(player, false);
             }
         });
     }
