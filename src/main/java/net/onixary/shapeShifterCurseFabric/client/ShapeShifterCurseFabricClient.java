@@ -164,7 +164,9 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 			return;
 		}
 		// Mana System
-		ManaUtils.manaTick(minecraftClient.player);
+		if (!MinecraftClient.getInstance().isPaused()) {
+			ManaUtils.manaTick(minecraftClient.player);
+		}
 	}
 
 	public static void emitTransformParticle(int duration) {
