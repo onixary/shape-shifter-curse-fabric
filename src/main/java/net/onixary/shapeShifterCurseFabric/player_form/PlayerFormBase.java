@@ -181,8 +181,12 @@ public class PlayerFormBase {
         return false;
     }
 
-    public String name() {
+    public String getIDString() {
         return FormID.toString();
+    }
+
+    public Text getFormName() {
+        return Text.translatable("codex.form." + FormID.getNamespace() + "." + FormID.getPath() + ".name");
     }
 
     public PlayerFormBase setOriginNameSpaceOverWrite(String nameSpace) {

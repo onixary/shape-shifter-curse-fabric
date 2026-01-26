@@ -43,6 +43,8 @@
     "projectile.PotionEntityMixin",
     "VirtualTotemMixin",
     "MinionPlayerEntityMixin",
+    "accessor.PowerTypeRegistryAccessor",
+    "MinionPlayerEntityMixin",
     "HungerManagerMixin",
     "EntityLootingMixin",
     "BlockDropMixin",

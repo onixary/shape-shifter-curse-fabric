@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FoodComponent;
@@ -17,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.NetworkThreadUtils;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -26,14 +28,17 @@ import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
+import net.onixary.shapeShifterCurseFabric.custom_ui.PatronFormSelectScreen;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import net.onixary.shapeShifterCurseFabric.util.CustomEdibleUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.jetbrains.annotations.Nullable;
+import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -64,6 +69,8 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.LOGIN_PACKET, ModPacketsS2C::onPlayerConnectServer);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.ACTIVE_VIRTUAL_TOTEM, ModPacketsS2C::receiveActiveVirtualTotem);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_POWER_ANIM_DATA_TO_CLIENT, ModPacketsS2C::receivePowerAnimationData);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_PATRON_LEVEL, ModPacketsS2C::receiveUpdatePatronLevel);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.OPEN_PATRON_FORM_SELECT_MENU, ModPacketsS2C::receiveOpenPatronFormSelectMenu);
     }
 
     /* 重构后不需要了 仅用于参考旧实现逻辑
@@ -378,5 +385,31 @@ public class ModPacketsS2C {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeUuid(targetPlayerUUID);
         ClientPlayNetworking.send(REQUEST_POWER_ANIM_DATA, buf);
+    }
+
+    public static void receiveUpdatePatronLevel(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        int PairCount = buf.readInt();
+        HashMap<UUID, Integer> map = new HashMap<>();
+        for (int i = 0; i < PairCount; i++) {
+            UUID uuid = buf.readUuid();
+            int level = buf.readInt();
+            map.put(uuid, level);
+        }
+        client.execute(() -> {
+            PatronUtils.ApplyPatronLevel(map);
+        });
+    }
+
+    public static void receiveOpenPatronFormSelectMenu(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        client.execute(() -> {
+            Screen screen = new PatronFormSelectScreen(Text.literal("PatronFromSelectScreen"), client.player);
+            client.setScreen(screen);
+        });
+    }
+
+    public static void sendSetPatronForm(Identifier formID) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeIdentifier(formID);
+        ClientPlayNetworking.send(SET_PATRON_FORM, buf);
     }
 }
