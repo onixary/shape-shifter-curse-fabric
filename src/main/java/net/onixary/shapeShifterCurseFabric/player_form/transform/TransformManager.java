@@ -373,7 +373,7 @@ public class TransformManager {
         // 只在客户端执行
         // transform时重置firstperson offset
         // Reset firstperson offset when transforming
-        if(IS_FIRST_PERSON_MOD_LOADED) {
+        if(IS_FIRST_PERSON_MOD_LOADED && ShapeShifterCurseFabric.clientConfig.enableChangeFPMConfig) {
             FirstPersonModelCore fpm = FirstPersonModelCore.instance;
             fpm.getConfig().xOffset = 0;
             fpm.getConfig().sitXOffset = 0;
@@ -532,7 +532,7 @@ public class TransformManager {
             return;
         }
 
-        if(IS_FIRST_PERSON_MOD_LOADED){
+        if(IS_FIRST_PERSON_MOD_LOADED && ShapeShifterCurseFabric.clientConfig.enableChangeFPMConfig) {
             FirstPersonModelCore fpm = FirstPersonModelCore.instance;
             fpm.getConfig().xOffset = 0;
             fpm.getConfig().sitXOffset = 0;
