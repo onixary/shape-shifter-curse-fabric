@@ -393,6 +393,7 @@
     "text.autoconfig.shape-shifter-curse-client.option.ignoreNoRenderArmPower": "Ignore NoRenderArm Power",
     "text.autoconfig.shape-shifter-curse-client.category.InDevelopment": "In Development",
     "text.autoconfig.shape-shifter-curse-client.option.newStartBookForBiggerScreen": "Make The New Version of Start Book Interface Bigger",
+    "text.autoconfig.shape-shifter-curse-client.option.enableChangeFPMConfig": "Enable automatic modification of FPM configuration",
     "text.autoconfig.shape-shifter-curse-client.category.UI": "UI",
     "text.autoconfig.shape-shifter-curse-client.option.instinctBarPosType": "Instinct Bar Middle Position Type",
     "text.autoconfig.shape-shifter-curse-client.option.instinctBarPosOffsetX": "Instinct Bar Position X Offset",

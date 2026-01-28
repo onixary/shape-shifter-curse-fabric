@@ -23,6 +23,10 @@ public class ClientConfig implements ConfigData {
     @Comment("Use Bigger(2x) Start Book Interface. Default: false")
     public boolean newStartBookForBiggerScreen = false;  // 菜单缩放至少为4
 
+    @ConfigEntry.Category("General")
+    @Comment("Enable Auto Modify FPM Config. Default: true")
+    public boolean enableChangeFPMConfig = true;  // 启用修改FPM配置
+
     // 开发用
     // @ConfigEntry.Category("InDevelopment")
 

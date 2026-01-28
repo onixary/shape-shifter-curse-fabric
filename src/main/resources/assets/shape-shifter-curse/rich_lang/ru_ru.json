@@ -811,5 +811,6 @@
   "text.autoconfig.shape-shifter-curse-custom.option.accent1GreyReverse": "Реверсировать дополнительный цвет 1 в чёрно-белый",
   "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "Реверсировать дополнительный цвет 2 в чёрно-белый",
   "text.autoconfig.shape-shifter-curse-custom.option.enable_form_random_sound": "Включить случайные звуки формы",
-  "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_config": "Автосинхронизация конфигурации"
+  "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_config": "Автосинхронизация конфигурации",
+  "text.autoconfig.shape-shifter-curse-client.option.enableChangeFPMConfig": "Enable automatic modification of FPM configuration"
 }
