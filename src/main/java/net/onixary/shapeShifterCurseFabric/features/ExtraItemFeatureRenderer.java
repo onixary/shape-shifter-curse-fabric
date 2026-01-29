@@ -78,15 +78,17 @@ public class ExtraItemFeatureRenderer <T extends LivingEntity, M extends EntityM
                 if(IS_FIRST_PERSON_MOD_LOADED) {
                     // Feral形态的forstperson配置必须固定为-25 offset，否则会导致物品位置不正确以及模型看不到
                     FirstPersonModelCore fpm = FirstPersonModelCore.instance;
-                    if (!IS_FIRST_PERSON_MOD_VERSION_CHECK_FAIL) {
-                        if (IS_FIRST_PERSON_MOD_NEW_VERSION) {
-                            fpm.getConfig().xOffset = 12;
-                            fpm.getConfig().sitXOffset = 12;
-                            fpm.getConfig().sneakXOffset = 12;
-                        } else {
-                            fpm.getConfig().xOffset = -25;
-                            fpm.getConfig().sitXOffset = -25;
-                            fpm.getConfig().sneakXOffset = -25;
+                    if (ShapeShifterCurseFabric.clientConfig.enableChangeFPMConfig) {
+                        if (!IS_FIRST_PERSON_MOD_VERSION_CHECK_FAIL) {
+                            if (IS_FIRST_PERSON_MOD_NEW_VERSION) {
+                                fpm.getConfig().xOffset = 12;
+                                fpm.getConfig().sitXOffset = 12;
+                                fpm.getConfig().sneakXOffset = 12;
+                            } else {
+                                fpm.getConfig().xOffset = -25;
+                                fpm.getConfig().sitXOffset = -25;
+                                fpm.getConfig().sneakXOffset = -25;
+                            }
                         }
                     }
 

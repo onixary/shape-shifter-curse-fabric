@@ -393,6 +393,7 @@
     "text.autoconfig.shape-shifter-curse-client.option.ignoreNoRenderArmPower": "忽略不渲染手臂的能力",
     "text.autoconfig.shape-shifter-curse-client.category.InDevelopment": "开发中配置",
     "text.autoconfig.shape-shifter-curse-client.option.newStartBookForBiggerScreen": "更大的新版幻形者之书界面",
+    "text.autoconfig.shape-shifter-curse-client.option.enableChangeFPMConfig": "启用自动修改FPM配置",
     "text.autoconfig.shape-shifter-curse-client.category.UI": "UI",
     "text.autoconfig.shape-shifter-curse-client.option.instinctBarPosType": "本能条中心位置类型",
     "text.autoconfig.shape-shifter-curse-client.option.instinctBarPosOffsetX": "本能条偏移量 X",
