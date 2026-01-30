@@ -148,6 +148,8 @@ public class Form_Bat3 extends PlayerFormBase {
                     return ATTACK_CONTROLLER;
                 case ANIM_STATE_FLYING:
                     return FLYING_CONTROLLER;
+                case ANIM_STATE_USE_ITEM:
+                    return IDLE_CONTROLLER;
                 default:
                     return null;
             }
