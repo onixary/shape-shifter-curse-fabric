@@ -21,7 +21,25 @@
         "amount": 1
     },
     "entity_action": {
-        "type": "origins:execute_command",
-        "command": "/give @p minecraft:splash_potion{Potion:\"minecraft:healing\"}"
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "origins:execute_command",
+                "command": "/give @p minecraft:splash_potion{Potion:\"minecraft:healing\"} 3"
+            },
+            {
+                "type": "shape-shifter-curse:consume_mana",
+                "mana": 5
+            }
+        ]
+    },
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "shape-shifter-curse:has_mana",
+                "mana": 5
+            }
+        ]
     }
 }

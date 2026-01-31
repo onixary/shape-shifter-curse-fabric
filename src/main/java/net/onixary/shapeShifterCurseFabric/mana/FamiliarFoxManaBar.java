@@ -5,6 +5,9 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.util.UIPositionUtils;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
@@ -17,20 +20,21 @@ public class FamiliarFoxManaBar implements IManaRender{
 
     @Override
     public boolean OverrideInstinctBar() {
-        return true;
+        return false;
     }
 
     @Override
     public void render(DrawContext context, float tickDelta) {
         if (!mc.options.hudHidden) {
-            int width = mc.getWindow().getScaledWidth();
-            int height = mc.getWindow().getScaledHeight();
-            //float x = (float) width / 2 + 11;
-            float x = (float)width / 2 - 40;
-            // 39 is the height of the health bar
-            float y = height - 39;
-            y += 16;
-            this.renderBar(context, tickDelta, (int) x, (int) y);
+            // int width = mc.getWindow().getScaledWidth();
+            // int height = mc.getWindow().getScaledHeight();
+            // //float x = (float) width / 2 + 11;
+            // float x = (float)width / 2 + 100;
+            // // 39 is the height of the health bar
+            // float y = height - 39;
+            // y += 22;
+            Pair<Integer, Integer> pos = UIPositionUtils.getCorrectPosition(ShapeShifterCurseFabric.clientConfig.manaBarPosType, ShapeShifterCurseFabric.clientConfig.manaBarPosOffsetX, ShapeShifterCurseFabric.clientConfig.manaBarPosOffsetY);
+            this.renderBar(context, tickDelta, pos.getLeft(), pos.getRight());
         }
     }
 

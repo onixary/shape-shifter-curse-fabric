@@ -1,0 +1,10 @@
+{
+  "type": "shape-shifter-curse:hiss_phantom_power",
+  "on_hiss_phantom_action": {
+    "type": "origins:actor_action",
+    "action": {
+      "type": "origins:play_sound",
+      "sound": "minecraft:entity.cat.hiss"
+    }
+  }
+}

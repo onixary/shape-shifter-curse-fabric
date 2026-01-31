@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
 import com.google.gson.JsonParser;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.integration.origins.component.PlayerOriginComponent;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginRegistry;
@@ -10,6 +11,9 @@ import net.minecraft.client.network.OtherClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form_render.AbstractClientPlayerEntityCompatMixins;
 import net.onixary.shapeShifterCurseFabric.player_form_render.IPlayerEntityMixins;
 import net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFurClient;
@@ -17,7 +21,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Unique;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,6 +122,29 @@ public class PlayerEntityMixin implements IPlayerEntityMixins {
     }*/
     @Override
     public ArrayList<OriginalFurClient.OriginFur> originalFur$getCurrentFurs() {
+        // 或许可以通过这种注入可以修改originalFur$getCurrentFurs的返回值 如果不行可以复制FurRenderFeature的代码新加一层
+        /*
+         *  @Mixin(targets = "net.onixary.shapeShifterCurseFabric.mixin.PlayerEntityMixin")
+         *      class PlayerEntityMixin2 {}
+         */
+        // ****新增开始****
+        try {
+            PlayerFormBase playerFormBase = RegPlayerFormComponent.PLAYER_FORM.get(this).getCurrentForm();
+            if (playerFormBase instanceof PlayerFormDynamic pfd) {
+                ArrayList<OriginalFurClient.OriginFur> furs = new ArrayList<>();
+                if (pfd.FurModelID != null) {
+                    OriginalFurClient.OriginFur opt = OriginalFurClient.FUR_REGISTRY.get(pfd.FurModelID);
+                    if (opt == null) {
+                        ShapeShifterCurseFabric.LOGGER.warn("ShapeShifterCurseFabric: PlayerFormDynamic.FurModelID is not null, but the fur model is not registered: {}", pfd.FurModelID);
+                        return new ArrayList<>();
+                    }
+                    furs.add(opt);
+                    return furs;
+                }
+            }
+        }
+        catch (Exception ignored) {}
+        // ****新增结束****
         var cO = originalFur$currentOrigins();
         ArrayList<OriginalFurClient.OriginFur> furs = new ArrayList<>();
         if (cO.isEmpty()) {return furs;}

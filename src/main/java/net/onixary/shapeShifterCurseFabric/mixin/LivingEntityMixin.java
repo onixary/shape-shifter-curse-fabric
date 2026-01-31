@@ -12,6 +12,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.EvokerEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.WitchEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.PotionEntity;
 import net.minecraft.item.ItemStack;
@@ -80,12 +81,15 @@ public abstract class LivingEntityMixin {
             }
         }
 
-        if(!(CursedMoon.isCursedMoon(world) && CursedMoon.isNight())){
+        if(!(CursedMoon.isCursedMoon(world) && CursedMoon.isNight(world))){
             return;
         }
 
-        if (attacker instanceof ServerPlayerEntity) {
-            ServerPlayerEntity player = (ServerPlayerEntity) attacker;
+        if (attacker instanceof TameableEntity tameableEntity) {
+            attacker = tameableEntity.getOwner();
+        }
+
+        if (attacker instanceof ServerPlayerEntity player) {
             if (entity instanceof MobEntity) {
                 handleMobDeathDrop((MobEntity) entity, player);
             }

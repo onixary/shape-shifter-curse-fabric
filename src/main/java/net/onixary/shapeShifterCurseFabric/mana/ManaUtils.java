@@ -10,6 +10,7 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashMap;
@@ -280,12 +281,16 @@ public class ManaUtils {
     }
 
     // 用于Power系统
-    public static void gainManaTypeID(PlayerEntity player, Identifier manaTypeID) {
-        getManaComponent(player).gainManaTypeID(manaTypeID);
+    public static void gainManaTypeID(PlayerEntity player, Identifier manaTypeID, Identifier sourceID) {
+        getManaComponent(player).gainManaTypeID(manaTypeID, sourceID);
     }
 
-    public static void loseManaTypeID(PlayerEntity player, Identifier manaTypeID) {
-        getManaComponent(player).loseManaTypeID(manaTypeID);
+    public static void loseManaTypeID(PlayerEntity player, Identifier manaTypeID, Identifier sourceID) {
+        getManaComponent(player).loseManaTypeID(manaTypeID, sourceID);
+    }
+
+    public static boolean isManaTypeExists(PlayerEntity player, @NotNull Identifier manaTypeID, @Nullable Identifier sourceID) {
+        return getManaComponent(player).isManaTypeExists(manaTypeID, sourceID);
     }
 
     // 用于其他非Power系统

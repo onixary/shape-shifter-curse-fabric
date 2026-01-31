@@ -22,7 +22,12 @@ import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.TStatusApplier;
 
+import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_AXOLOTL_0_EFFECT;
+import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_BAT_0_EFFECT;
+
 public class TransformativeBatEntity extends BatEntity {
+
+    public static float T_BAT_STATUS_CHANCE = 0.5f;
 
     public TransformativeBatEntity(EntityType<? extends BatEntity> entityType, World world) {
         super(entityType, world);
@@ -85,7 +90,7 @@ public class TransformativeBatEntity extends BatEntity {
                 // 对玩家造成伤害
                 tryAttack(player);
                 // 概率施加效果
-                TStatusApplier.applyStatusFromTMob(this, player);
+                TStatusApplier.applyStatusByChance(T_BAT_STATUS_CHANCE, player, TO_BAT_0_EFFECT);
                 // 重置冷却时间
                 cooldown = ATTACK_COOLDOWN;
             }

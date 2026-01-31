@@ -1,0 +1,8 @@
+{
+    "type": "shape-shifter-curse:pillager_friendly",
+    "condition": {
+        "type": "shape-shifter-curse:last_attack_pillager_time",
+        "comparison": ">=",
+        "compare_to": "1200"
+    }
+}

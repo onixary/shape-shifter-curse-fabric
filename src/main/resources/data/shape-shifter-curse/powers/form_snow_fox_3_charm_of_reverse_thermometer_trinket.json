@@ -1,0 +1,23 @@
+{
+  "type": "origins:multiple",
+
+  "reverse_hot_cold": {
+    "type": "shape-shifter-curse:delay_attribute",
+    "modifier": {
+      "attribute": "minecraft:generic.max_health",
+      "value": -8.0,
+      "operation": "addition"
+    },
+    "tick_rate": 20,
+    "updateHealth": true,
+    "delay": 5,
+    "condition": {
+      "type": "origins:biome",
+      "condition": {
+        "type": "origins:temperature",
+        "comparison": "<=",
+        "compare_to": 0
+      }
+    }
+  }
+}

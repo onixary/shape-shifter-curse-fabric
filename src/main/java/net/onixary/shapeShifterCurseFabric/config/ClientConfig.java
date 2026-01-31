@@ -23,6 +23,34 @@ public class ClientConfig implements ConfigData {
     @Comment("Use Bigger(2x) Start Book Interface. Default: false")
     public boolean newStartBookForBiggerScreen = false;  // 菜单缩放至少为4
 
+    @ConfigEntry.Category("General")
+    @Comment("Enable Auto Modify FPM Config. Default: true")
+    public boolean enableChangeFPMConfig = true;  // 启用修改FPM配置
+
     // 开发用
     // @ConfigEntry.Category("InDevelopment")
+
+    @ConfigEntry.Category("UI")
+    @Comment("Instinct Bar Middle Position Type (1-9). Default: 8")
+    public int instinctBarPosType = 8;  // 本能条中间位置类型 (1-9)
+
+    @ConfigEntry.Category("UI")
+    @Comment("Instinct Bar Position X Offset. Default: 100")
+    public int instinctBarPosOffsetX = 100;  // 本能条中间 X 位置偏移量
+
+    @ConfigEntry.Category("UI")
+    @Comment("Instinct Bar Position Y Offset. Default: -9")
+    public int instinctBarPosOffsetY = -9;  // 本能条中间 Y 位置偏移量
+
+    @ConfigEntry.Category("UI")
+    @Comment("ManaBar Middle Position Type (1-9). Default: 8")
+    public int manaBarPosType = 8;  // 魔力条中间位置类型 (1-9)
+
+    @ConfigEntry.Category("UI")
+    @Comment("ManaBar Position X Offset. Default: 100")
+    public int manaBarPosOffsetX = 100;  // 魔力条中间 X 位置偏移量
+
+    @ConfigEntry.Category("UI")
+    @Comment("ManaBar Position Y Offset. Default: -17")
+    public int manaBarPosOffsetY = -17;  // 魔力条中间 Y 位置偏移量
 }

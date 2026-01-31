@@ -50,6 +50,7 @@ public class Form_Allay extends PlayerFormBase {
             case ANIM_FALL:
             case ANIM_SNEAK_FALL:
             case ANIM_SLOW_FALL:
+            case ANIM_CREATIVE_FLY:
                 return anim_flying;
 
             case ANIM_TOOL_SWING:
@@ -58,7 +59,7 @@ public class Form_Allay extends PlayerFormBase {
             case ANIM_ATTACK_ONCE:
                 return anim_attack;
             default:
-                return null;
+                return anim_walk;
         }
     }
 
@@ -94,10 +95,13 @@ public class Form_Allay extends PlayerFormBase {
                     return MINING_CONTROLLER;
                 case ANIM_STATE_ATTACK:
                     return ATTACK_CONTROLLER;
+                case ANIM_STATE_JUMP:
+                case ANIM_STATE_FALL:
+                case ANIM_STATE_FALL_FLYING:
                 case ANIM_STATE_FLYING:
                     return FLYING_CONTROLLER;
                 default:
-                    return null;
+                    return WALK_CONTROLLER;
             }
         }
         return super.getAnimStateController(player, animSystemData, animStateID);

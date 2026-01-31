@@ -1,0 +1,28 @@
+{
+    "type": "origins:action_over_time",
+    "entity_action": {
+        "type": "shape-shifter-curse:consume_mana",
+        "mana": 0.1
+    },
+    "interval": 5,
+    "condition": {
+        "type": "origins:in_block",
+        "block_condition": {
+            "type": "origins:or",
+            "conditions": [
+                {
+                    "type": "origins:block",
+                    "block": "minecraft:fire"
+                },
+                {
+                    "type": "origins:block",
+                    "block": "minecraft:lava"
+                },
+                {
+                    "type": "origins:block",
+                    "block": "minecraft:soul_fire"
+                }
+            ]
+        }
+    }
+}

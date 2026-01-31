@@ -20,8 +20,14 @@ import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.mana.ManaComponent;
 import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
+import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -109,6 +115,9 @@ public class ShapeShifterCurseCommand {
                         .then(literal("dev_command").requires(cs -> cs.hasPermissionLevel(2))
                                 .executes(ShapeShifterCurseCommand::devCommand)
                         )
+                        .then(literal("patron_info").requires(cs -> cs.hasPermissionLevel(0))
+                                .executes(ShapeShifterCurseCommand::logPatronInfo)
+                        )
         );
     }
 
@@ -126,6 +135,7 @@ public class ShapeShifterCurseCommand {
         }
         catch (Exception e){
             // 调试时在此打断点
+            ShapeShifterCurseFabric.LOGGER.error("Exception when set form", e);
             throw e;
         }
 
@@ -162,6 +172,7 @@ public class ShapeShifterCurseCommand {
         }
         catch (Exception e){
             // 调试时在此打断点
+            ShapeShifterCurseFabric.LOGGER.error("Exception when set custom form", e);
             throw e;
         }
 
@@ -306,6 +317,50 @@ public class ShapeShifterCurseCommand {
             ShapeShifterCurseFabric.LOGGER.error("Error when change player form color: ", e);
             return 0;
         }
+    }
+
+    private static int logPatronInfo(CommandContext<ServerCommandSource> commandContext) {
+        if (!PatronUtils.EnablePatronFeature) {
+            commandContext.getSource().sendError(Text.literal("Patron feature is disabled!"));
+            return 0;
+        }
+        try {
+            ServerPlayerEntity player = commandContext.getSource().getPlayer();
+            if (player == null) {
+                commandContext.getSource().sendError(Text.literal("Must be a player!"));
+                return 0;
+            }
+            StringBuilder message = new StringBuilder("Patron Info:\n");
+            message.append("UUID: ").append(player.getUuid()).append("\n");
+            message.append("Patron Level: ").append(PatronUtils.PatronLevels.getOrDefault(player.getUuid(), 0)).append("\n");
+            message.append("Available FormID: ");
+            for (Identifier formID : getAvailableForms(player)) {
+                message.append(formID.toString()).append(" ");
+            }
+            message.append("\n");
+            player.sendMessage(Text.literal(message.toString()), false);
+        } catch (Exception e) {
+            // 处理其他可能的错误
+            commandContext.getSource().sendError(Text.literal("Error when log player patron info: " + e.getMessage()));
+            ShapeShifterCurseFabric.LOGGER.error("Error when log player patron info: ", e);
+        }
+        return 1;
+    }
+
+    // 仅用于logPatronInfo 使用
+    private static List<Identifier> getAvailableForms(ServerPlayerEntity player) {
+        List<Identifier> availableForms = new ArrayList<>();
+        for (Identifier formID : RegPlayerForms.dynamicPlayerForms) {
+            PlayerFormBase form = RegPlayerForms.getPlayerForm(formID);
+            if (form instanceof PlayerFormDynamic pfd) {
+                if (pfd.IsPatronForm && pfd.IsPlayerCanUse(player)) {
+                    if (!availableForms.contains(formID)) {
+                        availableForms.add(formID);
+                    }
+                }
+            }
+        }
+        return availableForms;
     }
 
     private static int setWorldTime(CommandContext<ServerCommandSource> commandContext) {

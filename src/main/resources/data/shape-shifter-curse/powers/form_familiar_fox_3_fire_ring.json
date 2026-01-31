@@ -1,0 +1,130 @@
+{
+    "type": "origins:active_self",
+    "entity_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "shape-shifter-curse:consume_mana",
+                "mana": 11
+            },
+            {
+                "type": "origins:play_sound",
+                "sound": "minecraft:item.firecharge.use",
+                "volume": 0.5
+            },
+            {
+                "type": "origins:play_sound",
+                "sound": "minecraft:block.fire.ambient",
+                "volume": 0.5
+            },
+            {
+                "type": "origins:play_sound",
+                "sound": "entity.evoker.prepare_summon",
+                "volume": 0.5
+            },
+            {
+                "type": "shape-shifter-curse:explosion_damage_entity",
+                "power": 3,
+                "entity_condition": {
+                    "type": "origins:and",
+                    "conditions": [
+                        {
+                            "type": "origins:target_condition",
+                            "condition": {
+                                "type": "origins:in_tag",
+                                "tag": "shape-shifter-curse:water_explode_immune"
+                            },
+                            "inverted": true
+                        },
+                        {
+                            "type": "origins:owner",
+                            "inverted": true
+                        }
+                    ]
+                },
+                "entity_action":
+                {
+                    "type": "origins:and",
+                    "actions": [
+                        {
+                            "type": "origins:set_on_fire",
+                            "duration": 10
+                        },
+                        {
+                            "type": "origins:damage",
+                            "amount": 8,
+                            "damage_type": "minecraft:on_fire"
+                        }
+                    ]
+                },
+                "explosion_damage_entity" : false
+            },
+            {
+                "type": "shape-shifter-curse:spawn_particles_in_circle",
+                "particle": "minecraft:flame",
+                "count": 1,
+                "speed": 0.01,
+                "force": true,
+                "spread": {
+                    "x": 0.4,
+                    "y": 0.6,
+                    "z": 0.4
+                },
+                "radius": 4.0,
+                "sample_count": 64
+            },
+            {
+                "type": "shape-shifter-curse:spawn_particles_in_circle",
+                "particle": "minecraft:flame",
+                "count": 1,
+                "speed": 0.04,
+                "force": true,
+                "spread": {
+                    "x": 0.2,
+                    "y": 0.3,
+                    "z": 0.2
+                },
+                "radius": 1.5,
+                "sample_count": 8
+            },
+            {
+                "type": "origins:spawn_particles",
+                "particle": "minecraft:soul_fire_flame",
+                "count": 8,
+                "speed": 0.0,
+                "force": true,
+                "spread": {
+                    "x": 2.0,
+                    "y": 1.0,
+                    "z": 2.0
+                }
+            },
+            {
+                "type": "origins:trigger_cooldown",
+                "power": "shape-shifter-curse:form_familiar_fox_fire_explode_cooldown"
+            }
+        ]
+    },
+    "entity_condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "shape-shifter-curse:has_mana",
+                "mana": 11
+            },
+            {
+                "type": "origins:resource",
+                "resource": "shape-shifter-curse:form_familiar_fox_fire_explode_cooldown",
+                "comparison": "<",
+                "compare_to": 1
+            }
+        ]
+    },
+    "cooldown": 40,
+    "hud_render": {
+        "should_render": false
+    },
+    "key": {
+        "key": "key.origins.primary_active"
+    }
+}

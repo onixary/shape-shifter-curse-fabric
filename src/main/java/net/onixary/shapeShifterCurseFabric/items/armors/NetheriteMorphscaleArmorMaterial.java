@@ -10,7 +10,7 @@ import net.minecraft.sound.SoundEvents;
 public class NetheriteMorphscaleArmorMaterial implements ArmorMaterial {
     public static final NetheriteMorphscaleArmorMaterial INSTANCE = new NetheriteMorphscaleArmorMaterial();
 
-    private static final int[] BASE_DURABILITY = new int[] {462, 592, 555, 481};
+    private static final int[] BASE_DURABILITY = new int[] {462, 555, 592, 481};
     private static final int[] PROTECTION_VALUES = new int[] {3, 6, 7, 3};
 
     @Override
@@ -42,23 +42,23 @@ public class NetheriteMorphscaleArmorMaterial implements ArmorMaterial {
 
     @Override
     public int getEnchantability() {
-        return 10;
+        return 15;
     }
 
     @Override
     public SoundEvent getEquipSound() {
-        return SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
+        return SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE;
     }
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(Items.DIAMOND);
+        return Ingredient.ofItems(Items.NETHERITE_SCRAP);
     }
 
     @Override
     public String getName() {
         // Must be all lowercase
-        return "morphscale";
+        return "netherite_morphscale";
     }
 
     @Override
@@ -68,6 +68,6 @@ public class NetheriteMorphscaleArmorMaterial implements ArmorMaterial {
 
     @Override
     public float getKnockbackResistance() {
-        return 0;
+        return 0.1f;
     }
 }

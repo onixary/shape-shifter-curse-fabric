@@ -1,0 +1,27 @@
+{
+    "type": "origins:action_over_time",
+    "entity_action": {
+        "type": "origins:gain_air",
+        "value": -1
+    },
+    "interval": 14,
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:fluid_height",
+                "fluid": "minecraft:water",
+                "comparison": "<=",
+                "compare_to": 0
+            },
+            {
+                "type": "origins:sprinting"
+            },
+            {
+                "type": "origins:air",
+                "comparison": ">",
+                "compare_to": 0
+            }
+        ]
+    }
+}

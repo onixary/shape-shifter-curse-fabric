@@ -5,6 +5,9 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -38,6 +41,11 @@ public abstract class PlayerEntitySpeedFOVMixin {
      * }
     */
 
+    @Unique  // 0.95
+    private final float nowSpeedMaxMul = 0.95f * 2 - 1.0f;
+    @Unique  // 2.5
+    private final float nowSpeedMinMul = 2.5f * 2 - 1.0f;
+
     @Unique
     private float shape_shifter_curse$originalWalkSpeed;
 
@@ -46,9 +54,12 @@ public abstract class PlayerEntitySpeedFOVMixin {
     @Inject(method = "getFovMultiplier", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerAbilities;getWalkSpeed()F"))
     private void shape_shifter_curse$modifyWalkSpeed(CallbackInfoReturnable<Float> cir) {
         shape_shifter_curse$originalWalkSpeed = ((AbstractClientPlayerEntity) (Object) this).getAbilities().getWalkSpeed();
+        PlayerFormBase playerFormBase = RegPlayerFormComponent.PLAYER_FORM.get((AbstractClientPlayerEntity) (Object) this).getCurrentForm();
+        if (playerFormBase.FormID == RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID) {
+            return;
+        }
         float nowSpeed = (float)(((AbstractClientPlayerEntity) (Object) this).getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
-        // 0.45(0.95-0.5) <= nowSpeed / targetWalkSpeed <= 0.75(1.25-0.5)
-        float targetWalkSpeed = Math.min(0.75f * nowSpeed, Math.max(0.45f * nowSpeed, shape_shifter_curse$originalWalkSpeed));
+        float targetWalkSpeed = Math.min(nowSpeedMinMul * nowSpeed, Math.max(nowSpeedMaxMul * nowSpeed, shape_shifter_curse$originalWalkSpeed));
         ((AbstractClientPlayerEntity) (Object) this).getAbilities().setWalkSpeed(targetWalkSpeed);
     }
 

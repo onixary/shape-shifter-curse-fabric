@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "shape-shifter-curse:moondust_crystal_grit"
+  },
+  "result": "shape-shifter-curse:moondust_crystal_shard",
+  "experience": 5,
+  "cookingtime": 800
+}

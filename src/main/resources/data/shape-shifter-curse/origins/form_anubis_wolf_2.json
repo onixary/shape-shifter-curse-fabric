@@ -24,7 +24,8 @@
         "shape-shifter-curse:form_disable_feet_armor",
         "shape-shifter-curse:form_anubis_wolf_sound_hurt",
         "shape-shifter-curse:scare_skeleton",
-        "shape-shifter-curse:no_hurt_pet"
+        "shape-shifter-curse:no_hurt_pet",
+        "shape-shifter-curse:form_anubis_wolf_sound_key"
     ],
     "icon": {
         "item": "minecraft:player_head"

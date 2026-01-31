@@ -1,0 +1,78 @@
+{
+  "type": "origins:multiple",
+
+  "vampire": {
+    "type": "origins:self_action_on_hit",
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:heal",
+          "amount": 3.0
+        },
+        {
+          "type": "origins:feed",
+          "food": 4,
+          "saturation": 0.4
+        }
+      ]
+    },
+    "damage_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:amount",
+          "comparison": ">=",
+          "compare_to": 4.0
+        },
+        {
+          "type": "origins:projectile",
+          "inverted": true
+        }
+      ]
+    },
+    "cooldown": 10
+  },
+
+  "no_food": {
+    "type": "origins:modify_food",
+    "food_modifiers": [
+      {
+        "operation": "set_total",
+        "value": 0.0
+      }
+    ],
+    "saturation_modifiers": [
+      {
+        "operation": "set_total",
+        "value": 0.0
+      }
+    ],
+    "item_condition": {
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:and",
+          "conditions": [
+            {
+              "type": "origins:food"
+            },
+            {
+              "type": "origins:ingredient",
+              "ingredient": {
+                "tag": "origins:ignore_diet"
+              },
+              "inverted": true
+            }
+          ]
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "item": "minecraft:golden_carrot"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -7,7 +7,7 @@
             "conditions": [
                 {
                     "type": "origins:harvest_level",
-                    "comparison": ">",
+                    "comparison": ">=",
                     "compare_to": 1
                 },
                 {

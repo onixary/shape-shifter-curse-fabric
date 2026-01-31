@@ -47,4 +47,7 @@ public class PlayerCustomConfig implements ConfigData {
     public boolean accent1GreyReverse = false;
     @Comment("Accent color 2 reverse grey scale mul. Default: false")
     public boolean accent2GreyReverse = false;
+
+    @Comment("Enable form random sound, Default: true")
+    public boolean enable_form_random_sound = true;
 }

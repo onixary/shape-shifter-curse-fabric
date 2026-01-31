@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
 
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.integration.origins.component.PlayerOriginComponent;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayers;
 import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents;
@@ -124,6 +125,9 @@ public class PlayerEntityRendererMixin {
     @Pseudo
     @Mixin(value = LivingEntityRenderer.class, priority = 99999)
     public static abstract class LivingEntityRendererMixin$HidePlayerModelIfNeeded<T extends LivingEntity, M extends EntityModel<T>> implements IPlayerEntityMixins {
+        @Unique
+        private final boolean BetterCombatInstalled = FabricLoader.getInstance().isModLoaded("bettercombat");
+
         @Shadow
         @Final
         protected List<FeatureRenderer<T, M>> features;
@@ -169,10 +173,28 @@ public class PlayerEntityRendererMixin {
                 at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/model/EntityModel;render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;IIFFFF)V",
                         shift = At.Shift.BEFORE))
         private void renderPreProcessMixin(T livingEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
+            boolean IsClientNowPlayedPlayer = livingEntity instanceof ClientPlayerEntity;
+            boolean IsFirstPersonView = MinecraftClient.getInstance().options.getPerspective().isFirstPerson();
             if (livingEntity instanceof AbstractClientPlayerEntity abstractClientPlayerEntity) {
                 isInvisible = false;
                 PlayerOriginComponent c = (PlayerOriginComponent) ModComponents.ORIGIN.get(abstractClientPlayerEntity);
                 for (var layer : OriginLayers.getLayers()) {
+                    if (abstractClientPlayerEntity.isSpectator()) {
+                        PlayerEntityModel<?> model = (PlayerEntityModel<?>) this.getModel();
+                        model.hat.hidden = false;
+                        model.head.hidden = false;
+                        model.body.hidden = false;
+                        model.jacket.hidden = false;
+                        model.leftArm.hidden = false;
+                        model.leftSleeve.hidden = false;
+                        model.rightArm.hidden = false;
+                        model.rightSleeve.hidden = false;
+                        model.leftLeg.hidden = false;
+                        model.leftPants.hidden = false;
+                        model.rightLeg.hidden = false;
+                        model.rightPants.hidden = false;
+                        return;
+                    }
                     var origin = c.getOrigin(layer);
                     if (origin == null) {
                         return;
@@ -204,6 +226,10 @@ public class PlayerEntityRendererMixin {
                             model.leftPants.visible = !p.contains(OriginFurModel.VMP.leftPants);
                             model.rightLeg.visible = !p.contains(OriginFurModel.VMP.rightLeg);
                             model.rightPants.visible = !p.contains(OriginFurModel.VMP.rightPants);
+                            if (this.BetterCombatInstalled && IsFirstPersonView && IsClientNowPlayedPlayer) {
+                                model.hat.visible = false;
+                                model.head.visible = false;
+                            }
                         }
                     }
                 }
@@ -227,6 +253,9 @@ public class PlayerEntityRendererMixin {
                 PlayerOriginComponent c = (PlayerOriginComponent) ModComponents.ORIGIN.get(aCPE);
                 int p = getOverlayMixin(livingEntity, this.getAnimationCounter(livingEntity, g));
                 for (var layer : OriginLayers.getLayers()) {
+                    if (aCPE.isSpectator()) {
+                        return;
+                    }
                     var origin = c.getOrigin(layer);
                     if (origin == null) {
                         return;

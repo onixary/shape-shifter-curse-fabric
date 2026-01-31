@@ -3,6 +3,79 @@
   "values": [
     "minecraft:bow",
     "minecraft:crossbow",
-    "minecraft:trident"
+    "minecraft:trident",
+
+    {
+      "id": "archers:composite_longbow",
+      "required": false
+    },
+    {
+      "id": "archers:mechanic_shortbow",
+      "required": false
+    },
+    {
+      "id": "archers:royal_longbow",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_shortbow",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_longbow",
+      "required": false
+    },
+    {
+      "id": "archers:rapid_crossbow",
+      "required": false
+    },
+    {
+      "id": "archers:heavy_crossbow",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_rapid_crossbow",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_heavy_crossbow",
+      "required": false
+    },
+    {
+      "id": "archers:crystal_shortbow",
+      "required": false
+    },
+    {
+      "id": "archers:crystal_longbow",
+      "required": false
+    },
+    {
+      "id": "archers:ruby_rapid_crossbow",
+      "required": false
+    },
+    {
+      "id": "archers:ruby_heavy_crossbow",
+      "required": false
+    },
+    {
+      "id": "tide:starlight_bow",
+      "required": false
+    },
+    {
+      "id": "twilightforest:triple_bow",
+      "required": false
+    },
+    {
+      "id": "twilightforest:seeker_bow",
+      "required": false
+    },
+    {
+      "id": "twilightforest:ice_bow",
+      "required": false
+    },
+    {
+      "id": "twilightforest:ender_bow",
+      "required": false
+    }
   ]
 }

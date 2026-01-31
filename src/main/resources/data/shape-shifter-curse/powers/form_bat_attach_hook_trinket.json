@@ -1,0 +1,57 @@
+{
+  "type": "origins:multiple",
+
+  "damage_on_block_break": {
+    "type": "origins:action_on_block_break",
+    "entity_action": {
+      "type": "origins:equipped_item_action",
+      "equipment_slot": "mainhand",
+      "action": {
+        "type": "origins:damage",
+        "amount": 1,
+        "ignore_unbreaking": false
+      }
+    },
+    "condition": {
+      "type": "origins:inventory",
+      "process_mode": "items",
+      "item_condition": {
+        "type": "origins:ingredient",
+        "ingredient": {
+          "item": "shape-shifter-curse:diamond_mining_claw"
+        }
+      },
+      "slots": [
+        "weapon.mainhand"
+      ],
+      "inverted": true
+    }
+  },
+
+  "damage_on_attack_entity": {
+    "type": "origins:self_action_on_hit",
+    "entity_action": {
+      "type": "origins:equipped_item_action",
+      "equipment_slot": "mainhand",
+      "action": {
+        "type": "origins:damage",
+        "amount": 2,
+        "ignore_unbreaking": false
+      }
+    },
+    "condition": {
+      "type": "origins:inventory",
+      "process_mode": "items",
+      "item_condition": {
+        "type": "origins:ingredient",
+        "ingredient": {
+          "item": "shape-shifter-curse:diamond_mining_claw"
+        }
+      },
+      "slots": [
+        "weapon.mainhand"
+      ],
+      "inverted": true
+    }
+  }
+}

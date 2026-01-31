@@ -1,0 +1,39 @@
+{
+  "shape-shifter-curse:charm_of_night_crystal": {
+    "accessory_powers": [],
+    "all_form": {
+      "add": [],
+      "remove": []
+    },
+    "forms": {
+      "shape-shifter-curse:bat_0": {
+        "add": [
+        ],
+        "remove": [
+          "shape-shifter-curse:form_bat_0_sun_health"
+        ]
+      },
+      "shape-shifter-curse:bat_1": {
+        "add": [
+        ],
+        "remove": [
+          "shape-shifter-curse:form_bat_1_sun_health"
+        ]
+      },
+      "shape-shifter-curse:bat_2": {
+        "add": [
+        ],
+        "remove": [
+          "shape-shifter-curse:form_bat_2_sun_health"
+        ]
+      },
+      "shape-shifter-curse:bat_3": {
+        "add": [
+        ],
+        "remove": [
+          "shape-shifter-curse:form_bat_2_sun_health"
+        ]
+      }
+    }
+  }
+}

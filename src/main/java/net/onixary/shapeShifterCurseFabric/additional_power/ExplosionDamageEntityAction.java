@@ -26,12 +26,21 @@ public class ExplosionDamageEntityAction {
     public static void action(SerializableData.Instance data, Entity entity) {
         // 仅实现爆炸伤害实体的能力
         // 参数 power -> 威力 entity_condition -> 实体条件
+        // 额外加入可选的EntityAction以及是否对实体应用爆炸伤害的设置
+        // entity_action -> 额外的实体action; explosion_damage_entity -> 爆炸是否伤害实体
         int Power = data.getInt("power");
         ConditionFactory<Pair<Entity, Entity>>.Instance entityCondition = data.get("entity_condition");
-        explosion(entity, Power, entityCondition);
+        ActionFactory<Entity>.Instance entityAction = data.get("entity_action");
+        boolean explosion_damage_entity = data.get("explosion_damage_entity");
+        explosion(entity, Power, entityCondition, entityAction, explosion_damage_entity);
     }
 
-    private static void explosion(Entity entity, int power, ConditionFactory<Pair<Entity, Entity>>.Instance entityCondition) {
+    private static void explosion(Entity entity,
+                                  int power,
+                                  ConditionFactory<Pair<Entity, Entity>>.Instance entityCondition,
+                                  ActionFactory<Entity>.Instance entityAction,
+                                  boolean explosion_damage_entity
+    ) {
         Vec3d ExplosionPos = entity.getPos();
         DamageSource source = entity.getWorld().getDamageSources().explosion(entity, entity);
         entity.getWorld().emitGameEvent(entity, GameEvent.EXPLODE, new Vec3d(ExplosionPos.getX(), ExplosionPos.getY(), ExplosionPos.getZ()));
@@ -60,7 +69,9 @@ public class ExplosionDamageEntityAction {
                         z /= aa;
                         double ab = (double) Explosion.getExposure(ExplosionPos, target_entity);
                         double ac = (1.0 - w) * ab;
-                        target_entity.damage(source, (float)((int)((ac * ac + ac) / 2.0 * 7.0 * (double)q + 1.0)));
+                        if(explosion_damage_entity){
+                            target_entity.damage(source, (float)((int)((ac * ac + ac) / 2.0 * 7.0 * (double)q + 1.0)));
+                        }
                         double ad;
                         if (target_entity instanceof LivingEntity livingEntity) {
                             ad = ProtectionEnchantment.transformExplosionKnockback(livingEntity, ac);
@@ -72,6 +83,10 @@ public class ExplosionDamageEntityAction {
                         z *= ad;
                         Vec3d vec3d2 = new Vec3d(x, y, z);
                         target_entity.setVelocity(target_entity.getVelocity().add(vec3d2));
+                        // 加入额外可选的EntityAction
+                        if (entityAction != null) {
+                            entityAction.accept(target_entity);
+                        }
                     }
                 }
             }
@@ -83,7 +98,10 @@ public class ExplosionDamageEntityAction {
                 ShapeShifterCurseFabric.identifier("explosion_damage_entity"),
                 new SerializableData()
                         .add("power", SerializableDataTypes.INT, 0)
-                        .add("entity_condition", ApoliDataTypes.BIENTITY_CONDITION, null),
+                        .add("entity_condition", ApoliDataTypes.BIENTITY_CONDITION, null)
+                        .add("entity_action", ApoliDataTypes.ENTITY_ACTION, null)
+                        .add("explosion_damage_entity", SerializableDataTypes.BOOLEAN, true),
+
                 ExplosionDamageEntityAction::action
         );
     }

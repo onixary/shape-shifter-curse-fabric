@@ -1,0 +1,55 @@
+{
+  "type": "origins:multiple",
+
+  "can_eat_non_raw_meat_food": {
+    "type": "origins:modify_food",
+    "food_modifier": {
+      "operation": "multiply_base_multiplicative",
+      "value": -0.3
+    },
+    "saturation_modifier": {
+      "operation": "multiply_base_multiplicative",
+      "value": -0.3
+    },
+    "item_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:or",
+          "conditions": [
+            {
+              "type": "origins:ingredient",
+              "ingredient": {
+                "tag": "origins:raw_meat"
+              }
+            },
+            {
+              "type": "origins:ingredient",
+              "ingredient": {
+                "item": "minecraft:rotten_flesh"
+              }
+            }
+          ],
+          "inverted": true
+        },
+        {
+          "type": "origins:food"
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "origins:ignore_diet"
+          },
+          "inverted": true
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "shape-shifter-curse:ignore_vc_eat"
+          },
+          "inverted": true
+        }
+      ]
+    }
+  }
+}

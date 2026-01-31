@@ -9,7 +9,8 @@
         "shape-shifter-curse:form_instinct_use_golden_apple",
         "shape-shifter-curse:form_familiar_fox_instinct_moving_on_snow",
         "shape-shifter-curse:form_familiar_fox_instinct_eat_berry",
-        "shape-shifter-curse:form_familiar_fox_instinct_biome"
+        "shape-shifter-curse:form_familiar_fox_instinct_biome",
+        "shape-shifter-curse:form_familiar_fox_sound_key"
     ],
     "icon": {
         "item": "minecraft:player_head"

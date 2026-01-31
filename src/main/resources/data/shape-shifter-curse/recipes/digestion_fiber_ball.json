@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WSW",
+    "SMS",
+    "WSW"
+  ],
+  "key": {
+    "M": {
+      "item": "shape-shifter-curse:moondust_crystal_shard"
+    },
+    "W": {
+      "item": "minecraft:wheat_seeds"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "shape-shifter-curse:digestion_fiber_ball",
+    "count": 1
+  }
+}

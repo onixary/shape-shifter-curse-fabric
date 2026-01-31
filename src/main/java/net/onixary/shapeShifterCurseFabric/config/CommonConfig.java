@@ -39,6 +39,34 @@ public class CommonConfig implements ConfigData {
     @Comment("Allow players to sleep during Cursed Moon. Default: false")
     public boolean allowSleepInCursedMoon = false;
 
+    @ConfigEntry.Category("Patron")
+    @Comment("Enable Patron Form System. Default: true")
+    public boolean enablePatronFormSystem = true;
+
+    @ConfigEntry.Category("Patron")
+    @Comment("Data Pack Version Url. Default: ")
+    public String DataPackVersionUrl = "http://localhost:1234/data_version.txt";  // 数据包版本存储URL
+
+    @ConfigEntry.Category("Patron")
+    @Comment("Data Pack Download Url. Default: ")
+    public String DataPackUrl = "http://localhost:1234/data.zip";  // 数据包下载URL
+
+    @ConfigEntry.Category("Patron")
+    @Comment("Resource Pack Version Url. Default: ")
+    public String ResourcePackVersionUrl = "http://localhost:1234/resource_version.txt";  // 资源包版本存储URL
+
+    @ConfigEntry.Category("Patron")
+    @Comment("Resource Pack Download Url. Default: ")
+    public String ResourcePackUrl = "http://localhost:1234/resource.zip";  // 资源包下载URL
+
+    @ConfigEntry.Category("Patron")
+    @Comment("Patron Data Url. Default: ")
+    public String PatronDataUrl = "http://localhost:1234/patron_data.json";  // 捐助者数据存储URL
+
+    @ConfigEntry.Category("Patron")
+    @Comment("Check Update Interval (Seconds). Default: 86400 (1 Day)")
+    public int CheckUpdateInterval = 60 * 60 * 24;
+
     // 开发用
     // @ConfigEntry.Category("InDevelopment")
 }

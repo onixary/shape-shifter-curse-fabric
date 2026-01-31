@@ -243,6 +243,8 @@ dependencies {
     modCompileOnly "maven.modrinth:vivecraft:9Sa2NEEb"
     annotationProcessor(files("libs/mixinextras-fabric-0.2.0-beta.8.jar"))
 
+    modCompileOnly "maven.modrinth:tacz-refabricated:HxQ3IsAZ" // TaCZ: Refabricated 1.20.1-0.4.0-forge1.1.7-hotfix
+
 }
 
 processResources {

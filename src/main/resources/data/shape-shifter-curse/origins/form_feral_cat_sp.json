@@ -8,7 +8,9 @@
         "origins:scare_creepers",
         "origins:fall_immunity",
         "shape-shifter-curse:form_ocelot_sound",
-        "shape-shifter-curse:form_ocelot_sound_hurt"
+        "shape-shifter-curse:form_ocelot_sound_hurt",
+        "shape-shifter-curse:form_ocelot_hiss_phantom",
+        "shape-shifter-curse:form_ocelot_sound_key"
     ],
     "icon": {
         "item": "minecraft:player_head"

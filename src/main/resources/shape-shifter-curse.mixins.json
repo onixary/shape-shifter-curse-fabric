@@ -43,6 +43,8 @@
     "projectile.PotionEntityMixin",
     "VirtualTotemMixin",
     "MinionPlayerEntityMixin",
+    "accessor.PowerTypeRegistryAccessor",
+    "MinionPlayerEntityMixin",
     "HungerManagerMixin",
     "EntityLootingMixin",
     "BlockDropMixin",
@@ -55,7 +57,10 @@
     "ArrowEntityMixin",
     "LingeringPotionItemMixin",
     "TippedArrowItemMixin",
-    "BrewingRecipeRegistryMixin"
+    "BrewingRecipeRegistryMixin",
+    "HissPhantomMixin",
+    "EnchantmentUtilAnvilMixin",
+    "EnchantmentUtilEnchantCommandMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",
@@ -80,7 +85,10 @@
     "PlayerEntitySpeedFOVMixin",
     "PlayerMovementControlMixin",
     "PlayerRotationRendererMixin",
-    "accessor.ApoliClientAccessor"
+    "accessor.ApoliClientAccessor",
+    "integration.TacZ_Anim",
+    "integration.TacZ_AnimThird",
+    "PlayerClipAtLedgeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

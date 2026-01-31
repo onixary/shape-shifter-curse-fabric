@@ -10,6 +10,7 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
@@ -17,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,7 +46,7 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
     // 双端 常更新
     public @Nullable Identifier ManaTypeID = null;
     // 双端 常更新
-    public @NotNull List<Identifier> ManaTypeArray = new ArrayList<>();
+    public @NotNull HashMap<Identifier, List<Identifier>> ManaTypeSourceMap = new HashMap<>();
     // 仅服务器端 仅切换ManaTypeID时更新
     public @NotNull ManaUtils.ModifierList MaxManaModifier = new ManaUtils.ModifierList();
     // 仅服务器端 不会更新
@@ -96,32 +98,46 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
 
     // 防止出现先加后减的情况
 
-    public void gainManaTypeID(@NotNull Identifier manaTypeID) {
-        if (!ManaTypeArray.contains(manaTypeID)) {
-            ManaTypeArray.add(manaTypeID);
+    public void gainManaTypeID(@NotNull Identifier manaTypeID, @NotNull Identifier manaSourceID) {
+        if (!ManaTypeSourceMap.computeIfAbsent(manaTypeID, k -> new ArrayList<>()).contains(manaSourceID)) {
+            ManaTypeSourceMap.get(manaTypeID).add(manaSourceID);
         }
         this.__setManaTypeID__(manaTypeID);
     }
 
-    public void loseManaTypeID(@NotNull Identifier manaTypeID) {
-        if (ManaTypeArray.contains(manaTypeID)) {
-            ManaTypeArray.remove(manaTypeID);
-            if (Objects.equals(this.ManaTypeID, manaTypeID)) {
-                if (!ManaTypeArray.isEmpty()) {
-                    this.__setManaTypeID__(ManaTypeArray.get(0));
-                } else {
-                    this.__setManaTypeID__(null);
-                }
-            } else {
-                return;
-            }
-            return;
+    public void loseManaTypeID(@NotNull Identifier manaTypeID, @NotNull Identifier manaSourceID) {
+        if (ManaTypeSourceMap.computeIfAbsent(manaTypeID, k -> new ArrayList<>()).contains(manaSourceID)) {
+            ManaTypeSourceMap.get(manaTypeID).remove(manaSourceID);
         }
+        if (ManaTypeSourceMap.get(manaTypeID).isEmpty()) {
+            ManaTypeSourceMap.remove(manaTypeID);
+        }
+        // 从Map里加载一个
+        for (Identifier id : ManaTypeSourceMap.keySet()) {
+            if (!ManaTypeSourceMap.get(id).isEmpty()) {
+                this.__setManaTypeID__(id);
+                return;
+            } else {
+                ManaTypeSourceMap.remove(id);
+            }
+        }
+        this.__setManaTypeID__(null);
     }
 
     public void setManaTypeID(@Nullable Identifier manaTypeID) {
-        ManaTypeArray.clear();
+        ManaTypeSourceMap.clear();
         this.__setManaTypeID__(manaTypeID);
+    }
+
+    public boolean isManaTypeExists(@NotNull Identifier manaTypeID, @Nullable Identifier source) {
+        if (ManaTypeSourceMap.containsKey(manaTypeID)) {
+            if (source == null) {
+                return true;
+            } else {
+                return ManaTypeSourceMap.get(manaTypeID).contains(source);
+            }
+        }
+        return false;
     }
 
     private void __reloadManaHandler__(@Nullable Identifier manaTypeID) {
@@ -141,6 +157,7 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
         this.MaxManaModifier = ManaRegistries.getMaxManaModifier(manaTypeID);
         this.ManaRegenModifier = ManaRegistries.getManaRegenModifier(manaTypeID);
         this.__reloadManaHandler__(manaTypeID);
+        this.onCommonManaBarChange();
         this.Dirty = true;
     }
 
@@ -186,7 +203,7 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
     }
 
     public boolean isManaAbove(double mana) {
-        return this.Mana > mana;
+        return this.Mana >= mana;
     }
 
     private void mergeTempRegen(double newTempRegen, int newTempRegenTime) {
@@ -253,10 +270,12 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
                 NbtCompound manaRegenPlayerSideCompound = nbtCompound.getCompound("ManaRegenModifierPlayerSide");
                 this.ManaRegenModifierPlayerSide.readFromNbt(manaRegenPlayerSideCompound);
             }
-            if (nbtCompound.contains("ManaTypeArray")) {
-                NbtList manaTypeArray = nbtCompound.getList("ManaTypeArray", NbtElement.STRING_TYPE);
-                for (NbtElement nbtElement : manaTypeArray) {
-                    ManaTypeArray.add(new Identifier(nbtElement.asString()));
+            if (nbtCompound.contains("ManaTypeSourceMap")) {
+                ManaTypeSourceMap.clear();
+                NbtCompound manaTypeMap = nbtCompound.getCompound("ManaTypeSourceMap");
+                for (String manaTypeID : manaTypeMap.getKeys()) {
+                    NbtList manaTypeSourceID = manaTypeMap.getList(manaTypeID, NbtElement.STRING_TYPE);
+                    ManaTypeSourceMap.computeIfAbsent(Identifier.tryParse(manaTypeID), k -> new ArrayList<>()).addAll(manaTypeSourceID.stream().map(NbtElement::asString).map(Identifier::tryParse).toList());
                 }
             }
         }
@@ -294,11 +313,13 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
             NbtCompound manaRegenPlayerSideCompound = new NbtCompound();
             this.ManaRegenModifierPlayerSide.writeToNbt(manaRegenPlayerSideCompound);
             nbtCompound.put("ManaRegenModifierPlayerSide", manaRegenPlayerSideCompound);
-            NbtList manaTypeArray = new NbtList();
-            for (Identifier manaType : this.ManaTypeArray) {
-                manaTypeArray.add(NbtString.of(manaType.toString()));
+            NbtCompound manaTypeMap = new NbtCompound();
+            for (Identifier manaType : this.ManaTypeSourceMap.keySet()) {
+                NbtList manaTypeSourceID = new NbtList();
+                manaTypeSourceID.addAll(this.ManaTypeSourceMap.get(manaType).stream().map(identifier -> NbtString.of(identifier.toString())).toList());
+                manaTypeMap.put(manaType.toString(), manaTypeSourceID);
             }
-            nbtCompound.put("ManaTypeArray", manaTypeArray);
+            nbtCompound.put("ManaTypeSourceMap", manaTypeMap);
         }
     }
 
@@ -332,7 +353,7 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
     public void copyFrom(ManaComponent other) {
         this.Mana = other.Mana;
         this.ManaTypeID = other.ManaTypeID;
-        this.ManaTypeArray = other.ManaTypeArray;
+        this.ManaTypeSourceMap = other.ManaTypeSourceMap;
         this.MaxManaModifier = other.MaxManaModifier;
         this.MaxManaModifierPlayerSide = other.MaxManaModifierPlayerSide;
         this.MaxManaClient = other.MaxManaClient;
@@ -370,6 +391,23 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
                 this.Dirty = true;
             }
         }
+    }
+
+    public void onCommonManaBarChange() {
+        if (this.manaHandler == ManaRegistries.EMPTY_MANA_HANDLER) return;
+        if (this.isClient) {
+            this.onClientManaBarChange(this.player);
+        } else {
+            this.onServerManaBarChange(this.player);
+        }
+    }
+
+    public void onClientManaBarChange(PlayerEntity clientPlayerEntity) {
+        manaHandler.getOnClientInit().accept(this, clientPlayerEntity);
+    }
+
+    public void onServerManaBarChange(PlayerEntity serverPlayerEntity) {
+        manaHandler.getOnServerInit().accept(this, serverPlayerEntity);
     }
 
     public void onCommonManaChange() {

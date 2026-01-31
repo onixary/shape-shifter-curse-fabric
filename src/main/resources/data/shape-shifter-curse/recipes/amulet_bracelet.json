@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "DMD",
+    " G "
+  ],
+  "key": {
+    "M": {
+      "item": "shape-shifter-curse:moondust_crystal_shard"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "D": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "G": {
+      "item": "minecraft:gold_nugget"
+    }
+  },
+  "result": {
+    "item": "shape-shifter-curse:amulet_bracelet",
+    "count": 1
+  }
+}

@@ -1,5 +1,7 @@
 {
   "__comment__": "具体看PlayerFormBase | See PlayerFormBase for details",
+  "FormID": "example_namespace:example",
+  "__FormID_comment__": "FormID覆写 **不推荐覆盖**",
   "groupID": "example_namespace:example_group",
   "__groupID_comment__": "组ID 用于注册组 与数据包结构相对应 | Group ID used for registering groups, corresponding to the datapack structure",
   "groupIndex": 5,
@@ -135,5 +137,23 @@
       "animID": "shape-shifter-curse:attach_bottom"
     }
   },
-  "__powerAnim_comment__": "powerAnim 动画列表 | powerAnim animation list"
+  "__powerAnim_comment__": "powerAnim 动画列表 | powerAnim animation list",
+  "FurModelID": "",
+  "__FurModelID_comment__": "FurModel 为赞助者形态设计 非赞助者形态请修改originID 由于无法动态添加起源",
+  "ExtraPower": [
+    {
+      "type": "origins:attribute",
+      "modifier": {
+        "name": "Nine lives health reduction",
+        "attribute": "minecraft:generic.max_health",
+        "value": -10.0,
+        "operation": "addition"
+      }
+    }
+  ],
+  "__ExtraPower_comment__": "额外能力 为赞助者形态设计 非赞助者形态请修改originID 由于无法动态添加起源",
+  "IsPatronForm": false,
+  "__IsPatronForm_comment__": "是否为赞助者形态 为赞助者形态设计 可以使用特殊物品直接变形",
+  "PlayerUUID": [],
+  "__PlayerUUID_comment__": "仅个别UUID可使用 为赞助者形态设计 空为全体可用"
 }

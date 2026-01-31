@@ -24,7 +24,8 @@
         "shape-shifter-curse:form_allay_sp_slipperiness",
         "shape-shifter-curse:form_allay_sp_health",
         "shape-shifter-curse:no_step_sound",
-        "shape-shifter-curse:can_eat_amethyst_shard"
+        "shape-shifter-curse:can_eat_amethyst_shard",
+        "shape-shifter-curse:form_allay_sp_sound_key"
     ],
     "icon": {
         "item": "minecraft:player_head"

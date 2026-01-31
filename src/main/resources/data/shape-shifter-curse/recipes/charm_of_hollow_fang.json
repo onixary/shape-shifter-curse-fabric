@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "MPM",
+    " B "
+  ],
+  "key": {
+    "M": {
+      "item": "shape-shifter-curse:moondust_crystal_shard"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "P": {
+      "item": "minecraft:prismarine_shard"
+    },
+    "B": {
+      "item": "minecraft:bone_meal"
+    }
+  },
+  "result": {
+    "item": "shape-shifter-curse:charm_of_hollow_fang",
+    "count": 1
+  }
+}

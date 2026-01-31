@@ -3,13 +3,18 @@
     "food_modifiers": [
         {
             "name": "increase food points",
+            "operation": "addition",
+            "value": 3.0
+        },
+        {
+            "name": "increase food points",
             "operation": "min_base",
-            "value": 5.0
+            "value": 3.0
         },
         {
             "name": "increase food points",
             "operation": "multiply_base",
-            "value": 0.5
+            "value": 0.25
         }
     ],
     "saturation_modifiers": [

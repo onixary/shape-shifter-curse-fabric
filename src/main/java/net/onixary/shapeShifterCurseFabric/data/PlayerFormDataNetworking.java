@@ -19,7 +19,7 @@ public class PlayerFormDataNetworking {
     public NbtCompound toNbt() {
         NbtCompound nbt = new NbtCompound();
         nbt.putUuid("PlayerId", playerId);
-        nbt.putString("CurrentForm", currentForm.name());
+        nbt.putString("CurrentForm", currentForm.getIDString());
         return nbt;
     }
 

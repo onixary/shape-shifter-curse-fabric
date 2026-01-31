@@ -38,7 +38,6 @@ import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
 import net.onixary.shapeShifterCurseFabric.config.ClientConfig;
 import net.onixary.shapeShifterCurseFabric.config.CommonConfig;
 import net.onixary.shapeShifterCurseFabric.config.PlayerCustomConfig;
-import net.onixary.shapeShifterCurseFabric.data.CursedMoonData;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntitySpawnEgg;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.TransformativeEntitySpawning;
@@ -46,6 +45,7 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.Tra
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.wolf.TransformativeWolfEntity;
+import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
 import net.onixary.shapeShifterCurseFabric.mana.ManaRegistries;
@@ -67,23 +67,30 @@ import net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusPotionEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
+import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
+import net.onixary.shapeShifterCurseFabric.util.AttackEntityDataTracker;
 import net.onixary.shapeShifterCurseFabric.util.PlayerEventHandler;
 import net.onixary.shapeShifterCurseFabric.util.TickManager;
 import net.onixary.shapeShifterCurseFabric.util.TrinketDataPackReloadListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 import static net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager.saveForm;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.saveInstinctComp;
-import static net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager.*;
 
 
 public class ShapeShifterCurseFabric implements ModInitializer {
 
     public static final String MOD_ID = "shape-shifter-curse";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
+    public static final Path MOD_LOCAL_DATA_STORAGE = Path.of("ssc_data");
 
     public static PlayerCustomConfig playerCustomConfig;
     public static ClientConfig clientConfig;
@@ -94,7 +101,6 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static Vec3d feralItemPosOffset = new Vec3d(0.0F, 0.0F, 0.0F);
     public static float feralItemEulerX = 0.0F;
 
-    public static CursedMoonData cursedMoonData = new CursedMoonData();
     // Reg custom advancement criterion
     public static final OnEnableMod ON_ENABLE_MOD = Criteria.register(new OnEnableMod());
     public static final OnOpenBookOfShapeShifter ON_OPEN_BOOK_OF_SHAPE_SHIFTER = Criteria.register(new OnOpenBookOfShapeShifter());
@@ -177,6 +183,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public void onInitialize() {
         // PlayerDataStorage.initialize(); // 移除这行，因为这里还没有服务器实例
         RegCustomItem.initialize();
+        RegCustomBlock.initialize();
         RegTransformativeEntitySpawnEgg.initialize();
         RegTStatusEffect.initialize();
         RegTStatusPotionEffect.initialize();
@@ -196,6 +203,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         // 注册召唤物属性
         MinionRegister.register();
 
+        AttackEntityDataTracker.init();
+
         // 注册配置文件
         AutoConfig.register(PlayerCustomConfig.class, Toml4jConfigSerializer::new);  // 客户端配置
         playerCustomConfig = AutoConfig.getConfigHolder(PlayerCustomConfig.class).getConfig();
@@ -206,7 +215,6 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
         // network package
         ModPacketsC2S.register();
-        cursedMoonData = new CursedMoonData();
 
         //TransformFX.INSTANCE.registerCallbacks();
         TransformOverlay.INSTANCE.init();
@@ -225,6 +233,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             // 获取主世界作为默认世界
             ServerWorld overworld = server.getOverworld();
             FormAbilityManager.getServerWorld(overworld);
+            // 更新Patron状态
+            PatronUtils.OnServerLoad(server);
         });
         // 获取动态Form(DataPack)
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new FormDataPackReloadListener());
@@ -236,6 +246,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
                 FormAbilityManager.applyForm(player, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
             }
         }));
+        initLocalDataStorage();
 
         // Reg origins content
 
@@ -260,8 +271,6 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             // saveCurrentAttachment(server.getOverworld(), player);
             saveForm(player);
             saveInstinctComp(player);
-            // save cursed moon data
-            ShapeShifterCurseFabric.cursedMoonData.getInstance().save(server.getOverworld());
         });
 
         // Reg listeners
@@ -322,6 +331,20 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
 
         //LOGGER.info(CONFIG.keepOriginalSkin() ? "Original skin will be kept." : "Override skin");
+    }
+
+    private void initLocalDataStorage() {
+        if (!PatronUtils.EnablePatronFeature) {
+            return;
+        }
+        File dataFolder = MOD_LOCAL_DATA_STORAGE.toFile();
+        if (!dataFolder.isDirectory()) {
+            try {
+                Files.createDirectories(dataFolder.toPath());
+            } catch (IOException e) {
+                LOGGER.error("Failed to create local data storage folder", e);
+            }
+        }
     }
 
     private void onPlayerEndSleeping(LivingEntity entity) {

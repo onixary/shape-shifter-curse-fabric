@@ -41,7 +41,7 @@ public class ManaAttributePower extends Power {
     }
 
     @Override
-    public void onRemoved() {
+    public void onLost() {
         if (modifierID == null) {
             return;
         }
@@ -53,6 +53,13 @@ public class ManaAttributePower extends Power {
                 ManaUtils.removeRegenManaModifier(playerEntity, modifierID, playerSide);
             }
         }
+    }
+
+
+    @Override
+    public void onRespawn() {
+        // 同样与 ManaTypePower 一样写个保底
+        this.onAdded();
     }
 
     public static PowerFactory<?> createFactory() {

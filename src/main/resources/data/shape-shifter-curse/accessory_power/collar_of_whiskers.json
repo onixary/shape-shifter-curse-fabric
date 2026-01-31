@@ -1,0 +1,39 @@
+{
+  "shape-shifter-curse:collar_of_whiskers": {
+    "accessory_powers": [],
+    "all_form": {
+      "add": [],
+      "remove": []
+    },
+    "forms": {
+      "shape-shifter-curse:ocelot_0": {
+        "add": [
+        ],
+        "remove": [
+        ]
+      },
+      "shape-shifter-curse:ocelot_1": {
+        "add": [
+        ],
+        "remove": [
+        ]
+      },
+      "shape-shifter-curse:ocelot_2": {
+        "add": [
+          "shape-shifter-curse:form_ocelot_collar_of_whiskers_trinket"
+        ],
+        "remove": [
+          "shape-shifter-curse:form_ocelot_2_arrow_dodge"
+        ]
+      },
+      "shape-shifter-curse:ocelot_3": {
+        "add": [
+          "shape-shifter-curse:form_ocelot_collar_of_whiskers_trinket"
+        ],
+        "remove": [
+          "shape-shifter-curse:form_ocelot_2_arrow_dodge"
+        ]
+      }
+    }
+  }
+}

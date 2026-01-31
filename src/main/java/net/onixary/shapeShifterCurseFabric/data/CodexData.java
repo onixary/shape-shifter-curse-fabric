@@ -283,7 +283,7 @@ public class CodexData {
         } else {
             // 服务端使用原始逻辑
             isCursedMoon = CursedMoon.isCursedMoon(player.getWorld());
-            isNight = CursedMoon.isNight();
+            isNight = CursedMoon.isNight(player.getWorld());
         }
 
         if(isCursedMoon){

@@ -1,11 +1,61 @@
 {
-    "type": "origins:modify_damage_dealt",
-    "condition": {
-        "type": "origins:exposed_to_sun",
-        "inverted": true
+    "type": "origins:multiple",
+    "normal": {
+        "type": "origins:conditioned_attribute",
+        "condition": {
+            "type": "origins:exposed_to_sun",
+            "inverted": true
+        },
+        "modifier": {
+            "attribute": "minecraft:generic.attack_damage",
+            "name": "Extra Attack Damage Normal",
+            "operation": "addition",
+            "value": 1.0
+        },
+        "tick_rate": 1
     },
-    "modifier": {
-        "operation": "addition",
-        "value": 6.0
+    "barehand": {
+        "type": "origins:conditioned_attribute",
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:exposed_to_sun",
+                    "inverted": true
+                },
+                {
+                    "type": "origins:or",
+                    "conditions": [
+                        {
+                            "type": "origins:inventory",
+                            "process_mode": "items",
+                            "item_condition": {
+                                "type": "shape-shifter-curse:is_weapon"
+                            },
+                            "slots": [
+                                "weapon.mainhand"
+                            ],
+                            "inverted": true
+                        },
+                        {
+                            "type": "origins:inventory",
+                            "process_mode": "items",
+                            "comparison": "==",
+                            "compare_to": 0,
+                            "slots": [
+                                "weapon.mainhand"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "modifier": {
+            "attribute": "minecraft:generic.attack_damage",
+            "name": "Extra Attack Damage Normal",
+            "operation": "addition",
+            "value": 5.0
+        },
+        "tick_rate": 1
     }
 }

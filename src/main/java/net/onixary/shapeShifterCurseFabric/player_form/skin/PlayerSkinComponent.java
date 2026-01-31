@@ -11,6 +11,7 @@ public class PlayerSkinComponent implements Component, AutoSyncedComponent {
     private boolean keepOriginalSkin = false;
     private boolean enableFormColor = false;
     private FormTextureUtils.ColorSetting formColor = new FormTextureUtils.ColorSetting(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFF000000, 0xFF000000, false, false, false);
+    private boolean enableFormRandomSound = true;
 
     public boolean shouldKeepOriginalSkin() {
         return keepOriginalSkin;
@@ -72,17 +73,20 @@ public class PlayerSkinComponent implements Component, AutoSyncedComponent {
 
     @Override
     public void readFromNbt(NbtCompound tag) {
+        // 直接往里面加了 反正在玩家进服务器后会同步 理论上连持久化都没必要
         try {
             this.keepOriginalSkin = tag.getBoolean("KeepOriginalSkin");
             this.enableFormColor = tag.getBoolean("EnableFormColor");
             this.formColor = new FormTextureUtils.ColorSetting(FormTextureUtils.RGBA2ABGR(tag.getInt("PrimaryColor")), FormTextureUtils.RGBA2ABGR(tag.getInt("AccentColor1")), FormTextureUtils.RGBA2ABGR(tag.getInt("AccentColor2")), FormTextureUtils.RGBA2ABGR(tag.getInt("EyeColorA")), FormTextureUtils.RGBA2ABGR(tag.getInt("EyeColorB")),
                     tag.getBoolean("PrimaryGreyReverse"), tag.getBoolean("Accent1GreyReverse"), tag.getBoolean("Accent2GreyReverse"));
+            this.enableFormRandomSound = tag.getBoolean("EnableFormRandomSound");
         }
         catch(IllegalArgumentException e)
         {
             this.keepOriginalSkin = false; // Default to false
             this.enableFormColor = false; // Default to false
             this.formColor = new FormTextureUtils.ColorSetting(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, false, false, false); // Default to default color
+            this.enableFormRandomSound = true; // Default to true
         }
     }
 
@@ -98,5 +102,14 @@ public class PlayerSkinComponent implements Component, AutoSyncedComponent {
         tag.putBoolean("PrimaryGreyReverse", this.formColor.getPrimaryGreyReverse());
         tag.putBoolean("Accent1GreyReverse", this.formColor.getAccent1GreyReverse());
         tag.putBoolean("Accent2GreyReverse", this.formColor.getAccent2GreyReverse());
+        tag.putBoolean("EnableFormRandomSound", this.enableFormRandomSound);
+    }
+
+    public boolean isEnableFormRandomSound() {
+        return enableFormRandomSound;
+    }
+
+    public void setEnableFormRandomSound(boolean enableFormRandomSound) {
+        this.enableFormRandomSound = enableFormRandomSound;
     }
 }

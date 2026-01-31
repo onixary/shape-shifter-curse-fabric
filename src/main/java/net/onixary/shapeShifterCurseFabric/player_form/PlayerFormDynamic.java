@@ -1,11 +1,18 @@
 package net.onixary.shapeShifterCurseFabric.player_form;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.entity.player.PlayerEntity;
+import io.github.apace100.apoli.power.Power;
+import io.github.apace100.apoli.power.PowerType;
+import io.github.apace100.apoli.power.factory.PowerFactory;
+import io.github.apace100.apoli.registry.ApoliRegistries;
+import io.github.apace100.apoli.util.NamespaceAlias;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.mixin.accessor.PowerTypeRegistryAccessor;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.v2.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
@@ -14,9 +21,9 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
 import net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFurClient;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class PlayerFormDynamic extends PlayerFormBase{
 
@@ -27,6 +34,17 @@ public class PlayerFormDynamic extends PlayerFormBase{
     public static final HashMap<Identifier, AnimationHolder> defaultAnim = new HashMap<>();
     public static final HashMap<Identifier, Boolean> isAnimRegistered = new HashMap<>();
      */
+
+    public static final UUID PublicUUID = UUID.fromString("00000000-0000-0000-0000-000000000000");
+
+    public Identifier FurModelID = null;
+    public List<Identifier> ExtraPower = new LinkedList<Identifier>();
+    public HashMap<Identifier, JsonObject> ExtraPowerData = new LinkedHashMap<>();
+    private int TempPowerIndex = 0;
+    public boolean IsPatronForm = false;  // 可以使用特殊物品直接变形
+    public int RequirePatronLevel = 0;  // 需要的赞助等级
+    public List<UUID> PlayerUUIDs = new ArrayList<UUID>();
+
 
     // 覆写数据
     private Identifier originID = null;
@@ -121,21 +139,21 @@ public class PlayerFormDynamic extends PlayerFormBase{
         return super.getPowerAnim(player, animSystemData, powerAnimID);
     }
 
-    private String _Gson_GetString(JsonObject data, String key, String defaultValue) {
+    private static String _Gson_GetString(JsonObject data, String key, String defaultValue) {
         if (data.has(key)) {
             return data.get(key).getAsString();
         }
         return defaultValue;
     }
 
-    private int _Gson_GetInt(JsonObject data, String key, int defaultValue) {
+    private static int _Gson_GetInt(JsonObject data, String key, int defaultValue) {
         if (data.has(key)) {
             return data.get(key).getAsInt();
         }
         return defaultValue;
     }
 
-    private boolean _Gson_GetBoolean(JsonObject data, String key, boolean defaultValue) {
+    private static boolean _Gson_GetBoolean(JsonObject data, String key, boolean defaultValue) {
         if (data.has(key)) {
             return data.get(key).getAsBoolean();
         }
@@ -144,6 +162,9 @@ public class PlayerFormDynamic extends PlayerFormBase{
 
     public void load(JsonObject formData) {
         try {
+            if (formData.has("FormID")) {
+                this.FormID = Identifier.tryParse(formData.get("FormID").getAsString());
+            }
             this.setPhase(PlayerFormPhase.valueOf(_Gson_GetString(formData, "phase", "PHASE_CLEAR")));
             this.setBodyType(PlayerFormBodyType.valueOf(_Gson_GetString(formData, "bodyType", "NORMAL")));
             this.setHasSlowFall(_Gson_GetBoolean(formData, "hasSlowFall", false));
@@ -201,6 +222,20 @@ public class PlayerFormDynamic extends PlayerFormBase{
                 group = RegPlayerForms.registerDynamicPlayerFormGroup(new PlayerFormGroup(GroupID));
             }
             this.setGroup(group, GroupIndex);
+            String IDStr = _Gson_GetString(formData, "FurModelID", null);
+            this.FurModelID = IDStr == null ? null : Identifier.tryParse(IDStr);
+            this.loadExtraPower(formData);
+            this.IsPatronForm = _Gson_GetBoolean(formData, "IsPatronForm", false);
+            this.PlayerUUIDs.clear();
+            if (formData.has("PlayerUUID")) {
+                for (JsonElement uuidJson : formData.get("PlayerUUID").getAsJsonArray()) {
+                    UUID uuid = UUID.fromString(uuidJson.getAsString());
+                    if (uuid != null) {
+                        this.PlayerUUIDs.add(uuid);
+                    }
+                }
+            }
+            this.RequirePatronLevel = _Gson_GetInt(formData, "RequirePatronLevel", 0);
         }
         catch(Exception e) {
             ShapeShifterCurseFabric.LOGGER.error("Error while loading player form: {}", e.getMessage());
@@ -236,6 +271,20 @@ public class PlayerFormDynamic extends PlayerFormBase{
             data.addProperty("groupID", this.getGroup().GroupID.toString());
             data.addProperty("groupIndex", this.FormIndex);
         }
+        if (this.FurModelID != null) {
+            data.addProperty("FurModelID", this.FurModelID.toString());
+        }
+        this.saveExtraPower(data);
+        data.addProperty("IsPatronForm", this.IsPatronForm);
+        if (!PlayerUUIDs.isEmpty()) {
+            JsonArray uuids = new JsonArray();
+            for (UUID uuid : PlayerUUIDs) {
+                uuids.add(uuid.toString());
+            }
+            data.add("PlayerUUID", uuids);
+        }
+        data.addProperty("RequirePatronLevel", this.RequirePatronLevel);
+        return data;
          */
         if (this.formData == null) {
             throw new RuntimeException("PlayerFormDynamic.save() called before load()");
@@ -249,6 +298,15 @@ public class PlayerFormDynamic extends PlayerFormBase{
         return form;
     }
 
+    public static PlayerFormDynamic of(JsonObject formData) throws IllegalArgumentException {
+        PlayerFormDynamic form = new PlayerFormDynamic(null);
+        form.load(formData);
+        if (form.FormID == null) {
+            throw new IllegalArgumentException("FormID is required");
+        }
+        return form;
+    }
+
     @Override
     public Identifier getFormOriginID() {
         return this.originID != null ? this.originID : super.getFormOriginID();
@@ -258,4 +316,95 @@ public class PlayerFormDynamic extends PlayerFormBase{
     public Identifier getFormOriginLayerID() {
         return this.originLayerID != null ? this.originLayerID : super.getFormOriginLayerID();
     }
+
+    // 添加在玩家自选Form的UI判断
+    public boolean IsPlayerCanUse(PlayerEntity player) {
+        // PlayerUUIDs 为白名单 为空则无限制
+        if (this.PlayerUUIDs.contains(player.getUuid())) {
+            return true;
+        }
+        return (this.PlayerUUIDs.isEmpty() || this.PlayerUUIDs.contains(PublicUUID)) && (PatronUtils.PatronLevels.getOrDefault(player.getUuid(), 0) >= this.RequirePatronLevel);
+    }
+
+    public List<Identifier> getExtraPower() {
+        List<Identifier> powerList = new LinkedList<>(this.ExtraPower);
+        // this.ExtraPowerData
+        for (Map.Entry<Identifier, JsonObject> powerData : this.ExtraPowerData.entrySet()) {
+            powerList.add(powerData.getKey());
+        }
+        return powerList;
+    }
+
+    private Identifier registerPower(JsonObject powerData) {
+        Identifier powerID = new Identifier(this.FormID.getNamespace(), this.FormID.getPath() + "_tpower_" + this.TempPowerIndex);
+        if (powerData == null) {
+            return null;
+        }
+        try {
+            Identifier PowerID = Identifier.tryParse(powerData.get("type").getAsString());
+            PowerFactory<Power> pf = null;
+            if (NamespaceAlias.hasAlias(PowerID)) {
+                pf = ApoliRegistries.POWER_FACTORY.get(NamespaceAlias.resolveAlias(PowerID));
+            }
+            else {
+                pf = ApoliRegistries.POWER_FACTORY.get(PowerID);
+            }
+            if (pf == null) {
+                ShapeShifterCurseFabric.LOGGER.warn("Power Factory is null! From {}", this.FormID.toString());
+                return null;
+            }
+            PowerFactory<Power>.Instance pi = pf.read(powerData);
+            PowerType<?> powerType = new PowerType<>(powerID, pi);
+            PowerTypeRegistryAccessor.Invoke_Update(powerID, powerType);
+        } catch (Exception e) {
+            ShapeShifterCurseFabric.LOGGER.warn("Failed to register power: {}", powerData.toString());
+            return null;
+        }
+        this.TempPowerIndex++;
+        return powerID;
+    }
+
+    private void loadExtraPower(JsonObject formData) {
+        /* "ExtraPower" : [
+         *      "power:power_id",
+         *      {
+         *          some power data
+         *      }
+         * ]
+         */
+        this.ExtraPower.clear();
+        this.ExtraPowerData.clear();
+        if (!formData.has("ExtraPower")) {
+            return;
+        }
+        JsonArray powerArray = formData.getAsJsonArray("ExtraPower");
+        for (JsonElement powerElement : powerArray) {
+            if (powerElement.isJsonPrimitive()) {
+                this.ExtraPower.add(Identifier.tryParse(powerElement.getAsString()));
+            }
+            else if (powerElement.isJsonObject()) {
+                this.ExtraPowerData.put(registerPower(powerElement.getAsJsonObject()), powerElement.getAsJsonObject());
+            }
+            else {
+                ShapeShifterCurseFabric.LOGGER.warn("Invalid ExtraPower data: {}", powerElement.toString());
+            }
+        }
+    }
+
+    /*
+    private void saveExtraPower(JsonObject data) {
+        JsonArray powerArray = new JsonArray();
+        if (!this.ExtraPower.isEmpty()) {
+            for (Identifier powerID : this.ExtraPower) {
+                powerArray.add(powerID.toString());
+            }
+        }
+        if (!this.ExtraPowerData.isEmpty()) {
+            for (Map.Entry<Identifier, JsonObject> powerData : this.ExtraPowerData.entrySet()) {
+                powerArray.add(powerData.getValue());
+            }
+        }
+        data.add("ExtraPower", powerArray);
+    }
+     */
 }

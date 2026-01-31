@@ -1,0 +1,19 @@
+{
+  "shape-shifter-curse:resonant_core": {
+    "accessory_powers": [],
+    "all_form": {
+      "add": [],
+      "remove": []
+    },
+    "forms": {
+      "shape-shifter-curse:allay_sp": {
+        "add": [
+          "shape-shifter-curse:form_allay_sp_resonant_core_trinket"
+        ],
+        "remove": [
+          "shape-shifter-curse:can_eat_amethyst_shard"
+        ]
+      }
+    }
+  }
+}

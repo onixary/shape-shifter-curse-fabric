@@ -1,6 +1,38 @@
 {
   "replace": false,
   "values": [
-    "minecraft:shield"
+    "minecraft:shield",
+
+    {
+      "id": "endermanoverhaul:corrupted_shield",
+      "required": false
+    },
+    {
+      "id": "paladins:iron_kite_shield",
+      "required": false
+    },
+    {
+      "id": "paladins:golden_kite_shield",
+      "required": false
+    },
+    {
+      "id": "paladins:diamond_kite_shield",
+      "required": false
+    },
+    {
+      "id": "paladins:netherite_kite_shield",
+      "required": false
+    },
+    {
+      "id": "paladins:ruby_kite_shield",
+      "required": false
+    },
+    {
+      "id": "paladins:aeternium_kite_shield",
+      "required": false
+    },
+    {
+      "id": "twilightforest:knightmetal_shield"
+	}
   ]
 }

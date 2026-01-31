@@ -6,6 +6,7 @@
         "shape-shifter-curse:form_axolotl_3_slipperiness",
         "shape-shifter-curse:form_axolotl_3_sneaking_speed",
         "shape-shifter-curse:form_axolotl_3_sprinting_speed",
+        "shape-shifter-curse:form_axolotl_3_sprinting_cost_oxygen",
         "shape-shifter-curse:form_axolotl_3_sprinting_sneaking_water_explode",
         "shape-shifter-curse:form_axolotl_3_sprinting_jump",
         "shape-shifter-curse:form_axolotl_3_sprinting_jump_high",
@@ -44,7 +45,8 @@
         "origins:air_from_potions",
         "shape-shifter-curse:air_from_splash_potions",
         "shape-shifter-curse:form_axolotl_sound",
-        "shape-shifter-curse:form_axolotl_sound_hurt"
+        "shape-shifter-curse:form_axolotl_sound_hurt",
+        "shape-shifter-curse:form_axolotl_sound_key"
     ],
     "icon": {
         "item": "minecraft:player_head"

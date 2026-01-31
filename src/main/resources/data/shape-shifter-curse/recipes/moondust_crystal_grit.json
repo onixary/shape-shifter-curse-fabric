@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QMQ",
+    "MGM",
+    "QMQ"
+  ],
+  "key": {
+    "M": {
+      "item": "shape-shifter-curse:untreated_moondust"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    },
+    "G": {
+      "item": "minecraft:ghast_tear"
+    }
+  },
+  "result": {
+    "item": "shape-shifter-curse:moondust_crystal_grit",
+    "count": 1
+  }
+}

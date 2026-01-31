@@ -6,8 +6,10 @@ import net.minecraft.client.render.entity.model.ElytraEntityModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.Vec3d;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -53,6 +55,29 @@ public abstract class ElytraEntityModelMixin<T extends LivingEntity> {
             m = 3.0f;
             n = 0.08726646f;
         }
+        // 特殊处理 BAT3的鞘翅轴心要向下移动来适配动画
+        if (entity instanceof AbstractClientPlayerEntity) {
+            PlayerFormBase curForm0 = RegPlayerFormComponent.PLAYER_FORM.get(entity).getCurrentForm();
+            if(curForm0 == RegPlayerForms.BAT_3){
+                //ShapeShifterCurseFabric.LOGGER.info("BAT3 set elytra");
+                if (((LivingEntity)entity).isOnGround()){
+                    if (((Entity)entity).isInSneakingPose()){
+                        k += (float)Math.toRadians(30.0);
+                        m = 12.0f;
+                    }
+                    else{
+                        k += (float)Math.toRadians(120.0);
+                        //l += (float)Math.toRadians(70.0);
+                        n += (float)Math.toRadians(45.0);
+                        m = 9.0f;
+                    }
+                }
+                else{
+                    m = 0.0f;
+                }
+            }
+        }
+
         this.leftWing.pivotY = m;
         if (entity instanceof AbstractClientPlayerEntity) {
             AbstractClientPlayerEntity abstractClientPlayerEntity = (AbstractClientPlayerEntity)entity;

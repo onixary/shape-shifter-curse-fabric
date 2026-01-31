@@ -25,9 +25,8 @@
                     "type": "origins:and",
                     "actions": [
                         {
-                            "type": "origins:feed",
-                            "food": 9,
-                            "saturation": 0.4
+                            "type": "origins:execute_command",
+                            "command": "/give @p minecraft:splash_potion{Potion:\"shape-shifter-curse:feed_potion\"}"
                         },
                         {
                             "type": "origins:trigger_cooldown",
@@ -72,7 +71,14 @@
         ]
     },
     "item_condition": {
-        "type": "origins:empty"
+        "type": "origins:ingredient",
+        "ingredient": {
+            "item": "minecraft:glass_bottle"
+        }
+    },
+    "held_item_action": {
+        "type": "origins:consume",
+        "amount": 1
     },
     "hands": [
         "main_hand"

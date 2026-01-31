@@ -12,7 +12,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class ManaRegistries {
     // 不可变 防止某些天才操作同时把其他的ManaHandler给修改了 导致程序异常 当然Immutable为可选项 无论是否Immutable都支持注册 推荐为公共ManaHandler加上setImmutable
@@ -43,7 +42,7 @@ public class ManaRegistries {
 
     public static final Identifier MC_AlwaysTrue = registerManaConditionType(ShapeShifterCurseFabric.identifier("always_true"), player -> true);
     public static final Identifier MC_AlwaysFalse = registerManaConditionType(ShapeShifterCurseFabric.identifier("always_false"), player -> false);
-    public static final Identifier MC_IsCursedMoon = registerManaConditionType(ShapeShifterCurseFabric.identifier("is_cursed_moon"), player -> CursedMoon.isCursedMoon(player.getWorld()) && CursedMoon.isNight());
+    public static final Identifier MC_IsCursedMoon = registerManaConditionType(ShapeShifterCurseFabric.identifier("is_cursed_moon"), player -> CursedMoon.isCursedMoon(player.getWorld()) && CursedMoon.isNight(player.getWorld()));
 
     public static final Identifier FAMILIAR_FOX_MANA = registerManaType(ShapeShifterCurseFabric.identifier("familiar_fox_mana"),
             new ManaUtils.ModifierList(
@@ -60,12 +59,15 @@ public class ManaRegistries {
                             ShapeShifterCurseFabric.identifier("cursed_moon"),
                             new Pair<Identifier, ManaUtils.Modifier>(
                                     MC_IsCursedMoon,
-                                    new ManaUtils.Modifier(0.5d, 1.0d, 0d)
+                                    new ManaUtils.Modifier(0.02d, 1.0d, 0d)
                             )
                     )
             ),
             EMPTY_MANA_HANDLER
     );
+
+    // 给数据包提供一个空 Modifier 资源条吧
+    public static final Identifier DP_MANA = registerManaType(ShapeShifterCurseFabric.identifier("dp_mana"), EMPTY_MAX_MANA_MODIFIER, EMPTY_MANA_REGEN_MODIFIER, EMPTY_MANA_HANDLER);
 
     public static Identifier registerManaType(Identifier identifier, ManaUtils.ModifierList defaultMaxManaModifier, ManaUtils.ModifierList defaultManaRegenModifier, @Nullable ManaHandler handler) {
         if (defaultManaRegenModifier == null) {

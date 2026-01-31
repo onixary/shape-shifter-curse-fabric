@@ -256,6 +256,302 @@
     {
       "id": "naturalist:catfish",
       "required": false
+    },
+    {
+      "id": "betterend:end_fish_raw",
+      "required": false
+    },
+    {
+      "id": "crittersandcompanions:koi_fish",
+      "required": false
+    },
+    {
+      "id": "tide:rainbow_trout",
+      "required": false
+    },
+    {
+      "id": "tide:brook_trout",
+      "required": false
+    },
+    {
+      "id": "tide:largemouth_bass",
+      "required": false
+    },
+    {
+      "id": "tide:smallmouth_bass",
+      "required": false
+    },
+    {
+      "id": "tide:white_crappie",
+      "required": false
+    },
+    {
+      "id": "tide:black_crappie",
+      "required": false
+    },
+    {
+      "id": "tide:yellow_perch",
+      "required": false
+    },
+    {
+      "id": "tide:carp",
+      "required": false
+    },
+    {
+      "id": "tide:pike",
+      "required": false
+    },
+    {
+      "id": "tide:bluegill",
+      "required": false
+    },
+    {
+      "id": "tide:catfish",
+      "required": false
+    },
+    {
+      "id": "tide:walleye",
+      "required": false
+    },
+    {
+      "id": "tide:arapaima",
+      "required": false
+    },
+    {
+      "id": "tide:sand_tiger_shark",
+      "required": false
+    },
+    {
+      "id": "tide:slimy_salmon",
+      "required": false
+    },
+    {
+      "id": "tide:sturgeon",
+      "required": false
+    },
+    {
+      "id": "tide:spore_stalker",
+      "required": false
+    },
+    {
+      "id": "tide:mooneye",
+      "required": false
+    },
+    {
+      "id": "tide:bull_shark",
+      "required": false
+    },
+    {
+      "id": "tide:ocean_perch",
+      "required": false
+    },
+    {
+      "id": "tide:red_snapper",
+      "required": false
+    },
+    {
+      "id": "tide:flounder",
+      "required": false
+    },
+    {
+      "id": "tide:anchovy",
+      "required": false
+    },
+    {
+      "id": "tide:tuna",
+      "required": false
+    },
+    {
+      "id": "tide:mackarel",
+      "required": false
+    },
+    {
+      "id": "tide:snook",
+      "required": false
+    },
+    {
+      "id": "tide:angelfish",
+      "required": false
+    },
+    {
+      "id": "tide:mahi_mahi",
+      "required": false
+    },
+    {
+      "id": "tide:sailfish",
+      "required": false
+    },
+    {
+      "id": "tide:swordfish",
+      "required": false
+    },
+    {
+      "id": "tide:manta_ray",
+      "required": false
+    },
+    {
+      "id": "tide:neptune_koi",
+      "required": false
+    },
+    {
+      "id": "tide:pluto_snail",
+      "required": false
+    },
+    {
+      "id": "tide:sun_emblem",
+      "required": false
+    },
+    {
+      "id": "tide:saturn_cuttlefish",
+      "required": false
+    },
+    {
+      "id": "tide:marstilus",
+      "required": false
+    },
+    {
+      "id": "tide:uranias_pisces",
+      "required": false
+    },
+    {
+      "id": "tide:great_white_shark",
+      "required": false
+    },
+    {
+      "id": "tide:coelacanth",
+      "required": false
+    },
+    {
+      "id": "tide:cave_crawler",
+      "required": false
+    },
+    {
+      "id": "tide:deep_grouper",
+      "required": false
+    },
+    {
+      "id": "tide:shadow_snapper",
+      "required": false
+    },
+    {
+      "id": "tide:glowfish",
+      "required": false
+    },
+    {
+      "id": "tide:anglerfish",
+      "required": false
+    },
+    {
+      "id": "tide:abyss_angler",
+      "required": false
+    },
+    {
+      "id": "tide:chasm_eel",
+      "required": false
+    },
+    {
+      "id": "tide:echo_snapper",
+      "required": false
+    },
+    {
+      "id": "tide:devils_hole_pupfish",
+      "required": false
+    },
+    {
+      "id": "tide:incandescent_larva",
+      "required": false
+    },
+    {
+      "id": "tide:bedrock_bug",
+      "required": false
+    },
+    {
+      "id": "tide:sleepy_carp",
+      "required": false
+    },
+    {
+      "id": "tide:blue_neonfish",
+      "required": false
+    },
+    {
+      "id": "tide:judgement_fish",
+      "required": false
+    },
+    {
+      "id": "tide:deep_blue",
+      "required": false
+    },
+    {
+      "id": "tide:nephrosilu",
+      "required": false
+    },
+    {
+      "id": "tide:vengeance",
+      "required": false
+    },
+    {
+      "id": "tide:pentapus",
+      "required": false
+    },
+    {
+      "id": "tide:darkness_eater",
+      "required": false
+    },
+    {
+      "id": "tide:shadow_shark",
+      "required": false
+    },
+    {
+      "id": "tide:alpha_fish",
+      "required": false
+    },
+    {
+      "id": "tide:ash_perch",
+      "required": false
+    },
+    {
+      "id": "tide:soulscale",
+      "required": false
+    },
+    {
+      "id": "tide:blazing_swordfish",
+      "required": false
+    },
+    {
+      "id": "tide:pale_clubfish",
+      "required": false
+    },
+    {
+      "id": "tide:amber_rockfish",
+      "required": false
+    },
+    {
+      "id": "tide:ender_glider",
+      "required": false
+    },
+    {
+      "id": "tide:violet_carp",
+      "required": false
+    },
+    {
+      "id": "tide:red_40",
+      "required": false
+    },
+    {
+      "id": "tide:dutchman_sock",
+      "required": false
+    },
+    {
+      "id": "tide:mantyvern",
+      "required": false
+    },
+    {
+      "id": "tide:snatcher_squid",
+      "required": false
+    },
+    {
+      "id": "tide:dragon_fish",
+      "required": false
     }
   ]
 }

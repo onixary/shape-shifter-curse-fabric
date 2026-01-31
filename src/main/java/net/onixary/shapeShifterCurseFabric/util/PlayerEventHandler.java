@@ -32,7 +32,6 @@ import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManag
 import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.TransformativeStatusInstance;
 import net.onixary.shapeShifterCurseFabric.team.MobTeamManager;
 
-import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.cursedMoonData;
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker.loadInstinct;
 
 public class PlayerEventHandler {
@@ -86,8 +85,6 @@ public class PlayerEventHandler {
                 } catch (Exception e) {
                     ShapeShifterCurseFabric.LOGGER.error("Error sending update dynamic form: ", e);
                 }
-            });
-            server.execute(() -> {
                 try {
                     FormAbilityManager.loadForm(player);
                 } catch (Exception e) {
@@ -113,10 +110,6 @@ public class PlayerEventHandler {
             InstinctManager.getServerWorld(server.getOverworld());
             loadInstinct(player);
 
-            // load cursed moon data
-            ShapeShifterCurseFabric.LOGGER.info("Cursed moon enabled");
-            cursedMoonData.getInstance().load(server.getOverworld());
-            cursedMoonData.getInstance().enableCursedMoon(server.getOverworld());
             // 修改为使用新的月相判定系统
             ServerWorld world = server.getOverworld();
             boolean currentIsCursedMoon = CursedMoon.isCursedMoon(world); // 使用新的月相判定
@@ -154,10 +147,6 @@ public class PlayerEventHandler {
                     });
                 }).start();
             });
-
-
-            cursedMoonData.getInstance().loadPlayerStates(server.getOverworld(), player);
-            cursedMoonData.getInstance().save(server.getOverworld());
 
             // reset moon effect
             CursedMoon.resetMoonEffect(player);
@@ -208,11 +197,6 @@ public class PlayerEventHandler {
                 InstinctManager.getServerWorld(server.getOverworld());
                 loadInstinct(player);
 
-                // load cursed moon data
-                ShapeShifterCurseFabric.LOGGER.info("Cursed moon enabled");
-                cursedMoonData.getInstance().load(server.getOverworld());
-                cursedMoonData.getInstance().enableCursedMoon(server.getOverworld());
-
                 // 修改为使用新的月相判定系统
                 boolean currentIsCursedMoon = CursedMoon.isCursedMoon(world); // 使用新的月相判定
                 boolean currentIsNight = CursedMoon.isNight(world);
@@ -222,8 +206,6 @@ public class PlayerEventHandler {
                         currentIsCursedMoon, currentIsNight);
 
                 ShapeShifterCurseFabric.LOGGER.info("向玩家同步诅咒之月状态: " + currentIsCursedMoon + ", 月相: " + world.getMoonPhase());
-                cursedMoonData.getInstance().loadPlayerStates(server.getOverworld(), player);
-                cursedMoonData.getInstance().save(server.getOverworld());
 
                 // reset moon effect
                 CursedMoon.resetMoonEffect(player);
@@ -238,10 +220,8 @@ public class PlayerEventHandler {
             for (ServerWorld world : server.getWorlds()) {
                 if (world.getRegistryKey() == World.OVERWORLD) {
                     ShapeShifterCurseFabric.LOGGER.info("Cursed moon data saved by server stop");
-                    cursedMoonData.getInstance().save(world);
                     // 保存所有玩家状态
                     for (ServerPlayerEntity player : world.getPlayers()) {
-                        cursedMoonData.getInstance().savePlayerStates(world, player);
                         PlayerNbtStorage.saveAll(world, player);
                     }
                 }

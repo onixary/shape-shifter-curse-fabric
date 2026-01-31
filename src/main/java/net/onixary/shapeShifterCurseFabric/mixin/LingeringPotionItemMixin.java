@@ -26,9 +26,7 @@ public class LingeringPotionItemMixin {
         }
         Identifier CTPFormID = CTPUtils.getCTPFormIDFromNBT(stack.getNbt());
         if (CTPFormID != null) {
-            Text formName = Text.literal(RegPlayerForms.getPlayerFormOrDefault(CTPFormID, RegPlayerForms.ORIGINAL_BEFORE_ENABLE).name());
-            // TODO 合并赞助者分支后使用下面的方法
-            // Text formName = RegPlayerForms.getPlayerFormOrDefault(CTPFormID, RegPlayerForms.ORIGINAL_BEFORE_ENABLE).getFormName();
+            Text formName = RegPlayerForms.getPlayerFormOrDefault(CTPFormID, RegPlayerForms.ORIGINAL_BEFORE_ENABLE).getFormName();
             tooltip.add(Text.translatable("tooltip.shape_shifter_curse.potion_target_form").append(formName));
         }
     }

@@ -23,7 +23,8 @@
         "shape-shifter-curse:form_anubis_wolf_instinct_eat_rotten_flesh",
         "shape-shifter-curse:form_anubis_wolf_instinct_biome",
         "shape-shifter-curse:form_anubis_wolf_instinct_wither_effect",
-        "shape-shifter-curse:no_hurt_pet"
+        "shape-shifter-curse:no_hurt_pet",
+        "shape-shifter-curse:form_anubis_wolf_sound_key"
     ],
     "icon": {
         "item": "minecraft:player_head"

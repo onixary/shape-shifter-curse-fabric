@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    " M ",
+    "BCI"
+  ],
+  "key": {
+    "M": {
+      "item": "shape-shifter-curse:moondust_crystal_shard"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "B": {
+      "item": "minecraft:water_bucket"
+    },
+    "I": {
+      "item": "minecraft:soul_sand"
+    },
+    "C": {
+      "item": "minecraft:conduit"
+    }
+  },
+  "result": {
+    "item": "shape-shifter-curse:fountain_belt",
+    "count": 1
+  }
+}

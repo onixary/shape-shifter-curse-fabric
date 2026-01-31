@@ -1,0 +1,15 @@
+{
+    "type": "origins:active_self",
+    "entity_action": {
+        "type": "origins:play_sound",
+        "sound": "minecraft:entity.fox.ambient"
+    },
+    "cooldown": 5,
+    "hud_render": {
+        "should_render": false
+    },
+    "key": {
+        "key": "key.shape-shifter-curse.make_sound",
+        "continuous": false
+    }
+}

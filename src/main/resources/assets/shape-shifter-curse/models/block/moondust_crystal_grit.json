@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "shape-shifter-curse:block/moondust_crystal_grit"
+  }
+}
