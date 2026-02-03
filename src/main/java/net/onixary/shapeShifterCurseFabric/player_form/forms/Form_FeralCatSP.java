@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
-public class Form_FeralCatSP extends PlayerFormBase {
+public class Form_FeralCatSP extends Form_FeralBase {
     public Form_FeralCatSP(Identifier formID) {
         super(formID);
     }
