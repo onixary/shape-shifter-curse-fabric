@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dev.kosmx.playerAnim.core.util.Vec3f;
 import mod.azure.azurelib.cache.object.GeoBone;
+import mod.azure.azurelib.core.animation.AnimationState;
 import mod.azure.azurelib.model.GeoModel;
 import net.minecraft.util.math.MathHelper;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
@@ -827,5 +828,12 @@ public class OriginFurModel extends GeoModel<OriginFurAnimatable> {
     }
     public Identifier getHurtSoundResource() {
         return Identifier.tryParse(JsonHelper.getString(json, "hurtSound", "null"));
+    }
+
+    @Override
+    public void handleAnimations(OriginFurAnimatable animatable, long instanceId, AnimationState<OriginFurAnimatable> animationState) {
+        if (json.has("use_azurelib_anim") && json.get("use_azurelib_anim").getAsBoolean()) {
+            super.handleAnimations(animatable, instanceId, animationState);
+        }
     }
 }
