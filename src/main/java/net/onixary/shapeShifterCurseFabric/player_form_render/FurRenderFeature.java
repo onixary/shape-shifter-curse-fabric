@@ -133,6 +133,8 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
                 //RenderLayer testFurLayer = FurColorGradientRenderLayer.getFurLayer(m.getTextureResource(a), new Vector4f(1.0f, 1.0f ,1.0f, 1.0f), new Vector4f(0.8f, 0.8f, 0.8f, 1.0f));
                 fur.render(matrixStack, a, vertexConsumerProvider, RenderLayer.getEntityTranslucent(m.getTextureResource(a)), null, light);
 
+                // 虽然重新调整模型动画3次看起来比较不太合适 等我之后研究一下为什么(fur.render)渲染后会重置动画再治本吧
+                ProcessModel(m, eR, entity, limbAngle, limbDistance, headYaw, headPitch);
                 // 用Core Shader渲染的尝试，但这玩意儿不兼容Iris，:(
                 // Core shader fur render implementation, but not capable with iris, :(
                 //RenderLayer myLayer2 = FurGradientRenderLayer.furGradientRemap.getRenderLayer(RenderLayer.getEntityTranslucentEmissive(m.getFullbrightTextureResource(a)));
