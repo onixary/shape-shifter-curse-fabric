@@ -60,4 +60,6 @@ public class ModPackets {
     public static final Identifier UPDATE_POWER_ANIM_DATA_TO_SERVER = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_power_anim_data_to_server");
     // C2S 结构: UUID-玩家UUID
     public static final Identifier REQUEST_POWER_ANIM_DATA = new Identifier(ShapeShifterCurseFabric.MOD_ID, "request_power_anim_data");
+
+    public static final Identifier SET_FORM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "set_form");
 }

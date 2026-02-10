@@ -100,8 +100,13 @@ public class ModPacketsC2S {
 
         ServerPlayNetworking.registerGlobalReceiver(
                 SET_PATRON_FORM,
-                net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S::receiveSetPatronForm);
+                net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S::receiveSetPatronForm
+        );
 
+        ServerPlayNetworking.registerGlobalReceiver(
+                SET_FORM,
+                net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S::receiveSetForm
+        );
 
         ServerPlayNetworking.registerGlobalReceiver(
                 UPDATE_POWER_ANIM_DATA_TO_SERVER,
@@ -201,6 +206,22 @@ public class ModPacketsC2S {
         });
     }
 
+    private static void receiveSetForm(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
+        Identifier formId = packetByteBuf.readIdentifier();
+        PlayerFormBase form = RegPlayerForms.getPlayerForm(formId);
+        // 网络包可以伪造 所以加个权限验证
+        if (minecraftServer.getCommandSource().hasPermissionLevel(2) || playerEntity.getAbilities().creativeMode) {
+            minecraftServer.execute(() -> {
+                if (playerEntity == null) {
+                    ShapeShifterCurseFabric.LOGGER.warn("[SetForm] Player is null");
+                    return;
+                }
+                TransformManager.handleDirectTransform(playerEntity, form, false);
+            });
+            return;
+        }
+    }
+
     private static void receiveSetPatronForm(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
         if (!PatronUtils.EnablePatronFeature) {
             ShapeShifterCurseFabric.LOGGER.error("Player {} tried to use patron form but patron feature is disabled", playerEntity.getDisplayName().getString());
@@ -208,6 +229,18 @@ public class ModPacketsC2S {
         }
         Identifier formId = packetByteBuf.readIdentifier();
         PlayerFormBase form = RegPlayerForms.getPlayerForm(formId);
+
+        if (minecraftServer.getCommandSource().hasPermissionLevel(2) || playerEntity.getAbilities().creativeMode) {
+            // 权限等级2时跳过反作弊 毕竟可以用setForm了
+            minecraftServer.execute(() -> {
+                if (playerEntity == null) {
+                    ShapeShifterCurseFabric.LOGGER.warn("[SetPatronForm] Player is null");
+                    return;
+                }
+                TransformManager.handleDirectTransform(playerEntity, form, false);
+            });
+            return;
+        }
         if (form instanceof PlayerFormDynamic pfd) {
             minecraftServer.execute(() -> {
                 if (playerEntity == null) {
