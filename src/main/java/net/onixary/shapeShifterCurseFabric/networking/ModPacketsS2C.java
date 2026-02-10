@@ -71,6 +71,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_POWER_ANIM_DATA_TO_CLIENT, ModPacketsS2C::receivePowerAnimationData);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_PATRON_LEVEL, ModPacketsS2C::receiveUpdatePatronLevel);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.OPEN_PATRON_FORM_SELECT_MENU, ModPacketsS2C::receiveOpenPatronFormSelectMenu);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.OPEN_FORM_SELECT_MENU, ModPacketsS2C::receiveOpenFormSelectMenu);
     }
 
     /* 重构后不需要了 仅用于参考旧实现逻辑
@@ -405,6 +406,14 @@ public class ModPacketsS2C {
             Screen screen = new PatronFormSelectScreen(Text.literal("PatronFromSelectScreen"), client.player);
             client.setScreen(screen);
         });
+    }
+
+    public static void receiveOpenFormSelectMenu(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        // TODO 写完UI后记得还原注释和改Screen
+        // client.execute(() -> {
+        //     Screen screen = new PatronFormSelectScreen(Text.literal("FormSelectScreen"), client.player);
+        //     client.setScreen(screen);
+        // });
     }
 
     public static void sendSetPatronForm(Identifier formID) {

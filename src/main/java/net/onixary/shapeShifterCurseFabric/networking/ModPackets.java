@@ -62,4 +62,5 @@ public class ModPackets {
     public static final Identifier REQUEST_POWER_ANIM_DATA = new Identifier(ShapeShifterCurseFabric.MOD_ID, "request_power_anim_data");
 
     public static final Identifier SET_FORM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "set_form");
+    public static final Identifier OPEN_FORM_SELECT_MENU = new Identifier(ShapeShifterCurseFabric.MOD_ID, "open_form_select_menu");
 }

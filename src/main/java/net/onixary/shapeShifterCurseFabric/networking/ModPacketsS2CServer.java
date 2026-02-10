@@ -231,6 +231,11 @@ public class ModPacketsS2CServer {
         ServerPlayNetworking.send(player, ModPackets.OPEN_PATRON_FORM_SELECT_MENU, buf);
     }
 
+    public static void OpenFormSelectMenu(ServerPlayerEntity player) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        ServerPlayNetworking.send(player, ModPackets.OPEN_FORM_SELECT_MENU, buf);
+    }
+
     public static void sendActiveVirtualTotem(ServerPlayerEntity player, VirtualTotemPower virtualTotemPower) {
         player.getServerWorld().getPlayers(near_player -> near_player.squaredDistanceTo(player) <= 64 * 64).forEach(
                 nearPlayer -> {
