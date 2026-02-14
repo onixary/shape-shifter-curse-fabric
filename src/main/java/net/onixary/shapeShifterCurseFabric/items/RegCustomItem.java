@@ -152,6 +152,9 @@ public class RegCustomItem {
                         RegCustomPotions.CUSTOM_STATUE_FORM_POTION,
                         RegCustomPotions.FEED_POTION
                 ));
+                if (PatronUtils.EnablePatronFeature) {
+                    entries.add(PATRON_FORM_ITEM);
+                }
             })
             .build();
 
