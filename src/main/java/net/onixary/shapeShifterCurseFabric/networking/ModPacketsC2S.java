@@ -19,6 +19,7 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimContro
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
@@ -120,11 +121,13 @@ public class ModPacketsC2S {
     }
 
     private static void onPressStartBookButton(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
-        UUID playerUuid = packetByteBuf.readUuid();
+        // 就凭这个网络Bug 我就可以做一个可以直接还原形态的作弊客户端 还可以给其他玩家还原 不知道为什么要往buf里写uuid
+        // UUID playerUuid = packetByteBuf.readUuid();
         minecraftServer.execute(() -> {
             // 通过 UUID 获取玩家实例
-            ServerPlayerEntity targetPlayer = minecraftServer.getPlayerManager().getPlayer(playerUuid);
-            if (targetPlayer != null) {
+            // ServerPlayerEntity targetPlayer = minecraftServer.getPlayerManager().getPlayer(playerUuid);
+            ServerPlayerEntity targetPlayer = playerEntity;
+            if (targetPlayer != null && RegPlayerForms.ORIGINAL_BEFORE_ENABLE.equals(RegPlayerFormComponent.PLAYER_FORM.get(targetPlayer).getCurrentForm())) {
                 TransformManager.handleDirectTransform(targetPlayer, RegPlayerForms.ORIGINAL_SHIFTER, false);
                 // 触发自定义成就
                 ShapeShifterCurseFabric.ON_ENABLE_MOD.trigger(targetPlayer);

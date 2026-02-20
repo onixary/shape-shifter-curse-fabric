@@ -55,7 +55,7 @@ public class StartBookScreenV2 extends Screen {
                 Text.translatable("screen.shape-shifter-curse.book_of_shape_shifter.start_button_text"),
                 button -> {
                     PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-                    buf.writeUuid(currentPlayer.getUuid());
+                    // buf.writeUuid(currentPlayer.getUuid());
                     // 发送到服务端
                     ClientPlayNetworking.send(ModPackets.VALIDATE_START_BOOK_BUTTON, buf);
                     if(MinecraftClient.getInstance().currentScreen instanceof StartBookScreenV2){
