@@ -83,6 +83,16 @@ public class AdditionalEntityConditions {
                     return false;
                 }
         ));
+        register(new ConditionFactory<Entity>(
+                ShapeShifterCurseFabric.identifier("is_sleep"),
+                new SerializableData(),
+                (data, e) -> {
+                    if (e instanceof PlayerEntity player) {
+                        return player.isSleeping();
+                    }
+                    return false;
+                }
+        ));
     }
 
     private static void register(ConditionFactory<Entity> conditionFactory) {

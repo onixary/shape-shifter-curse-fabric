@@ -54,7 +54,7 @@ public class StartBookScreen extends BaseOwoScreen<FlowLayout> {
                                         {
                                             //TransformManager.handleDirectTransform(currentPlayer, PlayerForms.ORIGINAL_SHIFTER, false);
                                             PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-                                            buf.writeUuid(currentPlayer.getUuid());
+                                            // buf.writeUuid(currentPlayer.getUuid());
                                             // 发送到服务端
                                             ClientPlayNetworking.send(ModPackets.VALIDATE_START_BOOK_BUTTON, buf);
 
