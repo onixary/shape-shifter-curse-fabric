@@ -60,7 +60,8 @@
     "BrewingRecipeRegistryMixin",
     "HissPhantomMixin",
     "EnchantmentUtilAnvilMixin",
-    "EnchantmentUtilEnchantCommandMixin"
+    "EnchantmentUtilEnchantCommandMixin",
+    "EntityMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",

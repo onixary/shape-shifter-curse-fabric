@@ -67,6 +67,8 @@ public class AdditionalPowers {
         register(ManaAttributePower.createFactory());
         register(ConditionedManaAttributePower.createFactory());
         register(HissPhantomPower.createFactory());
+        register(BypassesLandingEffectsPower.createFactory());
+        register(BypassesSteppingEffectsPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {
