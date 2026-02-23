@@ -24,6 +24,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.player_form_render.*;
+import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -226,7 +227,7 @@ public class PlayerEntityRendererMixin {
                             model.leftPants.visible = !p.contains(OriginFurModel.VMP.leftPants);
                             model.rightLeg.visible = !p.contains(OriginFurModel.VMP.rightLeg);
                             model.rightPants.visible = !p.contains(OriginFurModel.VMP.rightPants);
-                            if (this.BetterCombatInstalled && IsFirstPersonView && IsClientNowPlayedPlayer) {
+                            if (this.BetterCombatInstalled && IsFirstPersonView && IsClientNowPlayedPlayer && ClientUtils.ShouldEnableBetterCombatFix()) {
                                 model.hat.visible = false;
                                 model.head.visible = false;
                             }

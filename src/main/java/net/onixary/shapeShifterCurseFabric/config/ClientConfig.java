@@ -27,6 +27,10 @@ public class ClientConfig implements ConfigData {
     @Comment("Enable Auto Modify FPM Config. Default: true")
     public boolean enableChangeFPMConfig = true;  // 启用修改FPM配置
 
+    @ConfigEntry.Category("Integration")
+    @Comment("Enable Better Combat Fix. Default: true")
+    public boolean enableBetterCombatFix = true;  // 启用Better Combat Fix
+
     // 开发用
     // @ConfigEntry.Category("InDevelopment")
 
