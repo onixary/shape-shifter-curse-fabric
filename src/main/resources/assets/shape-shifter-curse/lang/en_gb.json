@@ -430,5 +430,8 @@
     "text.autoconfig.shape-shifter-curse-custom.option.accent1GreyReverse": "Accent 1 Greyscale Reverse",
     "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "Accent 2 Greyscale Reverse",
     "text.autoconfig.shape-shifter-curse-custom.option.enable_form_random_sound": "Enable Form Random Sound",
-    "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_config": "Auto Sync Config"
+    "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_config": "Auto Sync Config",
+
+    "text.autoconfig.shape-shifter-curse-client.category.Integration": "Integration",
+    "text.autoconfig.shape-shifter-curse-client.option.enableBetterCombatFix": "Enable BetterCombat Fix"
 }
