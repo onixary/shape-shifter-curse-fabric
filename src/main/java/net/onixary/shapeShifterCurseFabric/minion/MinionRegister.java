@@ -16,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntity;
+import net.onixary.shapeShifterCurseFabric.util.EntityAttributeRegister;
 import org.jetbrains.annotations.Nullable;
 
 public class MinionRegister {
@@ -29,7 +30,7 @@ public class MinionRegister {
     );
 
     public static void register() {
-        FabricDefaultAttributeRegistry.register(ANUBIS_WOLF_MINION, AnubisWolfMinionEntity.createWolfMinionAttributes());
+        EntityAttributeRegister.register(ANUBIS_WOLF_MINION, AnubisWolfMinionEntity::createWolfMinionAttributes);
     }
 
 
