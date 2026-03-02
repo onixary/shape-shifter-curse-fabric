@@ -61,7 +61,8 @@
     "HissPhantomMixin",
     "EnchantmentUtilAnvilMixin",
     "EnchantmentUtilEnchantCommandMixin",
-    "EntityMixin"
+    "EntityMixin",
+    "DefaultAttributeRegistryMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",
