@@ -2,7 +2,7 @@
   "type": "origins:multiple",
 
   "bare_paw_attack": {
-    "type": "origins:modify_damage_dealt",
+    "type": "origins:conditioned_attribute",
     "condition": {
       "type": "origins:or",
       "conditions": [
@@ -10,13 +10,12 @@
           "type": "origins:inventory",
           "process_mode": "items",
           "item_condition": {
-            "type": "origins:harvest_level",
-            "comparison": "<=",
-            "compare_to": 1
+            "type": "shape-shifter-curse:is_weapon"
           },
           "slots": [
             "weapon.mainhand"
-          ]
+          ],
+          "inverted": true
         },
         {
           "type": "origins:inventory",
@@ -30,9 +29,12 @@
       ]
     },
     "modifier": {
+      "attribute": "minecraft:generic.attack_damage",
+      "name": "Extra Attack Damage",
       "operation": "addition",
       "value": 9.0
-    }
+    },
+    "tick_rate": 1
   },
 
   "sneaking_jump_clash": {
