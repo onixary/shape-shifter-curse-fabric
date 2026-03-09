@@ -7,8 +7,6 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -54,30 +52,26 @@ public class PlayerEventHandler {
             PlayerSkinComponent skinComponent = RegPlayerSkinComponent.SKIN_SETTINGS.get(player);
             RegPlayerSkinComponent.SKIN_SETTINGS.sync(player);
 
-            // 检查是否存在保存的数据来判断是否首次加入
-            PlayerFormComponent savedComponent = PlayerNbtStorage.loadPlayerFormComponent(server.getOverworld(), player.getUuid().toString());
+            PlayerFormComponent formComponent = RegPlayerFormComponent.PLAYER_FORM.get(player);
+            PlayerFormComponent savedFormComponent = PlayerNbtStorage.migrateAndGetFormComponent(server.getOverworld(), player.getUuid().toString());
 
-            if (savedComponent != null) {
-                // 如果有保存的数据，说明不是首次加入，使用保存的数据
-                //formComponent.readFromNbt(savedComponent.writeToNbt(new net.minecraft.nbt.NbtCompound()));
-                RegPlayerFormComponent.PLAYER_FORM.sync(player);
-                ShapeShifterCurseFabric.LOGGER.info("Loaded existing player data, not first join");
-            } else {
-                // 如果没有保存的数据，说明是首次加入
-                ShapeShifterCurseFabric.LOGGER.info("No saved data found, this is first join with mod");
-                PlayerFormComponent formComponent = RegPlayerFormComponent.PLAYER_FORM.get(player);
-                // 还原到默认值 根据Wiki描述 如果删除data/shape-shifter-curse/{uuid}_*.dat则玩家会回到启用Mod之前的状态
-                formComponent.clear();
-                // 确保 firstJoin 为 true
-                formComponent.setFirstJoin(true);
-                // 触发首次加入成就
-                ShapeShifterCurseFabric.ON_FIRST_JOIN_WITH_MOD.trigger(player);
-                // 设置为 false 并保存
+            if (savedFormComponent != null) {
+                net.minecraft.nbt.NbtCompound nbt = new net.minecraft.nbt.NbtCompound();
+                savedFormComponent.writeToNbt(nbt);
+                formComponent.readFromNbt(nbt);
+                ShapeShifterCurseFabric.LOGGER.info("Migrated player form data from file, setting firstJoin to false");
                 formComponent.setFirstJoin(false);
-                RegPlayerFormComponent.PLAYER_FORM.sync(player);
-                // 立即保存以防止重复触发
-                PlayerNbtStorage.savePlayerFormComponent(server.getOverworld(), player.getUuid().toString(), formComponent);
             }
+
+            if (formComponent.isFirstJoin()) {
+                ShapeShifterCurseFabric.LOGGER.info("First join with mod, triggering achievement");
+                formComponent.setFirstJoin(false);
+                ShapeShifterCurseFabric.ON_FIRST_JOIN_WITH_MOD.trigger(player);
+            }
+
+            RegPlayerFormComponent.PLAYER_FORM.sync(player);
+
+            PlayerNbtStorage.completeMigration();
             // 同步动态Form
             server.execute(() -> {
                 try {
@@ -170,7 +164,6 @@ public class PlayerEventHandler {
 
             copyTransformativeEffect(oldPlayer, newPlayer);
             copyFormAndAbility(oldPlayer, newPlayer);
-            PlayerNbtStorage.saveAll(newPlayer.getServerWorld(), newPlayer);
             //PlayerTeamHandler.updatePlayerTeam(newPlayer);
         });
 
@@ -219,11 +212,7 @@ public class PlayerEventHandler {
         ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
             for (ServerWorld world : server.getWorlds()) {
                 if (world.getRegistryKey() == World.OVERWORLD) {
-                    ShapeShifterCurseFabric.LOGGER.info("Cursed moon data saved by server stop");
-                    // 保存所有玩家状态
-                    for (ServerPlayerEntity player : world.getPlayers()) {
-                        PlayerNbtStorage.saveAll(world, player);
-                    }
+                    ShapeShifterCurseFabric.LOGGER.info("Server stopping, player data persisted by CCA automatically");
                 }
             }
         });
