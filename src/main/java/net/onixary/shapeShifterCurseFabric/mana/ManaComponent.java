@@ -282,6 +282,22 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
         this.Dirty = true;
     }
 
+    public void clear() {
+        this.ManaTypeID = null;
+        this.ManaBeforeRegen = 0.0d;
+        this.Mana = 0.0d;
+        this.MaxManaClient = 0.0d;
+        this.ManaRegenClient = 0.0d;
+        this.tempRegen = 0.0d;
+        this.tempRegenTime = 0;
+        this.ManaTypeSourceMap.clear();
+        this.MaxManaModifier.clear();
+        this.MaxManaModifierPlayerSide.clear();
+        this.ManaRegenModifier.clear();
+        this.ManaRegenModifierPlayerSide.clear();
+        this.Dirty = true;
+    }
+
     @Override
     public void writeToNbt(NbtCompound nbtCompound) {
         this.writeToNbt(nbtCompound, true);

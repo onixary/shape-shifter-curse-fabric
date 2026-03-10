@@ -246,7 +246,6 @@ public abstract class CursedMoonWorldMixin implements WorldAccess, AutoCloseable
 
                     RegPlayerFormComponent.PLAYER_FORM.get(player).setByCursedMoon(false);
                     RegPlayerFormComponent.PLAYER_FORM.sync(player);
-                    FormAbilityManager.saveForm(player);
                 }
             }
         }

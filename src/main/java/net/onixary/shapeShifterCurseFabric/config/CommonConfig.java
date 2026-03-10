@@ -39,6 +39,10 @@ public class CommonConfig implements ConfigData {
     @Comment("Allow players to sleep during Cursed Moon. Default: false")
     public boolean allowSleepInCursedMoon = false;
 
+    @ConfigEntry.Category("General")
+    @Comment("Enable Debug Command (PermissionLevel = 0). Default: false")
+    public boolean enableDebugCommand = false;
+
     @ConfigEntry.Category("Patron")
     @Comment("Enable Patron Form System. Default: true")
     public boolean enablePatronFormSystem = true;

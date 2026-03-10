@@ -8,7 +8,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage;
 import net.onixary.shapeShifterCurseFabric.integration.origins.component.OriginComponent;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayer;
@@ -96,7 +95,7 @@ public class FormAbilityManager {
         component.setCurrentForm(newForm);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
         // 存储
-        FormAbilityManager.saveForm(player);
+        // FormAbilityManager.saveForm(player);
 
         TrinketUtils.ReApplyAccessoryPowerOnPlayerFormChange(player);
 
@@ -113,7 +112,7 @@ public class FormAbilityManager {
 
     public static void loadForm(PlayerEntity player) {
         PlayerFormComponent component = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
-        PlayerFormBase savedForm = loadSavedForm(player);
+        PlayerFormBase savedForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();;
         if (savedForm != null) {
             applyForm(player, savedForm);
         }
@@ -123,23 +122,7 @@ public class FormAbilityManager {
     }
 
     public static void saveForm(PlayerEntity player) {
-        // 添加世界检查
-        if (world == null && player instanceof ServerPlayerEntity serverPlayer) {
-            world = serverPlayer.getServerWorld();
-        }
-
-        if (world != null) {
-            PlayerFormComponent component = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
-            PlayerNbtStorage.savePlayerFormComponent(world, player.getUuid().toString(), component);
-        } else {
-            ShapeShifterCurseFabric.LOGGER.warn("Cannot save form: world is null");
-        }
-    }
-
-    private static PlayerFormBase loadSavedForm(PlayerEntity player) {
-        // 从存储中加载保存的 form
-        PlayerFormComponent formComponent = PlayerNbtStorage.loadPlayerFormComponent(world, player.getUuid().toString());
-        return formComponent != null ? formComponent.getCurrentForm() : null;
+        RegPlayerFormComponent.PLAYER_FORM.sync(player);
     }
 
     private static void clearFormEffects(PlayerEntity player, PlayerFormBase oldForm) {
