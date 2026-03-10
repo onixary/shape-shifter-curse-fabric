@@ -160,31 +160,21 @@ public class FormAbilityManager {
             }
         }
         else {
-            // 每0.1秒最多20次尝试应用能力 (ExtraPower中注册太慢)
-            new Thread(() -> {
-                try {
-                    boolean FoundPower = false;
-                    for (int i = 0; i < 20; i++) {
-                        Thread.sleep(100);
-                        if (PowerTypeRegistry.contains(powerId)) {
-                            FoundPower = true;
-                            break;
-                        }
+            // Power 注册可能需要时间，使用 ServerTickEvents 重试而不是 Thread.sleep
+            final int[] retryCount = {0};
+            final int maxRetries = 20;
+            net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents.END_SERVER_TICK.register(server -> {
+                retryCount[0]++;
+                if (PowerTypeRegistry.contains(powerId)) {
+                    PowerType<?> powerType = PowerTypeRegistry.get(powerId);
+                    if (powerType != null) {
+                        PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
+                        powerHolder.addPower(powerType, powerSource);
                     }
-                    if (FoundPower) {
-                        PowerType<?> powerType = PowerTypeRegistry.get(powerId);
-                        if (powerType != null) {
-                            PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
-                            powerHolder.addPower(powerType, powerSource);
-                        }
-                    }
-                    else {
-                        ShapeShifterCurseFabric.LOGGER.warn("Failed to apply power " + powerId.toString() + " for player " + player.getName() + " after 2 seconds");
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                } else if (retryCount[0] >= maxRetries) {
+                    ShapeShifterCurseFabric.LOGGER.warn("Failed to apply power " + powerId.toString() + " for player " + player.getName() + " after 2 seconds");
                 }
-            }).start();
+            });
         }
     }
 

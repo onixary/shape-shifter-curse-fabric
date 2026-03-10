@@ -8,7 +8,6 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -538,17 +537,24 @@ public class TransformManager {
             fpm.getConfig().sitXOffset = 0;
             fpm.getConfig().sneakXOffset = 0;
 
-            // 0.05s 0.1s 0.2s 1s 后重置 防止 ExtraItemFeatureRenderer 未同步玩家变形状态 减少玩家感知未同步
-            new Thread(() -> {
-                try { Thread.sleep(50); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }  // 0.05s
-                fpm.getConfig().xOffset = 0; fpm.getConfig().sitXOffset = 0; fpm.getConfig().sneakXOffset = 0;
-                try { Thread.sleep(50); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }  // 0.1s
-                fpm.getConfig().xOffset = 0; fpm.getConfig().sitXOffset = 0; fpm.getConfig().sneakXOffset = 0;
-                try { Thread.sleep(100); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }  // 0.2s
-                fpm.getConfig().xOffset = 0; fpm.getConfig().sitXOffset = 0; fpm.getConfig().sneakXOffset = 0;
-                try { Thread.sleep(800); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }  // 1s  最终修复 大部分均在1s内恢复同步
-                fpm.getConfig().xOffset = 0; fpm.getConfig().sitXOffset = 0; fpm.getConfig().sneakXOffset = 0;
-            }).start();
+            // 使用客户端 tick 事件代替 Thread.sleep
+            final int[] tickCounter = {0};
+            final int[] targetTicks = {1, 2, 4, 20}; // 对应 0.05s, 0.1s, 0.2s, 1s
+            net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK.register(client -> {
+                tickCounter[0]++;
+                for (int target : targetTicks) {
+                    if (tickCounter[0] == target) {
+                        fpm.getConfig().xOffset = 0;
+                        fpm.getConfig().sitXOffset = 0;
+                        fpm.getConfig().sneakXOffset = 0;
+                        break;
+                    }
+                }
+                if (tickCounter[0] > 20) {
+                    // 超过 1 秒后移除监听器
+                    tickCounter[0] = -1000; // 停止继续检查
+                }
+            });
         }
     }
 

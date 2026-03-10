@@ -124,3 +124,5 @@ runs/
 /.classpath
 /.factorypath
 /.project
+/src/main/java/net/onixary/shapeShifterCurseFabric/mixin/DefaultAttributeRegistryMixin.java
+/src/main/java/net/onixary/shapeShifterCurseFabric/util/EntityAttributeRegister.java
