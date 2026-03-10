@@ -16,6 +16,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComp
 import java.util.Iterator;
 
 import static net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager.getForm;
+import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.loadInstinctComp;
 import static net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager.handleProgressiveTransform;
 
 public class InstinctTicker {
@@ -27,10 +28,14 @@ public class InstinctTicker {
 
 
     public static void loadInstinct(PlayerEntity player) {
-        // CCA 组件已自动加载持久化数据，只需同步并确保状态正确
-        PlayerInstinctComponent comp = player.getComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
-        RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.sync(player);
-        isPausing = false;
+        PlayerInstinctComponent comp = loadInstinctComp(player);
+        if (comp != null) {
+            PlayerInstinctComponent thisComp = RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.get(player);
+            thisComp.instinctValue = comp.instinctValue;
+            thisComp.immediateEffects = comp.immediateEffects;
+            thisComp.sustainedEffects = comp.sustainedEffects;
+            isPausing = false;
+        }
     }
 
     public static void clearInstinct(PlayerEntity player) {
@@ -44,7 +49,11 @@ public class InstinctTicker {
     public static void tick(ServerPlayerEntity player) {
         PlayerInstinctComponent comp = player.getComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
 
-        isUnderCursedMoon = CursedMoon.isCursedMoon(player.getWorld()) && CursedMoon.isNight(player.getWorld());
+        if (CursedMoon.isCursedMoon(player.getWorld()) && CursedMoon.isNight(player.getWorld())) {
+            isUnderCursedMoon = true;
+        } else {
+            isUnderCursedMoon = false;
+        }
 
         // 处理立即效果
         // Process immediate effects
@@ -74,7 +83,7 @@ public class InstinctTicker {
         // If the instinct value is between 80 and 99.99, send a packet to the server
         if (comp.instinctValue >= 80.0f && comp.instinctValue < 99.99f && !player.getWorld().isClient && player instanceof ServerPlayerEntity) {
             PacketByteBuf buf = PacketByteBufs.create();
-            ServerPlayNetworking.send(player, ModPackets.INSTINCT_THRESHOLD_EFFECT_ID, buf);
+            ServerPlayNetworking.send((ServerPlayerEntity) player, ModPackets.INSTINCT_THRESHOLD_EFFECT_ID, buf);
         }
         //ShapeShifterCurseFabric.LOGGER.info("currentInstinctFromComp: " + comp.instinctValue);
         // 判断当前状态
@@ -91,14 +100,24 @@ public class InstinctTicker {
     private static float judgeInstinctGrowRate(PlayerEntity player){
         PlayerFormComponent formComp = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
         PlayerFormPhase currentPhase = formComp.getCurrentForm().getPhase();
-        return switch (currentPhase) {
-            case PHASE_CLEAR -> 0.0f;
-            case PHASE_0 -> StaticParams.INSTINCT_INCREASE_RATE_0;
-            case PHASE_1 -> StaticParams.INSTINCT_INCREASE_RATE_1;
-            case PHASE_2, PHASE_3, PHASE_SP ->
+        switch (currentPhase) {
+            case PHASE_CLEAR:
+                return 0.0f;
+            case PHASE_0:
+                return StaticParams.INSTINCT_INCREASE_RATE_0;
+            case PHASE_1:
+                return StaticParams.INSTINCT_INCREASE_RATE_1;
+            case PHASE_2:
                 // 立刻涨满
-                    100.0f;
-        };
+                return 100.0f;
+            case PHASE_3:
+                // 立刻涨满
+                return 100.0f;
+            case PHASE_SP:
+                // 立刻涨满
+                return 100.0f;
+        }
+        return 0.0f;
     }
 
     private static void judgeInstinctState(PlayerEntity player, PlayerInstinctComponent comp){

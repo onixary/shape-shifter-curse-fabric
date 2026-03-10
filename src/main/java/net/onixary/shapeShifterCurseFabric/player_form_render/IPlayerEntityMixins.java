@@ -5,35 +5,34 @@ import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import java.util.ArrayList;
 
 public interface IPlayerEntityMixins {
-    default boolean betterCombat$isSwinging() {
+    public default boolean betterCombat$isSwinging() {
         return false;
     }
 
-    default void betterCombat$setSwinging(boolean value) {
+    public default void betterCombat$setSwinging(boolean value) {
     }
 
-    default boolean originalFur$isPlayerInvisible() {
+    public default boolean originalFur$isPlayerInvisible() {
         return false;
     }
 
-    default ArrayList<Origin> originalFur$currentOrigins() {
+    ;
+
+    public default ArrayList<Origin> originalFur$currentOrigins() {
         var a = new ArrayList<Origin>();
         a.add(Origin.EMPTY);
         return a;
     }
 
-    default ArrayList<OriginFurModel> originalFur$getCurrentModels() {
+    public default ArrayList<OriginFurModel> originalFur$getCurrentModels() {
         ArrayList<OriginFurModel> mdls = new ArrayList<>();
         for (var fur : originalFur$getCurrentFurs()){
-            var geoModel = fur.getGeoModel();
-            if (geoModel != null) {
-                mdls.add((OriginFurModel) geoModel);
-            }
+            mdls.add((OriginFurModel) fur.getGeoModel());
         }
         return mdls;
     }
 
-    default ArrayList<OriginalFurClient.OriginFur> originalFur$getCurrentFurs() {
+    public default ArrayList<OriginalFurClient.OriginFur> originalFur$getCurrentFurs() {
         return new ArrayList<>();
     }
 }

@@ -6,6 +6,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.WorldSavePath;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.PlayerInstinctComponent;
@@ -20,13 +21,14 @@ import java.nio.file.StandardCopyOption;
 public class PlayerNbtStorage {
     private static final String MOD_DATA_DIR = ShapeShifterCurseFabric.MOD_ID;
     private static final Path OLD_SAVE_DIR_ROOT = Paths.get("config", "shape_shifter_curse_fabric");
-    private static boolean migrationCompleted = false;
 
     private static Path getNewWorldSaveDir(ServerWorld world) {
+        // 正确的路径应为：saves/<world_name>/data/<mod_id>
         return world.getServer().getSavePath(WorldSavePath.ROOT).resolve("data").resolve(MOD_DATA_DIR);
     }
 
     private static Path getOldWorldSaveDir(ServerWorld world) {
+        // 旧路径为：config/shape_shifter_curse_fabric/<world_name>
         String worldName = world.getServer().getSavePath(WorldSavePath.ROOT).getFileName().toString();
         return OLD_SAVE_DIR_ROOT.resolve(worldName);
     }
@@ -42,9 +44,11 @@ public class PlayerNbtStorage {
 
             if (Files.exists(oldFile) && !Files.exists(newFile)) {
                 Files.createDirectories(newDir);
+                // 使用 copy 而不是 move，确保操作的可靠性
                 Files.copy(oldFile, newFile, StandardCopyOption.REPLACE_EXISTING);
                 ShapeShifterCurseFabric.LOGGER.info("Migrated player data '{}' from old location to new location.", fileName);
                 ShapeShifterCurseFabric.LOGGER.info("Migration completed: newFile exists = {}, size = {}", Files.exists(newFile), Files.size(newFile));
+                // 迁移成功后删除旧文件
                 Files.delete(oldFile);
             } else if (Files.exists(newFile)) {
                 ShapeShifterCurseFabric.LOGGER.info("New file already exists, skipping migration: {}", newFile);
@@ -56,63 +60,36 @@ public class PlayerNbtStorage {
         }
     }
 
-    /**
-     * 迁移方法：从文件存储读取数据并迁移到 CCA 组件
-     * 此方法会在玩家首次加入时调用，自动将旧数据迁移到 CCA 持久化存储
-     *
-     * @param world    服务器世界
-     * @param playerId 玩家 UUID
-     * @return 从文件加载的 PlayerFormComponent，如果文件不存在则返回 null
-     */
-    public static PlayerFormComponent migrateAndGetFormComponent(ServerWorld world, String playerId) {
-        if (migrationCompleted) {
+    /* 重构后不需要了 仅用于参考旧实现逻辑
+    public static void saveAttachment(ServerWorld world, String playerId, PlayerEffectAttachment attachment) {
+        try {
+            Path worldSaveDir = getNewWorldSaveDir(world);
+            Files.createDirectories(worldSaveDir);
+            Path savePath = worldSaveDir.resolve(playerId + "_attachment.dat");
+            NbtCompound nbt = attachment.toNbt();
+            NbtIo.write(nbt, savePath.toFile());
+        } catch (IOException e) {
+            // 错误处理
+            ShapeShifterCurseFabric.LOGGER.error("Failed to save attachment for player: " + playerId, e);
+        }
+    }
+
+    public static PlayerEffectAttachment loadAttachment(ServerWorld world, String playerId) {
+        String fileName = playerId + "_attachment.dat";
+        migrateData(world, fileName);
+        try {
+            Path savePath = getNewWorldSaveDir(world).resolve(fileName);
+            if (!Files.exists(savePath)) return null;
+            NbtCompound nbt = NbtIo.read(savePath.toFile());
+            if (nbt == null) return null;
+            return PlayerEffectAttachment.fromNbt(nbt);
+        } catch (IOException e) {
+            ShapeShifterCurseFabric.LOGGER.error("Failed to load attachment for player: " + playerId, e);
             return null;
         }
-
-        String formFileName = playerId + "_form.dat";
-        String instinctFileName = playerId + "_instinct.dat";
-
-        try {
-            migrateData(world, formFileName);
-            migrateData(world, instinctFileName);
-
-            Path newDir = getNewWorldSaveDir(world);
-            Path formFile = newDir.resolve(formFileName);
-            Path instinctFile = newDir.resolve(instinctFileName);
-
-            if (Files.exists(formFile)) {
-                NbtCompound nbt = NbtIo.read(formFile.toFile());
-                if (nbt != null && !nbt.isEmpty()) {
-                    ShapeShifterCurseFabric.LOGGER.info("Migrating player form data from file: {}", playerId);
-                    PlayerFormComponent component = new PlayerFormComponent();
-                    component.readFromNbt(nbt);
-                    return component;
-                }
-            }
-
-            if (Files.exists(instinctFile)) {
-                NbtCompound nbt = NbtIo.read(instinctFile.toFile());
-                if (nbt != null && !nbt.isEmpty()) {
-                    ShapeShifterCurseFabric.LOGGER.info("Migrating player instinct data from file: {}", playerId);
-                }
-            }
-        } catch (IOException e) {
-            ShapeShifterCurseFabric.LOGGER.error("Failed to migrate player data for: " + playerId, e);
-        }
-
-        return null;
     }
-
-    /**
-     * 标记迁移完成，调用后不再尝试从文件读取数据
-     * 建议在世界加载完成后调用
      */
-    public static void completeMigration() {
-        migrationCompleted = true;
-        ShapeShifterCurseFabric.LOGGER.info("Player data migration completed, future loads will use CCA only");
-    }
 
-    @Deprecated
     public static void savePlayerFormComponent(ServerWorld world, String playerId, PlayerFormComponent component) {
         try {
             Path worldSaveDir = getNewWorldSaveDir(world);
@@ -126,7 +103,6 @@ public class PlayerNbtStorage {
         }
     }
 
-    @Deprecated
     public static PlayerFormComponent loadPlayerFormComponent(ServerWorld world, String playerId) {
         String fileName = playerId + "_form.dat";
         migrateData(world, fileName);
@@ -150,7 +126,6 @@ public class PlayerNbtStorage {
         return null;
     }
 
-    @Deprecated
     public static void savePlayerInstinctComponent(ServerWorld world, String playerId, PlayerInstinctComponent component) {
         try {
             Path worldSaveDir = getNewWorldSaveDir(world);
@@ -164,7 +139,6 @@ public class PlayerNbtStorage {
         }
     }
 
-    @Deprecated
     public static PlayerInstinctComponent loadPlayerInstinctComponent(ServerWorld world, String playerId) {
         String fileName = playerId + "_instinct.dat";
         migrateData(world, fileName);
@@ -189,7 +163,16 @@ public class PlayerNbtStorage {
     }
 
     public static void saveAll(ServerWorld world, ServerPlayerEntity player) {
-        RegPlayerFormComponent.PLAYER_FORM.sync(player);
-        RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.sync(player);
+        FormAbilityManager.saveForm(player);
+        PlayerNbtStorage.savePlayerFormComponent(world, player.getUuid().toString(),
+                RegPlayerFormComponent.PLAYER_FORM.get(player));
+        /* 重构后不需要了 仅用于参考旧实现逻辑
+        PlayerEffectAttachment attachment = player.getAttached(EffectManager.EFFECT_ATTACHMENT);
+        if (attachment != null) {
+            PlayerNbtStorage.saveAttachment(world, player.getUuid().toString(),attachment);
+        }
+         */
+        PlayerInstinctComponent comp = player.getComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
+        savePlayerInstinctComponent(world, player.getUuid().toString(), comp);
     }
 }

@@ -8,6 +8,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage;
 import net.onixary.shapeShifterCurseFabric.integration.origins.component.OriginComponent;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayer;
@@ -17,6 +18,7 @@ import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModCompo
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.util.TrinketUtils;
 import virtuoel.pehkui.api.ScaleData;
@@ -110,15 +112,33 @@ public class FormAbilityManager {
     }
 
     public static void loadForm(PlayerEntity player) {
-        // CCA 组件已自动加载持久化数据，直接应用当前形态
         PlayerFormComponent component = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
-        PlayerFormBase currentForm = component.getCurrentForm();
-        applyForm(player, currentForm);
+        PlayerFormBase savedForm = loadSavedForm(player);
+        if (savedForm != null) {
+            applyForm(player, savedForm);
+        } else {
+            applyForm(player, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
+        }
     }
 
     public static void saveForm(PlayerEntity player) {
-        // CCA 组件会自动持久化，只需同步即可
-        RegPlayerFormComponent.PLAYER_FORM.sync(player);
+        // 添加世界检查
+        if (world == null && player instanceof ServerPlayerEntity serverPlayer) {
+            world = serverPlayer.getServerWorld();
+        }
+
+        if (world != null) {
+            PlayerFormComponent component = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
+            PlayerNbtStorage.savePlayerFormComponent(world, player.getUuid().toString(), component);
+        } else {
+            ShapeShifterCurseFabric.LOGGER.warn("Cannot save form: world is null");
+        }
+    }
+
+    private static PlayerFormBase loadSavedForm(PlayerEntity player) {
+        // 从存储中加载保存的 form
+        PlayerFormComponent formComponent = PlayerNbtStorage.loadPlayerFormComponent(world, player.getUuid().toString());
+        return formComponent != null ? formComponent.getCurrentForm() : null;
     }
 
     private static void clearFormEffects(PlayerEntity player, PlayerFormBase oldForm) {

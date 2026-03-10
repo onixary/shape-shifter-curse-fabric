@@ -22,10 +22,6 @@ public class StatusEffectMixin {
     @Unique
     private boolean applyEffect(StatusEffect realThis, LivingEntity entity, @Nullable Entity source, @Nullable Entity attacker, int amplifier, double proximity, boolean IsInstantEffect) {
         // 返回值是是否覆盖了原版效果 如果返回false 还会执行原版效果
-        if (entity == null) {
-            return false;
-        }
-
         int EffectValue = 4;
         float FinalValue;
         if (realThis == StatusEffects.INSTANT_HEALTH) {
@@ -69,10 +65,6 @@ public class StatusEffectMixin {
 
     @Unique
     private void applyEffectDamage(LivingEntity entity, @Nullable Entity source, @Nullable Entity attacker, boolean IsInstantEffect, float finalValue) {
-        if (entity == null) {
-            return;
-        }
-
         if (finalValue == 0.0f) {
             return;
         }
@@ -97,9 +89,6 @@ public class StatusEffectMixin {
 
     @Inject(method = "applyInstantEffect", at = @At("HEAD"), cancellable = true)
     private void applyInstantEffect(Entity source, Entity attacker, LivingEntity target, int amplifier, double proximity, CallbackInfo ci) {
-        if (target == null) {
-            return;
-        }
         StatusEffect realThis = (StatusEffect)(Object)this;
         if (applyEffect(realThis, target, source, attacker, amplifier, proximity, true)) {
             ci.cancel();
