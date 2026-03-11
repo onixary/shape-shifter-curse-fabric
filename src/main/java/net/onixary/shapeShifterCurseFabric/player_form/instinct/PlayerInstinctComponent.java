@@ -65,4 +65,13 @@ public class PlayerInstinctComponent implements AutoSyncedComponent {
         nbtCompound.putBoolean("isInstinctIncreasing", this.isInstinctIncreasing);
         nbtCompound.putBoolean("isInstinctDecreasing", this.isInstinctDecreasing);
     }
+
+    public void clear() {
+        this.immediateEffects.clear();
+        this.sustainedEffects.clear();
+        this.instinctValue = 0f;
+        this.currentInstinctRate = 0f;
+        this.isInstinctIncreasing = false;
+        this.isInstinctDecreasing = false;
+    }
 }
