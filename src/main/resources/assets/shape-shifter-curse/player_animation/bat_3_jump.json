@@ -79,19 +79,6 @@
 						}
 					}
 				},
-				"head": {
-					"rotation": {
-						"vector": [0, 0, 0]
-					},
-					"position": {
-						"0.0": {
-							"vector": [0, -9, 1]
-						},
-						"0.2083": {
-							"vector": [0, 0, 0]
-						}
-					}
-				},
 				"rightLeg": {
 					"rotation": {
 						"0.0": {
