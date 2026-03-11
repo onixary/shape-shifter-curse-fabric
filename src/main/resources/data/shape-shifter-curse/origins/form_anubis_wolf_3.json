@@ -31,7 +31,8 @@
         "shape-shifter-curse:form_anubis_wolf_sound_hurt",
         "shape-shifter-curse:scare_skeleton",
         "shape-shifter-curse:no_hurt_pet",
-        "shape-shifter-curse:form_anubis_wolf_sound_key"
+        "shape-shifter-curse:form_anubis_wolf_sound_key",
+        "shape-shifter-curse:form_camera_bobbing_feral"
     ],
     "icon": {
         "item": "minecraft:player_head"

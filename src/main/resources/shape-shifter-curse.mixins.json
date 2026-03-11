@@ -90,7 +90,8 @@
     "accessor.ApoliClientAccessor",
     "integration.TacZ_Anim",
     "integration.TacZ_AnimThird",
-    "PlayerClipAtLedgeMixin"
+    "PlayerClipAtLedgeMixin",
+    "CameraBobbingMixin"
   ],
   "injectors": {
     "defaultRequire": 1

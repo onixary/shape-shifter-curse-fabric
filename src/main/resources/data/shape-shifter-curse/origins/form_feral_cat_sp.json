@@ -10,7 +10,8 @@
         "shape-shifter-curse:form_ocelot_sound",
         "shape-shifter-curse:form_ocelot_sound_hurt",
         "shape-shifter-curse:form_ocelot_hiss_phantom",
-        "shape-shifter-curse:form_ocelot_sound_key"
+        "shape-shifter-curse:form_ocelot_sound_key",
+        "shape-shifter-curse:form_camera_bobbing_feral"
     ],
     "icon": {
         "item": "minecraft:player_head"
