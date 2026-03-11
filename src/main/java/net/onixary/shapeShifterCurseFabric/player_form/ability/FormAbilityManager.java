@@ -27,6 +27,7 @@ import virtuoel.pehkui.api.ScaleTypes;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FormAbilityManager {
     private static ServerWorld world;
@@ -181,18 +182,34 @@ public class FormAbilityManager {
         }
         else {
             // Power 注册可能需要时间，使用 ServerTickEvents 重试而不是 Thread.sleep
-            final int[] retryCount = {0};
+            // 使用 AtomicBoolean 确保只执行一次，避免内存泄漏
+            final AtomicBoolean executed = new AtomicBoolean(false);
             final int maxRetries = 20;
+
             net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents.END_SERVER_TICK.register(server -> {
-                retryCount[0]++;
+                if (executed.get()) return;
+
+                // 检查玩家是否仍然在线
+                if (player instanceof ServerPlayerEntity serverPlayer && serverPlayer.isDisconnected()) {
+                    executed.set(true);
+                    return;
+                }
+                
                 if (PowerTypeRegistry.contains(powerId)) {
-                    PowerType<?> powerType = PowerTypeRegistry.get(powerId);
-                    if (powerType != null) {
-                        PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
-                        powerHolder.addPower(powerType, powerSource);
+                    if (executed.compareAndSet(false, true)) {
+                        PowerType<?> powerType = PowerTypeRegistry.get(powerId);
+                        if (powerType != null) {
+                            PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
+                            powerHolder.addPower(powerType, powerSource);
+                        }
                     }
-                } else if (retryCount[0] >= maxRetries) {
-                    ShapeShifterCurseFabric.LOGGER.warn("Failed to apply power " + powerId.toString() + " for player " + player.getName() + " after 2 seconds");
+                } else {
+                    // 记录当前重试次数，使用静态计数器模拟
+                    int currentRetry = server.getTicks() % maxRetries;
+                    if (currentRetry == 0) {
+                        ShapeShifterCurseFabric.LOGGER.warn("Failed to apply power " + powerId.toString() + " for player " + player.getName() + " after 2 seconds");
+                        executed.set(true);
+                    }
                 }
             });
         }

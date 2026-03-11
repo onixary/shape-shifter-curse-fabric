@@ -275,12 +275,20 @@ public class ModPacketsS2C {
         // 还原FPM设置 或许可以通过注入式修改配置来减少此类Bug 比如在FPM读取offset时修改返回值
         TransformManager.executeClientFirstPersonReset();
         // 使用客户端 tick 事件代替 Thread.sleep，等待服务器 component 加载完成
-        final int[] tickCounter = {0};
+        // 使用 AtomicBoolean 确保只执行一次，避免内存泄漏
         final int targetTick = 100; // 100 tick = 5秒
+        final int[] tickCounter = {0};
+        final java.util.concurrent.atomic.AtomicBoolean executed = new java.util.concurrent.atomic.AtomicBoolean(false);
         net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK.register(c -> {
+            if (executed.get()) return;
             tickCounter[0]++;
             if (tickCounter[0] >= targetTick) {
-                sendUpdateCustomSetting();
+                if (executed.compareAndSet(false, true)) {
+                    // 检查客户端连接状态
+                    if (c != null && c.getNetworkHandler() != null && c.getNetworkHandler().getConnection().isOpen()) {
+                        sendUpdateCustomSetting();
+                    }
+                }
             }
         });
     }

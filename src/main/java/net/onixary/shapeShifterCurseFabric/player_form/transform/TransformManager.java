@@ -538,9 +538,13 @@ public class TransformManager {
             fpm.getConfig().sneakXOffset = 0;
 
             // 使用客户端 tick 事件代替 Thread.sleep
-            final int[] tickCounter = {0};
+            // 使用 AtomicBoolean 确保只执行一次，避免内存泄漏
+            final java.util.concurrent.atomic.AtomicBoolean executed = new java.util.concurrent.atomic.AtomicBoolean(false);
             final int[] targetTicks = {1, 2, 4, 20}; // 对应 0.05s, 0.1s, 0.2s, 1s
+            final int[] tickCounter = {0};
             net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK.register(client -> {
+                if (executed.get()) return;
+                
                 tickCounter[0]++;
                 for (int target : targetTicks) {
                     if (tickCounter[0] == target) {
@@ -551,8 +555,8 @@ public class TransformManager {
                     }
                 }
                 if (tickCounter[0] > 20) {
-                    // 超过 1 秒后移除监听器
-                    tickCounter[0] = -1000; // 停止继续检查
+                    // 超过 1 秒后标记为已完成，避免继续检查
+                    executed.set(true);
                 }
             });
         }

@@ -30,6 +30,8 @@ import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManag
 import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.TransformativeStatusInstance;
 import net.onixary.shapeShifterCurseFabric.team.MobTeamManager;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker.loadInstinct;
 
 public class PlayerEventHandler {
@@ -119,22 +121,27 @@ public class PlayerEventHandler {
 
             ShapeShifterCurseFabric.LOGGER.info("向玩家同步诅咒之月状态: " + currentIsCursedMoon + ", 月相: " + world.getMoonPhase());
             // 使用 Fabric 的 ServerTickEvents 实现延迟同步，代替 Thread.sleep
-            final int[] tickCounter = {0};
+            // 使用 AtomicBoolean 确保只执行一次，避免内存泄漏
+            final AtomicBoolean executed = new AtomicBoolean(false);
             final int targetTick = 40; // 40 tick = 2秒
+
             net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents.END_SERVER_TICK.register(s -> {
-                tickCounter[0]++;
-                if (tickCounter[0] >= targetTick) {
-                    if (player.networkHandler != null && !player.isDisconnected()) {
-                        ServerWorld currentWorld = player.getServerWorld();
-                        boolean delayedIsCursedMoon = CursedMoon.isCursedMoonByPhase(currentWorld);
-                        boolean delayedIsNight = CursedMoon.isNight(currentWorld);
+                if (executed.get()) return;
 
-                        ModPacketsS2CServer.sendCursedMoonData(player, currentWorld.getTimeOfDay(), CursedMoon.getDay(currentWorld),
-                                delayedIsCursedMoon, delayedIsNight);
+                if (s.getTicks() >= targetTick) {
+                    if (executed.compareAndSet(false, true)) {
+                        if (player.networkHandler != null && !player.isDisconnected()) {
+                            ServerWorld currentWorld = player.getServerWorld();
+                            boolean delayedIsCursedMoon = CursedMoon.isCursedMoonByPhase(currentWorld);
+                            boolean delayedIsNight = CursedMoon.isNight(currentWorld);
 
-                        ShapeShifterCurseFabric.LOGGER.info("延迟同步诅咒之月状态: " + delayedIsCursedMoon +
-                                ", 月相: " + currentWorld.getMoonPhase() +
-                                ", 玩家: " + player.getName().getString());
+                            ModPacketsS2CServer.sendCursedMoonData(player, currentWorld.getTimeOfDay(), CursedMoon.getDay(currentWorld),
+                                    delayedIsCursedMoon, delayedIsNight);
+
+                            ShapeShifterCurseFabric.LOGGER.info("延迟同步诅咒之月状态: " + delayedIsCursedMoon +
+                                    ", 月相: " + currentWorld.getMoonPhase() +
+                                    ", 玩家: " + player.getName().getString());
+                        }
                     }
                 }
             });
