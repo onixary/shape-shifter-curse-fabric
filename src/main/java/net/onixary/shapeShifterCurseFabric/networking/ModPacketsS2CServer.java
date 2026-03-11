@@ -28,7 +28,8 @@ import static net.onixary.shapeShifterCurseFabric.networking.ModPackets.UPDATE_P
 // This is a pure server-side class, all send methods are called only here
 public class ModPacketsS2CServer {
 
-    private static boolean canSendPacket(ServerPlayerEntity player) {
+    // 我所能想到的最好的兜底方法，应该可以通用
+    public static boolean canSendPacket(ServerPlayerEntity player) {
         return player != null && player.networkHandler != null && !player.isDisconnected();
     }
 

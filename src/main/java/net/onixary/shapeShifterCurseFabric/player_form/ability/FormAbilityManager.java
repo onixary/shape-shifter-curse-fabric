@@ -20,6 +20,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
+import net.onixary.shapeShifterCurseFabric.util.PendingTaskManager;
 import net.onixary.shapeShifterCurseFabric.util.TrinketUtils;
 import virtuoel.pehkui.api.ScaleData;
 import virtuoel.pehkui.api.ScaleTypes;
@@ -27,7 +28,8 @@ import virtuoel.pehkui.api.ScaleTypes;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+
+import static net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer.canSendPacket;
 
 public class FormAbilityManager {
     private static ServerWorld world;
@@ -104,8 +106,10 @@ public class FormAbilityManager {
         // 添加网络同步：通知客户端形态已变化
         if (!player.getWorld().isClient() && player instanceof ServerPlayerEntity serverPlayer) {
             try {
-                ModPacketsS2CServer.sendFormChange(serverPlayer, newForm.getIDString());
-                ShapeShifterCurseFabric.LOGGER.info("Sent form change notification to client: " + newForm.getIDString());
+                if (canSendPacket(serverPlayer)) {
+                    ModPacketsS2CServer.sendFormChange(serverPlayer, newForm.getIDString());
+                    ShapeShifterCurseFabric.LOGGER.info("Sent form change notification to client: " + newForm.getIDString());
+                }
             } catch (Exception e) {
                 ShapeShifterCurseFabric.LOGGER.error("Failed to send form change notification: ", e);
             }
@@ -181,37 +185,33 @@ public class FormAbilityManager {
             }
         }
         else {
-            // Power 注册可能需要时间，使用 ServerTickEvents 重试而不是 Thread.sleep
-            // 使用 AtomicBoolean 确保只执行一次，避免内存泄漏
-            final AtomicBoolean executed = new AtomicBoolean(false);
-            final int maxRetries = 20;
+            // Power 注册可能需要时间，使用 PendingTaskManager.queueRepeatingForPlayer 代替 Thread.sleep
+            // 每 2 tick 检查一次，最多重试 20 次（约 2 秒）
+            final Identifier finalPowerId = powerId;
+            final Identifier finalPowerSource = powerSource;
+            final boolean[] powerApplied = {false};
 
-            net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents.END_SERVER_TICK.register(server -> {
-                if (executed.get()) return;
+            if (player instanceof ServerPlayerEntity serverPlayer) {
+                PendingTaskManager.queueRepeatingForPlayer(2, 20, serverPlayer, server -> {
+                    if (powerApplied[0]) return;
 
-                // 检查玩家是否仍然在线
-                if (player instanceof ServerPlayerEntity serverPlayer && serverPlayer.isDisconnected()) {
-                    executed.set(true);
-                    return;
-                }
-                
-                if (PowerTypeRegistry.contains(powerId)) {
-                    if (executed.compareAndSet(false, true)) {
-                        PowerType<?> powerType = PowerTypeRegistry.get(powerId);
+                    if (PowerTypeRegistry.contains(finalPowerId)) {
+                        PowerType<?> powerType = PowerTypeRegistry.get(finalPowerId);
                         if (powerType != null) {
                             PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
-                            powerHolder.addPower(powerType, powerSource);
+                            powerHolder.addPower(powerType, finalPowerSource);
+                            powerApplied[0] = true;
                         }
                     }
-                } else {
-                    // 记录当前重试次数，使用静态计数器模拟
-                    int currentRetry = server.getTicks() % maxRetries;
-                    if (currentRetry == 0) {
-                        ShapeShifterCurseFabric.LOGGER.warn("Failed to apply power " + powerId.toString() + " for player " + player.getName() + " after 2 seconds");
-                        executed.set(true);
+                }, (currentRetry, maxRetries) -> {
+                    // 如果 power 已成功应用或者还没达到最大重试次数，继续重试
+                    if (powerApplied[0]) return false;
+                    if (currentRetry >= maxRetries - 1) {
+                        ShapeShifterCurseFabric.LOGGER.warn("Failed to apply power {} for player {}", finalPowerId.toString(), player.getName());
                     }
-                }
-            });
+                    return currentRetry < maxRetries;
+                });
+            }
         }
     }
 
