@@ -248,7 +248,6 @@ public class CursedMoon {
             ShapeShifterCurseFabric.LOGGER.info("Cursed Moon ends!");
             TransformManager.setIsByCursedMoonEnd(player, true);
             RegPlayerFormComponent.PLAYER_FORM.get(player).setByCursedMoon(true);
-            FormAbilityManager.saveForm(player);
             RegPlayerFormComponent.PLAYER_FORM.sync(player);
             // transform
             if(wasByCursedMoon && !RegPlayerFormComponent.PLAYER_FORM.get(player).isByCure()){
@@ -257,9 +256,7 @@ public class CursedMoon {
             //clearFormFlag(player);
             //TransformManager.clearMoonEndFlags(player);
             formComp.setEndMoonEffectApplied(true);
-            FormAbilityManager.saveForm(player);
             RegPlayerFormComponent.PLAYER_FORM.sync(player);
-            FormAbilityManager.saveForm(player);
         }
     }
 
@@ -269,7 +266,6 @@ public class CursedMoon {
         formComp.setEndMoonEffectApplied(false);
         formComp.setMoonEffectApplied(false);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
-        FormAbilityManager.saveForm(player);
     }
 
     /*public static void resetCursedMoonForNewDay(ServerWorld world) {

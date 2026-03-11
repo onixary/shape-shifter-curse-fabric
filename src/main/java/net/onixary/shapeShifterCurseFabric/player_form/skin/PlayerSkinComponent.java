@@ -105,6 +105,13 @@ public class PlayerSkinComponent implements Component, AutoSyncedComponent {
         tag.putBoolean("EnableFormRandomSound", this.enableFormRandomSound);
     }
 
+    public void clear() {
+        this.keepOriginalSkin = false; // Default to false
+        this.enableFormColor = false; // Default to false
+        this.formColor = new FormTextureUtils.ColorSetting(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, false, false, false); // Default to default color
+        this.enableFormRandomSound = true; // Default to true
+    }
+
     public boolean isEnableFormRandomSound() {
         return enableFormRandomSound;
     }

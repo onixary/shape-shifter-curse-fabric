@@ -81,8 +81,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-import static net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager.saveForm;
-import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.saveInstinctComp;
 
 
 public class ShapeShifterCurseFabric implements ModInitializer {
@@ -267,10 +265,11 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             PlayerEntity player = handler.player;
             // 清空玩家召唤物
             MinionRegister.DisSpawnAllMinion(player);
-            LOGGER.info("Player disconnect, save attachment");
+            // 由CCA+原版存储代替
+            // LOGGER.info("Player disconnect, save attachment");
             // saveCurrentAttachment(server.getOverworld(), player);
-            saveForm(player);
-            saveInstinctComp(player);
+            //saveForm(player);
+            // saveInstinctComp(player);
         });
 
         // Reg listeners

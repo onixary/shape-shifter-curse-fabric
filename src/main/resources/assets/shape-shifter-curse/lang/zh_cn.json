@@ -412,6 +412,7 @@
     "text.autoconfig.shape-shifter-curse-common.option.enableNewStartBook": "启用新版幻形者之书界面",
     "text.autoconfig.shape-shifter-curse-common.option.curseMoonPhase": "诅咒之月月相",
     "text.autoconfig.shape-shifter-curse-common.option.allowSleepInCursedMoon": "是否可以在诅咒之月中睡觉",
+    "text.autoconfig.shape-shifter-curse-common.option.enableDebugCommand": "启用无权限限制的调试命令(不要在服务器中打开)",
     "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "开发中配置",
     "text.autoconfig.shape-shifter-curse-common.category.Patron": "赞助者配置 (未完工)",
     "text.autoconfig.shape-shifter-curse-common.option.enablePatronFormSystem": "启用赞助者形态功能 (未完工)",

@@ -2,19 +2,10 @@ package net.onixary.shapeShifterCurseFabric.player_form.instinct;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 import java.util.Objects;
 
-import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.loadPlayerInstinctComponent;
-import static net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage.savePlayerInstinctComponent;
-
 public class InstinctManager {
-    private static ServerWorld world;
-
-    public static void getServerWorld(ServerWorld world) {
-        InstinctManager.world = world;
-    }
     // 添加立即效果
     public static void applyImmediateEffect(PlayerEntity player, InstinctEffect effect) {
         if (!effect.isSustained()) {
@@ -69,10 +60,10 @@ public class InstinctManager {
     public static void saveInstinctComp(PlayerEntity player) {
         PlayerInstinctComponent comp = player.getComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
         comp.instinctValue = InstinctTicker.currentInstinctValue;
-        savePlayerInstinctComponent(world, player.getUuid().toString(), comp);
+        RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.sync(player);
     }
 
     public static PlayerInstinctComponent loadInstinctComp(PlayerEntity player) {
-        return loadPlayerInstinctComponent(world, player.getUuid().toString());
+        return RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.get(player);
     }
 }

@@ -27,18 +27,6 @@ public class InstinctTicker {
     public static boolean isUnderCursedMoon = false;
     public static boolean isPausing = false;
 
-
-    public static void loadInstinct(PlayerEntity player) {
-        PlayerInstinctComponent comp = loadInstinctComp(player);
-        if(comp != null){
-            PlayerInstinctComponent thisComp = RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.get(player);
-            thisComp.instinctValue = comp.instinctValue;
-            thisComp.immediateEffects = comp.immediateEffects;
-            thisComp.sustainedEffects = comp.sustainedEffects;
-            isPausing = false;
-        }
-    }
-
     public static void clearInstinct(PlayerEntity player) {
         PlayerInstinctComponent comp = player.getComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
         comp.instinctValue = 0.0f;
