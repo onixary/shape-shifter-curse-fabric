@@ -538,21 +538,28 @@ public class TransformManager {
             fpm.getConfig().sitXOffset = 0;
             fpm.getConfig().sneakXOffset = 0;
 
-            // 使用 PendingClientTaskManager.queueRepeating 实现多阶段重置
+            // 或许可以提取一个辅助方法,更DRY
             // 在 1, 2, 4, 20 tick 时分别重置
-            final int[] targetTicks = {1, 2, 4, 20};
-            final int[] currentIndex = {0};
-            final FirstPersonModelCore finalFpm = fpm;
-
-            PendingClientTaskManager.queueRepeating(1, 20, client -> {
-                if (currentIndex[0] < targetTicks.length &&
-                        PendingClientTaskManager.getPendingCount() > 0) {
-                    finalFpm.getConfig().xOffset = 0;
-                    finalFpm.getConfig().sitXOffset = 0;
-                    finalFpm.getConfig().sneakXOffset = 0;
-                    currentIndex[0]++;
-                }
-            }, (current, max) -> current < max && currentIndex[0] < targetTicks.length);
+            PendingClientTaskManager.queue(1, client -> {
+                fpm.getConfig().xOffset = 0;
+                fpm.getConfig().sitXOffset = 0;
+                fpm.getConfig().sneakXOffset = 0;
+            });
+            PendingClientTaskManager.queue(2, client -> {
+                fpm.getConfig().xOffset = 0;
+                fpm.getConfig().sitXOffset = 0;
+                fpm.getConfig().sneakXOffset = 0;
+            });
+            PendingClientTaskManager.queue(4, client -> {
+                fpm.getConfig().xOffset = 0;
+                fpm.getConfig().sitXOffset = 0;
+                fpm.getConfig().sneakXOffset = 0;
+            });
+            PendingClientTaskManager.queue(20, client -> {
+                fpm.getConfig().xOffset = 0;
+                fpm.getConfig().sitXOffset = 0;
+                fpm.getConfig().sneakXOffset = 0;
+            });
         }
     }
 

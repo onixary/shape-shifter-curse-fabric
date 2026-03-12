@@ -185,31 +185,31 @@ public class FormAbilityManager {
             }
         }
         else {
-            // Power 注册可能需要时间，使用 PendingTaskManager.queueRepeatingForPlayer 代替 Thread.sleep
-            // 每 2 tick 检查一次，最多重试 20 次（约 2 秒）
             final Identifier finalPowerId = powerId;
             final Identifier finalPowerSource = powerSource;
-            final boolean[] powerApplied = {false};
-
+            final java.util.concurrent.atomic.AtomicInteger successRetry = new java.util.concurrent.atomic.AtomicInteger(-1);
+            
             if (player instanceof ServerPlayerEntity serverPlayer) {
                 PendingTaskManager.queueRepeatingForPlayer(2, 20, serverPlayer, server -> {
-                    if (powerApplied[0]) return;
-
                     if (PowerTypeRegistry.contains(finalPowerId)) {
                         PowerType<?> powerType = PowerTypeRegistry.get(finalPowerId);
                         if (powerType != null) {
                             PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
                             powerHolder.addPower(powerType, finalPowerSource);
-                            powerApplied[0] = true;
+                            successRetry.set(server.getTicks());
                         }
                     }
                 }, (currentRetry, maxRetries) -> {
-                    // 如果 power 已成功应用或者还没达到最大重试次数，继续重试
-                    if (powerApplied[0]) return false;
-                    if (currentRetry >= maxRetries - 1) {
-                        ShapeShifterCurseFabric.LOGGER.warn("Failed to apply power {} for player {}", finalPowerId.toString(), player.getName());
+                    if (successRetry.get() >= 0) {
+                        return false;
                     }
-                    return currentRetry < maxRetries;
+
+                    if (currentRetry >= maxRetries) {
+                        ShapeShifterCurseFabric.LOGGER.warn("Failed to apply power {} for player {} after {} retries",
+                                finalPowerId.toString(), player.getName(), maxRetries);
+                        return false;
+                    }
+                    return true;
                 });
             }
         }
