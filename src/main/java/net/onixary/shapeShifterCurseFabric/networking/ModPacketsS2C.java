@@ -26,6 +26,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
+import net.onixary.shapeShifterCurseFabric.util.PendingClientTaskManager;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -274,21 +275,11 @@ public class ModPacketsS2C {
     public static void onPlayerConnectServer(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         // 还原FPM设置 或许可以通过注入式修改配置来减少此类Bug 比如在FPM读取offset时修改返回值
         TransformManager.executeClientFirstPersonReset();
-        // 使用客户端 tick 事件代替 Thread.sleep，等待服务器 component 加载完成
-        // 使用 AtomicBoolean 确保只执行一次，避免内存泄漏
-        final int targetTick = 100; // 100 tick = 5秒
-        final int[] tickCounter = {0};
-        final java.util.concurrent.atomic.AtomicBoolean executed = new java.util.concurrent.atomic.AtomicBoolean(false);
-        net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK.register(c -> {
-            if (executed.get()) return;
-            tickCounter[0]++;
-            if (tickCounter[0] >= targetTick) {
-                if (executed.compareAndSet(false, true)) {
-                    // 检查客户端连接状态
-                    if (c != null && c.getNetworkHandler() != null && c.getNetworkHandler().getConnection().isOpen()) {
-                        sendUpdateCustomSetting();
-                    }
-                }
+        // 使用 PendingClientTaskManager 实现延迟同步，代替 Thread.sleep
+        // PendingClientTaskManager 会自动管理任务执行和清理，避免内存泄漏
+        PendingClientTaskManager.queue(100, c -> {
+            if (c != null && c.getNetworkHandler() != null && c.getNetworkHandler().getConnection().isOpen()) {
+                sendUpdateCustomSetting();
             }
         });
     }

@@ -27,6 +27,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
 import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.TransformativeStatusInstance;
+import net.onixary.shapeShifterCurseFabric.util.PendingClientTaskManager;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -537,28 +538,21 @@ public class TransformManager {
             fpm.getConfig().sitXOffset = 0;
             fpm.getConfig().sneakXOffset = 0;
 
-            // 使用客户端 tick 事件代替 Thread.sleep
-            // 使用 AtomicBoolean 确保只执行一次，避免内存泄漏
-            final java.util.concurrent.atomic.AtomicBoolean executed = new java.util.concurrent.atomic.AtomicBoolean(false);
-            final int[] targetTicks = {1, 2, 4, 20}; // 对应 0.05s, 0.1s, 0.2s, 1s
-            final int[] tickCounter = {0};
-            net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK.register(client -> {
-                if (executed.get()) return;
-                
-                tickCounter[0]++;
-                for (int target : targetTicks) {
-                    if (tickCounter[0] == target) {
-                        fpm.getConfig().xOffset = 0;
-                        fpm.getConfig().sitXOffset = 0;
-                        fpm.getConfig().sneakXOffset = 0;
-                        break;
-                    }
+            // 使用 PendingClientTaskManager.queueRepeating 实现多阶段重置
+            // 在 1, 2, 4, 20 tick 时分别重置
+            final int[] targetTicks = {1, 2, 4, 20};
+            final int[] currentIndex = {0};
+            final FirstPersonModelCore finalFpm = fpm;
+
+            PendingClientTaskManager.queueRepeating(1, 20, client -> {
+                if (currentIndex[0] < targetTicks.length &&
+                        PendingClientTaskManager.getPendingCount() > 0) {
+                    finalFpm.getConfig().xOffset = 0;
+                    finalFpm.getConfig().sitXOffset = 0;
+                    finalFpm.getConfig().sneakXOffset = 0;
+                    currentIndex[0]++;
                 }
-                if (tickCounter[0] > 20) {
-                    // 超过 1 秒后标记为已完成，避免继续检查
-                    executed.set(true);
-                }
-            });
+            }, (current, max) -> current < max && currentIndex[0] < targetTicks.length);
         }
     }
 

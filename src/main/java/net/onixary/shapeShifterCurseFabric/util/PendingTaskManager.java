@@ -12,6 +12,86 @@ public class PendingTaskManager {
     private static boolean repeatingRegistered = false;
     private static MinecraftServer cachedServer = null;
 
+    public interface TaskExecutor {
+        void execute(MinecraftServer server);
+    }
+
+    public interface RetryCondition {
+        boolean shouldRetry(int currentRetry, int maxRetries);
+    }
+
+    public static class PendingTask {
+        private final int targetTick;
+        private final TaskExecutor executor;
+        private boolean executed = false;
+
+        public PendingTask(int targetTick, TaskExecutor executor) {
+            this.targetTick = targetTick;
+            this.executor = executor;
+        }
+
+        public boolean shouldExecute(int currentTick) {
+            return currentTick >= targetTick && !executed;
+        }
+
+        public void execute(MinecraftServer server) {
+            if (executed) return;
+            executed = true;
+            executor.execute(server);
+        }
+
+        public boolean isExpired(int currentTick) {
+            return currentTick > targetTick + 20;
+        }
+    }
+
+    public static class RepeatingTask {
+        private final int intervalTicks;
+        private final int maxRetries;
+        private final TaskExecutor executor;
+        private final RetryCondition retryCondition;
+        private int nextExecuteTick;
+        private int currentRetry = 0;
+        private boolean completed = false;
+
+        public RepeatingTask(int startTick, int intervalTicks, int maxRetries, TaskExecutor executor, RetryCondition retryCondition) {
+            this.nextExecuteTick = startTick;
+            this.intervalTicks = intervalTicks;
+            this.maxRetries = maxRetries;
+            this.executor = executor;
+            this.retryCondition = retryCondition;
+        }
+
+        public boolean shouldExecute(int currentTick) {
+            if (completed) return false;
+            return currentTick >= nextExecuteTick && currentRetry < maxRetries;
+        }
+
+        public void execute(MinecraftServer server) {
+            if (completed) return;
+            executor.execute(server);
+            currentRetry++;
+            nextExecuteTick = server.getTicks() + intervalTicks;
+        }
+
+        public boolean shouldContinue() {
+            if (completed) return false;
+            boolean shouldContinue = retryCondition.shouldRetry(currentRetry, maxRetries);
+            if (!shouldContinue) {
+                completed = true;
+            }
+            return shouldContinue;
+        }
+
+        public boolean isExpired(int currentTick) {
+            return currentTick > nextExecuteTick + 600 || currentRetry >= maxRetries;
+        }
+
+        public int getCurrentRetry() {
+            return currentRetry;
+        }
+    }
+
     public static void setServer(MinecraftServer server) {
         cachedServer = server;
     }
@@ -118,85 +198,5 @@ public class PendingTaskManager {
 
     public static int getPendingCount() {
         return PENDING_TASKS.size() + REPEATING_TASKS.size();
-    }
-
-    public interface TaskExecutor {
-        void execute(MinecraftServer server);
-    }
-
-    public interface RetryCondition {
-        boolean shouldRetry(int currentRetry, int maxRetries);
-    }
-
-    public static class PendingTask {
-        private final int targetTick;
-        private final TaskExecutor executor;
-        private boolean executed = false;
-
-        public PendingTask(int targetTick, TaskExecutor executor) {
-            this.targetTick = targetTick;
-            this.executor = executor;
-        }
-
-        public boolean shouldExecute(int currentTick) {
-            return currentTick >= targetTick && !executed;
-        }
-
-        public void execute(MinecraftServer server) {
-            if (executed) return;
-            executed = true;
-            executor.execute(server);
-        }
-
-        public boolean isExpired(int currentTick) {
-            return currentTick > targetTick + 20;
-        }
-    }
-
-    public static class RepeatingTask {
-        private final int intervalTicks;
-        private final int maxRetries;
-        private final TaskExecutor executor;
-        private final RetryCondition retryCondition;
-        private int nextExecuteTick;
-        private int currentRetry = 0;
-        private boolean completed = false;
-
-        public RepeatingTask(int startTick, int intervalTicks, int maxRetries, TaskExecutor executor, RetryCondition retryCondition) {
-            this.nextExecuteTick = startTick;
-            this.intervalTicks = intervalTicks;
-            this.maxRetries = maxRetries;
-            this.executor = executor;
-            this.retryCondition = retryCondition;
-        }
-
-        public boolean shouldExecute(int currentTick) {
-            if (completed) return false;
-            return currentTick >= nextExecuteTick && currentRetry < maxRetries;
-        }
-
-        public void execute(MinecraftServer server) {
-            if (completed) return;
-            executor.execute(server);
-            currentRetry++;
-            nextExecuteTick = server.getTicks() + intervalTicks;
-        }
-
-        public boolean shouldContinue() {
-            if (completed) return false;
-            boolean shouldContinue = retryCondition.shouldRetry(currentRetry, maxRetries);
-            if (!shouldContinue) {
-                completed = true;
-            }
-            return shouldContinue;
-        }
-
-        public boolean isExpired(int currentTick) {
-            return currentTick > nextExecuteTick + 600 || currentRetry >= maxRetries;
-        }
-
-        public int getCurrentRetry() {
-            return currentRetry;
-        }
     }
 }
