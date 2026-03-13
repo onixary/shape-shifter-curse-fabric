@@ -58,7 +58,7 @@ public class PatronUtils {
             // 开启服务器时无论如何都要更新一次
             PatronUtils.UpdateDataPack(server);
         }
-        Thread thread = new Thread(() -> {
+        new Thread(() -> {  // 如果之后有需要持续监控更新(长时间线程) 需要搓一个系统合并一下
             try {
                 long SleepTime = commonConfig.CheckUpdateInterval;
                 if (SleepTime <= 0) {
@@ -72,7 +72,7 @@ public class PatronUtils {
             if (commonConfig.enablePatronFormSystem) {
                 PatronUtils.CheckDataPackUpdate(server);
             }
-        });
+        }).start();
     }
 
     private static List<JsonObject> ReadDataPackZip(byte[] dataPackZip) {
