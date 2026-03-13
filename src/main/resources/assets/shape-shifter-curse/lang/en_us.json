@@ -412,6 +412,7 @@
     "text.autoconfig.shape-shifter-curse-common.option.enableNewStartBook": "Enable The New Version of Start Book Interface",
     "text.autoconfig.shape-shifter-curse-common.option.curseMoonPhase": "Curse Moon Phase",
     "text.autoconfig.shape-shifter-curse-common.option.allowSleepInCursedMoon": "Allow Sleep In Curse Moon",
+    "text.autoconfig.shape-shifter-curse-common.option.enableDebugCommand": "Enable debugging commands without permission restrictions (Do not enable on servers)",
     "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "In Development",
     "text.autoconfig.shape-shifter-curse-common.category.Patron": "Patron Config (Unfinished)",
     "text.autoconfig.shape-shifter-curse-common.option.enablePatronFormSystem": "Enable Patron Form System (Unfinished)",

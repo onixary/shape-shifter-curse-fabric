@@ -105,7 +105,6 @@ public class TransformManager {
 
         RegPlayerFormComponent.PLAYER_FORM.get(player).setByCursedMoon(isByCursedMoon);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
-        FormAbilityManager.saveForm(player);
         ShapeShifterCurseFabric.LOGGER.info("Progressive transform started, isByCursedMoon: " + isByCursedMoon + ", from: " + data.curFromForm);
         int currentFormIndex = currentForm.getIndex();
         PlayerFormGroup currentFormGroup = currentForm.getGroup();
@@ -166,7 +165,6 @@ public class TransformManager {
         applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);
         handleTransformEffect(player);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
-        FormAbilityManager.saveForm(player);
     }
 
     // 仅服务端

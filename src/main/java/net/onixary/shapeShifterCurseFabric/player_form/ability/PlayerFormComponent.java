@@ -35,7 +35,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         this.moonEffectApplied = nbtCompound.contains("moonEffectApplied") && nbtCompound.getBoolean("moonEffectApplied");
         this.endMoonEffectApplied = nbtCompound.contains("endMoonEffectApplied") && nbtCompound.getBoolean("endMoonEffectApplied");
         this.isByCursedMoonEnd = nbtCompound.contains("isByCursedMoonEnd") && nbtCompound.getBoolean("isByCursedMoonEnd");
-        this.firstJoin = nbtCompound.contains("firstJoin") && nbtCompound.getBoolean("firstJoin");
+        this.firstJoin = !nbtCompound.contains("firstJoin") || nbtCompound.getBoolean("firstJoin");
         this.customPotionFormID = nbtCompound.contains("customPotionFormID") ? Identifier.tryParse(nbtCompound.getString("customPotionFormID")) : RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID;
     }
 

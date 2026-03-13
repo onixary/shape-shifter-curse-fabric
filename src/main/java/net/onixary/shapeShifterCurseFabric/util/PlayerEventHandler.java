@@ -16,8 +16,6 @@ import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
-import net.onixary.shapeShifterCurseFabric.data.PlayerDataStorage;
-import net.onixary.shapeShifterCurseFabric.data.PlayerNbtStorage;
 import net.onixary.shapeShifterCurseFabric.minion.MinionRegister;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
@@ -30,7 +28,6 @@ import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManag
 import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.TransformativeStatusInstance;
 import net.onixary.shapeShifterCurseFabric.team.MobTeamManager;
 
-import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker.loadInstinct;
 
 public class PlayerEventHandler {
     public static void register() {
@@ -38,44 +35,20 @@ public class PlayerEventHandler {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             if (handler.player.getWorld().isClient()) return;
 
-            // 初始化 PlayerDataStorage（只在第一次有服务器实例时执行）
-            PlayerDataStorage.initialize(server);
-
             ServerPlayerEntity player = handler.player;
 
             // load form first
             FormAbilityManager.getServerWorld(player.getServerWorld());
 
-            // check if first join with mod using PlayerFormComponent
-            //PlayerFormComponent formComponent = RegPlayerFormComponent.PLAYER_FORM.get(player);
-
-            PlayerSkinComponent skinComponent = RegPlayerSkinComponent.SKIN_SETTINGS.get(player);
             RegPlayerSkinComponent.SKIN_SETTINGS.sync(player);
 
-            // 检查是否存在保存的数据来判断是否首次加入
-            PlayerFormComponent savedComponent = PlayerNbtStorage.loadPlayerFormComponent(server.getOverworld(), player.getUuid().toString());
-
-            if (savedComponent != null) {
-                // 如果有保存的数据，说明不是首次加入，使用保存的数据
-                //formComponent.readFromNbt(savedComponent.writeToNbt(new net.minecraft.nbt.NbtCompound()));
-                RegPlayerFormComponent.PLAYER_FORM.sync(player);
-                ShapeShifterCurseFabric.LOGGER.info("Loaded existing player data, not first join");
-            } else {
-                // 如果没有保存的数据，说明是首次加入
-                ShapeShifterCurseFabric.LOGGER.info("No saved data found, this is first join with mod");
-                PlayerFormComponent formComponent = RegPlayerFormComponent.PLAYER_FORM.get(player);
-                // 还原到默认值 根据Wiki描述 如果删除data/shape-shifter-curse/{uuid}_*.dat则玩家会回到启用Mod之前的状态
-                formComponent.clear();
-                // 确保 firstJoin 为 true
-                formComponent.setFirstJoin(true);
-                // 触发首次加入成就
+            PlayerFormComponent playerFormComponent = RegPlayerFormComponent.PLAYER_FORM.get(player);
+            if (playerFormComponent.isFirstJoin()) {
                 ShapeShifterCurseFabric.ON_FIRST_JOIN_WITH_MOD.trigger(player);
-                // 设置为 false 并保存
-                formComponent.setFirstJoin(false);
-                RegPlayerFormComponent.PLAYER_FORM.sync(player);
-                // 立即保存以防止重复触发
-                PlayerNbtStorage.savePlayerFormComponent(server.getOverworld(), player.getUuid().toString(), formComponent);
+                playerFormComponent.setFirstJoin(false);
             }
+            RegPlayerFormComponent.PLAYER_FORM.sync(player);
+
             // 同步动态Form
             server.execute(() -> {
                 try {
@@ -103,10 +76,6 @@ public class PlayerEventHandler {
              */
             // 将 StatusEffectInstance 转换为 TransformativeStatusInstance
             EffectManager.ReloadPlayerEffect(player);
-
-            // load instinct
-            InstinctManager.getServerWorld(server.getOverworld());
-            loadInstinct(player);
 
             // 修改为使用新的月相判定系统
             ServerWorld world = server.getOverworld();
@@ -155,7 +124,6 @@ public class PlayerEventHandler {
 
             copyTransformativeEffect(oldPlayer, newPlayer);
             copyFormAndAbility(oldPlayer, newPlayer);
-            PlayerNbtStorage.saveAll(newPlayer.getServerWorld(), newPlayer);
             //PlayerTeamHandler.updatePlayerTeam(newPlayer);
         });
 
@@ -178,10 +146,6 @@ public class PlayerEventHandler {
                 // 将 StatusEffectInstance 转换为 TransformativeStatusInstance
                 EffectManager.ReloadPlayerEffect(player);
 
-                // load instinct
-                InstinctManager.getServerWorld(server.getOverworld());
-                loadInstinct(player);
-
                 // 修改为使用新的月相判定系统
                 boolean currentIsCursedMoon = CursedMoon.isCursedMoon(world); // 使用新的月相判定
                 boolean currentIsNight = CursedMoon.isNight(world);
@@ -201,6 +165,8 @@ public class PlayerEventHandler {
             }
         });
 
+        /*
+        关闭自动保存有原版保存机制保存(CCA将数据塞进玩家NBT 原版再把玩家NBT保存)
         ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
             for (ServerWorld world : server.getWorlds()) {
                 if (world.getRegistryKey() == World.OVERWORLD) {
@@ -212,6 +178,7 @@ public class PlayerEventHandler {
                 }
             }
         });
+         */
 
         ServerTickEvents.END_SERVER_TICK.register(server -> JumpEventCondition.tick());
     }
@@ -255,7 +222,6 @@ public class PlayerEventHandler {
     private static void copyFormAndAbility(ServerPlayerEntity oldPlayer, ServerPlayerEntity newPlayer) {
         PlayerFormComponent oldComponent = RegPlayerFormComponent.PLAYER_FORM.get(oldPlayer);
         PlayerFormComponent newComponent = RegPlayerFormComponent.PLAYER_FORM.get(newPlayer);
-        newComponent.setCurrentForm(oldComponent.getCurrentForm());
         newComponent.setCurrentForm(oldComponent.getCurrentForm());
         FormAbilityManager.applyForm(newPlayer, newComponent.getCurrentForm());
     }

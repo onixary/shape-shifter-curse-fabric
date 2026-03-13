@@ -69,6 +69,7 @@ public class AdditionalPowers {
         register(HissPhantomPower.createFactory());
         register(BypassesLandingEffectsPower.createFactory());
         register(BypassesSteppingEffectsPower.createFactory());
+        register(FormCameraBobbingPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

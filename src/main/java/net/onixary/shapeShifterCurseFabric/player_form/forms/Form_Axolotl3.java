@@ -6,6 +6,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.v2.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.*;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.OneAnimController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.RushJumpAnimController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.SwimAnimController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.WithSneakAnimController;
@@ -32,6 +33,7 @@ public class Form_Axolotl3 extends PlayerFormBase {
     private static AnimationHolder anim_crawling_tool_swing = AnimationHolder.EMPTY;
     private static AnimationHolder anim_crawling_jump = AnimationHolder.EMPTY;
     private static AnimationHolder anim_rush_jump = AnimationHolder.EMPTY;
+    private static AnimationHolder anim_creative_flight = AnimationHolder.EMPTY;
 
 
     public AnimationHolder Anim_getFormAnimToPlay(PlayerAnimState currentState) {
@@ -46,6 +48,8 @@ public class Form_Axolotl3 extends PlayerFormBase {
                 return anim_crawling_idle;
             case ANIM_RUSH_JUMP:
                 return anim_rush_jump;
+            case ANIM_CREATIVE_FLY:
+                return anim_creative_flight;
 
             case ANIM_WALK:
                 return anim_walking;
@@ -89,6 +93,7 @@ public class Form_Axolotl3 extends PlayerFormBase {
         anim_jump = new AnimationHolder(new Identifier(MOD_ID, "axolotl_3_jump"), true);
         anim_idle = new AnimationHolder(new Identifier(MOD_ID, "axolotl_3_idle"), true);
         anim_rush_jump = new AnimationHolder(new Identifier(MOD_ID, "axolotl_3_rush_jump"), true, 1, 10);
+        anim_creative_flight = new AnimationHolder(new Identifier(MOD_ID, "axolotl_3_creative_flight"), true);
     }
 
     public static final AbstractAnimStateController SWIM_CONTROLLER = new SwimAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_2_swimming_idle")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_2_swimming")));
@@ -99,6 +104,7 @@ public class Form_Axolotl3 extends PlayerFormBase {
     public static final AbstractAnimStateController FALL_CONTROLLER = new WithSneakAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_3_jump")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_3_crawling_idle")));
     public static final AbstractAnimStateController ATTACK_CONTROLLER = new WithSneakAnimController(null, new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_2_crawling_attack_once")));
     public static final AbstractAnimStateController MINING_CONTROLLER = new WithSneakAnimController(null, new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_2_crawling_tool_swing")));
+    public static final AbstractAnimStateController FLYING_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_3_creative_flight")));
 
     @Override
     public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
@@ -121,6 +127,8 @@ public class Form_Axolotl3 extends PlayerFormBase {
                     return ATTACK_CONTROLLER;
                 case ANIM_STATE_MINING:
                     return MINING_CONTROLLER;
+                case ANIM_STATE_FLYING:
+                    return FLYING_CONTROLLER;
                 default:
                     return null;
             }
