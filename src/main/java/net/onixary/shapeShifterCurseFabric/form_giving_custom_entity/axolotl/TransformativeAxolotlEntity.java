@@ -7,6 +7,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AxolotlEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -15,6 +16,7 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
+import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
@@ -22,7 +24,7 @@ import net.onixary.shapeShifterCurseFabric.status_effects.TStatusApplier;
 
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_AXOLOTL_0_EFFECT;
 
-public class TransformativeAxolotlEntity extends AxolotlEntity {
+public class TransformativeAxolotlEntity extends AxolotlEntity implements Bucketable {
 
     public static float T_AXOLOTL_STATUS_CHANCE = 0.7f;
 
@@ -114,6 +116,10 @@ public class TransformativeAxolotlEntity extends AxolotlEntity {
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        return ActionResult.PASS;
+        return (ActionResult)Bucketable.tryBucket(player, hand, this).orElse(super.interactMob(player, hand));
+    }
+
+    public ItemStack getBucketItem() {
+        return new ItemStack(RegCustomItem.TRANSFORMATIVE_AXOLOTL_BUCKET);
     }
 }

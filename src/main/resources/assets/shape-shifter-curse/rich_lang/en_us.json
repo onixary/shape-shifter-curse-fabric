@@ -215,6 +215,7 @@
   "item.shape-shifter-curse.custom_bat_spawn_egg": ["Cursed Bat Spawn Egg"],
   "entity.shape-shifter-curse.t_axolotl": ["Cursed Axolotl"],
   "item.shape-shifter-curse.custom_axolotl_spawn_egg": ["Cursed Axolotl Spawn Egg"],
+  "item.shape-shifter-curse.transformative_axolotl_bucket": ["Cursed Axolotl Bucket"],
   "entity.shape-shifter-curse.t_ocelot": ["Cursed Ocelot"],
   "item.shape-shifter-curse.custom_ocelot_spawn_egg": ["Cursed Ocelot Spawn Egg"],
   "entity.shape-shifter-curse.t_wolf": ["Cursed Wandering Jackal Wraith"],

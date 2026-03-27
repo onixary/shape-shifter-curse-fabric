@@ -2,11 +2,14 @@ package net.onixary.shapeShifterCurseFabric.items;
 
 import dev.emi.trinkets.api.TrinketItem;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.entity.EntityType;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
@@ -68,6 +71,8 @@ public class RegCustomItem {
     public static final Item WITHERED_BANDAGE = register("withered_bandage", new WitheredBandageTrinket(new WitheredBandageTrinket.Settings()));
     public static final Item FOUNTAIN_BELT = register("fountain_belt", new FountainBeltTrinket(new FountainBeltTrinket.Settings()));
     public static final Item RESONANT_CORE = register("resonant_core", new ResonantCoreTrinket(new ResonantCoreTrinket.Settings()));
+
+    public static final Item TRANSFORMATIVE_AXOLOTL_BUCKET = register("transformative_axolotl_bucket", new EntityBucketItem(ShapeShifterCurseFabric.T_AXOLOTL, Fluids.WATER, SoundEvents.ITEM_BUCKET_EMPTY_AXOLOTL, (new Item.Settings()).maxCount(1)));
 
     public static final Item PATRON_FORM_ITEM = register("patron_form_item", new PatronFormItem(new Item.Settings()));
 
@@ -137,6 +142,7 @@ public class RegCustomItem {
                 entries.add(RESONANT_CORE);
                 entries.add(CUSTOM_TRINKET);
                 entries.add(FIRE_CHARM_PAPER);
+                entries.add(TRANSFORMATIVE_AXOLOTL_BUCKET);
                 // 方块物品注册
                 entries.add(MOONDUST_CRYSTAL_GRIT);
                 entries.addAll(buildAllPotions(
