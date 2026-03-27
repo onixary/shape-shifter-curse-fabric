@@ -427,5 +427,6 @@
 
     "text.autoconfig.shape-shifter-curse-client.category.Integration": "Integration",
     "text.autoconfig.shape-shifter-curse-client.option.enableBetterCombatFix": "Enable BetterCombat Fix",
-    "text.autoconfig.shape-shifter-curse-common.option.enableDebugCommand": "Enable debugging commands without permission restrictions (Do not enable on servers)"
+    "text.autoconfig.shape-shifter-curse-common.option.enableDebugCommand": "Enable debugging commands without permission restrictions (Do not enable on servers)",
+    "item.shape-shifter-curse.transformative_axolotl_bucket": "Cursed Axolotl Bucket"
 }
