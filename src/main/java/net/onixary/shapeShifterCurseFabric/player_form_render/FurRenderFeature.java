@@ -4,6 +4,7 @@ import dev.kosmx.playerAnim.api.TransformType;
 import dev.kosmx.playerAnim.api.layered.IAnimation;
 import dev.kosmx.playerAnim.core.util.Vec3f;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import net.minecraft.client.MinecraftClient;
@@ -19,6 +20,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.render.render_layer.FurColorGradientRenderLayer;
 import net.onixary.shapeShifterCurseFabric.render.render_layer.FurGradientRenderLayer;
 import org.joml.Quaternionf;
@@ -171,6 +173,12 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
         }
     }
 
+    public void ProcessExtraBone(OriginFurModel m, PlayerEntity player, String OriginFursBoneID, String AnimBoneID) {
+        m.resetBone(OriginFursBoneID);
+        m.translatePositionForBone(OriginFursBoneID, AnimSystem.getPlayerBone3DTransform(player, AnimBoneID, TransformType.POSITION, new Vec3f(0, 0, 0)));
+        m.setRotationForBone(OriginFursBoneID, AnimSystem.getPlayerBone3DTransform(player, AnimBoneID, TransformType.ROTATION, new Vec3f(0, 0, 0)));
+    }
+
     // 将修改模型提取出来 不知道为什么渲染模型和渲染模型发光会冲突(模型旋转会重置)
     private void ProcessModel(OriginFurModel m, PlayerEntityRenderer eR, T entity, float limbAngle, float limbDistance, float headYaw, float headPitch) {
         m.resetBone("bipedHead");
@@ -179,6 +187,24 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
         m.resetBone("bipedRightArm");
         m.resetBone("bipedLeftLeg");
         m.resetBone("bipedRightLeg");
+
+        if (entity instanceof PlayerEntity player) {
+            /*
+            "bones": {
+				"turf": {
+					"position": {
+						"0.0": {
+							"vector": [-8, 8, -16]
+						},
+						"0.3333": {
+							"vector": [8, -8, -16]
+						}
+					}
+				},
+			}
+             */
+            // this.ProcessExtraBone(m, player, "turf", "turf");
+        }
 
         m.setRotationForBone("bipedHead", ((IMojModelPart) (Object) eR.getModel().head).originfurs$getRotation());
         m.translatePositionForBone("bipedHead", ((IMojModelPart) (Object) eR.getModel().head).originfurs$getPosition());
