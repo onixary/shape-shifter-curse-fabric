@@ -1,6 +1,9 @@
 package net.onixary.shapeShifterCurseFabric.player_animation.v3;
 
+import dev.kosmx.playerAnim.api.TransformType;
 import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
+import dev.kosmx.playerAnim.core.util.Vec3f;
+import dev.kosmx.playerAnim.impl.IAnimatedPlayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
@@ -190,5 +193,9 @@ public class AnimSystem {
         }
         this.EndProcessAnimSystemData();
         return anim;
+    }
+
+    public static @NotNull Vec3f getPlayerBone3DTransform(PlayerEntity player, @NotNull String modelName, @NotNull TransformType type, @NotNull Vec3f DefaultValue) {
+        return ((IAnimatedPlayer) player).playerAnimator_getAnimation().get3DTransform(modelName, type, DefaultValue);
     }
 }
