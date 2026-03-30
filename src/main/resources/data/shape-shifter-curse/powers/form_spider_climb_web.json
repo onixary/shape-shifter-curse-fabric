@@ -1,0 +1,53 @@
+{
+  "type": "origins:multiple",
+  "climbing": {
+    "type": "origins:climbing",
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:in_block_anywhere",
+          "block_condition": {
+            "type": "origins:in_tag",
+            "tag": "origins:cobwebs"
+          }
+        }
+      ]
+    },
+    "hold_condition": {
+      "type": "origins:sneaking",
+      "inverted": true
+    }
+  },
+  "punch_through": {
+    "type": "origins:prevent_block_selection",
+    "block_condition": {
+      "type": "origins:in_tag",
+      "tag": "origins:cobwebs"
+    },
+    "condition": {
+      "type": "origins:sneaking",
+      "inverted": true
+    }
+  },
+  "sense": {
+    "type": "origins:entity_glow",
+    "entity_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:in_block_anywhere",
+          "block_condition": {
+            "type": "origins:in_tag",
+            "tag": "origins:cobwebs"
+          }
+        },
+        {
+          "type": "origins:entity_group",
+          "group": "arthropod",
+          "inverted": true
+        }
+      ]
+    }
+  }
+}
