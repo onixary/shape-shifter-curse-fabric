@@ -23,11 +23,13 @@ public class Form_Spider3 extends PlayerFormBase {
     public static final AnimUtils.AnimationHolderData ANIM_RUN =
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_3_run")).setSpeed(2.0f);
     public static final AnimUtils.AnimationHolderData ANIM_WALK =
-            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_3_walk"));
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_3_walk")).setSpeed(1.4f);
     public static final AnimUtils.AnimationHolderData ANIM_SNEAK_IDLE =
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_3_sneak_idle"));
     public static final AnimUtils.AnimationHolderData ANIM_JUMP =
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_3_jump"));
+    public static final AnimUtils.AnimationHolderData ANIM_FALL =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_3_fall"));
 
     public static final AbstractAnimStateController IDLE_CONTROLLER = 
         new WithSneakAnimController(ANIM_IDLE, ANIM_SNEAK_IDLE);
@@ -37,6 +39,8 @@ public class Form_Spider3 extends PlayerFormBase {
             new WithSneakAnimController(ANIM_RUN, ANIM_SNEAK_IDLE);
     public static final AbstractAnimStateController JUMP_CONTROLLER =
             new OneAnimController(ANIM_JUMP);
+    public static final AbstractAnimStateController FALL_CONTROLLER =
+            new OneAnimController(ANIM_FALL);
 
 
     @Override
@@ -56,6 +60,8 @@ public class Form_Spider3 extends PlayerFormBase {
                     return RUN_CONTROLLER;
                 case ANIM_STATE_JUMP:
                     return JUMP_CONTROLLER;
+                case ANIM_STATE_FALL:
+                    return FALL_CONTROLLER;
                 default:
                     return null;
             }
