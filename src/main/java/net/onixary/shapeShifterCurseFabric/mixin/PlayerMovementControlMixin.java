@@ -5,20 +5,18 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
-import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
-import net.onixary.shapeShifterCurseFabric.additional_power.KeepSneakingPower;
-import net.onixary.shapeShifterCurseFabric.additional_power.SprintingStateTracker;
+import net.onixary.shapeShifterCurseFabric.additional_power.*;
 import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
-import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.List;
 
 @Mixin(PlayerEntity.class)
 public class PlayerMovementControlMixin {
@@ -166,5 +164,16 @@ public class PlayerMovementControlMixin {
     private void cleanupSprintingState(CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity) (Object) this;
         SprintingStateTracker.removePlayer(player);
+    }
+
+    @ModifyVariable(method = "slowMovement", at = @At("HEAD"), ordinal = 0, argsOnly = true)
+    private Vec3d SlowdownPercentMixin(Vec3d multiplier) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        List<SlowdownPercentPower> slowdownPower = PowerHolderComponent.getPowers(player, SlowdownPercentPower.class);
+        float slowdownPercent = 1.0f;
+        for (SlowdownPercentPower power : slowdownPower) {
+            slowdownPercent *= power.Multiplier;
+        }
+        return multiplier.multiply(slowdownPercent);
     }
 }
