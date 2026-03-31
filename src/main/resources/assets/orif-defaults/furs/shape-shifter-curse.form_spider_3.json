@@ -1,0 +1,21 @@
+{
+  "model": "orif-defaults:geo/form_spider_3.geo.json",
+  "texture": "orif-defaults:textures/form_spider_3/form_spider_3.png",
+  "hidden": [
+    "leftLeg",
+    "rightLeg",
+    "rightPants",
+    "leftPants",
+    "leftSleeve",
+    "rightSleeve",
+    "leftArm",
+    "rightArm",
+    "body",
+    "jacket",
+    "head",
+    "hat"
+  ],
+  "tail_chain": {
+    "tail": [0]
+  }
+}

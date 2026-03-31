@@ -1,0 +1,9 @@
+{
+    "powers": [],
+    "icon": {
+        "item": "minecraft:player_head"
+    },
+    "order": 0,
+    "unchoosable": true,
+    "impact": 0
+}

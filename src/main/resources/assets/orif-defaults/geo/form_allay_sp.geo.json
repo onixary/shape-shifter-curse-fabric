@@ -146,11 +146,11 @@
 					"pivot": [5, 22, 0]
 				},
 				{
-					"name": "bipedRightLeg",
+					"name": "bipedLeftLeg",
 					"pivot": [-2, 12, 0]
 				},
 				{
-					"name": "bipedLeftLeg",
+					"name": "bipedRightLeg",
 					"pivot": [2, 12, 0]
 				}
 			]

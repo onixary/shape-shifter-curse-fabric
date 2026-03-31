@@ -110,7 +110,7 @@
 					]
 				},
 				{
-					"name": "bipedRightLeg",
+					"name": "bipedLeftLeg",
 					"pivot": [-2, 12, 0],
 					"cubes": [
 						{"origin": [-3.9, 6, -2], "size": [4, 6, 4], "uv": [48, 0]},
@@ -122,7 +122,7 @@
 					]
 				},
 				{
-					"name": "bipedLeftLeg",
+					"name": "bipedRightLeg",
 					"pivot": [2, 12, 0],
 					"cubes": [
 						{"origin": [0.3, 1, -0.6], "size": [3, 6, 3], "pivot": [2.4, 12, 0.4], "rotation": [-5, 0, 0], "uv": [51, 7], "mirror": true},

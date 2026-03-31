@@ -1,0 +1,11 @@
+{
+    "powers": [
+      "shape-shifter-curse:form_spider_3_scale"
+    ],
+    "icon": {
+        "item": "minecraft:player_head"
+    },
+    "order": 0,
+    "unchoosable": true,
+    "impact": 0
+}

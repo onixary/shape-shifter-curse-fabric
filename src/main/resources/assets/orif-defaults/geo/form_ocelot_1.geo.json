@@ -115,7 +115,7 @@
 					]
 				},
 				{
-					"name": "bipedRightLeg",
+					"name": "bipedLeftLeg",
 					"pivot": [-2, 12, 0],
 					"cubes": [
 						{"origin": [-2.5, 11.49144, 1.16947], "size": [2, 1, 1], "pivot": [-1, 11.99144, 1.66947], "rotation": [0, 0, -90], "uv": [38, 7]},
@@ -127,7 +127,7 @@
 					]
 				},
 				{
-					"name": "bipedLeftLeg",
+					"name": "bipedRightLeg",
 					"pivot": [2, 12, 0],
 					"cubes": [
 						{"origin": [0.8, 12.29144, 0.36947], "size": [4, 0.7, 1], "pivot": [0.3, 12.49144, 0.86947], "rotation": [0, -7.5, 90], "uv": [44, 8], "mirror": true},

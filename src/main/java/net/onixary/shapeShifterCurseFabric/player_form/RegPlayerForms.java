@@ -51,6 +51,11 @@ public class RegPlayerForms {
     public static PlayerFormBase ANUBIS_WOLF_1 = registerPlayerForm(new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "anubis_wolf_1")).setPhase(PlayerFormPhase.PHASE_1));
     public static PlayerFormBase ANUBIS_WOLF_2 = registerPlayerForm(new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "anubis_wolf_2")).setPhase(PlayerFormPhase.PHASE_2));
     public static PlayerFormBase ANUBIS_WOLF_3 = registerPlayerForm(new Form_AnubisWolf3(new Identifier(ShapeShifterCurseFabric.MOD_ID, "anubis_wolf_3")).setPhase(PlayerFormPhase.PHASE_3));
+    // Spider
+    public static PlayerFormBase SPIDER_0 = registerPlayerForm(new Form_Spider0(new Identifier(ShapeShifterCurseFabric.MOD_ID, "spider_0")).setPhase(PlayerFormPhase.PHASE_0));
+    public static PlayerFormBase SPIDER_1 = registerPlayerForm(new Form_Spider1(new Identifier(ShapeShifterCurseFabric.MOD_ID, "spider_1")).setPhase(PlayerFormPhase.PHASE_1));
+    public static PlayerFormBase SPIDER_2 = registerPlayerForm(new Form_Spider2(new Identifier(ShapeShifterCurseFabric.MOD_ID, "spider_2")).setPhase(PlayerFormPhase.PHASE_2));
+    public static PlayerFormBase SPIDER_3 = registerPlayerForm(new Form_Spider3(new Identifier(ShapeShifterCurseFabric.MOD_ID, "spider_3")).setPhase(PlayerFormPhase.PHASE_3));
     // ALLAY_SP
     public static PlayerFormBase ALLAY_SP = registerPlayerForm(new Form_Allay(new Identifier(ShapeShifterCurseFabric.MOD_ID, "allay_sp")).setPhase(PlayerFormPhase.PHASE_SP));
     // FERAL_CAT_SP
@@ -84,6 +89,7 @@ public class RegPlayerForms {
     public static PlayerFormGroup ALLAY_FORM = registerPlayerFormGroup(new PlayerFormGroup(new Identifier(ShapeShifterCurseFabric.MOD_ID, "allay_form")).addForm(ALLAY_SP, 5));
     public static PlayerFormGroup FERAL_CAT_FORM = registerPlayerFormGroup(new PlayerFormGroup(new Identifier(ShapeShifterCurseFabric.MOD_ID, "feral_cat_form")).addForm(FERAL_CAT_SP, 5));
     public static PlayerFormGroup ANUBIS_WOLF_FORM = registerPlayerFormGroup(new PlayerFormGroup(new Identifier(ShapeShifterCurseFabric.MOD_ID, "anubis_wolf_form")).addForm(ANUBIS_WOLF_0, 0).addForm(ANUBIS_WOLF_1, 1).addForm(ANUBIS_WOLF_2, 2).addForm(ANUBIS_WOLF_3, 3));
+    public static PlayerFormGroup SPIDER_FORM = registerPlayerFormGroup(new PlayerFormGroup(new Identifier(ShapeShifterCurseFabric.MOD_ID, "spider_form")).addForm(SPIDER_0, 0).addForm(SPIDER_1, 1).addForm(SPIDER_2, 2).addForm(SPIDER_3, 3));
 
 
     /* 未支持数据包时代的占位形态 现在可以使用数据添加形态了

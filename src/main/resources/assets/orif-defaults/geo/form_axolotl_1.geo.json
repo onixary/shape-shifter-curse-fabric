@@ -132,7 +132,7 @@
 					]
 				},
 				{
-					"name": "bipedRightLeg",
+					"name": "bipedLeftLeg",
 					"pivot": [-2, 12, 0],
 					"cubes": [
 						{"origin": [-2.45818, -0.02527, -2.19538], "size": [1, 7.1, 1.6], "pivot": [-1.95818, 2.22473, -1.39538], "rotation": [-5, 0, 0], "uv": [12, 25], "mirror": true},
@@ -142,7 +142,7 @@
 					]
 				},
 				{
-					"name": "bipedLeftLeg",
+					"name": "bipedRightLeg",
 					"pivot": [2, 12, 0],
 					"cubes": [
 						{"origin": [2.05818, 1.67473, -3.59538], "size": [0, 5.1, 1.6], "pivot": [1.55818, 1.92473, -2.79538], "rotation": [-10, 0, 0], "uv": [2, 36]},

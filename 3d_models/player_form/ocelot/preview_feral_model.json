@@ -11,25 +11,25 @@
 				},
 				"bipedBody": {
 					"rotation": {
-						"vector": [-90, 0, 0]
+						"vector": [90, 0, 0]
 					}
 				},
 				"bipedLeftArm": {
 					"position": {
-						"vector": [1.2, 2, -3]
+						"vector": [-1.2, 2, -3]
 					}
 				},
 				"bipedRightArm": {
 					"position": {
-						"vector": [-1.2, 2, -3]
+						"vector": [1.2, 2, -3]
 					}
 				},
-				"bipedRightLeg": {
+				"bipedLeftLeg": {
 					"position": {
 						"vector": [0, 13, -16]
 					}
 				},
-				"bipedLeftLeg": {
+				"bipedRightLeg": {
 					"position": {
 						"vector": [0, 13, -16]
 					}

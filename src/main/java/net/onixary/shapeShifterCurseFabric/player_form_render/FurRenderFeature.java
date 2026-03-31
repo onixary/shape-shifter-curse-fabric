@@ -203,7 +203,22 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
 				},
 			}
              */
-            // this.ProcessExtraBone(m, player, "turf", "turf");
+//            bipedRightHindLeg: extra right hind leg
+//            bipedLeftHindLeg: extra left hind leg
+//            bipedRightExtraArm: extra right arm
+//            bipedLeftExtraArm: extra left arm
+//            tailBase: the root bone of the tail, used for animations such as curling up
+//            wingLeftBase: the root bone of the left wing
+//            wingRightBase: the root bone of the right wing
+//            The animation bone names are consistent with the model bone names
+
+            this.ProcessExtraBone(m, player, "bipedRightHindLeg", "bipedRightHindLeg");
+            this.ProcessExtraBone(m, player, "bipedLeftHindLeg", "bipedLeftHindLeg");
+            this.ProcessExtraBone(m, player, "bipedRightExtraArm", "bipedRightExtraArm");
+            this.ProcessExtraBone(m, player, "bipedLeftExtraArm", "bipedLeftExtraArm");
+            this.ProcessExtraBone(m, player, "tailBase", "tailBase");
+            this.ProcessExtraBone(m, player, "wingLeftBase", "wingLeftBase");
+            this.ProcessExtraBone(m, player, "wingRightBase", "wingRightBase");
         }
 
         m.setRotationForBone("bipedHead", ((IMojModelPart) (Object) eR.getModel().head).originfurs$getRotation());
@@ -211,12 +226,18 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
         m.translatePositionForBone("bipedBody", ((IMojModelPart) (Object) eR.getModel().body).originfurs$getPosition());
         m.translatePositionForBone("bipedLeftArm", ((IMojModelPart) (Object) eR.getModel().leftArm).originfurs$getPosition());
         m.translatePositionForBone("bipedRightArm", ((IMojModelPart) (Object) eR.getModel().rightArm).originfurs$getPosition());
-        m.translatePositionForBone("bipedLeftLeg", ((IMojModelPart) (Object) eR.getModel().rightLeg).originfurs$getPosition());
-        m.translatePositionForBone("bipedRightLeg", ((IMojModelPart) (Object) eR.getModel().leftLeg).originfurs$getPosition());
+
+        // 26.03.21 Fix inverted leg naming
+//        m.translatePositionForBone("bipedLeftLeg", ((IMojModelPart) (Object) eR.getModel().rightLeg).originfurs$getPosition());
+//        m.translatePositionForBone("bipedRightLeg", ((IMojModelPart) (Object) eR.getModel().leftLeg).originfurs$getPosition());
+        m.translatePositionForBone("bipedRightLeg", ((IMojModelPart) (Object) eR.getModel().rightLeg).originfurs$getPosition());
+        m.translatePositionForBone("bipedLeftLeg", ((IMojModelPart) (Object) eR.getModel().leftLeg).originfurs$getPosition());
         m.translatePositionForBone("bipedLeftArm", new Vec3d(5, 2, 0));
         m.translatePositionForBone("bipedRightArm", new Vec3d(-5, 2, 0));
-        m.translatePositionForBone("bipedLeftLeg", new Vec3d(-2, 12, 0));
-        m.translatePositionForBone("bipedRightLeg", new Vec3d(2, 12, 0));
+//        m.translatePositionForBone("bipedLeftLeg", new Vec3d(-2, 12, 0));
+//        m.translatePositionForBone("bipedRightLeg", new Vec3d(2, 12, 0));
+        m.translatePositionForBone("bipedLeftLeg", new Vec3d(2, 12, 0));
+        m.translatePositionForBone("bipedRightLeg", new Vec3d(-2, 12, 0));
         m.setRotationForBone("bipedBody", ((IMojModelPart) (Object) eR.getModel().body).originfurs$getRotation());
 
         m.setRotationForTailBones(limbAngle, limbDistance, entity.age, currentTailDragAmount, tailDragAmountVertical);
@@ -226,12 +247,15 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
         m.invertRotForPart("bipedBody", false, true, false);
         m.setRotationForBone("bipedLeftArm", ((IMojModelPart) (Object) eR.getModel().leftArm).originfurs$getRotation());
         m.setRotationForBone("bipedRightArm", ((IMojModelPart) (Object) eR.getModel().rightArm).originfurs$getRotation());
-        m.setRotationForBone("bipedLeftLeg", ((IMojModelPart) (Object) eR.getModel().rightLeg).originfurs$getRotation());
-        m.setRotationForBone("bipedRightLeg", ((IMojModelPart) (Object) eR.getModel().leftLeg).originfurs$getRotation());
+//        m.setRotationForBone("bipedLeftLeg", ((IMojModelPart) (Object) eR.getModel().rightLeg).originfurs$getRotation());
+//        m.setRotationForBone("bipedRightLeg", ((IMojModelPart) (Object) eR.getModel().leftLeg).originfurs$getRotation());
+        m.setRotationForBone("bipedRightLeg", ((IMojModelPart) (Object) eR.getModel().rightLeg).originfurs$getRotation());
+        m.setRotationForBone("bipedLeftLeg", ((IMojModelPart) (Object) eR.getModel().leftLeg).originfurs$getRotation());
         m.invertRotForPart("bipedHead", false, true, true);
         m.invertRotForPart("bipedRightArm", false, true, true);
         m.invertRotForPart("bipedLeftArm", false, true, true);
         m.invertRotForPart("bipedRightLeg", false, true, true);
         m.invertRotForPart("bipedLeftLeg", false, true, true);
+
     }
 }
