@@ -3,7 +3,10 @@ package net.onixary.shapeShifterCurseFabric.player_form_render;
 import dev.kosmx.playerAnim.api.TransformType;
 import dev.kosmx.playerAnim.api.layered.IAnimation;
 import dev.kosmx.playerAnim.core.util.Vec3f;
+import mod.azure.azurelib.cache.object.GeoBone;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.model.Model;
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
@@ -173,10 +176,17 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
         }
     }
 
-    public void ProcessExtraBone(OriginFurModel m, PlayerEntity player, String OriginFursBoneID, String AnimBoneID) {
-        m.resetBone(OriginFursBoneID);
+    public void ProcessExtraBone(OriginFurModel m, PlayerEntity player, String OriginFursBoneID, String AnimBoneID, BipedEntityModel rootModel) {
+        GeoBone bone =  m.resetBone(OriginFursBoneID);
+        m.setPositionForBone(OriginFursBoneID, ((IMojModelPart) (Object) rootModel.body).originfurs$getPosition());
+        // m.setRotationForBone(OriginFursBoneID, ((IMojModelPart) (Object) rootModel.body).originfurs$getRotation());
         m.translatePositionForBone(OriginFursBoneID, AnimSystem.getPlayerBone3DTransform(player, AnimBoneID, TransformType.POSITION, new Vec3f(0, 0, 0)));
-        m.setRotationForBone(OriginFursBoneID, AnimSystem.getPlayerBone3DTransform(player, AnimBoneID, TransformType.ROTATION, new Vec3f(0, 0, 0)));
+        m.translateRotationForBone(OriginFursBoneID, AnimSystem.getPlayerBone3DTransform(player, AnimBoneID, TransformType.ROTATION, new Vec3f(0, 0, 0)));
+        if (rootModel.sneaking) {
+            // 强行还原法 我暂时没辙了 得翻原版潜行变换算法
+            // 潜行跳跃还有问题 还得修
+            m.translatePositionForBone(OriginFursBoneID, new Vec3f(0, 4.2f, -10.0f));
+        }
     }
 
     // 将修改模型提取出来 不知道为什么渲染模型和渲染模型发光会冲突(模型旋转会重置)
@@ -203,22 +213,14 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
 				},
 			}
              */
-//            bipedRightHindLeg: extra right hind leg
-//            bipedLeftHindLeg: extra left hind leg
-//            bipedRightExtraArm: extra right arm
-//            bipedLeftExtraArm: extra left arm
-//            tailBase: the root bone of the tail, used for animations such as curling up
-//            wingLeftBase: the root bone of the left wing
-//            wingRightBase: the root bone of the right wing
-//            The animation bone names are consistent with the model bone names
 
-            this.ProcessExtraBone(m, player, "bipedRightHindLeg", "bipedRightHindLeg");
-            this.ProcessExtraBone(m, player, "bipedLeftHindLeg", "bipedLeftHindLeg");
-            this.ProcessExtraBone(m, player, "bipedRightExtraArm", "bipedRightExtraArm");
-            this.ProcessExtraBone(m, player, "bipedLeftExtraArm", "bipedLeftExtraArm");
-            this.ProcessExtraBone(m, player, "tailBase", "tailBase");
-            this.ProcessExtraBone(m, player, "wingLeftBase", "wingLeftBase");
-            this.ProcessExtraBone(m, player, "wingRightBase", "wingRightBase");
+            this.ProcessExtraBone(m, player, "bipedRightHindLeg", "bipedRightHindLeg", eR.getModel());
+            this.ProcessExtraBone(m, player, "bipedLeftHindLeg", "bipedLeftHindLeg", eR.getModel());
+            this.ProcessExtraBone(m, player, "bipedRightExtraArm", "bipedRightExtraArm", eR.getModel());
+            this.ProcessExtraBone(m, player, "bipedLeftExtraArm", "bipedLeftExtraArm", eR.getModel());
+            this.ProcessExtraBone(m, player, "tailBase", "tailBase", eR.getModel());
+            this.ProcessExtraBone(m, player, "wingLeftBase", "wingLeftBase", eR.getModel());
+            this.ProcessExtraBone(m, player, "wingRightBase", "wingRightBase", eR.getModel());
         }
 
         m.setRotationForBone("bipedHead", ((IMojModelPart) (Object) eR.getModel().head).originfurs$getRotation());
@@ -227,15 +229,10 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
         m.translatePositionForBone("bipedLeftArm", ((IMojModelPart) (Object) eR.getModel().leftArm).originfurs$getPosition());
         m.translatePositionForBone("bipedRightArm", ((IMojModelPart) (Object) eR.getModel().rightArm).originfurs$getPosition());
 
-        // 26.03.21 Fix inverted leg naming
-//        m.translatePositionForBone("bipedLeftLeg", ((IMojModelPart) (Object) eR.getModel().rightLeg).originfurs$getPosition());
-//        m.translatePositionForBone("bipedRightLeg", ((IMojModelPart) (Object) eR.getModel().leftLeg).originfurs$getPosition());
         m.translatePositionForBone("bipedRightLeg", ((IMojModelPart) (Object) eR.getModel().rightLeg).originfurs$getPosition());
         m.translatePositionForBone("bipedLeftLeg", ((IMojModelPart) (Object) eR.getModel().leftLeg).originfurs$getPosition());
         m.translatePositionForBone("bipedLeftArm", new Vec3d(5, 2, 0));
         m.translatePositionForBone("bipedRightArm", new Vec3d(-5, 2, 0));
-//        m.translatePositionForBone("bipedLeftLeg", new Vec3d(-2, 12, 0));
-//        m.translatePositionForBone("bipedRightLeg", new Vec3d(2, 12, 0));
         m.translatePositionForBone("bipedLeftLeg", new Vec3d(2, 12, 0));
         m.translatePositionForBone("bipedRightLeg", new Vec3d(-2, 12, 0));
         m.setRotationForBone("bipedBody", ((IMojModelPart) (Object) eR.getModel().body).originfurs$getRotation());
@@ -247,8 +244,6 @@ public class FurRenderFeature <T extends LivingEntity, M extends BipedEntityMode
         m.invertRotForPart("bipedBody", false, true, false);
         m.setRotationForBone("bipedLeftArm", ((IMojModelPart) (Object) eR.getModel().leftArm).originfurs$getRotation());
         m.setRotationForBone("bipedRightArm", ((IMojModelPart) (Object) eR.getModel().rightArm).originfurs$getRotation());
-//        m.setRotationForBone("bipedLeftLeg", ((IMojModelPart) (Object) eR.getModel().rightLeg).originfurs$getRotation());
-//        m.setRotationForBone("bipedRightLeg", ((IMojModelPart) (Object) eR.getModel().leftLeg).originfurs$getRotation());
         m.setRotationForBone("bipedRightLeg", ((IMojModelPart) (Object) eR.getModel().rightLeg).originfurs$getRotation());
         m.setRotationForBone("bipedLeftLeg", ((IMojModelPart) (Object) eR.getModel().leftLeg).originfurs$getRotation());
         m.invertRotForPart("bipedHead", false, true, true);
