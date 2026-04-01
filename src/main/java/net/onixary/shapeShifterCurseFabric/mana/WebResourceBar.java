@@ -1,14 +1,20 @@
 package net.onixary.shapeShifterCurseFabric.mana;
 
+import io.github.apace100.apoli.component.PowerHolderComponent;
+import io.github.apace100.apoli.data.ApoliDataTypes;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.additional_power.ChargePower;
 import net.onixary.shapeShifterCurseFabric.util.UIPositionUtils;
 
 public class WebResourceBar implements IManaRender {
+    private ChargePower powerTemp;
+    private int powerTempTimer = 0;
+
     private static final MinecraftClient mc = MinecraftClient.getInstance();
     private static final Identifier BarTexID = ShapeShifterCurseFabric.identifier("textures/gui/web_bar.png");
 
@@ -25,7 +31,20 @@ public class WebResourceBar implements IManaRender {
     }
 
     public int getChargeLevel() {
-        // TODO 之后写完蓄力power后补上
+        // 每帧查一次有点费性能 还是每60帧查一次吧(渲染帧)
+        if (powerTempTimer > 60) {
+            powerTemp = null;
+            for (ChargePower power : PowerHolderComponent.getPowers(mc.player, ChargePower.class)) {
+                if (ShapeShifterCurseFabric.identifier("web_charge").equals(power.chargePowerID)) {
+                    powerTemp = power;
+                }
+            }
+            powerTempTimer = 0;
+        }
+        powerTempTimer++;
+        if (powerTemp != null) {
+            return powerTemp.nowTier;
+        }
         return 0;
     }
 

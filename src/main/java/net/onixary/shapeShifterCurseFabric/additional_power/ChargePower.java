@@ -8,8 +8,10 @@ import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.apoli.power.factory.action.ActionFactory;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
+import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 import java.util.ArrayList;
@@ -55,10 +57,11 @@ public class ChargePower extends Power implements Active {
 
     public static final int TierCount = 5;
 
-    public Key ActiveKey;
-    public int ChargeTime;
-    public ArrayList<ChargeTier> ChargeTierList;
+    public @Nullable Identifier chargePowerID;
     public int nowTier = 0;
+    public Key ActiveKey;
+    public int ChargeTime = 0;
+    public ArrayList<ChargeTier> ChargeTierList;
     public int nowCooldown = 0;
 
     public ChargePower(PowerType<?> type, LivingEntity entity, SerializableData.Instance data) {
@@ -72,6 +75,8 @@ public class ChargePower extends Power implements Active {
                 break;
             }
         }
+        this.chargePowerID = data.get("charge_power_id");
+        this.setKey(data.get("key"));
     }
 
     @Override
@@ -81,6 +86,7 @@ public class ChargePower extends Power implements Active {
         } else {
             nowCooldown = 0;
         }
+        ChargeTime++;
         for (ChargeTier chargeTier : ChargeTierList) {
             chargeTier.tick(this);
         }
@@ -94,6 +100,7 @@ public class ChargePower extends Power implements Active {
         for (ChargeTier chargeTier : ChargeTierList) {
             chargeTier.use(this);
         }
+        ChargeTime = 0;
     }
 
     @Override
@@ -108,6 +115,7 @@ public class ChargePower extends Power implements Active {
 
     public static PowerFactory<?> createFactory() {
         SerializableData factoryJson = new SerializableData()
+                .add("charge_power_id", SerializableDataTypes.IDENTIFIER, null)
                 .add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, new Active.Key());
         for (int index = 0; index < TierCount; index++) {
             factoryJson
