@@ -1,0 +1,26 @@
+{
+    "type": "origins:climbing",
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:collided_horizontally"
+            },
+            {
+                "type": "origins:or",
+                "conditions": [
+                    {
+                        "type": "origins:block_collision",
+                        "offset_x": 0.1,
+                        "offset_z": 0.1
+                    },
+                    {
+                        "type": "origins:block_collision",
+                        "offset_x": -0.1,
+                        "offset_z": -0.1
+                    }
+                ]
+            }
+        ]
+    }
+}

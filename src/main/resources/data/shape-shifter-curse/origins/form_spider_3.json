@@ -1,6 +1,7 @@
 {
     "powers": [
-      "shape-shifter-curse:form_spider_3_scale"
+      "shape-shifter-curse:form_spider_3_scale",
+      "shape-shifter-curse:form_spider_3_climb"
     ],
     "icon": {
         "item": "minecraft:player_head"
