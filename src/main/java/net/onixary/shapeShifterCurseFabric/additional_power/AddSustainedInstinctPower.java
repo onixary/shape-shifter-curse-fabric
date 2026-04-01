@@ -34,7 +34,7 @@ public class AddSustainedInstinctPower extends Power {
         this.value = data.getFloat("value");
         this.duration = data.getInt("duration");
 
-        this.setTicking();
+        this.setTicking(true);
 
 //        InstinctEffectType effectType = null;
 //        try {

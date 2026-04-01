@@ -71,6 +71,7 @@ public class AdditionalPowers {
         register(BypassesSteppingEffectsPower.createFactory());
         register(FormCameraBobbingPower.createFactory());
         register(SlowdownPercentPower.createFactory());
+        register(ChargePower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {
