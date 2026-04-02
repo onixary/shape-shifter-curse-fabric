@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Active;
 import io.github.apace100.apoli.power.Power;
@@ -11,6 +12,8 @@ import io.github.apace100.calio.data.SerializableDataTypes;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
@@ -63,6 +66,7 @@ public class ChargePower extends Power implements Active {
                             this.chargeCompleteAction.accept(power.entity);
                         }
                         power.nowTier = this.tier;
+                        power.updateTier();
                     }
                 }
             }
@@ -97,6 +101,7 @@ public class ChargePower extends Power implements Active {
 
     public @Nullable Identifier chargePowerID = null;
     public int nowTier = 0;
+    public int renderTier = 0;
     public Key ActiveKey;
     public int ChargeTime = 0;
     public ArrayList<ChargeTier> ChargeTierList = new ArrayList<>();
@@ -137,6 +142,7 @@ public class ChargePower extends Power implements Active {
             }
             this.nowTier = 0;
             this.ChargeTime = 0;
+            this.updateTier();
         }
         nowTick++;
         for (ChargeTier chargeTier : ChargeTierList) {
@@ -162,6 +168,21 @@ public class ChargePower extends Power implements Active {
     @Override
     public void setKey(Key key) {
         this.ActiveKey = key;
+    }
+
+    public void updateTier() {
+        this.renderTier = this.nowTier;
+        PowerHolderComponent.syncPower(this.entity, this.getType());
+    }
+
+    public NbtElement toTag() {
+        NbtCompound tag = new NbtCompound();
+        tag.putInt("renderTier", this.renderTier);
+        return tag;
+    }
+
+    public void fromTag(NbtElement tag) {
+        this.renderTier = ((NbtCompound) tag).getInt("renderTier");
     }
 
     public static PowerFactory<?> createFactory() {

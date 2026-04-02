@@ -37,13 +37,14 @@ public class WebResourceBar implements IManaRender {
             for (ChargePower power : PowerHolderComponent.getPowers(mc.player, ChargePower.class)) {
                 if (ShapeShifterCurseFabric.identifier("web_charge").equals(power.chargePowerID)) {
                     powerTemp = power;
+                    break;
                 }
             }
             powerTempTimer = 0;
         }
         powerTempTimer++;
         if (powerTemp != null) {
-            return powerTemp.nowTier;
+            return powerTemp.renderTier;
         }
         return 0;
     }
