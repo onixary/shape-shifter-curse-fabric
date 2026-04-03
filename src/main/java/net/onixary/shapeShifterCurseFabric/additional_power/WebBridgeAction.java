@@ -81,6 +81,11 @@ public class WebBridgeAction {
         if (direction == Direction.UP || direction == Direction.DOWN) {
             return;
         }
+        for (int k = -config.Width; k <= config.Width; k++) {
+            for (int m = -config.Width; m <= config.Width; m++) {
+                SetWebBlock(world, pos.add(k, 0, m), WebBlock);
+            }
+        }
         for (int i = 0; i < config.Length; i++) {
             SetWebBlock(world, NowPos, WebBlock);
             TempPos = NowPos;
