@@ -44,8 +44,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
+import static net.onixary.shapeShifterCurseFabric.util.ModTags.LIKE_SCAFFOLDING_TAG;
+
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
+
+
     @Shadow public abstract float getMovementSpeed();
 
     @Shadow protected abstract void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition);
@@ -200,5 +204,12 @@ public abstract class LivingEntityMixin {
             return g * totalSpeedModifier;
         }
         return g;
+    }
+
+    @Inject(method = "isHoldingOntoLadder", at = @At("HEAD"), cancellable = true)
+    private void isHoldingOntoLadder(CallbackInfoReturnable<Boolean> cir) {
+        if (((LivingEntity) (Object) this).getBlockStateAtPos().isIn(LIKE_SCAFFOLDING_TAG)) {
+            cir.setReturnValue(false);
+        }
     }
 }

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "shape-shifter-curse:block/temp_web_bridge_0"
+    },
+    "age=1": {
+      "model": "shape-shifter-curse:block/temp_web_bridge_1"
+    },
+    "age=2": {
+      "model": "shape-shifter-curse:block/temp_web_bridge_2"
+    },
+    "age=3": {
+      "model": "shape-shifter-curse:block/temp_web_bridge_3"
+    }
+  }
+}

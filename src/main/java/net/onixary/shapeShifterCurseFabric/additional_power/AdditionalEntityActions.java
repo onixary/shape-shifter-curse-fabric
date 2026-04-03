@@ -18,6 +18,7 @@ public class AdditionalEntityActions {
         ManaUtilsApoli.registerAction(AdditionalEntityActions::registerAction, AdditionalEntityActions::registerBIAction);
         FireArrowAction.registerAction(AdditionalEntityActions::registerAction, AdditionalEntityActions::registerBIAction);
         registerAction(SpawnParticlesInCircleAction.getFactory());
+        WebBridgeAction.registerAction(AdditionalEntityActions::registerAction, AdditionalEntityActions::registerBIAction);
     }
 
     public static ActionFactory<Entity> registerAction(ActionFactory<Entity> actionFactory) {

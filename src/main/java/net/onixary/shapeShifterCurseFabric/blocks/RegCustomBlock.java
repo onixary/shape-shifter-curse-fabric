@@ -14,6 +14,13 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 public final class RegCustomBlock {
     public static final Block MOONDUST_CRYSTAL_GRIT = register("moondust_crystal_grit", new Block(AbstractBlock.Settings.copy(Blocks.GRAVEL).mapColor(MapColor.PURPLE).strength(0.6f, 0.6f).sounds(BlockSoundGroup.GRAVEL)));
+    // TODO TEMP_WEB_BRIDGE 仅在测试时有物品 发布时记得用 registerWithOutItem
+    public static final Block TEMP_WEB_BRIDGE = register("temp_web_bridge", new TempWebBridgeBlock(AbstractBlock.Settings.copy(Blocks.COBWEB).ticksRandomly().noCollision().dynamicBounds()));
+
+    private static <T extends Block> T registerWithOutItem(String path, T block) {
+        Registry.register(Registries.BLOCK, new Identifier(ShapeShifterCurseFabric.MOD_ID, path), block);
+        return block;
+    }
 
     private static <T extends Block> T register(String path, T block) {
         Registry.register(Registries.BLOCK, new Identifier(ShapeShifterCurseFabric.MOD_ID, path), block);
