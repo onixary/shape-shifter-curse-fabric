@@ -1,13 +1,25 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
+import io.github.apace100.apoli.data.ApoliDataTypes;
+import io.github.apace100.apoli.power.factory.action.ActionFactory;
+import io.github.apace100.calio.data.SerializableData;
+import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.Pair;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
+import net.onixary.shapeShifterCurseFabric.entity.projectile.WebBullet;
+
+import java.util.function.Consumer;
 
 public class WebBridgeAction {
-    public record WebLadderConfig(int SideBlockNum, int BottomBlockNum, int TopBlockNum, boolean LargerLadder, int LargerLadderCount) {}
+    public record WebLadderConfig(int SideBlockNum, int BottomBlockNum, int TopBlockNum, boolean LargerLadder, float LargerLadderCountPercent) {}
     public record WebBridgeConfig(int Length, int Width) {}
 
     public static boolean SetWebBlock(World world, BlockPos pos, Block WebBlock) {
@@ -26,7 +38,6 @@ public class WebBridgeAction {
         Direction LadderDirection = null;
         int Length = 0;
         boolean LargerLadder = config.LargerLadder;
-        int LargerLadderCount = config.LargerLadderCount;
 
         switch (direction) {
             case UP -> {
@@ -45,6 +56,8 @@ public class WebBridgeAction {
                 Length = config.SideBlockNum;
             }
         }
+
+        int LargerLadderCount = (int)(config.LargerLadderCountPercent * Length);
 
         for (int i = 0; i < Length; i++) {
             if (!SetWebBlock(world, NowPos, LadderBlock)) {
@@ -84,5 +97,36 @@ public class WebBridgeAction {
             }
             NowPos = NowPos.offset(direction);
         }
+    }
+
+    public static void registerAction(Consumer<ActionFactory<Entity>> ActionRegister, Consumer<ActionFactory<Pair<Entity, Entity>>> BIActionRegister) {
+        ActionRegister.accept(new ActionFactory<>(
+                ShapeShifterCurseFabric.identifier("web_bridge"),
+                new SerializableData()
+                        .add("web_bridge_length", SerializableDataTypes.INT, 16)
+                        .add("web_bridge_width", SerializableDataTypes.INT, 0),
+                (data, entity) -> {
+                    BlockPos pos = entity.getBlockPos().down();
+                    Direction direction = entity.getHorizontalFacing();
+                    BuildWebBridge(entity.getWorld(), pos, direction, new WebBridgeConfig(data.getInt("web_bridge_length"), data.getInt("web_bridge_width")), RegCustomBlock.TEMP_WEB_BRIDGE);
+                }
+        ));
+
+        ActionRegister.accept(new ActionFactory<>(
+                ShapeShifterCurseFabric.identifier("fire_web_bullet"),
+                new SerializableData()
+                        .add("tier", SerializableDataTypes.INT, 1)
+                        .add("divergence", SerializableDataTypes.FLOAT, 1F)
+                        .add("speed", SerializableDataTypes.FLOAT, 1.5F)
+                        .add("projectile_action", ApoliDataTypes.ENTITY_ACTION, null),
+                (data, entity) -> {
+                    if (entity instanceof LivingEntity livingEntity) {
+                        WebBullet webBullet = new WebBullet(livingEntity, data.getInt("tier"));
+                        webBullet.setVelocity(livingEntity, livingEntity.getPitch(), livingEntity.getYaw(), 0.0f, data.getFloat("speed"), data.getFloat("divergence"));
+                        livingEntity.getWorld().spawnEntity(webBullet);
+                        data.<Consumer<Entity>>ifPresent("projectile_action", projectileAction -> projectileAction.accept(webBullet));
+                    }
+                }
+        ));
     }
 }

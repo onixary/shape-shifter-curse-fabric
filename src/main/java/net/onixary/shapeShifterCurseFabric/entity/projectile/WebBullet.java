@@ -16,9 +16,9 @@ import static net.onixary.shapeShifterCurseFabric.entity.RegCustomEntity.WEB_BUL
 public class WebBullet extends ThrownItemEntity {
     public int Tier = 1;
 
-    public static final WebBridgeAction.WebLadderConfig ladderConfigTier1 = new WebBridgeAction.WebLadderConfig(16, 20, 16, false, 0);
-    public static final WebBridgeAction.WebLadderConfig ladderConfigTier2 = new WebBridgeAction.WebLadderConfig(16, 20, 16, true, 8);
-    public static final WebBridgeAction.WebLadderConfig ladderConfigTier3 = new WebBridgeAction.WebLadderConfig(24, 30, 24, true, 12);
+    public static final WebBridgeAction.WebLadderConfig ladderConfigTier1 = new WebBridgeAction.WebLadderConfig(16, 20, 16, false, 0.0f);
+    public static final WebBridgeAction.WebLadderConfig ladderConfigTier2 = new WebBridgeAction.WebLadderConfig(16, 20, 16, true, 0.25f);
+    public static final WebBridgeAction.WebLadderConfig ladderConfigTier3 = new WebBridgeAction.WebLadderConfig(24, 30, 24, true, 0.4f);
 
     public WebBullet(EntityType<? extends ThrownItemEntity> entityType, World world) {
         super(entityType, world);
