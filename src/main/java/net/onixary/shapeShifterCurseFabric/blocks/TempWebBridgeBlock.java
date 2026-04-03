@@ -47,27 +47,43 @@ public class TempWebBridgeBlock extends Block {
     }
 
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        // 临时冰为(random.nextInt(3)
-        if ((random.nextInt(10) == 0 || this.canIncreaseAge(world, pos, 4)) && this.increaseAge(state, world, pos)) {
-            BlockPos.Mutable mutable = new BlockPos.Mutable();
-
-            for(Direction direction : Direction.values()) {
-                mutable.set(pos, direction);
-                BlockState blockState = world.getBlockState(mutable);
-                if (blockState.isOf(this) && !this.increaseAge(blockState, world, mutable)) {
-                    world.scheduleBlockTick(mutable, this, MathHelper.nextInt(random, 20, 40));
-                }
+        // if ((random.nextInt(3) == 0 || this.canIncreaseAge(world, pos, 4)) && this.increaseAge(state, world, pos)) {
+        //     BlockPos.Mutable mutable = new BlockPos.Mutable();
+        //     for(Direction direction : Direction.values()) {
+        //         mutable.set(pos, direction);
+        //         BlockState blockState = world.getBlockState(mutable);
+        //         if (blockState.isOf(this) && !this.increaseAge(blockState, world, mutable)) {
+        //             world.scheduleBlockTick(mutable, this, MathHelper.nextInt(random, 20, 40));
+        //         }
+        //     }
+        // } else {
+        //     world.scheduleBlockTick(pos, this, MathHelper.nextInt(random, 20, 40));
+        // }
+        boolean BlockRemoved = false;
+        if (this.canIncreaseAge(world, pos, 3) && random.nextInt(12) == 0) {
+            BlockRemoved = this.increaseAge(state, world, pos);
+        } else if (this.canIncreaseAge(world, pos, 2) && random.nextInt(6) == 0) {
+            BlockRemoved = this.increaseAge(state, world, pos);
+        } else if (random.nextInt(3) == 0) {
+            BlockRemoved = this.increaseAge(state, world, pos);
+        }
+        if (!BlockRemoved) {
+            world.scheduleBlockTick(pos, this, MathHelper.nextInt(random, 150, 300));  // 7.5s~15s
+        }
+        BlockPos.Mutable mutable = new BlockPos.Mutable();
+        for (Direction direction : Direction.values()) {
+            mutable.set(pos, direction);
+            BlockState blockState = world.getBlockState(mutable);
+            if (blockState.isOf(this)) {
+                world.scheduleBlockTick(mutable, this, MathHelper.nextInt(random, 150, 300));
             }
-
-        } else {
-            world.scheduleBlockTick(pos, this, MathHelper.nextInt(random, 20, 40));
         }
     }
 
     private boolean increaseAge(BlockState state, World world, BlockPos pos) {
-        int i = (Integer)state.get(AGE);
+        int i = state.get(AGE);
         if (i < 3) {
-            world.setBlockState(pos, (BlockState)state.with(AGE, i + 1), 2);
+            world.setBlockState(pos, state.with(AGE, i + 1), 2);
             return false;
         } else {
             world.removeBlock(pos, false);

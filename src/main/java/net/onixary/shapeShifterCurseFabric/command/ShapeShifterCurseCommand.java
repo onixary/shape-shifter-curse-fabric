@@ -17,6 +17,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
+import net.onixary.shapeShifterCurseFabric.entity.projectile.WebBullet;
 import net.onixary.shapeShifterCurseFabric.mana.ManaComponent;
 import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 import net.onixary.shapeShifterCurseFabric.mana.RegManaComponent;
@@ -426,24 +427,9 @@ public class ShapeShifterCurseCommand {
             return 0;
         }
         try {
-//            ItemStack stack = new ItemStack(Items.POTION);
-//            PotionUtil.setPotion(stack, RegCustomPotions.CUSTOM_STATUE_FORM_POTION);
-//            CTPUtils.setCTPFormIDToNBT(stack.getNbt(), RegPlayerForms.SNOW_FOX_3.FormID);
-//            player.giveItemStack(stack);
-            ManaComponent manaComponent = ManaUtils.getManaComponent(player);
-            StringBuilder stringBuilder = new StringBuilder("\nMana Data\n");
-            Identifier manaType = manaComponent.getManaTypeID();
-            if (manaType != null) {
-                stringBuilder.append("Mana Type: ").append(manaType.toString()).append("\n");
-            } else {
-                stringBuilder.append("Mana Type: None\n");
-            }
-            stringBuilder.append("Mana: ").append(manaComponent.getMana()).append("\n");
-            stringBuilder.append("Max Mana Client: ").append(manaComponent.MaxManaClient).append("\n");
-            stringBuilder.append("Mana Regen: ").append(manaComponent.ManaRegenClient).append("\n");
-            stringBuilder.append("Max Mana Server: ").append(manaComponent.getMaxMana()).append("\n");
-            stringBuilder.append("Mana Regen Server: ").append(manaComponent.getManaRegen()).append("\n");
-            player.sendMessage(Text.literal(stringBuilder.toString()), false);
+            WebBullet webBullet = new WebBullet(player, 3);
+            webBullet.setVelocity(player, player.getPitch(), player.getYaw(), 0.0f, 2.25f, 0.5f);
+            player.getWorld().spawnEntity(webBullet);
         } catch (Exception e) {
             ShapeShifterCurseFabric.LOGGER.error("Error Dev Command", e);
             return 0;

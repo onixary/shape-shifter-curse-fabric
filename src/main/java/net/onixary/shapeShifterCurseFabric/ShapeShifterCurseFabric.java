@@ -38,6 +38,7 @@ import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
 import net.onixary.shapeShifterCurseFabric.config.ClientConfig;
 import net.onixary.shapeShifterCurseFabric.config.CommonConfig;
 import net.onixary.shapeShifterCurseFabric.config.PlayerCustomConfig;
+import net.onixary.shapeShifterCurseFabric.entity.RegCustomEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntitySpawnEgg;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.TransformativeEntitySpawning;
@@ -190,6 +191,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         RegOtherStatusEffects.initialize();
         TransformativeEntitySpawning.addEntitySpawns();
         BatAttachEventHandler.register();
+        RegCustomEntity.init();
         // 注册动画（需要在服务端也执行以支持变换动画的同步）
         registerAnimations();
 
