@@ -79,6 +79,8 @@ public class RegCustomItem {
     public static final Item CUSTOM_TRINKET = register("custom_trinket", new CustomTrinket(new CustomTrinket.Settings()));
     // 用于成就图标的占位物品
     public static final Item ICON_CURSED_MOON = register("icon_cursed_moon", new Item(new Item.Settings()));
+    // 蛛丝弹占位物品
+    public static final Item WEB_PROJECTILE = register("web_projectile", new Item(new Item.Settings()));
 
     public static ItemStack buildPotion(Item PotionItem, Potion potion) {
         ItemStack potionStack = new ItemStack(PotionItem);

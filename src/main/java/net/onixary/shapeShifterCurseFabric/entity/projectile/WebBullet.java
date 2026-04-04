@@ -15,6 +15,7 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.additional_power.WebBridgeAction;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
+import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.status_effects.EntangledEffectUtils;
 
 import static net.onixary.shapeShifterCurseFabric.entity.RegCustomEntity.WEB_BULLET;
@@ -49,7 +50,7 @@ public class WebBullet extends ThrownItemEntity {
 
     @Override
     public Item getDefaultItem() {
-        return Items.WHITE_WOOL;
+        return RegCustomItem.WEB_PROJECTILE;
     }
 
     @Override
