@@ -21,11 +21,9 @@ import net.minecraft.potion.PotionUtil;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnSplashPotionTakeEffect;
-import net.onixary.shapeShifterCurseFabric.additional_power.BurnDamageModifierPower;
-import net.onixary.shapeShifterCurseFabric.additional_power.FallingProtectionPower;
-import net.onixary.shapeShifterCurseFabric.additional_power.InWaterSpeedModifierPower;
+import net.onixary.shapeShifterCurseFabric.additional_power.*;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
@@ -85,6 +83,10 @@ public abstract class LivingEntityMixin {
             }
         }
 
+        if (attacker instanceof ServerPlayerEntity player && entity instanceof MobEntity mobEntity) {
+            handleExtraLoot(mobEntity, player);
+        }
+
         if(!(CursedMoon.isCursedMoon(world) && CursedMoon.isNight(world))){
             return;
         }
@@ -96,6 +98,31 @@ public abstract class LivingEntityMixin {
         if (attacker instanceof ServerPlayerEntity player) {
             if (entity instanceof MobEntity) {
                 handleMobDeathDrop((MobEntity) entity, player);
+            }
+        }
+    }
+
+    @Unique
+    private void handleExtraLoot(MobEntity mob, ServerPlayerEntity player) {
+        if (AdditionalPowers.CAN_LOOT_SPIDER_FLUID_COCOON.isActive(player)) {
+            // 25% 掉落 0~(血上限/10f)个
+            float mobMaxHp = mob.getMaxHealth();
+            int lootCount = (int) (mobMaxHp / 10.0f);
+            Random random = player.getRandom();
+            if (random.nextInt(100) < 25) {
+                int finalCount = random.nextInt(lootCount);
+                if (finalCount > 0) {
+                    ItemStack stack = new ItemStack(RegCustomItem.SPIDER_FLUID_COCOON, finalCount);
+                    mob.getWorld().spawnEntity(
+                            new ItemEntity(
+                                    mob.getWorld(),
+                                    mob.getX(),
+                                    mob.getY(),
+                                    mob.getZ(),
+                                    stack
+                            )
+                    );
+                }
             }
         }
     }

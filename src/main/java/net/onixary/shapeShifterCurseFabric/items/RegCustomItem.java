@@ -3,6 +3,8 @@ package net.onixary.shapeShifterCurseFabric.items;
 import dev.emi.trinkets.api.TrinketItem;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
@@ -73,6 +75,7 @@ public class RegCustomItem {
     public static final Item RESONANT_CORE = register("resonant_core", new ResonantCoreTrinket(new ResonantCoreTrinket.Settings()));
 
     public static final Item TRANSFORMATIVE_AXOLOTL_BUCKET = register("transformative_axolotl_bucket", new EntityBucketItem(ShapeShifterCurseFabric.T_AXOLOTL, Fluids.WATER, SoundEvents.ITEM_BUCKET_EMPTY_AXOLOTL, (new Item.Settings()).maxCount(1)));
+    public static final Item SPIDER_FLUID_COCOON = register("spider_fluid_cocoon", new Item(new Item.Settings().maxCount(64).food(new FoodComponent.Builder().hunger(6).saturationModifier(0.8f).alwaysEdible().snack().statusEffect(new StatusEffectInstance(StatusEffects.POISON, 200, 0), 1.0f).build())));
 
     public static final Item PATRON_FORM_ITEM = register("patron_form_item", new PatronFormItem(new Item.Settings()));
 
@@ -143,6 +146,7 @@ public class RegCustomItem {
                 entries.add(CUSTOM_TRINKET);
                 entries.add(FIRE_CHARM_PAPER);
                 entries.add(TRANSFORMATIVE_AXOLOTL_BUCKET);
+                entries.add(SPIDER_FLUID_COCOON);
                 // 方块物品注册
                 entries.add(MOONDUST_CRYSTAL_GRIT);
                 entries.addAll(buildAllPotions(
