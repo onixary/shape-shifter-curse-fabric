@@ -1,0 +1,103 @@
+{
+    "type": "shape-shifter-curse:charge_action",
+    "charge_power_id": "shape-shifter-curse:web_charge",
+    "key": {
+        "key": "key.origins.primary_active",
+        "continuous": true
+    },
+    "tier0_enable": true,
+    "tier0_charge_time": 10,
+    "tier0_condition": {
+        "type": "origins:constant",
+        "value": true
+    },
+    "tier0_use_action": {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"Tier0 USE\", \"color\": \"red\"}"
+    },
+    "tier0_tick_action": {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"Tier0 TICK\", \"color\": \"green\"}"
+    },
+    "tier0_charge_tick_action": {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"Tier0 CHARGE TICK\", \"color\": \"green\"}"
+    },
+    "tier0_charge_complete_action": {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"Tier0 CHARGE COMPLETE\", \"color\": \"red\"}"
+    },
+    "tier0_charge_complete_use_action": {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"Tier0 CHARGE COMPLETE USE\", \"color\": \"red\"}"
+    },
+    "tier0_charge_complete_tick_action": {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"Tier0 CHARGE COMPLETE TICK\", \"color\": \"green\"}"
+    },
+    "tier0_cooldown": 10,
+
+    "tier1_enable": true,
+    "tier1_charge_time": 20,
+    "tier1_condition": {
+        "type": "origins:constant",
+        "value": true
+    },
+    "tier1_use_action": {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"Tier1 USE\", \"color\": \"red\"}"
+    },
+    "tier1_tick_action": {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"Tier1 TICK\", \"color\": \"green\"}"
+    },
+    "tier1_charge_tick_action": {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"Tier1 CHARGE TICK\", \"color\": \"green\"}"
+    },
+    "tier1_charge_complete_action": {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"Tier1 CHARGE COMPLETE\", \"color\": \"red\"}"
+    },
+    "tier1_charge_complete_use_action": {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"Tier1 CHARGE COMPLETE USE\", \"color\": \"red\"}"
+    },
+    "tier1_charge_complete_tick_action": {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"Tier1 CHARGE COMPLETE TICK\", \"color\": \"green\"}"
+    },
+    "tier1_cooldown": 10,
+
+    "tier2_enable": true,
+    "tier2_charge_time": 30,
+    "tier2_condition": {
+        "type": "origins:constant",
+        "value": false
+    },
+    "tier2_use_action": {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"Tier2 USE\", \"color\": \"red\"}"
+    },
+    "tier2_tick_action": {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"Tier2 TICK\", \"color\": \"green\"}"
+    },
+    "tier2_charge_tick_action": {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"Tier2 CHARGE TICK\", \"color\": \"green\"}"
+    },
+    "tier2_charge_complete_action": {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"Tier2 CHARGE COMPLETE\", \"color\": \"red\"}"
+    },
+    "tier2_charge_complete_use_action": {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"Tier2 CHARGE COMPLETE USE\", \"color\": \"red\"}"
+    },
+    "tier2_charge_complete_tick_action": {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"Tier2 CHARGE COMPLETE TICK\", \"color\": \"green\"}"
+    },
+    "tier2_cooldown": 10
+}

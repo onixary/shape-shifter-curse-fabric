@@ -6,6 +6,7 @@
         "shape-shifter-curse:form_spider_climb_web",
         "shape-shifter-curse:form_spider_3_climb",
         "shape-shifter-curse:can_loot_spider_fluid_cocoon"
+        "shape-shifter-curse:form_spider_3_silk_projectile"
     ],
     "icon": {
         "item": "minecraft:player_head"

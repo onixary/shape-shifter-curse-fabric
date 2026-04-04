@@ -13,7 +13,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.math.random.Random;
+import net.onixary.shapeShifterCurseFabric.blocks.TempWebBridgeBlock;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
+import net.minecraft.block.BlockState;
 import net.onixary.shapeShifterCurseFabric.entity.projectile.WebBullet;
 
 import java.util.function.Consumer;
@@ -22,12 +26,17 @@ public class WebBridgeAction {
     public record WebLadderConfig(int SideBlockNum, int BottomBlockNum, int TopBlockNum, boolean LargerLadder, float LargerLadderCountPercent) {}
     public record WebBridgeConfig(int Length, int Width) {}
 
-    public static boolean SetWebBlock(World world, BlockPos pos, Block WebBlock) {
+    public static boolean SetWebBlock(World world, BlockPos pos, Block WebBlock, Direction facing) {
         if (world.getBlockState(pos).isAir()) {
-            world.setBlockState(pos, WebBlock.getDefaultState());
+            BlockState state = WebBlock.getDefaultState().with(TempWebBridgeBlock.HORIZONTAL_FACING, facing);
+            world.setBlockState(pos, state);
             return true;
         }
         return false;
+    }
+
+    public static boolean SetWebBlock(World world, BlockPos pos, Block WebBlock) {
+        return SetWebBlock(world, pos, WebBlock, Direction.NORTH);
     }
 
     public static void BuildWebLadder(World world, BlockHitResult blockHitResult, WebLadderConfig config, Block LadderBlock) {
@@ -81,24 +90,32 @@ public class WebBridgeAction {
         if (direction == Direction.UP || direction == Direction.DOWN) {
             return;
         }
+        // 预定义水平方向数组，用于随机选择
+        Direction[] horizontalDirections = {Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
+        Random random = world.getRandom();
+        
         for (int k = -config.Width; k <= config.Width; k++) {
             for (int m = -config.Width; m <= config.Width; m++) {
-                SetWebBlock(world, pos.add(k, 0, m), WebBlock);
+                Direction randomFacing = horizontalDirections[random.nextInt(horizontalDirections.length)];
+                SetWebBlock(world, pos.add(k, 0, m), WebBlock, randomFacing);
             }
         }
         for (int i = 0; i < config.Length; i++) {
-            SetWebBlock(world, NowPos, WebBlock);
+            Direction randomFacing = horizontalDirections[random.nextInt(horizontalDirections.length)];
+            SetWebBlock(world, NowPos, WebBlock, randomFacing);
             TempPos = NowPos;
             TempDirection = direction.rotateYClockwise();
             for (int j = 0; j < config.Width; j++) {
                 TempPos = TempPos.offset(TempDirection);
-                SetWebBlock(world, TempPos, WebBlock);
+                randomFacing = horizontalDirections[random.nextInt(horizontalDirections.length)];
+                SetWebBlock(world, TempPos, WebBlock, randomFacing);
             }
             TempPos = NowPos;
             TempDirection = direction.rotateYCounterclockwise();
             for (int j = 0; j < config.Width; j++) {
                 TempPos = TempPos.offset(TempDirection);
-                SetWebBlock(world, TempPos, WebBlock);
+                randomFacing = horizontalDirections[random.nextInt(horizontalDirections.length)];
+                SetWebBlock(world, TempPos, WebBlock, randomFacing);
             }
             NowPos = NowPos.offset(direction);
         }
