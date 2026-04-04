@@ -9,6 +9,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 public class AdditionalPowers {
     public static final PowerType<?> SCARE_SKELETON = new PowerTypeReference<>(ShapeShifterCurseFabric.identifier("scare_skeleton"));  // 这种应该会比较节省计算资源
+    public static final PowerType<?> CAN_LOOT_SPIDER_FLUID_COCOON = new PowerTypeReference<>(ShapeShifterCurseFabric.identifier("can_loot_spider_fluid_cocoon"));
 
     public static void register() {
         register(AddSustainedInstinctPower.getFactory());

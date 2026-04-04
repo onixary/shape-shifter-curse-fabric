@@ -33,11 +33,11 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.event.GameEvent;
+import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.util.ModTags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class WebComposterBlock extends Block implements InventoryProvider {
     public static final int MIN_LEVEL = 0;
@@ -52,7 +52,7 @@ public class WebComposterBlock extends Block implements InventoryProvider {
         shapes[4] = shapes[3];
     });
 
-    public static Item ResultItem = Items.DIRT;  // TODO 修改为流食囊
+    public static Item ResultItem = RegCustomItem.SPIDER_FLUID_COCOON;
     public static Function<Random, Integer> ResultCount = (random) -> 2 + random.nextInt(4);
 
     public static boolean canIncrease(ItemStack itemStack) {

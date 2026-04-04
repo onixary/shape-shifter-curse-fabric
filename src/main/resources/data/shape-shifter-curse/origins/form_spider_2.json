@@ -1,5 +1,7 @@
 {
-    "powers": [],
+    "powers": [
+        "shape-shifter-curse:can_loot_spider_fluid_cocoon"
+    ],
     "icon": {
         "item": "minecraft:player_head"
     },
