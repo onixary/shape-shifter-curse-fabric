@@ -6,6 +6,7 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
@@ -19,9 +20,10 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
-public class TempWebBridgeBlock extends Block implements FluidFillable {
+public class TempWebBridgeBlock extends HorizontalFacingBlock implements FluidFillable {
     public static final int MAX_AGE = 3;
     public static final IntProperty AGE = Properties.AGE_3;
+    public static final DirectionProperty HORIZONTAL_FACING = Properties.HORIZONTAL_FACING;
 
     private static final VoxelShape COLLISION_SHAPE = Block.createCuboidShape((double)0.0F, (double)0.0F, (double)0.0F, (double)16.0F, (double)2.0F, (double)16.0F);
     private static final VoxelShape OUTLINE_SHAPE = VoxelShapes.fullCube().offset((double)0.0F, (double)-1.0F, (double)0.0F);
@@ -39,7 +41,7 @@ public class TempWebBridgeBlock extends Block implements FluidFillable {
 
     public TempWebBridgeBlock(AbstractBlock.Settings settings) {
         super(settings);
-        this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(AGE, 0));
+        this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(AGE, 0).with(HORIZONTAL_FACING, Direction.NORTH));
     }
 
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
@@ -118,7 +120,7 @@ public class TempWebBridgeBlock extends Block implements FluidFillable {
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{AGE});
+        builder.add(new Property[]{AGE, HORIZONTAL_FACING});
     }
 
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
