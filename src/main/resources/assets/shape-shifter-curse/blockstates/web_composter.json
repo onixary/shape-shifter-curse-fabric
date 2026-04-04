@@ -1,0 +1,41 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "shape-shifter-curse:block/web_composter"
+      }
+    },
+    {
+      "apply": {
+        "model": "shape-shifter-curse:block/web_composter_contents1"
+      },
+      "when": {
+        "level": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "shape-shifter-curse:block/web_composter_contents2"
+      },
+      "when": {
+        "level": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "shape-shifter-curse:block/web_composter_contents3"
+      },
+      "when": {
+        "level": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "shape-shifter-curse:block/web_composter_contents_ready"
+      },
+      "when": {
+        "level": "4"
+      }
+    }
+  ]
+}

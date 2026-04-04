@@ -427,7 +427,7 @@ public class ShapeShifterCurseCommand {
             return 0;
         }
         try {
-            WebBullet webBullet = new WebBullet(player, 3);
+            WebBullet webBullet = new WebBullet(player, 1);
             webBullet.setVelocity(player, player.getPitch(), player.getYaw(), 0.0f, 2.25f, 0.5f);
             player.getWorld().spawnEntity(webBullet);
         } catch (Exception e) {

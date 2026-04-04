@@ -5,6 +5,8 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects;
 
 import java.util.ArrayList;
 
@@ -25,7 +27,7 @@ public class EntityOverlayRenderSystem {
 
             @Override
             public boolean canRender(Entity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
-                return false;
+                return entity instanceof LivingEntity livingEntity && livingEntity.getStatusEffect(RegOtherStatusEffects.ENTANGLED_FULL_EFFECT) != null;
             }
 
             @Override
