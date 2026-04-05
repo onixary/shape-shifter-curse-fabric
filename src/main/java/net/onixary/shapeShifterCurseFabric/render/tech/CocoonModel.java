@@ -7,12 +7,12 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 public class CocoonModel extends GeoModel<EmptyAnimatable> {
     @Override
     public Identifier getModelResource(EmptyAnimatable animatable) {
-        return ShapeShifterCurseFabric.identifier("geo/tech/cocoon.geo.json");
+        return ShapeShifterCurseFabric.identifier("geo/tech/enemy_cocoon.geo.json");
     }
 
     @Override
     public Identifier getTextureResource(EmptyAnimatable animatable) {
-        return ShapeShifterCurseFabric.identifier("textures/tech/cocoon.png");
+        return ShapeShifterCurseFabric.identifier("textures/tech/enemy_cocoon.png");
     }
 
     @Override
