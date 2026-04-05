@@ -45,6 +45,7 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.Transformat
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.spider.TransformativeSpiderEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.wolf.TransformativeWolfEntity;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
@@ -127,7 +128,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             Registries.ENTITY_TYPE,
             new Identifier(ShapeShifterCurseFabric.MOD_ID, "t_bat"),
             FabricEntityTypeBuilder.create(SpawnGroup.AMBIENT, TransformativeBatEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.9f))
                     .build()
     );
     // Axolotl
@@ -135,7 +136,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             Registries.ENTITY_TYPE,
             new Identifier(ShapeShifterCurseFabric.MOD_ID, "t_axolotl"),
             FabricEntityTypeBuilder.create(SpawnGroup.AXOLOTLS, TransformativeAxolotlEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
+                    .dimensions(EntityDimensions.fixed(0.75f, 0.42f))
                     .build()
     );
     // Ocelot
@@ -143,7 +144,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             Registries.ENTITY_TYPE,
             new Identifier(ShapeShifterCurseFabric.MOD_ID, "t_ocelot"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TransformativeOcelotEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
+                    .dimensions(EntityDimensions.fixed(0.6f, 0.7f))
                     .build()
     );
 
@@ -151,8 +152,16 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             Registries.ENTITY_TYPE,
             new Identifier(ShapeShifterCurseFabric.MOD_ID, "t_wolf"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TransformativeWolfEntity::new)
-                .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
+                .dimensions(EntityDimensions.fixed(0.6f, 0.85f))
                 .build()
+    );
+
+    public static final EntityType<TransformativeSpiderEntity> T_SPIDER = Registry.register(
+            Registries.ENTITY_TYPE,
+            new Identifier(ShapeShifterCurseFabric.MOD_ID, "t_spider"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TransformativeSpiderEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.4f, 0.9f))
+                    .build()
     );
 
 
