@@ -25,19 +25,12 @@ public class TempWebBridgeBlock extends HorizontalFacingBlock implements FluidFi
     public static final IntProperty AGE = Properties.AGE_3;
     public static final DirectionProperty HORIZONTAL_FACING = Properties.HORIZONTAL_FACING;
 
-    private static final VoxelShape COLLISION_SHAPE = Block.createCuboidShape((double)0.0F, (double)0.0F, (double)0.0F, (double)16.0F, (double)2.0F, (double)16.0F);
-    private static final VoxelShape OUTLINE_SHAPE = VoxelShapes.fullCube().offset((double)0.0F, (double)-1.0F, (double)0.0F);
     private static final VoxelShape voxelShape = Block.createCuboidShape((double)0.0F, (double)14.0F, (double)0.0F, (double)16.0F, (double)16.0F, (double)16.0F);
     private static final VoxelShape voxelShape2 = Block.createCuboidShape((double)0.0F, (double)0.0F, (double)0.0F, (double)2.0F, (double)16.0F, (double)2.0F);
     private static final VoxelShape voxelShape3 = Block.createCuboidShape((double)14.0F, (double)0.0F, (double)0.0F, (double)16.0F, (double)16.0F, (double)2.0F);
     private static final VoxelShape voxelShape4 = Block.createCuboidShape((double)0.0F, (double)0.0F, (double)14.0F, (double)2.0F, (double)16.0F, (double)16.0F);
     private static final VoxelShape voxelShape5 = Block.createCuboidShape((double)14.0F, (double)0.0F, (double)14.0F, (double)16.0F, (double)16.0F, (double)16.0F);
     private static final VoxelShape NORMAL_OUTLINE_SHAPE = VoxelShapes.union(voxelShape, new VoxelShape[]{voxelShape2, voxelShape3, voxelShape4, voxelShape5});
-    private static final VoxelShape voxelShape6 = Block.createCuboidShape((double)0.0F, (double)0.0F, (double)0.0F, (double)2.0F, (double)2.0F, (double)16.0F);
-    private static final VoxelShape voxelShape7 = Block.createCuboidShape((double)14.0F, (double)0.0F, (double)0.0F, (double)16.0F, (double)2.0F, (double)16.0F);
-    private static final VoxelShape voxelShape8 = Block.createCuboidShape((double)0.0F, (double)0.0F, (double)14.0F, (double)16.0F, (double)2.0F, (double)16.0F);
-    private static final VoxelShape voxelShape9 = Block.createCuboidShape((double)0.0F, (double)0.0F, (double)0.0F, (double)16.0F, (double)2.0F, (double)2.0F);
-    private static final VoxelShape BOTTOM_OUTLINE_SHAPE = VoxelShapes.union(COLLISION_SHAPE, new VoxelShape[]{NORMAL_OUTLINE_SHAPE, voxelShape7, voxelShape6, voxelShape9, voxelShape8});
 
     public TempWebBridgeBlock(AbstractBlock.Settings settings) {
         super(settings);

@@ -21,6 +21,7 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.Tran
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.wolf.TransformativeWolfEntity;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class TransformativeEntitySpawning {
     public static void addEntitySpawns() {
@@ -91,8 +92,10 @@ public class TransformativeEntitySpawning {
         ServerLifecycleEvents.SERVER_STARTED.register(server -> {
             Structure structure = server.getOverworld().getRegistryManager().get(RegistryKeys.STRUCTURE).get(new Identifier("minecraft", "desert_pyramid"));
             if (structure != null) {
-                Map<SpawnGroup, StructureSpawns> spawns = structure.getStructureSpawns();
+                Map<SpawnGroup, StructureSpawns> oldSpawns = structure.getStructureSpawns();
+                Map<SpawnGroup, StructureSpawns> spawns = oldSpawns.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
                 spawns.put(SpawnGroup.CREATURE, new StructureSpawns(StructureSpawns.BoundingBox.PIECE, Pool.of(new SpawnSettings.SpawnEntry(ShapeShifterCurseFabric.T_WOLF, 20, 3, 5))));
+                structure.config.spawnOverrides = spawns;
             }
         });
     }

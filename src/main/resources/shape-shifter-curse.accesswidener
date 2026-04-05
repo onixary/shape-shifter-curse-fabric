@@ -23,3 +23,6 @@ accessible field net/minecraft/recipe/BrewingRecipeRegistry$Recipe ingredient Ln
 accessible field net/minecraft/recipe/BrewingRecipeRegistry$Recipe output Ljava/lang/Object;
 accessible field net/minecraft/server/network/ServerPlayerInteractionManager mining Z
 accessible field net/minecraft/screen/ForgingScreenHandler input Lnet/minecraft/inventory/Inventory;
+accessible field net/minecraft/world/gen/structure/Structure config Lnet/minecraft/world/gen/structure/Structure$Config;
+accessible field net/minecraft/world/gen/structure/Structure$Config spawnOverrides Ljava/util/Map;
+mutable field net/minecraft/world/gen/structure/Structure$Config spawnOverrides Ljava/util/Map;
