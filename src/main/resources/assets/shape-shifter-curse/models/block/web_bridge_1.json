@@ -3,8 +3,9 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"top": "shape-shifter-curse:block/web_bridge_2_top",
-		"side": "shape-shifter-curse:block/web_bridge_2_side"
+		"top": "shape-shifter-curse:block/web_bridge_1_top",
+		"side": "shape-shifter-curse:block/web_bridge_1_side",
+		"particle": "shape-shifter-curse:block/web_bridge_1_top"
 	},
 	"elements": [
 		{

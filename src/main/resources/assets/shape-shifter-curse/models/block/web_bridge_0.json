@@ -4,7 +4,8 @@
 	"parent": "block/block",
 	"textures": {
 		"top": "shape-shifter-curse:block/web_bridge_0_top",
-		"side": "shape-shifter-curse:block/web_bridge_0_side"
+		"side": "shape-shifter-curse:block/web_bridge_0_side",
+		"particle": "shape-shifter-curse:block/web_bridge_0_top"
 	},
 	"elements": [
 		{

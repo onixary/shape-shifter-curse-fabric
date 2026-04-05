@@ -43,6 +43,9 @@ public class WebBridgeAction {
         BlockPos pos = blockHitResult.getBlockPos();
         Direction direction = blockHitResult.getSide();
 
+        Direction[] horizontalDirections = {Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
+        Random random = world.getRandom();
+
         BlockPos NowPos = null;
         Direction LadderDirection = null;
         int Length = 0;
@@ -69,14 +72,19 @@ public class WebBridgeAction {
         int LargerLadderCount = (int)(config.LargerLadderCountPercent * Length);
 
         for (int i = 0; i < Length; i++) {
-            if (!SetWebBlock(world, NowPos, LadderBlock)) {
+            Direction randomFacing = horizontalDirections[random.nextInt(horizontalDirections.length)];
+            if (!SetWebBlock(world, NowPos, LadderBlock, randomFacing)) {
                 break;
             }
             if (LargerLadder && LargerLadderCount > 0) {
-                SetWebBlock(world, NowPos.east(), LadderBlock);
-                SetWebBlock(world, NowPos.west(), LadderBlock);
-                SetWebBlock(world, NowPos.north(), LadderBlock);
-                SetWebBlock(world, NowPos.south(), LadderBlock);
+                randomFacing = horizontalDirections[random.nextInt(horizontalDirections.length)];
+                SetWebBlock(world, NowPos.east(), LadderBlock, randomFacing);
+                randomFacing = horizontalDirections[random.nextInt(horizontalDirections.length)];
+                SetWebBlock(world, NowPos.west(), LadderBlock, randomFacing);
+                randomFacing = horizontalDirections[random.nextInt(horizontalDirections.length)];
+                SetWebBlock(world, NowPos.north(), LadderBlock, randomFacing);
+                randomFacing = horizontalDirections[random.nextInt(horizontalDirections.length)];
+                SetWebBlock(world, NowPos.south(), LadderBlock, randomFacing);
                 LargerLadderCount--;
             }
             NowPos = NowPos.offset(LadderDirection);
