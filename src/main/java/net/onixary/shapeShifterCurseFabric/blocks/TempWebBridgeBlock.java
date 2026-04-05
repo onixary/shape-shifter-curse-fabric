@@ -20,7 +20,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
-public class TempWebBridgeBlock extends HorizontalFacingBlock implements FluidFillable {
+public class TempWebBridgeBlock extends HorizontalFacingBlock {
     public static final int MAX_AGE = 3;
     public static final IntProperty AGE = Properties.AGE_3;
     public static final DirectionProperty HORIZONTAL_FACING = Properties.HORIZONTAL_FACING;
@@ -133,13 +133,7 @@ public class TempWebBridgeBlock extends HorizontalFacingBlock implements FluidFi
     }
 
     @Override
-    public boolean canFillWithFluid(BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
-        return true;
-    }
-
-    @Override
-    public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
-        world.breakBlock(pos, false);
+    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
         return true;
     }
 }
