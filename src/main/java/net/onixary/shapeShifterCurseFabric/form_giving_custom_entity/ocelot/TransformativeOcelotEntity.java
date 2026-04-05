@@ -2,7 +2,6 @@ package net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -16,26 +15,17 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.status_effects.TStatusApplier;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ITMob;
+import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
+
+import java.util.Optional;
 
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_OCELOT_0_EFFECT;
 
-public class TransformativeOcelotEntity extends OcelotEntity {
-
-    public static float T_OCELOT_STATUS_CHANCE = 0.5f;
-
+public class TransformativeOcelotEntity extends OcelotEntity implements ITMob {
     public TransformativeOcelotEntity(EntityType<? extends OcelotEntity> entityType, World world) {
         super(entityType, world);
     }
-
-    // 20 ticks = 1 second
-    private static final float ATTACK_COOLDOWN = 100.0F;
-
-    // 当前冷却时间
-    private float cooldown = 0;
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes()
@@ -44,15 +34,7 @@ public class TransformativeOcelotEntity extends OcelotEntity {
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3);
     }
 
-    @Override
-    protected void initGoals() {
-        super.initGoals();
-        // 添加攻击目标（玩家）
-        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
-    }
-
     public static boolean canCustomSpawn(EntityType<TransformativeOcelotEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-//        return random.nextInt(3) != 0;  // ~67% 刷新成功率
         float Chance = ShapeShifterCurseFabric.commonConfig.transformativeOcelotSpawnChance;
         if (Chance <= 0.0f) { return false; }
         if (Chance >= 1.0f) { return true; }
@@ -60,55 +42,49 @@ public class TransformativeOcelotEntity extends OcelotEntity {
     }
 
     @Override
-    public void tick() {
-        super.tick();
-        // 更新冷却时间
-        if (cooldown > 0) {
-            cooldown--;
-        }
+    public float getStatusChance() {
+        return 0.5f;
+    }
 
-        // 检查是否有目标玩家
-        LivingEntity target = this.getTarget();
-        if (target instanceof PlayerEntity && cooldown <= 0) {
-            PlayerEntity player = (PlayerEntity) target;
+    @Override
+    public BaseTransformativeStatusEffect getStatusEffect() {
+        return TO_OCELOT_0_EFFECT;
+    }
 
-            // 计算与玩家的距离
-            double distance = this.squaredDistanceTo(player);
-            if (distance <= StaticParams.CUSTOM_MOB_DEFAULT_ATTACK_RANGE * StaticParams.CUSTOM_MOB_DEFAULT_ATTACK_RANGE) {
-                // 对玩家造成伤害
-                tryAttack(player);
-                // 概率施加效果
-                TStatusApplier.applyStatusByChance(T_OCELOT_STATUS_CHANCE, player, TO_OCELOT_0_EFFECT);
-                // 重置冷却时间
-                cooldown = ATTACK_COOLDOWN;
-            }
-        }
+    private int cooldown = 0;
 
-        // 生成粒子效果
-        if (this.getWorld().isClient) {
-            for (int i = 0; i < 1; i++) {
-                this.getWorld().addParticle(StaticParams.CUSTOM_MOB_DEFAULT_PARTICLE,
-                        this.getX() + (this.random.nextDouble() - 0.5) * 0.5,
-                        this.getY() + this.random.nextDouble() * 0.5,
-                        this.getZ() + (this.random.nextDouble() - 0.5) * 0.5,
-                        0, 0, 0);
-            }
+    @Override
+    public void TickCooldown() {
+        if (this.cooldown > 0) {
+            this.cooldown --;
         }
     }
 
     @Override
+    public void ApplyCooldown() {
+        this.cooldown = 100;
+    }
+
+    @Override
+    public boolean IsInCooldown() {
+        return this.cooldown > 0;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        this.TMob_Tick(this);
+    }
+
+    @Override
     public boolean tryAttack(Entity target) {
-        if(target instanceof PlayerEntity) {
-            PlayerFormBase currentForm = target.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
-            if (currentForm.equals(RegPlayerForms.ORIGINAL_SHIFTER)) {
-                boolean attacked = target.damage(this.getDamageSources().mobAttack(this), (float)this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE));
-                if (attacked) {
-                    this.applyDamageEffects(this, target);
-                }
-                return attacked;
-            }
-            return false;
-        }
-        return super.tryAttack(target);
+        Optional<Boolean> attacked = this.TMob_TryAttack(this, target);
+        return attacked.orElseGet(() -> super.tryAttack(target));
+    }
+
+    @Override
+    protected void initGoals() {
+        super.initGoals();
+        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
     }
 }

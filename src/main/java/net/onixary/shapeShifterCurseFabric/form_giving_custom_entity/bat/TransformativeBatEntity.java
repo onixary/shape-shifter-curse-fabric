@@ -17,18 +17,19 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ITMob;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.TStatusApplier;
+
+import java.util.Optional;
 
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_AXOLOTL_0_EFFECT;
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_BAT_0_EFFECT;
 
-public class TransformativeBatEntity extends BatEntity {
-
-    public static float T_BAT_STATUS_CHANCE = 0.5f;
-
+public class TransformativeBatEntity extends BatEntity implements ITMob {
     public TransformativeBatEntity(EntityType<? extends BatEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -40,21 +41,12 @@ public class TransformativeBatEntity extends BatEntity {
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0);
     }
 
-    // 20 ticks = 1 second
-    private static final float ATTACK_COOLDOWN = 100.0F;
-
-    // 当前冷却时间
-    private float cooldown = 0;
-
     public static boolean canCustomSpawn(EntityType<TransformativeBatEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
         if (pos.getY() >= world.getSeaLevel()) {
             return false;
         } else {
             int i = world.getLightLevel(pos);
             int j = 4;
-//            if (random.nextBoolean()) {  // ~ 50% 成功率
-//                return false;
-//            }
             float Chance = ShapeShifterCurseFabric.commonConfig.transformativeBatSpawnChance;
             if (Chance <= 0) { return false; }
             if (Chance >= 1) { return true; }
@@ -64,63 +56,51 @@ public class TransformativeBatEntity extends BatEntity {
         }
     }
 
+
     @Override
-    protected void initGoals() {
-        super.initGoals();
-        // 添加攻击目标（玩家）
-        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+    public float getStatusChance() {
+        return 0.5f;
+    }
+
+    @Override
+    public BaseTransformativeStatusEffect getStatusEffect() {
+        return TO_BAT_0_EFFECT;
+    }
+
+    private int cooldown = 0;
+
+    @Override
+    public void TickCooldown() {
+        if (this.cooldown > 0) {
+            this.cooldown --;
+        }
+    }
+
+    @Override
+    public void ApplyCooldown() {
+        this.cooldown = 100;
+    }
+
+    @Override
+    public boolean IsInCooldown() {
+        return this.cooldown > 0;
     }
 
     @Override
     public void tick() {
         super.tick();
-        // 更新冷却时间
-        if (cooldown > 0) {
-            cooldown--;
-        }
-
-        // 检查是否有目标玩家
-        LivingEntity target = this.getTarget();
-        if (target instanceof PlayerEntity && cooldown <= 0) {
-            PlayerEntity player = (PlayerEntity) target;
-
-            // 计算与玩家的距离
-            double distance = this.squaredDistanceTo(player);
-            if (distance <= StaticParams.CUSTOM_MOB_DEFAULT_ATTACK_RANGE * StaticParams.CUSTOM_MOB_DEFAULT_ATTACK_RANGE) {
-                // 对玩家造成伤害
-                tryAttack(player);
-                // 概率施加效果
-                TStatusApplier.applyStatusByChance(T_BAT_STATUS_CHANCE, player, TO_BAT_0_EFFECT);
-                // 重置冷却时间
-                cooldown = ATTACK_COOLDOWN;
-            }
-        }
-
-        // 生成粒子效果
-        if (this.getWorld().isClient) {
-            for (int i = 0; i < 1; i++) {
-                this.getWorld().addParticle(StaticParams.CUSTOM_MOB_DEFAULT_PARTICLE,
-                        this.getX() + (this.random.nextDouble() - 0.5) * 0.5,
-                        this.getY() + this.random.nextDouble() * 1.5,
-                        this.getZ() + (this.random.nextDouble() - 0.5) * 0.5,
-                        0, 0, 0);
-            }
-        }
+        this.TMob_Tick(this);
     }
 
     @Override
     public boolean tryAttack(Entity target) {
-        if(target instanceof PlayerEntity) {
-            PlayerFormBase currentForm = target.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
-            if (currentForm.equals(RegPlayerForms.ORIGINAL_SHIFTER)) {
-                boolean attacked = target.damage(this.getDamageSources().mobAttack(this), (float)this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE));
-                if (attacked) {
-                    this.applyDamageEffects(this, target);
-                }
-                return attacked;
-            }
-            return false;
-        }
-        return super.tryAttack(target);
+        Optional<Boolean> attacked = this.TMob_TryAttack(this, target);
+        return attacked.orElseGet(() -> super.tryAttack(target));
+    }
+
+    @Override
+    protected void initGoals() {
+        super.initGoals();
+        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
     }
 }

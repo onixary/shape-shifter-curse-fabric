@@ -20,25 +20,24 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.*;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.TWolfFriendlyPower;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ITMob;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.TStatusApplier;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
+
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_ANUBIS_WOLF_0_EFFECT;
+import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_OCELOT_0_EFFECT;
 
-public class TransformativeWolfEntity extends WolfEntity {
-
-    public static float T_WOLF_STATUS_CHANCE = 0.5f;
-
+public class TransformativeWolfEntity extends WolfEntity implements ITMob {
     public TransformativeWolfEntity(EntityType<? extends WolfEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -56,10 +55,6 @@ public class TransformativeWolfEntity extends WolfEntity {
         return super.initialize(world, difficulty, spawnReason, data, entityNbt);
     }
 
-    // 20 ticks = 1 second
-    private static final float ATTACK_COOLDOWN = 100.0F;
-
-    // 当前冷却时间
     private float cooldown = 0;
 
     @Override
@@ -139,7 +134,7 @@ public class TransformativeWolfEntity extends WolfEntity {
     public void applyDamageEffects(LivingEntity attacker, Entity target) {
         // 在applyStatusByChance里面已经判断形态了 无需在外面判断
         if (target instanceof PlayerEntity player) {
-            TStatusApplier.applyStatusByChance(T_WOLF_STATUS_CHANCE, player, TO_ANUBIS_WOLF_0_EFFECT);
+            TStatusApplier.applyStatusByChance(this.getStatusChance(), player, this.getStatusEffect());
         }
     }
 
@@ -174,5 +169,37 @@ public class TransformativeWolfEntity extends WolfEntity {
     @Override
     public void setTamed(boolean tamed) {
         return;
+    }
+
+    @Override
+    public float getStatusChance() {
+        return 0.5f;
+    }
+
+    @Override
+    public BaseTransformativeStatusEffect getStatusEffect() {
+        return TO_OCELOT_0_EFFECT;
+    }
+
+    @Override
+    public void TickCooldown() {
+        if (this.cooldown > 0) {
+            this.cooldown --;
+        }
+    }
+
+    @Override
+    public void ApplyCooldown() {
+        this.cooldown = 100;
+    }
+
+    @Override
+    public boolean IsInCooldown() {
+        return this.cooldown > 0;
+    }
+
+    @Override
+    public EntityView method_48926() {
+        return super.getWorld();
     }
 }

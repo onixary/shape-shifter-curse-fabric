@@ -35,6 +35,10 @@ public class RegCustomPotions {
     public static final Potion ANUBIS_WOLF_FORM_POTION =
             Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_anubis_wolf_0_potion"),
                     new Potion(new StatusEffectInstance(TO_ANUBIS_WOLF_0_POTION)));
+    public static final Potion SPIDER_FORM_POTION =
+            Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_spider_0_potion"),
+                    new Potion(new StatusEffectInstance(TO_SPIDER_0_POTION)));
+
     public static final Potion ALLEY_FORM_POTION =
             Registry.register(Registries.POTION, new Identifier(MOD_ID, "to_allay_sp_potion"),
                     new Potion(new StatusEffectInstance(TO_ALLAY_SP_POTION)));

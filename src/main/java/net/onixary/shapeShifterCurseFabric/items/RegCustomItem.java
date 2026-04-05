@@ -159,6 +159,7 @@ public class RegCustomItem {
                         RegCustomPotions.FAMILIAR_FOX_FORM_POTION,
                         RegCustomPotions.SNOW_FOX_FORM_POTION,
                         RegCustomPotions.ANUBIS_WOLF_FORM_POTION,
+                        RegCustomPotions.SPIDER_FORM_POTION,
                         RegCustomPotions.ALLEY_FORM_POTION,
                         RegCustomPotions.FERAL_CAT_FORM_POTION,
                         RegCustomPotions.CUSTOM_STATUE_FORM_POTION,

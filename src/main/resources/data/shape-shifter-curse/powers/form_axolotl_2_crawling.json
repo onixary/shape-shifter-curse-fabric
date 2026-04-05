@@ -1,0 +1,10 @@
+{
+    "type": "shape-shifter-curse:crawling",
+    "condition": {
+        "type": "apoli:sneaking"
+    },
+    "scale": 1.0,
+    "eye_scale": 1.0,
+    "active_scale": 0.6,
+    "active_eye_scale": 0.35
+}

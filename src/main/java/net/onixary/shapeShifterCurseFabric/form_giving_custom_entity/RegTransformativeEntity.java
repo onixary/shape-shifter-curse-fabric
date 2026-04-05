@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.form_giving_custom_entity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.spider.TransformativeSpiderEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.wolf.TransformativeWolfEntity;
 import net.onixary.shapeShifterCurseFabric.util.EntityAttributeRegister;
 
@@ -20,6 +21,8 @@ public class RegTransformativeEntity {
         EntityAttributeRegister.register(T_OCELOT, TransformativeOcelotEntity::createAttributes);
 
         EntityAttributeRegister.register(T_WOLF, TransformativeWolfEntity::createAttributes);
+
+        EntityAttributeRegister.register(T_SPIDER, TransformativeSpiderEntity::createAttributes);
 
         // obsolete, use vanilla spawning logic
         // handle entity spawn
