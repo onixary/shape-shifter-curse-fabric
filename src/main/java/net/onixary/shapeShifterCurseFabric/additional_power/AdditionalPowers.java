@@ -73,6 +73,7 @@ public class AdditionalPowers {
         register(FormCameraBobbingPower.createFactory());
         register(SlowdownPercentPower.createFactory());
         register(ChargePower.createFactory());
+        register(ItemStorePower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

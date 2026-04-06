@@ -99,14 +99,14 @@ public class TransformativeEntitySpawning {
             if (structure != null) {
                 Map<SpawnGroup, StructureSpawns> oldSpawns = structure.getStructureSpawns();
                 Map<SpawnGroup, StructureSpawns> spawns = oldSpawns.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-                spawns.put(SpawnGroup.MONSTER, new StructureSpawns(StructureSpawns.BoundingBox.PIECE, Pool.of(new SpawnSettings.SpawnEntry(ShapeShifterCurseFabric.T_SPIDER, 20, 3, 5))));
+                spawns.put(SpawnGroup.MONSTER, new StructureSpawns(StructureSpawns.BoundingBox.PIECE, Pool.of(new SpawnSettings.SpawnEntry(ShapeShifterCurseFabric.T_SPIDER, 5, 1, 2))));
                 structure.config.spawnOverrides = spawns;
             }
             structure = server.getOverworld().getRegistryManager().get(RegistryKeys.STRUCTURE).get(new Identifier("minecraft", "mineshaft_mesa"));
             if (structure != null) {
                 Map<SpawnGroup, StructureSpawns> oldSpawns = structure.getStructureSpawns();
                 Map<SpawnGroup, StructureSpawns> spawns = oldSpawns.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-                spawns.put(SpawnGroup.MONSTER, new StructureSpawns(StructureSpawns.BoundingBox.PIECE, Pool.of(new SpawnSettings.SpawnEntry(ShapeShifterCurseFabric.T_SPIDER, 20, 3, 5))));
+                spawns.put(SpawnGroup.MONSTER, new StructureSpawns(StructureSpawns.BoundingBox.PIECE, Pool.of(new SpawnSettings.SpawnEntry(ShapeShifterCurseFabric.T_SPIDER, 5, 1, 2))));
                 structure.config.spawnOverrides = spawns;
             }
         });
