@@ -26,12 +26,29 @@ import java.util.function.Consumer;
 public class ItemStorePower extends Power {
     public ItemStack storedItem = ItemStack.EMPTY;
     public final @Nullable Identifier powerID;
+    public int bobbingAnimationTime = 0;
     public final int Slot;
+    public final int VanillaSlotStart = 2800;
 
     public ItemStorePower(PowerType<?> type, LivingEntity entity, @Nullable Identifier powerID, int Slot) {
         super(type, entity);
         this.powerID = powerID;
         this.Slot = Slot;
+        this.setTicking();
+    }
+
+    public void clientTick() {
+        if (this.bobbingAnimationTime > 0) {
+            this.bobbingAnimationTime -= 1;
+        }
+    }
+
+    @Override
+    public void tick() {
+        if (this.bobbingAnimationTime > 0) {
+            this.bobbingAnimationTime -= 1;
+        }
+        this.storedItem.inventoryTick(this.entity.getWorld(), this.entity, VanillaSlotStart + this.Slot, false);
     }
 
     public void SetItem(ItemStack stack) {
@@ -39,6 +56,7 @@ public class ItemStorePower extends Power {
             return;
         }
         this.storedItem = stack.copy();
+        this.bobbingAnimationTime = 5;
         PowerHolderComponent.syncPower(this.entity, this.getType());
     }
 
@@ -93,6 +111,7 @@ public class ItemStorePower extends Power {
         NbtCompound itemTag = new NbtCompound();
         this.storedItem.writeNbt(itemTag);
         tag.put("stored_item", itemTag);
+        tag.putInt("bobbing_animation_time", this.bobbingAnimationTime);
         return tag;
     }
 
@@ -103,6 +122,7 @@ public class ItemStorePower extends Power {
             if (!itemStackNBT.isEmpty()) {
                 this.storedItem = ItemStack.fromNbt(itemStackNBT);
             }
+            this.bobbingAnimationTime = compound.getInt("bobbing_animation_time");
         }
     }
 
