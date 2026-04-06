@@ -6,6 +6,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Pair;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.ItemStorePower;
 import net.onixary.shapeShifterCurseFabric.util.UIPositionUtils;
 
@@ -45,7 +46,7 @@ public class ItemStorePowerRender {
     }
 
     private static void renderSlot(DrawContext context, float tickDelta, ItemStorePower power) {
-        Pair<Integer, Integer> SlotBegin = UIPositionUtils.getCorrectPosition(8, -120 - (NowCol * 20), -2 - (NowRow * 20));
+        Pair<Integer, Integer> SlotBegin = UIPositionUtils.getCorrectPosition(ShapeShifterCurseFabric.clientConfig.itemStorePowerPosType, ShapeShifterCurseFabric.clientConfig.itemStorePowerPosOffsetX - (NowCol * 20), ShapeShifterCurseFabric.clientConfig.itemStorePowerPosOffsetY - (NowRow * 20));
         int SlotX = power.Slot % SlotPerRow;
         int SlotY = power.Slot / SlotPerRow;
         int SlotXFinal = SlotBegin.getLeft() + SlotX * 20;
