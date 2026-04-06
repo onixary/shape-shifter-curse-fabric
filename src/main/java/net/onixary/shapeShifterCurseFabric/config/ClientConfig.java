@@ -60,13 +60,13 @@ public class ClientConfig implements ConfigData {
 
     @ConfigEntry.Category("UI")
     @Comment("Item Store Power Middle Position Type (1-9). Default: 8")
-    public int itemStorePowerPosType = 8;  // 魔力条中间位置类型 (1-9)
+    public int itemStorePowerPosType = 8;  // itemStorePower 中间位置类型 (1-9)
 
     @ConfigEntry.Category("UI")
     @Comment("Item Store Power Position X Offset. Default: 100")
-    public int itemStorePowerPosOffsetX = -120;  // 魔力条中间 X 位置偏移量
+    public int itemStorePowerPosOffsetX = -120;  // itemStorePower 中间 X 位置偏移量
 
     @ConfigEntry.Category("UI")
     @Comment("Item Store Power Position Y Offset. Default: -17")
-    public int itemStorePowerPosOffsetY = 1;  // 魔力条中间 Y 位置偏移量
+    public int itemStorePowerPosOffsetY = 1;  // itemStorePower 中间 Y 位置偏移量
 }
