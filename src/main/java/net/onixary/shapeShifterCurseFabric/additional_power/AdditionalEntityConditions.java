@@ -93,6 +93,7 @@ public class AdditionalEntityConditions {
                     return false;
                 }
         ));
+        ItemStorePower.registerCondition(AdditionalEntityConditions::register);
     }
 
     private static void register(ConditionFactory<Entity> conditionFactory) {
