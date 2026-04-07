@@ -88,14 +88,14 @@ public class ItemStorePower extends Power {
         }
     }
 
-    public void SwapItem() {
+    public void SwapItem(EquipmentSlot slot) {
         if (this.entity.getWorld().isClient) {
             return;
         }
-        ItemStack item = this.entity.getEquippedStack(EquipmentSlot.MAINHAND);
+        ItemStack item = this.entity.getEquippedStack(slot);
         ItemStack stored = this.storedItem;
         this.SetItem(item);
-        this.entity.equipStack(EquipmentSlot.MAINHAND, stored);
+        this.entity.equipStack(slot, stored);
     }
 
     @Override
@@ -202,11 +202,12 @@ public class ItemStorePower extends Power {
         ActionRegister.accept(new ActionFactory<>(
                 ShapeShifterCurseFabric.identifier("swap_store_power_item"),
                 new SerializableData()
-                        .add("id", SerializableDataTypes.IDENTIFIER, null),
+                        .add("id", SerializableDataTypes.IDENTIFIER, null)
+                        .add("slot", SerializableDataTypes.EQUIPMENT_SLOT, EquipmentSlot.MAINHAND),
                 (data, entity) -> {
                     ItemStorePower itemStorePower = findPower(entity, data.get("id"));
                     if (itemStorePower != null) {
-                        itemStorePower.SwapItem();
+                        itemStorePower.SwapItem(data.get("slot"));
                     }
                 }
         ));
