@@ -13,8 +13,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.FlintAndSteelItem;
-import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -23,7 +21,6 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v2.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.*;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -459,26 +456,9 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 //
 //    }
 
-    // 2代控制器数据
-    // @Unique
-    // AnimationController.PlayerAnimDataHolder AnimDataHolder = new AnimationController.PlayerAnimDataHolder();
-
     // 3代控制器数据
     @Unique
     AnimSystem animSystem = new AnimSystem((PlayerEntity) (Object)this);
-
-//    @Override
-//    public void tick() {
-//        super.tick();
-//        animToPlay = AnimationControllerInstance.getAnim(this, this.AnimDataHolder);
-//        if (animToPlay != null){
-//            playAnimation(animToPlay.getAnimation(), animToPlay.getSpeed(), animToPlay.getFade());
-//        }
-//        else{
-//            CONTAINER.setAnimation(null);
-//            currentAnimation = null;
-//        }
-//    }
 
     @Inject(method = "tick", at = @At("TAIL"))
     void tick(CallbackInfo ci) {
