@@ -14,7 +14,6 @@ import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.mixin.accessor.PowerTypeRegistryAccessor;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
-import net.onixary.shapeShifterCurseFabric.player_animation.v2.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
@@ -27,14 +26,6 @@ import java.util.*;
 
 public class PlayerFormDynamic extends PlayerFormBase{
 
-    /*
-    private final HashMap<PlayerAnimState, AnimationHolderData> animMap_Builder = new HashMap<>();
-    public static final HashMap<Identifier, HashMap<PlayerAnimState, AnimationHolder>> animMap = new HashMap<>();
-    private AnimationHolderData defaultAnim_Builder = null;
-    public static final HashMap<Identifier, AnimationHolder> defaultAnim = new HashMap<>();
-    public static final HashMap<Identifier, Boolean> isAnimRegistered = new HashMap<>();
-     */
-
     public static final UUID PublicUUID = UUID.fromString("00000000-0000-0000-0000-000000000000");
 
     public Identifier FurModelID = null;
@@ -44,7 +35,6 @@ public class PlayerFormDynamic extends PlayerFormBase{
     public boolean IsPatronForm = false;  // 可以使用特殊物品直接变形
     public int RequirePatronLevel = 0;  // 需要的赞助等级
     public List<UUID> PlayerUUIDs = new ArrayList<UUID>();
-
 
     // 覆写数据
     private Identifier originID = null;
@@ -58,41 +48,6 @@ public class PlayerFormDynamic extends PlayerFormBase{
 
     public boolean isModelExist() {
         return OriginalFurClient.FUR_RESOURCES.containsKey(this.getFormOriginID());
-    }
-
-    @Override
-    public AnimationHolder Anim_getFormAnimToPlay(PlayerAnimState currentState) {
-        /*
-        // 如果未加载模型则不修改动画
-        if (!this.isModelExist()) {
-            return null;
-        }
-        if (!isAnimRegistered.getOrDefault(this.FormID, false)) {
-            Anim_registerAnims();
-        }
-        return this.getAnimMap().getOrDefault(currentState, defaultAnim.get(this.FormID));
-         */
-        return null;
-    }
-
-    /*
-    public HashMap<PlayerAnimState, AnimationHolder> getAnimMap() {
-        return animMap.computeIfAbsent(this.FormID, k -> new HashMap<>());
-    }
-     */
-
-    @Override
-    public void Anim_registerAnims() {
-        /*
-        this.getAnimMap().clear();
-        for (PlayerAnimState state : this.animMap_Builder.keySet()) {
-            this.getAnimMap().put(state, this.animMap_Builder.get(state).build());
-        }
-        if (this.defaultAnim_Builder != null) {
-            defaultAnim.put(this.FormID, defaultAnim_Builder.build());
-        }
-        isAnimRegistered.put(this.FormID, true);
-         */
     }
 
     private Map<Identifier, AbstractAnimStateController> animStateControllerMap = new HashMap<>();

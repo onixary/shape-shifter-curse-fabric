@@ -3,8 +3,6 @@ package net.onixary.shapeShifterCurseFabric.player_form.forms;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
-import net.onixary.shapeShifterCurseFabric.player_animation.v2.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.*;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.*;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
@@ -87,16 +85,5 @@ public class Form_Spider3 extends PlayerFormBase {
             }
         }
         return super.getAnimStateController(player, animSystemData, animStateID);
-    }
-
-    // v2动画兼容
-    @Override
-    public void Anim_registerAnims() {
-        // 动画注册（如需要）
-    }
-
-    @Override
-    public AnimationHolder Anim_getFormAnimToPlay(PlayerAnimState currentState) {
-        return null;
     }
 }
