@@ -62,8 +62,7 @@
     "EnchantmentUtilAnvilMixin",
     "EnchantmentUtilEnchantCommandMixin",
     "EntityMixin",
-    "DefaultAttributeRegistryMixin",
-    "BuiltinRegistriesMixin"
+    "DefaultAttributeRegistryMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",
