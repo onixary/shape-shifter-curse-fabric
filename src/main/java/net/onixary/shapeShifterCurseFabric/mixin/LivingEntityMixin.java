@@ -1,8 +1,12 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
 import io.github.apace100.apoli.component.PowerHolderComponent;
+import io.github.apace100.apoli.integration.ModifyValueCallback;
+import io.github.apace100.apoli.power.AttributeModifyTransferPower;
+import io.github.apace100.apoli.power.Power;
+import io.github.apace100.apoli.util.modifier.Modifier;
+import io.github.apace100.apoli.util.modifier.ModifierUtil;
 import net.minecraft.block.BlockState;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
@@ -20,7 +24,6 @@ import net.minecraft.item.Items;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.additional_power.*;
@@ -28,8 +31,7 @@ import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
-import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
-import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
+import net.onixary.shapeShifterCurseFabric.util.ModTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -41,6 +43,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static net.onixary.shapeShifterCurseFabric.util.ModTags.LIKE_SCAFFOLDING_TAG;
 
@@ -104,7 +108,7 @@ public abstract class LivingEntityMixin {
 
     @Unique
     private void handleExtraLoot(MobEntity mob, ServerPlayerEntity player) {
-        if (AdditionalPowers.CAN_LOOT_SPIDER_FLUID_COCOON.isActive(player)) {
+        if (AdditionalPowers.CAN_LOOT_SPIDER_FLUID_COCOON.isActive(player) && !mob.getType().getRegistryEntry().isIn(ModTags.SPIDER_FLUID_COCOON_BLACKLIST)) {
             // 25% 掉落 0~(血上限/10f)个
             float mobMaxHp = mob.getMaxHealth();
             int lootCount = (int) (mobMaxHp / 10.0f);
@@ -238,5 +242,26 @@ public abstract class LivingEntityMixin {
         if (((LivingEntity) (Object) this).getBlockStateAtPos().isIn(LIKE_SCAFFOLDING_TAG)) {
             cir.setReturnValue(false);
         }
+    }
+
+    @Unique
+    private <T extends Power> float applyModifier(Class<T> powerClass, float baseValue, Function<T, List<Modifier>> powerModifierGetter) {
+        LivingEntity entity = (LivingEntity) (Object) this;
+        List<T> powers = PowerHolderComponent.getPowers(entity, powerClass);
+        List<Modifier> mps = powers.stream()
+                .flatMap(p -> powerModifierGetter.apply(p).stream()).collect(Collectors.toList());
+        return (float) ModifierUtil.applyModifiers(entity, mps, baseValue);
+    }
+
+    @ModifyVariable(method = "handleFallDamage", at = @At("HEAD"), ordinal = 0, argsOnly = true)
+    private float handleFallDamageA(float fallDistance) {
+        float finalV = applyModifier(ModifyFallDamagePower.class, fallDistance, ModifyFallDamagePower::getModifiers_FallDistance);
+        return Math.max(0f, finalV);
+    }
+
+    @ModifyVariable(method = "handleFallDamage", at = @At("HEAD"), ordinal = 1, argsOnly = true)
+    private float handleFallDamageB(float damageMultiplier) {
+        float finalV = applyModifier(ModifyFallDamagePower.class, damageMultiplier, ModifyFallDamagePower::getModifiers_DamageMultiplier);
+        return Math.max(0f, finalV);
     }
 }

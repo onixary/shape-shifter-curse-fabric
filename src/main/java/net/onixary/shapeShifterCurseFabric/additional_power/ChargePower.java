@@ -28,6 +28,7 @@ public class ChargePower extends Power implements Active {
         public boolean enable;
         public int chargeTime;
         public Predicate<Entity> condition;
+        public Predicate<Entity> autoFireCondition;
         public ActionFactory<Entity>.Instance useAction;
         public ActionFactory<Entity>.Instance tickAction;
         public ActionFactory<Entity>.Instance chargeTickAction;
@@ -41,6 +42,7 @@ public class ChargePower extends Power implements Active {
             this.enable = data.getBoolean(String.format("tier%d_enable", index));
             this.chargeTime = data.getInt(String.format("tier%d_charge_time", index));
             this.condition = data.get(String.format("tier%d_condition", index));
+            this.autoFireCondition = data.get(String.format("tier%d_auto_fire_condition", index));
             this.useAction = data.get(String.format("tier%d_use_action", index));
             this.tickAction = data.get(String.format("tier%d_tick_action", index));
             this.chargeTickAction = data.get(String.format("tier%d_charge_tick_action", index));
@@ -51,6 +53,7 @@ public class ChargePower extends Power implements Active {
         }
 
         public void tick(ChargePower power) {
+            boolean checkAutoFire = false;
             if (!power.isCharging) {
                 return;
             }
@@ -67,6 +70,7 @@ public class ChargePower extends Power implements Active {
                         }
                         power.nowTier = this.tier;
                         power.updateTier();
+                        checkAutoFire = true;
                     }
                 }
             }
@@ -79,6 +83,9 @@ public class ChargePower extends Power implements Active {
                 if (this.chargeCompleteTickAction != null) {
                     this.chargeCompleteTickAction.accept(power.entity);
                 }
+            }
+            if (checkAutoFire && this.autoFireCondition != null && this.autoFireCondition.test(power.entity)) {
+                power.fire(false);
             }
         }
 
@@ -126,6 +133,21 @@ public class ChargePower extends Power implements Active {
         this.setTicking(true);
     }
 
+    public void fire(boolean AddTick) {
+        this.isCharging = false;
+        if (this.ChargeTime > 0) {
+            for (ChargeTier chargeTier : ChargeTierList) {
+                chargeTier.use(this);
+            }
+        }
+        if (AddTick) {
+            this.nowTick += 2;
+        }
+        this.nowTier = 0;
+        this.ChargeTime = 0;
+        this.updateTier();
+    }
+
     @Override
     public void tick() {
         if (nowCooldown > 0) {
@@ -134,15 +156,7 @@ public class ChargePower extends Power implements Active {
             nowCooldown = 0;
         }
         if (this.nowTick - this.lastTick > 2) {
-            this.isCharging = false;
-            if (this.ChargeTime > 0) {
-                for (ChargeTier chargeTier : ChargeTierList) {
-                    chargeTier.use(this);
-                }
-            }
-            this.nowTier = 0;
-            this.ChargeTime = 0;
-            this.updateTier();
+            this.fire(false);
         }
         nowTick++;
         for (ChargeTier chargeTier : ChargeTierList) {
@@ -194,6 +208,7 @@ public class ChargePower extends Power implements Active {
                     .add(String.format("tier%d_enable", index), SerializableDataTypes.BOOLEAN, index == 0)  // 是否启用这个阶段
                     .add(String.format("tier%d_charge_time", index), SerializableDataTypes.INT, index == 0 ? 0 : -1)  // 这个阶段需要充能的时间
                     .add(String.format("tier%d_condition", index), ApoliDataTypes.ENTITY_CONDITION, null)  // 是否可以到达这个阶段
+                    .add(String.format("tier%d_auto_fire_condition", index), ApoliDataTypes.ENTITY_CONDITION, null)  // 是否可以到达这个阶段
                     .add(String.format("tier%d_use_action", index), ApoliDataTypes.ENTITY_ACTION, null)  // 到达这个阶段后松下按键时的动作
                     .add(String.format("tier%d_tick_action", index), ApoliDataTypes.ENTITY_ACTION, null)  // 这个阶段每 Tick 执行的动作
                     .add(String.format("tier%d_charge_tick_action", index), ApoliDataTypes.ENTITY_ACTION, null)  // 给这个阶段充能时每 Tick 执行的动作

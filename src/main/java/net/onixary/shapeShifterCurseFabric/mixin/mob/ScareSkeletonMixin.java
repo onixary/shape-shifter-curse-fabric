@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.mixin;
+package net.onixary.shapeShifterCurseFabric.mixin.mob;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.RangedAttackMob;

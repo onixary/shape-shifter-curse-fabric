@@ -336,7 +336,7 @@ public class ModPacketsS2C {
             ShapeShifterCurseFabric.LOGGER.warn("Can't find player entity when receiving active virtual totem packet");
             return;
         }
-        int virtualTotemType = buf.readInt();
+        Identifier virtualTotemType = buf.readIdentifier();
         ItemStack totemStack = buf.readItemStack();
         // ConcurrentModificationException 需要把这个操作放到Client线程而非Network线程
         client.execute(() -> VirtualTotemPower.process_virtual_totem_type(playerEntity, virtualTotemType, totemStack));

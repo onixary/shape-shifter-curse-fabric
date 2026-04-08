@@ -19,6 +19,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
+import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 import java.util.function.Consumer;
@@ -96,6 +97,16 @@ public class ItemStorePower extends Power {
         ItemStack stored = this.storedItem;
         this.SetItem(item);
         this.entity.equipStack(slot, stored);
+    }
+
+    public void InvokeItemAction(ActionFactory<Pair<World, ItemStack>>.Instance action) {
+        if (this.entity.getWorld().isClient) {
+            return;
+        }
+        if (action != null) {
+            action.accept(new Pair<>(this.entity.getWorld(), this.storedItem));
+        }
+        PowerHolderComponent.syncPower(this.entity, this.getType());
     }
 
     @Override
@@ -208,6 +219,19 @@ public class ItemStorePower extends Power {
                     ItemStorePower itemStorePower = findPower(entity, data.get("id"));
                     if (itemStorePower != null) {
                         itemStorePower.SwapItem(data.get("slot"));
+                    }
+                }
+        ));
+
+        ActionRegister.accept(new ActionFactory<>(
+                ShapeShifterCurseFabric.identifier("invoke_store_power_item"),
+                new SerializableData()
+                        .add("id", SerializableDataTypes.IDENTIFIER, null)
+                        .add("action", ApoliDataTypes.ITEM_ACTION, null),
+                (data, entity) -> {
+                    ItemStorePower itemStorePower = findPower(entity, data.get("id"));
+                    if (itemStorePower != null) {
+                        itemStorePower.InvokeItemAction(data.get("action"));
                     }
                 }
         ));
