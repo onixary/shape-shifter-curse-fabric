@@ -12,32 +12,48 @@
         "value": true
     },
     "tier0_use_action": {
-        "type": "origins:execute_command",
-        "command": "tellraw @s {\"text\": \"Tier0 USE\", \"color\": \"red\"}"
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "tellraw @s {\"text\": \"Tier0 USE\", \"color\": \"red\"}"
+        },
+        {
+          "type" : "shape-shifter-curse:fire_web_bullet",
+          "tier" : 1,
+          "divergence": 1,
+          "speed": 1.5,
+          "projectile_action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:spawn_particles",
+                "particle": "minecraft:cloud",
+                "count": 8,
+                "speed": 0.0,
+                "force": false,
+                "spread": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                }
+              }
+            ]
+          }
+        }
+      ]
     },
     "tier0_tick_action": {
-        "type": "origins:execute_command",
-        "command": "tellraw @s {\"text\": \"Tier0 TICK\", \"color\": \"green\"}"
+      "type": "origins:execute_command",
+      "command": "tellraw @s {\"text\": \"Tier0 TICK\", \"color\": \"red\"}"
     },
     "tier0_charge_tick_action": {
-        "type": "origins:execute_command",
-        "command": "tellraw @s {\"text\": \"Tier0 CHARGE TICK\", \"color\": \"green\"}"
-    },
-    "tier0_charge_complete_action": {
-        "type": "origins:execute_command",
-        "command": "tellraw @s {\"text\": \"Tier0 CHARGE COMPLETE\", \"color\": \"red\"}"
-    },
-    "tier0_charge_complete_use_action": {
-        "type": "origins:execute_command",
-        "command": "tellraw @s {\"text\": \"Tier0 CHARGE COMPLETE USE\", \"color\": \"red\"}"
-    },
-    "tier0_charge_complete_tick_action": {
-        "type": "origins:execute_command",
-        "command": "tellraw @s {\"text\": \"Tier0 CHARGE COMPLETE TICK\", \"color\": \"green\"}"
+      "type": "origins:execute_command",
+      "command": "tellraw @s {\"text\": \"Tier0 CHARGE TICK\", \"color\": \"red\"}"
     },
     "tier0_cooldown": 10,
 
-    "tier1_enable": true,
+    "tier1_enable": false,
     "tier1_charge_time": 20,
     "tier1_condition": {
         "type": "origins:constant",
@@ -55,21 +71,9 @@
         "type": "origins:execute_command",
         "command": "tellraw @s {\"text\": \"Tier1 CHARGE TICK\", \"color\": \"green\"}"
     },
-    "tier1_charge_complete_action": {
-        "type": "origins:execute_command",
-        "command": "tellraw @s {\"text\": \"Tier1 CHARGE COMPLETE\", \"color\": \"red\"}"
-    },
-    "tier1_charge_complete_use_action": {
-        "type": "origins:execute_command",
-        "command": "tellraw @s {\"text\": \"Tier1 CHARGE COMPLETE USE\", \"color\": \"red\"}"
-    },
-    "tier1_charge_complete_tick_action": {
-        "type": "origins:execute_command",
-        "command": "tellraw @s {\"text\": \"Tier1 CHARGE COMPLETE TICK\", \"color\": \"green\"}"
-    },
     "tier1_cooldown": 10,
 
-    "tier2_enable": true,
+    "tier2_enable": false,
     "tier2_charge_time": 30,
     "tier2_condition": {
         "type": "origins:constant",
@@ -86,18 +90,6 @@
     "tier2_charge_tick_action": {
         "type": "origins:execute_command",
         "command": "tellraw @s {\"text\": \"Tier2 CHARGE TICK\", \"color\": \"green\"}"
-    },
-    "tier2_charge_complete_action": {
-        "type": "origins:execute_command",
-        "command": "tellraw @s {\"text\": \"Tier2 CHARGE COMPLETE\", \"color\": \"red\"}"
-    },
-    "tier2_charge_complete_use_action": {
-        "type": "origins:execute_command",
-        "command": "tellraw @s {\"text\": \"Tier2 CHARGE COMPLETE USE\", \"color\": \"red\"}"
-    },
-    "tier2_charge_complete_tick_action": {
-        "type": "origins:execute_command",
-        "command": "tellraw @s {\"text\": \"Tier2 CHARGE COMPLETE TICK\", \"color\": \"green\"}"
     },
     "tier2_cooldown": 10
 }
