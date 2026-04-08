@@ -10,6 +10,11 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
@@ -23,6 +28,7 @@ import static net.onixary.shapeShifterCurseFabric.entity.RegCustomEntity.WEB_BUL
 public class WebBullet extends ThrownItemEntity {
     public @Nullable LivingEntity owner = null;
     public int Tier = 1;
+    private boolean launched = false;
 
     public static final WebBridgeAction.WebLadderConfig ladderConfigTier1 = new WebBridgeAction.WebLadderConfig(16, 20, 16, false, 0.0f);
     public static final WebBridgeAction.WebLadderConfig ladderConfigTier2 = new WebBridgeAction.WebLadderConfig(16, 20, 16, true, 0.25f);
@@ -54,6 +60,71 @@ public class WebBullet extends ThrownItemEntity {
     }
 
     @Override
+    public void tick() {
+        super.tick();
+        if (this.getWorld() instanceof ServerWorld serverWorld) {
+            if (!launched) {
+                launched = true;
+                if(this.owner != null){
+                    switch (Tier){
+                        case 1 -> {
+                            serverWorld.playSound(null, this.owner.getX(), this.owner.getY(), this.owner.getZ(),
+                                    SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 1.0f, 0.6f + this.random.nextFloat() * 0.4f);
+                        }
+                        case 2 -> {
+                            serverWorld.playSound(null, this.owner.getX(), this.owner.getY(), this.owner.getZ(),
+                                    SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 1.0f, 0.9f + this.random.nextFloat() * 0.4f);
+                        }
+                        case 3 -> {
+                            serverWorld.playSound(null, this.owner.getX(), this.owner.getY(), this.owner.getZ(),
+                                    SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 1.0f, 1.2f + this.random.nextFloat() * 0.4f);
+                        }
+                    }
+                }
+            }
+            switch (Tier){
+                case 1 -> {
+                    serverWorld.spawnParticles(ParticleTypes.ASH,
+                            this.getX(), this.getY(), this.getZ(),
+                            3, 0.05, 0.05, 0.05, 0.01);
+                }
+                case 2 -> {
+                    serverWorld.spawnParticles(ParticleTypes.SPIT,
+                            this.getX(), this.getY(), this.getZ(),
+                            1, 0.05, 0.05, 0.05, 0.01);
+                }
+                case 3 -> {
+                    serverWorld.spawnParticles(ParticleTypes.CLOUD,
+                            this.getX(), this.getY(), this.getZ(),
+                            2, 0.05, 0.05, 0.05, 0.01);
+                }
+            }
+
+        }
+    }
+
+    private void playHitEffects() {
+        if (this.getWorld() instanceof ServerWorld serverWorld) {
+            serverWorld.spawnParticles(ParticleTypes.CLOUD,
+                    this.getX(), this.getY(), this.getZ(),
+                    20, 0.3, 0.3, 0.3, 0.05);
+            serverWorld.playSound(null, this.getX(), this.getY(), this.getZ(),
+                    SoundEvents.BLOCK_WET_GRASS_BREAK, SoundCategory.NEUTRAL, 1.0f, 0.8f + this.random.nextFloat() * 0.4f);
+        }
+    }
+
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        nbt.putBoolean("web_projectile", true);
+    }
+
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+    }
+
+    @Override
     public void onBlockHit(BlockHitResult blockHitResult) {
         WebBridgeAction.WebLadderConfig nowConfig = null;
         switch (Tier) {
@@ -63,6 +134,7 @@ public class WebBullet extends ThrownItemEntity {
             default -> nowConfig = ladderConfigTier1;
         }
         WebBridgeAction.BuildWebLadder(this.getWorld(), blockHitResult, nowConfig, RegCustomBlock.TEMP_WEB_BRIDGE);
+        playHitEffects();
         this.discard();
     }
 
@@ -103,6 +175,7 @@ public class WebBullet extends ThrownItemEntity {
                 case 3 -> EntangledEffectUtils.applyEntangledEffect(livingEntity, Tier3BuffTime);
             }
         }
+        playHitEffects();
         this.discard();
     }
 }

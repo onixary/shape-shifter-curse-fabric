@@ -1,0 +1,113 @@
+{
+  "type": "shape-shifter-curse:charge_action",
+  "charge_power_id": "shape-shifter-curse:web_charge",
+  "key": {
+    "key": "key.origins.primary_active",
+    "continuous": true
+  },
+  "tier0_enable": true,
+  "tier0_charge_time": 20,
+  "tier0_condition": {
+    "type": "shape-shifter-curse:has_mana",
+    "mana": 5
+  },
+  "tier0_use_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "shape-shifter-curse:fire_web_bullet",
+        "tier": 1,
+        "divergence": 1,
+        "speed": 2
+      }
+    ]
+  },
+  "tier0_tick_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:apply_effect",
+        "effect": {
+          "effect": "minecraft:slowness",
+          "duration": 10,
+          "amplifier": 1
+        }
+      }
+    ]
+  },
+  "tier0_charge_tick_action": {
+    "type": "shape-shifter-curse:consume_mana",
+    "mana": 0.25
+  },
+  "tier0_cooldown": 20,
+  "tier1_enable": true,
+  "tier1_charge_time": 40,
+  "tier1_condition": {
+    "type": "shape-shifter-curse:has_mana",
+    "mana": 10
+  },
+  "tier1_use_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "shape-shifter-curse:fire_web_bullet",
+        "tier": 2,
+        "divergence": 1,
+        "speed": 2
+      }
+    ]
+  },
+  "tier1_tick_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:apply_effect",
+        "effect": {
+          "effect": "minecraft:slowness",
+          "duration": 10,
+          "amplifier": 1
+        }
+      }
+    ]
+  },
+  "tier1_charge_tick_action": {
+    "type": "shape-shifter-curse:consume_mana",
+    "mana": 0.25
+  },
+  "tier1_cooldown": 40,
+  "tier2_enable": true,
+  "tier2_charge_time": 60,
+  "tier2_condition": {
+    "type": "shape-shifter-curse:has_mana",
+    "mana": 15
+  },
+  "tier2_use_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "shape-shifter-curse:fire_web_bullet",
+        "tier": 3,
+        "divergence": 1,
+        "speed": 2
+      }
+    ]
+  },
+  "tier2_tick_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:apply_effect",
+        "effect": {
+          "effect": "minecraft:slowness",
+          "duration": 10,
+          "amplifier": 1
+        }
+      }
+    ]
+  },
+  "tier2_charge_tick_action": {
+    "type": "shape-shifter-curse:consume_mana",
+    "mana": 0.25
+  },
+  "tier2_cooldown": 60
+}
