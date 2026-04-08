@@ -19,7 +19,7 @@ import java.util.Optional;
 
 public class SpiderTPEHR extends ThirdPersonExtraHandItemRender.TPEHR_Render {
     public static final String GROUP_STRING = "hand";
-    public static final String INV_STRING = "glove";
+    public static final String INV_STRING = "extra_hand";
 
     @Override
     public void render(HeldItemRenderer heldItemRenderer, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
