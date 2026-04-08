@@ -6,22 +6,7 @@
     "continuous": true
   },
   "tier0_enable": true,
-  "tier0_charge_time": 20,
-  "tier0_condition": {
-    "type": "shape-shifter-curse:has_mana",
-    "mana": 5
-  },
-  "tier0_use_action": {
-    "type": "origins:and",
-    "actions": [
-      {
-        "type": "shape-shifter-curse:fire_web_bullet",
-        "tier": 1,
-        "divergence": 1,
-        "speed": 2
-      }
-    ]
-  },
+  "tier0_charge_time": 0,
   "tier0_tick_action": {
     "type": "origins:and",
     "actions": [
@@ -35,23 +20,18 @@
       }
     ]
   },
-  "tier0_charge_tick_action": {
-    "type": "shape-shifter-curse:consume_mana",
-    "mana": 0.25
-  },
-  "tier0_cooldown": 20,
   "tier1_enable": true,
-  "tier1_charge_time": 40,
-  "tier1_condition": {
+  "tier1_charge_time": 20,
+  "tier1_can_charge_condition": {
     "type": "shape-shifter-curse:has_mana",
-    "mana": 10
+    "mana": 6
   },
   "tier1_use_action": {
     "type": "origins:and",
     "actions": [
       {
         "type": "shape-shifter-curse:fire_web_bullet",
-        "tier": 2,
+        "tier": 1,
         "divergence": 1,
         "speed": 2
       }
@@ -74,19 +54,19 @@
     "type": "shape-shifter-curse:consume_mana",
     "mana": 0.25
   },
-  "tier1_cooldown": 40,
+  "tier1_cooldown": 20,
   "tier2_enable": true,
-  "tier2_charge_time": 60,
-  "tier2_condition": {
+  "tier2_charge_time": 40,
+  "tier2_can_charge_condition": {
     "type": "shape-shifter-curse:has_mana",
-    "mana": 15
+    "mana": 6
   },
   "tier2_use_action": {
     "type": "origins:and",
     "actions": [
       {
         "type": "shape-shifter-curse:fire_web_bullet",
-        "tier": 3,
+        "tier": 2,
         "divergence": 1,
         "speed": 2
       }
@@ -109,5 +89,41 @@
     "type": "shape-shifter-curse:consume_mana",
     "mana": 0.25
   },
-  "tier2_cooldown": 60
+  "tier2_cooldown": 40,
+  "tier3_enable": true,
+  "tier3_charge_time": 60,
+  "tier3_can_charge_condition": {
+    "type": "shape-shifter-curse:has_mana",
+    "mana": 6
+  },
+  "tier3_use_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "shape-shifter-curse:fire_web_bullet",
+        "tier": 3,
+        "divergence": 1,
+        "speed": 2
+      }
+    ]
+  },
+  "tier3_tick_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:apply_effect",
+        "effect": {
+          "effect": "minecraft:slowness",
+          "duration": 10,
+          "amplifier": 1
+        }
+      }
+    ]
+  },
+  "tier3_charge_tick_action": {
+    "type": "shape-shifter-curse:consume_mana",
+    "mana": 0.25
+  },
+  "tier3_cooldown": 60,
+  "tier4_enable": false
 }
