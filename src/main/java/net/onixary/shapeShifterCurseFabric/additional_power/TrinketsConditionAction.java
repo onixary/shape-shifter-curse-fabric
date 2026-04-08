@@ -16,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
+import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 import java.util.Map;
@@ -63,6 +64,29 @@ public class TrinketsConditionAction {
             return conditon.test(stack);
         }
         return rDefault;
+    }
+
+    public static void InvokeEquipped(Entity entity, String GroupString, String SlotString, int Slot, ActionFactory<Pair<World, ItemStack>>.Instance action) {
+        if (entity instanceof LivingEntity livingEntity) {
+            Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(livingEntity);
+            if (component.isEmpty()) {
+                return;
+            }
+            Map<String, TrinketInventory> groupInv = component.get().getInventory().get(GroupString);
+            if (groupInv == null) {
+                return;
+            }
+            TrinketInventory inv = groupInv.get(SlotString);
+            if (inv == null) {
+                return;
+            }
+            ItemStack stack = inv.getStack(Slot);
+            if (action == null) {
+                return;
+            }
+            action.accept(new Pair<>(entity.getWorld(), stack));
+        }
+        return;
     }
 
     private static void DropEquippedSingle(Entity entity, TrinketInventory inv, int slot, boolean remove) {
@@ -136,6 +160,16 @@ public class TrinketsConditionAction {
                         .add("slot_index", SerializableDataTypes.INT, -1)
                         .add("remove", SerializableDataTypes.BOOLEAN, false),
                 (data, e) -> DropEquipped(e, data.get("group"), data.get("slot"), data.get("slot_index"), data.get("remove"))
+        ));
+
+        ActionRegister.accept(new ActionFactory<Entity>(
+                ShapeShifterCurseFabric.identifier("invoke_accessory"),
+                new SerializableData()
+                        .add("group", SerializableDataTypes.STRING, "")
+                        .add("slot", SerializableDataTypes.STRING, "")
+                        .add("slot_index", SerializableDataTypes.INT, 0)
+                        .add("action", ApoliDataTypes.ITEM_ACTION, null),
+                (data, e) -> InvokeEquipped(e, data.get("group"), data.get("slot"), data.get("slot_index"), data.get("action"))
         ));
     }
 }

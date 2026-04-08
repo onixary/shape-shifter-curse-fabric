@@ -21,6 +21,7 @@ public class AdditionalEntityActions {
         registerAction(SpawnParticlesInCircleAction.getFactory());
         WebBridgeAction.registerAction(AdditionalEntityActions::registerAction, AdditionalEntityActions::registerBIAction);
         ItemStorePower.registerAction(AdditionalEntityActions::registerAction, AdditionalEntityActions::registerBIAction);
+        ItemCooldownCA.registerAction(AdditionalEntityActions::registerAction, AdditionalEntityActions::registerBIAction);
     }
 
     public static ActionFactory<Entity> registerAction(ActionFactory<Entity> actionFactory) {
