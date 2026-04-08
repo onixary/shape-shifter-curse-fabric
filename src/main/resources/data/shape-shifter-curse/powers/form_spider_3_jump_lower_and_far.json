@@ -1,0 +1,44 @@
+{
+  "type": "origins:multiple",
+  "jump_far": {
+    "type": "shape-shifter-curse:action_on_jump",
+    "entity_action": {
+      "type": "origins:add_velocity",
+      "z": 0.5,
+      "space": "local"
+    },
+    "entity_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:food_level",
+          "comparison": ">=",
+          "compare_to": 6
+        },
+        {
+          "type": "origins:fluid_height",
+          "fluid": "minecraft:water",
+          "comparison": "<=",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:on_block"
+        },
+        {
+          "type": "origins:sprinting"
+        }
+      ]
+    }
+  },
+  "jump_lower": {
+    "type": "origins:modify_jump",
+    "modifier": {
+      "operation": "multiply_base_multiplicative",
+      "value": -0.25
+    },
+    "entity_action": {
+      "type": "origins:execute_command",
+      "command": "particle cloud ~ ~ ~ 0.3 0.3 0.3 0.01 16 normal @a"
+    }
+  }
+}

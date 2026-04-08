@@ -1,0 +1,23 @@
+{
+  "type": "origins:action_on_item_use",
+  "entity_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "shape-shifter-curse:gain_mana",
+        "mana": 15
+      },
+      {
+        "type": "origins:execute_command",
+        "command": "tellraw @s {\"text\": \"EAT STRING FINISH\", \"color\": \"yellow\"}"
+      }
+    ]
+  },
+  "item_condition": {
+    "type": "origins:ingredient",
+    "ingredient": {
+      "item": "minecraft:string"
+    }
+  },
+  "trigger": "finish"
+}

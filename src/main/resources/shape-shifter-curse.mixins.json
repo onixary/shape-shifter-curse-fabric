@@ -36,6 +36,7 @@
     "integration.AppleSkin",
     "integration.AzureLib_AzProvider",
     "mob.FoxEntityMixin",
+    "mob.IronGolemHostileMixin",
     "mob.MobEntityTeamMixin",
     "mob.VillagerHostilesSensorMixin",
     "mob.WitchEntityMixin",
