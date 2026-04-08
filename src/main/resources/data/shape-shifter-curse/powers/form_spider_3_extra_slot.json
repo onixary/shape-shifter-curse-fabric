@@ -4,19 +4,5 @@
     "type": "shape-shifter-curse:item_store",
     "id": "shape-shifter-curse:test_store",
     "slot": 0
-  },
-  "swap": {
-    "type": "origins:active_self",
-    "entity_action": {
-      "type": "shape-shifter-curse:swap_store_power_item",
-      "id": "shape-shifter-curse:test_store"
-    },
-    "cooldown": 1,
-    "hud_render": {
-      "should_render": false
-    },
-    "key": {
-      "key": "key.origins.secondary_active"
-    }
   }
 }

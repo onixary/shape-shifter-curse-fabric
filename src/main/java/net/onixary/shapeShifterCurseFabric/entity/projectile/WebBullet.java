@@ -30,9 +30,9 @@ public class WebBullet extends ThrownItemEntity {
     public int Tier = 1;
     private boolean launched = false;
 
-    public static final WebBridgeAction.WebLadderConfig ladderConfigTier1 = new WebBridgeAction.WebLadderConfig(16, 20, 16, false, 0.0f);
+    public static final WebBridgeAction.WebLadderConfig ladderConfigTier1 = new WebBridgeAction.WebLadderConfig(12, 16, 12, false, 0.0f);
     public static final WebBridgeAction.WebLadderConfig ladderConfigTier2 = new WebBridgeAction.WebLadderConfig(16, 20, 16, true, 0.25f);
-    public static final WebBridgeAction.WebLadderConfig ladderConfigTier3 = new WebBridgeAction.WebLadderConfig(24, 30, 24, true, 0.4f);
+    public static final WebBridgeAction.WebLadderConfig ladderConfigTier3 = new WebBridgeAction.WebLadderConfig(20, 24, 20, true, 0.4f);
 
     public static final int Tier1BuffTime = 200;
     public static final int Tier2BuffTime = 400;
