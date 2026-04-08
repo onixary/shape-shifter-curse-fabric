@@ -110,7 +110,7 @@ public class ChargePower extends Power implements Active {
         }
     }
 
-    public static final int TierCount = 5;
+    public static final int TierCount = 10;
 
     public @Nullable Identifier chargePowerID = null;
     public int nowTier = 0;
