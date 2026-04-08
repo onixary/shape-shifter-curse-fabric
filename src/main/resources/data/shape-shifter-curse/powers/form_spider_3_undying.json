@@ -1,0 +1,57 @@
+{
+  "type": "shape-shifter-curse:virtual_totem",
+  "virtual_totem_type": "shape-shifter-curse:default",
+  "totem_stack": {
+    "item": "minecraft:totem_of_undying",
+    "count": 1
+  },
+  "entity_actions": [
+    {
+      "type": "shape-shifter-curse:drop_accessory",
+      "group": "hand",
+      "slot": "extra_hand",
+      "slot_index": 0,
+      "remove": true
+    }
+  ],
+  "condition": {
+    "type": "shape-shifter-curse:check_accessory",
+    "group": "hand",
+    "slot": "extra_hand",
+    "slot_index": 0,
+    "condition": {
+      "type": "origins:ingredient",
+      "ingredient": {
+        "item": "minecraft:totem_of_undying"
+      }
+    }
+  },
+  "totem_health": 1,
+  "totem_status_effects": [
+    {
+      "effect": "minecraft:fire_resistance",
+      "duration": 800,
+      "amplifier": 0,
+      "show_particles": true,
+      "show_icon": true
+    },
+    {
+      "effect": "minecraft:regeneration",
+      "duration": 900,
+      "amplifier": 1,
+      "show_particles": true,
+      "show_icon": true
+    },
+    {
+      "effect": "minecraft:absorption",
+      "duration": 100,
+      "amplifier": 1,
+      "show_particles": true,
+      "show_icon": true
+    }
+  ],
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

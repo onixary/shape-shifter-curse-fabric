@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.additional_power;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketInventory;
 import dev.emi.trinkets.api.TrinketsApi;
+import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.factory.action.ActionFactory;
 import io.github.apace100.apoli.power.factory.condition.ConditionFactory;
 import io.github.apace100.calio.data.SerializableData;
@@ -39,6 +40,29 @@ public class TrinketsConditionAction {
             return IsEquipped;
         }
         return false;
+    }
+
+    public static boolean CheckEquipped(Entity entity, String GroupString, String SlotString, int Slot, ConditionFactory<ItemStack>.Instance conditon, boolean rDefault) {
+        if (entity instanceof LivingEntity livingEntity) {
+            Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(livingEntity);
+            if (component.isEmpty()) {
+                return rDefault;
+            }
+            Map<String, TrinketInventory> groupInv = component.get().getInventory().get(GroupString);
+            if (groupInv == null) {
+                return rDefault;
+            }
+            TrinketInventory inv = groupInv.get(SlotString);
+            if (inv == null) {
+                return rDefault;
+            }
+            ItemStack stack = inv.getStack(Slot);
+            if (conditon == null) {
+                return rDefault;
+            }
+            return conditon.test(stack);
+        }
+        return rDefault;
     }
 
     private static void DropEquippedSingle(Entity entity, TrinketInventory inv, int slot, boolean remove) {
@@ -90,6 +114,16 @@ public class TrinketsConditionAction {
                 new SerializableData()
                         .add("accessory", SerializableDataTypes.IDENTIFIER, null),
                 (data, e) -> isEquipped(e, data.get("accessory"))
+        ));
+
+        registerFunc.accept(new ConditionFactory<Entity>(
+                ShapeShifterCurseFabric.identifier("check_accessory"),
+                new SerializableData()
+                        .add("group", SerializableDataTypes.STRING, "")
+                        .add("slot", SerializableDataTypes.STRING, "")
+                        .add("slot_index", SerializableDataTypes.INT, 0)
+                        .add("condition", ApoliDataTypes.ITEM_CONDITION, null),
+                (data, e) -> CheckEquipped(e, data.get("group"), data.get("slot"), data.get("slot_index"), data.get("condition"), false)
         ));
     }
 

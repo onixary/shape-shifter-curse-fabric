@@ -20,17 +20,45 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 // 由于网络同步问题 仅支持玩家实体 非玩家实体不会触发客户端效果
 public class VirtualTotemPower extends CooldownPower {
-    public int virtualTotemType;  // 用于播放动画
+    public static final HashMap<Identifier, BiConsumer<PlayerEntity, ItemStack>> virtualTotemTypeMap = new HashMap<>();
+
+    static {
+        virtualTotemTypeMap.put(ShapeShifterCurseFabric.identifier("default"), (PlayerEntity playerEntity, ItemStack totemStack) -> {
+            MinecraftClient client = MinecraftClient.getInstance();
+            if (totemStack == null) {
+                totemStack = new ItemStack(Items.TOTEM_OF_UNDYING, 1);
+            }
+            if (client.world != null) {
+                client.particleManager.addEmitter(playerEntity, ParticleTypes.TOTEM_OF_UNDYING, 30);
+                client.world.playSound(playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ITEM_TOTEM_USE, playerEntity.getSoundCategory(), 1.0f, 1.0f, false);
+                if (playerEntity != client.player) return;
+                client.gameRenderer.showFloatingItem(totemStack);
+            }
+        });
+        virtualTotemTypeMap.put(ShapeShifterCurseFabric.identifier("form_anubis_wolf_3_undying"), (PlayerEntity playerEntity, ItemStack totemStack) -> {
+            MinecraftClient client = MinecraftClient.getInstance();
+            if (client.world != null) {
+                client.particleManager.addEmitter(playerEntity, ParticleTypes.SMOKE, 30);
+                client.particleManager.addEmitter(playerEntity, ParticleTypes.TOTEM_OF_UNDYING, 30);
+                client.world.playSound(playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_WITHER_DEATH, playerEntity.getSoundCategory(), 0.75f, 0.8f, false);
+            }
+        });
+    }
+
+    public Identifier virtualTotemType;  // 用于播放动画
     public ItemStack totemStack;  // 当VirtualTotemPowerID == 0时 模拟原版不死图腾
     private final List<Consumer<Entity>> entityAction;
     private final int totemHealth;
@@ -80,36 +108,19 @@ public class VirtualTotemPower extends CooldownPower {
         if (this.entity instanceof ServerPlayerEntity serverPlayerEntity) {
             PacketByteBuf packetByteBuf = PacketByteBufs.create();
             packetByteBuf.writeUuid(serverPlayerEntity.getUuid());
-            packetByteBuf.writeInt(this.virtualTotemType);
+            packetByteBuf.writeIdentifier(this.virtualTotemType);
             packetByteBuf.writeItemStack(this.totemStack);
             return packetByteBuf;
         }
         return null;
     }
 
-    public static void process_virtual_totem_type(@NotNull PlayerEntity entity, int virtualTotemType, @Nullable ItemStack totemStack) {
+    public static void process_virtual_totem_type(@NotNull PlayerEntity entity, Identifier virtualTotemType, @Nullable ItemStack totemStack) {
         MinecraftClient client = MinecraftClient.getInstance();
-        switch (virtualTotemType) {
-            case 0:
-                if (totemStack == null) {
-                    totemStack = new ItemStack(Items.TOTEM_OF_UNDYING, 1);
-                }
-                if (client.world != null) {
-                    client.particleManager.addEmitter(entity, ParticleTypes.TOTEM_OF_UNDYING, 30);
-                    client.world.playSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_TOTEM_USE, entity.getSoundCategory(), 1.0f, 1.0f, false);
-                    if (entity != client.player) break;
-                    client.gameRenderer.showFloatingItem(totemStack);
-                }
-                break;
-            case 1:  // 凋零不死能力
-                if (client.world != null) {
-                    client.particleManager.addEmitter(entity, ParticleTypes.SMOKE, 30);
-                    client.particleManager.addEmitter(entity, ParticleTypes.TOTEM_OF_UNDYING, 30);
-                    client.world.playSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ENTITY_WITHER_DEATH, entity.getSoundCategory(), 0.75f, 0.8f, false);
-                }
-                break;
-            default:
-                ShapeShifterCurseFabric.LOGGER.error("VirtualTotemPower: unknown virtualTotemType: {}", virtualTotemType);
+        if (virtualTotemTypeMap.containsKey(virtualTotemType)) {
+            virtualTotemTypeMap.get(virtualTotemType).accept(entity, totemStack);
+        } else {
+            ShapeShifterCurseFabric.LOGGER.error("VirtualTotemPower: unknown virtualTotemType: {}", virtualTotemType);
         }
     }
 
@@ -117,7 +128,7 @@ public class VirtualTotemPower extends CooldownPower {
         return new PowerFactory<>(
                 ShapeShifterCurseFabric.identifier("virtual_totem"),
                 new SerializableData()
-                        .add("virtual_totem_type", SerializableDataTypes.INT, 0)  // 默认0
+                        .add("virtual_totem_type", SerializableDataTypes.IDENTIFIER, ShapeShifterCurseFabric.identifier("default"))
                         .add("totem_stack", SerializableDataTypes.ITEM_STACK, new ItemStack(Items.TOTEM_OF_UNDYING, 1))
                         .add("entity_actions", ApoliDataTypes.ENTITY_ACTIONS, null)
                         .add("totem_health", SerializableDataTypes.INT, 1)  // 默认1
