@@ -74,6 +74,8 @@ public class AdditionalPowers {
         register(SlowdownPercentPower.createFactory());
         register(ChargePower.createFactory());
         register(ItemStorePower.createFactory());
+        register(SpiderFriendlyPower.createFactory());
+        register(IronGolemHostilePower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

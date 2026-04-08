@@ -6,7 +6,23 @@
         "shape-shifter-curse:form_spider_climb_web",
         "shape-shifter-curse:form_spider_3_climb",
         "shape-shifter-curse:can_loot_spider_fluid_cocoon",
-        "shape-shifter-curse:form_spider_3_silk_projectile"
+        "shape-shifter-curse:form_spider_3_silk_projectile",
+        "shape-shifter-curse:form_spider_3_extra_slot",
+        "shape-shifter-curse:form_spider_3_speed_down",
+        "shape-shifter-curse:form_spider_3_jump_lower_and_far",
+        "shape-shifter-curse:form_spider_3_step_height",
+        "shape-shifter-curse:form_spider_3_night_vision",
+        "shape-shifter-curse:form_spider_3_poison_immunity",
+        "shape-shifter-curse:form_spider_3_falling_protection",
+        "shape-shifter-curse:form_spider_3_burn_damage_up",
+        "shape-shifter-curse:spider_friendly",
+        "shape-shifter-curse:form_disable_chest_armor",
+        "shape-shifter-curse:form_disable_feet_armor",
+        "shape-shifter-curse:form_disable_leg_armor",
+        "shape-shifter-curse:can_eat_string",
+        "shape-shifter-curse:form_spider_3_mana_eat_string",
+        "shape-shifter-curse:form_spider_entity_group",
+        "shape-shifter-curse:form_spider_3_iron_golem_hostile"
     ],
     "icon": {
         "item": "minecraft:player_head"

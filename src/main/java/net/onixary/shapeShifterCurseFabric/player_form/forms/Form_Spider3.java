@@ -19,9 +19,9 @@ public class Form_Spider3 extends PlayerFormBase {
     public static final AnimUtils.AnimationHolderData ANIM_IDLE = 
         new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_3_idle"));
     public static final AnimUtils.AnimationHolderData ANIM_RUN =
-            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_3_run")).setSpeed(2.0f);
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_3_run")).setSpeed(1.8f);
     public static final AnimUtils.AnimationHolderData ANIM_WALK =
-            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_3_walk")).setSpeed(1.4f);
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_3_walk")).setSpeed(1.2f);
     public static final AnimUtils.AnimationHolderData ANIM_SNEAK_IDLE =
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_3_sneak_idle"));
     public static final AnimUtils.AnimationHolderData ANIM_SNEAK_WALK =
