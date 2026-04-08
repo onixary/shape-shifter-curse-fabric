@@ -6,10 +6,6 @@
       {
         "type": "shape-shifter-curse:gain_mana",
         "mana": 15
-      },
-      {
-        "type": "origins:execute_command",
-        "command": "tellraw @s {\"text\": \"EAT STRING FINISH\", \"color\": \"yellow\"}"
       }
     ]
   },

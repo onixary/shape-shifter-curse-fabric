@@ -1,0 +1,8 @@
+{
+  "type": "origins:action_over_time",
+  "entity_action": {
+    "type": "shape-shifter-curse:gain_mana",
+    "mana": 0.1
+  },
+  "interval": 10
+}

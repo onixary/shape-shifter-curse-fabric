@@ -20,6 +20,7 @@
       }
     ]
   },
+
   "tier1_enable": true,
   "tier1_charge_time": 20,
   "tier1_can_charge_condition": {
@@ -54,6 +55,25 @@
     "type": "shape-shifter-curse:consume_mana",
     "mana": 0.25
   },
+  "tier1_charge_complete_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:play_sound",
+        "sound": "minecraft:block.note_block.hat",
+        "pitch": 1.0
+      },
+      {
+        "type": "origins:play_sound",
+        "sound": "minecraft:block.note_block.snare",
+        "pitch": 1.0
+      },
+      {
+        "type": "origins:execute_command",
+        "command": "particle minecraft:cloud ~ ~1.0 ~ 0.8 0.8 0.8 0 10"
+      }
+    ]
+  },
   "tier1_cooldown": 20,
   "tier2_enable": true,
   "tier2_charge_time": 40,
@@ -61,6 +81,7 @@
     "type": "shape-shifter-curse:has_mana",
     "mana": 6
   },
+
   "tier2_use_action": {
     "type": "origins:and",
     "actions": [
@@ -89,7 +110,27 @@
     "type": "shape-shifter-curse:consume_mana",
     "mana": 0.25
   },
+  "tier2_charge_complete_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:play_sound",
+        "sound": "minecraft:block.note_block.hat",
+        "pitch": 1.19
+      },
+      {
+        "type": "origins:play_sound",
+        "sound": "minecraft:block.note_block.snare",
+        "pitch": 1.19
+      },
+      {
+        "type": "origins:execute_command",
+        "command": "particle minecraft:cloud ~ ~1.0 ~ 0.8 0.8 0.8 0 10"
+      }
+    ]
+  },
   "tier2_cooldown": 40,
+
   "tier3_enable": true,
   "tier3_charge_time": 60,
   "tier3_can_charge_condition": {
@@ -123,6 +164,25 @@
   "tier3_charge_tick_action": {
     "type": "shape-shifter-curse:consume_mana",
     "mana": 0.25
+  },
+  "tier3_charge_complete_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:play_sound",
+        "sound": "minecraft:block.note_block.hat",
+        "pitch": 1.414
+      },
+      {
+        "type": "origins:play_sound",
+        "sound": "minecraft:block.note_block.snare",
+        "pitch": 1.414
+      },
+      {
+        "type": "origins:execute_command",
+        "command": "particle minecraft:cloud ~ ~1.0 ~ 0.8 0.8 0.8 0 10"
+      }
+    ]
   },
   "tier3_cooldown": 60,
   "tier4_enable": false

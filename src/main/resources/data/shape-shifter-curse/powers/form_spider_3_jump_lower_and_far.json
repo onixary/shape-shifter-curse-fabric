@@ -4,7 +4,7 @@
     "type": "shape-shifter-curse:action_on_jump",
     "entity_action": {
       "type": "origins:add_velocity",
-      "z": 0.5,
+      "z": 0.35,
       "space": "local"
     },
     "entity_condition": {

@@ -136,7 +136,7 @@ public class WebBridgeAction {
                         .add("web_bridge_length", SerializableDataTypes.INT, 16)
                         .add("web_bridge_width", SerializableDataTypes.INT, 0),
                 (data, entity) -> {
-                    BlockPos pos = entity.getBlockPos().down();
+                    BlockPos pos = entity.getBlockPos();
                     Direction direction = entity.getHorizontalFacing();
                     BuildWebBridge(entity.getWorld(), pos, direction, new WebBridgeConfig(data.getInt("web_bridge_length"), data.getInt("web_bridge_width")), RegCustomBlock.TEMP_WEB_BRIDGE);
                 }

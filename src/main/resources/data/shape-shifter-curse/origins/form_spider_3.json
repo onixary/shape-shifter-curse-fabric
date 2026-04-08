@@ -25,7 +25,8 @@
         "shape-shifter-curse:form_disable_leg_armor",
         "shape-shifter-curse:can_eat_string",
         "shape-shifter-curse:form_spider_3_mana_eat_string",
-        "shape-shifter-curse:form_spider_entity_group"
+        "shape-shifter-curse:form_spider_entity_group",
+        "shape-shifter-curse:form_spider_3_mana_recover"
     ],
     "icon": {
         "item": "minecraft:player_head"

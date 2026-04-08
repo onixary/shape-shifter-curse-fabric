@@ -1,8 +1,8 @@
 {
-  "type": "origins:multiple",
-  "main": {
-    "type": "shape-shifter-curse:item_store",
-    "id": "shape-shifter-curse:test_store",
-    "slot": 0
-  }
+    "type": "origins:multiple",
+    "main": {
+        "type": "shape-shifter-curse:item_store",
+        "id": "shape-shifter-curse:test_store",
+        "slot": 0
+    }
 }
