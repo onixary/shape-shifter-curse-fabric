@@ -17,10 +17,7 @@ import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.items.armors.MorphScaleArmor;
 import net.onixary.shapeShifterCurseFabric.items.armors.NetheriteMorphScaleArmor;
-import net.onixary.shapeShifterCurseFabric.items.tools.BottledSnowfall;
-import net.onixary.shapeShifterCurseFabric.items.tools.BottledSnowfallToolMaterial;
-import net.onixary.shapeShifterCurseFabric.items.tools.DiamondMiningClaw;
-import net.onixary.shapeShifterCurseFabric.items.tools.DiamondMiningClawToolMaterial;
+import net.onixary.shapeShifterCurseFabric.items.tools.*;
 import net.onixary.shapeShifterCurseFabric.items.trinkets.*;
 
 import java.util.ArrayList;
@@ -60,6 +57,9 @@ public class RegCustomItem {
     public static final ToolItem BOTTLED_SNOWFALL = register("bottled_snowfall", new BottledSnowfall(BottledSnowfallToolMaterial.INSTANCE, 1, 1, new Item.Settings()));
     public static final ToolItem DIAMOND_MINING_CLAW = register("diamond_mining_claw", new DiamondMiningClaw(DiamondMiningClawToolMaterial.INSTANCE, 1, -2.4f, new Item.Settings()));
     public static final Item FIRE_CHARM_PAPER = register("fire_charm_paper", new Item(new Item.Settings()));
+    public static final Item AUXILIARY_SWORD = register("auxiliary_sword", new AuxiliarySword(AuxiliarySwordToolMaterial.INSTANCE, 1, -2.4f, new Item.Settings()));
+    public static final ToolItem AUXILIARY_PICKAXE = register("auxiliary_pickaxe", new AuxiliaryPickaxe(AuxiliaryPickaxeToolMaterial.INSTANCE, 1, -2.8f, new Item.Settings()));
+    public static final ToolItem AUXILIARY_AXE = register("auxiliary_axe", new AuxiliaryAxe(AuxiliaryAxeToolMaterial.INSTANCE, 1, -3.1f, new Item.Settings()));
     // 模组自定义Trinkets
     public static final TrinketItem AMULET_BRACELET = register("amulet_bracelet", new AmuletBraceletTrinket(new AmuletBraceletTrinket.Settings()));
     public static final Item ATTACH_HOOK = register("attach_hook", new AttachHookTrinket(new AttachHookTrinket.Settings()));
@@ -149,6 +149,9 @@ public class RegCustomItem {
                 entries.add(FIRE_CHARM_PAPER);
                 entries.add(TRANSFORMATIVE_AXOLOTL_BUCKET);
                 entries.add(SPIDER_FLUID_COCOON);
+                entries.add(AUXILIARY_SWORD);
+                entries.add(AUXILIARY_PICKAXE);
+                entries.add(AUXILIARY_AXE);
                 // 方块物品注册
                 entries.add(MOONDUST_CRYSTAL_GRIT);
                 entries.addAll(buildAllPotions(
