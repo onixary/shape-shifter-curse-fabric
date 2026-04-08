@@ -63,7 +63,8 @@
     "EnchantmentUtilEnchantCommandMixin",
     "EntityMixin",
     "DefaultAttributeRegistryMixin",
-    "mob.SpiderEntityMixin"
+    "mob.SpiderEntityMixin",
+    "mob.IronGolemEntityMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",

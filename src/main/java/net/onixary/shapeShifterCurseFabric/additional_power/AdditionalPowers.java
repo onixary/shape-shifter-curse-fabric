@@ -11,6 +11,7 @@ public class AdditionalPowers {
     public static final PowerType<?> SCARE_SKELETON = new PowerTypeReference<>(ShapeShifterCurseFabric.identifier("scare_skeleton"));  // 这种应该会比较节省计算资源
     public static final PowerType<?> CAN_LOOT_SPIDER_FLUID_COCOON = new PowerTypeReference<>(ShapeShifterCurseFabric.identifier("can_loot_spider_fluid_cocoon"));
     public static final PowerType<?> SPIDER_FRIENDLY = new PowerTypeReference<>(ShapeShifterCurseFabric.identifier("spider_friendly"));
+    public static final PowerType<?> HOSTILE_IRON_GOLEM = new PowerTypeReference<>(ShapeShifterCurseFabric.identifier("hostile_iron_golem"));
 
     public static void register() {
         register(AddSustainedInstinctPower.getFactory());
