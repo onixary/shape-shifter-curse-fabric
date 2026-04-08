@@ -7,7 +7,8 @@
         "shape-shifter-curse:form_spider_3_climb",
         "shape-shifter-curse:can_loot_spider_fluid_cocoon",
         "shape-shifter-curse:form_spider_3_silk_projectile",
-        "shape-shifter-curse:form_spider_3_undying"
+        "shape-shifter-curse:form_spider_3_undying",
+        "shape-shifter-curse:spider_friendly"
     ],
     "icon": {
         "item": "minecraft:player_head"

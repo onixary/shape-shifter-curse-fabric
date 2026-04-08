@@ -2,7 +2,6 @@ package net.onixary.shapeShifterCurseFabric.mixin;
 
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.block.BlockState;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
@@ -20,7 +19,6 @@ import net.minecraft.item.Items;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.additional_power.*;
@@ -28,8 +26,7 @@ import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
-import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
-import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
+import net.onixary.shapeShifterCurseFabric.util.ModTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -104,7 +101,7 @@ public abstract class LivingEntityMixin {
 
     @Unique
     private void handleExtraLoot(MobEntity mob, ServerPlayerEntity player) {
-        if (AdditionalPowers.CAN_LOOT_SPIDER_FLUID_COCOON.isActive(player)) {
+        if (AdditionalPowers.CAN_LOOT_SPIDER_FLUID_COCOON.isActive(player) && !mob.getType().getRegistryEntry().isIn(ModTags.SPIDER_FLUID_COCOON_BLACKLIST)) {
             // 25% 掉落 0~(血上限/10f)个
             float mobMaxHp = mob.getMaxHealth();
             int lootCount = (int) (mobMaxHp / 10.0f);

@@ -48,7 +48,7 @@
     "HungerManagerMixin",
     "EntityLootingMixin",
     "BlockDropMixin",
-    "ScareSkeletonMixin",
+    "mob.ScareSkeletonMixin",
     "PlayerAnimInterfaceMixin",
     "TrinketItemMixin",
     "PotionItemMixin",
@@ -62,7 +62,8 @@
     "EnchantmentUtilAnvilMixin",
     "EnchantmentUtilEnchantCommandMixin",
     "EntityMixin",
-    "DefaultAttributeRegistryMixin"
+    "DefaultAttributeRegistryMixin",
+    "mob.SpiderEntityMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",
