@@ -9,7 +9,6 @@ import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.entity.mob.WitchEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.additional_power.PillagerFriendlyPower;
-import net.onixary.shapeShifterCurseFabric.additional_power.SpiderFriendlyPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.WitchFriendlyPower;
 import net.onixary.shapeShifterCurseFabric.util.ModTags;
 import org.spongepowered.asm.mixin.Mixin;
@@ -36,9 +35,10 @@ public abstract class MobEntityTeamMixin {
                 }
 
                 // spider_form 蜘蛛友好判定
-                if (livingEntity instanceof SpiderEntity || livingEntity instanceof CaveSpiderEntity ||livingEntity.getType().isIn(ModTags.Spider_Tag) && PowerHolderComponent.hasPower(player, SpiderFriendlyPower.class)) {
-                    cir.setReturnValue(true);
-                }
+                // 先弃用
+//                if (livingEntity instanceof SpiderEntity || livingEntity instanceof CaveSpiderEntity ||livingEntity.getType().isIn(ModTags.Spider_Tag) && PowerHolderComponent.hasPower(player, SpiderFriendlyPower.class)) {
+//                    cir.setReturnValue(true);
+//                }
             }
         }
     }
