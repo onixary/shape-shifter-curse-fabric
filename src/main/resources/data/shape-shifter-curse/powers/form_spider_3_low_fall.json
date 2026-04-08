@@ -1,0 +1,7 @@
+{
+  "type": "shape-shifter-curse:modfiy_fall_damage",
+  "modifier_fall_distance": {
+    "value": -4,
+    "operation": "addition"
+  }
+}

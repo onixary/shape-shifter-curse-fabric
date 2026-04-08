@@ -9,7 +9,8 @@
         "shape-shifter-curse:form_spider_3_silk_projectile",
         "shape-shifter-curse:form_spider_3_undying",
         "shape-shifter-curse:spider_friendly",
-        "shape-shifter-curse:hostile_iron_golem"
+        "shape-shifter-curse:hostile_iron_golem",
+        "shape-shifter-curse:form_spider_3_low_fall"
     ],
     "icon": {
         "item": "minecraft:player_head"
