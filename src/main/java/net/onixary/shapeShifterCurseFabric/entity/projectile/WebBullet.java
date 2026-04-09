@@ -8,6 +8,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
+import net.minecraft.fluid.WaterFluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -17,6 +18,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.additional_power.WebBridgeAction;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
@@ -100,6 +102,13 @@ public class WebBullet extends ThrownItemEntity {
                 }
             }
 
+            if (this.getWorld().getBlockState(this.getBlockPos()).isLiquid()) {
+                this.discard();
+            }
+
+            if (this.getWorld().getBlockState(this.getBlockPos()).isOf(RegCustomBlock.TEMP_WEB_BRIDGE)) {
+                this.onBlockHit(new BlockHitResult(this.getPos(), Direction.DOWN, this.getBlockPos(), false));
+            }
         }
     }
 

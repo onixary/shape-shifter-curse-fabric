@@ -27,16 +27,13 @@ public class WebBridgeAction {
     public record WebBridgeConfig(int Length, int Width) {}
 
     public static boolean SetWebBlock(World world, BlockPos pos, Block WebBlock, Direction facing) {
-        if (world.getBlockState(pos).isAir()) {
+        BlockState blockState = world.getBlockState(pos);
+        if (blockState.isAir() || blockState.isOf(WebBlock)) {
             BlockState state = WebBlock.getDefaultState().with(TempWebBridgeBlock.HORIZONTAL_FACING, facing);
             world.setBlockState(pos, state);
             return true;
         }
         return false;
-    }
-
-    public static boolean SetWebBlock(World world, BlockPos pos, Block WebBlock) {
-        return SetWebBlock(world, pos, WebBlock, Direction.NORTH);
     }
 
     public static void BuildWebLadder(World world, BlockHitResult blockHitResult, WebLadderConfig config, Block LadderBlock) {
