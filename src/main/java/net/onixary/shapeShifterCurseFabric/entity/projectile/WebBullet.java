@@ -8,6 +8,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
+import net.minecraft.fluid.WaterFluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -100,6 +101,9 @@ public class WebBullet extends ThrownItemEntity {
                 }
             }
 
+            if (this.getWorld().getBlockState(this.getBlockPos()).isLiquid()) {
+                this.discard();
+            }
         }
     }
 
