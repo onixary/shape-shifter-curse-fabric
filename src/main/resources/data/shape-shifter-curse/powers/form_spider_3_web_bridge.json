@@ -15,7 +15,9 @@
         "effect": {
           "effect": "minecraft:slowness",
           "duration": 10,
-          "amplifier": 1
+          "amplifier": 1,
+          "show_particles": false,
+          "show_icon": false
         }
       }
     ]
@@ -71,7 +73,9 @@
         "effect": {
           "effect": "minecraft:slowness",
           "duration": 10,
-          "amplifier": 1
+          "amplifier": 1,
+          "show_particles": false,
+          "show_icon": false
         }
       }
     ]
@@ -151,7 +155,9 @@
         "effect": {
           "effect": "minecraft:slowness",
           "duration": 10,
-          "amplifier": 1
+          "amplifier": 1,
+          "show_particles": false,
+          "show_icon": false
         }
       }
     ]
@@ -231,7 +237,9 @@
         "effect": {
           "effect": "minecraft:slowness",
           "duration": 10,
-          "amplifier": 1
+          "amplifier": 1,
+          "show_particles": false,
+          "show_icon": false
         }
       }
     ]

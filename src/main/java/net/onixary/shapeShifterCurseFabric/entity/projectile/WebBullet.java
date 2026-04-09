@@ -154,23 +154,20 @@ public class WebBullet extends ThrownItemEntity {
         switch (Tier) {
             case 1 -> {
                 if (entity instanceof LivingEntity livingEntity) {
-                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 100, 4));
-                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 100, 2));
-                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 100, 3));
+                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 80, 1));
+                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 80, 1));
                 }
             }
             case 2 -> {
                 if (entity instanceof LivingEntity livingEntity) {
-                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 160, 10));
-                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 160, 2));
-                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 160, 3));
+                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 120, 2));
+                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 120, 2));
                 }
             }
             case 3 -> {
                 if (entity instanceof LivingEntity livingEntity) {
-                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 200, 10));
-                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 200, 2));
-                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 200, 3));
+                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 160, 3));
+                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 160, 3));
                 }
                 // 蛛网减速与现有施加buff有些重复，改为击杀被裹茧的实体会产生蛛网
 //                if (entity.getWorld().getBlockState(entity.getBlockPos()).isAir()) {

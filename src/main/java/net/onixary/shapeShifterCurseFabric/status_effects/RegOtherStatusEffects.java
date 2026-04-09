@@ -20,7 +20,8 @@ public class RegOtherStatusEffects {
     public static final ImmobilityEffect IMMOBILITY_EFFECT = register("immobility_effect",new ImmobilityEffect());
     public static final FeedEffect FEED_EFFECT = register("feed_effect", new FeedEffect());
 
-    public static final StatusEffect ENTANGLED_EFFECT = register("entangled_effect", new EntangledEffect(StatusEffectCategory.HARMFUL, 0x9F9F9F).addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, "8c7b7e0c-3b0b-4e0d-8f4e-0c0e0d8c7b7e", -0.2F, EntityAttributeModifier.Operation.MULTIPLY_BASE));
+    // 裹茧1级效果不手动减速，使用减速效果
+    public static final StatusEffect ENTANGLED_EFFECT = register("entangled_effect", new EntangledEffect(StatusEffectCategory.HARMFUL, 0x9F9F9F));
     public static final StatusEffect ENTANGLED_FULL_EFFECT  = register("entangled_full_effect", new SimpleStatusEffect(StatusEffectCategory.HARMFUL, 0xFFFFFF).addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, "8c7b7e0c-3b0b-4e0d-8f4e-0c0e0d8c7b7e", -1.0F, EntityAttributeModifier.Operation.MULTIPLY_BASE));
 
     public static <T extends StatusEffect> T register(String path, T effect) {
