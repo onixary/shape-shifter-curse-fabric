@@ -69,7 +69,9 @@ public class WebComposterBlock extends Block implements InventoryProvider {
     public static float getIncreaseChance(ItemStack itemStack) {
         FoodComponent foodComponent = itemStack.getItem().getFoodComponent();
         if (foodComponent != null) {
-            return Math.min(1.0f, foodComponent.getHunger() / 6.0f);
+            // 统一概率即可
+            //return Math.min(1.0f, foodComponent.getHunger() / 6.0f);
+            return 0.55f;
         }
         return 0.5f;
     }

@@ -3,9 +3,19 @@
   "jump_far": {
     "type": "shape-shifter-curse:action_on_jump",
     "entity_action": {
-      "type": "origins:add_velocity",
-      "z": 0.35,
-      "space": "local"
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:add_velocity",
+          "z": 0.35,
+          "space": "local"
+        },
+        {
+          "type": "origins:exhaust",
+          "amount": 0.4
+        }
+      ]
+
     },
     "entity_condition": {
       "type": "origins:and",

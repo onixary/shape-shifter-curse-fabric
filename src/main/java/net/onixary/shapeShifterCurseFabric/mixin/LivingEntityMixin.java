@@ -25,6 +25,7 @@ import net.minecraft.item.Items;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.additional_power.*;
@@ -71,15 +72,19 @@ public abstract class LivingEntityMixin {
         // 仅在服务端执行，避免客户端重复触发
         if (world.isClient) return;
 
-        // 拥有 ENTANGLED_FULL_EFFECT 的生物死亡时在其位置生成蜘蛛网
+        Entity attacker = source.getAttacker();
+        // 拥有 ENTANGLED_FULL_EFFECT 的生物死亡时在其位置生成蜘蛛网。当攻击者为蜘蛛形态时，概率掉落流食囊
         if (entity.hasStatusEffect(RegOtherStatusEffects.ENTANGLED_FULL_EFFECT)) {
             BlockPos pos = entity.getBlockPos();
             if (world.getBlockState(pos).isAir()) {
                 world.setBlockState(pos, Blocks.COBWEB.getDefaultState());
             }
+
+            if (attacker instanceof ServerPlayerEntity player && entity instanceof MobEntity mobEntity) {
+                handleFluidCocoonLoot(mobEntity, player);
+            }
         }
 
-        Entity attacker = source.getAttacker();
         // 自定义实体的掉落逻辑
         if (attacker instanceof ServerPlayerEntity) {
             if(entity instanceof WitchEntity || entity instanceof EvokerEntity) {
@@ -117,14 +122,20 @@ public abstract class LivingEntityMixin {
         }
     }
 
+    // 移动到蜘蛛形态判定
     @Unique
     private void handleExtraLoot(MobEntity mob, ServerPlayerEntity player) {
+
+    }
+
+    @Unique
+    private void handleFluidCocoonLoot(MobEntity mob, ServerPlayerEntity player) {
         if (AdditionalPowers.CAN_LOOT_SPIDER_FLUID_COCOON.isActive(player) && !mob.getType().getRegistryEntry().isIn(ModTags.SPIDER_FLUID_COCOON_BLACKLIST)) {
-            // 25% 掉落 0~(血上限/10f)个
+            // 50% 掉落 0~(血上限/4f)个
             float mobMaxHp = mob.getMaxHealth();
-            int lootCount = (int) (mobMaxHp / 10.0f);
+            int lootCount = (MathHelper.ceil(mobMaxHp / 4.0f));
             Random random = player.getRandom();
-            if (random.nextInt(100) < 25) {
+            if (random.nextInt(100) < 50) {
                 int finalCount = random.nextInt(lootCount);
                 if (finalCount > 0) {
                     ItemStack stack = new ItemStack(RegCustomItem.SPIDER_FLUID_COCOON, finalCount);
