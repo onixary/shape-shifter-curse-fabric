@@ -7,6 +7,7 @@ import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.util.modifier.Modifier;
 import io.github.apace100.apoli.util.modifier.ModifierUtil;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
@@ -31,6 +32,7 @@ import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
+import net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects;
 import net.onixary.shapeShifterCurseFabric.util.ModTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -68,6 +70,15 @@ public abstract class LivingEntityMixin {
 
         // 仅在服务端执行，避免客户端重复触发
         if (world.isClient) return;
+
+        // 拥有 ENTANGLED_FULL_EFFECT 的生物死亡时在其位置生成蜘蛛网
+        if (entity.hasStatusEffect(RegOtherStatusEffects.ENTANGLED_FULL_EFFECT)) {
+            BlockPos pos = entity.getBlockPos();
+            if (world.getBlockState(pos).isAir()) {
+                world.setBlockState(pos, Blocks.COBWEB.getDefaultState());
+            }
+        }
+
         Entity attacker = source.getAttacker();
         // 自定义实体的掉落逻辑
         if (attacker instanceof ServerPlayerEntity) {

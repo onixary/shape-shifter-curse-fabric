@@ -163,9 +163,10 @@ public class WebBullet extends ThrownItemEntity {
                     livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 200, 2));
                     livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 200, 3));
                 }
-                if (entity.getWorld().getBlockState(entity.getBlockPos()).isAir()) {
-                    entity.getWorld().setBlockState(entity.getBlockPos(), Blocks.COBWEB.getDefaultState());
-                }
+                // 蛛网减速与现有施加buff有些重复，改为击杀被裹茧的实体会产生蛛网
+//                if (entity.getWorld().getBlockState(entity.getBlockPos()).isAir()) {
+//                    entity.getWorld().setBlockState(entity.getBlockPos(), Blocks.COBWEB.getDefaultState());
+//                }
             }
         }
         if (entity instanceof LivingEntity livingEntity) {
