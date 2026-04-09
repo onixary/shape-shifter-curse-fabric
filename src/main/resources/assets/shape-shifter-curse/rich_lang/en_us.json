@@ -148,7 +148,16 @@
   "item.shape-shifter-curse.resonant_core.tooltip": ["[Allay Form] Consuming Amethyst Shards grants regeneration to nearby entities, but no longer restores saturation"],
   "item.shape-shifter-curse.fire_charm_paper": ["Fire Charm Paper"],
   "item.shape-shifter-curse.fire_charm_paper.tooltip": ["[Familiar Fox Form]Requires powerful magic source. Consume for casting enhanced fireball magic"],
+  "item.shape-shifter-curse.auxiliary_axe": ["Auxiliary Axe"],
+  "item.shape-shifter-curse.auxiliary_axe.tooltip": ["Increases melee damage when equipped on extra hands, but slows attack speed"],
+  "item.shape-shifter-curse.auxiliary_sword": ["Auxiliary Sword"],
+  "item.shape-shifter-curse.auxiliary_sword.tooltip": ["Increases melee attack speed when equipped on extra hands, but consumes more durability each attack"],
+  "item.shape-shifter-curse.auxiliary_pickaxe": ["Auxiliary Pickaxe"],
+  "item.shape-shifter-curse.auxiliary_pickaxe.tooltip": ["Increases digging efficiency when equipped on extra hands, but reduces melee damage"],
+  "item.shape-shifter-curse.web_projectile": ["Web Bullet"],
+  "item.shape-shifter-curse.web_projectile.tooltip": ["Highly compressed spider silk, unstable, and a large number of web structures are formed when bursting. How did you get it?"],
   "block.shape-shifter-curse.moondust_crystal_grit": ["Moondust Crystal Grit"],
+  "block.shape-shifter-curse.temp_web_bridge": ["Bridge Cobweb"],
 
   "screen.shape-shifter-curse.book_of_shape_shifter.start_content_text":
   [
@@ -221,6 +230,8 @@
   "entity.shape-shifter-curse.t_wolf": ["Cursed Wandering Jackal Wraith"],
   "item.shape-shifter-curse.custom_wolf_spawn_egg": ["Cursed Wandering Jackal Wraith Spawn Egg"],
   "entity.shape-shifter-curse.anubis_wolf_minion": ["Jackal Wraith Guard"],
+  "effect.shape-shifter-curse.entangled_effect": ["Entangled"],
+  "effect.shape-shifter-curse.entangled_full_effect": ["Cocooning"],
 
   "effect.shape-shifter-curse.to_bat_0_effect": [
     "...Strange ",

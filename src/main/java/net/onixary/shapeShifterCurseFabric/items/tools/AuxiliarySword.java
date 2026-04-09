@@ -19,8 +19,8 @@ public class AuxiliarySword extends SwordItem {
         super(material, attackDamage, attackSpeed, settings);
     }
 
-//    @Override
-//    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-//        tooltip.add(Text.translatable("item.shape-shifter-curse.diamond_mining_claw.tooltip").formatted(Formatting.YELLOW));
-//    }
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable("item.shape-shifter-curse.auxiliary_sword.tooltip").formatted(Formatting.YELLOW));
+    }
 }

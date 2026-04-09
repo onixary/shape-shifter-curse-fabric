@@ -1,8 +1,16 @@
 package net.onixary.shapeShifterCurseFabric.items.tools;
 
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.AxeItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 
 public class AuxiliaryAxe extends AxeItem {
@@ -11,8 +19,8 @@ public class AuxiliaryAxe extends AxeItem {
         super(material, attackDamage, attackSpeed, settings);
     }
 
-//    @Override
-//    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-//        tooltip.add(Text.translatable("item.shape-shifter-curse.diamond_mining_claw.tooltip").formatted(Formatting.YELLOW));
-//    }
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable("item.shape-shifter-curse.auxiliary_axe.tooltip").formatted(Formatting.YELLOW));
+    }
 }
