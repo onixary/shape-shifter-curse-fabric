@@ -23,6 +23,7 @@ import net.minecraft.entity.projectile.thrown.PotionEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.potion.PotionUtil;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -58,6 +59,9 @@ public abstract class LivingEntityMixin {
     @Shadow public abstract float getMovementSpeed();
 
     @Shadow protected abstract void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition);
+
+    @Shadow
+    protected abstract void takeShieldHit(LivingEntity attacker);
 
     @Inject(
             method = "onDeath",
@@ -285,5 +289,22 @@ public abstract class LivingEntityMixin {
     private float handleFallDamageB(float damageMultiplier) {
         float finalV = applyModifier(ModifyFallDamagePower.class, damageMultiplier, ModifyFallDamagePower::getModifiers_DamageMultiplier);
         return Math.max(0f, finalV);
+    }
+
+    @ModifyVariable(method = "damage", at = @At("HEAD"), argsOnly = true)
+    private float modifyDamageTaken(float originalValue, DamageSource source, float amount) {
+        LivingEntity realThis = (LivingEntity) (Object) this;
+        float finalDamage = originalValue;
+        for (VirtualShieldPower power : PowerHolderComponent.getPowers(realThis, VirtualShieldPower.class)) {
+            if (power.blockDamage(source)) {
+                finalDamage = 0.0f;
+                Entity attacker = source.getAttacker();
+                if (!source.isIn(DamageTypeTags.IS_PROJECTILE) && (attacker instanceof LivingEntity ale)) {
+                    this.takeShieldHit(ale);
+                }
+                realThis.getWorld().sendEntityStatus(realThis, (byte)29);
+            }
+        }
+        return finalDamage;
     }
 }

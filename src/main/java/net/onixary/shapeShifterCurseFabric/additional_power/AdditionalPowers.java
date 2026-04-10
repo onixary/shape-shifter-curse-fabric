@@ -78,6 +78,7 @@ public class AdditionalPowers {
         register(ChargePower.createFactory());
         register(ItemStorePower.createFactory());
         register(ModifyFallDamagePower.createFactory());
+        register(VirtualShieldPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {
