@@ -76,7 +76,7 @@ public class RegCustomItem {
 
     public static final Item TRANSFORMATIVE_AXOLOTL_BUCKET = register("transformative_axolotl_bucket", new EntityBucketItem(ShapeShifterCurseFabric.T_AXOLOTL, Fluids.WATER, SoundEvents.ITEM_BUCKET_EMPTY_AXOLOTL, (new Item.Settings()).maxCount(1)));
     // 减少非蜘蛛玩家食用的中毒量，做到实在没东西吃的时候也能硬着头皮吃的感觉
-    public static final Item SPIDER_FLUID_COCOON = register("spider_fluid_cocoon", new Item(new Item.Settings().maxCount(64).food(new FoodComponent.Builder().hunger(4).saturationModifier(0.8f).snack().statusEffect(new StatusEffectInstance(StatusEffects.POISON, 150, 0), 1.0f).build())));
+    public static final Item SPIDER_FLUID_COCOON = register("spider_fluid_cocoon", new Item(new Item.Settings().maxCount(64).food(new FoodComponent.Builder().hunger(7).saturationModifier(0.8f).snack().statusEffect(new StatusEffectInstance(StatusEffects.POISON, 150, 0), 1.0f).build())));
 
     public static final Item PATRON_FORM_ITEM = register("patron_form_item", new PatronFormItem(new Item.Settings()));
 
