@@ -240,13 +240,13 @@
         }
       ]
     },
-    "taken_damage_action": {
+    "normal_damage_action": {
       "type": "origins:and",
       "actions": [
         {
           "type": "shape-shifter-curse:set_item_cooldown",
           "item": "minecraft:shield",
-          "duration": 100
+          "cooldown": 100
         },
         {
           "type": "shape-shifter-curse:invoke_accessory",
@@ -267,7 +267,7 @@
         {
           "type": "shape-shifter-curse:set_item_cooldown",
           "item": "minecraft:shield",
-          "duration": 100
+          "cooldown": 200
         },
         {
           "type": "shape-shifter-curse:invoke_accessory",
@@ -276,7 +276,7 @@
           "slot_index": 0,
           "action": {
             "type": "origins:damage",
-            "amount": 1,
+            "amount": 2,
             "ignore_unbreaking": true
           }
         }
