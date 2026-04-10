@@ -28,7 +28,8 @@
         "shape-shifter-curse:form_spider_3_mana_recover",
         "shape-shifter-curse:form_spider_3_make_cobweb",
         "shape-shifter-curse:form_spider_3_extra_hand_auxiliary_tools",
-        "shape-shifter-curse:form_spider_3_spider_fluid_cocoon_only"
+        "shape-shifter-curse:form_spider_3_spider_fluid_cocoon_only",
+        "shape-shifter-curse:form_spider_3_extra_slot_render"
     ],
     "icon": {
         "item": "minecraft:player_head"
