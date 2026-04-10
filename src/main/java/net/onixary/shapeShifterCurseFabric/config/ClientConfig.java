@@ -63,10 +63,10 @@ public class ClientConfig implements ConfigData {
     public int itemStorePowerPosType = 8;  // itemStorePower 中间位置类型 (1-9)
 
     @ConfigEntry.Category("UI")
-    @Comment("Item Store Power Position X Offset. Default: 100")
+    @Comment("Item Store Power Position X Offset. Default: -120")
     public int itemStorePowerPosOffsetX = -120;  // itemStorePower 中间 X 位置偏移量
 
     @ConfigEntry.Category("UI")
-    @Comment("Item Store Power Position Y Offset. Default: -17")
+    @Comment("Item Store Power Position Y Offset. Default: 1")
     public int itemStorePowerPosOffsetY = 1;  // itemStorePower 中间 Y 位置偏移量
 }

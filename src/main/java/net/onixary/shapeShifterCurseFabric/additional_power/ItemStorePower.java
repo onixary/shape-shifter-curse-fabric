@@ -21,10 +21,11 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.render.tech.ItemStorePowerRender;
 
 import java.util.function.Consumer;
 
-public class ItemStorePower extends Power {
+public class ItemStorePower extends Power implements ItemStorePowerRender.itemStorePowerRenderInterface {
     public ItemStack storedItem = ItemStack.EMPTY;
     public final @Nullable Identifier powerID;
     public int bobbingAnimationTime = 0;
@@ -235,5 +236,20 @@ public class ItemStorePower extends Power {
                     }
                 }
         ));
+    }
+
+    @Override
+    public int getSlot() {
+        return this.Slot;
+    }
+
+    @Override
+    public ItemStack getStack() {
+        return this.storedItem;
+    }
+
+    @Override
+    public float getBobbingAnimationTime() {
+        return this.bobbingAnimationTime;
     }
 }
