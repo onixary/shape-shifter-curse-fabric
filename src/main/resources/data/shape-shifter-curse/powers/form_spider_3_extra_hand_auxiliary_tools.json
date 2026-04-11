@@ -73,6 +73,11 @@
       "value": 5.0,
       "name": "Increased attack damage"
     },
+    "damage_condition": {
+      "type": "origins:amount",
+      "comparison": ">=",
+      "compare_to": 4
+    },
     "condition": {
       "type": "shape-shifter-curse:check_accessory",
       "group": "hand",

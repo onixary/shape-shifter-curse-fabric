@@ -7,12 +7,22 @@
       "actions": [
         {
           "type": "origins:add_velocity",
-          "z": 0.35,
+          "z": 0.22,
           "space": "local"
         },
         {
           "type": "origins:exhaust",
           "amount": 0.4
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.frog.long_jump",
+          "pitch": 0.8
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.goat.long_jump",
+          "pitch": 1.0
         }
       ]
 
