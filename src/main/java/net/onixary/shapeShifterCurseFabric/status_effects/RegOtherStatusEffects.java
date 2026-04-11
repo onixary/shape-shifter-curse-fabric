@@ -22,7 +22,11 @@ public class RegOtherStatusEffects {
 
     // 裹茧1级效果不手动减速，使用减速效果
     public static final StatusEffect ENTANGLED_EFFECT = register("entangled_effect", new EntangledEffect(StatusEffectCategory.HARMFUL, 0x9F9F9F));
-    public static final StatusEffect ENTANGLED_FULL_EFFECT  = register("entangled_full_effect", new SimpleStatusEffect(StatusEffectCategory.HARMFUL, 0xFFFFFF).addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, "8c7b7e0c-3b0b-4e0d-8f4e-0c0e0d8c7b7e", -1.0F, EntityAttributeModifier.Operation.MULTIPLY_BASE));
+    public static final StatusEffect ENTANGLED_FULL_EFFECT  = register("entangled_full_effect", new SimpleStatusEffect(StatusEffectCategory.HARMFUL, 0xFFFFFF)
+            .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, "ef0f1c0e-3d99-45e8-9283-0d48d07751fe", -1.0F, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+            .addAttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, "e2f8008f-4b87-4f19-96c0-a10acce2f960", 100.0F, EntityAttributeModifier.Operation.ADDITION)
+            .addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, "e2f8008f-4b87-4f19-96c0-a10acce2f960", -0.8F, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+    );
 
     public static <T extends StatusEffect> T register(String path, T effect) {
         return Registry.register(Registries.STATUS_EFFECT, new Identifier(ShapeShifterCurseFabric.MOD_ID, path), effect);
