@@ -68,10 +68,9 @@
   "auxiliary_axe_attack_damage":{
     "type": "origins:modify_damage_dealt",
     "modifier": {
-      "attribute": "minecraft:generic.attack_speed",
+      "name": "Increased attack damage",
       "operation": "addition",
-      "value": 5.0,
-      "name": "Increased attack damage"
+      "value": 5.0
     },
     "damage_condition": {
       "type": "origins:amount",
@@ -150,10 +149,9 @@
   "auxiliary_pickaxe_attack_damage":{
     "type": "origins:modify_damage_dealt",
     "modifier": {
-      "attribute": "minecraft:generic.attack_speed",
+      "name": "Decreased attack damage",
       "operation": "addition",
-      "value": -4.0,
-      "name": "Decreased attack damage"
+      "value": -4.0
     },
     "condition": {
       "type": "shape-shifter-curse:check_accessory",
