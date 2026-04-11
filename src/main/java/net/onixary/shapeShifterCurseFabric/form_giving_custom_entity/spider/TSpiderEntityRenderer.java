@@ -6,6 +6,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.SpiderEntityModel;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.util.Identifier;
 
@@ -21,5 +22,10 @@ public class TSpiderEntityRenderer extends MobEntityRenderer<TransformativeSpide
 
 	public Identifier getTexture(TransformativeSpiderEntity ocelotEntity) {
 		return TEXTURE;
+	}
+
+	@Override
+	protected void scale(TransformativeSpiderEntity entity, MatrixStack matrices, float amount) {
+		matrices.scale(0.5f, 0.5f, 0.5f);
 	}
 }

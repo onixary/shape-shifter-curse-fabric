@@ -1,6 +1,8 @@
 package net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.spider;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -28,7 +30,7 @@ public class TransformativeSpiderEntity extends SpiderEntity implements ITMob {
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0f)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0f)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, StaticParams.CUSTOM_MOB_DEFAULT_DAMAGE)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f);
     }
@@ -79,5 +81,10 @@ public class TransformativeSpiderEntity extends SpiderEntity implements ITMob {
     public boolean tryAttack(Entity target) {
         Optional<Boolean> attacked = this.TMob_TryAttack(this, target);
         return attacked.orElseGet(() -> super.tryAttack(target));
+    }
+
+    @Override
+    public EntityDimensions getDimensions(EntityPose pose) {
+        return EntityDimensions.fixed(0.7f, 0.45f);
     }
 }
