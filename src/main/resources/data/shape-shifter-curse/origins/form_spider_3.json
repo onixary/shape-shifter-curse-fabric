@@ -29,7 +29,9 @@
         "shape-shifter-curse:form_spider_3_make_cobweb",
         "shape-shifter-curse:form_spider_3_extra_hand_auxiliary_tools",
         "shape-shifter-curse:form_spider_3_spider_fluid_cocoon_only",
-        "shape-shifter-curse:form_spider_3_extra_slot_render"
+        "shape-shifter-curse:form_spider_3_extra_slot_render",
+        "shape-shifter-curse:form_spider_3_make_web_composter",
+        "shape-shifter-curse:form_spider_3_mana_attack_cocooned_enemy"
     ],
     "icon": {
         "item": "minecraft:player_head"

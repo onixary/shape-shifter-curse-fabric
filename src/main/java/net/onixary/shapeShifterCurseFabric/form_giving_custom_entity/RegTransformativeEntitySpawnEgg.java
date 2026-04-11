@@ -38,7 +38,7 @@ public class RegTransformativeEntitySpawnEgg {
     ));
 
     public static final Item T_SPIDER_SPAWN_EGG = register("custom_spider_spawn_egg", new SpawnEggItem(
-            ShapeShifterCurseFabric.T_SPIDER,  0x8B8B8B,0xffd355, new FabricItemSettings()
+            ShapeShifterCurseFabric.T_SPIDER,  0x8B8B8B,0xff9060, new FabricItemSettings()
     ));
 
     public static <T extends Item> T register(String path, T item) {

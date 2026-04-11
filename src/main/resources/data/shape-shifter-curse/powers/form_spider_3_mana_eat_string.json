@@ -5,7 +5,7 @@
     "actions": [
       {
         "type": "shape-shifter-curse:gain_mana",
-        "mana": 15
+        "mana": 10
       }
     ]
   },

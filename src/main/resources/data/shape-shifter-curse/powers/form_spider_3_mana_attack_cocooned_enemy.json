@@ -1,0 +1,21 @@
+{
+  "type": "origins:self_action_on_hit",
+  "entity_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "shape-shifter-curse:gain_mana",
+        "mana": 8
+      }
+    ]
+  },
+  "damage_condition": {
+    "type": "origins:projectile",
+    "inverted" : true
+  },
+  "target_condition": {
+    "type": "origins:status_effect",
+    "effect": "shape-shifter-curse:entangled_full_effect"
+  },
+  "cooldown": 20
+}
