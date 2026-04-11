@@ -2,6 +2,10 @@
   "replace": false,
   "values": [
     "shape-shifter-curse:custom_trinket",
-    "minecraft:totem_of_undying"
+    "minecraft:totem_of_undying",
+    "minecraft:shield",
+    "shape-shifter-curse:auxiliary_sword",
+    "shape-shifter-curse:auxiliary_pickaxe",
+    "shape-shifter-curse:auxiliary_axe"
   ]
 }
