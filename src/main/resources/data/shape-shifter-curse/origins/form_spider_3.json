@@ -31,7 +31,8 @@
         "shape-shifter-curse:form_spider_3_spider_fluid_cocoon_only",
         "shape-shifter-curse:form_spider_3_extra_slot_render",
         "shape-shifter-curse:form_spider_3_make_web_composter",
-        "shape-shifter-curse:form_spider_3_mana_attack_cocooned_enemy"
+        "shape-shifter-curse:form_spider_3_mana_attack_cocooned_enemy",
+        "shape-shifter-curse:form_spider_3_auto_feed"
     ],
     "icon": {
         "item": "minecraft:player_head"
