@@ -12,7 +12,7 @@
         },
         {
           "type": "origins:exhaust",
-          "amount": 0.4
+          "amount": 0.2
         },
         {
           "type": "origins:play_sound",
@@ -23,6 +23,10 @@
           "type": "origins:play_sound",
           "sound": "minecraft:entity.goat.long_jump",
           "pitch": 1.0
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "particle cloud ~ ~ ~ 0.3 0.3 0.3 0.01 16 normal @a"
         }
       ]
 
@@ -55,10 +59,6 @@
     "modifier": {
       "operation": "multiply_base_multiplicative",
       "value": -0.25
-    },
-    "entity_action": {
-      "type": "origins:execute_command",
-      "command": "particle cloud ~ ~ ~ 0.3 0.3 0.3 0.01 16 normal @a"
     }
   }
 }

@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.blocks;
 
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -40,5 +41,7 @@ public final class RegCustomBlock {
     }
 
     public static void initialize() {
+        // 蔓延速度=20, 燃烧速度=5，与木板相同
+        FlammableBlockRegistry.getDefaultInstance().add(TEMP_WEB_BRIDGE, 60, 20);
     }
 }
