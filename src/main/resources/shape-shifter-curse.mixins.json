@@ -29,7 +29,6 @@
     "SneakEdgeCheckMixin",
     "StatusEffectMixin",
     "ThrowablePotionStackMixin",
-    "WaterFlexibilityMixin",
     "accessor.ActiveTargetGoalAccessor",
     "block.PowderSnowBlockMixin",
     "block.SweetBerryBushBlockMixin",
