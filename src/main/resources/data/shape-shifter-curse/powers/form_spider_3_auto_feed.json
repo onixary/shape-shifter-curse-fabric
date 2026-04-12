@@ -1,0 +1,50 @@
+{
+  "type": "origins:action_over_time",
+  "entity_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:feed",
+        "food": 7,
+        "saturation": 0.8
+      },
+      {
+        "type": "origins:play_sound",
+        "sound": "minecraft:entity.generic.eat"
+      },
+      {
+        "type": "shape-shifter-curse:invoke_accessory",
+        "group": "hand",
+        "slot": "extra_hand",
+        "slot_index": 0,
+        "action": {
+          "type": "origins:consume",
+          "amount": 1
+        }
+      }
+    ]
+  },
+  "interval": 20,
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:food_level",
+        "comparison": "<=",
+        "compare_to": 13
+      },
+      {
+        "type": "shape-shifter-curse:check_accessory",
+        "group": "hand",
+        "slot": "extra_hand",
+        "slot_index": 0,
+        "condition": {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "item": "shape-shifter-curse:spider_fluid_cocoon"
+          }
+        }
+      }
+    ]
+  }
+}
