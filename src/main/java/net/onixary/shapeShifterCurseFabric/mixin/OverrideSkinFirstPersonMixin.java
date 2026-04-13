@@ -63,11 +63,11 @@ public abstract class OverrideSkinFirstPersonMixin extends LivingEntityRenderer<
             // 设置手臂组件是否显示
             if (IsRenderRight) {
                 arm.visible = !OFModel.hiddenParts.contains(OriginFurModel.VMP.rightArm);
-                sleeve.visible = !OFModel.hiddenParts.contains(OriginFurModel.VMP.rightSleeve);
+                sleeve.visible = !OFModel.hiddenParts.contains(OriginFurModel.VMP.rightSleeve) && player.isPartVisible(PlayerModelPart.RIGHT_SLEEVE);
             }
             else {
                 arm.visible = !OFModel.hiddenParts.contains(OriginFurModel.VMP.leftArm);
-                sleeve.visible = !OFModel.hiddenParts.contains(OriginFurModel.VMP.leftSleeve);
+                sleeve.visible = !OFModel.hiddenParts.contains(OriginFurModel.VMP.leftSleeve) && player.isPartVisible(PlayerModelPart.LEFT_SLEEVE);
             }
         }
     }
