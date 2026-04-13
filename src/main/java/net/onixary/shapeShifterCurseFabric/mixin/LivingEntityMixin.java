@@ -39,17 +39,16 @@ import net.onixary.shapeShifterCurseFabric.util.ModTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static net.onixary.shapeShifterCurseFabric.additional_power.WaterFlexibilityPower.MAX_FLEXIBILITY;
 import static net.onixary.shapeShifterCurseFabric.util.ModTags.LIKE_SCAFFOLDING_TAG;
 
 @Mixin(LivingEntity.class)
@@ -262,6 +261,29 @@ public abstract class LivingEntityMixin {
         }
         return g;
     }
+
+    @ModifyArgs(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/Vec3d;multiply(DDD)Lnet/minecraft/util/math/Vec3d;", ordinal = 0))
+    private void modifyInWaterFlexibility(Args args) {
+        if ((LivingEntity)(Object)this instanceof PlayerEntity player) {
+            double targetSpeedX = args.get(0);
+            double targetSpeedZ = args.get(2);
+            if (!player.isTouchingWater()) {
+                return;
+            }
+            PowerHolderComponent component = PowerHolderComponent.KEY.get(player);
+
+            for (WaterFlexibilityPower power : component.getPowers(WaterFlexibilityPower.class)) {
+                if (power.isActive()) {
+                    float resistance = power.getResistance();
+                    targetSpeedX = 0.8F + (MAX_FLEXIBILITY - 0.8F) * resistance;
+                    targetSpeedZ = 0.8F + (MAX_FLEXIBILITY - 0.8F) * resistance;
+                }
+            }
+            args.set(0, targetSpeedX);
+            args.set(2, targetSpeedZ);
+        }
+    }
+
 
     @Inject(method = "isHoldingOntoLadder", at = @At("HEAD"), cancellable = true)
     private void isHoldingOntoLadder(CallbackInfoReturnable<Boolean> cir) {
