@@ -138,7 +138,7 @@ public abstract class LivingEntityMixin {
             float mobMaxHp = mob.getMaxHealth();
             int lootCount = (MathHelper.ceil(mobMaxHp / 4.0f));
             Random random = player.getRandom();
-            if (random.nextInt(100) < 50) {
+            if (random.nextInt(100) < 40) {
                 int finalCount = random.nextInt(lootCount);
                 if (finalCount > 0) {
                     ItemStack stack = new ItemStack(RegCustomItem.SPIDER_FLUID_COCOON, finalCount);
