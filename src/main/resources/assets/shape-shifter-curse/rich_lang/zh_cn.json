@@ -159,6 +159,7 @@
   "block.shape-shifter-curse.temp_web_bridge": ["桥梁蛛丝"],
   "block.shape-shifter-curse.web_composter": ["液化茧体"],
   "item.shape-shifter-curse.spider_fluid_cocoon": ["流食囊"],
+  "item.shape-shifter-curse.spider_fluid_cocoon.tooltip": ["流体营养液的储囊，食用风险自负"],
 
   "screen.shape-shifter-curse.book_of_shape_shifter.start_content_text":
   [
