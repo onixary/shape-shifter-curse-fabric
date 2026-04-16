@@ -27,6 +27,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
+import net.onixary.shapeShifterCurseFabric.custom_ui.NormalFormSelectScreen;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
 import net.onixary.shapeShifterCurseFabric.custom_ui.PatronFormSelectScreen;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
@@ -409,11 +410,10 @@ public class ModPacketsS2C {
     }
 
     public static void receiveOpenFormSelectMenu(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
-        // TODO 写完UI后记得还原注释和改Screen
-        // client.execute(() -> {
-        //     Screen screen = new PatronFormSelectScreen(Text.literal("FormSelectScreen"), client.player);
-        //     client.setScreen(screen);
-        // });
+        client.execute(() -> {
+            Screen screen = new NormalFormSelectScreen(Text.literal("FormSelectScreen"), client.player);
+            client.setScreen(screen);
+        });
     }
 
     public static void sendSetPatronForm(Identifier formID) {
