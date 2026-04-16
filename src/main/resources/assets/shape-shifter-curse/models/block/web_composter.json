@@ -3,6 +3,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
+		"particle": "shape-shifter-curse:block/web_composter_side",
 		"top": "shape-shifter-curse:block/web_composter_top",
 		"bottom": "shape-shifter-curse:block/web_composter_bottom",
 		"side": "shape-shifter-curse:block/web_composter_side"
