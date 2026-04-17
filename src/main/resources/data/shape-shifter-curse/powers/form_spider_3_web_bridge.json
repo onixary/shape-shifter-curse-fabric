@@ -1,6 +1,6 @@
 {
   "type": "shape-shifter-curse:charge_action",
-  "charge_power_id": "shape-shifter-curse:web_charge",
+  "charge_power_id": "shape-shifter-curse:web_charge_2",
   "key": {
     "key": "key.origins.secondary_active",
     "continuous": true
