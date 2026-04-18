@@ -79,6 +79,7 @@ public class RegCustomItem {
     public static final Item SPIDER_FLUID_COCOON = register("spider_fluid_cocoon", new SpiderFluidCocoon(new SpiderFluidCocoon.Settings()));
 
     public static final Item PATRON_FORM_ITEM = register("patron_form_item", new PatronFormItem(new Item.Settings()));
+    public static final Item SELECT_FORM_ITEM = register("select_form_item", new SelectFormItem(new Item.Settings()));
 
     public static final Item CUSTOM_TRINKET = register("custom_trinket", new CustomTrinket(new CustomTrinket.Settings()));
     // 用于成就图标的占位物品
@@ -153,6 +154,7 @@ public class RegCustomItem {
                 entries.add(AUXILIARY_SWORD);
                 entries.add(AUXILIARY_PICKAXE);
                 entries.add(AUXILIARY_AXE);
+                entries.add(SELECT_FORM_ITEM);
                 // 方块物品注册
                 entries.add(MOONDUST_CRYSTAL_GRIT);
                 entries.addAll(buildAllPotions(
