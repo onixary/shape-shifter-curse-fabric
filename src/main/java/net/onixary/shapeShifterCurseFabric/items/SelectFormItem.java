@@ -33,8 +33,10 @@ public class SelectFormItem extends Item {
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        if (!user.getWorld().isClient && entity instanceof PlayerEntity player) {
-            ModPacketsS2CServer.OpenFormSelectMenu((ServerPlayerEntity) user, player);
+        if (entity instanceof PlayerEntity player) {
+            if (!user.getWorld().isClient) {
+                ModPacketsS2CServer.OpenFormSelectMenu((ServerPlayerEntity) user, player);
+            }
             return ActionResult.SUCCESS;
         }
         return super.useOnEntity(stack, user, entity, hand);
