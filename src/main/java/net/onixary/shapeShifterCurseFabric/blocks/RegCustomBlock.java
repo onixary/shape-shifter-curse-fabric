@@ -23,7 +23,7 @@ public final class RegCustomBlock {
 
     public static final Block WEB_COMPOSTER = register("web_composter", new WebComposterBlock(AbstractBlock.Settings.create().mapColor(MapColor.WHITE_GRAY).instrument(Instrument.BASS).strength(0.6F).sounds(BlockSoundGroup.WOOL).burnable().nonOpaque()));
 
-    static {
+    public static void ClientInit() {
         // transparent透明模式不写Z，会出现自排序问题遮挡自己，只需要镂空的模型应该使用getCutout
         BlockRenderLayerMap.INSTANCE.putBlock(TEMP_WEB_BRIDGE, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(WEB_COMPOSTER, RenderLayer.getCutout());

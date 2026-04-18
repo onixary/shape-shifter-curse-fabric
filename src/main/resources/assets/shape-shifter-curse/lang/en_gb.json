@@ -438,5 +438,7 @@
     "item.shape-shifter-curse.transformative_axolotl_bucket": "Cursed Axolotl Bucket",
     "text.autoconfig.shape-shifter-curse-client.option.itemStorePowerPosType": "Item Store Power Middle Position Type",
     "text.autoconfig.shape-shifter-curse-client.option.itemStorePowerPosOffsetX": "Item Store Power Position X Offset",
-    "text.autoconfig.shape-shifter-curse-client.option.itemStorePowerPosOffsetY": "Item Store Power Position Y Offset"
+    "text.autoconfig.shape-shifter-curse-client.option.itemStorePowerPosOffsetY": "Item Store Power Position Y Offset",
+    "message.shape-shifter-curse.select_form_ui.target_name": "Target: %s",
+    "message.shape-shifter-curse.select_form_ui.target_uuid": "[ %s ]"
 }

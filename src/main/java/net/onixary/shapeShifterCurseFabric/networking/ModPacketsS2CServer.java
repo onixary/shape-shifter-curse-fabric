@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -231,8 +232,10 @@ public class ModPacketsS2CServer {
         ServerPlayNetworking.send(player, ModPackets.OPEN_PATRON_FORM_SELECT_MENU, buf);
     }
 
-    public static void OpenFormSelectMenu(ServerPlayerEntity player) {
+    public static void OpenFormSelectMenu(ServerPlayerEntity player, PlayerEntity target) {
         PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeString(target.getEntityName());
+        buf.writeUuid(target.getUuid());
         ServerPlayNetworking.send(player, ModPackets.OPEN_FORM_SELECT_MENU, buf);
     }
 

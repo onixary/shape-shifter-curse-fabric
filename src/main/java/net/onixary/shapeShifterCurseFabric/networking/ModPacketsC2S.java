@@ -210,16 +210,21 @@ public class ModPacketsC2S {
     }
 
     private static void receiveSetForm(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
+        UUID targetPlayerUuid = packetByteBuf.readUuid();
+        PlayerEntity target = minecraftServer.getPlayerManager().getPlayer(targetPlayerUuid);
+        if (target == null) {
+            ShapeShifterCurseFabric.LOGGER.warn("[SetForm] Player {} not found", targetPlayerUuid);
+        }
         Identifier formId = packetByteBuf.readIdentifier();
         PlayerFormBase form = RegPlayerForms.getPlayerForm(formId);
         // 网络包可以伪造 所以加个权限验证
-        if (minecraftServer.getCommandSource().hasPermissionLevel(2) || playerEntity.getAbilities().creativeMode) {
+        if (playerEntity.getCommandSource().hasPermissionLevel(2) || playerEntity.getAbilities().creativeMode) {
             minecraftServer.execute(() -> {
-                if (playerEntity == null) {
+                if (target == null) {
                     ShapeShifterCurseFabric.LOGGER.warn("[SetForm] Player is null");
                     return;
                 }
-                TransformManager.handleDirectTransform(playerEntity, form, false);
+                TransformManager.handleDirectTransform(target, form, false);
             });
             return;
         }
