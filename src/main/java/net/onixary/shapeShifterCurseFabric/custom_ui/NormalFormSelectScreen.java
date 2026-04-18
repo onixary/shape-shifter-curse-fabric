@@ -116,9 +116,10 @@ public class NormalFormSelectScreen extends Screen {
     }
 
     public void NextPage() {
-        int MaxPage = availableForms.size() / pageSize;
+        int MaxPage = availableForms.size() /  pageSize;
+        MaxPage += availableForms.size() % pageSize == 0 ? 0 : 1;
         this.nowPage++;
-        if (this.nowPage > MaxPage) {
+        if (this.nowPage >= MaxPage) {
             this.nowPage = 0;
         }
         LoadPage();
@@ -126,9 +127,10 @@ public class NormalFormSelectScreen extends Screen {
 
     public void PrevPage() {
         int MaxPage = availableForms.size() / pageSize;
+        MaxPage += availableForms.size() % pageSize == 0 ? 0 : 1;
         this.nowPage--;
         if (this.nowPage < 0) {
-            this.nowPage = MaxPage;
+            this.nowPage = MaxPage - 1;
         }
         LoadPage();
     }
