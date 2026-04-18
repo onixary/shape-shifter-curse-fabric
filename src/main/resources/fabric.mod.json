@@ -133,7 +133,7 @@
     "geckolib": "<4.7.0"
   },
   "recommends": {
-    "rich_translatable_text": ">=1.0.1",
+    "rich_translatable_text": ">=1.0.2",
     "firstperson": "*"
   }
 }

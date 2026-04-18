@@ -11,7 +11,9 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.ItemStack;
@@ -410,8 +412,10 @@ public class ModPacketsS2C {
     }
 
     public static void receiveOpenFormSelectMenu(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        String targetName = buf.readString();
+        UUID targetUUID = buf.readUuid();
         client.execute(() -> {
-            Screen screen = new NormalFormSelectScreen(Text.literal("FormSelectScreen"), client.player);
+            Screen screen = new NormalFormSelectScreen(Text.literal("FormSelectScreen"), targetName, targetUUID);
             client.setScreen(screen);
         });
     }
@@ -422,8 +426,9 @@ public class ModPacketsS2C {
         ClientPlayNetworking.send(SET_PATRON_FORM, buf);
     }
 
-    public static void sendSetForm(Identifier formID) {
+    public static void sendSetForm(Identifier formID, UUID target) {
         PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeUuid(target);
         buf.writeIdentifier(formID);
         ClientPlayNetworking.send(SET_FORM, buf);
     }
