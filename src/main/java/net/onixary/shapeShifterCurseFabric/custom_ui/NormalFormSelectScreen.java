@@ -93,8 +93,11 @@ public class NormalFormSelectScreen extends Screen {
         int ButtonHeight = 20;
         int ButtonStartX = width / 2 - (ButtonWidth + 10);
         int ButtonStartY = height / 2 - 4 * (ButtonHeight + 5) - 12;
-        TextWidget TargetInfoText = new TextWidget(ButtonStartX, ButtonStartY - 30, 400, 20, Text.translatable("message.shape-shifter-curse.select_form_ui.target_info", targetName, targetUUID.toString()), MinecraftClient.getInstance().textRenderer);
-        addDrawableChild(TargetInfoText);
+        int InfoStartY = height / 2 + 4 * (ButtonHeight + 5) + 5;
+        TextWidget TargetInfoText_NAME = new TextWidget(ButtonStartX, InfoStartY - 12, 420, 20, Text.translatable("message.shape-shifter-curse.select_form_ui.target_name", targetName), MinecraftClient.getInstance().textRenderer);
+        TextWidget TargetInfoText_UUID = new TextWidget(ButtonStartX, InfoStartY, 420, 20, Text.translatable("message.shape-shifter-curse.select_form_ui.target_uuid", targetUUID.toString()), MinecraftClient.getInstance().textRenderer);
+        addDrawableChild(TargetInfoText_NAME);
+        addDrawableChild(TargetInfoText_UUID);
         for (int Col = 0; Col < 2; Col++) {
             for (int Row = 0; Row < 8; Row++) {
                 int ButtonX = ButtonStartX + Col * (ButtonWidth + 20);
