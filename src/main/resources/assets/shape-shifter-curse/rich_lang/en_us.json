@@ -382,13 +382,15 @@
   "codex.desc.instincts_2": ["Instincts no longer disturb you - they've become part of you"],
   "codex.desc.instincts_3": ["Examining yourself, you feel the ever-shifting magic within you has reached a new state of stability - unshaken even by the cursed moon\nYour form has been permanently altered"],
 
-
+  "codex.form.shape-shifter-curse.original_before_enable.name": ["Original(Before enable mod contents)"],
+  "codex.form.shape-shifter-curse.original_shifter.name": ["Original Shape Shifter Form"],
   "codex.form.shape-shifter-curse.original_shifter.title": ["\nOverall, you are a normal human being"],
   "codex.form.shape-shifter-curse.original_shifter.appearance": [" "],
   "codex.form.shape-shifter-curse.original_shifter.pros": [" "],
   "codex.form.shape-shifter-curse.original_shifter.cons": [" "],
   "codex.form.shape-shifter-curse.original_shifter.instincts": [" "],
 
+  "codex.form.shape-shifter-curse.anubis_wolf_0.name" : ["Jackal Form(Phase 0)"],
   "codex.form.shape-shifter-curse.anubis_wolf_0.title": ["\nThe curse has had some visible effects on your body. You have developed some jackal-like features, and occasionally faint whispers echo in your mind"],
   "codex.form.shape-shifter-curse.anubis_wolf_0.appearance": ["You find your ears are no longer where they should be: they have moved toward the top of your head, their tips pointed, with pale golden fuzz growing on them, looking like the wolf-like spirits that appear in the desert\n",
     "Mottled black-and-yellow fur sprouts from the ends of your limbs. Beneath it, you find your nails have turned black, and your cuticles have become harder\n",
@@ -411,6 +413,7 @@
       "text":" staying in desert biomes", "color":"#c67681"
     }],
 
+  "codex.form.shape-shifter-curse.anubis_wolf_1.name" : ["Jackal Form(Phase 1)"],
   "codex.form.shape-shifter-curse.anubis_wolf_1.title": ["\nThe whispers of the masterless jackal wraiths grow clearer. Features that once belonged to them begin to spread across your body"],
   "codex.form.shape-shifter-curse.anubis_wolf_1.appearance": ["Mottled short fur, transitioning from black at the center of your body to light bronze at the ends of your limbs, has spread to most of your torso\n",
     "Your hands and feet have transformed into structures more akin to claws. They have become slightly elongated, with leathery pads protruding from your palms\n",
@@ -448,6 +451,7 @@
       "text":"an impulse to be afflicted with Wither", "color":"#c67681"
     }],
 
+  "codex.form.shape-shifter-curse.anubis_wolf_2.name" : ["Jackal Form(Phase 2)"],
   "codex.form.shape-shifter-curse.anubis_wolf_2.title": ["\nExcept for your ability to walk on two legs, you now look almost exactly like a jackal wraith brought back from the dead, flesh restored",
     "\n\nExclusive trinkets/tools：[Withered Bandage]"],
   "codex.form.shape-shifter-curse.anubis_wolf_2.appearance": ["Short fur now covers almost your entire body\n",
@@ -476,6 +480,7 @@
     "Normal leggings and boots no longer suit your new body structure; you cannot equip them"],
   "codex.form.shape-shifter-curse.anubis_wolf_2.instincts": [" "],
 
+  "codex.form.shape-shifter-curse.anubis_wolf_3.name" : ["Jackal Form(Phase Permanent)"],
   "codex.form.shape-shifter-curse.anubis_wolf_3.title": ["\nYour soul is intertwined seamlessly with the pack's; leading the reborn pack forward is your mission",
     "\n\nExclusive trinkets/tools：[Withered Bandage]"],
   "codex.form.shape-shifter-curse.anubis_wolf_3.appearance": ["As magical power intensifies, the essence of the pack begins to merge completely with yours..\n",
@@ -503,7 +508,7 @@
     "Normal leggings and boots no longer suit your quadrupedal body structure"],
   "codex.form.shape-shifter-curse.anubis_wolf_3.instincts": [" "],
 
-
+  "codex.form.shape-shifter-curse.axolotl_0.name" : ["Axolotl Form(Phase 0)"],
   "codex.form.shape-shifter-curse.axolotl_0.title": ["\nThe curse has caused visible changes to your body. Additionally, you feel an urge to immerse yourself in water."],
   "codex.form.shape-shifter-curse.axolotl_0.appearance": ["Pale red frond-like structures have grown on both sides of your cheeks. They remain constantly moist and seem to supplement your oxygen supply\n",
     "You notice wavy translucent fins forming at your extremities and on the newly grown tail\nYour skin has begun to feel noticeably damp"],
@@ -518,6 +523,8 @@
     {
       "text":" to stay in lush cave biomes", "color":"#c67681"
     }],
+
+  "codex.form.shape-shifter-curse.axolotl_1.name" : ["Axolotl Form(Phase 1)"],
   "codex.form.shape-shifter-curse.axolotl_1.title": ["\nYour enlarged gills and powerful tail enable free exploration of submerged structures. Freshly caught fish make ideal nourishment"],
   "codex.form.shape-shifter-curse.axolotl_1.appearance": ["The gill fronds on your cheeks have expanded further. When submerged, they can supply nearly all your oxygen needs\n",
     "Fins now cover more of your body, their colors growing more vibrant\n",
@@ -545,6 +552,8 @@
     {
       "text":"\nThe urge to wander through drip-leaf clusters", "color":"#c67681"
     },"intensifies"],
+
+  "codex.form.shape-shifter-curse.axolotl_2.name" : ["Axolotl Form(Phase 2)"],
   "codex.form.shape-shifter-curse.axolotl_2.title": ["\nAs an amphibious predator, you dominate aquatic environments while remaining functional on land - though moisture must be maintained"],
   "codex.form.shape-shifter-curse.axolotl_2.appearance": ["Your tail now functions as a true extension of your torso, comprising nearly half your height\n",
     "Prominent gill fronds occupy significant head space. When moistened, they provide abundant oxygen, eliminating lung dependency\n",
@@ -568,6 +577,7 @@
     "A echo catalyst could take your transformation to the next stage... though this process would likely be permanent\n",
     "You're NOT actually considering this, are you?"],
 
+  "codex.form.shape-shifter-curse.axolotl_3.name" : ["Axolotl Form(Phase Permanent)"],
   "codex.form.shape-shifter-curse.axolotl_3.title": ["Your body has fully transformed into that of an amphibian animal. To maintain an upright posture for walking, you must lean forward to counterbalance the weight of your tail.",
     "\n\nExclusive trinkets/tools：[Fountain Belt]"],
   "codex.form.shape-shifter-curse.axolotl_3.appearance": ["The further-grown tail has become the main structure of your body, adorned with developed fin membranes that allow swift underwater movement.\n",
@@ -596,6 +606,7 @@
     "Non-meat foods no longer provides you with energy"],
   "codex.form.shape-shifter-curse.axolotl_3.instincts": [""],
 
+  "codex.form.shape-shifter-curse.ocelot_0.name" : ["Ocelot Form(Phase 0)"],
   "codex.form.shape-shifter-curse.ocelot_0.title": ["\nThe curse has caused some visible changes. You notice your body moves more naturally when sneaking"],
   "codex.form.shape-shifter-curse.ocelot_0.appearance": ["Your ears have moved to the top of your head, covered in mottled fur, shaped between triangles and semicircles - somewhat resembling a feline's\n",
     "Your limb extremities are covered in spotted white fur, resembling thick gloves or socks. Underneath, your fingers seem altered - stronger than before\n",
@@ -615,6 +626,8 @@
     {
       "text":" to stay in jungle biomes", "color":"#c67681"
     }],
+
+  "codex.form.shape-shifter-curse.ocelot_1.name" : ["Ocelot Form(Phase 1)"],
   "codex.form.shape-shifter-curse.ocelot_1.title": ["\nMore feline traits let you climb trees freely and deliver deadly blows with powerful forepaws. Raw meat now seems more appealing than cooked"],
   "codex.form.shape-shifter-curse.ocelot_1.appearance": ["Mottled fur now covers most of your chest, abdomen and back. Connecting to your neck fur, it resembles a cloak\n",
     "Spotted white fur extends further up your limbs. Underneath, your hands and feet structure becomes more feline - retractable claws and cushioning pads\n",
@@ -645,6 +658,8 @@
     {
       "text":"climb to treetops", "color":"#c67681"
     }],
+
+  "codex.form.shape-shifter-curse.ocelot_2.name" : ["Ocelot Form(Phase 2)"],
   "codex.form.shape-shifter-curse.ocelot_2.title": ["\nQuadrupedal movement now feels most natural. When crouching, you're nearly indistinguishable from certain large felines",
     "\n\nExclusive trinkets/tools：[Collar Of Tension],[Collar Of Whiskers],[Digestion Fiber Ball]"],
   "codex.form.shape-shifter-curse.ocelot_2.appearance": ["Your head ears grow larger and more flexible - you notice they automatically turn toward sound sources\n",
@@ -671,6 +686,8 @@
   "codex.form.shape-shifter-curse.ocelot_2.instincts": ["Something inside you stirs... your transformation hasn't reached its end...\n",
     "A echo catalyst could take your transformation to the next stage... though this process would likely be permanent\n",
     "You're NOT actually considering this, are you?"],
+
+  "codex.form.shape-shifter-curse.ocelot_3.name" : ["Ocelot Form(Phase Permanent)"],
   "codex.form.shape-shifter-curse.ocelot_3.title": ["\n'There have been reports of an unusually large white ocelot spotted in the area. Best be cautious when approaching the forest'",
     "\n\nExclusive trinkets/tools：[Collar Of Tension],[Collar Of Whiskers],[Digestion Fiber Ball]"],
   "codex.form.shape-shifter-curse.ocelot_3.appearance": ["Apart from your fur color and body size, you're nearly indistinguishable from a wild ocelot\n",
@@ -691,6 +708,8 @@
   "codex.form.shape-shifter-curse.ocelot_3.cons": ["Your altered digestive system can no longer get energy from non-raw meat foods. Even when idle, your hyperactive metabolism constantly drains hunger - perpetual hunting becomes your only option\n\n",
     "Any armor severely hinders your movement. You can now only wear helmets and cannot properly use shields"],
   "codex.form.shape-shifter-curse.ocelot_3.instincts": [""],
+
+  "codex.form.shape-shifter-curse.bat_0.name" : ["Bat Form(Phase 0)"],
   "codex.form.shape-shifter-curse.bat_0.title": ["\nThe curse has affected your body, making you resemble certain chiropterans. You feel darkness attracting you.",
     "\n\nExclusive trinkets/tools：[Charm Of Night Crystal],[Charm Of Hollow Fang]"],
   "codex.form.shape-shifter-curse.bat_0.appearance": ["Membranous appendages extend from your arms' outer sides\n",
@@ -706,6 +725,8 @@
     {
       "text":" to stay in dripstone caves biomes", "color":"#c67681"
     }],
+
+  "codex.form.shape-shifter-curse.bat_1.name" : ["Bat Form(Phase 1)"],
   "codex.form.shape-shifter-curse.bat_1.title": ["\nNew vision and strength make you adept in caves and nighttime darkness. Just thinking about sunlight now discomforts you.",
     "\n\nExclusive trinkets/tools：[Charm Of Night Crystal],[Charm Of Hollow Fang]"],
   "codex.form.shape-shifter-curse.bat_1.appearance": ["Your ears now crown your head - large, pointed and forward-facing\n",
@@ -743,6 +764,8 @@
     {
       "text":"be surrounded by dripstones", "color":"#c67681"
     }," begins to attract you"],
+
+  "codex.form.shape-shifter-curse.bat_2.name" : ["Bat Form(Phase 2)"],
   "codex.form.shape-shifter-curse.bat_2.title": ["\nAs a chiropteran, you enjoy gliding through night skies with your kind.",
     "\n\nExclusive trinkets/tools：[Charm Of Night Crystal],[Charm Of Hollow Fang],[Diamond Mining Claw]"],
   "codex.form.shape-shifter-curse.bat_2.appearance": ["Your ears now dominate much head space, detecting minute sounds\n",
@@ -764,6 +787,8 @@
   "codex.form.shape-shifter-curse.bat_2.instincts": ["Something inside you stirs... your transformation hasn't reached its end...\n",
     "A echo catalyst could take your transformation to the next stage... though this process would likely be permanent\n",
     "You're NOT actually considering this, are you?"],
+
+  "codex.form.shape-shifter-curse.bat_3.name" : ["Bat Form(Phase Permanent)"],
   "codex.form.shape-shifter-curse.bat_3.title": ["\nFor you now, a cool and dark cavern might be more suitable as your new home..",
     "\n\nExclusive trinkets/tools：[Charm Of Night Crystal],[Charm Of Hollow Fang],[Diamond Mining Claw]"],
   "codex.form.shape-shifter-curse.bat_3.appearance": ["Fine, dense fur completely covers your body. Ears nearly as large as your head help you locate your surroundings, ensuring you don't miss even the faintest sounds.\n",
@@ -785,6 +810,7 @@
     "Meat no longer provides you with energy; your body has completely lost the ability to digest it."],
   "codex.form.shape-shifter-curse.bat_3.instincts": [" "],
 
+  "codex.form.shape-shifter-curse.snow_fox_0.name" : ["Snow Fox Form(Phase 0)"],
   "codex.form.shape-shifter-curse.snow_fox_0.title": ["\nThe curse has begun affecting your body; white fur starts growing all over you. You feel a growing urge to run across snowy ground.",
     "\n\nExclusive trinkets/tools：[Charm Of Reverse Thermometer]"],
   "codex.form.shape-shifter-curse.snow_fox_0.appearance": ["Grey-blue soft fur has grown at the ends of your limbs. You notice its color is slightly darker around your hands and feet.\n",
@@ -807,6 +833,8 @@
     {
       "text":" run across snowy ground", "color":"#c67681"
     }],
+
+  "codex.form.shape-shifter-curse.snow_fox_1.name" : ["Snow Fox Form(Phase 1)"],
   "codex.form.shape-shifter-curse.snow_fox_1.title": ["\nWhite and grey-blue fur spreads further across your body; a fluffy snow-white tail sways behind you.",
     "\n\nExclusive trinkets/tools：[Charm Of Reverse Thermometer]"],
   "codex.form.shape-shifter-curse.snow_fox_1.appearance": ["White and grey-blue fur spreads further across you. Your limbs and upper torso are now almost completely covered in thick fur.\n",
@@ -837,6 +865,8 @@
       "text":"The idea of lingering within Sweet Berry bushes", "color":"#c67681"
     }," begins to appeal to you"
   ],
+
+  "codex.form.shape-shifter-curse.snow_fox_2.name" : ["Snow Fox Form(Phase 2)"],
   "codex.form.shape-shifter-curse.snow_fox_2.title": ["You now bear a striking resemblance to an upright-walking snow fox.",
     "\n\nExclusive trinkets/tools：[Charm Of Reverse Thermometer],[Frost Pawglove],[Bottled Snowfall]"],
   "codex.form.shape-shifter-curse.snow_fox_2.appearance": ["Your hind feet have become fully digitigrade. Your face has pushed forward into a short muzzle, making you look more like a beast.\n",
@@ -861,6 +891,8 @@
   "codex.form.shape-shifter-curse.snow_fox_2.instincts": ["A faint tremor resonates deep within you: the transformation upon you has not yet reached its conclusion.\n",
     "A dose of Resonant Catalyst could push your transformation to the next stage... but this process would likely be permanent.\n",
     "You're not seriously considering this, are you?"],
+
+  "codex.form.shape-shifter-curse.snow_fox_3.name": ["Snow Fox Form(Phase Permanent)"],
   "codex.form.shape-shifter-curse.snow_fox_3.title": ["\nYou have fully embraced the cold magic within, allowing it to fundamentally change you. It's time to find a new den in the snowy woods..",
     "\n\nExclusive trinkets/tools：[Charm Of Reverse Thermometer],[Frost Pawglove],[Bottled Snowfall]"],
   "codex.form.shape-shifter-curse.snow_fox_3.appearance": ["Apart from an exceptionally fluffy neck ruff and a tail nearly as long as your body, your overall appearance is indistinguishable from a wild snow fox.\n",
@@ -888,6 +920,7 @@
     "Your fluffy fur further hinders your movement speed while swimming."],
   "codex.form.shape-shifter-curse.snow_fox_3.instincts": [""],
 
+  "codex.form.shape-shifter-curse.familiar_fox_0.name": ["Familiar Fox Form(Phase 0)"],
   "codex.form.shape-shifter-curse.familiar_fox_0.title": ["\nThe curse has affected your body - orange-red fur patches are growing across your skin. You feel an urge to run across snowy plains",
     "\n\nExclusive trinkets/tools：[Amulet Bracelet]"],
   "codex.form.shape-shifter-curse.familiar_fox_0.appearance": ["Black soft fur grows at your extremities, gradually transitioning to orange-red as it spreads upward\n",
@@ -910,6 +943,8 @@
     {
       "text":" to stay in taiga biomes", "color":"#c67681"
     }],
+
+  "codex.form.shape-shifter-curse.familiar_fox_1.name": ["Familiar Fox Form(Phase 1)"],
   "codex.form.shape-shifter-curse.familiar_fox_1.title": ["\nOrange-red fur continues spreading across your body as a fluffy red tail sways behind you",
     "\n\nExclusive trinkets/tools：[Amulet Bracelet]"],
   "codex.form.shape-shifter-curse.familiar_fox_1.appearance": ["The orange-red pelt expands further across your body, nearly covering your limbs and upper torso with thick fur\n",
@@ -940,6 +975,8 @@
       "text":"approach and observe them", "color":"#c67681"
     }
   ],
+
+  "codex.form.shape-shifter-curse.familiar_fox_2.name": ["Familiar Fox Form(Phase 2)"],
   "codex.form.shape-shifter-curse.familiar_fox_2.title": ["You now closely resemble an upright-walking red fox, but something feels distinctly wrong...",
     "\n\nExclusive trinkets/tools：[Amulet Bracelet]"],
   "codex.form.shape-shifter-curse.familiar_fox_2.appearance": ["Your hind legs have completely transformed into digitigrade structure, and your face has protruded forward to form a short muzzle, making you appear more beast-like\n",
@@ -970,6 +1007,8 @@
   "codex.form.shape-shifter-curse.familiar_fox_2.instincts": ["Something inside you stirs... your transformation hasn't reached its end...\n",
     "A echo catalyst could take your transformation to the next stage... though this process would likely be permanent\n",
     "You're NOT actually considering this, are you?"],
+
+  "codex.form.shape-shifter-curse.familiar_fox_3.name": ["Familiar Fox Form(Phase Permanent)"],
   "codex.form.shape-shifter-curse.familiar_fox_3.title": ["\n'Shape shifters can make perfect familiars. Magically attuned yet sufficiently intelligent...\n",
     "It seems we've found the correct approach'",
     "\n\nExclusive trinkets/tools：[Amulet Bracelet]"],
@@ -1002,6 +1041,7 @@
     "Villagers fear you, they actively avoid you"],
   "codex.form.shape-shifter-curse.familiar_fox_3.instincts": [""],
 
+  "codex.form.shape-shifter-curse.allay_sp.name": ["Allay Form(sp)"],
   "codex.form.shape-shifter-curse.allay_sp.title": ["\nYou now closely resemble a friendly spectral creature, though unclear if due to internal magic, you exhibit some unique features",
     "\n\nExclusive trinkets/tools：[Resonant Core]"],
   "codex.form.shape-shifter-curse.allay_sp.appearance": ["Your body now consists of light blue translucent gauze-like substance. Extremely light, letting you float\n",
@@ -1022,27 +1062,36 @@
     "Floating increases inertia, making stopping harder\n",
     "Your lower torso vanished - you can't wear leggings or boots"],
   "codex.form.shape-shifter-curse.allay_sp.instincts": ["\n\n\nCompared to other forms, you notice this one seems \"special\": it barely affects your mind and feels less stable. If desired, you could likely revert it relatively easily"],
+
+  "codex.form.shape-shifter-curse.feral_cat_sp.name": ["Feral Cat Form(sp)"],
   "codex.form.shape-shifter-curse.feral_cat_sp.title": ["Meow.."],
   "codex.form.shape-shifter-curse.feral_cat_sp.appearance": ["Meow？"],
   "codex.form.shape-shifter-curse.feral_cat_sp.pros": ["Meowwwww..."],
   "codex.form.shape-shifter-curse.feral_cat_sp.cons": ["Meow...Meowor？"],
   "codex.form.shape-shifter-curse.feral_cat_sp.instincts": ["Meow...."],
 
+  "codex.form.shape-shifter-curse.spider_0.name": ["Spider Form(Phase 0)"],
   "codex.form.shape-shifter-curse.spider_0.title": ["\n蜘蛛形态标题"],
   "codex.form.shape-shifter-curse.spider_0.appearance": ["外观描述..."],
   "codex.form.shape-shifter-curse.spider_0.pros": ["能力描述..."],
   "codex.form.shape-shifter-curse.spider_0.cons": ["缺点描述..."],
   "codex.form.shape-shifter-curse.spider_0.instincts": ["本能描述..."],
+
+  "codex.form.shape-shifter-curse.spider_1.name": ["Spider Form(Phase 1)"],
   "codex.form.shape-shifter-curse.spider_1.title": ["\n蜘蛛形态标题"],
   "codex.form.shape-shifter-curse.spider_1.appearance": ["外观描述..."],
   "codex.form.shape-shifter-curse.spider_1.pros": ["能力描述..."],
   "codex.form.shape-shifter-curse.spider_1.cons": ["缺点描述..."],
   "codex.form.shape-shifter-curse.spider_1.instincts": ["本能描述..."],
+
+  "codex.form.shape-shifter-curse.spider_2.name": ["Spider Form(Phase 2)"],
   "codex.form.shape-shifter-curse.spider_2.title": ["\n蜘蛛形态标题"],
   "codex.form.shape-shifter-curse.spider_2.appearance": ["外观描述..."],
   "codex.form.shape-shifter-curse.spider_2.pros": ["能力描述..."],
   "codex.form.shape-shifter-curse.spider_2.cons": ["缺点描述..."],
   "codex.form.shape-shifter-curse.spider_2.instincts": ["本能描述..."],
+
+  "codex.form.shape-shifter-curse.spider_3.name": ["Spider Form(Phase Permanent)"],
   "codex.form.shape-shifter-curse.spider_3.title": ["\n蜘蛛形态标题"],
   "codex.form.shape-shifter-curse.spider_3.appearance": ["外观描述..."],
   "codex.form.shape-shifter-curse.spider_3.pros": ["通过按住主要能力键蓄力并放开，你可以消耗蛛网值发射出蛛丝弹。根据蓄力程度以及命中实体或是方块表面，其会产生不同的效果：\n当命中方块的侧面或底面时，可以根据蓄力程度向下延伸出可供攀爬的不具粘性的桥梁蛛丝结构；\n你的蛛丝弹生成的桥梁蛛丝变得非常坚实。现在当命中方块的顶面时，可以根据蓄力程度向上生成塔状桥梁蛛丝结构\n当命中生物时，根据蓄力程度，你可以为其施加不同强度的缓慢与虚弱效果。另外，生物还会额外受到“缠身”的效果：当“缠身”持续积累时，其最终会变为“茧缚”，让生物完全裹在蛛丝茧中，无法行动\n使用近战攻击“茧缚”的生物，你可以补充一定蛛网值；若生物在“茧缚”效果下死亡，其可能会掉落流食囊。它们是你唯一的食物\n\n通过按住备用能力键蓄力并放开，你可以消耗蛛网值向你的面向方向生成水平的蛛丝桥梁。根据蓄力程度，其的长度与宽度也会发生变化\n\n你拥有一双额外的手臂。通过在Trinkets的额外副手栏中装备不同的特殊物品，你可以获取相应的增益效果：\n盾：自动防御前方的攻击，但是成功防御后任何攻击后都会产生冷却\n副手剑：近战攻击的冷却时间缩短，但是武器的耐久损耗提升\n副手斧：近战伤害提升，但是攻击冷却增加\n副手镐：挖掘速度增加，但是近战伤害下降\n\n你不会受到蛛网阻碍。可以攀爬蛛网，并感知到陷入网中的实体\n\n你可以食用线补充蛛网值。通过在背包中手持线并右键点击另外一个线物品，你可以消耗少许蛛网值制造蛛网\n通过在背包中手持蛛网并右键点击堆肥桶，你可以消耗较多蛛网值制造液化茧囊——投入其中的肉类会被逐渐转化为你可以食用的流食囊\n你完全变化的多足蜘蛛身体给与了你夜视，免疫中毒以及跨越一格高度的能力。你可以自由攀爬方块侧壁\n蜘蛛不会将你看作敌人"],
