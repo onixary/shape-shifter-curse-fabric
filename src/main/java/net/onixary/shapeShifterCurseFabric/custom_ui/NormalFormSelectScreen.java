@@ -21,7 +21,10 @@ import java.util.UUID;
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
 public class NormalFormSelectScreen extends Screen {
-    private static final Identifier page_texID = new Identifier(MOD_ID,"textures/gui/patron_form_select_menu.png");
+    // 背景图片固定尺寸配置
+    private static final int BG_WIDTH = 470;
+    private static final int BG_HEIGHT = 247;
+    private static final Identifier BG_TEXTURE = new Identifier(MOD_ID, "textures/gui/normal_form_select_menu.png");
     private final String targetName;
     private final UUID targetUUID;
 
@@ -89,15 +92,19 @@ public class NormalFormSelectScreen extends Screen {
         // 或许可以对按钮进行排版
         // 修改数量请同时修改pageSize
         // 一列显示8个 共2列
-        int ButtonWidth = 200;
+        int ButtonWidth = 180;
         int ButtonHeight = 20;
         int ButtonStartX = width / 2 - (ButtonWidth + 10);
         int ButtonStartY = height / 2 - 4 * (ButtonHeight + 5) - 12;
         int InfoStartY = height / 2 + 4 * (ButtonHeight + 5) + 5;
-        TextWidget TargetInfoText_NAME = new TextWidget(ButtonStartX, InfoStartY - 12, 420, 20, Text.translatable("message.shape-shifter-curse.select_form_ui.target_name", targetName), MinecraftClient.getInstance().textRenderer);
-        TextWidget TargetInfoText_UUID = new TextWidget(ButtonStartX, InfoStartY, 420, 20, Text.translatable("message.shape-shifter-curse.select_form_ui.target_uuid", targetUUID.toString()), MinecraftClient.getInstance().textRenderer);
+        int totalButtonWidth = 2 * ButtonWidth + 20;
+        int textX = width / 2 - totalButtonWidth / 2;
+        TextWidget TargetInfoText_NAME = new TextWidget(textX, InfoStartY - 9, totalButtonWidth, 20, Text.translatable("message.shape-shifter-curse.select_form_ui.target_name", targetName), MinecraftClient.getInstance().textRenderer);
+        TargetInfoText_NAME.alignCenter();
+        // 暂时不需要UUID，太长了
+        //TextWidget TargetInfoText_UUID = new TextWidget(ButtonStartX, InfoStartY, 420, 20, Text.translatable("message.shape-shifter-curse.select_form_ui.target_uuid", targetUUID.toString()), MinecraftClient.getInstance().textRenderer);
         addDrawableChild(TargetInfoText_NAME);
-        addDrawableChild(TargetInfoText_UUID);
+        //addDrawableChild(TargetInfoText_UUID);
         for (int Col = 0; Col < 2; Col++) {
             for (int Row = 0; Row < 8; Row++) {
                 int ButtonX = ButtonStartX + Col * (ButtonWidth + 20);
@@ -117,9 +124,9 @@ public class NormalFormSelectScreen extends Screen {
             }
         }
         // 翻页
-        ButtonWidget PagePrevButton = ButtonWidget.builder(Text.of("<"), (buttonWidget) -> PrevPage()).size(20, 20).position(width / 2 - 130, height / 2 + 4 * (ButtonHeight + 5) - 5).build();
+        ButtonWidget PagePrevButton = ButtonWidget.builder(Text.of("<"), (buttonWidget) -> PrevPage()).size(20, 20).position(width / 2 - 100, height / 2 + 4 * (ButtonHeight + 5) - 5).build();
         this.addDrawableChild(PagePrevButton);
-        ButtonWidget PageNextButton = ButtonWidget.builder(Text.of(">"), (buttonWidget) -> NextPage()).size(20, 20).position(width / 2 + 110, height / 2 + 4 * (ButtonHeight + 5) - 5).build();
+        ButtonWidget PageNextButton = ButtonWidget.builder(Text.of(">"), (buttonWidget) -> NextPage()).size(20, 20).position(width / 2 + 80, height / 2 + 4 * (ButtonHeight + 5) - 5).build();
         this.addDrawableChild(PageNextButton);
         LoadPage();
         super.init();
@@ -150,17 +157,18 @@ public class NormalFormSelectScreen extends Screen {
         super.close();
     }
 
-    private void renderTexture(DrawContext context) {
-        // 最小 UI 420x227 翻页按钮 [80,207 20x20] [320,207 20x20] 按钮
-        int TexturePosX = width / 2 - 210;
-        int TexturePosY = height / 2 - 112;
-        context.drawTexture(page_texID, TexturePosX, TexturePosY, 0, 0, 420, 227, 420, 227);
+    public void renderBackgroundTexture(DrawContext context) {
+        // 计算居中位置，保持固定尺寸
+        int bgX = (this.width - BG_WIDTH) / 2;
+        int bgY = (this.height - BG_HEIGHT) / 2;
+        context.drawTexture(BG_TEXTURE, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, BG_HEIGHT);
     }
 
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        this.renderTexture(context);
+        this.renderBackgroundTexture(context);
+        //this.renderTexture(context);
         super.render(context, mouseX, mouseY, delta);
     }
 
