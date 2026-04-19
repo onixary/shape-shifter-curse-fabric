@@ -16,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.RotationAxis;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryUtils;
 
 import java.util.Map;
 import java.util.Optional;
@@ -26,6 +27,10 @@ public class SpiderTPEHR extends ThirdPersonExtraHandItemRender.TPEHR_Render {
 
     @Override
     public void render(HeldItemRenderer heldItemRenderer, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
+        // XuHaoNan: 此功能暂时 trinket 独占 影响不大 不想写切换逻辑了
+        if (!AccessoryUtils.LOADED_Trinkets) {
+            return;
+        }
         Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
         if (component.isEmpty()) {
             return;

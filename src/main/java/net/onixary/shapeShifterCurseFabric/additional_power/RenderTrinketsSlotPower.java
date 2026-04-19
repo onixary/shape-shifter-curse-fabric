@@ -12,6 +12,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryUtils;
 import net.onixary.shapeShifterCurseFabric.render.tech.ItemStorePowerRender;
 
 import java.util.Map;
@@ -42,7 +43,7 @@ public class RenderTrinketsSlotPower extends Power implements ItemStorePowerRend
     public ItemStack getStack() {
         switch (accessoryMod) {
             case "trinkets":
-                if (FabricLoader.getInstance().isModLoaded("trinkets")) {
+                if (AccessoryUtils.LOADED_Trinkets) {
                     Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(this.entity);
                     if (component.isEmpty()) {
                         return ItemStack.EMPTY;
@@ -60,7 +61,7 @@ public class RenderTrinketsSlotPower extends Power implements ItemStorePowerRend
                 return ItemStack.EMPTY;
             case "curios":
                 // TODO 未完工
-                if (FabricLoader.getInstance().isModLoaded("curios")) {
+                if (AccessoryUtils.LOADED_Curios) {
                     return ItemStack.EMPTY;
                 }
                 return ItemStack.EMPTY;

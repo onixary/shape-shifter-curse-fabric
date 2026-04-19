@@ -8,7 +8,6 @@ import io.github.apace100.apoli.power.factory.action.ActionFactory;
 import io.github.apace100.apoli.power.factory.condition.ConditionFactory;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -19,6 +18,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryUtils;
 
 import java.util.Map;
 import java.util.Optional;
@@ -35,7 +35,7 @@ public class TrinketsConditionAction {
         }
         switch (AccessoryMod) {
             case "trinkets":
-                if (!FabricLoader.getInstance().isModLoaded("trinkets")) {
+                if (!AccessoryUtils.LOADED_Trinkets) {
                     return false;
                 }
                 if (entity instanceof LivingEntity livingEntity) {
@@ -48,13 +48,13 @@ public class TrinketsConditionAction {
                 return false;
             case "curios":
                 // TODO 未完工
-                if (!FabricLoader.getInstance().isModLoaded("curios")) {
+                if (!AccessoryUtils.LOADED_Curios) {
                     return false;
                 }
                 return false;
             case "all":
                 boolean FoundEquipped = false;
-                if (!FoundEquipped && FabricLoader.getInstance().isModLoaded("trinkets")) {
+                if (!FoundEquipped && AccessoryUtils.LOADED_Trinkets) {
                     if (entity instanceof LivingEntity livingEntity) {
                         Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(livingEntity);
                         if (!component.isEmpty()) {
@@ -63,7 +63,7 @@ public class TrinketsConditionAction {
                         }
                     }
                 }
-                if (!FoundEquipped && FabricLoader.getInstance().isModLoaded("curios")) {
+                if (!FoundEquipped && AccessoryUtils.LOADED_Curios) {
                     // TODO 未完工
                 }
                 return FoundEquipped;
@@ -77,7 +77,7 @@ public class TrinketsConditionAction {
         if (entity instanceof LivingEntity livingEntity) {
             switch (AccessoryMod) {
                 case "trinkets":
-                    if (!FabricLoader.getInstance().isModLoaded("trinkets")) {
+                    if (!AccessoryUtils.LOADED_Trinkets) {
                         return rDefault;
                     }
                     Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(livingEntity);
@@ -99,7 +99,7 @@ public class TrinketsConditionAction {
                     return conditon.test(stack);
                 case "curios":
                     // TODO 未完工
-                    if (!FabricLoader.getInstance().isModLoaded("curios")) {
+                    if (!AccessoryUtils.LOADED_Curios) {
                         return rDefault;
                     }
                     return rDefault;
@@ -114,7 +114,7 @@ public class TrinketsConditionAction {
         if (entity instanceof LivingEntity livingEntity) {
             switch (AccessoryMod) {
                 case "trinkets":
-                    if (!FabricLoader.getInstance().isModLoaded("trinkets")) {
+                    if (!AccessoryUtils.LOADED_Trinkets) {
                         return;
                     }
                     Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(livingEntity);
@@ -136,7 +136,7 @@ public class TrinketsConditionAction {
                     action.accept(new Pair<>(entity.getWorld(), stack));
                 case "curios":
                     // TODO 未完工
-                    if (!FabricLoader.getInstance().isModLoaded("curios")) {
+                    if (!AccessoryUtils.LOADED_Curios) {
                         return;
                     }
                     return;
@@ -153,7 +153,7 @@ public class TrinketsConditionAction {
         if (entity instanceof LivingEntity livingEntity) {
             switch (AccessoryMod) {
                 case "trinkets":
-                    if (!FabricLoader.getInstance().isModLoaded("trinkets")) {
+                    if (!AccessoryUtils.LOADED_Trinkets) {
                         return;
                     }
                     Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(livingEntity);
@@ -191,7 +191,7 @@ public class TrinketsConditionAction {
                     }
                 case "curios":
                     // TODO 未完工
-                    if (!FabricLoader.getInstance().isModLoaded("curios")) {
+                    if (!AccessoryUtils.LOADED_Curios) {
                         return;
                     }
                     return;
