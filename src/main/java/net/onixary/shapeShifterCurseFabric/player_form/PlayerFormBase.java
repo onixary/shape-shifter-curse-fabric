@@ -26,6 +26,7 @@ public class PlayerFormBase {
     private boolean CanSneakRush = false;
     private boolean CanRushJump = false;
     private boolean IsCustomForm = false;
+    private boolean IgnoreCursedMoon = false;
 
     private boolean IsRegisteredPowerAnim = false;
 
@@ -122,6 +123,15 @@ public class PlayerFormBase {
 
     public PlayerFormBase setIsCustomForm(boolean isCustomForm) {
         IsCustomForm = isCustomForm;
+        return this;
+    }
+
+    public boolean getIgnoreCursedMoon() {
+        return IgnoreCursedMoon;
+    }
+
+    public PlayerFormBase setIgnoreCursedMoon(boolean ignoreCursedMoon) {
+        IgnoreCursedMoon = ignoreCursedMoon;
         return this;
     }
 
