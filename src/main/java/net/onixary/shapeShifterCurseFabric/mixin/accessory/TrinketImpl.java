@@ -1,20 +1,11 @@
 package net.onixary.shapeShifterCurseFabric.mixin.accessory;
 
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.SlotType;
 import dev.emi.trinkets.api.Trinket;
 import dev.emi.trinkets.api.TrinketEnums;
-import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtList;
-import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryItem;
 import org.spongepowered.asm.mixin.Mixin;
@@ -71,41 +62,6 @@ public class TrinketImpl implements Trinket {
     @Override
     public boolean canUnequip(ItemStack stack, SlotReference slot, LivingEntity entity) {
         return ((AccessoryItem) (Object) this).canUnequip(stack, entity, getSlotData(slot));
-    }
-
-    @Override
-    public Multimap<EntityAttribute, EntityAttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid) {
-        AccessoryItem realThis = ((AccessoryItem) (Object) this);
-        if (realThis.enableCustomAttributeModifiers()) {
-            return realThis.getAttributeModifiers(stack, entity, getSlotData(slot), uuid);
-        }
-
-        // Trinket 的代码
-        Multimap<EntityAttribute, EntityAttributeModifier> map = Multimaps.newMultimap(Maps.newLinkedHashMap(), ArrayList::new);
-        if (stack.hasNbt() && stack.getNbt().contains("TrinketAttributeModifiers", 9)) {
-            NbtList list = stack.getNbt().getList("TrinketAttributeModifiers", 10);
-
-            for (int i = 0; i < list.size(); i++) {
-                NbtCompound tag = list.getCompound(i);
-
-                if (!tag.contains("Slot", NbtType.STRING) || tag.getString("Slot")
-                        .equals(slot.inventory().getSlotType().getGroup() + "/" + slot.inventory().getSlotType().getName())) {
-                    Optional<EntityAttribute> optional = Registries.ATTRIBUTE
-                            .getOrEmpty(Identifier.tryParse(tag.getString("AttributeName")));
-
-                    if (optional.isPresent()) {
-                        EntityAttributeModifier entityAttributeModifier = EntityAttributeModifier.fromNbt(tag);
-
-                        if (entityAttributeModifier != null
-                                && entityAttributeModifier.getId().getLeastSignificantBits() != 0L
-                                && entityAttributeModifier.getId().getMostSignificantBits() != 0L) {
-                            map.put(optional.get(), entityAttributeModifier);
-                        }
-                    }
-                }
-            }
-        }
-        return map;
     }
 
     @Override

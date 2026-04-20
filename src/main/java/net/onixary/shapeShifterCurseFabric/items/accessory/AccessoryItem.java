@@ -45,14 +45,6 @@ public abstract class AccessoryItem extends Item {
         return !EnchantmentHelper.hasBindingCurse(stack);
     }
 
-    public boolean enableCustomAttributeModifiers() {
-        return false;
-    }
-
-    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(ItemStack stack, LivingEntity entity, SlotData slotData, UUID uuid) {
-        return null;
-    }
-
     public void onBreak(ItemStack stack, LivingEntity entity, SlotData slotData) {
         return;
     }
