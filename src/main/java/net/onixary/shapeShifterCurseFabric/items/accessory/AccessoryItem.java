@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.items.accessory;
 
 import com.google.common.collect.Multimap;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -24,23 +25,39 @@ public abstract class AccessoryItem extends Item {
         super(settings);
     }
 
-    public abstract void accessoryTick(ItemStack stack, LivingEntity accessoryOwner, SlotData slotData);
+    public void accessoryTick(ItemStack stack, LivingEntity accessoryOwner, SlotData slotData) {
+        return;
+    }
 
-    public abstract void onEquip(ItemStack stack, LivingEntity accessoryOwner, SlotData slotData);
+    public void onEquip(ItemStack stack, LivingEntity accessoryOwner, SlotData slotData) {
+        return;
+    }
 
-    public abstract void onUnequip(ItemStack stack, LivingEntity accessoryOwner, SlotData slotData);
+    public void onUnequip(ItemStack stack, LivingEntity accessoryOwner, SlotData slotData) {
+        return;
+    }
 
-    public abstract boolean canEquip(ItemStack stack, LivingEntity entity, SlotData slotData);
+    public boolean canEquip(ItemStack stack, LivingEntity entity, SlotData slotData) {
+        return true;
+    }
 
-    public abstract boolean canUnequip(ItemStack stack, LivingEntity entity, SlotData slotData);
+    public boolean canUnequip(ItemStack stack, LivingEntity entity, SlotData slotData) {
+        return !EnchantmentHelper.hasBindingCurse(stack);
+    }
 
     public boolean enableCustomAttributeModifiers() {
         return false;
     }
 
-    public abstract Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(ItemStack stack, LivingEntity entity, SlotData slotData, UUID uuid);
+    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(ItemStack stack, LivingEntity entity, SlotData slotData, UUID uuid) {
+        return null;
+    }
 
-    public abstract boolean onBreak(ItemStack stack, LivingEntity entity, SlotData slotData);
+    public void onBreak(ItemStack stack, LivingEntity entity, SlotData slotData) {
+        return;
+    }
 
-    public abstract DropRule getDropRule(ItemStack stack, LivingEntity entity, SlotData slotData);
+    public DropRule getDropRule(ItemStack stack, LivingEntity entity, SlotData slotData) {
+        return DropRule.DEFAULT;
+    }
 }

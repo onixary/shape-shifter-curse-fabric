@@ -25,7 +25,7 @@ import java.util.*;
 
 public class TrinketUtils {
     public interface CustomPowerTrinketInterface {
-        void onFormChange(ItemStack stack, SlotReference slot, PlayerEntity entity);
+        void onFormChange(ItemStack stack, AccessoryItem.SlotData slot, PlayerEntity entity);
     }
 
     public static class TrinketPowerData {
@@ -275,26 +275,10 @@ public class TrinketUtils {
     }
 
     // 适配新架构的函数 等完工后再改 现在为了不影响正在使用的功能 先注释掉
-    // public static void ReApplyAccessoryPowerOnPlayerFormChange(PlayerEntity player) {
-    //     List<Pair<AccessoryItem.SlotData, ItemStack>> allAccessory = getAllAccessory(player);
-    //     for (Pair<AccessoryItem.SlotData, ItemStack> accessoryPair : allAccessory) {
-    //         AccessoryItem.SlotData slot = accessoryPair.getLeft();
-    //         ItemStack stack = accessoryPair.getRight();
-    //         if (stack.getItem() instanceof CustomPowerTrinketInterface cpti) {
-    //             cpti.onFormChange(stack, slot, player);
-    //         } else {
-    //             ApplyAccessoryPowerOnPlayerFormChange(player, Registries.ITEM.getId(stack.getItem()));
-    //         }
-    //     }
-    // }
-
     public static void ReApplyAccessoryPowerOnPlayerFormChange(PlayerEntity player) {
-        Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
-        if (component.isEmpty()) {
-            return;
-        }
-        for (Pair<SlotReference, ItemStack> accessoryPair : component.get().getAllEquipped()) {
-            SlotReference slot = accessoryPair.getLeft();
+        List<Pair<AccessoryItem.SlotData, ItemStack>> allAccessory = getAllAccessory(player);
+        for (Pair<AccessoryItem.SlotData, ItemStack> accessoryPair : allAccessory) {
+            AccessoryItem.SlotData slot = accessoryPair.getLeft();
             ItemStack stack = accessoryPair.getRight();
             if (stack.getItem() instanceof CustomPowerTrinketInterface cpti) {
                 cpti.onFormChange(stack, slot, player);
@@ -303,6 +287,22 @@ public class TrinketUtils {
             }
         }
     }
+
+    // public static void ReApplyAccessoryPowerOnPlayerFormChange(PlayerEntity player) {
+    //     Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
+    //     if (component.isEmpty()) {
+    //         return;
+    //     }
+    //     for (Pair<SlotReference, ItemStack> accessoryPair : component.get().getAllEquipped()) {
+    //         SlotReference slot = accessoryPair.getLeft();
+    //         ItemStack stack = accessoryPair.getRight();
+    //         if (stack.getItem() instanceof CustomPowerTrinketInterface cpti) {
+    //             cpti.onFormChange(stack, slot, player);
+    //         } else {
+    //             ApplyAccessoryPowerOnPlayerFormChange(player, Registries.ITEM.getId(stack.getItem()));
+    //         }
+    //     }
+    // }
 
     public static void ApplyAccessoryPowerOnEquip(PlayerEntity player, Identifier accessoryID) {
         if (player.getWorld().isClient) {

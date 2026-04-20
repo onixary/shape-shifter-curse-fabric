@@ -18,6 +18,8 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
         mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.integration.AppleSkin", new MixinRequiredMods(new String[]{"appleskin"}, new String[]{}));
         mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.integration.TacZ_Anim", new MixinRequiredMods(new String[]{"tacz"}, new String[]{}));
         mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.integration.TacZ_AnimThird", new MixinRequiredMods(new String[]{"tacz"}, new String[]{}));
+        mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.accessory.TrinketImpl", new MixinRequiredMods(new String[]{"trinkets"}, new String[]{}));
+        mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.accessory.TrinketItemMixin", new MixinRequiredMods(new String[]{"trinkets"}, new String[]{}));
     }
 
     @Override

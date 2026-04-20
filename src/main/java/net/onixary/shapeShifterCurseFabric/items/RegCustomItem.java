@@ -1,10 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.items;
 
-import dev.emi.trinkets.api.TrinketItem;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
@@ -61,7 +57,7 @@ public class RegCustomItem {
     public static final ToolItem AUXILIARY_PICKAXE = register("auxiliary_pickaxe", new AuxiliaryPickaxe(AuxiliaryPickaxeToolMaterial.INSTANCE, 1, -2.8f, new Item.Settings()));
     public static final ToolItem AUXILIARY_AXE = register("auxiliary_axe", new AuxiliaryAxe(AuxiliaryAxeToolMaterial.INSTANCE, 1, -3.1f, new Item.Settings()));
     // 模组自定义Trinkets
-    public static final TrinketItem AMULET_BRACELET = register("amulet_bracelet", new AmuletBraceletTrinket(new AmuletBraceletTrinket.Settings()));
+    public static final Item AMULET_BRACELET = register("amulet_bracelet", new AmuletBraceletTrinket(new AmuletBraceletTrinket.Settings()));
     public static final Item ATTACH_HOOK = register("attach_hook", new AttachHookTrinket(new AttachHookTrinket.Settings()));
     public static final Item CHARM_OF_HOLLOW_FANG = register("charm_of_hollow_fang", new CharmOfHollowFangTrinket(new CharmOfHollowFangTrinket.Settings()));
     public static final Item CHARM_OF_NIGHT_CRYSTAL = register("charm_of_night_crystal", new CharmOfNightCrystalTrinket(new CharmOfNightCrystalTrinket.Settings()));
