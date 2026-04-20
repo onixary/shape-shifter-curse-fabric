@@ -133,6 +133,7 @@
   },
   "recommends": {
     "rich_translatable_text": ">=1.0.2",
-    "firstperson": "*"
+    "firstperson": "*",
+    "trinkets": ">=3.7.2"
   }
 }
