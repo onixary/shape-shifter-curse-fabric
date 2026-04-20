@@ -24,6 +24,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 
+import static net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryUtils.calcAutoMod;
+
 public class TrinketsConditionAction {
     public static boolean isEquipped(Entity entity, String AccessoryMod, Identifier trinketID) {
         if (trinketID == null) {
@@ -33,7 +35,7 @@ public class TrinketsConditionAction {
         if (trinketItem.isEmpty()) {
             return false;
         }
-        switch (AccessoryMod) {
+        switch (calcAutoMod(AccessoryMod)) {
             case "trinkets":
                 if (!AccessoryUtils.LOADED_Trinkets) {
                     return false;
@@ -67,6 +69,8 @@ public class TrinketsConditionAction {
                     // TODO 未完工
                 }
                 return FoundEquipped;
+            case "none":
+                return false;
             default:
                 ShapeShifterCurseFabric.LOGGER.error("[check_accessory_slot] accessory_mod is not valid");
         }
@@ -75,7 +79,7 @@ public class TrinketsConditionAction {
 
     public static boolean CheckEquipped(Entity entity, String AccessoryMod, String GroupString, String SlotString, int Slot, ConditionFactory<ItemStack>.Instance conditon, boolean rDefault) {
         if (entity instanceof LivingEntity livingEntity) {
-            switch (AccessoryMod) {
+            switch (calcAutoMod(AccessoryMod)) {
                 case "trinkets":
                     if (!AccessoryUtils.LOADED_Trinkets) {
                         return rDefault;
@@ -103,6 +107,8 @@ public class TrinketsConditionAction {
                         return rDefault;
                     }
                     return rDefault;
+                case "none":
+                    return rDefault;
                 default:
                     ShapeShifterCurseFabric.LOGGER.error("[check_accessory_slot] accessory_mod is not valid");
             }
@@ -112,7 +118,7 @@ public class TrinketsConditionAction {
 
     public static void InvokeEquipped(Entity entity, String AccessoryMod, String GroupString, String SlotString, int Slot, ActionFactory<Pair<World, ItemStack>>.Instance action) {
         if (entity instanceof LivingEntity livingEntity) {
-            switch (AccessoryMod) {
+            switch (calcAutoMod(AccessoryMod)) {
                 case "trinkets":
                     if (!AccessoryUtils.LOADED_Trinkets) {
                         return;
@@ -140,6 +146,8 @@ public class TrinketsConditionAction {
                         return;
                     }
                     return;
+                case "none":
+                    return;
                 default:
                     ShapeShifterCurseFabric.LOGGER.error("[invoke_accessory] accessory_mod is not valid");
             }
@@ -151,7 +159,7 @@ public class TrinketsConditionAction {
 
     public static void DropEquipped(Entity entity, String AccessoryMod, String GroupString, String SlotString, int Slot, boolean remove) {
         if (entity instanceof LivingEntity livingEntity) {
-            switch (AccessoryMod) {
+            switch (calcAutoMod(AccessoryMod)) {
                 case "trinkets":
                     if (!AccessoryUtils.LOADED_Trinkets) {
                         return;
@@ -195,6 +203,8 @@ public class TrinketsConditionAction {
                         return;
                     }
                     return;
+                case "none":
+                    return;
                 default:
                     ShapeShifterCurseFabric.LOGGER.error("[drop_accessory] accessory_mod is not valid");
             }
@@ -205,7 +215,7 @@ public class TrinketsConditionAction {
         registerFunc.accept(new ConditionFactory<Entity>(
                 ShapeShifterCurseFabric.identifier("equip_accessory"),  // 为了之后写双端不用改 还是使用equip_accessories吧
                 new SerializableData()
-                        .add("accessory_mod", SerializableDataTypes.STRING, "all")
+                        .add("accessory_mod", SerializableDataTypes.STRING, "auto")
                         .add("accessory", SerializableDataTypes.IDENTIFIER, null),
                 (data, e) -> isEquipped(e, data.get("accessory_mod"), data.get("accessory"))
         ));
@@ -213,7 +223,7 @@ public class TrinketsConditionAction {
         registerFunc.accept(new ConditionFactory<Entity>(
                 ShapeShifterCurseFabric.identifier("check_accessory"),
                 new SerializableData()
-                        .add("accessory_mod", SerializableDataTypes.STRING, "trinkets")
+                        .add("accessory_mod", SerializableDataTypes.STRING, "auto")
                         .add("group", SerializableDataTypes.STRING, "")
                         .add("slot", SerializableDataTypes.STRING, "")
                         .add("slot_index", SerializableDataTypes.INT, 0)
@@ -226,7 +236,7 @@ public class TrinketsConditionAction {
         ActionRegister.accept(new ActionFactory<Entity>(
                 ShapeShifterCurseFabric.identifier("drop_accessory"),
                 new SerializableData()
-                        .add("accessory_mod", SerializableDataTypes.STRING, "trinkets")
+                        .add("accessory_mod", SerializableDataTypes.STRING, "auto")
                         .add("group", SerializableDataTypes.STRING, "")
                         .add("slot", SerializableDataTypes.STRING, "")
                         .add("slot_index", SerializableDataTypes.INT, -1)
@@ -237,7 +247,7 @@ public class TrinketsConditionAction {
         ActionRegister.accept(new ActionFactory<Entity>(
                 ShapeShifterCurseFabric.identifier("invoke_accessory"),
                 new SerializableData()
-                        .add("accessory_mod", SerializableDataTypes.STRING, "trinkets")
+                        .add("accessory_mod", SerializableDataTypes.STRING, "auto")
                         .add("group", SerializableDataTypes.STRING, "")
                         .add("slot", SerializableDataTypes.STRING, "")
                         .add("slot_index", SerializableDataTypes.INT, 0)

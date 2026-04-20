@@ -8,7 +8,6 @@ import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
@@ -17,6 +16,8 @@ import net.onixary.shapeShifterCurseFabric.render.tech.ItemStorePowerRender;
 
 import java.util.Map;
 import java.util.Optional;
+
+import static net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryUtils.calcAutoMod;
 
 public class RenderTrinketsSlotPower extends Power implements ItemStorePowerRender.itemStorePowerRenderInterface {
     private final String accessoryMod;
@@ -65,6 +66,8 @@ public class RenderTrinketsSlotPower extends Power implements ItemStorePowerRend
                     return ItemStack.EMPTY;
                 }
                 return ItemStack.EMPTY;
+            case "none":
+                return ItemStack.EMPTY;
             default:
                 ShapeShifterCurseFabric.LOGGER.error("[render_accessory_slot] accessory_mod is not valid");
                 return ItemStack.EMPTY;
@@ -85,7 +88,7 @@ public class RenderTrinketsSlotPower extends Power implements ItemStorePowerRend
                         .add("accessory_slot", SerializableDataTypes.STRING, "")
                         .add("accessory_slot_index", SerializableDataTypes.INT, 0)
                         .add("slot", SerializableDataTypes.INT, 0),
-                data -> (type, entity) -> new RenderTrinketsSlotPower(type, entity, data.getString("accessory_mod"), data.getInt("slot"), data.getString("accessory_group"), data.getString("accessory_slot"), data.getInt("accessory_slot_index"))
+                data -> (type, entity) -> new RenderTrinketsSlotPower(type, entity, calcAutoMod(data.getString("accessory_mod")), data.getInt("slot"), data.getString("accessory_group"), data.getString("accessory_slot"), data.getInt("accessory_slot_index"))
         ).allowCondition();
     }
 }

@@ -268,8 +268,7 @@ public class TrinketUtils {
                     allAccessory.add(new Pair<>(data, stack));
                 }
             }
-        }
-        if (AccessoryUtils.LOADED_Curios) {
+        } else if (AccessoryUtils.LOADED_Curios) {
             // TODO 未完工
         }
         return allAccessory;
