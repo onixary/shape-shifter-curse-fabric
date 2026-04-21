@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 // 和 Accessory_ICurio 一样 得用外部编译mixin解决 希望能运行吧 如果不行我得新建mod了 那工作量有点多了
+// 应该可以使用类似Trinket的系统 直接mixin AccessoryItem
 public class CurioUtils {
     public static boolean isEquipped(LivingEntity entity, Item item) {
         return false;
