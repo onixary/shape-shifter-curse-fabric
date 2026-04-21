@@ -160,6 +160,8 @@
   "block.shape-shifter-curse.web_composter": ["液化茧体"],
   "item.shape-shifter-curse.spider_fluid_cocoon": ["流食囊"],
   "item.shape-shifter-curse.spider_fluid_cocoon.tooltip": ["流体营养液的储囊，食用风险自负"],
+  "item.shape-shifter-curse.venom_spindle": ["箭毒纺锤"],
+  "item.shape-shifter-curse.venom_spindle.tooltip": ["[蜘蛛形态]蛛丝弹命中生物时造成伤害，并用中毒替换其迟缓与缠身效果"],
   "item.shape-shifter-curse.select_form_item": ["形态修改卷轴"],
   "item.shape-shifter-curse.select_form_item.tooltip": ["(管理员)对目标使用以设定自己或其他非管理员玩家的形态"],
 

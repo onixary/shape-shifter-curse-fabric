@@ -171,6 +171,10 @@ public class CursedMoon {
 
 
     public static void applyMoonEffect(ServerPlayerEntity player){
+        // 如果当前形态设置了无视诅咒之月，直接返回
+        if(FormAbilityManager.getForm(player).getIgnoreCursedMoon()){
+            return;
+        }
         // 处于Cursed Moon时的逻辑
         // 文本提示
         PlayerFormComponent formComp = RegPlayerFormComponent.PLAYER_FORM.get(player);
@@ -207,6 +211,10 @@ public class CursedMoon {
     }
 
     public static void applyEndMoonEffect(ServerPlayerEntity player){
+        // 如果当前形态设置了无视诅咒之月，直接返回
+        if(FormAbilityManager.getForm(player).getIgnoreCursedMoon()){
+            return;
+        }
         // 结束Cursed Moon时的逻辑
         PlayerFormComponent formComp = RegPlayerFormComponent.PLAYER_FORM.get(player);
         if(!formComp.isEndMoonEffectApplied() && formComp.isMoonEffectApplied()){

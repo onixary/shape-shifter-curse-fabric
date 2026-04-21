@@ -52,9 +52,9 @@ public class RegPlayerForms {
     public static PlayerFormBase ANUBIS_WOLF_2 = registerPlayerForm(new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "anubis_wolf_2")).setPhase(PlayerFormPhase.PHASE_2));
     public static PlayerFormBase ANUBIS_WOLF_3 = registerPlayerForm(new Form_AnubisWolf3(new Identifier(ShapeShifterCurseFabric.MOD_ID, "anubis_wolf_3")).setPhase(PlayerFormPhase.PHASE_3));
     // Spider
-    public static PlayerFormBase SPIDER_0 = registerPlayerForm(new Form_Spider0(new Identifier(ShapeShifterCurseFabric.MOD_ID, "spider_0")).setPhase(PlayerFormPhase.PHASE_0));
-    public static PlayerFormBase SPIDER_1 = registerPlayerForm(new Form_Spider1(new Identifier(ShapeShifterCurseFabric.MOD_ID, "spider_1")).setPhase(PlayerFormPhase.PHASE_1));
-    public static PlayerFormBase SPIDER_2 = registerPlayerForm(new Form_Spider2(new Identifier(ShapeShifterCurseFabric.MOD_ID, "spider_2")).setPhase(PlayerFormPhase.PHASE_2));
+    public static PlayerFormBase SPIDER_0 = registerPlayerForm(new Form_Spider0(new Identifier(ShapeShifterCurseFabric.MOD_ID, "spider_0")).setPhase(PlayerFormPhase.PHASE_0)).setIgnoreCursedMoon(true);
+    public static PlayerFormBase SPIDER_1 = registerPlayerForm(new Form_Spider1(new Identifier(ShapeShifterCurseFabric.MOD_ID, "spider_1")).setPhase(PlayerFormPhase.PHASE_1)).setIgnoreCursedMoon(true);
+    public static PlayerFormBase SPIDER_2 = registerPlayerForm(new Form_Spider2(new Identifier(ShapeShifterCurseFabric.MOD_ID, "spider_2")).setPhase(PlayerFormPhase.PHASE_2)).setIgnoreCursedMoon(true);
     public static PlayerFormBase SPIDER_3 = registerPlayerForm(new Form_Spider3(new Identifier(ShapeShifterCurseFabric.MOD_ID, "spider_3")).setPhase(PlayerFormPhase.PHASE_3));
     // ALLAY_SP
     public static PlayerFormBase ALLAY_SP = registerPlayerForm(new Form_Allay(new Identifier(ShapeShifterCurseFabric.MOD_ID, "allay_sp")).setPhase(PlayerFormPhase.PHASE_SP));
