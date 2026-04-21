@@ -23,6 +23,11 @@ public abstract class AccessoryItem extends Item {
 
     public AccessoryItem(Settings settings) {
         super(settings);
+        this.accessoryInit(settings);
+    }
+
+    public void accessoryInit(Settings settings) {
+        return;
     }
 
     public void accessoryTick(ItemStack stack, LivingEntity accessoryOwner, SlotData slotData) {

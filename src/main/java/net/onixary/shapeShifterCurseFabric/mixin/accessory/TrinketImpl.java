@@ -1,15 +1,16 @@
 package net.onixary.shapeShifterCurseFabric.mixin.accessory;
 
-import dev.emi.trinkets.api.SlotReference;
-import dev.emi.trinkets.api.SlotType;
-import dev.emi.trinkets.api.Trinket;
-import dev.emi.trinkets.api.TrinketEnums;
+import dev.emi.trinkets.api.*;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,6 +38,14 @@ public class TrinketImpl implements Trinket {
         AccessoryItem.SlotData data = new AccessoryItem.SlotData(new Identifier("trinket", "%s/%s".formatted(slotType.getGroup(), slotType.getName())), slot.index());
         slotDataCache.put(slot.hashCode(), data);
         return data;
+    }
+
+    @Inject(method = "accessoryInit", at = @At("HEAD"), cancellable = true)
+    private void initAccessory(Item.Settings settings, CallbackInfo ci) {
+        AccessoryItem realThis = ((AccessoryItem) (Object) this);
+        if (realThis instanceof Trinket trinket) {
+            TrinketsApi.registerTrinket(realThis, trinket);
+        }
     }
 
     @Override
