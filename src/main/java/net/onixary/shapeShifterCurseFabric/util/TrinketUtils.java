@@ -18,6 +18,7 @@ import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryItem;
 import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryUtils;
+import net.onixary.shapeShifterCurseFabric.items.accessory.CurioUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.jetbrains.annotations.Nullable;
 
@@ -264,12 +265,22 @@ public class TrinketUtils {
                     SlotReference slot = accessoryPair.getLeft();
                     ItemStack stack = accessoryPair.getRight();
                     SlotType slotType = slot.inventory().getSlotType();
-                    AccessoryItem.SlotData data = new AccessoryItem.SlotData(new Identifier("trinket", "%s/%s".formatted(slotType.getGroup(), slotType.getName())), slot.index());
+                    AccessoryItem.SlotData data = new AccessoryItem.SlotData(new Identifier("trinkets", "%s/%s".formatted(slotType.getGroup(), slotType.getName())), slot.index());
                     allAccessory.add(new Pair<>(data, stack));
                 }
             }
         } else if (AccessoryUtils.LOADED_Curios) {
-            // TODO 未完工
+            Map<String, List<ItemStack>> allSlots = CurioUtils.getEntitySlots(player);
+            for (Map.Entry<String, List<ItemStack>> entry : allSlots.entrySet()) {
+                String slotName = entry.getKey();
+                List<ItemStack> stacks = entry.getValue();
+                int Index = 0;
+                for (ItemStack stack : stacks) {
+                    AccessoryItem.SlotData data = new AccessoryItem.SlotData(new Identifier("curios", slotName), Index);
+                    allAccessory.add(new Pair<>(data, stack));
+                    Index++;
+                }
+            }
         }
         return allAccessory;
     }

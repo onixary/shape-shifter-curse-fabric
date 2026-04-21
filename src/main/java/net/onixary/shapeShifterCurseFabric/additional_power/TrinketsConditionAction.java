@@ -19,7 +19,9 @@ import net.minecraft.util.Pair;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryUtils;
+import net.onixary.shapeShifterCurseFabric.items.accessory.CurioUtils;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -49,9 +51,11 @@ public class TrinketsConditionAction {
                 }
                 return false;
             case "curios":
-                // TODO 未完工
                 if (!AccessoryUtils.LOADED_Curios) {
                     return false;
+                }
+                if (entity instanceof LivingEntity livingEntity) {
+                    return CurioUtils.isEquipped(livingEntity, trinketItem.get());
                 }
                 return false;
             case "all":
@@ -66,7 +70,9 @@ public class TrinketsConditionAction {
                     }
                 }
                 if (!FoundEquipped && AccessoryUtils.LOADED_Curios) {
-                    // TODO 未完工
+                    if (entity instanceof LivingEntity livingEntity) {
+                        return CurioUtils.isEquipped(livingEntity, trinketItem.get());
+                    }
                 }
                 return FoundEquipped;
             case "none":
@@ -102,11 +108,21 @@ public class TrinketsConditionAction {
                     }
                     return conditon.test(stack);
                 case "curios":
-                    // TODO 未完工
                     if (!AccessoryUtils.LOADED_Curios) {
                         return rDefault;
                     }
-                    return rDefault;
+                    List<ItemStack> itemStackList = CurioUtils.getEntitySlot(livingEntity, SlotString);
+                    if (itemStackList == null) {
+                        return rDefault;
+                    }
+                    if (Slot >= itemStackList.size()) {
+                        return rDefault;
+                    }
+                    ItemStack itemStack = itemStackList.get(Slot);
+                    if (conditon == null) {
+                        return rDefault;
+                    }
+                    return conditon.test(itemStack);
                 case "none":
                     return rDefault;
                 default:
@@ -141,10 +157,21 @@ public class TrinketsConditionAction {
                     }
                     action.accept(new Pair<>(entity.getWorld(), stack));
                 case "curios":
-                    // TODO 未完工
                     if (!AccessoryUtils.LOADED_Curios) {
                         return;
                     }
+                    List<ItemStack> itemStackList = CurioUtils.getEntitySlot(livingEntity, SlotString);
+                    if (itemStackList == null) {
+                        return;
+                    }
+                    if (Slot >= itemStackList.size()) {
+                        return;
+                    }
+                    ItemStack itemStack = itemStackList.get(Slot);
+                    if (action == null) {
+                        return;
+                    }
+                    action.accept(new Pair<>(entity.getWorld(), itemStack));
                     return;
                 case "none":
                     return;
@@ -198,9 +225,36 @@ public class TrinketsConditionAction {
                         }
                     }
                 case "curios":
-                    // TODO 未完工
                     if (!AccessoryUtils.LOADED_Curios) {
                         return;
+                    }
+                    List<ItemStack> itemStackList = CurioUtils.getEntitySlot(livingEntity, SlotString);
+                    if (itemStackList == null) {
+                        return;
+                    }
+                    if (Slot >= itemStackList.size()) {
+                        return;
+                    }
+                    if (Slot >= 0) {
+                        if (!remove) {
+                            if (!itemStackList.get(Slot).isEmpty()) {
+                                entity.getWorld().spawnEntity(new ItemEntity(entity.getWorld(), entity.getX(), entity.getY(), entity.getZ(), itemStackList.get(Slot)));
+                                CurioUtils.setEntitySlot(livingEntity, SlotString, Slot, ItemStack.EMPTY);
+                            }
+                        } else {
+                            CurioUtils.setEntitySlot(livingEntity, SlotString, Slot, ItemStack.EMPTY);
+                        }
+                    } else {
+                        for (int i = 0; i < itemStackList.size(); i++) {
+                            if (!remove) {
+                                if (!itemStackList.get(i).isEmpty()) {
+                                    entity.getWorld().spawnEntity(new ItemEntity(entity.getWorld(), entity.getX(), entity.getY(), entity.getZ(), itemStackList.get(i)));
+                                    CurioUtils.setEntitySlot(livingEntity, SlotString, i, ItemStack.EMPTY);
+                                }
+                            } else {
+                                CurioUtils.setEntitySlot(livingEntity, SlotString, i, ItemStack.EMPTY);
+                            }
+                        }
                     }
                     return;
                 case "none":
