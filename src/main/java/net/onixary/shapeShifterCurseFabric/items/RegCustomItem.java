@@ -73,6 +73,7 @@ public class RegCustomItem {
     public static final Item WITHERED_BANDAGE = register("withered_bandage", new WitheredBandageTrinket(new WitheredBandageTrinket.Settings()));
     public static final Item FOUNTAIN_BELT = register("fountain_belt", new FountainBeltTrinket(new FountainBeltTrinket.Settings()));
     public static final Item RESONANT_CORE = register("resonant_core", new ResonantCoreTrinket(new ResonantCoreTrinket.Settings()));
+    public static final Item VENOM_SPINDLE = register("venom_spindle", new VenomSpindle(new VenomSpindle.Settings()));
 
     public static final Item TRANSFORMATIVE_AXOLOTL_BUCKET = register("transformative_axolotl_bucket", new EntityBucketItem(ShapeShifterCurseFabric.T_AXOLOTL, Fluids.WATER, SoundEvents.ITEM_BUCKET_EMPTY_AXOLOTL, (new Item.Settings()).maxCount(1)));
     // 减少非蜘蛛玩家食用的中毒量，做到实在没东西吃的时候也能硬着头皮吃的感觉
@@ -147,6 +148,7 @@ public class RegCustomItem {
                 entries.add(WITHERED_BANDAGE);
                 entries.add(FOUNTAIN_BELT);
                 entries.add(RESONANT_CORE);
+                entries.add(VENOM_SPINDLE);
                 entries.add(CUSTOM_TRINKET);
                 entries.add(FIRE_CHARM_PAPER);
                 entries.add(TRANSFORMATIVE_AXOLOTL_BUCKET);

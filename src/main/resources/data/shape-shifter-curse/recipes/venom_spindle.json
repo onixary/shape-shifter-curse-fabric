@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TMT",
+    "ESE",
+    "WSW"
+  ],
+  "key": {
+    "M": {
+      "item": "shape-shifter-curse:moondust_crystal_shard"
+    },
+    "T": {
+      "item": "minecraft:string"
+    },
+    "E": {
+      "item": "minecraft:spider_eye"
+    },
+    "W": {
+      "item": "minecraft:cobweb"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "shape-shifter-curse:venom_spindle",
+    "count": 1
+  }
+}
