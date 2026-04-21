@@ -53,7 +53,7 @@ public class WebComposterBlock extends Block implements InventoryProvider {
     });
 
     public static Item ResultItem = RegCustomItem.SPIDER_FLUID_COCOON;
-    public static Function<Random, Integer> ResultCount = (random) -> 2 + random.nextInt(3);
+    public static Function<Random, Integer> ResultCount = (random) -> 4 + random.nextInt(3);
 
     public static boolean canIncrease(ItemStack itemStack) {
         if (itemStack.isIn(ModTags.Meat_Tag)) {
