@@ -178,7 +178,7 @@ public class TransformativeWolfEntity extends WolfEntity implements ITMob {
 
     @Override
     public BaseTransformativeStatusEffect getStatusEffect() {
-        return TO_OCELOT_0_EFFECT;
+        return TO_ANUBIS_WOLF_0_EFFECT;
     }
 
     @Override
