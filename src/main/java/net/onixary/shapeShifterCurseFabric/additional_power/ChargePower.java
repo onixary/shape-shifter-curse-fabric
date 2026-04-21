@@ -61,7 +61,7 @@ public class ChargePower extends Power implements Active {
             }
             if (power.nowTier + 1 == this.tier) {
                 if (this.canChargeCondition != null && !this.canChargeCondition.test(power.entity)) {
-                    power.ChargeTime = this.chargeTime - 1;
+                    power.ChargeTime = power.ChargeTime - 1;
                 } else {
                     if (this.chargeTickAction != null) {
                         this.chargeTickAction.accept(power.entity);
