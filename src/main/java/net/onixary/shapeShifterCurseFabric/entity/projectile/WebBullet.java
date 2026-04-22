@@ -15,6 +15,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
@@ -25,6 +26,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.onixary.shapeShifterCurseFabric.additional_power.TrinketsConditionAction;
 import net.onixary.shapeShifterCurseFabric.additional_power.WebBridgeAction;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
@@ -123,19 +125,26 @@ public class WebBullet extends ThrownItemEntity {
     }
 
     private boolean isExtraHandVenomSpindleEquipped(PlayerEntity player) {
-        Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
-        if (component.isEmpty()) {
-            return false;
-        }
-        Map<String, TrinketInventory> groupInv = component.get().getInventory().get("hand");
-        if (groupInv == null) {
-            return false;
-        }
-        TrinketInventory inv = groupInv.get("extra_hand");
-        if (inv == null) {
-            return false;
-        }
-        return inv.getStack(0).isOf(RegCustomItem.VENOM_SPINDLE);
+        // Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
+        // if (component.isEmpty()) {
+        //     return false;
+        // }
+        // Map<String, TrinketInventory> groupInv = component.get().getInventory().get("hand");
+        // if (groupInv == null) {
+        //     return false;
+        // }
+        // TrinketInventory inv = groupInv.get("extra_hand");
+        // if (inv == null) {
+        //     return false;
+        // }
+        // return inv.getStack(0).isOf(RegCustomItem.VENOM_SPINDLE);
+        return TrinketsConditionAction.CheckEquipped(
+                player, "auto", "hand", "extra_hand", 0,
+                (stack) -> {
+                    return stack.isOf(RegCustomItem.VENOM_SPINDLE);
+                },
+                false
+        );
     }
 
     private void playHitEffects() {
