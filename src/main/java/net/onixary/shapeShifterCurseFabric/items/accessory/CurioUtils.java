@@ -37,4 +37,8 @@ public class CurioUtils {
     public static void onPlayerUnEquip(PlayerEntity player, Identifier itemID) {
         TrinketUtils.ApplyAccessoryPowerOnUnEquip(player, itemID);
     }
+
+    public static boolean CanAutoExecute(Identifier itemID) {
+        return TrinketUtils.getAccessoryMixinAuto(itemID);
+    }
 }
