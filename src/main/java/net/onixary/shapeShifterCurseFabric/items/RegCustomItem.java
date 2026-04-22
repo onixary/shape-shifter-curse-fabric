@@ -22,7 +22,7 @@ import java.util.List;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
 import static net.minecraft.item.Items.register;
-import static net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock.MOONDUST_CRYSTAL_GRIT;
+import static net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock.*;
 
 public class RegCustomItem {
     private RegCustomItem(){}
@@ -83,6 +83,7 @@ public class RegCustomItem {
     public static final Item ICON_CURSED_MOON = register("icon_cursed_moon", new Item(new Item.Settings()));
     // 蛛丝弹占位物品
     public static final Item WEB_PROJECTILE = register("web_projectile", new Item(new Item.Settings()));
+    public static final Item SILK_DEW = register("silk_dew", new SilkDew(new Item.Settings()));
 
     public static ItemStack buildPotion(Item PotionItem, Potion potion) {
         ItemStack potionStack = new ItemStack(PotionItem);
@@ -153,8 +154,10 @@ public class RegCustomItem {
                 entries.add(AUXILIARY_PICKAXE);
                 entries.add(AUXILIARY_AXE);
                 entries.add(SELECT_FORM_ITEM);
+                entries.add(SILK_DEW);
                 // 方块物品注册
                 entries.add(MOONDUST_CRYSTAL_GRIT);
+                entries.add(DEW_COVERED_COBWEB);
                 entries.addAll(buildAllPotions(
                         RegCustomPotions.MOONDUST_POTION,
                         RegCustomPotions.BAT_FORM_POTION,

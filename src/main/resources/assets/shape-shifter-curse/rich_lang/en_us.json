@@ -163,6 +163,8 @@
   "item.shape-shifter-curse.spider_fluid_cocoon.tooltip": ["Sac of fluid nutrient, consumed at your own risk"],
   "item.shape-shifter-curse.venom_spindle": ["Venom Spindle"],
   "item.shape-shifter-curse.venom_spindle.tooltip": ["[Spider Form] Web projectile now deal damage when hit, and replace it's slow and entangle effects with poison."],
+  "block.shape-shifter-curse.dew_covered_cobweb": ["Dew Covered Cobweb"],
+  "item.shape-shifter-curse.silk_dew": ["Silk Dew"],
   "item.shape-shifter-curse.select_form_item": ["Form Shifting Scroll"],
   "item.shape-shifter-curse.select_form_item.tooltip": ["(OP)Using on target to set form of yourself or other non-op players"],
 
