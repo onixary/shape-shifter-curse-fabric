@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dev.emi.trinkets.api.SlotReference;
+import dev.emi.trinkets.api.SlotType;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import io.github.apace100.apoli.component.PowerHolderComponent;
@@ -15,6 +16,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryItem;
+import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryUtils;
+import net.onixary.shapeShifterCurseFabric.items.accessory.CurioUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,7 +26,7 @@ import java.util.*;
 
 public class TrinketUtils {
     public interface CustomPowerTrinketInterface {
-        void onFormChange(ItemStack stack, SlotReference slot, PlayerEntity entity);
+        void onFormChange(ItemStack stack, AccessoryItem.SlotData slot, PlayerEntity entity);
     }
 
     public static class TrinketPowerData {
@@ -251,13 +255,41 @@ public class TrinketUtils {
         powerData.onPlayerFormChangeReApply(player);
     }
 
-    public static void ReApplyAccessoryPowerOnPlayerFormChange(PlayerEntity player) {
-        Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
-        if (component.isEmpty()) {
-            return;
+    public static List<Pair<AccessoryItem.SlotData, ItemStack>> getAllAccessory(PlayerEntity player) {
+        List<Pair<AccessoryItem.SlotData, ItemStack>> allAccessory = new ArrayList<>();
+        if (AccessoryUtils.LOADED_Trinkets) {
+            Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
+            if (!component.isEmpty()) {
+                // 因为 foreach 会生成lambda函数 由于SlotReference为Trinket的类 生成匿名函数会带上这个类 会炸 所以用for循环
+                for (Pair<SlotReference, ItemStack> accessoryPair : component.get().getAllEquipped()) {
+                    SlotReference slot = accessoryPair.getLeft();
+                    ItemStack stack = accessoryPair.getRight();
+                    SlotType slotType = slot.inventory().getSlotType();
+                    AccessoryItem.SlotData data = new AccessoryItem.SlotData(new Identifier("trinkets", "%s/%s".formatted(slotType.getGroup(), slotType.getName())), slot.index());
+                    allAccessory.add(new Pair<>(data, stack));
+                }
+            }
+        } else if (AccessoryUtils.LOADED_Curios) {
+            Map<String, List<ItemStack>> allSlots = CurioUtils.getEntitySlots(player);
+            for (Map.Entry<String, List<ItemStack>> entry : allSlots.entrySet()) {
+                String slotName = entry.getKey();
+                List<ItemStack> stacks = entry.getValue();
+                int Index = 0;
+                for (ItemStack stack : stacks) {
+                    AccessoryItem.SlotData data = new AccessoryItem.SlotData(new Identifier("curios", slotName), Index);
+                    allAccessory.add(new Pair<>(data, stack));
+                    Index++;
+                }
+            }
         }
-        for (Pair<SlotReference, ItemStack> accessoryPair : component.get().getAllEquipped()) {
-            SlotReference slot = accessoryPair.getLeft();
+        return allAccessory;
+    }
+
+    // 适配新架构的函数 等完工后再改 现在为了不影响正在使用的功能 先注释掉
+    public static void ReApplyAccessoryPowerOnPlayerFormChange(PlayerEntity player) {
+        List<Pair<AccessoryItem.SlotData, ItemStack>> allAccessory = getAllAccessory(player);
+        for (Pair<AccessoryItem.SlotData, ItemStack> accessoryPair : allAccessory) {
+            AccessoryItem.SlotData slot = accessoryPair.getLeft();
             ItemStack stack = accessoryPair.getRight();
             if (stack.getItem() instanceof CustomPowerTrinketInterface cpti) {
                 cpti.onFormChange(stack, slot, player);
@@ -266,6 +298,22 @@ public class TrinketUtils {
             }
         }
     }
+
+    // public static void ReApplyAccessoryPowerOnPlayerFormChange(PlayerEntity player) {
+    //     Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
+    //     if (component.isEmpty()) {
+    //         return;
+    //     }
+    //     for (Pair<SlotReference, ItemStack> accessoryPair : component.get().getAllEquipped()) {
+    //         SlotReference slot = accessoryPair.getLeft();
+    //         ItemStack stack = accessoryPair.getRight();
+    //         if (stack.getItem() instanceof CustomPowerTrinketInterface cpti) {
+    //             cpti.onFormChange(stack, slot, player);
+    //         } else {
+    //             ApplyAccessoryPowerOnPlayerFormChange(player, Registries.ITEM.getId(stack.getItem()));
+    //         }
+    //     }
+    // }
 
     public static void ApplyAccessoryPowerOnEquip(PlayerEntity player, Identifier accessoryID) {
         if (player.getWorld().isClient) {

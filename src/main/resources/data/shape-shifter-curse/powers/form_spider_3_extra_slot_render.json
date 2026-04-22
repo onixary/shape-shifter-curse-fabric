@@ -1,5 +1,6 @@
 {
   "type": "shape-shifter-curse:render_accessory_slot",
+  "accessory_mod": "auto",
   "accessory_group": "hand",
   "accessory_slot": "extra_hand",
   "accessory_slot_index": 0,

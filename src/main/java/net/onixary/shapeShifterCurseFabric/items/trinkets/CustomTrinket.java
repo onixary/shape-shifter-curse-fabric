@@ -1,8 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.items.trinkets;
 
-import dev.emi.trinkets.api.SlotReference;
-import dev.emi.trinkets.api.SlotType;
-import dev.emi.trinkets.api.TrinketItem;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -10,10 +7,11 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryItem;
 import net.onixary.shapeShifterCurseFabric.util.TrinketUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class CustomTrinket extends TrinketItem implements TrinketUtils.CustomPowerTrinketInterface {
+public class CustomTrinket extends AccessoryItem implements TrinketUtils.CustomPowerTrinketInterface {
     static {
         TrinketUtils.registerAccessoryMixinAuto(ShapeShifterCurseFabric.identifier("custom_trinket"), false);
     }
@@ -37,19 +35,17 @@ public class CustomTrinket extends TrinketItem implements TrinketUtils.CustomPow
         return DEFAULT_IDENTIFIER;
     }
 
-    public boolean canEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {
+    @Override
+    public boolean canEquip(ItemStack stack, LivingEntity entity, AccessoryItem.SlotData slot) {
         NbtCompound nbt = stack.getNbt();
         if (nbt == null) {
             return false;
         }
         if (nbt.contains("custom_accessory_slots")) {
             NbtList slots = nbt.getList("custom_accessory_slots", 8);
-            SlotType slotType = slot.inventory().getSlotType();
-            String slotGroup = slotType.getGroup();
-            String slotName = slotType.getName();
-            String slotFinalName = slotGroup + "/" + slotName;
+            Identifier slotFinalName = slot.slot();
             for (int i = 0; i < slots.size(); i++) {
-                if (slots.getString(i).equals(slotFinalName)) {
+                if (slots.getString(i).equals(slotFinalName.toString())) {
                     return true;
                 }
             }
@@ -58,21 +54,21 @@ public class CustomTrinket extends TrinketItem implements TrinketUtils.CustomPow
     }
 
     @Override
-    public void onEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {
+    public void onEquip(ItemStack stack, LivingEntity entity, AccessoryItem.SlotData slot) {
         if (entity instanceof PlayerEntity player) {
             TrinketUtils.ApplyAccessoryPowerOnEquip(player, getAccessoryID(stack));
         }
     }
 
     @Override
-    public void onUnequip(ItemStack stack, SlotReference slot, LivingEntity entity) {
+    public void onUnequip(ItemStack stack, LivingEntity entity, AccessoryItem.SlotData slot) {
         if (entity instanceof PlayerEntity player) {
             TrinketUtils.ApplyAccessoryPowerOnUnEquip(player, getAccessoryID(stack));
         }
     }
 
     @Override
-    public void onFormChange(ItemStack stack, SlotReference slot, PlayerEntity player) {
+    public void onFormChange(ItemStack stack, AccessoryItem.SlotData slot, PlayerEntity player) {
         TrinketUtils.ApplyAccessoryPowerOnPlayerFormChange(player, getAccessoryID(stack));
     }
 }

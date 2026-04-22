@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.mixin;
+package net.onixary.shapeShifterCurseFabric.mixin.accessory;
 
 import dev.emi.trinkets.api.*;
 import net.minecraft.entity.LivingEntity;
