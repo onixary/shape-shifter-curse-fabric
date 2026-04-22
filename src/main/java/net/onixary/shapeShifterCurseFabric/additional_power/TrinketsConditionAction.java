@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import static net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryUtils.calcAutoMod;
 
@@ -83,7 +84,7 @@ public class TrinketsConditionAction {
         return false;
     }
 
-    public static boolean CheckEquipped(Entity entity, String AccessoryMod, String GroupString, String SlotString, int Slot, ConditionFactory<ItemStack>.Instance conditon, boolean rDefault) {
+    public static boolean CheckEquipped(Entity entity, String AccessoryMod, String GroupString, String SlotString, int Slot, Predicate<ItemStack> conditon, boolean rDefault) {
         if (entity instanceof LivingEntity livingEntity) {
             switch (calcAutoMod(AccessoryMod)) {
                 case "trinkets":
@@ -132,7 +133,7 @@ public class TrinketsConditionAction {
         return rDefault;
     }
 
-    public static void InvokeEquipped(Entity entity, String AccessoryMod, String GroupString, String SlotString, int Slot, ActionFactory<Pair<World, ItemStack>>.Instance action) {
+    public static void InvokeEquipped(Entity entity, String AccessoryMod, String GroupString, String SlotString, int Slot, Consumer<Pair<World, ItemStack>> action) {
         if (entity instanceof LivingEntity livingEntity) {
             switch (calcAutoMod(AccessoryMod)) {
                 case "trinkets":
