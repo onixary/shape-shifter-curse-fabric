@@ -1,5 +1,5 @@
 {
-  "icon": "shape-shifter-curse:gui/slots/extra_hand",
+  "icon": "shape-shifter-curse:slot/extra_hand",
   "order": -768,
   "validator_predicates": ["trinkets:tag"],
   "tooltip_predicates": ["trinkets:none"],

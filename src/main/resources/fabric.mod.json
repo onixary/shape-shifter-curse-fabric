@@ -98,7 +98,8 @@
   "mixins": [
     "shape-shifter-curse.mixins.json",
     "origins.mixins.json",
-    "originalfur.fabric.mixins.json"
+    "originalfur.fabric.mixins.json",
+    "ssc-misc.mixins.json"
   ],
 
   "accessWidener": "shape-shifter-curse.accesswidener",
