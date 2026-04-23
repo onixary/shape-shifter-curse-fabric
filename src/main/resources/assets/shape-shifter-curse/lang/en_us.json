@@ -458,6 +458,7 @@
     "message.shape-shifter-curse.clip_at_ledge.off": "Clip At Ledge: Off",
     "message.shape-shifter-curse.select_form_ui.target_name": "Target: %s",
     "message.shape-shifter-curse.select_form_ui.target_uuid": "[ %s ]",
+    "curios.identifier.extra_hand": "Extra Hand",
     "item.shape-shifter-curse.custom_trinket": "Custom Trinket",
     "text.shape-shifter-curse.config.title": "Shape Shifter Curse Config Menu",
     "text.shape-shifter-curse.config.close": "Cancel",

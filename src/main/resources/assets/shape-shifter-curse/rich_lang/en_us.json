@@ -1113,6 +1113,7 @@
   "message.shape-shifter-curse.select_form_ui.target_name": "Target: %s",
   "message.shape-shifter-curse.select_form_ui.target_uuid": "[ %s ]",
   "item.shape-shifter-curse.custom_trinket": ["Custom Trinket"],
+  "curios.identifier.extra_hand": "Extra Hand",
 
   "text.shape-shifter-curse.config.title": "Shape Shifter Curse Config Menu",
   "text.shape-shifter-curse.config.close": "Cancel",

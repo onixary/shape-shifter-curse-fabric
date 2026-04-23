@@ -459,6 +459,7 @@
     "message.shape-shifter-curse.select_form_ui.target_name": "目标: %s",
     "message.shape-shifter-curse.select_form_ui.target_uuid": "[ %s ]",
     "item.shape-shifter-curse.custom_trinket": "自定义饰品",
+    "curios.identifier.extra_hand": "额外手",
     "text.shape-shifter-curse.config.title": "幻形者诅咒 配置界面",
     "text.shape-shifter-curse.config.close": "取消",
     "text.autoconfig.shape-shifter-curse-client.title": "幻形者诅咒 - 客户端配置",

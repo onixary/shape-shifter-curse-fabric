@@ -822,5 +822,6 @@
   "text.autoconfig.shape-shifter-curse-client.option.itemStorePowerPosOffsetX": "Item Store Power Position X Offset",
   "text.autoconfig.shape-shifter-curse-client.option.itemStorePowerPosOffsetY": "Item Store Power Position Y Offset",
   "message.shape-shifter-curse.select_form_ui.target_name": "Target: %s",
-  "message.shape-shifter-curse.select_form_ui.target_uuid": "[ %s ]"
+  "message.shape-shifter-curse.select_form_ui.target_uuid": "[ %s ]",
+  "curios.identifier.extra_hand": "Extra Hand"
 }
