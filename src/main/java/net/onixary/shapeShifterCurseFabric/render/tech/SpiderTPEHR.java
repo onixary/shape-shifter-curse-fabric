@@ -16,7 +16,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.RotationAxis;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.additional_power.TrinketsConditionAction;
 import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryUtils;
+import net.onixary.shapeShifterCurseFabric.items.accessory.CurioUtils;
 
 import java.util.Map;
 import java.util.Optional;
@@ -27,25 +29,29 @@ public class SpiderTPEHR extends ThirdPersonExtraHandItemRender.TPEHR_Render {
 
     @Override
     public void render(HeldItemRenderer heldItemRenderer, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        // XuHaoNan: 此功能暂时 trinket 独占 影响不大 不想写切换逻辑了
-        if (!AccessoryUtils.LOADED_Trinkets) {
-            return;
-        }
-        Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
-        if (component.isEmpty()) {
-            return;
-        }
-        Map<String, TrinketInventory> groupInv = component.get().getInventory().get(GROUP_STRING);
-        if (groupInv == null) {
-            return;
-        }
-        TrinketInventory inv = groupInv.get(INV_STRING);
-        if (inv == null) {
-            return;
-        }
-        ItemStack stack = inv.getStack(0);
-        if (stack.isEmpty()) {
-            return;
+        ItemStack stack = ItemStack.EMPTY;
+        if (AccessoryUtils.LOADED_Trinkets) {
+            Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
+            if (component.isEmpty()) {
+                return;
+            }
+            Map<String, TrinketInventory> groupInv = component.get().getInventory().get(GROUP_STRING);
+            if (groupInv == null) {
+                return;
+            }
+            TrinketInventory inv = groupInv.get(INV_STRING);
+            if (inv == null) {
+                return;
+            }
+            stack = inv.getStack(0);
+            if (stack.isEmpty()) {
+                return;
+            }
+        } else if (AccessoryUtils.LOADED_Curios) {
+            stack = CurioUtils.getEntitySlot(player, "extra_hand").get(0);
+            if (stack.isEmpty()) {
+                return;
+            }
         }
         PlayerEntityRenderer eR = (PlayerEntityRenderer) MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(player);
         ModelPart body = eR.getModel().body;
