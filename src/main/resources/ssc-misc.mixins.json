@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.onixary.shapeShifterCurseFabric.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "ssc-misc.refmap.json",
+  "plugin": "net.onixary.shapeShifterCurseFabric.mixin.plugin.MixinConfigPlugin",
+  "mixins": [
+    "forge.CurioImpl",
+    "forge.CurioItemImpl",
+    "forge.CurioUtilsImpl"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
