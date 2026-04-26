@@ -1,0 +1,14 @@
+{
+  "mappings": {
+    "net/onixary/shapeShifterCurseFabric/mixin/forge/CurioItemImpl": {
+      "tick": "Lnet/minecraft/class_1309;method_5773()V"
+    }
+  },
+  "data": {
+    "named:intermediary": {
+      "net/onixary/shapeShifterCurseFabric/mixin/forge/CurioItemImpl": {
+        "tick": "Lnet/minecraft/class_1309;method_5773()V"
+      }
+    }
+  }
+}
