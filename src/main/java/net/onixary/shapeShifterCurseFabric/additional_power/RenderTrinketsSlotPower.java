@@ -12,6 +12,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryUtils;
+import net.onixary.shapeShifterCurseFabric.items.accessory.CurioUtils;
 import net.onixary.shapeShifterCurseFabric.render.tech.ItemStorePowerRender;
 
 import java.util.Map;
@@ -61,9 +62,8 @@ public class RenderTrinketsSlotPower extends Power implements ItemStorePowerRend
                 }
                 return ItemStack.EMPTY;
             case "curios":
-                // TODO 未完工
                 if (AccessoryUtils.LOADED_Curios) {
-                    return ItemStack.EMPTY;
+                    return CurioUtils.getEntitySlot(this.entity, TSlot).get(TSlotIndex);
                 }
                 return ItemStack.EMPTY;
             case "none":
