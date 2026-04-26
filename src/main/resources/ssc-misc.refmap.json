@@ -1,13 +1,13 @@
 {
   "mappings": {
     "net/onixary/shapeShifterCurseFabric/mixin/forge/CurioItemImpl": {
-      "tick": "Lnet/minecraft/world/entity/LivingEntity;m_8119_()V"
+      "tick": "Lnet/minecraft/class_1309;method_5773()V"
     }
   },
   "data": {
-    "searge": {
+    "named:intermediary": {
       "net/onixary/shapeShifterCurseFabric/mixin/forge/CurioItemImpl": {
-        "tick": "Lnet/minecraft/world/entity/LivingEntity;m_8119_()V"
+        "tick": "Lnet/minecraft/class_1309;method_5773()V"
       }
     }
   }
