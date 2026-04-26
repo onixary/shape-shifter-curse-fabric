@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "shape-shifter-curse:block/dew_covered_cobweb"
+  }
+}

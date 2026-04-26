@@ -160,6 +160,8 @@
     "item.shape-shifter-curse.spider_fluid_cocoon.tooltip": "Sac of fluid nutrient, consumed at your own risk",
     "item.shape-shifter-curse.venom_spindle": "Venom Spindle",
     "item.shape-shifter-curse.venom_spindle.tooltip": "[Spider Form] Web projectile now deal damage when hit, and replace it's slow and entangle effects with poison.",
+    "block.shape-shifter-curse.dew_covered_cobweb": "Dew Covered Cobweb",
+    "item.shape-shifter-curse.silk_dew": "Silk Dew",
     "item.shape-shifter-curse.select_form_item": "Form Shifting Scroll",
     "item.shape-shifter-curse.select_form_item.tooltip": "(OP)Using on target to set form of yourself or other non-op players",
     "screen.shape-shifter-curse.book_of_shape_shifter.start_content_text": "As you attempt to open the book, you feel strange magic flowing into your body through your fingertips with a faint tingling sensation, making you jerk your hand back instinctively\nCould this be some kind ofcurse? You're not sure\nHowever, you're certain that continuing to open this book will lead to unknown consequences\n\nNote:\nThis will activate the Shapeshifter's Curse mod content\nThis mod may not be a mod for everyone. Before proceeding, ensure you understand its themes and gameplay",
