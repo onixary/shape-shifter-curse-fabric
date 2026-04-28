@@ -219,7 +219,6 @@ dependencies {
     // Trinkets
 
     modCompileOnly "dev.emi:trinkets:${project.trinkets_version}"
-    modCompileOnly "curse.maven:curios-309927:6418456"
 
     // Fabric forge config api port
     // modLocalRuntime "fuzs.forgeconfigscreens:forgeconfigscreens-fabric:8.0.0"
