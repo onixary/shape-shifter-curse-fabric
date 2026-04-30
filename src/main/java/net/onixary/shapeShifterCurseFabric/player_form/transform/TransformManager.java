@@ -52,12 +52,33 @@ public class TransformManager {
         public float nauesaStrength = 0.0f;
         public float blackStrength = 0.0f;
         public boolean isTransforming = false;
+
+        public void reset() {
+            this.beginTransformEffectTicks = 0;
+            this.endTransformEffectTicks = 0;
+            this.isEffectActive = false;
+            this.isEndEffectActive = false;
+            this.curFromForm = null;
+            this.curToForm = null;
+            this._isByCursedMoon = false;
+            this._isByCursedMoonEnd = false;
+            this._isRegressedFromFinal = false;
+            this._isByCure = false;
+            this.nauesaStrength = 0.0f;
+            this.blackStrength = 0.0f;
+            this.isTransforming = false;
+        }
     }
     // 仅客户端数据
     private static final boolean IS_FIRST_PERSON_MOD_LOADED = FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT && FabricLoader.getInstance().isModLoaded("firstperson");
     public static final PlayerTransformData LocalPlayerTransformData = new PlayerTransformData();
     // 仅服务端数据
     public static final HashMap<UUID, PlayerTransformData> PlayerTransformDataMap = new HashMap<>();
+
+    public static void onServerInit() {
+        PlayerTransformDataMap.clear();
+        LocalPlayerTransformData.reset();
+    }
 
     // 仅服务器端 - 获取PlayerTransformData
     public static PlayerTransformData getPlayerTransformData(PlayerEntity player) {
