@@ -15,13 +15,6 @@ public class Form_Spider1 extends PlayerFormBase {
         super(formID);
     }
 
-    // v3动画系统
-    public static final AnimUtils.AnimationHolderData ANIM_IDLE = 
-        new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_1_idle"));
-
-    public static final AbstractAnimStateController IDLE_CONTROLLER = 
-        new WithSneakAnimController(ANIM_IDLE, null);
-
 
     @Override
     public @Nullable AbstractAnimStateController getAnimStateController(
@@ -32,8 +25,6 @@ public class Form_Spider1 extends PlayerFormBase {
         AnimStateEnum state = AnimStateEnum.getStateEnum(animStateID);
         if (state != null) {
             switch (state) {
-                case ANIM_STATE_IDLE:
-                    return IDLE_CONTROLLER;
                 default:
                     return null;
             }

@@ -16,11 +16,11 @@ public class Form_Spider2 extends PlayerFormBase {
     }
 
     // v3动画系统
-    public static final AnimUtils.AnimationHolderData ANIM_IDLE = 
-        new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_2_idle"));
+    public static final AnimUtils.AnimationHolderData ANIM_SNEAK_IDLE =
+        new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_2_sneak_idle"));
 
     public static final AbstractAnimStateController IDLE_CONTROLLER = 
-        new WithSneakAnimController(ANIM_IDLE, null);
+        new WithSneakAnimController(null, ANIM_SNEAK_IDLE);
 
     @Override
     public @Nullable AbstractAnimStateController getAnimStateController(
