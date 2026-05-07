@@ -1,11 +1,22 @@
 {
-    "powers": [
-        "shape-shifter-curse:form_spider_0_scale"
-    ],
-    "icon": {
-        "item": "minecraft:player_head"
-    },
-    "order": 0,
-    "unchoosable": true,
-    "impact": 0
+  "powers": [
+    "shape-shifter-curse:form_spider_0_scale",
+    "shape-shifter-curse:form_spider_0_web_projectile",
+    "shape-shifter-curse:form_spider_web_no_slow",
+    "shape-shifter-curse:form_spider_climb_web",
+    "shape-shifter-curse:form_spider_0_mana",
+    "shape-shifter-curse:form_spider_entity_group",
+    "shape-shifter-curse:form_spider_3_mana_recover",
+    "shape-shifter-curse:form_spider_3_poison_immunity",
+    "shape-shifter-curse:form_spider_3_falling_protection",
+    "shape-shifter-curse:form_disable_leg_armor",
+    "shape-shifter-curse:form_spider_0_vegetarian_saturation_down",
+    "shape-shifter-curse:form_spider_0_dew_covered_cobweb_instinct"
+  ],
+  "icon": {
+    "item": "minecraft:player_head"
+  },
+  "order": 0,
+  "unchoosable": true,
+  "impact": 0
 }

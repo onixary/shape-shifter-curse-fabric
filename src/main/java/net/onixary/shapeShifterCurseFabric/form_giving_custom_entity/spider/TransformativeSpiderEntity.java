@@ -9,6 +9,7 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SpiderEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
@@ -86,5 +87,10 @@ public class TransformativeSpiderEntity extends SpiderEntity implements ITMob {
     @Override
     public EntityDimensions getDimensions(EntityPose pose) {
         return EntityDimensions.fixed(0.7f, 0.45f);
+    }
+
+    @Override
+    protected Identifier getLootTableId() {
+        return new Identifier(ShapeShifterCurseFabric.MOD_ID, "entities/t_spider");
     }
 }
