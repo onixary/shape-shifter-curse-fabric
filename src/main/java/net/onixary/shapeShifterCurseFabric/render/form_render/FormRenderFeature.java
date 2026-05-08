@@ -1,5 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.render.form_render;
 
+import mod.azure.azurelib.cache.object.BakedGeoModel;
+import mod.azure.azurelib.cache.object.GeoBone;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
@@ -7,6 +9,7 @@ import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.PlayerModelPart;
@@ -180,9 +183,47 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
         }
     }
 
-    // TODO 复制OverrideSkinFirstPersonMixin里的逻辑
-    public static void rFPM_PartA(PlayerEntityRenderer playerEntityRenderer, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve) {
+    private static void renderGeoBone(FormRenderer formRenderer, GeoBone geoBone, MatrixStack matrixStack, FormAnimatable formAnimatable, VertexConsumerProvider vertexConsumerProvider, RenderLayer renderLayer, VertexConsumer vertexConsumer, int packedLight) {
+        renderGeoBone(formRenderer, geoBone, matrixStack, formAnimatable, vertexConsumerProvider, renderLayer, vertexConsumer, packedLight, 1.0f, 1.0f, 1.0f, 1.0f);
+    }
 
+    private static void renderGeoBone(FormRenderer formRenderer, GeoBone geoBone, MatrixStack matrixStack, FormAnimatable formAnimatable, VertexConsumerProvider vertexConsumerProvider, RenderLayer renderLayer, VertexConsumer vertexConsumer, int packedLight, float R, float G, float B, float A) {
+        FormModel formModel = (FormModel) formRenderer.getGeoModel();
+        BakedGeoModel bakedGeoModel = formModel.getBakedModel(formModel.getModelResource(formAnimatable));
+        float TickDelta = MinecraftClient.getInstance().getTickDelta();
+        int packedOverlay = formRenderer.getPackedOverlay(formAnimatable, 0.0F, MinecraftClient.getInstance().getTickDelta());
+        matrixStack.translate(-0.5, -0.51, -0.5); // 在 GeoObjectRenderer.preRender 中会 poseStack.translate(0.5, 0.51, 0.5) 因此需要手动调整
+        formRenderer.preRender(matrixStack, formAnimatable, bakedGeoModel, vertexConsumerProvider, vertexConsumerProvider.getBuffer(renderLayer), false, TickDelta, packedLight, packedOverlay, R, G, B, A);
+        if (formRenderer.firePreRenderEvent(matrixStack, bakedGeoModel, vertexConsumerProvider, TickDelta, packedLight)) {
+            formRenderer.preApplyRenderLayers(matrixStack, formAnimatable, bakedGeoModel, renderLayer, vertexConsumerProvider, vertexConsumer, (float)packedLight, packedLight, packedOverlay);
+            matrixStack.push();
+            formRenderer.updateAnimatedTextureFrame(formAnimatable);
+            formRenderer.renderRecursively(matrixStack, formAnimatable, geoBone, renderLayer, vertexConsumerProvider, vertexConsumer, false, TickDelta, packedLight, packedOverlay, R, G, B, A);
+            matrixStack.pop();
+            formRenderer.applyRenderLayers(matrixStack, formAnimatable, bakedGeoModel, renderLayer, vertexConsumerProvider, vertexConsumer, TickDelta, packedLight, packedOverlay);
+            formRenderer.postRender(matrixStack, formAnimatable, bakedGeoModel, vertexConsumerProvider, vertexConsumer, false, TickDelta, packedLight, packedOverlay, R, G, B, A);
+            formRenderer.firePostRenderEvent(matrixStack, bakedGeoModel, vertexConsumerProvider, TickDelta, packedLight);
+        }
+    }
+
+    public static void rFPM_PartA(PlayerEntityRenderer playerEntityRenderer, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve) {
+        List<FormRenderer> formRendererList = FormRenderUtils.getPlayerAllFormRenderer(player);
+        boolean IsRenderRight = arm.equals(playerEntityRenderer.getModel().rightArm);
+        boolean ArmHidden = false;
+        boolean SleeveHidden = IsRenderRight ? !player.isPartVisible(PlayerModelPart.RIGHT_SLEEVE) : !player.isPartVisible(PlayerModelPart.LEFT_SLEEVE);
+        for (FormRenderer formRenderer : formRendererList) {
+            FormModel formModel = (FormModel) formRenderer.getGeoModel();
+            // 设置手臂组件是否显示
+            if (IsRenderRight) {
+                ArmHidden |= formModel.Hidden_RightArm;
+                SleeveHidden |= formModel.Hidden_RightSleeve;
+            } else {
+                ArmHidden |= formModel.Hidden_LeftArm;
+                SleeveHidden |= formModel.Hidden_LeftSleeve;
+            }
+        }
+        arm.visible = !ArmHidden;
+        sleeve.visible = !SleeveHidden;
     }
 
     public static void rFPM_PartB(PlayerEntityRenderer playerEntityRenderer, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve) {
