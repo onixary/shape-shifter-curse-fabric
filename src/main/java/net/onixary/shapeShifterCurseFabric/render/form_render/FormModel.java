@@ -1,19 +1,25 @@
 package net.onixary.shapeShifterCurseFabric.render.form_render;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import mod.azure.azurelib.cache.object.GeoBone;
 import mod.azure.azurelib.model.GeoModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
+import net.minecraft.util.math.MathHelper;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class FormModel extends GeoModel<FormAnimatable> {
     public static List<FormModel> loadedModel = new ArrayList<>();
@@ -64,6 +70,29 @@ public class FormModel extends GeoModel<FormAnimatable> {
 
     public HashMap<FormTextureUtils.ColorSetting, Identifier> ColorMask_Baked_EmissiveTexture = new HashMap<>();
     public HashMap<FormTextureUtils.ColorSetting, Identifier> ColorMask_Baked_EmissiveTexture_Slim = new HashMap<>();
+
+    // Hidden Parts
+    public boolean Hidden_Hat = false;
+    public boolean Hidden_Head = false;
+    public boolean Hidden_Body = false;
+    public boolean Hidden_Jacket = false;
+    public boolean Hidden_LeftArm = false;
+    public boolean Hidden_RightArm = false;
+    public boolean Hidden_LeftSleeve = false;
+    public boolean Hidden_RightSleeve = false;
+    public boolean Hidden_LeftLeg = false;
+    public boolean Hidden_RightLeg = false;
+    public boolean Hidden_LeftPants = false;
+    public boolean Hidden_RightPants = false;
+
+    public IModelAnimationSystem AnimationSystem = null;  // TODO 写一个默认控制器
+
+    // builtin_controller_data
+    // chain -> [["tail0_0", "tail0_1"], [tail1_0", "tail1_1"]]
+    public List<List<String>> BCD_TailChain = new ArrayList<>();
+    public List<List<String>> BCD_TailChainHead = new ArrayList<>();
+    public List<List<String>> BCD_WingChainL = new ArrayList<>();
+    public List<List<String>> BCD_WingChainR = new ArrayList<>();
 
     public FormModel(JsonObject json) {
         this.modelJson = json;
@@ -138,9 +167,84 @@ public class FormModel extends GeoModel<FormAnimatable> {
 
         this.Animation = Identifier.tryParse(JsonHelper.getString(this.modelJson, "animations", MissingAnimationString));
 
-        // hidden
-        // animation_system + animation_system_config
-        // builtin_controller_data
+        this.Hidden_Hat = false;
+        this.Hidden_Head = false;
+        this.Hidden_Body = false;
+        this.Hidden_Jacket = false;
+        this.Hidden_LeftArm = false;
+        this.Hidden_RightArm = false;
+        this.Hidden_LeftSleeve = false;
+        this.Hidden_RightSleeve = false;
+        this.Hidden_LeftLeg = false;
+        this.Hidden_RightLeg = false;
+        this.Hidden_LeftPants = false;
+        this.Hidden_RightPants = false;
+        JsonArray hiddenArray = JsonHelper.getArray(this.modelJson, "hidden", null);
+        if (hiddenArray != null) {
+            for (int i = 0; i < hiddenArray.size(); i++) {
+                String hidden = hiddenArray.get(i).getAsString();
+                switch (hidden) {
+                    case "hat" -> { this.Hidden_Hat = true; }
+                    case "head" -> { this.Hidden_Head = true; }
+                    case "body" -> { this.Hidden_Body = true; }
+                    case "jacket" -> { this.Hidden_Jacket = true; }
+                    case "left_arm" -> { this.Hidden_LeftArm = true; }
+                    case "right_arm" -> { this.Hidden_RightArm = true; }
+                    case "left_sleeve" -> { this.Hidden_LeftSleeve = true; }
+                    case "right_sleeve" -> { this.Hidden_RightSleeve = true; }
+                    case "left_leg" -> { this.Hidden_LeftLeg = true; }
+                    case "right_leg" -> { this.Hidden_RightLeg = true; }
+                    case "left_pants" -> { this.Hidden_LeftPants = true; }
+                    case "right_pants" -> { this.Hidden_RightPants = true; }
+                }
+            }
+        }
+        this.AnimationSystem = null;
+        if (this.modelJson.has("animation_system")) {
+            this.AnimationSystem = ModelAnimationSystemUtils.get(Identifier.tryParse(JsonHelper.getString(this.modelJson, "animation_system", null)), this.modelJson.getAsJsonObject("animation_system_config"));
+        }
+        if (AnimationSystem == null) {
+            // TODO 写一个默认控制器
+        }
+        this.loadBCD();
+    }
+
+    public List<List<String>> loadChainData(JsonObject json) {
+        List<List<String>> ChainData = new ArrayList<>();
+        for (Map.Entry<String, JsonElement> entry : json.entrySet()) {
+            if (entry.getValue().isJsonArray()) {
+                String base = entry.getKey();
+                JsonArray array = entry.getValue().getAsJsonArray();
+                List<String> chain = new ArrayList<>();
+                for (int i = 0; i < array.size(); i++) {
+                    chain.add(array.get(i).getAsString());
+                }
+                ChainData.add(chain);
+            }
+        }
+        return ChainData;
+    }
+
+    public void loadBCD() {
+        BCD_TailChain.clear();
+        BCD_TailChainHead.clear();
+        BCD_WingChainL.clear();
+        BCD_WingChainR.clear();
+        JsonObject bcdJson = JsonHelper.getObject(this.modelJson, "builtin_controller_data", null);
+        if (bcdJson != null) {
+            if (bcdJson.has("tail_chain")) {
+                BCD_TailChain = loadChainData(bcdJson.getAsJsonObject("tail_chain"));
+            }
+            if (bcdJson.has("tail_chain_head")) {
+                BCD_TailChainHead = loadChainData(bcdJson.getAsJsonObject("tail_chain_head"));
+            }
+            if (bcdJson.has("wing_chain_l")) {
+                BCD_WingChainL = loadChainData(bcdJson.getAsJsonObject("wing_chain_l"));
+            }
+            if (bcdJson.has("wing_chain_r")) {
+                BCD_WingChainR = loadChainData(bcdJson.getAsJsonObject("wing_chain_r"));
+            }
+        }
     }
 
     public void setPlayer(PlayerEntity player, boolean slim) {
@@ -227,6 +331,115 @@ public class FormModel extends GeoModel<FormAnimatable> {
             return readCacheOrBake(Cache, Resource, ResourceMask, colorSetting);
         }
         return Resource;
+    }
+
+    public final HashMap<String, GeoBone> geoBoneCache = new HashMap<>();
+
+    public final @Nullable GeoBone getCachedGeoBone(String name) {
+        GeoBone bone = geoBoneCache.get(name);
+        if (bone == null) {
+            Optional<GeoBone> boneOptional = this.getBone(name);
+            if (boneOptional.isPresent()) {
+                bone = boneOptional.get();
+                geoBoneCache.put(name, bone);
+            }
+        }
+        return bone;
+    }
+
+    public final void setRotationForTailBones(PlayerEntity player, PlayerFormBase form, float limbAngle, float limbDistance, float age, float tailDragAmount, float tailDragAmountVertical){
+        boolean isFeral = form.getBodyType() == PlayerFormBodyType.FERAL;
+        float SWAY_RATE = 0.33333334F * 0.5F;
+        float SWAY_SCALE = 0.05F;
+        if(BCD_TailChain.isEmpty()) {return;}
+        for (List<String> tailChain : BCD_TailChain) {
+            GeoBone firstTail = this.getCachedGeoBone(tailChain.get(0));
+            if (firstTail == null) {
+                continue;
+            }
+            float tailSway = SWAY_SCALE * MathHelper.cos(age * SWAY_RATE + (((float)Math.PI / 3.0F) * 0.75f));
+            float tailBalance = MathHelper.cos(limbAngle * 0.6662F) * 0.325F * limbDistance;
+            if(!isFeral){
+                firstTail.setRotY(-MathHelper.lerp(limbDistance, tailSway, tailBalance) - tailDragAmount * 0.75F);
+            } else {
+                firstTail.setRotZ(MathHelper.lerp(limbDistance, tailSway, tailBalance) + tailDragAmount * 0.75F);
+            }
+            firstTail.setRotX(-tailDragAmountVertical * 0.75f);
+            float offset = 0.0F;
+            for(int i = 1; i < tailChain.size(); i++){
+                GeoBone chainBone = this.getCachedGeoBone(tailChain.get(i));
+                if (chainBone == null) {continue;}
+                if(!isFeral){
+                    chainBone.setRotY(- MathHelper.lerp(limbDistance, SWAY_SCALE * MathHelper.cos(age * SWAY_RATE - (((float)Math.PI / 3.0F) * offset)), 0.0f) - tailDragAmount * 0.75F);
+                } else{
+                    chainBone.setRotZ(MathHelper.lerp(limbDistance, SWAY_SCALE * MathHelper.cos(age * SWAY_RATE - (((float)Math.PI / 3.0F) * offset)), 0.0f) + tailDragAmount * 0.75F);
+                }
+                chainBone.setRotX(-tailDragAmountVertical * 0.75f * (offset + 0.75f));
+                offset += 0.75F;
+            }
+        }
+    }
+
+    public final void setRotationForHeadTailBones(float headAngle, float age, float tailDragAmount, float tailDragAmountVertical){
+        float SWAY_RATE = 0.33333334F * 0.5F;
+        float SWAY_SCALE = 0.05F;
+        if (BCD_TailChainHead.isEmpty()) {return;}
+        for (List<String> tailChain : BCD_TailChainHead) {
+            GeoBone firstHeadTail = this.getCachedGeoBone(tailChain.get(0));
+            if (firstHeadTail == null) {
+                continue;
+            }
+            float headTailSway = SWAY_SCALE * MathHelper.cos(age * SWAY_RATE + (((float)Math.PI / 3.0F) * 0.75f));
+            float headTailBalance = MathHelper.cos(headAngle * 0.6662F) * 0.325F * 0.1f;
+            firstHeadTail.setRotY(-MathHelper.lerp(0.1f, headTailSway, headTailBalance) - tailDragAmount * 0.75F);
+            firstHeadTail.setRotX(-tailDragAmountVertical * 0.75f);
+            float offset = 0.0F;
+            for (int i = 1; i < tailChain.size(); i++){
+                GeoBone chainBone = this.getCachedGeoBone(tailChain.get(i));
+                if (chainBone == null) {continue;}
+                chainBone.setRotY(- MathHelper.lerp(0.1f, SWAY_SCALE * MathHelper.cos(age * SWAY_RATE - (((float)Math.PI / 3.0F) * offset)), 0.0f) - tailDragAmount * 0.75F);
+                chainBone.setRotX(-tailDragAmountVertical * 0.75f * (offset + 0.75f));
+                offset += 0.75F;
+            }
+        }
+    }
+
+    public final void setRotationForWingBones(float limbAngle, float limbDistance, float age, float tailDragAmountVertical){
+        float swayAngle = age * 20.0F * (float) (Math.PI / 180.0) + limbAngle;
+        float sway_base = MathHelper.cos(swayAngle) * (float) Math.PI * 0.15F + limbDistance;
+        float sway_l = (float) -(Math.PI / 4) + sway_base;
+        float sway_r = (float) (Math.PI / 4) - sway_base;
+
+        if (BCD_WingChainL != null) {
+            for (List<String> wingChain : BCD_WingChainL) {
+                GeoBone firstWing = this.getCachedGeoBone(wingChain.get(0));
+                if (firstWing == null) { continue; }
+                firstWing.setRotY(sway_l);
+                firstWing.setRotX(-tailDragAmountVertical * 0.35f);
+                float offset = 0.0F;
+                for (int i = 1; i < wingChain.size(); i++) {
+                    GeoBone chainBone = this.getCachedGeoBone(wingChain.get(i));
+                    if (chainBone == null) { continue; }
+                    chainBone.setRotX(-tailDragAmountVertical * 0.75f * offset);
+                    offset += 0.75F;
+                }
+            }
+        }
+        if (BCD_WingChainR != null) {
+            for (List<String> wingChain : BCD_WingChainR) {
+                GeoBone firstWing = this.getCachedGeoBone(wingChain.get(0));
+                if (firstWing == null)  continue;
+                firstWing.setRotY(sway_r);
+                firstWing.setRotX(-tailDragAmountVertical * 0.35f);
+                float offset = 0.0F;
+                for (int i = 1; i < wingChain.size(); i++) {
+                    GeoBone chainBone = this.getCachedGeoBone(wingChain.get(i));
+                    if (chainBone == null) { continue; }
+                    chainBone.setRotX(-tailDragAmountVertical * 0.75f * offset);
+                    offset += 0.75F;
+                }
+            }
+        }
     }
 
     @Override

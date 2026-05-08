@@ -41,10 +41,10 @@
   },
   "as__comment__": "渲染动画系统配置 不涉及V3版动画系统 仅处理动画->模型Parts位置转换 后续可能会整一个仅播放动画的控制器",
   "builtin_controller_data": {
-    "tail_chain": [],
-    "tail_chain_head": [],
-    "wing_chain_l": [],
-    "wing_chain_r": []
+    "tail_chain": {},
+    "tail_chain_head": {},
+    "wing_chain_l": {},
+    "wing_chain_r": {}
   },
   "bcd__comment__": "内嵌的默认动画的数据 比如尾巴摇晃这种"
 }
