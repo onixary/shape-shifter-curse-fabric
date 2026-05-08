@@ -27,3 +27,5 @@ accessible field net/minecraft/world/gen/structure/Structure config Lnet/minecra
 accessible field net/minecraft/world/gen/structure/Structure$Config spawnOverrides Ljava/util/Map;
 mutable field net/minecraft/world/gen/structure/Structure$Config spawnOverrides Ljava/util/Map;
 accessible field net/minecraft/client/render/entity/model/PlayerEntityModel thinArms Z
+accessible method net/minecraft/client/render/entity/LivingEntityRenderer getAnimationCounter (Lnet/minecraft/entity/LivingEntity;F)F
+accessible method net/minecraft/client/render/entity/LivingEntityRenderer isVisible (Lnet/minecraft/entity/LivingEntity;)Z
