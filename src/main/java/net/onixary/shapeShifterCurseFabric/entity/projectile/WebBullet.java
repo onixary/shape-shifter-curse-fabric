@@ -26,6 +26,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.TrinketsConditionAction;
 import net.onixary.shapeShifterCurseFabric.additional_power.WebBridgeAction;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
@@ -79,6 +80,7 @@ public class WebBullet extends ThrownItemEntity {
     public WebBullet(LivingEntity livingEntity, int Tier, boolean EnableEntangledEffect, boolean EnableTopBlockBuild) {
         super(WEB_BULLET, livingEntity, livingEntity.getWorld());
         this.Tier = Tier;
+        this.owner = livingEntity;
         this.EnableEntangledEffect = EnableEntangledEffect;
         this.EnableTopBlockBuild = EnableTopBlockBuild;
     }
@@ -205,8 +207,11 @@ public class WebBullet extends ThrownItemEntity {
         super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity();
 
+        //ShapeShifterCurseFabric.LOGGER.info("Hit entity " + entity.getName().getString());
+
         // 检测 owner 的 extra_hand 槽位是否装备了箭毒纺锤，并根据tier形态施加效果
         if (this.owner instanceof PlayerEntity player && entity instanceof LivingEntity target) {
+            //ShapeShifterCurseFabric.LOGGER.info("Check hit living entity " + entity.getName().getString());
             if (isExtraHandVenomSpindleEquipped(player)) {
                 switch (Tier) {
                     case 1 -> {
