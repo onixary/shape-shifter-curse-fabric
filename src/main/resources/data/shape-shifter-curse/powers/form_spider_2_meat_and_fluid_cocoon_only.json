@@ -1,0 +1,91 @@
+{
+  "type": "origins:multiple",
+  "restrict_food_type": {
+    "type": "origins:modify_food",
+    "food_modifiers": [
+      {
+        "operation": "set_total",
+        "value": 0.0
+      }
+    ],
+    "saturation_modifiers": [
+      {
+        "operation": "set_total",
+        "value": 0.0
+      }
+    ],
+    "item_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:or",
+          "conditions": [
+            {
+              "type": "origins:ingredient",
+              "ingredient": {
+                "tag": "origins:meat"
+              }
+            },
+            {
+              "type": "origins:ingredient",
+              "ingredient": {
+                "item": "minecraft:rotten_flesh"
+              }
+            },
+            {
+              "type": "origins:ingredient",
+              "ingredient": {
+                "item": "shape-shifter-curse:spider_fluid_cocoon"
+              }
+            }
+          ],
+          "inverted": true
+        },
+        {
+          "type": "origins:food"
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "origins:ignore_diet"
+          },
+          "inverted": true
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "shape-shifter-curse:ignore_vc_eat"
+          },
+          "inverted": true
+        }
+      ]
+    }
+  },
+
+  "meat_down": {
+    "type": "origins:modify_food",
+    "food_modifiers": [
+      {
+        "operation": "multiply_base_multiplicative",
+        "value": -0.2
+      }
+    ],
+    "saturation_modifiers": [
+      {
+        "operation": "multiply_base_multiplicative",
+        "value": -0.1
+      }
+    ],
+    "item_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "origins:meat"
+          }
+        }
+      ]
+    }
+  }
+}

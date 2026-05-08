@@ -145,10 +145,12 @@ public class WebBridgeAction {
                         .add("tier", SerializableDataTypes.INT, 1)
                         .add("divergence", SerializableDataTypes.FLOAT, 1F)
                         .add("speed", SerializableDataTypes.FLOAT, 1.5F)
-                        .add("projectile_action", ApoliDataTypes.ENTITY_ACTION, null),
+                        .add("projectile_action", ApoliDataTypes.ENTITY_ACTION, null)
+                        .add("enable_entangled_effect", SerializableDataTypes.BOOLEAN, true)
+                        .add("enable_top_block_build", SerializableDataTypes.BOOLEAN, true),
                 (data, entity) -> {
                     if (entity instanceof LivingEntity livingEntity) {
-                        WebBullet webBullet = new WebBullet(livingEntity, data.getInt("tier"));
+                        WebBullet webBullet = new WebBullet(livingEntity, data.getInt("tier"), data.getBoolean("enable_entangled_effect"), data.getBoolean("enable_top_block_build"));
                         webBullet.setVelocity(livingEntity, livingEntity.getPitch(), livingEntity.getYaw(), 0.0f, data.getFloat("speed"), data.getFloat("divergence"));
                         livingEntity.getWorld().spawnEntity(webBullet);
                         data.<Consumer<Entity>>ifPresent("projectile_action", projectileAction -> projectileAction.accept(webBullet));

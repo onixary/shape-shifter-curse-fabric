@@ -32,6 +32,7 @@ import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.additional_power.*;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.spider.TransformativeSpiderEntity;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects;
@@ -89,6 +90,7 @@ public abstract class LivingEntityMixin {
         }
 
         // 自定义实体的掉落逻辑
+        // 攻击者判定来防止干扰生电设施
         if (attacker instanceof ServerPlayerEntity) {
             if(entity instanceof WitchEntity || entity instanceof EvokerEntity) {
                 if (Math.random() < StaticParams.FAMILIAR_CURSE_POTION_DROP_PROBABILITY){

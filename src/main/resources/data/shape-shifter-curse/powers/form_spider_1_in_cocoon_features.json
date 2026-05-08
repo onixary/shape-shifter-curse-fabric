@@ -1,0 +1,49 @@
+{
+  "type": "origins:multiple",
+  "health_down": {
+    "type": "origins:attribute",
+    "modifier": {
+      "attribute": "minecraft:generic.max_health",
+      "value": -12.0,
+      "operation": "addition"
+    }
+  },
+
+  "armor_value_up": {
+    "type": "origins:attribute",
+    "modifier": {
+      "attribute": "minecraft:generic.armor",
+      "value": 20.0,
+      "operation": "addition"
+    }
+  },
+
+  "no_armors": {
+    "type": "origins:restrict_armor",
+    "head": {
+      "type": "origins:armor_value",
+      "comparison": ">",
+      "compare_to": -1
+    },
+    "chest": {
+      "type": "origins:armor_value",
+      "comparison": ">",
+      "compare_to": -1
+    },
+    "legs": {
+      "type": "origins:armor_value",
+      "comparison": ">",
+      "compare_to": -1
+    },
+    "feet": {
+      "type": "origins:armor_value",
+      "comparison": ">",
+      "compare_to": -1
+    }
+  },
+
+  "fire_damage_up": {
+    "type": "shape-shifter-curse:burn_damage_modifier",
+    "modifier": 1.0
+  }
+}
