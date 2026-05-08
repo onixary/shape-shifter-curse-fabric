@@ -16,6 +16,7 @@
   "overlay_mask": "namespace:textures/form/form_overlay_colormask.png",
   "emissive_overlay": "namespace:textures/form/form_emissive_overlay.png",
   "emissive_overlay_mask": "namespace:textures/form/form_emissive_overlay_colormask.png",
+  "fullbright_texture": "namespace:textures/form/form_fullbright.png",
   "hidden": [
     "leftArm",
     "rightArm",

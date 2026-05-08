@@ -47,7 +47,7 @@ public class PlayerFormDynamic extends PlayerFormBase{
     }
 
     public boolean isModelExist() {
-        return OriginalFurClient.FUR_RESOURCES.containsKey(this.getFormOriginID());
+        return OriginalFurClient.FUR_REGISTRY.containsKey(this.getFormOriginID());
     }
 
     private Map<Identifier, AbstractAnimStateController> animStateControllerMap = new HashMap<>();

@@ -26,3 +26,4 @@ accessible field net/minecraft/screen/ForgingScreenHandler input Lnet/minecraft/
 accessible field net/minecraft/world/gen/structure/Structure config Lnet/minecraft/world/gen/structure/Structure$Config;
 accessible field net/minecraft/world/gen/structure/Structure$Config spawnOverrides Ljava/util/Map;
 mutable field net/minecraft/world/gen/structure/Structure$Config spawnOverrides Ljava/util/Map;
+accessible field net/minecraft/client/render/entity/model/PlayerEntityModel thinArms Z
