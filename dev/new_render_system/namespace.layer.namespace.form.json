@@ -1,0 +1,50 @@
+{
+  "load_priority": 0,
+  "apply_priority": 0,
+
+  "name": "namespace.layer.namespace.form",
+  "layer": "namespace.layer",
+  "form": "namespace.form",
+
+  "slim_only": false,
+  "wide_only": true,
+  "use_multiply_mask": false,
+  "model": "namespace:geo/form.geo.json",
+  "texture": "namespace:textures/form/form.png",
+  "texture_mask": "namespace:textures/form/form_colormask.png",
+  "overlay": "namespace:textures/form/form_overlay.png",
+  "overlay_mask": "namespace:textures/form/form_overlay_colormask.png",
+  "emissive_overlay": "namespace:textures/form/form_emissive_overlay.png",
+  "emissive_overlay_mask": "namespace:textures/form/form_emissive_overlay_colormask.png",
+  "hidden": [
+    "leftArm",
+    "rightArm",
+    "rightSleeve",
+    "leftSleeve",
+    "rightLeg",
+    "leftLeg",
+    "rightPants",
+    "leftPants",
+    "hat",
+    "head",
+    "body",
+    "jacket"
+  ],
+  "animation_system": "shape-shifter-curse:form_base",
+  "animation_system_config": {
+    "extra_parts_map": {
+      "bipedRightHindLeg": "bipedRightHindLeg",
+      "bipedLeftHindLeg": "bipedLeftHindLeg",
+      "bipedRightExtraArm": "bipedRightExtraArm",
+      "bipedLeftExtraArm": "bipedLeftExtraArm"
+    }
+  },
+  "as__comment__": "渲染动画系统配置 不涉及V3版动画系统 仅处理动画->模型Parts位置转换 后续可能会整一个仅播放动画的控制器",
+  "builtin_controller_data": {
+    "tail_chain": {},
+    "tail_chain_head": {},
+    "wing_chain_l": {},
+    "wing_chain_r": {}
+  },
+  "bcd__comment__": "内嵌的默认动画的数据 比如尾巴摇晃这种"
+}
