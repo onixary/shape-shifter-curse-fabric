@@ -9,6 +9,7 @@
 
   "model": "shape-shifter-curse:geo/form/form_spider_2.geo.json",
   "texture": "shape-shifter-curse:textures/form/form_spider_2/form_spider_2.png",
+  "texture_mask": "shape-shifter-curse:textures/form/form_spider_2/form_spider_2_colormask.png",
   "hidden": [
     "leftLeg",
     "rightLeg",
@@ -29,20 +30,6 @@
       "tail": [0],
       "tail_leg_l": [0, 1],
       "tail_leg_r": [0, 1]
-    }
-  },
-
-  "animation_system": "shape-shifter-curse:default",
-  "animation_system_config": {
-    "extra_parts_map": {
-      "bipedRightHindLeg": "bipedRightHindLeg",
-      "bipedLeftHindLeg": "bipedLeftHindLeg",
-      "bipedRightExtraArm": "bipedRightExtraArm",
-      "bipedLeftExtraArm": "bipedLeftExtraArm"
-    },
-    "first_person_render": {
-      "left_arm": "bipedLeftArm",
-      "right_arm": "bipedRightArm"
     }
   }
 }

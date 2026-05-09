@@ -9,6 +9,7 @@
 
   "model": "shape-shifter-curse:geo/form/form_spider_3.geo.json",
   "texture": "shape-shifter-curse:textures/form/form_spider_3/form_spider_3.png",
+  "texture_mask": "shape-shifter-curse:textures/form/form_spider_3/form_spider_3_colormask.png",
   "hidden": [
     "leftLeg",
     "rightLeg",
@@ -33,9 +34,7 @@
   "animation_system_config": {
     "extra_parts_map": {
       "bipedRightHindLeg": "bipedRightHindLeg",
-      "bipedLeftHindLeg": "bipedLeftHindLeg",
-      "bipedRightExtraArm": "bipedRightExtraArm",
-      "bipedLeftExtraArm": "bipedLeftExtraArm"
+      "bipedLeftHindLeg": "bipedLeftHindLeg"
     },
     "first_person_render": {
       "left_arm": "bipedLeftArm",
