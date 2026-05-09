@@ -3,23 +3,31 @@ package net.onixary.shapeShifterCurseFabric.render.form_render;
 import com.google.gson.JsonObject;
 import dev.kosmx.playerAnim.api.TransformType;
 import dev.kosmx.playerAnim.core.util.Vec3f;
+import mod.azure.azurelib.cache.object.BakedGeoModel;
 import mod.azure.azurelib.cache.object.GeoBone;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
+import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_form_render.IMojModelPart;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class DefaultModelAnimationSystem implements IModelAnimationSystem {
     public final List<Pair<String, String>> extraPartsMap = new ArrayList<>();
+
+    public String leftArmGeoBoneID = "bipedLeftArm";
+    public String rightArmGeoBoneID = "bipedRightArm";
 
     private float tailDragAmount = 0.0F;
     private float tailDragAmountO;
@@ -31,6 +39,10 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
     /*
     "extra_parts_map": {
       "__anim_part__": "__model_part__"
+    },
+    "first_person_render": {
+      "left_arm": "bipedLeftArm",
+      "right_arm": "bipedRightArm"
     }
      */
     @Override
@@ -43,6 +55,19 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
             JsonObject extraPartsMap = json.getAsJsonObject("extra_parts_map");
             for (String key : extraPartsMap.keySet()) {
                 this.extraPartsMap.add(new Pair<>(key, extraPartsMap.get(key).getAsString()));
+            }
+        }
+        if (json.has("first_person_render")) {
+            JsonObject firstPersonRender = json.getAsJsonObject("first_person_render");
+            if (firstPersonRender.has("left_arm")) {
+                this.leftArmGeoBoneID = firstPersonRender.get("left_arm").getAsString();
+            } else {
+                this.leftArmGeoBoneID = "bipedLeftArm";
+            }
+            if (firstPersonRender.has("right_arm")) {
+                this.rightArmGeoBoneID = firstPersonRender.get("right_arm").getAsString();
+            } else {
+                this.rightArmGeoBoneID = "bipedRightArm";
             }
         }
     }
@@ -73,26 +98,27 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
         for (Pair<String, String> pair : extraPartsMap) {
             ProcessExtraBone(model, player, pair.getLeft(), pair.getRight());
         }
-        model.setRotationForBone("bipedHead", ((IMojModelPart) (Object) renderer.getModel().head).originfurs$getRotation());
-        model.translatePositionForBone("bipedHead", ((IMojModelPart) (Object) renderer.getModel().head).originfurs$getPosition());
-        model.translatePositionForBone("bipedBody", ((IMojModelPart) (Object) renderer.getModel().body).originfurs$getPosition());
-        model.translatePositionForBone("bipedLeftArm", ((IMojModelPart) (Object) renderer.getModel().leftArm).originfurs$getPosition());
-        model.translatePositionForBone("bipedRightArm", ((IMojModelPart) (Object) renderer.getModel().rightArm).originfurs$getPosition());
-        model.translatePositionForBone("bipedRightLeg", ((IMojModelPart) (Object) renderer.getModel().rightLeg).originfurs$getPosition());
-        model.translatePositionForBone("bipedLeftLeg", ((IMojModelPart) (Object) renderer.getModel().leftLeg).originfurs$getPosition());
+        PlayerEntityModel<?> playerModel = renderer.getModel();
+        model.setRotationForBone("bipedHead", FormRenderUtils.getPartRotation(playerModel.head));
+        model.translatePositionForBone("bipedHead", FormRenderUtils.getPartPosition(playerModel.head));
+        model.translatePositionForBone("bipedBody", FormRenderUtils.getPartPosition(playerModel.body));
+        model.translatePositionForBone("bipedLeftArm", FormRenderUtils.getPartPosition(playerModel.leftArm));
+        model.translatePositionForBone("bipedRightArm", FormRenderUtils.getPartPosition(playerModel.rightArm));
+        model.translatePositionForBone("bipedLeftLeg", FormRenderUtils.getPartPosition(playerModel.leftLeg));
+        model.translatePositionForBone("bipedRightLeg", FormRenderUtils.getPartPosition(playerModel.rightLeg));
         model.translatePositionForBone("bipedLeftArm", new Vec3d(5, 2, 0));
         model.translatePositionForBone("bipedRightArm", new Vec3d(-5, 2, 0));
         model.translatePositionForBone("bipedLeftLeg", new Vec3d(2, 12, 0));
         model.translatePositionForBone("bipedRightLeg", new Vec3d(-2, 12, 0));
-        model.setRotationForBone("bipedBody", ((IMojModelPart) (Object) renderer.getModel().body).originfurs$getRotation());
+        model.setRotationForBone("bipedBody", FormRenderUtils.getPartRotation(playerModel.body));
         model.setRotationForTailBones(limbAngle, limbDistance, player.age, currentTailDragAmount, tailDragAmountVertical);
         model.setRotationForHeadTailBones(headYaw, player.age, currentTailDragAmount, tailDragAmountVertical);
         model.setRotationForWingBones(limbAngle, limbDistance, player.age, tailDragAmountVertical);
         model.invertRotForPart("bipedBody", false, true, false);
-        model.setRotationForBone("bipedLeftArm", ((IMojModelPart) (Object) renderer.getModel().leftArm).originfurs$getRotation());
-        model.setRotationForBone("bipedRightArm", ((IMojModelPart) (Object) renderer.getModel().rightArm).originfurs$getRotation());
-        model.setRotationForBone("bipedRightLeg", ((IMojModelPart) (Object) renderer.getModel().rightLeg).originfurs$getRotation());
-        model.setRotationForBone("bipedLeftLeg", ((IMojModelPart) (Object) renderer.getModel().leftLeg).originfurs$getRotation());
+        model.setRotationForBone("bipedLeftArm", FormRenderUtils.getPartRotation(playerModel.leftArm));
+        model.setRotationForBone("bipedRightArm", FormRenderUtils.getPartRotation(playerModel.rightArm));
+        model.setRotationForBone("bipedLeftLeg", FormRenderUtils.getPartRotation(playerModel.leftLeg));
+        model.setRotationForBone("bipedRightLeg", FormRenderUtils.getPartRotation(playerModel.rightLeg));
         model.invertRotForPart("bipedHead", false, true, true);
         model.invertRotForPart("bipedRightArm", false, true, true);
         model.invertRotForPart("bipedLeftArm", false, true, true);
@@ -114,5 +140,35 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
         tailDragAmountVertical += targetVerticalDrag * 0.15F;
         tailDragAmountVertical = MathHelper.clamp(tailDragAmountVertical, -1.6f, 1.6f);
         tailDragAmountVerticalO = tailDragAmountVertical;
+    }
+
+    @Override
+    public @Nullable GeoBone beforeRenderFirstPerson(@Nullable GeoBone geoBone, FormRenderer formRenderer, FormModel model, PlayerEntityRenderer renderer, PlayerEntity player, ModelPart arm, ModelPart sleeve) {
+        boolean IsRenderRight = arm.equals(renderer.getModel().rightArm);
+        String GeoBoneName = IsRenderRight ? this.rightArmGeoBoneID : this.leftArmGeoBoneID;
+        Optional<GeoBone> OptionalGeoBone = model.getBone(GeoBoneName);
+        if (OptionalGeoBone.isEmpty()) {
+            // 有时AzureLib 未能及时注册 GeoBone 因此需要手动注册
+            if (model.getAnimationProcessor().getRegisteredBones().isEmpty()) {
+                ShapeShifterCurseFabric.LOGGER.info("GeoBone 未注册, 尝试重新注册模型");
+                BakedGeoModel bakedGeoModel = model.getBakedModel(model.getModelResource(formRenderer.getAnimatable()));
+                model.getAnimationProcessor().setActiveModel(bakedGeoModel);
+            }
+            return null;
+        }
+        geoBone = OptionalGeoBone.get();
+        return geoBone;
+    }
+
+    @Override
+    public @Nullable GeoBone processAnimationFirstPerson(@Nullable GeoBone geoBone, FormRenderer formRenderer, FormModel model, PlayerEntityRenderer renderer, PlayerEntity player, ModelPart arm, ModelPart sleeve) {
+        boolean IsRenderRight = arm.equals(renderer.getModel().rightArm);
+        String GeoBoneName = IsRenderRight ? this.rightArmGeoBoneID : this.leftArmGeoBoneID;
+        model.resetBone(GeoBoneName);
+        model.translatePositionForBone(GeoBoneName, ((IMojModelPart) (Object) arm).originfurs$getPosition());
+        model.translatePositionForBone(GeoBoneName, new Vec3d(5 * (IsRenderRight ? -1.0 : 1.0), 2, 0));
+        model.setRotationForBone(GeoBoneName, FormRenderUtils.getPartRotation(arm));
+        model.invertRotForPart(GeoBoneName, false, true, true);
+        return geoBone;
     }
 }

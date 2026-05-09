@@ -38,6 +38,10 @@
       "bipedLeftHindLeg": "bipedLeftHindLeg",
       "bipedRightExtraArm": "bipedRightExtraArm",
       "bipedLeftExtraArm": "bipedLeftExtraArm"
+    },
+    "first_person_render": {
+      "left_arm": "bipedLeftArm",
+      "right_arm": "bipedRightArm"
     }
   },
   "as__comment__": "渲染动画系统配置 不涉及V3版动画系统 仅处理动画->模型Parts位置转换 后续可能会整一个仅播放动画的控制器",

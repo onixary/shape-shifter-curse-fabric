@@ -21,8 +21,8 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFurClient;
 import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 
 import java.util.List;
@@ -34,6 +34,7 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
 
     private static final boolean IS_FIRST_PERSON_MOD_LOADED = FabricLoader.getInstance().isModLoaded("firstperson");
     private static final boolean BetterCombatInstalled = FabricLoader.getInstance().isModLoaded("bettercombat");
+    private static final boolean IRISInstalled = FabricLoader.getInstance().isModLoaded("iris");
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
@@ -157,7 +158,7 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
             boolean bl2 = !bl && !player.isInvisibleTo(MinecraftClient.getInstance().player);
             if (overlayTexture != null) {
                 RenderLayer l = null;
-                if (OriginalFurClient.isRenderingInWorld && FabricLoader.getInstance().isModLoaded("iris")) {
+                if (FormRenderUtils.isRenderingInWorld && IRISInstalled) {
                     l = RenderLayer.getEntityCutoutNoCullZOffset(overlayTexture);
                 } else {
                     l = RenderLayer.getEntityCutout(overlayTexture);
@@ -227,6 +228,48 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
     }
 
     public static void rFPM_PartB(PlayerEntityRenderer playerEntityRenderer, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve) {
+        boolean IsRenderRight = arm.equals(playerEntityRenderer.getModel().rightArm);
+        List<FormRenderer> formRendererList = FormRenderUtils.getPlayerAllFormRenderer(player);
+        for (FormRenderer formRenderer : formRendererList) {
+            @Nullable GeoBone geoBone = null;
+            if (formRenderer == null) {return;}
+            PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = playerEntityRenderer.getModel();
+            FormModel formModel = (FormModel) formRenderer.getGeoModel();
+            FormAnimatable formAnimatable = formRenderer.getAnimatable();
+            formRenderer.setPlayer(player, playerEntityModel.thinArms);
+            matrices.push();
+            matrices.multiply(new Quaternionf().rotateX(180 * MathHelper.RADIANS_PER_DEGREE));
+            matrices.translate(0, -1.51f, 0);
+            geoBone = formModel.AnimationSystem.beforeRenderFirstPerson(geoBone, formRenderer, formModel, playerEntityRenderer, player, arm, sleeve);
+            geoBone = formModel.AnimationSystem.processAnimationFirstPerson(geoBone, formRenderer, formModel, playerEntityRenderer, player, arm, sleeve);
+            if (geoBone == null) {
+                formModel.AnimationSystem.afterRenderFirstPerson(geoBone, formRenderer, formModel, playerEntityRenderer, player, arm, sleeve);
+                matrices.pop();
+                continue;
+            }
+            RenderLayer renderLayerNormal = RenderLayer.getEntityTranslucent(formModel.getTextureResource(formAnimatable));
+            renderGeoBone(formRenderer, geoBone, matrices, formAnimatable, vertexConsumers, renderLayerNormal, vertexConsumers.getBuffer(renderLayerNormal), light);
+            RenderLayer renderLayerFullBright = RenderLayer.getEntityTranslucent(formModel.getFullbrightTextureResource(formAnimatable));
+            renderGeoBone(formRenderer, geoBone, matrices, formAnimatable, vertexConsumers, renderLayerFullBright, vertexConsumers.getBuffer(renderLayerFullBright), Integer.MAX_VALUE - 1);
+            matrices.pop();
 
+            // Render Overlay 藏得够深的 要不是发现悦灵手臂无法显示我都不会发现
+            // 从 PlayerEntityRendererMixin.renderOverlayTexture 提取的代码并进行修改
+            Identifier OverlayTextureID = formModel.getOverlayTextureResource(playerEntityModel.thinArms);
+            if (OverlayTextureID != null) {
+                // 玩家看自己绝对是非隐身
+                // boolean bl = this.isVisible(player);
+                // boolean bl2 = !bl && !player.isInvisibleTo(MinecraftClient.getInstance().player);
+                RenderLayer OverlayLayer = null;
+                if (FormRenderUtils.isRenderingInWorld && IRISInstalled) {
+                    OverlayLayer = RenderLayer.getEntityCutoutNoCullZOffset(OverlayTextureID);
+                } else {
+                    OverlayLayer = RenderLayer.getEntityCutout(OverlayTextureID);
+                }
+                int OverlayInt = OverlayTexture.packUv(OverlayTexture.getU(playerEntityRenderer.getAnimationCounter(player, MinecraftClient.getInstance().getTickDelta())), OverlayTexture.getV(player.hurtTime > 0 || player.deathTime > 0));
+                arm.render(matrices, vertexConsumers.getBuffer(OverlayLayer), light, OverlayInt, 1.0f, 1.0f, 1.0f, 1.0F);
+            }
+            formModel.AnimationSystem.afterRenderFirstPerson(geoBone, formRenderer, formModel, playerEntityRenderer, player, arm, sleeve);
+        }
     }
 }

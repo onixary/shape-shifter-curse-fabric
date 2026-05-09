@@ -1,8 +1,11 @@
 package net.onixary.shapeShifterCurseFabric.render.form_render;
 
 import com.google.gson.JsonObject;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.integration.origins.component.PlayerOriginComponent;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
@@ -22,10 +25,18 @@ import java.util.function.Supplier;
 public class FormRenderUtils {
     public static final HashMap<Identifier, Supplier<IModelAnimationSystem>> modelAnimationSystemRegistry = new HashMap<>();
 
+    public static boolean isRenderingInWorld = false;
+
     // { "layer(slot)": {"form": formRenderer} }
     public static final HashMap<Identifier, HashMap<Identifier, FormRenderer>> formRendererRegistry = new HashMap<>();
 
     public static final Identifier DEFAULT_MAS = register_MAS(ShapeShifterCurseFabric.identifier("default"), DefaultModelAnimationSystem::new);
+
+    // TODO 挂载Init
+    public static void onClientInit() {
+        WorldRenderEvents.END.register(context -> isRenderingInWorld = false);
+        WorldRenderEvents.START.register(context -> isRenderingInWorld = true);
+    }
 
     public static Identifier register_MAS(Identifier id, Supplier<IModelAnimationSystem> supplier) {
         modelAnimationSystemRegistry.put(id, supplier);
@@ -48,6 +59,20 @@ public class FormRenderUtils {
 
     public static void loadFormRenderer(Identifier slotID, Identifier formID, FormRenderer renderer) {
         formRendererRegistry.computeIfAbsent(slotID, k -> new HashMap<>()).put(formID, renderer);
+    }
+
+    public static Vec3d getPartPosition(ModelPart part) {
+        var t = part.getTransform();
+        return new Vec3d(t.pivotX, t.pivotY, t.pivotZ).negate();
+    }
+
+    public static Vec3d getPartRotation(ModelPart part) {
+        return new Vec3d(part.xScale, part.yScale, part.zScale);
+    }
+
+    public static Vec3d getPartScale(ModelPart part) {
+        var t = part.getTransform();
+        return new Vec3d(t.pitch, t.yaw, t.roll);
     }
 
     // Origins 版本核心 如果需要重构形态系统需要重新写一份这个函数
