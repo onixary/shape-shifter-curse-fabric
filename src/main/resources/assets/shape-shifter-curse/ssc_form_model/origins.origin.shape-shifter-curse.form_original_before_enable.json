@@ -1,0 +1,9 @@
+{
+  "load_priority": 0,
+
+  "name": "shape-shifter-curse.form_original_before_enable.model_name",
+  "layer": "origins:origin",
+  "form": "shape-shifter-curse:form_original_before_enable",
+
+  "wide_only": true
+}

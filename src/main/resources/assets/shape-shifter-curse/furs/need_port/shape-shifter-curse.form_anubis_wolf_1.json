@@ -1,0 +1,22 @@
+{
+  "model": "orif-defaults:geo/form_anubis_wolf_1.geo.json",
+  "texture": "orif-defaults:textures/form_anubis_wolf_1/form_anubis_wolf_1.png",
+  "texture_mask": "orif-defaults:textures/form_anubis_wolf_1/form_anubis_wolf_1_colormask.png",
+  "overlay": "orif-defaults:textures/form_anubis_wolf_1/form_anubis_wolf_1_overlay.png",
+  "overlay_mask": "orif-defaults:textures/form_anubis_wolf_1/form_anubis_wolf_1_overlay_colormask.png",
+  "hidden": [
+    "leftLeg",
+    "rightLeg",
+    "rightPants",
+    "leftPants",
+    "leftSleeve",
+    "rightSleeve"
+  ],
+  "tail_chain": {
+    "tail": [0, 1, 2, 3, 4]
+  },
+  "tail_chain_head": {
+    "ear_a": [0],
+    "ear_b": [0]
+  }
+}

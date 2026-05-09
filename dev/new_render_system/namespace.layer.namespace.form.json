@@ -30,7 +30,7 @@
     "body",
     "jacket"
   ],
-  "animation_system": "shape-shifter-curse:form_base",
+  "animation_system": "shape-shifter-curse:default",
   "animation_system_config": {
     "extra_parts_map": {
       "bipedRightHindLeg": "bipedRightHindLeg",

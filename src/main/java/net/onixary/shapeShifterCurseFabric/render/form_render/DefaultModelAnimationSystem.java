@@ -56,17 +56,15 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
                 this.extraPartsMap.add(new Pair<>(key, extraPartsMap.get(key).getAsString()));
             }
         }
+        this.leftArmGeoBoneID = "bipedLeftArm";
+        this.rightArmGeoBoneID = "bipedRightArm";
         if (json.has("first_person_render")) {
             JsonObject firstPersonRender = json.getAsJsonObject("first_person_render");
             if (firstPersonRender.has("left_arm")) {
                 this.leftArmGeoBoneID = firstPersonRender.get("left_arm").getAsString();
-            } else {
-                this.leftArmGeoBoneID = "bipedLeftArm";
             }
             if (firstPersonRender.has("right_arm")) {
                 this.rightArmGeoBoneID = firstPersonRender.get("right_arm").getAsString();
-            } else {
-                this.rightArmGeoBoneID = "bipedRightArm";
             }
         }
     }

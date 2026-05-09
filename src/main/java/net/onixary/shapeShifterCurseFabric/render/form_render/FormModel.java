@@ -193,14 +193,14 @@ public class FormModel extends GeoModel<FormAnimatable> {
                     case "head" -> { this.Hidden_Head = true; }
                     case "body" -> { this.Hidden_Body = true; }
                     case "jacket" -> { this.Hidden_Jacket = true; }
-                    case "left_arm" -> { this.Hidden_LeftArm = true; }
-                    case "right_arm" -> { this.Hidden_RightArm = true; }
-                    case "left_sleeve" -> { this.Hidden_LeftSleeve = true; }
-                    case "right_sleeve" -> { this.Hidden_RightSleeve = true; }
-                    case "left_leg" -> { this.Hidden_LeftLeg = true; }
-                    case "right_leg" -> { this.Hidden_RightLeg = true; }
-                    case "left_pants" -> { this.Hidden_LeftPants = true; }
-                    case "right_pants" -> { this.Hidden_RightPants = true; }
+                    case "leftArm" -> { this.Hidden_LeftArm = true; }
+                    case "rightArm" -> { this.Hidden_RightArm = true; }
+                    case "leftSleeve" -> { this.Hidden_LeftSleeve = true; }
+                    case "rightSleeve" -> { this.Hidden_RightSleeve = true; }
+                    case "leftLeg" -> { this.Hidden_LeftLeg = true; }
+                    case "rightLeg" -> { this.Hidden_RightLeg = true; }
+                    case "leftPants" -> { this.Hidden_LeftPants = true; }
+                    case "rightPants" -> { this.Hidden_RightPants = true; }
                 }
             }
         }
@@ -222,7 +222,7 @@ public class FormModel extends GeoModel<FormAnimatable> {
                 JsonArray array = entry.getValue().getAsJsonArray();
                 List<String> chain = new ArrayList<>();
                 for (int i = 0; i < array.size(); i++) {
-                    chain.add(array.get(i).getAsString());
+                    chain.add(base + "_" + array.get(i).getAsString());
                 }
                 ChainData.add(chain);
             }
