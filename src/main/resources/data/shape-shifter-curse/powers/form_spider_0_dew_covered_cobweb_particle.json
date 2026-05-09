@@ -1,0 +1,33 @@
+{
+    "type": "origins:action_over_time",
+    "entity_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "origins:spawn_particles",
+                "particle": "minecraft:poof",
+                "count": 1,
+                "speed": 0.0,
+                "force": false,
+                "spread": {
+                    "x": 0.8,
+                    "y": 0.3,
+                    "z": 0.8
+                },
+                "offset_y" : 1
+            }
+        ]
+    },
+    "interval": 4,
+  "condition": {
+    "type": "origins:block_in_radius",
+    "block_condition": {
+      "type": "origins:block",
+      "block": "shape-shifter-curse:dew_covered_cobweb"
+    },
+    "radius": 1,
+    "shape": "cube",
+    "comparison": ">=",
+    "compare_to": 6
+  }
+}

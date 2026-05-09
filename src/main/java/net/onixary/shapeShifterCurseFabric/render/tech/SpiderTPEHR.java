@@ -57,7 +57,7 @@ public class SpiderTPEHR extends ThirdPersonExtraHandItemRender.TPEHR_Render {
         ModelPart body = eR.getModel().body;
         body.rotate(matrices);
         if(stack.getItem() == Items.SHIELD){
-            // 适用于spider_3额外手臂盾牌的transform，需要将其转向正面
+            // 适用于spider_2、spider_3额外手臂盾牌的transform，需要将其转向正面
             //matrices.translate(-0.1F, 0.6F, -0.5F);
             matrices.translate(0.1F, 0.2F, -0.2F);
             matrices.scale(0.65F, 0.65F, 0.65F);
@@ -67,7 +67,7 @@ public class SpiderTPEHR extends ThirdPersonExtraHandItemRender.TPEHR_Render {
             matrices.translate(1.0 / 16.0F, -2.0 / 16.0F, 1.0 / 16.0F);
         }
         else{
-            // 适用于spider_3额外手臂通常道具的transform
+            // 适用于spider_2、spider_3额外手臂通常道具的transform
             matrices.translate(-0.1F, 0.6F, -0.5F);
             matrices.scale(0.8F, 0.8F, 0.8F);
             matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(45.0F));

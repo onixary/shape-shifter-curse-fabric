@@ -20,6 +20,7 @@ import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 public class AdditionalEntityConditions {
     public static void register() {
         register(DiggingBareHandCondition.getFactory());
+        register(InstinctValueCondition.getFactory());
         register(ChanceCondition.getFactory());
         register(JumpEventCondition.getFactory());
         register(MustCrawlingCondition.getFactory());

@@ -3,7 +3,7 @@
 	"animations": {
 		"spider_1_idle": {
 			"loop": true,
-			"animation_length": 2.25,
+			"animation_length": 3.7917,
 			"bones": {
 				"body": {
 					"rotation": {

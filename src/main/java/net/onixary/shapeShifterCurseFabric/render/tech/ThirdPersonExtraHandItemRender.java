@@ -32,6 +32,7 @@ public class ThirdPersonExtraHandItemRender<T extends LivingEntity, M extends En
 
     static {
         register(RegPlayerForms.SPIDER_3, new TPEHRData(p -> true, new SpiderTPEHR()));
+        register(RegPlayerForms.SPIDER_2, new TPEHRData(p -> true, new SpiderTPEHR()));
     }
 
     public static void register(PlayerFormBase form, TPEHRData Rdata) {
