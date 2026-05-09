@@ -1,7 +1,7 @@
 {
   "model": "orif-defaults:geo/form_spider_2.geo.json",
   "texture": "orif-defaults:textures/form_spider_2/form_spider_2.png",
-  "texture_mask": "orif-defaults:textures/form_ocelot_0/form_ocelot_0_colormask.png",
+  "texture_mask": "orif-defaults:textures/form_spider_2/form_spider_2_colormask.png",
   "hidden": [
     "leftLeg",
     "rightLeg",

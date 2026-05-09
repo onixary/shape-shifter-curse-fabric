@@ -36,6 +36,8 @@ public class Form_Spider3 extends PlayerFormBase {
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_3_climb"));
     public static final AnimUtils.AnimationHolderData ANIM_FLY =
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_3_creative_flight"));
+    public static final AnimUtils.AnimationHolderData ANIM_RIDE =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_3_ride"));
 
     public static final AbstractAnimStateController IDLE_CONTROLLER = 
         new WithSneakAnimController(ANIM_IDLE, ANIM_SNEAK_IDLE);
@@ -53,6 +55,9 @@ public class Form_Spider3 extends PlayerFormBase {
             new OneAnimController(ANIM_CLIMB);
     public static final AbstractAnimStateController FLIGHT_CONTROLLER =
             new OneAnimController(ANIM_FLY);
+    public static final AbstractAnimStateController RIDE_CONTROLLER =
+            new RideAnimController(ANIM_RIDE, ANIM_RIDE);
+
 
 
     @Override
@@ -80,6 +85,8 @@ public class Form_Spider3 extends PlayerFormBase {
                     return CLIMB_CONTROLLER;
                 case ANIM_STATE_FLYING:
                     return FLIGHT_CONTROLLER;
+                case ANIM_STATE_RIDE:
+                    return RIDE_CONTROLLER;
                 default:
                     return null;
             }

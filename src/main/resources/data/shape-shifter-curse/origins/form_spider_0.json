@@ -11,7 +11,10 @@
     "shape-shifter-curse:form_spider_3_falling_protection",
     "shape-shifter-curse:form_disable_leg_armor",
     "shape-shifter-curse:form_spider_0_vegetarian_saturation_down",
-    "shape-shifter-curse:form_spider_0_dew_covered_cobweb_instinct"
+    "shape-shifter-curse:form_spider_0_dew_covered_cobweb_instinct",
+    "shape-shifter-curse:form_spider_0_dew_covered_cobweb_particle",
+    "shape-shifter-curse:form_spider_0_instinct_max_particle",
+    "shape-shifter-curse:form_instinct_use_golden_apple"
   ],
   "icon": {
     "item": "minecraft:player_head"
