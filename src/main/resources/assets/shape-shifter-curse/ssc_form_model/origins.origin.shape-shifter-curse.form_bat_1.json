@@ -1,9 +1,9 @@
 {
   "load_priority": 0,
 
-  "name": "shape-shifter-curse.form_axolotl_0.model_name",
+  "name": "shape-shifter-curse.form_bat_1.model_name",
   "layer": "origins:origin",
-  "form": "shape-shifter-curse:form_axolotl_0",
+  "form": "shape-shifter-curse:form_bat_1",
 
   "wide_only": true,
 
