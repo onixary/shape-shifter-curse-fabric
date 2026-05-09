@@ -1,0 +1,137 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"spider_3_ride": {
+			"loop": true,
+			"animation_length": 0.25,
+			"bones": {
+				"head": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.25": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"torso": {
+					"rotation": {
+						"0.0": {
+							"vector": [25, 0, 0]
+						},
+						"0.25": {
+							"vector": [25, 0, 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 2, 0]
+						},
+						"0.25": {
+							"vector": [0, 2, 0]
+						}
+					}
+				},
+				"rightArm": {
+					"rotation": {
+						"vector": [-25.5158, -7.2371, -0.5721]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"leftArm": {
+					"rotation": {
+						"vector": [-25.5158, 7.2371, 0.5721]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"rightLeg": {
+					"rotation": {
+						"0.0": {
+							"vector": [-75, 0, 15]
+						},
+						"0.25": {
+							"vector": [-75, 0, 15]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 2, 5]
+						},
+						"0.25": {
+							"vector": [0, 2, 5]
+						}
+					}
+				},
+				"leftLeg": {
+					"rotation": {
+						"0.0": {
+							"vector": [-75, 0, -15]
+						},
+						"0.25": {
+							"vector": [-75, 0, -15]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 2, 5]
+						},
+						"0.25": {
+							"vector": [0, 2, 5]
+						}
+					}
+				},
+				"bipedLeftHindLeg": {
+					"rotation": {
+						"0.0": {
+							"vector": [57.9041, 18.7472, -21.1728]
+						},
+						"0.25": {
+							"vector": [57.9041, 18.7472, -21.1728]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 3, 5]
+						},
+						"0.25": {
+							"vector": [0, 3, 5]
+						}
+					}
+				},
+				"bipedRightHindLeg": {
+					"rotation": {
+						"0.0": {
+							"vector": [57.9041, -18.7472, 21.1728]
+						},
+						"0.25": {
+							"vector": [57.9041, -18.7472, 21.1728]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 3, 5]
+						},
+						"0.25": {
+							"vector": [0, 3, 5]
+						}
+					}
+				},
+				"body": {
+					"position": {
+						"0.0": {
+							"vector": [0, -1, -2]
+						},
+						"0.25": {
+							"vector": [0, -1, -2]
+						}
+					}
+				}
+			}
+		}
+	}
+}
