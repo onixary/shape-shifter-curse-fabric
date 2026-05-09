@@ -24,6 +24,7 @@
   "emissive_overlay_mask_slim": "namespace:textures/form/form_emissive_overlay_colormask.png",
   "fullbright_texture": "namespace:textures/form/form_fullbright.png",
   "fullbright_texture_slim": "namespace:textures/form/form_fullbright.png",
+  "animations": "shape-shifter-curse:animations/missing.animation.json",
   "hidden": [
     "leftArm",
     "rightArm",
