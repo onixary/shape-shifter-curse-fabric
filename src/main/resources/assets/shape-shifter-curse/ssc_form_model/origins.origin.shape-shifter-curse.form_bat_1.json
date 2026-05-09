@@ -1,0 +1,19 @@
+{
+  "load_priority": 0,
+
+  "name": "shape-shifter-curse.form_axolotl_0.model_name",
+  "layer": "origins:origin",
+  "form": "shape-shifter-curse:form_axolotl_0",
+
+  "wide_only": true,
+
+  "model": "shape-shifter-curse:geo/form/form_bat_1.geo.json",
+  "texture": "shape-shifter-curse:textures/form/form_bat_1/form_bat_1.png",
+  "texture_mask": "shape-shifter-curse:textures/form/form_bat_1/form_bat_1_colormask.png",
+
+  "builtin_controller_data": {
+    "tail_chain": {
+      "tail": [0, 1, 2]
+    }
+  }
+}
