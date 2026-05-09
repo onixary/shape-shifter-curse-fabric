@@ -35,8 +35,6 @@ public class FormModel extends GeoModel<FormAnimatable> {
 
     public JsonObject modelJson;
 
-    public int ApplyPriority = 0;
-
     public String Name = "";  // 用于皮肤系统 先留一下API
     public Identifier Layer = null;  // 用于皮肤系统 先留一下API
     public Identifier Form = null;  // 用于皮肤系统 先留一下API
@@ -112,7 +110,6 @@ public class FormModel extends GeoModel<FormAnimatable> {
         this.ColorMask_Baked_EmissiveTexture.clear();
         this.ColorMask_Baked_EmissiveTexture_Slim.clear();
 
-        this.ApplyPriority = JsonHelper.getInt(this.modelJson, "apply_priority", 0);
         this.Name = JsonHelper.getString(this.modelJson, "name", "");
         if (this.modelJson.has("layer")) {
             this.Layer = Identifier.tryParse(JsonHelper.getString(this.modelJson, "layer", ""));

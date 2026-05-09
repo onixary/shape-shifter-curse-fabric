@@ -2,8 +2,10 @@ package net.onixary.shapeShifterCurseFabric.render.form_render;
 
 import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
@@ -36,6 +38,7 @@ public class FormRenderUtils {
     public static void onClientInit() {
         WorldRenderEvents.END.register(context -> isRenderingInWorld = false);
         WorldRenderEvents.START.register(context -> isRenderingInWorld = true);
+        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new FormModelResourceReloadListener());
     }
 
     public static Identifier register_MAS(Identifier id, Supplier<IModelAnimationSystem> supplier) {
@@ -51,6 +54,10 @@ public class FormRenderUtils {
             return system;
         }
         return null;
+    }
+
+    public static void registerFormRenderer(Identifier slotID, Identifier formID, FormRenderer renderer) {
+        formRendererRegistry.computeIfAbsent(slotID, k -> new HashMap<>()).put(formID, renderer);
     }
 
     public static @Nullable FormRenderer getFormRenderer(Identifier slotID, Identifier formID) {
