@@ -23,7 +23,7 @@ public class FormModelResourceReloadListener implements SimpleSynchronousResourc
         return ShapeShifterCurseFabric.identifier("ssc_form_model");
     }
 
-    private static final Identifier defaultLayer = Identifier.of("origins", "origin");
+    public static final Identifier defaultLayer = Identifier.of("origins", "origin");
 
     @Override
     public void reload(ResourceManager manager) {

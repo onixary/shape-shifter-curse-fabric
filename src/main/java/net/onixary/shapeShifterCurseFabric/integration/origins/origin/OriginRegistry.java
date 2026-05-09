@@ -1,7 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.integration.origins.origin;
 
 import net.minecraft.util.Identifier;
-import net.onixary.shapeShifterCurseFabric.player_form_render.OriginEvents;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +19,6 @@ public class OriginRegistry {
             throw new IllegalArgumentException("Duplicate origin id tried to register: '" + id.toString() + "'");
         }
         idToOrigin.put(id, origin);
-        OriginEvents.ORIGIN_REGISTRY_ADDED_EVENT.invoker().onOriginAddedToRegistry(origin,id);
         return origin;
     }
 
