@@ -80,6 +80,11 @@
   "item.minecraft.lingering_potion.effect.to_anubis_wolf_0_potion": ["滞留型胡狼咒文药水"],
   "item.minecraft.tipped_arrow.effect.to_anubis_wolf_0_potion": ["胡狼咒文之箭"],
   "effect.shape-shifter-curse.to_anubis_wolf_0_potion": ["某种暗色的灵体在其中游荡..有点不同寻常"],
+  "item.minecraft.potion.effect.to_spider_0_potion": ["蜘蛛咒文药水"],
+  "item.minecraft.splash_potion.effect.to_spider_0_potion": ["喷溅型蜘蛛咒文药水"],
+  "item.minecraft.lingering_potion.effect.to_spider_0_potion": ["滞留型蜘蛛咒文药水"],
+  "item.minecraft.tipped_arrow.effect.to_spider_0_potion": ["蜘蛛咒文之箭"],
+  "effect.shape-shifter-curse.to_spider_0_potion": ["它有一种柔和的丝绸质感"],
 
   "item.minecraft.potion.effect.feed_potion": ["压缩能量药水"],
   "item.minecraft.splash_potion.effect.feed_potion": ["喷溅型压缩能量药水"],
@@ -255,6 +260,13 @@
     "...奇怪的",
     {
       "text": "豹猫", "color": "#0096FF"
+    },
+    "?"
+  ],
+  "effect.shape-shifter-curse.to_spider_0_effecct": [
+    "...奇怪的",
+    {
+      "text": "蜘蛛", "color": "#0096FF"
     },
     "?"
   ],
