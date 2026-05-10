@@ -12,8 +12,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.ScaleMultilineTextWidget;
+import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.ScaleTextRenderer;
 import net.onixary.shapeShifterCurseFabric.data.CodexData;
-import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 import org.joml.Quaternionf;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;

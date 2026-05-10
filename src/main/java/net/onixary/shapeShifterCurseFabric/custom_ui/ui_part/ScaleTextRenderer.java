@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.custom_ui;
+package net.onixary.shapeShifterCurseFabric.custom_ui.ui_part;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
