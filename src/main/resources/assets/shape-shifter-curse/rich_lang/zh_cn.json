@@ -80,6 +80,11 @@
   "item.minecraft.lingering_potion.effect.to_anubis_wolf_0_potion": ["滞留型胡狼咒文药水"],
   "item.minecraft.tipped_arrow.effect.to_anubis_wolf_0_potion": ["胡狼咒文之箭"],
   "effect.shape-shifter-curse.to_anubis_wolf_0_potion": ["某种暗色的灵体在其中游荡..有点不同寻常"],
+  "item.minecraft.potion.effect.to_spider_0_potion": ["蜘蛛咒文药水"],
+  "item.minecraft.splash_potion.effect.to_spider_0_potion": ["喷溅型蜘蛛咒文药水"],
+  "item.minecraft.lingering_potion.effect.to_spider_0_potion": ["滞留型蜘蛛咒文药水"],
+  "item.minecraft.tipped_arrow.effect.to_spider_0_potion": ["蜘蛛咒文之箭"],
+  "effect.shape-shifter-curse.to_spider_0_potion": ["它有一种柔和的丝绸质感"],
 
   "item.minecraft.potion.effect.feed_potion": ["压缩能量药水"],
   "item.minecraft.splash_potion.effect.feed_potion": ["喷溅型压缩能量药水"],
@@ -255,6 +260,13 @@
     "...奇怪的",
     {
       "text": "豹猫", "color": "#0096FF"
+    },
+    "?"
+  ],
+  "effect.shape-shifter-curse.to_spider_0_effecct": [
+    "...奇怪的",
+    {
+      "text": "蜘蛛", "color": "#0096FF"
     },
     "?"
   ],
@@ -1016,8 +1028,8 @@
   "codex.form.shape-shifter-curse.feral_cat_sp.instincts": ["喵...."],
 
   "codex.form.shape-shifter-curse.spider_0.name": ["蜘蛛形态(0阶段)"],
-  "codex.form.shape-shifter-curse.spider_0.title": ["\n蜘蛛形态标题"],
-  "codex.form.shape-shifter-curse.spider_0.appearance": ["外观描述..."],
+  "codex.form.shape-shifter-curse.spider_0.title": ["\n诅咒对你的身体产生了一些可见的影响。一些几丁质的外壳开始覆盖在你的体表，液态的丝线开始从你新的后腹部分泌出来"],
+  "codex.form.shape-shifter-curse.spider_0.appearance": ["你的体表开始生长出来一些硬质外壳。它们由几丁质构成，轻巧而坚实\n液态的丝线从你新长出的后腹部分泌出来。你发现自己本能地知道如何编织压缩的丝线团，它们可以被投掷来阻碍你的目标，以及搭建可供攀援的网架\n你的躯干两侧与后腹根部分别长出了一对覆盖着外壳的突起。集中精神，你发现自己可以在某种程度上控制它们稍微移动\n\n与其他形态不同，你察觉到你的变化现在处于停滞状态——新的本能向你低语：你需要一些特殊的催化材料，一个安全的地方，以及一些时间来达成完全的蜕变"],
   "codex.form.shape-shifter-curse.spider_0.pros": ["你的身体现在可以产生高密度的丝线团——按住主要能力键蓄力并放开，你可以消耗蛛网值发射出蛛丝弹。根据蓄力程度产生不同的效果：\n\n命中方块的侧面或底面时，可以从命中点向下延伸出可供攀爬的不具粘性的桥梁蛛丝结构\n命中生物时，可以为其施加缓慢与虚弱效果\n\n你的身体不再会受到中毒影响\n你不会受到蛛网阻碍。你可以攀爬蛛网，并感知到陷入网中的实体"],
   "codex.form.shape-shifter-curse.spider_0.cons": ["你的消化系统正在朝着更适合节肢掠食者的方向变化，让你从非肉食的食物中获取的饱和度减少\n节肢杀手附魔的武器会对你造成更多伤害\n你的尾部长出的附肢突起让你无法穿戴腿甲"],
   "codex.form.shape-shifter-curse.spider_0.instincts": ["出于某种原因，你感受到你的形态受月之潮汐的影响较弱…诅咒之月与普通的催化剂无法对你当前的形态产生足够的影响\n",
@@ -1031,15 +1043,15 @@
     },"，之后寻觅一个安全且隐蔽的地方..."],
 
   "codex.form.shape-shifter-curse.spider_1.name": ["蜘蛛形态(1阶段)"],
-  "codex.form.shape-shifter-curse.spider_1.title": ["\n蜘蛛形态标题"],
-  "codex.form.shape-shifter-curse.spider_1.appearance": ["外观描述..."],
+  "codex.form.shape-shifter-curse.spider_1.title": ["\n一个不时颤动的巨大丝茧被包裹在网巢中"],
+  "codex.form.shape-shifter-curse.spider_1.appearance": ["在结露蛛网的催化下，你后腹部分泌出大量的丝线，编织为坚固的丝茧并将你完全包裹在其中\n你感觉四周非常潮湿，想要发出移动身体的指令，但是回应你的只有一片混沌…你是被浸泡在某种粘稠的流体中么？还是说你就是这些流体本身?\n\n你无法描述自己现在的感觉。唯一可以确定的是，在丝茧之中，你的身体正在发生着某种激烈的变化"],
   "codex.form.shape-shifter-curse.spider_1.pros": ["你不知道该如何感受自己现在的身体，唯有等待"],
   "codex.form.shape-shifter-curse.spider_1.cons": ["你不知道该如何感受自己现在的身体，唯有等待"],
   "codex.form.shape-shifter-curse.spider_1.instincts": ["被包裹在丝茧中，你唯一能做的事情只有在结露蛛网的环绕下等待蜕变完成"],
 
   "codex.form.shape-shifter-curse.spider_2.name": ["蜘蛛形态(2阶段)"],
-  "codex.form.shape-shifter-curse.spider_2.title": ["\n蜘蛛形态标题"],
-  "codex.form.shape-shifter-curse.spider_2.appearance": ["外观描述..."],
+  "codex.form.shape-shifter-curse.spider_2.title": ["\n作为蜕变后的节肢生物，你的身体虽然保持着与原本相似的外形，但其甲壳下的运作方式已经完全不同\n\n专属饰品/工具：[副手剑],[副手镐],[副手斧],[盾牌(额外手臂槽位)],[不死图腾(额外手臂槽位)],[流食囊(额外手臂槽位)],[箭毒纺锤]"],
+  "codex.form.shape-shifter-curse.spider_2.appearance": ["你的体表已经变化成了几丁质的外壳。它们替代了你原本的骨骼，支撑你如今分节的肢体的移动；浅色的硬质毛发从你的颈部、关节与肢体末端生长出来，它们一定程度上弥补了你如今因为被坚硬的外壳包覆而失去的触觉\n一对额外的眼睛从你原本双眼的上方生长出来，让你在黑暗处也能清晰视物；你的头部与下颌的附属物伸长为两对触肢，进一步增强了你的感官\n你身体两侧的突起生长为一对功能完备的额外手臂，它们的力量较弱，但是足以拿住工具，帮助你的冒险；同时，位于你前腹部与后腹部交界处的突起也成长为一对额外的后肢。但它们还不能支撑你的身体，只是贴附于你的后腹部，微微向上扬起\n你的身体不再渴望固体的食物，转而希望摄取猎物在体外消化后的营养流质。而编织用于这一目的的液化茧囊的方法也已经刻在了你的本能中\n\n与普通的蜘蛛不同的是，你进一步发育的后腹部并不用于容纳器官组织，而是用于存储液态丝线。得益于更加特化的纺丝器，你可以编织更高密度的压缩丝线团，它们甚至足以形成可供攀爬的丝塔"],
   "codex.form.shape-shifter-curse.spider_2.pros": ["按住主要能力键蓄力并放开，你可以消耗蛛网值发射出蛛丝弹。根据蓄力程度产生不同的效果：\n命中方块的侧面或底面时，向下延伸出可供攀爬的不具粘性的桥梁蛛丝结构\n另外，命中方块的顶面时，可以向上生成塔状桥梁蛛丝结构\n命中生物时，你可以为其施加缓慢与虚弱效果\n\n你拥有一双额外的手臂。通过在Trinkets的额外副手栏中装备不同的特殊装备，你可以获取相应的增益效果\n\n你可以食用线补充蛛网值。通过在背包中手持线并右键点击另一个线，你可以消耗少许蛛网值制造蛛网\n通过在背包中手持蛛网并右键点击堆肥桶，你可以消耗较多蛛网值制造液化茧囊——投入其中的肉类会被逐渐转化为你可以食用的流食囊\n\n你蜕变的蜘蛛身体给与了你免疫中毒以及自由攀爬方块侧壁的能力。额外的一对眼睛可以捕捉细微的光线，让你在黑暗中也能清晰视物\n你不会受到蛛网阻碍。你可以攀爬蛛网，并感知到陷入网中的实体\n蜘蛛不会将你看作敌人"],
   "codex.form.shape-shifter-curse.spider_2.cons": ["新长出的一对腿部附着在你的后腹部，它们的结构还不适合支撑身体，反而拖慢了你的行动\n虽然依旧可以从肉类中获取少许营养，但是你发现体外消化的流食囊才是更适合你的食物\n节肢杀手附魔的武器会对你造成更多伤害\n你甲壳质的体表与其附着的绒毛惧怕火焰，燃烧造成的伤害更多\n由于新的附肢的阻碍，你只能穿戴头盔与鞋\n村庄的铁傀儡将你视作敌人，它们会主动攻击你"],
   "codex.form.shape-shifter-curse.spider_2.instincts": ["在你的内心深处传来了某种微弱的悸动：你身上的变化还没有到达终点\n",
@@ -1047,8 +1059,8 @@
     "你不会真的在考虑这件事情吧？"],
 
   "codex.form.shape-shifter-curse.spider_3.name": ["蜘蛛形态(永久阶段)"],
-  "codex.form.shape-shifter-curse.spider_3.title": ["\n蜘蛛形态标题"],
-  "codex.form.shape-shifter-curse.spider_3.appearance": ["外观描述..."],
+  "codex.form.shape-shifter-curse.spider_3.title": ["\n对于洞穴探索者而言，当你看到蓝色蛛网结构的时候，最好就要小心了…当然，除非它的始作俑者是你的同伴\n\n专属饰品/工具：[副手剑],[副手镐],[副手斧],[盾牌(额外手臂槽位)],[不死图腾(额外手臂槽位)],[流食囊(额外手臂槽位)],[箭毒纺锤]"],
+  "codex.form.shape-shifter-curse.spider_3.appearance": ["你的身体已经完全蜕变为适合多足节肢生物的结构。为了支撑多余的重量，你的后足不再悬空，原本作为双腿的肢体也向前倾斜，形成更加稳定的四足姿态——相较于持续移动，它们更适合爆发性地向前推进\n你额外的一对手臂会在不使用时自然收起在躯干前部。你还没有完全适应它们的存在\n另外一对单眼从你的头部侧面生长出来，将你的视野范围扩展到周围的全景。它们让你即使在黑暗处也能够捕捉到四周最细微的骚动\n在颈部覆盖的硬质绒毛下方，你感受到自己的口部也已经变化为了不适合咀嚼的短管状结构。现在你只能从体外消化的流体营养中获取能量\n\n你更加膨大的后腹部中存储着大量的液态丝线。压缩的丝线团可以形成丝茧，高效缠住命中的目标。除此以外，你现在还可以直接从纺丝器喷出液态丝线，让其向你的前方迅速膨胀凝结为坚韧的海绵状“桥梁”\n借助它们，你可以轻松跨越复杂的地势，让你的目标无处可逃"],
   "codex.form.shape-shifter-curse.spider_3.pros": ["按住主要能力键蓄力并放开，你可以消耗蛛网值发射出蛛丝弹。根据蓄力程度产生不同的效果：\n命中方块的侧面或底面时，向下延伸出可供攀爬的不具粘性的桥梁蛛丝结构\n命中方块的顶面时，可以向上生成塔状桥梁蛛丝结构\n命中生物时，你可以为其施加缓慢、虚弱与“缠身”效果：当“缠身”持续积累时，其最终会变为“茧缚”，让生物完全裹在蛛丝茧中，无法行动\n使用近战攻击“茧缚”的生物，你可以补充一定蛛网值；在“茧缚”效果下死亡的生物可能会掉落流食囊。它们是你现在唯一的食物\n你所制造的蛛丝如今已经变得非常坚实。现在，按住备用能力键蓄力并放开，你可以消耗蛛网值向面向方向生成水平的蛛丝桥梁。其长宽会根据蓄力程度发生变化\n\n你拥有一双额外的手臂。通过在Trinkets的额外副手栏中装备不同的特殊装备，你可以获取相应的增益效果\n你可以食用线补充蛛网值。通过在背包中手持线并右键点击另一个线，你可以消耗少许蛛网值制造蛛网\n通过在背包中手持蛛网并右键点击堆肥桶，你可以消耗较多蛛网值制造液化茧囊——投入其中的肉类会被逐渐转化为你可以食用的流食囊\n你完全变化的多足蜘蛛身体给与了你夜视，免疫中毒以及跨越一格高度的能力，它也给了你自由攀爬方块侧壁的能力\n你不会受到蛛网阻碍。你可以攀爬蛛网，并感知到陷入网中的实体\n蜘蛛不会将你看作敌人"],
   "codex.form.shape-shifter-curse.spider_3.cons": ["你完全变化的多足蜘蛛身体不再适合需要耐力的持续动作。你的移动与疾跑速度都大幅减慢，并且不再能像之前那样竖直跳跃到一格的高度。但是作为替代，你可以在疾跑时向前跳跃突进\n你的蜘蛛消化系统让你只能从体外消化的流食囊中获取饥饿值。同时，节肢杀手附魔的武器会对你造成更多伤害\n你甲壳质的体表与其附着的绒毛惧怕火焰，燃烧造成的伤害更多\n除了头盔以外，你无法穿戴平常的护甲\n村庄的铁傀儡将你视作敌人，它们会主动攻击你"],
   "tooltip.shape_shifter_curse.morphscale_item": "塑形物品",
