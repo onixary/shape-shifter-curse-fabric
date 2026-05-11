@@ -11,12 +11,17 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.ScaleMultilineTextWidget;
+import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.ScaleScrollTextWidget;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.ScaleTextRenderer;
+import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.WidgetEXUtils;
 import net.onixary.shapeShifterCurseFabric.data.CodexData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
-public class BookOfShapeShifterScreenV2_P2 extends Screen {
+public class BookOfShapeShifterScreenV2_P2 extends Screen implements WidgetEXUtils.IWidgetEX {
     private static final Identifier page_texID = new Identifier(MOD_ID,"textures/gui/codex_page_2.png");
     public PlayerEntity currentPlayer;
     public static final int BookSizeX = 350;
@@ -45,14 +50,18 @@ public class BookOfShapeShifterScreenV2_P2 extends Screen {
         // Size -> (83, 181) Pos -> (13, 26)
         this.addDrawableChild(BuildDetailScreenButton(80, 12, 9, 9, CodexData.getContentText(CodexData.ContentType.PROS, currentPlayer)));
         this.addDrawableChild(new TextWidget(BookPosX + 26 * BookScale, BookPosY + 10 * BookScale, 53 * BookScale, 11 * BookScale, CodexData.headerPros, textRenderer).setTextColor(HeaderTextColor));
-        MultilineTextWidget Pros = new ScaleMultilineTextWidget(BookPosX + 13 * BookScale, BookPosY + 26 * BookScale, CodexData.getContentText(CodexData.ContentType.PROS, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(83 * BookScale).setTextColor(DefaultTextColor);
+        ScaleScrollTextWidget Pros = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 13 * BookScale, BookPosY + 26 * BookScale, 83 * BookScale, 20 * BookScale, Scale, CodexData.getContentText(CodexData.ContentType.PROS, currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
+        // ScaleScrollTextWidget Pros = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 13 * BookScale, BookPosY + 26 * BookScale, 83 * BookScale, 4 * BookScale, Scale, CodexData.getContentText(CodexData.ContentType.PROS, currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
+        this.addWidget(Pros);
         this.addDrawableChild(Pros);
         // Cons
         // D -> (9, 9), (185, 12)
         // Size -> (82, 182) Pos -> (110, 26)
         this.addDrawableChild(BuildDetailScreenButton(185, 12, 9, 9, CodexData.getContentText(CodexData.ContentType.CONS, currentPlayer)));
         this.addDrawableChild(new TextWidget(BookPosX + 120 * BookScale, BookPosY + 10 * BookScale, 63 * BookScale, 11 * BookScale, CodexData.headerCons, textRenderer).setTextColor(HeaderTextColor));
-        MultilineTextWidget Cons = new ScaleMultilineTextWidget(BookPosX + 110 * BookScale, BookPosY + 26 * BookScale, CodexData.getContentText(CodexData.ContentType.CONS, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(82 * BookScale).setTextColor(DefaultTextColor);
+        ScaleScrollTextWidget Cons = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 110 * BookScale, BookPosY + 26 * BookScale, 82 * BookScale, 20 * BookScale, Scale, CodexData.getContentText(CodexData.ContentType.CONS, currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
+        // ScaleScrollTextWidget Cons = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 110 * BookScale, BookPosY + 26 * BookScale, 82 * BookScale, 4 * BookScale, Scale, CodexData.getContentText(CodexData.ContentType.CONS, currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
+        this.addWidget(Cons);
         this.addDrawableChild(Cons);
         // Instincts
         // D -> (9, 9), (308, 13)
@@ -62,7 +71,9 @@ public class BookOfShapeShifterScreenV2_P2 extends Screen {
         // 在 BookOfShapeShifterScreen 未上色
         MultilineTextWidget InstinctsDesc = new ScaleMultilineTextWidget(BookPosX + 220 * BookScale, BookPosY + 24 * BookScale, CodexData.getDescText(CodexData.ContentType.INSTINCTS, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(106 * BookScale);
         this.addDrawableChild(InstinctsDesc);
-        MultilineTextWidget Instincts = new ScaleMultilineTextWidget(BookPosX + 220 * BookScale, BookPosY + 24 * BookScale + InstinctsDesc.getHeight() + Math.round(9 * Scale), CodexData.getContentText(CodexData.ContentType.INSTINCTS, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(106 * BookScale).setTextColor(DefaultTextColor);
+        int InstinctsDescHeight = InstinctsDesc.getHeight();
+        ScaleScrollTextWidget Instincts = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 220 * BookScale, BookPosY + 24 * BookScale + InstinctsDescHeight + Math.round(9 * Scale), 106 * BookScale, ((112 - (BookPosY * BookScale + InstinctsDescHeight)) / 9 + 1) * BookScale, Scale, CodexData.getContentText(CodexData.ContentType.INSTINCTS, currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
+        this.addWidget(Instincts);
         this.addDrawableChild(Instincts);
         // 下一页按钮
         int NextPage_ButtonSizeX = 15 * BookScale;
@@ -117,5 +128,40 @@ public class BookOfShapeShifterScreenV2_P2 extends Screen {
     @Override
     public boolean shouldPause() {
         return false;
+    }
+
+    @Override
+    public WidgetEXUtils.WidgetRect getRect() {
+        return null;
+    }
+
+    public List<WidgetEXUtils.IWidgetEX> WidgetList = new ArrayList<>();
+
+    @Override
+    public List<WidgetEXUtils.IWidgetEX> getWidgetList() {
+        return this.WidgetList;
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        this.onClickWidget(mouseX, mouseY, button);
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        this.onReleaseWidget(mouseX, mouseY, button);
+        return super.mouseReleased(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
+        this.onDragWidget(mouseX, mouseY, button, deltaX, deltaY);
+        return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
+    }
+
+    public boolean mouseScrolled(double mouseX, double mouseY, double mouseZ) {
+        this.onScrollWidget(mouseX, mouseY, mouseZ);
+        return super.mouseScrolled(mouseX, mouseY, mouseZ);
     }
 }

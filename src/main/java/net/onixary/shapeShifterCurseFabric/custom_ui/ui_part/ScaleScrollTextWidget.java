@@ -5,16 +5,20 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.MultilineTextWidget;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.Text;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 import java.util.List;
 import java.util.Objects;
 
-public class ScaleScrollTextWidget extends MultilineTextWidget {
+public class ScaleScrollTextWidget extends MultilineTextWidget implements WidgetEXUtils.IWidgetEX {
     private final float Scale;
     private boolean shadow;
 
     private int MaxWidth;
     private int MaxRows;
+
+    private final List<WidgetEXUtils.IWidgetEX> widgetList = List.of();
+    private final WidgetEXUtils.WidgetRect rect;
 
     private boolean scrollable = false;
     private List<OrderedText> texts;
@@ -24,23 +28,52 @@ public class ScaleScrollTextWidget extends MultilineTextWidget {
     public ScaleScrollTextWidget(int x, int y, int width, int maxRow, float Scale, Text message, TextRenderer textRenderer) {
         super(x, y, message, textRenderer);
         this.Scale = Scale;
+        this.rect = new WidgetEXUtils.WidgetRect(x, y, width, maxRow * 9);
         this.setMaxWidth(width);
         this.setMaxRows(maxRow);
         this.calculateText();
     }
 
     @Override
-    public void onDrag(double mouseX, double mouseY, double deltaX, double deltaY) {
-        super.onDrag(mouseX, mouseY, deltaX, deltaY);
-        // TODO 完成onDrag
+    public WidgetEXUtils.WidgetRect getRect() {
+        return this.rect;
     }
 
-    public void onScroll(double mouseX, double mouseY, double amount) {
-        // TODO 完成onScroll(需要在Screen里挂载)
+    @Override
+    public List<WidgetEXUtils.IWidgetEX> getWidgetList() {
+        return this.widgetList;
+    }
+
+
+    private double deltaYTotal = 0;
+    private double scrollZTotal = 0;
+
+    @Override
+    public void onDragWidget(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
+        deltaYTotal += deltaY;
+        if (deltaYTotal > 9 || deltaYTotal < -9) {
+            int amount = (int) (deltaYTotal / 9);
+            deltaYTotal -= amount * 9;
+            this.scroll(-amount);
+        }
+    }
+
+    @Override
+    public void onScrollWidget(double mouseX, double mouseY, double mouseZ) {
+        scrollZTotal += mouseZ;
+        if (scrollZTotal > 0.5f || scrollZTotal < -0.5f) {
+            int amount = (int) (scrollZTotal * 2);
+            scrollZTotal -= amount * 0.5f;
+            this.scroll(-amount);
+        }
     }
 
     private void calculateCurrentText() {
-        this.currentTexts = this.texts.subList(this.scroll, this.scroll + this.MaxRows);
+        if (this.texts.size() < this.scroll + this.MaxRows) {
+            this.currentTexts = this.texts.subList(this.scroll, this.texts.size());
+        } else {
+            this.currentTexts = this.texts.subList(this.scroll, this.scroll + this.MaxRows);
+        }
     }
 
     private void calculateText() {
@@ -51,8 +84,9 @@ public class ScaleScrollTextWidget extends MultilineTextWidget {
         this.calculateCurrentText();
     }
 
-    public boolean shadow() {
-        return this.shadow;
+    public ScaleScrollTextWidget shadow(boolean shadow) {
+        this.shadow = shadow;
+        return this;
     }
 
     public void reloadText(Text message) {
@@ -63,11 +97,11 @@ public class ScaleScrollTextWidget extends MultilineTextWidget {
 
     public void scroll(int amount) {
         this.scroll += amount;
-        if (this.scroll < 0) {
-            this.scroll = 0;
-        }
         if (this.scroll > this.texts.size() - this.MaxRows) {
             this.scroll = this.texts.size() - this.MaxRows;
+        }
+        if (this.scroll < 0) {
+            this.scroll = 0;
         }
         this.calculateCurrentText();
     }
