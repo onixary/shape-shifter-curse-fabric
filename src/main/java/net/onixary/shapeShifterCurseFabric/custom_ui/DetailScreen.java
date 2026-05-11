@@ -5,8 +5,14 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.MultilineTextWidget;
 import net.minecraft.text.Text;
+import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.ScaleMultilineTextWidget;
+import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.ScaleScrollTextWidget;
+import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.WidgetEXUtils;
 
-public class DetailScreen extends Screen {
+import java.util.ArrayList;
+import java.util.List;
+
+public class DetailScreen extends Screen implements WidgetEXUtils.IWidgetEX {
     private final Screen PreviousScreen;
     private final Text DetailText;
 
@@ -22,7 +28,8 @@ public class DetailScreen extends Screen {
         int TextSizeX = width - TextX * 2;
         int TextSizeY = height - 60;
         int TextDefaultColor = 0xFFFFFF;
-        MultilineTextWidget DetailTextWidget = new MultilineTextWidget(TextX, TextY, DetailText, textRenderer).setMaxWidth(TextSizeX).setMaxRows(TextSizeY).setTextColor(TextDefaultColor);
+        ScaleScrollTextWidget DetailTextWidget = (ScaleScrollTextWidget) new ScaleScrollTextWidget(TextX, TextY, TextSizeX, TextSizeY / 9, 1.0f, DetailText, textRenderer).setTextColor(TextDefaultColor);
+        this.addWidget(DetailTextWidget);
         this.addDrawableChild(DetailTextWidget);
         int ButtonX = width - 30;
         int ButtonY = 10;
@@ -46,5 +53,41 @@ public class DetailScreen extends Screen {
     @Override
     public boolean shouldPause() {
         return false;
+    }
+
+    @Override
+    public WidgetEXUtils.WidgetRect getRect() {
+        return null;
+    }
+
+    public List<WidgetEXUtils.IWidgetEX> WidgetList = new ArrayList<>();
+
+    @Override
+    public List<WidgetEXUtils.IWidgetEX> getWidgetList() {
+        return this.WidgetList;
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        this.onClickWidget(mouseX, mouseY, button);
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        this.onReleaseWidget(mouseX, mouseY, button);
+        return super.mouseReleased(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
+        this.onDragWidget(mouseX, mouseY, button, deltaX, deltaY);
+        return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double mouseZ) {
+        this.onScrollWidget(mouseX, mouseY, mouseZ);
+        return super.mouseScrolled(mouseX, mouseY, mouseZ);
     }
 }

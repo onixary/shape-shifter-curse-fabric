@@ -198,6 +198,7 @@ public class BookOfShapeShifterScreenV2_P1 extends Screen implements WidgetEXUti
         return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
     }
 
+    @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double mouseZ) {
         this.onScrollWidget(mouseX, mouseY, mouseZ);
         return super.mouseScrolled(mouseX, mouseY, mouseZ);
