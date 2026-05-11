@@ -1,6 +1,5 @@
-package net.onixary.shapeShifterCurseFabric.custom_ui;
+package net.onixary.shapeShifterCurseFabric.custom_ui.ui_part;
 
-import io.wispforest.owo.ui.component.LabelComponent;
 import net.minecraft.client.font.MultilineText;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;

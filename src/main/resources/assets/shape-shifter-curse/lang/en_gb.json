@@ -441,5 +441,6 @@
     "text.autoconfig.shape-shifter-curse-client.option.itemStorePowerPosOffsetY": "Item Store Power Position Y Offset",
     "message.shape-shifter-curse.select_form_ui.target_name": "Target: %s",
     "message.shape-shifter-curse.select_form_ui.target_uuid": "[ %s ]",
+    "trinket.slot.hand.extra_hand": "Extra Hand",
     "curios.identifier.extra_hand": "Extra Hand"
 }
