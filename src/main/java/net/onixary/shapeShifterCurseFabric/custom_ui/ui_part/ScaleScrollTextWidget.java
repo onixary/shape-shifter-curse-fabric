@@ -17,10 +17,11 @@ public class ScaleScrollTextWidget extends MultilineTextWidget implements Widget
     private int MaxWidth;
     private int MaxRows;
 
+    private boolean textDone = false;
+
     private final List<WidgetEXUtils.IWidgetEX> widgetList = List.of();
     private final WidgetEXUtils.WidgetRect rect;
 
-    private boolean scrollable = false;
     private List<OrderedText> texts;
     private List<OrderedText> currentTexts;
     private int scroll = 0;
@@ -77,11 +78,13 @@ public class ScaleScrollTextWidget extends MultilineTextWidget implements Widget
     }
 
     private void calculateText() {
-        this.texts = this.getTextRenderer().wrapLines(this.getMessage(), this.getWidth());
-        if (this.texts.size() > this.MaxRows) {
-            this.scrollable = true;
+        try {
+            this.texts = this.getTextRenderer().wrapLines(this.getMessage(), this.getWidth());
+            this.calculateCurrentText();
+            this.textDone = true;
+        } catch (Exception e) {
+            ShapeShifterCurseFabric.LOGGER.error("Error while calculating text", e);
         }
-        this.calculateCurrentText();
     }
 
     public ScaleScrollTextWidget shadow(boolean shadow) {
@@ -91,11 +94,15 @@ public class ScaleScrollTextWidget extends MultilineTextWidget implements Widget
 
     public void reloadText(Text message) {
         this.setMessage(message);
+        this.textDone = false;
         this.calculateText();
         this.scroll = 0;
     }
 
     public void scroll(int amount) {
+        if (!this.textDone) {
+            this.calculateText();
+        }
         this.scroll += amount;
         if (this.scroll > this.texts.size() - this.MaxRows) {
             this.scroll = this.texts.size() - this.MaxRows;
@@ -164,6 +171,9 @@ public class ScaleScrollTextWidget extends MultilineTextWidget implements Widget
 
     @Override
     public void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
+        if (!this.textDone) {
+            this.calculateText();
+        }
         int i = this.getX();
         int j = this.getY();
         Objects.requireNonNull(this.getTextRenderer());
