@@ -5,6 +5,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.MultilineTextWidget;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 import java.util.List;
@@ -14,17 +15,26 @@ public class ScaleScrollTextWidget extends MultilineTextWidget implements Widget
     private final float Scale;
     private boolean shadow;
 
+
+    private int realWidth;
+    private int realHeight;
     private int MaxWidth;
     private int MaxRows;
 
     private boolean textDone = false;
 
     private final List<WidgetEXUtils.IWidgetEX> widgetList = List.of();
-    private final WidgetEXUtils.WidgetRect rect;
+    private WidgetEXUtils.WidgetRect rect;
 
     private List<OrderedText> texts;
     private List<OrderedText> currentTexts;
-    private int scroll = 0;
+
+    public boolean enableScrollableIconRender = false;
+    public int IconSize = 8;
+    public Identifier IconTexID = ShapeShifterCurseFabric.identifier("textures/gui/scrollable_icon.png");
+
+    public int textsLineCount = 0;
+    public int scroll = 0;
 
     public ScaleScrollTextWidget(int x, int y, int width, int maxRow, float Scale, Text message, TextRenderer textRenderer) {
         super(x, y, message, textRenderer);
@@ -50,7 +60,22 @@ public class ScaleScrollTextWidget extends MultilineTextWidget implements Widget
     private double scrollZTotal = 0;
 
     @Override
+    public void onClickWidget(double mouseX, double mouseY, int button) {
+        if (this.enableScrollableIconRender) {
+            if (mouseX >= this.realWidth - IconSize && mouseX <= this.realWidth && mouseY >= 0 && mouseY < IconSize) {
+                this.scroll(-this.MaxRows);
+            }
+            if (mouseX >= this.realWidth - IconSize && mouseX <= this.realWidth && mouseY >= this.realHeight - IconSize && mouseY < this.realHeight) {
+                this.scroll(this.MaxRows);
+            }
+        }
+    }
+
+    @Override
     public void onDragWidget(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
+        if (this.enableScrollableIconRender && mouseX >= this.realWidth) {
+            return;
+        }
         deltaYTotal += deltaY;
         if (deltaYTotal > 9 || deltaYTotal < -9) {
             int amount = (int) (deltaYTotal / 9);
@@ -61,6 +86,9 @@ public class ScaleScrollTextWidget extends MultilineTextWidget implements Widget
 
     @Override
     public void onScrollWidget(double mouseX, double mouseY, double mouseZ) {
+        if (this.enableScrollableIconRender && mouseX >= this.realWidth) {
+            return;
+        }
         scrollZTotal += mouseZ;
         if (scrollZTotal > 0.5f || scrollZTotal < -0.5f) {
             int amount = (int) (scrollZTotal * 2);
@@ -80,6 +108,7 @@ public class ScaleScrollTextWidget extends MultilineTextWidget implements Widget
     private void calculateText() {
         try {
             this.texts = this.getTextRenderer().wrapLines(this.getMessage(), this.getWidth());
+            this.textsLineCount = this.texts.size();
             this.calculateCurrentText();
             this.textDone = true;
         } catch (Exception e) {
@@ -92,11 +121,28 @@ public class ScaleScrollTextWidget extends MultilineTextWidget implements Widget
         return this;
     }
 
-    public void reloadText(Text message) {
-        this.setMessage(message);
+    public ScaleScrollTextWidget setEnableScrollableIconRender(boolean enableScrollableIconRender) {
+        if (this.enableScrollableIconRender != enableScrollableIconRender) {
+            if (enableScrollableIconRender) {
+                this.modMaxWidth(-IconSize);
+            } else {
+                this.modMaxWidth(0);
+            }
+            this.enableScrollableIconRender = enableScrollableIconRender;
+            this.reloadText();
+        }
+        return this;
+    }
+
+    public void reloadText() {
         this.textDone = false;
         this.calculateText();
         this.scroll = 0;
+    }
+
+    public void reloadText(Text message) {
+        this.setMessage(message);
+        this.reloadText();
     }
 
     public void scroll(int amount) {
@@ -113,15 +159,24 @@ public class ScaleScrollTextWidget extends MultilineTextWidget implements Widget
         this.calculateCurrentText();
     }
 
+    public int modMaxWidth = 0;
+
+    public void modMaxWidth(int value) {
+        this.modMaxWidth = value;
+        super.setMaxWidth(this.MaxWidth + this.modMaxWidth);
+    }
+
     @Override
     public MultilineTextWidget setMaxWidth(int maxWidth) {
+        this.realWidth = maxWidth;
         this.MaxWidth = Math.round(maxWidth * (1 / this.Scale));
-        super.setMaxWidth(this.MaxWidth);
+        super.setMaxWidth(this.MaxWidth + this.modMaxWidth);
         return this;
     }
 
     @Override
     public MultilineTextWidget setMaxRows(int maxRows) {
+        this.realHeight = maxRows * 9;
         this.MaxRows = Math.round(maxRows * (1 / this.Scale));
         super.setMaxRows(this.MaxRows);
         return this;
@@ -176,6 +231,14 @@ public class ScaleScrollTextWidget extends MultilineTextWidget implements Widget
         }
         int i = this.getX();
         int j = this.getY();
+        if (this.enableScrollableIconRender) {
+            if (this.scroll > 0) {
+                context.drawTexture(IconTexID, i + realWidth - IconSize, j, 0, 0, IconSize, IconSize, IconSize, IconSize * 2);
+            }
+            if (this.scroll < this.texts.size() - this.MaxRows) {
+                context.drawTexture(IconTexID, i + realWidth - IconSize, j + realHeight - IconSize, 0, IconSize, IconSize, IconSize, IconSize, IconSize * 2);
+            }
+        }
         Objects.requireNonNull(this.getTextRenderer());
         int k = Math.round(9 * this.Scale);
         int l = this.getTextColor();

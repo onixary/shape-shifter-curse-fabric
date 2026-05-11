@@ -52,6 +52,7 @@ public class BookOfShapeShifterScreenV2_P2 extends Screen implements WidgetEXUti
         this.addDrawableChild(new TextWidget(BookPosX + 26 * BookScale, BookPosY + 10 * BookScale, 53 * BookScale, 11 * BookScale, CodexData.headerPros, textRenderer).setTextColor(HeaderTextColor));
         ScaleScrollTextWidget Pros = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 13 * BookScale, BookPosY + 26 * BookScale, 83 * BookScale, 20 * BookScale, Scale, CodexData.getContentText(CodexData.ContentType.PROS, currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
         // ScaleScrollTextWidget Pros = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 13 * BookScale, BookPosY + 26 * BookScale, 83 * BookScale, 4 * BookScale, Scale, CodexData.getContentText(CodexData.ContentType.PROS, currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
+        Pros.setEnableScrollableIconRender(true);
         this.addWidget(Pros);
         this.addDrawableChild(Pros);
         // Cons
@@ -61,6 +62,7 @@ public class BookOfShapeShifterScreenV2_P2 extends Screen implements WidgetEXUti
         this.addDrawableChild(new TextWidget(BookPosX + 120 * BookScale, BookPosY + 10 * BookScale, 63 * BookScale, 11 * BookScale, CodexData.headerCons, textRenderer).setTextColor(HeaderTextColor));
         ScaleScrollTextWidget Cons = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 110 * BookScale, BookPosY + 26 * BookScale, 82 * BookScale, 20 * BookScale, Scale, CodexData.getContentText(CodexData.ContentType.CONS, currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
         // ScaleScrollTextWidget Cons = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 110 * BookScale, BookPosY + 26 * BookScale, 82 * BookScale, 4 * BookScale, Scale, CodexData.getContentText(CodexData.ContentType.CONS, currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
+        Cons.setEnableScrollableIconRender(true);
         this.addWidget(Cons);
         this.addDrawableChild(Cons);
         // Instincts
@@ -73,6 +75,7 @@ public class BookOfShapeShifterScreenV2_P2 extends Screen implements WidgetEXUti
         this.addDrawableChild(InstinctsDesc);
         int InstinctsDescHeight = InstinctsDesc.getHeight();
         ScaleScrollTextWidget Instincts = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 220 * BookScale, BookPosY + 24 * BookScale + InstinctsDescHeight + Math.round(9 * Scale), 106 * BookScale, ((112 - (BookPosY * BookScale + InstinctsDescHeight)) / 9 + 1) * BookScale, Scale, CodexData.getContentText(CodexData.ContentType.INSTINCTS, currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
+        Instincts.setEnableScrollableIconRender(true);
         this.addWidget(Instincts);
         this.addDrawableChild(Instincts);
         // 下一页按钮
