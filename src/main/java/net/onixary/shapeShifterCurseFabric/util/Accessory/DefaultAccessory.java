@@ -16,7 +16,7 @@ public class DefaultAccessory {
         AccessoryUtils.registerAccessoryMod("trinkets", new AccessoryUtils.AccessoryIO() {
             @Override
             public int priority() {
-                return 1000000;
+                return 1000;
             }
 
             @Override
@@ -106,7 +106,7 @@ public class DefaultAccessory {
         AccessoryUtils.registerAccessoryMod("curios", new AccessoryUtils.AccessoryIO() {
             @Override
             public int priority() {
-                return 1000;
+                return 2000;
             }
 
             @Override

@@ -115,13 +115,13 @@
     ],
     "ssc-accessory-priority": {
       "trinkets": {
-        "priority": 1000000,
+        "priority": 1000,
         "depends": [
           "trinkets"
         ]
       },
       "curios": {
-        "priority": 1000,
+        "priority": 2000,
         "depends": [
           "curios"
         ]
