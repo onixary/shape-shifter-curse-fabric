@@ -17,8 +17,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryItem;
-import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryUtils;
-import net.onixary.shapeShifterCurseFabric.items.accessory.CurioUtils;
+import net.onixary.shapeShifterCurseFabric.util.Accessory.AccessoryUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.jetbrains.annotations.Nullable;
 
@@ -257,28 +256,26 @@ public class TrinketUtils {
 
     public static List<Pair<AccessoryItem.SlotData, ItemStack>> getAllAccessory(PlayerEntity player) {
         List<Pair<AccessoryItem.SlotData, ItemStack>> allAccessory = new ArrayList<>();
-        if (AccessoryUtils.LOADED_Trinkets) {
-            Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
-            if (!component.isEmpty()) {
-                // 因为 foreach 会生成lambda函数 由于SlotReference为Trinket的类 生成匿名函数会带上这个类 会炸 所以用for循环
-                for (Pair<SlotReference, ItemStack> accessoryPair : component.get().getAllEquipped()) {
-                    SlotReference slot = accessoryPair.getLeft();
-                    ItemStack stack = accessoryPair.getRight();
-                    SlotType slotType = slot.inventory().getSlotType();
-                    AccessoryItem.SlotData data = new AccessoryItem.SlotData(new Identifier("trinkets", "%s/%s".formatted(slotType.getGroup(), slotType.getName())), slot.index());
-                    allAccessory.add(new Pair<>(data, stack));
-                }
-            }
-        } else if (AccessoryUtils.LOADED_Curios) {
-            Map<String, List<ItemStack>> allSlots = CurioUtils.getEntitySlots(player);
-            for (Map.Entry<String, List<ItemStack>> entry : allSlots.entrySet()) {
-                String slotName = entry.getKey();
-                List<ItemStack> stacks = entry.getValue();
-                int Index = 0;
-                for (ItemStack stack : stacks) {
-                    AccessoryItem.SlotData data = new AccessoryItem.SlotData(new Identifier("curios", slotName), Index);
-                    allAccessory.add(new Pair<>(data, stack));
-                    Index++;
+
+        for (Map.Entry<String, AccessoryUtils.AccessoryIO> accessoryReg : AccessoryUtils.activeAccessoryModInterfaces.entrySet()) {
+            String ioName = accessoryReg.getKey();
+            AccessoryUtils.AccessoryIO accessoryIO = accessoryReg.getValue();
+            @Nullable Map<Pair<@Nullable String, String>, List<ItemStack>> allSlots = accessoryIO.getEntitySlots(player);
+            if (allSlots != null) {
+                for (Map.Entry<Pair<@Nullable String, String>, List<ItemStack>> entry : allSlots.entrySet()) {
+                    Pair<@Nullable String, String> slotPair = entry.getKey();
+                    List<ItemStack> stacks = entry.getValue();
+                    int Index = 0;
+                    for (ItemStack stack : stacks) {
+                        AccessoryItem.SlotData data = null;
+                        if (slotPair.getLeft() == null) {
+                            data = new AccessoryItem.SlotData(new Identifier(ioName, slotPair.getRight()), Index);
+                        } else {
+                            data = new AccessoryItem.SlotData(new Identifier(ioName, "%s/%s".formatted(slotPair.getLeft(), slotPair.getRight())), Index);
+                        }
+                        allAccessory.add(new Pair<>(data, stack));
+                        Index++;
+                    }
                 }
             }
         }

@@ -1,8 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import dev.emi.trinkets.api.TrinketComponent;
-import dev.emi.trinkets.api.TrinketInventory;
-import dev.emi.trinkets.api.TrinketsApi;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
@@ -11,14 +8,11 @@ import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryUtils;
-import net.onixary.shapeShifterCurseFabric.items.accessory.CurioUtils;
+import net.onixary.shapeShifterCurseFabric.util.Accessory.AccessoryUtils;
 import net.onixary.shapeShifterCurseFabric.render.tech.ItemStorePowerRender;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Map;
-import java.util.Optional;
-
-import static net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryUtils.calcAutoMod;
+import java.util.List;
 
 public class RenderTrinketsSlotPower extends Power implements ItemStorePowerRender.itemStorePowerRenderInterface {
     private final String accessoryMod;
@@ -43,35 +37,14 @@ public class RenderTrinketsSlotPower extends Power implements ItemStorePowerRend
 
     @Override
     public ItemStack getStack() {
-        switch (accessoryMod) {
-            case "trinkets":
-                if (AccessoryUtils.LOADED_Trinkets) {
-                    Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(this.entity);
-                    if (component.isEmpty()) {
-                        return ItemStack.EMPTY;
-                    }
-                    Map<String, TrinketInventory> groupInv = component.get().getInventory().get(TGroup);
-                    if (groupInv == null) {
-                        return ItemStack.EMPTY;
-                    }
-                    TrinketInventory inv = groupInv.get(TSlot);
-                    if (inv == null) {
-                        return ItemStack.EMPTY;
-                    }
-                    return inv.getStack(TSlotIndex);
-                }
-                return ItemStack.EMPTY;
-            case "curios":
-                if (AccessoryUtils.LOADED_Curios) {
-                    return CurioUtils.getEntitySlot(this.entity, TSlot).get(TSlotIndex);
-                }
-                return ItemStack.EMPTY;
-            case "none":
-                return ItemStack.EMPTY;
-            default:
-                ShapeShifterCurseFabric.LOGGER.error("[render_accessory_slot] accessory_mod is not valid");
-                return ItemStack.EMPTY;
+        @Nullable List<ItemStack> items = AccessoryUtils.getEntitySlot(this.entity, this.accessoryMod, this.TGroup, this.TSlot);
+        if (items == null) {
+            return ItemStack.EMPTY;
         }
+        if (this.TSlotIndex < 0 || this.TSlotIndex >= items.size()) {
+            return ItemStack.EMPTY;
+        }
+        return items.get(this.TSlotIndex);
     }
 
     @Override
@@ -83,12 +56,12 @@ public class RenderTrinketsSlotPower extends Power implements ItemStorePowerRend
         return new PowerFactory<>(
                 ShapeShifterCurseFabric.identifier("render_accessory_slot"),
                 new SerializableData()
-                        .add("accessory_mod", SerializableDataTypes.STRING, "trinkets")
+                        .add("accessory_mod", SerializableDataTypes.STRING, "auto")
                         .add("accessory_group", SerializableDataTypes.STRING, "")
                         .add("accessory_slot", SerializableDataTypes.STRING, "")
                         .add("accessory_slot_index", SerializableDataTypes.INT, 0)
                         .add("slot", SerializableDataTypes.INT, 0),
-                data -> (type, entity) -> new RenderTrinketsSlotPower(type, entity, calcAutoMod(data.getString("accessory_mod")), data.getInt("slot"), data.getString("accessory_group"), data.getString("accessory_slot"), data.getInt("accessory_slot_index"))
+                data -> (type, entity) -> new RenderTrinketsSlotPower(type, entity, data.getString("accessory_mod"), data.getInt("slot"), data.getString("accessory_group"), data.getString("accessory_slot"), data.getInt("accessory_slot_index"))
         ).allowCondition();
     }
 }
