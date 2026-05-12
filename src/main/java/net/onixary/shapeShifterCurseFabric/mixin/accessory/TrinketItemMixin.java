@@ -55,24 +55,21 @@ public class TrinketItemMixin {
     private final Map<String, ItemStack> lastEquippedTrinkets = new HashMap();
 
     @Unique
-    public boolean CanAutoExecute(Identifier ItemID) {
-        return TrinketUtils.getAccessoryMixinAuto(ItemID);
-    }
-
+    private final String pluginID = "trinkets";
 
     @Unique
     public void onEquip(ItemStack stack, SlotReference slot, PlayerEntity player) {
         Identifier ItemID = Registries.ITEM.getId(stack.getItem());
-        if (CanAutoExecute(ItemID)) {
-            AccessoryUtils.onPlayerEquip(player, ItemID);
+        if (AccessoryUtils.CanAutoExecute(ItemID, pluginID)) {
+            AccessoryUtils.onPlayerEquip(player, ItemID, pluginID);
         }
     }
 
     @Unique
     public void onUnequip(ItemStack stack, SlotReference slot, PlayerEntity player) {
         Identifier ItemID = Registries.ITEM.getId(stack.getItem());
-        if (CanAutoExecute(ItemID)) {
-            AccessoryUtils.onPlayerUnEquip(player, ItemID);
+        if (AccessoryUtils.CanAutoExecute(ItemID, pluginID)) {
+            AccessoryUtils.onPlayerUnEquip(player, ItemID, pluginID);
         }
     }
 
