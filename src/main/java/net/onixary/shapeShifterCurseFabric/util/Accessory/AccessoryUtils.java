@@ -26,7 +26,9 @@ public class AccessoryUtils {
 
         public Map<Pair<@Nullable String, String>, List<ItemStack>> getEntitySlots(LivingEntity entity);
 
-        public List<ItemStack> getEntitySlot(LivingEntity entity, @Nullable String SlotGroup, String SlotName);
+        public List<@Nullable ItemStack> getEntitySlot(LivingEntity entity, @Nullable String SlotGroup, String SlotName);
+
+        public @Nullable ItemStack getEntitySlot(LivingEntity entity, @Nullable String SlotGroup, String SlotName, int Index);
 
         public void setEntitySlot(LivingEntity entity, @Nullable String SlotGroup, String SlotName, int Index, ItemStack stack);
     }
@@ -93,6 +95,20 @@ public class AccessoryUtils {
         }
         if (accessoryModInterfaces.containsKey(accessoryModID)) {
             return accessoryModInterfaces.get(accessoryModID).getEntitySlot(entity, SlotGroup, SlotName);
+        }
+        ShapeShifterCurseFabric.LOGGER.warn("Can't find Accessory Mod: " + accessoryModID);
+        return null;
+    }
+
+    public static @Nullable ItemStack getEntitySlot(LivingEntity entity, @Nullable String accessoryModID, String SlotGroup, String SlotName, int Index) {
+        if (nowAccessoryMod == null) {
+            return null;
+        }
+        if (accessoryModID == null || accessoryModID.equals("auto")) {
+            return nowAccessoryMod.getEntitySlot(entity, SlotGroup, SlotName, Index);
+        }
+        if (accessoryModInterfaces.containsKey(accessoryModID)) {
+            return accessoryModInterfaces.get(accessoryModID).getEntitySlot(entity, SlotGroup, SlotName, Index);
         }
         ShapeShifterCurseFabric.LOGGER.warn("Can't find Accessory Mod: " + accessoryModID);
         return null;

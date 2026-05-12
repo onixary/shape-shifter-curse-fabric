@@ -68,6 +68,25 @@ public class DefaultAccessory {
             }
 
             @Override
+            public @Nullable ItemStack getEntitySlot(LivingEntity entity, @Nullable String SlotGroup, String SlotName, int Index) {
+                if (SlotGroup == null) {
+                    return null;
+                }
+                Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(entity);
+                if (component.isEmpty()) {
+                    return null;
+                }
+                Map<String, Map<String, TrinketInventory>> invMap = component.get().getInventory();
+                if (invMap.containsKey(SlotGroup) && invMap.get(SlotGroup).containsKey(SlotName)) {
+                    TrinketInventory inventory = invMap.get(SlotGroup).get(SlotName);
+                    if (Index >= 0 && Index < inventory.size()) {
+                        return inventory.getStack(Index);
+                    }
+                }
+                return null;
+            }
+
+            @Override
             public void setEntitySlot(LivingEntity entity, @Nullable String SlotGroup, String SlotName, int Index, ItemStack stack) {
                 if (SlotGroup == null) {
                     return;
@@ -108,6 +127,15 @@ public class DefaultAccessory {
             @Override
             public List<ItemStack> getEntitySlot(LivingEntity entity, @Nullable String SlotGroup, String SlotName) {
                 return CurioUtils.getEntitySlot(entity, SlotName);
+            }
+
+            @Override
+            public @Nullable ItemStack getEntitySlot(LivingEntity entity, @Nullable String SlotGroup, String SlotName, int Index) {
+                List<ItemStack> ItemList = CurioUtils.getEntitySlot(entity, SlotName);
+                if (Index >= 0 && Index < ItemList.size()) {
+                    return ItemList.get(Index);
+                }
+                return null;
             }
 
             @Override

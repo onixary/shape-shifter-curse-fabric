@@ -11,14 +11,10 @@ import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.item.HeldItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.RotationAxis;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.additional_power.TrinketsConditionAction;
-import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryUtils;
-import net.onixary.shapeShifterCurseFabric.items.accessory.CurioUtils;
+import net.onixary.shapeShifterCurseFabric.util.Accessory.AccessoryUtils;
 
 import java.util.Map;
 import java.util.Optional;
@@ -29,30 +25,11 @@ public class SpiderTPEHR extends ThirdPersonExtraHandItemRender.TPEHR_Render {
 
     @Override
     public void render(HeldItemRenderer heldItemRenderer, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        ItemStack stack = ItemStack.EMPTY;
-        if (AccessoryUtils.LOADED_Trinkets) {
-            Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
-            if (component.isEmpty()) {
-                return;
-            }
-            Map<String, TrinketInventory> groupInv = component.get().getInventory().get(GROUP_STRING);
-            if (groupInv == null) {
-                return;
-            }
-            TrinketInventory inv = groupInv.get(INV_STRING);
-            if (inv == null) {
-                return;
-            }
-            stack = inv.getStack(0);
-            if (stack.isEmpty()) {
-                return;
-            }
-        } else if (AccessoryUtils.LOADED_Curios) {
-            stack = CurioUtils.getEntitySlot(player, "extra_hand").get(0);
-            if (stack.isEmpty()) {
-                return;
-            }
+        ItemStack stack = AccessoryUtils.getEntitySlot(player, "auto", GROUP_STRING, INV_STRING, 0);
+        if (stack == null || stack.isEmpty()) {
+            return;
         }
+
         PlayerEntityRenderer eR = (PlayerEntityRenderer) MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(player);
         ModelPart body = eR.getModel().body;
         body.rotate(matrices);
