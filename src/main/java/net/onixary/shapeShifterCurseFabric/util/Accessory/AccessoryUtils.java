@@ -68,6 +68,13 @@ public class AccessoryUtils {
         }
     }
 
+    public static void onStartServer() {
+        if (nowAccessoryMod == null) {
+            // 可能有其他的兼容方法 所以不会强制弹RuntimeException
+            ShapeShifterCurseFabric.LOGGER.warn("Can't find any active Accessory IO. Accessory features may not work");
+        }
+    }
+
     public static Map<String, AccessoryIO> accessoryModInterfaces = new HashMap<>();
     public static Map<String, AccessoryIO> activeAccessoryModInterfaces = new HashMap<>();
     public static AccessoryIO nowAccessoryMod = null;
