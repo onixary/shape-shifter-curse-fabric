@@ -267,6 +267,9 @@ public class TrinketUtils {
                     List<ItemStack> stacks = entry.getValue();
                     int Index = 0;
                     for (ItemStack stack : stacks) {
+                        if (stack.getItem() instanceof AccessoryItem && accessoryIO != AccessoryUtils.nowAccessoryMod) {
+                            continue;
+                        }
                         AccessoryItem.SlotData data = null;
                         if (slotPair.getLeft() == null) {
                             data = new AccessoryItem.SlotData(new Identifier(ioName, slotPair.getRight()), Index);

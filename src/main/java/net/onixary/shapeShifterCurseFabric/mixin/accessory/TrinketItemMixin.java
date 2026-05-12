@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.util.Accessory.AccessoryUtils;
 import net.onixary.shapeShifterCurseFabric.util.TrinketUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -63,7 +64,7 @@ public class TrinketItemMixin {
     public void onEquip(ItemStack stack, SlotReference slot, PlayerEntity player) {
         Identifier ItemID = Registries.ITEM.getId(stack.getItem());
         if (CanAutoExecute(ItemID)) {
-            TrinketUtils.ApplyAccessoryPowerOnEquip(player, ItemID);
+            AccessoryUtils.onPlayerEquip(player, ItemID);
         }
     }
 
@@ -71,7 +72,7 @@ public class TrinketItemMixin {
     public void onUnequip(ItemStack stack, SlotReference slot, PlayerEntity player) {
         Identifier ItemID = Registries.ITEM.getId(stack.getItem());
         if (CanAutoExecute(ItemID)) {
-            TrinketUtils.ApplyAccessoryPowerOnUnEquip(player, ItemID);
+            AccessoryUtils.onPlayerUnEquip(player, ItemID);
         }
     }
 

@@ -112,7 +112,21 @@
       "shape-shifter-curse:skin_settings",
       "shape-shifter-curse:player_minion_data",
       "shape-shifter-curse:mana"
-    ]
+    ],
+    "ssc-accessory-priority": {
+      "trinkets": {
+        "priority": 1000000,
+        "depends": [
+          "trinkets"
+        ]
+      },
+      "curios": {
+        "priority": 1000,
+        "depends": [
+          "curios"
+        ]
+      }
+    }
   },
 
   "depends": {

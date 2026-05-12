@@ -1,17 +1,25 @@
 package net.onixary.shapeShifterCurseFabric.mixin.plugin;
 
 import net.fabricmc.loader.api.FabricLoader;
+import net.onixary.shapeShifterCurseFabric.util.Accessory.AccessoryPriorityUtils;
 import org.objectweb.asm.tree.ClassNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class MixinConfigPlugin implements IMixinConfigPlugin {
+    public static final Logger LOGGER = LoggerFactory.getLogger("shape-shifter-curse-mixin");
+
     private record MixinRequiredMods(String[] value, String[] not) { }
     private static final HashMap<String, MixinRequiredMods> mixinRequiredMods = new HashMap<>();
+
+    private static final HashMap<String, String> mixinAccessoryMixin = new HashMap<>();
 
     static {
         mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.PlayerEntityRendererFallFlyingMixin", new MixinRequiredMods(new String[]{}, new String[]{"vivecraft"}));
@@ -20,9 +28,15 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
         mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.integration.TacZ_AnimThird", new MixinRequiredMods(new String[]{"tacz"}, new String[]{}));
         mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.accessory.TrinketImpl", new MixinRequiredMods(new String[]{"trinkets"}, new String[]{}));
         mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.accessory.TrinketItemMixin", new MixinRequiredMods(new String[]{"trinkets"}, new String[]{}));
-        mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.forge.CurioImpl", new MixinRequiredMods(new String[]{"curios"}, new String[]{"trinkets"}));
-        mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.forge.CurioItemImpl", new MixinRequiredMods(new String[]{"curios"}, new String[]{"trinkets"}));
-        mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.forge.CurioUtilsImpl", new MixinRequiredMods(new String[]{"curios"}, new String[]{"trinkets"}));
+        mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.forge.CurioImpl", new MixinRequiredMods(new String[]{"curios"}, new String[]{}));
+        mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.forge.CurioItemImpl", new MixinRequiredMods(new String[]{"curios"}, new String[]{}));
+        mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.forge.CurioUtilsImpl", new MixinRequiredMods(new String[]{"curios"}, new String[]{}));
+
+        mixinAccessoryMixin.put("net.onixary.shapeShifterCurseFabric.mixin.accessory.TrinketImpl", "trinkets");
+        mixinAccessoryMixin.put("net.onixary.shapeShifterCurseFabric.mixin.accessory.TrinketItemMixin", "trinkets");
+        mixinAccessoryMixin.put("net.onixary.shapeShifterCurseFabric.mixin.forge.CurioImpl", "curios");
+        mixinAccessoryMixin.put("net.onixary.shapeShifterCurseFabric.mixin.forge.CurioItemImpl", "curios");
+        mixinAccessoryMixin.put("net.onixary.shapeShifterCurseFabric.mixin.forge.CurioUtilsImpl", "curios");
     }
 
     @Override
@@ -52,15 +66,21 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
             MixinRequiredMods requiredMods = mixinRequiredMods.get(mixinClassName);
             for (String mod : requiredMods.value) {
                 if (!FabricLoader.getInstance().isModLoaded(mod)) {
-                    System.out.println("[ShapeShifterCurse] " + mod + " not detected, skipping " + mixinClassName);
+                    LOGGER.info("{} not detected, skipping {}", mod, mixinClassName);
                     return false; // 完全跳过这个 mixin
                 }
             }
             for (String mod : requiredMods.not) {
                 if (FabricLoader.getInstance().isModLoaded(mod)) {
-                    System.out.println("[ShapeShifterCurse] " + mod + " detected, skipping " + mixinClassName);
+                    LOGGER.info("{} detected, skipping {}", mod, mixinClassName);
                     return false; // 完全跳过这个 mixin
                 }
+            }
+        }
+        if (mixinAccessoryMixin.containsKey(mixinClassName)) {
+            if (!Objects.equals(AccessoryPriorityUtils.getHighestPriorityPlugin(), mixinAccessoryMixin.get(mixinClassName))) {
+                LOGGER.info("{} is highest priority, skipping {}", AccessoryPriorityUtils.getHighestPriorityPlugin(), mixinClassName);
+                return false;
             }
         }
         return true;
