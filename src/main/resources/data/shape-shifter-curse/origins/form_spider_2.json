@@ -25,7 +25,11 @@
     "shape-shifter-curse:form_spider_2_meat_and_fluid_cocoon_only",
     "shape-shifter-curse:form_spider_3_poison_immunity",
     "shape-shifter-curse:form_spider_3_make_cobweb",
-    "shape-shifter-curse:form_spider_3_make_web_composter"
+    "shape-shifter-curse:form_spider_3_make_web_composter",
+
+    "shape-shifter-curse:form_spider_sound",
+    "shape-shifter-curse:form_spider_sound_hurt",
+    "shape-shifter-curse:form_spider_sound_key"
   ],
   "icon": {
     "item": "minecraft:player_head"
