@@ -36,7 +36,7 @@
         "shape-shifter-curse:form_spider_sound",
         "shape-shifter-curse:form_spider_sound_hurt",
         "shape-shifter-curse:form_spider_sound_key",
-        "shape-shifter-curse:form_spider_sound_walk"
+        "shape-shifter-curse:form_spider_3_step_sound_speed_up"
     ],
     "icon": {
         "item": "minecraft:player_head"

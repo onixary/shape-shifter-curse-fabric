@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.additional_power.BypassesLandingEffectsPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.BypassesSteppingEffectsPower;
+import net.onixary.shapeShifterCurseFabric.additional_power.ModifyFootstepSoundSpeedPower;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -30,6 +31,17 @@ public class EntityMixin {
             int powerCount = PowerHolderComponent.getPowers(player, BypassesLandingEffectsPower.class).size();
             if (powerCount > 0) {
                 cir.setReturnValue(true);
+            }
+        }
+    }
+
+    @Inject(method = "calculateNextStepSoundDistance", at = @At("RETURN"), cancellable = true)
+    private void modifyFootstepSoundDistance(CallbackInfoReturnable<Float> cir) {
+        if ((Object)this instanceof PlayerEntity player) {
+            var powers = PowerHolderComponent.getPowers(player, ModifyFootstepSoundSpeedPower.class);
+            if (!powers.isEmpty()) {
+                float multiplier = powers.get(0).getSpeedMultiplier();
+                cir.setReturnValue(((Entity) (Object) this).distanceTraveled + (1.0f / multiplier));
             }
         }
     }
