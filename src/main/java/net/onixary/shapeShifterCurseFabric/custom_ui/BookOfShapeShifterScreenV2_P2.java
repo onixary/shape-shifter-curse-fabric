@@ -74,7 +74,7 @@ public class BookOfShapeShifterScreenV2_P2 extends Screen implements WidgetEXUti
         MultilineTextWidget InstinctsDesc = new ScaleMultilineTextWidget(BookPosX + 220 * BookScale, BookPosY + 24 * BookScale, CodexData.getDescText(CodexData.ContentType.INSTINCTS, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(106 * BookScale);
         this.addDrawableChild(InstinctsDesc);
         int InstinctsDescHeight = InstinctsDesc.getHeight();
-        ScaleScrollTextWidget Instincts = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 220 * BookScale, BookPosY + 24 * BookScale + InstinctsDescHeight + Math.round(9 * Scale), 106 * BookScale, ((112 - (BookPosY * BookScale + InstinctsDescHeight)) / 9 + 1) * BookScale, Scale, CodexData.getContentText(CodexData.ContentType.INSTINCTS, currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
+        ScaleScrollTextWidget Instincts = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 220 * BookScale, BookPosY + 24 * BookScale + InstinctsDescHeight + Math.round(9 * Scale), 106 * BookScale, ((112 - InstinctsDescHeight) / 9 + 1) * BookScale, Scale, CodexData.getContentText(CodexData.ContentType.INSTINCTS, currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
         Instincts.setEnableScrollableIconRender(true);
         this.addWidget(Instincts);
         this.addDrawableChild(Instincts);
