@@ -31,7 +31,12 @@
         "shape-shifter-curse:form_spider_3_extra_slot_render",
         "shape-shifter-curse:form_spider_3_make_web_composter",
         "shape-shifter-curse:form_spider_3_mana_attack_cocooned_enemy",
-        "shape-shifter-curse:form_spider_3_auto_feed"
+        "shape-shifter-curse:form_spider_3_auto_feed",
+
+        "shape-shifter-curse:form_spider_sound",
+        "shape-shifter-curse:form_spider_sound_hurt",
+        "shape-shifter-curse:form_spider_sound_key",
+        "shape-shifter-curse:form_spider_sound_walk"
     ],
     "icon": {
         "item": "minecraft:player_head"
