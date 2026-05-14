@@ -8,6 +8,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,8 +27,8 @@ public class ScaleScrollTextWidget extends MultilineTextWidget implements Widget
     private final List<WidgetEXUtils.IWidgetEX> widgetList = List.of();
     private WidgetEXUtils.WidgetRect rect;
 
-    private List<OrderedText> texts;
-    private List<OrderedText> currentTexts;
+    private List<OrderedText> texts = new ArrayList<>();
+    private List<OrderedText> currentTexts = new ArrayList<>();
 
     public boolean enableScrollableIconRender = false;
     public int IconSize = 8;
@@ -40,6 +41,8 @@ public class ScaleScrollTextWidget extends MultilineTextWidget implements Widget
         super(x, y, message, textRenderer);
         this.Scale = Scale;
         this.rect = new WidgetEXUtils.WidgetRect(x, y, width, maxRow * 9);
+        assert width > 0;
+        assert maxRow > 0;
         this.setMaxWidth(width);
         this.setMaxRows(maxRow);
         this.calculateText();
@@ -107,7 +110,7 @@ public class ScaleScrollTextWidget extends MultilineTextWidget implements Widget
 
     private void calculateText() {
         try {
-            this.texts = this.getTextRenderer().wrapLines(this.getMessage(), this.getWidth());
+            this.texts = this.getTextRenderer().wrapLines(this.getMessage(), this.getTextWidth());
             this.textsLineCount = this.texts.size();
             this.calculateCurrentText();
             this.textDone = true;
@@ -184,7 +187,11 @@ public class ScaleScrollTextWidget extends MultilineTextWidget implements Widget
 
     @Override
     public int getWidth() {
-        return (int) (super.getWidth() * this.Scale);
+        return (int) ((this.MaxWidth + this.modMaxWidth) * this.Scale);
+    }
+
+    public int getTextWidth() {
+        return (int) (this.MaxWidth + this.modMaxWidth);
     }
 
     @Override
