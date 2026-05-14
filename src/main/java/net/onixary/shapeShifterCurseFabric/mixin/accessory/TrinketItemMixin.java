@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.util.Accessory.AccessoryUtils;
 import net.onixary.shapeShifterCurseFabric.util.TrinketUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -54,24 +55,21 @@ public class TrinketItemMixin {
     private final Map<String, ItemStack> lastEquippedTrinkets = new HashMap();
 
     @Unique
-    public boolean CanAutoExecute(Identifier ItemID) {
-        return TrinketUtils.getAccessoryMixinAuto(ItemID);
-    }
-
+    private final String pluginID = "trinkets";
 
     @Unique
     public void onEquip(ItemStack stack, SlotReference slot, PlayerEntity player) {
         Identifier ItemID = Registries.ITEM.getId(stack.getItem());
-        if (CanAutoExecute(ItemID)) {
-            TrinketUtils.ApplyAccessoryPowerOnEquip(player, ItemID);
+        if (AccessoryUtils.CanAutoExecute(ItemID, pluginID)) {
+            AccessoryUtils.onPlayerEquip(player, ItemID, pluginID);
         }
     }
 
     @Unique
     public void onUnequip(ItemStack stack, SlotReference slot, PlayerEntity player) {
         Identifier ItemID = Registries.ITEM.getId(stack.getItem());
-        if (CanAutoExecute(ItemID)) {
-            TrinketUtils.ApplyAccessoryPowerOnUnEquip(player, ItemID);
+        if (AccessoryUtils.CanAutoExecute(ItemID, pluginID)) {
+            AccessoryUtils.onPlayerUnEquip(player, ItemID, pluginID);
         }
     }
 

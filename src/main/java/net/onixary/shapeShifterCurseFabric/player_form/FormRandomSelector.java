@@ -22,7 +22,7 @@ public class FormRandomSelector {
 
     // 省的每回添加形态后还得在这里的List中添加形态 上回就忘加了
     public static @NotNull PlayerFormBase getRandomForm_CurseMoon() {
-        PlayerFormBase randomForm = getRandomForm(form -> (form.getPhase() == PlayerFormPhase.PHASE_0 && !form.getIsCustomForm()));
+        PlayerFormBase randomForm = getRandomForm(form -> (form.getPhase() == PlayerFormPhase.PHASE_0 && !form.getIsCustomForm() && !form.getIgnoreCursedMoon()));
         if (randomForm == null) {
             throw new IllegalStateException("No forms available");  // 这只有Bug才会触发 代表形态系统重构没改这里 还是Throw出来比较好
         }

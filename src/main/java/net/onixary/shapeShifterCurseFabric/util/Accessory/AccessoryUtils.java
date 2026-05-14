@@ -3,9 +3,11 @@ package net.onixary.shapeShifterCurseFabric.util.Accessory;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryItem;
 import net.onixary.shapeShifterCurseFabric.util.TrinketUtils;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,15 +35,21 @@ public class AccessoryUtils {
         public void setEntitySlot(LivingEntity entity, @Nullable String SlotGroup, String SlotName, int Index, ItemStack stack);
     }
 
-    public static void onPlayerEquip(PlayerEntity player, Identifier itemID) {
+    public static void onPlayerEquip(PlayerEntity player, Identifier itemID, String pluginID) {
+        if (Registries.ITEM.get(itemID) instanceof AccessoryItem && !nowAccessoryModID.equals(pluginID)) {
+            return;
+        }
         TrinketUtils.ApplyAccessoryPowerOnEquip(player, itemID);
     }
 
-    public static void onPlayerUnEquip(PlayerEntity player, Identifier itemID) {
+    public static void onPlayerUnEquip(PlayerEntity player, Identifier itemID, String pluginID) {
+        if (Registries.ITEM.get(itemID) instanceof AccessoryItem && !nowAccessoryModID.equals(pluginID)) {
+            return;
+        }
         TrinketUtils.ApplyAccessoryPowerOnUnEquip(player, itemID);
     }
 
-    public static boolean CanAutoExecute(Identifier itemID) {
+    public static boolean CanAutoExecute(Identifier itemID, String pluginID) {
         return TrinketUtils.getAccessoryMixinAuto(itemID);
     }
 
@@ -50,6 +58,7 @@ public class AccessoryUtils {
     }
 
     public static void reCalcAccessoryMod() {
+        nowAccessoryModID = "";
         nowAccessoryMod = null;
         activeAccessoryModInterfaces.clear();
         if (accessoryModInterfaces.isEmpty()) {
@@ -60,11 +69,19 @@ public class AccessoryUtils {
             if (entry.getValue().canLoaded()) {
                 list.add(new Pair<>(entry.getValue(), entry.getValue().priority()));
                 activeAccessoryModInterfaces.put(entry.getKey(), entry.getValue());
+            } else {
+                ShapeShifterCurseFabric.LOGGER.warn("Accessory Mod: " + entry.getKey() + " can't loaded");
             }
         }
-        list.sort((o1, o2) -> o1.getRight() - o2.getRight());
+        list.sort((o1, o2) -> o2.getRight() - o1.getRight());
         if (!list.isEmpty()) {
             nowAccessoryMod = list.get(0).getLeft();
+        }
+        for (Map.Entry<String, AccessoryIO> entry : accessoryModInterfaces.entrySet()) {
+            if (entry.getValue() == nowAccessoryMod) {
+                nowAccessoryModID = entry.getKey();
+                ShapeShifterCurseFabric.LOGGER.info("Active Accessory IO: " + entry.getKey());
+            }
         }
     }
 
@@ -77,6 +94,7 @@ public class AccessoryUtils {
 
     public static Map<String, AccessoryIO> accessoryModInterfaces = new HashMap<>();
     public static Map<String, AccessoryIO> activeAccessoryModInterfaces = new HashMap<>();
+    public static String nowAccessoryModID = "";
     public static AccessoryIO nowAccessoryMod = null;
 
     public static @Nullable Map<Pair<@Nullable String, String>, List<ItemStack>> getEntitySlots(LivingEntity entity, @Nullable String accessoryModID) {
