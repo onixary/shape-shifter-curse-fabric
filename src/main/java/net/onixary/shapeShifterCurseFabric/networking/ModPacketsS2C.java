@@ -287,12 +287,19 @@ public class ModPacketsS2C {
         // 还原FPM设置 或许可以通过注入式修改配置来减少此类Bug 比如在FPM读取offset时修改返回值
         TransformManager.executeClientFirstPersonReset();
         new Thread(() -> {
-            // 延时5s, 等待服务器component加载完成
-            try {
-                Thread.sleep(5000);
-                sendUpdateCustomSetting();
-            } catch (Exception e) {
-                ShapeShifterCurseFabric.LOGGER.error("Error while sending custom setting to server", e);
+            // 延时5s, 等待服务器component加载完成 重复12次 共计1min
+            boolean success = false;
+            for (int i = 0; i < 12; i++) {
+                try {
+                    Thread.sleep(5000);
+                    sendUpdateCustomSetting();
+                    success = true;
+                } catch (Exception e) {
+                    ShapeShifterCurseFabric.LOGGER.warn("Error while sending custom setting to server, retrying after 5 second", e);
+                }
+            }
+            if (!success) {
+                ShapeShifterCurseFabric.LOGGER.error("Failed to send custom setting to server after 60 seconds");
             }
         }).start();
     }
