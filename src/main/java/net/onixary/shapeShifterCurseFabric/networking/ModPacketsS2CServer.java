@@ -271,4 +271,10 @@ public class ModPacketsS2CServer {
                 }
         );
     }
+
+    public static void sendNoJumpTick(ServerPlayerEntity player, int tick) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeInt(tick);
+        ServerPlayNetworking.send(player, ModPackets.SET_NO_JUMP_TICK, buf);
+    }
 }
