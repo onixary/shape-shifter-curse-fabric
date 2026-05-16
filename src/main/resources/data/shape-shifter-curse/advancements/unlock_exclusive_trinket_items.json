@@ -1,0 +1,36 @@
+{
+  "parent": "shape-shifter-curse:on_enable_mod",
+  "criteria": {
+    "has_untreated_moon_dust": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["shape-shifter-curse:moondust_crystal_shard"]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "recipes": [
+      "shape-shifter-curse:amulet_bracelet",
+      "shape-shifter-curse:attach_hook",
+      "shape-shifter-curse:auxiliary_axe",
+      "shape-shifter-curse:auxiliary_pickaxe",
+      "shape-shifter-curse:auxiliary_sword",
+      "shape-shifter-curse:bottled_snowfall",
+      "shape-shifter-curse:charm_of_hollow_fang",
+      "shape-shifter-curse:charm_of_night_crystal",
+      "shape-shifter-curse:charm_of_reverse_thermometer",
+      "shape-shifter-curse:collar_of_tension",
+      "shape-shifter-curse:collar_of_whiskers",
+      "shape-shifter-curse:diamond_mining_claw",
+      "shape-shifter-curse:digestion_fiber_ball",
+      "shape-shifter-curse:fountain_belt",
+      "shape-shifter-curse:frost_pawglove",
+      "shape-shifter-curse:venom_spindle",
+      "shape-shifter-curse:withered_bandage"
+    ]
+  }
+}
