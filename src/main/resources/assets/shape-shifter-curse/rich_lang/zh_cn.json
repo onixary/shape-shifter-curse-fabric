@@ -445,7 +445,9 @@
     "你的力量难以应对亡灵生物，让你对它们的直接伤害下降\n\n",
     "你更难从素食中吸收养分，它们提供的饱和度进一步减少\n",
     "普通的腿甲与鞋不再适合你新的身体结构，你无法装备它们"],
-  "codex.form.shape-shifter-curse.anubis_wolf_2.instincts": [" "],
+  "codex.form.shape-shifter-curse.anubis_wolf_2.instincts": ["在你的内心深处传来了某种微弱的悸动：你身上的变化还没有到达终点\n",
+    "一剂共鸣催化剂可以让你的变化抵达下一个阶段…但这一过程很可能是永久性的\n",
+    "你不会真的在考虑这件事情吧？"],
 
   "codex.form.shape-shifter-curse.anubis_wolf_3.name" : ["胡狼形态(永久阶段)"],
   "codex.form.shape-shifter-curse.anubis_wolf_3.title": ["\n你与族群的灵魂紧密无间地交织在一起，带领复生的族群延续下去是你的使命",
