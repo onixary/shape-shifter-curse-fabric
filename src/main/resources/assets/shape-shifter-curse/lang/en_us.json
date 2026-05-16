@@ -200,6 +200,7 @@
     "info.shape-shifter-curse.origin_form_used_catalyst": "The catalyst agitates your magic, which eventually settles. It seems they need clearer direction...",
     "info.shape-shifter-curse.origin_form_used_catalyst_attached": "The catalyst activated the curse's magic, altering your body...",
     "info.shape-shifter-curse.use_catalyst": "The catalyst further excites the magic within...",
+    "info.shape-shifter-curse.use_catalyst_when_ignore": "Your current form is less influenced by the lunar tides，normal catalyst seems won't have any effect...",
     "info.shape-shifter-curse.max_form_used_catalyst": "Your current form is so thoroughly altered that normal catalysts won't have any effect..",
     "info.shape-shifter-curse.max_form_used_powerful_catalyst": "Under the effect of the powerful catalyst, permanent changes have taken root in your body...",
     "info.shape-shifter-curse.form_used_powerful_catalyst_failed": " The powerful catalyst has no effect on your current form",

@@ -27,6 +27,7 @@ public class PlayerFormBase {
     private boolean CanRushJump = false;
     private boolean IsCustomForm = false;
     private boolean IgnoreCursedMoon = false;
+    private boolean IgnoreCatalyst = false;
 
     private boolean IsRegisteredPowerAnim = false;
 
@@ -132,6 +133,15 @@ public class PlayerFormBase {
 
     public PlayerFormBase setIgnoreCursedMoon(boolean ignoreCursedMoon) {
         IgnoreCursedMoon = ignoreCursedMoon;
+        return this;
+    }
+
+    public boolean getIgnoreCatalyst() {
+        return IgnoreCatalyst;
+    }
+
+    public PlayerFormBase setIgnoreCatalyst(boolean ignoreCatalyst) {
+        IgnoreCatalyst = ignoreCatalyst;
         return this;
     }
 

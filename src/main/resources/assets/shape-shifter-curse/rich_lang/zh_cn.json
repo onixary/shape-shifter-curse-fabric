@@ -224,6 +224,7 @@
   "info.shape-shifter-curse.origin_form_used_catalyst": ["受到催化剂的影响，你体内的魔法有些动荡不安，不过最后依然恢复了平静。似乎它们缺少一个更加明确的倾向...？"],
   "info.shape-shifter-curse.origin_form_used_catalyst_attached": ["你所受到的咒文效果被催化剂所活化，让你的身体发生了变化..."],
   "info.shape-shifter-curse.use_catalyst": ["你体内的魔法被催化剂进一步激化了..."],
+  "info.shape-shifter-curse.use_catalyst_when_ignore" : ["你当前的形态受月之潮汐的影响较弱，普通的催化剂似乎无法产生作用..."],
   "info.shape-shifter-curse.max_form_used_catalyst": ["你当前的形态被改变的如此彻底，普通的催化剂难以产生进一步的效果.."],
   "info.shape-shifter-curse.max_form_used_powerful_catalyst": ["在强效催化剂的影响下，你的形态发生了永久性的变化..."],
   "info.shape-shifter-curse.form_used_powerful_catalyst_failed": ["强效催化剂对你目前的形态没有作用"],

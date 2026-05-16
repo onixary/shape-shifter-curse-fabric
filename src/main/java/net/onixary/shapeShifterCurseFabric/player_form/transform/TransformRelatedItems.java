@@ -175,14 +175,30 @@ public class TransformRelatedItems {
                 break;
             case 0:
                 //toForm = PlayerForms.getFormsByGroup(currentFormGroup)[1];
-                player.sendMessage(Text.translatable("info.shape-shifter-curse.use_catalyst").formatted(Formatting.YELLOW));
+                if(currentForm.getIgnoreCatalyst()){
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.use_catalyst_when_ignore").formatted(Formatting.DARK_PURPLE));
+                }
+                else{
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.use_catalyst").formatted(Formatting.YELLOW));
+                }
                 break;
             case 1:
                 //toForm = PlayerForms.getFormsByGroup(currentFormGroup)[2];
-                player.sendMessage(Text.translatable("info.shape-shifter-curse.use_catalyst").formatted(Formatting.YELLOW));
+                if(currentForm.getIgnoreCatalyst()){
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.use_catalyst_when_ignore").formatted(Formatting.DARK_PURPLE));
+                }
+                else{
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.use_catalyst").formatted(Formatting.YELLOW));
+                }
                 break;
             case 2:
-                player.sendMessage(Text.translatable("info.shape-shifter-curse.max_form_used_catalyst").formatted(Formatting.YELLOW));
+                if(currentForm.getIgnoreCatalyst()){
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.use_catalyst_when_ignore").formatted(Formatting.DARK_PURPLE));
+                }
+                else{
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.max_form_used_catalyst").formatted(Formatting.YELLOW));
+                }
+
                 break;
             case 5:
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.sp_form_used_catalyst").formatted(Formatting.YELLOW));
