@@ -122,7 +122,25 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final OnTriggerCursedMoon ON_TRIGGER_CURSED_MOON = Criteria.register(new OnTriggerCursedMoon());
     public static final OnTriggerCursedMoonForm2 ON_TRIGGER_CURSED_MOON_FORM_2 = Criteria.register(new OnTriggerCursedMoonForm2());
     public static final OnFirstJoinWithMod ON_FIRST_JOIN_WITH_MOD = Criteria.register(new OnFirstJoinWithMod());
-    public static final OnEndCursedMoonBuggedForm2 ON_END_CURSED_MOON_BUGGED_FORM_2 = Criteria.register(new OnEndCursedMoonBuggedForm2());
+    public static final OnTransform3 ON_TRANSFORM_3 = Criteria.register(new OnTransform3());
+    public static final OnTransformSP ON_TRANSFORM_SP = Criteria.register(new OnTransformSP());
+    public static final OnFirstTransformEnableFormList ON_FIRST_TRANSFORM_ENABLE_FORM_LIST = Criteria.register(new OnFirstTransformEnableFormList());
+    public static final OnTransformAxolotl0 ON_TRANSFORM_AXOLOTL_0 = Criteria.register(new OnTransformAxolotl0());
+    public static final OnTransformAxolotl3 ON_TRANSFORM_AXOLOTL_3 = Criteria.register(new OnTransformAxolotl3());
+    public static final OnTransformBat0 ON_TRANSFORM_BAT_0 = Criteria.register(new OnTransformBat0());
+    public static final OnTransformBat3 ON_TRANSFORM_BAT_3 = Criteria.register(new OnTransformBat3());
+    public static final OnTransformOcelot0 ON_TRANSFORM_OCELOT_0 = Criteria.register(new OnTransformOcelot0());
+    public static final OnTransformOcelot3 ON_TRANSFORM_OCELOT_3 = Criteria.register(new OnTransformOcelot3());
+    public static final OnTransformFamiliarFox0 ON_TRANSFORM_FAMILIAR_FOX_0 = Criteria.register(new OnTransformFamiliarFox0());
+    public static final OnTransformFamiliarFox3 ON_TRANSFORM_FAMILIAR_FOX_3 = Criteria.register(new OnTransformFamiliarFox3());
+    public static final OnTransformSnowFox0 ON_TRANSFORM_SNOW_FOX_0 = Criteria.register(new OnTransformSnowFox0());
+    public static final OnTransformSnowFox3 ON_TRANSFORM_SNOW_FOX_3 = Criteria.register(new OnTransformSnowFox3());
+    public static final OnTransformAnubisWolf0 ON_TRANSFORM_ANUBIS_WOLF_0 = Criteria.register(new OnTransformAnubisWolf0());
+    public static final OnTransformAnubisWolf3 ON_TRANSFORM_ANUBIS_WOLF_3 = Criteria.register(new OnTransformAnubisWolf3());
+    public static final OnTransformSpider0 ON_TRANSFORM_SPIDER_0 = Criteria.register(new OnTransformSpider0());
+    public static final OnTransformSpider3 ON_TRANSFORM_SPIDER_3 = Criteria.register(new OnTransformSpider3());
+    public static final OnTransformAllaySP ON_TRANSFORM_ALLAY_SP = Criteria.register(new OnTransformAllaySP());
+    public static final OnTransformFeralCatSP ON_TRANSFORM_FERAL_CAT_SP = Criteria.register(new OnTransformFeralCatSP());
 
     // Reg custom entities
     // Bat

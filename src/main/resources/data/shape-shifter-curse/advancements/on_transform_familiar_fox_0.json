@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:sweet_berries"
+    },
+    "title": {
+      "translate": "advancements.shape-shifter-curse.on_transform_familiar_fox_0.title"
+    },
+    "description": {
+      "translate": "advancements.shape-shifter-curse.on_transform_familiar_fox_0.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "shape-shifter-curse:on_first_transform_enable_form_list",
+  "criteria": {
+    "on_transform_familiar_fox_0": {
+      "trigger": "shape-shifter-curse:on_transform_familiar_fox_0"
+    }
+  },
+  "requirements": []
+}

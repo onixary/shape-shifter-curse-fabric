@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:salmon_bucket"
+    },
+    "title": {
+      "translate": "advancements.shape-shifter-curse.on_transform_feral_cat_sp.title"
+    },
+    "description": {
+      "translate": "advancements.shape-shifter-curse.on_transform_feral_cat_sp.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "shape-shifter-curse:on_transform_sp",
+  "criteria": {
+    "on_transform_feral_cat_sp": {
+      "trigger": "shape-shifter-curse:on_transform_feral_cat_sp"
+    }
+  },
+  "requirements": []
+}

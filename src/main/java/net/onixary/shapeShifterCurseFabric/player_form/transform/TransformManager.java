@@ -69,6 +69,7 @@ public class TransformManager {
             this.isTransforming = false;
         }
     }
+
     // 仅客户端数据
     private static final boolean IS_FIRST_PERSON_MOD_LOADED = FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT && FabricLoader.getInstance().isModLoaded("firstperson");
     public static final PlayerTransformData LocalPlayerTransformData = new PlayerTransformData();
@@ -114,7 +115,7 @@ public class TransformManager {
     }
 
     // 仅服务端
-    public static void handleProgressiveTransform(ServerPlayerEntity player, boolean isByCursedMoon){
+    public static void handleProgressiveTransform(ServerPlayerEntity player, boolean isByCursedMoon) {
         PlayerTransformData data = getPlayerTransformData(player);
         data._isByCursedMoon = isByCursedMoon;
         data._isRegressedFromFinal = false;
@@ -150,14 +151,13 @@ public class TransformManager {
                 toForm = currentFormGroup.getForm(2);
                 break;
             case 2:
-                if(isByCursedMoon){
+                if (isByCursedMoon) {
                     toForm = currentFormGroup.getForm(0);
                     data._isRegressedFromFinal = true;
                     // 触发自定义成就
                     // Trigger custom achievement
                     ShapeShifterCurseFabric.ON_TRIGGER_CURSED_MOON_FORM_2.trigger((ServerPlayerEntity) player);
-                }
-                else{
+                } else {
                     ShapeShifterCurseFabric.LOGGER.info("Triggered transformation when at max phase, this should not happen!");
                 }
                 break;
@@ -169,7 +169,7 @@ public class TransformManager {
             case 5:
                 // SP形态只有一个阶段，不会受到CursedMoon影响
                 // SP form has only one stage, not affected by CursedMoon
-                if(isByCursedMoon){
+                if (isByCursedMoon) {
                     //toForm = PlayerForms.ORIGINAL_SHIFTER;
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.on_cursed_moon_special").formatted(Formatting.YELLOW));
                 }
@@ -189,7 +189,7 @@ public class TransformManager {
     }
 
     // 仅服务端
-    public static void handleMoonEndTransform(PlayerEntity player){
+    public static void handleMoonEndTransform(PlayerEntity player) {
         PlayerTransformData data = getPlayerTransformData(player);
         PlayerFormBase currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
 
@@ -212,10 +212,9 @@ public class TransformManager {
                 //ShapeShifterCurseFabric.LOGGER.error("Moon end transformation triggered when has original form, this should not happen!");
                 break;
             case 0:
-                if(player.getComponent(RegPlayerFormComponent.PLAYER_FORM).isRegressedFromFinal()){
+                if (player.getComponent(RegPlayerFormComponent.PLAYER_FORM).isRegressedFromFinal()) {
                     toForm = currentFormGroup.getForm(2);
-                }
-                else{
+                } else {
                     toForm = RegPlayerForms.ORIGINAL_SHIFTER;
                 }
                 break;
@@ -250,12 +249,11 @@ public class TransformManager {
     }
 
     // 仅服务端
-    static PlayerFormBase getRandomOrBuffForm(ServerPlayerEntity player){
+    static PlayerFormBase getRandomOrBuffForm(ServerPlayerEntity player) {
         TransformativeStatusInstance instance = EffectManager.getTransformativeEffect(player);
-        if(instance != null && instance.getTransformativeEffectType() != null){
+        if (instance != null && instance.getTransformativeEffectType() != null) {
             return instance.getTransformativeEffectType().getToForm(player);
-        }
-        else{
+        } else {
             return FormRandomSelector.getRandomForm_CurseMoon();
         }
     }
@@ -263,25 +261,25 @@ public class TransformManager {
     // 仅服务端
     public static void update(ServerPlayerEntity player) {
         PlayerTransformData data = getPlayerTransformData(player);
-        if(data.isEffectActive){
+        if (data.isEffectActive) {
             // handle overlay effect - 通过网络包触发客户端效果
             updateClientOverlayEffect(player);
 
             data.beginTransformEffectTicks--;
 
-            if(data.beginTransformEffectTicks <= 0){
+            if (data.beginTransformEffectTicks <= 0) {
                 data.isEffectActive = false;
                 data.isEndEffectActive = true;
                 if (data.curPlayer != null) {
                     // 只在非诅咒月亮变形时清除本能
                     // Only clear instinct when not transforming by Cursed Moon
-                    boolean isCursedMoonRelated  = RegPlayerFormComponent.PLAYER_FORM.get(data.curPlayer).isByCursedMoon()
+                    boolean isCursedMoonRelated = RegPlayerFormComponent.PLAYER_FORM.get(data.curPlayer).isByCursedMoon()
                             || data._isByCursedMoonEnd
                             || data._isByCursedMoon;
 
                     // 只有当不是诅咒月亮相关变形时才清除本能
                     // Only clear instinct when not related to Cursed Moon
-                    if(!isCursedMoonRelated ){
+                    if (!isCursedMoonRelated) {
                         clearInstinct(data.curPlayer);
                     }
 
@@ -301,17 +299,16 @@ public class TransformManager {
                 applyEndTransformEffect((ServerPlayerEntity) data.curPlayer, StaticParams.TRANSFORM_FX_DURATION_OUT);
                 //endTransformEffect();
             }
-        }
-        else if(data.isEndEffectActive){
+        } else if (data.isEndEffectActive) {
             // handle overlay fade effect - 通过网络包触发客户端效果
             updateClientOverlayFadeEffect(player);
 
             data.endTransformEffectTicks--;
-            if(data.endTransformEffectTicks <= 0){
+            if (data.endTransformEffectTicks <= 0) {
                 // 结束时的相关逻辑放在这里
                 // 如果curFromForm为ORIGINAL_BEFORE_ENABLE，则代表玩家第一次开启mod，触发info
                 // If curFromForm is ORIGINAL_BEFORE_ENABLE, it means the player is enabling the mod for the first time, trigger info
-                if(data.curFromForm.equals(RegPlayerForms.ORIGINAL_BEFORE_ENABLE)){
+                if (data.curFromForm.equals(RegPlayerForms.ORIGINAL_BEFORE_ENABLE)) {
                     // info
                     data.curPlayer.sendMessage(Text.translatable("info.shape-shifter-curse.on_enable_mod_after").formatted(Formatting.LIGHT_PURPLE));
                 }
@@ -348,12 +345,12 @@ public class TransformManager {
     private static void updateClientOverlayEffect(PlayerEntity player) {
         PlayerTransformData data = getPlayerTransformData(player);
         if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT && player instanceof ClientPlayerEntity) {
-            handleClientOverlayUpdate(1.0f - (data.beginTransformEffectTicks / (float)StaticParams.TRANSFORM_FX_DURATION_IN), data.beginTransformEffectTicks);
+            handleClientOverlayUpdate(1.0f - (data.beginTransformEffectTicks / (float) StaticParams.TRANSFORM_FX_DURATION_IN), data.beginTransformEffectTicks);
             return;
         }
         // 在服务端，通过网络包发送overlay状态到客户端
         PacketByteBuf buf = PacketByteBufs.create();
-        buf.writeFloat(1.0f - (data.beginTransformEffectTicks / (float)StaticParams.TRANSFORM_FX_DURATION_IN));
+        buf.writeFloat(1.0f - (data.beginTransformEffectTicks / (float) StaticParams.TRANSFORM_FX_DURATION_IN));
         buf.writeInt(data.beginTransformEffectTicks);
         ServerPlayNetworking.send((ServerPlayerEntity) data.curPlayer, ModPackets.UPDATE_OVERLAY_EFFECT, buf);
     }
@@ -363,12 +360,12 @@ public class TransformManager {
     private static void updateClientOverlayFadeEffect(PlayerEntity player) {
         PlayerTransformData data = getPlayerTransformData(player);
         if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT && player instanceof ClientPlayerEntity) {
-            handleClientOverlayFadeUpdate(data.endTransformEffectTicks / (float)StaticParams.TRANSFORM_FX_DURATION_OUT, data.endTransformEffectTicks);
+            handleClientOverlayFadeUpdate(data.endTransformEffectTicks / (float) StaticParams.TRANSFORM_FX_DURATION_OUT, data.endTransformEffectTicks);
             return;
         }
         // 在服务端，通过网络包发送overlay淡出状态到客户端
         PacketByteBuf buf = PacketByteBufs.create();
-        buf.writeFloat(data.endTransformEffectTicks / (float)StaticParams.TRANSFORM_FX_DURATION_OUT);
+        buf.writeFloat(data.endTransformEffectTicks / (float) StaticParams.TRANSFORM_FX_DURATION_OUT);
         buf.writeInt(data.endTransformEffectTicks);
         ServerPlayNetworking.send((ServerPlayerEntity) data.curPlayer, ModPackets.UPDATE_OVERLAY_FADE_EFFECT, buf);
     }
@@ -392,7 +389,7 @@ public class TransformManager {
         // 只在客户端执行
         // transform时重置firstperson offset
         // Reset firstperson offset when transforming
-        if(IS_FIRST_PERSON_MOD_LOADED && ShapeShifterCurseFabric.clientConfig.enableChangeFPMConfig) {
+        if (IS_FIRST_PERSON_MOD_LOADED && ShapeShifterCurseFabric.clientConfig.enableChangeFPMConfig) {
             FirstPersonModelCore fpm = FirstPersonModelCore.instance;
             fpm.getConfig().xOffset = 0;
             fpm.getConfig().sitXOffset = 0;
@@ -407,10 +404,9 @@ public class TransformManager {
     public static void handleClientOverlayUpdate(float nauseaStrength, int ticks) {
         PlayerTransformData data = getPlayerTransformData(null);
         data.nauesaStrength = nauseaStrength;
-        if(data.nauesaStrength > 0.8f){
+        if (data.nauesaStrength > 0.8f) {
             data.blackStrength = (data.nauesaStrength - 0.8f) / 0.2f;
-        }
-        else{
+        } else {
             data.blackStrength = 0.0f;
         }
         TransformOverlay.INSTANCE.setNauesaStrength(data.nauesaStrength);
@@ -422,10 +418,9 @@ public class TransformManager {
     public static void handleClientOverlayFadeUpdate(float nauseaStrength, int ticks) {
         PlayerTransformData data = getPlayerTransformData(null);
         data.nauesaStrength = nauseaStrength;
-        if(data.nauesaStrength > 0.6f){
+        if (data.nauesaStrength > 0.6f) {
             data.blackStrength = 1.0f;
-        }
-        else{
+        } else {
             data.blackStrength = data.nauesaStrength / 0.6f;
         }
         TransformOverlay.INSTANCE.setNauesaStrength(data.nauesaStrength);
@@ -433,7 +428,7 @@ public class TransformManager {
     }
 
     // 双端 但我觉得是仅服务端
-    public static void handleDirectTransform(PlayerEntity player, PlayerFormBase toForm, boolean isByCure){
+    public static void handleDirectTransform(PlayerEntity player, PlayerFormBase toForm, boolean isByCure) {
         PlayerTransformData data = getPlayerTransformData(player);
         data.curPlayer = player;
         data.curToForm = toForm;
@@ -441,22 +436,32 @@ public class TransformManager {
         data._isByCure = isByCure;
         // 检查cure应用时是否处于Cursed Moon，如果没有，则不设置flag
         // Check if the cure is applied during Cursed Moon, if not, do not set the flag
-        if(!CursedMoon.isCursedMoon(player.getWorld())){
+        if (!CursedMoon.isCursedMoon(player.getWorld())) {
             data._isByCure = false;
         }
         // 根据index触发自定义成就
         // Trigger custom achievement based on index
         int toFormIndex = data.curToForm.getIndex();
-        if(!isByCure){
-            switch(toFormIndex){
+        if (!isByCure) {
+            switch (toFormIndex) {
                 case 0:
                     ShapeShifterCurseFabric.ON_TRANSFORM_0.trigger((ServerPlayerEntity) player);
+                    ShapeShifterCurseFabric.ON_FIRST_TRANSFORM_ENABLE_FORM_LIST.trigger((ServerPlayerEntity) player);
+                    triggerSpecificFormAdvancement((ServerPlayerEntity) player, toForm);
                     break;
                 case 1:
                     ShapeShifterCurseFabric.ON_TRANSFORM_1.trigger((ServerPlayerEntity) player);
                     break;
                 case 2:
                     ShapeShifterCurseFabric.ON_TRANSFORM_2.trigger((ServerPlayerEntity) player);
+                    break;
+                case 3:
+                    ShapeShifterCurseFabric.ON_TRANSFORM_3.trigger((ServerPlayerEntity) player);
+                    triggerSpecificFormAdvancement((ServerPlayerEntity) player, toForm);
+                    break;
+                case 5:
+                    ShapeShifterCurseFabric.ON_TRANSFORM_SP.trigger((ServerPlayerEntity) player);
+                    triggerSpecificFormAdvancement((ServerPlayerEntity) player, toForm);
                     break;
                 default:
                     break;
@@ -467,6 +472,42 @@ public class TransformManager {
         handleTransformEffect(player);
         applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);
         // FormAbilityManager.applyForm(player, toForm);
+    }
+
+    private static void triggerSpecificFormAdvancement(ServerPlayerEntity serverPlayer, PlayerFormBase toForm) {
+        if (toForm.equals(RegPlayerForms.AXOLOTL_0)) {
+            ShapeShifterCurseFabric.ON_TRANSFORM_AXOLOTL_0.trigger(serverPlayer);
+        } else if (toForm.equals(RegPlayerForms.AXOLOTL_3)) {
+            ShapeShifterCurseFabric.ON_TRANSFORM_AXOLOTL_3.trigger(serverPlayer);
+        } else if (toForm.equals(RegPlayerForms.BAT_0)) {
+            ShapeShifterCurseFabric.ON_TRANSFORM_BAT_0.trigger(serverPlayer);
+        } else if (toForm.equals(RegPlayerForms.BAT_3)) {
+            ShapeShifterCurseFabric.ON_TRANSFORM_BAT_3.trigger(serverPlayer);
+        } else if (toForm.equals(RegPlayerForms.OCELOT_0)) {
+            ShapeShifterCurseFabric.ON_TRANSFORM_OCELOT_0.trigger(serverPlayer);
+        } else if (toForm.equals(RegPlayerForms.OCELOT_3)) {
+            ShapeShifterCurseFabric.ON_TRANSFORM_OCELOT_3.trigger(serverPlayer);
+        } else if (toForm.equals(RegPlayerForms.FAMILIAR_FOX_0)) {
+            ShapeShifterCurseFabric.ON_TRANSFORM_FAMILIAR_FOX_0.trigger(serverPlayer);
+        } else if (toForm.equals(RegPlayerForms.FAMILIAR_FOX_3)) {
+            ShapeShifterCurseFabric.ON_TRANSFORM_FAMILIAR_FOX_3.trigger(serverPlayer);
+        } else if (toForm.equals(RegPlayerForms.SNOW_FOX_0)) {
+            ShapeShifterCurseFabric.ON_TRANSFORM_SNOW_FOX_0.trigger(serverPlayer);
+        } else if (toForm.equals(RegPlayerForms.SNOW_FOX_3)) {
+            ShapeShifterCurseFabric.ON_TRANSFORM_SNOW_FOX_3.trigger(serverPlayer);
+        } else if (toForm.equals(RegPlayerForms.ANUBIS_WOLF_0)) {
+            ShapeShifterCurseFabric.ON_TRANSFORM_ANUBIS_WOLF_0.trigger(serverPlayer);
+        } else if (toForm.equals(RegPlayerForms.ANUBIS_WOLF_3)) {
+            ShapeShifterCurseFabric.ON_TRANSFORM_ANUBIS_WOLF_3.trigger(serverPlayer);
+        } else if (toForm.equals(RegPlayerForms.SPIDER_0)) {
+            ShapeShifterCurseFabric.ON_TRANSFORM_SPIDER_0.trigger(serverPlayer);
+        } else if (toForm.equals(RegPlayerForms.SPIDER_3)) {
+            ShapeShifterCurseFabric.ON_TRANSFORM_SPIDER_3.trigger(serverPlayer);
+        } else if (toForm.equals(RegPlayerForms.ALLAY_SP)) {
+            ShapeShifterCurseFabric.ON_TRANSFORM_ALLAY_SP.trigger(serverPlayer);
+        } else if (toForm.equals(RegPlayerForms.FERAL_CAT_SP)) {
+            ShapeShifterCurseFabric.ON_TRANSFORM_FERAL_CAT_SP.trigger(serverPlayer);
+        }
     }
 
     // 双端 但我觉得是仅服务端 继承于handleDirectTransform
@@ -514,10 +555,37 @@ public class TransformManager {
     }
 
     // 仅服务端
-    public static void setFormDirectly(PlayerEntity player, PlayerFormBase toForm){
+    public static void setFormDirectly(PlayerEntity player, PlayerFormBase toForm) {
         PlayerTransformData data = getPlayerTransformData(player);
         data.curPlayer = player;
         data.curToForm = toForm;
+
+        // 直接set时也会触发自定义成就
+        int toFormIndex = data.curToForm.getIndex();
+        switch (toFormIndex) {
+            case 0:
+                ShapeShifterCurseFabric.ON_TRANSFORM_0.trigger((ServerPlayerEntity) player);
+                ShapeShifterCurseFabric.ON_FIRST_TRANSFORM_ENABLE_FORM_LIST.trigger((ServerPlayerEntity) player);
+                triggerSpecificFormAdvancement((ServerPlayerEntity) player, toForm);
+                break;
+            case 1:
+                ShapeShifterCurseFabric.ON_TRANSFORM_1.trigger((ServerPlayerEntity) player);
+                break;
+            case 2:
+                ShapeShifterCurseFabric.ON_TRANSFORM_2.trigger((ServerPlayerEntity) player);
+                break;
+            case 3:
+                ShapeShifterCurseFabric.ON_TRANSFORM_3.trigger((ServerPlayerEntity) player);
+                triggerSpecificFormAdvancement((ServerPlayerEntity) player, toForm);
+                break;
+            case 5:
+                ShapeShifterCurseFabric.ON_TRANSFORM_SP.trigger((ServerPlayerEntity) player);
+                triggerSpecificFormAdvancement((ServerPlayerEntity) player, toForm);
+                break;
+            default:
+                break;
+        }
+
         EffectManager.clearTransformativeEffect(player);
         FormAbilityManager.applyForm(data.curPlayer, data.curToForm);
         clearFormFlag(data.curPlayer);
@@ -551,7 +619,7 @@ public class TransformManager {
             return;
         }
 
-        if(IS_FIRST_PERSON_MOD_LOADED && ShapeShifterCurseFabric.clientConfig.enableChangeFPMConfig) {
+        if (IS_FIRST_PERSON_MOD_LOADED && ShapeShifterCurseFabric.clientConfig.enableChangeFPMConfig) {
             FirstPersonModelCore fpm = FirstPersonModelCore.instance;
             fpm.getConfig().xOffset = 0;
             fpm.getConfig().sitXOffset = 0;
@@ -559,20 +627,44 @@ public class TransformManager {
 
             // 0.05s 0.1s 0.2s 1s 后重置 防止 ExtraItemFeatureRenderer 未同步玩家变形状态 减少玩家感知未同步
             new Thread(() -> {
-                try { Thread.sleep(50); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }  // 0.05s
-                fpm.getConfig().xOffset = 0; fpm.getConfig().sitXOffset = 0; fpm.getConfig().sneakXOffset = 0;
-                try { Thread.sleep(50); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }  // 0.1s
-                fpm.getConfig().xOffset = 0; fpm.getConfig().sitXOffset = 0; fpm.getConfig().sneakXOffset = 0;
-                try { Thread.sleep(100); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }  // 0.2s
-                fpm.getConfig().xOffset = 0; fpm.getConfig().sitXOffset = 0; fpm.getConfig().sneakXOffset = 0;
-                try { Thread.sleep(800); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }  // 1s  最终修复 大部分均在1s内恢复同步
-                fpm.getConfig().xOffset = 0; fpm.getConfig().sitXOffset = 0; fpm.getConfig().sneakXOffset = 0;
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }  // 0.05s
+                fpm.getConfig().xOffset = 0;
+                fpm.getConfig().sitXOffset = 0;
+                fpm.getConfig().sneakXOffset = 0;
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }  // 0.1s
+                fpm.getConfig().xOffset = 0;
+                fpm.getConfig().sitXOffset = 0;
+                fpm.getConfig().sneakXOffset = 0;
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }  // 0.2s
+                fpm.getConfig().xOffset = 0;
+                fpm.getConfig().sitXOffset = 0;
+                fpm.getConfig().sneakXOffset = 0;
+                try {
+                    Thread.sleep(800);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }  // 1s  最终修复 大部分均在1s内恢复同步
+                fpm.getConfig().xOffset = 0;
+                fpm.getConfig().sitXOffset = 0;
+                fpm.getConfig().sneakXOffset = 0;
             }).start();
         }
     }
 
     // 仅服务端
-    public static void clearFormFlag(PlayerEntity player){
+    public static void clearFormFlag(PlayerEntity player) {
         PlayerTransformData data = getPlayerTransformData(player);
         boolean wasByCursedMoon = RegPlayerFormComponent.PLAYER_FORM.get(player).isByCursedMoon();
 

@@ -9,8 +9,8 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
-public class OnEndCursedMoonBuggedForm2 extends AbstractCriterion<OnEndCursedMoonBuggedForm2.Condition> {
-    public static final Identifier ID = new Identifier(ShapeShifterCurseFabric.MOD_ID, "on_end_cursed_moon_bugged_form_2");
+public class OnTransformSpider3 extends AbstractCriterion<OnTransformSpider3.Condition> {
+    public static final Identifier ID = new Identifier(ShapeShifterCurseFabric.MOD_ID, "on_transform_spider_3");
 
     @Override
     public Identifier getId() {
@@ -18,9 +18,7 @@ public class OnEndCursedMoonBuggedForm2 extends AbstractCriterion<OnEndCursedMoo
     }
 
     public void trigger(ServerPlayerEntity player) {
-        trigger(player, condition -> {
-            return true;
-        });
+        trigger(player, condition -> true);
     }
 
     @Override
@@ -29,7 +27,6 @@ public class OnEndCursedMoonBuggedForm2 extends AbstractCriterion<OnEndCursedMoo
     }
 
     public static class Condition extends AbstractCriterionConditions {
-
         public Condition() {
             super(ID, LootContextPredicate.EMPTY);
         }

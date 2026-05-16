@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "shape-shifter-curse:icon_cursed_moon"
+    },
+    "title": {
+      "translate": "advancements.shape-shifter-curse.on_first_transform_enable_form_list.title"
+    },
+    "description": {
+      "translate": "advancements.shape-shifter-curse.on_first_transform_enable_form_list.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "shape-shifter-curse:on_open_book_of_shape_shifter",
+  "criteria": {
+    "on_first_transform_enable_form_list": {
+      "trigger": "shape-shifter-curse:on_first_transform_enable_form_list"
+    }
+  },
+  "requirements": []
+}
