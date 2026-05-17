@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "minecraft:cobweb",
-    "origins:temporary_cobweb"
+    "origins:temporary_cobweb",
+    "shape-shifter-curse:dew_covered_cobweb"
   ]
 }
