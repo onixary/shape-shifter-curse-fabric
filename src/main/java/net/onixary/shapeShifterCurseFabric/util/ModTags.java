@@ -16,5 +16,6 @@ public class ModTags {
 
     public static final TagKey<Item> Meat_Tag = TagKey.of(RegistryKeys.ITEM, new Identifier("origins", "meat"));
     public static final TagKey<Block> LIKE_SCAFFOLDING_TAG = TagKey.of(RegistryKeys.BLOCK, new Identifier(ShapeShifterCurseFabric.MOD_ID, "like_scaffolding"));
+    public static final TagKey<Block> LIKE_COBWEB_TAG = TagKey.of(RegistryKeys.BLOCK, new Identifier(ShapeShifterCurseFabric.MOD_ID, "like_cobweb"));
     public static final TagKey<EntityType<?>> SPIDER_FLUID_COCOON_BLACKLIST = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(ShapeShifterCurseFabric.MOD_ID, "spider_fluid_cocoon_blacklist"));
 }
