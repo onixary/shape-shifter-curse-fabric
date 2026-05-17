@@ -157,6 +157,7 @@ public class RegCustomItem {
                 entries.add(SILK_DEW);
                 // 方块物品注册
                 entries.add(MOONDUST_CRYSTAL_GRIT);
+                entries.add(WEB_COMPOSTER);
                 entries.add(DEW_COVERED_COBWEB);
                 entries.addAll(buildAllPotions(
                         RegCustomPotions.MOONDUST_POTION,

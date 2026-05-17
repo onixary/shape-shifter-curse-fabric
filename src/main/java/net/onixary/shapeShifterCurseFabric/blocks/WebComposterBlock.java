@@ -52,6 +52,7 @@ public class WebComposterBlock extends Block implements InventoryProvider {
         shapes[4] = shapes[3];
     });
 
+    public static final IntProperty COCOON_COUNT = IntProperty.of("cocoons_count", 0, 64);
     public static Item ResultItem = RegCustomItem.SPIDER_FLUID_COCOON;
     public static Function<Random, Integer> ResultCount = (random) -> 4 + random.nextInt(3);
 
@@ -78,7 +79,7 @@ public class WebComposterBlock extends Block implements InventoryProvider {
 
     public WebComposterBlock(Settings settings) {
         super(settings);
-        this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(LEVEL, MIN_LEVEL));
+        this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(LEVEL, MIN_LEVEL).with(COCOON_COUNT, 0));
     }
 
     public static void playEffects(World world, BlockPos pos, boolean fill) {
@@ -153,7 +154,7 @@ public class WebComposterBlock extends Block implements InventoryProvider {
     public static BlockState emptyFullComposter(Entity user, BlockState state, World world, BlockPos pos) {
         if (!world.isClient) {
             Vec3d vec3d = Vec3d.add(pos, (double)0.5F, 1.01, (double)0.5F).addRandom(world.random, 0.7F);
-            ItemEntity itemEntity = new ItemEntity(world, vec3d.getX(), vec3d.getY(), vec3d.getZ(), new ItemStack(ResultItem, ResultCount.apply(user.getWorld().getRandom())));
+            ItemEntity itemEntity = new ItemEntity(world, vec3d.getX(), vec3d.getY(), vec3d.getZ(), new ItemStack(ResultItem, state.get(COCOON_COUNT)));
             itemEntity.setToDefaultPickupDelay();
             world.spawnEntity(itemEntity);
         }
@@ -164,10 +165,21 @@ public class WebComposterBlock extends Block implements InventoryProvider {
     }
 
     static BlockState emptyComposter(@Nullable Entity user, BlockState state, WorldAccess world, BlockPos pos) {
-        BlockState blockState = (BlockState)state.with(LEVEL, 0);
+        BlockState blockState = (BlockState)state.with(LEVEL, 0).with(COCOON_COUNT, 0);
         world.setBlockState(pos, blockState, 3);
         world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(user, blockState));
         return blockState;
+    }
+
+    static BlockState setComposterItemCount(@Nullable Entity user, BlockState state, WorldAccess world, BlockPos pos, int count) {
+        if (count == 0) {
+            return emptyComposter(user, state, world, pos);
+        } else {
+            BlockState blockState = (BlockState) state.with(LEVEL, state.get(LEVEL)).with(COCOON_COUNT, count);
+            world.setBlockState(pos, blockState, 3);
+            world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(user, blockState));
+            return blockState;
+        }
     }
 
     static BlockState addToComposter(@Nullable Entity user, BlockState state, WorldAccess world, BlockPos pos, ItemStack stack) {
@@ -177,7 +189,7 @@ public class WebComposterBlock extends Block implements InventoryProvider {
             return state;
         } else {
             int j = i + 1;
-            BlockState blockState = (BlockState)state.with(LEVEL, j);
+            BlockState blockState = (BlockState)state.with(LEVEL, j).with(COCOON_COUNT, state.get(COCOON_COUNT));
             world.setBlockState(pos, blockState, 3);
             world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(user, blockState));
             if (j == MAX_LEVEL) {
@@ -190,7 +202,7 @@ public class WebComposterBlock extends Block implements InventoryProvider {
 
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if ((Integer)state.get(LEVEL) == MAX_LEVEL) {
-            world.setBlockState(pos, (BlockState)state.cycle(LEVEL), 3);
+            world.setBlockState(pos, (BlockState)state.with(LEVEL, MAX_LEVEL + 1).with(COCOON_COUNT, ResultCount.apply(random)), 3);
             world.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_COMPOSTER_READY, SoundCategory.BLOCKS, 1.0F, 1.0F);
         }
 
@@ -205,7 +217,7 @@ public class WebComposterBlock extends Block implements InventoryProvider {
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{LEVEL});
+        builder.add(new Property[]{LEVEL, COCOON_COUNT});
     }
 
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
@@ -215,7 +227,7 @@ public class WebComposterBlock extends Block implements InventoryProvider {
     public SidedInventory getInventory(BlockState state, WorldAccess world, BlockPos pos) {
         int i = (Integer)state.get(LEVEL);
         if (i == MAX_LEVEL + 1) {
-            return new WebComposterBlock.FullComposterInventory(state, world, pos, new ItemStack(ResultItem, ResultCount.apply(world.getRandom())));
+            return new WebComposterBlock.FullComposterInventory(state, world, pos, new ItemStack(ResultItem, state.get(COCOON_COUNT)));
         } else {
             return (SidedInventory)(i < MAX_LEVEL ? new WebComposterBlock.ComposterInventory(state, world, pos) : new WebComposterBlock.DummyInventory());
         }
@@ -253,7 +265,7 @@ public class WebComposterBlock extends Block implements InventoryProvider {
         }
 
         public int getMaxCountPerStack() {
-            return 1;
+            return 64;
         }
 
         public int[] getAvailableSlots(Direction side) {
@@ -269,8 +281,12 @@ public class WebComposterBlock extends Block implements InventoryProvider {
         }
 
         public void markDirty() {
-            WebComposterBlock.emptyComposter((Entity)null, this.state, this.world, this.pos);
             this.dirty = true;
+            if (this.getStack(0).isEmpty()) {
+                WebComposterBlock.emptyComposter((Entity)null, this.state, this.world, this.pos);
+            } else {
+                WebComposterBlock.setComposterItemCount((Entity)null, this.state, this.world, this.pos, this.getStack(0).getCount());
+            }
         }
     }
 

@@ -64,7 +64,9 @@
     "EntityMixin",
     "DefaultAttributeRegistryMixin",
     "mob.SpiderEntityMixin",
-    "mob.IronGolemEntityMixin"
+    "mob.IronGolemEntityMixin",
+    "SwordItemMixin",
+    "ShearsItemMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",
