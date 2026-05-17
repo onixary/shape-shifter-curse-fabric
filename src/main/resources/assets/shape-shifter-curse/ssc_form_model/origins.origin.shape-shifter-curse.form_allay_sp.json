@@ -1,0 +1,40 @@
+{
+  "load_priority": 0,
+
+  "name": "shape-shifter-curse.form_allay_sp.model_name",
+  "layer": "origins:origin",
+  "form": "shape-shifter-curse:form_allay_sp",
+
+  "wide_only": true,
+
+  "model": "shape-shifter-curse:geo/form/form_allay_sp.geo.json",
+  "texture": "shape-shifter-curse:textures/form/form_allay_sp/form_allay_sp.png",
+  "texture_mask": "shape-shifter-curse:textures/form/form_allay_sp/form_allay_sp_colormask.png",
+  "overlay": "shape-shifter-curse:textures/form/form_allay_sp/form_allay_sp_overlay.png",
+  "overlay_mask": "shape-shifter-curse:textures/form/form_allay_sp/form_allay_sp_overlay_colormask.png",
+  "hidden": [
+    "leftLeg",
+    "rightLeg",
+    "rightPants",
+    "leftPants",
+    "body",
+    "jacket"
+  ],
+
+  "builtin_controller_data": {
+    "tail_chain": {
+      "tail_l": [0],
+      "tail_r": [0]
+    },
+    "wing_chain_l": {
+      "wing_l": [0, 1]
+    },
+    "wing_chain_r": {
+      "wing_r": [0, 1]
+    },
+    "tail_chain_head": {
+      "head_tail_l": [0, 1],
+      "head_tail_r": [0, 1]
+    }
+  }
+}

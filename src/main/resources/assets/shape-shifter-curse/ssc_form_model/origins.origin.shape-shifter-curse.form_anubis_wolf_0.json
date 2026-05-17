@@ -1,0 +1,28 @@
+{
+  "load_priority": 0,
+
+  "name": "shape-shifter-curse.form_anubis_wolf_0.model_name",
+  "layer": "origins:origin",
+  "form": "shape-shifter-curse:form_anubis_wolf_0",
+
+  "wide_only": true,
+
+  "model": "shape-shifter-curse:geo/form/form_anubis_wolf_0.geo.json",
+  "texture": "shape-shifter-curse:textures/form/form_anubis_wolf_0/form_anubis_wolf_0.png",
+  "texture_mask": "shape-shifter-curse:textures/form/form_anubis_wolf_0/form_anubis_wolf_0_colormask.png",
+  "overlay": "shape-shifter-curse:textures/form/form_anubis_wolf_0/form_anubis_wolf_0_overlay.png",
+  "overlay_mask": "shape-shifter-curse:textures/form/form_anubis_wolf_0/form_anubis_wolf_0_overlay_colormask.png",
+  "hidden": [
+
+  ],
+
+  "builtin_controller_data": {
+    "tail_chain": {
+      "tail": [0, 1, 2]
+    },
+    "tail_chain_head": {
+      "ear_a": [0],
+      "ear_b": [0]
+    }
+  }
+}

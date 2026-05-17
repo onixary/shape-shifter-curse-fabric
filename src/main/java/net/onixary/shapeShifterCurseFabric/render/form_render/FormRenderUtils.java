@@ -74,12 +74,12 @@ public class FormRenderUtils {
     }
 
     public static Vec3d getPartRotation(ModelPart part) {
-        return new Vec3d(part.xScale, part.yScale, part.zScale);
+        var t = part.getTransform();
+        return new Vec3d(t.pitch, t.yaw, t.roll);
     }
 
     public static Vec3d getPartScale(ModelPart part) {
-        var t = part.getTransform();
-        return new Vec3d(t.pitch, t.yaw, t.roll);
+        return new Vec3d(part.xScale, part.yScale, part.zScale);
     }
 
     // Origins 版本核心 如果需要重构形态系统需要重新写一份这个函数

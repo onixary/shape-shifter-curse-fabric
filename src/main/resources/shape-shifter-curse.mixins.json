@@ -84,8 +84,6 @@
     "KeyboardInputMixin",
     "MinecraftClientMixin",
     "MoonPhaseRenderMixin",
-    "OverrideSkinFirstPersonMixin",
-    "OverrideSkinThirdPersonMixin",
     "PlayerEntityAnimOverrideMixin",
     "PlayerEntityRendererFallFlyingMixin",
     "PlayerEntitySpeedFOVMixin",
@@ -97,7 +95,9 @@
     "integration.TacZ_AnimThird",
     "PlayerClipAtLedgeMixin",
     "CameraBobbingMixin",
-    "EntityRendererMixin"
+    "EntityRendererMixin",
+    "render.LivingEntityRendererMixin",
+    "render.PlayerEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,0 +1,35 @@
+{
+  "load_priority": 0,
+
+  "name": "shape-shifter-curse.form_spider_2.model_name",
+  "layer": "origins:origin",
+  "form": "shape-shifter-curse:form_spider_2",
+
+  "wide_only": true,
+
+  "model": "shape-shifter-curse:geo/form/form_spider_2.geo.json",
+  "texture": "shape-shifter-curse:textures/form/form_spider_2/form_spider_2.png",
+  "texture_mask": "shape-shifter-curse:textures/form/form_spider_2/form_spider_2_colormask.png",
+  "hidden": [
+    "leftLeg",
+    "rightLeg",
+    "rightPants",
+    "leftPants",
+    "leftSleeve",
+    "rightSleeve",
+    "leftArm",
+    "rightArm",
+    "body",
+    "jacket",
+    "head",
+    "hat"
+  ],
+
+  "builtin_controller_data": {
+    "tail_chain": {
+      "tail": [0],
+      "tail_leg_l": [0, 1],
+      "tail_leg_r": [0, 1]
+    }
+  }
+}

@@ -297,7 +297,7 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		ManaRegistriesClient.register();
 		RegCustomEntityRenderer.init();
 
-		// FormRenderUtils.onClientInit();
+		FormRenderUtils.onClientInit();
 
 		ClientTickEvents.END_CLIENT_TICK.register(ShapeShifterCurseFabricClient::onClientTick);
 		// 客户端能力处理

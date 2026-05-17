@@ -16,7 +16,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
-import net.onixary.shapeShifterCurseFabric.player_form_render.IMojModelPart;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -57,17 +56,15 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
                 this.extraPartsMap.add(new Pair<>(key, extraPartsMap.get(key).getAsString()));
             }
         }
+        this.leftArmGeoBoneID = "bipedLeftArm";
+        this.rightArmGeoBoneID = "bipedRightArm";
         if (json.has("first_person_render")) {
             JsonObject firstPersonRender = json.getAsJsonObject("first_person_render");
             if (firstPersonRender.has("left_arm")) {
                 this.leftArmGeoBoneID = firstPersonRender.get("left_arm").getAsString();
-            } else {
-                this.leftArmGeoBoneID = "bipedLeftArm";
             }
             if (firstPersonRender.has("right_arm")) {
                 this.rightArmGeoBoneID = firstPersonRender.get("right_arm").getAsString();
-            } else {
-                this.rightArmGeoBoneID = "bipedRightArm";
             }
         }
     }
@@ -165,7 +162,7 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
         boolean IsRenderRight = arm.equals(renderer.getModel().rightArm);
         String GeoBoneName = IsRenderRight ? this.rightArmGeoBoneID : this.leftArmGeoBoneID;
         model.resetBone(GeoBoneName);
-        model.translatePositionForBone(GeoBoneName, ((IMojModelPart) (Object) arm).originfurs$getPosition());
+        model.translatePositionForBone(GeoBoneName, FormRenderUtils.getPartPosition(arm));
         model.translatePositionForBone(GeoBoneName, new Vec3d(5 * (IsRenderRight ? -1.0 : 1.0), 2, 0));
         model.setRotationForBone(GeoBoneName, FormRenderUtils.getPartRotation(arm));
         model.invertRotForPart(GeoBoneName, false, true, true);

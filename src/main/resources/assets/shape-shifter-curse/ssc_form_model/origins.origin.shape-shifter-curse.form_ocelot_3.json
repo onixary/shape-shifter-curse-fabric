@@ -1,0 +1,36 @@
+{
+  "load_priority": 0,
+
+  "name": "shape-shifter-curse.form_ocelot_3.model_name",
+  "layer": "origins:origin",
+  "form": "shape-shifter-curse:form_ocelot_3",
+
+  "wide_only": true,
+
+  "model": "shape-shifter-curse:geo/form/form_ocelot_3.geo.json",
+  "texture": "shape-shifter-curse:textures/form/form_ocelot_3/form_ocelot_3.png",
+  "texture_mask": "shape-shifter-curse:textures/form/form_ocelot_3/form_ocelot_3_colormask.png",
+  "hidden": [
+    "leftLeg",
+    "rightLeg",
+    "rightPants",
+    "leftPants",
+    "leftSleeve",
+    "rightSleeve",
+    "leftArm",
+    "rightArm",
+    "body",
+    "jacket",
+    "head",
+    "hat"
+  ],
+  "builtin_controller_data": {
+    "tail_chain": {
+      "tail": [0, 1, 2, 3]
+    },
+    "tail_chain_head": {
+      "ear_a": [0],
+      "ear_b": [0]
+    }
+  }
+}

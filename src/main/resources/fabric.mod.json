@@ -71,13 +71,11 @@
   "entrypoints": {
     "main": [
       "net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric",
-      "net.onixary.shapeShifterCurseFabric.integration.origins.Origins",
-      "net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFur"
+      "net.onixary.shapeShifterCurseFabric.integration.origins.Origins"
     ],
     "client": [
       "net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient",
-      "net.onixary.shapeShifterCurseFabric.integration.origins.OriginsClient",
-      "net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFurClient"
+      "net.onixary.shapeShifterCurseFabric.integration.origins.OriginsClient"
     ],
     "modmenu": [
       "net.onixary.shapeShifterCurseFabric.config.ConfigIntegration"
@@ -98,7 +96,6 @@
   "mixins": [
     "shape-shifter-curse.mixins.json",
     "origins.mixins.json",
-    "originalfur.fabric.mixins.json",
     "ssc-misc.mixins.json"
   ],
 
