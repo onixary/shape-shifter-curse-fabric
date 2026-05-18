@@ -291,19 +291,34 @@ public class ModPacketsS2C {
         new Thread(() -> {
             // 延时5s, 等待服务器component加载完成 重复12次 共计1min
             boolean success = false;
-            for (int i = 0; i < 12; i++) {
+            for (int i = 0; i < 60; i++) {
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(1000);
                     sendUpdateCustomSetting();
                     success = true;
-                } catch (Exception e) {
-                    ShapeShifterCurseFabric.LOGGER.warn("Error while sending custom setting to server, retrying after 5 second", e);
+                } catch (Exception ignored) {
                 }
             }
             if (!success) {
                 ShapeShifterCurseFabric.LOGGER.error("Failed to send custom setting to server after 60 seconds");
             }
         }).start();
+    }
+
+    public static void sendUpdateCustomSetting(FormTextureUtils.ColorSetting colorSetting) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.keep_original_skin);
+        buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.enable_form_color);
+        buf.writeInt(colorSetting.getPrimaryColor());
+        buf.writeInt(colorSetting.getAccentColor1());
+        buf.writeInt(colorSetting.getAccentColor2());
+        buf.writeInt(colorSetting.getEyeColorA());
+        buf.writeInt(colorSetting.getEyeColorB());
+        buf.writeBoolean(colorSetting.getPrimaryGreyReverse());
+        buf.writeBoolean(colorSetting.getAccent1GreyReverse());
+        buf.writeBoolean(colorSetting.getAccent2GreyReverse());
+        buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.enable_form_random_sound);
+        ClientPlayNetworking.send(UPDATE_CUSTOM_SETTING, buf);
     }
 
     // 临时先放这里，以后再整理
