@@ -55,6 +55,12 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     private boolean isColorSettingDirty = true;
     private FormTextureUtils.ColorSetting colorSetting = null;
 
+    private int tempSliderConfigIndex = -1;
+    private int tempSliderR = 0;
+    private int tempSliderG = 0;
+    private int tempSliderB = 0;
+    private int tempSliderAlpha = 0;
+
     public void loadData(boolean serverSide) {
         if (serverSide) {
             if (minecraftClient.player != null) {
@@ -90,8 +96,18 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         return colorSetting;
     }
 
+    private boolean isUsingTempTexture = true;
+
     public FormColorSelectMenu(Text title) {
         super(title);
+        loadData(false);
+        if (!FormTextureUtils.useTempTexture) {
+            FormTextureUtils.useTempTexture = true;
+            FormTextureUtils.tempTextureProcessor = this;
+        } else {
+            ShapeShifterCurseFabric.LOGGER.warn("Temp Texture System is already in use, dynamic texture rendering will not work");
+            isUsingTempTexture = false;
+        }
     }
 
     public void renderTextureBackground(DrawContext context) {
@@ -119,5 +135,16 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             minecraftClient.getTextureManager().registerTexture(id, nativeImageBackedTexture);
             return id;
         });
+    }
+
+    @Override
+    public void close() {
+        CleanColorSettingCache();
+        super.close();
+        if (isUsingTempTexture) {
+            FormTextureUtils.useTempTexture = false;
+            FormTextureUtils.tempTextureProcessor = null;
+            isUsingTempTexture = false;
+        }
     }
 }
