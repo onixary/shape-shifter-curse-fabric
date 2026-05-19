@@ -738,7 +738,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         int BPosX = width / 2 - BG_WIDTH / 2;
         int BPosY = height / 2 - BG_HEIGHT / 2;
-        if (!this.isOpenSlider && this.isEditBoxInit) {
+        if (!this.isOpenSlider && this.isEditBoxInit && button != 0) {
             // 228,27,11,11
             if (mouseX > BPosX + 228 && mouseX < BPosX + 239 && mouseY > BPosY + 27 && mouseY < BPosY + 38) {
                 this.tempSliderConfigIndex = 0;
