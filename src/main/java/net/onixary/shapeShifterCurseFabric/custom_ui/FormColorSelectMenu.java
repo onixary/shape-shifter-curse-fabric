@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.custom_ui;
 
+import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 import net.minecraft.client.MinecraftClient;
@@ -16,6 +17,8 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.config.PlayerCustomConfig;
+import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.SimpleIntSliderWidget;
 import net.onixary.shapeShifterCurseFabric.data.CodexData;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
@@ -81,6 +84,9 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     private ButtonWidget accent1GreyReverseButton = null;
     private ButtonWidget accent2GreyReverseButton = null;
 
+    private SimpleIntSliderWidget sliderR = null;
+    private SimpleIntSliderWidget sliderG = null;
+    private SimpleIntSliderWidget sliderB = null;
     private TextFieldWidget sliderREditBox = null;
     private TextFieldWidget sliderGEditBox = null;
     private TextFieldWidget sliderBEditBox = null;
@@ -107,17 +113,18 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     }
 
     // 顺序是 ARGB
-    private int primaryColor = 0xFFFFFFFF;
-    private int accentColor1Color = 0xFFFFFFFF;
-    private int accentColor2Color = 0xFFFFFFFF;
-    private int eyeColorA = 0xff000000;
-    private int eyeColorB = 0xff000000;
+    private int primaryColor = 0x00FFFFFF;
+    private int accentColor1Color = 0x00FFFFFF;
+    private int accentColor2Color = 0x00FFFFFF;
+    private int eyeColorA = 0x00FFFFFF;
+    private int eyeColorB = 0x00FFFFFF;
     private boolean primaryGreyReverse = false;
     private boolean accent1GreyReverse = false;
     private boolean accent2GreyReverse = false;
 
     private boolean isColorSettingDirty = true;
-    private FormTextureUtils.ColorSetting colorSetting = null;
+    private FormTextureUtils.ColorSetting colorSetting_ARGB = null;
+    private FormTextureUtils.ColorSetting colorSetting_ABGR = null;
 
     private int tempSliderConfigIndex = -1;
     private int tempSliderR = 0;
@@ -129,6 +136,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     private List<ClickableWidget> config_panel_01 = new ArrayList<>();  // 保存config输入框 label之类的 用于切换
     private List<ClickableWidget> config_panel_02 = new ArrayList<>();  // 保存 RGB条 一些按钮
 
+    // 修改 tempSliderX 后调用
     public void updateSlider() {
         int Color = tempSliderAlpha << 24 | tempSliderR << 16 | tempSliderG << 8 | tempSliderB;
         switch (tempSliderConfigIndex) {
@@ -141,8 +149,24 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         isColorSettingDirty = true;
     }
 
+    // 非条修改颜色后调用
     public void reloadSlider() {
-        // TODO
+        int sliderColor = 0;
+        switch (tempSliderConfigIndex) {
+            case 0 -> sliderColor = primaryColor;
+            case 1 -> sliderColor = accentColor1Color;
+            case 2 -> sliderColor = accentColor2Color;
+            case 3 -> sliderColor = eyeColorA;
+            case 4 -> sliderColor = eyeColorB;
+        }
+        tempSliderR = (sliderColor >>> 16) & 0xFF;
+        tempSliderG = (sliderColor >>> 8) & 0xFF;
+        tempSliderB = sliderColor & 0xFF;
+        tempSliderAlpha = (sliderColor >>> 24) & 0xFF;
+        sliderR.setIntValue(tempSliderR);
+        sliderG.setIntValue(tempSliderG);
+        sliderB.setIntValue(tempSliderB);
+        isEnableLayerButton.setMessage(tempSliderAlpha != 0 ? BoolBTN_ON : BoolBTN_OFF);
     }
 
     public void updatePanel() {
@@ -169,6 +193,20 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         this.updateUI();
     }
 
+    public void loadServerData(FormTextureUtils.ColorSetting colorSetting) {
+        // 服务器上的是 ABGR
+        primaryColor = FormTextureUtils.ABGR2ARGB(colorSetting.getPrimaryColor());
+        accentColor1Color = FormTextureUtils.ABGR2ARGB(colorSetting.getAccentColor1());
+        accentColor2Color = FormTextureUtils.ABGR2ARGB(colorSetting.getAccentColor2());
+        eyeColorA = FormTextureUtils.ABGR2ARGB(colorSetting.getEyeColorA());
+        eyeColorB = FormTextureUtils.ABGR2ARGB(colorSetting.getEyeColorB());
+        primaryGreyReverse = colorSetting.getPrimaryGreyReverse();
+        accent1GreyReverse = colorSetting.getAccent1GreyReverse();
+        accent2GreyReverse = colorSetting.getAccent2GreyReverse();
+        isColorSettingDirty = true;
+        this.updateUI();
+    }
+
     public void loadData() {
         if (minecraftClient.player != null) {
             loadData(true);
@@ -181,7 +219,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         if (serverSide) {
             if (minecraftClient.player != null) {
                 FormTextureUtils.ColorSetting colorSetting = RegPlayerSkinComponent.SKIN_SETTINGS.get(minecraftClient.player).getFormColor();
-                this.loadData(colorSetting);
+                this.loadServerData(colorSetting);
             }
         } else {
             primaryColor = ShapeShifterCurseFabric.playerCustomConfig.primaryColor;
@@ -197,12 +235,31 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         isColorSettingDirty = true;
     }
 
-    public @NotNull FormTextureUtils.ColorSetting getColorSetting() {
+    public @NotNull FormTextureUtils.ColorSetting getColorSetting(boolean ABGR) {
         if (isColorSettingDirty) {
-            colorSetting = new FormTextureUtils.ColorSetting(primaryColor, accentColor1Color, accentColor2Color, eyeColorA, eyeColorB, primaryGreyReverse, accent1GreyReverse, accent2GreyReverse);
+            colorSetting_ARGB = new FormTextureUtils.ColorSetting(
+                    primaryColor,
+                    accentColor1Color,
+                    accentColor2Color,
+                    eyeColorA,
+                    eyeColorB,
+                    primaryGreyReverse,
+                    accent1GreyReverse,
+                    accent2GreyReverse
+            );
+            colorSetting_ABGR = new FormTextureUtils.ColorSetting(
+                    FormTextureUtils.ARGB2ABGR(primaryColor),
+                    FormTextureUtils.ARGB2ABGR(accentColor1Color),
+                    FormTextureUtils.ARGB2ABGR(accentColor2Color),
+                    FormTextureUtils.ARGB2ABGR(eyeColorA),
+                    FormTextureUtils.ARGB2ABGR(eyeColorB),
+                    primaryGreyReverse,
+                    accent1GreyReverse,
+                    accent2GreyReverse
+            );
             isColorSettingDirty = false;
         }
-        return colorSetting;
+        return ABGR ? colorSetting_ABGR : colorSetting_ARGB;
     }
 
     private boolean isUsingTempTexture = true;
@@ -223,6 +280,21 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         int BG_X = width / 2 - BG_WIDTH / 2;
         int BG_Y = height / 2 - BG_HEIGHT / 2;
         context.drawTexture(texture, BG_X, BG_Y, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, BG_HEIGHT);
+    }
+
+    public int colorChannel2Int(String channel) {
+        try {
+            int value = Integer.parseInt(channel);
+            if (value > 255) {
+                return 255;
+            }
+            if (value < 0) {
+                return 0;
+            }
+            return value;
+        } catch (Exception ignored) {
+            return 0;
+        }
     }
 
     public int decodeColor(String Color) {
@@ -246,6 +318,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     }
 
     private boolean isUpdateUI = false;
+    private boolean isUpdateSlider = false;
 
     public void onConfigChanged() {
         if (!this.isEditBoxInit || isUpdateUI) {
@@ -301,7 +374,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         );
         // 85,23,45,15 - 发送到服务器
         this.addDrawableChild(ButtonWidget.builder(UploadToServer, button -> {
-            ModPacketsS2C.sendUpdateCustomSetting(this.getColorSetting());
+            ModPacketsS2C.sendUpdateCustomSetting(this.getColorSetting(false));
         }).position(BPosX + 85, BPosY + 23).size(45, 15).build()
         );
         // 85,41,45,15 - 获取客户端数据(配置)
@@ -319,6 +392,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             ShapeShifterCurseFabric.playerCustomConfig.primaryGreyReverse = primaryGreyReverse;
             ShapeShifterCurseFabric.playerCustomConfig.accent1GreyReverse = accent1GreyReverse;
             ShapeShifterCurseFabric.playerCustomConfig.accent2GreyReverse = accent2GreyReverse;
+            AutoConfig.getConfigHolder(PlayerCustomConfig.class).save();
         }).position(BPosX + 85, BPosY + 59).size(45, 15).build()
         );
         // 85,77,45,15 - 从剪切板获取
@@ -332,7 +406,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         );
         // 85,95,45,15 - 发送到剪切板
         this.addDrawableChild(ButtonWidget.builder(UploadToClipboard, button -> {
-            String keyBoardData = FormColorData.ColorSettingtoString(this.getColorSetting());
+            String keyBoardData = FormColorData.ColorSettingtoString(this.getColorSetting(false));
             if (keyBoardData == null) {
                 return;
             }
@@ -456,7 +530,6 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         this.addDrawableChild(accent2GreyReverseButton);
         this.config_panel_01.add(accent2GreyReverseButton);
         this.accent2GreyReverseButton = accent2GreyReverseButton;
-        // TODO RGB条
         // 139,27,25,11 R Label
         TextWidget rLabel = new TextWidget(BPosX + 139, BPosY + 27, 25, 11, ColorChannel_R, textRenderer).setTextColor(0xDDDDDD);
         this.addDrawableChild(rLabel);
@@ -473,7 +546,11 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         TextFieldWidget sliderREditBox = new TextFieldWidget(textRenderer, BPosX + 177, BPosY + 27, 30, 11, EmptyText);
         sliderREditBox.setMaxLength(3);
         sliderREditBox.setChangedListener((text) -> {
+            this.tempSliderR = this.colorChannel2Int(text);
             this.updateSlider();
+            if (!isUpdateSlider) {
+                this.sliderR.setIntValue(this.tempSliderR);
+            }
         });
         this.addDrawableChild(sliderREditBox);
         this.config_panel_02.add(sliderREditBox);
@@ -482,7 +559,11 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         TextFieldWidget sliderGEditBox = new TextFieldWidget(textRenderer, BPosX + 177, BPosY + 41, 30, 11, EmptyText);
         sliderGEditBox.setMaxLength(3);
         sliderGEditBox.setChangedListener((text) -> {
+            this.tempSliderG = this.colorChannel2Int(text);
             this.updateSlider();
+            if (!isUpdateSlider) {
+                this.sliderG.setIntValue(this.tempSliderG);
+            }
         });
         this.addDrawableChild(sliderGEditBox);
         this.config_panel_02.add(sliderGEditBox);
@@ -491,22 +572,52 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         TextFieldWidget sliderBEditBox = new TextFieldWidget(textRenderer, BPosX + 177, BPosY + 55, 30, 11, EmptyText);
         sliderBEditBox.setMaxLength(3);
         sliderBEditBox.setChangedListener((text) -> {
+            this.tempSliderB = this.colorChannel2Int(text);
             this.updateSlider();
+            if (!isUpdateSlider) {
+                this.sliderB.setIntValue(this.tempSliderB);
+            }
         });
         this.addDrawableChild(sliderBEditBox);
         this.config_panel_02.add(sliderBEditBox);
         this.sliderBEditBox = sliderBEditBox;
-        // TODO 滑条
         // Slider的改动直接改sliderXEditBox就行 不用updateSlider
         // 211,27,100,11 R Slider
+        SimpleIntSliderWidget sliderR = new SimpleIntSliderWidget(BPosX + 211, BPosY + 27, 100, 11, EmptyText, 0d, 0, 255);
+        sliderR.onChanged = (widget) -> {
+            this.isUpdateSlider = true;
+            this.sliderREditBox.setText(String.valueOf(widget.getIntValue()));
+            this.isUpdateSlider = false;
+        };
+        this.addDrawableChild(sliderR);
+        this.config_panel_02.add(sliderR);
+        this.sliderR = sliderR;
         // 211,41,100,11 G Slider
+        SimpleIntSliderWidget sliderG = new SimpleIntSliderWidget(BPosX + 211, BPosY + 41, 100, 11, EmptyText, 0d, 0, 255);
+        sliderG.onChanged = (widget) -> {
+            this.isUpdateSlider = true;
+            this.sliderGEditBox.setText(String.valueOf(widget.getIntValue()));
+            this.isUpdateSlider = false;
+        };
+        this.addDrawableChild(sliderG);
+        this.config_panel_02.add(sliderG);
+        this.sliderG = sliderG;
         // 211,55,100,11 B Slider
+        SimpleIntSliderWidget sliderB = new SimpleIntSliderWidget(BPosX + 211, BPosY + 55, 100, 11, EmptyText, 0d, 0, 255);
+        sliderB.onChanged = (widget) -> {
+            this.isUpdateSlider = true;
+            this.sliderBEditBox.setText(String.valueOf(widget.getIntValue()));
+            this.isUpdateSlider = false;
+        };
+        this.addDrawableChild(sliderB);
+        this.config_panel_02.add(sliderB);
+        this.sliderB = sliderB;
         // 139,69,75,11 - Is Enable Layer Label
         TextWidget isEnableLayerLabel = new TextWidget(BPosX + 139, BPosY + 69, 75, 11, IsEnableLayerLabel, textRenderer).setTextColor(0xDDDDDD);
         this.addDrawableChild(isEnableLayerLabel);
         this.config_panel_02.add(isEnableLayerLabel);
         // 228,69,36,11 - Is Enable Layer Button
-        ButtonWidget isEnableLayerButton = ButtonWidget.builder(this.tempSliderAlpha != 0 ? BoolBTN_ON :BoolBTN_OFF, (button) -> {
+        ButtonWidget isEnableLayerButton = ButtonWidget.builder(this.tempSliderAlpha != 0 ? BoolBTN_ON : BoolBTN_OFF, (button) -> {
             this.tempSliderAlpha = this.tempSliderAlpha == 0 ? 255 : 0;
             if (this.tempSliderAlpha != 0) {
                 button.setMessage(BoolBTN_ON);
@@ -583,7 +694,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             context.fill(BPosX + 228, BPosY + 83, BPosX + 239, BPosY + 94, this.eyeColorB);
         } else {
             // 267,69,11,11
-            context.fill(BPosX + 267, BPosY + 69, BPosX + 278, BPosY + 80, this.tempSliderAlpha << 24 | this.tempSliderR | this.tempSliderG | this.tempSliderB);
+            context.fill(BPosX + 267, BPosY + 69, BPosX + 278, BPosY + 80, (this.tempSliderAlpha << 24) | (this.tempSliderR << 16) | (this.tempSliderG << 8) | (this.tempSliderB));
         }
         super.render(context, mouseX, mouseY, delta);
     }
@@ -594,9 +705,9 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             this.modelID = modelID;
             CleanColorSettingCache();
         }
-        return colorSettingCacheMap.computeIfAbsent(category, k -> new HashMap<>()).computeIfAbsent(this.getColorSetting(), k -> {
+        return colorSettingCacheMap.computeIfAbsent(category, k -> new HashMap<>()).computeIfAbsent(this.getColorSetting(true), k -> {
             // 这种方法不会内存泄漏 但是得自己管理临时材质
-            NativeImageBackedTexture nativeImageBackedTexture = FormTextureUtils.BakeTextureNoMemLeak(texture, mask, this.getColorSetting(), OnlyMultiply);
+            NativeImageBackedTexture nativeImageBackedTexture = FormTextureUtils.BakeTextureNoMemLeak(texture, mask, this.getColorSetting(true), OnlyMultiply);
             Identifier id = getNextDynamicFormID();
             minecraftClient.getTextureManager().registerTexture(id, nativeImageBackedTexture);
             return id;
@@ -617,7 +728,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             isUsingTempTexture = false;
         }
         try {
-            ModPacketsS2C.sendUpdateCustomSetting(this.getColorSetting()); // 如果没进游戏时会发送失败 懒得做判断了 加一个Try
+            ModPacketsS2C.sendUpdateCustomSetting(this.getColorSetting(false)); // 如果没进游戏时会发送失败 懒得做判断了 加一个Try
         } catch (Exception ignored) {
         }
         this.saveData();

@@ -1,15 +1,20 @@
 package net.onixary.shapeShifterCurseFabric.util;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.texture.NativeImageBackedTexture;
 import net.minecraft.client.texture.TextureManager;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.lang3.tuple.Triple;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.io.IOException;
@@ -280,5 +285,18 @@ public class FormTextureUtils {
             }
         }
         return new NativeImageBackedTexture(textureImage);
+    }
+
+    // 仅渲染使用 会处理isEnableFormColor
+    public static @Nullable ColorSetting getPlayerColorSetting(PlayerEntity player) {
+        try {
+            PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(player);
+            if (!component.isEnableFormColor()) {
+                return null;
+            }
+            return component.getFormColor();
+        } catch (NullPointerException ignored) {
+            return null;
+        }
     }
 }
