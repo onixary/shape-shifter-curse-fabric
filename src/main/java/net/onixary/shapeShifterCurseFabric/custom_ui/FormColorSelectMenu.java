@@ -432,7 +432,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         );
         // 85,95,45,15 - 发送到剪切板
         this.addDrawableChild(ButtonWidget.builder(UploadToClipboard, button -> {
-            String keyBoardData = FormColorData.ColorSettingtoString(this.getColorSetting(false));
+            String keyBoardData = FormColorData.ColorSettingtoString(this.getColorSetting(false), true);
             if (keyBoardData == null) {
                 return;
             }

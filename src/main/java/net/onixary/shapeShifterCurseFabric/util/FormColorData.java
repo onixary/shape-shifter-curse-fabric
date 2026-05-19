@@ -1,7 +1,9 @@
 package net.onixary.shapeShifterCurseFabric.util;
 
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.nbt.*;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenu;
@@ -12,6 +14,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 
@@ -200,14 +203,101 @@ public class FormColorData {
         }
     }
 
-    public static @Nullable FormTextureUtils.ColorSetting ColorSettingFormString(String data) {
-        // TODO 得做一下压缩
-        return null;
+    public static byte[] ColorSettingToBytes(FormTextureUtils.ColorSetting colorSetting) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try (DataOutputStream dos = new DataOutputStream(baos)) {
+            dos.writeInt(1);  // 版本号
+            dos.writeInt(colorSetting.getPrimaryColor());
+            dos.writeInt(colorSetting.getAccentColor1());
+            dos.writeInt(colorSetting.getAccentColor2());
+            dos.writeInt(colorSetting.getEyeColorA());
+            dos.writeInt(colorSetting.getEyeColorB());
+            byte bools = 0;
+            bools |= (byte) (colorSetting.getPrimaryGreyReverse() ? 1 : 0);
+            bools |= (byte) (colorSetting.getAccent1GreyReverse() ? 2 : 0);
+            bools |= (byte) (colorSetting.getAccent2GreyReverse() ? 4 : 0);
+            dos.writeByte(bools);
+            dos.flush();
+            return baos.toByteArray();
+        } catch (Exception e) {
+            // 理论上不会发生，但若出错则返回空数组（或可抛运行时异常）
+            return new byte[0];
+        }
     }
 
-    public static String ColorSettingtoString(FormTextureUtils.ColorSetting data) {
-        // TODO 得做一下压缩
-        return null;
+    public static @Nullable FormTextureUtils.ColorSetting ColorSettingFromBytes(byte[] bytes) {
+        try (DataInputStream dis = new DataInputStream(new ByteArrayInputStream(bytes))) {
+            if (dis.readInt() != 1) {
+                return null;
+            }
+            int primaryColor = dis.readInt();
+            int accentColor1 = dis.readInt();
+            int accentColor2 = dis.readInt();
+            int eyeColorA = dis.readInt();
+            int eyeColorB = dis.readInt();
+            byte bools = dis.readByte();
+            boolean primaryGreyReverse = (bools & 1) != 0;
+            boolean accent1GreyReverse = (bools & 2) != 0;
+            boolean accent2GreyReverse = (bools & 4) != 0;
+            return new FormTextureUtils.ColorSetting(primaryColor, accentColor1, accentColor2,
+                    eyeColorA, eyeColorB, primaryGreyReverse, accent1GreyReverse, accent2GreyReverse);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static byte[] formHex(String hex) {
+        if (hex == null || hex.isEmpty() || hex.length() % 2 != 0) {
+            return null;
+        }
+        int len = hex.length() / 2;
+        byte[] result = new byte[len];
+        for (int i = 0; i < len; i++) {
+            String byteStr = hex.substring(i * 2, i * 2 + 2);
+            try {
+                int val = Integer.parseInt(byteStr, 16);
+                result[i] = (byte) val;
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        }
+        return result;
+    }
+
+    public static String toHex(byte[] bytes) {
+        if (bytes == null || bytes.length == 0) {
+            return null;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        for (byte b : bytes) {
+            stringBuilder.append(String.format("%02X", b & 0xFF));
+        }
+        return stringBuilder.toString();
+    }
+
+    public static @Nullable FormTextureUtils.ColorSetting ColorSettingFormString(String data) {
+        try {
+            if (data.startsWith("b")) {
+                byte[] bytes = Base64.getDecoder().decode(data.substring(1));
+                return ColorSettingFromBytes(bytes);
+            } else if (data.startsWith("#")) {
+                String hex = data.substring(1);
+                byte[] bytes = formHex(hex);
+                return ColorSettingFromBytes(bytes);
+            }
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static String ColorSettingtoString(FormTextureUtils.ColorSetting data, boolean useBase64) {
+        if (useBase64) {
+            byte[] bytes = FormColorData.ColorSettingToBytes(data);
+            return "b" + Base64.getEncoder().encodeToString(bytes);
+        } else {
+            return "#" + toHex(FormColorData.ColorSettingToBytes(data));
+        }
     }
 
     public String getName_LocalFormSlot(Identifier formID, int index) {
