@@ -1,8 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.util;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtIo;
+import net.minecraft.nbt.*;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
@@ -10,7 +9,9 @@ import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class FormColorData {
     public boolean enableDefaultFormColor = false;
@@ -18,6 +19,9 @@ public class FormColorData {
 
     public final HashMap<String, FormTextureUtils.ColorSetting> customSetting = new HashMap<>();
     public final HashMap<Identifier, HashMap<String, FormTextureUtils.ColorSetting>> customSettingByForm = new HashMap<>();
+
+    public final List<String> FormColorSelectMenu_Form_Local_Names = new ArrayList<>(4);
+    public final List<String> FormColorSelectMenu_Global_Names = new ArrayList<>(9);
 
     public NbtCompound dumpColorSetting(FormTextureUtils.ColorSetting colorSetting) {
         NbtCompound nbt = new NbtCompound();
@@ -58,6 +62,16 @@ public class FormColorData {
             customSettingByFormNbt.put(form.toString(), formNbt);
         }
         nbt.put("customSettingByForm", customSettingByFormNbt);
+        NbtList nbtList = new NbtList();
+        for (String name : FormColorSelectMenu_Form_Local_Names) {
+            nbtList.add(NbtString.of(name));
+        }
+        nbt.put("FCS_form_local_setting_names", nbtList);
+        nbtList = new NbtList();
+        for (String name : FormColorSelectMenu_Global_Names) {
+            nbtList.add(NbtString.of(name));
+        }
+        nbt.put("FCS_global_setting_names", nbtList);
         return nbt;
     }
 
@@ -65,6 +79,14 @@ public class FormColorData {
         formDefaultSetting.clear();
         customSetting.clear();
         customSettingByForm.clear();
+        FormColorSelectMenu_Form_Local_Names.clear();
+        for (int i = 0; i < 4; i++) {
+            FormColorSelectMenu_Form_Local_Names.add("");
+        }
+        FormColorSelectMenu_Global_Names.clear();
+        for (int i = 0; i < 9; i++) {
+            FormColorSelectMenu_Global_Names.add("");
+        }
         if (compound.contains("enableDefaultFormColor")) {
             enableDefaultFormColor = compound.getBoolean("enableDefaultFormColor");
         }
@@ -100,6 +122,18 @@ public class FormColorData {
                         ShapeShifterCurseFabric.LOGGER.warn("Failed to load custom color setting for " + name + " on form " + form + ": " + e.getMessage());
                     }
                 }
+            }
+        }
+        if (compound.contains("FCS_form_local_setting_names")) {
+            NbtList nbtList = compound.getList("FCS_form_local_setting_names", NbtElement.STRING_TYPE);
+            for (int i = 0; i < nbtList.size(); i++) {
+                FormColorSelectMenu_Form_Local_Names.set(i, nbtList.getString(i));
+            }
+        }
+        if (compound.contains("FCS_global_setting_names")) {
+            NbtList nbtList = compound.getList("FCS_global_setting_names", NbtElement.STRING_TYPE);
+            for (int i = 0; i < nbtList.size(); i++) {
+                FormColorSelectMenu_Global_Names.set(i, nbtList.getString(i));
             }
         }
     }

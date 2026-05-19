@@ -4,17 +4,21 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.texture.NativeImageBackedTexture;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
@@ -43,6 +47,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         colorSettingCacheMap.clear();
     }
 
+    // 顺序是 ARGB
     private int primaryColor = 0xFFFFFFFF;
     private int accentColor1Color = 0xFFFFFFFF;
     private int accentColor2Color = 0xFFFFFFFF;
@@ -60,6 +65,22 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     private int tempSliderG = 0;
     private int tempSliderB = 0;
     private int tempSliderAlpha = 0;
+
+    private boolean isOpenSlider = false;
+    private List<Element> config_panel_01 = new ArrayList<>();  // 保存config输入框 label之类的 用于切换
+    private List<Element> config_panel_02 = new ArrayList<>();  // 保存 RGB条 一些按钮
+
+    public void updateSlider() {
+        int Color = tempSliderAlpha << 24 | tempSliderR << 16 | tempSliderG << 8 | tempSliderB;
+        switch (tempSliderConfigIndex) {
+            case 0 -> primaryColor = Color;
+            case 1 -> accentColor1Color = Color;
+            case 2 -> accentColor2Color = Color;
+            case 3 -> eyeColorA = Color;
+            case 4 -> eyeColorB = Color;
+        }
+        isColorSettingDirty = true;
+    }
 
     public void loadData(boolean serverSide) {
         if (serverSide) {
@@ -128,13 +149,17 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             this.modelID = modelID;
             CleanColorSettingCache();
         }
-        return colorSettingCacheMap.computeIfAbsent(category, k -> new HashMap<>()).computeIfAbsent(colorSetting, k -> {
+        return colorSettingCacheMap.computeIfAbsent(category, k -> new HashMap<>()).computeIfAbsent(this.getColorSetting(), k -> {
             // 这种方法不会内存泄漏 但是得自己管理临时材质
-            NativeImageBackedTexture nativeImageBackedTexture = FormTextureUtils.BakeTextureNoMemLeak(texture, mask, colorSetting, OnlyMultiply);
+            NativeImageBackedTexture nativeImageBackedTexture = FormTextureUtils.BakeTextureNoMemLeak(texture, mask, this.getColorSetting(), OnlyMultiply);
             Identifier id = getNextDynamicFormID();
             minecraftClient.getTextureManager().registerTexture(id, nativeImageBackedTexture);
             return id;
         });
+    }
+
+    public void saveData() {
+        // TODO 调用FormColorData存储
     }
 
     @Override
@@ -146,5 +171,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             FormTextureUtils.tempTextureProcessor = null;
             isUsingTempTexture = false;
         }
+        ModPacketsS2C.sendUpdateCustomSetting(this.getColorSetting());
+        this.saveData();
     }
 }
