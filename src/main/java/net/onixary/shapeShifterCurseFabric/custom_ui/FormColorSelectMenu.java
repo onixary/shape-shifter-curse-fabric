@@ -46,6 +46,13 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     private static final Text FormDefaultSlotTitle = Text.translatable("gui.shape_shifter_curse_fabric.fcs.form_default_slot_title");
     private static final Text Title = Text.translatable("gui.shape_shifter_curse_fabric.fcs.title");
 
+    private static final Text ColorChannel_R = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_r");
+    private static final Text ColorChannel_G = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_g");
+    private static final Text ColorChannel_B = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_b");
+
+    private static final Text IsEnableLayerLabel = Text.translatable("gui.shape_shifter_curse_fabric.fcs.is_enable_layer");
+    private static final Text ExitSliderButtonLabel = Text.translatable("gui.shape_shifter_curse_fabric.fcs.exit_slider_button");
+
     // Button
     private static final Text DownloadFromServer = Text.translatable("gui.shape_shifter_curse_fabric.fcs.from_server");
     private static final Text UploadToServer = Text.translatable("gui.shape_shifter_curse_fabric.fcs.to_server");
@@ -73,6 +80,11 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     private ButtonWidget primaryGreyReverseButton = null;
     private ButtonWidget accent1GreyReverseButton = null;
     private ButtonWidget accent2GreyReverseButton = null;
+
+    private TextFieldWidget sliderREditBox = null;
+    private TextFieldWidget sliderGEditBox = null;
+    private TextFieldWidget sliderBEditBox = null;
+    private ButtonWidget isEnableLayerButton = null;
 
     private static final MinecraftClient minecraftClient = MinecraftClient.getInstance();
 
@@ -127,6 +139,10 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             case 4 -> eyeColorB = Color;
         }
         isColorSettingDirty = true;
+    }
+
+    public void reloadSlider() {
+        // TODO
     }
 
     public void updatePanel() {
@@ -259,6 +275,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         this.primaryGreyReverseButton.setMessage(this.primaryGreyReverse ? BoolBTN_ON : BoolBTN_OFF);
         this.accent1GreyReverseButton.setMessage(this.accent1GreyReverse ? BoolBTN_ON : BoolBTN_OFF);
         this.accent2GreyReverseButton.setMessage(this.accent2GreyReverse ? BoolBTN_ON : BoolBTN_OFF);
+        this.reloadSlider();
         this.isUpdateUI = false;
     }
 
@@ -439,8 +456,79 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         this.addDrawableChild(accent2GreyReverseButton);
         this.config_panel_01.add(accent2GreyReverseButton);
         this.accent2GreyReverseButton = accent2GreyReverseButton;
-        this.isEditBoxInit = true;
         // TODO RGB条
+        // 139,27,25,11 R Label
+        TextWidget rLabel = new TextWidget(BPosX + 139, BPosY + 27, 25, 11, ColorChannel_R, textRenderer).setTextColor(0xDDDDDD);
+        this.addDrawableChild(rLabel);
+        this.config_panel_02.add(rLabel);
+        // 139,41,25,11 G Label
+        TextWidget gLabel = new TextWidget(BPosX + 139, BPosY + 41, 25, 11, ColorChannel_G, textRenderer).setTextColor(0xDDDDDD);
+        this.addDrawableChild(gLabel);
+        this.config_panel_02.add(gLabel);
+        // 139,55,25,11 B Label
+        TextWidget bLabel = new TextWidget(BPosX + 139, BPosY + 55, 25, 11, ColorChannel_B, textRenderer).setTextColor(0xDDDDDD);
+        this.addDrawableChild(bLabel);
+        this.config_panel_02.add(bLabel);
+        // 177,27,30,11 R Input
+        TextFieldWidget sliderREditBox = new TextFieldWidget(textRenderer, BPosX + 177, BPosY + 27, 30, 11, EmptyText);
+        sliderREditBox.setMaxLength(3);
+        sliderREditBox.setChangedListener((text) -> {
+            this.updateSlider();
+        });
+        this.addDrawableChild(sliderREditBox);
+        this.config_panel_02.add(sliderREditBox);
+        this.sliderREditBox = sliderREditBox;
+        // 177,41,30,11 G Input
+        TextFieldWidget sliderGEditBox = new TextFieldWidget(textRenderer, BPosX + 177, BPosY + 41, 30, 11, EmptyText);
+        sliderGEditBox.setMaxLength(3);
+        sliderGEditBox.setChangedListener((text) -> {
+            this.updateSlider();
+        });
+        this.addDrawableChild(sliderGEditBox);
+        this.config_panel_02.add(sliderGEditBox);
+        this.sliderGEditBox = sliderGEditBox;
+        // 177,55,30,11 B Input
+        TextFieldWidget sliderBEditBox = new TextFieldWidget(textRenderer, BPosX + 177, BPosY + 55, 30, 11, EmptyText);
+        sliderBEditBox.setMaxLength(3);
+        sliderBEditBox.setChangedListener((text) -> {
+            this.updateSlider();
+        });
+        this.addDrawableChild(sliderBEditBox);
+        this.config_panel_02.add(sliderBEditBox);
+        this.sliderBEditBox = sliderBEditBox;
+        // TODO 滑条
+        // Slider的改动直接改sliderXEditBox就行 不用updateSlider
+        // 211,27,100,11 R Slider
+        // 211,41,100,11 G Slider
+        // 211,55,100,11 B Slider
+        // 139,69,75,11 - Is Enable Layer Label
+        TextWidget isEnableLayerLabel = new TextWidget(BPosX + 139, BPosY + 69, 75, 11, IsEnableLayerLabel, textRenderer).setTextColor(0xDDDDDD);
+        this.addDrawableChild(isEnableLayerLabel);
+        this.config_panel_02.add(isEnableLayerLabel);
+        // 228,69,36,11 - Is Enable Layer Button
+        ButtonWidget isEnableLayerButton = ButtonWidget.builder(this.tempSliderAlpha != 0 ? BoolBTN_ON :BoolBTN_OFF, (button) -> {
+            this.tempSliderAlpha = this.tempSliderAlpha == 0 ? 255 : 0;
+            if (this.tempSliderAlpha != 0) {
+                button.setMessage(BoolBTN_ON);
+            }
+            else {
+                button.setMessage(BoolBTN_OFF);
+            }
+            this.updateSlider();
+        }).position(BPosX + 228, BPosY + 69).size(36, 11).build();
+        this.addDrawableChild(isEnableLayerButton);
+        this.config_panel_02.add(isEnableLayerButton);
+        this.isEnableLayerButton = isEnableLayerButton;
+        // 281,69,30,11 - Exit Slider Button
+        ButtonWidget exitSliderButton = ButtonWidget.builder(ExitSliderButtonLabel, (button) -> {
+            this.updateSlider();
+            this.isOpenSlider = false;
+            this.updatePanel();
+        }).position(BPosX + 281, BPosY + 69).size(30, 11).build();
+        this.addDrawableChild(exitSliderButton);
+        this.config_panel_02.add(exitSliderButton);
+
+        this.isEditBoxInit = true;
         this.updatePanel();
         // TODO 特殊按钮 这个得写class了
     }
@@ -482,8 +570,21 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         if (minecraftClient.player != null) {
             RenderEntity(context, BPosX + 50, BPosY + 100, 30, BPosX + 50 - mouseX, BPosY + 100 - mouseY, minecraftClient.player);
         }
-        // TODO Color Panel
-
+        if (!isOpenSlider) {
+            // 228,27,11,11
+            context.fill(BPosX + 228, BPosY + 27, BPosX + 239, BPosY + 38, this.primaryColor);
+            // 228,41,11,11
+            context.fill(BPosX + 228, BPosY + 41, BPosX + 239, BPosY + 52, this.accentColor1Color);
+            // 228,55,11,11
+            context.fill(BPosX + 228, BPosY + 55, BPosX + 239, BPosY + 66, this.accentColor2Color);
+            // 228,69,11,11
+            context.fill(BPosX + 228, BPosY + 69, BPosX + 239, BPosY + 80, this.eyeColorA);
+            // 228,83,11,11
+            context.fill(BPosX + 228, BPosY + 83, BPosX + 239, BPosY + 94, this.eyeColorB);
+        } else {
+            // 267,69,11,11
+            context.fill(BPosX + 267, BPosY + 69, BPosX + 278, BPosY + 80, this.tempSliderAlpha << 24 | this.tempSliderR | this.tempSliderG | this.tempSliderB);
+        }
         super.render(context, mouseX, mouseY, delta);
     }
 
@@ -520,5 +621,44 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         } catch (Exception ignored) {
         }
         this.saveData();
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        int BPosX = width / 2 - BG_WIDTH / 2;
+        int BPosY = height / 2 - BG_HEIGHT / 2;
+        if (!this.isOpenSlider && this.isEditBoxInit) {
+            // 228,27,11,11
+            if (mouseX > BPosX + 228 && mouseX < BPosX + 239 && mouseY > BPosY + 27 && mouseY < BPosY + 38) {
+                this.tempSliderConfigIndex = 0;
+                this.isOpenSlider = true;
+                this.updatePanel();
+            } else
+            // 228,41,11,11
+            if (mouseX > BPosX + 228 && mouseX < BPosX + 239 && mouseY > BPosY + 41 && mouseY < BPosY + 52) {
+                this.tempSliderConfigIndex = 1;
+                this.isOpenSlider = true;
+                this.updatePanel();
+            } else
+            // 228,55,11,11
+            if (mouseX > BPosX + 228 && mouseX < BPosX + 239 && mouseY > BPosY + 55 && mouseY < BPosY + 66) {
+                this.tempSliderConfigIndex = 2;
+                this.isOpenSlider = true;
+                this.updatePanel();
+            } else
+            // 228,69,11,11
+            if (mouseX > BPosX + 228 && mouseX < BPosX + 239 && mouseY > BPosY + 69 && mouseY < BPosY + 80) {
+                this.tempSliderConfigIndex = 3;
+                this.isOpenSlider = true;
+                this.updatePanel();
+            } else
+            // 228,83,11,11
+            if (mouseX > BPosX + 228 && mouseX < BPosX + 239 && mouseY > BPosY + 83 && mouseY < BPosY + 94) {
+                this.tempSliderConfigIndex = 4;
+                this.isOpenSlider = true;
+                this.updatePanel();
+            }
+        }
+        return super.mouseClicked(mouseX, mouseY, button);
     }
 }
