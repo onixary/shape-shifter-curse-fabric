@@ -5,6 +5,7 @@ import net.minecraft.nbt.*;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -170,5 +171,15 @@ public class FormColorData {
                 ShapeShifterCurseFabric.LOGGER.error("Failed to load form color data from config file: " + e);
             }
         }
+    }
+
+    public static @Nullable FormTextureUtils.ColorSetting ColorSettingFormString(String data) {
+        // TODO
+        return null;
+    }
+
+    public static String ColorSettingtoString(FormTextureUtils.ColorSetting data) {
+        // TODO
+        return null;
     }
 }

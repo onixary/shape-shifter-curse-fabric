@@ -290,18 +290,15 @@ public class ModPacketsS2C {
         TransformManager.executeClientFirstPersonReset();
         new Thread(() -> {
             // 延时5s, 等待服务器component加载完成 重复12次 共计1min
-            boolean success = false;
             for (int i = 0; i < 60; i++) {
                 try {
                     Thread.sleep(1000);
                     sendUpdateCustomSetting();
-                    success = true;
+                    return;
                 } catch (Exception ignored) {
                 }
             }
-            if (!success) {
-                ShapeShifterCurseFabric.LOGGER.error("Failed to send custom setting to server after 60 seconds");
-            }
+            ShapeShifterCurseFabric.LOGGER.error("Failed to send custom setting to server after 60 seconds");
         }).start();
     }
 
@@ -309,11 +306,11 @@ public class ModPacketsS2C {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.keep_original_skin);
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.enable_form_color);
-        buf.writeInt(colorSetting.getPrimaryColor());
-        buf.writeInt(colorSetting.getAccentColor1());
-        buf.writeInt(colorSetting.getAccentColor2());
-        buf.writeInt(colorSetting.getEyeColorA());
-        buf.writeInt(colorSetting.getEyeColorB());
+        buf.writeInt(FormTextureUtils.ARGB2ABGR(colorSetting.getPrimaryColor()));
+        buf.writeInt(FormTextureUtils.ARGB2ABGR(colorSetting.getAccentColor1()));
+        buf.writeInt(FormTextureUtils.ARGB2ABGR(colorSetting.getAccentColor2()));
+        buf.writeInt(FormTextureUtils.ARGB2ABGR(colorSetting.getEyeColorA()));
+        buf.writeInt(FormTextureUtils.ARGB2ABGR(colorSetting.getEyeColorB()));
         buf.writeBoolean(colorSetting.getPrimaryGreyReverse());
         buf.writeBoolean(colorSetting.getAccent1GreyReverse());
         buf.writeBoolean(colorSetting.getAccent2GreyReverse());
