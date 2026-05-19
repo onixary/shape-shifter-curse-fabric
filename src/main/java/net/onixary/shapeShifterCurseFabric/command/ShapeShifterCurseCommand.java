@@ -149,6 +149,7 @@ public class ShapeShifterCurseCommand {
                                 .executes(ShapeShifterCurseCommand::logPatronInfo)
                         )
         );
+        // TODO 存储形态颜色命令 通过网络包传输指令(命令仅运行在服务器 客户端操作需要发网络包) 还得在ClientConfig里加一个配置(阻止服务器命令修改本地数据库) 防止服务器使用这个接口填满客户端存储空间
     }
 
     private static int setForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {

@@ -357,9 +357,13 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
 
     @Override
     public void init() {
+        // 格式:
+        // X,Y,Width,Height - WidgetDesc
+        // 推荐使用AI自动补全修改 先注释掉原来的代码 重新写那个位置大小注释 AI大概率能正确填充
+
         super.init();
-        int BPosX = width / 2 - BG_WIDTH / 2;
-        int BPosY = height / 2 - BG_HEIGHT / 2;
+        int BPosX = width / 2 - BG_WIDTH / 2;  // 图片左上角 X
+        int BPosY = height / 2 - BG_HEIGHT / 2;  // 图片左上角 Y
         // Label
         // 20,128,80,9 - 形态4槽
         this.addDrawableChild(new TextWidget(BPosX + 20, BPosY + 128, 80, 9, FormSlotTitle, textRenderer).setTextColor(0xDDDDDD));
@@ -642,6 +646,13 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         this.addDrawableChild(exitSliderButton);
         this.config_panel_02.add(exitSliderButton);
 
+        this.formLocalSettingButtons.clear();
+        this.formLocalSettingTextFields.clear();
+        this.formDefaultSettingButton = null;
+        this.formDefaultSettingTextField = null;
+        this.globalSettingButtons.clear();
+        this.globalSettingTextFields.clear();
+
         // 20,140,80,15 local_form_slot_1
         this.createSaveDataButtons(0, 0, BPosX + 20, BPosY + 140);
         // 20,158,80,15 local_form_slot_2
@@ -755,7 +766,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     }
 
     public void saveData() {
-        // TODO 调用FormColorData存储
+        ShapeShifterCurseFabricClient.formColorData.writeToConfig();
     }
 
     @Override
@@ -915,12 +926,12 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         this.updateSavaButtonActive();
     }
 
-    private List<Pair<FCS_ButtonWidget, FCS_ButtonWidget>> formLocalSettingButtons = new ArrayList<>();
-    private List<TextFieldWidget> formLocalSettingTextFields = new ArrayList<>();
+    private final List<Pair<FCS_ButtonWidget, FCS_ButtonWidget>> formLocalSettingButtons = new ArrayList<>();
+    private final List<TextFieldWidget> formLocalSettingTextFields = new ArrayList<>();
     private Pair<FCS_ButtonWidget, FCS_ButtonWidget> formDefaultSettingButton = null;
     private TextFieldWidget formDefaultSettingTextField = null;
-    private List<Pair<FCS_ButtonWidget, FCS_ButtonWidget>> globalSettingButtons = new ArrayList<>();
-    private List<TextFieldWidget> globalSettingTextFields = new ArrayList<>();
+    private final List<Pair<FCS_ButtonWidget, FCS_ButtonWidget>> globalSettingButtons = new ArrayList<>();
+    private final List<TextFieldWidget> globalSettingTextFields = new ArrayList<>();
 
     private void updateSavaButtonActive() {
         if (this.isScreenInit) {
@@ -946,8 +957,8 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
                     updButtonWidget.TEXTURE_X = dataExist ? 15 : 0;
                 }
                 boolean dataExist = this.isFormDefaultSettingExists();
-                this.formDefaultSettingButton.getLeft().active = dataExist;
-                this.formDefaultSettingButton.getRight().active = true;
+                this.formDefaultSettingButton.getLeft().active = true;
+                this.formDefaultSettingButton.getRight().active = dataExist;
                 this.formDefaultSettingButton.getLeft().TEXTURE_X = dataExist ? 15 : 0;
             }
             for (int index = 0; index < globalSettingButtons.size(); index++) {
@@ -1041,33 +1052,27 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             if (button instanceof FCS_ButtonWidget fcsButtonWidget) {
                 // 靠UI判断 省的写一个变量了
                 if (fcsButtonWidget.TEXTURE_X == 15) {
-                    this.loadSaveData(fcsButtonWidget.ButtonType, fcsButtonWidget.Index);
+                    this.loadSaveData(ButtonType, Index);
                 } else if (fcsButtonWidget.TEXTURE_X == 0) {
-                    this.saveCustomColorData(fcsButtonWidget.ButtonType, fcsButtonWidget.Index);
+                    this.saveCustomColorData(ButtonType, Index);
                 }
             }
         }), (textSupplier) -> (MutableText)textSupplier.get(), 0);
-        updButtonWidget.ButtonType = ButtonType;
-        updButtonWidget.Index = Index;
 
         // X+15,Y+0,50,15 slot name input
-        FCS_TextFieldWidget textFieldWidget = new FCS_TextFieldWidget(this.textRenderer, X + 15, Y, 50, 15, Text.literal(this.getSlotName(ButtonType, Index)));
-        textFieldWidget.onChanged = (widget) -> {
-            this.saveSlotName(widget.ButtonType, widget.Index);
-        };
-        textFieldWidget.ButtonType = ButtonType;
-        textFieldWidget.Index = Index;
+        TextFieldWidget textFieldWidget = new TextFieldWidget(this.textRenderer, X + 15, Y, 50, 15, Text.literal(this.getSlotName(ButtonType, Index)));
+        textFieldWidget.setChangedListener((text) -> {
+            this.saveSlotName(ButtonType, Index);
+        });
 
         // X+65,Y+0,15,15 delete Button
         FCS_ButtonWidget deleteButtonWidget = new FCS_ButtonWidget(X + 65, Y, EmptyText, (button -> {
             if (button instanceof FCS_ButtonWidget fcsButtonWidget) {
                 if (fcsButtonWidget.TEXTURE_X == 30) {
-                    this.deleteSaveData(fcsButtonWidget.ButtonType, fcsButtonWidget.Index);
+                    this.deleteSaveData(ButtonType, Index);
                 }
             }
         }), (textSupplier) -> (MutableText)textSupplier.get(), 30);
-        deleteButtonWidget.ButtonType = ButtonType;
-        deleteButtonWidget.Index = Index;
         switch (ButtonType) {
             case 0:
                 formLocalSettingButtons.add(new Pair<>(updButtonWidget, deleteButtonWidget));

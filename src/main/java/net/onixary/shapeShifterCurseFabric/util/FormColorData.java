@@ -157,6 +157,7 @@ public class FormColorData {
 
     // 挂一个钩子在网络接受形态上 比如客户端的SYNC_FORM_CHANGE接收函数上
     public void onClientFormChange(Identifier form) {
+        // TODO 挂载系统 + 新增配置
         if (this.enableDefaultFormColor && this.formDefaultSetting.containsKey(form)) {
             ModPacketsS2C.sendUpdateCustomSetting(this.formDefaultSetting.get(form));
         }
@@ -190,12 +191,12 @@ public class FormColorData {
     }
 
     public static @Nullable FormTextureUtils.ColorSetting ColorSettingFormString(String data) {
-        // TODO
+        // TODO 得做一下压缩
         return null;
     }
 
     public static String ColorSettingtoString(FormTextureUtils.ColorSetting data) {
-        // TODO
+        // TODO 得做一下压缩
         return null;
     }
 
