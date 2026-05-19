@@ -18,10 +18,15 @@ import java.io.InputStream;
 
 // 尽量少在Origin Fur中修改 减少后续工作量
 public class FormTextureUtils {
+    public interface TempTextureProcessor {
+        // 需要自行实现缓存 Model的缓存带内存泄漏
+        Identifier getTexture(int modelID, String category, Identifier texture, Identifier mask, boolean OnlyMultiply);
+    }
 
-    // onixary: 加入每个通道的覆盖强度overrideStrength的float参数，范围0.0~1.0
-    // 一些形态原版的贴图过黑，转换为灰度后无法看出自定义颜色，
-    // 应用后的灰度 = max(原灰度 + overrideStrength*255, 255)
+    public static boolean useTempTexture = false;
+    public static TempTextureProcessor tempTextureProcessor = null;
+
+
     public record ColorSetting(int primaryColor, int accentColor1, int accentColor2, int eyeColorA, int eyeColorB
             , boolean primaryGreyReverse, boolean accent1GreyReverse, boolean accent2GreyReverse) {
         public int getPrimaryColor() {
