@@ -1,26 +1,29 @@
 package net.onixary.shapeShifterCurseFabric.custom_ui;
 
+import blue.endless.jankson.annotation.Nullable;
 import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.annotation.ConfigEntry;
-import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.widget.*;
 import net.minecraft.client.texture.NativeImageBackedTexture;
 import net.minecraft.client.texture.TextureManager;
-import net.minecraft.client.util.Clipboard;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TextColor;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.config.PlayerCustomConfig;
+import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.FCS_ButtonWidget;
+import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.FCS_TextFieldWidget;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.SimpleIntSliderWidget;
-import net.onixary.shapeShifterCurseFabric.data.CodexData;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.util.FormColorData;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
@@ -74,7 +77,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     private static final Text Accent1GreyReverseLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.accent1GreyReverse");
     private static final Text Accent2GreyReverseLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse");
 
-    private boolean isEditBoxInit = false;
+    private boolean isScreenInit = false;
     private TextFieldWidget primaryColorEditBox = null;
     private TextFieldWidget accentColor1EditBox = null;
     private TextFieldWidget accentColor2EditBox = null;
@@ -321,7 +324,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     private boolean isUpdateSlider = false;
 
     public void onConfigChanged() {
-        if (!this.isEditBoxInit || isUpdateUI) {
+        if (!this.isScreenInit || isUpdateUI) {
             return;
         }
         this.primaryColor = decodeColor(this.primaryColorEditBox.getText());
@@ -336,7 +339,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     }
 
     public void updateUI() {
-        if (!this.isEditBoxInit) {
+        if (!this.isScreenInit) {
             return;
         }
         this.isUpdateUI = true;
@@ -639,9 +642,39 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         this.addDrawableChild(exitSliderButton);
         this.config_panel_02.add(exitSliderButton);
 
-        this.isEditBoxInit = true;
+        // 20,140,80,15 local_form_slot_1
+        this.createSaveDataButtons(0, 0, BPosX + 20, BPosY + 140);
+        // 20,158,80,15 local_form_slot_2
+        this.createSaveDataButtons(0, 1, BPosX + 20, BPosY + 158);
+        // 20,176,80,15 local_form_slot_3
+        this.createSaveDataButtons(0, 2, BPosX + 20, BPosY + 176);
+        // 20,194,80,15 local_form_slot_4
+        this.createSaveDataButtons(0, 3, BPosX + 20, BPosY + 194);
+
+        // 320,17,80,15 global_form_slot_1
+        this.createSaveDataButtons(1, 0, BPosX + 320, BPosY + 17);
+        // 320,35,80,15 global_form_slot_2
+        this.createSaveDataButtons(1, 1, BPosX + 320, BPosY + 35);
+        // 320,53,80,15 global_form_slot_3
+        this.createSaveDataButtons(1, 2, BPosX + 320, BPosY + 53);
+        // 320,71,80,15 global_form_slot_4
+        this.createSaveDataButtons(1, 3, BPosX + 320, BPosY + 71);
+        // 320,89,80,15 global_form_slot_5
+        this.createSaveDataButtons(1, 4, BPosX + 320, BPosY + 89);
+        // 320,107,80,15 global_form_slot_6
+        this.createSaveDataButtons(1, 5, BPosX + 320, BPosY + 107);
+        // 320,125,80,15 global_form_slot_7
+        this.createSaveDataButtons(1, 6, BPosX + 320, BPosY + 125);
+        // 320,143,80,15 global_form_slot_8
+        this.createSaveDataButtons(1, 7, BPosX + 320, BPosY + 143);
+        // 320,161,80,15 global_form_slot_9
+        this.createSaveDataButtons(1, 8, BPosX + 320, BPosY + 161);
+
+        // 320,194,80,15 form_default_slot
+        this.createSaveDataButtons(2, 0, BPosX + 320, BPosY + 194);
+
+        this.isScreenInit = true;
         this.updatePanel();
-        // TODO 特殊按钮 这个得写class了
     }
 
     private void RenderEntity(DrawContext context, int x, int y, int size, int mouseX, int mouseY, LivingEntity entity) {
@@ -671,6 +704,8 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         entity.headYaw = l;
     }
 
+    private static int timer = 0;
+
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         int BPosX = width / 2 - BG_WIDTH / 2;
@@ -695,6 +730,11 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         } else {
             // 267,69,11,11
             context.fill(BPosX + 267, BPosY + 69, BPosX + 278, BPosY + 80, (this.tempSliderAlpha << 24) | (this.tempSliderR << 16) | (this.tempSliderG << 8) | (this.tempSliderB));
+        }
+        if (timer > 60) {
+            this.updateSavaButtonActive();
+        } else {
+            timer++;
         }
         super.render(context, mouseX, mouseY, delta);
     }
@@ -738,7 +778,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         int BPosX = width / 2 - BG_WIDTH / 2;
         int BPosY = height / 2 - BG_HEIGHT / 2;
-        if (!this.isOpenSlider && this.isEditBoxInit && button != 0) {
+        if (!this.isOpenSlider && this.isScreenInit && button != 0) {
             // 228,27,11,11
             if (mouseX > BPosX + 228 && mouseX < BPosX + 239 && mouseY > BPosY + 27 && mouseY < BPosY + 38) {
                 this.tempSliderConfigIndex = 0;
@@ -771,5 +811,279 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             }
         }
         return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    private @Nullable Identifier getPlayerForm() {
+        PlayerEntity player = minecraftClient.player;
+        if (player == null) {
+            return null;
+        }
+        PlayerFormComponent playerFormComponent = RegPlayerFormComponent.PLAYER_FORM.get(player);
+        return playerFormComponent.getCurrentForm().FormID;
+    }
+
+    private boolean isFormLocalSettingExists(int index) {
+        String id = String.format("fcs_%s", index);
+        Identifier formID = this.getPlayerForm();
+        if (formID != null) {
+            return ShapeShifterCurseFabricClient.formColorData.customSettingByForm.getOrDefault(formID, new HashMap<>()).containsKey(id);
+        }
+        return false;
+    }
+
+    private @Nullable FormTextureUtils.ColorSetting getFormLocalSetting(int index) {
+        String id = String.format("fcs_%s", index);
+        Identifier formID = this.getPlayerForm();
+        if (formID != null) {
+            return ShapeShifterCurseFabricClient.formColorData.customSettingByForm.getOrDefault(formID, new HashMap<>()).get(id);
+        }
+        return null;
+    }
+
+    private void setFormLocalSetting(int index) {
+        String id = String.format("fcs_%s", index);
+        Identifier formID = this.getPlayerForm();
+        if (formID != null) {
+            FormTextureUtils.ColorSetting colorSettingRGBA = this.getColorSetting(false);
+            ShapeShifterCurseFabricClient.formColorData.customSettingByForm.computeIfAbsent(formID, k -> new HashMap<>()).put(id, colorSettingRGBA);
+        }
+        this.updateSavaButtonActive();
+    }
+
+    private void removeFormLocalSetting(int index) {
+        String id = String.format("fcs_%s", index);
+        Identifier formID = this.getPlayerForm();
+        if (formID != null) {
+            ShapeShifterCurseFabricClient.formColorData.customSettingByForm.computeIfAbsent(formID, k -> new HashMap<>()).remove(id);
+        }
+        this.updateSavaButtonActive();
+    }
+
+    private boolean isGlobalSettingExists(int index) {
+        String id = String.format("fcs_%s", index);
+        return ShapeShifterCurseFabricClient.formColorData.customSetting.containsKey(id);
+    }
+
+    private @Nullable FormTextureUtils.ColorSetting getGlobalSetting(int index) {
+        String id = String.format("fcs_%s", index);
+        return ShapeShifterCurseFabricClient.formColorData.customSetting.get(id);
+    }
+
+    private void setGlobalSetting(int index) {
+        String id = String.format("fcs_%s", index);
+        FormTextureUtils.ColorSetting colorSettingRGBA = this.getColorSetting(false);
+        ShapeShifterCurseFabricClient.formColorData.customSetting.put(id, colorSettingRGBA);
+        this.updateSavaButtonActive();
+    }
+
+    private void removeGlobalSetting(int index) {
+        String id = String.format("fcs_%s", index);
+        ShapeShifterCurseFabricClient.formColorData.customSetting.remove(id);
+        this.updateSavaButtonActive();
+    }
+
+    private boolean isFormDefaultSettingExists() {
+        Identifier formID = this.getPlayerForm();
+        if (formID != null) {
+            return ShapeShifterCurseFabricClient.formColorData.formDefaultSetting.containsKey(formID);
+        }
+        return false;
+    }
+
+    private @Nullable FormTextureUtils.ColorSetting getFormDefaultSetting() {
+        Identifier formID = this.getPlayerForm();
+        if (formID != null) {
+            return ShapeShifterCurseFabricClient.formColorData.formDefaultSetting.get(formID);
+        }
+        return null;
+    }
+
+    private void setFormDefaultSetting() {
+        Identifier formID = this.getPlayerForm();
+        if (formID != null) {
+            FormTextureUtils.ColorSetting colorSettingRGBA = this.getColorSetting(false);
+            ShapeShifterCurseFabricClient.formColorData.formDefaultSetting.put(formID, colorSettingRGBA);
+        }
+        this.updateSavaButtonActive();
+    }
+
+    private void removeFormDefaultSetting() {
+        Identifier formID = this.getPlayerForm();
+        if (formID != null) {
+            ShapeShifterCurseFabricClient.formColorData.formDefaultSetting.remove(formID);
+        }
+        this.updateSavaButtonActive();
+    }
+
+    private List<Pair<FCS_ButtonWidget, FCS_ButtonWidget>> formLocalSettingButtons = new ArrayList<>();
+    private List<TextFieldWidget> formLocalSettingTextFields = new ArrayList<>();
+    private Pair<FCS_ButtonWidget, FCS_ButtonWidget> formDefaultSettingButton = null;
+    private TextFieldWidget formDefaultSettingTextField = null;
+    private List<Pair<FCS_ButtonWidget, FCS_ButtonWidget>> globalSettingButtons = new ArrayList<>();
+    private List<TextFieldWidget> globalSettingTextFields = new ArrayList<>();
+
+    private void updateSavaButtonActive() {
+        if (this.isScreenInit) {
+            if (minecraftClient.player == null) {
+                for (Pair<FCS_ButtonWidget, FCS_ButtonWidget> buttonWidget : this.formLocalSettingButtons) {
+                    FCS_ButtonWidget deleteButtonWidget = buttonWidget.getRight();
+                    deleteButtonWidget.active = false;
+                    FCS_ButtonWidget updButtonWidget = buttonWidget.getLeft();
+                    updButtonWidget.active = false;
+                    updButtonWidget.TEXTURE_X = 0;
+                }
+                this.formDefaultSettingButton.getLeft().active = false;
+                this.formDefaultSettingButton.getRight().active = false;
+                this.formDefaultSettingButton.getLeft().TEXTURE_X = 0;
+            } else {
+                for (int index = 0; index < formLocalSettingButtons.size(); index++) {
+                    boolean dataExist = this.isFormLocalSettingExists(index);
+                    Pair<FCS_ButtonWidget, FCS_ButtonWidget> buttonWidget = formLocalSettingButtons.get(index);
+                    FCS_ButtonWidget deleteButtonWidget = buttonWidget.getRight();
+                    deleteButtonWidget.active = dataExist;
+                    FCS_ButtonWidget updButtonWidget = buttonWidget.getLeft();
+                    updButtonWidget.active = true;
+                    updButtonWidget.TEXTURE_X = dataExist ? 15 : 0;
+                }
+                boolean dataExist = this.isFormDefaultSettingExists();
+                this.formDefaultSettingButton.getLeft().active = dataExist;
+                this.formDefaultSettingButton.getRight().active = true;
+                this.formDefaultSettingButton.getLeft().TEXTURE_X = dataExist ? 15 : 0;
+            }
+            for (int index = 0; index < globalSettingButtons.size(); index++) {
+                boolean dataExist = this.isGlobalSettingExists(index);
+                Pair<FCS_ButtonWidget, FCS_ButtonWidget> buttonWidget = globalSettingButtons.get(index);
+                FCS_ButtonWidget deleteButtonWidget = buttonWidget.getRight();
+                deleteButtonWidget.active = dataExist;
+                FCS_ButtonWidget updButtonWidget = buttonWidget.getLeft();
+                updButtonWidget.active = true;
+                updButtonWidget.TEXTURE_X = dataExist ? 15 : 0;
+            }
+        }
+    }
+
+    public void saveCustomColorData(int ButtonType, int Index) {
+        if (ButtonType == 0) {
+            this.setFormLocalSetting(Index);
+        } else if (ButtonType == 1) {
+            this.setGlobalSetting(Index);
+        } else if (ButtonType == 2) {
+            this.setFormDefaultSetting();
+        }
+        return;
+    }
+
+    private void deleteSaveData(int ButtonType, int Index) {
+        if (ButtonType == 0) {
+            this.removeFormLocalSetting(Index);
+        } else if (ButtonType == 1) {
+            this.removeGlobalSetting(Index);
+        } else if (ButtonType == 2) {
+            this.removeFormDefaultSetting();
+        }
+    }
+
+    private void loadSaveData(int ButtonType, int Index) {
+        @Nullable FormTextureUtils.ColorSetting colorSetting = null;
+        if (ButtonType == 0) {
+            colorSetting = getFormLocalSetting(Index);
+        } else if (ButtonType == 1) {
+            colorSetting = getGlobalSetting(Index);
+        } else if (ButtonType == 2) {
+            colorSetting = getFormDefaultSetting();
+        }
+        if (colorSetting != null) {
+            this.loadData(colorSetting);
+        }
+    }
+
+    private void saveSlotName(int ButtonType, int Index) {
+        if (ButtonType == 0) {
+            Identifier FormID = this.getPlayerForm();
+            if (FormID == null) {
+                return;
+            }
+            ShapeShifterCurseFabricClient.formColorData.setName_LocalFormSlot(FormID, Index, this.formLocalSettingTextFields.get(Index).getText());
+        } else if (ButtonType == 1) {
+            ShapeShifterCurseFabricClient.formColorData.setName_GlobalSlot(Index, this.globalSettingTextFields.get(Index).getText());
+        } else if (ButtonType == 2) {
+            Identifier FormID = this.getPlayerForm();
+            if (FormID == null) {
+                return;
+            }
+            ShapeShifterCurseFabricClient.formColorData.setName_DefaultSlot(FormID, this.formDefaultSettingTextField.getText());
+        }
+    }
+
+    private String getSlotName(int ButtonType, int Index) {
+        if (ButtonType == 0) {
+            Identifier FormID = this.getPlayerForm();
+            if (FormID == null) {
+                return "";
+            }
+            return ShapeShifterCurseFabricClient.formColorData.getName_LocalFormSlot(FormID, Index);
+        } else if (ButtonType == 1) {
+            return ShapeShifterCurseFabricClient.formColorData.getName_GlobalSlot(Index);
+        } else if (ButtonType == 2) {
+            Identifier FormID = this.getPlayerForm();
+            if (FormID == null)
+                return "";
+
+            return ShapeShifterCurseFabricClient.formColorData.getName_DefaultSlot(FormID);
+        }
+        return "";
+    }
+
+    private void createSaveDataButtons(int ButtonType, int Index, int X, int Y) {
+        // X,Y,80,15
+        // X+0,Y+0,15,15 upload/download Button
+        FCS_ButtonWidget updButtonWidget = new FCS_ButtonWidget(X, Y, EmptyText, (button -> {
+            if (button instanceof FCS_ButtonWidget fcsButtonWidget) {
+                // 靠UI判断 省的写一个变量了
+                if (fcsButtonWidget.TEXTURE_X == 15) {
+                    this.loadSaveData(fcsButtonWidget.ButtonType, fcsButtonWidget.Index);
+                } else if (fcsButtonWidget.TEXTURE_X == 0) {
+                    this.saveCustomColorData(fcsButtonWidget.ButtonType, fcsButtonWidget.Index);
+                }
+            }
+        }), (textSupplier) -> (MutableText)textSupplier.get(), 0);
+        updButtonWidget.ButtonType = ButtonType;
+        updButtonWidget.Index = Index;
+
+        // X+15,Y+0,50,15 slot name input
+        FCS_TextFieldWidget textFieldWidget = new FCS_TextFieldWidget(this.textRenderer, X + 15, Y, 50, 15, Text.literal(this.getSlotName(ButtonType, Index)));
+        textFieldWidget.onChanged = (widget) -> {
+            this.saveSlotName(widget.ButtonType, widget.Index);
+        };
+        textFieldWidget.ButtonType = ButtonType;
+        textFieldWidget.Index = Index;
+
+        // X+65,Y+0,15,15 delete Button
+        FCS_ButtonWidget deleteButtonWidget = new FCS_ButtonWidget(X + 65, Y, EmptyText, (button -> {
+            if (button instanceof FCS_ButtonWidget fcsButtonWidget) {
+                if (fcsButtonWidget.TEXTURE_X == 30) {
+                    this.deleteSaveData(fcsButtonWidget.ButtonType, fcsButtonWidget.Index);
+                }
+            }
+        }), (textSupplier) -> (MutableText)textSupplier.get(), 30);
+        deleteButtonWidget.ButtonType = ButtonType;
+        deleteButtonWidget.Index = Index;
+        switch (ButtonType) {
+            case 0:
+                formLocalSettingButtons.add(new Pair<>(updButtonWidget, deleteButtonWidget));
+                formLocalSettingTextFields.add(textFieldWidget);
+                break;
+            case 1:
+                globalSettingButtons.add(new Pair<>(updButtonWidget, deleteButtonWidget));
+                globalSettingTextFields.add(textFieldWidget);
+                break;
+            case 2:
+                formDefaultSettingButton = new Pair<>(updButtonWidget, deleteButtonWidget);
+                formDefaultSettingTextField = textFieldWidget;
+                break;
+        }
+        this.addDrawableChild(updButtonWidget);
+        this.addDrawableChild(textFieldWidget);
+        this.addDrawableChild(deleteButtonWidget);
     }
 }

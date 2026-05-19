@@ -21,8 +21,9 @@ public class FormColorData {
     public final HashMap<String, FormTextureUtils.ColorSetting> customSetting = new HashMap<>();
     public final HashMap<Identifier, HashMap<String, FormTextureUtils.ColorSetting>> customSettingByForm = new HashMap<>();
 
-    public final List<String> FormColorSelectMenu_Form_Local_Names = new ArrayList<>(4);
-    public final List<String> FormColorSelectMenu_Global_Names = new ArrayList<>(9);
+    public final HashMap<Identifier, List<String>> FormColorSelectMenu_Form_Local_Names = new HashMap<>();
+    public final List<String> FormColorSelectMenu_Global_Names = new ArrayList<String>();
+    public final HashMap<Identifier, String> FormColorSelectMenu_Form_Default_Names = new HashMap<>();
 
     public NbtCompound dumpColorSetting(FormTextureUtils.ColorSetting colorSetting) {
         NbtCompound nbt = new NbtCompound();
@@ -63,16 +64,25 @@ public class FormColorData {
             customSettingByFormNbt.put(form.toString(), formNbt);
         }
         nbt.put("customSettingByForm", customSettingByFormNbt);
-        NbtList nbtList = new NbtList();
-        for (String name : FormColorSelectMenu_Form_Local_Names) {
-            nbtList.add(NbtString.of(name));
+        NbtCompound formColorSelectMenuNbt = new NbtCompound();
+        for (Identifier form : FormColorSelectMenu_Form_Local_Names.keySet()) {
+            NbtList nbtList = new NbtList();
+            for (String name : FormColorSelectMenu_Form_Local_Names.get(form)) {
+                nbtList.add(NbtString.of(name));
+            }
+            formColorSelectMenuNbt.put(form.toString(), nbtList);
         }
-        nbt.put("FCS_form_local_setting_names", nbtList);
-        nbtList = new NbtList();
+        nbt.put("FCS_form_local_setting_names", formColorSelectMenuNbt);
+        NbtList nbtList = new NbtList();
         for (String name : FormColorSelectMenu_Global_Names) {
             nbtList.add(NbtString.of(name));
         }
         nbt.put("FCS_global_setting_names", nbtList);
+        NbtCompound formColorSelectMenuDefaultNbt = new NbtCompound();
+        for (Identifier form : FormColorSelectMenu_Form_Default_Names.keySet()) {
+            formColorSelectMenuDefaultNbt.putString(form.toString(), FormColorSelectMenu_Form_Default_Names.get(form));
+        }
+        nbt.put("FCS_form_default_setting_names", formColorSelectMenuDefaultNbt);
         return nbt;
     }
 
@@ -81,13 +91,7 @@ public class FormColorData {
         customSetting.clear();
         customSettingByForm.clear();
         FormColorSelectMenu_Form_Local_Names.clear();
-        for (int i = 0; i < 4; i++) {
-            FormColorSelectMenu_Form_Local_Names.add("");
-        }
         FormColorSelectMenu_Global_Names.clear();
-        for (int i = 0; i < 9; i++) {
-            FormColorSelectMenu_Global_Names.add("");
-        }
         if (compound.contains("enableDefaultFormColor")) {
             enableDefaultFormColor = compound.getBoolean("enableDefaultFormColor");
         }
@@ -126,15 +130,27 @@ public class FormColorData {
             }
         }
         if (compound.contains("FCS_form_local_setting_names")) {
-            NbtList nbtList = compound.getList("FCS_form_local_setting_names", NbtElement.STRING_TYPE);
-            for (int i = 0; i < nbtList.size(); i++) {
-                FormColorSelectMenu_Form_Local_Names.set(i, nbtList.getString(i));
+            NbtCompound nbtList = compound.getCompound("FCS_form_local_setting_names");
+            for (String form : nbtList.getKeys()) {
+                Identifier formId = Identifier.tryParse(form);
+                List<String> formSlotNames = FormColorSelectMenu_Form_Local_Names.computeIfAbsent(formId, k -> new ArrayList<>());
+                NbtList nbtList2 = nbtList.getList(form, NbtElement.STRING_TYPE);
+                for (int i = 0; i < nbtList2.size(); i++) {
+                    formSlotNames.add(nbtList2.getString(i));
+                }
             }
         }
         if (compound.contains("FCS_global_setting_names")) {
             NbtList nbtList = compound.getList("FCS_global_setting_names", NbtElement.STRING_TYPE);
             for (int i = 0; i < nbtList.size(); i++) {
                 FormColorSelectMenu_Global_Names.set(i, nbtList.getString(i));
+            }
+        }
+        if (compound.contains("FCS_form_default_setting_names")) {
+            NbtCompound nbtList = compound.getCompound("FCS_form_default_setting_names");
+            for (String form : nbtList.getKeys()) {
+                Identifier formId = Identifier.tryParse(form);
+                FormColorSelectMenu_Form_Default_Names.put(formId, nbtList.getString(form));
             }
         }
     }
@@ -181,5 +197,53 @@ public class FormColorData {
     public static String ColorSettingtoString(FormTextureUtils.ColorSetting data) {
         // TODO
         return null;
+    }
+
+    public String getName_LocalFormSlot(Identifier formID, int index) {
+        List<String> list = this.FormColorSelectMenu_Form_Local_Names.get(formID);
+        if (list != null && index < list.size()) {
+            return list.get(index);
+        }
+        return "";
+    }
+
+    public void setName_LocalFormSlot(Identifier formID, int index, String name) {
+        if (index > 9) {
+            return;
+        }
+        List<String> list = this.FormColorSelectMenu_Form_Local_Names.computeIfAbsent(formID, k -> new ArrayList<>());
+        if (index >= list.size()) {
+            for (int i = list.size(); i <= index; i++) {
+                list.add("");
+            }
+        }
+        list.set(index, name);
+    }
+
+    public String getName_GlobalSlot(int index) {
+        if (index < FormColorSelectMenu_Global_Names.size()) {
+            return FormColorSelectMenu_Global_Names.get(index);
+        }
+        return "";
+    }
+
+    public void setName_GlobalSlot(int index, String name) {
+        if (index > 4) {
+            return;
+        }
+        if (index >= FormColorSelectMenu_Global_Names.size()) {
+            for (int i = FormColorSelectMenu_Global_Names.size(); i <= index; i++) {
+                FormColorSelectMenu_Global_Names.add("");
+            }
+        }
+        FormColorSelectMenu_Global_Names.set(index, name);
+    }
+
+    public String getName_DefaultSlot(Identifier formID) {
+        return this.FormColorSelectMenu_Form_Default_Names.get(formID);
+    }
+
+    public void setName_DefaultSlot(Identifier formID, String name) {
+        this.FormColorSelectMenu_Form_Default_Names.put(formID, name);
     }
 }

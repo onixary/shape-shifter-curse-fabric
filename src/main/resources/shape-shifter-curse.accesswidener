@@ -31,3 +31,5 @@ accessible method net/minecraft/client/render/entity/LivingEntityRenderer getAni
 accessible method net/minecraft/client/render/entity/LivingEntityRenderer isVisible (Lnet/minecraft/entity/LivingEntity;)Z
 accessible method net/minecraft/client/gui/widget/SliderWidget getTextureV ()I
 accessible method net/minecraft/client/gui/widget/SliderWidget getYImage ()I
+accessible method net/minecraft/client/gui/widget/TextFieldWidget onChanged (Ljava/lang/String;)V
+
