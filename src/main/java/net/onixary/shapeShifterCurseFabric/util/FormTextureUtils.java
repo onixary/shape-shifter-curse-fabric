@@ -257,6 +257,12 @@ public class FormTextureUtils {
     }
 
     public static Identifier BakeTexture(Identifier texture, Identifier mask, ColorSetting colorSetting, boolean OnlyMultiply)  {
+        TextureManager TM = MinecraftClient.getInstance().getTextureManager();
+        // 客户端会在每次重载资源包时数据溢出 溢出量不高 等以后再优化吧
+        return TM.registerDynamicTexture("masked_texture", BakeTextureNoMemLeak(texture, mask, colorSetting, OnlyMultiply));
+    }
+
+    public static NativeImageBackedTexture BakeTextureNoMemLeak(Identifier texture, Identifier mask, ColorSetting colorSetting, boolean OnlyMultiply) {
         if (texture == null || mask == null) return null;
         NativeImage textureImage = toNativeImage(texture);
         NativeImage maskImage = toNativeImage(mask);
@@ -268,8 +274,6 @@ public class FormTextureUtils {
                 textureImage.setColor(x, y, ProcessPixel(textureImage.getColor(x, y), maskImage.getColor(x, y), colorSetting, MaskLayerAverageGreyScale, OnlyMultiply));
             }
         }
-        TextureManager TM = MinecraftClient.getInstance().getTextureManager();
-        // 客户端会在每次重载资源包时数据溢出 溢出量不高 等以后再优化吧
-        return TM.registerDynamicTexture("masked_texture", new NativeImageBackedTexture(textureImage));
+        return new NativeImageBackedTexture(textureImage);
     }
 }
