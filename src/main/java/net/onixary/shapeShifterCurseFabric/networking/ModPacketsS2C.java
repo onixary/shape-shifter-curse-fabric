@@ -35,6 +35,7 @@ import net.onixary.shapeShifterCurseFabric.custom_ui.PatronFormSelectScreen;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
 import net.onixary.shapeShifterCurseFabric.util.CustomEdibleUtils;
+import net.onixary.shapeShifterCurseFabric.util.FormColorData;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.Interface.IJumpController;
 import org.jetbrains.annotations.Nullable;
@@ -138,6 +139,9 @@ public class ModPacketsS2C {
                 ShapeShifterCurseFabric.LOGGER.info("Client received form change: " + newFormName);
                 // 触发动画重新初始化
                 net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.refreshPlayerAnimations();
+
+                // 更新 formColorData 的数据(其实是FormColorSelectMenu的数据) 如果启动了自动切换 那么还会自动切换颜色数据
+                ShapeShifterCurseFabricClient.formColorData.onClientFormChange(Identifier.tryParse(newFormName));
             }
         });
     }

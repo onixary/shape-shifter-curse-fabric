@@ -4,6 +4,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.nbt.*;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenu;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class FormColorData {
-    public boolean enableDefaultFormColor = false;
+    public boolean enableDefaultFormColor = true;
     public final HashMap<Identifier, FormTextureUtils.ColorSetting> formDefaultSetting = new HashMap<>();
 
     public final HashMap<String, FormTextureUtils.ColorSetting> customSetting = new HashMap<>();
@@ -143,7 +144,7 @@ public class FormColorData {
         if (compound.contains("FCS_global_setting_names")) {
             NbtList nbtList = compound.getList("FCS_global_setting_names", NbtElement.STRING_TYPE);
             for (int i = 0; i < nbtList.size(); i++) {
-                FormColorSelectMenu_Global_Names.set(i, nbtList.getString(i));
+                FormColorSelectMenu_Global_Names.add(nbtList.getString(i));
             }
         }
         if (compound.contains("FCS_form_default_setting_names")) {
@@ -161,6 +162,15 @@ public class FormColorData {
         if (this.enableDefaultFormColor && this.formDefaultSetting.containsKey(form)) {
             ModPacketsS2C.sendUpdateCustomSetting(this.formDefaultSetting.get(form));
         }
+        // 延时一下 好同步 "sendUpdateCustomSetting" 的更新
+        new Thread(() -> {
+            try {
+                Thread.sleep(1000);
+                FormColorSelectMenu.onFormChange_STATIC();
+            } catch (InterruptedException ignored) {
+                FormColorSelectMenu.onFormChange_STATIC();
+            }
+        }).start();
     }
 
     public Path getConfigPath() {

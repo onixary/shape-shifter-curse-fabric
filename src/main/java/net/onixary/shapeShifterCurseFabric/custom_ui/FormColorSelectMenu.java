@@ -19,7 +19,6 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.config.PlayerCustomConfig;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.FCS_ButtonWidget;
-import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.FCS_TextFieldWidget;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.SimpleIntSliderWidget;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
@@ -41,6 +40,8 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     private static final Identifier texture = new Identifier(MOD_ID,"textures/gui/form_color_select_menu.png");
     private static final int BG_WIDTH = 420;
     private static final int BG_HEIGHT = 227;
+
+    public static FormColorSelectMenu instance = null;
 
     private static final Text EmptyText = Text.empty();
     private static final Text BoolBTN_ON = Text.translatable("text.cloth-config.boolean.value.true");
@@ -277,6 +278,10 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             ShapeShifterCurseFabric.LOGGER.warn("Temp Texture System is already in use, dynamic texture rendering will not work");
             isUsingTempTexture = false;
         }
+        if (instance != null) {
+            ShapeShifterCurseFabric.LOGGER.error("FormColorSelectMenu is already in use, only one instance is allowed");
+        }
+        instance = this;
     }
 
     public void renderTextureBackground(DrawContext context) {
@@ -352,7 +357,21 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         this.accent1GreyReverseButton.setMessage(this.accent1GreyReverse ? BoolBTN_ON : BoolBTN_OFF);
         this.accent2GreyReverseButton.setMessage(this.accent2GreyReverse ? BoolBTN_ON : BoolBTN_OFF);
         this.reloadSlider();
+        this.reloadAllSlotName();
         this.isUpdateUI = false;
+    }
+
+    public void onFormChange() {
+        if (!this.isScreenInit) {
+            return;
+        }
+        this.loadData();
+    }
+
+    public static void onFormChange_STATIC() {
+        if (instance != null) {
+            instance.onFormChange();
+        }
     }
 
     @Override
@@ -778,6 +797,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             FormTextureUtils.tempTextureProcessor = null;
             isUsingTempTexture = false;
         }
+        instance = null;
         try {
             ModPacketsS2C.sendUpdateCustomSetting(this.getColorSetting(false)); // 如果没进游戏时会发送失败 懒得做判断了 加一个Try
         } catch (Exception ignored) {
@@ -1045,6 +1065,19 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         return "";
     }
 
+    private void reloadAllSlotName() {
+        for (int index = 0; index < globalSettingButtons.size(); index++) {
+            this.globalSettingTextFields.get(index).setText(this.getSlotName(1, index));
+        }
+        Identifier FormID = this.getPlayerForm();
+        if (FormID != null) {
+            this.formDefaultSettingTextField.setText(this.getSlotName(2, 0));
+            for (int index = 0; index < formLocalSettingButtons.size(); index++) {
+                this.formLocalSettingTextFields.get(index).setText(this.getSlotName(0, index));
+            }
+        }
+    }
+
     private void createSaveDataButtons(int ButtonType, int Index, int X, int Y) {
         // X,Y,80,15
         // X+0,Y+0,15,15 upload/download Button
@@ -1060,7 +1093,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         }), (textSupplier) -> (MutableText)textSupplier.get(), 0);
 
         // X+15,Y+0,50,15 slot name input
-        TextFieldWidget textFieldWidget = new TextFieldWidget(this.textRenderer, X + 15, Y, 50, 15, Text.literal(this.getSlotName(ButtonType, Index)));
+        TextFieldWidget textFieldWidget = new TextFieldWidget(this.textRenderer, X + 15, Y, 50, 15, EmptyText);
         textFieldWidget.setChangedListener((text) -> {
             this.saveSlotName(ButtonType, Index);
         });

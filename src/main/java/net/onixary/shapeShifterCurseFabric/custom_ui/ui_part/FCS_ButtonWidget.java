@@ -12,8 +12,6 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 public class FCS_ButtonWidget extends ButtonWidget {
     public final Identifier WIDGETS_TEXTURE = ShapeShifterCurseFabric.identifier("textures/gui/form_color_select_menu_part.png");
     public int TEXTURE_X = 0;
-    public int ButtonType = -1;
-    public int Index = -1;
 
 
     public FCS_ButtonWidget(int x, int y, Text message, PressAction onPress, NarrationSupplier narrationSupplier, int TEXTURE_X) {
