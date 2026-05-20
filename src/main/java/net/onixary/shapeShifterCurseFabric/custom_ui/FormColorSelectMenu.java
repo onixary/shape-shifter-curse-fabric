@@ -36,6 +36,21 @@ import java.util.Locale;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
+// 条 更新链(防止StackOverflow)
+// 条 -> 输入框 -> 全局数据
+// 输入框 -> 条 -> 输入框 -> 全局数据
+// 输入框在flag下才能更新全局数据 否则只会修改条的数据
+// 条修改输入框的数据时会挂上flag
+// 当有flag时 框无法修改条的数据
+// flag为int 只有挂上flag的函数才能移除flag(boolean有点难看 所以用int 效果一样)
+
+// HSV RGB 更新链
+// HSV 条 -> 更新RGB条函数(updateSliderHSV) -> RGB输入框 -> 全局数据
+// HSV 框 -> HSV 条 -> ...
+// RGB 条 -> 更新HSV条函数(updateSliderRGB) -> HSV输入框
+//       -> 全局数据
+// RGB 框 -> RGB 条 -> ...
+
 public class FormColorSelectMenu extends Screen implements FormTextureUtils.TempTextureProcessor {
     private static final Identifier texture = new Identifier(MOD_ID,"textures/gui/form_color_select_menu.png");
     private static final int BG_WIDTH = 420;
@@ -56,6 +71,9 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     private static final Text ColorChannel_R = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_r");
     private static final Text ColorChannel_G = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_g");
     private static final Text ColorChannel_B = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_b");
+    private static final Text ColorChannel_H = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_h");
+    private static final Text ColorChannel_S = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_s");
+    private static final Text ColorChannel_V = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_v");
 
     private static final Text IsEnableLayerLabel = Text.translatable("gui.shape_shifter_curse_fabric.fcs.is_enable_layer");
     private static final Text ExitSliderButtonLabel = Text.translatable("gui.shape_shifter_curse_fabric.fcs.exit_slider_button");
@@ -94,6 +112,13 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     private TextFieldWidget sliderREditBox = null;
     private TextFieldWidget sliderGEditBox = null;
     private TextFieldWidget sliderBEditBox = null;
+    private SimpleIntSliderWidget sliderH = null;
+    private SimpleIntSliderWidget sliderS = null;
+    private SimpleIntSliderWidget sliderV = null;
+    private TextFieldWidget sliderHEditBox = null;
+    private TextFieldWidget sliderSEditBox = null;
+    private TextFieldWidget sliderVEditBox = null;
+
     private ButtonWidget isEnableLayerButton = null;
 
     private static final MinecraftClient minecraftClient = MinecraftClient.getInstance();
@@ -136,6 +161,10 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     private int tempSliderB = 0;
     private int tempSliderAlpha = 0;
 
+    private int tempSliderH = 0;
+    private int tempSliderS = 0;
+    private int tempSliderV = 0;
+
     private boolean isOpenSlider = false;
     private List<ClickableWidget> config_panel_01 = new ArrayList<>();  // 保存config输入框 label之类的 用于切换
     private List<ClickableWidget> config_panel_02 = new ArrayList<>();  // 保存 RGB条 一些按钮
@@ -151,6 +180,32 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             case 4 -> eyeColorB = Color;
         }
         isColorSettingDirty = true;
+    }
+
+    // HSV 更新时调用此函数
+    public void updateSliderHSV() {
+        this.isUpdateRGBFromHSV = true;
+        int[] color = FormTextureUtils.hsvToRgb(tempSliderH, tempSliderS, tempSliderV);
+        tempSliderR = color[0];
+        tempSliderG = color[1];
+        tempSliderB = color[2];
+        sliderR.setIntValue(tempSliderR);
+        sliderG.setIntValue(tempSliderG);
+        sliderB.setIntValue(tempSliderB);
+        this.isUpdateRGBFromHSV = false;
+    }
+
+    // RGB 更新时调用此函数
+    public void updateSliderRGB() {
+        this.isUpdateHSVFromRGB = true;
+        int[] color = FormTextureUtils.rgbToHsv(tempSliderR, tempSliderG, tempSliderB);
+        tempSliderH = color[0];
+        tempSliderS = color[1];
+        tempSliderV = color[2];
+        sliderH.setIntValue(tempSliderH);
+        sliderS.setIntValue(tempSliderS);
+        sliderV.setIntValue(tempSliderV);
+        this.isUpdateHSVFromRGB = false;
     }
 
     // 非条修改颜色后调用
@@ -171,6 +226,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         sliderG.setIntValue(tempSliderG);
         sliderB.setIntValue(tempSliderB);
         isEnableLayerButton.setMessage(tempSliderAlpha != 0 ? BoolBTN_ON : BoolBTN_OFF);
+        this.updateSliderRGB();
     }
 
     public void updatePanel() {
@@ -315,17 +371,15 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     }
 
     public int colorChannel2Int(String channel) {
+        return colorChannel2Int(channel, 0, 255);
+    }
+
+    public int colorChannel2Int(String channel, int min, int max) {
         try {
             int value = Integer.parseInt(channel);
-            if (value > 255) {
-                return 255;
-            }
-            if (value < 0) {
-                return 0;
-            }
-            return value;
+            return Math.min(Math.max(value, min), max);
         } catch (Exception ignored) {
-            return 0;
+            return min;
         }
     }
 
@@ -350,7 +404,9 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     }
 
     private boolean isUpdateUI = false;
-    private boolean isUpdateSlider = false;
+    private int isUpdateSlider = 0;  // 用于防止 EditBox修改Slider
+    private boolean isUpdateHSVFromRGB = false;
+    private boolean isUpdateRGBFromHSV = false;
 
     public void onConfigChanged() {
         if (!this.isScreenInit || isUpdateUI) {
@@ -572,93 +628,195 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         this.addDrawableChild(accent2GreyReverseButton);
         this.config_panel_01.add(accent2GreyReverseButton);
         this.accent2GreyReverseButton = accent2GreyReverseButton;
-        // 139,27,25,11 R Label
+        // 139,27,25,11 - R Label
         TextWidget rLabel = new TextWidget(BPosX + 139, BPosY + 27, 25, 11, ColorChannel_R, textRenderer).setTextColor(0xDDDDDD);
         this.addDrawableChild(rLabel);
         this.config_panel_02.add(rLabel);
-        // 139,41,25,11 G Label
+        // 139,41,25,11 - G Label
         TextWidget gLabel = new TextWidget(BPosX + 139, BPosY + 41, 25, 11, ColorChannel_G, textRenderer).setTextColor(0xDDDDDD);
         this.addDrawableChild(gLabel);
         this.config_panel_02.add(gLabel);
-        // 139,55,25,11 B Label
+        // 139,55,25,11 - B Label
         TextWidget bLabel = new TextWidget(BPosX + 139, BPosY + 55, 25, 11, ColorChannel_B, textRenderer).setTextColor(0xDDDDDD);
         this.addDrawableChild(bLabel);
         this.config_panel_02.add(bLabel);
-        // 177,27,30,11 R Input
+        // 177,27,30,11 - R Input
         TextFieldWidget sliderREditBox = new TextFieldWidget(textRenderer, BPosX + 177, BPosY + 27, 30, 11, EmptyText);
         sliderREditBox.setMaxLength(3);
         sliderREditBox.setChangedListener((text) -> {
             this.tempSliderR = this.colorChannel2Int(text);
-            this.updateSlider();
-            if (!isUpdateSlider) {
+            if (isUpdateSlider == 0) {
                 this.sliderR.setIntValue(this.tempSliderR);
+            } else {
+                this.updateSlider();
+                if (!isUpdateRGBFromHSV) {
+                    this.updateSliderRGB();
+                }
             }
         });
         this.addDrawableChild(sliderREditBox);
         this.config_panel_02.add(sliderREditBox);
         this.sliderREditBox = sliderREditBox;
-        // 177,41,30,11 G Input
+        // 177,41,30,11 - G Input
         TextFieldWidget sliderGEditBox = new TextFieldWidget(textRenderer, BPosX + 177, BPosY + 41, 30, 11, EmptyText);
         sliderGEditBox.setMaxLength(3);
         sliderGEditBox.setChangedListener((text) -> {
             this.tempSliderG = this.colorChannel2Int(text);
-            this.updateSlider();
-            if (!isUpdateSlider) {
+            if (isUpdateSlider == 0) {
                 this.sliderG.setIntValue(this.tempSliderG);
+            } else {
+                this.updateSlider();
+                if (!isUpdateRGBFromHSV) {
+                    this.updateSliderRGB();
+                }
             }
         });
         this.addDrawableChild(sliderGEditBox);
         this.config_panel_02.add(sliderGEditBox);
         this.sliderGEditBox = sliderGEditBox;
-        // 177,55,30,11 B Input
+        // 177,55,30,11 - B Input
         TextFieldWidget sliderBEditBox = new TextFieldWidget(textRenderer, BPosX + 177, BPosY + 55, 30, 11, EmptyText);
         sliderBEditBox.setMaxLength(3);
         sliderBEditBox.setChangedListener((text) -> {
             this.tempSliderB = this.colorChannel2Int(text);
-            this.updateSlider();
-            if (!isUpdateSlider) {
+            if (isUpdateSlider == 0) {
                 this.sliderB.setIntValue(this.tempSliderB);
+            } else {
+                this.updateSlider();
+                if (!isUpdateRGBFromHSV) {
+                    this.updateSliderRGB();
+                }
             }
         });
         this.addDrawableChild(sliderBEditBox);
         this.config_panel_02.add(sliderBEditBox);
         this.sliderBEditBox = sliderBEditBox;
         // Slider的改动直接改sliderXEditBox就行 不用updateSlider
-        // 211,27,100,11 R Slider
+        // 211,27,100,11 - R Slider
         SimpleIntSliderWidget sliderR = new SimpleIntSliderWidget(BPosX + 211, BPosY + 27, 100, 11, EmptyText, 0d, 0, 255);
         sliderR.onChanged = (widget) -> {
-            this.isUpdateSlider = true;
+            this.isUpdateSlider++;
             this.sliderREditBox.setText(String.valueOf(widget.getIntValue()));
-            this.isUpdateSlider = false;
+            this.isUpdateSlider--;
         };
         this.addDrawableChild(sliderR);
         this.config_panel_02.add(sliderR);
         this.sliderR = sliderR;
-        // 211,41,100,11 G Slider
+        // 211,41,100,11 - G Slider
         SimpleIntSliderWidget sliderG = new SimpleIntSliderWidget(BPosX + 211, BPosY + 41, 100, 11, EmptyText, 0d, 0, 255);
         sliderG.onChanged = (widget) -> {
-            this.isUpdateSlider = true;
+            this.isUpdateSlider++;
             this.sliderGEditBox.setText(String.valueOf(widget.getIntValue()));
-            this.isUpdateSlider = false;
+            this.isUpdateSlider--;
         };
         this.addDrawableChild(sliderG);
         this.config_panel_02.add(sliderG);
         this.sliderG = sliderG;
-        // 211,55,100,11 B Slider
+        // 211,55,100,11 - B Slider
         SimpleIntSliderWidget sliderB = new SimpleIntSliderWidget(BPosX + 211, BPosY + 55, 100, 11, EmptyText, 0d, 0, 255);
         sliderB.onChanged = (widget) -> {
-            this.isUpdateSlider = true;
+            this.isUpdateSlider++;
             this.sliderBEditBox.setText(String.valueOf(widget.getIntValue()));
-            this.isUpdateSlider = false;
+            this.isUpdateSlider--;
         };
         this.addDrawableChild(sliderB);
         this.config_panel_02.add(sliderB);
         this.sliderB = sliderB;
-        // 139,69,75,11 - Is Enable Layer Label
-        TextWidget isEnableLayerLabel = new TextWidget(BPosX + 139, BPosY + 69, 75, 11, IsEnableLayerLabel, textRenderer).setTextColor(0xDDDDDD);
+        // 139,69,25,11 - H label
+        TextWidget hLabel = new TextWidget(BPosX + 139, BPosY + 69, 25, 11, ColorChannel_H, textRenderer).setTextColor(0xDDDDDD);
+        this.addDrawableChild(hLabel);
+        this.config_panel_02.add(hLabel);
+        // 139,83,25,11 - S label
+        TextWidget sLabel = new TextWidget(BPosX + 139, BPosY + 83, 25, 11, ColorChannel_S, textRenderer).setTextColor(0xDDDDDD);
+        this.addDrawableChild(sLabel);
+        this.config_panel_02.add(sLabel);
+        // 139,97,25,11 - V label
+        TextWidget vLabel = new TextWidget(BPosX + 139, BPosY + 97, 25, 11, ColorChannel_V, textRenderer).setTextColor(0xDDDDDD);
+        this.addDrawableChild(vLabel);
+        this.config_panel_02.add(vLabel);
+        // 177,69,30,11 - H Input
+        TextFieldWidget sliderHEditBox = new TextFieldWidget(textRenderer, BPosX + 177, BPosY + 69, 30, 11, EmptyText);
+        sliderHEditBox.setMaxLength(3);
+        sliderHEditBox.setChangedListener((text) -> {
+            this.tempSliderH = this.colorChannel2Int(text, 0, 359);
+            if (isUpdateSlider == 0) {
+                this.sliderH.setIntValue(this.tempSliderH);
+            } else {
+                if (!isUpdateHSVFromRGB) {
+                    this.updateSliderHSV();
+                }
+            }
+        });
+        this.addDrawableChild(sliderHEditBox);
+        this.config_panel_02.add(sliderHEditBox);
+        this.sliderHEditBox = sliderHEditBox;
+        // 177,83,30,11 - S Input
+        TextFieldWidget sliderSEditBox = new TextFieldWidget(textRenderer, BPosX + 177, BPosY + 83, 30, 11, EmptyText);
+        sliderSEditBox.setMaxLength(3);
+        sliderSEditBox.setChangedListener((text) -> {
+            this.tempSliderS = this.colorChannel2Int(text, 0, 100);
+            if (isUpdateSlider == 0) {
+                this.sliderS.setIntValue(this.tempSliderS);
+            } else {
+                if (!isUpdateHSVFromRGB) {
+                    this.updateSliderHSV();
+                }
+            }
+        });
+        this.addDrawableChild(sliderSEditBox);
+        this.config_panel_02.add(sliderSEditBox);
+        this.sliderSEditBox = sliderSEditBox;
+        // 177,97,30,11 - V Input
+        TextFieldWidget sliderVEditBox = new TextFieldWidget(textRenderer, BPosX + 177, BPosY + 97, 30, 11, EmptyText);
+        sliderVEditBox.setMaxLength(3);
+        sliderVEditBox.setChangedListener((text) -> {
+            this.tempSliderV = this.colorChannel2Int(text, 0, 100);
+            if (isUpdateSlider == 0) {
+                this.sliderV.setIntValue(this.tempSliderV);
+            } else {
+                if (!isUpdateHSVFromRGB) {
+                    this.updateSliderHSV();
+                }
+            }
+        });
+        this.addDrawableChild(sliderVEditBox);
+        this.config_panel_02.add(sliderVEditBox);
+        this.sliderVEditBox = sliderVEditBox;
+        // 211,69,100,11 - H Slider
+        SimpleIntSliderWidget sliderH = new SimpleIntSliderWidget(BPosX + 211, BPosY + 69, 100, 11, EmptyText, 0d, 0, 359);
+        sliderH.onChanged = (widget) -> {
+            this.isUpdateSlider++;
+            this.sliderHEditBox.setText(String.valueOf(widget.getIntValue()));
+            this.isUpdateSlider--;
+        };
+        this.addDrawableChild(sliderH);
+        this.config_panel_02.add(sliderH);
+        this.sliderH = sliderH;
+        // 211,83,100,11 - S Slider
+        SimpleIntSliderWidget sliderS = new SimpleIntSliderWidget(BPosX + 211, BPosY + 83, 100, 11, EmptyText, 0d, 0, 100);
+        sliderS.onChanged = (widget) -> {
+            this.isUpdateSlider++;
+            this.sliderSEditBox.setText(String.valueOf(widget.getIntValue()));
+            this.isUpdateSlider--;
+        };
+        this.addDrawableChild(sliderS);
+        this.config_panel_02.add(sliderS);
+        this.sliderS = sliderS;
+        // 211,97,100,11 - V Slider
+        SimpleIntSliderWidget sliderV = new SimpleIntSliderWidget(BPosX + 211, BPosY + 97, 100, 11, EmptyText, 0d, 0, 100);
+        sliderV.onChanged = (widget) -> {
+            this.isUpdateSlider++;
+            this.sliderVEditBox.setText(String.valueOf(widget.getIntValue()));
+            this.isUpdateSlider--;
+        };
+        this.addDrawableChild(sliderV);
+        this.config_panel_02.add(sliderV);
+        this.sliderV = sliderV;
+        // 139,111,75,11 - Is Enable Layer Label
+        TextWidget isEnableLayerLabel = new TextWidget(BPosX + 139, BPosY + 111, 75, 11, IsEnableLayerLabel, textRenderer).setTextColor(0xDDDDDD);
         this.addDrawableChild(isEnableLayerLabel);
         this.config_panel_02.add(isEnableLayerLabel);
-        // 228,69,36,11 - Is Enable Layer Button
+        // 228,111,36,11 - Is Enable Layer Button
         ButtonWidget isEnableLayerButton = ButtonWidget.builder(this.tempSliderAlpha != 0 ? BoolBTN_ON : BoolBTN_OFF, (button) -> {
             this.tempSliderAlpha = this.tempSliderAlpha == 0 ? 255 : 0;
             if (this.tempSliderAlpha != 0) {
@@ -668,16 +826,16 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
                 button.setMessage(BoolBTN_OFF);
             }
             this.updateSlider();
-        }).position(BPosX + 228, BPosY + 69).size(36, 11).build();
+        }).position(BPosX + 228, BPosY + 111).size(36, 11).build();
         this.addDrawableChild(isEnableLayerButton);
         this.config_panel_02.add(isEnableLayerButton);
         this.isEnableLayerButton = isEnableLayerButton;
-        // 281,69,30,11 - Exit Slider Button
+        // 281,111,30,11 - Exit Slider Button
         ButtonWidget exitSliderButton = ButtonWidget.builder(ExitSliderButtonLabel, (button) -> {
             this.updateSlider();
             this.isOpenSlider = false;
             this.updatePanel();
-        }).position(BPosX + 281, BPosY + 69).size(30, 11).build();
+        }).position(BPosX + 281, BPosY + 111).size(30, 11).build();
         this.addDrawableChild(exitSliderButton);
         this.config_panel_02.add(exitSliderButton);
 
@@ -774,8 +932,8 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             // 228,83,11,11
             context.fill(BPosX + 228, BPosY + 83, BPosX + 239, BPosY + 94, this.eyeColorB);
         } else {
-            // 267,69,11,11
-            context.fill(BPosX + 267, BPosY + 69, BPosX + 278, BPosY + 80, (this.tempSliderAlpha << 24) | (this.tempSliderR << 16) | (this.tempSliderG << 8) | (this.tempSliderB));
+            // 267,111,11,11
+            context.fill(BPosX + 267, BPosY + 111, BPosX + 278, BPosY + 122, (this.tempSliderAlpha << 24) | (this.tempSliderR << 16) | (this.tempSliderG << 8) | (this.tempSliderB));
         }
         if (timer > 60) {
             this.updateSavaButtonActive();
