@@ -34,7 +34,6 @@ public class FormRenderUtils {
 
     public static final Identifier DEFAULT_MAS = register_MAS(ShapeShifterCurseFabric.identifier("default"), DefaultModelAnimationSystem::new);
 
-    // TODO 挂载Init
     public static void onClientInit() {
         WorldRenderEvents.END.register(context -> isRenderingInWorld = false);
         WorldRenderEvents.START.register(context -> isRenderingInWorld = true);

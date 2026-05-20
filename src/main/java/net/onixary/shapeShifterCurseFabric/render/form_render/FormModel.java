@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import dev.kosmx.playerAnim.core.util.Vec3f;
 import mod.azure.azurelib.cache.object.GeoBone;
 import mod.azure.azurelib.model.GeoModel;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
@@ -38,6 +39,9 @@ public class FormModel extends GeoModel<FormAnimatable> {
     public String Name = "";  // 用于皮肤系统 先留一下API
     public Identifier Layer = null;  // 用于皮肤系统 先留一下API
     public Identifier Form = null;  // 用于皮肤系统 先留一下API
+
+    public static int modelIDIter = 0;
+    public int modelID = -1;
 
     public boolean SlimOnly = false;
     public boolean WideOnly = false;
@@ -100,6 +104,7 @@ public class FormModel extends GeoModel<FormAnimatable> {
     public FormModel(JsonObject json) {
         this.modelJson = json;
         this.CompileModel();
+        this.modelID = modelIDIter++;
     }
 
     public void CompileModel() {
@@ -286,54 +291,51 @@ public class FormModel extends GeoModel<FormAnimatable> {
 
     public Identifier getTextureResource(boolean slim) {
         boolean uslim = useSlim(slim);
-        PlayerSkinComponent component = null;
-        try {
-            component = RegPlayerSkinComponent.SKIN_SETTINGS.get(entity);
-        }
-        catch (NullPointerException ignored) {
-        }
         Identifier Resource = uslim ? this.TextureResource_Slim : this.TextureResource;
         Identifier ResourceMask = uslim ? this.TextureMaskResource_Slim : this.TextureMaskResource;
-        if (component != null && component.isEnableFormColor() && ResourceMask != null) {
-            FormTextureUtils.ColorSetting colorSetting = component.getFormColor();
-            HashMap<FormTextureUtils.ColorSetting, Identifier> Cache = uslim ? ColorMask_Baked_Textures_Slim : ColorMask_Baked_Textures;
-            return readCacheOrBake(Cache, Resource, ResourceMask, colorSetting);
+        if (ResourceMask != null) {
+            if (FormTextureUtils.useTempTexture && Objects.equals(this.entity, MinecraftClient.getInstance().player)) {
+                return FormTextureUtils.tempTextureProcessor.getTexture(this.modelID, uslim ? "texture_slim" : "texture", Resource, ResourceMask, UseMultiplyMask);
+            }
+            FormTextureUtils.ColorSetting colorSetting = FormTextureUtils.getPlayerColorSetting(this.entity);
+            if (colorSetting != null) {
+                HashMap<FormTextureUtils.ColorSetting, Identifier> Cache = uslim ? ColorMask_Baked_Textures_Slim : ColorMask_Baked_Textures;
+                return readCacheOrBake(Cache, Resource, ResourceMask, colorSetting);
+            }
         }
         return Resource;
     }
 
     public Identifier getOverlayTextureResource(boolean slim) {
         boolean uslim = useSlim(slim);
-        PlayerSkinComponent component = null;
-        try {
-            component = RegPlayerSkinComponent.SKIN_SETTINGS.get(entity);
-        }
-        catch (NullPointerException ignored) {
-        }
         Identifier Resource = uslim ? this.OverlayTextureResource_Slim : this.OverlayTextureResource;
         Identifier ResourceMask = uslim ? this.OverlayTextureMaskResource_Slim : this.OverlayTextureMaskResource;
-        if (component != null && component.isEnableFormColor() && ResourceMask != null) {
-            FormTextureUtils.ColorSetting colorSetting = component.getFormColor();
-            HashMap<FormTextureUtils.ColorSetting, Identifier> Cache = uslim ? ColorMask_Baked_OverlayTexture_Slim : ColorMask_Baked_OverlayTexture;
-            return readCacheOrBake(Cache, Resource, ResourceMask, colorSetting);
+        if (ResourceMask != null) {
+            if (FormTextureUtils.useTempTexture && Objects.equals(this.entity, MinecraftClient.getInstance().player)) {
+                return FormTextureUtils.tempTextureProcessor.getTexture(this.modelID, uslim ? "overlay_texture_slim" : "overlay_texture", Resource, ResourceMask, UseMultiplyMask);
+            }
+            FormTextureUtils.ColorSetting colorSetting = FormTextureUtils.getPlayerColorSetting(this.entity);
+            if (colorSetting != null) {
+                HashMap<FormTextureUtils.ColorSetting, Identifier> Cache = uslim ? ColorMask_Baked_OverlayTexture_Slim : ColorMask_Baked_OverlayTexture;
+                return readCacheOrBake(Cache, Resource, ResourceMask, colorSetting);
+            }
         }
         return Resource;
     }
 
     public Identifier getEmissiveTextureResource(boolean slim) {
         boolean uslim = useSlim(slim);
-        PlayerSkinComponent component = null;
-        try {
-            component = RegPlayerSkinComponent.SKIN_SETTINGS.get(entity);
-        }
-        catch (NullPointerException ignored) {
-        }
         Identifier Resource = uslim ? this.EmissiveTextureResource_Slim : this.EmissiveTextureResource;
         Identifier ResourceMask = uslim ? this.EmissiveTextureMaskResource_Slim : this.EmissiveTextureMaskResource;
-        if (component != null && component.isEnableFormColor() && ResourceMask != null) {
-            FormTextureUtils.ColorSetting colorSetting = component.getFormColor();
-            HashMap<FormTextureUtils.ColorSetting, Identifier> Cache = uslim ? ColorMask_Baked_EmissiveTexture_Slim : ColorMask_Baked_EmissiveTexture;
-            return readCacheOrBake(Cache, Resource, ResourceMask, colorSetting);
+        if (ResourceMask != null) {
+            if (FormTextureUtils.useTempTexture && Objects.equals(this.entity, MinecraftClient.getInstance().player)) {
+                return FormTextureUtils.tempTextureProcessor.getTexture(this.modelID, uslim ? "emissive_texture_slim" : "emissive_texture", Resource, ResourceMask, UseMultiplyMask);
+            }
+            FormTextureUtils.ColorSetting colorSetting = FormTextureUtils.getPlayerColorSetting(this.entity);
+            if (colorSetting != null && ResourceMask != null) {
+                HashMap<FormTextureUtils.ColorSetting, Identifier> Cache = uslim ? ColorMask_Baked_EmissiveTexture_Slim : ColorMask_Baked_EmissiveTexture;
+                return readCacheOrBake(Cache, Resource, ResourceMask, colorSetting);
+            }
         }
         return Resource;
     }

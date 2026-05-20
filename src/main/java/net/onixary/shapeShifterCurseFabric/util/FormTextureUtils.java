@@ -1,15 +1,20 @@
 package net.onixary.shapeShifterCurseFabric.util;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.texture.NativeImageBackedTexture;
 import net.minecraft.client.texture.TextureManager;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.lang3.tuple.Triple;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.io.IOException;
@@ -18,10 +23,15 @@ import java.io.InputStream;
 
 // 尽量少在Origin Fur中修改 减少后续工作量
 public class FormTextureUtils {
+    public interface TempTextureProcessor {
+        // 需要自行实现缓存 Model的缓存带内存泄漏
+        Identifier getTexture(int modelID, String category, Identifier texture, Identifier mask, boolean OnlyMultiply);
+    }
 
-    // onixary: 加入每个通道的覆盖强度overrideStrength的float参数，范围0.0~1.0
-    // 一些形态原版的贴图过黑，转换为灰度后无法看出自定义颜色，
-    // 应用后的灰度 = max(原灰度 + overrideStrength*255, 255)
+    public static boolean useTempTexture = false;
+    public static TempTextureProcessor tempTextureProcessor = null;
+
+
     public record ColorSetting(int primaryColor, int accentColor1, int accentColor2, int eyeColorA, int eyeColorB
             , boolean primaryGreyReverse, boolean accent1GreyReverse, boolean accent2GreyReverse) {
         public int getPrimaryColor() {
@@ -257,6 +267,12 @@ public class FormTextureUtils {
     }
 
     public static Identifier BakeTexture(Identifier texture, Identifier mask, ColorSetting colorSetting, boolean OnlyMultiply)  {
+        TextureManager TM = MinecraftClient.getInstance().getTextureManager();
+        // 客户端会在每次重载资源包时数据溢出 溢出量不高 等以后再优化吧
+        return TM.registerDynamicTexture("masked_texture", BakeTextureNoMemLeak(texture, mask, colorSetting, OnlyMultiply));
+    }
+
+    public static NativeImageBackedTexture BakeTextureNoMemLeak(Identifier texture, Identifier mask, ColorSetting colorSetting, boolean OnlyMultiply) {
         if (texture == null || mask == null) return null;
         NativeImage textureImage = toNativeImage(texture);
         NativeImage maskImage = toNativeImage(mask);
@@ -268,8 +284,83 @@ public class FormTextureUtils {
                 textureImage.setColor(x, y, ProcessPixel(textureImage.getColor(x, y), maskImage.getColor(x, y), colorSetting, MaskLayerAverageGreyScale, OnlyMultiply));
             }
         }
-        TextureManager TM = MinecraftClient.getInstance().getTextureManager();
-        // 客户端会在每次重载资源包时数据溢出 溢出量不高 等以后再优化吧
-        return TM.registerDynamicTexture("masked_texture", new NativeImageBackedTexture(textureImage));
+        return new NativeImageBackedTexture(textureImage);
+    }
+
+    // 仅渲染使用 会处理isEnableFormColor
+    public static @Nullable ColorSetting getPlayerColorSetting(PlayerEntity player) {
+        try {
+            PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(player);
+            if (!component.isEnableFormColor()) {
+                return null;
+            }
+            return component.getFormColor();
+        } catch (NullPointerException ignored) {
+            return null;
+        }
+    }
+
+    // H(0~359) S(0~100) V(0~100) -> RGB(0~255)
+    public static int[] hsvToRgb(int h, int s, int v) {
+        double H = Math.min(359, Math.max(0, h));
+        double S = Math.min(100, Math.max(0, s)) / 100.0;
+        double V = Math.min(100, Math.max(0, v)) / 100.0;
+        double C = V * S;
+        double X = C * (1 - Math.abs((H / 60.0) % 2 - 1));
+        double m = V - C;
+        double r1, g1, b1;
+        if (H < 60) {
+            r1 = C; g1 = X; b1 = 0;
+        } else if (H < 120) {
+            r1 = X; g1 = C; b1 = 0;
+        } else if (H < 180) {
+            r1 = 0; g1 = C; b1 = X;
+        } else if (H < 240) {
+            r1 = 0; g1 = X; b1 = C;
+        } else if (H < 300) {
+            r1 = X; g1 = 0; b1 = C;
+        } else {
+            r1 = C; g1 = 0; b1 = X;
+        }
+        int R = (int) Math.round((r1 + m) * 255);
+        int G = (int) Math.round((g1 + m) * 255);
+        int B = (int) Math.round((b1 + m) * 255);
+        R = Math.min(255, Math.max(0, R));
+        G = Math.min(255, Math.max(0, G));
+        B = Math.min(255, Math.max(0, B));
+        return new int[]{R, G, B};
+    }
+
+    // RGB(0~255) -> H(0~359) S(0~100) V(0~100)
+    public static int[] rgbToHsv(int r, int g, int b) {
+        double R = Math.min(255, Math.max(0, r)) / 255.0;
+        double G = Math.min(255, Math.max(0, g)) / 255.0;
+        double B = Math.min(255, Math.max(0, b)) / 255.0;
+        double max = Math.max(R, Math.max(G, B));
+        double min = Math.min(R, Math.min(G, B));
+        double delta = max - min;
+        double H;
+        if (delta == 0) {
+            H = 0;
+        } else if (max == R) {
+            H = (G - B) / delta;
+        } else if (max == G) {
+            H = 2 + (B - R) / delta;
+        } else {
+            H = 4 + (R - G) / delta;
+        }
+        H *= 60;
+        if (H < 0) H += 360;
+        double S = (max == 0) ? 0 : delta / max;
+        double V = max;
+        int hue = (int) Math.round(H);
+        int sat = (int) Math.round(S * 100);
+        int val = (int) Math.round(V * 100);
+        hue = Math.min(359, Math.max(0, hue));
+        sat = Math.min(100, Math.max(0, sat));
+        val = Math.min(100, Math.max(0, val));
+        if (sat == 0) hue = 0;
+        if (hue == 360) hue = 0;
+        return new int[]{hue, sat, val};
     }
 }
