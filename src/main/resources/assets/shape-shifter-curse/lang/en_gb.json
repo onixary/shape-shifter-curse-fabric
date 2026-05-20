@@ -442,5 +442,22 @@
     "message.shape-shifter-curse.select_form_ui.target_name": "Target: %s",
     "message.shape-shifter-curse.select_form_ui.target_uuid": "[ %s ]",
     "trinket.slot.hand.extra_hand": "Extra Hand",
-    "curios.identifier.extra_hand": "Extra Hand"
+    "curios.identifier.extra_hand": "Extra Hand",
+    "text.shape-shifter-curse.config.form_color_select_menu": "Form Color Selection Menu",
+    "message.shape-shifter-curse.enable_default_color": "Form default color feature: %s",
+    "gui.shape_shifter_curse_fabric.fcs.form_slot_title": "Form-specific Slot",
+    "gui.shape_shifter_curse_fabric.fcs.global_slot_title": "Global Slot",
+    "gui.shape_shifter_curse_fabric.fcs.form_default_slot_title": "Form Default Slot",
+    "gui.shape_shifter_curse_fabric.fcs.title": "Form Color Modification Menu",
+    "gui.shape_shifter_curse_fabric.fcs.color_channel_r": "R",
+    "gui.shape_shifter_curse_fabric.fcs.color_channel_g": "G",
+    "gui.shape_shifter_curse_fabric.fcs.color_channel_b": "B",
+    "gui.shape_shifter_curse_fabric.fcs.is_enable_layer": "Is enable this layer",
+    "gui.shape_shifter_curse_fabric.fcs.exit_slider_button": "Exit",
+    "gui.shape_shifter_curse_fabric.fcs.from_server": "↓Server↓",
+    "gui.shape_shifter_curse_fabric.fcs.to_server": "↑Server↑",
+    "gui.shape_shifter_curse_fabric.fcs.from_client": "↓Client↓",
+    "gui.shape_shifter_curse_fabric.fcs.to_client": "↑Client↑",
+    "gui.shape_shifter_curse_fabric.fcs.from_clipboard": "↓Clipboard↓",
+    "gui.shape_shifter_curse_fabric.fcs.to_clipboard": "↑Clipboard↑"
 }

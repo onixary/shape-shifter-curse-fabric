@@ -387,7 +387,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         // 20,128,80,9 - 形态4槽
         this.addDrawableChild(new TextWidget(BPosX + 20, BPosY + 128, 80, 9, FormSlotTitle, textRenderer).setTextColor(0xDDDDDD));
         // 135,5,180,9 - Title
-        this.addDrawableChild(new TextWidget(BPosX + 135, BPosY + 5, 180, 9, title, textRenderer).setTextColor(0xDDDDDD));
+        this.addDrawableChild(new TextWidget(BPosX + 135, BPosY + 5, 180, 9, Title, textRenderer).setTextColor(0xDDDDDD));
         // 320,5,80,9 - 全局9槽
         this.addDrawableChild(new TextWidget(BPosX + 320, BPosY + 5, 80, 9, GlobalSlotTitle, textRenderer).setTextColor(0xDDDDDD));
         // 320,182,80,9 - 形态默认槽
