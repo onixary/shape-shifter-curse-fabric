@@ -211,11 +211,16 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         this.updateUI();
     }
 
+    // 仅用于最后保存 所以只会挂载到自动读取上 其他的可能由那6个按钮触发 loadData()只会在重载时触发
+    private boolean lastLoadDataIsServerSide = false;
+
     public void loadData() {
         if (minecraftClient.player != null) {
             loadData(true);
+            lastLoadDataIsServerSide = true;
         } else {
             loadData(false);
+            lastLoadDataIsServerSide = false;
         }
     }
 
@@ -237,6 +242,18 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             this.updateUI();
         }
         isColorSettingDirty = true;
+    }
+
+    public void saveDataToClient() {
+        ShapeShifterCurseFabric.playerCustomConfig.primaryColor = primaryColor;
+        ShapeShifterCurseFabric.playerCustomConfig.accentColor1Color = accentColor1Color;
+        ShapeShifterCurseFabric.playerCustomConfig.accentColor2Color = accentColor2Color;
+        ShapeShifterCurseFabric.playerCustomConfig.eyeColorA = eyeColorA;
+        ShapeShifterCurseFabric.playerCustomConfig.eyeColorB = eyeColorB;
+        ShapeShifterCurseFabric.playerCustomConfig.primaryGreyReverse = primaryGreyReverse;
+        ShapeShifterCurseFabric.playerCustomConfig.accent1GreyReverse = accent1GreyReverse;
+        ShapeShifterCurseFabric.playerCustomConfig.accent2GreyReverse = accent2GreyReverse;
+        AutoConfig.getConfigHolder(PlayerCustomConfig.class).save();
     }
 
     public @NotNull FormTextureUtils.ColorSetting getColorSetting(boolean ABGR) {
@@ -282,6 +299,13 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             ShapeShifterCurseFabric.LOGGER.error("FormColorSelectMenu is already in use, only one instance is allowed");
         }
         instance = this;
+    }
+
+    private Screen parsetScreen = null;
+
+    public FormColorSelectMenu(Text title, Screen parsetScreen) {
+        this(title);
+        this.parsetScreen = parsetScreen;
     }
 
     public void renderTextureBackground(DrawContext context) {
@@ -410,15 +434,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         );
         // 85,59,45,15 - 发送到客户端(配置)
         this.addDrawableChild(ButtonWidget.builder(UploadToClient, button -> {
-            ShapeShifterCurseFabric.playerCustomConfig.primaryColor = primaryColor;
-            ShapeShifterCurseFabric.playerCustomConfig.accentColor1Color = accentColor1Color;
-            ShapeShifterCurseFabric.playerCustomConfig.accentColor2Color = accentColor2Color;
-            ShapeShifterCurseFabric.playerCustomConfig.eyeColorA = eyeColorA;
-            ShapeShifterCurseFabric.playerCustomConfig.eyeColorB = eyeColorB;
-            ShapeShifterCurseFabric.playerCustomConfig.primaryGreyReverse = primaryGreyReverse;
-            ShapeShifterCurseFabric.playerCustomConfig.accent1GreyReverse = accent1GreyReverse;
-            ShapeShifterCurseFabric.playerCustomConfig.accent2GreyReverse = accent2GreyReverse;
-            AutoConfig.getConfigHolder(PlayerCustomConfig.class).save();
+            this.saveDataToClient();
         }).position(BPosX + 85, BPosY + 59).size(45, 15).build()
         );
         // 85,77,45,15 - 从剪切板获取
@@ -791,7 +807,6 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     @Override
     public void close() {
         CleanColorSettingCache();
-        super.close();
         if (isUsingTempTexture) {
             FormTextureUtils.useTempTexture = false;
             FormTextureUtils.tempTextureProcessor = null;
@@ -802,7 +817,15 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             ModPacketsS2C.sendUpdateCustomColor(this.getColorSetting(false), false); // 如果没进游戏时会发送失败 懒得做判断了 加一个Try
         } catch (Exception ignored) {
         }
+        if (!this.lastLoadDataIsServerSide) {
+            this.saveDataToClient();
+        }
         this.saveData();
+        if (this.parsetScreen != null && this.client != null) {
+            this.client.setScreen(this.parsetScreen);
+        } else {
+            super.close();
+        }
     }
 
     @Override

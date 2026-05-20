@@ -451,5 +451,8 @@
     "gui.shape_shifter_curse_fabric.fcs.from_client": "↓Client↓",
     "gui.shape_shifter_curse_fabric.fcs.to_client": "↑Client↑",
     "gui.shape_shifter_curse_fabric.fcs.from_clipboard": "↓Clipboard↓",
-    "gui.shape_shifter_curse_fabric.fcs.to_clipboard": "↑Clipboard↑"
+    "gui.shape_shifter_curse_fabric.fcs.to_clipboard": "↑Clipboard↑",
+    "text.autoconfig.shape-shifter-curse-custom.option.enable_server_modify_FCD_config": "Enable server to modify local form color database",
+    "text.autoconfig.shape-shifter-curse-custom.option.enable_form_default_color_system": "Enable form default color system",
+    "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_color_config": "Automatically sync color data to server"
 }

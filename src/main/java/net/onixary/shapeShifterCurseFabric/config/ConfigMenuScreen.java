@@ -42,7 +42,7 @@ public class ConfigMenuScreen extends Screen {
         Config_BTN_Y_Pos += Config_BTN_Size_Y + Config_BTN_Interval;
 
         // 自定义形态颜色新 UI
-        AddButton(Config_BTN_X_Pos, Config_BTN_Y_Pos, Config_BTN_Size_X, Config_BTN_Size_Y, Text.translatable("text.shape-shifter-curse.config.form_color_select_menu"), () -> new FormColorSelectMenu(Text.translatable("text.shape-shifter-curse.config.form_color_select_menu")));
+        AddButton(Config_BTN_X_Pos, Config_BTN_Y_Pos, Config_BTN_Size_X, Config_BTN_Size_Y, Text.translatable("text.shape-shifter-curse.config.form_color_select_menu"), () -> new FormColorSelectMenu(Text.translatable("text.shape-shifter-curse.config.form_color_select_menu"), this));
         Config_BTN_Y_Pos += Config_BTN_Size_Y + Config_BTN_Interval;
 
         // 被吞进去的Apoli配置 **** 提取起源模组时记得删除这项 ****
