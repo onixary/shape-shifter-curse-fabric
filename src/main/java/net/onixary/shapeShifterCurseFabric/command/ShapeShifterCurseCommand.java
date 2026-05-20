@@ -30,11 +30,13 @@ import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormCompone
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
+import net.onixary.shapeShifterCurseFabric.util.FormColorData;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -195,9 +197,22 @@ public class ShapeShifterCurseCommand {
                                                 )
                                         )
                                 )
+                                .then(literal("to_chat")
+                                        .then(argument("type", new MiscArgumentType.Enum_ArgumentType("local", "server"))
+                                                .then(argument("message_type", new MiscArgumentType.Enum_ArgumentType("raw", "command"))
+                                                        .then(argument("encode_type", new MiscArgumentType.Enum_ArgumentType("base64", "hex"))
+                                                                .executes(ShapeShifterCurseCommand::FC_ToChat)
+                                                        )
+                                                )
+                                        )
+                                )
+                                .then(literal("set_color_from_string")
+                                        .then(argument("color_string", StringArgumentType.string())
+                                                .executes(ShapeShifterCurseCommand::FC_SetColorFromString)
+                                        )
+                                )
                         )
         );
-        // TODO 存储形态颜色命令 通过网络包传输指令(命令仅运行在服务器 客户端操作需要发网络包) 还得在ClientConfig里加一个配置(阻止服务器命令修改本地数据库) 防止服务器使用这个接口填满客户端存储空间
     }
 
     private static int setForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
@@ -637,5 +652,63 @@ public class ShapeShifterCurseCommand {
         String type = commandContext.getArgument("type", String.class);
         ModPacketsS2CServer.sendModifyFCDData(player, "list", formID, type, "", "", "");
         return 1;
+    }
+
+    private static int FC_ToChat(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        if (player == null) {
+            return 0;
+        }
+        String type = commandContext.getArgument("type", String.class);
+        String messageType = commandContext.getArgument("message_type", String.class);
+        String encodeType = commandContext.getArgument("encode_type", String.class);
+        FormTextureUtils.ColorSetting colorSetting = FormColorData.ABGR2ARGB(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor());
+        String Data = "";
+        switch (encodeType) {
+            case "base64" -> {
+                Data = FormColorData.ColorSettingtoString(colorSetting, true);
+            }
+            case "hex" -> {
+                Data = FormColorData.ColorSettingtoString(colorSetting, false);
+            }
+        }
+        switch (messageType) {
+            case "raw" -> {
+            }
+            case "command" -> {
+                Data = "/shape_shifter_curse form_color set_color_from_string \"" + Data + "\"";
+            }
+        }
+        Text text = Text.translatable("message.shape-shifter-curse.form_color_data", player.getName());
+        text = FormColorData.appendCopyableText(text, Data);
+        switch (type) {
+            case "local" -> {
+                player.sendMessage(text, false);
+            }
+            case "server" -> {
+                Objects.requireNonNull(player.getServer()).getPlayerManager().broadcast(text, false);
+            }
+        }
+        return 1;
+    }
+
+    private static int FC_SetColorFromString(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        if (player == null) {
+            return 0;
+        }
+        String colorSettingString = commandContext.getArgument("color_string", String.class);
+        try {
+            FormTextureUtils.ColorSetting colorSetting = FormColorData.ColorSettingFormString(colorSettingString);
+            if (colorSetting != null) {
+                RegPlayerSkinComponent.SKIN_SETTINGS.get(player).setFormColor(FormColorData.ARGB2ABGR(colorSetting));
+                RegPlayerSkinComponent.SKIN_SETTINGS.sync(player);
+                return 1;
+            }
+        } catch (Exception e) {
+            player.getCommandSource().sendError(Text.literal("Error to apply color setting from string"));
+            return 0;
+        }
+        return 0;
     }
 }

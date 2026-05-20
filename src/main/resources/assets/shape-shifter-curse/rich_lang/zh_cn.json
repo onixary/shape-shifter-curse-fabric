@@ -1134,6 +1134,7 @@
   "gui.shape_shifter_curse_fabric.fcs.to_client": "↑客户端↑",
   "gui.shape_shifter_curse_fabric.fcs.from_clipboard": "↓剪切板↓",
   "gui.shape_shifter_curse_fabric.fcs.to_clipboard": "↑剪切板↑",
+  "message.shape-shifter-curse.form_color_data": "[%s] 分享了一个形态颜色数据 (点击复制)",
   
   "text.shape-shifter-curse.config.title": "幻形者诅咒 配置界面",
   "text.shape-shifter-curse.config.close": "取消",

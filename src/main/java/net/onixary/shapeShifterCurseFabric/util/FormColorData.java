@@ -4,6 +4,8 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.*;
+import net.minecraft.text.ClickEvent;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenu;
@@ -368,5 +370,41 @@ public class FormColorData {
                     colorSetting.getAccent2GreyReverse()
             );
         }
+    }
+
+    public static FormTextureUtils.ColorSetting ARGB2ABGR(FormTextureUtils.ColorSetting colorSetting) {
+        return new FormTextureUtils.ColorSetting(
+                FormTextureUtils.ARGB2ABGR(colorSetting.getPrimaryColor()),
+                FormTextureUtils.ARGB2ABGR(colorSetting.getAccentColor1()),
+                FormTextureUtils.ARGB2ABGR(colorSetting.getAccentColor2()),
+                FormTextureUtils.ARGB2ABGR(colorSetting.getEyeColorA()),
+                FormTextureUtils.ARGB2ABGR(colorSetting.getEyeColorB()),
+                colorSetting.getPrimaryGreyReverse(),
+                colorSetting.getAccent1GreyReverse(),
+                colorSetting.getAccent2GreyReverse()
+        );
+    }
+
+    public static FormTextureUtils.ColorSetting ABGR2ARGB(FormTextureUtils.ColorSetting colorSetting) {
+        return new FormTextureUtils.ColorSetting(
+                FormTextureUtils.ABGR2ARGB(colorSetting.getPrimaryColor()),
+                FormTextureUtils.ABGR2ARGB(colorSetting.getAccentColor1()),
+                FormTextureUtils.ABGR2ARGB(colorSetting.getAccentColor2()),
+                FormTextureUtils.ABGR2ARGB(colorSetting.getEyeColorA()),
+                FormTextureUtils.ABGR2ARGB(colorSetting.getEyeColorB()),
+                colorSetting.getPrimaryGreyReverse(),
+                colorSetting.getAccent1GreyReverse(),
+                colorSetting.getAccent2GreyReverse()
+        );
+    }
+
+    public static Text toCopyableText(String text, String copyText) {
+        return Text.literal(text).styled(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, copyText)));
+    }
+
+    public static Text appendCopyableText(Text text, String copyText) {
+        return text.copy().styled(style -> style.withClickEvent(
+                new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, copyText)
+        ));
     }
 }

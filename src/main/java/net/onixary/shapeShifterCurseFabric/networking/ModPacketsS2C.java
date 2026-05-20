@@ -485,9 +485,6 @@ public class ModPacketsS2C {
         String arg2 = buf.readString();
         String arg3 = buf.readString();
         String arg4 = buf.readString();
-        if (!ShapeShifterCurseFabric.playerCustomConfig.enable_server_modify_FCD_config) {
-            return;
-        }
         // commandType ->
         // save ->
         //     formID
@@ -510,6 +507,9 @@ public class ModPacketsS2C {
         //     arg1 -> slot_type [form, global, form_default]
         switch (commandType) {
             case "save" -> {
+                if (!ShapeShifterCurseFabric.playerCustomConfig.enable_server_modify_FCD_config) {
+                    return;
+                }
                 FormTextureUtils.ColorSetting nowColorSetting = FormColorData.getPlayerColorSetting(false);
                 if (nowColorSetting == null) {
                     return;
@@ -528,6 +528,9 @@ public class ModPacketsS2C {
                 ShapeShifterCurseFabricClient.formColorData.writeToConfig();
             }
             case "load" -> {
+                if (!ShapeShifterCurseFabric.playerCustomConfig.enable_server_modify_FCD_config) {
+                    return;
+                }
                 FormTextureUtils.ColorSetting colorSetting = null;
                 switch (arg1) {
                     case "form" -> {
@@ -545,6 +548,9 @@ public class ModPacketsS2C {
                 }
             }
             case "delete" -> {
+                if (!ShapeShifterCurseFabric.playerCustomConfig.enable_server_modify_FCD_config) {
+                    return;
+                }
                 switch (arg1) {
                     case "form" -> {
                         ShapeShifterCurseFabricClient.formColorData.customSettingByForm.computeIfAbsent(formID, k -> new HashMap<>()).remove(arg2);
@@ -559,6 +565,9 @@ public class ModPacketsS2C {
                 ShapeShifterCurseFabricClient.formColorData.writeToConfig();
             }
             case "config" -> {
+                if (!ShapeShifterCurseFabric.playerCustomConfig.enable_server_modify_FCD_config) {
+                    return;
+                }
                 switch (arg1) {
                     case "enable_default_color" -> {
                         ShapeShifterCurseFabricClient.formColorData.enableDefaultFormColor = !ShapeShifterCurseFabricClient.formColorData.enableDefaultFormColor;

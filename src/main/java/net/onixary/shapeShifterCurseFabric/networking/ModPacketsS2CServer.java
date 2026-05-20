@@ -305,6 +305,11 @@ public class ModPacketsS2CServer {
         // list ->
         //     formID
         //     arg1 -> slot_type [form, global, form_default]
+        // to_chat
+        //     formID -> not used
+        //     arg1 -> send_type [local, server]
+        //     arg2 -> message_type [raw, command]
+        //     arg3 -> encode_type [base64, hex]
 
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeString(commandType);
