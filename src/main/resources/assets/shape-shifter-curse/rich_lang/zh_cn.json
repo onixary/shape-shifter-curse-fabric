@@ -1113,6 +1113,7 @@
   "message.shape-shifter-curse.clip_at_ledge.off": "潜行边缘掉落: 关闭",
   "message.shape-shifter-curse.select_form_ui.target_name": "目标: %s",
   "message.shape-shifter-curse.select_form_ui.target_uuid": "[ %s ]",
+  "message.shape-shifter-curse.enable_default_color": "形态默认颜色功能: %s",
   "item.shape-shifter-curse.custom_trinket": ["自定义饰品"],
   "trinket.slot.hand.extra_hand": "额外手",
   "curios.identifier.extra_hand": "额外手",

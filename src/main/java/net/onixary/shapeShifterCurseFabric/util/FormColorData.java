@@ -1,13 +1,15 @@
 package net.onixary.shapeShifterCurseFabric.util;
 
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.*;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenu;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
+import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
@@ -161,9 +163,8 @@ public class FormColorData {
 
     // 挂一个钩子在网络接受形态上 比如客户端的SYNC_FORM_CHANGE接收函数上
     public void onClientFormChange(Identifier form) {
-        // TODO 挂载系统 + 新增配置
-        if (this.enableDefaultFormColor && this.formDefaultSetting.containsKey(form)) {
-            ModPacketsS2C.sendUpdateCustomSetting(this.formDefaultSetting.get(form));
+        if (this.enableDefaultFormColor && ShapeShifterCurseFabric.playerCustomConfig.enable_form_default_color_system && this.formDefaultSetting.containsKey(form)) {
+            ModPacketsS2C.sendUpdateCustomColor(this.formDefaultSetting.get(form), false);
         }
         // 延时一下 好同步 "sendUpdateCustomSetting" 的更新
         new Thread(() -> {
@@ -190,7 +191,6 @@ public class FormColorData {
         }
     }
 
-    // ShapeShifterCurseFabricClient 里挂一个钩子
     public void loadFormConfig() {
         Path configPath = getConfigPath();
         if (Files.exists(configPath)) {
@@ -206,7 +206,7 @@ public class FormColorData {
     public static byte[] ColorSettingToBytes(FormTextureUtils.ColorSetting colorSetting) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try (DataOutputStream dos = new DataOutputStream(baos)) {
-            dos.writeInt(1);  // 版本号
+            dos.writeInt(1);
             dos.writeInt(colorSetting.getPrimaryColor());
             dos.writeInt(colorSetting.getAccentColor1());
             dos.writeInt(colorSetting.getAccentColor2());
@@ -220,7 +220,6 @@ public class FormColorData {
             dos.flush();
             return baos.toByteArray();
         } catch (Exception e) {
-            // 理论上不会发生，但若出错则返回空数组（或可抛运行时异常）
             return new byte[0];
         }
     }
@@ -346,5 +345,28 @@ public class FormColorData {
 
     public void setName_DefaultSlot(Identifier formID, String name) {
         this.FormColorSelectMenu_Form_Default_Names.put(formID, name);
+    }
+
+    public static @Nullable FormTextureUtils.ColorSetting getPlayerColorSetting(boolean ABGR) {
+        PlayerEntity player = MinecraftClient.getInstance().player;
+        if (player == null) {
+            return null;
+        }
+        PlayerSkinComponent skinComponent = RegPlayerSkinComponent.SKIN_SETTINGS.get(player);
+        if (ABGR) {
+            return skinComponent.getFormColor();
+        } else {
+            FormTextureUtils.ColorSetting colorSetting = skinComponent.getFormColor();
+            return new FormTextureUtils.ColorSetting(
+                    FormTextureUtils.ABGR2ARGB(colorSetting.getPrimaryColor()),
+                    FormTextureUtils.ABGR2ARGB(colorSetting.getAccentColor1()),
+                    FormTextureUtils.ABGR2ARGB(colorSetting.getAccentColor2()),
+                    FormTextureUtils.ABGR2ARGB(colorSetting.getEyeColorA()),
+                    FormTextureUtils.ABGR2ARGB(colorSetting.getEyeColorB()),
+                    colorSetting.getPrimaryGreyReverse(),
+                    colorSetting.getAccent1GreyReverse(),
+                    colorSetting.getAccent2GreyReverse()
+            );
+        }
     }
 }

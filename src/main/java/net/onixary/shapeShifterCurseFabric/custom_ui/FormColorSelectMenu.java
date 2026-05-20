@@ -400,7 +400,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         );
         // 85,23,45,15 - 发送到服务器
         this.addDrawableChild(ButtonWidget.builder(UploadToServer, button -> {
-            ModPacketsS2C.sendUpdateCustomSetting(this.getColorSetting(false));
+            ModPacketsS2C.sendUpdateCustomColor(this.getColorSetting(false), false);
         }).position(BPosX + 85, BPosY + 23).size(45, 15).build()
         );
         // 85,41,45,15 - 获取客户端数据(配置)
@@ -799,7 +799,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         }
         instance = null;
         try {
-            ModPacketsS2C.sendUpdateCustomSetting(this.getColorSetting(false)); // 如果没进游戏时会发送失败 懒得做判断了 加一个Try
+            ModPacketsS2C.sendUpdateCustomColor(this.getColorSetting(false), false); // 如果没进游戏时会发送失败 懒得做判断了 加一个Try
         } catch (Exception ignored) {
         }
         this.saveData();

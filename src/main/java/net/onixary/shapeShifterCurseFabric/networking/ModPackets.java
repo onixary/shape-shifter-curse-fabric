@@ -47,6 +47,7 @@ public class ModPackets {
 
     public static final Identifier LOGIN_PACKET = new Identifier(ShapeShifterCurseFabric.MOD_ID, "login_packet");  // 我暂时没找到玩家进入服务去时的Hook，所以暂时由服务器询问来代替
     public static final Identifier UPDATE_CUSTOM_SETTING = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_custom_setting");
+    public static final Identifier UPDATE_CUSTOM_COLOR = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_custom_color");
 
     public static final Identifier ACTIVE_VIRTUAL_TOTEM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "active_virtual_totem");
 
@@ -65,4 +66,7 @@ public class ModPackets {
     public static final Identifier OPEN_FORM_SELECT_MENU = new Identifier(ShapeShifterCurseFabric.MOD_ID, "open_form_select_menu");
 
     public static final Identifier SET_NO_JUMP_TICK = new Identifier(ShapeShifterCurseFabric.MOD_ID, "set_no_jump_tick");
+
+    public static final Identifier OPEN_FORM_COLOR_SELECT_MENU = new Identifier(ShapeShifterCurseFabric.MOD_ID, "open_form_color_select_menu");
+    public static final Identifier MODIFY_FCD_DATA = new Identifier(ShapeShifterCurseFabric.MOD_ID, "modify_fcd_data");
 }

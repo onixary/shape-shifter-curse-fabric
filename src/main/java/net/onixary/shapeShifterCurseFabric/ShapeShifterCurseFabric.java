@@ -34,6 +34,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.*;
 import net.onixary.shapeShifterCurseFabric.advancement.*;
 import net.onixary.shapeShifterCurseFabric.command.CustomFormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.FormArgumentType;
+import net.onixary.shapeShifterCurseFabric.command.MiscArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
 import net.onixary.shapeShifterCurseFabric.config.ClientConfig;
 import net.onixary.shapeShifterCurseFabric.config.CommonConfig;
@@ -294,6 +295,11 @@ public class ShapeShifterCurseFabric implements ModInitializer {
                 Identifier.of(MOD_ID, "custom_form_argument_type"),
                 CustomFormArgumentType.class,
                 ConstantArgumentSerializer.of(CustomFormArgumentType::new)
+        );
+        ArgumentTypeRegistry.registerArgumentType(
+                Identifier.of(MOD_ID, "string_enum_argument_type"),
+                MiscArgumentType.Enum_ArgumentType.class,
+                new MiscArgumentType.Enum_ArgumentType_Serializer()
         );
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
             PlayerEntity player = handler.player;

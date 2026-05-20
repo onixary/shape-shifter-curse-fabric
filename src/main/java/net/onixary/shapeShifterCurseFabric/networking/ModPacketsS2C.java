@@ -2,23 +2,14 @@ package net.onixary.shapeShifterCurseFabric.networking;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.terraformersmc.modmenu.util.mod.Mod;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.FoodComponent;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.NetworkThreadUtils;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -29,12 +20,12 @@ import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
+import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenu;
 import net.onixary.shapeShifterCurseFabric.custom_ui.NormalFormSelectScreen;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
 import net.onixary.shapeShifterCurseFabric.custom_ui.PatronFormSelectScreen;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
-import net.onixary.shapeShifterCurseFabric.util.CustomEdibleUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormColorData;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.Interface.IJumpController;
@@ -42,7 +33,6 @@ import org.jetbrains.annotations.Nullable;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -77,7 +67,9 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_PATRON_LEVEL, ModPacketsS2C::receiveUpdatePatronLevel);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.OPEN_PATRON_FORM_SELECT_MENU, ModPacketsS2C::receiveOpenPatronFormSelectMenu);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.OPEN_FORM_SELECT_MENU, ModPacketsS2C::receiveOpenFormSelectMenu);
-        ClientPlayNetworking.registerGlobalReceiver(SET_NO_JUMP_TICK, ModPacketsS2C::receiveSetNoJumpTick);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.SET_NO_JUMP_TICK, ModPacketsS2C::receiveSetNoJumpTick);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.OPEN_FORM_COLOR_SELECT_MENU, ModPacketsS2C::receiveOpenFCSMenu);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.MODIFY_FCD_DATA, ModPacketsS2C::receiveModifyFCDData);
     }
 
     /* 重构后不需要了 仅用于参考旧实现逻辑
@@ -306,20 +298,25 @@ public class ModPacketsS2C {
         }).start();
     }
 
-    public static void sendUpdateCustomSetting(FormTextureUtils.ColorSetting colorSetting) {
+    public static void sendUpdateCustomColor(FormTextureUtils.ColorSetting colorSetting, boolean sendRAW) {
         PacketByteBuf buf = PacketByteBufs.create();
-        buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.keep_original_skin);
-        buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.enable_form_color);
-        buf.writeInt(FormTextureUtils.ARGB2ABGR(colorSetting.getPrimaryColor()));
-        buf.writeInt(FormTextureUtils.ARGB2ABGR(colorSetting.getAccentColor1()));
-        buf.writeInt(FormTextureUtils.ARGB2ABGR(colorSetting.getAccentColor2()));
-        buf.writeInt(FormTextureUtils.ARGB2ABGR(colorSetting.getEyeColorA()));
-        buf.writeInt(FormTextureUtils.ARGB2ABGR(colorSetting.getEyeColorB()));
+        if (sendRAW) {
+            buf.writeInt(colorSetting.getPrimaryColor());
+            buf.writeInt(colorSetting.getAccentColor1());
+            buf.writeInt(colorSetting.getAccentColor2());
+            buf.writeInt(colorSetting.getEyeColorA());
+            buf.writeInt(colorSetting.getEyeColorB());
+        } else {
+            buf.writeInt(FormTextureUtils.ARGB2ABGR(colorSetting.getPrimaryColor()));
+            buf.writeInt(FormTextureUtils.ARGB2ABGR(colorSetting.getAccentColor1()));
+            buf.writeInt(FormTextureUtils.ARGB2ABGR(colorSetting.getAccentColor2()));
+            buf.writeInt(FormTextureUtils.ARGB2ABGR(colorSetting.getEyeColorA()));
+            buf.writeInt(FormTextureUtils.ARGB2ABGR(colorSetting.getEyeColorB()));
+        }
         buf.writeBoolean(colorSetting.getPrimaryGreyReverse());
         buf.writeBoolean(colorSetting.getAccent1GreyReverse());
         buf.writeBoolean(colorSetting.getAccent2GreyReverse());
-        buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.enable_form_random_sound);
-        ClientPlayNetworking.send(UPDATE_CUSTOM_SETTING, buf);
+        ClientPlayNetworking.send(UPDATE_CUSTOM_COLOR, buf);
     }
 
     // 临时先放这里，以后再整理
@@ -329,9 +326,16 @@ public class ModPacketsS2C {
         if (!ForceUpdate && !autoSyncConfig) {
             return;
         }
-        int AGBRInt = 0;
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.keep_original_skin);
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.enable_form_color);
+        buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.enable_form_random_sound);
+        ClientPlayNetworking.send(UPDATE_CUSTOM_SETTING, buf);
+        boolean autoSyncColorConfig = ShapeShifterCurseFabric.playerCustomConfig.auto_sync_color_config;
+        if (!ForceUpdate && !autoSyncColorConfig) {
+            return;
+        }
+        buf = PacketByteBufs.create();
+        int AGBRInt = 0;
         AGBRInt = FormTextureUtils.ARGB2ABGR(ShapeShifterCurseFabric.playerCustomConfig.primaryColor);
         buf.writeInt(AGBRInt);
         AGBRInt = FormTextureUtils.ARGB2ABGR(ShapeShifterCurseFabric.playerCustomConfig.accentColor1Color);
@@ -345,8 +349,6 @@ public class ModPacketsS2C {
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.primaryGreyReverse);
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.accent1GreyReverse);
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.accent2GreyReverse);
-        buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.enable_form_random_sound);
-        ClientPlayNetworking.send(UPDATE_CUSTOM_SETTING, buf);
     }
 
     public static void sendUpdateCustomSetting() {
@@ -465,5 +467,136 @@ public class ModPacketsS2C {
                 jumpController.shape_shifter_curse$setNoJumpTick(tick);
             }
         });
+    }
+
+    public static void receiveOpenFCSMenu(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        client.execute(() -> {
+            if (FormColorSelectMenu.instance == null) {
+                Screen screen = new FormColorSelectMenu(Text.literal("text.shape-shifter-curse.config.form_color_select_menu"));
+                client.setScreen(screen);
+            }
+        });
+    }
+
+    public static void receiveModifyFCDData(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        String commandType = buf.readString();
+        Identifier formID = buf.readIdentifier();
+        String arg1 = buf.readString();
+        String arg2 = buf.readString();
+        String arg3 = buf.readString();
+        String arg4 = buf.readString();
+        if (!ShapeShifterCurseFabric.playerCustomConfig.enable_server_modify_FCD_config) {
+            return;
+        }
+        // commandType ->
+        // save ->
+        //     formID
+        //     arg1 -> slot_type [form, global, form_default]
+        //     arg2 -> slot_name
+        // load ->
+        //     formID
+        //     arg1 -> slot_type [form, global, form_default]
+        //     arg2 -> slot_name
+        // delete ->
+        //     formID
+        //     arg1 -> slot_type [form, global, form_default]
+        //     arg2 -> slot_name
+        // config ->
+        //     formID -> not used
+        //     arg1 -> config_type [enable_default_color]
+        //     arg2 -> config_value -> not used only toggle
+        // list ->
+        //     formID
+        //     arg1 -> slot_type [form, global, form_default]
+        switch (commandType) {
+            case "save" -> {
+                FormTextureUtils.ColorSetting nowColorSetting = FormColorData.getPlayerColorSetting(false);
+                if (nowColorSetting == null) {
+                    return;
+                }
+                switch (arg1) {
+                    case "form" -> {
+                        ShapeShifterCurseFabricClient.formColorData.customSettingByForm.computeIfAbsent(formID, k -> new HashMap<>()).put(arg2, nowColorSetting);
+                    }
+                    case "global" -> {
+                        ShapeShifterCurseFabricClient.formColorData.customSetting.put(arg2, nowColorSetting);
+                    }
+                    case "form_default" -> {
+                        ShapeShifterCurseFabricClient.formColorData.formDefaultSetting.put(formID, nowColorSetting);
+                    }
+                }
+                ShapeShifterCurseFabricClient.formColorData.writeToConfig();
+            }
+            case "load" -> {
+                FormTextureUtils.ColorSetting colorSetting = null;
+                switch (arg1) {
+                    case "form" -> {
+                        colorSetting = ShapeShifterCurseFabricClient.formColorData.customSettingByForm.getOrDefault(formID, new HashMap<>()).getOrDefault(arg2, null);
+                    }
+                    case "global" -> {
+                        colorSetting = ShapeShifterCurseFabricClient.formColorData.customSetting.getOrDefault(arg2, null);
+                    }
+                    case "form_default" -> {
+                        colorSetting = ShapeShifterCurseFabricClient.formColorData.formDefaultSetting.getOrDefault(formID, null);
+                    }
+                }
+                if (colorSetting != null) {
+                    ModPacketsS2C.sendUpdateCustomColor(colorSetting, false);
+                }
+            }
+            case "delete" -> {
+                switch (arg1) {
+                    case "form" -> {
+                        ShapeShifterCurseFabricClient.formColorData.customSettingByForm.computeIfAbsent(formID, k -> new HashMap<>()).remove(arg2);
+                    }
+                    case "global" -> {
+                        ShapeShifterCurseFabricClient.formColorData.customSetting.remove(arg2);
+                    }
+                    case "form_default" -> {
+                        ShapeShifterCurseFabricClient.formColorData.formDefaultSetting.remove(formID);
+                    }
+                }
+                ShapeShifterCurseFabricClient.formColorData.writeToConfig();
+            }
+            case "config" -> {
+                switch (arg1) {
+                    case "enable_default_color" -> {
+                        ShapeShifterCurseFabricClient.formColorData.enableDefaultFormColor = !ShapeShifterCurseFabricClient.formColorData.enableDefaultFormColor;
+                        if (client.player != null) {
+                            client.player.sendMessage(Text.translatable("message.shape-shifter-curse.enable_default_color", ShapeShifterCurseFabricClient.formColorData.enableDefaultFormColor), true);
+                        }
+                    }
+                }
+                ShapeShifterCurseFabricClient.formColorData.writeToConfig();
+            }
+            case "list" -> {
+                switch (arg1) {
+                    case "form" -> {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        stringBuilder.append("All Custom Form Color Settings For %s:\n|".formatted(formID));
+                        ShapeShifterCurseFabricClient.formColorData.customSettingByForm.getOrDefault(formID, new HashMap<>()).forEach((k, v) -> stringBuilder.append(" %s |".formatted(k)));
+                        if (client.player != null) {
+                            client.player.sendMessage(Text.literal(stringBuilder.toString()), false);
+                        }
+                    }
+                    case "global" -> {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        stringBuilder.append("All Custom Global Color Settings:\n|");
+                        ShapeShifterCurseFabricClient.formColorData.customSetting.forEach((k, v) -> stringBuilder.append(" %s |".formatted(k)));
+                        if (client.player != null) {
+                            client.player.sendMessage(Text.literal(stringBuilder.toString()), false);
+                        }
+                    }
+                    case "form_default" -> {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        stringBuilder.append("All Default Form Color Settings:\n|");
+                        ShapeShifterCurseFabricClient.formColorData.formDefaultSetting.forEach((k, v) -> stringBuilder.append(" %s |".formatted(k)));
+                        if (client.player != null) {
+                            client.player.sendMessage(Text.literal(stringBuilder.toString()), false);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

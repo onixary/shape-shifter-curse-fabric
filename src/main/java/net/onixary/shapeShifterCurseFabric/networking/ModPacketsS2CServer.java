@@ -277,4 +277,42 @@ public class ModPacketsS2CServer {
         buf.writeInt(tick);
         ServerPlayNetworking.send(player, ModPackets.SET_NO_JUMP_TICK, buf);
     }
+
+
+    public static void sendOpenFCSMenu(ServerPlayerEntity player) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        ServerPlayNetworking.send(player, ModPackets.OPEN_FORM_COLOR_SELECT_MENU, buf);
+    }
+
+    public static void sendModifyFCDData(ServerPlayerEntity player, String commandType, Identifier formID, String arg1, String arg2, String arg3, String arg4) {
+        // commandType ->
+        // save ->
+        //     formID
+        //     arg1 -> slot_type [form, global, form_default]
+        //     arg2 -> slot_name
+        // load ->
+        //     formID
+        //     arg1 -> slot_type [form, global, form_default]
+        //     arg2 -> slot_name
+        // delete ->
+        //     formID
+        //     arg1 -> slot_type [form, global, form_default]
+        //     arg2 -> slot_name
+        // config ->
+        //     formID -> not used
+        //     arg1 -> config_type [enable_default_color]
+        //     arg2 -> config_value -> not used only toggle
+        // list ->
+        //     formID
+        //     arg1 -> slot_type [form, global, form_default]
+
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeString(commandType);
+        buf.writeIdentifier(formID);
+        buf.writeString(arg1);
+        buf.writeString(arg2);
+        buf.writeString(arg3);
+        buf.writeString(arg4);
+        ServerPlayNetworking.send(player, ModPackets.MODIFY_FCD_DATA, buf);
+    }
 }

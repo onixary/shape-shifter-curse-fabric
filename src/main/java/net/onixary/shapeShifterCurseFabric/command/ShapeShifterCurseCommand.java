@@ -22,9 +22,11 @@ import net.onixary.shapeShifterCurseFabric.mana.ManaComponent;
 import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 import net.onixary.shapeShifterCurseFabric.mana.RegManaComponent;
 import net.onixary.shapeShifterCurseFabric.minion.RegPlayerMinionComponent;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
@@ -147,6 +149,52 @@ public class ShapeShifterCurseCommand {
                         )
                         .then(literal("patron_info").requires(cs -> cs.hasPermissionLevel(0))
                                 .executes(ShapeShifterCurseCommand::logPatronInfo)
+                        )
+                        .then(literal("form_color").requires(cs -> cs.hasPermissionLevel(0))
+                                .then(literal("menu").executes(ShapeShifterCurseCommand::FC_Menu))
+                                .then(literal("save")
+                                        .then(argument("type", new MiscArgumentType.Enum_ArgumentType("form", "global", "form_default"))
+                                                .then(argument("slot_name", StringArgumentType.string())
+                                                        .executes(ShapeShifterCurseCommand::FC_Save)
+                                                        .then(argument("form", FormArgumentType.form())
+                                                                .executes(ShapeShifterCurseCommand::FC_Save)
+                                                        )
+                                                )
+                                        )
+                                )
+                                .then(literal("load")
+                                        .then(argument("type", new MiscArgumentType.Enum_ArgumentType("form", "global", "form_default"))
+                                                .then(argument("slot_name", StringArgumentType.string())
+                                                        .executes(ShapeShifterCurseCommand::FC_Load)
+                                                        .then(argument("form", FormArgumentType.form())
+                                                                .executes(ShapeShifterCurseCommand::FC_Load)
+                                                        )
+                                                )
+                                        )
+                                )
+                                .then(literal("delete")
+                                        .then(argument("type", new MiscArgumentType.Enum_ArgumentType("form", "global", "form_default"))
+                                                .then(argument("slot_name", StringArgumentType.string())
+                                                        .executes(ShapeShifterCurseCommand::FC_Delete)
+                                                        .then(argument("form", FormArgumentType.form())
+                                                                .executes(ShapeShifterCurseCommand::FC_Delete)
+                                                        )
+                                                )
+                                        )
+                                )
+                                .then(literal("config")
+                                        .then(argument("type", new MiscArgumentType.Enum_ArgumentType("enable_default_color"))
+                                                .executes(ShapeShifterCurseCommand::FC_Config)
+                                        )
+                                )
+                                .then(literal("list")
+                                        .then(argument("type", new MiscArgumentType.Enum_ArgumentType("form", "global", "form_default"))
+                                                .executes(ShapeShifterCurseCommand::FC_List)
+                                                .then(argument("form", FormArgumentType.form())
+                                                        .executes(ShapeShifterCurseCommand::FC_List)
+                                                )
+                                        )
+                                )
                         )
         );
         // TODO 存储形态颜色命令 通过网络包传输指令(命令仅运行在服务器 客户端操作需要发网络包) 还得在ClientConfig里加一个配置(阻止服务器命令修改本地数据库) 防止服务器使用这个接口填满客户端存储空间
@@ -496,6 +544,98 @@ public class ShapeShifterCurseCommand {
         RegManaComponent.MANA.get(target).clear();
         RegManaComponent.MANA.sync(target);
         commandContext.getSource().sendFeedback(() -> {return Text.literal("Mana Data Cleared!");}, false);
+        return 1;
+    }
+
+    private static int FC_Menu(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        if (player == null) {
+            return 0;
+        }
+        ModPacketsS2CServer.sendOpenFCSMenu(player);
+        return 1;
+    }
+
+    private static int FC_Save(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        if (player == null) {
+            return 0;
+        }
+        Identifier formID = null;
+        try {
+            formID = commandContext.getArgument("form", Identifier.class);
+        } catch (Exception e) {
+            PlayerFormBase form = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+            formID = form.FormID;
+        }
+        String type = commandContext.getArgument("type", String.class);
+        String slotName = commandContext.getArgument("slot_name", String.class);
+        ModPacketsS2CServer.sendModifyFCDData(player, "save", formID, type, slotName, "", "");
+        return 1;
+    }
+
+    private static int FC_Load(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        if (player == null) {
+            return 0;
+        }
+        Identifier formID = null;
+        try {
+            formID = commandContext.getArgument("form", Identifier.class);
+        } catch (Exception e) {
+            PlayerFormBase form = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+            formID = form.FormID;
+        }
+        String type = commandContext.getArgument("type", String.class);
+        String slotName = commandContext.getArgument("slot_name", String.class);
+        ModPacketsS2CServer.sendModifyFCDData(player, "load", formID, type, slotName, "", "");
+        return 1;
+    }
+
+    private static int FC_Delete(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        if (player == null) {
+            return 0;
+        }
+        Identifier formID = null;
+        try {
+            formID = commandContext.getArgument("form", Identifier.class);
+        } catch (Exception e) {
+            PlayerFormBase form = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+            formID = form.FormID;
+        }
+        String type = commandContext.getArgument("type", String.class);
+        String slotName = commandContext.getArgument("slot_name", String.class);
+        ModPacketsS2CServer.sendModifyFCDData(player, "delete", formID, type, slotName, "", "");
+        return 1;
+    }
+
+    private static final Identifier NO_ID = ShapeShifterCurseFabric.identifier("empty");
+
+    private static int FC_Config(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        if (player == null) {
+            return 0;
+        }
+        String type = commandContext.getArgument("type", String.class);
+        ModPacketsS2CServer.sendModifyFCDData(player, "config", NO_ID, type, "", "", "");
+        return 1;
+    }
+
+    private static int FC_List(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        if (player == null) {
+            return 0;
+        }
+        Identifier formID = null;
+        try {
+            formID = commandContext.getArgument("form", Identifier.class);
+        } catch (Exception e) {
+            PlayerFormBase form = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+            formID = form.FormID;
+        }
+        String type = commandContext.getArgument("type", String.class);
+        ModPacketsS2CServer.sendModifyFCDData(player, "list", formID, type, "", "", "");
         return 1;
     }
 }
