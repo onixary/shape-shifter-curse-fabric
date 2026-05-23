@@ -146,6 +146,8 @@
   "item.shape-shifter-curse.creative_inhibitor": ["极效抑制剂"],
   "item.shape-shifter-curse.creative_inhibitor.tooltip": ["(创造模式物品)由超越这个世界的力量制成，可以逆转永久形态"],
   "item.shape-shifter-curse.morphscale_core": ["塑形核心"],
+  "item.shape-shifter-curse.super_morphscale_core": ["超级塑形核心"],
+  "item.shape-shifter-curse.super_morphscale_core.tooltip": "剩余充能: %s",
   "item.shape-shifter-curse.morphscale_headring": ["塑形头环"],
   "item.shape-shifter-curse.morphscale_vest": ["塑形身甲"],
   "item.shape-shifter-curse.morphscale_cuish": ["塑形绑腿"],

@@ -467,5 +467,7 @@
     "text.autoconfig.shape-shifter-curse-custom.option.enable_form_default_color_system": "Enable form default color system",
     "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_color_config": "Automatically sync color data to server",
     "message.shape-shifter-curse.form_color_data": "[%s] shared a form color data (click to copy)",
-    "text.autoconfig.shape-shifter-curse-common.option.enableFullStackUpgrade": "Upgrade Recipe Can Upgrade Full Stack"
+    "text.autoconfig.shape-shifter-curse-common.option.enableFullStackUpgrade": "Upgrade Recipe Can Upgrade Full Stack",
+    "item.shape-shifter-curse.super_morphscale_core": "Super Morphscale Core",
+    "item.shape-shifter-curse.super_morphscale_core.tooltip": "Remaining charge: %s"
 }

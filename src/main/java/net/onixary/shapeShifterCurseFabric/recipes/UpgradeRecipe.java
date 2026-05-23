@@ -16,11 +16,11 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public abstract class UpgradeRecipe implements SmithingRecipe, ISmithingRecipeEX {
-    private final Identifier id;
-    private final Predicate<ItemStack> template;
-    private final Predicate<ItemStack> base;
-    private final Predicate<ItemStack> addition;
-    private final Function<ItemStack, ItemStack> upgradeResult;
+    public final Identifier id;
+    public final Predicate<ItemStack> template;
+    public final Predicate<ItemStack> base;
+    public final Predicate<ItemStack> addition;
+    public final Function<ItemStack, ItemStack> upgradeResult;
 
     public boolean isUpgradeAll() {
         return false;
