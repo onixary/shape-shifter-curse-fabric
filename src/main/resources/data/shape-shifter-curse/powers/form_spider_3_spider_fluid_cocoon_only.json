@@ -38,6 +38,10 @@
           "item": "shape-shifter-curse:spider_fluid_cocoon"
         },
         "inverted": true
+      },
+      {
+        "type": "shape-shifter-curse:is_morph_scale_item",
+        "inverted": true
       }
     ]
   }

@@ -32,4 +32,8 @@ accessible method net/minecraft/client/render/entity/LivingEntityRenderer isVisi
 accessible method net/minecraft/client/gui/widget/SliderWidget getTextureV ()I
 accessible method net/minecraft/client/gui/widget/SliderWidget getYImage ()I
 accessible method net/minecraft/client/gui/widget/TextFieldWidget onChanged (Ljava/lang/String;)V
-
+accessible method net/minecraft/screen/SmithingScreenHandler decrementStack (I)V
+accessible field net/minecraft/screen/SmithingScreenHandler world Lnet/minecraft/world/World;
+accessible field net/minecraft/screen/ForgingScreenHandler output Lnet/minecraft/inventory/CraftingResultInventory;
+accessible method net/minecraft/screen/SmithingScreenHandler getInputStacks ()Ljava/util/List;
+accessible field net/minecraft/screen/ForgingScreenHandler context Lnet/minecraft/screen/ScreenHandlerContext;

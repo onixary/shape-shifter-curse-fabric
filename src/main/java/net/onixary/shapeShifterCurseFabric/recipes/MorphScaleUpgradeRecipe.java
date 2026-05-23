@@ -1,18 +1,26 @@
 package net.onixary.shapeShifterCurseFabric.recipes;
 
 import com.google.gson.JsonObject;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.screen.SmithingScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 import static net.onixary.shapeShifterCurseFabric.recipes.RecipeSerializerRegister.MORPH_SCALE_UPGRADE;
 
 public class MorphScaleUpgradeRecipe extends UpgradeRecipe {
     public Ingredient template;
     public Ingredient addition;
+
+    public boolean isUpgradeAll() {
+        return ShapeShifterCurseFabric.commonConfig.enableFullStackUpgrade;
+    }
 
     public MorphScaleUpgradeRecipe(Identifier id, Ingredient template, Ingredient addition) {
         super(id, template, (itemStack -> {
