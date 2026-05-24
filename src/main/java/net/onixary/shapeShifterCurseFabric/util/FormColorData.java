@@ -31,7 +31,7 @@ public class FormColorData {
 
     // V1 UI用的数据 XuHaoNan: Onixary设计的新UI功能不太全 旧UI我自己搓一下材质放我拓展里用吧
     public static int GlobalSlotCount = 9;
-    public static int LocalSlotCount = 4;
+    public static int LocalSlotCount = 3;
 
     public final HashMap<Identifier, List<String>> FormColorSelectMenu_Form_Local_Names = new HashMap<>();
     public final List<String> FormColorSelectMenu_Global_Names = new ArrayList<String>();
@@ -191,9 +191,9 @@ public class FormColorData {
         new Thread(() -> {
             try {
                 Thread.sleep(1000);
-                FormColorSelectMenu.onFormChange_STATIC();
+                FormColorSelectMenu.onFormChange_STATIC(true, true);
             } catch (InterruptedException ignored) {
-                FormColorSelectMenu.onFormChange_STATIC();
+                FormColorSelectMenu.onFormChange_STATIC(true, true);
             }
         }).start();
     }
@@ -381,7 +381,7 @@ public class FormColorData {
     }
 
     public String getName_DefaultSlot(Identifier formID) {
-        return this.FormColorSelectMenu_Form_Default_Names.get(formID);
+        return this.FormColorSelectMenu_Form_Default_Names.getOrDefault(formID, "");
     }
 
     public void setName_DefaultSlot(Identifier formID, String name) {

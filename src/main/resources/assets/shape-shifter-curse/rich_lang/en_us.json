@@ -1203,6 +1203,7 @@
   "gui.shape_shifter_curse_fabric.fcs.from_clipboard": "↓Clipboard↓",
   "gui.shape_shifter_curse_fabric.fcs.to_clipboard": "↑Clipboard↑",
   "message.shape-shifter-curse.form_color_data": "[%s] shared a form color data (click to copy)",
+  "gui.shape_shifter_curse_fabric.fcs.none_from_name": "No Form",
 
   "text.shape-shifter-curse.config.title": "Shape Shifter Curse Config Menu",
   "text.shape-shifter-curse.config.close": "Cancel",

@@ -461,5 +461,6 @@
     "message.shape-shifter-curse.form_color_data": "[%s] shared a form color data (click to copy)",
     "text.autoconfig.shape-shifter-curse-common.option.enableFullStackUpgrade": "Upgrade Recipe Can Upgrade Full Stack",
     "item.shape-shifter-curse.super_morphscale_core": "Super Morphscale Core",
-    "item.shape-shifter-curse.super_morphscale_core.tooltip": "Remaining charge: %s"
+    "item.shape-shifter-curse.super_morphscale_core.tooltip": "Remaining charge: %s",
+    "gui.shape_shifter_curse_fabric.fcs.none_from_name": "No Form"
 }
