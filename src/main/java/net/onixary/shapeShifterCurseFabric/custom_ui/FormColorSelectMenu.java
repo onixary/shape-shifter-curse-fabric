@@ -1002,17 +1002,23 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         }
         if (!isOpenSlider) {
             // 228,27,11,11
+            context.fill(BPosX + 228, BPosY + 27, BPosX + 239, BPosY + 38, 0xFF000000);
             context.fill(BPosX + 228, BPosY + 27, BPosX + 239, BPosY + 38, this.primaryColor);
             // 228,41,11,11
+            context.fill(BPosX + 228, BPosY + 41, BPosX + 239, BPosY + 52, 0xFF000000);
             context.fill(BPosX + 228, BPosY + 41, BPosX + 239, BPosY + 52, this.accentColor1Color);
             // 228,55,11,11
+            context.fill(BPosX + 228, BPosY + 55, BPosX + 239, BPosY + 66, 0xFF000000);
             context.fill(BPosX + 228, BPosY + 55, BPosX + 239, BPosY + 66, this.accentColor2Color);
             // 228,69,11,11
+            context.fill(BPosX + 228, BPosY + 69, BPosX + 239, BPosY + 80, 0xFF000000);
             context.fill(BPosX + 228, BPosY + 69, BPosX + 239, BPosY + 80, this.eyeColorA);
             // 228,83,11,11
+            context.fill(BPosX + 228, BPosY + 83, BPosX + 239, BPosY + 94, 0xFF000000);
             context.fill(BPosX + 228, BPosY + 83, BPosX + 239, BPosY + 94, this.eyeColorB);
         } else {
             // 267,111,11,11
+            context.fill(BPosX + 267, BPosY + 111, BPosX + 278, BPosY + 122, 0xFF000000);
             context.fill(BPosX + 267, BPosY + 111, BPosX + 278, BPosY + 122, (this.tempSliderAlpha << 24) | (this.tempSliderR << 16) | (this.tempSliderG << 8) | (this.tempSliderB));
         }
         if (timer > 60) {
