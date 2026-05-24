@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class FormColorData {
     public boolean enableDefaultFormColor = true;
@@ -182,6 +184,15 @@ public class FormColorData {
         }
     }
 
+    public static List<Consumer<Identifier>> onFormChangeListeners = new ArrayList<>();
+
+    // 移除V1后记得删
+    static {
+        onFormChangeListeners.add((form) -> {
+            FormColorSelectMenu.onFormChange_STATIC(true, true);
+        });
+    }
+
     // 挂一个钩子在网络接受形态上 比如客户端的SYNC_FORM_CHANGE接收函数上
     public void onClientFormChange(Identifier form) {
         if (this.enableDefaultFormColor && ShapeShifterCurseFabric.playerCustomConfig.enable_form_default_color_system && this.formDefaultSetting.containsKey(form)) {
@@ -191,9 +202,9 @@ public class FormColorData {
         new Thread(() -> {
             try {
                 Thread.sleep(1000);
-                FormColorSelectMenu.onFormChange_STATIC(true, true);
+                onFormChangeListeners.forEach(listener -> listener.accept(form));
             } catch (InterruptedException ignored) {
-                FormColorSelectMenu.onFormChange_STATIC(true, true);
+                onFormChangeListeners.forEach(listener -> listener.accept(form));
             }
         }).start();
     }
