@@ -355,7 +355,7 @@ public class FormModel extends GeoModel<FormAnimatable> {
     }
 
     public final void setRotationForTailBones(float limbAngle, float limbDistance, float age, float tailDragAmount, float tailDragAmountVertical) {
-        PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(entity).getCurrentForm();
+        PlayerFormBase curForm = FormTextureUtils.getPlayerForm_Render(entity);
         boolean isFeral = curForm.getBodyType() == PlayerFormBodyType.FERAL;
         float SWAY_RATE = 0.33333334F * 0.5F;
         float SWAY_SCALE = 0.05F;
