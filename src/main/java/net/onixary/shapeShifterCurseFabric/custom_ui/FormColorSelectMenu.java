@@ -128,7 +128,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     private final HashMap<String, HashMap<FormTextureUtils.ColorSetting, Identifier>> colorSettingCacheMap = new HashMap<>();  // 防止内存泄漏
     private int modelID = -1;
     private static final String IdentifierNameSpace = MOD_ID;
-    private static final String IdentifierPrefix = "dynamic_fcs_";
+    private static final String IdentifierPrefix = "dynamic_fcs_v1_";
     private static long nowColorSettingIndex = 0;  // 自增ID
 
     private int formIDIndex = -1;
