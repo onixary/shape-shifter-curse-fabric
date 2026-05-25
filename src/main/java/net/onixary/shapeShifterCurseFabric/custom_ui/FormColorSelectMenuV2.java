@@ -65,12 +65,16 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
     private boolean accent2GreyReverse = false;
 
     // Data2: 由Data1的数据更新 修改时直接修改对应int 需要一个flag标记 防止循环调用 更新对应Data5数据
-    private boolean isUpdateConfigWidget = false;  // 由
+    private boolean isUpdateConfigWidget = false;
+    private final boolean UseSliderTextBox = false;
+
     private TextFieldWidget primaryColorTextBox;
     private TextFieldWidget accentColor1TextBox;
     private TextFieldWidget accentColor2TextBox;
     private TextFieldWidget eyeColorATextBox;
     private TextFieldWidget eyeColorBTextBox;
+
+    private TextFieldWidget SliderTextBox; // 和上面的5个TextBox二选一
     // 点击直接切换
     private ButtonWidget primaryGreyReverseButton;
     private ButtonWidget accent1GreyReverseButton;
@@ -199,11 +203,23 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
     private void onData1Changed() {
         // 更新Data2
         this.isUpdateConfigWidget = true;
-        this.primaryColorTextBox.setText(encodeColor(this.primaryColor));
-        this.accentColor1TextBox.setText(encodeColor(this.accentColor1Color));
-        this.accentColor2TextBox.setText(encodeColor(this.accentColor2Color));
-        this.eyeColorATextBox.setText(encodeColor(this.eyeColorA));
-        this.eyeColorBTextBox.setText(encodeColor(this.eyeColorB));
+        if (!this.UseSliderTextBox) {
+            this.primaryColorTextBox.setText(encodeColor(this.primaryColor));
+            this.accentColor1TextBox.setText(encodeColor(this.accentColor1Color));
+            this.accentColor2TextBox.setText(encodeColor(this.accentColor2Color));
+            this.eyeColorATextBox.setText(encodeColor(this.eyeColorA));
+            this.eyeColorBTextBox.setText(encodeColor(this.eyeColorB));
+        } else {
+            int Color = 0x00FFFFFF;
+            switch (this.SliderIndex) {
+                case 0 -> { Color = this.primaryColor; }
+                case 1 -> { Color = this.accentColor1Color; }
+                case 2 -> { Color = this.accentColor2Color; }
+                case 3 -> { Color = this.eyeColorA; }
+                case 4 -> { Color = this.eyeColorB; }
+            }
+            this.SliderTextBox.setText(encodeColor(Color));
+        }
         this.primaryGreyReverseButton.setMessage(this.primaryGreyReverse ? BoolBTN_ON : BoolBTN_OFF);
         this.accent1GreyReverseButton.setMessage(this.accent1GreyReverse ? BoolBTN_ON : BoolBTN_OFF);
         this.accent2GreyReverseButton.setMessage(this.accent2GreyReverse ? BoolBTN_ON : BoolBTN_OFF);
@@ -236,17 +252,36 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
         if (this.isUpdateConfigWidget) {
             return;
         }
-        switch (textBoxIndex) {
-            // OnChanged
-            case 0 -> { this.primaryColor = decodeColor(this.primaryColorTextBox.getText()); }
-            case 1 -> { this.accentColor1Color = decodeColor(this.accentColor1TextBox.getText()); }
-            case 2 -> { this.accentColor2Color = decodeColor(this.accentColor2TextBox.getText()); }
-            case 3 -> { this.eyeColorA = decodeColor(this.eyeColorATextBox.getText()); }
-            case 4 -> { this.eyeColorB = decodeColor(this.eyeColorBTextBox.getText()); }
-            // OnClicked
-            case 5 -> { this.primaryGreyReverse = !this.primaryGreyReverse; }
-            case 6 -> { this.accent1GreyReverse = !this.accent1GreyReverse; }
-            case 7 -> { this.accent2GreyReverse = !this.accent2GreyReverse; }
+        if (!this.UseSliderTextBox) {
+            switch (textBoxIndex) {
+                // OnChanged
+                case 0 -> { this.primaryColor = decodeColor(this.primaryColorTextBox.getText()); }
+                case 1 -> { this.accentColor1Color = decodeColor(this.accentColor1TextBox.getText()); }
+                case 2 -> { this.accentColor2Color = decodeColor(this.accentColor2TextBox.getText()); }
+                case 3 -> { this.eyeColorA = decodeColor(this.eyeColorATextBox.getText()); }
+                case 4 -> { this.eyeColorB = decodeColor(this.eyeColorBTextBox.getText()); }
+                // OnClicked
+                case 5 -> { this.primaryGreyReverse = !this.primaryGreyReverse; }
+                case 6 -> { this.accent1GreyReverse = !this.accent1GreyReverse; }
+                case 7 -> { this.accent2GreyReverse = !this.accent2GreyReverse; }
+            }
+        } else {
+            switch (textBoxIndex) {
+                // OnChanged
+                case 0, 1, 2, 3, 4 -> {
+                    switch (this.SliderIndex) {
+                        case 0 -> { this.primaryColor = decodeColor(this.SliderTextBox.getText()); }
+                        case 1 -> { this.accentColor1Color = decodeColor(this.SliderTextBox.getText()); }
+                        case 2 -> { this.accentColor2Color = decodeColor(this.SliderTextBox.getText()); }
+                        case 3 -> { this.eyeColorA = decodeColor(this.SliderTextBox.getText()); }
+                        case 4 -> { this.eyeColorB = decodeColor(this.SliderTextBox.getText()); }
+                    }
+                }
+                // OnClicked
+                case 5 -> { this.primaryGreyReverse = !this.primaryGreyReverse; }
+                case 6 -> { this.accent1GreyReverse = !this.accent1GreyReverse; }
+                case 7 -> { this.accent2GreyReverse = !this.accent2GreyReverse; }
+            }
         }
         this.isColorSettingDirty = true;
         this.onData1Changed();
