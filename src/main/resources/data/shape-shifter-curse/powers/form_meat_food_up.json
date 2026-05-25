@@ -56,7 +56,7 @@
                 "inverted": true
             },
             {
-                "type": "shape-shifter-curse:is_morph_scale_item",
+                "type": "shape-shifter-curse:is_morph_scale_food",
                 "inverted": true
             }
         ]

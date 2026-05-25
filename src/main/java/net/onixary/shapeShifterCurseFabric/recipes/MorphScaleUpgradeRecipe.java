@@ -13,6 +13,7 @@ import net.minecraft.screen.SmithingScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.additional_power.IsMorphScaleItemCondition;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.tools.SuperMorphScaleCore;
 
@@ -35,10 +36,10 @@ public class MorphScaleUpgradeRecipe extends UpgradeRecipe {
             if (nbtCompound == null) {
                 return true;
             }
-            return !(nbtCompound.contains("MorphScaleItem") && nbtCompound.getBoolean("MorphScaleItem"));
+            return !(nbtCompound.contains(IsMorphScaleItemCondition.IsMorphScaleArmorTagName) && nbtCompound.getBoolean(IsMorphScaleItemCondition.IsMorphScaleArmorTagName));
         }), addition, itemStack -> {
             NbtCompound nbtCompound = itemStack.getOrCreateNbt();
-            nbtCompound.putBoolean("MorphScaleItem", true);
+            nbtCompound.putBoolean(IsMorphScaleItemCondition.IsMorphScaleArmorTagName, true);
             return itemStack;
         });
         this.template = template;

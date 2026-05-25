@@ -1106,6 +1106,7 @@
   "codex.form.shape-shifter-curse.spider_3.cons": ["你完全变化的多足蜘蛛身体不再适合需要耐力的持续动作。你的移动与疾跑速度都大幅减慢，并且不再能像之前那样竖直跳跃到一格的高度。但是作为替代，你可以在疾跑时向前跳跃突进\n你的蜘蛛消化系统让你只能从体外消化的流食囊中获取饥饿值。同时，节肢杀手附魔的武器会对你造成更多伤害\n你甲壳质的体表与其附着的绒毛惧怕火焰，燃烧造成的伤害更多\n除了头盔以外，你无法穿戴平常的护甲\n村庄的铁傀儡将你视作敌人，它们会主动攻击你"],
   "codex.form.shape-shifter-curse.spider_3.instincts": [" "],
   "tooltip.shape_shifter_curse.morphscale_item": "塑形物品",
+  "tooltip.shape_shifter_curse.morphscale_food": "未定义标签名称",
   "tooltip.shape_shifter_curse.potion_target_form": "目标形态: ",
   "itemGroup.shape_shifter_curse.sscitems": "幻形者诅咒",
   "category.shape-shifter-curse":"幻形者诅咒",

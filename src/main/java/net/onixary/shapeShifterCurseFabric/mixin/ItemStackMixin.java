@@ -10,6 +10,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.additional_power.IsMorphScaleItemCondition;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformRelatedItems;
@@ -66,8 +67,11 @@ public abstract class ItemStackMixin {
         ItemStack realThis = (ItemStack) (Object) this;
         List<Text> tooltip = cir.getReturnValue();
         if (realThis.hasNbt()) {
-            if (realThis.getNbt().contains("MorphScaleItem") && realThis.getNbt().getBoolean("MorphScaleItem")) {
+            if (realThis.getNbt().contains(IsMorphScaleItemCondition.IsMorphScaleArmorTagName) && realThis.getNbt().getBoolean(IsMorphScaleItemCondition.IsMorphScaleArmorTagName)) {
                 tooltip.add(Text.translatable("tooltip.shape_shifter_curse.morphscale_item").formatted(Formatting.GRAY));
+            }
+            if (realThis.getNbt().contains(IsMorphScaleItemCondition.IsMorphScaleFoodTagName) && realThis.getNbt().getBoolean(IsMorphScaleItemCondition.IsMorphScaleFoodTagName)) {
+                tooltip.add(Text.translatable("tooltip.shape_shifter_curse.morphscale_food").formatted(Formatting.GRAY));
             }
         }
     }
