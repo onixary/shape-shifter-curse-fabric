@@ -35,7 +35,7 @@ import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID
 // 玩家模型展示框
 // 自动加载/保存 颜色数据 当开启自动同步颜色时会自动把数据写入到config中 否则仅写入到服务器中 数据用服务器端的数据 如果未进入游戏 则使用客户端的数据
 // 剪切板上传下载
-// 二级菜单(由于Onixary提的方案有问题 等待修改方案中)
+// 二级菜单
 
 // 比V1少的功能
 // 客户端 服务器 独立上传下载按钮 可以实现多个服务器不同颜色数据
