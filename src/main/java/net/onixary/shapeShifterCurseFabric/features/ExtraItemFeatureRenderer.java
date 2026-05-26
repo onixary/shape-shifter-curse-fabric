@@ -25,6 +25,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 
 import java.util.Optional;
 
@@ -70,7 +71,7 @@ public class ExtraItemFeatureRenderer <T extends LivingEntity, M extends EntityM
     ) {
 
         if (livingEntity instanceof AbstractClientPlayerEntity player) {
-            PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+            PlayerFormBase curForm = FormTextureUtils.getPlayerForm_Render(player);
             boolean isFeral = curForm.getBodyType() == PlayerFormBodyType.FERAL;
 
             if (isFeral && MinecraftClient.getInstance().options.getPerspective().isFirstPerson() && player == MinecraftClient.getInstance().player) {

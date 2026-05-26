@@ -10,6 +10,7 @@ import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -44,7 +45,7 @@ public abstract class PlayerEntityRendererFallFlyingMixin extends LivingEntityRe
             return;
         }
         */
-        boolean isFeral = RegPlayerFormComponent.PLAYER_FORM.get(abstractClientPlayerEntity).getCurrentForm().getBodyType() == PlayerFormBodyType.FERAL;
+        boolean isFeral = FormTextureUtils.getPlayerForm_Render(abstractClientPlayerEntity).getBodyType() == PlayerFormBodyType.FERAL;
         if(!isFeral){
             return;
         }

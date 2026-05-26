@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,7 +31,7 @@ public abstract class PlayerEntityPoseMixin extends LivingEntity implements Name
     @Inject(method = "updatePose", at = @At("HEAD"), cancellable = true)
     private void forcePose(CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity) (Object) this;
-        PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+        PlayerFormBase curForm = FormTextureUtils.getPlayerForm_Render(player);
         boolean isFeral = curForm.getBodyType() == PlayerFormBodyType.FERAL;
         if(isFeral){
             if (this.wouldPoseNotCollide(EntityPose.SWIMMING)) {

@@ -14,7 +14,7 @@ import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateController.TransformingController;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -89,7 +89,8 @@ public class AnimSystem {
     }
 
     private void PreProcessAnimSystemData() {
-        this.data.playerForm = RegPlayerFormComponent.PLAYER_FORM.get(this.player).getCurrentForm();
+        // this.data.playerForm = RegPlayerFormComponent.PLAYER_FORM.get(this.player).getCurrentForm();
+        this.data.playerForm = FormTextureUtils.getPlayerForm_Render(this.player);
         this.data.IsWalking = !this.data.LastPosition.equals(this.player.getPos());
         if (this.player.getPos().getY() == this.data.LastPosition.getY()) {
             this.data.LastPosYChange ++;

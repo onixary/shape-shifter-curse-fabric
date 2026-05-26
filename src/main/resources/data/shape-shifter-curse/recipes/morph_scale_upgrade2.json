@@ -1,0 +1,9 @@
+{
+  "type": "shape-shifter-curse:morph_scale_upgrade",
+  "template": {
+    "item": "shape-shifter-curse:super_morphscale_core"
+  },
+  "addition": {
+    "item": "shape-shifter-curse:untreated_moondust"
+  }
+}

@@ -47,6 +47,14 @@ public class CommonConfig implements ConfigData {
     @Comment("Enable Debug Command (PermissionLevel = 0). Default: false")
     public boolean enableDebugCommand = false;
 
+    @ConfigEntry.Category("General")
+    @Comment("Enable Upgrade Recipe Can Upgrade Full Stack. Default: true")
+    public boolean enableFullStackUpgrade = true;  // 防止一些Mod冲突导致刷物品Bug
+
+    @ConfigEntry.Category("General")
+    @Comment("Enable Food Habit System Default: true")
+    public boolean enableFoodHabitSystem = true;
+
     @ConfigEntry.Category("Patron")
     @Comment("Enable Patron Form System. Default: true")
     public boolean enablePatronFormSystem = true;
