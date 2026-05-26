@@ -25,6 +25,9 @@ public class IsMorphScaleItemCondition {
     }
 
     public static boolean MSF_condition(SerializableData.Instance data, ItemStack itemStack) {
+        if (!ShapeShifterCurseFabric.commonConfig.enableFoodHabitSystem) {
+            return true;
+        }
         if (itemStack.isIn(ModTags.MorphScaleItem_Tag)) {
             return true;
         }
