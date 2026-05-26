@@ -37,3 +37,12 @@ accessible field net/minecraft/screen/SmithingScreenHandler world Lnet/minecraft
 accessible field net/minecraft/screen/ForgingScreenHandler output Lnet/minecraft/inventory/CraftingResultInventory;
 accessible method net/minecraft/screen/SmithingScreenHandler getInputStacks ()Ljava/util/List;
 accessible field net/minecraft/screen/ForgingScreenHandler context Lnet/minecraft/screen/ScreenHandlerContext;
+accessible field net/minecraft/advancement/criterion/InventoryChangedCriterion$Conditions items [Lnet/minecraft/predicate/item/ItemPredicate;
+accessible field net/minecraft/predicate/item/ItemPredicate tag Lnet/minecraft/registry/tag/TagKey;
+accessible field net/minecraft/predicate/item/ItemPredicate items Ljava/util/Set;
+accessible field net/minecraft/predicate/item/ItemPredicate count Lnet/minecraft/predicate/NumberRange$IntRange;
+accessible field net/minecraft/predicate/item/ItemPredicate durability Lnet/minecraft/predicate/NumberRange$IntRange;
+accessible field net/minecraft/predicate/item/ItemPredicate enchantments [Lnet/minecraft/predicate/item/EnchantmentPredicate;
+accessible field net/minecraft/predicate/item/ItemPredicate storedEnchantments [Lnet/minecraft/predicate/item/EnchantmentPredicate;
+accessible field net/minecraft/predicate/item/ItemPredicate potion Lnet/minecraft/potion/Potion;
+accessible field net/minecraft/predicate/item/ItemPredicate nbt Lnet/minecraft/predicate/NbtPredicate;

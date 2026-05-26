@@ -67,7 +67,8 @@
     "mob.IronGolemEntityMixin",
     "SwordItemMixin",
     "ShearsItemMixin",
-    "SmithingScreenHandlerMixin"
+    "SmithingScreenHandlerMixin",
+    "AdvancementFixMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",
