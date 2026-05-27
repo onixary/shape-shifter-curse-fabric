@@ -128,6 +128,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final OnFirstTransformEnableFormList ON_FIRST_TRANSFORM_ENABLE_FORM_LIST = Criteria.register(new OnFirstTransformEnableFormList());
 
     public static final OnTransformForm ON_TRANSFORM_FORM = Criteria.register(new OnTransformForm());
+    public static final OnWebEntity ON_WEB_ENTITY = Criteria.register(new OnWebEntity());
 
     // Reg custom entities
     // Bat

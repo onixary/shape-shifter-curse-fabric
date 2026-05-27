@@ -463,5 +463,7 @@
     "text.autoconfig.shape-shifter-curse-common.option.enableFoodHabitSystem": "Enable Food Habit System",
     "item.shape-shifter-curse.super_morphscale_core": "Super Morphscale Core",
     "item.shape-shifter-curse.super_morphscale_core.tooltip": "Remaining charge: %s",
-    "gui.shape_shifter_curse_fabric.fcs.none_from_name": "No Form"
+    "gui.shape_shifter_curse_fabric.fcs.none_from_name": "No Form",
+    "advancements.shape-shifter-curse.spider_catch_a_bug.title": "Caught: Unknown Exception",
+    "advancements.shape-shifter-curse.spider_catch_a_bug.description": "As a \"professional\" \"network engineer\": this bug has been try-catched."
 }
