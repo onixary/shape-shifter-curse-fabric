@@ -50,6 +50,14 @@
     "first_person_render": {
       "left_arm": "bipedLeftArm",
       "right_arm": "bipedRightArm"
+    },
+    "model_part_map": {
+      "head": "bipedHead",
+      "body": "bipedBody",
+      "left_arm": "bipedLeftArm",
+      "right_arm": "bipedRightArm",
+      "left_leg": "bipedLeftLeg",
+      "right_leg": "bipedRightLeg"
     }
   },
   "builtin_controller_data": {
