@@ -17,7 +17,12 @@
   "parent": "shape-shifter-curse:on_transform_snow_fox_0",
   "criteria": {
     "on_transform_snow_fox_3": {
-      "trigger": "shape-shifter-curse:on_transform_snow_fox_3"
+      "trigger": "shape-shifter-curse:on_transform_form",
+      "conditions": {
+        "form": [
+          "shape-shifter-curse:snow_fox_3"
+        ]
+      }
     }
   },
   "requirements": []

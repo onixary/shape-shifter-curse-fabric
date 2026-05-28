@@ -63,6 +63,8 @@
   "advancements.shape-shifter-curse.on_transform_spider_0.description": ["Strange spiders in the abandoned mineshaft...?"],
   "advancements.shape-shifter-curse.on_transform_spider_3.title": ["Network Engineer"],
   "advancements.shape-shifter-curse.on_transform_spider_3.description": ["Packet, bridge, hook... close enough I think"],
+  "advancements.shape-shifter-curse.spider_catch_a_bug.title": ["Caught: Unknown Exception"],
+  "advancements.shape-shifter-curse.spider_catch_a_bug.description": ["As a \"professional\" \"network engineer\": this bug has been try-catched."],
   "advancements.shape-shifter-curse.on_transform_allay_sp.title": ["Allay"],
   "advancements.shape-shifter-curse.on_transform_allay_sp.description": ["A friendly spirit that draws power from amethyst"],
   "advancements.shape-shifter-curse.on_transform_feral_cat_sp.title": ["Feral Cat"],
@@ -214,7 +216,7 @@
   "screen.shape-shifter-curse.book_of_shape_shifter.start_content_text":
   [
     "As you attempt to open the book, you feel strange magic flowing into your body through your fingertips with a faint tingling sensation, making you jerk your hand back instinctively\n",
-    "Could this be some kind of",
+    "Could this be some kind of ",
     {
       "text": "curse",
       "color": "#0096FF"

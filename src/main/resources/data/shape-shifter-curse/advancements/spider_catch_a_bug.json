@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:cobweb"
+    },
+    "title": {
+      "translate": "advancements.shape-shifter-curse.spider_catch_a_bug.title"
+    },
+    "description": {
+      "translate": "advancements.shape-shifter-curse.spider_catch_a_bug.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "shape-shifter-curse:on_transform_spider_3",
+  "criteria": {
+    "on_web_bullet_catch_bug": {
+      "trigger": "shape-shifter-curse:on_web_entity",
+      "conditions": {
+        "entity": [
+          "minecraft:silverfish",
+          "minecraft:endermite"
+        ]
+      }
+    }
+  }
+}

@@ -63,6 +63,8 @@
     "advancements.shape-shifter-curse.on_transform_spider_0.description": "废弃矿井中的奇怪蜘蛛…？",
     "advancements.shape-shifter-curse.on_transform_spider_3.title": "网络工程师",
     "advancements.shape-shifter-curse.on_transform_spider_3.description": "封包，桥接，Hook…大差不差了",
+    "advancements.shape-shifter-curse.spider_catch_a_bug.title": "已捕获：未知异常",
+    "advancements.shape-shifter-curse.spider_catch_a_bug.description": "作为一只专业的\"网络工程师\"：这个 Bug 被你 try-catch 了。",
     "advancements.shape-shifter-curse.on_transform_allay_sp.title": "悦灵",
     "advancements.shape-shifter-curse.on_transform_allay_sp.description": "从紫水晶中获取能量的友善灵体",
     "advancements.shape-shifter-curse.on_transform_feral_cat_sp.title": "野猫",
