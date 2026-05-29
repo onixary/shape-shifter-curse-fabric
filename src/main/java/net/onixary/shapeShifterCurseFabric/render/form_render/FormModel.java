@@ -18,6 +18,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
+import net.onixary.shapeShifterCurseFabric.util.FormSkinSystem;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3d;
@@ -293,6 +294,15 @@ public class FormModel extends GeoModel<FormAnimatable> {
         boolean uslim = useSlim(slim);
         Identifier Resource = uslim ? this.TextureResource_Slim : this.TextureResource;
         Identifier ResourceMask = uslim ? this.TextureMaskResource_Slim : this.TextureMaskResource;
+        if (this.entity != null) {
+            FormSkinSystem.FormSkin formSkin = FormSkinSystem.getFormSkin(this.entity.getUuid(), this.Form);
+            if (formSkin != null) {
+                Identifier SkinResource = formSkin.getSkinTexture(uslim);
+                if (SkinResource != null) {
+                    return SkinResource;
+                }
+            }
+        }
         if (ResourceMask != null) {
             if (FormTextureUtils.useTempTexture && Objects.equals(this.entity, MinecraftClient.getInstance().player)) {
                 return FormTextureUtils.tempTextureProcessor.getTexture(this.modelID, uslim ? "texture_slim" : "texture", Resource, ResourceMask, UseMultiplyMask);
@@ -310,6 +320,15 @@ public class FormModel extends GeoModel<FormAnimatable> {
         boolean uslim = useSlim(slim);
         Identifier Resource = uslim ? this.OverlayTextureResource_Slim : this.OverlayTextureResource;
         Identifier ResourceMask = uslim ? this.OverlayTextureMaskResource_Slim : this.OverlayTextureMaskResource;
+        if (this.entity != null) {
+            FormSkinSystem.FormSkin formSkin = FormSkinSystem.getFormSkin(this.entity.getUuid(), this.Form);
+            if (formSkin != null) {
+                Identifier SkinResource = formSkin.getSkinOverlayTexture(uslim);
+                if (SkinResource != null) {
+                    return SkinResource;
+                }
+            }
+        }
         if (ResourceMask != null) {
             if (FormTextureUtils.useTempTexture && Objects.equals(this.entity, MinecraftClient.getInstance().player)) {
                 return FormTextureUtils.tempTextureProcessor.getTexture(this.modelID, uslim ? "overlay_texture_slim" : "overlay_texture", Resource, ResourceMask, UseMultiplyMask);
@@ -327,12 +346,21 @@ public class FormModel extends GeoModel<FormAnimatable> {
         boolean uslim = useSlim(slim);
         Identifier Resource = uslim ? this.EmissiveTextureResource_Slim : this.EmissiveTextureResource;
         Identifier ResourceMask = uslim ? this.EmissiveTextureMaskResource_Slim : this.EmissiveTextureMaskResource;
+        if (this.entity != null) {
+            FormSkinSystem.FormSkin formSkin = FormSkinSystem.getFormSkin(this.entity.getUuid(), this.Form);
+            if (formSkin != null) {
+                Identifier SkinResource = formSkin.getSkinEmissiveTexture(uslim);
+                if (SkinResource != null) {
+                    return SkinResource;
+                }
+            }
+        }
         if (ResourceMask != null) {
             if (FormTextureUtils.useTempTexture && Objects.equals(this.entity, MinecraftClient.getInstance().player)) {
                 return FormTextureUtils.tempTextureProcessor.getTexture(this.modelID, uslim ? "emissive_texture_slim" : "emissive_texture", Resource, ResourceMask, UseMultiplyMask);
             }
             FormTextureUtils.ColorSetting colorSetting = FormTextureUtils.getPlayerColorSetting(this.entity);
-            if (colorSetting != null && ResourceMask != null) {
+            if (colorSetting != null) {
                 HashMap<FormTextureUtils.ColorSetting, Identifier> Cache = uslim ? ColorMask_Baked_EmissiveTexture_Slim : ColorMask_Baked_EmissiveTexture;
                 return readCacheOrBake(Cache, Resource, ResourceMask, colorSetting);
             }
@@ -533,6 +561,16 @@ public class FormModel extends GeoModel<FormAnimatable> {
     @Override
     public Identifier getModelResource(FormAnimatable animatable) {
         PlayerEntity player = animatable.e;
+        // Skin Model System Not Implemented
+        // if (player != null) {
+        //     FormSkinSystem.FormSkin formSkin = FormSkinSystem.getFormSkin(player.getUuid(), this.Form);
+        //     if (formSkin != null) {
+        //         Identifier formModel = formSkin.getSkinModel(useSlim(SlimMap.getOrDefault(player, false)));
+        //         if (formModel != null) {
+        //             return formModel;
+        //         }
+        //     }
+        // }
         return getModelResource(SlimMap.getOrDefault(player, false));
     }
 
