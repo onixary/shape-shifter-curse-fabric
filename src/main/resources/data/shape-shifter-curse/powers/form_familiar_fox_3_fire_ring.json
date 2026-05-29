@@ -29,16 +29,41 @@
                     "type": "origins:and",
                     "conditions": [
                         {
-                            "type": "origins:target_condition",
-                            "condition": {
-                                "type": "origins:in_tag",
-                                "tag": "shape-shifter-curse:water_explode_immune"
-                            },
+                            "type": "origins:and",
+                            "conditions": [
+                                {
+                                    "type": "origins:actor_condition",
+                                    "condition": {
+                                        "type": "origins:power_active",
+                                        "power": "shape-shifter-curse:pillager_friendly"
+                                    }
+                                },
+                                {
+                                    "type": "origins:target_condition",
+                                    "condition": {
+                                        "type": "origins:in_tag",
+                                        "tag": "shape-shifter-curse:illager"
+                                    }
+                                }
+                            ],
                             "inverted": true
                         },
                         {
-                            "type": "origins:owner",
-                            "inverted": true
+                            "type": "origins:and",
+                            "conditions": [
+                                {
+                                    "type": "origins:target_condition",
+                                    "condition": {
+                                        "type": "origins:in_tag",
+                                        "tag": "shape-shifter-curse:water_explode_immune"
+                                    },
+                                    "inverted": true
+                                },
+                                {
+                                    "type": "origins:owner",
+                                    "inverted": true
+                                }
+                            ]
                         }
                     ]
                 },
