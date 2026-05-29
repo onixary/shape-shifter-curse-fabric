@@ -19,13 +19,8 @@
     "bientity_condition": {
         "type": "origins:target_condition",
         "condition": {
-            "type": "origins:or",
-            "conditions": [
-                {
-                    "type": "apoli:in_tag",
-                    "tag": "shape-shifter-curse:illager"
-                }
-            ]
+            "type": "origins:in_tag",
+            "tag": "shape-shifter-curse:illager"
         }
     },
     "cooldown": 10
