@@ -349,6 +349,7 @@ public class ModPacketsS2C {
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.primaryGreyReverse);
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.accent1GreyReverse);
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.accent2GreyReverse);
+        ClientPlayNetworking.send(UPDATE_CUSTOM_COLOR, buf);
     }
 
     public static void sendUpdateCustomSetting() {
