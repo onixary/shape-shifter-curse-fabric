@@ -2,6 +2,7 @@ package net.onixary.shapeShifterCurseFabric.player_form;
 
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
@@ -195,7 +196,7 @@ public class PlayerFormBase {
         return FormID.toString();
     }
 
-    public Text getFormName() {
+    public MutableText getFormName() {
         return Text.translatable("codex.form." + FormID.getNamespace() + "." + FormID.getPath() + ".name");
     }
 

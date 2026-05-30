@@ -27,6 +27,18 @@ public class ClientConfig implements ConfigData {
     @Comment("Enable Auto Modify FPM Config. Default: true")
     public boolean enableChangeFPMConfig = true;  // 启用修改FPM配置
 
+    @ConfigEntry.Category("General")
+    @Comment("Disable Unlock Check In Form Color Select Menu. Default: false")
+    public boolean disableUnlockCheckInFormColorSelectMenu = false;  // 禁用颜色选择菜单中的解锁检查
+
+    @ConfigEntry.Category("Tool")
+    @Comment("Unlock All Form For Form Color Select Menu. Default: false")
+    public boolean unlockAllFormInFormColorSelectMenu = false;  // 解锁颜色选择菜单中的所有形态
+
+    @ConfigEntry.Category("Tool")
+    @Comment("Clear Form Unlock Record For Form Color Select Menu. Default: false")
+    public boolean clearFormUnlockRecordInFormColorSelectMenu = false;  // 清除颜色选择菜单中的解锁记录
+
     @ConfigEntry.Category("Integration")
     @Comment("Enable Better Combat Fix. Default: true")
     public boolean enableBetterCombatFix = true;  // 启用Better Combat Fix

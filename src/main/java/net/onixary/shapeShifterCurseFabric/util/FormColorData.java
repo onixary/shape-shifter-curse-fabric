@@ -10,6 +10,8 @@ import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenu;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import org.jetbrains.annotations.Nullable;
@@ -31,13 +33,14 @@ public class FormColorData {
     public final HashMap<String, FormTextureUtils.ColorSetting> customSetting = new HashMap<>();
     public final HashMap<Identifier, HashMap<String, FormTextureUtils.ColorSetting>> customSettingByForm = new HashMap<>();
 
-    // V1 UI用的数据 XuHaoNan: Onixary设计的新UI功能不太全 旧UI我自己搓一下材质放我拓展里用吧
     public static int GlobalSlotCount = 9;
     public static int LocalSlotCount = 3;
 
     public final HashMap<Identifier, List<String>> FormColorSelectMenu_Form_Local_Names = new HashMap<>();
     public final List<String> FormColorSelectMenu_Global_Names = new ArrayList<String>();
     public final HashMap<Identifier, String> FormColorSelectMenu_Form_Default_Names = new HashMap<>();
+
+    public final List<Identifier> unlockedForms = new ArrayList<Identifier>();
 
     // V2 UI用的数据 由于UI没设计完 部分值不确定
     public static int V2_GlobalSlotCount = 9;
@@ -106,6 +109,11 @@ public class FormColorData {
             nbtList2.add(NbtString.of(name));
         }
         nbt.put("V2_FCS_global_setting_names", nbtList2);
+        NbtList nbtList3 = new NbtList();
+        for (Identifier form : unlockedForms) {
+            nbtList3.add(NbtString.of(form.toString()));
+        }
+        nbt.put("unlockedForms", nbtList3);
         return nbt;
     }
 
@@ -115,6 +123,7 @@ public class FormColorData {
         customSettingByForm.clear();
         FormColorSelectMenu_Form_Local_Names.clear();
         FormColorSelectMenu_Global_Names.clear();
+        unlockedForms.clear();
         if (compound.contains("enableDefaultFormColor")) {
             enableDefaultFormColor = compound.getBoolean("enableDefaultFormColor");
         }
@@ -182,6 +191,39 @@ public class FormColorData {
                 FormColorSelectMenu_Global_Names.add(nbtList.getString(i));
             }
         }
+        if (compound.contains("unlockedForms")) {
+            NbtList nbtList = compound.getList("unlockedForms", NbtElement.STRING_TYPE);
+            for (int i = 0; i < nbtList.size(); i++) {
+                unlockedForms.add(Identifier.tryParse(nbtList.getString(i)));
+            }
+        }
+    }
+
+    public boolean isUnlock(Identifier form) {
+        return unlockedForms.contains(form);
+    }
+
+    public void unlockForm(Identifier form) {
+        if (unlockedForms.contains(form)) {
+            return;
+        }
+        unlockedForms.add(form);
+        this.writeToConfig();
+    }
+
+    public void unlockAll() {
+        for (PlayerFormBase form : RegPlayerForms.playerForms.values()) {
+            if (!unlockedForms.contains(form.FormID)) {
+                unlockedForms.add(form.FormID);
+            }
+        }
+        this.writeToConfig();
+    }
+
+    public void clearFormUnlock() {
+        unlockedForms.clear();
+        unlockedForms.add(RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID);
+        this.writeToConfig();
     }
 
     public static List<Consumer<Identifier>> onFormChangeListeners = new ArrayList<>();
@@ -198,6 +240,7 @@ public class FormColorData {
         if (this.enableDefaultFormColor && ShapeShifterCurseFabric.playerCustomConfig.enable_form_default_color_system && this.formDefaultSetting.containsKey(form)) {
             ModPacketsS2C.sendUpdateCustomColor(this.formDefaultSetting.get(form), false, false,false, false);
         }
+        this.unlockForm(form);
         // 延时一下 好同步 "sendUpdateCustomSetting" 的更新
         new Thread(() -> {
             try {

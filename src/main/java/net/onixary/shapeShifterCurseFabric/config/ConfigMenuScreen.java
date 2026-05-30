@@ -8,6 +8,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenu;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 
@@ -68,6 +69,16 @@ public class ConfigMenuScreen extends Screen {
     @Override
     public void close() {
         ShapeShifterCurseFabric.LOGGER.info("Sending custom settings to server");
+        if (ShapeShifterCurseFabric.clientConfig.unlockAllFormInFormColorSelectMenu) {
+            ShapeShifterCurseFabricClient.formColorData.unlockAll();
+            ShapeShifterCurseFabric.clientConfig.unlockAllFormInFormColorSelectMenu = false;
+            AutoConfig.getConfigHolder(ClientConfig.class).save();
+        }
+        if (ShapeShifterCurseFabric.clientConfig.clearFormUnlockRecordInFormColorSelectMenu) {
+            ShapeShifterCurseFabricClient.formColorData.clearFormUnlock();
+            ShapeShifterCurseFabric.clientConfig.clearFormUnlockRecordInFormColorSelectMenu = false;
+            AutoConfig.getConfigHolder(ClientConfig.class).save();
+        }
         try {
             ModPacketsS2C.sendUpdateCustomSetting();  // 尝试发送自定义配置到服务器
         }
