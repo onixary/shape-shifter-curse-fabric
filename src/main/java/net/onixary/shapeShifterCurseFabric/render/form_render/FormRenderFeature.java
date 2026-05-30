@@ -32,6 +32,8 @@ import org.joml.Quaternionf;
 
 import java.util.List;
 
+import static net.onixary.shapeShifterCurseFabric.util.ClientUtils.isOpenInventoryScreen;
+
 public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityModel<T>, A extends BipedEntityModel<T>> extends FeatureRenderer<T, M> {
     public FormRenderFeature(FeatureRendererContext<T, M> context) {
         super(context);
@@ -40,6 +42,7 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
     private static final boolean IS_FIRST_PERSON_MOD_LOADED = FabricLoader.getInstance().isModLoaded("firstperson");
     private static final boolean BetterCombatInstalled = FabricLoader.getInstance().isModLoaded("bettercombat");
     private static final boolean IRISInstalled = FabricLoader.getInstance().isModLoaded("iris");
+    private static final boolean ImmediatelyFastInstalled = FabricLoader.getInstance().isModLoaded("immediatelyfast");
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
@@ -176,12 +179,19 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
             boolean bl2 = !bl && !player.isInvisibleTo(MinecraftClient.getInstance().player);
             if (overlayTexture != null) {
                 RenderLayer l = null;
-                if (FormRenderUtils.isRenderingInWorld && IRISInstalled) {
+                if ((FormRenderUtils.isRenderingInWorld && IRISInstalled) || ImmediatelyFastInstalled) {
                     l = RenderLayer.getEntityCutoutNoCullZOffset(overlayTexture);
                 } else {
                     l = RenderLayer.getEntityCutout(overlayTexture);
                 }
-                playerEntityModel.render(matrixStack, vertexConsumerProvider.getBuffer(l), i, p, 1, 1, 1, bl2 ? 0.15F : 1.0F);
+                if (ImmediatelyFastInstalled && isOpenInventoryScreen) {
+                    matrixStack.push();
+                    matrixStack.scale(1.02f, 1.02f, 1.02f);
+                    playerEntityModel.render(matrixStack, vertexConsumerProvider.getBuffer(l), i, p, 1, 1, 1, bl2 ? 0.15F : 1.0F);
+                    matrixStack.pop();
+                } else {
+                    playerEntityModel.render(matrixStack, vertexConsumerProvider.getBuffer(l), i, p, 1, 1, 1, bl2 ? 0.15F : 1.0F);
+                }
             }
             if (emissiveTexture != null) {
                 RenderLayer l = RenderLayer.getEntityTranslucentEmissive(emissiveTexture);
@@ -279,7 +289,7 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
                 // boolean bl = this.isVisible(player);
                 // boolean bl2 = !bl && !player.isInvisibleTo(MinecraftClient.getInstance().player);
                 RenderLayer OverlayLayer = null;
-                if (FormRenderUtils.isRenderingInWorld && IRISInstalled) {
+                if ((FormRenderUtils.isRenderingInWorld && IRISInstalled) || ImmediatelyFastInstalled) {
                     OverlayLayer = RenderLayer.getEntityCutoutNoCullZOffset(OverlayTextureID);
                 } else {
                     OverlayLayer = RenderLayer.getEntityCutout(OverlayTextureID);
