@@ -9,7 +9,9 @@ import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.texture.NativeImageBackedTexture;
 import net.minecraft.client.texture.TextureManager;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TextColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
@@ -18,15 +20,19 @@ import net.onixary.shapeShifterCurseFabric.config.PlayerCustomConfig;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.FCS_ButtonWidget;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.SimpleIntSliderWidget;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
+import static net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenu.EmptyText;
+import static net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenu.NoneFromNameLabel;
 
 // XuHaoNan:
 // 需要的功能
@@ -44,10 +50,13 @@ import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID
 // 20260524整的新活 由于依赖"形态默认颜色"系统的更新机制 而且架构已经固定 所以V2不加此功能
 // V1的部分Label 文本保留 反正写都写了 保留吧 我之后把V1迁移到我的拓展里时可以减少一点工作量
 
-public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.TempFormTextureProcessor {
+public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.TempFormTextureProcessor, FormTextureUtils.TempFormModelProcessor {
     // LANG 从V1复制的
     private static final Text BoolBTN_ON = Text.translatable("text.cloth-config.boolean.value.true");
     private static final Text BoolBTN_OFF = Text.translatable("text.cloth-config.boolean.value.false");
+
+    // 其他UI部件
+    private ButtonWidget formNameLabel = null;
 
     // Data0:
     private boolean isColorSettingDirty = true;
@@ -126,6 +135,7 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
     private static final int BG_HEIGHT = 227;
     public static FormColorSelectMenuV2 instance;
     private boolean isLockTempTextureSystem = false;  // 用于还原
+    private boolean isLockTempModelSystem = false;  // 用于还原
     private @Nullable Screen parsetScreen = null;
     private final HashMap<String, HashMap<FormTextureUtils.ColorSetting, Identifier>> colorSettingCacheMap = new HashMap<>();  // 防止内存泄漏
     private int modelID = -1;
@@ -135,6 +145,7 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
     private int timer = 0;
     private List<Pair<FCS_ButtonWidget, FCS_ButtonWidget>> globalSlotButton = new ArrayList<>();
     private List<TextFieldWidget> globalSlotNameInputs = new ArrayList<>();
+    private int formIDIndex = -1;
 
     // 工具函数
     public static String encodeColor(int Color) {
@@ -164,6 +175,142 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
         } catch (Exception ignored) {
             return min;
         }
+    }
+
+    // 形态预览翻页
+    public void scrollFormID(int offset, boolean loop) {
+        if (formIDIndex < 0) {
+            formIDIndex = 0;
+        }
+        formIDIndex += offset;
+        if (formIDIndex < 0) {
+            formIDIndex = loop ? RegPlayerForms.playerForms.size() - 1 : 0;
+        } else if (formIDIndex >= RegPlayerForms.playerForms.size()) {
+            formIDIndex = loop ? 0 : RegPlayerForms.playerForms.size() - 1;
+        }
+        this.reloadFormIDName();
+    }
+
+    public void reloadFormIDName() {
+        PlayerFormBase form = this.getFormNoCheckUnlock();
+        boolean isUnlocked = ShapeShifterCurseFabricClient.formColorData.isUnlock(form.FormID);
+        MutableText message = NoneFromNameLabel;
+        if (!RegPlayerForms.ORIGINAL_BEFORE_ENABLE.equals(form)) {
+            message = form.getFormName();
+        }
+        if (!isUnlocked) {
+            message.setStyle(message.getStyle().withColor(TextColor.fromRgb(0xFF0000)));
+        }
+        this.formNameLabel.setMessage(message);
+    }
+
+    public void reloadFormIDIndex() {
+        if (minecraftClient.player != null) {
+            boolean isFind = false;
+            PlayerFormBase form = RegPlayerFormComponent.PLAYER_FORM.get(minecraftClient.player).getCurrentForm();
+            if (form != null) {
+                int Index = 0;
+                for (PlayerFormBase playerFormBase : RegPlayerForms.playerForms.values()) {
+                    if (Objects.equals(playerFormBase.FormID, form.FormID)) {
+                        formIDIndex = Index;
+                        isFind = true;
+                        break;
+                    }
+                    Index++;
+                }
+            }
+            if (!isFind) {
+                formIDIndex = -1;
+            }
+            return;
+        }
+        formIDIndex = -1;
+    }
+
+    public PlayerFormBase getFormNoCheckUnlock() {
+        if (this.formIDIndex < 0) {
+            return RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
+        }
+        Collection<PlayerFormBase> playerFormsCollection = RegPlayerForms.playerForms.values();
+        if (this.formIDIndex >= playerFormsCollection.size()) {
+            return RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
+        }
+        return playerFormsCollection.toArray(new PlayerFormBase[0])[this.formIDIndex];
+    }
+
+    @Override
+    public PlayerFormBase getForm() {
+        if (ShapeShifterCurseFabric.clientConfig.disableUnlockCheckInFormColorSelectMenu) {
+            return this.getFormNoCheckUnlock();
+        }
+        PlayerFormBase finalForm = null;
+        if (this.formIDIndex < 0) {
+            finalForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
+        } else {
+            Collection<PlayerFormBase> playerFormsCollection = RegPlayerForms.playerForms.values();
+            if (this.formIDIndex >= playerFormsCollection.size()) {
+                finalForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
+            } else {
+                finalForm = playerFormsCollection.toArray(new PlayerFormBase[0])[this.formIDIndex];
+            }
+        }
+        if (finalForm == null || !ShapeShifterCurseFabricClient.formColorData.isUnlock(finalForm.FormID)) {
+            if (minecraftClient.player != null) {
+                return RegPlayerFormComponent.PLAYER_FORM.get(minecraftClient.player).getCurrentForm();
+            } else {
+                return RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
+            }
+        }
+        return finalForm;
+    }
+
+    @Override
+    public Identifier getLayerID() {
+        return this.getForm().getFormOriginID();
+    }
+
+    @Override
+    public boolean shouldPause() {
+        return false;
+    }
+
+    // FCS按钮生成函数
+    private void createSaveDataButtons(int Index, int X, int Y) {
+        // X,Y,80,15
+        // X+0,Y+0,15,15 upload/download Button
+        FCS_ButtonWidget updButtonWidget = new FCS_ButtonWidget(X, Y, EmptyText, (button -> {
+            if (button instanceof FCS_ButtonWidget fcsButtonWidget) {
+                // 靠UI判断 省的写一个变量了
+                if (fcsButtonWidget.TEXTURE_X == 15) {
+                    FormTextureUtils.ColorSetting colorSetting = this.getGlobalSetting(Index);
+                    if (colorSetting != null) {
+                        this.loadData(colorSetting);
+                    }
+                } else if (fcsButtonWidget.TEXTURE_X == 0) {
+                    this.setGlobalSetting(Index);
+                }
+            }
+        }), (textSupplier) -> (MutableText)textSupplier.get(), 0);
+
+        // X+15,Y+0,50,15 slot name input
+        TextFieldWidget textFieldWidget = new TextFieldWidget(this.textRenderer, X + 15, Y, 50, 15, EmptyText);
+        textFieldWidget.setChangedListener((text) -> {
+            ShapeShifterCurseFabricClient.formColorData.setName_GlobalSlot(Index, this.globalSlotNameInputs.get(Index).getText());
+        });
+
+        // X+65,Y+0,15,15 delete Button
+        FCS_ButtonWidget deleteButtonWidget = new FCS_ButtonWidget(X + 65, Y, EmptyText, (button -> {
+            if (button instanceof FCS_ButtonWidget fcsButtonWidget) {
+                if (fcsButtonWidget.TEXTURE_X == 30) {
+                    this.removeGlobalSetting(Index);
+                }
+            }
+        }), (textSupplier) -> (MutableText)textSupplier.get(), 30);
+        globalSlotButton.add(new Pair<>(updButtonWidget, deleteButtonWidget));
+        globalSlotNameInputs.add(textFieldWidget);
+        this.addDrawableChild(updButtonWidget);
+        this.addDrawableChild(textFieldWidget);
+        this.addDrawableChild(deleteButtonWidget);
     }
 
     // Data0 函数
@@ -429,6 +576,76 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
         this.parsetScreen = parsetScreen;
     }
 
+    public void loadData(FormTextureUtils.ColorSetting colorSetting) {
+        primaryColor = colorSetting.getPrimaryColor();
+        accentColor1Color = colorSetting.getAccentColor1();
+        accentColor2Color = colorSetting.getAccentColor2();
+        eyeColorA = colorSetting.getEyeColorA();
+        eyeColorB = colorSetting.getEyeColorB();
+        primaryGreyReverse = colorSetting.getPrimaryGreyReverse();
+        accent1GreyReverse = colorSetting.getAccent1GreyReverse();
+        accent2GreyReverse = colorSetting.getAccent2GreyReverse();
+        isColorSettingDirty = true;
+        this.onData1Changed();
+    }
+
+    public void loadServerData(FormTextureUtils.ColorSetting colorSetting) {
+        // 服务器上的是 ABGR
+        primaryColor = FormTextureUtils.ABGR2ARGB(colorSetting.getPrimaryColor());
+        accentColor1Color = FormTextureUtils.ABGR2ARGB(colorSetting.getAccentColor1());
+        accentColor2Color = FormTextureUtils.ABGR2ARGB(colorSetting.getAccentColor2());
+        eyeColorA = FormTextureUtils.ABGR2ARGB(colorSetting.getEyeColorA());
+        eyeColorB = FormTextureUtils.ABGR2ARGB(colorSetting.getEyeColorB());
+        primaryGreyReverse = colorSetting.getPrimaryGreyReverse();
+        accent1GreyReverse = colorSetting.getAccent1GreyReverse();
+        accent2GreyReverse = colorSetting.getAccent2GreyReverse();
+        isColorSettingDirty = true;
+        this.onData1Changed();
+    }
+
+    public void loadData() {
+        if (minecraftClient.player != null) {
+            PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(minecraftClient.player);
+            FormTextureUtils.ColorSetting colorSetting = component.getFormColor();
+            this.loadServerData(colorSetting);
+        } else {
+            primaryColor = ShapeShifterCurseFabric.playerCustomConfig.primaryColor;
+            accentColor1Color = ShapeShifterCurseFabric.playerCustomConfig.accentColor1Color;
+            accentColor2Color = ShapeShifterCurseFabric.playerCustomConfig.accentColor2Color;
+            eyeColorA = ShapeShifterCurseFabric.playerCustomConfig.eyeColorA;
+            eyeColorB = ShapeShifterCurseFabric.playerCustomConfig.eyeColorB;
+            primaryGreyReverse = ShapeShifterCurseFabric.playerCustomConfig.primaryGreyReverse;
+            accent1GreyReverse = ShapeShifterCurseFabric.playerCustomConfig.accent1GreyReverse;
+            accent2GreyReverse = ShapeShifterCurseFabric.playerCustomConfig.accent2GreyReverse;
+            this.onData1Changed();
+        }
+        isColorSettingDirty = true;
+    }
+
+    public FormColorSelectMenuV2(Text title) {
+        super(title);
+        this.reloadFormIDIndex();
+        loadData();
+        if (!FormTextureUtils.useTempFormTexture) {
+            FormTextureUtils.useTempFormTexture = true;
+            FormTextureUtils.tempFormTextureProcessor = this;
+            isLockTempTextureSystem = true;
+        } else {
+            ShapeShifterCurseFabric.LOGGER.warn("Temp Texture System is already in use, dynamic texture rendering will not work");
+        }
+        if (!FormTextureUtils.useTempFormModel) {
+            FormTextureUtils.useTempFormModel = true;
+            FormTextureUtils.tempFormModelProcessor = this;
+            isLockTempModelSystem = true;
+        } else {
+            ShapeShifterCurseFabric.LOGGER.warn("Temp Form Model System is already in use, dynamic form rendering will not work");
+        }
+        if (instance != null) {
+            ShapeShifterCurseFabric.LOGGER.error("FormColorSelectMenu is already in use, only one instance is allowed");
+        }
+        instance = this;
+    }
+
     @Override
     public void init() {
         // TODO 等待最终UI方案
@@ -465,6 +682,11 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
             FormTextureUtils.useTempFormTexture = false;
             FormTextureUtils.tempFormTextureProcessor = null;
             isLockTempTextureSystem = false;
+        }
+        if (this.isLockTempModelSystem) {
+            FormTextureUtils.useTempFormModel = false;
+            FormTextureUtils.tempFormModelProcessor = null;
+            isLockTempModelSystem = false;
         }
         instance = null;
         try {
