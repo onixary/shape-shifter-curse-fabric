@@ -15,6 +15,7 @@ import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLaye
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginRegistry;
 import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
@@ -94,6 +95,9 @@ public class FormAbilityManager {
 
         component.setCurrentForm(newForm);
         RegPlayerFormComponent.PLAYER_FORM.sync(player);
+
+        // 清理Power动画
+        AnimUtils.stopPowerAnim(player, AnimUtils.AnimationSendSideType.ONLY_SERVER);
         // 存储
         // FormAbilityManager.saveForm(player);
 
