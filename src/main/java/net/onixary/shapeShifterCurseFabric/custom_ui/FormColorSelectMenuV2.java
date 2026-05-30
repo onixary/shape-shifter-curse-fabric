@@ -194,6 +194,9 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
     public void reloadFormIDName() {
         PlayerFormBase form = this.getFormNoCheckUnlock();
         boolean isUnlocked = ShapeShifterCurseFabricClient.formColorData.isUnlock(form.FormID);
+        if (ShapeShifterCurseFabric.clientConfig.disableUnlockCheckInFormColorSelectMenu) {
+            isUnlocked = true;
+        }
         MutableText message = NoneFromNameLabel;
         if (!RegPlayerForms.ORIGINAL_BEFORE_ENABLE.equals(form)) {
             message = form.getFormName();
