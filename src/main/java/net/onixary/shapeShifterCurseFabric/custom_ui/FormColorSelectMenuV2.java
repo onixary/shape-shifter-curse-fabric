@@ -44,7 +44,7 @@ import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID
 // 20260524整的新活 由于依赖"形态默认颜色"系统的更新机制 而且架构已经固定 所以V2不加此功能
 // V1的部分Label 文本保留 反正写都写了 保留吧 我之后把V1迁移到我的拓展里时可以减少一点工作量
 
-public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.TempTextureProcessor {
+public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.TempFormTextureProcessor {
     // LANG 从V1复制的
     private static final Text BoolBTN_ON = Text.translatable("text.cloth-config.boolean.value.true");
     private static final Text BoolBTN_OFF = Text.translatable("text.cloth-config.boolean.value.false");
@@ -462,13 +462,13 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
     public void close() {
         CleanColorSettingCache();
         if (this.isLockTempTextureSystem) {
-            FormTextureUtils.useTempTexture = false;
-            FormTextureUtils.tempTextureProcessor = null;
+            FormTextureUtils.useTempFormTexture = false;
+            FormTextureUtils.tempFormTextureProcessor = null;
             isLockTempTextureSystem = false;
         }
         instance = null;
         try {
-            ModPacketsS2C.sendUpdateCustomColor(this.getColorSetting(false), false); // 如果没进游戏时会发送失败 懒得做判断了 加一个Try
+            ModPacketsS2C.sendUpdateCustomColor(this.getColorSetting(false), false, false, false,  false); // 如果没进游戏时会发送失败 懒得做判断了 加一个Try
         } catch (Exception ignored) {
         }
         this.saveDataToClient();

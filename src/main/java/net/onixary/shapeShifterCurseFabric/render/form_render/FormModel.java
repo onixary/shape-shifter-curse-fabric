@@ -15,9 +15,6 @@ import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.util.FormSkinSystem;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.jetbrains.annotations.Nullable;
@@ -304,8 +301,8 @@ public class FormModel extends GeoModel<FormAnimatable> {
             }
         }
         if (ResourceMask != null) {
-            if (FormTextureUtils.useTempTexture && Objects.equals(this.entity, MinecraftClient.getInstance().player)) {
-                return FormTextureUtils.tempTextureProcessor.getTexture(this.modelID, uslim ? "texture_slim" : "texture", Resource, ResourceMask, UseMultiplyMask);
+            if (FormTextureUtils.useTempFormTexture && Objects.equals(this.entity, MinecraftClient.getInstance().player)) {
+                return FormTextureUtils.tempFormTextureProcessor.getTexture(this.modelID, uslim ? "texture_slim" : "texture", Resource, ResourceMask, UseMultiplyMask);
             }
             FormTextureUtils.ColorSetting colorSetting = FormTextureUtils.getPlayerColorSetting(this.entity);
             if (colorSetting != null) {
@@ -330,8 +327,8 @@ public class FormModel extends GeoModel<FormAnimatable> {
             }
         }
         if (ResourceMask != null) {
-            if (FormTextureUtils.useTempTexture && Objects.equals(this.entity, MinecraftClient.getInstance().player)) {
-                return FormTextureUtils.tempTextureProcessor.getTexture(this.modelID, uslim ? "overlay_texture_slim" : "overlay_texture", Resource, ResourceMask, UseMultiplyMask);
+            if (FormTextureUtils.useTempFormTexture && Objects.equals(this.entity, MinecraftClient.getInstance().player)) {
+                return FormTextureUtils.tempFormTextureProcessor.getTexture(this.modelID, uslim ? "overlay_texture_slim" : "overlay_texture", Resource, ResourceMask, UseMultiplyMask);
             }
             FormTextureUtils.ColorSetting colorSetting = FormTextureUtils.getPlayerColorSetting(this.entity);
             if (colorSetting != null) {
@@ -356,8 +353,8 @@ public class FormModel extends GeoModel<FormAnimatable> {
             }
         }
         if (ResourceMask != null) {
-            if (FormTextureUtils.useTempTexture && Objects.equals(this.entity, MinecraftClient.getInstance().player)) {
-                return FormTextureUtils.tempTextureProcessor.getTexture(this.modelID, uslim ? "emissive_texture_slim" : "emissive_texture", Resource, ResourceMask, UseMultiplyMask);
+            if (FormTextureUtils.useTempFormTexture && Objects.equals(this.entity, MinecraftClient.getInstance().player)) {
+                return FormTextureUtils.tempFormTextureProcessor.getTexture(this.modelID, uslim ? "emissive_texture_slim" : "emissive_texture", Resource, ResourceMask, UseMultiplyMask);
             }
             FormTextureUtils.ColorSetting colorSetting = FormTextureUtils.getPlayerColorSetting(this.entity);
             if (colorSetting != null) {

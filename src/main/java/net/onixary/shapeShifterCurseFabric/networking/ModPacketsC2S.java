@@ -168,6 +168,16 @@ public class ModPacketsC2S {
     }
 
     private static void onUpdatePlayerCustomColor(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
+        boolean extraData = packetByteBuf.readBoolean();
+        boolean keepOriginalSkin;
+        boolean enableFormColorSystem;
+        if (extraData) {
+            keepOriginalSkin = packetByteBuf.readBoolean();
+            enableFormColorSystem = packetByteBuf.readBoolean();
+        } else {
+            keepOriginalSkin = false;
+            enableFormColorSystem = false;
+        }
         int primaryColor = packetByteBuf.readInt();
         int accentColor1Color = packetByteBuf.readInt();
         int accentColor2Color = packetByteBuf.readInt();
@@ -179,6 +189,10 @@ public class ModPacketsC2S {
         minecraftServer.execute(() -> {
             try {
                 PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(playerEntity);
+                if (extraData) {
+                    component.setKeepOriginalSkin(keepOriginalSkin);
+                    component.setEnableFormColor(enableFormColorSystem);
+                }
                 component.setFormColor(new FormTextureUtils.ColorSetting(primaryColor, accentColor1Color, accentColor2Color, eyeColorA, eyeColorB, primaryGreyReverse, accent1GreyReverse, accent2GreyReverse));
                 RegPlayerSkinComponent.SKIN_SETTINGS.sync(playerEntity);
             } catch (Exception e) {
