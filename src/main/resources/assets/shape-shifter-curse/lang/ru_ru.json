@@ -465,5 +465,9 @@
     "item.shape-shifter-curse.super_morphscale_core.tooltip": "Remaining charge: %s",
     "gui.shape_shifter_curse_fabric.fcs.none_from_name": "No Form",
     "advancements.shape-shifter-curse.spider_catch_a_bug.title": "Caught: Unknown Exception",
-    "advancements.shape-shifter-curse.spider_catch_a_bug.description": "As a \"professional\" \"network engineer\": this bug has been try-catched."
+    "advancements.shape-shifter-curse.spider_catch_a_bug.description": "As a \"professional\" \"network engineer\": this bug has been try-catched.",
+    "text.autoconfig.shape-shifter-curse-client.option.disableUnlockCheckInFormColorSelectMenu": "Disable unlock check in the form color selection menu.",
+    "text.autoconfig.shape-shifter-curse-client.category.Tool": "Tools",
+    "text.autoconfig.shape-shifter-curse-client.option.unlockAllFormInFormColorSelectMenu": "Unlock all forms in the form color selection menu.",
+    "text.autoconfig.shape-shifter-curse-client.option.clearFormUnlockRecordInFormColorSelectMenu": "Clear form unlock records in the form color selection menu."
 }
