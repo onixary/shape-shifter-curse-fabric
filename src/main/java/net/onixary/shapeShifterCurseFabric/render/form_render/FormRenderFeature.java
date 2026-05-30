@@ -1,5 +1,9 @@
 package net.onixary.shapeShifterCurseFabric.render.form_render;
 
+import dev.kosmx.playerAnim.api.firstPerson.FirstPersonConfiguration;
+import dev.kosmx.playerAnim.api.firstPerson.FirstPersonMode;
+import dev.kosmx.playerAnim.impl.IAnimatedPlayer;
+import dev.kosmx.playerAnim.impl.animation.AnimationApplier;
 import mod.azure.azurelib.cache.object.BakedGeoModel;
 import mod.azure.azurelib.cache.object.GeoBone;
 import net.fabricmc.loader.api.FabricLoader;
@@ -21,6 +25,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
@@ -106,6 +111,27 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
         boolean leftPantsHidden = !player.isPartVisible(PlayerModelPart.LEFT_PANTS_LEG);
         boolean rightLegHidden = false;
         boolean rightPantsHidden = !player.isPartVisible(PlayerModelPart.RIGHT_PANTS_LEG);
+        // Better Combat 修复
+        if (FirstPersonMode.isFirstPersonPass() && ShapeShifterCurseFabric.clientConfig.enableBetterCombatFix && player == MinecraftClient.getInstance().getCameraEntity()) {
+            AnimationApplier animationApplier = ((IAnimatedPlayer) player).playerAnimator_getAnimation();
+            FirstPersonConfiguration config = animationApplier.getFirstPersonConfiguration();
+            hatHidden = true;
+            headHidden = true;
+            bodyHidden = true;
+            jacketHidden = true;
+            if (!config.isShowLeftArm()) {
+                leftArmHidden = true;
+                leftSleeveHidden = true;
+            }
+            if (!config.isShowRightArm()) {
+                rightArmHidden = true;
+                rightSleeveHidden = true;
+            }
+            leftLegHidden = true;
+            leftPantsHidden = true;
+            rightLegHidden = true;
+            rightPantsHidden = true;
+        }
         for (FormRenderer formRenderer : formRendererList) {
             FormModel formModel = (FormModel) formRenderer.getGeoModel();
             hatHidden |= formModel.Hidden_Hat;
@@ -133,14 +159,6 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
         playerEntityModel.leftPants.visible = !leftPantsHidden;
         playerEntityModel.rightLeg.visible = !rightLegHidden;
         playerEntityModel.rightPants.visible = !rightPantsHidden;
-
-        boolean IsClientNowPlayedPlayer = player instanceof ClientPlayerEntity;
-        boolean IsFirstPersonView = MinecraftClient.getInstance().options.getPerspective().isFirstPerson();
-
-        if (BetterCombatInstalled && IsFirstPersonView && IsClientNowPlayedPlayer && ClientUtils.ShouldEnableBetterCombatFix()) {
-            playerEntityModel.hat.visible = false;
-            playerEntityModel.head.visible = false;
-        }
     }
 
     public static void rM_PartB(PlayerEntityRenderer playerEntityRenderer, AbstractClientPlayerEntity player, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {

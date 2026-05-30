@@ -32,7 +32,6 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TAx
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.BatEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TOcelotEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.spider.TSpiderEntityRenderer;
-import net.onixary.shapeShifterCurseFabric.integration.origins.Origins;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.armors.MorphscaleArmorRenderer;
 import net.onixary.shapeShifterCurseFabric.items.armors.NetheriteMorphscaleArmorRenderer;
@@ -41,13 +40,9 @@ import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 import net.onixary.shapeShifterCurseFabric.minion.MinionRegisterClient;
 import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
-import net.onixary.shapeShifterCurseFabric.player_animation.RegPlayerAnimation;
 import net.onixary.shapeShifterCurseFabric.render.form_render.FormRenderUtils;
 import net.onixary.shapeShifterCurseFabric.render.render_layer.FurGradientRenderLayer;
-import net.onixary.shapeShifterCurseFabric.util.ClientTicker;
-import net.onixary.shapeShifterCurseFabric.util.FormColorData;
-import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
-import net.onixary.shapeShifterCurseFabric.util.TickManager;
+import net.onixary.shapeShifterCurseFabric.util.*;
 import org.lwjgl.glfw.GLFW;
 
 import java.lang.reflect.InvocationTargetException;
@@ -289,7 +284,6 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		RegPlayerAnimation.register();
 		registerEntityModels();
 		ModPacketsS2C.register();
 

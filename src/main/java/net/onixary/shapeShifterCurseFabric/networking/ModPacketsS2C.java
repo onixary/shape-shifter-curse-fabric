@@ -298,8 +298,13 @@ public class ModPacketsS2C {
         }).start();
     }
 
-    public static void sendUpdateCustomColor(FormTextureUtils.ColorSetting colorSetting, boolean sendRAW) {
+    public static void sendUpdateCustomColor(FormTextureUtils.ColorSetting colorSetting, boolean sendRAW, boolean sendExtraData, boolean keepOriginalSkin, boolean enableFormColorSystem) {
         PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeBoolean(sendExtraData);
+        if (sendExtraData) {
+            buf.writeBoolean(keepOriginalSkin);
+            buf.writeBoolean(enableFormColorSystem);
+        }
         if (sendRAW) {
             buf.writeInt(colorSetting.getPrimaryColor());
             buf.writeInt(colorSetting.getAccentColor1());
@@ -335,6 +340,7 @@ public class ModPacketsS2C {
             return;
         }
         buf = PacketByteBufs.create();
+        buf.writeBoolean(false);
         int AGBRInt = 0;
         AGBRInt = FormTextureUtils.ARGB2ABGR(ShapeShifterCurseFabric.playerCustomConfig.primaryColor);
         buf.writeInt(AGBRInt);
@@ -349,6 +355,7 @@ public class ModPacketsS2C {
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.primaryGreyReverse);
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.accent1GreyReverse);
         buf.writeBoolean(ShapeShifterCurseFabric.playerCustomConfig.accent2GreyReverse);
+        ClientPlayNetworking.send(UPDATE_CUSTOM_COLOR, buf);
     }
 
     public static void sendUpdateCustomSetting() {
@@ -544,7 +551,7 @@ public class ModPacketsS2C {
                     }
                 }
                 if (colorSetting != null) {
-                    ModPacketsS2C.sendUpdateCustomColor(colorSetting, false);
+                    ModPacketsS2C.sendUpdateCustomColor(colorSetting, false, false, false, false);
                 }
             }
             case "delete" -> {

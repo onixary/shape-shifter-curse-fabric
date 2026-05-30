@@ -23,6 +23,7 @@ import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.util.FormColorData;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
@@ -48,10 +49,14 @@ import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID
 //       -> 全局数据
 // RGB 框 -> RGB 条 -> ...
 
-public class FormColorSelectMenu extends Screen implements FormTextureUtils.TempTextureProcessor, FormTextureUtils.TempFormModelProcessor {
+public class FormColorSelectMenu extends Screen implements FormTextureUtils.TempFormTextureProcessor, FormTextureUtils.TempCustomSkinConfigOverrider, FormTextureUtils.TempFormModelProcessor {
     private static final Identifier texture = new Identifier(MOD_ID,"textures/gui/v1_form_color_select_menu.png");
     private static final int BG_WIDTH = 420;
     private static final int BG_HEIGHT = 227;
+    private static final int BG_IMAGE_WIDTH = 420;
+    private static final int BG_IMAGE_HEIGHT = 428;
+    private static final int EXTRA_PART_START_X = 0;
+    private static final int EXTRA_PART_START_Y = 228;
 
     public static FormColorSelectMenu instance = null;
 
@@ -93,6 +98,8 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     private static final Text PrimaryGreyReverseLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.primaryGreyReverse");
     private static final Text Accent1GreyReverseLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.accent1GreyReverse");
     private static final Text Accent2GreyReverseLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse");
+    private static final Text KeepOriginalSkinLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.keep_original_skin");
+    private static final Text IsEnableFormColorSystemLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.enable_form_color");
 
     private boolean isScreenInit = false;
     private TextFieldWidget primaryColorEditBox = null;
@@ -103,6 +110,8 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     private ButtonWidget primaryGreyReverseButton = null;
     private ButtonWidget accent1GreyReverseButton = null;
     private ButtonWidget accent2GreyReverseButton = null;
+    private ButtonWidget keepOriginalSkinButton = null;
+    private ButtonWidget isEnableFormColorSystemButton = null;
 
     private SimpleIntSliderWidget sliderR = null;
     private SimpleIntSliderWidget sliderG = null;
@@ -198,6 +207,9 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     private boolean primaryGreyReverse = false;
     private boolean accent1GreyReverse = false;
     private boolean accent2GreyReverse = false;
+    private boolean keepOriginalSkin = false;
+    private boolean enableFormColorSystem = true;
+    // 同步配置是真只会操作一次 就不加了
 
     private boolean isColorSettingDirty = true;
     private FormTextureUtils.ColorSetting colorSetting_ARGB = null;
@@ -331,7 +343,10 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     public void loadData(boolean serverSide) {
         if (serverSide) {
             if (minecraftClient.player != null) {
-                FormTextureUtils.ColorSetting colorSetting = RegPlayerSkinComponent.SKIN_SETTINGS.get(minecraftClient.player).getFormColor();
+                PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(minecraftClient.player);
+                FormTextureUtils.ColorSetting colorSetting = component.getFormColor();
+                this.keepOriginalSkin = component.shouldKeepOriginalSkin();
+                this.enableFormColorSystem = component.isEnableFormColor();
                 this.loadServerData(colorSetting);
             }
         } else {
@@ -343,20 +358,28 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             primaryGreyReverse = ShapeShifterCurseFabric.playerCustomConfig.primaryGreyReverse;
             accent1GreyReverse = ShapeShifterCurseFabric.playerCustomConfig.accent1GreyReverse;
             accent2GreyReverse = ShapeShifterCurseFabric.playerCustomConfig.accent2GreyReverse;
+            this.keepOriginalSkin = ShapeShifterCurseFabric.playerCustomConfig.keep_original_skin;
+            this.enableFormColorSystem = ShapeShifterCurseFabric.playerCustomConfig.enable_form_color;
             this.updateUI();
         }
         isColorSettingDirty = true;
     }
 
-    public void saveDataToClient() {
-        ShapeShifterCurseFabric.playerCustomConfig.primaryColor = primaryColor;
-        ShapeShifterCurseFabric.playerCustomConfig.accentColor1Color = accentColor1Color;
-        ShapeShifterCurseFabric.playerCustomConfig.accentColor2Color = accentColor2Color;
-        ShapeShifterCurseFabric.playerCustomConfig.eyeColorA = eyeColorA;
-        ShapeShifterCurseFabric.playerCustomConfig.eyeColorB = eyeColorB;
-        ShapeShifterCurseFabric.playerCustomConfig.primaryGreyReverse = primaryGreyReverse;
-        ShapeShifterCurseFabric.playerCustomConfig.accent1GreyReverse = accent1GreyReverse;
-        ShapeShifterCurseFabric.playerCustomConfig.accent2GreyReverse = accent2GreyReverse;
+    public void saveDataToClient(boolean savaColorData, boolean saveExtraData) {
+        if (savaColorData) {
+            ShapeShifterCurseFabric.playerCustomConfig.primaryColor = primaryColor;
+            ShapeShifterCurseFabric.playerCustomConfig.accentColor1Color = accentColor1Color;
+            ShapeShifterCurseFabric.playerCustomConfig.accentColor2Color = accentColor2Color;
+            ShapeShifterCurseFabric.playerCustomConfig.eyeColorA = eyeColorA;
+            ShapeShifterCurseFabric.playerCustomConfig.eyeColorB = eyeColorB;
+            ShapeShifterCurseFabric.playerCustomConfig.primaryGreyReverse = primaryGreyReverse;
+            ShapeShifterCurseFabric.playerCustomConfig.accent1GreyReverse = accent1GreyReverse;
+            ShapeShifterCurseFabric.playerCustomConfig.accent2GreyReverse = accent2GreyReverse;
+        }
+        if (saveExtraData) {
+            ShapeShifterCurseFabric.playerCustomConfig.keep_original_skin = keepOriginalSkin;
+            ShapeShifterCurseFabric.playerCustomConfig.enable_form_color = enableFormColorSystem;
+        }
         AutoConfig.getConfigHolder(PlayerCustomConfig.class).save();
     }
 
@@ -388,18 +411,26 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     }
 
     private boolean isUsingTempTexture = true;
+    private boolean isUsingCustomSkinConfigOverrider = true;
     private boolean isUsingTempModel = true;
 
     public FormColorSelectMenu(Text title) {
         super(title);
         this.reloadFormIDIndex();
         loadData();
-        if (!FormTextureUtils.useTempTexture) {
-            FormTextureUtils.useTempTexture = true;
-            FormTextureUtils.tempTextureProcessor = this;
+        if (!FormTextureUtils.useTempFormTexture) {
+            FormTextureUtils.useTempFormTexture = true;
+            FormTextureUtils.tempFormTextureProcessor = this;
         } else {
             ShapeShifterCurseFabric.LOGGER.warn("Temp Texture System is already in use, dynamic texture rendering will not work");
             isUsingTempTexture = false;
+        }
+        if (!FormTextureUtils.useTempCustomSkinConfig) {
+            FormTextureUtils.useTempCustomSkinConfig = true;
+            FormTextureUtils.tempCustomSkinConfigOverrider = this;
+        } else {
+            ShapeShifterCurseFabric.LOGGER.warn("Temp Custom Skin Config System is already in use, dynamic custom skin config will not work");
+            isUsingCustomSkinConfigOverrider = false;
         }
         if (!FormTextureUtils.useTempFormModel) {
             FormTextureUtils.useTempFormModel = true;
@@ -424,7 +455,14 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     public void renderTextureBackground(DrawContext context) {
         int BG_X = width / 2 - BG_WIDTH / 2;
         int BG_Y = height / 2 - BG_HEIGHT / 2;
-        context.drawTexture(texture, BG_X, BG_Y, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, BG_HEIGHT);
+        context.drawTexture(texture, BG_X, BG_Y, 0, 0, BG_WIDTH, BG_HEIGHT, BG_IMAGE_WIDTH, BG_IMAGE_HEIGHT);
+        if (!isOpenSlider) {
+            // 133,20,184,181,0,0
+            this.drawExtraPart(context, BG_X + 133, BG_Y + 20, 0, 0, 184, 181);
+        } else {
+            // 133,20,184,181,184,0
+            this.drawExtraPart(context, BG_X + 133, BG_Y + 20, 184, 0, 184, 181);
+        }
     }
 
     public int colorChannel2Int(String channel) {
@@ -477,6 +515,8 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         this.primaryGreyReverse = primaryGreyReverseButton.getMessage().equals(BoolBTN_ON);
         this.accent1GreyReverse = accent1GreyReverseButton.getMessage().equals(BoolBTN_ON);
         this.accent2GreyReverse = accent2GreyReverseButton.getMessage().equals(BoolBTN_ON);
+        this.keepOriginalSkin = keepOriginalSkinButton.getMessage().equals(BoolBTN_ON);
+        this.enableFormColorSystem = isEnableFormColorSystemButton.getMessage().equals(BoolBTN_ON);
         this.isColorSettingDirty = true;
     }
 
@@ -493,6 +533,8 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         this.primaryGreyReverseButton.setMessage(this.primaryGreyReverse ? BoolBTN_ON : BoolBTN_OFF);
         this.accent1GreyReverseButton.setMessage(this.accent1GreyReverse ? BoolBTN_ON : BoolBTN_OFF);
         this.accent2GreyReverseButton.setMessage(this.accent2GreyReverse ? BoolBTN_ON : BoolBTN_OFF);
+        this.keepOriginalSkinButton.setMessage(this.keepOriginalSkin ? BoolBTN_ON : BoolBTN_OFF);
+        this.isEnableFormColorSystemButton.setMessage(this.enableFormColorSystem ? BoolBTN_ON : BoolBTN_OFF);
         this.reloadSlider();
         this.reloadAllSlotName();
         this.isUpdateUI = false;
@@ -545,7 +587,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         );
         // 85,23,45,15 - 发送到服务器
         this.addDrawableChild(ButtonWidget.builder(UploadToServer, button -> {
-            ModPacketsS2C.sendUpdateCustomColor(this.getColorSetting(false), false);
+            ModPacketsS2C.sendUpdateCustomColor(this.getColorSetting(false), false, true, this.keepOriginalSkin, this.enableFormColorSystem);
         }).position(BPosX + 85, BPosY + 23).size(45, 15).build()
         );
         // 85,41,45,15 - 获取客户端数据(配置)
@@ -555,7 +597,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         );
         // 85,59,45,15 - 发送到客户端(配置)
         this.addDrawableChild(ButtonWidget.builder(UploadToClient, button -> {
-            this.saveDataToClient();
+            this.saveDataToClient(true, true);
         }).position(BPosX + 85, BPosY + 59).size(45, 15).build()
         );
         // 85,77,45,15 - 从剪切板获取
@@ -659,11 +701,11 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         this.addDrawableChild(eyeColorBInput);
         this.config_panel_01.add(eyeColorBInput);
         this.eyeColorBEditBox = eyeColorBInput;
-        // 139,97,75,11 - PrimaryGreyReverse Label
-        TextWidget primaryGreyReverseLabel = new TextWidget(BPosX + 139, BPosY + 97, 75, 11, PrimaryGreyReverseLabel, textRenderer).setTextColor(0xDDDDDD);
+        // 139,97,139,11 - PrimaryGreyReverse Label
+        TextWidget primaryGreyReverseLabel = new TextWidget(BPosX + 139, BPosY + 97, 139, 11, PrimaryGreyReverseLabel, textRenderer).setTextColor(0xDDDDDD);
         this.addDrawableChild(primaryGreyReverseLabel);
         this.config_panel_01.add(primaryGreyReverseLabel);
-        // 228,97,83,11 - PrimaryGreyReverse Button
+        // 281,97,30,11 - PrimaryGreyReverse Button
         ButtonWidget primaryGreyReverseButton = ButtonWidget.builder(this.primaryGreyReverse ? BoolBTN_ON :BoolBTN_OFF, (button) -> {
             this.primaryGreyReverse = !this.primaryGreyReverse;
             if (this.primaryGreyReverse) {
@@ -672,15 +714,15 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
                 button.setMessage(BoolBTN_OFF);
             }
             this.isColorSettingDirty = true;
-        }).position(BPosX + 228, BPosY + 97).size(83, 11).build();
+        }).position(BPosX + 281, BPosY + 97).size(30, 11).build();
         this.addDrawableChild(primaryGreyReverseButton);
         this.config_panel_01.add(primaryGreyReverseButton);
         this.primaryGreyReverseButton = primaryGreyReverseButton;
-        // 139,111,75,11 - Accent1GreyReverse Label
-        TextWidget accent1GreyReverseLabel = new TextWidget(BPosX + 139, BPosY + 111, 75, 11, Accent1GreyReverseLabel, textRenderer).setTextColor(0xDDDDDD);
+        // 139,111,139,11 - Accent1GreyReverse Label
+        TextWidget accent1GreyReverseLabel = new TextWidget(BPosX + 139, BPosY + 111, 139, 11, Accent1GreyReverseLabel, textRenderer).setTextColor(0xDDDDDD);
         this.addDrawableChild(accent1GreyReverseLabel);
         this.config_panel_01.add(accent1GreyReverseLabel);
-        // 228,111,83,11 - Accent1GreyReverse Button
+        // 281,111,30,11 - Accent1GreyReverse Button
         ButtonWidget accent1GreyReverseButton = ButtonWidget.builder(this.accent1GreyReverse ? BoolBTN_ON :BoolBTN_OFF, (button) -> {
             this.accent1GreyReverse = !this.accent1GreyReverse;
             if (this.accent1GreyReverse) {
@@ -689,15 +731,15 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
                 button.setMessage(BoolBTN_OFF);
             }
             this.isColorSettingDirty = true;
-        }).position(BPosX + 228, BPosY + 111).size(83, 11).build();
+        }).position(BPosX + 281, BPosY + 111).size(30, 11).build();
         this.addDrawableChild(accent1GreyReverseButton);
         this.config_panel_01.add(accent1GreyReverseButton);
         this.accent1GreyReverseButton = accent1GreyReverseButton;
-        // 139,125,75,11 - Accent2GreyReverse Label
-        TextWidget accent2GreyReverseLabel = new TextWidget(BPosX + 139, BPosY + 125, 75, 11, Accent2GreyReverseLabel, textRenderer).setTextColor(0xDDDDDD);
+        // 139,125,139,11 - Accent2GreyReverse Label
+        TextWidget accent2GreyReverseLabel = new TextWidget(BPosX + 139, BPosY + 125, 139, 11, Accent2GreyReverseLabel, textRenderer).setTextColor(0xDDDDDD);
         this.addDrawableChild(accent2GreyReverseLabel);
         this.config_panel_01.add(accent2GreyReverseLabel);
-        // 228,125,83,11 - Accent2GreyReverse Button
+        // 281,125,30,11 - Accent2GreyReverse Button
         ButtonWidget accent2GreyReverseButton = ButtonWidget.builder(this.accent2GreyReverse ? BoolBTN_ON :BoolBTN_OFF, (button) -> {
             this.accent2GreyReverse = !this.accent2GreyReverse;
             if (this.accent2GreyReverse) {
@@ -706,10 +748,42 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
                 button.setMessage(BoolBTN_OFF);
             }
             this.isColorSettingDirty = true;
-        }).position(BPosX + 228, BPosY + 125).size(83, 11).build();
+        }).position(BPosX + 281, BPosY + 125).size(30, 11).build();
         this.addDrawableChild(accent2GreyReverseButton);
         this.config_panel_01.add(accent2GreyReverseButton);
         this.accent2GreyReverseButton = accent2GreyReverseButton;
+        // 139,153,139,11 - Keep Original Skin Label
+        TextWidget keepOriginalSkinLabel = new TextWidget(BPosX + 139, BPosY + 153, 139, 11, KeepOriginalSkinLabel, textRenderer).setTextColor(0xDDDDDD);
+        this.addDrawableChild(keepOriginalSkinLabel);
+        this.config_panel_01.add(keepOriginalSkinLabel);
+        // 281,153,30,11 - Keep Original Skin Button
+        ButtonWidget keepOriginalSkinButton = ButtonWidget.builder(this.keepOriginalSkin ? BoolBTN_ON :BoolBTN_OFF, (button) -> {
+            this.keepOriginalSkin = !this.keepOriginalSkin;
+            if (this.keepOriginalSkin) {
+                button.setMessage(BoolBTN_ON);
+            } else {
+                button.setMessage(BoolBTN_OFF);
+            }
+        }).position(BPosX + 281, BPosY + 153).size(30, 11).build();
+        this.addDrawableChild(keepOriginalSkinButton);
+        this.config_panel_01.add(keepOriginalSkinButton);
+        this.keepOriginalSkinButton = keepOriginalSkinButton;
+        // 139,167,139,11 - Is Enable Form Color System Label
+        TextWidget isEnableFormColorSystemLabel = new TextWidget(BPosX + 139, BPosY + 167, 139, 11, IsEnableFormColorSystemLabel, textRenderer).setTextColor(0xDDDDDD);
+        this.addDrawableChild(isEnableFormColorSystemLabel);
+        this.config_panel_01.add(isEnableFormColorSystemLabel);
+        // 281,167,30,11 - Is Enable Form Color System Button
+        ButtonWidget isEnableFormColorSystemButton = ButtonWidget.builder(this.enableFormColorSystem ? BoolBTN_ON :BoolBTN_OFF, (button) -> {
+            this.enableFormColorSystem = !this.enableFormColorSystem;
+            if (this.enableFormColorSystem) {
+                button.setMessage(BoolBTN_ON);
+            } else {
+                button.setMessage(BoolBTN_OFF);
+            }
+        }).position(BPosX + 281, BPosY + 167).size(30, 11).build();
+        this.addDrawableChild(isEnableFormColorSystemButton);
+        this.config_panel_01.add(isEnableFormColorSystemButton);
+        this.isEnableFormColorSystemButton = isEnableFormColorSystemButton;
         // 139,27,25,11 - R Label
         TextWidget rLabel = new TextWidget(BPosX + 139, BPosY + 27, 25, 11, ColorChannel_R, textRenderer).setTextColor(0xDDDDDD);
         this.addDrawableChild(rLabel);
@@ -990,16 +1064,18 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
 
     private static int timer = 0;
 
+    private void drawExtraPart(DrawContext context, int x, int y, int PartX, int PartY, int Width, int Height) {
+        int realX = PartX + EXTRA_PART_START_X;
+        int realY = PartY + EXTRA_PART_START_Y;
+        context.drawTexture(texture, x, y, realX, realY, Width, Height, BG_IMAGE_WIDTH, BG_IMAGE_HEIGHT);
+    }
+
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         int BPosX = width / 2 - BG_WIDTH / 2;
         int BPosY = height / 2 - BG_HEIGHT / 2;
         this.renderBackground(context);
         this.renderTextureBackground(context);
-        // 20,5,60,120
-        if (minecraftClient.player != null) {
-            RenderEntity(context, BPosX + 50, BPosY + 100, 30, BPosX + 50 - mouseX, BPosY + 100 - mouseY, minecraftClient.player);
-        }
         if (!isOpenSlider) {
             // 228,27,11,11
             context.fill(BPosX + 228, BPosY + 27, BPosX + 239, BPosY + 38, 0xFF000000);
@@ -1026,6 +1102,10 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         } else {
             timer++;
         }
+        // 20,5,60,120
+        if (minecraftClient.player != null) {
+            RenderEntity(context, BPosX + 50, BPosY + 100, 30, BPosX + 50 - mouseX, BPosY + 100 - mouseY, minecraftClient.player);
+        }
         super.render(context, mouseX, mouseY, delta);
     }
 
@@ -1034,6 +1114,10 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         if (this.modelID != modelID) {
             this.modelID = modelID;
             CleanColorSettingCache();
+        }
+        // 可以关闭这个功能
+        if (!this.enableFormColorSystem) {
+            return texture;
         }
         return colorSettingCacheMap.computeIfAbsent(category, k -> new HashMap<>()).computeIfAbsent(this.getColorSetting(true), k -> {
             // 这种方法不会内存泄漏 但是得自己管理临时材质
@@ -1052,9 +1136,14 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     public void close() {
         CleanColorSettingCache();
         if (isUsingTempTexture) {
-            FormTextureUtils.useTempTexture = false;
-            FormTextureUtils.tempTextureProcessor = null;
+            FormTextureUtils.useTempFormTexture = false;
+            FormTextureUtils.tempFormTextureProcessor = null;
             isUsingTempTexture = false;
+        }
+        if (isUsingCustomSkinConfigOverrider) {
+            FormTextureUtils.useTempCustomSkinConfig = false;
+            FormTextureUtils.tempCustomSkinConfigOverrider = null;
+            isUsingCustomSkinConfigOverrider = false;
         }
         if (isUsingTempModel) {
             FormTextureUtils.useTempFormModel = false;
@@ -1063,11 +1152,12 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         }
         instance = null;
         try {
-            ModPacketsS2C.sendUpdateCustomColor(this.getColorSetting(false), false); // 如果没进游戏时会发送失败 懒得做判断了 加一个Try
+            this.saveDataToClient(ShapeShifterCurseFabric.playerCustomConfig.auto_sync_config && ShapeShifterCurseFabric.playerCustomConfig.auto_sync_color_config, ShapeShifterCurseFabric.playerCustomConfig.auto_sync_config);
+            ModPacketsS2C.sendUpdateCustomColor(this.getColorSetting(false), false, true, this.keepOriginalSkin, this.enableFormColorSystem); // 如果没进游戏时会发送失败 懒得做判断了 加一个Try
         } catch (Exception ignored) {
         }
         if (!this.lastLoadDataIsServerSide) {
-            this.saveDataToClient();
+            this.saveDataToClient(true, true);
         }
         this.saveData();
         if (this.parsetScreen != null && this.client != null) {
@@ -1416,5 +1506,10 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     @Override
     public boolean shouldPause() {
         return false;
+    }
+
+    @Override
+    public boolean keepOriginalSkin() {
+        return this.keepOriginalSkin;
     }
 }

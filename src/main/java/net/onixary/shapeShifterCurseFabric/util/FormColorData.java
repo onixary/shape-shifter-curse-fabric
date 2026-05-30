@@ -196,7 +196,7 @@ public class FormColorData {
     // 挂一个钩子在网络接受形态上 比如客户端的SYNC_FORM_CHANGE接收函数上
     public void onClientFormChange(Identifier form) {
         if (this.enableDefaultFormColor && ShapeShifterCurseFabric.playerCustomConfig.enable_form_default_color_system && this.formDefaultSetting.containsKey(form)) {
-            ModPacketsS2C.sendUpdateCustomColor(this.formDefaultSetting.get(form), false);
+            ModPacketsS2C.sendUpdateCustomColor(this.formDefaultSetting.get(form), false, false,false, false);
         }
         // 延时一下 好同步 "sendUpdateCustomSetting" 的更新
         new Thread(() -> {

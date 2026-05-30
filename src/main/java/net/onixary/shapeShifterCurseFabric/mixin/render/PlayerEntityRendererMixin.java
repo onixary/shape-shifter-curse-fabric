@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.mixin.render;
 
 import io.github.apace100.apoli.component.PowerHolderComponent;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -18,6 +19,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.render.form_render.FormRenderFeature;
+import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -72,6 +74,13 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
     private Identifier shape_shifter_curse$getSkinTexture(AbstractClientPlayerEntity player) {
         if (!RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm().equals(RegPlayerForms.ORIGINAL_BEFORE_ENABLE))  // 仅当玩家激活Mod后才进行修改
         {
+            if (FormTextureUtils.useTempCustomSkinConfig && MinecraftClient.getInstance().player == player) {
+                if (FormTextureUtils.tempCustomSkinConfigOverrider.keepOriginalSkin()) {
+                    return player.getSkinTexture();
+                } else {
+                    return CUSTOM_SKIN;
+                }
+            }
             if (!RegPlayerSkinComponent.SKIN_SETTINGS.get(player).shouldKeepOriginalSkin()) {
                 return CUSTOM_SKIN;
             }
@@ -86,6 +95,15 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
         if(entity instanceof PlayerEntity player) {
             if (!RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm().equals(RegPlayerForms.ORIGINAL_BEFORE_ENABLE)) {
                 boolean keepOriginalSkin = RegPlayerSkinComponent.SKIN_SETTINGS.get(player).shouldKeepOriginalSkin();
+                if (FormTextureUtils.useTempCustomSkinConfig && MinecraftClient.getInstance().player == player) {
+                    if (FormTextureUtils.tempCustomSkinConfigOverrider.keepOriginalSkin()) {
+                        return;
+                    } else {
+                        cir.setReturnValue(CUSTOM_SKIN);
+                        cir.cancel();
+                        return;
+                    }
+                }
                 if(!keepOriginalSkin){
                     cir.setReturnValue(CUSTOM_SKIN);
                     cir.cancel();
