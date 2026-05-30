@@ -7,6 +7,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 public class ClientUtils {
+    public static boolean isOpenInventoryScreen = false;
+
     public static boolean IsNowPlayingPlayer(PlayerEntity player) {
         if (FabricLoader.getInstance().getEnvironmentType() != EnvType.CLIENT) {
             return false;
