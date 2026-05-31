@@ -67,19 +67,19 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
 
     // Label
     private static final Text FormSlotTitle = Text.translatable("gui.shape_shifter_curse_fabric.fcs.form_slot_title");
-    private static final Text GlobalSlotTitle = Text.translatable("gui.shape_shifter_curse_fabric.fcs.global_slot_title");
+    static final Text GlobalSlotTitle = Text.translatable("gui.shape_shifter_curse_fabric.fcs.global_slot_title");
     private static final Text FormDefaultSlotTitle = Text.translatable("gui.shape_shifter_curse_fabric.fcs.form_default_slot_title");
     private static final Text Title = Text.translatable("gui.shape_shifter_curse_fabric.fcs.title");
 
-    private static final Text ColorChannel_R = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_r");
-    private static final Text ColorChannel_G = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_g");
-    private static final Text ColorChannel_B = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_b");
-    private static final Text ColorChannel_H = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_h");
-    private static final Text ColorChannel_S = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_s");
-    private static final Text ColorChannel_V = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_v");
+    static final Text ColorChannel_R = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_r");
+    static final Text ColorChannel_G = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_g");
+    static final Text ColorChannel_B = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_b");
+    static final Text ColorChannel_H = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_h");
+    static final Text ColorChannel_S = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_s");
+    static final Text ColorChannel_V = Text.translatable("gui.shape_shifter_curse_fabric.fcs.color_channel_v");
 
-    private static final Text IsEnableLayerLabel = Text.translatable("gui.shape_shifter_curse_fabric.fcs.is_enable_layer");
-    private static final Text ExitSliderButtonLabel = Text.translatable("gui.shape_shifter_curse_fabric.fcs.exit_slider_button");
+    static final Text IsEnableLayerLabel = Text.translatable("gui.shape_shifter_curse_fabric.fcs.is_enable_layer");
+    static final Text ExitSliderButtonLabel = Text.translatable("gui.shape_shifter_curse_fabric.fcs.exit_slider_button");
     static final MutableText NoneFromNameLabel = Text.translatable("gui.shape_shifter_curse_fabric.fcs.none_from_name");
 
     // Button
@@ -87,20 +87,20 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
     private static final Text UploadToServer = Text.translatable("gui.shape_shifter_curse_fabric.fcs.to_server");
     private static final Text DownloadFromClient = Text.translatable("gui.shape_shifter_curse_fabric.fcs.from_client");
     private static final Text UploadToClient = Text.translatable("gui.shape_shifter_curse_fabric.fcs.to_client");
-    private static final Text DownloadFromClipboard = Text.translatable("gui.shape_shifter_curse_fabric.fcs.from_clipboard");
-    private static final Text UploadToClipboard = Text.translatable("gui.shape_shifter_curse_fabric.fcs.to_clipboard");
+    static final Text DownloadFromClipboard = Text.translatable("gui.shape_shifter_curse_fabric.fcs.from_clipboard");
+    static final Text UploadToClipboard = Text.translatable("gui.shape_shifter_curse_fabric.fcs.to_clipboard");
 
     // Config Entry
-    private static final Text PrimaryColorLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.primaryColor");
-    private static final Text AccentColor1Label = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.accentColor1Color");
-    private static final Text AccentColor2Label = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.accentColor2Color");
-    private static final Text EyeColorALabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.eyeColorA");
-    private static final Text EyeColorBLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.eyeColorB");
-    private static final Text PrimaryGreyReverseLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.primaryGreyReverse");
-    private static final Text Accent1GreyReverseLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.accent1GreyReverse");
-    private static final Text Accent2GreyReverseLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse");
-    private static final Text KeepOriginalSkinLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.keep_original_skin");
-    private static final Text IsEnableFormColorSystemLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.enable_form_color");
+    static final Text PrimaryColorLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.primaryColor");
+    static final Text AccentColor1Label = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.accentColor1Color");
+    static final Text AccentColor2Label = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.accentColor2Color");
+    static final Text EyeColorALabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.eyeColorA");
+    static final Text EyeColorBLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.eyeColorB");
+    static final Text PrimaryGreyReverseLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.primaryGreyReverse");
+    static final Text Accent1GreyReverseLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.accent1GreyReverse");
+    static final Text Accent2GreyReverseLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse");
+    static final Text KeepOriginalSkinLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.keep_original_skin");
+    static final Text IsEnableFormColorSystemLabel = Text.translatable("text.autoconfig.shape-shifter-curse-custom.option.enable_form_color");
 
     private boolean isScreenInit = false;
     private TextFieldWidget primaryColorEditBox = null;
@@ -160,12 +160,16 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         if (ShapeShifterCurseFabric.clientConfig.disableUnlockCheckInFormColorSelectMenu) {
             isUnlocked = true;
         }
-        MutableText message = NoneFromNameLabel;
+        Text message = NoneFromNameLabel;
         if (!RegPlayerForms.ORIGINAL_BEFORE_ENABLE.equals(form)) {
             message = form.getFormName();
         }
         if (!isUnlocked) {
-            message.setStyle(message.getStyle().withColor(TextColor.fromRgb(0xFF0000)));
+            if (message instanceof MutableText text) {
+                text.setStyle(message.getStyle().withColor(TextColor.fromRgb(0xFF0000)));
+            } else {
+                message = message.copy().setStyle(message.getStyle().withColor(TextColor.fromRgb(0xFF0000)));
+            }
         }
         this.formNameLabel.setMessage(message);
     }
@@ -793,15 +797,15 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         this.config_panel_01.add(isEnableFormColorSystemButton);
         this.isEnableFormColorSystemButton = isEnableFormColorSystemButton;
         // 139,27,25,11 - R Label
-        TextWidget rLabel = new TextWidget(BPosX + 139, BPosY + 27, 25, 11, ColorChannel_R, textRenderer).setTextColor(0xDDDDDD);
+        TextWidget rLabel = new TextWidget(BPosX + 139, BPosY + 27, 25, 11, ColorChannel_R, textRenderer);
         this.addDrawableChild(rLabel);
         this.config_panel_02.add(rLabel);
         // 139,41,25,11 - G Label
-        TextWidget gLabel = new TextWidget(BPosX + 139, BPosY + 41, 25, 11, ColorChannel_G, textRenderer).setTextColor(0xDDDDDD);
+        TextWidget gLabel = new TextWidget(BPosX + 139, BPosY + 41, 25, 11, ColorChannel_G, textRenderer);
         this.addDrawableChild(gLabel);
         this.config_panel_02.add(gLabel);
         // 139,55,25,11 - B Label
-        TextWidget bLabel = new TextWidget(BPosX + 139, BPosY + 55, 25, 11, ColorChannel_B, textRenderer).setTextColor(0xDDDDDD);
+        TextWidget bLabel = new TextWidget(BPosX + 139, BPosY + 55, 25, 11, ColorChannel_B, textRenderer);
         this.addDrawableChild(bLabel);
         this.config_panel_02.add(bLabel);
         // 177,27,30,11 - R Input
@@ -887,15 +891,15 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         this.config_panel_02.add(sliderB);
         this.sliderB = sliderB;
         // 139,69,25,11 - H label
-        TextWidget hLabel = new TextWidget(BPosX + 139, BPosY + 69, 25, 11, ColorChannel_H, textRenderer).setTextColor(0xDDDDDD);
+        TextWidget hLabel = new TextWidget(BPosX + 139, BPosY + 69, 25, 11, ColorChannel_H, textRenderer);
         this.addDrawableChild(hLabel);
         this.config_panel_02.add(hLabel);
         // 139,83,25,11 - S label
-        TextWidget sLabel = new TextWidget(BPosX + 139, BPosY + 83, 25, 11, ColorChannel_S, textRenderer).setTextColor(0xDDDDDD);
+        TextWidget sLabel = new TextWidget(BPosX + 139, BPosY + 83, 25, 11, ColorChannel_S, textRenderer);
         this.addDrawableChild(sLabel);
         this.config_panel_02.add(sLabel);
         // 139,97,25,11 - V label
-        TextWidget vLabel = new TextWidget(BPosX + 139, BPosY + 97, 25, 11, ColorChannel_V, textRenderer).setTextColor(0xDDDDDD);
+        TextWidget vLabel = new TextWidget(BPosX + 139, BPosY + 97, 25, 11, ColorChannel_V, textRenderer);
         this.addDrawableChild(vLabel);
         this.config_panel_02.add(vLabel);
         // 177,69,30,11 - H Input
@@ -1086,23 +1090,23 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
         this.renderTextureBackground(context);
         if (!isOpenSlider) {
             // 228,27,11,11
-            context.fill(BPosX + 228, BPosY + 27, BPosX + 239, BPosY + 38, 0xFF000000);
+            // context.fill(BPosX + 228, BPosY + 27, BPosX + 239, BPosY + 38, 0xFF000000);
             context.fill(BPosX + 228, BPosY + 27, BPosX + 239, BPosY + 38, this.primaryColor);
             // 228,41,11,11
-            context.fill(BPosX + 228, BPosY + 41, BPosX + 239, BPosY + 52, 0xFF000000);
+            // context.fill(BPosX + 228, BPosY + 41, BPosX + 239, BPosY + 52, 0xFF000000);
             context.fill(BPosX + 228, BPosY + 41, BPosX + 239, BPosY + 52, this.accentColor1Color);
             // 228,55,11,11
-            context.fill(BPosX + 228, BPosY + 55, BPosX + 239, BPosY + 66, 0xFF000000);
+            // context.fill(BPosX + 228, BPosY + 55, BPosX + 239, BPosY + 66, 0xFF000000);
             context.fill(BPosX + 228, BPosY + 55, BPosX + 239, BPosY + 66, this.accentColor2Color);
             // 228,69,11,11
-            context.fill(BPosX + 228, BPosY + 69, BPosX + 239, BPosY + 80, 0xFF000000);
+            // context.fill(BPosX + 228, BPosY + 69, BPosX + 239, BPosY + 80, 0xFF000000);
             context.fill(BPosX + 228, BPosY + 69, BPosX + 239, BPosY + 80, this.eyeColorA);
             // 228,83,11,11
-            context.fill(BPosX + 228, BPosY + 83, BPosX + 239, BPosY + 94, 0xFF000000);
+            // context.fill(BPosX + 228, BPosY + 83, BPosX + 239, BPosY + 94, 0xFF000000);
             context.fill(BPosX + 228, BPosY + 83, BPosX + 239, BPosY + 94, this.eyeColorB);
         } else {
             // 267,111,11,11
-            context.fill(BPosX + 267, BPosY + 111, BPosX + 278, BPosY + 122, 0xFF000000);
+            // context.fill(BPosX + 267, BPosY + 111, BPosX + 278, BPosY + 122, 0xFF000000);
             context.fill(BPosX + 267, BPosY + 111, BPosX + 278, BPosY + 122, (this.tempSliderAlpha << 24) | (this.tempSliderR << 16) | (this.tempSliderG << 8) | (this.tempSliderB));
         }
         if (timer > 60) {

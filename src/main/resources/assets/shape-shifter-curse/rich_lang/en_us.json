@@ -1185,7 +1185,8 @@
   "trinket.slot.hand.extra_hand": "Extra Hand",
   "curios.identifier.extra_hand": "Extra Hand",
 
-  "text.shape-shifter-curse.config.form_color_select_menu": "Form Color Selection Menu",
+  "text.shape-shifter-curse.config.form_color_select_menu": "Form Color Selection Menu (Professional)",
+  "text.shape-shifter-curse.config.form_color_select_menu_v2": "Form Color Selection Menu (Standard)",
   "message.shape-shifter-curse.enable_default_color": "Form default color feature: %s",
   "gui.shape_shifter_curse_fabric.fcs.form_slot_title": "Form-specific Slot",
   "gui.shape_shifter_curse_fabric.fcs.global_slot_title": "Global Slot",
@@ -1207,6 +1208,7 @@
   "gui.shape_shifter_curse_fabric.fcs.to_clipboard": "↑Clipboard↑",
   "message.shape-shifter-curse.form_color_data": "[%s] shared a form color data (click to copy)",
   "gui.shape_shifter_curse_fabric.fcs.none_from_name": "No Form",
+  "gui.shape_shifter_curse_fabric.fcsv2.right_click_to_modify": "Right Click To Modify",
 
   "text.shape-shifter-curse.config.title": "Shape Shifter Curse Config Menu",
   "text.shape-shifter-curse.config.close": "Cancel",

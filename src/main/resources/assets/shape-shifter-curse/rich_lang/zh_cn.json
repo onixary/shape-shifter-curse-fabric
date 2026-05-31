@@ -1122,7 +1122,8 @@
   "trinket.slot.hand.extra_hand": "额外手",
   "curios.identifier.extra_hand": "额外手",
 
-  "text.shape-shifter-curse.config.form_color_select_menu": "形态颜色修改菜单",
+  "text.shape-shifter-curse.config.form_color_select_menu": "形态颜色修改菜单(专业版)",
+  "text.shape-shifter-curse.config.form_color_select_menu_v2": "形态颜色修改菜单(标准版)",
   "message.shape-shifter-curse.enable_default_color": "形态默认颜色功能: %s",
   "gui.shape_shifter_curse_fabric.fcs.form_slot_title": "形态独立槽位",
   "gui.shape_shifter_curse_fabric.fcs.global_slot_title": "全局槽位",
@@ -1144,6 +1145,7 @@
   "gui.shape_shifter_curse_fabric.fcs.to_clipboard": "↑剪切板↑",
   "message.shape-shifter-curse.form_color_data": "[%s] 分享了一个形态颜色数据 (点击复制)",
   "gui.shape_shifter_curse_fabric.fcs.none_from_name": "无形态",
+  "gui.shape_shifter_curse_fabric.fcsv2.right_click_to_modify": "右击修改",
   
   "text.shape-shifter-curse.config.title": "幻形者诅咒 配置界面",
   "text.shape-shifter-curse.config.close": "取消",
