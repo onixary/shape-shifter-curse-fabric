@@ -21,6 +21,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenu;
+import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenuV2;
 import net.onixary.shapeShifterCurseFabric.custom_ui.NormalFormSelectScreen;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
 import net.onixary.shapeShifterCurseFabric.custom_ui.PatronFormSelectScreen;
@@ -478,9 +479,16 @@ public class ModPacketsS2C {
 
     public static void receiveOpenFCSMenu(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         client.execute(() -> {
-            if (FormColorSelectMenu.instance == null) {
-                Screen screen = new FormColorSelectMenu(Text.literal("text.shape-shifter-curse.config.form_color_select_menu"));
-                client.setScreen(screen);
+            if (ShapeShifterCurseFabric.clientConfig.fcs_use_v1_menu) {
+                if (FormColorSelectMenu.instance == null) {
+                    Screen screen = new FormColorSelectMenu(Text.literal("text.shape-shifter-curse.config.form_color_select_menu"));
+                    client.setScreen(screen);
+                }
+            } else {
+                if (FormColorSelectMenuV2.instance == null) {
+                    Screen screen = new FormColorSelectMenuV2(Text.literal("text.shape-shifter-curse.config.form_color_select_menu_v2"));
+                    client.setScreen(screen);
+                }
             }
         });
     }
