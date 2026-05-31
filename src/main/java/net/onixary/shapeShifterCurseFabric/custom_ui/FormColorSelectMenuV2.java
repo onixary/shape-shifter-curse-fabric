@@ -60,6 +60,7 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
     private static final Text BoolBTN_ON = Text.translatable("text.cloth-config.boolean.value.true");
     private static final Text BoolBTN_OFF = Text.translatable("text.cloth-config.boolean.value.false");
     private static final Text RIGHT_CLICK_TO_MODIFY = Text.translatable("gui.shape_shifter_curse_fabric.fcsv2.right_click_to_modify");
+    private static final Text HEX_TEXT = Text.translatable("gui.shape_shifter_curse_fabric.fcsv2.hex_text");
 
     // 其他UI部件
     private ButtonWidget formNameLabel = null;
@@ -400,13 +401,13 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
         this.enableFormColorSystemButton.setMessage(this.enableFormColorSystem ? BoolBTN_ON : BoolBTN_OFF);
         this.isUpdateConfigWidget = false;
         // 更新Data5 由Data5转Data4再转Data3 最后由isUpdateSliderFormConfig Flag阻止更新至Data1
-        switch (this.SliderIndex) {
-            case 0 -> { this.PanelConfigNameLabel.setMessage(PrimaryColorLabel); }
-            case 1 -> { this.PanelConfigNameLabel.setMessage(AccentColor1Label); }
-            case 2 -> { this.PanelConfigNameLabel.setMessage(AccentColor2Label); }
-            case 3 -> { this.PanelConfigNameLabel.setMessage(EyeColorALabel); }
-            case 4 -> { this.PanelConfigNameLabel.setMessage(EyeColorBLabel); }
-        }
+        // switch (this.SliderIndex) {
+        //     case 0 -> { this.PanelConfigNameLabel.setMessage(PrimaryColorLabel); }
+        //     case 1 -> { this.PanelConfigNameLabel.setMessage(AccentColor1Label); }
+        //     case 2 -> { this.PanelConfigNameLabel.setMessage(AccentColor2Label); }
+        //     case 3 -> { this.PanelConfigNameLabel.setMessage(EyeColorALabel); }
+        //     case 4 -> { this.PanelConfigNameLabel.setMessage(EyeColorBLabel); }
+        // }
         int Color = 0x00FFFFFF;
         switch (this.SliderIndex) {
             case 0 -> { Color = this.primaryColor; }
@@ -883,7 +884,7 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
         this.ConfigPanel01.add(enableFormColorButton);
         // Config Panel 02
         // 177,68,41,11 - Config Label
-        TextWidget configLabel = new TextWidget(BPosX + 177, BPosY + 68, 41, 11, EmptyText, textRenderer).setTextColor(TextColor);
+        TextWidget configLabel = new TextWidget(BPosX + 177, BPosY + 68, 41, 11, HEX_TEXT, textRenderer).setTextColor(TextColor);
         this.addDrawableChild(configLabel);
         this.PanelConfigNameLabel = configLabel;
         this.ConfigPanel02.add(configLabel);

@@ -535,6 +535,7 @@
     "message.shape-shifter-curse.form_color_data": "[%s] shared a form color data (click to copy)",
     "gui.shape_shifter_curse_fabric.fcs.none_from_name": "No Form",
     "gui.shape_shifter_curse_fabric.fcsv2.right_click_to_modify": "Right Click To Modify",
+    "gui.shape_shifter_curse_fabric.fcsv2.hex_text": "HEX",
     "text.shape-shifter-curse.config.title": "Shape Shifter Curse Config Menu",
     "text.shape-shifter-curse.config.close": "Cancel",
     "text.autoconfig.shape-shifter-curse-client.title": "Shape Shifter Curse - Client Config",
