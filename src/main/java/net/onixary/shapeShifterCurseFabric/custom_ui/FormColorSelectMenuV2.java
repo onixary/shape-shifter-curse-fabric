@@ -1148,15 +1148,21 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
     }
 
 
-    public void saveDataToClient() {
-        ShapeShifterCurseFabric.playerCustomConfig.primaryColor = primaryColor;
-        ShapeShifterCurseFabric.playerCustomConfig.accentColor1Color = accentColor1Color;
-        ShapeShifterCurseFabric.playerCustomConfig.accentColor2Color = accentColor2Color;
-        ShapeShifterCurseFabric.playerCustomConfig.eyeColorA = eyeColorA;
-        ShapeShifterCurseFabric.playerCustomConfig.eyeColorB = eyeColorB;
-        ShapeShifterCurseFabric.playerCustomConfig.primaryGreyReverse = primaryGreyReverse;
-        ShapeShifterCurseFabric.playerCustomConfig.accent1GreyReverse = accent1GreyReverse;
-        ShapeShifterCurseFabric.playerCustomConfig.accent2GreyReverse = accent2GreyReverse;
+    public void saveDataToClient(boolean savaColorData, boolean saveExtraData) {
+        if (savaColorData) {
+            ShapeShifterCurseFabric.playerCustomConfig.primaryColor = primaryColor;
+            ShapeShifterCurseFabric.playerCustomConfig.accentColor1Color = accentColor1Color;
+            ShapeShifterCurseFabric.playerCustomConfig.accentColor2Color = accentColor2Color;
+            ShapeShifterCurseFabric.playerCustomConfig.eyeColorA = eyeColorA;
+            ShapeShifterCurseFabric.playerCustomConfig.eyeColorB = eyeColorB;
+            ShapeShifterCurseFabric.playerCustomConfig.primaryGreyReverse = primaryGreyReverse;
+            ShapeShifterCurseFabric.playerCustomConfig.accent1GreyReverse = accent1GreyReverse;
+            ShapeShifterCurseFabric.playerCustomConfig.accent2GreyReverse = accent2GreyReverse;
+        }
+        if (saveExtraData) {
+            ShapeShifterCurseFabric.playerCustomConfig.keep_original_skin = keepCustomSkin;
+            ShapeShifterCurseFabric.playerCustomConfig.enable_form_color = enableFormColorSystem;
+        }
         AutoConfig.getConfigHolder(PlayerCustomConfig.class).save();
     }
 
@@ -1183,7 +1189,7 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
             ModPacketsS2C.sendUpdateCustomColor(this.getColorSetting(false), false, true, this.keepCustomSkin,  this.enableFormColorSystem); // 如果没进游戏时会发送失败 懒得做判断了 加一个Try
         } catch (Exception ignored) {
         }
-        this.saveDataToClient();
+        this.saveDataToClient(true, true);
         ShapeShifterCurseFabricClient.formColorData.writeToConfig();
         if (this.parsetScreen != null && this.client != null) {
             this.client.setScreen(this.parsetScreen);
