@@ -188,7 +188,7 @@ public class FormColorData {
         if (compound.contains("V2_FCS_global_setting_names")) {
             NbtList nbtList = compound.getList("V2_FCS_global_setting_names", NbtElement.STRING_TYPE);
             for (int i = 0; i < nbtList.size(); i++) {
-                FormColorSelectMenu_Global_Names.add(nbtList.getString(i));
+                V2_FormColorSelectMenu_Global_Names.add(nbtList.getString(i));
             }
         }
         if (compound.contains("unlockedForms")) {
@@ -383,7 +383,7 @@ public class FormColorData {
     }
 
     public void setName_LocalFormSlot(Identifier formID, int index, String name) {
-        if (index > GlobalSlotCount) {
+        if (index > LocalSlotCount) {
             return;
         }
         List<String> list = this.FormColorSelectMenu_Form_Local_Names.computeIfAbsent(formID, k -> new ArrayList<>());
@@ -403,7 +403,7 @@ public class FormColorData {
     }
 
     public void setName_GlobalSlot(int index, String name) {
-        if (index > LocalSlotCount) {
+        if (index > GlobalSlotCount) {
             return;
         }
         if (index >= FormColorSelectMenu_Global_Names.size()) {

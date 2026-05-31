@@ -435,7 +435,8 @@
     "message.shape-shifter-curse.select_form_ui.target_uuid": "[ %s ]",
     "trinket.slot.hand.extra_hand": "Extra Hand",
     "curios.identifier.extra_hand": "Extra Hand",
-    "text.shape-shifter-curse.config.form_color_select_menu": "Form Color Selection Menu",
+    "text.shape-shifter-curse.config.form_color_select_menu": "Form Color Selection Menu (Professional)",
+    "text.shape-shifter-curse.config.form_color_select_menu_v2": "Form Color Selection Menu (Standard)",
     "message.shape-shifter-curse.enable_default_color": "Form default color feature: %s",
     "gui.shape_shifter_curse_fabric.fcs.form_slot_title": "Form-specific Slot",
     "gui.shape_shifter_curse_fabric.fcs.global_slot_title": "Global Slot",
@@ -469,5 +470,9 @@
     "text.autoconfig.shape-shifter-curse-client.option.disableUnlockCheckInFormColorSelectMenu": "Disable unlock check in the form color selection menu.",
     "text.autoconfig.shape-shifter-curse-client.category.Tool": "Tools",
     "text.autoconfig.shape-shifter-curse-client.option.unlockAllFormInFormColorSelectMenu": "Unlock all forms in the form color selection menu.",
-    "text.autoconfig.shape-shifter-curse-client.option.clearFormUnlockRecordInFormColorSelectMenu": "Clear form unlock records in the form color selection menu."
+    "text.autoconfig.shape-shifter-curse-client.option.clearFormUnlockRecordInFormColorSelectMenu": "Clear form unlock records in the form color selection menu.",
+    "text.autoconfig.shape-shifter-curse-common.option.transformativeSpiderSpawnChance": "Transformative Spider Spawn Success Rate",
+    "text.autoconfig.shape-shifter-curse-common.option.PatronDataUrl": "Patron Data Download Url (Unfinished)",
+    "gui.shape_shifter_curse_fabric.fcsv2.right_click_to_modify": "Right Click To Modify",
+    "gui.shape_shifter_curse_fabric.fcsv2.hex_text": "HEX"
 }

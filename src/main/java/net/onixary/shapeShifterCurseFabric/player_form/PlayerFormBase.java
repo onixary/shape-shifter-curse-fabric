@@ -196,7 +196,7 @@ public class PlayerFormBase {
         return FormID.toString();
     }
 
-    public MutableText getFormName() {
+    public Text getFormName() {
         return Text.translatable("codex.form." + FormID.getNamespace() + "." + FormID.getPath() + ".name");
     }
 
