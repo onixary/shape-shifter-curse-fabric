@@ -50,7 +50,7 @@ import static net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenu.
 // 20260524整的新活 由于依赖"形态默认颜色"系统的更新机制 而且架构已经固定 所以V2不加此功能
 // V1的部分Label 文本保留 反正写都写了 保留吧 我之后把V1迁移到我的拓展里时可以减少一点工作量
 
-public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.TempFormTextureProcessor, FormTextureUtils.TempFormModelProcessor {
+public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.TempFormTextureProcessor, FormTextureUtils.TempCustomSkinConfigOverrider, FormTextureUtils.TempFormModelProcessor {
     // LANG 从V1复制的
     private static final Text BoolBTN_ON = Text.translatable("text.cloth-config.boolean.value.true");
     private static final Text BoolBTN_OFF = Text.translatable("text.cloth-config.boolean.value.false");
@@ -72,6 +72,8 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
     private boolean primaryGreyReverse = false;
     private boolean accent1GreyReverse = false;
     private boolean accent2GreyReverse = false;
+    private boolean keepCustomSkin = false;
+    private boolean enableFormColorSystem = true;
 
     // Data2: 由Data1的数据更新 修改时直接修改对应int 需要一个flag标记 防止循环调用 更新对应Data5数据
     private boolean isUpdateConfigWidget = false;
@@ -88,6 +90,8 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
     private ButtonWidget primaryGreyReverseButton;
     private ButtonWidget accent1GreyReverseButton;
     private ButtonWidget accent2GreyReverseButton;
+    private ButtonWidget keepCustomSkinButton;
+    private ButtonWidget enableFormColorSystemButton;
 
     // Data3: 修改它后需要调用刷新函数 直接修改对应的TextBox 仅当flag为否时修改
     private int SliderIndex = -1;
@@ -136,6 +140,7 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
     public static FormColorSelectMenuV2 instance;
     private boolean isLockTempTextureSystem = false;  // 用于还原
     private boolean isLockTempModelSystem = false;  // 用于还原
+    private boolean isLockTempConfigSystem = false;  // 用于还原
     private @Nullable Screen parsetScreen = null;
     private final HashMap<String, HashMap<FormTextureUtils.ColorSetting, Identifier>> colorSettingCacheMap = new HashMap<>();  // 防止内存泄漏
     private int modelID = -1;
@@ -373,6 +378,8 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
         this.primaryGreyReverseButton.setMessage(this.primaryGreyReverse ? BoolBTN_ON : BoolBTN_OFF);
         this.accent1GreyReverseButton.setMessage(this.accent1GreyReverse ? BoolBTN_ON : BoolBTN_OFF);
         this.accent2GreyReverseButton.setMessage(this.accent2GreyReverse ? BoolBTN_ON : BoolBTN_OFF);
+        this.keepCustomSkinButton.setMessage(this.keepCustomSkin ? BoolBTN_ON : BoolBTN_OFF);
+        this.enableFormColorSystemButton.setMessage(this.enableFormColorSystem ? BoolBTN_ON : BoolBTN_OFF);
         this.isUpdateConfigWidget = false;
         // 更新Data5 由Data5转Data4再转Data3 最后由isUpdateSliderFormConfig Flag阻止更新至Data1
         int Color = 0x00FFFFFF;
@@ -414,6 +421,8 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
                 case 5 -> { this.primaryGreyReverse = !this.primaryGreyReverse; }
                 case 6 -> { this.accent1GreyReverse = !this.accent1GreyReverse; }
                 case 7 -> { this.accent2GreyReverse = !this.accent2GreyReverse; }
+                case 8 -> { this.keepCustomSkin = !this.keepCustomSkin; }
+                case 9 -> { this.enableFormColorSystem = !this.enableFormColorSystem; }
             }
         } else {
             switch (textBoxIndex) {
@@ -643,6 +652,13 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
         } else {
             ShapeShifterCurseFabric.LOGGER.warn("Temp Form Model System is already in use, dynamic form rendering will not work");
         }
+        if (!FormTextureUtils.useTempCustomSkinConfig) {
+            FormTextureUtils.useTempCustomSkinConfig = true;
+            FormTextureUtils.tempCustomSkinConfigOverrider = this;
+            isLockTempConfigSystem = true;
+        } else {
+            ShapeShifterCurseFabric.LOGGER.warn("Temp Config System is already in use, dynamic config rendering will not work");
+        }
         if (instance != null) {
             ShapeShifterCurseFabric.LOGGER.error("FormColorSelectMenu is already in use, only one instance is allowed");
         }
@@ -691,6 +707,11 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
             FormTextureUtils.tempFormModelProcessor = null;
             isLockTempModelSystem = false;
         }
+        if (this.isLockTempConfigSystem) {
+            FormTextureUtils.useTempCustomSkinConfig = false;
+            FormTextureUtils.tempCustomSkinConfigOverrider = null;
+            isLockTempConfigSystem = false;
+        }
         instance = null;
         try {
             ModPacketsS2C.sendUpdateCustomColor(this.getColorSetting(false), false, false, false,  false); // 如果没进游戏时会发送失败 懒得做判断了 加一个Try
@@ -724,6 +745,10 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
             this.modelID = modelID;
             CleanColorSettingCache();
         }
+        // 可以关闭这个功能
+        if (!this.enableFormColorSystem) {
+            return texture;
+        }
         return colorSettingCacheMap.computeIfAbsent(category, k -> new HashMap<>()).computeIfAbsent(this.getColorSetting(true), k -> {
             // 这种方法不会内存泄漏 但是得自己管理临时材质
             NativeImageBackedTexture nativeImageBackedTexture = FormTextureUtils.BakeTextureNoMemLeak(texture, mask, this.getColorSetting(true), OnlyMultiply);
@@ -731,5 +756,10 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
             minecraftClient.getTextureManager().registerTexture(id, nativeImageBackedTexture);
             return id;
         });
+    }
+
+    @Override
+    public boolean keepOriginalSkin() {
+        return this.keepCustomSkin;
     }
 }
