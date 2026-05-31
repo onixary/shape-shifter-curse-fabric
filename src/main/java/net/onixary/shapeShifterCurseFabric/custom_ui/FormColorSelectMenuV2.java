@@ -1180,7 +1180,7 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
         }
         instance = null;
         try {
-            ModPacketsS2C.sendUpdateCustomColor(this.getColorSetting(false), false, false, false,  false); // 如果没进游戏时会发送失败 懒得做判断了 加一个Try
+            ModPacketsS2C.sendUpdateCustomColor(this.getColorSetting(false), false, true, this.keepCustomSkin,  this.enableFormColorSystem); // 如果没进游戏时会发送失败 懒得做判断了 加一个Try
         } catch (Exception ignored) {
         }
         this.saveDataToClient();
