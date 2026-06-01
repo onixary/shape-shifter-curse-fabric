@@ -30,6 +30,8 @@ public class BookOfShapeShifterScreenV2_P1 extends Screen implements WidgetEXUti
     public static final int BookSizeX = 350;
     public static final int BookSizeY = 220;
 
+    public static final Text openFCSMenuButtonLabel = Text.translatable("gui.shape_shifter_curse_fabric.book_2_1.open_fcs_menu");
+
     public BookOfShapeShifterScreenV2_P1() {
         super(Text.of("ShapeShifterCurse_Book_Screen_V2"));
     }
@@ -56,15 +58,30 @@ public class BookOfShapeShifterScreenV2_P1 extends Screen implements WidgetEXUti
         TitleLabel.setEnableScrollableIconRender(true);
         this.addWidget(TitleLabel);
         this.addDrawableChild(TitleLabel);
-        // Status
+        // Status 190
         // D -> (9, 9), (116, 143)
         // Size -> (107, 56) Pos -> (17, 153)
         this.addDrawableChild(BuildDetailScreenButton(116, 143, 9, 9, CodexData.getPlayerStatusText(currentPlayer)));
-        this.addDrawableChild(new TextWidget(BookPosX + 17 * BookScale, BookPosY + 143 * BookScale, 107 * BookScale, 8 * BookScale, CodexData.headerStatus, textRenderer).setTextColor(HeaderTextColor));
+        this.addDrawableChild(new TextWidget(BookPosX + 17 * BookScale, BookPosY + 143 * BookScale, 107 * BookScale, 6 * BookScale, CodexData.headerStatus, textRenderer).setTextColor(HeaderTextColor));
         ScaleScrollTextWidget StatusLabel = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 17 * BookScale, BookPosY + 153 * BookScale, 107 * BookScale, 6 * BookScale, Scale, CodexData.getPlayerStatusText(currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
         StatusLabel.setEnableScrollableIconRender(true);
         this.addWidget(StatusLabel);
         this.addDrawableChild(StatusLabel);
+        // Open FCS Menu Button
+        // 21,194,98,11
+        this.addDrawableChild(ButtonWidget.builder(openFCSMenuButtonLabel, button -> {
+                    if (ShapeShifterCurseFabric.clientConfig.fcs_use_v1_menu) {
+                        if (FormColorSelectMenu.instance == null) {
+                            Screen screen = new FormColorSelectMenu(Text.literal("text.shape-shifter-curse.config.form_color_select_menu"), this);
+                            client.setScreen(screen);
+                        }
+                    } else {
+                        if (FormColorSelectMenuV2.instance == null) {
+                            Screen screen = new FormColorSelectMenuV2(Text.literal("text.shape-shifter-curse.config.form_color_select_menu_v2"), this);
+                            client.setScreen(screen);
+                        }
+                    }
+        }).position(BookPosX + 21 * BookScale, BookPosY + 194 * BookScale).size(98 * BookScale, 11 * BookScale).build());
         // Appearance
         // D -> (9, 9), (311, 13)
         // Size -> (176, 184) Pos -> (142, 23)
