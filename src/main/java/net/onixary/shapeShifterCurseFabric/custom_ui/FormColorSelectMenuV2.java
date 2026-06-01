@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.custom_ui;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -33,6 +34,7 @@ import net.onixary.shapeShifterCurseFabric.util.FormColorData;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
+import org.lwjgl.opengl.GL11;
 
 import java.util.*;
 
@@ -1094,6 +1096,16 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
         entity.headYaw = l;
     }
 
+    private void RenderEntityInViewport(DrawContext context, int viewportX, int viewportY, int viewportWidth, int viewportHeight, int x, int y, int size, int mouseX, int mouseY, LivingEntity entity) {
+        context.enableScissor(viewportX, viewportY, viewportX + viewportWidth, viewportY + viewportHeight);
+        try {
+            RenderSystem.clear(GL11.GL_DEPTH_BUFFER_BIT, MinecraftClient.IS_SYSTEM_MAC);
+            RenderEntity(context, x, y, size, mouseX, mouseY, entity);
+        } finally {
+            context.disableScissor();
+        }
+    }
+
     private void drawExtraPart(DrawContext context, int x, int y, int PartX, int PartY, int Width, int Height) {
         int realX = PartX + EXTRA_PART_START_X;
         int realY = PartY + EXTRA_PART_START_Y;
@@ -1142,7 +1154,7 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
         }
         // 20,34,142,157
         if (minecraftClient.player != null) {
-            RenderEntity(context, BPosX + 91, BPosY + 156, 50, BPosX + 91 - mouseX, BPosY + 96 - mouseY, minecraftClient.player);
+            RenderEntityInViewport(context, BPosX + 20, BPosY + 34, 142, 157, BPosX + 91, BPosY + 226, 90, BPosX + 91 - mouseX, BPosY + 96 - mouseY, minecraftClient.player);
         }
         super.render(context, mouseX, mouseY, delta);
     }
