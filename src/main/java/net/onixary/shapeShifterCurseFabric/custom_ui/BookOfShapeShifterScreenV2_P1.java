@@ -81,7 +81,7 @@ public class BookOfShapeShifterScreenV2_P1 extends Screen implements WidgetEXUti
                             client.setScreen(screen);
                         }
                     }
-        }).position(BookPosX + 21 * BookScale, BookPosY + 194 * BookScale).size(98 * BookScale, 11 * BookScale).build());
+        }).position(BookPosX + 31 * BookScale, BookPosY + 194 * BookScale).size(78 * BookScale, 14 * BookScale).build());
         // Appearance
         // D -> (9, 9), (311, 13)
         // Size -> (176, 184) Pos -> (142, 23)
