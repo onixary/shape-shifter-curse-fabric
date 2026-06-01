@@ -68,7 +68,8 @@
     "SwordItemMixin",
     "ShearsItemMixin",
     "SmithingScreenHandlerMixin",
-    "AdvancementFixMixin"
+    "AdvancementFixMixin",
+    "mob.ScareCreeperMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",

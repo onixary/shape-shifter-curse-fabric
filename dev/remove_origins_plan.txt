@@ -1,8 +1,12 @@
 (XuHaoNan)(https://github.com/xu233333)
 
 移除Origins计划表(不太急)
-1. 整理所有Power 把Origins的Power分成Apoli的(修改NameSpace为Apoli)和Origins新增的(重新实现)
+1. 整理所有Power 把Origins的Power分成Apoli的(修改NameSpace为Apoli)和Origins新增的(重新实现) 看起来没有用到Origins新增的powerType 只需要
 2. 使用SSC的Component存储形态Layer(还是用Layer->Form吧 可以实现一些特殊操作 我拓展后续可以利用这个机制整点有意思的玩法)
 3. 将Form的能力系统迁移到新系统上 需要重新实现Origins的origin系统 不过应该比较简单(之前有涉及能力添加和移除)
 4. 把新渲染系统的API修改为新系统
 5. 移除Origins的代码 测试形态Power是否缺失
+
+需要新增的Power -> LIKE_WATER SCARE_CREEPERS [完成]
+将形态Origin Json里的Origins Power改为SSC的Power [完成]
+将SSC的power中的Origins NameSpace改为Apoli
