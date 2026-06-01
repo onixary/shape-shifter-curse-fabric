@@ -46,3 +46,9 @@ accessible field net/minecraft/predicate/item/ItemPredicate enchantments [Lnet/m
 accessible field net/minecraft/predicate/item/ItemPredicate storedEnchantments [Lnet/minecraft/predicate/item/EnchantmentPredicate;
 accessible field net/minecraft/predicate/item/ItemPredicate potion Lnet/minecraft/potion/Potion;
 accessible field net/minecraft/predicate/item/ItemPredicate nbt Lnet/minecraft/predicate/NbtPredicate;
+accessible field net/minecraft/entity/ai/goal/ActiveTargetGoal targetClass Ljava/lang/Class;
+accessible field net/minecraft/entity/ai/goal/TrackTargetGoal checkVisibility Z
+accessible field net/minecraft/entity/ai/goal/TrackTargetGoal checkCanNavigate Z
+accessible field net/minecraft/entity/ai/goal/ActiveTargetGoal reciprocalChance I
+accessible field net/minecraft/entity/ai/goal/ActiveTargetGoal targetPredicate Lnet/minecraft/entity/ai/TargetPredicate;
+accessible field net/minecraft/entity/ai/TargetPredicate predicate Ljava/util/function/Predicate;
