@@ -86,6 +86,7 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
     private boolean isUpdateConfigWidget = false;
     private final boolean UseSliderTextBox = true;
 
+    private boolean isUpdateFromTextBox = false;
     private TextFieldWidget primaryColorTextBox;
     private TextFieldWidget accentColor1TextBox;
     private TextFieldWidget accentColor2TextBox;
@@ -377,22 +378,24 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
         }
         // 更新Data2
         this.isUpdateConfigWidget = true;
-        if (!this.UseSliderTextBox) {
-            this.primaryColorTextBox.setText(encodeColor(this.primaryColor));
-            this.accentColor1TextBox.setText(encodeColor(this.accentColor1Color));
-            this.accentColor2TextBox.setText(encodeColor(this.accentColor2Color));
-            this.eyeColorATextBox.setText(encodeColor(this.eyeColorA));
-            this.eyeColorBTextBox.setText(encodeColor(this.eyeColorB));
-        } else {
-            int Color = 0x00FFFFFF;
-            switch (this.SliderIndex) {
-                case 0 -> { Color = this.primaryColor; }
-                case 1 -> { Color = this.accentColor1Color; }
-                case 2 -> { Color = this.accentColor2Color; }
-                case 3 -> { Color = this.eyeColorA; }
-                case 4 -> { Color = this.eyeColorB; }
+        if (!isUpdateFromTextBox) {
+            if (!this.UseSliderTextBox) {
+                this.primaryColorTextBox.setText(encodeColor(this.primaryColor));
+                this.accentColor1TextBox.setText(encodeColor(this.accentColor1Color));
+                this.accentColor2TextBox.setText(encodeColor(this.accentColor2Color));
+                this.eyeColorATextBox.setText(encodeColor(this.eyeColorA));
+                this.eyeColorBTextBox.setText(encodeColor(this.eyeColorB));
+            } else {
+                int Color = 0x00FFFFFF;
+                switch (this.SliderIndex) {
+                    case 0 -> { Color = this.primaryColor; }
+                    case 1 -> { Color = this.accentColor1Color; }
+                    case 2 -> { Color = this.accentColor2Color; }
+                    case 3 -> { Color = this.eyeColorA; }
+                    case 4 -> { Color = this.eyeColorB; }
+                }
+                this.SliderTextBox.setText(encodeColor(Color));
             }
-            this.SliderTextBox.setText(encodeColor(Color));
         }
         this.primaryGreyReverseButton.setMessage(this.primaryGreyReverse ? BoolBTN_ON : BoolBTN_OFF);
         this.accent1GreyReverseButton.setMessage(this.accent1GreyReverse ? BoolBTN_ON : BoolBTN_OFF);
@@ -471,7 +474,9 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
             }
         }
         this.isColorSettingDirty = true;
+        isUpdateFromTextBox = true;
         this.onData1Changed();
+        isUpdateFromTextBox = false;
     }
 
     // Data3 函数
