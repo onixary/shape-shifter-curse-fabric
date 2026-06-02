@@ -863,7 +863,7 @@
   "text.autoconfig.shape-shifter-curse-client.option.clearFormUnlockRecordInFormColorSelectMenu": "Clear form unlock records in the form color selection menu.",
   "text.autoconfig.shape-shifter-curse-common.option.transformativeSpiderSpawnChance": "Transformative Spider Spawn Success Rate",
   "text.autoconfig.shape-shifter-curse-common.option.PatronDataUrl": "Patron Data Download Url (Unfinished)",
-  "gui.shape_shifter_curse_fabric.fcsv2.right_click_to_modify": "Right Click To Modify",
+  "gui.shape_shifter_curse_fabric.fcsv2.click_to_modify": "Modify",
   "gui.shape_shifter_curse_fabric.fcsv2.hex_text": "HEX",
   "text.autoconfig.shape-shifter-curse-client.option.fcs_use_v1_menu": "Default use form color selection menu (Professional)",
   "gui.shape_shifter_curse_fabric.book_2_1.open_fcs_menu": "Open Form Color Customization Menu"

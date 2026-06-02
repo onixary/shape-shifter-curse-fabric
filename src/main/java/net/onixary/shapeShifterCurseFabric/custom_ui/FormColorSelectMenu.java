@@ -1181,41 +1181,47 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        boolean result = super.mouseClicked(mouseX, mouseY, button);
         int BPosX = width / 2 - BG_WIDTH / 2;
         int BPosY = height / 2 - BG_HEIGHT / 2;
-        if (!this.isOpenSlider && this.isScreenInit && button != 0) {
+        if (!this.isOpenSlider && this.isScreenInit) {
             // 228,27,11,11
             if (mouseX > BPosX + 228 && mouseX < BPosX + 239 && mouseY > BPosY + 27 && mouseY < BPosY + 38) {
                 this.tempSliderConfigIndex = 0;
                 this.isOpenSlider = true;
+                result = true;
                 this.updatePanel();
             } else
             // 228,41,11,11
             if (mouseX > BPosX + 228 && mouseX < BPosX + 239 && mouseY > BPosY + 41 && mouseY < BPosY + 52) {
                 this.tempSliderConfigIndex = 1;
                 this.isOpenSlider = true;
+                result = true;
                 this.updatePanel();
             } else
             // 228,55,11,11
             if (mouseX > BPosX + 228 && mouseX < BPosX + 239 && mouseY > BPosY + 55 && mouseY < BPosY + 66) {
                 this.tempSliderConfigIndex = 2;
                 this.isOpenSlider = true;
+                result = true;
                 this.updatePanel();
             } else
             // 228,69,11,11
             if (mouseX > BPosX + 228 && mouseX < BPosX + 239 && mouseY > BPosY + 69 && mouseY < BPosY + 80) {
                 this.tempSliderConfigIndex = 3;
                 this.isOpenSlider = true;
+                result = true;
                 this.updatePanel();
             } else
             // 228,83,11,11
             if (mouseX > BPosX + 228 && mouseX < BPosX + 239 && mouseY > BPosY + 83 && mouseY < BPosY + 94) {
                 this.tempSliderConfigIndex = 4;
                 this.isOpenSlider = true;
+                result = true;
                 this.updatePanel();
             }
         }
-        return super.mouseClicked(mouseX, mouseY, button);
+        return result;
     }
 
     private @Nullable Identifier getPlayerForm() {

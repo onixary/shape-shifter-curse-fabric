@@ -1145,7 +1145,7 @@
   "gui.shape_shifter_curse_fabric.fcs.to_clipboard": "↑剪切板↑",
   "message.shape-shifter-curse.form_color_data": "[%s] 分享了一个形态颜色数据 (点击复制)",
   "gui.shape_shifter_curse_fabric.fcs.none_from_name": "无形态",
-  "gui.shape_shifter_curse_fabric.fcsv2.right_click_to_modify": "右击修改",
+  "gui.shape_shifter_curse_fabric.fcsv2.click_to_modify": "修改",
   "gui.shape_shifter_curse_fabric.fcsv2.hex_text": "HEX",
   "gui.shape_shifter_curse_fabric.book_2_1.open_fcs_menu": "打开形态颜色自定义菜单",
   
