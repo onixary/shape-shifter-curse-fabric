@@ -456,7 +456,8 @@
     "gui.shape_shifter_curse_fabric.fcs.color_channel_h": "H",
     "gui.shape_shifter_curse_fabric.fcs.color_channel_s": "S",
     "gui.shape_shifter_curse_fabric.fcs.color_channel_v": "V",
-    "gui.shape_shifter_curse_fabric.fcs.is_enable_layer": "Is enable this layer",
+    "gui.shape_shifter_curse_fabric.fcs.is_enable_layer": "Activate Layer",
+    "gui.shape_shifter_curse_fabric.fcsv2.is_enable_layer": "Activate This Layer",
     "gui.shape_shifter_curse_fabric.fcs.exit_slider_button": "Exit",
     "gui.shape_shifter_curse_fabric.fcs.from_server": "↓Server↓",
     "gui.shape_shifter_curse_fabric.fcs.to_server": "↑Server↑",
@@ -484,5 +485,13 @@
     "gui.shape_shifter_curse_fabric.fcsv2.click_to_modify": "Modify",
     "gui.shape_shifter_curse_fabric.fcsv2.hex_text": "HEX",
     "text.autoconfig.shape-shifter-curse-client.option.fcs_use_v1_menu": "Default use form color selection menu (Professional)",
-    "gui.shape_shifter_curse_fabric.book_2_1.open_fcs_menu": "Open Form Color Customization Menu"
+    "gui.shape_shifter_curse_fabric.book_2_1.open_fcs_menu": "Open Form Color Customization Menu",
+    "gui.shape_shifter_curse_fabric.fcs.primaryColor": "Primary",
+    "gui.shape_shifter_curse_fabric.fcs.accentColor1Color": "Accent 1",
+    "gui.shape_shifter_curse_fabric.fcs.accentColor2Color": "Accent 2",
+    "gui.shape_shifter_curse_fabric.fcs.eyeColorA": "Eye A",
+    "gui.shape_shifter_curse_fabric.fcs.eyeColorB": "Eye B",
+    "gui.shape_shifter_curse_fabric.fcs.primaryGreyReverse": "Reverse Primary",
+    "gui.shape_shifter_curse_fabric.fcs.accent1GreyReverse": "Reverse Accent 1",
+    "gui.shape_shifter_curse_fabric.fcs.accent2GreyReverse": "Reverse Accent 2"
 }

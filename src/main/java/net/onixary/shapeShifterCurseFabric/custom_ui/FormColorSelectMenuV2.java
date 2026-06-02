@@ -63,6 +63,7 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
     private static final Text BoolBTN_OFF = Text.translatable("text.cloth-config.boolean.value.false");
     private static final Text CLICK_TO_MODIFY = Text.translatable("gui.shape_shifter_curse_fabric.fcsv2.click_to_modify");
     private static final Text HEX_TEXT = Text.translatable("gui.shape_shifter_curse_fabric.fcsv2.hex_text");
+    private static final Text V2IsEnableLayerLabel = Text.translatable("gui.shape_shifter_curse_fabric.fcsv2.is_enable_layer");
 
     // 其他UI部件
     private ButtonWidget formNameLabel = null;
@@ -1051,7 +1052,7 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
         this.SliderVSlider = vSlider;
         this.ConfigPanel02.add(vSlider);
         // 177,174,101,12 - Is Enable Layer Label
-        TextWidget isEnableLayerLabel = new TextWidget(BPosX + 177, BPosY + 174, 101, 12, IsEnableLayerLabel, textRenderer).setTextColor(TextColor);
+        TextWidget isEnableLayerLabel = new TextWidget(BPosX + 177, BPosY + 174, 101, 12, V2IsEnableLayerLabel, textRenderer).setTextColor(TextColor);
         this.addDrawableChild(isEnableLayerLabel);
         this.ConfigPanel02.add(isEnableLayerLabel);
         // 288,174,27,12 - Is Enable Layer Button
