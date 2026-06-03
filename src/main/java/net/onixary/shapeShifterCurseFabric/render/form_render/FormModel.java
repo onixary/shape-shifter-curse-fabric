@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dev.kosmx.playerAnim.core.util.Vec3f;
 import mod.azure.azurelib.cache.object.GeoBone;
+import mod.azure.azurelib.core.animation.AnimationState;
 import mod.azure.azurelib.model.GeoModel;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
@@ -44,6 +45,7 @@ public class FormModel extends GeoModel<FormAnimatable> {
     public boolean SlimOnly = false;
     public boolean WideOnly = false;
     public boolean UseMultiplyMask = false;
+    public boolean UseAzureAnim = false;
     public Identifier ModelResource = ShapeShifterCurseFabric.identifier("geo/missing.geo.json");
     public Identifier ModelResource_Slim = ShapeShifterCurseFabric.identifier("geo/missing.geo.json");
 
@@ -173,6 +175,7 @@ public class FormModel extends GeoModel<FormAnimatable> {
         this.FullBrightTextureResource = Identifier.tryParse(JsonHelper.getString(this.modelJson, "fullbright_texture", MissingTextureString));
         this.FullBrightTextureResource_Slim = Identifier.tryParse(JsonHelper.getString(this.modelJson, "fullbright_texture_slim", MissingTextureString));
 
+        this.UseAzureAnim = JsonHelper.getBoolean(this.modelJson, "use_azurelib_anim", false);
         this.Animation = Identifier.tryParse(JsonHelper.getString(this.modelJson, "animations", MissingAnimationString));
 
         this.Hidden_Hat = false;
@@ -586,6 +589,13 @@ public class FormModel extends GeoModel<FormAnimatable> {
     @Override
     public Identifier getAnimationResource(FormAnimatable animatable) {
         return this.Animation;
+    }
+
+    @Override
+    public void handleAnimations(FormAnimatable animatable, long instanceId, AnimationState<FormAnimatable> animationState) {
+        if (this.UseAzureAnim) {
+            super.handleAnimations(animatable, instanceId, animationState);
+        }
     }
 
 }
