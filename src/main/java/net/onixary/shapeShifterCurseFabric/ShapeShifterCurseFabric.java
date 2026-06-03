@@ -114,9 +114,6 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final OnEndCursedMoonCuredForm2 ON_END_CURSED_MOON_CURED_FORM_2 = Criteria.register(new OnEndCursedMoonCuredForm2());
     public static final OnGetTransformEffect ON_GET_TRANSFORM_EFFECT = Criteria.register(new OnGetTransformEffect());
     public static final OnSleepWhenHaveTransformEffect ON_SLEEP_WHEN_HAVE_TRANSFORM_EFFECT = Criteria.register(new OnSleepWhenHaveTransformEffect());
-    public static final OnTransform0 ON_TRANSFORM_0 = Criteria.register(new OnTransform0());
-    public static final OnTransform1 ON_TRANSFORM_1 = Criteria.register(new OnTransform1());
-    public static final OnTransform2 ON_TRANSFORM_2 = Criteria.register(new OnTransform2());
     public static final OnTransformByCatalyst ON_TRANSFORM_BY_CATALYST = Criteria.register(new OnTransformByCatalyst());
     public static final OnTransformByCure ON_TRANSFORM_BY_CURE = Criteria.register(new OnTransformByCure());
     public static final OnUseGoldenApple ON_USE_GOLDEN_APPLE = Criteria.register(new OnUseGoldenApple());
@@ -125,9 +122,6 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public static final OnTriggerCursedMoon ON_TRIGGER_CURSED_MOON = Criteria.register(new OnTriggerCursedMoon());
     public static final OnTriggerCursedMoonForm2 ON_TRIGGER_CURSED_MOON_FORM_2 = Criteria.register(new OnTriggerCursedMoonForm2());
     public static final OnFirstJoinWithMod ON_FIRST_JOIN_WITH_MOD = Criteria.register(new OnFirstJoinWithMod());
-    public static final OnTransform3 ON_TRANSFORM_3 = Criteria.register(new OnTransform3());
-    public static final OnTransformSP ON_TRANSFORM_SP = Criteria.register(new OnTransformSP());
-    public static final OnFirstTransformEnableFormList ON_FIRST_TRANSFORM_ENABLE_FORM_LIST = Criteria.register(new OnFirstTransformEnableFormList());
 
     public static final OnTransformForm ON_TRANSFORM_FORM = Criteria.register(new OnTransformForm());
     public static final OnWebEntity ON_WEB_ENTITY = Criteria.register(new OnWebEntity());

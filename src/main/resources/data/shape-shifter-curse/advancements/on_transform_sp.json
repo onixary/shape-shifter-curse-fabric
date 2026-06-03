@@ -17,7 +17,10 @@
   "parent": "shape-shifter-curse:on_open_book_of_shape_shifter",
   "criteria": {
     "on_transform_sp": {
-      "trigger": "shape-shifter-curse:on_transform_sp"
+      "trigger": "shape-shifter-curse:on_transform_form",
+      "conditions": {
+        "form_tier": [5]
+      }
     }
   },
   "requirements": []
