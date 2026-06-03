@@ -12,11 +12,22 @@
 - ~~Reason有FallBack机制 当getNextForm/getPrevForm返回null时使用 类型为@Nullable Reason 如果为null 自动调用DefaultXXXX函数或由_XXXX函数内部处理 拥有boolean OverrideReason变量 如果为True 则在失败时覆写Reason~~
 - ~~_XXXX 函数先调用不带_的函数 如果返回null 处理FallBack 如果FallBack处理还是null 先用_XXXX内置处理 如果没有对应的内置处理 直接调用getDefaultXXXX函数~~
 - _getXXXX流程 先调用getXXXX函数 如果为null 则调用Reason里的getFallBackForm 如果还为null 自动调用getDefaultXXXX 再为null就返回this 并写一个Error日志
+- 移除Phase Enum 改为Int(类Index) 未开启使用-1 开启后使用0 形态_0使用1 以此类推 拥有一个IsFinalForm的Flag用于默认升降级(仅最终形态为True SP形态不为True)
+- 每个组的不同Level可以有多个形态 自动处理升降级时会随机选一个(如果要指定 可以覆写get\[Next/Prev\]Form)
+- 诅咒之月改成在触发时记录触发前形态F1和触发后形态F2 变形结束时如果当前形态和F2相同则变为F1
+- 维护一个LinkedList记录玩家的变形路线 当玩家使用命令/返回开始前/后的形态时清空 用于定向返回逻辑
+- Layer系统在完成移除Origins后需要保留 改为1个主Layer(Form) 多个副Layer 具体启用什么Layer由PlayerFormBase的函数决定(输出不可变) 可以实现一个形态带几个拼接能力包这种功能
+
+- getNextForm 和 getPrevForm 在数据包上使用Power处理 仅提供一个默认升降级配置项
 
 ```java
 public interface Reason {
     @NotNull Identifier getType();
-    default @Nullable PlayerFormBase getFallBackForm(PlayerEntity player, PlayerFormBase nowForm) {
+    default @Nullable PlayerFormBase getFallBackNextForm(PlayerEntity player, PlayerFormBase nowForm) {
+        // 可以链式调用 比如[SSC:Inhibitor]为nowForm._getNextForm(player, INSTINCT) [SSC:Instinct]为nowForm._getNextForm(player, DEFAULT)
+        return null;
+    }
+    default @Nullable PlayerFormBase getFallBackPrevForm(PlayerEntity player, PlayerFormBase nowForm) {
         // 可以链式调用 比如[SSC:Inhibitor]为nowForm._getNextForm(player, INSTINCT) [SSC:Instinct]为nowForm._getNextForm(player, DEFAULT)
         return null;
     }
@@ -29,7 +40,7 @@ public class PlayerFormBase {
     public @NotNull PlayerFormBase _getNextForm(PlayerEntity player, Reason reason) {
         PlayerFormBase nextForm = getNextForm(player, reason);
         if (nextForm == null) {
-            nextForm = reason.getFallBackForm(player, this);
+            nextForm = reason.getFallBackNextForm(player, this);
         }
         if (nextForm == null) {
             nextForm = getDefaultNextForm(player, reason);
@@ -44,7 +55,7 @@ public class PlayerFormBase {
     public @NotNull PlayerFormBase _getPrevForm(PlayerEntity player, Reason reason) {
         PlayerFormBase prevForm = getPrevForm(player, reason);
         if (prevForm == null) {
-            prevForm = reason.getFallBackForm(player, this);
+            prevForm = reason.getFallBackPrevForm(player, this);
         }
         if (prevForm == null) {
             prevForm = getDefaultPrevForm(player, reason);
