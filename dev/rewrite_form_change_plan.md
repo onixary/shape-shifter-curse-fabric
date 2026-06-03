@@ -1,8 +1,13 @@
 (XuHaoNan)(https://github.com/xu233333)
 
 重构形态变形代码(先设计 后开工)
-1. 实现网状进化功能(由Form类决定下一个阶段形态 包含退化)
-2. 诅咒之月变形代码重写(现在的代码成了屎山了 加补丁难度太高 重写一份)
+- 重构 TransformManager
+- 重构 PlayerFormBase 提取出接口
+- 重构诅咒之月逻辑
+- 重构本能系统(可选)
+- 修改催化剂和抑制剂逻辑(改到Item类里处理 金苹果成就改为使用数据包实现)
+
+- 将"form_giving_custom_entity"的Buff逻辑改为攻击后给予 比较符合知觉(不属于这个计划 等什么时候有空就整一下)
 
 大约需要的功能(未设计完 等我先设计几天再和 Onixary 讨论一下还需要什么功能)
 - `@NotNull PlayerFormBase PlayerFormBase._getNextForm(PlayerEntity player, Reason reason)` | `@NotNull PlayerFormBase PlayerFormBase._getPrevForm(PlayerEntity, Reason reason)` 由PlayerFormBase实现 一般不用改
@@ -19,6 +24,11 @@
 - Layer系统在完成移除Origins后需要保留 改为1个主Layer(Form) 多个副Layer 具体启用什么Layer由PlayerFormBase的函数决定(输出不可变) 可以实现一个形态带几个拼接能力包这种功能
 
 - getNextForm 和 getPrevForm 在数据包上使用Power处理 仅提供一个默认升降级配置项
+
+- 诅咒之月使用ServerTick事件挂载 取消客户端dayTime之类变量的存储(可以从World里拿) 同步逻辑改为玩家进入时同步一次 修改诅咒之月状态时一次 当处于诅咒之月时检查玩家诅咒之月变形flag 如果为false则触发变形 非诅咒之月时如果flag为true则触发还原 (旧版经过多次补丁 已经成屎山了 再补几个估计我也快没法补了)
+- 动画变量只保留"HasSlowFall"(因为由外部渲染调用) 其他可以用动画控制器代替
+- CustomForm改为DynamicForm(动态加载形态) 原先的CustomForm是给空位形态留的 现在支持数据包加载 可以移除CustomForm了
+- getCapeIdleLoc/getCapeBaseRotateAngle/NeedModifyXRotationAngle 这三在PlayerFormBase里不太好 改为外部Processor注册表
 
 ```java
 public interface Reason {
