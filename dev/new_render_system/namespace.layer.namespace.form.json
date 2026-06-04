@@ -8,6 +8,8 @@
   "slim_only": false,
   "wide_only": false,
   "use_multiply_mask": false,
+  "use_azurelib_anim": false,
+
   "model": "namespace:geo/form.geo.json",
   "model_slim": "namespace:geo/form.geo.json",
   "texture": "namespace:textures/form/form.png",
