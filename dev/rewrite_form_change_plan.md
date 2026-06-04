@@ -18,7 +18,7 @@
 - ~~_XXXX 函数先调用不带_的函数 如果返回null 处理FallBack 如果FallBack处理还是null 先用_XXXX内置处理 如果没有对应的内置处理 直接调用getDefaultXXXX函数~~
 - _getXXXX流程 先调用getXXXX函数 如果为null 则调用Reason里的getFallBackForm 如果还为null 自动调用getDefaultXXXX 再为null就返回this 并写一个Error日志
 - 移除Phase Enum 改为Int(类Index) 未开启使用-1 开启后使用0 形态_0使用1 以此类推 拥有一个IsFinalForm的Flag用于默认升降级(仅最终形态为True SP形态不为True)
-- 每个组的不同Level可以有多个形态 自动处理升降级时会随机选一个(如果要指定 可以覆写get\[Next/Prev\]Form)
+- 每个组的不同Level可以有多个形态 自动处理升降级时会随机选一个(如果要指定 可以覆写get\[Next/Prev\]Form) 需要加一个Function权重系统
 - 诅咒之月改成在触发时记录触发前形态F1和触发后形态F2 变形结束时如果当前形态和F2相同则变为F1
 - 维护一个LinkedList记录玩家的变形路线 当玩家使用命令/返回开始前/后的形态时清空 用于定向返回逻辑
 - Layer系统在完成移除Origins后需要保留 改为1个主Layer(Form) 多个副Layer 具体启用什么Layer由PlayerFormBase的函数决定(输出不可变) 可以实现一个形态带几个拼接能力包这种功能
@@ -29,7 +29,8 @@
 - 动画变量只保留"HasSlowFall"(因为由外部渲染调用) 其他可以用动画控制器代替
 - CustomForm改为DynamicForm(动态加载形态) 原先的CustomForm是给空位形态留的 现在支持数据包加载 可以移除CustomForm了
 - getCapeIdleLoc/getCapeBaseRotateAngle/NeedModifyXRotationAngle 这三在PlayerFormBase里不太好 改为外部注册表 HashMap<PlayerFormBase, CapeProcessor>
-- 新增2个Hook 用于实现一些特殊逻辑 比如给形态初始化一些数据
+- 新增3个Hook 用于实现一些特殊逻辑 比如给形态初始化一些数据
+- Flag系统 每个形态有`List<String>`的Flag列表 可以压缩部分变量到flag系统里
 
 ```java
 public interface Reason {
@@ -102,6 +103,11 @@ public class PlayerFormBase {
     
     public void onTransform_From(PlayerEntity player, PlayerFormBase prevForm) {
         
+    }
+
+
+    public void onTransformFinish(PlayerEntity player) {
+
     }
     
     public void onTransform_To(PlayerEntity player, PlayerFormBase nextForm) {
