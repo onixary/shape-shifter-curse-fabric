@@ -30,7 +30,8 @@
 - CustomForm改为DynamicForm(动态加载形态) 原先的CustomForm是给空位形态留的 现在支持数据包加载 可以移除CustomForm了
 - getCapeIdleLoc/getCapeBaseRotateAngle/NeedModifyXRotationAngle 这三在PlayerFormBase里不太好 改为外部注册表 HashMap<PlayerFormBase, CapeProcessor>
 - 新增3个Hook 用于实现一些特殊逻辑 比如给形态初始化一些数据
-- Flag系统 每个形态有`List<String>`的Flag列表 可以压缩部分变量到flag系统里
+- Flag系统 每个形态有`Set<String>`的Flag列表 可以压缩部分变量到flag系统里
+- Scale系统由Power改到Form处理 毕竟每个形态都得设置尺寸 不如放进形态类里省的漏
 
 ```java
 public interface Reason {
@@ -47,6 +48,8 @@ public interface Reason {
 ```
 
 ```java
+import java.util.Set;
+
 public class PlayerFormBase {
     // 最后一层了 必须是NotNull 否则直接throw 所以不推荐覆写
     public @NotNull PlayerFormBase _getNextForm(PlayerEntity player, Reason reason) {
@@ -100,17 +103,73 @@ public class PlayerFormBase {
         // 省略从Group里自动获取上一级形态
         return this;
     }
-    
-    public void onTransform_From(PlayerEntity player, PlayerFormBase prevForm) {
-        
-    }
 
+    public void onTransform_From(PlayerEntity player, PlayerFormBase prevForm) {
+    }
 
     public void onTransformFinish(PlayerEntity player) {
+    }
 
+    public void onTransform_To(PlayerEntity player, PlayerFormBase nextForm) {
+    }
+
+    // 不可变Set 优化一下性能 听AI说<100个时比HashSet快(话说Hash消耗这么高吗) 但应该没人用超过10个Flag吧
+    public Set<String> getFlags() {
+        return Set.of();
+    }
+
+    public PlayerFormBodyType getBodyType() {
+        return PlayerFormBodyType.NORMAL;
+    }
+
+    // Phase和Index合并在一起了
+    public int getPhase() {
+        return -1;
     }
     
-    public void onTransform_To(PlayerEntity player, PlayerFormBase nextForm) {
+    public Identifier getFormID() {
+        return FormID;
+    }
+    
+    public Text getFormName() {
+        return Text.translatable("codex.form." + FormID.getNamespace() + "." + FormID.getPath() + ".name");
+    }
+    
+    public Text getContentText(CodexData.ContentType type) {
+        return Text.translatable("codex.form." + FormID.getNamespace() + "." + FormID.getPath() + "." + type.toString().toLowerCase());
+    }
+
+    public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
+        return null;
+    }
+
+    public void registerPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) {
+        this.IsRegisteredPowerAnim = true;
+    }
+
+    public boolean isPowerAnimRegistered(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) {
+        return IsRegisteredPowerAnim;
+    }
+
+    public @NotNull Pair<Boolean, @Nullable AnimationHolder> getPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier powerAnimID) {
+        return new Pair<>(false, null);
+    }
+
+    public boolean getIsDynamicForm() {
+        return false;
+    }
+
+    public PlayerFormGroup getGroup() {
+        return Group;
+    }
+    
+    // 临时先用这套方案 等移除Origins完工了后再改 变动位置小 影响不大
+    public Pair<Identifier, Identifier> getFormLayer() {
+        
+    }
+    
+    // 取消power设置scale的操作 改为由form指定 填null为使用外部power ScaleData为record 记录scale的数据
+    public @Nullable ScaleData getScale() {
         
     }
 }
