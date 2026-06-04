@@ -18,9 +18,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class DefaultModelAnimationSystem implements IModelAnimationSystem {
     public final List<Pair<String, String>> extraPartsMap = new ArrayList<>();
@@ -36,12 +34,17 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
     public String RM_LeftLegGeoBoneID = "bipedLeftLeg";
     public String RM_RightLegGeoBoneID = "bipedRightLeg";
 
-    private float tailDragAmount = 0.0F;
-    private float tailDragAmountO;
-    private float currentTailDragAmount = 0.0F;
-    private float tailDragAmountVertical = 0.0F;
-    private float tailDragAmountVerticalO;
-    private float currentTailDragAmountVertical = 0.0F;
+    // 每个UUID只能用一个ModelAnimationSystem 改为全局变量比较省资源
+    private static final HashMap<UUID, tailData> tailDataMap = new HashMap<>();
+    private static class tailData {
+        private float tailDragAmount = 0.0F;
+        private float tailDragAmountO;
+        private float currentTailDragAmount = 0.0F;
+        private float tailDragAmountVertical = 0.0F;
+        private float tailDragAmountVerticalO;
+        private float currentTailDragAmountVertical = 0.0F;
+    }
+
 
     /*
     "extra_parts_map": {
@@ -122,13 +125,15 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
 
     @Override
     public void beforeRender(FormRenderer formRenderer, FormModel model, PlayerEntityRenderer renderer, PlayerEntity player, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        float targetDrag = MathHelper.lerp(tickDelta, tailDragAmountO, tailDragAmount);
-        currentTailDragAmount = MathHelper.lerp(0.04f, currentTailDragAmount, targetDrag);
+        tailData td = tailDataMap.computeIfAbsent(player.getUuid(), k -> new tailData());
+        float targetDrag = MathHelper.lerp(tickDelta, td.tailDragAmountO, td.tailDragAmount);
+        td.currentTailDragAmount = MathHelper.lerp(0.04f, td.currentTailDragAmount, targetDrag);
     }
 
 
     @Override
     public void processAnimation(FormRenderer formRenderer, FormModel model, PlayerEntityRenderer renderer, PlayerEntity player, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
+        tailData td = tailDataMap.computeIfAbsent(player.getUuid(), k -> new tailData());
         model.resetBone(RM_HeadGeoBoneID);
         model.resetBone(RM_BodyGeoBoneID);
         model.resetBone(RM_LeftArmGeoBoneID);
@@ -151,9 +156,9 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
         model.translatePositionForBone(RM_LeftLegGeoBoneID, new Vec3d(2, 12, 0));
         model.translatePositionForBone(RM_RightLegGeoBoneID, new Vec3d(-2, 12, 0));
         model.setRotationForBone(RM_BodyGeoBoneID, FormRenderUtils.getPartRotation(playerModel.body));
-        model.setRotationForTailBones(limbAngle, limbDistance, player.age, currentTailDragAmount, tailDragAmountVertical);
-        model.setRotationForHeadTailBones(headYaw, player.age, currentTailDragAmount, tailDragAmountVertical);
-        model.setRotationForWingBones(limbAngle, limbDistance, player.age, tailDragAmountVertical);
+        model.setRotationForTailBones(limbAngle, limbDistance, player.age, td.currentTailDragAmount, td.tailDragAmountVertical);
+        model.setRotationForHeadTailBones(headYaw, player.age, td.currentTailDragAmount, td.tailDragAmountVertical);
+        model.setRotationForWingBones(limbAngle, limbDistance, player.age, td.tailDragAmountVertical);
         model.invertRotForPart(RM_BodyGeoBoneID, false, true, false);
         model.setRotationForBone(RM_LeftArmGeoBoneID, FormRenderUtils.getPartRotation(playerModel.leftArm));
         model.setRotationForBone(RM_RightArmGeoBoneID, FormRenderUtils.getPartRotation(playerModel.rightArm));
@@ -168,18 +173,19 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
 
     @Override
     public void afterRender(FormRenderer formRenderer, FormModel model, PlayerEntityRenderer renderer, PlayerEntity player, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        tailDragAmountO = tailDragAmount;
-        tailDragAmount *= 0.75F;
-        tailDragAmount -= (float) (Math.toRadians((player.bodyYaw - player.prevBodyYaw)) * 0.55F);
-        tailDragAmount = MathHelper.clamp(tailDragAmount, -1.6F, 1.6F);
+        tailData td = tailDataMap.computeIfAbsent(player.getUuid(), k -> new tailData());
+        td.tailDragAmountO = td.tailDragAmount;
+        td.tailDragAmount *= 0.75F;
+        td.tailDragAmount -= (float) (Math.toRadians((player.bodyYaw - player.prevBodyYaw)) * 0.55F);
+        td.tailDragAmount = MathHelper.clamp(td.tailDragAmount, -1.6F, 1.6F);
         float verticalSpeed = (float) player.getVelocity().y;
         float targetVerticalDrag = MathHelper.clamp(verticalSpeed * 1.5f, -1.6f, 1.6f);
-        float targetDragVertical = MathHelper.lerp(tickDelta, tailDragAmountVerticalO, tailDragAmountVertical);
-        currentTailDragAmountVertical = MathHelper.lerp(0.04f, currentTailDragAmountVertical, targetDragVertical);
-        tailDragAmountVertical *= 0.8F;
-        tailDragAmountVertical += targetVerticalDrag * 0.15F;
-        tailDragAmountVertical = MathHelper.clamp(tailDragAmountVertical, -1.6f, 1.6f);
-        tailDragAmountVerticalO = tailDragAmountVertical;
+        float targetDragVertical = MathHelper.lerp(tickDelta, td.tailDragAmountVerticalO, td.tailDragAmountVertical);
+        td.currentTailDragAmountVertical = MathHelper.lerp(0.04f, td.currentTailDragAmountVertical, targetDragVertical);
+        td.tailDragAmountVertical *= 0.8F;
+        td.tailDragAmountVertical += targetVerticalDrag * 0.15F;
+        td.tailDragAmountVertical = MathHelper.clamp(td.tailDragAmountVertical, -1.6f, 1.6f);
+        td.tailDragAmountVerticalO = td.tailDragAmountVertical;
     }
 
     @Override
