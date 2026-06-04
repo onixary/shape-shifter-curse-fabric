@@ -28,7 +28,8 @@
 - 诅咒之月使用ServerTick事件挂载 取消客户端dayTime之类变量的存储(可以从World里拿) 同步逻辑改为玩家进入时同步一次 修改诅咒之月状态时一次 当处于诅咒之月时检查玩家诅咒之月变形flag 如果为false则触发变形 非诅咒之月时如果flag为true则触发还原 (旧版经过多次补丁 已经成屎山了 再补几个估计我也快没法补了)
 - 动画变量只保留"HasSlowFall"(因为由外部渲染调用) 其他可以用动画控制器代替
 - CustomForm改为DynamicForm(动态加载形态) 原先的CustomForm是给空位形态留的 现在支持数据包加载 可以移除CustomForm了
-- getCapeIdleLoc/getCapeBaseRotateAngle/NeedModifyXRotationAngle 这三在PlayerFormBase里不太好 改为外部Processor注册表
+- getCapeIdleLoc/getCapeBaseRotateAngle/NeedModifyXRotationAngle 这三在PlayerFormBase里不太好 改为外部注册表 HashMap<PlayerFormBase, CapeProcessor>
+- 新增2个Hook 用于实现一些特殊逻辑 比如给形态初始化一些数据
 
 ```java
 public interface Reason {
@@ -97,6 +98,14 @@ public class PlayerFormBase {
         // reason 用处不大 但或许可以做些特殊功能
         // 省略从Group里自动获取上一级形态
         return this;
+    }
+    
+    public void onTransform_From(PlayerEntity player, PlayerFormBase prevForm) {
+        
+    }
+    
+    public void onTransform_To(PlayerEntity player, PlayerFormBase nextForm) {
+        
     }
 }
 ```
