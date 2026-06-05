@@ -93,9 +93,12 @@ public interface IForm {
     }
 
     public default @NotNull IForm getDefaultPrevForm(PlayerEntity player, ITransformReason reason) {
-        // TODO 查找形态记录 如果没有再使用下面的逻辑
-        IFormGroup group = this.getFormGroup();
+        IForm prevForm = FormUtils.getPrevForm(player);
         int tier = this.getFormTier() - 1;
+        if (prevForm != null && prevForm.getFormTier() == tier) {
+            return prevForm;
+        }
+        IFormGroup group = this.getFormGroup();
         IForm result = null;
         if (group != null) {
             result = group.getRandomForm(tier, player.getRandom());
@@ -122,4 +125,9 @@ public interface IForm {
     // Scale 系统
     // 先这样写 等我之后翻一下 pehkui 的代码
     public void applyScale(PlayerEntity player);
+
+    // Interface 没法重载boolean equal(Object)函数
+    default boolean isEquals(IForm form) {
+        return form != null && this.getFormID().equals(form.getFormID());
+    }
 }
