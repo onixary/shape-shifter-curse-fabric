@@ -107,13 +107,19 @@ public interface IForm {
     }
 
     // 动画系统
-    public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID);
+    public default @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
+        return null;
+    }
 
-    public void registerPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData);
+    public default void registerPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) { }
 
-    public boolean isPowerAnimRegistered(PlayerEntity player, AnimSystem.AnimSystemData animSystemData);
+    public default boolean isPowerAnimRegistered(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) {
+        return true;
+    }
 
-    public @NotNull Pair<Boolean, @Nullable AnimationHolder> getPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier powerAnimID);
+    public default @NotNull Pair<Boolean, @Nullable AnimationHolder> getPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier powerAnimID) {
+        return new Pair<>(false, null);
+    }
 
     // 3个Hook 顺序为当前形态onTransform_To 目标形态onTransform_From 目标形态onTransform_Finish
     default void onTransform_From(PlayerEntity player, IForm prevForm) { }
