@@ -65,7 +65,9 @@ public class FormModel extends GeoModel<FormAnimatable> {
     public Identifier EmissiveTextureMaskResource_Slim = null;
 
     public Identifier FullBrightTextureResource = ShapeShifterCurseFabric.identifier("textures/missing.png");
+    public Identifier FullBrightTextureMaskResource = null;
     public Identifier FullBrightTextureResource_Slim = ShapeShifterCurseFabric.identifier("textures/missing.png");
+    public Identifier FullBrightTextureMaskResource_Slim = null;
 
     public Identifier Animation = ShapeShifterCurseFabric.identifier("animations/missing.animation.json");
 
@@ -77,6 +79,9 @@ public class FormModel extends GeoModel<FormAnimatable> {
 
     public HashMap<FormTextureUtils.ColorSetting, Identifier> ColorMask_Baked_EmissiveTexture = new HashMap<>();
     public HashMap<FormTextureUtils.ColorSetting, Identifier> ColorMask_Baked_EmissiveTexture_Slim = new HashMap<>();
+
+    public HashMap<FormTextureUtils.ColorSetting, Identifier> ColorMask_Baked_FullBrightTexture = new HashMap<>();
+    public HashMap<FormTextureUtils.ColorSetting, Identifier> ColorMask_Baked_FullBrightTexture_Slim = new HashMap<>();
 
     // Hidden Parts
     public boolean Hidden_Hat = false;
@@ -173,7 +178,17 @@ public class FormModel extends GeoModel<FormAnimatable> {
         }
 
         this.FullBrightTextureResource = Identifier.tryParse(JsonHelper.getString(this.modelJson, "fullbright_texture", MissingTextureString));
+        if (this.modelJson.has("fullbright_texture_mask")) {
+            this.FullBrightTextureMaskResource = Identifier.tryParse(JsonHelper.getString(this.modelJson, "fullbright_texture_mask", MissingTextureString));
+        } else {
+            this.FullBrightTextureMaskResource = null;
+        }
         this.FullBrightTextureResource_Slim = Identifier.tryParse(JsonHelper.getString(this.modelJson, "fullbright_texture_slim", MissingTextureString));
+        if (this.modelJson.has("fullbright_texture_mask_slim")) {
+            this.FullBrightTextureMaskResource_Slim = Identifier.tryParse(JsonHelper.getString(this.modelJson, "fullbright_texture_mask_slim", MissingTextureString));
+        } else {
+            this.FullBrightTextureMaskResource_Slim = null;
+        }
 
         this.UseAzureAnim = JsonHelper.getBoolean(this.modelJson, "use_azurelib_anim", false);
         this.Animation = Identifier.tryParse(JsonHelper.getString(this.modelJson, "animations", MissingAnimationString));
@@ -362,6 +377,32 @@ public class FormModel extends GeoModel<FormAnimatable> {
             FormTextureUtils.ColorSetting colorSetting = FormTextureUtils.getPlayerColorSetting(this.entity);
             if (colorSetting != null) {
                 HashMap<FormTextureUtils.ColorSetting, Identifier> Cache = uslim ? ColorMask_Baked_EmissiveTexture_Slim : ColorMask_Baked_EmissiveTexture;
+                return readCacheOrBake(Cache, Resource, ResourceMask, colorSetting);
+            }
+        }
+        return Resource;
+    }
+
+    public Identifier getFullBrightTextureResource(boolean slim) {
+        boolean uslim = useSlim(slim);
+        Identifier Resource = uslim ? this.FullBrightTextureResource_Slim : this.FullBrightTextureResource;
+        Identifier ResourceMask = uslim ? this.FullBrightTextureMaskResource_Slim : this.FullBrightTextureMaskResource;
+        if (this.entity != null) {
+            FormSkinSystem.FormSkin formSkin = FormSkinSystem.getFormSkin(this.entity.getUuid(), this.Form);
+            if (formSkin != null) {
+                Identifier SkinResource = formSkin.getSkinEmissiveTexture(uslim);
+                if (SkinResource != null) {
+                    return SkinResource;
+                }
+            }
+        }
+        if (ResourceMask != null) {
+            if (FormTextureUtils.useTempFormTexture && Objects.equals(this.entity, MinecraftClient.getInstance().player)) {
+                return FormTextureUtils.tempFormTextureProcessor.getTexture(this.modelID, uslim ? "fullbright_texture_slim" : "fullbright_texture", Resource, ResourceMask, UseMultiplyMask);
+            }
+            FormTextureUtils.ColorSetting colorSetting = FormTextureUtils.getPlayerColorSetting(this.entity);
+            if (colorSetting != null) {
+                HashMap<FormTextureUtils.ColorSetting, Identifier> Cache = uslim ? ColorMask_Baked_FullBrightTexture_Slim : ColorMask_Baked_FullBrightTexture;
                 return readCacheOrBake(Cache, Resource, ResourceMask, colorSetting);
             }
         }
@@ -582,7 +623,7 @@ public class FormModel extends GeoModel<FormAnimatable> {
 
     public Identifier getFullbrightTextureResource(FormAnimatable animatable) {
         PlayerEntity player = animatable.e;
-        return useSlim(SlimMap.getOrDefault(player, false)) ? this.FullBrightTextureResource_Slim : this.FullBrightTextureResource;
+        return getFullBrightTextureResource(SlimMap.getOrDefault(player, false));
 
     }
 
