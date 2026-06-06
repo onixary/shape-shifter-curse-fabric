@@ -119,6 +119,8 @@ public class FormModel extends GeoModel<FormAnimatable> {
         this.ColorMask_Baked_OverlayTexture_Slim.clear();
         this.ColorMask_Baked_EmissiveTexture.clear();
         this.ColorMask_Baked_EmissiveTexture_Slim.clear();
+        this.ColorMask_Baked_FullBrightTexture.clear();
+        this.ColorMask_Baked_FullBrightTexture_Slim.clear();
 
         this.Name = JsonHelper.getString(this.modelJson, "name", "");
         if (this.modelJson.has("layer")) {
