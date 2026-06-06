@@ -390,7 +390,7 @@ public class FormModel extends GeoModel<FormAnimatable> {
         if (this.entity != null) {
             FormSkinSystem.FormSkin formSkin = FormSkinSystem.getFormSkin(this.entity.getUuid(), this.Form);
             if (formSkin != null) {
-                Identifier SkinResource = formSkin.getSkinEmissiveTexture(uslim);
+                Identifier SkinResource = formSkin.getSkinFullBrightTexture(uslim);
                 if (SkinResource != null) {
                     return SkinResource;
                 }
