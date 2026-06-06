@@ -13,12 +13,12 @@
 - `@NotNull PlayerFormBase PlayerFormBase._getNextForm(PlayerEntity player, Reason reason)` | `@NotNull PlayerFormBase PlayerFormBase._getPrevForm(PlayerEntity, Reason reason)` 由PlayerFormBase实现 一般不用改
 - `@Nullable PlayerFormBase PlayerFormBase.getNextForm(PlayerEntity player, Reason reason)` | `@Nullable PlayerFormBase PlayerFormBase.getPrevForm(PlayerEntity, Reason reason)`
 - `@NotNull PlayerFormBase PlayerFormBase.getDefaultNextForm(PlayerEntity player)` | `@NotNull PlayerFormBase PlayerFormBase.getDefaultPrevForm(PlayerEntity)`
-- Reason有ReasonType(Identifier) SSC自带(NameSpace在此文档中用SSC简写 否则太长了) `SSC:Default` `SSC:Instinct` `SSC:CurseMoon` `SSC:Inhibitor(Reason带ItemStack)` `SSC:Force(Reason带PlayerFormBase)`
+- Reason有ReasonType(Identifier) SSC自带(NameSpace在此文档中用SSC简写 否则太长了) `SSC:instinct` `SSC:cursed_moon` `SSC:item(Reason带ItemStack)` `SSC:force(Reason带PlayerFormBase)`
 - ~~Reason有FallBack机制 当getNextForm/getPrevForm返回null时使用 类型为@Nullable Reason 如果为null 自动调用DefaultXXXX函数或由_XXXX函数内部处理 拥有boolean OverrideReason变量 如果为True 则在失败时覆写Reason~~
 - ~~_XXXX 函数先调用不带_的函数 如果返回null 处理FallBack 如果FallBack处理还是null 先用_XXXX内置处理 如果没有对应的内置处理 直接调用getDefaultXXXX函数~~
 - _getXXXX流程 先调用getXXXX函数 如果为null 则调用Reason里的getFallBackForm 如果还为null 自动调用getDefaultXXXX 再为null就返回this 并写一个Error日志
 - 移除Phase Enum 改为Int(类Index) 未开启使用-1 开启后使用0 形态_0使用1 以此类推 拥有一个IsFinalForm的Flag用于默认升降级(仅最终形态为True SP形态不为True)
-- 每个组的不同Level可以有多个形态 自动处理升降级时会随机选一个(如果要指定 可以覆写get\[Next/Prev\]Form)
+- 每个组的不同Level可以有多个形态 自动处理升降级时会随机选一个(如果要指定 可以覆写get\[Next/Prev\]Form) 需要加一个Function权重系统
 - 诅咒之月改成在触发时记录触发前形态F1和触发后形态F2 变形结束时如果当前形态和F2相同则变为F1
 - 维护一个LinkedList记录玩家的变形路线 当玩家使用命令/返回开始前/后的形态时清空 用于定向返回逻辑
 - Layer系统在完成移除Origins后需要保留 改为1个主Layer(Form) 多个副Layer 具体启用什么Layer由PlayerFormBase的函数决定(输出不可变) 可以实现一个形态带几个拼接能力包这种功能
@@ -29,7 +29,9 @@
 - 动画变量只保留"HasSlowFall"(因为由外部渲染调用) 其他可以用动画控制器代替
 - CustomForm改为DynamicForm(动态加载形态) 原先的CustomForm是给空位形态留的 现在支持数据包加载 可以移除CustomForm了
 - getCapeIdleLoc/getCapeBaseRotateAngle/NeedModifyXRotationAngle 这三在PlayerFormBase里不太好 改为外部注册表 HashMap<PlayerFormBase, CapeProcessor>
-- 新增2个Hook 用于实现一些特殊逻辑 比如给形态初始化一些数据
+- 新增3个Hook 用于实现一些特殊逻辑 比如给形态初始化一些数据
+- Flag系统 每个形态有`Set<String>`的Flag列表 可以压缩部分变量到flag系统里
+- Scale系统由Power改到Form处理 毕竟每个形态都得设置尺寸 不如放进形态类里省的漏
 
 ```java
 public interface Reason {
@@ -46,6 +48,8 @@ public interface Reason {
 ```
 
 ```java
+import java.util.Set;
+
 public class PlayerFormBase {
     // 最后一层了 必须是NotNull 否则直接throw 所以不推荐覆写
     public @NotNull PlayerFormBase _getNextForm(PlayerEntity player, Reason reason) {
@@ -99,12 +103,73 @@ public class PlayerFormBase {
         // 省略从Group里自动获取上一级形态
         return this;
     }
-    
+
     public void onTransform_From(PlayerEntity player, PlayerFormBase prevForm) {
+    }
+
+    public void onTransformFinish(PlayerEntity player) {
+    }
+
+    public void onTransform_To(PlayerEntity player, PlayerFormBase nextForm) {
+    }
+
+    // 不可变Set 优化一下性能 听AI说<100个时比HashSet快(话说Hash消耗这么高吗) 但应该没人用超过10个Flag吧
+    public Set<String> getFlags() {
+        return Set.of();
+    }
+
+    public PlayerFormBodyType getBodyType() {
+        return PlayerFormBodyType.NORMAL;
+    }
+
+    // Phase和Index合并在一起了
+    public int getPhase() {
+        return -1;
+    }
+    
+    public Identifier getFormID() {
+        return FormID;
+    }
+    
+    public Text getFormName() {
+        return Text.translatable("codex.form." + FormID.getNamespace() + "." + FormID.getPath() + ".name");
+    }
+    
+    public Text getContentText(CodexData.ContentType type) {
+        return Text.translatable("codex.form." + FormID.getNamespace() + "." + FormID.getPath() + "." + type.toString().toLowerCase());
+    }
+
+    public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
+        return null;
+    }
+
+    public void registerPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) {
+        this.IsRegisteredPowerAnim = true;
+    }
+
+    public boolean isPowerAnimRegistered(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) {
+        return IsRegisteredPowerAnim;
+    }
+
+    public @NotNull Pair<Boolean, @Nullable AnimationHolder> getPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier powerAnimID) {
+        return new Pair<>(false, null);
+    }
+
+    public boolean getIsDynamicForm() {
+        return false;
+    }
+
+    public PlayerFormGroup getGroup() {
+        return Group;
+    }
+    
+    // 临时先用这套方案 等移除Origins完工了后再改 变动位置小 影响不大
+    public Pair<Identifier, Identifier> getFormLayer() {
         
     }
     
-    public void onTransform_To(PlayerEntity player, PlayerFormBase nextForm) {
+    // 取消power设置scale的操作 改为由form指定 填null为使用外部power ScaleData为record 记录scale的数据
+    public @Nullable ScaleData getScale() {
         
     }
 }

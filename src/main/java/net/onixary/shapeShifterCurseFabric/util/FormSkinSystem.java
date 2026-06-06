@@ -40,6 +40,10 @@ public class FormSkinSystem {
         private @Nullable Identifier skinEmissiveTexture = null;
         private boolean isSkinEmissiveTextureSlimDynamic = false;
         private @Nullable Identifier skinEmissiveTextureSlim = null;
+        private boolean isSkinFullBrightTextureDynamic = false;
+        private @Nullable Identifier skinFullBrightTexture = null;
+        private boolean isSkinFullBrightTextureSlimDynamic = false;
+        private @Nullable Identifier skinFullBrightTextureSlim = null;
 
         public FormSkin(boolean enableSkinModels, boolean enableSkinTextures) {
             this.enableSkinModels = enableSkinModels;
@@ -57,14 +61,18 @@ public class FormSkinSystem {
                     Identifier id = this.skinTextureSlim;
                     this.skinTextureSlim = null;
                     this.isSkinTextureSlimDynamic = false;
-                    textureManager.destroyTexture(id);
+                    if (id != null) {
+                        textureManager.destroyTexture(id);
+                    }
                 }
             } else {
                 if (this.isSkinTextureDynamic) {
                     Identifier id = this.skinTexture;
                     this.skinTexture = null;
                     this.isSkinTextureDynamic = false;
-                    textureManager.destroyTexture(id);
+                    if (id != null) {
+                        textureManager.destroyTexture(id);
+                    }
                 }
             }
         }
@@ -76,14 +84,18 @@ public class FormSkinSystem {
                     Identifier id = this.skinOverlayTextureSlim;
                     this.skinOverlayTextureSlim = null;
                     this.isSkinOverlayTextureSlimDynamic = false;
-                    textureManager.destroyTexture(id);
+                    if (id != null) {
+                        textureManager.destroyTexture(id);
+                    }
                 }
             } else {
                 if (this.isSkinOverlayTextureDynamic) {
                     Identifier id = this.skinOverlayTexture;
                     this.skinOverlayTexture = null;
                     this.isSkinOverlayTextureDynamic = false;
-                    textureManager.destroyTexture(id);
+                    if (id != null) {
+                        textureManager.destroyTexture(id);
+                    }
                 }
             }
         }
@@ -95,14 +107,41 @@ public class FormSkinSystem {
                     Identifier id = this.skinEmissiveTextureSlim;
                     this.skinEmissiveTextureSlim = null;
                     this.isSkinEmissiveTextureSlimDynamic = false;
-                    textureManager.destroyTexture(id);
+                    if (id != null) {
+                        textureManager.destroyTexture(id);
+                    }
                 }
             } else {
                 if (this.isSkinEmissiveTextureDynamic) {
                     Identifier id = this.skinEmissiveTexture;
                     this.skinEmissiveTexture = null;
                     this.isSkinEmissiveTextureDynamic = false;
-                    textureManager.destroyTexture(id);
+                    if (id != null) {
+                        textureManager.destroyTexture(id);
+                    }
+                }
+            }
+        }
+
+        private void CleanSkinFullBrightTexture(boolean slim) {
+            TextureManager textureManager = MinecraftClient.getInstance().getTextureManager();
+            if (slim) {
+                if (this.isSkinFullBrightTextureSlimDynamic) {
+                    Identifier id = this.skinFullBrightTextureSlim;
+                    this.skinFullBrightTextureSlim = null;
+                    this.isSkinFullBrightTextureSlimDynamic = false;
+                    if (id != null) {
+                        textureManager.destroyTexture(id);
+                    }
+                }
+            } else {
+                if (this.isSkinFullBrightTextureDynamic) {
+                    Identifier id = this.skinFullBrightTexture;
+                    this.skinFullBrightTexture = null;
+                    this.isSkinFullBrightTextureDynamic = false;
+                    if (id != null) {
+                        textureManager.destroyTexture(id);
+                    }
                 }
             }
         }
@@ -116,6 +155,8 @@ public class FormSkinSystem {
             this.CleanSkinOverlayTexture(false);
             this.CleanSkinEmissiveTexture(true);
             this.CleanSkinEmissiveTexture(false);
+            this.CleanSkinFullBrightTexture(true);
+            this.CleanSkinFullBrightTexture(false);
         }
 
         public Identifier getNextID() {
@@ -208,6 +249,31 @@ public class FormSkinSystem {
                 return this.skinEmissiveTextureSlim;
             }
             return this.skinEmissiveTexture;
+        }
+
+        public Identifier setSkinFullBrightTexture(NativeImage image, boolean slim) {
+            this.CleanSkinFullBrightTexture(slim);
+            if (image != null) {
+                NativeImageBackedTexture texture = new NativeImageBackedTexture(image);
+                Identifier id = this.getNextID();
+                MinecraftClient.getInstance().getTextureManager().registerTexture(id, texture);
+                if (slim) {
+                    this.isSkinFullBrightTextureSlimDynamic = true;
+                    this.skinFullBrightTextureSlim = id;
+                } else {
+                    this.isSkinFullBrightTextureDynamic = true;
+                    this.skinFullBrightTexture = id;
+                }
+                return id;
+            }
+            return null;
+        }
+
+        public Identifier getSkinFullBrightTexture(boolean slim) {
+            if (slim) {
+                return this.skinFullBrightTextureSlim;
+            }
+            return this.skinFullBrightTexture;
         }
     }
 

@@ -8,6 +8,8 @@
   "slim_only": false,
   "wide_only": false,
   "use_multiply_mask": false,
+  "use_azurelib_anim": false,
+
   "model": "namespace:geo/form.geo.json",
   "model_slim": "namespace:geo/form.geo.json",
   "texture": "namespace:textures/form/form.png",
@@ -24,6 +26,8 @@
   "emissive_overlay_mask_slim": "namespace:textures/form/form_emissive_overlay_colormask.png",
   "fullbright_texture": "namespace:textures/form/form_fullbright.png",
   "fullbright_texture_slim": "namespace:textures/form/form_fullbright.png",
+  "fullbright_texture_mask": "namespace:textures/form/form_fullbright_colormask.png",
+  "fullbright_texture_mask_slim": "namespace:textures/form/form_fullbright_colormask.png",
   "animations": "shape-shifter-curse:animations/missing.animation.json",
   "hidden": [
     "leftArm",
