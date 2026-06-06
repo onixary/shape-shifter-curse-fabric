@@ -30,7 +30,7 @@ public interface IForm {
     public void setFormGroup(IFormGroup group, int formTier);
 
     // 临时能力系统 等Origins移除后再写
-    public @Nullable Pair<Identifier, Identifier> getFormLayer();
+    public @NotNull Pair<Identifier, Identifier> getFormLayer();
 
 
     public @NotNull PlayerFormBodyType getBodyType();

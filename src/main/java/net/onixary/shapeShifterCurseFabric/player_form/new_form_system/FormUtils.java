@@ -1,7 +1,20 @@
 package net.onixary.shapeShifterCurseFabric.player_form.new_form_system;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.integration.origins.component.OriginComponent;
+import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
+import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayer;
+import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayers;
+import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginRegistry;
+import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.util.TrinketUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -77,7 +90,31 @@ public class FormUtils {
     }
 
     public static void _loadForm(PlayerEntity player, IForm form) {
-        // 未完工
+        OriginComponent component = ModComponents.ORIGIN.get(player);
+        Pair<Identifier, Identifier> layerPair = form.getFormLayer();
+        OriginLayer layer = OriginLayers.getLayer(layerPair.getLeft());
+        if (layer != null && layerPair.getRight() != null) {
+            Origin origin = OriginRegistry.get(layerPair.getRight());
+            if(layer.contains(origin, player)){
+                component.setOrigin(layer, origin);
+                component.sync();
+            }
+        }
+        // applyExtraPower
+        // checkAndClearTransformativeEffect
+
+        // component.setCurrentForm(newForm);
+        // RegPlayerFormComponent.PLAYER_FORM.sync(player);
+
+        AnimUtils.stopPowerAnim(player, AnimUtils.AnimationSendSideType.ONLY_SERVER);
+        TrinketUtils.ReApplyAccessoryPowerOnPlayerFormChange(player);
+        if (!player.getWorld().isClient() && player instanceof ServerPlayerEntity serverPlayer) {
+            try {
+                // ModPacketsS2CServer.sendFormChange(serverPlayer, form.getFormID());
+            } catch (Exception e) {
+                ShapeShifterCurseFabric.LOGGER.error("Failed to send form change notification: ", e);
+            }
+        }
     }
 
     public static void _setForm(PlayerEntity player, IForm form) {

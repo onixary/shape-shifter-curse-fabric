@@ -71,7 +71,7 @@ public class NormalForm implements IForm {
     }
 
     @Override
-    public @Nullable Pair<Identifier, Identifier> getFormLayer() {
+    public @NotNull Pair<Identifier, Identifier> getFormLayer() {
         return new Pair<>(Identifier.of("origins", "origin"), Identifier.of(this.FORM_ID.getNamespace(), "form_" + this.FORM_ID.getPath()));
     }
 
