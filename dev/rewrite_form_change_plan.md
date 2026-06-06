@@ -13,7 +13,7 @@
 - `@NotNull PlayerFormBase PlayerFormBase._getNextForm(PlayerEntity player, Reason reason)` | `@NotNull PlayerFormBase PlayerFormBase._getPrevForm(PlayerEntity, Reason reason)` 由PlayerFormBase实现 一般不用改
 - `@Nullable PlayerFormBase PlayerFormBase.getNextForm(PlayerEntity player, Reason reason)` | `@Nullable PlayerFormBase PlayerFormBase.getPrevForm(PlayerEntity, Reason reason)`
 - `@NotNull PlayerFormBase PlayerFormBase.getDefaultNextForm(PlayerEntity player)` | `@NotNull PlayerFormBase PlayerFormBase.getDefaultPrevForm(PlayerEntity)`
-- Reason有ReasonType(Identifier) SSC自带(NameSpace在此文档中用SSC简写 否则太长了) `SSC:Default` `SSC:Instinct` `SSC:CurseMoon` `SSC:Inhibitor(Reason带ItemStack)` `SSC:Force(Reason带PlayerFormBase)`
+- Reason有ReasonType(Identifier) SSC自带(NameSpace在此文档中用SSC简写 否则太长了) `SSC:instinct` `SSC:cursed_moon` `SSC:item(Reason带ItemStack)` `SSC:force(Reason带PlayerFormBase)`
 - ~~Reason有FallBack机制 当getNextForm/getPrevForm返回null时使用 类型为@Nullable Reason 如果为null 自动调用DefaultXXXX函数或由_XXXX函数内部处理 拥有boolean OverrideReason变量 如果为True 则在失败时覆写Reason~~
 - ~~_XXXX 函数先调用不带_的函数 如果返回null 处理FallBack 如果FallBack处理还是null 先用_XXXX内置处理 如果没有对应的内置处理 直接调用getDefaultXXXX函数~~
 - _getXXXX流程 先调用getXXXX函数 如果为null 则调用Reason里的getFallBackForm 如果还为null 自动调用getDefaultXXXX 再为null就返回this 并写一个Error日志

@@ -87,7 +87,7 @@ public interface IForm {
         int tier = this.getFormTier() + 1;
         IForm result = null;
         if (group != null) {
-            result = group.getRandomForm(tier, player.getRandom());
+            result = group.getRandomForm(tier, player.getRandom(), null);
         }
         return result == null ? this : result;
     }
@@ -101,7 +101,7 @@ public interface IForm {
         IFormGroup group = this.getFormGroup();
         IForm result = null;
         if (group != null) {
-            result = group.getRandomForm(tier, player.getRandom());
+            result = group.getRandomForm(tier, player.getRandom(), null);
         }
         return result == null ? this : result;
     }
