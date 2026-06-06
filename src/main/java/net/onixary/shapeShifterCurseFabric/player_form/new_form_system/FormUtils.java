@@ -159,6 +159,17 @@ public class FormUtils {
         savePlayerFormHistory(player);
     }
 
+    public static void updateFormHistory(PlayerEntity player, IForm formA, IForm formB) {
+        // 如果History为[C, B, A] formA == A formB == B History -> [C, B] 否则向后增加 formB
+        List<IForm> formHistory = getPlayerFormHistory(player);
+        if (formHistory.size() > 1 && isFormEqual(formHistory.get(formHistory.size() - 1), formA) && isFormEqual(formHistory.get(formHistory.size() - 2), formB)) {
+            formHistory.remove(formHistory.size() - 1);
+        } else {
+            formHistory.add(formB);
+        }
+        savePlayerFormHistory(player);
+    }
+
     public static @NotNull IForm getFormNextLevel(PlayerEntity player, ITransformReason reason) {
         IForm form = getPlayerForm(player);
         return form._getNextForm(player, reason);
