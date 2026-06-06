@@ -11,9 +11,7 @@ import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLaye
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayers;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginRegistry;
 import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents;
-import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.util.TrinketUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -53,19 +51,26 @@ public class FormUtils {
         return Set.copyOf(flagSet);
     }
 
-    public static @NotNull IForm getPlayerForm(PlayerEntity player) {
-        // 未完工
+    public static @Nullable IForm getForm(@NotNull Identifier formID) {
         return null;
+    }
+
+    public static @NotNull IForm parseForm(@Nullable Identifier formID, IForm defaultForm) {
+        if (formID == null) return defaultForm;
+        IForm form = getForm(formID);
+        return form != null ? form : defaultForm;
+    }
+
+    public static @NotNull IForm getPlayerForm(PlayerEntity player) {
+        return PlayerFormComponent.COMPONENT.get(player).nowForm;
     }
 
     public static @NotNull List<IForm> getPlayerFormHistory(PlayerEntity player) {
-        // 未完工
-        return null;
+        return PlayerFormComponent.COMPONENT.get(player).formHistory;
     }
 
     public static void savePlayerFormHistory(PlayerEntity player) {
-        // 未完工
-        return;
+        PlayerFormComponent.COMPONENT.sync(player);
     }
 
     public static boolean isFormEqual(@Nullable IForm form1, @Nullable IForm form2) {
@@ -90,6 +95,7 @@ public class FormUtils {
     }
 
     public static void _loadForm(PlayerEntity player, IForm form) {
+        // 临时 等移除Origins后再重新这部分
         OriginComponent component = ModComponents.ORIGIN.get(player);
         Pair<Identifier, Identifier> layerPair = form.getFormLayer();
         OriginLayer layer = OriginLayers.getLayer(layerPair.getLeft());
@@ -100,16 +106,19 @@ public class FormUtils {
                 component.sync();
             }
         }
+
         // applyExtraPower
         // checkAndClearTransformativeEffect
 
-        // component.setCurrentForm(newForm);
-        // RegPlayerFormComponent.PLAYER_FORM.sync(player);
+        PlayerFormComponent playerFormComponent = PlayerFormComponent.COMPONENT.get(player);
+        playerFormComponent.nowForm = form;
+        playerFormComponent.sync();
 
         AnimUtils.stopPowerAnim(player, AnimUtils.AnimationSendSideType.ONLY_SERVER);
         TrinketUtils.ReApplyAccessoryPowerOnPlayerFormChange(player);
         if (!player.getWorld().isClient() && player instanceof ServerPlayerEntity serverPlayer) {
             try {
+                // 改成Identifier
                 // ModPacketsS2CServer.sendFormChange(serverPlayer, form.getFormID());
             } catch (Exception e) {
                 ShapeShifterCurseFabric.LOGGER.error("Failed to send form change notification: ", e);
@@ -133,25 +142,30 @@ public class FormUtils {
         savePlayerFormHistory(player);
     }
 
-    public static void setFormNextLevel(PlayerEntity player, ITransformReason reason) {
-        IForm form = getPlayerForm(player);
-        IForm nextForm = form._getNextForm(player, reason);
-        _setForm(player, nextForm);
-        getPlayerFormHistory(player).add(nextForm);
+    public static void pushFormHistory(PlayerEntity player, IForm form) {
+        List<IForm> formHistory = getPlayerFormHistory(player);
+        formHistory.add(form);
         savePlayerFormHistory(player);
     }
 
-    public static void setFormPrevLevel(PlayerEntity player, ITransformReason reason) {
-        IForm form = getPlayerForm(player);
-        IForm prevForm = form._getPrevForm(player, reason);
-        _setForm(player, prevForm);
+    public static void checkAndPullFormHistory(PlayerEntity player, IForm lastForm, IForm prevForm) {
         List<IForm> formHistory = getPlayerFormHistory(player);
-        if (formHistory.size() > 1 && isFormEqual(formHistory.get(formHistory.size() - 1), form) && isFormEqual(formHistory.get(formHistory.size() - 2), prevForm)) {
+        if (formHistory.size() > 1 && isFormEqual(formHistory.get(formHistory.size() - 1), lastForm) && isFormEqual(formHistory.get(formHistory.size() - 2), prevForm)) {
             formHistory.remove(formHistory.size() - 1);
         } else {
             formHistory.clear();
-            ShapeShifterCurseFabric.LOGGER.warn("Player " + player.getName().getString() + " prev form data error. clear prev form data.");
+            ShapeShifterCurseFabric.LOGGER.warn("Player " + player.getName().getString() + " form history data error. clear form history data.");
         }
         savePlayerFormHistory(player);
+    }
+
+    public static @NotNull IForm getFormNextLevel(PlayerEntity player, ITransformReason reason) {
+        IForm form = getPlayerForm(player);
+        return form._getNextForm(player, reason);
+    }
+
+    public static @NotNull IForm getFormPrevLevel(PlayerEntity player, ITransformReason reason) {
+        IForm form = getPlayerForm(player);
+        return form._getPrevForm(player, reason);
     }
 }
