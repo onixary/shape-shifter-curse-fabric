@@ -7,17 +7,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandOutput;
 import net.minecraft.util.Nameable;
 import net.minecraft.world.World;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.Comparator;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityPoseMixin extends LivingEntity implements Nameable, CommandOutput {

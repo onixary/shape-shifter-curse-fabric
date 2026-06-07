@@ -10,7 +10,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
+import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 
 import java.io.*;

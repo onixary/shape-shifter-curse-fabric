@@ -11,12 +11,10 @@ import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
+import net.onixary.shapeShifterCurseFabric.player_form.old.transform.TransformManager;
 
 import java.util.Arrays;
 import java.util.Optional;
-
-import static net.onixary.shapeShifterCurseFabric.data.StaticParams.CURSED_MOON_PROBABILITY_MAX;
 
 
 // Logic from Magic Moon mod

@@ -8,13 +8,11 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.LlamaEntity;
 import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -25,17 +23,11 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.TWolfFriendlyPower;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ITMob;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.TStatusApplier;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Optional;
-
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_ANUBIS_WOLF_0_EFFECT;
-import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_OCELOT_0_EFFECT;
 
 public class TransformativeWolfEntity extends WolfEntity implements ITMob {
     public TransformativeWolfEntity(EntityType<? extends WolfEntity> entityType, World world) {

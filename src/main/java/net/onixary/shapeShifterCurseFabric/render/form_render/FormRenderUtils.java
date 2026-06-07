@@ -14,8 +14,8 @@ import net.onixary.shapeShifterCurseFabric.integration.origins.component.PlayerO
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayer;
 import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
+import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.jetbrains.annotations.Nullable;

@@ -2,8 +2,8 @@ package net.onixary.shapeShifterCurseFabric.status_effects.transformative_effect
 
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
+import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.old.transform.TransformManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 
 public class TransformativeStatus extends BaseTransformativeStatusEffect {

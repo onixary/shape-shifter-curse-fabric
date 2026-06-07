@@ -18,15 +18,12 @@ import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.entity.projectile.WebBullet;
-import net.onixary.shapeShifterCurseFabric.mana.ManaComponent;
-import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 import net.onixary.shapeShifterCurseFabric.mana.RegManaComponent;
 import net.onixary.shapeShifterCurseFabric.minion.RegPlayerMinionComponent;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
+import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
@@ -40,8 +37,8 @@ import java.util.Objects;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
-import static net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager.handleDirectTransform;
-import static net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager.setFormDirectly;
+import static net.onixary.shapeShifterCurseFabric.player_form.old.transform.TransformManager.handleDirectTransform;
+import static net.onixary.shapeShifterCurseFabric.player_form.old.transform.TransformManager.setFormDirectly;
 
 public class ShapeShifterCurseCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher){

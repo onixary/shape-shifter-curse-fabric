@@ -4,7 +4,7 @@ import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.additional_power.PillagerFriendlyPower;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 
 // 为了避免与Team功能冲突已弃用，替换为其他逻辑

@@ -8,8 +8,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
+import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 
 import java.util.ArrayList;

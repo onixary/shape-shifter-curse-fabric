@@ -26,7 +26,7 @@ import net.onixary.shapeShifterCurseFabric.custom_ui.NormalFormSelectScreen;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
 import net.onixary.shapeShifterCurseFabric.custom_ui.PatronFormSelectScreen;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
+import net.onixary.shapeShifterCurseFabric.player_form.old.transform.TransformManager;
 import net.onixary.shapeShifterCurseFabric.util.FormColorData;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.Interface.IJumpController;

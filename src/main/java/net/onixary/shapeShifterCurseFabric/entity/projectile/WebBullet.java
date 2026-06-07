@@ -1,22 +1,14 @@
 package net.onixary.shapeShifterCurseFabric.entity.projectile;
 
-import dev.emi.trinkets.api.TrinketComponent;
-import dev.emi.trinkets.api.TrinketInventory;
-import dev.emi.trinkets.api.TrinketsApi;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageSources;
-import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
@@ -26,17 +18,11 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.TrinketsConditionAction;
 import net.onixary.shapeShifterCurseFabric.additional_power.WebBridgeAction;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.status_effects.EntangledEffectUtils;
-
-import java.util.Map;
-import java.util.Optional;
 
 import static net.onixary.shapeShifterCurseFabric.entity.RegCustomEntity.WEB_BULLET;
 

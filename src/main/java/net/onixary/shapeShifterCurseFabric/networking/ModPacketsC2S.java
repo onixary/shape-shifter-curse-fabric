@@ -16,13 +16,13 @@ import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnSprintingToS
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
+import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
+import net.onixary.shapeShifterCurseFabric.player_form.old.transform.TransformManager;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.jetbrains.annotations.Nullable;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;

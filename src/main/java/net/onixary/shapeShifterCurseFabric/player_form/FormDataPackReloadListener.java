@@ -8,6 +8,7 @@ import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
+import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormDynamic;
 
 import java.io.IOException;
 import java.util.LinkedList;

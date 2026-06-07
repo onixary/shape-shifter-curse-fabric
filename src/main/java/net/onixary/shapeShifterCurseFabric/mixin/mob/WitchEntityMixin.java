@@ -12,7 +12,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.additional_power.WitchFriendlyPower;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.spongepowered.asm.mixin.Mixin;

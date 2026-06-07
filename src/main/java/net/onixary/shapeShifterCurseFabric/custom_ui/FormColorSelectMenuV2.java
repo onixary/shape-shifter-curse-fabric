@@ -25,7 +25,7 @@ import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.ButtonWidgetOKey;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.FCS_ButtonWidget;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.SimpleIntSliderWidget;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
