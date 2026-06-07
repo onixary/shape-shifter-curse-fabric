@@ -107,4 +107,13 @@ public class NormalForm implements IForm {
         this.applyScaleFunc = func;
         return this;
     }
+
+    // 所有形态必须重载 equals 函数 由于IForm是接口 没法重载Object的函数
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof IForm iForm) {
+            return this.isEquals(iForm);
+        }
+        return false;
+    }
 }

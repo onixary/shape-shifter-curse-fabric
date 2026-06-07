@@ -10,6 +10,7 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,10 +21,11 @@ import java.util.List;
 public class PlayerFormComponent implements AutoSyncedComponent {
     public static final ComponentKey<PlayerFormComponent> COMPONENT = ComponentRegistry.getOrCreate(ShapeShifterCurseFabric.identifier("player_form"), PlayerFormComponent.class);
 
-    public @NotNull IForm nowForm;
+    public @NotNull IForm nowForm = RegPlayerForms.N_ORIGINAL_BEFORE_ENABLE;
     public final List<IForm> formHistory = new ArrayList<>();
     // 诅咒之月逻辑
     public boolean isCursedMoonApplied = false;
+    public boolean lastTransformByCure = false;  // 仅用于诅咒之月 进入和退出诅咒之月时会清空
     public @Nullable IForm BeforeCursedMoonAppliedForm = null;
     public @Nullable IForm AfterCursedMoonAppliedForm = null;
     // 变形系统
@@ -40,9 +42,9 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     public void readFromNbt(NbtCompound tag) {
         // 目前没写形态注册表 先用null凑活一下
         if (tag.contains("nowForm")) {
-            nowForm = FormUtils.parseForm(Identifier.tryParse(tag.getString("nowForm")), null);
+            nowForm = FormUtils.parseForm(Identifier.tryParse(tag.getString("nowForm")), RegPlayerForms.N_ORIGINAL_BEFORE_ENABLE);
         } else {
-            nowForm = null;
+            nowForm = RegPlayerForms.N_ORIGINAL_BEFORE_ENABLE;
         }
         if (tag.contains("formHistory")) {
             NbtList history = tag.getList("formHistory", NbtElement.STRING_TYPE);
@@ -58,6 +60,11 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         } else {
             isCursedMoonApplied = false;
         }
+        if (tag.contains("lastTransformByCure")) {
+            lastTransformByCure = tag.getBoolean("lastTransformByCure");
+        } else {
+            lastTransformByCure = false;
+        }
         if (tag.contains("BeforeCursedMoonAppliedForm")) {
             BeforeCursedMoonAppliedForm = FormUtils.parseForm(Identifier.tryParse(tag.getString("BeforeCursedMoonAppliedForm")), null);
         } else {
@@ -67,6 +74,11 @@ public class PlayerFormComponent implements AutoSyncedComponent {
             AfterCursedMoonAppliedForm = FormUtils.parseForm(Identifier.tryParse(tag.getString("AfterCursedMoonAppliedForm")), null);
         } else {
             AfterCursedMoonAppliedForm = null;
+        }
+        if (tag.contains("transformTargetForm")) {
+            transformTargetForm = FormUtils.parseForm(Identifier.tryParse(tag.getString("transformTargetForm")), null);
+        } else {
+            transformTargetForm = null;
         }
     }
 
@@ -79,6 +91,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         }
         tag.put("formHistory", history);
         tag.putBoolean("isCursedMoonApplied", isCursedMoonApplied);
+        tag.putBoolean("lastTransformByCure", lastTransformByCure);
         if (BeforeCursedMoonAppliedForm != null) {
             tag.putString("BeforeCursedMoonAppliedForm", BeforeCursedMoonAppliedForm.getFormID().toString());
         }

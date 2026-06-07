@@ -2,10 +2,13 @@ package net.onixary.shapeShifterCurseFabric.player_form.new_form_system;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
 
 import java.util.Arrays;
 
@@ -46,13 +49,80 @@ public class CursedMoon {
     }
 
     public static void applyStartCursedMoonEffect(World world, PlayerEntity player) {
-        // 先检查flag 后执行逻辑
-        // TODO
+        // java16+ 真神奇的写法
+        if (!(player instanceof ServerPlayerEntity serverPlayer)) {
+            return;
+        }
+        if (PlayerFormComponent.COMPONENT.get(player).isCursedMoonApplied) {
+            return;
+        }
+        boolean isOverworld = player.getWorld().getRegistryKey() == World.OVERWORLD;
+        if (RegPlayerForms.N_ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) {
+            if (isOverworld) {
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.on_cursed_moon_before_enable").formatted(Formatting.LIGHT_PURPLE));
+            }
+        } else {
+            if(isOverworld){
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.on_cursed_moon").formatted(Formatting.LIGHT_PURPLE));
+            }
+            else{
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.on_cursed_moon_nether").formatted(Formatting.LIGHT_PURPLE));
+            }
+            ShapeShifterCurseFabric.ON_TRIGGER_CURSED_MOON.trigger(serverPlayer);
+        }
+        PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+        component.isCursedMoonApplied = true;
+        component.lastTransformByCure = false;
+        component.BeforeCursedMoonAppliedForm = null;
+        component.AfterCursedMoonAppliedForm = null;
+        if (!RegPlayerForms.N_ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) {
+            IForm nowForm = component.nowForm;
+            IForm targetForm = component.nowForm._getNextForm(player, ITransformReason.CursedMoon);
+            if (!nowForm.isEquals(targetForm)) {
+                component.BeforeCursedMoonAppliedForm = nowForm;
+                component.AfterCursedMoonAppliedForm = targetForm;
+                TransformManager.startTransform(player, targetForm, null);
+            }
+        }
+        component.sync();
     }
 
     public static void applyEndCursedMoonEffect(World world, PlayerEntity player) {
-        // 先检查flag 后执行逻辑
-        // TODO
+        if (!(player instanceof ServerPlayerEntity serverPlayer)) {
+            return;
+        }
+        if (!PlayerFormComponent.COMPONENT.get(player).isCursedMoonApplied) {
+            return;
+        }
+        boolean isOverworld = player.getWorld().getRegistryKey() == World.OVERWORLD;
+        PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+        if (RegPlayerForms.N_ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) {
+            if (isOverworld) {
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon_before_enable").formatted(Formatting.LIGHT_PURPLE));
+            }
+        } else {
+            // 要不是可以用别的手段降级(比如我拓展的幻形石) 我直接查当前形态与AfterCursedMoonAppliedForm的等级差就行
+            if (component.lastTransformByCure) {
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon_by_cure").formatted(Formatting.LIGHT_PURPLE));
+                ShapeShifterCurseFabric.ON_END_CURSED_MOON_CURED.trigger(serverPlayer);
+                if (component.AfterCursedMoonAppliedForm != null && component.AfterCursedMoonAppliedForm.getFormTier() == 1) {
+                    ShapeShifterCurseFabric.ON_END_CURSED_MOON_CURED_FORM_2.trigger(serverPlayer);
+                }
+            } else if(RegPlayerForms.N_ORIGINAL_SHIFTER.isPlayerForm(player)){
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon_special").formatted(Formatting.LIGHT_PURPLE));
+            } else if (component.BeforeCursedMoonAppliedForm != null && component.AfterCursedMoonAppliedForm != null && component.AfterCursedMoonAppliedForm.isPlayerForm(player)) {
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon").formatted(Formatting.LIGHT_PURPLE));
+                ShapeShifterCurseFabric.ON_END_CURSED_MOON.trigger(serverPlayer);
+            }
+        }
+        component.isCursedMoonApplied = false;
+        component.lastTransformByCure = false;
+        if (component.BeforeCursedMoonAppliedForm != null && component.AfterCursedMoonAppliedForm != null && component.AfterCursedMoonAppliedForm.isPlayerForm(player)) {
+            TransformManager.startTransform(player, component.BeforeCursedMoonAppliedForm, null);
+        }
+        component.BeforeCursedMoonAppliedForm = null;
+        component.AfterCursedMoonAppliedForm = null;
+        component.sync();
     }
 
     public static void serverTick(World world) {

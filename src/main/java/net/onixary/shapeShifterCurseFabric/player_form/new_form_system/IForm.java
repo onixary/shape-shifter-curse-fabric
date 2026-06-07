@@ -136,4 +136,9 @@ public interface IForm {
     default boolean isEquals(IForm form) {
         return form != null && this.getFormID().equals(form.getFormID());
     }
+
+    default boolean isPlayerForm(PlayerEntity player) {
+        IForm playerForm = FormUtils.getPlayerForm(player);
+        return this.isEquals(playerForm);
+    }
 }
