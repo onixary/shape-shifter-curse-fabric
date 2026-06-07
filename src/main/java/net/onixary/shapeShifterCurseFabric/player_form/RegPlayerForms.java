@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.forms.*;
+import net.onixary.shapeShifterCurseFabric.player_form.new_form_system.IForm;
 
 import java.util.*;
 
@@ -18,6 +19,10 @@ public class RegPlayerForms {
 
     // Builtin PlayerForms
     // 在Java中null不能使用equals方法
+    // 新系统用占位符 别用 后续会改变量名
+    public static IForm N_ORIGINAL_BEFORE_ENABLE = null;
+    public static IForm N_ORIGINAL_SHIFTER = null;
+
     // Original
     public static PlayerFormBase ORIGINAL_BEFORE_ENABLE = registerPlayerForm(new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "original_before_enable")));
     public static PlayerFormBase ORIGINAL_SHIFTER = registerPlayerForm(new PlayerFormBase(new Identifier(ShapeShifterCurseFabric.MOD_ID, "original_shifter")));
