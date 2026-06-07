@@ -112,7 +112,7 @@ public interface ITransformReason {
                         return nowForm;
                     }
                 }
-                int tier = nowForm.getFormTier() + 1;
+                int tier = FormUtils.CursedMoonFinalForm.hasFlag(nowForm) ? 1 : nowForm.getFormTier() + 1;
                 IFormGroup group = nowForm.getFormGroup();
                 IForm result = null;
                 if (group != null) {
