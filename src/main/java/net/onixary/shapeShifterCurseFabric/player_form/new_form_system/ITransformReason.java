@@ -1,9 +1,11 @@
 package net.onixary.shapeShifterCurseFabric.player_form.new_form_system;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiFunction;
@@ -95,11 +97,25 @@ public interface ITransformReason {
     public static final Identifier CursedMoonReasonID = ShapeShifterCurseFabric.identifier("cursed_moon");
     public static final ITransformReason CursedMoon = create(CursedMoonReasonID,
             (player, nowForm) -> {
-                // TODO
-                return nowForm;
+                if (FormUtils.NoCursedMoonEffect.hasFlag(nowForm)) {
+                    return nowForm;
+                }
+                int tier = nowForm.getFormTier() + 1;
+                IFormGroup group = nowForm.getFormGroup();
+                IForm result = null;
+                if (group != null) {
+                    result = group.getRandomForm(tier, player.getRandom(), FormUtils.NoCursedMoonTFTarget.hasFlag().negate());
+                }
+                return result == null ? nowForm : result;
             },
             (player, nowForm) -> {
-                // TODO
+                if (FormUtils.NoCursedMoonEffect.hasFlag(nowForm)) {
+                    return nowForm;
+                }
+                PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+                if (component.BeforeCursedMoonAppliedForm != null && component.AfterCursedMoonAppliedForm != null && nowForm.isEquals(component.AfterCursedMoonAppliedForm)) {
+                    return component.BeforeCursedMoonAppliedForm;
+                }
                 return nowForm;
             }
     );
@@ -107,11 +123,31 @@ public interface ITransformReason {
     public static final Identifier ItemReasonID = ShapeShifterCurseFabric.identifier("item");
     public static final Function<ItemStack, ITransformReasonWithArg<ItemStack>> ItemReasonBuilder = (itemStack) -> create(ItemReasonID,
             (reason, player, nowForm) -> {
-                // TODO
-                return nowForm;
+                Item item = itemStack.getItem();
+                int Tier = nowForm.getFormTier() + 1;
+                IFormGroup group = nowForm.getFormGroup();
+                IForm result = null;
+                if (RegCustomItem.POWERFUL_CATALYST.equals(item) && group != null) {
+                    result = group.getRandomForm(Tier, player.getRandom(), FormUtils.FinalForm.hasFlag());
+                }
+                return result == null ? nowForm : result;
             },
             (reason, player, nowForm) -> {
-                // TODO
+                Item item = itemStack.getItem();
+                boolean canNotAffect = true;
+                if (!FormUtils.NoAnyInhibitor.hasFlag(nowForm) && (!FormUtils.NoInhibitor.hasFlag(nowForm) || RegCustomItem.POWERFUL_INHIBITOR.equals(item))) {
+                    int Tier = nowForm.getFormTier() - 1;
+                    IForm prevForm = FormUtils.getPrevForm(player);
+                    if (prevForm != null && prevForm.getFormTier() == Tier) {
+                        return prevForm;
+                    }
+                    IFormGroup group = nowForm.getFormGroup();
+                    IForm result = null;
+                    if (group != null) {
+                        result = group.getRandomForm(Tier, player.getRandom(), null);
+                    }
+                    return result == null ? nowForm : result;
+                }
                 return nowForm;
             },
             itemStack
@@ -120,10 +156,10 @@ public interface ITransformReason {
     public static final Identifier ForceReasonID = ShapeShifterCurseFabric.identifier("force");
     public static final Function<IForm, ITransformReasonWithArg<IForm>> ForceReasonBuilder = (form) -> create(ForceReasonID,
             (reason, player, nowForm) -> {
-                return reason.getArg();
+                return reason.getArg() == null ? nowForm : reason.getArg();
             },
             (reason, player, nowForm) -> {
-                return reason.getArg();
+                return reason.getArg() == null ? nowForm : reason.getArg();
             },
             form
     );
