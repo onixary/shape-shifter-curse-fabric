@@ -6,8 +6,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -99,6 +101,14 @@ public interface ITransformReason {
             (player, nowForm) -> {
                 if (FormUtils.NoCursedMoonEffect.hasFlag(nowForm)) {
                     return nowForm;
+                }
+                if (RegPlayerForms.N_ORIGINAL_SHIFTER.isEquals(nowForm)) {
+                    List<IForm> formList = FormUtils.getFormByCondition(FormUtils.StarterForm.hasFlag());
+                    if (!formList.isEmpty()) {
+                        return formList.get(player.getRandom().nextInt(formList.size()));
+                    } else {
+                        return nowForm;
+                    }
                 }
                 int tier = nowForm.getFormTier() + 1;
                 IFormGroup group = nowForm.getFormGroup();

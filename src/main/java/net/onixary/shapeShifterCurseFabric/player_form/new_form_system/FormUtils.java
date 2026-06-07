@@ -16,6 +16,7 @@ import net.onixary.shapeShifterCurseFabric.util.TrinketUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -44,6 +45,7 @@ public class FormUtils {
     public static final FlagData FinalForm = new FlagData("final_form"); // 最终形态 PowerfulCatalyst仅能变形到此形态
     public static final FlagData NoInhibitor = new FlagData("no_inhibitor");  // 禁止普通抑制剂 给最后一个可退回形态用
     public static final FlagData NoAnyInhibitor = new FlagData("no_any_inhibitor"); // 禁止常规抑制剂(除了创造版本) 给最终形态用
+    public static final FlagData StarterForm = new FlagData("starter_form"); // 诅咒之月给开书后形态随机挑的形态
 
     public static Set<String> buildFormFlag(FlagData... flags) {
         Set<String> flagSet = new HashSet<>();
@@ -180,5 +182,11 @@ public class FormUtils {
     public static @NotNull IForm getFormPrevLevel(PlayerEntity player, ITransformReason reason) {
         IForm form = getPlayerForm(player);
         return form._getPrevForm(player, reason);
+    }
+
+    public static @NotNull List<IForm> getFormByCondition(@NotNull Predicate<IForm> predicate) {
+        List<IForm> result = new ArrayList<>();
+        // TODO 改完注册表后写
+        return result;
     }
 }
