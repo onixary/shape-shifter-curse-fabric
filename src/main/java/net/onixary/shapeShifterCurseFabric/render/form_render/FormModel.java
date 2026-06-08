@@ -14,7 +14,7 @@ import net.minecraft.util.JsonHelper;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.util.FormSkinSystem;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
@@ -426,7 +426,7 @@ public class FormModel extends GeoModel<FormAnimatable> {
     }
 
     public final void setRotationForTailBones(float limbAngle, float limbDistance, float age, float tailDragAmount, float tailDragAmountVertical) {
-        PlayerFormBase curForm = FormTextureUtils.getPlayerForm_Render(entity);
+        IForm curForm = FormTextureUtils.getPlayerForm_Render(entity);
         boolean isFeral = curForm.getBodyType() == PlayerFormBodyType.FERAL;
         float SWAY_RATE = 0.33333334F * 0.5F;
         float SWAY_SCALE = 0.05F;

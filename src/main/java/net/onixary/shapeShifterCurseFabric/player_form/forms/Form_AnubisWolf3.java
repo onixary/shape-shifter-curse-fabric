@@ -6,8 +6,6 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimState
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateEnum;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_form.NormalForm;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.old.forms.Form_FeralBase;
 import net.onixary.shapeShifterCurseFabric.player_form.old.forms.Form_SnowFox3;
 import org.jetbrains.annotations.NotNull;

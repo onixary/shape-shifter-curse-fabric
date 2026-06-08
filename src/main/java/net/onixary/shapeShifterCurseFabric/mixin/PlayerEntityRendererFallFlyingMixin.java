@@ -81,7 +81,7 @@ public abstract class PlayerEntityRendererFallFlyingMixin extends LivingEntityRe
             ShapeShifterCurseFabric.LOGGER.info("ViveCraft mod detected, skipping PlayerEntityRendererFallFlyingMixin.");
             return;
         }
-        PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+        IForm curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
         boolean isFeral = curForm.getBodyType() == PlayerFormBodyType.FERAL;
 
         float i = player.getLeaningPitch(h);

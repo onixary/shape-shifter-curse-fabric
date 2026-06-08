@@ -111,7 +111,7 @@ public class InstinctTicker {
     private static void judgeInstinctState(PlayerEntity player, PlayerInstinctComponent comp){
         // 判断当前状态，供进度条使用
         // Judge the current state for the progress bar
-        // PlayerFormBase form = getForm(player);
+        // IForm form = getForm(player);
         // PlayerFormPhase currentPhase = form.getPhase();
         // showInstinctBar = !(currentPhase == PlayerFormPhase.PHASE_CLEAR || currentPhase == PlayerFormPhase.PHASE_3);
 

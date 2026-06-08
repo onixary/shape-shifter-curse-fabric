@@ -5,10 +5,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.PlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.RegPlayerFormComponent;
 
 // Custom Transformative Potion Utils (CTP)
 public class CTPUtils {
@@ -17,7 +15,7 @@ public class CTPUtils {
         void setCTPFormID(Identifier formID);
     }
 
-    public static PlayerFormBase getTransformativePotionForm(PlayerEntity player) {
+    public static IForm getTransformativePotionForm(PlayerEntity player) {
         if (player == null) {
             ShapeShifterCurseFabric.LOGGER.error("CustomTransformativeStatue PlayerEntity is null");
             return RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
@@ -47,7 +45,7 @@ public class CTPUtils {
     }
 
     public static void resetTransformativePotionForm(PlayerEntity player) {
-        setTransformativePotionForm(player, RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID);
+        setTransformativePotionForm(player, RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID());
     }
 
     public static Identifier getCTPFormIDFromNBT(NbtCompound nbtCompound) {

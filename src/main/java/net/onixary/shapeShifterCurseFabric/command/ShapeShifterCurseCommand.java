@@ -21,12 +21,12 @@ import net.onixary.shapeShifterCurseFabric.entity.projectile.WebBullet;
 import net.onixary.shapeShifterCurseFabric.mana.RegManaComponent;
 import net.onixary.shapeShifterCurseFabric.minion.RegPlayerMinionComponent;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormDynamic;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.new_form_system.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormColorData;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
@@ -215,7 +215,7 @@ public class ShapeShifterCurseCommand {
     private static int setForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
         // set form without transform effect
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
-        PlayerFormBase form = FormArgumentType.getForm(commandContext, "form");
+        IForm form = FormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
         if (form == null) {
             commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
@@ -237,7 +237,7 @@ public class ShapeShifterCurseCommand {
     private static int transformToForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
         // this with transform effect
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
-        PlayerFormBase form = FormArgumentType.getForm(commandContext, "form");
+        IForm form = FormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
         if (form == null) {
             commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
@@ -252,7 +252,7 @@ public class ShapeShifterCurseCommand {
     private static int setCustomForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
         // set form without transform effect
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
-        PlayerFormBase form = CustomFormArgumentType.getForm(commandContext, "form");
+        IForm form = CustomFormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
         if (form == null) {
             commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
@@ -274,7 +274,7 @@ public class ShapeShifterCurseCommand {
     private static int transformToCustomForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
         // this with transform effect
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
-        PlayerFormBase form = CustomFormArgumentType.getForm(commandContext, "form");
+        IForm form = CustomFormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
         if (form == null) {
             commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
@@ -442,7 +442,7 @@ public class ShapeShifterCurseCommand {
     private static List<Identifier> getAvailableForms(ServerPlayerEntity player) {
         List<Identifier> availableForms = new ArrayList<>();
         for (Identifier formID : RegPlayerForms.dynamicPlayerForms) {
-            PlayerFormBase form = RegPlayerForms.getPlayerForm(formID);
+            IForm form = RegPlayerForms.getPlayerForm(formID);
             if (form instanceof PlayerFormDynamic pfd) {
                 if (pfd.IsPatronForm && pfd.IsPlayerCanUse(player)) {
                     if (!availableForms.contains(formID)) {
@@ -577,8 +577,7 @@ public class ShapeShifterCurseCommand {
         try {
             formID = commandContext.getArgument("form", Identifier.class);
         } catch (Exception e) {
-            PlayerFormBase form = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
-            formID = form.FormID;
+            formID = FormUtils.getPlayerForm(player).getFormID();
         }
         String type = commandContext.getArgument("type", String.class);
         String slotName = commandContext.getArgument("slot_name", String.class);
@@ -595,8 +594,7 @@ public class ShapeShifterCurseCommand {
         try {
             formID = commandContext.getArgument("form", Identifier.class);
         } catch (Exception e) {
-            PlayerFormBase form = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
-            formID = form.FormID;
+            formID = FormUtils.getPlayerForm(player).getFormID();
         }
         String type = commandContext.getArgument("type", String.class);
         String slotName = commandContext.getArgument("slot_name", String.class);
@@ -613,8 +611,7 @@ public class ShapeShifterCurseCommand {
         try {
             formID = commandContext.getArgument("form", Identifier.class);
         } catch (Exception e) {
-            PlayerFormBase form = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
-            formID = form.FormID;
+            formID = FormUtils.getPlayerForm(player).getFormID();
         }
         String type = commandContext.getArgument("type", String.class);
         String slotName = commandContext.getArgument("slot_name", String.class);
@@ -643,8 +640,7 @@ public class ShapeShifterCurseCommand {
         try {
             formID = commandContext.getArgument("form", Identifier.class);
         } catch (Exception e) {
-            PlayerFormBase form = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
-            formID = form.FormID;
+            formID = FormUtils.getPlayerForm(player).getFormID();
         }
         String type = commandContext.getArgument("type", String.class);
         ModPacketsS2CServer.sendModifyFCDData(player, "list", formID, type, "", "", "");

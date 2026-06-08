@@ -8,7 +8,7 @@ import net.minecraft.client.render.entity.feature.CapeFeatureRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -72,7 +72,7 @@ public class CapeFeatureRendererMixin {
             index = 0)
     private float modifyXRotationAngle(float angle) {
         if (currentPlayer != null) {
-            PlayerFormBase curForm = FormTextureUtils.getPlayerForm_Render(currentPlayer);
+            IForm curForm = FormTextureUtils.getPlayerForm_Render(currentPlayer);
 
             if (curForm.NeedModifyXRotationAngle()) {
                 // 从角度中提取 q 的部分并钳制
@@ -98,14 +98,14 @@ public class CapeFeatureRendererMixin {
     // helper func
     @Unique
     private Vec3d getCapeIdleLoc(AbstractClientPlayerEntity player) {
-        PlayerFormBase curForm = FormTextureUtils.getPlayerForm_Render(currentPlayer);
+        IForm curForm = FormTextureUtils.getPlayerForm_Render(currentPlayer);
         return curForm.getCapeIdleLoc(player);
     }
 
     // 获取披风的基础旋转角度
     @Unique
     private float getCapeBaseRotateAngle(AbstractClientPlayerEntity player) {
-        PlayerFormBase curForm = FormTextureUtils.getPlayerForm_Render(currentPlayer);
+        IForm curForm = FormTextureUtils.getPlayerForm_Render(currentPlayer);
         return curForm.getCapeBaseRotateAngle(player);
     }
 }

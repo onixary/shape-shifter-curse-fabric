@@ -10,8 +10,8 @@ import net.minecraft.predicate.entity.LootContextPredicate;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.FormAbilityManager;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -37,13 +37,13 @@ public class OnTransformForm extends AbstractCriterion<OnTransformForm.Condition
         trigger(player, condition -> condition.CanTrigger(player));
     }
 
-    public void trigger(ServerPlayerEntity player, PlayerFormBase form) {
+    public void trigger(ServerPlayerEntity player, IForm form) {
         trigger(player, condition -> condition.CanTrigger(form));
     }
 
     @Override
     public OnTransformForm.Condition conditionsFromJson(JsonObject obj, LootContextPredicate playerPredicate, AdvancementEntityPredicateDeserializer predicateDeserializer) {
-        Predicate<PlayerFormBase> formPredicate = (form) -> true;
+        Predicate<IForm> formPredicate = (form) -> true;
         if (obj.has("form")) {
             JsonArray formIDArray = obj.getAsJsonArray("form");
             Identifier[] formID = new Identifier[formIDArray.size()];
@@ -53,7 +53,7 @@ public class OnTransformForm extends AbstractCriterion<OnTransformForm.Condition
             if (formID.length > 0) {
                 formPredicate = formPredicate.and(form -> {
                     for (Identifier id : formID) {
-                        if (Objects.equals(id, form.FormID)) {
+                        if (Objects.equals(id, form.getFormID())) {
                             return true;
                         }
                     }
@@ -70,7 +70,7 @@ public class OnTransformForm extends AbstractCriterion<OnTransformForm.Condition
             if (formTier.length > 0) {
                 formPredicate = formPredicate.and(form -> {
                     for (int tier : formTier) {
-                        if (form.getIndex() == tier) {
+                        if (form.getFormTier() == tier) {
                             return true;
                         }
                     }
@@ -87,20 +87,20 @@ public class OnTransformForm extends AbstractCriterion<OnTransformForm.Condition
     }
 
     public static class Condition extends AbstractCriterionConditions {
-        private final Predicate<PlayerFormBase> formPredicate;
+        private final Predicate<IForm> formPredicate;
 
-        public Condition(Identifier id, LootContextPredicate entity, Predicate<PlayerFormBase> formPredicate) {
+        public Condition(Identifier id, LootContextPredicate entity, Predicate<IForm> formPredicate) {
             super(id, entity);
             this.formPredicate = formPredicate;
         }
 
 
-        public boolean CanTrigger(PlayerFormBase form) {
+        public boolean CanTrigger(IForm form) {
             return formPredicate.test(form);
         }
 
         public boolean CanTrigger(PlayerEntity player) {
-            PlayerFormBase form = FormAbilityManager.getForm(player);
+            IForm form = FormUtils.getPlayerForm(player);
             if (form == null) {
                 return false;
             }

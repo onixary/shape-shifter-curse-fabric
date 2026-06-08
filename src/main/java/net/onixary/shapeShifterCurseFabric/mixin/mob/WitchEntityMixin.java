@@ -12,9 +12,10 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.additional_power.WitchFriendlyPower;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.old.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -30,8 +31,8 @@ public abstract class WitchEntityMixin {
         WitchEntity witch = (WitchEntity) (Object) this;
         World world = witch.getWorld();
 
-        if(target instanceof PlayerEntity){
-            PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(target).getCurrentForm();
+        if(target instanceof PlayerEntity player){
+            IForm curForm = FormUtils.getPlayerForm(player);
             if(curForm.equals(RegPlayerForms.ORIGINAL_SHIFTER)){
                 double randomChance = Math.random();
                 if(randomChance < POTION_REPLACE_CHANCE){

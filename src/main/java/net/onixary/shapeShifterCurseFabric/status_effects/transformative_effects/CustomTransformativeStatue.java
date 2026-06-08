@@ -3,9 +3,8 @@ package net.onixary.shapeShifterCurseFabric.status_effects.transformative_effect
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.old.transform.TransformManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.CTPUtils;
 
@@ -15,14 +14,14 @@ public class CustomTransformativeStatue extends BaseTransformativeStatusEffect {
     }
 
 
-    public PlayerFormBase getToForm(PlayerEntity player) {
+    public IForm getToForm(PlayerEntity player) {
         return CTPUtils.getTransformativePotionForm(player);
     }
 
     // 抽象方法：效果应用时的回调
     public void ActiveEffect(ServerPlayerEntity player){
-        PlayerFormBase targetForm = this.getToForm(player);
-        if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID.equals(targetForm.FormID)) {
+        IForm targetForm = this.getToForm(player);
+        if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID().equals(targetForm.FormID)) {
             return;
         }
         TransformManager.handleDirectTransform(player, targetForm, false);

@@ -6,7 +6,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.util.math.Vec3d;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,7 +26,7 @@ public abstract class FeralPlayerEntityRendererMixin {
     private void cancelSneakOffset(AbstractClientPlayerEntity abstractClientPlayerEntity, float f, CallbackInfoReturnable<Vec3d> ci)
     {
         if(abstractClientPlayerEntity instanceof AbstractClientPlayerEntity){
-            PlayerFormBase curForm = FormTextureUtils.getPlayerForm_Render(abstractClientPlayerEntity);
+            IForm curForm = FormTextureUtils.getPlayerForm_Render(abstractClientPlayerEntity);
             boolean isFeral = curForm.getBodyType() == PlayerFormBodyType.FERAL;
             if(isFeral){
                 ci.setReturnValue(Vec3d.ZERO);

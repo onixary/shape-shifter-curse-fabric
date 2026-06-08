@@ -4,16 +4,15 @@ import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.additional_power.PillagerFriendlyPower;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.RegPlayerFormComponent;
-
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 // 为了避免与Team功能冲突已弃用，替换为其他逻辑
 // Deprecated to avoid conflicts with Team functionality, replaced with other logic
 
 public class PlayerTeamHandler {
-    private static PlayerFormBase currentForm;
+    private static IForm currentForm;
     public static void updatePlayerTeam(ServerPlayerEntity player) {
-        currentForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+        currentForm = FormUtils.getPlayerForm(player);
         updateSorceryTeam(player);
     }
 

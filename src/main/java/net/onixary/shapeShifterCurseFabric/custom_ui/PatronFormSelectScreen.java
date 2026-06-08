@@ -8,8 +8,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormDynamic;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class PatronFormSelectScreen extends Screen {
     private List<Identifier> getAvailableForms() {
         List<Identifier> availableForms = new ArrayList<>();
         for (Identifier formID : RegPlayerForms.dynamicPlayerForms) {
-            PlayerFormBase form = RegPlayerForms.getPlayerForm(formID);
+            IForm form = RegPlayerForms.getPlayerForm(formID);
             if (form instanceof PlayerFormDynamic pfd) {
                 if (pfd.IsPatronForm && pfd.IsPlayerCanUse(player)) {
                     if (!availableForms.contains(formID)) {
@@ -47,7 +46,7 @@ public class PatronFormSelectScreen extends Screen {
         // TODO 移除填充项
         // 下面是填充项
         RegPlayerForms.playerForms.forEach((formID, form) -> {
-            availableForms.add(form.FormID);
+            availableForms.add(form.getFormID());
         });
         // 填充项结束
         return availableForms;

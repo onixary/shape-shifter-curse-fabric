@@ -11,9 +11,10 @@ import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.IsMorphScaleItemCondition;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.old.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.old.transform.TransformRelatedItems;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -52,7 +53,7 @@ public abstract class ItemStackMixin {
                 TransformRelatedItems.OnUsePowerfulCatalyst(player);
             }
             else if(stack.getItem() == Items.GOLDEN_APPLE){
-                PlayerFormBase currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+                IForm currentForm = FormUtils.getPlayerForm(player);
                 int currentFormIndex = currentForm.getIndex();
                 if(currentFormIndex == 0 || currentFormIndex == 1){
                     // 触发自定义成就

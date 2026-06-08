@@ -14,9 +14,8 @@ import net.onixary.shapeShifterCurseFabric.integration.origins.component.PlayerO
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayer;
 import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormDynamic;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.jetbrains.annotations.Nullable;
 
@@ -94,7 +93,7 @@ public class FormRenderUtils {
             return formRenderers;
         }
         try {
-            PlayerFormBase playerFormBase = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+            IForm playerFormBase = FormUtils.getPlayerForm(player);
             if (playerFormBase instanceof PlayerFormDynamic pfd) {
                 List<FormRenderer> formRenderers = new ArrayList<>();
                 if (pfd.FurModelID != null) {

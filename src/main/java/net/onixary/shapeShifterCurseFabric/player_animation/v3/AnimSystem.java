@@ -12,7 +12,7 @@ import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateController.TransformingController;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.jetbrains.annotations.NotNull;
@@ -25,7 +25,7 @@ import java.util.Objects;
 // 每个玩家的动画系统
 public class AnimSystem {
     public static class AnimSystemData {
-        public PlayerFormBase playerForm;
+        public IForm playerForm;
         public boolean IsOnGround = true;
         public Vec3d LastPosition;
         public long LastPosYChange = 0;  // 持续增长使用long防止溢出 顺便可以不用做最大值判断

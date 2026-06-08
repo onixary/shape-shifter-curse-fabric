@@ -12,8 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormDynamic;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import org.jetbrains.annotations.Nullable;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
@@ -189,7 +188,7 @@ public class ModPacketsS2CServer {
         int MaxFormPerPacket = 63;
         HashMap<Identifier, PlayerFormDynamic> forms = new HashMap<>();
         for (Identifier formId : patronForms) {
-            PlayerFormBase form = RegPlayerForms.getPlayerForm(formId);
+            IForm form = RegPlayerForms.getPlayerForm(formId);
             if (form instanceof PlayerFormDynamic pfd) {
                 forms.put(formId, pfd);
             }

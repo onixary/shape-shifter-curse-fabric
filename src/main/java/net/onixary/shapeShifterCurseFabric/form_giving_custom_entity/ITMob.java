@@ -6,9 +6,9 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.TStatusApplier;
 
@@ -49,9 +49,9 @@ public interface ITMob {
     }
 
     public default Optional<Boolean> TMob_TryAttack(MobEntity TMob, Entity target) {
-        if(target instanceof PlayerEntity) {
-            PlayerFormBase currentForm = target.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
-            if (currentForm.equals(RegPlayerForms.ORIGINAL_SHIFTER)) {
+        if(target instanceof PlayerEntity player) {
+            IForm currentForm = FormUtils.getPlayerForm(player);
+            if (currentForm.isEquals(RegPlayerForms.ORIGINAL_SHIFTER)) {
                 boolean attacked = target.damage(TMob.getDamageSources().mobAttack(TMob), (float)TMob.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE));
                 if (attacked) {
                     TMob.applyDamageEffects(TMob, target);

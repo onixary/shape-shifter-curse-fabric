@@ -8,9 +8,10 @@ import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormPhase;
 import net.onixary.shapeShifterCurseFabric.player_form.old.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.util.UIPositionUtils;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
@@ -45,7 +46,7 @@ public class InstinctBarRenderer  {
         if (MinecraftClient.getInstance().player == null) return;
 
         PlayerEntity player = MinecraftClient.getInstance().player;
-        PlayerFormBase curForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+        IForm curForm = FormUtils.getPlayerForm(player);
         PlayerFormPhase currentPhase = curForm.getPhase();
         boolean showInstinctBar = !(currentPhase == PlayerFormPhase.PHASE_CLEAR || currentPhase == PlayerFormPhase.PHASE_3);;
         if(curForm.FormIndex < 2){

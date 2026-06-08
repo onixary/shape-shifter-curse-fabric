@@ -6,9 +6,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.old.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.TransformativeStatusInstance;
 import org.jetbrains.annotations.Nullable;
@@ -283,7 +284,7 @@ public class EffectManager {
         }
     }
 
-    public static void checkAndClearTransformativeEffect(PlayerEntity player, @Nullable PlayerFormBase newForm) {
+    public static void checkAndClearTransformativeEffect(PlayerEntity player, @Nullable IForm newForm) {
         if (player == null) {
             ShapeShifterCurseFabric.LOGGER.error("Attempted to check effect with null player");
             return;
@@ -330,15 +331,15 @@ public class EffectManager {
         return true;
     }
 
-    private static PlayerFormBase getPlayerForm(PlayerEntity player) {
+    private static IForm getPlayerForm(PlayerEntity player) {
         try {
-            return player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
+            return FormUtils.getPlayerForm(player);
         } catch (Exception e)  {
             return null;
         }
     }
 
-    private static boolean CanHaveTransformativeEffect(PlayerEntity player, @Nullable PlayerFormBase newForm) {
+    private static boolean CanHaveTransformativeEffect(PlayerEntity player, @Nullable IForm newForm) {
         return RegPlayerForms.ORIGINAL_SHIFTER.equals(newForm == null ? getPlayerForm(player) : newForm);
     }
 }

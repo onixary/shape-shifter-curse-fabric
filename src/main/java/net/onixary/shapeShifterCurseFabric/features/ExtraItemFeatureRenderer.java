@@ -21,7 +21,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 
@@ -69,7 +69,7 @@ public class ExtraItemFeatureRenderer <T extends LivingEntity, M extends EntityM
     ) {
 
         if (livingEntity instanceof AbstractClientPlayerEntity player) {
-            PlayerFormBase curForm = FormTextureUtils.getPlayerForm_Render(player);
+            IForm curForm = FormTextureUtils.getPlayerForm_Render(player);
             boolean isFeral = curForm.getBodyType() == PlayerFormBodyType.FERAL;
 
             if (isFeral && MinecraftClient.getInstance().options.getPerspective().isFirstPerson() && player == MinecraftClient.getInstance().player) {

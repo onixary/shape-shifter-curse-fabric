@@ -8,11 +8,9 @@ import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormPhase;
-import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.FormAbilityManager;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 
 public class InstinctValueCondition {
 
@@ -22,16 +20,9 @@ public class InstinctValueCondition {
             return false;
         }
 
-        PlayerFormBase currentForm = FormAbilityManager.getForm(player);
+        IForm currentForm = FormUtils.getPlayerForm(player);
 
-        // ORIGINAL_BEFORE_ENABLE 和 ORIGINAL_SHIFTER 形态始终返回 false
-        if (currentForm == RegPlayerForms.ORIGINAL_BEFORE_ENABLE || currentForm == RegPlayerForms.ORIGINAL_SHIFTER) {
-            return false;
-        }
-
-        // PHASE_2, PHASE_3, PHASE_SP 形态始终返回 false
-        PlayerFormPhase phase = currentForm.getPhase();
-        if (phase == PlayerFormPhase.PHASE_2 || phase == PlayerFormPhase.PHASE_3 || phase == PlayerFormPhase.PHASE_SP) {
+        if (FormUtils.NoInstinct.hasFlag(currentForm) || FormUtils.LockInstinct.hasFlag(currentForm)) {
             return false;
         }
 

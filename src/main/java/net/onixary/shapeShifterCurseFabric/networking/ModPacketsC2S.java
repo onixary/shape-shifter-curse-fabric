@@ -16,10 +16,8 @@ import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnSprintingToS
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormDynamic;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.old.transform.TransformManager;
@@ -247,7 +245,7 @@ public class ModPacketsC2S {
             ShapeShifterCurseFabric.LOGGER.warn("[SetForm] Player {} not found", targetPlayerUuid);
         }
         Identifier formId = packetByteBuf.readIdentifier();
-        PlayerFormBase form = RegPlayerForms.getPlayerForm(formId);
+        IForm form = RegPlayerForms.getPlayerForm(formId);
         // 网络包可以伪造 所以加个权限验证
         if (playerEntity.getCommandSource().hasPermissionLevel(2) || playerEntity.getAbilities().creativeMode) {
             minecraftServer.execute(() -> {
@@ -267,7 +265,7 @@ public class ModPacketsC2S {
             return;
         }
         Identifier formId = packetByteBuf.readIdentifier();
-        PlayerFormBase form = RegPlayerForms.getPlayerForm(formId);
+        IForm form = RegPlayerForms.getPlayerForm(formId);
 
         if (minecraftServer.getCommandSource().hasPermissionLevel(2) || playerEntity.getAbilities().creativeMode) {
             // 权限等级2时跳过反作弊 毕竟可以用setForm了
