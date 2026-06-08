@@ -9,14 +9,13 @@ import net.minecraft.util.math.MathHelper;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormPhase;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.PlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
+import net.onixary.shapeShifterCurseFabric.player_form.ITransformReason;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 
 import java.util.Iterator;
 
-import static net.onixary.shapeShifterCurseFabric.player_form.old.ability.FormAbilityManager.getForm;
-import static net.onixary.shapeShifterCurseFabric.player_form.old.transform.TransformManager.handleProgressiveTransform;
 
 public class InstinctTicker {
     public static float currentInstinctValue = 0.0f;
@@ -86,26 +85,12 @@ public class InstinctTicker {
     }
 
     private static float judgeInstinctGrowRate(PlayerEntity player){
-        PlayerFormComponent formComp = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
-        PlayerFormPhase currentPhase = formComp.getCurrentForm().getPhase();
-        switch (currentPhase){
-            case PHASE_CLEAR:
-                return 0.0f;
-            case PHASE_0:
-                return StaticParams.INSTINCT_INCREASE_RATE_0;
-            case PHASE_1:
-                return StaticParams.INSTINCT_INCREASE_RATE_1;
-            case PHASE_2:
-                // 立刻涨满
-                return 100.0f;
-            case PHASE_3:
-                // 立刻涨满
-                return 100.0f;
-            case PHASE_SP:
-                // 立刻涨满
-                return 100.0f;
+        IForm form = FormUtils.getPlayerForm(player);
+        if (FormUtils.NoInstinct.hasFlag(form) || FormUtils.LockInstinct.hasFlag(form)) {
+            return -100.0f;
+        } else {
+            return StaticParams.INSTINCT_INCREASE_RATE;
         }
-        return 0.0f;
     }
 
     private static void judgeInstinctState(PlayerEntity player, PlayerInstinctComponent comp){
@@ -173,10 +158,14 @@ public class InstinctTicker {
         if (comp.instinctValue >= StaticParams.INSTINCT_MAX) {
             // 这里放置满instinct时要触发的逻辑
             // Here is the logic to be triggered when the instinct is full
-            if(getForm(player).FormIndex < 2){
-                handleProgressiveTransform(player, false);
+            IForm nowForm = FormUtils.getPlayerForm(player);
+            IForm targetForm = nowForm._getNextForm(player, ITransformReason.Instinct);
+            if (!nowForm.isEquals(targetForm)) {
+                TransformManager.startTransform(player, targetForm, null);
             }
-            comp.instinctValue = 0f;
+            // 保险一下
+            comp.instinctValue = 0.0f;
+            clearInstinct(player);
         }
     }
 }

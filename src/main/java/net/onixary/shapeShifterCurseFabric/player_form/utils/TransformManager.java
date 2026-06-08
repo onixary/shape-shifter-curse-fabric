@@ -7,7 +7,6 @@ import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.effect.PlayerTransformEffectManager;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
-import net.onixary.shapeShifterCurseFabric.player_form.new_form_system.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import org.jetbrains.annotations.NotNull;
@@ -31,6 +30,12 @@ public class TransformManager {
     private static final HashMap<UUID, PlayerTransformData> playerData = new HashMap<>();  // 默认值为-1 当大于等于0时开始每Tick递增 并且进入变形 当PlayerFormComponent.transformTargetForm != null且playerTransformTimer<0时开始变形
     // Client Side
     private static int transformTimer = -1;  // 处理 nauesaStrength 和 blackStrength
+
+
+    public static void onServerInit() {
+        playerData.clear();
+        transformTimer = -1;
+    }
 
     private static PlayerTransformData getPlayerData(PlayerEntity player) {
         PlayerTransformData data = playerData.get(player.getUuid());

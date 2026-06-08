@@ -10,6 +10,7 @@ import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.CTPUtils;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusPotionEffect;
 
@@ -30,10 +31,10 @@ public class TransformAction {
             }
             IForm pfb = RegPlayerForms.getPlayerForm(formId);
             if (instant) {
-                TransformManager.setFormDirectly(pe, pfb);
+                TransformManager.immediatelyTransform(pe, pfb);
             }
             else {
-                TransformManager.handleDirectTransform(pe, pfb, false);
+                TransformManager.startTransform(pe, pfb, null);
             }
         }
     }

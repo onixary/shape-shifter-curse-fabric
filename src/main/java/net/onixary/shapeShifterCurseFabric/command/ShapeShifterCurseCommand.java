@@ -25,9 +25,10 @@ import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.new_form_system.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.util.FormColorData;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
@@ -38,8 +39,6 @@ import java.util.Objects;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
-import static net.onixary.shapeShifterCurseFabric.player_form.old.transform.TransformManager.handleDirectTransform;
-import static net.onixary.shapeShifterCurseFabric.player_form.old.transform.TransformManager.setFormDirectly;
 
 public class ShapeShifterCurseCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher){
@@ -223,7 +222,7 @@ public class ShapeShifterCurseCommand {
             return 0;
         }
         try {
-            setFormDirectly(target, form);
+            TransformManager.immediatelyTransform(target, form);
         }
         catch (Exception e){
             // 调试时在此打断点
@@ -244,7 +243,7 @@ public class ShapeShifterCurseCommand {
             commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
             return 0;
         }
-        handleDirectTransform(target, form, false);
+        TransformManager.startTransform(target, form, null);
 
         return 1;
 
@@ -260,7 +259,7 @@ public class ShapeShifterCurseCommand {
             return 0;
         }
         try {
-            setFormDirectly(target, form);
+            TransformManager.immediatelyTransform(target, form);
         }
         catch (Exception e){
             // 调试时在此打断点
@@ -281,7 +280,7 @@ public class ShapeShifterCurseCommand {
             commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
             return 0;
         }
-        handleDirectTransform(target, form, false);
+        TransformManager.startTransform(target, form, null);
 
         return 1;
 
@@ -506,8 +505,8 @@ public class ShapeShifterCurseCommand {
             return 0;
         }
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
-        RegPlayerFormComponent.PLAYER_FORM.get(target).clear();
-        RegPlayerFormComponent.PLAYER_FORM.sync(target);
+        PlayerFormComponent.COMPONENT.get(target).clear();
+        PlayerFormComponent.COMPONENT.sync(target);
         commandContext.getSource().sendFeedback(() -> {return Text.literal("Form Data Cleared!");}, false);
         return 1;
     }

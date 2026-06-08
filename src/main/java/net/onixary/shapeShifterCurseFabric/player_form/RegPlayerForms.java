@@ -21,11 +21,6 @@ public class RegPlayerForms {
     public static String PatronNameSpace = "ssc-patron";  // 在更新数据包时保留
 
     // Builtin PlayerForms
-    // 在Java中null不能使用equals方法
-    // 新系统用占位符 别用 后续会改变量名
-    public static IForm N_ORIGINAL_BEFORE_ENABLE = null;
-    public static IForm N_ORIGINAL_SHIFTER = null;
-
     // Original
     public static IForm ORIGINAL_BEFORE_ENABLE = registerPlayerForm(new NormalForm(ShapeShifterCurseFabric.identifier("original_before_enable")).formFlag(NoInstinct, NoAnyInhibitor, NoCursedMoonEffect, NoCursedMoonTFTarget).applyScaleFunc(NormalForm.RESET_SCALE_FUNC));
     public static IForm ORIGINAL_SHIFTER = registerPlayerForm(new NormalForm(ShapeShifterCurseFabric.identifier("original_shifter")).formFlag(NoInstinct, NoAnyInhibitor, NoCursedMoonTFTarget).applyScaleFunc(NormalForm.RESET_SCALE_FUNC));

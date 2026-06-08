@@ -5,9 +5,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormPhase;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.PlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 
 public class CodexData {
@@ -305,54 +303,57 @@ public class CodexData {
         return Text.literal(statusTextBuilder.toString());
     }
 
-    public static Text getDescText(ContentType type, PlayerEntity player){
-        PlayerFormComponent formComp = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
-        PlayerFormPhase currentPhase = formComp.getCurrentForm().getPhase();
-        switch (type){
-            case TITLE:
+    public static Text getDescText(ContentType type, PlayerEntity player) {
+        int tier = FormUtils.getPlayerForm(player).getFormTier();
+        switch (type) {
+            case TITLE -> {
                 return Text.empty();
-            case APPEARANCE:
-                return switch (currentPhase) {
-                    case PHASE_CLEAR -> descAppearance_normal;
-                    case PHASE_0 -> descAppearance_0;
-                    case PHASE_1 -> descAppearance_1;
-                    case PHASE_2 -> descAppearance_2;
-                    case PHASE_3 -> descAppearance_3;
-                    case PHASE_SP -> Text.empty();
+            }
+            case APPEARANCE -> {
+                return switch (tier) {
+                    case -1, 0 -> descAppearance_normal;
+                    case 1 -> descAppearance_0;
+                    case 2 -> descAppearance_1;
+                    case 3 -> descAppearance_2;
+                    case 4 -> descAppearance_3;
+                    default -> Text.empty();
                 };
-            case PROS:
-                return switch (currentPhase) {
-                    case PHASE_CLEAR -> descPros_normal;
-                    case PHASE_0 -> descPros_0;
-                    case PHASE_1 -> descPros_1;
-                    case PHASE_2 -> descPros_2;
-                    case PHASE_3 -> descPros_3;
-                    case PHASE_SP -> Text.empty();
+            }
+            case PROS -> {
+                return switch (tier) {
+                    case -1, 0 -> descPros_normal;
+                    case 1 -> descPros_0;
+                    case 2 -> descPros_1;
+                    case 3 -> descPros_2;
+                    case 4 -> descPros_3;
+                    default -> Text.empty();
                 };
-            case CONS:
-                return switch (currentPhase) {
-                    case PHASE_CLEAR -> descCons_normal;
-                    case PHASE_0 -> descCons_0;
-                    case PHASE_1 -> descCons_1;
-                    case PHASE_2 -> descCons_2;
-                    case PHASE_3 -> descCons_3;
-                    case PHASE_SP -> Text.empty();
+            }
+            case CONS -> {
+                return switch (tier) {
+                    case -1, 0 -> descCons_normal;
+                    case 1 -> descCons_0;
+                    case 2 -> descCons_1;
+                    case 3 -> descCons_2;
+                    case 4 -> descCons_3;
+                    default -> Text.empty();
                 };
-            case INSTINCTS:
-                return switch (currentPhase) {
-                    case PHASE_CLEAR -> descInstincts_normal;
-                    case PHASE_0 -> descInstincts_0;
-                    case PHASE_1 -> descInstincts_1;
-                    case PHASE_2 -> descInstincts_2;
-                    case PHASE_3 -> descInstincts_3;
-                    case PHASE_SP -> Text.empty();
+            }
+            case INSTINCTS -> {
+                return switch (tier) {
+                    case -1, 0 -> descInstincts_normal;
+                    case 1 -> descInstincts_0;
+                    case 2 -> descInstincts_1;
+                    case 3 -> descInstincts_2;
+                    case 4 -> descInstincts_3;
+                    default -> Text.empty();
                 };
+            }
         }
         return Text.empty();
     }
 
     public static Text getContentText(ContentType type, PlayerEntity player){
-        PlayerFormComponent formComp = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
-        return formComp.getCurrentForm().getContentText(type);
+        return FormUtils.getPlayerForm(player).getContentText(type);
     }
 }

@@ -6,11 +6,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormPhase;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.util.UIPositionUtils;
 
@@ -36,9 +33,9 @@ public class InstinctBarRenderer  {
     private static Identifier currentBarEmptyID = instinctBarTexEmptyID;
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 
-    private static final float increase1Threshold = StaticParams.INSTINCT_INCREASE_RATE_0 + 0.005f;
-    private static final float increase2Threshold = StaticParams.INSTINCT_INCREASE_RATE_0 + 0.01f;
-    private static final float increase3Threshold = StaticParams.INSTINCT_INCREASE_RATE_0 + 0.1f;
+    private static final float increase1Threshold = StaticParams.INSTINCT_INCREASE_RATE + 0.005f;
+    private static final float increase2Threshold = StaticParams.INSTINCT_INCREASE_RATE + 0.01f;
+    private static final float increase3Threshold = StaticParams.INSTINCT_INCREASE_RATE + 0.1f;
 
     private boolean isInstinctLock = false;
 
@@ -47,19 +44,8 @@ public class InstinctBarRenderer  {
 
         PlayerEntity player = MinecraftClient.getInstance().player;
         IForm curForm = FormUtils.getPlayerForm(player);
-        PlayerFormPhase currentPhase = curForm.getPhase();
-        boolean showInstinctBar = !(currentPhase == PlayerFormPhase.PHASE_CLEAR || currentPhase == PlayerFormPhase.PHASE_3);;
-        if(curForm.FormIndex < 2){
-            if(CursedMoon.isCursedMoon(player.getWorld()) && CursedMoon.isNight(player.getWorld())){
-                this.isInstinctLock = true;
-            }
-            else{
-                this.isInstinctLock = false;
-            }
-        }
-        else{
-            this.isInstinctLock = true;
-        }
+        boolean showInstinctBar = FormUtils.NoInstinct.hasFlag(curForm);;
+        this.isInstinctLock = FormUtils.LockInstinct.hasFlag(curForm);
 
         if (!mc.options.hudHidden
                 && mc.interactionManager != null

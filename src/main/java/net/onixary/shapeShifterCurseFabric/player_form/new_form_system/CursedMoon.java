@@ -10,6 +10,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.ITransformReason;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 
 import java.util.Arrays;
@@ -59,7 +60,7 @@ public class CursedMoon {
             return;
         }
         boolean isOverworld = player.getWorld().getRegistryKey() == World.OVERWORLD;
-        if (RegPlayerForms.N_ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) {
+        if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) {
             if (isOverworld) {
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.on_cursed_moon_before_enable").formatted(Formatting.LIGHT_PURPLE));
             }
@@ -77,7 +78,7 @@ public class CursedMoon {
         component.lastTransformByCure = false;
         component.BeforeCursedMoonAppliedForm = null;
         component.AfterCursedMoonAppliedForm = null;
-        if (!RegPlayerForms.N_ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) {
+        if (!RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) {
             IForm nowForm = component.nowForm;
             IForm targetForm = component.nowForm._getNextForm(player, ITransformReason.CursedMoon);
             if (!nowForm.isEquals(targetForm)) {
@@ -98,7 +99,7 @@ public class CursedMoon {
         }
         boolean isOverworld = player.getWorld().getRegistryKey() == World.OVERWORLD;
         PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
-        if (RegPlayerForms.N_ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) {
+        if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) {
             if (isOverworld) {
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon_before_enable").formatted(Formatting.LIGHT_PURPLE));
             }
@@ -110,7 +111,7 @@ public class CursedMoon {
                 if (component.AfterCursedMoonAppliedForm != null && component.AfterCursedMoonAppliedForm.getFormTier() == 1) {
                     ShapeShifterCurseFabric.ON_END_CURSED_MOON_CURED_FORM_2.trigger(serverPlayer);
                 }
-            } else if(RegPlayerForms.N_ORIGINAL_SHIFTER.isPlayerForm(player)){
+            } else if(RegPlayerForms.ORIGINAL_SHIFTER.isPlayerForm(player)){
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon_special").formatted(Formatting.LIGHT_PURPLE));
             } else if (component.BeforeCursedMoonAppliedForm != null && component.AfterCursedMoonAppliedForm != null && component.AfterCursedMoonAppliedForm.isPlayerForm(player)) {
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.end_cursed_moon").formatted(Formatting.LIGHT_PURPLE));

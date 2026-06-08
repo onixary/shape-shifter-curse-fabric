@@ -12,8 +12,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import net.onixary.shapeShifterCurseFabric.custom_ui.util.ScaledLabelComponent;
 import net.onixary.shapeShifterCurseFabric.data.CodexData;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.PlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.RegPlayerFormComponent;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
@@ -394,8 +392,6 @@ public class BookOfShapeShifterScreen extends BaseOwoScreen<FlowLayout> {
 
     private float calculatePlayerScale(PlayerEntity player) {
         float BASE_SCALE_FACTOR = 0.25f;
-        PlayerFormComponent formComp = player.getComponent(RegPlayerFormComponent.PLAYER_FORM);
-        //float formScale = RegFormConfig.CONFIGS.get(formComp.getCurrentForm()).getScale();
         float formScale = 1;
         return BASE_SCALE_FACTOR * (1.0f / formScale);
     }
