@@ -1,0 +1,625 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:form_anubis_wolf_sound_key",
+  "updatedAt": "2026-06-08T16:04:41.051Z",
+  "viewport": {
+    "x": 13.361137662463705,
+    "y": -65.46740768721565,
+    "zoom": 0.8040888484979252
+  },
+  "nodes": [
+    {
+      "id": "ast-5",
+      "astNodeId": "ast-5",
+      "type": "origins:active_self",
+      "kind": "power",
+      "label": "form_anubis_wolf_sound_key_normal",
+      "title": "form_anubis_wolf_sound_key_normal",
+      "signature": "power|origins:active_self|form_anubis_wolf_sound_key_normal|form_anubis_wolf_sound_key_normal",
+      "occurrence": 0,
+      "position": {
+        "x": 80,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-1",
+      "astNodeId": "ast-1",
+      "type": "origins:play_sound",
+      "kind": "entity_action",
+      "title": "play sound",
+      "signature": "entity_action|origins:play_sound||play sound",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-2",
+      "astNodeId": "ast-2",
+      "type": "hud_render",
+      "kind": "datatype",
+      "title": "HUD Render",
+      "signature": "datatype|hud_render||HUD Render",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 314
+      }
+    },
+    {
+      "id": "ast-3",
+      "astNodeId": "ast-3",
+      "type": "key",
+      "kind": "datatype",
+      "title": "Key",
+      "signature": "datatype|key||Key",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 548
+      }
+    },
+    {
+      "id": "ast-4",
+      "astNodeId": "ast-4",
+      "type": "origins:sneaking",
+      "kind": "entity_condition",
+      "title": "sneaking",
+      "signature": "entity_condition|origins:sneaking||sneaking",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 782
+      }
+    },
+    {
+      "id": "ast-10",
+      "astNodeId": "ast-10",
+      "type": "origins:active_self",
+      "kind": "power",
+      "label": "form_anubis_wolf_sound_key_hiss",
+      "title": "form_anubis_wolf_sound_key_hiss",
+      "signature": "power|origins:active_self|form_anubis_wolf_sound_key_hiss|form_anubis_wolf_sound_key_hiss",
+      "occurrence": 0,
+      "position": {
+        "x": 73.78178169074192,
+        "y": 532.8812844858826
+      }
+    },
+    {
+      "id": "ast-6",
+      "astNodeId": "ast-6",
+      "type": "origins:play_sound",
+      "kind": "entity_action",
+      "title": "play sound",
+      "signature": "entity_action|origins:play_sound||play sound",
+      "occurrence": 1,
+      "position": {
+        "x": 590,
+        "y": 1016
+      }
+    },
+    {
+      "id": "ast-7",
+      "astNodeId": "ast-7",
+      "type": "hud_render",
+      "kind": "datatype",
+      "title": "HUD Render",
+      "signature": "datatype|hud_render||HUD Render",
+      "occurrence": 1,
+      "position": {
+        "x": 590,
+        "y": 1250
+      }
+    },
+    {
+      "id": "ast-8",
+      "astNodeId": "ast-8",
+      "type": "key",
+      "kind": "datatype",
+      "title": "Key",
+      "signature": "datatype|key||Key",
+      "occurrence": 1,
+      "position": {
+        "x": 590,
+        "y": 1484
+      }
+    },
+    {
+      "id": "ast-9",
+      "astNodeId": "ast-9",
+      "type": "origins:sneaking",
+      "kind": "entity_condition",
+      "title": "sneaking",
+      "signature": "entity_condition|origins:sneaking||sneaking",
+      "occurrence": 1,
+      "position": {
+        "x": 590,
+        "y": 1718
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "ast-5",
+        "astNodeId": "ast-5",
+        "type": "origins:active_self",
+        "kind": "power",
+        "title": "form_anubis_wolf_sound_key_normal",
+        "label": "form_anubis_wolf_sound_key_normal",
+        "color": "power",
+        "position": {
+          "x": 80,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "entity_action",
+            "schema": {
+              "name": "entity_action",
+              "valueKind": "slot",
+              "slotKind": "entity_action",
+              "required": true
+            },
+            "valueKind": "slot",
+            "displayValue": "-> play sound",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-5:out:entity_action"
+          },
+          {
+            "name": "cooldown",
+            "schema": {
+              "name": "cooldown",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "5",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-5:out:cooldown"
+          },
+          {
+            "name": "hud_render",
+            "schema": {
+              "name": "hud_render",
+              "valueKind": "datatype",
+              "datatype": "hud_render"
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> HUD Render",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-5:out:hud_render"
+          },
+          {
+            "name": "key",
+            "schema": {
+              "name": "key",
+              "valueKind": "datatype",
+              "datatype": "key"
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Key",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-5:out:key"
+          },
+          {
+            "name": "condition",
+            "schema": {
+              "name": "condition",
+              "valueKind": "slot",
+              "slotKind": "entity_condition"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> sneaking",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-5:out:condition"
+          }
+        ]
+      },
+      {
+        "id": "ast-1",
+        "astNodeId": "ast-1",
+        "type": "origins:play_sound",
+        "kind": "entity_action",
+        "title": "play sound",
+        "color": "action",
+        "position": {
+          "x": 590,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "sound",
+            "schema": {
+              "name": "sound",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:entity.wolf.ambient",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-1:out:sound"
+          }
+        ]
+      },
+      {
+        "id": "ast-2",
+        "astNodeId": "ast-2",
+        "type": "hud_render",
+        "kind": "datatype",
+        "title": "HUD Render",
+        "color": "datatype",
+        "position": {
+          "x": 590,
+          "y": 314
+        },
+        "fields": [
+          {
+            "name": "should_render",
+            "schema": {
+              "name": "should_render",
+              "valueKind": "boolean",
+              "defaultValue": true
+            },
+            "valueKind": "boolean",
+            "displayValue": "false",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-2:out:should_render"
+          }
+        ]
+      },
+      {
+        "id": "ast-3",
+        "astNodeId": "ast-3",
+        "type": "key",
+        "kind": "datatype",
+        "title": "Key",
+        "color": "datatype",
+        "position": {
+          "x": 590,
+          "y": 548
+        },
+        "fields": [
+          {
+            "name": "key",
+            "schema": {
+              "name": "key",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "key.shape-shifter-curse.make_sound",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-3:out:key"
+          },
+          {
+            "name": "continuous",
+            "schema": {
+              "name": "continuous",
+              "valueKind": "boolean",
+              "defaultValue": false
+            },
+            "valueKind": "boolean",
+            "displayValue": "false",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-3:out:continuous"
+          }
+        ]
+      },
+      {
+        "id": "ast-4",
+        "astNodeId": "ast-4",
+        "type": "origins:sneaking",
+        "kind": "entity_condition",
+        "title": "sneaking",
+        "color": "condition",
+        "position": {
+          "x": 590,
+          "y": 782
+        },
+        "fields": [
+          {
+            "name": "inverted",
+            "schema": {
+              "name": "inverted",
+              "valueKind": "boolean",
+              "defaultValue": false
+            },
+            "valueKind": "boolean",
+            "displayValue": "true",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-4:out:inverted"
+          }
+        ]
+      },
+      {
+        "id": "ast-10",
+        "astNodeId": "ast-10",
+        "type": "origins:active_self",
+        "kind": "power",
+        "title": "form_anubis_wolf_sound_key_hiss",
+        "label": "form_anubis_wolf_sound_key_hiss",
+        "color": "power",
+        "position": {
+          "x": 73.78178169074192,
+          "y": 532.8812844858826
+        },
+        "fields": [
+          {
+            "name": "entity_action",
+            "schema": {
+              "name": "entity_action",
+              "valueKind": "slot",
+              "slotKind": "entity_action",
+              "required": true
+            },
+            "valueKind": "slot",
+            "displayValue": "-> play sound",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-10:out:entity_action"
+          },
+          {
+            "name": "cooldown",
+            "schema": {
+              "name": "cooldown",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "5",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-10:out:cooldown"
+          },
+          {
+            "name": "hud_render",
+            "schema": {
+              "name": "hud_render",
+              "valueKind": "datatype",
+              "datatype": "hud_render"
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> HUD Render",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-10:out:hud_render"
+          },
+          {
+            "name": "key",
+            "schema": {
+              "name": "key",
+              "valueKind": "datatype",
+              "datatype": "key"
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Key",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-10:out:key"
+          },
+          {
+            "name": "condition",
+            "schema": {
+              "name": "condition",
+              "valueKind": "slot",
+              "slotKind": "entity_condition"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> sneaking",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-10:out:condition"
+          }
+        ]
+      },
+      {
+        "id": "ast-6",
+        "astNodeId": "ast-6",
+        "type": "origins:play_sound",
+        "kind": "entity_action",
+        "title": "play sound",
+        "color": "action",
+        "position": {
+          "x": 590,
+          "y": 1016
+        },
+        "fields": [
+          {
+            "name": "sound",
+            "schema": {
+              "name": "sound",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:entity.wolf.growl",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-6:out:sound"
+          }
+        ]
+      },
+      {
+        "id": "ast-7",
+        "astNodeId": "ast-7",
+        "type": "hud_render",
+        "kind": "datatype",
+        "title": "HUD Render",
+        "color": "datatype",
+        "position": {
+          "x": 590,
+          "y": 1250
+        },
+        "fields": [
+          {
+            "name": "should_render",
+            "schema": {
+              "name": "should_render",
+              "valueKind": "boolean",
+              "defaultValue": true
+            },
+            "valueKind": "boolean",
+            "displayValue": "false",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-7:out:should_render"
+          }
+        ]
+      },
+      {
+        "id": "ast-8",
+        "astNodeId": "ast-8",
+        "type": "key",
+        "kind": "datatype",
+        "title": "Key",
+        "color": "datatype",
+        "position": {
+          "x": 590,
+          "y": 1484
+        },
+        "fields": [
+          {
+            "name": "key",
+            "schema": {
+              "name": "key",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "key.shape-shifter-curse.make_sound",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-8:out:key"
+          },
+          {
+            "name": "continuous",
+            "schema": {
+              "name": "continuous",
+              "valueKind": "boolean",
+              "defaultValue": false
+            },
+            "valueKind": "boolean",
+            "displayValue": "false",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-8:out:continuous"
+          }
+        ]
+      },
+      {
+        "id": "ast-9",
+        "astNodeId": "ast-9",
+        "type": "origins:sneaking",
+        "kind": "entity_condition",
+        "title": "sneaking",
+        "color": "condition",
+        "position": {
+          "x": 590,
+          "y": 1718
+        },
+        "fields": []
+      }
+    ],
+    "edges": [
+      {
+        "id": "ast-5:entity_action->ast-1",
+        "source": "ast-5",
+        "target": "ast-1",
+        "sourceHandle": "ast-5:out:entity_action",
+        "targetHandle": "ast-1:in",
+        "fieldName": "entity_action",
+        "color": "action"
+      },
+      {
+        "id": "ast-5:hud_render->ast-2",
+        "source": "ast-5",
+        "target": "ast-2",
+        "sourceHandle": "ast-5:out:hud_render",
+        "targetHandle": "ast-2:in",
+        "fieldName": "hud_render",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-5:key->ast-3",
+        "source": "ast-5",
+        "target": "ast-3",
+        "sourceHandle": "ast-5:out:key",
+        "targetHandle": "ast-3:in",
+        "fieldName": "key",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-5:condition->ast-4",
+        "source": "ast-5",
+        "target": "ast-4",
+        "sourceHandle": "ast-5:out:condition",
+        "targetHandle": "ast-4:in",
+        "fieldName": "condition",
+        "color": "condition"
+      },
+      {
+        "id": "ast-10:entity_action->ast-6",
+        "source": "ast-10",
+        "target": "ast-6",
+        "sourceHandle": "ast-10:out:entity_action",
+        "targetHandle": "ast-6:in",
+        "fieldName": "entity_action",
+        "color": "action"
+      },
+      {
+        "id": "ast-10:hud_render->ast-7",
+        "source": "ast-10",
+        "target": "ast-7",
+        "sourceHandle": "ast-10:out:hud_render",
+        "targetHandle": "ast-7:in",
+        "fieldName": "hud_render",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-10:key->ast-8",
+        "source": "ast-10",
+        "target": "ast-8",
+        "sourceHandle": "ast-10:out:key",
+        "targetHandle": "ast-8:in",
+        "fieldName": "key",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-10:condition->ast-9",
+        "source": "ast-10",
+        "target": "ast-9",
+        "sourceHandle": "ast-10:out:condition",
+        "targetHandle": "ast-9:in",
+        "fieldName": "condition",
+        "color": "condition"
+      }
+    ]
+  }
+}

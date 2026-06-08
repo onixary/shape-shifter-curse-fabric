@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:form_anubis_wolf_1_summon_wolf_when_hit",
+  "updatedAt": "2026-06-08T15:04:49.943Z",
+  "viewport": {
+    "x": 14.914490985935686,
+    "y": 150.84022351801895,
+    "zoom": 1.4
+  },
+  "nodes": [
+    {
+      "id": "ast-3",
+      "astNodeId": "ast-3",
+      "type": "origins:action_when_hit",
+      "kind": "power",
+      "label": "root",
+      "title": "root",
+      "signature": "power|origins:action_when_hit|root|root",
+      "occurrence": 0,
+      "position": {
+        "x": 80,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-1",
+      "astNodeId": "ast-1",
+      "type": "shape-shifter-curse:bi_summon_anubis_wolf_minion",
+      "kind": "bientity_action",
+      "title": "bi summon anubis wolf minion",
+      "signature": "bientity_action|shape-shifter-curse:bi_summon_anubis_wolf_minion||bi summon anubis wolf minion",
+      "occurrence": 0,
+      "position": {
+        "x": 610,
+        "y": 19.999999999999993
+      }
+    },
+    {
+      "id": "ast-2",
+      "astNodeId": "ast-2",
+      "type": "origins:attacker",
+      "kind": "bientity_condition",
+      "title": "attacker",
+      "signature": "bientity_condition|origins:attacker||attacker",
+      "occurrence": 0,
+      "position": {
+        "x": 605.7142857142858,
+        "y": 397.5714285714286
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "ast-3",
+        "astNodeId": "ast-3",
+        "type": "origins:action_when_hit",
+        "kind": "power",
+        "title": "root",
+        "label": "root",
+        "color": "power",
+        "position": {
+          "x": 80,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "bientity_action",
+            "schema": {
+              "name": "bientity_action",
+              "valueKind": "slot",
+              "slotKind": "bientity_action",
+              "required": true
+            },
+            "valueKind": "slot",
+            "displayValue": "-> bi summon anubis wolf minion",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-3:out:bientity_action"
+          },
+          {
+            "name": "damage_condition",
+            "schema": {
+              "name": "damage_condition",
+              "valueKind": "slot",
+              "slotKind": "damage_condition"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> attacker",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-3:out:damage_condition"
+          }
+        ]
+      },
+      {
+        "id": "ast-1",
+        "astNodeId": "ast-1",
+        "type": "shape-shifter-curse:bi_summon_anubis_wolf_minion",
+        "kind": "bientity_action",
+        "title": "bi summon anubis wolf minion",
+        "color": "action",
+        "position": {
+          "x": 610,
+          "y": 19.999999999999993
+        },
+        "fields": [
+          {
+            "name": "minion_level",
+            "schema": {
+              "name": "minion_level",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "1",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-1:out:minion_level"
+          },
+          {
+            "name": "count",
+            "schema": {
+              "name": "count",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "1",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-1:out:count"
+          },
+          {
+            "name": "max_minion_count",
+            "schema": {
+              "name": "max_minion_count",
+              "valueKind": "number",
+              "numberKind": "int"
+            },
+            "valueKind": "number",
+            "displayValue": "1",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-1:out:max_minion_count"
+          },
+          {
+            "name": "cooldown",
+            "schema": {
+              "name": "cooldown",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "600",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-1:out:cooldown"
+          },
+          {
+            "name": "reverse",
+            "schema": {
+              "name": "reverse",
+              "valueKind": "boolean",
+              "defaultValue": false
+            },
+            "valueKind": "boolean",
+            "displayValue": "true",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-1:out:reverse"
+          }
+        ]
+      },
+      {
+        "id": "ast-2",
+        "astNodeId": "ast-2",
+        "type": "origins:attacker",
+        "kind": "bientity_condition",
+        "title": "attacker",
+        "color": "condition",
+        "position": {
+          "x": 605.7142857142858,
+          "y": 397.5714285714286
+        },
+        "fields": []
+      }
+    ],
+    "edges": [
+      {
+        "id": "ast-3:bientity_action->ast-1",
+        "source": "ast-3",
+        "target": "ast-1",
+        "sourceHandle": "ast-3:out:bientity_action",
+        "targetHandle": "ast-1:in",
+        "fieldName": "bientity_action",
+        "color": "action"
+      },
+      {
+        "id": "ast-3:damage_condition->ast-2",
+        "source": "ast-3",
+        "target": "ast-2",
+        "sourceHandle": "ast-3:out:damage_condition",
+        "targetHandle": "ast-2:in",
+        "fieldName": "damage_condition",
+        "color": "condition"
+      }
+    ]
+  }
+}

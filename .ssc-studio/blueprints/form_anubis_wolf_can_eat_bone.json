@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:form_anubis_wolf_can_eat_bone",
+  "updatedAt": "2026-06-08T15:05:24.951Z",
+  "viewport": {
+    "x": 506.5,
+    "y": 183.8,
+    "zoom": 1.4
+  },
+  "nodes": [
+    {
+      "id": "ast-1",
+      "astNodeId": "ast-1",
+      "type": "shape-shifter-curse:custom_edible",
+      "kind": "power",
+      "label": "root",
+      "title": "root",
+      "signature": "power|shape-shifter-curse:custom_edible|root|root",
+      "occurrence": 0,
+      "position": {
+        "x": 64.2857142857143,
+        "y": 76.42857142857143
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "ast-1",
+        "astNodeId": "ast-1",
+        "type": "shape-shifter-curse:custom_edible",
+        "kind": "power",
+        "title": "root",
+        "label": "root",
+        "color": "power",
+        "position": {
+          "x": 64.2857142857143,
+          "y": 76.42857142857143
+        },
+        "fields": [
+          {
+            "name": "item_id_list",
+            "schema": {
+              "name": "item_id_list",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "Array[1]",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-1:out:item_id_list"
+          },
+          {
+            "name": "hunger",
+            "schema": {
+              "name": "hunger",
+              "valueKind": "number",
+              "numberKind": "int",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "5",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-1:out:hunger"
+          },
+          {
+            "name": "saturation_modifier",
+            "schema": {
+              "name": "saturation_modifier",
+              "valueKind": "number",
+              "numberKind": "float",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "0.4",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-1:out:saturation_modifier"
+          },
+          {
+            "name": "always_edible",
+            "schema": {
+              "name": "always_edible",
+              "valueKind": "boolean",
+              "required": true
+            },
+            "valueKind": "boolean",
+            "displayValue": "true",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-1:out:always_edible"
+          }
+        ]
+      }
+    ],
+    "edges": []
+  }
+}
