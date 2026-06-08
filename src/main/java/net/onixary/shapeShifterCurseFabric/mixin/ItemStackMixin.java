@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.IsMorphScaleItemCondition;
 import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.old.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.old.transform.TransformRelatedItems;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

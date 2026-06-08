@@ -10,12 +10,12 @@ import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
 import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormPhase;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.old.ability.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.old.ability.RegPlayerFormComponent;
 
 import java.util.Iterator;
 
-import static net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager.getForm;
+import static net.onixary.shapeShifterCurseFabric.player_form.old.ability.FormAbilityManager.getForm;
 import static net.onixary.shapeShifterCurseFabric.player_form.old.transform.TransformManager.handleProgressiveTransform;
 
 public class InstinctTicker {

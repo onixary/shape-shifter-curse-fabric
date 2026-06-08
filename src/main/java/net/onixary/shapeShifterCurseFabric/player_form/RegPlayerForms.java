@@ -5,8 +5,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.forms.*;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormPhase;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -233,8 +232,7 @@ public class RegPlayerForms {
         return getPlayerFormOrDefault(Identifier.tryParse(id), defaultForm);
     }
 
-    // 比较两个PlayerForm是否相等 支持null
-    public static Boolean IsPlayerFormEqual(IForm form1, IForm form2) {
+    public static Boolean IsPlayerFormEqual(@Nullable IForm form1, @Nullable IForm form2) {
         if (form1 == null || form2 == null) {
             return form1 == null && form2 == null;
         }

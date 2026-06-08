@@ -1,5 +1,8 @@
 package net.onixary.shapeShifterCurseFabric.player_form.utils;
 
+import io.github.apace100.apoli.component.PowerHolderComponent;
+import io.github.apace100.apoli.power.PowerType;
+import io.github.apace100.apoli.power.PowerTypeRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -16,14 +19,12 @@ import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.ITransformReason;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.new_form_system.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.util.TrinketUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class FormUtils {
@@ -52,6 +53,79 @@ public class FormUtils {
     public static final FlagData NoAnyInhibitor = new FlagData("no_any_inhibitor"); // 禁止常规抑制剂(除了创造版本) 给最终形态用
     public static final FlagData StarterForm = new FlagData("starter_form"); // 诅咒之月给开书后形态随机挑的形态
 
+    public static record ExtraPower(@NotNull Identifier LayerID, @NotNull Identifier FormID, @NotNull List<Identifier> PowerIDs) {
+        public @NotNull Identifier getLayerID() { return LayerID; }
+        public @NotNull Identifier getFormID() { return FormID; }
+        public @NotNull List<Identifier> getPowerIDs() { return PowerIDs; }
+
+        public boolean canApply(Identifier layerID, Identifier formID) {
+            return getLayerID().equals(layerID) && getFormID().equals(formID);
+        }
+    }
+
+    private static void applyPower(PlayerEntity player, Identifier powerId, Identifier powerSource) {
+        if (PowerTypeRegistry.contains(powerId)) {
+            PowerType<?> powerType = PowerTypeRegistry.get(powerId);
+            if (powerType != null) {
+                PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
+                powerHolder.addPower(powerType, powerSource);
+            }
+        }
+        else {
+            new Thread(() -> {
+                try {
+                    boolean FoundPower = false;
+                    for (int i = 0; i < 20; i++) {
+                        Thread.sleep(100);
+                        if (PowerTypeRegistry.contains(powerId)) {
+                            FoundPower = true;
+                            break;
+                        }
+                    }
+                    if (FoundPower) {
+                        PowerType<?> powerType = PowerTypeRegistry.get(powerId);
+                        if (powerType != null) {
+                            PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
+                            powerHolder.addPower(powerType, powerSource);
+                        }
+                    }
+                    else {
+                        ShapeShifterCurseFabric.LOGGER.warn("Failed to apply power " + powerId.toString() + " for player " + player.getName() + " after 2 seconds");
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+    }
+
+    public static final HashMap<Identifier, ExtraPower> extraPowerRegistry = new HashMap<>();
+    public static void registerExtraPower(Identifier identifier, ExtraPower extraPower) {
+        extraPowerRegistry.put(identifier, extraPower);
+    }
+
+    public static void applyExtraPower(PlayerEntity player, Pair<Identifier, Identifier> layerData) {
+        extraPowerRegistry.forEach((id, extraPower) -> {
+            if (extraPower.canApply(layerData.getLeft(), layerData.getRight())) {
+                extraPower.getPowerIDs().forEach(powerId -> applyPower(player, powerId, layerData.getLeft()));
+            }
+        });
+    }
+
+    public static void applyLayer(PlayerEntity player, Pair<Identifier, Identifier> layerData) {
+        // 临时 等移除Origins后再重新这部分
+        OriginComponent component = ModComponents.ORIGIN.get(player);
+        OriginLayer layer = OriginLayers.getLayer(layerData.getLeft());
+        if (layer != null && layerData.getRight() != null) {
+            Origin origin = OriginRegistry.get(layerData.getRight());
+            if(layer.contains(origin, player)){
+                component.setOrigin(layer, origin);
+                component.sync();
+            }
+        }
+        applyExtraPower(player, layerData);
+    }
+
     public static Set<String> buildFormFlag(FlagData... flags) {
         Set<String> flagSet = new HashSet<>();
         for (FlagData flag : flags) {
@@ -61,7 +135,7 @@ public class FormUtils {
     }
 
     public static @Nullable IForm getForm(@NotNull Identifier formID) {
-        return null;
+        return RegPlayerForms.getPlayerForm(formID);
     }
 
     public static @NotNull IForm parseForm(@Nullable Identifier formID, IForm defaultForm) {
@@ -104,27 +178,22 @@ public class FormUtils {
     }
 
     public static void _loadForm(PlayerEntity player, IForm form) {
-        // 临时 等移除Origins后再重新这部分
-        OriginComponent component = ModComponents.ORIGIN.get(player);
-        Pair<Identifier, Identifier> layerPair = form.getFormLayer();
-        OriginLayer layer = OriginLayers.getLayer(layerPair.getLeft());
-        if (layer != null && layerPair.getRight() != null) {
-            Origin origin = OriginRegistry.get(layerPair.getRight());
-            if(layer.contains(origin, player)){
-                component.setOrigin(layer, origin);
-                component.sync();
-            }
-        }
-
-        // applyExtraPower
-        // checkAndClearTransformativeEffect
-
         PlayerFormComponent playerFormComponent = PlayerFormComponent.COMPONENT.get(player);
         playerFormComponent.nowForm = form;
         playerFormComponent.sync();
 
-        AnimUtils.stopPowerAnim(player, AnimUtils.AnimationSendSideType.ONLY_SERVER);
+        if (!RegPlayerForms.ORIGINAL_SHIFTER.isPlayerForm(player)) {
+            EffectManager.clearTransformativeEffect(player);
+        }
+        // 应用Scale
+        form.applyScale(player);
+        // 应用Power Origin -> OriginExtraPower -> AccessoryPower
+        Pair<Identifier, Identifier> layerPair = form.getFormLayer();
+        applyLayer(player, layerPair);
         TrinketUtils.ReApplyAccessoryPowerOnPlayerFormChange(player);
+        // 停止Power动画 目前就蝙蝠用了
+        AnimUtils.stopPowerAnim(player, AnimUtils.AnimationSendSideType.ONLY_SERVER);
+
         if (!player.getWorld().isClient() && player instanceof ServerPlayerEntity serverPlayer) {
             try {
                 // 改成Identifier

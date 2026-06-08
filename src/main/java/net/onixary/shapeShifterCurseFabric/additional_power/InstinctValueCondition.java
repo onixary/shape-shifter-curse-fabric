@@ -11,7 +11,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormPhase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.FormAbilityManager;
+import net.onixary.shapeShifterCurseFabric.player_form.old.ability.FormAbilityManager;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent;
 
 public class InstinctValueCondition {

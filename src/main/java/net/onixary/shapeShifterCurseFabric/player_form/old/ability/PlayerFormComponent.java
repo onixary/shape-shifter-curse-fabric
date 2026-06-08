@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.player_form.ability;
+package net.onixary.shapeShifterCurseFabric.player_form.old.ability;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.nbt.NbtCompound;

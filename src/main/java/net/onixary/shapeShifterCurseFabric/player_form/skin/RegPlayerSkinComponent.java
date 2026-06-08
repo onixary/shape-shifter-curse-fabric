@@ -7,7 +7,6 @@ import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
 import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.PlayerFormComponent;
 
 public class RegPlayerSkinComponent  implements EntityComponentInitializer {
     public static final ComponentKey<PlayerSkinComponent> SKIN_SETTINGS =
