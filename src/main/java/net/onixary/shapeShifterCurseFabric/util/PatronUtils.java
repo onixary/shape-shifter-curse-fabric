@@ -10,7 +10,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
-import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormDynamic;
+import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 
 import java.io.*;
@@ -278,19 +278,19 @@ public class PatronUtils {
         List<Identifier> patronForms = new ArrayList<>();
         if (jsonObjects != null) {
             for (JsonObject jsonObject : jsonObjects) {
-                PlayerFormDynamic pfd = null;
+                DynamicForm pfd = null;
                 try {
-                    pfd = PlayerFormDynamic.of(jsonObject);
+                    pfd = DynamicForm.fromJson(null, jsonObject);
                 }
                 catch (IllegalArgumentException e) {
                     ShapeShifterCurseFabric.LOGGER.error("Failed to parse PlayerFormDynamic from json No FormID", e);
                     continue;
                 }
-                if (!pfd.FormID.getNamespace().equals(RegPlayerForms.PatronNameSpace)) {
-                    ShapeShifterCurseFabric.LOGGER.warn("DataPack contains non-patron PlayerFormDynamic: {}", pfd.FormID);
+                if (!pfd.getFormID().getNamespace().equals(RegPlayerForms.PatronNameSpace)) {
+                    ShapeShifterCurseFabric.LOGGER.warn("DataPack contains non-patron PlayerFormDynamic: {}", pfd.getFormID());
                     continue;
                 }
-                Identifier formID = RegPlayerForms.registerDynamicPlayerForm(pfd).FormID;
+                Identifier formID = RegPlayerForms.registerDynamicPlayerForm(pfd).getFormID();
                 if (!patronForms.contains(formID)) {
                     patronForms.add(formID);
                 }

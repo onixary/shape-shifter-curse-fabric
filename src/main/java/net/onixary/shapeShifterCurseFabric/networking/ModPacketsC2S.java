@@ -16,6 +16,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnSprintingToS
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
+import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
@@ -278,7 +279,7 @@ public class ModPacketsC2S {
             });
             return;
         }
-        if (form instanceof PlayerFormDynamic pfd) {
+        if (form instanceof DynamicForm pfd) {
             minecraftServer.execute(() -> {
                 if (playerEntity == null) {
                     ShapeShifterCurseFabric.LOGGER.warn("[SetPatronForm] Player is null");

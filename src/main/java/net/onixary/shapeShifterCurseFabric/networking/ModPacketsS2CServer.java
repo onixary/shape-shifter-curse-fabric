@@ -12,6 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
+import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import org.jetbrains.annotations.Nullable;
@@ -165,13 +166,13 @@ public class ModPacketsS2CServer {
     // 现在理论 单包32K Form数量无限
     public static void updateDynamicForm(ServerPlayerEntity player) {
         int MaxFormPerPacket = 63;  // 2M / 32K - 1
-        HashMap<Identifier, PlayerFormDynamic> forms = RegPlayerForms.DumpDynamicPlayerForms();
+        HashMap<Identifier, DynamicForm> forms = RegPlayerForms.DumpDynamicPlayerForms();
         sendRemoveDynamicFormExcept(player);
         for (int i = 0; i < forms.size(); i += MaxFormPerPacket) {
             JsonObject jsonForms = new JsonObject();
             for (int j = 0; j < MaxFormPerPacket && i + j < forms.size(); j++) {
                 Identifier formId = RegPlayerForms.dynamicPlayerForms.get(i + j);
-                jsonForms.add(formId.toString(), forms.get(formId).save());
+                jsonForms.add(formId.toString(), forms.get(formId).toJson());
             }
             sendUpdateDynamicForm(player, jsonForms);
         }
@@ -186,10 +187,10 @@ public class ModPacketsS2CServer {
     // 仅在获取到 Patron 数据后调用 玩家登录由 updateDynamicForm 负责
     public static void updatePatronForms(ServerPlayerEntity player, List<Identifier> patronForms) {
         int MaxFormPerPacket = 63;
-        HashMap<Identifier, PlayerFormDynamic> forms = new HashMap<>();
+        HashMap<Identifier, DynamicForm> forms = new HashMap<>();
         for (Identifier formId : patronForms) {
             IForm form = RegPlayerForms.getPlayerForm(formId);
-            if (form instanceof PlayerFormDynamic pfd) {
+            if (form instanceof DynamicForm pfd) {
                 forms.put(formId, pfd);
             }
         }
@@ -197,7 +198,7 @@ public class ModPacketsS2CServer {
         int RemainPacket = forms.size();
         JsonObject jsonForms = new JsonObject();
         for (Identifier formId : forms.keySet()) {
-            jsonForms.add(formId.toString(), forms.get(formId).save());
+            jsonForms.add(formId.toString(), forms.get(formId).toJson());
             NowPacket ++;
             RemainPacket --;
             if (NowPacket % MaxFormPerPacket == 0) {

@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.player_form;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -21,6 +22,7 @@ public class NormalForm implements IForm {
     private Set<String> formFlag = Set.of();
     private PlayerFormBodyType bodyType = PlayerFormBodyType.NORMAL;
     private @Nullable Consumer<PlayerEntity> applyScaleFunc = null;
+    private boolean powerAnimRegistered = false;
 
     public static final BiFunction<Float, Float, Consumer<PlayerEntity>> NORMAL_SCALE_FUNC_BUILDER = (scale, eye_scale) -> (player) -> {
         ScaleData scaleDataWidth = ScaleTypes.WIDTH.getScaleData(player);
@@ -137,5 +139,16 @@ public class NormalForm implements IForm {
             return this.isEquals(iForm);
         }
         return false;
+    }
+
+    @Override
+    public void registerPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) {
+        powerAnimRegistered = true;
+        return;
+    }
+
+    @Override
+    public boolean isPowerAnimRegistered(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) {
+        return powerAnimRegistered;
     }
 }
