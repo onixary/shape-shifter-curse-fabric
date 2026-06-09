@@ -45,6 +45,9 @@ public class TransformManager {
     }
 
     public static void startTransform(PlayerEntity player, IForm form, @Nullable Consumer<PlayerTransformData> onTransformComplete) {
+        if (form.isPlayerForm(player)) {
+            return;
+        }
         PlayerFormComponent.COMPONENT.get(player).transformTargetForm = form;
         PlayerTransformData data = getPlayerData(player);
         data.transformTimer = 0;
@@ -59,6 +62,9 @@ public class TransformManager {
     }
 
     public static void immediatelyTransform(PlayerEntity player, IForm form) {
+        if (form.isPlayerForm(player)) {
+            return;
+        }
         PlayerFormComponent.COMPONENT.get(player).transformTargetForm = form;
         PlayerTransformData data = getPlayerData(player);
         data.transformTimer = -1;
@@ -68,7 +74,7 @@ public class TransformManager {
         setForm(player);
     }
 
-    public static void setForm(PlayerEntity player) {
+    private static void setForm(PlayerEntity player) {
         PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
         component.transformTargetForm = null;
         PlayerTransformData data = getPlayerData(player);

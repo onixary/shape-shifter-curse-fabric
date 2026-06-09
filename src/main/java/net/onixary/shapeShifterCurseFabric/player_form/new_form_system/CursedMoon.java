@@ -117,9 +117,8 @@ public class CursedMoon {
         }
         component.isCursedMoonApplied = false;
         component.lastTransformByCure = false;
-        if (component.BeforeCursedMoonAppliedForm != null && component.AfterCursedMoonAppliedForm != null && component.AfterCursedMoonAppliedForm.isPlayerForm(player)) {
-            TransformManager.startTransform(player, component.BeforeCursedMoonAppliedForm, null);
-        }
+        IForm targetForm = component.nowForm._getPrevForm(player, ITransformReason.CursedMoon);
+        TransformManager.startTransform(player, targetForm, null);
         component.BeforeCursedMoonAppliedForm = null;
         component.AfterCursedMoonAppliedForm = null;
         component.sync();
