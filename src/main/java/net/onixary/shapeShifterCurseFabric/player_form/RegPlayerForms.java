@@ -194,7 +194,10 @@ public class RegPlayerForms {
         dynamicPlayerFormGroups.clear();
     }
 
-    public static IForm getPlayerForm(Identifier id) {
+    public static IForm getPlayerForm(@Nullable Identifier id) {
+        if (id == null) {
+            return null;
+        }
         return playerForms.get(id);
     }
 
@@ -234,7 +237,10 @@ public class RegPlayerForms {
         return form1.isEquals(form2);
     }
 
-    public static IFormGroup getPlayerFormGroup(Identifier id) {
+    public static IFormGroup getPlayerFormGroup(@Nullable Identifier id) {
+        if (id == null) {
+            return null;
+        }
         return playerFormGroups.get(id);
     }
 
