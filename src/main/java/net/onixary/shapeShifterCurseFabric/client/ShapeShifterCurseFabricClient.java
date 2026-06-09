@@ -24,6 +24,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.CustomEdiblePower;
 import net.onixary.shapeShifterCurseFabric.additional_power.ItemStorePower;
 import net.onixary.shapeShifterCurseFabric.additional_power.LevitatePower;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
+import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.custom_ui.BookOfShapeShifterScreenV2_P1;
 import net.onixary.shapeShifterCurseFabric.custom_ui.StartBookScreenV2;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
@@ -40,6 +41,7 @@ import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 import net.onixary.shapeShifterCurseFabric.minion.MinionRegisterClient;
 import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.render.form_render.FormRenderUtils;
 import net.onixary.shapeShifterCurseFabric.render.render_layer.FurGradientRenderLayer;
 import net.onixary.shapeShifterCurseFabric.util.*;
@@ -169,6 +171,8 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 			return;
 		}
 		// Mana System
+		TransformManager.clientTick();
+		CursedMoon.clientTick(minecraftClient.world);
 		if (!MinecraftClient.getInstance().isPaused()) {
 			ManaUtils.manaTick(minecraftClient.player);
 		}

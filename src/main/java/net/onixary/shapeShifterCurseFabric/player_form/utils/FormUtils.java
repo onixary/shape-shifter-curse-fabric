@@ -14,6 +14,7 @@ import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLaye
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayers;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginRegistry;
 import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.ITransformReason;
@@ -178,7 +179,7 @@ public class FormUtils {
 
     public static void _loadForm(PlayerEntity player, IForm form) {
         PlayerFormComponent playerFormComponent = PlayerFormComponent.COMPONENT.get(player);
-        playerFormComponent.nowForm = form;
+        playerFormComponent.setForm(form);
         playerFormComponent.sync();
 
         if (!RegPlayerForms.ORIGINAL_SHIFTER.isPlayerForm(player)) {
@@ -195,8 +196,7 @@ public class FormUtils {
 
         if (!player.getWorld().isClient() && player instanceof ServerPlayerEntity serverPlayer) {
             try {
-                // 改成Identifier
-                // ModPacketsS2CServer.sendFormChange(serverPlayer, form.getFormID());
+                ModPacketsS2CServer.sendFormChange(serverPlayer, form.getFormID());
             } catch (Exception e) {
                 ShapeShifterCurseFabric.LOGGER.error("Failed to send form change notification: ", e);
             }

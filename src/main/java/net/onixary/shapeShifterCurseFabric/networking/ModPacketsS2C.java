@@ -20,6 +20,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
+import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenu;
 import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenuV2;
 import net.onixary.shapeShifterCurseFabric.custom_ui.NormalFormSelectScreen;
@@ -105,36 +106,25 @@ public class ModPacketsS2C {
         });
     }
 
-    public static void receiveCursedMoonData(MinecraftClient client, ClientPlayNetworkHandler handler,
-                                           PacketByteBuf buf, PacketSender responseSender) {
-        long dayTime = buf.readLong();
-        int day = buf.readInt();
+    public static void receiveCursedMoonData(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         boolean isCursedMoon = buf.readBoolean();
-        boolean isNight = buf.readBoolean();
-
         client.execute(() -> {
-            // 更新客户端的CursedMoon状态
-            net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon.day_time = dayTime;
-            net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon.day = day;
-            net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon.clientIsCursedMoon = isCursedMoon;
-            net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon.clientIsNight = isNight;
+            CursedMoon.isCursedMoon = isCursedMoon;
+            CursedMoon.middayMessageSent = false;
         });
     }
 
     // 接收形态变化同步包
-    public static void receiveFormChange(MinecraftClient client, ClientPlayNetworkHandler handler,
-                                       PacketByteBuf buf, PacketSender responseSender) {
-        String newFormName = buf.readString();
+    public static void receiveFormChange(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        Identifier newFormID = buf.readIdentifier();
 
         client.execute(() -> {
-            // 强制客户端重新注册动画（如果需要）
             if (client.player != null) {
-                ShapeShifterCurseFabric.LOGGER.info("Client received form change: " + newFormName);
                 // 触发动画重新初始化
-                net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.refreshPlayerAnimations();
+                ShapeShifterCurseFabricClient.refreshPlayerAnimations();
 
                 // 更新 formColorData 的数据(其实是FormColorSelectMenu的数据) 如果启动了自动切换 那么还会自动切换颜色数据
-                ShapeShifterCurseFabricClient.formColorData.onClientFormChange(Identifier.tryParse(newFormName));
+                ShapeShifterCurseFabricClient.formColorData.onClientFormChange(newFormID);
             }
         });
     }

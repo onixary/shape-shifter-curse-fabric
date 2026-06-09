@@ -30,21 +30,17 @@ import java.util.Map;
 // This is a pure server-side class, all send methods are called only here
 public class ModPacketsS2CServer {
 
-    public static void sendCursedMoonData(ServerPlayerEntity player, long dayTime, int day, boolean isCursedMoon, boolean isNight) {
+    public static void sendCursedMoonData(ServerPlayerEntity player, boolean isCursedMoon) {
         PacketByteBuf buf = PacketByteBufs.create();
-        buf.writeLong(dayTime);
-        buf.writeInt(day);
         buf.writeBoolean(isCursedMoon);
-        buf.writeBoolean(isNight);
         ServerPlayNetworking.send(player, ModPackets.SYNC_CURSED_MOON_DATA, buf);
     }
 
     // 发送形态变化同步包
-    public static void sendFormChange(ServerPlayerEntity player, String newFormName) {
+    public static void sendFormChange(ServerPlayerEntity player, Identifier newFormID) {
         PacketByteBuf buf = PacketByteBufs.create();
-        buf.writeString(newFormName);
+        buf.writeIdentifier(newFormID);
         ServerPlayNetworking.send(player, ModPackets.SYNC_FORM_CHANGE, buf);
-        ShapeShifterCurseFabric.LOGGER.info("Sent form change to client: " + newFormName);
     }
 
     /* 重构后不需要了 仅用于参考旧实现逻辑

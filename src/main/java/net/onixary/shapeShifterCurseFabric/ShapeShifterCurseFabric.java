@@ -39,6 +39,7 @@ import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
 import net.onixary.shapeShifterCurseFabric.config.ClientConfig;
 import net.onixary.shapeShifterCurseFabric.config.CommonConfig;
 import net.onixary.shapeShifterCurseFabric.config.PlayerCustomConfig;
+import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.entity.RegCustomEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.RegTransformativeEntitySpawnEgg;
@@ -59,10 +60,10 @@ import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationTransform;
 import net.onixary.shapeShifterCurseFabric.player_form.FormDataPackReloadListener;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.FormAbilityManager;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
-import net.onixary.shapeShifterCurseFabric.player_form.old.transform.TransformManager;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.recipes.BrewingRecipeReloadListener;
 import net.onixary.shapeShifterCurseFabric.recipes.RecipeSerializerRegister;
 import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
@@ -246,7 +247,6 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         ServerLifecycleEvents.SERVER_STARTED.register(server -> {
             // 获取主世界作为默认世界
             ServerWorld overworld = server.getOverworld();
-            FormAbilityManager.getServerWorld(overworld);
             // 更新Patron状态
             PatronUtils.OnServerLoad(server);
             TransformManager.onServerInit();
@@ -258,8 +258,9 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new BrewingRecipeReloadListener());
         ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, resourceManager, success) -> server.getPlayerManager().getPlayerList().forEach((player) -> {
             ModPacketsS2CServer.updateDynamicForm(player);
-            if (!player.getComponent(RegPlayerFormComponent.PLAYER_FORM).isCurrentFormExist()) {
-                FormAbilityManager.applyForm(player, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
+            PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+            if (RegPlayerForms.getPlayerForm(component.nowFormID) == null) {
+                FormUtils._loadForm(player, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
             }
         }));
         initLocalDataStorage();
@@ -389,11 +390,12 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         List<ServerPlayerEntity> players = minecraftServer.getPlayerManager().getPlayerList();
         if (players.isEmpty()) return;
 
+        TransformManager.serverTick(minecraftServer);
+        CursedMoon.serverTick(minecraftServer);
+
         for(ServerPlayerEntity player : players) {
             // handle instinct tick
             InstinctTicker.tick(player);
-            // handle transform manager update
-            TransformManager.update(player);
             TickManager.tickServerAll();
 
             // CustomEdiblePower Tick
