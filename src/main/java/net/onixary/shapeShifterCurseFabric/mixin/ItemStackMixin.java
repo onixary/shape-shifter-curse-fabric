@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.IsMorphScaleItemCondition;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
-import net.onixary.shapeShifterCurseFabric.player_form.old.transform.TransformRelatedItems;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -29,28 +28,11 @@ public abstract class ItemStackMixin {
             at = @At("HEAD")
     )
     private void shape_shifter_curse$onFinishUsing(World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
-        // 仅在服务端且使用者为玩家时处理
         if (!world.isClient && user instanceof ServerPlayerEntity player) {
             ItemStack stack = (ItemStack) (Object) this;
-
-            if(stack.getItem() == TransformRelatedItems.TRANSFORM_CURE){
-                TransformRelatedItems.OnUseCure(player);
-            }else if(stack.getItem() == TransformRelatedItems.TRANSFORM_CURE_FINAL){
-                TransformRelatedItems.OnUseCureFinal(player);
-            }else if(stack.getItem() == TransformRelatedItems.TRANSFORM_CURE_CREATIVE){
-                TransformRelatedItems.OnUseCreativeCure(player);
-            }
-            else if(stack.getItem() == TransformRelatedItems.TRANSFORM_CATALYST){
-                TransformRelatedItems.OnUseCatalyst(player);
-            }
-            else if(stack.getItem() == TransformRelatedItems.TRANSFORM_POWERFUL_CATALYST){
-                TransformRelatedItems.OnUsePowerfulCatalyst(player);
-            }
-            else if(stack.getItem() == Items.GOLDEN_APPLE){
+            if(stack.getItem() == Items.GOLDEN_APPLE){
                 IForm currentForm = FormUtils.getPlayerForm(player);
-                int currentFormIndex = currentForm.getIndex();
-                if(currentFormIndex == 0 || currentFormIndex == 1){
-                    // 触发自定义成就
+                if(!FormUtils.NoInstinct.hasFlag(currentForm) && !FormUtils.LockInstinct.hasFlag(currentForm)){
                     ShapeShifterCurseFabric.ON_USE_GOLDEN_APPLE.trigger(player);
                 }
             }

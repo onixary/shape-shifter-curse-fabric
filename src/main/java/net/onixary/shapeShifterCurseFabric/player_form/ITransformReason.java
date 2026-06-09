@@ -150,8 +150,12 @@ public interface ITransformReason {
             (reason, player, nowForm) -> {
                 Item item = itemStack.getItem();
                 boolean canNotAffect = true;
-                if (!FormUtils.NoAnyInhibitor.hasFlag(nowForm) && (!FormUtils.NoInhibitor.hasFlag(nowForm) || RegCustomItem.POWERFUL_INHIBITOR.equals(item))) {
+                if (!FormUtils.InhibitorImmune.hasFlag(nowForm) && (!FormUtils.InhibitorResist.hasFlag(nowForm) || RegCustomItem.POWERFUL_INHIBITOR.equals(item))) {
                     int Tier = nowForm.getFormTier() - 1;
+                    // 没看代码我还不知道 POWERFUL_INHIBITOR竟然能直接还原二阶段的形态
+                    if (RegCustomItem.POWERFUL_INHIBITOR.equals(item) && !FormUtils.InhibitorResist.hasFlag(nowForm)) {
+                        Tier = 0;
+                    }
                     IForm prevForm = FormUtils.getPrevForm(player);
                     if (prevForm != null && prevForm.getFormTier() == Tier) {
                         return prevForm;

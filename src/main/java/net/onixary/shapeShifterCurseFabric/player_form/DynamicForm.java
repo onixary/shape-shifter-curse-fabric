@@ -34,7 +34,7 @@ public class DynamicForm implements IForm {
     private PlayerFormBodyType bodyType = PlayerFormBodyType.NORMAL;
 
     private @Nullable Pair<Identifier, Identifier> layerOverwrite = null;
-    private @Nullable Pair<Identifier, Identifier> layerRenderOverwrite = null;
+    public @Nullable Pair<Identifier, Identifier> layerRenderOverwrite = null;
     private boolean powerAnimRegistered = false;
 
     private JsonObject formData;
@@ -321,5 +321,10 @@ public class DynamicForm implements IForm {
             return true;
         }
         return (this.PlayerUUIDs.isEmpty() || this.PlayerUUIDs.contains(PublicUUID)) && (PatronUtils.PatronLevels.getOrDefault(player.getUuid(), 0) >= this.RequirePatronLevel);
+    }
+
+    @Override
+    public boolean isDynamicForm() {
+        return true;
     }
 }

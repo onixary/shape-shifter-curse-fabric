@@ -35,7 +35,7 @@ public class InstinctTicker {
     public static void tick(ServerPlayerEntity player) {
         PlayerInstinctComponent comp = player.getComponent(RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP);
 
-        if(CursedMoon.isInCursedMoonDay(player.getWorld())){
+        if(CursedMoon.isInCursedMoon(player.getWorld())){
             isUnderCursedMoon = true;
         }
         else{

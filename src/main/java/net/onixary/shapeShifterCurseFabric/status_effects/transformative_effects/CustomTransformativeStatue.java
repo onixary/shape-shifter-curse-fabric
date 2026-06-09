@@ -5,6 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.CTPUtils;
 
@@ -21,10 +22,10 @@ public class CustomTransformativeStatue extends BaseTransformativeStatusEffect {
     // 抽象方法：效果应用时的回调
     public void ActiveEffect(ServerPlayerEntity player){
         IForm targetForm = this.getToForm(player);
-        if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID().equals(targetForm.FormID)) {
+        if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) {
             return;
         }
-        TransformManager.handleDirectTransform(player, targetForm, false);
+        TransformManager.startTransform(player, targetForm, null);
         CTPUtils.resetTransformativePotionForm(player);
     };
 }

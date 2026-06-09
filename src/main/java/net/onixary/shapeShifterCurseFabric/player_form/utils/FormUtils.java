@@ -16,6 +16,7 @@ import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginRegi
 import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.ITransformReason;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
@@ -48,10 +49,10 @@ public class FormUtils {
     public static final FlagData NoCursedMoonTFTarget = new FlagData("no_cursed_moon_target"); // 禁止诅咒之月变形至目标形态 给蜘蛛茧用
     public static final FlagData NoCursedMoonEffect = new FlagData("no_cursed_moon_effect"); // 免疫诅咒之月效果 给开书前 SP 最终形态用
     public static final FlagData NoInstinctTFTarget = new FlagData("no_instinct_target"); // 禁止本能系统变形至目标形态
-    public static final FlagData NoInhibitor = new FlagData("no_inhibitor");  // 禁止普通抑制剂 给最后一个可退回形态用
-    public static final FlagData NoAnyInhibitor = new FlagData("no_any_inhibitor"); // 禁止常规抑制剂(除了创造版本) 给最终形态用
-    public static final FlagData NoCatalyst = new FlagData("ignore_catalyst"); // 禁止普通催化剂
-    public static final FlagData NoAnyCatalyst = new FlagData("no_any_catalyst"); // 禁止催化剂
+    public static final FlagData InhibitorResist = new FlagData("inhibitor_resist");  // 禁止普通抑制剂 给最后一个可退回形态用
+    public static final FlagData InhibitorImmune = new FlagData("inhibitor_immune"); // 禁止常规抑制剂(除了创造版本) 给最终形态用
+    public static final FlagData CatalystResist = new FlagData("catalyst_resist"); // 禁止普通催化剂
+    public static final FlagData CatalystImmune = new FlagData("catalyst_immune"); // 禁止催化剂
     public static final FlagData StarterForm = new FlagData("starter_form"); // 诅咒之月给开书后形态随机挑的形态
     public static final FlagData SpecialForm = new FlagData("special_form"); // SP形态
     public static final FlagData CanTFToFinalForm = new FlagData("can_tf_to_final_form"); // 可以通过高级催化剂变形到最终形态
@@ -111,9 +112,17 @@ public class FormUtils {
     public static void applyExtraPower(PlayerEntity player, Pair<Identifier, Identifier> layerData) {
         extraPowerRegistry.forEach((id, extraPower) -> {
             if (extraPower.canApply(layerData.getLeft(), layerData.getRight())) {
-                extraPower.getPowerIDs().forEach(powerId -> applyPower(player, powerId, layerData.getLeft()));
+                extraPower.getPowerIDs().forEach(powerId -> applyPower(player, powerId, layerData.getRight()));
             }
         });
+    }
+
+    public static void applyDynamicFormPower(PlayerEntity player, IForm form, Pair<Identifier, Identifier> layerData) {
+        if (form instanceof DynamicForm pfd) {
+            for (Identifier powerID: pfd.getExtraPower()) {
+                applyPower(player, powerID, layerData.getRight());
+            }
+        }
     }
 
     public static void applyLayer(PlayerEntity player, Pair<Identifier, Identifier> layerData) {
@@ -194,6 +203,7 @@ public class FormUtils {
         // 应用Power Origin -> OriginExtraPower -> AccessoryPower
         Pair<Identifier, Identifier> layerPair = form.getFormLayer();
         applyLayer(player, layerPair);
+        applyDynamicFormPower(player, form, layerPair);
         TrinketUtils.ReApplyAccessoryPowerOnPlayerFormChange(player);
         // 停止Power动画 目前就蝙蝠用了
         AnimUtils.stopPowerAnim(player, AnimUtils.AnimationSendSideType.ONLY_SERVER);

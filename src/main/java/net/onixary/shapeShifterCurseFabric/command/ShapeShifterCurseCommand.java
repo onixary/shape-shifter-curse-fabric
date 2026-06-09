@@ -58,17 +58,17 @@ public class ShapeShifterCurseCommand {
                                         )
                                 )
                         )
-                        .then(literal("set_custom_form").requires(cs -> cs.hasPermissionLevel(2))
+                        .then(literal("set_dynamic_form").requires(cs -> cs.hasPermissionLevel(2))
                                 .then(argument("target", EntityArgumentType.player())
-                                        .then(argument("form", CustomFormArgumentType.form())
-                                                .executes(ShapeShifterCurseCommand::setCustomForm)
+                                        .then(argument("form", DynamicFormArgumentType.form())
+                                                .executes(ShapeShifterCurseCommand::setDynamicForm)
                                         )
                                 )
                         )
-                        .then(literal("transform_to_custom_form").requires(cs -> cs.hasPermissionLevel(2))
+                        .then(literal("transform_to_dynamic_form").requires(cs -> cs.hasPermissionLevel(2))
                                 .then(argument("target", EntityArgumentType.player())
-                                        .then(argument("form", CustomFormArgumentType.form())
-                                                .executes(ShapeShifterCurseCommand::transformToCustomForm)
+                                        .then(argument("form", DynamicFormArgumentType.form())
+                                                .executes(ShapeShifterCurseCommand::transformToDynamicForm)
                                         )
                                 )
                         )
@@ -249,10 +249,10 @@ public class ShapeShifterCurseCommand {
 
     }
 
-    private static int setCustomForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+    private static int setDynamicForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
         // set form without transform effect
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
-        IForm form = CustomFormArgumentType.getForm(commandContext, "form");
+        IForm form = DynamicFormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
         if (form == null) {
             commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
@@ -271,10 +271,10 @@ public class ShapeShifterCurseCommand {
 
     }
 
-    private static int transformToCustomForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+    private static int transformToDynamicForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
         // this with transform effect
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
-        IForm form = CustomFormArgumentType.getForm(commandContext, "form");
+        IForm form = DynamicFormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
         if (form == null) {
             commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));

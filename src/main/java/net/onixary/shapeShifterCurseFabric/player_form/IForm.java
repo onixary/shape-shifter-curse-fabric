@@ -141,4 +141,8 @@ public interface IForm {
         IForm playerForm = FormUtils.getPlayerForm(player);
         return this.isEquals(playerForm);
     }
+
+    default boolean isDynamicForm() {
+        return false;
+    }
 }

@@ -22,10 +22,9 @@ public class MoonPhaseRenderMixin {
     public Identifier getMoonIdentifier() {
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.world != null) {
-            return CursedMoon.isCursedMoon(client.world) ? CURSED_MOON_PHASES : Vanilla_MOON_PHASES;
+            return CursedMoon.isCursedMoonDay(client.world) ? CURSED_MOON_PHASES : Vanilla_MOON_PHASES;
         }
-        // fallback to client state
-        return CursedMoon.clientIsCursedMoon ? CURSED_MOON_PHASES : Vanilla_MOON_PHASES;
+        return CursedMoon.isCursedMoon ? CURSED_MOON_PHASES : Vanilla_MOON_PHASES;
     }
 
     @ModifyArg(method = "renderSky(Lnet/minecraft/client/util/math/MatrixStack;Lorg/joml/Matrix4f;FLnet/minecraft/client/render/Camera;ZLjava/lang/Runnable;)V", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderTexture(ILnet/minecraft/util/Identifier;)V", ordinal = 1))

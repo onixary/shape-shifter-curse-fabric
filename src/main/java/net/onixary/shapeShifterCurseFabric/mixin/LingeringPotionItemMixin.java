@@ -7,6 +7,7 @@ import net.minecraft.potion.PotionUtil;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
+import net.onixary.shapeShifterCurseFabric.data.CodexData;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.CTPUtils;
@@ -26,7 +27,7 @@ public class LingeringPotionItemMixin {
         }
         Identifier CTPFormID = CTPUtils.getCTPFormIDFromNBT(stack.getNbt());
         if (CTPFormID != null) {
-            Text formName = RegPlayerForms.getPlayerFormOrDefault(CTPFormID, RegPlayerForms.ORIGINAL_BEFORE_ENABLE).getFormName();
+            Text formName = RegPlayerForms.getPlayerFormOrDefault(CTPFormID, RegPlayerForms.ORIGINAL_BEFORE_ENABLE).getContentText(CodexData.ContentType.NAME);
             tooltip.add(Text.translatable("tooltip.shape_shifter_curse.potion_target_form").append(formName));
         }
     }

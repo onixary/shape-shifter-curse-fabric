@@ -16,7 +16,8 @@
   "__originLayerID_comment__": "OriginLayerID 与内置的OriginFur mod联动 **极度不推荐修改** | OriginLayerID works with OriginFur **Highly not recommended to modify**",
   "flag": [
     "no_instinct",
-    "no_cursed_moon_effect"
+    "no_cursed_moon_effect",
+    "special_form"
   ],
   "anim": {
     "shape-shifter-curse:idle_state": {

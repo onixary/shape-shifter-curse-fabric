@@ -14,6 +14,7 @@ import net.onixary.shapeShifterCurseFabric.integration.origins.component.PlayerO
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayer;
 import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents;
+import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
@@ -94,12 +95,12 @@ public class FormRenderUtils {
         }
         try {
             IForm playerFormBase = FormUtils.getPlayerForm(player);
-            if (playerFormBase instanceof PlayerFormDynamic pfd) {
+            if (playerFormBase instanceof DynamicForm pfd) {
                 List<FormRenderer> formRenderers = new ArrayList<>();
-                if (pfd.FurModelID != null) {
-                    FormRenderer formRenderer = FormRenderUtils.getFormRenderer(Identifier.of("origins", "origin"), pfd.FurModelID);
+                if (pfd.layerRenderOverwrite != null) {
+                    FormRenderer formRenderer = FormRenderUtils.getFormRenderer(pfd.layerRenderOverwrite.getLeft(), pfd.layerRenderOverwrite.getRight());
                     if (formRenderer == null) {
-                        ShapeShifterCurseFabric.LOGGER.warn("ShapeShifterCurseFabric: PlayerFormDynamic.ModelID is not null, but the model is not registered: {}", pfd.FurModelID);
+                        ShapeShifterCurseFabric.LOGGER.warn("ShapeShifterCurseFabric: PlayerFormDynamic.layerRenderOverwrite is not null, but the model is not registered: {} - {}", pfd.layerRenderOverwrite.getLeft(), pfd.layerRenderOverwrite.getRight());
                         return new ArrayList<>();
                     }
                     formRenderers.add(formRenderer);

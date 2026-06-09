@@ -4,6 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
@@ -16,6 +17,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent
 import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public class CursedMoon {
     // Server Side
@@ -42,7 +44,7 @@ public class CursedMoon {
         return timeDayMoon > 12000L && timeDayMoon < 23000L;
     }
 
-    public static boolean isInCursedMoonDay(World world) {
+    public static boolean isInCursedMoon(World world) {
         return isCursedMoonDay(world) && isNight(world);
     }
 
@@ -152,7 +154,7 @@ public class CursedMoon {
                 }
             }
         }
-        if (isInCursedMoonDay(world)) {
+        if (isInCursedMoon(world)) {
             for (PlayerEntity player : minecraftServer.getPlayerManager().getPlayerList()) {
                 applyStartCursedMoonEffect(world, player);
             }
@@ -160,6 +162,51 @@ public class CursedMoon {
             for (PlayerEntity player : minecraftServer.getPlayerManager().getPlayerList()) {
                 applyEndCursedMoonEffect(world, player);
             }
+        }
+    }
+
+    public static Optional<Integer> getNextCurseMoonPhase(int NowPhase) {
+        int MoonPhaseCount = 8;
+        for (int DaySkip = 0; DaySkip < MoonPhaseCount; DaySkip++) {
+            int CurrentPhase = (NowPhase + DaySkip) % MoonPhaseCount;
+            if (isCursedMoonByPhase(CurrentPhase)) {
+                return Optional.of(CurrentPhase);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public static void forceTriggerCursedMoon(ServerWorld world) {
+        int currentPhase = world.getMoonPhase();
+        Optional<Integer> nextCursedPhase = getNextCurseMoonPhase(currentPhase);
+        if (nextCursedPhase.isEmpty()) {
+            ShapeShifterCurseFabric.LOGGER.warn("Cannot trigger CursedMoon: no next cursed phase found");
+            return;
+        }
+        int targetPhase = nextCursedPhase.get();
+
+        // 计算需要跳过的天数来达到目标月相
+        int daysToSkip = (targetPhase - currentPhase + 8) % 8;
+        if (daysToSkip == 0) daysToSkip = 8; // 如果已经是诅咒月相，跳到下一个
+
+        // 调整世界时间到目标月相
+        long currentTime = world.getTimeOfDay();
+        long newTime = currentTime + (daysToSkip * 24000L);
+        world.setTimeOfDay(newTime);
+
+        ShapeShifterCurseFabric.LOGGER.info("CursedMoon manually triggered! Skipped " + daysToSkip + " days to reach moon phase " + targetPhase);
+
+        // 向所有玩家发送消息
+        for (ServerPlayerEntity player : world.getServer().getPlayerManager().getPlayerList()) {
+            if (!RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) {
+                player.sendMessage(Text.translatable("info.shape-shifter-curse.cursed_moon_forced").formatted(Formatting.DARK_PURPLE));
+            }
+        }
+
+        // 立即向所有在线玩家同步状态
+        boolean currentIsNight = isNight(world);
+        for (ServerPlayerEntity player : world.getServer().getPlayerManager().getPlayerList()) {
+            ModPacketsS2CServer.sendCursedMoonData(player, true);
         }
     }
 }

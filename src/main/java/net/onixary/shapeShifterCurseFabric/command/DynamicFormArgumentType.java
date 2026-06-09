@@ -19,14 +19,14 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 
-public class CustomFormArgumentType implements ArgumentType<Identifier> {
+public class DynamicFormArgumentType implements ArgumentType<Identifier> {
 
    public static final DynamicCommandExceptionType FORM_NOT_FOUND = new DynamicCommandExceptionType(
        o -> Text.translatable("commands.shape-shifter-curse.form_not_found", o)
    );
 
-   public static CustomFormArgumentType form() {
-      return new CustomFormArgumentType();
+   public static DynamicFormArgumentType form() {
+      return new DynamicFormArgumentType();
    }
 
    public Identifier parse(StringReader stringReader) throws CommandSyntaxException {
@@ -54,8 +54,8 @@ public class CustomFormArgumentType implements ArgumentType<Identifier> {
 
       try {
             RegPlayerForms.playerForms.forEach((formID, form) -> {
-                if (form.getIsCustomForm()) {
-                    availableForms.add(form.FormID);
+                if (form.isDynamicForm()) {
+                    availableForms.add(form.getFormID());
                 }
             });
       }

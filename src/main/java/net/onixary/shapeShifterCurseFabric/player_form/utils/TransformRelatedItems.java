@@ -14,14 +14,66 @@ import org.jetbrains.annotations.Nullable;
 
 public class TransformRelatedItems {
     public static void OnUseCure(PlayerEntity player, @Nullable ItemStack stack) {
-
+        if (!(player instanceof ServerPlayerEntity serverPlayer)) {
+            return;
+        }
+        IForm nowForm = FormUtils.getPlayerForm(player);
+        int Tier = nowForm.getFormTier();
+        if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) { }
+        else if (RegPlayerForms.ORIGINAL_SHIFTER.isPlayerForm(player)) {
+            player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_used_cure").formatted(Formatting.YELLOW));
+        }
+        else if (Tier == 1) {
+            player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure_0").formatted(Formatting.YELLOW));
+            ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger((ServerPlayerEntity) player);
+        }
+        else if (FormUtils.InhibitorImmune.hasFlag(nowForm)) {
+            player.sendMessage(Text.translatable("info.shape-shifter-curse.permanent_form_used_cure").formatted(Formatting.YELLOW));
+        }
+        else if (FormUtils.InhibitorResist.hasFlag(nowForm)) {
+            player.sendMessage(Text.translatable("info.shape-shifter-curse.max_form_used_cure").formatted(Formatting.YELLOW));
+        }
+        else {
+            player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure").formatted(Formatting.YELLOW));
+        }
+        IForm nextForm = nowForm._getPrevForm(player, ITransformReason.ItemReasonBuilder.apply(stack));
+        if (nextForm != nowForm) {
+            PlayerFormComponent.COMPONENT.get(player).lastTransformByCure = true;
+            PlayerFormComponent.COMPONENT.sync(player);
+            TransformManager.startTransform(player, nextForm, null);
+        }
     }
 
     public static void OnUseCureFinal(PlayerEntity player, @Nullable ItemStack stack) {
-
+        if (!(player instanceof ServerPlayerEntity serverPlayer)) {
+            return;
+        }
+        IForm nowForm = FormUtils.getPlayerForm(player);
+        if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) { }
+        else if (RegPlayerForms.ORIGINAL_SHIFTER.isPlayerForm(player)) {
+            player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_used_cure_final").formatted(Formatting.YELLOW));
+        }
+        else if (FormUtils.InhibitorImmune.hasFlag(nowForm)) {
+            player.sendMessage(Text.translatable("info.shape-shifter-curse.permanent_form_used_cure_final").formatted(Formatting.YELLOW));
+        }
+        else if (FormUtils.InhibitorResist.hasFlag(nowForm)) {
+            player.sendMessage(Text.translatable("info.shape-shifter-curse.max_form_used_cure_final").formatted(Formatting.YELLOW));
+        }
+        else {
+            player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure_final").formatted(Formatting.YELLOW));
+        }
+        IForm nextForm = nowForm._getPrevForm(player, ITransformReason.ItemReasonBuilder.apply(stack));
+        if (nextForm != nowForm) {
+            PlayerFormComponent.COMPONENT.get(player).lastTransformByCure = true;
+            PlayerFormComponent.COMPONENT.sync(player);
+            TransformManager.startTransform(player, nextForm, null);
+        }
     }
 
     public static void OnUseCreativeCure(PlayerEntity player, @Nullable ItemStack stack) {
+        if (!(player instanceof ServerPlayerEntity serverPlayer)) {
+            return;
+        }
         PlayerFormComponent.COMPONENT.get(player).lastTransformByCure = true;
         PlayerFormComponent.COMPONENT.sync(player);
         if(!RegPlayerForms.ORIGINAL_SHIFTER.isPlayerForm(player) && !RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)){
@@ -49,10 +101,10 @@ public class TransformRelatedItems {
             // 为了这句文本 专门加了一个flag
             player.sendMessage(Text.translatable("info.shape-shifter-curse.sp_form_used_catalyst").formatted(Formatting.YELLOW));
         }
-        else if (FormUtils.NoAnyCatalyst.hasFlag(nowForm)) {
+        else if (FormUtils.CatalystImmune.hasFlag(nowForm)) {
             player.sendMessage(Text.translatable("info.shape-shifter-curse.use_catalyst_when_ignore").formatted(Formatting.DARK_PURPLE));
         }
-        else if (FormUtils.NoCatalyst.hasFlag(nowForm)) {
+        else if (FormUtils.CatalystResist.hasFlag(nowForm)) {
             player.sendMessage(Text.translatable("info.shape-shifter-curse.max_form_used_catalyst").formatted(Formatting.YELLOW));
         }
         else {

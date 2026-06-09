@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.status_effects.transformative_effect
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 
 public class TransformativeStatus extends BaseTransformativeStatusEffect {
@@ -12,6 +13,6 @@ public class TransformativeStatus extends BaseTransformativeStatusEffect {
 
     @Override
     public void ActiveEffect(ServerPlayerEntity player) {
-        TransformManager.handleDirectTransform(player, this.getToForm(player), false);
+        TransformManager.startTransform(player, this.getToForm(player), null);
     }
 }
