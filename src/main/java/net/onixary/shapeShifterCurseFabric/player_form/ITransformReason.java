@@ -95,6 +95,9 @@ public interface ITransformReason {
                 if (group != null) {
                     result = group.getRandomForm(tier, player.getRandom(), FormUtils.NoInstinctTFTarget.hasFlag().negate());
                 }
+                if (result == null && tier == 0) {
+                    result = RegPlayerForms.ORIGINAL_SHIFTER;
+                }
                 return result == null ? nowForm : result;
             }
     );
@@ -157,6 +160,9 @@ public interface ITransformReason {
                     IForm result = null;
                     if (group != null) {
                         result = group.getRandomForm(Tier, player.getRandom(), null);
+                    }
+                    if (result == null && Tier == 0) {
+                        result = RegPlayerForms.ORIGINAL_SHIFTER;
                     }
                     return result == null ? nowForm : result;
                 }
