@@ -92,7 +92,6 @@ public class TransformManager {
         component.transformTargetForm = null;
         PlayerTransformData data = getPlayerData(player);
         IForm form = data.transformEndForm;
-        data.transformTimer = -1;
         EffectManager.clearTransformativeEffect(player);
         FormUtils._setForm(player, form);
         FormUtils.updateFormHistory(player, data.transformStartForm, form);
@@ -101,11 +100,9 @@ public class TransformManager {
 
     private static void startPlayerTransform(PlayerEntity player) {
         if (player instanceof ServerPlayerEntity serverPlayerEntity) {
-            // 向客户端同步数据
             PlayerTransformData data = getPlayerData(player);
             IForm nowForm = data.transformStartForm;
             IForm targetForm = data.transformEndForm;
-            // 改成 Identifier
             ModPacketsS2CServer.sendTransformState(serverPlayerEntity, true, nowForm == null ? null : nowForm.getFormID(), targetForm == null ? null : targetForm.getFormID());
             InstinctTicker.isPausing = true;
             PlayerTransformEffectManager.applyStartTransformEffect(serverPlayerEntity, StaticParams.TRANSFORM_FX_DURATION_IN);
@@ -113,8 +110,7 @@ public class TransformManager {
     }
 
     private static void middlePlayerTransform(PlayerEntity player) {
-        PlayerTransformData data = getPlayerData(player);
-        // 清空本能值挂在本能值触发变形时
+        // PlayerTransformData data = getPlayerData(player);
         setForm(player);
         if (player instanceof ServerPlayerEntity serverPlayerEntity) {
             PlayerTransformEffectManager.applyEndTransformEffect(serverPlayerEntity, StaticParams.TRANSFORM_FX_DURATION_OUT);
@@ -126,7 +122,6 @@ public class TransformManager {
             PlayerTransformData data = getPlayerData(player);
             IForm nowForm = data.transformStartForm;
             IForm targetForm = data.transformEndForm;
-            // 改成 Identifier
             ModPacketsS2CServer.sendTransformState(serverPlayerEntity, false, nowForm == null ? null : nowForm.getFormID(), targetForm == null ? null : targetForm.getFormID());
             InstinctTicker.isPausing = false;
             PlayerTransformEffectManager.applyFinaleTransformEffect(serverPlayerEntity, 5);
@@ -144,9 +139,9 @@ public class TransformManager {
         float nauesaStrength = 0.0f;
         float blackStrength = 0.0f;
         if (transformTimer < StaticParams.TRANSFORM_FX_DURATION_IN) {
-            nauesaStrength = 1.0f - (transformTimer / (float) StaticParams.TRANSFORM_FX_DURATION_IN);
+            nauesaStrength = transformTimer / (float) StaticParams.TRANSFORM_FX_DURATION_IN;
             blackStrength = Math.max(nauesaStrength - 0.8f, 0.0f) * 5;
-        } else if (transformTimer < StaticParams.TRANSFORM_FX_DURATION_IN + StaticParams.TRANSFORM_FX_DURATION_OUT) {
+        } else if (transformTimer < (StaticParams.TRANSFORM_FX_DURATION_IN + StaticParams.TRANSFORM_FX_DURATION_OUT)) {
             nauesaStrength = 1.0f - ((transformTimer - StaticParams.TRANSFORM_FX_DURATION_IN) / (float) StaticParams.TRANSFORM_FX_DURATION_IN);
             blackStrength = Math.min(1.0f, nauesaStrength / 0.6f);
         } else {
@@ -154,17 +149,19 @@ public class TransformManager {
         }
         TransformOverlay.INSTANCE.setNauesaStrength(nauesaStrength);
         TransformOverlay.INSTANCE.setBlackStrength(blackStrength);
-        transformTimer++;
+        if (transformTimer >= 0) {
+            transformTimer++;
+        }
     }
 
     public static void serverTick(MinecraftServer server) {
         for (PlayerEntity player : server.getPlayerManager().getPlayerList()) {
             IForm form = PlayerFormComponent.COMPONENT.get(player).transformTargetForm;
-            if (form == null) {
-                continue;
-            }
             PlayerTransformData data = getPlayerData(player);
             int timer = data.transformTimer;
+            if (form == null && timer < 0) {
+                continue;
+            }
             if (timer < 0) {
                 startTransform(player, form, null);
                 continue;
@@ -173,7 +170,7 @@ public class TransformManager {
                 startPlayerTransform(player);
             } else if (timer == StaticParams.TRANSFORM_FX_DURATION_IN) {
                 middlePlayerTransform(player);
-            } else if (timer == StaticParams.TRANSFORM_FX_DURATION_IN + StaticParams.TRANSFORM_FX_DURATION_OUT) {
+            } else if (timer == (StaticParams.TRANSFORM_FX_DURATION_IN + StaticParams.TRANSFORM_FX_DURATION_OUT)) {
                 endPlayerTransform(player);
                 data.transformTimer = -1;
             }

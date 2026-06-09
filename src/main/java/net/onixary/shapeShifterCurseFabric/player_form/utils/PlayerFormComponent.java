@@ -51,7 +51,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
             nowForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
         } else {
             if (tag.contains("nowFormID")) {
-                nowFormID = Identifier.tryParse(tag.getString("nowForm"));
+                nowFormID = Identifier.tryParse(tag.getString("nowFormID"));
                 nowForm = FormUtils.parseForm(nowFormID, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
             } else {
                 nowFormID = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID();

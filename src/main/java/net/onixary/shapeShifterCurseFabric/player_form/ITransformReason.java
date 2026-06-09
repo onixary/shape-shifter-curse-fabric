@@ -9,6 +9,8 @@ import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.ExtraFunctionInterface;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
+import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
+import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.TransformativeStatusInstance;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -108,6 +110,10 @@ public interface ITransformReason {
                     return nowForm;
                 }
                 if (RegPlayerForms.ORIGINAL_SHIFTER.isEquals(nowForm)) {
+                    TransformativeStatusInstance instance = EffectManager.getTransformativeEffect(player);
+                    if (instance != null && instance.getTransformativeEffectType() != null) {
+                        return instance.getTransformativeEffectType().getToForm(player);
+                    }
                     List<IForm> formList = FormUtils.getFormByCondition(FormUtils.StarterForm.hasFlag());
                     if (!formList.isEmpty()) {
                         return formList.get(player.getRandom().nextInt(formList.size()));
