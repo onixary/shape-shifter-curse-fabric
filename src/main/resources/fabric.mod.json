@@ -82,7 +82,7 @@
     ],
     "cardinal-components-entity": [
       "net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents",
-      "net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent",
+      "net.onixary.shapeShifterCurseFabric.player_form.utils.RegPlayerFormComponent",
       "net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent",
       "net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent",
       "net.onixary.shapeShifterCurseFabric.minion.RegPlayerMinionComponent",

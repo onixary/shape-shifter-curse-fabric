@@ -1,9 +1,19 @@
 package net.onixary.shapeShifterCurseFabric.player_form.utils;
 
+import dev.tr7zw.firstperson.FirstPersonModelCore;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
+import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.effect.PlayerTransformEffectManager;
 import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
@@ -29,7 +39,7 @@ public class TransformManager {
     // Server Side
     private static final HashMap<UUID, PlayerTransformData> playerData = new HashMap<>();  // 默认值为-1 当大于等于0时开始每Tick递增 并且进入变形 当PlayerFormComponent.transformTargetForm != null且playerTransformTimer<0时开始变形
     // Client Side
-    private static int transformTimer = -1;  // 处理 nauesaStrength 和 blackStrength
+    public static int transformTimer = -1;  // 处理 nauesaStrength 和 blackStrength
 
 
     public static void onServerInit() {
@@ -86,19 +96,18 @@ public class TransformManager {
         EffectManager.clearTransformativeEffect(player);
         FormUtils._setForm(player, form);
         FormUtils.updateFormHistory(player, data.transformStartForm, form);
+        sendClientFirstPersonReset(player);
     }
 
     private static void startPlayerTransform(PlayerEntity player) {
-        // 向客户端同步数据
-        PlayerTransformData data = getPlayerData(player);
-        IForm nowForm = data.transformStartForm;
-        IForm targetForm = data.transformEndForm;
-        // 改成 Identifier
-        // ModPacketsS2CServer.sendTransformState(player, true, nowForm.getFormID(), targetForm.getFormID());
-        // 顺便把同步transformTimer挂在SYNC_TRANSFORM_STATE上
-        // 顺便把playClientTransformEffect逻辑也挂上
-        InstinctTicker.isPausing = true;
         if (player instanceof ServerPlayerEntity serverPlayerEntity) {
+            // 向客户端同步数据
+            PlayerTransformData data = getPlayerData(player);
+            IForm nowForm = data.transformStartForm;
+            IForm targetForm = data.transformEndForm;
+            // 改成 Identifier
+            ModPacketsS2CServer.sendTransformState(serverPlayerEntity, true, nowForm == null ? null : nowForm.getFormID(), targetForm == null ? null : targetForm.getFormID());
+            InstinctTicker.isPausing = true;
             PlayerTransformEffectManager.applyStartTransformEffect(serverPlayerEntity, StaticParams.TRANSFORM_FX_DURATION_IN);
         }
     }
@@ -113,19 +122,18 @@ public class TransformManager {
     }
 
     private static void endPlayerTransform(PlayerEntity player) {
-        PlayerTransformData data = getPlayerData(player);
-        IForm nowForm = data.transformStartForm;
-        IForm targetForm = data.transformEndForm;
-        // 改成 Identifier
-        // ModPacketsS2CServer.sendTransformState(player, false, nowForm.getFormID(), nowForm.getFormID());
-        // 顺便把executeClientTransformCompleteEffect逻辑挂上
-        InstinctTicker.isPausing = false;
         if (player instanceof ServerPlayerEntity serverPlayerEntity) {
+            PlayerTransformData data = getPlayerData(player);
+            IForm nowForm = data.transformStartForm;
+            IForm targetForm = data.transformEndForm;
+            // 改成 Identifier
+            ModPacketsS2CServer.sendTransformState(serverPlayerEntity, false, nowForm == null ? null : nowForm.getFormID(), targetForm == null ? null : targetForm.getFormID());
+            InstinctTicker.isPausing = false;
             PlayerTransformEffectManager.applyFinaleTransformEffect(serverPlayerEntity, 5);
-        }
-        if (data.onTransformComplete != null) {
-            data.onTransformComplete.accept(data);
-            data.onTransformComplete = null;
+            if (data.onTransformComplete != null) {
+                data.onTransformComplete.accept(data);
+                data.onTransformComplete = null;
+            }
         }
     }
 
@@ -175,4 +183,37 @@ public class TransformManager {
         }
     }
 
+    private static final boolean IS_FIRST_PERSON_MOD_LOADED = FabricLoader.getInstance().isModLoaded("firstperson");
+
+    public static void executeClientFirstPersonReset() {
+        if (FabricLoader.getInstance().getEnvironmentType() != EnvType.CLIENT) {
+            return;
+        }
+
+        if (IS_FIRST_PERSON_MOD_LOADED && ShapeShifterCurseFabric.clientConfig.enableChangeFPMConfig) {
+            FirstPersonModelCore fpm = FirstPersonModelCore.instance;
+            fpm.getConfig().xOffset = 0;
+            fpm.getConfig().sitXOffset = 0;
+            fpm.getConfig().sneakXOffset = 0;
+            new Thread(() -> {
+                for (int i = 0; i < 20; i++) {
+                    try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException ignored) { }
+                    fpm.getConfig().xOffset = 0;
+                    fpm.getConfig().sitXOffset = 0;
+                    fpm.getConfig().sneakXOffset = 0;
+                }
+            }).start();
+        }
+    }
+
+    private static void sendClientFirstPersonReset(PlayerEntity player) {
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT && player instanceof ClientPlayerEntity) {
+            executeClientFirstPersonReset();
+        } else if (player instanceof ServerPlayerEntity serverPlayerEntity) {
+            PacketByteBuf buf = PacketByteBufs.create();
+            ServerPlayNetworking.send(serverPlayerEntity, ModPackets.RESET_FIRST_PERSON, buf);
+        }
+    }
 }

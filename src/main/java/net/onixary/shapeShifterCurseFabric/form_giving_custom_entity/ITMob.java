@@ -5,12 +5,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
-import net.onixary.shapeShifterCurseFabric.status_effects.TStatusApplier;
+import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
+import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.TransformativeStatusInstance;
 
 import java.util.Optional;
 
@@ -31,7 +33,7 @@ public interface ITMob {
             double distance = TMob.squaredDistanceTo(player);
             if (distance <= StaticParams.CUSTOM_MOB_DEFAULT_ATTACK_RANGE * StaticParams.CUSTOM_MOB_DEFAULT_ATTACK_RANGE) {
                 TMob.tryAttack(player);
-                TStatusApplier.applyStatusByChance(this.getStatusChance(), player, this.getStatusEffect());
+                applyStatusByChance(this.getStatusChance(), player, this.getStatusEffect());
                 this.ApplyCooldown();
             }
         }
@@ -61,5 +63,16 @@ public interface ITMob {
             return Optional.of(false);
         }
         return Optional.empty();
+    }
+
+    public static void applyStatusByChance(float chance, PlayerEntity player, BaseTransformativeStatusEffect regStatusEffect) {
+        if (player instanceof ServerPlayerEntity playerEntity) {
+            TransformativeStatusInstance instance = EffectManager.getTransformativeEffect(playerEntity);
+            if (instance == null || instance.getTransformativeEffectType() == null || !instance.getTransformativeEffectType().getToForm(player).isEquals(regStatusEffect.getToForm(player))) {  // 如果当前效果的形态与regStatusEffect不同
+                if (Math.random() < chance && RegPlayerForms.ORIGINAL_SHIFTER.isPlayerForm(player)) {
+                    EffectManager.overrideEffect(player, regStatusEffect);
+                }
+            }
+        }
     }
 }

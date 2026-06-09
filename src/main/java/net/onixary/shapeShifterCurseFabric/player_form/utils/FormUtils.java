@@ -48,10 +48,14 @@ public class FormUtils {
     public static final FlagData NoCursedMoonTFTarget = new FlagData("no_cursed_moon_target"); // 禁止诅咒之月变形至目标形态 给蜘蛛茧用
     public static final FlagData NoCursedMoonEffect = new FlagData("no_cursed_moon_effect"); // 免疫诅咒之月效果 给开书前 SP 最终形态用
     public static final FlagData NoInstinctTFTarget = new FlagData("no_instinct_target"); // 禁止本能系统变形至目标形态
-    public static final FlagData FinalForm = new FlagData("final_form"); // 最终形态 PowerfulCatalyst仅能变形到此形态
     public static final FlagData NoInhibitor = new FlagData("no_inhibitor");  // 禁止普通抑制剂 给最后一个可退回形态用
     public static final FlagData NoAnyInhibitor = new FlagData("no_any_inhibitor"); // 禁止常规抑制剂(除了创造版本) 给最终形态用
+    public static final FlagData NoCatalyst = new FlagData("ignore_catalyst"); // 禁止普通催化剂
+    public static final FlagData NoAnyCatalyst = new FlagData("no_any_catalyst"); // 禁止催化剂
     public static final FlagData StarterForm = new FlagData("starter_form"); // 诅咒之月给开书后形态随机挑的形态
+    public static final FlagData SpecialForm = new FlagData("special_form"); // SP形态
+    public static final FlagData CanTFToFinalForm = new FlagData("can_tf_to_final_form"); // 可以通过高级催化剂变形到最终形态
+    public static final FlagData FinalForm = new FlagData("final_form"); // 最终形态 PowerfulCatalyst仅能变形到此形态
 
     public static record ExtraPower(@NotNull Identifier LayerID, @NotNull Identifier FormID, @NotNull List<Identifier> PowerIDs) {
         public @NotNull Identifier getLayerID() { return LayerID; }

@@ -37,6 +37,15 @@ public class CursedMoon {
         return isCursedMoonByPhase(moonPhase);
     }
 
+    public static boolean isNight(World world) {
+        long timeDayMoon = world.getTimeOfDay() % 24000;
+        return timeDayMoon > 12000L && timeDayMoon < 23000L;
+    }
+
+    public static boolean isInCursedMoonDay(World world) {
+        return isCursedMoonDay(world) && isNight(world);
+    }
+
     public static void clientTick(World world) {
         if (!isCursedMoonDay(world)) { return; }
         long dayTime = world.getTimeOfDay() % 24000;
@@ -143,7 +152,7 @@ public class CursedMoon {
                 }
             }
         }
-        if (dayTime >= 12500L && dayTime < 23000L && isCursedMoonDay(world)) {
+        if (isInCursedMoonDay(world)) {
             for (PlayerEntity player : minecraftServer.getPlayerManager().getPlayerList()) {
                 applyStartCursedMoonEffect(world, player);
             }

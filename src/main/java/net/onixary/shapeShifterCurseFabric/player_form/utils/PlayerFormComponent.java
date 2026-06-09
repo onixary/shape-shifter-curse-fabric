@@ -33,6 +33,8 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     public @Nullable IForm AfterCursedMoonAppliedForm = null;
     // 变形系统
     public @Nullable IForm transformTargetForm = null;
+    // CTP系统
+    public Identifier customPotionFormID = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID();
 
     // 临时变量
     public PlayerEntity player = null;
@@ -90,6 +92,11 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         } else {
             transformTargetForm = null;
         }
+        if (tag.contains("customPotionFormID")) {
+            customPotionFormID = Identifier.tryParse(tag.getString("customPotionFormID"));
+        } else {
+            customPotionFormID = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID();
+        }
     }
 
     @Override
@@ -114,6 +121,9 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         }
         if (transformTargetForm != null) {
             tag.putString("transformTargetForm", transformTargetForm.getFormID().toString());
+        }
+        if (customPotionFormID != null) {
+            tag.putString("customPotionFormID", customPotionFormID.toString());
         }
     }
 

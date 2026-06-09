@@ -24,7 +24,6 @@ import net.onixary.shapeShifterCurseFabric.additional_power.TWolfFriendlyPower;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ITMob;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
-import net.onixary.shapeShifterCurseFabric.status_effects.TStatusApplier;
 import org.jetbrains.annotations.Nullable;
 
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_ANUBIS_WOLF_0_EFFECT;
@@ -126,7 +125,7 @@ public class TransformativeWolfEntity extends WolfEntity implements ITMob {
     public void applyDamageEffects(LivingEntity attacker, Entity target) {
         // 在applyStatusByChance里面已经判断形态了 无需在外面判断
         if (target instanceof PlayerEntity player) {
-            TStatusApplier.applyStatusByChance(this.getStatusChance(), player, this.getStatusEffect());
+            ITMob.applyStatusByChance(this.getStatusChance(), player, this.getStatusEffect());
         }
     }
 

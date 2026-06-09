@@ -89,7 +89,6 @@ public class AnimSystem {
     }
 
     private void PreProcessAnimSystemData() {
-        // this.data.playerForm = RegPlayerFormComponent.PLAYER_FORM.get(this.player).getCurrentForm();
         this.data.playerForm = FormTextureUtils.getPlayerForm_Render(this.player);
         this.data.IsWalking = !this.data.LastPosition.equals(this.player.getPos());
         if (this.player.getPos().getY() == this.data.LastPosition.getY()) {

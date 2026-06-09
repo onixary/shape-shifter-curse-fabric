@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.IsMorphScaleItemCondition;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
-import net.onixary.shapeShifterCurseFabric.player_form.old.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.old.transform.TransformRelatedItems;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,11 +24,6 @@ import java.util.List;
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
 
-    /**
-     * 注入到物品使用完成时的逻辑
-     * @param world 当前世界
-     * @param user 使用物品的实体（可能是玩家）
-     */
     @Inject(
             method = "finishUsing",
             at = @At("HEAD")

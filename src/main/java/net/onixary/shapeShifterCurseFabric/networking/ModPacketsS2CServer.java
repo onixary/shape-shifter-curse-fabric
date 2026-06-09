@@ -53,19 +53,15 @@ public class ModPacketsS2CServer {
      */
 
     // 发送变身状态同步包
-    public static void sendTransformState(ServerPlayerEntity player, boolean isTransforming,
-                                          String fromForm, String toForm) {
+    public static void sendTransformState(ServerPlayerEntity player, boolean isTransforming, Identifier fromForm, Identifier toForm) {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeUuid(player.getUuid());
         buf.writeBoolean(isTransforming);
-        buf.writeString(fromForm != null ? fromForm : "");
-        buf.writeString(toForm != null ? toForm : "");
-//        ServerPlayNetworking.send(player, ModPackets.SYNC_TRANSFORM_STATE, buf);
-        // 广播给所有玩家 用于同步动作
+        buf.writeString(fromForm == null ? "" : fromForm.toString());
+        buf.writeString(toForm== null ? "" : toForm.toString());
         for (ServerPlayerEntity p : player.getServerWorld().getPlayers()) {
             ServerPlayNetworking.send(p, ModPackets.SYNC_TRANSFORM_STATE, buf);
         }
-        ShapeShifterCurseFabric.LOGGER.info("Sent transform state to client: isTransforming=" + isTransforming);
     }
 
     // 发送蝙蝠吸附状态同步包
