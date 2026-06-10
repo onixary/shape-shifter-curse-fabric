@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.player_form.instinct;
+package net.onixary.shapeShifterCurseFabric.player_form.old.instinct;
 
 import dev.onyxstudios.cca.api.v3.component.ComponentKey;
 import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;

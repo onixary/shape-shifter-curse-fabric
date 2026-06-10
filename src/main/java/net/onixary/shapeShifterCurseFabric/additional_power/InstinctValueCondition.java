@@ -9,8 +9,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
-import net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.old.instinct.RegPlayerInstinctComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
 
 public class InstinctValueCondition {
 
@@ -31,7 +32,7 @@ public class InstinctValueCondition {
             return false;
         }
 
-        float instinctValue = RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.get(player).instinctValue;
+        float instinctValue = PlayerFormComponent.COMPONENT.get(player).instinctValue;
         float compareTo = data.getFloat("compare_to");
 
         return comparison.compare(instinctValue, compareTo);

@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.player_form.instinct;
+package net.onixary.shapeShifterCurseFabric.player_form.old.instinct;
 
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -70,7 +70,7 @@ public class InstinctTicker {
         // If the instinct value is between 80 and 99.99, send a packet to the server
         if (comp.instinctValue >= 80.0f && comp.instinctValue < 99.99f && !player.getWorld().isClient && player instanceof ServerPlayerEntity) {
             PacketByteBuf buf = PacketByteBufs.create();
-            ServerPlayNetworking.send((ServerPlayerEntity) player, ModPackets.INSTINCT_THRESHOLD_EFFECT_ID, buf);
+            // ServerPlayNetworking.send((ServerPlayerEntity) player, ModPackets.INSTINCT_THRESHOLD_EFFECT_ID, buf);
         }
         //ShapeShifterCurseFabric.LOGGER.info("currentInstinctFromComp: " + comp.instinctValue);
         // 判断当前状态

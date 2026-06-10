@@ -16,7 +16,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class PlayerFormComponent implements AutoSyncedComponent {
@@ -35,6 +37,10 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     public @Nullable IForm transformTargetForm = null;
     // CTP系统
     public Identifier customPotionFormID = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID();
+    // 本能系统
+    public float instinctValue = 0.0f;
+    public float instinctRate = 0.0f;
+    public HashMap<Identifier, InstinctUtils.InstinctEffect> instinctEffects = new HashMap<>();
 
     // 临时变量
     public PlayerEntity player = null;
@@ -101,6 +107,25 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         } else {
             customPotionFormID = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID();
         }
+        if (tag.contains("instinctValue")) {
+            instinctValue = tag.getFloat("instinctValue");
+        } else {
+            instinctValue = 0f;
+        }
+        if (tag.contains("instinctRate")) {
+            instinctRate = tag.getFloat("instinctRate");
+        } else {
+            instinctRate = 0f;
+        }
+        if (tag.contains("instinctEffects")) {
+            NbtCompound effects = tag.getCompound("instinctEffects");
+            for (String key : effects.getKeys()) {
+                instinctEffects.put(Identifier.tryParse(key), InstinctUtils.InstinctEffect.fromNBT(effects.getCompound(key)));
+            }
+        }
+        if (player.getWorld().isClient) {
+            InstinctUtils.fromInstinctUpdate(instinctValue, instinctRate);
+        }
     }
 
     @Override
@@ -129,6 +154,15 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         if (customPotionFormID != null) {
             tag.putString("customPotionFormID", customPotionFormID.toString());
         }
+        tag.putFloat("instinctValue", instinctValue);
+        tag.putFloat("instinctRate", instinctRate);
+        NbtCompound effects = new NbtCompound();
+        for (Map.Entry<Identifier, InstinctUtils.InstinctEffect> entry : instinctEffects.entrySet()) {
+            NbtCompound effect = new NbtCompound();
+            entry.getValue().toNBT(effect);
+            effects.put(entry.getKey().toString(), effect);
+        }
+        tag.put("instinctEffects", effects);
     }
 
     public void clear() {

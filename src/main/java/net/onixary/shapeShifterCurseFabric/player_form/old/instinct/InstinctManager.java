@@ -1,7 +1,6 @@
-package net.onixary.shapeShifterCurseFabric.player_form.instinct;
+package net.onixary.shapeShifterCurseFabric.player_form.old.instinct;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.world.ServerWorld;
 
 import java.util.Objects;
 

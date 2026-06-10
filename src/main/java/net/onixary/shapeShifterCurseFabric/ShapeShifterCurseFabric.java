@@ -60,8 +60,8 @@ import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.AnimationTransform;
 import net.onixary.shapeShifterCurseFabric.player_form.FormDataPackReloadListener;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.InstinctUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.recipes.BrewingRecipeReloadListener;
@@ -392,10 +392,10 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
         TransformManager.serverTick(minecraftServer);
         CursedMoon.serverTick(minecraftServer);
+        InstinctUtils.serverTick(minecraftServer);
 
         for(ServerPlayerEntity player : players) {
             // handle instinct tick
-            InstinctTicker.tick(player);
             TickManager.tickServerAll();
 
             // CustomEdiblePower Tick

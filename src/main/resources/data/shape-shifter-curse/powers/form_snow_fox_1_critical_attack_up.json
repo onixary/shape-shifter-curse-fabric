@@ -2,7 +2,7 @@
     "type": "shape-shifter-curse:critical_damage_modifier",
     "action": {
         "type": "shape-shifter-curse:add_instinct",
-        "instinct_effect_id": "FORM_SNOW_FOX_CRITICAL_ATTACK",
+        "instinct_effect_id": "shape-shifter-curse:form_snow_fox_critical_attack",
         "value": 1.0,
         "duration": 0
     },

@@ -16,7 +16,6 @@ import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.effect.PlayerTransformEffectManager;
-import net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctTicker;
 import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import org.jetbrains.annotations.NotNull;
@@ -107,7 +106,7 @@ public class TransformManager {
             IForm nowForm = data.transformStartForm;
             IForm targetForm = data.transformEndForm;
             ModPacketsS2CServer.sendTransformState(serverPlayerEntity, true, nowForm == null ? null : nowForm.getFormID(), targetForm == null ? null : targetForm.getFormID());
-            InstinctTicker.isPausing = true;
+            InstinctUtils.lockInstinctCalc = true;
             PlayerTransformEffectManager.applyStartTransformEffect(serverPlayerEntity, StaticParams.TRANSFORM_FX_DURATION_IN);
         }
     }
@@ -126,7 +125,7 @@ public class TransformManager {
             IForm nowForm = data.transformStartForm;
             IForm targetForm = data.transformEndForm;
             ModPacketsS2CServer.sendTransformState(serverPlayerEntity, false, nowForm == null ? null : nowForm.getFormID(), targetForm == null ? null : targetForm.getFormID());
-            InstinctTicker.isPausing = false;
+            InstinctUtils.lockInstinctCalc = false;
             PlayerTransformEffectManager.applyFinaleTransformEffect(serverPlayerEntity, 5);
             if (data.onTransformComplete != null) {
                 data.onTransformComplete.accept(data);

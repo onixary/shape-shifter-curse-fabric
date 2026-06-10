@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.player_form.instinct;
+package net.onixary.shapeShifterCurseFabric.player_form.old.instinct;
 
 import net.minecraft.nbt.NbtCompound;
 

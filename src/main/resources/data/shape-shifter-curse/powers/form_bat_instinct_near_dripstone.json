@@ -1,6 +1,6 @@
 {
     "type": "shape-shifter-curse:add_sustained_instinct",
-    "instinct_effect_id": "FORM_BAT_NEAR_DRIPSTONE",
+    "instinct_effect_id": "shape-shifter-curse:form_bat_near_dripstone",
     "value": 0.006,
     "duration": 1,
     "condition": {
