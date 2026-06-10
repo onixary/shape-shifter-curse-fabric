@@ -1,14 +1,19 @@
 package net.onixary.shapeShifterCurseFabric.player_form.forms;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.WithSneakAnimController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateEnum;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
+import net.onixary.shapeShifterCurseFabric.player_form.ITransformReason;
 import net.onixary.shapeShifterCurseFabric.player_form.NormalForm;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,6 +21,16 @@ public class Form_Spider2 extends NormalForm {
     
     public Form_Spider2(Identifier formID) {
         super(formID);
+    }
+
+    @Override
+    public @Nullable IForm getPrevForm(PlayerEntity player, ITransformReason reason) {
+        if (reason.getReasonType().equals(ITransformReason.ItemReasonID) && reason instanceof ITransformReason.ITransformReasonWithArg<?> reasonEX && reasonEX.getArg() instanceof ItemStack itemStack) {
+            if (itemStack.getItem().equals(RegCustomItem.POWERFUL_INHIBITOR)) {
+                return RegPlayerForms.SPIDER_0;
+            }
+        }
+        return null;
     }
 
     // v3动画系统
