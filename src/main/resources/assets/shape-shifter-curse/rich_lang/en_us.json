@@ -1261,6 +1261,7 @@
   "text.autoconfig.shape-shifter-curse-common.option.enableDebugCommand": "Enable debugging commands without permission restrictions (Do not enable on servers)",
   "text.autoconfig.shape-shifter-curse-common.option.enableFullStackUpgrade": "Upgrade Recipe Can Upgrade Full Stack",
   "text.autoconfig.shape-shifter-curse-common.option.enableFoodHabitSystem": "Enable Food Habit System",
+  "text.autoconfig.shape-shifter-curse-common.option.immediatelyTransform": "Force Immediately Transform",
   "text.autoconfig.shape-shifter-curse-common.category.InDevelopment": "In Development",
   "text.autoconfig.shape-shifter-curse-common.category.Patron": "Patron Config (Unfinished)",
   "text.autoconfig.shape-shifter-curse-common.option.enablePatronFormSystem": "Enable Patron Form System (Unfinished)",

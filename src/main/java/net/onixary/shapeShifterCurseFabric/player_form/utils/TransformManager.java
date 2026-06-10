@@ -67,11 +67,14 @@ public class TransformManager {
         data.transformStartForm = FormUtils.getPlayerForm(player);
         data.transformEndForm = form;
         data.onTransformComplete = onTransformComplete;
-        // 瞬间变形配置
-        // if (XXXX) {
-        //     data.transformTimer = -1;
-        //     setForm(player);
-        // }
+        if (ShapeShifterCurseFabric.commonConfig.immediatelyTransform) {
+            data.transformTimer = -1;
+            setForm(player);
+            if (data.onTransformComplete != null) {
+                data.onTransformComplete.accept(data);
+                data.onTransformComplete = null;
+            }
+        }
     }
 
     public static void immediatelyTransform(PlayerEntity player, IForm form) {

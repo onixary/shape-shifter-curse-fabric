@@ -55,6 +55,10 @@ public class CommonConfig implements ConfigData {
     @Comment("Enable Food Habit System Default: true")
     public boolean enableFoodHabitSystem = true;
 
+    @ConfigEntry.Category("General")
+    @Comment("Immediately Transform Default: false")
+    public boolean immediatelyTransform = false;
+
     @ConfigEntry.Category("Patron")
     @Comment("Enable Patron Form System. Default: true")
     public boolean enablePatronFormSystem = true;
