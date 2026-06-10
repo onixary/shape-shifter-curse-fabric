@@ -44,7 +44,7 @@ public class InstinctBarRenderer  {
 
         PlayerEntity player = MinecraftClient.getInstance().player;
         IForm curForm = FormUtils.getPlayerForm(player);
-        boolean showInstinctBar = FormUtils.NoInstinct.hasFlag(curForm);;
+        boolean showInstinctBar = !FormUtils.NoInstinct.hasFlag(curForm);;
         this.isInstinctLock = FormUtils.LockInstinct.hasFlag(curForm);
 
         if (!mc.options.hudHidden

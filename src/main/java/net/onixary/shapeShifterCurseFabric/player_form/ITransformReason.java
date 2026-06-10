@@ -81,6 +81,10 @@ public interface ITransformReason {
                 IFormGroup group = nowForm.getFormGroup();
                 int tier = nowForm.getFormTier() + 1;
                 IForm result = null;
+                // TransformativeStatusInstance instance = EffectManager.getTransformativeEffect(player);
+                // if (RegPlayerForms.ORIGINAL_SHIFTER.isEquals(nowForm) && instance != null && instance.getTransformativeEffectType() != null) {
+                //     result = instance.getTransformativeEffectType().getToForm(player);
+                // }
                 if (group != null) {
                     result = group.getRandomForm(tier, player.getRandom(), FormUtils.NoInstinctTFTarget.hasFlag().negate());
                 }

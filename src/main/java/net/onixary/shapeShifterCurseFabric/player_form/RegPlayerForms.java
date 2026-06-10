@@ -68,10 +68,10 @@ public class RegPlayerForms {
     public static IForm SPIDER_3 = registerPlayerForm(new Form_Spider3(ShapeShifterCurseFabric.identifier("spider_3")).formFlag(FinalForm, InhibitorImmune, NoInstinct, NoCursedMoonEffect).applyScaleFunc(NORMAL_SCALE_FUNC_BUILDER.apply(0.9f,0.6f)));
     public static IFormGroup SPIDER_FORM = registerPlayerFormGroup(new NormalGroup(ShapeShifterCurseFabric.identifier("spider_form")).registerForm(1, 1, SPIDER_0).registerForm(2, 1, SPIDER_1).registerForm(3, 1, SPIDER_2).registerForm(4, 1, SPIDER_3));
     // ALLAY_SP
-    public static IForm ALLAY_SP = registerPlayerForm(new NormalForm(ShapeShifterCurseFabric.identifier("allay_sp")).formFlag(NoInstinct, NoCursedMoonEffect, SpecialForm).applyScaleFunc(NORMAL_SCALE_FUNC_BUILDER.apply(0.35f,1.0f)));
+    public static IForm ALLAY_SP = registerPlayerForm(new Form_Allay(ShapeShifterCurseFabric.identifier("allay_sp")).formFlag(NoInstinct, NoCursedMoonEffect, SpecialForm).applyScaleFunc(NORMAL_SCALE_FUNC_BUILDER.apply(0.35f,1.0f)));
     public static IFormGroup ALLAY_FORM = registerPlayerFormGroup(new NormalGroup(ShapeShifterCurseFabric.identifier("allay_form")).registerForm(1, 1, ALLAY_SP));
     // FERAL_CAT_SP
-    public static IForm FERAL_CAT_SP = registerPlayerForm(new NormalForm(ShapeShifterCurseFabric.identifier("feral_cat_sp")).formFlag(NoInstinct, NoCursedMoonEffect, SpecialForm).bodyType(PlayerFormBodyType.FERAL).applyScaleFunc(NORMAL_SCALE_FUNC_BUILDER.apply(0.55f,0.6f)));
+    public static IForm FERAL_CAT_SP = registerPlayerForm(new Form_FeralCatSP(ShapeShifterCurseFabric.identifier("feral_cat_sp")).formFlag(NoInstinct, NoCursedMoonEffect, SpecialForm).bodyType(PlayerFormBodyType.FERAL).applyScaleFunc(NORMAL_SCALE_FUNC_BUILDER.apply(0.55f,0.6f)));
     public static IFormGroup FERAL_CAT_FORM = registerPlayerFormGroup(new NormalGroup(ShapeShifterCurseFabric.identifier("feral_cat_form")).registerForm(1, 1, FERAL_CAT_SP));
 
     public static <T extends IForm> T registerPlayerForm(T form) {
