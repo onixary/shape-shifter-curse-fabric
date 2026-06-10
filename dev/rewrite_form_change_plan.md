@@ -1,11 +1,11 @@
 (XuHaoNan)(https://github.com/xu233333)
 
 重构形态变形代码(先设计 后开工)
-- 重构 TransformManager
-- 重构 PlayerFormBase 提取出接口
-- 重构诅咒之月逻辑
-- 重构本能系统(可选)
-- 修改催化剂和抑制剂逻辑(改到Item类里处理 金苹果成就改为使用数据包实现)
+- 重构 TransformManager [√]
+- 重构 PlayerFormBase 提取出接口 [√]
+- 重构诅咒之月逻辑 [√]
+- 重构本能系统
+- 修改催化剂和抑制剂逻辑(改到Item类里处理 金苹果成就改为使用数据包实现) [√]
 
 - 将"form_giving_custom_entity"的Buff逻辑改为攻击后给予 比较符合知觉(不属于这个计划 等什么时候有空就整一下)
 
