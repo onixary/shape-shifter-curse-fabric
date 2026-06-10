@@ -45,7 +45,6 @@ public class PlayerFormComponent implements AutoSyncedComponent {
 
     @Override
     public void readFromNbt(NbtCompound tag) {
-        // 目前没写形态注册表 先用null凑活一下
         if (tag.contains("no_form_id") && tag.getBoolean("no_form_id")) {
             nowFormID = null;
             nowForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
@@ -57,6 +56,11 @@ public class PlayerFormComponent implements AutoSyncedComponent {
                 nowFormID = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID();
                 nowForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
             }
+        }
+        // 旧版兼容补丁 只迁移形态数据 其他全Drop了
+        if (tag.contains("currentForm")) {
+            nowFormID = Identifier.tryParse(tag.getString("currentForm"));
+            nowForm = FormUtils.parseForm(nowFormID, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
         }
         if (tag.contains("formHistory")) {
             NbtList history = tag.getList("formHistory", NbtElement.STRING_TYPE);
