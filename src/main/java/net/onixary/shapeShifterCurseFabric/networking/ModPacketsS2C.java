@@ -23,6 +23,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
+import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoonClient;
 import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenu;
 import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenuV2;
 import net.onixary.shapeShifterCurseFabric.custom_ui.NormalFormSelectScreen;
@@ -102,8 +103,8 @@ public class ModPacketsS2C {
     public static void receiveCursedMoonData(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         boolean isCursedMoon = buf.readBoolean();
         client.execute(() -> {
-            CursedMoon.isCursedMoon = isCursedMoon;
-            CursedMoon.middayMessageSent = false;
+            CursedMoonClient.isCursedMoon = isCursedMoon;
+            CursedMoonClient.middayMessageSent = false;
         });
     }
 

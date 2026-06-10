@@ -60,7 +60,7 @@ public class DynamicForm implements IForm {
 
     @Override
     public @NotNull Identifier getFormID() {
-        return this.getFormID();
+        return formID;
     }
 
     @Override
