@@ -114,7 +114,12 @@ public class TransformRelatedItems {
                 ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger((ServerPlayerEntity) player);
                 break;
             case 2:
-                toForm = currentFormGroup.getForm(1);
+                // 会软锁 加一个例外情况 反正已经重构完了 等重构测完稳定后就全删了
+                if (RegPlayerForms.SPIDER_2.equals(currentForm)) {
+                    toForm = RegPlayerForms.SPIDER_0;
+                } else {
+                    toForm = currentFormGroup.getForm(1);
+                }
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.max_form_used_cure_final").formatted(Formatting.YELLOW));
                 // 触发自定义成就
                 // Trigger custom achievement
