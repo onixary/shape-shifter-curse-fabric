@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:form_ocelot_3_jump_high",
+  "updatedAt": "2026-06-09T16:36:28.961Z",
+  "viewport": {
+    "x": -2.207792207792238,
+    "y": 166.8116883116883,
+    "zoom": 0.9025974025974026
+  },
+  "nodes": [
+    {
+      "id": "ast-2",
+      "astNodeId": "ast-2",
+      "type": "origins:modify_jump",
+      "kind": "power",
+      "label": "root",
+      "title": "root",
+      "signature": "power|origins:modify_jump|root|root",
+      "occurrence": 0,
+      "position": {
+        "x": 80,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-1",
+      "astNodeId": "ast-1",
+      "type": "modifier",
+      "kind": "datatype",
+      "title": "Modifier",
+      "signature": "datatype|modifier||Modifier",
+      "occurrence": 0,
+      "position": {
+        "x": 547.8992805755396,
+        "y": 140.93525179856113
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "ast-2",
+        "astNodeId": "ast-2",
+        "type": "origins:modify_jump",
+        "kind": "power",
+        "title": "root",
+        "label": "root",
+        "color": "power",
+        "position": {
+          "x": 80,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "modifier",
+            "schema": {
+              "name": "modifier",
+              "valueKind": "datatype",
+              "datatype": "modifier"
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Modifier",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-2:out:modifier"
+          }
+        ]
+      },
+      {
+        "id": "ast-1",
+        "astNodeId": "ast-1",
+        "type": "modifier",
+        "kind": "datatype",
+        "title": "Modifier",
+        "color": "datatype",
+        "position": {
+          "x": 547.8992805755396,
+          "y": 140.93525179856113
+        },
+        "fields": [
+          {
+            "name": "name",
+            "schema": {
+              "name": "name",
+              "valueKind": "string"
+            },
+            "valueKind": "string",
+            "displayValue": "Bonus jump force",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-1:out:name"
+          },
+          {
+            "name": "operation",
+            "schema": {
+              "name": "operation",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "multiply_base",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-1:out:operation"
+          },
+          {
+            "name": "value",
+            "schema": {
+              "name": "value",
+              "valueKind": "number",
+              "numberKind": "float",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "0.25",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-1:out:value"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "ast-2:modifier->ast-1",
+        "source": "ast-2",
+        "target": "ast-1",
+        "sourceHandle": "ast-2:out:modifier",
+        "targetHandle": "ast-1:in",
+        "fieldName": "modifier",
+        "color": "datatype"
+      }
+    ]
+  }
+}

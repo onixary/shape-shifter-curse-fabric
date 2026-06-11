@@ -3,13 +3,13 @@
   "food_modifiers": [
     {
       "operation": "set_total",
-      "value": 0.0
+      "value": 0
     }
   ],
   "saturation_modifiers": [
     {
       "operation": "set_total",
-      "value": 0.0
+      "value": 0
     }
   ],
   "item_condition": {

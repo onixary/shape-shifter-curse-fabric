@@ -1,0 +1,313 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:form_snow_fox_2_snowball_up",
+  "updatedAt": "2026-06-09T16:37:41.742Z",
+  "viewport": {
+    "x": 104.46052631578948,
+    "y": 2.3157894736842195,
+    "zoom": 0.6710526315789473
+  },
+  "nodes": [
+    {
+      "id": "ast-5",
+      "astNodeId": "ast-5",
+      "type": "origins:modify_projectile_damage",
+      "kind": "power",
+      "label": "root",
+      "title": "root",
+      "signature": "power|origins:modify_projectile_damage|root|root",
+      "occurrence": 0,
+      "position": {
+        "x": 80,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-1",
+      "astNodeId": "ast-1",
+      "type": "origins:projectile",
+      "kind": "damage_condition",
+      "title": "projectile",
+      "signature": "damage_condition|origins:projectile||projectile",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-2",
+      "astNodeId": "ast-2",
+      "type": "modifier",
+      "kind": "datatype",
+      "title": "Modifier",
+      "signature": "datatype|modifier||Modifier",
+      "occurrence": 0,
+      "position": {
+        "x": 624.2745098039217,
+        "y": 279.72549019607845
+      }
+    },
+    {
+      "id": "ast-3",
+      "astNodeId": "ast-3",
+      "type": "origins:execute_command",
+      "kind": "entity_action",
+      "title": "Entity Execute Command",
+      "signature": "entity_action|origins:execute_command||Entity Execute Command",
+      "occurrence": 0,
+      "position": {
+        "x": 552.7450980392156,
+        "y": 507.7647058823529
+      }
+    },
+    {
+      "id": "ast-4",
+      "astNodeId": "ast-4",
+      "type": "origins:play_sound",
+      "kind": "entity_action",
+      "title": "play sound",
+      "signature": "entity_action|origins:play_sound||play sound",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 782
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "ast-5",
+        "astNodeId": "ast-5",
+        "type": "origins:modify_projectile_damage",
+        "kind": "power",
+        "title": "root",
+        "label": "root",
+        "color": "power",
+        "position": {
+          "x": 80,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "damage_condition",
+            "schema": {
+              "name": "damage_condition",
+              "valueKind": "slot",
+              "slotKind": "damage_condition"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> projectile",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-5:out:damage_condition"
+          },
+          {
+            "name": "modifier",
+            "schema": {
+              "name": "modifier",
+              "valueKind": "datatype",
+              "datatype": "modifier"
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Modifier",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-5:out:modifier"
+          },
+          {
+            "name": "target_action",
+            "schema": {
+              "name": "target_action",
+              "valueKind": "slot",
+              "slotKind": "bientity_action"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> Entity Execute Command",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-5:out:target_action"
+          },
+          {
+            "name": "self_action",
+            "schema": {
+              "name": "self_action",
+              "valueKind": "slot",
+              "slotKind": "entity_action"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> play sound",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-5:out:self_action"
+          }
+        ]
+      },
+      {
+        "id": "ast-1",
+        "astNodeId": "ast-1",
+        "type": "origins:projectile",
+        "kind": "damage_condition",
+        "title": "projectile",
+        "color": "condition",
+        "position": {
+          "x": 590,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "projectile",
+            "schema": {
+              "name": "projectile",
+              "valueKind": "string"
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:snowball",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-1:out:projectile"
+          }
+        ]
+      },
+      {
+        "id": "ast-2",
+        "astNodeId": "ast-2",
+        "type": "modifier",
+        "kind": "datatype",
+        "title": "Modifier",
+        "color": "datatype",
+        "position": {
+          "x": 624.2745098039217,
+          "y": 279.72549019607845
+        },
+        "fields": [
+          {
+            "name": "operation",
+            "schema": {
+              "name": "operation",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "addition",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-2:out:operation"
+          },
+          {
+            "name": "value",
+            "schema": {
+              "name": "value",
+              "valueKind": "number",
+              "numberKind": "float",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "5",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-2:out:value"
+          }
+        ]
+      },
+      {
+        "id": "ast-3",
+        "astNodeId": "ast-3",
+        "type": "origins:execute_command",
+        "kind": "entity_action",
+        "title": "Entity Execute Command",
+        "color": "action",
+        "position": {
+          "x": 552.7450980392156,
+          "y": 507.7647058823529
+        },
+        "fields": [
+          {
+            "name": "command",
+            "schema": {
+              "name": "command",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "particle minecraft:crit ~ ~0.5 ~ 0.2 0.2 0.2 0 10",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-3:out:command"
+          }
+        ]
+      },
+      {
+        "id": "ast-4",
+        "astNodeId": "ast-4",
+        "type": "origins:play_sound",
+        "kind": "entity_action",
+        "title": "play sound",
+        "color": "action",
+        "position": {
+          "x": 590,
+          "y": 782
+        },
+        "fields": [
+          {
+            "name": "sound",
+            "schema": {
+              "name": "sound",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:entity.firework_rocket.blast_far",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-4:out:sound"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "ast-5:damage_condition->ast-1",
+        "source": "ast-5",
+        "target": "ast-1",
+        "sourceHandle": "ast-5:out:damage_condition",
+        "targetHandle": "ast-1:in",
+        "fieldName": "damage_condition",
+        "color": "condition"
+      },
+      {
+        "id": "ast-5:modifier->ast-2",
+        "source": "ast-5",
+        "target": "ast-2",
+        "sourceHandle": "ast-5:out:modifier",
+        "targetHandle": "ast-2:in",
+        "fieldName": "modifier",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-5:target_action->ast-3",
+        "source": "ast-5",
+        "target": "ast-3",
+        "sourceHandle": "ast-5:out:target_action",
+        "targetHandle": "ast-3:in",
+        "fieldName": "target_action",
+        "color": "action"
+      },
+      {
+        "id": "ast-5:self_action->ast-4",
+        "source": "ast-5",
+        "target": "ast-4",
+        "sourceHandle": "ast-5:out:self_action",
+        "targetHandle": "ast-4:in",
+        "fieldName": "self_action",
+        "color": "action"
+      }
+    ]
+  }
+}

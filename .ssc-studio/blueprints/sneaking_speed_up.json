@@ -1,0 +1,349 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:sneaking_speed_up",
+  "updatedAt": "2026-06-09T16:18:54.809Z",
+  "viewport": {
+    "x": 49.5625,
+    "y": 204.19921875,
+    "zoom": 1.04296875
+  },
+  "nodes": [
+    {
+      "id": "ast-5",
+      "astNodeId": "ast-5",
+      "type": "origins:conditioned_attribute",
+      "kind": "power",
+      "label": "root",
+      "title": "root",
+      "signature": "power|origins:conditioned_attribute|root|root",
+      "occurrence": 0,
+      "position": {
+        "x": 80,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-1",
+      "astNodeId": "ast-1",
+      "type": "attributed_attribute_modifier",
+      "kind": "datatype",
+      "title": "Attributed Attribute Modifier",
+      "signature": "datatype|attributed_attribute_modifier||Attributed Attribute Modifier",
+      "occurrence": 0,
+      "position": {
+        "x": 563.1535580524344,
+        "y": -58.067415730337075
+      }
+    },
+    {
+      "id": "ast-4",
+      "astNodeId": "ast-4",
+      "type": "origins:and",
+      "kind": "entity_condition",
+      "title": "Condition And",
+      "signature": "entity_condition|origins:and||Condition And",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 314
+      }
+    },
+    {
+      "id": "ast-2",
+      "astNodeId": "ast-2",
+      "type": "origins:fluid_height",
+      "kind": "entity_condition",
+      "title": "fluid height",
+      "signature": "entity_condition|origins:fluid_height||fluid height",
+      "occurrence": 0,
+      "position": {
+        "x": 1100,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-3",
+      "astNodeId": "ast-3",
+      "type": "origins:sneaking",
+      "kind": "entity_condition",
+      "title": "sneaking",
+      "signature": "entity_condition|origins:sneaking||sneaking",
+      "occurrence": 0,
+      "position": {
+        "x": 1100,
+        "y": 314
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "ast-5",
+        "astNodeId": "ast-5",
+        "type": "origins:conditioned_attribute",
+        "kind": "power",
+        "title": "root",
+        "label": "root",
+        "color": "power",
+        "position": {
+          "x": 80,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "modifier",
+            "schema": {
+              "name": "modifier",
+              "valueKind": "datatype",
+              "datatype": "attributed_attribute_modifier"
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Attributed Attribute Modifier",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-5:out:modifier"
+          },
+          {
+            "name": "tick_rate",
+            "schema": {
+              "name": "tick_rate",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 20
+            },
+            "valueKind": "number",
+            "displayValue": "1",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-5:out:tick_rate"
+          },
+          {
+            "name": "condition",
+            "schema": {
+              "name": "condition",
+              "valueKind": "slot",
+              "slotKind": "entity_condition",
+              "required": true
+            },
+            "valueKind": "slot",
+            "displayValue": "-> Condition And",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-5:out:condition"
+          }
+        ]
+      },
+      {
+        "id": "ast-1",
+        "astNodeId": "ast-1",
+        "type": "attributed_attribute_modifier",
+        "kind": "datatype",
+        "title": "Attributed Attribute Modifier",
+        "color": "datatype",
+        "position": {
+          "x": 563.1535580524344,
+          "y": -58.067415730337075
+        },
+        "fields": [
+          {
+            "name": "attribute",
+            "schema": {
+              "name": "attribute",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:generic.movement_speed",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-1:out:attribute"
+          },
+          {
+            "name": "operation",
+            "schema": {
+              "name": "operation",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "addition",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-1:out:operation"
+          },
+          {
+            "name": "value",
+            "schema": {
+              "name": "value",
+              "valueKind": "number",
+              "numberKind": "float",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "0.35",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-1:out:value"
+          },
+          {
+            "name": "name",
+            "schema": {
+              "name": "name",
+              "valueKind": "string",
+              "defaultValue": "Unnamed EntityAttributeModifier"
+            },
+            "valueKind": "string",
+            "displayValue": "Increased sprinting speed",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-1:out:name"
+          }
+        ]
+      },
+      {
+        "id": "ast-4",
+        "astNodeId": "ast-4",
+        "type": "origins:and",
+        "kind": "entity_condition",
+        "title": "Condition And",
+        "color": "condition",
+        "position": {
+          "x": 590,
+          "y": 314
+        },
+        "fields": [
+          {
+            "name": "conditions",
+            "schema": {
+              "name": "conditions",
+              "valueKind": "slot_array",
+              "slotKind": "entity_condition",
+              "multi": true,
+              "required": true
+            },
+            "valueKind": "slot_array",
+            "displayValue": "Array[2]",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-4:out:conditions"
+          }
+        ]
+      },
+      {
+        "id": "ast-2",
+        "astNodeId": "ast-2",
+        "type": "origins:fluid_height",
+        "kind": "entity_condition",
+        "title": "fluid height",
+        "color": "condition",
+        "position": {
+          "x": 1100,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "fluid",
+            "schema": {
+              "name": "fluid",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:water",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-2:out:fluid"
+          },
+          {
+            "name": "comparison",
+            "schema": {
+              "name": "comparison",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "<=",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-2:out:comparison"
+          },
+          {
+            "name": "compare_to",
+            "schema": {
+              "name": "compare_to",
+              "valueKind": "number",
+              "numberKind": "float",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "0",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-2:out:compare_to"
+          }
+        ]
+      },
+      {
+        "id": "ast-3",
+        "astNodeId": "ast-3",
+        "type": "origins:sneaking",
+        "kind": "entity_condition",
+        "title": "sneaking",
+        "color": "condition",
+        "position": {
+          "x": 1100,
+          "y": 314
+        },
+        "fields": []
+      }
+    ],
+    "edges": [
+      {
+        "id": "ast-5:modifier->ast-1",
+        "source": "ast-5",
+        "target": "ast-1",
+        "sourceHandle": "ast-5:out:modifier",
+        "targetHandle": "ast-1:in",
+        "fieldName": "modifier",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-4:conditions:0->ast-2",
+        "source": "ast-4",
+        "target": "ast-2",
+        "sourceHandle": "ast-4:out:conditions",
+        "targetHandle": "ast-2:in",
+        "fieldName": "conditions",
+        "color": "condition",
+        "order": 0
+      },
+      {
+        "id": "ast-4:conditions:1->ast-3",
+        "source": "ast-4",
+        "target": "ast-3",
+        "sourceHandle": "ast-4:out:conditions",
+        "targetHandle": "ast-3:in",
+        "fieldName": "conditions",
+        "color": "condition",
+        "order": 1
+      },
+      {
+        "id": "ast-5:condition->ast-4",
+        "source": "ast-5",
+        "target": "ast-4",
+        "sourceHandle": "ast-5:out:condition",
+        "targetHandle": "ast-4:in",
+        "fieldName": "condition",
+        "color": "condition"
+      }
+    ]
+  }
+}
