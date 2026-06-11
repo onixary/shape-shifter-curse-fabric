@@ -1,6 +1,6 @@
 {
     "type": "shape-shifter-curse:add_sustained_instinct",
-    "instinct_effect_id": "FORM_SPIDER_0_DEW_COVERED_COBWEB",
+    "instinct_effect_id": "shape-shifter-curse:form_spider_0_dew_covered_cobweb",
     "value": 0.16,
     "duration": 1,
     "condition": {

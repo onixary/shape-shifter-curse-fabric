@@ -11,7 +11,7 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 
 import java.util.ArrayList;
@@ -19,21 +19,21 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 
-public class CustomFormArgumentType implements ArgumentType<Identifier> {
+public class DynamicFormArgumentType implements ArgumentType<Identifier> {
 
    public static final DynamicCommandExceptionType FORM_NOT_FOUND = new DynamicCommandExceptionType(
        o -> Text.translatable("commands.shape-shifter-curse.form_not_found", o)
    );
 
-   public static CustomFormArgumentType form() {
-      return new CustomFormArgumentType();
+   public static DynamicFormArgumentType form() {
+      return new DynamicFormArgumentType();
    }
 
    public Identifier parse(StringReader stringReader) throws CommandSyntaxException {
       return Identifier.fromCommandInput(stringReader);
    }
 
-   public static PlayerFormBase getForm(CommandContext<ServerCommandSource> context, String argumentName) throws CommandSyntaxException {
+   public static IForm getForm(CommandContext<ServerCommandSource> context, String argumentName) throws CommandSyntaxException {
 
       Identifier id = context.getArgument(argumentName, Identifier.class);
 
@@ -54,8 +54,8 @@ public class CustomFormArgumentType implements ArgumentType<Identifier> {
 
       try {
             RegPlayerForms.playerForms.forEach((formID, form) -> {
-                if (form.getIsCustomForm()) {
-                    availableForms.add(form.FormID);
+                if (form.isDynamicForm()) {
+                    availableForms.add(form.getFormID());
                 }
             });
       }

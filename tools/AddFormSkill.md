@@ -46,7 +46,7 @@ src/main/java/net/onixary/shapeShifterCurseFabric/player_form/forms/Form_<Name>.
 ### 1.2 渐进式普通形态（Phase 0-3均为两足）
 
 ```java
-package net.onixary.shapeShifterCurseFabric.player_form.forms;
+package net.onixary.shapeShifterCurseFabric.player_form.old.forms;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
@@ -56,65 +56,74 @@ import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.v2.PlayerAnimState;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.*;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.*;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Form_<Name> extends PlayerFormBase {
     
-    public Form_<Name>(Identifier formID) {
-        super(formID);
+    public Form_<Name>(
+  Identifier formID)
+
+  {
+    super(formID);
+  }
+
+  // ========== v3动画系统 ==========
+  public static final AnimUtils.AnimationHolderData ANIM_IDLE =
+          new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("<name>_idle"));
+
+  public static final AbstractAnimStateController IDLE_CONTROLLER =
+          new WithSneakAnimController(ANIM_IDLE, null);
+
+  @Override
+  public @Nullable AbstractAnimStateController getAnimStateController(
+          PlayerEntity player,
+          AnimSystem.AnimSystemData animSystemData,
+          @NotNull Identifier animStateID) {
+
+    AnimStateEnum state = AnimStateEnum.getStateEnum(animStateID);
+    if (state != null) {
+      switch (state) {
+        case ANIM_STATE_IDLE:
+          return IDLE_CONTROLLER;
+        default:
+          return null;
+      }
     }
-
-    // ========== v3动画系统 ==========
-    public static final AnimUtils.AnimationHolderData ANIM_IDLE = 
-        new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("<name>_idle"));
-
-    public static final AbstractAnimStateController IDLE_CONTROLLER = 
-        new WithSneakAnimController(ANIM_IDLE, null);
-
-    @Override
-    public @Nullable AbstractAnimStateController getAnimStateController(
-            PlayerEntity player, 
-            AnimSystem.AnimSystemData animSystemData, 
-            @NotNull Identifier animStateID) {
-        
-        AnimStateEnum state = AnimStateEnum.getStateEnum(animStateID);
-        if (state != null) {
-            switch (state) {
-                case ANIM_STATE_IDLE: return IDLE_CONTROLLER;
-                default: return null;
-            }
-        }
-        return super.getAnimStateController(player, animSystemData, animStateID);
-    }
+    return super.getAnimStateController(player, animSystemData, animStateID);
+  }
 }
 ```
 
 ### 1.3 渐进式野性形态（Phase 3变为四足）
 
 **Phase 0-2（两足阶段）:**
+
 ```java
-package net.onixary.shapeShifterCurseFabric.player_form.forms;
+package net.onixary.shapeShifterCurseFabric.player_form.old.forms;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class Form_<Name>1 extends PlayerFormBase {
-    // Phase 1 使用普通两足动画
-    public Form_<Name>1(Identifier formID) {
-        super(formID);
-    }
-    // ... 实现动画控制器
+public class Form_<Name>1 extends
+
+PlayerFormBase {
+  // Phase 1 使用普通两足动画
+  public Form_<Name> 1 (Identifier formID){
+    super(formID);
+  }
+  // ... 实现动画控制器
 }
 ```
 
 **Phase 3（四足最终形态）:**
+
 ```java
-package net.onixary.shapeShifterCurseFabric.player_form.forms;
+package net.onixary.shapeShifterCurseFabric.player_form.old.forms;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
@@ -122,61 +131,63 @@ import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class Form_<Name>3 extends Form_FeralBase {
-    
-    public Form_<Name>3(Identifier formID) {
-        super(formID);
-        this.setBodyType(PlayerFormBodyType.FERAL);
-    }
+public class Form_<Name>3 extends
 
-    @Override
-    public @Nullable AbstractAnimStateController getAnimStateController(
-            PlayerEntity player, 
-            AnimSystem.AnimSystemData animSystemData, 
-            @NotNull Identifier animStateID) {
-        
-        AnimStateEnum state = AnimStateEnum.getStateEnum(animStateID);
-        if (state != null) {
-            switch (state) {
-                case ANIM_STATE_WALK:
-                    // 如果有潜行冲刺能力
-                    return this.getCanSneakRush() ? WALK_CONTROLLER_SNEAK_RUSH : WALK_CONTROLLER;
-                case ANIM_STATE_IDLE:
-                    return IDLE_CONTROLLER;
-                case ANIM_STATE_SPRINT:
-                    return this.getCanSneakRush() ? SPRINT_CONTROLLER_SNEAK_RUSH : SPRINT_CONTROLLER;
-                // ... 复用Form_FeralBase的其他控制器
-                default:
-                    return Form_FeralBase.IDLE_CONTROLLER;
-            }
-        }
-        return super.getAnimStateController(player, animSystemData, animStateID);
+Form_FeralBase {
+
+  public Form_<Name> 3 (Identifier formID){
+    super(formID);
+    this.setBodyType(PlayerFormBodyType.FERAL);
+  }
+
+  @Override
+  public @Nullable AbstractAnimStateController getAnimStateController (
+          PlayerEntity player,
+          AnimSystem.AnimSystemData animSystemData,
+          @NotNull Identifier animStateID){
+
+    AnimStateEnum state = AnimStateEnum.getStateEnum(animStateID);
+    if (state != null) {
+      switch (state) {
+        case ANIM_STATE_WALK:
+          // 如果有潜行冲刺能力
+          return this.getCanSneakRush() ? WALK_CONTROLLER_SNEAK_RUSH : WALK_CONTROLLER;
+        case ANIM_STATE_IDLE:
+          return IDLE_CONTROLLER;
+        case ANIM_STATE_SPRINT:
+          return this.getCanSneakRush() ? SPRINT_CONTROLLER_SNEAK_RUSH : SPRINT_CONTROLLER;
+        // ... 复用Form_FeralBase的其他控制器
+        default:
+          return Form_FeralBase.IDLE_CONTROLLER;
+      }
     }
+    return super.getAnimStateController(player, animSystemData, animStateID);
+  }
 }
 ```
 
 ### 1.4 特殊普通形态（Phase SP，两足）
 
 ```java
-package net.onixary.shapeShifterCurseFabric.player_form.forms;
+package net.onixary.shapeShifterCurseFabric.player_form.old.forms;
 
 import net.minecraft.util.Identifier;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.old.PlayerFormBase;
 
 public class Form_<Name>SP extends PlayerFormBase {
-    
-    public Form_<Name>SP(Identifier formID) {
-        super(formID);
-    }
-    
-    // 实现自定义动画控制器...
+
+  public Form_<Name> SP(Identifier formID) {
+    super(formID);
+  }
+
+  // 实现自定义动画控制器...
 }
 ```
 
 ### 1.5 特殊野性形态（Phase SP，四足）
 
 ```java
-package net.onixary.shapeShifterCurseFabric.player_form.forms;
+package net.onixary.shapeShifterCurseFabric.player_form.old.forms;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
@@ -185,35 +196,35 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Form_<Name>SPFeral extends Form_FeralBase {
-    
-    public Form_<Name>SPFeral(Identifier formID) {
-        super(formID);
-        this.setBodyType(PlayerFormBodyType.FERAL);
-    }
 
-    @Override
-    public @Nullable AbstractAnimStateController getAnimStateController(
-            PlayerEntity player,
-            AnimSystem.AnimSystemData animSystemData,
-            @NotNull Identifier animStateID) {
+  public Form_<Name> SPFeral(Identifier formID) {
+    super(formID);
+    this.setBodyType(PlayerFormBodyType.FERAL);
+  }
 
-        AnimStateEnum state = AnimStateEnum.getStateEnum(animStateID);
-        if (state != null) {
-            switch (state) {
-                case ANIM_STATE_WALK:
-                    // 如果有潜行冲刺能力
-                    return this.getCanSneakRush() ? WALK_CONTROLLER_SNEAK_RUSH : WALK_CONTROLLER;
-                case ANIM_STATE_IDLE:
-                    return IDLE_CONTROLLER;
-                case ANIM_STATE_SPRINT:
-                    return this.getCanSneakRush() ? SPRINT_CONTROLLER_SNEAK_RUSH : SPRINT_CONTROLLER;
-                // ... 复用Form_FeralBase的其他控制器
-                default:
-                    return Form_FeralBase.IDLE_CONTROLLER;
-            }
-        }
-        return super.getAnimStateController(player, animSystemData, animStateID);
+  @Override
+  public @Nullable AbstractAnimStateController getAnimStateController(
+          PlayerEntity player,
+          AnimSystem.AnimSystemData animSystemData,
+          @NotNull Identifier animStateID) {
+
+    AnimStateEnum state = AnimStateEnum.getStateEnum(animStateID);
+    if (state != null) {
+      switch (state) {
+        case ANIM_STATE_WALK:
+          // 如果有潜行冲刺能力
+          return this.getCanSneakRush() ? WALK_CONTROLLER_SNEAK_RUSH : WALK_CONTROLLER;
+        case ANIM_STATE_IDLE:
+          return IDLE_CONTROLLER;
+        case ANIM_STATE_SPRINT:
+          return this.getCanSneakRush() ? SPRINT_CONTROLLER_SNEAK_RUSH : SPRINT_CONTROLLER;
+        // ... 复用Form_FeralBase的其他控制器
+        default:
+          return Form_FeralBase.IDLE_CONTROLLER;
+      }
     }
+    return super.getAnimStateController(player, animSystemData, animStateID);
+  }
 }
 ```
 

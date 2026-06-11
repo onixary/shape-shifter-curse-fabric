@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.player_form.new_form_system;
+package net.onixary.shapeShifterCurseFabric.player_form;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
@@ -9,7 +9,7 @@ import net.onixary.shapeShifterCurseFabric.data.CodexData;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -140,5 +140,9 @@ public interface IForm {
     default boolean isPlayerForm(PlayerEntity player) {
         IForm playerForm = FormUtils.getPlayerForm(player);
         return this.isEquals(playerForm);
+    }
+
+    default boolean isDynamicForm() {
+        return false;
     }
 }

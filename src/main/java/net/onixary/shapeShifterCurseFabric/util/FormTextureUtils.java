@@ -9,10 +9,10 @@ import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.lang3.tuple.Triple;
 import org.jetbrains.annotations.Nullable;
@@ -34,7 +34,7 @@ public class FormTextureUtils {
     }
 
     public interface TempFormModelProcessor {
-        PlayerFormBase getForm();
+        IForm getForm();
 
         Identifier getLayerID();
     }
@@ -47,14 +47,14 @@ public class FormTextureUtils {
     public static boolean useTempFormModel = false;
     public static TempFormModelProcessor tempFormModelProcessor = null;
 
-    public static PlayerFormBase getPlayerForm_Render(PlayerEntity player) {
+    public static IForm getPlayerForm_Render(PlayerEntity player) {
         if (useTempFormModel && Objects.equals(player, MinecraftClient.getInstance().player)) {
-            PlayerFormBase form = tempFormModelProcessor.getForm();
+            IForm form = tempFormModelProcessor.getForm();
             if (form != null) {
                 return form;
             }
         }
-        return RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+        return FormUtils.getPlayerForm(player);
     }
 
     public record ColorSetting(int primaryColor, int accentColor1, int accentColor2, int eyeColorA, int eyeColorB

@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenu;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
@@ -24,7 +24,6 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 public class FormColorData {
     public boolean enableDefaultFormColor = true;
@@ -212,9 +211,9 @@ public class FormColorData {
     }
 
     public void unlockAll() {
-        for (PlayerFormBase form : RegPlayerForms.playerForms.values()) {
-            if (!unlockedForms.contains(form.FormID)) {
-                unlockedForms.add(form.FormID);
+        for (IForm form : RegPlayerForms.playerForms.values()) {
+            if (!unlockedForms.contains(form.getFormID())) {
+                unlockedForms.add(form.getFormID());
             }
         }
         this.writeToConfig();
@@ -222,7 +221,7 @@ public class FormColorData {
 
     public void clearFormUnlock() {
         unlockedForms.clear();
-        unlockedForms.add(RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID);
+        unlockedForms.add(RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID());
         this.writeToConfig();
     }
 

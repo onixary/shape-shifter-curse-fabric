@@ -1,5 +1,6 @@
-package net.onixary.shapeShifterCurseFabric.player_form.new_form_system;
+package net.onixary.shapeShifterCurseFabric.player_form;
 
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.random.Random;
 import org.jetbrains.annotations.NotNull;
@@ -11,6 +12,8 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 public interface IFormGroup {
+    @NotNull Identifier getGroupID();
+
     @NotNull Map<Integer, List<Pair<Integer, IForm>>> getGroupData();
 
     default @NotNull IFormGroup registerForm(int formTier, int formWeight, IForm form) {

@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.player_form.new_form_system;
+package net.onixary.shapeShifterCurseFabric.player_form.utils;
 
 import java.util.Objects;
 import java.util.function.Function;

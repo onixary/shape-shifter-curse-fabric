@@ -24,10 +24,6 @@ public class CancelEntityStepSoundMixin {
     private void disablePlayerStepSound(BlockPos pos, BlockState state, CallbackInfo ci) {
         // 类型检查确保是玩家实体
         if ((Object)this instanceof PlayerEntity) {
-//            PlayerForms currentForm = FormAbilityManager.getForm((PlayerEntity) (Object)this);
-//            if(currentForm == PlayerForms.ALLAY_SP || currentForm == PlayerForms.OCELOT_2 || currentForm == PlayerForms.OCELOT_3) {
-//                ci.cancel(); // 取消原方法执行
-//            }
             if (PowerHolderComponent.hasPower((PlayerEntity) (Object)this, NoStepSoundPower.class)) {
                 ci.cancel();
             }

@@ -5,13 +5,11 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextWidget;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.data.CodexData;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 
 import java.util.ArrayList;
@@ -43,7 +41,7 @@ public class NormalFormSelectScreen extends Screen {
     private List<Identifier> getAvailableForms() {
         List<Identifier> availableForms = new ArrayList<>();
         RegPlayerForms.playerForms.forEach((formID, form) -> {
-            availableForms.add(form.FormID);
+            availableForms.add(form.getFormID());
         });
         return availableForms;
     }
@@ -74,7 +72,7 @@ public class NormalFormSelectScreen extends Screen {
             ButtonWidget buttonWidget = buttonWidgetList.get(i);
             if (buttonForms.get(i) != null) {
                 try {
-                    buttonWidget.setMessage(RegPlayerForms.getPlayerForm(buttonForms.get(i)).getFormName());
+                    buttonWidget.setMessage(RegPlayerForms.getPlayerForm(buttonForms.get(i)).getContentText(CodexData.ContentType.NAME));
                 } catch (Exception e) {
                     buttonWidget.setMessage(Text.of(buttonForms.get(i).toString()));
                 }

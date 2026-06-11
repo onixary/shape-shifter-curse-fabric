@@ -24,12 +24,13 @@ import net.onixary.shapeShifterCurseFabric.config.PlayerCustomConfig;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.ButtonWidgetOKey;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.FCS_ButtonWidget;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.SimpleIntSliderWidget;
+import net.onixary.shapeShifterCurseFabric.data.CodexData;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormColorData;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.jetbrains.annotations.Nullable;
@@ -216,14 +217,14 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
     }
 
     public void reloadFormIDName() {
-        PlayerFormBase form = this.getFormNoCheckUnlock();
-        boolean isUnlocked = ShapeShifterCurseFabricClient.formColorData.isUnlock(form.FormID);
+        IForm form = this.getFormNoCheckUnlock();
+        boolean isUnlocked = ShapeShifterCurseFabricClient.formColorData.isUnlock(form.getFormID());
         if (ShapeShifterCurseFabric.clientConfig.disableUnlockCheckInFormColorSelectMenu) {
             isUnlocked = true;
         }
         Text message = NoneFromNameLabel;
         if (!RegPlayerForms.ORIGINAL_BEFORE_ENABLE.equals(form)) {
-            message = form.getFormName();
+            message = form.getContentText(CodexData.ContentType.NAME);
         }
         if (!isUnlocked) {
             if (message instanceof MutableText text) {
@@ -238,11 +239,11 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
     public void reloadFormIDIndex() {
         if (minecraftClient.player != null) {
             boolean isFind = false;
-            PlayerFormBase form = RegPlayerFormComponent.PLAYER_FORM.get(minecraftClient.player).getCurrentForm();
+            IForm form = FormUtils.getPlayerForm(minecraftClient.player);
             if (form != null) {
                 int Index = 0;
-                for (PlayerFormBase playerFormBase : RegPlayerForms.playerForms.values()) {
-                    if (Objects.equals(playerFormBase.FormID, form.FormID)) {
+                for (IForm playerFormBase : RegPlayerForms.playerForms.values()) {
+                    if (Objects.equals(playerFormBase.getFormID(), form.getFormID())) {
                         formIDIndex = Index;
                         isFind = true;
                         break;
@@ -258,36 +259,36 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
         formIDIndex = -1;
     }
 
-    public PlayerFormBase getFormNoCheckUnlock() {
+    public IForm getFormNoCheckUnlock() {
         if (this.formIDIndex < 0) {
             return RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
         }
-        Collection<PlayerFormBase> playerFormsCollection = RegPlayerForms.playerForms.values();
+        Collection<IForm> playerFormsCollection = RegPlayerForms.playerForms.values();
         if (this.formIDIndex >= playerFormsCollection.size()) {
             return RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
         }
-        return playerFormsCollection.toArray(new PlayerFormBase[0])[this.formIDIndex];
+        return playerFormsCollection.toArray(new IForm[0])[this.formIDIndex];
     }
 
     @Override
-    public PlayerFormBase getForm() {
+    public IForm getForm() {
         if (ShapeShifterCurseFabric.clientConfig.disableUnlockCheckInFormColorSelectMenu) {
             return this.getFormNoCheckUnlock();
         }
-        PlayerFormBase finalForm = null;
+        IForm finalForm = null;
         if (this.formIDIndex < 0) {
             finalForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
         } else {
-            Collection<PlayerFormBase> playerFormsCollection = RegPlayerForms.playerForms.values();
+            Collection<IForm> playerFormsCollection = RegPlayerForms.playerForms.values();
             if (this.formIDIndex >= playerFormsCollection.size()) {
                 finalForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
             } else {
-                finalForm = playerFormsCollection.toArray(new PlayerFormBase[0])[this.formIDIndex];
+                finalForm = playerFormsCollection.toArray(new IForm[0])[this.formIDIndex];
             }
         }
-        if (finalForm == null || !ShapeShifterCurseFabricClient.formColorData.isUnlock(finalForm.FormID)) {
+        if (finalForm == null || !ShapeShifterCurseFabricClient.formColorData.isUnlock(finalForm.getFormID())) {
             if (minecraftClient.player != null) {
-                return RegPlayerFormComponent.PLAYER_FORM.get(minecraftClient.player).getCurrentForm();
+                return FormUtils.getPlayerForm(minecraftClient.player);
             } else {
                 return RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
             }
@@ -297,7 +298,7 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
 
     @Override
     public Identifier getLayerID() {
-        return this.getForm().getFormOriginID();
+        return this.getForm().getFormLayer().getRight();
     }
 
     @Override

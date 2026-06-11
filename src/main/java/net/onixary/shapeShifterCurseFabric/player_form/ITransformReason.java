@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.player_form.new_form_system;
+package net.onixary.shapeShifterCurseFabric.player_form;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -6,7 +6,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
-import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.ExtraFunctionInterface;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
+import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
+import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.TransformativeStatusInstance;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -77,6 +81,10 @@ public interface ITransformReason {
                 IFormGroup group = nowForm.getFormGroup();
                 int tier = nowForm.getFormTier() + 1;
                 IForm result = null;
+                // TransformativeStatusInstance instance = EffectManager.getTransformativeEffect(player);
+                // if (RegPlayerForms.ORIGINAL_SHIFTER.isEquals(nowForm) && instance != null && instance.getTransformativeEffectType() != null) {
+                //     result = instance.getTransformativeEffectType().getToForm(player);
+                // }
                 if (group != null) {
                     result = group.getRandomForm(tier, player.getRandom(), FormUtils.NoInstinctTFTarget.hasFlag().negate());
                 }
@@ -93,6 +101,9 @@ public interface ITransformReason {
                 if (group != null) {
                     result = group.getRandomForm(tier, player.getRandom(), FormUtils.NoInstinctTFTarget.hasFlag().negate());
                 }
+                if (result == null && tier == 0) {
+                    result = RegPlayerForms.ORIGINAL_SHIFTER;
+                }
                 return result == null ? nowForm : result;
             }
     );
@@ -102,7 +113,11 @@ public interface ITransformReason {
                 if (FormUtils.NoCursedMoonEffect.hasFlag(nowForm)) {
                     return nowForm;
                 }
-                if (RegPlayerForms.N_ORIGINAL_SHIFTER.isEquals(nowForm)) {
+                if (RegPlayerForms.ORIGINAL_SHIFTER.isEquals(nowForm)) {
+                    TransformativeStatusInstance instance = EffectManager.getTransformativeEffect(player);
+                    if (instance != null && instance.getTransformativeEffectType() != null) {
+                        return instance.getTransformativeEffectType().getToForm(player);
+                    }
                     List<IForm> formList = FormUtils.getFormByCondition(FormUtils.StarterForm.hasFlag());
                     if (!formList.isEmpty()) {
                         return formList.get(player.getRandom().nextInt(formList.size()));
@@ -110,7 +125,7 @@ public interface ITransformReason {
                         return nowForm;
                     }
                 }
-                int tier = nowForm.getFormTier() + 1;
+                int tier = FormUtils.CursedMoonFinalForm.hasFlag(nowForm) ? 1 : nowForm.getFormTier() + 1;
                 IFormGroup group = nowForm.getFormGroup();
                 IForm result = null;
                 if (group != null) {
@@ -145,8 +160,12 @@ public interface ITransformReason {
             (reason, player, nowForm) -> {
                 Item item = itemStack.getItem();
                 boolean canNotAffect = true;
-                if (!FormUtils.NoAnyInhibitor.hasFlag(nowForm) && (!FormUtils.NoInhibitor.hasFlag(nowForm) || RegCustomItem.POWERFUL_INHIBITOR.equals(item))) {
+                if (!FormUtils.InhibitorImmune.hasFlag(nowForm) && (!FormUtils.InhibitorResist.hasFlag(nowForm) || RegCustomItem.POWERFUL_INHIBITOR.equals(item))) {
                     int Tier = nowForm.getFormTier() - 1;
+                    // 没看代码我还不知道 POWERFUL_INHIBITOR竟然能直接还原二阶段的形态
+                    if (RegCustomItem.POWERFUL_INHIBITOR.equals(item) && !FormUtils.InhibitorResist.hasFlag(nowForm)) {
+                        Tier = 0;
+                    }
                     IForm prevForm = FormUtils.getPrevForm(player);
                     if (prevForm != null && prevForm.getFormTier() == Tier) {
                         return prevForm;
@@ -155,6 +174,9 @@ public interface ITransformReason {
                     IForm result = null;
                     if (group != null) {
                         result = group.getRandomForm(Tier, player.getRandom(), null);
+                    }
+                    if (result == null && Tier == 0) {
+                        result = RegPlayerForms.ORIGINAL_SHIFTER;
                     }
                     return result == null ? nowForm : result;
                 }
