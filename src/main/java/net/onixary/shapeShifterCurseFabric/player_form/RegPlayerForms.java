@@ -65,7 +65,7 @@ public class RegPlayerForms {
     public static IForm SPIDER_0 = registerPlayerForm(new NormalForm(ShapeShifterCurseFabric.identifier("spider_0")).formFlag(StarterForm, CatalystImmune).applyScaleFunc(NormalForm.RESET_SCALE_FUNC));
     public static IForm SPIDER_1 = registerPlayerForm(new Form_Spider1(ShapeShifterCurseFabric.identifier("spider_1")).formFlag(NoCursedMoonTFTarget, NoCursedMoonEffect, CatalystImmune).applyScaleFunc(NORMAL_SCALE_FUNC_BUILDER.apply(0.85f, 1.0f)));
     public static IForm SPIDER_2 = registerPlayerForm(new Form_Spider2(ShapeShifterCurseFabric.identifier("spider_2")).formFlag(InhibitorResist, LockInstinct, CursedMoonFinalForm, CatalystResist, CanTFToFinalForm).applyScaleFunc(NORMAL_SCALE_FUNC_BUILDER.apply(0.9f, 1.0f)));
-    public static IForm SPIDER_3 = registerPlayerForm(new Form_Spider3(ShapeShifterCurseFabric.identifier("spider_3")).formFlag(FinalForm, InhibitorImmune, NoInstinct, NoCursedMoonEffect).applyScaleFunc(NORMAL_SCALE_FUNC_BUILDER.apply(0.9f,0.6f)));
+    public static IForm SPIDER_3 = registerPlayerForm(new Form_Spider3(ShapeShifterCurseFabric.identifier("spider_3")).formFlag(FinalForm, InhibitorImmune, NoInstinct, NoCursedMoonEffect).applyScaleFunc(NORMAL_SCALE_FUNC_BUILDER.apply(0.9f,1.0f)));
     public static IFormGroup SPIDER_FORM = registerPlayerFormGroup(new NormalGroup(ShapeShifterCurseFabric.identifier("spider_form")).registerForm(1, 1, SPIDER_0).registerForm(2, 1, SPIDER_1).registerForm(3, 1, SPIDER_2).registerForm(4, 1, SPIDER_3));
     // ALLAY_SP
     public static IForm ALLAY_SP = registerPlayerForm(new Form_Allay(ShapeShifterCurseFabric.identifier("allay_sp")).formFlag(NoInstinct, NoCursedMoonEffect, SpecialForm).applyScaleFunc(NORMAL_SCALE_FUNC_BUILDER.apply(0.35f,1.0f)));
