@@ -62,6 +62,19 @@
       "right_arm": "bipedRightArm",
       "left_leg": "bipedLeftLeg",
       "right_leg": "bipedRightLeg"
+    },
+    "part_extra_pos": {
+      "head": {
+        "pos_x": 0.0,
+        "pos_y": 0.0,
+        "pos_z": 0.0,
+        "rot_x": 0.0,
+        "rot_y": 0.0,
+        "rot_z": 0.0,
+        "pivot_x": 0.0,
+        "pivot_y": 0.0,
+        "pivot_z": 0.0
+      }
     }
   },
   "builtin_controller_data": {
