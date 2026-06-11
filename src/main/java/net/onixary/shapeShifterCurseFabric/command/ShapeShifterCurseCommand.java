@@ -24,7 +24,6 @@ import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.old.instinct.RegPlayerInstinctComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
@@ -123,11 +122,6 @@ public class ShapeShifterCurseCommand {
                                 .then(literal("clear_player_form_data")
                                         .then(argument("target", EntityArgumentType.player())
                                                 .executes(ShapeShifterCurseCommand::clearPlayerFormData)
-                                        )
-                                )
-                                .then(literal("clear_player_instinct_data")
-                                        .then(argument("target", EntityArgumentType.player())
-                                                .executes(ShapeShifterCurseCommand::clearPlayerInstinctData)
                                         )
                                 )
                                 .then(literal("clear_player_skin_data")
@@ -508,18 +502,6 @@ public class ShapeShifterCurseCommand {
         PlayerFormComponent.COMPONENT.get(target).clear();
         PlayerFormComponent.COMPONENT.sync(target);
         commandContext.getSource().sendFeedback(() -> {return Text.literal("Form Data Cleared!");}, false);
-        return 1;
-    }
-
-    private static int clearPlayerInstinctData(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
-        if (!CheckDebugEnvironment(commandContext)) {
-            commandContext.getSource().sendError(Text.literal("Has No Permission!"));
-            return 0;
-        }
-        ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
-        RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.get(target).clear();
-        RegPlayerInstinctComponent.PLAYER_INSTINCT_COMP.sync(target);
-        commandContext.getSource().sendFeedback(() -> {return Text.literal("Instinct Data Cleared!");}, false);
         return 1;
     }
 

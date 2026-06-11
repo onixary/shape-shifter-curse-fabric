@@ -83,7 +83,6 @@
     "cardinal-components-entity": [
       "net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents",
       "net.onixary.shapeShifterCurseFabric.player_form.utils.RegPlayerFormComponent",
-      "net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent",
       "net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent",
       "net.onixary.shapeShifterCurseFabric.minion.RegPlayerMinionComponent",
       "net.onixary.shapeShifterCurseFabric.mana.RegManaComponent"
@@ -105,7 +104,6 @@
     "cardinal-components": [
       "origins:origin",
       "shape-shifter-curse:player_form",
-      "shape-shifter-curse:player_instinct_component",
       "shape-shifter-curse:skin_settings",
       "shape-shifter-curse:player_minion_data",
       "shape-shifter-curse:mana"

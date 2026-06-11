@@ -11,7 +11,6 @@ import net.onixary.shapeShifterCurseFabric.player_form.ITransformReason;
 import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 public class InstinctUtils {
@@ -98,18 +97,29 @@ public class InstinctUtils {
         return (float) effects.values().stream().mapToDouble(effect -> effect.getValue(false)).sum();
     }
 
+    // Both Side
+    public static float getBaseInstinctRate(PlayerEntity player) {
+        IForm form = FormUtils.getPlayerForm(player);
+        if (FormUtils.NoInstinct.hasFlag(form) || FormUtils.LockInstinct.hasFlag(form)) {
+            return -100.0f;
+        } else {
+            return StaticParams.INSTINCT_INCREASE_RATE;
+        }
+    }
+
     // Server Side
     public static void serverTick(MinecraftServer server) {
         for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
             PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
             float prevRate = playerInstinctRate.getOrDefault(player.getUuid(), 0.0f);
-            float nowRate = 0.0f;
+            float nowRate = getBaseInstinctRate(player);
             if (lockInstinctCalc) {
                 nowRate = 0.0f;
             } else {
-                nowRate = calcRate(component.instinctEffects, true);
+                nowRate += calcRate(component.instinctEffects, true);
             }
             playerInstinctRate.put(player.getUuid(), nowRate);
+            component.instinctValue += nowRate;
             component.instinctRate = nowRate;
             if (prevRate != nowRate) {
                 component.sync();
