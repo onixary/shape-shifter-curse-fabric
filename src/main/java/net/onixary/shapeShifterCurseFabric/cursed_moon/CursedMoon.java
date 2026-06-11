@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.cursed_moon;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -13,6 +12,7 @@ import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.ITransformReason;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 
@@ -79,6 +79,9 @@ public class CursedMoon {
                 component.BeforeCursedMoonAppliedForm = nowForm;
                 component.AfterCursedMoonAppliedForm = targetForm;
                 TransformManager.startTransform(player, targetForm, null);
+                if (FormUtils.CursedMoonFinalForm.hasFlag(nowForm)) {
+                    ShapeShifterCurseFabric.ON_TRIGGER_CURSED_MOON_FORM_2.trigger(serverPlayer);
+                }
             }
         }
         component.sync();

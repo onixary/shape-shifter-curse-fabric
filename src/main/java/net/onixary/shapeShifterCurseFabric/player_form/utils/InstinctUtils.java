@@ -68,7 +68,7 @@ public class InstinctUtils {
 
     // Client Only
     public static float getNowInstinct() {
-        return nowInstinctValue + nowInstinctRate * nowInstinctTick;
+        return Math.min(Math.max(nowInstinctValue + nowInstinctRate * nowInstinctTick, 0.0f), StaticParams.INSTINCT_MAX);
     }
 
     // Client Only
@@ -120,6 +120,7 @@ public class InstinctUtils {
             }
             playerInstinctRate.put(player.getUuid(), nowRate);
             component.instinctValue += nowRate;
+            component.instinctValue = Math.max(component.instinctValue, 0);
             component.instinctRate = nowRate;
             if (prevRate != nowRate) {
                 component.sync();
@@ -150,6 +151,7 @@ public class InstinctUtils {
         PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
         if (isImmediate) {
             component.instinctValue += lockInstinctCalc ? 0 : effect.getValue(true);
+            component.instinctValue = Math.max(component.instinctValue, 0);
         } else {
             component.instinctEffects.put(effect.getId(), effect);
         }

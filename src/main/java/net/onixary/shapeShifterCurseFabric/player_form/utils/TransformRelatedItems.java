@@ -25,7 +25,7 @@ public class TransformRelatedItems {
         }
         else if (Tier == 1) {
             player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure_0").formatted(Formatting.YELLOW));
-            ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger((ServerPlayerEntity) player);
+            ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger(serverPlayer);
         }
         else if (FormUtils.InhibitorImmune.hasFlag(nowForm)) {
             player.sendMessage(Text.translatable("info.shape-shifter-curse.permanent_form_used_cure").formatted(Formatting.YELLOW));
@@ -35,6 +35,7 @@ public class TransformRelatedItems {
         }
         else {
             player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure").formatted(Formatting.YELLOW));
+            ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger(serverPlayer);
         }
         IForm nextForm = nowForm._getPrevForm(player, ITransformReason.ItemReasonBuilder.apply(stack));
         if (nextForm != nowForm) {
@@ -58,9 +59,12 @@ public class TransformRelatedItems {
         }
         else if (FormUtils.InhibitorResist.hasFlag(nowForm)) {
             player.sendMessage(Text.translatable("info.shape-shifter-curse.max_form_used_cure_final").formatted(Formatting.YELLOW));
+            ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE_FINAL.trigger(serverPlayer);
+            ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger(serverPlayer);
         }
         else {
             player.sendMessage(Text.translatable("info.shape-shifter-curse.transformed_by_cure_final").formatted(Formatting.YELLOW));
+            ShapeShifterCurseFabric.ON_TRANSFORM_BY_CURE.trigger(serverPlayer);
         }
         IForm nextForm = nowForm._getPrevForm(player, ITransformReason.ItemReasonBuilder.apply(stack));
         if (nextForm != nowForm) {

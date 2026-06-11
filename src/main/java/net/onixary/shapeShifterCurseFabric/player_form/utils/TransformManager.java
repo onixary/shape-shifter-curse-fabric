@@ -57,15 +57,17 @@ public class TransformManager {
     }
 
     public static void startTransform(PlayerEntity player, IForm form, @Nullable Consumer<PlayerTransformData> onTransformComplete) {
-        if (form.isPlayerForm(player)) {
+        if (form.isPlayerForm(player) || !(player instanceof ServerPlayerEntity serverPlayerEntity)) {
             return;
         }
-        PlayerFormComponent.COMPONENT.get(player).transformTargetForm = form;
+        PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+        component.transformTargetForm = form;
         PlayerTransformData data = getPlayerData(player);
         data.transformTimer = 0;
         data.transformStartForm = FormUtils.getPlayerForm(player);
         data.transformEndForm = form;
         data.onTransformComplete = onTransformComplete;
+        ShapeShifterCurseFabric.ON_TRANSFORM_FORM.trigger(serverPlayerEntity, form);
         if (ShapeShifterCurseFabric.commonConfig.immediatelyTransform) {
             data.transformTimer = -1;
             setForm(player);
@@ -77,15 +79,17 @@ public class TransformManager {
     }
 
     public static void immediatelyTransform(PlayerEntity player, IForm form) {
-        if (form.isPlayerForm(player)) {
+        if (form.isPlayerForm(player) || !(player instanceof ServerPlayerEntity serverPlayerEntity)) {
             return;
         }
-        PlayerFormComponent.COMPONENT.get(player).transformTargetForm = form;
+        PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+        component.transformTargetForm = form;
         PlayerTransformData data = getPlayerData(player);
         data.transformTimer = -1;
         data.transformStartForm = FormUtils.getPlayerForm(player);
         data.transformEndForm = form;
         data.onTransformComplete = null;
+        ShapeShifterCurseFabric.ON_TRANSFORM_FORM.trigger(serverPlayerEntity, form);
         setForm(player);
     }
 

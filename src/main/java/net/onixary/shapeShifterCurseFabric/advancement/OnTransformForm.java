@@ -13,6 +13,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Predicate;
 
@@ -76,6 +77,26 @@ public class OnTransformForm extends AbstractCriterion<OnTransformForm.Condition
                     }
                     return false;
                 });
+            }
+        }
+        if (obj.has("flags")) {
+            JsonArray flagArray = obj.getAsJsonArray("flags");
+            String[] flag = new String[flagArray.size()];
+            for (int i = 0; i < flagArray.size(); i++) {
+                flag[i] = flagArray.get(i).getAsString();
+            }
+            if (flag.length > 0) {
+                formPredicate = formPredicate.and(form -> form.getFormFlag().containsAll(Arrays.asList(flag)));
+            }
+        }
+        if (obj.has("not_flags")) {
+            JsonArray flagArray = obj.getAsJsonArray("not_flags");
+            String[] flag = new String[flagArray.size()];
+            for (int i = 0; i < flagArray.size(); i++) {
+                flag[i] = flagArray.get(i).getAsString();
+            }
+            if (flag.length > 0) {
+                formPredicate = formPredicate.and(form -> !form.getFormFlag().containsAll(Arrays.asList(flag)));
             }
         }
         return new OnTransformForm.Condition(ID, playerPredicate, formPredicate);
