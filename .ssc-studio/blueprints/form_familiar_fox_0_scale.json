@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:form_familiar_fox_0_scale",
+  "updatedAt": "2026-06-08T16:08:44.968Z",
+  "viewport": {
+    "x": 475.5,
+    "y": 246.20000000000005,
+    "zoom": 1.4
+  },
+  "nodes": [
+    {
+      "id": "ast-1",
+      "astNodeId": "ast-1",
+      "type": "shape-shifter-curse:scale",
+      "kind": "power",
+      "label": "root",
+      "title": "root",
+      "signature": "power|shape-shifter-curse:scale|root|root",
+      "occurrence": 0,
+      "position": {
+        "x": 80,
+        "y": 80
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "ast-1",
+        "astNodeId": "ast-1",
+        "type": "shape-shifter-curse:scale",
+        "kind": "power",
+        "title": "root",
+        "label": "root",
+        "color": "power",
+        "position": {
+          "x": 80,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "scale",
+            "schema": {
+              "name": "scale",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "0.8",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-1:out:scale"
+          }
+        ]
+      }
+    ],
+    "edges": []
+  }
+}

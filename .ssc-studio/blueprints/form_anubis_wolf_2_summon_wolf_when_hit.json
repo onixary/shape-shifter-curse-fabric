@@ -1,0 +1,311 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:form_anubis_wolf_2_summon_wolf_when_hit",
+  "updatedAt": "2026-06-08T16:03:19.496Z",
+  "viewport": {
+    "x": -166.27330065214915,
+    "y": 26.652252638565955,
+    "zoom": 0.822986729472443
+  },
+  "nodes": [
+    {
+      "id": "ast-4",
+      "astNodeId": "ast-4",
+      "type": "origins:action_when_hit",
+      "kind": "power",
+      "label": "root",
+      "title": "root",
+      "signature": "power|origins:action_when_hit|root|root",
+      "occurrence": 0,
+      "position": {
+        "x": 80,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-2",
+      "astNodeId": "ast-2",
+      "type": "shape-shifter-curse:bi_summon_anubis_wolf_minion",
+      "kind": "bientity_action",
+      "title": "bi summon anubis wolf minion",
+      "signature": "bientity_action|shape-shifter-curse:bi_summon_anubis_wolf_minion||bi summon anubis wolf minion",
+      "occurrence": 0,
+      "position": {
+        "x": 585.1396543142754,
+        "y": -143.57590154333235
+      }
+    },
+    {
+      "id": "ast-1",
+      "astNodeId": "ast-1",
+      "type": "shape-shifter-curse:add_instinct",
+      "kind": "entity_action",
+      "title": "add instinct",
+      "signature": "entity_action|shape-shifter-curse:add_instinct||add instinct",
+      "occurrence": 0,
+      "position": {
+        "x": 929.8879009996385,
+        "y": 32.61162956418501
+      }
+    },
+    {
+      "id": "ast-3",
+      "astNodeId": "ast-3",
+      "type": "origins:attacker",
+      "kind": "bientity_condition",
+      "title": "attacker",
+      "signature": "bientity_condition|origins:attacker||attacker",
+      "occurrence": 0,
+      "position": {
+        "x": 570.5586172571016,
+        "y": 474.3914076289123
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "ast-4",
+        "astNodeId": "ast-4",
+        "type": "origins:action_when_hit",
+        "kind": "power",
+        "title": "root",
+        "label": "root",
+        "color": "power",
+        "position": {
+          "x": 80,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "bientity_action",
+            "schema": {
+              "name": "bientity_action",
+              "valueKind": "slot",
+              "slotKind": "bientity_action",
+              "required": true
+            },
+            "valueKind": "slot",
+            "displayValue": "-> bi summon anubis wolf minion",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-4:out:bientity_action"
+          },
+          {
+            "name": "damage_condition",
+            "schema": {
+              "name": "damage_condition",
+              "valueKind": "slot",
+              "slotKind": "damage_condition"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> attacker",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-4:out:damage_condition"
+          }
+        ]
+      },
+      {
+        "id": "ast-2",
+        "astNodeId": "ast-2",
+        "type": "shape-shifter-curse:bi_summon_anubis_wolf_minion",
+        "kind": "bientity_action",
+        "title": "bi summon anubis wolf minion",
+        "color": "action",
+        "position": {
+          "x": 585.1396543142754,
+          "y": -143.57590154333235
+        },
+        "fields": [
+          {
+            "name": "minion_level",
+            "schema": {
+              "name": "minion_level",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "2",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-2:out:minion_level"
+          },
+          {
+            "name": "count",
+            "schema": {
+              "name": "count",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "2",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-2:out:count"
+          },
+          {
+            "name": "max_minion_count",
+            "schema": {
+              "name": "max_minion_count",
+              "valueKind": "number",
+              "numberKind": "int"
+            },
+            "valueKind": "number",
+            "displayValue": "2",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-2:out:max_minion_count"
+          },
+          {
+            "name": "cooldown",
+            "schema": {
+              "name": "cooldown",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "600",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-2:out:cooldown"
+          },
+          {
+            "name": "reverse",
+            "schema": {
+              "name": "reverse",
+              "valueKind": "boolean",
+              "defaultValue": false
+            },
+            "valueKind": "boolean",
+            "displayValue": "true",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-2:out:reverse"
+          },
+          {
+            "name": "owner_action",
+            "schema": {
+              "name": "owner_action",
+              "valueKind": "slot",
+              "slotKind": "entity_action"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> add instinct",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-2:out:owner_action"
+          }
+        ]
+      },
+      {
+        "id": "ast-1",
+        "astNodeId": "ast-1",
+        "type": "shape-shifter-curse:add_instinct",
+        "kind": "entity_action",
+        "title": "add instinct",
+        "color": "action",
+        "position": {
+          "x": 929.8879009996385,
+          "y": 32.61162956418501
+        },
+        "fields": [
+          {
+            "name": "instinct_effect_id",
+            "schema": {
+              "name": "instinct_effect_id",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "FORM_ANUBIS_WOLF_SUMMON_MINION",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-1:out:instinct_effect_id"
+          },
+          {
+            "name": "value",
+            "schema": {
+              "name": "value",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0.3",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-1:out:value"
+          },
+          {
+            "name": "duration",
+            "schema": {
+              "name": "duration",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "20",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-1:out:duration"
+          }
+        ]
+      },
+      {
+        "id": "ast-3",
+        "astNodeId": "ast-3",
+        "type": "origins:attacker",
+        "kind": "bientity_condition",
+        "title": "attacker",
+        "color": "condition",
+        "position": {
+          "x": 570.5586172571016,
+          "y": 474.3914076289123
+        },
+        "fields": []
+      }
+    ],
+    "edges": [
+      {
+        "id": "ast-2:owner_action->ast-1",
+        "source": "ast-2",
+        "target": "ast-1",
+        "sourceHandle": "ast-2:out:owner_action",
+        "targetHandle": "ast-1:in",
+        "fieldName": "owner_action",
+        "color": "action"
+      },
+      {
+        "id": "ast-4:bientity_action->ast-2",
+        "source": "ast-4",
+        "target": "ast-2",
+        "sourceHandle": "ast-4:out:bientity_action",
+        "targetHandle": "ast-2:in",
+        "fieldName": "bientity_action",
+        "color": "action"
+      },
+      {
+        "id": "ast-4:damage_condition->ast-3",
+        "source": "ast-4",
+        "target": "ast-3",
+        "sourceHandle": "ast-4:out:damage_condition",
+        "targetHandle": "ast-3:in",
+        "fieldName": "damage_condition",
+        "color": "condition"
+      }
+    ]
+  }
+}

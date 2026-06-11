@@ -1,0 +1,1534 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:form_axolotl_fountain_belt_trinket",
+  "updatedAt": "2026-06-08T14:36:52.005Z",
+  "viewport": {
+    "x": -2.738984584411469,
+    "y": -214.50527065544168,
+    "zoom": 0.9236555375410264
+  },
+  "nodes": [
+    {
+      "id": "ast-22",
+      "astNodeId": "ast-22",
+      "type": "shape-shifter-curse:action_on_sprinting_to_sneaking",
+      "kind": "power",
+      "label": "fountain",
+      "title": "fountain",
+      "signature": "power|shape-shifter-curse:action_on_sprinting_to_sneaking|fountain|fountain",
+      "occurrence": 0,
+      "position": {
+        "x": 80,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-18",
+      "astNodeId": "ast-18",
+      "type": "origins:and",
+      "kind": "entity_action",
+      "title": "And Action",
+      "signature": "entity_action|origins:and||And Action",
+      "occurrence": 0,
+      "position": {
+        "x": 538.7440376000677,
+        "y": 182.39772789262418
+      }
+    },
+    {
+      "id": "ast-1",
+      "astNodeId": "ast-1",
+      "type": "origins:add_velocity",
+      "kind": "entity_action",
+      "title": "add velocity",
+      "signature": "entity_action|origins:add_velocity||add velocity",
+      "occurrence": 0,
+      "position": {
+        "x": 1100,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-2",
+      "astNodeId": "ast-2",
+      "type": "origins:play_sound",
+      "kind": "entity_action",
+      "title": "play sound",
+      "signature": "entity_action|origins:play_sound||play sound",
+      "occurrence": 0,
+      "position": {
+        "x": 1425.714285714286,
+        "y": 75.96428571428575
+      }
+    },
+    {
+      "id": "ast-3",
+      "astNodeId": "ast-3",
+      "type": "origins:play_sound",
+      "kind": "entity_action",
+      "title": "play sound",
+      "signature": "entity_action|origins:play_sound||play sound",
+      "occurrence": 1,
+      "position": {
+        "x": 1770,
+        "y": 70.85714285714299
+      }
+    },
+    {
+      "id": "ast-10",
+      "astNodeId": "ast-10",
+      "type": "shape-shifter-curse:explosion_damage_entity",
+      "kind": "entity_action",
+      "title": "explosion damage entity",
+      "signature": "entity_action|shape-shifter-curse:explosion_damage_entity||explosion damage entity",
+      "occurrence": 0,
+      "position": {
+        "x": 1092.4599547955834,
+        "y": 348.4474007460491
+      }
+    },
+    {
+      "id": "ast-7",
+      "astNodeId": "ast-7",
+      "type": "origins:and",
+      "kind": "entity_condition",
+      "title": "And Condition",
+      "signature": "entity_condition|origins:and||And Condition",
+      "occurrence": 0,
+      "position": {
+        "x": 1507.094651981926,
+        "y": 514.0708003419047
+      }
+    },
+    {
+      "id": "ast-5",
+      "astNodeId": "ast-5",
+      "type": "origins:target_condition",
+      "kind": "entity_condition",
+      "title": "target condition",
+      "signature": "entity_condition|origins:target_condition||target condition",
+      "occurrence": 0,
+      "position": {
+        "x": 2019.951794839069,
+        "y": 314.0708003419047
+      }
+    },
+    {
+      "id": "ast-4",
+      "astNodeId": "ast-4",
+      "type": "origins:in_tag",
+      "kind": "entity_condition",
+      "title": "in tag",
+      "signature": "entity_condition|origins:in_tag||in tag",
+      "occurrence": 0,
+      "position": {
+        "x": 2529.951794839069,
+        "y": 314.0708003419047
+      }
+    },
+    {
+      "id": "ast-6",
+      "astNodeId": "ast-6",
+      "type": "origins:owner",
+      "kind": "entity_condition",
+      "title": "owner",
+      "signature": "entity_condition|origins:owner||owner",
+      "occurrence": 0,
+      "position": {
+        "x": 2019.951794839069,
+        "y": 548.0708003419048
+      }
+    },
+    {
+      "id": "ast-9",
+      "astNodeId": "ast-9",
+      "type": "origins:and",
+      "kind": "entity_action",
+      "title": "And Action",
+      "signature": "entity_action|origins:and||And Action",
+      "occurrence": 1,
+      "position": {
+        "x": 1509.951794839069,
+        "y": 688.0708003419048
+      }
+    },
+    {
+      "id": "ast-8",
+      "astNodeId": "ast-8",
+      "type": "origins:add_velocity",
+      "kind": "entity_action",
+      "title": "add velocity",
+      "signature": "entity_action|origins:add_velocity||add velocity",
+      "occurrence": 1,
+      "position": {
+        "x": 1874.2375091247832,
+        "y": 762.0708003419046
+      }
+    },
+    {
+      "id": "ast-11",
+      "astNodeId": "ast-11",
+      "type": "origins:gain_air",
+      "kind": "entity_action",
+      "title": "gain air",
+      "signature": "entity_action|origins:gain_air||gain air",
+      "occurrence": 0,
+      "position": {
+        "x": 1101.3100678066248,
+        "y": 956.2129046634275
+      }
+    },
+    {
+      "id": "ast-14",
+      "astNodeId": "ast-14",
+      "type": "origins:spawn_particles",
+      "kind": "entity_action",
+      "title": "spawn particles",
+      "signature": "entity_action|origins:spawn_particles||spawn particles",
+      "occurrence": 0,
+      "position": {
+        "x": 1477.0022602208269,
+        "y": 963.4782822321718
+      }
+    },
+    {
+      "id": "ast-12",
+      "astNodeId": "ast-12",
+      "type": "particle_effect",
+      "kind": "datatype",
+      "title": "Particle Effect",
+      "signature": "datatype|particle_effect||Particle Effect",
+      "occurrence": 0,
+      "position": {
+        "x": 1837.0423942925759,
+        "y": 1007.1658119064379
+      }
+    },
+    {
+      "id": "ast-13",
+      "astNodeId": "ast-13",
+      "type": "vector",
+      "kind": "datatype",
+      "title": "Vector",
+      "signature": "datatype|vector||Vector",
+      "occurrence": 0,
+      "position": {
+        "x": 1837.4682257697164,
+        "y": 1183.9706148336838
+      }
+    },
+    {
+      "id": "ast-17",
+      "astNodeId": "ast-17",
+      "type": "origins:spawn_particles",
+      "kind": "entity_action",
+      "title": "spawn particles",
+      "signature": "entity_action|origins:spawn_particles||spawn particles",
+      "occurrence": 1,
+      "position": {
+        "x": 1089.370391449281,
+        "y": 1351.0878202791716
+      }
+    },
+    {
+      "id": "ast-15",
+      "astNodeId": "ast-15",
+      "type": "particle_effect",
+      "kind": "datatype",
+      "title": "Particle Effect",
+      "signature": "datatype|particle_effect||Particle Effect",
+      "occurrence": 1,
+      "position": {
+        "x": 1494.5800321301028,
+        "y": 1404.1732597033558
+      }
+    },
+    {
+      "id": "ast-16",
+      "astNodeId": "ast-16",
+      "type": "vector",
+      "kind": "datatype",
+      "title": "Vector",
+      "signature": "datatype|vector||Vector",
+      "occurrence": 1,
+      "position": {
+        "x": 1497.5382091713227,
+        "y": 1614.9164039547882
+      }
+    },
+    {
+      "id": "ast-21",
+      "astNodeId": "ast-21",
+      "type": "origins:and",
+      "kind": "entity_condition",
+      "title": "And Condition",
+      "signature": "entity_condition|origins:and||And Condition",
+      "occurrence": 1,
+      "position": {
+        "x": 997.4491746174214,
+        "y": 2093.829111560616
+      }
+    },
+    {
+      "id": "ast-19",
+      "astNodeId": "ast-19",
+      "type": "origins:on_block",
+      "kind": "entity_condition",
+      "title": "on block",
+      "signature": "entity_condition|origins:on_block||on block",
+      "occurrence": 0,
+      "position": {
+        "x": 1551.354526686408,
+        "y": 2007.7616851403652
+      }
+    },
+    {
+      "id": "ast-20",
+      "astNodeId": "ast-20",
+      "type": "origins:air",
+      "kind": "entity_condition",
+      "title": "air",
+      "signature": "entity_condition|origins:air||air",
+      "occurrence": 0,
+      "position": {
+        "x": 1551.354526686408,
+        "y": 2241.7616851403654
+      }
+    },
+    {
+      "id": "ast-23",
+      "astNodeId": "ast-23",
+      "type": "shape-shifter-curse:falling_protection",
+      "kind": "power",
+      "label": "falling_protection",
+      "title": "falling_protection",
+      "signature": "power|shape-shifter-curse:falling_protection|falling_protection|falling_protection",
+      "occurrence": 0,
+      "position": {
+        "x": 80,
+        "y": 314
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "ast-22",
+        "astNodeId": "ast-22",
+        "type": "shape-shifter-curse:action_on_sprinting_to_sneaking",
+        "kind": "power",
+        "title": "fountain",
+        "label": "fountain",
+        "color": "power",
+        "position": {
+          "x": 80,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "entity_action",
+            "schema": {
+              "name": "entity_action",
+              "valueKind": "slot",
+              "slotKind": "entity_action",
+              "required": true
+            },
+            "valueKind": "slot",
+            "displayValue": "-> And Action",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-22:out:entity_action"
+          },
+          {
+            "name": "entity_condition",
+            "schema": {
+              "name": "entity_condition",
+              "valueKind": "slot",
+              "slotKind": "entity_condition"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> And Condition",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-22:out:entity_condition"
+          }
+        ]
+      },
+      {
+        "id": "ast-18",
+        "astNodeId": "ast-18",
+        "type": "origins:and",
+        "kind": "entity_action",
+        "title": "And Action",
+        "color": "action",
+        "position": {
+          "x": 538.7440376000677,
+          "y": 182.39772789262418
+        },
+        "fields": [
+          {
+            "name": "actions",
+            "schema": {
+              "name": "actions",
+              "valueKind": "slot_array",
+              "slotKind": "entity_action",
+              "multi": true,
+              "required": true
+            },
+            "valueKind": "slot_array",
+            "displayValue": "Array[7]",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-18:out:actions"
+          }
+        ]
+      },
+      {
+        "id": "ast-1",
+        "astNodeId": "ast-1",
+        "type": "origins:add_velocity",
+        "kind": "entity_action",
+        "title": "add velocity",
+        "color": "action",
+        "position": {
+          "x": 1100,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "y",
+            "schema": {
+              "name": "y",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "1.2",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-1:out:y"
+          },
+          {
+            "name": "z",
+            "schema": {
+              "name": "z",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0.1",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-1:out:z"
+          },
+          {
+            "name": "space",
+            "schema": {
+              "name": "space",
+              "valueKind": "string",
+              "defaultValue": "world"
+            },
+            "valueKind": "string",
+            "displayValue": "local_horizontal_normalized",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-1:out:space"
+          }
+        ]
+      },
+      {
+        "id": "ast-2",
+        "astNodeId": "ast-2",
+        "type": "origins:play_sound",
+        "kind": "entity_action",
+        "title": "play sound",
+        "color": "action",
+        "position": {
+          "x": 1425.714285714286,
+          "y": 75.96428571428575
+        },
+        "fields": [
+          {
+            "name": "sound",
+            "schema": {
+              "name": "sound",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:entity.axolotl.splash",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-2:out:sound"
+          },
+          {
+            "name": "volume",
+            "schema": {
+              "name": "volume",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "0.5",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-2:out:volume"
+          },
+          {
+            "name": "pitch",
+            "schema": {
+              "name": "pitch",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "0.8",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-2:out:pitch"
+          }
+        ]
+      },
+      {
+        "id": "ast-3",
+        "astNodeId": "ast-3",
+        "type": "origins:play_sound",
+        "kind": "entity_action",
+        "title": "play sound",
+        "color": "action",
+        "position": {
+          "x": 1770,
+          "y": 70.85714285714299
+        },
+        "fields": [
+          {
+            "name": "sound",
+            "schema": {
+              "name": "sound",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:entity.wither.break_block",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-3:out:sound"
+          },
+          {
+            "name": "volume",
+            "schema": {
+              "name": "volume",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "0.5",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-3:out:volume"
+          },
+          {
+            "name": "pitch",
+            "schema": {
+              "name": "pitch",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "0.8",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-3:out:pitch"
+          }
+        ]
+      },
+      {
+        "id": "ast-10",
+        "astNodeId": "ast-10",
+        "type": "shape-shifter-curse:explosion_damage_entity",
+        "kind": "entity_action",
+        "title": "explosion damage entity",
+        "color": "action",
+        "position": {
+          "x": 1092.4599547955834,
+          "y": 348.4474007460491
+        },
+        "fields": [
+          {
+            "name": "power",
+            "schema": {
+              "name": "power",
+              "valueKind": "number",
+              "numberKind": "float",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "3",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-10:out:power"
+          },
+          {
+            "name": "entity_condition",
+            "schema": {
+              "name": "entity_condition",
+              "valueKind": "slot",
+              "slotKind": "entity_condition"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> And Condition",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-10:out:entity_condition"
+          },
+          {
+            "name": "entity_action",
+            "schema": {
+              "name": "entity_action",
+              "valueKind": "slot",
+              "slotKind": "entity_action"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> And Action",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-10:out:entity_action"
+          },
+          {
+            "name": "explosion_damage_entity",
+            "schema": {
+              "name": "explosion_damage_entity",
+              "valueKind": "boolean",
+              "defaultValue": true
+            },
+            "valueKind": "boolean",
+            "displayValue": "false",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-10:out:explosion_damage_entity"
+          }
+        ]
+      },
+      {
+        "id": "ast-7",
+        "astNodeId": "ast-7",
+        "type": "origins:and",
+        "kind": "entity_condition",
+        "title": "And Condition",
+        "color": "condition",
+        "position": {
+          "x": 1507.094651981926,
+          "y": 514.0708003419047
+        },
+        "fields": [
+          {
+            "name": "conditions",
+            "schema": {
+              "name": "conditions",
+              "valueKind": "slot_array",
+              "slotKind": "entity_condition",
+              "multi": true,
+              "required": true
+            },
+            "valueKind": "slot_array",
+            "displayValue": "Array[2]",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-7:out:conditions"
+          }
+        ]
+      },
+      {
+        "id": "ast-5",
+        "astNodeId": "ast-5",
+        "type": "origins:target_condition",
+        "kind": "entity_condition",
+        "title": "target condition",
+        "color": "condition",
+        "position": {
+          "x": 2019.951794839069,
+          "y": 314.0708003419047
+        },
+        "fields": [
+          {
+            "name": "condition",
+            "schema": {
+              "name": "condition",
+              "valueKind": "slot",
+              "slotKind": "entity_condition",
+              "required": true
+            },
+            "valueKind": "slot",
+            "displayValue": "-> in tag",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-5:out:condition"
+          },
+          {
+            "name": "inverted",
+            "schema": {
+              "name": "inverted",
+              "valueKind": "boolean",
+              "defaultValue": false
+            },
+            "valueKind": "boolean",
+            "displayValue": "true",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-5:out:inverted"
+          }
+        ]
+      },
+      {
+        "id": "ast-4",
+        "astNodeId": "ast-4",
+        "type": "origins:in_tag",
+        "kind": "entity_condition",
+        "title": "in tag",
+        "color": "condition",
+        "position": {
+          "x": 2529.951794839069,
+          "y": 314.0708003419047
+        },
+        "fields": [
+          {
+            "name": "tag",
+            "schema": {
+              "name": "tag",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "shape-shifter-curse:water_explode_immune",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-4:out:tag"
+          }
+        ]
+      },
+      {
+        "id": "ast-6",
+        "astNodeId": "ast-6",
+        "type": "origins:owner",
+        "kind": "entity_condition",
+        "title": "owner",
+        "color": "condition",
+        "position": {
+          "x": 2019.951794839069,
+          "y": 548.0708003419048
+        },
+        "fields": [
+          {
+            "name": "inverted",
+            "schema": {
+              "name": "inverted",
+              "valueKind": "boolean",
+              "defaultValue": false
+            },
+            "valueKind": "boolean",
+            "displayValue": "true",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-6:out:inverted"
+          }
+        ]
+      },
+      {
+        "id": "ast-9",
+        "astNodeId": "ast-9",
+        "type": "origins:and",
+        "kind": "entity_action",
+        "title": "And Action",
+        "color": "action",
+        "position": {
+          "x": 1509.951794839069,
+          "y": 688.0708003419048
+        },
+        "fields": [
+          {
+            "name": "actions",
+            "schema": {
+              "name": "actions",
+              "valueKind": "slot_array",
+              "slotKind": "entity_action",
+              "multi": true,
+              "required": true
+            },
+            "valueKind": "slot_array",
+            "displayValue": "Array[1]",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-9:out:actions"
+          }
+        ]
+      },
+      {
+        "id": "ast-8",
+        "astNodeId": "ast-8",
+        "type": "origins:add_velocity",
+        "kind": "entity_action",
+        "title": "add velocity",
+        "color": "action",
+        "position": {
+          "x": 1874.2375091247832,
+          "y": 762.0708003419046
+        },
+        "fields": [
+          {
+            "name": "y",
+            "schema": {
+              "name": "y",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "1",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-8:out:y"
+          },
+          {
+            "name": "space",
+            "schema": {
+              "name": "space",
+              "valueKind": "string",
+              "defaultValue": "world"
+            },
+            "valueKind": "string",
+            "displayValue": "world",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-8:out:space"
+          }
+        ]
+      },
+      {
+        "id": "ast-11",
+        "astNodeId": "ast-11",
+        "type": "origins:gain_air",
+        "kind": "entity_action",
+        "title": "gain air",
+        "color": "action",
+        "position": {
+          "x": 1101.3100678066248,
+          "y": 956.2129046634275
+        },
+        "fields": [
+          {
+            "name": "value",
+            "schema": {
+              "name": "value",
+              "valueKind": "number",
+              "numberKind": "int",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "-15",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-11:out:value"
+          }
+        ]
+      },
+      {
+        "id": "ast-14",
+        "astNodeId": "ast-14",
+        "type": "origins:spawn_particles",
+        "kind": "entity_action",
+        "title": "spawn particles",
+        "color": "action",
+        "position": {
+          "x": 1477.0022602208269,
+          "y": 963.4782822321718
+        },
+        "fields": [
+          {
+            "name": "particle",
+            "schema": {
+              "name": "particle",
+              "valueKind": "datatype",
+              "datatype": "particle_effect",
+              "required": true
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Particle Effect",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-14:out:particle"
+          },
+          {
+            "name": "count",
+            "schema": {
+              "name": "count",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "32",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-14:out:count"
+          },
+          {
+            "name": "speed",
+            "schema": {
+              "name": "speed",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-14:out:speed"
+          },
+          {
+            "name": "force",
+            "schema": {
+              "name": "force",
+              "valueKind": "boolean",
+              "defaultValue": false
+            },
+            "valueKind": "boolean",
+            "displayValue": "true",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-14:out:force"
+          },
+          {
+            "name": "spread",
+            "schema": {
+              "name": "spread",
+              "valueKind": "datatype",
+              "datatype": "vector"
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Vector",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-14:out:spread"
+          }
+        ]
+      },
+      {
+        "id": "ast-12",
+        "astNodeId": "ast-12",
+        "type": "particle_effect",
+        "kind": "datatype",
+        "title": "Particle Effect",
+        "color": "datatype",
+        "position": {
+          "x": 1837.0423942925759,
+          "y": 1007.1658119064379
+        },
+        "fields": [
+          {
+            "name": "type",
+            "schema": {
+              "name": "type",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:rain",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-12:out:type"
+          }
+        ]
+      },
+      {
+        "id": "ast-13",
+        "astNodeId": "ast-13",
+        "type": "vector",
+        "kind": "datatype",
+        "title": "Vector",
+        "color": "datatype",
+        "position": {
+          "x": 1837.4682257697164,
+          "y": 1183.9706148336838
+        },
+        "fields": [
+          {
+            "name": "x",
+            "schema": {
+              "name": "x",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "2",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-13:out:x"
+          },
+          {
+            "name": "y",
+            "schema": {
+              "name": "y",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0.5",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-13:out:y"
+          },
+          {
+            "name": "z",
+            "schema": {
+              "name": "z",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "2",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-13:out:z"
+          }
+        ]
+      },
+      {
+        "id": "ast-17",
+        "astNodeId": "ast-17",
+        "type": "origins:spawn_particles",
+        "kind": "entity_action",
+        "title": "spawn particles",
+        "color": "action",
+        "position": {
+          "x": 1089.370391449281,
+          "y": 1351.0878202791716
+        },
+        "fields": [
+          {
+            "name": "particle",
+            "schema": {
+              "name": "particle",
+              "valueKind": "datatype",
+              "datatype": "particle_effect",
+              "required": true
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Particle Effect",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-17:out:particle"
+          },
+          {
+            "name": "count",
+            "schema": {
+              "name": "count",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "32",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-17:out:count"
+          },
+          {
+            "name": "speed",
+            "schema": {
+              "name": "speed",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-17:out:speed"
+          },
+          {
+            "name": "force",
+            "schema": {
+              "name": "force",
+              "valueKind": "boolean",
+              "defaultValue": false
+            },
+            "valueKind": "boolean",
+            "displayValue": "true",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-17:out:force"
+          },
+          {
+            "name": "spread",
+            "schema": {
+              "name": "spread",
+              "valueKind": "datatype",
+              "datatype": "vector"
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Vector",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-17:out:spread"
+          }
+        ]
+      },
+      {
+        "id": "ast-15",
+        "astNodeId": "ast-15",
+        "type": "particle_effect",
+        "kind": "datatype",
+        "title": "Particle Effect",
+        "color": "datatype",
+        "position": {
+          "x": 1494.5800321301028,
+          "y": 1404.1732597033558
+        },
+        "fields": [
+          {
+            "name": "type",
+            "schema": {
+              "name": "type",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:dust",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-15:out:type"
+          },
+          {
+            "name": "params",
+            "schema": {
+              "name": "params",
+              "valueKind": "string"
+            },
+            "valueKind": "string",
+            "displayValue": "0.11 0.18 0.69 2",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-15:out:params"
+          }
+        ]
+      },
+      {
+        "id": "ast-16",
+        "astNodeId": "ast-16",
+        "type": "vector",
+        "kind": "datatype",
+        "title": "Vector",
+        "color": "datatype",
+        "position": {
+          "x": 1497.5382091713227,
+          "y": 1614.9164039547882
+        },
+        "fields": [
+          {
+            "name": "x",
+            "schema": {
+              "name": "x",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "2",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-16:out:x"
+          },
+          {
+            "name": "y",
+            "schema": {
+              "name": "y",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "1",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-16:out:y"
+          },
+          {
+            "name": "z",
+            "schema": {
+              "name": "z",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "2",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-16:out:z"
+          }
+        ]
+      },
+      {
+        "id": "ast-21",
+        "astNodeId": "ast-21",
+        "type": "origins:and",
+        "kind": "entity_condition",
+        "title": "And Condition",
+        "color": "condition",
+        "position": {
+          "x": 997.4491746174214,
+          "y": 2093.829111560616
+        },
+        "fields": [
+          {
+            "name": "conditions",
+            "schema": {
+              "name": "conditions",
+              "valueKind": "slot_array",
+              "slotKind": "entity_condition",
+              "multi": true,
+              "required": true
+            },
+            "valueKind": "slot_array",
+            "displayValue": "Array[2]",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-21:out:conditions"
+          }
+        ]
+      },
+      {
+        "id": "ast-19",
+        "astNodeId": "ast-19",
+        "type": "origins:on_block",
+        "kind": "entity_condition",
+        "title": "on block",
+        "color": "condition",
+        "position": {
+          "x": 1551.354526686408,
+          "y": 2007.7616851403652
+        },
+        "fields": []
+      },
+      {
+        "id": "ast-20",
+        "astNodeId": "ast-20",
+        "type": "origins:air",
+        "kind": "entity_condition",
+        "title": "air",
+        "color": "condition",
+        "position": {
+          "x": 1551.354526686408,
+          "y": 2241.7616851403654
+        },
+        "fields": [
+          {
+            "name": "comparison",
+            "schema": {
+              "name": "comparison",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": ">",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-20:out:comparison"
+          },
+          {
+            "name": "compare_to",
+            "schema": {
+              "name": "compare_to",
+              "valueKind": "number",
+              "numberKind": "int",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "0",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-20:out:compare_to"
+          }
+        ]
+      },
+      {
+        "id": "ast-23",
+        "astNodeId": "ast-23",
+        "type": "shape-shifter-curse:falling_protection",
+        "kind": "power",
+        "title": "falling_protection",
+        "label": "falling_protection",
+        "color": "power",
+        "position": {
+          "x": 80,
+          "y": 314
+        },
+        "fields": [
+          {
+            "name": "fall_distance",
+            "schema": {
+              "name": "fall_distance",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 6
+            },
+            "valueKind": "number",
+            "displayValue": "6",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-23:out:fall_distance"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "ast-18:actions:0->ast-1",
+        "source": "ast-18",
+        "target": "ast-1",
+        "sourceHandle": "ast-18:out:actions",
+        "targetHandle": "ast-1:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 0
+      },
+      {
+        "id": "ast-18:actions:1->ast-2",
+        "source": "ast-18",
+        "target": "ast-2",
+        "sourceHandle": "ast-18:out:actions",
+        "targetHandle": "ast-2:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 1
+      },
+      {
+        "id": "ast-18:actions:2->ast-3",
+        "source": "ast-18",
+        "target": "ast-3",
+        "sourceHandle": "ast-18:out:actions",
+        "targetHandle": "ast-3:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 2
+      },
+      {
+        "id": "ast-5:condition->ast-4",
+        "source": "ast-5",
+        "target": "ast-4",
+        "sourceHandle": "ast-5:out:condition",
+        "targetHandle": "ast-4:in",
+        "fieldName": "condition",
+        "color": "condition"
+      },
+      {
+        "id": "ast-7:conditions:0->ast-5",
+        "source": "ast-7",
+        "target": "ast-5",
+        "sourceHandle": "ast-7:out:conditions",
+        "targetHandle": "ast-5:in",
+        "fieldName": "conditions",
+        "color": "condition",
+        "order": 0
+      },
+      {
+        "id": "ast-7:conditions:1->ast-6",
+        "source": "ast-7",
+        "target": "ast-6",
+        "sourceHandle": "ast-7:out:conditions",
+        "targetHandle": "ast-6:in",
+        "fieldName": "conditions",
+        "color": "condition",
+        "order": 1
+      },
+      {
+        "id": "ast-10:entity_condition->ast-7",
+        "source": "ast-10",
+        "target": "ast-7",
+        "sourceHandle": "ast-10:out:entity_condition",
+        "targetHandle": "ast-7:in",
+        "fieldName": "entity_condition",
+        "color": "condition"
+      },
+      {
+        "id": "ast-9:actions:0->ast-8",
+        "source": "ast-9",
+        "target": "ast-8",
+        "sourceHandle": "ast-9:out:actions",
+        "targetHandle": "ast-8:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 0
+      },
+      {
+        "id": "ast-10:entity_action->ast-9",
+        "source": "ast-10",
+        "target": "ast-9",
+        "sourceHandle": "ast-10:out:entity_action",
+        "targetHandle": "ast-9:in",
+        "fieldName": "entity_action",
+        "color": "action"
+      },
+      {
+        "id": "ast-18:actions:3->ast-10",
+        "source": "ast-18",
+        "target": "ast-10",
+        "sourceHandle": "ast-18:out:actions",
+        "targetHandle": "ast-10:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 3
+      },
+      {
+        "id": "ast-18:actions:4->ast-11",
+        "source": "ast-18",
+        "target": "ast-11",
+        "sourceHandle": "ast-18:out:actions",
+        "targetHandle": "ast-11:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 4
+      },
+      {
+        "id": "ast-14:particle->ast-12",
+        "source": "ast-14",
+        "target": "ast-12",
+        "sourceHandle": "ast-14:out:particle",
+        "targetHandle": "ast-12:in",
+        "fieldName": "particle",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-14:spread->ast-13",
+        "source": "ast-14",
+        "target": "ast-13",
+        "sourceHandle": "ast-14:out:spread",
+        "targetHandle": "ast-13:in",
+        "fieldName": "spread",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-18:actions:5->ast-14",
+        "source": "ast-18",
+        "target": "ast-14",
+        "sourceHandle": "ast-18:out:actions",
+        "targetHandle": "ast-14:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 5
+      },
+      {
+        "id": "ast-17:particle->ast-15",
+        "source": "ast-17",
+        "target": "ast-15",
+        "sourceHandle": "ast-17:out:particle",
+        "targetHandle": "ast-15:in",
+        "fieldName": "particle",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-17:spread->ast-16",
+        "source": "ast-17",
+        "target": "ast-16",
+        "sourceHandle": "ast-17:out:spread",
+        "targetHandle": "ast-16:in",
+        "fieldName": "spread",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-18:actions:6->ast-17",
+        "source": "ast-18",
+        "target": "ast-17",
+        "sourceHandle": "ast-18:out:actions",
+        "targetHandle": "ast-17:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 6
+      },
+      {
+        "id": "ast-22:entity_action->ast-18",
+        "source": "ast-22",
+        "target": "ast-18",
+        "sourceHandle": "ast-22:out:entity_action",
+        "targetHandle": "ast-18:in",
+        "fieldName": "entity_action",
+        "color": "action"
+      },
+      {
+        "id": "ast-21:conditions:0->ast-19",
+        "source": "ast-21",
+        "target": "ast-19",
+        "sourceHandle": "ast-21:out:conditions",
+        "targetHandle": "ast-19:in",
+        "fieldName": "conditions",
+        "color": "condition",
+        "order": 0
+      },
+      {
+        "id": "ast-21:conditions:1->ast-20",
+        "source": "ast-21",
+        "target": "ast-20",
+        "sourceHandle": "ast-21:out:conditions",
+        "targetHandle": "ast-20:in",
+        "fieldName": "conditions",
+        "color": "condition",
+        "order": 1
+      },
+      {
+        "id": "ast-22:entity_condition->ast-21",
+        "source": "ast-22",
+        "target": "ast-21",
+        "sourceHandle": "ast-22:out:entity_condition",
+        "targetHandle": "ast-21:in",
+        "fieldName": "entity_condition",
+        "color": "condition"
+      }
+    ]
+  }
+}
