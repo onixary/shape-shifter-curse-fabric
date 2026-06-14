@@ -712,6 +712,8 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
         if (minecraftClient.player != null) {
             PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(minecraftClient.player);
             FormTextureUtils.ColorSetting colorSetting = component.getFormColor();
+            this.keepCustomSkin = component.shouldKeepOriginalSkin();
+            this.enableFormColorSystem = component.isEnableFormColor();
             this.loadServerData(colorSetting);
         } else {
             primaryColor = ShapeShifterCurseFabric.playerCustomConfig.primaryColor;
@@ -722,6 +724,8 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
             primaryGreyReverse = ShapeShifterCurseFabric.playerCustomConfig.primaryGreyReverse;
             accent1GreyReverse = ShapeShifterCurseFabric.playerCustomConfig.accent1GreyReverse;
             accent2GreyReverse = ShapeShifterCurseFabric.playerCustomConfig.accent2GreyReverse;
+            this.keepCustomSkin = ShapeShifterCurseFabric.playerCustomConfig.keep_original_skin;
+            this.enableFormColorSystem = ShapeShifterCurseFabric.playerCustomConfig.enable_form_color;
             this.onData1Changed();
         }
         isColorSettingDirty = true;

@@ -5,8 +5,6 @@ import dev.kosmx.playerAnim.api.TransformType;
 import dev.kosmx.playerAnim.core.util.Vec3f;
 import mod.azure.azurelib.cache.object.BakedGeoModel;
 import mod.azure.azurelib.cache.object.GeoBone;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
@@ -34,6 +32,13 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
     public String RM_LeftLegGeoBoneID = "bipedLeftLeg";
     public String RM_RightLegGeoBoneID = "bipedRightLeg";
 
+    public partTransform headTransform = null;
+    public partTransform bodyTransform = null;
+    public partTransform leftArmTransform = null;
+    public partTransform rightArmTransform = null;
+    public partTransform leftLegTransform = null;
+    public partTransform rightLegTransform = null;
+
     // 每个UUID只能用一个ModelAnimationSystem 改为全局变量比较省资源
     private static final HashMap<UUID, tailData> tailDataMap = new HashMap<>();
     private static class tailData {
@@ -43,6 +48,52 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
         private float tailDragAmountVertical = 0.0F;
         private float tailDragAmountVerticalO;
         private float currentTailDragAmountVertical = 0.0F;
+    }
+
+    public static class partTransform {
+        private final Vec3f pos;
+        private final Vec3f rot;
+        private final Vec3f pivot;
+        public partTransform(Vec3f pos, Vec3f rot, Vec3f pivot) {
+            this.pos = pos;
+            this.rot = rot;
+            this.pivot = pivot;
+        }
+
+        public void apply(@Nullable GeoBone bone) {
+            if (bone == null) {
+                return;
+            }
+            bone.setPosX(bone.getPosX() + pos.getX());
+            bone.setPosY(bone.getPosY() + pos.getY());
+            bone.setPosZ(bone.getPosZ() + pos.getZ());
+            bone.setRotX(bone.getRotX() + rot.getX());
+            bone.setRotY(bone.getRotY() + rot.getY());
+            bone.setRotZ(bone.getRotZ() + rot.getZ());
+            bone.setPivotX(bone.getPivotX() + pivot.getX());
+            bone.setPivotY(bone.getPivotY() + pivot.getY());
+            bone.setPivotZ(bone.getPivotZ() + pivot.getZ());
+        }
+
+        public static partTransform of(JsonObject json) {
+            Vec3f pos, rot, pivot;
+            if (json.has("pos_x") && json.has("pos_y") && json.has("pos_z")) {
+                pos = new Vec3f(json.get("pos_x").getAsFloat(), json.get("pos_y").getAsFloat(), json.get("pos_z").getAsFloat());
+            } else {
+                pos = new Vec3f(0.0F, 0.0F, 0.0F);
+            }
+            if (json.has("rot_x") && json.has("rot_y") && json.has("rot_z")) {
+                rot = new Vec3f(json.get("rot_x").getAsFloat(), json.get("rot_y").getAsFloat(), json.get("rot_z").getAsFloat());
+            } else {
+                rot = new Vec3f(0.0F, 0.0F, 0.0F);
+            }
+            if (json.has("pivot_x") && json.has("pivot_y") && json.has("pivot_z")) {
+                pivot = new Vec3f(json.get("pivot_x").getAsFloat(), json.get("pivot_y").getAsFloat(), json.get("pivot_z").getAsFloat());
+            } else {
+                pivot = new Vec3f(0.0F, 0.0F, 0.0F);
+            }
+            return new partTransform(pos, rot, pivot);
+        }
     }
 
 
@@ -61,6 +112,19 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
       "right_arm": "bipedRightArm",
       "left_leg": "bipedLeftLeg",
       "right_leg": "bipedRightLeg"
+    },
+    "part_extra_pos" {
+      "head": {
+        "pos_x": 0.0,
+        "pos_y": 0.0,
+        "pos_z": 0.0,
+        "rot_x": 0.0,
+        "rot_y": 0.0,
+        "rot_z": 0.0,
+        "pivot_x": 0.0,
+        "pivot_y": 0.0,
+        "pivot_z": 0.0
+      }
     }
      */
     @Override
@@ -113,6 +177,27 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
                 this.RM_RightLegGeoBoneID = modelPartMap.get("right_leg").getAsString();
             }
         }
+        if (json.has("part_extra_pos")) {
+            JsonObject partExtraPos = json.getAsJsonObject("part_extra_pos");
+            if (partExtraPos.has("head")) {
+                this.headTransform = partTransform.of(partExtraPos.get("head").getAsJsonObject());
+            }
+            if (partExtraPos.has("body")) {
+                this.bodyTransform = partTransform.of(partExtraPos.get("body").getAsJsonObject());
+            }
+            if (partExtraPos.has("left_arm")) {
+                this.leftArmTransform = partTransform.of(partExtraPos.get("left_arm").getAsJsonObject());
+            }
+            if (partExtraPos.has("right_arm")) {
+                this.rightArmTransform = partTransform.of(partExtraPos.get("right_arm").getAsJsonObject());
+            }
+            if (partExtraPos.has("left_leg")) {
+                this.leftLegTransform = partTransform.of(partExtraPos.get("left_leg").getAsJsonObject());
+            }
+            if (partExtraPos.has("right_leg")) {
+                this.rightLegTransform = partTransform.of(partExtraPos.get("right_leg").getAsJsonObject());
+            }
+        }
     }
 
     public void ProcessExtraBone(FormModel m, PlayerEntity player, String OriginFursBoneID, String AnimBoneID) {
@@ -159,11 +244,17 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
         model.setRotationForTailBones(limbAngle, limbDistance, player.age, td.currentTailDragAmount, td.tailDragAmountVertical);
         model.setRotationForHeadTailBones(headYaw, player.age, td.currentTailDragAmount, td.tailDragAmountVertical);
         model.setRotationForWingBones(limbAngle, limbDistance, player.age, td.tailDragAmountVertical);
+        if (this.bodyTransform != null) this.bodyTransform.apply(model.getCachedGeoBone(RM_BodyGeoBoneID));
         model.invertRotForPart(RM_BodyGeoBoneID, false, true, false);
         model.setRotationForBone(RM_LeftArmGeoBoneID, FormRenderUtils.getPartRotation(playerModel.leftArm));
         model.setRotationForBone(RM_RightArmGeoBoneID, FormRenderUtils.getPartRotation(playerModel.rightArm));
         model.setRotationForBone(RM_LeftLegGeoBoneID, FormRenderUtils.getPartRotation(playerModel.leftLeg));
         model.setRotationForBone(RM_RightLegGeoBoneID, FormRenderUtils.getPartRotation(playerModel.rightLeg));
+        if (this.headTransform != null) this.headTransform.apply(model.getCachedGeoBone(RM_HeadGeoBoneID));
+        if (this.leftArmTransform != null) this.leftArmTransform.apply(model.getCachedGeoBone(RM_LeftArmGeoBoneID));
+        if (this.rightArmTransform != null) this.rightArmTransform.apply(model.getCachedGeoBone(RM_RightArmGeoBoneID));
+        if (this.leftLegTransform != null) this.leftLegTransform.apply(model.getCachedGeoBone(RM_LeftLegGeoBoneID));
+        if (this.rightLegTransform != null) this.rightLegTransform.apply(model.getCachedGeoBone(RM_RightLegGeoBoneID));
         model.invertRotForPart(RM_HeadGeoBoneID, false, true, true);
         model.invertRotForPart(RM_RightArmGeoBoneID, false, true, true);
         model.invertRotForPart(RM_LeftArmGeoBoneID, false, true, true);
