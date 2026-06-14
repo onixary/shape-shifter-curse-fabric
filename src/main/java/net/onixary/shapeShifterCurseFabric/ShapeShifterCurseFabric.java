@@ -250,6 +250,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             // 更新Patron状态
             PatronUtils.OnServerLoad(server);
             TransformManager.onServerInit();
+            InstinctUtils.onServerInit();
             AccessoryUtils.onStartServer();
         });
         // 获取动态Form(DataPack)

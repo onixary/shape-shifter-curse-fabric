@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.util.UIPositionUtils;
@@ -57,7 +58,7 @@ public class InstinctBarRenderer {
         float currentInstinct = Math.max(0.0f, Math.min(instinctValue, StaticParams.INSTINCT_MAX));
         float instinctProportion;
         IForm curForm = FormUtils.getPlayerForm(player);
-        boolean isInstinctLock = FormUtils.LockInstinct.hasFlag(curForm);
+        boolean isInstinctLock = FormUtils.LockInstinct.hasFlag(curForm) || CursedMoon.isInCursedMoon(player.getWorld());
         instinctProportion = currentInstinct / StaticParams.INSTINCT_MAX;
         int instinctWidth = (int) Math.ceil(80 * instinctProportion);
         context.drawTexture(instinctBarID, x, y, 0, currentBarY, 80 - instinctWidth, 5, 160, 40);

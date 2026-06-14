@@ -5,6 +5,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.ITransformReason;
@@ -53,11 +54,17 @@ public class InstinctUtils {
     }
     // ServerSide Data
     private static final HashMap<UUID, Float> playerInstinctRate = new HashMap<>();  // 当计算出的值与此表中的不同时触发同步
-    public static boolean lockInstinctCalc = false;
+    public static final HashMap<UUID, Boolean> playerInstinctLock = new HashMap<>();
     // ClientSide Data
     private static float nowInstinctValue = 0.0f;
     private static float nowInstinctRate = 0.0f;
     private static int nowInstinctTick = 0;
+
+    // Server Side
+    public static void onServerInit() {
+        playerInstinctRate.clear();
+        playerInstinctLock.clear();
+    }
 
     // Client Only
     public static void fromInstinctUpdate(float value, float rate) {
@@ -109,11 +116,12 @@ public class InstinctUtils {
 
     // Server Side
     public static void serverTick(MinecraftServer server) {
+        boolean isInCursedMoon = CursedMoon.isInCursedMoon(server.getOverworld());
         for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
             PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
             float prevRate = playerInstinctRate.getOrDefault(player.getUuid(), 0.0f);
             float nowRate = getBaseInstinctRate(player);
-            if (lockInstinctCalc) {
+            if (isInCursedMoon || playerInstinctLock.getOrDefault(player.getUuid(), false)) {
                 nowRate = 0.0f;
             } else {
                 nowRate += calcRate(component.instinctEffects, true);
@@ -148,9 +156,10 @@ public class InstinctUtils {
     }
 
     public static void addInstinctEffect(PlayerEntity player, InstinctEffect effect, boolean isImmediate) {
+        boolean isInCursedMoon = CursedMoon.isInCursedMoon(player.getWorld());
         PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
         if (isImmediate) {
-            component.instinctValue += lockInstinctCalc ? 0 : effect.getValue(true);
+            component.instinctValue += (isInCursedMoon || playerInstinctLock.getOrDefault(player.getUuid(), false)) ? 0 : effect.getValue(true);
             component.instinctValue = Math.max(component.instinctValue, 0);
         } else {
             component.instinctEffects.put(effect.getId(), effect);

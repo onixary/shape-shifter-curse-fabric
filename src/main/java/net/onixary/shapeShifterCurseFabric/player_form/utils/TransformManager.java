@@ -110,7 +110,7 @@ public class TransformManager {
             IForm nowForm = data.transformStartForm;
             IForm targetForm = data.transformEndForm;
             ModPacketsS2CServer.sendTransformState(serverPlayerEntity, true, nowForm == null ? null : nowForm.getFormID(), targetForm == null ? null : targetForm.getFormID());
-            InstinctUtils.lockInstinctCalc = true;
+            InstinctUtils.playerInstinctLock.put(player.getUuid(), true);
             PlayerTransformEffectManager.applyStartTransformEffect(serverPlayerEntity, StaticParams.TRANSFORM_FX_DURATION_IN);
         }
     }
@@ -129,7 +129,7 @@ public class TransformManager {
             IForm nowForm = data.transformStartForm;
             IForm targetForm = data.transformEndForm;
             ModPacketsS2CServer.sendTransformState(serverPlayerEntity, false, nowForm == null ? null : nowForm.getFormID(), targetForm == null ? null : targetForm.getFormID());
-            InstinctUtils.lockInstinctCalc = false;
+            InstinctUtils.playerInstinctLock.put(player.getUuid(), false);
             PlayerTransformEffectManager.applyFinaleTransformEffect(serverPlayerEntity, 5);
             if (data.onTransformComplete != null) {
                 data.onTransformComplete.accept(data);
