@@ -1,8 +1,0 @@
-{
-  "type": "origins:invisibility",
-  "render_armor": true,
-  "condition": {
-    "type": "origins:power_active",
-    "power": "*:phantomize"
-  }
-}
