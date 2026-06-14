@@ -10,6 +10,8 @@ import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenu;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import org.jetbrains.annotations.Nullable;
@@ -21,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class FormColorData {
     public boolean enableDefaultFormColor = true;
@@ -29,9 +33,18 @@ public class FormColorData {
     public final HashMap<String, FormTextureUtils.ColorSetting> customSetting = new HashMap<>();
     public final HashMap<Identifier, HashMap<String, FormTextureUtils.ColorSetting>> customSettingByForm = new HashMap<>();
 
+    public static int GlobalSlotCount = 9;
+    public static int LocalSlotCount = 3;
+
     public final HashMap<Identifier, List<String>> FormColorSelectMenu_Form_Local_Names = new HashMap<>();
     public final List<String> FormColorSelectMenu_Global_Names = new ArrayList<String>();
     public final HashMap<Identifier, String> FormColorSelectMenu_Form_Default_Names = new HashMap<>();
+
+    public final List<Identifier> unlockedForms = new ArrayList<Identifier>();
+
+    // V2 UI用的数据 由于UI没设计完 部分值不确定
+    public static int V2_GlobalSlotCount = 9;
+    public final List<String> V2_FormColorSelectMenu_Global_Names = new ArrayList<String>();
 
     public NbtCompound dumpColorSetting(FormTextureUtils.ColorSetting colorSetting) {
         NbtCompound nbt = new NbtCompound();
@@ -91,6 +104,16 @@ public class FormColorData {
             formColorSelectMenuDefaultNbt.putString(form.toString(), FormColorSelectMenu_Form_Default_Names.get(form));
         }
         nbt.put("FCS_form_default_setting_names", formColorSelectMenuDefaultNbt);
+        NbtList nbtList2 = new NbtList();
+        for (String name : V2_FormColorSelectMenu_Global_Names) {
+            nbtList2.add(NbtString.of(name));
+        }
+        nbt.put("V2_FCS_global_setting_names", nbtList2);
+        NbtList nbtList3 = new NbtList();
+        for (Identifier form : unlockedForms) {
+            nbtList3.add(NbtString.of(form.toString()));
+        }
+        nbt.put("unlockedForms", nbtList3);
         return nbt;
     }
 
@@ -100,6 +123,7 @@ public class FormColorData {
         customSettingByForm.clear();
         FormColorSelectMenu_Form_Local_Names.clear();
         FormColorSelectMenu_Global_Names.clear();
+        unlockedForms.clear();
         if (compound.contains("enableDefaultFormColor")) {
             enableDefaultFormColor = compound.getBoolean("enableDefaultFormColor");
         }
@@ -161,20 +185,69 @@ public class FormColorData {
                 FormColorSelectMenu_Form_Default_Names.put(formId, nbtList.getString(form));
             }
         }
+        if (compound.contains("V2_FCS_global_setting_names")) {
+            NbtList nbtList = compound.getList("V2_FCS_global_setting_names", NbtElement.STRING_TYPE);
+            for (int i = 0; i < nbtList.size(); i++) {
+                V2_FormColorSelectMenu_Global_Names.add(nbtList.getString(i));
+            }
+        }
+        if (compound.contains("unlockedForms")) {
+            NbtList nbtList = compound.getList("unlockedForms", NbtElement.STRING_TYPE);
+            for (int i = 0; i < nbtList.size(); i++) {
+                unlockedForms.add(Identifier.tryParse(nbtList.getString(i)));
+            }
+        }
+    }
+
+    public boolean isUnlock(Identifier form) {
+        return unlockedForms.contains(form);
+    }
+
+    public void unlockForm(Identifier form) {
+        if (unlockedForms.contains(form)) {
+            return;
+        }
+        unlockedForms.add(form);
+        this.writeToConfig();
+    }
+
+    public void unlockAll() {
+        for (PlayerFormBase form : RegPlayerForms.playerForms.values()) {
+            if (!unlockedForms.contains(form.FormID)) {
+                unlockedForms.add(form.FormID);
+            }
+        }
+        this.writeToConfig();
+    }
+
+    public void clearFormUnlock() {
+        unlockedForms.clear();
+        unlockedForms.add(RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID);
+        this.writeToConfig();
+    }
+
+    public static List<Consumer<Identifier>> onFormChangeListeners = new ArrayList<>();
+
+    // 移除V1后记得删
+    static {
+        onFormChangeListeners.add((form) -> {
+            FormColorSelectMenu.onFormChange_STATIC(true, true);
+        });
     }
 
     // 挂一个钩子在网络接受形态上 比如客户端的SYNC_FORM_CHANGE接收函数上
     public void onClientFormChange(Identifier form) {
         if (this.enableDefaultFormColor && ShapeShifterCurseFabric.playerCustomConfig.enable_form_default_color_system && this.formDefaultSetting.containsKey(form)) {
-            ModPacketsS2C.sendUpdateCustomColor(this.formDefaultSetting.get(form), false);
+            ModPacketsS2C.sendUpdateCustomColor(this.formDefaultSetting.get(form), false, false,false, false);
         }
+        this.unlockForm(form);
         // 延时一下 好同步 "sendUpdateCustomSetting" 的更新
         new Thread(() -> {
             try {
                 Thread.sleep(1000);
-                FormColorSelectMenu.onFormChange_STATIC();
+                onFormChangeListeners.forEach(listener -> listener.accept(form));
             } catch (InterruptedException ignored) {
-                FormColorSelectMenu.onFormChange_STATIC();
+                onFormChangeListeners.forEach(listener -> listener.accept(form));
             }
         }).start();
     }
@@ -310,7 +383,7 @@ public class FormColorData {
     }
 
     public void setName_LocalFormSlot(Identifier formID, int index, String name) {
-        if (index > 9) {
+        if (index > LocalSlotCount) {
             return;
         }
         List<String> list = this.FormColorSelectMenu_Form_Local_Names.computeIfAbsent(formID, k -> new ArrayList<>());
@@ -330,7 +403,7 @@ public class FormColorData {
     }
 
     public void setName_GlobalSlot(int index, String name) {
-        if (index > 4) {
+        if (index > GlobalSlotCount) {
             return;
         }
         if (index >= FormColorSelectMenu_Global_Names.size()) {
@@ -341,8 +414,28 @@ public class FormColorData {
         FormColorSelectMenu_Global_Names.set(index, name);
     }
 
+    // V2的API
+    public String V2_getName_GlobalSlot(int index) {
+        if (index < V2_FormColorSelectMenu_Global_Names.size()) {
+            return V2_FormColorSelectMenu_Global_Names.get(index);
+        }
+        return "";
+    }
+
+    public void V2_setName_GlobalSlot(int index, String name) {
+        if (index > V2_GlobalSlotCount) {
+            return;
+        }
+        if (index >= V2_FormColorSelectMenu_Global_Names.size()) {
+            for (int i = V2_FormColorSelectMenu_Global_Names.size(); i <= index; i++) {
+                V2_FormColorSelectMenu_Global_Names.add("");
+            }
+        }
+        V2_FormColorSelectMenu_Global_Names.set(index, name);
+    }
+
     public String getName_DefaultSlot(Identifier formID) {
-        return this.FormColorSelectMenu_Form_Default_Names.get(formID);
+        return this.FormColorSelectMenu_Form_Default_Names.getOrDefault(formID, "");
     }
 
     public void setName_DefaultSlot(Identifier formID, String name) {

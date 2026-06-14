@@ -32,7 +32,8 @@
       "required": false
     },
     {
-      "id": "twilightforest:knightmetal_shield"
+      "id": "twilightforest:knightmetal_shield",
+      "required": false
 	}
   ]
 }

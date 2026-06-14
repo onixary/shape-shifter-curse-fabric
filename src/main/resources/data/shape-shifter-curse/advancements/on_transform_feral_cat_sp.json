@@ -17,7 +17,12 @@
   "parent": "shape-shifter-curse:on_transform_sp",
   "criteria": {
     "on_transform_feral_cat_sp": {
-      "trigger": "shape-shifter-curse:on_transform_feral_cat_sp"
+      "trigger": "shape-shifter-curse:on_transform_form",
+      "conditions": {
+        "form": [
+          "shape-shifter-curse:feral_cat_sp"
+        ]
+      }
     }
   },
   "requirements": []

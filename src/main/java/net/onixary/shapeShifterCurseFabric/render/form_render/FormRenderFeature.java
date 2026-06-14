@@ -1,5 +1,9 @@
 package net.onixary.shapeShifterCurseFabric.render.form_render;
 
+import dev.kosmx.playerAnim.api.firstPerson.FirstPersonConfiguration;
+import dev.kosmx.playerAnim.api.firstPerson.FirstPersonMode;
+import dev.kosmx.playerAnim.impl.IAnimatedPlayer;
+import dev.kosmx.playerAnim.impl.animation.AnimationApplier;
 import mod.azure.azurelib.cache.object.BakedGeoModel;
 import mod.azure.azurelib.cache.object.GeoBone;
 import net.fabricmc.loader.api.FabricLoader;
@@ -21,11 +25,14 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 
 import java.util.List;
+
+import static net.onixary.shapeShifterCurseFabric.util.ClientUtils.isOpenInventoryScreen;
 
 public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityModel<T>, A extends BipedEntityModel<T>> extends FeatureRenderer<T, M> {
     public FormRenderFeature(FeatureRendererContext<T, M> context) {
@@ -35,6 +42,7 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
     private static final boolean IS_FIRST_PERSON_MOD_LOADED = FabricLoader.getInstance().isModLoaded("firstperson");
     private static final boolean BetterCombatInstalled = FabricLoader.getInstance().isModLoaded("bettercombat");
     private static final boolean IRISInstalled = FabricLoader.getInstance().isModLoaded("iris");
+    private static final boolean ImmediatelyFastInstalled = FabricLoader.getInstance().isModLoaded("immediatelyfast");
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
@@ -106,6 +114,27 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
         boolean leftPantsHidden = !player.isPartVisible(PlayerModelPart.LEFT_PANTS_LEG);
         boolean rightLegHidden = false;
         boolean rightPantsHidden = !player.isPartVisible(PlayerModelPart.RIGHT_PANTS_LEG);
+        // Better Combat 修复
+        if (FirstPersonMode.isFirstPersonPass() && ShapeShifterCurseFabric.clientConfig.enableBetterCombatFix && player == MinecraftClient.getInstance().getCameraEntity()) {
+            AnimationApplier animationApplier = ((IAnimatedPlayer) player).playerAnimator_getAnimation();
+            FirstPersonConfiguration config = animationApplier.getFirstPersonConfiguration();
+            hatHidden = true;
+            headHidden = true;
+            bodyHidden = true;
+            jacketHidden = true;
+            if (!config.isShowLeftArm()) {
+                leftArmHidden = true;
+                leftSleeveHidden = true;
+            }
+            if (!config.isShowRightArm()) {
+                rightArmHidden = true;
+                rightSleeveHidden = true;
+            }
+            leftLegHidden = true;
+            leftPantsHidden = true;
+            rightLegHidden = true;
+            rightPantsHidden = true;
+        }
         for (FormRenderer formRenderer : formRendererList) {
             FormModel formModel = (FormModel) formRenderer.getGeoModel();
             hatHidden |= formModel.Hidden_Hat;
@@ -133,14 +162,6 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
         playerEntityModel.leftPants.visible = !leftPantsHidden;
         playerEntityModel.rightLeg.visible = !rightLegHidden;
         playerEntityModel.rightPants.visible = !rightPantsHidden;
-
-        boolean IsClientNowPlayedPlayer = player instanceof ClientPlayerEntity;
-        boolean IsFirstPersonView = MinecraftClient.getInstance().options.getPerspective().isFirstPerson();
-
-        if (BetterCombatInstalled && IsFirstPersonView && IsClientNowPlayedPlayer && ClientUtils.ShouldEnableBetterCombatFix()) {
-            playerEntityModel.hat.visible = false;
-            playerEntityModel.head.visible = false;
-        }
     }
 
     public static void rM_PartB(PlayerEntityRenderer playerEntityRenderer, AbstractClientPlayerEntity player, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
@@ -158,12 +179,19 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
             boolean bl2 = !bl && !player.isInvisibleTo(MinecraftClient.getInstance().player);
             if (overlayTexture != null) {
                 RenderLayer l = null;
-                if (FormRenderUtils.isRenderingInWorld && IRISInstalled) {
+                if ((FormRenderUtils.isRenderingInWorld && IRISInstalled) || ImmediatelyFastInstalled) {
                     l = RenderLayer.getEntityCutoutNoCullZOffset(overlayTexture);
                 } else {
                     l = RenderLayer.getEntityCutout(overlayTexture);
                 }
-                playerEntityModel.render(matrixStack, vertexConsumerProvider.getBuffer(l), i, p, 1, 1, 1, bl2 ? 0.15F : 1.0F);
+                if (ImmediatelyFastInstalled && isOpenInventoryScreen) {
+                    matrixStack.push();
+                    matrixStack.scale(1.02f, 1.02f, 1.02f);
+                    playerEntityModel.render(matrixStack, vertexConsumerProvider.getBuffer(l), i, p, 1, 1, 1, bl2 ? 0.15F : 1.0F);
+                    matrixStack.pop();
+                } else {
+                    playerEntityModel.render(matrixStack, vertexConsumerProvider.getBuffer(l), i, p, 1, 1, 1, bl2 ? 0.15F : 1.0F);
+                }
             }
             if (emissiveTexture != null) {
                 RenderLayer l = RenderLayer.getEntityTranslucentEmissive(emissiveTexture);
@@ -261,7 +289,7 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
                 // boolean bl = this.isVisible(player);
                 // boolean bl2 = !bl && !player.isInvisibleTo(MinecraftClient.getInstance().player);
                 RenderLayer OverlayLayer = null;
-                if (FormRenderUtils.isRenderingInWorld && IRISInstalled) {
+                if ((FormRenderUtils.isRenderingInWorld && IRISInstalled) || ImmediatelyFastInstalled) {
                     OverlayLayer = RenderLayer.getEntityCutoutNoCullZOffset(OverlayTextureID);
                 } else {
                     OverlayLayer = RenderLayer.getEntityCutout(OverlayTextureID);

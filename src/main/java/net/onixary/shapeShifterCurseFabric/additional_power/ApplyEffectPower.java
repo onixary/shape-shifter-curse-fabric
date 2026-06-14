@@ -37,6 +37,9 @@ public class ApplyEffectPower extends Power {
             this.RemoveEffects();
             this.isApplied = false;
         }
+        if (entity.age % 20 == 0 && this.isActive() && this.isApplied) {
+            this.checkEffects();
+        }
     }
 
     private void ApplyEffects() {
@@ -46,6 +49,14 @@ public class ApplyEffectPower extends Power {
                 this.entity.removeStatusEffect(effect.getEffectType());
             }
             this.entity.addStatusEffect(new StatusEffectInstance(effect));
+        }
+    }
+
+    private void checkEffects() {
+        for (StatusEffectInstance effect : this.effects) {
+            if (!this.entity.hasStatusEffect(effect.getEffectType())) {
+                this.entity.addStatusEffect(new StatusEffectInstance(effect));
+            }
         }
     }
 

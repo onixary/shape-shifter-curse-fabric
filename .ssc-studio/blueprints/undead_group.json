@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:undead_group",
+  "updatedAt": "2026-06-09T15:13:39.059Z",
+  "viewport": {
+    "x": -47.85040453456867,
+    "y": 73.47716170174493,
+    "zoom": 1.4
+  },
+  "nodes": [
+    {
+      "id": "new-2",
+      "astNodeId": "new-2",
+      "type": "origins:entity_group",
+      "kind": "power",
+      "title": "Entity Group Power",
+      "signature": "power|origins:entity_group||Entity Group Power",
+      "occurrence": 0,
+      "position": {
+        "x": 77.53601195828563,
+        "y": 125.8020317155505
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "new-2",
+        "astNodeId": "new-2",
+        "type": "origins:entity_group",
+        "kind": "power",
+        "title": "Entity Group Power",
+        "color": "power",
+        "position": {
+          "x": 77.53601195828563,
+          "y": 125.8020317155505
+        },
+        "fields": [
+          {
+            "name": "group",
+            "schema": {
+              "name": "group",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "undead",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "new-2:out:group"
+          }
+        ]
+      }
+    ],
+    "edges": []
+  }
+}

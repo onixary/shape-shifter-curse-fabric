@@ -1,0 +1,935 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:form_snow_fox_2_triple_jump",
+  "updatedAt": "2026-06-09T16:38:03.838Z",
+  "viewport": {
+    "x": -598.8305265675772,
+    "y": 39.17552172802573,
+    "zoom": 0.9236555375410264
+  },
+  "nodes": [
+    {
+      "id": "ast-15",
+      "astNodeId": "ast-15",
+      "type": "shape-shifter-curse:triple_jump",
+      "kind": "power",
+      "label": "root",
+      "title": "root",
+      "signature": "power|shape-shifter-curse:triple_jump|root|root",
+      "occurrence": 0,
+      "position": {
+        "x": 80,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-4",
+      "astNodeId": "ast-4",
+      "type": "origins:and",
+      "kind": "entity_action",
+      "title": "Action And",
+      "signature": "entity_action|origins:and||Action And",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-1",
+      "astNodeId": "ast-1",
+      "type": "origins:execute_command",
+      "kind": "entity_action",
+      "title": "Entity Execute Command",
+      "signature": "entity_action|origins:execute_command||Entity Execute Command",
+      "occurrence": 0,
+      "position": {
+        "x": 1092.421417167448,
+        "y": 50.76832336015663
+      }
+    },
+    {
+      "id": "ast-2",
+      "astNodeId": "ast-2",
+      "type": "origins:play_sound",
+      "kind": "entity_action",
+      "title": "play sound",
+      "signature": "entity_action|origins:play_sound||play sound",
+      "occurrence": 0,
+      "position": {
+        "x": 1100,
+        "y": 314
+      }
+    },
+    {
+      "id": "ast-3",
+      "astNodeId": "ast-3",
+      "type": "origins:play_sound",
+      "kind": "entity_action",
+      "title": "play sound",
+      "signature": "entity_action|origins:play_sound||play sound",
+      "occurrence": 1,
+      "position": {
+        "x": 1100,
+        "y": 548
+      }
+    },
+    {
+      "id": "ast-9",
+      "astNodeId": "ast-9",
+      "type": "origins:and",
+      "kind": "entity_action",
+      "title": "Action And",
+      "signature": "entity_action|origins:and||Action And",
+      "occurrence": 1,
+      "position": {
+        "x": 590,
+        "y": 314
+      }
+    },
+    {
+      "id": "ast-5",
+      "astNodeId": "ast-5",
+      "type": "origins:add_velocity",
+      "kind": "entity_action",
+      "title": "Entity Add Velocity",
+      "signature": "entity_action|origins:add_velocity||Entity Add Velocity",
+      "occurrence": 0,
+      "position": {
+        "x": 1100,
+        "y": 782
+      }
+    },
+    {
+      "id": "ast-6",
+      "astNodeId": "ast-6",
+      "type": "origins:execute_command",
+      "kind": "entity_action",
+      "title": "Entity Execute Command",
+      "signature": "entity_action|origins:execute_command||Entity Execute Command",
+      "occurrence": 1,
+      "position": {
+        "x": 1100,
+        "y": 1016
+      }
+    },
+    {
+      "id": "ast-7",
+      "astNodeId": "ast-7",
+      "type": "origins:play_sound",
+      "kind": "entity_action",
+      "title": "play sound",
+      "signature": "entity_action|origins:play_sound||play sound",
+      "occurrence": 2,
+      "position": {
+        "x": 1100,
+        "y": 1250
+      }
+    },
+    {
+      "id": "ast-8",
+      "astNodeId": "ast-8",
+      "type": "origins:play_sound",
+      "kind": "entity_action",
+      "title": "play sound",
+      "signature": "entity_action|origins:play_sound||play sound",
+      "occurrence": 3,
+      "position": {
+        "x": 1100,
+        "y": 1484
+      }
+    },
+    {
+      "id": "ast-14",
+      "astNodeId": "ast-14",
+      "type": "origins:and",
+      "kind": "entity_action",
+      "title": "Action And",
+      "signature": "entity_action|origins:and||Action And",
+      "occurrence": 2,
+      "position": {
+        "x": 590,
+        "y": 548
+      }
+    },
+    {
+      "id": "ast-10",
+      "astNodeId": "ast-10",
+      "type": "origins:add_velocity",
+      "kind": "entity_action",
+      "title": "Entity Add Velocity",
+      "signature": "entity_action|origins:add_velocity||Entity Add Velocity",
+      "occurrence": 1,
+      "position": {
+        "x": 1100,
+        "y": 1718
+      }
+    },
+    {
+      "id": "ast-11",
+      "astNodeId": "ast-11",
+      "type": "origins:execute_command",
+      "kind": "entity_action",
+      "title": "Entity Execute Command",
+      "signature": "entity_action|origins:execute_command||Entity Execute Command",
+      "occurrence": 2,
+      "position": {
+        "x": 1100,
+        "y": 1952
+      }
+    },
+    {
+      "id": "ast-12",
+      "astNodeId": "ast-12",
+      "type": "origins:play_sound",
+      "kind": "entity_action",
+      "title": "play sound",
+      "signature": "entity_action|origins:play_sound||play sound",
+      "occurrence": 4,
+      "position": {
+        "x": 1100,
+        "y": 2186
+      }
+    },
+    {
+      "id": "ast-13",
+      "astNodeId": "ast-13",
+      "type": "origins:play_sound",
+      "kind": "entity_action",
+      "title": "play sound",
+      "signature": "entity_action|origins:play_sound||play sound",
+      "occurrence": 5,
+      "position": {
+        "x": 1100,
+        "y": 2420
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "ast-15",
+        "astNodeId": "ast-15",
+        "type": "shape-shifter-curse:triple_jump",
+        "kind": "power",
+        "title": "root",
+        "label": "root",
+        "color": "power",
+        "position": {
+          "x": 80,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "first_jump_multiplier",
+            "schema": {
+              "name": "first_jump_multiplier",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "1.4",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-15:out:first_jump_multiplier"
+          },
+          {
+            "name": "second_jump_multiplier",
+            "schema": {
+              "name": "second_jump_multiplier",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 1.5
+            },
+            "valueKind": "number",
+            "displayValue": "1.5",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-15:out:second_jump_multiplier"
+          },
+          {
+            "name": "third_jump_multiplier",
+            "schema": {
+              "name": "third_jump_multiplier",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 2
+            },
+            "valueKind": "number",
+            "displayValue": "1.65",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-15:out:third_jump_multiplier"
+          },
+          {
+            "name": "first_jump_action",
+            "schema": {
+              "name": "first_jump_action",
+              "valueKind": "slot",
+              "slotKind": "entity_action"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> Action And",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-15:out:first_jump_action"
+          },
+          {
+            "name": "second_jump_action",
+            "schema": {
+              "name": "second_jump_action",
+              "valueKind": "slot",
+              "slotKind": "entity_action"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> Action And",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-15:out:second_jump_action"
+          },
+          {
+            "name": "third_jump_action",
+            "schema": {
+              "name": "third_jump_action",
+              "valueKind": "slot",
+              "slotKind": "entity_action"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> Action And",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-15:out:third_jump_action"
+          },
+          {
+            "name": "reset_ticks_on_ground",
+            "schema": {
+              "name": "reset_ticks_on_ground",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 10
+            },
+            "valueKind": "number",
+            "displayValue": "8",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-15:out:reset_ticks_on_ground"
+          }
+        ]
+      },
+      {
+        "id": "ast-4",
+        "astNodeId": "ast-4",
+        "type": "origins:and",
+        "kind": "entity_action",
+        "title": "Action And",
+        "color": "action",
+        "position": {
+          "x": 590,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "actions",
+            "schema": {
+              "name": "actions",
+              "valueKind": "slot_array",
+              "slotKind": "entity_action",
+              "multi": true,
+              "required": true
+            },
+            "valueKind": "slot_array",
+            "displayValue": "Array[3]",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-4:out:actions"
+          }
+        ]
+      },
+      {
+        "id": "ast-1",
+        "astNodeId": "ast-1",
+        "type": "origins:execute_command",
+        "kind": "entity_action",
+        "title": "Entity Execute Command",
+        "color": "action",
+        "position": {
+          "x": 1092.421417167448,
+          "y": 50.76832336015663
+        },
+        "fields": [
+          {
+            "name": "command",
+            "schema": {
+              "name": "command",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "particle minecraft:crit ~ ~0.5 ~ 0.2 0.2 0.2 0 5",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-1:out:command"
+          }
+        ]
+      },
+      {
+        "id": "ast-2",
+        "astNodeId": "ast-2",
+        "type": "origins:play_sound",
+        "kind": "entity_action",
+        "title": "play sound",
+        "color": "action",
+        "position": {
+          "x": 1100,
+          "y": 314
+        },
+        "fields": [
+          {
+            "name": "sound",
+            "schema": {
+              "name": "sound",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:block.note_block.bass",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-2:out:sound"
+          },
+          {
+            "name": "pitch",
+            "schema": {
+              "name": "pitch",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "1",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-2:out:pitch"
+          }
+        ]
+      },
+      {
+        "id": "ast-3",
+        "astNodeId": "ast-3",
+        "type": "origins:play_sound",
+        "kind": "entity_action",
+        "title": "play sound",
+        "color": "action",
+        "position": {
+          "x": 1100,
+          "y": 548
+        },
+        "fields": [
+          {
+            "name": "sound",
+            "schema": {
+              "name": "sound",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:entity.goat.long_jump",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-3:out:sound"
+          }
+        ]
+      },
+      {
+        "id": "ast-9",
+        "astNodeId": "ast-9",
+        "type": "origins:and",
+        "kind": "entity_action",
+        "title": "Action And",
+        "color": "action",
+        "position": {
+          "x": 590,
+          "y": 314
+        },
+        "fields": [
+          {
+            "name": "actions",
+            "schema": {
+              "name": "actions",
+              "valueKind": "slot_array",
+              "slotKind": "entity_action",
+              "multi": true,
+              "required": true
+            },
+            "valueKind": "slot_array",
+            "displayValue": "Array[4]",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-9:out:actions"
+          }
+        ]
+      },
+      {
+        "id": "ast-5",
+        "astNodeId": "ast-5",
+        "type": "origins:add_velocity",
+        "kind": "entity_action",
+        "title": "Entity Add Velocity",
+        "color": "action",
+        "position": {
+          "x": 1100,
+          "y": 782
+        },
+        "fields": [
+          {
+            "name": "y",
+            "schema": {
+              "name": "y",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "1.3",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-5:out:y"
+          },
+          {
+            "name": "space",
+            "schema": {
+              "name": "space",
+              "valueKind": "string",
+              "defaultValue": "world"
+            },
+            "valueKind": "string",
+            "displayValue": "world",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-5:out:space"
+          }
+        ]
+      },
+      {
+        "id": "ast-6",
+        "astNodeId": "ast-6",
+        "type": "origins:execute_command",
+        "kind": "entity_action",
+        "title": "Entity Execute Command",
+        "color": "action",
+        "position": {
+          "x": 1100,
+          "y": 1016
+        },
+        "fields": [
+          {
+            "name": "command",
+            "schema": {
+              "name": "command",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "particle minecraft:crit ~ ~0.5 ~ 0.2 0.2 0.2 0 5",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-6:out:command"
+          }
+        ]
+      },
+      {
+        "id": "ast-7",
+        "astNodeId": "ast-7",
+        "type": "origins:play_sound",
+        "kind": "entity_action",
+        "title": "play sound",
+        "color": "action",
+        "position": {
+          "x": 1100,
+          "y": 1250
+        },
+        "fields": [
+          {
+            "name": "sound",
+            "schema": {
+              "name": "sound",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:block.note_block.bass",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-7:out:sound"
+          },
+          {
+            "name": "pitch",
+            "schema": {
+              "name": "pitch",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "1.19",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-7:out:pitch"
+          }
+        ]
+      },
+      {
+        "id": "ast-8",
+        "astNodeId": "ast-8",
+        "type": "origins:play_sound",
+        "kind": "entity_action",
+        "title": "play sound",
+        "color": "action",
+        "position": {
+          "x": 1100,
+          "y": 1484
+        },
+        "fields": [
+          {
+            "name": "sound",
+            "schema": {
+              "name": "sound",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:entity.goat.long_jump",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-8:out:sound"
+          }
+        ]
+      },
+      {
+        "id": "ast-14",
+        "astNodeId": "ast-14",
+        "type": "origins:and",
+        "kind": "entity_action",
+        "title": "Action And",
+        "color": "action",
+        "position": {
+          "x": 590,
+          "y": 548
+        },
+        "fields": [
+          {
+            "name": "actions",
+            "schema": {
+              "name": "actions",
+              "valueKind": "slot_array",
+              "slotKind": "entity_action",
+              "multi": true,
+              "required": true
+            },
+            "valueKind": "slot_array",
+            "displayValue": "Array[4]",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-14:out:actions"
+          }
+        ]
+      },
+      {
+        "id": "ast-10",
+        "astNodeId": "ast-10",
+        "type": "origins:add_velocity",
+        "kind": "entity_action",
+        "title": "Entity Add Velocity",
+        "color": "action",
+        "position": {
+          "x": 1100,
+          "y": 1718
+        },
+        "fields": [
+          {
+            "name": "y",
+            "schema": {
+              "name": "y",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "1.3",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-10:out:y"
+          },
+          {
+            "name": "space",
+            "schema": {
+              "name": "space",
+              "valueKind": "string",
+              "defaultValue": "world"
+            },
+            "valueKind": "string",
+            "displayValue": "world",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-10:out:space"
+          }
+        ]
+      },
+      {
+        "id": "ast-11",
+        "astNodeId": "ast-11",
+        "type": "origins:execute_command",
+        "kind": "entity_action",
+        "title": "Entity Execute Command",
+        "color": "action",
+        "position": {
+          "x": 1100,
+          "y": 1952
+        },
+        "fields": [
+          {
+            "name": "command",
+            "schema": {
+              "name": "command",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "particle minecraft:crit ~ ~0.5 ~ 0.2 0.2 0.2 0 5",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-11:out:command"
+          }
+        ]
+      },
+      {
+        "id": "ast-12",
+        "astNodeId": "ast-12",
+        "type": "origins:play_sound",
+        "kind": "entity_action",
+        "title": "play sound",
+        "color": "action",
+        "position": {
+          "x": 1100,
+          "y": 2186
+        },
+        "fields": [
+          {
+            "name": "sound",
+            "schema": {
+              "name": "sound",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:block.note_block.bass",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-12:out:sound"
+          },
+          {
+            "name": "pitch",
+            "schema": {
+              "name": "pitch",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "1.414",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-12:out:pitch"
+          }
+        ]
+      },
+      {
+        "id": "ast-13",
+        "astNodeId": "ast-13",
+        "type": "origins:play_sound",
+        "kind": "entity_action",
+        "title": "play sound",
+        "color": "action",
+        "position": {
+          "x": 1100,
+          "y": 2420
+        },
+        "fields": [
+          {
+            "name": "sound",
+            "schema": {
+              "name": "sound",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:entity.goat.long_jump",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-13:out:sound"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "ast-4:actions:0->ast-1",
+        "source": "ast-4",
+        "target": "ast-1",
+        "sourceHandle": "ast-4:out:actions",
+        "targetHandle": "ast-1:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 0
+      },
+      {
+        "id": "ast-4:actions:1->ast-2",
+        "source": "ast-4",
+        "target": "ast-2",
+        "sourceHandle": "ast-4:out:actions",
+        "targetHandle": "ast-2:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 1
+      },
+      {
+        "id": "ast-4:actions:2->ast-3",
+        "source": "ast-4",
+        "target": "ast-3",
+        "sourceHandle": "ast-4:out:actions",
+        "targetHandle": "ast-3:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 2
+      },
+      {
+        "id": "ast-15:first_jump_action->ast-4",
+        "source": "ast-15",
+        "target": "ast-4",
+        "sourceHandle": "ast-15:out:first_jump_action",
+        "targetHandle": "ast-4:in",
+        "fieldName": "first_jump_action",
+        "color": "action"
+      },
+      {
+        "id": "ast-9:actions:0->ast-5",
+        "source": "ast-9",
+        "target": "ast-5",
+        "sourceHandle": "ast-9:out:actions",
+        "targetHandle": "ast-5:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 0
+      },
+      {
+        "id": "ast-9:actions:1->ast-6",
+        "source": "ast-9",
+        "target": "ast-6",
+        "sourceHandle": "ast-9:out:actions",
+        "targetHandle": "ast-6:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 1
+      },
+      {
+        "id": "ast-9:actions:2->ast-7",
+        "source": "ast-9",
+        "target": "ast-7",
+        "sourceHandle": "ast-9:out:actions",
+        "targetHandle": "ast-7:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 2
+      },
+      {
+        "id": "ast-9:actions:3->ast-8",
+        "source": "ast-9",
+        "target": "ast-8",
+        "sourceHandle": "ast-9:out:actions",
+        "targetHandle": "ast-8:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 3
+      },
+      {
+        "id": "ast-15:second_jump_action->ast-9",
+        "source": "ast-15",
+        "target": "ast-9",
+        "sourceHandle": "ast-15:out:second_jump_action",
+        "targetHandle": "ast-9:in",
+        "fieldName": "second_jump_action",
+        "color": "action"
+      },
+      {
+        "id": "ast-14:actions:0->ast-10",
+        "source": "ast-14",
+        "target": "ast-10",
+        "sourceHandle": "ast-14:out:actions",
+        "targetHandle": "ast-10:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 0
+      },
+      {
+        "id": "ast-14:actions:1->ast-11",
+        "source": "ast-14",
+        "target": "ast-11",
+        "sourceHandle": "ast-14:out:actions",
+        "targetHandle": "ast-11:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 1
+      },
+      {
+        "id": "ast-14:actions:2->ast-12",
+        "source": "ast-14",
+        "target": "ast-12",
+        "sourceHandle": "ast-14:out:actions",
+        "targetHandle": "ast-12:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 2
+      },
+      {
+        "id": "ast-14:actions:3->ast-13",
+        "source": "ast-14",
+        "target": "ast-13",
+        "sourceHandle": "ast-14:out:actions",
+        "targetHandle": "ast-13:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 3
+      },
+      {
+        "id": "ast-15:third_jump_action->ast-14",
+        "source": "ast-15",
+        "target": "ast-14",
+        "sourceHandle": "ast-15:out:third_jump_action",
+        "targetHandle": "ast-14:in",
+        "fieldName": "third_jump_action",
+        "color": "action"
+      }
+    ]
+  }
+}

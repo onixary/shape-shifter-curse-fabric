@@ -27,6 +27,22 @@ public class ClientConfig implements ConfigData {
     @Comment("Enable Auto Modify FPM Config. Default: true")
     public boolean enableChangeFPMConfig = true;  // 启用修改FPM配置
 
+    @ConfigEntry.Category("General")
+    @Comment("Disable Unlock Check In Form Color Select Menu. Default: false")
+    public boolean disableUnlockCheckInFormColorSelectMenu = false;  // 禁用颜色选择菜单中的解锁检查
+
+    @ConfigEntry.Category("General")
+    @Comment("Form Color Select Menu Use Professional Version. Default: false")
+    public boolean fcs_use_v1_menu = false;  // 是否启用V1版本 那版由于Onixary说有点复杂 所以设计了标准版(V2) 我原本想扔拓展里 最后我决定加个专业版后缀放本体里
+
+    @ConfigEntry.Category("Tool")
+    @Comment("Unlock All Form For Form Color Select Menu. Default: false")
+    public boolean unlockAllFormInFormColorSelectMenu = false;  // 解锁颜色选择菜单中的所有形态
+
+    @ConfigEntry.Category("Tool")
+    @Comment("Clear Form Unlock Record For Form Color Select Menu. Default: false")
+    public boolean clearFormUnlockRecordInFormColorSelectMenu = false;  // 清除颜色选择菜单中的解锁记录
+
     @ConfigEntry.Category("Integration")
     @Comment("Enable Better Combat Fix. Default: true")
     public boolean enableBetterCombatFix = true;  // 启用Better Combat Fix

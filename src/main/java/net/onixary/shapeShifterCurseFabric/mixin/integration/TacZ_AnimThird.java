@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,7 +20,7 @@ public class TacZ_AnimThird {
     @Inject(method = "setRotationAnglesHead", at = @At("HEAD"), cancellable = true)
     private static void setRotationAnglesHead(LivingEntity entityIn, ModelPart rightArm, ModelPart leftArm, ModelPart body, ModelPart head, float limbSwingAmount, CallbackInfo ci) {
         if (entityIn instanceof PlayerEntity player && !MinecraftClient.getInstance().isPaused()) {
-            PlayerFormBase form = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+            PlayerFormBase form = FormTextureUtils.getPlayerForm_Render(player);
             if (form.getBodyType() == PlayerFormBodyType.FERAL) {
                 ci.cancel();
             }

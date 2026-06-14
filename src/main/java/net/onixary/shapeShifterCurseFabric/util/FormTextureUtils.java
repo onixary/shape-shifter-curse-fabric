@@ -1,7 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.util;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.texture.NativeImageBackedTexture;
 import net.minecraft.client.texture.TextureManager;
@@ -10,27 +9,53 @@ import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.lang3.tuple.Triple;
 import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 
 // 尽量少在Origin Fur中修改 减少后续工作量
 public class FormTextureUtils {
-    public interface TempTextureProcessor {
+    public interface TempFormTextureProcessor {
         // 需要自行实现缓存 Model的缓存带内存泄漏
         Identifier getTexture(int modelID, String category, Identifier texture, Identifier mask, boolean OnlyMultiply);
     }
 
-    public static boolean useTempTexture = false;
-    public static TempTextureProcessor tempTextureProcessor = null;
+    public interface TempCustomSkinConfigOverrider {
+        boolean keepOriginalSkin();
+    }
 
+    public interface TempFormModelProcessor {
+        PlayerFormBase getForm();
+
+        Identifier getLayerID();
+    }
+
+    public static boolean useTempFormTexture = false;
+    public static TempFormTextureProcessor tempFormTextureProcessor = null;
+    public static boolean useTempCustomSkinConfig = false;
+    public static TempCustomSkinConfigOverrider tempCustomSkinConfigOverrider = null;
+    // XuHaoNan 重构时需要加上形态默认层函数
+    public static boolean useTempFormModel = false;
+    public static TempFormModelProcessor tempFormModelProcessor = null;
+
+    public static PlayerFormBase getPlayerForm_Render(PlayerEntity player) {
+        if (useTempFormModel && Objects.equals(player, MinecraftClient.getInstance().player)) {
+            PlayerFormBase form = tempFormModelProcessor.getForm();
+            if (form != null) {
+                return form;
+            }
+        }
+        return RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+    }
 
     public record ColorSetting(int primaryColor, int accentColor1, int accentColor2, int eyeColorA, int eyeColorB
             , boolean primaryGreyReverse, boolean accent1GreyReverse, boolean accent2GreyReverse) {

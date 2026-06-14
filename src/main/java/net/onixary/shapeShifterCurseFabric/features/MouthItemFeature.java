@@ -23,6 +23,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.util.FeralRenderUtils;
+import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 
 public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> & ModelWithArms> extends FeatureRenderer<T, M> {
     private final HeldItemRenderer heldItemRenderer;
@@ -49,7 +50,7 @@ public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> &
             return;
         }
 
-        PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+        PlayerFormBase curForm = FormTextureUtils.getPlayerForm_Render(player);
         if (curForm.getBodyType() != PlayerFormBodyType.FERAL) {
             return;
         }

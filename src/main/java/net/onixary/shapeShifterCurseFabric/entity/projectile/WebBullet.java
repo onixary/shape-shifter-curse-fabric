@@ -238,7 +238,7 @@ public class WebBullet extends ThrownItemEntity {
                         target.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 80, 1));
                         target.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 80, 1));
                         if(EnableEntangledEffect){
-                            EntangledEffectUtils.applyEntangledEffect(target, Tier1BuffTime);
+                            EntangledEffectUtils.applyEntangledEffect(this.getOwner(), target, Tier1BuffTime);
                         }
 
                     }
@@ -246,14 +246,14 @@ public class WebBullet extends ThrownItemEntity {
                         target.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 120, 2));
                         target.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 120, 2));
                         if(EnableEntangledEffect){
-                            EntangledEffectUtils.applyEntangledEffect(target, Tier2BuffTime);
+                            EntangledEffectUtils.applyEntangledEffect(this.getOwner(), target, Tier2BuffTime);
                         }
                     }
                     case 3 -> {
                         target.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 160, 3));
                         target.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 160, 3));
                         if(EnableEntangledEffect){
-                            EntangledEffectUtils.applyEntangledEffect(target, Tier3BuffTime);
+                            EntangledEffectUtils.applyEntangledEffect(this.getOwner(), target, Tier3BuffTime);
                         }
                     }
                 }

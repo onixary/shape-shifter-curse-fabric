@@ -9,8 +9,9 @@ import net.onixary.shapeShifterCurseFabric.util.ModTags;
 
 public class IsMorphScaleItemCondition {
     public static final String IsMorphScaleArmorTagName = "MorphScaleItem";
+    public static final String IsMorphScaleFoodTagName = "MorphScaleFood";  // TODO 得改一下名称 我想不出名字了
 
-    public static boolean condition(SerializableData.Instance data, ItemStack itemStack) {
+    public static boolean MSI_condition(SerializableData.Instance data, ItemStack itemStack) {
         if (itemStack.isIn(ModTags.MorphScaleItem_Tag)) {
             return true;
         }
@@ -23,11 +24,37 @@ public class IsMorphScaleItemCondition {
         return false;
     }
 
-    public static ConditionFactory<ItemStack> getFactory() {
+    public static boolean MSF_condition(SerializableData.Instance data, ItemStack itemStack) {
+        if (!ShapeShifterCurseFabric.commonConfig.enableFoodHabitSystem) {
+            return true;
+        }
+        if (itemStack.isIn(ModTags.MorphScaleItem_Tag)) {
+            return true;
+        }
+        NbtCompound itemNBT = itemStack.getNbt();
+        if (itemNBT != null) {
+            if (itemNBT.getBoolean(IsMorphScaleFoodTagName)) {
+                return true;
+            }
+            if (itemNBT.getBoolean(IsMorphScaleArmorTagName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static ConditionFactory<ItemStack> getFactory1() {
         return new ConditionFactory<ItemStack>(
                 ShapeShifterCurseFabric.identifier("is_morph_scale_item"),
                 new SerializableData(),
-                IsMorphScaleItemCondition::condition
+                IsMorphScaleItemCondition::MSI_condition
+        );
+    }
+    public static ConditionFactory<ItemStack> getFactory2() {
+        return new ConditionFactory<ItemStack>(
+                ShapeShifterCurseFabric.identifier("is_morph_scale_food"),
+                new SerializableData(),
+                IsMorphScaleItemCondition::MSF_condition
         );
     }
 }

@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.render.tech;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
@@ -9,13 +10,16 @@ import net.minecraft.client.render.entity.model.ModelWithArms;
 import net.minecraft.client.render.item.HeldItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.render.form_render.FormRenderUtils;
+import net.onixary.shapeShifterCurseFabric.util.FormColorData;
+import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public class ThirdPersonExtraHandItemRender<T extends LivingEntity, M extends EntityModel<T> & ModelWithArms> extends FeatureRenderer<T, M> {
@@ -49,7 +53,7 @@ public class ThirdPersonExtraHandItemRender<T extends LivingEntity, M extends En
 
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l) {
         if (livingEntity instanceof AbstractClientPlayerEntity player) {
-            PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+            PlayerFormBase curForm = FormTextureUtils.getPlayerForm_Render(player);
             if (data.containsKey(curForm)) {
                 for (TPEHRData Rdata : data.get(curForm)) {
                     if (Rdata.shouldRender().test(player)) {

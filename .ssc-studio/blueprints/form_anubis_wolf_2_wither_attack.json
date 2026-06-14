@@ -1,0 +1,1010 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:form_anubis_wolf_2_wither_attack",
+  "updatedAt": "2026-06-09T16:28:59.182Z",
+  "viewport": {
+    "x": -2195.030016168873,
+    "y": -75.18828396604283,
+    "zoom": 0.9236555375410261
+  },
+  "nodes": [
+    {
+      "id": "ast-15",
+      "astNodeId": "ast-15",
+      "type": "origins:action_on_hit",
+      "kind": "power",
+      "label": "root",
+      "title": "root",
+      "signature": "power|origins:action_on_hit|root|root",
+      "occurrence": 0,
+      "position": {
+        "x": 80,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-11",
+      "astNodeId": "ast-11",
+      "type": "origins:and",
+      "kind": "bientity_action",
+      "title": "Action And",
+      "signature": "bientity_action|origins:and||Action And",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-10",
+      "astNodeId": "ast-10",
+      "type": "origins:target_action",
+      "kind": "bientity_action",
+      "title": "target action",
+      "signature": "bientity_action|origins:target_action||target action",
+      "occurrence": 0,
+      "position": {
+        "x": 1100,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-9",
+      "astNodeId": "ast-9",
+      "type": "origins:and",
+      "kind": "entity_action",
+      "title": "Action And",
+      "signature": "entity_action|origins:and||Action And",
+      "occurrence": 0,
+      "position": {
+        "x": 1610,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-2",
+      "astNodeId": "ast-2",
+      "type": "origins:apply_effect",
+      "kind": "entity_action",
+      "title": "apply effect",
+      "signature": "entity_action|origins:apply_effect||apply effect",
+      "occurrence": 0,
+      "position": {
+        "x": 2120,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-1",
+      "astNodeId": "ast-1",
+      "type": "status_effect_instance",
+      "kind": "datatype",
+      "title": "Status Effect Instance",
+      "signature": "datatype|status_effect_instance||Status Effect Instance",
+      "occurrence": 0,
+      "position": {
+        "x": 2630,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-5",
+      "astNodeId": "ast-5",
+      "type": "origins:spawn_particles",
+      "kind": "entity_action",
+      "title": "spawn particles",
+      "signature": "entity_action|origins:spawn_particles||spawn particles",
+      "occurrence": 0,
+      "position": {
+        "x": 2120,
+        "y": 314
+      }
+    },
+    {
+      "id": "ast-3",
+      "astNodeId": "ast-3",
+      "type": "particle_effect",
+      "kind": "datatype",
+      "title": "Particle Effect",
+      "signature": "datatype|particle_effect||Particle Effect",
+      "occurrence": 0,
+      "position": {
+        "x": 2625.669381238542,
+        "y": 347.56229540130164
+      }
+    },
+    {
+      "id": "ast-4",
+      "astNodeId": "ast-4",
+      "type": "vector",
+      "kind": "datatype",
+      "title": "Vector",
+      "signature": "datatype|vector||Vector",
+      "occurrence": 0,
+      "position": {
+        "x": 2630,
+        "y": 548
+      }
+    },
+    {
+      "id": "ast-8",
+      "astNodeId": "ast-8",
+      "type": "origins:spawn_particles",
+      "kind": "entity_action",
+      "title": "spawn particles",
+      "signature": "entity_action|origins:spawn_particles||spawn particles",
+      "occurrence": 1,
+      "position": {
+        "x": 2120,
+        "y": 548
+      }
+    },
+    {
+      "id": "ast-6",
+      "astNodeId": "ast-6",
+      "type": "particle_effect",
+      "kind": "datatype",
+      "title": "Particle Effect",
+      "signature": "datatype|particle_effect||Particle Effect",
+      "occurrence": 1,
+      "position": {
+        "x": 2630,
+        "y": 782
+      }
+    },
+    {
+      "id": "ast-7",
+      "astNodeId": "ast-7",
+      "type": "vector",
+      "kind": "datatype",
+      "title": "Vector",
+      "signature": "datatype|vector||Vector",
+      "occurrence": 1,
+      "position": {
+        "x": 2630,
+        "y": 1016
+      }
+    },
+    {
+      "id": "ast-14",
+      "astNodeId": "ast-14",
+      "type": "origins:actor_condition",
+      "kind": "bientity_condition",
+      "title": "actor condition",
+      "signature": "bientity_condition|origins:actor_condition||actor condition",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 314
+      }
+    },
+    {
+      "id": "ast-13",
+      "astNodeId": "ast-13",
+      "type": "origins:and",
+      "kind": "entity_condition",
+      "title": "Condition And",
+      "signature": "entity_condition|origins:and||Condition And",
+      "occurrence": 0,
+      "position": {
+        "x": 1100,
+        "y": 314
+      }
+    },
+    {
+      "id": "ast-12",
+      "astNodeId": "ast-12",
+      "type": "origins:status_effect",
+      "kind": "entity_condition",
+      "title": "status effect",
+      "signature": "entity_condition|origins:status_effect||status effect",
+      "occurrence": 0,
+      "position": {
+        "x": 1610,
+        "y": 314
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "ast-15",
+        "astNodeId": "ast-15",
+        "type": "origins:action_on_hit",
+        "kind": "power",
+        "title": "root",
+        "label": "root",
+        "color": "power",
+        "position": {
+          "x": 80,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "bientity_action",
+            "schema": {
+              "name": "bientity_action",
+              "valueKind": "slot",
+              "slotKind": "bientity_action",
+              "required": true
+            },
+            "valueKind": "slot",
+            "displayValue": "-> Action And",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-15:out:bientity_action"
+          },
+          {
+            "name": "bientity_condition",
+            "schema": {
+              "name": "bientity_condition",
+              "valueKind": "slot",
+              "slotKind": "bientity_condition"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> actor condition",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-15:out:bientity_condition"
+          }
+        ]
+      },
+      {
+        "id": "ast-11",
+        "astNodeId": "ast-11",
+        "type": "origins:and",
+        "kind": "bientity_action",
+        "title": "Action And",
+        "color": "action",
+        "position": {
+          "x": 590,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "actions",
+            "schema": {
+              "name": "actions",
+              "valueKind": "slot_array",
+              "slotKind": "bientity_action",
+              "multi": true,
+              "required": true
+            },
+            "valueKind": "slot_array",
+            "displayValue": "Array[1]",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-11:out:actions"
+          }
+        ]
+      },
+      {
+        "id": "ast-10",
+        "astNodeId": "ast-10",
+        "type": "origins:target_action",
+        "kind": "bientity_action",
+        "title": "target action",
+        "color": "action",
+        "position": {
+          "x": 1100,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "action",
+            "schema": {
+              "name": "action",
+              "valueKind": "slot",
+              "slotKind": "entity_action",
+              "required": true
+            },
+            "valueKind": "slot",
+            "displayValue": "-> Action And",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-10:out:action"
+          }
+        ]
+      },
+      {
+        "id": "ast-9",
+        "astNodeId": "ast-9",
+        "type": "origins:and",
+        "kind": "entity_action",
+        "title": "Action And",
+        "color": "action",
+        "position": {
+          "x": 1610,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "actions",
+            "schema": {
+              "name": "actions",
+              "valueKind": "slot_array",
+              "slotKind": "entity_action",
+              "multi": true,
+              "required": true
+            },
+            "valueKind": "slot_array",
+            "displayValue": "Array[3]",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-9:out:actions"
+          }
+        ]
+      },
+      {
+        "id": "ast-2",
+        "astNodeId": "ast-2",
+        "type": "origins:apply_effect",
+        "kind": "entity_action",
+        "title": "apply effect",
+        "color": "action",
+        "position": {
+          "x": 2120,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "effect",
+            "schema": {
+              "name": "effect",
+              "valueKind": "datatype",
+              "datatype": "status_effect_instance"
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Status Effect Instance",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-2:out:effect"
+          }
+        ]
+      },
+      {
+        "id": "ast-1",
+        "astNodeId": "ast-1",
+        "type": "status_effect_instance",
+        "kind": "datatype",
+        "title": "Status Effect Instance",
+        "color": "datatype",
+        "position": {
+          "x": 2630,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "effect",
+            "schema": {
+              "name": "effect",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:wither",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-1:out:effect"
+          },
+          {
+            "name": "duration",
+            "schema": {
+              "name": "duration",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 100
+            },
+            "valueKind": "number",
+            "displayValue": "40",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-1:out:duration"
+          },
+          {
+            "name": "amplifier",
+            "schema": {
+              "name": "amplifier",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "2",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-1:out:amplifier"
+          }
+        ]
+      },
+      {
+        "id": "ast-5",
+        "astNodeId": "ast-5",
+        "type": "origins:spawn_particles",
+        "kind": "entity_action",
+        "title": "spawn particles",
+        "color": "action",
+        "position": {
+          "x": 2120,
+          "y": 314
+        },
+        "fields": [
+          {
+            "name": "particle",
+            "schema": {
+              "name": "particle",
+              "valueKind": "datatype",
+              "datatype": "particle_effect",
+              "required": true
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Particle Effect",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-5:out:particle"
+          },
+          {
+            "name": "count",
+            "schema": {
+              "name": "count",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "8",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-5:out:count"
+          },
+          {
+            "name": "speed",
+            "schema": {
+              "name": "speed",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-5:out:speed"
+          },
+          {
+            "name": "force",
+            "schema": {
+              "name": "force",
+              "valueKind": "boolean",
+              "defaultValue": false
+            },
+            "valueKind": "boolean",
+            "displayValue": "true",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-5:out:force"
+          },
+          {
+            "name": "spread",
+            "schema": {
+              "name": "spread",
+              "valueKind": "datatype",
+              "datatype": "vector",
+              "defaultValue": {
+                "x": 0.5,
+                "y": 0.5,
+                "z": 0.5
+              }
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Vector",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-5:out:spread"
+          }
+        ]
+      },
+      {
+        "id": "ast-3",
+        "astNodeId": "ast-3",
+        "type": "particle_effect",
+        "kind": "datatype",
+        "title": "Particle Effect",
+        "color": "datatype",
+        "position": {
+          "x": 2625.669381238542,
+          "y": 347.56229540130164
+        },
+        "fields": [
+          {
+            "name": "type",
+            "schema": {
+              "name": "type",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:dust",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-3:out:type"
+          },
+          {
+            "name": "params",
+            "schema": {
+              "name": "params",
+              "valueKind": "string"
+            },
+            "valueKind": "string",
+            "displayValue": "0.07 0.07 0.07 2",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-3:out:params"
+          }
+        ]
+      },
+      {
+        "id": "ast-4",
+        "astNodeId": "ast-4",
+        "type": "vector",
+        "kind": "datatype",
+        "title": "Vector",
+        "color": "datatype",
+        "position": {
+          "x": 2630,
+          "y": 548
+        },
+        "fields": [
+          {
+            "name": "x",
+            "schema": {
+              "name": "x",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0.5",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-4:out:x"
+          },
+          {
+            "name": "y",
+            "schema": {
+              "name": "y",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0.5",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-4:out:y"
+          },
+          {
+            "name": "z",
+            "schema": {
+              "name": "z",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0.5",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-4:out:z"
+          }
+        ]
+      },
+      {
+        "id": "ast-8",
+        "astNodeId": "ast-8",
+        "type": "origins:spawn_particles",
+        "kind": "entity_action",
+        "title": "spawn particles",
+        "color": "action",
+        "position": {
+          "x": 2120,
+          "y": 548
+        },
+        "fields": [
+          {
+            "name": "particle",
+            "schema": {
+              "name": "particle",
+              "valueKind": "datatype",
+              "datatype": "particle_effect",
+              "required": true
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Particle Effect",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-8:out:particle"
+          },
+          {
+            "name": "count",
+            "schema": {
+              "name": "count",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "4",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-8:out:count"
+          },
+          {
+            "name": "speed",
+            "schema": {
+              "name": "speed",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-8:out:speed"
+          },
+          {
+            "name": "force",
+            "schema": {
+              "name": "force",
+              "valueKind": "boolean",
+              "defaultValue": false
+            },
+            "valueKind": "boolean",
+            "displayValue": "true",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-8:out:force"
+          },
+          {
+            "name": "spread",
+            "schema": {
+              "name": "spread",
+              "valueKind": "datatype",
+              "datatype": "vector",
+              "defaultValue": {
+                "x": 0.5,
+                "y": 0.5,
+                "z": 0.5
+              }
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Vector",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-8:out:spread"
+          }
+        ]
+      },
+      {
+        "id": "ast-6",
+        "astNodeId": "ast-6",
+        "type": "particle_effect",
+        "kind": "datatype",
+        "title": "Particle Effect",
+        "color": "datatype",
+        "position": {
+          "x": 2630,
+          "y": 782
+        },
+        "fields": [
+          {
+            "name": "type",
+            "schema": {
+              "name": "type",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:soul_fire_flame",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-6:out:type"
+          }
+        ]
+      },
+      {
+        "id": "ast-7",
+        "astNodeId": "ast-7",
+        "type": "vector",
+        "kind": "datatype",
+        "title": "Vector",
+        "color": "datatype",
+        "position": {
+          "x": 2630,
+          "y": 1016
+        },
+        "fields": [
+          {
+            "name": "x",
+            "schema": {
+              "name": "x",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0.5",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-7:out:x"
+          },
+          {
+            "name": "y",
+            "schema": {
+              "name": "y",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0.5",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-7:out:y"
+          },
+          {
+            "name": "z",
+            "schema": {
+              "name": "z",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0.5",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-7:out:z"
+          }
+        ]
+      },
+      {
+        "id": "ast-14",
+        "astNodeId": "ast-14",
+        "type": "origins:actor_condition",
+        "kind": "bientity_condition",
+        "title": "actor condition",
+        "color": "condition",
+        "position": {
+          "x": 590,
+          "y": 314
+        },
+        "fields": [
+          {
+            "name": "condition",
+            "schema": {
+              "name": "condition",
+              "valueKind": "slot",
+              "slotKind": "entity_condition",
+              "required": true
+            },
+            "valueKind": "slot",
+            "displayValue": "-> Condition And",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-14:out:condition"
+          }
+        ]
+      },
+      {
+        "id": "ast-13",
+        "astNodeId": "ast-13",
+        "type": "origins:and",
+        "kind": "entity_condition",
+        "title": "Condition And",
+        "color": "condition",
+        "position": {
+          "x": 1100,
+          "y": 314
+        },
+        "fields": [
+          {
+            "name": "conditions",
+            "schema": {
+              "name": "conditions",
+              "valueKind": "slot_array",
+              "slotKind": "entity_condition",
+              "multi": true,
+              "required": true
+            },
+            "valueKind": "slot_array",
+            "displayValue": "Array[1]",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-13:out:conditions"
+          }
+        ]
+      },
+      {
+        "id": "ast-12",
+        "astNodeId": "ast-12",
+        "type": "origins:status_effect",
+        "kind": "entity_condition",
+        "title": "status effect",
+        "color": "condition",
+        "position": {
+          "x": 1610,
+          "y": 314
+        },
+        "fields": [
+          {
+            "name": "effect",
+            "schema": {
+              "name": "effect",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:wither",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-12:out:effect"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "ast-2:effect->ast-1",
+        "source": "ast-2",
+        "target": "ast-1",
+        "sourceHandle": "ast-2:out:effect",
+        "targetHandle": "ast-1:in",
+        "fieldName": "effect",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-9:actions:0->ast-2",
+        "source": "ast-9",
+        "target": "ast-2",
+        "sourceHandle": "ast-9:out:actions",
+        "targetHandle": "ast-2:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 0
+      },
+      {
+        "id": "ast-5:particle->ast-3",
+        "source": "ast-5",
+        "target": "ast-3",
+        "sourceHandle": "ast-5:out:particle",
+        "targetHandle": "ast-3:in",
+        "fieldName": "particle",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-5:spread->ast-4",
+        "source": "ast-5",
+        "target": "ast-4",
+        "sourceHandle": "ast-5:out:spread",
+        "targetHandle": "ast-4:in",
+        "fieldName": "spread",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-9:actions:1->ast-5",
+        "source": "ast-9",
+        "target": "ast-5",
+        "sourceHandle": "ast-9:out:actions",
+        "targetHandle": "ast-5:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 1
+      },
+      {
+        "id": "ast-8:particle->ast-6",
+        "source": "ast-8",
+        "target": "ast-6",
+        "sourceHandle": "ast-8:out:particle",
+        "targetHandle": "ast-6:in",
+        "fieldName": "particle",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-8:spread->ast-7",
+        "source": "ast-8",
+        "target": "ast-7",
+        "sourceHandle": "ast-8:out:spread",
+        "targetHandle": "ast-7:in",
+        "fieldName": "spread",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-9:actions:2->ast-8",
+        "source": "ast-9",
+        "target": "ast-8",
+        "sourceHandle": "ast-9:out:actions",
+        "targetHandle": "ast-8:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 2
+      },
+      {
+        "id": "ast-10:action->ast-9",
+        "source": "ast-10",
+        "target": "ast-9",
+        "sourceHandle": "ast-10:out:action",
+        "targetHandle": "ast-9:in",
+        "fieldName": "action",
+        "color": "action"
+      },
+      {
+        "id": "ast-11:actions:0->ast-10",
+        "source": "ast-11",
+        "target": "ast-10",
+        "sourceHandle": "ast-11:out:actions",
+        "targetHandle": "ast-10:in",
+        "fieldName": "actions",
+        "color": "action",
+        "order": 0
+      },
+      {
+        "id": "ast-15:bientity_action->ast-11",
+        "source": "ast-15",
+        "target": "ast-11",
+        "sourceHandle": "ast-15:out:bientity_action",
+        "targetHandle": "ast-11:in",
+        "fieldName": "bientity_action",
+        "color": "action"
+      },
+      {
+        "id": "ast-13:conditions:0->ast-12",
+        "source": "ast-13",
+        "target": "ast-12",
+        "sourceHandle": "ast-13:out:conditions",
+        "targetHandle": "ast-12:in",
+        "fieldName": "conditions",
+        "color": "condition",
+        "order": 0
+      },
+      {
+        "id": "ast-14:condition->ast-13",
+        "source": "ast-14",
+        "target": "ast-13",
+        "sourceHandle": "ast-14:out:condition",
+        "targetHandle": "ast-13:in",
+        "fieldName": "condition",
+        "color": "condition"
+      },
+      {
+        "id": "ast-15:bientity_condition->ast-14",
+        "source": "ast-15",
+        "target": "ast-14",
+        "sourceHandle": "ast-15:out:bientity_condition",
+        "targetHandle": "ast-14:in",
+        "fieldName": "bientity_condition",
+        "color": "condition"
+      }
+    ]
+  }
+}

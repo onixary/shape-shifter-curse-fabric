@@ -11,6 +11,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -56,8 +57,8 @@ public abstract class ElytraEntityModelMixin<T extends LivingEntity> {
             n = 0.08726646f;
         }
         // 特殊处理 BAT3的鞘翅轴心要向下移动来适配动画
-        if (entity instanceof AbstractClientPlayerEntity) {
-            PlayerFormBase curForm0 = RegPlayerFormComponent.PLAYER_FORM.get(entity).getCurrentForm();
+        if (entity instanceof AbstractClientPlayerEntity player) {
+            PlayerFormBase curForm0 = FormTextureUtils.getPlayerForm_Render(player);
             if(curForm0 == RegPlayerForms.BAT_3){
                 //ShapeShifterCurseFabric.LOGGER.info("BAT3 set elytra");
                 if (((LivingEntity)entity).isOnGround()){
@@ -85,7 +86,7 @@ public abstract class ElytraEntityModelMixin<T extends LivingEntity> {
             abstractClientPlayerEntity.elytraYaw += (n - abstractClientPlayerEntity.elytraYaw) * 0.1f;
             abstractClientPlayerEntity.elytraRoll += (l - abstractClientPlayerEntity.elytraRoll) * 0.1f;
 
-            PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(entity).getCurrentForm();
+            PlayerFormBase curForm = FormTextureUtils.getPlayerForm_Render(abstractClientPlayerEntity);
             boolean isFeral = curForm.getBodyType() == PlayerFormBodyType.FERAL;
             if(isFeral){
                 this.leftWing.pitch = k + (float)Math.toRadians(70.0);

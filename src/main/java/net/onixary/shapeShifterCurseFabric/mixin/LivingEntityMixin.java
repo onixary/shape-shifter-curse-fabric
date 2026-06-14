@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.integration.ModifyValueCallback;
 import io.github.apace100.apoli.power.AttributeModifyTransferPower;
@@ -27,12 +28,14 @@ import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.additional_power.*;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.spider.TransformativeSpiderEntity;
+import net.onixary.shapeShifterCurseFabric.integration.origins.power.OriginsPowerTypes;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects;
@@ -215,6 +218,18 @@ public abstract class LivingEntityMixin {
                         .forEach(ActionOnSplashPotionTakeEffect::executeAction);
             }
         }
+    }
+
+    // Origins的LikeWaterPower
+    @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;setVelocity(Lnet/minecraft/util/math/Vec3d;)V", ordinal = 1))
+    public Vec3d likeWaterMixin(Vec3d movementInput, @Local(ordinal = 0) double d) {
+        LivingEntity self = (LivingEntity) (Object) this;
+        if(AdditionalPowers.LIKE_WATER.isActive((LivingEntity) (Object) this)) {
+            if (Math.abs(self.getVelocity().y - d / 16.0D) < 0.025D) {
+                return new Vec3d(movementInput.x, 0, movementInput.z);
+            }
+        }
+        return movementInput;
     }
 
     // todo: 直接强制修改hasModifyWaterSpeed似乎会导致广泛的与其他模组的mixin冲突，暂时禁用

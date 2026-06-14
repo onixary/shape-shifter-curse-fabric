@@ -140,9 +140,6 @@ public class TransformManager {
                 // 如果没有buff则随机选择一个形态，如果有buff則buff形态+1
                 // If there is no buff, randomly select a form; if there is a buff, buff form +1
                 toForm = getRandomOrBuffForm(player);
-                // 触发自定义成就
-                // Trigger custom achievement
-                ShapeShifterCurseFabric.ON_TRANSFORM_0.trigger((ServerPlayerEntity) player);
                 break;
             case 0:
                 toForm = currentFormGroup.getForm(1);
@@ -441,73 +438,15 @@ public class TransformManager {
         }
         // 根据index触发自定义成就
         // Trigger custom achievement based on index
-        int toFormIndex = data.curToForm.getIndex();
-        if (!isByCure) {
-            switch (toFormIndex) {
-                case 0:
-                    ShapeShifterCurseFabric.ON_TRANSFORM_0.trigger((ServerPlayerEntity) player);
-                    ShapeShifterCurseFabric.ON_FIRST_TRANSFORM_ENABLE_FORM_LIST.trigger((ServerPlayerEntity) player);
-                    triggerSpecificFormAdvancement((ServerPlayerEntity) player, toForm);
-                    break;
-                case 1:
-                    ShapeShifterCurseFabric.ON_TRANSFORM_1.trigger((ServerPlayerEntity) player);
-                    break;
-                case 2:
-                    ShapeShifterCurseFabric.ON_TRANSFORM_2.trigger((ServerPlayerEntity) player);
-                    break;
-                case 3:
-                    ShapeShifterCurseFabric.ON_TRANSFORM_3.trigger((ServerPlayerEntity) player);
-                    triggerSpecificFormAdvancement((ServerPlayerEntity) player, toForm);
-                    break;
-                case 5:
-                    ShapeShifterCurseFabric.ON_TRANSFORM_SP.trigger((ServerPlayerEntity) player);
-                    triggerSpecificFormAdvancement((ServerPlayerEntity) player, toForm);
-                    break;
-                default:
-                    break;
-            }
+
+        if (player instanceof ServerPlayerEntity serverPlayer && !isByCure) {
+            ShapeShifterCurseFabric.ON_TRANSFORM_FORM.trigger(serverPlayer, toForm);
         }
 
         ShapeShifterCurseFabric.LOGGER.info("Cur Player: " + data.curPlayer + " To Form: " + data.curToForm);
         handleTransformEffect(player);
         applyStartTransformEffect((ServerPlayerEntity) player, StaticParams.TRANSFORM_FX_DURATION_IN);
         // FormAbilityManager.applyForm(player, toForm);
-    }
-
-    private static void triggerSpecificFormAdvancement(ServerPlayerEntity serverPlayer, PlayerFormBase toForm) {
-        if (toForm.equals(RegPlayerForms.AXOLOTL_0)) {
-            ShapeShifterCurseFabric.ON_TRANSFORM_AXOLOTL_0.trigger(serverPlayer);
-        } else if (toForm.equals(RegPlayerForms.AXOLOTL_3)) {
-            ShapeShifterCurseFabric.ON_TRANSFORM_AXOLOTL_3.trigger(serverPlayer);
-        } else if (toForm.equals(RegPlayerForms.BAT_0)) {
-            ShapeShifterCurseFabric.ON_TRANSFORM_BAT_0.trigger(serverPlayer);
-        } else if (toForm.equals(RegPlayerForms.BAT_3)) {
-            ShapeShifterCurseFabric.ON_TRANSFORM_BAT_3.trigger(serverPlayer);
-        } else if (toForm.equals(RegPlayerForms.OCELOT_0)) {
-            ShapeShifterCurseFabric.ON_TRANSFORM_OCELOT_0.trigger(serverPlayer);
-        } else if (toForm.equals(RegPlayerForms.OCELOT_3)) {
-            ShapeShifterCurseFabric.ON_TRANSFORM_OCELOT_3.trigger(serverPlayer);
-        } else if (toForm.equals(RegPlayerForms.FAMILIAR_FOX_0)) {
-            ShapeShifterCurseFabric.ON_TRANSFORM_FAMILIAR_FOX_0.trigger(serverPlayer);
-        } else if (toForm.equals(RegPlayerForms.FAMILIAR_FOX_3)) {
-            ShapeShifterCurseFabric.ON_TRANSFORM_FAMILIAR_FOX_3.trigger(serverPlayer);
-        } else if (toForm.equals(RegPlayerForms.SNOW_FOX_0)) {
-            ShapeShifterCurseFabric.ON_TRANSFORM_SNOW_FOX_0.trigger(serverPlayer);
-        } else if (toForm.equals(RegPlayerForms.SNOW_FOX_3)) {
-            ShapeShifterCurseFabric.ON_TRANSFORM_SNOW_FOX_3.trigger(serverPlayer);
-        } else if (toForm.equals(RegPlayerForms.ANUBIS_WOLF_0)) {
-            ShapeShifterCurseFabric.ON_TRANSFORM_ANUBIS_WOLF_0.trigger(serverPlayer);
-        } else if (toForm.equals(RegPlayerForms.ANUBIS_WOLF_3)) {
-            ShapeShifterCurseFabric.ON_TRANSFORM_ANUBIS_WOLF_3.trigger(serverPlayer);
-        } else if (toForm.equals(RegPlayerForms.SPIDER_0)) {
-            ShapeShifterCurseFabric.ON_TRANSFORM_SPIDER_0.trigger(serverPlayer);
-        } else if (toForm.equals(RegPlayerForms.SPIDER_3)) {
-            ShapeShifterCurseFabric.ON_TRANSFORM_SPIDER_3.trigger(serverPlayer);
-        } else if (toForm.equals(RegPlayerForms.ALLAY_SP)) {
-            ShapeShifterCurseFabric.ON_TRANSFORM_ALLAY_SP.trigger(serverPlayer);
-        } else if (toForm.equals(RegPlayerForms.FERAL_CAT_SP)) {
-            ShapeShifterCurseFabric.ON_TRANSFORM_FERAL_CAT_SP.trigger(serverPlayer);
-        }
     }
 
     // 双端 但我觉得是仅服务端 继承于handleDirectTransform
@@ -560,30 +499,8 @@ public class TransformManager {
         data.curPlayer = player;
         data.curToForm = toForm;
 
-        // 直接set时也会触发自定义成就
-        int toFormIndex = data.curToForm.getIndex();
-        switch (toFormIndex) {
-            case 0:
-                ShapeShifterCurseFabric.ON_TRANSFORM_0.trigger((ServerPlayerEntity) player);
-                ShapeShifterCurseFabric.ON_FIRST_TRANSFORM_ENABLE_FORM_LIST.trigger((ServerPlayerEntity) player);
-                triggerSpecificFormAdvancement((ServerPlayerEntity) player, toForm);
-                break;
-            case 1:
-                ShapeShifterCurseFabric.ON_TRANSFORM_1.trigger((ServerPlayerEntity) player);
-                break;
-            case 2:
-                ShapeShifterCurseFabric.ON_TRANSFORM_2.trigger((ServerPlayerEntity) player);
-                break;
-            case 3:
-                ShapeShifterCurseFabric.ON_TRANSFORM_3.trigger((ServerPlayerEntity) player);
-                triggerSpecificFormAdvancement((ServerPlayerEntity) player, toForm);
-                break;
-            case 5:
-                ShapeShifterCurseFabric.ON_TRANSFORM_SP.trigger((ServerPlayerEntity) player);
-                triggerSpecificFormAdvancement((ServerPlayerEntity) player, toForm);
-                break;
-            default:
-                break;
+        if (player instanceof ServerPlayerEntity serverPlayer) {
+            ShapeShifterCurseFabric.ON_TRANSFORM_FORM.trigger(serverPlayer, toForm);
         }
 
         EffectManager.clearTransformativeEffect(player);
