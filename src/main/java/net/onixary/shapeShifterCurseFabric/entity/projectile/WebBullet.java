@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.entity.projectile;
 
-import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -23,6 +22,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.WebBridgeAction;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.status_effects.EntangledEffectUtils;
+import org.jetbrains.annotations.Nullable;
 
 import static net.onixary.shapeShifterCurseFabric.entity.RegCustomEntity.WEB_BULLET;
 

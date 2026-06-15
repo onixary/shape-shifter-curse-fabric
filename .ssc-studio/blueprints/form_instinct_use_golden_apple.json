@@ -1,0 +1,406 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:form_instinct_use_golden_apple",
+  "updatedAt": "2026-06-09T16:36:13.003Z",
+  "viewport": {
+    "x": -953.0839932956812,
+    "y": -26.83202968697026,
+    "zoom": 0.8920059851652958
+  },
+  "nodes": [
+    {
+      "id": "ast-7",
+      "astNodeId": "ast-7",
+      "type": "origins:action_on_item_use",
+      "kind": "power",
+      "label": "root",
+      "title": "root",
+      "signature": "power|origins:action_on_item_use|root|root",
+      "occurrence": 0,
+      "position": {
+        "x": 80,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-1",
+      "astNodeId": "ast-1",
+      "type": "shape-shifter-curse:add_instinct",
+      "kind": "entity_action",
+      "title": "add instinct",
+      "signature": "entity_action|shape-shifter-curse:add_instinct||add instinct",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-6",
+      "astNodeId": "ast-6",
+      "type": "origins:or",
+      "kind": "item_condition",
+      "title": "Item Condition Or",
+      "signature": "item_condition|origins:or||Item Condition Or",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 314
+      }
+    },
+    {
+      "id": "ast-3",
+      "astNodeId": "ast-3",
+      "type": "origins:ingredient",
+      "kind": "item_condition",
+      "title": "ingredient",
+      "signature": "item_condition|origins:ingredient||ingredient",
+      "occurrence": 0,
+      "position": {
+        "x": 1100,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-2",
+      "astNodeId": "ast-2",
+      "type": "ingredient",
+      "kind": "datatype",
+      "title": "Ingredient",
+      "signature": "datatype|ingredient||Ingredient",
+      "occurrence": 0,
+      "position": {
+        "x": 1610,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-5",
+      "astNodeId": "ast-5",
+      "type": "origins:ingredient",
+      "kind": "item_condition",
+      "title": "ingredient",
+      "signature": "item_condition|origins:ingredient||ingredient",
+      "occurrence": 1,
+      "position": {
+        "x": 1100,
+        "y": 314
+      }
+    },
+    {
+      "id": "ast-4",
+      "astNodeId": "ast-4",
+      "type": "ingredient",
+      "kind": "datatype",
+      "title": "Ingredient",
+      "signature": "datatype|ingredient||Ingredient",
+      "occurrence": 1,
+      "position": {
+        "x": 1540.6729767156814,
+        "y": 402.3948532515337
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "ast-7",
+        "astNodeId": "ast-7",
+        "type": "origins:action_on_item_use",
+        "kind": "power",
+        "title": "root",
+        "label": "root",
+        "color": "power",
+        "position": {
+          "x": 80,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "entity_action",
+            "schema": {
+              "name": "entity_action",
+              "valueKind": "slot",
+              "slotKind": "entity_action",
+              "required": true
+            },
+            "valueKind": "slot",
+            "displayValue": "-> add instinct",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-7:out:entity_action"
+          },
+          {
+            "name": "item_condition",
+            "schema": {
+              "name": "item_condition",
+              "valueKind": "slot",
+              "slotKind": "item_condition",
+              "required": true
+            },
+            "valueKind": "slot",
+            "displayValue": "-> Item Condition Or",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-7:out:item_condition"
+          }
+        ]
+      },
+      {
+        "id": "ast-1",
+        "astNodeId": "ast-1",
+        "type": "shape-shifter-curse:add_instinct",
+        "kind": "entity_action",
+        "title": "add instinct",
+        "color": "action",
+        "position": {
+          "x": 590,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "instinct_effect_id",
+            "schema": {
+              "name": "instinct_effect_id",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "FORM_USE_GOLDEN_APPLE",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-1:out:instinct_effect_id"
+          },
+          {
+            "name": "value",
+            "schema": {
+              "name": "value",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "-2.125",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-1:out:value"
+          },
+          {
+            "name": "duration",
+            "schema": {
+              "name": "duration",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "40",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-1:out:duration"
+          }
+        ]
+      },
+      {
+        "id": "ast-6",
+        "astNodeId": "ast-6",
+        "type": "origins:or",
+        "kind": "item_condition",
+        "title": "Item Condition Or",
+        "color": "condition",
+        "position": {
+          "x": 590,
+          "y": 314
+        },
+        "fields": [
+          {
+            "name": "conditions",
+            "schema": {
+              "name": "conditions",
+              "valueKind": "slot_array",
+              "slotKind": "item_condition",
+              "multi": true,
+              "required": true
+            },
+            "valueKind": "slot_array",
+            "displayValue": "Array[2]",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-6:out:conditions"
+          }
+        ]
+      },
+      {
+        "id": "ast-3",
+        "astNodeId": "ast-3",
+        "type": "origins:ingredient",
+        "kind": "item_condition",
+        "title": "ingredient",
+        "color": "condition",
+        "position": {
+          "x": 1100,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "ingredient",
+            "schema": {
+              "name": "ingredient",
+              "valueKind": "datatype",
+              "datatype": "ingredient",
+              "required": true
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Ingredient",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-3:out:ingredient"
+          }
+        ]
+      },
+      {
+        "id": "ast-2",
+        "astNodeId": "ast-2",
+        "type": "ingredient",
+        "kind": "datatype",
+        "title": "Ingredient",
+        "color": "datatype",
+        "position": {
+          "x": 1610,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "item",
+            "schema": {
+              "name": "item",
+              "valueKind": "string"
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:golden_apple",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-2:out:item"
+          }
+        ]
+      },
+      {
+        "id": "ast-5",
+        "astNodeId": "ast-5",
+        "type": "origins:ingredient",
+        "kind": "item_condition",
+        "title": "ingredient",
+        "color": "condition",
+        "position": {
+          "x": 1100,
+          "y": 314
+        },
+        "fields": [
+          {
+            "name": "ingredient",
+            "schema": {
+              "name": "ingredient",
+              "valueKind": "datatype",
+              "datatype": "ingredient",
+              "required": true
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Ingredient",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-5:out:ingredient"
+          }
+        ]
+      },
+      {
+        "id": "ast-4",
+        "astNodeId": "ast-4",
+        "type": "ingredient",
+        "kind": "datatype",
+        "title": "Ingredient",
+        "color": "datatype",
+        "position": {
+          "x": 1540.6729767156814,
+          "y": 402.3948532515337
+        },
+        "fields": [
+          {
+            "name": "item",
+            "schema": {
+              "name": "item",
+              "valueKind": "string"
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:enchanted_golden_apple",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-4:out:item"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "ast-7:entity_action->ast-1",
+        "source": "ast-7",
+        "target": "ast-1",
+        "sourceHandle": "ast-7:out:entity_action",
+        "targetHandle": "ast-1:in",
+        "fieldName": "entity_action",
+        "color": "action"
+      },
+      {
+        "id": "ast-3:ingredient->ast-2",
+        "source": "ast-3",
+        "target": "ast-2",
+        "sourceHandle": "ast-3:out:ingredient",
+        "targetHandle": "ast-2:in",
+        "fieldName": "ingredient",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-6:conditions:0->ast-3",
+        "source": "ast-6",
+        "target": "ast-3",
+        "sourceHandle": "ast-6:out:conditions",
+        "targetHandle": "ast-3:in",
+        "fieldName": "conditions",
+        "color": "condition",
+        "order": 0
+      },
+      {
+        "id": "ast-5:ingredient->ast-4",
+        "source": "ast-5",
+        "target": "ast-4",
+        "sourceHandle": "ast-5:out:ingredient",
+        "targetHandle": "ast-4:in",
+        "fieldName": "ingredient",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-6:conditions:1->ast-5",
+        "source": "ast-6",
+        "target": "ast-5",
+        "sourceHandle": "ast-6:out:conditions",
+        "targetHandle": "ast-5:in",
+        "fieldName": "conditions",
+        "color": "condition",
+        "order": 1
+      },
+      {
+        "id": "ast-7:item_condition->ast-6",
+        "source": "ast-7",
+        "target": "ast-6",
+        "sourceHandle": "ast-7:out:item_condition",
+        "targetHandle": "ast-6:in",
+        "fieldName": "item_condition",
+        "color": "condition"
+      }
+    ]
+  }
+}

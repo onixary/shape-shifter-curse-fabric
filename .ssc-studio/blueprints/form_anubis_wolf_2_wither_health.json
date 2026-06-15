@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:form_anubis_wolf_2_wither_health",
+  "updatedAt": "2026-06-09T15:14:43.349Z",
+  "viewport": {
+    "x": -2.207792207792238,
+    "y": 133.41558441558442,
+    "zoom": 0.9025974025974026
+  },
+  "nodes": [
+    {
+      "id": "ast-2",
+      "astNodeId": "ast-2",
+      "type": "shape-shifter-curse:delay_attribute",
+      "kind": "power",
+      "label": "root",
+      "title": "root",
+      "signature": "power|shape-shifter-curse:delay_attribute|root|root",
+      "occurrence": 0,
+      "position": {
+        "x": 80,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-1",
+      "astNodeId": "ast-1",
+      "type": "origins:status_effect",
+      "kind": "entity_condition",
+      "title": "status effect",
+      "signature": "entity_condition|origins:status_effect||status effect",
+      "occurrence": 0,
+      "position": {
+        "x": 551.2230215827338,
+        "y": 132.07194244604318
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "ast-2",
+        "astNodeId": "ast-2",
+        "type": "shape-shifter-curse:delay_attribute",
+        "kind": "power",
+        "title": "root",
+        "label": "root",
+        "color": "power",
+        "position": {
+          "x": 80,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "modifier",
+            "schema": {
+              "name": "modifier",
+              "valueKind": "unknown",
+              "required": true
+            },
+            "valueKind": "unknown",
+            "displayValue": "{...}",
+            "connected": false,
+            "color": "scalar",
+            "sourceHandleId": "ast-2:out:modifier"
+          },
+          {
+            "name": "tick_rate",
+            "schema": {
+              "name": "tick_rate",
+              "valueKind": "number",
+              "numberKind": "int",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "2",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-2:out:tick_rate"
+          },
+          {
+            "name": "updateHealth",
+            "schema": {
+              "name": "updateHealth",
+              "valueKind": "boolean",
+              "required": true
+            },
+            "valueKind": "boolean",
+            "displayValue": "true",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-2:out:updateHealth"
+          },
+          {
+            "name": "delay",
+            "schema": {
+              "name": "delay",
+              "valueKind": "number",
+              "numberKind": "int",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "1",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-2:out:delay"
+          },
+          {
+            "name": "condition",
+            "schema": {
+              "name": "condition",
+              "valueKind": "slot",
+              "slotKind": "entity_condition"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> status effect",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-2:out:condition"
+          }
+        ]
+      },
+      {
+        "id": "ast-1",
+        "astNodeId": "ast-1",
+        "type": "origins:status_effect",
+        "kind": "entity_condition",
+        "title": "status effect",
+        "color": "condition",
+        "position": {
+          "x": 551.2230215827338,
+          "y": 132.07194244604318
+        },
+        "fields": [
+          {
+            "name": "effect",
+            "schema": {
+              "name": "effect",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:wither",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-1:out:effect"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "ast-2:condition->ast-1",
+        "source": "ast-2",
+        "target": "ast-1",
+        "sourceHandle": "ast-2:out:condition",
+        "targetHandle": "ast-1:in",
+        "fieldName": "condition",
+        "color": "condition"
+      }
+    ]
+  }
+}

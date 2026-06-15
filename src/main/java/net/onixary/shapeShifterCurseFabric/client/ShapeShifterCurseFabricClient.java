@@ -8,10 +8,8 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderProgram;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.VertexFormats;
@@ -49,7 +47,6 @@ import net.onixary.shapeShifterCurseFabric.render.render_layer.FurGradientRender
 import net.onixary.shapeShifterCurseFabric.util.*;
 import org.lwjgl.glfw.GLFW;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -75,67 +72,17 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 	public static boolean isClipAtLedge = true;
 
 	public static void openBookScreen(PlayerEntity user) {
-		// 仅当owo_lib加载时才能调用旧版页面，否则回退回新版
-		if (commonConfig.enableNewStartBook | !FabricLoader.getInstance().isModLoaded("owo")) {
-			if (!commonConfig.enableNewStartBook) {
-				// 以未安装owo_lib为理由进入新版页面时打印日志
-				LOGGER.error("Owo lib is not installed! Old book screen is unavailable, opening new book screen instead.");
-			}
-			if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreenV2_P1)) {
-				BookOfShapeShifterScreenV2_P1 bookScreen = new BookOfShapeShifterScreenV2_P1();
-				bookScreen.currentPlayer = user;
-				MinecraftClient.getInstance().setScreen(bookScreen);
-			}
-		}
-		else {
-			// 反射
-			try {
-				Class<?> ScreenClass = Class.forName("net.onixary.shapeShifterCurseFabric.custom_ui.BookOfShapeShifterScreen");
-				Object startScreen = ScreenClass.getDeclaredConstructor().newInstance();
-				startScreen.getClass().getMethod("setCurrentPlayer", PlayerEntity.class).invoke(startScreen, user);
-				MinecraftClient.getInstance().setScreen((Screen) startScreen);
-			}
-			catch (ClassNotFoundException | InvocationTargetException | IllegalAccessException | InstantiationException | NoSuchMethodException e) {
-				LOGGER.error("Failed to open old book screen!");
-				return;
-			}
-//			if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreen)) {
-//				BookOfShapeShifterScreen bookScreen = new BookOfShapeShifterScreen();
-//				bookScreen.currentPlayer = user;
-//				MinecraftClient.getInstance().setScreen(bookScreen);
-//			}
+		if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreenV2_P1)) {
+			BookOfShapeShifterScreenV2_P1 bookScreen = new BookOfShapeShifterScreenV2_P1();
+			bookScreen.currentPlayer = user;
+			MinecraftClient.getInstance().setScreen(bookScreen);
 		}
 	}
 	public static void openStartBookScreen(PlayerEntity user) {
-		// 仅当owo_lib加载时才能调用旧版页面，否则回退回新版
-		if (commonConfig.enableNewStartBook | !FabricLoader.getInstance().isModLoaded("owo")) {
-			if (!commonConfig.enableNewStartBook) {
-				// 以未安装owo_lib为理由进入新版页面时打印日志
-				LOGGER.error("Owo lib is not installed! Old book screen is unavailable, opening new book screen instead.");
-			}
-			if (!(MinecraftClient.getInstance().currentScreen instanceof StartBookScreenV2)) {
-				StartBookScreenV2 startScreen = new StartBookScreenV2();
-				startScreen.currentPlayer = user;
-				MinecraftClient.getInstance().setScreen(startScreen);
-			}
-		}
-		else {
-			// 反射
-			try {
-				Class<?> ScreenClass = Class.forName("net.onixary.shapeShifterCurseFabric.custom_ui.StartBookScreen");
-				Object startScreen = ScreenClass.getDeclaredConstructor().newInstance();
-				startScreen.getClass().getMethod("setCurrentPlayer", PlayerEntity.class).invoke(startScreen, user);
-				MinecraftClient.getInstance().setScreen((Screen) startScreen);
-			}
-			catch (ClassNotFoundException | InvocationTargetException | IllegalAccessException | InstantiationException | NoSuchMethodException e) {
-				LOGGER.error("Failed to open old book screen!");
-				return;
-			}
-//			if (!(MinecraftClient.getInstance().currentScreen instanceof StartBookScreen)) {
-//				StartBookScreen startScreen = new StartBookScreen();
-//				startScreen.currentPlayer = user;
-//				MinecraftClient.getInstance().setScreen(startScreen);
-//			}
+		if (!(MinecraftClient.getInstance().currentScreen instanceof StartBookScreenV2)) {
+			StartBookScreenV2 startScreen = new StartBookScreenV2();
+			startScreen.currentPlayer = user;
+			MinecraftClient.getInstance().setScreen(startScreen);
 		}
 	}
 

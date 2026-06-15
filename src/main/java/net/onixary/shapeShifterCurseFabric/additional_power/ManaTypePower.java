@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import blue.endless.jankson.annotation.Nullable;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
@@ -8,10 +7,10 @@ import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
+import org.jetbrains.annotations.Nullable;
 
 public class ManaTypePower extends Power {
     private @Nullable Identifier manaType = null;
