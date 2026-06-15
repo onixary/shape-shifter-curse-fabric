@@ -16,16 +16,26 @@
     "type": "origins:and",
     "conditions": [
       {
-        "type": "origins:or",
+        "type": "origins:and",
         "conditions": [
           {
-            "type": "origins:ingredient",
-            "ingredient": {
-              "tag": "origins:meat"
-            }
+            "type": "origins:or",
+            "conditions": [
+              {
+                "type": "origins:ingredient",
+                "ingredient": {
+                  "tag": "origins:meat"
+                }
+              },
+              {
+                "type": "origins:meat"
+              }
+            ]
           },
           {
-            "type": "origins:meat"
+            "type": "shape-shifter-curse:is_vegan_ex",
+            "default": false,
+            "inverted": true
           }
         ]
       },

@@ -28,15 +28,29 @@
         "type": "origins:and",
         "conditions": [
             {
-                "type": "origins:ingredient",
-                "ingredient": {
-                    "tag": "origins:meat"
-                },
-                "inverted": true
-            },
-            {
-                "type": "origins:meat",
-                "inverted": true
+                "type": "origins:or",
+                "conditions": [
+                    {
+                        "type": "origins:and",
+                        "conditions": [
+                            {
+                                "type": "origins:ingredient",
+                                "ingredient": {
+                                    "tag": "origins:meat"
+                                },
+                                "inverted": true
+                            },
+                            {
+                                "type": "origins:meat",
+                                "inverted": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "shape-shifter-curse:is_vegan_ex",
+                        "default": false
+                    }
+                ]
             },
             {
                 "type": "origins:ingredient",
