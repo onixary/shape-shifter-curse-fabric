@@ -135,18 +135,20 @@ public class WebBridgeAction {
                 (data, entity) -> {
                     BlockPos pos = entity.getBlockPos().down();
                     if (entity.isSneaking()) {
-                        Vec3d player_pos = entity.getPos();
-                        if (player_pos.getY() - pos.up().getY() > 0.025) {
-                            // 不完整方块
-                            pos = pos.up();
-                        }
-                        float pitch = entity.getPitch();
-                        // 俯仰角取值 -90 ~ 90
-                        if (pitch > 30.0f) {
-                            pos = pos.down();
-                        } else if (pitch < -30.0f) {
-                            pos = pos.up();
-                        }
+                        pos = pos.up();
+                        // 如果需要俯仰角控制就取消下面的注释 并且把上面的 "pos = pos.up();" 给注释掉
+                        // Vec3d player_pos = entity.getPos();
+                        // if (player_pos.getY() - pos.up().getY() > 0.025) {
+                        //     // 不完整方块
+                        //     pos = pos.up();
+                        // }
+                        // float pitch = entity.getPitch();
+                        // // 俯仰角取值 -90 ~ 90
+                        // if (pitch > 30.0f) {
+                        //     pos = pos.down();
+                        // } else if (pitch < -30.0f) {
+                        //     pos = pos.up();
+                        // }
                     }
                     Direction direction = entity.getHorizontalFacing();
                     BuildWebBridge(entity.getWorld(), pos, direction, new WebBridgeConfig(data.getInt("web_bridge_length"), data.getInt("web_bridge_width")), RegCustomBlock.TEMP_WEB_BRIDGE);
