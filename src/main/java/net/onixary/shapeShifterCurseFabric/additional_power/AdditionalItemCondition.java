@@ -30,6 +30,7 @@ public class AdditionalItemCondition {
                     return totalAdd > 1;
                 }
         ));
+        FoodUtilsCondition.registerCondition(AdditionalItemCondition::register);
     }
 
     private static void register(ConditionFactory<ItemStack> conditionFactory) {

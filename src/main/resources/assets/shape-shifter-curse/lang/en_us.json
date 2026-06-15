@@ -580,7 +580,6 @@
     "text.autoconfig.shape-shifter-curse-common.option.transformativeOcelotSpawnChance": "Transformative Ocelot Spawn Success Rate",
     "text.autoconfig.shape-shifter-curse-common.option.transformativeWolfSpawnChance": "Transformative Jackal Wraith Spawn Success Rate",
     "text.autoconfig.shape-shifter-curse-common.option.transformativeSpiderSpawnChance": "Transformative Spider Spawn Success Rate",
-    "text.autoconfig.shape-shifter-curse-common.option.enableNewStartBook": "Enable The New Version of Start Book Interface",
     "text.autoconfig.shape-shifter-curse-common.option.curseMoonPhase": "Curse Moon Phase",
     "text.autoconfig.shape-shifter-curse-common.option.allowSleepInCursedMoon": "Allow Sleep In Curse Moon",
     "text.autoconfig.shape-shifter-curse-common.option.enableDebugCommand": "Enable debugging commands without permission restrictions (Do not enable on servers)",

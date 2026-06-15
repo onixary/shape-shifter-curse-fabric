@@ -32,10 +32,6 @@ public class CommonConfig implements ConfigData {
     public float transformativeSpiderSpawnChance = 0.5f;
 
     @ConfigEntry.Category("General")
-    @Comment("Use The New Start Book Interface. Default: true")
-    public boolean enableNewStartBook = true;  // 新版启动书
-
-    @ConfigEntry.Category("General")
     @Comment("Curse Moon Phase (0 ~ 7). Default: [1, 5]")
     public int[] curseMoonPhase = {1, 5};
 
