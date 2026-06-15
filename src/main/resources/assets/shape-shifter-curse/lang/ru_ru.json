@@ -535,7 +535,6 @@
     "text.autoconfig.shape-shifter-curse-common.option.transformativeOcelotSpawnChance": "Вероятность появления проклятого оцелота",
     "text.autoconfig.shape-shifter-curse-common.option.transformativeWolfSpawnChance": "Вероятность появления духа проклятого шакала",
     "text.autoconfig.shape-shifter-curse-common.option.transformativeSpiderSpawnChance": "Вероятность появления проклятого паука",
-    "text.autoconfig.shape-shifter-curse-common.option.enableNewStartBook": "Включить новую версию интерфейса стартовой книги",
     "text.autoconfig.shape-shifter-curse-common.option.curseMoonPhase": "Фаза проклятой луны",
     "text.autoconfig.shape-shifter-curse-common.option.allowSleepInCursedMoon": "Включить возможность спать в ночь проклятой луны",
     "text.autoconfig.shape-shifter-curse-common.option.enableDebugCommand": "Включить доступ к отладочным командам для всех (не включать на серверах!)",
