@@ -11,9 +11,9 @@ import net.minecraft.util.Pair;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.random.Random;
 import net.onixary.shapeShifterCurseFabric.blocks.TempWebBridgeBlock;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
@@ -133,7 +133,21 @@ public class WebBridgeAction {
                         .add("web_bridge_length", SerializableDataTypes.INT, 16)
                         .add("web_bridge_width", SerializableDataTypes.INT, 0),
                 (data, entity) -> {
-                    BlockPos pos = entity.getBlockPos();
+                    BlockPos pos = entity.getBlockPos().down();
+                    if (entity.isSneaking()) {
+                        Vec3d player_pos = entity.getPos();
+                        if (player_pos.getY() - pos.up().getY() > 0.025) {
+                            // 不完整方块
+                            pos = pos.up();
+                        }
+                        float pitch = entity.getPitch();
+                        // 俯仰角取值 -90 ~ 90
+                        if (pitch > 30.0f) {
+                            pos = pos.down();
+                        } else if (pitch < -30.0f) {
+                            pos = pos.up();
+                        }
+                    }
                     Direction direction = entity.getHorizontalFacing();
                     BuildWebBridge(entity.getWorld(), pos, direction, new WebBridgeConfig(data.getInt("web_bridge_length"), data.getInt("web_bridge_width")), RegCustomBlock.TEMP_WEB_BRIDGE);
                 }
