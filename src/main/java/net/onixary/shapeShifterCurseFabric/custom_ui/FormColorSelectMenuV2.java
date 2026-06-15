@@ -364,8 +364,8 @@ public class FormColorSelectMenuV2 extends Screen implements FormTextureUtils.Te
                 FormTextureUtils.ARGB2ABGR(eyeColorB),
                 FormTextureUtils.ARGB2ABGR(eyeColorA),
                 primaryGreyReverse,
-                accent2GreyReverse,
-                accent1GreyReverse
+                accent1GreyReverse,
+                accent2GreyReverse
         );
         this.isColorSettingDirty = false;
     }
