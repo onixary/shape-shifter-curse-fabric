@@ -49,11 +49,18 @@ public class PotionEntityMixin {
 
     @Inject(method = "applySplashPotion", at = @At("HEAD"))
     private void onApplySplashPotion(List<StatusEffectInstance> effects, Entity entity, CallbackInfo ci) {
-        if (entity instanceof PlayerEntity player) {
-            PowerHolderComponent.getPowers(player, ActionOnSplashPotionTakeEffect.class)
-                    .stream()
-                    .filter(ActionOnSplashPotionTakeEffect::isActive)
-                    .forEach(ActionOnSplashPotionTakeEffect::executeAction);
+        PotionEntity self = (PotionEntity) (Object) this;
+        Box box = self.getBoundingBox().expand(4.0, 2.0, 4.0);
+        List<LivingEntity> entities = self.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
+
+        for (LivingEntity livingEntity : entities) {
+            double distance = self.squaredDistanceTo(livingEntity);
+            if (distance < 16.0 && livingEntity instanceof PlayerEntity player) {
+                PowerHolderComponent.getPowers(player, ActionOnSplashPotionTakeEffect.class)
+                        .stream()
+                        .filter(ActionOnSplashPotionTakeEffect::isActive)
+                        .forEach(ActionOnSplashPotionTakeEffect::executeAction);
+            }
         }
     }
 
