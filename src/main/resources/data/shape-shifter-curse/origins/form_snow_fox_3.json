@@ -34,7 +34,9 @@
         "shape-shifter-curse:form_snow_fox_bottled_snowfall_cooldown",
         "shape-shifter-curse:form_familiar_fox_sound_key",
         "shape-shifter-curse:form_camera_bobbing_feral",
-        "shape-shifter-curse:feral_form_step_sound_speed_up"
+        "shape-shifter-curse:feral_form_step_sound_speed_up",
+        "shape-shifter-curse:form_snow_fox_3_tan_temperature_remap",
+        "shape-shifter-curse:form_tan_prevent_dirty_water_thirst"
     ],
     "icon": {
         "item": "minecraft:player_head"

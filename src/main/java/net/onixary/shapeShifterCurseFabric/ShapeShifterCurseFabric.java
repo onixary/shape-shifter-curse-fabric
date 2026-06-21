@@ -48,6 +48,8 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.Transfo
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.spider.TransformativeSpiderEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.wolf.TransformativeWolfEntity;
+import net.onixary.shapeShifterCurseFabric.integration.toughasnails.ToughAsNailsPowerUtils;
+import net.onixary.shapeShifterCurseFabric.integration.toughasnails.ToughAsNailsTemperatureIntegration;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
@@ -251,6 +253,9 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             PatronUtils.OnServerLoad(server);
             TransformManager.onServerInit();
             AccessoryUtils.onStartServer();
+            if (ToughAsNailsPowerUtils.isToughAsNailsLoaded()) {
+                ToughAsNailsTemperatureIntegration.registerPlayerTemperatureModifier();
+            }
         });
         // 获取动态Form(DataPack)
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new FormDataPackReloadListener());
