@@ -35,6 +35,7 @@
     "integration.AppleSkin",
     "integration.AzureLib_AzProvider",
     "integration.ToughAsNailsDrinkInWorldPacketMixin",
+    "integration.ToughAsNailsBuiltInTemperatureModifierMixin",
     "integration.ToughAsNailsThirstHandlerMixin",
     "integration.ToughAsNailsThirstHooksMixin",
     "mob.FoxEntityMixin",

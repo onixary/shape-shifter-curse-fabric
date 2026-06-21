@@ -27,10 +27,10 @@
     "shape-shifter-curse:form_spider_3_make_cobweb",
     "shape-shifter-curse:form_spider_3_make_web_composter",
     "shape-shifter-curse:form_spider_3_night_vision",
-
     "shape-shifter-curse:form_spider_sound",
     "shape-shifter-curse:form_spider_sound_hurt",
-    "shape-shifter-curse:form_spider_sound_key"
+    "shape-shifter-curse:form_spider_sound_key",
+    "shape-shifter-curse:form_tan_prevent_dirty_water_thirst"
   ],
   "icon": {
     "item": "minecraft:player_head"
