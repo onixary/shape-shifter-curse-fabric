@@ -1,99 +1,107 @@
 package net.onixary.shapeShifterCurseFabric.util.util;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.function.Function;
 
 public class CachedDataMap <KEY, ARG, VALUE> {
-    public final HashMap<KEY, CachedData<VALUE>> map = new HashMap<>();
-    public Function<ARG, VALUE> supplier;
+    public final HashMap<KEY, CachedData<ARG, VALUE>> map = new HashMap<>();
+    public @NotNull Function<ARG, VALUE> supplier;
     public @Nullable Function<ARG, KEY> keySupplier = null;
 
-    public CachedDataMap(Function<ARG, VALUE> supplier) {
+    public CachedDataMap(@NotNull Function<ARG, VALUE> supplier) {
         this.supplier = supplier;
     }
 
-    public CachedDataMap(Function<ARG, VALUE> supplier, Function<ARG, KEY> keySupplier) {
+    public CachedDataMap(@NotNull Function<ARG, VALUE> supplier, @Nullable Function<ARG, KEY> keySupplier) {
         this.supplier = supplier;
         this.keySupplier = keySupplier;
     }
 
-    public VALUE get(KEY key, ARG arg) {
-        CachedData<VALUE> cachedData = map.get(key);
-        if (cachedData == null) {
-            cachedData = new CachedData<>(() -> supplier.apply(arg));
-            map.put(key, cachedData);
-        }
-        return cachedData.get();
-    }
-
-    public VALUE get(ARG key) {
+    public void _assertNotNullKeySupplier() {
         if (keySupplier == null) {
             throw new IllegalStateException("keySupplier is null!");
         }
-        return this.get(keySupplier.apply(key), key);
     }
 
-    public CachedData<VALUE> getCache(KEY key, ARG arg) {
-        CachedData<VALUE> cachedData = map.get(key);
+    public VALUE get(KEY key, ARG arg) {
+        CachedData<ARG, VALUE> cachedData = map.get(key);
         if (cachedData == null) {
-            cachedData = new CachedData<>(() -> supplier.apply(arg));
+            cachedData = new CachedData<>(supplier);
+            map.put(key, cachedData);
+        }
+        return cachedData.get(arg);
+    }
+
+    public VALUE get(ARG arg) {
+        _assertNotNullKeySupplier();
+        return this.get(keySupplier.apply(arg), arg);
+    }
+
+    public CachedData<ARG, VALUE> getCacheK(KEY key) {
+        CachedData<ARG, VALUE> cachedData = map.get(key);
+        if (cachedData == null) {
+            cachedData = new CachedData<>(supplier);
             map.put(key, cachedData);
         }
         return cachedData;
     }
 
-    public CachedData<VALUE> getCache(ARG key) {
-        if (keySupplier == null) {
-            throw new IllegalStateException("keySupplier is null!");
-        }
-        return this.getCache(keySupplier.apply(key), key);
+    public CachedData<ARG, VALUE> getCacheA(ARG key) {
+        _assertNotNullKeySupplier();
+        return this.getCacheK(keySupplier.apply(key));
     }
 
-    public void updateK(KEY key) {
-        CachedData<VALUE> cachedData = map.get(key);
+    public void updateK(KEY key, ARG arg) {
+        CachedData<ARG, VALUE> cachedData = map.get(key);
         if (cachedData != null) {
-            cachedData.update();
+            cachedData.update(arg);
         }
     }
 
-    public void updateA(ARG key) {
-        if (keySupplier == null) {
-            throw new IllegalStateException("keySupplier is null!");
-        }
-        this.updateK(keySupplier.apply(key));
+    public void updateA(ARG arg) {
+        _assertNotNullKeySupplier();
+        this.updateK(keySupplier.apply(arg), arg);
     }
 
-    public void setDirtyK(KEY key) {
-        CachedData<VALUE> cachedData = map.get(key);
+    public void markDirtyK(KEY key) {
+        CachedData<ARG, VALUE> cachedData = map.get(key);
         if (cachedData != null) {
-            cachedData.setDirty();
+            cachedData.markDirty();
         }
     }
 
     public void setDirtyA(ARG key) {
-        if (keySupplier == null) {
-            throw new IllegalStateException("keySupplier is null!");
-        }
-        this.setDirtyK(keySupplier.apply(key));
+        _assertNotNullKeySupplier();
+        this.markDirtyK(keySupplier.apply(key));
     }
 
-    public void set(KEY key, ARG arg, VALUE value) {
-        CachedData<VALUE> cachedData = this.getCache(key, arg);
+    public void setK(KEY key, VALUE value) {
+        CachedData<ARG, VALUE> cachedData = this.getCacheK(key);
         if (cachedData != null) {
             cachedData.set(value);
         }
     }
 
-    public void set(ARG key, VALUE value) {
-        if (keySupplier == null) {
-            throw new IllegalStateException("keySupplier is null!");
-        }
-        this.set(keySupplier.apply(key), key, value);
+    public void setA(ARG key, VALUE value) {
+        _assertNotNullKeySupplier();
+        this.setK(keySupplier.apply(key), value);
     }
 
     public void clear() {
         map.clear();
+    }
+
+    public void setSupplier(@NotNull Function<ARG, VALUE> supplier) {
+        this.supplier = supplier;
+        for (CachedData<ARG, VALUE> cachedData : map.values()) {
+            cachedData.setSupplier(supplier);
+        }
+    }
+
+    public void setKeySupplier(@Nullable Function<ARG, KEY> keySupplier) {
+        this.keySupplier = keySupplier;
     }
 }

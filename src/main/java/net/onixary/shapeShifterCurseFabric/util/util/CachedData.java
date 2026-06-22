@@ -5,46 +5,46 @@ package net.onixary.shapeShifterCurseFabric.util.util;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Supplier;
+import java.util.function.Function;
 
-public class CachedData <T> {
+public class CachedData <ARG, VALUE> {
     public boolean isDirty = false;
-    public @Nullable T data;
-    public @NotNull Supplier<T> supplier;
+    public @Nullable VALUE data;
+    public @NotNull Function<ARG, VALUE> supplier;
 
-    public CachedData(@Nullable T data, @NotNull Supplier<T> supplier) {
-        this.data = data;
+    public CachedData(@NotNull Function<ARG, VALUE> supplier) {
         this.supplier = supplier;
+        this.data = null;
+        this.markDirty();
     }
 
-    public CachedData(@NotNull Supplier<T> supplier) {
-        this.supplier = supplier;
-        this.data = supplier.get();
-    }
-
-    public @Nullable T get() {
+    public @Nullable VALUE get(ARG arg) {
         if (isDirty) {
-            this.update();
+            this.update(arg);
         }
         return data;
     }
 
-    public void setDirty() {
+    public CachedData<ARG, VALUE> markDirty() {
         isDirty = true;
+        return this;
     }
 
-    public void update() {
-        data = supplier.get();
+    public CachedData<ARG, VALUE> update(ARG arg) {
+        data = supplier.apply(arg);
         isDirty = false;
+        return this;
     }
 
-    public void set(@Nullable T data) {
+    public CachedData<ARG, VALUE> set(@Nullable VALUE data) {
         this.data = data;
         isDirty = false;
+        return this;
     }
 
-    public void setSupplier(@NotNull Supplier<T> supplier) {
+    public CachedData<ARG, VALUE> setSupplier(@NotNull Function<ARG, VALUE> supplier) {
         this.supplier = supplier;
         isDirty = true;
+        return this;
     }
 }
