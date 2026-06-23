@@ -1,25 +1,27 @@
 {
-    "powers": [
-        "shape-shifter-curse:no_render_arm",
-        "shape-shifter-curse:form_feral_cat_sp_scale",
-        "shape-shifter-curse:form_disable_leg_armor",
-        "shape-shifter-curse:form_disable_feet_armor",
-        "shape-shifter-curse:velvet_paws",
-        "shape-shifter-curse:scare_creepers",
-        "shape-shifter-curse:fall_immunity",
-        "shape-shifter-curse:form_ocelot_sound",
-        "shape-shifter-curse:form_ocelot_sound_hurt",
-        "shape-shifter-curse:form_ocelot_hiss_phantom",
-        "shape-shifter-curse:form_ocelot_sound_key",
-        "shape-shifter-curse:form_camera_bobbing_feral",
-        "shape-shifter-curse:form_ocelot_3_climb_all",
-        "shape-shifter-curse:feral_form_step_sound_speed_up",
-        "shape-shifter-curse:cat_vision"
-    ],
-    "icon": {
-        "item": "minecraft:player_head"
-    },
-    "order": 0,
-    "unchoosable": true,
-    "impact": 0
+  "powers": [
+    "shape-shifter-curse:no_render_arm",
+    "shape-shifter-curse:form_feral_cat_sp_scale",
+    "shape-shifter-curse:form_disable_leg_armor",
+    "shape-shifter-curse:form_disable_feet_armor",
+    "shape-shifter-curse:velvet_paws",
+    "shape-shifter-curse:scare_creepers",
+    "shape-shifter-curse:fall_immunity",
+    "shape-shifter-curse:form_ocelot_sound",
+    "shape-shifter-curse:form_ocelot_sound_hurt",
+    "shape-shifter-curse:form_ocelot_hiss_phantom",
+    "shape-shifter-curse:form_ocelot_sound_key",
+    "shape-shifter-curse:form_camera_bobbing_feral",
+    "shape-shifter-curse:form_ocelot_3_climb_all",
+    "shape-shifter-curse:feral_form_step_sound_speed_up",
+    "shape-shifter-curse:cat_vision",
+    "shape-shifter-curse:form_tan_prevent_dirty_water_thirst",
+    "shape-shifter-curse:form_tan_cold_resistance_mild"
+  ],
+  "icon": {
+    "item": "minecraft:player_head"
+  },
+  "order": 0,
+  "unchoosable": true,
+  "impact": 0
 }
