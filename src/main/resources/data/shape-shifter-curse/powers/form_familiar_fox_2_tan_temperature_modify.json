@@ -1,0 +1,8 @@
+{
+  "type": "shape-shifter-curse:tan_form_temperature_modifier",
+  "icy_offset": 0,
+  "cold_offset": 0,
+  "neutral_offset": 0,
+  "warm_offset": -1,
+  "hot_offset": -1
+}

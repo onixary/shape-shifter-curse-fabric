@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:form_snow_fox_3_tan_temperature_remap",
+  "updatedAt": "2026-06-21T15:15:32.673Z",
+  "viewport": {
+    "x": 506.5,
+    "y": 146,
+    "zoom": 1.4
+  },
+  "nodes": [
+    {
+      "id": "ast-1",
+      "astNodeId": "ast-1",
+      "type": "shape-shifter-curse:tan_form_temperature_modifier",
+      "kind": "power",
+      "label": "root",
+      "title": "root",
+      "signature": "power|shape-shifter-curse:tan_form_temperature_modifier|root|root",
+      "occurrence": 0,
+      "position": {
+        "x": 80,
+        "y": 80
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "ast-1",
+        "astNodeId": "ast-1",
+        "type": "shape-shifter-curse:tan_form_temperature_modifier",
+        "kind": "power",
+        "title": "root",
+        "label": "root",
+        "color": "power",
+        "position": {
+          "x": 80,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "icy_offset",
+            "schema": {
+              "name": "icy_offset",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "2",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-1:out:icy_offset"
+          },
+          {
+            "name": "cold_offset",
+            "schema": {
+              "name": "cold_offset",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "1",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-1:out:cold_offset"
+          },
+          {
+            "name": "neutral_offset",
+            "schema": {
+              "name": "neutral_offset",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "1",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-1:out:neutral_offset"
+          },
+          {
+            "name": "warm_offset",
+            "schema": {
+              "name": "warm_offset",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "1",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-1:out:warm_offset"
+          },
+          {
+            "name": "hot_offset",
+            "schema": {
+              "name": "hot_offset",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-1:out:hot_offset"
+          }
+        ]
+      }
+    ],
+    "edges": []
+  }
+}

@@ -1,0 +1,414 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:form_snow_fox_2_charm_of_reverse_thermometer_trinket",
+  "updatedAt": "2026-06-21T15:17:30.057Z",
+  "viewport": {
+    "x": 343.736811592055,
+    "y": -569.3214878356684,
+    "zoom": 1.4
+  },
+  "nodes": [
+    {
+      "id": "ast-4",
+      "astNodeId": "ast-4",
+      "type": "shape-shifter-curse:delay_attribute",
+      "kind": "power",
+      "label": "reverse_hot_cold",
+      "title": "reverse_hot_cold",
+      "signature": "power|shape-shifter-curse:delay_attribute|reverse_hot_cold|reverse_hot_cold",
+      "occurrence": 0,
+      "position": {
+        "x": 80,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-1",
+      "astNodeId": "ast-1",
+      "type": "attributed_attribute_modifier",
+      "kind": "datatype",
+      "title": "Attributed Attribute Modifier",
+      "signature": "datatype|attributed_attribute_modifier||Attributed Attribute Modifier",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-3",
+      "astNodeId": "ast-3",
+      "type": "origins:biome",
+      "kind": "entity_condition",
+      "title": "biome",
+      "signature": "entity_condition|origins:biome||biome",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 314
+      }
+    },
+    {
+      "id": "ast-2",
+      "astNodeId": "ast-2",
+      "type": "origins:temperature",
+      "kind": "entity_condition",
+      "title": "temperature",
+      "signature": "entity_condition|origins:temperature||temperature",
+      "occurrence": 0,
+      "position": {
+        "x": 1100,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-5",
+      "astNodeId": "ast-5",
+      "type": "shape-shifter-curse:tan_form_temperature_modifier",
+      "kind": "power",
+      "label": "reverse_tan_temperature",
+      "title": "reverse_tan_temperature",
+      "signature": "power|shape-shifter-curse:tan_form_temperature_modifier|reverse_tan_temperature|reverse_tan_temperature",
+      "occurrence": 0,
+      "position": {
+        "x": 74.91836376404498,
+        "y": 516.6370845037453
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "ast-4",
+        "astNodeId": "ast-4",
+        "type": "shape-shifter-curse:delay_attribute",
+        "kind": "power",
+        "title": "reverse_hot_cold",
+        "label": "reverse_hot_cold",
+        "color": "power",
+        "position": {
+          "x": 80,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "modifier",
+            "schema": {
+              "name": "modifier",
+              "valueKind": "datatype",
+              "datatype": "attributed_attribute_modifier"
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Attributed Attribute Modifier",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-4:out:modifier"
+          },
+          {
+            "name": "tick_rate",
+            "schema": {
+              "name": "tick_rate",
+              "valueKind": "number",
+              "numberKind": "int",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "20",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-4:out:tick_rate"
+          },
+          {
+            "name": "updateHealth",
+            "schema": {
+              "name": "updateHealth",
+              "valueKind": "boolean",
+              "required": true
+            },
+            "valueKind": "boolean",
+            "displayValue": "true",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-4:out:updateHealth"
+          },
+          {
+            "name": "delay",
+            "schema": {
+              "name": "delay",
+              "valueKind": "number",
+              "numberKind": "int",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "5",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-4:out:delay"
+          },
+          {
+            "name": "condition",
+            "schema": {
+              "name": "condition",
+              "valueKind": "slot",
+              "slotKind": "entity_condition"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> biome",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-4:out:condition"
+          }
+        ]
+      },
+      {
+        "id": "ast-1",
+        "astNodeId": "ast-1",
+        "type": "attributed_attribute_modifier",
+        "kind": "datatype",
+        "title": "Attributed Attribute Modifier",
+        "color": "datatype",
+        "position": {
+          "x": 590,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "attribute",
+            "schema": {
+              "name": "attribute",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:generic.max_health",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-1:out:attribute"
+          },
+          {
+            "name": "value",
+            "schema": {
+              "name": "value",
+              "valueKind": "number",
+              "numberKind": "float",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "-6",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-1:out:value"
+          },
+          {
+            "name": "operation",
+            "schema": {
+              "name": "operation",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "addition",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-1:out:operation"
+          }
+        ]
+      },
+      {
+        "id": "ast-3",
+        "astNodeId": "ast-3",
+        "type": "origins:biome",
+        "kind": "entity_condition",
+        "title": "biome",
+        "color": "condition",
+        "position": {
+          "x": 590,
+          "y": 314
+        },
+        "fields": [
+          {
+            "name": "condition",
+            "schema": {
+              "name": "condition",
+              "valueKind": "slot",
+              "slotKind": "biome_condition"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> temperature",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-3:out:condition"
+          }
+        ]
+      },
+      {
+        "id": "ast-2",
+        "astNodeId": "ast-2",
+        "type": "origins:temperature",
+        "kind": "entity_condition",
+        "title": "temperature",
+        "color": "condition",
+        "position": {
+          "x": 1100,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "comparison",
+            "schema": {
+              "name": "comparison",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "<=",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-2:out:comparison"
+          },
+          {
+            "name": "compare_to",
+            "schema": {
+              "name": "compare_to",
+              "valueKind": "number",
+              "numberKind": "float",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "0",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-2:out:compare_to"
+          }
+        ]
+      },
+      {
+        "id": "ast-5",
+        "astNodeId": "ast-5",
+        "type": "shape-shifter-curse:tan_form_temperature_modifier",
+        "kind": "power",
+        "title": "reverse_tan_temperature",
+        "label": "reverse_tan_temperature",
+        "color": "power",
+        "position": {
+          "x": 74.91836376404498,
+          "y": 516.6370845037453
+        },
+        "fields": [
+          {
+            "name": "icy_offset",
+            "schema": {
+              "name": "icy_offset",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-5:out:icy_offset"
+          },
+          {
+            "name": "cold_offset",
+            "schema": {
+              "name": "cold_offset",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "-1",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-5:out:cold_offset"
+          },
+          {
+            "name": "neutral_offset",
+            "schema": {
+              "name": "neutral_offset",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-5:out:neutral_offset"
+          },
+          {
+            "name": "warm_offset",
+            "schema": {
+              "name": "warm_offset",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "-1",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-5:out:warm_offset"
+          },
+          {
+            "name": "hot_offset",
+            "schema": {
+              "name": "hot_offset",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "-2",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-5:out:hot_offset"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "ast-4:modifier->ast-1",
+        "source": "ast-4",
+        "target": "ast-1",
+        "sourceHandle": "ast-4:out:modifier",
+        "targetHandle": "ast-1:in",
+        "fieldName": "modifier",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-3:condition->ast-2",
+        "source": "ast-3",
+        "target": "ast-2",
+        "sourceHandle": "ast-3:out:condition",
+        "targetHandle": "ast-2:in",
+        "fieldName": "condition",
+        "color": "condition"
+      },
+      {
+        "id": "ast-4:condition->ast-3",
+        "source": "ast-4",
+        "target": "ast-3",
+        "sourceHandle": "ast-4:out:condition",
+        "targetHandle": "ast-3:in",
+        "fieldName": "condition",
+        "color": "condition"
+      }
+    ]
+  }
+}

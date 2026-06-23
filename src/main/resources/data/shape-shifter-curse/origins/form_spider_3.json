@@ -31,11 +31,11 @@
         "shape-shifter-curse:form_spider_3_make_web_composter",
         "shape-shifter-curse:form_spider_3_mana_attack_cocooned_enemy",
         "shape-shifter-curse:form_spider_3_auto_feed",
-
         "shape-shifter-curse:form_spider_sound",
         "shape-shifter-curse:form_spider_sound_hurt",
         "shape-shifter-curse:form_spider_sound_key",
-        "shape-shifter-curse:form_spider_3_step_sound_speed_up"
+        "shape-shifter-curse:form_spider_3_step_sound_speed_up",
+        "shape-shifter-curse:form_tan_prevent_dirty_water_thirst"
     ],
     "icon": {
         "item": "minecraft:player_head"

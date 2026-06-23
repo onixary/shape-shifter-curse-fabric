@@ -1,0 +1,188 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:form_tan_axolotl_thirst_in_water",
+  "updatedAt": "2026-06-21T14:37:18.684Z",
+  "viewport": {
+    "x": 33.07085877743725,
+    "y": -187.79209168665955,
+    "zoom": 1.4
+  },
+  "nodes": [
+    {
+      "id": "new-2",
+      "astNodeId": "new-2",
+      "type": "origins:action_over_time",
+      "kind": "power",
+      "title": "action over time",
+      "signature": "power|origins:action_over_time||action over time",
+      "occurrence": 0,
+      "position": {
+        "x": 143.00000871930797,
+        "y": 203.78571864536846
+      }
+    },
+    {
+      "id": "new-3",
+      "astNodeId": "new-3",
+      "type": "shape-shifter-curse:tan_add_thirst",
+      "kind": "entity_action",
+      "title": "TAN Add Thirst",
+      "signature": "entity_action|shape-shifter-curse:tan_add_thirst||TAN Add Thirst",
+      "occurrence": 0,
+      "position": {
+        "x": 633.6636592228683,
+        "y": 217.70863691904262
+      }
+    },
+    {
+      "id": "new-4",
+      "astNodeId": "new-4",
+      "type": "origins:submerged_in",
+      "kind": "entity_condition",
+      "title": "submerged in",
+      "signature": "entity_condition|origins:submerged_in||submerged in",
+      "occurrence": 0,
+      "position": {
+        "x": 615.8065163657257,
+        "y": 527.7086369190428
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "new-2",
+        "astNodeId": "new-2",
+        "type": "origins:action_over_time",
+        "kind": "power",
+        "title": "action over time",
+        "color": "power",
+        "position": {
+          "x": 143.00000871930797,
+          "y": 203.78571864536846
+        },
+        "fields": [
+          {
+            "name": "entity_action",
+            "schema": {
+              "name": "entity_action",
+              "valueKind": "slot",
+              "slotKind": "entity_action",
+              "required": true
+            },
+            "valueKind": "slot",
+            "displayValue": "-> TAN Add Thirst",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "new-2:out:entity_action"
+          },
+          {
+            "name": "interval",
+            "schema": {
+              "name": "interval",
+              "valueKind": "number",
+              "numberKind": "int",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "10",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "new-2:out:interval"
+          },
+          {
+            "name": "condition",
+            "schema": {
+              "name": "condition",
+              "valueKind": "slot",
+              "slotKind": "entity_condition"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> submerged in",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "new-2:out:condition"
+          }
+        ]
+      },
+      {
+        "id": "new-3",
+        "astNodeId": "new-3",
+        "type": "shape-shifter-curse:tan_add_thirst",
+        "kind": "entity_action",
+        "title": "TAN Add Thirst",
+        "color": "action",
+        "position": {
+          "x": 633.6636592228683,
+          "y": 217.70863691904262
+        },
+        "fields": [
+          {
+            "name": "amount",
+            "schema": {
+              "name": "amount",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "1",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "new-3:out:amount"
+          }
+        ]
+      },
+      {
+        "id": "new-4",
+        "astNodeId": "new-4",
+        "type": "origins:submerged_in",
+        "kind": "entity_condition",
+        "title": "submerged in",
+        "color": "condition",
+        "position": {
+          "x": 615.8065163657257,
+          "y": 527.7086369190428
+        },
+        "fields": [
+          {
+            "name": "fluid",
+            "schema": {
+              "name": "fluid",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "water",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "new-4:out:fluid"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "new-2:out:entity_action->new-3:1782052605072",
+        "source": "new-2",
+        "target": "new-3",
+        "sourceHandle": "new-2:out:entity_action",
+        "targetHandle": "new-3:in",
+        "fieldName": "entity_action",
+        "color": "action"
+      },
+      {
+        "id": "new-2:out:condition->new-4:1782052628121",
+        "source": "new-2",
+        "target": "new-4",
+        "sourceHandle": "new-2:out:condition",
+        "targetHandle": "new-4:in",
+        "fieldName": "condition",
+        "color": "condition"
+      }
+    ]
+  }
+}

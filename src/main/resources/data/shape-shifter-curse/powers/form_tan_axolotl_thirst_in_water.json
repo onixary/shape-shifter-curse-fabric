@@ -1,0 +1,12 @@
+{
+  "type": "origins:action_over_time",
+  "entity_action": {
+    "type": "shape-shifter-curse:tan_add_thirst",
+    "amount": 1
+  },
+  "interval": 10,
+  "condition": {
+    "type": "origins:submerged_in",
+    "fluid": "water"
+  }
+}

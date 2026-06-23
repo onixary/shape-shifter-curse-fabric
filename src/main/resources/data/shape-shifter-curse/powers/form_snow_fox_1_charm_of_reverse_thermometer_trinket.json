@@ -1,11 +1,10 @@
 {
   "type": "origins:multiple",
-
   "reverse_hot_cold": {
     "type": "shape-shifter-curse:delay_attribute",
     "modifier": {
       "attribute": "minecraft:generic.max_health",
-      "value": -4.0,
+      "value": -4,
       "operation": "addition"
     },
     "tick_rate": 20,
@@ -19,5 +18,13 @@
         "compare_to": 0
       }
     }
+  },
+  "reverse_tan_temperature": {
+    "type": "shape-shifter-curse:tan_form_temperature_modifier",
+    "icy_offset": 0,
+    "cold_offset": 0,
+    "neutral_offset": 0,
+    "warm_offset": -1,
+    "hot_offset": -1
   }
 }

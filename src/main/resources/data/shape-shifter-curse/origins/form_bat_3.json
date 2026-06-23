@@ -26,7 +26,9 @@
         "shape-shifter-curse:form_bat_sound_hurt",
         "shape-shifter-curse:form_bat_diamond_mining_claw_tool",
         "shape-shifter-curse:form_bat_sound_key",
-        "shape-shifter-curse:form_camera_bobbing_bat"
+        "shape-shifter-curse:form_camera_bobbing_bat",
+        "shape-shifter-curse:form_tan_prevent_dirty_water_thirst",
+        "shape-shifter-curse:form_tan_cold_resistance_mild"
     ],
     "icon": {
         "item": "minecraft:player_head"

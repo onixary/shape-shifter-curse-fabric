@@ -32,7 +32,9 @@
         "shape-shifter-curse:form_ocelot_hiss_phantom",
         "shape-shifter-curse:form_ocelot_sound_key",
         "shape-shifter-curse:form_camera_bobbing_feral",
-        "shape-shifter-curse:feral_form_step_sound_speed_up"
+        "shape-shifter-curse:feral_form_step_sound_speed_up",
+        "shape-shifter-curse:form_tan_prevent_dirty_water_thirst",
+        "shape-shifter-curse:form_tan_cold_resistance_mild"
     ],
     "icon": {
         "item": "minecraft:player_head"
