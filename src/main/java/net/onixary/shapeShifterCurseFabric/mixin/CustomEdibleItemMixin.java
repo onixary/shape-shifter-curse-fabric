@@ -37,7 +37,7 @@ public abstract class CustomEdibleItemMixin {
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void onUse(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         ItemStack stack = user.getStackInHand(hand);
-        PlayerFormBase currentForm = FormAbilityManager.getForm(user);
+        IForm currentForm = FormAbilityManager.getForm(user);
         canConsumeCustomFood = false;
         if(currentForm != null){
 
@@ -81,7 +81,7 @@ public abstract class CustomEdibleItemMixin {
     @Inject(method = "finishUsing", at = @At("HEAD"), cancellable = true)
     private void onFinishUsing(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
         if(user instanceof PlayerEntity){
-            PlayerFormBase currentForm = FormAbilityManager.getForm((PlayerEntity) user);
+            IForm currentForm = FormAbilityManager.getForm((PlayerEntity) user);
 //            if ((stack.getItem() == Items.AMETHYST_SHARD) && (currentForm == PlayerForms.ALLAY_SP)) {
             if ((stack.getItem() == Items.AMETHYST_SHARD) && (PowerHolderComponent.hasPower(user, CanEatOtherItemPower.class))) {
                 if (user instanceof PlayerEntity player) {

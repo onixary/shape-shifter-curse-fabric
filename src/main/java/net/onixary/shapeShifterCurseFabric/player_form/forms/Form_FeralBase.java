@@ -3,18 +3,24 @@ package net.onixary.shapeShifterCurseFabric.player_form.forms;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.player_animation.v3.*;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.*;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateEnum;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.NormalForm;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 // 通用四足形态
-public class Form_FeralBase extends PlayerFormBase {
+public class Form_FeralBase extends NormalForm {
+    // 用模版的需要自行修改canSneakRush 不用模版的直接改AnimStateController
+    public boolean canSneakRush = false;
+
     public Form_FeralBase(Identifier formID) {
         super(formID);
-        this.setBodyType(PlayerFormBodyType.FERAL);
+        this.bodyType(PlayerFormBodyType.FERAL);
     }
 
     // 共用动画 其他类尽量使用private
@@ -77,14 +83,14 @@ public class Form_FeralBase extends PlayerFormBase {
                 case ANIM_STATE_USE_ITEM:
                     return USE_ITEM_CONTROLLER;
                 case ANIM_STATE_WALK:
-                    if (this.getCanSneakRush()) {
+                    if (this.canSneakRush) {
                         return WALK_CONTROLLER_SNEAK_RUSH;
                     }
                     else {
                         return WALK_CONTROLLER;
                     }
                 case ANIM_STATE_SPRINT:
-                    if (this.getCanSneakRush()) {
+                    if (this.canSneakRush) {
                         return SPRINT_CONTROLLER_SNEAK_RUSH;
                     }
                     else {

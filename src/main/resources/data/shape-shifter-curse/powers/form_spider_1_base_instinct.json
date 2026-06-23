@@ -1,6 +1,6 @@
 {
     "type": "shape-shifter-curse:add_sustained_instinct",
-    "instinct_effect_id": "FORM_SPIDER_1_BASE",
+    "instinct_effect_id": "shape-shifter-curse:form_spider_1_base",
     "value": 0.005,
     "duration": 1
 }

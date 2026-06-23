@@ -24,9 +24,6 @@ import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.status_effects.EntangledEffectUtils;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Map;
-import java.util.Optional;
-
 import static net.onixary.shapeShifterCurseFabric.entity.RegCustomEntity.WEB_BULLET;
 
 public class WebBullet extends ThrownItemEntity {

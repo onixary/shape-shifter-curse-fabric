@@ -16,13 +16,12 @@ import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnSprintingToS
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
+import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.jetbrains.annotations.Nullable;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
@@ -132,13 +131,10 @@ public class ModPacketsC2S {
         minecraftServer.execute(() -> {
             // 通过 UUID 获取玩家实例
             // ServerPlayerEntity targetPlayer = minecraftServer.getPlayerManager().getPlayer(playerUuid);
-            ServerPlayerEntity targetPlayer = playerEntity;
-            if (targetPlayer != null && RegPlayerForms.ORIGINAL_BEFORE_ENABLE.equals(RegPlayerFormComponent.PLAYER_FORM.get(targetPlayer).getCurrentForm())) {
-                TransformManager.handleDirectTransform(targetPlayer, RegPlayerForms.ORIGINAL_SHIFTER, false);
-                // 触发自定义成就
-                ShapeShifterCurseFabric.ON_ENABLE_MOD.trigger(targetPlayer);
-                // info
-                targetPlayer.sendMessage(Text.translatable("info.shape-shifter-curse.on_enable_mod").formatted(Formatting.LIGHT_PURPLE));
+            if (playerEntity != null && RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(playerEntity)) {
+                TransformManager.startTransform(playerEntity, RegPlayerForms.ORIGINAL_SHIFTER, null);
+                ShapeShifterCurseFabric.ON_ENABLE_MOD.trigger(playerEntity);
+                playerEntity.sendMessage(Text.translatable("info.shape-shifter-curse.on_enable_mod").formatted(Formatting.LIGHT_PURPLE));
             }
         });
     }
@@ -247,7 +243,7 @@ public class ModPacketsC2S {
             ShapeShifterCurseFabric.LOGGER.warn("[SetForm] Player {} not found", targetPlayerUuid);
         }
         Identifier formId = packetByteBuf.readIdentifier();
-        PlayerFormBase form = RegPlayerForms.getPlayerForm(formId);
+        IForm form = RegPlayerForms.getPlayerForm(formId);
         // 网络包可以伪造 所以加个权限验证
         if (playerEntity.getCommandSource().hasPermissionLevel(2) || playerEntity.getAbilities().creativeMode) {
             minecraftServer.execute(() -> {
@@ -255,7 +251,7 @@ public class ModPacketsC2S {
                     ShapeShifterCurseFabric.LOGGER.warn("[SetForm] Player is null");
                     return;
                 }
-                TransformManager.handleDirectTransform(target, form, false);
+                TransformManager.startTransform(target, form, null);
             });
             return;
         }
@@ -267,7 +263,7 @@ public class ModPacketsC2S {
             return;
         }
         Identifier formId = packetByteBuf.readIdentifier();
-        PlayerFormBase form = RegPlayerForms.getPlayerForm(formId);
+        IForm form = RegPlayerForms.getPlayerForm(formId);
 
         if (minecraftServer.getCommandSource().hasPermissionLevel(2) || playerEntity.getAbilities().creativeMode) {
             // 权限等级2时跳过反作弊 毕竟可以用setForm了
@@ -276,18 +272,18 @@ public class ModPacketsC2S {
                     ShapeShifterCurseFabric.LOGGER.warn("[SetPatronForm] Player is null");
                     return;
                 }
-                TransformManager.handleDirectTransform(playerEntity, form, false);
+                TransformManager.startTransform(playerEntity, form, null);
             });
             return;
         }
-        if (form instanceof PlayerFormDynamic pfd) {
+        if (form instanceof DynamicForm pfd) {
             minecraftServer.execute(() -> {
                 if (playerEntity == null) {
                     ShapeShifterCurseFabric.LOGGER.warn("[SetPatronForm] Player is null");
                     return;
                 }
                 if (pfd.IsPlayerCanUse(playerEntity)) {
-                    TransformManager.handleDirectTransform(playerEntity, pfd, false);
+                    TransformManager.startTransform(playerEntity, pfd, null);
                 }
                 else {
                     // 一般情况下，这里不会执行，因为客户端在发送请求前已经进行了检查 如果触发了这里，说明客户端和服务器之间的数据不同步(小概率 如果不同步早就掉线了) 或者是客户端作弊(大概率)

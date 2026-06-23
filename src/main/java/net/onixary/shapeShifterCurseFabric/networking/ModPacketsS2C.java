@@ -20,13 +20,16 @@ import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
+import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoonClient;
 import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenu;
 import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenuV2;
 import net.onixary.shapeShifterCurseFabric.custom_ui.NormalFormSelectScreen;
+import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
 import net.onixary.shapeShifterCurseFabric.custom_ui.PatronFormSelectScreen;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
+import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
 import net.onixary.shapeShifterCurseFabric.util.FormColorData;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.Interface.IJumpController;
@@ -39,6 +42,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static net.onixary.shapeShifterCurseFabric.networking.ModPackets.*;
+import static net.onixary.shapeShifterCurseFabric.screen_effect.TransformFX.beginTransformEffect;
 
 // 应仅在客户端注册
 // This class should only be registered on the client side
@@ -47,16 +51,10 @@ import static net.onixary.shapeShifterCurseFabric.networking.ModPackets.*;
 public class ModPacketsS2C {
 
     public static void register() {
-        ClientPlayNetworking.registerGlobalReceiver(ModPackets.TRANSFORM_EFFECT_ID, ModPacketsS2C::receiveTransformEffect);
-        ClientPlayNetworking.registerGlobalReceiver(ModPackets.INSTINCT_THRESHOLD_EFFECT_ID, ModPacketsS2C::receiveInstinctThresholdEffect);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_CURSED_MOON_DATA, ModPacketsS2C::receiveCursedMoonData);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_FORM_CHANGE, ModPacketsS2C::receiveFormChange);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_TRANSFORM_STATE, ModPacketsS2C::receiveTransformState);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_BAT_ATTACH_STATE, ModPacketsS2C::receiveBatAttachState);
-        // ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_EFFECT_ATTACHMENT, ModPacketsS2C::handleSyncEffectAttachment);
-        ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_OVERLAY_EFFECT, ModPacketsS2C::receiveUpdateOverlayEffect);
-        ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_OVERLAY_FADE_EFFECT, ModPacketsS2C::receiveUpdateOverlayFadeEffect);
-        ClientPlayNetworking.registerGlobalReceiver(ModPackets.TRANSFORM_COMPLETE_EFFECT, ModPacketsS2C::receiveTransformCompleteEffect);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.RESET_FIRST_PERSON, ModPacketsS2C::receiveResetFirstPerson);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_OTHER_PLAYER_BAT_ATTACH_STATE, ModPacketsS2C::receiveOtherPlayerBatAttachState);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_FORCE_SNEAK_STATE, ModPacketsS2C::receiveForceSneakState);
@@ -89,52 +87,26 @@ public class ModPacketsS2C {
     }
      */
 
-    public static void receiveTransformEffect(MinecraftClient client, ClientPlayNetworkHandler handler,
-                                              PacketByteBuf buf, PacketSender responseSender) {
-        client.execute(() -> {
-            // 当客户端收到这个数据包时，调用TransformManager中的新方法来播放特效
-            TransformManager.playClientTransformEffect();
-        });
-    }
 
-    public static void receiveInstinctThresholdEffect(MinecraftClient client, ClientPlayNetworkHandler handler,
-                                                      PacketByteBuf buf, PacketSender responseSender) {
-        client.execute(() -> {
-            // 当客户端收到这个数据包时，调用TransformManager中的新方法来播放特效
-            ShapeShifterCurseFabricClient.applyInstinctThresholdEffect();
-        });
-    }
-
-    public static void receiveCursedMoonData(MinecraftClient client, ClientPlayNetworkHandler handler,
-                                           PacketByteBuf buf, PacketSender responseSender) {
-        long dayTime = buf.readLong();
-        int day = buf.readInt();
+    public static void receiveCursedMoonData(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         boolean isCursedMoon = buf.readBoolean();
-        boolean isNight = buf.readBoolean();
-
         client.execute(() -> {
-            // 更新客户端的CursedMoon状态
-            net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon.day_time = dayTime;
-            net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon.day = day;
-            net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon.clientIsCursedMoon = isCursedMoon;
-            net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon.clientIsNight = isNight;
+            CursedMoonClient.isCursedMoon = isCursedMoon;
+            CursedMoonClient.middayMessageSent = false;
         });
     }
 
     // 接收形态变化同步包
-    public static void receiveFormChange(MinecraftClient client, ClientPlayNetworkHandler handler,
-                                       PacketByteBuf buf, PacketSender responseSender) {
-        String newFormName = buf.readString();
+    public static void receiveFormChange(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        Identifier newFormID = buf.readIdentifier();
 
         client.execute(() -> {
-            // 强制客户端重新注册动画（如果需要）
             if (client.player != null) {
-                ShapeShifterCurseFabric.LOGGER.info("Client received form change: " + newFormName);
                 // 触发动画重新初始化
-                net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.refreshPlayerAnimations();
+                ShapeShifterCurseFabricClient.refreshPlayerAnimations();
 
                 // 更新 formColorData 的数据(其实是FormColorSelectMenu的数据) 如果启动了自动切换 那么还会自动切换颜色数据
-                ShapeShifterCurseFabricClient.formColorData.onClientFormChange(Identifier.tryParse(newFormName));
+                ShapeShifterCurseFabricClient.formColorData.onClientFormChange(newFormID);
             }
         });
     }
@@ -149,45 +121,24 @@ public class ModPacketsS2C {
 
         client.execute(() -> {
             if (client.player != null) {
-                ShapeShifterCurseFabric.LOGGER.info("Client received transform state: isTransforming=" + isTransforming);
-                // 更新客户端的变身状态
-                net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient.updateTransformState(
-                        playerUuid, isTransforming, fromForm.isEmpty() ? null : fromForm, toForm.isEmpty() ? null : toForm);
+                ShapeShifterCurseFabricClient.updateTransformState(playerUuid, isTransforming, fromForm.isEmpty() ? null : fromForm, toForm.isEmpty() ? null : toForm);
+                if (client.player.getUuid().equals(playerUuid)) {
+                    if (isTransforming) {
+                        TransformManager.transformTimer = 0;
+                        ShapeShifterCurseFabricClient.emitTransformParticle(StaticParams.TRANSFORM_FX_DURATION_IN);
+                        beginTransformEffect();
+                        TransformOverlay.INSTANCE.setEnableOverlay(true);
+                    } else {
+                        TransformManager.transformTimer = -1;
+                        TransformOverlay.INSTANCE.setEnableOverlay(false);
+                    }
+                }
             }
         });
     }
 
-    // 接收Overlay效果更新包
-    public static void receiveUpdateOverlayEffect(MinecraftClient client, ClientPlayNetworkHandler handler,
-                                                 PacketByteBuf buf, PacketSender responseSender) {
-        float nauseaStrength = buf.readFloat();
-        int ticks = buf.readInt();
-
-        client.execute(() -> {
-            TransformManager.handleClientOverlayUpdate(nauseaStrength, ticks);
-        });
-    }
-
-    // 接收Overlay淡出效果更新包
-    public static void receiveUpdateOverlayFadeEffect(MinecraftClient client, ClientPlayNetworkHandler handler,
-                                                     PacketByteBuf buf, PacketSender responseSender) {
-        float nauseaStrength = buf.readFloat();
-        int ticks = buf.readInt();
-
-        client.execute(() -> {
-            TransformManager.handleClientOverlayFadeUpdate(nauseaStrength, ticks);
-        });
-    }
-
-    // 接收变身完成效果包
-    public static void receiveTransformCompleteEffect(MinecraftClient client, ClientPlayNetworkHandler handler,
-                                                     PacketByteBuf buf, PacketSender responseSender) {
-        client.execute(TransformManager::executeClientTransformCompleteEffect);
-    }
-
     // 接收FirstPerson重置包
-    public static void receiveResetFirstPerson(MinecraftClient client, ClientPlayNetworkHandler handler,
-                                             PacketByteBuf buf, PacketSender responseSender) {
+    public static void receiveResetFirstPerson(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         client.execute(TransformManager::executeClientFirstPersonReset);
     }
 

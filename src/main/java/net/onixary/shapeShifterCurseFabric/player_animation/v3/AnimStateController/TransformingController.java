@@ -7,7 +7,7 @@ import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import org.jetbrains.annotations.Nullable;
@@ -23,8 +23,8 @@ public class TransformingController extends AbstractAnimStateController {
     public @Nullable AnimationHolder getAnimation(PlayerEntity player, AnimSystem.AnimSystemData data) {
         String fromFormName = ShapeShifterCurseFabricClient.getClientTransformFromForm(player.getUuid());
         String toFormName = ShapeShifterCurseFabricClient.getClientTransformToForm(player.getUuid());
-        PlayerFormBase transformCurrentForm = null;
-        PlayerFormBase transformToForm = null;
+        IForm transformCurrentForm = null;
+        IForm transformToForm = null;
         try {
             transformCurrentForm = fromFormName != null ? RegPlayerForms.getPlayerForm(fromFormName) : null;
             transformToForm = toFormName != null ? RegPlayerForms.getPlayerForm(toFormName) : null;

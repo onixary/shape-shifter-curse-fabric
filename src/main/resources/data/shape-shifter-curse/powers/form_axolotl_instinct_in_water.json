@@ -1,6 +1,6 @@
 {
     "type": "shape-shifter-curse:add_sustained_instinct",
-    "instinct_effect_id": "FORM_AXOLOTL_IN_WATER",
+    "instinct_effect_id": "shape-shifter-curse:form_axolotl_in_water",
     "value": 0.004,
     "duration": 1,
     "condition": {

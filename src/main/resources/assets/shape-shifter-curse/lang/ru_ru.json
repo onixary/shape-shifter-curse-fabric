@@ -621,5 +621,6 @@
     "gui.shape_shifter_curse_fabric.fcs.eyeColorB": "Eye B",
     "gui.shape_shifter_curse_fabric.fcs.primaryGreyReverse": "Reverse Primary",
     "gui.shape_shifter_curse_fabric.fcs.accent1GreyReverse": "Reverse Accent 1",
-    "gui.shape_shifter_curse_fabric.fcs.accent2GreyReverse": "Reverse Accent 2"
+    "gui.shape_shifter_curse_fabric.fcs.accent2GreyReverse": "Reverse Accent 2",
+    "text.autoconfig.shape-shifter-curse-common.option.immediatelyTransform": "Force Immediately Transform"
 }

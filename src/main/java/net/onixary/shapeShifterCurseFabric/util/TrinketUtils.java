@@ -3,10 +3,6 @@ package net.onixary.shapeShifterCurseFabric.util;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import dev.emi.trinkets.api.SlotReference;
-import dev.emi.trinkets.api.SlotType;
-import dev.emi.trinkets.api.TrinketComponent;
-import dev.emi.trinkets.api.TrinketsApi;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.PowerTypeRegistry;
@@ -17,8 +13,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryItem;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.util.Accessory.AccessoryUtils;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -160,8 +157,9 @@ public class TrinketUtils {
         }
 
         public void onPlayerFormChangeReApply(PlayerEntity player) {
-            Identifier currentFormID = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm().FormID;
-            Identifier currentOriginsID = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm().getFormOriginID();
+            IForm form = FormUtils.getPlayerForm(player);
+            Identifier currentFormID = form.getFormID();
+            Identifier currentOriginsID = form.getFormLayer().getRight();
             for (Identifier powerID : allFormPowerAdd) {
                 this.AddPower(player, powerID, currentOriginsID);
             }
@@ -190,8 +188,9 @@ public class TrinketUtils {
         }
 
         public void onPlayerUnEquip(PlayerEntity player, Identifier itemID) {
-            Identifier currentFormID = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm().FormID;
-            Identifier currentOriginsID = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm().getFormOriginID();
+            IForm form = FormUtils.getPlayerForm(player);
+            Identifier currentFormID = form.getFormID();
+            Identifier currentOriginsID = form.getFormLayer().getRight();
             for (Identifier powerID : accessoryPowers) {
                 this.RemovePower(player, powerID, itemID);
             }

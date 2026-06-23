@@ -9,6 +9,13 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 public class ClientUtils {
     public static boolean isOpenInventoryScreen = false;
 
+    public static PlayerEntity getPlayer() {
+        if (FabricLoader.getInstance().getEnvironmentType() != EnvType.CLIENT) {
+            return null;
+        }
+        return MinecraftClient.getInstance().player;
+    }
+
     public static boolean IsNowPlayingPlayer(PlayerEntity player) {
         if (FabricLoader.getInstance().getEnvironmentType() != EnvType.CLIENT) {
             return false;

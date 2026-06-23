@@ -1,6 +1,5 @@
 {
     "powers": [
-        "shape-shifter-curse:form_spider_1_scale",
         "shape-shifter-curse:no_render_arm",
         "shape-shifter-curse:disable_player_rotation",
         "shape-shifter-curse:no_render_tp_item",

@@ -7,7 +7,6 @@
   "mixins": [
     "BreathingUnderWaterMixin",
     "CancelEntityStepSoundMixin",
-    "CursedMoonWorldMixin",
     "CustomEdibleItemMixin",
     "CustomEdiblePlayerAMixin",
     "CustomEdiblePlayerBMixin",

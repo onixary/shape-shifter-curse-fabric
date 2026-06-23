@@ -5,18 +5,15 @@ import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.HeldItemFeatureRenderer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.ModelWithArms;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.additional_power.HideTPHeldItemPower;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -98,7 +95,7 @@ public abstract class AdjustItemHoldFeatureRendererMixin<T extends LivingEntity,
 
     private boolean shouldHideItem(LivingEntity entity) {
         if (entity instanceof AbstractClientPlayerEntity player) {
-            PlayerFormBase curForm = FormTextureUtils.getPlayerForm_Render(player);
+            IForm curForm = FormTextureUtils.getPlayerForm_Render(player);
             boolean isFeral = curForm.getBodyType() == PlayerFormBodyType.FERAL;
             //ShapeShifterCurseFabric.LOGGER.info("Is Feral Form : " + isFeral);
 

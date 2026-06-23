@@ -3,17 +3,14 @@ package net.onixary.shapeShifterCurseFabric.mixin;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Environment(EnvType.CLIENT)
@@ -54,8 +51,7 @@ public abstract class PlayerEntitySpeedFOVMixin {
     @Inject(method = "getFovMultiplier", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerAbilities;getWalkSpeed()F"))
     private void shape_shifter_curse$modifyWalkSpeed(CallbackInfoReturnable<Float> cir) {
         shape_shifter_curse$originalWalkSpeed = ((AbstractClientPlayerEntity) (Object) this).getAbilities().getWalkSpeed();
-        PlayerFormBase playerFormBase = RegPlayerFormComponent.PLAYER_FORM.get((AbstractClientPlayerEntity) (Object) this).getCurrentForm();
-        if (playerFormBase.FormID == RegPlayerForms.ORIGINAL_BEFORE_ENABLE.FormID) {
+        if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm((AbstractClientPlayerEntity) (Object) this)) {
             return;
         }
         float nowSpeed = (float)(((AbstractClientPlayerEntity) (Object) this).getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));

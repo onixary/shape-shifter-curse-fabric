@@ -9,7 +9,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -82,7 +81,7 @@ public abstract class PlayerEntityRendererFallFlyingMixin extends LivingEntityRe
             ShapeShifterCurseFabric.LOGGER.info("ViveCraft mod detected, skipping PlayerEntityRendererFallFlyingMixin.");
             return;
         }
-        PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
+        IForm curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
         boolean isFeral = curForm.getBodyType() == PlayerFormBodyType.FERAL;
 
         float i = player.getLeaningPitch(h);

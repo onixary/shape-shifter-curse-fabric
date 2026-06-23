@@ -18,9 +18,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.v2.PlayerAnimState;
-import net.onixary.shapeShifterCurseFabric.player_animation.form_animation.*;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -84,7 +83,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
     private int tickCounter = 0;  // 无用
 
     @Unique
-    private PlayerFormBase curForm;
+    private IForm curForm;
     @Unique
     KeyframeAnimation currentAnimation = null;
     @Unique
@@ -97,9 +96,9 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
     int continueSwingAnimCounter = 0;
 
     @Unique
-    PlayerFormBase transformCurrentForm;
+    IForm transformCurrentForm;
     @Unique
-    PlayerFormBase transformToForm;
+    IForm transformToForm;
 
 //    @Override
 //    public void tick() {
@@ -416,7 +415,7 @@ public abstract class PlayerEntityAnimOverrideMixin extends PlayerEntity {
 //            // 检查是否刚刚结束变身，如果是则强制刷新当前形态
 //            if (previousState == PlayerAnimState.ANIM_ON_TRANSFORM) {
 //                // 强制重新获取当前形态，确保使用最新的数据
-//                PlayerFormBase latestForm = RegPlayerFormComponent.PLAYER_FORM.get(this).getCurrentForm();
+//                IForm latestForm = FormUtils.getPlayerForm(player);
 //                if (!latestForm.equals(curForm)) {
 //                    curForm = latestForm;
 //                    ShapeShifterCurseFabric.LOGGER.info("Animation system updated curForm after transform: " + curForm);

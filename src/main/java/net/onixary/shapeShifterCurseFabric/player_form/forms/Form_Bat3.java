@@ -11,12 +11,13 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v3.*;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.OneAnimController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.RideAnimController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.WithSneakAnimController;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.NormalForm;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.ModifyCapeRender;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
-public class Form_Bat3 extends PlayerFormBase {
+public class Form_Bat3 extends NormalForm implements ModifyCapeRender {
     public Form_Bat3(Identifier formID) {
         super(formID);
     }

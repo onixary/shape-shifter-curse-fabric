@@ -11,7 +11,7 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class FormArgumentType implements ArgumentType<Identifier> {
       return Identifier.fromCommandInput(stringReader);
    }
 
-   public static PlayerFormBase getForm(CommandContext<ServerCommandSource> context, String argumentName) throws CommandSyntaxException {
+   public static IForm getForm(CommandContext<ServerCommandSource> context, String argumentName) throws CommandSyntaxException {
 
       Identifier id = context.getArgument(argumentName, Identifier.class);
 
@@ -54,8 +54,8 @@ public class FormArgumentType implements ArgumentType<Identifier> {
 
       try {
           RegPlayerForms.playerForms.forEach((formID, form) -> {
-              if (!form.getIsCustomForm()) {
-                  availableForms.add(form.FormID);
+              if (!form.isDynamicForm()) {
+                  availableForms.add(form.getFormID());
               }
           });
       }

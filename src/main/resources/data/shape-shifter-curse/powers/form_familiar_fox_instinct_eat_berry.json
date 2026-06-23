@@ -2,7 +2,7 @@
     "type": "origins:action_on_item_use",
     "entity_action": {
         "type": "shape-shifter-curse:add_instinct",
-        "instinct_effect_id": "FORM_FAMILIAR_FOX_EAT_BERRY",
+        "instinct_effect_id": "shape-shifter-curse:form_familiar_fox_eat_berry",
         "value": 0.15,
         "duration": 20
     },

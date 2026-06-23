@@ -1,6 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.additional_power;
 
-import io.github.apace100.apoli.Apoli;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
@@ -8,13 +7,13 @@ import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-
-import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.applySustainedEffect;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.InstinctUtils;
 
 public class AddSustainedInstinctPower extends Power {
 
-    private final String instinctEffectID;
+    private final Identifier instinctEffectID;
     private final float value;
     private final int duration;
 
@@ -30,7 +29,7 @@ public class AddSustainedInstinctPower extends Power {
         }
 
 
-        this.instinctEffectID = data.getString("instinct_effect_id");
+        this.instinctEffectID = data.getId("instinct_effect_id");
         this.value = data.getFloat("value");
         this.duration = data.getInt("duration");
 
@@ -49,7 +48,7 @@ public class AddSustainedInstinctPower extends Power {
 
     public void tick() {
         if (entity instanceof ServerPlayerEntity SPE && this.instinctEffectID != null){
-            applySustainedEffect(SPE, this.instinctEffectID, this.value, this.duration);
+            InstinctUtils.addInstinctEffect(SPE, this.instinctEffectID, this.value, this.duration, false);
         }
 //        if(entity instanceof ServerPlayerEntity && instinctEffectType != null && instinctEffectType.isSustained()) {
 //            //ShapeShifterCurseFabric.LOGGER.info("Applying sustained effect bt power: " + instinctEffectType);
@@ -61,7 +60,7 @@ public class AddSustainedInstinctPower extends Power {
         return new PowerFactory<>(
             ShapeShifterCurseFabric.identifier("add_sustained_instinct"),
             new SerializableData()
-                .add("instinct_effect_id", SerializableDataTypes.STRING)
+                .add("instinct_effect_id", SerializableDataTypes.IDENTIFIER)
                 .add("value", SerializableDataTypes.FLOAT, 0.0f)
                 .add("duration", SerializableDataTypes.INT, 1),
             data -> (powerType, livingEntity) -> new AddSustainedInstinctPower(
