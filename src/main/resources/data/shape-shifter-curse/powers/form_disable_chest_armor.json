@@ -16,6 +16,13 @@
                 "inverted": true
             },
             {
+              "type": "origins:ingredient",
+              "ingredient": {
+                "tag": "shape-shifter-curse:ignore_armor_restriction"
+              },
+              "inverted": true
+            },
+            {
               "type": "shape-shifter-curse:is_morph_scale_item",
               "inverted": true
             }

@@ -23,6 +23,12 @@
       },
       {
         "type": "shape-shifter-curse:is_morph_scale_item"
+      },
+      {
+        "type": "origins:ingredient",
+        "ingredient": {
+          "tag": "origins:ignore_armor_restriction"
+        }
       }
     ],
     "inverted": true
@@ -44,6 +50,12 @@
       },
       {
         "type": "shape-shifter-curse:is_morph_scale_item"
+      },
+      {
+        "type": "origins:ingredient",
+        "ingredient": {
+          "tag": "origins:ignore_armor_restriction"
+        }
       }
     ],
     "inverted": true
@@ -65,6 +77,12 @@
       },
       {
         "type": "shape-shifter-curse:is_morph_scale_item"
+      },
+      {
+        "type": "origins:ingredient",
+        "ingredient": {
+          "tag": "shape-shifter-curse:ignore_armor_restriction"
+        }
       }
     ],
     "inverted": true
