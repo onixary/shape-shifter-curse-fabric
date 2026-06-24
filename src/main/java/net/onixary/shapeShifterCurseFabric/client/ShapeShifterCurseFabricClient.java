@@ -22,7 +22,6 @@ import net.onixary.shapeShifterCurseFabric.additional_power.CustomEdiblePower;
 import net.onixary.shapeShifterCurseFabric.additional_power.ItemStorePower;
 import net.onixary.shapeShifterCurseFabric.additional_power.LevitatePower;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
-import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoonClient;
 import net.onixary.shapeShifterCurseFabric.custom_ui.BookOfShapeShifterScreenV2_P1;
 import net.onixary.shapeShifterCurseFabric.custom_ui.StartBookScreenV2;
@@ -67,6 +66,8 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 
 	public static KeyBinding toggleClipAtLedge;
 	public static KeyBinding makeSound;
+	public static KeyBinding useActiveSkill1PowerKeybind;
+	public static KeyBinding useActiveSkill2PowerKeybind;
 
 	private static boolean toggleClipAtLedgeIsPressed = false;
 	public static boolean isClipAtLedge = true;
@@ -275,6 +276,15 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		KeyBindingHelper.registerKeyBinding(makeSound);
 		toggleClipAtLedge = new KeyBinding("key.shape-shifter-curse.toggle_clip_at_ledge", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + MOD_ID);
 		KeyBindingHelper.registerKeyBinding(toggleClipAtLedge);
+
+		// 后续可拓展到多技能按键 等超出4个后我整个轮盘或其他减少需求按键的功能
+		useActiveSkill1PowerKeybind = new KeyBinding("key.shape-shifter-curse.active_skill_1", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + ShapeShifterCurseFabric.MOD_ID);
+		useActiveSkill2PowerKeybind = new KeyBinding("key.shape-shifter-curse.active_skill_2", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + ShapeShifterCurseFabric.MOD_ID);
+		ApoliClient.registerPowerKeybinding("key.shape-shifter-curse.active_skill_1", useActiveSkill1PowerKeybind);
+		ApoliClient.registerPowerKeybinding("key.shape-shifter-curse.active_skill_2", useActiveSkill2PowerKeybind);
+		KeyBindingHelper.registerKeyBinding(useActiveSkill1PowerKeybind);
+		KeyBindingHelper.registerKeyBinding(useActiveSkill2PowerKeybind);
+
 		ClientTickEvents.END_CLIENT_TICK.register((client) -> {
 			if (toggleClipAtLedge.isPressed()) {
 				if (!toggleClipAtLedgeIsPressed) {
