@@ -1,5 +1,5 @@
 {
-    "type": "origins:conditioned_attribute",
+    "type": "apoli:conditioned_attribute",
     "modifier": {
         "attribute": "minecraft:generic.movement_speed",
         "operation": "addition",
@@ -7,19 +7,19 @@
     },
     "tick_rate": 1,
     "condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:fluid_height",
+                "type": "apoli:fluid_height",
                 "fluid": "minecraft:water",
                 "comparison": "<=",
                 "compare_to": 0
             },
             {
-                "type": "origins:sneaking"
+                "type": "apoli:sneaking"
             },
             {
-                "type": "origins:air",
+                "type": "apoli:air",
                 "comparison": ">",
                 "compare_to": 0
             }

@@ -20,7 +20,7 @@
     "slot": "extra_hand",
     "slot_index": 0,
     "condition": {
-      "type": "origins:ingredient",
+      "type": "apoli:ingredient",
       "ingredient": {
         "item": "minecraft:totem_of_undying"
       }

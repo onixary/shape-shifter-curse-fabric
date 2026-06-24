@@ -1,5 +1,5 @@
 {
-  "type": "origins:effect_immunity",
+  "type": "apoli:effect_immunity",
   "effects": [
     "minecraft:poison",
     "minecraft:hunger"

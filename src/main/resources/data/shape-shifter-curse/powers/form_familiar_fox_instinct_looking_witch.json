@@ -4,23 +4,23 @@
     "value": 0.013,
     "duration": 1,
     "condition": {
-        "type": "origins:raycast",
+        "type": "apoli:raycast",
         "distance": 20,
         "block": false,
         "entity": true,
         "shape_type": "visual",
         "fluid_handling": "any",
         "hit_bientity_condition": {
-            "type": "origins:target_condition",
+            "type": "apoli:target_condition",
             "condition": {
-                "type": "origins:or",
+                "type": "apoli:or",
                 "conditions": [
                     {
-                        "type": "origins:entity_type",
+                        "type": "apoli:entity_type",
                         "entity_type": "minecraft:witch"
                     },
                     {
-                        "type": "origins:entity_type",
+                        "type": "apoli:entity_type",
                         "entity_type": "minecraft:evoker"
                     }
                 ]

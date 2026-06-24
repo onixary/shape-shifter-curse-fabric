@@ -4,7 +4,7 @@
     "value": 0.002,
     "duration": 1,
     "condition": {
-        "type": "origins:biome",
+        "type": "apoli:biome",
         "biome": "minecraft:dripstone_caves"
     }
 }

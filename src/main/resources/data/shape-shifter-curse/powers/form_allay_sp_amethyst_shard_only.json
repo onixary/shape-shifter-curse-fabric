@@ -1,15 +1,15 @@
 {
-    "type": "origins:prevent_item_use",
+    "type": "apoli:prevent_item_use",
     "item_condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:food"
+                "type": "apoli:food"
             },
             {
-                "type": "origins:ingredient",
+                "type": "apoli:ingredient",
                 "ingredient": {
-                    "tag": "origins:ignore_diet"
+                    "tag": "shape-shifter-curse:ignore_diet"
                 },
                 "inverted": true
             }

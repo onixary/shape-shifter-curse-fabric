@@ -4,9 +4,9 @@
     "value": 0.002,
     "duration": 1,
     "condition": {
-        "type": "origins:biome",
+        "type": "apoli:biome",
         "condition": {
-            "type": "origins:in_tag",
+            "type": "apoli:in_tag",
             "tag": "minecraft:is_taiga"
         }
     }

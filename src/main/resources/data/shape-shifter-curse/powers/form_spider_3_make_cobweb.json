@@ -1,23 +1,23 @@
 {
-  "type": "origins:item_on_item",
+  "type": "apoli:item_on_item",
   "using_item_condition": {
-    "type": "origins:ingredient",
+    "type": "apoli:ingredient",
     "ingredient": {
       "item": "minecraft:string"
     }
   },
   "on_item_condition": {
-    "type": "origins:ingredient",
+    "type": "apoli:ingredient",
     "ingredient": {
       "item": "minecraft:string"
     }
   },
   "using_item_action": {
-    "type": "origins:consume",
+    "type": "apoli:consume",
     "amount": 1
   },
   "on_item_action": {
-    "type": "origins:consume",
+    "type": "apoli:consume",
     "amount": 1
   },
   "result": {
@@ -25,10 +25,10 @@
     "amount": 1
   },
   "entity_action": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "actions": [
       {
-        "type": "origins:play_sound",
+        "type": "apoli:play_sound",
         "sound": "minecraft:entity.shulker.hurt_closed",
         "volume": 0.45
       },
@@ -39,7 +39,7 @@
     ]
   },
   "condition": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "conditions": [
       {
         "type": "shape-shifter-curse:has_mana",

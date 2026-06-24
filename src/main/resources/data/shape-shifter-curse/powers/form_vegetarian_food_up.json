@@ -1,5 +1,5 @@
 {
-    "type": "origins:modify_food",
+    "type": "apoli:modify_food",
     "food_modifiers": [
         {
             "name": "increase food points",
@@ -25,23 +25,23 @@
         }
     ],
     "item_condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:or",
+                "type": "apoli:or",
                 "conditions": [
                     {
-                        "type": "origins:and",
+                        "type": "apoli:and",
                         "conditions": [
                             {
-                                "type": "origins:ingredient",
+                                "type": "apoli:ingredient",
                                 "ingredient": {
-                                    "tag": "origins:meat"
+                                    "tag": "shape-shifter-curse:meat"
                                 },
                                 "inverted": true
                             },
                             {
-                                "type": "origins:meat",
+                                "type": "apoli:meat",
                                 "inverted": true
                             }
                         ]
@@ -53,14 +53,14 @@
                 ]
             },
             {
-                "type": "origins:ingredient",
+                "type": "apoli:ingredient",
                 "ingredient": {
-                    "tag": "origins:ignore_diet"
+                    "tag": "shape-shifter-curse:ignore_diet"
                 },
                 "inverted": true
             },
             {
-                "type": "origins:ingredient",
+                "type": "apoli:ingredient",
                 "ingredient": {
                     "tag": "shape-shifter-curse:ignore_vc_eat"
                 },

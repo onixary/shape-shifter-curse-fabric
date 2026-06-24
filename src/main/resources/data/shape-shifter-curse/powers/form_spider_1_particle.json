@@ -1,10 +1,10 @@
 {
-    "type": "origins:action_over_time",
+    "type": "apoli:action_over_time",
     "entity_action": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "actions": [
             {
-                "type": "origins:spawn_particles",
+                "type": "apoli:spawn_particles",
                 "particle": "minecraft:enchant",
                 "count": 1,
                 "speed": 0.0,

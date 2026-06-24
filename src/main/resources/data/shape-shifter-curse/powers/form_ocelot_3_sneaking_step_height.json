@@ -3,6 +3,6 @@
     "step_height_scale": 2.0,
     "affect_sneak": false,
     "condition": {
-        "type": "origins:sneaking"
+        "type": "apoli:sneaking"
     }
 }

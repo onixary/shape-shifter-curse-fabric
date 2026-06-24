@@ -1,5 +1,5 @@
 {
-    "type": "origins:particle",
+    "type": "apoli:particle",
     "particle": "minecraft:white_ash",
     "frequency": 10,
     "visible_while_invisible": true,

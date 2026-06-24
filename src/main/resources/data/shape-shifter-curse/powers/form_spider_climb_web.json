@@ -1,49 +1,49 @@
 {
-  "type": "origins:multiple",
+  "type": "apoli:multiple",
   "climbing": {
-    "type": "origins:climbing",
+    "type": "apoli:climbing",
     "condition": {
-      "type": "origins:and",
+      "type": "apoli:and",
       "conditions": [
         {
-          "type": "origins:in_block_anywhere",
+          "type": "apoli:in_block_anywhere",
           "block_condition": {
-            "type": "origins:in_tag",
-            "tag": "origins:cobwebs"
+            "type": "apoli:in_tag",
+            "tag": "shape-shifter-curse:cobwebs"
           }
         }
       ]
     },
     "hold_condition": {
-      "type": "origins:sneaking",
+      "type": "apoli:sneaking",
       "inverted": true
     }
   },
   "punch_through": {
-    "type": "origins:prevent_block_selection",
+    "type": "apoli:prevent_block_selection",
     "block_condition": {
-      "type": "origins:in_tag",
-      "tag": "origins:cobwebs"
+      "type": "apoli:in_tag",
+      "tag": "shape-shifter-curse:cobwebs"
     },
     "condition": {
-      "type": "origins:sneaking",
+      "type": "apoli:sneaking",
       "inverted": true
     }
   },
   "sense": {
-    "type": "origins:entity_glow",
+    "type": "apoli:entity_glow",
     "entity_condition": {
-      "type": "origins:and",
+      "type": "apoli:and",
       "conditions": [
         {
-          "type": "origins:in_block_anywhere",
+          "type": "apoli:in_block_anywhere",
           "block_condition": {
-            "type": "origins:in_tag",
-            "tag": "origins:cobwebs"
+            "type": "apoli:in_tag",
+            "tag": "shape-shifter-curse:cobwebs"
           }
         },
         {
-          "type": "origins:entity_group",
+          "type": "apoli:entity_group",
           "group": "arthropod",
           "inverted": true
         }

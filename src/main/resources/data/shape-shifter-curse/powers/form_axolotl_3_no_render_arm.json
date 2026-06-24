@@ -1,13 +1,13 @@
 {
     "type": "shape-shifter-curse:no_render_arm",
     "condition": {
-        "type": "origins:or",
+        "type": "apoli:or",
         "conditions": [
             {
-                "type": "origins:sneaking"
+                "type": "apoli:sneaking"
             },
             {
-                "type": "origins:swimming"
+                "type": "apoli:swimming"
             }
         ]
     }

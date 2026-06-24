@@ -4,7 +4,7 @@
     "value": 0.004,
     "duration": 1,
     "condition": {
-        "type": "origins:fluid_height",
+        "type": "apoli:fluid_height",
         "fluid": "minecraft:water",
         "comparison": ">",
         "compare_to": 0

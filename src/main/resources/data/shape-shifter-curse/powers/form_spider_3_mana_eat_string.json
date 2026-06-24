@@ -1,7 +1,7 @@
 {
-  "type": "origins:action_on_item_use",
+  "type": "apoli:action_on_item_use",
   "entity_action": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "actions": [
       {
         "type": "shape-shifter-curse:gain_mana",
@@ -10,7 +10,7 @@
     ]
   },
   "item_condition": {
-    "type": "origins:ingredient",
+    "type": "apoli:ingredient",
     "ingredient": {
       "item": "minecraft:string"
     }

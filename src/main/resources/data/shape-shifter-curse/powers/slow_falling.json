@@ -3,32 +3,32 @@
   "velocity": 0.01,
   "take_fall_damage": false,
   "condition": {
-    "type": "origins:or",
+    "type": "apoli:or",
     "conditions": [
       {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
           {
-            "type": "origins:sneaking"
+            "type": "apoli:sneaking"
           },
           {
-            "type": "origins:fall_flying"
+            "type": "apoli:fall_flying"
           }
         ]
       },
       {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
           {
-            "type": "origins:sneaking",
+            "type": "apoli:sneaking",
             "inverted": true
           },
           {
-            "type": "origins:fall_flying",
+            "type": "apoli:fall_flying",
             "inverted": true
           },
           {
-            "type": "origins:on_block",
+            "type": "apoli:on_block",
             "inverted": true
           },
           {

@@ -1,9 +1,9 @@
 {
-    "type": "origins:multiple",
+    "type": "apoli:multiple",
     "form_ocelot_sound_key_normal": {
-        "type": "origins:active_self",
+        "type": "apoli:active_self",
         "entity_action": {
-            "type": "origins:play_sound",
+            "type": "apoli:play_sound",
             "sound": "minecraft:entity.cat.ambient",
             "pitch": 0.5,
             "volume": 0.7
@@ -17,14 +17,14 @@
             "continuous": false
         },
         "condition": {
-            "type": "origins:sneaking",
+            "type": "apoli:sneaking",
             "inverted": true
         }
     },
     "form_ocelot_sound_key_hiss": {
-        "type": "origins:active_self",
+        "type": "apoli:active_self",
         "entity_action": {
-            "type": "origins:play_sound",
+            "type": "apoli:play_sound",
             "sound": "minecraft:entity.cat.hiss"
         },
         "cooldown": 5,
@@ -36,7 +36,7 @@
             "continuous": false
         },
         "condition": {
-            "type": "origins:sneaking"
+            "type": "apoli:sneaking"
         }
     }
 }

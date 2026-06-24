@@ -1,32 +1,32 @@
 {
-  "type": "origins:multiple",
+  "type": "apoli:multiple",
 
   "vampire": {
-    "type": "origins:self_action_on_hit",
+    "type": "apoli:self_action_on_hit",
     "entity_action": {
-      "type": "origins:and",
+      "type": "apoli:and",
       "actions": [
         {
-          "type": "origins:heal",
+          "type": "apoli:heal",
           "amount": 3.0
         },
         {
-          "type": "origins:feed",
+          "type": "apoli:feed",
           "food": 4,
           "saturation": 0.4
         }
       ]
     },
     "damage_condition": {
-      "type": "origins:and",
+      "type": "apoli:and",
       "conditions": [
         {
-          "type": "origins:amount",
+          "type": "apoli:amount",
           "comparison": ">=",
           "compare_to": 4.0
         },
         {
-          "type": "origins:projectile",
+          "type": "apoli:projectile",
           "inverted": true
         }
       ]
@@ -35,7 +35,7 @@
   },
 
   "no_food": {
-    "type": "origins:modify_food",
+    "type": "apoli:modify_food",
     "food_modifiers": [
       {
         "operation": "set_total",
@@ -49,25 +49,25 @@
       }
     ],
     "item_condition": {
-      "type": "origins:or",
+      "type": "apoli:or",
       "conditions": [
         {
-          "type": "origins:and",
+          "type": "apoli:and",
           "conditions": [
             {
-              "type": "origins:food"
+              "type": "apoli:food"
             },
             {
-              "type": "origins:ingredient",
+              "type": "apoli:ingredient",
               "ingredient": {
-                "tag": "origins:ignore_diet"
+                "tag": "shape-shifter-curse:ignore_diet"
               },
               "inverted": true
             }
           ]
         },
         {
-          "type": "origins:ingredient",
+          "type": "apoli:ingredient",
           "ingredient": {
             "item": "minecraft:golden_carrot"
           }

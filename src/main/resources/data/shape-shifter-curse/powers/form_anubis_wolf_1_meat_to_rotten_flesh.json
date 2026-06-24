@@ -1,15 +1,15 @@
 {
   "type": "shape-shifter-curse:modify_entity_loot",
   "from_item_condition": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "conditions": [
       {
-        "type": "origins:food"
+        "type": "apoli:food"
       },
       {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
-          "tag": "origins:raw_meat"
+          "tag": "shape-shifter-curse:raw_meat"
         }
       }
     ]

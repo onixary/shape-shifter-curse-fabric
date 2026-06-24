@@ -1,8 +1,8 @@
 {
-  "type": "origins:night_vision",
+  "type": "apoli:night_vision",
   "strength": 1.0,
   "condition": {
-    "type": "origins:submerged_in",
+    "type": "apoli:submerged_in",
     "fluid": "minecraft:water"
   }
 }

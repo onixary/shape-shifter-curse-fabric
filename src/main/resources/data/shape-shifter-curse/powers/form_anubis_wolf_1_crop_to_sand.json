@@ -1,7 +1,7 @@
 {
   "type": "shape-shifter-curse:modify_block_drop",
   "block_condition": {
-    "type": "origins:in_tag",
+    "type": "apoli:in_tag",
     "tag": "minecraft:crops"
   },
   "chance": 0.1,

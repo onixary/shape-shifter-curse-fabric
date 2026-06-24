@@ -1,9 +1,9 @@
 {
-    "type": "origins:multiple",
+    "type": "apoli:multiple",
     "normal": {
-        "type": "origins:conditioned_attribute",
+        "type": "apoli:conditioned_attribute",
         "condition": {
-            "type": "origins:exposed_to_sun",
+            "type": "apoli:exposed_to_sun",
             "inverted": true
         },
         "modifier": {
@@ -15,19 +15,19 @@
         "tick_rate": 1
     },
     "barehand": {
-        "type": "origins:conditioned_attribute",
+        "type": "apoli:conditioned_attribute",
         "condition": {
-            "type": "origins:and",
+            "type": "apoli:and",
             "conditions": [
                 {
-                    "type": "origins:exposed_to_sun",
+                    "type": "apoli:exposed_to_sun",
                     "inverted": true
                 },
                 {
-                    "type": "origins:or",
+                    "type": "apoli:or",
                     "conditions": [
                         {
-                            "type": "origins:inventory",
+                            "type": "apoli:inventory",
                             "process_mode": "items",
                             "item_condition": {
                                 "type": "shape-shifter-curse:is_weapon"
@@ -38,7 +38,7 @@
                             "inverted": true
                         },
                         {
-                            "type": "origins:inventory",
+                            "type": "apoli:inventory",
                             "process_mode": "items",
                             "comparison": "==",
                             "compare_to": 0,

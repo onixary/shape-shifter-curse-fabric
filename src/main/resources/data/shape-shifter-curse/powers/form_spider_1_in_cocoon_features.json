@@ -1,7 +1,7 @@
 {
-  "type": "origins:multiple",
+  "type": "apoli:multiple",
   "health_down": {
-    "type": "origins:attribute",
+    "type": "apoli:attribute",
     "modifier": {
       "attribute": "minecraft:generic.max_health",
       "value": -12.0,
@@ -10,7 +10,7 @@
   },
 
   "armor_value_up": {
-    "type": "origins:attribute",
+    "type": "apoli:attribute",
     "modifier": {
       "attribute": "minecraft:generic.armor",
       "value": 20.0,
@@ -19,24 +19,24 @@
   },
 
   "no_armors": {
-    "type": "origins:restrict_armor",
+    "type": "apoli:restrict_armor",
     "head": {
-      "type": "origins:armor_value",
+      "type": "apoli:armor_value",
       "comparison": ">",
       "compare_to": -1
     },
     "chest": {
-      "type": "origins:armor_value",
+      "type": "apoli:armor_value",
       "comparison": ">",
       "compare_to": -1
     },
     "legs": {
-      "type": "origins:armor_value",
+      "type": "apoli:armor_value",
       "comparison": ">",
       "compare_to": -1
     },
     "feet": {
-      "type": "origins:armor_value",
+      "type": "apoli:armor_value",
       "comparison": ">",
       "compare_to": -1
     }

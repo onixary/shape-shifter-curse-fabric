@@ -1,5 +1,5 @@
 {
-    "type": "origins:modify_food",
+    "type": "apoli:modify_food",
     "food_modifier": {
         "name": "increase food points",
         "operation": "addition",
@@ -11,7 +11,7 @@
         "value": 0.5
     },
     "item_condition": {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
             "item": "minecraft:sweet_berries"
         }

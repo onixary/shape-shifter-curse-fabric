@@ -1,28 +1,28 @@
 {
-    "type": "origins:climbing",
+    "type": "apoli:climbing",
     "condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:collided_horizontally"
+                "type": "apoli:collided_horizontally"
             },
             {
-                "type": "origins:or",
+                "type": "apoli:or",
                 "conditions": [
                     {
-                        "type": "origins:block_collision",
+                        "type": "apoli:block_collision",
                         "block_condition": {
-                            "type": "origins:in_tag",
-                            "tag": "origins:natural_wood"
+                            "type": "apoli:in_tag",
+                            "tag": "shape-shifter-curse:natural_wood"
                         },
                         "offset_x": 0.1,
                         "offset_z": 0.1
                     },
                     {
-                        "type": "origins:block_collision",
+                        "type": "apoli:block_collision",
                         "block_condition": {
-                            "type": "origins:in_tag",
-                            "tag": "origins:natural_wood"
+                            "type": "apoli:in_tag",
+                            "tag": "shape-shifter-curse:natural_wood"
                         },
                         "offset_x": -0.1,
                         "offset_z": -0.1

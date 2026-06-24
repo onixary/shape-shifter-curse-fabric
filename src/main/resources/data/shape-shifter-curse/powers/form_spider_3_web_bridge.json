@@ -8,10 +8,10 @@
   "tier0_enable": true,
   "tier0_charge_time": 0,
   "tier0_tick_action": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "actions": [
       {
-        "type": "origins:apply_effect",
+        "type": "apoli:apply_effect",
         "effect": {
           "effect": "minecraft:slowness",
           "duration": 10,
@@ -30,7 +30,7 @@
     "mana": 6
   },
   "tier1_use_action": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "actions": [
       {
         "type": "shape-shifter-curse:web_bridge",
@@ -38,7 +38,7 @@
         "web_bridge_width": 0
       },
       {
-        "type": "origins:spawn_particles",
+        "type": "apoli:spawn_particles",
         "particle": {
           "type": "minecraft:cloud"
         },
@@ -52,13 +52,13 @@
         }
       },
       {
-        "type": "origins:play_sound",
+        "type": "apoli:play_sound",
         "sound": "minecraft:entity.shulker_bullet.hit",
         "volume": 0.5,
         "pitch": 0.8
       },
       {
-        "type": "origins:play_sound",
+        "type": "apoli:play_sound",
         "sound": "minecraft:block.grass.place",
         "volume": 0.5,
         "pitch": 0.8
@@ -66,10 +66,10 @@
     ]
   },
   "tier1_tick_action": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "actions": [
       {
-        "type": "origins:apply_effect",
+        "type": "apoli:apply_effect",
         "effect": {
           "effect": "minecraft:slowness",
           "duration": 10,
@@ -85,20 +85,20 @@
     "mana": 0.25
   },
   "tier1_charge_complete_action": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "actions": [
       {
-        "type": "origins:play_sound",
+        "type": "apoli:play_sound",
         "sound": "minecraft:block.note_block.hat",
         "pitch": 1.0
       },
       {
-        "type": "origins:play_sound",
+        "type": "apoli:play_sound",
         "sound": "minecraft:block.note_block.snare",
         "pitch": 1.0
       },
       {
-        "type": "origins:execute_command",
+        "type": "apoli:execute_command",
         "command": "particle minecraft:cloud ~ ~1.0 ~ 0.8 0.8 0.8 0 10"
       }
     ]
@@ -112,7 +112,7 @@
     "mana": 6
   },
   "tier2_use_action": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "actions": [
       {
         "type": "shape-shifter-curse:web_bridge",
@@ -120,7 +120,7 @@
         "web_bridge_width": 0
       },
       {
-        "type": "origins:spawn_particles",
+        "type": "apoli:spawn_particles",
         "particle": {
           "type": "minecraft:cloud"
         },
@@ -134,13 +134,13 @@
         }
       },
       {
-        "type": "origins:play_sound",
+        "type": "apoli:play_sound",
         "sound": "minecraft:entity.shulker_bullet.hit",
         "volume": 0.5,
         "pitch": 0.8
       },
       {
-        "type": "origins:play_sound",
+        "type": "apoli:play_sound",
         "sound": "minecraft:block.grass.place",
         "volume": 0.5,
         "pitch": 0.8
@@ -148,10 +148,10 @@
     ]
   },
   "tier2_tick_action": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "actions": [
       {
-        "type": "origins:apply_effect",
+        "type": "apoli:apply_effect",
         "effect": {
           "effect": "minecraft:slowness",
           "duration": 10,
@@ -167,20 +167,20 @@
     "mana": 0.25
   },
   "tier2_charge_complete_action": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "actions": [
       {
-        "type": "origins:play_sound",
+        "type": "apoli:play_sound",
         "sound": "minecraft:block.note_block.hat",
         "pitch": 1.19
       },
       {
-        "type": "origins:play_sound",
+        "type": "apoli:play_sound",
         "sound": "minecraft:block.note_block.snare",
         "pitch": 1.19
       },
       {
-        "type": "origins:execute_command",
+        "type": "apoli:execute_command",
         "command": "particle minecraft:cloud ~ ~1.0 ~ 0.8 0.8 0.8 0 10"
       }
     ]
@@ -194,7 +194,7 @@
     "mana": 6
   },
   "tier3_use_action": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "actions": [
       {
         "type": "shape-shifter-curse:web_bridge",
@@ -202,7 +202,7 @@
         "web_bridge_width": 1
       },
       {
-        "type": "origins:spawn_particles",
+        "type": "apoli:spawn_particles",
         "particle": {
           "type": "minecraft:cloud"
         },
@@ -216,13 +216,13 @@
         }
       },
       {
-        "type": "origins:play_sound",
+        "type": "apoli:play_sound",
         "sound": "minecraft:entity.shulker_bullet.hit",
         "volume": 0.5,
         "pitch": 0.8
       },
       {
-        "type": "origins:play_sound",
+        "type": "apoli:play_sound",
         "sound": "minecraft:block.grass.place",
         "volume": 0.5,
         "pitch": 0.8
@@ -230,10 +230,10 @@
     ]
   },
   "tier3_tick_action": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "actions": [
       {
-        "type": "origins:apply_effect",
+        "type": "apoli:apply_effect",
         "effect": {
           "effect": "minecraft:slowness",
           "duration": 10,
@@ -249,20 +249,20 @@
     "mana": 0.25
   },
   "tier3_charge_complete_action": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "actions": [
       {
-        "type": "origins:play_sound",
+        "type": "apoli:play_sound",
         "sound": "minecraft:block.note_block.hat",
         "pitch": 1.414
       },
       {
-        "type": "origins:play_sound",
+        "type": "apoli:play_sound",
         "sound": "minecraft:block.note_block.snare",
         "pitch": 1.414
       },
       {
-        "type": "origins:execute_command",
+        "type": "apoli:execute_command",
         "command": "particle minecraft:cloud ~ ~1.0 ~ 0.8 0.8 0.8 0 10"
       }
     ]

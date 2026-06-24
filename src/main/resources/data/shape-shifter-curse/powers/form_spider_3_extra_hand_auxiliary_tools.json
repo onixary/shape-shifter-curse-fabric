@@ -1,8 +1,8 @@
 {
-  "type": "origins:multiple",
+  "type": "apoli:multiple",
 
   "auxiliary_sword_attack_speed":{
-    "type": "origins:conditioned_attribute",
+    "type": "apoli:conditioned_attribute",
     "modifier": {
       "attribute": "minecraft:generic.attack_speed",
       "operation": "addition",
@@ -16,7 +16,7 @@
       "slot": "extra_hand",
       "slot_index": 0,
       "condition": {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
           "item": "shape-shifter-curse:auxiliary_sword"
         }
@@ -25,15 +25,15 @@
   },
 
   "auxiliary_sword_tool_damage":{
-    "type": "origins:self_action_on_hit",
+    "type": "apoli:self_action_on_hit",
     "entity_action": {
-      "type": "origins:and",
+      "type": "apoli:and",
       "actions": [
         {
-          "type": "origins:equipped_item_action",
+          "type": "apoli:equipped_item_action",
           "equipment_slot": "mainhand",
           "action": {
-            "type": "origins:damage",
+            "type": "apoli:damage",
             "amount": 2,
             "ignore_unbreaking": true
           }
@@ -44,7 +44,7 @@
           "slot": "extra_hand",
           "slot_index": 0,
           "action": {
-            "type": "origins:damage",
+            "type": "apoli:damage",
             "amount": 1,
             "ignore_unbreaking": true
           }
@@ -57,7 +57,7 @@
       "slot": "extra_hand",
       "slot_index": 0,
       "condition": {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
           "item": "shape-shifter-curse:auxiliary_sword"
         }
@@ -66,14 +66,14 @@
   },
 
   "auxiliary_axe_attack_damage":{
-    "type": "origins:modify_damage_dealt",
+    "type": "apoli:modify_damage_dealt",
     "modifier": {
       "name": "Increased attack damage",
       "operation": "addition",
       "value": 5.0
     },
     "damage_condition": {
-      "type": "origins:amount",
+      "type": "apoli:amount",
       "comparison": ">=",
       "compare_to": 4
     },
@@ -83,7 +83,7 @@
       "slot": "extra_hand",
       "slot_index": 0,
       "condition": {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
           "item": "shape-shifter-curse:auxiliary_axe"
         }
@@ -92,7 +92,7 @@
   },
 
   "auxiliary_axe_attack_speed":{
-    "type": "origins:conditioned_attribute",
+    "type": "apoli:conditioned_attribute",
     "modifier": {
       "attribute": "minecraft:generic.attack_speed",
       "operation": "multiply_base",
@@ -106,7 +106,7 @@
       "slot": "extra_hand",
       "slot_index": 0,
       "condition": {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
           "item": "shape-shifter-curse:auxiliary_axe"
         }
@@ -115,9 +115,9 @@
   },
 
   "auxiliary_axe_tool_damage":{
-    "type": "origins:self_action_on_hit",
+    "type": "apoli:self_action_on_hit",
     "entity_action": {
-      "type": "origins:and",
+      "type": "apoli:and",
       "actions": [
         {
           "type": "shape-shifter-curse:invoke_accessory",
@@ -125,7 +125,7 @@
           "slot": "extra_hand",
           "slot_index": 0,
           "action": {
-            "type": "origins:damage",
+            "type": "apoli:damage",
             "amount": 1,
             "ignore_unbreaking": true
           }
@@ -138,7 +138,7 @@
       "slot": "extra_hand",
       "slot_index": 0,
       "condition": {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
           "item": "shape-shifter-curse:auxiliary_axe"
         }
@@ -147,7 +147,7 @@
   },
 
   "auxiliary_pickaxe_attack_damage":{
-    "type": "origins:modify_damage_dealt",
+    "type": "apoli:modify_damage_dealt",
     "modifier": {
       "name": "Decreased attack damage",
       "operation": "addition",
@@ -159,7 +159,7 @@
       "slot": "extra_hand",
       "slot_index": 0,
       "condition": {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
           "item": "shape-shifter-curse:auxiliary_pickaxe"
         }
@@ -168,7 +168,7 @@
   },
 
   "auxiliary_pickaxe_mining_speed":{
-    "type": "origins:modify_break_speed",
+    "type": "apoli:modify_break_speed",
     "modifier": {
       "operation": "multiply_base",
       "value": 0.8
@@ -179,7 +179,7 @@
       "slot": "extra_hand",
       "slot_index": 0,
       "condition": {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
           "item": "shape-shifter-curse:auxiliary_pickaxe"
         }
@@ -188,9 +188,9 @@
   },
 
   "auxiliary_pickaxe_tool_damage":{
-    "type": "origins:self_action_on_hit",
+    "type": "apoli:self_action_on_hit",
     "entity_action": {
-      "type": "origins:and",
+      "type": "apoli:and",
       "actions": [
         {
           "type": "shape-shifter-curse:invoke_accessory",
@@ -198,7 +198,7 @@
           "slot": "extra_hand",
           "slot_index": 0,
           "action": {
-            "type": "origins:damage",
+            "type": "apoli:damage",
             "amount": 1,
             "ignore_unbreaking": true
           }
@@ -211,7 +211,7 @@
       "slot": "extra_hand",
       "slot_index": 0,
       "condition": {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
           "item": "shape-shifter-curse:auxiliary_pickaxe"
         }
@@ -222,7 +222,7 @@
   "extra_shield_blocking":{
     "type": "shape-shifter-curse:virtual_shield",
     "active_shield_condition": {
-      "type": "origins:and",
+      "type": "apoli:and",
       "conditions": [
         {
           "type": "shape-shifter-curse:is_item_in_cooldown",
@@ -235,7 +235,7 @@
           "slot": "extra_hand",
           "slot_index": 0,
           "condition": {
-            "type": "origins:ingredient",
+            "type": "apoli:ingredient",
             "ingredient": {
               "item": "minecraft:shield"
             }
@@ -244,7 +244,7 @@
       ]
     },
     "normal_damage_action": {
-      "type": "origins:and",
+      "type": "apoli:and",
       "actions": [
         {
           "type": "shape-shifter-curse:set_item_cooldown",
@@ -257,7 +257,7 @@
           "slot": "extra_hand",
           "slot_index": 0,
           "action": {
-            "type": "origins:damage",
+            "type": "apoli:damage",
             "amount": 1,
             "ignore_unbreaking": true
           }
@@ -265,7 +265,7 @@
       ]
     },
     "shield_break_action": {
-      "type": "origins:and",
+      "type": "apoli:and",
       "actions": [
         {
           "type": "shape-shifter-curse:set_item_cooldown",
@@ -278,7 +278,7 @@
           "slot": "extra_hand",
           "slot_index": 0,
           "action": {
-            "type": "origins:damage",
+            "type": "apoli:damage",
             "amount": 2,
             "ignore_unbreaking": true
           }

@@ -1,10 +1,10 @@
 {
-    "type": "origins:conditioned_attribute",
+    "type": "apoli:conditioned_attribute",
     "condition": {
-        "type": "origins:or",
+        "type": "apoli:or",
         "conditions": [
             {
-                "type": "origins:inventory",
+                "type": "apoli:inventory",
                 "process_mode": "items",
                 "item_condition": {
                     "type": "shape-shifter-curse:is_weapon"
@@ -15,7 +15,7 @@
                 "inverted": true
             },
             {
-                "type": "origins:inventory",
+                "type": "apoli:inventory",
                 "process_mode": "items",
                 "comparison": "==",
                 "compare_to": 0,

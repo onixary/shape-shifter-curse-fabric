@@ -1,25 +1,25 @@
 {
-    "type": "origins:action_on_hit",
+    "type": "apoli:action_on_hit",
     "bientity_action": {
-        "type": "origins:target_action",
+        "type": "apoli:target_action",
         "action": {
-            "type": "origins:and",
+            "type": "apoli:and",
             "actions": [
                 {
-                    "type": "origins:heal",
+                    "type": "apoli:heal",
                     "amount": 20.0
                 },
                 {
-                    "type": "origins:play_sound",
+                    "type": "apoli:play_sound",
                     "sound": "minecraft:entity.ender_eye.death"
                 }
             ]
         }
     },
     "bientity_condition": {
-        "type": "origins:target_condition",
+        "type": "apoli:target_condition",
         "condition": {
-            "type": "origins:in_tag",
+            "type": "apoli:in_tag",
             "tag": "shape-shifter-curse:illager"
         }
     },
