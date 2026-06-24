@@ -2,7 +2,7 @@
   "type": "shape-shifter-curse:charge_action",
   "charge_power_id": "shape-shifter-curse:web_charge_1",
   "key": {
-    "key": "key.origins.primary_active",
+    "key": "key.shape-shifter-curse.active_skill_1",
     "continuous": true
   },
   "tier0_enable": true,

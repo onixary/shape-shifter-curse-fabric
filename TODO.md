@@ -10,4 +10,4 @@
 - 移除 Origins 的 Tag 需要 (2) 完成后等1个小版本
 
 ### 1.10.0:
-- Origins 的按键(`key.origins.primary_active` `key.origins.secondary_active`)转为SSC的按键(没法跨版本兼容 所以放在中版本里)
+- Origins 的按键(`key.origins.primary_active` `key.origins.secondary_active`)转为SSC的按键(没法跨版本兼容 所以放在中版本里) [√]

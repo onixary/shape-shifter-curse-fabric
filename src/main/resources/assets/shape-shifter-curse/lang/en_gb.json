@@ -616,5 +616,7 @@
     "codex.form.shape-shifter-curse.spider_3.instincts": " ",
     "tooltip.shape_shifter_curse.morphscale_food": "Undefined Tag Name",
     "death.attack.ssc_no_water_for_gills": "%1$s didn't manage to keep wet",
-    "death.attack.ssc_no_water_for_gills.player": "%1$s didn't manage to keep wet because they were fighting %2$s"
+    "death.attack.ssc_no_water_for_gills.player": "%1$s didn't manage to keep wet because they were fighting %2$s",
+    "key.shape-shifter-curse.active_skill_1": "Active Power (1)",
+    "key.shape-shifter-curse.active_skill_2": "Active Power (2)"
 }
