@@ -3,7 +3,7 @@
 ### 1.9.x:
 - (1) Power 中的 Origins Namespace 迁移至 Apoli Namespace [√]
 - (2) 将 Origins 的 Tag 转成 SSC 的 Tag (复制) [√]
-- 迁移 Origins 的 Damage Type
+- 迁移 Origins 的 Damage Type [√]
 - 移除 Origins 的 Lang
 - 移除 Origins 的数据包和资源包(除了`origins_layers`)
 - 移除 `net.onixary.shapeShifterCurseFabric.integration.origins.Origins` 里的 `NamespaceAlias.addAlias(MODID, "apoli");` 需要 (1) 完成后等1个小版本

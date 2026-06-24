@@ -1222,6 +1222,9 @@
   "gui.shape_shifter_curse_fabric.fcs.accent1GreyReverse": "Reverse Accent 1",
   "gui.shape_shifter_curse_fabric.fcs.accent2GreyReverse": "Reverse Accent 2",
 
+  "death.attack.ssc_no_water_for_gills": "%1$s didn't manage to keep wet",
+  "death.attack.ssc_no_water_for_gills.player": "%1$s didn't manage to keep wet because they were fighting %2$s",
+
   "text.shape-shifter-curse.config.title": "Shape Shifter Curse Config Menu",
   "text.shape-shifter-curse.config.close": "Cancel",
   "text.autoconfig.shape-shifter-curse-client.title": "Shape Shifter Curse - Client Config",

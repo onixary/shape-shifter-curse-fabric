@@ -916,6 +916,9 @@
   "trinket.slot.hand.extra_hand": "Доп. рука",
   "curios.identifier.extra_hand": "Доп. рука",
 
+  "death.attack.ssc_no_water_for_gills": "%1$s не успел погрузиться в воду.",
+  "death.attack.ssc_no_water_for_gills.player": "%1$s не успел погрузиться в воду из-за боя с %2$s.",
+
   "text.shape-shifter-curse.config.title": "Shape Shifter Curse - Меню настроек",
   "text.shape-shifter-curse.config.close": "Отмена",
   "text.autoconfig.shape-shifter-curse-client.title": "Shape Shifter Curse - Настройки клиента",
@@ -968,19 +971,7 @@
   "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "Реверсировать дополнительный цвет 2 в чёрно-белый",
   "text.autoconfig.shape-shifter-curse-custom.option.enable_form_random_sound": "Включить случайные звуки формы",
   "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_config": "Автосинхронизация конфигурации",
-  "text.autoconfig.shape-shifter-curse-client.option.enableChangeFPMConfig": "Enable automatic modification of FPM configuration",
 
-  "text.autoconfig.shape-shifter-curse-client.category.Integration": "Integration",
-  "text.autoconfig.shape-shifter-curse-client.option.enableBetterCombatFix": "Enable BetterCombat Fix",
-  "text.autoconfig.shape-shifter-curse-common.option.enableDebugCommand": "Enable debugging commands without permission restrictions (Do not enable on servers)",
-  "item.shape-shifter-curse.transformative_axolotl_bucket": ["Cursed Axolotl Bucket"],
-  "text.autoconfig.shape-shifter-curse-client.option.itemStorePowerPosType": "Item Store Power Middle Position Type",
-  "text.autoconfig.shape-shifter-curse-client.option.itemStorePowerPosOffsetX": "Item Store Power Position X Offset",
-  "text.autoconfig.shape-shifter-curse-client.option.itemStorePowerPosOffsetY": "Item Store Power Position Y Offset",
-  "message.shape-shifter-curse.select_form_ui.target_name": "Target: %s",
-  "message.shape-shifter-curse.select_form_ui.target_uuid": "[ %s ]",
-  "trinket.slot.hand.extra_hand": "Extra Hand",
-  "curios.identifier.extra_hand": "Extra Hand",
   "text.shape-shifter-curse.config.form_color_select_menu": "Form Color Selection Menu (Professional)",
   "text.shape-shifter-curse.config.form_color_select_menu_v2": "Form Color Selection Menu (Standard)",
   "message.shape-shifter-curse.enable_default_color": "Form default color feature: %s",
@@ -1018,7 +1009,6 @@
   "text.autoconfig.shape-shifter-curse-client.category.Tool": "Tools",
   "text.autoconfig.shape-shifter-curse-client.option.unlockAllFormInFormColorSelectMenu": "Unlock all forms in the form color selection menu.",
   "text.autoconfig.shape-shifter-curse-client.option.clearFormUnlockRecordInFormColorSelectMenu": "Clear form unlock records in the form color selection menu.",
-  "text.autoconfig.shape-shifter-curse-common.option.transformativeSpiderSpawnChance": "Transformative Spider Spawn Success Rate",
   "text.autoconfig.shape-shifter-curse-common.option.PatronDataUrl": "Patron Data Download Url (Unfinished)",
   "gui.shape_shifter_curse_fabric.fcsv2.click_to_modify": "Modify",
   "gui.shape_shifter_curse_fabric.fcsv2.hex_text": "HEX",
@@ -1032,5 +1022,7 @@
   "gui.shape_shifter_curse_fabric.fcs.primaryGreyReverse": "Reverse Primary",
   "gui.shape_shifter_curse_fabric.fcs.accent1GreyReverse": "Reverse Accent 1",
   "gui.shape_shifter_curse_fabric.fcs.accent2GreyReverse": "Reverse Accent 2",
-  "text.autoconfig.shape-shifter-curse-common.option.immediatelyTransform": "Force Immediately Transform"
+
+  "text.autoconfig.shape-shifter-curse-common.option.immediatelyTransform": "Force Immediately Transform",
+  "tooltip.shape_shifter_curse.morphscale_food": "Undefined Tag Name"
 }
