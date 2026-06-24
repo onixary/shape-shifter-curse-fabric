@@ -1,5 +1,5 @@
 {
-    "type": "origins:conditioned_attribute",
+    "type": "apoli:conditioned_attribute",
     "modifier": {
         "attribute": "minecraft:generic.movement_speed",
         "operation": "multiply_total",
@@ -8,6 +8,6 @@
     },
     "tick_rate": 4,
     "condition": {
-        "type": "origins:sprinting"
+        "type": "apoli:sprinting"
     }
 }

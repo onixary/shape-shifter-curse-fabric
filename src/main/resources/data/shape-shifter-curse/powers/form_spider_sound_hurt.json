@@ -1,7 +1,7 @@
 {
-    "type": "origins:self_action_when_hit",
+    "type": "apoli:self_action_when_hit",
     "entity_action": {
-        "type": "origins:play_sound",
+        "type": "apoli:play_sound",
         "sound": "minecraft:entity.spider.hurt",
         "volume": 0.2
     },

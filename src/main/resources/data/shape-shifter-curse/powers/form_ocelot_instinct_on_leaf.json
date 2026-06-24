@@ -4,10 +4,10 @@
     "value": 0.008,
     "duration": 1,
     "condition": {
-        "type": "origins:on_block",
+        "type": "apoli:on_block",
         "block_condition": {
-            "type": "origins:in_tag",
-            "tag": "origins:leaves"
+            "type": "apoli:in_tag",
+            "tag": "shape-shifter-curse:leaves"
         }
     }
 }

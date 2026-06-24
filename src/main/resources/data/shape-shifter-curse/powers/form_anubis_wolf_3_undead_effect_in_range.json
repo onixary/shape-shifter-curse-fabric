@@ -1,24 +1,24 @@
 {
     "type": "shape-shifter-curse:action_on_entity_in_range",
     "entity_condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:entity_group",
+                "type": "apoli:entity_group",
                 "group": "undead"
             },
             {
-                "type": "origins:status_effect",
+                "type": "apoli:status_effect",
                 "effect": "minecraft:weakness",
                 "inverted": true
             }
         ]
     },
     "entity_action": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "actions": [
             {
-                "type": "origins:apply_effect",
+                "type": "apoli:apply_effect",
                 "effect": {
                     "effect": "minecraft:weakness",
                     "duration": 20,
@@ -26,7 +26,7 @@
                 }
             },
             {
-                "type": "origins:apply_effect",
+                "type": "apoli:apply_effect",
                 "effect": {
                     "effect": "minecraft:slowness",
                     "duration": 20,

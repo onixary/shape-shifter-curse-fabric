@@ -1,5 +1,5 @@
 {
-    "type": "origins:conditioned_attribute",
+    "type": "apoli:conditioned_attribute",
     "modifier": {
         "attribute": "minecraft:generic.movement_speed",
         "operation": "multiply_total",
@@ -8,7 +8,7 @@
     },
     "tick_rate": 1,
     "condition": {
-        "type": "origins:power_active",
+        "type": "apoli:power_active",
         "power": "shape-shifter-curse:form_allay_sp_levitate"
     }
 }

@@ -1,7 +1,7 @@
 {
-    "type": "origins:active_self",
+    "type": "apoli:active_self",
     "entity_action": {
-        "type": "origins:play_sound",
+        "type": "apoli:play_sound",
         "sound": "entity.allay.ambient_without_item"
     },
     "cooldown": 5,

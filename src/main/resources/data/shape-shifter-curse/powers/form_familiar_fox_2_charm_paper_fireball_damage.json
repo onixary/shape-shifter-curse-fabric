@@ -1,13 +1,13 @@
 {
-    "type": "origins:modify_projectile_damage",
+    "type": "apoli:modify_projectile_damage",
     "condition": {
-        "type": "origins:resource",
+        "type": "apoli:resource",
         "resource": "shape-shifter-curse:form_familiar_fox_fireball_kind_boolean_resource",
         "comparison": "==",
         "compare_to": 1
     },
     "damage_condition": {
-        "type": "origins:projectile",
+        "type": "apoli:projectile",
         "projectile": "minecraft:small_fireball"
     },
     "modifier": {
@@ -15,31 +15,31 @@
         "value": 9.0
     },
     "target_action": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "actions": [
             {
                 "type": "shape-shifter-curse:explosion_damage_entity",
                 "power": 1,
                 "entity_condition": {
-                    "type": "origins:and",
+                    "type": "apoli:and",
                     "conditions": [
                         {
-                            "type": "origins:target_condition",
+                            "type": "apoli:target_condition",
                             "condition": {
-                                "type": "origins:in_tag",
+                                "type": "apoli:in_tag",
                                 "tag": "shape-shifter-curse:water_explode_immune"
                             },
                             "inverted": true
                         },
                         {
-                            "type": "origins:owner",
+                            "type": "apoli:owner",
                             "inverted": true
                         }
                     ]
                 }
             },
             {
-                "type": "origins:spawn_particles",
+                "type": "apoli:spawn_particles",
                 "particle": "minecraft:explosion",
                 "count": 2,
                 "speed": 0.0,
@@ -51,7 +51,7 @@
                 }
             },
             {
-                "type": "origins:spawn_particles",
+                "type": "apoli:spawn_particles",
                 "particle": "minecraft:soul_fire_flame",
                 "count": 8,
                 "speed": 0.0,
@@ -63,7 +63,7 @@
                 }
             },
             {
-                "type": "origins:play_sound",
+                "type": "apoli:play_sound",
                 "sound": "minecraft:entity.generic.explode"
             }
         ]

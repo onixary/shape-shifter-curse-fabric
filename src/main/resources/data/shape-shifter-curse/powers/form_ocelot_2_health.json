@@ -1,5 +1,5 @@
 {
-    "type": "origins:attribute",
+    "type": "apoli:attribute",
     "modifier": {
         "name": "Form ocelot0 health reduction",
         "attribute": "minecraft:generic.max_health",

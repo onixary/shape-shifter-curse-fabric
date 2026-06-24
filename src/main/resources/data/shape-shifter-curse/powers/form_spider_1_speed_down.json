@@ -1,5 +1,5 @@
 {
-  "type": "origins:attribute",
+  "type": "apoli:attribute",
   "modifier": {
     "attribute": "minecraft:generic.movement_speed",
     "operation": "multiply_total",

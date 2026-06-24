@@ -10,6 +10,6 @@
     "updateHealth": true,
     "delay": 100,
     "condition": {
-        "type": "origins:exposed_to_sun"
+        "type": "apoli:exposed_to_sun"
     }
 }

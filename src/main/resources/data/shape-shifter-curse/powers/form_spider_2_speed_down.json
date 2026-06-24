@@ -1,5 +1,5 @@
 {
-  "type": "origins:conditioned_attribute",
+  "type": "apoli:conditioned_attribute",
   "modifier": {
     "attribute": "minecraft:generic.movement_speed",
     "operation": "multiply_base",
@@ -7,15 +7,15 @@
   },
   "tick_rate": 2,
   "condition": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "conditions": [
       {
-        "type": "origins:on_block"
+        "type": "apoli:on_block"
       },
       {
-        "type": "origins:in_block",
+        "type": "apoli:in_block",
         "block_condition": {
-          "type": "origins:block",
+          "type": "apoli:block",
           "block": "minecraft:water"
         },
         "inverted": true

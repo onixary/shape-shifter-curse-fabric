@@ -1,4 +1,4 @@
 {
-  "type": "origins:prevent_game_event",
+  "type": "apoli:prevent_game_event",
   "event": "minecraft:step"
 }

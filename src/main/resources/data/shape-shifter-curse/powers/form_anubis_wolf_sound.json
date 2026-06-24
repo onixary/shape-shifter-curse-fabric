@@ -1,12 +1,12 @@
 {
-    "type": "origins:action_over_time",
+    "type": "apoli:action_over_time",
     "entity_action": {
-        "type": "origins:play_sound",
+        "type": "apoli:play_sound",
         "sound": "minecraft:entity.wolf.pant"
     },
     "interval": 200,
     "condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
                 "type": "shape-shifter-curse:enable_random_sound"

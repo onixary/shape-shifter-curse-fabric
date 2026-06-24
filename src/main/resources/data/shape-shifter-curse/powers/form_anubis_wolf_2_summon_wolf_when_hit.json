@@ -1,5 +1,5 @@
 {
-  "type": "origins:action_when_hit",
+  "type": "apoli:action_when_hit",
   "bientity_action": {
     "type": "shape-shifter-curse:bi_summon_anubis_wolf_minion",
     "minion_level": 2,
@@ -15,6 +15,6 @@
     }
   },
   "damage_condition": {
-    "type": "origins:attacker"
+    "type": "apoli:attacker"
   }
 }

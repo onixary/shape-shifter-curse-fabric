@@ -1,5 +1,5 @@
 {
-    "type": "origins:conditioned_attribute",
+    "type": "apoli:conditioned_attribute",
     "modifier": {
         "name": "Decrease speed when not having air(moist)",
         "attribute": "minecraft:generic.movement_speed",
@@ -8,7 +8,7 @@
     },
     "tick_rate": 20,
     "condition": {
-        "type": "origins:air",
+        "type": "apoli:air",
         "comparison": "<=",
         "compare_to": 0
     }

@@ -10,7 +10,7 @@
   "updateHealth": true,
   "delay": 1,
   "condition": {
-    "type": "origins:status_effect",
+    "type": "apoli:status_effect",
     "effect": "minecraft:wither"
   }
 }

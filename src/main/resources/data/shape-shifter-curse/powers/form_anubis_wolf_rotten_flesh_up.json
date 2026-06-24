@@ -1,5 +1,5 @@
 {
-    "type": "origins:modify_food",
+    "type": "apoli:modify_food",
     "food_modifiers": [
         {
             "name": "increase food points",
@@ -15,7 +15,7 @@
         }
     ],
     "item_condition": {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
             "item": "minecraft:rotten_flesh"
         }

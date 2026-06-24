@@ -1,5 +1,5 @@
 {
-    "type": "origins:resource",
+    "type": "apoli:resource",
     "min": 0,
     "max": 1,
     "hud_render": {

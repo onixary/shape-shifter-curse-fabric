@@ -1,10 +1,10 @@
 {
-    "type": "origins:action_over_time",
+    "type": "apoli:action_over_time",
     "entity_action": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "actions": [
             {
-                "type": "origins:spawn_particles",
+                "type": "apoli:spawn_particles",
                 "particle": "minecraft:poof",
                 "count": 1,
                 "speed": 0.0,
@@ -20,9 +20,9 @@
     },
     "interval": 4,
   "condition": {
-    "type": "origins:block_in_radius",
+    "type": "apoli:block_in_radius",
     "block_condition": {
-      "type": "origins:block",
+      "type": "apoli:block",
       "block": "shape-shifter-curse:dew_covered_cobweb"
     },
     "radius": 1,

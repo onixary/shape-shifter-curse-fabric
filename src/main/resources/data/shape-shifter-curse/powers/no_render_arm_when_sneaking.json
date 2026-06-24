@@ -1,10 +1,10 @@
 {
     "type": "shape-shifter-curse:no_render_arm",
     "condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:sneaking"
+                "type": "apoli:sneaking"
             }
         ]
     }

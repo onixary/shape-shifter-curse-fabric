@@ -1,5 +1,5 @@
 {
-  "type": "origins:modify_exhaustion",
+  "type": "apoli:modify_exhaustion",
   "modifier": {
     "name": "Extra exhaustion from large appetite",
     "value": 0.6,

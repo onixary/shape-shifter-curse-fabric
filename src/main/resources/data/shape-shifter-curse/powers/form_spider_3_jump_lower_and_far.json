@@ -1,61 +1,61 @@
 {
-  "type": "origins:multiple",
+  "type": "apoli:multiple",
   "jump_far": {
     "type": "shape-shifter-curse:action_on_jump",
     "entity_action": {
-      "type": "origins:and",
+      "type": "apoli:and",
       "actions": [
         {
-          "type": "origins:add_velocity",
+          "type": "apoli:add_velocity",
           "z": 0.22,
           "space": "local"
         },
         {
-          "type": "origins:exhaust",
+          "type": "apoli:exhaust",
           "amount": 0.2
         },
         {
-          "type": "origins:play_sound",
+          "type": "apoli:play_sound",
           "sound": "minecraft:entity.frog.long_jump",
           "pitch": 0.8
         },
         {
-          "type": "origins:play_sound",
+          "type": "apoli:play_sound",
           "sound": "minecraft:entity.goat.long_jump",
           "pitch": 1.0
         },
         {
-          "type": "origins:execute_command",
+          "type": "apoli:execute_command",
           "command": "particle cloud ~ ~ ~ 0.3 0.3 0.3 0.01 16 normal @a"
         }
       ]
 
     },
     "entity_condition": {
-      "type": "origins:and",
+      "type": "apoli:and",
       "conditions": [
         {
-          "type": "origins:food_level",
+          "type": "apoli:food_level",
           "comparison": ">=",
           "compare_to": 6
         },
         {
-          "type": "origins:fluid_height",
+          "type": "apoli:fluid_height",
           "fluid": "minecraft:water",
           "comparison": "<=",
           "compare_to": 0
         },
         {
-          "type": "origins:on_block"
+          "type": "apoli:on_block"
         },
         {
-          "type": "origins:sprinting"
+          "type": "apoli:sprinting"
         }
       ]
     }
   },
   "jump_lower": {
-    "type": "origins:modify_jump",
+    "type": "apoli:modify_jump",
     "modifier": {
       "operation": "multiply_base_multiplicative",
       "value": -0.25

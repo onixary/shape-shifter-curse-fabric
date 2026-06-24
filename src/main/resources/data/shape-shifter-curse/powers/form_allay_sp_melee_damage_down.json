@@ -1,15 +1,15 @@
 {
-    "type": "origins:modify_damage_dealt",
+    "type": "apoli:modify_damage_dealt",
     "bientity_condition": {
-        "type": "origins:actor_condition",
+        "type": "apoli:actor_condition",
         "condition": {
-            "type": "origins:or",
+            "type": "apoli:or",
             "conditions": [
                 {
-                    "type": "origins:inventory",
+                    "type": "apoli:inventory",
                     "process_mode": "items",
                     "item_condition": {
-                        "type": "origins:harvest_level",
+                        "type": "apoli:harvest_level",
                         "comparison": ">",
                         "compare_to": 1
                     },

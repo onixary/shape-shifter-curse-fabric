@@ -1,5 +1,5 @@
 {
-    "type": "origins:modify_food",
+    "type": "apoli:modify_food",
     "food_modifier": {
         "name": "Decreased food points",
         "operation": "multiply_base_multiplicative",
@@ -11,31 +11,31 @@
         "value": -0.5
     },
     "item_condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:or",
+                "type": "apoli:or",
                 "conditions": [
                     {
-                        "type": "origins:ingredient",
+                        "type": "apoli:ingredient",
                         "ingredient": {
-                            "tag": "origins:meat"
+                            "tag": "shape-shifter-curse:meat"
                         }
                     },
                     {
-                        "type": "origins:meat"
+                        "type": "apoli:meat"
                     }
                 ]
             },
             {
-                "type": "origins:ingredient",
+                "type": "apoli:ingredient",
                 "ingredient": {
-                    "tag": "origins:ignore_diet"
+                    "tag": "shape-shifter-curse:ignore_diet"
                 },
                 "inverted": true
             },
             {
-                "type": "origins:ingredient",
+                "type": "apoli:ingredient",
                 "ingredient": {
                     "tag": "shape-shifter-curse:ignore_vc_eat"
                 },

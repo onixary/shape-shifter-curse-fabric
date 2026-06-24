@@ -1,7 +1,7 @@
 {
-    "type": "origins:modify_break_speed",
+    "type": "apoli:modify_break_speed",
     "condition": {
-        "type": "origins:creative_flying"
+        "type": "apoli:creative_flying"
     },
     "modifier": {
         "operation": "multiply_base",

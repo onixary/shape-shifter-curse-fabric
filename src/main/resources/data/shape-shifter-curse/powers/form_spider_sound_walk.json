@@ -1,32 +1,32 @@
 {
-    "type": "origins:action_over_time",
+    "type": "apoli:action_over_time",
     "entity_action": {
-        "type": "origins:play_sound",
+        "type": "apoli:play_sound",
         "sound": "minecraft:entity.spider.step",
         "volume": 0.075
     },
     "interval": 10,
     "condition": {
-        "type": "origins:or",
+        "type": "apoli:or",
         "conditions": [
             {
-                "type": "origins:and",
+                "type": "apoli:and",
                 "conditions": [
                     {
-                        "type": "origins:moving",
+                        "type": "apoli:moving",
                         "horizontally": false,
                         "vertically": true
                     },
                     {
-                        "type": "origins:or",
+                        "type": "apoli:or",
                         "conditions": [
                             {
-                                "type": "origins:block_collision",
+                                "type": "apoli:block_collision",
                                 "offset_x": 0.1,
                                 "offset_z": 0.1
                             },
                             {
-                                "type": "origins:block_collision",
+                                "type": "apoli:block_collision",
                                 "offset_x": -0.1,
                                 "offset_z": -0.1
                             }
@@ -35,15 +35,15 @@
                 ]
             },
             {
-                "type": "origins:and",
+                "type": "apoli:and",
                 "conditions": [
                     {
-                        "type": "origins:moving",
+                        "type": "apoli:moving",
                         "horizontally": true,
                         "vertically": false
                     },
                     {
-                        "type": "origins:block_collision",
+                        "type": "apoli:block_collision",
                         "offset_y": -0.1
                     }
                 ]

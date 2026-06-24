@@ -1,7 +1,7 @@
 {
-    "type": "origins:action_over_time",
+    "type": "apoli:action_over_time",
     "entity_action": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "actions": [
             {
               "type": "shape-shifter-curse:spawn_particles_in_circle",

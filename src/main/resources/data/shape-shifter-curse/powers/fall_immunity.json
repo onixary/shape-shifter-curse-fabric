@@ -1,7 +1,7 @@
 {
-  "type": "origins:invulnerability",
+  "type": "apoli:invulnerability",
   "damage_condition": {
-    "type": "origins:name",
+    "type": "apoli:name",
     "name": "fall"
   }
 }

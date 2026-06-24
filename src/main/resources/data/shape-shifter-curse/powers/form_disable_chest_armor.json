@@ -1,22 +1,22 @@
 {
-    "type": "origins:restrict_armor",
+    "type": "apoli:restrict_armor",
     "chest": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:armor_value",
+                "type": "apoli:armor_value",
                 "comparison": ">",
                 "compare_to": -1
             },
             {
-                "type": "origins:ingredient",
+                "type": "apoli:ingredient",
                 "ingredient": {
                     "item": "minecraft:elytra"
                 },
                 "inverted": true
             },
             {
-              "type": "origins:ingredient",
+              "type": "apoli:ingredient",
               "ingredient": {
                 "tag": "shape-shifter-curse:ignore_armor_restriction"
               },

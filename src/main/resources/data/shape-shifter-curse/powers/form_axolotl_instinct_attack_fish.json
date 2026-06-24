@@ -1,5 +1,5 @@
 {
-    "type": "origins:self_action_on_hit",
+    "type": "apoli:self_action_on_hit",
     "entity_action": {
         "type": "shape-shifter-curse:add_instinct",
         "instinct_effect_id": "shape-shifter-curse:form_axolotl_attack_fish",
@@ -7,7 +7,7 @@
         "duration": 0
     },
     "target_condition": {
-        "type": "origins:in_tag",
-        "tag": "origins:fish"
+        "type": "apoli:in_tag",
+        "tag": "shape-shifter-curse:fish"
     }
 }

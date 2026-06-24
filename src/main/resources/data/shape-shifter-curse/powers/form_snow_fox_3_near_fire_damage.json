@@ -1,28 +1,28 @@
 {
-    "type": "origins:damage_over_time",
+    "type": "apoli:damage_over_time",
     "interval": 60,
     "onset_delay": 60,
     "damage": 1,
     "damage_easy": 1,
     "damage_type": "minecraft:on_fire",
     "condition": {
-        "type": "origins:block_in_radius",
+        "type": "apoli:block_in_radius",
         "block_condition": {
-            "type": "origins:or",
+            "type": "apoli:or",
             "conditions": [
                 {
-                    "type": "origins:block",
+                    "type": "apoli:block",
                     "block": "minecraft:fire"
                 },
                 {
-                    "type": "origins:and",
+                    "type": "apoli:and",
                     "conditions": [
                         {
-                            "type": "origins:block",
+                            "type": "apoli:block",
                             "block": "minecraft:campfire"
                         },
                         {
-                            "type": "origins:block_state",
+                            "type": "apoli:block_state",
                             "property": "lit",
                             "value": "true"
                         }

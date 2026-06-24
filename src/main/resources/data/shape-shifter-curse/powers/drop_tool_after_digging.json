@@ -1,12 +1,12 @@
 {
-    "type": "origins:action_on_block_break",
+    "type": "apoli:action_on_block_break",
     "entity_action": {
-        "type": "origins:drop_inventory",
+        "type": "apoli:drop_inventory",
         "item_condition": {
-            "type": "origins:and",
+            "type": "apoli:and",
             "conditions": [
                 {
-                    "type": "origins:harvest_level",
+                    "type": "apoli:harvest_level",
                     "comparison": ">=",
                     "compare_to": 1
                 },
@@ -21,7 +21,7 @@
         ]
     },
     "block_condition": {
-        "type": "origins:blast_resistance",
+        "type": "apoli:blast_resistance",
         "comparison": ">",
         "compare_to": 0.2
     }

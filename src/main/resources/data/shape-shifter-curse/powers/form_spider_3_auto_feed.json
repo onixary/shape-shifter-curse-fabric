@@ -1,15 +1,15 @@
 {
-  "type": "origins:action_over_time",
+  "type": "apoli:action_over_time",
   "entity_action": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "actions": [
       {
-        "type": "origins:feed",
+        "type": "apoli:feed",
         "food": 7,
         "saturation": 0.8
       },
       {
-        "type": "origins:play_sound",
+        "type": "apoli:play_sound",
         "sound": "minecraft:entity.generic.eat"
       },
       {
@@ -18,7 +18,7 @@
         "slot": "extra_hand",
         "slot_index": 0,
         "action": {
-          "type": "origins:consume",
+          "type": "apoli:consume",
           "amount": 1
         }
       }
@@ -26,10 +26,10 @@
   },
   "interval": 20,
   "condition": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "conditions": [
       {
-        "type": "origins:food_level",
+        "type": "apoli:food_level",
         "comparison": "<=",
         "compare_to": 13
       },
@@ -39,7 +39,7 @@
         "slot": "extra_hand",
         "slot_index": 0,
         "condition": {
-          "type": "origins:ingredient",
+          "type": "apoli:ingredient",
           "ingredient": {
             "item": "shape-shifter-curse:spider_fluid_cocoon"
           }

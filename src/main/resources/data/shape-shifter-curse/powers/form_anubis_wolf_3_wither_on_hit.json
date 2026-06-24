@@ -1,7 +1,7 @@
 {
-  "type": "origins:self_action_when_hit",
+  "type": "apoli:self_action_when_hit",
   "entity_action": {
-    "type": "origins:apply_effect",
+    "type": "apoli:apply_effect",
     "effect": {
       "effect": "minecraft:wither",
       "duration": 70,
@@ -10,6 +10,6 @@
     }
   },
   "damage_condition": {
-    "type": "origins:attacker"
+    "type": "apoli:attacker"
   }
 }

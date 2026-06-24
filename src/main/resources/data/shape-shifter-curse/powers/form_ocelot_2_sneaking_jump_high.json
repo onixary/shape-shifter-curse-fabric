@@ -1,18 +1,18 @@
 {
-    "type": "origins:modify_jump",
+    "type": "apoli:modify_jump",
     "modifier": {
         "name": "Bonus jump force while sneaking",
         "operation": "multiply_base",
         "value": 0.15
     },
     "condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:sneaking"
+                "type": "apoli:sneaking"
             },
             {
-                "type": "origins:food_level",
+                "type": "apoli:food_level",
                 "comparison": ">=",
                 "compare_to": 6
             }

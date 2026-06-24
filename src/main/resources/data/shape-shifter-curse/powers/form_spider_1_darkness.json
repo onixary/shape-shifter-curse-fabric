@@ -1,7 +1,7 @@
 {
-  "type": "origins:action_over_time",
+  "type": "apoli:action_over_time",
   "entity_action": {
-    "type": "origins:apply_effect",
+    "type": "apoli:apply_effect",
     "effect": {
       "effect": "minecraft:darkness",
       "duration": 100,
