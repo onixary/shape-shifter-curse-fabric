@@ -55,6 +55,10 @@ public class CommonConfig implements ConfigData {
     @Comment("Immediately Transform Default: false")
     public boolean immediatelyTransform = false;
 
+    @ConfigEntry.Category("General")
+    @Comment("Initial form ID used when the sscUseConfiguredInitialForm gamerule is enabled. Supports datapack forms. Default: shape-shifter-curse:original_before_enable")
+    public String initialFormId = "shape-shifter-curse:original_before_enable";
+
     @ConfigEntry.Category("Patron")
     @Comment("Enable Patron Form System. Default: true")
     public boolean enablePatronFormSystem = true;
