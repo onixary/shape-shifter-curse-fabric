@@ -615,5 +615,7 @@
     "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "Accent 2 Grayscale Reverse",
     "text.autoconfig.shape-shifter-curse-custom.option.enable_form_random_sound": "Enable Form Random Sound",
     "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_config": "Automatically sync config to server",
-    "text.autoconfig.shape-shifter-curse-common.option.initialFormIds": "Configured Initial Form IDs(Randomize if multiple)"
+    "text.autoconfig.shape-shifter-curse-common.option.initialFormIds": "Configured Initial Form IDs(Randomize if multiple)",
+    "text.autoconfig.shape-shifter-curse-common.option.statusPotionWithCurse": "Transformative Potion Can Effect Pre-Book Player",
+    "text.autoconfig.shape-shifter-curse-common.option.witchPotionForPreBook": "Witch Can Throw Transformative Potion To Pre-Book Player"
 }

@@ -615,9 +615,11 @@
     "codex.form.shape-shifter-curse.spider_3.cons": "Your fully transformed multi-legged spider body is no longer suited for sustained actions requiring endurance. Your movement and sprinting speed are greatly reduced, and you can no longer jump vertically to a height of one block as before. However, as a replacement, you can lunge forward while sprinting.\nYour spider digestive system means you can only gain hunger from externally digested Nutrient Sacs. Additionally, weapons enchanted with Bane of Arthropods deal increased damage to you.\nYour chitinous carapace and the bristles upon it fear flame — you take increased damage from fire.\nAside from a helmet, you cannot wear normal armor.\nVillage Iron Golems see you as an enemy and will actively attack you.",
     "codex.form.shape-shifter-curse.spider_3.instincts": " ",
     "tooltip.shape_shifter_curse.morphscale_food": "Undefined Tag Name",
-    "text.autoconfig.shape-shifter-curse-common.option.initialFormIds": "Configured Initial Form IDs(Randomize if multiple)",
     "death.attack.ssc_no_water_for_gills": "%1$s didn't manage to keep wet",
     "death.attack.ssc_no_water_for_gills.player": "%1$s didn't manage to keep wet because they were fighting %2$s",
     "key.shape-shifter-curse.active_skill_1": "Active Power (1)",
-    "key.shape-shifter-curse.active_skill_2": "Active Power (2)"
+    "key.shape-shifter-curse.active_skill_2": "Active Power (2)",
+    "text.autoconfig.shape-shifter-curse-common.option.initialFormIds": "Configured Initial Form IDs(Randomize if multiple)",
+    "text.autoconfig.shape-shifter-curse-common.option.statusPotionWithCurse": "Transformative Potion Can Effect Pre-Book Player",
+    "text.autoconfig.shape-shifter-curse-common.option.witchPotionForPreBook": "Witch Can Throw Transformative Potion To Pre-Book Player"
 }

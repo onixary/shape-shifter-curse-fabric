@@ -195,7 +195,7 @@ public class FormUtils {
         playerFormComponent.setForm(form);
         playerFormComponent.sync();
 
-        if (!RegPlayerForms.ORIGINAL_SHIFTER.isPlayerForm(player)) {
+        if (!EffectManager.playerCanHaveTransformativeEffect(player)) {
             EffectManager.clearTransformativeEffect(player);
         }
         // 应用Scale
