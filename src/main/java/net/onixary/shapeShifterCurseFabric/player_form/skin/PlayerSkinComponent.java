@@ -10,7 +10,7 @@ import java.util.OptionalInt;
 public class PlayerSkinComponent implements Component, AutoSyncedComponent {
     private boolean keepOriginalSkin = false;
     private boolean enableFormColor = false;
-    private FormTextureUtils.ColorSetting formColor = new FormTextureUtils.ColorSetting(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFF000000, 0xFF000000, false, false, false);
+    private FormTextureUtils.ColorSetting formColor = new FormTextureUtils.ColorSetting(0x00FFFFFF, 0x00FFFFFF, 0x00FFFFFF, 0x00000000, 0x00000000, false, false, false);
     private boolean enableFormRandomSound = true;
 
     public boolean shouldKeepOriginalSkin() {
