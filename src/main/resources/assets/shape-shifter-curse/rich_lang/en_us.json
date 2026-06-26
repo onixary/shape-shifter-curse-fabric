@@ -1291,9 +1291,5 @@
   "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "Accent 2 Grayscale Reverse",
   "text.autoconfig.shape-shifter-curse-custom.option.enable_form_random_sound": "Enable Form Random Sound",
   "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_config": "Automatically sync config to server",
-  "text.autoconfig.shape-shifter-curse-common.option.initialFormId": "Configured Initial Form ID",
-  "text.autoconfig.shape-shifter-curse-common.option.initialFormIds": "Configured Initial Form IDs(Randomize if multiple)",
-  "gamerule.sscUseConfiguredInitialForm": "Use SSC Configured Initial Form",
-  "gamerule.sscUseConfiguredInitialForm.description": "new players will immediately set the server-configured initial form on join.",
-  "info.shape-shifter-curse.configured_initial_form_not_found": "Configured initial form not found: %s"
+  "text.autoconfig.shape-shifter-curse-common.option.initialFormIds": "Configured Initial Form IDs(Randomize if multiple)"
 }

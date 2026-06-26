@@ -1228,9 +1228,5 @@
   "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "重点色2灰度反转",
   "text.autoconfig.shape-shifter-curse-custom.option.enable_form_random_sound": "启用形态随机叫声",
   "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_config": "自动向服务器同步配置",
-  "text.autoconfig.shape-shifter-curse-common.option.initialFormId": "配置的初始形态 ID",
-  "text.autoconfig.shape-shifter-curse-common.option.initialFormIds": "配置的初始形态ID(若有多个则随机选择)",
-  "gamerule.sscUseConfiguredInitialForm": "以SSC配置的初始形态开局",
-  "gamerule.sscUseConfiguredInitialForm.description": "开启后，新玩家加入世界时会立即变为服务器配置的初始形态",
-  "info.shape-shifter-curse.configured_initial_form_not_found": "未找到配置的初始形态：%s"
+  "text.autoconfig.shape-shifter-curse-common.option.initialFormIds": "配置的初始形态ID(若有多个则随机选择)"
 }

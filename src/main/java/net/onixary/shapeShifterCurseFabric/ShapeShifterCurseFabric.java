@@ -71,14 +71,9 @@ import net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusPotionEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
+import net.onixary.shapeShifterCurseFabric.util.*;
 import net.onixary.shapeShifterCurseFabric.util.Accessory.AccessoryUtils;
 import net.onixary.shapeShifterCurseFabric.util.Accessory.DefaultAccessory;
-import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
-import net.onixary.shapeShifterCurseFabric.util.AttackEntityDataTracker;
-import net.onixary.shapeShifterCurseFabric.util.ModGameRules;
-import net.onixary.shapeShifterCurseFabric.util.PlayerEventHandler;
-import net.onixary.shapeShifterCurseFabric.util.TickManager;
-import net.onixary.shapeShifterCurseFabric.util.TrinketDataPackReloadListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -196,7 +191,6 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         // PlayerDataStorage.initialize(); // 移除这行，因为这里还没有服务器实例
-        ModGameRules.register();
         RegCustomItem.initialize();
         RegCustomBlock.initialize();
         RegTransformativeEntitySpawnEgg.initialize();
@@ -263,7 +257,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             ModPacketsS2CServer.updateDynamicForm(player);
             PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
             if (RegPlayerForms.getPlayerForm(component.nowFormID) == null) {
-                FormUtils._loadForm(player, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
+                FormUtils._loadForm(player, InitialFormUtils.getInitialForm());
             }
         }));
         initLocalDataStorage();
