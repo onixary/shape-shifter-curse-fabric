@@ -37,6 +37,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     public @Nullable IForm transformTargetForm = null;
     // CTP系统
     public Identifier customPotionFormID = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID();
+    public boolean configuredInitialFormApplied = false;
     // 本能系统
     public float instinctValue = 0.0f;
     public float instinctRate = 0.0f;
@@ -107,6 +108,11 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         } else {
             customPotionFormID = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID();
         }
+        if (tag.contains("configuredInitialFormApplied")) {
+            configuredInitialFormApplied = tag.getBoolean("configuredInitialFormApplied");
+        } else {
+            configuredInitialFormApplied = false;
+        }
         if (tag.contains("instinctValue")) {
             instinctValue = tag.getFloat("instinctValue");
         } else {
@@ -154,6 +160,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         if (customPotionFormID != null) {
             tag.putString("customPotionFormID", customPotionFormID.toString());
         }
+        tag.putBoolean("configuredInitialFormApplied", configuredInitialFormApplied);
         tag.putFloat("instinctValue", instinctValue);
         tag.putFloat("instinctRate", instinctRate);
         NbtCompound effects = new NbtCompound();

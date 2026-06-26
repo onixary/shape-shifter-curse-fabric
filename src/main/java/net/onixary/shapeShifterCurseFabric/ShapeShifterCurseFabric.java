@@ -75,6 +75,7 @@ import net.onixary.shapeShifterCurseFabric.util.Accessory.AccessoryUtils;
 import net.onixary.shapeShifterCurseFabric.util.Accessory.DefaultAccessory;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 import net.onixary.shapeShifterCurseFabric.util.AttackEntityDataTracker;
+import net.onixary.shapeShifterCurseFabric.util.ModGameRules;
 import net.onixary.shapeShifterCurseFabric.util.PlayerEventHandler;
 import net.onixary.shapeShifterCurseFabric.util.TickManager;
 import net.onixary.shapeShifterCurseFabric.util.TrinketDataPackReloadListener;
@@ -195,6 +196,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         // PlayerDataStorage.initialize(); // 移除这行，因为这里还没有服务器实例
+        ModGameRules.register();
         RegCustomItem.initialize();
         RegCustomBlock.initialize();
         RegTransformativeEntitySpawnEgg.initialize();
