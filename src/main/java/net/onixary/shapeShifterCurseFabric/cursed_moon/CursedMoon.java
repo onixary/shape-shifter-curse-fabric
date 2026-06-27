@@ -140,6 +140,9 @@ public class CursedMoon {
         }
         if (isInCursedMoon(world)) {
             for (PlayerEntity player : minecraftServer.getPlayerManager().getPlayerList()) {
+                if(player.isSleeping() && !ShapeShifterCurseFabric.commonConfig.allowSleepInCursedMoon){
+                    player.wakeUp();
+                }
                 applyStartCursedMoonEffect(world, player);
             }
         } else {
