@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.util;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
@@ -10,8 +11,12 @@ import java.util.Map;
 import java.util.Random;
 
 public class InitialFormUtils {
-    public static @NotNull IForm getInitialForm() {
+    // 给Mixin留个参数 给个player应该能实现一些特殊操作
+    public static @NotNull IForm getInitialForm(PlayerEntity player) {
         // "namespace:id:weight"
+        if (!ShapeShifterCurseFabric.commonConfig.enableInitialForm) {
+            return RegPlayerForms.ORIGINAL_BEFORE_ENABLE;  // 默认形态
+        }
         try {
             String[] initialFormArray = ShapeShifterCurseFabric.commonConfig.initialFormIds;
             HashMap<IForm, Integer> validForms = new HashMap<>();

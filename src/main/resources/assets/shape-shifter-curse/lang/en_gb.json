@@ -619,6 +619,7 @@
     "death.attack.ssc_no_water_for_gills.player": "%1$s didn't manage to keep wet because they were fighting %2$s",
     "key.shape-shifter-curse.active_skill_1": "Active Power (1)",
     "key.shape-shifter-curse.active_skill_2": "Active Power (2)",
+    "text.autoconfig.shape-shifter-curse-common.option.enableInitialForm": "Enable Custom Initial Form",
     "text.autoconfig.shape-shifter-curse-common.option.initialFormIds": "Configured Initial Form IDs(Randomize if multiple)",
     "text.autoconfig.shape-shifter-curse-common.option.statusPotionWithCurse": "Transformative Potion Can Effect Pre-Book Player",
     "text.autoconfig.shape-shifter-curse-common.option.witchPotionForPreBook": "Witch Can Throw Transformative Potion To Pre-Book Player"

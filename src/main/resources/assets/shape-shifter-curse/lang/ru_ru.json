@@ -615,7 +615,8 @@
     "gui.shape_shifter_curse_fabric.fcs.accent2GreyReverse": "Reverse Accent 2",
     "text.autoconfig.shape-shifter-curse-common.option.immediatelyTransform": "Force Immediately Transform",
     "tooltip.shape_shifter_curse.morphscale_food": "Undefined Tag Name",
-    "text.autoconfig.shape-shifter-curse-common.option.initialFormIds": "Configured Initial Form IDs",
+    "text.autoconfig.shape-shifter-curse-common.option.enableInitialForm": "Enable Custom Initial Form",
+    "text.autoconfig.shape-shifter-curse-common.option.initialFormIds": "Configured Initial Form ID(Randomize if multiple)s",
     "text.autoconfig.shape-shifter-curse-common.option.statusPotionWithCurse": "Transformative Potion Can Effect Pre-Book Player",
     "text.autoconfig.shape-shifter-curse-common.option.witchPotionForPreBook": "Witch Can Throw Transformative Potion To Pre-Book Player"
 }

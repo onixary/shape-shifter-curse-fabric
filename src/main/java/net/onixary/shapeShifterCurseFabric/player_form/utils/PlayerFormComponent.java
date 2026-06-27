@@ -26,7 +26,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     public static final ComponentKey<PlayerFormComponent> COMPONENT = ComponentRegistry.getOrCreate(ShapeShifterCurseFabric.identifier("player_form"), PlayerFormComponent.class);
 
     // form的2个值禁止使用非setForm函数修改 除非你知道你在干什么 读取可以直接读 但是修改请使用setForm
-    public @NotNull IForm nowForm = InitialFormUtils.getInitialForm();
+    public @NotNull IForm nowForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
     public @Nullable Identifier nowFormID = nowForm.getFormID();
     public final List<IForm> formHistory = new ArrayList<>();
     // 诅咒之月逻辑
@@ -48,6 +48,8 @@ public class PlayerFormComponent implements AutoSyncedComponent {
 
     public PlayerFormComponent(PlayerEntity player) {
         this.player = player;
+        this.nowForm = InitialFormUtils.getInitialForm(player);
+        this.nowFormID = nowForm.getFormID();
     }
 
     @Override

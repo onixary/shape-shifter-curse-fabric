@@ -615,6 +615,7 @@
     "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse": "重点色2灰度反转",
     "text.autoconfig.shape-shifter-curse-custom.option.enable_form_random_sound": "启用形态随机叫声",
     "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_config": "自动向服务器同步配置",
+    "text.autoconfig.shape-shifter-curse-common.option.enableInitialForm": "是否启用自定义初始形态",
     "text.autoconfig.shape-shifter-curse-common.option.initialFormIds": "配置的初始形态ID(若有多个则随机选择)",
     "text.autoconfig.shape-shifter-curse-common.option.statusPotionWithCurse": "变形药水可以影响开书前玩家",
     "text.autoconfig.shape-shifter-curse-common.option.witchPotionForPreBook": "女巫会给开书前玩家投掷变形药水"
