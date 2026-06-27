@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.util;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.random.Random;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
@@ -8,13 +9,15 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class InitialFormUtils {
     // 给Mixin留个参数 给个player应该能实现一些特殊操作
     public static @NotNull IForm getInitialForm(PlayerEntity player) {
         // "namespace:id:weight"
         if (!ShapeShifterCurseFabric.commonConfig.enableInitialForm) {
+            return RegPlayerForms.ORIGINAL_BEFORE_ENABLE;  // 默认形态
+        }
+        if (player.getServer() != null && !player.getServer().getGameRules().getBoolean(ModGameRules.USE_INITIAL_FORM)) {
             return RegPlayerForms.ORIGINAL_BEFORE_ENABLE;  // 默认形态
         }
         try {
@@ -59,7 +62,7 @@ public class InitialFormUtils {
                 return validForms.keySet().iterator().next();
             }
 
-            Random random = new Random();
+            Random random = player.getRandom();
             int randomValue = random.nextInt(totalWeight);
 
             int cumulative = 0;

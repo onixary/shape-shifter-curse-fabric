@@ -214,6 +214,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         MinionRegister.register();
 
         AttackEntityDataTracker.init();
+        ModGameRules.register();
 
         // 注册配置文件
         AutoConfig.register(PlayerCustomConfig.class, Toml4jConfigSerializer::new);  // 客户端配置

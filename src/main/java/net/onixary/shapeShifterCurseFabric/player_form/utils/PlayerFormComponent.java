@@ -169,14 +169,18 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     }
 
     public void clear() {
-        nowFormID = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID();
-        nowForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
+        this.nowForm = InitialFormUtils.getInitialForm(this.player);
+        this.nowFormID = nowForm.getFormID();
         formHistory.clear();
         isCursedMoonApplied = false;
         lastTransformByCure = false;
         BeforeCursedMoonAppliedForm = null;
         AfterCursedMoonAppliedForm = null;
         transformTargetForm = null;
+        customPotionFormID = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID();
+        instinctValue = 0.0f;
+        instinctRate = 0.0f;
+        instinctEffects.clear();
     }
 
     public void sync() {

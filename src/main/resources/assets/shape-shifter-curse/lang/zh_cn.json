@@ -618,5 +618,8 @@
     "text.autoconfig.shape-shifter-curse-common.option.enableInitialForm": "是否启用自定义初始形态",
     "text.autoconfig.shape-shifter-curse-common.option.initialFormIds": "配置的初始形态ID(若有多个则随机选择)",
     "text.autoconfig.shape-shifter-curse-common.option.statusPotionWithCurse": "变形药水可以影响开书前玩家",
-    "text.autoconfig.shape-shifter-curse-common.option.witchPotionForPreBook": "女巫会给开书前玩家投掷变形药水"
+    "text.autoconfig.shape-shifter-curse-common.option.witchPotionForPreBook": "女巫会给开书前玩家投掷变形药水",
+    "gamerule.category.ssc_gamerule": "Shape Shifter Curse",
+    "gamerule.sscUseInitialForm": "以SSC配置的初始形态开局",
+    "gamerule.sscUseInitialForm.description": "开启后，新玩家加入世界时会立即变为服务器配置的初始形态"
 }
