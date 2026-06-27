@@ -28,10 +28,6 @@ public interface IFormLayerGroup {
         return layerID;
     }
 
-    default void beforeApply(@NotNull PlayerEntity player, @NotNull Identifier layerID) {};
-
-    default void afterApply(@NotNull PlayerEntity player, @NotNull Identifier layerID) {};
-
     // 给后续留的拓展接口 说不定未来客户端需要知道部分数据 反正目前不需要
     default void write(@NotNull PacketByteBuf packetByteBuf) {
         packetByteBuf.writeIdentifier(getGroupID());
@@ -41,5 +37,11 @@ public interface IFormLayerGroup {
     default void read(@NotNull PacketByteBuf packetByteBuf) {
         __setGroupID(packetByteBuf.readIdentifier());
         __setLayers(packetByteBuf.readCollection(ArrayList::new, PacketByteBuf::readIdentifier));
+    }
+
+    default void onAddGroup(@NotNull PlayerEntity player, @NotNull Identifier newLayer) {
+    }
+
+    default void onRemoveGroup(@NotNull PlayerEntity player, @NotNull Identifier oldLayer) {
     }
 }

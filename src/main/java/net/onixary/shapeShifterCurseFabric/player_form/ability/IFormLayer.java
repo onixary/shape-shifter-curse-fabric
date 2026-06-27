@@ -1,5 +1,9 @@
 package net.onixary.shapeShifterCurseFabric.player_form.ability;
 
+import io.github.apace100.apoli.component.PowerHolderComponent;
+import io.github.apace100.apoli.power.MultiplePowerType;
+import io.github.apace100.apoli.power.PowerType;
+import io.github.apace100.apoli.power.PowerTypeRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
@@ -32,5 +36,42 @@ public interface IFormLayer {
     default void read(@NotNull PacketByteBuf packetByteBuf) {
         __setID(packetByteBuf.readIdentifier());
         __setPowerID(packetByteBuf.readCollection(ArrayList::new, PacketByteBuf::readIdentifier));
+    }
+
+    static boolean hasPowerType(List<Identifier> powerIDs, PowerType<?> powerType) {
+        if(powerType.getIdentifier() == null) {
+            return false;
+        }
+        if(powerIDs.contains(powerType.getIdentifier())) {
+            return true;
+        }
+        for (Identifier powerID : powerIDs) {
+            PowerType<?> power = PowerTypeRegistry.get(powerID);
+            if (power instanceof MultiplePowerType<?> mpt) {
+                if(mpt.getSubPowers().contains(powerType.getIdentifier())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    default void __onApply(@NotNull PlayerEntity player) {
+        beforeApply(player);
+        PowerHolderComponent phc = PowerHolderComponent.KEY.get(player);
+        phc.removeAllPowersFromSource(getID());
+        List<Identifier> powerIDs = getPowerID(player);
+        for (Identifier powerID : powerIDs) {
+            PowerType<?> powerType = PowerTypeRegistry.get(powerID);
+            if (powerType != null && !phc.hasPower(powerType, getID())) {
+                phc.addPower(powerType, getID());
+            }
+        }
+        phc.getPowersFromSource(getID()).stream().filter(p -> !hasPowerType(powerIDs, p)).forEach(p -> phc.removePower(p, getID()));
+        afterApply(player);
+    }
+
+    default void __onRemove(@NotNull PlayerEntity player) {
+        PowerHolderComponent.KEY.get(player).removeAllPowersFromSource(getID());
     }
 }
