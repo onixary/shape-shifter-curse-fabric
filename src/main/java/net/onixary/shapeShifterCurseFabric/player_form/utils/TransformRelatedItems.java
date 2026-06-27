@@ -90,8 +90,7 @@ public class TransformRelatedItems {
             return;
         }
         IForm nowForm = FormUtils.getPlayerForm(player);
-        if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) { }
-        else if (RegPlayerForms.ORIGINAL_SHIFTER.isPlayerForm(player)) {
+        if (RegPlayerForms.ORIGINAL_SHIFTER.isPlayerForm(player) || EffectManager.playerCanHaveTransformativeEffect(player)) {
             if (EffectManager.hasTransformativeEffect(player)) {
                 EffectManager.ActiveTransformativeEffect(serverPlayer);
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_used_catalyst_attached").formatted(Formatting.YELLOW));
@@ -100,6 +99,9 @@ public class TransformRelatedItems {
             else{
                 player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_used_catalyst").formatted(Formatting.YELLOW));
             }
+        }
+        else if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) {
+
         }
         else if (FormUtils.SpecialForm.hasFlag(nowForm)) {
             // 为了这句文本 专门加了一个flag

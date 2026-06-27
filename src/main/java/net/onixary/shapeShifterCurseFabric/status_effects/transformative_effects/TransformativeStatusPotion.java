@@ -5,7 +5,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +38,7 @@ public class TransformativeStatusPotion extends StatusEffect {
         if (!target.getWorld().isClient() && target instanceof ServerPlayerEntity player) {
             TransformativeStatusInstance instance = EffectManager.getTransformativeEffect(player);
             if (instance == null || instance.getTransformativeEffectType() == null || !instance.getTransformativeEffectType().getToForm(player).equals(this.TransformativeStatusEffect.getToForm(player))) {  // 如果当前效果的形态与regStatusEffect不同
-                if (RegPlayerForms.ORIGINAL_SHIFTER.isPlayerForm(player)) {
+                if (EffectManager.playerCanHaveTransformativeEffect(player)) {
                     EffectManager.overrideEffect(player, this.TransformativeStatusEffect);
                 }
             }

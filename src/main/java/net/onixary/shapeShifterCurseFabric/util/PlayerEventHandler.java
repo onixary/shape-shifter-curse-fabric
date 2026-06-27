@@ -54,7 +54,6 @@ public class PlayerEventHandler {
                     ShapeShifterCurseFabric.LOGGER.error("Error sending update dynamic form: ", e);
                 }
                 try {
-                    applyConfiguredInitialForm(player);
                     IForm form = FormUtils.getPlayerForm(player);
                     FormUtils._loadForm(player, form);
                 } catch (Exception e) {
@@ -171,62 +170,6 @@ public class PlayerEventHandler {
          */
 
         ServerTickEvents.END_SERVER_TICK.register(server -> JumpEventCondition.tick());
-    }
-
-    private static void applyConfiguredInitialForm(ServerPlayerEntity player) {
-        if (!player.getServerWorld().getGameRules().getBoolean(ModGameRules.USE_CONFIGURED_INITIAL_FORM)) {
-            return;
-        }
-
-        PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
-        if (component.configuredInitialFormApplied || !RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) {
-            return;
-        }
-
-        String[] configuredFormIds = ShapeShifterCurseFabric.commonConfig.initialFormIds;
-        List<IForm> forms = getConfiguredInitialForms(configuredFormIds);
-        IForm form = forms.isEmpty() ? null : forms.get(player.getRandom().nextInt(forms.size()));
-        if (form == null) {
-            player.sendMessage(Text.translatable("info.shape-shifter-curse.configured_initial_form_not_found", formatConfiguredInitialFormIds(configuredFormIds)), false);
-            return;
-        }
-
-        component.configuredInitialFormApplied = true;
-        component.sync();
-        TransformManager.immediatelyTransform(player, form);
-    }
-
-    private static List<IForm> getConfiguredInitialForms(String[] configuredFormIds) {
-        List<IForm> forms = new ArrayList<>();
-        if (configuredFormIds == null) {
-            return forms;
-        }
-        for (String configuredFormId : configuredFormIds) {
-            Identifier formId = parseConfiguredInitialFormId(configuredFormId);
-            IForm form = formId == null ? null : RegPlayerForms.getPlayerForm(formId);
-            if (form != null) {
-                forms.add(form);
-            }
-        }
-        return forms;
-    }
-
-    private static Identifier parseConfiguredInitialFormId(String configuredFormId) {
-        if (configuredFormId == null || configuredFormId.isBlank()) {
-            return null;
-        }
-        String normalized = configuredFormId.trim();
-        if (!normalized.contains(":")) {
-            normalized = ShapeShifterCurseFabric.MOD_ID + ":" + normalized;
-        }
-        return Identifier.tryParse(normalized);
-    }
-
-    private static String formatConfiguredInitialFormIds(String[] configuredFormIds) {
-        if (configuredFormIds == null) {
-            return "[]";
-        }
-        return Arrays.toString(configuredFormIds);
     }
 
     private static void copyTransformativeEffect(ServerPlayerEntity oldPlayer, ServerPlayerEntity newPlayer) {

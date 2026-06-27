@@ -615,9 +615,11 @@
     "gui.shape_shifter_curse_fabric.fcs.accent2GreyReverse": "Reverse Accent 2",
     "text.autoconfig.shape-shifter-curse-common.option.immediatelyTransform": "Force Immediately Transform",
     "tooltip.shape_shifter_curse.morphscale_food": "Undefined Tag Name",
-    "text.autoconfig.shape-shifter-curse-common.option.initialFormId": "Configured Initial Form ID",
-    "text.autoconfig.shape-shifter-curse-common.option.initialFormIds": "Configured Initial Form IDs",
-    "gamerule.sscUseConfiguredInitialForm": "Use SSC Configured Initial Form",
-    "gamerule.sscUseConfiguredInitialForm.description": "When enabled, players who have not chosen a form will immediately transform into the server-configured initial form on join.",
-    "info.shape-shifter-curse.configured_initial_form_not_found": "Configured initial form not found: %s"
+    "text.autoconfig.shape-shifter-curse-common.option.enableInitialForm": "Enable Custom Initial Form",
+    "text.autoconfig.shape-shifter-curse-common.option.initialFormIds": "Configured Initial Form ID(Randomize if multiple)s",
+    "text.autoconfig.shape-shifter-curse-common.option.statusPotionWithCurse": "Transformative Potion Can Effect Pre-Book Player",
+    "text.autoconfig.shape-shifter-curse-common.option.witchPotionForPreBook": "Witch Can Throw Transformative Potion To Pre-Book Player",
+    "gamerule.category.ssc_gamerule": "Shape Shifter Curse",
+    "gamerule.sscUseInitialForm": "Use SSC Custom Initial Form",
+    "gamerule.sscUseInitialForm.description": "When enabled, players who have not chosen a form will immediately transform into the server-configured initial form on join."
 }
