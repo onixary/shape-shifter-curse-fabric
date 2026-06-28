@@ -31,6 +31,8 @@ public class TrinketUtils {
         public final List<Identifier> allFormPowerRemove;
         public final HashMap<Identifier, List<Identifier>> formPowerAdd;
         public final HashMap<Identifier, List<Identifier>> formPowerRemove;
+        public final HashMap<Identifier, HashMap<Identifier, List<Identifier>>> layerPowerAddMap;
+        public final HashMap<Identifier, HashMap<Identifier, List<Identifier>>> layerPowerRemoveMap;
 
         private Pair<List<Identifier>, List<Identifier>> parsePowerList(JsonObject jsonObject) {
             List<Identifier> allFormPowerAdd = new ArrayList<>();
@@ -54,20 +56,24 @@ public class TrinketUtils {
             return new Pair<>(allFormPowerAdd, allFormPowerRemove);
         }
 
-        public TrinketPowerData(List<Identifier> accessoryPowers, List<Identifier> allFormPowerAdd, List<Identifier> allFormPowerRemove, HashMap<Identifier, List<Identifier>> formPowerAdd, HashMap<Identifier, List<Identifier>> formPowerRemove) {
-            this.accessoryPowers = accessoryPowers;
-            this.allFormPowerAdd = allFormPowerAdd;
-            this.allFormPowerRemove = allFormPowerRemove;
-            this.formPowerAdd = formPowerAdd;
-            this.formPowerRemove = formPowerRemove;
-        }
-
         public TrinketPowerData(JsonObject jsonObject) {
+            if (jsonObject == null) {
+                this.accessoryPowers = new ArrayList<>();
+                this.allFormPowerAdd = new ArrayList<>();
+                this.allFormPowerRemove = new ArrayList<>();
+                this.formPowerAdd = new HashMap<>();
+                this.formPowerRemove = new HashMap<>();
+                this.layerPowerAddMap = new HashMap<>();
+                this.layerPowerRemoveMap = new HashMap<>();
+                return;
+            }
             List<Identifier> accessoryPowers = new ArrayList<>();
             List<Identifier> allFormPowerAdd = new ArrayList<>();
             List<Identifier> allFormPowerRemove = new ArrayList<>();
             HashMap<Identifier, List<Identifier>> formPowerAdd = new HashMap<>();
             HashMap<Identifier, List<Identifier>> formPowerRemove = new HashMap<>();
+            HashMap<Identifier, HashMap<Identifier, List<Identifier>>> layerPowerAddMap = new HashMap<>();
+            HashMap<Identifier, HashMap<Identifier, List<Identifier>>> layerPowerRemoveMap = new HashMap<>();
             if (jsonObject.has("accessory_powers") && jsonObject.get("accessory_powers").isJsonArray()) {
                 JsonArray accessoryPowerArray = jsonObject.get("accessory_powers").getAsJsonArray();
                 accessoryPowerArray.forEach(jsonElement -> {
@@ -96,11 +102,39 @@ public class TrinketUtils {
                     formPowerRemove.put(currentFormID, formPowerList.getRight());
                 }
             }
+            if (jsonObject.has("layers") && jsonObject.get("layers").isJsonObject()) {
+                JsonObject layerGroupData = jsonObject.get("layers").getAsJsonObject();
+                for (String layerGroupID : layerGroupData.keySet()) {
+                    Identifier currentLayerGroupID = Identifier.tryParse(layerGroupID);
+                    if (currentLayerGroupID == null) {
+                        ShapeShifterCurseFabric.LOGGER.warn("Error On Parsing Trinket Power Data: Invalid Layer Group ID: {}", layerGroupID);
+                    }
+                    HashMap<Identifier, List<Identifier>> layerPowerAddMap2 = new HashMap<>();
+                    HashMap<Identifier, List<Identifier>> layerPowerRemoveMap2 = new HashMap<>();
+                    JsonObject layerData = layerGroupData.get(layerGroupID).getAsJsonObject();
+                    for (String layerID : layerData.keySet()) {
+                        Identifier currentLayerID = Identifier.tryParse(layerID);
+                        if (currentLayerID == null) {
+                            ShapeShifterCurseFabric.LOGGER.warn("Error On Parsing Trinket Power Data: Invalid Layer ID: {}", layerID);
+                            continue;
+                        }
+                        JsonObject layerPowerData = layerData.get(layerID).getAsJsonObject();
+                        Pair<List<Identifier>, List<Identifier>> layerPowerList = parsePowerList(layerPowerData);
+                        layerPowerAddMap2.put(currentLayerID, layerPowerList.getLeft());
+                        layerPowerRemoveMap2.put(currentLayerID, layerPowerList.getRight());
+                    }
+                    layerPowerAddMap.put(currentLayerGroupID, layerPowerAddMap2);
+                    layerPowerRemoveMap.put(currentLayerGroupID, layerPowerRemoveMap2);
+                }
+            }
+
             this.accessoryPowers = accessoryPowers;
             this.allFormPowerAdd = allFormPowerAdd;
             this.allFormPowerRemove = allFormPowerRemove;
             this.formPowerAdd = formPowerAdd;
             this.formPowerRemove = formPowerRemove;
+            this.layerPowerAddMap = layerPowerAddMap;
+            this.layerPowerRemoveMap = layerPowerRemoveMap;
         }
 
         public TrinketPowerData Merge(TrinketPowerData other) {
@@ -137,6 +171,32 @@ public class TrinketUtils {
                     }
                 }
             }
+            for (Identifier layerGroupID : other.layerPowerAddMap.keySet()) {
+                HashMap<Identifier, List<Identifier>> selfLayerGroupPowerAddMap = this.layerPowerAddMap.computeIfAbsent(layerGroupID, k -> new HashMap<>());
+                HashMap<Identifier, List<Identifier>> layerPowerAddMap = other.layerPowerAddMap.get(layerGroupID);
+                for (Identifier layerID : layerPowerAddMap.keySet()) {
+                    List<Identifier> selfLayerPowerAddList = selfLayerGroupPowerAddMap.computeIfAbsent(layerID, k -> new ArrayList<>());
+                    List<Identifier> layerPowerAddList = layerPowerAddMap.get(layerID);
+                    for (Identifier powerID : layerPowerAddList) {
+                        if (!selfLayerPowerAddList.contains(powerID)) {
+                            selfLayerPowerAddList.add(powerID);
+                        }
+                    }
+                }
+            }
+            for (Identifier layerGroupID : other.layerPowerRemoveMap.keySet()) {
+                HashMap<Identifier, List<Identifier>> selfLayerGroupPowerRemoveMap = this.layerPowerRemoveMap.computeIfAbsent(layerGroupID, k -> new HashMap<>());
+                HashMap<Identifier, List<Identifier>> layerPowerRemoveMap = other.layerPowerRemoveMap.get(layerGroupID);
+                for (Identifier layerID : layerPowerRemoveMap.keySet()) {
+                    List<Identifier> selfLayerPowerRemoveList = selfLayerGroupPowerRemoveMap.computeIfAbsent(layerID, k -> new ArrayList<>());
+                    List<Identifier> layerPowerRemoveList = layerPowerRemoveMap.get(layerID);
+                    for (Identifier powerID : layerPowerRemoveList) {
+                        if (!selfLayerPowerRemoveList.contains(powerID)) {
+                            selfLayerPowerRemoveList.add(powerID);
+                        }
+                    }
+                }
+            }
             return this;
         }
 
@@ -158,8 +218,9 @@ public class TrinketUtils {
 
         public void onPlayerFormChangeReApply(PlayerEntity player) {
             IForm form = FormUtils.getPlayerForm(player);
+            Pair<Identifier, Identifier> currentFormLayer = form.getFormLayer();
             Identifier currentFormID = form.getFormID();
-            Identifier currentOriginsID = form.getFormLayer().getRight();
+            Identifier currentOriginsID = currentFormLayer.getRight();
             for (Identifier powerID : allFormPowerAdd) {
                 this.AddPower(player, powerID, currentOriginsID);
             }
@@ -168,13 +229,25 @@ public class TrinketUtils {
             }
             List<Identifier> formPowerAddList = formPowerAdd.get(currentFormID);
             List<Identifier> formPowerRemoveList = formPowerRemove.get(currentFormID);
+            List<Identifier> layerGroupPowerAddList = layerPowerAddMap.getOrDefault(currentFormLayer.getLeft(), new HashMap<>()).get(currentFormLayer.getRight());
+            List<Identifier> layerGroupPowerRemoveList = layerPowerRemoveMap.getOrDefault(currentFormLayer.getLeft(), new HashMap<>()).get(currentFormLayer.getRight());
             if (formPowerAddList != null) {
                 for (Identifier powerID : formPowerAddList) {
                     this.AddPower(player, powerID, currentOriginsID);
                 }
             }
+            if (layerGroupPowerAddList != null) {
+                for (Identifier powerID : layerGroupPowerAddList) {
+                    this.AddPower(player, powerID, currentOriginsID);
+                }
+            }
             if (formPowerRemoveList != null) {
                 for (Identifier powerID : formPowerRemoveList) {
+                    this.RemovePower(player, powerID, currentOriginsID);
+                }
+            }
+            if (layerGroupPowerRemoveList != null) {
+                for (Identifier powerID : layerGroupPowerRemoveList) {
                     this.RemovePower(player, powerID, currentOriginsID);
                 }
             }
@@ -189,8 +262,9 @@ public class TrinketUtils {
 
         public void onPlayerUnEquip(PlayerEntity player, Identifier itemID) {
             IForm form = FormUtils.getPlayerForm(player);
+            Pair<Identifier, Identifier> currentFormLayer = form.getFormLayer();
             Identifier currentFormID = form.getFormID();
-            Identifier currentOriginsID = form.getFormLayer().getRight();
+            Identifier currentOriginsID = currentFormLayer.getRight();
             for (Identifier powerID : accessoryPowers) {
                 this.RemovePower(player, powerID, itemID);
             }
@@ -202,13 +276,25 @@ public class TrinketUtils {
             }
             List<Identifier> formPowerAddList = formPowerAdd.get(currentFormID);
             List<Identifier> formPowerRemoveList = formPowerRemove.get(currentFormID);
+            List<Identifier> layerGroupPowerAddList = layerPowerAddMap.getOrDefault(currentFormLayer.getLeft(), new HashMap<>()).get(currentFormLayer.getRight());
+            List<Identifier> layerGroupPowerRemoveList = layerPowerRemoveMap.getOrDefault(currentFormLayer.getLeft(), new HashMap<>()).get(currentFormLayer.getRight());
             if (formPowerAddList != null) {
                 for (Identifier powerID : formPowerAddList) {
                     this.RemovePower(player, powerID, currentOriginsID);
                 }
             }
+            if (layerGroupPowerAddList != null) {
+                for (Identifier powerID : layerGroupPowerAddList) {
+                    this.RemovePower(player, powerID, currentOriginsID);
+                }
+            }
             if (formPowerRemoveList != null) {
                 for (Identifier powerID : formPowerRemoveList) {
+                    this.AddPower(player, powerID, currentOriginsID);
+                }
+            }
+            if (layerGroupPowerRemoveList != null) {
+                for (Identifier powerID : layerGroupPowerRemoveList) {
                     this.AddPower(player, powerID, currentOriginsID);
                 }
             }
