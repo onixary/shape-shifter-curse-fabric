@@ -128,6 +128,8 @@ public interface IForm {
 
     default void onTransform_To(PlayerEntity player, IForm nextForm) { }
 
+    default void onApplyPowerEnd(PlayerEntity player) { }
+
     // Scale 系统
     // 先这样写 等我之后翻一下 pehkui 的代码
     public void applyScale(PlayerEntity player);
