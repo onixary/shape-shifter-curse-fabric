@@ -10,6 +10,8 @@
   "model": "shape-shifter-curse:geo/form/form_ocelot_3.geo.json",
   "texture": "shape-shifter-curse:textures/form/form_ocelot_3/form_ocelot_3.png",
   "texture_mask": "shape-shifter-curse:textures/form/form_ocelot_3/form_ocelot_3_colormask.png",
+  "fullbright_texture": "shape-shifter-curse:textures/form/form_ocelot_3/form_ocelot_3_emission.png",
+  "fullbright_texture_mask": "shape-shifter-curse:textures/form/form_ocelot_3/form_ocelot_3_emission_colormask.png",
   "hidden": [
     "leftLeg",
     "rightLeg",

@@ -10,6 +10,8 @@
   "model": "shape-shifter-curse:geo/form/form_spider_2.geo.json",
   "texture": "shape-shifter-curse:textures/form/form_spider_2/form_spider_2.png",
   "texture_mask": "shape-shifter-curse:textures/form/form_spider_2/form_spider_2_colormask.png",
+  "fullbright_texture": "shape-shifter-curse:textures/form/form_spider_2/form_spider_2_emission.png",
+  "fullbright_texture_mask": "shape-shifter-curse:textures/form/form_spider_2/form_spider_2_emission_colormask.png",
   "hidden": [
     "leftLeg",
     "rightLeg",

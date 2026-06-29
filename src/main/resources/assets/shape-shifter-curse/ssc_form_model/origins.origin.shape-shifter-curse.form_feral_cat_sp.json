@@ -10,6 +10,8 @@
   "model": "shape-shifter-curse:geo/form/form_feral_cat_sp.geo.json",
   "texture": "shape-shifter-curse:textures/form/form_feral_cat_sp/form_feral_cat_sp.png",
   "texture_mask": "shape-shifter-curse:textures/form/form_feral_cat_sp/form_feral_cat_sp_colormask.png",
+  "fullbright_texture": "shape-shifter-curse:textures/form/form_feral_cat_sp/form_feral_cat_sp_emission.png",
+  "fullbright_texture_mask": "shape-shifter-curse:textures/form/form_feral_cat_sp/form_feral_cat_sp_emission_colormask.png",
   "hidden": [
     "leftLeg",
     "rightLeg",

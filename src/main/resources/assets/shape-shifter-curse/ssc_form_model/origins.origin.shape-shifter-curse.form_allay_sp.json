@@ -12,6 +12,10 @@
   "texture_mask": "shape-shifter-curse:textures/form/form_allay_sp/form_allay_sp_colormask.png",
   "overlay": "shape-shifter-curse:textures/form/form_allay_sp/form_allay_sp_overlay.png",
   "overlay_mask": "shape-shifter-curse:textures/form/form_allay_sp/form_allay_sp_overlay_colormask.png",
+  "fullbright_texture": "shape-shifter-curse:textures/form/form_allay_sp/form_allay_sp_emission.png",
+  "fullbright_texture_mask": "shape-shifter-curse:textures/form/form_allay_sp/form_allay_sp_emission_colormask.png",
+  "emissive_overlay": "shape-shifter-curse:textures/form/form_allay_sp/form_allay_sp_overlay_emission.png",
+  "emissive_overlay_mask": "shape-shifter-curse:textures/form/form_allay_sp/form_allay_sp_overlay_emission_colormask.png",
   "hidden": [
     "leftLeg",
     "rightLeg",
