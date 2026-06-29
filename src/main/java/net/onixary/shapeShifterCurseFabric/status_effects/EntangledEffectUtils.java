@@ -18,6 +18,9 @@ public class EntangledEffectUtils {
     public static final int ENTANGLED_FULL_DURATION_PLAYER = 20 * 5;
 
     public static void applyEntangledEffect(@Nullable Entity owner, LivingEntity target, int Time) {
+        if (target.getWorld().isClient) {
+            return;
+        }
         if (target.getStatusEffect(RegOtherStatusEffects.ENTANGLED_FULL_EFFECT) != null) {
             return;
         }
