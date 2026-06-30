@@ -1,0 +1,65 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"spider_3_climb_idle": {
+			"loop": true,
+			"bones": {
+				"torso": {
+					"rotation": {
+						"vector": [-12.5, 0, 0]
+					}
+				},
+				"rightArm": {
+					"rotation": {
+						"vector": [-77.5, 0, 0]
+					}
+				},
+				"leftArm": {
+					"rotation": {
+						"vector": [-77.5, 0, 0]
+					}
+				},
+				"rightLeg": {
+					"rotation": {
+						"vector": [-88.6077, 18.0578, 8.7447]
+					},
+					"position": {
+						"vector": [0, 0, 2]
+					}
+				},
+				"leftLeg": {
+					"rotation": {
+						"vector": [-88.6077, -18.0578, -8.7447]
+					},
+					"position": {
+						"vector": [0, 0, 2]
+					}
+				},
+				"bipedLeftHindLeg": {
+					"rotation": {
+						"vector": [-87.5, 0, 0]
+					},
+					"position": {
+						"vector": [0, -2, -1]
+					}
+				},
+				"bipedRightHindLeg": {
+					"rotation": {
+						"vector": [-85, 0, 0]
+					},
+					"position": {
+						"vector": [0, -2, -1]
+					}
+				},
+				"body": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				}
+			}
+		}
+	}
+}
