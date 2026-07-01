@@ -49,15 +49,24 @@ public class EntityMixin {
         }
     }
 
-    @Inject(method = "updateSwimming", at = @At("HEAD"), cancellable = true, order = 8000)
-    private void updateSwimming(CallbackInfo ci) {
+    private boolean lastIsSwimming = false;
+
+    @Inject(method = "updateSwimming", at = @At("HEAD"))
+    private void updateSwimmingH(CallbackInfo ci) {
+        lastIsSwimming = ((Entity) (Object) this).isSwimming();
+    }
+
+    @Inject(method = "updateSwimming", at = @At("TAIL"))
+    private void updateSwimmingT(CallbackInfo ci) {
+        if (((Entity) (Object) this).isSwimming()) {
+            return;
+        }
         if ((Object) this instanceof PlayerEntity player && PowerHolderComponent.hasPower(player, AlwaysSprintSwimmingPower.class)) {
-            if (player.isSwimming()) {
+            if (lastIsSwimming) {
                 player.setSwimming(player.isTouchingWater() && !player.hasVehicle());
             } else {
                 player.setSwimming(player.isSubmergedInWater() && !player.hasVehicle() && player.getWorld().getFluidState(player.getBlockPos()).isIn(FluidTags.WATER));
             }
-            ci.cancel();
         }
     }
 }
