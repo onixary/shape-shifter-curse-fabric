@@ -8,6 +8,8 @@
   "__group_weight_comment__": "组内权重 用于变形逻辑 | Weight within group used for transformation logic",
   "tier": 1,
   "__tier_comment__": "组内阶段 用于变形逻辑 | Tier within group used for transformation logic",
+  "fallback": "shape-shifter-curse:allay_sp",
+  "__fallback_comment__": "回退ID 用于如果未加载资源包 可以回退到特定形态",
   "bodyType": "FERAL",
   "__BodyType_comment__": "身体类型 Enum:[NORMAL, FERAL] | Body type. Enum:[NORMAL, FERAL]",
   "originID": "example_namespace:form_example",
@@ -138,7 +140,7 @@
     }
   },
   "__powerAnim_comment__": "powerAnim 动画列表 | powerAnim animation list",
-  "render_layer": "",
+  "render_layer": "example_namespace:form_example",
   "__render_layer_comment__": "为赞助者形态设计 非赞助者形态请修改originID 由于无法动态添加起源",
   "ExtraPower": [
     {
@@ -150,6 +152,10 @@
         "operation": "addition"
       }
     }
+  ],
+  "RemovedPower": [
+    "shape-shifter-curse:form_disable_leg_armor",
+    "shape-shifter-curse:form_disable_feet_armor"
   ],
   "__ExtraPower_comment__": "额外能力 为赞助者形态设计 非赞助者形态请修改originID 由于无法动态添加起源",
   "IsPatronForm": false,

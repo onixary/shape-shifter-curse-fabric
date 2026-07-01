@@ -17,13 +17,17 @@ import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.NeedCheckUsableForm;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.render.form_render.FormRenderUtils;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public class DynamicForm implements IForm {
+public class DynamicForm implements IForm, NeedCheckUsableForm {
     public static final UUID PublicUUID = UUID.fromString("00000000-0000-0000-0000-000000000000");
 
     public @NotNull Identifier formID;
@@ -50,7 +54,10 @@ public class DynamicForm implements IForm {
 
     public List<Identifier> ExtraPower = new LinkedList<Identifier>();
     public HashMap<Identifier, JsonObject> ExtraPowerData = new LinkedHashMap<>();
+    public List<Identifier> RemovedPower = new LinkedList<Identifier>();
     private int TempPowerIndex = 0;
+
+    public Identifier fallbackFormID = null;
 
     public DynamicForm(@Nullable Identifier formID, JsonObject formData) {
         this.formID = formID;
@@ -117,14 +124,43 @@ public class DynamicForm implements IForm {
         return IForm.super.getDefaultPrevForm(player, reason);
     }
 
+    public Pair<Identifier, Identifier> getCurrentRenderLayer() {
+        return Objects.requireNonNullElseGet(this.layerRenderOverwrite, this::getFormLayer);
+    }
+
+    public boolean isModelExist() {
+        Pair<Identifier, Identifier> currentLayer = this.getCurrentRenderLayer();
+        return FormRenderUtils.formRendererRegistry.getOrDefault(currentLayer.getLeft(), new HashMap<>()).containsKey(currentLayer.getRight());
+    }
+
     @Override
     public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
-        return IForm.super.getAnimStateController(player, animSystemData, animStateID);
+        if (!this.isModelExist()) {
+            return AnimUtils.EMPTY_CONTROLLER; // 如果未加载模型则不修改动画
+        }
+        return animStateControllerMap.getOrDefault(animStateID, defaultAnimStateController);
     }
 
     @Override
     public void registerPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) {
+        for (Identifier powerAnimID : powerAnimBuilderMap.keySet()) {
+            AnimUtils.AnimationHolderData powerAnimData = powerAnimBuilderMap.get(powerAnimID);
+            powerAnimMap.put(powerAnimID, powerAnimData.build());
+        }
         this.powerAnimRegistered = true;
+    }
+
+    @Override
+    public @NotNull Pair<Boolean, @Nullable AnimationHolder> getPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier powerAnimID) {
+        if (!this.isModelExist()) {
+            return new Pair<>(false, null); // 如果未加载模型则不修改动画
+        }
+        boolean isAnimRegistered = powerAnimMap.containsKey(powerAnimID);
+        AnimationHolder powerAnimData = powerAnimMap.get(powerAnimID);
+        if (isAnimRegistered) {
+            return new Pair<>(true, powerAnimData);
+        }
+        return new Pair<>(false, null);
     }
 
     @Override
@@ -133,13 +169,8 @@ public class DynamicForm implements IForm {
     }
 
     @Override
-    public @NotNull Pair<Boolean, @Nullable AnimationHolder> getPowerAnim(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier powerAnimID) {
-        return IForm.super.getPowerAnim(player, animSystemData, powerAnimID);
-    }
-
-    @Override
     public void applyScale(PlayerEntity player) {
-        NormalForm.RESET_SCALE_FUNC.accept(player);
+        // NormalForm.RESET_SCALE_FUNC.accept(player);
     }
 
     public void loadFromJson() {
@@ -216,7 +247,9 @@ public class DynamicForm implements IForm {
             }
         }
         this.RequirePatronLevel = _Gson_GetInt(formData, "RequirePatronLevel", 0);
-
+        if (formData.has("fallback")) {
+            this.fallbackFormID = Identifier.tryParse(formData.get("fallback").getAsString());
+        }
     }
 
     public static DynamicForm fromJson(@Nullable Identifier identifier, JsonObject data) {
@@ -267,6 +300,10 @@ public class DynamicForm implements IForm {
         return powerList;
     }
 
+    public List<Identifier> getRemovedPower() {
+        return this.RemovedPower;
+    }
+
     private Identifier registerPower(JsonObject powerData) {
         Identifier powerID = new Identifier(this.formID.getNamespace(), this.formID.getPath() + "_tpower_" + this.TempPowerIndex);
         if (powerData == null) {
@@ -299,23 +336,28 @@ public class DynamicForm implements IForm {
     private void loadExtraPower(JsonObject formData) {
         this.ExtraPower.clear();
         this.ExtraPowerData.clear();
-        if (!formData.has("ExtraPower")) {
-            return;
+        this.RemovedPower.clear();
+        if (formData.has("ExtraPower")) {
+            JsonArray powerArray = formData.getAsJsonArray("ExtraPower");
+            for (JsonElement powerElement : powerArray) {
+                if (powerElement.isJsonPrimitive()) {
+                    this.ExtraPower.add(Identifier.tryParse(powerElement.getAsString()));
+                } else if (powerElement.isJsonObject()) {
+                    this.ExtraPowerData.put(registerPower(powerElement.getAsJsonObject()), powerElement.getAsJsonObject());
+                } else {
+                    ShapeShifterCurseFabric.LOGGER.warn("Invalid ExtraPower data: {}", powerElement.toString());
+                }
+            }
         }
-        JsonArray powerArray = formData.getAsJsonArray("ExtraPower");
-        for (JsonElement powerElement : powerArray) {
-            if (powerElement.isJsonPrimitive()) {
-                this.ExtraPower.add(Identifier.tryParse(powerElement.getAsString()));
-            }
-            else if (powerElement.isJsonObject()) {
-                this.ExtraPowerData.put(registerPower(powerElement.getAsJsonObject()), powerElement.getAsJsonObject());
-            }
-            else {
-                ShapeShifterCurseFabric.LOGGER.warn("Invalid ExtraPower data: {}", powerElement.toString());
+        if (formData.has("RemovedPower")) {
+            JsonArray powerArray = formData.getAsJsonArray("RemovedPower");
+            for (JsonElement powerElement : powerArray) {
+                this.RemovedPower.add(Identifier.tryParse(powerElement.getAsString()));
             }
         }
     }
 
+    @Override
     public boolean IsPlayerCanUse(PlayerEntity player) {
         if (this.PlayerUUIDs.contains(player.getUuid())) {
             return true;
@@ -326,5 +368,24 @@ public class DynamicForm implements IForm {
     @Override
     public boolean isDynamicForm() {
         return true;
+    }
+
+    @Override
+    public void afterApplyLayer(PlayerEntity player) {
+        Identifier layer = this.getFormLayer().getRight();
+        for (Identifier powerID: this.getExtraPower()) {
+            FormUtils.applyPower(player, powerID, layer);
+        }
+        for (Identifier powerID: this.getRemovedPower()) {
+            FormUtils.removePower(player, powerID, layer);
+        }
+    }
+
+    @Override
+    public void onTransform_Finish(PlayerEntity player) {
+        if (this.fallbackFormID != null) {
+            PlayerFormComponent pfc = PlayerFormComponent.COMPONENT.get(player);
+            pfc.setFallbackForm(this.fallbackFormID);
+        }
     }
 }
