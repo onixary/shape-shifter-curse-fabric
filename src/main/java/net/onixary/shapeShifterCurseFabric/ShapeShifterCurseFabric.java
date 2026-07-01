@@ -258,7 +258,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             ModPacketsS2CServer.updateDynamicForm(player);
             PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
             if (RegPlayerForms.getPlayerForm(component.nowFormID) == null) {
-                FormUtils._loadForm(player, InitialFormUtils.getInitialForm(player));
+                FormUtils._loadForm(player, component.getFallbackForm());
             }
         }));
         initLocalDataStorage();

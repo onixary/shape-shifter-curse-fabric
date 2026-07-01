@@ -16,10 +16,7 @@ import net.onixary.shapeShifterCurseFabric.util.InitialFormUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class PlayerFormComponent implements AutoSyncedComponent {
@@ -28,6 +25,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     // form的2个值禁止使用非setForm函数修改 除非你知道你在干什么 读取可以直接读 但是修改请使用setForm
     public @NotNull IForm nowForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
     public @Nullable Identifier nowFormID = nowForm.getFormID();
+    public @NotNull Identifier fallbackFormID = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID();
     public final List<IForm> formHistory = new ArrayList<>();
     // 诅咒之月逻辑
     public boolean isCursedMoonApplied = false;
@@ -50,6 +48,27 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         this.player = player;
         this.nowForm = InitialFormUtils.getInitialForm(player);
         this.nowFormID = nowForm.getFormID();
+        this.fallbackFormID = nowForm.getFormID();
+    }
+
+    public @NotNull IForm getFallbackForm() {
+        IForm form = RegPlayerForms.getPlayerForm(this.fallbackFormID);
+        if (form == null) {
+            return InitialFormUtils.getInitialForm(player);
+        }
+        return form;
+    }
+
+    public void setFallbackForm(@NotNull Identifier formID) {
+        IForm form = RegPlayerForms.getPlayerForm(formID);
+        if (form == null) {
+            ShapeShifterCurseFabric.LOGGER.warn("Fallback form not found");
+            formID = InitialFormUtils.getInitialForm(player).getFormID();
+        } else if (form.isDynamicForm()) {
+            ShapeShifterCurseFabric.LOGGER.warn("Fallback form not supported dynamic form");
+            formID = InitialFormUtils.getInitialForm(player).getFormID();
+        }
+        this.fallbackFormID = formID;
     }
 
     @Override
@@ -65,6 +84,10 @@ public class PlayerFormComponent implements AutoSyncedComponent {
                 nowFormID = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID();
                 nowForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
             }
+        }
+        if (tag.contains("fallbackFormID")) {
+            Identifier fallbackFormIDNullable = Identifier.tryParse(tag.getString("fallbackFormID"));
+            fallbackFormID = fallbackFormIDNullable == null ? RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID() : fallbackFormIDNullable;
         }
         // 旧版兼容补丁 只迁移形态数据 其他全Drop了
         if (tag.contains("currentForm")) {
@@ -138,6 +161,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         } else {
             tag.putBoolean("no_form_id", true);
         }
+        tag.putString("fallbackFormID", fallbackFormID.toString());
         NbtList history = new NbtList();
         for (IForm form : formHistory) {
             history.add(NbtString.of(form.getFormID().toString()));

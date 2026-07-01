@@ -18,6 +18,7 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimState
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.render.form_render.FormModelResourceReloadListener;
 import net.onixary.shapeShifterCurseFabric.render.form_render.FormRenderUtils;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
@@ -55,6 +56,8 @@ public class DynamicForm implements IForm {
     public HashMap<Identifier, JsonObject> ExtraPowerData = new LinkedHashMap<>();
     public List<Identifier> RemovedPower = new LinkedList<Identifier>();
     private int TempPowerIndex = 0;
+
+    public Identifier fallbackFormID = null;
 
     public DynamicForm(@Nullable Identifier formID, JsonObject formData) {
         this.formID = formID;
@@ -167,7 +170,7 @@ public class DynamicForm implements IForm {
 
     @Override
     public void applyScale(PlayerEntity player) {
-        NormalForm.RESET_SCALE_FUNC.accept(player);
+        // NormalForm.RESET_SCALE_FUNC.accept(player);
     }
 
     public void loadFromJson() {
@@ -244,7 +247,9 @@ public class DynamicForm implements IForm {
             }
         }
         this.RequirePatronLevel = _Gson_GetInt(formData, "RequirePatronLevel", 0);
-
+        if (formData.has("fallback")) {
+            this.fallbackFormID = Identifier.tryParse(formData.get("fallback").getAsString());
+        }
     }
 
     public static DynamicForm fromJson(@Nullable Identifier identifier, JsonObject data) {
@@ -372,6 +377,14 @@ public class DynamicForm implements IForm {
         }
         for (Identifier powerID: this.getRemovedPower()) {
             FormUtils.removePower(player, powerID, layer);
+        }
+    }
+
+    @Override
+    public void onTransform_Finish(PlayerEntity player) {
+        if (this.fallbackFormID != null) {
+            PlayerFormComponent pfc = PlayerFormComponent.COMPONENT.get(player);
+            pfc.setFallbackForm(this.fallbackFormID);
         }
     }
 }
