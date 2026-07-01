@@ -281,4 +281,9 @@ public class FormUtils {
         }
         return result;
     }
+
+    public static void applyFallback(PlayerEntity player) {
+        PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+        FormUtils._loadForm(player, component.getFallbackForm());
+    }
 }

@@ -18,8 +18,8 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimState
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.NeedCheckUsableForm;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.render.form_render.FormModelResourceReloadListener;
 import net.onixary.shapeShifterCurseFabric.render.form_render.FormRenderUtils;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public class DynamicForm implements IForm {
+public class DynamicForm implements IForm, NeedCheckUsableForm {
     public static final UUID PublicUUID = UUID.fromString("00000000-0000-0000-0000-000000000000");
 
     public @NotNull Identifier formID;
@@ -357,6 +357,7 @@ public class DynamicForm implements IForm {
         }
     }
 
+    @Override
     public boolean IsPlayerCanUse(PlayerEntity player) {
         if (this.PlayerUUIDs.contains(player.getUuid())) {
             return true;

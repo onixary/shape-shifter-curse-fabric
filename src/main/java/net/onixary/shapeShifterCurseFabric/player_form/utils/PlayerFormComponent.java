@@ -67,6 +67,9 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         } else if (form.isDynamicForm()) {
             ShapeShifterCurseFabric.LOGGER.warn("Fallback form not supported dynamic form");
             formID = InitialFormUtils.getInitialForm(player).getFormID();
+        } else if (form instanceof NeedCheckUsableForm) {
+            ShapeShifterCurseFabric.LOGGER.warn("Fallback form not supported need check usable form");
+            formID = InitialFormUtils.getInitialForm(player).getFormID();
         }
         this.fallbackFormID = formID;
     }
