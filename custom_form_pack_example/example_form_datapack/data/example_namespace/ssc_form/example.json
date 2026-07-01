@@ -138,7 +138,7 @@
     }
   },
   "__powerAnim_comment__": "powerAnim 动画列表 | powerAnim animation list",
-  "render_layer": "",
+  "render_layer": "example_namespace:form_example",
   "__render_layer_comment__": "为赞助者形态设计 非赞助者形态请修改originID 由于无法动态添加起源",
   "ExtraPower": [
     {
@@ -150,6 +150,10 @@
         "operation": "addition"
       }
     }
+  ],
+  "RemovedPower": [
+    "shape-shifter-curse:form_disable_leg_armor",
+    "shape-shifter-curse:form_disable_feet_armor"
   ],
   "__ExtraPower_comment__": "额外能力 为赞助者形态设计 非赞助者形态请修改originID 由于无法动态添加起源",
   "IsPatronForm": false,

@@ -128,6 +128,10 @@ public interface IForm {
 
     default void onTransform_To(PlayerEntity player, IForm nextForm) { }
 
+    // 应用Layer后
+    default void afterApplyLayer(PlayerEntity player) { }
+
+    // 所有Power修改结束
     default void onApplyPowerEnd(PlayerEntity player) { }
 
     // Scale 系统

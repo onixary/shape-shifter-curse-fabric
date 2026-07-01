@@ -8,6 +8,7 @@ import net.minecraft.client.model.ModelPart;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.integration.origins.component.PlayerOriginComponent;
@@ -97,10 +98,11 @@ public class FormRenderUtils {
             IForm playerFormBase = FormUtils.getPlayerForm(player);
             if (playerFormBase instanceof DynamicForm pfd) {
                 List<FormRenderer> formRenderers = new ArrayList<>();
-                if (pfd.layerRenderOverwrite != null) {
-                    FormRenderer formRenderer = FormRenderUtils.getFormRenderer(pfd.layerRenderOverwrite.getLeft(), pfd.layerRenderOverwrite.getRight());
+                Pair<Identifier, Identifier> currentLayer = pfd.getCurrentRenderLayer();
+                if (currentLayer != null) {
+                    FormRenderer formRenderer = FormRenderUtils.getFormRenderer(currentLayer.getLeft(), currentLayer.getRight());
                     if (formRenderer == null) {
-                        ShapeShifterCurseFabric.LOGGER.warn("ShapeShifterCurseFabric: PlayerFormDynamic.layerRenderOverwrite is not null, but the model is not registered: {} - {}", pfd.layerRenderOverwrite.getLeft(), pfd.layerRenderOverwrite.getRight());
+                        ShapeShifterCurseFabric.LOGGER.warn("ShapeShifterCurseFabric: PlayerFormDynamic.layerRenderOverwrite is not null, but the model is not registered: {} - {}", currentLayer.getLeft(), currentLayer.getRight());
                         return new ArrayList<>();
                     }
                     formRenderers.add(formRenderer);

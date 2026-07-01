@@ -68,7 +68,7 @@ public class FormUtils {
         }
     }
 
-    private static void applyPower(PlayerEntity player, Identifier powerId, Identifier powerSource) {
+    public static void applyPower(PlayerEntity player, Identifier powerId, Identifier powerSource) {
         if (PowerTypeRegistry.contains(powerId)) {
             PowerType<?> powerType = PowerTypeRegistry.get(powerId);
             if (powerType != null) {
@@ -104,6 +104,14 @@ public class FormUtils {
         }
     }
 
+    public static void removePower(PlayerEntity player, Identifier powerId, Identifier powerSource) {
+        PowerType<?> powerType = PowerTypeRegistry.get(powerId);
+        if (powerType != null) {
+            PowerHolderComponent powerHolder = PowerHolderComponent.KEY.get(player);
+            powerHolder.removePower(powerType, powerSource);
+        }
+    }
+
     public static final HashMap<Identifier, ExtraPower> extraPowerRegistry = new HashMap<>();
     public static void registerExtraPower(Identifier identifier, ExtraPower extraPower) {
         extraPowerRegistry.put(identifier, extraPower);
@@ -115,14 +123,6 @@ public class FormUtils {
                 extraPower.getPowerIDs().forEach(powerId -> applyPower(player, powerId, layerData.getRight()));
             }
         });
-    }
-
-    public static void applyDynamicFormPower(PlayerEntity player, IForm form, Pair<Identifier, Identifier> layerData) {
-        if (form instanceof DynamicForm pfd) {
-            for (Identifier powerID: pfd.getExtraPower()) {
-                applyPower(player, powerID, layerData.getRight());
-            }
-        }
     }
 
     public static void applyLayer(PlayerEntity player, Pair<Identifier, Identifier> layerData) {
@@ -203,7 +203,7 @@ public class FormUtils {
         // 应用Power Origin -> OriginExtraPower -> AccessoryPower
         Pair<Identifier, Identifier> layerPair = form.getFormLayer();
         applyLayer(player, layerPair);
-        applyDynamicFormPower(player, form, layerPair);
+        form.afterApplyLayer(player);
         TrinketUtils.ReApplyAccessoryPowerOnPlayerFormChange(player);
         form.onApplyPowerEnd(player);
         // 停止Power动画 目前就蝙蝠用了
