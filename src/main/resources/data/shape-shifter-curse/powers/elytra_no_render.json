@@ -1,4 +1,9 @@
 {
     "type": "apoli:elytra_flight",
-    "render_elytra": false
+    "render_elytra": false,
+    "condition": {
+        "type": "apoli:submerged_in",
+        "fluid": "minecraft:water",
+        "inverted": true
+    }
 }
