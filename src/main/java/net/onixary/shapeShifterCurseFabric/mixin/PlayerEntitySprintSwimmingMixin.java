@@ -26,17 +26,6 @@ public class PlayerEntitySprintSwimmingMixin {
         return exhaustion;
     }
 
-    @Inject(method = "updateSwimming", at = @At("TAIL"))
-    private void forceSwimmingUnderwater(CallbackInfo ci) {
-        PlayerEntity player = (PlayerEntity) (Object) this;
-        if (PowerHolderComponent.hasPower(player, AlwaysSprintSwimmingPower.class)
-                && player.isSubmergedInWater()
-                && !player.hasVehicle()
-                && player.getWorld().getFluidState(player.getBlockPos()).isIn(FluidTags.WATER)) {
-            player.setSwimming(true);
-        }
-    }
-
     @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setVelocity(Lnet/minecraft/util/math/Vec3d;)V"), index = 0)
     private Vec3d modifyVerticalVelocity(Vec3d originalVelocity) {
         PlayerEntity player = (PlayerEntity) (Object) this;

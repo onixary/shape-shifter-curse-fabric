@@ -3,12 +3,15 @@ package net.onixary.shapeShifterCurseFabric.mixin;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.tag.FluidTags;
+import net.onixary.shapeShifterCurseFabric.additional_power.AlwaysSprintSwimmingPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.BypassesLandingEffectsPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.BypassesSteppingEffectsPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.ModifyFootstepSoundSpeedPower;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 
@@ -42,6 +45,27 @@ public class EntityMixin {
             if (!powers.isEmpty()) {
                 float multiplier = powers.get(0).getSpeedMultiplier();
                 cir.setReturnValue(((Entity) (Object) this).distanceTraveled + (1.0f / multiplier));
+            }
+        }
+    }
+
+    private boolean lastIsSwimming = false;
+
+    @Inject(method = "updateSwimming", at = @At("HEAD"))
+    private void updateSwimmingH(CallbackInfo ci) {
+        lastIsSwimming = ((Entity) (Object) this).isSwimming();
+    }
+
+    @Inject(method = "updateSwimming", at = @At("TAIL"))
+    private void updateSwimmingT(CallbackInfo ci) {
+        if (((Entity) (Object) this).isSwimming()) {
+            return;
+        }
+        if ((Object) this instanceof PlayerEntity player && PowerHolderComponent.hasPower(player, AlwaysSprintSwimmingPower.class)) {
+            if (lastIsSwimming) {
+                player.setSwimming(player.isTouchingWater() && !player.hasVehicle());
+            } else {
+                player.setSwimming(player.isSubmergedInWater() && !player.hasVehicle() && player.getWorld().getFluidState(player.getBlockPos()).isIn(FluidTags.WATER));
             }
         }
     }
