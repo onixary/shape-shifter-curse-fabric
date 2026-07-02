@@ -161,5 +161,6 @@
   "IsPatronForm": false,
   "__IsPatronForm_comment__": "是否为赞助者形态 为赞助者形态设计 可以使用特殊物品直接变形",
   "PlayerUUID": [],
-  "__PlayerUUID_comment__": "仅个别UUID可使用 为赞助者形态设计 空为全体可用"
+  "__PlayerUUID_comment__": "仅个别UUID可使用 为赞助者形态设计 空为全体可用",
+  "MasterForm": "shape-shifter-curse:feral_cat_sp"
 }

@@ -59,7 +59,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         return form;
     }
 
-    public void setFallbackForm(@NotNull Identifier formID) {
+    public void setFallbackForm(@Nullable Identifier formID) {
         IForm form = RegPlayerForms.getPlayerForm(formID);
         if (form == null) {
             ShapeShifterCurseFabric.LOGGER.warn("Fallback form not found");

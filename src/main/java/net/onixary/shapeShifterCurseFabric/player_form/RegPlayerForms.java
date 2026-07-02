@@ -18,6 +18,8 @@ public class RegPlayerForms {
     public static LinkedHashMap<Identifier, IForm> playerForms = new LinkedHashMap<>();
     public static LinkedHashMap<Identifier, IFormGroup> playerFormGroups = new LinkedHashMap<>();
 
+    public static HashMap<Identifier, List<Identifier>> subFormMap = new HashMap<>();
+
     public static String PatronNameSpace = "ssc-patron";  // 在更新数据包时保留
 
     // Builtin PlayerForms
@@ -84,6 +86,27 @@ public class RegPlayerForms {
             dynamicPlayerForms.add(form.getFormID());
         }
         return registerPlayerForm(form);
+    }
+
+    public static void registerSubForm(IForm masterForm, IForm subForm) {
+        List<Identifier> subFormList = subFormMap.computeIfAbsent(masterForm.getFormID(), k -> new ArrayList<>());
+        if (!subFormList.contains(subForm.getFormID())) {
+            subFormList.add(subForm.getFormID());
+        }
+    }
+
+    public static List<IForm> getSubForms(IForm masterForm) {
+        List<IForm> result = new ArrayList<>();
+        List<Identifier> subFormList = subFormMap.get(masterForm.getFormID());
+        if (subFormList != null) {
+            for (Identifier id : subFormList) {
+                IForm form = playerForms.get(id);
+                if (form != null) {
+                    result.add(form);
+                }
+            }
+        }
+        return result;
     }
 
     public static DynamicForm buildDynamicPlayerForm(Identifier id, JsonObject dynamicPlayerForm) {
