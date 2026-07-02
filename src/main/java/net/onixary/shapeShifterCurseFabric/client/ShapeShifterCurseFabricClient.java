@@ -68,6 +68,8 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 	public static KeyBinding makeSound;
 	public static KeyBinding useActiveSkill1PowerKeybind;
 	public static KeyBinding useActiveSkill2PowerKeybind;
+	public static KeyBinding useActiveSkill3PowerKeybind;
+	public static KeyBinding useActiveSkill4PowerKeybind;
 
 	private static boolean toggleClipAtLedgeIsPressed = false;
 	public static boolean isClipAtLedge = true;
@@ -277,13 +279,19 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		toggleClipAtLedge = new KeyBinding("key.shape-shifter-curse.toggle_clip_at_ledge", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + MOD_ID);
 		KeyBindingHelper.registerKeyBinding(toggleClipAtLedge);
 
-		// 后续可拓展到多技能按键 等超出4个后我整个轮盘或其他减少需求按键的功能
+		// 4个技能按键基本够用了 一般Mod的常用技能一般也是4个 后续如果还要加按键 可以做成轮盘(应该可以虚拟触发按键 反正只用触发Apoli的就行)等压缩按键形式 然后这些按键可以当做快捷触发键使用
 		useActiveSkill1PowerKeybind = new KeyBinding("key.shape-shifter-curse.active_skill_1", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + ShapeShifterCurseFabric.MOD_ID);
 		useActiveSkill2PowerKeybind = new KeyBinding("key.shape-shifter-curse.active_skill_2", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + ShapeShifterCurseFabric.MOD_ID);
+		useActiveSkill3PowerKeybind = new KeyBinding("key.shape-shifter-curse.active_skill_3", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + ShapeShifterCurseFabric.MOD_ID);
+		useActiveSkill4PowerKeybind = new KeyBinding("key.shape-shifter-curse.active_skill_4", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + ShapeShifterCurseFabric.MOD_ID);
 		ApoliClient.registerPowerKeybinding("key.shape-shifter-curse.active_skill_1", useActiveSkill1PowerKeybind);
 		ApoliClient.registerPowerKeybinding("key.shape-shifter-curse.active_skill_2", useActiveSkill2PowerKeybind);
+		ApoliClient.registerPowerKeybinding("key.shape-shifter-curse.active_skill_3", useActiveSkill3PowerKeybind);
+		ApoliClient.registerPowerKeybinding("key.shape-shifter-curse.active_skill_4", useActiveSkill4PowerKeybind);
 		KeyBindingHelper.registerKeyBinding(useActiveSkill1PowerKeybind);
 		KeyBindingHelper.registerKeyBinding(useActiveSkill2PowerKeybind);
+		KeyBindingHelper.registerKeyBinding(useActiveSkill3PowerKeybind);
+		KeyBindingHelper.registerKeyBinding(useActiveSkill4PowerKeybind);
 
 		ClientTickEvents.END_CLIENT_TICK.register((client) -> {
 			if (toggleClipAtLedge.isPressed()) {

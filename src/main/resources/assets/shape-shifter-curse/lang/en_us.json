@@ -551,6 +551,8 @@
     "death.attack.ssc_no_water_for_gills.player": "%1$s didn't manage to keep wet because they were fighting %2$s",
     "key.shape-shifter-curse.active_skill_1": "Active Power (1)",
     "key.shape-shifter-curse.active_skill_2": "Active Power (2)",
+    "key.shape-shifter-curse.active_skill_3": "Active Power (3)",
+    "key.shape-shifter-curse.active_skill_4": "Active Power (4)",
     "text.shape-shifter-curse.config.title": "Shape Shifter Curse Config Menu",
     "text.shape-shifter-curse.config.close": "Cancel",
     "text.autoconfig.shape-shifter-curse-client.title": "Shape Shifter Curse - Client Config",
