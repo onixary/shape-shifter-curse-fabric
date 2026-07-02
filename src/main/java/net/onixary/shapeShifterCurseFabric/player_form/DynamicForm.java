@@ -250,6 +250,13 @@ public class DynamicForm implements IForm, NeedCheckUsableForm {
         if (formData.has("fallback")) {
             this.fallbackFormID = Identifier.tryParse(formData.get("fallback").getAsString());
         }
+        if (formData.has("MasterForm")) {
+            Identifier masterFormID = Identifier.tryParse(formData.get("MasterForm").getAsString());
+            IForm masterForm = RegPlayerForms.getPlayerForm(masterFormID);
+            if (masterFormID != null) {
+                RegPlayerForms.registerSubForm(masterForm, this);
+            }
+        }
     }
 
     public static DynamicForm fromJson(@Nullable Identifier identifier, JsonObject data) {

@@ -5,6 +5,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import virtuoel.pehkui.api.ScaleData;
@@ -150,5 +151,11 @@ public class NormalForm implements IForm {
     @Override
     public boolean isPowerAnimRegistered(PlayerEntity player, AnimSystem.AnimSystemData animSystemData) {
         return powerAnimRegistered;
+    }
+
+    @Override
+    public void onTransform_Finish(PlayerEntity player) {
+        PlayerFormComponent pfc = PlayerFormComponent.COMPONENT.get(player);
+        pfc.setFallbackForm(null);
     }
 }

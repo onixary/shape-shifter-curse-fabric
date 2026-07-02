@@ -551,6 +551,8 @@
     "death.attack.ssc_no_water_for_gills.player": "%1$s在与%2$s战斗时没能保持湿润",
     "key.shape-shifter-curse.active_skill_1": "主动能力 (1)",
     "key.shape-shifter-curse.active_skill_2": "主动能力 (2)",
+    "key.shape-shifter-curse.active_skill_3": "主动能力 (3)",
+    "key.shape-shifter-curse.active_skill_4": "主动能力 (4)",
     "text.shape-shifter-curse.config.title": "幻形者诅咒 配置界面",
     "text.shape-shifter-curse.config.close": "取消",
     "text.autoconfig.shape-shifter-curse-client.title": "幻形者诅咒 - 客户端配置",

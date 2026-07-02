@@ -511,6 +511,8 @@
     "death.attack.ssc_no_water_for_gills.player": "%1$s не успел погрузиться в воду из-за боя с %2$s.",
     "key.shape-shifter-curse.active_skill_1": "Активная сила (1)",
     "key.shape-shifter-curse.active_skill_2": "Активная сила (2)",
+    "key.shape-shifter-curse.active_skill_3": "Активная сила (3)",
+    "key.shape-shifter-curse.active_skill_4": "Активная сила (4)",
     "text.shape-shifter-curse.config.title": "Shape Shifter Curse - Меню настроек",
     "text.shape-shifter-curse.config.close": "Отмена",
     "text.autoconfig.shape-shifter-curse-client.title": "Shape Shifter Curse - Настройки клиента",
