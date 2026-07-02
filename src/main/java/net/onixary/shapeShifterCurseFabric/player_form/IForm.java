@@ -32,6 +32,9 @@ public interface IForm {
     // 临时能力系统 等Origins移除后再写
     public @NotNull Pair<Identifier, Identifier> getFormLayer();
 
+    public default @Nullable Pair<Identifier, Identifier> getRenderLayerOverride() {
+        return null;
+    }
 
     public @NotNull PlayerFormBodyType getBodyType();
 
@@ -121,6 +124,8 @@ public interface IForm {
         return new Pair<>(false, null);
     }
 
+    default void onRegister() { }
+
     // 3个Hook 顺序为当前形态onTransform_To 目标形态onTransform_From 目标形态onTransform_Finish
     default void onTransform_From(PlayerEntity player, IForm prevForm) { }
 
@@ -143,9 +148,23 @@ public interface IForm {
         return form != null && this.getFormID().equals(form.getFormID());
     }
 
+    default boolean isSoftEquals(IForm form) {
+        IForm ThisMasterForm = this instanceof ISubForm subForm ? subForm.getMasterForm() : this;
+        IForm FormMasterForm = form instanceof ISubForm subForm ? subForm.getMasterForm() : form;
+        if (ThisMasterForm == null || FormMasterForm == null) {
+            return false;
+        }
+        return ThisMasterForm.isEquals(FormMasterForm);
+    }
+
     default boolean isPlayerForm(PlayerEntity player) {
         IForm playerForm = FormUtils.getPlayerForm(player);
         return this.isEquals(playerForm);
+    }
+
+    default boolean isPlayerFormSoft(PlayerEntity player) {
+        IForm playerForm = FormUtils.getPlayerForm(player);
+        return this.isSoftEquals(playerForm);
     }
 
     default boolean isDynamicForm() {
