@@ -19,6 +19,9 @@ public class Form_Axolotl3 extends NormalForm {
     public Form_Axolotl3(Identifier formID) {
         super(formID);
     }
+    public static final AnimUtils.AnimationHolderData ANIM_SLEEP =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_3_sleep"));
+
 
     public static final AbstractAnimStateController SWIM_CONTROLLER = new SwimAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_2_swimming_idle")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_2_swimming")));
     public static final AbstractAnimStateController IDLE_CONTROLLER = new WithSneakAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_3_idle")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_3_crawling_idle")));
@@ -29,6 +32,7 @@ public class Form_Axolotl3 extends NormalForm {
     public static final AbstractAnimStateController ATTACK_CONTROLLER = new WithSneakAnimController(null, new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_2_crawling_attack_once")));
     public static final AbstractAnimStateController MINING_CONTROLLER = new WithSneakAnimController(null, new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_2_crawling_tool_swing")));
     public static final AbstractAnimStateController FLYING_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_3_creative_flight")));
+    public static final AbstractAnimStateController SLEEP_CONTROLLER = new OneAnimController(ANIM_SLEEP);
 
     @Override
     public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
@@ -53,6 +57,8 @@ public class Form_Axolotl3 extends NormalForm {
                     return MINING_CONTROLLER;
                 case ANIM_STATE_FLYING:
                     return FLYING_CONTROLLER;
+                case ANIM_STATE_SLEEP:
+                        return SLEEP_CONTROLLER;
                 default:
                     return null;
             }
