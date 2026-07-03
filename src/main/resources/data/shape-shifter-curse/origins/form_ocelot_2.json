@@ -29,7 +29,8 @@
         "shape-shifter-curse:form_ocelot_hiss_phantom",
         "shape-shifter-curse:form_ocelot_sound_key",
         "shape-shifter-curse:form_tan_prevent_dirty_water_thirst",
-        "shape-shifter-curse:form_tan_cold_resistance_mild"
+        "shape-shifter-curse:form_tan_cold_resistance_mild",
+        "shape-shifter-curse:cat_friendly"
     ],
     "icon": {
         "item": "minecraft:player_head"

@@ -14,8 +14,10 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalPowers;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ITMob;
+import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 
 import java.util.Optional;
@@ -86,5 +88,19 @@ public class TransformativeOcelotEntity extends OcelotEntity implements ITMob {
     protected void initGoals() {
         super.initGoals();
         this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+
+        // this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true, livingEntity -> {
+        //     if (livingEntity instanceof PlayerEntity player) {
+        //         return RegPlayerForms.ORIGINAL_SHIFTER.isPlayerForm(player);
+        //     }
+        //     return false;
+        // }));
+
+        // this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true, livingEntity -> {
+        //     if (livingEntity instanceof PlayerEntity player) {
+        //         return !AdditionalPowers.CAT_FRIENDLY.isActive(player);
+        //     }
+        //     return true;
+        // }));
     }
 }
