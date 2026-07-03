@@ -76,8 +76,12 @@ public class RegPlayerForms {
     public static IForm FERAL_CAT_SP = registerPlayerForm(new Form_FeralCatSP(ShapeShifterCurseFabric.identifier("feral_cat_sp")).formFlag(NoInstinct, NoCursedMoonEffect, SpecialForm).bodyType(PlayerFormBodyType.FERAL).applyScaleFunc(NORMAL_SCALE_FUNC_BUILDER.apply(0.55f,0.6f)));
     public static IFormGroup FERAL_CAT_FORM = registerPlayerFormGroup(new NormalGroup(ShapeShifterCurseFabric.identifier("feral_cat_form")).registerForm(1, 1, FERAL_CAT_SP));
 
+    // EXAMPLE_SUB_FORM
+    public static IForm EXAMPLE_SUB_FORM = registerPlayerForm(new ExampleSubForm(ShapeShifterCurseFabric.identifier("example_sub_form")));
+
     public static <T extends IForm> T registerPlayerForm(T form) {
         playerForms.put(form.getFormID(), form);
+        form.onRegister();
         return form;
     }
 
@@ -88,7 +92,7 @@ public class RegPlayerForms {
         return registerPlayerForm(form);
     }
 
-    public static void registerSubForm(IForm masterForm, IForm subForm) {
+    public static void registerSubForm(IForm masterForm, ISubForm subForm) {
         List<Identifier> subFormList = subFormMap.computeIfAbsent(masterForm.getFormID(), k -> new ArrayList<>());
         if (!subFormList.contains(subForm.getFormID())) {
             subFormList.add(subForm.getFormID());

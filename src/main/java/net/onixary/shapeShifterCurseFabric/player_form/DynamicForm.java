@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public class DynamicForm implements IForm, NeedCheckUsableForm {
+public class DynamicForm implements IForm, ISubForm, NeedCheckUsableForm {
     public static final UUID PublicUUID = UUID.fromString("00000000-0000-0000-0000-000000000000");
 
     public @NotNull Identifier formID;
@@ -58,6 +58,7 @@ public class DynamicForm implements IForm, NeedCheckUsableForm {
     private int TempPowerIndex = 0;
 
     public Identifier fallbackFormID = null;
+    public IForm masterForm = null;
 
     public DynamicForm(@Nullable Identifier formID, JsonObject formData) {
         this.formID = formID;
@@ -91,6 +92,7 @@ public class DynamicForm implements IForm, NeedCheckUsableForm {
         this.formTier = formTier;
     }
 
+
     @Override
     public @NotNull Pair<Identifier, Identifier> getFormLayer() {
         if (this.layerOverwrite != null) {
@@ -106,26 +108,31 @@ public class DynamicForm implements IForm, NeedCheckUsableForm {
 
     @Override
     public @Nullable IForm getNextForm(PlayerEntity player, ITransformReason reason) {
-        return IForm.super.getNextForm(player, reason);
+        return ISubForm.super.getNextForm(player, reason);
     }
 
     @Override
     public @Nullable IForm getPrevForm(PlayerEntity player, ITransformReason reason) {
-        return IForm.super.getPrevForm(player, reason);
+        return ISubForm.super.getPrevForm(player, reason);
     }
 
     @Override
     public @NotNull IForm getDefaultNextForm(PlayerEntity player, ITransformReason reason) {
-        return IForm.super.getDefaultNextForm(player, reason);
+        return ISubForm.super.getDefaultNextForm(player, reason);
     }
 
     @Override
     public @NotNull IForm getDefaultPrevForm(PlayerEntity player, ITransformReason reason) {
-        return IForm.super.getDefaultPrevForm(player, reason);
+        return ISubForm.super.getDefaultPrevForm(player, reason);
+    }
+
+    @Override
+    public @Nullable Pair<Identifier, Identifier> getRenderLayerOverride() {
+        return this.layerRenderOverwrite;
     }
 
     public Pair<Identifier, Identifier> getCurrentRenderLayer() {
-        return Objects.requireNonNullElseGet(this.layerRenderOverwrite, this::getFormLayer);
+        return Objects.requireNonNullElseGet(this.getRenderLayerOverride(), this::getFormLayer);
     }
 
     public boolean isModelExist() {
@@ -252,10 +259,7 @@ public class DynamicForm implements IForm, NeedCheckUsableForm {
         }
         if (formData.has("MasterForm")) {
             Identifier masterFormID = Identifier.tryParse(formData.get("MasterForm").getAsString());
-            IForm masterForm = RegPlayerForms.getPlayerForm(masterFormID);
-            if (masterFormID != null) {
-                RegPlayerForms.registerSubForm(masterForm, this);
-            }
+            this.masterForm = RegPlayerForms.getPlayerForm(masterFormID);
         }
     }
 
@@ -375,6 +379,22 @@ public class DynamicForm implements IForm, NeedCheckUsableForm {
     @Override
     public boolean isDynamicForm() {
         return true;
+    }
+
+    @Override
+    public @Nullable Pair<List<Identifier>, List<Identifier>> getLayerModifier() {
+        return null;
+    }
+
+
+    @Override
+    public Boolean isSubForm() {
+        return masterForm != null;
+    }
+
+    @Override
+    public IForm getMasterForm() {
+        return masterForm;
     }
 
     @Override
