@@ -72,7 +72,9 @@
     "ShearsItemMixin",
     "SmithingScreenHandlerMixin",
     "AdvancementFixMixin",
-    "mob.ScareCreeperMixin"
+    "mob.ScareCreeperMixin",
+    "mob.CatEntityMixin",
+    "mob.OcelotEntityMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",
