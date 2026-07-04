@@ -18,8 +18,8 @@ def CreateSubKey(Type: int, Version: int, UseMeltDown: bool, RootPrivateKey: byt
     )
     public_key = private_key.public_key()
     n_bytes = public_key.public_numbers().n.to_bytes(512, 'big')
-    private_pem = private_key.private_bytes(
-        encoding=serialization.Encoding.PEM,
+    private_bytes = private_key.private_bytes(
+        encoding=serialization.Encoding.DER,
         format=serialization.PrivateFormat.PKCS8,
         encryption_algorithm=serialization.NoEncryption(),
     )
@@ -39,7 +39,13 @@ def CreateSubKey(Type: int, Version: int, UseMeltDown: bool, RootPrivateKey: byt
     if len(signature) != 512:
         raise Exception("Signature length is invalid")
     key_segment = type_bytes + version_bytes + meltdown_byte + n_bytes + signature
-    return n_bytes, private_pem, key_segment
+    return n_bytes, private_bytes, key_segment
+
+
+def MergeSubKey(SubKeySegment: bytes, SubPrivateKey: bytes):
+    SKS_Size = len(SubKeySegment).to_bytes(4, 'big')
+    SPK_Size = len(SubPrivateKey).to_bytes(4, 'big')
+    return SKS_Size + SubKeySegment + SPK_Size + SubPrivateKey
 
 
 def ConsoleUI():
@@ -52,10 +58,10 @@ def ConsoleUI():
     print("是否使用MeltDown(Y/N):")
     UseMeltDown = input() == "Y"
     n_bytes, private_pem, key_segment = CreateSubKey(Type, Version, UseMeltDown, root_private_key)
-    with open(f"SubPrivateKey_{Type}_{Version}{'' if UseMeltDown else '_NM'}.pem", "wb") as f:
-        f.write(private_pem)
-    with open(f"SubKeySegment_{Type}_{Version}{'' if UseMeltDown else '_NM'}.bin", "wb") as f:
-        f.write(key_segment)
+    final_key = MergeSubKey(key_segment, private_pem)
+    keyName = f"SubKey_{Type}_{Version}.bin" if UseMeltDown else f"SubKey_{Type}.bin"
+    with open(keyName, "wb") as f:
+        f.write(final_key)
 
 
 if __name__ == "__main__":
