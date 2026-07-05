@@ -26,7 +26,8 @@ public class CodexData {
     public static final Text headerPros = Text.translatable("codex.header.pros");
     public static final Text headerCons = Text.translatable("codex.header.cons");
     public static final Text headerInstincts = Text.translatable("codex.header.instincts");
-    // status —— 保留原版无后缀 key 供 tier<=0（original 原形）兜底
+    // status —— 历史保留的无后缀 key（getPlayerStatusText 不再直接使用它们；
+    // tier<=0 走 *_human 系列，tier>=1 走 *_ByPhase 系列。保留是为兼容外部引用与旧 lang 文件）
     private static final Text statusNormal = Text.translatable("codex.status.normal");
     private static final Text statusInfected = Text.translatable("codex.status.infected");
     private static final Text statusBeforeMoon = Text.translatable("codex.status.before_moon");
