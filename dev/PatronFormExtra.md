@@ -44,7 +44,7 @@
 - 公钥数据签名 4096位RSA签名 1x512(byte[])
 - (数据部分)
 - 数据部分长度 1x4(uint) 最大为16(块)*512 bytes
-- 玩家UUID 1x32(byte[])
+- 玩家UUID 1x16(byte[])
 - 签发时间戳 1x8(ulong)
 - 时限 1x8(ulong)
 - 权限等级 1x4(int)
