@@ -13,6 +13,6 @@ public class Form_SnowFox3_Sub_WhiteWeasel extends NormalSubForm {
 
     @Override
     public @Nullable Pair<Identifier, Identifier> getRenderLayerOverride() {
-        return RegPlayerForms.SNOW_FOX_3_SUB_WHITE_WEASEL.getFormLayer();
+        return new Pair<>(Identifier.of("origins", "origin"), Identifier.of(this.getFormID().getNamespace(), "form_" + this.getFormID().getPath()));
     }
 }
