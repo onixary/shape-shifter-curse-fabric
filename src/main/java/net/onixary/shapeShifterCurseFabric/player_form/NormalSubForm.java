@@ -11,11 +11,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class NormalSubForm extends NormalForm implements ISubForm {
     public final @NotNull IForm masterForm;
     public final @NotNull List<Identifier> power_ADD = new ArrayList<>();
     public final @NotNull List<Identifier> power_REMOVE = new ArrayList<>();
+    private @Nullable Consumer<PlayerEntity> applyScaleFunc = null;
 
     public NormalSubForm(Identifier formID, @NotNull IForm masterForm) {
         super(formID);
@@ -92,7 +94,17 @@ public class NormalSubForm extends NormalForm implements ISubForm {
 
     @Override
     public void applyScale(PlayerEntity player) {
-        this.getMasterForm().applyScale(player);
+        if (this.applyScaleFunc != null) {
+            this.applyScaleFunc.accept(player);
+            return;
+        } else {
+            this.getMasterForm().applyScale(player);
+        }
+    }
+
+    public NormalForm applyScaleFunc(Consumer<PlayerEntity> func) {
+        this.applyScaleFunc = func;
+        return this;
     }
 
     @Override
