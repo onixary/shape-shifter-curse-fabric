@@ -47,6 +47,7 @@ public class Form_Bat3 extends NormalForm implements ModifyCapeRender {
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("bat_3_climb"), 1.25f, 2);
     public static final AnimUtils.AnimationHolderData ANIM_CLIMB_IDLE =
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("bat_3_attach_side"));
+    public static final AnimUtils.AnimationHolderData ANIM_SLEEP = new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("bat_3_sleep"));
 
     public static final AbstractAnimStateController IDLE_CONTROLLER = new WithSneakAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("bat_3_idle")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("bat_1_sneak_idle")));
     public static final AbstractAnimStateController WALK_CONTROLLER = new WithSneakAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("bat_3_walk"), 1.7f, 4), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("bat_3_sneak_walk")));
@@ -59,6 +60,7 @@ public class Form_Bat3 extends NormalForm implements ModifyCapeRender {
     public static final AbstractAnimStateController FLYING_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("bat_2_slow_falling")));
     public static final AbstractAnimStateController CLIMB_CONTROLLER =
             new ClimbAnimController(ANIM_CLIMB_IDLE, ANIM_CLIMB);
+    public static final AbstractAnimStateController SLEEP_CONTROLLER = new OneAnimController(ANIM_SLEEP);
 
     public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
         @Nullable AnimStateEnum animStateEnum = AnimStateEnum.getStateEnum(animStateID);
@@ -86,6 +88,8 @@ public class Form_Bat3 extends NormalForm implements ModifyCapeRender {
                     return FLYING_CONTROLLER;
                 case ANIM_STATE_USE_ITEM:
                     return IDLE_CONTROLLER;
+                case ANIM_STATE_SLEEP:
+                    return SLEEP_CONTROLLER;
                 default:
                     return null;
             }
