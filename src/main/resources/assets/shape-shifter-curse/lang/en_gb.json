@@ -659,5 +659,8 @@
     "text.autoconfig.shape-shifter-curse-common.option.witchPotionForPreBook": "Witch Can Throw Transformative Potion To Pre-Book Player",
     "gamerule.category.ssc_gamerule": "Shape Shifter Curse",
     "gamerule.sscUseInitialForm": "Use SSC Custom Initial Form",
-    "gamerule.sscUseInitialForm.description": "When enabled, players who have not chosen a form will immediately transform into the server-configured initial form on join."
+    "gamerule.sscUseInitialForm.description": "When enabled, players who have not chosen a form will immediately transform into the server-configured initial form on join.",
+
+    "info.shape-shifter-curse.transformative_effect_cure": "Golden magic has cured the curse effect upon you.",
+    "info.shape-shifter-curse.milk_cannot_remove_effect": "Milk seems unable to remove the curse effect upon you; you seem to need some golden magic."
 }

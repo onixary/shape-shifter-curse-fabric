@@ -19,7 +19,11 @@ public class TransformRelatedItems {
         }
         IForm nowForm = FormUtils.getPlayerForm(player);
         int Tier = nowForm.getFormTier();
-        if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) { }
+        if (EffectManager.hasTransformativeEffect(player)) {
+            player.sendMessage(Text.translatable("info.shape-shifter-curse.transformative_effect_cure").formatted(Formatting.YELLOW));
+            EffectManager.clearTransformativeEffect(player);
+        }
+        else if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) { }
         else if (RegPlayerForms.ORIGINAL_SHIFTER.isPlayerForm(player)) {
             player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_used_cure").formatted(Formatting.YELLOW));
         }
@@ -50,7 +54,11 @@ public class TransformRelatedItems {
             return;
         }
         IForm nowForm = FormUtils.getPlayerForm(player);
-        if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) { }
+        if (EffectManager.hasTransformativeEffect(player)) {
+            player.sendMessage(Text.translatable("info.shape-shifter-curse.transformative_effect_cure").formatted(Formatting.YELLOW));
+            EffectManager.clearTransformativeEffect(player);
+        }
+        else if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) { }
         else if (RegPlayerForms.ORIGINAL_SHIFTER.isPlayerForm(player)) {
             player.sendMessage(Text.translatable("info.shape-shifter-curse.origin_form_used_cure_final").formatted(Formatting.YELLOW));
         }
@@ -80,6 +88,9 @@ public class TransformRelatedItems {
         }
         PlayerFormComponent.COMPONENT.get(player).lastTransformByCure = true;
         PlayerFormComponent.COMPONENT.sync(player);
+        if (EffectManager.hasTransformativeEffect(player)) {
+            EffectManager.clearTransformativeEffect(player);
+        }
         if(!RegPlayerForms.ORIGINAL_SHIFTER.isPlayerForm(player) && !RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)){
             TransformManager.startTransform(player, RegPlayerForms.ORIGINAL_SHIFTER, null);
         }
