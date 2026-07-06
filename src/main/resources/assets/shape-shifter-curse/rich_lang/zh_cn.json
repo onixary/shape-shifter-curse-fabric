@@ -269,6 +269,9 @@
   "info.shape-shifter-curse.max_form_used_powerful_catalyst": ["在强效催化剂的影响下，你的形态发生了永久性的变化..."],
   "info.shape-shifter-curse.form_used_powerful_catalyst_failed": ["强效催化剂对你目前的形态没有作用"],
   "info.shape-shifter-curse.sp_form_used_catalyst": ["你目前的形态中似乎流淌着某种特殊的魔力，催化剂无法对它产生进一步的影响..."],
+  "info.shape-shifter-curse.transformative_effect_cure": ["黄金的魔力解除了你所受到的咒文效果。"],
+  "info.shape-shifter-curse.milk_cannot_remove_effect": ["牛奶似乎无法将你受到的咒文效果祛除，你似乎需要一些黄金的魔力。"],
+
   "entity.shape-shifter-curse.t_bat": ["咒文蝙蝠"],
   "item.shape-shifter-curse.custom_bat_spawn_egg": ["咒文蝙蝠刷怪蛋"],
   "entity.shape-shifter-curse.t_axolotl": ["咒文美西螈"],

@@ -274,6 +274,8 @@
   "info.shape-shifter-curse.max_form_used_powerful_catalyst": ["Under the effect of the powerful catalyst, permanent changes have taken root in your body..."],
   "info.shape-shifter-curse.form_used_powerful_catalyst_failed": [" The powerful catalyst has no effect on your current form"],
   "info.shape-shifter-curse.sp_form_used_catalyst": ["Your current form contains special magic that catalysts can't influence..."],
+  "info.shape-shifter-curse.transformative_effect_cure": ["Golden magic has cured the curse effect upon you."],
+  "info.shape-shifter-curse.milk_cannot_remove_effect": ["Milk seems unable to remove the curse effect upon you; you seem to need some golden magic."],
 
   "entity.shape-shifter-curse.t_bat": ["Cursed Bat"],
   "item.shape-shifter-curse.custom_bat_spawn_egg": ["Cursed Bat Spawn Egg"],

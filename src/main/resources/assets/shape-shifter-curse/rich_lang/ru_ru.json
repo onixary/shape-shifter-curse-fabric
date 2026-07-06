@@ -577,6 +577,7 @@
 
   "codex.form.shape-shifter-curse.axolotl_0.name" : ["Форма аксолотля (фаза 1)"],
   "codex.form.shape-shifter-curse.axolotl_0.title": ["\nПроклятие видоизменило ваше тело. Вы чувствуете сильную тягу к воде."],
+  "codex.form.shape-shifter-curse.axolotl_0.equip": [""],
   "codex.form.shape-shifter-curse.axolotl_0.appearance": ["Бледно-красные образования, похожие на листья водорослей или жабры, выросли по бокам щёк. Они постоянно влажные и, похоже, помогают вам дышать в водной среде.\nНа конечностях и новом хвосте вы можете заметить полупрозрачные плавники.\nВаша кожа покрыта влагой."],
   "codex.form.shape-shifter-curse.axolotl_0.pros": ["Благодаря изменениям в вашей дыхательной системы вы можете дольше находиться под водой.\nВы слегка быстрее передвигаетесь в воде, чем раньше."],
   "codex.form.shape-shifter-curse.axolotl_0.cons": ["К вашей коже постоянно прилипают частицы пыли. Из-за этого вы медленнее передвигаетесь по суше."],
@@ -630,6 +631,7 @@
 
   "codex.form.shape-shifter-curse.ocelot_0.name" : ["Форма оцелота (фаза 1)"],
   "codex.form.shape-shifter-curse.ocelot_0.title": ["\nПроклятие видоизменило вас. Теперь ваше тело двигается более свободно, когда вы крадетесь."],
+  "codex.form.shape-shifter-curse.ocelot_0.equip": [""],
   "codex.form.shape-shifter-curse.ocelot_0.appearance": ["Ваши уши сдвинулись ближе к макушке и покрылись пятнистым мехом. Их форма является чем-то средним между треугольником и полукругом. Чем-то напоминают кошачьи.\nВаши кисти и стопы прокрыты пятнистой шерстью белого цвета, как будто вы надели толстые перчатки или носки. Пальцы тоже видоизменились - они стали намного сильнее.\nНа шее выросла шерсть, как будто кто-то надел на вас шарф.\nКороткая густая шерсть покрыла ваш живот, защитив его от холода.\nИз вашего копчика вырос небольшой хвост, покрытый светло-серой шерстью. При ходьбе он слегка помогает вам удерживать равновесие."],
   "codex.form.shape-shifter-curse.ocelot_0.pros": ["Благодаря хвосту вы можете быстрее красться.\nВаша новая пищеварительная система больше не отторгает гнилую плоть, и после её поедания вы не будете испытывать аномальный голод.\nКриперы почему-то избегают вас."],
   "codex.form.shape-shifter-curse.ocelot_0.cons": ["Ваше тело стало слабее - максимальное количество здоровья слегка уменьшено.\nВаша пищеварительная система менее восприимчива к немясным продуктам - они хуже утоляют голод."],
@@ -688,8 +690,9 @@
   "codex.form.shape-shifter-curse.ocelot_3.instincts": [""],
 
   "codex.form.shape-shifter-curse.bat_0.name" : ["Форма летучей мыши (фаза 1)"],
-  "codex.form.shape-shifter-curse.bat_0.title": ["\nПроклятие изменило ваше тело, сделав вас похожим на летучую мышь. Тьма привлекает вас.",
-  "\n\nЭксклюзивные предметы：[Талисман ночного кристалла], [Талисман клыка]."],
+  "codex.form.shape-shifter-curse.bat_0.title": ["\nПроклятие изменило ваше тело, сделав вас похожим на летучую мышь. Тьма привлекает вас."],
+  "codex.form.shape-shifter-curse.bat_0.equip": ["[Талисман ночного кристалла], [Талисман клыка]"],
+
   "codex.form.shape-shifter-curse.bat_0.appearance": ["Из ваших рук выросли мембранные придатки.\nИз вашего копчика вырос небольшой хвост.\nНесмотря на это, они, похоже, ничем не помогают вам."],
   "codex.form.shape-shifter-curse.bat_0.pros": ["Во тьме вы чувствуете себя более свободно."],
   "codex.form.shape-shifter-curse.bat_0.cons": ["Из-за мембранных образований вы не можете носить нагрудник."],
@@ -1048,5 +1051,8 @@
   "text.autoconfig.shape-shifter-curse-common.option.witchPotionForPreBook": "Witch Can Throw Transformative Potion To Pre-Book Player",
   "gamerule.category.ssc_gamerule": "Shape Shifter Curse",
   "gamerule.sscUseInitialForm": "Use SSC Custom Initial Form",
-  "gamerule.sscUseInitialForm.description": "When enabled, players who have not chosen a form will immediately transform into the server-configured initial form on join."
+  "gamerule.sscUseInitialForm.description": "When enabled, players who have not chosen a form will immediately transform into the server-configured initial form on join.",
+
+  "info.shape-shifter-curse.transformative_effect_cure": ["Golden magic has cured the curse effect upon you."],
+  "info.shape-shifter-curse.milk_cannot_remove_effect": ["Milk seems unable to remove the curse effect upon you; you seem to need some golden magic."]
 }
