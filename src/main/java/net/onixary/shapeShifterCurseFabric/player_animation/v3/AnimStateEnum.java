@@ -24,7 +24,8 @@ public enum AnimStateEnum {
     ANIM_STATE_ATTACK,
     ANIM_STATE_WALK,
     ANIM_STATE_SPRINT,
-    ANIM_STATE_IDLE;
+    ANIM_STATE_IDLE,
+    ANIM_STATE_CRAWL;
 
     public static final HashMap <Identifier, AnimStateEnum> stateMap = new HashMap<>();
 
@@ -43,6 +44,7 @@ public enum AnimStateEnum {
         stateMap.put(AnimRegistries.ANIM_STATE_WALK, ANIM_STATE_WALK);
         stateMap.put(AnimRegistries.ANIM_STATE_SPRINT, ANIM_STATE_SPRINT);
         stateMap.put(AnimRegistries.ANIM_STATE_IDLE, ANIM_STATE_IDLE);
+        stateMap.put(AnimRegistries.ANIM_STATE_CRAWL, ANIM_STATE_CRAWL);
     }
 
     public static @Nullable AnimStateEnum getStateEnum(Identifier stateID) {

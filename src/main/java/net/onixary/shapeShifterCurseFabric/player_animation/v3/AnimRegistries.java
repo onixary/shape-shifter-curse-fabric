@@ -35,6 +35,7 @@ public class AnimRegistries {
     public static Identifier ANIM_STATE_WALK = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("walk_state"), new AnimRegistry.AnimState(new EmptyController()));
     public static Identifier ANIM_STATE_SPRINT = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("sprint_state"), new AnimRegistry.AnimState(new EmptyController()));
     public static Identifier ANIM_STATE_IDLE = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("idle_state"), new AnimRegistry.AnimState(new EmptyController()));
+    public static Identifier ANIM_STATE_CRAWL = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("crawl_state"), new AnimRegistry.AnimState(new EmptyController()));
 
     // AnimFSM注册
     public static Identifier FSM_ON_GROUND = AnimRegistry.registerAnimFSM(ShapeShifterCurseFabric.identifier("on_ground"), new OnGroundFSM());
