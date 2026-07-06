@@ -1,7 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.data;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
@@ -13,6 +11,7 @@ public class CodexData {
 
     public static enum ContentType{
         TITLE,
+        EQUIP,
         APPEARANCE,
         PROS,
         CONS,
@@ -22,6 +21,7 @@ public class CodexData {
     // static texts
     // headers
     public static final Text headerStatus = Text.translatable("codex.header.status");
+    public static final Text headerEquip = Text.translatable("codex.header.equip");
     public static final Text headerAppearance = Text.translatable("codex.header.appearance");
     public static final Text headerPros = Text.translatable("codex.header.pros");
     public static final Text headerCons = Text.translatable("codex.header.cons");
@@ -99,40 +99,8 @@ public class CodexData {
 
     public static Text getDescText(ContentType type, PlayerEntity player) {
         int tier = FormUtils.getPlayerForm(player).getFormTier();
+        // 什么时候也得把 本能Desc 改一下
         switch (type) {
-            case TITLE -> {
-                return Text.empty();
-            }
-            case APPEARANCE -> {
-                return switch (tier) {
-                    case -1, 0 -> descAppearance_normal;
-                    case 1 -> descAppearance_0;
-                    case 2 -> descAppearance_1;
-                    case 3 -> descAppearance_2;
-                    case 4 -> descAppearance_3;
-                    default -> Text.empty();
-                };
-            }
-            case PROS -> {
-                return switch (tier) {
-                    case -1, 0 -> descPros_normal;
-                    case 1 -> descPros_0;
-                    case 2 -> descPros_1;
-                    case 3 -> descPros_2;
-                    case 4 -> descPros_3;
-                    default -> Text.empty();
-                };
-            }
-            case CONS -> {
-                return switch (tier) {
-                    case -1, 0 -> descCons_normal;
-                    case 1 -> descCons_0;
-                    case 2 -> descCons_1;
-                    case 3 -> descCons_2;
-                    case 4 -> descCons_3;
-                    default -> Text.empty();
-                };
-            }
             case INSTINCTS -> {
                 return switch (tier) {
                     case -1, 0 -> descInstincts_normal;

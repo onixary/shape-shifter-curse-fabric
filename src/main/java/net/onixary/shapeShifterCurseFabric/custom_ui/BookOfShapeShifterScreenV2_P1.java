@@ -5,14 +5,13 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.MultilineTextWidget;
 import net.minecraft.client.gui.widget.TextWidget;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.ScaleMultilineTextWidget;
+import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoonClient;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.ScaleScrollTextWidget;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.ScaleTextRenderer;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.WidgetEXUtils;
@@ -26,6 +25,7 @@ import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID
 
 public class BookOfShapeShifterScreenV2_P1 extends Screen implements WidgetEXUtils.IWidgetEX {
     private static final Identifier page_texID = new Identifier(MOD_ID,"textures/gui/codex_page_1.png");
+    private static final Identifier cursed_moon_icon_texID = new Identifier(MOD_ID,"textures/gui/book_cursed_moon_icon.png");
     public PlayerEntity currentPlayer;
     public static final int BookSizeX = 350;
     public static final int BookSizeY = 220;
@@ -58,12 +58,12 @@ public class BookOfShapeShifterScreenV2_P1 extends Screen implements WidgetEXUti
         TitleLabel.setEnableScrollableIconRender(true);
         this.addWidget(TitleLabel);
         this.addDrawableChild(TitleLabel);
-        // Status 190
+        // Equip 190
         // D -> (9, 9), (116, 143)
         // Size -> (107, 56) Pos -> (17, 153)
-        this.addDrawableChild(BuildDetailScreenButton(116, 143, 9, 9, CodexData.getPlayerStatusText(currentPlayer)));
-        this.addDrawableChild(new TextWidget(BookPosX + 17 * BookScale, BookPosY + 143 * BookScale, 107 * BookScale, 6 * BookScale, CodexData.headerStatus, textRenderer).setTextColor(HeaderTextColor));
-        ScaleScrollTextWidget StatusLabel = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 17 * BookScale, BookPosY + 153 * BookScale, 107 * BookScale, 6 * BookScale, Scale, CodexData.getPlayerStatusText(currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
+        this.addDrawableChild(BuildDetailScreenButton(116, 143, 9, 9, CodexData.getContentText(CodexData.ContentType.EQUIP, currentPlayer)));
+        this.addDrawableChild(new TextWidget(BookPosX + 17 * BookScale, BookPosY + 143 * BookScale, 107 * BookScale, 6 * BookScale, CodexData.headerEquip, textRenderer).setTextColor(HeaderTextColor));
+        ScaleScrollTextWidget StatusLabel = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 17 * BookScale, BookPosY + 153 * BookScale, 107 * BookScale, 6 * BookScale, Scale, CodexData.getContentText(CodexData.ContentType.EQUIP, currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
         StatusLabel.setEnableScrollableIconRender(true);
         this.addWidget(StatusLabel);
         this.addDrawableChild(StatusLabel);
@@ -180,6 +180,9 @@ public class BookOfShapeShifterScreenV2_P1 extends Screen implements WidgetEXUti
         int PlayerX = BookPosX + 70 * BookScale;
         int PlayerY = BookPosY + 75 * BookScale;
         this.RenderEntity(context, PlayerX, PlayerY, 30 * BookScale, PlayerX - mouseX, PlayerY - 37 * BookScale - mouseY, currentPlayer);
+        // Cursed Moon Icon
+        // Size -> (8, 8), Pos -> (115, 92)
+        context.drawTexture(cursed_moon_icon_texID, BookPosX + 115 * BookScale, BookPosY + 92 * BookScale, 8 * BookScale, 8 * BookScale, CursedMoonClient.isCursedMoon ? 8 : 0, 0, 8, 8, 16, 8);
         super.render(context, mouseX, mouseY, delta);
     }
 
