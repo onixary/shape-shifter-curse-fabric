@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 # Author        : XuHaoNan
+# LICENSE       : All Rights Reserved (XuHaoNan)
 
 import importlib.util
 import os

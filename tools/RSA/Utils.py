@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-from numba.core.typing import Signature
 
 # Author        : XuHaoNan
-
+# LICENSE       : All Rights Reserved (XuHaoNan)
 
 import ScriptTypes
 import PluginUtils
