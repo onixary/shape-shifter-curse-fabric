@@ -1,7 +1,9 @@
 # !/usr/bin/env python
 # -*- coding: UTF-8 -*-
+
 # Author        : XuHaoNan
 
+import os
 import typing
 import io
 import abc
@@ -16,16 +18,19 @@ class SubKeyPublicSegment:
 	KeyType: int = -1
 	KeyVersion: int = -1
 	MeltDown: bool = True
-	AcceptedDataType: list[int] = []
+	AcceptedDataType: list[int] = None
 	Signature: bytes = None
+
+	def __init__(self):
+		self.AcceptedDataType = []
 
 	@staticmethod
 	def load(data: bytes, rootPublicKey: typing.Optional[rsa.RSAPublicKey] = None) -> "SubKeyPublicSegment":
 		segment: SubKeyPublicSegment = SubKeyPublicSegment()
 		dataIO: io.BytesIO = io.BytesIO(data)
-		dataLength = dataIO.read(4)
-		if (dataLength != len(bytes)):
-			raise Exception("Data length is not Current")
+		dataLength = int.from_bytes(dataIO.read(4), "big")
+		if dataLength != len(data):
+			raise Exception(f"Data length is not Current {len(data)} != {dataLength}")
 		segment.KeyType = int.from_bytes(dataIO.read(4), "big")
 		segment.KeyVersion = int.from_bytes(dataIO.read(4), "big")
 		segment.MeltDown = bool(int.from_bytes(dataIO.read(1), "big"))
@@ -57,6 +62,7 @@ class SubKeyPublicSegment:
 		dataLength = len(signedData) + 4 + 512
 		signedData = dataLength.to_bytes(4, "big") + signedData
 		dataIO = io.BytesIO(signedData)
+		dataIO.seek(0, os.SEEK_END)
 		if rootPrivateKey is not None:
 			dataIO.write(rootPrivateKey.sign(signedData, padding.PKCS1v15(), hashes.SHA256()))
 		else:
@@ -127,18 +133,25 @@ class SubDataSegment:
 
 
 class IDataSegment:
-	SubSegments: list[SubDataSegment] = []
+	SubSegments: list[SubDataSegment] = None
+
+	def __init__(self):
+		self.SubSegments = []
 
 	# load 函数由于需要读取Plugin列表 所以不在ScriptTypes.py 中定义
 	@staticmethod
-	def load(data: bytes) -> "IDataSegment":
+	def load(fileName: str, data: bytes) -> "IDataSegment":
 		raise NotImplementedError
 
 	def save(self) -> bytes:
 		dataIO = io.BytesIO()
+		dataIO.write((0).to_bytes(4, "big"))  # 由后续添加长度
 		dataIO.write(len(self.SubSegments).to_bytes(2, "big"))
 		for subSegment in self.SubSegments:
 			dataIO.write(subSegment.save())
+		dataLength = dataIO.tell()
+		dataIO.seek(0)
+		dataIO.write(dataLength.to_bytes(4, "big"))
 		return dataIO.getvalue()
 
 	def saveWithSignature(self, privateKey: SubKeySegment | rsa.RSAPrivateKey) -> tuple[bytes, bytes]:
@@ -151,11 +164,11 @@ class IDataSegment:
 class AuthFile:
 	Version: int = -1
 	KeySegment: SubKeyPublicSegment = None
-	DataSegments: IDataSegment
+	DataSegments: IDataSegment = None
 	DataSignature: bytes = None
 
 	@staticmethod
-	def load(data: bytes, rootPublicKey: typing.Optional[rsa.RSAPublicKey] = None) -> "AuthFile":
+	def load(fileName: str, data: bytes, rootPublicKey: typing.Optional[rsa.RSAPublicKey] = None) -> "AuthFile":
 		authFile: AuthFile = AuthFile()
 		dataIO = io.BytesIO(data)
 		MagicNumber = dataIO.read(Const.MAGIC_NUMBER_LENGTH)
@@ -170,7 +183,7 @@ class AuthFile:
 		dataSegmentSize = int.from_bytes(dataIO.read(4), "big")
 		dataIO.seek(rollback)
 		dataSegmentBytes = dataIO.read(dataSegmentSize)
-		authFile.DataSegments = IDataSegment.load(dataSegmentBytes)
+		authFile.DataSegments = IDataSegment.load(fileName, dataSegmentBytes)
 		authFile.DataSignature = dataIO.read(512)
 		if not authFile.KeySegment.verify(dataSegmentBytes, authFile.DataSignature):
 			raise Exception("AuthFile Cannot Pass Verify")
