@@ -114,6 +114,6 @@
     - 额外数据value长度 1x4(int)
     - 额外数据value 1xN(byte[]) N = `额外数据value长度`
 
-.auth = 密钥部分+数据部分+签名部分 总大小不得超过1M  
+.auth = MagicNumber+版本(固定为0(int))+密钥部分+数据部分+签名部分 总大小不得超过1M  
 .key = 密钥部分  
 .sub_key = 密钥段文件  
