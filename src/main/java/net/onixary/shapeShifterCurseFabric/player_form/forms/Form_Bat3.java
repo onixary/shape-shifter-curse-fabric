@@ -58,8 +58,7 @@ public class Form_Bat3 extends NormalForm implements ModifyCapeRender {
     public static final AbstractAnimStateController FALL_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("bat_2_slow_falling")));
     public static final AbstractAnimStateController RIDE_CONTROLLER = new RideAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("bat_3_riding")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("bat_1_sneak_idle")));
     public static final AbstractAnimStateController FLYING_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("bat_2_slow_falling")));
-    public static final AbstractAnimStateController CLIMB_CONTROLLER =
-            new ClimbAnimController(ANIM_CLIMB_IDLE, ANIM_CLIMB);
+    public static final AbstractAnimStateController CLIMB_CONTROLLER = new ClimbAnimController(ANIM_CLIMB_IDLE, ANIM_CLIMB);
     public static final AbstractAnimStateController SLEEP_CONTROLLER = new OneAnimController(ANIM_SLEEP);
 
     public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
@@ -90,6 +89,8 @@ public class Form_Bat3 extends NormalForm implements ModifyCapeRender {
                     return IDLE_CONTROLLER;
                 case ANIM_STATE_SLEEP:
                     return SLEEP_CONTROLLER;
+                case ANIM_STATE_CRAWL:
+                    return FLYING_CONTROLLER;
                 default:
                     return null;
             }
