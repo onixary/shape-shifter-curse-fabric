@@ -1,0 +1,9 @@
+{
+  "AuthMethod": "GithubAccount|xu233333",
+  "UUID": "5ba1922be58b4b2ebaaf7897de194351",
+  "ExpiresIn": 31556736,
+  "PermissionLevel": 5,
+  "ExtraData": {
+    "IsAuthor": "AQ=="
+  }
+}
