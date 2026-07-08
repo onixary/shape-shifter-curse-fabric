@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.util.Verify;
 
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import org.jetbrains.annotations.NotNull;
@@ -15,8 +16,15 @@ import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 
+// XuHaoNan:
+// 在此警告一下 任何拓展未经允许不得修改此Package中的任何函数/类 理论上调用也没有必要 毕竟没有对应根私钥 无法创建auth文件
+// 这个package仅用于验证是否有对应权限 我认为除非想要破解 否则应该没有任何理由修改此类
+// 也就是我拓展后续可能会给赞助者加点功能 所以部分field改为了public 否则全都是protected/包protected 以及使用部分注册表系统
+// 如果发现 会直接使用检查ModID或其他方式检测来阻止与对应拓展一起启动(让SSC与对应Mod强行不兼容)
+// 如果真的有人破解完 并且公开发布的话(私底下破解我不反对 只要别公开/分享出去) 我后续可能会使用一些特殊技术来防止破解 不过我个人十分讨厌在代码里整这种东西 否则按理说应该得给验证逻辑整点加密/混淆
+
 public class AuthFileUtils {
-    public static final List<Pair<BiPredicate<Integer, Integer>, Consumer<InputStream>>> authFileDataReaders = new ArrayList<>();
+    protected static final List<Pair<BiPredicate<Integer, Integer>, Consumer<PacketByteBuf>>> authFileDataReaders = new ArrayList<>();
     public static final @NotNull KeyFactory Ed448KeyFactory;
     public static final @NotNull KeyPairGenerator Ed448KeyPairGenerator;
     public static final @NotNull String rootPublicKeyPEM = "MEMwBQYDK2VxAzoA775GpvHNH+fuvZ0k293H6TBNCNGVyWaVv50XtEjIeWsupe3/VfxNlOTvuQiIETZy3MDo3Rb/ynwA";
@@ -102,6 +110,31 @@ public class AuthFileUtils {
             return sig.verify(signature);
         } catch (SignatureException | InvalidKeyException | NoSuchAlgorithmException e) {
             return false;
+        }
+    }
+
+    public static void registerAuthFileDataReader(BiPredicate<Integer, Integer> typeVersionPredicate, Consumer<PacketByteBuf> reader) {
+        authFileDataReaders.add(new Pair<>(typeVersionPredicate, reader));
+    }
+
+    protected static void invokeAuthFileDataReader(PacketByteBuf buf) {
+        int type = buf.readVarInt();
+        int version = buf.readVarInt();
+        for (Pair<BiPredicate<Integer, Integer>, Consumer<PacketByteBuf>> reader : authFileDataReaders) {
+            if (reader.getLeft().test(type, version)) {
+                buf.setIndex(0, 0);
+                reader.getRight().accept(buf);
+            }
+        }
+    }
+
+    // 客户端需要 isVirtual = True 服务器需要 isVirtual = False 当isVirtual=True时 仅会进行读取+验证 不会执行任何回调
+    public static @Nullable AuthFile loadAuthFile(InputStream fileStream, boolean isVirtual) {
+        try {
+            byte[] fileBytes = fileStream.readAllBytes();
+            return new AuthFile(fileBytes, isVirtual);
+        } catch (Exception e) {
+            return null;
         }
     }
 }

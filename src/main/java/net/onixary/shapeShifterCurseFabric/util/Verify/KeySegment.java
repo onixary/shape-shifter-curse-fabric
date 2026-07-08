@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.util.Verify;
 import net.minecraft.network.PacketByteBuf;
 
 import java.security.PublicKey;
+import java.util.Arrays;
 
 public class KeySegment {
     private final int type;
@@ -16,10 +17,16 @@ public class KeySegment {
         this.version = buf.readVarInt();
         this.useMeltdown = buf.readBoolean();
         int supportDataTypeCount = buf.readVarInt();
-        this.supportDataTypes = new int[supportDataTypeCount];
+        int[] supportDataTypes = new int[supportDataTypeCount];
         for (int i = 0; i < supportDataTypeCount; i++) {
-            this.supportDataTypes[i] = buf.readVarInt();
+            int targetType = buf.readVarInt();
+            supportDataTypes[i] = targetType;
+            if (targetType == -1) {
+                supportDataTypes = null;
+                break;
+            }
         }
+        this.supportDataTypes = supportDataTypes;
         this.publicKey = AuthFileUtils.readEd448PublicKey(buf.readBytes(57).array());
         if (this.publicKey == null) {
             throw new RuntimeException("Invalid Ed448 public key");
@@ -29,6 +36,24 @@ public class KeySegment {
         byte[] keyData = new byte[keyDataEnd];
         buf.getBytes(0, keyData);
         AuthFileUtils.requireTrue(AuthFileUtils.verifyEd448Signature(keyData, signature, AuthFileUtils.rootPublickey), "Invalid signature");
+    }
+    public int getType() {
+        return type;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public boolean isUseMeltdown() {
+        return useMeltdown;
+    }
+
+    public boolean isDataTypeValid(int dataType) {
+        if (supportDataTypes == null) {
+            return true;
+        }
+        return Arrays.stream(supportDataTypes).anyMatch(i -> i == dataType);
     }
 
     public boolean verify(byte[] data, byte[]signature) {

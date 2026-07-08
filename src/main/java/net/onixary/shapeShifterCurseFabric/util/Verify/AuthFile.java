@@ -10,20 +10,20 @@ import java.util.Arrays;
 public class AuthFile {
     private final int MAGIC_NUMBER_LENGTH = 8;
     private final byte[] MAGIC_NUMBER = new byte[] { 0x58, 0x55, 0x53, 0x53, 0x43, 0x4B, 0x45, 0x59 };  // XUSSCKEY
-    public final byte[] raw;
-    public byte[] keySegment;
-    public KeySegment keySegmentObject;
+    protected final byte[] raw;
+    protected byte[] keySegment;
+    protected KeySegment keySegmentObject;
 
-    public AuthFile(byte[] raw) {
+    protected AuthFile(byte[] raw, boolean isVirtual) {
         this.raw = raw;
         try {
-            this.read(new PacketByteBuf(Unpooled.wrappedBuffer(raw)));
+            this.read(new PacketByteBuf(Unpooled.wrappedBuffer(raw)), isVirtual);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void read(PacketByteBuf buf) throws IOException {
+    private void read(PacketByteBuf buf, boolean isVirtual) throws IOException {
         int rollBack = 0;
         AuthFileUtils.requireTrue(Arrays.equals(buf.readBytes(MAGIC_NUMBER_LENGTH).array(), MAGIC_NUMBER), "MAGIC_NUMBER does not match");
         int version = buf.readVarInt();
@@ -35,9 +35,38 @@ public class AuthFile {
         this.keySegment = buf.readBytes(keySegmentLength).array();
         // 解析密钥段
         PacketByteBuf keyBuf = new PacketByteBuf(Unpooled.wrappedBuffer(this.keySegment));
-        keySegmentObject = new KeySegment(keyBuf);
+        this.keySegmentObject = new KeySegment(keyBuf);
         // 读取数据段Bytes
+        rollBack = buf.readerIndex();
+        int dataSegmentLength = buf.readVarInt();
+        buf.setIndex(rollBack, rollBack);
+        PacketByteBuf dataBuf = new PacketByteBuf(buf.readBytes(dataSegmentLength));
         // 验证数据段
+        byte[] signature = dataBuf.readBytes(114).array();
+        byte[] data = dataBuf.readBytes(dataBuf.readableBytes()).array();
+        AuthFileUtils.requireTrue(this.keySegmentObject.verify(data, signature), "Signature does not match");
+        dataBuf.setIndex(0, 0);
+        dataBuf.skipBytes(4);  // dataLength
+        int dataCount = dataBuf.readVarInt();
+        for (int i = 0; i < dataCount; i++) {
+            int dataType = dataBuf.readVarInt();
+            dataBuf.skipBytes(4);  // dataVersion
+            int dataLength = dataBuf.readVarInt();
+            dataBuf.skipBytes(dataLength);
+            AuthFileUtils.requireTrue(this.keySegmentObject.isDataTypeValid(dataType), "Invalid data type for key: " + dataType);
+        }
         // 调用authFileDataReaders中的回调
+        if (!isVirtual) {
+            dataBuf.setIndex(0, 0);
+            dataBuf.skipBytes(4);  // dataLength
+            dataCount = dataBuf.readVarInt();
+            for (int i = 0; i < dataCount; i++) {
+                rollBack = dataBuf.readerIndex();
+                dataBuf.skipBytes(8);
+                int dataLength = dataBuf.readVarInt();
+                dataBuf.setIndex(rollBack, rollBack);
+                AuthFileUtils.invokeAuthFileDataReader(new PacketByteBuf(dataBuf.readBytes(dataLength)));
+            }
+        }
     }
 }
