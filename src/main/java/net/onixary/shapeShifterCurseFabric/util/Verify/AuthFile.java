@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 // 由于Java不用签名数据 没写对应的save函数 所以需要存储原始bytes
-public class AuthFile {
+public final class AuthFile {
     private final int MAGIC_NUMBER_LENGTH = 8;
     private final byte[] MAGIC_NUMBER = new byte[] { 0x58, 0x55, 0x53, 0x53, 0x43, 0x4B, 0x45, 0x59 };  // XUSSCKEY
     protected final byte[] raw;

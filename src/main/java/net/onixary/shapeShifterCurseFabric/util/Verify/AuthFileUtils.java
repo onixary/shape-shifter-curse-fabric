@@ -1,18 +1,22 @@
 package net.onixary.shapeShifterCurseFabric.util.Verify;
 
+import io.netty.buffer.Unpooled;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 
@@ -23,7 +27,22 @@ import java.util.function.Consumer;
 // 如果发现 会直接使用检查ModID或其他方式检测来阻止与对应拓展一起启动(让SSC与对应Mod强行不兼容)
 // 如果真的有人破解完 并且公开发布的话(私底下破解我不反对 只要别公开/分享出去) 我后续可能会使用一些特殊技术来防止破解 不过我个人十分讨厌在代码里整这种东西 否则按理说应该得给验证逻辑整点加密/混淆
 
-public class AuthFileUtils {
+// 运行流程
+// Client:
+// 初始化Mod时开始读取所有key 检查上一次Auth文件更新时间 每天检查一次外部更新
+// 触发Auth更新时: 从网络下载对应UUID的Auth文件 并自动加载 如果在服务器中 自动向服务器发送Auth文件Bytes
+// 进入服务器时 自动发送存储中的Auth文件Bytes
+// 当接收服务器的 密钥熔断包时(payload为KeySegment) 先检查密钥段是否正确 如果没问题则触发Auth更新
+// Server:
+// 当接收客户端的Auth文件Bytes时 检查并加载Auth文件 如果触发熔断 向所有玩家发送KeySegment熔断 并将key放入forgiveKeySegments里 让玩家在30min内仍然可以使用赞助者内容
+// 当有forgiveKeySegments失效时 检查玩家Auth文件现在是否仍然有效 如果无效 则还原玩家特权
+// 当玩家进入服务器时 30s后(等待网络发送Auth文件) 检查玩家Auth文件是否有效 如果无效 则还原玩家特权
+
+// 暂存(今天状态不太行了 明天再继续吧)
+// 需要把KeySegment/AuthFile加载区分是否为服务器端
+
+
+public final class AuthFileUtils {
     protected static final List<Pair<BiPredicate<Integer, Integer>, Consumer<PacketByteBuf>>> authFileDataReaders = new ArrayList<>();
     public static final @NotNull KeyFactory Ed448KeyFactory;
     public static final @NotNull KeyPairGenerator Ed448KeyPairGenerator;
@@ -48,6 +67,13 @@ public class AuthFileUtils {
         } else {
             rootPublickey = Ed448KeyPairGenerator.generateKeyPair().getPublic();
         }
+    }
+    protected static final HashMap<Integer, KeySegment> storedKeySegments = new HashMap<>();
+    protected static final List<Pair<Long, KeySegment>> forgiveKeySegments = new ArrayList<>();
+    protected static final long forgiveTime = 60 * 30;  // 30分钟
+    public static @Nullable AuthFile clientSideAuthFile = null;
+    static {
+        loadLocalKeySegments();
     }
 
     public static void requireTrue(boolean condition, String message) {
@@ -135,6 +161,97 @@ public class AuthFileUtils {
             return new AuthFile(fileBytes, isVirtual);
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    private static @Nullable KeySegment loadKeySegment(InputStream fileStream) {
+        try {
+            byte[] fileBytes = fileStream.readAllBytes();
+            return new KeySegment(new PacketByteBuf(Unpooled.wrappedBuffer(fileBytes)));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private Path getLocalKeyFolderPath() {
+        return FabricLoader.getInstance().getConfigDir().resolve("ssc_auth/keys");
+    }
+
+    protected static void loadLocalKeySegments() {
+        try {
+            Path folderPath = new AuthFileUtils().getLocalKeyFolderPath();
+            if (!Files.exists(folderPath)) {
+                Files.createDirectories(folderPath);
+            }
+            try (DirectoryStream<Path> stream = Files.newDirectoryStream(folderPath)) {
+                for (Path path : stream) {
+                    String fileName = path.getFileName().toString();
+                    if (fileName.endsWith(".key") && fileName.matches("\\d+\\.key")) {
+                        try (InputStream is = Files.newInputStream(path)) {
+                            KeySegment segment = loadKeySegment(is);
+                            if (segment != null) {
+                                storedKeySegments.put(segment.getType(), segment);
+                            }
+                        } catch (IOException ignored) {
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected static void updateKeySegmentFromKey(KeySegment keySegment) {
+        if (!keySegment.isUseMeltdown()) {
+            return;
+        }
+        KeySegment oldKey = storedKeySegments.put(keySegment.getType(), keySegment);
+        if (oldKey != null) {
+            long nowTime = System.currentTimeMillis() / 1000;
+            forgiveKeySegments.add(new Pair<>(nowTime, oldKey));
+        }
+        saveKeySegment(keySegment);
+    }
+
+    protected static void saveKeySegment(KeySegment keySegment) {
+        Path folderPath = new AuthFileUtils().getLocalKeyFolderPath();
+        try {
+            if (!Files.exists(folderPath)) {
+                Files.createDirectories(folderPath);
+            }
+            Path filePath = folderPath.resolve(keySegment.getType() + ".key");
+            Files.write(filePath, keySegment.raw);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void updateForgiveKeySegments() {
+        long nowTime = System.currentTimeMillis() / 1000;
+        forgiveKeySegments.removeIf(pair -> pair.getLeft() + forgiveTime < nowTime);
+    }
+
+    public static Pair<Boolean, Boolean> isKeyCanUse(KeySegment keySegment) {
+        // 返回值为 Pair<Boolean, Boolean> 第一个值表示是否可用 第二个值表示是否需要更新
+        updateForgiveKeySegments();
+        int Type = keySegment.getType();
+        int Version = keySegment.getVersion();
+        KeySegment storedKeySegment = storedKeySegments.get(Type);
+        if (storedKeySegment == null) {
+            return new Pair<>(true, true);
+        }
+        if (storedKeySegment.getVersion() < Version) {
+            return new Pair<>(true, true);
+        } else if (storedKeySegment.getVersion() == Version) {
+            return new Pair<>(true, false);
+        } else {
+            for (Pair<Long, KeySegment> segmentPair : forgiveKeySegments) {
+                if (segmentPair.getLeft() == Type) {
+                    return new Pair<>(true, false);
+                }
+            }
+            return new Pair<>(false, false);
         }
     }
 }

@@ -1,18 +1,21 @@
 package net.onixary.shapeShifterCurseFabric.util.Verify;
 
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.util.Pair;
 
 import java.security.PublicKey;
 import java.util.Arrays;
 
-public class KeySegment {
+public final class KeySegment {
+    public final byte[] raw;
     private final int type;
     private final int version;
     private final boolean useMeltdown;
     private final int[] supportDataTypes;
     private final PublicKey publicKey;
 
-    public KeySegment(PacketByteBuf buf) {
+    protected KeySegment(PacketByteBuf buf) {
+        this.raw = buf.array();
         this.type = buf.readVarInt();
         this.version = buf.readVarInt();
         this.useMeltdown = buf.readBoolean();
@@ -36,6 +39,15 @@ public class KeySegment {
         byte[] keyData = new byte[keyDataEnd];
         buf.getBytes(0, keyData);
         AuthFileUtils.requireTrue(AuthFileUtils.verifyEd448Signature(keyData, signature, AuthFileUtils.rootPublickey), "Invalid signature");
+        if (this.isUseMeltdown()) {
+            Pair<Boolean, Boolean> canUse = AuthFileUtils.isKeyCanUse(this);
+            if (!canUse.getLeft()) {
+                throw new RuntimeException("Key has been meltdown");
+            }
+            if (canUse.getRight()) {
+                AuthFileUtils.updateKeySegmentFromKey(this);
+            }
+        }
     }
     public int getType() {
         return type;
