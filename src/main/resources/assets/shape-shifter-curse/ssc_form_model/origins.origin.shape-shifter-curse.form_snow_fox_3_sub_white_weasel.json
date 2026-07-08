@@ -7,11 +7,11 @@
 
   "wide_only": true,
 
-  "model": "shape-shifter-curse:geo/form/form_ocelot_3.geo.json",
-  "texture": "shape-shifter-curse:textures/form/form_ocelot_3/form_ocelot_3.png",
-  "texture_mask": "shape-shifter-curse:textures/form/form_ocelot_3/form_ocelot_3_colormask.png",
-  "fullbright_texture": "shape-shifter-curse:textures/form/form_ocelot_3/form_ocelot_3_emission.png",
-  "fullbright_texture_mask": "shape-shifter-curse:textures/form/form_ocelot_3/form_ocelot_3_emission_colormask.png",
+  "model": "shape-shifter-curse:geo/form/form_long_cat_test.geo.json",
+  "texture": "shape-shifter-curse:textures/form/form_feral_cat_sp/form_feral_cat_sp.png",
+  "texture_mask": "shape-shifter-curse:textures/form/form_feral_cat_sp/form_feral_cat_sp_colormask.png",
+  "fullbright_texture": "shape-shifter-curse:textures/form/form_feral_cat_sp/form_feral_cat_sp_emission.png",
+  "fullbright_texture_mask": "shape-shifter-curse:textures/form/form_feral_cat_sp/form_feral_cat_sp_emission_colormask.png",
   "hidden": [
     "leftLeg",
     "rightLeg",
