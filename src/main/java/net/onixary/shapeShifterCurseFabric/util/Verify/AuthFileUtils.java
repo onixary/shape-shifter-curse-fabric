@@ -27,6 +27,9 @@ import java.util.function.Consumer;
 // 如果发现 会直接使用检查ModID或其他方式检测来阻止与对应拓展一起启动(让SSC与对应Mod强行不兼容)
 // 如果真的有人破解完 并且公开发布的话(私底下破解我不反对 只要别公开/分享出去) 我后续可能会使用一些特殊技术来防止破解 不过我个人十分讨厌在代码里整这种东西 否则按理说应该得给验证逻辑整点加密/混淆
 
+// Java端额外设计指标
+// 在这个package里 任意public函数 或非final的public类field 外部随意调用/修改 不可导致密钥系统被破解(比如调用/修改几个public函数或field导致其他玩家获得赞助者权限) 但可以允许破坏验证(所有验证全部失败是允许的)
+
 // 运行流程
 // Client:
 // 初始化Mod时开始读取所有key 检查上一次Auth文件更新时间 每天检查一次外部更新
@@ -43,7 +46,7 @@ import java.util.function.Consumer;
 
 
 public final class AuthFileUtils {
-    protected static final List<Pair<BiPredicate<Integer, Integer>, Consumer<PacketByteBuf>>> authFileDataReaders = new ArrayList<>();
+    private static final List<Pair<BiPredicate<Integer, Integer>, Consumer<PacketByteBuf>>> authFileDataReaders = new ArrayList<>();
     public static final @NotNull KeyFactory Ed448KeyFactory;
     public static final @NotNull KeyPairGenerator Ed448KeyPairGenerator;
     public static final @NotNull String rootPublicKeyPEM = "MEMwBQYDK2VxAzoA775GpvHNH+fuvZ0k293H6TBNCNGVyWaVv50XtEjIeWsupe3/VfxNlOTvuQiIETZy3MDo3Rb/ynwA";
@@ -68,9 +71,9 @@ public final class AuthFileUtils {
             rootPublickey = Ed448KeyPairGenerator.generateKeyPair().getPublic();
         }
     }
-    protected static final HashMap<Integer, KeySegment> storedKeySegments = new HashMap<>();
-    protected static final List<Pair<Long, KeySegment>> forgiveKeySegments = new ArrayList<>();
-    protected static final long forgiveTime = 60 * 30;  // 30分钟
+    private static final HashMap<Integer, KeySegment> storedKeySegments = new HashMap<>();
+    private static final List<Pair<Long, KeySegment>> forgiveKeySegments = new ArrayList<>();
+    private static final long forgiveTime = 60 * 30;  // 30分钟
     public static @Nullable AuthFile clientSideAuthFile = null;
     static {
         loadLocalKeySegments();
