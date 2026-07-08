@@ -65,42 +65,42 @@ class PatronDataSegment(ScriptTypes.SubDataSegment):
 	def load(data: bytes) -> "PatronDataSegment":
 		dataIO = io.BytesIO(data)
 		segment = PatronDataSegment()
-		segment.Type = int.from_bytes(dataIO.read(4), "big")
-		segment.Version = int.from_bytes(dataIO.read(4), "big")
-		length = int.from_bytes(dataIO.read(4), "big")
+		segment.Type = int.from_bytes(dataIO.read(4), "little")
+		segment.Version = int.from_bytes(dataIO.read(4), "little")
+		length = int.from_bytes(dataIO.read(4), "little")
 		if length != len(data):
 			raise Exception("Data length is not Current")
 		segment.UUID = dataIO.read(16)
-		segment.PermissionLevel = int.from_bytes(dataIO.read(4), "big")
-		segment.Timestamp = int.from_bytes(dataIO.read(8), "big")
-		segment.ExpiresIn = int.from_bytes(dataIO.read(8), "big")
-		extraDataCount = int.from_bytes(dataIO.read(4), "big")
+		segment.PermissionLevel = int.from_bytes(dataIO.read(4), "little")
+		segment.Timestamp = int.from_bytes(dataIO.read(8), "little")
+		segment.ExpiresIn = int.from_bytes(dataIO.read(8), "little")
+		extraDataCount = int.from_bytes(dataIO.read(4), "little")
 		for i in range(extraDataCount):
-			keyLength = int.from_bytes(dataIO.read(4), "big")
+			keyLength = int.from_bytes(dataIO.read(4), "little")
 			key = dataIO.read(keyLength).decode("utf-8")
-			valueLength = int.from_bytes(dataIO.read(4), "big")
+			valueLength = int.from_bytes(dataIO.read(4), "little")
 			value = dataIO.read(valueLength)
 			segment.ExtraData[key] = value
 		return segment
 
 	def save(self) -> bytes:
 		dataIO = io.BytesIO()
-		dataIO.write(self.Type.to_bytes(4, "big"))
-		dataIO.write(self.Version.to_bytes(4, "big"))
-		dataIO.write((0).to_bytes(4, "big"))  # 先用0填充 之后填充数据长度
+		dataIO.write(self.Type.to_bytes(4, "little"))
+		dataIO.write(self.Version.to_bytes(4, "little"))
+		dataIO.write((0).to_bytes(4, "little"))  # 先用0填充 之后填充数据长度
 		dataIO.write(self.UUID)
-		dataIO.write(self.PermissionLevel.to_bytes(4, "big"))
-		dataIO.write(self.Timestamp.to_bytes(8, "big"))
-		dataIO.write(self.ExpiresIn.to_bytes(8, "big"))
-		dataIO.write(len(self.ExtraData).to_bytes(4, "big"))
+		dataIO.write(self.PermissionLevel.to_bytes(4, "little"))
+		dataIO.write(self.Timestamp.to_bytes(8, "little"))
+		dataIO.write(self.ExpiresIn.to_bytes(8, "little"))
+		dataIO.write(len(self.ExtraData).to_bytes(4, "little"))
 		for key, value in self.ExtraData.items():
-			dataIO.write(len(key).to_bytes(4, "big"))
+			dataIO.write(len(key).to_bytes(4, "little"))
 			dataIO.write(key.encode("utf-8"))
-			dataIO.write(len(value).to_bytes(4, "big"))
+			dataIO.write(len(value).to_bytes(4, "little"))
 			dataIO.write(value)
 		length = dataIO.tell()
 		dataIO.seek(8)
-		dataIO.write(length.to_bytes(4, "big"))
+		dataIO.write(length.to_bytes(4, "little"))
 		return dataIO.getvalue()
 
 	@staticmethod
