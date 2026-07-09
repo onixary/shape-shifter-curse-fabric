@@ -10,11 +10,11 @@ import java.util.Arrays;
 public final class AuthFile {
     private final int MAGIC_NUMBER_LENGTH = 8;
     private final byte[] MAGIC_NUMBER = new byte[] { 0x58, 0x55, 0x53, 0x53, 0x43, 0x4B, 0x45, 0x59 };  // XUSSCKEY
-    protected final byte[] raw;
-    protected byte[] keySegment;
-    protected KeySegment keySegmentObject;
+    final byte[] raw;
+    byte[] keySegment;
+    KeySegment keySegmentObject;
 
-    protected AuthFile(byte[] raw, boolean isVirtual) {
+    AuthFile(byte[] raw, boolean isVirtual) {
         this.raw = raw;
         try {
             this.read(new PacketByteBuf(Unpooled.wrappedBuffer(raw)), isVirtual);

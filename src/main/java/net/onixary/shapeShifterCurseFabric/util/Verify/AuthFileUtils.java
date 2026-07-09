@@ -31,18 +31,43 @@ import java.util.function.Consumer;
 // 在这个package里 任意public函数 或非final的public类field 外部随意调用/修改 不可导致密钥系统被破解(比如调用/修改几个public函数或field导致其他玩家获得赞助者权限) 但可以允许破坏验证(所有验证全部失败是允许的)
 
 // 运行流程
+// Common:
+//      初始化:
+//          初始化 AuthFileUtils 联动调用读取本地Key
 // Client:
-// 初始化Mod时开始读取所有key 检查上一次Auth文件更新时间 每天检查一次外部更新
-// 触发Auth更新时: 从网络下载对应UUID的Auth文件 并自动加载 如果在服务器中 自动向服务器发送Auth文件Bytes
-// 进入服务器时 自动发送存储中的Auth文件Bytes
-// 当接收服务器的 密钥熔断包时(payload为KeySegment) 先检查密钥段是否正确 如果没问题则触发Auth更新
+//      初始化:
+//          检查本地configJson文件是否需要检查更新Auth文件
+//      触发更新时:
+//          如果在服务器中 自动向服务器发送更新的密钥
+//          触发AuthFile落盘 检查KeySegment是否也需要落盘
+//      进入服务器:
+//          向服务器发送AuthFile
+//      收到服务器密钥段:
+//          检查是否需要熔断当前密钥 如果需要 触发更新
 // Server:
-// 当接收客户端的Auth文件Bytes时 检查并加载Auth文件 如果触发熔断 向所有玩家发送KeySegment熔断 并将key放入forgiveKeySegments里 让玩家在30min内仍然可以使用赞助者内容
-// 当有forgiveKeySegments失效时 检查玩家Auth文件现在是否仍然有效 如果无效 则还原玩家特权
-// 当玩家进入服务器时 30s后(等待网络发送Auth文件) 检查玩家Auth文件是否有效 如果无效 则还原玩家特权
+//      玩家进入时:
+//          开始30s计时 等待AuthFile 先不执行还原
+//      收到客户端AuthFile:
+//          检查本地Key 如果AuthFile需要熔断当前密钥 触发熔断
+//          将AuthFile写入内存
+//      密钥熔断时:
+//          将旧Key写入forgive组 并使用新Key替换 并将新Key落盘
+//          向所有玩家发送新密钥
+//      每5s:
+//          给每个玩家检查内存中是否有有效认证文件Object 如果没有 触发回调中的还原
+//          检查forgive组是否有失效密钥 如果有失效 对当前存储的AuthFile进行检查 如果有AuthFile失效 触发回调中的还原
 
 // 暂存(今天状态不太行了 明天再继续吧)
 // 需要把KeySegment/AuthFile加载区分是否为服务器端
+// 回调需要读取PacketByteBuf 返回一个Object 拥有撤销等回调
+
+
+// 公开功能 其余全是package-private 对于验证代码而言 外部所有调用都可能为恶意的 必须得做防护
+// - 初始化AuthFileUtils(需要由SSC初始化时初始化) 联动读取本地KeySegment
+// - 加载新的AuthFile 参数为buffer 用于网络 返回AuthFile
+// - 加载新的KeySegment 参数为buffer 用于网络 返回KeySegment
+// - 注册数据段回调(需要把回调改为class 新增失效时的回调)
+// - ...
 
 
 public final class AuthFileUtils {
