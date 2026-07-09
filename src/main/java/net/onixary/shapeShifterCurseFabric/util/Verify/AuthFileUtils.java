@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,7 +17,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.*;
 import java.util.function.BiPredicate;
-import java.util.function.Consumer;
+import java.util.function.Function;
 
 // XuHaoNan:
 // 在此警告一下 任何拓展未经允许不得修改此Package中的任何函数/类 理论上调用也没有必要 毕竟没有对应根私钥 无法创建auth文件
@@ -71,11 +70,11 @@ import java.util.function.Consumer;
 
 
 public final class AuthFileUtils {
-    private static final List<Pair<BiPredicate<Integer, Integer>, Consumer<PacketByteBuf>>> authFileDataReaders = new ArrayList<>();
-    public static final @NotNull KeyFactory Ed448KeyFactory;
-    public static final @NotNull KeyPairGenerator Ed448KeyPairGenerator;
-    public static final @NotNull String rootPublicKeyPEM = "MEMwBQYDK2VxAzoA775GpvHNH+fuvZ0k293H6TBNCNGVyWaVv50XtEjIeWsupe3/VfxNlOTvuQiIETZy3MDo3Rb/ynwA";
-    public static final @NotNull PublicKey rootPublickey;
+    // 密钥处理部分
+    static final @NotNull KeyFactory Ed448KeyFactory;
+    static final @NotNull KeyPairGenerator Ed448KeyPairGenerator;
+    static final @NotNull String rootPublicKeyPEM = "MEMwBQYDK2VxAzoA775GpvHNH+fuvZ0k293H6TBNCNGVyWaVv50XtEjIeWsupe3/VfxNlOTvuQiIETZy3MDo3Rb/ynwA";
+    static final @NotNull PublicKey rootPublickey;
     static {
         try {
             Ed448KeyFactory = KeyFactory.getInstance("Ed448");
@@ -95,13 +94,6 @@ public final class AuthFileUtils {
         } else {
             rootPublickey = Ed448KeyPairGenerator.generateKeyPair().getPublic();
         }
-    }
-    private static final HashMap<Integer, KeySegment> storedKeySegments = new HashMap<>();
-    private static final List<Pair<Long, KeySegment>> forgiveKeySegments = new ArrayList<>();
-    private static final long forgiveTime = 60 * 30;  // 30分钟
-    public static @Nullable AuthFile clientSideAuthFile = null;
-    static {
-        loadLocalKeySegments();
     }
 
     public static void requireTrue(boolean condition, String message) {
@@ -167,119 +159,253 @@ public final class AuthFileUtils {
         }
     }
 
-    public static void registerAuthFileDataReader(BiPredicate<Integer, Integer> typeVersionPredicate, Consumer<PacketByteBuf> reader) {
-        authFileDataReaders.add(new Pair<>(typeVersionPredicate, reader));
+    private static final List<Pair<BiPredicate<Integer, Integer>, Function<PacketByteBuf, IDataSegment>>> dataReaderRegistry = new ArrayList<>();
+
+    public static void registerDataReader(BiPredicate<Integer, Integer> typeVersionPredicate, Function<PacketByteBuf, IDataSegment> dataReader) {
+        dataReaderRegistry.add(new Pair<>(typeVersionPredicate, dataReader));
     }
 
-    protected static void invokeAuthFileDataReader(PacketByteBuf buf) {
+    public static @Nullable IDataSegment readDataSegment(PacketByteBuf buf) {
         int type = buf.readVarInt();
         int version = buf.readVarInt();
-        for (Pair<BiPredicate<Integer, Integer>, Consumer<PacketByteBuf>> reader : authFileDataReaders) {
+        for (Pair<BiPredicate<Integer, Integer>, Function<PacketByteBuf, IDataSegment>> reader : dataReaderRegistry) {
             if (reader.getLeft().test(type, version)) {
                 buf.setIndex(0, 0);
-                reader.getRight().accept(buf);
+                return reader.getRight().apply(buf);
             }
         }
+        return null;
     }
 
-    // 客户端需要 isVirtual = True 服务器需要 isVirtual = False 当isVirtual=True时 仅会进行读取+验证 不会执行任何回调
-    public static @Nullable AuthFile loadAuthFile(InputStream fileStream, boolean isVirtual) {
+    public static @Nullable AuthFile readAuthFile(PacketByteBuf buf) {
         try {
-            byte[] fileBytes = fileStream.readAllBytes();
-            return new AuthFile(fileBytes, isVirtual);
+            return new AuthFile(buf);
         } catch (Exception e) {
             return null;
         }
     }
 
-    private static @Nullable KeySegment loadKeySegment(InputStream fileStream) {
+    public static @Nullable KeySegment readKeySegment(PacketByteBuf buf) {
         try {
-            byte[] fileBytes = fileStream.readAllBytes();
-            return new KeySegment(new PacketByteBuf(Unpooled.wrappedBuffer(fileBytes)));
+            return new KeySegment(buf);
         } catch (Exception e) {
             return null;
         }
     }
 
-    private Path getLocalKeyFolderPath() {
-        return FabricLoader.getInstance().getConfigDir().resolve("ssc_auth/keys");
+    private static final List<AuthFile> authFiles = new ArrayList<>();  // TODO ReadOnly
+    private static final HashMap<Integer, KeySegment> storedKeySegments = new HashMap<>();  // TODO ReadOnly
+    private static final List<Pair<Long, KeySegment>> forgiveKeySegments = new ArrayList<>();  // TODO ReadOnly
+    private static final long forgiveTime = 60 * 30;  // 30分钟
+    static {
+        loadLocalKeySegments();
     }
 
-    protected static void loadLocalKeySegments() {
-        try {
-            Path folderPath = new AuthFileUtils().getLocalKeyFolderPath();
-            if (!Files.exists(folderPath)) {
+    public static Path getLocalKeyFolderPath() { return FabricLoader.getInstance().getConfigDir().resolve("ssc_auth/keys"); }
+
+    public static void loadLocalKeySegments() {
+        storedKeySegments.clear();
+        forgiveKeySegments.clear();
+        Path folderPath = getLocalKeyFolderPath();
+        if (!Files.exists(folderPath)) {
+            try {
                 Files.createDirectories(folderPath);
+            } catch (IOException e) {
+                ShapeShifterCurseFabric.LOGGER.warn("Failed to create key folder: " + e.getMessage());
             }
-            try (DirectoryStream<Path> stream = Files.newDirectoryStream(folderPath)) {
-                for (Path path : stream) {
-                    String fileName = path.getFileName().toString();
-                    if (fileName.endsWith(".key") && fileName.matches("\\d+\\.key")) {
-                        try (InputStream is = Files.newInputStream(path)) {
-                            KeySegment segment = loadKeySegment(is);
-                            if (segment != null) {
-                                storedKeySegments.put(segment.getType(), segment);
-                            }
-                        } catch (IOException ignored) {
-                        }
+        }
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(folderPath)) {
+            for (Path path : stream) {
+                if (path.getFileName().toString().endsWith(".key")) {
+                    KeySegment keySegment = readKeySegment(new PacketByteBuf(Unpooled.wrappedBuffer(Files.readAllBytes(path))));
+                    if (keySegment != null) {
+                        storedKeySegments.put(keySegment.getType(), keySegment);
                     }
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            ShapeShifterCurseFabric.LOGGER.warn("Failed to load key segments: " + e.getMessage());
         }
     }
 
-    protected static void updateKeySegmentFromKey(KeySegment keySegment) {
-        if (!keySegment.isUseMeltdown()) {
-            return;
-        }
-        KeySegment oldKey = storedKeySegments.put(keySegment.getType(), keySegment);
-        if (oldKey != null) {
-            long nowTime = System.currentTimeMillis() / 1000;
-            forgiveKeySegments.add(new Pair<>(nowTime, oldKey));
-        }
-        saveKeySegment(keySegment);
-    }
-
-    protected static void saveKeySegment(KeySegment keySegment) {
-        Path folderPath = new AuthFileUtils().getLocalKeyFolderPath();
+    public static void saveKey(KeySegment keySegment) {
+        Path folderPath = getLocalKeyFolderPath();
         try {
             if (!Files.exists(folderPath)) {
                 Files.createDirectories(folderPath);
             }
             Path filePath = folderPath.resolve(keySegment.getType() + ".key");
-            Files.write(filePath, keySegment.raw);
+            Files.write(filePath, keySegment.getRaw());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void updateForgiveKeySegments() {
-        long nowTime = System.currentTimeMillis() / 1000;
-        forgiveKeySegments.removeIf(pair -> pair.getLeft() + forgiveTime < nowTime);
+    public static boolean loadKey(@Nullable KeySegment keySegment) {
+        // 返回值 -> 是否触发熔断
+        if (keySegment == null || !keySegment.isUseMeltdown()) {
+            return false;
+        }
+        if (!storedKeySegments.containsKey(keySegment.getType())) {
+            storedKeySegments.put(keySegment.getType(), keySegment);
+            saveKey(keySegment);
+            return false;
+        } else {
+            KeySegment storedKey = storedKeySegments.get(keySegment.getType());
+            if (storedKey.getVersion() >= keySegment.getVersion()) {
+                return false;
+            } else {
+                storedKeySegments.put(keySegment.getType(), keySegment);
+                forgiveKeySegments.add(new Pair<>(System.currentTimeMillis() / 1000, storedKey));
+                saveKey(keySegment);
+                return true;
+            }
+        }
     }
 
-    public static Pair<Boolean, Boolean> isKeyCanUse(KeySegment keySegment) {
-        // 返回值为 Pair<Boolean, Boolean> 第一个值表示是否可用 第二个值表示是否需要更新
-        updateForgiveKeySegments();
-        int Type = keySegment.getType();
-        int Version = keySegment.getVersion();
-        KeySegment storedKeySegment = storedKeySegments.get(Type);
-        if (storedKeySegment == null) {
-            return new Pair<>(true, true);
-        }
-        if (storedKeySegment.getVersion() < Version) {
-            return new Pair<>(true, true);
-        } else if (storedKeySegment.getVersion() == Version) {
-            return new Pair<>(true, false);
-        } else {
-            for (Pair<Long, KeySegment> segmentPair : forgiveKeySegments) {
-                if (segmentPair.getLeft() == Type) {
-                    return new Pair<>(true, false);
-                }
-            }
-            return new Pair<>(false, false);
-        }
+    public static void removeExpiredKey() {
+        long currentTime = System.currentTimeMillis() / 1000;
+        forgiveKeySegments.removeIf(pair -> pair.getLeft() + forgiveTime < currentTime);
     }
+
+    public static boolean isKeyCanUse(@Nullable KeySegment keySegment) {
+        removeExpiredKey();
+        if (keySegment == null) {
+            return false;
+        }
+        if (!keySegment.isUseMeltdown()) {
+            return true;
+        }
+        if (!storedKeySegments.containsKey(keySegment.getType())) {
+            return true;
+        }
+        KeySegment storedKey = storedKeySegments.get(keySegment.getType());
+        if (storedKey.getVersion() <= keySegment.getVersion()) {
+            return true;
+        }
+        for (Pair<Long, KeySegment> forgiveKeySegment : forgiveKeySegments) {
+            if (keySegment.softEquals(forgiveKeySegment.getRight())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+// 从这里开始 之后的函数全部废弃 得重写
+
+//    public static void registerAuthFileDataReader(BiPredicate<Integer, Integer> typeVersionPredicate, Consumer<PacketByteBuf> reader) {
+//        authFileDataReaders.add(new Pair<>(typeVersionPredicate, reader));
+//    }
+//
+//    protected static void invokeAuthFileDataReader(PacketByteBuf buf) {
+//        int type = buf.readVarInt();
+//        int version = buf.readVarInt();
+//        for (Pair<BiPredicate<Integer, Integer>, Consumer<PacketByteBuf>> reader : authFileDataReaders) {
+//            if (reader.getLeft().test(type, version)) {
+//                buf.setIndex(0, 0);
+//                reader.getRight().accept(buf);
+//            }
+//        }
+//    }
+//
+//    // 客户端需要 isVirtual = True 服务器需要 isVirtual = False 当isVirtual=True时 仅会进行读取+验证 不会执行任何回调
+//    public static @Nullable AuthFile loadAuthFile(InputStream fileStream, boolean isVirtual) {
+//        try {
+//            byte[] fileBytes = fileStream.readAllBytes();
+//            return new AuthFile(fileBytes, isVirtual);
+//        } catch (Exception e) {
+//            return null;
+//        }
+//    }
+//
+//    private static @Nullable KeySegment loadKeySegment(InputStream fileStream) {
+//        try {
+//            byte[] fileBytes = fileStream.readAllBytes();
+//            return new KeySegment(new PacketByteBuf(Unpooled.wrappedBuffer(fileBytes)));
+//        } catch (Exception e) {
+//            return null;
+//        }
+//    }
+//
+//    private Path getLocalKeyFolderPath() {
+//        return FabricLoader.getInstance().getConfigDir().resolve("ssc_auth/keys");
+//    }
+//
+//    protected static void loadLocalKeySegments() {
+//        try {
+//            Path folderPath = new AuthFileUtils().getLocalKeyFolderPath();
+//            if (!Files.exists(folderPath)) {
+//                Files.createDirectories(folderPath);
+//            }
+//            try (DirectoryStream<Path> stream = Files.newDirectoryStream(folderPath)) {
+//                for (Path path : stream) {
+//                    String fileName = path.getFileName().toString();
+//                    if (fileName.endsWith(".key") && fileName.matches("\\d+\\.key")) {
+//                        try (InputStream is = Files.newInputStream(path)) {
+//                            KeySegment segment = loadKeySegment(is);
+//                            if (segment != null) {
+//                                storedKeySegments.put(segment.getType(), segment);
+//                            }
+//                        } catch (IOException ignored) {
+//                        }
+//                    }
+//                }
+//            }
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//    protected static void updateKeySegmentFromKey(KeySegment keySegment) {
+//        if (!keySegment.isUseMeltdown()) {
+//            return;
+//        }
+//        KeySegment oldKey = storedKeySegments.put(keySegment.getType(), keySegment);
+//        if (oldKey != null) {
+//            long nowTime = System.currentTimeMillis() / 1000;
+//            forgiveKeySegments.add(new Pair<>(nowTime, oldKey));
+//        }
+//        saveKeySegment(keySegment);
+//    }
+//
+//    protected static void saveKeySegment(KeySegment keySegment) {
+//        Path folderPath = new AuthFileUtils().getLocalKeyFolderPath();
+//        try {
+//            if (!Files.exists(folderPath)) {
+//                Files.createDirectories(folderPath);
+//            }
+//            Path filePath = folderPath.resolve(keySegment.getType() + ".key");
+//            Files.write(filePath, keySegment.raw);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//    public static void updateForgiveKeySegments() {
+//        long nowTime = System.currentTimeMillis() / 1000;
+//        forgiveKeySegments.removeIf(pair -> pair.getLeft() + forgiveTime < nowTime);
+//    }
+//
+//    public static Pair<Boolean, Boolean> isKeyCanUse(KeySegment keySegment) {
+//        // 返回值为 Pair<Boolean, Boolean> 第一个值表示是否可用 第二个值表示是否需要更新
+//        updateForgiveKeySegments();
+//        int Type = keySegment.getType();
+//        int Version = keySegment.getVersion();
+//        KeySegment storedKeySegment = storedKeySegments.get(Type);
+//        if (storedKeySegment == null) {
+//            return new Pair<>(true, true);
+//        }
+//        if (storedKeySegment.getVersion() < Version) {
+//            return new Pair<>(true, true);
+//        } else if (storedKeySegment.getVersion() == Version) {
+//            return new Pair<>(true, false);
+//        } else {
+//            for (Pair<Long, KeySegment> segmentPair : forgiveKeySegments) {
+//                if (segmentPair.getLeft() == Type) {
+//                    return new Pair<>(true, false);
+//                }
+//            }
+//            return new Pair<>(false, false);
+//        }
+//    }
 }

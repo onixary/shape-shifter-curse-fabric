@@ -1,29 +1,30 @@
 package net.onixary.shapeShifterCurseFabric.util.Verify;
 
-import io.netty.buffer.Unpooled;
 import net.minecraft.network.PacketByteBuf;
 
 import java.io.IOException;
 import java.util.Arrays;
-
-// 由于Java不用签名数据 没写对应的save函数 所以需要存储原始bytes
 public final class AuthFile {
+    // Const
     private final int MAGIC_NUMBER_LENGTH = 8;
     private final byte[] MAGIC_NUMBER = new byte[] { 0x58, 0x55, 0x53, 0x53, 0x43, 0x4B, 0x45, 0x59 };  // XUSSCKEY
-    final byte[] raw;
-    byte[] keySegment;
-    KeySegment keySegmentObject;
 
-    AuthFile(byte[] raw, boolean isVirtual) {
-        this.raw = raw;
+    // Data
+    private final byte[] raw;  // 因为在加载时已经调用了read了(验证过了) 所以这个字段可以public 就算修改了客户端的raw 但是服务器端会验证失败 符合最差仅会导致验证失败的设计
+
+    private KeySegment keySegment;
+    private IDataSegment[] dataSegments;
+
+    AuthFile(PacketByteBuf buf) {
+        this.raw = buf.array();
         try {
-            this.read(new PacketByteBuf(Unpooled.wrappedBuffer(raw)), isVirtual);
+            this.read(buf);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void read(PacketByteBuf buf, boolean isVirtual) throws IOException {
+    private void read(PacketByteBuf buf) throws IOException {
         int rollBack = 0;
         AuthFileUtils.requireTrue(Arrays.equals(buf.readBytes(MAGIC_NUMBER_LENGTH).array(), MAGIC_NUMBER), "MAGIC_NUMBER does not match");
         int version = buf.readVarInt();
@@ -32,10 +33,9 @@ public final class AuthFile {
         rollBack = buf.readerIndex();
         int keySegmentLength = buf.readVarInt();
         buf.setIndex(rollBack, rollBack);
-        this.keySegment = buf.readBytes(keySegmentLength).array();
         // 解析密钥段
-        PacketByteBuf keyBuf = new PacketByteBuf(Unpooled.wrappedBuffer(this.keySegment));
-        this.keySegmentObject = new KeySegment(keyBuf);
+        PacketByteBuf keyBuf = new PacketByteBuf(buf.readBytes(keySegmentLength));
+        this.keySegment = new KeySegment(keyBuf);
         // 读取数据段Bytes
         rollBack = buf.readerIndex();
         int dataSegmentLength = buf.readVarInt();
@@ -44,7 +44,7 @@ public final class AuthFile {
         // 验证数据段
         byte[] signature = dataBuf.readBytes(114).array();
         byte[] data = dataBuf.readBytes(dataBuf.readableBytes()).array();
-        AuthFileUtils.requireTrue(this.keySegmentObject.verify(data, signature), "Signature does not match");
+        AuthFileUtils.requireTrue(this.keySegment.verify(data, signature), "Signature does not match");
         dataBuf.setIndex(0, 0);
         dataBuf.skipBytes(4);  // dataLength
         int dataCount = dataBuf.readVarInt();
@@ -53,20 +53,38 @@ public final class AuthFile {
             dataBuf.skipBytes(4);  // dataVersion
             int dataLength = dataBuf.readVarInt();
             dataBuf.skipBytes(dataLength);
-            AuthFileUtils.requireTrue(this.keySegmentObject.isDataTypeValid(dataType), "Invalid data type for key: " + dataType);
+            AuthFileUtils.requireTrue(this.keySegment.isDataTypeValid(dataType), "Invalid data type for key: " + dataType);
         }
-        // 调用authFileDataReaders中的回调
-        if (!isVirtual) {
-            dataBuf.setIndex(0, 0);
-            dataBuf.skipBytes(4);  // dataLength
-            dataCount = dataBuf.readVarInt();
-            for (int i = 0; i < dataCount; i++) {
-                rollBack = dataBuf.readerIndex();
-                dataBuf.skipBytes(8);
-                int dataLength = dataBuf.readVarInt();
-                dataBuf.setIndex(rollBack, rollBack);
-                AuthFileUtils.invokeAuthFileDataReader(new PacketByteBuf(dataBuf.readBytes(dataLength)));
-            }
+        dataBuf.setIndex(0, 0);
+        dataBuf.skipBytes(4);  // dataLength
+        dataCount = dataBuf.readVarInt();
+        this.dataSegments = new IDataSegment[dataCount];
+        for (int i = 0; i < dataCount; i++) {
+            rollBack = dataBuf.readerIndex();
+            dataBuf.skipBytes(8);
+            int dataLength = dataBuf.readVarInt();
+            dataBuf.setIndex(rollBack, rollBack);
+            this.dataSegments[i] = AuthFileUtils.readDataSegment(new PacketByteBuf(dataBuf.readBytes(dataLength)));
         }
+    }
+
+    public void onGain() {
+        for (IDataSegment segment : this.dataSegments) {
+            segment.onGain();
+        }
+    }
+
+    public void onLost() {
+        for (IDataSegment segment : this.dataSegments) {
+            segment.onLost();
+        }
+    }
+
+    public KeySegment getKeySegment() {
+        return this.keySegment;
+    }
+
+    public byte[] getRaw() {
+        return raw.clone();
     }
 }

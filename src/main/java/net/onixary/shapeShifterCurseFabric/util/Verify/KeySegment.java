@@ -6,7 +6,7 @@ import java.security.PublicKey;
 import java.util.Arrays;
 
 public final class KeySegment {
-    final byte[] raw;
+    private final byte[] raw;
     private final int type;
     private final int version;
     private final boolean useMeltdown;
@@ -39,6 +39,7 @@ public final class KeySegment {
         buf.getBytes(0, keyData);
         AuthFileUtils.requireTrue(AuthFileUtils.verifyEd448Signature(keyData, signature, AuthFileUtils.rootPublickey), "Invalid signature");
     }
+
     public int getType() {
         return type;
     }
@@ -58,7 +59,27 @@ public final class KeySegment {
         return Arrays.stream(supportDataTypes).anyMatch(i -> i == dataType);
     }
 
-    public boolean verify(byte[] data, byte[]signature) {
+    public boolean verify(byte[] data, byte[] signature) {
         return AuthFileUtils.verifyEd448Signature(data, signature, publicKey);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof KeySegment other) {
+            return Arrays.equals(this.raw, other.raw);
+        }
+        return false;
+    }
+
+    public boolean softEquals(Object obj) {
+        if (obj instanceof KeySegment other) {
+            return this.type == other.type && this.version == other.version;
+        }
+        return false;
+    }
+
+    public byte[] getRaw() {
+        return raw.clone();
+    }
+
 }
