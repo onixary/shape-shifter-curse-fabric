@@ -39,10 +39,6 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
         this.addFeature(new FormRenderFeature<>((PlayerEntityRenderer) (Object) this));
     }
 
-    // 第一人称 渲染
-    @Unique
-    private static final Identifier CUSTOM_SKIN = new Identifier(ShapeShifterCurseFabric.MOD_ID, "textures/entity/base_player/ssc_base_skin.png");
-
     @Inject(method = "renderArm", at = @At("HEAD"), cancellable = true)
     private void shape_shifter_curse$RenderArm_HEAD(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
         if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) {return;}  // 仅当玩家激活Mod后才进行修改
@@ -67,47 +63,5 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
         if (!ShapeShifterCurseFabric.clientConfig.enableFormModelOnVanillaFirstPersonRender) {return;}  // 仅当启用自定义第一人称渲染时才进行修改
         PlayerEntityRenderer realThis = (PlayerEntityRenderer) (Object) this;
         FormRenderFeature.rFPM_PartB(realThis, matrices, vertexConsumers, light, player, arm, sleeve);
-    }
-
-    @Redirect(method="renderArm", at= @At(value="INVOKE", target = "Lnet/minecraft/client/network/AbstractClientPlayerEntity;getSkinTexture()Lnet/minecraft/util/Identifier;"))
-    private Identifier shape_shifter_curse$getSkinTexture(AbstractClientPlayerEntity player) {
-        if (!RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player))  // 仅当玩家激活Mod后才进行修改
-        {
-            if (FormTextureUtils.useTempCustomSkinConfig && MinecraftClient.getInstance().player == player) {
-                if (FormTextureUtils.tempCustomSkinConfigOverrider.keepOriginalSkin()) {
-                    return player.getSkinTexture();
-                } else {
-                    return CUSTOM_SKIN;
-                }
-            }
-            if (!RegPlayerSkinComponent.SKIN_SETTINGS.get(player).shouldKeepOriginalSkin()) {
-                return CUSTOM_SKIN;
-            }
-        }
-        return player.getSkinTexture();
-    }
-
-
-    // 第三人称皮肤
-    @Inject(method = "getTexture(Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/Identifier;", at = @At("HEAD"), cancellable = true)
-    private void shape_shifter_curse$onGetTexture(Entity entity, CallbackInfoReturnable<Identifier> cir) {
-        if(entity instanceof PlayerEntity player) {
-            if (!RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) {
-                boolean keepOriginalSkin = RegPlayerSkinComponent.SKIN_SETTINGS.get(player).shouldKeepOriginalSkin();
-                if (FormTextureUtils.useTempCustomSkinConfig && MinecraftClient.getInstance().player == player) {
-                    if (FormTextureUtils.tempCustomSkinConfigOverrider.keepOriginalSkin()) {
-                        return;
-                    } else {
-                        cir.setReturnValue(CUSTOM_SKIN);
-                        cir.cancel();
-                        return;
-                    }
-                }
-                if(!keepOriginalSkin){
-                    cir.setReturnValue(CUSTOM_SKIN);
-                    cir.cancel();
-                }
-            }
-        }
     }
 }
