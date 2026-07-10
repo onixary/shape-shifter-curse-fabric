@@ -29,7 +29,7 @@ public final class KeySegment {
             }
         }
         this.supportDataTypes = supportDataTypes;
-        this.publicKey = AuthFileUtils.readEd448PublicKey(buf.readBytes(57).array());
+        this.publicKey = AuthUtils.readEd448PublicKey(buf.readBytes(57).array());
         if (this.publicKey == null) {
             throw new RuntimeException("Invalid Ed448 public key");
         }
@@ -37,7 +37,7 @@ public final class KeySegment {
         byte[] signature = buf.readBytes(114).array();
         byte[] keyData = new byte[keyDataEnd];
         buf.getBytes(0, keyData);
-        AuthFileUtils.requireTrue(AuthFileUtils.verifyEd448Signature(keyData, signature, AuthFileUtils.rootPublickey), "Invalid signature");
+        AuthUtils.requireTrue(AuthUtils.verifyEd448Signature(keyData, signature, AuthUtils.rootPublickey), "Invalid signature");
     }
 
     public int getType() {
@@ -60,7 +60,7 @@ public final class KeySegment {
     }
 
     public boolean verify(byte[] data, byte[] signature) {
-        return AuthFileUtils.verifyEd448Signature(data, signature, publicKey);
+        return AuthUtils.verifyEd448Signature(data, signature, publicKey);
     }
 
     @Override

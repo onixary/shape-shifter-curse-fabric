@@ -26,9 +26,9 @@ public final class AuthFile {
 
     private void read(PacketByteBuf buf) throws IOException {
         int rollBack = 0;
-        AuthFileUtils.requireTrue(Arrays.equals(buf.readBytes(MAGIC_NUMBER_LENGTH).array(), MAGIC_NUMBER), "MAGIC_NUMBER does not match");
+        AuthUtils.requireTrue(Arrays.equals(buf.readBytes(MAGIC_NUMBER_LENGTH).array(), MAGIC_NUMBER), "MAGIC_NUMBER does not match");
         int version = buf.readVarInt();
-        AuthFileUtils.requireTrue(version == 1, "Unsupported version: " + version);
+        AuthUtils.requireTrue(version == 1, "Unsupported version: " + version);
         // 读取秘钥部分
         rollBack = buf.readerIndex();
         int keySegmentLength = buf.readVarInt();
@@ -44,7 +44,7 @@ public final class AuthFile {
         // 验证数据段
         byte[] signature = dataBuf.readBytes(114).array();
         byte[] data = dataBuf.readBytes(dataBuf.readableBytes()).array();
-        AuthFileUtils.requireTrue(this.keySegment.verify(data, signature), "Signature does not match");
+        AuthUtils.requireTrue(this.keySegment.verify(data, signature), "Signature does not match");
         dataBuf.setIndex(0, 0);
         dataBuf.skipBytes(4);  // dataLength
         int dataCount = dataBuf.readVarInt();
@@ -53,7 +53,7 @@ public final class AuthFile {
             dataBuf.skipBytes(4);  // dataVersion
             int dataLength = dataBuf.readVarInt();
             dataBuf.skipBytes(dataLength);
-            AuthFileUtils.requireTrue(this.keySegment.isDataTypeValid(dataType), "Invalid data type for key: " + dataType);
+            AuthUtils.requireTrue(this.keySegment.isDataTypeValid(dataType), "Invalid data type for key: " + dataType);
         }
         dataBuf.setIndex(0, 0);
         dataBuf.skipBytes(4);  // dataLength
@@ -64,7 +64,7 @@ public final class AuthFile {
             dataBuf.skipBytes(8);
             int dataLength = dataBuf.readVarInt();
             dataBuf.setIndex(rollBack, rollBack);
-            this.dataSegments[i] = AuthFileUtils.readDataSegment(new PacketByteBuf(dataBuf.readBytes(dataLength)));
+            this.dataSegments[i] = AuthUtils.readDataSegment(new PacketByteBuf(dataBuf.readBytes(dataLength)));
         }
     }
 
