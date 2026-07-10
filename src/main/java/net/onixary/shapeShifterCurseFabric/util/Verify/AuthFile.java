@@ -87,4 +87,9 @@ public final class AuthFile {
     public byte[] getRaw() {
         return raw.clone();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof AuthFile && Arrays.equals(((AuthFile) obj).raw, this.raw);
+    }
 }

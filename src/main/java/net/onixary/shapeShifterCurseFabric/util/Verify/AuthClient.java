@@ -11,7 +11,11 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.UUID;
@@ -71,12 +75,62 @@ public final class AuthClient {
         }
     }
 
+    private static byte[] downloadFormURL(String urlString) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        URL url;
+        try {
+            url = new URL(urlString);
+        } catch (MalformedURLException e) {
+            ShapeShifterCurseFabric.LOGGER.error("Failed to parse URL {}", urlString);
+            return null;
+        }
+        byte[] chunk = new byte[4096];
+        int bytesRead;
+        try (InputStream stream = url.openStream()) {
+            while ((bytesRead = stream.read(chunk)) > 0) {
+                outputStream.write(chunk, 0, bytesRead);
+            }
+        } catch (IOException e) {
+            ShapeShifterCurseFabric.LOGGER.error("Failed to download file from {}", urlString);
+            return null;
+        }
+        return outputStream.toByteArray();
+    }
+
+    private static String getAuthFileUrl() {
+        UUID playerUUID = ClientUtils.getPlayerUUID();
+        if (playerUUID == null) {
+            return null;
+        }
+        String uuidStr = playerUUID.toString().replace("-", "").toUpperCase();
+        // TODO 发布时记得改URL 还得加一个配置项
+        return "https://raw.githubusercontent.com/Onixary/ShapeShifterCurseFabricAuth/main/auth/" + uuidStr + ".auth";
+    }
+
     public static void checkUpdate(boolean force) {
         // TODO 需要加一个配置来开关是否自动更新 毕竟是离线系统 想手动更新也行
         if (force || (System.currentTimeMillis() / 1000) - lastUpdateTime > UPDATE_INTERVAL) {
             lastUpdateTime = System.currentTimeMillis();
             saveClientConfig();
-            // TODO 拉线程从指定网站下载
+            new Thread(() -> {
+                String authFileUrl = getAuthFileUrl();
+                if (authFileUrl == null) {
+                    return;
+                }
+                byte[] authFileBytes = downloadFormURL(authFileUrl);
+                if (authFileBytes == null) {
+                    return;
+                }
+                AuthFile authFile = AuthUtils.readAuthFile(new PacketByteBuf(Unpooled.wrappedBuffer(authFileBytes)));
+                if (authFile == null) {
+                    return;
+                }
+                if (LOCAL_PATRON_AUTH_FILE != null && LOCAL_PATRON_AUTH_FILE.equals(authFile)) {
+                    return;
+                }
+                LOCAL_PATRON_AUTH_FILE = authFile;
+                // TODO 检查是否在服务器里
+            }).start();
         }
     }
 
