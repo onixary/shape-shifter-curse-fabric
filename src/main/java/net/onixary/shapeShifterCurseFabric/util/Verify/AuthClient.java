@@ -6,6 +6,7 @@ import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.PacketByteBuf;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
@@ -129,7 +130,9 @@ public final class AuthClient {
                     return;
                 }
                 LOCAL_PATRON_AUTH_FILE = authFile;
-                // TODO 检查是否在服务器里
+                if (MinecraftClient.getInstance().getServer() != null) {
+                    // TODO 发送数据到服务器
+                }
             }).start();
         }
     }

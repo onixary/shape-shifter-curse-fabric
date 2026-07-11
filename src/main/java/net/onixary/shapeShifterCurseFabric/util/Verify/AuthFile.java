@@ -80,6 +80,17 @@ public final class AuthFile {
         }
     }
 
+    public void onUpdate(AuthFile newAuthFile) {
+        for (IDataSegment segment : this.dataSegments) {
+            for (IDataSegment newSegment : newAuthFile.dataSegments) {
+                if (segment.isSameSlot(newSegment)) {
+                    segment.onUpdate_Old(newSegment);
+                    newSegment.onUpdate_New(segment);
+                }
+            }
+        }
+    };
+
     public KeySegment getKeySegment() {
         return this.keySegment;
     }
