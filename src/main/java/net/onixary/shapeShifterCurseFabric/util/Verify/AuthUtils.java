@@ -290,4 +290,8 @@ public final class AuthUtils {
         }
         return false;
     }
+
+    static {
+        registerDataReader((type, version) -> type == 1 && version == 0, PatronDataSegment::new);
+    }
 }
