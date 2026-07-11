@@ -90,6 +90,8 @@
     "InGameHudMixin",
     "InventoryScreenMixin",
     "KeyboardInputMixin",
+    "LongNeckArmorFeatureRendererMixin",
+    "LongNeckHeadFeatureRendererMixin",
     "MinecraftClientMixin",
     "MoonPhaseRenderMixin",
     "PlayerEntityAnimOverrideMixin",

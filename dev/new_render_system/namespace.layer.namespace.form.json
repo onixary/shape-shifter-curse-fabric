@@ -49,7 +49,8 @@
       "bipedRightHindLeg": "bipedRightHindLeg",
       "bipedLeftHindLeg": "bipedLeftHindLeg",
       "bipedRightExtraArm": "bipedRightExtraArm",
-      "bipedLeftExtraArm": "bipedLeftExtraArm"
+      "bipedLeftExtraArm": "bipedLeftExtraArm",
+      "neck_mount": "neck_mount"
     },
     "first_person_render": {
       "left_arm": "bipedLeftArm",
@@ -81,6 +82,7 @@
     "tail_chain": {},
     "tail_chain_head": {},
     "wing_chain_l": {},
-    "wing_chain_r": {}
+    "wing_chain_r": {},
+    "neck_ik": {}
   }
 }

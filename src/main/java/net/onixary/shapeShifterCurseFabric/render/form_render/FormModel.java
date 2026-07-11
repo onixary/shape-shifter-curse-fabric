@@ -105,6 +105,22 @@ public class FormModel extends GeoModel<FormAnimatable> {
     public List<List<String>> BCD_TailChainHead = new ArrayList<>();
     public List<List<String>> BCD_WingChainL = new ArrayList<>();
     public List<List<String>> BCD_WingChainR = new ArrayList<>();
+    public @Nullable NeckIkConfig BCD_NeckIk = null;
+
+    public static class NeckIkConfig {
+        public String mount = "neck_mount";
+        public String head = "ik_head";
+        public List<String> chain = new ArrayList<>();
+        public char yawAxis = 'y';
+        public char pitchAxis = 'x';
+        public float yawSign = -1.0f;
+        public float pitchSign = 1.0f;
+        public float[] yawWeights = new float[0];
+        public float[] pitchWeights = new float[0];
+        public float maxYawDeg = 85.0f;
+        public float maxPitchUpDeg = 55.0f;
+        public float maxPitchDownDeg = 45.0f;
+    }
 
     public FormModel(JsonObject json) {
         this.modelJson = json;
@@ -258,6 +274,7 @@ public class FormModel extends GeoModel<FormAnimatable> {
         BCD_TailChainHead.clear();
         BCD_WingChainL.clear();
         BCD_WingChainR.clear();
+        BCD_NeckIk = null;
         JsonObject bcdJson = JsonHelper.getObject(this.modelJson, "builtin_controller_data", null);
         if (bcdJson != null) {
             if (bcdJson.has("tail_chain")) {
@@ -272,6 +289,133 @@ public class FormModel extends GeoModel<FormAnimatable> {
             if (bcdJson.has("wing_chain_r")) {
                 BCD_WingChainR = loadChainData(bcdJson.getAsJsonObject("wing_chain_r"));
             }
+            if (bcdJson.has("neck_ik")) {
+                BCD_NeckIk = loadNeckIkData(bcdJson.getAsJsonObject("neck_ik"));
+            }
+        }
+    }
+
+    private NeckIkConfig loadNeckIkData(JsonObject json) {
+        NeckIkConfig config = new NeckIkConfig();
+        config.mount = JsonHelper.getString(json, "mount", config.mount);
+        config.head = JsonHelper.getString(json, "head", config.head);
+        config.yawAxis = readAxis(JsonHelper.getString(json, "yaw_axis", String.valueOf(config.yawAxis)), config.yawAxis);
+        config.pitchAxis = readAxis(JsonHelper.getString(json, "pitch_axis", String.valueOf(config.pitchAxis)), config.pitchAxis);
+        config.yawSign = JsonHelper.getFloat(json, "yaw_sign", config.yawSign);
+        config.pitchSign = JsonHelper.getFloat(json, "pitch_sign", config.pitchSign);
+        config.maxYawDeg = JsonHelper.getFloat(json, "max_yaw_deg", config.maxYawDeg);
+        config.maxPitchUpDeg = JsonHelper.getFloat(json, "max_pitch_up_deg", config.maxPitchUpDeg);
+        config.maxPitchDownDeg = JsonHelper.getFloat(json, "max_pitch_down_deg", config.maxPitchDownDeg);
+
+        JsonArray chainArray = JsonHelper.getArray(json, "chain", null);
+        if (chainArray != null) {
+            for (JsonElement element : chainArray) {
+                config.chain.add(element.getAsString());
+            }
+        }
+        if (config.chain.isEmpty()) {
+            config.chain.add(config.head);
+        }
+
+        config.yawWeights = readWeights(json, "yaw_weights", config.chain.size());
+        config.pitchWeights = readWeights(json, "pitch_weights", config.chain.size());
+        return config;
+    }
+
+    private char readAxis(String value, char fallback) {
+        if (value == null || value.isEmpty()) {
+            return fallback;
+        }
+        char axis = Character.toLowerCase(value.charAt(0));
+        return axis == 'x' || axis == 'y' || axis == 'z' ? axis : fallback;
+    }
+
+    private float[] readWeights(JsonObject json, String key, int size) {
+        float[] weights = new float[size];
+        JsonArray weightArray = JsonHelper.getArray(json, key, null);
+        if (weightArray != null && !weightArray.isEmpty()) {
+            float sum = 0.0f;
+            for (int i = 0; i < size; i++) {
+                float weight = i < weightArray.size() ? weightArray.get(i).getAsFloat() : 0.0f;
+                weights[i] = weight;
+                sum += weight;
+            }
+            if (sum > 0.0001f) {
+                for (int i = 0; i < size; i++) {
+                    weights[i] /= sum;
+                }
+                return weights;
+            }
+        }
+        float evenWeight = size <= 0 ? 0.0f : 1.0f / size;
+        Arrays.fill(weights, evenWeight);
+        return weights;
+    }
+
+    public boolean hasNeckIk() {
+        return BCD_NeckIk != null && !BCD_NeckIk.chain.isEmpty();
+    }
+
+    public @Nullable String getNeckIkMountBoneId() {
+        return BCD_NeckIk == null ? null : BCD_NeckIk.mount;
+    }
+
+    public @Nullable String getNeckIkHeadBoneId() {
+        return BCD_NeckIk == null ? null : BCD_NeckIk.head;
+    }
+
+    public @Nullable GeoBone getNeckIkHeadBone() {
+        String head = getNeckIkHeadBoneId();
+        return head == null ? null : getCachedGeoBone(head);
+    }
+
+    public @Nullable GeoBone getNeckIkMountBone() {
+        String mount = getNeckIkMountBoneId();
+        return mount == null ? null : getCachedGeoBone(mount);
+    }
+
+    public void setNeckIkHidden(boolean hidden) {
+        GeoBone mount = getNeckIkMountBone();
+        if (mount != null) {
+            mount.setHidden(hidden);
+        }
+    }
+
+    public void trackNeckIkHeadMatrix() {
+        GeoBone head = getNeckIkHeadBone();
+        if (head != null) {
+            head.getModelSpaceMatrix();
+        }
+    }
+
+    public void applyNeckIk(float headYaw, float headPitch) {
+        if (!hasNeckIk()) {
+            return;
+        }
+        NeckIkConfig config = BCD_NeckIk;
+        float yawDeg = MathHelper.clamp(headYaw, -config.maxYawDeg, config.maxYawDeg);
+        float pitchDeg = MathHelper.clamp(headPitch, -config.maxPitchUpDeg, config.maxPitchDownDeg);
+        float yawRad = yawDeg * MathHelper.RADIANS_PER_DEGREE * config.yawSign;
+        float pitchRad = pitchDeg * MathHelper.RADIANS_PER_DEGREE * config.pitchSign;
+
+        for (int i = 0; i < config.chain.size(); i++) {
+            GeoBone bone = getCachedGeoBone(config.chain.get(i));
+            if (bone == null) {
+                continue;
+            }
+            bone.setRotX(0.0f);
+            bone.setRotY(0.0f);
+            bone.setRotZ(0.0f);
+            setAxisRotation(bone, config.yawAxis, yawRad * config.yawWeights[i]);
+            setAxisRotation(bone, config.pitchAxis, pitchRad * config.pitchWeights[i]);
+        }
+    }
+
+    private void setAxisRotation(GeoBone bone, char axis, float value) {
+        switch (axis) {
+            case 'x' -> bone.setRotX(value);
+            case 'y' -> bone.setRotY(value);
+            case 'z' -> bone.setRotZ(value);
         }
     }
 

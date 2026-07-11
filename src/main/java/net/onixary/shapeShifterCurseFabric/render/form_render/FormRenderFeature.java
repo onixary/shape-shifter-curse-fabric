@@ -70,11 +70,20 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
                 matrices.translate(-0.5, -0.5, -0.5);
                 formModel.AnimationSystem.beforeRender(formRenderer, formModel, playerEntityRenderer, abstractClientPlayerEntity, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch);
                 formModel.AnimationSystem.processAnimation(formRenderer, formModel, playerEntityRenderer, abstractClientPlayerEntity, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch);
+                boolean hideLongNeckForFirstPersonModel = formModel.hasNeckIk() && LongNeckRenderUtils.isFirstPersonModelActiveForSelf(abstractClientPlayerEntity);
+                if (formModel.hasNeckIk()) {
+                    formModel.trackNeckIkHeadMatrix();
+                    formModel.setNeckIkHidden(hideLongNeckForFirstPersonModel);
+                }
                 // 渲染部分
                 formRenderer.render(matrices, formAnimatable, vertexConsumers, RenderLayer.getEntityTranslucent(formModel.getTextureResource(formAnimatable)), null, light);
                 formRenderer.render(matrices, formAnimatable, vertexConsumers, RenderLayer.getEntityTranslucentEmissive(formModel.getFullbrightTextureResource(formAnimatable)), null, Integer.MAX_VALUE - 1);
                 if (hasOutline) {
                     formRenderer.render(matrices, formAnimatable, vertexConsumers, RenderLayer.getOutline(formModel.getTextureResource(formAnimatable)), vertexConsumers.getBuffer(RenderLayer.getOutline(formModel.getTextureResource(formAnimatable))), light);
+                }
+                if (formModel.hasNeckIk()) {
+                    formModel.setNeckIkHidden(false);
+                    LongNeckRenderUtils.renderLongNeckAttachments(matrices, vertexConsumers, light, abstractClientPlayerEntity, formModel, tickDelta);
                 }
                 matrices.pop();
                 formModel.AnimationSystem.afterRender(formRenderer, formModel, playerEntityRenderer, abstractClientPlayerEntity, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch);

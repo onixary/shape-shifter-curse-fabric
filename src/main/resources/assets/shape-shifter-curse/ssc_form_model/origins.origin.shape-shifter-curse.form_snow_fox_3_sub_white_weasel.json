@@ -33,6 +33,20 @@
     "tail_chain_head": {
       "ear_a": [0],
       "ear_b": [0]
+    },
+    "neck_ik": {
+      "mount": "neck_mount",
+      "chain": ["neck_0", "neck_1", "neck_2", "ik_head"],
+      "head": "ik_head",
+      "yaw_axis": "y",
+      "pitch_axis": "x",
+      "yaw_sign": -1.0,
+      "pitch_sign": 1.0,
+      "yaw_weights": [0.18, 0.27, 0.32, 0.23],
+      "pitch_weights": [0.10, 0.22, 0.33, 0.35],
+      "max_yaw_deg": 85.0,
+      "max_pitch_up_deg": 55.0,
+      "max_pitch_down_deg": 45.0
     }
   }
 }

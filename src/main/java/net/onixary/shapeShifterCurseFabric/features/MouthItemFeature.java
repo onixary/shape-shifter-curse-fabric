@@ -21,6 +21,7 @@ import net.minecraft.util.UseAction;
 import net.minecraft.util.math.RotationAxis;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
+import net.onixary.shapeShifterCurseFabric.render.form_render.LongNeckRenderUtils;
 import net.onixary.shapeShifterCurseFabric.util.FeralRenderUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 
@@ -92,6 +93,9 @@ public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> &
 
     private void renderItemInMouth(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, ItemStack itemStack, float k, float l) {
         if (FeralRenderUtils.isFeralMouthItemBlackListed(itemStack)) {
+            return;
+        }
+        if (livingEntity instanceof AbstractClientPlayerEntity player && LongNeckRenderUtils.hasLongNeck(player)) {
             return;
         }
         matrixStack.push();

@@ -213,6 +213,8 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
         tailData td = tailDataMap.computeIfAbsent(player.getUuid(), k -> new tailData());
         float targetDrag = MathHelper.lerp(tickDelta, td.tailDragAmountO, td.tailDragAmount);
         td.currentTailDragAmount = MathHelper.lerp(0.04f, td.currentTailDragAmount, targetDrag);
+        float targetDragVertical = MathHelper.lerp(tickDelta, td.tailDragAmountVerticalO, td.tailDragAmountVertical);
+        td.currentTailDragAmountVertical = MathHelper.lerp(0.04f, td.currentTailDragAmountVertical, targetDragVertical);
     }
 
 
@@ -241,9 +243,8 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
         model.translatePositionForBone(RM_LeftLegGeoBoneID, new Vec3d(2, 12, 0));
         model.translatePositionForBone(RM_RightLegGeoBoneID, new Vec3d(-2, 12, 0));
         model.setRotationForBone(RM_BodyGeoBoneID, FormRenderUtils.getPartRotation(playerModel.body));
-        model.setRotationForTailBones(limbAngle, limbDistance, player.age, td.currentTailDragAmount, td.tailDragAmountVertical);
-        model.setRotationForHeadTailBones(headYaw, player.age, td.currentTailDragAmount, td.tailDragAmountVertical);
-        model.setRotationForWingBones(limbAngle, limbDistance, player.age, td.tailDragAmountVertical);
+        model.setRotationForTailBones(limbAngle, limbDistance, player.age, td.currentTailDragAmount, td.currentTailDragAmountVertical);
+        model.setRotationForWingBones(limbAngle, limbDistance, player.age, td.currentTailDragAmountVertical);
         if (this.bodyTransform != null) this.bodyTransform.apply(model.getCachedGeoBone(RM_BodyGeoBoneID));
         model.invertRotForPart(RM_BodyGeoBoneID, false, true, false);
         model.setRotationForBone(RM_LeftArmGeoBoneID, FormRenderUtils.getPartRotation(playerModel.leftArm));
@@ -260,6 +261,8 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
         model.invertRotForPart(RM_LeftArmGeoBoneID, false, true, true);
         model.invertRotForPart(RM_LeftLegGeoBoneID, false, true, true);
         model.invertRotForPart(RM_RightLegGeoBoneID, false, true, true);
+        model.applyNeckIk(headYaw, headPitch);
+        model.setRotationForHeadTailBones(headYaw, player.age, td.currentTailDragAmount, td.currentTailDragAmountVertical);
     }
 
     @Override
@@ -271,8 +274,6 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
         td.tailDragAmount = MathHelper.clamp(td.tailDragAmount, -1.6F, 1.6F);
         float verticalSpeed = (float) player.getVelocity().y;
         float targetVerticalDrag = MathHelper.clamp(verticalSpeed * 1.5f, -1.6f, 1.6f);
-        float targetDragVertical = MathHelper.lerp(tickDelta, td.tailDragAmountVerticalO, td.tailDragAmountVertical);
-        td.currentTailDragAmountVertical = MathHelper.lerp(0.04f, td.currentTailDragAmountVertical, targetDragVertical);
         td.tailDragAmountVertical *= 0.8F;
         td.tailDragAmountVertical += targetVerticalDrag * 0.15F;
         td.tailDragAmountVertical = MathHelper.clamp(td.tailDragAmountVertical, -1.6f, 1.6f);
