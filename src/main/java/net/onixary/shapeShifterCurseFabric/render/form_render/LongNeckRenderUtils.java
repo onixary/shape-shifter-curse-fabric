@@ -1,30 +1,31 @@
 package net.onixary.shapeShifterCurseFabric.render.form_render;
 
-import com.google.common.collect.Maps;
 import dev.tr7zw.firstperson.FirstPersonModelCore;
 import mod.azure.azurelib.cache.object.GeoBone;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.LivingEntityRenderer;
+import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
+import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.HeadFeatureRenderer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
+import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.item.HeldItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ArmorItem;
-import net.minecraft.item.DyeableArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.RotationAxis;
+import net.onixary.shapeShifterCurseFabric.mixin.accessor.ArmorFeatureRendererAccessor;
+import net.onixary.shapeShifterCurseFabric.mixin.accessor.LivingEntityRendererAccessor;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.util.FeralRenderUtils;
@@ -33,15 +34,10 @@ import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 public class LongNeckRenderUtils {
     private static final boolean IS_FIRST_PERSON_MOD_LOADED = FabricLoader.getInstance().isModLoaded("firstperson");
-    private static final Map<String, Identifier> ARMOR_TEXTURE_CACHE = Maps.newHashMap();
-    private static BipedEntityModel<AbstractClientPlayerEntity> outerArmorModelWide;
-    private static BipedEntityModel<AbstractClientPlayerEntity> outerArmorModelSlim;
-    private static BipedEntityModel<AbstractClientPlayerEntity> innerArmorModelWide;
-    private static BipedEntityModel<AbstractClientPlayerEntity> innerArmorModelSlim;
+    private static final ThreadLocal<Boolean> DELEGATING_LONG_NECK_HEAD_ARMOR = ThreadLocal.withInitial(() -> false);
 
     public static boolean hasLongNeck(AbstractClientPlayerEntity player) {
         return findLongNeckModel(player) != null;
@@ -66,6 +62,10 @@ public class LongNeckRenderUtils {
                 && client.options.getPerspective().isFirstPerson()
                 && player == client.player
                 && FirstPersonModelCore.instance.isEnabled();
+    }
+
+    public static boolean isRenderingDelegatedLongNeckHeadArmor() {
+        return DELEGATING_LONG_NECK_HEAD_ARMOR.get();
     }
 
     public static void applyHeadBoneTransform(MatrixStack matrices, FormModel formModel) {
@@ -176,7 +176,7 @@ public class LongNeckRenderUtils {
             return;
         }
         if (headStack.getItem() instanceof ArmorItem armorItem && armorItem.getSlotType() == EquipmentSlot.HEAD) {
-            renderArmorHead(matrices, vertexConsumers, light, player, formModel, headStack, armorItem);
+            renderArmorHead(matrices, vertexConsumers, light, player, formModel);
             return;
         }
 
@@ -195,90 +195,42 @@ public class LongNeckRenderUtils {
             VertexConsumerProvider vertexConsumers,
             int light,
             AbstractClientPlayerEntity player,
-            FormModel formModel,
-            ItemStack stack,
-            ArmorItem armorItem
+            FormModel formModel
     ) {
-        BipedEntityModel<AbstractClientPlayerEntity> model = getArmorModel(player, false);
-        model.child = false;
-        model.setVisible(false);
-        model.head.visible = true;
-        model.hat.visible = true;
-        model.head.resetTransform();
-        model.hat.resetTransform();
+        ArmorFeatureRenderer<LivingEntity, BipedEntityModel<LivingEntity>, BipedEntityModel<LivingEntity>> armorFeatureRenderer = getArmorFeatureRenderer(player);
+        if (armorFeatureRenderer == null) {
+            return;
+        }
 
         matrices.push();
         applyHeadBoneTransform(matrices, formModel);
         applyVanillaHeadAttachmentAxes(matrices);
         applyVanillaHeadModelAxes(matrices);
-        boolean secondTextureLayer = false;
-        if (armorItem instanceof DyeableArmorItem dyeableArmorItem) {
-            int color = dyeableArmorItem.getColor(stack);
-            renderArmorParts(matrices, vertexConsumers, light, armorItem, model, secondTextureLayer,
-                    (float)(color >> 16 & 0xFF) / 255.0F,
-                    (float)(color >> 8 & 0xFF) / 255.0F,
-                    (float)(color & 0xFF) / 255.0F,
-                    null);
-            renderArmorParts(matrices, vertexConsumers, light, armorItem, model, secondTextureLayer,
-                    1.0F, 1.0F, 1.0F, "overlay");
-        } else {
-            renderArmorParts(matrices, vertexConsumers, light, armorItem, model, secondTextureLayer,
-                    1.0F, 1.0F, 1.0F, null);
+        DELEGATING_LONG_NECK_HEAD_ARMOR.set(true);
+        try {
+            ArmorFeatureRendererAccessor<LivingEntity, BipedEntityModel<LivingEntity>> accessor =
+                    (ArmorFeatureRendererAccessor<LivingEntity, BipedEntityModel<LivingEntity>>) armorFeatureRenderer;
+            BipedEntityModel<LivingEntity> model = accessor.shape_shifter_curse$invokeGetModel(EquipmentSlot.HEAD);
+            accessor.shape_shifter_curse$invokeRenderArmor(matrices, vertexConsumers, player, EquipmentSlot.HEAD, light, model);
+        } finally {
+            DELEGATING_LONG_NECK_HEAD_ARMOR.set(false);
+            matrices.pop();
         }
-        if (stack.hasGlint()) {
-            model.render(matrices, vertexConsumers.getBuffer(RenderLayer.getArmorEntityGlint()), light,
-                    OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
-        }
-        matrices.pop();
     }
 
-    private static BipedEntityModel<AbstractClientPlayerEntity> getArmorModel(AbstractClientPlayerEntity player, boolean inner) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        boolean slim = player.getModel().equals("slim");
-        if (inner) {
-            if (slim) {
-                if (innerArmorModelSlim == null) {
-                    innerArmorModelSlim = new BipedEntityModel<>(client.getEntityModelLoader().getModelPart(EntityModelLayers.PLAYER_SLIM_INNER_ARMOR));
-                }
-                return innerArmorModelSlim;
-            }
-            if (innerArmorModelWide == null) {
-                innerArmorModelWide = new BipedEntityModel<>(client.getEntityModelLoader().getModelPart(EntityModelLayers.PLAYER_INNER_ARMOR));
-            }
-            return innerArmorModelWide;
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private static ArmorFeatureRenderer<LivingEntity, BipedEntityModel<LivingEntity>, BipedEntityModel<LivingEntity>> getArmorFeatureRenderer(AbstractClientPlayerEntity player) {
+        EntityRenderer<? super AbstractClientPlayerEntity> renderer = MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(player);
+        if (!(renderer instanceof LivingEntityRenderer<?, ?> livingEntityRenderer)) {
+            return null;
         }
-        if (slim) {
-            if (outerArmorModelSlim == null) {
-                outerArmorModelSlim = new BipedEntityModel<>(client.getEntityModelLoader().getModelPart(EntityModelLayers.PLAYER_SLIM_OUTER_ARMOR));
+        List<FeatureRenderer<LivingEntity, EntityModel<LivingEntity>>> features =
+                ((LivingEntityRendererAccessor<LivingEntity, EntityModel<LivingEntity>>) livingEntityRenderer).shape_shifter_curse$getFeatures();
+        for (FeatureRenderer<LivingEntity, EntityModel<LivingEntity>> feature : features) {
+            if (feature instanceof ArmorFeatureRenderer<?, ?, ?> armorFeatureRenderer) {
+                return (ArmorFeatureRenderer) armorFeatureRenderer;
             }
-            return outerArmorModelSlim;
         }
-        if (outerArmorModelWide == null) {
-            outerArmorModelWide = new BipedEntityModel<>(client.getEntityModelLoader().getModelPart(EntityModelLayers.PLAYER_OUTER_ARMOR));
-        }
-        return outerArmorModelWide;
-    }
-
-    private static void renderArmorParts(
-            MatrixStack matrices,
-            VertexConsumerProvider vertexConsumers,
-            int light,
-            ArmorItem item,
-            BipedEntityModel<AbstractClientPlayerEntity> model,
-            boolean secondTextureLayer,
-            float red,
-            float green,
-            float blue,
-            String overlay
-    ) {
-        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(getArmorTexture(item, secondTextureLayer, overlay)));
-        model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, red, green, blue, 1.0F);
-    }
-
-    private static Identifier getArmorTexture(ArmorItem item, boolean secondLayer, String overlay) {
-        String texture = "textures/models/armor/" + item.getMaterial().getName()
-                + "_layer_" + (secondLayer ? 2 : 1)
-                + (overlay == null ? "" : "_" + overlay) + ".png";
-        return ARMOR_TEXTURE_CACHE.computeIfAbsent(texture, Identifier::new);
+        return null;
     }
 }
