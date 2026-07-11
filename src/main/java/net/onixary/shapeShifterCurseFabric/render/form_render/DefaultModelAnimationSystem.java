@@ -50,6 +50,16 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
         private float currentTailDragAmountVertical = 0.0F;
     }
 
+    private static final HashMap<UUID, neckLookData> neckLookDataMap = new HashMap<>();
+    private static class neckLookData {
+        private float headYaw;
+        private float headPitch;
+        private double lastRenderTick = Double.NaN;
+        private boolean initialized = false;
+    }
+
+    private record NeckAngles(float headYaw, float headPitch) {}
+
     public static class partTransform {
         private final Vec3f pos;
         private final Vec3f rot;
@@ -261,8 +271,72 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
         model.invertRotForPart(RM_LeftArmGeoBoneID, false, true, true);
         model.invertRotForPart(RM_LeftLegGeoBoneID, false, true, true);
         model.invertRotForPart(RM_RightLegGeoBoneID, false, true, true);
-        model.applyNeckIk(headYaw, headPitch);
-        model.setRotationForHeadTailBones(headYaw, player.age, td.currentTailDragAmount, td.currentTailDragAmountVertical);
+        NeckAngles neckAngles = model.hasNeckIk()
+                ? getLongNeckAngles(player, tickDelta, headYaw, headPitch)
+                : new NeckAngles(headYaw, headPitch);
+        model.applyNeckIk(neckAngles.headYaw(), neckAngles.headPitch());
+        model.setRotationForHeadTailBones(neckAngles.headYaw(), player.age, td.currentTailDragAmount, td.currentTailDragAmountVertical);
+    }
+
+    private NeckAngles getLongNeckAngles(PlayerEntity player, float tickDelta, float fallbackHeadYaw, float fallbackHeadPitch) {
+        neckLookData data = neckLookDataMap.computeIfAbsent(player.getUuid(), k -> new neckLookData());
+        float viewYaw = player.getYaw(tickDelta);
+        float viewPitch = player.getPitch(tickDelta);
+        float bodyYaw = lerpAngle(tickDelta, player.prevBodyYaw, player.bodyYaw);
+        float targetHeadYaw = MathHelper.wrapDegrees(viewYaw - bodyYaw);
+        float targetHeadPitch = viewPitch;
+        double renderTick = player.age + tickDelta;
+        float deltaTicks = 1.0F;
+        if (Double.isFinite(data.lastRenderTick)) {
+            deltaTicks = (float) MathHelper.clamp(renderTick - data.lastRenderTick, 0.0D, 1.0D);
+        }
+        data.lastRenderTick = renderTick;
+
+        if (!data.initialized) {
+            data.headYaw = Double.isFinite(targetHeadYaw) ? targetHeadYaw : fallbackHeadYaw;
+            data.headPitch = Double.isFinite(targetHeadPitch) ? targetHeadPitch : fallbackHeadPitch;
+            data.initialized = true;
+            return new NeckAngles(data.headYaw, data.headPitch);
+        }
+        if (deltaTicks <= 0.0F) {
+            return new NeckAngles(data.headYaw, data.headPitch);
+        }
+
+        float yawLerp = MathHelper.clamp(deltaTicks * 0.45F, 0.0F, 1.0F);
+        float pitchLerp = MathHelper.clamp(deltaTicks * 0.35F, 0.0F, 1.0F);
+        data.headYaw = lerpAngleAwayFrom(yawLerp, data.headYaw, targetHeadYaw, 180.0F);
+        data.headPitch = MathHelper.lerp(pitchLerp, data.headPitch, targetHeadPitch);
+
+        if (!Float.isFinite(data.headYaw)) {
+            data.headYaw = fallbackHeadYaw;
+        }
+        if (!Float.isFinite(data.headPitch)) {
+            data.headPitch = fallbackHeadPitch;
+        }
+        return new NeckAngles(data.headYaw, data.headPitch);
+    }
+
+    private static float lerpAngle(float delta, float start, float end) {
+        return start + MathHelper.wrapDegrees(end - start) * delta;
+    }
+
+    private static float lerpAngleAwayFrom(float delta, float start, float end, float avoidAngle) {
+        if (Math.abs(MathHelper.wrapDegrees(avoidAngle - end)) < 0.0001F) {
+            return lerpAngle(delta, start, end);
+        }
+
+        start = MathHelper.wrapDegrees(start);
+        end = MathHelper.wrapDegrees(end);
+
+        float diff = MathHelper.wrapDegrees(end - start);
+        float avoidDiff = MathHelper.wrapDegrees(avoidAngle - start);
+        boolean flipDir = Math.signum(diff) == Math.signum(avoidDiff) && Math.abs(diff) > Math.abs(avoidDiff);
+
+        if (flipDir) {
+            diff = Math.copySign(360.0F - Math.abs(diff), -diff);
+        }
+
+        return MathHelper.wrapDegrees(start + diff * delta);
     }
 
     @Override

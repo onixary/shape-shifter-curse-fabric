@@ -44,9 +44,9 @@
       "pitch_sign": 1.0,
       "yaw_weights": [0.18, 0.27, 0.32, 0.23],
       "pitch_weights": [0.10, 0.22, 0.33, 0.35],
-      "max_yaw_deg": 85.0,
-      "max_pitch_up_deg": 55.0,
-      "max_pitch_down_deg": 45.0
+      "max_yaw_deg": 120.0,
+      "max_pitch_up_deg": 70.0,
+      "max_pitch_down_deg": 60.0
     }
   }
 }

@@ -29,12 +29,15 @@ import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.util.FeralRenderUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
-import org.joml.Matrix4f;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class LongNeckRenderUtils {
     private static final boolean IS_FIRST_PERSON_MOD_LOADED = FabricLoader.getInstance().isModLoaded("firstperson");
+    private static final float VANILLA_HEAD_MODEL_VERTICAL_OFFSET = -1F;
     private static final Map<String, Identifier> ARMOR_TEXTURE_CACHE = Maps.newHashMap();
     private static BipedEntityModel<AbstractClientPlayerEntity> outerArmorModelWide;
     private static BipedEntityModel<AbstractClientPlayerEntity> outerArmorModelSlim;
@@ -71,8 +74,46 @@ public class LongNeckRenderUtils {
         if (head == null) {
             return;
         }
+
         matrices.translate(0.5F, 0.51F, 0.5F);
-        matrices.multiplyPositionMatrix(new Matrix4f(head.getModelSpaceMatrix()));
+        List<GeoBone> boneChain = new ArrayList<>();
+        for (GeoBone bone = head; bone != null; bone = bone.getParent()) {
+            boneChain.add(bone);
+        }
+        Collections.reverse(boneChain);
+
+        for (int i = 0; i < boneChain.size(); i++) {
+            GeoBone bone = boneChain.get(i);
+            applyBoneLocalTransform(matrices, bone);
+            if (i < boneChain.size() - 1) {
+                translateAwayFromPivot(matrices, bone);
+            }
+        }
+    }
+
+    private static void applyBoneLocalTransform(MatrixStack matrices, GeoBone bone) {
+        matrices.translate(-bone.getPosX() / 16.0F, bone.getPosY() / 16.0F, bone.getPosZ() / 16.0F);
+        matrices.translate(bone.getPivotX() / 16.0F, bone.getPivotY() / 16.0F, bone.getPivotZ() / 16.0F);
+        matrices.multiply(RotationAxis.POSITIVE_Z.rotation(bone.getRotZ()));
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotation(bone.getRotY()));
+        matrices.multiply(RotationAxis.POSITIVE_X.rotation(bone.getRotX()));
+        matrices.scale(bone.getScaleX(), bone.getScaleY(), bone.getScaleZ());
+    }
+
+    private static void translateAwayFromPivot(MatrixStack matrices, GeoBone bone) {
+        matrices.translate(-bone.getPivotX() / 16.0F, -bone.getPivotY() / 16.0F, -bone.getPivotZ() / 16.0F);
+    }
+
+    private static void applyVanillaHeadAttachmentAxes(MatrixStack matrices) {
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0F));
+    }
+
+    private static void applyVanillaHeadModelAxes(MatrixStack matrices) {
+        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(180.0F));
+    }
+
+    private static void applyVanillaHeadModelOffset(MatrixStack matrices) {
+        matrices.translate(0.0F, VANILLA_HEAD_MODEL_VERTICAL_OFFSET, 0.0F);
     }
 
     public static void renderLongNeckAttachments(
@@ -118,6 +159,7 @@ public class LongNeckRenderUtils {
         HeldItemRenderer heldItemRenderer = MinecraftClient.getInstance().getEntityRenderDispatcher().getHeldItemRenderer();
         matrices.push();
         applyHeadBoneTransform(matrices, formModel);
+        applyVanillaHeadAttachmentAxes(matrices);
         matrices.translate(0.06F, 0.085F, -0.35D);
         matrices.scale(1.25F, 1.25F, 1.25F);
         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0F));
@@ -146,6 +188,9 @@ public class LongNeckRenderUtils {
         HeldItemRenderer heldItemRenderer = MinecraftClient.getInstance().getEntityRenderDispatcher().getHeldItemRenderer();
         matrices.push();
         applyHeadBoneTransform(matrices, formModel);
+        applyVanillaHeadAttachmentAxes(matrices);
+        applyVanillaHeadModelAxes(matrices);
+        applyVanillaHeadModelOffset(matrices);
         HeadFeatureRenderer.translate(matrices, false);
         heldItemRenderer.renderItem(player, headStack, ModelTransformationMode.HEAD, false, matrices, vertexConsumers, light);
         matrices.pop();
@@ -169,6 +214,9 @@ public class LongNeckRenderUtils {
 
         matrices.push();
         applyHeadBoneTransform(matrices, formModel);
+        applyVanillaHeadAttachmentAxes(matrices);
+        applyVanillaHeadModelAxes(matrices);
+        applyVanillaHeadModelOffset(matrices);
         boolean secondTextureLayer = false;
         if (armorItem instanceof DyeableArmorItem dyeableArmorItem) {
             int color = dyeableArmorItem.getColor(stack);
