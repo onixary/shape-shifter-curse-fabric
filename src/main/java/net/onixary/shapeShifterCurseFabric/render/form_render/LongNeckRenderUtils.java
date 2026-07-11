@@ -37,7 +37,6 @@ import java.util.Map;
 
 public class LongNeckRenderUtils {
     private static final boolean IS_FIRST_PERSON_MOD_LOADED = FabricLoader.getInstance().isModLoaded("firstperson");
-    private static final float VANILLA_HEAD_MODEL_VERTICAL_OFFSET = -1F;
     private static final Map<String, Identifier> ARMOR_TEXTURE_CACHE = Maps.newHashMap();
     private static BipedEntityModel<AbstractClientPlayerEntity> outerArmorModelWide;
     private static BipedEntityModel<AbstractClientPlayerEntity> outerArmorModelSlim;
@@ -110,10 +109,6 @@ public class LongNeckRenderUtils {
 
     private static void applyVanillaHeadModelAxes(MatrixStack matrices) {
         matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(180.0F));
-    }
-
-    private static void applyVanillaHeadModelOffset(MatrixStack matrices) {
-        matrices.translate(0.0F, VANILLA_HEAD_MODEL_VERTICAL_OFFSET, 0.0F);
     }
 
     public static void renderLongNeckAttachments(
@@ -190,7 +185,6 @@ public class LongNeckRenderUtils {
         applyHeadBoneTransform(matrices, formModel);
         applyVanillaHeadAttachmentAxes(matrices);
         applyVanillaHeadModelAxes(matrices);
-        applyVanillaHeadModelOffset(matrices);
         HeadFeatureRenderer.translate(matrices, false);
         heldItemRenderer.renderItem(player, headStack, ModelTransformationMode.HEAD, false, matrices, vertexConsumers, light);
         matrices.pop();
@@ -206,6 +200,7 @@ public class LongNeckRenderUtils {
             ArmorItem armorItem
     ) {
         BipedEntityModel<AbstractClientPlayerEntity> model = getArmorModel(player, false);
+        model.child = false;
         model.setVisible(false);
         model.head.visible = true;
         model.hat.visible = true;
@@ -216,7 +211,6 @@ public class LongNeckRenderUtils {
         applyHeadBoneTransform(matrices, formModel);
         applyVanillaHeadAttachmentAxes(matrices);
         applyVanillaHeadModelAxes(matrices);
-        applyVanillaHeadModelOffset(matrices);
         boolean secondTextureLayer = false;
         if (armorItem instanceof DyeableArmorItem dyeableArmorItem) {
             int color = dyeableArmorItem.getColor(stack);
