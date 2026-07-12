@@ -5,6 +5,8 @@ import com.google.gson.JsonParser;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientLoginConnectionEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.PacketByteBuf;
@@ -188,5 +190,12 @@ public final class AuthClient {
         if (LOCAL_PATRON_AUTH_FILE != null && !AuthUtils.isKeyCanUse(LOCAL_PATRON_AUTH_FILE.getKeySegment())) {
             checkUpdate(true);
         }
+    }
+
+    public static void init() {
+        AuthUtils.init();
+        ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
+            // TODO 向服务器发包
+        });
     }
 }

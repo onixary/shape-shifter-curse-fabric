@@ -22,6 +22,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.ITransformReason;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.util.TrinketUtils;
+import net.onixary.shapeShifterCurseFabric.util.Verify.PatronDataSegment;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -285,5 +286,16 @@ public class FormUtils {
     public static void applyFallback(PlayerEntity player) {
         PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
         FormUtils._loadForm(player, component.getFallbackForm());
+    }
+
+    public static boolean isFormCanUse(PlayerEntity player, IForm form) {
+        boolean canUse = true;
+        if (form instanceof IFormWithCondition iFormWithCondition) {
+            canUse &= iFormWithCondition.checkCanUse(player);
+        }
+        if (form instanceof IPatronForm iPatronForm) {
+            canUse &= PatronDataSegment.isPatronFormCanUse(player, iPatronForm);
+        }
+        return canUse;
     }
 }

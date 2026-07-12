@@ -294,4 +294,6 @@ public final class AuthUtils {
     static {
         registerDataReader((type, version) -> type == 1 && version == 0, PatronDataSegment::new);
     }
+
+    public static void init() { }
 }

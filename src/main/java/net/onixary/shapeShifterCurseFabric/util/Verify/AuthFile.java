@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.util.Verify;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 
 import java.io.IOException;
@@ -68,24 +69,30 @@ public final class AuthFile {
         }
     }
 
-    public void onGain() {
+    public void onGain(PlayerEntity player) {
         for (IDataSegment segment : this.dataSegments) {
-            segment.onGain();
+            if (segment == null) {
+                return;
+            }
+            segment.onGain(player);
         }
     }
 
-    public void onLost() {
+    public void onLost(PlayerEntity player) {
         for (IDataSegment segment : this.dataSegments) {
-            segment.onLost();
+            if (segment == null) {
+                return;
+            }
+            segment.onLost(player);
         }
     }
 
-    public void onUpdate(AuthFile newAuthFile) {
+    public void onUpdate(PlayerEntity player, AuthFile newAuthFile) {
         for (IDataSegment segment : this.dataSegments) {
             for (IDataSegment newSegment : newAuthFile.dataSegments) {
-                if (segment.isSameSlot(newSegment)) {
-                    segment.onUpdate_Old(newSegment);
-                    newSegment.onUpdate_New(segment);
+                if (segment != null && newSegment != null && segment.isSameSlot(newSegment)) {
+                    segment.onUpdate_Old(player, newSegment);
+                    newSegment.onUpdate_New(player, segment);
                 }
             }
         }
@@ -102,5 +109,16 @@ public final class AuthFile {
     @Override
     public boolean equals(Object obj) {
         return obj instanceof AuthFile && Arrays.equals(((AuthFile) obj).raw, this.raw);
+    }
+
+    public boolean removeDataSegment(PlayerEntity player, IDataSegment dataSegment) {
+        for (int i = 0; i < this.dataSegments.length; i++) {
+            if (this.dataSegments[i].equals(dataSegment)) {
+                this.dataSegments[i].onLost(player);
+                this.dataSegments[i] = null;
+                return true;
+            }
+        }
+        return false;
     }
 }
