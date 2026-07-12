@@ -105,6 +105,8 @@ public class FormModel extends GeoModel<FormAnimatable> {
     public List<List<String>> BCD_TailChainHead = new ArrayList<>();
     public List<List<String>> BCD_WingChainL = new ArrayList<>();
     public List<List<String>> BCD_WingChainR = new ArrayList<>();
+
+    // NECK FEATURES START
     public @Nullable NeckIkConfig BCD_NeckIk = null;
 
     public static class NeckIkConfig {
@@ -121,6 +123,7 @@ public class FormModel extends GeoModel<FormAnimatable> {
         public float maxPitchUpDeg = 55.0f;
         public float maxPitchDownDeg = 45.0f;
     }
+    // NECK FEATURES END
 
     public FormModel(JsonObject json) {
         this.modelJson = json;
@@ -274,7 +277,9 @@ public class FormModel extends GeoModel<FormAnimatable> {
         BCD_TailChainHead.clear();
         BCD_WingChainL.clear();
         BCD_WingChainR.clear();
+        // NECK FEATURES START
         BCD_NeckIk = null;
+        // NECK FEATURES END
         JsonObject bcdJson = JsonHelper.getObject(this.modelJson, "builtin_controller_data", null);
         if (bcdJson != null) {
             if (bcdJson.has("tail_chain")) {
@@ -289,11 +294,16 @@ public class FormModel extends GeoModel<FormAnimatable> {
             if (bcdJson.has("wing_chain_r")) {
                 BCD_WingChainR = loadChainData(bcdJson.getAsJsonObject("wing_chain_r"));
             }
+            // NECK FEATURES START
             if (bcdJson.has("neck_ik")) {
                 BCD_NeckIk = loadNeckIkData(bcdJson.getAsJsonObject("neck_ik"));
             }
+            // NECK FEATURES END
         }
     }
+
+
+    // NECK FEATURES START
 
     private NeckIkConfig loadNeckIkData(JsonObject json) {
         NeckIkConfig config = new NeckIkConfig();
@@ -418,6 +428,8 @@ public class FormModel extends GeoModel<FormAnimatable> {
             case 'z' -> bone.setRotZ(value);
         }
     }
+
+    // NECK FEATURES END
 
     public void setPlayer(PlayerEntity player, boolean slim) {
         this.entity = player;

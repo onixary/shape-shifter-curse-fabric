@@ -271,13 +271,16 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
         model.invertRotForPart(RM_LeftArmGeoBoneID, false, true, true);
         model.invertRotForPart(RM_LeftLegGeoBoneID, false, true, true);
         model.invertRotForPart(RM_RightLegGeoBoneID, false, true, true);
+        // NECK FEATURES START
         NeckAngles neckAngles = model.hasNeckIk()
                 ? getLongNeckAngles(player, tickDelta, headYaw, headPitch)
                 : new NeckAngles(headYaw, headPitch);
         model.applyNeckIk(neckAngles.headYaw(), neckAngles.headPitch());
         model.setRotationForHeadTailBones(neckAngles.headYaw(), player.age, td.currentTailDragAmount, td.currentTailDragAmountVertical);
+        // NECK FEATURES END
     }
 
+    // NECK FEATURES START
     private NeckAngles getLongNeckAngles(PlayerEntity player, float tickDelta, float fallbackHeadYaw, float fallbackHeadPitch) {
         neckLookData data = neckLookDataMap.computeIfAbsent(player.getUuid(), k -> new neckLookData());
         float viewYaw = player.getYaw(tickDelta);
@@ -338,6 +341,7 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
 
         return MathHelper.wrapDegrees(start + diff * delta);
     }
+    // NECK FEATURES END
 
     @Override
     public void afterRender(FormRenderer formRenderer, FormModel model, PlayerEntityRenderer renderer, PlayerEntity player, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {

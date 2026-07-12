@@ -9,6 +9,8 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.List;
 
+// NECK FEATURES FILE
+
 @Mixin(LivingEntityRenderer.class)
 public interface LivingEntityRendererAccessor<T extends LivingEntity, M extends EntityModel<T>> {
     @Accessor("features")

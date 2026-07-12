@@ -15,6 +15,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+// NECK FEATURES FILE
+
 @Mixin(HeadFeatureRenderer.class)
 public class LongNeckHeadFeatureRendererMixin<T extends LivingEntity, M extends EntityModel<T> & ModelWithHead> {
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)

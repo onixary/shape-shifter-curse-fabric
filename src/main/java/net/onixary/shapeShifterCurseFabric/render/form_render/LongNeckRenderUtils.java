@@ -35,6 +35,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+// NECK FEATURES FILE
+
 public class LongNeckRenderUtils {
     private static final boolean IS_FIRST_PERSON_MOD_LOADED = FabricLoader.getInstance().isModLoaded("firstperson");
     private static final ThreadLocal<Boolean> DELEGATING_LONG_NECK_HEAD_ARMOR = ThreadLocal.withInitial(() -> false);
