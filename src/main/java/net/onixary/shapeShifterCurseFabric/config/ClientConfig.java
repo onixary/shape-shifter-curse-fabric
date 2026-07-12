@@ -52,8 +52,8 @@ public class ClientConfig implements ConfigData {
     public boolean autoDownloadPatronAuthorizationFile = true;  // 自动下载赞助者授权文件
 
     @ConfigEntry.Category("Patron")
-    @Comment("Patron Authorization Url Path Without Suffix(<UUID>.auth). Default: \"https://raw.githubusercontent.com/Onixary/ShapeShifterCurseFabricAuth/main/auth/\"")
-    public String patronAuthorizationUrlPath = "https://raw.githubusercontent.com/Onixary/ShapeShifterCurseFabricAuth/main/auth/";  // 赞助者授权文件URL路径
+    @Comment("Patron Authorization Url Path Without Suffix(<UUID>.auth). Default: \"https://raw.githubusercontent.com/onixary/ssc_patron/main/auth/\"")
+    public String patronAuthorizationUrlPath = "https://raw.githubusercontent.com/onixary/ssc_patron/main/auth/";  // 赞助者授权文件URL路径
 
     // 开发用
     // @ConfigEntry.Category("InDevelopment")
