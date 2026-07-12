@@ -59,6 +59,9 @@ public class FormUtils {
     public static final FlagData CanTFToFinalForm = new FlagData("can_tf_to_final_form"); // 可以通过高级催化剂变形到最终形态
     public static final FlagData FinalForm = new FlagData("final_form"); // 最终形态 PowerfulCatalyst仅能变形到此形态
 
+    // 在此解释一下为什么要先变TechnicalFormOrigin后变目标Origin 因为形态能力还原依赖于不同Origin切换时的清除旧Power+添加新Power 如果Origin一样 就会导致饰品/子形态/额外能力挂载系统添加/删除的能力无法还原
+    public static Origin TechnicalFormOrigin = null;
+
     public static record ExtraPower(@NotNull Identifier LayerID, @NotNull Identifier FormID, @NotNull List<Identifier> PowerIDs) {
         public @NotNull Identifier getLayerID() { return LayerID; }
         public @NotNull Identifier getFormID() { return FormID; }
@@ -133,6 +136,10 @@ public class FormUtils {
         if (layer != null && layerData.getRight() != null) {
             Origin origin = OriginRegistry.get(layerData.getRight());
             if(layer.contains(origin, player)){
+                if (TechnicalFormOrigin == null) {
+                    TechnicalFormOrigin = OriginRegistry.get(ShapeShifterCurseFabric.identifier("technical_form"));
+                }
+                component.setOrigin(layer, TechnicalFormOrigin);
                 component.setOrigin(layer, origin);
                 component.sync();
             }
