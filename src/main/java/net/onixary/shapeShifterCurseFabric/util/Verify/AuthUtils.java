@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.util.Verify;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.PacketByteBuf;
@@ -127,7 +128,7 @@ public final class AuthUtils {
 
     public static byte[] buildEd448PublicKeyDer(byte[] rawKey) {
         // 为了文件大小极限的小 所以去除了DER 但是JAVA的Ed448库不支持直接使用Ed448的公钥 所以需要手动构建DER
-        byte[] oid = new byte[] {0x06, 0x03, 0x2B, 0x65, 0x70}; // OID 1.3.101.113
+        byte[] oid = new byte[] {0x06, 0x03, 0x2B, 0x65, 0x71}; // OID 1.3.101.113
         byte[] algSeq = new byte[2 + oid.length];
         algSeq[0] = 0x30;
         algSeq[1] = (byte) oid.length;
@@ -166,11 +167,11 @@ public final class AuthUtils {
     }
 
     public static @Nullable IDataSegment readDataSegment(PacketByteBuf buf) {
-        int type = buf.readVarInt();
-        int version = buf.readVarInt();
+        int type = buf.readInt();
+        int version = buf.readInt();
         for (Pair<BiPredicate<Integer, Integer>, Function<PacketByteBuf, IDataSegment>> reader : dataReaderRegistry) {
             if (reader.getLeft().test(type, version)) {
-                buf.setIndex(0, 0);
+                buf.setIndex(0, buf.capacity());
                 return reader.getRight().apply(buf);
             }
         }
@@ -193,9 +194,8 @@ public final class AuthUtils {
         }
     }
 
-    private static final List<AuthFile> authFiles = new ArrayList<>();  // TODO ReadOnly
-    private static final HashMap<Integer, KeySegment> storedKeySegments = new HashMap<>();  // TODO ReadOnly
-    private static final List<Pair<Long, KeySegment>> forgiveKeySegments = new ArrayList<>();  // TODO ReadOnly
+    private static final HashMap<Integer, KeySegment> storedKeySegments = new HashMap<>();
+    private static final List<Pair<Long, KeySegment>> forgiveKeySegments = new ArrayList<>();
     private static final long forgiveTime = 60 * 30;  // 30分钟
     static {
         loadLocalKeySegments();
@@ -289,6 +289,22 @@ public final class AuthUtils {
             }
         }
         return false;
+    }
+
+    public static byte[] getBufArray(ByteBuf buf) {
+        if (buf == null) {
+            return null;
+        }
+        if (buf.hasArray()) {
+            return buf.array();
+        }
+        int rollbackIndexR = buf.readerIndex();
+        int rollbackIndexW = buf.writerIndex();
+        buf.setIndex(0, buf.capacity());
+        byte[] array = new byte[buf.readableBytes()];
+        buf.readBytes(array);
+        buf.setIndex(rollbackIndexR, rollbackIndexW);
+        return array;
     }
 
     static {

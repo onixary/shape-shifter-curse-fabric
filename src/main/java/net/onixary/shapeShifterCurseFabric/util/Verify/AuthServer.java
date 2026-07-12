@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 
@@ -20,12 +21,12 @@ import java.util.UUID;
 //          将AuthFile写入内存 [√]
 //      密钥熔断时:
 //          将旧Key写入forgive组 并使用新Key替换 并将新Key落盘 (由AuthUtils负责) [√]
-//          向所有玩家发送新密钥
+//          向所有玩家发送新密钥 [√]
 //      每15s: [√]
 //          给每个玩家检查内存中是否有有效认证文件Object 如果没有 触发回调中的还原 [√]
 //          检查forgive组是否有失效密钥 如果有失效 对当前存储的AuthFile进行检查 如果有AuthFile失效 触发回调中的还原 (由AuthUtils负责) [√]
 //      每分钟: [√]
-//          检查赞助者数据是否过期
+//          检查赞助者数据是否过期 [√]
 
 public final class AuthServer {
     // 赞助者用的变量 如果后续需要新增AuthFile 需要额外添加对应逻辑
@@ -43,7 +44,12 @@ public final class AuthServer {
             return;
         }
         if (AuthUtils.loadKey(keySegment)) {
-            // TODO 通知所有玩家更新密钥
+            MinecraftServer server = player.getServer();
+            if (server != null) {
+                for (ServerPlayerEntity serverPlayerEntity : server.getPlayerManager().getPlayerList()) {
+                    ModPacketsS2CServer.sendNewSubKey(serverPlayerEntity, keySegment);
+                }
+            }
         }
         if (!AuthUtils.isKeyCanUse(keySegment)) {
             return;

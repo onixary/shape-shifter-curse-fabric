@@ -22,13 +22,14 @@ public final class PatronDataSegment implements IDataSegment {
     private final HashMap<String, byte[]> extraData = new HashMap<>();
 
     PatronDataSegment(PacketByteBuf buf) {
-        this.type = buf.readVarInt();
-        this.version = buf.readVarInt();
+        this.type = buf.readInt();
+        this.version = buf.readInt();
         buf.skipBytes(4);
         this.uuid = buf.readUuid();
         this.level = buf.readShort();
         long startTime = buf.readLong();
-        this.expireTime = startTime + buf.readLong();
+        long expiresIn = buf.readLong();
+        this.expireTime = startTime + expiresIn;
         int extraDataCount = buf.readShort();
         for (int i = 0; i < extraDataCount; i++) {
             String key = buf.readString(256);

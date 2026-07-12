@@ -2,6 +2,7 @@ package net.onixary.shapeShifterCurseFabric.networking;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
@@ -33,6 +34,8 @@ import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
 import net.onixary.shapeShifterCurseFabric.util.FormColorData;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.Interface.IJumpController;
+import net.onixary.shapeShifterCurseFabric.util.Verify.AuthClient;
+import net.onixary.shapeShifterCurseFabric.util.Verify.AuthFile;
 import org.jetbrains.annotations.Nullable;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
@@ -69,6 +72,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SET_NO_JUMP_TICK, ModPacketsS2C::receiveSetNoJumpTick);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.OPEN_FORM_COLOR_SELECT_MENU, ModPacketsS2C::receiveOpenFCSMenu);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.MODIFY_FCD_DATA, ModPacketsS2C::receiveModifyFCDData);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.MELT_AUTH_SUB_KEY, ModPacketsS2C::receiveNewSubKey);
     }
 
     /* 重构后不需要了 仅用于参考旧实现逻辑
@@ -573,5 +577,21 @@ public class ModPacketsS2C {
                 }
             }
         }
+    }
+
+    public static void sendPatronAuthFile(@Nullable AuthFile authFile) {
+        if (authFile == null) {
+            return;
+        }
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeByteArray(authFile.getRaw());
+        ClientPlayNetworking.send(UPLOAD_PATRON_AUTH_FILE, buf);
+    }
+
+    private static void receiveNewSubKey(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        PacketByteBuf keyBuf = new PacketByteBuf(Unpooled.wrappedBuffer(buf.readByteArray()));
+        client.execute(() -> {
+            AuthClient.loadServerKey(keyBuf);
+        });
     }
 }

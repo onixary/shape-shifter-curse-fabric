@@ -5,12 +5,12 @@ import com.google.gson.JsonParser;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.networking.v1.ClientLoginConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.PacketByteBuf;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,6 +39,7 @@ import java.util.UUID;
 public final class AuthClient {
     private static final long UPDATE_INTERVAL = 60 * 60 * 24; // 1 days in Second
     private static long lastUpdateTime;
+    private static boolean isInit = false;
     // 赞助者用的变量 如果后续需要新增AuthFile 需要额外添加对应逻辑
     private static @Nullable AuthFile LOCAL_PATRON_AUTH_FILE = null;
     static {
@@ -124,7 +125,7 @@ public final class AuthClient {
             return;
         }
         if (force || (System.currentTimeMillis() / 1000) - lastUpdateTime > UPDATE_INTERVAL) {
-            lastUpdateTime = System.currentTimeMillis();
+            lastUpdateTime = System.currentTimeMillis() / 1000;
             saveClientConfig();
             new Thread(() -> {
                 String authFileUrl = getAuthFileUrl();
@@ -145,7 +146,7 @@ public final class AuthClient {
                 LOCAL_PATRON_AUTH_FILE = authFile;
                 saveLocalPatronAuthFile();
                 if (MinecraftClient.getInstance().getServer() != null) {
-                    // TODO 发送数据到服务器
+                    ModPacketsS2C.sendPatronAuthFile(LOCAL_PATRON_AUTH_FILE);
                 }
             }).start();
         }
@@ -193,9 +194,13 @@ public final class AuthClient {
     }
 
     public static void init() {
+        if (isInit) {
+            return;
+        }
+        isInit = true;
         AuthUtils.init();
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
-            // TODO 向服务器发包
+            ModPacketsS2C.sendPatronAuthFile(LOCAL_PATRON_AUTH_FILE);
         });
     }
 }

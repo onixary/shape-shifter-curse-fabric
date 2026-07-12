@@ -45,6 +45,7 @@ public class ModPackets {
 
     public static final Identifier ACTIVE_VIRTUAL_TOTEM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "active_virtual_totem");
 
+    // 老版
     public static final Identifier UPDATE_PATRON_LEVEL = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_patron_level");
     public static final Identifier OPEN_PATRON_FORM_SELECT_MENU = new Identifier(ShapeShifterCurseFabric.MOD_ID, "open_patron_form_select_menu");
     public static final Identifier SET_PATRON_FORM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "set_patron_form");
@@ -63,4 +64,7 @@ public class ModPackets {
 
     public static final Identifier OPEN_FORM_COLOR_SELECT_MENU = new Identifier(ShapeShifterCurseFabric.MOD_ID, "open_form_color_select_menu");
     public static final Identifier MODIFY_FCD_DATA = new Identifier(ShapeShifterCurseFabric.MOD_ID, "modify_fcd_data");
+
+    public static final Identifier UPLOAD_PATRON_AUTH_FILE = new Identifier(ShapeShifterCurseFabric.MOD_ID, "upload_patron_auth_file");
+    public static final Identifier MELT_AUTH_SUB_KEY = new Identifier(ShapeShifterCurseFabric.MOD_ID, "melt_auth_sub_key");
 }
