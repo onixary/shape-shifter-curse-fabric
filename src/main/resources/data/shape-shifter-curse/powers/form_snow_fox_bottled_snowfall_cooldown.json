@@ -1,5 +1,5 @@
 {
-    "type": "origins:cooldown",
+    "type": "apoli:cooldown",
     "cooldown": 8,
     "hud_render": {
         "should_render": false

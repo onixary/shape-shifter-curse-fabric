@@ -1,15 +1,15 @@
 {
-    "type": "origins:action_on_hit",
+    "type": "apoli:action_on_hit",
     "bientity_action": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "actions": [
             {
-                "type": "origins:actor_action",
+                "type": "apoli:actor_action",
                 "action": {
-                    "type": "origins:and",
+                    "type": "apoli:and",
                     "actions": [
                         {
-                            "type": "origins:heal",
+                            "type": "apoli:heal",
                             "amount": 2
                         }
                     ]
@@ -18,19 +18,19 @@
         ]
     },
     "bientity_condition": {
-        "type": "origins:actor_condition",
+        "type": "apoli:actor_condition",
         "condition": {
-            "type": "origins:and",
+            "type": "apoli:and",
             "conditions": [
                 {
-                    "type": "origins:status_effect",
+                    "type": "apoli:status_effect",
                     "effect": "minecraft:wither"
                 }
             ]
         }
     },
     "damage_condition": {
-        "type": "origins:amount",
+        "type": "apoli:amount",
         "comparison": ">",
         "compare_to": 1
     }

@@ -1,0 +1,88 @@
+{
+  "load_priority": 0,
+
+  "name": "namespace.layer.namespace.form",
+  "layer": "namespace:layer",
+  "form": "namespace:form",
+
+  "slim_only": false,
+  "wide_only": false,
+  "use_multiply_mask": false,
+  "use_azurelib_anim": false,
+
+  "model": "namespace:geo/form.geo.json",
+  "model_slim": "namespace:geo/form.geo.json",
+  "texture": "namespace:textures/form/form.png",
+  "texture_slim": "namespace:textures/form/form.png",
+  "texture_mask": "namespace:textures/form/form_colormask.png",
+  "texture_mask_slim": "namespace:textures/form/form_colormask.png",
+  "overlay": "namespace:textures/form/form_overlay.png",
+  "overlay_slim": "namespace:textures/form/form_overlay.png",
+  "overlay_mask": "namespace:textures/form/form_overlay_colormask.png",
+  "overlay_mask_slim": "namespace:textures/form/form_overlay_colormask.png",
+  "emissive_overlay": "namespace:textures/form/form_emissive_overlay.png",
+  "emissive_overlay_slim": "namespace:textures/form/form_emissive_overlay.png",
+  "emissive_overlay_mask": "namespace:textures/form/form_emissive_overlay_colormask.png",
+  "emissive_overlay_mask_slim": "namespace:textures/form/form_emissive_overlay_colormask.png",
+  "fullbright_texture": "namespace:textures/form/form_fullbright.png",
+  "fullbright_texture_slim": "namespace:textures/form/form_fullbright.png",
+  "fullbright_texture_mask": "namespace:textures/form/form_fullbright_colormask.png",
+  "fullbright_texture_mask_slim": "namespace:textures/form/form_fullbright_colormask.png",
+  "animations": "shape-shifter-curse:animations/missing.animation.json",
+  "hidden": [
+    "leftArm",
+    "rightArm",
+    "rightSleeve",
+    "leftSleeve",
+    "rightLeg",
+    "leftLeg",
+    "rightPants",
+    "leftPants",
+    "hat",
+    "head",
+    "body",
+    "jacket"
+  ],
+  "animation_system": "shape-shifter-curse:default",
+  "animation_system_config": {
+    "extra_parts_map": {
+      "bipedRightHindLeg": "bipedRightHindLeg",
+      "bipedLeftHindLeg": "bipedLeftHindLeg",
+      "bipedRightExtraArm": "bipedRightExtraArm",
+      "bipedLeftExtraArm": "bipedLeftExtraArm",
+      "neck_mount": "neck_mount"
+    },
+    "first_person_render": {
+      "left_arm": "bipedLeftArm",
+      "right_arm": "bipedRightArm"
+    },
+    "model_part_map": {
+      "head": "bipedHead",
+      "body": "bipedBody",
+      "left_arm": "bipedLeftArm",
+      "right_arm": "bipedRightArm",
+      "left_leg": "bipedLeftLeg",
+      "right_leg": "bipedRightLeg"
+    },
+    "part_extra_pos": {
+      "head": {
+        "pos_x": 0.0,
+        "pos_y": 0.0,
+        "pos_z": 0.0,
+        "rot_x": 0.0,
+        "rot_y": 0.0,
+        "rot_z": 0.0,
+        "pivot_x": 0.0,
+        "pivot_y": 0.0,
+        "pivot_z": 0.0
+      }
+    }
+  },
+  "builtin_controller_data": {
+    "tail_chain": {},
+    "tail_chain_head": {},
+    "wing_chain_l": {},
+    "wing_chain_r": {},
+    "neck_ik": {}
+  }
+}

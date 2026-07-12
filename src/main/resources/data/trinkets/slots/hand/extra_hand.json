@@ -1,0 +1,7 @@
+{
+  "icon": "shape-shifter-curse:slot/extra_hand",
+  "order": -768,
+  "validator_predicates": ["trinkets:tag"],
+  "tooltip_predicates": ["trinkets:none"],
+  "quick_move_predicates": ["trinkets:none"]
+}

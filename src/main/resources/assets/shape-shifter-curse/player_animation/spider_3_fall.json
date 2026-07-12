@@ -1,0 +1,91 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"spider_3_fall": {
+			"loop": true,
+			"animation_length": 1,
+			"bones": {
+				"rightArm": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 20]
+						},
+						"1.0": {
+							"vector": [0, 0, 20]
+						}
+					}
+				},
+				"leftArm": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, -20]
+						},
+						"1.0": {
+							"vector": [0, 0, -20]
+						}
+					}
+				},
+				"rightLeg": {
+					"rotation": {
+						"0.0": {
+							"vector": [-20, 0, 20]
+						},
+						"0.3333": {
+							"vector": [-9.8423, -2.5587, 12.9476]
+						},
+						"1.0": {
+							"vector": [-20, 0, 20]
+						}
+					}
+				},
+				"leftLeg": {
+					"rotation": {
+						"0.0": {
+							"vector": [-20, 0, -20]
+						},
+						"0.6667": {
+							"vector": [-9.8422, 2.5587, -12.9476]
+						},
+						"1.0": {
+							"vector": [-20, 0, -20]
+						}
+					}
+				},
+				"bipedLeftHindLeg": {
+					"rotation": {
+						"0.0": {
+							"vector": [-40, 0, -20]
+						},
+						"0.5": {
+							"vector": [-39.025, 9.5767, -8.4006]
+						},
+						"1.0": {
+							"vector": [-40, 0, -20]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"bipedRightHindLeg": {
+					"rotation": {
+						"0.0": {
+							"vector": [-40, 0, 20]
+						},
+						"0.5": {
+							"vector": [-39.5686, -6.4087, 12.3074]
+						},
+						"1.0": {
+							"vector": [-40, 0, 20]
+						}
+					}
+				}
+			}
+		}
+	}
+}

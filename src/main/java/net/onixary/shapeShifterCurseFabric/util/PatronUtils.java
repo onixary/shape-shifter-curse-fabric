@@ -10,7 +10,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
+import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 
 import java.io.*;
@@ -58,7 +58,7 @@ public class PatronUtils {
             // 开启服务器时无论如何都要更新一次
             PatronUtils.UpdateDataPack(server);
         }
-        Thread thread = new Thread(() -> {
+        new Thread(() -> {  // 如果之后有需要持续监控更新(长时间线程) 需要搓一个系统合并一下
             try {
                 long SleepTime = commonConfig.CheckUpdateInterval;
                 if (SleepTime <= 0) {
@@ -72,7 +72,7 @@ public class PatronUtils {
             if (commonConfig.enablePatronFormSystem) {
                 PatronUtils.CheckDataPackUpdate(server);
             }
-        });
+        }).start();
     }
 
     private static List<JsonObject> ReadDataPackZip(byte[] dataPackZip) {
@@ -278,19 +278,19 @@ public class PatronUtils {
         List<Identifier> patronForms = new ArrayList<>();
         if (jsonObjects != null) {
             for (JsonObject jsonObject : jsonObjects) {
-                PlayerFormDynamic pfd = null;
+                DynamicForm pfd = null;
                 try {
-                    pfd = PlayerFormDynamic.of(jsonObject);
+                    pfd = DynamicForm.fromJson(null, jsonObject);
                 }
                 catch (IllegalArgumentException e) {
                     ShapeShifterCurseFabric.LOGGER.error("Failed to parse PlayerFormDynamic from json No FormID", e);
                     continue;
                 }
-                if (!pfd.FormID.getNamespace().equals(RegPlayerForms.PatronNameSpace)) {
-                    ShapeShifterCurseFabric.LOGGER.warn("DataPack contains non-patron PlayerFormDynamic: {}", pfd.FormID);
+                if (!pfd.getFormID().getNamespace().equals(RegPlayerForms.PatronNameSpace)) {
+                    ShapeShifterCurseFabric.LOGGER.warn("DataPack contains non-patron PlayerFormDynamic: {}", pfd.getFormID());
                     continue;
                 }
-                Identifier formID = RegPlayerForms.registerDynamicPlayerForm(pfd).FormID;
+                Identifier formID = RegPlayerForms.registerDynamicPlayerForm(pfd).getFormID();
                 if (!patronForms.contains(formID)) {
                     patronForms.add(formID);
                 }

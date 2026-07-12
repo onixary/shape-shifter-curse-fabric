@@ -1,20 +1,20 @@
 {
-    "type": "origins:action_over_time",
+    "type": "apoli:action_over_time",
     "entity_action": {
-        "type": "origins:heal",
+        "type": "apoli:heal",
         "amount": 1
     },
     "interval": 400,
     "condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:food_level",
+                "type": "apoli:food_level",
                 "comparison": ">=",
                 "compare_to": 6
             },
             {
-                "type": "origins:health",
+                "type": "apoli:health",
                 "comparison": "<",
                 "compare_to": 30
             }

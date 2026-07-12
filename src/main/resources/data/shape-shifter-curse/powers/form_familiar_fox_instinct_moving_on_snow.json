@@ -1,25 +1,25 @@
 {
     "type": "shape-shifter-curse:add_sustained_instinct",
-    "instinct_effect_id": "FORM_FAMILIAR_FOX_MOVING_ON_SNOW",
+    "instinct_effect_id": "shape-shifter-curse:form_familiar_fox_moving_on_snow",
     "value": 0.008,
     "duration": 1,
     "condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:or",
+                "type": "apoli:or",
                 "conditions": [
                     {
-                        "type": "origins:on_block",
+                        "type": "apoli:on_block",
                         "block_condition": {
-                            "type": "origins:block",
+                            "type": "apoli:block",
                             "block": "minecraft:snow_block"
                         }
                     },
                     {
-                        "type": "origins:on_block",
+                        "type": "apoli:on_block",
                         "block_condition": {
-                            "type": "origins:block_state",
+                            "type": "apoli:block_state",
                             "property": "snowy",
                             "value": true
                         }
@@ -27,7 +27,7 @@
                 ]
             },
             {
-                "type": "origins:moving"
+                "type": "apoli:moving"
             }
         ]
     }

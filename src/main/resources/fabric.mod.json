@@ -71,21 +71,18 @@
   "entrypoints": {
     "main": [
       "net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric",
-      "net.onixary.shapeShifterCurseFabric.integration.origins.Origins",
-      "net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFur"
+      "net.onixary.shapeShifterCurseFabric.integration.origins.Origins"
     ],
     "client": [
       "net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient",
-      "net.onixary.shapeShifterCurseFabric.integration.origins.OriginsClient",
-      "net.onixary.shapeShifterCurseFabric.player_form_render.OriginalFurClient"
+      "net.onixary.shapeShifterCurseFabric.integration.origins.OriginsClient"
     ],
     "modmenu": [
       "net.onixary.shapeShifterCurseFabric.config.ConfigIntegration"
     ],
     "cardinal-components-entity": [
       "net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents",
-      "net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent",
-      "net.onixary.shapeShifterCurseFabric.player_form.instinct.RegPlayerInstinctComponent",
+      "net.onixary.shapeShifterCurseFabric.player_form.utils.RegPlayerFormComponent",
       "net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent",
       "net.onixary.shapeShifterCurseFabric.minion.RegPlayerMinionComponent",
       "net.onixary.shapeShifterCurseFabric.mana.RegManaComponent"
@@ -98,7 +95,7 @@
   "mixins": [
     "shape-shifter-curse.mixins.json",
     "origins.mixins.json",
-    "originalfur.fabric.mixins.json"
+    "ssc-misc.mixins.json"
   ],
 
   "accessWidener": "shape-shifter-curse.accesswidener",
@@ -107,11 +104,24 @@
     "cardinal-components": [
       "origins:origin",
       "shape-shifter-curse:player_form",
-      "shape-shifter-curse:player_instinct_component",
       "shape-shifter-curse:skin_settings",
       "shape-shifter-curse:player_minion_data",
       "shape-shifter-curse:mana"
-    ]
+    ],
+    "ssc-accessory-priority": {
+      "trinkets": {
+        "priority": 1000,
+        "depends": [
+          "trinkets"
+        ]
+      },
+      "curios": {
+        "priority": 2000,
+        "depends": [
+          "curios"
+        ]
+      }
+    }
   },
 
   "depends": {
@@ -120,11 +130,11 @@
     "fabric": ">=0.83.0",
     "minecraft": "1.20.1",
     "pehkui": ">=3.7.8",
-    "satin": ">=1.14.0",
-    "trinkets": ">=3.7.2"
+    "satin": ">=1.14.0"
   },
   "breaks": {
     "origins": ">0.0.0",
+    "enchantedlib": ">0.3.0",
     "optifabric": "*",
     "identity": "<1.14.2-beta",
     "azurelib": ">3.0.19",
@@ -132,7 +142,8 @@
     "geckolib": "<4.7.0"
   },
   "recommends": {
-    "rich_translatable_text": ">=1.0.1",
-    "firstperson": "*"
+    "rich_translatable_text": ">=1.0.2",
+    "firstperson": "*",
+    "trinkets": ">=3.7.2"
   }
 }

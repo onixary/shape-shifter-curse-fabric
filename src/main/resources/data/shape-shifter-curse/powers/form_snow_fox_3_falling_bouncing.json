@@ -1,47 +1,47 @@
 {
-    "type": "origins:action_on_block_use",
+    "type": "apoli:action_on_block_use",
     "directions": [
         "up"
     ],
     "condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:resource",
+                "type": "apoli:resource",
                 "resource": "shape-shifter-curse:form_snow_fox_bounce_cooldown",
                 "comparison": "<",
                 "compare_to": 1
             },
             {
-                "type": "origins:fall_distance",
+                "type": "apoli:fall_distance",
                 "comparison": ">=",
                 "compare_to": 0.5
             },
             {
-                "type": "origins:fall_flying",
+                "type": "apoli:fall_flying",
                 "inverted": true
             }
         ]
     },
     "entity_action": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "actions": [
             {
-                "type": "origins:add_velocity",
+                "type": "apoli:add_velocity",
                 "y": 0.65,
                 "space": "world",
                 "set": true
             },
             {
-                "type": "origins:execute_command",
+                "type": "apoli:execute_command",
                 "command": "particle cloud ~ ~ ~ 0.3 0.3 0.3 0.01 16 normal @a"
             },
             {
-                "type": "origins:play_sound",
+                "type": "apoli:play_sound",
                 "sound": "minecraft:entity.goat.long_jump"
             },
             {
-                "type": "origins:trigger_cooldown",
+                "type": "apoli:trigger_cooldown",
                 "power": "shape-shifter-curse:form_snow_fox_bounce_cooldown"
             }
         ]

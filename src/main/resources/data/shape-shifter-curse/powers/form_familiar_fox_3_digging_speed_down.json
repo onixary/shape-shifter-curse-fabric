@@ -1,7 +1,7 @@
 {
-    "type": "origins:modify_break_speed",
+    "type": "apoli:modify_break_speed",
     "block_condition": {
-        "type": "origins:hardness",
+        "type": "apoli:hardness",
         "comparison": ">=",
         "compare_to": 1
     },

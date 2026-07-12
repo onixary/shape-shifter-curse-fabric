@@ -1,24 +1,24 @@
 {
-    "type": "origins:action_over_time",
+    "type": "apoli:action_over_time",
     "entity_action": {
-        "type": "origins:gain_air",
+        "type": "apoli:gain_air",
         "value": -1
     },
     "interval": 14,
     "condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:fluid_height",
+                "type": "apoli:fluid_height",
                 "fluid": "minecraft:water",
                 "comparison": "<=",
                 "compare_to": 0
             },
             {
-                "type": "origins:sprinting"
+                "type": "apoli:sprinting"
             },
             {
-                "type": "origins:air",
+                "type": "apoli:air",
                 "comparison": ">",
                 "compare_to": 0
             }

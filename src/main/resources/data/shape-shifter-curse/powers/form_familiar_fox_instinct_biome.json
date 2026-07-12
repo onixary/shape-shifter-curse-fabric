@@ -1,12 +1,12 @@
 {
     "type": "shape-shifter-curse:add_sustained_instinct",
-    "instinct_effect_id": "FORM_FAMILIAR_FOX_BIOME",
+    "instinct_effect_id": "shape-shifter-curse:form_familiar_fox_biome",
     "value": 0.002,
     "duration": 1,
     "condition": {
-        "type": "origins:biome",
+        "type": "apoli:biome",
         "condition": {
-            "type": "origins:in_tag",
+            "type": "apoli:in_tag",
             "tag": "minecraft:is_taiga"
         }
     }

@@ -1,31 +1,63 @@
 {
-    "type": "origins:climbing",
-    "condition": {
-        "type": "origins:and",
+    "type": "shape-shifter-curse:climbing_ex",
+    "start_climb_condition": {
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:collided_horizontally"
+                "type": "apoli:collided_horizontally"
             },
             {
-                "type": "origins:or",
+                "type": "apoli:or",
                 "conditions": [
                     {
-                        "type": "origins:block_collision",
+                        "type": "apoli:block_collision",
                         "block_condition": {
-                            "type": "origins:in_tag",
-                            "tag": "origins:natural_wood"
+                            "type": "apoli:in_tag",
+                            "tag": "shape-shifter-curse:natural_wood"
                         },
-                        "offset_x": 0.1,
-                        "offset_z": 0.1
+                        "offset_x": 0.05,
+                        "offset_z": 0.05
                     },
                     {
-                        "type": "origins:block_collision",
+                        "type": "apoli:block_collision",
                         "block_condition": {
-                            "type": "origins:in_tag",
-                            "tag": "origins:natural_wood"
+                            "type": "apoli:in_tag",
+                            "tag": "shape-shifter-curse:natural_wood"
                         },
-                        "offset_x": -0.1,
-                        "offset_z": -0.1
+                        "offset_x": -0.05,
+                        "offset_z": -0.05
+                    }
+                ]
+            }
+        ]
+    },
+    "continue_climb_condition": {
+        "type": "apoli:and",
+        "conditions": [
+            {
+                "type": "apoli:on_block",
+                "inverted": true
+            },
+            {
+                "type": "apoli:or",
+                "conditions": [
+                    {
+                        "type": "apoli:block_collision",
+                        "block_condition": {
+                            "type": "apoli:in_tag",
+                            "tag": "shape-shifter-curse:natural_wood"
+                        },
+                        "offset_x": 0.01,
+                        "offset_z": 0.01
+                    },
+                    {
+                        "type": "apoli:block_collision",
+                        "block_condition": {
+                            "type": "apoli:in_tag",
+                            "tag": "shape-shifter-curse:natural_wood"
+                        },
+                        "offset_x": -0.01,
+                        "offset_z": -0.01
                     }
                 ]
             }

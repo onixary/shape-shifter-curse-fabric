@@ -1,5 +1,5 @@
 {
-    "type": "origins:conditioned_attribute",
+    "type": "apoli:conditioned_attribute",
     "modifier": {
         "name": "Oxygen health",
         "attribute": "minecraft:generic.max_health",
@@ -8,15 +8,15 @@
     },
     "tick_rate": 20,
     "condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:air",
+                "type": "apoli:air",
                 "comparison": "<",
                 "compare_to": 150
             },
             {
-                "type": "origins:air",
+                "type": "apoli:air",
                 "comparison": ">=",
                 "compare_to": 120
             }

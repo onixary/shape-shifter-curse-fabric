@@ -1,0 +1,55 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"spider_2_sneak_idle": {
+			"loop": true,
+			"bones": {
+				"head": {
+					"position": {
+						"vector": [0, -9, -2]
+					}
+				},
+				"torso": {
+					"rotation": {
+						"vector": [52.5, 0, 0]
+					},
+					"position": {
+						"vector": [0, -8, -1]
+					}
+				},
+				"rightArm": {
+					"rotation": {
+						"vector": [-0.4002, -2.5322, 5.46]
+					},
+					"position": {
+						"vector": [2.5, -11, -1]
+					}
+				},
+				"leftArm": {
+					"rotation": {
+						"vector": [-0.4001, 2.5322, -5.46]
+					},
+					"position": {
+						"vector": [-2.5, -11, -1]
+					}
+				},
+				"rightLeg": {
+					"rotation": {
+						"vector": [22.5, 0, 10]
+					},
+					"position": {
+						"vector": [-1, 0, 6]
+					}
+				},
+				"leftLeg": {
+					"rotation": {
+						"vector": [22.5, 0, -7.5]
+					},
+					"position": {
+						"vector": [1, 0, 6]
+					}
+				}
+			}
+		}
+	}
+}

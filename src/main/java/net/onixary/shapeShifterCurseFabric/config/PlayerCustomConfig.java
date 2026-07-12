@@ -10,6 +10,15 @@ public class PlayerCustomConfig implements ConfigData {
     @Comment("Enable Auto Sync Config. Default: true")
     public boolean auto_sync_config = true;
 
+    @Comment("Enable Server Side Modify Form Color Data Config. Default: true")
+    public boolean enable_server_modify_FCD_config = true;  // 用于命令 是否运行服务器修改客户端形态颜色数据 在原版程序上只能由用户自身调用修改 但是可能存在修改版的服务端 加一下防护
+
+    @Comment("Enable Form Default Color System. Default: true")
+    public boolean enable_form_default_color_system = true;  // 是否启用形态默认颜色系统 可以用命令/FCS来修改 仅当有数据时发送
+
+    @Comment("Enable Auto Sync Color Config. Default: true")
+    public boolean auto_sync_color_config = true;
+
     @Comment("Keep original skin. Default: false")
     public boolean keep_original_skin = false;
 

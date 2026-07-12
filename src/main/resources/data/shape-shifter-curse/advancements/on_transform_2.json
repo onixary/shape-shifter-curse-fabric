@@ -17,7 +17,13 @@
   "parent": "shape-shifter-curse:on_transform_1",
   "criteria": {
     "on_transform_2": {
-      "trigger": "shape-shifter-curse:on_transform_2"
+      "trigger": "shape-shifter-curse:on_transform_form",
+      "conditions": {
+        "form_tier": [3],
+        "not_flags": [
+          "special_form"
+        ]
+      }
     }
   },
   "requirements": []

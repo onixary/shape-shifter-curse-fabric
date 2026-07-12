@@ -1,0 +1,53 @@
+{
+    "type": "apoli:action_over_time",
+    "entity_action": {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:entity.spider.step",
+        "volume": 0.075
+    },
+    "interval": 10,
+    "condition": {
+        "type": "apoli:or",
+        "conditions": [
+            {
+                "type": "apoli:and",
+                "conditions": [
+                    {
+                        "type": "apoli:moving",
+                        "horizontally": false,
+                        "vertically": true
+                    },
+                    {
+                        "type": "apoli:or",
+                        "conditions": [
+                            {
+                                "type": "apoli:block_collision",
+                                "offset_x": 0.1,
+                                "offset_z": 0.1
+                            },
+                            {
+                                "type": "apoli:block_collision",
+                                "offset_x": -0.1,
+                                "offset_z": -0.1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "apoli:and",
+                "conditions": [
+                    {
+                        "type": "apoli:moving",
+                        "horizontally": true,
+                        "vertically": false
+                    },
+                    {
+                        "type": "apoli:block_collision",
+                        "offset_y": -0.1
+                    }
+                ]
+            }
+        ]
+    }
+}

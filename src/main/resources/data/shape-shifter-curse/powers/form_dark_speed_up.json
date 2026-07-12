@@ -1,5 +1,5 @@
 {
-    "type": "origins:conditioned_attribute",
+    "type": "apoli:conditioned_attribute",
     "modifier": {
         "attribute": "minecraft:generic.movement_speed",
         "operation": "multiply_total",
@@ -8,7 +8,7 @@
     },
     "tick_rate": 20,
     "condition": {
-        "type": "origins:brightness",
+        "type": "apoli:brightness",
         "comparison": "<=",
         "compare_to": 0.25
     }

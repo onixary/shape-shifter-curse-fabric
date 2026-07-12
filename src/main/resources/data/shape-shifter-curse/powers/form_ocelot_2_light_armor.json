@@ -1,70 +1,88 @@
 {
-  "type": "origins:restrict_armor",
+  "type": "apoli:restrict_armor",
   "chest": {
-    "type": "origins:or",
+    "type": "apoli:or",
     "conditions": [
       {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
           "item": "minecraft:leather_chestplate"
         }
       },
       {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
           "item": "minecraft:chainmail_chestplate"
         }
       },
       {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
           "item": "minecraft:elytra"
         }
       },
       {
         "type": "shape-shifter-curse:is_morph_scale_item"
+      },
+      {
+        "type": "apoli:ingredient",
+        "ingredient": {
+          "tag": "shape-shifter-curse:ignore_armor_restriction"
+        }
       }
     ],
     "inverted": true
   },
   "legs": {
-    "type": "origins:or",
+    "type": "apoli:or",
     "conditions": [
       {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
           "item": "minecraft:leather_leggings"
         }
       },
       {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
           "item": "minecraft:chainmail_leggings"
         }
       },
       {
         "type": "shape-shifter-curse:is_morph_scale_item"
+      },
+      {
+        "type": "apoli:ingredient",
+        "ingredient": {
+          "tag": "shape-shifter-curse:ignore_armor_restriction"
+        }
       }
     ],
     "inverted": true
   },
   "feet": {
-    "type": "origins:or",
+    "type": "apoli:or",
     "conditions": [
       {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
           "item": "minecraft:leather_boots"
         }
       },
       {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
           "item": "minecraft:chainmail_boots"
         }
       },
       {
         "type": "shape-shifter-curse:is_morph_scale_item"
+      },
+      {
+        "type": "apoli:ingredient",
+        "ingredient": {
+          "tag": "shape-shifter-curse:ignore_armor_restriction"
+        }
       }
     ],
     "inverted": true

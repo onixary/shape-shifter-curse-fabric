@@ -1,16 +1,15 @@
 {
     "powers": [
-        "shape-shifter-curse:form_ocelot_1_scale",
-        "origins:scare_creepers",
+        "shape-shifter-curse:scare_creepers",
         "shape-shifter-curse:sneaking_speed_up",
-        "origins:fall_immunity",
+        "shape-shifter-curse:fall_immunity",
         "shape-shifter-curse:barehand_attack_up",
         "shape-shifter-curse:form_ocelot_1_health",
         "shape-shifter-curse:form_raw_meat_food_up",
         "shape-shifter-curse:form_carnivore",
         "shape-shifter-curse:form_ocelot_2_light_armor",
         "shape-shifter-curse:sprint_speed_down",
-        "origins:velvet_paws",
+        "shape-shifter-curse:velvet_paws",
         "shape-shifter-curse:form_ocelot_2_climb_wood",
         "shape-shifter-curse:hunger_immunity",
         "shape-shifter-curse:form_ocelot_1_sneaking_jump_far",
@@ -21,7 +20,8 @@
         "shape-shifter-curse:form_ocelot_instinct_eat_raw_meat",
         "shape-shifter-curse:form_ocelot_instinct_biome",
         "shape-shifter-curse:form_ocelot_hiss_phantom",
-        "shape-shifter-curse:form_ocelot_sound_key"
+        "shape-shifter-curse:form_ocelot_sound_key",
+        "shape-shifter-curse:cat_friendly"
     ],
     "icon": {
         "item": "minecraft:player_head"

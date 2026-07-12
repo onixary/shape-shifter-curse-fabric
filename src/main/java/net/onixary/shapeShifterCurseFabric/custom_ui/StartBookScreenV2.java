@@ -12,13 +12,17 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.ScaleScrollTextWidget;
+import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.WidgetEXUtils;
 import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.OptionalInt;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
-public class StartBookScreenV2 extends Screen {
+public class StartBookScreenV2 extends Screen implements WidgetEXUtils.IWidgetEX {
     private static final Identifier StartBook_TexID = new Identifier(MOD_ID,"textures/gui/start_book.png");
     public PlayerEntity currentPlayer;
 
@@ -44,8 +48,9 @@ public class StartBookScreenV2 extends Screen {
         // 渲染文字
         int TextPosX = width / 2 - TextSizeX / 2;
         int TextPosY = height / 2 - TextSizeY / 2 + TextPosYFix;
-        MultilineTextWidget StartBookLabel = new MultilineTextWidget(TextPosX, TextPosY, Text.translatable("screen.shape-shifter-curse.book_of_shape_shifter.start_content_text"), textRenderer);
-        StartBookLabel.setMaxWidth(TextSizeX);
+        ScaleScrollTextWidget StartBookLabel = new ScaleScrollTextWidget(TextPosX, TextPosY, TextSizeX, TextSizeY / 9, 1.0f, Text.translatable("screen.shape-shifter-curse.book_of_shape_shifter.start_content_text"), textRenderer);
+        StartBookLabel.setEnableScrollableIconRender(true);
+        this.addWidget(StartBookLabel);
         this.addDrawableChild(StartBookLabel);
         // 渲染按钮
         int BookBottomY = height / 2 + BookSizeY / 2;
@@ -55,7 +60,7 @@ public class StartBookScreenV2 extends Screen {
                 Text.translatable("screen.shape-shifter-curse.book_of_shape_shifter.start_button_text"),
                 button -> {
                     PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-                    buf.writeUuid(currentPlayer.getUuid());
+                    // buf.writeUuid(currentPlayer.getUuid());
                     // 发送到服务端
                     ClientPlayNetworking.send(ModPackets.VALIDATE_START_BOOK_BUTTON, buf);
                     if(MinecraftClient.getInstance().currentScreen instanceof StartBookScreenV2){
@@ -81,5 +86,42 @@ public class StartBookScreenV2 extends Screen {
     @Override
     public boolean shouldPause() {
         return false;
+    }
+
+
+    @Override
+    public WidgetEXUtils.WidgetRect getRect() {
+        return null;
+    }
+
+    public List<WidgetEXUtils.IWidgetEX> WidgetList = new ArrayList<>();
+
+    @Override
+    public List<WidgetEXUtils.IWidgetEX> getWidgetList() {
+        return this.WidgetList;
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        this.onClickWidget(mouseX, mouseY, button);
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        this.onReleaseWidget(mouseX, mouseY, button);
+        return super.mouseReleased(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
+        this.onDragWidget(mouseX, mouseY, button, deltaX, deltaY);
+        return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double mouseZ) {
+        this.onScrollWidget(mouseX, mouseY, mouseZ);
+        return super.mouseScrolled(mouseX, mouseY, mouseZ);
     }
 }

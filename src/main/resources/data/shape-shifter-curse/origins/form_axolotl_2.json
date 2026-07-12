@@ -1,13 +1,12 @@
 {
     "powers": [
         "shape-shifter-curse:no_render_arm_when_sneaking",
-        "shape-shifter-curse:form_axolotl_2_scale",
         "shape-shifter-curse:form_axolotl_2_water_breathing",
-        "origins:aqua_affinity",
-        "origins:like_water",
-        "origins:aquatic",
+        "shape-shifter-curse:aqua_affinity",
+        "shape-shifter-curse:like_water",
+        "shape-shifter-curse:aquatic",
         "shape-shifter-curse:form_axolotl_1_swim_speed",
-        "shape-shifter-curse:form_axolotl_2_regeneration",
+        "shape-shifter-curse:form_axolotl_2_new_oxygen_regeneration",
         "shape-shifter-curse:form_axolotl_2_dry_speed_down",
         "shape-shifter-curse:form_axolotl_2_new_water_flexibility",
         "shape-shifter-curse:form_axolotl_2_water_spurt",
@@ -18,16 +17,18 @@
         "shape-shifter-curse:form_axolotl_0_new_puff_speed_down",
         "shape-shifter-curse:form_disable_head_armor",
         "shape-shifter-curse:form_carnivore",
-        "shape-shifter-curse:crawling",
+        "shape-shifter-curse:form_axolotl_2_crawling",
         "shape-shifter-curse:form_axolotl_keep_sneaking_when_head_collide",
         "shape-shifter-curse:sneaking_speed_up",
-        "origins:air_from_potions",
+        "shape-shifter-curse:air_from_potions",
         "shape-shifter-curse:air_from_splash_potions",
         "shape-shifter-curse:form_instinct_use_catalyst",
         "shape-shifter-curse:form_instinct_use_golden_apple",
         "shape-shifter-curse:form_axolotl_sound",
         "shape-shifter-curse:form_axolotl_sound_hurt",
-        "shape-shifter-curse:form_axolotl_sound_key"
+        "shape-shifter-curse:form_axolotl_sound_key",
+        "shape-shifter-curse:form_tan_prevent_dirty_water_thirst",
+        "shape-shifter-curse:form_tan_axolotl_thirst_in_water"
     ],
     "icon": {
         "item": "minecraft:player_head"

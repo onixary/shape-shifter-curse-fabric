@@ -1,0 +1,22 @@
+{
+    "type": "shape-shifter-curse:add_sustained_instinct",
+    "instinct_effect_id": "shape-shifter-curse:form_spider_1_cocoon",
+    "value": 0.08,
+    "duration": 1,
+    "condition": {
+      "type": "apoli:block_in_radius",
+      "block_condition": {
+        "type": "apoli:or",
+        "conditions": [
+          {
+            "type": "apoli:block",
+            "block": "shape-shifter-curse:dew_covered_cobweb"
+          }
+        ]
+      },
+      "radius": 1,
+      "shape": "cube",
+      "comparison": ">=",
+      "compare_to": 6
+    }
+}

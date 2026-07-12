@@ -1,15 +1,15 @@
 {
-    "type": "origins:action_over_time",
+    "type": "apoli:action_over_time",
     "entity_action": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "actions": [
             {
-                "type": "origins:add_velocity",
+                "type": "apoli:add_velocity",
                 "z": 0.085,
                 "space": "local_horizontal_normalized"
             },
             {
-                "type": "origins:apply_effect",
+                "type": "apoli:apply_effect",
                 "effect": {
                     "effect": "minecraft:nausea",
                     "amplifier": 1,
@@ -20,33 +20,33 @@
     },
     "interval": 1,
     "condition": {
-        "type": "origins:raycast",
+        "type": "apoli:raycast",
         "distance": 20,
         "block": false,
         "entity": true,
         "shape_type": "visual",
         "fluid_handling": "any",
         "hit_bientity_condition": {
-            "type": "origins:and",
+            "type": "apoli:and",
             "conditions": [
                 {
-                    "type": "origins:target_condition",
+                    "type": "apoli:target_condition",
                     "condition": {
-                        "type": "origins:or",
+                        "type": "apoli:or",
                         "conditions": [
                             {
-                                "type": "origins:entity_type",
+                                "type": "apoli:entity_type",
                                 "entity_type": "minecraft:witch"
                             },
                             {
-                                "type": "origins:entity_type",
+                                "type": "apoli:entity_type",
                                 "entity_type": "minecraft:evoker"
                             }
                         ]
                     }
                 },
                 {
-                    "type": "origins:distance",
+                    "type": "apoli:distance",
                     "comparison": ">=",
                     "compare_to": 1.5
                 }

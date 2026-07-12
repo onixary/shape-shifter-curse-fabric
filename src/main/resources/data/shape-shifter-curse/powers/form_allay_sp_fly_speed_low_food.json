@@ -1,5 +1,5 @@
 {
-    "type": "origins:conditioned_attribute",
+    "type": "apoli:conditioned_attribute",
     "modifier": {
         "attribute": "minecraft:generic.movement_speed",
         "operation": "multiply_total",
@@ -8,13 +8,13 @@
     },
     "tick_rate": 1,
     "condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:creative_flying"
+                "type": "apoli:creative_flying"
             },
             {
-                "type": "origins:food_level",
+                "type": "apoli:food_level",
                 "comparison": "<",
                 "compare_to": 6
             }

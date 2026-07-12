@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "shape-shifter-curse:block/dew_covered_cobweb"
+  }
+}

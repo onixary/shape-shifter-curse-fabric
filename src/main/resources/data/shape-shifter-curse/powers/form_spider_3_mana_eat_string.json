@@ -1,0 +1,19 @@
+{
+  "type": "apoli:action_on_item_use",
+  "entity_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "shape-shifter-curse:gain_mana",
+        "mana": 10
+      }
+    ]
+  },
+  "item_condition": {
+    "type": "apoli:ingredient",
+    "ingredient": {
+      "item": "minecraft:string"
+    }
+  },
+  "trigger": "finish"
+}

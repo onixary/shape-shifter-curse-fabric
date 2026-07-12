@@ -4,6 +4,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimFSM;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,7 +31,7 @@ public class InAirFSM extends AbstractAnimFSM {
         if (player.isFallFlying()) {
             return ANIM_STATE_FALL_FLYING;
         }
-        if (player.getVelocity().getY() < 0 && (animSystemData.playerForm.getHasSlowFall() || player.fallDistance > 0.6f)) {
+        if (player.getVelocity().getY() < 0 && (FormUtils.HasSlowFall.hasFlag(animSystemData.playerForm) || player.fallDistance > 0.6f)) {
             return ANIM_STATE_FALL;
         }
         return ANIM_STATE_JUMP;

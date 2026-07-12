@@ -1,29 +1,29 @@
 {
     "type": "shape-shifter-curse:action_on_jump",
     "entity_action": {
-        "type": "origins:add_velocity",
+        "type": "apoli:add_velocity",
         "z": 0.8,
         "space": "local"
     },
     "entity_condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:sneaking"
+                "type": "apoli:sneaking"
             },
             {
-                "type": "origins:food_level",
+                "type": "apoli:food_level",
                 "comparison": ">=",
                 "compare_to": 6
             },
             {
-                "type": "origins:fluid_height",
+                "type": "apoli:fluid_height",
                 "fluid": "minecraft:water",
                 "comparison": "<=",
                 "compare_to": 0
             },
             {
-                "type": "origins:on_block"
+                "type": "apoli:on_block"
             }
         ]
     }

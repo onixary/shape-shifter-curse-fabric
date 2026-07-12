@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#origins:cobwebs",
+      "required": false
+    },
+    "minecraft:cobweb",
+    "shape-shifter-curse:dew_covered_cobweb"
+  ]
+}

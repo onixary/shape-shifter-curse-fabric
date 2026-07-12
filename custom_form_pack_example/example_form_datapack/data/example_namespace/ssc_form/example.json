@@ -2,23 +2,25 @@
   "__comment__": "具体看PlayerFormBase | See PlayerFormBase for details",
   "FormID": "example_namespace:example",
   "__FormID_comment__": "FormID覆写 **不推荐覆盖**",
-  "groupID": "example_namespace:example_group",
-  "__groupID_comment__": "组ID 用于注册组 与数据包结构相对应 | Group ID used for registering groups, corresponding to the datapack structure",
-  "groupIndex": 5,
-  "__groupIndex_comment__": "组内索引 用于变形逻辑 | Index within group used for transformation logic",
-  "phase": "PHASE_SP",
-  "__Phase_comment__": "变形阶段一般和groupIndex一样 Enum:[PHASE_CLEAR, PHASE_0, PHASE_1, PHASE_2, PHASE_3, PHASE_SP] | Transformation phase usually matches groupIndex. Enum:[PHASE_CLEAR, PHASE_0, PHASE_1, PHASE_2, PHASE_3, PHASE_SP]",
+  "group": "example_namespace:example_group",
+  "__group_comment__": "组ID 用于注册组 与数据包结构相对应 | Group ID used for registering groups, corresponding to the datapack structure",
+  "group_weight": 1,
+  "__group_weight_comment__": "组内权重 用于变形逻辑 | Weight within group used for transformation logic",
+  "tier": 1,
+  "__tier_comment__": "组内阶段 用于变形逻辑 | Tier within group used for transformation logic",
+  "fallback": "shape-shifter-curse:allay_sp",
+  "__fallback_comment__": "回退ID 用于如果未加载资源包 可以回退到特定形态",
   "bodyType": "FERAL",
   "__BodyType_comment__": "身体类型 Enum:[NORMAL, FERAL] | Body type. Enum:[NORMAL, FERAL]",
-  "isCustomForm": true,
   "originID": "example_namespace:form_example",
   "__originID_comment__": "OriginID 与内置的Origin mod联动 与origin_layer的名称相对应 **必须在 data/[NameSpace]/origins 里注册** | OriginID works with the built-in Origin mod, corresponding to the origin layer name. **Must be registered in data/[NameSpace]/origins**",
   "originLayerID": "origins:origin",
   "__originLayerID_comment__": "OriginLayerID 与内置的OriginFur mod联动 **极度不推荐修改** | OriginLayerID works with OriginFur **Highly not recommended to modify**",
-  "hasSlowFall": false,
-  "overrideHandAnim": false,
-  "canSneakRush": false,
-  "canRushJump": false,
+  "flag": [
+    "no_instinct",
+    "no_cursed_moon_effect",
+    "special_form"
+  ],
   "anim": {
     "shape-shifter-curse:idle_state": {
       "controllerType": "shape-shifter-curse:sneak_anim_controller",
@@ -138,8 +140,8 @@
     }
   },
   "__powerAnim_comment__": "powerAnim 动画列表 | powerAnim animation list",
-  "FurModelID": "",
-  "__FurModelID_comment__": "FurModel 为赞助者形态设计 非赞助者形态请修改originID 由于无法动态添加起源",
+  "render_layer": "example_namespace:form_example",
+  "__render_layer_comment__": "为赞助者形态设计 非赞助者形态请修改originID 由于无法动态添加起源",
   "ExtraPower": [
     {
       "type": "origins:attribute",
@@ -151,9 +153,14 @@
       }
     }
   ],
+  "RemovedPower": [
+    "shape-shifter-curse:form_disable_leg_armor",
+    "shape-shifter-curse:form_disable_feet_armor"
+  ],
   "__ExtraPower_comment__": "额外能力 为赞助者形态设计 非赞助者形态请修改originID 由于无法动态添加起源",
   "IsPatronForm": false,
   "__IsPatronForm_comment__": "是否为赞助者形态 为赞助者形态设计 可以使用特殊物品直接变形",
   "PlayerUUID": [],
-  "__PlayerUUID_comment__": "仅个别UUID可使用 为赞助者形态设计 空为全体可用"
+  "__PlayerUUID_comment__": "仅个别UUID可使用 为赞助者形态设计 空为全体可用",
+  "MasterForm": "shape-shifter-curse:feral_cat_sp"
 }

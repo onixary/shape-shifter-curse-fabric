@@ -5,9 +5,10 @@ import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.InstinctUtils;
 
-import static net.onixary.shapeShifterCurseFabric.player_form.instinct.InstinctManager.applyEffect;
 
 public class AddInstinctAction{
 
@@ -22,30 +23,18 @@ public class AddInstinctAction{
             return;
         }
 
-        String EffectID = data.getString("instinct_effect_id");
+        Identifier EffectID = data.getId("instinct_effect_id");
         float EffectValue = data.getFloat("value");
         int EffectDuration = data.getInt("duration");
 
-        applyEffect(playerEntity, EffectID, EffectValue, EffectDuration);
-
-//        try {
-//            effectType = InstinctEffectType.valueOf(data.getString("instinct_effect_type"));
-//        } catch (IllegalArgumentException e) {
-//            // Handle the error, for example, log it or set a default value
-//            ShapeShifterCurseFabric.LOGGER.error("Invalid instinct effect type: " + data.getString("instinct_effect_type") + ", it should be matching the enum InstinctEffectType");
-//        }
-//
-//        if(effectType != null && !effectType.isSustained()) {
-//            ShapeShifterCurseFabric.LOGGER.info("Add immediate instinct action: " + effectType);
-//            applyImmediateEffect((ServerPlayerEntity)entity, effectType);
-//        }
+        InstinctUtils.addInstinctEffect(playerEntity, EffectID, EffectValue, EffectDuration, EffectDuration <= 1);
     }
 
     public static ActionFactory<Entity> getFactory() {
         return new ActionFactory<>(
                 ShapeShifterCurseFabric.identifier("add_instinct"),
                 new SerializableData()
-                        .add("instinct_effect_id", SerializableDataTypes.STRING)
+                        .add("instinct_effect_id", SerializableDataTypes.IDENTIFIER)
                         .add("value", SerializableDataTypes.FLOAT, 0.0f)
                         .add("duration", SerializableDataTypes.INT, 1),
                 AddInstinctAction::action

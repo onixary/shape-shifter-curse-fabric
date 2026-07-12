@@ -4,17 +4,14 @@ import io.github.apace100.apoli.power.factory.action.ActionFactory;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.CTPUtils;
-import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusPotionEffect;
 
 import java.util.function.Consumer;
@@ -32,12 +29,12 @@ public class TransformAction {
                 ShapeShifterCurseFabric.LOGGER.warn("Invalid form_id for TransformAction: {}", formId);
                 return;
             }
-            PlayerFormBase pfb = RegPlayerForms.getPlayerForm(formId);
+            IForm pfb = RegPlayerForms.getPlayerForm(formId);
             if (instant) {
-                TransformManager.setFormDirectly(pe, pfb);
+                TransformManager.immediatelyTransform(pe, pfb);
             }
             else {
-                TransformManager.handleDirectTransform(pe, pfb, false);
+                TransformManager.startTransform(pe, pfb, null);
             }
         }
     }

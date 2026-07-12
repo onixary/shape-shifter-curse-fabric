@@ -1,10 +1,10 @@
 {
     "type": "shape-shifter-curse:add_sustained_instinct",
-    "instinct_effect_id": "FORM_BAT_IN_DARK",
+    "instinct_effect_id": "shape-shifter-curse:form_bat_in_dark",
     "value": 0.004,
     "duration": 1,
     "condition": {
-        "type": "origins:brightness",
+        "type": "apoli:brightness",
         "comparison": "<=",
         "compare_to": 0.25
     }

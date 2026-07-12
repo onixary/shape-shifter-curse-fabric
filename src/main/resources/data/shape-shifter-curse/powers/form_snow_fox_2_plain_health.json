@@ -9,23 +9,23 @@
     "updateHealth": true,
     "delay": 5,
     "condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:and",
+                "type": "apoli:and",
                 "conditions": [
                     {
-                        "type": "origins:biome",
+                        "type": "apoli:biome",
                         "condition": {
-                            "type": "origins:temperature",
+                            "type": "apoli:temperature",
                             "comparison": "<",
                             "compare_to": 1
                         }
                     },
                     {
-                        "type": "origins:biome",
+                        "type": "apoli:biome",
                         "condition": {
-                            "type": "origins:temperature",
+                            "type": "apoli:temperature",
                             "comparison": ">",
                             "compare_to": 0.7
                         }
@@ -33,15 +33,15 @@
                 ]
             },
             {
-                "type": "origins:and",
+                "type": "apoli:and",
                 "conditions": [
                     {
-                        "type": "origins:time_of_day",
+                        "type": "apoli:time_of_day",
                         "comparison": ">=",
                         "compare_to": 1000
                     },
                     {
-                        "type": "origins:time_of_day",
+                        "type": "apoli:time_of_day",
                         "comparison": "<=",
                         "compare_to": 12000
                     }

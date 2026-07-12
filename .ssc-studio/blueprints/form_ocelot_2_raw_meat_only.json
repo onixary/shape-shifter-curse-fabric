@@ -1,0 +1,852 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:form_ocelot_2_raw_meat_only",
+  "updatedAt": "2026-06-09T16:36:48.211Z",
+  "viewport": {
+    "x": -428.71965191485174,
+    "y": -69.40470757866899,
+    "zoom": 1.2187707886145744
+  },
+  "nodes": [
+    {
+      "id": "ast-15",
+      "astNodeId": "ast-15",
+      "type": "origins:modify_food",
+      "kind": "power",
+      "label": "root",
+      "title": "root",
+      "signature": "power|origins:modify_food|root|root",
+      "occurrence": 0,
+      "position": {
+        "x": 80,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-1",
+      "astNodeId": "ast-1",
+      "type": "modifier",
+      "kind": "datatype",
+      "title": "Modifier",
+      "signature": "datatype|modifier||Modifier",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-2",
+      "astNodeId": "ast-2",
+      "type": "modifier",
+      "kind": "datatype",
+      "title": "Modifier",
+      "signature": "datatype|modifier||Modifier",
+      "occurrence": 1,
+      "position": {
+        "x": 586.7180047000085,
+        "y": 291.84653172505716
+      }
+    },
+    {
+      "id": "ast-14",
+      "astNodeId": "ast-14",
+      "type": "origins:and",
+      "kind": "item_condition",
+      "title": "Condition And",
+      "signature": "item_condition|origins:and||Condition And",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 548
+      }
+    },
+    {
+      "id": "ast-7",
+      "astNodeId": "ast-7",
+      "type": "origins:or",
+      "kind": "item_condition",
+      "title": "Item Condition Or",
+      "signature": "item_condition|origins:or||Item Condition Or",
+      "occurrence": 0,
+      "position": {
+        "x": 1100,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-4",
+      "astNodeId": "ast-4",
+      "type": "origins:ingredient",
+      "kind": "item_condition",
+      "title": "ingredient",
+      "signature": "item_condition|origins:ingredient||ingredient",
+      "occurrence": 0,
+      "position": {
+        "x": 1610,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-3",
+      "astNodeId": "ast-3",
+      "type": "ingredient",
+      "kind": "datatype",
+      "title": "Ingredient",
+      "signature": "datatype|ingredient||Ingredient",
+      "occurrence": 0,
+      "position": {
+        "x": 2120,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-6",
+      "astNodeId": "ast-6",
+      "type": "origins:ingredient",
+      "kind": "item_condition",
+      "title": "ingredient",
+      "signature": "item_condition|origins:ingredient||ingredient",
+      "occurrence": 1,
+      "position": {
+        "x": 1610,
+        "y": 314
+      }
+    },
+    {
+      "id": "ast-5",
+      "astNodeId": "ast-5",
+      "type": "ingredient",
+      "kind": "datatype",
+      "title": "Ingredient",
+      "signature": "datatype|ingredient||Ingredient",
+      "occurrence": 1,
+      "position": {
+        "x": 2120,
+        "y": 314
+      }
+    },
+    {
+      "id": "ast-8",
+      "astNodeId": "ast-8",
+      "type": "origins:food",
+      "kind": "item_condition",
+      "title": "food",
+      "signature": "item_condition|origins:food||food",
+      "occurrence": 0,
+      "position": {
+        "x": 1100,
+        "y": 314
+      }
+    },
+    {
+      "id": "ast-10",
+      "astNodeId": "ast-10",
+      "type": "origins:ingredient",
+      "kind": "item_condition",
+      "title": "ingredient",
+      "signature": "item_condition|origins:ingredient||ingredient",
+      "occurrence": 2,
+      "position": {
+        "x": 1100,
+        "y": 548
+      }
+    },
+    {
+      "id": "ast-9",
+      "astNodeId": "ast-9",
+      "type": "ingredient",
+      "kind": "datatype",
+      "title": "Ingredient",
+      "signature": "datatype|ingredient||Ingredient",
+      "occurrence": 2,
+      "position": {
+        "x": 1610,
+        "y": 548
+      }
+    },
+    {
+      "id": "ast-12",
+      "astNodeId": "ast-12",
+      "type": "origins:ingredient",
+      "kind": "item_condition",
+      "title": "ingredient",
+      "signature": "item_condition|origins:ingredient||ingredient",
+      "occurrence": 3,
+      "position": {
+        "x": 1100,
+        "y": 782
+      }
+    },
+    {
+      "id": "ast-11",
+      "astNodeId": "ast-11",
+      "type": "ingredient",
+      "kind": "datatype",
+      "title": "Ingredient",
+      "signature": "datatype|ingredient||Ingredient",
+      "occurrence": 3,
+      "position": {
+        "x": 1610,
+        "y": 782
+      }
+    },
+    {
+      "id": "ast-13",
+      "astNodeId": "ast-13",
+      "type": "shape-shifter-curse:is_morph_scale_food",
+      "kind": "item_condition",
+      "title": "is morph scale food",
+      "signature": "item_condition|shape-shifter-curse:is_morph_scale_food||is morph scale food",
+      "occurrence": 0,
+      "position": {
+        "x": 1100,
+        "y": 1016
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "ast-15",
+        "astNodeId": "ast-15",
+        "type": "origins:modify_food",
+        "kind": "power",
+        "title": "root",
+        "label": "root",
+        "color": "power",
+        "position": {
+          "x": 80,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "food_modifiers",
+            "schema": {
+              "name": "food_modifiers",
+              "valueKind": "datatype_array",
+              "datatype": "modifier",
+              "multi": true
+            },
+            "valueKind": "datatype_array",
+            "displayValue": "Array[1]",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-15:out:food_modifiers"
+          },
+          {
+            "name": "saturation_modifiers",
+            "schema": {
+              "name": "saturation_modifiers",
+              "valueKind": "datatype_array",
+              "datatype": "modifier",
+              "multi": true
+            },
+            "valueKind": "datatype_array",
+            "displayValue": "Array[1]",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-15:out:saturation_modifiers"
+          },
+          {
+            "name": "item_condition",
+            "schema": {
+              "name": "item_condition",
+              "valueKind": "slot",
+              "slotKind": "item_condition"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> Condition And",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-15:out:item_condition"
+          }
+        ]
+      },
+      {
+        "id": "ast-1",
+        "astNodeId": "ast-1",
+        "type": "modifier",
+        "kind": "datatype",
+        "title": "Modifier",
+        "color": "datatype",
+        "position": {
+          "x": 590,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "operation",
+            "schema": {
+              "name": "operation",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "set_total",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-1:out:operation"
+          },
+          {
+            "name": "value",
+            "schema": {
+              "name": "value",
+              "valueKind": "number",
+              "numberKind": "float",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "0",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-1:out:value"
+          }
+        ]
+      },
+      {
+        "id": "ast-2",
+        "astNodeId": "ast-2",
+        "type": "modifier",
+        "kind": "datatype",
+        "title": "Modifier",
+        "color": "datatype",
+        "position": {
+          "x": 586.7180047000085,
+          "y": 291.84653172505716
+        },
+        "fields": [
+          {
+            "name": "operation",
+            "schema": {
+              "name": "operation",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "set_total",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-2:out:operation"
+          },
+          {
+            "name": "value",
+            "schema": {
+              "name": "value",
+              "valueKind": "number",
+              "numberKind": "float",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "0",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-2:out:value"
+          }
+        ]
+      },
+      {
+        "id": "ast-14",
+        "astNodeId": "ast-14",
+        "type": "origins:and",
+        "kind": "item_condition",
+        "title": "Condition And",
+        "color": "condition",
+        "position": {
+          "x": 590,
+          "y": 548
+        },
+        "fields": [
+          {
+            "name": "conditions",
+            "schema": {
+              "name": "conditions",
+              "valueKind": "slot_array",
+              "slotKind": "item_condition",
+              "multi": true,
+              "required": true
+            },
+            "valueKind": "slot_array",
+            "displayValue": "Array[5]",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-14:out:conditions"
+          }
+        ]
+      },
+      {
+        "id": "ast-7",
+        "astNodeId": "ast-7",
+        "type": "origins:or",
+        "kind": "item_condition",
+        "title": "Item Condition Or",
+        "color": "condition",
+        "position": {
+          "x": 1100,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "conditions",
+            "schema": {
+              "name": "conditions",
+              "valueKind": "slot_array",
+              "slotKind": "item_condition",
+              "multi": true,
+              "required": true
+            },
+            "valueKind": "slot_array",
+            "displayValue": "Array[2]",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-7:out:conditions"
+          },
+          {
+            "name": "inverted",
+            "schema": {
+              "name": "inverted",
+              "valueKind": "boolean",
+              "defaultValue": false
+            },
+            "valueKind": "boolean",
+            "displayValue": "true",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-7:out:inverted"
+          }
+        ]
+      },
+      {
+        "id": "ast-4",
+        "astNodeId": "ast-4",
+        "type": "origins:ingredient",
+        "kind": "item_condition",
+        "title": "ingredient",
+        "color": "condition",
+        "position": {
+          "x": 1610,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "ingredient",
+            "schema": {
+              "name": "ingredient",
+              "valueKind": "datatype",
+              "datatype": "ingredient",
+              "required": true
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Ingredient",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-4:out:ingredient"
+          }
+        ]
+      },
+      {
+        "id": "ast-3",
+        "astNodeId": "ast-3",
+        "type": "ingredient",
+        "kind": "datatype",
+        "title": "Ingredient",
+        "color": "datatype",
+        "position": {
+          "x": 2120,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "tag",
+            "schema": {
+              "name": "tag",
+              "valueKind": "string"
+            },
+            "valueKind": "string",
+            "displayValue": "origins:raw_meat",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-3:out:tag"
+          }
+        ]
+      },
+      {
+        "id": "ast-6",
+        "astNodeId": "ast-6",
+        "type": "origins:ingredient",
+        "kind": "item_condition",
+        "title": "ingredient",
+        "color": "condition",
+        "position": {
+          "x": 1610,
+          "y": 314
+        },
+        "fields": [
+          {
+            "name": "ingredient",
+            "schema": {
+              "name": "ingredient",
+              "valueKind": "datatype",
+              "datatype": "ingredient",
+              "required": true
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Ingredient",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-6:out:ingredient"
+          }
+        ]
+      },
+      {
+        "id": "ast-5",
+        "astNodeId": "ast-5",
+        "type": "ingredient",
+        "kind": "datatype",
+        "title": "Ingredient",
+        "color": "datatype",
+        "position": {
+          "x": 2120,
+          "y": 314
+        },
+        "fields": [
+          {
+            "name": "item",
+            "schema": {
+              "name": "item",
+              "valueKind": "string"
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:rotten_flesh",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-5:out:item"
+          }
+        ]
+      },
+      {
+        "id": "ast-8",
+        "astNodeId": "ast-8",
+        "type": "origins:food",
+        "kind": "item_condition",
+        "title": "food",
+        "color": "condition",
+        "position": {
+          "x": 1100,
+          "y": 314
+        },
+        "fields": []
+      },
+      {
+        "id": "ast-10",
+        "astNodeId": "ast-10",
+        "type": "origins:ingredient",
+        "kind": "item_condition",
+        "title": "ingredient",
+        "color": "condition",
+        "position": {
+          "x": 1100,
+          "y": 548
+        },
+        "fields": [
+          {
+            "name": "ingredient",
+            "schema": {
+              "name": "ingredient",
+              "valueKind": "datatype",
+              "datatype": "ingredient",
+              "required": true
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Ingredient",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-10:out:ingredient"
+          },
+          {
+            "name": "inverted",
+            "schema": {
+              "name": "inverted",
+              "valueKind": "boolean",
+              "defaultValue": false
+            },
+            "valueKind": "boolean",
+            "displayValue": "true",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-10:out:inverted"
+          }
+        ]
+      },
+      {
+        "id": "ast-9",
+        "astNodeId": "ast-9",
+        "type": "ingredient",
+        "kind": "datatype",
+        "title": "Ingredient",
+        "color": "datatype",
+        "position": {
+          "x": 1610,
+          "y": 548
+        },
+        "fields": [
+          {
+            "name": "tag",
+            "schema": {
+              "name": "tag",
+              "valueKind": "string"
+            },
+            "valueKind": "string",
+            "displayValue": "origins:ignore_diet",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-9:out:tag"
+          }
+        ]
+      },
+      {
+        "id": "ast-12",
+        "astNodeId": "ast-12",
+        "type": "origins:ingredient",
+        "kind": "item_condition",
+        "title": "ingredient",
+        "color": "condition",
+        "position": {
+          "x": 1100,
+          "y": 782
+        },
+        "fields": [
+          {
+            "name": "ingredient",
+            "schema": {
+              "name": "ingredient",
+              "valueKind": "datatype",
+              "datatype": "ingredient",
+              "required": true
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Ingredient",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-12:out:ingredient"
+          },
+          {
+            "name": "inverted",
+            "schema": {
+              "name": "inverted",
+              "valueKind": "boolean",
+              "defaultValue": false
+            },
+            "valueKind": "boolean",
+            "displayValue": "true",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-12:out:inverted"
+          }
+        ]
+      },
+      {
+        "id": "ast-11",
+        "astNodeId": "ast-11",
+        "type": "ingredient",
+        "kind": "datatype",
+        "title": "Ingredient",
+        "color": "datatype",
+        "position": {
+          "x": 1610,
+          "y": 782
+        },
+        "fields": [
+          {
+            "name": "tag",
+            "schema": {
+              "name": "tag",
+              "valueKind": "string"
+            },
+            "valueKind": "string",
+            "displayValue": "shape-shifter-curse:ignore_vc_eat",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-11:out:tag"
+          }
+        ]
+      },
+      {
+        "id": "ast-13",
+        "astNodeId": "ast-13",
+        "type": "shape-shifter-curse:is_morph_scale_food",
+        "kind": "item_condition",
+        "title": "is morph scale food",
+        "color": "condition",
+        "position": {
+          "x": 1100,
+          "y": 1016
+        },
+        "fields": [
+          {
+            "name": "inverted",
+            "schema": {
+              "name": "inverted",
+              "valueKind": "boolean",
+              "defaultValue": false
+            },
+            "valueKind": "boolean",
+            "displayValue": "true",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-13:out:inverted"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "ast-15:food_modifiers:0->ast-1",
+        "source": "ast-15",
+        "target": "ast-1",
+        "sourceHandle": "ast-15:out:food_modifiers",
+        "targetHandle": "ast-1:in",
+        "fieldName": "food_modifiers",
+        "color": "datatype",
+        "order": 0
+      },
+      {
+        "id": "ast-15:saturation_modifiers:0->ast-2",
+        "source": "ast-15",
+        "target": "ast-2",
+        "sourceHandle": "ast-15:out:saturation_modifiers",
+        "targetHandle": "ast-2:in",
+        "fieldName": "saturation_modifiers",
+        "color": "datatype",
+        "order": 0
+      },
+      {
+        "id": "ast-4:ingredient->ast-3",
+        "source": "ast-4",
+        "target": "ast-3",
+        "sourceHandle": "ast-4:out:ingredient",
+        "targetHandle": "ast-3:in",
+        "fieldName": "ingredient",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-7:conditions:0->ast-4",
+        "source": "ast-7",
+        "target": "ast-4",
+        "sourceHandle": "ast-7:out:conditions",
+        "targetHandle": "ast-4:in",
+        "fieldName": "conditions",
+        "color": "condition",
+        "order": 0
+      },
+      {
+        "id": "ast-6:ingredient->ast-5",
+        "source": "ast-6",
+        "target": "ast-5",
+        "sourceHandle": "ast-6:out:ingredient",
+        "targetHandle": "ast-5:in",
+        "fieldName": "ingredient",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-7:conditions:1->ast-6",
+        "source": "ast-7",
+        "target": "ast-6",
+        "sourceHandle": "ast-7:out:conditions",
+        "targetHandle": "ast-6:in",
+        "fieldName": "conditions",
+        "color": "condition",
+        "order": 1
+      },
+      {
+        "id": "ast-14:conditions:0->ast-7",
+        "source": "ast-14",
+        "target": "ast-7",
+        "sourceHandle": "ast-14:out:conditions",
+        "targetHandle": "ast-7:in",
+        "fieldName": "conditions",
+        "color": "condition",
+        "order": 0
+      },
+      {
+        "id": "ast-14:conditions:1->ast-8",
+        "source": "ast-14",
+        "target": "ast-8",
+        "sourceHandle": "ast-14:out:conditions",
+        "targetHandle": "ast-8:in",
+        "fieldName": "conditions",
+        "color": "condition",
+        "order": 1
+      },
+      {
+        "id": "ast-10:ingredient->ast-9",
+        "source": "ast-10",
+        "target": "ast-9",
+        "sourceHandle": "ast-10:out:ingredient",
+        "targetHandle": "ast-9:in",
+        "fieldName": "ingredient",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-14:conditions:2->ast-10",
+        "source": "ast-14",
+        "target": "ast-10",
+        "sourceHandle": "ast-14:out:conditions",
+        "targetHandle": "ast-10:in",
+        "fieldName": "conditions",
+        "color": "condition",
+        "order": 2
+      },
+      {
+        "id": "ast-12:ingredient->ast-11",
+        "source": "ast-12",
+        "target": "ast-11",
+        "sourceHandle": "ast-12:out:ingredient",
+        "targetHandle": "ast-11:in",
+        "fieldName": "ingredient",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-14:conditions:3->ast-12",
+        "source": "ast-14",
+        "target": "ast-12",
+        "sourceHandle": "ast-14:out:conditions",
+        "targetHandle": "ast-12:in",
+        "fieldName": "conditions",
+        "color": "condition",
+        "order": 3
+      },
+      {
+        "id": "ast-14:conditions:4->ast-13",
+        "source": "ast-14",
+        "target": "ast-13",
+        "sourceHandle": "ast-14:out:conditions",
+        "targetHandle": "ast-13:in",
+        "fieldName": "conditions",
+        "color": "condition",
+        "order": 4
+      },
+      {
+        "id": "ast-15:item_condition->ast-14",
+        "source": "ast-15",
+        "target": "ast-14",
+        "sourceHandle": "ast-15:out:item_condition",
+        "targetHandle": "ast-14:in",
+        "fieldName": "item_condition",
+        "color": "condition"
+      }
+    ]
+  }
+}

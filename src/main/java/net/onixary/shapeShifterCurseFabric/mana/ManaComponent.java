@@ -3,6 +3,8 @@ package net.onixary.shapeShifterCurseFabric.mana;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.sync.PlayerSyncPredicate;
 import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -149,7 +151,7 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
             return;
         }
         this.ManaTypeID = manaTypeID;
-        if (ClientUtils.IsNowPlayingPlayer(this.player)) {
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT && this.player == ClientUtils.getPlayer()) {
             LocalManaTypeID = this.ManaTypeID;
         }
         this.MaxManaModifier.clear();
@@ -246,7 +248,7 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
             this.ManaTypeID = null;
         }
         this.__reloadManaHandler__(this.ManaTypeID);
-        if (ClientUtils.IsNowPlayingPlayer(this.player)) {
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT && this.player == ClientUtils.getPlayer()) {
             LocalManaTypeID = this.ManaTypeID;
         }
         MaxManaClient = nbtCompound.getDouble("MaxMana");
@@ -279,6 +281,22 @@ public class ManaComponent implements AutoSyncedComponent, PlayerComponent<ManaC
                 }
             }
         }
+        this.Dirty = true;
+    }
+
+    public void clear() {
+        this.ManaTypeID = null;
+        this.ManaBeforeRegen = 0.0d;
+        this.Mana = 0.0d;
+        this.MaxManaClient = 0.0d;
+        this.ManaRegenClient = 0.0d;
+        this.tempRegen = 0.0d;
+        this.tempRegenTime = 0;
+        this.ManaTypeSourceMap.clear();
+        this.MaxManaModifier.clear();
+        this.MaxManaModifierPlayerSide.clear();
+        this.ManaRegenModifier.clear();
+        this.ManaRegenModifierPlayerSide.clear();
         this.Dirty = true;
     }
 

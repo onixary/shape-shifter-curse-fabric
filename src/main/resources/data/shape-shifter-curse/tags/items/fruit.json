@@ -1,0 +1,90 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:apple",
+    "minecraft:chorus_fruit",
+    "minecraft:glow_berries",
+    "minecraft:melon_slice",
+    "minecraft:sweet_berries",
+    {
+      "id": "farmersdelight:apple_pie",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:apple_pie_slice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:fruit_salad",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:glow_berry_custard",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:melon_popsicle",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:sweet_berry_cheesecake",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:sweet_berry_cheesecake_slice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:sweet_berry_cookie",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:tomato",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:tomato_sauce",
+      "required": false
+    },
+    {
+      "id": "vinery:red_grape",
+      "required": false
+    },
+    {
+      "id": "vinery:white_grape",
+      "required": false
+    },
+    {
+      "id": "vinery:savanna_grapes_red",
+      "required": false
+    },
+    {
+      "id": "vinery:savanna_grapes_white",
+      "required": false
+    },
+    {
+      "id": "vinery:taiga_grapes_red",
+      "required": false
+    },
+    {
+      "id": "vinery:taiga_grapes_white",
+      "required": false
+    },
+    {
+      "id": "vinery:jungle_grapes_red",
+      "required": false
+    },
+    {
+      "id": "vinery:jungle_grapes_white",
+      "required": false
+    },
+    {
+      "id":"vinery:cherry",
+      "required":false
+    },
+    {
+      "id": "farm_and_charm:strawberry",
+      "required": false
+    }
+  ]
+}

@@ -48,6 +48,22 @@ public class ModifyStepHeightPower extends Power {
         }
     }
 
+    @Override
+    public void onRemoved() {
+        super.onRemoved();
+        ScaleData scaleDataStepHeight = ScaleTypes.STEP_HEIGHT.getScaleData(entity);
+        scaleDataStepHeight.setScale(1.0f);
+        scaleDataStepHeight.setPersistence(true);
+    }
+
+    @Override
+    public void onLost() {
+        super.onRemoved();
+        ScaleData scaleDataStepHeight = ScaleTypes.STEP_HEIGHT.getScaleData(entity);
+        scaleDataStepHeight.setScale(1.0f);
+        scaleDataStepHeight.setPersistence(true);
+    }
+
     public boolean shouldAffectSneak() {
         return affectSneak;
     }

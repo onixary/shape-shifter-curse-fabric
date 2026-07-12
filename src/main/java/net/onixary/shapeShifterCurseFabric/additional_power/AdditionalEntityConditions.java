@@ -12,7 +12,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registry;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.util.AttackEntityDataTracker;
@@ -21,10 +20,11 @@ import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 public class AdditionalEntityConditions {
     public static void register() {
         register(DiggingBareHandCondition.getFactory());
+        register(InstinctValueCondition.getFactory());
         register(ChanceCondition.getFactory());
         register(JumpEventCondition.getFactory());
         register(MustCrawlingCondition.getFactory());
-        TrinketsCondition.registerCondition(AdditionalEntityConditions::register);
+        TrinketsConditionAction.registerCondition(AdditionalEntityConditions::register);
         ManaUtilsApoli.registerCondition(AdditionalEntityConditions::register);
         register(new ConditionFactory<Entity>(
                 ShapeShifterCurseFabric.identifier("can_render_gui"),
@@ -83,6 +83,18 @@ public class AdditionalEntityConditions {
                     return false;
                 }
         ));
+        register(new ConditionFactory<Entity>(
+                ShapeShifterCurseFabric.identifier("is_sleep"),
+                new SerializableData(),
+                (data, e) -> {
+                    if (e instanceof PlayerEntity player) {
+                        return player.isSleeping();
+                    }
+                    return false;
+                }
+        ));
+        ItemStorePower.registerCondition(AdditionalEntityConditions::register);
+        ItemCooldownCA.registerCondition(AdditionalEntityConditions::register);
     }
 
     private static void register(ConditionFactory<Entity> conditionFactory) {

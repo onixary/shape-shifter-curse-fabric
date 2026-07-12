@@ -1,7 +1,7 @@
 {
-    "type": "origins:active_self",
+    "type": "apoli:active_self",
     "entity_action": {
-        "type": "origins:add_velocity",
+        "type": "apoli:add_velocity",
         "z": 0.25,
         "space": "local"
     },
@@ -14,13 +14,13 @@
         "continuous": false
     },
     "condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:sneaking"
+                "type": "apoli:sneaking"
             },
             {
-                "type": "origins:food_level",
+                "type": "apoli:food_level",
                 "comparison": ">=",
                 "compare_to": 6
             }

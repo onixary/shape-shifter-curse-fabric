@@ -1,0 +1,22 @@
+{
+    "type": "apoli:action_over_time",
+    "entity_action": {
+        "type": "apoli:and",
+        "actions": [
+            {
+                "type": "apoli:spawn_particles",
+                "particle": "minecraft:enchant",
+                "count": 1,
+                "speed": 0.0,
+                "force": false,
+                "spread": {
+                    "x": 0.8,
+                    "y": 0.3,
+                    "z": 0.8
+                },
+                "offset_y" : 1
+            }
+        ]
+    },
+    "interval": 4
+}

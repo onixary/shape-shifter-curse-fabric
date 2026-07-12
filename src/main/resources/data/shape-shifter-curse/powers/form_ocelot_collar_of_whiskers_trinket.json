@@ -1,5 +1,5 @@
 {
-  "type": "origins:multiple",
+  "type": "apoli:multiple",
 
   "dodge_arrow_plus": {
     "type": "shape-shifter-curse:projectile_dodge",
@@ -8,17 +8,17 @@
     "dodge_speed": 2,
     "cooldown": 20,
     "entity_condition": {
-      "type": "origins:on_block"
+      "type": "apoli:on_block"
     },
     "action": {
-      "type": "origins:and",
+      "type": "apoli:and",
       "actions": [
         {
-          "type": "origins:play_sound",
+          "type": "apoli:play_sound",
           "sound": "minecraft:entity.goat.long_jump"
         },
         {
-          "type": "origins:apply_effect",
+          "type": "apoli:apply_effect",
           "effect": {
             "effect": "minecraft:regeneration",
             "duration": 102,

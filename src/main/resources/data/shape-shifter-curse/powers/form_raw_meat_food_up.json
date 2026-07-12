@@ -1,5 +1,5 @@
 {
-    "type": "origins:modify_food",
+    "type": "apoli:modify_food",
     "food_modifiers": [
         {
             "name": "increase food points",
@@ -25,9 +25,9 @@
         }
     ],
     "item_condition": {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
-            "tag": "origins:raw_meat"
+            "tag": "shape-shifter-curse:raw_meat"
         }
     }
 }

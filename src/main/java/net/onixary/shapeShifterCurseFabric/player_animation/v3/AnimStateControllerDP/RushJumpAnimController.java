@@ -21,7 +21,7 @@ public class RushJumpAnimController extends AbstractAnimStateControllerDP {
         super(jsonData);
     }
 
-    public RushJumpAnimController(@Nullable AnimUtils.AnimationHolderData animationHolderData, @Nullable AnimUtils.AnimationHolderData sneakAnimationHolderData, AnimUtils.AnimationHolderData rushJumpAnimationHolderData, AnimUtils.AnimationHolderData sneakRushJumpAnimationHolder) {
+    public RushJumpAnimController(@Nullable AnimUtils.AnimationHolderData animationHolderData, @Nullable AnimUtils.AnimationHolderData sneakAnimationHolderData, AnimUtils.AnimationHolderData rushJumpAnimationHolderData, AnimUtils.AnimationHolderData sneakRushJumpAnimationHolderData) {
         super();
         this.animationHolderData = AnimUtils.ensureAnimHolderDataNotNull(animationHolderData);
         this.sneakAnimationHolderData = AnimUtils.ensureAnimHolderDataNotNull(sneakAnimationHolderData);

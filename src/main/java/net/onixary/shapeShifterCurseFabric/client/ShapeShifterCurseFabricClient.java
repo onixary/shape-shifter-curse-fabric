@@ -8,10 +8,8 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderProgram;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.VertexFormats;
@@ -21,14 +19,18 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.CustomEdiblePower;
+import net.onixary.shapeShifterCurseFabric.additional_power.ItemStorePower;
 import net.onixary.shapeShifterCurseFabric.additional_power.LevitatePower;
+import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
+import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoonClient;
 import net.onixary.shapeShifterCurseFabric.custom_ui.BookOfShapeShifterScreenV2_P1;
 import net.onixary.shapeShifterCurseFabric.custom_ui.StartBookScreenV2;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
+import net.onixary.shapeShifterCurseFabric.entity.RegCustomEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TAxolotlEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.BatEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TOcelotEntityRenderer;
-import net.onixary.shapeShifterCurseFabric.integration.origins.Origins;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.spider.TSpiderEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.armors.MorphscaleArmorRenderer;
 import net.onixary.shapeShifterCurseFabric.items.armors.NetheriteMorphscaleArmorRenderer;
@@ -37,14 +39,14 @@ import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 import net.onixary.shapeShifterCurseFabric.minion.MinionRegisterClient;
 import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
-import net.onixary.shapeShifterCurseFabric.player_animation.RegPlayerAnimation;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.InstinctUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
+import net.onixary.shapeShifterCurseFabric.render.form_render.FormRenderUtils;
 import net.onixary.shapeShifterCurseFabric.render.render_layer.FurGradientRenderLayer;
-import net.onixary.shapeShifterCurseFabric.util.ClientTicker;
-import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
-import net.onixary.shapeShifterCurseFabric.util.TickManager;
+import net.onixary.shapeShifterCurseFabric.util.*;
+import net.onixary.shapeShifterCurseFabric.util.Verify.AuthClient;
 import org.lwjgl.glfw.GLFW;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -56,6 +58,8 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 	//public static final EntityModelLayer T_AXOLOTL_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_axolotl"), "main");
 	//public static final EntityModelLayer T_OCELOT_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_ocelot"), "main");
 
+	public static final FormColorData formColorData = new FormColorData();
+
 	public static MinecraftClient getClient() {
 		return MinecraftClient.getInstance();
 	}
@@ -63,72 +67,26 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 
 	public static KeyBinding toggleClipAtLedge;
 	public static KeyBinding makeSound;
+	public static KeyBinding useActiveSkill1PowerKeybind;
+	public static KeyBinding useActiveSkill2PowerKeybind;
+	public static KeyBinding useActiveSkill3PowerKeybind;
+	public static KeyBinding useActiveSkill4PowerKeybind;
 
 	private static boolean toggleClipAtLedgeIsPressed = false;
 	public static boolean isClipAtLedge = true;
 
 	public static void openBookScreen(PlayerEntity user) {
-		// 仅当owo_lib加载时才能调用旧版页面，否则回退回新版
-		if (commonConfig.enableNewStartBook | !FabricLoader.getInstance().isModLoaded("owo")) {
-			if (!commonConfig.enableNewStartBook) {
-				// 以未安装owo_lib为理由进入新版页面时打印日志
-				LOGGER.error("Owo lib is not installed! Old book screen is unavailable, opening new book screen instead.");
-			}
-			if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreenV2_P1)) {
-				BookOfShapeShifterScreenV2_P1 bookScreen = new BookOfShapeShifterScreenV2_P1();
-				bookScreen.currentPlayer = user;
-				MinecraftClient.getInstance().setScreen(bookScreen);
-			}
-		}
-		else {
-			// 反射
-			try {
-				Class<?> ScreenClass = Class.forName("net.onixary.shapeShifterCurseFabric.custom_ui.BookOfShapeShifterScreen");
-				Object startScreen = ScreenClass.getDeclaredConstructor().newInstance();
-				startScreen.getClass().getMethod("setCurrentPlayer", PlayerEntity.class).invoke(startScreen, user);
-				MinecraftClient.getInstance().setScreen((Screen) startScreen);
-			}
-			catch (ClassNotFoundException | InvocationTargetException | IllegalAccessException | InstantiationException | NoSuchMethodException e) {
-				LOGGER.error("Failed to open old book screen!");
-				return;
-			}
-//			if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreen)) {
-//				BookOfShapeShifterScreen bookScreen = new BookOfShapeShifterScreen();
-//				bookScreen.currentPlayer = user;
-//				MinecraftClient.getInstance().setScreen(bookScreen);
-//			}
+		if (!(MinecraftClient.getInstance().currentScreen instanceof BookOfShapeShifterScreenV2_P1)) {
+			BookOfShapeShifterScreenV2_P1 bookScreen = new BookOfShapeShifterScreenV2_P1();
+			bookScreen.currentPlayer = user;
+			MinecraftClient.getInstance().setScreen(bookScreen);
 		}
 	}
 	public static void openStartBookScreen(PlayerEntity user) {
-		// 仅当owo_lib加载时才能调用旧版页面，否则回退回新版
-		if (commonConfig.enableNewStartBook | !FabricLoader.getInstance().isModLoaded("owo")) {
-			if (!commonConfig.enableNewStartBook) {
-				// 以未安装owo_lib为理由进入新版页面时打印日志
-				LOGGER.error("Owo lib is not installed! Old book screen is unavailable, opening new book screen instead.");
-			}
-			if (!(MinecraftClient.getInstance().currentScreen instanceof StartBookScreenV2)) {
-				StartBookScreenV2 startScreen = new StartBookScreenV2();
-				startScreen.currentPlayer = user;
-				MinecraftClient.getInstance().setScreen(startScreen);
-			}
-		}
-		else {
-			// 反射
-			try {
-				Class<?> ScreenClass = Class.forName("net.onixary.shapeShifterCurseFabric.custom_ui.StartBookScreen");
-				Object startScreen = ScreenClass.getDeclaredConstructor().newInstance();
-				startScreen.getClass().getMethod("setCurrentPlayer", PlayerEntity.class).invoke(startScreen, user);
-				MinecraftClient.getInstance().setScreen((Screen) startScreen);
-			}
-			catch (ClassNotFoundException | InvocationTargetException | IllegalAccessException | InstantiationException | NoSuchMethodException e) {
-				LOGGER.error("Failed to open old book screen!");
-				return;
-			}
-//			if (!(MinecraftClient.getInstance().currentScreen instanceof StartBookScreen)) {
-//				StartBookScreen startScreen = new StartBookScreen();
-//				startScreen.currentPlayer = user;
-//				MinecraftClient.getInstance().setScreen(startScreen);
-//			}
+		if (!(MinecraftClient.getInstance().currentScreen instanceof StartBookScreenV2)) {
+			StartBookScreenV2 startScreen = new StartBookScreenV2();
+			startScreen.currentPlayer = user;
+			MinecraftClient.getInstance().setScreen(startScreen);
 		}
 	}
 
@@ -137,6 +95,8 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		EntityRendererRegistry.register(T_AXOLOTL, TAxolotlEntityRenderer::new);
 		EntityRendererRegistry.register(T_OCELOT, TOcelotEntityRenderer::new);
 		EntityRendererRegistry.register(T_WOLF, AnubisWolfMinionEntityRenderer::new);
+		EntityRendererRegistry.register(T_SPIDER, TSpiderEntityRenderer::new);
+
 		MinionRegisterClient.registerClient();
 	}
 
@@ -164,9 +124,13 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 			return;
 		}
 		// Mana System
+		TransformManager.clientTick();
+		CursedMoonClient.clientTick(minecraftClient.world);
+		InstinctUtils.clientTick();
 		if (!MinecraftClient.getInstance().isPaused()) {
 			ManaUtils.manaTick(minecraftClient.player);
 		}
+		PowerHolderComponent.getPowers(clientPlayer, ItemStorePower.class).forEach(ItemStorePower::clientTick);
 	}
 
 	public static void emitTransformParticle(int duration) {
@@ -278,7 +242,6 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		RegPlayerAnimation.register();
 		registerEntityModels();
 		ModPacketsS2C.register();
 
@@ -287,6 +250,11 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
         registerAzureArmorGeo();
 
 		ManaRegistriesClient.register();
+		RegCustomEntityRenderer.init();
+
+		FormRenderUtils.onClientInit();
+
+		formColorData.loadFormConfig();
 
 		ClientTickEvents.END_CLIENT_TICK.register(ShapeShifterCurseFabricClient::onClientTick);
 		// 客户端能力处理
@@ -311,6 +279,21 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		KeyBindingHelper.registerKeyBinding(makeSound);
 		toggleClipAtLedge = new KeyBinding("key.shape-shifter-curse.toggle_clip_at_ledge", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + MOD_ID);
 		KeyBindingHelper.registerKeyBinding(toggleClipAtLedge);
+
+		// 4个技能按键基本够用了 一般Mod的常用技能一般也是4个 后续如果还要加按键 可以做成轮盘(应该可以虚拟触发按键 反正只用触发Apoli的就行)等压缩按键形式 然后这些按键可以当做快捷触发键使用
+		useActiveSkill1PowerKeybind = new KeyBinding("key.shape-shifter-curse.active_skill_1", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + ShapeShifterCurseFabric.MOD_ID);
+		useActiveSkill2PowerKeybind = new KeyBinding("key.shape-shifter-curse.active_skill_2", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + ShapeShifterCurseFabric.MOD_ID);
+		useActiveSkill3PowerKeybind = new KeyBinding("key.shape-shifter-curse.active_skill_3", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + ShapeShifterCurseFabric.MOD_ID);
+		useActiveSkill4PowerKeybind = new KeyBinding("key.shape-shifter-curse.active_skill_4", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + ShapeShifterCurseFabric.MOD_ID);
+		ApoliClient.registerPowerKeybinding("key.shape-shifter-curse.active_skill_1", useActiveSkill1PowerKeybind);
+		ApoliClient.registerPowerKeybinding("key.shape-shifter-curse.active_skill_2", useActiveSkill2PowerKeybind);
+		ApoliClient.registerPowerKeybinding("key.shape-shifter-curse.active_skill_3", useActiveSkill3PowerKeybind);
+		ApoliClient.registerPowerKeybinding("key.shape-shifter-curse.active_skill_4", useActiveSkill4PowerKeybind);
+		KeyBindingHelper.registerKeyBinding(useActiveSkill1PowerKeybind);
+		KeyBindingHelper.registerKeyBinding(useActiveSkill2PowerKeybind);
+		KeyBindingHelper.registerKeyBinding(useActiveSkill3PowerKeybind);
+		KeyBindingHelper.registerKeyBinding(useActiveSkill4PowerKeybind);
+
 		ClientTickEvents.END_CLIENT_TICK.register((client) -> {
 			if (toggleClipAtLedge.isPressed()) {
 				if (!toggleClipAtLedgeIsPressed) {
@@ -325,7 +308,9 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 			}
 		});
 
+		RegCustomBlock.ClientInit();
 		PatronUtils.OnClientInit();
+		AuthClient.init();
 	}
 
 	public static ShaderProgram getFurGradientShader() {

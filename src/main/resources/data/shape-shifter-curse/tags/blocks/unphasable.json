@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#origins:unphasable",
+      "required": false
+    },
+    "minecraft:barrier",
+    "minecraft:bedrock",
+    "minecraft:crying_obsidian",
+    "minecraft:obsidian"
+  ]
+}

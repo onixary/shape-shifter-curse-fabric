@@ -172,8 +172,8 @@ def selectMaskProgram(CanSplit: bool = True, CanMerge: bool = True) -> typing.Op
 	for Index, MaskProgram in enumerate(CanSelectableMaskProgram):
 		print("[%d]: %s" % (Index, MaskProgram))
 	Select = int(input("请选择: "))
-	if Select < len(AllMaskProgramRegistry):
-		return list(AllMaskProgramRegistry.keys())[Select]
+	if Select < len(CanSelectableMaskProgram):
+		return CanSelectableMaskProgram[Select]
 	else:
 		return None
 

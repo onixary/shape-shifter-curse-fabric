@@ -1,22 +1,22 @@
 {
-  "type": "origins:multiple",
+  "type": "apoli:multiple",
 
   "damage_on_block_break": {
-    "type": "origins:action_on_block_break",
+    "type": "apoli:action_on_block_break",
     "entity_action": {
-      "type": "origins:equipped_item_action",
+      "type": "apoli:equipped_item_action",
       "equipment_slot": "mainhand",
       "action": {
-        "type": "origins:damage",
+        "type": "apoli:damage",
         "amount": 1,
         "ignore_unbreaking": false
       }
     },
     "condition": {
-      "type": "origins:inventory",
+      "type": "apoli:inventory",
       "process_mode": "items",
       "item_condition": {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
           "item": "shape-shifter-curse:diamond_mining_claw"
         }
@@ -29,21 +29,21 @@
   },
 
   "damage_on_attack_entity": {
-    "type": "origins:self_action_on_hit",
+    "type": "apoli:self_action_on_hit",
     "entity_action": {
-      "type": "origins:equipped_item_action",
+      "type": "apoli:equipped_item_action",
       "equipment_slot": "mainhand",
       "action": {
-        "type": "origins:damage",
+        "type": "apoli:damage",
         "amount": 2,
         "ignore_unbreaking": false
       }
     },
     "condition": {
-      "type": "origins:inventory",
+      "type": "apoli:inventory",
       "process_mode": "items",
       "item_condition": {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
           "item": "shape-shifter-curse:diamond_mining_claw"
         }

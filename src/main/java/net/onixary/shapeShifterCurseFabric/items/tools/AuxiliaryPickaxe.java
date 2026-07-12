@@ -1,0 +1,23 @@
+package net.onixary.shapeShifterCurseFabric.items.tools;
+
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.item.*;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+
+
+public class AuxiliaryPickaxe extends PickaxeItem {
+
+    public AuxiliaryPickaxe(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
+        super(material, attackDamage, attackSpeed, settings);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable("item.shape-shifter-curse.auxiliary_pickaxe.tooltip").formatted(Formatting.YELLOW));
+    }
+}

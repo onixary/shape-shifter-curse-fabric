@@ -3,7 +3,7 @@ package net.onixary.shapeShifterCurseFabric.player_animation.form_animation;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
@@ -17,7 +17,7 @@ public class AnimationTransform {
     private static AnimationHolder anim_on_transform_feral_to_normal = AnimationHolder.EMPTY;
 
 
-    public static AnimationHolder getFormAnimToPlay(PlayerFormBase curForm, PlayerFormBase toForm) {
+    public static AnimationHolder getFormAnimToPlay(IForm curForm, IForm toForm) {
         // 适配Feral，根据当前形态和目标形态返回对应的动画
         // 添加null捕获防止恶性bug
         if(curForm == null || toForm == null){

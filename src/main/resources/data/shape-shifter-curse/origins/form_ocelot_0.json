@@ -1,7 +1,6 @@
 {
     "powers": [
-        "shape-shifter-curse:form_ocelot_0_scale",
-        "origins:scare_creepers",
+        "shape-shifter-curse:scare_creepers",
         "shape-shifter-curse:sneaking_speed_up_low",
         "shape-shifter-curse:form_ocelot_0_health",
         "shape-shifter-curse:form_vegetarian_food_down",

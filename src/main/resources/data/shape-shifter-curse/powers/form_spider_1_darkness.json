@@ -1,0 +1,14 @@
+{
+  "type": "apoli:action_over_time",
+  "entity_action": {
+    "type": "apoli:apply_effect",
+    "effect": {
+      "effect": "minecraft:darkness",
+      "duration": 100,
+      "amplifier": 0,
+      "show_particles": false,
+      "show_icon": false
+    }
+  },
+  "interval": 40
+}

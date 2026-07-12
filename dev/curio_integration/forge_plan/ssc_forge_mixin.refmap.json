@@ -1,0 +1,14 @@
+{
+  "mappings": {
+    "net/onixary/shapeShifterCurseFabric/mixin/forge/CurioItemImpl": {
+      "tick": "Lnet/minecraft/world/entity/LivingEntity;m_8119_()V"
+    }
+  },
+  "data": {
+    "searge": {
+      "net/onixary/shapeShifterCurseFabric/mixin/forge/CurioItemImpl": {
+        "tick": "Lnet/minecraft/world/entity/LivingEntity;m_8119_()V"
+      }
+    }
+  }
+}

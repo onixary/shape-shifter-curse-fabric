@@ -1,7 +1,7 @@
 {
-  "type": "origins:modify_damage_dealt",
+  "type": "apoli:modify_damage_dealt",
   "bientity_condition": {
-    "type": "origins:owner"
+    "type": "apoli:owner"
   },
   "modifier": {
     "operation": "multiply_total",

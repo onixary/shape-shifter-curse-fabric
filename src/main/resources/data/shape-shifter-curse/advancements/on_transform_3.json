@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "title": {
+      "translate": "advancements.shape-shifter-curse.on_transform_3.title"
+    },
+    "description": {
+      "translate": "advancements.shape-shifter-curse.on_transform_3.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "shape-shifter-curse:on_transform_2",
+  "criteria": {
+    "on_transform_3": {
+      "trigger": "shape-shifter-curse:on_transform_form",
+      "conditions": {
+        "form_tier": [4],
+        "not_flags": [
+          "special_form"
+        ]
+      }
+    }
+  },
+  "requirements": []
+}

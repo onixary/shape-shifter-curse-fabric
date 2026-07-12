@@ -124,13 +124,17 @@
   },
   "FurModelID": "ssc-patron:form_example",
   "ExtraPower": [
+    {
+      "type": "shape-shifter-curse:scale",
+      "scale": 0.55,
+      "eye_scale": 0.6
+    },
     "shape-shifter-curse:no_render_arm",
-    "shape-shifter-curse:form_feral_cat_sp_scale",
     "shape-shifter-curse:form_disable_leg_armor",
     "shape-shifter-curse:form_disable_feet_armor",
-    "origins:velvet_paws",
-    "origins:scare_creepers",
-    "origins:fall_immunity",
+    "shape-shifter-curse:velvet_paws",
+    "shape-shifter-curse:scare_creepers",
+    "shape-shifter-curse:fall_immunity",
     "shape-shifter-curse:form_ocelot_sound",
     "shape-shifter-curse:form_ocelot_sound_hurt"
   ],

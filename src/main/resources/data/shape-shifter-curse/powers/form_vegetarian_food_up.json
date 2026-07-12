@@ -1,5 +1,5 @@
 {
-    "type": "origins:modify_food",
+    "type": "apoli:modify_food",
     "food_modifiers": [
         {
             "name": "increase food points",
@@ -25,31 +25,49 @@
         }
     ],
     "item_condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:ingredient",
+                "type": "apoli:or",
+                "conditions": [
+                    {
+                        "type": "apoli:and",
+                        "conditions": [
+                            {
+                                "type": "apoli:ingredient",
+                                "ingredient": {
+                                    "tag": "shape-shifter-curse:meat"
+                                },
+                                "inverted": true
+                            },
+                            {
+                                "type": "apoli:meat",
+                                "inverted": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "shape-shifter-curse:is_vegan_ex",
+                        "default": false
+                    }
+                ]
+            },
+            {
+                "type": "apoli:ingredient",
                 "ingredient": {
-                    "tag": "origins:meat"
+                    "tag": "shape-shifter-curse:ignore_diet"
                 },
                 "inverted": true
             },
             {
-                "type": "origins:meat",
-                "inverted": true
-            },
-            {
-                "type": "origins:ingredient",
-                "ingredient": {
-                    "tag": "origins:ignore_diet"
-                },
-                "inverted": true
-            },
-            {
-                "type": "origins:ingredient",
+                "type": "apoli:ingredient",
                 "ingredient": {
                     "tag": "shape-shifter-curse:ignore_vc_eat"
                 },
+                "inverted": true
+            },
+            {
+                "type": "shape-shifter-curse:is_morph_scale_food",
                 "inverted": true
             }
         ]

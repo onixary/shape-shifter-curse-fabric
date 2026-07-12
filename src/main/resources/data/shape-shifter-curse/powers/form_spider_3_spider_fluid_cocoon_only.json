@@ -1,0 +1,48 @@
+{
+  "type": "apoli:modify_food",
+  "food_modifiers": [
+    {
+      "operation": "set_total",
+      "value": 0.0
+    }
+  ],
+  "saturation_modifiers": [
+    {
+      "operation": "set_total",
+      "value": 0.0
+    }
+  ],
+  "item_condition": {
+    "type": "apoli:and",
+    "conditions": [
+      {
+        "type": "apoli:food"
+      },
+      {
+        "type": "apoli:ingredient",
+        "ingredient": {
+          "tag": "shape-shifter-curse:ignore_diet"
+        },
+        "inverted": true
+      },
+      {
+        "type": "apoli:ingredient",
+        "ingredient": {
+          "tag": "shape-shifter-curse:ignore_vc_eat"
+        },
+        "inverted": true
+      },
+      {
+        "type": "apoli:ingredient",
+        "ingredient": {
+          "item": "shape-shifter-curse:spider_fluid_cocoon"
+        },
+        "inverted": true
+      },
+      {
+        "type": "shape-shifter-curse:is_morph_scale_food",
+        "inverted": true
+      }
+    ]
+  }
+}

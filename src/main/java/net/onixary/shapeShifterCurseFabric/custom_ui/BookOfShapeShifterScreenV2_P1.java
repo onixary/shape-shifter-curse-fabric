@@ -5,23 +5,32 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.MultilineTextWidget;
 import net.minecraft.client.gui.widget.TextWidget;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoonClient;
+import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.ScaleScrollTextWidget;
+import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.ScaleTextRenderer;
+import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.WidgetEXUtils;
 import net.onixary.shapeShifterCurseFabric.data.CodexData;
 import org.joml.Quaternionf;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
-public class BookOfShapeShifterScreenV2_P1 extends Screen {
+public class BookOfShapeShifterScreenV2_P1 extends Screen implements WidgetEXUtils.IWidgetEX {
     private static final Identifier page_texID = new Identifier(MOD_ID,"textures/gui/codex_page_1.png");
+    private static final Identifier cursed_moon_icon_texID = new Identifier(MOD_ID,"textures/gui/book_cursed_moon_icon.png");
     public PlayerEntity currentPlayer;
     public static final int BookSizeX = 350;
     public static final int BookSizeY = 220;
+
+    public static final Text openFCSMenuButtonLabel = Text.translatable("gui.shape_shifter_curse_fabric.book_2_1.open_fcs_menu");
 
     public BookOfShapeShifterScreenV2_P1() {
         super(Text.of("ShapeShifterCurse_Book_Screen_V2"));
@@ -45,21 +54,42 @@ public class BookOfShapeShifterScreenV2_P1 extends Screen {
         // D -> (9, 9), (19, 95)
         // Size -> (108, 48) Pos -> (17, 92)
         this.addDrawableChild(BuildDetailScreenButton(19, 95, 9, 9, CodexData.getContentText(CodexData.ContentType.TITLE, currentPlayer)));
-        MultilineTextWidget TitleLabel = new ScaleMultilineTextWidget(BookPosX + 17 * BookScale, BookPosY + 105 * BookScale, CodexData.getContentText(CodexData.ContentType.TITLE, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(108 * BookScale).setTextColor(DefaultTextColor);
+        ScaleScrollTextWidget TitleLabel = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 17 * BookScale, BookPosY + 105 * BookScale, 108 * BookScale, 5 * BookScale, Scale, CodexData.getContentText(CodexData.ContentType.TITLE, currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
+        TitleLabel.setEnableScrollableIconRender(true);
+        this.addWidget(TitleLabel);
         this.addDrawableChild(TitleLabel);
-        // Status
+        // Equip 190
         // D -> (9, 9), (116, 143)
         // Size -> (107, 56) Pos -> (17, 153)
-        this.addDrawableChild(BuildDetailScreenButton(116, 143, 9, 9, CodexData.getPlayerStatusText(currentPlayer)));
-        this.addDrawableChild(new TextWidget(BookPosX + 17 * BookScale, BookPosY + 143 * BookScale, 107 * BookScale, 8 * BookScale, CodexData.headerStatus, textRenderer).setTextColor(HeaderTextColor));
-        MultilineTextWidget StatusLabel = new ScaleMultilineTextWidget(BookPosX + 17 * BookScale, BookPosY + 153 * BookScale, CodexData.getPlayerStatusText(currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(107 * BookScale).setTextColor(DefaultTextColor);
+        this.addDrawableChild(BuildDetailScreenButton(116, 143, 9, 9, CodexData.getContentText(CodexData.ContentType.EQUIP, currentPlayer)));
+        this.addDrawableChild(new TextWidget(BookPosX + 17 * BookScale, BookPosY + 143 * BookScale, 107 * BookScale, 6 * BookScale, CodexData.headerEquip, textRenderer).setTextColor(HeaderTextColor));
+        ScaleScrollTextWidget StatusLabel = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 17 * BookScale, BookPosY + 153 * BookScale, 107 * BookScale, 6 * BookScale, Scale, CodexData.getContentText(CodexData.ContentType.EQUIP, currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
+        StatusLabel.setEnableScrollableIconRender(true);
+        this.addWidget(StatusLabel);
         this.addDrawableChild(StatusLabel);
+        // Open FCS Menu Button
+        // 21,194,98,11
+        this.addDrawableChild(ButtonWidget.builder(openFCSMenuButtonLabel, button -> {
+                    if (ShapeShifterCurseFabric.clientConfig.fcs_use_v1_menu) {
+                        if (FormColorSelectMenu.instance == null) {
+                            Screen screen = new FormColorSelectMenu(Text.literal("text.shape-shifter-curse.config.form_color_select_menu"), this);
+                            client.setScreen(screen);
+                        }
+                    } else {
+                        if (FormColorSelectMenuV2.instance == null) {
+                            Screen screen = new FormColorSelectMenuV2(Text.literal("text.shape-shifter-curse.config.form_color_select_menu_v2"), this);
+                            client.setScreen(screen);
+                        }
+                    }
+        }).position(BookPosX + 31 * BookScale, BookPosY + 194 * BookScale).size(78 * BookScale, 14 * BookScale).build());
         // Appearance
         // D -> (9, 9), (311, 13)
         // Size -> (176, 184) Pos -> (142, 23)
         this.addDrawableChild(BuildDetailScreenButton(311, 13, 9, 9, CodexData.getContentText(CodexData.ContentType.APPEARANCE, currentPlayer)));
         this.addDrawableChild(new TextWidget(BookPosX + 142 * BookScale, BookPosY + 11 * BookScale, 176 * BookScale, 8 * BookScale, CodexData.headerAppearance, textRenderer).setTextColor(HeaderTextColor));
-        MultilineTextWidget AppearanceLabel = new ScaleMultilineTextWidget(BookPosX + 142 * BookScale, BookPosY + 26 * BookScale, CodexData.getContentText(CodexData.ContentType.APPEARANCE, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(176 * BookScale).setTextColor(DefaultTextColor);
+        ScaleScrollTextWidget AppearanceLabel = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 142 * BookScale, BookPosY + 26 * BookScale, 176 * BookScale, 20 * BookScale, Scale, CodexData.getContentText(CodexData.ContentType.APPEARANCE, currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
+        AppearanceLabel.setEnableScrollableIconRender(true);
+        this.addWidget(AppearanceLabel);
         this.addDrawableChild(AppearanceLabel);
         // 下一页按钮
         int NextPage_ButtonSizeX = 15 * BookScale;
@@ -150,11 +180,50 @@ public class BookOfShapeShifterScreenV2_P1 extends Screen {
         int PlayerX = BookPosX + 70 * BookScale;
         int PlayerY = BookPosY + 75 * BookScale;
         this.RenderEntity(context, PlayerX, PlayerY, 30 * BookScale, PlayerX - mouseX, PlayerY - 37 * BookScale - mouseY, currentPlayer);
+        // Cursed Moon Icon
+        // Size -> (8, 8), Pos -> (115, 92)
+        context.drawTexture(cursed_moon_icon_texID, BookPosX + 115 * BookScale, BookPosY + 92 * BookScale, 8 * BookScale, 8 * BookScale, CursedMoonClient.isCursedMoon ? 8 : 0, 0, 8, 8, 16, 8);
         super.render(context, mouseX, mouseY, delta);
     }
 
     @Override
     public boolean shouldPause() {
         return false;
+    }
+
+    @Override
+    public WidgetEXUtils.WidgetRect getRect() {
+        return null;
+    }
+
+    public List<WidgetEXUtils.IWidgetEX> WidgetList = new ArrayList<>();
+
+    @Override
+    public List<WidgetEXUtils.IWidgetEX> getWidgetList() {
+        return this.WidgetList;
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        this.onClickWidget(mouseX, mouseY, button);
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        this.onReleaseWidget(mouseX, mouseY, button);
+        return super.mouseReleased(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
+        this.onDragWidget(mouseX, mouseY, button, deltaX, deltaY);
+        return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double mouseZ) {
+        this.onScrollWidget(mouseX, mouseY, mouseZ);
+        return super.mouseScrolled(mouseX, mouseY, mouseZ);
     }
 }

@@ -1,0 +1,425 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:form_axolotl_2_water_spurt",
+  "updatedAt": "2026-06-09T16:19:33.194Z",
+  "viewport": {
+    "x": 22.22563176895312,
+    "y": 5.080625752105902,
+    "zoom": 0.9614921780986763
+  },
+  "nodes": [
+    {
+      "id": "ast-6",
+      "astNodeId": "ast-6",
+      "type": "origins:active_self",
+      "kind": "power",
+      "label": "root",
+      "title": "root",
+      "signature": "power|origins:active_self|root|root",
+      "occurrence": 0,
+      "position": {
+        "x": 80,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-1",
+      "astNodeId": "ast-1",
+      "type": "origins:add_velocity",
+      "kind": "entity_action",
+      "title": "Entity Add Velocity",
+      "signature": "entity_action|origins:add_velocity||Entity Add Velocity",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 80
+      }
+    },
+    {
+      "id": "ast-2",
+      "astNodeId": "ast-2",
+      "type": "hud_render",
+      "kind": "datatype",
+      "title": "HUD Render",
+      "signature": "datatype|hud_render||HUD Render",
+      "occurrence": 0,
+      "position": {
+        "x": 614.9612015018773,
+        "y": 297.3591989987484
+      }
+    },
+    {
+      "id": "ast-3",
+      "astNodeId": "ast-3",
+      "type": "key",
+      "kind": "datatype",
+      "title": "Key",
+      "signature": "datatype|key||Key",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 548
+      }
+    },
+    {
+      "id": "ast-5",
+      "astNodeId": "ast-5",
+      "type": "origins:and",
+      "kind": "entity_condition",
+      "title": "Condition And",
+      "signature": "entity_condition|origins:and||Condition And",
+      "occurrence": 0,
+      "position": {
+        "x": 590,
+        "y": 782
+      }
+    },
+    {
+      "id": "ast-4",
+      "astNodeId": "ast-4",
+      "type": "origins:fluid_height",
+      "kind": "entity_condition",
+      "title": "fluid height",
+      "signature": "entity_condition|origins:fluid_height||fluid height",
+      "occurrence": 0,
+      "position": {
+        "x": 1100,
+        "y": 80
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "ast-6",
+        "astNodeId": "ast-6",
+        "type": "origins:active_self",
+        "kind": "power",
+        "title": "root",
+        "label": "root",
+        "color": "power",
+        "position": {
+          "x": 80,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "entity_action",
+            "schema": {
+              "name": "entity_action",
+              "valueKind": "slot",
+              "slotKind": "entity_action",
+              "required": true
+            },
+            "valueKind": "slot",
+            "displayValue": "-> Entity Add Velocity",
+            "connected": true,
+            "color": "action",
+            "sourceHandleId": "ast-6:out:entity_action"
+          },
+          {
+            "name": "cooldown",
+            "schema": {
+              "name": "cooldown",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 1
+            },
+            "valueKind": "number",
+            "displayValue": "100",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "ast-6:out:cooldown"
+          },
+          {
+            "name": "hud_render",
+            "schema": {
+              "name": "hud_render",
+              "valueKind": "datatype",
+              "datatype": "hud_render"
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> HUD Render",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-6:out:hud_render"
+          },
+          {
+            "name": "key",
+            "schema": {
+              "name": "key",
+              "valueKind": "datatype",
+              "datatype": "key"
+            },
+            "valueKind": "datatype",
+            "displayValue": "-> Key",
+            "connected": true,
+            "color": "datatype",
+            "sourceHandleId": "ast-6:out:key"
+          },
+          {
+            "name": "condition",
+            "schema": {
+              "name": "condition",
+              "valueKind": "slot",
+              "slotKind": "entity_condition"
+            },
+            "valueKind": "slot",
+            "displayValue": "-> Condition And",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-6:out:condition"
+          }
+        ]
+      },
+      {
+        "id": "ast-1",
+        "astNodeId": "ast-1",
+        "type": "origins:add_velocity",
+        "kind": "entity_action",
+        "title": "Entity Add Velocity",
+        "color": "action",
+        "position": {
+          "x": 590,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "z",
+            "schema": {
+              "name": "z",
+              "valueKind": "number",
+              "numberKind": "float",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "1.6",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-1:out:z"
+          },
+          {
+            "name": "space",
+            "schema": {
+              "name": "space",
+              "valueKind": "string",
+              "defaultValue": "world"
+            },
+            "valueKind": "string",
+            "displayValue": "local",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-1:out:space"
+          }
+        ]
+      },
+      {
+        "id": "ast-2",
+        "astNodeId": "ast-2",
+        "type": "hud_render",
+        "kind": "datatype",
+        "title": "HUD Render",
+        "color": "datatype",
+        "position": {
+          "x": 614.9612015018773,
+          "y": 297.3591989987484
+        },
+        "fields": [
+          {
+            "name": "should_render",
+            "schema": {
+              "name": "should_render",
+              "valueKind": "boolean",
+              "defaultValue": true
+            },
+            "valueKind": "boolean",
+            "displayValue": "false",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-2:out:should_render"
+          }
+        ]
+      },
+      {
+        "id": "ast-3",
+        "astNodeId": "ast-3",
+        "type": "key",
+        "kind": "datatype",
+        "title": "Key",
+        "color": "datatype",
+        "position": {
+          "x": 590,
+          "y": 548
+        },
+        "fields": [
+          {
+            "name": "key",
+            "schema": {
+              "name": "key",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "key.sprint",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-3:out:key"
+          },
+          {
+            "name": "continuous",
+            "schema": {
+              "name": "continuous",
+              "valueKind": "boolean",
+              "defaultValue": false
+            },
+            "valueKind": "boolean",
+            "displayValue": "false",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "boolean",
+            "sourceHandleId": "ast-3:out:continuous"
+          }
+        ]
+      },
+      {
+        "id": "ast-5",
+        "astNodeId": "ast-5",
+        "type": "origins:and",
+        "kind": "entity_condition",
+        "title": "Condition And",
+        "color": "condition",
+        "position": {
+          "x": 590,
+          "y": 782
+        },
+        "fields": [
+          {
+            "name": "conditions",
+            "schema": {
+              "name": "conditions",
+              "valueKind": "slot_array",
+              "slotKind": "entity_condition",
+              "multi": true,
+              "required": true
+            },
+            "valueKind": "slot_array",
+            "displayValue": "Array[1]",
+            "connected": true,
+            "color": "condition",
+            "sourceHandleId": "ast-5:out:conditions"
+          }
+        ]
+      },
+      {
+        "id": "ast-4",
+        "astNodeId": "ast-4",
+        "type": "origins:fluid_height",
+        "kind": "entity_condition",
+        "title": "fluid height",
+        "color": "condition",
+        "position": {
+          "x": 1100,
+          "y": 80
+        },
+        "fields": [
+          {
+            "name": "fluid",
+            "schema": {
+              "name": "fluid",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": "minecraft:water",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-4:out:fluid"
+          },
+          {
+            "name": "comparison",
+            "schema": {
+              "name": "comparison",
+              "valueKind": "string",
+              "required": true
+            },
+            "valueKind": "string",
+            "displayValue": ">=",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "string",
+            "sourceHandleId": "ast-4:out:comparison"
+          },
+          {
+            "name": "compare_to",
+            "schema": {
+              "name": "compare_to",
+              "valueKind": "number",
+              "numberKind": "float",
+              "required": true
+            },
+            "valueKind": "number",
+            "displayValue": "1",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "float",
+            "sourceHandleId": "ast-4:out:compare_to"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "ast-6:entity_action->ast-1",
+        "source": "ast-6",
+        "target": "ast-1",
+        "sourceHandle": "ast-6:out:entity_action",
+        "targetHandle": "ast-1:in",
+        "fieldName": "entity_action",
+        "color": "action"
+      },
+      {
+        "id": "ast-6:hud_render->ast-2",
+        "source": "ast-6",
+        "target": "ast-2",
+        "sourceHandle": "ast-6:out:hud_render",
+        "targetHandle": "ast-2:in",
+        "fieldName": "hud_render",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-6:key->ast-3",
+        "source": "ast-6",
+        "target": "ast-3",
+        "sourceHandle": "ast-6:out:key",
+        "targetHandle": "ast-3:in",
+        "fieldName": "key",
+        "color": "datatype"
+      },
+      {
+        "id": "ast-5:conditions:0->ast-4",
+        "source": "ast-5",
+        "target": "ast-4",
+        "sourceHandle": "ast-5:out:conditions",
+        "targetHandle": "ast-4:in",
+        "fieldName": "conditions",
+        "color": "condition",
+        "order": 0
+      },
+      {
+        "id": "ast-6:condition->ast-5",
+        "source": "ast-6",
+        "target": "ast-5",
+        "sourceHandle": "ast-6:out:condition",
+        "targetHandle": "ast-5:in",
+        "fieldName": "condition",
+        "color": "condition"
+      }
+    ]
+  }
+}

@@ -1,13 +1,13 @@
 {
-    "type": "origins:modify_projectile_damage",
+    "type": "apoli:modify_projectile_damage",
     "condition": {
-        "type": "origins:resource",
+        "type": "apoli:resource",
         "resource": "shape-shifter-curse:form_familiar_fox_fireball_kind_boolean_resource",
         "comparison": "==",
         "compare_to": 0
     },
     "damage_condition": {
-        "type": "origins:projectile",
+        "type": "apoli:projectile",
         "projectile": "minecraft:small_fireball"
     },
     "modifier": {

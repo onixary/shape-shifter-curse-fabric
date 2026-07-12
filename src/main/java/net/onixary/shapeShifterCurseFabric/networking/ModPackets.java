@@ -12,9 +12,6 @@ public class ModPackets {
     // New server-to-client attachment sync packet
     // public static final Identifier SYNC_EFFECT_ATTACHMENT = new Identifier(ShapeShifterCurseFabric.MOD_ID, "sync_effect_attachment");
 
-    public static final Identifier TRANSFORM_EFFECT_ID = new Identifier(ShapeShifterCurseFabric.MOD_ID, "transform_effect");
-
-    public static final Identifier INSTINCT_THRESHOLD_EFFECT_ID = new Identifier(ShapeShifterCurseFabric.MOD_ID, "instinct_threshold_effect");
 
     public static final Identifier SYNC_CURSED_MOON_DATA = new Identifier(ShapeShifterCurseFabric.MOD_ID, "sync_cursed_moon_data");
 
@@ -25,9 +22,6 @@ public class ModPackets {
     public static final Identifier SYNC_TRANSFORM_STATE = new Identifier(ShapeShifterCurseFabric.MOD_ID, "sync_transform_state");
 
     // 添加Overlay效果相关的网络包
-    public static final Identifier UPDATE_OVERLAY_EFFECT = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_overlay_effect");
-    public static final Identifier UPDATE_OVERLAY_FADE_EFFECT = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_overlay_fade_effect");
-    public static final Identifier TRANSFORM_COMPLETE_EFFECT = new Identifier(ShapeShifterCurseFabric.MOD_ID, "transform_complete_effect");
     public static final Identifier RESET_FIRST_PERSON = new Identifier(ShapeShifterCurseFabric.MOD_ID, "reset_first_person");
 
     // Bat attach power sync packet
@@ -47,9 +41,11 @@ public class ModPackets {
 
     public static final Identifier LOGIN_PACKET = new Identifier(ShapeShifterCurseFabric.MOD_ID, "login_packet");  // 我暂时没找到玩家进入服务去时的Hook，所以暂时由服务器询问来代替
     public static final Identifier UPDATE_CUSTOM_SETTING = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_custom_setting");
+    public static final Identifier UPDATE_CUSTOM_COLOR = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_custom_color");
 
     public static final Identifier ACTIVE_VIRTUAL_TOTEM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "active_virtual_totem");
 
+    // 老版
     public static final Identifier UPDATE_PATRON_LEVEL = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_patron_level");
     public static final Identifier OPEN_PATRON_FORM_SELECT_MENU = new Identifier(ShapeShifterCurseFabric.MOD_ID, "open_patron_form_select_menu");
     public static final Identifier SET_PATRON_FORM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "set_patron_form");
@@ -60,4 +56,15 @@ public class ModPackets {
     public static final Identifier UPDATE_POWER_ANIM_DATA_TO_SERVER = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_power_anim_data_to_server");
     // C2S 结构: UUID-玩家UUID
     public static final Identifier REQUEST_POWER_ANIM_DATA = new Identifier(ShapeShifterCurseFabric.MOD_ID, "request_power_anim_data");
+
+    public static final Identifier SET_FORM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "set_form");
+    public static final Identifier OPEN_FORM_SELECT_MENU = new Identifier(ShapeShifterCurseFabric.MOD_ID, "open_form_select_menu");
+
+    public static final Identifier SET_NO_JUMP_TICK = new Identifier(ShapeShifterCurseFabric.MOD_ID, "set_no_jump_tick");
+
+    public static final Identifier OPEN_FORM_COLOR_SELECT_MENU = new Identifier(ShapeShifterCurseFabric.MOD_ID, "open_form_color_select_menu");
+    public static final Identifier MODIFY_FCD_DATA = new Identifier(ShapeShifterCurseFabric.MOD_ID, "modify_fcd_data");
+
+    public static final Identifier UPLOAD_PATRON_AUTH_FILE = new Identifier(ShapeShifterCurseFabric.MOD_ID, "upload_patron_auth_file");
+    public static final Identifier MELT_AUTH_SUB_KEY = new Identifier(ShapeShifterCurseFabric.MOD_ID, "melt_auth_sub_key");
 }

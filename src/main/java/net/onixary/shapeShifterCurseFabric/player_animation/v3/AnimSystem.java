@@ -1,6 +1,9 @@
 package net.onixary.shapeShifterCurseFabric.player_animation.v3;
 
+import dev.kosmx.playerAnim.api.TransformType;
 import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
+import dev.kosmx.playerAnim.core.util.Vec3f;
+import dev.kosmx.playerAnim.impl.IAnimatedPlayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
@@ -9,9 +12,9 @@ import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateController.TransformingController;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,10 +25,9 @@ import java.util.Objects;
 // 每个玩家的动画系统
 public class AnimSystem {
     public static class AnimSystemData {
-        public PlayerFormBase playerForm;
+        public IForm playerForm;
         public boolean IsOnGround = true;
         public Vec3d LastPosition;
-        public long LastPosYChange = 0;  // 持续增长使用long防止溢出 顺便可以不用做最大值判断
         public long ContinueSwingAnimCounter = 0;  // 持续增长使用long防止溢出 顺便可以不用做最大值判断
         public boolean IsWalking = false;
         public NbtCompound customData;  // 用于存储其他拓展Mod的数据 在本模组中不使用
@@ -85,22 +87,26 @@ public class AnimSystem {
         return null;
     }
 
+    public static boolean checkOnGroundSuper(PlayerEntity player) {
+        if (player.isOnGround()) {
+            return true;
+        }
+        if (player.getAbilities().flying) {
+            return false;
+        }
+        return !player.getWorld().isSpaceEmpty(player.getBoundingBox().offset(0, -0.01, 0).withMaxY(player.getY()));
+    }
+
     private void PreProcessAnimSystemData() {
-        this.data.playerForm = RegPlayerFormComponent.PLAYER_FORM.get(this.player).getCurrentForm();
+        this.data.playerForm = FormTextureUtils.getPlayerForm_Render(this.player);
         this.data.IsWalking = !this.data.LastPosition.equals(this.player.getPos());
-        if (this.player.getPos().getY() == this.data.LastPosition.getY()) {
-            this.data.LastPosYChange ++;
-        }
-        else {
-            this.data.LastPosYChange = 0;
-        }
         if (this.player.handSwinging) {
             this.data.ContinueSwingAnimCounter ++;
         }
         else {
             this.data.ContinueSwingAnimCounter = 0;
         }
-        this.data.IsOnGround = (player.isOnGround() || (!player.getAbilities().flying && this.data.LastPosYChange > 10));
+        this.data.IsOnGround = checkOnGroundSuper(this.player);
         this.NPPA_Tick();
     }
 
@@ -190,5 +196,9 @@ public class AnimSystem {
         }
         this.EndProcessAnimSystemData();
         return anim;
+    }
+
+    public static @NotNull Vec3f getPlayerBone3DTransform(PlayerEntity player, @NotNull String modelName, @NotNull TransformType type, @NotNull Vec3f DefaultValue) {
+        return ((IAnimatedPlayer) player).playerAnimator_getAnimation().get3DTransform(modelName, type, DefaultValue);
     }
 }

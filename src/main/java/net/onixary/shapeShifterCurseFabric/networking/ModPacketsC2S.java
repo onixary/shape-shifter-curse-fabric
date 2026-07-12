@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.networking;
 
 import io.github.apace100.apoli.component.PowerHolderComponent;
+import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
@@ -16,13 +17,14 @@ import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnSprintingToS
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
+import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
+import net.onixary.shapeShifterCurseFabric.util.Verify.AuthServer;
 import org.jetbrains.annotations.Nullable;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
@@ -98,10 +100,21 @@ public class ModPacketsC2S {
                 net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S::onUpdatePlayerCustomConfig
         );
 
+
+        ServerPlayNetworking.registerGlobalReceiver(
+                UPDATE_CUSTOM_COLOR,
+                net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S::onUpdatePlayerCustomColor
+        );
+
         ServerPlayNetworking.registerGlobalReceiver(
                 SET_PATRON_FORM,
-                net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S::receiveSetPatronForm);
+                net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S::receiveSetPatronForm
+        );
 
+        ServerPlayNetworking.registerGlobalReceiver(
+                SET_FORM,
+                net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S::receiveSetForm
+        );
 
         ServerPlayNetworking.registerGlobalReceiver(
                 UPDATE_POWER_ANIM_DATA_TO_SERVER,
@@ -112,19 +125,23 @@ public class ModPacketsC2S {
                 REQUEST_POWER_ANIM_DATA,
                 ModPacketsC2S::onRequestPowerAnimationData
         );
+
+        ServerPlayNetworking.registerGlobalReceiver(
+                UPLOAD_PATRON_AUTH_FILE,
+                ModPacketsC2S::receivePatronAuthFile
+        );
     }
 
     private static void onPressStartBookButton(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
-        UUID playerUuid = packetByteBuf.readUuid();
+        // 就凭这个网络Bug 我就可以做一个可以直接还原形态的作弊客户端 还可以给其他玩家还原 不知道为什么要往buf里写uuid
+        // UUID playerUuid = packetByteBuf.readUuid();
         minecraftServer.execute(() -> {
             // 通过 UUID 获取玩家实例
-            ServerPlayerEntity targetPlayer = minecraftServer.getPlayerManager().getPlayer(playerUuid);
-            if (targetPlayer != null) {
-                TransformManager.handleDirectTransform(targetPlayer, RegPlayerForms.ORIGINAL_SHIFTER, false);
-                // 触发自定义成就
-                ShapeShifterCurseFabric.ON_ENABLE_MOD.trigger(targetPlayer);
-                // info
-                targetPlayer.sendMessage(Text.translatable("info.shape-shifter-curse.on_enable_mod").formatted(Formatting.LIGHT_PURPLE));
+            // ServerPlayerEntity targetPlayer = minecraftServer.getPlayerManager().getPlayer(playerUuid);
+            if (playerEntity != null && RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(playerEntity)) {
+                TransformManager.startTransform(playerEntity, RegPlayerForms.ORIGINAL_SHIFTER, null);
+                ShapeShifterCurseFabric.ON_ENABLE_MOD.trigger(playerEntity);
+                playerEntity.sendMessage(Text.translatable("info.shape-shifter-curse.on_enable_mod").formatted(Formatting.LIGHT_PURPLE));
             }
         });
     }
@@ -139,6 +156,31 @@ public class ModPacketsC2S {
     private static void onUpdatePlayerCustomConfig(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
         boolean keepOriginalSkin = packetByteBuf.readBoolean();
         boolean enableFormColor = packetByteBuf.readBoolean();
+        boolean enableFormRandomSound = packetByteBuf.readBoolean();
+        minecraftServer.execute(() -> {
+            try {
+                PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(playerEntity);
+                component.setKeepOriginalSkin(keepOriginalSkin);
+                component.setEnableFormColor(enableFormColor);
+                component.setEnableFormRandomSound(enableFormRandomSound);
+                RegPlayerSkinComponent.SKIN_SETTINGS.sync(playerEntity);
+            } catch (Exception e) {
+                ShapeShifterCurseFabric.LOGGER.error("Error while updating player custom config", e);
+            }
+        });
+    }
+
+    private static void onUpdatePlayerCustomColor(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
+        boolean extraData = packetByteBuf.readBoolean();
+        boolean keepOriginalSkin;
+        boolean enableFormColorSystem;
+        if (extraData) {
+            keepOriginalSkin = packetByteBuf.readBoolean();
+            enableFormColorSystem = packetByteBuf.readBoolean();
+        } else {
+            keepOriginalSkin = false;
+            enableFormColorSystem = false;
+        }
         int primaryColor = packetByteBuf.readInt();
         int accentColor1Color = packetByteBuf.readInt();
         int accentColor2Color = packetByteBuf.readInt();
@@ -147,17 +189,17 @@ public class ModPacketsC2S {
         boolean primaryGreyReverse = packetByteBuf.readBoolean();
         boolean accent1GreyReverse = packetByteBuf.readBoolean();
         boolean accent2GreyReverse = packetByteBuf.readBoolean();
-        boolean enableFormRandomSound = packetByteBuf.readBoolean();
         minecraftServer.execute(() -> {
             try {
                 PlayerSkinComponent component = RegPlayerSkinComponent.SKIN_SETTINGS.get(playerEntity);
-                component.setKeepOriginalSkin(keepOriginalSkin);
-                component.setEnableFormColor(enableFormColor);
+                if (extraData) {
+                    component.setKeepOriginalSkin(keepOriginalSkin);
+                    component.setEnableFormColor(enableFormColorSystem);
+                }
                 component.setFormColor(new FormTextureUtils.ColorSetting(primaryColor, accentColor1Color, accentColor2Color, eyeColorA, eyeColorB, primaryGreyReverse, accent1GreyReverse, accent2GreyReverse));
-                component.setEnableFormRandomSound(enableFormRandomSound);
                 RegPlayerSkinComponent.SKIN_SETTINGS.sync(playerEntity);
             } catch (Exception e) {
-                ShapeShifterCurseFabric.LOGGER.error("Error while updating player custom config", e);
+                ShapeShifterCurseFabric.LOGGER.error("Error while updating player custom color", e);
             }
         });
     }
@@ -201,21 +243,54 @@ public class ModPacketsC2S {
         });
     }
 
+    private static void receiveSetForm(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
+        UUID targetPlayerUuid = packetByteBuf.readUuid();
+        PlayerEntity target = minecraftServer.getPlayerManager().getPlayer(targetPlayerUuid);
+        if (target == null) {
+            ShapeShifterCurseFabric.LOGGER.warn("[SetForm] Player {} not found", targetPlayerUuid);
+        }
+        Identifier formId = packetByteBuf.readIdentifier();
+        IForm form = RegPlayerForms.getPlayerForm(formId);
+        // 网络包可以伪造 所以加个权限验证
+        if (playerEntity.getCommandSource().hasPermissionLevel(2) || playerEntity.getAbilities().creativeMode) {
+            minecraftServer.execute(() -> {
+                if (target == null) {
+                    ShapeShifterCurseFabric.LOGGER.warn("[SetForm] Player is null");
+                    return;
+                }
+                TransformManager.startTransform(target, form, null);
+            });
+            return;
+        }
+    }
+
     private static void receiveSetPatronForm(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
         if (!PatronUtils.EnablePatronFeature) {
             ShapeShifterCurseFabric.LOGGER.error("Player {} tried to use patron form but patron feature is disabled", playerEntity.getDisplayName().getString());
             return;
         }
         Identifier formId = packetByteBuf.readIdentifier();
-        PlayerFormBase form = RegPlayerForms.getPlayerForm(formId);
-        if (form instanceof PlayerFormDynamic pfd) {
+        IForm form = RegPlayerForms.getPlayerForm(formId);
+
+        if (minecraftServer.getCommandSource().hasPermissionLevel(2) || playerEntity.getAbilities().creativeMode) {
+            // 权限等级2时跳过反作弊 毕竟可以用setForm了
+            minecraftServer.execute(() -> {
+                if (playerEntity == null) {
+                    ShapeShifterCurseFabric.LOGGER.warn("[SetPatronForm] Player is null");
+                    return;
+                }
+                TransformManager.startTransform(playerEntity, form, null);
+            });
+            return;
+        }
+        if (form instanceof DynamicForm pfd) {
             minecraftServer.execute(() -> {
                 if (playerEntity == null) {
                     ShapeShifterCurseFabric.LOGGER.warn("[SetPatronForm] Player is null");
                     return;
                 }
                 if (pfd.IsPlayerCanUse(playerEntity)) {
-                    TransformManager.handleDirectTransform(playerEntity, pfd, false);
+                    TransformManager.startTransform(playerEntity, pfd, null);
                 }
                 else {
                     // 一般情况下，这里不会执行，因为客户端在发送请求前已经进行了检查 如果触发了这里，说明客户端和服务器之间的数据不同步(小概率 如果不同步早就掉线了) 或者是客户端作弊(大概率)
@@ -233,4 +308,14 @@ public class ModPacketsC2S {
         }
         return;
     }
+
+    private static void receivePatronAuthFile(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
+        byte[] data = packetByteBuf.readByteArray();
+        if (data != null) {
+            minecraftServer.execute(() -> {
+                AuthServer.loadPatronAuthFile(playerEntity, new PacketByteBuf(Unpooled.wrappedBuffer(data)));
+            });
+        }
+    }
 }
+

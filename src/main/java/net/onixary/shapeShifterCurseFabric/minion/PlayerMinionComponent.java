@@ -42,6 +42,11 @@ public class PlayerMinionComponent implements Component, AutoSyncedComponent {
         }
     }
 
+    public void clear() {
+        this.minions.clear();
+        this.minionsCooldown.clear();
+    }
+
     @Override
     public void writeToNbt(NbtCompound nbtCompound) {
         NbtCompound minionsNbt = new NbtCompound();

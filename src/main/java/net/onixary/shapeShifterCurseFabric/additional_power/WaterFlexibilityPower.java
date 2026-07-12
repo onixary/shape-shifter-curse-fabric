@@ -9,6 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 public class WaterFlexibilityPower extends Power {
+    public static final float MAX_FLEXIBILITY = 0.98F;
 
     private final float resistance;
 

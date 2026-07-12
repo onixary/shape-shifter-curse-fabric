@@ -1,13 +1,19 @@
 {
     "type": "shape-shifter-curse:keep_sneaking",
     "condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "shape-shifter-curse:must_crawling"
+                "type": "shape-shifter-curse:must_crawling",
+                "width": 0.54,
+                "height": 1.35
             },
             {
-                "type": "origins:swimming",
+                "type": "apoli:swimming",
+                "inverted": true
+            },
+            {
+                "type": "apoli:riding",
                 "inverted": true
             }
         ]

@@ -1,21 +1,21 @@
 {
-    "type": "origins:action_over_time",
+    "type": "apoli:action_over_time",
     "entity_action": {
-        "type": "origins:heal",
+        "type": "apoli:heal",
         "amount": 2
     },
     "interval": 40,
     "condition": {
-        "type": "origins:block_in_radius",
+        "type": "apoli:block_in_radius",
         "block_condition": {
-            "type": "origins:and",
+            "type": "apoli:and",
             "conditions": [
                 {
-                    "type": "origins:block",
+                    "type": "apoli:block",
                     "block": "minecraft:jukebox"
                 },
                 {
-                    "type": "origins:block_state",
+                    "type": "apoli:block_state",
                     "property": "has_record",
                     "value": true
                 }

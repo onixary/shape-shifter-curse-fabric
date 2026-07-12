@@ -1,10 +1,10 @@
 {
-    "type": "origins:restrict_armor",
+    "type": "apoli:restrict_armor",
     "feet": {
-      "type": "origins:and",
+      "type": "apoli:and",
       "conditions": [
         {
-          "type": "origins:armor_value",
+          "type": "apoli:armor_value",
           "comparison": ">",
           "compare_to": -1
         }

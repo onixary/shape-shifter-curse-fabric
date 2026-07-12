@@ -1,12 +1,12 @@
 {
-  "type": "origins:prevent_item_use",
+  "type": "apoli:prevent_item_use",
   "item_condition": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "conditions": [
       {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
-          "tag": "origins:shields"
+          "tag": "shape-shifter-curse:shields"
         }
       },
       {

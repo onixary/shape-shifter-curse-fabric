@@ -1,7 +1,7 @@
 {
-  "type": "origins:modify_damage_taken",
+  "type": "apoli:modify_damage_taken",
   "damage_condition": {
-    "type": "origins:in_tag",
+    "type": "apoli:in_tag",
     "tag": "shape-shifter-curse:bat_immune_damage_tag"
   },
   "modifier": {

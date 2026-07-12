@@ -1,16 +1,16 @@
 package net.onixary.shapeShifterCurseFabric.items.trinkets;
 
-import dev.emi.trinkets.api.TrinketItem;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
+import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryItem;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FountainBeltTrinket extends TrinketItem {
+public class FountainBeltTrinket extends AccessoryItem {
     public FountainBeltTrinket(Settings settings) {
         super(settings.maxCount(1));
     }

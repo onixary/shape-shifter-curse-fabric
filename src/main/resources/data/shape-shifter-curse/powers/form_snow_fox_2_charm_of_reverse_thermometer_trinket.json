@@ -1,23 +1,30 @@
 {
-  "type": "origins:multiple",
-
+  "type": "apoli:multiple",
   "reverse_hot_cold": {
     "type": "shape-shifter-curse:delay_attribute",
     "modifier": {
       "attribute": "minecraft:generic.max_health",
-      "value": -6.0,
+      "value": -6,
       "operation": "addition"
     },
     "tick_rate": 20,
     "updateHealth": true,
     "delay": 5,
     "condition": {
-      "type": "origins:biome",
+      "type": "apoli:biome",
       "condition": {
-        "type": "origins:temperature",
+        "type": "apoli:temperature",
         "comparison": "<=",
         "compare_to": 0
       }
     }
+  },
+  "reverse_tan_temperature": {
+    "type": "shape-shifter-curse:tan_form_temperature_modifier",
+    "icy_offset": 0,
+    "cold_offset": -1,
+    "neutral_offset": 0,
+    "warm_offset": -1,
+    "hot_offset": -2
   }
 }

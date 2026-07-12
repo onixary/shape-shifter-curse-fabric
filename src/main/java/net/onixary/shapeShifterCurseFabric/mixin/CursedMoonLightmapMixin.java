@@ -24,7 +24,7 @@ public abstract class CursedMoonLightmapMixin implements AutoCloseable{
     //获取常量flickerIntensity之前的局部变量，并修改目标变量
     public void update(float delta, CallbackInfo ci, ClientWorld clientWorld, float f, float g, float h, float i, float j, float l, float k, Vector3f vector3f){
         MinecraftClient client = MinecraftClient.getInstance();
-        if(CursedMoon.isCursedMoon(client.world)){
+        if(CursedMoon.isCursedMoonDay(client.world)){
             Vector3f modifiedColor = new Vector3f(1.0F, 0.24F, 0.82F);
             float skyBlend = 1.0F - f - clientWorld.getRainGradient(1.0F);
             vector3f.lerp(modifiedColor, skyBlend);

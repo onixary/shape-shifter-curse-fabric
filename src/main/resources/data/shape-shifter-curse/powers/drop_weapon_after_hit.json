@@ -1,23 +1,23 @@
 {
-    "type": "origins:self_action_on_hit",
+    "type": "apoli:self_action_on_hit",
     "entity_action": {
-        "type": "origins:drop_inventory",
+        "type": "apoli:drop_inventory",
         "item_condition": {
-            "type": "origins:and",
+            "type": "apoli:and",
             "conditions": [
                 {
-                    "type": "origins:or",
+                    "type": "apoli:or",
                     "conditions": [
                         {
-                            "type": "origins:ingredient",
+                            "type": "apoli:ingredient",
                             "ingredient": {
-                                "tag": "origins:melee_weapons"
+                                "tag": "shape-shifter-curse:melee_weapons"
                             }
                         },
                         {
-                            "type": "origins:ingredient",
+                            "type": "apoli:ingredient",
                             "ingredient": {
-                                "tag": "origins:tools"
+                                "tag": "shape-shifter-curse:tools"
                             }
                         }
                     ]

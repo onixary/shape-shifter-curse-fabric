@@ -1,7 +1,6 @@
 {
     "powers": [
         "shape-shifter-curse:no_render_arm_when_sneaking",
-        "shape-shifter-curse:form_familiar_fox_2_scale",
         "shape-shifter-curse:form_sprint_speed_up",
         "shape-shifter-curse:form_familiar_fox_1_looting",
         "shape-shifter-curse:form_familiar_fox_3_mob_glow_in_range",
@@ -38,7 +37,9 @@
         "shape-shifter-curse:form_familiar_fox_2_mana",
         "shape-shifter-curse:form_familiar_fox_low_mana_exhaustion",
         "shape-shifter-curse:form_familiar_fox_2_low_mana_debuff",
-        "shape-shifter-curse:form_familiar_fox_sound_key"
+        "shape-shifter-curse:form_familiar_fox_sound_key",
+        "shape-shifter-curse:form_tan_prevent_dirty_water_thirst",
+        "shape-shifter-curse:form_familiar_fox_2_tan_temperature_modify"
     ],
     "icon": {
         "item": "minecraft:player_head"

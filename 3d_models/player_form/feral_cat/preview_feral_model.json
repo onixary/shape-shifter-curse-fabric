@@ -5,22 +5,34 @@
 			"loop": true,
 			"bones": {
 				"bipedHead": {
-					"position": [0, 1, 0]
+					"position": {
+						"vector": [0, 1, 0]
+					}
 				},
 				"bipedBody": {
-					"rotation": [-90, 0, 0]
+					"rotation": {
+						"vector": [90, 0, 0]
+					}
 				},
 				"bipedLeftArm": {
-					"position": [1.2, 2, -3]
+					"position": {
+						"vector": [-1.2, 2, -3]
+					}
 				},
 				"bipedRightArm": {
-					"position": [-1.2, 2, -3]
-				},
-				"bipedRightLeg": {
-					"position": [0, 13, -16]
+					"position": {
+						"vector": [1.2, 2, -3]
+					}
 				},
 				"bipedLeftLeg": {
-					"position": [0, 13, -16]
+					"position": {
+						"vector": [0, 13, -16]
+					}
+				},
+				"bipedRightLeg": {
+					"position": {
+						"vector": [0, 13, -16]
+					}
 				}
 			}
 		}

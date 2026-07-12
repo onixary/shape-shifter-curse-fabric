@@ -1,0 +1,30 @@
+{
+    "type": "apoli:action_over_time",
+    "entity_action": {
+        "type": "apoli:and",
+        "actions": [
+            {
+              "type": "shape-shifter-curse:spawn_particles_in_circle",
+              "particle": "minecraft:cloud",
+              "count": 1,
+              "speed": 0.01,
+              "force": true,
+              "spread": {
+                "x": 0.3,
+                "y": 0.3,
+                "z": 0.3
+              },
+              "radius": 1.0,
+              "offset_y": 1.0,
+              "sample_count": 16
+            }
+        ]
+    },
+    "interval": 4,
+  "condition": {
+    "type": "shape-shifter-curse:instinct_value",
+    "comparison": ">=",
+    "compare_to": 95.0
+
+  }
+}

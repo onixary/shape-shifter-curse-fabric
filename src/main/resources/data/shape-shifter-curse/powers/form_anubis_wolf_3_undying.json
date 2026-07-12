@@ -1,6 +1,6 @@
 {
   "type": "shape-shifter-curse:virtual_totem",
-  "virtual_totem_type": 1,
+  "virtual_totem_type": "shape-shifter-curse:form_anubis_wolf_3_undying",
   "totem_stack": {
     "item": "minecraft:air",
     "count": 1

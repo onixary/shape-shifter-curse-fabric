@@ -2,28 +2,32 @@ package net.onixary.shapeShifterCurseFabric.form_giving_custom_entity;
 
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnRestriction;
-import net.minecraft.registry.BuiltinRegistries;
-import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BiomeTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.collection.Pool;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureSpawns;
 import net.minecraft.world.biome.BiomeKeys;
+import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.structure.Structure;
-import net.minecraft.world.gen.structure.StructureKeys;
-import net.minecraft.world.gen.structure.StructureType;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.wolf.TransformativeWolfEntity;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class TransformativeEntitySpawning {
     public static void addEntitySpawns() {
-        // original weights located at data/minecraft/worldgen/biome/...
-
         // T_OCELOT
         SpawnRestriction.register(
                 ShapeShifterCurseFabric.T_OCELOT,
@@ -85,9 +89,24 @@ public class TransformativeEntitySpawning {
                 1,
                 2
         );
-        // 用数据包的方式来让T_WOLF生成在沙漠神殿 可能会与修改结构的Mod冲突
-        // Weight: 20
-        // MinGroupSize = 3
-        // MaxGroupSize = 5
+
+        ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+            Structure structure = server.getOverworld().getRegistryManager().get(RegistryKeys.STRUCTURE).get(new Identifier("minecraft", "desert_pyramid"));
+            if (structure != null) {
+                Map<SpawnGroup, StructureSpawns> oldSpawns = structure.getStructureSpawns();
+                Map<SpawnGroup, StructureSpawns> spawns = oldSpawns.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                spawns.put(SpawnGroup.CREATURE, new StructureSpawns(StructureSpawns.BoundingBox.PIECE, Pool.of(new SpawnSettings.SpawnEntry(ShapeShifterCurseFabric.T_WOLF, 20, 3, 5))));
+                structure.config.spawnOverrides = spawns;
+            }
+            for (RegistryEntry<Structure> structureEntry : server.getOverworld().getRegistryManager().get(RegistryKeys.STRUCTURE).iterateEntries(TagKey.of(RegistryKeys.STRUCTURE, new Identifier("minecraft", "mineshaft")))) {
+                structure = structureEntry.value();
+                if (structure != null) {
+                    Map<SpawnGroup, StructureSpawns> oldSpawns = structure.getStructureSpawns();
+                    Map<SpawnGroup, StructureSpawns> spawns = oldSpawns.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                    spawns.put(SpawnGroup.MONSTER, new StructureSpawns(StructureSpawns.BoundingBox.PIECE, Pool.of(new SpawnSettings.SpawnEntry(ShapeShifterCurseFabric.T_SPIDER, 5, 1, 2))));
+                    structure.config.spawnOverrides = spawns;
+                }
+            }
+        });
     }
 }

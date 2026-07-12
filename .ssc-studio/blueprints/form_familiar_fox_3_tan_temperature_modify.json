@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "powerId": "shape-shifter-curse:form_familiar_fox_3_tan_temperature_modify",
+  "updatedAt": "2026-06-21T14:48:38.077Z",
+  "viewport": {
+    "x": 420.0996979050386,
+    "y": 109.66098417845421,
+    "zoom": 1.4
+  },
+  "nodes": [
+    {
+      "id": "new-2",
+      "astNodeId": "new-2",
+      "type": "shape-shifter-curse:tan_form_temperature_modifier",
+      "kind": "power",
+      "title": "TAN Form Temperature Modifier",
+      "signature": "power|shape-shifter-curse:tan_form_temperature_modifier||TAN Form Temperature Modifier",
+      "occurrence": 0,
+      "position": {
+        "x": -24.857134137834805,
+        "y": 21.642861502511145
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "new-2",
+        "astNodeId": "new-2",
+        "type": "shape-shifter-curse:tan_form_temperature_modifier",
+        "kind": "power",
+        "title": "TAN Form Temperature Modifier",
+        "color": "power",
+        "position": {
+          "x": -24.857134137834805,
+          "y": 21.642861502511145
+        },
+        "fields": [
+          {
+            "name": "icy_offset",
+            "schema": {
+              "name": "icy_offset",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "new-2:out:icy_offset"
+          },
+          {
+            "name": "cold_offset",
+            "schema": {
+              "name": "cold_offset",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "new-2:out:cold_offset"
+          },
+          {
+            "name": "neutral_offset",
+            "schema": {
+              "name": "neutral_offset",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "0",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "new-2:out:neutral_offset"
+          },
+          {
+            "name": "warm_offset",
+            "schema": {
+              "name": "warm_offset",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "-1",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "new-2:out:warm_offset"
+          },
+          {
+            "name": "hot_offset",
+            "schema": {
+              "name": "hot_offset",
+              "valueKind": "number",
+              "numberKind": "int",
+              "defaultValue": 0
+            },
+            "valueKind": "number",
+            "displayValue": "-2",
+            "connected": false,
+            "color": "scalar",
+            "inputKind": "int",
+            "sourceHandleId": "new-2:out:hot_offset"
+          }
+        ]
+      }
+    ],
+    "edges": []
+  }
+}

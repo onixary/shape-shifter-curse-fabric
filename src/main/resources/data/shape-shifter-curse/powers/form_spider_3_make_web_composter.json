@@ -1,0 +1,50 @@
+{
+  "type": "apoli:item_on_item",
+  "using_item_condition": {
+    "type": "apoli:ingredient",
+    "ingredient": {
+      "item": "minecraft:cobweb"
+    }
+  },
+  "on_item_condition": {
+    "type": "apoli:ingredient",
+    "ingredient": {
+      "item": "minecraft:composter"
+    }
+  },
+  "using_item_action": {
+    "type": "apoli:consume",
+    "amount": 1
+  },
+  "on_item_action": {
+    "type": "apoli:consume",
+    "amount": 1
+  },
+  "result": {
+    "item": "shape-shifter-curse:web_composter",
+    "amount": 1
+  },
+  "entity_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:entity.shulker.hurt_closed",
+        "volume": 0.45
+      },
+      {
+        "type": "shape-shifter-curse:consume_mana",
+        "mana": 20
+      }
+    ]
+  },
+  "condition": {
+    "type": "apoli:and",
+    "conditions": [
+      {
+        "type": "shape-shifter-curse:has_mana",
+        "mana": 20
+      }
+    ]
+  }
+}

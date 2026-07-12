@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "origins:no_water_for_gills",
-    "origins:hurt_by_water"
+    "origins:hurt_by_water",
+
+    "shape-shifter-curse:no_water_for_gills"
   ]
 }

@@ -2,6 +2,7 @@ package net.onixary.shapeShifterCurseFabric.mixin;
 
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -10,53 +11,66 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.player_form.transform.TransformRelatedItems;
+import net.onixary.shapeShifterCurseFabric.additional_power.IsMorphScaleItemCondition;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
+import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
+import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.TransformativeStatusInstance;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
+    @Unique
+    private static final List<TransformativeStatusInstance> tsiList = new ArrayList<>();
 
-    /**
-     * 注入到物品使用完成时的逻辑
-     * @param world 当前世界
-     * @param user 使用物品的实体（可能是玩家）
-     */
     @Inject(
             method = "finishUsing",
             at = @At("HEAD")
     )
     private void shape_shifter_curse$onFinishUsing(World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
-        // 仅在服务端且使用者为玩家时处理
         if (!world.isClient && user instanceof ServerPlayerEntity player) {
             ItemStack stack = (ItemStack) (Object) this;
-
-            if(stack.getItem() == TransformRelatedItems.TRANSFORM_CURE){
-                TransformRelatedItems.OnUseCure(player);
-            }else if(stack.getItem() == TransformRelatedItems.TRANSFORM_CURE_FINAL){
-                TransformRelatedItems.OnUseCureFinal(player);
-            }else if(stack.getItem() == TransformRelatedItems.TRANSFORM_CURE_CREATIVE){
-                TransformRelatedItems.OnUseCreativeCure(player);
-            }
-            else if(stack.getItem() == TransformRelatedItems.TRANSFORM_CATALYST){
-                TransformRelatedItems.OnUseCatalyst(player);
-            }
-            else if(stack.getItem() == TransformRelatedItems.TRANSFORM_POWERFUL_CATALYST){
-                TransformRelatedItems.OnUsePowerfulCatalyst(player);
-            }
-            else if(stack.getItem() == Items.GOLDEN_APPLE){
-                PlayerFormBase currentForm = player.getComponent(RegPlayerFormComponent.PLAYER_FORM).getCurrentForm();
-                int currentFormIndex = currentForm.getIndex();
-                if(currentFormIndex == 0 || currentFormIndex == 1){
-                    // 触发自定义成就
+            if(stack.getItem() == Items.GOLDEN_APPLE || stack.getItem() == Items.ENCHANTED_GOLDEN_APPLE){
+                IForm currentForm = FormUtils.getPlayerForm(player);
+                if(!FormUtils.NoInstinct.hasFlag(currentForm) && !FormUtils.LockInstinct.hasFlag(currentForm)){
                     ShapeShifterCurseFabric.ON_USE_GOLDEN_APPLE.trigger(player);
                 }
+                if (EffectManager.hasTransformativeEffect(player)) {
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.transformative_effect_cure").formatted(Formatting.YELLOW));
+                    EffectManager.clearTransformativeEffect(player);
+                }
+            }
+            else if (stack.getItem() == Items.MILK_BUCKET) {
+                if (EffectManager.hasTransformativeEffect(player)) {
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.milk_cannot_remove_effect").formatted(Formatting.YELLOW));
+                    tsiList.clear();
+                    Iterator<StatusEffectInstance> iterator = player.getStatusEffects().iterator();
+                    while (iterator.hasNext()) {
+                        StatusEffectInstance effectInstance = iterator.next();
+                        if (effectInstance instanceof TransformativeStatusInstance tsi) {
+                            tsiList.add(tsi);
+                            iterator.remove();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Inject(method = "finishUsing", at = @At("TAIL"))
+    private void shape_shifter_curse$onFinishUsingEnd(World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
+        if (!world.isClient && user instanceof ServerPlayerEntity player) {
+            if (!tsiList.isEmpty()) {
+                tsiList.forEach(tsi -> player.getActiveStatusEffects().put(tsi.getEffectType(), tsi));
+                tsiList.clear();
             }
         }
     }
@@ -66,8 +80,11 @@ public abstract class ItemStackMixin {
         ItemStack realThis = (ItemStack) (Object) this;
         List<Text> tooltip = cir.getReturnValue();
         if (realThis.hasNbt()) {
-            if (realThis.getNbt().contains("MorphScaleItem") && realThis.getNbt().getBoolean("MorphScaleItem")) {
+            if (realThis.getNbt().contains(IsMorphScaleItemCondition.IsMorphScaleArmorTagName) && realThis.getNbt().getBoolean(IsMorphScaleItemCondition.IsMorphScaleArmorTagName)) {
                 tooltip.add(Text.translatable("tooltip.shape_shifter_curse.morphscale_item").formatted(Formatting.GRAY));
+            }
+            if (realThis.getNbt().contains(IsMorphScaleItemCondition.IsMorphScaleFoodTagName) && realThis.getNbt().getBoolean(IsMorphScaleItemCondition.IsMorphScaleFoodTagName)) {
+                tooltip.add(Text.translatable("tooltip.shape_shifter_curse.morphscale_food").formatted(Formatting.GRAY));
             }
         }
     }

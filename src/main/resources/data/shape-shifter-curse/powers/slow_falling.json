@@ -1,0 +1,42 @@
+{
+  "type": "apoli:modify_falling",
+  "velocity": 0.01,
+  "take_fall_damage": false,
+  "condition": {
+    "type": "apoli:or",
+    "conditions": [
+      {
+        "type": "apoli:and",
+        "conditions": [
+          {
+            "type": "apoli:sneaking"
+          },
+          {
+            "type": "apoli:fall_flying"
+          }
+        ]
+      },
+      {
+        "type": "apoli:and",
+        "conditions": [
+          {
+            "type": "apoli:sneaking",
+            "inverted": true
+          },
+          {
+            "type": "apoli:fall_flying",
+            "inverted": true
+          },
+          {
+            "type": "apoli:on_block",
+            "inverted": true
+          },
+          {
+            "type": "shape-shifter-curse:is_sleep",
+            "inverted": true
+          }
+        ]
+      }
+    ]
+  }
+}

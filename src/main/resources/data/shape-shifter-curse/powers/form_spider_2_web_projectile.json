@@ -1,0 +1,200 @@
+{
+  "type": "shape-shifter-curse:charge_action",
+  "charge_power_id": "shape-shifter-curse:web_charge_1",
+  "key": {
+    "key": "key.shape-shifter-curse.active_skill_1",
+    "continuous": true
+  },
+  "tier0_enable": true,
+  "tier0_charge_time": 0,
+  "tier0_tick_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "apoli:apply_effect",
+        "effect": {
+          "effect": "minecraft:slowness",
+          "duration": 10,
+          "amplifier": 1,
+          "show_particles": false,
+          "show_icon": false
+        }
+      }
+    ]
+  },
+
+  "tier1_enable": true,
+  "tier1_charge_time": 20,
+  "tier1_can_charge_condition": {
+    "type": "shape-shifter-curse:has_mana",
+    "mana": 6
+  },
+  "tier1_use_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "shape-shifter-curse:fire_web_bullet",
+        "tier": 1,
+        "divergence": 1,
+        "speed": 2,
+        "enable_entangled_effect": false
+      }
+    ]
+  },
+  "tier1_tick_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "apoli:apply_effect",
+        "effect": {
+          "effect": "minecraft:slowness",
+          "duration": 10,
+          "amplifier": 1,
+          "show_particles": false,
+          "show_icon": false
+        }
+      }
+    ]
+  },
+  "tier1_charge_tick_action": {
+    "type": "shape-shifter-curse:consume_mana",
+    "mana": 0.25
+  },
+  "tier1_charge_complete_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:block.note_block.hat",
+        "pitch": 1.0
+      },
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:block.note_block.snare",
+        "pitch": 1.0
+      },
+      {
+        "type": "apoli:execute_command",
+        "command": "particle minecraft:cloud ~ ~1.0 ~ 0.8 0.8 0.8 0 10"
+      }
+    ]
+  },
+  "tier1_cooldown": 20,
+  "tier2_enable": true,
+  "tier2_charge_time": 40,
+  "tier2_can_charge_condition": {
+    "type": "shape-shifter-curse:has_mana",
+    "mana": 6
+  },
+
+  "tier2_use_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "shape-shifter-curse:fire_web_bullet",
+        "tier": 2,
+        "divergence": 1,
+        "speed": 2,
+        "enable_entangled_effect": false
+      }
+    ]
+  },
+  "tier2_tick_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "apoli:apply_effect",
+        "effect": {
+          "effect": "minecraft:slowness",
+          "duration": 10,
+          "amplifier": 1,
+          "show_particles": false,
+          "show_icon": false
+        }
+      }
+    ]
+  },
+  "tier2_charge_tick_action": {
+    "type": "shape-shifter-curse:consume_mana",
+    "mana": 0.25
+  },
+  "tier2_charge_complete_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:block.note_block.hat",
+        "pitch": 1.19
+      },
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:block.note_block.snare",
+        "pitch": 1.19
+      },
+      {
+        "type": "apoli:execute_command",
+        "command": "particle minecraft:cloud ~ ~1.0 ~ 0.8 0.8 0.8 0 10"
+      }
+    ]
+  },
+  "tier2_cooldown": 40,
+
+  "tier3_enable": true,
+  "tier3_charge_time": 60,
+  "tier3_can_charge_condition": {
+    "type": "shape-shifter-curse:has_mana",
+    "mana": 6
+  },
+  "tier3_use_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "shape-shifter-curse:fire_web_bullet",
+        "tier": 3,
+        "divergence": 1,
+        "speed": 2,
+        "enable_entangled_effect": false
+      }
+    ]
+  },
+  "tier3_tick_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "apoli:apply_effect",
+        "effect": {
+          "effect": "minecraft:slowness",
+          "duration": 10,
+          "amplifier": 1,
+          "show_particles": false,
+          "show_icon": false
+        }
+      }
+    ]
+  },
+  "tier3_charge_tick_action": {
+    "type": "shape-shifter-curse:consume_mana",
+    "mana": 0.25
+  },
+  "tier3_charge_complete_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:block.note_block.hat",
+        "pitch": 1.414
+      },
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:block.note_block.snare",
+        "pitch": 1.414
+      },
+      {
+        "type": "apoli:execute_command",
+        "command": "particle minecraft:cloud ~ ~1.0 ~ 0.8 0.8 0.8 0 10"
+      }
+    ]
+  },
+  "tier3_cooldown": 60,
+  "tier4_enable": false
+}

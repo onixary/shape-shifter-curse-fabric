@@ -1,5 +1,5 @@
 {
-    "type": "origins:modify_food",
+    "type": "apoli:modify_food",
     "food_modifier": {
         "name": "Decreased food points",
         "operation": "multiply_base_multiplicative",

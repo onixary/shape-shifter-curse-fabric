@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class ManaRegistries {
@@ -32,17 +33,18 @@ public class ManaRegistries {
             })
             .setImmutable();
 
-    private static final HashMap<Identifier, Function<PlayerEntity, Boolean>> manaConditionTypeRegistry = new HashMap<>();
-    private static final HashMap<Identifier, ManaUtils.ModifierList> maxManaModifierRegistry = new HashMap<>();
-    private static final HashMap<Identifier, ManaUtils.ModifierList> manaReginModifierRegistry = new HashMap<>();
-    private static final HashMap<Identifier, ManaHandler> manaHandlerRegistry = new HashMap<>();
+    // 给我自己拓展留的访问权限 修改时需要使用特殊方式 如果用错误修改方式修改可能会出现特殊Bug 优先使用提供的2个函数修改 manaHandler没有提供函数 因为有可能拓展使用相同的handler
+    public static final HashMap<Identifier, Function<PlayerEntity, Boolean>> manaConditionTypeRegistry = new HashMap<>();
+    public static final HashMap<Identifier, ManaUtils.ModifierList> maxManaModifierRegistry = new HashMap<>();
+    public static final HashMap<Identifier, ManaUtils.ModifierList> manaReginModifierRegistry = new HashMap<>();
+    public static final HashMap<Identifier, ManaHandler> manaHandlerRegistry = new HashMap<>();
 
     public static final ManaUtils.ModifierList EMPTY_MAX_MANA_MODIFIER = new ManaUtils.ModifierList();
     public static final ManaUtils.ModifierList EMPTY_MANA_REGEN_MODIFIER = new ManaUtils.ModifierList();
 
     public static final Identifier MC_AlwaysTrue = registerManaConditionType(ShapeShifterCurseFabric.identifier("always_true"), player -> true);
     public static final Identifier MC_AlwaysFalse = registerManaConditionType(ShapeShifterCurseFabric.identifier("always_false"), player -> false);
-    public static final Identifier MC_IsCursedMoon = registerManaConditionType(ShapeShifterCurseFabric.identifier("is_cursed_moon"), player -> CursedMoon.isCursedMoon(player.getWorld()) && CursedMoon.isNight(player.getWorld()));
+    public static final Identifier MC_IsCursedMoon = registerManaConditionType(ShapeShifterCurseFabric.identifier("is_cursed_moon"), player -> CursedMoon.isInCursedMoon(player.getWorld()));
 
     public static final Identifier FAMILIAR_FOX_MANA = registerManaType(ShapeShifterCurseFabric.identifier("familiar_fox_mana"),
             new ManaUtils.ModifierList(
@@ -63,6 +65,20 @@ public class ManaRegistries {
                             )
                     )
             ),
+            EMPTY_MANA_HANDLER
+    );
+
+    public static final Identifier WEB_RESOURCE = registerManaType(ShapeShifterCurseFabric.identifier("web_resource"),
+            new ManaUtils.ModifierList(
+                    new Pair<Identifier, Pair<Identifier, ManaUtils.Modifier>>(
+                            ShapeShifterCurseFabric.identifier("base_value"),
+                            new Pair<Identifier, ManaUtils.Modifier>(
+                                    MC_AlwaysTrue,
+                                    new ManaUtils.Modifier(100d, 1.0d, 0d)
+                            )
+                    )
+            ),
+            new ManaUtils.ModifierList(),
             EMPTY_MANA_HANDLER
     );
 
@@ -96,13 +112,47 @@ public class ManaRegistries {
         return maxManaModifierRegistry.getOrDefault(identifier, EMPTY_MAX_MANA_MODIFIER).copy();
     }
 
+    public static boolean modifyMaxManaModifier(@Nullable Identifier identifier, @NotNull Consumer<ManaUtils.ModifierList> modify) {
+        if (!maxManaModifierRegistry.containsKey(identifier)) {
+            return false;
+        }
+        ManaUtils.ModifierList data = maxManaModifierRegistry.getOrDefault(identifier, EMPTY_MAX_MANA_MODIFIER);
+        if (data == null) {
+            data = EMPTY_MAX_MANA_MODIFIER;
+        }
+        if (data == EMPTY_MAX_MANA_MODIFIER) {
+            data = EMPTY_MAX_MANA_MODIFIER.copy();
+        }
+        modify.accept(data);
+        maxManaModifierRegistry.put(identifier, data);
+        return true;
+    }
+
     public static @NotNull ManaUtils.ModifierList getManaRegenModifier(@Nullable Identifier identifier) {
         return manaReginModifierRegistry.getOrDefault(identifier, EMPTY_MANA_REGEN_MODIFIER).copy();
+    }
+
+    public static boolean modifyManaRegenModifier(@Nullable Identifier identifier, @NotNull Consumer<ManaUtils.ModifierList> modify) {
+        if (!manaReginModifierRegistry.containsKey(identifier)) {
+            return false;
+        }
+        ManaUtils.ModifierList data = manaReginModifierRegistry.getOrDefault(identifier, EMPTY_MANA_REGEN_MODIFIER);
+        if (data == null) {
+            data = EMPTY_MANA_REGEN_MODIFIER;
+        }
+        if (data == EMPTY_MANA_REGEN_MODIFIER) {
+            data = EMPTY_MANA_REGEN_MODIFIER.copy();
+        }
+        modify.accept(data);
+        manaReginModifierRegistry.put(identifier, data);
+        return true;
     }
 
     public static @Nullable ManaHandler getManaHandler(@Nullable Identifier identifier) {
         return manaHandlerRegistry.get(identifier);
     }
+
+    // Mana Handler 就不留API了 直接改注册表吧 修改起来非常麻烦
 
     public static @NotNull ManaHandler getManaHandlerOrDefault(@Nullable Identifier identifier) {
         return getManaHandlerOrDefault(identifier, EMPTY_MANA_HANDLER);

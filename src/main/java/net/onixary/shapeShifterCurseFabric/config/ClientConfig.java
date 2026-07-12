@@ -27,6 +27,34 @@ public class ClientConfig implements ConfigData {
     @Comment("Enable Auto Modify FPM Config. Default: true")
     public boolean enableChangeFPMConfig = true;  // 启用修改FPM配置
 
+    @ConfigEntry.Category("General")
+    @Comment("Disable Unlock Check In Form Color Select Menu. Default: false")
+    public boolean disableUnlockCheckInFormColorSelectMenu = false;  // 禁用颜色选择菜单中的解锁检查
+
+    @ConfigEntry.Category("General")
+    @Comment("Form Color Select Menu Use Professional Version. Default: false")
+    public boolean fcs_use_v1_menu = false;  // 是否启用V1版本 那版由于Onixary说有点复杂 所以设计了标准版(V2) 我原本想扔拓展里 最后我决定加个专业版后缀放本体里
+
+    @ConfigEntry.Category("Tool")
+    @Comment("Unlock All Form For Form Color Select Menu. Default: false")
+    public boolean unlockAllFormInFormColorSelectMenu = false;  // 解锁颜色选择菜单中的所有形态
+
+    @ConfigEntry.Category("Tool")
+    @Comment("Clear Form Unlock Record For Form Color Select Menu. Default: false")
+    public boolean clearFormUnlockRecordInFormColorSelectMenu = false;  // 清除颜色选择菜单中的解锁记录
+
+    @ConfigEntry.Category("Integration")
+    @Comment("Enable Better Combat Fix. Default: true")
+    public boolean enableBetterCombatFix = true;  // 启用Better Combat Fix
+
+    @ConfigEntry.Category("Patron")
+    @Comment("Auto Download Patron Authorization File. Default: true")
+    public boolean autoDownloadPatronAuthorizationFile = true;  // 自动下载赞助者授权文件
+
+    @ConfigEntry.Category("Patron")
+    @Comment("Patron Authorization Url Path Without Suffix(<UUID>.auth). Default: \"https://raw.githubusercontent.com/onixary/ssc_patron/main/auth/\"")
+    public String patronAuthorizationUrlPath = "https://raw.githubusercontent.com/onixary/ssc_patron/main/auth/";  // 赞助者授权文件URL路径
+
     // 开发用
     // @ConfigEntry.Category("InDevelopment")
 
@@ -53,4 +81,16 @@ public class ClientConfig implements ConfigData {
     @ConfigEntry.Category("UI")
     @Comment("ManaBar Position Y Offset. Default: -17")
     public int manaBarPosOffsetY = -17;  // 魔力条中间 Y 位置偏移量
+
+    @ConfigEntry.Category("UI")
+    @Comment("Item Store Power Middle Position Type (1-9). Default: 8")
+    public int itemStorePowerPosType = 8;  // itemStorePower 中间位置类型 (1-9)
+
+    @ConfigEntry.Category("UI")
+    @Comment("Item Store Power Position X Offset. Default: -120")
+    public int itemStorePowerPosOffsetX = -120;  // itemStorePower 中间 X 位置偏移量
+
+    @ConfigEntry.Category("UI")
+    @Comment("Item Store Power Position Y Offset. Default: 1")
+    public int itemStorePowerPosOffsetY = 1;  // itemStorePower 中间 Y 位置偏移量
 }

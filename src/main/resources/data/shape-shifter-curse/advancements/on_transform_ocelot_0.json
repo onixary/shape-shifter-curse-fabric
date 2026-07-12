@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:chicken"
+    },
+    "title": {
+      "translate": "advancements.shape-shifter-curse.on_transform_ocelot_0.title"
+    },
+    "description": {
+      "translate": "advancements.shape-shifter-curse.on_transform_ocelot_0.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "shape-shifter-curse:on_first_transform_enable_form_list",
+  "criteria": {
+    "on_transform_ocelot_0": {
+      "trigger": "shape-shifter-curse:on_transform_form",
+      "conditions": {
+        "form": [
+          "shape-shifter-curse:ocelot_0"
+        ]
+      }
+    }
+  },
+  "requirements": []
+}

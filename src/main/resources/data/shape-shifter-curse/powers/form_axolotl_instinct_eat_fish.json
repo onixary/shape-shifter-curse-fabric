@@ -1,15 +1,15 @@
 {
-    "type": "origins:action_on_item_use",
+    "type": "apoli:action_on_item_use",
     "entity_action": {
         "type": "shape-shifter-curse:add_instinct",
-        "instinct_effect_id": "FORM_AXOLOTL_EAT_FISH",
+        "instinct_effect_id": "shape-shifter-curse:form_axolotl_eat_fish",
         "value": 0.1,
         "duration": 20
     },
     "item_condition": {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
-            "tag": "origins:fish"
+            "tag": "shape-shifter-curse:fish"
         }
     }
 }

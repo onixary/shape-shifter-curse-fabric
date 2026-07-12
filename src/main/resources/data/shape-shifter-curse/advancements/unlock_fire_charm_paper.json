@@ -1,0 +1,20 @@
+{
+  "parent": "shape-shifter-curse:on_enable_mod",
+  "criteria": {
+    "has_untreated_moon_dust": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:gunpowder"]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "recipes": [
+      "shape-shifter-curse:fire_charm_paper"
+    ]
+  }
+}

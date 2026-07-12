@@ -8,8 +8,10 @@ import net.minecraft.client.render.entity.feature.CapeFeatureRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.ModifyCapeRender;
+import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -72,9 +74,7 @@ public class CapeFeatureRendererMixin {
             index = 0)
     private float modifyXRotationAngle(float angle) {
         if (currentPlayer != null) {
-            PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(currentPlayer).getCurrentForm();
-
-            if (curForm.NeedModifyXRotationAngle()) {
+            if (this.NeedModifyXRotationAngle(currentPlayer)) {
                 // 从角度中提取 q 的部分并钳制
                 // angle = 6.0F + r / 2.0F + q
                 // 我们需要重新计算角度以限制 q 的部分
@@ -98,14 +98,35 @@ public class CapeFeatureRendererMixin {
     // helper func
     @Unique
     private Vec3d getCapeIdleLoc(AbstractClientPlayerEntity player) {
-        PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
-        return curForm.getCapeIdleLoc(player);
+        IForm curForm = FormTextureUtils.getPlayerForm_Render(currentPlayer);
+        if (curForm instanceof ModifyCapeRender mcr) {
+            return mcr.getCapeIdleLoc(player);
+        }
+        if (curForm.getBodyType() == PlayerFormBodyType.FERAL) {
+            return new Vec3d(0.0f, -0.2f, 0.3f);
+        }
+        else {
+            return new Vec3d(0.0, 0.0, 0.125);
+        }
     }
 
     // 获取披风的基础旋转角度
     @Unique
     private float getCapeBaseRotateAngle(AbstractClientPlayerEntity player) {
-        PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(player).getCurrentForm();
-        return curForm.getCapeBaseRotateAngle(player);
+        IForm curForm = FormTextureUtils.getPlayerForm_Render(currentPlayer);
+        if (curForm instanceof ModifyCapeRender mcr) {
+            return mcr.getCapeBaseRotateAngle(player);
+        }
+        return 100.0f;
+    }
+
+    @Unique
+    private boolean NeedModifyXRotationAngle(AbstractClientPlayerEntity player) {
+        IForm curForm = FormTextureUtils.getPlayerForm_Render(currentPlayer);
+        if (curForm instanceof ModifyCapeRender mcr) {
+            return mcr.NeedModifyXRotationAngle();
+        } else {
+            return curForm.getBodyType() == PlayerFormBodyType.FERAL;
+        }
     }
 }

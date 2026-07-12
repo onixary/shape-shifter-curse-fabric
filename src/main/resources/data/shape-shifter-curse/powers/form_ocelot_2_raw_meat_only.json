@@ -1,31 +1,31 @@
 {
-  "type": "origins:modify_food",
+  "type": "apoli:modify_food",
   "food_modifiers": [
     {
       "operation": "set_total",
-      "value": 0.0
+      "value": 0
     }
   ],
   "saturation_modifiers": [
     {
       "operation": "set_total",
-      "value": 0.0
+      "value": 0
     }
   ],
   "item_condition": {
-    "type": "origins:and",
+    "type": "apoli:and",
     "conditions": [
       {
-        "type": "origins:or",
+        "type": "apoli:or",
         "conditions": [
           {
-            "type": "origins:ingredient",
+            "type": "apoli:ingredient",
             "ingredient": {
-              "tag": "origins:raw_meat"
+              "tag": "shape-shifter-curse:raw_meat"
             }
           },
           {
-            "type": "origins:ingredient",
+            "type": "apoli:ingredient",
             "ingredient": {
               "item": "minecraft:rotten_flesh"
             }
@@ -34,20 +34,24 @@
         "inverted": true
       },
       {
-        "type": "origins:food"
+        "type": "apoli:food"
       },
       {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
-          "tag": "origins:ignore_diet"
+          "tag": "shape-shifter-curse:ignore_diet"
         },
         "inverted": true
       },
       {
-        "type": "origins:ingredient",
+        "type": "apoli:ingredient",
         "ingredient": {
           "tag": "shape-shifter-curse:ignore_vc_eat"
         },
+        "inverted": true
+      },
+      {
+        "type": "shape-shifter-curse:is_morph_scale_food",
         "inverted": true
       }
     ]

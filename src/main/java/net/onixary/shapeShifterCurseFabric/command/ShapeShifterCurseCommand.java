@@ -17,22 +17,27 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
-import net.onixary.shapeShifterCurseFabric.mana.ManaComponent;
-import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormDynamic;
+import net.onixary.shapeShifterCurseFabric.entity.projectile.WebBullet;
+import net.onixary.shapeShifterCurseFabric.mana.RegManaComponent;
+import net.onixary.shapeShifterCurseFabric.minion.RegPlayerMinionComponent;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
+import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
+import net.onixary.shapeShifterCurseFabric.util.FormColorData;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
-import static net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager.handleDirectTransform;
-import static net.onixary.shapeShifterCurseFabric.player_form.transform.TransformManager.setFormDirectly;
 
 public class ShapeShifterCurseCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher){
@@ -52,17 +57,17 @@ public class ShapeShifterCurseCommand {
                                         )
                                 )
                         )
-                        .then(literal("set_custom_form").requires(cs -> cs.hasPermissionLevel(2))
+                        .then(literal("set_dynamic_form").requires(cs -> cs.hasPermissionLevel(2))
                                 .then(argument("target", EntityArgumentType.player())
-                                        .then(argument("form", CustomFormArgumentType.form())
-                                                .executes(ShapeShifterCurseCommand::setCustomForm)
+                                        .then(argument("form", DynamicFormArgumentType.form())
+                                                .executes(ShapeShifterCurseCommand::setDynamicForm)
                                         )
                                 )
                         )
-                        .then(literal("transform_to_custom_form").requires(cs -> cs.hasPermissionLevel(2))
+                        .then(literal("transform_to_dynamic_form").requires(cs -> cs.hasPermissionLevel(2))
                                 .then(argument("target", EntityArgumentType.player())
-                                        .then(argument("form", CustomFormArgumentType.form())
-                                                .executes(ShapeShifterCurseCommand::transformToCustomForm)
+                                        .then(argument("form", DynamicFormArgumentType.form())
+                                                .executes(ShapeShifterCurseCommand::transformToDynamicForm)
                                         )
                                 )
                         )
@@ -112,11 +117,91 @@ public class ShapeShifterCurseCommand {
                                         )
                                 )
                         )
-                        .then(literal("dev_command").requires(cs -> cs.hasPermissionLevel(2))
-                                .executes(ShapeShifterCurseCommand::devCommand)
+                        .then(literal("debug").requires(cs -> cs.hasPermissionLevel(0))
+                                .then(literal("dev_command").executes(ShapeShifterCurseCommand::devCommand))
+                                .then(literal("clear_player_form_data")
+                                        .then(argument("target", EntityArgumentType.player())
+                                                .executes(ShapeShifterCurseCommand::clearPlayerFormData)
+                                        )
+                                )
+                                .then(literal("clear_player_skin_data")
+                                        .then(argument("target", EntityArgumentType.player())
+                                                .executes(ShapeShifterCurseCommand::clearPlayerSkinData)
+                                        )
+                                )
+                                .then(literal("clear_player_minion_data")
+                                        .then(argument("target", EntityArgumentType.player())
+                                                .executes(ShapeShifterCurseCommand::clearPlayerMinionData)
+                                        )
+                                )
+                                .then(literal("clear_player_mana_data")
+                                        .then(argument("target", EntityArgumentType.player())
+                                                .executes(ShapeShifterCurseCommand::clearPlayerManaData)
+                                        )
+                                )
                         )
                         .then(literal("patron_info").requires(cs -> cs.hasPermissionLevel(0))
                                 .executes(ShapeShifterCurseCommand::logPatronInfo)
+                        )
+                        .then(literal("form_color").requires(cs -> cs.hasPermissionLevel(0))
+                                .then(literal("menu").executes(ShapeShifterCurseCommand::FC_Menu))
+                                .then(literal("save")
+                                        .then(argument("type", new MiscArgumentType.Enum_ArgumentType("form", "global", "form_default"))
+                                                .then(argument("slot_name", StringArgumentType.string())
+                                                        .executes(ShapeShifterCurseCommand::FC_Save)
+                                                        .then(argument("form", FormArgumentType.form())
+                                                                .executes(ShapeShifterCurseCommand::FC_Save)
+                                                        )
+                                                )
+                                        )
+                                )
+                                .then(literal("load")
+                                        .then(argument("type", new MiscArgumentType.Enum_ArgumentType("form", "global", "form_default"))
+                                                .then(argument("slot_name", StringArgumentType.string())
+                                                        .executes(ShapeShifterCurseCommand::FC_Load)
+                                                        .then(argument("form", FormArgumentType.form())
+                                                                .executes(ShapeShifterCurseCommand::FC_Load)
+                                                        )
+                                                )
+                                        )
+                                )
+                                .then(literal("delete")
+                                        .then(argument("type", new MiscArgumentType.Enum_ArgumentType("form", "global", "form_default"))
+                                                .then(argument("slot_name", StringArgumentType.string())
+                                                        .executes(ShapeShifterCurseCommand::FC_Delete)
+                                                        .then(argument("form", FormArgumentType.form())
+                                                                .executes(ShapeShifterCurseCommand::FC_Delete)
+                                                        )
+                                                )
+                                        )
+                                )
+                                .then(literal("config")
+                                        .then(argument("type", new MiscArgumentType.Enum_ArgumentType("enable_default_color"))
+                                                .executes(ShapeShifterCurseCommand::FC_Config)
+                                        )
+                                )
+                                .then(literal("list")
+                                        .then(argument("type", new MiscArgumentType.Enum_ArgumentType("form", "global", "form_default"))
+                                                .executes(ShapeShifterCurseCommand::FC_List)
+                                                .then(argument("form", FormArgumentType.form())
+                                                        .executes(ShapeShifterCurseCommand::FC_List)
+                                                )
+                                        )
+                                )
+                                .then(literal("to_chat")
+                                        .then(argument("type", new MiscArgumentType.Enum_ArgumentType("local", "server"))
+                                                .then(argument("message_type", new MiscArgumentType.Enum_ArgumentType("raw", "command"))
+                                                        .then(argument("encode_type", new MiscArgumentType.Enum_ArgumentType("base64", "hex"))
+                                                                .executes(ShapeShifterCurseCommand::FC_ToChat)
+                                                        )
+                                                )
+                                        )
+                                )
+                                .then(literal("set_color_from_string")
+                                        .then(argument("color_string", StringArgumentType.string())
+                                                .executes(ShapeShifterCurseCommand::FC_SetColorFromString)
+                                        )
+                                )
                         )
         );
     }
@@ -124,14 +209,14 @@ public class ShapeShifterCurseCommand {
     private static int setForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
         // set form without transform effect
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
-        PlayerFormBase form = FormArgumentType.getForm(commandContext, "form");
+        IForm form = FormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
         if (form == null) {
             commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
             return 0;
         }
         try {
-            setFormDirectly(target, form);
+            TransformManager.immediatelyTransform(target, form);
         }
         catch (Exception e){
             // 调试时在此打断点
@@ -146,29 +231,29 @@ public class ShapeShifterCurseCommand {
     private static int transformToForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
         // this with transform effect
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
-        PlayerFormBase form = FormArgumentType.getForm(commandContext, "form");
+        IForm form = FormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
         if (form == null) {
             commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
             return 0;
         }
-        handleDirectTransform(target, form, false);
+        TransformManager.startTransform(target, form, null);
 
         return 1;
 
     }
 
-    private static int setCustomForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+    private static int setDynamicForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
         // set form without transform effect
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
-        PlayerFormBase form = CustomFormArgumentType.getForm(commandContext, "form");
+        IForm form = DynamicFormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
         if (form == null) {
             commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
             return 0;
         }
         try {
-            setFormDirectly(target, form);
+            TransformManager.immediatelyTransform(target, form);
         }
         catch (Exception e){
             // 调试时在此打断点
@@ -180,16 +265,16 @@ public class ShapeShifterCurseCommand {
 
     }
 
-    private static int transformToCustomForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+    private static int transformToDynamicForm(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
         // this with transform effect
         ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
-        PlayerFormBase form = CustomFormArgumentType.getForm(commandContext, "form");
+        IForm form = DynamicFormArgumentType.getForm(commandContext, "form");
         ServerCommandSource serverCommandSource = commandContext.getSource();
         if (form == null) {
             commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
             return 0;
         }
-        handleDirectTransform(target, form, false);
+        TransformManager.startTransform(target, form, null);
 
         return 1;
 
@@ -351,8 +436,8 @@ public class ShapeShifterCurseCommand {
     private static List<Identifier> getAvailableForms(ServerPlayerEntity player) {
         List<Identifier> availableForms = new ArrayList<>();
         for (Identifier formID : RegPlayerForms.dynamicPlayerForms) {
-            PlayerFormBase form = RegPlayerForms.getPlayerForm(formID);
-            if (form instanceof PlayerFormDynamic pfd) {
+            IForm form = RegPlayerForms.getPlayerForm(formID);
+            if (form instanceof DynamicForm pfd) {
                 if (pfd.IsPatronForm && pfd.IsPlayerCanUse(player)) {
                     if (!availableForms.contains(formID)) {
                         availableForms.add(formID);
@@ -378,33 +463,225 @@ public class ShapeShifterCurseCommand {
         return 1;
     }
 
+    private static boolean CheckDebugEnvironment(CommandContext<ServerCommandSource> commandContext) {
+        // 只有权限等级>=2 或者在配置中开启才可以使用调试命令
+        if (commandContext.getSource().hasPermissionLevel(2)) {
+            return true;
+        }
+        return ShapeShifterCurseFabric.commonConfig.enableDebugCommand;
+    }
+
     private static int devCommand(CommandContext<ServerCommandSource> commandContext) {
+        if (!CheckDebugEnvironment(commandContext)) {
+            commandContext.getSource().sendError(Text.literal("Has No Permission!"));
+            return 0;
+        }
         ServerPlayerEntity player = commandContext.getSource().getPlayer();
         ServerWorld world = commandContext.getSource().getWorld();
         if (player == null) {
-            return 1;
+            return 0;
         }
         try {
-//            ItemStack stack = new ItemStack(Items.POTION);
-//            PotionUtil.setPotion(stack, RegCustomPotions.CUSTOM_STATUE_FORM_POTION);
-//            CTPUtils.setCTPFormIDToNBT(stack.getNbt(), RegPlayerForms.SNOW_FOX_3.FormID);
-//            player.giveItemStack(stack);
-            ManaComponent manaComponent = ManaUtils.getManaComponent(player);
-            StringBuilder stringBuilder = new StringBuilder("\nMana Data\n");
-            Identifier manaType = manaComponent.getManaTypeID();
-            if (manaType != null) {
-                stringBuilder.append("Mana Type: ").append(manaType.toString()).append("\n");
-            } else {
-                stringBuilder.append("Mana Type: None\n");
-            }
-            stringBuilder.append("Mana: ").append(manaComponent.getMana()).append("\n");
-            stringBuilder.append("Max Mana Client: ").append(manaComponent.MaxManaClient).append("\n");
-            stringBuilder.append("Mana Regen: ").append(manaComponent.ManaRegenClient).append("\n");
-            stringBuilder.append("Max Mana Server: ").append(manaComponent.getMaxMana()).append("\n");
-            stringBuilder.append("Mana Regen Server: ").append(manaComponent.getManaRegen()).append("\n");
-            player.sendMessage(Text.literal(stringBuilder.toString()), false);
+            WebBullet webBullet = new WebBullet(player, 1);
+            webBullet.setVelocity(player, player.getPitch(), player.getYaw(), 0.0f, 2.25f, 0.5f);
+            player.getWorld().spawnEntity(webBullet);
         } catch (Exception e) {
             ShapeShifterCurseFabric.LOGGER.error("Error Dev Command", e);
+            return 0;
+        }
+        return 1;
+    }
+
+
+    private static int clearPlayerFormData(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        if (!CheckDebugEnvironment(commandContext)) {
+            commandContext.getSource().sendError(Text.literal("Has No Permission!"));
+            return 0;
+        }
+        ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
+        PlayerFormComponent.COMPONENT.get(target).clear();
+        PlayerFormComponent.COMPONENT.sync(target);
+        commandContext.getSource().sendFeedback(() -> {return Text.literal("Form Data Cleared!");}, false);
+        return 1;
+    }
+
+    private static int clearPlayerSkinData(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        if (!CheckDebugEnvironment(commandContext)) {
+            commandContext.getSource().sendError(Text.literal("Has No Permission!"));
+            return 0;
+        }
+        ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
+        RegPlayerSkinComponent.SKIN_SETTINGS.get(target).clear();
+        RegPlayerSkinComponent.SKIN_SETTINGS.sync(target);
+        commandContext.getSource().sendFeedback(() -> {return Text.literal("Skin Data Cleared!");}, false);
+        return 1;
+    }
+
+    private static int clearPlayerMinionData(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        if (!CheckDebugEnvironment(commandContext)) {
+            commandContext.getSource().sendError(Text.literal("Has No Permission!"));
+            return 0;
+        }
+        ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
+        RegPlayerMinionComponent.PLAYER_MINION_DATA.get(target).clear();
+        RegPlayerMinionComponent.PLAYER_MINION_DATA.sync(target);
+        commandContext.getSource().sendFeedback(() -> {return Text.literal("Minion Data Cleared!");}, false);
+        return 1;
+    }
+
+    private static int clearPlayerManaData(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        if (!CheckDebugEnvironment(commandContext)) {
+            commandContext.getSource().sendError(Text.literal("Has No Permission!"));
+            return 0;
+        }
+        ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
+        RegManaComponent.MANA.get(target).clear();
+        RegManaComponent.MANA.sync(target);
+        commandContext.getSource().sendFeedback(() -> {return Text.literal("Mana Data Cleared!");}, false);
+        return 1;
+    }
+
+    private static int FC_Menu(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        if (player == null) {
+            return 0;
+        }
+        ModPacketsS2CServer.sendOpenFCSMenu(player);
+        return 1;
+    }
+
+    private static int FC_Save(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        if (player == null) {
+            return 0;
+        }
+        Identifier formID = null;
+        try {
+            formID = commandContext.getArgument("form", Identifier.class);
+        } catch (Exception e) {
+            formID = FormUtils.getPlayerForm(player).getFormID();
+        }
+        String type = commandContext.getArgument("type", String.class);
+        String slotName = commandContext.getArgument("slot_name", String.class);
+        ModPacketsS2CServer.sendModifyFCDData(player, "save", formID, type, slotName, "", "");
+        return 1;
+    }
+
+    private static int FC_Load(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        if (player == null) {
+            return 0;
+        }
+        Identifier formID = null;
+        try {
+            formID = commandContext.getArgument("form", Identifier.class);
+        } catch (Exception e) {
+            formID = FormUtils.getPlayerForm(player).getFormID();
+        }
+        String type = commandContext.getArgument("type", String.class);
+        String slotName = commandContext.getArgument("slot_name", String.class);
+        ModPacketsS2CServer.sendModifyFCDData(player, "load", formID, type, slotName, "", "");
+        return 1;
+    }
+
+    private static int FC_Delete(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        if (player == null) {
+            return 0;
+        }
+        Identifier formID = null;
+        try {
+            formID = commandContext.getArgument("form", Identifier.class);
+        } catch (Exception e) {
+            formID = FormUtils.getPlayerForm(player).getFormID();
+        }
+        String type = commandContext.getArgument("type", String.class);
+        String slotName = commandContext.getArgument("slot_name", String.class);
+        ModPacketsS2CServer.sendModifyFCDData(player, "delete", formID, type, slotName, "", "");
+        return 1;
+    }
+
+    private static final Identifier NO_ID = ShapeShifterCurseFabric.identifier("empty");
+
+    private static int FC_Config(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        if (player == null) {
+            return 0;
+        }
+        String type = commandContext.getArgument("type", String.class);
+        ModPacketsS2CServer.sendModifyFCDData(player, "config", NO_ID, type, "", "", "");
+        return 1;
+    }
+
+    private static int FC_List(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        if (player == null) {
+            return 0;
+        }
+        Identifier formID = null;
+        try {
+            formID = commandContext.getArgument("form", Identifier.class);
+        } catch (Exception e) {
+            formID = FormUtils.getPlayerForm(player).getFormID();
+        }
+        String type = commandContext.getArgument("type", String.class);
+        ModPacketsS2CServer.sendModifyFCDData(player, "list", formID, type, "", "", "");
+        return 1;
+    }
+
+    private static int FC_ToChat(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        if (player == null) {
+            return 0;
+        }
+        String type = commandContext.getArgument("type", String.class);
+        String messageType = commandContext.getArgument("message_type", String.class);
+        String encodeType = commandContext.getArgument("encode_type", String.class);
+        FormTextureUtils.ColorSetting colorSetting = FormColorData.ABGR2ARGB(RegPlayerSkinComponent.SKIN_SETTINGS.get(player).getFormColor());
+        String Data = "";
+        switch (encodeType) {
+            case "base64" -> {
+                Data = FormColorData.ColorSettingtoString(colorSetting, true);
+            }
+            case "hex" -> {
+                Data = FormColorData.ColorSettingtoString(colorSetting, false);
+            }
+        }
+        switch (messageType) {
+            case "raw" -> {
+            }
+            case "command" -> {
+                Data = "/shape_shifter_curse form_color set_color_from_string \"" + Data + "\"";
+            }
+        }
+        Text text = Text.translatable("message.shape-shifter-curse.form_color_data", player.getName());
+        text = FormColorData.appendCopyableText(text, Data);
+        switch (type) {
+            case "local" -> {
+                player.sendMessage(text, false);
+            }
+            case "server" -> {
+                Objects.requireNonNull(player.getServer()).getPlayerManager().broadcast(text, false);
+            }
+        }
+        return 1;
+    }
+
+    private static int FC_SetColorFromString(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        if (player == null) {
+            return 0;
+        }
+        String colorSettingString = commandContext.getArgument("color_string", String.class);
+        try {
+            FormTextureUtils.ColorSetting colorSetting = FormColorData.ColorSettingFormString(colorSettingString);
+            if (colorSetting != null) {
+                RegPlayerSkinComponent.SKIN_SETTINGS.get(player).setFormColor(FormColorData.ARGB2ABGR(colorSetting));
+                RegPlayerSkinComponent.SKIN_SETTINGS.sync(player);
+                return 1;
+            }
+        } catch (Exception e) {
+            player.getCommandSource().sendError(Text.literal("Error to apply color setting from string"));
             return 0;
         }
         return 0;

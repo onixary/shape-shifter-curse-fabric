@@ -1,4 +1,4 @@
 {
-    "type": "origins:modify_falling",
+    "type": "apoli:modify_falling",
     "velocity": 0.06
 }

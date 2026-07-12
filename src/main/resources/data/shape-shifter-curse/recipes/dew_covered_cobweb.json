@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "shape-shifter-curse:untreated_moondust"
+    },
+    {
+      "item": "minecraft:cobweb"
+    },
+    {
+      "item": "shape-shifter-curse:silk_dew"
+    }
+  ],
+  "result": {
+    "item": "shape-shifter-curse:dew_covered_cobweb",
+    "count": 1
+  }
+}

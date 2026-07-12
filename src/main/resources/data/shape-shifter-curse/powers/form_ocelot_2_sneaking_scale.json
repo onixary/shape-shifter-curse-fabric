@@ -5,10 +5,10 @@
     "original_scale": 0.65,
     "original_eye_scale": 1.0,
     "condition": {
-        "type": "origins:and",
+        "type": "apoli:and",
         "conditions": [
             {
-                "type": "origins:sneaking"
+                "type": "apoli:sneaking"
             }
         ]
     }

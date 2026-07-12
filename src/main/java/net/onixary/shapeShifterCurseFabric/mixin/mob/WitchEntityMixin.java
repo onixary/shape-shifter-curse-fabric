@@ -10,11 +10,10 @@ import net.minecraft.potion.PotionUtil;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.WitchFriendlyPower;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomPotions;
-import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBase;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.ability.RegPlayerFormComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -30,9 +29,11 @@ public abstract class WitchEntityMixin {
         WitchEntity witch = (WitchEntity) (Object) this;
         World world = witch.getWorld();
 
-        if(target instanceof PlayerEntity){
-            PlayerFormBase curForm = RegPlayerFormComponent.PLAYER_FORM.get(target).getCurrentForm();
-            if(curForm.equals(RegPlayerForms.ORIGINAL_SHIFTER)){
+        if(target instanceof PlayerEntity player){
+            if (PowerHolderComponent.hasPower(player, WitchFriendlyPower.class)) {
+                ci.cancel();
+            }
+            if (RegPlayerForms.ORIGINAL_SHIFTER.isPlayerForm(player) || (ShapeShifterCurseFabric.commonConfig.witchPotionForPreBook && RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player))){
                 double randomChance = Math.random();
                 if(randomChance < POTION_REPLACE_CHANCE){
                     Vec3d vec3d = target.getVelocity();
@@ -58,9 +59,6 @@ public abstract class WitchEntityMixin {
                     // 取消原始攻击逻辑
                     ci.cancel();
                 }
-            }
-            else if (PowerHolderComponent.hasPower((PlayerEntity)target, WitchFriendlyPower.class)) {
-                ci.cancel();
             }
         }
     }

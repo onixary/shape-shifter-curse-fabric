@@ -1,7 +1,7 @@
 {
-    "type": "origins:action_over_time",
+    "type": "apoli:action_over_time",
     "entity_action": {
-        "type": "origins:damage",
+        "type": "apoli:damage",
         "amount": 1,
         "damage_type": "minecraft:starve"
     },

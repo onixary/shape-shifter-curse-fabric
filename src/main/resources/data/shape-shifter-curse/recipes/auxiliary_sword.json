@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " D ",
+    "MG ",
+    " S "
+  ],
+  "key": {
+    "M": {
+      "item": "shape-shifter-curse:untreated_moondust"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "shape-shifter-curse:auxiliary_sword",
+    "count": 1
+  }
+}

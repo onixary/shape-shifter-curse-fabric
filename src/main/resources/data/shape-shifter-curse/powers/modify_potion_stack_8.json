@@ -1,7 +1,7 @@
 {
     "type": "shape-shifter-curse:modify_potion_stack",
     "condition": {
-        "type": "origins:constant",
+        "type": "apoli:constant",
         "value": true
     },
     "count": 8

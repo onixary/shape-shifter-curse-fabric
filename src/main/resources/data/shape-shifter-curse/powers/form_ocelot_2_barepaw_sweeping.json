@@ -1,13 +1,13 @@
 {
     "type": "shape-shifter-curse:always_sweeping",
     "condition": {
-        "type": "origins:or",
+        "type": "apoli:or",
         "conditions": [
             {
-                "type": "origins:inventory",
+                "type": "apoli:inventory",
                 "process_mode": "items",
                 "item_condition": {
-                    "type": "origins:harvest_level",
+                    "type": "apoli:harvest_level",
                     "comparison": "<=",
                     "compare_to": 1
                 },
@@ -16,7 +16,7 @@
                 ]
             },
             {
-                "type": "origins:inventory",
+                "type": "apoli:inventory",
                 "process_mode": "items",
                 "comparison": "==",
                 "compare_to": 0,

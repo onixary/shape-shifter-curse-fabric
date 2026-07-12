@@ -161,15 +161,15 @@ dependencies {
     //modCompileOnly "maven.modrinth:azurelib:2.1.17"
 
 
-    //Owo
-    //modImplementation "io.wispforest:owo-lib:${project.owo_version}"
-    //include "io.wispforest:owo-sentinel:${project.owo_version}"
-    //annotationProcessor modImplementation("io.wispforest:owo-lib:${project.owo_version}")
-    modCompileOnly "io.wispforest:owo-lib:${owo_version}"
-    modRuntimeOnly "io.wispforest:owo-lib:${owo_version}"
+    // Owo
+    // modImplementation "io.wispforest:owo-lib:${project.owo_version}"
+    // include "io.wispforest:owo-sentinel:${project.owo_version}"
+    // annotationProcessor modImplementation("io.wispforest:owo-lib:${project.owo_version}")
+    // modCompileOnly "io.wispforest:owo-lib:${owo_version}"
+    // modRuntimeOnly "io.wispforest:owo-lib:${owo_version}"
 
     // Rich Translatable Text
-    modLocalRuntime "curse.maven:rich-translatable-text-1342784:6975662"
+    modLocalRuntime "curse.maven:rich-translatable-text-1342784:7440321"
 
     // satin shader
     modImplementation "org.ladysnake:satin:${satin_version}"
@@ -218,7 +218,7 @@ dependencies {
 
     // Trinkets
 
-    modImplementation "dev.emi:trinkets:${project.trinkets_version}"
+    modCompileOnly "dev.emi:trinkets:${project.trinkets_version}"
 
     // Fabric forge config api port
     // modLocalRuntime "fuzs.forgeconfigscreens:forgeconfigscreens-fabric:8.0.0"
@@ -244,6 +244,9 @@ dependencies {
     annotationProcessor(files("libs/mixinextras-fabric-0.2.0-beta.8.jar"))
 
     modCompileOnly "maven.modrinth:tacz-refabricated:HxQ3IsAZ" // TaCZ: Refabricated 1.20.1-0.4.0-forge1.1.7-hotfix
+
+    // Tough as nails
+    modCompileOnly "maven.modrinth:tough-as-nails:VaFrDMPi"
 
 }
 

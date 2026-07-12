@@ -1,5 +1,5 @@
 {
-    "type": "origins:modify_exhaustion",
+    "type": "apoli:modify_exhaustion",
     "modifier": {
         "name": "Increased exhaustion",
         "operation": "multiply_base",

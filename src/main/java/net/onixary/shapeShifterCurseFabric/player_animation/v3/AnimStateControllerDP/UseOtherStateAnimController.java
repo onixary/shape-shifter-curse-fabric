@@ -56,9 +56,9 @@ public class UseOtherStateAnimController extends AbstractAnimStateControllerDP {
             }
             return otherStateController.getAnimation(player, data);
         }
-        if (ShapeShifterCurseFabric.IsDevelopmentEnvironment()) {  // 由于otherStateId nullable但是逻辑上不推荐为null 所以在开发环境下提示
-            ShapeShifterCurseFabric.LOGGER.warn("UseOtherStateAnimController State Not Found: {}", this.otherStateId);
-        }
+        // if (ShapeShifterCurseFabric.IsDevelopmentEnvironment()) {  // 由于otherStateId nullable但是逻辑上不推荐为null 所以在开发环境下提示
+        //     ShapeShifterCurseFabric.LOGGER.warn("UseOtherStateAnimController State Not Found: {}", this.otherStateId);
+        // }
         return null;
     }
 

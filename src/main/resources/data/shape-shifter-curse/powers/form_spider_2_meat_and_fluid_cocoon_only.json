@@ -1,0 +1,95 @@
+{
+  "type": "apoli:multiple",
+  "restrict_food_type": {
+    "type": "apoli:modify_food",
+    "food_modifiers": [
+      {
+        "operation": "set_total",
+        "value": 0.0
+      }
+    ],
+    "saturation_modifiers": [
+      {
+        "operation": "set_total",
+        "value": 0.0
+      }
+    ],
+    "item_condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:or",
+          "conditions": [
+            {
+              "type": "apoli:ingredient",
+              "ingredient": {
+                "tag": "shape-shifter-curse:meat"
+              }
+            },
+            {
+              "type": "apoli:ingredient",
+              "ingredient": {
+                "item": "minecraft:rotten_flesh"
+              }
+            },
+            {
+              "type": "apoli:ingredient",
+              "ingredient": {
+                "item": "shape-shifter-curse:spider_fluid_cocoon"
+              }
+            }
+          ],
+          "inverted": true
+        },
+        {
+          "type": "apoli:food"
+        },
+        {
+          "type": "apoli:ingredient",
+          "ingredient": {
+            "tag": "shape-shifter-curse:ignore_diet"
+          },
+          "inverted": true
+        },
+        {
+          "type": "apoli:ingredient",
+          "ingredient": {
+            "tag": "shape-shifter-curse:ignore_vc_eat"
+          },
+          "inverted": true
+        },
+        {
+          "type": "shape-shifter-curse:is_morph_scale_food",
+          "inverted": true
+        }
+      ]
+    }
+  },
+
+  "meat_down": {
+    "type": "apoli:modify_food",
+    "food_modifiers": [
+      {
+        "operation": "multiply_base_multiplicative",
+        "value": -0.2
+      }
+    ],
+    "saturation_modifiers": [
+      {
+        "operation": "multiply_base_multiplicative",
+        "value": -0.1
+      }
+    ],
+    "item_condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:ingredient",
+          "ingredient": {
+            "tag": "shape-shifter-curse:meat"
+          }
+        }
+      ]
+    }
+  }
+}

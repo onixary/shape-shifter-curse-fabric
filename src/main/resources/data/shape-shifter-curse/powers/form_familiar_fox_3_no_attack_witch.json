@@ -1,55 +1,26 @@
 {
-    "type": "origins:action_on_hit",
+    "type": "apoli:action_on_hit",
     "bientity_action": {
-        "type": "origins:target_action",
+        "type": "apoli:target_action",
         "action": {
-            "type": "origins:and",
+            "type": "apoli:and",
             "actions": [
                 {
-                    "type": "origins:heal",
+                    "type": "apoli:heal",
                     "amount": 20.0
                 },
                 {
-                    "type": "origins:play_sound",
+                    "type": "apoli:play_sound",
                     "sound": "minecraft:entity.ender_eye.death"
                 }
             ]
         }
     },
     "bientity_condition": {
-        "type": "origins:target_condition",
+        "type": "apoli:target_condition",
         "condition": {
-            "type": "origins:or",
-            "conditions": [
-                {
-                    "type": "origins:entity_type",
-                    "entity_type": "minecraft:witch"
-                },
-                {
-                    "type": "origins:entity_type",
-                    "entity_type": "minecraft:vex"
-                },
-                {
-                    "type": "origins:entity_type",
-                    "entity_type": "minecraft:evoker"
-                },
-                {
-                    "type": "origins:entity_type",
-                    "entity_type": "minecraft:illusioner"
-                },
-                {
-                    "type": "origins:entity_type",
-                    "entity_type": "minecraft:pillager"
-                },
-                {
-                    "type": "origins:entity_type",
-                    "entity_type": "minecraft:vindicator"
-                },
-                {
-                    "type": "origins:entity_type",
-                    "entity_type": "minecraft:ravager"
-                }
-            ]
+            "type": "apoli:in_tag",
+            "tag": "shape-shifter-curse:illager"
         }
     },
     "cooldown": 10
