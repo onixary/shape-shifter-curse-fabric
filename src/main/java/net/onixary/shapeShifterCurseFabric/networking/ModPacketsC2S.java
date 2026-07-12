@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.networking;
 
 import io.github.apace100.apoli.component.PowerHolderComponent;
+import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
@@ -23,6 +24,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
+import net.onixary.shapeShifterCurseFabric.util.Verify.AuthServer;
 import org.jetbrains.annotations.Nullable;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
@@ -122,6 +124,11 @@ public class ModPacketsC2S {
         ServerPlayNetworking.registerGlobalReceiver(
                 REQUEST_POWER_ANIM_DATA,
                 ModPacketsC2S::onRequestPowerAnimationData
+        );
+
+        ServerPlayNetworking.registerGlobalReceiver(
+                UPLOAD_PATRON_AUTH_FILE,
+                ModPacketsC2S::receivePatronAuthFile
         );
     }
 
@@ -301,4 +308,14 @@ public class ModPacketsC2S {
         }
         return;
     }
+
+    private static void receivePatronAuthFile(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
+        byte[] data = packetByteBuf.readByteArray();
+        if (data != null) {
+            minecraftServer.execute(() -> {
+                AuthServer.loadPatronAuthFile(playerEntity, new PacketByteBuf(Unpooled.wrappedBuffer(data)));
+            });
+        }
+    }
 }
+

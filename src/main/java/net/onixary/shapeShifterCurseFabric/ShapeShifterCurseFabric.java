@@ -74,6 +74,7 @@ import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManag
 import net.onixary.shapeShifterCurseFabric.util.*;
 import net.onixary.shapeShifterCurseFabric.util.Accessory.AccessoryUtils;
 import net.onixary.shapeShifterCurseFabric.util.Accessory.DefaultAccessory;
+import net.onixary.shapeShifterCurseFabric.util.Verify.AuthServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -240,6 +241,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
         ManaRegistries.register();
         DefaultAccessory.init();
+        AuthServer.init();
 
         ServerLifecycleEvents.SERVER_STARTED.register(server -> {
             // 获取主世界作为默认世界

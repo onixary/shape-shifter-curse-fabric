@@ -5,6 +5,9 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.UUID;
 
 // 服务端不能访问这个class里的任何函数 有随机崩溃问题 所以现在所有函数加了一个检查 防止测试时测不出问题 发布时随机崩溃
 public class ClientUtils {
@@ -24,5 +27,12 @@ public class ClientUtils {
             // return true;
         }
         return !MinecraftClient.getInstance().options.hudHidden;
+    }
+
+    public static @Nullable UUID getPlayerUUID() {
+        if (FabricLoader.getInstance().getEnvironmentType() != EnvType.CLIENT) {
+            throw new RuntimeException("Cannot invoke this method in a non-client environment");
+        }
+        return MinecraftClient.getInstance().getSession().getUuidOrNull();
     }
 }

@@ -109,7 +109,8 @@
     "CameraBobbingMixin",
     "EntityRendererMixin",
     "render.LivingEntityRendererMixin",
-    "render.PlayerEntityRendererMixin"
+    "render.PlayerEntityRendererMixin",
+    "render.AbstractClientPlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
