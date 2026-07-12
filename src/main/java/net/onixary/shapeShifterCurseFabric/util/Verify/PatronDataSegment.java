@@ -61,6 +61,10 @@ public final class PatronDataSegment implements IDataSegment {
         return expireTime;
     }
 
+    public byte[] getExtraData(String key) {
+        return extraData.get(key);
+    }
+
     @Override
     public void onGain(PlayerEntity player) {
         PATRON_AUTH_DATA.put(uuid, this);
