@@ -34,7 +34,8 @@
     "shape-shifter-curse:form_spider_2",
     "shape-shifter-curse:form_spider_3",
     "shape-shifter-curse:form_allay_sp",
-    "shape-shifter-curse:form_feral_cat_sp"
+    "shape-shifter-curse:form_feral_cat_sp",
+    "shape-shifter-curse:technical_form"
   ],
   "allow_random": true,
   "exclude_random": [

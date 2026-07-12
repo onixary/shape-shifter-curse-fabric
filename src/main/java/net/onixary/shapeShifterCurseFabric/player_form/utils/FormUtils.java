@@ -22,6 +22,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.ITransformReason;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.util.TrinketUtils;
+import net.onixary.shapeShifterCurseFabric.util.Verify.PatronDataSegment;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -57,6 +58,9 @@ public class FormUtils {
     public static final FlagData SpecialForm = new FlagData("special_form"); // SP形态
     public static final FlagData CanTFToFinalForm = new FlagData("can_tf_to_final_form"); // 可以通过高级催化剂变形到最终形态
     public static final FlagData FinalForm = new FlagData("final_form"); // 最终形态 PowerfulCatalyst仅能变形到此形态
+
+    // 在此解释一下为什么要先变TechnicalFormOrigin后变目标Origin 因为形态能力还原依赖于不同Origin切换时的清除旧Power+添加新Power 如果Origin一样 就会导致饰品/子形态/额外能力挂载系统添加/删除的能力无法还原
+    public static Origin TechnicalFormOrigin = null;
 
     public static record ExtraPower(@NotNull Identifier LayerID, @NotNull Identifier FormID, @NotNull List<Identifier> PowerIDs) {
         public @NotNull Identifier getLayerID() { return LayerID; }
@@ -132,6 +136,10 @@ public class FormUtils {
         if (layer != null && layerData.getRight() != null) {
             Origin origin = OriginRegistry.get(layerData.getRight());
             if(layer.contains(origin, player)){
+                if (TechnicalFormOrigin == null) {
+                    TechnicalFormOrigin = OriginRegistry.get(ShapeShifterCurseFabric.identifier("technical_form"));
+                }
+                component.setOrigin(layer, TechnicalFormOrigin);
                 component.setOrigin(layer, origin);
                 component.sync();
             }
@@ -285,5 +293,16 @@ public class FormUtils {
     public static void applyFallback(PlayerEntity player) {
         PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
         FormUtils._loadForm(player, component.getFallbackForm());
+    }
+
+    public static boolean isFormCanUse(PlayerEntity player, IForm form) {
+        boolean canUse = true;
+        if (form instanceof IFormWithCondition iFormWithCondition) {
+            canUse &= iFormWithCondition.checkCanUse(player);
+        }
+        if (form instanceof IPatronForm iPatronForm) {
+            canUse &= PatronDataSegment.isPatronFormCanUse(player, iPatronForm);
+        }
+        return canUse;
     }
 }

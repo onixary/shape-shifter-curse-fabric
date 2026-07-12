@@ -15,6 +15,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
 import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
+import net.onixary.shapeShifterCurseFabric.util.Verify.KeySegment;
 import org.jetbrains.annotations.Nullable;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
@@ -309,5 +310,15 @@ public class ModPacketsS2CServer {
         buf.writeString(arg3);
         buf.writeString(arg4);
         ServerPlayNetworking.send(player, ModPackets.MODIFY_FCD_DATA, buf);
+    }
+
+    public static void sendNewSubKey(ServerPlayerEntity player, KeySegment newKey) {
+        if (newKey == null) {
+            ShapeShifterCurseFabric.LOGGER.error("newKey is null");
+            return;
+        }
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeByteArray(newKey.getRaw());
+        ServerPlayNetworking.send(player, ModPackets.MELT_AUTH_SUB_KEY, buf);
     }
 }

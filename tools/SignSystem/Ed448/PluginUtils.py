@@ -40,6 +40,8 @@ def loadPlugins(pluginName: str) -> bool:
 		module.registerPlugin(DataDeserializerRegister, LoadAllDataFunctionRegister)
 		return True
 	except Exception as e:
+		print(f"加载插件 {pluginName} 失败")
+		print(e)
 		return False
 
 

@@ -14,14 +14,15 @@ public final class KeySegment {
     private final PublicKey publicKey;
 
     KeySegment(PacketByteBuf buf) {
-        this.raw = buf.array();
-        this.type = buf.readVarInt();
-        this.version = buf.readVarInt();
+        this.raw = AuthUtils.getBufArray(buf);
+        buf.skipBytes(4);  // Length
+        this.type = buf.readInt();
+        this.version = buf.readInt();
         this.useMeltdown = buf.readBoolean();
-        int supportDataTypeCount = buf.readVarInt();
+        int supportDataTypeCount = buf.readInt();
         int[] supportDataTypes = new int[supportDataTypeCount];
         for (int i = 0; i < supportDataTypeCount; i++) {
-            int targetType = buf.readVarInt();
+            int targetType = buf.readInt();
             supportDataTypes[i] = targetType;
             if (targetType == -1) {
                 supportDataTypes = null;
@@ -29,12 +30,12 @@ public final class KeySegment {
             }
         }
         this.supportDataTypes = supportDataTypes;
-        this.publicKey = AuthUtils.readEd448PublicKey(buf.readBytes(57).array());
+        this.publicKey = AuthUtils.readEd448PublicKey(AuthUtils.getBufArray((buf.readBytes(57))));
         if (this.publicKey == null) {
             throw new RuntimeException("Invalid Ed448 public key");
         }
         int keyDataEnd = buf.readerIndex();
-        byte[] signature = buf.readBytes(114).array();
+        byte[] signature = AuthUtils.getBufArray(buf.readBytes(114));
         byte[] keyData = new byte[keyDataEnd];
         buf.getBytes(0, keyData);
         AuthUtils.requireTrue(AuthUtils.verifyEd448Signature(keyData, signature, AuthUtils.rootPublickey), "Invalid signature");

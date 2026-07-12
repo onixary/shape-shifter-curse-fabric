@@ -15,15 +15,21 @@ import json
 
 if TYPE_CHECKING:
 	import ScriptTypes
+	import Const
 
-currentDir = os.path.dirname(os.path.abspath(__file__))
-parentDir = os.path.dirname(currentDir)
-moduleName = "ScriptTypes"  # 假设要导入的模块名
-moduleFilePath = os.path.join(parentDir, f"{moduleName}.py")
-spec = importlib.util.spec_from_file_location(moduleName, moduleFilePath)
 if not TYPE_CHECKING:
+	currentDir = os.path.dirname(os.path.abspath(__file__))
+	parentDir = os.path.dirname(currentDir)
+	moduleName = "ScriptTypes"
+	moduleFilePath = os.path.join(parentDir, f"{moduleName}.py")
+	spec = importlib.util.spec_from_file_location(moduleName, moduleFilePath)
 	ScriptTypes = importlib.util.module_from_spec(spec)
 	spec.loader.exec_module(ScriptTypes)
+	moduleName = "Const"
+	moduleFilePath = os.path.join(parentDir, f"{moduleName}.py")
+	spec = importlib.util.spec_from_file_location(moduleName, moduleFilePath)
+	Const = importlib.util.module_from_spec(spec)
+	spec.loader.exec_module(Const)
 
 
 def FormatDuration(Seconds: int) -> str:
@@ -65,42 +71,42 @@ class PatronDataSegment(ScriptTypes.SubDataSegment):
 	def load(data: bytes) -> "PatronDataSegment":
 		dataIO = io.BytesIO(data)
 		segment = PatronDataSegment()
-		segment.Type = int.from_bytes(dataIO.read(4), "little")
-		segment.Version = int.from_bytes(dataIO.read(4), "little")
-		length = int.from_bytes(dataIO.read(4), "little")
+		segment.Type = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
+		segment.Version = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
+		length = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
 		if length != len(data):
 			raise Exception("Data length is not Current")
 		segment.UUID = dataIO.read(16)
-		segment.PermissionLevel = int.from_bytes(dataIO.read(4), "little")
-		segment.Timestamp = int.from_bytes(dataIO.read(8), "little")
-		segment.ExpiresIn = int.from_bytes(dataIO.read(8), "little")
-		extraDataCount = int.from_bytes(dataIO.read(4), "little")
+		segment.PermissionLevel = int.from_bytes(dataIO.read(2), Const.INT_BYTE_TYPE)
+		segment.Timestamp = int.from_bytes(dataIO.read(8), Const.INT_BYTE_TYPE)
+		segment.ExpiresIn = int.from_bytes(dataIO.read(8), Const.INT_BYTE_TYPE)
+		extraDataCount = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
 		for i in range(extraDataCount):
-			keyLength = int.from_bytes(dataIO.read(4), "little")
+			keyLength = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
 			key = dataIO.read(keyLength).decode("utf-8")
-			valueLength = int.from_bytes(dataIO.read(4), "little")
+			valueLength = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
 			value = dataIO.read(valueLength)
 			segment.ExtraData[key] = value
 		return segment
 
 	def save(self) -> bytes:
 		dataIO = io.BytesIO()
-		dataIO.write(self.Type.to_bytes(4, "little"))
-		dataIO.write(self.Version.to_bytes(4, "little"))
-		dataIO.write((0).to_bytes(4, "little"))  # 先用0填充 之后填充数据长度
+		dataIO.write(self.Type.to_bytes(4, Const.INT_BYTE_TYPE))
+		dataIO.write(self.Version.to_bytes(4, Const.INT_BYTE_TYPE))
+		dataIO.write((0).to_bytes(4, Const.INT_BYTE_TYPE))  # 先用0填充 之后填充数据长度
 		dataIO.write(self.UUID)
-		dataIO.write(self.PermissionLevel.to_bytes(4, "little"))
-		dataIO.write(self.Timestamp.to_bytes(8, "little"))
-		dataIO.write(self.ExpiresIn.to_bytes(8, "little"))
-		dataIO.write(len(self.ExtraData).to_bytes(4, "little"))
+		dataIO.write(self.PermissionLevel.to_bytes(2, Const.INT_BYTE_TYPE))
+		dataIO.write(self.Timestamp.to_bytes(8, Const.INT_BYTE_TYPE))
+		dataIO.write(self.ExpiresIn.to_bytes(8, Const.INT_BYTE_TYPE))
+		dataIO.write(len(self.ExtraData).to_bytes(4, Const.INT_BYTE_TYPE))
 		for key, value in self.ExtraData.items():
-			dataIO.write(len(key).to_bytes(4, "little"))
+			dataIO.write(len(key).to_bytes(4, Const.INT_BYTE_TYPE))
 			dataIO.write(key.encode("utf-8"))
-			dataIO.write(len(value).to_bytes(4, "little"))
+			dataIO.write(len(value).to_bytes(4, Const.INT_BYTE_TYPE))
 			dataIO.write(value)
 		length = dataIO.tell()
 		dataIO.seek(8)
-		dataIO.write(length.to_bytes(4, "little"))
+		dataIO.write(length.to_bytes(4, Const.INT_BYTE_TYPE))
 		return dataIO.getvalue()
 
 	@staticmethod

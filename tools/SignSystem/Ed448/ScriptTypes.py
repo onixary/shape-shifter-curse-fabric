@@ -28,15 +28,15 @@ class SubKeyPublicSegment:
 	def load(data: bytes, rootPublicKey: typing.Optional[ed448.Ed448PublicKey] = None) -> "SubKeyPublicSegment":
 		segment: SubKeyPublicSegment = SubKeyPublicSegment()
 		dataIO: io.BytesIO = io.BytesIO(data)
-		dataLength = int.from_bytes(dataIO.read(4), "little")
+		dataLength = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
 		if dataLength != len(data):
 			raise Exception(f"Data length is not Current {len(data)} != {dataLength}")
-		segment.KeyType = int.from_bytes(dataIO.read(4), "little")
-		segment.KeyVersion = int.from_bytes(dataIO.read(4), "little")
-		segment.MeltDown = bool(int.from_bytes(dataIO.read(1), "little"))
-		AcceptedDataTypeCount = int.from_bytes(dataIO.read(4), "little")
+		segment.KeyType = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
+		segment.KeyVersion = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
+		segment.MeltDown = bool(int.from_bytes(dataIO.read(1), Const.INT_BYTE_TYPE))
+		AcceptedDataTypeCount = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
 		for i in range(AcceptedDataTypeCount):
-			segment.AcceptedDataType.append(int.from_bytes(dataIO.read(4), "little"))
+			segment.AcceptedDataType.append(int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE))
 		segment.PublicKey = ed448.Ed448PublicKey.from_public_bytes(dataIO.read(57))
 		signedEndIndex = dataIO.tell()
 		segment.Signature = dataIO.read(114)
@@ -48,16 +48,16 @@ class SubKeyPublicSegment:
 
 	def save(self, rootPublicKey: typing.Optional[ed448.Ed448PublicKey] = None, rootPrivateKey: typing.Optional[ed448.Ed448PrivateKey] = None) -> bytes:
 		dataIO: io.BytesIO = io.BytesIO()
-		dataIO.write(self.KeyType.to_bytes(4, "little"))
-		dataIO.write(self.KeyVersion.to_bytes(4, "little"))
-		dataIO.write(int(self.MeltDown).to_bytes(1, "little"))
-		dataIO.write(len(self.AcceptedDataType).to_bytes(4, "little"))
+		dataIO.write(self.KeyType.to_bytes(4, Const.INT_BYTE_TYPE))
+		dataIO.write(self.KeyVersion.to_bytes(4, Const.INT_BYTE_TYPE))
+		dataIO.write(int(self.MeltDown).to_bytes(1, Const.INT_BYTE_TYPE))
+		dataIO.write(len(self.AcceptedDataType).to_bytes(4, Const.INT_BYTE_TYPE))
 		for i in self.AcceptedDataType:
-			dataIO.write(i.to_bytes(4, "little"))
+			dataIO.write(i.to_bytes(4, Const.INT_BYTE_TYPE))
 		dataIO.write(self.PublicKey.public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw))
 		signedData = dataIO.getvalue()
 		dataLength = len(signedData) + 4 + 114
-		signedData = dataLength.to_bytes(4, "little") + signedData
+		signedData = dataLength.to_bytes(4, Const.INT_BYTE_TYPE) + signedData
 		dataIO = io.BytesIO(signedData)
 		dataIO.seek(0, os.SEEK_END)
 		if rootPrivateKey is not None:
@@ -89,9 +89,9 @@ class SubKeySegment:
 	def load(data: bytes, rootPublicKey: typing.Optional[ed448.Ed448PublicKey] = None) -> "SubKeySegment":
 		segment: SubKeySegment = SubKeySegment()
 		dataIO: io.BytesIO = io.BytesIO(data)
-		publicKeySegmentLength = int.from_bytes(dataIO.read(4), "little")
+		publicKeySegmentLength = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
 		segment.PublicKeySegment = SubKeyPublicSegment.load(dataIO.read(publicKeySegmentLength), rootPublicKey)
-		privateKeyLength = int.from_bytes(dataIO.read(4), "little")
+		privateKeyLength = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
 		segment.PrivateKey = ed448.Ed448PrivateKey.from_private_bytes(dataIO.read(privateKeyLength))
 		return segment
 
@@ -103,9 +103,9 @@ class SubKeySegment:
 			encryption_algorithm=serialization.NoEncryption(),
 		)
 		dataIO: io.BytesIO = io.BytesIO()
-		dataIO.write(len(SubKeyPublicSegmentBytes).to_bytes(4, "little"))
+		dataIO.write(len(SubKeyPublicSegmentBytes).to_bytes(4, Const.INT_BYTE_TYPE))
 		dataIO.write(SubKeyPublicSegmentBytes)
-		dataIO.write(len(SubKeyPrivateKeyBytes).to_bytes(4, "little"))
+		dataIO.write(len(SubKeyPrivateKeyBytes).to_bytes(4, Const.INT_BYTE_TYPE))
 		dataIO.write(SubKeyPrivateKeyBytes)
 		return dataIO.getvalue()
 
@@ -142,13 +142,13 @@ class IDataSegment:
 
 	def save(self) -> bytes:
 		dataIO = io.BytesIO()
-		dataIO.write((0).to_bytes(4, "little"))  # 由后续添加长度
-		dataIO.write(len(self.SubSegments).to_bytes(2, "little"))
+		dataIO.write((0).to_bytes(4, Const.INT_BYTE_TYPE))  # 由后续添加长度
+		dataIO.write(len(self.SubSegments).to_bytes(2, Const.INT_BYTE_TYPE))
 		for subSegment in self.SubSegments:
 			dataIO.write(subSegment.save())
 		dataLength = dataIO.tell()
 		dataIO.seek(0)
-		dataIO.write(dataLength.to_bytes(4, "little"))
+		dataIO.write(dataLength.to_bytes(4, Const.INT_BYTE_TYPE))
 		return dataIO.getvalue()
 
 	def saveWithSignature(self, privateKey: SubKeySegment | ed448.Ed448PrivateKey) -> tuple[bytes, bytes]:
@@ -171,13 +171,13 @@ class AuthFile:
 		MagicNumber = dataIO.read(Const.MAGIC_NUMBER_LENGTH)
 		if MagicNumber != Const.MAGIC_NUMBER:
 			raise Exception("Magic Number is invalid")
-		authFile.Version = int.from_bytes(dataIO.read(4), "little")
+		authFile.Version = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
 		rollback = dataIO.tell()
-		keySegmentSize = int.from_bytes(dataIO.read(4), "little")
+		keySegmentSize = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
 		dataIO.seek(rollback)
 		authFile.KeySegment = SubKeyPublicSegment.load(dataIO.read(keySegmentSize), rootPublicKey)
 		rollback = dataIO.tell()
-		dataSegmentSize = int.from_bytes(dataIO.read(4), "little")
+		dataSegmentSize = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
 		dataIO.seek(rollback)
 		dataSegmentBytes = dataIO.read(dataSegmentSize)
 		authFile.DataSegments = IDataSegment.load(fileName, dataSegmentBytes)
@@ -191,7 +191,7 @@ class AuthFile:
 			raise Exception("SubKeySegment is invalid")
 		dataIO = io.BytesIO()
 		dataIO.write(Const.MAGIC_NUMBER)
-		dataIO.write(self.Version.to_bytes(4, "little"))
+		dataIO.write(self.Version.to_bytes(4, Const.INT_BYTE_TYPE))
 		dataIO.write(self.KeySegment.save(rootPublicKey, rootPrivateKey))
 		dataSegmentBytes = self.DataSegments.save()
 		dataIO.write(dataSegmentBytes)
