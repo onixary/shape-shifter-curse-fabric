@@ -397,38 +397,6 @@ public class FormModel extends GeoModel<FormAnimatable> {
             head.getModelSpaceMatrix();
         }
     }
-
-    public void applyNeckIk(float headYaw, float headPitch) {
-        if (!hasNeckIk()) {
-            return;
-        }
-        NeckIkConfig config = BCD_NeckIk;
-        float yawDeg = MathHelper.clamp(headYaw, -config.maxYawDeg, config.maxYawDeg);
-        float pitchDeg = MathHelper.clamp(headPitch, -config.maxPitchUpDeg, config.maxPitchDownDeg);
-        float yawRad = yawDeg * MathHelper.RADIANS_PER_DEGREE * config.yawSign;
-        float pitchRad = pitchDeg * MathHelper.RADIANS_PER_DEGREE * config.pitchSign;
-
-        for (int i = 0; i < config.chain.size(); i++) {
-            GeoBone bone = getCachedGeoBone(config.chain.get(i));
-            if (bone == null) {
-                continue;
-            }
-            bone.setRotX(0.0f);
-            bone.setRotY(0.0f);
-            bone.setRotZ(0.0f);
-            setAxisRotation(bone, config.yawAxis, yawRad * config.yawWeights[i]);
-            setAxisRotation(bone, config.pitchAxis, pitchRad * config.pitchWeights[i]);
-        }
-    }
-
-    private void setAxisRotation(GeoBone bone, char axis, float value) {
-        switch (axis) {
-            case 'x' -> bone.setRotX(value);
-            case 'y' -> bone.setRotY(value);
-            case 'z' -> bone.setRotZ(value);
-        }
-    }
-
     // NECK FEATURES END
 
     public void setPlayer(PlayerEntity player, boolean slim) {
@@ -581,101 +549,7 @@ public class FormModel extends GeoModel<FormAnimatable> {
         return bone;
     }
 
-    public final void setRotationForTailBones(float limbAngle, float limbDistance, float age, float tailDragAmount, float tailDragAmountVertical) {
-        IForm curForm = FormTextureUtils.getPlayerForm_Render(entity);
-        boolean isFeral = curForm.getBodyType() == PlayerFormBodyType.FERAL;
-        float SWAY_RATE = 0.33333334F * 0.5F;
-        float SWAY_SCALE = 0.05F;
-        if(BCD_TailChain.isEmpty()) {return;}
-        for (List<String> tailChain : BCD_TailChain) {
-            GeoBone firstTail = this.getCachedGeoBone(tailChain.get(0));
-            if (firstTail == null) {
-                continue;
-            }
-            float tailSway = SWAY_SCALE * MathHelper.cos(age * SWAY_RATE + (((float)Math.PI / 3.0F) * 0.75f));
-            float tailBalance = MathHelper.cos(limbAngle * 0.6662F) * 0.325F * limbDistance;
-            if(!isFeral){
-                firstTail.setRotY(-MathHelper.lerp(limbDistance, tailSway, tailBalance) - tailDragAmount * 0.75F);
-            } else {
-                firstTail.setRotZ(MathHelper.lerp(limbDistance, tailSway, tailBalance) + tailDragAmount * 0.75F);
-            }
-            firstTail.setRotX(-tailDragAmountVertical * 0.75f);
-            float offset = 0.0F;
-            for(int i = 1; i < tailChain.size(); i++){
-                GeoBone chainBone = this.getCachedGeoBone(tailChain.get(i));
-                if (chainBone == null) {continue;}
-                if(!isFeral){
-                    chainBone.setRotY(- MathHelper.lerp(limbDistance, SWAY_SCALE * MathHelper.cos(age * SWAY_RATE - (((float)Math.PI / 3.0F) * offset)), 0.0f) - tailDragAmount * 0.75F);
-                } else{
-                    chainBone.setRotZ(MathHelper.lerp(limbDistance, SWAY_SCALE * MathHelper.cos(age * SWAY_RATE - (((float)Math.PI / 3.0F) * offset)), 0.0f) + tailDragAmount * 0.75F);
-                }
-                chainBone.setRotX(-tailDragAmountVertical * 0.75f * (offset + 0.75f));
-                offset += 0.75F;
-            }
-        }
-    }
 
-    public final void setRotationForHeadTailBones(float headAngle, float age, float tailDragAmount, float tailDragAmountVertical){
-        float SWAY_RATE = 0.33333334F * 0.5F;
-        float SWAY_SCALE = 0.05F;
-        if (BCD_TailChainHead.isEmpty()) {return;}
-        for (List<String> tailChain : BCD_TailChainHead) {
-            GeoBone firstHeadTail = this.getCachedGeoBone(tailChain.get(0));
-            if (firstHeadTail == null) {
-                continue;
-            }
-            float headTailSway = SWAY_SCALE * MathHelper.cos(age * SWAY_RATE + (((float)Math.PI / 3.0F) * 0.75f));
-            float headTailBalance = MathHelper.cos(headAngle * 0.6662F) * 0.325F * 0.1f;
-            firstHeadTail.setRotY(-MathHelper.lerp(0.1f, headTailSway, headTailBalance) - tailDragAmount * 0.75F);
-            firstHeadTail.setRotX(-tailDragAmountVertical * 0.75f);
-            float offset = 0.0F;
-            for (int i = 1; i < tailChain.size(); i++){
-                GeoBone chainBone = this.getCachedGeoBone(tailChain.get(i));
-                if (chainBone == null) {continue;}
-                chainBone.setRotY(- MathHelper.lerp(0.1f, SWAY_SCALE * MathHelper.cos(age * SWAY_RATE - (((float)Math.PI / 3.0F) * offset)), 0.0f) - tailDragAmount * 0.75F);
-                chainBone.setRotX(-tailDragAmountVertical * 0.75f * (offset + 0.75f));
-                offset += 0.75F;
-            }
-        }
-    }
-
-    public final void setRotationForWingBones(float limbAngle, float limbDistance, float age, float tailDragAmountVertical){
-        float swayAngle = age * 20.0F * (float) (Math.PI / 180.0) + limbAngle;
-        float sway_base = MathHelper.cos(swayAngle) * (float) Math.PI * 0.15F + limbDistance;
-        float sway_l = (float) -(Math.PI / 4) + sway_base;
-        float sway_r = (float) (Math.PI / 4) - sway_base;
-
-        if (BCD_WingChainL != null) {
-            for (List<String> wingChain : BCD_WingChainL) {
-                GeoBone firstWing = this.getCachedGeoBone(wingChain.get(0));
-                if (firstWing == null) { continue; }
-                firstWing.setRotY(sway_l);
-                firstWing.setRotX(-tailDragAmountVertical * 0.35f);
-                float offset = 0.0F;
-                for (int i = 1; i < wingChain.size(); i++) {
-                    GeoBone chainBone = this.getCachedGeoBone(wingChain.get(i));
-                    if (chainBone == null) { continue; }
-                    chainBone.setRotX(-tailDragAmountVertical * 0.75f * offset);
-                    offset += 0.75F;
-                }
-            }
-        }
-        if (BCD_WingChainR != null) {
-            for (List<String> wingChain : BCD_WingChainR) {
-                GeoBone firstWing = this.getCachedGeoBone(wingChain.get(0));
-                if (firstWing == null)  continue;
-                firstWing.setRotY(sway_r);
-                firstWing.setRotX(-tailDragAmountVertical * 0.35f);
-                float offset = 0.0F;
-                for (int i = 1; i < wingChain.size(); i++) {
-                    GeoBone chainBone = this.getCachedGeoBone(wingChain.get(i));
-                    if (chainBone == null) { continue; }
-                    chainBone.setRotX(-tailDragAmountVertical * 0.75f * offset);
-                    offset += 0.75F;
-                }
-            }
-        }
-    }
 
     public final GeoBone translatePositionForBone(String bone_name, Vec3d pos) {
         var b = this.getCachedGeoBone(bone_name);

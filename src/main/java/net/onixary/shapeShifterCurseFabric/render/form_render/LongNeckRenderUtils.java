@@ -18,11 +18,13 @@ import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.util.Hand;
 import net.minecraft.util.UseAction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 import net.onixary.shapeShifterCurseFabric.mixin.accessor.ArmorFeatureRendererAccessor;
 import net.onixary.shapeShifterCurseFabric.mixin.accessor.LivingEntityRendererAccessor;
@@ -58,12 +60,9 @@ public class LongNeckRenderUtils {
         return null;
     }
 
-    public static boolean isFirstPersonModelActiveForSelf(AbstractClientPlayerEntity player) {
+    public static boolean isFirstPersonModelActiveForSelf(PlayerEntity player) {
         MinecraftClient client = MinecraftClient.getInstance();
-        return IS_FIRST_PERSON_MOD_LOADED
-                && client.options.getPerspective().isFirstPerson()
-                && player == client.player
-                && FirstPersonModelCore.instance.isEnabled();
+        return IS_FIRST_PERSON_MOD_LOADED && player.isMainPlayer() && client.options.getPerspective().isFirstPerson() && FirstPersonModelCore.instance.isEnabled();
     }
 
     public static boolean isRenderingDelegatedLongNeckHeadArmor() {
@@ -117,7 +116,7 @@ public class LongNeckRenderUtils {
             MatrixStack matrices,
             VertexConsumerProvider vertexConsumers,
             int light,
-            AbstractClientPlayerEntity player,
+            PlayerEntity player,
             FormModel formModel,
             float tickDelta
     ) {
@@ -132,7 +131,7 @@ public class LongNeckRenderUtils {
             MatrixStack matrices,
             VertexConsumerProvider vertexConsumers,
             int light,
-            AbstractClientPlayerEntity player,
+            PlayerEntity player,
             FormModel formModel,
             float tickDelta
     ) {
@@ -170,7 +169,7 @@ public class LongNeckRenderUtils {
             MatrixStack matrices,
             VertexConsumerProvider vertexConsumers,
             int light,
-            AbstractClientPlayerEntity player,
+            PlayerEntity player,
             FormModel formModel
     ) {
         ItemStack headStack = player.getEquippedStack(EquipmentSlot.HEAD);
@@ -196,7 +195,7 @@ public class LongNeckRenderUtils {
             MatrixStack matrices,
             VertexConsumerProvider vertexConsumers,
             int light,
-            AbstractClientPlayerEntity player,
+            PlayerEntity player,
             FormModel formModel
     ) {
         ArmorFeatureRenderer<LivingEntity, BipedEntityModel<LivingEntity>, BipedEntityModel<LivingEntity>> armorFeatureRenderer = getArmorFeatureRenderer(player);
@@ -221,8 +220,8 @@ public class LongNeckRenderUtils {
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    private static ArmorFeatureRenderer<LivingEntity, BipedEntityModel<LivingEntity>, BipedEntityModel<LivingEntity>> getArmorFeatureRenderer(AbstractClientPlayerEntity player) {
-        EntityRenderer<? super AbstractClientPlayerEntity> renderer = MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(player);
+    private static ArmorFeatureRenderer<LivingEntity, BipedEntityModel<LivingEntity>, BipedEntityModel<LivingEntity>> getArmorFeatureRenderer(PlayerEntity player) {
+        EntityRenderer<? super PlayerEntity> renderer = MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(player);
         if (!(renderer instanceof LivingEntityRenderer<?, ?> livingEntityRenderer)) {
             return null;
         }
@@ -234,5 +233,25 @@ public class LongNeckRenderUtils {
             }
         }
         return null;
+    }
+
+
+    public static float lerpAngle(float delta, float start, float end) {
+        return start + MathHelper.wrapDegrees(end - start) * delta;
+    }
+
+    public static float lerpAngleAwayFrom(float delta, float start, float end, float avoidAngle) {
+        if (Math.abs(MathHelper.wrapDegrees(avoidAngle - end)) < 0.0001F) {
+            return lerpAngle(delta, start, end);
+        }
+        start = MathHelper.wrapDegrees(start);
+        end = MathHelper.wrapDegrees(end);
+        float diff = MathHelper.wrapDegrees(end - start);
+        float avoidDiff = MathHelper.wrapDegrees(avoidAngle - start);
+        boolean flipDir = Math.signum(diff) == Math.signum(avoidDiff) && Math.abs(diff) > Math.abs(avoidDiff);
+        if (flipDir) {
+            diff = Math.copySign(360.0F - Math.abs(diff), -diff);
+        }
+        return MathHelper.wrapDegrees(start + diff * delta);
     }
 }
