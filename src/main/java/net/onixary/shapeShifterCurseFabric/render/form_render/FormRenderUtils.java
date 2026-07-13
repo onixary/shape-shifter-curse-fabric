@@ -1,10 +1,12 @@
 package net.onixary.shapeShifterCurseFabric.render.form_render;
 
 import com.google.gson.JsonObject;
+import mod.azure.azurelib.cache.object.GeoBone;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
@@ -15,17 +17,24 @@ import net.onixary.shapeShifterCurseFabric.integration.origins.component.PlayerO
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayer;
 import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents;
-import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class FormRenderUtils {
     public static final HashMap<Identifier, Supplier<IModelAnimationSystem>> modelAnimationSystemRegistry = new HashMap<>();
+    public static final HashMap<String, Predicate<PlayerEntity>> conditionRegistry = new HashMap<>();
+    static {
+        conditionRegistry.put("always_true", player -> true);
+        conditionRegistry.put("always_false", player -> false);
+        conditionRegistry.put("is_sneaking", Entity::isSneaking);
+        conditionRegistry.put("is_sprinting", Entity::isSprinting);
+    }
 
     public static boolean isRenderingInWorld = false;
 
@@ -33,6 +42,43 @@ public class FormRenderUtils {
     public static final HashMap<Identifier, HashMap<Identifier, FormRenderer>> formRendererRegistry = new HashMap<>();
 
     public static final Identifier DEFAULT_MAS = register_MAS(ShapeShifterCurseFabric.identifier("default"), DefaultModelAnimationSystem::new);
+
+    public static record BoneBipedState(float x, float y, float z, float rot_x, float rot_y, float rot_z, float pivot_x, float pivot_y, float pivot_z, float scale_x, float scale_y, float scale_z) {
+        public BoneBipedState(ModelPart part) {
+            this(0f, 0f, 0f, part.pitch, part.yaw, part.roll, part.pivotX, part.pivotY, part.pivotZ, part.xScale, part.yScale, part.zScale);
+        }
+
+        public BoneBipedState(GeoBone bone) {
+            this(bone.getPosX(), bone.getPosY(), bone.getPosZ(), bone.getRotX(), bone.getRotY(), bone.getRotZ(), bone.getPivotX(), bone.getPivotY(), bone.getPivotZ(), bone.getScaleX(), bone.getScaleY(), bone.getScaleZ());
+        }
+
+        public void apply(ModelPart part) {
+            part.pitch = rot_x;
+            part.yaw = rot_y;
+            part.roll = rot_z;
+            part.pivotX = pivot_x;
+            part.pivotY = pivot_y;
+            part.pivotZ = pivot_z;
+            part.xScale = scale_x;
+            part.yScale = scale_y;
+            part.zScale = scale_z;
+        }
+
+        public void apply(GeoBone bone) {
+            bone.setPosX(x);
+            bone.setPosY(y);
+            bone.setPosZ(z);
+            bone.setRotX(rot_x);
+            bone.setRotY(rot_y);
+            bone.setRotZ(rot_z);
+            bone.setPivotX(pivot_x);
+            bone.setPivotY(pivot_y);
+            bone.setPivotZ(pivot_z);
+            bone.setScaleX(scale_x);
+            bone.setScaleY(scale_y);
+            bone.setScaleZ(scale_z);
+        }
+    }
 
     public static void onClientInit() {
         WorldRenderEvents.END.register(context -> isRenderingInWorld = false);

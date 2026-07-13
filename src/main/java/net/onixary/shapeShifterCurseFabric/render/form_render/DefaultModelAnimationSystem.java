@@ -8,6 +8,7 @@ import dev.kosmx.playerAnim.core.util.Vec3f;
 import mod.azure.azurelib.cache.object.BakedGeoModel;
 import mod.azure.azurelib.cache.object.GeoBone;
 import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
@@ -17,6 +18,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
@@ -27,18 +29,12 @@ import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.util.CachedDataMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Quaternionf;
 
 import java.util.*;
 import java.util.function.Predicate;
 
-public class DefaultModelAnimationSystem implements IModelAnimationSystem {
-    public static final HashMap<String, Predicate<PlayerEntity>> chainConditionRegistry = new HashMap<>();
-    static {
-        chainConditionRegistry.put("always_true", player -> true);
-        chainConditionRegistry.put("always_false", player -> false);
-        chainConditionRegistry.put("is_sneaking", Entity::isSneaking);
-        chainConditionRegistry.put("is_sprinting", Entity::isSprinting);
-    }
+public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModifyHead_MAS {
 
     public final List<Pair<String, String>> extraPartsMap = new ArrayList<>();
 
@@ -158,8 +154,8 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
             }
             if (json.has("condition")) {
                 String conditionName = json.get("condition").getAsString();
-                if (chainConditionRegistry.containsKey(conditionName)) {
-                    this.condition = chainConditionRegistry.get(conditionName);
+                if (FormRenderUtils.conditionRegistry.containsKey(conditionName)) {
+                    this.condition = FormRenderUtils.conditionRegistry.get(conditionName);
                 } else {
                     ShapeShifterCurseFabric.LOGGER.warn("Unknown condition: " + conditionName);
                 }
@@ -748,5 +744,42 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
         model.setRotationForBone(GeoBoneName, FormRenderUtils.getPartRotation(arm));
         model.invertRotForPart(GeoBoneName, false, true, true);
         return geoBone;
+    }
+
+    @Override
+    public void modifyHeadMatrix(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, PlayerEntity player, PlayerEntityRenderer renderer, FormModel formModel) {
+        if (this.neckConfig == null) {
+            return;
+        }
+        GeoBone neckHead = this.neckConfig.getHead(formModel);
+        if (neckHead != null) {
+            matrices.translate(0.5F, 0.51F, 0.5F);
+            List<GeoBone> boneChain = new ArrayList<>();
+            for (GeoBone bone = neckHead; bone != null; bone = bone.getParent()) {
+                boneChain.add(bone);
+            }
+            Collections.reverse(boneChain);
+
+            for (int i = 0; i < boneChain.size(); i++) {
+                GeoBone bone = boneChain.get(i);
+                applyBoneLocalTransform(matrices, bone);
+                if (i < boneChain.size() - 1) {
+                    translateAwayFromPivot(matrices, bone);
+                }
+            }
+        }
+    }
+
+    private static void applyBoneLocalTransform(MatrixStack matrices, GeoBone bone) {
+        matrices.translate(-bone.getPosX() / 16.0F, bone.getPosY() / 16.0F, bone.getPosZ() / 16.0F);
+        matrices.translate(bone.getPivotX() / 16.0F, bone.getPivotY() / 16.0F, bone.getPivotZ() / 16.0F);
+        matrices.multiply(RotationAxis.POSITIVE_Z.rotation(bone.getRotZ()));
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotation(bone.getRotY()));
+        matrices.multiply(RotationAxis.POSITIVE_X.rotation(bone.getRotX()));
+        matrices.scale(bone.getScaleX(), bone.getScaleY(), bone.getScaleZ());
+    }
+
+    private static void translateAwayFromPivot(MatrixStack matrices, GeoBone bone) {
+        matrices.translate(-bone.getPivotX() / 16.0F, -bone.getPivotY() / 16.0F, -bone.getPivotZ() / 16.0F);
     }
 }

@@ -124,7 +124,7 @@ public class LongNeckRenderUtils {
             return;
         }
         renderMouthItem(matrices, vertexConsumers, light, player, formModel, tickDelta);
-        renderHeadEquipment(matrices, vertexConsumers, light, player, formModel);
+        // renderHeadEquipment(matrices, vertexConsumers, light, player, formModel);
     }
 
     private static void renderMouthItem(
