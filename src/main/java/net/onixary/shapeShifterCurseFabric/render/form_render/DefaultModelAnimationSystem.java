@@ -1,5 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.render.form_render;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dev.kosmx.playerAnim.api.TransformType;
 import dev.kosmx.playerAnim.core.util.Vec3f;
@@ -8,17 +10,31 @@ import mod.azure.azurelib.cache.object.GeoBone;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
+import net.onixary.shapeShifterCurseFabric.util.util.CachedDataMap;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class DefaultModelAnimationSystem implements IModelAnimationSystem {
+    public static final HashMap<String, Predicate<PlayerEntity>> chainConditionRegistry = new HashMap<>();
+    static {
+        chainConditionRegistry.put("always_true", player -> true);
+        chainConditionRegistry.put("always_false", player -> false);
+        chainConditionRegistry.put("is_sneaking", Entity::isSneaking);
+        chainConditionRegistry.put("is_sprinting", Entity::isSprinting);
+    }
+
+
     public final List<Pair<String, String>> extraPartsMap = new ArrayList<>();
 
     public String leftArmGeoBoneID = "bipedLeftArm";
@@ -38,27 +54,6 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
     public partTransform rightArmTransform = null;
     public partTransform leftLegTransform = null;
     public partTransform rightLegTransform = null;
-
-    // 每个UUID只能用一个ModelAnimationSystem 改为全局变量比较省资源
-    private static final HashMap<UUID, tailData> tailDataMap = new HashMap<>();
-    private static class tailData {
-        private float tailDragAmount = 0.0F;
-        private float tailDragAmountO;
-        private float currentTailDragAmount = 0.0F;
-        private float tailDragAmountVertical = 0.0F;
-        private float tailDragAmountVerticalO;
-        private float currentTailDragAmountVertical = 0.0F;
-    }
-
-    private static final HashMap<UUID, neckLookData> neckLookDataMap = new HashMap<>();
-    private static class neckLookData {
-        private float headYaw;
-        private float headPitch;
-        private double lastRenderTick = Double.NaN;
-        private boolean initialized = false;
-    }
-
-    private record NeckAngles(float headYaw, float headPitch) {}
 
     public static class partTransform {
         private final Vec3f pos;
@@ -106,6 +101,221 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
         }
     }
 
+    public static List<String> load1DChainData(JsonObject json) {
+        List<String> ChainData = new ArrayList<>();
+        for (Map.Entry<String, JsonElement> entry : json.entrySet()) {
+            if (entry.getValue().isJsonArray()) {
+                String base = entry.getKey();
+                JsonArray array = entry.getValue().getAsJsonArray();
+                for (int i = 0; i < array.size(); i++) {
+                    ChainData.add(base + "_" + array.get(i).getAsString());
+                }
+            }
+        }
+        return ChainData;
+    }
+
+    public static List<List<String>> load2DChainData(JsonObject json) {
+        List<List<String>> ChainData = new ArrayList<>();
+        for (Map.Entry<String, JsonElement> entry : json.entrySet()) {
+            if (entry.getValue().isJsonArray()) {
+                String base = entry.getKey();
+                JsonArray array = entry.getValue().getAsJsonArray();
+                List<String> chain = new ArrayList<>();
+                for (int i = 0; i < array.size(); i++) {
+                    chain.add(base + "_" + array.get(i).getAsString());
+                }
+                ChainData.add(chain);
+            }
+        }
+        return ChainData;
+    }
+
+    public NormalChainConfig tailChain = null;
+    public NormalChainConfig headTailChain = null;
+    public NormalChainConfig wingChainL = null;
+    public NormalChainConfig wingChainR = null;
+
+    public static class NormalChainConfig {
+        public final @NotNull List<List<String>> chain;
+        public Predicate<PlayerEntity> condition = player -> true;
+        public boolean inverted = false;
+
+        public NormalChainConfig(@Nullable JsonObject json) {
+            if (json == null) {
+                this.chain = new ArrayList<>();
+                return;
+            }
+            if (json.has("chain")) {
+                this.chain = load2DChainData(json.get("chain").getAsJsonObject());
+            } else {
+                this.chain = new ArrayList<>();
+            }
+            if (json.has("condition")) {
+                String conditionName = json.get("condition").getAsString();
+                if (chainConditionRegistry.containsKey(conditionName)) {
+                    this.condition = chainConditionRegistry.get(conditionName);
+                } else {
+                    ShapeShifterCurseFabric.LOGGER.warn("Unknown condition: " + conditionName);
+                }
+            }
+            if (json.has("inverted")) {
+                this.inverted = json.get("inverted").getAsBoolean();
+            }
+        }
+
+        public boolean canApply(PlayerEntity player) {
+            return condition.test(player) ^ inverted;
+        }
+    }
+
+
+    /*
+
+    "neck_config": {
+      "chain": {
+        "neck": [0, 1, 2]
+      },
+      "head": "ik_head",
+      "yaw_axis": "-y",
+      "pitch_axis": "x",
+      "yaw_weights": [0.18, 0.27, 0.32, 0.23],
+      "pitch_weights": [0.10, 0.22, 0.33, 0.35],
+      "yaw_total": 1.0,
+      "pitch_total": 1.0,
+      "max_yaw_deg": 120.0,
+      "max_pitch_up_deg": 70.0,
+      "max_pitch_down_deg": 60.0
+    }
+
+     */
+
+    public @Nullable NeckConfig neckConfig = null;
+
+    public static class NeckConfig {
+        public final List<String> chain;
+        public @NotNull String headBone;
+        public int yawAxis = -1;  // -1 -> 不转 0 -> +x 1 -> -x 2 -> +y 3 -> -y 4 -> +z 5 -> -z
+        public int pitchAxis = -1;  // -1 -> 不转 0 -> +x 1 -> -x 2 -> +y 3 -> -y 4 -> +z 5 -> -z
+        public float[] yawWeights;  // Length = len(chain) + 1
+        public float[] pitchWeights;  // Length = len(chain) + 1
+        public float maxYawDegree = 180.0F;
+        public float maxPitchDegreeU = 180.0F;
+        public float maxPitchDegreeD = 180.0F;
+
+        public NeckConfig(@Nullable JsonObject json) throws Exception {
+            if (json == null) {
+                throw new Exception("neck_config is null");
+            }
+            if (json.has("chain")) {
+                this.chain = load1DChainData(json.get("chain").getAsJsonObject());
+            } else {
+                throw new Exception("neck_config chain is null");
+            }
+            if (json.has("head")) {
+                this.headBone = json.get("head").getAsString();
+            } else {
+                throw new Exception("neck_config head is null");
+            }
+            if (json.has("yaw_axis")) {
+                this.yawAxis = translateAxisStringToID(json.get("yaw_axis").getAsString());
+            }
+            if (json.has("pitch_axis")) {
+                this.pitchAxis = translateAxisStringToID(json.get("pitch_axis").getAsString());
+            }
+            Float fixYaw = null;
+            Float fixPitch = null;
+            int chainSize = this.chain.size() + 1;
+            if (json.has("yaw_total")) {
+                fixYaw = json.get("yaw_total").getAsFloat();
+            }
+            if (json.has("pitch_total")) {
+                fixPitch = json.get("pitch_total").getAsFloat();
+            }
+            if (json.has("yaw_weights")) {
+                this.yawWeights = readWeights(JsonHelper.getArray(json, "yaw_weights", null), fixYaw, chainSize);
+            }
+            if (json.has("pitch_weights")) {
+                this.pitchWeights = readWeights(JsonHelper.getArray(json, "pitch_weights", null), fixPitch, chainSize);
+            }
+            if (json.has("max_yaw_deg")) {
+                this.maxYawDegree = json.get("max_yaw_deg").getAsFloat();
+            }
+            if (json.has("max_pitch_up_deg")) {
+                this.maxPitchDegreeU = json.get("max_pitch_up_deg").getAsFloat();
+            }
+            if (json.has("max_pitch_down_deg")) {
+                this.maxPitchDegreeD = json.get("max_pitch_down_deg").getAsFloat();
+            }
+        }
+
+        public static int translateAxisStringToID(String axis) {
+            return switch (axis) {
+                case "x" -> 0;
+                case "-x" -> 1;
+                case "y" -> 2;
+                case "-y" -> 3;
+                case "z" -> 4;
+                case "-z" -> 5;
+                default -> -1;
+            };
+        }
+
+        public void setAxisRotation(@NotNull GeoBone bone, int axis, float value) {
+            switch (axis) {
+                case 0 -> bone.setRotX(value);
+                case 1 -> bone.setRotX(-value);
+                case 2 -> bone.setRotY(value);
+                case 3 -> bone.setRotY(-value);
+                case 4 -> bone.setRotZ(value);
+                case 5 -> bone.setRotZ(-value);
+            }
+        }
+
+        public static float[] readWeights(JsonArray json, @Nullable Float total, int size) {
+            float realTotal = 0.0f;
+            float[] weights = new float[size];
+            if (json == null) {
+                if (total == null) {
+                    total = 1.0f;
+                }
+                Arrays.fill(weights, total / size);
+                return weights;
+            }
+            for (int i = 0; i < size; i++) {
+                float weight = i < json.size() ? json.get(i).getAsFloat() : 0.0f;
+                weights[i] = weight;
+                realTotal += weight;
+            }
+            if (total != null && realTotal > 0.0001f) {
+                float scale = total / realTotal;
+                for (int i = 0; i < size; i++) {
+                    weights[i] *= scale;
+                }
+            }
+            return weights;
+        }
+    }
+
+    private static final CachedDataMap<UUID, PlayerEntity, tailData> tailDataMap = new CachedDataMap<>(player -> new tailData(), Entity::getUuid);
+    private static final CachedDataMap<UUID, PlayerEntity, neckData> neckDataMap = new CachedDataMap<>(player -> new neckData(), Entity::getUuid);
+
+    private static class tailData {
+        private float tailDragAmount = 0.0F;
+        private float tailDragAmountO;
+        private float currentTailDragAmount = 0.0F;
+        private float tailDragAmountVertical = 0.0F;
+        private float tailDragAmountVerticalO;
+        private float currentTailDragAmountVertical = 0.0F;
+    }
+    private static class neckData {
+        private float headYaw;
+        private float headPitch;
+        private double lastRenderTick = Double.NaN;
+        private boolean initialized = false;
+    }
+
+    private record NeckAngles(float headYaw, float headPitch) {}
 
     /*
     "extra_parts_map": {
@@ -208,6 +418,26 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
                 this.rightLegTransform = partTransform.of(partExtraPos.get("right_leg").getAsJsonObject());
             }
         }
+        if (json.has("tail")) {
+            this.tailChain = new NormalChainConfig(json.getAsJsonObject("tail"));
+        }
+        if (json.has("head_tail")) {
+            this.headTailChain = new NormalChainConfig(json.getAsJsonObject("head_tail"));
+        }
+        if (json.has("wing_l")) {
+            this.wingChainL = new NormalChainConfig(json.getAsJsonObject("wing_l"));
+        }
+        if (json.has("wing_r")) {
+            this.wingChainR = new NormalChainConfig(json.getAsJsonObject("wing_r"));
+        }
+        if (json.has("neck_config")) {
+            try {
+                this.neckConfig = new NeckConfig(json.getAsJsonObject("neck_config"));
+            } catch (Exception e) {
+                this.neckConfig = null;
+                ShapeShifterCurseFabric.LOGGER.error("Error parsing neck_config", e);
+            }
+        }
     }
 
     public void ProcessExtraBone(FormModel m, PlayerEntity player, String OriginFursBoneID, String AnimBoneID) {
@@ -220,7 +450,7 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
 
     @Override
     public void beforeRender(FormRenderer formRenderer, FormModel model, PlayerEntityRenderer renderer, PlayerEntity player, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        tailData td = tailDataMap.computeIfAbsent(player.getUuid(), k -> new tailData());
+        tailData td = tailDataMap.get(player);
         float targetDrag = MathHelper.lerp(tickDelta, td.tailDragAmountO, td.tailDragAmount);
         td.currentTailDragAmount = MathHelper.lerp(0.04f, td.currentTailDragAmount, targetDrag);
         float targetDragVertical = MathHelper.lerp(tickDelta, td.tailDragAmountVerticalO, td.tailDragAmountVertical);
@@ -230,7 +460,7 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
 
     @Override
     public void processAnimation(FormRenderer formRenderer, FormModel model, PlayerEntityRenderer renderer, PlayerEntity player, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        tailData td = tailDataMap.computeIfAbsent(player.getUuid(), k -> new tailData());
+        tailData td = tailDataMap.get(player);
         model.resetBone(RM_HeadGeoBoneID);
         model.resetBone(RM_BodyGeoBoneID);
         model.resetBone(RM_LeftArmGeoBoneID);
@@ -282,7 +512,7 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
 
     // NECK FEATURES START
     private NeckAngles getLongNeckAngles(PlayerEntity player, float tickDelta, float fallbackHeadYaw, float fallbackHeadPitch) {
-        neckLookData data = neckLookDataMap.computeIfAbsent(player.getUuid(), k -> new neckLookData());
+        neckData data = neckDataMap.get(player);
         float viewYaw = player.getYaw(tickDelta);
         float viewPitch = player.getPitch(tickDelta);
         float bodyYaw = lerpAngle(tickDelta, player.prevBodyYaw, player.bodyYaw);
@@ -345,7 +575,7 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem {
 
     @Override
     public void afterRender(FormRenderer formRenderer, FormModel model, PlayerEntityRenderer renderer, PlayerEntity player, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        tailData td = tailDataMap.computeIfAbsent(player.getUuid(), k -> new tailData());
+        tailData td = tailDataMap.get(player);
         td.tailDragAmountO = td.tailDragAmount;
         td.tailDragAmount *= 0.75F;
         td.tailDragAmount -= (float) (Math.toRadians((player.bodyYaw - player.prevBodyYaw)) * 0.55F);
