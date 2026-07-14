@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import mod.azure.azurelib.renderer.GeoObjectRenderer;
 import net.minecraft.entity.player.PlayerEntity;
 
+@SuppressWarnings("removal")
 public class FormRenderer extends GeoObjectRenderer<FormAnimatable> {
     public FormModel realModel = null;
 

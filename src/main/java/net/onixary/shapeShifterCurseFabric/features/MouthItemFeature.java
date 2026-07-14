@@ -111,11 +111,16 @@ public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> &
             }
             return model.AnimationSystem instanceof IModifyHead_MAS;
         });
+        var head = eR.getModel().head;
+        float headRoll = 0.0f;
         if (renderer != null) {
             ((IModifyHead_MAS)renderer.realModel.AnimationSystem).modifyHeadPart(player, eR.getModel(), renderer.realModel);
+            k = (float) Math.toDegrees(head.yaw);
+            l = (float) Math.toDegrees(head.pitch);
+            headRoll = (float) Math.toDegrees(head.roll);
         }
-        var head = eR.getModel().head;
         matrixStack.translate(head.pivotX / 16.0F, head.pivotY / 16.0F, head.pivotZ / 16.0F);
+        matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(headRoll));
         matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(k));
         matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(l));
         matrixStack.translate(0.06F, 0.085F, -0.35D);

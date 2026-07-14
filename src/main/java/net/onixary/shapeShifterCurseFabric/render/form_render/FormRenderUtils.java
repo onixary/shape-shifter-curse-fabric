@@ -181,7 +181,7 @@ public class FormRenderUtils {
             chain.add(b);
         }
         Collections.reverse(chain);
-        matrices.translate(0.5F, 0.51F, 0.5F);
+        // matrices.translate(0.5F, 0.51F, 0.5F);
         for (int i = 0; i < chain.size(); i++) {
             GeoBone b = chain.get(i);
             matrices.translate(-b.getPosX(), b.getPosY(), b.getPosZ());
@@ -190,13 +190,10 @@ public class FormRenderUtils {
             matrices.multiply(RotationAxis.POSITIVE_Y.rotation(b.getRotY()));
             matrices.multiply(RotationAxis.POSITIVE_X.rotation(b.getRotX()));
             matrices.scale(b.getScaleX(), b.getScaleY(), b.getScaleZ());
-
             if (i < chain.size() - 1) {
                 matrices.translate(-b.getPivotX(), -b.getPivotY(), -b.getPivotZ());
             }
         }
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0F));
-        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(180.0F));
         return matrices;
     }
 

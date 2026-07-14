@@ -23,6 +23,7 @@ import org.joml.Vector3d;
 
 import java.util.*;
 
+@SuppressWarnings("removal")
 public class FormModel extends GeoModel<FormAnimatable> {
     public static List<FormModel> loadedModel = new ArrayList<>();
     public static HashMap<PlayerEntity, Boolean> SlimMap = new HashMap<>();

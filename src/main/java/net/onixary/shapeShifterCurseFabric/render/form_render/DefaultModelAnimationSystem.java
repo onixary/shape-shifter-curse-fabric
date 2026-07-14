@@ -760,10 +760,16 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModi
             return;
         }
         MatrixStack headMatrix = FormRenderUtils.computeModelMatrixStack(neckHead);
+        Matrix4f matrix4f = headMatrix.peek().getPositionMatrix();
         Vector4f headPos = headMatrix.peek().getPositionMatrix().transform(new Vector4f(0, 0, 0, 1));
         head.pivotX = (float) (headPos.x);
-        head.pivotY = (float) (-headPos.y + 24); // 或者 +22
+        head.pivotY = (float) (-headPos.y + 24);
         head.pivotZ = (float) (-headPos.z);
-
+        Matrix3f rotationMatrix = matrix4f.get3x3(new Matrix3f());
+        Vector3f euler = new Vector3f();
+        rotationMatrix.getEulerAnglesZYX(euler);
+        head.pitch = euler.x();
+        head.yaw = -euler.y();
+        head.roll = -euler.z();
     }
 }

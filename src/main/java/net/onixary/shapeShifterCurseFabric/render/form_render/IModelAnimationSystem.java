@@ -9,6 +9,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("removal")
 public interface IModelAnimationSystem {
     public void loadConfig(@Nullable JsonObject json);
 
