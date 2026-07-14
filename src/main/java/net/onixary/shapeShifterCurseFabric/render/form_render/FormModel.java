@@ -106,9 +106,6 @@ public class FormModel extends GeoModel<FormAnimatable> {
     public List<List<String>> BCD_WingChainL = new ArrayList<>();
     public List<List<String>> BCD_WingChainR = new ArrayList<>();
 
-    // NECK FEATURES START
-    public @Nullable NeckIkConfig BCD_NeckIk = null;
-
     public static class NeckIkConfig {
         public String mount = "neck_mount";
         public String head = "ik_head";
@@ -273,131 +270,8 @@ public class FormModel extends GeoModel<FormAnimatable> {
     }
 
     public void loadBCD() {
-        BCD_TailChain.clear();
-        BCD_TailChainHead.clear();
-        BCD_WingChainL.clear();
-        BCD_WingChainR.clear();
-        // NECK FEATURES START
-        BCD_NeckIk = null;
-        // NECK FEATURES END
-        JsonObject bcdJson = JsonHelper.getObject(this.modelJson, "builtin_controller_data", null);
-        if (bcdJson != null) {
-            if (bcdJson.has("tail_chain")) {
-                BCD_TailChain = loadChainData(bcdJson.getAsJsonObject("tail_chain"));
-            }
-            if (bcdJson.has("tail_chain_head")) {
-                BCD_TailChainHead = loadChainData(bcdJson.getAsJsonObject("tail_chain_head"));
-            }
-            if (bcdJson.has("wing_chain_l")) {
-                BCD_WingChainL = loadChainData(bcdJson.getAsJsonObject("wing_chain_l"));
-            }
-            if (bcdJson.has("wing_chain_r")) {
-                BCD_WingChainR = loadChainData(bcdJson.getAsJsonObject("wing_chain_r"));
-            }
-            // NECK FEATURES START
-            if (bcdJson.has("neck_ik")) {
-                BCD_NeckIk = loadNeckIkData(bcdJson.getAsJsonObject("neck_ik"));
-            }
-            // NECK FEATURES END
-        }
+        // BCD 目前没参数了 之前的迁移至DefaultModelAnimationSystem里了 不过这套系统还留着 后续想加新参数可以在这里写
     }
-
-
-    // NECK FEATURES START
-
-    private NeckIkConfig loadNeckIkData(JsonObject json) {
-        NeckIkConfig config = new NeckIkConfig();
-        config.mount = JsonHelper.getString(json, "mount", config.mount);
-        config.head = JsonHelper.getString(json, "head", config.head);
-        config.yawAxis = readAxis(JsonHelper.getString(json, "yaw_axis", String.valueOf(config.yawAxis)), config.yawAxis);
-        config.pitchAxis = readAxis(JsonHelper.getString(json, "pitch_axis", String.valueOf(config.pitchAxis)), config.pitchAxis);
-        config.yawSign = JsonHelper.getFloat(json, "yaw_sign", config.yawSign);
-        config.pitchSign = JsonHelper.getFloat(json, "pitch_sign", config.pitchSign);
-        config.maxYawDeg = JsonHelper.getFloat(json, "max_yaw_deg", config.maxYawDeg);
-        config.maxPitchUpDeg = JsonHelper.getFloat(json, "max_pitch_up_deg", config.maxPitchUpDeg);
-        config.maxPitchDownDeg = JsonHelper.getFloat(json, "max_pitch_down_deg", config.maxPitchDownDeg);
-
-        JsonArray chainArray = JsonHelper.getArray(json, "chain", null);
-        if (chainArray != null) {
-            for (JsonElement element : chainArray) {
-                config.chain.add(element.getAsString());
-            }
-        }
-        if (config.chain.isEmpty()) {
-            config.chain.add(config.head);
-        }
-
-        config.yawWeights = readWeights(json, "yaw_weights", config.chain.size());
-        config.pitchWeights = readWeights(json, "pitch_weights", config.chain.size());
-        return config;
-    }
-
-    private char readAxis(String value, char fallback) {
-        if (value == null || value.isEmpty()) {
-            return fallback;
-        }
-        char axis = Character.toLowerCase(value.charAt(0));
-        return axis == 'x' || axis == 'y' || axis == 'z' ? axis : fallback;
-    }
-
-    private float[] readWeights(JsonObject json, String key, int size) {
-        float[] weights = new float[size];
-        JsonArray weightArray = JsonHelper.getArray(json, key, null);
-        if (weightArray != null && !weightArray.isEmpty()) {
-            float sum = 0.0f;
-            for (int i = 0; i < size; i++) {
-                float weight = i < weightArray.size() ? weightArray.get(i).getAsFloat() : 0.0f;
-                weights[i] = weight;
-                sum += weight;
-            }
-            if (sum > 0.0001f) {
-                for (int i = 0; i < size; i++) {
-                    weights[i] /= sum;
-                }
-                return weights;
-            }
-        }
-        float evenWeight = size <= 0 ? 0.0f : 1.0f / size;
-        Arrays.fill(weights, evenWeight);
-        return weights;
-    }
-
-    public boolean hasNeckIk() {
-        return BCD_NeckIk != null && !BCD_NeckIk.chain.isEmpty();
-    }
-
-    public @Nullable String getNeckIkMountBoneId() {
-        return BCD_NeckIk == null ? null : BCD_NeckIk.mount;
-    }
-
-    public @Nullable String getNeckIkHeadBoneId() {
-        return BCD_NeckIk == null ? null : BCD_NeckIk.head;
-    }
-
-    public @Nullable GeoBone getNeckIkHeadBone() {
-        String head = getNeckIkHeadBoneId();
-        return head == null ? null : getCachedGeoBone(head);
-    }
-
-    public @Nullable GeoBone getNeckIkMountBone() {
-        String mount = getNeckIkMountBoneId();
-        return mount == null ? null : getCachedGeoBone(mount);
-    }
-
-    public void setNeckIkHidden(boolean hidden) {
-        GeoBone mount = getNeckIkMountBone();
-        if (mount != null) {
-            mount.setHidden(hidden);
-        }
-    }
-
-    public void trackNeckIkHeadMatrix() {
-        GeoBone head = getNeckIkHeadBone();
-        if (head != null) {
-            head.getModelSpaceMatrix();
-        }
-    }
-    // NECK FEATURES END
 
     public void setPlayer(PlayerEntity player, boolean slim) {
         this.entity = player;

@@ -43,13 +43,46 @@ public class FormRenderUtils {
 
     public static final Identifier DEFAULT_MAS = register_MAS(ShapeShifterCurseFabric.identifier("default"), DefaultModelAnimationSystem::new);
 
-    public static record BoneBipedState(float x, float y, float z, float rot_x, float rot_y, float rot_z, float pivot_x, float pivot_y, float pivot_z, float scale_x, float scale_y, float scale_z) {
+    public static class BoneBipedState {
+        public final float x;
+        public final float y;
+        public final float z;
+        public final float rot_x;
+        public final float rot_y;
+        public final float rot_z;
+        public final float pivot_x;
+        public final float pivot_y;
+        public final float pivot_z;
+        public final float scale_x;
+        public final float scale_y;
+        public final float scale_z;
+
+        private @Nullable ModelPart cachedPart = null;
+        private @Nullable GeoBone cachedBone = null;
+
+        public BoneBipedState(float x, float y, float z, float rot_x, float rot_y, float rot_z, float pivot_x, float pivot_y, float pivot_z, float scale_x, float scale_y, float scale_z) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            this.rot_x = rot_x;
+            this.rot_y = rot_y;
+            this.rot_z = rot_z;
+            this.pivot_x = pivot_x;
+            this.pivot_y = pivot_y;
+            this.pivot_z = pivot_z;
+            this.scale_x = scale_x;
+            this.scale_y = scale_y;
+            this.scale_z = scale_z;
+        }
+
         public BoneBipedState(ModelPart part) {
             this(0f, 0f, 0f, part.pitch, part.yaw, part.roll, part.pivotX, part.pivotY, part.pivotZ, part.xScale, part.yScale, part.zScale);
+            this.cachedPart = part;
         }
 
         public BoneBipedState(GeoBone bone) {
             this(bone.getPosX(), bone.getPosY(), bone.getPosZ(), bone.getRotX(), bone.getRotY(), bone.getRotZ(), bone.getPivotX(), bone.getPivotY(), bone.getPivotZ(), bone.getScaleX(), bone.getScaleY(), bone.getScaleZ());
+            this.cachedBone = bone;
         }
 
         public void apply(ModelPart part) {
@@ -77,6 +110,15 @@ public class FormRenderUtils {
             bone.setScaleX(scale_x);
             bone.setScaleY(scale_y);
             bone.setScaleZ(scale_z);
+        }
+
+        public void restore() {
+            if (cachedPart != null) {
+                apply(cachedPart);
+            }
+            if (cachedBone != null) {
+                apply(cachedBone);
+            }
         }
     }
 
@@ -125,6 +167,10 @@ public class FormRenderUtils {
 
     public static Vec3d getPartScale(ModelPart part) {
         return new Vec3d(part.xScale, part.yScale, part.zScale);
+    }
+
+    public static @Nullable FormRenderer searchFirstRenderer(PlayerEntity player, Predicate<FormRenderer> predicate) {
+        return getPlayerAllFormRenderer(player).stream().filter(predicate).findFirst().orElse(null);
     }
 
     // Origins 版本核心 如果需要重构形态系统需要重新写一份这个函数

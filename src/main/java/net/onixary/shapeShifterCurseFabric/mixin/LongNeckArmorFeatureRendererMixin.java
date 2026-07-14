@@ -20,18 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ArmorFeatureRenderer.class)
 public class LongNeckArmorFeatureRendererMixin<T extends LivingEntity, M extends BipedEntityModel<T>, A extends BipedEntityModel<T>> {
-
-    @Inject(method = "renderArmor", at = @At("HEAD"), cancellable = true)
-    private void shape_shifter_curse$skipVanillaHeadArmorForLongNeck(MatrixStack matrices, VertexConsumerProvider vertexConsumers, T entity, EquipmentSlot armorSlot, int light, A model, CallbackInfo ci) {
-        if (LongNeckRenderUtils.isRenderingDelegatedLongNeckHeadArmor()) {
-            return;
-        }
-        if (armorSlot == EquipmentSlot.HEAD
-                && entity instanceof AbstractClientPlayerEntity player
-                && LongNeckRenderUtils.hasLongNeck(player)) {
-            ci.cancel();
-        }
-    }
+    @Unique private static FormRenderUtils.BoneBipedState headBoneState;
 
     @Inject(
             method = "renderArmor",
@@ -41,12 +30,31 @@ public class LongNeckArmorFeatureRendererMixin<T extends LivingEntity, M extends
                     shift = At.Shift.AFTER
             )
     )
-    private void shape_shifter_curse$resetHeadModelForDelegatedLongNeckArmor(MatrixStack matrices, VertexConsumerProvider vertexConsumers, T entity, EquipmentSlot armorSlot, int light, A model, CallbackInfo ci) {
-        if (armorSlot != EquipmentSlot.HEAD || !LongNeckRenderUtils.isRenderingDelegatedLongNeckHeadArmor()) {
+    private void shape_shifter_curse$modifyHeadStateForMAS(MatrixStack matrices, VertexConsumerProvider vertexConsumers, T entity, EquipmentSlot armorSlot, int light, A model, CallbackInfo ci) {
+        if (!(entity instanceof AbstractClientPlayerEntity player)) {
             return;
         }
-        model.child = false;
-        model.head.resetTransform();
-        model.hat.resetTransform();
+        PlayerEntityRenderer playerEntityRenderer = (PlayerEntityRenderer) MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(player);
+        FormRenderer renderer = FormRenderUtils.searchFirstRenderer(player, formRenderer -> {
+            FormModel formModel = formRenderer.realModel;
+            if (formModel == null) {
+                return false;
+            }
+            return formModel.AnimationSystem instanceof IModifyHead_MAS;
+        });
+        if (renderer != null) {
+            headBoneState = new FormRenderUtils.BoneBipedState(model.getHead());
+            ((IModifyHead_MAS)renderer.realModel.AnimationSystem).modifyHeadPart(player, model, renderer.realModel);
+        }
     }
+
+    @Inject(method = "renderArmor", at = @At(value = "RETURN"))
+    private void shape_shifter_curse$restoreHeadStateForMAS(MatrixStack matrices, VertexConsumerProvider vertexConsumers, T entity, EquipmentSlot armorSlot, int light, A model, CallbackInfo ci) {
+        if (headBoneState != null) {
+            headBoneState.restore();
+            headBoneState = null;
+        }
+    }
+
+
 }

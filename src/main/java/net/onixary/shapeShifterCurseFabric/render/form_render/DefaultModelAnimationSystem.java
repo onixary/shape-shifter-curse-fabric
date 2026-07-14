@@ -11,6 +11,7 @@ import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
@@ -29,8 +30,9 @@ import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.util.CachedDataMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Quaternionf;
+import org.joml.*;
 
+import java.lang.Math;
 import java.util.*;
 import java.util.function.Predicate;
 
@@ -698,7 +700,6 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModi
                 neckRoot.setHidden(false);
             }
         }
-        LongNeckRenderUtils.renderLongNeckAttachments(matrices, vertexConsumers, light, player, model, tickDelta);
     }
 
     @Override
@@ -747,39 +748,18 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModi
     }
 
     @Override
-    public void modifyHeadMatrix(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, PlayerEntity player, PlayerEntityRenderer renderer, FormModel formModel) {
+    public void modifyHeadPart(PlayerEntity player, BipedEntityModel<?> model, FormModel formModel) {
         if (this.neckConfig == null) {
             return;
         }
         GeoBone neckHead = this.neckConfig.getHead(formModel);
-        if (neckHead != null) {
-            matrices.translate(0.5F, 0.51F, 0.5F);
-            List<GeoBone> boneChain = new ArrayList<>();
-            for (GeoBone bone = neckHead; bone != null; bone = bone.getParent()) {
-                boneChain.add(bone);
-            }
-            Collections.reverse(boneChain);
-
-            for (int i = 0; i < boneChain.size(); i++) {
-                GeoBone bone = boneChain.get(i);
-                applyBoneLocalTransform(matrices, bone);
-                if (i < boneChain.size() - 1) {
-                    translateAwayFromPivot(matrices, bone);
-                }
-            }
+        if (neckHead == null) {
+            return;
         }
-    }
+        ModelPart head = model.getHead();
+        if (head == null) {
+            return;
+        }
 
-    private static void applyBoneLocalTransform(MatrixStack matrices, GeoBone bone) {
-        matrices.translate(-bone.getPosX() / 16.0F, bone.getPosY() / 16.0F, bone.getPosZ() / 16.0F);
-        matrices.translate(bone.getPivotX() / 16.0F, bone.getPivotY() / 16.0F, bone.getPivotZ() / 16.0F);
-        matrices.multiply(RotationAxis.POSITIVE_Z.rotation(bone.getRotZ()));
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotation(bone.getRotY()));
-        matrices.multiply(RotationAxis.POSITIVE_X.rotation(bone.getRotX()));
-        matrices.scale(bone.getScaleX(), bone.getScaleY(), bone.getScaleZ());
-    }
-
-    private static void translateAwayFromPivot(MatrixStack matrices, GeoBone bone) {
-        matrices.translate(-bone.getPivotX() / 16.0F, -bone.getPivotY() / 16.0F, -bone.getPivotZ() / 16.0F);
     }
 }
