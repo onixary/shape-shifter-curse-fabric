@@ -6,11 +6,13 @@ import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
+import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.integration.origins.component.PlayerOriginComponent;
@@ -21,6 +23,8 @@ import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Matrix4f;
+import org.joml.Vector3d;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -58,6 +62,7 @@ public class FormRenderUtils {
         public final float scale_z;
 
         private @Nullable ModelPart cachedPart = null;
+        @SuppressWarnings("removal")
         private @Nullable GeoBone cachedBone = null;
 
         public BoneBipedState(float x, float y, float z, float rot_x, float rot_y, float rot_z, float pivot_x, float pivot_y, float pivot_z, float scale_x, float scale_y, float scale_z) {
@@ -80,6 +85,7 @@ public class FormRenderUtils {
             this.cachedPart = part;
         }
 
+        @SuppressWarnings("removal")
         public BoneBipedState(GeoBone bone) {
             this(bone.getPosX(), bone.getPosY(), bone.getPosZ(), bone.getRotX(), bone.getRotY(), bone.getRotZ(), bone.getPivotX(), bone.getPivotY(), bone.getPivotZ(), bone.getScaleX(), bone.getScaleY(), bone.getScaleZ());
             this.cachedBone = bone;
@@ -97,6 +103,7 @@ public class FormRenderUtils {
             part.zScale = scale_z;
         }
 
+        @SuppressWarnings("removal")
         public void apply(GeoBone bone) {
             bone.setPosX(x);
             bone.setPosY(y);
@@ -163,6 +170,34 @@ public class FormRenderUtils {
     public static Vec3d getPartRotation(ModelPart part) {
         var t = part.getTransform();
         return new Vec3d(t.pitch, t.yaw, t.roll);
+    }
+
+    @SuppressWarnings("removal")
+    public static MatrixStack computeModelMatrixStack(GeoBone bone) {
+        MatrixStack matrices = new MatrixStack();
+        if (bone == null) return matrices;
+        List<GeoBone> chain = new ArrayList<>();
+        for (GeoBone b = bone; b != null; b = b.getParent()) {
+            chain.add(b);
+        }
+        Collections.reverse(chain);
+        matrices.translate(0.5F, 0.51F, 0.5F);
+        for (int i = 0; i < chain.size(); i++) {
+            GeoBone b = chain.get(i);
+            matrices.translate(-b.getPosX(), b.getPosY(), b.getPosZ());
+            matrices.translate(b.getPivotX(), b.getPivotY(), b.getPivotZ());
+            matrices.multiply(RotationAxis.POSITIVE_Z.rotation(b.getRotZ()));
+            matrices.multiply(RotationAxis.POSITIVE_Y.rotation(b.getRotY()));
+            matrices.multiply(RotationAxis.POSITIVE_X.rotation(b.getRotX()));
+            matrices.scale(b.getScaleX(), b.getScaleY(), b.getScaleZ());
+
+            if (i < chain.size() - 1) {
+                matrices.translate(-b.getPivotX(), -b.getPivotY(), -b.getPivotZ());
+            }
+        }
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0F));
+        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(180.0F));
+        return matrices;
     }
 
     public static Vec3d getPartScale(ModelPart part) {

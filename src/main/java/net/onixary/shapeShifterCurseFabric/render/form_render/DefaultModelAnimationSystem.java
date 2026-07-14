@@ -8,7 +8,6 @@ import dev.kosmx.playerAnim.core.util.Vec3f;
 import mod.azure.azurelib.cache.object.BakedGeoModel;
 import mod.azure.azurelib.cache.object.GeoBone;
 import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
@@ -19,7 +18,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
@@ -35,6 +33,7 @@ import org.joml.*;
 import java.lang.Math;
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModifyHead_MAS {
 
@@ -760,6 +759,11 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModi
         if (head == null) {
             return;
         }
+        MatrixStack headMatrix = FormRenderUtils.computeModelMatrixStack(neckHead);
+        Vector4f headPos = headMatrix.peek().getPositionMatrix().transform(new Vector4f(0, 0, 0, 1));
+        head.pivotX = (float) (headPos.x);
+        head.pivotY = (float) (-headPos.y + 24); // 或者 +22
+        head.pivotZ = (float) (-headPos.z);
 
     }
 }
