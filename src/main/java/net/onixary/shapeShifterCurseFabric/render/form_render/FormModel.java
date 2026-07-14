@@ -23,6 +23,7 @@ import org.joml.Vector3d;
 
 import java.util.*;
 
+@SuppressWarnings("removal")
 public class FormModel extends GeoModel<FormAnimatable> {
     public static List<FormModel> loadedModel = new ArrayList<>();
     public static HashMap<PlayerEntity, Boolean> SlimMap = new HashMap<>();
@@ -105,7 +106,6 @@ public class FormModel extends GeoModel<FormAnimatable> {
     public List<List<String>> BCD_TailChainHead = new ArrayList<>();
     public List<List<String>> BCD_WingChainL = new ArrayList<>();
     public List<List<String>> BCD_WingChainR = new ArrayList<>();
-    public @Nullable NeckIkConfig BCD_NeckIk = null;
 
     public static class NeckIkConfig {
         public String mount = "neck_mount";
@@ -121,6 +121,7 @@ public class FormModel extends GeoModel<FormAnimatable> {
         public float maxPitchUpDeg = 55.0f;
         public float maxPitchDownDeg = 45.0f;
     }
+    // NECK FEATURES END
 
     public FormModel(JsonObject json) {
         this.modelJson = json;
@@ -270,153 +271,7 @@ public class FormModel extends GeoModel<FormAnimatable> {
     }
 
     public void loadBCD() {
-        BCD_TailChain.clear();
-        BCD_TailChainHead.clear();
-        BCD_WingChainL.clear();
-        BCD_WingChainR.clear();
-        BCD_NeckIk = null;
-        JsonObject bcdJson = JsonHelper.getObject(this.modelJson, "builtin_controller_data", null);
-        if (bcdJson != null) {
-            if (bcdJson.has("tail_chain")) {
-                BCD_TailChain = loadChainData(bcdJson.getAsJsonObject("tail_chain"));
-            }
-            if (bcdJson.has("tail_chain_head")) {
-                BCD_TailChainHead = loadChainData(bcdJson.getAsJsonObject("tail_chain_head"));
-            }
-            if (bcdJson.has("wing_chain_l")) {
-                BCD_WingChainL = loadChainData(bcdJson.getAsJsonObject("wing_chain_l"));
-            }
-            if (bcdJson.has("wing_chain_r")) {
-                BCD_WingChainR = loadChainData(bcdJson.getAsJsonObject("wing_chain_r"));
-            }
-            if (bcdJson.has("neck_ik")) {
-                BCD_NeckIk = loadNeckIkData(bcdJson.getAsJsonObject("neck_ik"));
-            }
-        }
-    }
-
-    private NeckIkConfig loadNeckIkData(JsonObject json) {
-        NeckIkConfig config = new NeckIkConfig();
-        config.mount = JsonHelper.getString(json, "mount", config.mount);
-        config.head = JsonHelper.getString(json, "head", config.head);
-        config.yawAxis = readAxis(JsonHelper.getString(json, "yaw_axis", String.valueOf(config.yawAxis)), config.yawAxis);
-        config.pitchAxis = readAxis(JsonHelper.getString(json, "pitch_axis", String.valueOf(config.pitchAxis)), config.pitchAxis);
-        config.yawSign = JsonHelper.getFloat(json, "yaw_sign", config.yawSign);
-        config.pitchSign = JsonHelper.getFloat(json, "pitch_sign", config.pitchSign);
-        config.maxYawDeg = JsonHelper.getFloat(json, "max_yaw_deg", config.maxYawDeg);
-        config.maxPitchUpDeg = JsonHelper.getFloat(json, "max_pitch_up_deg", config.maxPitchUpDeg);
-        config.maxPitchDownDeg = JsonHelper.getFloat(json, "max_pitch_down_deg", config.maxPitchDownDeg);
-
-        JsonArray chainArray = JsonHelper.getArray(json, "chain", null);
-        if (chainArray != null) {
-            for (JsonElement element : chainArray) {
-                config.chain.add(element.getAsString());
-            }
-        }
-        if (config.chain.isEmpty()) {
-            config.chain.add(config.head);
-        }
-
-        config.yawWeights = readWeights(json, "yaw_weights", config.chain.size());
-        config.pitchWeights = readWeights(json, "pitch_weights", config.chain.size());
-        return config;
-    }
-
-    private char readAxis(String value, char fallback) {
-        if (value == null || value.isEmpty()) {
-            return fallback;
-        }
-        char axis = Character.toLowerCase(value.charAt(0));
-        return axis == 'x' || axis == 'y' || axis == 'z' ? axis : fallback;
-    }
-
-    private float[] readWeights(JsonObject json, String key, int size) {
-        float[] weights = new float[size];
-        JsonArray weightArray = JsonHelper.getArray(json, key, null);
-        if (weightArray != null && !weightArray.isEmpty()) {
-            float sum = 0.0f;
-            for (int i = 0; i < size; i++) {
-                float weight = i < weightArray.size() ? weightArray.get(i).getAsFloat() : 0.0f;
-                weights[i] = weight;
-                sum += weight;
-            }
-            if (sum > 0.0001f) {
-                for (int i = 0; i < size; i++) {
-                    weights[i] /= sum;
-                }
-                return weights;
-            }
-        }
-        float evenWeight = size <= 0 ? 0.0f : 1.0f / size;
-        Arrays.fill(weights, evenWeight);
-        return weights;
-    }
-
-    public boolean hasNeckIk() {
-        return BCD_NeckIk != null && !BCD_NeckIk.chain.isEmpty();
-    }
-
-    public @Nullable String getNeckIkMountBoneId() {
-        return BCD_NeckIk == null ? null : BCD_NeckIk.mount;
-    }
-
-    public @Nullable String getNeckIkHeadBoneId() {
-        return BCD_NeckIk == null ? null : BCD_NeckIk.head;
-    }
-
-    public @Nullable GeoBone getNeckIkHeadBone() {
-        String head = getNeckIkHeadBoneId();
-        return head == null ? null : getCachedGeoBone(head);
-    }
-
-    public @Nullable GeoBone getNeckIkMountBone() {
-        String mount = getNeckIkMountBoneId();
-        return mount == null ? null : getCachedGeoBone(mount);
-    }
-
-    public void setNeckIkHidden(boolean hidden) {
-        GeoBone mount = getNeckIkMountBone();
-        if (mount != null) {
-            mount.setHidden(hidden);
-        }
-    }
-
-    public void trackNeckIkHeadMatrix() {
-        GeoBone head = getNeckIkHeadBone();
-        if (head != null) {
-            head.getModelSpaceMatrix();
-        }
-    }
-
-    public void applyNeckIk(float headYaw, float headPitch) {
-        if (!hasNeckIk()) {
-            return;
-        }
-        NeckIkConfig config = BCD_NeckIk;
-        float yawDeg = MathHelper.clamp(headYaw, -config.maxYawDeg, config.maxYawDeg);
-        float pitchDeg = MathHelper.clamp(headPitch, -config.maxPitchUpDeg, config.maxPitchDownDeg);
-        float yawRad = yawDeg * MathHelper.RADIANS_PER_DEGREE * config.yawSign;
-        float pitchRad = pitchDeg * MathHelper.RADIANS_PER_DEGREE * config.pitchSign;
-
-        for (int i = 0; i < config.chain.size(); i++) {
-            GeoBone bone = getCachedGeoBone(config.chain.get(i));
-            if (bone == null) {
-                continue;
-            }
-            bone.setRotX(0.0f);
-            bone.setRotY(0.0f);
-            bone.setRotZ(0.0f);
-            setAxisRotation(bone, config.yawAxis, yawRad * config.yawWeights[i]);
-            setAxisRotation(bone, config.pitchAxis, pitchRad * config.pitchWeights[i]);
-        }
-    }
-
-    private void setAxisRotation(GeoBone bone, char axis, float value) {
-        switch (axis) {
-            case 'x' -> bone.setRotX(value);
-            case 'y' -> bone.setRotY(value);
-            case 'z' -> bone.setRotZ(value);
-        }
+        // BCD 目前没参数了 之前的迁移至DefaultModelAnimationSystem里了 不过这套系统还留着 后续想加新参数可以在这里写
     }
 
     public void setPlayer(PlayerEntity player, boolean slim) {
@@ -569,101 +424,7 @@ public class FormModel extends GeoModel<FormAnimatable> {
         return bone;
     }
 
-    public final void setRotationForTailBones(float limbAngle, float limbDistance, float age, float tailDragAmount, float tailDragAmountVertical) {
-        IForm curForm = FormTextureUtils.getPlayerForm_Render(entity);
-        boolean isFeral = curForm.getBodyType() == PlayerFormBodyType.FERAL;
-        float SWAY_RATE = 0.33333334F * 0.5F;
-        float SWAY_SCALE = 0.05F;
-        if(BCD_TailChain.isEmpty()) {return;}
-        for (List<String> tailChain : BCD_TailChain) {
-            GeoBone firstTail = this.getCachedGeoBone(tailChain.get(0));
-            if (firstTail == null) {
-                continue;
-            }
-            float tailSway = SWAY_SCALE * MathHelper.cos(age * SWAY_RATE + (((float)Math.PI / 3.0F) * 0.75f));
-            float tailBalance = MathHelper.cos(limbAngle * 0.6662F) * 0.325F * limbDistance;
-            if(!isFeral){
-                firstTail.setRotY(-MathHelper.lerp(limbDistance, tailSway, tailBalance) - tailDragAmount * 0.75F);
-            } else {
-                firstTail.setRotZ(MathHelper.lerp(limbDistance, tailSway, tailBalance) + tailDragAmount * 0.75F);
-            }
-            firstTail.setRotX(-tailDragAmountVertical * 0.75f);
-            float offset = 0.0F;
-            for(int i = 1; i < tailChain.size(); i++){
-                GeoBone chainBone = this.getCachedGeoBone(tailChain.get(i));
-                if (chainBone == null) {continue;}
-                if(!isFeral){
-                    chainBone.setRotY(- MathHelper.lerp(limbDistance, SWAY_SCALE * MathHelper.cos(age * SWAY_RATE - (((float)Math.PI / 3.0F) * offset)), 0.0f) - tailDragAmount * 0.75F);
-                } else{
-                    chainBone.setRotZ(MathHelper.lerp(limbDistance, SWAY_SCALE * MathHelper.cos(age * SWAY_RATE - (((float)Math.PI / 3.0F) * offset)), 0.0f) + tailDragAmount * 0.75F);
-                }
-                chainBone.setRotX(-tailDragAmountVertical * 0.75f * (offset + 0.75f));
-                offset += 0.75F;
-            }
-        }
-    }
 
-    public final void setRotationForHeadTailBones(float headAngle, float age, float tailDragAmount, float tailDragAmountVertical){
-        float SWAY_RATE = 0.33333334F * 0.5F;
-        float SWAY_SCALE = 0.05F;
-        if (BCD_TailChainHead.isEmpty()) {return;}
-        for (List<String> tailChain : BCD_TailChainHead) {
-            GeoBone firstHeadTail = this.getCachedGeoBone(tailChain.get(0));
-            if (firstHeadTail == null) {
-                continue;
-            }
-            float headTailSway = SWAY_SCALE * MathHelper.cos(age * SWAY_RATE + (((float)Math.PI / 3.0F) * 0.75f));
-            float headTailBalance = MathHelper.cos(headAngle * 0.6662F) * 0.325F * 0.1f;
-            firstHeadTail.setRotY(-MathHelper.lerp(0.1f, headTailSway, headTailBalance) - tailDragAmount * 0.75F);
-            firstHeadTail.setRotX(-tailDragAmountVertical * 0.75f);
-            float offset = 0.0F;
-            for (int i = 1; i < tailChain.size(); i++){
-                GeoBone chainBone = this.getCachedGeoBone(tailChain.get(i));
-                if (chainBone == null) {continue;}
-                chainBone.setRotY(- MathHelper.lerp(0.1f, SWAY_SCALE * MathHelper.cos(age * SWAY_RATE - (((float)Math.PI / 3.0F) * offset)), 0.0f) - tailDragAmount * 0.75F);
-                chainBone.setRotX(-tailDragAmountVertical * 0.75f * (offset + 0.75f));
-                offset += 0.75F;
-            }
-        }
-    }
-
-    public final void setRotationForWingBones(float limbAngle, float limbDistance, float age, float tailDragAmountVertical){
-        float swayAngle = age * 20.0F * (float) (Math.PI / 180.0) + limbAngle;
-        float sway_base = MathHelper.cos(swayAngle) * (float) Math.PI * 0.15F + limbDistance;
-        float sway_l = (float) -(Math.PI / 4) + sway_base;
-        float sway_r = (float) (Math.PI / 4) - sway_base;
-
-        if (BCD_WingChainL != null) {
-            for (List<String> wingChain : BCD_WingChainL) {
-                GeoBone firstWing = this.getCachedGeoBone(wingChain.get(0));
-                if (firstWing == null) { continue; }
-                firstWing.setRotY(sway_l);
-                firstWing.setRotX(-tailDragAmountVertical * 0.35f);
-                float offset = 0.0F;
-                for (int i = 1; i < wingChain.size(); i++) {
-                    GeoBone chainBone = this.getCachedGeoBone(wingChain.get(i));
-                    if (chainBone == null) { continue; }
-                    chainBone.setRotX(-tailDragAmountVertical * 0.75f * offset);
-                    offset += 0.75F;
-                }
-            }
-        }
-        if (BCD_WingChainR != null) {
-            for (List<String> wingChain : BCD_WingChainR) {
-                GeoBone firstWing = this.getCachedGeoBone(wingChain.get(0));
-                if (firstWing == null)  continue;
-                firstWing.setRotY(sway_r);
-                firstWing.setRotX(-tailDragAmountVertical * 0.35f);
-                float offset = 0.0F;
-                for (int i = 1; i < wingChain.size(); i++) {
-                    GeoBone chainBone = this.getCachedGeoBone(wingChain.get(i));
-                    if (chainBone == null) { continue; }
-                    chainBone.setRotX(-tailDragAmountVertical * 0.75f * offset);
-                    offset += 0.75F;
-                }
-            }
-        }
-    }
 
     public final GeoBone translatePositionForBone(String bone_name, Vec3d pos) {
         var b = this.getCachedGeoBone(bone_name);

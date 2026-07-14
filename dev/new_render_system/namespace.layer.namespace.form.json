@@ -49,8 +49,7 @@
       "bipedRightHindLeg": "bipedRightHindLeg",
       "bipedLeftHindLeg": "bipedLeftHindLeg",
       "bipedRightExtraArm": "bipedRightExtraArm",
-      "bipedLeftExtraArm": "bipedLeftExtraArm",
-      "neck_mount": "neck_mount"
+      "bipedLeftExtraArm": "bipedLeftExtraArm"
     },
     "first_person_render": {
       "left_arm": "bipedLeftArm",
@@ -76,13 +75,41 @@
         "pivot_y": 0.0,
         "pivot_z": 0.0
       }
+    },
+    "tail": {
+      "chain": { },
+      "condition": "shape-shifter-curse:always_true",
+      "inverted": false
+    },
+    "head_tail": {
+      "chain": { },
+      "condition": "shape-shifter-curse:always_true",
+      "inverted": false
+    },
+    "wing_l": {
+      "chain": { },
+      "condition": "shape-shifter-curse:always_true",
+      "inverted": false
+    },
+    "wing_r": {
+      "chain": { },
+      "condition": "shape-shifter-curse:always_true",
+      "inverted": false
+    },
+    "neck_config": {
+      "chain": {
+        "neck": [0, 1, 2]
+      },
+      "head": "ik_head",
+      "yaw_axis": "-y",
+      "pitch_axis": "x",
+      "yaw_weights": [0.18, 0.27, 0.32, 0.23],
+      "pitch_weights": [0.10, 0.22, 0.33, 0.35],
+      "yaw_total": 1.0,
+      "pitch_total": 1.0,
+      "max_yaw_deg": 120.0,
+      "max_pitch_up_deg": 70.0,
+      "max_pitch_down_deg": 60.0
     }
-  },
-  "builtin_controller_data": {
-    "tail_chain": {},
-    "tail_chain_head": {},
-    "wing_chain_l": {},
-    "wing_chain_r": {},
-    "neck_ik": {}
   }
 }

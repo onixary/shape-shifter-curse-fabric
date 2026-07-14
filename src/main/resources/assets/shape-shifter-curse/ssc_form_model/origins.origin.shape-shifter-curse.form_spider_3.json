@@ -26,11 +26,6 @@
     "head",
     "hat"
   ],
-  "builtin_controller_data": {
-    "tail_chain": {
-      "tail": [0]
-    }
-  },
 
   "animation_system": "shape-shifter-curse:default",
   "animation_system_config": {
@@ -41,6 +36,11 @@
     "first_person_render": {
       "left_arm": "bipedLeftArm",
       "right_arm": "bipedRightArm"
+    },
+    "tail": {
+      "chain": {
+        "tail": [0]
+      }
     }
   }
 }

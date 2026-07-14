@@ -13,6 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 
+@SuppressWarnings("removal")
 public class FormAnimatable implements GeoAnimatable {
     AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
