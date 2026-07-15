@@ -177,7 +177,7 @@
   "item.shape-shifter-curse.digestion_fiber_ball": ["Digestion Fiber Ball"],
   "item.shape-shifter-curse.digestion_fiber_ball.tooltip": ["[Ocelot Form] Allows you to digest cooked meat and vegetables, but their restoration efficiency remains low"],
   "item.shape-shifter-curse.frost_pawglove": ["Frost Pawglove"],
-  "item.shape-shifter-curse.frost_pawglove.tooltip": ["[Snow Fox Form] Requires powerful ice magic. Your snowballs inflict slowness in area, but deal reduced damage"],
+  "item.shape-shifter-curse.frost_pawglove.tooltip": ["[Snow Fox Form] Requires powerful ice magic. Your snowballs inflict slowness in an area, but deal reduced damage"],
   "item.shape-shifter-curse.withered_bandage": ["Withered Bandage"],
   "item.shape-shifter-curse.withered_bandage.tooltip": ["[Jackal Form] The Wither effect you gain when hit has reduced level, but lasts longer"],
   "item.shape-shifter-curse.moondust_crystal_shard": ["Moondust Crystal Shard"],
