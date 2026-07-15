@@ -272,7 +272,7 @@
   "info.shape-shifter-curse.use_catalyst_when_ignore" : ["Your current form is less influenced by the lunar tides, normal catalyst seems not to have any effect..."],
   "info.shape-shifter-curse.max_form_used_catalyst": ["Your current form is so thoroughly altered that normal catalysts don't have any effect..."],
   "info.shape-shifter-curse.max_form_used_powerful_catalyst": ["Under the effect of the powerful catalyst, permanent changes have taken root in your body..."],
-  "info.shape-shifter-curse.form_used_powerful_catalyst_failed": [" The powerful catalyst has no effect on your current form"],
+  "info.shape-shifter-curse.form_used_powerful_catalyst_failed": ["The powerful catalyst has no effect on your current form"],
   "info.shape-shifter-curse.sp_form_used_catalyst": ["Your current form contains special magic that catalysts can't influence..."],
   "info.shape-shifter-curse.transformative_effect_cure": ["Golden magic has cured the curse effect upon you."],
   "info.shape-shifter-curse.milk_cannot_remove_effect": ["Milk seems unable to remove the curse effect upon you; you seem to need some golden magic."],
@@ -419,7 +419,7 @@
   "codex.status.before_moon": ["You feel magic stirring within. The cursed moon will rise next night...\n"],
   "codex.status.under_moon": ["The cursed moon alters your body...\nIts effects fade at dawn. But... perhaps you should utilize this opportunity?\n"],
 
-  "codex.desc.appearance_normal": ["Your body feels no different than usual. Maybe your internal magic needs certain triggers to manifest?"],
+  "codex.desc.appearance_normal": ["Your body feels no different from usual. Maybe your internal magic needs certain triggers to manifest?"],
   "codex.desc.pros_normal": ["Currently, the magic within grants no noticeable benefits"],
   "codex.desc.cons_normal": ["Currently, the magic within causes no negative effects"],
   "codex.desc.instincts_normal": ["Examining yourself, you sense shifting magic within your body, but nothing more.\nYour mind remains calm, maintaining awareness of surroundings"],
