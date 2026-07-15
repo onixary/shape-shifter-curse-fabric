@@ -457,7 +457,7 @@
   "codex.form.shape-shifter-curse.anubis_wolf_0.name" : ["Jackal Form (Phase 0)"],
   "codex.form.shape-shifter-curse.anubis_wolf_0.title": ["\nThe curse has had some visible effects on your body. You have developed some jackal-like features, and occasionally faint whispers echo in your mind"],
   "codex.form.shape-shifter-curse.anubis_wolf_0.equip": [""],
-  "codex.form.shape-shifter-curse.anubis_wolf_0.appearance": ["You find your ears are no longer where they should be: they have moved toward the top of your head, their tips pointed, with pale golden fuzz growing on them, looking like the wolf-like spirits that appear in the desert\n",
+  "codex.form.shape-shifter-curse.anubis_wolf_0.appearance": ["You find your ears are no longer where they should be: they have moved towards the top of your head, their tips pointed, with pale golden fuzz growing on them, looking like the wolf-like spirits that appear in the desert\n",
     "Mottled black-and-yellow fur sprouts from the ends of your limbs. Beneath it, you find your nails have turned black, and your cuticles have become harder\n",
     "A slender, well-proportioned tail extends from your tailbone. It is covered in short fur, its colour gradually transitioning from dark at the base to light at the tip\n\n",
     "What troubles you is that you occasionally hear whispers in your mind. You cannot identify what it is; it seems some foreign entity resides within your body..."],
@@ -658,7 +658,7 @@
     "[Fountain Belt]"
   ],
   "codex.form.shape-shifter-curse.axolotl_3.appearance": ["The further-grown tail has become the main structure of your body, adorned with developed fin membranes that allow swift underwater movement.\n",
-    "Your blunt-clawed limbs have grown even shorter and are now positioned more toward the front of your torso. When standing still, you can only maintain an upright posture with the support of your tail.\n",
+    "Your blunt-clawed limbs have grown even shorter and are now positioned more towards the front of your torso. When standing still, you can only maintain an upright posture with the support of your tail.\n",
     "Your skin is now entirely covered in pale, scale-less tissue. Thanks to the water-storing feathery structure, your skin remains perpetually moist.\n\n",
     "Two new clusters of gill filaments extend from the top of your head. Beyond supplying vital oxygen, you sense they grant you some power to perceive and manipulate water currents..."],
   "codex.form.shape-shifter-curse.axolotl_3.pros": ["You can breathe freely underwater, and your oxygen bar now indicates your Moisture level.\n",
@@ -743,7 +743,7 @@
   "codex.form.shape-shifter-curse.ocelot_2.equip": [
     "[Collar Of Tension], [Collar Of Whiskers], [Digestion Fiber Ball]"
   ],
-  "codex.form.shape-shifter-curse.ocelot_2.appearance": ["Your head ears grow larger and more flexible - you notice they automatically turn toward sound sources\n",
+  "codex.form.shape-shifter-curse.ocelot_2.appearance": ["Your head ears grow larger and more flexible - you notice they automatically turn towards sound sources\n",
     "Your entire body now sports black-spotted fur. Very warm - you'd hate it getting wet\n",
     "Your hind legs fully become digitigrade, though you can still stand upright barely\n",
     "With powerful quadruped claws and a tail nearly matching torso length, you can low-center sprint and pounce across fields and forests rapidly. No prey escapes your claws"],
@@ -1029,7 +1029,7 @@
     "Your ears have shifted to the top of your head, becoming triangular and covered in black fur\n",
     "Your nails have grown sharper, standing out noticeably against the dark fur\n",
     "Orange-red fur patches appear sporadically across your body, most notably a red-and-white tuft growing from your lower back. When touched, you can feel hidden bony protrusions within"],
-  "codex.form.shape-shifter-curse.familiar_fox_0.pros": ["To your puzzlement, witches no longer seem hostile toward you\n",
+  "codex.form.shape-shifter-curse.familiar_fox_0.pros": ["To your puzzlement, witches no longer seem hostile towards you\n",
     "Your body feels more energetic, granting increased running speed\n",
     "Enhanced perception helps you find more dropped items, roughly equivalent to Looting I"],
   "codex.form.shape-shifter-curse.familiar_fox_0.cons": ["Your new fur growth slightly reduces your swimming speed\n",
@@ -1057,7 +1057,7 @@
     "The fur tuft at your tailbone has developed into a full fluffy tail that sways slowly\n\n",
     "Worryingly, beyond the usual shifting magic, you detect a new type of magic blending within you..."],
   "codex.form.shape-shifter-curse.familiar_fox_1.pros": ["The foreign magic grants new abilities - you can now right-click while empty-handed to drain energy from weak creatures for hunger restoration\n\n",
-    "All illagers strangely show no hostility toward you\n",
+    "All illagers strangely show no hostility towards you\n",
     "Your running speed increases further, and your new fur protects you from sweet berry bushes\n",
     "Sharper perception helps find more dropped items (~Looting II)"],
   "codex.form.shape-shifter-curse.familiar_fox_1.cons": ["The foreign magic affects your digestion, reducing hunger gained from food\n",
@@ -1186,7 +1186,7 @@
   "codex.form.shape-shifter-curse.spider_0.equip": [""],
   "codex.form.shape-shifter-curse.spider_0.appearance": ["Hard carapace-like growths have begun to emerge on your body. They are composed of chitin - lightweight yet sturdy.\nLiquid silk threads seep from your newly grown abdomen. You discover that you instinctively know how to weave compressed silk projectiles, which can be hurled to hinder your targets, and construct climbable web scaffolds.\nA pair of carapace-covered protrusions has grown on each side of your torso and at the base of your abdomen. By focusing your mind, you find that you can command them to move slightly.\n\nUnlike other forms, you sense that your transformation is now in a state of stagnation - a new instinct whispers to you: you will need specific catalytic materials, a safe location, and time to achieve a complete transformation."],
   "codex.form.shape-shifter-curse.spider_0.pros": ["Your body can now produce high-density silk projectiles - hold the primary ability key to charge and release to fire a web bullet, expending web value. Different effects occur based on charge level:\n\nWhen hitting the side or bottom of a block, a non-sticky bridge web structure extends downward from the point of impact, which can be climbed.\nWhen hitting a creature, it inflicts Slowness and Weakness.\n\nYour body is no longer affected by poison.\nYou are unhindered by cobwebs. You can climb webs and sense entities caught within them."],
-  "codex.form.shape-shifter-curse.spider_0.cons": ["Your digestive system is shifting toward one better suited for an arthropod predator, reducing the saturation you gain from non-meat foods.\nWeapons enchanted with Bane of Arthropods deal increased damage to you.\nThe appendage protrusions on your rear make it impossible to wear leggings."],
+  "codex.form.shape-shifter-curse.spider_0.cons": ["Your digestive system is shifting towards one better suited for an arthropod predator, reducing the saturation you gain from non-meat foods.\nWeapons enchanted with Bane of Arthropods deal increased damage to you.\nThe appendage protrusions on your rear make it impossible to wear leggings."],
   "codex.form.shape-shifter-curse.spider_0.instincts": ["For some reason, you feel that your form is less influenced by the lunar tides... The Cursed Moon and ordinary catalysts cannot exert sufficient influence on your current form.\n",
     "Instead, the idea of weaving\n",
     {
