@@ -11,9 +11,12 @@
   "texture": "shape-shifter-curse:textures/form/form_bat_0/form_bat_0.png",
   "texture_mask": "shape-shifter-curse:textures/form/form_bat_0/form_bat_0_colormask.png",
 
-  "builtin_controller_data": {
-    "tail_chain": {
-      "tail": [0]
+  "animation_system": "shape-shifter-curse:default",
+  "animation_system_config": {
+    "tail": {
+      "chain": {
+        "tail": [0]
+      }
     }
   }
 }

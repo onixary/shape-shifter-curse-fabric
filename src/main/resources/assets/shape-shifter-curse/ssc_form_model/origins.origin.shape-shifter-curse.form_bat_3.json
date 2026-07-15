@@ -26,13 +26,20 @@
     "head",
     "hat"
   ],
-  "builtin_controller_data": {
-    "tail_chain": {
-      "tail": [0, 1, 2, 3]
+
+
+  "animation_system": "shape-shifter-curse:default",
+  "animation_system_config": {
+    "tail": {
+      "chain": {
+        "tail": [0, 1, 2, 3]
+      }
     },
-    "tail_chain_head": {
-      "ear_l": [0],
-      "ear_r": [0]
+    "head_tail": {
+      "chain": {
+        "ear_l": [0],
+        "ear_r": [0]
+      }
     }
   }
 }

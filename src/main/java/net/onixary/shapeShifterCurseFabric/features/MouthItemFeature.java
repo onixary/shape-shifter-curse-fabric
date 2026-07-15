@@ -14,6 +14,7 @@ import net.minecraft.client.render.item.HeldItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.util.Hand;
@@ -21,7 +22,7 @@ import net.minecraft.util.UseAction;
 import net.minecraft.util.math.RotationAxis;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
-import net.onixary.shapeShifterCurseFabric.render.form_render.LongNeckRenderUtils;
+import net.onixary.shapeShifterCurseFabric.render.form_render.*;
 import net.onixary.shapeShifterCurseFabric.util.FeralRenderUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 
@@ -95,13 +96,31 @@ public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> &
         if (FeralRenderUtils.isFeralMouthItemBlackListed(itemStack)) {
             return;
         }
-        if (livingEntity instanceof AbstractClientPlayerEntity player && LongNeckRenderUtils.hasLongNeck(player)) {
+        if (!(livingEntity instanceof PlayerEntity player)) {
             return;
         }
+        // if (livingEntity instanceof AbstractClientPlayerEntity player && LongNeckRenderUtils.hasLongNeck(player)) {
+        //     return;
+        // }
         matrixStack.push();
         var eR = (PlayerEntityRenderer) MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(livingEntity);
+        FormRenderer renderer = FormRenderUtils.searchFirstRenderer(player, formRenderer -> {
+            FormModel model = formRenderer.realModel;
+            if (model == null) {
+                return false;
+            }
+            return model.AnimationSystem instanceof IModifyHead_MAS;
+        });
         var head = eR.getModel().head;
+        float headRoll = 0.0f;
+        if (renderer != null) {
+            ((IModifyHead_MAS)renderer.realModel.AnimationSystem).modifyHeadPart(player, eR.getModel(), renderer.realModel);
+            k = (float) Math.toDegrees(head.yaw);
+            l = (float) Math.toDegrees(head.pitch);
+            headRoll = (float) Math.toDegrees(head.roll);
+        }
         matrixStack.translate(head.pivotX / 16.0F, head.pivotY / 16.0F, head.pivotZ / 16.0F);
+        matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(headRoll));
         matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(k));
         matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(l));
         matrixStack.translate(0.06F, 0.085F, -0.35D);

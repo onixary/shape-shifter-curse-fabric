@@ -25,20 +25,29 @@
     "jacket"
   ],
 
-  "builtin_controller_data": {
-    "tail_chain": {
-      "tail_l": [0],
-      "tail_r": [0]
+  "animation_system": "shape-shifter-curse:default",
+  "animation_system_config": {
+    "tail": {
+      "chain": {
+        "tail_l": [0],
+        "tail_r": [0]
+      }
     },
-    "wing_chain_l": {
-      "wing_l": [0, 1]
+    "head_tail": {
+      "chain": {
+        "head_tail_l": [0, 1],
+        "head_tail_r": [0, 1]
+      }
     },
-    "wing_chain_r": {
-      "wing_r": [0, 1]
+    "wing_l": {
+      "chain": {
+        "wing_l": [0, 1]
+      }
     },
-    "tail_chain_head": {
-      "head_tail_l": [0, 1],
-      "head_tail_r": [0, 1]
+    "wing_r": {
+      "chain": {
+        "wing_r": [0, 1]
+      }
     }
   }
 }

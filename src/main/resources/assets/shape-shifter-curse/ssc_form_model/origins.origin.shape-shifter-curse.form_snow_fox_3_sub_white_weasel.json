@@ -26,24 +26,31 @@
     "head",
     "hat"
   ],
-  "builtin_controller_data": {
-    "tail_chain": {
-      "tail": [0, 1, 2, 3]
+
+  "animation_system": "shape-shifter-curse:default",
+  "animation_system_config": {
+    "tail": {
+      "chain": {
+        "tail": [0, 1, 2, 3]
+      }
     },
-    "tail_chain_head": {
-      "ear_a": [0],
-      "ear_b": [0]
+    "head_tail": {
+      "chain": {
+        "ear_a": [0],
+        "ear_b": [0]
+      }
     },
-    "neck_ik": {
-      "mount": "neck_mount",
-      "chain": ["neck_0", "neck_1", "neck_2", "ik_head"],
+    "neck_config": {
+      "chain": {
+        "neck": [0, 1, 2]
+      },
       "head": "ik_head",
-      "yaw_axis": "y",
+      "yaw_axis": "-y",
       "pitch_axis": "x",
-      "yaw_sign": -1.0,
-      "pitch_sign": 1.0,
       "yaw_weights": [0.18, 0.27, 0.32, 0.23],
       "pitch_weights": [0.10, 0.22, 0.33, 0.35],
+      "yaw_total": 1.0,
+      "pitch_total": 1.0,
       "max_yaw_deg": 120.0,
       "max_pitch_up_deg": 70.0,
       "max_pitch_down_deg": 60.0
