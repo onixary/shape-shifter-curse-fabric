@@ -62,13 +62,13 @@ public class FormArgumentType implements ArgumentType<Identifier> {
 
     public static final BiPredicate<@Nullable PlayerEntity, @NotNull IForm> NonDynamicForms = (player, form) -> !form.isDynamicForm();
     public static final BiPredicate<@Nullable PlayerEntity, @NotNull IForm> DynamicForms = (player, form) -> form.isDynamicForm();
-    public static final BiPredicate<@Nullable PlayerEntity, @NotNull IForm> NonSubForms = (player, form) -> !(form instanceof ISubForm);
-    public static final BiPredicate<@Nullable PlayerEntity, @NotNull IForm> SubForms = (player, form) -> form instanceof ISubForm;
+    public static final BiPredicate<@Nullable PlayerEntity, @NotNull IForm> NonSubForms = (player, form) -> !(form instanceof ISubForm subForm && subForm.isSubForm());
+    public static final BiPredicate<@Nullable PlayerEntity, @NotNull IForm> SubForms = (player, form) -> (form instanceof ISubForm subForm && subForm.isSubForm());
     public static final BiPredicate<@Nullable PlayerEntity, @NotNull IForm> UsableForms = FormUtils::isFormCanUse;
     public static final Identifier ALL_FORM_ARG = registerSuggestionsProvider(ShapeShifterCurseFabric.identifier("all_form_arg"), buildSuggestionsProvider(((player, form) -> true)));
     public static final Identifier SET_FORM_ARG = registerSuggestionsProvider(ShapeShifterCurseFabric.identifier("set_form_arg"), buildSuggestionsProvider(NonDynamicForms.and(NonSubForms)));
     public static final Identifier SET_DYNAMIC_FORM_ARG = registerSuggestionsProvider(ShapeShifterCurseFabric.identifier("set_dynamic_form_arg"), buildSuggestionsProvider(DynamicForms.and(NonSubForms)));
-    public static final Identifier SET_SUB_FORM_ARG = registerSuggestionsProvider(ShapeShifterCurseFabric.identifier("set_sub_form_arg"), buildSuggestionsProvider(NonDynamicForms.and(SubForms)));
+    public static final Identifier SET_SUB_FORM_ARG = registerSuggestionsProvider(ShapeShifterCurseFabric.identifier("set_sub_form_arg"), buildSuggestionsProvider(SubForms.and(UsableForms)));
 
     private final Identifier suggestionsProvider;
 

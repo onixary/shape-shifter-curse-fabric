@@ -21,9 +21,7 @@ import net.onixary.shapeShifterCurseFabric.entity.projectile.WebBullet;
 import net.onixary.shapeShifterCurseFabric.mana.RegManaComponent;
 import net.onixary.shapeShifterCurseFabric.minion.RegPlayerMinionComponent;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
-import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
-import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
@@ -31,7 +29,12 @@ import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.util.FormColorData;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
+import net.onixary.shapeShifterCurseFabric.util.Verify.PatronDataSegment;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -393,7 +396,29 @@ public class ShapeShifterCurseCommand {
     }
 
     private static int logPatronInfo(CommandContext<ServerCommandSource> commandContext) {
-        return 0;
+        try {
+            ServerPlayerEntity player = commandContext.getSource().getPlayer();
+            if (player == null) {
+                commandContext.getSource().sendError(Text.literal("Must be a player!"));
+                return 0;
+            }
+            PatronDataSegment patronDataSegment = PatronDataSegment.getPatronDataSegment(player);
+            StringBuilder message = new StringBuilder("Patron Info:\n");
+            message.append("UUID: ").append(player.getUuid()).append("\n");
+            message.append("Patron Level: ").append(patronDataSegment != null ? patronDataSegment.getLevel() : 0).append("\n");
+            if (patronDataSegment != null) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                long expireTime = patronDataSegment.getExpireTime();
+                message.append("Expire Time: ").append(LocalDateTime.ofInstant(Instant.ofEpochSecond(expireTime), ZoneId.systemDefault()).format(formatter)).append("\n");
+            }
+            // message.append("\n");
+            player.sendMessage(Text.literal(message.toString()), false);
+        } catch (Exception e) {
+            // 处理其他可能的错误
+            commandContext.getSource().sendError(Text.literal("Error when log player patron info: " + e.getMessage()));
+            ShapeShifterCurseFabric.LOGGER.error("Error when log player patron info: ", e);
+        }
+        return 1;
     }
 
     // private static int logPatronInfo(CommandContext<ServerCommandSource> commandContext) {
