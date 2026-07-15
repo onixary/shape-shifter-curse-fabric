@@ -32,7 +32,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.additional_power.*;
 import net.onixary.shapeShifterCurseFabric.advancement.*;
-import net.onixary.shapeShifterCurseFabric.command.DynamicFormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.FormArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.MiscArgumentType;
 import net.onixary.shapeShifterCurseFabric.command.ShapeShifterCurseCommand;
@@ -273,12 +272,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         ArgumentTypeRegistry.registerArgumentType(
                 Identifier.of(MOD_ID, "form_argument_type"),
                 FormArgumentType.class,
-                ConstantArgumentSerializer.of(FormArgumentType::new)
-        );
-        ArgumentTypeRegistry.registerArgumentType(
-                Identifier.of(MOD_ID, "custom_form_argument_type"),
-                DynamicFormArgumentType.class,
-                ConstantArgumentSerializer.of(DynamicFormArgumentType::new)
+                new FormArgumentType.Form_ArgumentType_Serializer()
         );
         ArgumentTypeRegistry.registerArgumentType(
                 Identifier.of(MOD_ID, "string_enum_argument_type"),

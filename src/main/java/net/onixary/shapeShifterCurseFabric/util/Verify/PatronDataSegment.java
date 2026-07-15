@@ -5,6 +5,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.IPatronForm;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -90,7 +91,8 @@ public final class PatronDataSegment implements IDataSegment {
         }
     }
 
-    public static boolean isPatronFormCanUse(PlayerEntity player, IPatronForm form) {
+    public static boolean isPatronFormCanUse(@Nullable PlayerEntity player, @NotNull IPatronForm form) {
+        if (player == null) return false;
         UUID uuid = player.getUuid();
         PatronDataSegment dataSegment = PATRON_AUTH_DATA.get(uuid);
         return form.checkCanUse(player, dataSegment);
