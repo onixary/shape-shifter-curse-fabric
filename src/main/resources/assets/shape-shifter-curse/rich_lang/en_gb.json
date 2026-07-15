@@ -251,9 +251,9 @@
 
 "info.shape-shifter-curse.origin_form_sleep_when_attached": ["In your sleep, the curse's magic intensified, altering your body..."],
   "info.shape-shifter-curse.origin_form_time_end_when_attached": ["The curse's effects fade. The magic within you quiets down"],
-  "info.shape-shifter-curse.end_cursed_moon_by_cure": ["The cursed moon's influence fades. Golden magic stabilizes your current form"],
+  "info.shape-shifter-curse.end_cursed_moon_by_cure": ["The cursed moon's influence fades. Golden magic stabilises your current form"],
   "info.shape-shifter-curse.origin_form_used_cure": ["Golden magic briefly quiets your magic, but it soon resurges. To truly dispel it, you might need other methods..."],
-  "info.shape-shifter-curse.transformed_by_cure_0": ["Golden magic successfully reversed your transformation! Your magic stabilizes"],
+  "info.shape-shifter-curse.transformed_by_cure_0": ["Golden magic successfully reversed your transformation! Your magic stabilises"],
   "info.shape-shifter-curse.transformed_by_cure": ["Golden magic partially reversed your transformation!"],
   "info.shape-shifter-curse.permanent_form_used_cure": ["You feel nothing. It has no effect on your permanently altered form"],
   "info.shape-shifter-curse.permanent_form_used_cure_final": ["You resort to more potent magic, but to no avail\nYour permanently transformed form cannot be reversed any more"],
@@ -434,7 +434,7 @@
   "codex.desc.cons_1": ["Your form brings new limitations..."],
   "codex.desc.instincts_1": ["Creature instincts grow stronger... Maybe resist them"],
 
-  "codex.desc.appearance_2": ["The magic has nearly remade you. It's stabilized - even golden apples can't help...\nUnless some ",
+  "codex.desc.appearance_2": ["The magic has nearly remade you. It's stabilised - even golden apples can't help...\nUnless some ",
     {
       "text": "greater influence",
       "color": "#ed721d"
