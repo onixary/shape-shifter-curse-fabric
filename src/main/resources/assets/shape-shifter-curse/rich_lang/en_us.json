@@ -186,7 +186,7 @@
   "item.shape-shifter-curse.bottled_snowfall": ["Bottled Snowfall"],
   "item.shape-shifter-curse.bottled_snowfall.tooltip": ["[Snow Fox Form Tool] Requires powerful ice magic. At the cost of some hunger, condense and fire snowballs"],
   "item.shape-shifter-curse.diamond_mining_claw": ["Diamond Mining Claw"],
-  "item.shape-shifter-curse.diamond_mining_claw.tooltip": ["[Bat Form Tool] Requires strong foreclaws. Mining efficiency and damage + , you can use wall clinging power when held"],
+  "item.shape-shifter-curse.diamond_mining_claw.tooltip": ["[Bat Form Tool] Requires strong foreclaws. Increases mining efficiency and damage. When held, you can also cling to walls"],
   "item.shape-shifter-curse.fountain_belt": ["Fountain Belt"],
   "item.shape-shifter-curse.fountain_belt.tooltip": ["[Axolotl Form] Requires powerful water power. Water burst stop dealing damage, it launches you and nearby entities"],
   "item.shape-shifter-curse.resonant_core": ["Resonant Core"],
