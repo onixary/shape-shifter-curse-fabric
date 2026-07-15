@@ -470,7 +470,7 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModi
         }
     }
 
-    public void ProcessExtraBone(FormModel m, PlayerEntity player, String OriginFursBoneID, String AnimBoneID) {
+    public void ProcessExtraBone(FormModel m, PlayerEntity player, String AnimBoneID, String OriginFursBoneID) {
         GeoBone bone =  m.resetBone(OriginFursBoneID);
         Vec3f AnimPosition = AnimSystem.getPlayerBone3DTransform(player, AnimBoneID, TransformType.POSITION, new Vec3f(0, 0, 0));
         m.setPositionForBone(OriginFursBoneID, new Vec3d(AnimPosition.getX(), -AnimPosition.getY(), -AnimPosition.getZ()));
