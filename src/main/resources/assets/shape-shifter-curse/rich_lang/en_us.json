@@ -1132,7 +1132,7 @@
     "Your familiar magic repels other magic, now most persistent status effects can no longer affect your body, whether positive or negative\n",
     "Illagers see you as an ally and no longer attack you\n",
     "Your running speed increases. Due to your size, ranged attacks also have difficulty hitting you\n",
-    "By consuming a small amount of magic and right-clicking with a water bottle on corresponding ingredients, you can directly brew powerful Splash Potions of Poison, Instant Health, and Instant Damage in your inventory, 3 at a time. You can now stack 8 identical potions\n",
+    "By consuming a small amount of magic and right-clicking with a water bottle on corresponding ingredients, you can directly brew powerful Splash Potions of Poison, Healing, and Harming in your inventory, 3 at a time. You can now stack 8 identical potions\n",
     "Additionally, through magic perception, you can see through and locate creatures within a certain range\n",
     "Thanks to your thick fur, you can move freely through sweet berry bushes\n"],
   "codex.form.shape-shifter-curse.familiar_fox_3.cons": ["As a familiar made of magic, you need to maintain sufficient magic reserves at all times:\n",
