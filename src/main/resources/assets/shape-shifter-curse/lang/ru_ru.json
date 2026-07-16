@@ -657,5 +657,8 @@
     "gamerule.sscUseInitialForm": "Use SSC Custom Initial Form",
     "gamerule.sscUseInitialForm.description": "When enabled, players who have not chosen a form will immediately transform into the server-configured initial form on join.",
     "info.shape-shifter-curse.transformative_effect_cure": "Golden magic has cured the curse effect upon you.",
-    "info.shape-shifter-curse.milk_cannot_remove_effect": "Milk seems unable to remove the curse effect upon you; you seem to need some golden magic."
+    "info.shape-shifter-curse.milk_cannot_remove_effect": "Milk seems unable to remove the curse effect upon you; you seem to need some golden magic.",
+    "command.shape_shifter_curse.no_permission_form": "You don't have permission to use this form.",
+    "command.shape_shifter_curse.no_permission_dynamic_form": "You don't have permission to use this form.",
+    "command.shape_shifter_curse.no_permission_sub_form": "You don't have permission to use this form."
 }
