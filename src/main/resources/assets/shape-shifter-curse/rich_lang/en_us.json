@@ -723,7 +723,7 @@
     "You can no longer digest non-meat foods"],
   "codex.form.shape-shifter-curse.ocelot_1.instincts": ["You increasingly want to",
     {
-      "text":"eat more raw meat", "color":"#c67681"
+      "text":" eat more raw meat", "color":"#c67681"
     },
     "\nYou begin to desire",
     {
