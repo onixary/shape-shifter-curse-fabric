@@ -1062,7 +1062,7 @@
   "codex.form.shape-shifter-curse.familiar_fox_1.cons": ["The foreign magic affects your digestion, reducing hunger gained from food\n",
     "Your health is slightly reduced\n",
     "Your fur slows swimming slightly\n",
-    "Attacking illagers now also start causes unusual dizziness"],
+    "Attacking illagers now also causes unusual dizziness"],
   "codex.form.shape-shifter-curse.familiar_fox_1.instincts": ["",
     {
       "text":"Thoughts of draining energy from creatures", "color":"#c67681"
