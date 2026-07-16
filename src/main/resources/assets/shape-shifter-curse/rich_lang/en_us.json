@@ -676,7 +676,7 @@
     "With Moisture, you regenerate health over time.\n",
     "Sneaking puts you in a natural crawling stance for tight spaces.\n",
     "Raw fish provides greater saturation."],
-  "codex.form.shape-shifter-curse.axolotl_3.cons": ["Your physiology hinders normal locomotion. Outside 'Wave-Step', your movement become sluggish.\n",
+  "codex.form.shape-shifter-curse.axolotl_3.cons": ["Your physiology hinders normal locomotion. Outside 'Wave-Step', your movement becomes sluggish.\n",
     "Moisture fuels your strength. Your max health now decreases as Moisture drops; when your moisture is depleted, you will be unable to support your body's weight and can only crawl slowly on the ground.\n\n",
     "Helmets can no longer be equipped.\n",
     "Movement slows further on loose/powdery terrain.\n",
