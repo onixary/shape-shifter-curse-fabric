@@ -878,8 +878,7 @@
     "You're NOT actually considering this, are you?"],
 
   "codex.form.shape-shifter-curse.bat_3.name" : ["Bat Form (Phase Permanent)"],
-  "codex.form.shape-shifter-curse.bat_3.title": ["\nFor you now, a cool and dark cavern might be more suitable as your new home..",
-    "\n\nExclusive trinkets/tools：[Charm Of Night Crystal], [Charm Of Hollow Fang], [Diamond Mining Claw]"],
+  "codex.form.shape-shifter-curse.bat_3.title": ["\nFor you now, a cool and dark cavern might be more suitable as your new home.."],
   "codex.form.shape-shifter-curse.bat_3.equip": [
     "[Charm Of Night Crystal], [Charm Of Hollow Fang], [Attach Hook], [Diamond Mining Claw]"
   ],
