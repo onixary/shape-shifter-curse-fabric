@@ -714,7 +714,7 @@
   "codex.form.shape-shifter-curse.ocelot_1.pros": ["Your claws become deadly, dealing heavy damage barehanded and letting you climb trees and leaves freely\n",
     "The longer tail helps balance when crouching, allowing near-running sneaking speed and unimpeded jumping\n",
     "Your footsteps become nearly silent\n",
-    "Your digestive system strengthens - fresh raw meat provides more hunger value, rotten flesh won't cause hunger\n",
+    "Your digestive system strengthens - fresh raw meat provides more hunger value, rotten flesh doesn't cause hunger\n",
     "Creepers avoid you\n",
     "You excel at mid-air posture adjustment, preventing fall damage from any height"],
   "codex.form.shape-shifter-curse.ocelot_1.cons": ["A strange uncoordinated feeling slows your sprinting, as if your body prefers different movement\n",
