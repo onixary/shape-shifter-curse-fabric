@@ -667,7 +667,7 @@
     "While sprinting, you enter 'Wave-Step' state: speed increases and you can step 1-block heights, but turning becomes harder.\n",
     "During 'Wave-Step', you can expend Moisture to channel water-based powers:\n",
     "- Cost a small amount of moisture, you can press jump to propel yourself forward with a water current.\n",
-    "- Cost a mid amount of moisture, your attacks can launch enemies back greatly.\n",
+    "- Cost a medium amount of moisture, your attacks can launch enemies back greatly.\n",
     "- Cost a moderate amount of moisture, you can press sneak to release a small non-destructive water explosion.\n\n",
     "You move swiftly in water currents. When fully submerged, you auto-enter sprint swimming without extra hunger drain.\n",
     "When underwater,you can see more clearly and break blocks unimpeded.\n",
