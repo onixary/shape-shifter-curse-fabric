@@ -9,5 +9,24 @@
         "name": "Decreased saturation points",
         "operation": "multiply_base_multiplicative",
         "value": -0.3
+    },
+    "item_condition": {
+        "type": "apoli:and",
+        "conditions": [
+            {
+                "type": "apoli:food"
+            },
+            {
+                "type": "apoli:ingredient",
+                "ingredient": {
+                    "tag": "shape-shifter-curse:ignore_diet"
+                },
+                "inverted": true
+            },
+            {
+                "type": "shape-shifter-curse:is_morph_scale_food",
+                "inverted": true
+            }
+        ]
     }
 }
