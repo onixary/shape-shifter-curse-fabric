@@ -491,7 +491,7 @@
     "When you are attacked, a jackal wraith manifests from within you as a guardian, disappearing after a short time. Jackal wraiths' attacks also inflict the target with 1 second of Wither III\n",
     "Your undead power has further strengthened. When afflicted with Wither, your attacks spread the Wither effect, inflicting the target with one second of Wither III while simultaneously absorbing a small amount of the target's health\n",
     "You can now move swiftly on soul sand and soul soil, equivalent to Soul Speed I\n",
-    "The jackal wraiths in the desert will no longer actively attack you\n\n",
+    "The jackal wraiths in the desert no longer actively attack you\n\n",
     "You can eat bones\n",
     "You are no longer affected by the Hunger and Poison effect, and rotten flesh provides greater saturation"],
   "codex.form.shape-shifter-curse.anubis_wolf_1.cons": ["Due to the deepening possession of the jackal wraiths, your constitution has changed further:\n",
