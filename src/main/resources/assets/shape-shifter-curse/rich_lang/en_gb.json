@@ -611,7 +611,7 @@
     "Using your powerful tail, you can leap from water surfaces to higher ground"],
   "codex.form.shape-shifter-curse.axolotl_1.cons": ["Helmet equipment is impossible - your gills reject foreign contact\n",
     "Skin and fins easily accumulate particles/sand, reducing speed on loose ground\n",
-    "Your digestive system can no longer process non-meat foods, they will no longer provides you with energy"],
+    "Your digestive system can no longer process non-meat foods, they no longer provide you with energy"],
   "codex.form.shape-shifter-curse.axolotl_1.instincts": ["The desire",
     {
       "text":" to remain in water", "color":"#c67681"
