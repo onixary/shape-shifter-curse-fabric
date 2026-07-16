@@ -897,7 +897,7 @@
   "codex.form.shape-shifter-curse.bat_3.cons": ["Due to the shift in your centre of gravity, you can now only move slowly on the ground in a nearly quadrupedal posture.\n",
     "Sunlight now severely affects you. Under sunlight, your maximum health is greatly reduced, and the enhanced melee damage effect cannot be sustained.\n",
     "Your fore claws are no longer suited for grasping bulky tools and weapons. When you use them to dig hard blocks or swing them to hit monsters, they will merely slip off and drop. Naturally, you can also no longer operate bows or crossbows.\n",
-    "Your membrane wings and digitigrade leg structure make equipping chestplates, leggings, and boots impossible.\n",
+    "Your membrane wings and digitigrade leg structure make equipping chestplates, leggings and boots impossible.\n",
     "Meat no longer provides you with energy; your body has completely lost the ability to digest it."],
   "codex.form.shape-shifter-curse.bat_3.instincts": [" "],
 
