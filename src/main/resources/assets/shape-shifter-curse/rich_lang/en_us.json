@@ -1007,7 +1007,7 @@
     "Your jump critical damage increases with fall distance, up to a maximum of 2 times the normal damage.\n\n",
     "Your small size makes you harder to hit with ranged attacks\n",
     "Your running speed is faster, and you can move freely through Sweet Berry bushes.\n",
-    "Sweet Berries provide more saturation.\n",
+    "Sweet Berries provide higher hunger value.\n",
     "Foxes trust you. They won't run away.\n",
     "You can now walk on Powder Snow."],
   "codex.form.shape-shifter-curse.snow_fox_3.cons": ["The cold magic that constitutes your body brings significant side effects:\n",
