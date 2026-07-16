@@ -680,7 +680,7 @@
     "Moisture fuels your strength. Your max health now decreases as Moisture drops; when your moisture is depleted, you will be unable to support your body's weight and can only crawl slowly on the ground.\n\n",
     "Helmets can no longer be equipped.\n",
     "Movement slows further on loose/powdery terrain.\n",
-    "Non-meat foods no longer provides you with energy"],
+    "Non-meat foods no longer provide you with energy"],
   "codex.form.shape-shifter-curse.axolotl_3.instincts": [""],
 
   "codex.form.shape-shifter-curse.ocelot_0.name" : ["Ocelot Form (Phase 0)"],
