@@ -475,7 +475,7 @@
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in desert biomes", "color":"#c67681"
+      "text":" to stay in desert biome", "color":"#c67681"
     }],
 
   "codex.form.shape-shifter-curse.anubis_wolf_1.name" : ["Jackal Form (Phase 1)"],
@@ -506,7 +506,7 @@
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in desert biomes", "color":"#c67681"
+      "text":" to stay in desert biome", "color":"#c67681"
     },
     "\nWithin you arises",
     {
@@ -594,7 +594,7 @@
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in lush cave biomes", "color":"#c67681"
+      "text":" to stay in lush caves biome", "color":"#c67681"
     }],
 
   "codex.form.shape-shifter-curse.axolotl_1.name" : ["Axolotl Form (Phase 1)"],
@@ -618,7 +618,7 @@
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in lush cave biomes", "color":"#c67681"
+      "text":" to stay in lush caves biome", "color":"#c67681"
     },
     {
       "text":"\nThe urge to hunt down and consume more raw fish", "color":"#c67681"
@@ -702,7 +702,7 @@
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in jungle biomes", "color":"#c67681"
+      "text":" to stay in jungle biome", "color":"#c67681"
     }],
 
   "codex.form.shape-shifter-curse.ocelot_1.name" : ["Ocelot Form (Phase 1)"],
@@ -727,7 +727,7 @@
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in jungle biomes", "color":"#c67681"
+      "text":" to stay in jungle biome", "color":"#c67681"
     },
     "\nYou feel an inner urge to",
     {
@@ -808,7 +808,7 @@
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in dripstone caves biomes", "color":"#c67681"
+      "text":" to stay in dripstone caves biome", "color":"#c67681"
     }],
 
   "codex.form.shape-shifter-curse.bat_1.name" : ["Bat Form (Phase 1)"],
@@ -837,7 +837,7 @@
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in dripstone caves biomes", "color":"#c67681"
+      "text":" to stay in dripstone caves biome", "color":"#c67681"
     },
     "\nThe thought of ",
     {
@@ -914,7 +914,7 @@
     "A tuft of snow-white fur has sprouted at the base of your spine. Touching it, you can feel a bony protrusion hidden within."],
   "codex.form.shape-shifter-curse.snow_fox_0.pros": ["Your body feels more energetic, and your running speed has increased.\n",
     "You discover you can jump slightly higher when leaping during a run."],
-  "codex.form.shape-shifter-curse.snow_fox_0.cons": ["The fluffy fur covering you makes hot environments unbearable. During the daytime in hot desert biomes or the scorching Nether, your maximum health is slightly reduced.\n",
+  "codex.form.shape-shifter-curse.snow_fox_0.cons": ["The fluffy fur covering you makes hot environments unbearable. During the daytime in hot desert biome or the scorching Nether, your maximum health is slightly reduced.\n",
     "Your new fur tuft slightly hinders your movement speed while swimming."],
   "codex.form.shape-shifter-curse.snow_fox_0.instincts": ["You begin to desire",
     {
@@ -922,7 +922,7 @@
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in Taiga biomes", "color":"#c67681"
+      "text":" to stay in Taiga biome", "color":"#c67681"
     },"\nYou begin to desire",
     {
       "text":" to run across snowy ground", "color":"#c67681"
@@ -944,7 +944,7 @@
     "Your running speed has increased. Your new fur allows you to move freely through Sweet Berry bushes, and Sweet Berries also provide more saturation.\n",
     "You find your body better suited for jumping. You can jump higher during a sprint, and your jump critical damage has increased."],
   "codex.form.shape-shifter-curse.snow_fox_1.cons": ["Your fluffy fur isn't the only reason for your aversion to heat... It seems connected to the cold magic within.\n\n",
-    "During the daytime in hot desert biomes or the scorching Nether, your maximum health is further reduced.\n",
+    "During the daytime in hot desert biome or the scorching Nether, your maximum health is further reduced.\n",
     "Additionally, when you are very close to lava or in lava, you will gradually take damage, even with fire resistance effects.\n",
     "Your movement speed in water is slightly decreased."],
   "codex.form.shape-shifter-curse.snow_fox_1.instincts": ["The idea of",
@@ -955,7 +955,7 @@
       "text":" jumping while sprinting", "color":"#c67681"
     }," begins to appeal to you\nYou begin to desire",
     {
-      "text":" to stay in Taiga biomes\n", "color":"#c67681"
+      "text":" to stay in Taiga biome\n", "color":"#c67681"
     },
     {
       "text":"The idea of lingering within Sweet Berry bushes", "color":"#c67681"
@@ -982,7 +982,7 @@
     "You can now walk safely on powdered snow."],
   "codex.form.shape-shifter-curse.snow_fox_2.cons": ["The frigid magic within your body also brings side effects:\n\n",
     "You take additional burning damage when on fire.\n",
-    "During daytime in hot desert biomes or the scorching Nether, your maximum health is further reduced.\n",
+    "During daytime in hot desert biome or the scorching Nether, your maximum health is further reduced.\n",
     "Additionally, being very close to or submerged in lava causes gradual damage, even with fire resistance.\n",
     "Leggings and boots no longer fit your new body structure.\n",
     "Your fluffy fur further slows your movement speed in water."],
@@ -1013,7 +1013,7 @@
     "You can now walk on Powder Snow."],
   "codex.form.shape-shifter-curse.snow_fox_3.cons": ["The cold magic that constitutes your body brings significant side effects:\n",
     "Fire and heat are your greatest enemies. You take additional damage while burning, and fire on you won't extinguish naturally unless you enter water or extinguish it with a water bottle.\n",
-    "During the daytime in hot desert biomes or the scorching Nether, your maximum health is drastically reduced. Furthermore, the warm Plains biome is now uncomfortably hot for you, reducing your maximum health while you are in it.\n",
+    "During the daytime in hot desert biome or the scorching Nether, your maximum health is drastically reduced. Furthermore, the warm Plains biome is now uncomfortably hot for you, reducing your maximum health while you are in it.\n",
     "When you are very close to lava or open flame, or in lava, you will gradually take damage, even with fire resistance effects.\n",
     "Leggings and boots no longer fit your quadrupedal body structure.\n",
     "Without proper hands for tools, your block-breaking speed is slower\n",
@@ -1043,7 +1043,7 @@
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in taiga biomes", "color":"#c67681"
+      "text":" to stay in taiga biome", "color":"#c67681"
     }],
 
   "codex.form.shape-shifter-curse.familiar_fox_1.name": ["Familiar Fox Form (Phase 1)"],
@@ -1070,7 +1070,7 @@
     }," begin attracting you\n",
     "You begin to desire",
     {
-      "text":" to stay in taiga biomes\n", "color":"#c67681"
+      "text":" to stay in taiga biome\n", "color":"#c67681"
     },
     {
       "text":"Thoughts of staying in sweet berry bushes", "color":"#c67681"
