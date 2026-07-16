@@ -20,8 +20,8 @@ public class Form_SnowFox3_Sub_WhiteWeasel extends NormalSubForm implements IPat
     }
 
     @Override
-    public boolean checkCanUse(PlayerEntity player, @Nullable PatronDataSegment patronData) {
-        if (patronData == null) {
+    public boolean checkCanUse(@Nullable PlayerEntity player, @Nullable PatronDataSegment patronData) {
+        if (patronData == null || player == null) {
             return false;
         }
         return patronData.getLevel() >= 5;

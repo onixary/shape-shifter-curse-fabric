@@ -5,7 +5,7 @@ import net.onixary.shapeShifterCurseFabric.util.Verify.PatronDataSegment;
 import org.jetbrains.annotations.Nullable;
 
 public interface IPatronForm {
-    default boolean checkCanUse(PlayerEntity player, @Nullable PatronDataSegment patronData) {
+    default boolean checkCanUse(@Nullable PlayerEntity player, @Nullable PatronDataSegment patronData) {
         return true;
     }
 }

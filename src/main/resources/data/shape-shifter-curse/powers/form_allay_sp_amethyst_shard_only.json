@@ -12,6 +12,10 @@
                     "tag": "shape-shifter-curse:ignore_diet"
                 },
                 "inverted": true
+            },
+            {
+                "type": "shape-shifter-curse:is_morph_scale_food",
+                "inverted": true
             }
         ]
     }
