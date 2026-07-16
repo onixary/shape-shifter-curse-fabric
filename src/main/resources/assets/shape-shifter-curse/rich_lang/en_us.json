@@ -60,7 +60,7 @@
   "advancements.shape-shifter-curse.on_transform_anubis_wolf_3.title": ["Resurrection of the Dead"],
   "advancements.shape-shifter-curse.on_transform_anubis_wolf_3.description": ["A forgotten clan has found their belonging"],
   "advancements.shape-shifter-curse.on_transform_spider_0.title": ["Spider"],
-  "advancements.shape-shifter-curse.on_transform_spider_0.description": ["Strange spiders in the abandoned mineshaft...?"],
+  "advancements.shape-shifter-curse.on_transform_spider_0.description": ["Strange spiders in the mineshaft...?"],
   "advancements.shape-shifter-curse.on_transform_spider_3.title": ["Network Engineer"],
   "advancements.shape-shifter-curse.on_transform_spider_3.description": ["Packet, bridge, hook... Close enough I think"],
   "advancements.shape-shifter-curse.spider_catch_a_bug.title": ["Caught: Unknown Exception"],
@@ -78,7 +78,7 @@
     "item.minecraft.splash_potion.effect.moondust_potion": ["Splash Potion of Moondust"],
     "item.minecraft.lingering_potion.effect.moondust_potion": ["Lingering Potion of Moondust"],
   "item.minecraft.tipped_arrow.effect.moondust_potion": ["Arrow of Moondust"],
-  "effect.shape-shifter-curse.moondust_potion": ["The essence of moondust surges within, it requires further processing"],
+  "effect.shape-shifter-curse.moondust_potion": ["The essence of moondust surges within; it requires further processing"],
   "item.minecraft.potion.effect.to_bat_0_potion": ["Bat Curse Potion"],
     "item.minecraft.splash_potion.effect.to_bat_0_potion": ["Splash Bat Curse Potion"],
     "item.minecraft.lingering_potion.effect.to_bat_0_potion": ["Lingering Bat Curse Potion"],
@@ -108,7 +108,7 @@
   "item.minecraft.splash_potion.effect.to_familiar_fox_0_potion": ["Splash Familiar Fox Curse Potion"],
   "item.minecraft.lingering_potion.effect.to_familiar_fox_0_potion": ["Lingering Familiar Fox Curse Potion"],
   "item.minecraft.tipped_arrow.effect.to_familiar_fox_0_potion": ["Arrow of Familiar Fox Curse"],
-  "effect.shape-shifter-curse.to_familiar_fox_0_potion": ["It has been altered... maybe use a gold nuggets to purify it?"],
+  "effect.shape-shifter-curse.to_familiar_fox_0_potion": ["It has been altered... maybe use gold nuggets to purify it?"],
   "item.minecraft.potion.effect.to_snow_fox_0_potion": ["Snow Fox Curse Potion"],
   "item.minecraft.splash_potion.effect.to_snow_fox_0_potion": ["Splash Snow Fox Curse Potion"],
   "item.minecraft.lingering_potion.effect.to_snow_fox_0_potion": ["Lingering Snow Fox Curse Potion"],
@@ -159,9 +159,9 @@
   "item.shape-shifter-curse.netherite_morphscale_vest": ["Netherite Morphscale Vest"],
   "item.shape-shifter-curse.netherite_morphscale_cuish": ["Netherite Morphscale Cuish"],
   "item.shape-shifter-curse.netherite_morphscale_anklet": ["Netherite Morphscale Anklet"],
-  "item.shape-shifter-curse.morphscale_armor.tooltip": ["The moon-dust magic infused in these armors automatically adapts to your form"],
+  "item.shape-shifter-curse.morphscale_armor.tooltip": ["The moondust magic infused in these armors automatically adapts to your form"],
   "item.shape-shifter-curse.amulet_bracelet": ["Amulet Bracelet"],
-  "item.shape-shifter-curse.amulet_bracelet.tooltip": ["[Familiar Fox Form] You are no longer forcibly affected by Witches, and no longer suffer side effects absorbing from hostiles"],
+  "item.shape-shifter-curse.amulet_bracelet.tooltip": ["[Familiar Fox Form] You are no longer forcibly affected by witches and evokers, and no longer suffer side effects absorbing from hostiles"],
   "item.shape-shifter-curse.attach_hook": ["Attach Hook"],
   "item.shape-shifter-curse.attach_hook.tooltip": ["[Bat Form] Weapons and tools no longer slip from your grip, though their durability consumption increases"],
   "item.shape-shifter-curse.charm_of_hollow_fang": ["Charm Of Hollow Fang"],
@@ -173,11 +173,11 @@
   "item.shape-shifter-curse.collar_of_tension": ["Collar Of Tension"],
   "item.shape-shifter-curse.collar_of_tension.tooltip": ["[Ocelot Form] For true hunters only. Your swipes and pounces deal increased damage, but disable your dodge ability"],
   "item.shape-shifter-curse.collar_of_whiskers": ["Collar Of Whiskers"],
-  "item.shape-shifter-curse.collar_of_whiskers.tooltip": ["[Ocelot Form] For true hunters only. When trigger dodge power, you gain health regeneration effect"],
+  "item.shape-shifter-curse.collar_of_whiskers.tooltip": ["[Ocelot Form] For true hunters only. When trigger dodge power, you gain regeneration effect"],
   "item.shape-shifter-curse.digestion_fiber_ball": ["Digestion Fiber Ball"],
-  "item.shape-shifter-curse.digestion_fiber_ball.tooltip": ["[Ocelot Form] Allows you to digest cooked meat and vegetables, their restoration efficiency remains low"],
+  "item.shape-shifter-curse.digestion_fiber_ball.tooltip": ["[Ocelot Form] Allows you to digest cooked meat and vegetables, but their restoration efficiency remains low"],
   "item.shape-shifter-curse.frost_pawglove": ["Frost Pawglove"],
-  "item.shape-shifter-curse.frost_pawglove.tooltip": ["[Snow Fox Form] Requires powerful ice magic. Your snowballs inflict slowness in area, but deal reduced damage"],
+  "item.shape-shifter-curse.frost_pawglove.tooltip": ["[Snow Fox Form] Requires powerful ice magic. Your snowballs inflict slowness in an area, but deal reduced damage"],
   "item.shape-shifter-curse.withered_bandage": ["Withered Bandage"],
   "item.shape-shifter-curse.withered_bandage.tooltip": ["[Jackal Form] The Wither effect you gain when hit has reduced level, but lasts longer"],
   "item.shape-shifter-curse.moondust_crystal_shard": ["Moondust Crystal Shard"],
@@ -186,13 +186,13 @@
   "item.shape-shifter-curse.bottled_snowfall": ["Bottled Snowfall"],
   "item.shape-shifter-curse.bottled_snowfall.tooltip": ["[Snow Fox Form Tool] Requires powerful ice magic. At the cost of some hunger, condense and fire snowballs"],
   "item.shape-shifter-curse.diamond_mining_claw": ["Diamond Mining Claw"],
-  "item.shape-shifter-curse.diamond_mining_claw.tooltip": ["[Bat Form Tool] Requires strong foreclaws. Mining efficiency and damage + , you can use wall clinging power when held"],
+  "item.shape-shifter-curse.diamond_mining_claw.tooltip": ["[Bat Form Tool] Requires strong foreclaws. Increases mining efficiency and damage. When held, you can also cling to walls"],
   "item.shape-shifter-curse.fountain_belt": ["Fountain Belt"],
-  "item.shape-shifter-curse.fountain_belt.tooltip": ["[Axolotl Form] Requires powerful water power. Water burst stop dealing damage, it launches you and nearby entities"],
+  "item.shape-shifter-curse.fountain_belt.tooltip": ["[Axolotl Form] Requires powerful water power. Water burst no longer deals damage, but launches you and nearby entities into the air"],
   "item.shape-shifter-curse.resonant_core": ["Resonant Core"],
   "item.shape-shifter-curse.resonant_core.tooltip": ["[Allay Form] Consuming Amethyst Shards grants regeneration to nearby entities, but no longer restores saturation"],
   "item.shape-shifter-curse.fire_charm_paper": ["Fire Charm Paper"],
-  "item.shape-shifter-curse.fire_charm_paper.tooltip": ["[Familiar Fox Form]Requires powerful magic source. Consume for casting enhanced fireball magic"],
+  "item.shape-shifter-curse.fire_charm_paper.tooltip": ["[Familiar Fox Form] Requires powerful magic source. Consume for casting enhanced fireball magic"],
   "item.shape-shifter-curse.auxiliary_axe": ["Auxiliary Axe"],
   "item.shape-shifter-curse.auxiliary_axe.tooltip": ["Increases melee damage when equipped on extra hands, but slows attack speed"],
   "item.shape-shifter-curse.auxiliary_sword": ["Auxiliary Sword"],
@@ -207,7 +207,7 @@
   "item.shape-shifter-curse.spider_fluid_cocoon": ["Nutrient Sac"],
   "item.shape-shifter-curse.spider_fluid_cocoon.tooltip": ["Sac of fluid nutrient, consumed at your own risk"],
   "item.shape-shifter-curse.venom_spindle": ["Venom Spindle"],
-  "item.shape-shifter-curse.venom_spindle.tooltip": ["[Spider Form] Web projectile now deal damage when hit, and replace it's slow and entangle effects with poison."],
+  "item.shape-shifter-curse.venom_spindle.tooltip": ["[Spider Form] Web bullets now deal damage when hit, and replace its slowness and entangle effects with poison."],
   "block.shape-shifter-curse.dew_covered_cobweb": ["Dew Covered Cobweb"],
   "item.shape-shifter-curse.silk_dew": ["Silk Dew"],
   "item.shape-shifter-curse.select_form_item": ["Form Shifting Scroll"],
@@ -228,7 +228,7 @@
       "color": "#0096FF"
     },
     {
-      "text": "Note:\nThis will activate the Shapeshifter's Curse mod content\nThis mod may not be a mod for everyone. Before proceeding, ensure you understand its themes and gameplay",
+      "text": "Note:\nThis will activate the content of the Shape Shifter Curse mod\nThis mod may not be for everyone. Before proceeding, ensure you understand its themes and gameplay",
       "color": "#ed721d"
     }
   ],
@@ -237,10 +237,10 @@
   "info.shape-shifter-curse.on_enable_mod": ["As the pages open, powerful magic sealed within the book floods into your body!"],
   "info.shape-shifter-curse.on_enable_mod_after": ["When you regain your senses, you notice... you seem unchanged?\nPerhaps you should check the book's contents..."],
   "info.shape-shifter-curse.before_cursed_moon": ["You feel magic stirring within you. The cursed moon will rise next night..."],
-  "info.shape-shifter-curse.before_cursed_moon_nether": ["You feel magic stirring within you. The cursed moon will rise somewhere soon - even in other dimensions, you can't get rid of it"],
+  "info.shape-shifter-curse.before_cursed_moon_nether": ["You feel magic stirring within you. The cursed moon will rise somewhere soon - Even in other dimensions, you can't get rid of it"],
   "info.shape-shifter-curse.cursed_moon_forced": ["You feel a strange force pushing time forward. The cursed moon will rise next night..."],
-  "info.shape-shifter-curse.on_cursed_moon": ["The magic within you surges - the cursed moon has risen"],
-  "info.shape-shifter-curse.on_cursed_moon_nether": ["The magic within you surges - the cursed moon has risen somewhere"],
+  "info.shape-shifter-curse.on_cursed_moon": ["The magic within you surges - The cursed moon has risen"],
+  "info.shape-shifter-curse.on_cursed_moon_nether": ["The magic within you surges - The cursed moon has risen somewhere"],
   "info.shape-shifter-curse.on_cursed_moon_special": ["Strangely, it doesn't seem to visibly affect your current [special] form..."],
   "info.shape-shifter-curse.on_cursed_moon_permanent": ["However, it can no longer affect your permanently changed form in any way..."],
   "info.shape-shifter-curse.on_cursed_moon_before_enable": ["Tonight's moon looks peculiar. Whether due to its influence or not, monsters have become restless"],
@@ -269,10 +269,10 @@
   "info.shape-shifter-curse.origin_form_used_catalyst": ["The catalyst agitates your magic, which eventually settles. It seems they need clearer direction..."],
   "info.shape-shifter-curse.origin_form_used_catalyst_attached": ["The catalyst activated the curse's magic, altering your body..."],
   "info.shape-shifter-curse.use_catalyst": ["The catalyst further excites the magic within..."],
-  "info.shape-shifter-curse.use_catalyst_when_ignore" : ["Your current form is less influenced by the lunar tides, normal catalyst seems won't have any effect..."],
-  "info.shape-shifter-curse.max_form_used_catalyst": ["Your current form is so thoroughly altered that normal catalysts won't have any effect..."],
+  "info.shape-shifter-curse.use_catalyst_when_ignore" : ["Your current form is less influenced by the lunar tides, normal catalyst seems not to have any effect..."],
+  "info.shape-shifter-curse.max_form_used_catalyst": ["Your current form is so thoroughly altered that normal catalysts don't have any effect..."],
   "info.shape-shifter-curse.max_form_used_powerful_catalyst": ["Under the effect of the powerful catalyst, permanent changes have taken root in your body..."],
-  "info.shape-shifter-curse.form_used_powerful_catalyst_failed": [" The powerful catalyst has no effect on your current form"],
+  "info.shape-shifter-curse.form_used_powerful_catalyst_failed": ["The powerful catalyst has no effect on your current form"],
   "info.shape-shifter-curse.sp_form_used_catalyst": ["Your current form contains special magic that catalysts can't influence..."],
   "info.shape-shifter-curse.transformative_effect_cure": ["Golden magic has cured the curse effect upon you."],
   "info.shape-shifter-curse.milk_cannot_remove_effect": ["Milk seems unable to remove the curse effect upon you; you seem to need some golden magic."],
@@ -434,7 +434,7 @@
   "codex.desc.cons_1": ["Your form brings new limitations..."],
   "codex.desc.instincts_1": ["Creature instincts grow stronger... Maybe resist them"],
 
-  "codex.desc.appearance_2": ["The magic has nearly remade you. It's stabilized - even golden apples can't help...\nUnless some ",
+  "codex.desc.appearance_2": ["The magic has nearly remade you. It's stabilized - Even golden apples can't help...\nUnless some ",
     {
       "text": "greater influence",
       "color": "#ed721d"
@@ -442,7 +442,7 @@
     " reignites its flow..."],
   "codex.desc.pros_2": ["Your form possesses these strengths"],
   "codex.desc.cons_2": ["Your form has these limitations..."],
-  "codex.desc.instincts_2": ["Instincts no longer disturb you - they've become part of you"],
+  "codex.desc.instincts_2": ["Instincts no longer disturb you - They've become part of you"],
   "codex.desc.instincts_3": ["Examining yourself, you feel the ever-shifting magic within you has reached a new state of stability - unshaken even by the cursed moon\nYour form has been permanently altered"],
 
   "codex.form.shape-shifter-curse.original_before_enable.name": ["Original (Before enable mod contents)"],
@@ -468,14 +468,14 @@
     "Your digestive system has begun to resemble that of a scavenger species; you are no longer affected by the Hunger and Poison effect, and rotten flesh provides greater saturation"],
   "codex.form.shape-shifter-curse.anubis_wolf_0.cons": ["The foreign entity residing within has altered your constitution:\n",
     "When attacked by enemies, the undead power within you is triggered, inflicting you with Wither I for 2.5 seconds\n",
-    "Your new powers are less effective against undead creatures, slightly reducing your direct damage to them"],
+    "Your new powers are less effective against undead mobs, slightly reducing your direct damage to them"],
   "codex.form.shape-shifter-curse.anubis_wolf_0.instincts": ["You begin to desire",
     {
       "text":" to eat more rotten flesh", "color":"#c67681"
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in desert biomes", "color":"#c67681"
+      "text":" to stay in desert biome", "color":"#c67681"
     }],
 
   "codex.form.shape-shifter-curse.anubis_wolf_1.name" : ["Jackal Form (Phase 1)"],
@@ -497,8 +497,8 @@
   "codex.form.shape-shifter-curse.anubis_wolf_1.cons": ["Due to the deepening possession of the jackal wraiths, your constitution has changed further:\n",
     "When attacked by enemies, the triggered undead power inflicts you with Wither I for 4.5 seconds\n",
     "Your touch now also carries undead power. You now have a small chance to cause meat dropped by slain creatures to rot, and harvested crops to turn to dust\n",
-    "Your body's regeneration has slowed; health recovery from saturation is slightly reduced\n",
-    "Your powers are less effective against undead creatures, slightly decreasing your direct damage to them\n",
+    "Your body's regeneration has slowed; the speed of health recovery from saturation is slightly reduced\n",
+    "Your powers are less effective against undead mobs, slightly decreasing your direct damage to them\n",
     "Your digestive system has begun to become unsuited for absorbing nutrients from vegetables, reducing the saturation they provide"],
   "codex.form.shape-shifter-curse.anubis_wolf_1.instincts": ["You desire",
     {
@@ -506,7 +506,7 @@
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in desert biomes", "color":"#c67681"
+      "text":" to stay in desert biome", "color":"#c67681"
     },
     "\nWithin you arises",
     {
@@ -530,24 +530,24 @@
     "The pack whispers past memories to you, teaching you techniques for finding water and hunting. As your soul bond deepens, you feel your own essence beginning to shift closer to their likeness..."],
   "codex.form.shape-shifter-curse.anubis_wolf_2.pros": ["Your soul is linked with the jackal wraiths within you, granting new power:\n",
     "When you are attacked, two jackal wraiths manifest from within you as guardians, with greater health and longer duration.\n",
-    "Jackal wraiths' attack inflicts a 2 second Wither III effect on the target. Due to your connection, Jackal wraiths' attacks now restore 1 health to you\n",
+    "Jackal wraiths' attack inflicts a 2-second Wither III effect on the target. Due to your connection, Jackal wraiths' attacks now restore 1 health point to you\n",
     "Your undead power alongside the jackal wraiths has further strengthened. When afflicted with Wither, your attacks spread the Wither effect, inflicting the target with two seconds of Wither III, and the health absorbed has slightly increased\n\n",
     "You permanently have the effect equivalent to Soul Speed II\n\n",
-    "A constitution closer to undead creatures allows you to use Potions of Harming to restore health\n",
-    "The jackal wraiths in the desert will no longer actively attack you\n",
-    "Due to your resistance to undead powers, undead creatures deal slightly less damage to you.\n",
-    "The skeletons now fear you; they will avoid you.\n\n",
+    "A constitution closer to undead mobs allows you to use Potions of Harming to restore health\n",
+    "The jackal wraiths in the desert no longer actively attack you\n",
+    "Due to your resistance to undead powers, undead mobs deal slightly less damage to you.\n",
+    "The skeletons now fear and avoid you.\n\n",
     "You can eat bones\n",
     "You are no longer affected by the Hunger and Poison effect, and rotten flesh provides greater saturation"],
-  "codex.form.shape-shifter-curse.anubis_wolf_2.cons": ["Under the influence of the jackal wraiths, your constitution more closely resembles that of undead creatures:\n",
+  "codex.form.shape-shifter-curse.anubis_wolf_2.cons": ["Under the influence of the jackal wraiths, your constitution more closely resembles that of undead mobs:\n",
     "When attacked by enemies, the triggered undead power inflicts you with Wither II for 2.5 seconds\n",
     "The undead power in your touch has grown stronger. You now have some chance to cause meat dropped by slain creatures to rot, and harvested crops to turn to dust\n",
     "Your body now struggles to regenerate naturally; health recovery from saturation is further reduced\n",
-    "Your power struggles against undead creatures, decreasing your direct damage to them.\n\n",
+    "Your power struggles against undead mobs, decreasing your direct damage to them.\n\n",
     "You find it harder to absorb nutrients from vegetables, reducing the saturation they provide further\n",
     "Normal leggings and boots no longer suit your new body structure; you cannot equip them"],
   "codex.form.shape-shifter-curse.anubis_wolf_2.instincts": ["Something inside you stirs... Your transformation hasn't reached its end...\n",
-    "A echo catalyst could take your transformation to the next stage... though this process would likely be permanent\n",
+    "An echo catalyst could take your transformation to the next stage... though this process would likely be permanent\n",
     "You're NOT actually considering this, are you?"],
 
   "codex.form.shape-shifter-curse.anubis_wolf_3.name" : ["Jackal Form (Phase Permanent)"],
@@ -561,12 +561,12 @@
     "As the alpha, a sense of responsibility to lead the pack to prosperity fills your heart"],
   "codex.form.shape-shifter-curse.anubis_wolf_3.pros": ["Your merged souls grant you tremendous power:\n",
     "As the alpha, your command over the pack further strengthens: when you actively attack a target or are attacked, two jackal wraiths manifest from the group as aid. Their health and duration are further extended.\n",
-    "Jackal wraiths' attack inflicts a 3 second Wither III effect on the target. Due to the nature of your merge as one, Jackal wraiths' attacks now restore 1 health to you\n",
+    "Jackal wraiths' attack inflicts a 3-second Wither III effect on the target. Due to the nature of your merge as one, Jackal wraiths' attacks now restore 1 health point to you\n",
     "When you lose all your health, by tapping into the pack's soul power at a certain cost, you can resurrect from death. This process consumes much soul power and requires a long time to become available again\n\n",
     "Powerful undead energy fills your bodies. When afflicted with Wither, your attacks spread the Wither effect, inflicting the target with three seconds of Wither III and Slowness III, and can absorb more health\n",
     "By channeling undead power into your attacks, you can execute targets below 5 hearts that are afflicted with Wither\n",
-    "Due to your resistance to undead powers, undead creatures deal slightly less damage to you.\n",
-    "The skeletons now fear you; they will avoid you.\n\n",
+    "Due to your resistance to undead powers, undead mobs deal slightly less damage to you.\n",
+    "The skeletons now fear and avoid you.\n\n",
     "You permanently have the effect equivalent to Soul Speed III\n",
     "You can use Potions of Harming to restore health\n",
     "You can eat bones\n",
@@ -575,7 +575,7 @@
     "When attacked by enemies, the triggered undead power inflicts you with Wither II for 3.5 seconds\n",
     "You cannot control the undead power in your touch. The chance for meat dropped by slain creatures to rot and harvested crops to turn to dust is now higher\n",
     "Your bodies now struggle greatly to regenerate naturally; health recovery from saturation has become quite slow, and Potions of Healing no longer affect you\n",
-    "Your direct damage to undead creatures has decreased further\n\n",
+    "Your direct damage to undead mobs has decreased further\n\n",
     "Vegetables now provide you no saturation whatsoever\n",
     "Normal leggings and boots no longer suit your quadrupedal body structure"],
   "codex.form.shape-shifter-curse.anubis_wolf_3.instincts": [" "],
@@ -594,7 +594,7 @@
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in lush cave biomes", "color":"#c67681"
+      "text":" to stay in lush caves biome", "color":"#c67681"
     }],
 
   "codex.form.shape-shifter-curse.axolotl_1.name" : ["Axolotl Form (Phase 1)"],
@@ -606,23 +606,23 @@
     "Water-absorbent white filaments have grown around your neck"],
   "codex.form.shape-shifter-curse.axolotl_1.pros": ["With enhanced gills, you can breathe underwater indefinitely\n",
     "You move slightly faster in water. Your new fins and slick skin harness currents, granting swift movement against water flow\n",
-    "Your body efficiently digests raw fish, providing greater satiation\n",
-    "Strong regeneration slowly restores health when hunger is above 3 bars\n",
+    "Your body efficiently digests raw fish, providing greater hunger value\n",
+    "Strong regeneration slowly restores health when hunger is above 3 shanks\n",
     "Using your powerful tail, you can leap from water surfaces to higher ground"],
-  "codex.form.shape-shifter-curse.axolotl_1.cons": ["Helmet equipment is impossible - your gills reject foreign contact\n",
+  "codex.form.shape-shifter-curse.axolotl_1.cons": ["Helmet equipment is impossible - Your gills reject foreign contact\n",
     "Skin and fins easily accumulate particles/sand, reducing speed on loose ground\n",
-    "Your digestive system can no longer process non-meat foods, they will no longer provides you with energy"],
+    "Your digestive system can no longer process non-meat foods, they no longer provide you with energy"],
   "codex.form.shape-shifter-curse.axolotl_1.instincts": ["The desire",
     {
       "text":" to remain in water", "color":"#c67681"
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in lush cave biomes", "color":"#c67681"
+      "text":" to stay in lush caves biome", "color":"#c67681"
     },
     {
-      "text":"\nHunt down and consume more raw fish", "color":"#c67681"
-    },"grows stronger",
+      "text":"\nThe urge to hunt down and consume more raw fish", "color":"#c67681"
+    }," intensifies",
     {
       "text":"\nThe urge to wander through drip-leaf clusters", "color":"#c67681"
     }," intensifies"],
@@ -638,8 +638,8 @@
     "Your oxygen bar now indicates moisture level. It replenishes in water and depletes slowly on land\n",
     "Consuming water bottles or any potions also restores moisture\n\n",
     "Your body draws strength from water. Your maximum health increases when you have moisture level\n",
-    "Powerful regeneration slowly heals you when well-hydrated and above 3 hunger bars\n",
-    "Raw fish provide greater satiation\n\n",
+    "Powerful regeneration slowly heals you when well-hydrated and above 3 hunger shanks\n",
+    "Raw fish provide greater hunger value\n\n",
     "Your powerful tail enables faster aquatic movement. You can leap freely from water surfaces and sprint forward underwater by pressing sprint\n",
     "Fully developed fins act like sails, harnessing water currents for rapid travel\n",
     "Blunt claws provide exceptional grip for unobstructed block breaking underwater\n",
@@ -647,9 +647,9 @@
   "codex.form.shape-shifter-curse.axolotl_2.cons": ["Moisture is now your lifeline. When dehydrated, maximum health and movement speed drastically decrease, nearly immobilizing you\n\n",
     "Helmet equipment remains impossible\n",
     "Moist skin/fins gather particles/dust, slowing movement on loose terrain\n",
-    "Non-meat foods no longer provides you with energy"],
+    "Non-meat foods no longer provide you with energy"],
   "codex.form.shape-shifter-curse.axolotl_2.instincts": ["Something inside you stirs... Your transformation hasn't reached its end...\n",
-    "A echo catalyst could take your transformation to the next stage... though this process would likely be permanent\n",
+    "An echo catalyst could take your transformation to the next stage... though this process would likely be permanent\n",
     "You're NOT actually considering this, are you?"],
 
   "codex.form.shape-shifter-curse.axolotl_3.name" : ["Axolotl Form (Phase Permanent)"],
@@ -662,12 +662,12 @@
     "Your skin is now entirely covered in pale, scale-less tissue. Thanks to the water-storing feathery structure, your skin remains perpetually moist.\n\n",
     "Two new clusters of gill filaments extend from the top of your head. Beyond supplying vital oxygen, you sense they grant you some power to perceive and manipulate water currents..."],
   "codex.form.shape-shifter-curse.axolotl_3.pros": ["You can breathe freely underwater, and your oxygen bar now indicates your Moisture level.\n",
-    "It can be replenished by submerging in water or consuming water bottles/potions. Now, even on land, your Moisture no depletes over time.\n\n",
+    "It can be replenished by submerging in water or consuming water bottles/potions. Now, even on land, your Moisture no longer depletes over time.\n\n",
     "Your body grants hydrokinetic abilities:\n",
     "While sprinting, you enter 'Wave-Step' state: speed increases and you can step 1-block heights, but turning becomes harder.\n",
     "During 'Wave-Step', you can expend Moisture to channel water-based powers:\n",
     "- Cost a small amount of moisture, you can press jump to propel yourself forward with a water current.\n",
-    "- Cost a mid amount of moisture, your attacks can launch enemies back greatly.\n",
+    "- Cost a medium amount of moisture, your attacks can launch enemies back greatly.\n",
     "- Cost a moderate amount of moisture, you can press sneak to release a small non-destructive water explosion.\n\n",
     "You move swiftly in water currents. When fully submerged, you auto-enter sprint swimming without extra hunger drain.\n",
     "When underwater,you can see more clearly and break blocks unimpeded.\n",
@@ -676,11 +676,11 @@
     "With Moisture, you regenerate health over time.\n",
     "Sneaking puts you in a natural crawling stance for tight spaces.\n",
     "Raw fish provides greater saturation."],
-  "codex.form.shape-shifter-curse.axolotl_3.cons": ["Your physiology hinders normal locomotion. Outside 'Wave-Step', your movement become sluggish.\n",
+  "codex.form.shape-shifter-curse.axolotl_3.cons": ["Your physiology hinders normal locomotion. Outside 'Wave-Step', your movement becomes sluggish.\n",
     "Moisture fuels your strength. Your max health now decreases as Moisture drops; when your moisture is depleted, you will be unable to support your body's weight and can only crawl slowly on the ground.\n\n",
     "Helmets can no longer be equipped.\n",
     "Movement slows further on loose/powdery terrain.\n",
-    "Non-meat foods no longer provides you with energy"],
+    "Non-meat foods no longer provide you with energy"],
   "codex.form.shape-shifter-curse.axolotl_3.instincts": [""],
 
   "codex.form.shape-shifter-curse.ocelot_0.name" : ["Ocelot Form (Phase 0)"],
@@ -694,27 +694,27 @@
   "codex.form.shape-shifter-curse.ocelot_0.pros": ["Your body is more coordinated, increasing sneaking speed\n",
     "Rotten flesh is trivial for your new digestive system. You no longer get abnormal hunger\n",
     "Creepers seem strangely afraid of you"],
-  "codex.form.shape-shifter-curse.ocelot_0.cons": ["Your body isn't as strong as before - max health slightly decreased\n",
-    "Your digestive system adapts less to non-meat foods - they provide less satiation"],
+  "codex.form.shape-shifter-curse.ocelot_0.cons": ["Your body isn't as strong as before - Max health slightly decreased\n",
+    "Your digestive system adapts less to non-meat foods - They provide lower hunger value"],
   "codex.form.shape-shifter-curse.ocelot_0.instincts": ["You begin to desire",
     {
       "text":" to eat more raw meat", "color":"#c67681"
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in jungle biomes", "color":"#c67681"
+      "text":" to stay in jungle biome", "color":"#c67681"
     }],
 
   "codex.form.shape-shifter-curse.ocelot_1.name" : ["Ocelot Form (Phase 1)"],
   "codex.form.shape-shifter-curse.ocelot_1.title": ["\nMore feline traits let you climb trees freely and deliver deadly blows with powerful forepaws. Raw meat now seems more appealing than cooked"],
   "codex.form.shape-shifter-curse.ocelot_1.equip": [""],
-  "codex.form.shape-shifter-curse.ocelot_1.appearance": ["Mottled fur now covers most of your chest, abdomen and back. Connecting to your neck fur, it resembles a cloak\n",
+  "codex.form.shape-shifter-curse.ocelot_1.appearance": ["Mottled fur now covers most of your chest, abdomen, and back. Connecting to your neck fur, it resembles a cloak\n",
     "Spotted white fur extends further up your limbs. Underneath, your hands and feet structure becomes more feline - retractable claws and cushioning pads\n",
     "While lengthening, your tail grows more flexible and powerful. It helps mid-air balance but increasingly affects your walking/running posture"],
   "codex.form.shape-shifter-curse.ocelot_1.pros": ["Your claws become deadly, dealing heavy damage barehanded and letting you climb trees and leaves freely\n",
     "The longer tail helps balance when crouching, allowing near-running sneaking speed and unimpeded jumping\n",
     "Your footsteps become nearly silent\n",
-    "Your digestive system strengthens - fresh raw meat provides more satiation, rotten flesh won't cause hunger\n",
+    "Your digestive system strengthens - Fresh raw meat provides higher hunger value, rotten flesh doesn't cause hunger\n",
     "Creepers avoid you\n",
     "You excel at mid-air posture adjustment, preventing fall damage from any height"],
   "codex.form.shape-shifter-curse.ocelot_1.cons": ["A strange uncoordinated feeling slows your sprinting, as if your body prefers different movement\n",
@@ -723,11 +723,11 @@
     "You can no longer digest non-meat foods"],
   "codex.form.shape-shifter-curse.ocelot_1.instincts": ["You increasingly want to",
     {
-      "text":"eat more raw meat", "color":"#c67681"
+      "text":" eat more raw meat", "color":"#c67681"
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in jungle biomes", "color":"#c67681"
+      "text":" to stay in jungle biome", "color":"#c67681"
     },
     "\nYou feel an inner urge to",
     {
@@ -739,33 +739,33 @@
     }],
 
   "codex.form.shape-shifter-curse.ocelot_2.name" : ["Ocelot Form (Phase 2)"],
-  "codex.form.shape-shifter-curse.ocelot_2.title": ["\nQuadrupedal movement now feels most natural. When crouching, you're nearly indistinguishable from certain large felines"],
+  "codex.form.shape-shifter-curse.ocelot_2.title": ["\nQuadrupedal movement now feels the most natural. When crouching, you're nearly indistinguishable from certain large felines"],
   "codex.form.shape-shifter-curse.ocelot_2.equip": [
     "[Collar Of Tension], [Collar Of Whiskers], [Digestion Fiber Ball]"
   ],
-  "codex.form.shape-shifter-curse.ocelot_2.appearance": ["Your head ears grow larger and more flexible - you notice they automatically turn toward sound sources\n",
-    "Your entire body now sports black-spotted fur. Very warm - you'd hate it getting wet\n",
-    "Your hind legs fully become digitigrade, though you can still stand upright barely\n",
+  "codex.form.shape-shifter-curse.ocelot_2.appearance": ["Your head ears grow larger and more flexible - You notice they automatically turn toward sound sources\n",
+    "Your entire body now sports black-spotted fur. Very warm - You'd hate it getting wet\n",
+    "Your hind legs have fully become digitigrade, though you can still stand upright barely\n",
     "With powerful quadruped claws and a tail nearly matching torso length, you can low-center sprint and pounce across fields and forests rapidly. No prey escapes your claws"],
   "codex.form.shape-shifter-curse.ocelot_2.pros": ["Thanks to body changes, sneaking enters a quadrupedal hunting stance\n",
-    "In hunting stance, you sprint extremely fast and enter 1-block-high spaces\n",
+    "In hunting stance, you can sprint extremely fast and enter 1-block-high spaces\n",
     "In hunting stance, jumps become pounces covering great distances\n\n",
     "Your heightened senses let you instinctively dodge sideways when projectiles are about to hit you, making them barely miss\n",
     "Feline eyes let you see clearly even at night\n",
     "You can deal heavy sweeping damage with your bare-forepaws\n",
     "Your claws enable climbing trees and leaves\n",
     "You make no footsteps and take no fall damage\n",
-    "Fresh raw meat provides more satiation\n",
+    "Fresh raw meat provides higher hunger value\n",
     "Your body grants strong immunity - no hunger or poison effects\n",
     "Creepers avoid you"],
-  "codex.form.shape-shifter-curse.ocelot_2.cons": ["In hunting stance, enhanced physicality rapidly consumes satiation. Below threshold, you can't maintain stance\n\n",
+  "codex.form.shape-shifter-curse.ocelot_2.cons": ["In hunting stance, enhanced physicality rapidly consumes hunger value. Below threshold, you can't maintain stance\n\n",
     "Digitigrade hind legs make bipedal sprinting impossible\n",
     "Becoming smaller and lighter further reduces max health\n",
-    "As a swift lethal hunter, aside helmet, you can only wear leather/chainmail witch not affect your movement. You also can't effectively block damage with shields\n",
-    "Faster metabolism increases natural satiation depletion\n",
-    "Your digestive system changes further - non-raw meat foods no longer provides you with energy"],
+    "As a swift lethal hunter, aside helmet, you can only wear leather/chainmail which does not affect your movement. You also can't effectively block damage with shields\n",
+    "Faster metabolism increases natural hunger value depletion\n",
+    "Your digestive system changes further - Non-raw meat foods no longer provide you with energy"],
   "codex.form.shape-shifter-curse.ocelot_2.instincts": ["Something inside you stirs... Your transformation hasn't reached its end...\n",
-    "A echo catalyst could take your transformation to the next stage... though this process would likely be permanent\n",
+    "An echo catalyst could take your transformation to the next stage... though this process would likely be permanent\n",
     "You're NOT actually considering this, are you?"],
 
   "codex.form.shape-shifter-curse.ocelot_3.name" : ["Ocelot Form (Phase Permanent)"],
@@ -776,19 +776,19 @@
   "codex.form.shape-shifter-curse.ocelot_3.appearance": ["Apart from your fur color and body size, you're nearly indistinguishable from a wild ocelot\n",
     "You're the apex predator of the dense jungle. With your keen eyes and razor-sharp claws, every creature is potential prey"],
   "codex.form.shape-shifter-curse.ocelot_3.pros": [
-    "Your body has fully adapted to quadrupedal structure, significantly enhancing your leaping ability. Additionally, maintaining Hunting Stance has been made easier, it no longer accelerates your hunger consumption\n",
+    "Your body has fully adapted to quadrupedal structure, significantly enhancing your leaping ability. Additionally, maintaining Hunting Stance has been made easier; it no longer accelerates your hunger consumption\n",
     "Your strengthened claws allow climbing on nearly any surface\n",
-    "Sprinting is replaced with stealth - while sneaking, you can dash forward at tremendous speed and pounce across great distances. While dashing, you can automatically step over one-block-high blocks.\n",
+    "Sprinting is replaced with stealth - While sneaking, you can dash forward at tremendous speed and pounce across great distances. While dashing, you can automatically step up one-block-high obstacles.\n",
     "If you collide with enemies during a mid-air pounce, you can deal pounce damage to them.\n",
     "Your keen senses let you instinctively dodge incoming projectiles\n",
     "Night vision grants perfect sight in darkness\n",
     "You can deal heavy sweeping damage with your bare-forepaws\n",
     "You produce no footstep sounds and take no fall damage\n",
-    "Fresh raw meat provides greater satiation\n",
+    "Fresh raw meat provides greater hunger value\n",
     "Your physiology grants strong immunity to both hunger and poison effects\n",
-    "Creepers will actively avoid you\n"
+    "Creepers actively avoid you\n"
   ],
-  "codex.form.shape-shifter-curse.ocelot_3.cons": ["Your altered digestive system can no longer get energy from non-raw meat foods. Even when idle, your hyperactive metabolism constantly drains hunger - perpetual hunting becomes your only option\n\n",
+  "codex.form.shape-shifter-curse.ocelot_3.cons": ["Your altered digestive system can no longer get energy from non-raw meat foods. Even when idle, your hyperactive metabolism constantly drains hunger - Perpetual hunting becomes your only option\n\n",
     "Any armor severely hinders your movement. You can now only wear helmets and cannot properly use shields"],
   "codex.form.shape-shifter-curse.ocelot_3.instincts": [""],
 
@@ -808,7 +808,7 @@
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in dripstone caves biomes", "color":"#c67681"
+      "text":" to stay in dripstone caves biome", "color":"#c67681"
     }],
 
   "codex.form.shape-shifter-curse.bat_1.name" : ["Bat Form (Phase 1)"],
@@ -817,7 +817,7 @@
     "[Charm Of Night Crystal], [Charm Of Hollow Fang]"
   ],
   "codex.form.shape-shifter-curse.bat_1.appearance": ["Your ears now crown your head - large, pointed and forward-facing\n",
-    "Arm membranes have grown further - when jumping you instinctively flap them\n",
+    "Arm membranes have grown further - When jumping you instinctively flap them\n",
     "Your fingers now somewhat resemble claws, preventing delicate operations though you can still grasp items\n",
     "Your toes have elongated - thin and long\n",
     "Your tail has lengthened further\n",
@@ -825,19 +825,19 @@
   "codex.form.shape-shifter-curse.bat_1.pros": ["You now see clearly in darkness\n",
     "Your arms grow stronger, increasing melee damage\n",
     "While still flightless, membrane flapping lets you jump higher\n",
-    "Your body absorbs non-meat foods more efficiently - increased satiation\n",
+    "Your body absorbs non-meat foods more efficiently - increased hunger value\n",
     "In darkness, you feel more agile"],
   "codex.form.shape-shifter-curse.bat_1.cons": ["Your new finger structure makes using bows/crossbows impossible\n",
     "Membranes and new toe structure prevent wearing chestplates and boots\n",
     "In sunlight, you feel weaker and slower\n",
-    "Your body adapts less to meat - it provides less satiation"],
+    "Your body adapts less to meat - It provides lower hunger value"],
   "codex.form.shape-shifter-curse.bat_1.instincts": ["You increasingly want to",
     {
       "text":"stay in darkness", "color":"#c67681"
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in dripstone caves biomes", "color":"#c67681"
+      "text":" to stay in dripstone caves biome", "color":"#c67681"
     },
     "\nThe thought of ",
     {
@@ -859,45 +859,44 @@
   ],
   "codex.form.shape-shifter-curse.bat_2.appearance": ["Your ears now dominate much head space, detecting minute sounds\n",
     "Your face extends forward forming a short muzzle with sharp tiny teeth\n",
-    "Your arms fully integrate with wing membranes. Though still too heavy for free flight, they suffice for gliding and diving\n",
+    "Your arms fully integrate with wing membranes. Though you're still too heavy for free flight, they suffice for gliding and diving\n",
     "Your foreclaws can't handle bulky tools/weapons\n",
     "New foot claws, digitigrade legs and balancing long tail suit diving/gliding. With effort, you can still run\n",
     "Body fuzz maintains warmth in chilly caves"],
   "codex.form.shape-shifter-curse.bat_2.pros": ["You now see clearly in darkness. In darkness, you also feel more agile\n",
     "Your foreclaws are hard and strong, dealing decent barehanded damage. They let you rapidly break blocks and normally harvest ores\n",
     "While still flightless, membrane flapping boosts jump height and enables slow descent from any height. They function like elytra\n",
-    "Your body absorbs non-meat foods more efficiently - increased satiation\n",
+    "Your body absorbs non-meat foods more efficiently - increased hunger value\n",
     "Your size lets you squeeze into 1-block spaces"],
   "codex.form.shape-shifter-curse.bat_2.cons": ["Your foreclaws can't grip bulky tools/weapons. When breaking hard blocks or hitting mobs, they just drop\n",
     "Your foreclaws struggle to even lift bows/crossbows, let alone use them\n",
     "Membranes and digitigrade legs prevent wearing chestplates, leggings and boots. They slightly slow ground movement\n",
     "In sunlight, you feel extremely weak and slow\n",
-    "Meat no longer provides you with energy - your body can't digest it anymore"],
+    "Meat no longer provides you with energy - Your body can't digest it anymore"],
   "codex.form.shape-shifter-curse.bat_2.instincts": ["Something inside you stirs... Your transformation hasn't reached its end...\n",
-    "A echo catalyst could take your transformation to the next stage... though this process would likely be permanent\n",
+    "An echo catalyst could take your transformation to the next stage... though this process would likely be permanent\n",
     "You're NOT actually considering this, are you?"],
 
   "codex.form.shape-shifter-curse.bat_3.name" : ["Bat Form (Phase Permanent)"],
-  "codex.form.shape-shifter-curse.bat_3.title": ["\nFor you now, a cool and dark cavern might be more suitable as your new home..",
-    "\n\nExclusive trinkets/tools：[Charm Of Night Crystal], [Charm Of Hollow Fang], [Diamond Mining Claw]"],
+  "codex.form.shape-shifter-curse.bat_3.title": ["\nFor you now, a cool and dark cavern might be more suitable as your new home.."],
   "codex.form.shape-shifter-curse.bat_3.equip": [
     "[Charm Of Night Crystal], [Charm Of Hollow Fang], [Attach Hook], [Diamond Mining Claw]"
   ],
   "codex.form.shape-shifter-curse.bat_3.appearance": ["Fine, dense fur completely covers your body. Ears nearly as large as your head help you locate your surroundings, ensuring you don't miss even the faintest sounds.\n",
     "Your forelimbs have extended further to make space for the expansive membrane wings. If you wish, you could wrap your entire body within these wings.\n",
-    "Fore claws and hind paws equipped with hooks allow you to cling to walls or hang upside-down from cave ceilings, just like your kind.\n",
+    "Foreclaws and hind paws equipped with hooks allow you to cling to walls or hang upside-down from cave ceilings, just like your kind.\n",
     "Your body is now fully specialized for flight and gliding. Your hind legs can no longer support your body weight, forcing you to move slowly on the ground in a near-quadrupedal stance."],
   "codex.form.shape-shifter-curse.bat_3.pros": ["Newly formed hooks grant you the ability to cling and hang upside-down:\n\n",
     "While airborne, you can right-click 'use' the side face of a block while empty-handed to cling to it. While clinging, press jump while aiming in a direction to kick off for a high-speed glide in that direction.\n",
     "While airborne, you can right-click 'use' the underside of a block while empty-handed to hang yourself upside-down from it. While hanging upside-down, your health will slowly regenerate.\n",
     "Large membrane wings enable you to glide swiftly through the air. Press jump while sprinting to launch into high-speed forward flight. Even while airborne, you can press the sprint key to increase your glide speed.\n",
     "You can now clearly discern things in darkness.\n",
-    "Hardened and powerful fore claws enhance your melee damage. Additionally, they allow you to dig blocks at high speed barehanded and harvest drops normally.\n",
+    "Hardened and powerful foreclaws enhance your melee damage. Additionally, they allow you to dig blocks at high speed barehanded and harvest drops normally.\n",
     "By flapping your wing membranes, you can jump higher and descend slowly from heights. Naturally, they can also serve as elytra.\n",
-    "Your body now absorbs non-meat foods more effectively, granting higher saturation."],
+    "Your body now absorbs non-meat foods more effectively, granting higher hunger value."],
   "codex.form.shape-shifter-curse.bat_3.cons": ["Due to the shift in your center of gravity, you can now only move slowly on the ground in a nearly quadrupedal posture.\n",
     "Sunlight now severely affects you. Under sunlight, your maximum health is greatly reduced, and the enhanced melee damage effect cannot be sustained.\n",
-    "Your fore claws are no longer suited for grasping bulky tools and weapons. When you use them to dig hard blocks or swing them to hit monsters, they will merely slip off and drop. Naturally, you can also no longer operate bows or crossbows.\n",
+    "Your foreclaws are no longer suited for grasping bulky tools and weapons. When you use them to dig hard blocks or swing them to hit monsters, they will merely slip off and drop. Naturally, you can also no longer operate bows or crossbows.\n",
     "Your membrane wings and digitigrade leg structure make equipping chestplates, leggings, and boots impossible.\n",
     "Meat no longer provides you with energy; your body has completely lost the ability to digest it."],
   "codex.form.shape-shifter-curse.bat_3.instincts": [" "],
@@ -914,7 +913,7 @@
     "A tuft of snow-white fur has sprouted at the base of your spine. Touching it, you can feel a bony protrusion hidden within."],
   "codex.form.shape-shifter-curse.snow_fox_0.pros": ["Your body feels more energetic, and your running speed has increased.\n",
     "You discover you can jump slightly higher when leaping during a run."],
-  "codex.form.shape-shifter-curse.snow_fox_0.cons": ["The fluffy fur covering you makes hot environments unbearable. During the daytime in hot desert biomes or the scorching Nether, your maximum health is slightly reduced.\n",
+  "codex.form.shape-shifter-curse.snow_fox_0.cons": ["The fluffy fur covering you makes hot environments unbearable. During the daytime in hot desert biome or the scorching Nether, your maximum health is slightly reduced.\n",
     "Your new fur tuft slightly hinders your movement speed while swimming."],
   "codex.form.shape-shifter-curse.snow_fox_0.instincts": ["You begin to desire",
     {
@@ -922,7 +921,7 @@
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in Taiga biomes", "color":"#c67681"
+      "text":" to stay in Taiga biome", "color":"#c67681"
     },"\nYou begin to desire",
     {
       "text":" to run across snowy ground", "color":"#c67681"
@@ -941,10 +940,10 @@
     "Something noteworthy: despite being purified, you can still feel a foreign magic within you... It feels cold, icy."],
   "codex.form.shape-shifter-curse.snow_fox_1.pros": ["The chilling magic within grants you new abilities. Snowballs you throw are empowered to deal more damage.\n\n",
     "Foxes trust you. They won't run away.\n",
-    "Your running speed has increased. Your new fur allows you to move freely through Sweet Berry bushes, and Sweet Berries also provide more saturation.\n",
+    "Your running speed has increased. Your new fur allows you to move freely through Sweet Berry bushes, and Sweet Berries also provide higher hunger value.\n",
     "You find your body better suited for jumping. You can jump higher during a sprint, and your jump critical damage has increased."],
   "codex.form.shape-shifter-curse.snow_fox_1.cons": ["Your fluffy fur isn't the only reason for your aversion to heat... It seems connected to the cold magic within.\n\n",
-    "During the daytime in hot desert biomes or the scorching Nether, your maximum health is further reduced.\n",
+    "During the daytime in hot desert biome or the scorching Nether, your maximum health is further reduced.\n",
     "Additionally, when you are very close to lava or in lava, you will gradually take damage, even with fire resistance effects.\n",
     "Your movement speed in water is slightly decreased."],
   "codex.form.shape-shifter-curse.snow_fox_1.instincts": ["The idea of",
@@ -955,7 +954,7 @@
       "text":" jumping while sprinting", "color":"#c67681"
     }," begins to appeal to you\nYou begin to desire",
     {
-      "text":" to stay in Taiga biomes\n", "color":"#c67681"
+      "text":" to stay in Taiga biome\n", "color":"#c67681"
     },
     {
       "text":"The idea of lingering within Sweet Berry bushes", "color":"#c67681"
@@ -975,14 +974,14 @@
   "codex.form.shape-shifter-curse.snow_fox_2.pros": ["You've adapted better to the frigid magic within your body, allowing you to harness its stronger powers:\n",
     "Snowballs you throw deal more damage. Infused with icy magic, your snowballs can turn water into ice and even solidify lava.\n\n",
     "Your transformed body grants you new muscle memory. While sprinting, timing your jumps correctly enables a triple jump with increasing height.\n",
-    "Mastering jumping techniques now increases your critical jump damage based on fall distance, up to 2x maximum.\n",
+    "Mastering jumping techniques now increases your jump critical damage based on fall distance, up to 2x maximum.\n",
     "Your sprinting speed is faster, and you can move freely through sweet berry bushes.\n",
     "Sweet berries restore more hunger.\n",
     "Foxes trust you and won't flee.\n",
-    "You can now walk safely on powdered snow."],
+    "You can now walk safely on powder snow."],
   "codex.form.shape-shifter-curse.snow_fox_2.cons": ["The frigid magic within your body also brings side effects:\n\n",
     "You take additional burning damage when on fire.\n",
-    "During daytime in hot desert biomes or the scorching Nether, your maximum health is further reduced.\n",
+    "During daytime in hot desert biome or the scorching Nether, your maximum health is further reduced.\n",
     "Additionally, being very close to or submerged in lava causes gradual damage, even with fire resistance.\n",
     "Leggings and boots no longer fit your new body structure.\n",
     "Your fluffy fur further slows your movement speed in water."],
@@ -1003,17 +1002,17 @@
   "codex.form.shape-shifter-curse.snow_fox_3.pros": ["The cold magic is now one with you:\n",
     "Snowballs you throw deal immense damage, rivaling arrows. Infused with frost magic, you can use them to turn water into ice and even harden lava.\n\n",
     "Quadrupedal movement grants you extreme agility:\n",
-    "While falling, you can right-click 'use' the ground to leverage your fore claws and nimbly vault yourself back into the air.\n",
+    "While falling, you can right-click 'use' the ground to leverage your foreclaws and nimbly vault yourself back into the air.\n",
     "While maintaining a sprint, by timing successive jumps, you can trigger a triple jump where each jump gains height.\n",
     "Your jump critical damage increases with fall distance, up to a maximum of 2 times the normal damage.\n\n",
     "Your small size makes you harder to hit with ranged attacks\n",
     "Your running speed is faster, and you can move freely through Sweet Berry bushes.\n",
-    "Sweet Berries provide more saturation.\n",
+    "Sweet Berries provide higher hunger value.\n",
     "Foxes trust you. They won't run away.\n",
     "You can now walk on Powder Snow."],
   "codex.form.shape-shifter-curse.snow_fox_3.cons": ["The cold magic that constitutes your body brings significant side effects:\n",
     "Fire and heat are your greatest enemies. You take additional damage while burning, and fire on you won't extinguish naturally unless you enter water or extinguish it with a water bottle.\n",
-    "During the daytime in hot desert biomes or the scorching Nether, your maximum health is drastically reduced. Furthermore, the warm Plains biome is now uncomfortably hot for you, reducing your maximum health while you are in it.\n",
+    "During the daytime in hot desert biome or the scorching Nether, your maximum health is drastically reduced. Furthermore, the warm Plains biome is now uncomfortably hot for you, reducing your maximum health while you are in it.\n",
     "When you are very close to lava or open flame, or in lava, you will gradually take damage, even with fire resistance effects.\n",
     "Leggings and boots no longer fit your quadrupedal body structure.\n",
     "Without proper hands for tools, your block-breaking speed is slower\n",
@@ -1021,7 +1020,7 @@
   "codex.form.shape-shifter-curse.snow_fox_3.instincts": [""],
 
   "codex.form.shape-shifter-curse.familiar_fox_0.name": ["Familiar Fox Form (Phase 0)"],
-  "codex.form.shape-shifter-curse.familiar_fox_0.title": ["\nThe curse has affected your body - orange-red fur patches are growing across your skin. You feel an urge to run across snowy plains"],
+  "codex.form.shape-shifter-curse.familiar_fox_0.title": ["\nThe curse has affected your body - Orange-red fur patches are growing across your skin. You feel an urge to run across snowy plains"],
   "codex.form.shape-shifter-curse.familiar_fox_0.equip": [
     "[Amulet Bracelet]"
   ],
@@ -1031,7 +1030,7 @@
     "Orange-red fur patches appear sporadically across your body, most notably a red-and-white tuft growing from your lower back. When touched, you can feel hidden bony protrusions within"],
   "codex.form.shape-shifter-curse.familiar_fox_0.pros": ["To your puzzlement, witches no longer seem hostile toward you\n",
     "Your body feels more energetic, granting increased running speed\n",
-    "Enhanced perception helps you find more dropped items, roughly equivalent to Looting I"],
+    "Enhanced perception helps you find more drops, roughly equivalent to Looting I"],
   "codex.form.shape-shifter-curse.familiar_fox_0.cons": ["Your new fur growth slightly reduces your swimming speed\n",
     "Strangely, attacking witches causes unusual dizziness"],
   "codex.form.shape-shifter-curse.familiar_fox_0.instincts": ["You begin to desire",
@@ -1039,11 +1038,11 @@
       "text":" sweet berries", "color":"#c67681"
     },"\nYou begin to desire",
     {
-      "text":" to run across snow", "color":"#c67681"
+      "text":" to run across snowy ground", "color":"#c67681"
     },
     "\nYou begin to desire",
     {
-      "text":" to stay in taiga biomes", "color":"#c67681"
+      "text":" to stay in taiga biome", "color":"#c67681"
     }],
 
   "codex.form.shape-shifter-curse.familiar_fox_1.name": ["Familiar Fox Form (Phase 1)"],
@@ -1056,25 +1055,25 @@
     "Your hands and feet have grown larger, becoming more claw-like\n",
     "The fur tuft at your tailbone has developed into a full fluffy tail that sways slowly\n\n",
     "Worryingly, beyond the usual shifting magic, you detect a new type of magic blending within you..."],
-  "codex.form.shape-shifter-curse.familiar_fox_1.pros": ["The foreign magic grants new abilities - you can now right-click while empty-handed to drain energy from weak creatures for hunger restoration\n\n",
+  "codex.form.shape-shifter-curse.familiar_fox_1.pros": ["The foreign magic grants new abilities - You can now right-click while empty-handed to drain energy from weak creatures for hunger restoration\n\n",
     "All illagers strangely show no hostility toward you\n",
     "Your running speed increases further, and your new fur protects you from sweet berry bushes\n",
-    "Sharper perception helps find more dropped items (~Looting II)"],
+    "Sharper perception helps find more drops (~Looting II)"],
   "codex.form.shape-shifter-curse.familiar_fox_1.cons": ["The foreign magic affects your digestion, reducing hunger gained from food\n",
     "Your health is slightly reduced\n",
     "Your fur slows swimming slightly\n",
-    "Attacking illagers now also start causes unusual dizziness"],
+    "Attacking illagers now also causes unusual dizziness"],
   "codex.form.shape-shifter-curse.familiar_fox_1.instincts": ["",
     {
       "text":"Thoughts of draining energy from creatures", "color":"#c67681"
     }," begin attracting you\n",
     "You begin to desire",
     {
-      "text":" to stay in taiga biomes\n", "color":"#c67681"
+      "text":" to stay in taiga biome\n", "color":"#c67681"
     },
     {
       "text":"Thoughts of staying in sweet berry bushes", "color":"#c67681"
-    }," begin attracting you\nThe magic of witches and evokers draws you in - you feel compelled to",
+    }," begin attracting you\nThe magic of witches and evokers draws you in - You feel compelled to",
     {
       "text":" approach and observe them", "color":"#c67681"
     }
@@ -1093,13 +1092,13 @@
   "codex.form.shape-shifter-curse.familiar_fox_2.pros": ["Foreign Magic\n",
     "You feel foreign magic surging within your body. Now, you have learned how to actively utilize your magic reserves...\n",
     "Fox Firebolt: While holding a stick, consume some magic to right-click and launch a straight-flying fireball that deals moderate damage and ignites the target\n\n",
-    "By consuming a small amount of magic and right-clicking with a water bottle on corresponding ingredients, you can directly brew Splash Potions of Poison, Instant Health, and Instant Damage in your inventory, 3 at a time. You can now stack 8 identical potions\n",
+    "By consuming a small amount of magic and right-clicking with a water bottle on corresponding ingredients, you can directly brew Splash Potions of Poison, Healing, and Harming in your inventory, 3 at a time. You can now stack 8 identical potions\n",
     "You can absorb more hunger from stronger creatures by right-clicking them empty-handed, while also restoring magic reserves. You can also sense the location of nearby creatures\n",
     "When absolutely necessary, you can drain energy from hostile mobs, though their energy will weaken you\n",
-    "...Intelligent creatures seem to have more energy, you can bottle their energy for later use. Perhaps you should try other targets...\n\n",
-    "Illagers now see you as an ally and will no longer attack you\n",
+    "... Intelligent creatures seem to have more energy, you can bottle their energy for later use. Perhaps you should try other targets...\n\n",
+    "Illagers now see you as an ally and no longer attack you\n",
     "Your running speed increases, and you can move freely through sweet berry bushes\n",
-    "Your enhanced perception allows you to discover more loot, roughly equivalent to Looting II enchantment\n"],
+    "Your enhanced perception allows you to discover more drops, roughly equivalent to Looting II enchantment\n"],
   "codex.form.shape-shifter-curse.familiar_fox_2.cons": ["As an integral part of your body, you need to maintain abundant magic reserves:\n",
     "Your body requires magic to function properly, now most foods provide you with less hunger\n",
     "When your magic reserves fall below 1/3, your hunger consumption increases\n",
@@ -1111,7 +1110,7 @@
     "For some reason, villagers seem to have started fearing you, they actively avoid you\n",
     "You find yourself involuntarily drawn to the magic of Witches and Evokers when you look at them..."],
   "codex.form.shape-shifter-curse.familiar_fox_2.instincts": ["Something inside you stirs... Your transformation hasn't reached its end...\n",
-    "A echo catalyst could take your transformation to the next stage... though this process would likely be permanent\n",
+    "An echo catalyst could take your transformation to the next stage... though this process would likely be permanent\n",
     "You're NOT actually considering this, are you?"],
 
   "codex.form.shape-shifter-curse.familiar_fox_3.name": ["Familiar Fox Form (Phase Permanent)"],
@@ -1131,9 +1130,9 @@
     "Fox Fire Ring: Press the active ability key, consume more magic to release a fire ring centered on yourself, dealing damage and igniting targets in the area for an extended duration\n\n",
     "Your familiar magic protects you from fire damage, when in fire or lava, your magic is continuously consumed to maintain this effect\n",
     "Your familiar magic repels other magic, now most persistent status effects can no longer affect your body, whether positive or negative\n",
-    "Illagers see you as an ally and will no longer attack you\n",
+    "Illagers see you as an ally and no longer attack you\n",
     "Your running speed increases. Due to your size, ranged attacks also have difficulty hitting you\n",
-    "By consuming a small amount of magic and right-clicking with a water bottle on corresponding ingredients, you can directly brew powerful Splash Potions of Poison, Instant Health, and Instant Damage in your inventory, 3 at a time. You can now stack 8 identical potions\n",
+    "By consuming a small amount of magic and right-clicking with a water bottle on corresponding ingredients, you can directly brew powerful Splash Potions of Poison, Healing, and Harming in your inventory, 3 at a time. You can now stack 8 identical potions\n",
     "Additionally, through magic perception, you can see through and locate creatures within a certain range\n",
     "Thanks to your thick fur, you can move freely through sweet berry bushes\n"],
   "codex.form.shape-shifter-curse.familiar_fox_3.cons": ["As a familiar made of magic, you need to maintain sufficient magic reserves at all times:\n",
@@ -1158,7 +1157,7 @@
     "Feathery antenna-like structures grow from your forehead - very flexible. They grant new senses detecting nearby creatures' locations\n",
     "Branch-like wings sprout from your back. With them, you can hover through skies. Below wings, two ribbon-like extensions emerge - purpose unclear, possibly compensating lost leg functions"],
   "codex.form.shape-shifter-curse.allay_sp.pros": ["Your more spectral physique grants new abilities -\n",
-    "Your actions now barely consume satiation\n",
+    "Your actions now barely consume hunger value\n",
     "Holding jump lets you ascend and hover freely midair. You also descend slowly\n\n",
     "Floating means no footsteps\n",
     "Amethyst resonates strangely with you: in inventory, you can \"use\" one amethyst block on another to create amethyst shards\n",
@@ -1166,11 +1165,11 @@
     "Enhanced perception increases bow damage\n",
     "Your tiny size lets you enter 1-block spaces easily, and projectiles miss you more often"],
   "codex.form.shape-shifter-curse.allay_sp.cons": ["Your semi-spectral nature brings disadvantages -\n",
-    "Hovering rapidly depletes satiation\n",
-    "Your body can't derive energy from food - only amethyst shards restore satiation. You also heal less from satiation\n",
+    "Hovering rapidly depletes hunger value\n",
+    "Your body can't derive energy from food - Only amethyst shards restore hunger value. You also heal less from hunger\n",
     "Your weaker body requires both hands for tools/weapons. You break hard materials slower and deal reduced melee damage.Your max health has reduced greatly either\n",
     "Floating increases inertia, making stopping harder\n",
-    "Your lower torso vanished - you can't wear leggings or boots"],
+    "Your lower torso vanished - You can't wear leggings or boots"],
   "codex.form.shape-shifter-curse.allay_sp.instincts": ["\n\n\nCompared to other forms, you notice this one seems \"special\": it barely affects your mind and feels less stable. If desired, you could likely revert it relatively easily"],
 
   "codex.form.shape-shifter-curse.feral_cat_sp.name": ["Feral Cat Form (sp)"],
@@ -1184,11 +1183,11 @@
   "codex.form.shape-shifter-curse.spider_0.name": ["Spider Form (Phase 0)"],
   "codex.form.shape-shifter-curse.spider_0.title": ["\nThe curse has begun affecting your body. Patches of chitinous shell have started to spread across your skin, and liquid silk is beginning to secrete from your new abdomen."],
   "codex.form.shape-shifter-curse.spider_0.equip": [""],
-  "codex.form.shape-shifter-curse.spider_0.appearance": ["Hard carapace-like growths have begun to emerge on your body. They are composed of chitin - lightweight yet sturdy.\nLiquid silk threads seep from your newly grown abdomen. You discover that you instinctively know how to weave compressed silk projectiles, which can be hurled to hinder your targets, and construct climbable web scaffolds.\nA pair of carapace-covered protrusions has grown on each side of your torso and at the base of your abdomen. By focusing your mind, you find that you can command them to move slightly.\n\nUnlike other forms, you sense that your transformation is now in a state of stagnation - a new instinct whispers to you: you will need specific catalytic materials, a safe location, and time to achieve a complete transformation."],
-  "codex.form.shape-shifter-curse.spider_0.pros": ["Your body can now produce high-density silk projectiles - hold the primary ability key to charge and release to fire a web projectile, expending web value. Different effects occur based on charge level:\n\nWhen hitting the side or bottom of a block, a non-sticky bridge web structure extends downward from the point of impact, which can be climbed.\nWhen hitting a creature, it inflicts Slowness and Weakness.\n\nYour body is no longer affected by poison.\nYou are unhindered by cobwebs. You can climb webs and sense entities caught within them."],
+  "codex.form.shape-shifter-curse.spider_0.appearance": ["Hard carapace-like growths have begun to emerge on your body. They are composed of chitin - lightweight yet sturdy.\nLiquid silk threads seep from your newly grown abdomen. You discover that you instinctively know how to weave compressed silk projectiles, which can be hurled to hinder your targets, and construct climbable web scaffolds.\nA pair of carapace-covered protrusions has grown on each side of your torso and at the base of your abdomen. By focusing your mind, you find that you can command them to move slightly.\n\nUnlike other forms, you sense that your transformation is now in a state of stagnation - A new instinct whispers to you: you will need specific catalytic materials, a safe location, and time to achieve a complete transformation."],
+  "codex.form.shape-shifter-curse.spider_0.pros": ["Your body can now produce high-density silk projectiles - Hold the primary ability key to charge and release to fire a web projectile, expending web value. Different effects occur based on charge level:\n\nWhen hitting the side or bottom of a block, a non-sticky bridge web structure extends downward from the point of impact, which can be climbed.\nWhen hitting a creature, it inflicts Slowness and Weakness.\n\nYour body is no longer affected by poison.\nYou are unhindered by cobwebs. You can climb cobwebs and sense entities caught within them."],
   "codex.form.shape-shifter-curse.spider_0.cons": ["Your digestive system is shifting toward one better suited for an arthropod predator, reducing the saturation you gain from non-meat foods.\nWeapons enchanted with Bane of Arthropods deal increased damage to you.\nThe appendage protrusions on your rear make it impossible to wear leggings."],
   "codex.form.shape-shifter-curse.spider_0.instincts": ["For some reason, you feel that your form is less influenced by the lunar tides... The Cursed Moon and ordinary catalysts cannot exert sufficient influence on your current form.\n",
-    "Instead, the idea of weaving\n",
+    "Instead, the idea of weaving \n",
     {
       "text":"[Dew Covered Cobweb]", "color":"#c67681"
     }," and using them to construct a silk nest begins to captivate you.\n",
@@ -1210,9 +1209,9 @@
   "codex.form.shape-shifter-curse.spider_2.equip": [
     "[Auxiliary Sword], [Auxiliary Pickaxe], [Auxiliary Axe], [Shield (Extra Arm Slot)], [Totem of Undying (Extra Arm Slot)], [Nutrient Sac (Extra Arm Slot)], [Venom Spindle]"
   ],
-  "codex.form.shape-shifter-curse.spider_2.appearance": ["Your skin has transformed into a chitinous exoskeleton. It has replaced your original bones, supporting the movement of your now-segmented limbs. Pale, bristly hairs have grown from your neck, joints, and the tips of your limbs, partially compensating for the tactile sensation you have lost beneath your rigid carapace.\nAn extra pair of eyes has grown above your original eyes, allowing you to see clearly even in darkness. The appendages of your head and mandibles have elongated into two pairs of pedipalps, further enhancing your senses.\nThe protrusions on the sides of your torso have grown into a pair of fully functional extra arms. Though relatively weak, they are strong enough to hold tools and aid you in your adventures. Meanwhile, the protrusions at the junction of your abdomen and abdomen have also developed into an extra pair of hind limbs. However, they cannot yet support your body - they merely cling to your abdomen, curving slightly upward.\nYour body no longer craves solid food; instead, it seeks the liquefied nutrients of prey digested externally. The method of weaving Nutrient Dissolve Cocoon sacs for this purpose has already been etched into your instincts.\n\nUnlike ordinary spiders, your further-developed abdomen is not used to house organs, but to store liquid silk. Thanks to more specialized spinnerets, you can now weave higher-density compressed silk projectiles - dense enough to form climbable silk towers."],
-  "codex.form.shape-shifter-curse.spider_2.pros": ["Hold the primary active power key to charge and release to fire a web projectile. Different effects occur based on charge level:\nWhen hitting the side or bottom of a block, a non-sticky bridge web structure extends downward from the point of impact, which can be climbed.\nAdditionally, when hitting the top of a block, a tower bridge web structure can be generated upward. When hitting a creature, you can inflict Slowness and Weakness.\n\nYou possess an extra pair of arms. By equipping different special items in the Trinkets extra hand slot, you can gain various beneficial effects.\nYou can eat string to replenish web value. By holding string in your inventory and right-clicking another string to expend a small amount of web value to craft cobwebs.\nBy holding a cobweb in your inventory and right-clicking a composter, you can expend a larger amount of web value to create a Nutrient Dissolve Cocoon - meat placed will be converted into Nutrient Sacs that you can consume.\n\nYour transformed spider body grants you immunity to poison and the ability to freely climb the sides of blocks. The extra pair of eyes can capture faint traces of light, allowing you to see clearly even in darkness.\nYou are unhindered by cobwebs. You can climb webs and sense entities caught within them.\nSpiders do not see you as an enemy."],
-  "codex.form.shape-shifter-curse.spider_2.cons": ["The newly grown pair of legs attached to your abdomen are not yet structured for supporting your body; instead, they slow your movement.\nAlthough you can still gain some nutrition from meat, you have discovered that externally digested Nutrient Sacs are the more suitable food for you.\nWeapons enchanted with Bane of Arthropods deal increased damage to you.\nYour chitinous carapace and the bristles upon it fear flame - you take increased damage from fire.\nDue to the obstruction of your new appendages, you can only wear a helmet and boots.\nVillage Iron Golems see you as an enemy and will actively attack you."],
+  "codex.form.shape-shifter-curse.spider_2.appearance": ["Your skin has transformed into a chitinous exoskeleton. It has replaced your original bones, supporting the movement of your now-segmented limbs. Pale, bristly hairs have grown from your neck, joints, and the tips of your limbs, partially compensating for the tactile sensation you have lost beneath your rigid carapace.\nAn extra pair of eyes has grown above your original eyes, allowing you to see clearly even in darkness. The appendages of your head and mandibles have elongated into two pairs of pedipalps, further enhancing your senses.\nThe protrusions on the sides of your torso have grown into a pair of fully functional extra arms. Though relatively weak, they are strong enough to hold tools and aid you in your adventures. Meanwhile, the protrusions at the junction of your anterior abdomen and posterior abdomen have also developed into an extra pair of hind limbs. However, they cannot yet support your body - They merely cling to your abdomen, curving slightly upward.\nYour body no longer craves solid food; instead, it seeks the liquefied nutrients of prey digested externally. The method of weaving Nutrient Dissolve Cocoon for this purpose has already been etched into your instincts.\n\nUnlike ordinary spiders, your further-developed abdomen is not used to house organs, but to store liquid silk. Thanks to more specialized spinnerets, you can now weave higher-density compressed silk projectiles - dense enough to form climbable silk towers."],
+  "codex.form.shape-shifter-curse.spider_2.pros": ["Hold the primary active power key to charge and release to fire a web projectile. Different effects occur based on charge level:\nWhen hitting the side or bottom of a block, a non-sticky bridge web structure extends downward from the point of impact, which can be climbed.\nAdditionally, when hitting the top of a block, a tower bridge web structure can be generated upward. When hitting a creature, you can inflict Slowness and Weakness.\n\nYou possess an extra pair of arms. By equipping different special items in the Trinkets extra hand slot, you can gain various beneficial effects.\nYou can eat string to replenish web value. By holding string in your inventory and right-clicking another string to expend a small amount of web value to craft cobwebs.\nBy holding a cobweb in your inventory and right-clicking a composter, you can expend a larger amount of web value to create a Nutrient Dissolve Cocoon - Meat placed will be converted into Nutrient Sacs that you can consume.\n\nYour transformed spider body grants you immunity to poison and the ability to freely climb the sides of blocks. The extra pair of eyes can capture faint traces of light, allowing you to see clearly even in darkness.\nYou are unhindered by cobwebs. You can climb cobwebs and sense entities caught within them.\nSpiders do not see you as an enemy."],
+  "codex.form.shape-shifter-curse.spider_2.cons": ["The newly grown pair of legs attached to your abdomen are not yet structured for supporting your body; instead, they slow your movement.\nAlthough you can still gain some nutrition from meat, you have discovered that externally digested Nutrient Sacs are the more suitable food for you.\nWeapons enchanted with Bane of Arthropods deal increased damage to you.\nYour chitinous carapace and the bristles upon it fear flame - You take increased damage from fire.\nDue to the obstruction of your new appendages, you can only wear a helmet and boots.\nVillage Iron Golems see you as an enemy and actively attack you."],
   "codex.form.shape-shifter-curse.spider_2.instincts": ["Something inside you stirs... Your transformation hasn't reached its end...\n",
     "For some reason, you feel that your form is less influenced by the lunar tides...\nThe Cursed Moon and ordinary catalysts cannot exert sufficient influence on your current form. However, a Resonant Catalyst should be enough to bring your transformation to the next stage... though this process is likely to be permanent.\n",
     "You're NOT actually considering this, are you?"],
@@ -1223,8 +1222,8 @@
     "[Auxiliary Sword], [Auxiliary Pickaxe], [Auxiliary Axe], [Shield (Extra Arm Slot)], [Totem of Undying (Extra Arm Slot)], [Nutrient Sac (Extra Arm Slot)], [Venom Spindle]"
   ],
   "codex.form.shape-shifter-curse.spider_3.appearance": ["Your body has fully metamorphosed into a structure suited for a multi-legged arthropod. To support the added weight, your hind legs no longer hang in the air, and your original bipedal limbs have tilted forward, forming a more stable quadrupedal stance - better suited for explosive forward lunges than sustained movement.\nYour extra pair of arms naturally tuck against the front of your torso when not in use. You have not yet fully grown accustomed to their presence.\nAnother pair of simple eyes has grown from the sides of your head, extending your field of vision to a panoramic view of your surroundings. They allow you to detect even the faintest stirrings around you, even in darkness.\nBeneath the bristly hairs covering your neck, you sense that your mouth has also transformed into a short tubular structure unfit for chewing. Now you can only draw energy from externally digested fluid nutrients.\n\nYour greatly enlarged abdomen stores vast quantities of liquid silk. Compressed silk projectiles can form silk cocoons that efficiently ensnare struck targets. Beyond that, you can now spray liquid silk directly from your spinnerets, causing it to rapidly expand and solidify into a tough, sponge-like \"bridge\" ahead of you.\nWith these, you can effortlessly traverse complex terrain, leaving your targets with nowhere to run."],
-  "codex.form.shape-shifter-curse.spider_3.pros": ["Hold the primary active power key to charge and release to fire a web projectile. Different effects occur based on charge level:\nWhen hitting the side or bottom of block, a non-sticky bridge web structure extends downward from the point of impact, which can be climbed.\nWhen hitting the top of block, a tower bridge web structure can be generated upward.\nWhen hitting a creature, you can inflict Slowness, Weakness, and \"Entangled\": as \"Entangled\" continues to accumulate, it will eventually become \"Cocooning\", make it unable to move.\nMelee attacks against \"Cocooning\" creatures fill some web value; creatures that die under the \"Cocooning\" effect may drop Nutrient Sacs.\nHold the secondary active power key to charge and release to generate a horizontal silk bridge. Its length and width vary based on charge level.\n\nYou possess an extra pair of arms. By equipping different special items in the Trinkets extra hand slot, you can gain various beneficial effects.\nYou can eat string to replenish web value. By holding string in your inventory and right-clicking another string, you can craft cobwebs.\nBy holding a cobweb in your inventory and right-clicking a composter, you can create a Nutrient Dissolve Cocoon - meat placed inside will be converted into Nutrient Sacs that you can consume.\nYour fully transformed multi-legged spider body grants you night vision, immunity to poison, and the ability to step up one block of height. It also grants you the ability to freely climb the sides of blocks.\nYou are unhindered by cobwebs. You can climb webs and sense entities caught within them.\nSpiders do not see you as an enemy."],
-  "codex.form.shape-shifter-curse.spider_3.cons": ["Your fully transformed multi-legged spider body is no longer suited for sustained actions requiring endurance. Your movement and sprinting speed are greatly reduced, and you can no longer jump vertically to a height of one block as before. However, as a replacement, you can lunge forward while sprinting.\nYour spider digestive system means you can only gain hunger from externally digested Nutrient Sacs. Additionally, weapons enchanted with Bane of Arthropods deal increased damage to you.\nYour chitinous carapace and the bristles upon it fear flame - you take increased damage from fire.\nAside from a helmet, you cannot wear normal armor.\nVillage Iron Golems see you as an enemy and will actively attack you."],
+  "codex.form.shape-shifter-curse.spider_3.pros": ["Hold the primary active power key to charge and release to fire a web projectile. Different effects occur based on charge level:\nWhen hitting the side or bottom of block, a non-sticky bridge web structure extends downward from the point of impact, which can be climbed.\nWhen hitting the top of block, a tower bridge web structure can be generated upward.\nWhen hitting a creature, you can inflict Slowness, Weakness, and \"Entangled\": as \"Entangled\" continues to accumulate, it will eventually become \"Cocooning\", make it unable to move.\nMelee attacks against \"Cocooning\" creatures fill some web value; creatures that die under the \"Cocooning\" effect may drop Nutrient Sacs.\nHold the secondary active power key to charge and release to generate a horizontal silk bridge. Its length and width vary based on charge level.\n\nYou possess an extra pair of arms. By equipping different special items in the Trinkets extra hand slot, you can gain various beneficial effects.\nYou can eat string to replenish web value. By holding string in your inventory and right-clicking another string, you can craft cobwebs.\nBy holding a cobweb in your inventory and right-clicking a composter, you can create a Nutrient Dissolve Cocoon - Meat placed inside will be converted into Nutrient Sacs that you can consume.\nYour fully transformed multi-legged spider body grants you night vision, immunity to poison, and the ability to step up one block of height. It also grants you the ability to freely climb the sides of blocks.\nYou are unhindered by cobwebs. You can climb cobwebs and sense entities caught within them.\nSpiders do not see you as an enemy."],
+  "codex.form.shape-shifter-curse.spider_3.cons": ["Your fully transformed multi-legged spider body is no longer suited for sustained actions requiring endurance. Your movement and sprinting speed are greatly reduced, and you can no longer jump vertically to a height of one block as before. However, as a replacement, you can lunge forward while sprinting.\nYour spider digestive system means you can only gain hunger from externally digested Nutrient Sacs. Additionally, weapons enchanted with Bane of Arthropods deal increased damage to you.\nYour chitinous carapace and the bristles upon it fear flame - You take increased damage from fire.\nAside from a helmet, you cannot wear normal armor.\nVillage Iron Golems see you as an enemy and actively attack you."],
   "codex.form.shape-shifter-curse.spider_3.instincts": [" "],
 
   "tooltip.shape_shifter_curse.morphscale_item": "MorphScaled Item",
@@ -1318,11 +1317,11 @@
   "text.autoconfig.shape-shifter-curse-client.option.itemStorePowerPosOffsetY": "Item Store Power Position Y Offset",
   "text.autoconfig.shape-shifter-curse-common.title": "Shape Shifter Curse - Common Config",
   "text.autoconfig.shape-shifter-curse-common.category.General": "General",
-  "text.autoconfig.shape-shifter-curse-common.option.transformativeBatSpawnChance": "Transformative Bat Spawn Success Rate",
-  "text.autoconfig.shape-shifter-curse-common.option.transformativeAxolotlSpawnChance": "Transformative Axolotl Spawn Success Rate",
-  "text.autoconfig.shape-shifter-curse-common.option.transformativeOcelotSpawnChance": "Transformative Ocelot Spawn Success Rate",
-  "text.autoconfig.shape-shifter-curse-common.option.transformativeWolfSpawnChance": "Transformative Jackal Wraith Spawn Success Rate",
-  "text.autoconfig.shape-shifter-curse-common.option.transformativeSpiderSpawnChance": "Transformative Spider Spawn Success Rate",
+  "text.autoconfig.shape-shifter-curse-common.option.transformativeBatSpawnChance": "Cursed Bat Spawn Success Rate",
+  "text.autoconfig.shape-shifter-curse-common.option.transformativeAxolotlSpawnChance": "Cursed Axolotl Spawn Success Rate",
+  "text.autoconfig.shape-shifter-curse-common.option.transformativeOcelotSpawnChance": "Cursed Ocelot Spawn Success Rate",
+  "text.autoconfig.shape-shifter-curse-common.option.transformativeWolfSpawnChance": "Cursed Jackal Wraith Spawn Success Rate",
+  "text.autoconfig.shape-shifter-curse-common.option.transformativeSpiderSpawnChance": "Cursed Spider Spawn Success Rate",
   "text.autoconfig.shape-shifter-curse-common.option.curseMoonPhase": "Curse Moon Phase",
   "text.autoconfig.shape-shifter-curse-common.option.allowSleepInCursedMoon": "Allow Sleep In Curse Moon",
   "text.autoconfig.shape-shifter-curse-common.option.enableDebugCommand": "Enable debugging commands without permission restrictions (Do not enable on servers)",
