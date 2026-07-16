@@ -974,7 +974,7 @@
   "codex.form.shape-shifter-curse.snow_fox_2.pros": ["You've adapted better to the frigid magic within your body, allowing you to harness its stronger powers:\n",
     "Snowballs you throw deal more damage. Infused with icy magic, your snowballs can turn water into ice and even solidify lava.\n\n",
     "Your transformed body grants you new muscle memory. While sprinting, timing your jumps correctly enables a triple jump with increasing height.\n",
-    "Mastering jumping techniques now increases your critical jump damage based on fall distance, up to 2x maximum.\n",
+    "Mastering jumping techniques now increases your jump critical damage based on fall distance, up to 2x maximum.\n",
     "Your sprinting speed is faster, and you can move freely through sweet berry bushes.\n",
     "Sweet berries restore more hunger.\n",
     "Foxes trust you and won't flee.\n",
