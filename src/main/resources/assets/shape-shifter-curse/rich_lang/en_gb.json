@@ -417,7 +417,7 @@
     },
     "?\n"],
   "codex.status.before_moon": ["You feel magic stirring within. The cursed moon will rise next night...\n"],
-  "codex.status.under_moon": ["The cursed moon alters your body...\nIts effects fade at dawn. But... perhaps you should utilize this opportunity?\n"],
+  "codex.status.under_moon": ["The cursed moon alters your body...\nIts effects fade at dawn. But... perhaps you should utilise this opportunity?\n"],
 
   "codex.desc.appearance_normal": ["Your body feels no different from usual. Maybe your internal magic needs certain triggers to manifest?"],
   "codex.desc.pros_normal": ["Currently, the magic within grants no noticeable benefits"],
@@ -1090,7 +1090,7 @@
     "Azure-blue flames occasionally appear around your body before slowly fading away\n\n",
     "It's become clear that the magic inherent in this form has been altered by someone else..."],
   "codex.form.shape-shifter-curse.familiar_fox_2.pros": ["Foreign Magic\n",
-    "You feel foreign magic surging within your body. Now, you have learned how to actively utilize your magic reserves...\n",
+    "You feel foreign magic surging within your body. Now, you have learned how to actively utilise your magic reserves...\n",
     "Fox Firebolt: While holding a stick, consume some magic to right-click and launch a straight-flying fireball that deals moderate damage and ignites the target\n\n",
     "By consuming a small amount of magic and right-clicking with a water bottle on corresponding ingredients, you can directly brew Splash Potions of Poison, Instant Health, and Instant Damage in your inventory, 3 at a time. You can now stack 8 identical potions\n",
     "You can absorb more hunger from stronger creatures by right-clicking them empty-handed, while also restoring magic reserves. You can also sense the location of nearby creatures\n",
