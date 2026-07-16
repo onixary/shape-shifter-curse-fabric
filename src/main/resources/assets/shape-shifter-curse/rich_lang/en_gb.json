@@ -695,7 +695,7 @@
     "Rotten flesh is trivial for your new digestive system. You no longer get abnormal hunger\n",
     "Creepers seem strangely afraid of you"],
   "codex.form.shape-shifter-curse.ocelot_0.cons": ["Your body isn't as strong as before - max health slightly decreased\n",
-    "Your digestive system adapts less to non-meat foods - they provide less hunger value"],
+    "Your digestive system adapts less to non-meat foods - they provide lower hunger value"],
   "codex.form.shape-shifter-curse.ocelot_0.instincts": ["You begin to desire",
     {
       "text":" to eat more raw meat", "color":"#c67681"
@@ -830,7 +830,7 @@
   "codex.form.shape-shifter-curse.bat_1.cons": ["Your new finger structure makes using bows/crossbows impossible\n",
     "Membranes and new toe structure prevent wearing chestplates and boots\n",
     "In sunlight, you feel weaker and slower\n",
-    "Your body adapts less to meat - it provides less hunger value"],
+    "Your body adapts less to meat - it provides lower hunger value"],
   "codex.form.shape-shifter-curse.bat_1.instincts": ["You increasingly want to",
     {
       "text":"stay in darkness", "color":"#c67681"
