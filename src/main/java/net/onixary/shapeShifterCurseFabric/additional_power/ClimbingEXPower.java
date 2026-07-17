@@ -26,6 +26,7 @@ public class ClimbingEXPower extends ClimbingPower {
         this.continueClimbCondition = continueClimbCondition;
         this.holdingCondition = holdingCondition;
         this.allowHolding = allowHolding;
+        this.setTicking();
     }
 
     public boolean canHold() {
@@ -36,6 +37,13 @@ public class ClimbingEXPower extends ClimbingPower {
             return entity.isSneaking();
         }
         return this.holdingCondition.test(this.entity);
+    }
+
+    @Override
+    public void tick() {
+        if (this.isActive()) {
+            entity.fallDistance = 0;
+        }
     }
 
     @Override
