@@ -1,12 +1,12 @@
 package net.onixary.shapeShifterCurseFabric.render.tech;
 
-import mod.azure.azurelib.renderer.GeoObjectRenderer;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects;
+import software.bernie.geckolib.renderer.GeoObjectRenderer;
 
 import java.util.ArrayList;
 

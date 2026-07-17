@@ -1,8 +1,5 @@
 package net.onixary.shapeShifterCurseFabric.render.tech;
 
-import dev.emi.trinkets.api.TrinketComponent;
-import dev.emi.trinkets.api.TrinketInventory;
-import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -15,9 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.RotationAxis;
 import net.onixary.shapeShifterCurseFabric.util.Accessory.AccessoryUtils;
-
-import java.util.Map;
-import java.util.Optional;
 
 public class SpiderTPEHR extends ThirdPersonExtraHandItemRender.TPEHR_Render {
     public static final String GROUP_STRING = "hand";
