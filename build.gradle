@@ -50,9 +50,14 @@ repositories {
     //}
 
     // The Maven with the mods source
-    maven { url 'https://maven.azuredoom.com/mods' }
-
-    maven { url 'https://dl.cloudsmith.io/public/azuredoom-mods/azurelib/maven/' }
+    maven {
+        name = 'GeckoLib'
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroupByRegex("software\\.bernie.*")
+            includeGroup("com.eliotlash.mclib")
+        }
+    }
 
     //Owo
     maven { url 'https://maven.wispforest.io/releases/' }
@@ -156,8 +161,10 @@ dependencies {
     //compileOnly "mod.azure.azurelib:azurelib-common-1.20.1:2.0.41"
 
     //Fabric or Quilt
-    modImplementation "mod.azure.azurelib:azurelib-fabric-1.20.1:${azurelib_version}"
-    include "mod.azure.azurelib:azurelib-fabric-1.20.1:${azurelib_version}"
+    modImplementation("software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}")
+    // 可选
+    // include("software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}")
+    implementation("com.eliotlash.mclib:mclib:20")
     //modCompileOnly "maven.modrinth:azurelib:2.1.17"
 
 

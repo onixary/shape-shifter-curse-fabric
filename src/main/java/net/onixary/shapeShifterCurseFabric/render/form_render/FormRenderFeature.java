@@ -4,13 +4,10 @@ import dev.kosmx.playerAnim.api.firstPerson.FirstPersonConfiguration;
 import dev.kosmx.playerAnim.api.firstPerson.FirstPersonMode;
 import dev.kosmx.playerAnim.impl.IAnimatedPlayer;
 import dev.kosmx.playerAnim.impl.animation.AnimationApplier;
-import mod.azure.azurelib.cache.object.BakedGeoModel;
-import mod.azure.azurelib.cache.object.GeoBone;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -26,9 +23,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.cache.object.GeoBone;
 
 import java.util.List;
 
@@ -62,7 +60,7 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
                 PlayerEntityRenderer playerEntityRenderer = (PlayerEntityRenderer) MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(abstractClientPlayerEntity);
                 PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = playerEntityRenderer.getModel();
                 FormModel formModel = (FormModel) formRenderer.getGeoModel();
-                FormAnimatable formAnimatable = formRenderer.getAnimatable();
+                FormAnimatable formAnimatable = formRenderer.realAnimatable;
                 formRenderer.setPlayer(abstractClientPlayerEntity, playerEntityModel.thinArms);
                 matrices.push();
                 matrices.multiply(new Quaternionf().rotateX(180 * MathHelper.RADIANS_PER_DEGREE));
@@ -264,7 +262,7 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
             if (formRenderer == null) {return;}
             PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = playerEntityRenderer.getModel();
             FormModel formModel = (FormModel) formRenderer.getGeoModel();
-            FormAnimatable formAnimatable = formRenderer.getAnimatable();
+            FormAnimatable formAnimatable = formRenderer.realAnimatable;
             formRenderer.setPlayer(player, playerEntityModel.thinArms);
             matrices.push();
             matrices.multiply(new Quaternionf().rotateX(180 * MathHelper.RADIANS_PER_DEGREE));

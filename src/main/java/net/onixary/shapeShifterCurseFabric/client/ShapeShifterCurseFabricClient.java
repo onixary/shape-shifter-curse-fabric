@@ -2,7 +2,6 @@ package net.onixary.shapeShifterCurseFabric.client;
 
 import io.github.apace100.apoli.ApoliClient;
 import io.github.apace100.apoli.component.PowerHolderComponent;
-import mod.azure.azurelib.rewrite.render.armor.AzArmorRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -100,22 +99,6 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		MinionRegisterClient.registerClient();
 	}
 
-    public static void registerAzureArmorGeo(){
-        AzArmorRendererRegistry.register(
-                MorphscaleArmorRenderer::new,
-                RegCustomItem.MORPHSCALE_HEADRING,
-                RegCustomItem.MORPHSCALE_VEST,
-                RegCustomItem.MORPHSCALE_CUISH,
-                RegCustomItem.MORPHSCALE_ANKLET
-        );
-		AzArmorRendererRegistry.register(
-				NetheriteMorphscaleArmorRenderer::new,
-				RegCustomItem.NETHERITE_MORPHSCALE_HEADRING,
-				RegCustomItem.NETHERITE_MORPHSCALE_VEST,
-				RegCustomItem.NETHERITE_MORPHSCALE_CUISH,
-				RegCustomItem.NETHERITE_MORPHSCALE_ANKLET
-		);
-    }
 
 	private static void onClientTick(MinecraftClient minecraftClient){
 		TickManager.tickClientAll();
@@ -247,7 +230,6 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 
 		registerShaderResource();
 		FurGradientRenderLayer.onInitializeClient();
-        registerAzureArmorGeo();
 
 		ManaRegistriesClient.register();
 		RegCustomEntityRenderer.init();

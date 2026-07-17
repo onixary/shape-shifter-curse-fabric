@@ -1,7 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.render.form_render;
 
 import com.google.gson.JsonObject;
-import mod.azure.azurelib.cache.object.GeoBone;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.MinecraftClient;
@@ -23,8 +22,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Matrix4f;
-import org.joml.Vector3d;
+import software.bernie.geckolib.cache.object.GeoBone;
 
 import java.util.*;
 import java.util.function.Predicate;

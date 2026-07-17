@@ -1,13 +1,13 @@
 package net.onixary.shapeShifterCurseFabric.render.form_render;
 
 import com.google.gson.JsonObject;
-import mod.azure.azurelib.cache.object.GeoBone;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.cache.object.GeoBone;
 
 @SuppressWarnings("removal")
 public interface IModelAnimationSystem {

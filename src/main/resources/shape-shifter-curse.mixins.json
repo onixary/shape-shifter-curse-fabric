@@ -31,7 +31,6 @@
     "block.PowderSnowBlockMixin",
     "block.SweetBerryBushBlockMixin",
     "integration.AppleSkin",
-    "integration.AzureLib_AzProvider",
     "integration.ToughAsNailsDrinkInWorldPacketMixin",
     "integration.ToughAsNailsTemperatureHelperImplMixin",
     "integration.ToughAsNailsThirstHandlerMixin",

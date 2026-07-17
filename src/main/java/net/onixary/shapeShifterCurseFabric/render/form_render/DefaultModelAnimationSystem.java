@@ -5,8 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dev.kosmx.playerAnim.api.TransformType;
 import dev.kosmx.playerAnim.core.util.Vec3f;
-import mod.azure.azurelib.cache.object.BakedGeoModel;
-import mod.azure.azurelib.cache.object.GeoBone;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
@@ -29,6 +27,8 @@ import net.onixary.shapeShifterCurseFabric.util.util.CachedDataMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.*;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.cache.object.GeoBone;
 
 import java.lang.Math;
 import java.util.*;
@@ -725,7 +725,7 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModi
             // 有时AzureLib 未能及时注册 GeoBone 因此需要手动注册
             if (model.getAnimationProcessor().getRegisteredBones().isEmpty()) {
                 ShapeShifterCurseFabric.LOGGER.info("GeoBone 未注册, 尝试重新注册模型");
-                BakedGeoModel bakedGeoModel = model.getBakedModel(model.getModelResource(formRenderer.getAnimatable()));
+                BakedGeoModel bakedGeoModel = model.getBakedModel(model.getModelResource(formRenderer.realAnimatable));
                 model.getAnimationProcessor().setActiveModel(bakedGeoModel);
             }
             return null;
