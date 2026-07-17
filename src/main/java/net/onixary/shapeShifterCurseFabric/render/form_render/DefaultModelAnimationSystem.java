@@ -681,6 +681,7 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModi
         model.invertRotForPart(RM_LeftArmGeoBoneID, false, true, true);
         model.invertRotForPart(RM_LeftLegGeoBoneID, false, true, true);
         model.invertRotForPart(RM_RightLegGeoBoneID, false, true, true);
+        FormEyeBlinkController.update(model, player, tickDelta);
         if (neckConfig != null) {
             GeoBone neckHead = neckConfig.getHead(model);
             GeoBone neckRoot = neckConfig.getRoot(model);

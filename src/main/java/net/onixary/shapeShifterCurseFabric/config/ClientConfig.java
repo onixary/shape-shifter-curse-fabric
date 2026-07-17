@@ -20,6 +20,18 @@ public class ClientConfig implements ConfigData {
     public boolean ignoreNoRenderArmPower = false;  // 忽略不渲染手臂的Power
 
     @ConfigEntry.Category("General")
+    @Comment("Minimum blink interval in ticks. Default: 60")
+    public int minBlinkIntervalTick = 60;
+
+    @ConfigEntry.Category("General")
+    @Comment("Maximum blink interval in ticks. Default: 140")
+    public int maxBlinkIntervalTick = 140;
+
+    @ConfigEntry.Category("General")
+    @Comment("Blink duration in ticks. Default: 4")
+    public int blinkTick = 4;
+
+    @ConfigEntry.Category("General")
     @Comment("Use Bigger(2x) Start Book Interface. Default: false")
     public boolean newStartBookForBiggerScreen = false;  // 菜单缩放至少为4
 
