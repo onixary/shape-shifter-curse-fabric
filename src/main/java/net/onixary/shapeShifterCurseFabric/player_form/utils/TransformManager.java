@@ -116,7 +116,7 @@ public class TransformManager {
         IForm form = data.transformEndForm;
         EffectManager.clearTransformativeEffect(player);
         FormUtils._setForm(player, form);
-        FormUtils.updateFormHistory(player, data.transformStartForm, form);
+        FormUtils.updateFormHistory(player, form);
         sendClientFirstPersonReset(player);
     }
 
