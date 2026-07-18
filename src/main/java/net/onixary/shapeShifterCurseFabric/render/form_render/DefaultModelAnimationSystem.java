@@ -25,6 +25,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.render.form_render.sub_controller.FormEyeBlinkController;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.util.CachedDataMap;
+import net.onixary.shapeShifterCurseFabric.util.util.ICachedDataMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.*;
@@ -327,8 +328,8 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModi
         }
     }
 
-    private static final CachedDataMap<UUID, PlayerEntity, tailData> tailDataMap = new CachedDataMap<>(player -> new tailData(), Entity::getUuid);
-    private static final CachedDataMap<UUID, PlayerEntity, neckData> neckDataMap = new CachedDataMap<>(neckData::new, Entity::getUuid);
+    private static final ICachedDataMap<UUID, PlayerEntity, tailData> tailDataMap = new CachedDataMap<>(player -> new tailData(), Entity::getUuid);
+    private static final ICachedDataMap<UUID, PlayerEntity, neckData> neckDataMap = new CachedDataMap<>(neckData::new, Entity::getUuid);
 
     private static class tailData {
         private float tailDragAmount = 0.0F;

@@ -8,6 +8,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.config.ClientConfig;
 import net.onixary.shapeShifterCurseFabric.render.form_render.FormModel;
 import net.onixary.shapeShifterCurseFabric.util.util.CachedDataMap;
+import net.onixary.shapeShifterCurseFabric.util.util.ICachedDataMap;
 import software.bernie.geckolib.cache.object.GeoBone;
 
 import java.util.Random;
@@ -20,7 +21,7 @@ public final class FormEyeBlinkController {
     private static final int DEFAULT_MIN_BLINK_INTERVAL_TICK = 60;
     private static final int DEFAULT_MAX_BLINK_INTERVAL_TICK = 140;
     private static final int DEFAULT_BLINK_TICK = 4;
-    private static final CachedDataMap<UUID, PlayerEntity, BlinkState> STATE_MAP = new CachedDataMap<>(player -> new BlinkState(), Entity::getUuid);
+    private static final ICachedDataMap<UUID, PlayerEntity, BlinkState> STATE_MAP = new CachedDataMap<>(player -> new BlinkState(), Entity::getUuid);
 
     // "eye_blink": {
     //     "eye": "eyeRoot",
