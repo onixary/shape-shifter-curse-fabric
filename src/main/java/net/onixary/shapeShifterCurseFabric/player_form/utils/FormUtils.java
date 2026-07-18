@@ -176,6 +176,12 @@ public class FormUtils {
         PlayerFormComponent.COMPONENT.sync(player);
     }
 
+    public static void clearPlayerFormHistory(PlayerEntity player) {
+        PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+        component.formHistory.clear();
+        component.sync();
+    }
+
     public static boolean isFormEqual(@Nullable IForm form1, @Nullable IForm form2) {
         return form1 != null && form2 != null && form1.isEquals(form2);
     }

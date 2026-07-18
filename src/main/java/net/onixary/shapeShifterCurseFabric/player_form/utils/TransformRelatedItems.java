@@ -92,7 +92,7 @@ public class TransformRelatedItems {
             EffectManager.clearTransformativeEffect(player);
         }
         if(!RegPlayerForms.ORIGINAL_SHIFTER.isPlayerForm(player) && !RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)){
-            TransformManager.startTransform(player, RegPlayerForms.ORIGINAL_SHIFTER, null);
+            TransformManager.forceTransform(player, RegPlayerForms.ORIGINAL_SHIFTER, false);
         }
     }
 

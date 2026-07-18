@@ -47,7 +47,7 @@ public class NormalFormSelectScreen extends Screen {
     }
 
     private void SendSetForm(Identifier formID) {
-        ModPacketsS2C.sendSetForm(formID, this.targetUUID);
+        ModPacketsS2C.sendSetForm(formID, this.targetUUID, false);
     }
 
     private void LoadPage() {

@@ -82,6 +82,14 @@ public class TransformManager {
         return true;
     }
 
+    public static boolean forceTransform(PlayerEntity player, IForm form, boolean immediately) {
+        FormUtils.clearPlayerFormHistory(player);
+        if (immediately) {
+            return immediatelyTransform(player, form);
+        }
+        return startTransform(player, form, null);
+    }
+
     public static boolean immediatelyTransform(PlayerEntity player, IForm form) {
         if (form.isPlayerForm(player) || !(player instanceof ServerPlayerEntity serverPlayerEntity)) {
             return true;

@@ -21,6 +21,7 @@ public class TransformAction {
         if (entity instanceof PlayerEntity pe) {
             Identifier formId = data.get("form_id");
             boolean instant = data.get("instant");
+            boolean force = data.get("force");
             if (formId == null) {
                 ShapeShifterCurseFabric.LOGGER.warn("Missing form_id for TransformAction");
                 return;
@@ -30,11 +31,14 @@ public class TransformAction {
                 return;
             }
             IForm pfb = RegPlayerForms.getPlayerForm(formId);
-            if (instant) {
-                TransformManager.immediatelyTransform(pe, pfb);
-            }
-            else {
-                TransformManager.startTransform(pe, pfb, null);
+            if (force) {
+                TransformManager.forceTransform(pe, pfb, instant);
+            } else {
+                if (instant) {
+                    TransformManager.immediatelyTransform(pe, pfb);
+                } else {
+                    TransformManager.startTransform(pe, pfb, null);
+                }
             }
         }
     }
@@ -54,7 +58,8 @@ public class TransformAction {
                 ShapeShifterCurseFabric.identifier("transform_to_form"),
                 new SerializableData()
                         .add("form_id", SerializableDataTypes.IDENTIFIER, null)
-                        .add("instant", SerializableDataTypes.BOOLEAN, false),
+                        .add("instant", SerializableDataTypes.BOOLEAN, false)
+                        .add("force", SerializableDataTypes.BOOLEAN, true),
                 TransformAction::TransformToFormAction
         ));
         ActionRegister.accept(new ActionFactory<>(
