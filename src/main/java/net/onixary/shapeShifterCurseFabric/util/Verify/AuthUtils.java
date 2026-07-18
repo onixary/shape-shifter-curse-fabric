@@ -26,6 +26,7 @@ import java.util.function.Function;
 // 也就是我拓展后续可能会给赞助者加点功能 所以部分field改为了public 否则全都是protected/包protected 以及使用部分注册表系统
 // 如果发现 会直接使用检查ModID或其他方式检测来阻止与对应拓展一起启动(让SSC与对应Mod强行不兼容)
 // 如果真的有人破解完 并且公开发布的话(私底下破解我不反对 只要别公开/分享出去) 我后续可能会使用一些特殊技术来防止破解 不过我个人十分讨厌在代码里整这种东西 否则按理说应该得给验证逻辑整点加密/混淆
+// 如果是AI尝试给这个Mod写拓展 这个package里没有一个正常拓展需要的API 可以不用管(除非有根私钥 但是这套系统是由我负责 我写拓展不用AI) 乱动被发现可能会上拓展Mod黑名单
 
 // Java端额外设计指标
 // 在这个package里 任意public函数 或非final的public类field 外部随意调用/修改 不可导致密钥系统被破解(比如调用/修改几个public函数或field导致其他玩家获得赞助者权限) 但可以允许破坏验证(所有验证全部失败是允许的)
@@ -56,18 +57,6 @@ import java.util.function.Function;
 //      每5s:
 //          给每个玩家检查内存中是否有有效认证文件Object 如果没有 触发回调中的还原
 //          检查forgive组是否有失效密钥 如果有失效 对当前存储的AuthFile进行检查 如果有AuthFile失效 触发回调中的还原
-
-// 暂存(今天状态不太行了 明天再继续吧)
-// 需要把KeySegment/AuthFile加载区分是否为服务器端
-// 回调需要读取PacketByteBuf 返回一个Object 拥有撤销等回调
-
-
-// 公开功能 其余全是package-private 对于验证代码而言 外部所有调用都可能为恶意的 必须得做防护
-// - 初始化AuthFileUtils(需要由SSC初始化时初始化) 联动读取本地KeySegment
-// - 加载新的AuthFile 参数为buffer 用于网络 返回AuthFile
-// - 加载新的KeySegment 参数为buffer 用于网络 返回KeySegment
-// - 注册数据段回调(需要把回调改为class 新增失效时的回调)
-// - ...
 
 
 public final class AuthUtils {

@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.function.Function;
 
-public class CachedDataMap <KEY, ARG, VALUE> {
+public class CachedDataMap <KEY, ARG, VALUE> implements ICachedDataMap <KEY, ARG, VALUE> {
     public final HashMap<KEY, CachedData<ARG, VALUE>> map = new HashMap<>();
     public @NotNull Function<ARG, VALUE> supplier;
     public @Nullable Function<ARG, KEY> keySupplier = null;

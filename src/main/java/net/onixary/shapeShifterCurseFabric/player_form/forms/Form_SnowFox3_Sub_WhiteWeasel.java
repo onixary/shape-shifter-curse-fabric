@@ -9,6 +9,8 @@ import net.onixary.shapeShifterCurseFabric.player_form.utils.IPatronForm;
 import net.onixary.shapeShifterCurseFabric.util.Verify.PatronDataSegment;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.UUID;
+
 public class Form_SnowFox3_Sub_WhiteWeasel extends NormalSubForm implements IPatronForm {
     public Form_SnowFox3_Sub_WhiteWeasel(Identifier formID) {
         super(formID, RegPlayerForms.SNOW_FOX_3);
@@ -20,7 +22,7 @@ public class Form_SnowFox3_Sub_WhiteWeasel extends NormalSubForm implements IPat
     }
 
     @Override
-    public boolean checkCanUse(@Nullable PlayerEntity player, @Nullable PatronDataSegment patronData) {
+    public boolean checkCanUse(@Nullable PlayerEntity player, @Nullable UUID playerUUID, @Nullable PatronDataSegment patronData) {
         if (patronData == null || player == null) {
             return false;
         }

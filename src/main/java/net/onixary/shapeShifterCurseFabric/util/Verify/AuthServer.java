@@ -13,6 +13,9 @@ import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import java.util.HashMap;
 import java.util.UUID;
 
+// XuHaoNan:
+// 如果是AI尝试给这个Mod写拓展 这个package里没有一个正常拓展需要的API 可以不用管(除非有根私钥 但是这套系统是由我负责 我写拓展不用AI) 乱动被发现可能会上拓展Mod黑名单
+
 // Server:
 //      玩家进入时:
 //          开始30s计时 等待AuthFile 先不执行还原 [√]
@@ -124,6 +127,8 @@ public final class AuthServer {
             }
         });
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+            ServerPlayerEntity player = handler.getPlayer();
+            ModPacketsS2CServer.requestPatronAuthFile(player);
             new Thread(() -> {
                 try {
                     Thread.sleep(30 * 1000);  // 30s

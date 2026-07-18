@@ -1,0 +1,9 @@
+{
+  "AuthMethod": "ONLY_FOR_TEST",
+  "UUID": "380df991f603344ca090369bad2a924a",
+  "ExpiresIn": 31556736,
+  "PermissionLevel": 5,
+  "ExtraData": {
+    "IsAuthor": "AQ=="
+  }
+}

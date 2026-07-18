@@ -38,6 +38,11 @@
         "ear_a": [0],
         "ear_b": [0]
       }
+    },
+    "eye_blink": {
+      "eye": "eyeRoot",
+      "open_scale": 1.0,
+      "close_scale": 0.01
     }
   }
 }
