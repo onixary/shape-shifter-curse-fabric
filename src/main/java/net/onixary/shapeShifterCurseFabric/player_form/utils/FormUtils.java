@@ -238,12 +238,14 @@ public class FormUtils {
         List<IForm> formHistory = getPlayerFormHistory(player);
         formHistory.clear();
         formHistory.add(form);
+        checkHistorySize(formHistory, 20);
         savePlayerFormHistory(player);
     }
 
     public static void pushFormHistory(PlayerEntity player, IForm form) {
         List<IForm> formHistory = getPlayerFormHistory(player);
         formHistory.add(form);
+        checkHistorySize(formHistory, 20);
         savePlayerFormHistory(player);
     }
 
@@ -258,6 +260,12 @@ public class FormUtils {
         savePlayerFormHistory(player);
     }
 
+    public static void checkHistorySize(List<IForm> formHistory, int maxSize) {
+        while (formHistory.size() > maxSize && !formHistory.isEmpty()) {
+            formHistory.remove(0);
+        }
+    }
+
     public static void updateFormHistory(PlayerEntity player, IForm formA, IForm formB) {
         // 如果History为[C, B, A] formA == A formB == B History -> [C, B] 否则向后增加 formB
         List<IForm> formHistory = getPlayerFormHistory(player);
@@ -266,6 +274,7 @@ public class FormUtils {
         } else {
             formHistory.add(formB);
         }
+        checkHistorySize(formHistory, 20);
         savePlayerFormHistory(player);
     }
 
