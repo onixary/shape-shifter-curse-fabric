@@ -110,6 +110,11 @@
       "max_yaw_deg": 120.0,
       "max_pitch_up_deg": 70.0,
       "max_pitch_down_deg": 60.0
+    },
+    "eye_blink": {
+      "eye": "eyeRoot",
+      "open_scale": 1.0,
+      "close_scale": 0.01
     }
   }
 }

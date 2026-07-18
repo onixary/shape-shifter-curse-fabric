@@ -35,6 +35,11 @@
         "tail_leg_l": [0, 1],
         "tail_leg_r": [0, 1]
       }
+    },
+    "eye_blink": {
+      "eye": "eyeRoot",
+      "open_scale": 1.0,
+      "close_scale": 0.01
     }
   }
 }

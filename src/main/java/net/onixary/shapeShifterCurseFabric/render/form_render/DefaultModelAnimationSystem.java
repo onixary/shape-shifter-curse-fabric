@@ -22,6 +22,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
+import net.onixary.shapeShifterCurseFabric.render.form_render.sub_controller.FormEyeBlinkController;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.util.CachedDataMap;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +34,6 @@ import software.bernie.geckolib.cache.object.GeoBone;
 import java.lang.Math;
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModifyHead_MAS {
 
@@ -49,6 +49,8 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModi
     public String RM_RightArmGeoBoneID = "bipedRightArm";
     public String RM_LeftLegGeoBoneID = "bipedLeftLeg";
     public String RM_RightLegGeoBoneID = "bipedRightLeg";
+
+    public FormEyeBlinkController eyeBlinkController = null;
 
     public partTransform headTransform = null;
     public partTransform bodyTransform = null;
@@ -468,6 +470,14 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModi
                 ShapeShifterCurseFabric.LOGGER.error("Error parsing neck_config", e);
             }
         }
+        if (json.has("eye_blink")) {
+            try {
+                this.eyeBlinkController = new FormEyeBlinkController(json.getAsJsonObject("eye_blink"));
+            } catch (Exception e) {
+                this.eyeBlinkController = null;
+                ShapeShifterCurseFabric.LOGGER.error("Error parsing eye_blink", e);
+            }
+        }
     }
 
     public void ProcessExtraBone(FormModel m, PlayerEntity player, String AnimBoneID, String OriginFursBoneID) {
@@ -681,7 +691,9 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModi
         model.invertRotForPart(RM_LeftArmGeoBoneID, false, true, true);
         model.invertRotForPart(RM_LeftLegGeoBoneID, false, true, true);
         model.invertRotForPart(RM_RightLegGeoBoneID, false, true, true);
-        FormEyeBlinkController.update(model, player, tickDelta);
+        if (eyeBlinkController != null) {
+            eyeBlinkController.update(model, player, tickDelta);
+        }
         if (neckConfig != null) {
             GeoBone neckHead = neckConfig.getHead(model);
             GeoBone neckRoot = neckConfig.getRoot(model);
