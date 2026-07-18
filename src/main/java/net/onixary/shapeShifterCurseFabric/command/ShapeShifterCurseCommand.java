@@ -28,15 +28,12 @@ import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent
 import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.util.FormColorData;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
-import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 import net.onixary.shapeShifterCurseFabric.util.Verify.PatronDataSegment;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import static net.minecraft.server.command.CommandManager.argument;
@@ -233,7 +230,7 @@ public class ShapeShifterCurseCommand {
             return 0;
         }
         try {
-            boolean success = TransformManager.immediatelyTransform(target, form);
+            boolean success = TransformManager.forceTransform(target, form, false);
             if (!success) {
                 commandContext.getSource().sendError(failText);
             }
@@ -258,7 +255,7 @@ public class ShapeShifterCurseCommand {
             return 0;
         }
         try {
-            boolean success = TransformManager.startTransform(target, form, null);
+            boolean success = TransformManager.forceTransform(target, form, false);
             if (!success) {
                 commandContext.getSource().sendError(failText);
             }

@@ -417,10 +417,11 @@ public class ModPacketsS2C {
         ClientPlayNetworking.send(SET_PATRON_FORM, buf);
     }
 
-    public static void sendSetForm(Identifier formID, UUID target) {
+    public static void sendSetForm(Identifier formID, UUID target, boolean immediate) {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeUuid(target);
         buf.writeIdentifier(formID);
+        buf.writeBoolean(immediate);
         ClientPlayNetworking.send(SET_FORM, buf);
     }
 

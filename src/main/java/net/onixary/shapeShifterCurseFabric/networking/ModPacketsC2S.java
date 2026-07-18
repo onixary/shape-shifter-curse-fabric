@@ -251,6 +251,7 @@ public class ModPacketsC2S {
         }
         Identifier formId = packetByteBuf.readIdentifier();
         IForm form = RegPlayerForms.getPlayerForm(formId);
+        boolean immediately = packetByteBuf.readBoolean();
         // 网络包可以伪造 所以加个权限验证
         if (playerEntity.getCommandSource().hasPermissionLevel(2) || playerEntity.getAbilities().creativeMode) {
             minecraftServer.execute(() -> {
@@ -258,7 +259,7 @@ public class ModPacketsC2S {
                     ShapeShifterCurseFabric.LOGGER.warn("[SetForm] Player is null");
                     return;
                 }
-                TransformManager.startTransform(target, form, null);
+                TransformManager.forceTransform(target, form, immediately);
             });
             return;
         }
@@ -279,7 +280,7 @@ public class ModPacketsC2S {
                     ShapeShifterCurseFabric.LOGGER.warn("[SetPatronForm] Player is null");
                     return;
                 }
-                TransformManager.startTransform(playerEntity, form, null);
+                TransformManager.forceTransform(playerEntity, form, false);
             });
             return;
         }
@@ -290,7 +291,7 @@ public class ModPacketsC2S {
                     return;
                 }
                 if (pfd.IsPlayerCanUse(playerEntity)) {
-                    TransformManager.startTransform(playerEntity, pfd, null);
+                    TransformManager.forceTransform(playerEntity, pfd, false);
                 }
                 else {
                     // 一般情况下，这里不会执行，因为客户端在发送请求前已经进行了检查 如果触发了这里，说明客户端和服务器之间的数据不同步(小概率 如果不同步早就掉线了) 或者是客户端作弊(大概率)
