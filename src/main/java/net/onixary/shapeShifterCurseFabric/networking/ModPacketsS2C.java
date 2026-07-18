@@ -72,6 +72,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SET_NO_JUMP_TICK, ModPacketsS2C::receiveSetNoJumpTick);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.OPEN_FORM_COLOR_SELECT_MENU, ModPacketsS2C::receiveOpenFCSMenu);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.MODIFY_FCD_DATA, ModPacketsS2C::receiveModifyFCDData);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.REQUEST_PATRON_AUTH_FILE, ModPacketsS2C::receiveRequestPatronAuthFile);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.MELT_AUTH_SUB_KEY, ModPacketsS2C::receiveNewSubKey);
     }
 
@@ -586,6 +587,13 @@ public class ModPacketsS2C {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeByteArray(authFile.getRaw());
         ClientPlayNetworking.send(UPLOAD_PATRON_AUTH_FILE, buf);
+    }
+
+    private static void receiveRequestPatronAuthFile(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        UUID playerID = buf.readUuid();
+        client.execute(() -> {
+            AuthClient.requestAuthFile(playerID);
+        });
     }
 
     private static void receiveNewSubKey(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {

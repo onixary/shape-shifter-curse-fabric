@@ -312,6 +312,12 @@ public class ModPacketsS2CServer {
         ServerPlayNetworking.send(player, ModPackets.MODIFY_FCD_DATA, buf);
     }
 
+    public static void requestPatronAuthFile(ServerPlayerEntity player) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeUuid(player.getUuid());
+        ServerPlayNetworking.send(player, ModPackets.REQUEST_PATRON_AUTH_FILE, buf);
+    }
+
     public static void sendNewSubKey(ServerPlayerEntity player, KeySegment newKey) {
         if (newKey == null) {
             ShapeShifterCurseFabric.LOGGER.error("newKey is null");

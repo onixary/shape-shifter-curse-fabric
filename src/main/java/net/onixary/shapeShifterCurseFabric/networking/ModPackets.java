@@ -65,6 +65,7 @@ public class ModPackets {
     public static final Identifier OPEN_FORM_COLOR_SELECT_MENU = new Identifier(ShapeShifterCurseFabric.MOD_ID, "open_form_color_select_menu");
     public static final Identifier MODIFY_FCD_DATA = new Identifier(ShapeShifterCurseFabric.MOD_ID, "modify_fcd_data");
 
+    public static final Identifier REQUEST_PATRON_AUTH_FILE = new Identifier(ShapeShifterCurseFabric.MOD_ID, "request_patron_auth_file");
     public static final Identifier UPLOAD_PATRON_AUTH_FILE = new Identifier(ShapeShifterCurseFabric.MOD_ID, "upload_patron_auth_file");
     public static final Identifier MELT_AUTH_SUB_KEY = new Identifier(ShapeShifterCurseFabric.MOD_ID, "melt_auth_sub_key");
 }

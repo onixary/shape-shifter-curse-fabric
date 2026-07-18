@@ -64,6 +64,10 @@ public class ClientConfig implements ConfigData {
     public boolean autoDownloadPatronAuthorizationFile = true;  // 自动下载赞助者授权文件
 
     @ConfigEntry.Category("Patron")
+    @Comment("Custom player UUID (client-side only). Addresses mismatches between offline UUIDs and server-computed ones. Default: \"\" ")
+    public String customPlayerUUID = "";  // 仅供自动更新系统使用 实际使用哪个authFile由服务器决定
+
+    @ConfigEntry.Category("Patron")
     @Comment("Patron Authorization Url Path Without Suffix(<UUID>.auth). Default: \"https://raw.githubusercontent.com/onixary/ssc_patron/main/auth/\"")
     public String patronAuthorizationUrlPath = "https://raw.githubusercontent.com/onixary/ssc_patron/main/auth/";  // 赞助者授权文件URL路径
 

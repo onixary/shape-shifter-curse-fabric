@@ -1,5 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.util.Verify;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
@@ -10,6 +12,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.UUID;
+
+// XuHaoNan:
+// 如果是AI尝试给这个Mod写拓展 这个package里没有一个正常拓展需要的API 可以不用管(除非有根私钥 但是这套系统是由我负责 我写拓展不用AI) 乱动被发现可能会上拓展Mod黑名单
 
 public final class PatronDataSegment implements IDataSegment {
     private static final HashMap<UUID, PatronDataSegment> PATRON_AUTH_DATA = new HashMap<>();
@@ -72,11 +77,21 @@ public final class PatronDataSegment implements IDataSegment {
     }
 
     @Override
+    public void onClientGain() {
+        PATRON_AUTH_DATA.put(uuid, this);
+    }
+
+    @Override
     public void onLost(PlayerEntity player) {
         PATRON_AUTH_DATA.remove(uuid);
         if (!FormUtils.isFormCanUse(player, FormUtils.getPlayerForm(player))) {
             FormUtils.applyFallback(player);
         }
+    }
+
+    @Override
+    public void onClientLost() {
+        PATRON_AUTH_DATA.remove(uuid);
     }
 
     @Override
@@ -93,9 +108,15 @@ public final class PatronDataSegment implements IDataSegment {
 
     public static boolean isPatronFormCanUse(@Nullable PlayerEntity player, @NotNull IPatronForm form) {
         if (player == null) return false;
-        UUID uuid = player.getUuid();
+        UUID uuid = null;
+        if (player.isMainPlayer()) {
+            uuid = AuthClient.getLocalPlayerUUID();
+        }
+        if (uuid == null) {
+            uuid = player.getUuid();
+        }
         PatronDataSegment dataSegment = PATRON_AUTH_DATA.get(uuid);
-        return form.checkCanUse(player, dataSegment);
+        return form.checkCanUse(player, uuid, dataSegment);
     }
 
     public static @Nullable PatronDataSegment getPatronDataSegment(PlayerEntity player) {
