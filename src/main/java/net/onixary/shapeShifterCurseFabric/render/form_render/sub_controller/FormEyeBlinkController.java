@@ -14,7 +14,7 @@ import java.util.Random;
 import java.util.UUID;
 
 public final class FormEyeBlinkController {
-    public String EYE_ROOT_BONE = "eyeRoot";
+    public String EYE_ROOT_BONE = null;
     public float OPEN_SCALE = 1.0f;
     public float CLOSED_SCALE = 0.01f;
     private static final int DEFAULT_MIN_BLINK_INTERVAL_TICK = 60;
@@ -42,6 +42,9 @@ public final class FormEyeBlinkController {
     }
 
     public void update(FormModel model, PlayerEntity player, float tickDelta) {
+        if (EYE_ROOT_BONE == null) {
+            return;
+        }
         GeoBone eyeRoot = model.getCachedGeoBone(EYE_ROOT_BONE);
         if (eyeRoot == null) {
             return;
