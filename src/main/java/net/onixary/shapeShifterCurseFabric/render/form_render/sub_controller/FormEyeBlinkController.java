@@ -20,7 +20,6 @@ public final class FormEyeBlinkController {
     private static final int DEFAULT_MIN_BLINK_INTERVAL_TICK = 60;
     private static final int DEFAULT_MAX_BLINK_INTERVAL_TICK = 140;
     private static final int DEFAULT_BLINK_TICK = 4;
-    // WeakHashMap 不能存储这种需要持续保存的数据 GC会随时清掉BlinkState 弱引用只能用在已经有别处存储了这个Object时才能用
     private static final CachedDataMap<UUID, PlayerEntity, BlinkState> STATE_MAP = new CachedDataMap<>(player -> new BlinkState(), Entity::getUuid);
 
     // "eye_blink": {
