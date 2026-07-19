@@ -1064,5 +1064,6 @@
   "text.autoconfig.shape-shifter-curse-client.category.Patron": "Patron Configuration (Work in Progress - For Developer Testing Only)",
   "text.autoconfig.shape-shifter-curse-client.option.autoDownloadPatronAuthorizationFile": "Enable automatic authorization file updates",
   "text.autoconfig.shape-shifter-curse-client.option.customPlayerUUID": "Current UUID used by the auto-update system (leave empty to use the player's current UUID)",
-  "text.autoconfig.shape-shifter-curse-client.option.patronAuthorizationUrlPath": "Authorization file server URL"
+  "text.autoconfig.shape-shifter-curse-client.option.patronAuthorizationUrlPath": "Authorization file server URL",
+  "text.autoconfig.shape-shifter-curse-common.option.enableCursedMoonTransform": "Enable Cursed Moon Transform"
 }

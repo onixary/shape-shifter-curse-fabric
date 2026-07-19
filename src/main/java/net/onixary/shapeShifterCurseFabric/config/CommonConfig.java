@@ -40,6 +40,10 @@ public class CommonConfig implements ConfigData {
     public boolean allowSleepInCursedMoon = false;
 
     @ConfigEntry.Category("General")
+    @Comment("Enable Cursed Moon Transform. Default: true")
+    public boolean enableCursedMoonTransform = true;
+
+    @ConfigEntry.Category("General")
     @Comment("Enable Debug Command (PermissionLevel = 0). Default: false")
     public boolean enableDebugCommand = false;
 
