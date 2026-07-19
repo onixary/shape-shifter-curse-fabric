@@ -72,7 +72,7 @@ public class CursedMoon {
         component.lastTransformByCure = false;
         component.BeforeCursedMoonAppliedForm = null;
         component.AfterCursedMoonAppliedForm = null;
-        if (!RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) {
+        if (!RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player) && ShapeShifterCurseFabric.commonConfig.enableCursedMoonTransform) {
             IForm nowForm = component.nowForm;
             IForm targetForm = component.nowForm._getNextForm(player, ITransformReason.CursedMoon);
             if (!nowForm.isEquals(targetForm)) {

@@ -1331,6 +1331,7 @@
   "text.autoconfig.shape-shifter-curse-common.option.transformativeSpiderSpawnChance": "Cursed Spider Spawn Success Rate",
   "text.autoconfig.shape-shifter-curse-common.option.curseMoonPhase": "Cursed Moon Phase",
   "text.autoconfig.shape-shifter-curse-common.option.allowSleepInCursedMoon": "Allow sleep in Cursed Moon",
+  "text.autoconfig.shape-shifter-curse-common.option.enableCursedMoonTransform": "Enable Cursed Moon Transform",
   "text.autoconfig.shape-shifter-curse-common.option.enableDebugCommand": "Enable debugging commands without permission restrictions (do not enable on servers)",
   "text.autoconfig.shape-shifter-curse-common.option.enableFullStackUpgrade": "Upgrade recipe can upgrade full stack",
   "text.autoconfig.shape-shifter-curse-common.option.enableFoodHabitSystem": "Enable food habit system",
