@@ -230,7 +230,7 @@ public class ShapeShifterCurseCommand {
             return 0;
         }
         try {
-            boolean success = TransformManager.forceTransform(target, form, false);
+            boolean success = TransformManager.forceTransform(target, form, true);
             if (!success) {
                 commandContext.getSource().sendError(failText);
             }
