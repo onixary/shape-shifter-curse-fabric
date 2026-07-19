@@ -1,7 +1,16 @@
 {
     "type": "shape-shifter-curse:crawling",
     "condition": {
-        "type": "apoli:sneaking"
+        "type": "apoli:and",
+        "conditions": [
+            {
+                "type": "apoli:sneaking"
+            },
+            {
+                "type": "apoli:swimming",
+                "inverted": true
+            }
+        ]
     },
     "scale": 1.0,
     "eye_scale": 1.0,
