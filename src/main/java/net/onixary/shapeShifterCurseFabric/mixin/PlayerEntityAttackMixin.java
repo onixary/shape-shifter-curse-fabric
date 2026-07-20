@@ -13,6 +13,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.AlwaysSweepingPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.CriticalDamageModifierPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.EnhancedFallingAttackPower;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.*;
 
 import java.util.List;
@@ -42,7 +43,9 @@ public abstract class PlayerEntityAttackMixin {
     }
 
     // 直接改暴击的常量岂不是兼容性更好 对了 之前的版本会导致攻击附魔暴击伤害计算错误
-    @ModifyExpressionValue(method = "attack(Lnet/minecraft/entity/Entity;)V", at = @At(value = "CONSTANT", args = {"floatValue=1.5F"}))
+    // 修改常量容易出现量子态(你观测(打断点 打日志(这个不是100%))就能生效 不观测就不生效) 而且日志里的值是正确的 但就是没生效(可能和常量优化有关系) 调了快1个小时了
+    // @ModifyExpressionValue(method = "attack(Lnet/minecraft/entity/Entity;)V", at = @At(value = "CONSTANT", args = {"floatValue=1.5F"}))
+    @ModifyVariable(method = "attack(Lnet/minecraft/entity/Entity;)V", ordinal = 0, at = @At(value = "STORE", ordinal = 2))
     private float modifyCritMultiplier(float critMultiplier, @Local(ordinal = 0, argsOnly = true) Entity target) {
         PlayerEntity player = (PlayerEntity) (Object) this;
         float finalMultiplier = critMultiplier;
