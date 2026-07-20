@@ -37,7 +37,7 @@ public class CriticalDamageModifierPower extends Power {
                 ShapeShifterCurseFabric.identifier("critical_damage_modifier"),
                 new SerializableData()
                         .add("action", ApoliDataTypes.ENTITY_ACTION, null)
-                        .add("multiplier", SerializableDataTypes.FLOAT, 1.5f),
+                        .add("multiplier", SerializableDataTypes.FLOAT, 1.0f),
                 data -> (type, entity) -> new CriticalDamageModifierPower(
                         type,
                         entity,
