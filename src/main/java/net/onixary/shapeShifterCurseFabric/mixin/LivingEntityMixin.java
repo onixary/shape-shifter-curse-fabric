@@ -1,5 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.integration.ModifyValueCallback;
@@ -363,10 +365,10 @@ public abstract class LivingEntityMixin {
         }
     }
 
-    @Redirect(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damageShield(F)V"))
-    private void damageShield(LivingEntity instance, float amount) {
+    @WrapOperation(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damageShield(F)V"))
+    private void damageShield(LivingEntity instance, float amount, Operation<Void> original) {
         if (!this.bypassNextShieldDamage) {
-            instance.damageShield(amount);
+            original.call(instance, amount);
         }
         this.bypassNextShieldDamage = false;
     }

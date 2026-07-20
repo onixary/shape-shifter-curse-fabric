@@ -1,20 +1,18 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.AlwaysSweepingPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.CriticalDamageModifierPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.EnhancedFallingAttackPower;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 import java.util.List;
 
@@ -47,16 +45,16 @@ public abstract class PlayerEntityAttackMixin {
      * 精确注入到 attack 方法中，在原版暴击伤害计算之后修改伤害值。
      * local variable `f` (float) at index 2.
      */
-    @Redirect(
+    @WrapOperation(
             method = "attack(Lnet/minecraft/entity/Entity;)V",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/entity/Entity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"
             )
     )
-    private boolean modifyCritDamage(Entity target, DamageSource source, float amount, @Local(ordinal = 2) boolean isCrit) {
+    private boolean modifyCritDamage(Entity target, DamageSource source, float amount, Operation<Boolean> original, @Local(ordinal = 2) boolean isCrit) {
         if (!isCrit) {
-            return target.damage(source, amount);
+            return original.call(target, source, amount);
         }
 
         PlayerEntity player = (PlayerEntity) (Object) this;
@@ -113,6 +111,6 @@ public abstract class PlayerEntityAttackMixin {
             enhancedCritDamage = enhancedCritDamage * fallMultiplier;
         }
 
-        return target.damage(source, enhancedCritDamage);
+        return original.call(target, source, enhancedCritDamage);
     }
 }

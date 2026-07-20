@@ -1,17 +1,14 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Environment(EnvType.CLIENT)
 @Mixin(AbstractClientPlayerEntity.class)
@@ -43,24 +40,16 @@ public abstract class PlayerEntitySpeedFOVMixin {
     @Unique  // 2.5
     private final float nowSpeedMinMul = 2.5f * 2 - 1.0f;
 
-    @Unique
-    private float shape_shifter_curse$originalWalkSpeed;
-
     // 旧的会破坏望远镜等FOV修改 尝试用新的方法 为了减少冲突不用重定向
     // f *= ((float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED) / this.getAbilities().getWalkSpeed() + 1.0F) / 2.0F;
-    @Inject(method = "getFovMultiplier", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerAbilities;getWalkSpeed()F"))
-    private void shape_shifter_curse$modifyWalkSpeed(CallbackInfoReturnable<Float> cir) {
-        shape_shifter_curse$originalWalkSpeed = ((AbstractClientPlayerEntity) (Object) this).getAbilities().getWalkSpeed();
-        if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm((AbstractClientPlayerEntity) (Object) this)) {
-            return;
+    @ModifyExpressionValue(method = "getFovMultiplier", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerAbilities;getWalkSpeed()F"))
+    private float shape_shifter_curse$modifyWalkSpeed(float original) {
+        var self = (AbstractClientPlayerEntity) (Object) this;
+        if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(self)) {
+            return original;
         }
-        float nowSpeed = (float)(((AbstractClientPlayerEntity) (Object) this).getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
-        float targetWalkSpeed = Math.min(nowSpeedMinMul * nowSpeed, Math.max(nowSpeedMaxMul * nowSpeed, shape_shifter_curse$originalWalkSpeed));
-        ((AbstractClientPlayerEntity) (Object) this).getAbilities().setWalkSpeed(targetWalkSpeed);
+        float nowSpeed = (float) ((self).getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
+        return Math.min(nowSpeedMinMul * nowSpeed, Math.max(nowSpeedMaxMul * nowSpeed, original));
     }
 
-    @Inject(method = "getFovMultiplier", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerAbilities;getWalkSpeed()F", shift = At.Shift.AFTER))
-    private void shape_shifter_curse$restoreWalkSpeed(CallbackInfoReturnable<Float> cir) {
-        ((AbstractClientPlayerEntity) (Object) this).getAbilities().setWalkSpeed(shape_shifter_curse$originalWalkSpeed);
-    }
 }
