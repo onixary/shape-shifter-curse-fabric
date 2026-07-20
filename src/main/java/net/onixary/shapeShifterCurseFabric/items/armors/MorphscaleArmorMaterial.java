@@ -56,8 +56,8 @@ public class MorphscaleArmorMaterial  implements ArmorMaterial {
 
     @Override
     public String getName() {
-        // Must be all lowercase
-        return "morphscale";
+        // return "morphscale";
+        return "diamond";
     }
 
     @Override
