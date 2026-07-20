@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.mixin.EntityAccessor;
 import io.github.apace100.apoli.power.Power;
@@ -8,10 +9,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.additional_power.CustomWaterBreathingPower;
 import net.onixary.shapeShifterCurseFabric.util.ModDamageSources;
@@ -20,7 +19,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -121,9 +119,8 @@ public final class CustomWaterBreathingMixin {
             }
         }
 
-        @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;isSubmergedIn(Lnet/minecraft/registry/tag/TagKey;)Z"), method = "updateTurtleHelmet")
-        public boolean isSubmergedInProxy(PlayerEntity player, TagKey<Fluid> fluidTag) {
-            boolean submerged = this.isSubmergedIn(fluidTag);
+        @ModifyExpressionValue(at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;isSubmergedIn(Lnet/minecraft/registry/tag/TagKey;)Z"), method = "updateTurtleHelmet")
+        public boolean isSubmergedInProxy(boolean submerged) {
             if(PowerHolderComponent.getPowers(this, CustomWaterBreathingPower.class).stream().anyMatch(Power::isActive)) {
                 return !submerged;
             }
