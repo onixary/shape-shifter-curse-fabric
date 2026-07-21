@@ -568,7 +568,7 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModi
                 }
             }
         }
-        if (this.wingChainR != null && this.wingChainL.canApply(player)) {
+        if (this.wingChainR != null && this.wingChainR.canApply(player)) {
             for (List<String> wingChain : this.wingChainR.chain) {
                 GeoBone firstWing = model.getCachedGeoBone(wingChain.get(0));
                 if (firstWing == null)  continue;

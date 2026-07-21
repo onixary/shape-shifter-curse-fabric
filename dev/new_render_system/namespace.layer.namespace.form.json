@@ -49,7 +49,10 @@
       "bipedRightHindLeg": "bipedRightHindLeg",
       "bipedLeftHindLeg": "bipedLeftHindLeg",
       "bipedRightExtraArm": "bipedRightExtraArm",
-      "bipedLeftExtraArm": "bipedLeftExtraArm"
+      "bipedLeftExtraArm": "bipedLeftExtraArm",
+      "lowerBody" : "lowerBody",
+      "neckMount" : "neckMount",
+      "tailMount" : "tailMount"
     },
     "first_person_render": {
       "left_arm": "bipedLeftArm",
