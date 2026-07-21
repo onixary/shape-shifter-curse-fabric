@@ -8,6 +8,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.event.SSCEvent;
 import net.onixary.shapeShifterCurseFabric.integration.origins.component.OriginComponent;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.Origin;
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLayer;
@@ -205,9 +206,10 @@ public class FormUtils {
 
     public static void _loadForm(PlayerEntity player, IForm form) {
         PlayerFormComponent playerFormComponent = PlayerFormComponent.COMPONENT.get(player);
+        IForm oldForm = playerFormComponent.nowForm;
         playerFormComponent.setForm(form);
         playerFormComponent.sync();
-
+        SSCEvent.FORM_CHANGE_START.invoker().onFormChange(player, oldForm, form);
         if (!EffectManager.playerCanHaveTransformativeEffect(player)) {
             EffectManager.clearTransformativeEffect(player);
         }
@@ -221,6 +223,7 @@ public class FormUtils {
         form.onApplyPowerEnd(player);
         // 停止Power动画 目前就蝙蝠用了
         AnimUtils.stopPowerAnim(player, AnimUtils.AnimationSendSideType.ONLY_SERVER);
+        SSCEvent.FORM_CHANGE_END.invoker().onFormChange(player, oldForm, form);
 
         if (!player.getWorld().isClient() && player instanceof ServerPlayerEntity serverPlayer) {
             try {
