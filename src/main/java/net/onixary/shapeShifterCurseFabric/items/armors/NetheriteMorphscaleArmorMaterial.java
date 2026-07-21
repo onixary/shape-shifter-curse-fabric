@@ -57,8 +57,8 @@ public class NetheriteMorphscaleArmorMaterial implements ArmorMaterial {
 
     @Override
     public String getName() {
-        // Must be all lowercase
-        return "netherite_morphscale";
+        // return "netherite_morphscale";
+        return "netherite";
     }
 
     @Override
