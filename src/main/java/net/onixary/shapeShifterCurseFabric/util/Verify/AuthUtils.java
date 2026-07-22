@@ -155,7 +155,8 @@ public final class AuthUtils {
         dataReaderRegistry.add(new Pair<>(typeVersionPredicate, dataReader));
     }
 
-    public static @Nullable IDataSegment readDataSegment(PacketByteBuf buf) {
+    // 由于DataSegment没有对应验证 所以改为package private
+    static @Nullable IDataSegment readDataSegment(PacketByteBuf buf) {
         int type = buf.readInt();
         int version = buf.readInt();
         for (Pair<BiPredicate<Integer, Integer>, Function<PacketByteBuf, IDataSegment>> reader : dataReaderRegistry) {
