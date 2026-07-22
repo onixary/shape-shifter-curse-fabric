@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.event;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.entity.player.PlayerEntity;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -13,6 +14,11 @@ public class SSCEvent {
     @FunctionalInterface
     public static interface FormChange {
         void onFormChange(@NotNull PlayerEntity player, @Nullable IForm oldForm, @NotNull IForm newForm);
+    }
+
+    @FunctionalInterface
+    public static interface TransformManagerSetForm {
+        @NotNull IForm onSetForm(@NotNull PlayerEntity player, @Nullable IForm oldForm, @NotNull IForm newForm, @NotNull IForm finalForm);
     }
 
     @FunctionalInterface
@@ -30,6 +36,17 @@ public class SSCEvent {
         for (FormChange callback : callbacks) {
             callback.onFormChange(player, oldForm, newForm);
         }
+    });
+
+    // 最后一个参数没用 但是Event注册需要和对应Event参数一致 "_"得java22才能用
+    public static final Event<TransformManagerSetForm> TRANSFORM_MANAGER_SET_FORM = EventFactory.createArrayBacked(TransformManagerSetForm.class, callbacks -> (player, oldForm, newForm, _form) -> {
+        IForm finalForm = newForm;
+        for (TransformManagerSetForm callback : callbacks) {
+            finalForm = callback.onSetForm(player, oldForm, newForm, finalForm);
+            // 仅测试环境下可用
+            assert finalForm != null : "TRANSFORM_MANAGER_SET_FORM: finalForm is null";
+        }
+        return finalForm;
     });
 
     public static final Event<NormalPlayerEvent> CURSED_MOON_BEGIN = EventFactory.createArrayBacked(NormalPlayerEvent.class, callbacks -> (player) -> {
