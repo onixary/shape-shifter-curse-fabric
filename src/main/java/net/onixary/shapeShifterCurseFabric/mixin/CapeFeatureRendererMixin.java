@@ -98,7 +98,7 @@ public class CapeFeatureRendererMixin {
     // helper func
     @Unique
     private Vec3d getCapeIdleLoc(AbstractClientPlayerEntity player) {
-        IForm curForm = FormTextureUtils.getPlayerForm_Render(currentPlayer);
+        IForm curForm = FormTextureUtils.getPlayerForm_Render(player);
         if (curForm instanceof ModifyCapeRender mcr) {
             return mcr.getCapeIdleLoc(player);
         }
@@ -113,16 +113,17 @@ public class CapeFeatureRendererMixin {
     // 获取披风的基础旋转角度
     @Unique
     private float getCapeBaseRotateAngle(AbstractClientPlayerEntity player) {
-        IForm curForm = FormTextureUtils.getPlayerForm_Render(currentPlayer);
+        IForm curForm = FormTextureUtils.getPlayerForm_Render(player);
         if (curForm instanceof ModifyCapeRender mcr) {
             return mcr.getCapeBaseRotateAngle(player);
         }
-        return 100.0f;
+        // 与重构前行为保持一致: FERAL 形态上仰 90°, 其他普通形态不做额外旋转
+        return curForm.getBodyType() == PlayerFormBodyType.FERAL ? 90.0f : 0.0f;
     }
 
     @Unique
     private boolean NeedModifyXRotationAngle(AbstractClientPlayerEntity player) {
-        IForm curForm = FormTextureUtils.getPlayerForm_Render(currentPlayer);
+        IForm curForm = FormTextureUtils.getPlayerForm_Render(player);
         if (curForm instanceof ModifyCapeRender mcr) {
             return mcr.NeedModifyXRotationAngle();
         } else {

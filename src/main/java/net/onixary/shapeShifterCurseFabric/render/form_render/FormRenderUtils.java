@@ -32,10 +32,16 @@ public class FormRenderUtils {
     public static final HashMap<Identifier, Supplier<IModelAnimationSystem>> modelAnimationSystemRegistry = new HashMap<>();
     public static final HashMap<String, Predicate<PlayerEntity>> conditionRegistry = new HashMap<>();
     static {
-        conditionRegistry.put("always_true", player -> true);
-        conditionRegistry.put("always_false", player -> false);
-        conditionRegistry.put("is_sneaking", Entity::isSneaking);
-        conditionRegistry.put("is_sprinting", Entity::isSprinting);
+        registerCondition("always_true", player -> true);
+        registerCondition("always_false", player -> false);
+        registerCondition("is_sneaking", Entity::isSneaking);
+        registerCondition("is_sprinting", Entity::isSprinting);
+    }
+
+    public static void registerCondition(String name, Predicate<PlayerEntity> condition) {
+        conditionRegistry.put(name, condition);
+        // 同时注册带命名空间的形式, 与数据包模板(dev/new_render_system)中的写法保持一致
+        conditionRegistry.put(ShapeShifterCurseFabric.identifier(name).toString(), condition);
     }
 
     public static boolean isRenderingInWorld = false;
