@@ -13,6 +13,7 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.MathHelper;
@@ -158,10 +159,11 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModi
             }
             if (json.has("condition")) {
                 String conditionName = json.get("condition").getAsString();
-                if (FormRenderUtils.conditionRegistry.containsKey(conditionName)) {
-                    this.condition = FormRenderUtils.conditionRegistry.get(conditionName);
+                Identifier conditionID = Identifier.tryParse(conditionName);
+                if (FormRenderUtils.conditionRegistry.containsKey(conditionID)) {
+                    this.condition = FormRenderUtils.conditionRegistry.get(conditionID);
                 } else {
-                    ShapeShifterCurseFabric.LOGGER.warn("Unknown condition: " + conditionName);
+                    ShapeShifterCurseFabric.LOGGER.warn("Unknown condition: {}", conditionName);
                 }
             }
             if (json.has("inverted")) {
