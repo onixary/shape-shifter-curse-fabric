@@ -15,6 +15,11 @@ public class SSCEvent {
         void onFormChange(@NotNull PlayerEntity player, @Nullable IForm oldForm, @NotNull IForm newForm);
     }
 
+    @FunctionalInterface
+    public static interface NormalPlayerEvent {
+        void onEvent(@NotNull PlayerEntity player);
+    }
+
     public static final Event<FormChange> FORM_CHANGE_START = EventFactory.createArrayBacked(FormChange.class, callbacks -> (player, oldForm, newForm) -> {
         for (FormChange callback : callbacks) {
             callback.onFormChange(player, oldForm, newForm);
@@ -24,6 +29,18 @@ public class SSCEvent {
     public static final Event<FormChange> FORM_CHANGE_END = EventFactory.createArrayBacked(FormChange.class, callbacks -> (player, oldForm, newForm) -> {
         for (FormChange callback : callbacks) {
             callback.onFormChange(player, oldForm, newForm);
+        }
+    });
+
+    public static final Event<NormalPlayerEvent> CURSED_MOON_BEGIN = EventFactory.createArrayBacked(NormalPlayerEvent.class, callbacks -> (player) -> {
+        for (NormalPlayerEvent callback : callbacks) {
+            callback.onEvent(player);
+        }
+    });
+
+    public static final Event<NormalPlayerEvent> CURSED_MOON_END = EventFactory.createArrayBacked(NormalPlayerEvent.class, callbacks -> (player) -> {
+        for (NormalPlayerEvent callback : callbacks) {
+            callback.onEvent(player);
         }
     });
 }
