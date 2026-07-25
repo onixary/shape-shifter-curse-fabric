@@ -7,6 +7,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.event.SSCEvent;
 import net.onixary.shapeShifterCurseFabric.items.accessory.AccessoryItem;
 import net.onixary.shapeShifterCurseFabric.util.TrinketUtils;
 import org.jetbrains.annotations.Nullable;
@@ -40,6 +41,7 @@ public class AccessoryUtils {
             return;
         }
         TrinketUtils.ApplyAccessoryPowerOnEquip(player, itemID);
+        SSCEvent.ACCESSORY_EQUIP.invoker().onEvent(player, itemID, pluginID);
     }
 
     public static void onPlayerUnEquip(PlayerEntity player, Identifier itemID, String pluginID) {
@@ -47,6 +49,7 @@ public class AccessoryUtils {
             return;
         }
         TrinketUtils.ApplyAccessoryPowerOnUnEquip(player, itemID);
+        SSCEvent.ACCESSORY_UNEQUIP.invoker().onEvent(player, itemID, pluginID);
     }
 
     public static boolean CanAutoExecute(Identifier itemID, String pluginID) {

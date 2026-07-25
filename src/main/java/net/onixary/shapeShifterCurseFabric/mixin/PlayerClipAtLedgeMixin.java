@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class PlayerClipAtLedgeMixin {
     @Inject(method = "clipAtLedge", at = @At("HEAD"), cancellable = true)
     private void clipAtLedge(CallbackInfoReturnable<Boolean> cir) {
-        if (!ShapeShifterCurseFabricClient.isClipAtLedge) {
+        if (ShapeShifterCurseFabricClient.isBlockingClipAtLedge) {
             cir.setReturnValue(false);
         }
         return;
