@@ -58,15 +58,21 @@ public class PatronUtils {
             // 开启服务器时无论如何都要更新一次
             PatronUtils.UpdateDataPack(server);
         }
-        long sleepSeconds = commonConfig.CheckUpdateInterval;
-        if (sleepSeconds > 0) {
-            new ServerTicker(() -> {
+        new Thread(() -> {  // 如果之后有需要持续监控更新(长时间线程) 需要搓一个系统合并一下
+            try {
+                long SleepTime = commonConfig.CheckUpdateInterval;
+                if (SleepTime <= 0) {
+                    return;
+                }
+                Thread.sleep(SleepTime * 1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
                 PatronUtils.UpdatePatronData(server);
                 if (commonConfig.enablePatronFormSystem) {
                     PatronUtils.CheckDataPackUpdate(server);
                 }
-            }, (int)(sleepSeconds * 20), true).start();
-        }
+        }).start();
     }
 
     private static List<JsonObject> ReadDataPackZip(byte[] dataPackZip) {
