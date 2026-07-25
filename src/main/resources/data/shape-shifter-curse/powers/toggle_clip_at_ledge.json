@@ -1,0 +1,7 @@
+{
+  "type": "origins:toggle",
+  "active_by_default": false,
+  "key": {
+    "key": "key.shape-shifter-curse.active_skill_6"
+  }
+}

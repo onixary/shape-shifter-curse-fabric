@@ -21,7 +21,8 @@
         "shape-shifter-curse:form_ocelot_instinct_biome",
         "shape-shifter-curse:form_ocelot_hiss_phantom",
         "shape-shifter-curse:form_ocelot_sound_key",
-        "shape-shifter-curse:cat_friendly"
+        "shape-shifter-curse:cat_friendly",
+        "shape-shifter-curse:toggle_clip_at_ledge"
     ],
     "icon": {
         "item": "minecraft:player_head"
