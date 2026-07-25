@@ -240,15 +240,8 @@ public class FormColorData {
             ModPacketsS2C.sendUpdateCustomColor(this.formDefaultSetting.get(form), false, false,false, false);
         }
         this.unlockForm(form);
-        // 延时一下 好同步 "sendUpdateCustomSetting" 的更新
-        new Thread(() -> {
-            try {
-                Thread.sleep(1000);
-                onFormChangeListeners.forEach(listener -> listener.accept(form));
-            } catch (InterruptedException ignored) {
-                onFormChangeListeners.forEach(listener -> listener.accept(form));
-            }
-        }).start();
+        // 延时 20 tick 确保 "sendUpdateCustomSetting" 的更新同步完成
+        new ClientTicker(MinecraftClient.getInstance(), () -> onFormChangeListeners.forEach(listener -> listener.accept(form)), 20, true).start();
     }
 
     public Path getConfigPath() {

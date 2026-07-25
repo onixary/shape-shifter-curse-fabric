@@ -38,6 +38,7 @@ import net.onixary.shapeShifterCurseFabric.util.Verify.AuthClient;
 import net.onixary.shapeShifterCurseFabric.util.Verify.AuthFile;
 import org.jetbrains.annotations.Nullable;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
+import net.onixary.shapeShifterCurseFabric.util.ClientTicker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -241,18 +242,21 @@ public class ModPacketsS2C {
     public static void onPlayerConnectServer(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         // 还原FPM设置 或许可以通过注入式修改配置来减少此类Bug 比如在FPM读取offset时修改返回值
         TransformManager.executeClientFirstPersonReset();
-        new Thread(() -> {
-            // 延时5s, 等待服务器component加载完成 重复12次 共计1min
-            for (int i = 0; i < 60; i++) {
-                try {
-                    Thread.sleep(1000);
-                    sendUpdateCustomSetting();
-                    return;
-                } catch (Exception ignored) {
-                }
-            }
+        retrySendCustomSetting(60);
+    }
+
+    private static void retrySendCustomSetting(int attemptsLeft) {
+        if (attemptsLeft <= 0) {
             ShapeShifterCurseFabric.LOGGER.error("Failed to send custom setting to server after 60 seconds");
-        }).start();
+            return;
+        }
+        new ClientTicker(MinecraftClient.getInstance(), () -> {
+            try {
+                sendUpdateCustomSetting();
+            } catch (Exception e) {
+                retrySendCustomSetting(attemptsLeft - 1);
+            }
+        }, 20, true).start();
     }
 
     public static void sendUpdateCustomColor(FormTextureUtils.ColorSetting colorSetting, boolean sendRAW, boolean sendExtraData, boolean keepOriginalSkin, boolean enableFormColorSystem) {

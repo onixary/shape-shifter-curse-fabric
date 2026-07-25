@@ -9,19 +9,30 @@ public class ClientTicker implements ClientTickable {
     private final MinecraftClient client;
     private final Runnable task;
     private int ticksRemaining;
+    private final boolean runOnce;
 
-    public ClientTicker(MinecraftClient client, Runnable task, int durationTicks) {
+    public ClientTicker(MinecraftClient client, Runnable task, int durationTicks, boolean runOnce) {
         this.client = client;
         this.task = task;
         this.ticksRemaining = durationTicks;
+        this.runOnce = runOnce;
+    }
+
+    public ClientTicker(MinecraftClient client, Runnable task, int durationTicks) {
+        this(client, task, durationTicks, false);
     }
 
     @Override
     public void tick() {
-        //ShapeShifterCurseFabric.LOGGER.info("Client ticker tick");
         if (ticksRemaining > 0) {
-            task.run();
+            if (!runOnce) {
+                task.run();
+            }
             ticksRemaining--;
+            if (runOnce && ticksRemaining == 0) {
+                task.run();
+                TickManager.removeTickable(this);
+            }
         } else {
             TickManager.removeTickable(this);
         }

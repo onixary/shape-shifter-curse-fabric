@@ -80,22 +80,12 @@ public class PlayerEventHandler {
 
             // 添加延迟同步，确保客户端完全加载后再次发送状态
             // 延迟40个tick（2秒）再次同步
-            // 反正都得延时2秒 先不在主线程处跑了 等新建的线程等完2秒后再切进主线程
-            new Thread(() -> {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
+            new ServerTicker(() -> {
+                if (player.networkHandler != null && !player.isDisconnected()) {
+                    ServerWorld currentWorld = player.getServerWorld();
+                    ModPacketsS2CServer.sendCursedMoonData(player, CursedMoon.isCursedMoonDay(currentWorld));
                 }
-
-                // 在主线程中执行同步
-                server.execute(() -> {
-                    if (player.networkHandler != null && !player.isDisconnected()) {
-                        ServerWorld currentWorld = player.getServerWorld();
-                        ModPacketsS2CServer.sendCursedMoonData(player, CursedMoon.isCursedMoonDay(currentWorld));
-                    }
-                });
-            }).start();
+            }, 40, true).start();
 
             // Set doDaylightCycle to true forced
             //server.getGameRules().get(GameRules.DO_DAYLIGHT_CYCLE).set(true, server);
