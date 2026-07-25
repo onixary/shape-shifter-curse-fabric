@@ -9,7 +9,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
-import net.onixary.shapeShifterCurseFabric.util.ServerTicker;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -130,7 +129,14 @@ public final class AuthServer {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             ServerPlayerEntity player = handler.getPlayer();
             ModPacketsS2CServer.requestPatronAuthFile(player);
-            new ServerTicker(() -> checkPatronStatus(handler.getPlayer()), 600, true).start();
+            new Thread(() -> {
+                try {
+                    Thread.sleep(30 * 1000);  // 30s
+                } catch (InterruptedException e) {
+                    checkPatronStatus(handler.getPlayer());
+                }
+                checkPatronStatus(handler.getPlayer());
+            }).start();
         });
     }
 }
