@@ -339,11 +339,17 @@ public class EffectManager {
     }
 
     public static boolean playerCanHaveTransformativeEffect(PlayerEntity player) {
-        return RegPlayerForms.ORIGINAL_SHIFTER.isPlayerForm(player) || (ShapeShifterCurseFabric.commonConfig.statusPotionWithCurse && RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player));
+        return CanHaveTransformativeEffect(player, getPlayerForm(player));
     }
 
     private static boolean CanHaveTransformativeEffect(PlayerEntity player, @Nullable IForm newForm) {
         IForm form = newForm == null ? getPlayerForm(player) : newForm;
-        return RegPlayerForms.ORIGINAL_SHIFTER.isEquals(form) || (ShapeShifterCurseFabric.commonConfig.statusPotionWithCurse && RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isEquals(form));
+        if (form == null) {
+            return false;
+        }
+        if (ShapeShifterCurseFabric.commonConfig.statusPotionWithCurse && RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isEquals(form)) {
+            return true;
+        }
+        return FormUtils.CanHaveTransformEffect.hasFlag(form);
     }
 }

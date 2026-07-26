@@ -5,6 +5,8 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,7 +28,8 @@ public class TransformativeStatusInstance extends StatusEffectInstance {
 
     public void ActiveEffect(ServerPlayerEntity player) {
         BaseTransformativeStatusEffect effect = this.getTransformativeEffectType();
-        if (effect != null) {
+        IForm nowForm = FormUtils.getPlayerForm(player);
+        if (effect != null && (nowForm == null || FormUtils.TransformEffectCanApply.hasFlag(nowForm))) {
             effect.ActiveEffect(player);
         }
     }
