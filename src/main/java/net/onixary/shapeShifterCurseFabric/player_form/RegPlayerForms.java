@@ -77,7 +77,7 @@ public class RegPlayerForms {
     public static IFormGroup FERAL_CAT_FORM = registerPlayerFormGroup(new NormalGroup(ShapeShifterCurseFabric.identifier("feral_cat_form")).registerForm(1, 1, FERAL_CAT_SP));
 
     // SubForms
-    public static IForm SNOW_FOX_3_SUB_WHITE_WEASEL = registerPlayerForm(new Form_SnowFox3_Sub_WhiteWeasel(ShapeShifterCurseFabric.identifier("snow_fox_3_sub_white_weasel")));
+    public static IForm SNOW_FOX_3_SUB_MARBLED_POLECAT = registerPlayerForm(new Form_SnowFox3_Sub_MarbledPolecat(ShapeShifterCurseFabric.identifier("snow_fox_3_sub_marbled_polecat")));
 
     public static <T extends IForm> T registerPlayerForm(T form) {
         playerForms.put(form.getFormID(), form);

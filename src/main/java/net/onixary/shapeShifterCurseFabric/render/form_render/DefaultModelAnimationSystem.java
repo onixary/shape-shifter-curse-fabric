@@ -24,6 +24,7 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.render.form_render.sub_controller.FormEyeBlinkController;
+import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.util.CachedDataMap;
 import net.onixary.shapeShifterCurseFabric.util.util.ICachedDataMap;
@@ -673,8 +674,14 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModi
         model.translatePositionForBone(RM_LeftLegGeoBoneID, new Vec3d(2, 12, 0));
         model.translatePositionForBone(RM_RightLegGeoBoneID, new Vec3d(-2, 12, 0));
         model.setRotationForBone(RM_BodyGeoBoneID, FormRenderUtils.getPartRotation(playerModel.body));
-        Vec2f neckAngles = getLongNeckAngles(player, tickDelta, headYaw, headPitch);
-        this.setRotationForNeckBones(player, model, neckAngles.x, neckAngles.y);
+        // 物品栏等GUI窗口中的额外模型渲染会干扰脖颈IK的角度缓存数据，导致脖颈抖动，此时关闭脖颈IK
+        Vec2f neckAngles;
+        if (ClientUtils.isOpenInventoryScreen) {
+            neckAngles = new Vec2f(headYaw, headPitch);
+        } else {
+            neckAngles = getLongNeckAngles(player, tickDelta, headYaw, headPitch);
+            this.setRotationForNeckBones(player, model, neckAngles.x, neckAngles.y);
+        }
         this.setRotationForTailBones(player, model, limbAngle, limbDistance, player.age, td.currentTailDragAmount, td.currentTailDragAmountVertical);
         this.setRotationForHeadTailBones(player, model, neckAngles.x, player.age, td.currentTailDragAmount, td.currentTailDragAmountVertical);
         this.setRotationForWingBones(player, model, limbAngle, limbDistance, player.age, td.currentTailDragAmountVertical);
