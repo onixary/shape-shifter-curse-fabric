@@ -1,17 +1,14 @@
 {
   "load_priority": 0,
 
-  "name": "shape-shifter-curse.form_snow_fox_3_sub_white_weasel.model_name",
+  "name": "shape-shifter-curse.form_snow_fox_3_sub_marbled_polecat.model_name",
   "layer": "origins:origin",
-  "form": "shape-shifter-curse:form_snow_fox_3_sub_white_weasel",
+  "form": "shape-shifter-curse:form_snow_fox_3_sub_marbled_polecat",
 
   "wide_only": true,
 
-  "model": "shape-shifter-curse:geo/form/form_long_cat_test.geo.json",
-  "texture": "shape-shifter-curse:textures/form/form_feral_cat_sp/form_feral_cat_sp.png",
-  "texture_mask": "shape-shifter-curse:textures/form/form_feral_cat_sp/form_feral_cat_sp_colormask.png",
-  "fullbright_texture": "shape-shifter-curse:textures/form/form_feral_cat_sp/form_feral_cat_sp_emission.png",
-  "fullbright_texture_mask": "shape-shifter-curse:textures/form/form_feral_cat_sp/form_feral_cat_sp_emission_colormask.png",
+  "model": "shape-shifter-curse:geo/form/form_snow_fox_3_sub_marbled_polecat.geo.json",
+  "texture": "shape-shifter-curse:textures/form/form_snow_fox_3_sub_marbled_polecat/form_snow_fox_3_sub_marbled_polecat.png",
   "hidden": [
     "leftLeg",
     "rightLeg",
@@ -29,9 +26,14 @@
 
   "animation_system": "shape-shifter-curse:default",
   "animation_system_config": {
+    "extra_parts_map": {
+      "lowerBody": "lowerBody",
+      "neckMount": "neckMount",
+      "tailMount": "tailMount"
+    },
     "tail": {
       "chain": {
-        "tail": [0, 1, 2, 3]
+        "tail": [0, 1, 2, 3, 4, 5]
       }
     },
     "head_tail": {
@@ -54,11 +56,6 @@
       "max_yaw_deg": 120.0,
       "max_pitch_up_deg": 70.0,
       "max_pitch_down_deg": 60.0
-    },
-    "eye_blink": {
-      "eye": "eyeRoot",
-      "open_scale": 1.0,
-      "close_scale": 0.01
     }
   }
 }
