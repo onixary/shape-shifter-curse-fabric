@@ -34,7 +34,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
     }
 
     // 挂载Feature
-    @Inject(method = "<init>", at = @At(value = "TAIL"))
+    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/PlayerEntityRenderer;addFeature(Lnet/minecraft/client/render/entity/feature/FeatureRenderer;)Z", ordinal = 0))
     public void onInit(EntityRendererFactory.Context ctx, boolean slim, CallbackInfo ci) {
         this.addFeature(new FormRenderFeature<>((PlayerEntityRenderer) (Object) this));
     }

@@ -25,7 +25,7 @@ public class RegPlayerForms {
     // Builtin PlayerForms
     // Original
     public static IForm ORIGINAL_BEFORE_ENABLE = registerPlayerForm(new NormalForm(ShapeShifterCurseFabric.identifier("original_before_enable")).formFlag(NoInstinct, InhibitorImmune, NoCursedMoonEffect, NoCursedMoonTFTarget).applyScaleFunc(NormalForm.RESET_SCALE_FUNC));
-    public static IForm ORIGINAL_SHIFTER = registerPlayerForm(new NormalForm(ShapeShifterCurseFabric.identifier("original_shifter")).formFlag(NoInstinct, InhibitorImmune, NoCursedMoonTFTarget).applyScaleFunc(NormalForm.RESET_SCALE_FUNC));
+    public static IForm ORIGINAL_SHIFTER = registerPlayerForm(new NormalForm(ShapeShifterCurseFabric.identifier("original_shifter")).formFlag(CanHaveTransformEffect, TransformEffectCanApply, NoInstinct, InhibitorImmune, NoCursedMoonTFTarget).applyScaleFunc(NormalForm.RESET_SCALE_FUNC));
     public static IFormGroup BASE_FORM = registerPlayerFormGroup(new NormalGroup(ShapeShifterCurseFabric.identifier("base_form")).registerForm(-1, 1, ORIGINAL_BEFORE_ENABLE).registerForm(0, 1, ORIGINAL_SHIFTER));
     // Bat
     public static IForm BAT_0 = registerPlayerForm(new NormalForm(ShapeShifterCurseFabric.identifier("bat_0")).formFlag(StarterForm).applyScaleFunc(NORMAL_SCALE_FUNC_BUILDER.apply(0.9f, 1.0f)));

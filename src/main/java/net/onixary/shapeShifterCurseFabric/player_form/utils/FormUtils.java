@@ -58,6 +58,8 @@ public class FormUtils {
     public static final FlagData SpecialForm = new FlagData("special_form"); // SP形态
     public static final FlagData CanTFToFinalForm = new FlagData("can_tf_to_final_form"); // 可以通过高级催化剂变形到最终形态
     public static final FlagData FinalForm = new FlagData("final_form"); // 最终形态 PowerfulCatalyst仅能变形到此形态
+    public static final FlagData CanHaveTransformEffect = new FlagData("can_have_transform_effect"); // 可以拥有变形效果
+    public static final FlagData TransformEffectCanApply = new FlagData("transform_effect_can_apply"); // 可以被变形效果修改形态
 
     // 在此解释一下为什么要先变TechnicalFormOrigin后变目标Origin 因为形态能力还原依赖于不同Origin切换时的清除旧Power+添加新Power 如果Origin一样 就会导致饰品/子形态/额外能力挂载系统添加/删除的能力无法还原
     public static Origin TechnicalFormOrigin = null;

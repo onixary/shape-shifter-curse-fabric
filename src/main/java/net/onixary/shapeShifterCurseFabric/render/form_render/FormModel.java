@@ -98,27 +98,6 @@ public class FormModel extends GeoModel<FormAnimatable> {
     public IModelAnimationSystem AnimationSystem = null;
 
     // builtin_controller_data
-    // chain -> [["tail0_0", "tail0_1"], [tail1_0", "tail1_1"]]
-    public List<List<String>> BCD_TailChain = new ArrayList<>();
-    public List<List<String>> BCD_TailChainHead = new ArrayList<>();
-    public List<List<String>> BCD_WingChainL = new ArrayList<>();
-    public List<List<String>> BCD_WingChainR = new ArrayList<>();
-
-    public static class NeckIkConfig {
-        public String mount = "neck_mount";
-        public String head = "ik_head";
-        public List<String> chain = new ArrayList<>();
-        public char yawAxis = 'y';
-        public char pitchAxis = 'x';
-        public float yawSign = -1.0f;
-        public float pitchSign = 1.0f;
-        public float[] yawWeights = new float[0];
-        public float[] pitchWeights = new float[0];
-        public float maxYawDeg = 85.0f;
-        public float maxPitchUpDeg = 55.0f;
-        public float maxPitchDownDeg = 45.0f;
-    }
-    // NECK FEATURES END
 
     public FormModel(JsonObject json) {
         this.modelJson = json;
