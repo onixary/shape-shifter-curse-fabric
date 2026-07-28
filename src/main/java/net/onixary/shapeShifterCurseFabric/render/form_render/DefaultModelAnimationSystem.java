@@ -333,6 +333,8 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModi
 
     private static final ICachedDataMap<UUID, PlayerEntity, tailData> tailDataMap = new CachedDataMap<>(player -> new tailData(), Entity::getUuid);
     private static final ICachedDataMap<UUID, PlayerEntity, neckData> neckDataMap = new CachedDataMap<>(neckData::new, Entity::getUuid);
+    // 物品栏或其他需要额外渲染玩家用的数据缓存 应该就只需要一个吧
+    private static final ICachedDataMap<UUID, PlayerEntity, neckData> neckDataMapV = new CachedDataMap<>(neckData::new, Entity::getUuid);
 
     private static class tailData {
         private float tailDragAmount = 0.0F;
@@ -588,12 +590,19 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModi
         }
     }
 
+    // 如果拓展需要修改这个逻辑 可以使用Mixin 我认为挂一个事件有点臃肿 推荐使用Inject Return False
+    // 当然也有其他方法 比如写一个判断函数变量 不过我认为修改应该没这么勤
+    private boolean shouldUseVirtualData(PlayerEntity player) {
+        return ClientUtils.isOpenInventoryScreen;
+    }
+
     // Yaw, Pitch
     private Vec2f getLongNeckAngles(PlayerEntity player, float tickDelta, float fallbackHeadYaw, float fallbackHeadPitch) {
         if (neckConfig == null) {
             return new Vec2f(fallbackHeadYaw, fallbackHeadPitch);
         }
         neckData data = neckDataMap.get(player);
+        // neckData data = (shouldUseVirtualData(player) ? neckDataMapV : neckDataMap).get(player);
         float viewYaw = player.getYaw(tickDelta);
         float targetHeadPitch = player.getPitch(tickDelta);
         float bodyYaw = LongNeckRenderUtils.lerpAngle(tickDelta, player.prevBodyYaw, player.bodyYaw);
@@ -682,6 +691,8 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModi
             neckAngles = getLongNeckAngles(player, tickDelta, headYaw, headPitch);
             this.setRotationForNeckBones(player, model, neckAngles.x, neckAngles.y);
         }
+        // Vec2f neckAngles = getLongNeckAngles(player, tickDelta, headYaw, headPitch);
+        // this.setRotationForNeckBones(player, model, neckAngles.x, neckAngles.y);
         this.setRotationForTailBones(player, model, limbAngle, limbDistance, player.age, td.currentTailDragAmount, td.currentTailDragAmountVertical);
         this.setRotationForHeadTailBones(player, model, neckAngles.x, player.age, td.currentTailDragAmount, td.currentTailDragAmountVertical);
         this.setRotationForWingBones(player, model, limbAngle, limbDistance, player.age, td.currentTailDragAmountVertical);
