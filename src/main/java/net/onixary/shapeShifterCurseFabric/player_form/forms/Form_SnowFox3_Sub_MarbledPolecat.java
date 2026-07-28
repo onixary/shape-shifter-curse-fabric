@@ -38,7 +38,9 @@ public class Form_SnowFox3_Sub_MarbledPolecat extends NormalSubForm implements I
 
     private static final AnimUtils.AnimationHolderData ANIM_IDLE =
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_idle"));
-    public static final AbstractAnimStateController IDLE_CONTROLLER = new WithSneakAnimController(ANIM_IDLE, ANIM_IDLE);
+    private static final AnimUtils.AnimationHolderData ANIM_SNEAK_IDLE =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_sneak_idle"));
+    public static final AbstractAnimStateController IDLE_CONTROLLER = new WithSneakAnimController(ANIM_IDLE, ANIM_SNEAK_IDLE);
 
 
     @Override
