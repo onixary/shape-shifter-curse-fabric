@@ -6,6 +6,8 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PotionItem;
+import net.minecraft.potion.PotionUtil;
+import net.minecraft.potion.Potions;
 import net.minecraft.screen.slot.Slot;
 import net.onixary.shapeShifterCurseFabric.additional_power.ModifyPotionStackPower;
 import org.spongepowered.asm.mixin.Final;
@@ -47,8 +49,10 @@ public abstract class PotionStackMixin {
         if (this.inventory instanceof PlayerInventory) {
             PlayerEntity player = ((PlayerInventory) this.inventory).player;
             if (itemStack.getItem() instanceof PotionItem) {
+                Boolean isWater = PotionUtil.getPotion(itemStack).equals(Potions.WATER);
                 int StackCount = PowerHolderComponent.getPowers(player, ModifyPotionStackPower.class)
                         .stream()
+                        .filter(power -> !power.isOnlyWaterPotion() || isWater)
                         .mapToInt(ModifyPotionStackPower::getCount)
                         .max().orElseGet(() -> 1);
                 cir.setReturnValue(Math.max(StackCount, cir.getReturnValue()));
