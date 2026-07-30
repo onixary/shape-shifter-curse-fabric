@@ -17,10 +17,7 @@ public class PlayerTransformEffectManager {
         StatusEffectInstance darknessEffect = new StatusEffectInstance(StatusEffects.BLINDNESS, duration);
         player.addStatusEffect(darknessEffect);
 
-        // add immobility effect
-        StatusEffectInstance immobilityEffect = new StatusEffectInstance(StatusEffects.SLOWNESS, duration, 245);
-        player.addStatusEffect(immobilityEffect);
-
+        ModPacketsS2CServer.sendNoMoveTick(player, duration);
         ModPacketsS2CServer.sendNoJumpTick(player, duration);
     }
 
@@ -29,18 +26,12 @@ public class PlayerTransformEffectManager {
         StatusEffectInstance nauseaEffect = new StatusEffectInstance(StatusEffects.NAUSEA, duration);
         player.addStatusEffect(nauseaEffect);
 
-        // add immobility effect
-        StatusEffectInstance immobilityEffect = new StatusEffectInstance(StatusEffects.SLOWNESS, duration, 245);
-        player.addStatusEffect(immobilityEffect);
-
+        ModPacketsS2CServer.sendNoMoveTick(player, duration);
         ModPacketsS2CServer.sendNoJumpTick(player, duration);
+
     }
 
     public static void applyFinaleTransformEffect(ServerPlayerEntity player, int duration){
-
-        // slowness effect remain some time
-        StatusEffectInstance immobilityEffect = new StatusEffectInstance(StatusEffects.SLOWNESS, duration, 200);
-        player.addStatusEffect(immobilityEffect);
-
+        ModPacketsS2CServer.sendNoMoveTick(player, duration);
     }
 }

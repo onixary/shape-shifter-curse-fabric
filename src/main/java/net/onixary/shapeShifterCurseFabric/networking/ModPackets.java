@@ -61,6 +61,7 @@ public class ModPackets {
     public static final Identifier OPEN_FORM_SELECT_MENU = new Identifier(ShapeShifterCurseFabric.MOD_ID, "open_form_select_menu");
 
     public static final Identifier SET_NO_JUMP_TICK = new Identifier(ShapeShifterCurseFabric.MOD_ID, "set_no_jump_tick");
+    public static final Identifier SET_NO_MOVE_TICK = new Identifier(ShapeShifterCurseFabric.MOD_ID, "set_no_move_tick");
 
     public static final Identifier OPEN_FORM_COLOR_SELECT_MENU = new Identifier(ShapeShifterCurseFabric.MOD_ID, "open_form_color_select_menu");
     public static final Identifier MODIFY_FCD_DATA = new Identifier(ShapeShifterCurseFabric.MOD_ID, "modify_fcd_data");

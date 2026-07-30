@@ -9,7 +9,9 @@ import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.*;
 import net.onixary.shapeShifterCurseFabric.networking.ModPackets;
+import net.onixary.shapeShifterCurseFabric.util.Interface.IMoveController;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -19,10 +21,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 
 @Mixin(PlayerEntity.class)
-public class PlayerMovementControlMixin {
+public class PlayerMovementControlMixin implements IMoveController {
 
     @Inject(method = "travel", at = @At("HEAD"), cancellable = true)
     private void preventTravelWhenAttached(Vec3d movementInput, CallbackInfo ci) {
+        // if (noMoveTick > 0) {
+        //     ci.cancel();
+        // }
         PlayerEntity player = (PlayerEntity) (Object) this;
 
         // 添加空值检查
@@ -46,6 +51,9 @@ public class PlayerMovementControlMixin {
 
     @Inject(method = "getMovementSpeed()F", at = @At("RETURN"), cancellable = true)
     private void zeroMovementSpeedWhenAttached(CallbackInfoReturnable<Float> cir) {
+        if (noMoveTick > 0) {
+            cir.setReturnValue(0.0f);
+        }
         PlayerEntity player = (PlayerEntity) (Object) this;
 
         // 添加空值检查
@@ -176,4 +184,25 @@ public class PlayerMovementControlMixin {
         }
         return multiplier.multiply(slowdownPercent);
     }
+
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void onTick(CallbackInfo ci) {
+        if (this.noMoveTick > 0) {
+            this.noMoveTick--;
+        }
+    }
+
+    @Unique
+    public int noMoveTick = 0;
+
+    @Override
+    public void shape_shifter_curse$setNoMoveTick(int tick) {
+        this.noMoveTick = tick;
+    }
+
+    @Override
+    public int shape_shifter_curse$getNoMoveTick() {
+        return this.noMoveTick;
+    }
+
 }
