@@ -1,0 +1,9 @@
+{
+  "type": "shape-shifter-curse:modify_potion_stack",
+  "condition": {
+    "type": "apoli:constant",
+    "value": true
+  },
+  "only_water_potion": true,
+  "count": 16
+}
