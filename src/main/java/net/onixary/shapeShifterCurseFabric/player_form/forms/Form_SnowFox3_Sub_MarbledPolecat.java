@@ -5,6 +5,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateController.IdleStayAnimController;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.OneAnimController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.WithSneakAnimController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateEnum;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
@@ -21,6 +23,8 @@ import java.util.UUID;
 public class Form_SnowFox3_Sub_MarbledPolecat extends NormalSubForm implements IPatronForm {
     public Form_SnowFox3_Sub_MarbledPolecat(Identifier formID) {
         super(formID, RegPlayerForms.SNOW_FOX_3);
+        this.addPower(ShapeShifterCurseFabric.identifier("sub_form_marbled_polecat_idle_stay_eye_height"));
+
     }
 
     @Override
@@ -38,9 +42,15 @@ public class Form_SnowFox3_Sub_MarbledPolecat extends NormalSubForm implements I
 
     private static final AnimUtils.AnimationHolderData ANIM_IDLE =
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_idle"));
+    private static final AnimUtils.AnimationHolderData ANIM_IDLE_STAY =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_idle_stay"),1.0f,4);
     private static final AnimUtils.AnimationHolderData ANIM_SNEAK_IDLE =
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_sneak_idle"));
-    public static final AbstractAnimStateController IDLE_CONTROLLER = new WithSneakAnimController(ANIM_IDLE, ANIM_SNEAK_IDLE);
+    public static final AbstractAnimStateController IDLE_CONTROLLER = new IdleStayAnimController(
+            new WithSneakAnimController(ANIM_IDLE, ANIM_SNEAK_IDLE),  // 保留原潜行 idle
+            new OneAnimController(ANIM_IDLE_STAY), // 停留动画
+            100  // 5秒
+    );
 
 
     @Override

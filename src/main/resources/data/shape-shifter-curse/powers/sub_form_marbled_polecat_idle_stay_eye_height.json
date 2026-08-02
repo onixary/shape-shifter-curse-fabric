@@ -1,0 +1,10 @@
+{
+    "type": "shape-shifter-curse:condition_scale",
+    "scale": 0.55,
+    "eye_scale": 0.9,
+    "original_scale": 0.55,
+    "original_eye_scale": 0.6,
+    "condition": {
+      "type": "shape-shifter-curse:idle_stay"
+    }
+}

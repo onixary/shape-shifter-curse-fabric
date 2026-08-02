@@ -11,6 +11,7 @@ import net.minecraft.util.Pair;
 import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimFSM.FSMUtils;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateController.TransformingController;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
@@ -30,6 +31,7 @@ public class AnimSystem {
         public Vec3d LastPosition;
         public long ContinueSwingAnimCounter = 0;  // 持续增长使用long防止溢出 顺便可以不用做最大值判断
         public boolean IsWalking = false;
+        public long ContinueIdleStayTickCounter = 0;  // 静止Idle持续tick数 用于Idle停留动画 20tick=1秒
         public NbtCompound customData;  // 用于存储其他拓展Mod的数据 在本模组中不使用
 
         public AnimSystemData(PlayerEntity player) {
@@ -107,6 +109,7 @@ public class AnimSystem {
             this.data.ContinueSwingAnimCounter = 0;
         }
         this.data.IsOnGround = checkOnGroundSuper(this.player);
+        this.data.ContinueIdleStayTickCounter = FSMUtils.IsIdleStayCondition(this.player, this.data) ? this.data.ContinueIdleStayTickCounter + 1 : 0;
         this.NPPA_Tick();
     }
 

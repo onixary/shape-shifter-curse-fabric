@@ -24,6 +24,8 @@ public class AdditionalEntityConditions {
         register(ChanceCondition.getFactory());
         register(JumpEventCondition.getFactory());
         register(MustCrawlingCondition.getFactory());
+        register(IdleStayCondition.getFactory());
+        IdleStayCondition.init();
         TrinketsConditionAction.registerCondition(AdditionalEntityConditions::register);
         ManaUtilsApoli.registerCondition(AdditionalEntityConditions::register);
         register(new ConditionFactory<Entity>(
