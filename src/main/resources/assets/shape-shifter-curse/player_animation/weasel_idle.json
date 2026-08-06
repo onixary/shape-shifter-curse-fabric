@@ -144,10 +144,10 @@
 				"neckMount": {
 					"position": {
 						"0.0": {
-							"vector": [0, -2, 0]
+							"vector": [0, 1, 0]
 						},
 						"0.25": {
-							"vector": [0, -2, 0]
+							"vector": [0, 1, 0]
 						}
 					}
 				},

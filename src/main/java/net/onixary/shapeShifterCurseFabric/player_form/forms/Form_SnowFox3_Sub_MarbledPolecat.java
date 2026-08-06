@@ -46,11 +46,23 @@ public class Form_SnowFox3_Sub_MarbledPolecat extends NormalSubForm implements I
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_idle_stay"),1.0f,4);
     private static final AnimUtils.AnimationHolderData ANIM_SNEAK_IDLE =
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_sneak_idle"));
+    private static final AnimUtils.AnimationHolderData ANIM_WALK =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_walk"), 2.0f * 1.6f, 4);
+    private static final AnimUtils.AnimationHolderData ANIM_SNEAK_WALK =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_sneak_walk"));
+    public static final AnimUtils.AnimationHolderData ANIM_RUN =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_run"), 2.8f, 4);
+
+
     public static final AbstractAnimStateController IDLE_CONTROLLER = new IdleStayAnimController(
             new WithSneakAnimController(ANIM_IDLE, ANIM_SNEAK_IDLE),  // 保留原潜行 idle
             new OneAnimController(ANIM_IDLE_STAY), // 停留动画
             100  // 5秒
     );
+    public static final AbstractAnimStateController WALK_CONTROLLER = new WithSneakAnimController(ANIM_WALK, ANIM_SNEAK_WALK);
+    public static final AbstractAnimStateController SPRINT_CONTROLLER = new WithSneakAnimController(ANIM_RUN, ANIM_SNEAK_WALK);
+
+
 
 
     @Override
@@ -69,9 +81,9 @@ public class Form_SnowFox3_Sub_MarbledPolecat extends NormalSubForm implements I
                 case ANIM_STATE_USE_ITEM:
                     return Form_FeralBase.USE_ITEM_CONTROLLER;
                 case ANIM_STATE_WALK:
-                    return Form_FeralBase.WALK_CONTROLLER;
+                    return WALK_CONTROLLER;
                 case ANIM_STATE_SPRINT:
-                    return Form_FeralBase.SPRINT_CONTROLLER;
+                    return SPRINT_CONTROLLER;
                 case ANIM_STATE_IDLE:
                     return IDLE_CONTROLLER;
                 case ANIM_STATE_MINING:

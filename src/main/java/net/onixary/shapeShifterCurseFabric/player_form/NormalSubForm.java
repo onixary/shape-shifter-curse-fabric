@@ -108,6 +108,15 @@ public class NormalSubForm extends NormalForm implements ISubForm {
     }
 
     @Override
+    public float getDefaultEyeScale() {
+        // 子形态若自行配置了 scale 则用自身的，否则沿用 masterForm 的基准 eye_scale
+        if (this.applyScaleFunc != null) {
+            return super.getDefaultEyeScale();
+        }
+        return this.getMasterForm().getDefaultEyeScale();
+    }
+
+    @Override
     public void onTransform_From(PlayerEntity player, IForm prevForm) {
         this.getMasterForm().onTransform_From(player, prevForm);
     }

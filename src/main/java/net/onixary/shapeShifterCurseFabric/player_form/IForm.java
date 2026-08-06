@@ -143,6 +143,11 @@ public interface IForm {
     // 先这样写 等我之后翻一下 pehkui 的代码
     public void applyScale(PlayerEntity player);
 
+    // 该 Form 在无额外 power 修改时的基准 eye_scale（用于第一人称额外物品锚点补偿等）
+    default float getDefaultEyeScale() {
+        return 1.0F;
+    }
+
     // Interface 没法重载boolean equal(Object)函数
     default boolean isEquals(IForm form) {
         return form != null && this.getFormID().equals(form.getFormID());

@@ -23,6 +23,7 @@ public class NormalForm implements IForm {
     private Set<String> formFlag = Set.of();
     private PlayerFormBodyType bodyType = PlayerFormBodyType.NORMAL;
     private @Nullable Consumer<PlayerEntity> applyScaleFunc = null;
+    private float defaultEyeScale = 1.0F;
     private boolean powerAnimRegistered = false;
 
     public static final BiFunction<Float, Float, Consumer<PlayerEntity>> NORMAL_SCALE_FUNC_BUILDER = (scale, eye_scale) -> (player) -> {
@@ -131,6 +132,18 @@ public class NormalForm implements IForm {
     public NormalForm applyScaleFunc(Consumer<PlayerEntity> func) {
         this.applyScaleFunc = func;
         return this;
+    }
+
+    // 同时记录基准 eye_scale，供 getDefaultEyeScale() 使用
+    public NormalForm applyScale(float scale, float eyeScale) {
+        this.applyScaleFunc = NORMAL_SCALE_FUNC_BUILDER.apply(scale, eyeScale);
+        this.defaultEyeScale = eyeScale;
+        return this;
+    }
+
+    @Override
+    public float getDefaultEyeScale() {
+        return this.defaultEyeScale;
     }
 
     // 所有形态必须重载 equals 函数 由于IForm是接口 没法重载Object的函数
