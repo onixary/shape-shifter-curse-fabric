@@ -354,6 +354,10 @@ public class ModPacketsS2C {
             return;
         }
         PlayerEntity playerEntity = client.world.getPlayerByUuid(playerUuid);
+        if (playerEntity == null) {
+            ShapeShifterCurseFabric.LOGGER.warn("Can't find player entity when receiving update power anim data packet");
+            return;
+        }
         // ShapeShifterCurseFabric.LOGGER.info("Received power animation data for player " + playerUuid + " animationId " + animationId + " animationCount " + animationCount + " animationLength " + animationLength);
         client.execute(() -> {
             if (playerEntity instanceof IPlayerAnimController animPlayer) {
