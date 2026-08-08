@@ -207,6 +207,8 @@ public class FormRenderUtils {
         return getPlayerAllFormRenderer(player).stream().filter(predicate).findFirst().orElse(null);
     }
 
+    /*
+    // 暂时废弃 有渲染Bug 用于后续参考逻辑
     // Origins 版本核心 如果需要重构形态系统需要重新写一份这个函数
     public static List<FormRenderer> getPlayerAllFormRenderer(PlayerEntity player) {
         if (FormTextureUtils.useTempFormModel && Objects.equals(player, MinecraftClient.getInstance().player)) {
@@ -259,6 +261,47 @@ public class FormRenderUtils {
                 formRenderers.add(formRenderer);
             }
         }
+        return formRenderers;
+    }
+     */
+
+
+    // 由于服务器端有时没有同步Origins的数据 所以先临时删掉多重layer的功能 改为直接由Form Class提供数据 但是这个功能后续得加 得等剔除Origins
+    public static List<FormRenderer> getPlayerAllFormRenderer(PlayerEntity player) {
+        if (FormTextureUtils.useTempFormModel && Objects.equals(player, MinecraftClient.getInstance().player)) {
+            List<FormRenderer> formRenderers = new ArrayList<>();
+            Identifier formID = FormTextureUtils.tempFormModelProcessor.getLayerID();
+            FormRenderer formRenderer = FormRenderUtils.getFormRenderer(Identifier.of("origins", "origin"), formID);
+            if (formRenderer == null) {
+                return new ArrayList<>();
+            }
+            formRenderers.add(formRenderer);
+            return formRenderers;
+        }
+        List<FormRenderer> formRenderers = new ArrayList<>();
+        try {
+            IForm form = FormUtils.getPlayerForm(player);
+            Pair<Identifier, Identifier> layerOverride = form.getRenderLayerOverride();
+            if (layerOverride != null) {
+                FormRenderer formRenderer = FormRenderUtils.getFormRenderer(layerOverride.getLeft(), layerOverride.getRight());
+                if (formRenderer != null) {
+                    formRenderers.add(formRenderer);
+                } else {
+                    ShapeShifterCurseFabric.LOGGER.warn("IForm.layerRenderOverwrite is not null, but the model is not registered: {} - {}", layerOverride.getLeft(), layerOverride.getRight());
+                }
+                return formRenderers;
+            }
+            Pair<Identifier, Identifier> currentLayer = form.getFormLayer();
+            if (currentLayer != null) {
+                FormRenderer formRenderer = FormRenderUtils.getFormRenderer(currentLayer.getLeft(), currentLayer.getRight());
+                if (formRenderer != null) {
+                    formRenderers.add(formRenderer);
+                } else {
+                    ShapeShifterCurseFabric.LOGGER.warn("IForm.formLayer is not null, but the model is not registered: {} - {}", currentLayer.getLeft(), currentLayer.getRight());
+                }
+                return formRenderers;
+            }
+        } catch (Exception ignored) {}
         return formRenderers;
     }
 }

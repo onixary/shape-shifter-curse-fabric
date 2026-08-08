@@ -35,7 +35,8 @@
         "shape-shifter-curse:form_spider_sound_hurt",
         "shape-shifter-curse:form_spider_sound_key",
         "shape-shifter-curse:form_spider_3_step_sound_speed_up",
-        "shape-shifter-curse:form_tan_prevent_dirty_water_thirst"
+        "shape-shifter-curse:form_tan_prevent_dirty_water_thirst",
+        "shape-shifter-curse:form_spider_web_break_speed"
     ],
     "icon": {
         "item": "minecraft:player_head"

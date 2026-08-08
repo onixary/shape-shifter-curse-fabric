@@ -1,0 +1,11 @@
+{
+  "type": "apoli:modify_break_speed",
+  "block_condition": {
+    "type": "apoli:block",
+    "block": "shape-shifter-curse:temp_web_bridge"
+  },
+  "modifier": {
+    "operation": "multiply_total",
+    "value": 15.0
+  }
+}
