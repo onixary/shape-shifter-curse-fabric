@@ -489,7 +489,10 @@ public class DefaultModelAnimationSystem implements IModelAnimationSystem, IModi
     public void ProcessExtraBone(FormModel m, PlayerEntity player, String AnimBoneID, String OriginFursBoneID) {
         GeoBone bone =  m.resetBone(OriginFursBoneID);
         Vec3f AnimPosition = AnimSystem.getPlayerBone3DTransform(player, AnimBoneID, TransformType.POSITION, new Vec3f(0, 0, 0));
-        m.setPositionForBone(OriginFursBoneID, new Vec3d(AnimPosition.getX(), -AnimPosition.getY(), -AnimPosition.getZ()));
+        // GeckoLib 渲染骨骼时仅对 posX 取反 (translateMatrixToBone: translate(-posX, posY, posZ))，posY/posZ 不取反。
+        // 因此存储阶段必须预取反 X 以抵消渲染层翻转；Y/Z 取反则是补偿 vanilla与GeoBone 的轴向差异。
+        // 之前漏掉了 X 的取反，导致所有额外骨骼的左右(X)位移动画在游戏中反向。
+        m.setPositionForBone(OriginFursBoneID, new Vec3d(-AnimPosition.getX(), -AnimPosition.getY(), -AnimPosition.getZ()));
         m.setRotationForBone(OriginFursBoneID, AnimSystem.getPlayerBone3DTransform(player, AnimBoneID, TransformType.ROTATION, new Vec3f(0, 0, 0)));
         m.invertRotForPart(OriginFursBoneID, false, true, true);
     }

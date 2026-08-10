@@ -70,12 +70,6 @@
 							},
 							"lerp_mode": "catmullrom"
 						},
-						"0.2083": {
-							"post": {
-								"vector": [109.53, 0, 0]
-							},
-							"lerp_mode": "catmullrom"
-						},
 						"0.4167": {
 							"post": {
 								"vector": [107.5, 0, 0]
@@ -104,7 +98,7 @@
 					"position": {
 						"0.0": {
 							"post": {
-								"vector": [0, 0.94, 0]
+								"vector": [0, 2.94, 0]
 							},
 							"lerp_mode": "catmullrom"
 						},
@@ -120,9 +114,15 @@
 							},
 							"lerp_mode": "catmullrom"
 						},
+						"1.4583": {
+							"post": {
+								"vector": [0, 3.23, 0]
+							},
+							"lerp_mode": "catmullrom"
+						},
 						"1.7917": {
 							"post": {
-								"vector": [0, 0.94, 0]
+								"vector": [0, 2.94, 0]
 							},
 							"lerp_mode": "catmullrom"
 						}
@@ -136,12 +136,6 @@
 							},
 							"lerp_mode": "catmullrom"
 						},
-						"0.1667": {
-							"post": {
-								"vector": [126.26, 0, 0]
-							},
-							"lerp_mode": "catmullrom"
-						},
 						"0.4167": {
 							"post": {
 								"vector": [101.06, 0, 0]
@@ -150,7 +144,7 @@
 						},
 						"0.8333": {
 							"post": {
-								"vector": [62.5, 0, 0]
+								"vector": [54.87, 0, 0]
 							},
 							"lerp_mode": "catmullrom"
 						},
@@ -170,13 +164,7 @@
 					"position": {
 						"0.0": {
 							"post": {
-								"vector": [0, 15.36317, 12.14659]
-							},
-							"lerp_mode": "catmullrom"
-						},
-						"0.1667": {
-							"post": {
-								"vector": [0, 16.16, 11.53]
+								"vector": [0, 17.36317, 12.14659]
 							},
 							"lerp_mode": "catmullrom"
 						},
@@ -188,19 +176,19 @@
 						},
 						"0.9167": {
 							"post": {
-								"vector": [0, 12.90716, 8.07233]
+								"vector": [0, 12.90716, 9.07233]
 							},
 							"lerp_mode": "catmullrom"
 						},
 						"1.375": {
 							"post": {
-								"vector": [0, 10.89, 13]
+								"vector": [0, 13.89, 13]
 							},
 							"lerp_mode": "catmullrom"
 						},
 						"1.7917": {
 							"post": {
-								"vector": [0, 15.36317, 12.14659]
+								"vector": [0, 17.36317, 12.14659]
 							},
 							"lerp_mode": "catmullrom"
 						}
