@@ -11,6 +11,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.event.SSCEvent;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
+import net.onixary.shapeShifterCurseFabric.player_form.ISubForm;
 import net.onixary.shapeShifterCurseFabric.player_form.ITransformReason;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
@@ -46,6 +47,10 @@ public class CursedMoon {
         return isCursedMoonDay(world) && isNight(world);
     }
 
+    private static boolean isSubForm(IForm form) {
+        return form instanceof ISubForm subForm && subForm.isSubForm();
+    }
+
     public static void applyStartCursedMoonEffect(World world, PlayerEntity player) {
         // java16+ 真神奇的写法
         if (!(player instanceof ServerPlayerEntity serverPlayer)) {
@@ -73,7 +78,9 @@ public class CursedMoon {
         component.lastTransformByCure = false;
         component.BeforeCursedMoonAppliedForm = null;
         component.AfterCursedMoonAppliedForm = null;
-        if (!RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player) && ShapeShifterCurseFabric.commonConfig.enableCursedMoonTransform) {
+        if (!RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)
+                && !isSubForm(component.nowForm)
+                && ShapeShifterCurseFabric.commonConfig.enableCursedMoonTransform) {
             IForm nowForm = component.nowForm;
             IForm targetForm = component.nowForm._getNextForm(player, ITransformReason.CursedMoon);
             if (!nowForm.isEquals(targetForm)) {
@@ -119,8 +126,10 @@ public class CursedMoon {
         }
         component.isCursedMoonApplied = false;
         component.lastTransformByCure = false;
-        IForm targetForm = component.nowForm._getPrevForm(player, ITransformReason.CursedMoon);
-        TransformManager.startTransform(player, targetForm, null);
+        if (!isSubForm(component.nowForm)) {
+            IForm targetForm = component.nowForm._getPrevForm(player, ITransformReason.CursedMoon);
+            TransformManager.startTransform(player, targetForm, null);
+        }
         component.BeforeCursedMoonAppliedForm = null;
         component.AfterCursedMoonAppliedForm = null;
         component.sync();
