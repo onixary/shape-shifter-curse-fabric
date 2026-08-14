@@ -11,6 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class NormalSubForm extends NormalForm implements ISubForm {
@@ -61,14 +62,23 @@ public class NormalSubForm extends NormalForm implements ISubForm {
         this.formFlag(masterForm.getFormFlag().toArray(new String[0]));
     }
 
+    // 写这段代码时忘了返回的是非null值 如果没变化就返回自身 不能直接返回父形态的返回值 得处理一下
     @Override
     public @NotNull IForm _getNextForm(PlayerEntity player, ITransformReason reason) {
-        return this.getMasterForm()._getNextForm(player, reason);
+        IForm targetForm = this.getMasterForm()._getNextForm(player, reason);
+        if (targetForm.isEquals(this.getMasterForm())) {
+            return this;
+        }
+        return targetForm;
     }
 
     @Override
     public @NotNull IForm _getPrevForm(PlayerEntity player, ITransformReason reason) {
-        return this.getMasterForm()._getPrevForm(player, reason);
+        IForm targetForm = this.getMasterForm()._getPrevForm(player, reason);
+        if (targetForm.isEquals(this.getMasterForm())) {
+            return this;
+        }
+        return targetForm;
     }
 
     @Override
