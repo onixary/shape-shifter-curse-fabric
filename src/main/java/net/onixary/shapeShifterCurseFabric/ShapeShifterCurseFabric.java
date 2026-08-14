@@ -348,6 +348,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
 
         //LOGGER.info(CONFIG.keepOriginalSkin() ? "Original skin will be kept." : "Override skin");
+
+        LOGGER.info("Shape Shifter Curse loaded, Channel: {}, Channel Version: {}, IsConnectorVersion: {}", SSCCustomDataReader.Channel, SSCCustomDataReader.ChannelVersion, IS_CONNECTOR_VERSION);
     }
 
     private void initLocalDataStorage() {

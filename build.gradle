@@ -10,8 +10,9 @@ group = project.maven_group
 // 从Github Action 环境获取构建Channel和BuildVersion
 def channel = System.getenv('channel')
 def build_version = System.getenv('build_version')
-if (channel != null) {
-    version = "${project.mod_version}-${channel}.${build_version}"
+if (channel == null || build_version == null) {
+    channel = "release"
+    build_version = "0"
 }
 
 base {
@@ -266,7 +267,9 @@ processResources {
     filesMatching("fabric.mod.json") {
         expand "version": project.version,
                 "minecraft_version": project.minecraft_version,
-                "loader_version": project.loader_version
+                "loader_version": project.loader_version,
+                "CHANNEL": channel,
+                "CHANNEL_VERSION": build_version
     }
 }
 
