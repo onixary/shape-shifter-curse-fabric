@@ -390,6 +390,10 @@
     {
       "id": "naturalist:cooked_catfish",
       "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:sashimi",
+      "required": false
     }
   ]
 }

@@ -552,6 +552,10 @@
     {
       "id": "tide:dragon_fish",
       "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:sashimi",
+      "required": false
     }
   ]
 }
