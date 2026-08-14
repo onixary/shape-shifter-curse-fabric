@@ -35,6 +35,7 @@ import net.onixary.shapeShifterCurseFabric.util.FormColorData;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.Interface.IJumpController;
 import net.onixary.shapeShifterCurseFabric.util.Interface.IMoveController;
+import net.onixary.shapeShifterCurseFabric.util.SuperUserUtils;
 import net.onixary.shapeShifterCurseFabric.util.Verify.AuthClient;
 import net.onixary.shapeShifterCurseFabric.util.Verify.AuthFile;
 import org.jetbrains.annotations.Nullable;
@@ -76,6 +77,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.MODIFY_FCD_DATA, ModPacketsS2C::receiveModifyFCDData);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.REQUEST_PATRON_AUTH_FILE, ModPacketsS2C::receiveRequestPatronAuthFile);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.MELT_AUTH_SUB_KEY, ModPacketsS2C::receiveNewSubKey);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.SET_SUPER_USER_LEVEL, ModPacketsS2C::receiveSetSuperUserLevel);
     }
 
     /* 重构后不需要了 仅用于参考旧实现逻辑
@@ -616,6 +618,13 @@ public class ModPacketsS2C {
         PacketByteBuf keyBuf = new PacketByteBuf(Unpooled.wrappedBuffer(buf.readByteArray()));
         client.execute(() -> {
             AuthClient.loadServerKey(keyBuf);
+        });
+    }
+
+    private static void receiveSetSuperUserLevel(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        int level = buf.readInt();
+        client.execute(() -> {
+            SuperUserUtils.setClientSULevel(level);
         });
     }
 }
