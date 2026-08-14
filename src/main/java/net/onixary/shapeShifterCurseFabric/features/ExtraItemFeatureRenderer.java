@@ -24,6 +24,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
+import virtuoel.pehkui.api.ScaleTypes;
 
 import java.util.Optional;
 
@@ -100,7 +101,15 @@ public class ExtraItemFeatureRenderer <T extends LivingEntity, M extends EntityM
                         // FirstPerson Mod会直接将head.pivot移动到某个非常远的位置来“隐藏”头部，所以需要直接定义好一个固定位置
                         // Vec3d posOffset = new Vec3d(0.0F, 0.0F, 0.0F);
                         // Vec3d rotCenter = ShapeShifterCurseFabric.feralItemCenter;
-                        Vec3d rotCenter = new Vec3d(0.0F, -4.0F, -6.0F);
+                        // Pehkui EYE_HEIGHT#getScale() 还会乘上 HEIGHT scale，而 Form 保存的基准值是未乘 HEIGHT
+                        // 的 base scale。因此必须用 getBaseScale() 比较同一坐标系下的值，否则 0.9 * 0.55
+                        // 会被错误地与 0.6 相减，导致补偿方向和幅度都不正确。
+                        // 此处是在 Pehkui 模型缩放矩阵内平移，HEIGHT scale 会在矩阵上自动应用，无需再手动除以它。
+                        float eyeScale = ScaleTypes.EYE_HEIGHT.getScaleData(player).getBaseScale(tickDelta);
+                        float feralDefaultEyeScale = curForm.getDefaultEyeScale();
+                        // Entity feature 渲染坐标的 Y 轴与世界坐标相反：eye height 增加时需要减小局部 Y。
+                        float eyeHeightDeltaPixels = (feralDefaultEyeScale - eyeScale) * 1.62F * 16.0F;
+                        Vec3d rotCenter = new Vec3d(0.0F, -4.0F + eyeHeightDeltaPixels, -6.0F);
                         matrices.translate(rotCenter.x / 16.0F, rotCenter.y / 16.0F, rotCenter.z / 16.0F);
                         //Vec3d posOffset = ShapeShifterCurseFabric.feralItemPosOffset;
                         Vec3d posOffset = new Vec3d(-12.0F, 15.0F, 4.0F);

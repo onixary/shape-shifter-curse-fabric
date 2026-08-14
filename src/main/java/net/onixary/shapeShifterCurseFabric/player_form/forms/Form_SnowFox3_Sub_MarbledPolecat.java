@@ -6,8 +6,7 @@ import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateController.IdleStayAnimController;
-import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.OneAnimController;
-import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.WithSneakAnimController;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.*;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateEnum;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
@@ -46,11 +45,54 @@ public class Form_SnowFox3_Sub_MarbledPolecat extends NormalSubForm implements I
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_idle_stay"),1.0f,4);
     private static final AnimUtils.AnimationHolderData ANIM_SNEAK_IDLE =
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_sneak_idle"));
+    private static final AnimUtils.AnimationHolderData ANIM_WALK =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_walk"), 2.0f * 1.6f, 4);
+    private static final AnimUtils.AnimationHolderData ANIM_SNEAK_WALK =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_sneak_walk"));
+    public static final AnimUtils.AnimationHolderData ANIM_RUN =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_run"), 3.5f, 4);
+    public static final AnimUtils.AnimationHolderData ANIM_JUMP =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_jump"), 1.0f, 2);
+    public static final AnimUtils.AnimationHolderData ANIM_FALL =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_fall"), 1.0f, 4);
+    public static final AnimUtils.AnimationHolderData ANIM_SWIM =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_swim"));
+    public static final AnimUtils.AnimationHolderData ANIM_FLOAT =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_float"));
+    public static final AnimUtils.AnimationHolderData ANIM_ATTACK =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_attack"));
+    public static final AnimUtils.AnimationHolderData ANIM_DIG =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_dig"));
+    public static final AnimUtils.AnimationHolderData ANIM_CLIMB =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_climb"));
+    public static final AnimUtils.AnimationHolderData ANIM_CLIMB_IDLE =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_climb_idle"));
+    public static final AnimUtils.AnimationHolderData ANIM_ELYTRA_FLY =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_elytra_fly"));
+    public static final AnimUtils.AnimationHolderData ANIM_SLEEP =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_sleep"));
+
+
+
+
+
+
     public static final AbstractAnimStateController IDLE_CONTROLLER = new IdleStayAnimController(
             new WithSneakAnimController(ANIM_IDLE, ANIM_SNEAK_IDLE),  // 保留原潜行 idle
             new OneAnimController(ANIM_IDLE_STAY), // 停留动画
             100  // 5秒
     );
+    public static final AbstractAnimStateController WALK_CONTROLLER = new WithSneakAnimController(ANIM_WALK, ANIM_SNEAK_WALK);
+    public static final AbstractAnimStateController SPRINT_CONTROLLER = new WithSneakAnimController(ANIM_RUN, ANIM_SNEAK_WALK);
+    public static final AbstractAnimStateController JUMP_CONTROLLER = new OneAnimController(ANIM_JUMP);
+    public static final AbstractAnimStateController FALL_CONTROLLER = new OneAnimController(ANIM_FALL);
+    public static final AbstractAnimStateController SWIM_CONTROLLER = new SwimAnimController(ANIM_FLOAT, ANIM_SWIM);
+    public static final AbstractAnimStateController USE_ITEM_CONTROLLER = new UseItemAnimControllerPro(ANIM_IDLE, ANIM_IDLE, ANIM_SNEAK_IDLE, ANIM_SNEAK_WALK);
+    public static final AbstractAnimStateController MINING_CONTROLLER = new OneAnimController(ANIM_DIG);
+    public static final AbstractAnimStateController ATTACK_CONTROLLER = new OneAnimController(ANIM_ATTACK);
+    public static final AbstractAnimStateController CLIMB_CONTROLLER = new ClimbAnimController(ANIM_CLIMB_IDLE, ANIM_CLIMB);
+    public static final AbstractAnimStateController FALL_FLYING_CONTROLLER = new OneAnimController(ANIM_ELYTRA_FLY);
+    public static final AbstractAnimStateController SLEEP_CONTROLLER = new OneAnimController(ANIM_SLEEP);
 
 
     @Override
@@ -59,30 +101,32 @@ public class Form_SnowFox3_Sub_MarbledPolecat extends NormalSubForm implements I
         if (animStateEnum != null) {
             switch (animStateEnum) {
                 case ANIM_STATE_SLEEP:
-                    return Form_FeralBase.SLEEP_CONTROLLER;
+                    return SLEEP_CONTROLLER;
                 case ANIM_STATE_CLIMB:
-                    return Form_FeralBase.CLIMB_CONTROLLER;
+                    return CLIMB_CONTROLLER;
                 case ANIM_STATE_JUMP:
-                    return Form_FeralBase.JUMP_CONTROLLER;
+                    return JUMP_CONTROLLER;
+                case ANIM_STATE_FALL:
+                    return FALL_CONTROLLER;
                 case ANIM_STATE_SWIM:
-                    return Form_FeralBase.SWIM_CONTROLLER;
+                    return SWIM_CONTROLLER;
                 case ANIM_STATE_USE_ITEM:
-                    return Form_FeralBase.USE_ITEM_CONTROLLER;
+                    return USE_ITEM_CONTROLLER;
                 case ANIM_STATE_WALK:
-                    return Form_FeralBase.WALK_CONTROLLER;
+                    return WALK_CONTROLLER;
                 case ANIM_STATE_SPRINT:
-                    return Form_FeralBase.SPRINT_CONTROLLER;
+                    return SPRINT_CONTROLLER;
                 case ANIM_STATE_IDLE:
                     return IDLE_CONTROLLER;
                 case ANIM_STATE_MINING:
-                    return Form_FeralBase.MINING_CONTROLLER;
+                    return MINING_CONTROLLER;
                 case ANIM_STATE_ATTACK:
-                    return Form_FeralBase.ATTACK_CONTROLLER;
+                    return ATTACK_CONTROLLER;
                 case ANIM_STATE_FLYING:
                 case ANIM_STATE_FALL_FLYING:
-                    return Form_FeralBase.FALL_FLYING_CONTROLLER;
+                    return FALL_FLYING_CONTROLLER;
                 default:
-                    return Form_FeralBase.IDLE_CONTROLLER;
+                    return IDLE_CONTROLLER;
             }
         }
         return super.getAnimStateController(player, animSystemData, animStateID);

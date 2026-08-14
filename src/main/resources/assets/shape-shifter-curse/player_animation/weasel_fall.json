@@ -1,179 +1,151 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"weasel_sneak_idle": {
+		"weasel_fall": {
 			"loop": true,
 			"animation_length": 0.3333,
 			"bones": {
 				"body": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, 0, 0]
+							"vector": [15, 0, 0]
 						},
 						"0.3333": {
-							"vector": [0, 0, 0]
+							"vector": [15, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": [0, -14.3, -6]
+							"vector": [0, -13, -2]
 						},
 						"0.3333": {
-							"vector": [0, -14.3, -6]
-						}
-					}
-				},
-				"head": {
-					"position": {
-						"0.0": {
-							"vector": [0, 2, 0]
-						},
-						"0.3333": {
-							"vector": [0, 2, 0]
+							"vector": [0, -13, -2]
 						}
 					}
 				},
 				"torso": {
 					"rotation": {
 						"0.0": {
-							"vector": [105, 0, 0]
+							"vector": [120, 0, 0]
 						},
 						"0.3333": {
-							"vector": [105, 0, 0]
+							"vector": [120, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": [0, -4, 0]
+							"vector": [0, 4, 0]
 						},
 						"0.3333": {
-							"vector": [0, -4, 0]
+							"vector": [0, 4, 0]
 						}
 					}
 				},
 				"lowerBody": {
 					"rotation": {
 						"0.0": {
-							"vector": [105, 0, 0]
+							"vector": [172.5, 0, 0]
 						},
 						"0.3333": {
-							"vector": [105, 0, 0]
+							"vector": [172.5, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": [0, 9, 13]
+							"vector": [0, 20, 11]
 						},
 						"0.3333": {
-							"vector": [0, 9, 13]
-						}
-					}
-				},
-				"tailMount": {
-					"rotation": {
-						"0.0": {
-							"vector": [-35, 0, 0]
-						},
-						"0.3333": {
-							"vector": [-35, 0, 0]
-						}
-					},
-					"position": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"0.3333": {
-							"vector": [0, 0, 0]
+							"vector": [0, 20, 11]
 						}
 					}
 				},
 				"leftArm": {
 					"rotation": {
 						"0.0": {
-							"vector": [-40, 0, 0]
+							"vector": [0, 0, 7.5]
 						},
 						"0.3333": {
-							"vector": [-40, 0, 0]
+							"vector": [0, 0, 7.5]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": [-1.2, -1, 1]
+							"vector": [-1.2, 6, 1]
 						},
 						"0.3333": {
-							"vector": [-1.2, -1, 1]
+							"vector": [-1.2, 6, 1]
 						}
 					}
 				},
 				"rightArm": {
 					"rotation": {
 						"0.0": {
-							"vector": [-40, 0, 0]
+							"vector": [0, 0, -7.5]
 						},
 						"0.3333": {
-							"vector": [-40, 0, 0]
+							"vector": [0, 0, -7.5]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": [1.2, -1, 1]
+							"vector": [1.2, 6, 1]
 						},
 						"0.3333": {
-							"vector": [1.2, -1, 1]
+							"vector": [1.2, 6, 1]
 						}
 					}
 				},
 				"leftLeg": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, 0, 0]
+							"vector": [127.5, 0, 0]
 						},
 						"0.3333": {
-							"vector": [0, 0, 0]
+							"vector": [127.5, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": [1, 13, 18]
+							"vector": [1, 20, 10]
 						},
 						"0.3333": {
-							"vector": [1, 13, 18]
+							"vector": [1, 20, 10]
 						}
 					}
 				},
 				"rightLeg": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, 0, 0]
+							"vector": [107.5, 0, 0]
 						},
 						"0.3333": {
-							"vector": [0, 0, 0]
+							"vector": [107.5, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": [-1, 13, 18]
+							"vector": [-1, 22, 9]
 						},
 						"0.3333": {
-							"vector": [-1, 13, 18]
+							"vector": [-1, 22, 9]
 						}
 					}
 				},
 				"neckMount": {
 					"rotation": {
 						"0.0": {
-							"vector": [10, 0, 0]
+							"vector": [25, 0, 0]
 						},
 						"0.3333": {
-							"vector": [10, 0, 0]
+							"vector": [25, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": [0, -3, 1]
+							"vector": [0, 5, -1]
 						},
 						"0.3333": {
-							"vector": [0, -3, 1]
+							"vector": [0, 5, -1]
 						}
 					}
 				}
