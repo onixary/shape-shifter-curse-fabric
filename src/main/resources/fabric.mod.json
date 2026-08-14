@@ -113,6 +113,10 @@
   "accessWidener": "shape-shifter-curse.accesswidener",
 
   "custom": {
+    "ssc-data": {
+      "Channel": "${CHANNEL}",
+      "ChannelVersion": "${CHANNEL_VERSION}"
+    },
     "cardinal-components": [
       "origins:origin",
       "shape-shifter-curse:player_form",

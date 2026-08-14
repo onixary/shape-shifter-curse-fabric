@@ -42,4 +42,4 @@ jobs:
         uses: actions/upload-artifact@v4.3.3
         with:
           name: "${{ steps.properties.outputs.archives_base_name }}-${{ steps.properties.outputs.mod_version }}-${{ env.channel }}.${{ env.build_version }}"
-          path: build/libs/${{ steps.properties.outputs.archives_base_name }}-${{ steps.properties.outputs.mod_version }}-${{ env.channel }}.${{ env.build_version }}.jar
+          path: build/libs/${{ steps.properties.outputs.archives_base_name }}-${{ steps.properties.outputs.mod_version }}.jar
