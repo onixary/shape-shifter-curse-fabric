@@ -75,11 +75,43 @@
       "required": false
     },
     {
-      "id": "kaleidoscope_cookery:qingtuan",
+      "id": "kaleidoscope_cookery:sticky_candy",
       "required": false
     },
     {
-      "id": "kaleidoscope_cookery:sticky_candy",
+      "id": "kaleidoscope_cookery:buddha_jumps_over_the_wall",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:chorus_fried_egg",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:dark_cuisine",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:fondant_pie",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:fondant_spider_eye",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:golden_salad",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:slime_ball_meal",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:suspicious_stir_fry",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:sweet_and_sour_ender_pearls",
       "required": false
     }
   ]

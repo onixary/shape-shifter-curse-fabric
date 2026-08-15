@@ -394,6 +394,38 @@
     {
       "id": "kaleidoscope_cookery:sashimi",
       "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:braised_fish",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:cold_style_sashimi",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:desert_style_sashimi",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:end_style_sashimi",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:nether_style_sashimi",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:oil_splashed_fish",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:stargazy_pie",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:tundra_style_sashimi",
+      "required": false
     }
   ]
 }
