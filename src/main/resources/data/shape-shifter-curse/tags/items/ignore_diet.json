@@ -79,19 +79,11 @@
       "required": false
     },
     {
-      "id": "kaleidoscope_cookery:qingtuan",
-      "required": false
-    },
-    {
       "id": "kaleidoscope_cookery:sticky_candy",
       "required": false
     },
     {
       "id": "kaleidoscope_cookery:buddha_jumps_over_the_wall",
-      "required": false
-    },
-    {
-      "id": "kaleidoscope_cookery:candied_potato",
       "required": false
     },
     {
@@ -124,6 +116,38 @@
     },
     {
       "id": "kaleidoscope_cookery:sweet_and_sour_ender_pearls",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:delicious_egg_fried_rice",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:egg_fried_rice",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:laba_congee",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:pork_bone_soup",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:scramble_egg_with_tomatoes",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:scramble_egg_with_tomatoes_rice_bowl",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:suspicious_stir_fry_rice_bowl",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:udon_noodle",
       "required": false
     }
   ]
