@@ -661,6 +661,90 @@
     {
       "id": "natures_delight:fafaru",
       "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:baozi",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:bamboo_tube_rice",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:caterpillar",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:cooked_cow_offal",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:cooked_cut_small_meats",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:cooked_donkey_meat",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:cooked_lamb_chops",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:cooked_meatball",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:cooked_pork_belly",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:donkey_burger",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:dumpling",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:meat_pie",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:raw_cow_offal",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:raw_cut_small_meats",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:raw_donkey_meat",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:raw_lamb_chops",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:raw_meatball",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:raw_pork_belly",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:samsa",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:sashimi",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:shengjian_mantou",
+      "required": false
     }
   ]
 }

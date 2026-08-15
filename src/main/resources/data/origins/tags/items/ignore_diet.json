@@ -69,6 +69,18 @@
     {
       "id": "nethersdelight:magma_gelatin",
       "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:fried_egg",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:qingtuan",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:sticky_candy",
+      "required": false
     }
   ]
 }
