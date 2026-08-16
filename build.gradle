@@ -256,6 +256,10 @@ dependencies {
     // Tough as nails
     modCompileOnly "maven.modrinth:tough-as-nails:VaFrDMPi"
 
+    // Presence Footsteps
+    modCompileOnly "maven.modrinth:presence-footsteps:1.10.1+1.20.1"
+    modRuntimeOnly "maven.modrinth:presence-footsteps:1.10.1+1.20.1"
+
 }
 
 processResources {

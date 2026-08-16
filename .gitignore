@@ -118,3 +118,4 @@ runs/
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
 /.claude/
+/.zcode/plans/plan-sess_f76410b7-f958-4e04-9e4c-1307dab3c9fb.md

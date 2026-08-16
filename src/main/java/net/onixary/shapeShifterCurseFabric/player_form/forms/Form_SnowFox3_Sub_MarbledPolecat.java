@@ -24,6 +24,7 @@ public class Form_SnowFox3_Sub_MarbledPolecat extends NormalSubForm implements I
         super(formID, RegPlayerForms.SNOW_FOX_3);
         this.addPower(ShapeShifterCurseFabric.identifier("sub_form_marbled_polecat_idle_stay_eye_height"));
         this.removePower(ShapeShifterCurseFabric.identifier("feral_form_step_sound_speed_up"));
+        this.addPower(ShapeShifterCurseFabric.identifier("sub_form_marbled_polecat_step_sound_speed_down"));
     }
 
     @Override
