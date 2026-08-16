@@ -23,7 +23,7 @@ public class Form_SnowFox3_Sub_MarbledPolecat extends NormalSubForm implements I
     public Form_SnowFox3_Sub_MarbledPolecat(Identifier formID) {
         super(formID, RegPlayerForms.SNOW_FOX_3);
         this.addPower(ShapeShifterCurseFabric.identifier("sub_form_marbled_polecat_idle_stay_eye_height"));
-
+        this.removePower(ShapeShifterCurseFabric.identifier("feral_form_step_sound_speed_up"));
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Form_SnowFox3_Sub_MarbledPolecat extends NormalSubForm implements I
     private static final AnimUtils.AnimationHolderData ANIM_SNEAK_IDLE =
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_sneak_idle"));
     private static final AnimUtils.AnimationHolderData ANIM_WALK =
-            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_walk"), 2.0f * 1.6f, 4);
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_walk"), 2.0f * 1.3f, 4);
     private static final AnimUtils.AnimationHolderData ANIM_SNEAK_WALK =
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_sneak_walk"));
     public static final AnimUtils.AnimationHolderData ANIM_RUN =
