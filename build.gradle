@@ -256,6 +256,7 @@ dependencies {
     // Tough as nails
     modCompileOnly "maven.modrinth:tough-as-nails:VaFrDMPi"
 
+    // modCompileOnly "curse.maven:biomes-o-plenty-220318:6364066"
 }
 
 processResources {
