@@ -1,14 +1,11 @@
 package net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.spider;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SpiderEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
@@ -53,25 +50,6 @@ public class TransformativeSpiderEntity extends SpiderEntity implements ITMob {
         return TO_SPIDER_0_EFFECT;
     }
 
-    private int cooldown = 0;
-
-    @Override
-    public void TickCooldown() {
-        if (this.cooldown > 0) {
-            this.cooldown --;
-        }
-    }
-
-    @Override
-    public void ApplyCooldown() {
-        this.cooldown = 100;
-    }
-
-    @Override
-    public boolean IsInCooldown() {
-        return this.cooldown > 0;
-    }
-
     @Override
     public void tick() {
         super.tick();
@@ -79,9 +57,11 @@ public class TransformativeSpiderEntity extends SpiderEntity implements ITMob {
     }
 
     @Override
-    public boolean tryAttack(Entity target) {
-        Optional<Boolean> attacked = this.TMob_TryAttack(this, target);
-        return attacked.orElseGet(() -> super.tryAttack(target));
+    public void applyDamageEffects(LivingEntity attacker, Entity target) {
+        // 在applyStatusByChance里面已经判断形态了 无需在外面判断
+        if (target instanceof PlayerEntity player) {
+            ITMob.applyStatusByChance(this.getStatusChance(), player, this.getStatusEffect());
+        }
     }
 
     @Override

@@ -333,4 +333,10 @@ public class ModPacketsS2CServer {
         buf.writeByteArray(newKey.getRaw());
         ServerPlayNetworking.send(player, ModPackets.MELT_AUTH_SUB_KEY, buf);
     }
+
+    public static void sendSetSuperUserLevel(ServerPlayerEntity player, int level) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeInt(level);
+        ServerPlayNetworking.send(player, ModPackets.SET_SUPER_USER_LEVEL, buf);
+    }
 }

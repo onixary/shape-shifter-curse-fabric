@@ -93,6 +93,7 @@ public class AdditionalPowers {
         register(TANPreventDirtyWaterThirstEffectPower.createFactory());
         register(TANModifyThirstExhaustionPower.createFactory());
         register(ClimbingEXPower.createFactory());
+        register(EatEntityPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

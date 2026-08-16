@@ -2,6 +2,7 @@ package net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 
@@ -31,7 +32,7 @@ public class TransformativeBatEntity extends BatEntity implements ITMob {
     public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, StaticParams.CUSTOM_MOB_DEFAULT_DAMAGE)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, StaticParams.CUSTOM_MOB_DEFAULT_DAMAGE_OLD)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0);
     }
 
@@ -49,7 +50,6 @@ public class TransformativeBatEntity extends BatEntity implements ITMob {
             return i > random.nextInt(j) ? false : canMobSpawn(type, world, spawnReason, pos, random);
         }
     }
-
 
     @Override
     public float getStatusChance() {
@@ -83,6 +83,17 @@ public class TransformativeBatEntity extends BatEntity implements ITMob {
     @Override
     public void tick() {
         super.tick();
+        // 由于大部分变形生物都改了攻击逻辑 所以把这个逻辑放唯一一个没改的蝙蝠代码里
+        LivingEntity target = this.getTarget();
+        if (target instanceof PlayerEntity && !this.IsInCooldown()) {
+            PlayerEntity player = (PlayerEntity) target;
+            double distance = this.squaredDistanceTo(player);
+            if (distance <= StaticParams.CUSTOM_MOB_DEFAULT_ATTACK_RANGE * StaticParams.CUSTOM_MOB_DEFAULT_ATTACK_RANGE) {
+                this.tryAttack(player);
+                ITMob.applyStatusByChance(this.getStatusChance(), player, this.getStatusEffect());
+                this.ApplyCooldown();
+            }
+        }
         this.TMob_Tick(this);
     }
 

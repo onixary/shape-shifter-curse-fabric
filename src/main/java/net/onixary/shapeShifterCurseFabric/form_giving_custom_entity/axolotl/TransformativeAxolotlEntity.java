@@ -1,7 +1,10 @@
 package net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.ai.brain.Brain;
+import net.minecraft.entity.ai.brain.sensor.Sensor;
+import net.minecraft.entity.ai.brain.sensor.SensorType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
@@ -20,11 +23,10 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ITMob;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.status_effects.BaseTransformativeStatusEffect;
 
-import java.util.Optional;
-
 import static net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect.TO_AXOLOTL_0_EFFECT;
 
 public class TransformativeAxolotlEntity extends AxolotlEntity implements Bucketable, ITMob {
+    protected static final ImmutableList<? extends SensorType<? extends Sensor<? super AxolotlEntity>>> SENSORS = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_ADULT, SensorType.HURT_BY, TAxolotlEntitySensor.T_AXOLOTL_ENTITY_SENSOR, SensorType.AXOLOTL_TEMPTATIONS);;
 
     public TransformativeAxolotlEntity(EntityType<? extends AxolotlEntity> entityType, World world) {
         super(entityType, world);
@@ -33,7 +35,7 @@ public class TransformativeAxolotlEntity extends AxolotlEntity implements Bucket
     public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, StaticParams.CUSTOM_MOB_DEFAULT_DAMAGE)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, StaticParams.CUSTOM_MOB_DEFAULT_DAMAGE)  // 不改成1点伤害不行 无法攻击
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0);
     }
 
@@ -65,25 +67,6 @@ public class TransformativeAxolotlEntity extends AxolotlEntity implements Bucket
         return TO_AXOLOTL_0_EFFECT;
     }
 
-    private int cooldown = 0;
-
-    @Override
-    public void TickCooldown() {
-        if (this.cooldown > 0) {
-            this.cooldown --;
-        }
-    }
-
-    @Override
-    public void ApplyCooldown() {
-        this.cooldown = 100;
-    }
-
-    @Override
-    public boolean IsInCooldown() {
-        return this.cooldown > 0;
-    }
-
     @Override
     public void tick() {
         super.tick();
@@ -91,14 +74,15 @@ public class TransformativeAxolotlEntity extends AxolotlEntity implements Bucket
     }
 
     @Override
-    public boolean tryAttack(Entity target) {
-        Optional<Boolean> attacked = this.TMob_TryAttack(this, target);
-        return attacked.orElseGet(() -> super.tryAttack(target));
+    public void applyDamageEffects(LivingEntity attacker, Entity target) {
+        // 在applyStatusByChance里面已经判断形态了 无需在外面判断
+        if (target instanceof PlayerEntity player) {
+            ITMob.applyStatusByChance(this.getStatusChance(), player, this.getStatusEffect());
+        }
     }
 
     @Override
-    protected void initGoals() {
-        super.initGoals();
-        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+    protected Brain.Profile<AxolotlEntity> createBrainProfile() {
+        return Brain.createProfile(MEMORY_MODULES, SENSORS);
     }
 }
