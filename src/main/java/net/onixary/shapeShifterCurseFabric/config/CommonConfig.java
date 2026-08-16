@@ -16,12 +16,12 @@ public class CommonConfig implements ConfigData {
     public float transformativeBatSpawnChance = 0.5f;
 
     @ConfigEntry.Category("General")
-    @Comment("Transformative Axolotl Spawn Chance, 0 For Disable Spawn. Default: 1.0f [0.0f ~ 1.0f]")
-    public float transformativeAxolotlSpawnChance = 1.0f;
+    @Comment("Transformative Axolotl Spawn Chance, 0 For Disable Spawn. Default: 0.5f [0.0f ~ 1.0f]")
+    public float transformativeAxolotlSpawnChance = 0.5f;
 
     @ConfigEntry.Category("General")
-    @Comment("Transformative Ocelot Spawn Chance, 0 For Disable Spawn. Default: 0.67f [0.0f ~ 1.0f]")
-    public float transformativeOcelotSpawnChance = 0.67f;
+    @Comment("Transformative Ocelot Spawn Chance, 0 For Disable Spawn. Default: 0.5f [0.0f ~ 1.0f]")
+    public float transformativeOcelotSpawnChance = 0.5f;
 
     @ConfigEntry.Category("General")
     @Comment("Transformative Wolf Spawn Chance, 0 For Disable Spawn. Default: 0.5f [0.0f ~ 1.0f]")
