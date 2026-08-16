@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.form_giving_custom_entity;
 
+import net.minecraft.entity.EntityType;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
@@ -7,9 +8,27 @@ import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.spider.Tran
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.wolf.TransformativeWolfEntity;
 import net.onixary.shapeShifterCurseFabric.util.EntityAttributeRegister;
 
+import java.util.HashMap;
+
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.*;
 
 public class RegTransformativeEntity {
+    // 突然想在拓展整个好玩的玩具 预先留一个API
+    public static final HashMap<EntityType<?>, EntityType<?>> NormalMobTMobMap = new HashMap<>();
+    public static final HashMap<EntityType<?>, EntityType<?>> TMobNormalMobMap = new HashMap<>();
+    public static void registerTMobLink(EntityType<?> normalMob, EntityType<?> tMob) {
+        NormalMobTMobMap.put(normalMob, tMob);
+        TMobNormalMobMap.put(tMob, normalMob);
+    }
+
+    static {
+        registerTMobLink(EntityType.BAT, T_BAT);
+        registerTMobLink(EntityType.AXOLOTL, T_AXOLOTL);
+        registerTMobLink(EntityType.OCELOT, T_OCELOT);
+        registerTMobLink(EntityType.WOLF, T_WOLF);
+        registerTMobLink(EntityType.SPIDER, T_SPIDER);
+    }
+
 
     public static void register() {
         // Reg custom entities model and renderer
