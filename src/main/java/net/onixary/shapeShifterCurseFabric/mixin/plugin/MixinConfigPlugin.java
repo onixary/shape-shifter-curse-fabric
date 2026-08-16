@@ -26,6 +26,7 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
         mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.integration.AppleSkin", new MixinRequiredMods(new String[]{"appleskin"}, new String[]{}));
         mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.integration.TacZ_Anim", new MixinRequiredMods(new String[]{"tacz"}, new String[]{}));
         mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.integration.TacZ_AnimThird", new MixinRequiredMods(new String[]{"tacz"}, new String[]{}));
+        mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.integration.PresenceFootstepsStepSpeedMixin", new MixinRequiredMods(new String[]{"presencefootsteps"}, new String[]{}));
         mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.integration.ToughAsNailsDrinkInWorldPacketMixin", new MixinRequiredMods(new String[]{"toughasnails"}, new String[]{}));
         mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.integration.ToughAsNailsTemperatureHelperImplMixin", new MixinRequiredMods(new String[]{"toughasnails"}, new String[]{}));
         mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.integration.ToughAsNailsThirstHandlerMixin", new MixinRequiredMods(new String[]{"toughasnails"}, new String[]{}));
