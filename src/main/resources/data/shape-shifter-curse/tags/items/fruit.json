@@ -89,6 +89,10 @@
     {
       "id": "kaleidoscope_cookery:tomato",
       "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:fruit_platter",
+      "required": false
     }
   ]
 }

@@ -745,6 +745,206 @@
     {
       "id": "kaleidoscope_cookery:shengjian_mantou",
       "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:blaze_lamb_chop",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:braised_fish",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:braised_pork_ribs",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:cold_roasted_meat",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:cold_style_sashimi",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:crystal_lamb_chop",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:desert_style_sashimi",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:dongpo_pork",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:end_style_sashimi",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:four_joy_meatball_soup",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:fried_caterpillar",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:fried_spring_roll",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:frost_lamb_chop",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:nether_style_sashimi",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:numbing_spicy_chicken",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:oil_splashed_fish",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:pan_seared_knight_steak",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:spicy_blood_stew",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:spicy_chicken",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:spicy_rabbit_head",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:stargazy_pie",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:stuffed_tiger_skin_pepper",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:tundra_style_sashimi",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:yakitori",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:beef_meatball_soup",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:beef_noodle",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:borscht",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:braised_beef",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:braised_beef_rice_bowl",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:braised_beef_with_potatoes",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:braised_fish_rice_bowl",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:chicken_and_mushroom_stew",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:donkey_soup",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:fearsome_thick_soup",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:fish_flavored_shredded_pork",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:fish_flavored_shredded_pork_rice_bowl",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:hui_noodle",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:lamb_and_radish_soup",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:pork_bone_soup",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:pufferfish_soup",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:seafood_miso_soup",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:spicy_chicken_rice_bowl",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:stir_fried_beef_offal",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:stir_fried_beef_offal_rice_bowl",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:stir_fried_pork_with_peppers",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:stir_fried_pork_with_peppers_rice_bowl",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:sweet_and_sour_pork",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:sweet_and_sour_pork_rice_bowl",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:tomato_beef_brisket_soup",
+      "required": false
+    },
+    {
+      "id": "kaleidoscope_cookery:wild_mushroom_rabbit_soup",
+      "required": false
     }
   ]
 }
