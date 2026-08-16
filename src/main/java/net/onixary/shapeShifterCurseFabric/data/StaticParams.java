@@ -35,7 +35,8 @@ public class StaticParams {
     // ----------------------------------------
     // transformative mob settings
     // transformative mob default attack damage
-    public static final float CUSTOM_MOB_DEFAULT_DAMAGE = 0.5F;
+    public static final float CUSTOM_MOB_DEFAULT_DAMAGE_OLD = 0.5F;
+    public static final float CUSTOM_MOB_DEFAULT_DAMAGE = 1.0F;
 
     // attack range for non aggressive transformative mobs
     public static final double CUSTOM_MOB_DEFAULT_ATTACK_RANGE = 3.0;
