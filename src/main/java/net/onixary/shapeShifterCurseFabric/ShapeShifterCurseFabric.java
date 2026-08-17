@@ -161,7 +161,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             Registries.ENTITY_TYPE,
             new Identifier(ShapeShifterCurseFabric.MOD_ID, "t_spider"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TransformativeSpiderEntity::new)
-                    .dimensions(EntityDimensions.fixed(1.4f, 0.9f))
+                    .dimensions(EntityDimensions.fixed(0.7f, 0.45f))
                     .build()
     );
 

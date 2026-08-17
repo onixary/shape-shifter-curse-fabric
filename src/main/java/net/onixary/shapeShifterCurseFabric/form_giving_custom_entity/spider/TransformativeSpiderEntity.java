@@ -70,6 +70,11 @@ public class TransformativeSpiderEntity extends SpiderEntity implements ITMob {
     }
 
     @Override
+    protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
+        return 0.325F;
+    }
+
+    @Override
     protected Identifier getLootTableId() {
         return new Identifier(ShapeShifterCurseFabric.MOD_ID, "entities/t_spider");
     }
