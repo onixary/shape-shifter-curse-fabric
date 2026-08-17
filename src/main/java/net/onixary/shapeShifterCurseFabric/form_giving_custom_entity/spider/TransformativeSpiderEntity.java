@@ -33,7 +33,7 @@ public class TransformativeSpiderEntity extends SpiderEntity implements ITMob {
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f);
     }
 
-    public static boolean canCustomSpawn(EntityType<TransformativeOcelotEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+    public static boolean canCustomSpawn(EntityType<TransformativeSpiderEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
         float Chance = ShapeShifterCurseFabric.commonConfig.transformativeSpiderSpawnChance;
         if (Chance <= 0.0f) { return false; }
         if (Chance >= 1.0f) { return true; }
@@ -67,6 +67,11 @@ public class TransformativeSpiderEntity extends SpiderEntity implements ITMob {
     @Override
     public EntityDimensions getDimensions(EntityPose pose) {
         return EntityDimensions.fixed(0.7f, 0.45f);
+    }
+
+    @Override
+    protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
+        return 0.325F;
     }
 
     @Override

@@ -652,6 +652,7 @@
     "gui.shape_shifter_curse_fabric.fcs.primaryGreyReverse": "Reverse Primary",
     "gui.shape_shifter_curse_fabric.fcs.accent1GreyReverse": "Reverse Accent 1",
     "gui.shape_shifter_curse_fabric.fcs.accent2GreyReverse": "Reverse Accent 2",
+    "gui.shape_shifter_curse.category.web_compostable": "Переваривание",
     "text.autoconfig.shape-shifter-curse-common.option.immediatelyTransform": "Force Immediately Transform",
     "tooltip.shape_shifter_curse.morphscale_food": "Undefined Tag Name",
     "text.autoconfig.shape-shifter-curse-common.option.enableInitialForm": "Enable Custom Initial Form",

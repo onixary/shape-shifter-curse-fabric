@@ -21,6 +21,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TransformativeAxolotlEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.bat.TransformativeBatEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.ocelot.TransformativeOcelotEntity;
+import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.spider.TransformativeSpiderEntity;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.wolf.TransformativeWolfEntity;
 
 import java.util.Map;
@@ -88,6 +89,13 @@ public class TransformativeEntitySpawning {
                 2,  // 1/2 兔子的权重
                 1,
                 2
+        );
+        // T_SPIDER
+        SpawnRestriction.register(
+                ShapeShifterCurseFabric.T_SPIDER,
+                SpawnRestriction.Location.ON_GROUND,
+                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                TransformativeSpiderEntity::canCustomSpawn
         );
 
         ServerLifecycleEvents.SERVER_STARTED.register(server -> {

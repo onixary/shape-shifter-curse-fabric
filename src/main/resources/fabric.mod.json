@@ -101,6 +101,9 @@
     ],
     "calio:ordered-resource-listener": [
       "net.onixary.shapeShifterCurseFabric.integration.origins.Origins"
+    ],
+    "jei_mod_plugin": [
+      "net.onixary.shapeShifterCurseFabric.integration.jei.SSC_JEI_Plugin"
     ]
   },
 
