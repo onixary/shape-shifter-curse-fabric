@@ -135,6 +135,10 @@ repositories {
         url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
     }
     maven { url "https://maven.ryanliptak.com/" }
+    maven {
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
 
     mavenLocal()
 }
@@ -261,6 +265,10 @@ dependencies {
     // modRuntimeOnly "maven.modrinth:presence-footsteps:1.10.1+1.20.1"
 
     // modCompileOnly "curse.maven:biomes-o-plenty-220318:6364066"
+
+    // 官方Maven仓库速度太慢 改为CurseMaven的源
+    // modImplementation "mezz.jei:jei-${minecraft_version}-fabric:${jei_version}"
+    modImplementation "curse.maven:jei-238222:8622779"
 }
 
 processResources {
