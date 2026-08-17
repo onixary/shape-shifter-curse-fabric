@@ -258,7 +258,7 @@ dependencies {
 
     // Presence Footsteps
     modCompileOnly "maven.modrinth:presence-footsteps:1.10.1+1.20.1"
-    modRuntimeOnly "maven.modrinth:presence-footsteps:1.10.1+1.20.1"
+    // modRuntimeOnly "maven.modrinth:presence-footsteps:1.10.1+1.20.1"
 
     // modCompileOnly "curse.maven:biomes-o-plenty-220318:6364066"
 }
