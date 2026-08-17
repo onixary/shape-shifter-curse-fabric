@@ -6,6 +6,14 @@
       "required": false
     },
     "minecraft:cobweb",
-    "shape-shifter-curse:dew_covered_cobweb"
+    "shape-shifter-curse:dew_covered_cobweb",
+    {
+      "id": "biomesoplenty:hanging_cobweb",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:glowworm_silk",
+      "required": false
+    }
   ]
 }

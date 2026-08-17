@@ -8,7 +8,8 @@
   "mixins": [
     "forge.CurioImpl",
     "forge.CurioItemImpl",
-    "forge.CurioUtilsImpl"
+    "forge.CurioUtilsImpl",
+    "integration.BOP_WebbingBlockMixin"
   ],
   "client": [
   ],

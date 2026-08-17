@@ -36,6 +36,7 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
         mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.forge.CurioImpl", new MixinRequiredMods(new String[]{"curios"}, new String[]{}));
         mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.forge.CurioItemImpl", new MixinRequiredMods(new String[]{"curios"}, new String[]{}));
         mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.forge.CurioUtilsImpl", new MixinRequiredMods(new String[]{"curios"}, new String[]{}));
+        mixinRequiredMods.put("net.onixary.shapeShifterCurseFabric.mixin.integration.BOP_WebbingBlockMixin", new MixinRequiredMods(new String[]{"biomesoplenty"}, new String[]{}));
 
         mixinAccessoryMixin.put("net.onixary.shapeShifterCurseFabric.mixin.accessory.TrinketImpl", "trinkets");
         mixinAccessoryMixin.put("net.onixary.shapeShifterCurseFabric.mixin.forge.CurioImpl", "curios");
