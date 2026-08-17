@@ -1,0 +1,49 @@
+{
+  "load_priority": 0,
+
+  "name": "shape-shifter-curse.form_bat_3_sub_avali.model_name",
+  "layer": "origins:origin",
+  "form": "shape-shifter-curse:form_bat_3_sub_avali",
+
+  "wide_only": true,
+
+  "model": "shape-shifter-curse:geo/form/form_bat_3.geo.json",
+  "texture": "shape-shifter-curse:textures/form/form_bat_3/form_bat_3.png",
+  "texture_mask": "shape-shifter-curse:textures/form/form_bat_3/form_bat_3_colormask.png",
+  "fullbright_texture": "shape-shifter-curse:textures/form/form_bat_3/form_bat_3_emission.png",
+  "fullbright_texture_mask": "shape-shifter-curse:textures/form/form_bat_3/form_bat_3_emission_colormask.png",
+  "hidden": [
+    "leftArm",
+    "rightArm",
+    "leftLeg",
+    "rightLeg",
+    "leftSleeve",
+    "rightSleeve",
+    "rightPants",
+    "leftPants",
+    "body",
+    "jacket",
+    "head",
+    "hat"
+  ],
+
+  "animation_system": "shape-shifter-curse:default",
+  "animation_system_config": {
+    "tail": {
+      "chain": {
+        "tail": [0, 1, 2, 3]
+      }
+    },
+    "head_tail": {
+      "chain": {
+        "ear_l": [0],
+        "ear_r": [0]
+      }
+    },
+    "eye_blink": {
+      "eye": "eyeRoot",
+      "open_scale": 1.0,
+      "close_scale": 0.01
+    }
+  }
+}

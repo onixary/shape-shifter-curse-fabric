@@ -78,6 +78,7 @@ public class RegPlayerForms {
 
     // SubForms
     public static IForm SNOW_FOX_3_SUB_MARBLED_POLECAT = registerPlayerForm(new Form_SnowFox3_Sub_MarbledPolecat(ShapeShifterCurseFabric.identifier("snow_fox_3_sub_marbled_polecat")));
+    public static IForm BAT_3_SUB_AVALI = registerPlayerForm(new Form_Bat3_Sub_Avali(ShapeShifterCurseFabric.identifier("bat_3_sub_avali")));
 
     public static <T extends IForm> T registerPlayerForm(T form) {
         playerForms.put(form.getFormID(), form);
