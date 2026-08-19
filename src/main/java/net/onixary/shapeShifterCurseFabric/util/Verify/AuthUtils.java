@@ -58,6 +58,13 @@ import java.util.function.Function;
 //          给每个玩家检查内存中是否有有效认证文件Object 如果没有 触发回调中的还原
 //          检查forgive组是否有失效密钥 如果有失效 对当前存储的AuthFile进行检查 如果有AuthFile失效 触发回调中的还原
 
+// 新版方案
+// 服务器向客户端要对应UUID的AuthFile
+// 客户端向服务器发送AuthFile
+// 当服务器接收到AuthFile后开始解析
+// AuthFile仅进行验证和熔断 但数据段熔断后如何操作由数据段处理
+// AuthUtils只存储秘钥 forgiveKeySegments逻辑由对应DataSegment处理
+
 
 public final class AuthUtils {
     // 密钥处理部分
@@ -65,6 +72,15 @@ public final class AuthUtils {
     static final @NotNull KeyPairGenerator Ed448KeyPairGenerator;
     static final @NotNull String rootPublicKeyPEM = "MEMwBQYDK2VxAzoA775GpvHNH+fuvZ0k293H6TBNCNGVyWaVv50XtEjIeWsupe3/VfxNlOTvuQiIETZy3MDo3Rb/ynwA";
     static final @NotNull PublicKey rootPublickey;
+
+    private static final List<Pair<BiPredicate<Integer, Integer>, Function<PacketByteBuf, IDataSegment>>> dataReaderRegistry = new ArrayList<>();
+    private static final HashMap<Integer, KeySegment> storedKeySegments = new HashMap<>();
+    private static final List<Pair<Long, KeySegment>> forgiveKeySegments = new ArrayList<>();
+    private static final long forgiveTime = 60 * 30;  // 30分钟
+
+    static {
+        loadLocalKeySegments();
+    }
     static {
         try {
             Ed448KeyFactory = KeyFactory.getInstance("Ed448");
@@ -149,7 +165,6 @@ public final class AuthUtils {
         }
     }
 
-    private static final List<Pair<BiPredicate<Integer, Integer>, Function<PacketByteBuf, IDataSegment>>> dataReaderRegistry = new ArrayList<>();
 
     public static void registerDataReader(BiPredicate<Integer, Integer> typeVersionPredicate, Function<PacketByteBuf, IDataSegment> dataReader) {
         dataReaderRegistry.add(new Pair<>(typeVersionPredicate, dataReader));
@@ -182,13 +197,6 @@ public final class AuthUtils {
         } catch (Exception e) {
             return null;
         }
-    }
-
-    private static final HashMap<Integer, KeySegment> storedKeySegments = new HashMap<>();
-    private static final List<Pair<Long, KeySegment>> forgiveKeySegments = new ArrayList<>();
-    private static final long forgiveTime = 60 * 30;  // 30分钟
-    static {
-        loadLocalKeySegments();
     }
 
     public static Path getLocalKeyFolderPath() { return FabricLoader.getInstance().getConfigDir().resolve("ssc_auth/keys"); }

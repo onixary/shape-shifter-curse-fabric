@@ -71,40 +71,40 @@ public final class PatronDataSegment implements IDataSegment {
         return extraData.get(key);
     }
 
-    @Override
-    public void onGain(PlayerEntity player) {
-        PATRON_AUTH_DATA.put(uuid, this);
-    }
-
-    @Override
-    public void onClientGain() {
-        PATRON_AUTH_DATA.put(uuid, this);
-    }
-
-    @Override
-    public void onLost(PlayerEntity player) {
-        PATRON_AUTH_DATA.remove(uuid);
-        if (!FormUtils.isFormCanUse(player, FormUtils.getPlayerForm(player))) {
-            FormUtils.applyFallback(player);
-        }
-    }
-
-    @Override
-    public void onClientLost() {
-        PATRON_AUTH_DATA.remove(uuid);
-    }
-
-    @Override
-    public void onUpdate_New(PlayerEntity player, IDataSegment newDataSegment) {
-        if (!(newDataSegment instanceof PatronDataSegment patronDataSegment)) {
-            ShapeShifterCurseFabric.LOGGER.error("Invalid data segment type");
-            return;
-        }
-        PATRON_AUTH_DATA.put(uuid, patronDataSegment);
-        if (!FormUtils.isFormCanUse(player, FormUtils.getPlayerForm(player))) {
-            FormUtils.applyFallback(player);
-        }
-    }
+//    @Override
+//    public void onGain(PlayerEntity player) {
+//        PATRON_AUTH_DATA.put(uuid, this);
+//    }
+//
+//    @Override
+//    public void onClientGain() {
+//        PATRON_AUTH_DATA.put(uuid, this);
+//    }
+//
+//    @Override
+//    public void onLost(PlayerEntity player) {
+//        PATRON_AUTH_DATA.remove(uuid);
+//        if (!FormUtils.isFormCanUse(player, FormUtils.getPlayerForm(player))) {
+//            FormUtils.applyFallback(player);
+//        }
+//    }
+//
+//    @Override
+//    public void onClientLost() {
+//        PATRON_AUTH_DATA.remove(uuid);
+//    }
+//
+//    @Override
+//    public void onUpdate_New(PlayerEntity player, IDataSegment newDataSegment) {
+//        if (!(newDataSegment instanceof PatronDataSegment patronDataSegment)) {
+//            ShapeShifterCurseFabric.LOGGER.error("Invalid data segment type");
+//            return;
+//        }
+//        PATRON_AUTH_DATA.put(uuid, patronDataSegment);
+//        if (!FormUtils.isFormCanUse(player, FormUtils.getPlayerForm(player))) {
+//            FormUtils.applyFallback(player);
+//        }
+//    }
 
     public static boolean isPatronFormCanUse(@Nullable PlayerEntity player, @NotNull IPatronForm form) {
         if (player == null) return false;
