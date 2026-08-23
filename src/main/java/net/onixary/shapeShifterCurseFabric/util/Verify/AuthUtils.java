@@ -1,18 +1,13 @@
 package net.onixary.shapeShifterCurseFabric.util.Verify;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.util.Verify.KeyManager.RootKeyManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
@@ -74,13 +69,9 @@ public final class AuthUtils {
     static final @NotNull PublicKey rootPublickey;
 
     private static final List<Pair<BiPredicate<Integer, Integer>, Function<PacketByteBuf, IDataSegment>>> dataReaderRegistry = new ArrayList<>();
-    private static final HashMap<Integer, KeySegment> storedKeySegments = new HashMap<>();
-    private static final List<Pair<Long, KeySegment>> forgiveKeySegments = new ArrayList<>();
-    private static final long forgiveTime = 60 * 30;  // 30分钟
+    // Package Private
+    static final RootKeyManager keyManager = new RootKeyManager();
 
-    static {
-        loadLocalKeySegments();
-    }
     static {
         try {
             Ed448KeyFactory = KeyFactory.getInstance("Ed448");
@@ -197,96 +188,6 @@ public final class AuthUtils {
         } catch (Exception e) {
             return null;
         }
-    }
-
-    public static Path getLocalKeyFolderPath() { return FabricLoader.getInstance().getConfigDir().resolve("ssc_auth/keys"); }
-
-    public static void loadLocalKeySegments() {
-        storedKeySegments.clear();
-        forgiveKeySegments.clear();
-        Path folderPath = getLocalKeyFolderPath();
-        if (!Files.exists(folderPath)) {
-            try {
-                Files.createDirectories(folderPath);
-            } catch (IOException e) {
-                ShapeShifterCurseFabric.LOGGER.warn("Failed to create key folder: " + e.getMessage());
-            }
-        }
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(folderPath)) {
-            for (Path path : stream) {
-                if (path.getFileName().toString().endsWith(".key")) {
-                    KeySegment keySegment = readKeySegment(new PacketByteBuf(Unpooled.wrappedBuffer(Files.readAllBytes(path))));
-                    if (keySegment != null) {
-                        storedKeySegments.put(keySegment.getType(), keySegment);
-                    }
-                }
-            }
-        } catch (IOException e) {
-            ShapeShifterCurseFabric.LOGGER.warn("Failed to load key segments: " + e.getMessage());
-        }
-    }
-
-    public static void saveKey(KeySegment keySegment) {
-        Path folderPath = getLocalKeyFolderPath();
-        try {
-            if (!Files.exists(folderPath)) {
-                Files.createDirectories(folderPath);
-            }
-            Path filePath = folderPath.resolve(keySegment.getType() + ".key");
-            Files.write(filePath, keySegment.getRaw());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static boolean loadKey(@Nullable KeySegment keySegment) {
-        // 返回值 -> 是否触发熔断
-        if (keySegment == null || !keySegment.isUseMeltdown()) {
-            return false;
-        }
-        if (!storedKeySegments.containsKey(keySegment.getType())) {
-            storedKeySegments.put(keySegment.getType(), keySegment);
-            saveKey(keySegment);
-            return false;
-        } else {
-            KeySegment storedKey = storedKeySegments.get(keySegment.getType());
-            if (storedKey.getVersion() >= keySegment.getVersion()) {
-                return false;
-            } else {
-                storedKeySegments.put(keySegment.getType(), keySegment);
-                forgiveKeySegments.add(new Pair<>(System.currentTimeMillis() / 1000, storedKey));
-                saveKey(keySegment);
-                return true;
-            }
-        }
-    }
-
-    public static void removeExpiredKey() {
-        long currentTime = System.currentTimeMillis() / 1000;
-        forgiveKeySegments.removeIf(pair -> pair.getLeft() + forgiveTime < currentTime);
-    }
-
-    public static boolean isKeyCanUse(@Nullable KeySegment keySegment) {
-        removeExpiredKey();
-        if (keySegment == null) {
-            return false;
-        }
-        if (!keySegment.isUseMeltdown()) {
-            return true;
-        }
-        if (!storedKeySegments.containsKey(keySegment.getType())) {
-            return true;
-        }
-        KeySegment storedKey = storedKeySegments.get(keySegment.getType());
-        if (storedKey.getVersion() <= keySegment.getVersion()) {
-            return true;
-        }
-        for (Pair<Long, KeySegment> forgiveKeySegment : forgiveKeySegments) {
-            if (keySegment.softEquals(forgiveKeySegment.getRight())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public static byte[] getBufArray(ByteBuf buf) {
