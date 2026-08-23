@@ -29,12 +29,15 @@ public class RootKeyManager extends KeyManager {
         return;
     }
 
-    public boolean canLoad(KeySegment keySegment) {
+    public boolean canLoad(@Nullable KeySegment keySegment) {
+        if (keySegment == null) {
+            return false;
+        }
         @Nullable KeySegment oldKeySegment = this.getKeySegment(keySegment.getType());
         return oldKeySegment == null || keySegment.getVersion() >= oldKeySegment.getVersion();
     }
 
-    public void loadKey(KeySegment keySegment) {
+    public void loadKey(@Nullable KeySegment keySegment) {
         if (!canLoad(keySegment)) {
             return;
         }

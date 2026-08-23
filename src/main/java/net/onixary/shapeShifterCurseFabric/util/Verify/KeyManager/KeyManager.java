@@ -31,7 +31,10 @@ public abstract class KeyManager {
         keySegments.clear();
     }
 
-    public boolean isKeyValid(KeySegment keySegment) {
+    public boolean isKeyValid(@Nullable KeySegment keySegment) {
+        if (keySegment == null) {
+            return false;
+        }
         KeySegment oldKeySegment = this.getKeySegment(keySegment.getType());
         return oldKeySegment == null || keySegment.getVersion() >= oldKeySegment.getVersion();
     }

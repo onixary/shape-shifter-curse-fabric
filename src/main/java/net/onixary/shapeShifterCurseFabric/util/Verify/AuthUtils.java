@@ -206,6 +206,14 @@ public final class AuthUtils {
         return array;
     }
 
+    public static @Nullable KeySegment getKeySegment(int type) {
+        return keyManager.getKeySegment(type);
+    }
+
+    public static boolean isKeyValid(KeySegment keySegment) {
+        return keyManager.isKeyValid(keySegment);
+    }
+
     static {
         registerDataReader((type, version) -> type == 1 && version == 0, PatronDataSegment::new);
     }
