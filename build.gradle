@@ -259,6 +259,9 @@ dependencies {
 
     // Tough as nails
     modCompileOnly "maven.modrinth:tough-as-nails:VaFrDMPi"
+    // TAN 的前置库（Modrinth maven 无 POM，Gradle 不会传递解析；其网络包类签名引用 glitchcore.network.CustomPacket，
+    // IDE 全量解析签名时缺类报错，需显式声明编译依赖）
+    modCompileOnly "maven.modrinth:glitchcore:0.0.1.1"
 
     // Presence Footsteps
     modCompileOnly "maven.modrinth:presence-footsteps:1.10.1+1.20.1"
