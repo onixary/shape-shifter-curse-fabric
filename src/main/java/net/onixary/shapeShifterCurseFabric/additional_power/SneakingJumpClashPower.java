@@ -15,9 +15,11 @@ import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Pair;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.RaycastContext;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 import java.util.function.Consumer;
@@ -96,7 +98,11 @@ public class SneakingJumpClashPower extends Power {
         for (LivingEntity target : player.getWorld().getEntitiesByClass(
                 LivingEntity.class, expandedBox, 
                 e -> e != player && e.isAlive() && !e.isRemoved())) {
-            
+
+            if (player.getWorld().raycast(new RaycastContext(player.getPos(), target.getPos(), RaycastContext.ShapeType.OUTLINE, RaycastContext.FluidHandling.NONE, player)).getType() == HitResult.Type.BLOCK) {
+                continue;
+            }
+
             // 触发碰撞action
             if (bientityAction != null) {
                 this.bientityAction.accept(new Pair<>(player, target));
