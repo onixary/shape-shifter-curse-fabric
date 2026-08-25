@@ -2,12 +2,16 @@ package net.onixary.shapeShifterCurseFabric.util.Verify;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.MinecraftServer;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.IPatronForm;
 import net.onixary.shapeShifterCurseFabric.util.Verify.KeyManager.KeyManagerWithExpire;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 public final class PatronDataSegment implements IDataSegment {
@@ -16,6 +20,7 @@ public final class PatronDataSegment implements IDataSegment {
 
     static {
         KEY_MANAGER.mountEvent();
+        VerifyEvent.CHECK_AUTH.register(PatronDataSegment::checkExpire_STATIC);
     }
 
     private final int type;
@@ -25,6 +30,8 @@ public final class PatronDataSegment implements IDataSegment {
     private final int level;
     private final long expireTime;
     private final HashMap<String, byte[]> extraData = new HashMap<>();
+
+    private final KeySegment key;
 
     PatronDataSegment(KeySegment key, PacketByteBuf buf) {
         this.type = buf.readInt();
@@ -41,6 +48,7 @@ public final class PatronDataSegment implements IDataSegment {
             byte[] v = buf.readByteArray(4096);
             extraData.put(k, v);
         }
+        this.key = key;
         if (!KEY_MANAGER.isKeyValid(key)) {
             return;
         }
@@ -96,5 +104,38 @@ public final class PatronDataSegment implements IDataSegment {
         return PATRON_AUTH_DATA.get(uuid);
     }
 
-    // 还差一个检查过期
+    private static void checkExpire_STATIC(MinecraftServer server) {
+        List<UUID> shouldRemove = new ArrayList<>();
+        for (PatronDataSegment dataSegment : PATRON_AUTH_DATA.values()) {
+            if (dataSegment.checkExpire(server)) {
+                shouldRemove.add(dataSegment.uuid);
+            }
+        }
+        for (UUID uuid : shouldRemove) {
+            PATRON_AUTH_DATA.remove(uuid);
+        }
+    }
+
+    private boolean checkExpire(MinecraftServer server) {
+        long realExpireTime = expireTime * 1000;
+        if (realExpireTime < System.currentTimeMillis()) {
+            onLost(server);
+            return true;
+        }
+        if (!KEY_MANAGER.isKeyValid(key)) {
+            onLost(server);
+            return true;
+        }
+        return false;
+    }
+
+    private void onLost(MinecraftServer server) {
+        PlayerEntity currentPlayer = server.getPlayerManager().getPlayer(uuid);
+        if (currentPlayer == null) {
+            return;
+        }
+        if (!FormUtils.isFormCanUse(currentPlayer, FormUtils.getPlayerForm(currentPlayer))) {
+            FormUtils.applyFallback(currentPlayer);
+        }
+    }
 }
