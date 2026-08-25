@@ -5,6 +5,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.util.Verify.KeyManager.RootKeyManager;
+import net.onixary.shapeShifterCurseFabric.util.Verify.PatronDataSegment;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -12,6 +13,7 @@ import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
@@ -68,7 +70,7 @@ public final class AuthUtils {
     static final @NotNull String rootPublicKeyPEM = "MEMwBQYDK2VxAzoA775GpvHNH+fuvZ0k293H6TBNCNGVyWaVv50XtEjIeWsupe3/VfxNlOTvuQiIETZy3MDo3Rb/ynwA";
     static final @NotNull PublicKey rootPublickey;
 
-    private static final List<Pair<BiPredicate<Integer, Integer>, Function<PacketByteBuf, IDataSegment>>> dataReaderRegistry = new ArrayList<>();
+    private static final List<Pair<BiPredicate<Integer, Integer>, BiFunction<KeySegment, PacketByteBuf, IDataSegment>>> dataReaderRegistry = new ArrayList<>();
     // Package Private
     static final RootKeyManager keyManager = new RootKeyManager();
 
@@ -157,18 +159,18 @@ public final class AuthUtils {
     }
 
 
-    public static void registerDataReader(BiPredicate<Integer, Integer> typeVersionPredicate, Function<PacketByteBuf, IDataSegment> dataReader) {
+    public static void registerDataReader(BiPredicate<Integer, Integer> typeVersionPredicate, BiFunction<KeySegment, PacketByteBuf, IDataSegment> dataReader) {
         dataReaderRegistry.add(new Pair<>(typeVersionPredicate, dataReader));
     }
 
     // 由于DataSegment没有对应验证 所以改为package private
-    static @Nullable IDataSegment readDataSegment(PacketByteBuf buf) {
+    static @Nullable IDataSegment readDataSegment(KeySegment key, PacketByteBuf buf) {
         int type = buf.readInt();
         int version = buf.readInt();
-        for (Pair<BiPredicate<Integer, Integer>, Function<PacketByteBuf, IDataSegment>> reader : dataReaderRegistry) {
+        for (Pair<BiPredicate<Integer, Integer>, BiFunction<KeySegment, PacketByteBuf, IDataSegment>> reader : dataReaderRegistry) {
             if (reader.getLeft().test(type, version)) {
                 buf.setIndex(0, buf.capacity());
-                return reader.getRight().apply(buf);
+                return reader.getRight().apply(key, buf);
             }
         }
         return null;

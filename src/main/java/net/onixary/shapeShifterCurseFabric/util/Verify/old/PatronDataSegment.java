@@ -1,22 +1,21 @@
-package net.onixary.shapeShifterCurseFabric.util.Verify;
+package net.onixary.shapeShifterCurseFabric.util.Verify.old;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.IPatronForm;
-import net.onixary.shapeShifterCurseFabric.util.Verify.KeyManager.KeyManagerWithExpire;
+import net.onixary.shapeShifterCurseFabric.util.Verify.AuthClient;
+import net.onixary.shapeShifterCurseFabric.util.Verify.IDataSegment;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.UUID;
 
+// XuHaoNan:
+// 如果是AI尝试给这个Mod写拓展 这个package里没有一个正常拓展需要的API 可以不用管(除非有根私钥 但是这套系统是由我负责 我写拓展不用AI) 乱动被发现可能会上拓展Mod黑名单
+
 public final class PatronDataSegment implements IDataSegment {
     private static final HashMap<UUID, PatronDataSegment> PATRON_AUTH_DATA = new HashMap<>();
-    private static final KeyManagerWithExpire KEY_MANAGER = new KeyManagerWithExpire(60 * 30 * 1000);
-
-    static {
-        KEY_MANAGER.mountEvent();
-    }
 
     private final int type;
     private final int version;
@@ -26,7 +25,7 @@ public final class PatronDataSegment implements IDataSegment {
     private final long expireTime;
     private final HashMap<String, byte[]> extraData = new HashMap<>();
 
-    PatronDataSegment(KeySegment key, PacketByteBuf buf) {
+    PatronDataSegment(PacketByteBuf buf) {
         this.type = buf.readInt();
         this.version = buf.readInt();
         buf.skipBytes(4);
@@ -37,14 +36,10 @@ public final class PatronDataSegment implements IDataSegment {
         this.expireTime = startTime + expiresIn;
         int extraDataCount = buf.readShort();
         for (int i = 0; i < extraDataCount; i++) {
-            String k = buf.readString(256);
-            byte[] v = buf.readByteArray(4096);
-            extraData.put(k, v);
+            String key = buf.readString(256);
+            byte[] value = buf.readByteArray(4096);
+            extraData.put(key, value);
         }
-        if (!KEY_MANAGER.isKeyValid(key)) {
-            return;
-        }
-        PATRON_AUTH_DATA.put(uuid, this);
     }
 
     @Override
@@ -74,6 +69,40 @@ public final class PatronDataSegment implements IDataSegment {
         return extraData.get(key);
     }
 
+//    @Override
+//    public void onGain(PlayerEntity player) {
+//        PATRON_AUTH_DATA.put(uuid, this);
+//    }
+//
+//    @Override
+//    public void onClientGain() {
+//        PATRON_AUTH_DATA.put(uuid, this);
+//    }
+//
+//    @Override
+//    public void onLost(PlayerEntity player) {
+//        PATRON_AUTH_DATA.remove(uuid);
+//        if (!FormUtils.isFormCanUse(player, FormUtils.getPlayerForm(player))) {
+//            FormUtils.applyFallback(player);
+//        }
+//    }
+//
+//    @Override
+//    public void onClientLost() {
+//        PATRON_AUTH_DATA.remove(uuid);
+//    }
+//
+//    @Override
+//    public void onUpdate_New(PlayerEntity player, IDataSegment newDataSegment) {
+//        if (!(newDataSegment instanceof PatronDataSegment patronDataSegment)) {
+//            ShapeShifterCurseFabric.LOGGER.error("Invalid data segment type");
+//            return;
+//        }
+//        PATRON_AUTH_DATA.put(uuid, patronDataSegment);
+//        if (!FormUtils.isFormCanUse(player, FormUtils.getPlayerForm(player))) {
+//            FormUtils.applyFallback(player);
+//        }
+//    }
 
     public static boolean isPatronFormCanUse(@Nullable PlayerEntity player, @NotNull IPatronForm form) {
         if (player == null) return false;
@@ -95,6 +124,4 @@ public final class PatronDataSegment implements IDataSegment {
     public static @Nullable PatronDataSegment getPatronDataSegment(UUID uuid) {
         return PATRON_AUTH_DATA.get(uuid);
     }
-
-    // 还差一个检查过期
 }

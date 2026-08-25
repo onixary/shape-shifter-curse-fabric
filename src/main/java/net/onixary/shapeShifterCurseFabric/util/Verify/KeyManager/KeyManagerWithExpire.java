@@ -11,8 +11,8 @@ public class KeyManagerWithExpire extends KeyManager {
     private final long ExpireTime;
     private final HashMap<Integer, HashMap<Integer, Long>> keyExpireMap = new HashMap<>();
 
-    public KeyManagerWithExpire(long ExpireTime) {
-        this.ExpireTime = ExpireTime;
+    public KeyManagerWithExpire(long ExpireTimeMS) {
+        this.ExpireTime = ExpireTimeMS;
     }
 
     @Override
