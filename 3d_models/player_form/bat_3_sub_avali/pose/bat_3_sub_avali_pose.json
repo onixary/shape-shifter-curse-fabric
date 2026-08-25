@@ -1,0 +1,20 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"bat_3_sub_avali_pose": {
+			"loop": true,
+			"bones": {
+				"bipedLeftArm": {
+					"rotation": {
+						"vector": [0, 0, 90]
+					}
+				},
+				"bipedRightArm": {
+					"rotation": {
+						"vector": [0, 0, -90]
+					}
+				}
+			}
+		}
+	}
+}
