@@ -112,18 +112,18 @@ public final class PatronDataSegment implements IDataSegment {
             }
         }
         for (UUID uuid : shouldRemove) {
+            PatronDataSegment dataSegment = PATRON_AUTH_DATA.get(uuid);
             PATRON_AUTH_DATA.remove(uuid);
+            dataSegment.onLost(server);
         }
     }
 
     private boolean checkExpire(MinecraftServer server) {
         long realExpireTime = expireTime * 1000;
         if (realExpireTime < System.currentTimeMillis()) {
-            onLost(server);
             return true;
         }
         if (!KEY_MANAGER.isKeyValid(key)) {
-            onLost(server);
             return true;
         }
         return false;
