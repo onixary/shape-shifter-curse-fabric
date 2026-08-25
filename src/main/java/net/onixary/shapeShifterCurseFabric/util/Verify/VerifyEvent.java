@@ -2,6 +2,7 @@ package net.onixary.shapeShifterCurseFabric.util.Verify;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 
 public class VerifyEvent {
     @FunctionalInterface
@@ -23,6 +24,13 @@ public class VerifyEvent {
     public static final Event<KeyLoad> ON_KEY_LOAD = EventFactory.createArrayBacked(KeyLoad.class, callbacks -> (keySegment) -> {
         for (KeyLoad callback : callbacks) {
             callback.onKeyLoad(keySegment);
+        }
+    });
+
+    // 每15s检查一次
+    public static final Event<ServerTickEvents.EndTick> CHECK_AUTH = EventFactory.createArrayBacked(ServerTickEvents.EndTick.class, callbacks -> (server) -> {
+        for (ServerTickEvents.EndTick callback : callbacks) {
+            callback.onEndTick(server);
         }
     });
 }
