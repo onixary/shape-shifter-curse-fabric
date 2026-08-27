@@ -3,27 +3,29 @@ package net.onixary.shapeShifterCurseFabric.util.Verify;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.entity.player.PlayerEntity;
+import org.jetbrains.annotations.Nullable;
 
 public class VerifyEvent {
     @FunctionalInterface
     public static interface KeyMelt {
-        void onKeyMelt(KeySegment oldKeySegment, KeySegment newKeySegment);
+        void onKeyMelt(@Nullable PlayerEntity invoker, KeySegment oldKeySegment, KeySegment newKeySegment);
     }
 
     @FunctionalInterface
     public static interface KeyLoad {
-        void onKeyLoad(KeySegment keySegment);
+        void onKeyLoad(@Nullable PlayerEntity invoker, KeySegment keySegment);
     }
 
-    public static final Event<KeyMelt> ON_KEY_MELT = EventFactory.createArrayBacked(KeyMelt.class, callbacks -> (oldKeySegment, newKeySegment) -> {
+    public static final Event<KeyMelt> ON_KEY_MELT = EventFactory.createArrayBacked(KeyMelt.class, callbacks -> (invoker, oldKeySegment, newKeySegment) -> {
         for (KeyMelt callback : callbacks) {
-            callback.onKeyMelt(oldKeySegment, newKeySegment);
+            callback.onKeyMelt(invoker, oldKeySegment, newKeySegment);
         }
     });
 
-    public static final Event<KeyLoad> ON_KEY_LOAD = EventFactory.createArrayBacked(KeyLoad.class, callbacks -> (keySegment) -> {
+    public static final Event<KeyLoad> ON_KEY_LOAD = EventFactory.createArrayBacked(KeyLoad.class, callbacks -> (invoker, keySegment) -> {
         for (KeyLoad callback : callbacks) {
-            callback.onKeyLoad(keySegment);
+            callback.onKeyLoad(invoker, keySegment);
         }
     });
 

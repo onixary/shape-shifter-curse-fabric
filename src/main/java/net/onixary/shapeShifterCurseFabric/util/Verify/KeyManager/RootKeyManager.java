@@ -2,6 +2,7 @@ package net.onixary.shapeShifterCurseFabric.util.Verify.KeyManager;
 
 import io.netty.buffer.Unpooled;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.util.Verify.AuthUtils;
@@ -25,7 +26,7 @@ public class RootKeyManager extends KeyManager {
     }
 
     @Override
-    public void onKeyLoad(KeySegment keySegment) {
+    public void onKeyLoad(@Nullable PlayerEntity invoker, KeySegment keySegment) {
         return;
     }
 
@@ -37,15 +38,15 @@ public class RootKeyManager extends KeyManager {
         return oldKeySegment == null || keySegment.getVersion() >= oldKeySegment.getVersion();
     }
 
-    public void loadKey(@Nullable KeySegment keySegment) {
+    public void loadKey(@Nullable PlayerEntity invoker, @Nullable KeySegment keySegment) {
         if (!canLoad(keySegment)) {
             return;
         }
         @Nullable KeySegment oldKeySegment = this.getKeySegment(keySegment.getType());
         this.keySegments.put(keySegment.getType(), keySegment);
-        VerifyEvent.ON_KEY_LOAD.invoker().onKeyLoad(keySegment);
+        VerifyEvent.ON_KEY_LOAD.invoker().onKeyLoad(invoker, keySegment);
         if (oldKeySegment != null && keySegment.isUseMeltdown() && keySegment.getVersion() > oldKeySegment.getVersion()) {
-            VerifyEvent.ON_KEY_MELT.invoker().onKeyMelt(oldKeySegment, keySegment);
+            VerifyEvent.ON_KEY_MELT.invoker().onKeyMelt(invoker, oldKeySegment, keySegment);
         }
         if (oldKeySegment == null || keySegment.getVersion() > oldKeySegment.getVersion()) {
             this.saveKey(keySegment);
@@ -68,7 +69,7 @@ public class RootKeyManager extends KeyManager {
                 if (path.getFileName().toString().endsWith(".key")) {
                     KeySegment keySegment = AuthUtils.readKeySegment(new PacketByteBuf(Unpooled.wrappedBuffer(Files.readAllBytes(path))));
                     if (keySegment != null) {
-                        this.loadKey(keySegment);
+                        this.loadKey(null, keySegment);
                     }
                 }
             }

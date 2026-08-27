@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.util.Verify.KeyManager;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.util.Verify.KeySegment;
 import net.onixary.shapeShifterCurseFabric.util.Verify.VerifyEvent;
 import org.jetbrains.annotations.Nullable;
@@ -14,7 +15,7 @@ public abstract class KeyManager {
         VerifyEvent.ON_KEY_LOAD.register(this::onKeyLoad);
     }
 
-    public void onKeyLoad(KeySegment keySegment) {
+    public void onKeyLoad(@Nullable PlayerEntity invoker, KeySegment keySegment) {
         keySegments.put(keySegment.getType(), keySegment);
     }
 
