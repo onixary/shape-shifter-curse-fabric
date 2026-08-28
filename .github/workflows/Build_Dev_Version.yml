@@ -20,7 +20,7 @@ jobs:
         uses: christian-draeger/read-properties@1.1.1
         with:
           path: gradle.properties
-          properties: 'mod_version archives_base_name minecraft_version'
+          properties: 'mod_version archives_base_name minecraft_version special_build_version'
 
       - name: 配置Java环境 使用Java17 # 由于Java版本在build.gradle中写的 无法获取到 如果修改了build.gradle需要手动修改下面的java-version
         uses: actions/setup-java@v4
@@ -41,5 +41,5 @@ jobs:
       - name: 发布构建产物 # 如果没有Action中没有发布Jar 请检查Gradle配置文件
         uses: actions/upload-artifact@v4.3.3
         with:
-          name: "${{ steps.properties.outputs.archives_base_name }}-${{ steps.properties.outputs.mod_version }}-${{ env.channel }}.${{ env.build_version }}"
-          path: build/libs/${{ steps.properties.outputs.archives_base_name }}-${{ steps.properties.outputs.mod_version }}.jar
+          name: "${{ steps.properties.outputs.archives_base_name }}-${{ steps.properties.outputs.mod_version }}${{ steps.properties.outputs.special_build_version }}-${{ env.channel }}.${{ env.build_version }}"
+          path: build/libs/${{ steps.properties.outputs.archives_base_name }}-${{ steps.properties.outputs.mod_version }}${{ steps.properties.outputs.special_build_version }}.jar
