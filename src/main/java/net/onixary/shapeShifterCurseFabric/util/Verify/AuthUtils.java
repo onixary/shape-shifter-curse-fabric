@@ -71,8 +71,6 @@ public final class AuthUtils {
     static final @NotNull PublicKey rootPublickey;
 
     private static final List<Pair<BiPredicate<Integer, Integer>, BiFunction<KeySegment, PacketByteBuf, IDataSegment>>> dataReaderRegistry = new ArrayList<>();
-    // Package Private
-    static final RootKeyManager keyManager = new RootKeyManager();
 
     static {
         try {
@@ -94,6 +92,10 @@ public final class AuthUtils {
             rootPublickey = Ed448KeyPairGenerator.generateKeyPair().getPublic();
         }
     }
+
+    // keyManager必须在加载KeyFactory之后 至于为什么 可以猜一猜 和加载顺序有关
+    // Package Private
+    static final RootKeyManager keyManager = new RootKeyManager();
 
     public static void requireTrue(boolean condition, String message) {
         if (!condition) { throw new RuntimeException(message); }

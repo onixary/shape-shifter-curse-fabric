@@ -2,6 +2,7 @@ package net.onixary.shapeShifterCurseFabric.util.Verify.KeyManager;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
+import net.onixary.shapeShifterCurseFabric.util.Verify.AuthUtils;
 import net.onixary.shapeShifterCurseFabric.util.Verify.KeySegment;
 import net.onixary.shapeShifterCurseFabric.util.Verify.VerifyEvent;
 import org.jetbrains.annotations.Nullable;
@@ -31,7 +32,7 @@ public class KeyManagerWithExpire extends KeyManager {
         if (keySegment == null) {
             return false;
         }
-        if (super.isKeyValid(keySegment)) {
+        if (super.isKeyValid(keySegment) && AuthUtils.isKeyValid(keySegment)) {
             return true;
         }
         HashMap<Integer, Long> expireMap = keyExpireMap.get(keySegment.getType());
