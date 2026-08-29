@@ -1,0 +1,55 @@
+{
+    "type": "shape-shifter-curse:bat_block_attach",
+    "attach_condition": {
+        "type": "apoli:or",
+        "conditions": [
+            {
+                "type": "apoli:inventory",
+                "process_mode": "items",
+                "item_condition": {
+                    "type": "apoli:ingredient",
+                    "ingredient": {
+                        "item": "shape-shifter-curse:diamond_mining_claw"
+                    }
+                },
+                "slots": [
+                    "weapon.mainhand"
+                ]
+            },
+            {
+                "type": "apoli:inventory",
+                "process_mode": "items",
+                "comparison": "==",
+                "compare_to": 0,
+                "slots": [
+                    "weapon.mainhand"
+                ]
+            }
+        ]
+    },
+    "block_condition": {
+        "type": "apoli:and",
+        "conditions": [
+            {
+                "type": "apoli:replacable",
+                "inverted": true
+            }
+        ]
+    },
+    "side_attach_action": {
+        "type": "apoli:and",
+        "actions": [
+            {
+                "type": "apoli:execute_command",
+                "command": "particle minecraft:crit ~ ~0.5 ~ 0.2 0.2 0.2 0 5"
+            },
+            {
+                "type": "apoli:play_sound",
+                "sound": "minecraft:entity.goat.long_jump"
+            }
+        ]
+    },
+    "bottom_attach_action": {
+    },
+    "bottom_attach_interval": 40
+}

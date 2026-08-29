@@ -7,11 +7,8 @@
 
   "wide_only": true,
 
-  "model": "shape-shifter-curse:geo/form/form_bat_3.geo.json",
-  "texture": "shape-shifter-curse:textures/form/form_bat_3/form_bat_3.png",
-  "texture_mask": "shape-shifter-curse:textures/form/form_bat_3/form_bat_3_colormask.png",
-  "fullbright_texture": "shape-shifter-curse:textures/form/form_bat_3/form_bat_3_emission.png",
-  "fullbright_texture_mask": "shape-shifter-curse:textures/form/form_bat_3/form_bat_3_emission_colormask.png",
+  "model": "shape-shifter-curse:geo/form/form_bat_3_sub_avali.geo.json",
+  "texture": "shape-shifter-curse:textures/form/form_bat_3_sub_avali/form_bat_3_sub_avali.png",
   "hidden": [
     "leftArm",
     "rightArm",
@@ -29,6 +26,13 @@
 
   "animation_system": "shape-shifter-curse:default",
   "animation_system_config": {
+    "extra_parts_map": {
+      "tailMount": "tailMount",
+      "leftCalf": "leftCalf",
+      "leftArch": "leftArch",
+      "rightCalf": "rightCalf",
+      "rightArch": "rightArch"
+    },
     "tail": {
       "chain": {
         "tail": [0, 1, 2, 3]
@@ -36,8 +40,10 @@
     },
     "head_tail": {
       "chain": {
-        "ear_l": [0],
-        "ear_r": [0]
+        "ear_l_a": [0],
+        "ear_l_b": [0],
+        "ear_r_a": [0],
+        "ear_r_b": [0]
       }
     },
     "eye_blink": {
