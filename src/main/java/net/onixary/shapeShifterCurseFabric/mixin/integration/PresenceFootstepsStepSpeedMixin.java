@@ -28,7 +28,7 @@ public abstract class PresenceFootstepsStepSpeedMixin {
         if (entity instanceof PlayerEntity player) {
             var powers = PowerHolderComponent.getPowers(player, ModifyFootstepSoundSpeedPower.class);
             if (!powers.isEmpty()) {
-                return original / powers.get(0).getSpeedMultiplier();
+                return original / powers.get(0).getSpeedMultiplierFor(player);
             }
         }
         return original;
