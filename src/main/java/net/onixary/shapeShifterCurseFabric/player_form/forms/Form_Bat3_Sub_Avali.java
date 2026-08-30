@@ -89,6 +89,9 @@ public class Form_Bat3_Sub_Avali extends NormalSubForm implements IPatronForm, M
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_attach_side"));
     public static final AnimUtils.AnimationHolderData ANIM_SLEEP =
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_sleep"));
+    public static final AnimUtils.AnimationHolderData ANIM_ELYTRA_FLY =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_elytra_fly"));
+
 
     public static final AbstractAnimStateController IDLE_CONTROLLER = new WithSneakAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_idle")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_sneak_idle")));
     // 为预防缩放导致的动画帧精度损失，模型中动画时间*2，同时动画器中速度也*2
@@ -98,11 +101,11 @@ public class Form_Bat3_Sub_Avali extends NormalSubForm implements IPatronForm, M
     public static final AbstractAnimStateController ATTACK_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_attack"), 1.8f, 2));
     public static final AbstractAnimStateController JUMP_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_jump"), 1.5f, 2));
     public static final AbstractAnimStateController FALL_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_slow_falling")));
-    // 暂无 avali_riding 与主形态 bat_3 相同引用缺失文件 后续补上动画文件即可生效 船/矿车姿势使用 avali_sneak_idle
-    public static final AbstractAnimStateController RIDE_CONTROLLER = new RideAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_riding")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_sneak_idle")));
+    public static final AbstractAnimStateController RIDE_CONTROLLER = new RideAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_ride")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_ride")));
     public static final AbstractAnimStateController FLYING_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_slow_falling")));
     public static final AbstractAnimStateController CLIMB_CONTROLLER = new ClimbAnimController(ANIM_CLIMB_IDLE, ANIM_CLIMB);
     public static final AbstractAnimStateController SLEEP_CONTROLLER = new OneAnimController(ANIM_SLEEP);
+    public static final AbstractAnimStateController FALL_FLYING_CONTROLLER = new OneAnimController(ANIM_ELYTRA_FLY);
 
     @Override
     public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
@@ -135,6 +138,8 @@ public class Form_Bat3_Sub_Avali extends NormalSubForm implements IPatronForm, M
                     return SLEEP_CONTROLLER;
                 case ANIM_STATE_CRAWL:
                     return FLYING_CONTROLLER;
+                case ANIM_STATE_FALL_FLYING:
+                    return FALL_FLYING_CONTROLLER;
                 default:
                     return null;
             }

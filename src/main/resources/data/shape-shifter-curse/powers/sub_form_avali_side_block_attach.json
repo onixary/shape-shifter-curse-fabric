@@ -1,5 +1,6 @@
 {
     "type": "shape-shifter-curse:bat_block_attach",
+    "enable_bottom_attach": false,
     "attach_condition": {
         "type": "apoli:or",
         "conditions": [
@@ -48,8 +49,5 @@
                 "sound": "minecraft:entity.goat.long_jump"
             }
         ]
-    },
-    "bottom_attach_action": {
-    },
-    "bottom_attach_interval": 40
+    }
 }

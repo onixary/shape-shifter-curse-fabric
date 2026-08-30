@@ -37,6 +37,8 @@ public class BatBlockAttachPower extends Power {
     private final Consumer<LivingEntity> sideAttachAction;
     private final Consumer<LivingEntity> bottomAttachAction;
     private final int bottomAttachInterval;
+    // 是否启用底部（天花板倒挂）吸附
+    private final boolean enableBottomAttach;
 
     // 吸附状态
     private boolean isAttached = false;
@@ -54,13 +56,15 @@ public class BatBlockAttachPower extends Power {
                                Predicate<CachedBlockPosition> blockCondition,
                                Consumer<LivingEntity> sideAttachAction,
                                Consumer<LivingEntity> bottomAttachAction,
-                               int bottomAttachInterval) {
+                               int bottomAttachInterval,
+                               boolean enableBottomAttach) {
         super(type, entity);
         this.entityAttachCondition = entityAttachCondition;
         this.blockCondition = blockCondition;
         this.sideAttachAction = sideAttachAction;
         this.bottomAttachAction = bottomAttachAction;
         this.bottomAttachInterval = bottomAttachInterval;
+        this.enableBottomAttach = enableBottomAttach;
         this.setTicking(true);
         this.shouldTickWhenInactive();
     }
@@ -159,6 +163,10 @@ public class BatBlockAttachPower extends Power {
 
         boolean attached = false;
         if (hitSide == Direction.DOWN) {
+            // 底部（天花板倒挂）吸附被禁用时，不允许触发
+            if (!enableBottomAttach) {
+                return false;
+            }
             //System.out.println("Debug: Attaching to bottom");
             attachToBottom(player, blockPos);
             attached = true;
@@ -360,6 +368,10 @@ public class BatBlockAttachPower extends Power {
         return attachedSide;
     }
 
+    public boolean isBottomAttachEnabled() {
+        return enableBottomAttach;
+    }
+
     // 用于处理跳跃取消吸附
     public void handleJump(PlayerEntity player) {
         if (isAttached) {
@@ -382,7 +394,8 @@ public class BatBlockAttachPower extends Power {
                         .add("block_condition", ApoliDataTypes.BLOCK_CONDITION, null)
                         .add("side_attach_action", ApoliDataTypes.ENTITY_ACTION, null)
                         .add("bottom_attach_action", ApoliDataTypes.ENTITY_ACTION, null)
-                        .add("bottom_attach_interval", SerializableDataTypes.INT, 20),
+                        .add("bottom_attach_interval", SerializableDataTypes.INT, 20)
+                        .add("enable_bottom_attach", SerializableDataTypes.BOOLEAN, true),
                 data -> (type, entity) -> new BatBlockAttachPower(
                         type,
                         entity,
@@ -390,7 +403,8 @@ public class BatBlockAttachPower extends Power {
                         data.get("block_condition"),
                         data.get("side_attach_action"),
                         data.get("bottom_attach_action"),
-                        data.getInt("bottom_attach_interval"))
+                        data.getInt("bottom_attach_interval"),
+                        data.get("enable_bottom_attach"))
         ).allowCondition();
     }
 }
