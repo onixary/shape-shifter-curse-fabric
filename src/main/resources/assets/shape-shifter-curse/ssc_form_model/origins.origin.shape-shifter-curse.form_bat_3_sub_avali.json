@@ -9,6 +9,7 @@
 
   "model": "shape-shifter-curse:geo/form/form_bat_3_sub_avali.geo.json",
   "texture": "shape-shifter-curse:textures/form/form_bat_3_sub_avali/form_bat_3_sub_avali.png",
+  "texture_mask": "shape-shifter-curse:textures/form/form_bat_3_sub_avali/form_bat_3_sub_avali_colormask.png",
   "hidden": [
     "leftArm",
     "rightArm",
