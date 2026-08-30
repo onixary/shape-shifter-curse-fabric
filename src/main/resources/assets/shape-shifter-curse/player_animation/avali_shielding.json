@@ -1,7 +1,8 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"avali_idle": {
+		"avali_shielding": {
+			"loop": true,
 			"animation_length": 0.25,
 			"bones": {
 				"body": {
@@ -25,10 +26,10 @@
 				"leftLeg": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, 0, 0]
+							"vector": [12.5, 0, 0]
 						},
 						"0.25": {
-							"vector": [0, 0, 0]
+							"vector": [12.5, 0, 0]
 						}
 					},
 					"position": {
@@ -43,10 +44,10 @@
 				"leftCalf": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, 0, 0]
+							"vector": [-10, 0, 0]
 						},
 						"0.25": {
-							"vector": [0, 0, 0]
+							"vector": [-10, 0, 0]
 						}
 					},
 					"position": {
@@ -61,10 +62,10 @@
 				"leftArch": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, 0, 0]
+							"vector": [-7.5, 0, 0]
 						},
 						"0.25": {
-							"vector": [0, 0, 0]
+							"vector": [-7.5, 0, 0]
 						}
 					},
 					"position": {
@@ -79,10 +80,10 @@
 				"rightArm": {
 					"rotation": {
 						"0.0": {
-							"vector": [-7.6166, 24.0289, 5.558]
+							"vector": [-62.0219, -55.7896, 19.8895]
 						},
 						"0.25": {
-							"vector": [-7.6166, 24.0289, 5.558]
+							"vector": [-62.0219, -55.7896, 19.8895]
 						}
 					},
 					"position": {
@@ -97,28 +98,28 @@
 				"leftArm": {
 					"rotation": {
 						"0.0": {
-							"vector": [-7.6166, -24.0289, -5.558]
+							"vector": [-53.6718, 24.231, 25.5605]
 						},
 						"0.25": {
-							"vector": [-7.6166, -24.0289, -5.558]
+							"vector": [-53.6718, 24.231, 25.5605]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": [0, 0, 0]
+							"vector": [1, 0, 0]
 						},
 						"0.25": {
-							"vector": [0, 0, 0]
+							"vector": [1, 0, 0]
 						}
 					}
 				},
 				"torso": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, 0, 0]
+							"vector": [0, -5, 0]
 						},
 						"0.25": {
-							"vector": [0, 0, 0]
+							"vector": [0, -5, 0]
 						}
 					},
 					"position": {
@@ -133,10 +134,10 @@
 				"rightLeg": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, 0, 0]
+							"vector": [-10, 0, 0]
 						},
 						"0.25": {
-							"vector": [0, 0, 0]
+							"vector": [-10, 0, 0]
 						}
 					},
 					"position": {
@@ -151,10 +152,10 @@
 				"rightCalf": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, 0, 0]
+							"vector": [-2.5, 0, 0]
 						},
 						"0.25": {
-							"vector": [0, 0, 0]
+							"vector": [-2.5, 0, 0]
 						}
 					},
 					"position": {
@@ -169,10 +170,10 @@
 				"rightArch": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, 0, 0]
+							"vector": [7.5, 0, 0]
 						},
 						"0.25": {
-							"vector": [0, 0, 0]
+							"vector": [7.5, 0, 0]
 						}
 					},
 					"position": {
@@ -182,14 +183,6 @@
 						"0.25": {
 							"vector": [0, 0, 0]
 						}
-					}
-				},
-				"tailMount": {
-					"rotation": {
-						"vector": [0, 0, 0]
-					},
-					"position": {
-						"vector": [0, 0, 0]
 					}
 				}
 			}

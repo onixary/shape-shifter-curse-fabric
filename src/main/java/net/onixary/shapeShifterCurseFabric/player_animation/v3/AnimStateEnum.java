@@ -20,6 +20,7 @@ public enum AnimStateEnum {
     ANIM_STATE_FALL,
     ANIM_STATE_JUMP,
     ANIM_STATE_USE_ITEM,
+    ANIM_STATE_BLOCK_SHIELD,
     ANIM_STATE_MINING,
     ANIM_STATE_ATTACK,
     ANIM_STATE_WALK,
@@ -39,6 +40,7 @@ public enum AnimStateEnum {
         stateMap.put(AnimRegistries.ANIM_STATE_FALL, ANIM_STATE_FALL);
         stateMap.put(AnimRegistries.ANIM_STATE_JUMP, ANIM_STATE_JUMP);
         stateMap.put(AnimRegistries.ANIM_STATE_USE_ITEM, ANIM_STATE_USE_ITEM);
+        stateMap.put(AnimRegistries.ANIM_STATE_BLOCK_SHIELD, ANIM_STATE_BLOCK_SHIELD);
         stateMap.put(AnimRegistries.ANIM_STATE_MINING, ANIM_STATE_MINING);
         stateMap.put(AnimRegistries.ANIM_STATE_ATTACK, ANIM_STATE_ATTACK);
         stateMap.put(AnimRegistries.ANIM_STATE_WALK, ANIM_STATE_WALK);

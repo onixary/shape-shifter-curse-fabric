@@ -93,6 +93,8 @@ public class Form_Bat3_Sub_Avali extends NormalSubForm implements IPatronForm, M
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_sleep"));
     public static final AnimUtils.AnimationHolderData ANIM_ELYTRA_FLY =
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_elytra_fly"));
+    public static final AnimUtils.AnimationHolderData ANIM_SHIELDING =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_shielding"), 1.0f, 1);
 
 
     public static final AbstractAnimStateController IDLE_CONTROLLER = new WithSneakAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_idle")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_sneak_idle")));
@@ -108,6 +110,7 @@ public class Form_Bat3_Sub_Avali extends NormalSubForm implements IPatronForm, M
     public static final AbstractAnimStateController CLIMB_CONTROLLER = new ClimbAnimController(ANIM_CLIMB_IDLE, ANIM_CLIMB);
     public static final AbstractAnimStateController SLEEP_CONTROLLER = new OneAnimController(ANIM_SLEEP);
     public static final AbstractAnimStateController FALL_FLYING_CONTROLLER = new OneAnimController(ANIM_ELYTRA_FLY);
+    public static final AbstractAnimStateController SHIELDING_CONTROLLER = new OneAnimController(ANIM_SHIELDING);
 
     @Override
     public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
@@ -142,6 +145,8 @@ public class Form_Bat3_Sub_Avali extends NormalSubForm implements IPatronForm, M
                     return FLYING_CONTROLLER;
                 case ANIM_STATE_FALL_FLYING:
                     return FALL_FLYING_CONTROLLER;
+                case ANIM_STATE_BLOCK_SHIELD:
+                    return SHIELDING_CONTROLLER;
                 default:
                     return null;
             }

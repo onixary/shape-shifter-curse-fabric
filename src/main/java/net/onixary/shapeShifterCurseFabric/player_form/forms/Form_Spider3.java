@@ -45,6 +45,8 @@ public class Form_Spider3 extends NormalForm {
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_3_ride"));
     public static final AnimUtils.AnimationHolderData ANIM_SLEEP =
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_3_sleep"));
+    public static final AnimUtils.AnimationHolderData ANIM_SHIELDING =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("spider_3_shielding"), 1.0f, 1);
 
 
     public static final AbstractAnimStateController IDLE_CONTROLLER = 
@@ -66,8 +68,7 @@ public class Form_Spider3 extends NormalForm {
     public static final AbstractAnimStateController RIDE_CONTROLLER =
             new RideAnimController(ANIM_RIDE, ANIM_RIDE);
     public static final AbstractAnimStateController SLEEP_CONTROLLER = new OneAnimController(ANIM_SLEEP);
-
-
+    public static final AbstractAnimStateController SHIELDING_CONTROLLER = new OneAnimController(ANIM_SHIELDING);
 
 
     @Override
@@ -99,6 +100,8 @@ public class Form_Spider3 extends NormalForm {
                     return RIDE_CONTROLLER;
                 case ANIM_STATE_SLEEP:
                     return SLEEP_CONTROLLER;
+                case ANIM_STATE_BLOCK_SHIELD:
+                    return SHIELDING_CONTROLLER;
                 default:
                     return null;
             }
