@@ -1,22 +1,19 @@
 package net.onixary.shapeShifterCurseFabric.util.Verify;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.util.Verify.KeyManager.RootKeyManager;
+import net.onixary.shapeShifterCurseFabric.util.Verify.PatronDataSegment;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
@@ -58,6 +55,13 @@ import java.util.function.Function;
 //          给每个玩家检查内存中是否有有效认证文件Object 如果没有 触发回调中的还原
 //          检查forgive组是否有失效密钥 如果有失效 对当前存储的AuthFile进行检查 如果有AuthFile失效 触发回调中的还原
 
+// 新版方案
+// 服务器向客户端要对应UUID的AuthFile
+// 客户端向服务器发送AuthFile
+// 当服务器接收到AuthFile后开始解析
+// AuthFile仅进行验证和熔断 但数据段熔断后如何操作由数据段处理
+// AuthUtils只存储秘钥 forgiveKeySegments逻辑由对应DataSegment处理
+
 
 public final class AuthUtils {
     // 密钥处理部分
@@ -65,6 +69,9 @@ public final class AuthUtils {
     static final @NotNull KeyPairGenerator Ed448KeyPairGenerator;
     static final @NotNull String rootPublicKeyPEM = "MEMwBQYDK2VxAzoA775GpvHNH+fuvZ0k293H6TBNCNGVyWaVv50XtEjIeWsupe3/VfxNlOTvuQiIETZy3MDo3Rb/ynwA";
     static final @NotNull PublicKey rootPublickey;
+
+    private static final List<Pair<BiPredicate<Integer, Integer>, BiFunction<KeySegment, PacketByteBuf, IDataSegment>>> dataReaderRegistry = new ArrayList<>();
+
     static {
         try {
             Ed448KeyFactory = KeyFactory.getInstance("Ed448");
@@ -85,6 +92,10 @@ public final class AuthUtils {
             rootPublickey = Ed448KeyPairGenerator.generateKeyPair().getPublic();
         }
     }
+
+    // keyManager必须在加载KeyFactory之后 至于为什么 可以猜一猜 和加载顺序有关
+    // Package Private
+    static final RootKeyManager keyManager = new RootKeyManager();
 
     public static void requireTrue(boolean condition, String message) {
         if (!condition) { throw new RuntimeException(message); }
@@ -149,20 +160,19 @@ public final class AuthUtils {
         }
     }
 
-    private static final List<Pair<BiPredicate<Integer, Integer>, Function<PacketByteBuf, IDataSegment>>> dataReaderRegistry = new ArrayList<>();
 
-    public static void registerDataReader(BiPredicate<Integer, Integer> typeVersionPredicate, Function<PacketByteBuf, IDataSegment> dataReader) {
+    public static void registerDataReader(BiPredicate<Integer, Integer> typeVersionPredicate, BiFunction<KeySegment, PacketByteBuf, IDataSegment> dataReader) {
         dataReaderRegistry.add(new Pair<>(typeVersionPredicate, dataReader));
     }
 
     // 由于DataSegment没有对应验证 所以改为package private
-    static @Nullable IDataSegment readDataSegment(PacketByteBuf buf) {
+    static @Nullable IDataSegment readDataSegment(KeySegment key, PacketByteBuf buf) {
         int type = buf.readInt();
         int version = buf.readInt();
-        for (Pair<BiPredicate<Integer, Integer>, Function<PacketByteBuf, IDataSegment>> reader : dataReaderRegistry) {
+        for (Pair<BiPredicate<Integer, Integer>, BiFunction<KeySegment, PacketByteBuf, IDataSegment>> reader : dataReaderRegistry) {
             if (reader.getLeft().test(type, version)) {
                 buf.setIndex(0, buf.capacity());
-                return reader.getRight().apply(buf);
+                return reader.getRight().apply(key, buf);
             }
         }
         return null;
@@ -184,103 +194,6 @@ public final class AuthUtils {
         }
     }
 
-    private static final HashMap<Integer, KeySegment> storedKeySegments = new HashMap<>();
-    private static final List<Pair<Long, KeySegment>> forgiveKeySegments = new ArrayList<>();
-    private static final long forgiveTime = 60 * 30;  // 30分钟
-    static {
-        loadLocalKeySegments();
-    }
-
-    public static Path getLocalKeyFolderPath() { return FabricLoader.getInstance().getConfigDir().resolve("ssc_auth/keys"); }
-
-    public static void loadLocalKeySegments() {
-        storedKeySegments.clear();
-        forgiveKeySegments.clear();
-        Path folderPath = getLocalKeyFolderPath();
-        if (!Files.exists(folderPath)) {
-            try {
-                Files.createDirectories(folderPath);
-            } catch (IOException e) {
-                ShapeShifterCurseFabric.LOGGER.warn("Failed to create key folder: " + e.getMessage());
-            }
-        }
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(folderPath)) {
-            for (Path path : stream) {
-                if (path.getFileName().toString().endsWith(".key")) {
-                    KeySegment keySegment = readKeySegment(new PacketByteBuf(Unpooled.wrappedBuffer(Files.readAllBytes(path))));
-                    if (keySegment != null) {
-                        storedKeySegments.put(keySegment.getType(), keySegment);
-                    }
-                }
-            }
-        } catch (IOException e) {
-            ShapeShifterCurseFabric.LOGGER.warn("Failed to load key segments: " + e.getMessage());
-        }
-    }
-
-    public static void saveKey(KeySegment keySegment) {
-        Path folderPath = getLocalKeyFolderPath();
-        try {
-            if (!Files.exists(folderPath)) {
-                Files.createDirectories(folderPath);
-            }
-            Path filePath = folderPath.resolve(keySegment.getType() + ".key");
-            Files.write(filePath, keySegment.getRaw());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static boolean loadKey(@Nullable KeySegment keySegment) {
-        // 返回值 -> 是否触发熔断
-        if (keySegment == null || !keySegment.isUseMeltdown()) {
-            return false;
-        }
-        if (!storedKeySegments.containsKey(keySegment.getType())) {
-            storedKeySegments.put(keySegment.getType(), keySegment);
-            saveKey(keySegment);
-            return false;
-        } else {
-            KeySegment storedKey = storedKeySegments.get(keySegment.getType());
-            if (storedKey.getVersion() >= keySegment.getVersion()) {
-                return false;
-            } else {
-                storedKeySegments.put(keySegment.getType(), keySegment);
-                forgiveKeySegments.add(new Pair<>(System.currentTimeMillis() / 1000, storedKey));
-                saveKey(keySegment);
-                return true;
-            }
-        }
-    }
-
-    public static void removeExpiredKey() {
-        long currentTime = System.currentTimeMillis() / 1000;
-        forgiveKeySegments.removeIf(pair -> pair.getLeft() + forgiveTime < currentTime);
-    }
-
-    public static boolean isKeyCanUse(@Nullable KeySegment keySegment) {
-        removeExpiredKey();
-        if (keySegment == null) {
-            return false;
-        }
-        if (!keySegment.isUseMeltdown()) {
-            return true;
-        }
-        if (!storedKeySegments.containsKey(keySegment.getType())) {
-            return true;
-        }
-        KeySegment storedKey = storedKeySegments.get(keySegment.getType());
-        if (storedKey.getVersion() <= keySegment.getVersion()) {
-            return true;
-        }
-        for (Pair<Long, KeySegment> forgiveKeySegment : forgiveKeySegments) {
-            if (keySegment.softEquals(forgiveKeySegment.getRight())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public static byte[] getBufArray(ByteBuf buf) {
         if (buf == null) {
             return null;
@@ -295,6 +208,14 @@ public final class AuthUtils {
         buf.readBytes(array);
         buf.setIndex(rollbackIndexR, rollbackIndexW);
         return array;
+    }
+
+    public static @Nullable KeySegment getKeySegment(int type) {
+        return keyManager.getKeySegment(type);
+    }
+
+    public static boolean isKeyValid(KeySegment keySegment) {
+        return keyManager.isKeyValid(keySegment);
     }
 
     static {

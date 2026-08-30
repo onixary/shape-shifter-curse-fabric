@@ -32,12 +32,16 @@ public class AnimSystem {
         public long ContinueSwingAnimCounter = 0;  // 持续增长使用long防止溢出 顺便可以不用做最大值判断
         public boolean IsWalking = false;
         public long ContinueIdleStayTickCounter = 0;  // 静止Idle持续tick数 用于Idle停留动画 20tick=1秒
+        public Vec3d fakeVelocity = Vec3d.ZERO;
+        public double fallDistanceTemp;
+        public double fallDistance = 0;
         public NbtCompound customData;  // 用于存储其他拓展Mod的数据 在本模组中不使用
 
         public AnimSystemData(PlayerEntity player) {
             this.playerForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
             this.customData = new NbtCompound();
             this.LastPosition = player.getPos();
+            this.fallDistanceTemp = LastPosition.y;
         }
     }
     public final PlayerEntity player;  // 玩家实体 理论上如果当前玩家实体被卸载了 那么这个AnimSystem也应该被卸载
@@ -100,8 +104,10 @@ public class AnimSystem {
     }
 
     private void PreProcessAnimSystemData() {
+        Vec3d nowPos = this.player.getPos();
+        this.data.fakeVelocity = nowPos.subtract(this.data.LastPosition);
         this.data.playerForm = FormTextureUtils.getPlayerForm_Render(this.player);
-        this.data.IsWalking = !this.data.LastPosition.equals(this.player.getPos());
+        this.data.IsWalking = !this.data.LastPosition.equals(nowPos);
         if (this.player.handSwinging) {
             this.data.ContinueSwingAnimCounter ++;
         }
@@ -109,6 +115,12 @@ public class AnimSystem {
             this.data.ContinueSwingAnimCounter = 0;
         }
         this.data.IsOnGround = checkOnGroundSuper(this.player);
+        if (this.data.IsOnGround) {
+            this.data.fallDistanceTemp = nowPos.y;
+        } else {
+            this.data.fallDistanceTemp = Math.max(this.data.fallDistanceTemp, nowPos.y);
+        }
+        this.data.fallDistance = this.data.fallDistanceTemp - nowPos.y;
         this.data.ContinueIdleStayTickCounter = FSMUtils.IsIdleStayCondition(this.player, this.data) ? this.data.ContinueIdleStayTickCounter + 1 : 0;
         this.NPPA_Tick();
     }
