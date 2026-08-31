@@ -9,13 +9,10 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimRegistries;
+import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.*;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateEnum;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
-import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.ClimbAnimController;
-import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.OneAnimController;
-import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.RideAnimController;
-import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateControllerDP.WithSneakAnimController;
 import net.onixary.shapeShifterCurseFabric.player_form.NormalSubForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.IPatronForm;
@@ -95,6 +92,9 @@ public class Form_Bat3_Sub_Avali extends NormalSubForm implements IPatronForm, M
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_elytra_fly"));
     public static final AnimUtils.AnimationHolderData ANIM_SHIELDING =
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_shielding"), 1.0f, 1);
+    public static final AnimUtils.AnimationHolderData ANIM_FLOAT =
+            new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_water_float"));
+
 
 
     public static final AbstractAnimStateController IDLE_CONTROLLER = new WithSneakAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_idle")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("avali_sneak_idle")));
@@ -111,6 +111,7 @@ public class Form_Bat3_Sub_Avali extends NormalSubForm implements IPatronForm, M
     public static final AbstractAnimStateController SLEEP_CONTROLLER = new OneAnimController(ANIM_SLEEP);
     public static final AbstractAnimStateController FALL_FLYING_CONTROLLER = new OneAnimController(ANIM_ELYTRA_FLY);
     public static final AbstractAnimStateController SHIELDING_CONTROLLER = new OneAnimController(ANIM_SHIELDING);
+    public static final AbstractAnimStateController SWIM_CONTROLLER = new SwimAnimController(ANIM_FLOAT, null);
 
     @Override
     public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
@@ -147,6 +148,8 @@ public class Form_Bat3_Sub_Avali extends NormalSubForm implements IPatronForm, M
                     return FALL_FLYING_CONTROLLER;
                 case ANIM_STATE_BLOCK_SHIELD:
                     return SHIELDING_CONTROLLER;
+                case ANIM_STATE_SWIM:
+                    return SWIM_CONTROLLER;
                 default:
                     return null;
             }
