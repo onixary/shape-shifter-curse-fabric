@@ -220,6 +220,7 @@ public final class AuthUtils {
 
     static {
         registerDataReader((type, version) -> type == 1 && version == 0, PatronDataSegment::new);
+        registerDataReader((type, version) -> type == 2 && version == 0, DebuggerDataSegment::new);
     }
 
     public static void init() { }

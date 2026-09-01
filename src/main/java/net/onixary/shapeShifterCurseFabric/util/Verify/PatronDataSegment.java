@@ -34,7 +34,11 @@ public final class PatronDataSegment implements IDataSegment {
     private final KeySegment key;
 
     PatronDataSegment(KeySegment key, PacketByteBuf buf) {
-        this.type = buf.readInt();
+        int type = buf.readInt();
+        if (type != 1) {
+            throw new RuntimeException("Invalid Patron Data Segment");
+        }
+        this.type = type;
         this.version = buf.readInt();
         buf.skipBytes(4);
         this.uuid = buf.readUuid();

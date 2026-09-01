@@ -57,36 +57,25 @@ def FormatDuration(Seconds: int) -> str:
 	return "".join(Parts) if Parts else "0s"
 
 
-class PatronDataSegment(ScriptTypes.SubDataSegment):
+class DebuggerDataSegment(ScriptTypes.SubDataSegment):
 	UUID: bytes = None
-	PermissionLevel: int = 0
+	DebugLevel: int = 0
 	Timestamp: int = 0
 	ExpiresIn: int = 0
-	ExtraData: dict[str, bytes] = None
-
-	def __init__(self):
-		self.ExtraData = {}
 
 	@staticmethod
-	def load(data: bytes) -> "PatronDataSegment":
+	def load(data: bytes) -> "DebuggerDataSegment":
 		dataIO = io.BytesIO(data)
-		segment = PatronDataSegment()
+		segment = DebuggerDataSegment()
 		segment.Type = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
 		segment.Version = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
 		length = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
 		if length != len(data):
 			raise Exception("Data length is not Current")
 		segment.UUID = dataIO.read(16)
-		segment.PermissionLevel = int.from_bytes(dataIO.read(2), Const.INT_BYTE_TYPE)
+		segment.DebugLevel = int.from_bytes(dataIO.read(2), Const.INT_BYTE_TYPE)
 		segment.Timestamp = int.from_bytes(dataIO.read(8), Const.INT_BYTE_TYPE)
 		segment.ExpiresIn = int.from_bytes(dataIO.read(8), Const.INT_BYTE_TYPE)
-		extraDataCount = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
-		for i in range(extraDataCount):
-			keyLength = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
-			key = dataIO.read(keyLength).decode("utf-8")
-			valueLength = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
-			value = dataIO.read(valueLength)
-			segment.ExtraData[key] = value
 		return segment
 
 	def save(self) -> bytes:
@@ -95,15 +84,9 @@ class PatronDataSegment(ScriptTypes.SubDataSegment):
 		dataIO.write(self.Version.to_bytes(4, Const.INT_BYTE_TYPE))
 		dataIO.write((0).to_bytes(4, Const.INT_BYTE_TYPE))  # 先用0填充 之后填充数据长度
 		dataIO.write(self.UUID)
-		dataIO.write(self.PermissionLevel.to_bytes(2, Const.INT_BYTE_TYPE))
+		dataIO.write(self.DebugLevel.to_bytes(2, Const.INT_BYTE_TYPE))
 		dataIO.write(self.Timestamp.to_bytes(8, Const.INT_BYTE_TYPE))
 		dataIO.write(self.ExpiresIn.to_bytes(8, Const.INT_BYTE_TYPE))
-		dataIO.write(len(self.ExtraData).to_bytes(4, Const.INT_BYTE_TYPE))
-		for key, value in self.ExtraData.items():
-			dataIO.write(len(key).to_bytes(4, Const.INT_BYTE_TYPE))
-			dataIO.write(key.encode("utf-8"))
-			dataIO.write(len(value).to_bytes(4, Const.INT_BYTE_TYPE))
-			dataIO.write(value)
 		length = dataIO.tell()
 		dataIO.seek(8)
 		dataIO.write(length.to_bytes(4, Const.INT_BYTE_TYPE))
@@ -112,16 +95,13 @@ class PatronDataSegment(ScriptTypes.SubDataSegment):
 	@staticmethod
 	def fromJson(jsonData: dict, Timestamp: typing.Optional[int] = None) -> "PatronDataSegment":
 		Timestamp = int(time.time()) if Timestamp is None else Timestamp
-		segment = PatronDataSegment()
-		segment.Type = 1
+		segment = DebuggerDataSegment()
+		segment.Type = 2
 		segment.Version = 0
 		segment.UUID = bytes.fromhex(jsonData["UUID"])
-		segment.PermissionLevel = jsonData["PermissionLevel"]
+		segment.DebugLevel = jsonData["DebugLevel"]
 		segment.Timestamp = Timestamp
 		segment.ExpiresIn = jsonData["ExpiresIn"]
-		extraData = jsonData.get("ExtraData", {})
-		for key, value in extraData.items():
-			segment.ExtraData[key] = base64.b64decode(value)
 		return segment
 
 	def getReadableData(self) -> str | dict | list | None:
@@ -129,39 +109,36 @@ class PatronDataSegment(ScriptTypes.SubDataSegment):
 			"数据类型": self.Type,
 			"数据版本": self.Version,
 			"UUID": self.UUID.hex(),
-			"权限等级": self.PermissionLevel,
+			"调试等级": self.DebugLevel,
 			"签发时间": time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(self.Timestamp)),
 			"失效时间": time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(self.Timestamp + self.ExpiresIn)),
-			"有效期": FormatDuration(self.ExpiresIn),
-			"额外数据": {
-				key: f"0x{value.hex()}" for key, value in self.ExtraData.items()
-			}
+			"有效期": FormatDuration(self.ExpiresIn)
 		}
 
 
 def loadAllData() -> dict[str, list[ScriptTypes.SubDataSegment]]:
-	PatronJsons = [
-		os.path.join("./PatronData", f) for f in os.listdir("./PatronData")
-		if f.endswith(".json") and os.path.isfile(os.path.join("./PatronData", f))
+	DebuggerJsons = [
+		os.path.join("./DebuggerData", f) for f in os.listdir("./DebuggerData")
+		if f.endswith(".json") and os.path.isfile(os.path.join("./DebuggerData", f))
 	]
-	PatronData = {}
-	for PatronFilePath in PatronJsons:
-		with open(PatronFilePath, "r", encoding="utf-8") as f:
-			PatronJson = json.load(f)
+	DebuggerData = {}
+	for DebuggerFilePath in DebuggerJsons:
+		with open(DebuggerFilePath, "r", encoding="utf-8") as f:
+			DebuggerJson = json.load(f)
 		try:
-			dataSegment = PatronDataSegment.fromJson(PatronJson)
+			dataSegment = DebuggerDataSegment.fromJson(DebuggerJson)
 			fileName = dataSegment.UUID.hex().upper()
-			dataList = PatronData.get(fileName, None)
+			dataList = DebuggerData.get(fileName, None)
 			if dataList is None:
 				dataList = []
 			dataList.append(dataSegment)
-			PatronData[fileName] = dataList
+			DebuggerData[fileName] = dataList
 		except Exception as e:
-			print(f"Error building patron data for {PatronFilePath}: {e}")
+			print(f"Error building patron data for {DebuggerFilePath}: {e}")
 			continue
-	return PatronData
+	return DebuggerData
 
 
 def registerPlugin(dataSerializerRegister: ScriptTypes.dataDeserializerRegister, loaderRegister: ScriptTypes.loadAllDataFunctionRegister):
-	dataSerializerRegister("Patron Data Reader V0", (1, 0), lambda fileName, data: PatronDataSegment.load(data))
-	loaderRegister("Patron Data", loadAllData)
+	dataSerializerRegister("Debugger Data Reader V0", (2, 0), lambda fileName, data: DebuggerDataSegment.load(data))
+	loaderRegister("Debugger Data", loadAllData)
