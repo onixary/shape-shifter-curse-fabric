@@ -43,7 +43,7 @@ public class EntityMixin {
         if ((Object)this instanceof PlayerEntity player) {
             var powers = PowerHolderComponent.getPowers(player, ModifyFootstepSoundSpeedPower.class);
             if (!powers.isEmpty()) {
-                float multiplier = powers.get(0).getSpeedMultiplier();
+                float multiplier = powers.get(0).getSpeedMultiplierFor(player);
                 cir.setReturnValue(((Entity) (Object) this).distanceTraveled + (1.0f / multiplier));
             }
         }
