@@ -610,6 +610,7 @@ public class ModPacketsS2C {
     private static void receiveRequestPatronAuthFile(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         UUID playerID = buf.readUuid();
         client.execute(() -> {
+            ShapeShifterCurseFabricClient.onRequestAuthFile();
             AuthClient.requestAuthFile(playerID);
         });
     }

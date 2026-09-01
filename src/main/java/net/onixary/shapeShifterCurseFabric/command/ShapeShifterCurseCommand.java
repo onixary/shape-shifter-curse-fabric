@@ -168,6 +168,9 @@ public class ShapeShifterCurseCommand {
                                                 )
                                         )
                                 )
+                                .then(literal("reupload_auth_file")
+                                        .executes(ShapeShifterCurseCommand::requestNewAuthData)
+                                )
                         )
                         .then(literal("patron_info").requires(cs -> cs.hasPermissionLevel(0))
                                 .executes(ShapeShifterCurseCommand::logPatronInfo)
@@ -757,6 +760,20 @@ public class ShapeShifterCurseCommand {
             // 调试时在此打断点
             ShapeShifterCurseFabric.LOGGER.error("Exception when set form", e);
             throw e;
+        }
+        return 1;
+    }
+
+    private static int requestNewAuthData(CommandContext<ServerCommandSource> commandContext) throws CommandSyntaxException {
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        if (player == null) {
+            return 0;
+        }
+        try {
+            ModPacketsS2CServer.requestPatronAuthFile(player);
+        } catch (Exception e) {
+            player.getCommandSource().sendError(Text.literal("Error to request auth file"));
+            return 0;
         }
         return 1;
     }
