@@ -230,11 +230,11 @@ public final class AuthClient {
         }
     }
 
-    public static void requestAuthFile(UUID playerUUID) {
+    public static void requestAuthFile(UUID playerUUID, boolean forceReReadFile) {
         if (playerUUID == null) {
             return;
         }
-        if (!playerUUID.equals(LOCAL_PLAYER_UUID)) {
+        if (forceReReadFile || !playerUUID.equals(LOCAL_PLAYER_UUID)) {
             loadLocalPatronAuthFile(playerUUID);
         }
         if (LOCAL_PATRON_AUTH_FILE != null) {

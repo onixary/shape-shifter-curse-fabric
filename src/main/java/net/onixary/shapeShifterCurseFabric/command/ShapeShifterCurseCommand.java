@@ -770,7 +770,7 @@ public class ShapeShifterCurseCommand {
             return 0;
         }
         try {
-            ModPacketsS2CServer.requestPatronAuthFile(player);
+            ModPacketsS2CServer.requestPatronAuthFile(player, true);
         } catch (Exception e) {
             player.getCommandSource().sendError(Text.literal("Error to request auth file"));
             return 0;
