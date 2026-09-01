@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class DebuggerDataSegment implements IDataSegment {
+public final class DebuggerDataSegment implements IDataSegment {
     private static final HashMap<UUID, DebuggerDataSegment> PATRON_AUTH_DATA = new HashMap<>();
     private final int type;
     private final int version;
@@ -15,7 +15,7 @@ public class DebuggerDataSegment implements IDataSegment {
     private final int level;
     private final long expireTime;
 
-    public DebuggerDataSegment(KeySegment key, PacketByteBuf buf) {
+    DebuggerDataSegment(KeySegment key, PacketByteBuf buf) {
         int type = buf.readInt();
         if (type != 2) {
             throw new RuntimeException("Invalid Debugger Data Segment");
