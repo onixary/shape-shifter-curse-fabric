@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public final class DebuggerDataSegment implements IDataSegment {
-    private static final HashMap<UUID, DebuggerDataSegment> PATRON_AUTH_DATA = new HashMap<>();
+    private static final HashMap<UUID, DebuggerDataSegment> DEBUGGER_AUTH_DATA = new HashMap<>();
     private final int type;
     private final int version;
     private final UUID uuid;
@@ -33,7 +33,7 @@ public final class DebuggerDataSegment implements IDataSegment {
             return;
         }
         if (AuthUtils.isKeyValid(key)) {
-            PATRON_AUTH_DATA.put(uuid, this);
+            DEBUGGER_AUTH_DATA.put(uuid, this);
         }
     }
 
@@ -55,7 +55,7 @@ public final class DebuggerDataSegment implements IDataSegment {
         if (player == null) {
             return 0;
         }
-        DebuggerDataSegment dataSegment = PATRON_AUTH_DATA.get(player.getUuid());
+        DebuggerDataSegment dataSegment = DEBUGGER_AUTH_DATA.get(player.getUuid());
         if (dataSegment == null) {
             return 0;
         }
