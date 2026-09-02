@@ -1,5 +1,5 @@
 {
-    "type": "shape-shifter-curse:action_on_sprinting_to_sneaking",
+    "type": "apoli:active_self",
     "entity_action": {
         "type": "apoli:and",
         "actions": [
@@ -24,6 +24,8 @@
             {
                 "type": "shape-shifter-curse:explosion_damage_entity",
                 "power": 2,
+                "baseDamage": 4,
+                "damage_multiplier": 1.5,
                 "entity_condition": {
                     "type": "apoli:and",
                     "conditions": [
@@ -44,7 +46,7 @@
             },
             {
                 "type": "apoli:gain_air",
-                "value": -15
+                "value": -20
             },
             {
                 "type": "apoli:spawn_particles",
@@ -75,11 +77,14 @@
             }
         ]
     },
-    "entity_condition": {
+    "condition": {
         "type": "apoli:and",
         "conditions": [
             {
                 "type": "apoli:on_block"
+            },
+            {
+                "type": "apoli:sprinting"
             },
             {
                 "type": "apoli:air",
@@ -87,5 +92,12 @@
                 "compare_to": 0
             }
         ]
+    },
+    "cooldown": 60,
+    "hud_render": {
+        "should_render": false
+    },
+    "key": {
+        "key": "key.shape-shifter-curse.active_skill_1"
     }
 }
