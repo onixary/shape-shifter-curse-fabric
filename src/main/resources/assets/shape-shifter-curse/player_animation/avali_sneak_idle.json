@@ -1,0 +1,81 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"avali_sneak_idle": {
+			"loop": true,
+			"animation_length": 2.0833,
+			"bones": {
+				"leftLeg": {
+					"rotation": {
+						"vector": [5, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"leftCalf": {
+					"rotation": {
+						"vector": [-5, 0, 0]
+					}
+				},
+				"leftArch": {
+					"rotation": {
+						"vector": [10, 0, 0]
+					}
+				},
+				"rightArm": {
+					"rotation": {
+						"vector": [-7.3123, -18.5364, 15.2559]
+					},
+					"position": {
+						"vector": [1, -3, 0]
+					}
+				},
+				"leftArm": {
+					"rotation": {
+						"vector": [-7.312, 18.5363, -15.2563]
+					},
+					"position": {
+						"vector": [-1, -3, 0]
+					}
+				},
+				"torso": {
+					"rotation": {
+						"vector": [5, 0, 0]
+					},
+					"position": {
+						"vector": [0, -2, 0]
+					}
+				},
+				"head": {
+					"position": {
+						"vector": [0, -3.5, -1]
+					}
+				},
+				"rightLeg": {
+					"rotation": {
+						"vector": [5, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"rightCalf": {
+					"rotation": {
+						"vector": [-5, 0, 0]
+					}
+				},
+				"rightArch": {
+					"rotation": {
+						"vector": [10, 0, 0]
+					}
+				},
+				"tailMount": {
+					"rotation": {
+						"vector": [45, 0, 0]
+					}
+				}
+			}
+		}
+	}
+}

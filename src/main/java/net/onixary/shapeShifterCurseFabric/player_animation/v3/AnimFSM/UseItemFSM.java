@@ -25,6 +25,10 @@ public class UseItemFSM extends AbstractAnimFSM {
             return UniversalStateResult;
         }
         if (player.isUsingItem()) {
+            // 举盾防御优先于普通使用物品判定 1.20.1的isBlocking仅在举盾时为true
+            if (player.isBlocking()) {
+                return ANIM_STATE_BLOCK_SHIELD;
+            }
             return ANIM_STATE_USE_ITEM;
         }
         // 到这里player.handSwinging一定是true

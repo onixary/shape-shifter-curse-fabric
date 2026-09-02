@@ -29,13 +29,15 @@ public class AnimRegistries {
     public static Identifier ANIM_STATE_FALL_FLYING = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("fall_flying_state"), new AnimRegistry.AnimState(new EmptyController()));
     public static Identifier ANIM_STATE_FALL = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("fall_state"), new AnimRegistry.AnimState(new EmptyController()));
     public static Identifier ANIM_STATE_JUMP = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("jump_state"), new AnimRegistry.AnimState(new EmptyController()));
-    public static Identifier ANIM_STATE_USE_ITEM = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("use_item_state"), new AnimRegistry.AnimState(new UseOtherStateAnimController(AnimRegistries.ANIM_STATE_IDLE)));
     public static Identifier ANIM_STATE_MINING = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("mining_state"), new AnimRegistry.AnimState(new EmptyController()));
     public static Identifier ANIM_STATE_ATTACK = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("attack_state"), new AnimRegistry.AnimState(new EmptyController()));
     public static Identifier ANIM_STATE_WALK = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("walk_state"), new AnimRegistry.AnimState(new EmptyController()));
     public static Identifier ANIM_STATE_SPRINT = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("sprint_state"), new AnimRegistry.AnimState(new EmptyController()));
     public static Identifier ANIM_STATE_IDLE = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("idle_state"), new AnimRegistry.AnimState(new EmptyController()));
     public static Identifier ANIM_STATE_CRAWL = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("crawl_state"), new AnimRegistry.AnimState(new EmptyController()));
+    // 注意: USE_ITEM和BLOCK_SHIELD的默认控制器引用了ANIM_STATE_IDLE 因此必须声明在其之后 否则静态初始化时会传入null
+    public static Identifier ANIM_STATE_USE_ITEM = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("use_item_state"), new AnimRegistry.AnimState(new UseOtherStateAnimController(AnimRegistries.ANIM_STATE_IDLE)));
+    public static Identifier ANIM_STATE_BLOCK_SHIELD = AnimRegistry.registerAnimState(ShapeShifterCurseFabric.identifier("block_shield_state"), new AnimRegistry.AnimState(new UseOtherStateAnimController(AnimRegistries.ANIM_STATE_IDLE)));
 
     // AnimFSM注册
     public static Identifier FSM_ON_GROUND = AnimRegistry.registerAnimFSM(ShapeShifterCurseFabric.identifier("on_ground"), new OnGroundFSM());
