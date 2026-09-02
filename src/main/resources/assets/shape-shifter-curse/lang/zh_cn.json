@@ -576,6 +576,7 @@
     "gui.shape_shifter_curse_fabric.fcsv2.click_to_modify": "编辑",
     "gui.shape_shifter_curse_fabric.fcsv2.hex_text": "HEX",
     "gui.shape_shifter_curse_fabric.book_2_1.open_fcs_menu": "自定义形态配色",
+    "message.shapeShifterCurseFabric.authing": "服务器正在请求验证数据, 这一般发生于刚进入游戏阶段(有可能是Bug导致计数器未清空导致进入服务器时弹出此提示). 如果在游玩过程中触发此提示, 请小心服务器端的JAR可能已经被修改了. 总请求次数 %s",
     "gui.shape_shifter_curse_fabric.fcs.primaryColor": "主要色",
     "gui.shape_shifter_curse_fabric.fcs.accentColor1Color": "重点色1",
     "gui.shape_shifter_curse_fabric.fcs.accentColor2Color": "重点色2",

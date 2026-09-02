@@ -5,10 +5,12 @@ import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderProgram;
+import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.VertexFormats;
@@ -56,6 +58,17 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 	//public static final EntityModelLayer T_OCELOT_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "t_ocelot"), "main");
 
 	public static final FormColorData formColorData = new FormColorData();
+
+	private static int requestAuthCount = 0;
+
+	public static void onRequestAuthFile() {
+		if (requestAuthCount != 0) {
+            if (MinecraftClient.getInstance().player != null) {
+                MinecraftClient.getInstance().player.sendMessage(Text.translatable("message.shapeShifterCurseFabric.authing", requestAuthCount + 1));
+            }
+        }
+		requestAuthCount++;
+	}
 
 	public static MinecraftClient getClient() {
 		return MinecraftClient.getInstance();
@@ -252,6 +265,9 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 			// }
 			PowerHolderComponent.KEY.get(clientPlayer).getPowers().stream().filter(p -> p instanceof LevitatePower).forEach(p -> ((LevitatePower) p).clientTick(clientPlayer));
 			CustomEdiblePower.OnClientTick(clientPlayer);
+		});
+		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
+			requestAuthCount = 0;
 		});
 
 		makeSound = new KeyBinding("key.shape-shifter-curse.make_sound", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_GRAVE_ACCENT, "category." + MOD_ID);
