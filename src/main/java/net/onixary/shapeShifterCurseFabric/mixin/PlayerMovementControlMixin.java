@@ -104,7 +104,6 @@ public class PlayerMovementControlMixin implements IMoveController {
         // 发送网络包到服务器
         if (player.getWorld().isClient()) {
             PacketByteBuf buf = PacketByteBufs.create();
-            buf.writeUuid(player.getUuid());
             ClientPlayNetworking.send(ModPackets.JUMP_EVENT_ID, buf);
         }
     }
@@ -162,7 +161,6 @@ public class PlayerMovementControlMixin implements IMoveController {
             // 发送网络包到服务器
             if (player.getWorld().isClient()) {
                 PacketByteBuf buf = PacketByteBufs.create();
-                buf.writeUuid(player.getUuid());
                 ClientPlayNetworking.send(ModPackets.SPRINTING_TO_SNEAKING_EVENT_ID, buf);
             }
         }

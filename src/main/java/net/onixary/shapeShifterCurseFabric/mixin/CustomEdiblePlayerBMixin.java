@@ -11,6 +11,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.world.World;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -27,6 +28,7 @@ public abstract class CustomEdiblePlayerBMixin extends LivingEntity {
 
     @Inject(method = "eatFood", at = @At(value = "HEAD"), cancellable = true)
     private void eatFood(World world, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
+        // ShapeShifterCurseFabric.LOGGER.error("SSC_CE_SYSTEM_CEPB_01");
         if ((Object)this instanceof PlayerEntity playerEntity) {
             FoodComponent foodComponent = getPowerFoodComponent(playerEntity, stack);
             if (foodComponent == null) {

@@ -75,7 +75,8 @@
     "mob.OcelotEntityMixin",
     "SU_ServerCommandSourceMixin",
     "SU_ServerPlayerEntityMixin",
-    "SU_MinecraftServerMixin"
+    "SU_MinecraftServerMixin",
+    "integration.LodeStoneIntegrationMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",
