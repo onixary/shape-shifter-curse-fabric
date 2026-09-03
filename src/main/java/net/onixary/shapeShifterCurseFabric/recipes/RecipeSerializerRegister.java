@@ -6,11 +6,11 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.recipes.alter.AlterRecipe;
+import net.onixary.shapeShifterCurseFabric.recipes.alter.AlterRecipeOld;
 
 public class RecipeSerializerRegister {
     public static RecipeSerializer<MorphScaleUpgradeRecipe> MORPH_SCALE_UPGRADE = register(ShapeShifterCurseFabric.identifier("morph_scale_upgrade"), new MorphScaleUpgradeRecipe.Serializer());
-    public static RecipeSerializer<AlterRecipe> ALTER_RECIPE = register(ShapeShifterCurseFabric.identifier("alter"), new AlterRecipe.Serializer());
+    public static RecipeSerializer<AlterRecipeOld> ALTER_RECIPE = register(ShapeShifterCurseFabric.identifier("alter"), new AlterRecipeOld.Serializer());
 
 
     public static void register() {
