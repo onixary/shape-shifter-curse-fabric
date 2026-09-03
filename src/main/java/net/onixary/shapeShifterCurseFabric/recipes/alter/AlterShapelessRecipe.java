@@ -6,6 +6,7 @@ import com.google.gson.JsonParseException;
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.RecipeInputInventory;
+import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.*;
@@ -41,7 +42,7 @@ public class AlterShapelessRecipe extends AlterRecipe {
     }
 
     @Override
-    public boolean matches(RecipeInputInventory inventory, World world) {
+    public boolean matches(SidedInventory inventory, World world) {
         RecipeMatcher recipeMatcher = new RecipeMatcher();
         int i = 0;
 
@@ -57,7 +58,7 @@ public class AlterShapelessRecipe extends AlterRecipe {
     }
 
     @Override
-    public ItemStack craft(RecipeInputInventory inventory, DynamicRegistryManager registryManager) {
+    public ItemStack craft(SidedInventory inventory, DynamicRegistryManager registryManager) {
         return this.output.copy();
     }
 

@@ -8,6 +8,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.RecipeInputInventory;
+import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;
@@ -52,9 +53,9 @@ public class AlterShapedRecipe extends AlterRecipe {
         return true;
     }
 
-    private boolean matchesPattern(RecipeInputInventory inv, int offsetX, int offsetY, boolean flipped) {
-        for(int i = 0; i < inv.getWidth(); ++i) {
-            for(int j = 0; j < inv.getHeight(); ++j) {
+    private boolean matchesPattern(SidedInventory inv, int offsetX, int offsetY, boolean flipped) {
+        for(int i = 0; i < 3; ++i) {
+            for(int j = 0; j < 3; ++j) {
                 int k = i - offsetX;
                 int l = j - offsetY;
                 Ingredient ingredient = Ingredient.EMPTY;
@@ -66,7 +67,7 @@ public class AlterShapedRecipe extends AlterRecipe {
                     }
                 }
 
-                if (!ingredient.test(inv.getStack(i + j * inv.getWidth()))) {
+                if (!ingredient.test(inv.getStack(i + j * 3))) {
                     return false;
                 }
             }
@@ -76,9 +77,9 @@ public class AlterShapedRecipe extends AlterRecipe {
     }
 
     @Override
-    public boolean matches(RecipeInputInventory recipeInputInventory, World world) {
-        for(int i = 0; i <= recipeInputInventory.getWidth() - this.width; ++i) {
-            for(int j = 0; j <= recipeInputInventory.getHeight() - this.height; ++j) {
+    public boolean matches(SidedInventory recipeInputInventory, World world) {
+        for(int i = 0; i <= 3 - this.width; ++i) {
+            for(int j = 0; j <= 3 - this.height; ++j) {
                 if (this.matchesPattern(recipeInputInventory, i, j, true)) {
                     return true;
                 }
@@ -92,7 +93,7 @@ public class AlterShapedRecipe extends AlterRecipe {
     }
 
     @Override
-    public ItemStack craft(RecipeInputInventory inventory, DynamicRegistryManager registryManager) {
+    public ItemStack craft(SidedInventory inventory, DynamicRegistryManager registryManager) {
         return this.getOutput(registryManager).copy();
     }
 
