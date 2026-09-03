@@ -69,29 +69,18 @@ public class ModPacketsC2S {
 
         // jump_event condition handle
         ServerPlayNetworking.registerGlobalReceiver(JUMP_EVENT_ID, (server, player, handler, buf, responseSender) -> {
-            UUID playerUuid = buf.readUuid();
-
             server.execute(() -> {
                 // 在服务器端设置跳跃状态
-                if (player.getUuid().equals(playerUuid)) {
-                    JumpEventCondition.setJumping(player, true);
-                }
-
-                PowerHolderComponent.getPowers(player, ActionOnJumpPower.class)
-                        .forEach(ActionOnJumpPower::executeAction);
+                JumpEventCondition.setJumping(player, true);
+                PowerHolderComponent.getPowers(player, ActionOnJumpPower.class).forEach(ActionOnJumpPower::executeAction);
             });
         });
 
         // SPRINTING_TO_SNEAKING_EVENT condition handle
         ServerPlayNetworking.registerGlobalReceiver(SPRINTING_TO_SNEAKING_EVENT_ID, (server, player, handler, buf, responseSender) -> {
-            UUID playerUuid = buf.readUuid();
-
             server.execute(() -> {
                 // 在服务器端处理疾跑转潜行事件
-                if (player.getUuid().equals(playerUuid)) {
-                    PowerHolderComponent.getPowers(player, ActionOnSprintingToSneakingPower.class)
-                            .forEach(ActionOnSprintingToSneakingPower::executeAction);
-                }
+                PowerHolderComponent.getPowers(player, ActionOnSprintingToSneakingPower.class).forEach(ActionOnSprintingToSneakingPower::executeAction);
             });
         });
 
