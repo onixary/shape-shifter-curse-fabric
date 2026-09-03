@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -102,11 +103,13 @@ public abstract class CustomEdibleItemMixin {
 
     @ModifyExpressionValue(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item;isFood()Z"))
     private boolean use$isFood(boolean original, World world, PlayerEntity user, Hand hand) {
+        // ShapeShifterCurseFabric.LOGGER.error("SSC_CE_SYSTEM_CEI_01");
         return getPowerFoodComponent(user, user.getStackInHand(hand)) != null || original;
     }
 
     @ModifyExpressionValue(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item;getFoodComponent()Lnet/minecraft/item/FoodComponent;"))
     private FoodComponent use$getFoodComponent(FoodComponent original, World world, PlayerEntity user, Hand hand) {
+        // ShapeShifterCurseFabric.LOGGER.error("SSC_CE_SYSTEM_CEI_02");
         FoodComponent fc = getPowerFoodComponent(user, user.getStackInHand(hand));
         if (fc == null) {
             return original;
@@ -116,6 +119,7 @@ public abstract class CustomEdibleItemMixin {
 
     @ModifyExpressionValue(method = "finishUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item;isFood()Z"))
     private boolean finishUsing$isFood(boolean original, ItemStack stack, World world, LivingEntity user) {
+        // ShapeShifterCurseFabric.LOGGER.error("SSC_CE_SYSTEM_CEI_03");
         if (user instanceof PlayerEntity playerEntity) {
             return getPowerFoodComponent(playerEntity, stack) != null || original;
         }
