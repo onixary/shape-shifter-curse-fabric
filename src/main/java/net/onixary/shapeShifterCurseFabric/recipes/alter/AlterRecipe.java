@@ -8,7 +8,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.recipes.RecipeUtils;
 
 public abstract class AlterRecipe implements Recipe<RecipeInputInventory> {
-    public static final RecipeType<AlterRecipeOld> ALTER_RECIPE = RecipeUtils.registerRecipeType(ShapeShifterCurseFabric.identifier("alter"));
+    public static final RecipeType<AlterRecipe> ALTER_RECIPE = RecipeUtils.registerRecipeType(ShapeShifterCurseFabric.identifier("alter"));
 
     @Override
     public RecipeType<?> getType() {
@@ -17,6 +17,12 @@ public abstract class AlterRecipe implements Recipe<RecipeInputInventory> {
 
     public abstract int recipeTime();
 
+    public boolean needFuel() {
+        return true;
+    }
+
     // 进度锁 虽然SSC目前没这个需求 但我的拓展有这个需求
-    public abstract boolean canCraft(PlayerEntity player);
+    public boolean canCraft(PlayerEntity player) {
+        return true;
+    }
 }
