@@ -5,12 +5,16 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.screen.ScreenHandlerContext;
+import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.blocks.block_entity.AlterBlockEntity;
+import net.onixary.shapeShifterCurseFabric.custom_ui.AlterCraftUIHandler;
+import net.onixary.shapeShifterCurseFabric.custom_ui.RegMenuType;
 import org.jetbrains.annotations.Nullable;
 
 
@@ -39,7 +43,7 @@ public class AlterBlock extends BlockWithEntity {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof AlterBlockEntity alterBlockEntity) {
             alterBlockEntity.lastUser = player.getUuid();
-            // TODO 开启UI
+            player.openHandledScreen(alterBlockEntity);
         }
     }
 

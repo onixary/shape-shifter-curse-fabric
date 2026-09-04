@@ -14,12 +14,15 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
+import net.onixary.shapeShifterCurseFabric.custom_ui.AlterCraftUIHandler;
+import net.onixary.shapeShifterCurseFabric.custom_ui.RegMenuType;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.recipes.RecipeUtils;
 import net.onixary.shapeShifterCurseFabric.recipes.alter.AlterRecipe;
@@ -37,6 +40,8 @@ public class AlterBlockEntity extends LockableContainerBlockEntity implements Si
     public int progress = 0;
     public int fuelTime = 0;
     public final DefaultedList<ItemStack> inventory;
+
+    public boolean needCheckRecipe = true;
 
     public static final int[] TOP = {0, 1, 2, 3, 4, 5, 6, 7, 8};
     public static final int[] SIDE = {9};
@@ -66,12 +71,12 @@ public class AlterBlockEntity extends LockableContainerBlockEntity implements Si
 
     @Override
     protected Text getContainerName() {
-        return null;
+        return Text.literal("ALTER TEST NAME");
     }
 
     @Override
     protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-        return null;
+        return new AlterCraftUIHandler(RegMenuType.AlterCraftUI, syncId, playerInventory, this, ScreenHandlerContext.EMPTY);
     }
 
     @Override
@@ -246,6 +251,10 @@ public class AlterBlockEntity extends LockableContainerBlockEntity implements Si
     }
 
     public void tick(World world, BlockPos pos, BlockState state, AlterBlockEntity blockEntity) {
+        if (needCheckRecipe) {
+            this.checkRecipe();
+            needCheckRecipe = false;
+        }
         boolean itemChanged = false;
         boolean hasRecipe = this.nowRecipe != null;
         boolean hasFuel = this.fuelTime > 0;
@@ -292,7 +301,6 @@ public class AlterBlockEntity extends LockableContainerBlockEntity implements Si
         }
         this.fuelTime = nbt.getInt("FuelTime");
         this.progress = nbt.getInt("Process");
-        this.checkRecipe();
     }
 
     protected void writeNbt(NbtCompound nbt) {
