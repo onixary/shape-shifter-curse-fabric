@@ -2,6 +2,7 @@ package net.onixary.shapeShifterCurseFabric.blocks.block_entity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
@@ -24,6 +25,7 @@ import net.onixary.shapeShifterCurseFabric.recipes.alter.AlterRecipe;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -224,6 +226,16 @@ public class AlterBlockEntity extends LockableContainerBlockEntity implements Si
                 outputSlot.increment(output.getCount());
             } else {
                 return false;
+            }
+            List<ItemStack> extraOutput = this.nowRecipe.getExtraOutput(this);
+            if (extraOutput != null) {
+                World world = this.getWorld();
+                BlockPos pos = this.getPos().up();
+                if (world != null) {
+                    for (ItemStack extra : extraOutput) {
+                        world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), extra));
+                    }
+                }
             }
             this.nowRecipe.consumeInputs(this);
             return true;

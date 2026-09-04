@@ -2,11 +2,14 @@ package net.onixary.shapeShifterCurseFabric.recipes.alter;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SidedInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeType;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.recipes.RecipeUtils;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public abstract class AlterRecipe implements Recipe<SidedInventory> {
     public static final RecipeType<AlterRecipe> ALTER_RECIPE = RecipeUtils.registerRecipeType(ShapeShifterCurseFabric.identifier("alter"));
@@ -17,10 +20,6 @@ public abstract class AlterRecipe implements Recipe<SidedInventory> {
     }
 
     public abstract int recipeTime();
-
-    public boolean needFuel() {
-        return true;
-    }
 
     // 进度锁 虽然SSC目前没这个需求 但我的拓展有这个需求
     public boolean canCraft(@Nullable PlayerEntity player) {
@@ -36,5 +35,9 @@ public abstract class AlterRecipe implements Recipe<SidedInventory> {
         for (int i = 0; i < 9; i++) {
             inventory.getStack(i).decrement(1);
         }
+    }
+
+    public List<ItemStack> getExtraOutput(SidedInventory inventory) {
+        return List.of();
     }
 }
