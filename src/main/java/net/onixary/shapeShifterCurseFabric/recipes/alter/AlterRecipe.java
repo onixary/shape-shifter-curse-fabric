@@ -26,4 +26,15 @@ public abstract class AlterRecipe implements Recipe<SidedInventory> {
     public boolean canCraft(@Nullable PlayerEntity player) {
         return true;
     }
+
+    // 可以做到一个配方 消耗N个物品
+    public boolean InputsCountEnough(SidedInventory inventory) {
+        return true;
+    }
+
+    public void consumeInputs(SidedInventory inventory) {
+        for (int i = 0; i < 9; i++) {
+            inventory.getStack(i).decrement(1);
+        }
+    }
 }
