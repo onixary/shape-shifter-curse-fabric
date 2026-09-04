@@ -21,6 +21,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
+import net.onixary.shapeShifterCurseFabric.recipes.RecipeUtils;
 import net.onixary.shapeShifterCurseFabric.recipes.alter.AlterRecipe;
 import org.jetbrains.annotations.Nullable;
 
@@ -60,7 +61,7 @@ public class AlterBlockEntity extends LockableContainerBlockEntity implements Si
     public AlterBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(RegCustomBlock.ALTER_BLOCK_ENTITY, blockPos, blockState);
         this.inventory = DefaultedList.ofSize(11, ItemStack.EMPTY);
-        this.matchGetter = RecipeManager.createCachedMatchGetter(AlterRecipe.ALTER_RECIPE);
+        this.matchGetter = RecipeManager.createCachedMatchGetter(RecipeUtils.ALTER_RECIPE);
     }
 
     @Override

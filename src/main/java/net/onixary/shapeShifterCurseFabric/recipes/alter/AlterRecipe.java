@@ -5,18 +5,16 @@ import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeType;
-import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.recipes.RecipeUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public abstract class AlterRecipe implements Recipe<SidedInventory> {
-    public static final RecipeType<AlterRecipe> ALTER_RECIPE = RecipeUtils.registerRecipeType(ShapeShifterCurseFabric.identifier("alter"));
 
     @Override
     public RecipeType<?> getType() {
-        return ALTER_RECIPE;
+        return RecipeUtils.ALTER_RECIPE;
     }
 
     public abstract int recipeTime();

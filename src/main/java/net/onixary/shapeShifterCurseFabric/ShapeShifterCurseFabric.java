@@ -65,6 +65,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent
 import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.recipes.BrewingRecipeReloadListener;
 import net.onixary.shapeShifterCurseFabric.recipes.RecipeSerializerRegister;
+import net.onixary.shapeShifterCurseFabric.recipes.RecipeUtils;
 import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
@@ -237,6 +238,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
         // 注册配方
         RecipeSerializerRegister.register();
+        RecipeUtils.register();
 
         ManaRegistries.register();
         DefaultAccessory.init();

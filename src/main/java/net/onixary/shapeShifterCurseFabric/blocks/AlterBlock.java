@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.blocks;
 
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
@@ -40,5 +41,10 @@ public class AlterBlock extends BlockWithEntity {
             alterBlockEntity.lastUser = player.getUuid();
             // TODO 开启UI
         }
+    }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
     }
 }
