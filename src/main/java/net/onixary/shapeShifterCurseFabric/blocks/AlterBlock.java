@@ -3,7 +3,10 @@ package net.onixary.shapeShifterCurseFabric.blocks;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
@@ -50,5 +53,17 @@ public class AlterBlock extends BlockWithEntity {
     @Override
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;
+    }
+
+    @Override
+    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return checkType(world, type, RegCustomBlock.ALTER_BLOCK_ENTITY);
+    }
+
+    @Nullable
+    public static <T extends BlockEntity> BlockEntityTicker<T> checkType(World world, BlockEntityType<T> givenType, BlockEntityType<? extends AlterBlockEntity> expectedType) {
+        return world.isClient ? null : checkType(givenType, expectedType, (world1, pos, state, blockEntity) -> {
+            blockEntity.tick(world1, pos, state, blockEntity);
+        });
     }
 }
