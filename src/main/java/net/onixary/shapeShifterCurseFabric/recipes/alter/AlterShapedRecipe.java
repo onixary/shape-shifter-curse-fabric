@@ -6,6 +6,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import net.minecraft.advancement.Advancement;
+import net.minecraft.advancement.AdvancementManager;
+import net.minecraft.advancement.AdvancementProgress;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.RecipeInputInventory;
 import net.minecraft.inventory.SidedInventory;
@@ -15,6 +18,8 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.ShapedRecipe;
 import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
@@ -37,7 +42,9 @@ public class AlterShapedRecipe extends AlterRecipe {
     public final Identifier id;
     public final int fuelCostPerTick;
 
-    public AlterShapedRecipe(Identifier id, int width, int height, DefaultedList<Ingredient> input, Ingredient catalyst, ItemStack output, int recipeTime, int fuelCostPerTick) {
+    public final @Nullable Identifier requireAdvancement;
+
+    public AlterShapedRecipe(Identifier id, int width, int height, DefaultedList<Ingredient> input, Ingredient catalyst, ItemStack output, int recipeTime, int fuelCostPerTick, Identifier requireAdvancement) {
         this.id = id;
         this.width = width;
         this.height = height;
@@ -46,6 +53,7 @@ public class AlterShapedRecipe extends AlterRecipe {
         this.recipeTime = recipeTime;
         this.catalyst = catalyst;
         this.fuelCostPerTick = fuelCostPerTick;
+        this.requireAdvancement = requireAdvancement;
     }
 
     @Override
@@ -53,10 +61,27 @@ public class AlterShapedRecipe extends AlterRecipe {
         return recipeTime;
     }
 
-    // 之后再说 比如加一下进度锁什么的
     @Override
     public boolean canCraft(PlayerEntity player) {
-        return true;
+        if (requireAdvancement == null) {
+            return true;
+        }
+        if (player instanceof ServerPlayerEntity playerEntity) {
+            MinecraftServer server = playerEntity.getServer();
+            if (server == null) {
+                return false;
+            }
+            Advancement advancement = server.getAdvancementLoader().get(requireAdvancement);
+            if (advancement == null) {
+                return false;
+            }
+            AdvancementProgress advancementProgress = playerEntity.getAdvancementTracker().getProgress(advancement);
+            if (advancementProgress == null) {
+                return false;
+            }
+            return advancementProgress.isDone();
+        }
+        return false;
     }
 
     private boolean matchesPattern(SidedInventory inv, int offsetX, int offsetY, boolean flipped) {
@@ -256,6 +281,10 @@ public class AlterShapedRecipe extends AlterRecipe {
             if (jsonObject.has("catalyst")) {
                 catalyst = Ingredient.fromJson(jsonObject.get("catalyst"), true);
             }
+            Identifier requireAdvancement = null;
+            if (jsonObject.has("require_advancement")) {
+                requireAdvancement = new Identifier(JsonHelper.getString(jsonObject, "require_advancement"));
+            }
             int fuelCost = JsonHelper.getInt(jsonObject, "fuel_cost", 1);
             Map<String, Ingredient> map = readSymbols(JsonHelper.getObject(jsonObject, "key"));
             String[] strings = removePadding(getPattern(JsonHelper.getArray(jsonObject, "pattern")));
@@ -263,13 +292,17 @@ public class AlterShapedRecipe extends AlterRecipe {
             int j = strings.length;
             DefaultedList<Ingredient> defaultedList = createPatternMatrix(strings, map, i, j);
             ItemStack itemStack = ShapedRecipe.outputFromJson(JsonHelper.getObject(jsonObject, "result"));
-            return new AlterShapedRecipe(identifier, i, j, defaultedList, catalyst, itemStack, time, fuelCost);
+            return new AlterShapedRecipe(identifier, i, j, defaultedList, catalyst, itemStack, time, fuelCost, requireAdvancement);
         }
 
         public AlterShapedRecipe read(Identifier identifier, PacketByteBuf packetByteBuf) {
             Ingredient catalyst = null;
             if (packetByteBuf.readBoolean()) {
                 catalyst = Ingredient.fromPacket(packetByteBuf);
+            }
+            Identifier requireAdvancement = null;
+            if (packetByteBuf.readBoolean()) {
+                requireAdvancement = packetByteBuf.readIdentifier();
             }
             int i = packetByteBuf.readVarInt();
             int j = packetByteBuf.readVarInt();
@@ -280,13 +313,19 @@ public class AlterShapedRecipe extends AlterRecipe {
             ItemStack itemStack = packetByteBuf.readItemStack();
             int time = packetByteBuf.readVarInt();
             int fuelCost = packetByteBuf.readVarInt();
-            return new AlterShapedRecipe(identifier, i, j, defaultedList, catalyst, itemStack, time, fuelCost);
+            return new AlterShapedRecipe(identifier, i, j, defaultedList, catalyst, itemStack, time, fuelCost, requireAdvancement);
         }
 
         public void write(PacketByteBuf packetByteBuf, AlterShapedRecipe alterRecipe) {
             if (alterRecipe.catalyst != null) {
                 packetByteBuf.writeBoolean(true);
                 alterRecipe.catalyst.write(packetByteBuf);
+            } else {
+                packetByteBuf.writeBoolean(false);
+            }
+            if (alterRecipe.requireAdvancement != null) {
+                packetByteBuf.writeBoolean(true);
+                packetByteBuf.writeIdentifier(alterRecipe.requireAdvancement);
             } else {
                 packetByteBuf.writeBoolean(false);
             }

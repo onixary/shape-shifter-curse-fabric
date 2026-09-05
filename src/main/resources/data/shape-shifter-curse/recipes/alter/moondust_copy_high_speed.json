@@ -22,5 +22,6 @@
     "item": "shape-shifter-curse:untreated_moondust",
     "count": 5
   },
-  "time": 10
+  "time": 10,
+  "require_advancement": "shape-shifter-curse:spider_catch_a_bug"
 }
