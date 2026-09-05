@@ -9,6 +9,7 @@ import net.minecraft.util.Nameable;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -29,6 +30,10 @@ public abstract class PlayerEntityPoseMixin extends LivingEntity implements Name
     private void forcePose(CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity) (Object) this;
         IForm curForm = FormTextureUtils.getPlayerForm_Render(player);
+        if (FormUtils.LockPoseToStand.hasFlag(curForm)) {
+            this.setPose(EntityPose.STANDING);
+            ci.cancel();
+        }
         boolean isFeral = curForm.getBodyType() == PlayerFormBodyType.FERAL;
         if(isFeral){
             if (this.wouldPoseNotCollide(EntityPose.SWIMMING)) {

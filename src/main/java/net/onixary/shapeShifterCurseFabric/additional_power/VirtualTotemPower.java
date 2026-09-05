@@ -33,6 +33,9 @@ import java.util.function.Consumer;
 
 // 由于网络同步问题 仅支持玩家实体 非玩家实体不会触发客户端效果
 public class VirtualTotemPower extends CooldownPower {
+    public final int priority;
+    public final boolean highPriority;
+    public final boolean lowPriority;
     public static final HashMap<Identifier, BiConsumer<PlayerEntity, ItemStack>> virtualTotemTypeMap = new HashMap<>();
 
     static {
@@ -71,6 +74,9 @@ public class VirtualTotemPower extends CooldownPower {
         this.entityAction = data.get("entity_actions");
         this.totemHealth = data.get("totem_health");
         this.totemStatusEffects = data.get("totem_status_effects");
+        this.priority = data.get("priority");
+        this.highPriority = data.get("high_priority");
+        this.lowPriority = data.get("low_priority");
     }
 
     // 应该不用同步配置 Apoli应该会把SerializableData.Instance同步到客户端
@@ -128,6 +134,9 @@ public class VirtualTotemPower extends CooldownPower {
         return new PowerFactory<>(
                 ShapeShifterCurseFabric.identifier("virtual_totem"),
                 new SerializableData()
+                        .add("priority", SerializableDataTypes.INT, 1000)
+                        .add("high_priority", SerializableDataTypes.BOOLEAN, false)
+                        .add("low_priority", SerializableDataTypes.BOOLEAN, false)
                         .add("virtual_totem_type", SerializableDataTypes.IDENTIFIER, ShapeShifterCurseFabric.identifier("default"))
                         .add("totem_stack", SerializableDataTypes.ITEM_STACK, new ItemStack(Items.TOTEM_OF_UNDYING, 1))
                         .add("entity_actions", ApoliDataTypes.ENTITY_ACTIONS, null)

@@ -218,22 +218,25 @@ public class AlterBlockEntity extends LockableContainerBlockEntity implements Si
     }
 
     public void checkRecipe() {
-        PlayerEntity playerEntity = null;
         World world = this.getWorld();
-        if (world != null && this.lastUser != null) {
-            playerEntity = world.getPlayerByUuid(this.lastUser);
-        }
         if (this.nowRecipe != null) {
-            if (this.nowRecipe.canCraft(playerEntity) && this.nowRecipe.matches(this, world)) {
+            if (world != null && this.canCraftRecipe(world.getRegistryManager())) {
                 return;
             }
+            this.nowRecipe = null;
+            this.totalProgress = 0;
         }
         Optional<? extends AlterRecipe> alterRecipe = this.matchGetter.getFirstMatch(this, world);
-        if (alterRecipe.isPresent() && alterRecipe.get().canCraft(playerEntity)) {
+        if (alterRecipe.isPresent()) {
             this.nowRecipe = alterRecipe.get();
             this.totalProgress = this.nowRecipe.recipeTime();
+            if (!(world != null && this.canCraftRecipe(world.getRegistryManager()))) {
+                this.nowRecipe = null;
+                this.totalProgress = 0;
+            }
         } else {
             this.nowRecipe = null;
+            this.totalProgress = 0;
         }
         this.progress = 0;
     }
@@ -250,7 +253,7 @@ public class AlterBlockEntity extends LockableContainerBlockEntity implements Si
         if (!nowRecipe.canCraft(playerEntity)) {
             return false;
         }
-        if (!nowRecipe.matches(this, world) && !nowRecipe.InputsCountEnough(this)) {
+        if (!nowRecipe.matches(this, world) || !nowRecipe.InputsCountEnough(this)) {
             return false;
         }
         ItemStack output = this.nowRecipe.getOutput(registryManager);
@@ -337,6 +340,7 @@ public class AlterBlockEntity extends LockableContainerBlockEntity implements Si
             itemChanged = true;
         }
         if (itemChanged) {
+            this.checkRecipe();
             this.markDirty();
         }
     }
