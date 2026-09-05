@@ -37,8 +37,6 @@ public class AlterCraftUIHandler extends AbstractRecipeScreenHandler<SidedInvent
         this.world = playerInventory.player.getWorld();
         this.propertyDelegate = propertyDelegate;
 
-        this.addSlot(new AlterOutputSlot(this.alterBlockEntity, 10, 124, 35));
-
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 3; ++j) {
                 this.addSlot(new Slot(this.alterBlockEntity, j + i * 3, 30 + j * 18, 17 + i * 18));
@@ -46,6 +44,7 @@ public class AlterCraftUIHandler extends AbstractRecipeScreenHandler<SidedInvent
         }
 
         this.addSlot(new Slot(this.alterBlockEntity, 9, 152, 57));
+        this.addSlot(new AlterOutputSlot(this.alterBlockEntity, 10, 124, 35));
 
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 9; ++j) {
@@ -116,8 +115,45 @@ public class AlterCraftUIHandler extends AbstractRecipeScreenHandler<SidedInvent
     }
 
     @Override
-    public ItemStack quickMove(PlayerEntity player, int slot) {
-        // 有点麻烦 之后再写 先把逻辑跑通
+    public ItemStack quickMove(PlayerEntity player, int slotIndex) {
+        // 0~8 -> Input
+        // 9 -> Fuel
+        // 10 -> Output
+        // 11~37 -> Player Inventory
+        // 38~46 -> Player Hotbar
+        Slot slot = this.slots.get(slotIndex);
+        ItemStack slotItem = slot.hasStack() ? slot.getStack() : ItemStack.EMPTY;
+        ItemStack slotItemCopy = slotItem.copy();
+        if (slotIndex >= 0 && slotIndex < 11) {
+            if (!this.insertItem(slotItem, 11, 47, slotIndex == 10)) {
+                return ItemStack.EMPTY;
+            }
+            if (slotIndex == 0) {
+                slot.onQuickTransfer(slotItem, slotItemCopy);
+            }
+        }
+        else if (slotIndex >= 11 && slotIndex < 47) {
+            if (AlterBlockEntity.canFuel(slotItem)) {
+                if (!this.insertItem(slotItem, 9, 10, false)) {
+                    if (!this.insertItem(slotItem, 0, 9, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                }
+            }
+            if (!this.insertItem(slotItem, 0, 9, false)) {
+                return ItemStack.EMPTY;
+            }
+        }
+        if (slotItem.isEmpty()) {
+            slot.setStack(ItemStack.EMPTY);
+        } else {
+            slot.markDirty();
+        }
+        if (slotItem.getCount() == slotItemCopy.getCount()) {
+            return ItemStack.EMPTY;
+        }
+        slot.onTakeItem(player, slotItem);
+
         return ItemStack.EMPTY;
     }
 

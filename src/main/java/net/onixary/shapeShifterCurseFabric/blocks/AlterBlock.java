@@ -10,8 +10,10 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -65,5 +67,18 @@ public class AlterBlock extends BlockWithEntity {
         return world.isClient ? null : checkType(givenType, expectedType, (world1, pos, state, blockEntity) -> {
             blockEntity.tick(world1, pos, state, blockEntity);
         });
+    }
+
+    @Override
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        if (!state.isOf(newState.getBlock())) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof AlterBlockEntity alterBlockEntity) {
+                if (world instanceof ServerWorld) {
+                    ItemScatterer.spawn(world, pos, alterBlockEntity);
+                }
+            }
+            super.onStateReplaced(state, world, pos, newState, moved);
+        }
     }
 }
