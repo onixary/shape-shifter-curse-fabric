@@ -24,14 +24,16 @@ public class AlterShapelessRecipe extends AlterRecipe {
     public final DefaultedList<Ingredient> input;
     public final @Nullable Ingredient catalyst;
     public final int recipeTime;
+    public final int fuelCostPerTick;
 
 
-    public AlterShapelessRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> input, Ingredient catalyst, int recipeTime) {
+    public AlterShapelessRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> input, Ingredient catalyst, int recipeTime, int fuelCostPerTick) {
         this.id = id;
         this.output = output;
         this.input = input;
         this.recipeTime = recipeTime;
         this.catalyst = catalyst;
+        this.fuelCostPerTick = fuelCostPerTick;
     }
 
     @Override
@@ -67,6 +69,11 @@ public class AlterShapelessRecipe extends AlterRecipe {
     }
 
     @Override
+    public int fuelUsage() {
+        return fuelCostPerTick;
+    }
+
+    @Override
     public ItemStack craft(SidedInventory inventory, DynamicRegistryManager registryManager) {
         return this.output.copy();
     }
@@ -99,13 +106,14 @@ public class AlterShapelessRecipe extends AlterRecipe {
             if (jsonObject.has("catalyst")) {
                 catalyst = Ingredient.fromJson(jsonObject.get("catalyst"), true);
             }
+            int fuelCost = JsonHelper.getInt(jsonObject, "fuel_cost", 1);
             if (defaultedList.isEmpty()) {
                 throw new JsonParseException("No ingredients for alter shapeless recipe");
             } else if (defaultedList.size() > 9) {
                 throw new JsonParseException("Too many ingredients for alter shapeless recipe");
             } else {
                 ItemStack itemStack = ShapedRecipe.outputFromJson(JsonHelper.getObject(jsonObject, "result"));
-                return new AlterShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time);
+                return new AlterShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time, fuelCost);
             }
         }
 
@@ -132,7 +140,8 @@ public class AlterShapelessRecipe extends AlterRecipe {
             }
             ItemStack itemStack = packetByteBuf.readItemStack();
             int time = packetByteBuf.readVarInt();
-            return new AlterShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time);
+            int fuelCost = packetByteBuf.readVarInt();
+            return new AlterShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time, fuelCost);
         }
 
         public void write(PacketByteBuf packetByteBuf, AlterShapelessRecipe shapelessRecipe) {
@@ -148,6 +157,7 @@ public class AlterShapelessRecipe extends AlterRecipe {
             }
             packetByteBuf.writeItemStack(shapelessRecipe.output);
             packetByteBuf.writeVarInt(shapelessRecipe.recipeTime);
+            packetByteBuf.writeVarInt(shapelessRecipe.fuelCostPerTick);
         }
     }
 }

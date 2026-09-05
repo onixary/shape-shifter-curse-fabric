@@ -35,8 +35,9 @@ public class AlterShapedRecipe extends AlterRecipe {
     public final @Nullable Ingredient catalyst;
     public final ItemStack output;
     public final Identifier id;
+    public final int fuelCostPerTick;
 
-    public AlterShapedRecipe(Identifier id, int width, int height, DefaultedList<Ingredient> input, Ingredient catalyst, ItemStack output, int recipeTime) {
+    public AlterShapedRecipe(Identifier id, int width, int height, DefaultedList<Ingredient> input, Ingredient catalyst, ItemStack output, int recipeTime, int fuelCostPerTick) {
         this.id = id;
         this.width = width;
         this.height = height;
@@ -44,6 +45,7 @@ public class AlterShapedRecipe extends AlterRecipe {
         this.output = output;
         this.recipeTime = recipeTime;
         this.catalyst = catalyst;
+        this.fuelCostPerTick = fuelCostPerTick;
     }
 
     @Override
@@ -101,6 +103,11 @@ public class AlterShapedRecipe extends AlterRecipe {
             }
         }
         return false;
+    }
+
+    @Override
+    public int fuelUsage() {
+        return fuelCostPerTick;
     }
 
     @Override
@@ -249,13 +256,14 @@ public class AlterShapedRecipe extends AlterRecipe {
             if (jsonObject.has("catalyst")) {
                 catalyst = Ingredient.fromJson(jsonObject.get("catalyst"), true);
             }
+            int fuelCost = JsonHelper.getInt(jsonObject, "fuel_cost", 1);
             Map<String, Ingredient> map = readSymbols(JsonHelper.getObject(jsonObject, "key"));
             String[] strings = removePadding(getPattern(JsonHelper.getArray(jsonObject, "pattern")));
             int i = strings[0].length();
             int j = strings.length;
             DefaultedList<Ingredient> defaultedList = createPatternMatrix(strings, map, i, j);
             ItemStack itemStack = ShapedRecipe.outputFromJson(JsonHelper.getObject(jsonObject, "result"));
-            return new AlterShapedRecipe(identifier, i, j, defaultedList, catalyst, itemStack, time);
+            return new AlterShapedRecipe(identifier, i, j, defaultedList, catalyst, itemStack, time, fuelCost);
         }
 
         public AlterShapedRecipe read(Identifier identifier, PacketByteBuf packetByteBuf) {
@@ -271,7 +279,8 @@ public class AlterShapedRecipe extends AlterRecipe {
             }
             ItemStack itemStack = packetByteBuf.readItemStack();
             int time = packetByteBuf.readVarInt();
-            return new AlterShapedRecipe(identifier, i, j, defaultedList, catalyst, itemStack, time);
+            int fuelCost = packetByteBuf.readVarInt();
+            return new AlterShapedRecipe(identifier, i, j, defaultedList, catalyst, itemStack, time, fuelCost);
         }
 
         public void write(PacketByteBuf packetByteBuf, AlterShapedRecipe alterRecipe) {
@@ -288,6 +297,7 @@ public class AlterShapedRecipe extends AlterRecipe {
             }
             packetByteBuf.writeItemStack(alterRecipe.output);
             packetByteBuf.writeVarInt(alterRecipe.recipeTime);
+            packetByteBuf.writeVarInt(alterRecipe.fuelCostPerTick);
         }
     }
 }
