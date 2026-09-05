@@ -14,6 +14,10 @@
       "item": "shape-shifter-curse:untreated_moondust"
     }
   ],
+  "catalyst": {
+    "item": "minecraft:nether_star"
+  },
+  "fuel_cost": 10,
   "result": {
     "item": "shape-shifter-curse:untreated_moondust",
     "count": 5
