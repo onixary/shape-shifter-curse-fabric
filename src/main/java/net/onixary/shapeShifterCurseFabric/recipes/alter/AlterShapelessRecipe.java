@@ -46,7 +46,7 @@ public class AlterShapelessRecipe extends AlterRecipe {
         RecipeMatcher recipeMatcher = new RecipeMatcher();
         int i = 0;
 
-        for(int j = 0; j < inventory.size(); ++j) {
+        for(int j = 0; j < 9; ++j) {
             ItemStack itemStack = inventory.getStack(j);
             if (!itemStack.isEmpty()) {
                 ++i;

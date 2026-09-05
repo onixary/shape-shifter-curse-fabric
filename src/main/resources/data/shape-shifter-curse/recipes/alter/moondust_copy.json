@@ -1,0 +1,12 @@
+{
+  "type": "shape-shifter-curse:alter_shapeless",
+  "ingredients": [
+    {
+      "item": "shape-shifter-curse:untreated_moondust"
+    }
+  ],
+  "result": {
+    "item": "shape-shifter-curse:untreated_moondust",
+    "count": 2
+  }
+}
