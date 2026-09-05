@@ -9,6 +9,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.KeepSneakingPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
+import net.onixary.shapeShifterCurseFabric.player_form.IForm;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
+import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -40,9 +43,18 @@ public abstract class KeyboardInputMixin extends Input {
                 }
 
         }*/
-
+        MinecraftClient client = MinecraftClient.getInstance();
+        PlayerEntity player = client.player;
+        if (player != null) {
+            IForm curForm = FormTextureUtils.getPlayerForm_Render(player);
+            if (FormUtils.LockPoseToStand.hasFlag(curForm)) {
+                this.sneaking = false;
+                return;
+            }
+        }
         if (ClientPlayerStateManager.shouldForceSneak) {
             this.sneaking = true;
+            return;
         }
     }
 }
