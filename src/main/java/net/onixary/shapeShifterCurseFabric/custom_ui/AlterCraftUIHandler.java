@@ -25,7 +25,7 @@ public class AlterCraftUIHandler extends AbstractRecipeScreenHandler<SidedInvent
     public final PropertyDelegate propertyDelegate;
 
     public static AlterCraftUIHandler createMenu(int i, PlayerInventory inventory) {
-        return new AlterCraftUIHandler(RegMenuType.AlterCraftUI, i, inventory, new SimpleInventory(11), ScreenHandlerContext.EMPTY, new ArrayPropertyDelegate(4));
+        return new AlterCraftUIHandler(RegMenuType.AlterCraftUI, i, inventory, new SimpleInventory(11), ScreenHandlerContext.EMPTY, new ArrayPropertyDelegate(3));
     }
 
     public AlterCraftUIHandler(ScreenHandlerType<?> screenHandlerType, int syncId, PlayerInventory playerInventory, Inventory alterBlockEntity, ScreenHandlerContext context, PropertyDelegate propertyDelegate) {
@@ -167,10 +167,6 @@ public class AlterCraftUIHandler extends AbstractRecipeScreenHandler<SidedInvent
 
     public int getNowFuel() {
         return this.propertyDelegate.get(2);
-    }
-
-    public int getMaxFuel() {
-        return this.propertyDelegate.get(3);
     }
 
     @Override

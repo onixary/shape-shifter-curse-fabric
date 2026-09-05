@@ -38,4 +38,8 @@ public abstract class AlterRecipe implements Recipe<SidedInventory> {
     public List<ItemStack> getExtraOutput(SidedInventory inventory) {
         return List.of();
     }
+
+    public int fuelUsage() {
+        return 1;
+    }
 }

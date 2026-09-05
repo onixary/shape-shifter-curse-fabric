@@ -5,6 +5,7 @@ import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.blocks.block_entity.AlterBlockEntity;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
@@ -48,7 +49,7 @@ public class AlterCraftUI extends HandledScreen<AlterCraftUIHandler> {
             int ProcessWidth = (int) (54 * ((float) uiHandler.getNowProgress() / (float) maxProgress));
             context.fill(baseX + 90, baseY + 65, baseX + 90 + ProcessWidth, baseY + 65 + 5, 0xFF00FF00);
         }
-        int maxFuel = uiHandler.getMaxFuel();
+        int maxFuel = AlterBlockEntity.maxFuel;
         if (maxFuel > 0) {
             int FuelWidth = (int) (54 * ((float) uiHandler.getNowFuel() / (float) maxFuel));
             context.fill(baseX + 90, baseY + 60, baseX + 90 + FuelWidth, baseY + 60 + 5, 0xFFFF00FF);
