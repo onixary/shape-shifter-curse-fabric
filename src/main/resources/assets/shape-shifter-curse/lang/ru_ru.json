@@ -672,5 +672,6 @@
     "text.autoconfig.shape-shifter-curse-client.option.customPlayerUUID": "Current UUID used by the auto-update system (leave empty to use the player's current UUID)",
     "text.autoconfig.shape-shifter-curse-client.option.patronAuthorizationUrlPath": "Authorization file server URL",
     "text.autoconfig.shape-shifter-curse-common.option.enableCursedMoonTransform": "Enable Cursed Moon Transform",
-    "message.shapeShifterCurseFabric.authing": "The server is requesting authentication data. This typically occurs when first joining the world (it may also be caused by a bug where a counter wasn't reset, triggering this message on login). If this prompt appears during gameplay, be cautious – the server-side JAR file may have been tampered with. Total requests: %s"
+    "message.shapeShifterCurseFabric.authing": "The server is requesting authentication data. This typically occurs when first joining the world (it may also be caused by a bug where a counter wasn't reset, triggering this message on login). If this prompt appears during gameplay, be cautious – the server-side JAR file may have been tampered with. Total requests: %s",
+    "block.shape-shifter-curse.alter": "Alter"
 }

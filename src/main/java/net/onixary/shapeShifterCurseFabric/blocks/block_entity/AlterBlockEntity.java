@@ -115,7 +115,7 @@ public class AlterBlockEntity extends LockableContainerBlockEntity implements Si
 
     @Override
     protected Text getContainerName() {
-        return Text.literal("ALTER TEST NAME");
+        return Text.translatable("block.shape-shifter-curse.alter");
     }
 
     @Override
