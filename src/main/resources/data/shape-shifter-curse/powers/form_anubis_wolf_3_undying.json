@@ -41,5 +41,7 @@
   "cooldown": 9000,
   "hud_render": {
     "should_render": false
-  }
+  },
+  "priority": 1000,
+  "low_priority": true
 }
