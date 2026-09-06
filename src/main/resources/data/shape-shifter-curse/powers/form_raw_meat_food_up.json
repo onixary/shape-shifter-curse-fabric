@@ -13,7 +13,7 @@
         },
         {
             "name": "increase food points",
-            "operation": "multiply_base",
+            "operation": "multiply_total_additive",
             "value": 0.25
         }
     ],
