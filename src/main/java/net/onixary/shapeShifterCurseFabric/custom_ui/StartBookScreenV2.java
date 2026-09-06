@@ -48,7 +48,7 @@ public class StartBookScreenV2 extends Screen implements WidgetEXUtils.IWidgetEX
         // 渲染文字
         int TextPosX = width / 2 - TextSizeX / 2;
         int TextPosY = height / 2 - TextSizeY / 2 + TextPosYFix;
-        ScaleScrollTextWidget StartBookLabel = new ScaleScrollTextWidget(TextPosX, TextPosY, TextSizeX, TextSizeY / 9, 1.0f, Text.translatable("screen.shape-shifter-curse.book_of_shape_shifter.start_content_text"), textRenderer);
+        ScaleScrollTextWidget StartBookLabel = new ScaleScrollTextWidget(TextPosX, TextPosY, TextSizeX, TextSizeY, 1.0f, Text.translatable("screen.shape-shifter-curse.book_of_shape_shifter.start_content_text"), textRenderer);
         StartBookLabel.setEnableScrollableIconRender(true);
         this.addWidget(StartBookLabel);
         this.addDrawableChild(StartBookLabel);
