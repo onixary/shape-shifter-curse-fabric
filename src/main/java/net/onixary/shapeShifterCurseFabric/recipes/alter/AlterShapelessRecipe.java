@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import it.unimi.dsi.fastutil.ints.IntList;
+import net.minecraft.advancement.Advancement;
+import net.minecraft.advancement.AdvancementProgress;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.RecipeInputInventory;
 import net.minecraft.inventory.SidedInventory;
@@ -11,6 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
@@ -26,14 +30,16 @@ public class AlterShapelessRecipe extends AlterRecipe {
     public final int recipeTime;
     public final int fuelCostPerTick;
 
+    public final @Nullable Identifier requireAdvancement;
 
-    public AlterShapelessRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> input, Ingredient catalyst, int recipeTime, int fuelCostPerTick) {
+    public AlterShapelessRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> input, Ingredient catalyst, int recipeTime, int fuelCostPerTick, Identifier requireAdvancement) {
         this.id = id;
         this.output = output;
         this.input = input;
         this.recipeTime = recipeTime;
         this.catalyst = catalyst;
         this.fuelCostPerTick = fuelCostPerTick;
+        this.requireAdvancement = requireAdvancement;
     }
 
     @Override
@@ -43,7 +49,25 @@ public class AlterShapelessRecipe extends AlterRecipe {
 
     @Override
     public boolean canCraft(PlayerEntity player) {
-        return true;
+        if (requireAdvancement == null) {
+            return true;
+        }
+        if (player instanceof ServerPlayerEntity playerEntity) {
+            MinecraftServer server = playerEntity.getServer();
+            if (server == null) {
+                return false;
+            }
+            Advancement advancement = server.getAdvancementLoader().get(requireAdvancement);
+            if (advancement == null) {
+                return false;
+            }
+            AdvancementProgress advancementProgress = playerEntity.getAdvancementTracker().getProgress(advancement);
+            if (advancementProgress == null) {
+                return false;
+            }
+            return advancementProgress.isDone();
+        }
+        return false;
     }
 
     @Override
@@ -106,6 +130,10 @@ public class AlterShapelessRecipe extends AlterRecipe {
             if (jsonObject.has("catalyst")) {
                 catalyst = Ingredient.fromJson(jsonObject.get("catalyst"), true);
             }
+            Identifier requireAdvancement = null;
+            if (jsonObject.has("require_advancement")) {
+                requireAdvancement = new Identifier(JsonHelper.getString(jsonObject, "require_advancement"));
+            }
             int fuelCost = JsonHelper.getInt(jsonObject, "fuel_cost", 1);
             if (defaultedList.isEmpty()) {
                 throw new JsonParseException("No ingredients for alter shapeless recipe");
@@ -113,7 +141,7 @@ public class AlterShapelessRecipe extends AlterRecipe {
                 throw new JsonParseException("Too many ingredients for alter shapeless recipe");
             } else {
                 ItemStack itemStack = ShapedRecipe.outputFromJson(JsonHelper.getObject(jsonObject, "result"));
-                return new AlterShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time, fuelCost);
+                return new AlterShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time, fuelCost, requireAdvancement);
             }
         }
 
@@ -133,6 +161,10 @@ public class AlterShapelessRecipe extends AlterRecipe {
             if (packetByteBuf.readBoolean()) {
                 catalyst = Ingredient.fromPacket(packetByteBuf);
             }
+            Identifier requireAdvancement = null;
+            if (packetByteBuf.readBoolean()) {
+                requireAdvancement = packetByteBuf.readIdentifier();
+            }
             int i = packetByteBuf.readVarInt();
             DefaultedList<Ingredient> defaultedList = DefaultedList.ofSize(i, Ingredient.EMPTY);
             for(int j = 0; j < defaultedList.size(); ++j) {
@@ -141,13 +173,19 @@ public class AlterShapelessRecipe extends AlterRecipe {
             ItemStack itemStack = packetByteBuf.readItemStack();
             int time = packetByteBuf.readVarInt();
             int fuelCost = packetByteBuf.readVarInt();
-            return new AlterShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time, fuelCost);
+            return new AlterShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time, fuelCost, requireAdvancement);
         }
 
         public void write(PacketByteBuf packetByteBuf, AlterShapelessRecipe shapelessRecipe) {
             if (shapelessRecipe.catalyst != null) {
                 packetByteBuf.writeBoolean(true);
                 shapelessRecipe.catalyst.write(packetByteBuf);
+            } else {
+                packetByteBuf.writeBoolean(false);
+            }
+            if (shapelessRecipe.requireAdvancement != null) {
+                packetByteBuf.writeBoolean(true);
+                packetByteBuf.writeIdentifier(shapelessRecipe.requireAdvancement);
             } else {
                 packetByteBuf.writeBoolean(false);
             }
