@@ -10,6 +10,8 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.perk.IPerk;
+import net.onixary.shapeShifterCurseFabric.perk.RegPerks;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.util.InitialFormUtils;
@@ -40,6 +42,8 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     public float instinctValue = 0.0f;
     public float instinctRate = 0.0f;
     public HashMap<Identifier, InstinctUtils.InstinctEffect> instinctEffects = new HashMap<>();
+
+    public HashMap<Identifier, List<Identifier>> formPerkMap = new HashMap<>();
 
     // 临时变量
     public PlayerEntity player = null;
@@ -154,6 +158,24 @@ public class PlayerFormComponent implements AutoSyncedComponent {
                 instinctEffects.put(Identifier.tryParse(key), InstinctUtils.InstinctEffect.fromNBT(effects.getCompound(key)));
             }
         }
+        if (tag.contains("perks")) {
+            formPerkMap.clear();
+            NbtCompound perks = tag.getCompound("perks");
+            for (String key : perks.getKeys()) {
+                Identifier treeID = Identifier.tryParse(key);
+                if (treeID != null) {
+                    List<Identifier> perkList = new ArrayList<>();
+                    NbtList perkListNBT = perks.getList(key, NbtElement.STRING_TYPE);
+                    for (NbtElement element : perkListNBT) {
+                        Identifier perkID = Identifier.tryParse(element.asString());
+                        if (perkID != null && !perkList.contains(perkID)) {
+                            perkList.add(perkID);
+                        }
+                    }
+                    formPerkMap.put(treeID, perkList);
+                }
+            }
+        }
         if (player.getWorld().isClient) {
             InstinctUtils.fromInstinctUpdate(instinctValue, instinctRate);
         }
@@ -194,6 +216,18 @@ public class PlayerFormComponent implements AutoSyncedComponent {
             entry.getValue().toNBT(effect);
             effects.put(entry.getKey().toString(), effect);
         }
+        NbtCompound perks = new NbtCompound();
+        for (Map.Entry<Identifier, List<Identifier>> perkEntry : formPerkMap.entrySet()) {
+            NbtList perkTree = new NbtList();
+            for (Identifier perkID : perkEntry.getValue()) {
+                perkTree.add(NbtString.of(perkID.toString()));
+            }
+            if (perkTree.isEmpty()) {
+                continue;
+            }
+            perks.put(perkEntry.getKey().toString(), perkTree);
+        }
+        tag.put("perks", perks);
         tag.put("instinctEffects", effects);
     }
 
