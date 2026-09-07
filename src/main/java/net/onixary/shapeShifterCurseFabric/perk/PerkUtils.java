@@ -44,6 +44,16 @@ public class PerkUtils {
         component.sync();
     }
 
+    public static void __addPerk(PlayerEntity player, Identifier perkTreeID, Identifier perkID) {
+        IPerk perkData = RegPerks.getPerk(perkID);
+        if (perkData == null) return;
+        PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+        List<Identifier> perkList = component.formPerkMap.computeIfAbsent(perkTreeID, k -> new ArrayList<>());
+        perkList.add(perkID);
+        component.sync();
+        perkData.onGain(player, component.nowForm);
+    }
+
     public static void addPerk(PlayerEntity player, Identifier perkTreeID, Identifier perkID) {
         if (!(player instanceof ServerPlayerEntity playerEntity)) {
             // TODO 发送加技能点请求
@@ -54,11 +64,28 @@ public class PerkUtils {
         PerkTree perkTree = RegPerks.getPerkTree(perkTreeID);
         if (perkTree == null) return;
         if (!perkTree.getAllPerks().contains(perkID)) return;
-        PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
-        List<Identifier> perkList = component.formPerkMap.computeIfAbsent(perkTreeID, k -> new ArrayList<>());
-        perkList.add(perkID);
-        component.sync();
-        perkData.onGain(player, component.nowForm);
+
+        __addPerk(player, perkTreeID, perkID);
+        removeInValidPerk(player, perkTreeID);
+    }
+
+    public static void addPerkFromClient(PlayerEntity player, Identifier perkTreeID, Identifier perkID) {
+        if (!(player instanceof ServerPlayerEntity playerEntity)) return;
+        IPerk perkData = RegPerks.getPerk(perkID);
+        if (perkData == null) return;
+        PerkTree perkTree = RegPerks.getPerkTree(perkTreeID);
+        if (perkTree == null) return;
+        if (!perkTree.getAllPerks().contains(perkID)) return;
+
+        PerkTree.PerkNode node = perkTree.getNode(perkID);
+        if (node == null) return;
+        if (node.dependentPerkID != null) {
+            List<Identifier> playerPerkList = getPlayerPerks(player, perkTreeID);
+            if (playerPerkList == null || !playerPerkList.contains(node.dependentPerkID)) return;
+        }
+        int tier = node.tier;
+        // TODO tier 判断 需要给升级方块加个玩家UUID表 记录最后一个使用的升级方块等级
+        __addPerk(player, perkTreeID, perkID);
         removeInValidPerk(player, perkTreeID);
     }
 
