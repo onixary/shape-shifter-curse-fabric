@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.function.*;
 
+// TODO 还差JAVA层手动注册配方 得翻原版代码
 public class BuiltinAlterRecipe extends AlterRecipe {
     public static final HashMap<Identifier, BARecipeConfig> BARecipeConfigMap = new HashMap<>();
 
