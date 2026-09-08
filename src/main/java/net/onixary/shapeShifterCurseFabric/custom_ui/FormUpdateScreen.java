@@ -6,6 +6,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.WidgetEXUtils;
 import net.onixary.shapeShifterCurseFabric.perk.PerkTree;
+import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
+import net.onixary.shapeShifterCurseFabric.perk.RegPerks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -70,5 +72,19 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         context.fill(X1, Y1, HalfX + 1, Y1, LineColor);
         context.fill(HalfX, Y1, HalfX + 1, Y2, LineColor);
         context.fill(HalfX, Y2, X2 + 1, Y2, LineColor);
+    }
+
+    // UNTESTED
+    // playerGainedPerk 由调用方获取 毕竟drawNode调用频繁
+    public void drawNode(DrawContext context, PerkTree.PerkNode perkNode, List<Identifier> playerGainedPerk) {
+        this.drawConnectLine(context, perkNode);
+        Identifier icon = RegPerks.getPerkIcon(perkNode.perkID);
+        if (icon == null) {
+            icon = RegPerks.FALLBACK_PERK_ICON;
+        }
+        if (playerGainedPerk.contains(perkNode.perkID)) {
+            // TODO
+        }
+        context.drawTexture(icon, nodeBaseX + Tier0X + this.posXPerTier * perkNode.tier, nodeBaseY + perkNode.y, 0, 0, 16, 16, 16, 16);
     }
 }

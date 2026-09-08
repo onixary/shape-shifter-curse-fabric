@@ -11,6 +11,8 @@ public class RegPerks {
     public static final HashMap<Identifier, Identifier> PerkIconRegistry = new HashMap<>();
     public static final HashMap<Identifier, PerkTree> PerkTreeRegistry = new HashMap<>();
 
+    public static final Identifier FALLBACK_PERK_ICON = ShapeShifterCurseFabric.identifier("textures/perk/fallback.png");
+
     public static final Identifier P_FireBallPlusL1 = registerPerk(
             new NormalPerk(ShapeShifterCurseFabric.identifier("fire_ball_plus_1"))
                     .addPower()
