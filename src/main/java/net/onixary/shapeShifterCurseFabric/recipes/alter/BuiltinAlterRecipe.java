@@ -2,14 +2,18 @@ package net.onixary.shapeShifterCurseFabric.recipes.alter;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.RecipeMatcher;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.blocks.block_entity.AlterBlockEntity;
 import net.onixary.shapeShifterCurseFabric.recipes.RecipeSerializerRegister;
@@ -19,7 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.function.*;
 
-// TODO 还差JAVA层手动注册配方 得翻原版代码
 public class BuiltinAlterRecipe extends AlterRecipe {
     public static final HashMap<Identifier, BARecipeConfig> BARecipeConfigMap = new HashMap<>();
 
@@ -68,6 +71,31 @@ public class BuiltinAlterRecipe extends AlterRecipe {
         public BARecipeConfig build() { return new BARecipeConfig(match, craft, virtualOutput, canCraft, recipeTime, fuelUsage, isInputsCountEnough, consumeInputs, extraOutput); }
 
         // TODO 还差几个预设生成器 比如match函数 让它支持Shape和Shapeless
+
+        // 坏了 还得整TriPredicate TriFunction 顺带在整个TriConsumer吧 函数还得传配方自身
+        public static BiPredicate<AlterBlockEntity, World> createMatch_Shapeless(DefaultedList<Ingredient> input, Ingredient catalyst) {
+            return (alterBlockEntity, world) -> {
+                if (catalyst != null) {
+                    ItemStack itemStack = alterBlockEntity.getStack(9);
+                    if (!catalyst.test(itemStack)) {
+                        return false;
+                    }
+                }
+
+                RecipeMatcher recipeMatcher = new RecipeMatcher();
+                int i = 0;
+                for(int j = 0; j < 9; ++j) {
+                    ItemStack itemStack = alterBlockEntity.getStack(j);
+                    if (!itemStack.isEmpty()) {
+                        ++i;
+                        recipeMatcher.addInput(itemStack, 1);
+                    }
+                }
+
+                // return i == input.size() && recipeMatcher.match(this, (IntList)null);
+                return false;
+            };
+        }
     }
 
     public final Identifier id;
