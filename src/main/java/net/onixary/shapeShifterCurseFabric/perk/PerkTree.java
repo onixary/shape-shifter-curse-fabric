@@ -62,4 +62,8 @@ public class PerkTree {
     public @NotNull List<Identifier> getAllPerks() {
         return new ArrayList<>(perkNodeMap.keySet());
     }
+
+    public @NotNull List<PerkNode> getAllNodes() {
+        return new ArrayList<>(perkNodes);
+    }
 }
