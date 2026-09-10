@@ -14,34 +14,40 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Vector2i;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 // 标记 UNTESTED 代表这个函数没测试 测试完了就删(估计最后得有一堆没测试函数 还是标一下大概率炸的函数吧)
 
 public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX {
-    // Node得建立一个注册表 用来标记Power更改 Icon路径 再上几个API什么的
-    // NodeMetaData生成也得要注册表 根据FormData里的数据选对应的初始化函数
-
     public boolean isLocked;
     public @NotNull PerkTree perkTree;
 
-    public @Nullable Identifier nowSelectNode;
+    public @Nullable PerkTree.PerkNode nowSelectNode;
     public int cameraPosX = 0;
     public int cameraPosY = 0;
     public float cameraScale = 1.0f;  // 不一定实现 得看手动鼠标计算位置好不好算
 
-    public final int nodeWindowX = 0;
-    public final int nodeWindowY = 0;
-    public final int nodeWindowWidth = 250;
-    public final int nodeWindowHeight = 200;
+    public static final int nodeWindowX = 0;
+    public static final int nodeWindowY = 0;
+    public static final int nodeWindowWidth = 250;
+    public static final int nodeWindowHeight = 200;
 
-    public final int nodeBaseX = 50;
-    public final int nodeBaseY = nodeWindowHeight / 2;
-    public final int posXPerTier = 50;
-    public final int nodeLineRootXOffset = 9;
-    public final int nodeLineDependXOffset = -9;
-    public final int LineColor = 0xFF9F9F9F;
+    public static final int nodeBaseX = 50;
+    public static final int nodeBaseY = nodeWindowHeight / 2;
+    public static final int posXPerTier = 50;
+    public static final int nodeLineRootXOffset = 9;
+    public static final int nodeLineDependXOffset = -9;
+    public static final int LineColor = 0xFF9F9F9F;
+
+    public static final int NodeDrawStartX = -7;
+    public static final int NodeDrawStartY = -7;
+    public static final int NodeTextureWidth = 16;
+    public static final int NodeTextureHeight = 16;
+
+    public static final int NodeSelectStartX = -8;
+    public static final int NodeSelectStartY = -8;
+    public static final int NodeSelectRectWidth = 18;
+    public static final int NodeSelectRectHeight = 18;
 
     @Override
     public WidgetEXUtils.WidgetRect getRect() {
@@ -66,6 +72,14 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         super.init();
     }
 
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        this.onClickWidget(mouseX, mouseY, button);
+        this.NodeScreenMouseClickHandler((int)mouseX, (int)mouseY, button);
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
     // Utils
 
     // UNTESTED
@@ -74,8 +88,8 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         if (depend == null) return;
         PerkTree.PerkNode dependNodeMetaData = perkTree.getNode(depend);
         if (dependNodeMetaData == null) return;
-        int X1 = nodeWindowX + nodeBaseX + this.posXPerTier * perkNode.tier + nodeLineDependXOffset;
-        int X2 = nodeWindowX + nodeBaseX + this.posXPerTier * dependNodeMetaData.tier + nodeLineRootXOffset;
+        int X1 = nodeWindowX + nodeBaseX + posXPerTier * perkNode.tier + nodeLineDependXOffset;
+        int X2 = nodeWindowX + nodeBaseX + posXPerTier * dependNodeMetaData.tier + nodeLineRootXOffset;
         int Y1 = nodeWindowY + nodeBaseY + perkNode.y;
         int Y2 = nodeWindowY + nodeBaseY + dependNodeMetaData.y;
         int HalfX = (X1 + X2) / 2;
@@ -95,7 +109,7 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         if (playerGainedPerk.contains(perkNode.perkID)) {
             // TODO
         }
-        context.drawTexture(icon, nodeWindowX + nodeBaseX + this.posXPerTier * perkNode.tier, nodeWindowY + nodeBaseY + perkNode.y, 0, 0, 16, 16, 16, 16);
+        context.drawTexture(icon, nodeWindowX + nodeBaseX + posXPerTier * perkNode.tier + NodeDrawStartX, nodeWindowY + nodeBaseY + perkNode.y + NodeDrawStartY, 0, 0, NodeTextureWidth, NodeTextureHeight, NodeTextureWidth, NodeTextureHeight);
     }
 
     // UNTESTED
@@ -118,5 +132,32 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
     // UNTESTED
     public Vector2i getVirtualMousePos(int mouseX, int mouseY) {
         return new Vector2i(mouseX - nodeWindowX - cameraPosX, mouseY - nodeWindowY - cameraPosY).div(cameraScale);
+    }
+
+    public @Nullable PerkTree.PerkNode getMouseNode(int mouseX, int mouseY) {
+        for (PerkTree.PerkNode perkNode : this.perkTree.getAllNodes()) {
+            int centerX = nodeBaseX + posXPerTier * perkNode.tier;
+            int centerY = nodeBaseY + perkNode.y;
+            int left = centerX + NodeSelectStartX;
+            int top = centerY + NodeSelectStartY;
+            if (mouseX >= left && mouseX < left + NodeSelectRectWidth && mouseY >= top && mouseY < top + NodeSelectRectHeight) {
+                return perkNode;
+            }
+        }
+        return null;
+    }
+
+    public void NodeScreenMouseClickHandler(int mouseX, int mouseY, int mode) {
+        if (mouseX < nodeWindowX || mouseX >= nodeBaseX + nodeWindowWidth || mouseY < nodeBaseY || mouseY >= nodeBaseY + nodeWindowHeight) {
+            return;
+        }
+        Vector2i trueMousePos = getVirtualMousePos(mouseX, mouseY);
+        @Nullable PerkTree.PerkNode node = getMouseNode(trueMousePos.x, trueMousePos.y);
+        this.nowSelectNode = node;
+        this.onNodeSelect();
+    }
+
+    public void onNodeSelect() {
+        // TODO 需要联动其他的Widget
     }
 }
