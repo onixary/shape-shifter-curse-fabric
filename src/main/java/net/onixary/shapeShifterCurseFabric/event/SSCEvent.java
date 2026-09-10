@@ -4,11 +4,15 @@ import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.function.BiConsumer;
 
 public class SSCEvent {
     // 挂在FormUtils._loadForm上的 oldForm有很大可能性和newForm相等
@@ -37,6 +41,11 @@ public class SSCEvent {
     @FunctionalInterface
     public static interface OnGetForm {
         @Nullable IForm onGetForm(@NotNull PlayerEntity player, @NotNull IForm form, @Nullable IForm middleForm);
+    }
+
+    @FunctionalInterface
+    public static interface BeforeApplyRecipe {
+        void beforeApplyRecipe(BiConsumer<@Nullable Identifier, @NotNull Recipe<?>> register);
     }
 
     public static final Event<FormChange> FORM_CHANGE_START = EventFactory.createArrayBacked(FormChange.class, callbacks -> (player, oldForm, newForm) -> {
@@ -92,5 +101,11 @@ public class SSCEvent {
             finalForm = callback.onGetForm(player, form, middleForm);
         }
         return finalForm;
+    });
+
+    public static final Event<BeforeApplyRecipe> BEFORE_APPLY_RECIPE = EventFactory.createArrayBacked(BeforeApplyRecipe.class, callbacks -> (register) -> {
+        for (BeforeApplyRecipe callback : callbacks) {
+            callback.beforeApplyRecipe(register);
+        }
     });
 }

@@ -67,7 +67,9 @@ public final class AuthUtils {
     // 密钥处理部分
     static final @NotNull KeyFactory Ed448KeyFactory;
     static final @NotNull KeyPairGenerator Ed448KeyPairGenerator;
-    static final @NotNull String rootPublicKeyPEM = "MEMwBQYDK2VxAzoA775GpvHNH+fuvZ0k293H6TBNCNGVyWaVv50XtEjIeWsupe3/VfxNlOTvuQiIETZy3MDo3Rb/ynwA";
+    static final @NotNull String devRootPublicKeyPEM = "MEMwBQYDK2VxAzoA775GpvHNH+fuvZ0k293H6TBNCNGVyWaVv50XtEjIeWsupe3/VfxNlOTvuQiIETZy3MDo3Rb/ynwA";
+    // 还是开发秘钥 不过仅我持有 之后正式版秘钥我得通过多渠道加密发送给Onixary
+    static final @NotNull String rootPublicKeyPEM = "MEMwBQYDK2VxAzoAUroq2zB8FPRj+b5XoCUS3OKn8MGvhu0uUS4fMmqjdyjATBMXE8O9w6v0VJLA9LsBOYt3NP6SzrsA";
     static final @NotNull PublicKey rootPublickey;
 
     private static final List<Pair<BiPredicate<Integer, Integer>, BiFunction<KeySegment, PacketByteBuf, IDataSegment>>> dataReaderRegistry = new ArrayList<>();
@@ -81,7 +83,7 @@ public final class AuthUtils {
         }
         // 现在还没整根密钥 先用测试密钥 为了防止发布时使用公开的测试密钥 随机生成一个 保证任何数据都无法通过验证
         if (ShapeShifterCurseFabric.IsDevelopmentEnvironment()) {
-            byte[] publicKeyBytes = Base64.getDecoder().decode(rootPublicKeyPEM);
+            byte[] publicKeyBytes = Base64.getDecoder().decode(devRootPublicKeyPEM);
             X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicKeyBytes);
             try {
                 rootPublickey = Ed448KeyFactory.generatePublic(keySpec);
@@ -89,7 +91,14 @@ public final class AuthUtils {
                 throw new RuntimeException(e);
             }
         } else {
-            rootPublickey = Ed448KeyPairGenerator.generateKeyPair().getPublic();
+            // rootPublickey = Ed448KeyPairGenerator.generateKeyPair().getPublic();
+            byte[] publicKeyBytes = Base64.getDecoder().decode(rootPublicKeyPEM);
+            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicKeyBytes);
+            try {
+                rootPublickey = Ed448KeyFactory.generatePublic(keySpec);
+            } catch (InvalidKeySpecException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

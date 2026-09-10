@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.perk;
 
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -56,5 +57,13 @@ public class PerkTree {
             return getNode(perkNode.dependentPerkID);
         }
         return null;
+    }
+
+    public @NotNull List<Identifier> getAllPerks() {
+        return new ArrayList<>(perkNodeMap.keySet());
+    }
+
+    public @NotNull List<PerkNode> getAllNodes() {
+        return new ArrayList<>(perkNodes);
     }
 }
