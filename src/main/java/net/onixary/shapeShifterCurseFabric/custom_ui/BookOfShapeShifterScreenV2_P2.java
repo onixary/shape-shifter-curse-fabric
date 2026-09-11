@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.custom_ui;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -68,13 +69,23 @@ public class BookOfShapeShifterScreenV2_P2 extends Screen implements WidgetEXUti
         // Instincts
         // D -> (9, 9), (308, 13)
         // Size -> (106, 136) Pos -> (220, 24)
-        this.addDrawableChild(BuildDetailScreenButton(308, 13, 9, 9, CodexData.getContentText(CodexData.ContentType.INSTINCTS, currentPlayer)));
+        // 扩展点：注册 CodexInstinctColumnHooks.Provider 时优先取该列文本；正文只取一次，主列与"+"详情同源
+        CodexInstinctColumnHooks.Provider codexColumnProvider = CodexInstinctColumnHooks.provider();
+        Text instinctsDescText = codexColumnProvider != null ? codexColumnProvider.instinctsDesc(currentPlayer) : null;
+        if (instinctsDescText == null) {
+            instinctsDescText = CodexData.getDescText(CodexData.ContentType.INSTINCTS, currentPlayer);
+        }
+        Text instinctsContentText = codexColumnProvider != null ? codexColumnProvider.instinctsContent(currentPlayer) : null;
+        if (instinctsContentText == null) {
+            instinctsContentText = CodexData.getContentText(CodexData.ContentType.INSTINCTS, currentPlayer);
+        }
+        this.addDrawableChild(BuildDetailScreenButton(308, 13, 9, 9, instinctsContentText));
         this.addDrawableChild(new TextWidget(BookPosX + 242 * BookScale, BookPosY + 10 * BookScale, 63 * BookScale, 12 * BookScale, CodexData.headerInstincts, textRenderer).setTextColor(HeaderTextColor));
         // 在 BookOfShapeShifterScreen 未上色
-        MultilineTextWidget InstinctsDesc = new ScaleMultilineTextWidget(BookPosX + 220 * BookScale, BookPosY + 24 * BookScale, CodexData.getDescText(CodexData.ContentType.INSTINCTS, currentPlayer), scaleTextRenderer, Scale).shadow(false).setMaxWidth(106 * BookScale);
+        MultilineTextWidget InstinctsDesc = new ScaleMultilineTextWidget(BookPosX + 220 * BookScale, BookPosY + 24 * BookScale, instinctsDescText, scaleTextRenderer, Scale).shadow(false).setMaxWidth(106 * BookScale);
         this.addDrawableChild(InstinctsDesc);
         int InstinctsDescHeight = InstinctsDesc.getHeight();
-        ScaleScrollTextWidget Instincts = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 220 * BookScale, BookPosY + 24 * BookScale + InstinctsDescHeight + Math.round(9 * Scale), 106 * BookScale, (112 - InstinctsDescHeight) * BookScale, Scale, CodexData.getContentText(CodexData.ContentType.INSTINCTS, currentPlayer), scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
+        ScaleScrollTextWidget Instincts = (ScaleScrollTextWidget) new ScaleScrollTextWidget(BookPosX + 220 * BookScale, BookPosY + 24 * BookScale + InstinctsDescHeight + Math.round(9 * Scale), 106 * BookScale, (112 - InstinctsDescHeight) * BookScale, Scale, instinctsContentText, scaleTextRenderer).shadow(false).setTextColor(DefaultTextColor);
         Instincts.setEnableScrollableIconRender(true);
         this.addWidget(Instincts);
         this.addDrawableChild(Instincts);
@@ -126,6 +137,32 @@ public class BookOfShapeShifterScreenV2_P2 extends Screen implements WidgetEXUti
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         this.RenderBook(context);
         super.render(context, mouseX, mouseY, delta);
+        renderInstinctsBottomTexture(context);
+    }
+
+    /** 扩展点：INSTINCTS 列底贴图（宽随列宽、高按原始宽高比、锚定列区底部 in-book y=160）。 */
+    private void renderInstinctsBottomTexture(DrawContext context) {
+        CodexInstinctColumnHooks.Provider provider = CodexInstinctColumnHooks.provider();
+        if (provider == null || currentPlayer == null) {
+            return;
+        }
+        CodexInstinctColumnHooks.BottomTexture texture = provider.bottomTexture(currentPlayer);
+        if (texture == null) {
+            return;
+        }
+        int BookScale = 1;
+        if (ShapeShifterCurseFabric.clientConfig.newStartBookForBiggerScreen) {
+            BookScale = 2;
+        }
+        int BookPosX = width / 2 - (BookSizeX * BookScale) / 2;
+        int BookPosY = height / 2 - (BookSizeY * BookScale) / 2;
+        int textureWidth = 106 * BookScale;
+        int textureHeight = Math.round(textureWidth * (texture.imageHeight() / (float) texture.imageWidth()));
+        int x = BookPosX + 220 * BookScale;
+        int y = BookPosY + 160 * BookScale - textureHeight;
+        RenderSystem.enableBlend();
+        context.drawTexture(texture.id(), x, y, 0, 0, textureWidth, textureHeight, textureWidth, textureHeight);
+        RenderSystem.disableBlend();
     }
 
     @Override
