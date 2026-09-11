@@ -23,6 +23,7 @@ public class AdditionalEntityActions {
         ItemStorePower.registerAction(AdditionalEntityActions::registerAction, AdditionalEntityActions::registerBIAction);
         ItemCooldownCA.registerAction(AdditionalEntityActions::registerAction, AdditionalEntityActions::registerBIAction);
         registerAction(TANAddThirstAction.createFactory());
+        SomeRandomACS.registerAction(AdditionalEntityActions::registerAction, AdditionalEntityActions::registerBIAction);
     }
 
     public static ActionFactory<Entity> registerAction(ActionFactory<Entity> actionFactory) {
