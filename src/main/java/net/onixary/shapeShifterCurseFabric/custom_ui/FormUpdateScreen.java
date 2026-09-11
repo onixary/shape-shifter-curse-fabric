@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.custom_ui;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.math.MatrixStack;
@@ -23,6 +24,7 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
     public @NotNull PerkTree perkTree;
 
     public @Nullable PerkTree.PerkNode nowSelectNode;
+    // TODO 需要调中心点 目前左上角作为中心点不太行
     public int cameraPosX = 0;
     public int cameraPosY = 0;
     public float cameraScale = 1.0f;  // 不一定实现 得看手动鼠标计算位置好不好算
@@ -61,7 +63,7 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         return this.WidgetList;
     }
 
-    protected FormUpdateScreen(Text title, boolean isLocked, @NotNull PerkTree perkTree) {
+    public FormUpdateScreen(Text title, boolean isLocked, @NotNull PerkTree perkTree) {
         super(title);
         this.isLocked = isLocked;
         this.perkTree = perkTree;
@@ -80,6 +82,13 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
+    @Override
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        context.fill(nodeWindowX, nodeWindowY, nodeWindowX + nodeWindowWidth, nodeWindowY + nodeWindowHeight, 0xFF000000);
+        this.drawAllNode(context, mouseX, mouseY, delta);
+        super.render(context, mouseX, mouseY, delta);
+    }
+
     // Utils
 
     // UNTESTED
@@ -93,20 +102,20 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         int Y1 = nodeWindowY + nodeBaseY + perkNode.y;
         int Y2 = nodeWindowY + nodeBaseY + dependNodeMetaData.y;
         int HalfX = (X1 + X2) / 2;
-        context.fill(X1, Y1, HalfX + 1, Y1, LineColor);
-        context.fill(HalfX, Y1, HalfX + 1, Y2, LineColor);
-        context.fill(HalfX, Y2, X2 + 1, Y2, LineColor);
+        context.fill(X1, Y1, HalfX + 1, Y1 + 1, LineColor);
+        context.fill(HalfX, Y1, HalfX + 1, Y2 + 1, LineColor);
+        context.fill(HalfX, Y2, X2 + 1, Y2 + 1, LineColor);
     }
 
     // UNTESTED
     // playerGainedPerk 由调用方获取 毕竟drawNode调用频繁
-    public void drawNode(DrawContext context, PerkTree.PerkNode perkNode, List<Identifier> playerGainedPerk, int mouseX, int mouseY, float delta) {
+    public void drawNode(DrawContext context, PerkTree.PerkNode perkNode, @Nullable List<Identifier> playerGainedPerk, int mouseX, int mouseY, float delta) {
         this.drawConnectLine(context, perkNode);
         Identifier icon = RegPerks.getPerkIcon(perkNode.perkID);
         if (icon == null) {
             icon = RegPerks.FALLBACK_PERK_ICON;
         }
-        if (playerGainedPerk.contains(perkNode.perkID)) {
+        if (playerGainedPerk != null && playerGainedPerk.contains(perkNode.perkID)) {
             // TODO
         }
         context.drawTexture(icon, nodeWindowX + nodeBaseX + posXPerTier * perkNode.tier + NodeDrawStartX, nodeWindowY + nodeBaseY + perkNode.y + NodeDrawStartY, 0, 0, NodeTextureWidth, NodeTextureHeight, NodeTextureWidth, NodeTextureHeight);
@@ -148,7 +157,7 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
     }
 
     public void NodeScreenMouseClickHandler(int mouseX, int mouseY, int mode) {
-        if (mouseX < nodeWindowX || mouseX >= nodeBaseX + nodeWindowWidth || mouseY < nodeBaseY || mouseY >= nodeBaseY + nodeWindowHeight) {
+        if (mouseX < nodeWindowX || mouseX >= nodeWindowX + nodeWindowWidth || mouseY < nodeWindowY || mouseY >= nodeWindowY + nodeWindowHeight) {
             return;
         }
         Vector2i trueMousePos = getVirtualMousePos(mouseX, mouseY);
@@ -158,6 +167,10 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
     }
 
     public void onNodeSelect() {
-        // TODO 需要联动其他的Widget
+        try {
+            MinecraftClient.getInstance().player.sendMessage(Text.literal("Node Selected" + this.nowSelectNode.perkID.toString()), false);
+        } catch (Exception e) {
+            MinecraftClient.getInstance().player.sendMessage(Text.literal("No Node Selected"), false);
+        }
     }
 }

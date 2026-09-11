@@ -25,10 +25,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.ItemStorePower;
 import net.onixary.shapeShifterCurseFabric.additional_power.LevitatePower;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoonClient;
-import net.onixary.shapeShifterCurseFabric.custom_ui.BookOfShapeShifterScreenV2_P1;
-import net.onixary.shapeShifterCurseFabric.custom_ui.RegMenuScreen;
-import net.onixary.shapeShifterCurseFabric.custom_ui.RegMenuType;
-import net.onixary.shapeShifterCurseFabric.custom_ui.StartBookScreenV2;
+import net.onixary.shapeShifterCurseFabric.custom_ui.*;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.entity.RegCustomEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.form_giving_custom_entity.axolotl.TAxolotlEntityRenderer;
@@ -40,6 +37,7 @@ import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 import net.onixary.shapeShifterCurseFabric.minion.MinionRegisterClient;
 import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
+import net.onixary.shapeShifterCurseFabric.perk.RegPerks;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.InstinctUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.render.form_render.FormRenderUtils;
@@ -84,6 +82,8 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 	public static KeyBinding useActiveSkill4PowerKeybind;
 	public static KeyBinding useActiveSkill5PowerKeybind;
 	public static KeyBinding useActiveSkill6PowerKeybind;
+
+	public static KeyBinding openTestUIKeybind;
 
 	public static boolean isBlockingClipAtLedge = false;
 
@@ -291,6 +291,9 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		// 这2个给打开UI/可切换功能使用 不推荐给主动能力用 当然 你要是加个自爆技能也能绑这2个按键 推荐绑键盘不太常按的按键上
 		useActiveSkill5PowerKeybind = new KeyBinding("key.shape-shifter-curse.active_skill_5", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + ShapeShifterCurseFabric.MOD_ID);
 		useActiveSkill6PowerKeybind = new KeyBinding("key.shape-shifter-curse.active_skill_6", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + ShapeShifterCurseFabric.MOD_ID);
+		// 这个是开测试UI的 开发什么UI就绑哪个UI 发布时记得注释掉
+		openTestUIKeybind = new KeyBinding("key.shape-shifter-curse.open_test_ui", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category." + ShapeShifterCurseFabric.MOD_ID);
+
 		ApoliClient.registerPowerKeybinding("key.shape-shifter-curse.active_skill_1", useActiveSkill1PowerKeybind);
 		ApoliClient.registerPowerKeybinding("key.shape-shifter-curse.active_skill_2", useActiveSkill2PowerKeybind);
 		ApoliClient.registerPowerKeybinding("key.shape-shifter-curse.active_skill_3", useActiveSkill3PowerKeybind);
@@ -303,6 +306,8 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		KeyBindingHelper.registerKeyBinding(useActiveSkill4PowerKeybind);
 		KeyBindingHelper.registerKeyBinding(useActiveSkill5PowerKeybind);
 		KeyBindingHelper.registerKeyBinding(useActiveSkill6PowerKeybind);
+
+		KeyBindingHelper.registerKeyBinding(openTestUIKeybind);
 
 		ClientTickEvents.END_CLIENT_TICK.register((client) -> {
 			if (client.player == null) {
@@ -318,6 +323,10 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 					isBlockingClipAtLedge = false;
 					client.player.sendMessage(Text.translatable("message.shape-shifter-curse.clip_at_ledge.on"), true);
 				}
+			}
+			if (openTestUIKeybind.isPressed()) {
+				FormUpdateScreen screen = new FormUpdateScreen(Text.literal(""), false, RegPerks.getPerkTree(RegPerks.T_FFoxTree));
+				client.setScreen(screen);
 			}
 		});
 
