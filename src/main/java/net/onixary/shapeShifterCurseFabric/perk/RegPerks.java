@@ -38,10 +38,10 @@ public class RegPerks {
 
     public static final Identifier T_FFoxTree = registerPerkTree(
             new PerkTree(ShapeShifterCurseFabric.identifier("f_fox_tree"))
-                    .addNode(P_FoxRoot, 0, -25, null)
-                    .addNode(P_FireBallPlusL1, 1, 0, P_FoxRoot)
-                    .addNode(P_FireBallPlusL2, 2, -25, P_FireBallPlusL1)
-                    .addNode(P_FireArrowPlusL1, 2, 25, P_FireBallPlusL1)
+                    .addNode(P_FoxRoot, 0, 0, null)
+                    .addNode(P_FireBallPlusL1, 1, 25, P_FoxRoot)
+                    .addNode(P_FireBallPlusL2, 2, 0, P_FireBallPlusL1)
+                    .addNode(P_FireArrowPlusL1, 2, 50, P_FireBallPlusL1)
     );
 
     static {

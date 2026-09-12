@@ -32,16 +32,16 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
     public int cameraPosY = 0;
     public float cameraScale = 1.0f;  // 不一定实现 得看手动鼠标计算位置好不好算
 
-    public static final int nodeWindowX = 0;
-    public static final int nodeWindowY = 0;
+    public int nodeWindowX = 0;
+    public int nodeWindowY = 0;
     public static final int nodeWindowWidth = 250;
     public static final int nodeWindowHeight = 200;
 
     // 基础渲染原点(左上) -> cameraCenter(中心) -> nodeCenter(左中)
-    public static final Vector2i cameraCenter = new Vector2i(nodeWindowX + nodeWindowWidth / 2, nodeWindowY + nodeWindowHeight / 2);
-    public static final Vector2i nodeCenter = new Vector2i( -nodeWindowWidth / 2, 0);  // 参考的是cameraCenter为原点
+    public Vector2i cameraCenter = new Vector2i(0, 0);
+    public Vector2i nodeCenter = new Vector2i( 0, 0);
 
-    public static final int nodeBaseX = 50;
+    public static final int nodeBaseX = 25;
     public static final int posXPerTier = 50;
     public static final int nodeLineRootXOffset = 10;
     public static final int nodeLineDependXOffset = -9;
@@ -109,6 +109,10 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        nodeWindowX = this.width / 2 - nodeWindowWidth / 2;
+        nodeWindowY = this.height / 2 - nodeWindowHeight / 2;
+        cameraCenter = new Vector2i(nodeWindowX + nodeWindowWidth / 2, nodeWindowY + nodeWindowHeight / 2);
+        nodeCenter = new Vector2i( -nodeWindowWidth / 2, 0);
         context.fill(nodeWindowX, nodeWindowY, nodeWindowX + nodeWindowWidth, nodeWindowY + nodeWindowHeight, 0xFF000000);
         this.drawAllNode(context, mouseX, mouseY, delta);
         super.render(context, mouseX, mouseY, delta);
