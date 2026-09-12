@@ -6,6 +6,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.WidgetEXUtils;
 import net.onixary.shapeShifterCurseFabric.perk.PerkTree;
 import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
@@ -21,6 +22,9 @@ import java.util.Objects;
 // 标记 UNTESTED 代表这个函数没测试 测试完了就删(估计最后得有一堆没测试函数 还是标一下大概率炸的函数吧)
 
 public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX {
+    public static final Identifier LABEL_GAINED = ShapeShifterCurseFabric.identifier("textures/perk/system/gained.png");
+    public static final Identifier LABEL_SELECT = ShapeShifterCurseFabric.identifier("textures/perk/system/select.png");
+
     public boolean isLocked;
     public @NotNull PerkTree perkTree;
 
@@ -161,17 +165,11 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         int NodePosY = nodeCenter.y + virtualNodeY;
         int left = virtualNodeX + NodeSelectStartX;
         int top = virtualNodeY + NodeSelectStartY;
-        if (mouseX >= left && mouseX < left + NodeSelectRectWidth && mouseY >= top && mouseY < top + NodeSelectRectHeight) {
-            context.fill(
-                    NodePosX + NodeSelectStartX,
-                    NodePosY + NodeSelectStartY,
-                    NodePosX + NodeSelectStartX + NodeSelectRectWidth,
-                    NodePosY + NodeSelectStartY + NodeSelectRectHeight,
-                    0xFFFFFFFF
-            );
-        }
         if (playerGainedPerk != null && playerGainedPerk.contains(perkNode.perkID)) {
-            // TODO
+            context.drawTexture(LABEL_GAINED, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
+        }
+        if (mouseX >= left && mouseX < left + NodeSelectRectWidth && mouseY >= top && mouseY < top + NodeSelectRectHeight) {
+            context.drawTexture(LABEL_SELECT, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
         }
         context.drawTexture(icon, NodePosX + NodeDrawStartX, NodePosY + NodeDrawStartY, 0, 0, NodeTextureWidth, NodeTextureHeight, NodeTextureWidth, NodeTextureHeight);
     }
@@ -267,6 +265,9 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
             MinecraftClient.getInstance().player.sendMessage(Text.literal("Node Selected: " + this.nowSelectNode.perkID.toString()), false);
         } catch (Exception e) {
             MinecraftClient.getInstance().player.sendMessage(Text.literal("No Node Selected"), false);
+        }
+        if (this.nowSelectNode != null) {
+            PerkUtils.addPerk(MinecraftClient.getInstance().player, this.perkTree.getID(), this.nowSelectNode.perkID);
         }
     }
 }

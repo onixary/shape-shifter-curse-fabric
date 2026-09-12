@@ -7,11 +7,15 @@ import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 public class NormalPerk implements IPerk {
     public final Identifier perkID;
     public final List<Identifier> powerAdd = new ArrayList<>();
     public final List<Identifier> powerRemove = new ArrayList<>();
+
+    public boolean repeatable = false;
+    public BiConsumer<PlayerEntity, IForm> onGainFunc = null;
 
     public NormalPerk(Identifier perkID) {
         this.perkID = perkID;
@@ -32,6 +36,30 @@ public class NormalPerk implements IPerk {
                 powerRemove.add(powerID);
             }
         }
+        return this;
+    }
+
+    @Override
+    public void onGain(PlayerEntity player, IForm form) {
+        if (onGainFunc != null) {
+            onGainFunc.accept(player, form);
+        } else {
+            IPerk.super.onGain(player, form);
+        }
+    }
+
+    @Override
+    public boolean canRepeat() {
+        return repeatable;
+    }
+
+    public NormalPerk Repeat(BiConsumer<PlayerEntity, IForm> onGainFunc) {
+        if (onGainFunc == null) {
+            repeatable = false;
+        } else {
+            repeatable = true;
+        }
+        this.onGainFunc = onGainFunc;
         return this;
     }
 

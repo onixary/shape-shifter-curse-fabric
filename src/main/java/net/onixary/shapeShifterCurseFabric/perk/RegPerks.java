@@ -2,9 +2,11 @@ package net.onixary.shapeShifterCurseFabric.perk;
 
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class RegPerks {
     public static final HashMap<Identifier, IPerk> PerkRegistry = new HashMap<>();
@@ -36,12 +38,27 @@ public class RegPerks {
                     .removePower()
     );
 
+    public static final Identifier P_Reset = registerPerk(
+            new NormalPerk(ShapeShifterCurseFabric.identifier("reset"))
+                    .Repeat(((player, form) -> {
+                        Identifier perkTreeID = PerkUtils.getPlayerNowPerkTreeID(player);
+                        List<Identifier> perks = PerkUtils.getPlayerPerks(player, perkTreeID);
+                        if (perks != null) {
+                            perks.clear();
+                            PerkUtils.removeInValidPerk(player, perkTreeID);
+                            PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+                            component.sync();
+                        }
+                    }))
+    );
+
     public static final Identifier T_FFoxTree = registerPerkTree(
             new PerkTree(ShapeShifterCurseFabric.identifier("f_fox_tree"))
                     .addNode(P_FoxRoot, 0, 0, null)
                     .addNode(P_FireBallPlusL1, 1, 25, P_FoxRoot)
                     .addNode(P_FireBallPlusL2, 2, 0, P_FireBallPlusL1)
                     .addNode(P_FireArrowPlusL1, 2, 50, P_FireBallPlusL1)
+                    .addNode(P_Reset, 2, -50, null)
     );
 
     static {
@@ -49,6 +66,7 @@ public class RegPerks {
         registerPerkIcon(P_FireBallPlusL1, ShapeShifterCurseFabric.identifier("textures/perk/fire_ball_plus_1.png"));
         registerPerkIcon(P_FireBallPlusL2, ShapeShifterCurseFabric.identifier("textures/perk/fire_ball_plus_2.png"));
         registerPerkIcon(P_FireArrowPlusL1, ShapeShifterCurseFabric.identifier("textures/perk/fire_arrow_plus_1.png"));
+        registerPerkIcon(P_Reset, ShapeShifterCurseFabric.identifier("textures/perk/reset.png"));
     }
 
     public static Identifier registerPerk(IPerk perk) {

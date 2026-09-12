@@ -8,8 +8,14 @@ import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 public interface IPerk {
     Identifier getID();
 
+    default boolean canRepeat() {  // 可重复升级
+        return false;
+    }
+
     default void onGain(PlayerEntity player, IForm form) {
-        this.onLoad(player, form);
+        if (!canRepeat()) {
+            this.onLoad(player, form);
+        }
     }
 
     default boolean canGain(PlayerEntity player, IForm form) {
