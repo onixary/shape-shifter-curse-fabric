@@ -103,14 +103,25 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         if (depend == null) return;
         PerkTree.PerkNode dependNodeMetaData = perkTree.getNode(depend);
         if (dependNodeMetaData == null) return;
-        int X1 = nodeCenter.x + nodeBaseX + posXPerTier * perkNode.tier + nodeLineDependXOffset;
-        int X2 = nodeCenter.x + nodeBaseX + posXPerTier * dependNodeMetaData.tier + nodeLineRootXOffset;
-        int Y1 = nodeCenter.y + perkNode.y;
-        int Y2 = nodeCenter.y + dependNodeMetaData.y;
-        int HalfX = (X1 + X2) / 2;
-        context.fill(X1, Y1, HalfX + 1, Y1 + 1, LineColor);
-        context.fill(HalfX, Y1, HalfX + 1, Y2 + 1, LineColor);
-        context.fill(HalfX, Y2, X2 + 1, Y2 + 1, LineColor);
+        int ox = nodeCenter.x;
+        int oy = nodeCenter.y;
+        int x1 = nodeBaseX + posXPerTier * perkNode.tier + nodeLineDependXOffset;
+        int x2 = nodeBaseX + posXPerTier * dependNodeMetaData.tier + nodeLineRootXOffset;
+        int y1 = perkNode.y;
+        int y2 = dependNodeMetaData.y;
+        int halfX = (x1 + x2) / 2;
+        context.fill(
+                ox + Math.min(x1, halfX), oy + y1,
+                ox + Math.max(x1, halfX) + 1, oy + y1 + 1,
+                LineColor);
+        context.fill(
+                ox + halfX, oy + Math.min(y1, y2),
+                ox + halfX + 1, oy + Math.max(y1, y2) + 1,
+                LineColor);
+        context.fill(
+                ox + Math.min(x2, halfX), oy + y2,
+                ox + Math.max(x2, halfX) + 1, oy + y2 + 1,
+                LineColor);
     }
 
     // UNTESTED
@@ -124,16 +135,13 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         if (playerGainedPerk != null && playerGainedPerk.contains(perkNode.perkID)) {
             // TODO
         }
-        // TODO 有点晚了 明天再优化一下 先让AI整一个能用的 行吧 还没法用 明天再算
         int virtualNodeX = nodeBaseX + posXPerTier * perkNode.tier;
         int virtualNodeY = perkNode.y;
         int NodePosX = nodeCenter.x + virtualNodeX;
         int NodePosY = nodeCenter.y + virtualNodeY;
-        int selectLeft = virtualNodeX + NodeSelectStartX;
-        int selectTop = virtualNodeY + NodeSelectStartY;
-        int selectRight = selectLeft + NodeSelectRectWidth;
-        int selectBottom = selectTop + NodeSelectRectHeight;
-        if (mouseX >= selectLeft && mouseX < selectRight && mouseY >= selectTop && mouseX < selectBottom) {
+        int left = virtualNodeX + NodeSelectStartX;
+        int top = virtualNodeY + NodeSelectStartY;
+        if (mouseX >= left && mouseX < left + NodeSelectRectWidth && mouseY >= top && mouseY < top + NodeSelectRectHeight) {
             context.fill(
                     NodePosX + NodeSelectStartX,
                     NodePosY + NodeSelectStartY,
