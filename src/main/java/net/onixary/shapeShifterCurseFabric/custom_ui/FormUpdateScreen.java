@@ -42,7 +42,7 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
 
     public static final int nodeBaseX = 50;
     public static final int posXPerTier = 50;
-    public static final int nodeLineRootXOffset = 9;
+    public static final int nodeLineRootXOffset = 10;
     public static final int nodeLineDependXOffset = -9;
     public static final int LineColor = 0xFF9F9F9F;
 

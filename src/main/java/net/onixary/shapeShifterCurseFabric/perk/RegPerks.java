@@ -13,6 +13,10 @@ public class RegPerks {
 
     public static final Identifier FALLBACK_PERK_ICON = ShapeShifterCurseFabric.identifier("textures/perk/fallback.png");
 
+    public static final Identifier P_FoxRoot = registerPerk(
+            new NormalPerk(ShapeShifterCurseFabric.identifier("fox_root"))
+    );
+
     public static final Identifier P_FireBallPlusL1 = registerPerk(
             new NormalPerk(ShapeShifterCurseFabric.identifier("fire_ball_plus_1"))
                     .addPower()
@@ -33,12 +37,14 @@ public class RegPerks {
 
     public static final Identifier T_FFoxTree = registerPerkTree(
             new PerkTree(ShapeShifterCurseFabric.identifier("f_fox_tree"))
-                    .addNode(P_FireBallPlusL1, 1, 0, null)
-                    .addNode(P_FireBallPlusL2, 2, -25, ShapeShifterCurseFabric.identifier("fire_ball_plus_1"))
-                    .addNode(P_FireArrowPlusL1, 2, 25, ShapeShifterCurseFabric.identifier("fire_ball_plus_1"))
+                    .addNode(P_FoxRoot, 0, -25, null)
+                    .addNode(P_FireBallPlusL1, 1, 0, P_FoxRoot)
+                    .addNode(P_FireBallPlusL2, 2, -25, P_FireBallPlusL1)
+                    .addNode(P_FireArrowPlusL1, 2, 25, P_FireBallPlusL1)
     );
 
     static {
+        registerPerkIcon(P_FoxRoot, ShapeShifterCurseFabric.identifier("textures/perk/fox_root.png"));
         registerPerkIcon(P_FireBallPlusL1, ShapeShifterCurseFabric.identifier("textures/perk/fire_ball_plus_1.png"));
         registerPerkIcon(P_FireBallPlusL2, ShapeShifterCurseFabric.identifier("textures/perk/fire_ball_plus_2.png"));
         registerPerkIcon(P_FireArrowPlusL1, ShapeShifterCurseFabric.identifier("textures/perk/fire_arrow_plus_1.png"));
