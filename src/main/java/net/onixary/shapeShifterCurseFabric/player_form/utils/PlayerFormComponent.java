@@ -43,6 +43,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     public float instinctRate = 0.0f;
     public HashMap<Identifier, InstinctUtils.InstinctEffect> instinctEffects = new HashMap<>();
 
+    public Identifier nowPerkTree = RegPerks.EMPTY_PERK_TREE;
     public HashMap<Identifier, List<Identifier>> formPerkMap = new HashMap<>();
 
     // 临时变量
@@ -158,6 +159,9 @@ public class PlayerFormComponent implements AutoSyncedComponent {
                 instinctEffects.put(Identifier.tryParse(key), InstinctUtils.InstinctEffect.fromNBT(effects.getCompound(key)));
             }
         }
+        if (tag.contains("now_perk_tree")) {
+            nowPerkTree = Identifier.tryParse(tag.getString("now_perk_tree"));
+        }
         if (tag.contains("perks")) {
             formPerkMap.clear();
             NbtCompound perks = tag.getCompound("perks");
@@ -216,6 +220,8 @@ public class PlayerFormComponent implements AutoSyncedComponent {
             entry.getValue().toNBT(effect);
             effects.put(entry.getKey().toString(), effect);
         }
+        tag.put("instinctEffects", effects);
+        tag.putString("now_perk_tree", nowPerkTree.toString());
         NbtCompound perks = new NbtCompound();
         for (Map.Entry<Identifier, List<Identifier>> perkEntry : formPerkMap.entrySet()) {
             NbtList perkTree = new NbtList();
@@ -228,7 +234,6 @@ public class PlayerFormComponent implements AutoSyncedComponent {
             perks.put(perkEntry.getKey().toString(), perkTree);
         }
         tag.put("perks", perks);
-        tag.put("instinctEffects", effects);
     }
 
     public void clear() {

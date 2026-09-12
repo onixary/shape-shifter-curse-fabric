@@ -37,6 +37,7 @@ import net.onixary.shapeShifterCurseFabric.mana.ManaUtils;
 import net.onixary.shapeShifterCurseFabric.minion.MinionRegisterClient;
 import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
+import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
 import net.onixary.shapeShifterCurseFabric.perk.RegPerks;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.InstinctUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
@@ -325,7 +326,7 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 				}
 			}
 			if (openTestUIKeybind.isPressed()) {
-				FormUpdateScreen screen = new FormUpdateScreen(Text.literal(""), false, RegPerks.getPerkTree(RegPerks.T_FFoxTree));
+				FormUpdateScreen screen = new FormUpdateScreen(Text.literal(""), false, PerkUtils.getPlayerNowPerkTree(client.player));
 				client.setScreen(screen);
 			}
 		});

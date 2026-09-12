@@ -16,6 +16,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnJumpPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnSprintingToSneakingPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
+import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
 import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
@@ -118,6 +119,11 @@ public class ModPacketsC2S {
         ServerPlayNetworking.registerGlobalReceiver(
                 UPLOAD_PATRON_AUTH_FILE,
                 ModPacketsC2S::receivePatronAuthFile
+        );
+
+        ServerPlayNetworking.registerGlobalReceiver(
+                ADD_PERK,
+                ModPacketsC2S::receiveAddPerk
         );
     }
 
@@ -306,6 +312,14 @@ public class ModPacketsC2S {
                 AuthServer.loadPatronAuthFile(playerEntity, new PacketByteBuf(Unpooled.wrappedBuffer(data)));
             });
         }
+    }
+
+    private static void receiveAddPerk(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
+        Identifier perkTreeId = packetByteBuf.readIdentifier();
+        Identifier perkId = packetByteBuf.readIdentifier();
+        minecraftServer.execute(() -> {
+            PerkUtils.addPerkFromClient(playerEntity, perkTreeId, perkId);
+        });
     }
 }
 

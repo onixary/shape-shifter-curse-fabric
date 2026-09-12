@@ -16,6 +16,7 @@ import org.joml.Vector2i;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 // 标记 UNTESTED 代表这个函数没测试 测试完了就删(估计最后得有一堆没测试函数 还是标一下大概率炸的函数吧)
 
@@ -68,10 +69,10 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         return this.WidgetList;
     }
 
-    public FormUpdateScreen(Text title, boolean isLocked, @NotNull PerkTree perkTree) {
+    public FormUpdateScreen(Text title, boolean isLocked, @Nullable PerkTree perkTree) {
         super(title);
         this.isLocked = isLocked;
-        this.perkTree = perkTree;
+        this.perkTree = perkTree != null ? perkTree : Objects.requireNonNull(RegPerks.getPerkTree(RegPerks.EMPTY_PERK_TREE));
     }
 
     @Override

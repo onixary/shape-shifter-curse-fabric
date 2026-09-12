@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.perk;
 
+import com.google.common.base.Objects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -71,6 +72,8 @@ public class PerkUtils {
 
     public static void addPerkFromClient(PlayerEntity player, Identifier perkTreeID, Identifier perkID) {
         if (!(player instanceof ServerPlayerEntity playerEntity)) return;
+        PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+        if (!Objects.equal(perkTreeID, component.nowPerkTree)) return;
         IPerk perkData = RegPerks.getPerk(perkID);
         if (perkData == null) return;
         PerkTree perkTree = RegPerks.getPerkTree(perkTreeID);
@@ -101,5 +104,21 @@ public class PerkUtils {
                 perkData.onLoad(player, component.nowForm);
             }
         }
+    }
+
+    public static Identifier getPlayerNowPerkTreeID(PlayerEntity player) {
+        PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+        return component.nowPerkTree;
+    }
+
+    public static @Nullable PerkTree getPlayerNowPerkTree(PlayerEntity player) {
+        Identifier perkTreeID = getPlayerNowPerkTreeID(player);
+        return RegPerks.getPerkTree(perkTreeID);
+    }
+
+    public static void setPlayerNowPerkTreeID(PlayerEntity player, Identifier perkTreeID) {
+        PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+        component.nowPerkTree = perkTreeID;
+        component.sync();
     }
 }
