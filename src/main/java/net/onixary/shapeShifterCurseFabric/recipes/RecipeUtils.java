@@ -6,10 +6,10 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.recipes.alter.AlterRecipe;
+import net.onixary.shapeShifterCurseFabric.recipes.altar.AltarRecipe;
 
 public class RecipeUtils {
-    public static final RecipeType<AlterRecipe> ALTER_RECIPE = registerRecipeType(ShapeShifterCurseFabric.identifier("alter"));
+    public static final RecipeType<AltarRecipe> ALTER_RECIPE = registerRecipeType(ShapeShifterCurseFabric.identifier("altar"));
 
     public static void register() {
         // 用于加载静态注册

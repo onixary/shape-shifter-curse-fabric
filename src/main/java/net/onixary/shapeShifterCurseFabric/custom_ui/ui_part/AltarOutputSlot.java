@@ -4,8 +4,8 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.Slot;
 
-public class AlterOutputSlot extends Slot {
-    public AlterOutputSlot(Inventory inventory, int index, int x, int y) {
+public class AltarOutputSlot extends Slot {
+    public AltarOutputSlot(Inventory inventory, int index, int x, int y) {
         super(inventory, index, x, y);
     }
 

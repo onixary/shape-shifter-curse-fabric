@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.recipes.alter;
+package net.onixary.shapeShifterCurseFabric.recipes.altar;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SidedInventory;
@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public abstract class AlterRecipe implements Recipe<SidedInventory> {
+public abstract class AltarRecipe implements Recipe<SidedInventory> {
 
     @Override
     public RecipeType<?> getType() {
