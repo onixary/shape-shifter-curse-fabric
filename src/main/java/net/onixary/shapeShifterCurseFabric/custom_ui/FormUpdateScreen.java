@@ -24,7 +24,6 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
     public @NotNull PerkTree perkTree;
 
     public @Nullable PerkTree.PerkNode nowSelectNode;
-    // TODO 需要调中心点 目前左上角作为中心点不太行
     // 中心点:
     // Camera 中心
     // Node 左中
@@ -80,12 +79,31 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         super.init();
     }
 
-
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         this.onClickWidget(mouseX, mouseY, button);
         this.NodeScreenMouseClickHandler((int)mouseX, (int)mouseY, button);
         return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        this.onReleaseWidget(mouseX, mouseY, button);
+        return super.mouseReleased(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
+        this.onDragWidget(mouseX, mouseY, button, deltaX, deltaY);
+        this.NodeScreenMouseDragHandler((int)mouseX, (int)mouseY, button, deltaX, deltaY);
+        return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double mouseZ) {
+        this.onScrollWidget(mouseX, mouseY, mouseZ);
+        this.NodeScreenMouseScrollHandler((int)mouseX, (int)mouseY, mouseZ);
+        return super.mouseScrolled(mouseX, mouseY, mouseZ);
     }
 
     @Override
@@ -132,9 +150,6 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         if (icon == null) {
             icon = RegPerks.FALLBACK_PERK_ICON;
         }
-        if (playerGainedPerk != null && playerGainedPerk.contains(perkNode.perkID)) {
-            // TODO
-        }
         int virtualNodeX = nodeBaseX + posXPerTier * perkNode.tier;
         int virtualNodeY = perkNode.y;
         int NodePosX = nodeCenter.x + virtualNodeX;
@@ -149,6 +164,9 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
                     NodePosY + NodeSelectStartY + NodeSelectRectHeight,
                     0xFFFFFFFF
             );
+        }
+        if (playerGainedPerk != null && playerGainedPerk.contains(perkNode.perkID)) {
+            // TODO
         }
         context.drawTexture(icon, NodePosX + NodeDrawStartX, NodePosY + NodeDrawStartY, 0, 0, NodeTextureWidth, NodeTextureHeight, NodeTextureWidth, NodeTextureHeight);
     }
@@ -199,6 +217,44 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         @Nullable PerkTree.PerkNode node = getMouseNode(trueMousePos.x, trueMousePos.y);
         this.nowSelectNode = node;
         this.onNodeSelect();
+    }
+
+    public double totalDragX = 0;
+    public double totalDragY = 0;
+
+    public void NodeScreenMouseDragHandler(int mouseX, int mouseY, int mode, double deltaX, double deltaY) {
+        if (mouseX < nodeWindowX || mouseX >= nodeWindowX + nodeWindowWidth || mouseY < nodeWindowY || mouseY >= nodeWindowY + nodeWindowHeight) {
+            return;
+        }
+        if (mode == 0) {
+            totalDragX += deltaX;
+            totalDragY += deltaY;
+            int dragX = (int) totalDragX;
+            int dragY = (int) totalDragY;
+            if (dragX != 0 || dragY != 0) {
+                cameraPosX += dragX;
+                cameraPosY += dragY;
+                totalDragX -= dragX;
+                totalDragY -= dragY;
+            }
+        }
+    }
+
+    public void NodeScreenMouseScrollHandler(int mouseX, int mouseY, double scroll) {
+        if (mouseX < nodeWindowX || mouseX >= nodeWindowX + nodeWindowWidth
+                || mouseY < nodeWindowY || mouseY >= nodeWindowY + nodeWindowHeight) {
+            return;
+        }
+        if (scroll == 0) return;
+        float oldScale = cameraScale;
+        float newScale = oldScale * (float) Math.pow(1.1, scroll);
+        newScale = Math.max(0.25f, Math.min(4.0f, newScale));
+        if (newScale == oldScale) return;
+        float worldX = (mouseX - cameraCenter.x - cameraPosX) / oldScale;
+        float worldY = (mouseY - cameraCenter.y - cameraPosY) / oldScale;
+        cameraPosX = (int) (mouseX - cameraCenter.x - worldX * newScale);
+        cameraPosY = (int) (mouseY - cameraCenter.y - worldY * newScale);
+        cameraScale = newScale;
     }
 
     public void onNodeSelect() {
