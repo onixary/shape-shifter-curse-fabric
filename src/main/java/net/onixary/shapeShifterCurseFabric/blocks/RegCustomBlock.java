@@ -17,7 +17,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.blocks.block_entity.AlterBlockEntity;
+import net.onixary.shapeShifterCurseFabric.blocks.block_entity.AltarBlockEntity;
 
 public final class RegCustomBlock {
     public static final Block MOONDUST_CRYSTAL_GRIT = register("moondust_crystal_grit", new Block(AbstractBlock.Settings.copy(Blocks.GRAVEL).mapColor(MapColor.PURPLE).strength(0.6f, 0.6f).sounds(BlockSoundGroup.GRAVEL)));
@@ -27,8 +27,8 @@ public final class RegCustomBlock {
     public static final Block WEB_COMPOSTER = register("web_composter", new WebComposterBlock(AbstractBlock.Settings.create().mapColor(MapColor.WHITE_GRAY).instrument(Instrument.BASS).strength(0.6F).sounds(BlockSoundGroup.WOOL).burnable().nonOpaque()));
     public static final Block DEW_COVERED_COBWEB = register("dew_covered_cobweb", new DewCoveredCobwebBlock(AbstractBlock.Settings.create().mapColor(MapColor.WHITE_GRAY).instrument(Instrument.BELL).strength(1.0F).sounds(BlockSoundGroup.WOOL).noCollision().nonOpaque()));
 
-    public static final Block ALTER_BLOCK = register("alter", new AlterBlock(AbstractBlock.Settings.create().mapColor(MapColor.WHITE_GRAY).instrument(Instrument.BELL).strength(4.0F, 10.0F).sounds(BlockSoundGroup.AMETHYST_BLOCK).nonOpaque()));
-    public static final BlockEntityType<AlterBlockEntity> ALTER_BLOCK_ENTITY = registerBlockEntity("alter_block_entity", BlockEntityType.Builder.create(AlterBlockEntity::new, ALTER_BLOCK).build(null));
+    public static final Block ALTER_BLOCK = register("altar", new AltarBlock(AbstractBlock.Settings.create().mapColor(MapColor.WHITE_GRAY).instrument(Instrument.BELL).strength(4.0F, 10.0F).sounds(BlockSoundGroup.AMETHYST_BLOCK).nonOpaque()));
+    public static final BlockEntityType<AltarBlockEntity> ALTER_BLOCK_ENTITY = registerBlockEntity("altar_block_entity", BlockEntityType.Builder.create(AltarBlockEntity::new, ALTER_BLOCK).build(null));
 
 
     public static void ClientInit() {

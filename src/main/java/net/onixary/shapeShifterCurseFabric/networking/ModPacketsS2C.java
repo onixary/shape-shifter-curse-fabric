@@ -629,4 +629,14 @@ public class ModPacketsS2C {
             SuperUserUtils.setClientSULevel(level);
         });
     }
+
+    public static void sendAddPerk(Identifier perkTreeID, Identifier perkID) {
+        if (perkTreeID == null || perkID == null) {
+            return;
+        }
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeIdentifier(perkTreeID);
+        buf.writeIdentifier(perkID);
+        ClientPlayNetworking.send(ADD_PERK, buf);
+    }
 }

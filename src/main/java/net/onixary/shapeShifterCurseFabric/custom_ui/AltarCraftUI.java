@@ -5,13 +5,13 @@ import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.onixary.shapeShifterCurseFabric.blocks.block_entity.AlterBlockEntity;
+import net.onixary.shapeShifterCurseFabric.blocks.block_entity.AltarBlockEntity;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
-public class AlterCraftUI extends HandledScreen<AlterCraftUIHandler> {
+public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
 
-    private static final Identifier BACKGROUND = new Identifier(MOD_ID,"textures/gui/alter_craft_ui.png");
+    private static final Identifier BACKGROUND = new Identifier(MOD_ID,"textures/gui/altar_craft_ui.png");
     private static final int WIDTH = 176;
     private static final int HEIGHT = 166;
     private static final int TEXTURE_WIDTH = 200;
@@ -21,7 +21,7 @@ public class AlterCraftUI extends HandledScreen<AlterCraftUIHandler> {
 
     // 90,60,54,10
 
-    public AlterCraftUI(AlterCraftUIHandler handler, PlayerInventory inventory, Text title) {
+    public AltarCraftUI(AltarCraftUIHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
     }
 
@@ -44,13 +44,13 @@ public class AlterCraftUI extends HandledScreen<AlterCraftUIHandler> {
     }
 
     public void drawBar(DrawContext context) {
-        AlterCraftUIHandler uiHandler = this.getScreenHandler();
+        AltarCraftUIHandler uiHandler = this.getScreenHandler();
         int maxProgress = uiHandler.getMaxProgress();
         if (maxProgress > 0) {
             int ProcessWidth = (int) (24 * ((float) uiHandler.getNowProgress() / (float) maxProgress));
             context.drawTexture(BACKGROUND, baseX+89, baseY+35, 176, 0, ProcessWidth, 17, TEXTURE_WIDTH, TEXTURE_HEIGHT);
         }
-        int maxFuel = AlterBlockEntity.maxFuel;
+        int maxFuel = AltarBlockEntity.maxFuel;
         if (maxFuel > 0) {
             int FuelWidth = (int) (54 * ((float) uiHandler.getNowFuel() / (float) maxFuel));
             context.fill(baseX + 90, baseY + 60, baseX + 90 + FuelWidth, baseY + 60 + 10, 0xFFFF00FF);

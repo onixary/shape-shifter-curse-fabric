@@ -1,8 +1,11 @@
 package net.onixary.shapeShifterCurseFabric.perk;
 
+import com.google.common.base.Objects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,14 +52,16 @@ public class PerkUtils {
         if (perkData == null) return;
         PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
         List<Identifier> perkList = component.formPerkMap.computeIfAbsent(perkTreeID, k -> new ArrayList<>());
-        perkList.add(perkID);
+        if (!perkData.canRepeat()) {
+            perkList.add(perkID);
+        }
         component.sync();
         perkData.onGain(player, component.nowForm);
     }
 
     public static void addPerk(PlayerEntity player, Identifier perkTreeID, Identifier perkID) {
         if (!(player instanceof ServerPlayerEntity playerEntity)) {
-            // TODO 发送加技能点请求
+            ModPacketsS2C.sendAddPerk(perkTreeID, perkID);
             return;
         }
         IPerk perkData = RegPerks.getPerk(perkID);
@@ -64,13 +69,17 @@ public class PerkUtils {
         PerkTree perkTree = RegPerks.getPerkTree(perkTreeID);
         if (perkTree == null) return;
         if (!perkTree.getAllPerks().contains(perkID)) return;
-
-        __addPerk(player, perkTreeID, perkID);
+        PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+        if (perkData.canGain(player, component.nowForm)) {
+            __addPerk(player, perkTreeID, perkID);
+        }
         removeInValidPerk(player, perkTreeID);
     }
 
     public static void addPerkFromClient(PlayerEntity player, Identifier perkTreeID, Identifier perkID) {
         if (!(player instanceof ServerPlayerEntity playerEntity)) return;
+        PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+        if (!Objects.equal(perkTreeID, component.nowPerkTree)) return;
         IPerk perkData = RegPerks.getPerk(perkID);
         if (perkData == null) return;
         PerkTree perkTree = RegPerks.getPerkTree(perkTreeID);
@@ -101,5 +110,21 @@ public class PerkUtils {
                 perkData.onLoad(player, component.nowForm);
             }
         }
+    }
+
+    public static Identifier getPlayerNowPerkTreeID(PlayerEntity player) {
+        PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+        return component.nowPerkTree;
+    }
+
+    public static @Nullable PerkTree getPlayerNowPerkTree(PlayerEntity player) {
+        Identifier perkTreeID = getPlayerNowPerkTreeID(player);
+        return RegPerks.getPerkTree(perkTreeID);
+    }
+
+    public static void setPlayerNowPerkTreeID(PlayerEntity player, Identifier perkTreeID) {
+        PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+        component.nowPerkTree = perkTreeID;
+        component.sync();
     }
 }

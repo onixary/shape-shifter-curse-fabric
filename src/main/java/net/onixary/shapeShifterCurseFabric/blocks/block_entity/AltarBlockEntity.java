@@ -22,11 +22,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
-import net.onixary.shapeShifterCurseFabric.custom_ui.AlterCraftUIHandler;
+import net.onixary.shapeShifterCurseFabric.custom_ui.AltarCraftUIHandler;
 import net.onixary.shapeShifterCurseFabric.custom_ui.RegMenuType;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.recipes.RecipeUtils;
-import net.onixary.shapeShifterCurseFabric.recipes.alter.AlterRecipe;
+import net.onixary.shapeShifterCurseFabric.recipes.altar.AltarRecipe;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -34,10 +34,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class AlterBlockEntity extends LockableContainerBlockEntity implements SidedInventory, RecipeUnlocker, RecipeInputProvider {
+public class AltarBlockEntity extends LockableContainerBlockEntity implements SidedInventory, RecipeUnlocker, RecipeInputProvider {
     // 进度锁是个不错的设计 能降低难度(毕竟之前做限制进度使用得上对应阶段的材料 有些材料是真不好量产 有这个就能用便宜材料了)
     public UUID lastUser;
-    public AlterRecipe nowRecipe;
+    public AltarRecipe nowRecipe;
     public static final int maxFuel = 102400;
     public int progress = 0;
     public int totalProgress = 0;  // Only Client
@@ -54,7 +54,7 @@ public class AlterBlockEntity extends LockableContainerBlockEntity implements Si
 
     public static final HashMap<Item, Integer> fuelTimeMap = new HashMap<>();
 
-    private final RecipeManager.MatchGetter<SidedInventory, ? extends AlterRecipe> matchGetter;
+    private final RecipeManager.MatchGetter<SidedInventory, ? extends AltarRecipe> matchGetter;
 
     static {
         fuelTimeMap.put(RegCustomItem.UNTREATED_MOONDUST, 800);
@@ -68,7 +68,7 @@ public class AlterBlockEntity extends LockableContainerBlockEntity implements Si
         return fuelTimeMap.getOrDefault(stack.getItem(), 0);
     }
 
-    public AlterBlockEntity(BlockPos blockPos, BlockState blockState) {
+    public AltarBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(RegCustomBlock.ALTER_BLOCK_ENTITY, blockPos, blockState);
         this.inventory = DefaultedList.ofSize(11, ItemStack.EMPTY);
         this.matchGetter = RecipeManager.createCachedMatchGetter(RecipeUtils.ALTER_RECIPE);
@@ -76,13 +76,13 @@ public class AlterBlockEntity extends LockableContainerBlockEntity implements Si
             public int get(int index) {
                 switch (index) {
                     case 0 -> {
-                        return AlterBlockEntity.this.progress;
+                        return AltarBlockEntity.this.progress;
                     }
                     case 1 -> {
-                        return AlterBlockEntity.this.totalProgress;
+                        return AltarBlockEntity.this.totalProgress;
                     }
                     case 2 -> {
-                        return AlterBlockEntity.this.fuelTime;
+                        return AltarBlockEntity.this.fuelTime;
                     }
                     default -> {
                         return 0;
@@ -92,9 +92,9 @@ public class AlterBlockEntity extends LockableContainerBlockEntity implements Si
 
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> AlterBlockEntity.this.progress = value;
-                    case 1 -> AlterBlockEntity.this.totalProgress = value;
-                    case 2 -> AlterBlockEntity.this.fuelTime = value;
+                    case 0 -> AltarBlockEntity.this.progress = value;
+                    case 1 -> AltarBlockEntity.this.totalProgress = value;
+                    case 2 -> AltarBlockEntity.this.fuelTime = value;
                 }
 
             }
@@ -107,12 +107,12 @@ public class AlterBlockEntity extends LockableContainerBlockEntity implements Si
 
     @Override
     protected Text getContainerName() {
-        return Text.translatable("block.shape-shifter-curse.alter");
+        return Text.translatable("block.shape-shifter-curse.altar");
     }
 
     @Override
     protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-        return new AlterCraftUIHandler(RegMenuType.AlterCraftUI, syncId, playerInventory, this, ScreenHandlerContext.EMPTY, this.propertyDelegate);
+        return new AltarCraftUIHandler(RegMenuType.AltarCraftUI, syncId, playerInventory, this, ScreenHandlerContext.EMPTY, this.propertyDelegate);
     }
 
     @Override
@@ -218,9 +218,9 @@ public class AlterBlockEntity extends LockableContainerBlockEntity implements Si
             this.nowRecipe = null;
             this.totalProgress = 0;
         }
-        Optional<? extends AlterRecipe> alterRecipe = this.matchGetter.getFirstMatch(this, world);
-        if (alterRecipe.isPresent()) {
-            this.nowRecipe = alterRecipe.get();
+        Optional<? extends AltarRecipe> altarRecipe = this.matchGetter.getFirstMatch(this, world);
+        if (altarRecipe.isPresent()) {
+            this.nowRecipe = altarRecipe.get();
             this.totalProgress = this.nowRecipe.recipeTime();
             if (!(world != null && this.canCraftRecipe(world.getRegistryManager()))) {
                 this.nowRecipe = null;
@@ -290,7 +290,7 @@ public class AlterBlockEntity extends LockableContainerBlockEntity implements Si
         }
     }
 
-    public void tick(World world, BlockPos pos, BlockState state, AlterBlockEntity blockEntity) {
+    public void tick(World world, BlockPos pos, BlockState state, AltarBlockEntity blockEntity) {
         if (needCheckRecipe) {
             this.checkRecipe();
             needCheckRecipe = false;

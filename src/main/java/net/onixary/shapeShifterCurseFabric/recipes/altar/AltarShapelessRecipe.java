@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.recipes.alter;
+package net.onixary.shapeShifterCurseFabric.recipes.altar;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.recipes.RecipeSerializerRegister;
 import org.jetbrains.annotations.Nullable;
 
-public class AlterShapelessRecipe extends AlterRecipe {
+public class AltarShapelessRecipe extends AltarRecipe {
     public final Identifier id;
     public final ItemStack output;
     public final DefaultedList<Ingredient> input;
@@ -32,7 +32,7 @@ public class AlterShapelessRecipe extends AlterRecipe {
 
     public final @Nullable Identifier requireAdvancement;
 
-    public AlterShapelessRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> input, Ingredient catalyst, int recipeTime, int fuelCostPerTick, Identifier requireAdvancement) {
+    public AltarShapelessRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> input, Ingredient catalyst, int recipeTime, int fuelCostPerTick, Identifier requireAdvancement) {
         this.id = id;
         this.output = output;
         this.input = input;
@@ -122,8 +122,8 @@ public class AlterShapelessRecipe extends AlterRecipe {
         return RecipeSerializerRegister.ALTER_SHAPELESS_RECIPE;
     }
 
-    public static class Serializer implements RecipeSerializer<AlterShapelessRecipe> {
-        public AlterShapelessRecipe read(Identifier identifier, JsonObject jsonObject) {
+    public static class Serializer implements RecipeSerializer<AltarShapelessRecipe> {
+        public AltarShapelessRecipe read(Identifier identifier, JsonObject jsonObject) {
             int time = JsonHelper.getInt(jsonObject, "time", 200);
             DefaultedList<Ingredient> defaultedList = getIngredients(JsonHelper.getArray(jsonObject, "ingredients"));
             Ingredient catalyst = null;
@@ -136,12 +136,12 @@ public class AlterShapelessRecipe extends AlterRecipe {
             }
             int fuelCost = JsonHelper.getInt(jsonObject, "fuel_cost", 1);
             if (defaultedList.isEmpty()) {
-                throw new JsonParseException("No ingredients for alter shapeless recipe");
+                throw new JsonParseException("No ingredients for altar shapeless recipe");
             } else if (defaultedList.size() > 9) {
-                throw new JsonParseException("Too many ingredients for alter shapeless recipe");
+                throw new JsonParseException("Too many ingredients for altar shapeless recipe");
             } else {
                 ItemStack itemStack = ShapedRecipe.outputFromJson(JsonHelper.getObject(jsonObject, "result"));
-                return new AlterShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time, fuelCost, requireAdvancement);
+                return new AltarShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time, fuelCost, requireAdvancement);
             }
         }
 
@@ -156,7 +156,7 @@ public class AlterShapelessRecipe extends AlterRecipe {
             return defaultedList;
         }
 
-        public AlterShapelessRecipe read(Identifier identifier, PacketByteBuf packetByteBuf) {
+        public AltarShapelessRecipe read(Identifier identifier, PacketByteBuf packetByteBuf) {
             Ingredient catalyst = null;
             if (packetByteBuf.readBoolean()) {
                 catalyst = Ingredient.fromPacket(packetByteBuf);
@@ -173,10 +173,10 @@ public class AlterShapelessRecipe extends AlterRecipe {
             ItemStack itemStack = packetByteBuf.readItemStack();
             int time = packetByteBuf.readVarInt();
             int fuelCost = packetByteBuf.readVarInt();
-            return new AlterShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time, fuelCost, requireAdvancement);
+            return new AltarShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time, fuelCost, requireAdvancement);
         }
 
-        public void write(PacketByteBuf packetByteBuf, AlterShapelessRecipe shapelessRecipe) {
+        public void write(PacketByteBuf packetByteBuf, AltarShapelessRecipe shapelessRecipe) {
             if (shapelessRecipe.catalyst != null) {
                 packetByteBuf.writeBoolean(true);
                 shapelessRecipe.catalyst.write(packetByteBuf);

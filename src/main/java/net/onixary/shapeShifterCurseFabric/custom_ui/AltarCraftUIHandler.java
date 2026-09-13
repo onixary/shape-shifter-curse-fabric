@@ -13,25 +13,25 @@ import net.minecraft.recipe.book.RecipeBookCategory;
 import net.minecraft.screen.*;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.world.World;
-import net.onixary.shapeShifterCurseFabric.blocks.block_entity.AlterBlockEntity;
-import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.AlterOutputSlot;
+import net.onixary.shapeShifterCurseFabric.blocks.block_entity.AltarBlockEntity;
+import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.AltarOutputSlot;
 
-public class AlterCraftUIHandler extends AbstractRecipeScreenHandler<SidedInventory> {
+public class AltarCraftUIHandler extends AbstractRecipeScreenHandler<SidedInventory> {
     public final PlayerInventory playerInventory;
-    public final Inventory alterBlockEntity;
+    public final Inventory altarBlockEntity;
     public final ScreenHandlerContext context;
     public final PlayerEntity player;
     public final World world;
     public final PropertyDelegate propertyDelegate;
 
-    public static AlterCraftUIHandler createMenu(int i, PlayerInventory inventory) {
-        return new AlterCraftUIHandler(RegMenuType.AlterCraftUI, i, inventory, new SimpleInventory(11), ScreenHandlerContext.EMPTY, new ArrayPropertyDelegate(3));
+    public static AltarCraftUIHandler createMenu(int i, PlayerInventory inventory) {
+        return new AltarCraftUIHandler(RegMenuType.AltarCraftUI, i, inventory, new SimpleInventory(11), ScreenHandlerContext.EMPTY, new ArrayPropertyDelegate(3));
     }
 
-    public AlterCraftUIHandler(ScreenHandlerType<?> screenHandlerType, int syncId, PlayerInventory playerInventory, Inventory alterBlockEntity, ScreenHandlerContext context, PropertyDelegate propertyDelegate) {
+    public AltarCraftUIHandler(ScreenHandlerType<?> screenHandlerType, int syncId, PlayerInventory playerInventory, Inventory altarBlockEntity, ScreenHandlerContext context, PropertyDelegate propertyDelegate) {
         super(screenHandlerType, syncId);
         this.playerInventory = playerInventory;
-        this.alterBlockEntity = alterBlockEntity;
+        this.altarBlockEntity = altarBlockEntity;
         this.context = context;
         this.player = playerInventory.player;
         this.world = playerInventory.player.getWorld();
@@ -39,12 +39,12 @@ public class AlterCraftUIHandler extends AbstractRecipeScreenHandler<SidedInvent
 
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 3; ++j) {
-                this.addSlot(new Slot(this.alterBlockEntity, j + i * 3, 30 + j * 18, 17 + i * 18));
+                this.addSlot(new Slot(this.altarBlockEntity, j + i * 3, 30 + j * 18, 17 + i * 18));
             }
         }
 
-        this.addSlot(new Slot(this.alterBlockEntity, 9, 152, 57));
-        this.addSlot(new AlterOutputSlot(this.alterBlockEntity, 10, 124, 35));
+        this.addSlot(new Slot(this.altarBlockEntity, 9, 152, 57));
+        this.addSlot(new AltarOutputSlot(this.altarBlockEntity, 10, 124, 35));
 
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 9; ++j) {
@@ -61,14 +61,14 @@ public class AlterCraftUIHandler extends AbstractRecipeScreenHandler<SidedInvent
 
     @Override
     public void populateRecipeFinder(RecipeMatcher finder) {
-        if (this.alterBlockEntity instanceof AlterBlockEntity realAlter) {
-            realAlter.provideRecipeInputs(finder);
+        if (this.altarBlockEntity instanceof AltarBlockEntity realAltar) {
+            realAltar.provideRecipeInputs(finder);
         }
     }
 
     @Override
     public void clearCraftingSlots() {
-        for (int i = 0; i < this.alterBlockEntity.size(); ++i) {
+        for (int i = 0; i < this.altarBlockEntity.size(); ++i) {
             if (i == 9) {
                 continue;
             }
@@ -78,8 +78,8 @@ public class AlterCraftUIHandler extends AbstractRecipeScreenHandler<SidedInvent
 
     @Override
     public boolean matches(Recipe<? super SidedInventory> recipe) {
-        if (this.alterBlockEntity instanceof AlterBlockEntity realAlter) {
-            return recipe.matches(realAlter, world);
+        if (this.altarBlockEntity instanceof AltarBlockEntity realAltar) {
+            return recipe.matches(realAltar, world);
         }
         return false;
     }
@@ -133,7 +133,7 @@ public class AlterCraftUIHandler extends AbstractRecipeScreenHandler<SidedInvent
             }
         }
         else if (slotIndex >= 11 && slotIndex < 47) {
-            if (AlterBlockEntity.canFuel(slotItem)) {
+            if (AltarBlockEntity.canFuel(slotItem)) {
                 if (!this.insertItem(slotItem, 9, 10, false)) {
                     if (!this.insertItem(slotItem, 0, 9, false)) {
                         return ItemStack.EMPTY;

@@ -17,21 +17,21 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.onixary.shapeShifterCurseFabric.blocks.block_entity.AlterBlockEntity;
-import net.onixary.shapeShifterCurseFabric.custom_ui.AlterCraftUIHandler;
+import net.onixary.shapeShifterCurseFabric.blocks.block_entity.AltarBlockEntity;
+import net.onixary.shapeShifterCurseFabric.custom_ui.AltarCraftUIHandler;
 import net.onixary.shapeShifterCurseFabric.custom_ui.RegMenuType;
 import org.jetbrains.annotations.Nullable;
 
 
 // 渲染先用透明方案吧 BlockEntity类方块由BlockEntity动态渲染
-public class AlterBlock extends BlockWithEntity {
-    protected AlterBlock(Settings settings) {
+public class AltarBlock extends BlockWithEntity {
+    protected AltarBlock(Settings settings) {
         super(settings);
     }
 
     @Override
     public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new AlterBlockEntity(pos, state);
+        return new AltarBlockEntity(pos, state);
     }
 
 
@@ -46,9 +46,9 @@ public class AlterBlock extends BlockWithEntity {
 
     protected void openScreen(World world, BlockPos pos, PlayerEntity player) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof AlterBlockEntity alterBlockEntity) {
-            alterBlockEntity.lastUser = player.getUuid();
-            player.openHandledScreen(alterBlockEntity);
+        if (blockEntity instanceof AltarBlockEntity altarBlockEntity) {
+            altarBlockEntity.lastUser = player.getUuid();
+            player.openHandledScreen(altarBlockEntity);
         }
     }
 
@@ -63,7 +63,7 @@ public class AlterBlock extends BlockWithEntity {
     }
 
     @Nullable
-    public static <T extends BlockEntity> BlockEntityTicker<T> checkType(World world, BlockEntityType<T> givenType, BlockEntityType<? extends AlterBlockEntity> expectedType) {
+    public static <T extends BlockEntity> BlockEntityTicker<T> checkType(World world, BlockEntityType<T> givenType, BlockEntityType<? extends AltarBlockEntity> expectedType) {
         return world.isClient ? null : checkType(givenType, expectedType, (world1, pos, state, blockEntity) -> {
             blockEntity.tick(world1, pos, state, blockEntity);
         });
@@ -73,9 +73,9 @@ public class AlterBlock extends BlockWithEntity {
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (!state.isOf(newState.getBlock())) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof AlterBlockEntity alterBlockEntity) {
+            if (blockEntity instanceof AltarBlockEntity altarBlockEntity) {
                 if (world instanceof ServerWorld) {
-                    ItemScatterer.spawn(world, pos, alterBlockEntity);
+                    ItemScatterer.spawn(world, pos, altarBlockEntity);
                 }
             }
             super.onStateReplaced(state, world, pos, newState, moved);

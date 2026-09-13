@@ -21,7 +21,7 @@
             {
                 "type": "apoli:air",
                 "comparison": ">",
-                "compare_to": 150
+                "compare_to": 0
             }
         ]
     }
