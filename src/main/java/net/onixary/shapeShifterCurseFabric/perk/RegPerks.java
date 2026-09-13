@@ -1,8 +1,10 @@
 package net.onixary.shapeShifterCurseFabric.perk;
 
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -12,6 +14,9 @@ public class RegPerks {
     public static final HashMap<Identifier, IPerk> PerkRegistry = new HashMap<>();
     public static final HashMap<Identifier, Identifier> PerkIconRegistry = new HashMap<>();
     public static final HashMap<Identifier, PerkTree> PerkTreeRegistry = new HashMap<>();
+    public static final HashMap<Identifier, Text> PerkTreeNameRegistry = new HashMap<>();
+    public static final HashMap<Identifier, Text> PerkNameRegistry = new HashMap<>();
+    public static final HashMap<Identifier, Text> PerkDescriptionRegistry = new HashMap<>();
 
     public static final Identifier FALLBACK_PERK_ICON = ShapeShifterCurseFabric.identifier("textures/perk/fallback.png");
     public static final Identifier EMPTY_PERK_TREE = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("empty")));
@@ -93,5 +98,20 @@ public class RegPerks {
 
     public static @Nullable Identifier getPerkIcon(Identifier perkID) {
         return PerkIconRegistry.get(perkID);
+    }
+
+    // TODO 需要加一个注册函数
+    public static @NotNull Text getPerkName(Identifier perkID) {
+        if (PerkNameRegistry.containsKey(perkID)) {
+            return PerkNameRegistry.get(perkID);
+        }
+        return Text.translatable("ssc_perk." + perkID.getNamespace() + "." + perkID.getPath() + ".name");
+    }
+
+    public static @NotNull Text getPerkDescription(Identifier perkID) {
+        if (PerkDescriptionRegistry.containsKey(perkID)) {
+            return PerkDescriptionRegistry.get(perkID);
+        }
+        return Text.translatable("ssc_perk." + perkID.getNamespace() + "." + perkID.getPath() + ".description");
     }
 }
