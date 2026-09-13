@@ -15,6 +15,7 @@ public class AnimationTransform {
     private static AnimationHolder anim_on_transform_default = AnimationHolder.EMPTY;
     private static AnimationHolder anim_on_transform_normal_to_feral = AnimationHolder.EMPTY;
     private static AnimationHolder anim_on_transform_feral_to_normal = AnimationHolder.EMPTY;
+    private static AnimationHolder anim_on_transform_feral_to_feral = AnimationHolder.EMPTY;
 
 
     public static AnimationHolder getFormAnimToPlay(IForm curForm, IForm toForm) {
@@ -37,6 +38,10 @@ public class AnimationTransform {
             {
                 return anim_on_transform_feral_to_normal;
             }
+            else if(curIsFeral && toIsFeral)
+            {
+                return anim_on_transform_feral_to_feral;
+            }
             return anim_on_transform_default;
         } catch (Exception e) {
             ShapeShifterCurseFabric.LOGGER.error("Error in getFormAnimToPlay: " + e.getMessage());
@@ -48,5 +53,6 @@ public class AnimationTransform {
         anim_on_transform_default = new AnimationHolder(new Identifier(MOD_ID, "player_on_transform"), true);
         anim_on_transform_normal_to_feral = new AnimationHolder(new Identifier(MOD_ID, "player_on_transform_normal_to_feral"), true);
         anim_on_transform_feral_to_normal = new AnimationHolder(new Identifier(MOD_ID, "player_on_transform_feral_to_normal"), true);
+        anim_on_transform_feral_to_feral = new AnimationHolder(new Identifier(MOD_ID, "player_on_transform_feral_to_feral"), true);
     }
 }

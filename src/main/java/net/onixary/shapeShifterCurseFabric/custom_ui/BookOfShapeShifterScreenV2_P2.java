@@ -140,7 +140,7 @@ public class BookOfShapeShifterScreenV2_P2 extends Screen implements WidgetEXUti
         renderInstinctsBottomTexture(context);
     }
 
-    /** 扩展点：INSTINCTS 列底贴图（宽随列宽、高按原始宽高比、锚定列区底部 in-book y=160）。 */
+    /** 扩展点：INSTINCTS 列底贴图（宽随列宽稍缩小、高按原始宽高比、锚定列区底部 in-book y=160）。 */
     private void renderInstinctsBottomTexture(DrawContext context) {
         CodexInstinctColumnHooks.Provider provider = CodexInstinctColumnHooks.provider();
         if (provider == null || currentPlayer == null) {
@@ -156,7 +156,7 @@ public class BookOfShapeShifterScreenV2_P2 extends Screen implements WidgetEXUti
         }
         int BookPosX = width / 2 - (BookSizeX * BookScale) / 2;
         int BookPosY = height / 2 - (BookSizeY * BookScale) / 2;
-        int textureWidth = 106 * BookScale;
+        int textureWidth = 86 * BookScale;
         int textureHeight = Math.round(textureWidth * (texture.imageHeight() / (float) texture.imageWidth()));
         int x = BookPosX + 220 * BookScale;
         int y = BookPosY + 160 * BookScale - textureHeight;
