@@ -94,7 +94,9 @@ public class PerkUtils {
         }
         int tier = node.tier;
         // TODO tier 判断 需要给升级方块加个玩家UUID表 记录最后一个使用的升级方块等级
-        __addPerk(player, perkTreeID, perkID);
+        if (perkData.canGain(player, component.nowForm)) {
+            __addPerk(player, perkTreeID, perkID);
+        }
         removeInValidPerk(player, perkTreeID);
     }
 
@@ -126,5 +128,18 @@ public class PerkUtils {
         PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
         component.nowPerkTree = perkTreeID;
         component.sync();
+    }
+
+    public static HashMap<Identifier, Boolean> getPlayerPerkAvailability(PlayerEntity player) {
+        PerkTree perkTree = getPlayerNowPerkTree(player);
+        if (perkTree == null) return new HashMap<>();
+        HashMap<Identifier, Boolean> perkAvailability = new HashMap<>();
+        for (Identifier perkID : perkTree.getAllPerks()) {
+            IPerk perkData = RegPerks.getPerk(perkID);
+            if (perkData != null) {
+                perkAvailability.put(perkID, perkData.canGain(player, PlayerFormComponent.COMPONENT.get(player).nowForm));
+            }
+        }
+        return perkAvailability;
     }
 }
