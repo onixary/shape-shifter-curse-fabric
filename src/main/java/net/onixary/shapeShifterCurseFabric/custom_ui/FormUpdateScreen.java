@@ -27,6 +27,7 @@ import java.util.Objects;
 public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX {
     public static final Identifier LABEL_GAINED = ShapeShifterCurseFabric.identifier("textures/perk/system/gained.png");
     public static final Identifier LABEL_SELECT = ShapeShifterCurseFabric.identifier("textures/perk/system/select.png");
+    public static final Identifier LABEL_SELECTED = ShapeShifterCurseFabric.identifier("textures/perk/system/selected.png");
 
     public boolean isLocked;
     public @NotNull PerkTree perkTree;
@@ -91,7 +92,7 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
     public void init() {
         int InfoPosX = this.width / 2 + nodeWindowWidth / 2 + 10;
         int InfoPosY = this.height / 2 - nodeWindowHeight / 2;
-        this.PerkNameWidget = new TextWidget(InfoPosX, InfoPosY, 12, 9, Text.literal(""), this.textRenderer);
+        this.PerkNameWidget = new TextWidget(InfoPosX, InfoPosY, 100, 9, Text.literal(""), this.textRenderer);
         this.PerkDescWidget = new ScaleScrollTextWidget(InfoPosX, InfoPosY + 12, 100, 160, 1.0f, Text.literal(""), this.textRenderer);
         this.PerkDescWidget.setEnableScrollableIconRender(true);
         this.WidgetList.add(this.PerkDescWidget);
@@ -187,6 +188,9 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         int top = virtualNodeY + NodeSelectStartY;
         if (playerGainedPerk != null && playerGainedPerk.contains(perkNode.perkID)) {
             context.drawTexture(LABEL_GAINED, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
+        }
+        if (perkNode == this.nowSelectNode) {
+            context.drawTexture(LABEL_SELECTED, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
         }
         if (mouseX >= left && mouseX < left + NodeSelectRectWidth && mouseY >= top && mouseY < top + NodeSelectRectHeight) {
             context.drawTexture(LABEL_SELECT, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
