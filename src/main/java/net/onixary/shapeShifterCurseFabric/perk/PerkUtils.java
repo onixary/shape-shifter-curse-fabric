@@ -97,7 +97,8 @@ public class PerkUtils {
             if (playerPerkList == null || !playerPerkList.contains(node.dependentPerkID)) return;
         }
         int tier = node.tier;
-        if (!isCanGainPerk(player)) {
+        // 感觉Tier0在无诅咒之月可以点可以作为特性使用 可以在tier0设置一些特殊的Perk
+        if (tier > 0 && !isCanGainPerk(player)) {
             return;
         }
         @Nullable FormAttunerBlockEntity lastUsedAttuner = FormAttunerBlock.getPlayerLastUsedAttuner(player);

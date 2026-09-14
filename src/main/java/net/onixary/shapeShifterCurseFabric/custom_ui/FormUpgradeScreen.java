@@ -3,9 +3,12 @@ package net.onixary.shapeShifterCurseFabric.custom_ui;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextWidget;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
@@ -26,14 +29,14 @@ import java.util.Objects;
 
 // 标记 UNTESTED 代表这个函数没测试 测试完了就删(估计最后得有一堆没测试函数 还是标一下大概率炸的函数吧)
 
-public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX {
+public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX {
     public static final Identifier LABEL_GAINED = ShapeShifterCurseFabric.identifier("textures/perk/system/gained.png");
     public static final Identifier LABEL_SELECT = ShapeShifterCurseFabric.identifier("textures/perk/system/select.png");
     public static final Identifier LABEL_SELECTED = ShapeShifterCurseFabric.identifier("textures/perk/system/selected.png");
 
     public static final HashMap<Identifier, Boolean> perkAvailableMap = new HashMap<>();  // 仅客户端数据 仅影响渲染
 
-    public boolean isLocked;
+    public int tier = -1;
     public @NotNull PerkTree perkTree;
 
     public @Nullable PerkTree.PerkNode nowSelectNode;
@@ -86,9 +89,9 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         return this.WidgetList;
     }
 
-    public FormUpdateScreen(Text title, boolean isLocked, @Nullable PerkTree perkTree) {
+    public FormUpgradeScreen(int tier, Text title, @Nullable PerkTree perkTree) {
         super(title);
-        this.isLocked = isLocked;
+        this.tier = tier;
         this.perkTree = perkTree != null ? perkTree : Objects.requireNonNull(RegPerks.getPerkTree(RegPerks.EMPTY_PERK_TREE));
         ModPacketsS2C.sendRequestPerkAvailability();
     }
@@ -149,6 +152,27 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         context.fill(nodeWindowX, nodeWindowY, nodeWindowX + nodeWindowWidth, nodeWindowY + nodeWindowHeight, 0xFF000000);
         this.drawAllNode(context, mouseX, mouseY, delta);
         super.render(context, mouseX, mouseY, delta);
+    }
+
+    @Override
+    public boolean shouldPause() {
+        return false;
+    }
+
+    @Override
+    public boolean shouldCloseOnEsc() {
+        return true;
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if (super.keyPressed(keyCode, scanCode, modifiers)) {
+            return true;
+        } else if (this.client.options.inventoryKey.matchesKey(keyCode, scanCode)) {
+            this.close();
+            return true;
+        }
+        return false;
     }
 
     // Utils
@@ -299,9 +323,11 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         if (this.nowSelectNode != null) {
             this.PerkNameWidget.setMessage(RegPerks.getPerkName(this.nowSelectNode.perkID));
             this.PerkDescWidget.reloadText(RegPerks.getPerkDescription(this.nowSelectNode.perkID));
+            this.AcquirePerkButton.active = this.nowSelectNode.tier <= this.tier;
         } else {
             this.PerkNameWidget.setMessage(Text.literal(""));
             this.PerkDescWidget.reloadText(Text.literal(""));
+            this.AcquirePerkButton.active = false;
         }
         ModPacketsS2C.sendRequestPerkAvailability();
     }

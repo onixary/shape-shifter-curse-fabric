@@ -326,7 +326,7 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 				}
 			}
 			if (openTestUIKeybind.isPressed()) {
-				FormUpdateScreen screen = new FormUpdateScreen(Text.literal(""), false, PerkUtils.getPlayerNowPerkTree(client.player));
+				FormUpgradeScreen screen = new FormUpgradeScreen(-1, Text.literal(""), PerkUtils.getPlayerNowPerkTree(client.player));
 				client.setScreen(screen);
 			}
 		});

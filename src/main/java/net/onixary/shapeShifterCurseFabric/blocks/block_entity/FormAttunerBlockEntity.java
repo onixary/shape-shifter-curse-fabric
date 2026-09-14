@@ -28,28 +28,9 @@ public class FormAttunerBlockEntity extends BlockEntity {
     private int minY = 0;
     private List<BeamSegment> beams = Lists.newArrayList();
     private List<BeamSegment> beamSegments = Lists.newArrayList();
-    private final PropertyDelegate propertyDelegate;
 
     public FormAttunerBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(RegCustomBlock.FORM_ATTUNER_BLOCK_ENTITY, blockPos, blockState);
-        this.propertyDelegate = new PropertyDelegate() {
-            public int get(int index) {
-                if (index == 0) {
-                    return FormAttunerBlockEntity.this.level;
-                }
-                return 0;
-            }
-
-            public void set(int index, int value) {
-                if (index == 0) {
-                    FormAttunerBlockEntity.this.level = value;
-                }
-            }
-
-            public int size() {
-                return 1;
-            }
-        };
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, FormAttunerBlockEntity blockEntity) {
