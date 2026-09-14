@@ -1,0 +1,43 @@
+{
+  "type": "apoli:multiple",
+  "sprint": {
+    "type": "apoli:modify_jump",
+    "modifier": {
+      "operation": "addition",
+      "value": 0.168
+    },
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:sprinting"
+        },
+        {
+          "type": "apoli:food_level",
+          "comparison": ">=",
+          "compare_to": 6
+        }
+      ]
+    }
+  },
+  "sneak": {
+    "type": "apoli:modify_jump",
+    "modifier": {
+      "operation": "addition",
+      "value": 0.42
+    },
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:sneaking"
+        },
+        {
+          "type": "apoli:food_level",
+          "comparison": ">=",
+          "compare_to": 6
+        }
+      ]
+    }
+  }
+}
