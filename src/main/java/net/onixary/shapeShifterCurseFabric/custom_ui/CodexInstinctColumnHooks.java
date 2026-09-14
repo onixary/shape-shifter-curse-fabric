@@ -11,6 +11,9 @@ import org.jetbrains.annotations.Nullable;
  * 未注册或对应方法返回 null 时保持原版 CodexData 行为，PROS/CONS 列不受影响。
  * 正文文本由页面侧只取一次并同时供主列与“+”详情使用（同源）。
  */
+
+// XuHaoNan: 由于这个API没有做多Provider处理 仅Onixary的拓展可用
+//           或许可以给这种改UI的做个API什么的 不过感觉优先度不高
 public final class CodexInstinctColumnHooks {
 
     private static @Nullable Provider provider;
