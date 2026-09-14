@@ -1,0 +1,9 @@
+{
+  "type": "apoli:attribute",
+  "modifier": {
+    "name": "2 health reduction",
+    "attribute": "minecraft:generic.max_health",
+    "value": -2.0,
+    "operation": "addition"
+  }
+}

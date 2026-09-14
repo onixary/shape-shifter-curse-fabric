@@ -1,0 +1,58 @@
+{
+    "type": "apoli:multiple",
+    "normal": {
+        "type": "apoli:conditioned_attribute",
+        "modifier": {
+            "attribute": "minecraft:generic.movement_speed",
+            "operation": "addition",
+            "value": 0.035,
+            "name": "normal speed up"
+        },
+        "tick_rate": 1,
+        "condition": {
+            "type": "apoli:and",
+            "conditions": [
+                {
+                    "type": "apoli:fluid_height",
+                    "fluid": "minecraft:water",
+                    "comparison": "<=",
+                    "compare_to": 0
+                },
+                {
+                    "type": "apoli:food_level",
+                    "comparison": ">=",
+                    "compare_to": 6
+                }
+            ]
+        }
+    },
+    "sprint": {
+        "type": "apoli:conditioned_attribute",
+        "modifier": {
+            "attribute": "minecraft:generic.movement_speed",
+            "operation": "addition",
+            "value": 0.0525,
+            "name": "sprint speed up"
+        },
+        "tick_rate": 1,
+        "condition": {
+            "type": "apoli:and",
+            "conditions": [
+                {
+                    "type": "apoli:fluid_height",
+                    "fluid": "minecraft:water",
+                    "comparison": "<=",
+                    "compare_to": 0
+                },
+                {
+                    "type": "apoli:sprinting"
+                },
+                {
+                    "type": "apoli:food_level",
+                    "comparison": ">=",
+                    "compare_to": 6
+                }
+            ]
+        }
+    }
+}

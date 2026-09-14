@@ -16,7 +16,10 @@
         "shape-shifter-curse:cat_vision",
         "shape-shifter-curse:form_tan_prevent_dirty_water_thirst",
         "shape-shifter-curse:form_tan_cold_resistance_mild",
-        "shape-shifter-curse:cat_friendly"
+        "shape-shifter-curse:cat_friendly",
+        "shape-shifter-curse:form_feral_cat_vf_health",
+        "shape-shifter-curse:form_feral_cat_vf_jump_boost",
+        "shape-shifter-curse:form_feral_cat_vf_speed_up"
     ],
     "icon": {
         "item": "minecraft:player_head"

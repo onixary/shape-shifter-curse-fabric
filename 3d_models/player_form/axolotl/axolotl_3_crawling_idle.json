@@ -1,0 +1,66 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"axolotl_3_crawling_idle": {
+			"loop": true,
+			"bones": {
+				"head": {
+					"rotation": {
+						"vector": [-72.5, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 2]
+					}
+				},
+				"torso": {
+					"rotation": {
+						"vector": [-14.53186, -2.27497, -1.47225]
+					},
+					"position": {
+						"vector": [0, 0, 2.5]
+					}
+				},
+				"rightArm": {
+					"rotation": {
+						"vector": [201.61714, 3.35069, 0.68962]
+					},
+					"position": {
+						"vector": [0.90094, -0.28975, -0.60935]
+					}
+				},
+				"leftArm": {
+					"rotation": {
+						"vector": [-149.53527, -7.14268, 3.07982]
+					},
+					"position": {
+						"vector": [-1.05896, 0.55046, 0.52099]
+					}
+				},
+				"rightLeg": {
+					"rotation": {
+						"vector": [-7.99572, 0.06526, 7.49972]
+					},
+					"position": {
+						"vector": [0, 0.99124, -0.69131]
+					}
+				},
+				"leftLeg": {
+					"rotation": {
+						"vector": [-7.5, 0, -7.5]
+					},
+					"position": {
+						"vector": [0, 0.9, -1.1]
+					}
+				},
+				"body": {
+					"rotation": {
+						"vector": [90, 0, 0]
+					},
+					"position": {
+						"vector": [0, -5, 12]
+					}
+				}
+			}
+		}
+	}
+}

@@ -11,6 +11,7 @@ import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.ScaleScrollTextWidget;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.WidgetEXUtils;
+import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.perk.PerkTree;
 import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
 import net.onixary.shapeShifterCurseFabric.perk.RegPerks;
@@ -19,6 +20,7 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Vector2i;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,6 +30,8 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
     public static final Identifier LABEL_GAINED = ShapeShifterCurseFabric.identifier("textures/perk/system/gained.png");
     public static final Identifier LABEL_SELECT = ShapeShifterCurseFabric.identifier("textures/perk/system/select.png");
     public static final Identifier LABEL_SELECTED = ShapeShifterCurseFabric.identifier("textures/perk/system/selected.png");
+
+    public static final HashMap<Identifier, Boolean> perkAvailableMap = new HashMap<>();  // 仅客户端数据 仅影响渲染
 
     public boolean isLocked;
     public @NotNull PerkTree perkTree;
@@ -86,6 +90,7 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         super(title);
         this.isLocked = isLocked;
         this.perkTree = perkTree != null ? perkTree : Objects.requireNonNull(RegPerks.getPerkTree(RegPerks.EMPTY_PERK_TREE));
+        ModPacketsS2C.sendRequestPerkAvailability();
     }
 
     @Override
@@ -99,6 +104,7 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
         this.AcquirePerkButton = ButtonWidget.builder(Text.literal("GET"), button -> {
             if (this.nowSelectNode != null) {
                 PerkUtils.addPerk(MinecraftClient.getInstance().player, this.perkTree.getID(), this.nowSelectNode.perkID);
+                ModPacketsS2C.sendRequestPerkAvailability();
             }
         }).position(InfoPosX + 20, InfoPosY + 180).size(60, 10).build();
         this.addDrawableChild(this.PerkNameWidget);
@@ -285,6 +291,8 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
     public void onNodeSelect() {
         try {
             MinecraftClient.getInstance().player.sendMessage(Text.literal("Node Selected: " + this.nowSelectNode.perkID.toString()), false);
+            MinecraftClient.getInstance().player.sendMessage(Text.literal("Can Gained (Cache): " + this.perkAvailableMap.getOrDefault(this.nowSelectNode.perkID, true)), false);
+
         } catch (Exception e) {
             MinecraftClient.getInstance().player.sendMessage(Text.literal("No Node Selected"), false);
         }
@@ -295,5 +303,6 @@ public class FormUpdateScreen extends Screen implements WidgetEXUtils.IWidgetEX 
             this.PerkNameWidget.setMessage(Text.literal(""));
             this.PerkDescWidget.reloadText(Text.literal(""));
         }
+        ModPacketsS2C.sendRequestPerkAvailability();
     }
 }
