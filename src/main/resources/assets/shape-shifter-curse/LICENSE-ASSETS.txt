@@ -1,0 +1,16 @@
+The files in this directory are media assets licensed under the
+Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).
+
+- Full license text: LICENSE-CC-BY-NC-4.0.txt in the repository root
+- Scope, exceptions and third-party carve-outs: LICENSING.md in the repository root
+- License page: https://creativecommons.org/licenses/by-nc/4.0/
+
+The shader sources in shaders/** are code and are licensed under the MIT License
+instead. The assets of the Origins mod under assets/origins/** keep their own MIT
+license, see THIRD-PARTY-NOTICES.md.
+
+Copyright (c) 2025 onixary and contributors
+
+本目录下的文件属于媒体资源，采用 CC BY-NC 4.0 授权，仅限非商业用途，使用时
+需要署名并注明是否修改。shaders/** 内的着色器源码属于代码，采用 MIT 授权；
+assets/origins/** 保留 Origins 模组的 MIT 授权，详见 THIRD-PARTY-NOTICES.md。

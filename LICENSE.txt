@@ -1,3 +1,7 @@
+This license applies to the source code of this project only.
+Media assets (3D models, textures, animations, sounds, fonts) are licensed
+separately under CC BY-NC 4.0 - see LICENSE-CC-BY-NC-4.0.txt and LICENSING.md.
+
 The MIT License (MIT)
 
 Copyright (c) 2025 onixary

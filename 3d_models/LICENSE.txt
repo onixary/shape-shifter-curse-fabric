@@ -1,0 +1,16 @@
+The files in this directory are media assets licensed under the
+Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).
+
+- Full license text: LICENSE-CC-BY-NC-4.0.txt in the repository root
+- Scope, exceptions and third-party carve-outs: LICENSING.md in the repository root
+- License page: https://creativecommons.org/licenses/by-nc/4.0/
+
+You may share and adapt these files for non-commercial purposes, provided you
+give appropriate credit and indicate if changes were made. Commercial use is not
+permitted.
+
+Copyright (c) 2025 onixary and contributors
+
+本目录下的文件属于媒体资源，采用 CC BY-NC 4.0 授权，仅限非商业用途，使用时
+需要署名并注明是否修改。完整协议见仓库根目录的 LICENSE-CC-BY-NC-4.0.txt，
+适用范围与例外说明见仓库根目录的 LICENSING.md。

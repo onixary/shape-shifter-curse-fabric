@@ -76,7 +76,7 @@
     }
   ],
 
-  "license": "MIT",
+  "license": "MIT AND CC-BY-NC-4.0",
   "icon": "assets/shape-shifter-curse/icon.png",
 
   "environment": "*",

@@ -310,9 +310,20 @@ java {
 }
 
 
-jar {
-    from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}" }
+// 代码为 MIT，模型/贴图/动画等资源为 CC BY-NC 4.0，两份协议都要随产物分发
+def licenseFiles = [
+        "LICENSE.txt"              : "LICENSE_${project.archivesBaseName}.txt",
+        "LICENSE-CC-BY-NC-4.0.txt" : "LICENSE-CC-BY-NC-4.0_${project.archivesBaseName}.txt",
+        "LICENSING.md"             : "LICENSING_${project.archivesBaseName}.md",
+        "THIRD-PARTY-NOTICES.md"   : "THIRD-PARTY-NOTICES_${project.archivesBaseName}.md",
+]
+
+// 同时覆盖 dev 产物与 remap 后的产物（jar / sourcesJar / remapJar / remapSourcesJar）
+tasks.matching { it.name in ["jar", "sourcesJar", "remapJar", "remapSourcesJar"] }.configureEach {
+    licenseFiles.each { source, target ->
+        from(source) {
+            rename { target }
+        }
     }
 }
 
