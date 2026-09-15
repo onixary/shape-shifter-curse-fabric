@@ -1,16 +1,16 @@
 The files in this directory are NOT open source.
 
-Each file carries the header `LICENSE : All Rights Reserved (XuHaoNan)`, which is
+Each file carries the header `LICENSE : All Rights Reserved (ShapeShifterCurse 开发组 - XuHaoNan & Onixary)`, which is
 authoritative. They are excluded from the project's MIT grant and from the
 CC BY-NC 4.0 asset grant.
 
-Reusing, copying or redistributing these files requires permission from XuHaoNan.
+Reusing, copying or redistributing these files requires permission from XuHaoNan or Onixary.
 
 Copyright (c) XuHaoNan. All rights reserved.
 
 本目录下的文件并非开源代码。每个文件头部均声明
-`LICENSE : All Rights Reserved (XuHaoNan)`，以此为准。
+`LICENSE : All Rights Reserved (ShapeShifterCurse 开发组 - XuHaoNan & Onixary)`，以此为准。
 这些文件不属于本项目的 MIT 授权范围，也不属于 CC BY-NC 4.0 资源授权范围，
-复用、复制或再分发需要取得 XuHaoNan 的许可。
+复用、复制或再分发需要取得 XuHaoNan 或 Onixary 的许可。
 
 详见仓库根目录的 LICENSING.md 与 THIRD-PARTY-NOTICES.md。

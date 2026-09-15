@@ -80,10 +80,10 @@ Notably:
 - `src/main/java/net/onixary/shapeShifterCurseFabric/integration/origins/**` and
   `src/main/resources/assets/origins/**` are derived from the Origins mod by
   apace100, which is MIT licensed. They stay MIT.
-- `tools/SignSystem/**` carries a per-file header `LICENSE: All Rights Reserved
-  (XuHaoNan)`. Those files are all rights reserved and are **not** MIT licensed,
+- `tools/SignSystem/**` carries a per-file header `LICENSE: All Rights Reserved 
+  (ShapeShifterCurse 开发组 - XuHaoNan & Onixary)`. Those files are all rights reserved and are **not** MIT licensed,
   despite living in this repository. Redistributing or reusing them requires
-  permission from XuHaoNan.
+  permission from XuHaoNan or Onixary.
 
 Dependencies declared in `build.gradle` (Fabric API, GeckoLib, Satin, Pehkui,
 Cardinal Components API, Cloth Config, PlayerAnimator, and so on) are not
@@ -184,9 +184,9 @@ information is in [`fabric.mod.json`](src/main/resources/fabric.mod.json).
 - `src/main/java/net/onixary/shapeShifterCurseFabric/integration/origins/**` 与
   `src/main/resources/assets/origins/**` 派生自 apace100 的 Origins 模组，
   该项目为 MIT 授权，因此这些文件保持 MIT。
-- `tools/SignSystem/**` 的文件头写有 `LICENSE: All Rights Reserved (XuHaoNan)`，
+- `tools/SignSystem/**` 的文件头写有 `LICENSE: All Rights Reserved (ShapeShifterCurse 开发组 - XuHaoNan & Onixary)`，
   属于「保留所有权利」，**不是** MIT 授权。若要再分发或复用其中的代码，
-  需要取得 XuHaoNan 的许可。
+  需要取得 XuHaoNan 或 Onixary 的许可。
 
 `build.gradle` 中声明的依赖（Fabric API、GeckoLib、Satin、Pehkui、Cardinal
 Components API、Cloth Config、PlayerAnimator 等）并未以源码形式在本仓库中再
