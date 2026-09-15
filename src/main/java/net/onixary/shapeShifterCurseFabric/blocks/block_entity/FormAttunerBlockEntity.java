@@ -23,11 +23,15 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FormAttunerBlockEntity extends BlockEntity {
-    public static final int MAX_LEVEL = 10;  // 大约一次检查1770个方块 再大别整成卡服务机了 这玩意性能消耗指数级上升(但物资消耗会逐渐成为线性) 而且绿宝石块当前版本有掠夺塔(不止掠夺塔可以整 但这应该是效率较高的方式 其他方法感觉更卡服 比如超多核心刷铁塔(这个效率不太高) 双维度猪人塔(这个劲大 我以前试过)) 真要卡爆服务器很简单
+    public static int MAX_LEVEL = 4;  // 10级大约一次检查1770个方块 再大别整成卡服务机了 这玩意性能消耗指数级上升(但物资消耗会逐渐成为线性) 而且绿宝石块当前版本有掠夺塔(不止掠夺塔可以整 但这应该是效率较高的方式 其他方法感觉更卡服 比如超多核心刷铁塔(这个效率不太高) 双维度猪人塔(这个劲大 我以前试过)) 真要卡爆服务器很简单
     public int level = 0;
     private int minY = 0;
     private List<BeamSegment> beams = Lists.newArrayList();
     private List<BeamSegment> beamSegments = Lists.newArrayList();
+
+    public static void allocMaxLevel(int maxLevel) {
+        MAX_LEVEL = Math.max(MAX_LEVEL, maxLevel);
+    }
 
     public FormAttunerBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(RegCustomBlock.FORM_ATTUNER_BLOCK_ENTITY, blockPos, blockState);
