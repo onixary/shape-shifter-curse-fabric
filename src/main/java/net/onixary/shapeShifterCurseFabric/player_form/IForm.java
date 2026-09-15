@@ -6,6 +6,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.data.CodexData;
+import net.onixary.shapeShifterCurseFabric.perk.RegPerks;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
@@ -174,5 +175,9 @@ public interface IForm {
 
     default boolean isDynamicForm() {
         return false;
+    }
+
+    default Identifier getPerkTreeID() {
+        return RegPerks.EMPTY_PERK_TREE;
     }
 }

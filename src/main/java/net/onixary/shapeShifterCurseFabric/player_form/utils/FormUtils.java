@@ -223,6 +223,7 @@ public class FormUtils {
         Pair<Identifier, Identifier> layerPair = form.getFormLayer();
         applyLayer(player, layerPair);
         form.afterApplyLayer(player);
+        playerFormComponent.nowPerkTree = form.getPerkTreeID();
         PerkUtils.loadAllPerk(player, PerkUtils.getPlayerNowPerkTreeID(player));
         TrinketUtils.ReApplyAccessoryPowerOnPlayerFormChange(player);
         form.onApplyPowerEnd(player);
