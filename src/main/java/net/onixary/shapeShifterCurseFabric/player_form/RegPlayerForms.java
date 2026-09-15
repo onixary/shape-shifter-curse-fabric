@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.perk.RegPerks;
 import net.onixary.shapeShifterCurseFabric.player_form.forms.*;
 import org.jetbrains.annotations.Nullable;
 
@@ -79,6 +80,13 @@ public class RegPlayerForms {
     // SubForms
     public static IForm SNOW_FOX_3_SUB_MARBLED_POLECAT = registerPlayerForm(new Form_SnowFox3_Sub_MarbledPolecat(ShapeShifterCurseFabric.identifier("snow_fox_3_sub_marbled_polecat")));
     public static IForm BAT_3_SUB_AVALI = registerPlayerForm(new Form_Bat3_Sub_Avali(ShapeShifterCurseFabric.identifier("bat_3_sub_avali")).applyScaleFunc(NORMAL_SCALE_FUNC_BUILDER.apply(0.65f, 1.0f)));
+
+    static {
+        // TODO 发布前一定一定得记得删
+        // ONLY FOR DEVELOPMENT
+        // 正常注册挂注册函数后面 这么写是为了提醒这里发布前得删 而且这么写不太规范 属于未定义行为 拓展这么写炸了不是我的责任
+        ((NormalForm) FAMILIAR_FOX_3).perkTree(RegPerks.T_FFoxTree);
+    }
 
     public static <T extends IForm> T registerPlayerForm(T form) {
         playerForms.put(form.getFormID(), form);

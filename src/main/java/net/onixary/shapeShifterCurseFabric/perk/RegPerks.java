@@ -53,6 +53,15 @@ public class RegPerks {
                     .setIcon(ShapeShifterCurseFabric.identifier("textures/perk/fire_arrow_plus_1.png"))
     );
 
+    public static final Identifier P_FireArrowPlusL2 = registerPerkCommon(
+            new NormalPerk(ShapeShifterCurseFabric.identifier("fire_arrow_plus_2"))
+                    .addPower()
+                    .removePower()
+                    .setName(Text.literal("Fire Arrow Lv2"))
+                    .setDesc(Text.literal("Just A Example Perk!"))
+                    .setIcon(ShapeShifterCurseFabric.identifier("textures/perk/fire_arrow_plus_2.png"))
+    );
+
     // 注意一下 Perk不可删除的 这个只是调试用的 没做Power还原
     public static final Identifier P_Reset = registerPerkCommon(
             new NormalPerk(ShapeShifterCurseFabric.identifier("reset"))
@@ -100,11 +109,12 @@ public class RegPerks {
 
     public static final Identifier T_FFoxTree = registerPerkTree(
             new PerkTree(ShapeShifterCurseFabric.identifier("f_fox_tree"))
-                    .addNode(P_FoxRoot, 0, 0, null)
-                    .addNode(P_Reset_DEBUG, 0, -50, null)
+                    .addNode(P_FoxRoot, 0, 0)
+                    .addNode(P_Reset_DEBUG, 0, -50)
                     .addNode(P_FireBallPlusL1, 1, 25, P_FoxRoot)
                     .addNode(P_FireBallPlusL2, 2, 0, P_FireBallPlusL1)
                     .addNode(P_FireArrowPlusL1, 2, 50, P_FireBallPlusL1)
+                    .addNode(P_FireArrowPlusL2, 3, 25, P_FireBallPlusL2, P_FireArrowPlusL1)
                     .addNode(P_Reset, 2, -50, P_FoxRoot)
     );
 

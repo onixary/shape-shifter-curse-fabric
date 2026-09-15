@@ -6,6 +6,8 @@
 
 # Description   : 生成骑乘动画
 
+# LICENSE       : MIT (ShapeShifterCurse 开发组 - XuHaoNan & Onixary)
+
 # 由于原版骑乘动画是悬空的 并且悬空多少和实体高度有关 所以需要根据实体高度生成
 
 import os

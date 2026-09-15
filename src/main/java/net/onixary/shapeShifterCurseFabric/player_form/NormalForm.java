@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.player_form;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
+import net.onixary.shapeShifterCurseFabric.perk.RegPerks;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
@@ -25,6 +26,7 @@ public class NormalForm implements IForm {
     private @Nullable Consumer<PlayerEntity> applyScaleFunc = null;
     private float defaultEyeScale = 1.0F;
     private boolean powerAnimRegistered = false;
+    private Identifier perkTreeID = RegPerks.EMPTY_PERK_TREE;
 
     public static final BiFunction<Float, Float, Consumer<PlayerEntity>> NORMAL_SCALE_FUNC_BUILDER = (scale, eye_scale) -> (player) -> {
         ScaleData scaleDataWidth = ScaleTypes.WIDTH.getScaleData(player);
@@ -170,5 +172,15 @@ public class NormalForm implements IForm {
     public void onTransform_Finish(PlayerEntity player) {
         PlayerFormComponent pfc = PlayerFormComponent.COMPONENT.get(player);
         pfc.setFallbackForm(null);
+    }
+
+    public NormalForm perkTree(Identifier perkTreeID) {
+        this.perkTreeID = perkTreeID;
+        return this;
+    }
+
+    @Override
+    public Identifier getPerkTreeID() {
+        return this.perkTreeID;
     }
 }

@@ -5,6 +5,8 @@
 # 需要安装的库: Pillow
 # pip install Pillow
 
+# LICENSE       : MIT (ShapeShifterCurse 开发组 - XuHaoNan & Onixary)
+
 import typing
 import os
 

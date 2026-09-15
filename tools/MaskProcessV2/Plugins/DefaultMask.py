@@ -3,6 +3,8 @@
 
 # Author        : XuHaoNan
 
+# LICENSE       : MIT (ShapeShifterCurse 开发组 - XuHaoNan & Onixary)
+
 import typing
 
 RGBA = typing.NamedTuple("RGBA", [("r", int), ("g", int), ("b", int), ("a", int)])

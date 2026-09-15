@@ -3,6 +3,8 @@
 
 # Author        : XuHaoNan
 
+# LICENSE       : MIT (ShapeShifterCurse 开发组 - XuHaoNan & Onixary)
+
 
 import json
 
