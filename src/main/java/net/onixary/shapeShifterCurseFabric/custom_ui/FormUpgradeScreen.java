@@ -33,8 +33,10 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     public static final Identifier LABEL_GAINED = ShapeShifterCurseFabric.identifier("textures/perk/system/gained.png");
     public static final Identifier LABEL_SELECT = ShapeShifterCurseFabric.identifier("textures/perk/system/select.png");
     public static final Identifier LABEL_SELECTED = ShapeShifterCurseFabric.identifier("textures/perk/system/selected.png");
+    public static final Identifier LABEL_CAN_NOT_GAIN = ShapeShifterCurseFabric.identifier("textures/perk/system/can_not_gain.png");
+    public static final Identifier LABEL_DEPEND = ShapeShifterCurseFabric.identifier("textures/perk/system/depend.png");
 
-    public static final HashMap<Identifier, Boolean> perkAvailableMap = new HashMap<>();  // 仅客户端数据 仅影响渲染
+    public static final HashMap<Identifier, Boolean> perkAvailableMap = new HashMap<>();  // 仅客户端数据 仅影响渲染 仅代表服务器获取这个表时无法获取这个Perk
 
     public int tier = -1;
     public @NotNull PerkTree perkTree;
@@ -58,8 +60,8 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
 
     public static final int nodeBaseX = 25;
     public static final int posXPerTier = 50;
-    public static final int nodeLineRootXOffset = 10;
-    public static final int nodeLineDependXOffset = -9;
+    public static final int nodeLineRootXOffset = 11;
+    public static final int nodeLineDependXOffset = -10;
     public static final int LineColor = 0xFF9F9F9F;
 
     public static final int NodeDrawStartX = -7;
@@ -188,19 +190,37 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         int x2 = nodeBaseX + posXPerTier * dependNodeMetaData.tier + nodeLineRootXOffset;
         int y1 = perkNode.y;
         int y2 = dependNodeMetaData.y;
-        int halfX = (x1 + x2) / 2;
-        context.fill(
-                ox + Math.min(x1, halfX), oy + y1,
-                ox + Math.max(x1, halfX) + 1, oy + y1 + 1,
-                LineColor);
-        context.fill(
-                ox + halfX, oy + Math.min(y1, y2),
-                ox + halfX + 1, oy + Math.max(y1, y2) + 1,
-                LineColor);
-        context.fill(
-                ox + Math.min(x2, halfX), oy + y2,
-                ox + Math.max(x2, halfX) + 1, oy + y2 + 1,
-                LineColor);
+        if (perkNode.tier - 1 == dependNodeMetaData.tier) {
+            int halfX = (x1 + x2) / 2;
+            context.fill(
+                    ox + Math.min(x1, halfX), oy + y1,
+                    ox + Math.max(x1, halfX) + 1, oy + y1 + 1,
+                    LineColor);
+            context.fill(
+                    ox + halfX, oy + Math.min(y1, y2),
+                    ox + halfX + 1, oy + Math.max(y1, y2) + 1,
+                    LineColor);
+            context.fill(
+                    ox + Math.min(x2, halfX), oy + y2,
+                    ox + Math.max(x2, halfX) + 1, oy + y2 + 1,
+                    LineColor);
+        } else {
+            // AI整的虚线 看起来应该没有对应的API了 所以尽量别整需要虚线的Perk 这种比较费性能 除非使用贴图 但是这种不太好改
+            int dashLen = posXPerTier / 2 - 10;
+            int dashSize = 2;
+            int gapSize = 1;
+            int lastPixelX = x1;
+            for (int i = 0; i < dashLen; i += dashSize + gapSize) {
+                int to = Math.min(i + dashSize, dashLen);
+                if (i >= to) break;
+                context.fill(
+                        ox + x1 - to, oy + y1,
+                        ox + x1 - i, oy + y1 + 1,
+                        LineColor);
+                lastPixelX = x1 - to;
+            }
+            context.fill(ox + lastPixelX - 2, oy + y1 - 1, ox + lastPixelX - 1, oy + y1 + 2, LineColor);
+        }
     }
 
     // playerGainedPerk 由调用方获取 毕竟drawNode调用频繁
@@ -218,9 +238,16 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         int top = virtualNodeY + NodeSelectStartY;
         if (playerGainedPerk != null && playerGainedPerk.contains(perkNode.perkID)) {
             context.drawTexture(LABEL_GAINED, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
+        } else if (!perkAvailableMap.getOrDefault(perkNode.perkID, true)) {
+            context.drawTexture(LABEL_CAN_NOT_GAIN, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
         }
-        if (perkNode == this.nowSelectNode) {
-            context.drawTexture(LABEL_SELECTED, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
+
+        if (this.nowSelectNode != null) {
+            if (perkNode == this.nowSelectNode) {
+                context.drawTexture(LABEL_SELECTED, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
+            } else if (perkNode.perkID == this.nowSelectNode.dependentPerkID) {
+                context.drawTexture(LABEL_DEPEND, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
+            }
         }
         if (mouseX >= left && mouseX < left + NodeSelectRectWidth && mouseY >= top && mouseY < top + NodeSelectRectHeight) {
             context.drawTexture(LABEL_SELECT, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);

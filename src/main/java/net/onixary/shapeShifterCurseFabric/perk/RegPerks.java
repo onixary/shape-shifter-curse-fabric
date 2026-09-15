@@ -105,7 +105,7 @@ public class RegPerks {
                     .addNode(P_FireBallPlusL1, 1, 25, P_FoxRoot)
                     .addNode(P_FireBallPlusL2, 2, 0, P_FireBallPlusL1)
                     .addNode(P_FireArrowPlusL1, 2, 50, P_FireBallPlusL1)
-                    .addNode(P_Reset, 2, -50, null)
+                    .addNode(P_Reset, 2, -50, P_FoxRoot)
     );
 
     public static Identifier registerPerk(IPerk perk) {
