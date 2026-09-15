@@ -21,13 +21,15 @@ public class RegPerks {
 
     public static final Identifier P_FoxRoot = registerPerkCommon(
             new NormalPerk(ShapeShifterCurseFabric.identifier("fox_root"))
+                    .addPower(ShapeShifterCurseFabric.identifier("_test_perk01"))
+                    .removePower(ShapeShifterCurseFabric.identifier("form_familiar_fox_3_health"))
                     .setIcon(ShapeShifterCurseFabric.identifier("textures/perk/fox_root.png"))
     );
 
     public static final Identifier P_FireBallPlusL1 = registerPerkCommon(
             new NormalPerk(ShapeShifterCurseFabric.identifier("fire_ball_plus_1"))
                     .addPower()
-                    .removePower()
+                    .removePower(ShapeShifterCurseFabric.identifier("_test_perk01"))
                     .setName(Text.literal("Fire Ball Lv1"))
                     .setDesc(Text.literal("Just A Example Perk!"))
                     .setIcon(ShapeShifterCurseFabric.identifier("textures/perk/fire_ball_plus_1.png"))
@@ -51,6 +53,7 @@ public class RegPerks {
                     .setIcon(ShapeShifterCurseFabric.identifier("textures/perk/fire_arrow_plus_1.png"))
     );
 
+    // 注意一下 Perk不可删除的 这个只是调试用的 没做Power还原
     public static final Identifier P_Reset = registerPerkCommon(
             new NormalPerk(ShapeShifterCurseFabric.identifier("reset"))
                     .Repeat(((player, form) -> {
