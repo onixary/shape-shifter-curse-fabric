@@ -12,38 +12,49 @@ import java.util.List;
 
 public class RegPerks {
     public static final HashMap<Identifier, IPerk> PerkRegistry = new HashMap<>();
-    public static final HashMap<Identifier, Identifier> PerkIconRegistry = new HashMap<>();
     public static final HashMap<Identifier, PerkTree> PerkTreeRegistry = new HashMap<>();
+    public static final HashMap<Identifier, IPerkClient> PerkClientRegistry = new HashMap<>();
     public static final HashMap<Identifier, Text> PerkTreeNameRegistry = new HashMap<>();
-    public static final HashMap<Identifier, Text> PerkNameRegistry = new HashMap<>();
-    public static final HashMap<Identifier, Text> PerkDescriptionRegistry = new HashMap<>();
 
     public static final Identifier FALLBACK_PERK_ICON = ShapeShifterCurseFabric.identifier("textures/perk/fallback.png");
     public static final Identifier EMPTY_PERK_TREE = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("empty")));
 
-    public static final Identifier P_FoxRoot = registerPerk(
+    public static final Identifier P_FoxRoot = registerPerkCommon(
             new NormalPerk(ShapeShifterCurseFabric.identifier("fox_root"))
+                    .addPower(ShapeShifterCurseFabric.identifier("_test_perk01"))
+                    .removePower(ShapeShifterCurseFabric.identifier("form_familiar_fox_3_health"))
+                    .setIcon(ShapeShifterCurseFabric.identifier("textures/perk/fox_root.png"))
     );
 
-    public static final Identifier P_FireBallPlusL1 = registerPerk(
+    public static final Identifier P_FireBallPlusL1 = registerPerkCommon(
             new NormalPerk(ShapeShifterCurseFabric.identifier("fire_ball_plus_1"))
                     .addPower()
-                    .removePower()
+                    .removePower(ShapeShifterCurseFabric.identifier("_test_perk01"))
+                    .setName(Text.literal("Fire Ball Lv1"))
+                    .setDesc(Text.literal("Just A Example Perk!"))
+                    .setIcon(ShapeShifterCurseFabric.identifier("textures/perk/fire_ball_plus_1.png"))
     );
 
-    public static final Identifier P_FireBallPlusL2 = registerPerk(
+    public static final Identifier P_FireBallPlusL2 = registerPerkCommon(
             new NormalPerk(ShapeShifterCurseFabric.identifier("fire_ball_plus_2"))
                     .addPower()
                     .removePower()
+                    .setName(Text.literal("Fire Ball Lv2"))
+                    .setDesc(Text.literal("Just A Example Perk!"))
+                    .setIcon(ShapeShifterCurseFabric.identifier("textures/perk/fire_ball_plus_2.png"))
     );
 
-    public static final Identifier P_FireArrowPlusL1 = registerPerk(
+    public static final Identifier P_FireArrowPlusL1 = registerPerkCommon(
             new NormalPerk(ShapeShifterCurseFabric.identifier("fire_arrow_plus_1"))
                     .addPower()
                     .removePower()
+                    .setName(Text.literal("Fire Arrow Lv1"))
+                    .setDesc(Text.literal("Just A Example Perk!"))
+                    .setIcon(ShapeShifterCurseFabric.identifier("textures/perk/fire_arrow_plus_1.png"))
     );
 
-    public static final Identifier P_Reset = registerPerk(
+    // 注意一下 Perk不可删除的 这个只是调试用的 没做Power还原
+    public static final Identifier P_Reset = registerPerkCommon(
             new NormalPerk(ShapeShifterCurseFabric.identifier("reset"))
                     .Repeat(((player, form) -> {
                         Identifier perkTreeID = PerkUtils.getPlayerNowPerkTreeID(player);
@@ -60,24 +71,42 @@ public class RegPerks {
                         List<Identifier> perks = PerkUtils.getPlayerPerks(player, PerkUtils.getPlayerNowPerkTreeID(player));
                         return perks != null && !perks.isEmpty();
                     })
+                    .setName(Text.literal("RESET"))
+                    .setDesc(Text.literal("Reset all perks!"))
+                    .setIcon(ShapeShifterCurseFabric.identifier("textures/perk/reset.png"))
+    );
+
+    public static final Identifier P_Reset_DEBUG = registerPerkCommon(
+            new NormalPerk(ShapeShifterCurseFabric.identifier("reset_debug"))
+                    .Repeat(((player, form) -> {
+                        Identifier perkTreeID = PerkUtils.getPlayerNowPerkTreeID(player);
+                        List<Identifier> perks = PerkUtils.getPlayerPerks(player, perkTreeID);
+                        if (perks != null) {
+                            perks.clear();
+                            PerkUtils.removeInValidPerk(player, perkTreeID);
+                            PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+                            component.sync();
+                        }
+                        player.sendMessage(Text.literal("Perks reset!"), false);
+                    }))
+                    .canGain((player, form) -> {
+                        List<Identifier> perks = PerkUtils.getPlayerPerks(player, PerkUtils.getPlayerNowPerkTreeID(player));
+                        return perks != null && !perks.isEmpty();
+                    })
+                    .setName(Text.literal("RESET_DEBUG"))
+                    .setDesc(Text.literal("Reset all perks! Only for DEBUG!"))
+                    .setIcon(ShapeShifterCurseFabric.identifier("textures/perk/reset.png"))
     );
 
     public static final Identifier T_FFoxTree = registerPerkTree(
             new PerkTree(ShapeShifterCurseFabric.identifier("f_fox_tree"))
                     .addNode(P_FoxRoot, 0, 0, null)
+                    .addNode(P_Reset_DEBUG, 0, -50, null)
                     .addNode(P_FireBallPlusL1, 1, 25, P_FoxRoot)
                     .addNode(P_FireBallPlusL2, 2, 0, P_FireBallPlusL1)
                     .addNode(P_FireArrowPlusL1, 2, 50, P_FireBallPlusL1)
-                    .addNode(P_Reset, 2, -50, null)
+                    .addNode(P_Reset, 2, -50, P_FoxRoot)
     );
-
-    static {
-        registerPerkIcon(P_FoxRoot, ShapeShifterCurseFabric.identifier("textures/perk/fox_root.png"));
-        registerPerkIcon(P_FireBallPlusL1, ShapeShifterCurseFabric.identifier("textures/perk/fire_ball_plus_1.png"));
-        registerPerkIcon(P_FireBallPlusL2, ShapeShifterCurseFabric.identifier("textures/perk/fire_ball_plus_2.png"));
-        registerPerkIcon(P_FireArrowPlusL1, ShapeShifterCurseFabric.identifier("textures/perk/fire_arrow_plus_1.png"));
-        registerPerkIcon(P_Reset, ShapeShifterCurseFabric.identifier("textures/perk/reset.png"));
-    }
 
     public static Identifier registerPerk(IPerk perk) {
         PerkRegistry.put(perk.getID(), perk);
@@ -97,26 +126,33 @@ public class RegPerks {
         return PerkTreeRegistry.get(perkTreeID);
     }
 
-    public static void registerPerkIcon(Identifier perkID, Identifier iconID) {
-        PerkIconRegistry.put(perkID, iconID);
+    public static void registerPerkClientData(IPerkClient perkClient) {
+        PerkClientRegistry.put(perkClient.getID(), perkClient);
     }
+
+    public static @Nullable IPerkClient getPerkClientData(Identifier perkID) {
+        return PerkClientRegistry.get(perkID);
+    }
+
+    public static <PERK extends IPerk & IPerkClient> Identifier registerPerkCommon(PERK perk) {
+        PerkRegistry.put(perk.getID(), perk);
+        PerkClientRegistry.put(perk.getID(), perk);
+        return perk.getID();
+    }
+
 
     public static @Nullable Identifier getPerkIcon(Identifier perkID) {
-        return PerkIconRegistry.get(perkID);
+        IPerkClient perk = getPerkClientData(perkID);
+        return perk != null ? perk.getIcon() : null;
     }
 
-    // TODO 需要加一个注册函数
     public static @NotNull Text getPerkName(Identifier perkID) {
-        if (PerkNameRegistry.containsKey(perkID)) {
-            return PerkNameRegistry.get(perkID);
-        }
-        return Text.translatable("ssc_perk." + perkID.getNamespace() + "." + perkID.getPath() + ".name");
+        IPerkClient perk = getPerkClientData(perkID);
+        return perk != null ? perk.getName() : IPerkClient.getDefaultName(perkID);
     }
 
     public static @NotNull Text getPerkDescription(Identifier perkID) {
-        if (PerkDescriptionRegistry.containsKey(perkID)) {
-            return PerkDescriptionRegistry.get(perkID);
-        }
-        return Text.translatable("ssc_perk." + perkID.getNamespace() + "." + perkID.getPath() + ".description");
+        IPerkClient perk = getPerkClientData(perkID);
+        return perk != null ? perk.getDesc() : IPerkClient.getDefaultDesc(perkID);
     }
 }

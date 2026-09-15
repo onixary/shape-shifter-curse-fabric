@@ -10,10 +10,10 @@ import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallbac
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderProgram;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
@@ -24,6 +24,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.CustomEdiblePower;
 import net.onixary.shapeShifterCurseFabric.additional_power.ItemStorePower;
 import net.onixary.shapeShifterCurseFabric.additional_power.LevitatePower;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
+import net.onixary.shapeShifterCurseFabric.blocks.block_entity_renderer.FormAttunerBeamRenderer;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoonClient;
 import net.onixary.shapeShifterCurseFabric.custom_ui.*;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
@@ -38,7 +39,6 @@ import net.onixary.shapeShifterCurseFabric.minion.MinionRegisterClient;
 import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntityRenderer;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
-import net.onixary.shapeShifterCurseFabric.perk.RegPerks;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.InstinctUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.render.form_render.FormRenderUtils;
@@ -326,7 +326,7 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 				}
 			}
 			if (openTestUIKeybind.isPressed()) {
-				FormUpdateScreen screen = new FormUpdateScreen(Text.literal(""), false, PerkUtils.getPlayerNowPerkTree(client.player));
+				FormUpgradeScreen screen = new FormUpgradeScreen(-1, Text.literal(""), PerkUtils.getPlayerNowPerkTree(client.player));
 				client.setScreen(screen);
 			}
 		});
@@ -335,6 +335,8 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		PatronUtils.OnClientInit();
 		AuthClient.init();
 		RegMenuScreen.init();
+
+		BlockEntityRendererFactories.register(RegCustomBlock.FORM_ATTUNER_BLOCK_ENTITY, FormAttunerBeamRenderer::new);
 	}
 
 	public static ShaderProgram getFurGradientShader() {

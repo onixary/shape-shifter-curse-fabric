@@ -24,6 +24,7 @@ import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoonClient;
 import net.onixary.shapeShifterCurseFabric.custom_ui.*;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
+import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
@@ -76,6 +77,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.MELT_AUTH_SUB_KEY, ModPacketsS2C::receiveNewSubKey);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SET_SUPER_USER_LEVEL, ModPacketsS2C::receiveSetSuperUserLevel);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_PERK_AVAILABILITY, ModPacketsS2C::receivePerkAvailability);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.OPEN_FORM_UPGRADE_MENU, ModPacketsS2C::receiveOpenFormUpgradeMenu);
     }
 
     /* 重构后不需要了 仅用于参考旧实现逻辑
@@ -653,9 +655,17 @@ public class ModPacketsS2C {
         }
         client.execute(() -> {
             if (fullUpdate) {
-                FormUpdateScreen.perkAvailableMap.clear();
+                FormUpgradeScreen.perkAvailableMap.clear();
             }
-            FormUpdateScreen.perkAvailableMap.putAll(perkAvailability);
+            FormUpgradeScreen.perkAvailableMap.putAll(perkAvailability);
+        });
+    }
+
+    public static void receiveOpenFormUpgradeMenu(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        int tier = buf.readInt();
+        client.execute(() -> {
+            FormUpgradeScreen screen = new FormUpgradeScreen(tier, Text.literal(""), PerkUtils.getPlayerNowPerkTree(client.player));
+            client.setScreen(screen);
         });
     }
 }

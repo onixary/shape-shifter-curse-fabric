@@ -18,10 +18,10 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.blocks.block_entity.AltarBlockEntity;
+import net.onixary.shapeShifterCurseFabric.blocks.block_entity.FormAttunerBlockEntity;
 
 public final class RegCustomBlock {
     public static final Block MOONDUST_CRYSTAL_GRIT = register("moondust_crystal_grit", new Block(AbstractBlock.Settings.copy(Blocks.GRAVEL).mapColor(MapColor.PURPLE).strength(0.6f, 0.6f).sounds(BlockSoundGroup.GRAVEL)));
-    // TODO TEMP_WEB_BRIDGE 仅在测试时有物品 发布时记得用 registerWithOutItem
     public static final Block TEMP_WEB_BRIDGE = register("temp_web_bridge", new TempWebBridgeBlock(AbstractBlock.Settings.create().mapColor(MapColor.WHITE_GRAY).strength(4.0f).ticksRandomly().noCollision().dynamicBounds().dropsNothing().solidBlock(Blocks::never).burnable().sounds(BlockSoundGroup.WOOL)));
 
     public static final Block WEB_COMPOSTER = register("web_composter", new WebComposterBlock(AbstractBlock.Settings.create().mapColor(MapColor.WHITE_GRAY).instrument(Instrument.BASS).strength(0.6F).sounds(BlockSoundGroup.WOOL).burnable().nonOpaque()));
@@ -30,6 +30,8 @@ public final class RegCustomBlock {
     public static final Block ALTER_BLOCK = register("altar", new AltarBlock(AbstractBlock.Settings.create().mapColor(MapColor.WHITE_GRAY).instrument(Instrument.BELL).strength(4.0F, 10.0F).sounds(BlockSoundGroup.AMETHYST_BLOCK).nonOpaque()));
     public static final BlockEntityType<AltarBlockEntity> ALTER_BLOCK_ENTITY = registerBlockEntity("altar_block_entity", BlockEntityType.Builder.create(AltarBlockEntity::new, ALTER_BLOCK).build(null));
 
+    public static final Block FORM_ATTUNER_BLOCK = register("form_attuner", new FormAttunerBlock(AbstractBlock.Settings.create().mapColor(MapColor.WHITE_GRAY).instrument(Instrument.BELL).luminance((state) -> 15).strength(4.0F, 10.0F).sounds(BlockSoundGroup.GLASS).nonOpaque()));
+    public static final BlockEntityType<FormAttunerBlockEntity> FORM_ATTUNER_BLOCK_ENTITY = registerBlockEntity("form_attuner_block_entity", BlockEntityType.Builder.create(FormAttunerBlockEntity::new, FORM_ATTUNER_BLOCK).build(null));
 
     public static void ClientInit() {
         // transparent透明模式不写Z，会出现自排序问题遮挡自己，只需要镂空的模型应该使用getCutout
@@ -37,6 +39,7 @@ public final class RegCustomBlock {
         BlockRenderLayerMap.INSTANCE.putBlock(WEB_COMPOSTER, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(DEW_COVERED_COBWEB, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ALTER_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(FORM_ATTUNER_BLOCK, RenderLayer.getCutout());
     }
 
     private static <T extends Block> T registerWithOutItem(String path, T block) {

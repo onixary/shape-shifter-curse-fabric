@@ -16,6 +16,7 @@ import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginLaye
 import net.onixary.shapeShifterCurseFabric.integration.origins.origin.OriginRegistry;
 import net.onixary.shapeShifterCurseFabric.integration.origins.registry.ModComponents;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
+import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.ITransformReason;
@@ -222,6 +223,7 @@ public class FormUtils {
         Pair<Identifier, Identifier> layerPair = form.getFormLayer();
         applyLayer(player, layerPair);
         form.afterApplyLayer(player);
+        PerkUtils.loadAllPerk(player, PerkUtils.getPlayerNowPerkTreeID(player));
         TrinketUtils.ReApplyAccessoryPowerOnPlayerFormChange(player);
         form.onApplyPowerEnd(player);
         // 停止Power动画 目前就蝙蝠用了

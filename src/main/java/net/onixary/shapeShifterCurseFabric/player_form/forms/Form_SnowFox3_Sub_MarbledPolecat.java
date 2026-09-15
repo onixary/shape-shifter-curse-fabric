@@ -73,11 +73,6 @@ public class Form_SnowFox3_Sub_MarbledPolecat extends NormalSubForm implements I
     public static final AnimUtils.AnimationHolderData ANIM_SLEEP =
             new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("weasel_sleep"));
 
-
-
-
-
-
     public static final AbstractAnimStateController IDLE_CONTROLLER = new IdleStayAnimController(
             new WithSneakAnimController(ANIM_IDLE, ANIM_SNEAK_IDLE),  // 保留原潜行 idle
             new OneAnimController(ANIM_IDLE_STAY), // 停留动画

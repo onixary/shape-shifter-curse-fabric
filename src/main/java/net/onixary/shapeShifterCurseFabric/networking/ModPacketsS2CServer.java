@@ -356,4 +356,10 @@ public class ModPacketsS2CServer {
     public static void sendPerkAvailabilityFull(ServerPlayerEntity player) {
         sendPerkAvailability(player, true, PerkUtils.getPlayerPerkAvailability(player));
     }
+
+    public static void sendOpenFormUpgradeMenu(ServerPlayerEntity player, int tier) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeInt(tier);
+        ServerPlayNetworking.send(player, ModPackets.OPEN_FORM_UPGRADE_MENU, buf);
+    }
 }

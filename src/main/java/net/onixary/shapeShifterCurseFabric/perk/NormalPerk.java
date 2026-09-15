@@ -1,9 +1,11 @@
 package net.onixary.shapeShifterCurseFabric.perk;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
-public class NormalPerk implements IPerk {
+public class NormalPerk implements IPerk, IPerkClient {
     public final Identifier perkID;
     public final List<Identifier> powerAdd = new ArrayList<>();
     public final List<Identifier> powerRemove = new ArrayList<>();
@@ -19,6 +21,10 @@ public class NormalPerk implements IPerk {
     public boolean repeatable = false;
     public BiConsumer<PlayerEntity, IForm> onGainFunc = null;
     public BiPredicate<PlayerEntity, IForm> canGainCondition = null;
+
+    public @Nullable Identifier Icon = null;
+    public @Nullable Text Name = null;
+    public @Nullable Text Desc = null;
 
     public NormalPerk(Identifier perkID) {
         this.perkID = perkID;
@@ -90,5 +96,44 @@ public class NormalPerk implements IPerk {
     public NormalPerk canGain(BiPredicate<PlayerEntity, IForm> canGainCondition) {
         this.canGainCondition = canGainCondition;
         return this;
+    }
+
+    public NormalPerk setIcon(Identifier icon) {
+        this.Icon = icon;
+        return this;
+    }
+
+    public NormalPerk setName(Text name) {
+        this.Name = name;
+        return this;
+    }
+
+    public NormalPerk setDesc(Text desc) {
+        this.Desc = desc;
+        return this;
+    }
+
+    @Override
+    public @Nullable Identifier getIcon() {
+        if (Icon != null) {
+            return Icon;
+        }
+        return IPerkClient.super.getIcon();
+    }
+
+    @Override
+    public @Nullable Text getName() {
+        if (Name != null) {
+            return Name;
+        }
+        return IPerkClient.super.getName();
+    }
+
+    @Override
+    public @Nullable Text getDesc() {
+        if (Desc != null) {
+            return Desc;
+        }
+        return IPerkClient.super.getDesc();
     }
 }
