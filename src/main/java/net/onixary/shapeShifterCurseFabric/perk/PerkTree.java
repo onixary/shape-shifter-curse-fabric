@@ -4,10 +4,7 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 // Common Side
 public class PerkTree {
@@ -15,13 +12,20 @@ public class PerkTree {
         public final Identifier perkID;
         public final int tier;
         public final int y;
-        public final @Nullable Identifier dependentPerkID;
+        public final @NotNull ArrayList<@NotNull Identifier> dependentPerkIDs;
 
-        public PerkNode(Identifier perkID, int tier, int y, @Nullable Identifier dependentPerkID) {
+        public PerkNode(Identifier perkID, int tier, int y) {
             this.perkID = perkID;
             this.tier = tier;
             this.y = y;
-            this.dependentPerkID = dependentPerkID;
+            this.dependentPerkIDs = new ArrayList<>();
+        }
+
+        public PerkNode(Identifier perkID, int tier, int y, @NotNull Identifier... dependentPerkIDs) {
+            this.perkID = perkID;
+            this.tier = tier;
+            this.y = y;
+            this.dependentPerkIDs = new ArrayList<>(Arrays.asList(dependentPerkIDs));
         }
     }
 
@@ -37,8 +41,12 @@ public class PerkTree {
         return treeID;
     }
 
-    public PerkTree addNode(Identifier perkID, int tier, int y, @Nullable Identifier dependentPerkID) {
-        return this.addNode(new PerkNode(perkID, tier, y, dependentPerkID));
+    public PerkTree addNode(Identifier perkID, int tier, int y) {
+        return this.addNode(new PerkNode(perkID, tier, y));
+    }
+
+    public PerkTree addNode(Identifier perkID, int tier, int y, Identifier... dependentPerkIDs) {
+        return this.addNode(new PerkNode(perkID, tier, y, dependentPerkIDs));
     }
 
     public PerkTree addNode(PerkNode perkNode) {
@@ -51,10 +59,10 @@ public class PerkTree {
         return perkNodeMap.get(perkID);
     }
 
-    public @Nullable PerkNode getDependentNode(Identifier perkID) {
+    public @NotNull List<PerkNode> getDependentNode(Identifier perkID) {
         PerkNode perkNode = getNode(perkID);
-        if (perkNode != null && perkNode.dependentPerkID != null) {
-            return getNode(perkNode.dependentPerkID);
+        if (perkNode != null) {
+            return perkNodes.stream().filter(perkNode1 -> perkNode1.dependentPerkIDs.contains(perkID)).toList();
         }
         return null;
     }

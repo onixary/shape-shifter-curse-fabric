@@ -180,46 +180,48 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     // Utils
 
     public void drawConnectLine(DrawContext context, PerkTree.PerkNode perkNode) {
-        Identifier depend = perkNode.dependentPerkID;
-        if (depend == null) return;
-        PerkTree.PerkNode dependNodeMetaData = perkTree.getNode(depend);
-        if (dependNodeMetaData == null) return;
-        int ox = nodeCenter.x;
-        int oy = nodeCenter.y;
-        int x1 = nodeBaseX + posXPerTier * perkNode.tier + nodeLineDependXOffset;
-        int x2 = nodeBaseX + posXPerTier * dependNodeMetaData.tier + nodeLineRootXOffset;
-        int y1 = perkNode.y;
-        int y2 = dependNodeMetaData.y;
-        if (perkNode.tier - 1 == dependNodeMetaData.tier) {
-            int halfX = (x1 + x2) / 2;
-            context.fill(
-                    ox + Math.min(x1, halfX), oy + y1,
-                    ox + Math.max(x1, halfX) + 1, oy + y1 + 1,
-                    LineColor);
-            context.fill(
-                    ox + halfX, oy + Math.min(y1, y2),
-                    ox + halfX + 1, oy + Math.max(y1, y2) + 1,
-                    LineColor);
-            context.fill(
-                    ox + Math.min(x2, halfX), oy + y2,
-                    ox + Math.max(x2, halfX) + 1, oy + y2 + 1,
-                    LineColor);
-        } else {
-            // AI整的虚线 看起来应该没有对应的API了 所以尽量别整需要虚线的Perk 这种比较费性能 除非使用贴图 但是这种不太好改
-            int dashLen = posXPerTier / 2 - 10;
-            int dashSize = 2;
-            int gapSize = 1;
-            int lastPixelX = x1;
-            for (int i = 0; i < dashLen; i += dashSize + gapSize) {
-                int to = Math.min(i + dashSize, dashLen);
-                if (i >= to) break;
+        List<Identifier> depends = perkNode.dependentPerkIDs;
+        if (depends.isEmpty()) return;
+        for (Identifier depend : depends) {
+            PerkTree.PerkNode dependNodeMetaData = perkTree.getNode(depend);
+            if (dependNodeMetaData == null) return;
+            int ox = nodeCenter.x;
+            int oy = nodeCenter.y;
+            int x1 = nodeBaseX + posXPerTier * perkNode.tier + nodeLineDependXOffset;
+            int x2 = nodeBaseX + posXPerTier * dependNodeMetaData.tier + nodeLineRootXOffset;
+            int y1 = perkNode.y;
+            int y2 = dependNodeMetaData.y;
+            if (perkNode.tier - 1 == dependNodeMetaData.tier) {
+                int halfX = (x1 + x2) / 2;
                 context.fill(
-                        ox + x1 - to, oy + y1,
-                        ox + x1 - i, oy + y1 + 1,
+                        ox + Math.min(x1, halfX), oy + y1,
+                        ox + Math.max(x1, halfX) + 1, oy + y1 + 1,
                         LineColor);
-                lastPixelX = x1 - to;
+                context.fill(
+                        ox + halfX, oy + Math.min(y1, y2),
+                        ox + halfX + 1, oy + Math.max(y1, y2) + 1,
+                        LineColor);
+                context.fill(
+                        ox + Math.min(x2, halfX), oy + y2,
+                        ox + Math.max(x2, halfX) + 1, oy + y2 + 1,
+                        LineColor);
+            } else {
+                // AI整的虚线 看起来应该没有对应的API了 所以尽量别整需要虚线的Perk 这种比较费性能 除非使用贴图 但是这种不太好改
+                int dashLen = posXPerTier / 2 - 10;
+                int dashSize = 2;
+                int gapSize = 1;
+                int lastPixelX = x1;
+                for (int i = 0; i < dashLen; i += dashSize + gapSize) {
+                    int to = Math.min(i + dashSize, dashLen);
+                    if (i >= to) break;
+                    context.fill(
+                            ox + x1 - to, oy + y1,
+                            ox + x1 - i, oy + y1 + 1,
+                            LineColor);
+                    lastPixelX = x1 - to;
+                }
+                context.fill(ox + lastPixelX - 2, oy + y1 - 1, ox + lastPixelX - 1, oy + y1 + 2, LineColor);
             }
-            context.fill(ox + lastPixelX - 2, oy + y1 - 1, ox + lastPixelX - 1, oy + y1 + 2, LineColor);
         }
     }
 
@@ -245,7 +247,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         if (this.nowSelectNode != null) {
             if (perkNode == this.nowSelectNode) {
                 context.drawTexture(LABEL_SELECTED, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
-            } else if (perkNode.perkID == this.nowSelectNode.dependentPerkID) {
+            } else if (this.nowSelectNode.dependentPerkIDs.contains(perkNode.perkID)) {
                 context.drawTexture(LABEL_DEPEND, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
             }
         }
