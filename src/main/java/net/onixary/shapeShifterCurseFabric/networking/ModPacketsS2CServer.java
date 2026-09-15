@@ -12,6 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
+import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
@@ -339,5 +340,20 @@ public class ModPacketsS2CServer {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeInt(level);
         ServerPlayNetworking.send(player, ModPackets.SET_SUPER_USER_LEVEL, buf);
+    }
+
+    public static void sendPerkAvailability(ServerPlayerEntity player, boolean fullUpdate, HashMap<Identifier, Boolean> perkAvailability) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeBoolean(fullUpdate);
+        buf.writeInt(perkAvailability.size());
+        for (Map.Entry<Identifier, Boolean> entry : perkAvailability.entrySet()) {
+            buf.writeIdentifier(entry.getKey());
+            buf.writeBoolean(entry.getValue());
+        }
+        ServerPlayNetworking.send(player, ModPackets.SYNC_PERK_AVAILABILITY, buf);
+    }
+
+    public static void sendPerkAvailabilityFull(ServerPlayerEntity player) {
+        sendPerkAvailability(player, true, PerkUtils.getPlayerPerkAvailability(player));
     }
 }

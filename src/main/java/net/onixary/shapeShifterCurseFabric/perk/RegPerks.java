@@ -54,7 +54,12 @@ public class RegPerks {
                             PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
                             component.sync();
                         }
+                        player.sendMessage(Text.literal("Perks reset!"), false);
                     }))
+                    .canGain((player, form) -> {
+                        List<Identifier> perks = PerkUtils.getPlayerPerks(player, PerkUtils.getPlayerNowPerkTreeID(player));
+                        return perks != null && !perks.isEmpty();
+                    })
     );
 
     public static final Identifier T_FFoxTree = registerPerkTree(

@@ -22,12 +22,9 @@ import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
 import net.onixary.shapeShifterCurseFabric.client.ClientPlayerStateManager;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoonClient;
-import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenu;
-import net.onixary.shapeShifterCurseFabric.custom_ui.FormColorSelectMenuV2;
-import net.onixary.shapeShifterCurseFabric.custom_ui.NormalFormSelectScreen;
+import net.onixary.shapeShifterCurseFabric.custom_ui.*;
 import net.onixary.shapeShifterCurseFabric.data.StaticParams;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
-import net.onixary.shapeShifterCurseFabric.custom_ui.PatronFormSelectScreen;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
@@ -78,6 +75,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.REQUEST_PATRON_AUTH_FILE, ModPacketsS2C::receiveRequestPatronAuthFile);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.MELT_AUTH_SUB_KEY, ModPacketsS2C::receiveNewSubKey);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SET_SUPER_USER_LEVEL, ModPacketsS2C::receiveSetSuperUserLevel);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_PERK_AVAILABILITY, ModPacketsS2C::receivePerkAvailability);
     }
 
     /* 重构后不需要了 仅用于参考旧实现逻辑
@@ -638,5 +636,26 @@ public class ModPacketsS2C {
         buf.writeIdentifier(perkTreeID);
         buf.writeIdentifier(perkID);
         ClientPlayNetworking.send(ADD_PERK, buf);
+    }
+
+    public static void sendRequestPerkAvailability() {
+        ClientPlayNetworking.send(REQUEST_PERK_AVAILABILITY, PacketByteBufs.create());
+    }
+
+    public static void receivePerkAvailability(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        boolean fullUpdate = buf.readBoolean();
+        int updateCount = buf.readInt();
+        HashMap<Identifier, Boolean> perkAvailability = new HashMap<>();
+        for (int i = 0; i < updateCount; i++) {
+            Identifier perkID = buf.readIdentifier();
+            boolean available = buf.readBoolean();
+            perkAvailability.put(perkID, available);
+        }
+        client.execute(() -> {
+            if (fullUpdate) {
+                FormUpdateScreen.perkAvailableMap.clear();
+            }
+            FormUpdateScreen.perkAvailableMap.putAll(perkAvailability);
+        });
     }
 }

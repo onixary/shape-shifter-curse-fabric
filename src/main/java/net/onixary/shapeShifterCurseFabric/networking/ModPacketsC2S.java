@@ -125,6 +125,11 @@ public class ModPacketsC2S {
                 ADD_PERK,
                 ModPacketsC2S::receiveAddPerk
         );
+
+        ServerPlayNetworking.registerGlobalReceiver(
+                REQUEST_PERK_AVAILABILITY,
+                ModPacketsC2S::receiveRequestPerkAvailability
+        );
     }
 
     private static void onPressStartBookButton(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
@@ -319,6 +324,12 @@ public class ModPacketsC2S {
         Identifier perkId = packetByteBuf.readIdentifier();
         minecraftServer.execute(() -> {
             PerkUtils.addPerkFromClient(playerEntity, perkTreeId, perkId);
+        });
+    }
+
+    private static void receiveRequestPerkAvailability(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
+        minecraftServer.execute(() -> {
+            ModPacketsS2CServer.sendPerkAvailabilityFull(playerEntity);
         });
     }
 }
