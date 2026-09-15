@@ -6,6 +6,8 @@
 
 # Description   : 让lang对齐
 
+# LICENSE       : MIT (ShapeShifterCurse 开发组 - XuHaoNan & Onixary)
+
 # 由于rich_lang里有换行 虽然删除换行不会出现问题 但会大幅度降低后续修改可读性
 # 如果将脚本移动时 请修改LangFolderPath
 

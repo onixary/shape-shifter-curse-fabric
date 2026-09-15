@@ -2,6 +2,9 @@
 # -*- coding: UTF-8 -*-
 
 # Author        : XuHaoNan
+
+# LICENSE       : MIT (ShapeShifterCurse 开发组 - XuHaoNan & Onixary)
+
 # 需要安装的库: Pillow
 # pip install Pillow
 

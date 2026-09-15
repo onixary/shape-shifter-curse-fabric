@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 # Author        : XuHaoNan
-# LICENSE       : All Rights Reserved (XuHaoNan)
+# LICENSE       : All Rights Reserved (ShapeShifterCurse 开发组 - XuHaoNan & Onixary)
 
 import ScriptTypes
 import PluginUtils

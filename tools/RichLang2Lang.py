@@ -6,6 +6,8 @@
 # Author        : XuHaoNan
 # Version       : 1.1.0 (Modified for auto path detection)
 
+# LICENSE       : MIT (ShapeShifterCurse 开发组 - XuHaoNan & Onixary)
+
 import json
 import logging
 import os
