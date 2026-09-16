@@ -87,6 +87,8 @@ public class RegCustomItem {
     public static final Item WEB_PROJECTILE = register("web_projectile", new Item(new Item.Settings()));
     public static final Item SILK_DEW = register("silk_dew", new SilkDew(new Item.Settings()));
 
+    public static final Item RIPPLE_MIRROR = register("ripple_mirror", new RippleMirror(new Item.Settings()));
+
     public static ItemStack buildPotion(Item PotionItem, Potion potion) {
         ItemStack potionStack = new ItemStack(PotionItem);
         PotionUtil.setPotion(potionStack, potion);
@@ -158,6 +160,7 @@ public class RegCustomItem {
                 entries.add(AUXILIARY_AXE);
                 entries.add(SELECT_FORM_ITEM);
                 entries.add(SILK_DEW);
+                entries.add(RIPPLE_MIRROR);
                 // 方块物品注册
                 entries.add(MOONDUST_CRYSTAL_GRIT);
                 entries.add(WEB_COMPOSTER);
