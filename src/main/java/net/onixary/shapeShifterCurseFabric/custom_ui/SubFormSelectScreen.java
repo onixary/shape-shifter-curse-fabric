@@ -45,10 +45,11 @@ public class SubFormSelectScreen extends Screen {
         if (playerForm == null) {
             return availableForms;
         }
-        List<IForm> subFormIDs = RegPlayerForms.getSubForms(playerForm);
-        subFormIDs.add(playerForm);
-        subFormIDs.removeIf(form -> form.isEquals(nowForm));
-        availableForms.addAll(subFormIDs.stream().map(IForm::getFormID).toList());
+        List<IForm> subForms = RegPlayerForms.getSubForms(playerForm);
+        subForms.add(playerForm);
+        subForms.removeIf(form -> form.isEquals(nowForm));
+        subForms.removeIf(form -> !(FormUtils.isFormCanUse(this.client.player, form)));
+        availableForms.addAll(subForms.stream().map(IForm::getFormID).toList());
         return availableForms;
     }
 
