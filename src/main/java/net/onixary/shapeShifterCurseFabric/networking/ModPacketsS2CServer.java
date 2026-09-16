@@ -362,4 +362,9 @@ public class ModPacketsS2CServer {
         buf.writeInt(tier);
         ServerPlayNetworking.send(player, ModPackets.OPEN_FORM_UPGRADE_MENU, buf);
     }
+
+    public static void sendOpenSelectSubFormMenu(ServerPlayerEntity player) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        ServerPlayNetworking.send(player, ModPackets.OPEN_SELECT_SUB_FORM_MENU, buf);
+    }
 }

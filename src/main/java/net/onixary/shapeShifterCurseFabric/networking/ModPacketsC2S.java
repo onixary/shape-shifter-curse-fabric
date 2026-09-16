@@ -4,6 +4,8 @@ import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
@@ -16,6 +18,7 @@ import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnJumpPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnSprintingToSneakingPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
 import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
+import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
 import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
@@ -343,15 +346,47 @@ public class ModPacketsC2S {
     private static void receiveRequestSetSubForm(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
         Identifier subFormID = packetByteBuf.readIdentifier();
         IForm form = RegPlayerForms.getPlayerForm(subFormID);
-        if (!(form instanceof ISubForm subForm) || !subForm.isSubForm()) {
+        IForm playerNowForm = FormUtils.getPlayerForm(playerEntity);
+        if (form == null || form.isEquals(playerNowForm)) {
             return;
         }
-        boolean canUseThisForm = FormUtils.isFormCanUse(playerEntity, subForm);
+        IForm fM1 = null;
+        IForm fM2 = null;
+        if (form instanceof ISubForm subForm && subForm.isSubForm()) {
+            fM1 = (subForm).getMasterForm();
+        } else {
+            fM1 = form;
+        }
+        if (playerNowForm instanceof ISubForm subForm && subForm.isSubForm()) {
+            fM2 = subForm.getMasterForm();
+        } else {
+            fM2 = playerNowForm;
+        }
+        if (fM1 == null || !fM1.isEquals(fM2)) {
+            return;
+        }
+        boolean canUseThisForm = FormUtils.isFormCanUse(playerEntity, form);
         if (!canUseThisForm) {
             return;
         }
-        // TODO 检查背包里是否有对应物品
-        TransformManager.forceTransform(playerEntity, subForm, false);
+        minecraftServer.execute(() -> {
+            if (!playerEntity.getAbilities().creativeMode) {
+                boolean findItem = false;
+                PlayerInventory playerInventory = playerEntity.getInventory();
+                for (int i = 0; i < playerInventory.size(); i++) {
+                    ItemStack stack = playerInventory.getStack(i);
+                    if (stack.isOf(RegCustomItem.RIPPLE_MIRROR)) {
+                        stack.decrement(1);
+                        findItem = true;
+                        break;
+                    }
+                }
+                if (!findItem) {
+                    return;
+                }
+            }
+            TransformManager.forceTransform(playerEntity, form, false);
+        });
     }
 }
 

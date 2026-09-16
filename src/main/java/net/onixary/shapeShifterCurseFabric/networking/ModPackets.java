@@ -77,5 +77,6 @@ public class ModPackets {
     public static final Identifier SYNC_PERK_AVAILABILITY = new Identifier(ShapeShifterCurseFabric.MOD_ID, "sync_perk_availability");
     public static final Identifier OPEN_FORM_UPGRADE_MENU = new Identifier(ShapeShifterCurseFabric.MOD_ID, "open_form_upgrade_menu");
 
+    public static final Identifier OPEN_SELECT_SUB_FORM_MENU = new Identifier(ShapeShifterCurseFabric.MOD_ID, "open_select_sub_form_menu");
     public static final Identifier REQUEST_SET_SUB_FORM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "request_set_sub_form");
 }

@@ -78,6 +78,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SET_SUPER_USER_LEVEL, ModPacketsS2C::receiveSetSuperUserLevel);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_PERK_AVAILABILITY, ModPacketsS2C::receivePerkAvailability);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.OPEN_FORM_UPGRADE_MENU, ModPacketsS2C::receiveOpenFormUpgradeMenu);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.OPEN_SELECT_SUB_FORM_MENU, ModPacketsS2C::receiveOpenSelectSubFormMenu);
     }
 
     /* 重构后不需要了 仅用于参考旧实现逻辑
@@ -405,7 +406,7 @@ public class ModPacketsS2C {
 
     public static void receiveOldOpenPatronFormSelectMenu(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         client.execute(() -> {
-            Screen screen = new PatronFormSelectScreen(Text.literal("PatronFromSelectScreen"), client.player);
+            Screen screen = new OldPatronFormSelectScreen(Text.literal("PatronFromSelectScreen"), client.player);
             client.setScreen(screen);
         });
     }
@@ -665,6 +666,14 @@ public class ModPacketsS2C {
         int tier = buf.readInt();
         client.execute(() -> {
             FormUpgradeScreen screen = new FormUpgradeScreen(tier, Text.literal(""), PerkUtils.getPlayerNowPerkTree(client.player));
+            client.setScreen(screen);
+        });
+    }
+
+
+    public static void receiveOpenSelectSubFormMenu(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        client.execute(() -> {
+            SubFormSelectScreen screen = new SubFormSelectScreen(Text.literal(""));
             client.setScreen(screen);
         });
     }

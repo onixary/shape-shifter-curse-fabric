@@ -18,7 +18,7 @@ import java.util.List;
 
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
-public class PatronFormSelectScreen extends Screen {
+public class OldPatronFormSelectScreen extends Screen {
     private static final Identifier page_texID = new Identifier(MOD_ID,"textures/gui/patron_form_select_menu.png");
     private final ClientPlayerEntity player;
 
@@ -28,7 +28,7 @@ public class PatronFormSelectScreen extends Screen {
     private final List<Identifier> buttonForms = new ArrayList<>();
     private final List<ButtonWidget> buttonWidgetList = new ArrayList<>();
 
-    public PatronFormSelectScreen(Text title, ClientPlayerEntity player) {
+    public OldPatronFormSelectScreen(Text title, ClientPlayerEntity player) {
         super(title);
         this.player = player;
     }
