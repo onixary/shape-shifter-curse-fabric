@@ -4,7 +4,7 @@ separately under CC BY-NC 4.0 - see LICENSE-CC-BY-NC-4.0.txt and LICENSING.md.
 
 The MIT License (MIT)
 
-Copyright (c) 2025 onixary
+Copyright (c) 2025~2026 ShapeShifterCurse Development Team - onixary, XuHaoNan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

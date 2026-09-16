@@ -1,3 +1,6 @@
+# Author        : Onixary
+# LICENSE       : MIT (ShapeShifterCurse 开发组 - Onixary & XuHaoNan)
+
 from PIL import Image
 import os
 from collections import defaultdict
