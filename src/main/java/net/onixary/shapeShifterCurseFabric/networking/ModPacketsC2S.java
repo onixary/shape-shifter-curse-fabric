@@ -20,9 +20,11 @@ import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
 import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
+import net.onixary.shapeShifterCurseFabric.player_form.ISubForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.PlayerSkinComponent;
 import net.onixary.shapeShifterCurseFabric.player_form.skin.RegPlayerSkinComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.Verify.AuthServer;
@@ -97,7 +99,7 @@ public class ModPacketsC2S {
         );
 
         ServerPlayNetworking.registerGlobalReceiver(
-                SET_PATRON_FORM,
+                OLD_SET_PATRON_FORM,
                 net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S::receiveSetPatronForm
         );
 
@@ -129,6 +131,11 @@ public class ModPacketsC2S {
         ServerPlayNetworking.registerGlobalReceiver(
                 REQUEST_PERK_AVAILABILITY,
                 ModPacketsC2S::receiveRequestPerkAvailability
+        );
+
+        ServerPlayNetworking.registerGlobalReceiver(
+                REQUEST_SET_SUB_FORM,
+                ModPacketsC2S::receiveRequestSetSubForm
         );
     }
 
@@ -331,6 +338,20 @@ public class ModPacketsC2S {
         minecraftServer.execute(() -> {
             ModPacketsS2CServer.sendPerkAvailabilityFull(playerEntity);
         });
+    }
+
+    private static void receiveRequestSetSubForm(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
+        Identifier subFormID = packetByteBuf.readIdentifier();
+        IForm form = RegPlayerForms.getPlayerForm(subFormID);
+        if (!(form instanceof ISubForm subForm) || !subForm.isSubForm()) {
+            return;
+        }
+        boolean canUseThisForm = FormUtils.isFormCanUse(playerEntity, subForm);
+        if (!canUseThisForm) {
+            return;
+        }
+        // TODO 检查背包里是否有对应物品
+        TransformManager.forceTransform(playerEntity, subForm, false);
     }
 }
 

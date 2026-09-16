@@ -6,7 +6,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -27,7 +26,7 @@ public class PatronFormItem extends Item {
             return super.use(world, user, hand);
         }
         if (!world.isClient) {
-            ModPacketsS2CServer.OpenPatronFormSelectMenu(((ServerPlayerEntity) user));
+            ModPacketsS2CServer.OpenOldPatronFormSelectMenu(((ServerPlayerEntity) user));
         }
         return super.use(world, user, hand);
     }

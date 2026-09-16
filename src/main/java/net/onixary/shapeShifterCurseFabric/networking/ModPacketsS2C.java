@@ -66,8 +66,8 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.LOGIN_PACKET, ModPacketsS2C::onPlayerConnectServer);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.ACTIVE_VIRTUAL_TOTEM, ModPacketsS2C::receiveActiveVirtualTotem);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_POWER_ANIM_DATA_TO_CLIENT, ModPacketsS2C::receivePowerAnimationData);
-        ClientPlayNetworking.registerGlobalReceiver(ModPackets.UPDATE_PATRON_LEVEL, ModPacketsS2C::receiveUpdatePatronLevel);
-        ClientPlayNetworking.registerGlobalReceiver(ModPackets.OPEN_PATRON_FORM_SELECT_MENU, ModPacketsS2C::receiveOpenPatronFormSelectMenu);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.OLD_UPDATE_PATRON_LEVEL, ModPacketsS2C::receiveOldUpdatePatronLevel);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.OLD_OPEN_PATRON_FORM_SELECT_MENU, ModPacketsS2C::receiveOldOpenPatronFormSelectMenu);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.OPEN_FORM_SELECT_MENU, ModPacketsS2C::receiveOpenFormSelectMenu);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SET_NO_JUMP_TICK, ModPacketsS2C::receiveSetNoJumpTick);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SET_NO_MOVE_TICK, ModPacketsS2C::receiveSetNoMoveTick);
@@ -390,7 +390,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.send(REQUEST_POWER_ANIM_DATA, buf);
     }
 
-    public static void receiveUpdatePatronLevel(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+    public static void receiveOldUpdatePatronLevel(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         int PairCount = buf.readInt();
         HashMap<UUID, Integer> map = new HashMap<>();
         for (int i = 0; i < PairCount; i++) {
@@ -403,7 +403,7 @@ public class ModPacketsS2C {
         });
     }
 
-    public static void receiveOpenPatronFormSelectMenu(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+    public static void receiveOldOpenPatronFormSelectMenu(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         client.execute(() -> {
             Screen screen = new PatronFormSelectScreen(Text.literal("PatronFromSelectScreen"), client.player);
             client.setScreen(screen);
@@ -419,10 +419,10 @@ public class ModPacketsS2C {
         });
     }
 
-    public static void sendSetPatronForm(Identifier formID) {
+    public static void sendOldSetPatronForm(Identifier formID) {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeIdentifier(formID);
-        ClientPlayNetworking.send(SET_PATRON_FORM, buf);
+        ClientPlayNetworking.send(OLD_SET_PATRON_FORM, buf);
     }
 
     public static void sendSetForm(Identifier formID, UUID target, boolean immediate) {
@@ -667,5 +667,14 @@ public class ModPacketsS2C {
             FormUpgradeScreen screen = new FormUpgradeScreen(tier, Text.literal(""), PerkUtils.getPlayerNowPerkTree(client.player));
             client.setScreen(screen);
         });
+    }
+
+    public static void sendSetSubForm(Identifier formID) {
+        if (formID == null) {
+            return;
+        }
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeIdentifier(formID);
+        ClientPlayNetworking.send(REQUEST_SET_SUB_FORM, buf);
     }
 }

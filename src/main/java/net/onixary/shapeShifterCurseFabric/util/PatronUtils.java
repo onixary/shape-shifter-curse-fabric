@@ -334,7 +334,7 @@ public class PatronUtils {
                         PatronLevels.put(PlayerUUID, Level);
                     }
                 }
-                ModPacketsS2CServer.updatePatronLevel(server);
+                ModPacketsS2CServer.updateOldPatronLevel(server);
             }
             catch (Exception e) {
                 ShapeShifterCurseFabric.LOGGER.error("Failed to parse PatronData", e);

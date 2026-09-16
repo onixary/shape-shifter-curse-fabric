@@ -46,9 +46,9 @@ public class ModPackets {
     public static final Identifier ACTIVE_VIRTUAL_TOTEM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "active_virtual_totem");
 
     // 老版
-    public static final Identifier UPDATE_PATRON_LEVEL = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_patron_level");
-    public static final Identifier OPEN_PATRON_FORM_SELECT_MENU = new Identifier(ShapeShifterCurseFabric.MOD_ID, "open_patron_form_select_menu");
-    public static final Identifier SET_PATRON_FORM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "set_patron_form");
+    public static final Identifier OLD_UPDATE_PATRON_LEVEL = new Identifier(ShapeShifterCurseFabric.MOD_ID, "old_update_patron_level");
+    public static final Identifier OLD_OPEN_PATRON_FORM_SELECT_MENU = new Identifier(ShapeShifterCurseFabric.MOD_ID, "old_open_patron_form_select_menu");
+    public static final Identifier OLD_SET_PATRON_FORM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "old_set_patron_form");
 
     // S2C 结构: UUID-玩家UUID Boolean-是否启用动画, (仅在启用动画时包含)Identifier-动画ID, Int-动画次数. Int-动画时长
     public static final Identifier UPDATE_POWER_ANIM_DATA_TO_CLIENT = new Identifier(ShapeShifterCurseFabric.MOD_ID, "update_power_anim_data_to_client");
@@ -76,4 +76,6 @@ public class ModPackets {
     public static final Identifier REQUEST_PERK_AVAILABILITY = new Identifier(ShapeShifterCurseFabric.MOD_ID, "request_perk_availability");
     public static final Identifier SYNC_PERK_AVAILABILITY = new Identifier(ShapeShifterCurseFabric.MOD_ID, "sync_perk_availability");
     public static final Identifier OPEN_FORM_UPGRADE_MENU = new Identifier(ShapeShifterCurseFabric.MOD_ID, "open_form_upgrade_menu");
+
+    public static final Identifier REQUEST_SET_SUB_FORM = new Identifier(ShapeShifterCurseFabric.MOD_ID, "request_set_sub_form");
 }

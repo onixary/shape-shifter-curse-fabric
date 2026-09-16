@@ -55,7 +55,7 @@ public class PatronFormSelectScreen extends Screen {
     }
 
     private void SendSetPatronForm(Identifier formID) {
-        ModPacketsS2C.sendSetPatronForm(formID);
+        ModPacketsS2C.sendOldSetPatronForm(formID);
     }
 
     private void LoadPage() {
