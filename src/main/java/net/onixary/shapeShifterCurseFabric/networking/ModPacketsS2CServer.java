@@ -205,7 +205,7 @@ public class ModPacketsS2CServer {
         }
     }
 
-    public static void updatePatronLevel(MinecraftServer server) {
+    public static void updateOldPatronLevel(MinecraftServer server) {
         HashMap<UUID, Integer> patronLevels = PatronUtils.PatronLevels;
         int PairCount = patronLevels.size();
         for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
@@ -215,13 +215,13 @@ public class ModPacketsS2CServer {
                 buf.writeUuid(entry.getKey());
                 buf.writeInt(entry.getValue());
             }
-            ServerPlayNetworking.send(player, ModPackets.UPDATE_PATRON_LEVEL, buf);
+            ServerPlayNetworking.send(player, ModPackets.OLD_UPDATE_PATRON_LEVEL, buf);
         }
     }
 
-    public static void OpenPatronFormSelectMenu(ServerPlayerEntity player) {
+    public static void OpenOldPatronFormSelectMenu(ServerPlayerEntity player) {
         PacketByteBuf buf = PacketByteBufs.create();
-        ServerPlayNetworking.send(player, ModPackets.OPEN_PATRON_FORM_SELECT_MENU, buf);
+        ServerPlayNetworking.send(player, ModPackets.OLD_OPEN_PATRON_FORM_SELECT_MENU, buf);
     }
 
     public static void OpenFormSelectMenu(ServerPlayerEntity player, PlayerEntity target) {
@@ -361,5 +361,10 @@ public class ModPacketsS2CServer {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeInt(tier);
         ServerPlayNetworking.send(player, ModPackets.OPEN_FORM_UPGRADE_MENU, buf);
+    }
+
+    public static void sendOpenSelectSubFormMenu(ServerPlayerEntity player) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        ServerPlayNetworking.send(player, ModPackets.OPEN_SELECT_SUB_FORM_MENU, buf);
     }
 }
