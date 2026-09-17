@@ -1,0 +1,7 @@
+body
+head
+torso
+leftArm
+rightArm
+leftLeg
+rightLeg
