@@ -170,4 +170,17 @@ public class InstinctUtils {
     public static void addInstinctEffect(PlayerEntity player, Identifier id, float value, int duration, boolean isImmediate) {
         addInstinctEffect(player, new InstinctEffect(id, value, duration), isImmediate);
     }
+
+    public static float getNowInstinctValue(PlayerEntity player) {
+        PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
+        return component.instinctValue;
+    }
+
+    public static float getMaxInstinctValue(PlayerEntity player) {
+        return StaticParams.INSTINCT_MAX;
+    }
+
+    public static float getInstinctValuePercent(PlayerEntity player) {
+        return getNowInstinctValue(player) / getMaxInstinctValue(player);
+    }
 }
