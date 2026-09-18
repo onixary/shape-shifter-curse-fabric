@@ -137,6 +137,11 @@ public class ModPacketsC2S {
         );
 
         ServerPlayNetworking.registerGlobalReceiver(
+                REQUEST_PERK_DATA,
+                ModPacketsC2S::receiveRequestPerkData
+        );
+
+        ServerPlayNetworking.registerGlobalReceiver(
                 REQUEST_SET_SUB_FORM,
                 ModPacketsC2S::receiveRequestSetSubForm
         );
@@ -340,6 +345,12 @@ public class ModPacketsC2S {
     private static void receiveRequestPerkAvailability(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
         minecraftServer.execute(() -> {
             ModPacketsS2CServer.sendPerkAvailabilityFull(playerEntity);
+        });
+    }
+
+    private static void receiveRequestPerkData(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
+        minecraftServer.execute(() -> {
+            ModPacketsS2CServer.sendPerkDataFull(playerEntity);
         });
     }
 

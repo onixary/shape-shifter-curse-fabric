@@ -37,6 +37,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     public static final Identifier LABEL_DEPEND = ShapeShifterCurseFabric.identifier("textures/perk/system/depend.png");
 
     public static final HashMap<Identifier, Boolean> perkAvailableMap = new HashMap<>();  // 仅客户端数据 仅影响渲染 仅代表服务器获取这个表时无法获取这个Perk
+    public static final HashMap<Identifier, Integer> perkXpCostMap = new HashMap<>();  // 仅客户端数据 实际消耗由服务器决定
 
     public int tier = -1;
     public @NotNull PerkTree perkTree;
@@ -96,6 +97,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         this.tier = tier;
         this.perkTree = perkTree != null ? perkTree : Objects.requireNonNull(RegPerks.getPerkTree(RegPerks.EMPTY_PERK_TREE));
         ModPacketsS2C.sendRequestPerkAvailability();
+        ModPacketsS2C.sendRequestPerkData();
     }
 
     @Override
@@ -341,18 +343,31 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         cameraScale = newScale;
     }
 
+    public boolean isNowPerkCanGain() {
+        if (this.nowSelectNode == null) {
+            return false;
+        }
+        if (this.nowSelectNode.tier > this.tier) {
+            return false;
+        }
+        int requireXp = this.client.player.getAbilities().creativeMode ? 0 : perkXpCostMap.getOrDefault(this.nowSelectNode.perkID, 0);
+        if (this.client.player.totalExperience < requireXp) {
+            return false;
+        }
+        return true;
+    }
+
     public void onNodeSelect() {
         try {
             MinecraftClient.getInstance().player.sendMessage(Text.literal("Node Selected: " + this.nowSelectNode.perkID.toString()), false);
             MinecraftClient.getInstance().player.sendMessage(Text.literal("Can Gained (Cache): " + this.perkAvailableMap.getOrDefault(this.nowSelectNode.perkID, true)), false);
-
         } catch (Exception e) {
             MinecraftClient.getInstance().player.sendMessage(Text.literal("No Node Selected"), false);
         }
         if (this.nowSelectNode != null) {
             this.PerkNameWidget.setMessage(RegPerks.getPerkName(this.nowSelectNode.perkID));
             this.PerkDescWidget.reloadText(RegPerks.getPerkDescription(this.nowSelectNode.perkID));
-            this.AcquirePerkButton.active = this.nowSelectNode.tier <= this.tier;
+            this.AcquirePerkButton.active = this.isNowPerkCanGain();
         } else {
             this.PerkNameWidget.setMessage(Text.literal(""));
             this.PerkDescWidget.reloadText(Text.literal(""));

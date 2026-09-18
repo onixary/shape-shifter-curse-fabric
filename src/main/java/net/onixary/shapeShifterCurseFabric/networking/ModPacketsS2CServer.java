@@ -12,7 +12,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.VirtualTotemPower;
+import net.onixary.shapeShifterCurseFabric.perk.IPerk;
+import net.onixary.shapeShifterCurseFabric.perk.PerkTree;
 import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
+import net.onixary.shapeShifterCurseFabric.perk.RegPerks;
 import net.onixary.shapeShifterCurseFabric.player_form.DynamicForm;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
@@ -20,13 +23,9 @@ import net.onixary.shapeShifterCurseFabric.util.Verify.KeySegment;
 import org.jetbrains.annotations.Nullable;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
 import static net.onixary.shapeShifterCurseFabric.networking.ModPackets.UPDATE_POWER_ANIM_DATA_TO_CLIENT;
-
-import java.util.List;
-import java.util.Map;
 
 // 纯服务端类，所有send方法都只在这里调用
 // This is a pure server-side class, all send methods are called only here
@@ -355,6 +354,26 @@ public class ModPacketsS2CServer {
 
     public static void sendPerkAvailabilityFull(ServerPlayerEntity player) {
         sendPerkAvailability(player, true, PerkUtils.getPlayerPerkAvailability(player));
+    }
+
+    public static void sendPerkData(ServerPlayerEntity player, boolean fullUpdate, IPerk... perks) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeBoolean(fullUpdate);
+        buf.writeInt(perks.length);
+        for (IPerk perk : perks) {
+            buf.writeIdentifier(perk.getID());
+            buf.writeInt(perk.getXpCost());
+        }
+        ServerPlayNetworking.send(player, ModPackets.SYNC_PERK_DATA, buf);
+    }
+
+    public static void sendPerkDataFull(ServerPlayerEntity player) {
+        PerkTree perkTree = PerkUtils.getPlayerNowPerkTree(player);
+        if (perkTree == null) {
+            return;
+        }
+        List<Identifier> perks = perkTree.getAllPerks();
+        sendPerkData(player, true, perks.stream().map(RegPerks::getPerk).filter(Objects::nonNull).toArray(IPerk[]::new));
     }
 
     public static void sendOpenFormUpgradeMenu(ServerPlayerEntity player, int tier) {
