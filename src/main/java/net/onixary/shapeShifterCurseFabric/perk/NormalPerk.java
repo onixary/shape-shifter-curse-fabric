@@ -22,6 +22,8 @@ public class NormalPerk implements IPerk, IPerkClient {
     public BiConsumer<PlayerEntity, IForm> onGainFunc = null;
     public BiPredicate<PlayerEntity, IForm> canGainCondition = null;
 
+    public int xpCost = 0;
+
     public @Nullable Identifier Icon = null;
     public @Nullable Text Name = null;
     public @Nullable Text Desc = null;
@@ -91,6 +93,16 @@ public class NormalPerk implements IPerk, IPerkClient {
     @Override
     public boolean canGain(PlayerEntity player, IForm form) {
         return canGainCondition == null || canGainCondition.test(player, form);
+    }
+
+    @Override
+    public int getXpCost() {
+        return xpCost;
+    }
+
+    public NormalPerk XpCost(int xpCost) {
+        this.xpCost = xpCost;
+        return this;
     }
 
     public NormalPerk canGain(BiPredicate<PlayerEntity, IForm> canGainCondition) {

@@ -77,6 +77,7 @@ public class ModPacketsS2C {
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.MELT_AUTH_SUB_KEY, ModPacketsS2C::receiveNewSubKey);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SET_SUPER_USER_LEVEL, ModPacketsS2C::receiveSetSuperUserLevel);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_PERK_AVAILABILITY, ModPacketsS2C::receivePerkAvailability);
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.SYNC_PERK_DATA, ModPacketsS2C::receivePerkData);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.OPEN_FORM_UPGRADE_MENU, ModPacketsS2C::receiveOpenFormUpgradeMenu);
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.OPEN_SELECT_SUB_FORM_MENU, ModPacketsS2C::receiveOpenSelectSubFormMenu);
     }
@@ -645,6 +646,10 @@ public class ModPacketsS2C {
         ClientPlayNetworking.send(REQUEST_PERK_AVAILABILITY, PacketByteBufs.create());
     }
 
+    public static void sendRequestPerkData() {
+        ClientPlayNetworking.send(REQUEST_PERK_DATA, PacketByteBufs.create());
+    }
+
     public static void receivePerkAvailability(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         boolean fullUpdate = buf.readBoolean();
         int updateCount = buf.readInt();
@@ -659,6 +664,22 @@ public class ModPacketsS2C {
                 FormUpgradeScreen.perkAvailableMap.clear();
             }
             FormUpgradeScreen.perkAvailableMap.putAll(perkAvailability);
+        });
+    }
+
+    public static void receivePerkData(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        boolean fullUpdate = buf.readBoolean();
+        int updateCount = buf.readInt();
+        HashMap<Identifier, Integer> perkXpCostMap = new HashMap<>();
+        for (int i = 0; i < updateCount; i++) {
+            Identifier perkID = buf.readIdentifier();
+            perkXpCostMap.put(perkID, buf.readInt());
+        }
+        client.execute(() -> {
+            if (fullUpdate) {
+                FormUpgradeScreen.perkXpCostMap.clear();
+            }
+            FormUpgradeScreen.perkXpCostMap.putAll(perkXpCostMap);
         });
     }
 

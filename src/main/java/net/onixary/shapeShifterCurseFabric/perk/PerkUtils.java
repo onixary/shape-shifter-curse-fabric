@@ -27,6 +27,20 @@ public class PerkUtils {
         return getPlayerPerks(player).get(perkTreeID);
     }
 
+    public static @Nullable List<IPerk> getPlayerPerksObject(PlayerEntity player, Identifier perkTreeID) {
+        // 仅服务器端 客户端不保证数据能完整拿到
+        List<Identifier> perkList = getPlayerPerks(player, perkTreeID);
+        if (perkList == null) return null;
+        List<IPerk> perkDataList = new ArrayList<>();
+        for (Identifier perkID : perkList) {
+            IPerk perkData = RegPerks.getPerk(perkID);
+            if (perkData != null) {
+                perkDataList.add(perkData);
+            }
+        }
+        return perkDataList;
+    }
+
     public static void removeInValidPerk(PlayerEntity player, Identifier perkTreeID) {
         if (!(player instanceof ServerPlayerEntity playerEntity)) return;
         PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
@@ -90,6 +104,11 @@ public class PerkUtils {
         if (perkTree == null) return;
         if (!perkTree.getAllPerks().contains(perkID)) return;
 
+        int xpCost = player.getAbilities().creativeMode ? 0 : perkData.getXpCost();
+        if (player.totalExperience < xpCost) {
+            return;
+        }
+
         PerkTree.PerkNode node = perkTree.getNode(perkID);
         if (node == null) return;
         if (!node.dependentPerkIDs.isEmpty()) {
@@ -108,7 +127,9 @@ public class PerkUtils {
         if (lastUsedAttuner == null || lastUsedAttuner.level < tier) {
             return;
         }
+
         if (perkData.canGain(player, component.nowForm)) {
+            player.addExperience(-xpCost);
             __addPerk(player, perkTreeID, perkID);
         }
         removeInValidPerk(player, perkTreeID);
