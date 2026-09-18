@@ -17,16 +17,21 @@ public class AnimationHolder {
     private boolean isEnabled;
     @Nullable private KeyframeAnimation animation;
 
+    public @Nullable Identifier animationID;
+
     public AnimationHolder(Identifier animation_id, boolean isEnabled, float speed) {
         this(PlayerAnimationRegistry.getAnimation(animation_id), isEnabled, speed, 5);
+        this.animationID = animation_id;
     }
 
     public AnimationHolder(Identifier animation_id, boolean isEnabled) {
         this(PlayerAnimationRegistry.getAnimation(animation_id), isEnabled, 1.0f, 2);
+        this.animationID = animation_id;
     }
 
     public AnimationHolder(Identifier animation_id, boolean isEnabled, float speed, int fade) {
         this(PlayerAnimationRegistry.getAnimation(animation_id), isEnabled, speed, fade);
+        this.animationID = animation_id;
     }
 
     public AnimationHolder(@Nullable KeyframeAnimation animation, boolean isEnabled, float speed, int fade) {
@@ -34,6 +39,7 @@ public class AnimationHolder {
         this.animation = animation;
         this.speed = speed;
         this.fade = fade;
+        this.animationID = null;
     }
 
     public AnimationHolder(@Nullable KeyframeAnimation animation, boolean isEnabled) {

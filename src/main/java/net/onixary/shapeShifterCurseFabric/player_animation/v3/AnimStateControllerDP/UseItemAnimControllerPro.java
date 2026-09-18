@@ -4,8 +4,11 @@ import com.google.gson.JsonObject;
 import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.*;
+import net.onixary.shapeShifterCurseFabric.util.util.DataDumper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 // 为什么是Pro版本呢 由于四足形态没有四足站立的动画 而且我(XuHaoNan)不太会K动画 只能用IDLE和WALK动画来代替 添加动画后使用WithSneakAnimController就行
 public class UseItemAnimControllerPro extends AbstractAnimStateControllerDP {
@@ -58,5 +61,10 @@ public class UseItemAnimControllerPro extends AbstractAnimStateControllerDP {
         this.animationHolderData3 = AnimUtils.readAnimInJson(jsonObject, "sneakIdleAnim", null);
         this.animationHolderData4 = AnimUtils.readAnimInJson(jsonObject, "sneakWalkAnim", null);
         return this;
+    }
+
+    @Override
+    public @NotNull List<AnimationHolder> getAllAnimations() {
+        return DataDumper.buildList(animationHolder1, animationHolder2, animationHolder3, animationHolder4);
     }
 }
