@@ -1,0 +1,724 @@
+{
+  "shape-shifter-curse:original_before_enable": {},
+  "shape-shifter-curse:original_shifter": {},
+  "shape-shifter-curse:bat_0": {},
+  "shape-shifter-curse:bat_1": {
+    "shape-shifter-curse:bat_1_jump": {
+      "shape-shifter-curse:jump_state": 1.0
+    }
+  },
+  "shape-shifter-curse:bat_2": {
+    "shape-shifter-curse:bat_2_riding": {
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:bat_2_attack": {
+      "shape-shifter-curse:attack_state": 1.0
+    },
+    "shape-shifter-curse:bat_1_sneak_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:bat_2_digging": {
+      "shape-shifter-curse:mining_state": 1.0
+    },
+    "shape-shifter-curse:bat_2_jump": {
+      "shape-shifter-curse:jump_state": 1.0
+    },
+    "shape-shifter-curse:bat_2_slow_falling": {
+      "shape-shifter-curse:flying_state": 1.0,
+      "shape-shifter-curse:fall_state": 1.0
+    }
+  },
+  "shape-shifter-curse:bat_3": {
+    "shape-shifter-curse:bat_3_jump": {
+      "shape-shifter-curse:jump_state": 1.5
+    },
+    "shape-shifter-curse:bat_3_climb": {
+      "shape-shifter-curse:climb_state": 1.25
+    },
+    "shape-shifter-curse:bat_3_sleep": {
+      "shape-shifter-curse:sleep_state": 1.0
+    },
+    "shape-shifter-curse:bat_3_attack": {
+      "shape-shifter-curse:attack_state": 1.5
+    },
+    "shape-shifter-curse:bat_3_sneak_walk": {
+      "shape-shifter-curse:walk_state": 1.0,
+      "shape-shifter-curse:sprint_state": 1.0
+    },
+    "shape-shifter-curse:bat_3_attach_side": {
+      "shape-shifter-curse:climb_state": 1.0
+    },
+    "shape-shifter-curse:bat_3_walk": {
+      "shape-shifter-curse:walk_state": 1.7,
+      "shape-shifter-curse:sprint_state": 2.4
+    },
+    "shape-shifter-curse:bat_3_riding": {
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:bat_3_digging": {
+      "shape-shifter-curse:mining_state": 1.5
+    },
+    "shape-shifter-curse:bat_1_sneak_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0,
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:bat_3_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0
+    },
+    "shape-shifter-curse:bat_2_slow_falling": {
+      "shape-shifter-curse:flying_state": 1.0,
+      "shape-shifter-curse:fall_state": 1.0,
+      "shape-shifter-curse:crawl_state": 1.0
+    }
+  },
+  "shape-shifter-curse:axolotl_0": {},
+  "shape-shifter-curse:axolotl_1": {
+    "shape-shifter-curse:axolotl_2_swimming_idle": {
+      "shape-shifter-curse:swim_state": 1.0
+    }
+  },
+  "shape-shifter-curse:axolotl_2": {
+    "shape-shifter-curse:axolotl_2_crawling_jump": {
+      "shape-shifter-curse:jump_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_2_swimming": {
+      "shape-shifter-curse:swim_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_2_swimming_idle": {
+      "shape-shifter-curse:swim_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_2_crawling_attack_once": {
+      "shape-shifter-curse:attack_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_2_crawling_idle_new": {
+      "shape-shifter-curse:idle_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_2_crawling_new": {
+      "shape-shifter-curse:walk_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_2_crawling_tool_swing": {
+      "shape-shifter-curse:mining_state": 1.0
+    }
+  },
+  "shape-shifter-curse:axolotl_3": {
+    "shape-shifter-curse:axolotl_2_swimming": {
+      "shape-shifter-curse:swim_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_2_swimming_idle": {
+      "shape-shifter-curse:swim_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_3_crawling_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:fall_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_3_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:crawl_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_3_rush_jump": {
+      "shape-shifter-curse:jump_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_2_crawling_tool_swing": {
+      "shape-shifter-curse:mining_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_3_crawling": {
+      "shape-shifter-curse:walk_state": 1.0,
+      "shape-shifter-curse:sprint_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_3_sleep": {
+      "shape-shifter-curse:sleep_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_3_creative_flight": {
+      "shape-shifter-curse:flying_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_2_crawling_jump": {
+      "shape-shifter-curse:jump_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_2_crawling_attack_once": {
+      "shape-shifter-curse:attack_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_3_jump": {
+      "shape-shifter-curse:fall_state": 1.0,
+      "shape-shifter-curse:jump_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_3_walk": {
+      "shape-shifter-curse:walk_state": 1.0
+    },
+    "shape-shifter-curse:axolotl_3_run": {
+      "shape-shifter-curse:sprint_state": 1.0
+    }
+  },
+  "shape-shifter-curse:ocelot_0": {},
+  "shape-shifter-curse:ocelot_1": {},
+  "shape-shifter-curse:ocelot_2": {
+    "shape-shifter-curse:ocelot_2_rush_jump": {
+      "shape-shifter-curse:fall_state": 1.0,
+      "shape-shifter-curse:jump_state": 1.0
+    },
+    "shape-shifter-curse:ocelot_2_sneak_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:ocelot_2_riding": {
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:ocelot_2_sneak_rush_2": {
+      "shape-shifter-curse:walk_state": 3.3,
+      "shape-shifter-curse:sprint_state": 3.3
+    }
+  },
+  "shape-shifter-curse:ocelot_3": {
+    "shape-shifter-curse:form_feral_common_jump": {
+      "shape-shifter-curse:jump_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_dig": {
+      "shape-shifter-curse:mining_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_climb": {
+      "shape-shifter-curse:climb_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_attack": {
+      "shape-shifter-curse:attack_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_climb_idle": {
+      "shape-shifter-curse:climb_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_elytra_fly": {
+      "shape-shifter-curse:fall_flying_state": 1.0,
+      "shape-shifter-curse:flying_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_run": {
+      "shape-shifter-curse:walk_state": 3.3,
+      "shape-shifter-curse:sprint_state": 3.3
+    },
+    "shape-shifter-curse:form_feral_common_sleep": {
+      "shape-shifter-curse:sleep_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_fall": {
+      "shape-shifter-curse:fall_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:block_shield_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0,
+      "shape-shifter-curse:crawl_state": 1.0
+    },
+    "shape-shifter-curse:ocelot_3_riding": {
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_swim": {
+      "shape-shifter-curse:swim_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_sneak_walk": {
+      "shape-shifter-curse:walk_state": 1.0,
+      "shape-shifter-curse:sprint_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_walk": {
+      "shape-shifter-curse:walk_state": 1.2
+    },
+    "shape-shifter-curse:form_feral_common_sneak_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:block_shield_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0,
+      "shape-shifter-curse:crawl_state": 1.0,
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_float": {
+      "shape-shifter-curse:swim_state": 1.0
+    }
+  },
+  "shape-shifter-curse:familiar_fox_0": {},
+  "shape-shifter-curse:familiar_fox_1": {},
+  "shape-shifter-curse:familiar_fox_2": {
+    "shape-shifter-curse:ocelot_2_sneak_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:familiar_fox_2_riding": {
+      "shape-shifter-curse:ride_state": 1.0
+    }
+  },
+  "shape-shifter-curse:familiar_fox_3": {
+    "shape-shifter-curse:form_feral_common_jump": {
+      "shape-shifter-curse:jump_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_dig": {
+      "shape-shifter-curse:mining_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_climb": {
+      "shape-shifter-curse:climb_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_attack": {
+      "shape-shifter-curse:attack_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_climb_idle": {
+      "shape-shifter-curse:climb_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_elytra_fly": {
+      "shape-shifter-curse:fall_flying_state": 1.0,
+      "shape-shifter-curse:flying_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_run": {
+      "shape-shifter-curse:sprint_state": 2.3
+    },
+    "shape-shifter-curse:familiar_fox_3_riding": {
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_sleep": {
+      "shape-shifter-curse:sleep_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_fall": {
+      "shape-shifter-curse:fall_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:block_shield_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0,
+      "shape-shifter-curse:crawl_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_swim": {
+      "shape-shifter-curse:swim_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_sneak_walk": {
+      "shape-shifter-curse:walk_state": 1.0,
+      "shape-shifter-curse:sprint_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_walk": {
+      "shape-shifter-curse:walk_state": 1.2
+    },
+    "shape-shifter-curse:form_feral_common_sneak_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:block_shield_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0,
+      "shape-shifter-curse:crawl_state": 1.0,
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_float": {
+      "shape-shifter-curse:swim_state": 1.0
+    }
+  },
+  "shape-shifter-curse:snow_fox_0": {},
+  "shape-shifter-curse:snow_fox_1": {},
+  "shape-shifter-curse:snow_fox_2": {
+    "shape-shifter-curse:ocelot_2_sneak_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:snow_fox_2_riding": {
+      "shape-shifter-curse:ride_state": 1.0
+    }
+  },
+  "shape-shifter-curse:snow_fox_3": {
+    "shape-shifter-curse:form_feral_common_jump": {
+      "shape-shifter-curse:jump_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_dig": {
+      "shape-shifter-curse:mining_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_climb": {
+      "shape-shifter-curse:climb_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_attack": {
+      "shape-shifter-curse:attack_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_climb_idle": {
+      "shape-shifter-curse:climb_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_elytra_fly": {
+      "shape-shifter-curse:fall_flying_state": 1.0,
+      "shape-shifter-curse:flying_state": 1.0
+    },
+    "shape-shifter-curse:form_snow_fox_3_fall": {
+      "shape-shifter-curse:fall_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_run": {
+      "shape-shifter-curse:sprint_state": 2.3
+    },
+    "shape-shifter-curse:form_feral_common_sleep": {
+      "shape-shifter-curse:sleep_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:block_shield_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0,
+      "shape-shifter-curse:crawl_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_swim": {
+      "shape-shifter-curse:swim_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_sneak_walk": {
+      "shape-shifter-curse:walk_state": 1.0,
+      "shape-shifter-curse:sprint_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_walk": {
+      "shape-shifter-curse:walk_state": 1.2
+    },
+    "shape-shifter-curse:form_feral_common_sneak_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:block_shield_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0,
+      "shape-shifter-curse:crawl_state": 1.0,
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_float": {
+      "shape-shifter-curse:swim_state": 1.0
+    },
+    "shape-shifter-curse:snow_fox_3_riding": {
+      "shape-shifter-curse:ride_state": 1.0
+    }
+  },
+  "shape-shifter-curse:anubis_wolf_0": {},
+  "shape-shifter-curse:anubis_wolf_1": {},
+  "shape-shifter-curse:anubis_wolf_2": {},
+  "shape-shifter-curse:anubis_wolf_3": {
+    "shape-shifter-curse:form_feral_common_jump": {
+      "shape-shifter-curse:jump_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_dig": {
+      "shape-shifter-curse:mining_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_climb": {
+      "shape-shifter-curse:climb_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_attack": {
+      "shape-shifter-curse:attack_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_climb_idle": {
+      "shape-shifter-curse:climb_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_elytra_fly": {
+      "shape-shifter-curse:fall_flying_state": 1.0,
+      "shape-shifter-curse:flying_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_run": {
+      "shape-shifter-curse:sprint_state": 2.3
+    },
+    "shape-shifter-curse:form_feral_common_sleep": {
+      "shape-shifter-curse:sleep_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_fall": {
+      "shape-shifter-curse:fall_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:block_shield_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0,
+      "shape-shifter-curse:crawl_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_swim": {
+      "shape-shifter-curse:swim_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_sneak_walk": {
+      "shape-shifter-curse:walk_state": 1.0,
+      "shape-shifter-curse:sprint_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_walk": {
+      "shape-shifter-curse:walk_state": 1.2
+    },
+    "shape-shifter-curse:form_feral_common_sneak_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:block_shield_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0,
+      "shape-shifter-curse:crawl_state": 1.0,
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_float": {
+      "shape-shifter-curse:swim_state": 1.0
+    },
+    "shape-shifter-curse:snow_fox_3_riding": {
+      "shape-shifter-curse:ride_state": 1.0
+    }
+  },
+  "shape-shifter-curse:spider_0": {},
+  "shape-shifter-curse:spider_1": {
+    "shape-shifter-curse:spider_1_idle": {
+      "shape-shifter-curse:walk_state": 1.0,
+      "shape-shifter-curse:sprint_state": 1.0,
+      "shape-shifter-curse:idle_state": 1.0
+    },
+    "shape-shifter-curse:spider_1_move": {
+      "shape-shifter-curse:walk_state": 1.0,
+      "shape-shifter-curse:sprint_state": 1.0
+    }
+  },
+  "shape-shifter-curse:spider_2": {
+    "shape-shifter-curse:spider_2_sneak_idle": {
+      "shape-shifter-curse:idle_state": 1.0
+    }
+  },
+  "shape-shifter-curse:spider_3": {
+    "shape-shifter-curse:spider_3_climb_idle": {
+      "shape-shifter-curse:climb_state": 1.0
+    },
+    "shape-shifter-curse:spider_3_sneak_walk": {
+      "shape-shifter-curse:walk_state": 1.0,
+      "shape-shifter-curse:sprint_state": 1.0
+    },
+    "shape-shifter-curse:spider_3_shielding": {
+      "shape-shifter-curse:block_shield_state": 1.0
+    },
+    "shape-shifter-curse:spider_3_ride": {
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:spider_3_swim_idle": {
+      "shape-shifter-curse:swim_state": 1.0
+    },
+    "shape-shifter-curse:spider_3_walk": {
+      "shape-shifter-curse:walk_state": 1.2
+    },
+    "shape-shifter-curse:spider_3_sneak_idle": {
+      "shape-shifter-curse:idle_state": 1.0
+    },
+    "shape-shifter-curse:spider_3_sleep": {
+      "shape-shifter-curse:sleep_state": 1.0
+    },
+    "shape-shifter-curse:spider_3_fall": {
+      "shape-shifter-curse:fall_state": 1.0
+    },
+    "shape-shifter-curse:spider_3_climb": {
+      "shape-shifter-curse:climb_state": 1.0
+    },
+    "shape-shifter-curse:spider_3_creative_flight": {
+      "shape-shifter-curse:flying_state": 1.0
+    },
+    "shape-shifter-curse:spider_3_jump": {
+      "shape-shifter-curse:jump_state": 1.0
+    },
+    "shape-shifter-curse:spider_3_idle": {
+      "shape-shifter-curse:idle_state": 1.0
+    },
+    "shape-shifter-curse:spider_3_run": {
+      "shape-shifter-curse:sprint_state": 1.8
+    }
+  },
+  "shape-shifter-curse:allay_sp": {
+    "shape-shifter-curse:allay_sp_idle": {
+      "shape-shifter-curse:idle_state": 1.0
+    },
+    "shape-shifter-curse:allay_sp_fly": {
+      "shape-shifter-curse:fall_flying_state": 1.0,
+      "shape-shifter-curse:flying_state": 1.0,
+      "shape-shifter-curse:fall_state": 1.0,
+      "shape-shifter-curse:jump_state": 1.0
+    },
+    "shape-shifter-curse:allay_sp_sneaking_walk": {
+      "shape-shifter-curse:climb_state": 1.0,
+      "shape-shifter-curse:walk_state": 1.0,
+      "shape-shifter-curse:sleep_state": 1.0,
+      "shape-shifter-curse:sprint_state": 1.0,
+      "shape-shifter-curse:block_shield_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0,
+      "shape-shifter-curse:crawl_state": 1.0,
+      "shape-shifter-curse:ride_state": 1.0,
+      "shape-shifter-curse:swim_state": 1.0
+    },
+    "shape-shifter-curse:allay_sp_digging": {
+      "shape-shifter-curse:mining_state": 1.0
+    },
+    "shape-shifter-curse:allay_sp_attack": {
+      "shape-shifter-curse:attack_state": 1.0
+    },
+    "shape-shifter-curse:allay_sp_sneaking": {
+      "shape-shifter-curse:idle_state": 1.0
+    },
+    "shape-shifter-curse:allay_sp_run": {
+      "shape-shifter-curse:sprint_state": 1.0
+    },
+    "shape-shifter-curse:allay_sp_moving": {
+      "shape-shifter-curse:climb_state": 1.0,
+      "shape-shifter-curse:walk_state": 1.0,
+      "shape-shifter-curse:sleep_state": 1.0,
+      "shape-shifter-curse:block_shield_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0,
+      "shape-shifter-curse:crawl_state": 1.0,
+      "shape-shifter-curse:ride_state": 1.0,
+      "shape-shifter-curse:swim_state": 1.0
+    }
+  },
+  "shape-shifter-curse:feral_cat_sp": {
+    "shape-shifter-curse:form_feral_common_jump": {
+      "shape-shifter-curse:jump_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_dig": {
+      "shape-shifter-curse:mining_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_climb": {
+      "shape-shifter-curse:climb_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_attack": {
+      "shape-shifter-curse:attack_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_climb_idle": {
+      "shape-shifter-curse:climb_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_elytra_fly": {
+      "shape-shifter-curse:fall_flying_state": 1.0,
+      "shape-shifter-curse:flying_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_run": {
+      "shape-shifter-curse:sprint_state": 2.3
+    },
+    "shape-shifter-curse:form_feral_common_sleep": {
+      "shape-shifter-curse:sleep_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_fall": {
+      "shape-shifter-curse:fall_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:block_shield_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0,
+      "shape-shifter-curse:crawl_state": 1.0
+    },
+    "shape-shifter-curse:feral_cat_sp_riding": {
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_swim": {
+      "shape-shifter-curse:swim_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_sneak_walk": {
+      "shape-shifter-curse:walk_state": 1.0,
+      "shape-shifter-curse:sprint_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_walk": {
+      "shape-shifter-curse:walk_state": 1.2
+    },
+    "shape-shifter-curse:form_feral_common_sneak_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:block_shield_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0,
+      "shape-shifter-curse:crawl_state": 1.0,
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:form_feral_common_float": {
+      "shape-shifter-curse:swim_state": 1.0
+    }
+  },
+  "shape-shifter-curse:snow_fox_3_sub_marbled_polecat": {
+    "shape-shifter-curse:weasel_climb_idle": {
+      "shape-shifter-curse:climb_state": 1.0
+    },
+    "shape-shifter-curse:weasel_run": {
+      "shape-shifter-curse:sprint_state": 3.5
+    },
+    "shape-shifter-curse:weasel_float": {
+      "shape-shifter-curse:swim_state": 1.0
+    },
+    "shape-shifter-curse:weasel_sleep": {
+      "shape-shifter-curse:sleep_state": 1.0
+    },
+    "shape-shifter-curse:weasel_dig": {
+      "shape-shifter-curse:mining_state": 1.0
+    },
+    "shape-shifter-curse:weasel_fall": {
+      "shape-shifter-curse:fall_state": 1.0
+    },
+    "shape-shifter-curse:weasel_sneak_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:block_shield_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0,
+      "shape-shifter-curse:crawl_state": 1.0,
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:weasel_elytra_fly": {
+      "shape-shifter-curse:fall_flying_state": 1.0,
+      "shape-shifter-curse:flying_state": 1.0
+    },
+    "shape-shifter-curse:weasel_idle_stay": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:block_shield_state": 1.0,
+      "shape-shifter-curse:crawl_state": 1.0,
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:weasel_climb": {
+      "shape-shifter-curse:climb_state": 1.0
+    },
+    "shape-shifter-curse:weasel_sneak_walk": {
+      "shape-shifter-curse:walk_state": 1.0,
+      "shape-shifter-curse:sprint_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0
+    },
+    "shape-shifter-curse:weasel_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:block_shield_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0,
+      "shape-shifter-curse:crawl_state": 1.0,
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:weasel_swim": {
+      "shape-shifter-curse:swim_state": 1.0
+    },
+    "shape-shifter-curse:weasel_walk": {
+      "shape-shifter-curse:walk_state": 2.6
+    },
+    "shape-shifter-curse:weasel_jump": {
+      "shape-shifter-curse:jump_state": 1.0
+    },
+    "shape-shifter-curse:weasel_attack": {
+      "shape-shifter-curse:attack_state": 1.0
+    }
+  },
+  "shape-shifter-curse:bat_3_sub_avali": {
+    "shape-shifter-curse:avali_shielding": {
+      "shape-shifter-curse:block_shield_state": 1.0
+    },
+    "shape-shifter-curse:avali_climb": {
+      "shape-shifter-curse:climb_state": 1.0
+    },
+    "shape-shifter-curse:avali_run": {
+      "shape-shifter-curse:sprint_state": 3.0
+    },
+    "shape-shifter-curse:avali_ride": {
+      "shape-shifter-curse:ride_state": 1.0
+    },
+    "shape-shifter-curse:avali_digging": {
+      "shape-shifter-curse:mining_state": 1.8
+    },
+    "shape-shifter-curse:avali_sneak_walk": {
+      "shape-shifter-curse:walk_state": 1.0,
+      "shape-shifter-curse:sprint_state": 1.0
+    },
+    "shape-shifter-curse:avali_slow_falling": {
+      "shape-shifter-curse:flying_state": 1.0,
+      "shape-shifter-curse:fall_state": 1.0,
+      "shape-shifter-curse:crawl_state": 1.0
+    },
+    "shape-shifter-curse:avali_sleep": {
+      "shape-shifter-curse:sleep_state": 1.0
+    },
+    "shape-shifter-curse:avali_water_float": {
+      "shape-shifter-curse:swim_state": 1.0
+    },
+    "shape-shifter-curse:avali_sneak_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0
+    },
+    "shape-shifter-curse:avali_attach_side": {
+      "shape-shifter-curse:climb_state": 1.0
+    },
+    "shape-shifter-curse:avali_walk": {
+      "shape-shifter-curse:walk_state": 3.0
+    },
+    "shape-shifter-curse:avali_jump": {
+      "shape-shifter-curse:jump_state": 1.5
+    },
+    "shape-shifter-curse:avali_idle": {
+      "shape-shifter-curse:idle_state": 1.0,
+      "shape-shifter-curse:use_item_state": 1.0
+    },
+    "shape-shifter-curse:avali_attack": {
+      "shape-shifter-curse:attack_state": 1.8
+    },
+    "shape-shifter-curse:avali_elytra_fly": {
+      "shape-shifter-curse:fall_flying_state": 1.0
+    }
+  }
+}
