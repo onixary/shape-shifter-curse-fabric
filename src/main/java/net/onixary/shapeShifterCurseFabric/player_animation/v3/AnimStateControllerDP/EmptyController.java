@@ -6,7 +6,10 @@ import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateControllerDP;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class EmptyController extends AbstractAnimStateControllerDP {
     public EmptyController() {
@@ -30,5 +33,10 @@ public class EmptyController extends AbstractAnimStateControllerDP {
     @Override
     public AbstractAnimStateController loadFormJson(JsonObject jsonData) {
         return this;
+    }
+
+    @Override
+    public @NotNull List<AnimationHolder> getAllAnimations() {
+        return List.of();
     }
 }

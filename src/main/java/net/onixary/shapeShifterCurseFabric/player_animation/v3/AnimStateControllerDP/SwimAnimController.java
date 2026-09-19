@@ -4,8 +4,11 @@ import com.google.gson.JsonObject;
 import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.*;
+import net.onixary.shapeShifterCurseFabric.util.util.DataDumper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class SwimAnimController extends AbstractAnimStateControllerDP {
     private AnimUtils.AnimationHolderData animationHolderData1;
@@ -44,5 +47,10 @@ public class SwimAnimController extends AbstractAnimStateControllerDP {
         this.animationHolderData1 = AnimUtils.readAnimInJson(jsonObject, "anim", null);
         this.animationHolderData2 = AnimUtils.readAnimInJson(jsonObject, "swimAnim", null);
         return this;
+    }
+
+    @Override
+    public @NotNull List<AnimationHolder> getAllAnimations() {
+        return DataDumper.buildList(animationHolder1, animationHolder2);
     }
 }

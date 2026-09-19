@@ -13,7 +13,11 @@ import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.IsMorphScaleItemCondition;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
+import net.onixary.shapeShifterCurseFabric.player_form.ITransformReason;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.InstinctUtils;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
 import net.onixary.shapeShifterCurseFabric.status_effects.transformative_effects.TransformativeStatusInstance;
 import org.spongepowered.asm.mixin.Mixin;
@@ -46,6 +50,14 @@ public abstract class ItemStackMixin {
                 if (EffectManager.hasTransformativeEffect(player)) {
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.transformative_effect_cure").formatted(Formatting.YELLOW));
                     EffectManager.clearTransformativeEffect(player);
+                }
+                if (FormUtils.InitialForm.hasFlag(currentForm) && InstinctUtils.getInstinctValuePercent(player) < 0.1) {
+                    player.sendMessage(Text.translatable("info.shape-shifter-curse.transformative_effect_cure").formatted(Formatting.YELLOW));
+                    IForm nextForm = currentForm._getPrevForm(player, ITransformReason.ItemReasonBuilder.apply(stack));
+                    if (nextForm != currentForm) {
+                        PlayerFormComponent.COMPONENT.get(player).lastTransformByCure = true;
+                        TransformManager.startTransform(player, nextForm, null);
+                    }
                 }
             }
             else if (stack.getItem() == Items.MILK_BUCKET) {

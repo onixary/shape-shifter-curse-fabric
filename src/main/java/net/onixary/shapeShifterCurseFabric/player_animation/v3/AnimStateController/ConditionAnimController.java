@@ -9,6 +9,7 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.BiFunction;
@@ -43,5 +44,15 @@ public class ConditionAnimController extends AbstractAnimStateController {
             }
         }
         return this.defaultAnimation;
+    }
+
+    @Override
+    public @NotNull List<AnimationHolder> getAllAnimations() {
+        List<AnimationHolder> result = new ArrayList<>();
+        for (Pair<BiFunction<PlayerEntity, AnimSystem.AnimSystemData, Boolean>, AnimationHolder> pair : this.animConditionList) {
+            result.add(pair.getRight());
+        }
+        result.add(this.defaultAnimation);
+        return result;
     }
 }

@@ -454,7 +454,7 @@
   "codex.form.shape-shifter-curse.original_shifter.cons": [" "],
   "codex.form.shape-shifter-curse.original_shifter.instincts": [" "],
 
-  "codex.form.shape-shifter-curse.anubis_wolf_0.name" : ["Jackal Form (Phase 0)"],
+  "codex.form.shape-shifter-curse.anubis_wolf_0.name" : ["Jackal Form (Phase Initial)"],
   "codex.form.shape-shifter-curse.anubis_wolf_0.title": ["\nThe curse has had some visible effects on your body. You have developed some jackal-like features, and occasionally faint whispers echo in your mind"],
   "codex.form.shape-shifter-curse.anubis_wolf_0.equip": [""],
   "codex.form.shape-shifter-curse.anubis_wolf_0.appearance": ["You find your ears are no longer where they should be: they have moved towards the top of your head, their tips pointed, with pale golden fuzz growing on them, looking like the wolf-like spirits that appear in the desert\n",
@@ -580,7 +580,7 @@
     "Normal leggings and boots no longer suit your quadrupedal body structure"],
   "codex.form.shape-shifter-curse.anubis_wolf_3.instincts": [" "],
 
-  "codex.form.shape-shifter-curse.axolotl_0.name" : ["Axolotl Form (Phase 0)"],
+  "codex.form.shape-shifter-curse.axolotl_0.name" : ["Axolotl Form (Phase Initial)"],
   "codex.form.shape-shifter-curse.axolotl_0.title": ["\nThe curse has caused visible changes to your body. Additionally, you feel an urge to immerse yourself in water."],
   "codex.form.shape-shifter-curse.axolotl_0.equip": [""],
   "codex.form.shape-shifter-curse.axolotl_0.appearance": ["Pale red frond-like structures have grown on both sides of your cheeks. They remain constantly moist and seem to supplement your oxygen supply\n",
@@ -683,7 +683,7 @@
     "Non-meat foods no longer provide you with energy"],
   "codex.form.shape-shifter-curse.axolotl_3.instincts": [""],
 
-  "codex.form.shape-shifter-curse.ocelot_0.name" : ["Ocelot Form (Phase 0)"],
+  "codex.form.shape-shifter-curse.ocelot_0.name" : ["Ocelot Form (Phase Initial)"],
   "codex.form.shape-shifter-curse.ocelot_0.title": ["\nThe curse has caused some visible changes. You notice your body moves more naturally when sneaking"],
   "codex.form.shape-shifter-curse.ocelot_0.equip": [""],
   "codex.form.shape-shifter-curse.ocelot_0.appearance": ["Your ears have moved to the top of your head, covered in mottled fur, shaped between triangles and semicircles - somewhat resembling a feline's\n",
@@ -796,7 +796,7 @@
     "Any armour severely hinders your movement. You can now only wear helmets and cannot properly use shields"],
   "codex.form.shape-shifter-curse.ocelot_3.instincts": [""],
 
-  "codex.form.shape-shifter-curse.bat_0.name" : ["Bat Form (Phase 0)"],
+  "codex.form.shape-shifter-curse.bat_0.name" : ["Bat Form (Phase Initial)"],
   "codex.form.shape-shifter-curse.bat_0.title": ["\nThe curse has affected your body, making you resemble certain chiropterans. You feel darkness attracting you."],
   "codex.form.shape-shifter-curse.bat_0.equip": [
     "[Charm Of Night Crystal], [Charm Of Hollow Fang]"
@@ -905,7 +905,7 @@
     "Meat no longer provides you with energy; your body has completely lost the ability to digest it."],
   "codex.form.shape-shifter-curse.bat_3.instincts": [" "],
 
-  "codex.form.shape-shifter-curse.snow_fox_0.name" : ["Snow Fox Form (Phase 0)"],
+  "codex.form.shape-shifter-curse.snow_fox_0.name" : ["Snow Fox Form (Phase Initial)"],
   "codex.form.shape-shifter-curse.snow_fox_0.title": ["\nThe curse has begun affecting your body; white fur starts growing all over you. You feel a growing urge to run across snowy ground."],
   "codex.form.shape-shifter-curse.snow_fox_0.equip": [
     "[Charm Of Reverse Thermometer]"
@@ -1023,7 +1023,7 @@
     "Your fluffy fur further hinders your movement speed while swimming."],
   "codex.form.shape-shifter-curse.snow_fox_3.instincts": [""],
 
-  "codex.form.shape-shifter-curse.familiar_fox_0.name": ["Familiar Fox Form (Phase 0)"],
+  "codex.form.shape-shifter-curse.familiar_fox_0.name": ["Familiar Fox Form (Phase Initial)"],
   "codex.form.shape-shifter-curse.familiar_fox_0.title": ["\nThe curse has affected your body - Orange-red fur patches are growing across your skin. You feel an urge to run across snowy plains"],
   "codex.form.shape-shifter-curse.familiar_fox_0.equip": [
     "[Amulet Bracelet]"
@@ -1184,7 +1184,7 @@
   "codex.form.shape-shifter-curse.feral_cat_sp.cons": ["Meow... Meowor?"],
   "codex.form.shape-shifter-curse.feral_cat_sp.instincts": ["Meow...."],
 
-  "codex.form.shape-shifter-curse.spider_0.name": ["Spider Form (Phase 0)"],
+  "codex.form.shape-shifter-curse.spider_0.name": ["Spider Form (Phase Initial)"],
   "codex.form.shape-shifter-curse.spider_0.title": ["\nThe curse has begun affecting your body. Patches of chitinous shell have started to spread across your skin, and liquid silk is beginning to secrete from your new abdomen."],
   "codex.form.shape-shifter-curse.spider_0.equip": [""],
   "codex.form.shape-shifter-curse.spider_0.appearance": ["Hard carapace-like growths have begun to emerge on your body. They are composed of chitin - lightweight yet sturdy.\nLiquid silk threads seep from your newly grown abdomen. You discover that you instinctively know how to weave compressed silk projectiles, which can be hurled to hinder your targets, and construct climbable web scaffolds.\nA pair of carapace-covered protrusions has grown on each side of your torso and at the base of your abdomen. By focusing your mind, you find that you can command them to move slightly.\n\nUnlike other forms, you sense that your transformation is now in a state of stagnation - A new instinct whispers to you: you will need specific catalytic materials, a safe location and time to achieve a complete transformation."],

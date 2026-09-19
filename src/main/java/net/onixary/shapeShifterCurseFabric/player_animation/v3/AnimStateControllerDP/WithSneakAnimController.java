@@ -4,8 +4,11 @@ import com.google.gson.JsonObject;
 import net.minecraft.entity.player.PlayerEntity;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.*;
+import net.onixary.shapeShifterCurseFabric.util.util.DataDumper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class WithSneakAnimController extends AbstractAnimStateControllerDP {
     private AnimUtils.AnimationHolderData animationHolderData;
@@ -44,5 +47,10 @@ public class WithSneakAnimController extends AbstractAnimStateControllerDP {
         this.animationHolderData = AnimUtils.readAnimInJson(jsonObject, "anim", null);
         this.sneakAnimationHolderData = AnimUtils.readAnimInJson(jsonObject, "sneakAnim", null);
         return this;
+    }
+
+    @Override
+    public @NotNull List<AnimationHolder> getAllAnimations() {
+        return DataDumper.buildList(animationHolder, sneakAnimationHolder);
     }
 }

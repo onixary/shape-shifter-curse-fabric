@@ -428,7 +428,7 @@
   "codex.form.shape-shifter-curse.original_shifter.cons": [" "],
   "codex.form.shape-shifter-curse.original_shifter.instincts": [" "],
 
-  "codex.form.shape-shifter-curse.anubis_wolf_0.name" : ["胡狼形态(0阶段)"],
+  "codex.form.shape-shifter-curse.anubis_wolf_0.name" : ["胡狼形态(初始阶段)"],
   "codex.form.shape-shifter-curse.anubis_wolf_0.title": ["\n诅咒对你的身体产生了一些可见的影响。你身上出现了一些类似胡狼的特征，偶尔会有模糊的低语在你脑海中回荡"],
   "codex.form.shape-shifter-curse.anubis_wolf_0.equip": [""],
   "codex.form.shape-shifter-curse.anubis_wolf_0.appearance": ["你发现你的耳朵不再处于本应该在的位置：它们向你的头顶移动，末端变尖，上面长出了淡金色的绒毛，看起来就像沙漠中出现的狼形灵体的一样\n黑黄相间的斑驳毛皮从你的四肢末端长出。在其下，你发现你的指甲变成了黑色，角质层也变得更加坚硬\n一条纤细匀称的尾部从你的尾骨延伸出来。其被短毛覆盖，颜色由根部的暗色逐渐过渡到末端的浅色\n\n令人在意的是，你偶尔能听见脑海中传来的低语声。你无法确定那是什么，似乎有某种外来的存在寄居在你的身体中…"],
@@ -443,7 +443,7 @@
       "text":" 待在沙漠群系中", "color":"#c67681"
     }],
 
-  "codex.form.shape-shifter-curse.anubis_wolf_1.name" : ["胡狼形态(1阶段)"],
+  "codex.form.shape-shifter-curse.anubis_wolf_1.name" : ["胡狼形态(第一阶段)"],
   "codex.form.shape-shifter-curse.anubis_wolf_1.title": ["\n无主的狼灵们的低语声愈发清晰。曾经属于它们的特征开始在你身上蔓延开来"],
   "codex.form.shape-shifter-curse.anubis_wolf_1.equip": [""],
   "codex.form.shape-shifter-curse.anubis_wolf_1.appearance": ["由身体中部的黑色过渡到四肢末端的浅铜色，斑驳的短毛已经蔓延到了你躯干的大部分部位\n你的手足变成了更加接近爪子的结构。它们变得比之前稍微细长，革质的肉垫从掌中凸出\n你的耳部变得更大，尖端指向上方。值得注意的是，你发现从你的耳后长出了两簇金色的毛簇，远远看去如同某种耳饰一样\n你的尾部进一步延伸，变得更加修长。其末端的金色也变得更加显眼\n\n你脑海中的低语声变得愈发清晰。彷徨在沙漠中的无主狼灵依附在你的身上，在还有生命时，它们曾集群狩猎，紧密无间\n它们似乎没有敌意，反而会在危险时保护你。它们想从你这里得到什么？"],
@@ -466,7 +466,7 @@
       "text":"处于凋零效果下的冲动", "color":"#c67681"
     }],
 
-  "codex.form.shape-shifter-curse.anubis_wolf_2.name" : ["胡狼形态(2阶段)"],
+  "codex.form.shape-shifter-curse.anubis_wolf_2.name" : ["胡狼形态(第二阶段)"],
   "codex.form.shape-shifter-curse.anubis_wolf_2.title": ["\n除了能够双足行走以外，一只死而复生，重新得到肉体的狼灵几乎就是你现在的模样"],
   "codex.form.shape-shifter-curse.anubis_wolf_2.equip": [
     "[凋零裹布]"
@@ -523,7 +523,7 @@
   "codex.form.shape-shifter-curse.anubis_wolf_3.cons": ["亡灵生物的体质同样带给了你们一些劣势：\n当受到敌人攻击时，被激发的亡灵力量会让你们陷入3.5秒的凋零II状态\n你们无法控制触碰中带有的亡灵之力。现在击杀生物掉落的肉类腐烂，以及收获的作物化为沙尘的概率更高\n你们现在的身体很难自然再生，从饱和度的生命值回复速度变得相当缓慢，并且现在生命回复药水不会再对你们起效\n你们的力量对亡灵生物的直接伤害进一步下降\n\n素食现在无法为你们提供任何饱和度\n普通的腿甲与鞋不再适合你们四足的身体结构"],
   "codex.form.shape-shifter-curse.anubis_wolf_3.instincts": [" "],
 
-  "codex.form.shape-shifter-curse.axolotl_0.name": ["美西螈形态(0阶段)"],
+  "codex.form.shape-shifter-curse.axolotl_0.name": ["美西螈形态(初始阶段)"],
   "codex.form.shape-shifter-curse.axolotl_0.title": ["\n诅咒对你的身体产生了一些可见的影响。除此之外，你有一种想要浸没在水中的冲动。"],
   "codex.form.shape-shifter-curse.axolotl_0.equip": [""],
   "codex.form.shape-shifter-curse.axolotl_0.appearance": ["你的脸颊两侧生长出了几丛淡红色的簇状结构，它们总是处于潮湿状态，似乎能帮你补充一部分氧气\n",
@@ -541,7 +541,7 @@
       "text":" 待在繁茂洞穴群系中", "color":"#c67681"
     }],
 
-  "codex.form.shape-shifter-curse.axolotl_1.name": ["美西螈形态(1阶段)"],
+  "codex.form.shape-shifter-curse.axolotl_1.name": ["美西螈形态(第一阶段)"],
   "codex.form.shape-shifter-curse.axolotl_1.title": ["\n生长后的鳃与有力的尾部让你能够自由探索被淹没的结构。刚捕获的鱼类是最适合你的食物"],
   "codex.form.shape-shifter-curse.axolotl_1.equip": [""],
   "codex.form.shape-shifter-curse.axolotl_1.appearance": ["你脸颊两侧的鳃丛进一步生长。在水中，它们几乎可以供给你所需的所有氧气\n",
@@ -571,7 +571,7 @@
       "text":"\n在垂滴叶丛中漫游", "color":"#c67681"
     },"的想法开始吸引你"],
 
-  "codex.form.shape-shifter-curse.axolotl_2.name": ["美西螈形态(2阶段)"],
+  "codex.form.shape-shifter-curse.axolotl_2.name": ["美西螈形态(第二阶段)"],
   "codex.form.shape-shifter-curse.axolotl_2.title": ["\n作为两栖类的一员，你是水中的掠食者，同时也能在陆地上活动——只是务必记得保持湿润"],
   "codex.form.shape-shifter-curse.axolotl_2.equip": [""],
   "codex.form.shape-shifter-curse.axolotl_2.appearance": ["你的尾部现在更接近你躯干的延伸，它几乎占据了身高的一半\n",
@@ -627,7 +627,7 @@
     "你只能从肉类食物中获取能量"],
   "codex.form.shape-shifter-curse.axolotl_3.instincts": [""],
 
-  "codex.form.shape-shifter-curse.ocelot_0.name" : ["豹猫形态(0阶段)"],
+  "codex.form.shape-shifter-curse.ocelot_0.name" : ["豹猫形态(初始阶段)"],
   "codex.form.shape-shifter-curse.ocelot_0.title": ["\n诅咒对你产生了一些可见的影响。你发现你的身体在潜行时变得更加自然协调"],
   "codex.form.shape-shifter-curse.ocelot_0.equip": [""],
   "codex.form.shape-shifter-curse.ocelot_0.appearance": ["你的耳朵移动到了头顶，它们现在被斑驳的绒毛覆盖，外形介于三角与半圆之间，看起来有点类似某种猫科动物的\n",
@@ -650,7 +650,7 @@
       "text":" 待在丛林群系中", "color":"#c67681"
     }],
 
-  "codex.form.shape-shifter-curse.ocelot_1.name" : ["豹猫形态(1阶段)"],
+  "codex.form.shape-shifter-curse.ocelot_1.name" : ["豹猫形态(第一阶段)"],
   "codex.form.shape-shifter-curse.ocelot_1.title": ["\n更多的猫科动物特征让你能够在树林中自如攀越，并使用有力的前爪发动致命一击。现在生肉似乎比熟食更加吸引你"],
   "codex.form.shape-shifter-curse.ocelot_1.equip": [""],
   "codex.form.shape-shifter-curse.ocelot_1.appearance": ["斑驳的毛皮现在覆盖了你的胸腹与后背的大部分区域。它们与你脖颈的毛领相连，看起来就像是一件斗篷\n",
@@ -683,7 +683,7 @@
       "text":"想要爬到树冠顶部的冲动", "color":"#c67681"
     }],
 
-  "codex.form.shape-shifter-curse.ocelot_2.name" : ["豹猫形态(2阶段)"],
+  "codex.form.shape-shifter-curse.ocelot_2.name" : ["豹猫形态(第二阶段)"],
   "codex.form.shape-shifter-curse.ocelot_2.title": ["\n四足行动对于现在的你而言是最自然的姿态。当蹲坐在地面上时，你几乎和某种大型猫科动物没有什么区别"],
   "codex.form.shape-shifter-curse.ocelot_2.equip": [
     "[肾上素颈环],[猫胡须颈环],[消化毛球]"
@@ -737,7 +737,7 @@
     "任何护甲对你运动的阻碍都让你难以忍受。现在你只能穿戴头盔，也无法正常使用盾牌"],
   "codex.form.shape-shifter-curse.ocelot_3.instincts": [""],
 
-  "codex.form.shape-shifter-curse.bat_0.name" : ["蝙蝠形态(0阶段)"],
+  "codex.form.shape-shifter-curse.bat_0.name" : ["蝙蝠形态(初始阶段)"],
   "codex.form.shape-shifter-curse.bat_0.title": ["\n诅咒对你的身体产生了一些影响，让你看起来像某些翼手目的生物。你感到黑暗的环境在吸引着你。"],
   "codex.form.shape-shifter-curse.bat_0.equip": [
     "[黑夜水晶吊坠],[空心牙吊坠]"
@@ -757,7 +757,7 @@
     }
   ],
 
-  "codex.form.shape-shifter-curse.bat_1.name" : ["蝙蝠形态(1阶段)"],
+  "codex.form.shape-shifter-curse.bat_1.name" : ["蝙蝠形态(第一阶段)"],
   "codex.form.shape-shifter-curse.bat_1.title": ["\n新的视觉与力量让你在洞穴与深夜的黑暗中游刃有余。现在，只是想到暴露在日光下的念头就会让你感到难受。"],
   "codex.form.shape-shifter-curse.bat_1.equip": [
     "[黑夜水晶吊坠],[空心牙吊坠]"
@@ -795,7 +795,7 @@
       "text":"\n被滴水石块围绕", "color":"#c67681"
     },"的想法开始吸引你"],
 
-  "codex.form.shape-shifter-curse.bat_2.name" : ["蝙蝠形态(2阶段)"],
+  "codex.form.shape-shifter-curse.bat_2.name" : ["蝙蝠形态(第二阶段)"],
   "codex.form.shape-shifter-curse.bat_2.title": ["\n作为翼手目生物的一员，你喜欢和你的同类一起在夜空中滑翔。"],
   "codex.form.shape-shifter-curse.bat_2.equip": [
     "[黑夜水晶吊坠],[空心牙吊坠],[固着抓钩],[金刚石握爪]"
@@ -844,7 +844,7 @@
     "肉食不再能为你提供能量，你的身体已经彻底无法消化它们了"],
   "codex.form.shape-shifter-curse.bat_3.instincts": [" "],
 
-  "codex.form.shape-shifter-curse.snow_fox_0.name": ["雪狐形态(0阶段)"],
+  "codex.form.shape-shifter-curse.snow_fox_0.name": ["雪狐形态(初始阶段)"],
   "codex.form.shape-shifter-curse.snow_fox_0.title":["\n诅咒对你的身体产生了一些影响，白色的绒毛开始从你身上生长出来。你有点想要在雪地上奔跑"],
   "codex.form.shape-shifter-curse.snow_fox_0.equip": [
     "[计度温护符]"
@@ -870,7 +870,7 @@
       "text":" 在雪地上奔跑", "color":"#c67681"
     }],
 
-  "codex.form.shape-shifter-curse.snow_fox_1.name": ["雪狐形态(1阶段)"],
+  "codex.form.shape-shifter-curse.snow_fox_1.name": ["雪狐形态(第一阶段)"],
   "codex.form.shape-shifter-curse.snow_fox_1.title": ["\n白色与灰蓝色的绒毛在你身上进一步蔓延，一条雪白的蓬松尾巴在你身后摆动"],
   "codex.form.shape-shifter-curse.snow_fox_1.equip": [
     "[计度温护符]"
@@ -905,7 +905,7 @@
     },"开始吸引你"
   ],
 
-  "codex.form.shape-shifter-curse.snow_fox_2.name": ["雪狐形态(2阶段)"],
+  "codex.form.shape-shifter-curse.snow_fox_2.name": ["雪狐形态(第二阶段)"],
   "codex.form.shape-shifter-curse.snow_fox_2.title": ["你现在的样子几乎与一只直立行走的雪狐别无二致"],
   "codex.form.shape-shifter-curse.snow_fox_2.equip": [
     "[计度温护符],[结霜护爪],[瓶装暴雪]"
@@ -963,7 +963,7 @@
     "你蓬松的毛皮进一步拖慢了你在水中的移动速度"],
   "codex.form.shape-shifter-curse.snow_fox_3.instincts": [""],
 
-  "codex.form.shape-shifter-curse.familiar_fox_0.name": ["使魔红狐形态(0阶段)"],
+  "codex.form.shape-shifter-curse.familiar_fox_0.name": ["使魔红狐形态(初始阶段)"],
   "codex.form.shape-shifter-curse.familiar_fox_0.title":["\n诅咒对你的身体产生了一些影响，橙红色的毛簇开始从你身上生长出来。你有点想要在雪地上奔跑"],
   "codex.form.shape-shifter-curse.familiar_fox_0.equip": [
     "[守御脚环]"
@@ -989,7 +989,7 @@
       "text":" 在雪地上奔跑", "color":"#c67681"
     }],
 
-  "codex.form.shape-shifter-curse.familiar_fox_1.name": ["使魔红狐形态(1阶段)"],
+  "codex.form.shape-shifter-curse.familiar_fox_1.name": ["使魔红狐形态(第一阶段)"],
   "codex.form.shape-shifter-curse.familiar_fox_1.title": ["\n橙红色的毛发在你身上进一步蔓延，一条红色的蓬松尾巴在你身后摆动"],
   "codex.form.shape-shifter-curse.familiar_fox_1.equip": [
     "[守御脚环]"
@@ -1023,7 +1023,7 @@
     }
   ],
 
-  "codex.form.shape-shifter-curse.familiar_fox_2.name": ["使魔红狐形态(2阶段)"],
+  "codex.form.shape-shifter-curse.familiar_fox_2.name": ["使魔红狐形态(第二阶段)"],
   "codex.form.shape-shifter-curse.familiar_fox_2.title": ["你现在看起来很像一只直立行走的红狐，不过有些事情有点不对劲…"],
   "codex.form.shape-shifter-curse.familiar_fox_2.equip": [
     "[守御脚环]"
@@ -1123,7 +1123,7 @@
   "codex.form.shape-shifter-curse.feral_cat_sp.cons": ["喵...喵？"],
   "codex.form.shape-shifter-curse.feral_cat_sp.instincts": ["喵...."],
 
-  "codex.form.shape-shifter-curse.spider_0.name": ["蜘蛛形态(0阶段)"],
+  "codex.form.shape-shifter-curse.spider_0.name": ["蜘蛛形态(初始阶段)"],
   "codex.form.shape-shifter-curse.spider_0.title": ["\n诅咒对你的身体产生了一些可见的影响。一些几丁质的外壳开始覆盖在你的体表，液态的丝线开始从你新的后腹部分泌出来"],
   "codex.form.shape-shifter-curse.spider_0.equip": [""],
   "codex.form.shape-shifter-curse.spider_0.appearance": ["你的体表开始生长出来一些硬质外壳。它们由几丁质构成，轻巧而坚实\n液态的丝线从你新长出的后腹部分泌出来。你发现自己本能地知道如何编织压缩的丝线团，它们可以被投掷来阻碍你的目标，以及搭建可供攀援的网架\n你的躯干两侧与后腹根部分别长出了一对覆盖着外壳的突起。集中精神，你发现自己可以在某种程度上控制它们稍微移动\n\n与其他形态不同，你察觉到你的变化现在处于停滞状态——新的本能向你低语：你需要一些特殊的催化材料，一个安全的地方，以及一些时间来达成完全的蜕变"],
@@ -1139,7 +1139,7 @@
       "text":"[蛛网胶滴]", "color":"#c67681"
     },"，之后寻觅一个安全且隐蔽的地方..."],
 
-  "codex.form.shape-shifter-curse.spider_1.name": ["蜘蛛形态(1阶段)"],
+  "codex.form.shape-shifter-curse.spider_1.name": ["蜘蛛形态(第一阶段)"],
   "codex.form.shape-shifter-curse.spider_1.title": ["\n一个不时颤动的巨大丝茧被包裹在网巢中"],
   "codex.form.shape-shifter-curse.spider_1.equip": [""],
   "codex.form.shape-shifter-curse.spider_1.appearance": ["在结露蛛网的催化下，你后腹部分泌出大量的丝线，编织为坚固的丝茧并将你完全包裹在其中\n你感觉四周非常潮湿，想要发出移动身体的指令，但是回应你的只有一片混沌…你是被浸泡在某种粘稠的流体中么？还是说你就是这些流体本身?\n\n你无法描述自己现在的感觉。唯一可以确定的是，在丝茧之中，你的身体正在发生着某种激烈的变化"],
@@ -1147,7 +1147,7 @@
   "codex.form.shape-shifter-curse.spider_1.cons": ["你不知道该如何感受自己现在的身体，唯有等待"],
   "codex.form.shape-shifter-curse.spider_1.instincts": ["被包裹在丝茧中，你唯一能做的事情只有在结露蛛网的环绕下等待蜕变完成"],
 
-  "codex.form.shape-shifter-curse.spider_2.name": ["蜘蛛形态(2阶段)"],
+  "codex.form.shape-shifter-curse.spider_2.name": ["蜘蛛形态(第二阶段)"],
   "codex.form.shape-shifter-curse.spider_2.title": ["\n作为蜕变后的节肢生物，你的身体虽然保持着与原本相似的外形，但其甲壳下的运作方式已经完全不同"],
   "codex.form.shape-shifter-curse.spider_2.equip": ["[副手剑],[副手镐],[副手斧],[盾牌(额外手臂槽位)],[不死图腾(额外手臂槽位)],[流食囊(额外手臂槽位)],[箭毒纺锤]"],
   "codex.form.shape-shifter-curse.spider_2.appearance": ["你的体表已经变化成了几丁质的外壳。它们替代了你原本的骨骼，支撑你如今分节的肢体的移动；浅色的硬质毛发从你的颈部、关节与肢体末端生长出来，它们一定程度上弥补了你如今因为被坚硬的外壳包覆而失去的触觉\n一对额外的眼睛从你原本双眼的上方生长出来，让你在黑暗处也能清晰视物；你的头部与下颌的附属物伸长为两对触肢，进一步增强了你的感官\n你身体两侧的突起生长为一对功能完备的额外手臂，它们的力量较弱，但是足以拿住工具，帮助你的冒险；同时，位于你前腹部与后腹部交界处的突起也成长为一对额外的后肢。但它们还不能支撑你的身体，只是贴附于你的后腹部，微微向上扬起\n你的身体不再渴望固体的食物，转而希望摄取猎物在体外消化后的营养流质。而编织用于这一目的的液化茧囊的方法也已经刻在了你的本能中\n\n与普通的蜘蛛不同的是，你进一步发育的后腹部并不用于容纳器官组织，而是用于存储液态丝线。得益于更加特化的纺丝器，你可以编织更高密度的压缩丝线团，它们甚至足以形成可供攀爬的丝塔"],

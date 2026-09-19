@@ -6,8 +6,11 @@ import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.entity.vehicle.MinecartEntity;
 import net.onixary.shapeShifterCurseFabric.player_animation.AnimationHolder;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.*;
+import net.onixary.shapeShifterCurseFabric.util.util.DataDumper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class RideAnimController extends AbstractAnimStateControllerDP {
     private AnimUtils.AnimationHolderData animationHolderData;
@@ -46,5 +49,10 @@ public class RideAnimController extends AbstractAnimStateControllerDP {
         this.animationHolderData = AnimUtils.readAnimInJson(jsonObject, "anim", null);
         this.RideVehicleAnimationHolderData = AnimUtils.readAnimInJson(jsonObject, "rideVehicleAnim", null);
         return this;
+    }
+
+    @Override
+    public @NotNull List<AnimationHolder> getAllAnimations() {
+        return DataDumper.buildList(animationHolder, RideVehicleAnimationHolder);
     }
 }
