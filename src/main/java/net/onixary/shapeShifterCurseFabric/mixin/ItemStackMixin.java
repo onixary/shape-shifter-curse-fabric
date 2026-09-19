@@ -51,7 +51,9 @@ public abstract class ItemStackMixin {
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.transformative_effect_cure").formatted(Formatting.YELLOW));
                     EffectManager.clearTransformativeEffect(player);
                 }
-                if (FormUtils.InitialForm.hasFlag(currentForm) && InstinctUtils.getInstinctValuePercent(player) < 0.1) {
+                // if (FormUtils.InitialForm.hasFlag(currentForm) && InstinctUtils.getInstinctValuePercent(player) < 0.1) {
+                // 初始阶段可以吃金苹果还原
+                if (FormUtils.InitialForm.hasFlag(currentForm)) {
                     player.sendMessage(Text.translatable("info.shape-shifter-curse.transformative_effect_cure").formatted(Formatting.YELLOW));
                     IForm nextForm = currentForm._getPrevForm(player, ITransformReason.ItemReasonBuilder.apply(stack));
                     if (nextForm != currentForm) {
