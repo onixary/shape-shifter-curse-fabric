@@ -25,7 +25,7 @@ public class AltarCraftUIHandler extends AbstractRecipeScreenHandler<SidedInvent
     public final PropertyDelegate propertyDelegate;
 
     public static AltarCraftUIHandler createMenu(int i, PlayerInventory inventory) {
-        return new AltarCraftUIHandler(RegMenuType.AltarCraftUI, i, inventory, new SimpleInventory(11), ScreenHandlerContext.EMPTY, new ArrayPropertyDelegate(3));
+        return new AltarCraftUIHandler(RegMenuType.AltarCraftUI, i, inventory, new SimpleInventory(12), ScreenHandlerContext.EMPTY, new ArrayPropertyDelegate(3));
     }
 
     public AltarCraftUIHandler(ScreenHandlerType<?> screenHandlerType, int syncId, PlayerInventory playerInventory, Inventory altarBlockEntity, ScreenHandlerContext context, PropertyDelegate propertyDelegate) {
@@ -44,7 +44,8 @@ public class AltarCraftUIHandler extends AbstractRecipeScreenHandler<SidedInvent
         }
 
         this.addSlot(new Slot(this.altarBlockEntity, 9, 97, 53));
-        this.addSlot(new AltarOutputSlot(this.altarBlockEntity, 10, 134, 35));
+        this.addSlot(new Slot(this.altarBlockEntity, 10, 97 + 18, 53));
+        this.addSlot(new AltarOutputSlot(this.altarBlockEntity, 11, 134, 35));
 
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 9; ++j) {
@@ -86,7 +87,7 @@ public class AltarCraftUIHandler extends AbstractRecipeScreenHandler<SidedInvent
 
     @Override
     public int getCraftingResultSlotIndex() {
-        return 10;
+        return 11;
     }
 
     @Override
@@ -101,7 +102,7 @@ public class AltarCraftUIHandler extends AbstractRecipeScreenHandler<SidedInvent
 
     @Override
     public int getCraftingSlotCount() {
-        return 11;
+        return 12;
     }
 
     @Override
@@ -124,23 +125,23 @@ public class AltarCraftUIHandler extends AbstractRecipeScreenHandler<SidedInvent
         Slot slot = this.slots.get(slotIndex);
         ItemStack slotItem = slot.hasStack() ? slot.getStack() : ItemStack.EMPTY;
         ItemStack slotItemCopy = slotItem.copy();
-        if (slotIndex >= 0 && slotIndex < 11) {
-            if (!this.insertItem(slotItem, 11, 47, slotIndex == 10)) {
+        if (slotIndex >= 0 && slotIndex < 12) {
+            if (!this.insertItem(slotItem, 12, 47, slotIndex == 10)) {
                 return ItemStack.EMPTY;
             }
             if (slotIndex == 0) {
                 slot.onQuickTransfer(slotItem, slotItemCopy);
             }
         }
-        else if (slotIndex >= 11 && slotIndex < 47) {
+        else if (slotIndex >= 12 && slotIndex < 48) {
             if (AltarBlockEntity.canFuel(slotItem)) {
-                if (!this.insertItem(slotItem, 9, 10, false)) {
-                    if (!this.insertItem(slotItem, 0, 9, false)) {
+                if (!this.insertItem(slotItem, 10, 11, false)) {
+                    if (!this.insertItem(slotItem, 0, 10, false)) {
                         return ItemStack.EMPTY;
                     }
                 }
             }
-            if (!this.insertItem(slotItem, 0, 9, false)) {
+            if (!this.insertItem(slotItem, 0, 10, false)) {
                 return ItemStack.EMPTY;
             }
         }
