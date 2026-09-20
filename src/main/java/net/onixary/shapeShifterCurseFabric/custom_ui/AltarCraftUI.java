@@ -14,8 +14,14 @@ public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
     private static final Identifier BACKGROUND = new Identifier(MOD_ID,"textures/gui/altar_craft_ui.png");
     private static final int WIDTH = 176;
     private static final int HEIGHT = 166;
-    private static final int TEXTURE_WIDTH = 200;
-    private static final int TEXTURE_HEIGHT = 166;
+    private static final int TEXTURE_WIDTH = 256;
+    private static final int TEXTURE_HEIGHT = 256;
+    private static final int PROCESS_BAR_ORIG_X = 84;
+    private static final int PROCESS_BAR_ORIG_Y = 36;
+    private static final int PROCESS_BAR_FULL_X = 176;
+    private static final int PROCESS_BAR_FULL_Y = 0;
+    private static final int PROCESS_BAR_W = 43;
+    private static final int PROCESS_BAR_H = 15;
     private int baseX;
     private int baseY;
 
@@ -35,7 +41,7 @@ public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
         this.renderBackground(context);
         super.render(context, mouseX, mouseY, delta);
         this.drawMouseoverTooltip(context, mouseX, mouseY);
-        this.drawBar(context);
+        this.drawProcess(context);
     }
 
     @Override
@@ -43,13 +49,18 @@ public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
         context.drawTexture(BACKGROUND, baseX, baseY, 0, 0, WIDTH, HEIGHT, TEXTURE_WIDTH, TEXTURE_HEIGHT);
     }
 
-    public void drawBar(DrawContext context) {
+    public void drawProcess(DrawContext context) {
         AltarCraftUIHandler uiHandler = this.getScreenHandler();
         int maxProgress = uiHandler.getMaxProgress();
         if (maxProgress > 0) {
-            int ProcessWidth = (int) (24 * ((float) uiHandler.getNowProgress() / (float) maxProgress));
-            context.drawTexture(BACKGROUND, baseX+89, baseY+35, 176, 0, ProcessWidth, 17, TEXTURE_WIDTH, TEXTURE_HEIGHT);
+            int ProcessWidth = (int) (PROCESS_BAR_W * ((float) uiHandler.getNowProgress() / (float) maxProgress));
+            context.drawTexture(BACKGROUND, baseX + PROCESS_BAR_ORIG_X, baseY + PROCESS_BAR_ORIG_Y, PROCESS_BAR_FULL_X, PROCESS_BAR_FULL_Y, ProcessWidth, PROCESS_BAR_H, TEXTURE_WIDTH, TEXTURE_HEIGHT);
         }
+    }
+
+    // 新Widget图没有 估计是漏了
+    public void drawBar(DrawContext context) {
+        AltarCraftUIHandler uiHandler = this.getScreenHandler();
         int maxFuel = AltarBlockEntity.maxFuel;
         if (maxFuel > 0) {
             int FuelWidth = (int) (54 * ((float) uiHandler.getNowFuel() / (float) maxFuel));

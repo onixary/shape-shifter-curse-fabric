@@ -39,12 +39,12 @@ public class AltarCraftUIHandler extends AbstractRecipeScreenHandler<SidedInvent
 
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 3; ++j) {
-                this.addSlot(new Slot(this.altarBlockEntity, j + i * 3, 30 + j * 18, 17 + i * 18));
+                this.addSlot(new Slot(this.altarBlockEntity, j + i * 3, 26 + j * 18, 17 + i * 18));
             }
         }
 
-        this.addSlot(new Slot(this.altarBlockEntity, 9, 152, 57));
-        this.addSlot(new AltarOutputSlot(this.altarBlockEntity, 10, 124, 35));
+        this.addSlot(new Slot(this.altarBlockEntity, 9, 97, 53));
+        this.addSlot(new AltarOutputSlot(this.altarBlockEntity, 10, 134, 35));
 
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 9; ++j) {
