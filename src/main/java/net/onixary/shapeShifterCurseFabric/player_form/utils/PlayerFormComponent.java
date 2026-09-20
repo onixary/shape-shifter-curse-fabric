@@ -46,6 +46,8 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     public Identifier nowPerkTree = RegPerks.EMPTY_PERK_TREE;
     public HashMap<Identifier, List<Identifier>> formPerkMap = new HashMap<>();
 
+    public boolean isFlying;
+
     // 临时变量
     public PlayerEntity player = null;
 
@@ -54,6 +56,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         this.nowForm = InitialFormUtils.getInitialForm(player);
         this.nowFormID = nowForm.getFormID();
         this.fallbackFormID = nowForm.getFormID();
+        this.isFlying = false;
     }
 
     public @NotNull IForm getFallbackForm() {
@@ -182,6 +185,11 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         }
         if (player.getWorld().isClient) {
             InstinctUtils.fromInstinctUpdate(instinctValue, instinctRate);
+            if (tag.contains("isFlying")) {
+                this.isFlying = tag.getBoolean("isFlying");
+            }
+        } else {
+            this.isFlying = player.getAbilities().flying;
         }
     }
 
@@ -234,6 +242,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
             perks.put(perkEntry.getKey().toString(), perkTree);
         }
         tag.put("perks", perks);
+        tag.putBoolean("isFlying", isFlying);
     }
 
     public void clear() {
@@ -263,5 +272,13 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     public void setForm(Identifier formID) {
         nowForm = FormUtils.parseForm(formID, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
         nowFormID = formID;
+    }
+
+    public void checkUpdate() {
+        boolean isFlying = player.getAbilities().flying;
+        if (isFlying != this.isFlying) {
+            this.isFlying = isFlying;
+            sync();
+        }
     }
 }

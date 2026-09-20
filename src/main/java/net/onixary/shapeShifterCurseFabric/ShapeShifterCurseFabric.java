@@ -312,6 +312,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             return ActionResult.PASS;
         });
 
+
+
         /// Debug instinct: unregister this to see instinct debug info
         //InstinctDebugHUD.register();
 
@@ -401,6 +403,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
             // Mana System
             ManaUtils.manaTick(player);
+
+            PlayerFormComponent.COMPONENT.get(player).checkUpdate();
 
             /* 重构后不需要了 仅用于参考旧实现逻辑
             // handle transformative effects tick
