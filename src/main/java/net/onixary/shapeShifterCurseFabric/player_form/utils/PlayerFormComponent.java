@@ -10,7 +10,6 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.perk.IPerk;
 import net.onixary.shapeShifterCurseFabric.perk.RegPerks;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
@@ -46,6 +45,9 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     public Identifier nowPerkTree = RegPerks.EMPTY_PERK_TREE;
     public HashMap<Identifier, List<Identifier>> formPerkMap = new HashMap<>();
 
+    // 仅用于(客户端)和(服务器端判断是否需要同步)
+    public boolean isFlying;
+
     // 临时变量
     public PlayerEntity player = null;
 
@@ -54,6 +56,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         this.nowForm = InitialFormUtils.getInitialForm(player);
         this.nowFormID = nowForm.getFormID();
         this.fallbackFormID = nowForm.getFormID();
+        this.isFlying = false;
     }
 
     public @NotNull IForm getFallbackForm() {
@@ -182,6 +185,11 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         }
         if (player.getWorld().isClient) {
             InstinctUtils.fromInstinctUpdate(instinctValue, instinctRate);
+            if (tag.contains("isFlying")) {
+                this.isFlying = tag.getBoolean("isFlying");
+            }
+        } else {
+            this.isFlying = player.getAbilities().flying;
         }
     }
 
@@ -234,6 +242,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
             perks.put(perkEntry.getKey().toString(), perkTree);
         }
         tag.put("perks", perks);
+        tag.putBoolean("isFlying", this.player.getAbilities() != null && this.player.getAbilities().flying);
     }
 
     public void clear() {
@@ -263,5 +272,13 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     public void setForm(Identifier formID) {
         nowForm = FormUtils.parseForm(formID, RegPlayerForms.ORIGINAL_BEFORE_ENABLE);
         nowFormID = formID;
+    }
+
+    public void checkFlyUpdate() {
+        boolean isFlying = player.getAbilities().flying;
+        if (isFlying != this.isFlying) {
+            this.isFlying = isFlying;
+            sync();
+        }
     }
 }

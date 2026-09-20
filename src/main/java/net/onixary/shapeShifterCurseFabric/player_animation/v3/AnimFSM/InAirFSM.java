@@ -25,8 +25,7 @@ public class InAirFSM extends AbstractAnimFSM {
         if (UniversalStateResult != null) {
             return UniversalStateResult;
         }
-        // TODO 需要想一个对网络友好的同步方式 最好能客户端单独处理的
-        if (player.getAbilities().flying) {
+        if (animSystemData.isFlying) {
             return ANIM_STATE_FLYING;
         }
         if (player.isFallFlying()) {

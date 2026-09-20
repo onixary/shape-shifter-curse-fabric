@@ -77,7 +77,8 @@
     "SU_ServerPlayerEntityMixin",
     "SU_MinecraftServerMixin",
     "integration.LodeStoneIntegrationMixin",
-    "RecipeManagerMixin"
+    "RecipeManagerMixin",
+    "ServerPlayNetworkHandlerMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",

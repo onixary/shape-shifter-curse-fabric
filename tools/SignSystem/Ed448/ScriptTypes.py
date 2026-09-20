@@ -186,6 +186,26 @@ class AuthFile:
 			raise Exception("AuthFile Cannot Pass Verify")
 		return authFile
 
+	@staticmethod
+	def loadWithOutVerify(fileName: str, data: bytes, rootPublicKey: typing.Optional[ed448.Ed448PublicKey] = None) -> "AuthFile":
+		authFile: AuthFile = AuthFile()
+		dataIO = io.BytesIO(data)
+		MagicNumber = dataIO.read(Const.MAGIC_NUMBER_LENGTH)
+		if MagicNumber != Const.MAGIC_NUMBER:
+			raise Exception("Magic Number is invalid")
+		authFile.Version = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
+		rollback = dataIO.tell()
+		keySegmentSize = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
+		dataIO.seek(rollback)
+		authFile.KeySegment = SubKeyPublicSegment.load(dataIO.read(keySegmentSize), rootPublicKey)
+		rollback = dataIO.tell()
+		dataSegmentSize = int.from_bytes(dataIO.read(4), Const.INT_BYTE_TYPE)
+		dataIO.seek(rollback)
+		dataSegmentBytes = dataIO.read(dataSegmentSize)
+		authFile.DataSegments = IDataSegment.load(fileName, dataSegmentBytes)
+		authFile.DataSignature = dataIO.read(114)
+		return authFile
+
 	def save(self, subKeySegment: SubKeySegment, rootPublicKey: typing.Optional[ed448.Ed448PublicKey] = None, rootPrivateKey: typing.Optional[ed448.Ed448PrivateKey] = None) -> bytes:
 		if self.KeySegment.PublicKey != subKeySegment.PublicKeySegment.PublicKey:
 			raise Exception("SubKeySegment is invalid")
