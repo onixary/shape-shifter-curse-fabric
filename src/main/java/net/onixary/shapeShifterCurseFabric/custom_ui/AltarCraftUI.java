@@ -12,16 +12,22 @@ import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID
 public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
 
     private static final Identifier BACKGROUND = new Identifier(MOD_ID,"textures/gui/altar_craft_ui.png");
-    private static final int WIDTH = 176;
+    private static final int WIDTH = 174;
     private static final int HEIGHT = 166;
     private static final int TEXTURE_WIDTH = 256;
     private static final int TEXTURE_HEIGHT = 256;
     private static final int PROCESS_BAR_ORIG_X = 84;
-    private static final int PROCESS_BAR_ORIG_Y = 36;
-    private static final int PROCESS_BAR_FULL_X = 176;
+    private static final int PROCESS_BAR_ORIG_Y = 39;
+    private static final int PROCESS_BAR_FULL_X = 174;
     private static final int PROCESS_BAR_FULL_Y = 0;
     private static final int PROCESS_BAR_W = 43;
-    private static final int PROCESS_BAR_H = 15;
+    private static final int PROCESS_BAR_H = 9;
+    private static final int FUEL_BAR_ORIG_X = 84;
+    private static final int FUEL_BAR_ORIG_Y = 49;
+    private static final int FUEL_BAR_FULL_X = 174;
+    private static final int FUEL_BAR_FULL_Y = 9;
+    private static final int FUEL_BAR_W = 43;
+    private static final int FUEL_BAR_H = 3;
     private int baseX;
     private int baseY;
 
@@ -29,6 +35,9 @@ public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
 
     public AltarCraftUI(AltarCraftUIHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
+        // 藏的还挺深 要不是我修槽位偏移我都不知道这个
+        this.backgroundWidth = WIDTH;
+        this.backgroundHeight = HEIGHT;
     }
 
     protected void init() {
@@ -42,6 +51,7 @@ public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
         super.render(context, mouseX, mouseY, delta);
         this.drawMouseoverTooltip(context, mouseX, mouseY);
         this.drawProcess(context);
+        this.drawFuel(context);
     }
 
     @Override
@@ -58,13 +68,12 @@ public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
         }
     }
 
-    // 新Widget图没有 估计是漏了
-    public void drawBar(DrawContext context) {
+    public void drawFuel(DrawContext context) {
         AltarCraftUIHandler uiHandler = this.getScreenHandler();
         int maxFuel = AltarBlockEntity.maxFuel;
         if (maxFuel > 0) {
-            int FuelWidth = (int) (54 * ((float) uiHandler.getNowFuel() / (float) maxFuel));
-            context.fill(baseX + 90, baseY + 60, baseX + 90 + FuelWidth, baseY + 60 + 10, 0xFFFF00FF);
+            int FuelWidth = (int) (FUEL_BAR_W * ((float) uiHandler.getNowFuel() / (float) maxFuel));
+            context.drawTexture(BACKGROUND, baseX + FUEL_BAR_ORIG_X, baseY + FUEL_BAR_ORIG_Y, FUEL_BAR_FULL_X, FUEL_BAR_FULL_Y, FuelWidth, FUEL_BAR_H, TEXTURE_WIDTH, TEXTURE_HEIGHT);
         }
     }
 }
