@@ -404,8 +404,6 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             // Mana System
             ManaUtils.manaTick(player);
 
-            PlayerFormComponent.COMPONENT.get(player).checkUpdate();
-
             /* 重构后不需要了 仅用于参考旧实现逻辑
             // handle transformative effects tick
             PlayerEffectAttachment attachment = player.getAttached(EffectManager.EFFECT_ATTACHMENT);
