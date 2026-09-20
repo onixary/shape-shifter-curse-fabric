@@ -760,10 +760,10 @@ public class ShapeShifterCurseCommand {
             return 0;
         }
         try {
-            EffectManager.clearTransformativeEffect(player);
-            FormUtils._setForm(player, form);
-            FormUtils.updateFormHistory(player, form);
-            TransformManager.sendClientFirstPersonReset(player);
+            EffectManager.clearTransformativeEffect(target);
+            FormUtils._setForm(target, form);
+            FormUtils.updateFormHistory(target, form);
+            TransformManager.sendClientFirstPersonReset(target);
         }
         catch (Exception e){
             // 调试时在此打断点
