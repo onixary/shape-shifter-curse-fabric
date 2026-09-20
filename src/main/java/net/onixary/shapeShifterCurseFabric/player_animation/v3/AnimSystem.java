@@ -15,6 +15,7 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimFSM.FSMUtils;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateController.TransformingController;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,6 +36,7 @@ public class AnimSystem {
         public Vec3d fakeVelocity = Vec3d.ZERO;
         public double fallDistanceTemp;
         public double fallDistance = 0;
+        public boolean isFlying = false;
         public NbtCompound customData;  // 用于存储其他拓展Mod的数据 在本模组中不使用
 
         public AnimSystemData(PlayerEntity player) {
@@ -122,6 +124,7 @@ public class AnimSystem {
         }
         this.data.fallDistance = this.data.fallDistanceTemp - nowPos.y;
         this.data.ContinueIdleStayTickCounter = FSMUtils.IsIdleStayCondition(this.player, this.data) ? this.data.ContinueIdleStayTickCounter + 1 : 0;
+        this.data.isFlying = this.player.getAbilities().flying || PlayerFormComponent.COMPONENT.get(player).isFlying;
         this.NPPA_Tick();
     }
 

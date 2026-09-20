@@ -50,7 +50,7 @@ def SelectFile(folderPath: str, fileCondition: typing.Callable[[str], bool]) -> 
 
 def printAuthFileData(fileName: str, authFileBytes: bytes, publicKey: typing.Optional[ed448.Ed448PublicKey] = None):
 	try:
-		Utils.printAuthFileData(fileName, ScriptTypes.AuthFile.load(fileName, authFileBytes, publicKey))
+		Utils.printAuthFileData(fileName, ScriptTypes.AuthFile.loadWithOutVerify(fileName, authFileBytes, publicKey))
 	except Exception as e:
 		print("验证文件读取失败")
 		raise e
