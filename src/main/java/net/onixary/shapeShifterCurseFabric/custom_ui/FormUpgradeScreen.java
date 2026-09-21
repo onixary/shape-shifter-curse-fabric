@@ -30,6 +30,55 @@ import java.util.Objects;
 // 标记 UNTESTED 代表这个函数没测试 测试完了就删(估计最后得有一堆没测试函数 还是标一下大概率炸的函数吧)
 
 public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX {
+    public static final Identifier TEXTURE = ShapeShifterCurseFabric.identifier("textures/gui/shape_shifter_tuner_ui.png");
+    public static final int TEXTURE_WIDTH = 420;
+    public static final int TEXTURE_HEIGHT = 190;
+
+    public static final int BACKGROUND_X = 0;
+    public static final int BACKGROUND_Y = 0;
+    public static final int BACKGROUND_WIDTH = 420;
+    public static final int BACKGROUND_HEIGHT = 190;
+
+    public static final int FORM_MODEL_REVIEW_X = 8;
+    public static final int FORM_MODEL_REVIEW_Y = 30;
+    public static final int FORM_MODEL_REVIEW_WIDTH = 100;
+    public static final int FORM_MODEL_REVIEW_HEIGHT = 130;
+
+    public static final int PERK_UI_X = 110;
+    public static final int PERK_UI_Y = 8;
+    public static final int PERK_UI_WIDTH = 200;
+    public static final int PERK_UI_HEIGHT = 174;
+
+    public static final int PERK_INFO_UI_X = 312;
+    public static final int PERK_INFO_UI_Y = 8;
+    public static final int PERK_INFO_UI_WIDTH = 99;
+    public static final int PERK_INFO_UI_HEIGHT = 174;
+
+    public static final int PERK_INFO_NAME_X = 316;
+    public static final int PERK_INFO_NAME_Y = 12;
+    public static final int PERK_INFO_NAME_WIDTH = 91;
+    public static final int PERK_INFO_NAME_HEIGHT = 14;
+
+    public static final int PERK_INFO_DESC_X = 316;
+    public static final int PERK_INFO_DESC_Y = 28;
+    public static final int PERK_INFO_DESC_WIDTH = 91;
+    public static final int PERK_INFO_DESC_HEIGHT = 115;
+
+    public static final int PERK_INFO_XP_ICON_X = 316;
+    public static final int PERK_INFO_XP_ICON_Y = 145;
+    public static final int PERK_INFO_XP_ICON_WIDTH = 16;
+    public static final int PERK_INFO_XP_ICON_HEIGHT = 17;
+
+    public static final int PERK_INFO_XP_COST_X = 334;
+    public static final int PERK_INFO_XP_COST_Y = 145;
+    public static final int PERK_INFO_XP_COST_WIDTH = 73;
+    public static final int PERK_INFO_XP_COST_HEIGHT = 17;
+
+    public static final int PERK_INFO_GAIN_BUTTON_X = 316;
+    public static final int PERK_INFO_GAIN_BUTTON_Y = 164;
+    public static final int PERK_INFO_GAIN_BUTTON_WIDTH = 91;
+    public static final int PERK_INFO_GAIN_BUTTON_HEIGHT = 14;
+
     public static final Identifier LABEL_GAINED = ShapeShifterCurseFabric.identifier("textures/perk/system/gained.png");
     public static final Identifier LABEL_SELECT = ShapeShifterCurseFabric.identifier("textures/perk/system/select.png");
     public static final Identifier LABEL_SELECTED = ShapeShifterCurseFabric.identifier("textures/perk/system/selected.png");
