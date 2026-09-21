@@ -17,4 +17,6 @@ public class RegMenuType {
         Registry.register(Registries.SCREEN_HANDLER, id, factory);
         return factory;
     }
+
+    public static void init() {}
 }
