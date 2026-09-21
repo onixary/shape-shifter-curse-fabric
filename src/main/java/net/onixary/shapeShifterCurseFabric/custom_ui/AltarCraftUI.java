@@ -12,10 +12,22 @@ import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID
 public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
 
     private static final Identifier BACKGROUND = new Identifier(MOD_ID,"textures/gui/altar_craft_ui.png");
-    private static final int WIDTH = 176;
+    private static final int WIDTH = 174;
     private static final int HEIGHT = 166;
-    private static final int TEXTURE_WIDTH = 200;
-    private static final int TEXTURE_HEIGHT = 166;
+    private static final int TEXTURE_WIDTH = 256;
+    private static final int TEXTURE_HEIGHT = 256;
+    private static final int PROCESS_BAR_ORIG_X = 84;
+    private static final int PROCESS_BAR_ORIG_Y = 39;
+    private static final int PROCESS_BAR_FULL_X = 174;
+    private static final int PROCESS_BAR_FULL_Y = 0;
+    private static final int PROCESS_BAR_W = 43;
+    private static final int PROCESS_BAR_H = 9;
+    private static final int FUEL_BAR_ORIG_X = 84;
+    private static final int FUEL_BAR_ORIG_Y = 49;
+    private static final int FUEL_BAR_FULL_X = 174;
+    private static final int FUEL_BAR_FULL_Y = 9;
+    private static final int FUEL_BAR_W = 43;
+    private static final int FUEL_BAR_H = 3;
     private int baseX;
     private int baseY;
 
@@ -23,6 +35,9 @@ public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
 
     public AltarCraftUI(AltarCraftUIHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
+        // 藏的还挺深 要不是我修槽位偏移我都不知道这个
+        this.backgroundWidth = WIDTH;
+        this.backgroundHeight = HEIGHT;
     }
 
     protected void init() {
@@ -35,7 +50,8 @@ public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
         this.renderBackground(context);
         super.render(context, mouseX, mouseY, delta);
         this.drawMouseoverTooltip(context, mouseX, mouseY);
-        this.drawBar(context);
+        this.drawProcess(context);
+        this.drawFuel(context);
     }
 
     @Override
@@ -43,17 +59,21 @@ public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
         context.drawTexture(BACKGROUND, baseX, baseY, 0, 0, WIDTH, HEIGHT, TEXTURE_WIDTH, TEXTURE_HEIGHT);
     }
 
-    public void drawBar(DrawContext context) {
+    public void drawProcess(DrawContext context) {
         AltarCraftUIHandler uiHandler = this.getScreenHandler();
         int maxProgress = uiHandler.getMaxProgress();
         if (maxProgress > 0) {
-            int ProcessWidth = (int) (24 * ((float) uiHandler.getNowProgress() / (float) maxProgress));
-            context.drawTexture(BACKGROUND, baseX+89, baseY+35, 176, 0, ProcessWidth, 17, TEXTURE_WIDTH, TEXTURE_HEIGHT);
+            int ProcessWidth = (int) (PROCESS_BAR_W * ((float) uiHandler.getNowProgress() / (float) maxProgress));
+            context.drawTexture(BACKGROUND, baseX + PROCESS_BAR_ORIG_X, baseY + PROCESS_BAR_ORIG_Y, PROCESS_BAR_FULL_X, PROCESS_BAR_FULL_Y, ProcessWidth, PROCESS_BAR_H, TEXTURE_WIDTH, TEXTURE_HEIGHT);
         }
+    }
+
+    public void drawFuel(DrawContext context) {
+        AltarCraftUIHandler uiHandler = this.getScreenHandler();
         int maxFuel = AltarBlockEntity.maxFuel;
         if (maxFuel > 0) {
-            int FuelWidth = (int) (54 * ((float) uiHandler.getNowFuel() / (float) maxFuel));
-            context.fill(baseX + 90, baseY + 60, baseX + 90 + FuelWidth, baseY + 60 + 10, 0xFFFF00FF);
+            int FuelWidth = (int) (FUEL_BAR_W * ((float) uiHandler.getNowFuel() / (float) maxFuel));
+            context.drawTexture(BACKGROUND, baseX + FUEL_BAR_ORIG_X, baseY + FUEL_BAR_ORIG_Y, FUEL_BAR_FULL_X, FUEL_BAR_FULL_Y, FuelWidth, FUEL_BAR_H, TEXTURE_WIDTH, TEXTURE_HEIGHT);
         }
     }
 }
