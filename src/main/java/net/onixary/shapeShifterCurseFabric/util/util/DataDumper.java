@@ -32,8 +32,10 @@ import java.util.Map;
 
 // 导出数据仅能在开发环境中导出
 public class DataDumper {
+    public static boolean ENABLE_DUMPER = ShapeShifterCurseFabric.IsDevelopmentEnvironment();
+
     public static void dumpJson(JsonObject json, Path path) {
-        if (!ShapeShifterCurseFabric.IsDevelopmentEnvironment()) {
+        if (!ENABLE_DUMPER) {
             return;
         }
         ShapeShifterCurseFabric.LOGGER.info("Dumping data to " + path);
@@ -59,7 +61,7 @@ public class DataDumper {
     }
 
     public static void dumpBinary(byte[] data, Path path) {
-        if (!ShapeShifterCurseFabric.IsDevelopmentEnvironment()) {
+        if (!ENABLE_DUMPER) {
             return;
         }
         ShapeShifterCurseFabric.LOGGER.info("Dumping data to " + path);
