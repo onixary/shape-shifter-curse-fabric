@@ -115,7 +115,8 @@
     "render.PlayerEntityRendererMixin",
     "render.AbstractClientPlayerEntityMixin",
     "SU_ClientCommandSourceMixin",
-    "SU_ClientPlayerEntityMixin"
+    "SU_ClientPlayerEntityMixin",
+    "PlayerListHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1
