@@ -34,6 +34,7 @@ public class Form_Axolotl3 extends NormalForm {
     public static final AbstractAnimStateController FLYING_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_3_creative_flight")));
     public static final AbstractAnimStateController SLEEP_CONTROLLER = new OneAnimController(ANIM_SLEEP);
     public static final AbstractAnimStateController CRAWL_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_3_idle")));
+    public static final AbstractAnimStateController USE_VANILLA_CONTROLLER = new OneAnimController((AnimUtils.AnimationHolderData) null);
 
     @Override
     public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
@@ -62,6 +63,10 @@ public class Form_Axolotl3 extends NormalForm {
                     return SLEEP_CONTROLLER;
                 case ANIM_STATE_CRAWL:
                     return CRAWL_CONTROLLER;
+                case ANIM_STATE_USE_ITEM:
+                    return USE_VANILLA_CONTROLLER;
+                case ANIM_STATE_BLOCK_SHIELD:
+                    return USE_VANILLA_CONTROLLER;
                 default:
                     return null;
             }
