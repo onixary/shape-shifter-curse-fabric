@@ -146,7 +146,7 @@ public class FormUtils {
                 }
                 component.setOrigin(layer, TechnicalFormOrigin);
                 component.setOrigin(layer, origin);
-                component.sync();
+                // component.sync();
             }
         }
         applyExtraPower(player, layerData);
@@ -239,16 +239,8 @@ public class FormUtils {
                 ShapeShifterCurseFabric.LOGGER.error("Failed to send form change notification: ", e);
             }
         }
+        ModComponents.ORIGIN.get(player).sync();
 
-        // 执行次数不多 不用做线程池或其他操作 容易导致性能更差
-        new Thread(() -> {
-            try {
-                Thread.sleep(3000);  // 3s后同步一次
-                ModComponents.ORIGIN.sync(player);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }).start();
     }
 
     public static void _setForm(PlayerEntity player, IForm form) {

@@ -251,6 +251,7 @@ public class TrinketUtils {
                     this.RemovePower(player, powerID, currentOriginsID);
                 }
             }
+            PowerHolderComponent.KEY.sync(player);
         }
 
         public void onPlayerEquip(PlayerEntity player, Identifier itemID) {
@@ -298,6 +299,7 @@ public class TrinketUtils {
                     this.AddPower(player, powerID, currentOriginsID);
                 }
             }
+            PowerHolderComponent.KEY.sync(player);
         }
     }
 
