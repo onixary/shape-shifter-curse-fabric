@@ -44,10 +44,15 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     public static final int PERK_UI_WIDTH = 200;
     public static final int PERK_UI_HEIGHT = 174;
 
-    public static final int PERK_INFO_UI_X = 312;
-    public static final int PERK_INFO_UI_Y = 8;
-    public static final int PERK_INFO_UI_WIDTH = 99;
-    public static final int PERK_INFO_UI_HEIGHT = 174;
+    public static final int PERK_UI_ICON_X = 123;
+    public static final int PERK_UI_ICON_Y = 10;
+    public static final int PERK_UI_ICON_WIDTH = 17;
+    public static final int PERK_UI_ICON_HEIGHT = 17;
+
+    public static final int LEVEL_ICON_Y = 5;  // 以摄像机中心计算
+    public static final int LEVEL_ICON_DRAW_X = -5;
+    public static final int LEVEL_ICON_WIDTH = 11;
+    public static final int LEVEL_ICON_HEIGHT = 11;
 
     public static final int PERK_INFO_NAME_X = 316;
     public static final int PERK_INFO_NAME_Y = 12;
@@ -125,6 +130,8 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     public ScaleScrollTextWidget PerkDescWidget;
     public ButtonWidget AcquirePerkButton;
 
+    public int MaxPerkLevel = 0;
+
     @Override
     public WidgetEXUtils.WidgetRect getRect() {
         return null;
@@ -143,6 +150,11 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         this.perkTree = perkTree != null ? perkTree : Objects.requireNonNull(RegPerks.getPerkTree(RegPerks.EMPTY_PERK_TREE));
         ModPacketsS2C.sendRequestPerkAvailability();
         ModPacketsS2C.sendRequestPerkData();
+        for (PerkTree.PerkNode node : this.perkTree.getAllNodes()) {
+            if (node.tier > MaxPerkLevel) {
+                MaxPerkLevel = node.tier;
+            }
+        }
     }
 
     @Override
@@ -201,6 +213,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         nodeWindowY = baseY + PERK_UI_Y;
         cameraCenter = new Vector2i(nodeWindowX + PERK_UI_WIDTH / 2, nodeWindowY + PERK_UI_HEIGHT / 2);
         nodeCenter = new Vector2i( -PERK_UI_WIDTH / 2, 0);
+        context.fill(baseX + PERK_UI_ICON_X, baseY + PERK_UI_ICON_Y, baseX + PERK_UI_ICON_X + PERK_UI_ICON_WIDTH, baseY + PERK_UI_ICON_Y + PERK_UI_ICON_HEIGHT, 0xFFFFFFFF);
         this.drawAllNode(context, mouseX, mouseY, delta);
         super.render(context, mouseX, mouseY, delta);
     }
@@ -310,6 +323,25 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         if (this.client == null) return;
         context.enableScissor(nodeWindowX, nodeWindowY, nodeWindowX + PERK_UI_WIDTH, nodeWindowY + PERK_UI_HEIGHT);
         MatrixStack matrixStack = context.getMatrices();
+        int firstX = nodeBaseX + nodeCenter.x;
+        int firstY = nodeWindowY + LEVEL_ICON_Y;
+        for (int tierIndex = 1; tierIndex <= this.MaxPerkLevel; tierIndex++) {
+            int localLineX = firstX + tierIndex * posXPerTier;
+            float iconCenterScreenX =
+                    cameraCenter.x + cameraPosX + cameraScale * (localLineX + 1.0f);
+            int lineLeftX = Math.round(iconCenterScreenX - 0.5f);
+            context.fill(
+                    lineLeftX, nodeWindowY,
+                    lineLeftX + 1, nodeWindowY + PERK_UI_HEIGHT,
+                    LineColor
+            );
+            int screenIconX = lineLeftX - (LEVEL_ICON_WIDTH - 1) / 2;
+            context.fill(
+                    screenIconX, firstY,
+                    screenIconX + LEVEL_ICON_WIDTH, firstY + LEVEL_ICON_HEIGHT,
+                    LineColor
+            );
+        }
         matrixStack.push();
         matrixStack.translate(cameraCenter.x + cameraPosX, cameraCenter.y + cameraPosY, 0);
         matrixStack.scale(cameraScale, cameraScale, 1.0f);
