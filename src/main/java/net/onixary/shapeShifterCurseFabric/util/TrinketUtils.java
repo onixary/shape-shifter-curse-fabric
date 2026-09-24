@@ -251,6 +251,7 @@ public class TrinketUtils {
                     this.RemovePower(player, powerID, currentOriginsID);
                 }
             }
+            PowerHolderComponent.KEY.sync(player);
         }
 
         public void onPlayerEquip(PlayerEntity player, Identifier itemID) {
@@ -261,43 +262,47 @@ public class TrinketUtils {
         }
 
         public void onPlayerUnEquip(PlayerEntity player, Identifier itemID) {
-            IForm form = FormUtils.getPlayerForm(player);
-            Pair<Identifier, Identifier> currentFormLayer = form.getFormLayer();
-            Identifier currentFormID = form.getFormID();
-            Identifier currentOriginsID = currentFormLayer.getRight();
-            for (Identifier powerID : accessoryPowers) {
-                this.RemovePower(player, powerID, itemID);
-            }
-            for (Identifier powerID : allFormPowerAdd) {
-                this.RemovePower(player, powerID, currentOriginsID);
-            }
-            for (Identifier powerID : allFormPowerRemove) {
-                this.AddPower(player, powerID, currentOriginsID);
-            }
-            List<Identifier> formPowerAddList = formPowerAdd.get(currentFormID);
-            List<Identifier> formPowerRemoveList = formPowerRemove.get(currentFormID);
-            List<Identifier> layerGroupPowerAddList = layerPowerAddMap.getOrDefault(currentFormLayer.getLeft(), new HashMap<>()).get(currentFormLayer.getRight());
-            List<Identifier> layerGroupPowerRemoveList = layerPowerRemoveMap.getOrDefault(currentFormLayer.getLeft(), new HashMap<>()).get(currentFormLayer.getRight());
-            if (formPowerAddList != null) {
-                for (Identifier powerID : formPowerAddList) {
-                    this.RemovePower(player, powerID, currentOriginsID);
-                }
-            }
-            if (layerGroupPowerAddList != null) {
-                for (Identifier powerID : layerGroupPowerAddList) {
-                    this.RemovePower(player, powerID, currentOriginsID);
-                }
-            }
-            if (formPowerRemoveList != null) {
-                for (Identifier powerID : formPowerRemoveList) {
-                    this.AddPower(player, powerID, currentOriginsID);
-                }
-            }
-            if (layerGroupPowerRemoveList != null) {
-                for (Identifier powerID : layerGroupPowerRemoveList) {
-                    this.AddPower(player, powerID, currentOriginsID);
-                }
-            }
+            // IForm form = FormUtils.getPlayerForm(player);
+            // Pair<Identifier, Identifier> currentFormLayer = form.getFormLayer();
+            // Identifier currentFormID = form.getFormID();
+            // Identifier currentOriginsID = currentFormLayer.getRight();
+            // for (Identifier powerID : accessoryPowers) {
+            //     this.RemovePower(player, powerID, itemID);
+            // }
+            // for (Identifier powerID : allFormPowerAdd) {
+            //     this.RemovePower(player, powerID, currentOriginsID);
+            // }
+            // for (Identifier powerID : allFormPowerRemove) {
+            //     this.AddPower(player, powerID, currentOriginsID);
+            // }
+            // List<Identifier> formPowerAddList = formPowerAdd.get(currentFormID);
+            // List<Identifier> formPowerRemoveList = formPowerRemove.get(currentFormID);
+            // List<Identifier> layerGroupPowerAddList = layerPowerAddMap.getOrDefault(currentFormLayer.getLeft(), new HashMap<>()).get(currentFormLayer.getRight());
+            // List<Identifier> layerGroupPowerRemoveList = layerPowerRemoveMap.getOrDefault(currentFormLayer.getLeft(), new HashMap<>()).get(currentFormLayer.getRight());
+            // if (formPowerAddList != null) {
+            //     for (Identifier powerID : formPowerAddList) {
+            //         this.RemovePower(player, powerID, currentOriginsID);
+            //     }
+            // }
+            // if (layerGroupPowerAddList != null) {
+            //     for (Identifier powerID : layerGroupPowerAddList) {
+            //         this.RemovePower(player, powerID, currentOriginsID);
+            //     }
+            // }
+            // if (formPowerRemoveList != null) {
+            //     for (Identifier powerID : formPowerRemoveList) {
+            //         this.AddPower(player, powerID, currentOriginsID);
+            //     }
+            // }
+            // if (layerGroupPowerRemoveList != null) {
+            //     for (Identifier powerID : layerGroupPowerRemoveList) {
+            //         this.AddPower(player, powerID, currentOriginsID);
+            //     }
+            // }
+            // PowerHolderComponent.KEY.sync(player);
+
+            // 子形态的Bug 不能用这种方式还原了 等之后写双端时改成计数式Power
+            FormUtils.reApplyPower(player);
         }
     }
 

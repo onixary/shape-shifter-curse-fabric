@@ -45,6 +45,7 @@ import net.onixary.shapeShifterCurseFabric.render.form_render.FormRenderUtils;
 import net.onixary.shapeShifterCurseFabric.render.render_layer.FurGradientRenderLayer;
 import net.onixary.shapeShifterCurseFabric.util.*;
 import net.onixary.shapeShifterCurseFabric.util.Verify.AuthClient;
+import net.onixary.shapeShifterCurseFabric.util.test.NetWorkTest;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.HashMap;
@@ -337,6 +338,8 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		RegMenuScreen.init();
 
 		BlockEntityRendererFactories.register(RegCustomBlock.FORM_ATTUNER_BLOCK_ENTITY, FormAttunerBeamRenderer::new);
+
+		// NetWorkTest.init();
 	}
 
 	public static ShaderProgram getFurGradientShader() {
