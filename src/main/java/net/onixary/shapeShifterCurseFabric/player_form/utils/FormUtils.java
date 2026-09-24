@@ -209,6 +209,24 @@ public class FormUtils {
         }
     }
 
+    // 这个函数性能占用比较大 不要频繁调用
+    public static void reApplyPower(PlayerEntity player) {
+        PlayerFormComponent playerFormComponent = PlayerFormComponent.COMPONENT.get(player);
+        IForm form = playerFormComponent.nowForm;
+        form.applyScale(player);
+        Pair<Identifier, Identifier> layerPair = form.getFormLayer();
+        applyLayer(player, layerPair);
+        form.afterApplyLayer(player);
+        playerFormComponent.nowPerkTree = form.getPerkTreeID();
+        PerkUtils.loadAllPerk(player, PerkUtils.getPlayerNowPerkTreeID(player));
+        TrinketUtils.ReApplyAccessoryPowerOnPlayerFormChange(player);
+        form.onApplyPowerEnd(player);
+        AnimUtils.stopPowerAnim(player, AnimUtils.AnimationSendSideType.ONLY_SERVER);
+        ModComponents.ORIGIN.get(player).sync();
+        // 应该不会有人修改IForm里的数据吧 虽然理论可行 但我是反对这种写法的
+        // TransformManager.sendClientFirstPersonReset(player);
+    }
+
     public static void _loadForm(PlayerEntity player, IForm form) {
         PlayerFormComponent playerFormComponent = PlayerFormComponent.COMPONENT.get(player);
         IForm oldForm = playerFormComponent.nowForm;
