@@ -33,7 +33,6 @@ import net.onixary.shapeShifterCurseFabric.util.FormColorData;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.SuperUserUtils;
 import net.onixary.shapeShifterCurseFabric.util.Verify.DebuggerUtils;
-import net.onixary.shapeShifterCurseFabric.util.Verify.PatronDataSegment;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -415,28 +414,35 @@ public class ShapeShifterCurseCommand {
     }
 
     private static int logPatronInfo(CommandContext<ServerCommandSource> commandContext) {
-        try {
-            ServerPlayerEntity player = commandContext.getSource().getPlayer();
-            if (player == null) {
-                commandContext.getSource().sendError(Text.literal("Must be a player!"));
-                return 0;
-            }
-            PatronDataSegment patronDataSegment = PatronDataSegment.getPatronDataSegment(player);
-            StringBuilder message = new StringBuilder("Patron Info:\n");
-            message.append("UUID: ").append(player.getUuid()).append("\n");
-            message.append("Patron Level: ").append(patronDataSegment != null ? patronDataSegment.getLevel() : 0).append("\n");
-            if (patronDataSegment != null) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                long expireTime = patronDataSegment.getExpireTime();
-                message.append("Expire Time: ").append(LocalDateTime.ofInstant(Instant.ofEpochSecond(expireTime), ZoneId.systemDefault()).format(formatter)).append("\n");
-            }
-            // message.append("\n");
-            player.sendMessage(Text.literal(message.toString()), false);
-        } catch (Exception e) {
-            // 处理其他可能的错误
-            commandContext.getSource().sendError(Text.literal("Error when log player patron info: " + e.getMessage()));
-            ShapeShifterCurseFabric.LOGGER.error("Error when log player patron info: ", e);
+        // try {
+        //     ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        //     if (player == null) {
+        //         commandContext.getSource().sendError(Text.literal("Must be a player!"));
+        //         return 0;
+        //     }
+        //     PatronDataSegment patronDataSegment = PatronDataSegment.getPatronDataSegment(player);
+        //     StringBuilder message = new StringBuilder("Patron Info:\n");
+        //     message.append("UUID: ").append(player.getUuid()).append("\n");
+        //     message.append("Patron Level: ").append(patronDataSegment != null ? patronDataSegment.getLevel() : 0).append("\n");
+        //     if (patronDataSegment != null) {
+        //         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        //         long expireTime = patronDataSegment.getExpireTime();
+        //         message.append("Expire Time: ").append(LocalDateTime.ofInstant(Instant.ofEpochSecond(expireTime), ZoneId.systemDefault()).format(formatter)).append("\n");
+        //     }
+        //     // message.append("\n");
+        //     player.sendMessage(Text.literal(message.toString()), false);
+        // } catch (Exception e) {
+        //     // 处理其他可能的错误
+        //     commandContext.getSource().sendError(Text.literal("Error when log player patron info: " + e.getMessage()));
+        //     ShapeShifterCurseFabric.LOGGER.error("Error when log player patron info: ", e);
+        // }
+        ServerPlayerEntity player = commandContext.getSource().getPlayer();
+        if (player == null) {
+            commandContext.getSource().sendError(Text.literal("Must be a player!"));
+            return 0;
         }
+        StringBuilder message = new StringBuilder("Patron Feature Are Disable By Developer\n");
+        player.sendMessage(Text.literal(message.toString()), false);
         return 1;
     }
 

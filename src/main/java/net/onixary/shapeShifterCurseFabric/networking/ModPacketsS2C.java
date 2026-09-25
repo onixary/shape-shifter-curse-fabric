@@ -619,10 +619,10 @@ public class ModPacketsS2C {
     }
 
     private static void receiveNewSubKey(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
-        PacketByteBuf keyBuf = new PacketByteBuf(Unpooled.wrappedBuffer(buf.readByteArray()));
-        client.execute(() -> {
-            AuthClient.loadServerKey(keyBuf);
-        });
+        // PacketByteBuf keyBuf = new PacketByteBuf(Unpooled.wrappedBuffer(buf.readByteArray()));
+        // client.execute(() -> {
+        //     AuthClient.loadServerKey(keyBuf);
+        // });
     }
 
     private static void receiveSetSuperUserLevel(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {

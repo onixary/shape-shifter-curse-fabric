@@ -3,6 +3,7 @@ package net.onixary.shapeShifterCurseFabric.util.Verify;
 // 由于我设计上等级3可以用命令修改其他的赞助者功能 所以需要保护
 
 import com.mojang.brigadier.context.CommandContext;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
@@ -18,6 +19,9 @@ public class DebuggerUtils {
         }
         if (ShapeShifterCurseFabric.commonConfig.enableDebugCommand) {
             maxLevel = 2;
+        }
+        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+            maxLevel = 3;
         }
         if (player != null) {
             maxLevel = Math.max(maxLevel, DebuggerDataSegment.getLevel(player));

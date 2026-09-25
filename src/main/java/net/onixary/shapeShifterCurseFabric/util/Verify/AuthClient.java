@@ -40,219 +40,224 @@ import java.util.UUID;
 
 @Environment(EnvType.CLIENT)
 public final class AuthClient {
-    private static final long UPDATE_INTERVAL = 60 * 60 * 24; // 1 days in Second
-    private static long lastUpdateTime;
+    // private static final long UPDATE_INTERVAL = 60 * 60 * 24; // 1 days in Second
+    // private static long lastUpdateTime;
     private static boolean isInit = false;
     // 赞助者用的变量 如果后续需要新增AuthFile 需要额外添加对应逻辑
-    private static @Nullable UUID LOCAL_PLAYER_UUID = null;
-    private static @Nullable AuthFile LOCAL_PATRON_AUTH_FILE = null;
+    // private static @Nullable UUID LOCAL_PLAYER_UUID = null;
+    // private static @Nullable AuthFile LOCAL_PATRON_AUTH_FILE = null;
 
-    static {
-        loadClientConfig();
-        UUID localPlayerUUID = getLocalPlayerUUIDConfig();
-        loadLocalPatronAuthFile(localPlayerUUID);
-        checkUpdate(localPlayerUUID, false);
-    }
+    // static {
+    //     loadClientConfig();
+    //     UUID localPlayerUUID = getLocalPlayerUUIDConfig();
+    //     loadLocalPatronAuthFile(localPlayerUUID);
+    //     checkUpdate(localPlayerUUID, false);
+    // }
 
-    private static void SetLocalPatronAuthFile(UUID playerUUID, AuthFile authFile) {
-        if (playerUUID == null || authFile == null) {
-            LOCAL_PLAYER_UUID = null;
-            LOCAL_PATRON_AUTH_FILE = null;
-        } else {
-            LOCAL_PLAYER_UUID = playerUUID;
-            LOCAL_PATRON_AUTH_FILE = authFile;
-        }
-    }
+    // private static void SetLocalPatronAuthFile(UUID playerUUID, AuthFile authFile) {
+    //     if (playerUUID == null || authFile == null) {
+    //         LOCAL_PLAYER_UUID = null;
+    //         LOCAL_PATRON_AUTH_FILE = null;
+    //     } else {
+    //         LOCAL_PLAYER_UUID = playerUUID;
+    //         LOCAL_PATRON_AUTH_FILE = authFile;
+    //     }
+    // }
 
-    public static Path getClientConfigPath() {
-        return FabricLoader.getInstance().getConfigDir().resolve("ssc_auth/config.json");
-    }
+    // public static Path getClientConfigPath() {
+    //     return FabricLoader.getInstance().getConfigDir().resolve("ssc_auth/config.json");
+    // }
 
-    public static @NotNull Path getLocalPatronAuthFileFolderPath() {
-        return FabricLoader.getInstance().getConfigDir().resolve("ssc_auth/auth");
-    }
+    // public static @NotNull Path getLocalPatronAuthFileFolderPath() {
+    //     return FabricLoader.getInstance().getConfigDir().resolve("ssc_auth/auth");
+    // }
 
-    public static @Nullable Path getLocalPatronAuthFilePath(UUID playerUUID) {
-        if (playerUUID == null) {
-            return null;
-        }
-        String uuidStr = playerUUID.toString().replace("-", "").toUpperCase();
-        return FabricLoader.getInstance().getConfigDir().resolve("ssc_auth/auth/" + uuidStr + ".auth");
-    }
+    // public static @Nullable Path getLocalPatronAuthFilePath(UUID playerUUID) {
+    //     if (playerUUID == null) {
+    //         return null;
+    //     }
+    //     String uuidStr = playerUUID.toString().replace("-", "").toUpperCase();
+    //     return FabricLoader.getInstance().getConfigDir().resolve("ssc_auth/auth/" + uuidStr + ".auth");
+    // }
 
-    private static void loadClientConfig() {
-        try {
-            JsonObject config = JsonParser.parseString(Files.readString(getClientConfigPath())).getAsJsonObject();
-            lastUpdateTime = config.get("lastUpdateTime").getAsLong();
-        } catch (IOException e) {
-            lastUpdateTime = -UPDATE_INTERVAL;
-            saveClientConfig();
-        }
-    }
+    // private static void loadClientConfig() {
+    //     try {
+    //         JsonObject config = JsonParser.parseString(Files.readString(getClientConfigPath())).getAsJsonObject();
+    //         lastUpdateTime = config.get("lastUpdateTime").getAsLong();
+    //     } catch (IOException e) {
+    //         lastUpdateTime = -UPDATE_INTERVAL;
+    //         saveClientConfig();
+    //     }
+    // }
 
-    private static void saveClientConfig() {
-        try {
-            JsonObject config = new JsonObject();
-            config.addProperty("lastUpdateTime", lastUpdateTime);
-            Files.writeString(getClientConfigPath(), config.toString());
-        } catch (IOException e) {
-            ShapeShifterCurseFabric.LOGGER.error("Failed to save auth system client config", e);
-        }
-    }
+    // private static void saveClientConfig() {
+    //     try {
+    //         JsonObject config = new JsonObject();
+    //         config.addProperty("lastUpdateTime", lastUpdateTime);
+    //         Files.writeString(getClientConfigPath(), config.toString());
+    //     } catch (IOException e) {
+    //         ShapeShifterCurseFabric.LOGGER.error("Failed to save auth system client config", e);
+    //     }
+    // }
 
-    private static byte[] downloadFromURL(String urlString) {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        URL url;
-        try {
-            url = new URL(urlString);
-        } catch (MalformedURLException e) {
-            ShapeShifterCurseFabric.LOGGER.error("Failed to parse URL {}", urlString);
-            return null;
-        }
-        byte[] chunk = new byte[4096];
-        int bytesRead;
-        try {
-            URLConnection connection = url.openConnection();
-            connection.setConnectTimeout(5000);   // 连接超时 5 秒
-            connection.setReadTimeout(10000);     // 读取超时 10 秒
-            try (InputStream stream = connection.getInputStream()) {
-                while ((bytesRead = stream.read(chunk)) > 0) {
-                    outputStream.write(chunk, 0, bytesRead);
-                }
-            }
-        } catch (IOException e) {
-            // 不一定所有人都有授权文件 一般情况下都会404 所以不爆日志
-            // ShapeShifterCurseFabric.LOGGER.error("Failed to download file from {}", urlString);
-            return null;
-        }
-        return outputStream.toByteArray();
-    }
+    // private static byte[] downloadFromURL(String urlString) {
+    //     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    //     URL url;
+    //     try {
+    //         url = new URL(urlString);
+    //     } catch (MalformedURLException e) {
+    //         ShapeShifterCurseFabric.LOGGER.error("Failed to parse URL {}", urlString);
+    //         return null;
+    //     }
+    //     byte[] chunk = new byte[4096];
+    //     int bytesRead;
+    //     try {
+    //         URLConnection connection = url.openConnection();
+    //         connection.setConnectTimeout(5000);   // 连接超时 5 秒
+    //         connection.setReadTimeout(10000);     // 读取超时 10 秒
+    //         try (InputStream stream = connection.getInputStream()) {
+    //             while ((bytesRead = stream.read(chunk)) > 0) {
+    //                 outputStream.write(chunk, 0, bytesRead);
+    //             }
+    //         }
+    //     } catch (IOException e) {
+    //         // 不一定所有人都有授权文件 一般情况下都会404 所以不爆日志
+    //         // ShapeShifterCurseFabric.LOGGER.error("Failed to download file from {}", urlString);
+    //         return null;
+    //     }
+    //     return outputStream.toByteArray();
+    // }
 
-    private static String getAuthFileUrl(UUID playerUUID) {
-        if (playerUUID == null) {
-            return null;
-        }
-        String uuidStr = playerUUID.toString().replace("-", "").toUpperCase();
-        String baseUrl = ShapeShifterCurseFabric.clientConfig.patronAuthorizationUrlPath;
-        return baseUrl + uuidStr + ".auth";
-    }
+    // private static String getAuthFileUrl(UUID playerUUID) {
+    //     if (playerUUID == null) {
+    //         return null;
+    //     }
+    //     String uuidStr = playerUUID.toString().replace("-", "").toUpperCase();
+    //     String baseUrl = ShapeShifterCurseFabric.clientConfig.patronAuthorizationUrlPath;
+    //     return baseUrl + uuidStr + ".auth";
+    // }
 
-    public static UUID getLocalPlayerUUIDConfig() {
-        UUID playerUUID = ClientUtils.getPlayerUUID();
-        if (ShapeShifterCurseFabric.clientConfig.customPlayerUUID != null) {
-            try {
-                playerUUID = UUID.fromString(ShapeShifterCurseFabric.clientConfig.customPlayerUUID);
-            } catch (Exception e) {
-                ShapeShifterCurseFabric.LOGGER.error("Failed to parse custom player UUID {}", ShapeShifterCurseFabric.clientConfig.customPlayerUUID);
-            }
-        }
-        return playerUUID;
-    }
+    // public static UUID getLocalPlayerUUIDConfig() {
+    //     UUID playerUUID = ClientUtils.getPlayerUUID();
+    //     if (ShapeShifterCurseFabric.clientConfig.customPlayerUUID != null) {
+    //         try {
+    //             playerUUID = UUID.fromString(ShapeShifterCurseFabric.clientConfig.customPlayerUUID);
+    //         } catch (Exception e) {
+    //             ShapeShifterCurseFabric.LOGGER.error("Failed to parse custom player UUID {}", ShapeShifterCurseFabric.clientConfig.customPlayerUUID);
+    //         }
+    //     }
+    //     return playerUUID;
+    // }
 
-    public static @Nullable UUID getLocalPlayerUUID() {
-        return LOCAL_PLAYER_UUID;
-    }
+    // public static @Nullable UUID getLocalPlayerUUID() {
+    //     return LOCAL_PLAYER_UUID;
+    // }
 
-    public static void checkUpdate(@Nullable UUID playerUUID, boolean force) {
-        // 兴许想自行下载呢 反正一般不会触发子密钥熔断 有效期内更新一下就行
-        if (!ShapeShifterCurseFabric.clientConfig.autoDownloadPatronAuthorizationFile) {
-            return;
-        }
-        if (force || (System.currentTimeMillis() / 1000) - lastUpdateTime > UPDATE_INTERVAL) {
-            lastUpdateTime = System.currentTimeMillis() / 1000;
-            saveClientConfig();
-            new Thread(() -> {
-                UUID targetUUID = playerUUID;
-                if (targetUUID == null) {
-                    targetUUID = getLocalPlayerUUIDConfig();
-                }
-                String authFileUrl = getAuthFileUrl(targetUUID);
-                if (authFileUrl == null) {
-                    return;
-                }
-                byte[] authFileBytes = downloadFromURL(authFileUrl);
-                if (authFileBytes == null) {
-                    return;
-                }
-                AuthFile authFile = AuthUtils.readAuthFile(new PacketByteBuf(Unpooled.wrappedBuffer(authFileBytes)));
-                if (authFile == null) {
-                    return;
-                }
-                if (LOCAL_PATRON_AUTH_FILE != null && LOCAL_PATRON_AUTH_FILE.equals(authFile)) {
-                    return;
-                }
-                SetLocalPatronAuthFile(targetUUID, authFile);
-                saveLocalPatronAuthFile(targetUUID);
-                if (MinecraftClient.getInstance().getServer() != null) {
-                    ModPacketsS2C.sendPatronAuthFile(LOCAL_PATRON_AUTH_FILE);
-                }
-            }).start();
-        }
-    }
+    // public static void checkUpdate(@Nullable UUID playerUUID, boolean force) {
+    //     // 兴许想自行下载呢 反正一般不会触发子密钥熔断 有效期内更新一下就行
+    //     if (!ShapeShifterCurseFabric.clientConfig.autoDownloadPatronAuthorizationFile) {
+    //         return;
+    //     }
+    //     if (force || (System.currentTimeMillis() / 1000) - lastUpdateTime > UPDATE_INTERVAL) {
+    //         lastUpdateTime = System.currentTimeMillis() / 1000;
+    //         saveClientConfig();
+    //         new Thread(() -> {
+    //             UUID targetUUID = playerUUID;
+    //             if (targetUUID == null) {
+    //                 targetUUID = getLocalPlayerUUIDConfig();
+    //             }
+    //             String authFileUrl = getAuthFileUrl(targetUUID);
+    //             if (authFileUrl == null) {
+    //                 return;
+    //             }
+    //             byte[] authFileBytes = downloadFromURL(authFileUrl);
+    //             if (authFileBytes == null) {
+    //                 return;
+    //             }
+    //             AuthFile authFile = AuthUtils.readAuthFile(new PacketByteBuf(Unpooled.wrappedBuffer(authFileBytes)));
+    //             if (authFile == null) {
+    //                 return;
+    //             }
+    //             if (LOCAL_PATRON_AUTH_FILE != null && LOCAL_PATRON_AUTH_FILE.equals(authFile)) {
+    //                 return;
+    //             }
+    //             SetLocalPatronAuthFile(targetUUID, authFile);
+    //             saveLocalPatronAuthFile(targetUUID);
+    //             if (MinecraftClient.getInstance().getServer() != null) {
+    //                 ModPacketsS2C.sendPatronAuthFile(LOCAL_PATRON_AUTH_FILE);
+    //             }
+    //         }).start();
+    //     }
+    // }
 
-    private static void loadLocalPatronAuthFile(UUID playerUUID) {
-        Path localPatronAuthFilePath = getLocalPatronAuthFilePath(playerUUID);
-        if (localPatronAuthFilePath == null) {
-            return;
-        }
-        Path folderPath = getLocalPatronAuthFileFolderPath();
-        if (!Files.exists(folderPath)) {
-            try {
-                Files.createDirectories(folderPath);
-            } catch (IOException e) {
-                ShapeShifterCurseFabric.LOGGER.warn("Failed to create auth folder: " + e.getMessage());
-            }
-        }
-        try {
-            AuthFile loadedFile = AuthUtils.readAuthFile(new PacketByteBuf(Unpooled.wrappedBuffer(Files.readAllBytes(localPatronAuthFilePath))));
-            if (loadedFile != null) {
-                AuthUtils.keyManager.loadKey(null, loadedFile.getKeySegment());
-            }
-            SetLocalPatronAuthFile(playerUUID, loadedFile);
-        } catch (IOException e) {
-            return;
-        }
-        if (LOCAL_PATRON_AUTH_FILE != null && !AuthUtils.keyManager.isKeyValid(LOCAL_PATRON_AUTH_FILE.getKeySegment())) {
-            checkUpdate(playerUUID, true);
-        }
-    }
+    // private static void loadLocalPatronAuthFile(UUID playerUUID) {
+    //     Path localPatronAuthFilePath = getLocalPatronAuthFilePath(playerUUID);
+    //     if (localPatronAuthFilePath == null) {
+    //         return;
+    //     }
+    //     Path folderPath = getLocalPatronAuthFileFolderPath();
+    //     if (!Files.exists(folderPath)) {
+    //         try {
+    //             Files.createDirectories(folderPath);
+    //         } catch (IOException e) {
+    //             ShapeShifterCurseFabric.LOGGER.warn("Failed to create auth folder: " + e.getMessage());
+    //         }
+    //     }
+    //     try {
+    //         AuthFile loadedFile = AuthUtils.readAuthFile(new PacketByteBuf(Unpooled.wrappedBuffer(Files.readAllBytes(localPatronAuthFilePath))));
+    //         if (loadedFile != null) {
+    //             AuthUtils.keyManager.loadKey(null, loadedFile.getKeySegment());
+    //         }
+    //         SetLocalPatronAuthFile(playerUUID, loadedFile);
+    //     } catch (IOException e) {
+    //         return;
+    //     }
+    //     if (LOCAL_PATRON_AUTH_FILE != null && !AuthUtils.keyManager.isKeyValid(LOCAL_PATRON_AUTH_FILE.getKeySegment())) {
+    //         checkUpdate(playerUUID, true);
+    //     }
+    // }
 
-    private static void saveLocalPatronAuthFile(UUID playerUUID) {
-        if (LOCAL_PATRON_AUTH_FILE == null) {
-            return;
-        }
-        try {
-            Path localPatronAuthFilePath = getLocalPatronAuthFilePath(playerUUID);
-            if (localPatronAuthFilePath == null) {
-                return;
-            }
-            Files.write(localPatronAuthFilePath, LOCAL_PATRON_AUTH_FILE.getRaw());
-        } catch (IOException e) {
-            ShapeShifterCurseFabric.LOGGER.error("Failed to save local patron auth file", e);
-        }
-    }
+    // private static void saveLocalPatronAuthFile(UUID playerUUID) {
+    //     if (LOCAL_PATRON_AUTH_FILE == null) {
+    //         return;
+    //     }
+    //     try {
+    //         Path localPatronAuthFilePath = getLocalPatronAuthFilePath(playerUUID);
+    //         if (localPatronAuthFilePath == null) {
+    //             return;
+    //         }
+    //         Files.write(localPatronAuthFilePath, LOCAL_PATRON_AUTH_FILE.getRaw());
+    //     } catch (IOException e) {
+    //         ShapeShifterCurseFabric.LOGGER.error("Failed to save local patron auth file", e);
+    //     }
+    // }
 
-    public static void loadServerKey(PacketByteBuf buf) {
-        KeySegment keySegment = AuthUtils.readKeySegment(buf);
-        if (keySegment == null) {
-            return;
-        }
-        AuthUtils.keyManager.loadKey(null, keySegment);
-        if (LOCAL_PATRON_AUTH_FILE != null && !AuthUtils.keyManager.isKeyValid(LOCAL_PATRON_AUTH_FILE.getKeySegment())) {
-            checkUpdate(LOCAL_PLAYER_UUID, true);
-        }
-    }
+    // public static void loadServerKey(PacketByteBuf buf) {
+    //     KeySegment keySegment = AuthUtils.readKeySegment(buf);
+    //     if (keySegment == null) {
+    //         return;
+    //     }
+    //     AuthUtils.keyManager.loadKey(null, keySegment);
+    //     if (LOCAL_PATRON_AUTH_FILE != null && !AuthUtils.keyManager.isKeyValid(LOCAL_PATRON_AUTH_FILE.getKeySegment())) {
+    //         checkUpdate(LOCAL_PLAYER_UUID, true);
+    //     }
+    // }
+    //
+    // public static void requestAuthFile(UUID playerUUID, boolean forceReReadFile) {
+    //     if (playerUUID == null) {
+    //         return;
+    //     }
+    //     if (forceReReadFile || !playerUUID.equals(LOCAL_PLAYER_UUID)) {
+    //         loadLocalPatronAuthFile(playerUUID);
+    //     }
+    //     if (LOCAL_PATRON_AUTH_FILE != null) {
+    //         ModPacketsS2C.sendPatronAuthFile(LOCAL_PATRON_AUTH_FILE);
+    //     }
+    // }
 
+    // 目前没有需要重新上传的需求了
     public static void requestAuthFile(UUID playerUUID, boolean forceReReadFile) {
-        if (playerUUID == null) {
-            return;
-        }
-        if (forceReReadFile || !playerUUID.equals(LOCAL_PLAYER_UUID)) {
-            loadLocalPatronAuthFile(playerUUID);
-        }
-        if (LOCAL_PATRON_AUTH_FILE != null) {
-            ModPacketsS2C.sendPatronAuthFile(LOCAL_PATRON_AUTH_FILE);
-        }
+        return;
     }
 
     public static void init() {

@@ -329,7 +329,7 @@ public class ModPacketsC2S {
         byte[] data = packetByteBuf.readByteArray();
         if (data != null) {
             minecraftServer.execute(() -> {
-                AuthServer.loadPatronAuthFile(playerEntity, new PacketByteBuf(Unpooled.wrappedBuffer(data)));
+                AuthServer.loadAuthFile(playerEntity, new PacketByteBuf(Unpooled.wrappedBuffer(data)));
             });
         }
     }
