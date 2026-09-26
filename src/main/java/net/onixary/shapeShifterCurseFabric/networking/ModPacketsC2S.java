@@ -14,10 +14,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnJumpPower;
-import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnSprintingToSneakingPower;
-import net.onixary.shapeShifterCurseFabric.additional_power.BatBlockAttachPower;
-import net.onixary.shapeShifterCurseFabric.additional_power.JumpEventCondition;
+import net.onixary.shapeShifterCurseFabric.additional_power.*;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
@@ -79,6 +76,7 @@ public class ModPacketsC2S {
                 // 在服务器端设置跳跃状态
                 JumpEventCondition.setJumping(player, true);
                 PowerHolderComponent.getPowers(player, ActionOnJumpPower.class).forEach(ActionOnJumpPower::executeAction);
+                PowerHolderComponent.getPowers(player, SneakingJumpClashPower.class).forEach(sneakingJumpClashPower -> sneakingJumpClashPower.jumpTicks = 5);
             });
         });
 

@@ -35,6 +35,8 @@ public class SneakingJumpClashPower extends Power {
     private int activeTicks = 0;
     private boolean wasOnGround = true;
 
+    public int jumpTicks = 0;
+
     public SneakingJumpClashPower(PowerType<?> type, LivingEntity entity,
                                   Consumer<Pair<Entity, Entity>> bientityAction,
                                  int checkDuration, double expansionDistance, float damage) {
@@ -55,12 +57,15 @@ public class SneakingJumpClashPower extends Power {
         // 检查是否重新接触地面
         if (player.isOnGround()) {
             wasOnGround = true;
+            if (jumpTicks > 0) {
+                jumpTicks--;
+            }
             // 如果之前处于激活状态，则重置状态
             if (isActive) {
                 isActive = false;
                 activeTicks = 0;
             }
-        } else if (wasOnGround && player.isSneaking() && player.getVelocity().y > 0) {
+        } else if (wasOnGround && player.isSneaking() && player.getVelocity().y > 0 && jumpTicks > 0) {
             // 从地面潜行跳跃时触发
             isActive = true;
             activeTicks = 0;
