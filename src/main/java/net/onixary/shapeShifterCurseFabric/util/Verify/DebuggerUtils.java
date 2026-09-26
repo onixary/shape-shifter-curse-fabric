@@ -30,6 +30,9 @@ public class DebuggerUtils {
     }
 
     public static boolean canExecute(@Nullable CommandContext<ServerCommandSource> commandContext, @Nullable PlayerEntity player, int requireLevel) {
+        if (ShapeShifterCurseFabric.commonConfig.disableAllDebug) {
+            return false;
+        }
         return getDebuggerLevel(commandContext, player) >= requireLevel;
     }
 }

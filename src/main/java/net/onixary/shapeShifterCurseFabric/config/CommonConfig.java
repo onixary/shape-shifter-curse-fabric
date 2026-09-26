@@ -44,6 +44,10 @@ public class CommonConfig implements ConfigData {
     public boolean enableCursedMoonTransform = true;
 
     @ConfigEntry.Category("General")
+    @Comment("Disable All Debug Command And Interface. Default: false")
+    public boolean disableAllDebug = false;
+
+    @ConfigEntry.Category("General")
     @Comment("Enable Debug Command (PermissionLevel = 0). Default: false")
     public boolean enableDebugCommand = false;
 
