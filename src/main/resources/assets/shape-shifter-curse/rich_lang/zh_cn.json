@@ -1279,6 +1279,7 @@
   "text.autoconfig.shape-shifter-curse-common.option.allowSleepInCursedMoon": "是否可以在诅咒之月中睡觉",
   "text.autoconfig.shape-shifter-curse-common.option.enableCursedMoonTransform": "是否启用诅咒之月变形",
   "text.autoconfig.shape-shifter-curse-common.option.enableDebugCommand": "启用无权限限制的调试命令(不要在服务器中打开)",
+  "text.autoconfig.shape-shifter-curse-common.option.disableAllDebug": "禁用所有调试命令和接口(当调试系统或验证权限系统出现故障时使用)",
   "text.autoconfig.shape-shifter-curse-common.option.enableFullStackUpgrade": "升级配方能否升级整组物品",
   "text.autoconfig.shape-shifter-curse-common.option.enableFoodHabitSystem": "启用食性系统",
   "text.autoconfig.shape-shifter-curse-common.option.immediatelyTransform": "强制瞬间变形",

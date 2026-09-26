@@ -12,14 +12,12 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.NormalSubForm;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
-import net.onixary.shapeShifterCurseFabric.player_form.utils.IPatronForm;
-import net.onixary.shapeShifterCurseFabric.util.Verify.PatronDataSegment;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class Form_SnowFox3_Sub_MarbledPolecat extends NormalSubForm implements IPatronForm {
+public class Form_SnowFox3_Sub_MarbledPolecat extends NormalSubForm {
     public Form_SnowFox3_Sub_MarbledPolecat(Identifier formID) {
         super(formID, RegPlayerForms.SNOW_FOX_3);
         this.addPower(ShapeShifterCurseFabric.identifier("sub_form_marbled_polecat_idle_stay_eye_height"));
@@ -30,14 +28,6 @@ public class Form_SnowFox3_Sub_MarbledPolecat extends NormalSubForm implements I
     @Override
     public @Nullable Pair<Identifier, Identifier> getRenderLayerOverride() {
         return new Pair<>(Identifier.of("origins", "origin"), Identifier.of(this.getFormID().getNamespace(), "form_" + this.getFormID().getPath()));
-    }
-
-    @Override
-    public boolean checkCanUse(@Nullable PlayerEntity player, @Nullable UUID playerUUID, @Nullable PatronDataSegment patronData) {
-        if (patronData == null || player == null) {
-            return false;
-        }
-        return patronData.getLevel() >= 5;
     }
 
     private static final AnimUtils.AnimationHolderData ANIM_IDLE =
