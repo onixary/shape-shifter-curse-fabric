@@ -17,7 +17,7 @@ import java.nio.file.Path;
 
 public class RootKeyManager extends KeyManager {
     public RootKeyManager() {
-        this.loadFormLocal();
+        // this.loadFormLocal();
     }
 
     @Override
@@ -49,45 +49,45 @@ public class RootKeyManager extends KeyManager {
             VerifyEvent.ON_KEY_MELT.invoker().onKeyMelt(invoker, oldKeySegment, keySegment);
         }
         if (oldKeySegment == null || keySegment.getVersion() > oldKeySegment.getVersion()) {
-            this.saveKey(keySegment);
+            // this.saveKey(keySegment);
         }
     }
 
-    public static Path getLocalKeyFolderPath() { return FabricLoader.getInstance().getConfigDir().resolve("ssc_auth/keys"); }
-
-    public void loadFormLocal() {
-        Path folderPath = getLocalKeyFolderPath();
-        if (!Files.exists(folderPath)) {
-            try {
-                Files.createDirectories(folderPath);
-            } catch (IOException e) {
-                ShapeShifterCurseFabric.LOGGER.warn("Failed to create key folder: " + e.getMessage());
-            }
-        }
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(folderPath)) {
-            for (Path path : stream) {
-                if (path.getFileName().toString().endsWith(".key")) {
-                    KeySegment keySegment = AuthUtils.readKeySegment(new PacketByteBuf(Unpooled.wrappedBuffer(Files.readAllBytes(path))));
-                    if (keySegment != null) {
-                        this.loadKey(null, keySegment);
-                    }
-                }
-            }
-        } catch (IOException e) {
-            ShapeShifterCurseFabric.LOGGER.warn("Failed to load key segments: " + e.getMessage());
-        }
-    }
-
-    public void saveKey(KeySegment keySegment) {
-        Path folderPath = getLocalKeyFolderPath();
-        try {
-            if (!Files.exists(folderPath)) {
-                Files.createDirectories(folderPath);
-            }
-            Path filePath = folderPath.resolve(keySegment.getType() + ".key");
-            Files.write(filePath, keySegment.getRaw());
-        } catch (IOException e) {
-            ShapeShifterCurseFabric.LOGGER.warn("Failed to save key segment: " + e.getMessage());
-        }
-    }
+    // public static Path getLocalKeyFolderPath() { return FabricLoader.getInstance().getConfigDir().resolve("ssc_auth/keys"); }
+    //
+    // public void loadFormLocal() {
+    //     Path folderPath = getLocalKeyFolderPath();
+    //     if (!Files.exists(folderPath)) {
+    //         try {
+    //             Files.createDirectories(folderPath);
+    //         } catch (IOException e) {
+    //             ShapeShifterCurseFabric.LOGGER.warn("Failed to create key folder: " + e.getMessage());
+    //         }
+    //     }
+    //     try (DirectoryStream<Path> stream = Files.newDirectoryStream(folderPath)) {
+    //         for (Path path : stream) {
+    //             if (path.getFileName().toString().endsWith(".key")) {
+    //                 KeySegment keySegment = AuthUtils.readKeySegment(new PacketByteBuf(Unpooled.wrappedBuffer(Files.readAllBytes(path))));
+    //                 if (keySegment != null) {
+    //                     this.loadKey(null, keySegment);
+    //                 }
+    //             }
+    //         }
+    //     } catch (IOException e) {
+    //         ShapeShifterCurseFabric.LOGGER.warn("Failed to load key segments: " + e.getMessage());
+    //     }
+    // }
+    //
+    // public void saveKey(KeySegment keySegment) {
+    //     Path folderPath = getLocalKeyFolderPath();
+    //     try {
+    //         if (!Files.exists(folderPath)) {
+    //             Files.createDirectories(folderPath);
+    //         }
+    //         Path filePath = folderPath.resolve(keySegment.getType() + ".key");
+    //         Files.write(filePath, keySegment.getRaw());
+    //     } catch (IOException e) {
+    //         ShapeShifterCurseFabric.LOGGER.warn("Failed to save key segment: " + e.getMessage());
+    //     }
+    // }
 }

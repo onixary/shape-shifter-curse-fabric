@@ -30,19 +30,23 @@ public class SneakingJumpClashPower extends Power {
     private final int checkDuration;
     private final double expansionDistance;
     private final float damage;
+    private final boolean needJump;
     
     private boolean isActive = false;
     private int activeTicks = 0;
     private boolean wasOnGround = true;
 
+    public int jumpTicks = 0;
+
     public SneakingJumpClashPower(PowerType<?> type, LivingEntity entity,
                                   Consumer<Pair<Entity, Entity>> bientityAction,
-                                 int checkDuration, double expansionDistance, float damage) {
+                                 int checkDuration, double expansionDistance, float damage, boolean needJump) {
         super(type, entity);
         this.bientityAction = bientityAction;
         this.checkDuration = checkDuration;
         this.expansionDistance = expansionDistance;
         this.damage = damage;
+        this.needJump = needJump;
         this.setTicking(true);
     }
 
@@ -55,12 +59,15 @@ public class SneakingJumpClashPower extends Power {
         // 检查是否重新接触地面
         if (player.isOnGround()) {
             wasOnGround = true;
+            if (jumpTicks > 0) {
+                jumpTicks--;
+            }
             // 如果之前处于激活状态，则重置状态
             if (isActive) {
                 isActive = false;
                 activeTicks = 0;
             }
-        } else if (wasOnGround && player.isSneaking() && player.getVelocity().y > 0) {
+        } else if (wasOnGround && player.isSneaking() && player.getVelocity().y > 0 && (jumpTicks > 0 || !needJump)) {
             // 从地面潜行跳跃时触发
             isActive = true;
             activeTicks = 0;
@@ -123,14 +130,16 @@ public class SneakingJumpClashPower extends Power {
                         .add("bientity_action", ApoliDataTypes.BIENTITY_ACTION, null)
                         .add("check_duration", SerializableDataTypes.INT, 20)
                         .add("expansion_distance", SerializableDataTypes.DOUBLE, 1.0)
-                        .add("damage", SerializableDataTypes.FLOAT, 1.0f),
+                        .add("damage", SerializableDataTypes.FLOAT, 1.0f)
+                        .add("need_jump", SerializableDataTypes.BOOLEAN, false),
                 data -> (type, entity) -> new SneakingJumpClashPower(
                         type,
                         entity,
                         data.get("bientity_action"),
                         data.getInt("check_duration"),
                         data.getDouble("expansion_distance"),
-                        data.getFloat("damage")
+                        data.getFloat("damage"),
+                        data.getBoolean("need_jump")
                 )
         ).allowCondition();
     }

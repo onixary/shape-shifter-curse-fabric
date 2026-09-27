@@ -17,12 +17,14 @@ public class VerifyEvent {
         void onKeyLoad(@Nullable PlayerEntity invoker, KeySegment keySegment);
     }
 
+    @Deprecated
     public static final Event<KeyMelt> ON_KEY_MELT = EventFactory.createArrayBacked(KeyMelt.class, callbacks -> (invoker, oldKeySegment, newKeySegment) -> {
         for (KeyMelt callback : callbacks) {
             callback.onKeyMelt(invoker, oldKeySegment, newKeySegment);
         }
     });
 
+    @Deprecated
     public static final Event<KeyLoad> ON_KEY_LOAD = EventFactory.createArrayBacked(KeyLoad.class, callbacks -> (invoker, keySegment) -> {
         for (KeyLoad callback : callbacks) {
             callback.onKeyLoad(invoker, keySegment);
@@ -30,6 +32,7 @@ public class VerifyEvent {
     });
 
     // 每15s检查一次
+    @Deprecated
     public static final Event<ServerTickEvents.EndTick> CHECK_AUTH = EventFactory.createArrayBacked(ServerTickEvents.EndTick.class, callbacks -> (server) -> {
         for (ServerTickEvents.EndTick callback : callbacks) {
             callback.onEndTick(server);
