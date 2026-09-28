@@ -1,11 +1,14 @@
 package net.onixary.shapeShifterCurseFabric.custom_ui;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextWidget;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
@@ -17,7 +20,9 @@ import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
 import net.onixary.shapeShifterCurseFabric.perk.RegPerks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Quaternionf;
 import org.joml.Vector2i;
+import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -129,6 +134,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     public TextWidget PerkNameWidget;
     public ScaleScrollTextWidget PerkDescWidget;
     public ButtonWidget AcquirePerkButton;
+    public TextWidget PerkXpCostWidget;
 
     public int MaxPerkLevel = 0;
 
@@ -171,9 +177,12 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
                 ModPacketsS2C.sendRequestPerkAvailability();
             }
         }).position(baseX + PERK_INFO_GAIN_BUTTON_X, baseY + PERK_INFO_GAIN_BUTTON_Y).size(PERK_INFO_GAIN_BUTTON_WIDTH, PERK_INFO_GAIN_BUTTON_HEIGHT).build();
+        this.PerkXpCostWidget = new TextWidget(baseX + PERK_INFO_XP_COST_X, baseY + PERK_INFO_XP_COST_Y, PERK_INFO_XP_COST_WIDTH, PERK_INFO_XP_COST_HEIGHT, Text.literal(""), this.textRenderer);
+        this.PerkXpCostWidget.alignRight();
         this.addDrawableChild(this.PerkNameWidget);
         this.addDrawableChild(this.PerkDescWidget);
         this.addDrawableChild(this.AcquirePerkButton);
+        this.addDrawableChild(this.PerkXpCostWidget);
         super.init();
     }
 
@@ -204,6 +213,43 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         return super.mouseScrolled(mouseX, mouseY, mouseZ);
     }
 
+    private void RenderEntity(DrawContext context, int x, int y, int size, int mouseX, int mouseY, LivingEntity entity) {
+        float f = (float)Math.atan((double)(mouseX / 40.0F));
+        float g = (float)Math.atan((double)(mouseY / 40.0F));
+        Quaternionf quaternionf = (new Quaternionf()).rotateZ(3.1415927F);
+        Quaternionf quaternionf2 = (new Quaternionf()).rotateX(g * 20.0F * 0.017453292F);
+        quaternionf.mul(quaternionf2);
+        float h = entity.bodyYaw;
+        float i = entity.getYaw();
+        float j = entity.getPitch();
+        float k = entity.prevHeadYaw;
+        float l = entity.headYaw;
+        float m = entity.prevBodyYaw;
+        entity.bodyYaw = 180.0F + f * 20.0F;
+        entity.prevBodyYaw = entity.bodyYaw;
+        entity.setYaw(180.0F + f * 40.0F);
+        entity.setPitch(-g * 20.0F);
+        entity.headYaw = entity.getYaw();
+        entity.prevHeadYaw = entity.getYaw();
+        InventoryScreen.drawEntity(context, x, y, size, quaternionf, quaternionf2, entity);
+        entity.bodyYaw = h;
+        entity.prevBodyYaw = m;
+        entity.setYaw(i);
+        entity.setPitch(j);
+        entity.prevHeadYaw = k;
+        entity.headYaw = l;
+    }
+
+    private void RenderEntityInViewport(DrawContext context, int viewportX, int viewportY, int viewportWidth, int viewportHeight, int x, int y, int size, int mouseX, int mouseY, LivingEntity entity) {
+        context.enableScissor(viewportX, viewportY, viewportX + viewportWidth, viewportY + viewportHeight);
+        try {
+            RenderSystem.clear(GL11.GL_DEPTH_BUFFER_BIT, MinecraftClient.IS_SYSTEM_MAC);
+            RenderEntity(context, x, y, size, mouseX, mouseY, entity);
+        } finally {
+            context.disableScissor();
+        }
+    }
+
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         baseX = this.width / 2 - BACKGROUND_WIDTH / 2;
@@ -215,6 +261,24 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         nodeCenter = new Vector2i( -PERK_UI_WIDTH / 2, 0);
         context.fill(baseX + PERK_UI_ICON_X, baseY + PERK_UI_ICON_Y, baseX + PERK_UI_ICON_X + PERK_UI_ICON_WIDTH, baseY + PERK_UI_ICON_Y + PERK_UI_ICON_HEIGHT, 0xFFFFFFFF);
         this.drawAllNode(context, mouseX, mouseY, delta);
+
+        if (client.player != null) {
+            int viewportX = baseX + FORM_MODEL_REVIEW_X;
+            int viewportY = baseY + FORM_MODEL_REVIEW_Y;
+            int entityX = viewportX + FORM_MODEL_REVIEW_WIDTH / 2;
+            int entityY = viewportY + FORM_MODEL_REVIEW_HEIGHT - 15;
+            int entitySize = 50;
+            RenderEntityInViewport(
+                    context,
+                    viewportX, viewportY,
+                    FORM_MODEL_REVIEW_WIDTH, FORM_MODEL_REVIEW_HEIGHT,
+                    entityX, entityY,
+                    entitySize,
+                    entityX - mouseX, entityY - mouseY - entitySize,
+                    client.player
+            );
+        }
+
         super.render(context, mouseX, mouseY, delta);
     }
 
@@ -289,7 +353,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
 
     // playerGainedPerk 由调用方获取 毕竟drawNode调用频繁
     public void drawNode(DrawContext context, PerkTree.PerkNode perkNode, @Nullable List<Identifier> playerGainedPerk, int mouseX, int mouseY, float delta) {
-        this.drawConnectLine(context, perkNode);
+        // this.drawConnectLine(context, perkNode);
         Identifier icon = RegPerks.getPerkIcon(perkNode.perkID);
         if (icon == null) {
             icon = RegPerks.FALLBACK_PERK_ICON;
@@ -317,6 +381,21 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
             context.drawTexture(LABEL_SELECT, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
         }
         context.drawTexture(icon, NodePosX + NodeDrawStartX, NodePosY + NodeDrawStartY, 0, 0, NodeTextureWidth, NodeTextureHeight, NodeTextureWidth, NodeTextureHeight);
+        final int PerkNameBoxWidth = 33;
+        Text perkNameText = RegPerks.getPerkName(perkNode.perkID);
+        int perkNameTextWidth = this.textRenderer.getWidth(perkNameText);
+        int iconCenterX = NodePosX + NodeDrawStartX + NodeTextureWidth / 2;
+        int perkNameY = NodePosY + NodeDrawStartY + NodeTextureHeight + 2;
+        int perkNameBoxLeftX = iconCenterX - PerkNameBoxWidth / 2;
+        int perkNameX = perkNameBoxLeftX + (PerkNameBoxWidth - perkNameTextWidth) / 2;
+        context.drawText(
+                this.textRenderer,
+                perkNameText,
+                perkNameX,
+                perkNameY,
+                0xFFFFFFFF,
+                false
+        );
     }
 
     public void drawAllNode(DrawContext context, int mouseX, int mouseY, float delta) {
@@ -348,6 +427,9 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         PerkTree tree = this.perkTree;
         List<Identifier> playerGainedPerk = PerkUtils.getPlayerPerks(this.client.player, tree.getID());
         Vector2i vMousePos = getVirtualMousePos(mouseX, mouseY);
+        for (PerkTree.PerkNode perkNode : tree.getAllNodes()) {
+            this.drawConnectLine(context, perkNode);
+        }
         for (PerkTree.PerkNode perkNode : tree.getAllNodes()) {
             this.drawNode(context, perkNode, playerGainedPerk, vMousePos.x, vMousePos.y, delta);
         }
@@ -446,10 +528,12 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         if (this.nowSelectNode != null) {
             this.PerkNameWidget.setMessage(RegPerks.getPerkName(this.nowSelectNode.perkID));
             this.PerkDescWidget.reloadText(RegPerks.getPerkDescription(this.nowSelectNode.perkID));
+            this.PerkXpCostWidget.setMessage(Text.literal(String.valueOf(perkXpCostMap.getOrDefault(this.nowSelectNode.perkID, 0))));
             this.AcquirePerkButton.active = this.isNowPerkCanGain();
         } else {
             this.PerkNameWidget.setMessage(Text.literal(""));
             this.PerkDescWidget.reloadText(Text.literal(""));
+            this.PerkXpCostWidget.setMessage(Text.literal(""));
             this.AcquirePerkButton.active = false;
         }
         ModPacketsS2C.sendRequestPerkAvailability();
