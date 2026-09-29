@@ -46,6 +46,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
 
     public static final int PERK_UI_X = 110;
     public static final int PERK_UI_Y = 8;
+    public static final int PERK_UI_VIEW_Y = 20;
     public static final int PERK_UI_WIDTH = 200;
     public static final int PERK_UI_HEIGHT = 174;
 
@@ -421,6 +422,8 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
                     LineColor
             );
         }
+        context.disableScissor();
+        context.enableScissor(nodeWindowX, nodeWindowY + PERK_UI_VIEW_Y, nodeWindowX + PERK_UI_WIDTH, nodeWindowY + PERK_UI_HEIGHT);
         matrixStack.push();
         matrixStack.translate(cameraCenter.x + cameraPosX, cameraCenter.y + cameraPosY, 0);
         matrixStack.scale(cameraScale, cameraScale, 1.0f);
@@ -510,6 +513,14 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         }
         if (this.nowSelectNode.tier > this.tier) {
             return false;
+        }
+        List<Identifier> playerGainedPerk = PerkUtils.getPlayerPerks(this.client.player, this.perkTree.getID());
+        if (playerGainedPerk != null && playerGainedPerk.contains(this.nowSelectNode.perkID)) {
+            return false;
+        }
+        if (this.nowSelectNode.dependentPerkIDs != null && !this.nowSelectNode.dependentPerkIDs.isEmpty()) {
+            if (playerGainedPerk == null) return false;
+            for (Identifier dependentPerkID : this.nowSelectNode.dependentPerkIDs) if (!playerGainedPerk.contains(dependentPerkID)) return false;
         }
         int requireXp = this.client.player.getAbilities().creativeMode ? 0 : perkXpCostMap.getOrDefault(this.nowSelectNode.perkID, 0);
         if (this.client.player.totalExperience < requireXp) {
