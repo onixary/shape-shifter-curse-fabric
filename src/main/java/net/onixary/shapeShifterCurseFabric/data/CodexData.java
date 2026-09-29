@@ -16,7 +16,8 @@ public class CodexData {
         PROS,
         CONS,
         INSTINCTS,
-        NAME
+        NAME,
+        DESC,
     }
     // static texts
     // headers
