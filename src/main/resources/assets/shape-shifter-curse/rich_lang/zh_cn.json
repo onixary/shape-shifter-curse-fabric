@@ -1316,6 +1316,11 @@
   "gamerule.sscUseInitialForm": "以SSC配置的初始形态开局",
   "gamerule.sscUseInitialForm.description": "开启后，新玩家加入世界时会立即变为服务器配置的初始形态",
 
+  "gui.shape_shifter_curse.category.altar_shaped": "祭坛有序合成",
+  "gui.shape_shifter_curse.category.altar_shapeless": "祭坛无序合成",
+  "gui.shape_shifter_curse.jei.altar.recipe_id": "配方 ID：%s",
+  "gui.shape_shifter_curse.jei.altar.requires_advancement": "需要进度：%s",
+
   "ssc_perk.shape-shifter-curse.fox_root.name": "测试根节点-名称",
   "ssc_perk.shape-shifter-curse.fox_root.desc": ["测试根节点-介绍\n",
     "可滚动UI测试:\n",

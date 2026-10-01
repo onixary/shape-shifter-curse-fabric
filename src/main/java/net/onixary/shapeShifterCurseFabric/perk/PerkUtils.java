@@ -111,12 +111,15 @@ public class PerkUtils {
 
         PerkTree.PerkNode node = perkTree.getNode(perkID);
         if (node == null) return;
+        List<Identifier> playerPerkList = getPlayerPerks(player, perkTreeID);
         if (!node.dependentPerkIDs.isEmpty()) {
-            List<Identifier> playerPerkList = getPlayerPerks(player, perkTreeID);
             if (playerPerkList == null) return;
             for (Identifier dependentPerkID : node.dependentPerkIDs) {
                 if (!playerPerkList.contains(dependentPerkID)) return;
             }
+        }
+        if (playerPerkList != null && playerPerkList.contains(perkID)) {
+            return;
         }
         int tier = node.tier;
         // 感觉Tier0在无诅咒之月可以点可以作为特性使用 可以在tier0设置一些特殊的Perk
