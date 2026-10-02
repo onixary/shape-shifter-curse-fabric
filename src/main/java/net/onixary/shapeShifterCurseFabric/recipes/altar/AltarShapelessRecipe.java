@@ -7,7 +7,6 @@ import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementProgress;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.RecipeInputInventory;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
@@ -119,7 +118,7 @@ public class AltarShapelessRecipe extends AltarRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeSerializerRegister.ALTER_SHAPELESS_RECIPE;
+        return RecipeSerializerRegister.ALTAR_SHAPELESS_RECIPE;
     }
 
     public static class Serializer implements RecipeSerializer<AltarShapelessRecipe> {

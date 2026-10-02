@@ -7,10 +7,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.advancement.Advancement;
-import net.minecraft.advancement.AdvancementManager;
 import net.minecraft.advancement.AdvancementProgress;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.RecipeInputInventory;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
@@ -157,7 +155,7 @@ public class AltarShapedRecipe extends AltarRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeSerializerRegister.ALTER_SHAPED_RECIPE;
+        return RecipeSerializerRegister.ALTAR_SHAPED_RECIPE;
     }
 
     public static String[] getPattern(JsonArray json) {

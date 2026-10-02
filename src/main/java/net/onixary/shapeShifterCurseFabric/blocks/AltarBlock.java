@@ -4,14 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
@@ -26,8 +23,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.blocks.block_entity.AltarBlockEntity;
-import net.onixary.shapeShifterCurseFabric.custom_ui.AltarCraftUIHandler;
-import net.onixary.shapeShifterCurseFabric.custom_ui.RegMenuType;
 import org.jetbrains.annotations.Nullable;
 
 
@@ -90,7 +85,7 @@ public class AltarBlock extends BlockWithEntity {
 
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(world, type, RegCustomBlock.ALTER_BLOCK_ENTITY);
+        return checkType(world, type, RegCustomBlock.ALTAR_BLOCK_ENTITY);
     }
 
     @Nullable

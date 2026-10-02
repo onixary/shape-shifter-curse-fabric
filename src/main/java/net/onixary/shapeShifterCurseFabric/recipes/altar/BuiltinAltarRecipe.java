@@ -2,7 +2,6 @@ package net.onixary.shapeShifterCurseFabric.recipes.altar;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
@@ -177,7 +176,7 @@ public class BuiltinAltarRecipe extends AltarRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeSerializerRegister.BUILTIN_ALTER_RECIPE;
+        return RecipeSerializerRegister.BUILTIN_ALTAR_RECIPE;
     }
 
     public static class Serializer implements RecipeSerializer<BuiltinAltarRecipe> {

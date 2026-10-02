@@ -48,7 +48,7 @@ public class SSC_JEI_Plugin implements IModPlugin {
             return;
         }
         RecipeManager rm = client.getNetworkHandler().getRecipeManager();
-        List<AltarRecipe> all = rm.listAllOfType(RecipeUtils.ALTER_RECIPE);
+        List<AltarRecipe> all = rm.listAllOfType(RecipeUtils.ALTAR_RECIPE);
 
         List<AltarShapedRecipe> shaped = all.stream()
                 .filter(r -> r instanceof AltarShapedRecipe)
@@ -65,7 +65,7 @@ public class SSC_JEI_Plugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(new ItemStack(RegCustomBlock.ALTER_BLOCK), ALTAR_SHAPED, ALTAR_SHAPELESS);
+        registration.addRecipeCatalyst(new ItemStack(RegCustomBlock.ALTAR_BLOCK), ALTAR_SHAPED, ALTAR_SHAPELESS);
     }
 
     @Override

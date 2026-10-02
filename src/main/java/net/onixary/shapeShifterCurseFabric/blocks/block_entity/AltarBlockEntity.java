@@ -69,9 +69,9 @@ public class AltarBlockEntity extends LockableContainerBlockEntity implements Si
     }
 
     public AltarBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(RegCustomBlock.ALTER_BLOCK_ENTITY, blockPos, blockState);
+        super(RegCustomBlock.ALTAR_BLOCK_ENTITY, blockPos, blockState);
         this.inventory = DefaultedList.ofSize(12, ItemStack.EMPTY);
-        this.matchGetter = RecipeManager.createCachedMatchGetter(RecipeUtils.ALTER_RECIPE);
+        this.matchGetter = RecipeManager.createCachedMatchGetter(RecipeUtils.ALTAR_RECIPE);
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
                 switch (index) {
