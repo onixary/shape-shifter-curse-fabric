@@ -14,6 +14,7 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.NormalForm;
 import net.onixary.shapeShifterCurseFabric.util.integration.AnimItem;
+import net.onixary.shapeShifterCurseFabric.util.integration.CarryOnIntegration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,7 +47,12 @@ public class Form_Axolotl3 extends NormalForm {
         Item holdItem = player.getMainHandStack().getItem();
         List<AnimItem.AnimItemTag> animItemTags = AnimItem.getAnimItemTags(holdItem);
         if (animStateEnum != null) {
-            if (animItemTags != null && !animItemTags.isEmpty() && animItemTags.contains(AnimItem.NoAnimItemTag)) {
+            if (
+                    !player.isSneaking() && (
+                            CarryOnIntegration.isInCarryingAnimation(player) ||
+                            (animItemTags != null && !animItemTags.isEmpty() && animItemTags.contains(AnimItem.NoAnimItemTag))
+                    )
+            ) {
                 return switch (animStateEnum) {
                     case ANIM_STATE_SWIM -> USE_VANILLA_CONTROLLER;
                     case ANIM_STATE_SLEEP -> USE_VANILLA_CONTROLLER;
