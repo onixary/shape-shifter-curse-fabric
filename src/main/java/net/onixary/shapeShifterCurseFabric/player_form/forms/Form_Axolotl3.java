@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.player_form.forms;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AbstractAnimStateController;
@@ -12,8 +13,11 @@ import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimStateEnum;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimSystem;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.AnimUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.NormalForm;
+import net.onixary.shapeShifterCurseFabric.util.integration.AnimItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class Form_Axolotl3 extends NormalForm {
     public Form_Axolotl3(Identifier formID) {
@@ -39,36 +43,34 @@ public class Form_Axolotl3 extends NormalForm {
     @Override
     public @Nullable AbstractAnimStateController getAnimStateController(PlayerEntity player, AnimSystem.AnimSystemData animSystemData, @NotNull Identifier animStateID) {
         @Nullable AnimStateEnum animStateEnum = AnimStateEnum.getStateEnum(animStateID);
+        Item holdItem = player.getMainHandStack().getItem();
+        List<AnimItem.AnimItemTag> animItemTags = AnimItem.getAnimItemTags(holdItem);
         if (animStateEnum != null) {
-            switch (animStateEnum) {
-                case ANIM_STATE_SWIM:
-                    return SWIM_CONTROLLER;
-                case ANIM_STATE_IDLE:
-                    return IDLE_CONTROLLER;
-                case ANIM_STATE_WALK:
-                    return WALK_CONTROLLER;
-                case ANIM_STATE_SPRINT:
-                    return SPRINT_CONTROLLER;
-                case ANIM_STATE_JUMP:
-                    return JUMP_CONTROLLER;
-                case ANIM_STATE_FALL:
-                    return FALL_CONTROLLER;
-                case ANIM_STATE_ATTACK:
-                    return ATTACK_CONTROLLER;
-                case ANIM_STATE_MINING:
-                    return MINING_CONTROLLER;
-                case ANIM_STATE_FLYING:
-                    return FLYING_CONTROLLER;
-                case ANIM_STATE_SLEEP:
-                    return SLEEP_CONTROLLER;
-                case ANIM_STATE_CRAWL:
-                    return CRAWL_CONTROLLER;
-                case ANIM_STATE_USE_ITEM:
-                    return USE_VANILLA_CONTROLLER;
-                case ANIM_STATE_BLOCK_SHIELD:
-                    return USE_VANILLA_CONTROLLER;
-                default:
-                    return null;
+            if (animItemTags != null && !animItemTags.isEmpty() && animItemTags.contains(AnimItem.NoAnimItemTag)) {
+                return switch (animStateEnum) {
+                    case ANIM_STATE_SWIM -> USE_VANILLA_CONTROLLER;
+                    case ANIM_STATE_SLEEP -> USE_VANILLA_CONTROLLER;
+                    case ANIM_STATE_CRAWL -> USE_VANILLA_CONTROLLER;
+                    default -> USE_VANILLA_CONTROLLER;
+                };
+            }
+            else {
+                return switch (animStateEnum) {
+                    case ANIM_STATE_SWIM -> SWIM_CONTROLLER;
+                    case ANIM_STATE_IDLE -> IDLE_CONTROLLER;
+                    case ANIM_STATE_WALK -> WALK_CONTROLLER;
+                    case ANIM_STATE_SPRINT -> SPRINT_CONTROLLER;
+                    case ANIM_STATE_JUMP -> JUMP_CONTROLLER;
+                    case ANIM_STATE_FALL -> FALL_CONTROLLER;
+                    case ANIM_STATE_ATTACK -> ATTACK_CONTROLLER;
+                    case ANIM_STATE_MINING -> MINING_CONTROLLER;
+                    case ANIM_STATE_FLYING -> FLYING_CONTROLLER;
+                    case ANIM_STATE_SLEEP -> SLEEP_CONTROLLER;
+                    case ANIM_STATE_CRAWL -> CRAWL_CONTROLLER;
+                    case ANIM_STATE_USE_ITEM -> USE_VANILLA_CONTROLLER;
+                    case ANIM_STATE_BLOCK_SHIELD -> USE_VANILLA_CONTROLLER;
+                    default -> null;
+                };
             }
         }
         return super.getAnimStateController(player, animSystemData, animStateID);
