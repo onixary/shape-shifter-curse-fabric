@@ -14,7 +14,7 @@ public abstract class AltarRecipe implements Recipe<SidedInventory> {
 
     @Override
     public RecipeType<?> getType() {
-        return RecipeUtils.ALTER_RECIPE;
+        return RecipeUtils.ALTAR_RECIPE;
     }
 
     public abstract int recipeTime();

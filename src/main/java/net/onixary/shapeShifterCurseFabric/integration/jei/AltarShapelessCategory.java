@@ -30,7 +30,7 @@ public class AltarShapelessCategory extends AbstractRecipeCategory<AltarShapeles
     public AltarShapelessCategory(IGuiHelper guiHelper) {
         super(SSC_JEI_Plugin.ALTAR_SHAPELESS,
                 Text.translatable("gui.shape_shifter_curse.category.altar_shapeless"),
-                guiHelper.createDrawableItemLike(RegCustomBlock.ALTER_BLOCK),
+                guiHelper.createDrawableItemLike(RegCustomBlock.ALTAR_BLOCK),
                 174, 79);
         this.background = guiHelper.createDrawable(TEXTURE, 0, 0, 174, 79);
         this.arrow = guiHelper.createDrawable(TEXTURE, 174, 0, 43, 9);
