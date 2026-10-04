@@ -546,7 +546,7 @@
     "item.shape-shifter-curse.custom_trinket": "Custom Trinket",
     "trinket.slot.hand.extra_hand": "Extra Hand",
     "curios.identifier.extra_hand": "Extra Hand",
-    "block.shape-shifter-curse.altar": "Altar",
+    "block.shape-shifter-curse.altar": "Shape Shifter Altar",
     "command.shape_shifter_curse.no_permission_form": "You don't have permission to use this form",
     "command.shape_shifter_curse.no_permission_dynamic_form": "You don't have permission to use this form",
     "command.shape_shifter_curse.no_permission_sub_form": "You don't have permission to use this form",
@@ -675,8 +675,8 @@
     "gamerule.category.ssc_gamerule": "Shape Shifter Curse",
     "gamerule.sscUseInitialForm": "Use SSC custom initial form",
     "gamerule.sscUseInitialForm.description": "When enabled, players who have not chosen a form will immediately transform into the server-configured initial form on join",
-    "gui.shape_shifter_curse.category.altar_shaped": "Altar Shaped Crafting",
-    "gui.shape_shifter_curse.category.altar_shapeless": "Altar Shapeless Crafting",
+    "gui.shape_shifter_curse.category.altar_shaped": "Shape Shifter Altar Shaped Crafting",
+    "gui.shape_shifter_curse.category.altar_shapeless": "Shape Shifter Altar Shapeless Crafting",
     "gui.shape_shifter_curse.jei.altar.recipe_id": "Recipe ID: %s",
     "gui.shape_shifter_curse.jei.altar.requires_advancement": "Requires Advancement: %s",
     "item.shape-shifter-curse.charm_of_night_crystal_plus": "Charm of Night Crystal+",
@@ -724,5 +724,5 @@
     "item.shape-shifter-curse.surge_catalyst_core.tooltip": "It brings to mind hidden, surging currents beneath a calm sea.",
     "item.shape-shifter-curse.dune_catalyst_core.tooltip": "It brings to mind the faint shapes traced in the sky by dust devils.",
     "item.shape-shifter-curse.night_catalyst_core.tooltip": "It brings to mind a starless, moonless night, clear as black glass.",
-    "jei.shape-shifter-curse.catalyst_core.info": "Not consumed when used in the catalyst slot for crafting at the Shapeshifting Altar."
+    "jei.shape-shifter-curse.catalyst_core.info": "Not consumed when used in the catalyst slot for crafting at the Shape Shifter Altar."
 }

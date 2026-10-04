@@ -55,6 +55,11 @@ public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
     }
 
     @Override
+    protected void drawForeground(DrawContext context, int mouseX, int mouseY) {
+        // The altar layout omits the default screen and inventory labels.
+    }
+
+    @Override
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
         context.drawTexture(BACKGROUND, baseX, baseY, 0, 0, WIDTH, HEIGHT, TEXTURE_WIDTH, TEXTURE_HEIGHT);
     }
