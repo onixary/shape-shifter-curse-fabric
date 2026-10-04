@@ -9,7 +9,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.custom_ui.FormUpgradeScreen;
 import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 import net.onixary.shapeShifterCurseFabric.util.util.BaseSprite;
 import net.onixary.shapeShifterCurseFabric.util.util.ISprite;
@@ -18,7 +17,10 @@ import org.jetbrains.annotations.Nullable;
 
 public class ItemCostType implements IFUSDrawableCostType<ItemCostType> {
     private static final Identifier id = ShapeShifterCurseFabric.identifier("item");
-    private static final ISprite itemIconSprite = new BaseSprite(FormUpgradeScreen.TEXTURE, FormUpgradeScreen.TEXTURE_WIDTH, FormUpgradeScreen.TEXTURE_HEIGHT, 434, 54, 18, 18);
+    public static final Identifier TEXTURE = ShapeShifterCurseFabric.identifier("textures/gui/shape_shifter_tuner_ui.png");
+    public static final int TEXTURE_WIDTH = 452;
+    public static final int TEXTURE_HEIGHT = 190;
+    private static final ISprite itemIconSprite = new BaseSprite(TEXTURE, TEXTURE_WIDTH, TEXTURE_HEIGHT, 434, 54, 18, 18);
 
     @Override
     public Identifier getID() {
