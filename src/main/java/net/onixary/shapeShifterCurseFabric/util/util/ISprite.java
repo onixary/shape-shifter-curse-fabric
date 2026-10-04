@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.util.menu;
+package net.onixary.shapeShifterCurseFabric.util.util;
 
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.Identifier;

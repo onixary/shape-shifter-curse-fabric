@@ -18,8 +18,11 @@ import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.perk.PerkTree;
 import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
 import net.onixary.shapeShifterCurseFabric.perk.RegPerks;
-import net.onixary.shapeShifterCurseFabric.util.menu.BaseSprite;
-import net.onixary.shapeShifterCurseFabric.util.menu.ISprite;
+import net.onixary.shapeShifterCurseFabric.util.util.BaseSprite;
+import net.onixary.shapeShifterCurseFabric.util.util.ISprite;
+import net.onixary.shapeShifterCurseFabric.util.util.cost.BaseCost;
+import net.onixary.shapeShifterCurseFabric.util.util.cost.ICost;
+import net.onixary.shapeShifterCurseFabric.util.util.cost.IFUSDrawableCostType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
@@ -36,7 +39,7 @@ import java.util.Objects;
 public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX {
     public static final Identifier TEXTURE = ShapeShifterCurseFabric.identifier("textures/gui/shape_shifter_tuner_ui.png");
     public static final HashMap<Integer, ISprite> levelSprites = new HashMap<>();
-    public static final int TEXTURE_WIDTH = 451;
+    public static final int TEXTURE_WIDTH = 452;
     public static final int TEXTURE_HEIGHT = 190;
 
     static {
@@ -86,15 +89,15 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     public static final int PERK_INFO_DESC_WIDTH = 91;
     public static final int PERK_INFO_DESC_HEIGHT = 115;
 
-    public static final int PERK_INFO_XP_ICON_X = 316;
-    public static final int PERK_INFO_XP_ICON_Y = 145;
-    public static final int PERK_INFO_XP_ICON_WIDTH = 16;
-    public static final int PERK_INFO_XP_ICON_HEIGHT = 17;
+    public static final int PERK_INFO_COST_ICON_X = 315;
+    public static final int PERK_INFO_COST_ICON_Y = 144;
+    public static final int PERK_INFO_COST_ICON_WIDTH = 18;
+    public static final int PERK_INFO_COST_ICON_HEIGHT = 18;
 
-    public static final int PERK_INFO_XP_COST_X = 334;
-    public static final int PERK_INFO_XP_COST_Y = 145;
-    public static final int PERK_INFO_XP_COST_WIDTH = 73;
-    public static final int PERK_INFO_XP_COST_HEIGHT = 17;
+    public static final int PERK_INFO_COST_AMOUNT_X = 334;
+    public static final int PERK_INFO_COST_AMOUNT_Y = 145;
+    public static final int PERK_INFO_COST_AMOUNT_WIDTH = 73;
+    public static final int PERK_INFO_COST_AMOUNT_HEIGHT = 17;
 
     public static final int PERK_INFO_GAIN_BUTTON_X = 316;
     public static final int PERK_INFO_GAIN_BUTTON_Y = 164;
@@ -111,7 +114,8 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     public static final Identifier LABEL_DEPEND = ShapeShifterCurseFabric.identifier("textures/perk/system/depend.png");
 
     public static final HashMap<Identifier, Boolean> perkAvailableMap = new HashMap<>();  // 仅客户端数据 仅影响渲染 仅代表服务器获取这个表时无法获取这个Perk
-    public static final HashMap<Identifier, Integer> perkXpCostMap = new HashMap<>();  // 仅客户端数据 实际消耗由服务器决定
+    public static final HashMap<Identifier, ICost> perkCostMap = new HashMap<>();  // 仅客户端数据 实际消耗由服务器决定
+    public static final ICost EMPTY_COST = new BaseCost();
 
     public int tier = -1;
     public @NotNull PerkTree perkTree;
@@ -151,7 +155,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     public TextWidget PerkNameWidget;
     public ScaleScrollTextWidget PerkDescWidget;
     public ButtonWidget AcquirePerkButton;
-    public TextWidget PerkXpCostWidget;
+    public TextWidget PerkCostAmountWidget;
 
     public int MaxPerkLevel = 0;
 
@@ -194,12 +198,12 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
                 ModPacketsS2C.sendRequestPerkAvailability();
             }
         }).position(baseX + PERK_INFO_GAIN_BUTTON_X, baseY + PERK_INFO_GAIN_BUTTON_Y).size(PERK_INFO_GAIN_BUTTON_WIDTH, PERK_INFO_GAIN_BUTTON_HEIGHT).build();
-        this.PerkXpCostWidget = new TextWidget(baseX + PERK_INFO_XP_COST_X, baseY + PERK_INFO_XP_COST_Y, PERK_INFO_XP_COST_WIDTH, PERK_INFO_XP_COST_HEIGHT, Text.literal(""), this.textRenderer);
-        this.PerkXpCostWidget.alignRight();
+        this.PerkCostAmountWidget = new TextWidget(baseX + PERK_INFO_COST_AMOUNT_X, baseY + PERK_INFO_COST_AMOUNT_Y, PERK_INFO_COST_AMOUNT_WIDTH, PERK_INFO_COST_AMOUNT_HEIGHT, Text.literal(""), this.textRenderer);
+        this.PerkCostAmountWidget.alignRight();
         this.addDrawableChild(this.PerkNameWidget);
         this.addDrawableChild(this.PerkDescWidget);
         this.addDrawableChild(this.AcquirePerkButton);
-        this.addDrawableChild(this.PerkXpCostWidget);
+        this.addDrawableChild(this.PerkCostAmountWidget);
         super.init();
     }
 
@@ -276,6 +280,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         nodeWindowY = baseY + PERK_UI_Y;
         cameraCenter = new Vector2i(nodeWindowX + PERK_UI_WIDTH / 2, nodeWindowY + PERK_UI_HEIGHT / 2);
         nodeCenter = new Vector2i( -PERK_UI_WIDTH / 2, 0);
+        super.render(context, mouseX, mouseY, delta);
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -300,7 +305,15 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
             );
         }
 
-        super.render(context, mouseX, mouseY, delta);
+        if (this.nowSelectNode != null) {
+            ICost nowCost = perkCostMap.getOrDefault(this.nowSelectNode.perkID, EMPTY_COST);
+            if (nowCost.getType() instanceof IFUSDrawableCostType<?> fusDrawable) {
+                int rx = baseX + PERK_INFO_COST_ICON_X;
+                int ry = baseY + PERK_INFO_COST_ICON_Y;
+                fusDrawable.drawIcon(context, nowCost, client.player, rx, ry, 0);
+                fusDrawable.drawOnHover(context, nowCost, client.player, rx, ry, 0, mouseX - rx, mouseY - ry);
+            }
+        }
     }
 
     @Override
@@ -552,8 +565,8 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
             if (playerGainedPerk == null) return false;
             for (Identifier dependentPerkID : this.nowSelectNode.dependentPerkIDs) if (!playerGainedPerk.contains(dependentPerkID)) return false;
         }
-        int requireXp = this.client.player.getAbilities().creativeMode ? 0 : perkXpCostMap.getOrDefault(this.nowSelectNode.perkID, 0);
-        if (this.client.player.totalExperience < requireXp) {
+        ICost cost = perkCostMap.get(this.nowSelectNode.perkID);
+        if (cost != null && !cost.getType().canPay_CLIENT(cost, client.player)) {
             return false;
         }
         return true;
@@ -569,12 +582,17 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         if (this.nowSelectNode != null) {
             this.PerkNameWidget.setMessage(RegPerks.getPerkName(this.nowSelectNode.perkID));
             this.PerkDescWidget.reloadText(RegPerks.getPerkDescription(this.nowSelectNode.perkID));
-            this.PerkXpCostWidget.setMessage(Text.literal(String.valueOf(perkXpCostMap.getOrDefault(this.nowSelectNode.perkID, 0))));
+            ICost cost = perkCostMap.get(this.nowSelectNode.perkID);
+            if (cost != null && cost.getType() instanceof IFUSDrawableCostType<?> ifusDrawableCostType) {
+                this.PerkCostAmountWidget.setMessage(ifusDrawableCostType.getAmountText(cost, client.player));
+            } else {
+                this.PerkCostAmountWidget.setMessage(Text.literal(""));
+            }
             this.AcquirePerkButton.active = this.isNowPerkCanGain();
         } else {
             this.PerkNameWidget.setMessage(Text.literal(""));
             this.PerkDescWidget.reloadText(Text.literal(""));
-            this.PerkXpCostWidget.setMessage(Text.literal(""));
+            this.PerkCostAmountWidget.setMessage(Text.literal(""));
             this.AcquirePerkButton.active = false;
         }
         ModPacketsS2C.sendRequestPerkAvailability();
