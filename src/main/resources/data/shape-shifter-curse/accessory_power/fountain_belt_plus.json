@@ -1,0 +1,34 @@
+{
+  "shape-shifter-curse:fountain_belt_plus": {
+    "accessory_powers": [],
+    "all_form": {
+      "add": [],
+      "remove": []
+    },
+    "layers": {
+      "origins:origin": {
+        "shape-shifter-curse:form_axolotl_0": {
+          "add": [],
+          "remove": []
+        },
+        "shape-shifter-curse:form_axolotl_1": {
+          "add": [],
+          "remove": []
+        },
+        "shape-shifter-curse:form_axolotl_2": {
+          "add": [],
+          "remove": []
+        },
+        "shape-shifter-curse:form_axolotl_3": {
+          "add": [
+            "shape-shifter-curse:form_axolotl_fountain_belt_trinket_plus"
+          ],
+          "remove": [
+            "shape-shifter-curse:form_axolotl_3_sprinting_sneaking_water_explode",
+            "shape-shifter-curse:form_axolotl_2_falling_protection"
+          ]
+        }
+      }
+    }
+  }
+}

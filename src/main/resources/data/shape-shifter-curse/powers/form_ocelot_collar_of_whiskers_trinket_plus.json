@@ -1,0 +1,39 @@
+{
+  "type": "apoli:multiple",
+  "dodge_arrow_plus": {
+    "type": "shape-shifter-curse:projectile_dodge",
+    "range": 7.0,
+    "trigger_distance": 7.0,
+    "dodge_speed": 2,
+    "cooldown": 20,
+    "entity_condition": {
+      "type": "apoli:on_block"
+    },
+    "action": {
+      "type": "apoli:and",
+      "actions": [
+        {
+          "type": "apoli:play_sound",
+          "sound": "minecraft:entity.goat.long_jump"
+        },
+        {
+          "type": "apoli:apply_effect",
+          "effect": {
+            "effect": "minecraft:regeneration",
+            "duration": 102,
+            "amplifier": 0,
+            "hide_particles": false
+          }
+        },
+        {
+          "type": "apoli:apply_effect",
+          "effect": {
+            "effect": "minecraft:strength",
+            "duration": 100,
+            "amplifier": 1
+          }
+        }
+      ]
+    }
+  }
+}

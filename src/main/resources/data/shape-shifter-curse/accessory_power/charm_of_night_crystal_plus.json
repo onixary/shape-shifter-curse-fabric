@@ -1,0 +1,45 @@
+{
+  "shape-shifter-curse:charm_of_night_crystal_plus": {
+    "accessory_powers": [],
+    "all_form": {
+      "add": [],
+      "remove": []
+    },
+    "layers": {
+      "origins:origin": {
+        "shape-shifter-curse:form_bat_0": {
+          "add": [
+            "shape-shifter-curse:form_bat_charm_of_night_crystal_trinket_plus"
+          ],
+          "remove": [
+            "shape-shifter-curse:form_bat_0_sun_health"
+          ]
+        },
+        "shape-shifter-curse:form_bat_1": {
+          "add": [
+            "shape-shifter-curse:form_bat_charm_of_night_crystal_trinket_plus"
+          ],
+          "remove": [
+            "shape-shifter-curse:form_bat_1_sun_health"
+          ]
+        },
+        "shape-shifter-curse:form_bat_2": {
+          "add": [
+            "shape-shifter-curse:form_bat_charm_of_night_crystal_trinket_plus"
+          ],
+          "remove": [
+            "shape-shifter-curse:form_bat_2_sun_health"
+          ]
+        },
+        "shape-shifter-curse:form_bat_3": {
+          "add": [
+            "shape-shifter-curse:form_bat_charm_of_night_crystal_trinket_plus"
+          ],
+          "remove": [
+            "shape-shifter-curse:form_bat_2_sun_health"
+          ]
+        }
+      }
+    }
+  }
+}

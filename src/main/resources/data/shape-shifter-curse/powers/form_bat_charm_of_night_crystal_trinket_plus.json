@@ -1,0 +1,20 @@
+{
+  "type": "apoli:action_over_time",
+  "interval": 20,
+  "entity_action": {
+    "type": "apoli:apply_effect",
+    "effect": {
+      "effect": "minecraft:resistance",
+      "duration": 40,
+      "amplifier": 0
+    }
+  },
+  "condition": {
+    "type": "apoli:in_block",
+    "block_condition": {
+      "type": "apoli:light_level",
+      "comparison": "<=",
+      "compare_to": 7
+    }
+  }
+}

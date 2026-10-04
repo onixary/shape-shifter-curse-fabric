@@ -1,0 +1,17 @@
+{
+  "type": "shape-shifter-curse:altar_shapeless",
+  "ingredients": [
+    {
+      "item": "shape-shifter-curse:charm_of_hollow_fang"
+    }
+  ],
+  "result": {
+    "item": "shape-shifter-curse:charm_of_hollow_fang_plus",
+    "count": 1
+  },
+  "time": 600,
+  "moondust_cost": 16,
+  "catalyst": {
+    "item": "shape-shifter-curse:night_catalyst_core"
+  }
+}

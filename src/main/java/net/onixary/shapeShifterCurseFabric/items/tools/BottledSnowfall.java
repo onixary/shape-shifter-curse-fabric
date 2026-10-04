@@ -20,6 +20,6 @@ public class BottledSnowfall extends SwordItem {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("item.shape-shifter-curse.bottled_snowfall.tooltip").formatted(Formatting.YELLOW));
+        tooltip.add(Text.translatable(getTranslationKey() + ".tooltip").formatted(Formatting.YELLOW));
     }
 }

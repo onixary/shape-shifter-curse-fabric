@@ -1,0 +1,43 @@
+{
+  "type": "shape-shifter-curse:altar_shaped",
+  "result": {
+    "item": "shape-shifter-curse:glint_prism",
+    "count": 1
+  },
+  "time": 200,
+  "moondust_cost": 10,
+  "pattern": [
+    "ABC",
+    "DEF",
+    "GHI"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:glass"
+    },
+    "B": {
+      "item": "shape-shifter-curse:moondust_crystal_shard"
+    },
+    "C": {
+      "item": "minecraft:glass"
+    },
+    "D": {
+      "item": "minecraft:glass"
+    },
+    "E": {
+      "item": "minecraft:sea_lantern"
+    },
+    "F": {
+      "item": "minecraft:glass"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "H": {
+      "item": "shape-shifter-curse:moondust_crystal_shard"
+    },
+    "I": {
+      "item": "minecraft:glass"
+    }
+  }
+}

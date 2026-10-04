@@ -240,6 +240,7 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
+		ItemTooltipWrapping.register();
 		registerEntityModels();
 		ModPacketsS2C.register();
 

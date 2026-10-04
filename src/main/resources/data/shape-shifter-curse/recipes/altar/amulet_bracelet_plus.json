@@ -1,0 +1,17 @@
+{
+  "type": "shape-shifter-curse:altar_shapeless",
+  "ingredients": [
+    {
+      "item": "shape-shifter-curse:amulet_bracelet"
+    }
+  ],
+  "result": {
+    "item": "shape-shifter-curse:amulet_bracelet_plus",
+    "count": 1
+  },
+  "time": 600,
+  "moondust_cost": 16,
+  "catalyst": {
+    "item": "shape-shifter-curse:foxfire_catalyst_core"
+  }
+}

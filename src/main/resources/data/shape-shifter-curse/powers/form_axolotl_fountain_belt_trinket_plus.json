@@ -1,0 +1,135 @@
+{
+  "type": "apoli:multiple",
+  "fountain": {
+    "type": "apoli:active_self",
+    "entity_action": {
+      "type": "apoli:and",
+      "actions": [
+        {
+          "type": "apoli:add_velocity",
+          "y": 1.2,
+          "z": 0.1,
+          "space": "local_horizontal_normalized"
+        },
+        {
+          "type": "apoli:play_sound",
+          "sound": "minecraft:entity.axolotl.splash",
+          "volume": 0.5,
+          "pitch": 0.8
+        },
+        {
+          "type": "apoli:play_sound",
+          "sound": "minecraft:entity.wither.break_block",
+          "volume": 0.5,
+          "pitch": 0.8
+        },
+        {
+          "type": "shape-shifter-curse:explosion_damage_entity",
+          "power": 3,
+          "entity_condition": {
+            "type": "apoli:and",
+            "conditions": [
+              {
+                "type": "apoli:target_condition",
+                "condition": {
+                  "type": "apoli:in_tag",
+                  "tag": "shape-shifter-curse:water_explode_immune"
+                },
+                "inverted": true
+              },
+              {
+                "type": "apoli:owner",
+                "inverted": true
+              }
+            ]
+          },
+          "entity_action": {
+            "type": "apoli:and",
+            "actions": [
+              {
+                "type": "apoli:add_velocity",
+                "y": 1.25,
+                "space": "world"
+              },
+              {
+                "type": "apoli:apply_effect",
+                "effect": {
+                  "effect": "minecraft:slow_falling",
+                  "duration": 100,
+                  "amplifier": 0
+                }
+              }
+            ]
+          },
+          "explosion_damage_entity": false
+        },
+        {
+          "type": "apoli:gain_air",
+          "value": -20
+        },
+        {
+          "type": "apoli:spawn_particles",
+          "particle": "minecraft:rain",
+          "count": 32,
+          "speed": 0,
+          "force": true,
+          "spread": {
+            "x": 2,
+            "y": 0.5,
+            "z": 2
+          }
+        },
+        {
+          "type": "apoli:spawn_particles",
+          "particle": {
+            "type": "minecraft:dust",
+            "params": "0.11 0.18 0.69 2"
+          },
+          "count": 32,
+          "speed": 0,
+          "force": true,
+          "spread": {
+            "x": 2,
+            "y": 1,
+            "z": 2
+          }
+        },
+        {
+          "type": "apoli:apply_effect",
+          "effect": {
+            "effect": "minecraft:slow_falling",
+            "duration": 100,
+            "amplifier": 0
+          }
+        }
+      ]
+    },
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:on_block"
+        },
+        {
+          "type": "apoli:sprinting"
+        },
+        {
+          "type": "apoli:air",
+          "comparison": ">",
+          "compare_to": 0
+        }
+      ]
+    },
+    "cooldown": 60,
+    "hud_render": {
+      "should_render": false
+    },
+    "key": {
+      "key": "key.shape-shifter-curse.active_skill_1"
+    }
+  },
+  "falling_protection": {
+    "type": "shape-shifter-curse:falling_protection",
+    "fall_distance": 6
+  }
+}

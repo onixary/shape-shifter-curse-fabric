@@ -1,0 +1,67 @@
+{
+  "type": "apoli:multiple",
+  "damage_on_block_break": {
+    "type": "apoli:action_on_block_break",
+    "entity_action": {
+      "type": "apoli:equipped_item_action",
+      "equipment_slot": "mainhand",
+      "action": {
+        "type": "apoli:damage",
+        "amount": 1,
+        "ignore_unbreaking": false
+      }
+    },
+    "condition": {
+      "type": "apoli:inventory",
+      "process_mode": "items",
+      "item_condition": {
+        "type": "apoli:ingredient",
+        "ingredient": {
+          "item": "shape-shifter-curse:diamond_mining_claw"
+        }
+      },
+      "slots": [
+        "weapon.mainhand"
+      ],
+      "inverted": true
+    }
+  },
+  "damage_on_attack_entity": {
+    "type": "apoli:self_action_on_hit",
+    "entity_action": {
+      "type": "apoli:equipped_item_action",
+      "equipment_slot": "mainhand",
+      "action": {
+        "type": "apoli:damage",
+        "amount": 2,
+        "ignore_unbreaking": false
+      }
+    },
+    "condition": {
+      "type": "apoli:inventory",
+      "process_mode": "items",
+      "item_condition": {
+        "type": "apoli:ingredient",
+        "ingredient": {
+          "item": "shape-shifter-curse:diamond_mining_claw"
+        }
+      },
+      "slots": [
+        "weapon.mainhand"
+      ],
+      "inverted": true
+    }
+  },
+  "haste_on_harvest": {
+    "type": "apoli:action_on_block_break",
+    "only_when_harvested": true,
+    "entity_action": {
+      "type": "apoli:apply_effect",
+      "effect": {
+        "effect": "minecraft:haste",
+        "duration": 20,
+        "amplifier": 1
+      }
+    }
+  }
+}

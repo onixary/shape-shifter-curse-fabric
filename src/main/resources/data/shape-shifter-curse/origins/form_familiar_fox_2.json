@@ -39,7 +39,9 @@
         "shape-shifter-curse:form_familiar_fox_2_low_mana_debuff",
         "shape-shifter-curse:form_familiar_fox_sound_key",
         "shape-shifter-curse:form_tan_prevent_dirty_water_thirst",
-        "shape-shifter-curse:form_familiar_fox_2_tan_temperature_modify"
+        "shape-shifter-curse:form_familiar_fox_2_tan_temperature_modify",
+        "shape-shifter-curse:form_familiar_fox_explosive_charm_paper",
+        "shape-shifter-curse:form_familiar_fox_explosive_charm_paper_damage"
     ],
     "icon": {
         "item": "minecraft:player_head"

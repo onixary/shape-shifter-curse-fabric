@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "result": {
+    "item": "shape-shifter-curse:altar",
+    "count": 1
+  },
+  "pattern": [
+    "ABC",
+    "DEF",
+    "GHI"
+  ],
+  "key": {
+    "A": {
+      "item": "shape-shifter-curse:moondust_crystal_shard"
+    },
+    "B": {
+      "tag": "minecraft:wool_carpets"
+    },
+    "C": {
+      "item": "minecraft:gold_block"
+    },
+    "D": {
+      "item": "minecraft:crying_obsidian"
+    },
+    "E": {
+      "item": "minecraft:glowstone"
+    },
+    "F": {
+      "item": "minecraft:crying_obsidian"
+    },
+    "G": {
+      "item": "minecraft:crying_obsidian"
+    },
+    "H": {
+      "item": "minecraft:crying_obsidian"
+    },
+    "I": {
+      "item": "minecraft:crying_obsidian"
+    }
+  }
+}

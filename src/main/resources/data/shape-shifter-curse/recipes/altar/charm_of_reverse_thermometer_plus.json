@@ -1,0 +1,17 @@
+{
+  "type": "shape-shifter-curse:altar_shapeless",
+  "ingredients": [
+    {
+      "item": "shape-shifter-curse:charm_of_reverse_thermometer"
+    }
+  ],
+  "result": {
+    "item": "shape-shifter-curse:charm_of_reverse_thermometer_plus",
+    "count": 1
+  },
+  "time": 600,
+  "moondust_cost": 16,
+  "catalyst": {
+    "item": "shape-shifter-curse:frost_catalyst_core"
+  }
+}

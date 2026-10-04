@@ -1,0 +1,43 @@
+{
+  "type": "shape-shifter-curse:altar_shaped",
+  "result": {
+    "item": "shape-shifter-curse:jungle_catalyst_core",
+    "count": 1
+  },
+  "time": 1200,
+  "moondust_cost": 9,
+  "pattern": [
+    "ABC",
+    "DEF",
+    "GHI"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:bone_block"
+    },
+    "B": {
+      "item": "minecraft:bone_block"
+    },
+    "C": {
+      "item": "minecraft:bone_block"
+    },
+    "D": {
+      "item": "minecraft:sculk_catalyst"
+    },
+    "E": {
+      "item": "shape-shifter-curse:glint_prism"
+    },
+    "F": {
+      "item": "minecraft:jungle_log"
+    },
+    "G": {
+      "item": "minecraft:mossy_cobblestone"
+    },
+    "H": {
+      "item": "minecraft:mossy_cobblestone"
+    },
+    "I": {
+      "item": "minecraft:mossy_cobblestone"
+    }
+  }
+}

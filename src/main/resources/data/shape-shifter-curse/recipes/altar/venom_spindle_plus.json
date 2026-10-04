@@ -1,0 +1,17 @@
+{
+  "type": "shape-shifter-curse:altar_shapeless",
+  "ingredients": [
+    {
+      "item": "shape-shifter-curse:venom_spindle"
+    }
+  ],
+  "result": {
+    "item": "shape-shifter-curse:venom_spindle_plus",
+    "count": 1
+  },
+  "time": 600,
+  "moondust_cost": 16,
+  "catalyst": {
+    "item": "shape-shifter-curse:web_catalyst_core"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "type": "shape-shifter-curse:altar_shaped",
+  "result": {
+    "item": "shape-shifter-curse:foxfire_catalyst_core",
+    "count": 1
+  },
+  "time": 1200,
+  "moondust_cost": 9,
+  "pattern": [
+    "ABC",
+    "DEF",
+    "GHI"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:experience_bottle"
+    },
+    "B": {
+      "item": "minecraft:experience_bottle"
+    },
+    "C": {
+      "item": "minecraft:experience_bottle"
+    },
+    "D": {
+      "item": "minecraft:sentry_armor_trim_smithing_template"
+    },
+    "E": {
+      "item": "shape-shifter-curse:glint_prism"
+    },
+    "F": {
+      "item": "minecraft:goat_horn"
+    },
+    "G": {
+      "item": "minecraft:glowstone"
+    },
+    "H": {
+      "item": "minecraft:glowstone"
+    },
+    "I": {
+      "item": "minecraft:glowstone"
+    }
+  }
+}

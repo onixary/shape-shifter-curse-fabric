@@ -17,6 +17,6 @@ public class FireCharmPaper extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("item.shape-shifter-curse.fire_charm_paper.tooltip").formatted(Formatting.YELLOW));
+        tooltip.add(Text.translatable(getTranslationKey() + ".tooltip").formatted(Formatting.YELLOW));
     }
 }

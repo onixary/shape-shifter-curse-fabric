@@ -80,6 +80,8 @@ public class AdditionalPowers {
         register(BypassesLandingEffectsPower.createFactory());
         register(BypassesSteppingEffectsPower.createFactory());
         register(FormCameraBobbingPower.createFactory());
+        register(DisableHurtCameraPower.createFactory());
+        register(DisableWitherHeartsPower.createFactory());
         register(SlowdownPercentPower.createFactory());
         register(ChargePower.createFactory());
         register(ItemStorePower.createFactory());

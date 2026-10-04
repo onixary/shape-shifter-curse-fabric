@@ -23,6 +23,22 @@ These files are MIT licensed by their original author. They are **not** licensed
 under CC BY-NC 4.0, even where they sit inside the asset trees listed in
 `LICENSING.md`. Their copyright notice must be kept.
 
+### 1-bit Pixel Icons
+
+- Author: Nikoichu
+- License: CC0 1.0 Universal
+- License page: <https://creativecommons.org/publicdomain/zero/1.0/>
+- Applies to: `3d_models/icon/1-bit_Pixel_Icons/**`
+
+These icons retain the original author's CC0 1.0 dedication and are exempt from
+this project's CC BY-NC 4.0 asset license. Attribution is appreciated by the
+author but is not required.
+
+Original author's statement:
+
+> 1-bit Pixel Icons by Nikoichu is marked CC0 1.0
+> All of these icons are licensed under CC0, which means you have absolutely no restrictions on how you can use them. I would still appreciate it if you gave me attribution for my work, but it's not strictly required.
+
 ### tools/SignSystem
 
 - Author: XuHaoNan
@@ -101,6 +117,10 @@ SOFTWARE.
   与 `src/main/resources/assets/origins/**`。
   这些文件按原作者授权保持 MIT，**不属于** CC BY-NC 4.0，即使它们位于
   `LICENSING.md` 列出的资源目录内；其版权声明必须保留。
+- **1-bit Pixel Icons**，作者 Nikoichu，采用
+  [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)，适用于
+  `3d_models/icon/1-bit_Pixel_Icons/**`。该图标包保留原作者的 CC0 1.0 授权，
+  不适用本项目的 CC BY-NC 4.0 资源许可。作者欢迎署名，但不强制要求。
 - **tools/SignSystem**，作者 XuHaoNan，按文件头声明为「保留所有权利」，
   不是开源代码，复用或再分发需取得作者许可。见
   `tools/SignSystem/LICENSE.txt`。

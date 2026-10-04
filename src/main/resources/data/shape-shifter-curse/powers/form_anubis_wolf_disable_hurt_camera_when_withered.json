@@ -1,0 +1,8 @@
+{
+  "type": "shape-shifter-curse:disable_hurt_camera",
+  "condition": {
+    "type": "apoli:status_effect",
+    "effect": "minecraft:wither"
+  },
+  "hidden": true
+}

@@ -23,7 +23,8 @@
         "shape-shifter-curse:form_snow_fox_bottled_snowfall_cooldown",
         "shape-shifter-curse:form_familiar_fox_sound_key",
         "shape-shifter-curse:form_tan_prevent_dirty_water_thirst",
-        "shape-shifter-curse:form_snow_fox_2_tan_temperature_remap"
+        "shape-shifter-curse:form_snow_fox_2_tan_temperature_remap",
+        "shape-shifter-curse:form_snow_fox_bottled_snowfall_plus_tool"
     ],
     "icon": {
         "item": "minecraft:player_head"

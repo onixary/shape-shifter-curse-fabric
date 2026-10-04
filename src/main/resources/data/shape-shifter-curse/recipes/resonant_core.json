@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "shape-shifter-curse:altar_shaped",
   "pattern": [
     "BAB",
     "AMA",
@@ -19,5 +19,7 @@
   "result": {
     "item": "shape-shifter-curse:resonant_core",
     "count": 1
-  }
+  },
+  "time": 100,
+  "moondust_cost": 5
 }

@@ -1,0 +1,18 @@
+1-bit Pixel Icons by Nikoichu
+
+License: CC0 1.0 Universal
+License page: https://creativecommons.org/publicdomain/zero/1.0/
+Legal code: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+Applies to the 1-bit Pixel Icons assets in icon/1-bit_Pixel_Icons/**.
+These assets retain their original CC0 1.0 dedication and are exempt from the
+project's CC BY-NC 4.0 asset license.
+
+Original author's statement:
+
+1-bit Pixel Icons by [Nikoichu](https://nikoichu.itch.io/) is marked CC0 1.0
+All of these icons are licensed under CC0, which means you have absolutely no restrictions on how you can use them. I would still appreciate it if you gave me attribution for my work, but it's not strictly required.
+
+icon/1-bit_Pixel_Icons/** 中的 1-bit Pixel Icons 图标资源由 [Nikoichu](https://nikoichu.itch.io/) 创作，采用
+CC0 1.0 Universal，保留原作者授权，不适用本项目的 CC BY-NC 4.0 资源许可。
+作者欢迎署名，但不强制要求。

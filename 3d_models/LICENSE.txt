@@ -1,6 +1,10 @@
 The files in this directory are media assets licensed under the
 Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).
 
+Exception: icon/1-bit_Pixel_Icons/** contains 1-bit Pixel Icons by Nikoichu,
+licensed under CC0 1.0 Universal. Attribution is appreciated but not required.
+See LICENSE-1-bit-Pixel-Icons.txt and ../THIRD-PARTY-NOTICES.md.
+
 - Full license text: LICENSE-CC-BY-NC-4.0.txt in the repository root
 - Scope, exceptions and third-party carve-outs: LICENSING.md in the repository root
 - License page: https://creativecommons.org/licenses/by-nc/4.0/
@@ -14,3 +18,7 @@ Copyright (c) 2025 onixary and contributors
 本目录下的文件属于媒体资源，采用 CC BY-NC 4.0 授权，仅限非商业用途，使用时
 需要署名并注明是否修改。完整协议见仓库根目录的 LICENSE-CC-BY-NC-4.0.txt，
 适用范围与例外说明见仓库根目录的 LICENSING.md。
+
+例外：icon/1-bit_Pixel_Icons/** 为 Nikoichu 创作的 1-bit Pixel Icons，采用
+CC0 1.0 Universal，不适用上述 CC BY-NC 4.0 许可。作者欢迎署名，但不强制要求。
+详见 LICENSE-1-bit-Pixel-Icons.txt 及仓库根目录的 THIRD-PARTY-NOTICES.md。

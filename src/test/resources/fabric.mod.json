@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "ssc-altar-checks",
+  "version": "1.0.0",
+  "name": "SSC Altar Checks",
+  "environment": "server",
+  "entrypoints": {
+    "fabric-gametest": [
+      "net.onixary.shapeShifterCurseFabric.recipes.altar.AltarRecipeCheck",
+      "net.onixary.shapeShifterCurseFabric.additional_power.DisableHurtCameraPowerCheck"
+    ]
+  }
+}

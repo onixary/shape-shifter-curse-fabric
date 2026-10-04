@@ -1,0 +1,39 @@
+{
+  "shape-shifter-curse:frost_pawglove_plus": {
+    "accessory_powers": [],
+    "all_form": {
+      "add": [],
+      "remove": []
+    },
+    "layers": {
+      "origins:origin": {
+        "shape-shifter-curse:form_snow_fox_0": {
+          "add": [],
+          "remove": []
+        },
+        "shape-shifter-curse:form_snow_fox_1": {
+          "add": [],
+          "remove": []
+        },
+        "shape-shifter-curse:form_snow_fox_2": {
+          "add": [
+            "shape-shifter-curse:form_snow_fox_frost_pawglove_trinket_plus",
+            "shape-shifter-curse:form_snow_fox_snowball_effect_cooldown"
+          ],
+          "remove": [
+            "shape-shifter-curse:form_snow_fox_2_snowball_up"
+          ]
+        },
+        "shape-shifter-curse:form_snow_fox_3": {
+          "add": [
+            "shape-shifter-curse:form_snow_fox_frost_pawglove_trinket_plus",
+            "shape-shifter-curse:form_snow_fox_snowball_effect_cooldown"
+          ],
+          "remove": [
+            "shape-shifter-curse:form_snow_fox_3_snowball_up"
+          ]
+        }
+      }
+    }
+  }
+}
