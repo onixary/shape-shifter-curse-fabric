@@ -704,12 +704,19 @@
     "item.shape-shifter-curse.amulet_bracelet_plus": "守御脚环+",
     "item.shape-shifter-curse.amulet_bracelet_plus.tooltip": "[使魔红狐形态]你不再会受到女巫与唤魔者的强制影响，从敌对生物吸取魔力时不再受到副作用 +从敌对生物吸取的魔力量大幅增加+",
     "item.shape-shifter-curse.jungle_catalyst_core": "密林催化核心",
+    "item.shape-shifter-curse.jungle_catalyst_core.tooltip": "它让你联想到叶浪与潮湿的沉积层",
     "item.shape-shifter-curse.web_catalyst_core": "丝网催化核心",
+    "item.shape-shifter-curse.web_catalyst_core.tooltip": "它让你联想到丝质布料轻若无物的柔和触感",
     "item.shape-shifter-curse.frost_catalyst_core": "冻霜催化核心",
+    "item.shape-shifter-curse.frost_catalyst_core.tooltip": "它让你联想到水面上大部分淹没，只露出一尖的蓝色浮冰",
     "item.shape-shifter-curse.foxfire_catalyst_core": "磷火催化核心",
+    "item.shape-shifter-curse.foxfire_catalyst_core.tooltip": "它让你联想到黑暗中飘忽闪烁的蓝绿色火焰",
     "item.shape-shifter-curse.surge_catalyst_core": "浪涌催化核心",
+    "item.shape-shifter-curse.surge_catalyst_core.tooltip": "它让你联想到平静海面下的不为人知的汹涌洋流",
     "item.shape-shifter-curse.dune_catalyst_core": "沙丘催化核心",
+    "item.shape-shifter-curse.dune_catalyst_core.tooltip": "它让你联想到尘卷风在天空中形成的隐约可见的形状",
     "item.shape-shifter-curse.night_catalyst_core": "暗夜催化核心",
+    "item.shape-shifter-curse.night_catalyst_core.tooltip": "它让你联想到无星无月，黑色玻璃一般的通透夜色",
     "item.shape-shifter-curse.glint_prism": "微光棱柱",
     "item.shape-shifter-curse.bottled_snowfall_plus": "瓶装暴雪+",
     "item.shape-shifter-curse.bottled_snowfall_plus.tooltip": "[雪狐形态工具]凝结并发射雪球 +不再消耗自身饥饿值+",
@@ -718,5 +725,6 @@
     "item.shape-shifter-curse.ripple_mirror": "波纹碎片",
     "item.shape-shifter-curse.ripple_mirror.tooltip": "使用后选择并解锁当前形态的子形态。",
     "gui.shape_shifter_curse.jei.altar.time": "耗时：%s 秒",
-    "gui.shape_shifter_curse.jei.altar.moondust": "月尘消耗：%s"
+    "gui.shape_shifter_curse.jei.altar.moondust": "月尘消耗：%s",
+    "jei.shape-shifter-curse.catalyst_core.info": "在幻形祭坛合成催化槽使用时不会被消耗"
 }

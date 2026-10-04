@@ -10,9 +10,11 @@ import mezz.jei.api.runtime.IIngredientManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeManager;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
+import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.recipes.RecipeUtils;
 import net.onixary.shapeShifterCurseFabric.recipes.altar.AltarRecipe;
 import net.onixary.shapeShifterCurseFabric.recipes.altar.AltarShapedRecipe;
@@ -40,6 +42,16 @@ public class SSC_JEI_Plugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
+        registration.addItemStackInfo(List.of(
+                new ItemStack(RegCustomItem.JUNGLE_CATALYST_CORE),
+                new ItemStack(RegCustomItem.WEB_CATALYST_CORE),
+                new ItemStack(RegCustomItem.FROST_CATALYST_CORE),
+                new ItemStack(RegCustomItem.FOXFIRE_CATALYST_CORE),
+                new ItemStack(RegCustomItem.SURGE_CATALYST_CORE),
+                new ItemStack(RegCustomItem.DUNE_CATALYST_CORE),
+                new ItemStack(RegCustomItem.NIGHT_CATALYST_CORE)
+        ), Text.translatable("jei.shape-shifter-curse.catalyst_core.info"));
+
         IIngredientManager ingredientManager = registration.getIngredientManager();
         registration.addRecipes(WEB_COMPOSTING, WebComposterRecipe.getRecipes(ingredientManager));
 

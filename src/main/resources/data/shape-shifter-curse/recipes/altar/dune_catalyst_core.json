@@ -1,38 +1,43 @@
 {
-  "type": "shape-shifter-curse:altar_shapeless",
-  "ingredients": [
-    {
-      "item": "shape-shifter-curse:glint_prism"
-    },
-    {
-      "item": "minecraft:dune_armor_trim_smithing_template"
-    },
-    {
-      "item": "shape-shifter-curse:ectoplasm_rag"
-    },
-    {
-      "item": "shape-shifter-curse:ectoplasm_rag"
-    },
-    {
-      "item": "shape-shifter-curse:ectoplasm_rag"
-    },
-    {
-      "item": "minecraft:rabbit_hide"
-    },
-    {
-      "item": "minecraft:red_sand"
-    },
-    {
-      "item": "minecraft:red_sand"
-    },
-    {
-      "item": "minecraft:red_sand"
-    }
-  ],
+  "type": "shape-shifter-curse:altar_shaped",
   "result": {
     "item": "shape-shifter-curse:dune_catalyst_core",
     "count": 1
   },
   "time": 1200,
-  "moondust_cost": 9
+  "moondust_cost": 9,
+  "pattern": [
+    "ABC",
+    "DEF",
+    "GHI"
+  ],
+  "key": {
+    "A": {
+      "item": "shape-shifter-curse:ectoplasm_rag"
+    },
+    "B": {
+      "item": "shape-shifter-curse:ectoplasm_rag"
+    },
+    "C": {
+      "item": "shape-shifter-curse:ectoplasm_rag"
+    },
+    "D": {
+      "item": "minecraft:dune_armor_trim_smithing_template"
+    },
+    "E": {
+      "item": "shape-shifter-curse:glint_prism"
+    },
+    "F": {
+      "item": "minecraft:rabbit_hide"
+    },
+    "G": {
+      "item": "minecraft:red_sand"
+    },
+    "H": {
+      "item": "minecraft:red_sand"
+    },
+    "I": {
+      "item": "minecraft:red_sand"
+    }
+  }
 }

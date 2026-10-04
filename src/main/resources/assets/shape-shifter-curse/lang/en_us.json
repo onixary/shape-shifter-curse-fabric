@@ -716,5 +716,13 @@
     "item.shape-shifter-curse.ripple_mirror.tooltip": "Use to select and unlock a sub-form of your current form.",
     "gui.shape_shifter_curse.jei.altar.time": "Time: %s seconds",
     "gui.shape_shifter_curse.jei.altar.moondust": "Moondust cost: %s",
-    "item.shape-shifter-curse.explosive_charm_paper.tooltip": "[Familiar Fox Form] Requires powerful magic to use. +Consumed to cast a more destructive fireball spell+"
+    "item.shape-shifter-curse.explosive_charm_paper.tooltip": "[Familiar Fox Form] Requires powerful magic to use. +Consumed to cast a more destructive fireball spell+",
+    "item.shape-shifter-curse.jungle_catalyst_core.tooltip": "It brings to mind waves of leaves and damp layers of sediment.",
+    "item.shape-shifter-curse.web_catalyst_core.tooltip": "It brings to mind the soft, almost weightless touch of silk.",
+    "item.shape-shifter-curse.frost_catalyst_core.tooltip": "It brings to mind a blue iceberg, mostly submerged, with only its tip above the water.",
+    "item.shape-shifter-curse.foxfire_catalyst_core.tooltip": "It brings to mind blue-green flames flickering and drifting in the darkness.",
+    "item.shape-shifter-curse.surge_catalyst_core.tooltip": "It brings to mind hidden, surging currents beneath a calm sea.",
+    "item.shape-shifter-curse.dune_catalyst_core.tooltip": "It brings to mind the faint shapes traced in the sky by dust devils.",
+    "item.shape-shifter-curse.night_catalyst_core.tooltip": "It brings to mind a starless, moonless night, clear as black glass.",
+    "jei.shape-shifter-curse.catalyst_core.info": "Not consumed when used in the catalyst slot for crafting at the Shapeshifting Altar."
 }

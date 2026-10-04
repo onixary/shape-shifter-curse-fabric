@@ -10,9 +10,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FireCharmPaper extends Item {
-    public FireCharmPaper(Settings settings) {
-        super(settings.maxCount(64));
+public class CatalystCoreItem extends Item {
+    public CatalystCoreItem(Settings settings) {
+        super(settings);
     }
 
     @Override

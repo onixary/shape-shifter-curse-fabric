@@ -1,38 +1,43 @@
 {
-  "type": "shape-shifter-curse:altar_shapeless",
-  "ingredients": [
-    {
-      "item": "shape-shifter-curse:glint_prism"
-    },
-    {
-      "item": "shape-shifter-curse:dew_covered_cobweb"
-    },
-    {
-      "item": "minecraft:string"
-    },
-    {
-      "item": "minecraft:string"
-    },
-    {
-      "item": "minecraft:string"
-    },
-    {
-      "item": "minecraft:smooth_basalt"
-    },
-    {
-      "item": "minecraft:smooth_basalt"
-    },
-    {
-      "item": "minecraft:smooth_basalt"
-    },
-    {
-      "item": "minecraft:eye_armor_trim_smithing_template"
-    }
-  ],
+  "type": "shape-shifter-curse:altar_shaped",
   "result": {
     "item": "shape-shifter-curse:web_catalyst_core",
     "count": 1
   },
   "time": 1200,
-  "moondust_cost": 9
+  "moondust_cost": 9,
+  "pattern": [
+    "ABC",
+    "DEF",
+    "GHI"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:string"
+    },
+    "B": {
+      "item": "minecraft:string"
+    },
+    "C": {
+      "item": "minecraft:string"
+    },
+    "D": {
+      "item": "minecraft:eye_armor_trim_smithing_template"
+    },
+    "E": {
+      "item": "shape-shifter-curse:glint_prism"
+    },
+    "F": {
+      "item": "shape-shifter-curse:dew_covered_cobweb"
+    },
+    "G": {
+      "item": "minecraft:smooth_basalt"
+    },
+    "H": {
+      "item": "minecraft:smooth_basalt"
+    },
+    "I": {
+      "item": "minecraft:smooth_basalt"
+    }
+  }
 }

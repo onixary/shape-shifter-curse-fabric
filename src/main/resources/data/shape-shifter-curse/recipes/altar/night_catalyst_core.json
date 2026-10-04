@@ -1,38 +1,43 @@
 {
-  "type": "shape-shifter-curse:altar_shapeless",
-  "ingredients": [
-    {
-      "item": "shape-shifter-curse:glint_prism"
-    },
-    {
-      "item": "minecraft:pointed_dripstone"
-    },
-    {
-      "item": "minecraft:pointed_dripstone"
-    },
-    {
-      "item": "minecraft:pointed_dripstone"
-    },
-    {
-      "item": "minecraft:weeping_vines"
-    },
-    {
-      "item": "minecraft:twisting_vines"
-    },
-    {
-      "item": "minecraft:soul_sand"
-    },
-    {
-      "item": "minecraft:polished_basalt"
-    },
-    {
-      "item": "minecraft:polished_basalt"
-    }
-  ],
+  "type": "shape-shifter-curse:altar_shaped",
   "result": {
     "item": "shape-shifter-curse:night_catalyst_core",
     "count": 1
   },
   "time": 1200,
-  "moondust_cost": 9
+  "moondust_cost": 9,
+  "pattern": [
+    "ABC",
+    "DEF",
+    "GHI"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:polished_basalt"
+    },
+    "B": {
+      "item": "minecraft:soul_sand"
+    },
+    "C": {
+      "item": "minecraft:polished_basalt"
+    },
+    "D": {
+      "item": "minecraft:weeping_vines"
+    },
+    "E": {
+      "item": "shape-shifter-curse:glint_prism"
+    },
+    "F": {
+      "item": "minecraft:twisting_vines"
+    },
+    "G": {
+      "item": "minecraft:pointed_dripstone"
+    },
+    "H": {
+      "item": "minecraft:pointed_dripstone"
+    },
+    "I": {
+      "item": "minecraft:pointed_dripstone"
+    }
+  }
 }
