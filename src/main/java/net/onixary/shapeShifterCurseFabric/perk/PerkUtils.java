@@ -8,9 +8,9 @@ import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.blocks.FormAttunerBlock;
 import net.onixary.shapeShifterCurseFabric.blocks.block_entity.FormAttunerBlockEntity;
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
-import net.onixary.shapeShifterCurseFabric.networking.ModPacketsC2S;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.util.util.cost.Cost;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -104,9 +104,11 @@ public class PerkUtils {
         if (perkTree == null) return;
         if (!perkTree.getAllPerks().contains(perkID)) return;
 
-        int xpCost = player.getAbilities().creativeMode ? 0 : perkData.getXpCost();
-        if (player.totalExperience < xpCost) {
-            return;
+        Cost cost = perkData.getCost();
+        if (!player.getAbilities().creativeMode) {
+            if (!cost.getType().canPay(cost, player)) {
+                return;
+            }
         }
 
         PerkTree.PerkNode node = perkTree.getNode(perkID);
@@ -132,7 +134,9 @@ public class PerkUtils {
         }
 
         if (perkData.canGain(player, component.nowForm)) {
-            player.addExperience(-xpCost);
+            if (!player.getAbilities().creativeMode) {
+                cost.getType().pay(cost, player);
+            }
             __addPerk(player, perkTreeID, perkID);
         }
         removeInValidPerk(player, perkTreeID);

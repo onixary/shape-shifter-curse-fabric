@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -362,7 +363,9 @@ public class ModPacketsS2CServer {
         buf.writeInt(perks.length);
         for (IPerk perk : perks) {
             buf.writeIdentifier(perk.getID());
-            buf.writeInt(perk.getXpCost());
+            NbtCompound nbt = new NbtCompound();
+            perk.getCost().writeToNBT(nbt);
+            buf.writeNbt(nbt);
         }
         ServerPlayNetworking.send(player, ModPackets.SYNC_PERK_DATA, buf);
     }

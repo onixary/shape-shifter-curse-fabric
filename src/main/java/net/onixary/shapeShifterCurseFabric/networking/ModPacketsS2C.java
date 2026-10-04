@@ -11,6 +11,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -36,6 +37,7 @@ import net.onixary.shapeShifterCurseFabric.util.Interface.IMoveController;
 import net.onixary.shapeShifterCurseFabric.util.SuperUserUtils;
 import net.onixary.shapeShifterCurseFabric.util.Verify.AuthClient;
 import net.onixary.shapeShifterCurseFabric.util.Verify.AuthFile;
+import net.onixary.shapeShifterCurseFabric.util.util.cost.Cost;
 import org.jetbrains.annotations.Nullable;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
@@ -670,16 +672,17 @@ public class ModPacketsS2C {
     public static void receivePerkData(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         boolean fullUpdate = buf.readBoolean();
         int updateCount = buf.readInt();
-        HashMap<Identifier, Integer> perkXpCostMap = new HashMap<>();
+        HashMap<Identifier, Cost> perkCostMap = new HashMap<>();
         for (int i = 0; i < updateCount; i++) {
             Identifier perkID = buf.readIdentifier();
-            perkXpCostMap.put(perkID, buf.readInt());
+            NbtCompound nbt = buf.readNbt();
+            perkCostMap.put(perkID, Cost.fromNBT(nbt));
         }
         client.execute(() -> {
             if (fullUpdate) {
-                FormUpgradeScreen.perkXpCostMap.clear();
+                FormUpgradeScreen.perkCostMap.clear();
             }
-            FormUpgradeScreen.perkXpCostMap.putAll(perkXpCostMap);
+            FormUpgradeScreen.perkCostMap.putAll(perkCostMap);
         });
     }
 
