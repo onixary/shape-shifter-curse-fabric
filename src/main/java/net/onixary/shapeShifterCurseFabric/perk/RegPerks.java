@@ -1,9 +1,15 @@
 package net.onixary.shapeShifterCurseFabric.perk;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.util.util.cost.BaseCost;
+import net.onixary.shapeShifterCurseFabric.util.util.cost.ICost;
+import net.onixary.shapeShifterCurseFabric.util.util.cost.ItemCost;
+import net.onixary.shapeShifterCurseFabric.util.util.cost.RegCostType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,12 +25,17 @@ public class RegPerks {
     public static final Identifier FALLBACK_PERK_ICON = ShapeShifterCurseFabric.identifier("textures/perk/fallback.png");
     public static final Identifier EMPTY_PERK_TREE = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("empty")));
 
+    private static final ItemStack moonDust = new ItemStack(RegCustomItem.UNTREATED_MOONDUST);
+    static {
+        moonDust.getOrCreateNbt().putBoolean("Unbreakable", true);
+    }
+
     public static final Identifier P_FoxRoot = registerPerkCommon(
             new NormalPerk(ShapeShifterCurseFabric.identifier("fox_root"))
                     .addPower(ShapeShifterCurseFabric.identifier("_test_perk01"))
                     .removePower(ShapeShifterCurseFabric.identifier("form_familiar_fox_3_health"))
                     .setIcon(ShapeShifterCurseFabric.identifier("textures/perk/fox_root.png"))
-                    .XpCost(3000)
+                    .cost(new ItemCost(RegCostType.COST_ITEM, moonDust, 16))
     );
 
     public static final Identifier P_FireBallPlusL1 = registerPerkCommon(
@@ -34,7 +45,7 @@ public class RegPerks {
                     .setName(Text.literal("Fire Ball Lv1"))
                     .setDesc(Text.literal("Just A Example Perk!"))
                     .setIcon(ShapeShifterCurseFabric.identifier("textures/perk/fire_ball_plus_1.png"))
-                    .XpCost(6000)
+                    .cost(new BaseCost(RegCostType.COST_XP, 6000))
     );
 
     public static final Identifier P_FireBallPlusL2 = registerPerkCommon(
@@ -44,7 +55,7 @@ public class RegPerks {
                     .setName(Text.literal("Fire Ball Lv2"))
                     .setDesc(Text.literal("Just A Example Perk!"))
                     .setIcon(ShapeShifterCurseFabric.identifier("textures/perk/fire_ball_plus_2.png"))
-                    .XpCost(9000)
+                    .cost(new BaseCost(RegCostType.COST_XP, 9000))
     );
 
     public static final Identifier P_FireArrowPlusL1 = registerPerkCommon(
@@ -54,7 +65,7 @@ public class RegPerks {
                     .setName(Text.literal("Fire Arrow Lv1"))
                     .setDesc(Text.literal("Just A Example Perk!"))
                     .setIcon(ShapeShifterCurseFabric.identifier("textures/perk/fire_arrow_plus_1.png"))
-                    .XpCost(9000)
+                    .cost(new BaseCost(RegCostType.COST_XP, 9000))
     );
 
     public static final Identifier P_FireArrowPlusL2 = registerPerkCommon(
@@ -64,7 +75,7 @@ public class RegPerks {
                     .setName(Text.literal("Fire Arrow Lv2"))
                     .setDesc(Text.literal("Just A Example Perk!"))
                     .setIcon(ShapeShifterCurseFabric.identifier("textures/perk/fire_arrow_plus_2.png"))
-                    .XpCost(12000)
+                    .cost(new BaseCost(RegCostType.COST_XP, 12000))
     );
 
     // 注意一下 Perk不可删除的 这个只是调试用的 没做Power还原
