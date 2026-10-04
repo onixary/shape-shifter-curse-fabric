@@ -10,7 +10,7 @@ import net.onixary.shapeShifterCurseFabric.blocks.block_entity.FormAttunerBlockE
 import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
-import net.onixary.shapeShifterCurseFabric.util.util.cost.Cost;
+import net.onixary.shapeShifterCurseFabric.util.util.cost.ICost;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -104,7 +104,7 @@ public class PerkUtils {
         if (perkTree == null) return;
         if (!perkTree.getAllPerks().contains(perkID)) return;
 
-        Cost cost = perkData.getCost();
+        ICost cost = perkData.getCost();
         if (!player.getAbilities().creativeMode) {
             if (!cost.getType().canPay(cost, player)) {
                 return;

@@ -7,11 +7,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public interface IFUSDrawableCostType<T extends ICostType<T>> extends ICostType<T> {
-    public void drawIcon(DrawContext context, @NotNull Cost costObject, @Nullable PlayerEntity player, int x, int y, int z);
+    public void drawIcon(DrawContext context, @NotNull ICost costObject, @Nullable PlayerEntity player, int x, int y, int z);
 
-    public void drawOnHover(DrawContext context, @NotNull Cost costObject, @Nullable PlayerEntity player, int x, int y, int z, int mouseX, int mouseY);
+    public void drawOnHover(DrawContext context, @NotNull ICost costObject, @Nullable PlayerEntity player, int x, int y, int z, int mouseX, int mouseY);
 
-    public default Text getAmountText(@NotNull Cost costObject, @Nullable PlayerEntity player) {
+    public default Text getAmountText(@NotNull ICost costObject, @Nullable PlayerEntity player) {
         return Text.of(String.valueOf(costObject.getAmount()));
     }
 }

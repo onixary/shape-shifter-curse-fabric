@@ -2,7 +2,6 @@ package net.onixary.shapeShifterCurseFabric.networking;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
@@ -37,7 +36,7 @@ import net.onixary.shapeShifterCurseFabric.util.Interface.IMoveController;
 import net.onixary.shapeShifterCurseFabric.util.SuperUserUtils;
 import net.onixary.shapeShifterCurseFabric.util.Verify.AuthClient;
 import net.onixary.shapeShifterCurseFabric.util.Verify.AuthFile;
-import net.onixary.shapeShifterCurseFabric.util.util.cost.Cost;
+import net.onixary.shapeShifterCurseFabric.util.util.cost.ICost;
 import org.jetbrains.annotations.Nullable;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
@@ -672,11 +671,11 @@ public class ModPacketsS2C {
     public static void receivePerkData(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         boolean fullUpdate = buf.readBoolean();
         int updateCount = buf.readInt();
-        HashMap<Identifier, Cost> perkCostMap = new HashMap<>();
+        HashMap<Identifier, ICost> perkCostMap = new HashMap<>();
         for (int i = 0; i < updateCount; i++) {
             Identifier perkID = buf.readIdentifier();
             NbtCompound nbt = buf.readNbt();
-            perkCostMap.put(perkID, Cost.fromNBT(nbt));
+            perkCostMap.put(perkID, ICost.fromNBT(nbt));
         }
         client.execute(() -> {
             if (fullUpdate) {

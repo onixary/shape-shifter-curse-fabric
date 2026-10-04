@@ -20,7 +20,8 @@ import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
 import net.onixary.shapeShifterCurseFabric.perk.RegPerks;
 import net.onixary.shapeShifterCurseFabric.util.util.BaseSprite;
 import net.onixary.shapeShifterCurseFabric.util.util.ISprite;
-import net.onixary.shapeShifterCurseFabric.util.util.cost.Cost;
+import net.onixary.shapeShifterCurseFabric.util.util.cost.BaseCost;
+import net.onixary.shapeShifterCurseFabric.util.util.cost.ICost;
 import net.onixary.shapeShifterCurseFabric.util.util.cost.IFUSDrawableCostType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -113,8 +114,8 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     public static final Identifier LABEL_DEPEND = ShapeShifterCurseFabric.identifier("textures/perk/system/depend.png");
 
     public static final HashMap<Identifier, Boolean> perkAvailableMap = new HashMap<>();  // 仅客户端数据 仅影响渲染 仅代表服务器获取这个表时无法获取这个Perk
-    public static final HashMap<Identifier, Cost> perkCostMap = new HashMap<>();  // 仅客户端数据 实际消耗由服务器决定
-    public static final Cost EMPTY_COST = new Cost();
+    public static final HashMap<Identifier, ICost> perkCostMap = new HashMap<>();  // 仅客户端数据 实际消耗由服务器决定
+    public static final ICost EMPTY_COST = new BaseCost();
 
     public int tier = -1;
     public @NotNull PerkTree perkTree;
@@ -279,18 +280,10 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         nodeWindowY = baseY + PERK_UI_Y;
         cameraCenter = new Vector2i(nodeWindowX + PERK_UI_WIDTH / 2, nodeWindowY + PERK_UI_HEIGHT / 2);
         nodeCenter = new Vector2i( -PERK_UI_WIDTH / 2, 0);
+        super.render(context, mouseX, mouseY, delta);
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        if (this.nowSelectNode != null) {
-            Cost nowCost = perkCostMap.getOrDefault(this.nowSelectNode.perkID, EMPTY_COST);
-            if (nowCost.getType() instanceof IFUSDrawableCostType<?> fusDrawable) {
-                int rx = baseX + PERK_INFO_COST_ICON_X;
-                int ry = baseY + PERK_INFO_COST_ICON_Y;
-                fusDrawable.drawIcon(context, nowCost, client.player, rx, ry, 0);
-                fusDrawable.drawOnHover(context, nowCost, client.player, rx, ry, 0, mouseX - rx, mouseY - ry);
-            }
-        }
         context.drawTexture(TEXTURE, baseX + PERK_UI_ICON_X, baseY + PERK_UI_ICON_Y, 434, 0, PERK_UI_ICON_WIDTH, PERK_UI_ICON_HEIGHT, TEXTURE_WIDTH, TEXTURE_HEIGHT);
         RenderSystem.disableBlend();
         this.drawAllNode(context, mouseX, mouseY, delta);
@@ -312,7 +305,15 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
             );
         }
 
-        super.render(context, mouseX, mouseY, delta);
+        if (this.nowSelectNode != null) {
+            ICost nowCost = perkCostMap.getOrDefault(this.nowSelectNode.perkID, EMPTY_COST);
+            if (nowCost.getType() instanceof IFUSDrawableCostType<?> fusDrawable) {
+                int rx = baseX + PERK_INFO_COST_ICON_X;
+                int ry = baseY + PERK_INFO_COST_ICON_Y;
+                fusDrawable.drawIcon(context, nowCost, client.player, rx, ry, 0);
+                fusDrawable.drawOnHover(context, nowCost, client.player, rx, ry, 0, mouseX - rx, mouseY - ry);
+            }
+        }
     }
 
     @Override
@@ -564,7 +565,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
             if (playerGainedPerk == null) return false;
             for (Identifier dependentPerkID : this.nowSelectNode.dependentPerkIDs) if (!playerGainedPerk.contains(dependentPerkID)) return false;
         }
-        Cost cost = perkCostMap.get(this.nowSelectNode.perkID);
+        ICost cost = perkCostMap.get(this.nowSelectNode.perkID);
         if (cost != null && !cost.getType().canPay_CLIENT(cost, client.player)) {
             return false;
         }
@@ -581,7 +582,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         if (this.nowSelectNode != null) {
             this.PerkNameWidget.setMessage(RegPerks.getPerkName(this.nowSelectNode.perkID));
             this.PerkDescWidget.reloadText(RegPerks.getPerkDescription(this.nowSelectNode.perkID));
-            Cost cost = perkCostMap.get(this.nowSelectNode.perkID);
+            ICost cost = perkCostMap.get(this.nowSelectNode.perkID);
             if (cost != null && cost.getType() instanceof IFUSDrawableCostType<?> ifusDrawableCostType) {
                 this.PerkCostAmountWidget.setMessage(ifusDrawableCostType.getAmountText(cost, client.player));
             } else {

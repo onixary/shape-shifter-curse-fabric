@@ -23,17 +23,17 @@ public class XPCostType implements IFUSDrawableCostType<XPCostType> {
     }
 
     @Override
-    public void drawIcon(DrawContext context, @NotNull Cost costObject, @Nullable PlayerEntity player, int x, int y, int z) {
+    public void drawIcon(DrawContext context, @NotNull ICost costObject, @Nullable PlayerEntity player, int x, int y, int z) {
         xpIconSprite.draw(context, x, y, z, 0, 0, 18, 18);
     }
 
     @Override
-    public void drawOnHover(DrawContext context, @NotNull Cost costObject, @Nullable PlayerEntity player, int x, int y, int z, int mouseX, int mouseY) {
+    public void drawOnHover(DrawContext context, @NotNull ICost costObject, @Nullable PlayerEntity player, int x, int y, int z, int mouseX, int mouseY) {
         // NOP
     }
 
     @Override
-    public boolean canPay(@NotNull Cost costObject, @Nullable PlayerEntity player) {
+    public boolean canPay(@NotNull ICost costObject, @Nullable PlayerEntity player) {
         int costAmount = costObject.getAmount();
         if (player == null) {
             if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
@@ -46,7 +46,7 @@ public class XPCostType implements IFUSDrawableCostType<XPCostType> {
     }
 
     @Override
-    public void pay(@NotNull Cost costObject, @NotNull PlayerEntity player) {
+    public void pay(@NotNull ICost costObject, @NotNull PlayerEntity player) {
         player.addExperience(costObject.getAmount());
     }
 }
