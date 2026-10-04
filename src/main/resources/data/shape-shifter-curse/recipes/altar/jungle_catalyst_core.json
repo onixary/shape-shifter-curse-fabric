@@ -1,0 +1,38 @@
+{
+  "type": "shape-shifter-curse:altar_shapeless",
+  "ingredients": [
+    {
+      "item": "shape-shifter-curse:glint_prism"
+    },
+    {
+      "item": "minecraft:bone_block"
+    },
+    {
+      "item": "minecraft:bone_block"
+    },
+    {
+      "item": "minecraft:bone_block"
+    },
+    {
+      "item": "minecraft:sculk_catalyst"
+    },
+    {
+      "item": "minecraft:jungle_log"
+    },
+    {
+      "item": "minecraft:mossy_cobblestone"
+    },
+    {
+      "item": "minecraft:mossy_cobblestone"
+    },
+    {
+      "item": "minecraft:mossy_cobblestone"
+    }
+  ],
+  "result": {
+    "item": "shape-shifter-curse:jungle_catalyst_core",
+    "count": 1
+  },
+  "time": 1200,
+  "moondust_cost": 9
+}

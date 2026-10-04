@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "shape-shifter-curse:altar_shaped",
   "pattern": [
     "CCC",
     "DMD",
@@ -22,5 +22,7 @@
   "result": {
     "item": "shape-shifter-curse:amulet_bracelet",
     "count": 1
-  }
+  },
+  "time": 100,
+  "moondust_cost": 5
 }

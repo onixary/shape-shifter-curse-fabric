@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "shape-shifter-curse:altar_shaped",
   "pattern": [
     "WSW",
     "SMS",
@@ -19,5 +19,7 @@
   "result": {
     "item": "shape-shifter-curse:digestion_fiber_ball",
     "count": 1
-  }
+  },
+  "time": 100,
+  "moondust_cost": 5
 }

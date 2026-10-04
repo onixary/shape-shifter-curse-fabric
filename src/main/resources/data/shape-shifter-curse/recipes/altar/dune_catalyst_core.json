@@ -1,0 +1,38 @@
+{
+  "type": "shape-shifter-curse:altar_shapeless",
+  "ingredients": [
+    {
+      "item": "shape-shifter-curse:glint_prism"
+    },
+    {
+      "item": "minecraft:dune_armor_trim_smithing_template"
+    },
+    {
+      "item": "shape-shifter-curse:ectoplasm_rag"
+    },
+    {
+      "item": "shape-shifter-curse:ectoplasm_rag"
+    },
+    {
+      "item": "shape-shifter-curse:ectoplasm_rag"
+    },
+    {
+      "item": "minecraft:rabbit_hide"
+    },
+    {
+      "item": "minecraft:red_sand"
+    },
+    {
+      "item": "minecraft:red_sand"
+    },
+    {
+      "item": "minecraft:red_sand"
+    }
+  ],
+  "result": {
+    "item": "shape-shifter-curse:dune_catalyst_core",
+    "count": 1
+  },
+  "time": 1200,
+  "moondust_cost": 9
+}

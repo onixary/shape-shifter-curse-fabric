@@ -1,0 +1,8 @@
+{
+  "type": "shape-shifter-curse:disable_wither_hearts",
+  "condition": {
+    "type": "apoli:status_effect",
+    "effect": "minecraft:wither"
+  },
+  "hidden": true
+}

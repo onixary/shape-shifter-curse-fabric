@@ -1,0 +1,92 @@
+{
+  "type": "apoli:multiple",
+  "vampire": {
+    "type": "apoli:self_action_on_hit",
+    "entity_action": {
+      "type": "apoli:and",
+      "actions": [
+        {
+          "type": "apoli:heal",
+          "amount": 3.0
+        },
+        {
+          "type": "apoli:feed",
+          "food": 4,
+          "saturation": 0.4
+        }
+      ]
+    },
+    "damage_condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:amount",
+          "comparison": ">=",
+          "compare_to": 4.0
+        },
+        {
+          "type": "apoli:projectile",
+          "inverted": true
+        }
+      ]
+    },
+    "cooldown": 10
+  },
+  "no_food": {
+    "type": "apoli:modify_food",
+    "food_modifiers": [
+      {
+        "operation": "set_total",
+        "value": 0.0
+      }
+    ],
+    "saturation_modifiers": [
+      {
+        "operation": "set_total",
+        "value": 0.0
+      }
+    ],
+    "item_condition": {
+      "type": "apoli:or",
+      "conditions": [
+        {
+          "type": "apoli:and",
+          "conditions": [
+            {
+              "type": "apoli:food"
+            },
+            {
+              "type": "apoli:ingredient",
+              "ingredient": {
+                "tag": "shape-shifter-curse:ignore_diet"
+              },
+              "inverted": true
+            }
+          ]
+        },
+        {
+          "type": "apoli:ingredient",
+          "ingredient": {
+            "item": "minecraft:golden_carrot"
+          }
+        }
+      ]
+    }
+  },
+  "poison_on_melee": {
+    "type": "apoli:target_action_on_hit",
+    "entity_action": {
+      "type": "apoli:apply_effect",
+      "effect": {
+        "effect": "minecraft:poison",
+        "duration": 20,
+        "amplifier": 2
+      }
+    },
+    "damage_condition": {
+      "type": "apoli:name",
+      "name": "player"
+    },
+    "cooldown": 0
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "shape-shifter-curse:altar_shapeless",
+  "ingredients": [
+    {
+      "item": "shape-shifter-curse:withered_bandage"
+    }
+  ],
+  "result": {
+    "item": "shape-shifter-curse:withered_bandage_plus",
+    "count": 1
+  },
+  "time": 600,
+  "moondust_cost": 16,
+  "catalyst": {
+    "item": "shape-shifter-curse:dune_catalyst_core"
+  }
+}

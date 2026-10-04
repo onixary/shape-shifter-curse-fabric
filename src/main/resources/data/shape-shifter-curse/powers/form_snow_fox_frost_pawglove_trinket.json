@@ -48,7 +48,7 @@
           "wait_time": 10,
           "effect": {
             "effect": "minecraft:slowness",
-            "amplifier": 2,
+            "amplifier": 1,
             "duration": 60
           }
         }

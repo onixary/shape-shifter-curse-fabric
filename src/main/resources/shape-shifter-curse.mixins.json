@@ -90,6 +90,7 @@
     "EntityRenderDispatcherMixin",
     "FeralPlayerEntityRendererMixin",
     "GameRendererMixin",
+    "HeartTypeMixin",
     "IEntityRenderDispatcherAccessor",
     "InGameHudMixin",
     "InventoryScreenMixin",

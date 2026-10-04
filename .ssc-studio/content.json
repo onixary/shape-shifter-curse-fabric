@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "accessories": [],
+  "perks": [
+    {
+      "id": "shape-shifter-curse:snowfox_root",
+      "name": "snowfox_root",
+      "description": "",
+      "xp": 0,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [],
+      "remove": []
+    }
+  ],
+  "trees": [
+    {
+      "id": "shape-shifter-curse:f_snowfox_tree",
+      "forms": [],
+      "nodes": [
+        {
+          "perk": "shape-shifter-curse:snowfox_root",
+          "tier": 0,
+          "y": 0,
+          "requires": []
+        }
+      ]
+    }
+  ]
+}

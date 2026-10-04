@@ -1,0 +1,15 @@
+{
+  "type": "apoli:modify_projectile_damage",
+  "damage_condition": {
+    "type": "apoli:projectile",
+    "projectile": "minecraft:fireball",
+    "projectile_condition": {
+      "type": "apoli:nbt",
+      "nbt": "{Tags:[\"ssc_explosive_charm\"]}"
+    }
+  },
+  "modifier": {
+    "operation": "set_total",
+    "value": 16.0
+  }
+}

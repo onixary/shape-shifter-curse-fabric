@@ -1,0 +1,17 @@
+{
+  "type": "shape-shifter-curse:altar_shapeless",
+  "ingredients": [
+    {
+      "item": "shape-shifter-curse:attach_hook"
+    }
+  ],
+  "result": {
+    "item": "shape-shifter-curse:attach_hook_plus",
+    "count": 1
+  },
+  "time": 600,
+  "moondust_cost": 16,
+  "catalyst": {
+    "item": "shape-shifter-curse:night_catalyst_core"
+  }
+}

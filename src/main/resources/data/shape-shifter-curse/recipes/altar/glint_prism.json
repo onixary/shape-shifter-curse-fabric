@@ -1,0 +1,38 @@
+{
+  "type": "shape-shifter-curse:altar_shapeless",
+  "ingredients": [
+    {
+      "item": "shape-shifter-curse:moondust_crystal_shard"
+    },
+    {
+      "item": "shape-shifter-curse:moondust_crystal_shard"
+    },
+    {
+      "item": "minecraft:glass"
+    },
+    {
+      "item": "minecraft:glass"
+    },
+    {
+      "item": "minecraft:glass"
+    },
+    {
+      "item": "minecraft:glass"
+    },
+    {
+      "item": "minecraft:glass"
+    },
+    {
+      "item": "minecraft:glass"
+    },
+    {
+      "item": "minecraft:sea_lantern"
+    }
+  ],
+  "result": {
+    "item": "shape-shifter-curse:glint_prism",
+    "count": 1
+  },
+  "time": 200,
+  "moondust_cost": 10
+}

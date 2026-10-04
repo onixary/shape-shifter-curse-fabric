@@ -18,6 +18,8 @@ public class StaticParams {
     public static final int T_EFFECT_DEFAULT_DURATION = 400 * 20; // 400 seconds
     // ----------------------------------------
     // items related
+    // Maximum item description line width, measured in scaled GUI pixels.
+    public static final int ITEM_TOOLTIP_MAX_WIDTH = 220;
     // ----------------------------------------
     public static final float MOONDUST_DROP_PROBABILITY = 0.45F;
     public static final float FAMILIAR_CURSE_POTION_DROP_PROBABILITY = 0.35F;

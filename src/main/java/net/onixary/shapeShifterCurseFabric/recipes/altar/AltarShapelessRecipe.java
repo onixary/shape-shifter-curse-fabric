@@ -42,6 +42,11 @@ public class AltarShapelessRecipe extends AltarRecipe {
     }
 
     @Override
+    public DefaultedList<Ingredient> getIngredients() {
+        return input;
+    }
+
+    @Override
     public int recipeTime() {
         return recipeTime;
     }
@@ -124,6 +129,10 @@ public class AltarShapelessRecipe extends AltarRecipe {
     public static class Serializer implements RecipeSerializer<AltarShapelessRecipe> {
         public AltarShapelessRecipe read(Identifier identifier, JsonObject jsonObject) {
             int time = JsonHelper.getInt(jsonObject, "time", 200);
+            int moondustCost = JsonHelper.getInt(jsonObject, "moondust_cost", -1);
+            if (time <= 0 || moondustCost < -1 || moondustCost > Integer.MAX_VALUE / 800) {
+                throw new com.google.gson.JsonSyntaxException("Invalid altar time or moondust_cost");
+            }
             DefaultedList<Ingredient> defaultedList = getIngredients(JsonHelper.getArray(jsonObject, "ingredients"));
             Ingredient catalyst = null;
             if (jsonObject.has("catalyst")) {
@@ -134,13 +143,18 @@ public class AltarShapelessRecipe extends AltarRecipe {
                 requireAdvancement = new Identifier(JsonHelper.getString(jsonObject, "require_advancement"));
             }
             int fuelCost = JsonHelper.getInt(jsonObject, "fuel_cost", 1);
+            if (fuelCost < 0 || (long) fuelCost * time > Integer.MAX_VALUE) {
+                throw new com.google.gson.JsonSyntaxException("Invalid altar fuel_cost");
+            }
             if (defaultedList.isEmpty()) {
                 throw new JsonParseException("No ingredients for altar shapeless recipe");
             } else if (defaultedList.size() > 9) {
                 throw new JsonParseException("Too many ingredients for altar shapeless recipe");
             } else {
                 ItemStack itemStack = ShapedRecipe.outputFromJson(JsonHelper.getObject(jsonObject, "result"));
-                return new AltarShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time, fuelCost, requireAdvancement);
+                AltarShapelessRecipe recipe = new AltarShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time, fuelCost, requireAdvancement);
+                recipe.totalFuelCost = moondustCost < 0 ? -1 : moondustCost * 800;
+                return recipe;
             }
         }
 
@@ -172,7 +186,9 @@ public class AltarShapelessRecipe extends AltarRecipe {
             ItemStack itemStack = packetByteBuf.readItemStack();
             int time = packetByteBuf.readVarInt();
             int fuelCost = packetByteBuf.readVarInt();
-            return new AltarShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time, fuelCost, requireAdvancement);
+            AltarShapelessRecipe recipe = new AltarShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time, fuelCost, requireAdvancement);
+            recipe.totalFuelCost = packetByteBuf.readVarInt();
+            return recipe;
         }
 
         public void write(PacketByteBuf packetByteBuf, AltarShapelessRecipe shapelessRecipe) {
@@ -195,6 +211,7 @@ public class AltarShapelessRecipe extends AltarRecipe {
             packetByteBuf.writeItemStack(shapelessRecipe.output);
             packetByteBuf.writeVarInt(shapelessRecipe.recipeTime);
             packetByteBuf.writeVarInt(shapelessRecipe.fuelCostPerTick);
+            packetByteBuf.writeVarInt(shapelessRecipe.totalFuelCost);
         }
     }
 }

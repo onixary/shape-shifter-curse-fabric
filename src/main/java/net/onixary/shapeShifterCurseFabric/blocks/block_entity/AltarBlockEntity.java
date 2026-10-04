@@ -17,6 +17,7 @@ import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -38,6 +39,7 @@ public class AltarBlockEntity extends LockableContainerBlockEntity implements Si
     // 进度锁是个不错的设计 能降低难度(毕竟之前做限制进度使用得上对应阶段的材料 有些材料是真不好量产 有这个就能用便宜材料了)
     public UUID lastUser;
     public AltarRecipe nowRecipe;
+    private @Nullable Identifier resumeRecipeId;
     public static final int maxFuel = 102400;
     public int progress = 0;
     public int totalProgress = 0;  // Only Client
@@ -212,6 +214,13 @@ public class AltarBlockEntity extends LockableContainerBlockEntity implements Si
 
     public void checkRecipe() {
         World world = this.getWorld();
+        if (world == null) {
+            return;
+        }
+        Identifier savedRecipe = this.resumeRecipeId;
+        int savedProgress = this.progress;
+        int savedTotal = this.totalProgress;
+        this.resumeRecipeId = null;
         if (this.nowRecipe != null) {
             if (world != null && this.canCraftRecipe(world.getRegistryManager())) {
                 return;
@@ -231,7 +240,9 @@ public class AltarBlockEntity extends LockableContainerBlockEntity implements Si
             this.nowRecipe = null;
             this.totalProgress = 0;
         }
-        this.progress = 0;
+        this.progress = this.nowRecipe != null && this.nowRecipe.getId().equals(savedRecipe)
+                && savedTotal == this.totalProgress
+                ? Math.max(0, Math.min(savedProgress, this.totalProgress - 1)) : 0;
     }
 
     private boolean canCraftRecipe(DynamicRegistryManager registryManager) {
@@ -260,7 +271,7 @@ public class AltarBlockEntity extends LockableContainerBlockEntity implements Si
         if (outputSlot.getCount() + output.getCount() <= outputSlot.getMaxCount()) {
             return true;
         }
-        return outputSlot.getCount() + output.getCount() <= this.getMaxCountPerStack();
+        return false;
     }
 
     private boolean craftRecipe(DynamicRegistryManager registryManager) {
@@ -292,7 +303,7 @@ public class AltarBlockEntity extends LockableContainerBlockEntity implements Si
     }
 
     public void tick(World world, BlockPos pos, BlockState state, AltarBlockEntity blockEntity) {
-        if (needCheckRecipe) {
+        if (needCheckRecipe || (this.nowRecipe != null && !canCraftRecipe(world.getRegistryManager()))) {
             this.checkRecipe();
             needCheckRecipe = false;
         }
@@ -307,17 +318,13 @@ public class AltarBlockEntity extends LockableContainerBlockEntity implements Si
             }
         }
         if (this.nowRecipe != null) {
-            int fuelCost = nowRecipe.fuelUsage();
+            int fuelCost = nowRecipe.fuelUsage(this.progress);
             if (this.fuelTime >= fuelCost) {
                 this.fuelTime -= fuelCost;
                 this.progress++;
-            } else {
-                if (this.progress > 0) {
-                    this.progress--;
-                } else {
-                    this.progress = 0;
-                }
+                this.markDirty();
             }
+            // With no fuel, pause rather than charging again for completed work.
 
             if (this.progress >= this.nowRecipe.recipeTime()) {
                 if (craftRecipe(world.getRegistryManager())) {
@@ -345,6 +352,9 @@ public class AltarBlockEntity extends LockableContainerBlockEntity implements Si
         this.fuelTime = nbt.getInt("FuelTime");
         this.progress = nbt.getInt("Process");
         this.totalProgress = nbt.getInt("TotalProcess");
+        this.resumeRecipeId = Identifier.tryParse(nbt.getString("Recipe"));
+        this.nowRecipe = null;
+        this.needCheckRecipe = true;
     }
 
     protected void writeNbt(NbtCompound nbt) {
@@ -356,5 +366,9 @@ public class AltarBlockEntity extends LockableContainerBlockEntity implements Si
         nbt.putInt("FuelTime", this.fuelTime);
         nbt.putInt("Process", this.progress);
         nbt.putInt("TotalProcess", this.totalProgress);
+        Identifier recipeId = this.nowRecipe != null ? this.nowRecipe.getId() : this.resumeRecipeId;
+        if (recipeId != null) {
+            nbt.putString("Recipe", recipeId.toString());
+        }
     }
 }

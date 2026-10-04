@@ -1,0 +1,17 @@
+{
+  "type": "shape-shifter-curse:altar_shapeless",
+  "ingredients": [
+    {
+      "item": "shape-shifter-curse:digestion_fiber_ball"
+    }
+  ],
+  "result": {
+    "item": "shape-shifter-curse:digestion_fiber_ball_plus",
+    "count": 1
+  },
+  "time": 600,
+  "moondust_cost": 16,
+  "catalyst": {
+    "item": "shape-shifter-curse:jungle_catalyst_core"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "type": "shape-shifter-curse:altar_shapeless",
+  "ingredients": [
+    {
+      "item": "shape-shifter-curse:glint_prism"
+    },
+    {
+      "item": "minecraft:powder_snow_bucket"
+    },
+    {
+      "item": "minecraft:spruce_leaves"
+    },
+    {
+      "item": "minecraft:spruce_leaves"
+    },
+    {
+      "item": "minecraft:spruce_leaves"
+    },
+    {
+      "item": "minecraft:packed_ice"
+    },
+    {
+      "item": "minecraft:packed_ice"
+    },
+    {
+      "item": "minecraft:packed_ice"
+    },
+    {
+      "item": "minecraft:emerald"
+    }
+  ],
+  "result": {
+    "item": "shape-shifter-curse:frost_catalyst_core",
+    "count": 1
+  },
+  "time": 1200,
+  "moondust_cost": 9
+}

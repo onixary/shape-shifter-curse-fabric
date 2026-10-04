@@ -1,0 +1,17 @@
+{
+  "type": "shape-shifter-curse:altar_shapeless",
+  "ingredients": [
+    {
+      "item": "shape-shifter-curse:collar_of_whiskers"
+    }
+  ],
+  "result": {
+    "item": "shape-shifter-curse:collar_of_whiskers_plus",
+    "count": 1
+  },
+  "time": 600,
+  "moondust_cost": 16,
+  "catalyst": {
+    "item": "shape-shifter-curse:jungle_catalyst_core"
+  }
+}

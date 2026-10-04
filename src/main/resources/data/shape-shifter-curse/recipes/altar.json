@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CMC",
+    "GLB",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:crying_obsidian"
+    },
+    "M": {
+      "item": "shape-shifter-curse:moondust_crystal_shard"
+    },
+    "G": {
+      "item": "minecraft:glowstone"
+    },
+    "L": {
+      "tag": "minecraft:wool_carpets"
+    },
+    "B": {
+      "item": "minecraft:gold_block"
+    }
+  },
+  "result": {
+    "item": "shape-shifter-curse:altar"
+  }
+}

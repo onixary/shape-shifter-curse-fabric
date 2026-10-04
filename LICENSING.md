@@ -43,7 +43,7 @@ Everything below is licensed under CC BY-NC 4.0 in
 
 | Path | Content |
 | --- | --- |
-| `3d_models/**` | Blockbench project files, colormasks, reference art |
+| `3d_models/**`, except `icon/1-bit_Pixel_Icons/**` | Blockbench project files, colormasks, reference art |
 | `src/main/resources/assets/shape-shifter-curse/**`, except `shaders/**` | textures, GeckoLib geo models, animation JSON, form models, GUI, sounds, `lang/**` and `rich_lang/**` translations |
 | `PatronServer/PackRes/**` | patron form packs |
 | `PatronServer/WebRoot/*.zip` | built patron form packs |
@@ -77,6 +77,8 @@ above; the upstream license applies instead. See
 
 Notably:
 
+- `3d_models/icon/1-bit_Pixel_Icons/**` contains 1-bit Pixel Icons by Nikoichu,
+  licensed under CC0 1.0 Universal. Attribution is appreciated but not required.
 - `src/main/java/net/onixary/shapeShifterCurseFabric/integration/origins/**` and
   `src/main/resources/assets/origins/**` are derived from the Origins mod by
   apace100, which is MIT licensed. They stay MIT.
@@ -151,7 +153,7 @@ information is in [`fabric.mod.json`](src/main/resources/fabric.mod.json).
 
 | 路径 | 内容 |
 | --- | --- |
-| `3d_models/**` | Blockbench 工程文件、色掩膜、参考图 |
+| `3d_models/**`（`icon/1-bit_Pixel_Icons/**` 除外） | Blockbench 工程文件、色掩膜、参考图 |
 | `src/main/resources/assets/shape-shifter-curse/**`（`shaders/**` 除外） | 贴图、GeckoLib 模型、动画 JSON、形态模型、GUI、音效、`lang/**` 与 `rich_lang/**` 翻译 |
 | `PatronServer/PackRes/**` | 赞助者形态包 |
 | `PatronServer/WebRoot/*.zip` | 构建好的赞助者形态包 |
@@ -181,6 +183,8 @@ information is in [`fabric.mod.json`](src/main/resources/fabric.mod.json).
 
 主要例外：
 
+- `3d_models/icon/1-bit_Pixel_Icons/**` 为 Nikoichu 创作的 1-bit Pixel Icons，
+  采用 CC0 1.0 Universal。作者欢迎署名，但不强制要求。
 - `src/main/java/net/onixary/shapeShifterCurseFabric/integration/origins/**` 与
   `src/main/resources/assets/origins/**` 派生自 apace100 的 Origins 模组，
   该项目为 MIT 授权，因此这些文件保持 MIT。

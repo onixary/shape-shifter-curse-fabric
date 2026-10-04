@@ -1,0 +1,17 @@
+{
+  "type": "shape-shifter-curse:altar_shapeless",
+  "ingredients": [
+    {
+      "item": "shape-shifter-curse:fountain_belt"
+    }
+  ],
+  "result": {
+    "item": "shape-shifter-curse:fountain_belt_plus",
+    "count": 1
+  },
+  "time": 600,
+  "moondust_cost": 16,
+  "catalyst": {
+    "item": "shape-shifter-curse:surge_catalyst_core"
+  }
+}

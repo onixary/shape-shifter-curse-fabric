@@ -1,0 +1,68 @@
+{
+  "type": "apoli:action_on_item_use",
+  "entity_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "apoli:fire_projectile",
+        "entity_type": "minecraft:snowball",
+        "divergence": 0,
+        "count": 1,
+        "projectile_action": {
+          "type": "apoli:and",
+          "actions": [
+            {
+              "type": "apoli:spawn_particles",
+              "particle": {
+                "type": "minecraft:cloud"
+              },
+              "count": 8,
+              "speed": 0,
+              "force": false,
+              "spread": {
+                "x": 2,
+                "y": 1,
+                "z": 2
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:entity.snowball.throw"
+      },
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:block.amethyst_block.fall"
+      },
+      {
+        "type": "apoli:trigger_cooldown",
+        "power": "shape-shifter-curse:form_snow_fox_bottled_snowfall_cooldown"
+      }
+    ]
+  },
+  "condition": {
+    "type": "apoli:and",
+    "conditions": [
+      {
+        "type": "apoli:resource",
+        "resource": "shape-shifter-curse:form_snow_fox_bottled_snowfall_cooldown",
+        "comparison": "<",
+        "compare_to": 1
+      }
+    ]
+  },
+  "item_condition": {
+    "type": "apoli:ingredient",
+    "ingredient": {
+      "item": "shape-shifter-curse:bottled_snowfall_plus"
+    }
+  },
+  "item_action": {
+    "type": "apoli:damage",
+    "amount": 1,
+    "ignore_unbreaking": false
+  },
+  "trigger": "instant"
+}

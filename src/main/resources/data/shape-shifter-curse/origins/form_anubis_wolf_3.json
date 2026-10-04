@@ -18,6 +18,8 @@
         "shape-shifter-curse:form_anubis_wolf_3_reverse_instant_damage",
         "shape-shifter-curse:form_anubis_wolf_3_soul_speed",
         "shape-shifter-curse:form_anubis_wolf_3_wither_on_hit",
+        "shape-shifter-curse:form_anubis_wolf_disable_hurt_camera_when_withered",
+        "shape-shifter-curse:form_anubis_wolf_disable_wither_hearts",
         "shape-shifter-curse:form_anubis_wolf_3_immune_instant_heal",
         "shape-shifter-curse:form_anubis_wolf_3_immune_regeneration",
         "shape-shifter-curse:form_anubis_wolf_3_food_heal_slower",

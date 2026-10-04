@@ -1,0 +1,20 @@
+{
+  "type": "shape-shifter-curse:altar_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_pane"
+    },
+    {
+      "item": "minecraft:quartz"
+    },
+    {
+      "item": "minecraft:phantom_membrane"
+    }
+  ],
+  "result": {
+    "item": "shape-shifter-curse:ripple_mirror",
+    "count": 1
+  },
+  "time": 100,
+  "moondust_cost": 5
+}

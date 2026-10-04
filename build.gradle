@@ -20,7 +20,18 @@ base {
 }
 
 loom {
+    mods {
+        "shape-shifter-curse" { sourceSet sourceSets.main }
+        "ssc-altar-checks" { sourceSet sourceSets.test }
+    }
     runs {
+        altarCheck {
+            server()
+            source sourceSets.test
+            vmArg "-Dfabric-api.gametest"
+            vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/altar-checks.xml"
+            runDir "build/altar-check"
+        }
         client {
             programArgs([
                     "--username", "Dev",
@@ -330,6 +341,16 @@ tasks.matching { it.name in ["jar", "sourcesJar", "remapJar", "remapSourcesJar"]
 }
 
 // configure the maven publication
+tasks.register('checkAltarRecipes') {
+    dependsOn 'runAltarCheck'
+}
+
+tasks.register('checkTooltipWrapping', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'net.onixary.shapeShifterCurseFabric.client.ItemTooltipWrappingCheck'
+}
+
 publishing {
     publications {
         create("mavenJava", MavenPublication) {

@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "shape-shifter-curse:altar_shaped",
   "pattern": [
     "LLL",
     " M ",
@@ -25,5 +25,7 @@
   "result": {
     "item": "shape-shifter-curse:fountain_belt",
     "count": 1
-  }
+  },
+  "time": 100,
+  "moondust_cost": 5
 }

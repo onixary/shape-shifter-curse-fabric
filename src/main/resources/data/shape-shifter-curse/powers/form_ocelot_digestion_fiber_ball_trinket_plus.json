@@ -1,0 +1,76 @@
+{
+  "type": "apoli:multiple",
+  "can_eat_non_raw_meat_food": {
+    "type": "apoli:modify_food",
+    "food_modifier": {
+      "operation": "multiply_base_multiplicative",
+      "value": -0.3
+    },
+    "saturation_modifier": {
+      "operation": "multiply_base_multiplicative",
+      "value": -0.3
+    },
+    "item_condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:or",
+          "conditions": [
+            {
+              "type": "apoli:ingredient",
+              "ingredient": {
+                "tag": "shape-shifter-curse:raw_meat"
+              }
+            },
+            {
+              "type": "apoli:ingredient",
+              "ingredient": {
+                "item": "minecraft:rotten_flesh"
+              }
+            }
+          ],
+          "inverted": true
+        },
+        {
+          "type": "apoli:food"
+        },
+        {
+          "type": "apoli:ingredient",
+          "ingredient": {
+            "tag": "shape-shifter-curse:ignore_diet"
+          },
+          "inverted": true
+        },
+        {
+          "type": "apoli:ingredient",
+          "ingredient": {
+            "tag": "shape-shifter-curse:ignore_vc_eat"
+          },
+          "inverted": true
+        },
+        {
+          "type": "shape-shifter-curse:is_morph_scale_food",
+          "inverted": true
+        }
+      ]
+    }
+  },
+  "raw_meat_absorption": {
+    "type": "apoli:action_on_item_use",
+    "trigger": "finish",
+    "item_condition": {
+      "type": "apoli:ingredient",
+      "ingredient": {
+        "tag": "shape-shifter-curse:raw_meat"
+      }
+    },
+    "entity_action": {
+      "type": "apoli:apply_effect",
+      "effect": {
+        "effect": "minecraft:absorption",
+        "duration": 600,
+        "amplifier": 0
+      }
+    }
+  }
+}

@@ -127,7 +127,7 @@ public class WebBullet extends ThrownItemEntity {
         }
     }
 
-    private boolean isExtraHandVenomSpindleEquipped(PlayerEntity player) {
+    private boolean isExtraHandVenomSpindleEquipped(PlayerEntity player, Item item) {
         // Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
         // if (component.isEmpty()) {
         //     return false;
@@ -144,7 +144,7 @@ public class WebBullet extends ThrownItemEntity {
         return TrinketsConditionAction.CheckEquipped(
                 player, "auto", "hand", "extra_hand", 0,
                 (stack) -> {
-                    return stack.isOf(RegCustomItem.VENOM_SPINDLE);
+                    return stack.isOf(item);
                 },
                 false
         );
@@ -198,7 +198,8 @@ public class WebBullet extends ThrownItemEntity {
         // 检测 owner 的 extra_hand 槽位是否装备了箭毒纺锤，并根据tier形态施加效果
         if (this.owner instanceof PlayerEntity player && entity instanceof LivingEntity target) {
             //ShapeShifterCurseFabric.LOGGER.info("Check hit living entity " + entity.getName().getString());
-            if (isExtraHandVenomSpindleEquipped(player)) {
+            boolean upgradedSpindle = isExtraHandVenomSpindleEquipped(player, RegCustomItem.VENOM_SPINDLE_PLUS);
+            if (upgradedSpindle || isExtraHandVenomSpindleEquipped(player, RegCustomItem.VENOM_SPINDLE)) {
                 switch (Tier) {
                     case 1 -> {
                         target.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 80, 1));
@@ -215,6 +216,14 @@ public class WebBullet extends ThrownItemEntity {
                         target.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 2));
                         target.damage(this.getDamageSources().thrown(this, this.owner), 8.0F);
                     }
+                }
+                if (upgradedSpindle) {
+                    int duration = switch (Tier) {
+                        case 2 -> Tier2BuffTime;
+                        case 3 -> Tier3BuffTime;
+                        default -> Tier1BuffTime;
+                    };
+                    EntangledEffectUtils.applyEntangledEffect(this.getOwner(), target, duration);
                 }
             }
             else {
