@@ -172,7 +172,7 @@
     "item.shape-shifter-curse.frost_pawglove": "Леденящая перчатка для лапы",
     "item.shape-shifter-curse.frost_pawglove.tooltip": "[Форма полярной лисицы] Требуется сильная магия холода. Ваши снежки накладывают эффект замедления по области, однако наносят меньше урона.",
     "item.shape-shifter-curse.withered_bandage": "Иссохшая повязка",
-    "item.shape-shifter-curse.withered_bandage.tooltip": "[Форма шакала] Эффект иссушения, который вы получаете при ударе, имеет пониженный уровень, однако длится дольше.",
+    "item.shape-shifter-curse.withered_bandage.tooltip": "[Форма шакала] Эффект иссушения, который вы получаете при ударе, имеет пониженный уровень и длится дольше.",
     "item.shape-shifter-curse.moondust_crystal_shard": "Осколок кристалла лунной пыли",
     "item.shape-shifter-curse.moondust_crystal_shard.tooltip": "Очищенный кристалл лунной пыли, используемый для создания аксессуаров и инструментов, которые должны усилить способности вашей формы.",
     "item.shape-shifter-curse.ectoplasm_rag": "Кусок эктоплазмы",
@@ -678,5 +678,18 @@
     "gui.shape_shifter_curse.category.altar_shaped": "Altar Shaped Crafting",
     "gui.shape_shifter_curse.category.altar_shapeless": "Altar Shapeless Crafting",
     "gui.shape_shifter_curse.jei.altar.recipe_id": "Recipe ID: %s",
-    "gui.shape_shifter_curse.jei.altar.requires_advancement": "Requires Advancement: %s"
+    "gui.shape_shifter_curse.jei.altar.requires_advancement": "Requires Advancement: %s",
+    "item.shape-shifter-curse.charm_of_night_crystal_plus.tooltip": "[Форма летучей мыши] Солнечный свет больше не снижает ваше максимальное здоровье. +В темноте вы получаете эффект сопротивления+",
+    "item.shape-shifter-curse.charm_of_hollow_fang_plus.tooltip": "[Форма летучей мыши] Ваши атаки восстанавливают здоровье и сытость, но еда больше не восстанавливает их. +Удары в ближнем бою также накладывают эффект отравления+",
+    "item.shape-shifter-curse.attach_hook_plus.tooltip": "[Форма летучей мыши] Оружие и инструменты больше не выпадают у вас из рук, однако их прочность расходуется быстрее. +После добычи блоков вы получаете эффект спешки+",
+    "item.shape-shifter-curse.charm_of_reverse_thermometer_plus.tooltip": "[Форма полярной лисицы] Обращает влияние холодных и жарких биомов на ваше максимальное здоровье. +В жарких биомах вы получаете эффект скорости+",
+    "item.shape-shifter-curse.frost_pawglove_plus.tooltip": "[Форма полярной лисицы] Требуется сильная магия холода. Ваши снежки накладывают эффект замедления по области, однако наносят меньше урона. +Эффект замедления по области становится ещё сильнее+",
+    "item.shape-shifter-curse.venom_spindle_plus.tooltip": "[Форма паука] Паутинные снаряды наносят урон и накладывают эффекты отравления и слабости, но больше не замедляют цель. +Также накладывают эффект опутывания+",
+    "item.shape-shifter-curse.collar_of_whiskers_plus.tooltip": "[Форма оцелота] Только для настоящих охотников. При активации способности уклонения вы временно получаете эффект регенерации. +Успешное уклонение также даёт эффект силы+",
+    "item.shape-shifter-curse.digestion_fiber_ball_plus.tooltip": "[Форма оцелота] Позволяет переваривать приготовленное мясо и растительную пищу, однако их восстановительный эффект остаётся слабым. +Употребление сырого мяса даёт длительный эффект поглощения+",
+    "item.shape-shifter-curse.withered_bandage_plus.tooltip": "[Форма шакала] Эффект иссушения, который вы получаете при ударе, имеет пониженный уровень и длится дольше. +После получения удара иссушение на вас длится значительно дольше, давая больше времени для атаки+",
+    "item.shape-shifter-curse.fountain_belt_plus.tooltip": "[Форма аксолотля] Требуется сильная магия воды. Водный взрыв больше не наносит урон, а подбрасывает вас и ближайших существ в воздух. +При подбрасывании вы и подброшенные существа также получаете эффект плавного падения+",
+    "item.shape-shifter-curse.amulet_bracelet_plus.tooltip": "[Форма лисицы-фамильяра] Ведьмы и заклинатели больше не могут принудительно влиять на вас, а поглощение маны у враждебных существ больше не вызывает побочных эффектов. +Количество маны, поглощаемой у враждебных существ, значительно увеличивается+",
+    "item.shape-shifter-curse.bottled_snowfall_plus.tooltip": "[Инструмент полярной лисицы] Создаёт и выпускает снежки. +Больше не расходует сытость+",
+    "item.shape-shifter-curse.explosive_charm_paper.tooltip": "[Форма лисицы-фамильяра] Для использования требуется сильная магия. +Расходуется для создания более разрушительного огненного шара+"
 }
