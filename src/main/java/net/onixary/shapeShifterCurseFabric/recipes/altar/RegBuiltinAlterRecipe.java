@@ -25,6 +25,10 @@ public class RegBuiltinAlterRecipe {
                         if (airCount != 8 || foodStack == null || !foodStack.isFood()) {
                             return false;
                         }
+                        NbtCompound foodNBT = foodStack.getNbt();
+                        if (foodNBT != null && foodNBT.getBoolean(IsMorphScaleItemCondition.IsMorphScaleFoodTagName)) {
+                            return false;
+                        }
                         return true;
                     }
             )
