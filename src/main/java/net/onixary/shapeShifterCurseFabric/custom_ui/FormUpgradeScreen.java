@@ -39,7 +39,7 @@ import java.util.Objects;
 public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX {
     public static final Identifier TEXTURE = ShapeShifterCurseFabric.identifier("textures/gui/shape_shifter_tuner_ui.png");
     public static final HashMap<Integer, ISprite> levelSprites = new HashMap<>();
-    public static final int TEXTURE_WIDTH = 452;
+    public static final int TEXTURE_WIDTH = 454;
     public static final int TEXTURE_HEIGHT = 190;
 
     static {
@@ -107,11 +107,10 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     public int baseX = 0;
     public int baseY = 0;
 
-    public static final Identifier LABEL_GAINED = ShapeShifterCurseFabric.identifier("textures/perk/system/gained.png");
-    public static final Identifier LABEL_SELECT = ShapeShifterCurseFabric.identifier("textures/perk/system/select.png");
-    public static final Identifier LABEL_SELECTED = ShapeShifterCurseFabric.identifier("textures/perk/system/selected.png");
-    public static final Identifier LABEL_CAN_NOT_GAIN = ShapeShifterCurseFabric.identifier("textures/perk/system/can_not_gain.png");
-    public static final Identifier LABEL_DEPEND = ShapeShifterCurseFabric.identifier("textures/perk/system/depend.png");
+    public static final ISprite GAINED_SPRITE = new BaseSprite(TEXTURE, TEXTURE_WIDTH, TEXTURE_HEIGHT, 434, 112, 20, 20);
+    public static final ISprite SELECTED_SPRITE = new BaseSprite(TEXTURE, TEXTURE_WIDTH, TEXTURE_HEIGHT, 434, 72, 20, 20);
+    public static final ISprite CAN_NOT_GAIN_SPRITE = new BaseSprite(TEXTURE, TEXTURE_WIDTH, TEXTURE_HEIGHT, 434, 132, 20, 20);
+    public static final ISprite DEPEND_SPRITE = new BaseSprite(TEXTURE, TEXTURE_WIDTH, TEXTURE_HEIGHT, 434, 92, 20, 20);
 
     public static final HashMap<Identifier, Boolean> perkAvailableMap = new HashMap<>();  // 仅客户端数据 仅影响渲染 仅代表服务器获取这个表时无法获取这个Perk
     public static final HashMap<Identifier, ICost> perkCostMap = new HashMap<>();  // 仅客户端数据 实际消耗由服务器决定
@@ -396,40 +395,40 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         int virtualNodeY = perkNode.y;
         int NodePosX = nodeCenter.x + virtualNodeX;
         int NodePosY = nodeCenter.y + virtualNodeY;
-        int left = virtualNodeX + NodeSelectStartX;
-        int top = virtualNodeY + NodeSelectStartY;
+        // int left = virtualNodeX + NodeSelectStartX;
+        // int top = virtualNodeY + NodeSelectStartY;
         if (playerGainedPerk != null && playerGainedPerk.contains(perkNode.perkID)) {
-            context.drawTexture(LABEL_GAINED, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
+            GAINED_SPRITE.draw(context, NodePosX - 9, NodePosY - 9);
         } else if (!perkAvailableMap.getOrDefault(perkNode.perkID, true)) {
-            context.drawTexture(LABEL_CAN_NOT_GAIN, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
+            CAN_NOT_GAIN_SPRITE.draw(context, NodePosX - 9, NodePosY - 9);
         }
 
         if (this.nowSelectNode != null) {
             if (perkNode == this.nowSelectNode) {
-                context.drawTexture(LABEL_SELECTED, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
+                SELECTED_SPRITE.draw(context, NodePosX - 9, NodePosY - 9);
             } else if (this.nowSelectNode.dependentPerkIDs.contains(perkNode.perkID)) {
-                context.drawTexture(LABEL_DEPEND, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
+                DEPEND_SPRITE.draw(context, NodePosX - 9, NodePosY - 9);
             }
         }
-        if (mouseX >= left && mouseX < left + NodeSelectRectWidth && mouseY >= top && mouseY < top + NodeSelectRectHeight) {
-            context.drawTexture(LABEL_SELECT, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
-        }
+        // if (mouseX >= left && mouseX < left + NodeSelectRectWidth && mouseY >= top && mouseY < top + NodeSelectRectHeight) {
+        //     context.drawTexture(LABEL_SELECT, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
+        // }
         context.drawTexture(icon, NodePosX + NodeDrawStartX, NodePosY + NodeDrawStartY, 0, 0, NodeTextureWidth, NodeTextureHeight, NodeTextureWidth, NodeTextureHeight);
-        final int PerkNameBoxWidth = 33;
-        Text perkNameText = RegPerks.getPerkName(perkNode.perkID);
-        int perkNameTextWidth = this.textRenderer.getWidth(perkNameText);
-        int iconCenterX = NodePosX + NodeDrawStartX + NodeTextureWidth / 2;
-        int perkNameY = NodePosY + NodeDrawStartY + NodeTextureHeight + 2;
-        int perkNameBoxLeftX = iconCenterX - PerkNameBoxWidth / 2;
-        int perkNameX = perkNameBoxLeftX + (PerkNameBoxWidth - perkNameTextWidth) / 2;
-        context.drawText(
-                this.textRenderer,
-                perkNameText,
-                perkNameX,
-                perkNameY,
-                0xFFFFFFFF,
-                false
-        );
+        // final int PerkNameBoxWidth = 33;
+        // Text perkNameText = RegPerks.getPerkName(perkNode.perkID);
+        // int perkNameTextWidth = this.textRenderer.getWidth(perkNameText);
+        // int iconCenterX = NodePosX + NodeDrawStartX + NodeTextureWidth / 2;
+        // int perkNameY = NodePosY + NodeDrawStartY + NodeTextureHeight + 2;
+        // int perkNameBoxLeftX = iconCenterX - PerkNameBoxWidth / 2;
+        // int perkNameX = perkNameBoxLeftX + (PerkNameBoxWidth - perkNameTextWidth) / 2;
+        // context.drawText(
+        //                 this.textRenderer,
+        //         perkNameText,
+        //         perkNameX,
+        //         perkNameY,
+        //         0xFFFFFFFF,
+        //         false
+        //         );
     }
 
     public void drawAllNode(DrawContext context, int mouseX, int mouseY, float delta) {

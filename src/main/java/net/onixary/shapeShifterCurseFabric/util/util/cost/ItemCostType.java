@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 public class ItemCostType implements IFUSDrawableCostType<ItemCostType> {
     private static final Identifier id = ShapeShifterCurseFabric.identifier("item");
     public static final Identifier TEXTURE = ShapeShifterCurseFabric.identifier("textures/gui/shape_shifter_tuner_ui.png");
-    public static final int TEXTURE_WIDTH = 452;
+    public static final int TEXTURE_WIDTH = 454;
     public static final int TEXTURE_HEIGHT = 190;
     private static final ISprite itemIconSprite = new BaseSprite(TEXTURE, TEXTURE_WIDTH, TEXTURE_HEIGHT, 434, 54, 18, 18);
 
