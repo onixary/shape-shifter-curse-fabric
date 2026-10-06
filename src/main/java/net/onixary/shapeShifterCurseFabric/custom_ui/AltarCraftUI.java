@@ -49,9 +49,9 @@ public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
         baseY = height / 2 - HEIGHT / 2;
         this.renderBackground(context);
         super.render(context, mouseX, mouseY, delta);
-        this.drawMouseoverTooltip(context, mouseX, mouseY);
         this.drawProcess(context);
         this.drawFuel(context);
+        this.drawMouseoverTooltip(context, mouseX, mouseY);
     }
 
     @Override

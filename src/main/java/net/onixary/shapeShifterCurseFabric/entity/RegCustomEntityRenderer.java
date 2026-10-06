@@ -6,6 +6,8 @@ import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 public class RegCustomEntityRenderer {
     static {
         EntityRendererRegistry.register(RegCustomEntity.WEB_BULLET, FlyingItemEntityRenderer::new);
+        EntityRendererRegistry.register(RegCustomEntity.POTION_CHARM_ARROW, FlyingItemEntityRenderer::new);
+
     }
 
     public static void init() {

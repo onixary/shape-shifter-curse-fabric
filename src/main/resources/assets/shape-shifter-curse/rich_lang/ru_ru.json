@@ -1051,7 +1051,7 @@
   "gui.shape_shifter_curse.category.web_compostable": "Переваривание",
 
   "text.autoconfig.shape-shifter-curse-common.option.immediatelyTransform": "Force Immediately Transform",
-  "tooltip.shape_shifter_curse.morphscale_food": "Undefined Tag Name",
+  "tooltip.shape_shifter_curse.morphscale_food": "Morphscaled Food",
   "text.autoconfig.shape-shifter-curse-common.option.enableInitialForm": "Enable Custom Initial Form",
   "text.autoconfig.shape-shifter-curse-common.option.initialFormIds": "Configured Initial Form IDs(Randomize if multiple)",
   "text.autoconfig.shape-shifter-curse-common.option.statusPotionWithCurse": "Transformative Potion Can Effect Pre-Book Player",

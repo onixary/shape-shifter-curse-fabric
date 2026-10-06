@@ -15,7 +15,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.minion.mobs.AnubisWolfMinionEntity;
+import net.onixary.shapeShifterCurseFabric.minion.mobs.ManaReservoirEntity;
 import net.onixary.shapeShifterCurseFabric.util.EntityAttributeRegister;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,9 +30,17 @@ public class MinionRegister {
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
                     .build()
     );
+    public static final EntityType<ManaReservoirEntity> MANA_RESERVOIR = Registry.register(
+            Registries.ENTITY_TYPE,
+            ShapeShifterCurseFabric.identifier("mana_reservoir"),
+            FabricEntityTypeBuilder
+                    .create(SpawnGroup.MISC, ManaReservoirEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.6f, 0.6f))
+                    .build());
 
     public static void register() {
         EntityAttributeRegister.register(ANUBIS_WOLF_MINION, AnubisWolfMinionEntity::createWolfMinionAttributes);
+        EntityAttributeRegister.register(MANA_RESERVOIR, AnubisWolfMinionEntity::createWolfMinionAttributes);
     }
 
 

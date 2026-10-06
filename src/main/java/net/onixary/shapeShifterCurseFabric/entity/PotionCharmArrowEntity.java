@@ -1,4 +1,4 @@
-package net.onixary.shapeShifterCurseFabric.items;
+package net.onixary.shapeShifterCurseFabric.entity;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FlyingItemEntity;

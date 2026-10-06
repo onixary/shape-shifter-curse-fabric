@@ -10,6 +10,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.entity.PotionCharmArrowEntity;
+import net.onixary.shapeShifterCurseFabric.entity.RegCustomEntity;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 
 public class PotionCharmItem extends Item {
@@ -21,7 +23,7 @@ public class PotionCharmItem extends Item {
             return TypedActionResult.fail(stack);
         }
         if (!world.isClient) {
-            var arrow = new PotionCharmArrowEntity(FamiliarFoxContent.POTION_CHARM_ARROW, world);
+            var arrow = new PotionCharmArrowEntity(RegCustomEntity.POTION_CHARM_ARROW, world);
             arrow.setOwner(player);
             arrow.setPosition(player.getX(), player.getEyeY() - 0.1, player.getZ());
             arrow.initFromStack(PotionUtil.setPotion(new ItemStack(Items.TIPPED_ARROW), potion));
