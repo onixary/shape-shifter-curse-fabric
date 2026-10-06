@@ -15,6 +15,10 @@ public class RegCustomEntity {
             ShapeShifterCurseFabric.identifier("web_bullet"),
             FabricEntityTypeBuilder.<WebBullet>create(SpawnGroup.MISC, WebBullet::new).dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeChunks(10).trackedUpdateRate(1).build()
     );
+    public static final EntityType<PotionCharmArrowEntity> POTION_CHARM_ARROW = Registry.register(
+            Registries.ENTITY_TYPE,
+            ShapeShifterCurseFabric.identifier("potion_charm_arrow"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, PotionCharmArrowEntity::new).dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeBlocks(64).trackedUpdateRate(1).build());
 
     public static void init() {
     }

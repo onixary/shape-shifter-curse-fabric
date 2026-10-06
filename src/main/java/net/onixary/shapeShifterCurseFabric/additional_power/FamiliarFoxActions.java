@@ -16,8 +16,9 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
-import net.onixary.shapeShifterCurseFabric.items.FamiliarFoxContent;
 import net.onixary.shapeShifterCurseFabric.minion.IPlayerEntityMinion;
+import net.onixary.shapeShifterCurseFabric.minion.MinionRegister;
+
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -47,7 +48,7 @@ public final class FamiliarFoxActions {
             int cost = data.getInt("food_cost");
             if (player.getHungerManager().getFoodLevel() < cost
                     || minions.shape_shifter_curse$getMinionsCount(ShapeShifterCurseFabric.identifier("mana_reservoir")) >= 1) return;
-            var reservoir = FamiliarFoxContent.MANA_RESERVOIR.create(player.getServerWorld());
+            var reservoir = MinionRegister.MANA_RESERVOIR.create(player.getServerWorld());
             if (reservoir == null) return;
             Vec3d position = player.getEyePos().add(player.getRotationVec(1).multiply(1.5));
             reservoir.setPosition(position);

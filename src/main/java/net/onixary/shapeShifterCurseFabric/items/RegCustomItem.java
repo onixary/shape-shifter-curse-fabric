@@ -5,6 +5,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
+import net.minecraft.potion.Potions;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvents;
@@ -111,6 +112,11 @@ public class RegCustomItem {
 
     public static final Item RIPPLE_MIRROR = register("ripple_mirror", new RippleMirror(new Item.Settings()));
 
+    public static final Item HEALING_CHARM = register("healing_charm_paper", new PotionCharmItem(Potions.STRONG_HEALING));
+    public static final Item HARMING_CHARM = register("harming_charm_paper", new PotionCharmItem(Potions.STRONG_HARMING));
+    public static final Item POISON_CHARM = register("poison_charm_paper", new PotionCharmItem(Potions.STRONG_POISON));
+
+
     public static ItemStack buildPotion(Item PotionItem, Potion potion) {
         ItemStack potionStack = new ItemStack(PotionItem);
         PotionUtil.setPotion(potionStack, potion);
@@ -204,6 +210,9 @@ public class RegCustomItem {
                 entries.add(SELECT_FORM_ITEM);
                 entries.add(SILK_DEW);
                 entries.add(RIPPLE_MIRROR);
+                entries.add(HEALING_CHARM);
+                entries.add(HARMING_CHARM);
+                entries.add(POISON_CHARM);
                 // 方块物品注册
                 entries.add(MOONDUST_CRYSTAL_GRIT);
                 entries.add(WEB_COMPOSTER);
