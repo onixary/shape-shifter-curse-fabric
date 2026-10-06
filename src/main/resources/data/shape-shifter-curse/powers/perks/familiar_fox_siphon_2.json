@@ -1,0 +1,17 @@
+{
+  "name": "power.shape-shifter-curse.perks.familiar_fox_siphon_2.name",
+  "description": "power.shape-shifter-curse.perks.familiar_fox_siphon_2.description",
+  "hidden": true,
+  "type": "apoli:action_on_hit",
+  "cooldown": 0,
+  "bientity_condition": {
+    "type": "shape-shifter-curse:enemy"
+  },
+  "bientity_action": {
+    "type": "apoli:actor_action",
+    "action": {
+      "type": "shape-shifter-curse:gain_mana",
+      "mana": 4
+    }
+  }
+}

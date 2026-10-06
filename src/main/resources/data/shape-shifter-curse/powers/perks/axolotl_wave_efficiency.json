@@ -1,0 +1,30 @@
+{
+  "name": "power.shape-shifter-curse.perks.axolotl_wave_efficiency.name",
+  "description": "power.shape-shifter-curse.perks.axolotl_wave_efficiency.description",
+  "hidden": true,
+  "type": "apoli:action_over_time",
+  "entity_action": {
+    "type": "apoli:gain_air",
+    "value": -1
+  },
+  "interval": 30,
+  "condition": {
+    "type": "apoli:and",
+    "conditions": [
+      {
+        "type": "apoli:fluid_height",
+        "fluid": "minecraft:water",
+        "comparison": "<=",
+        "compare_to": 0
+      },
+      {
+        "type": "apoli:sprinting"
+      },
+      {
+        "type": "apoli:air",
+        "comparison": ">",
+        "compare_to": 0
+      }
+    ]
+  }
+}

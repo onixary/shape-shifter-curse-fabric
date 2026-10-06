@@ -1,0 +1,67 @@
+{
+  "name": "power.shape-shifter-curse.perks.axolotl_collect_water.name",
+  "description": "power.shape-shifter-curse.perks.axolotl_collect_water.description",
+  "hidden": true,
+  "type": "apoli:active_self",
+  "entity_action": {
+    "type": "shape-shifter-curse:oriented_box",
+    "width": 4.0,
+    "length": 4.0,
+    "height": 3.0,
+    "centered": true,
+    "bientity_condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "shape-shifter-curse:enemy"
+        },
+        {
+          "type": "apoli:can_see"
+        }
+      ]
+    },
+    "bientity_action": {
+      "type": "shape-shifter-curse:damage_on_success",
+      "amount": 10,
+      "bientity_action": {
+        "type": "apoli:and",
+        "actions": [
+          {
+            "type": "apoli:add_velocity",
+            "z": -1.0,
+            "y": 0.8
+          },
+          {
+            "type": "apoli:actor_action",
+            "action": {
+              "type": "apoli:gain_air",
+              "value": 30
+            }
+          },
+          {
+            "type": "apoli:target_action",
+            "action": {
+              "type": "apoli:spawn_particles",
+              "particle": "minecraft:splash",
+              "count": 8,
+              "force": true,
+              "spread": {
+                "x": 0.5,
+                "y": 0.6,
+                "z": 0.5
+              },
+              "speed": 0.02
+            }
+          }
+        ]
+      }
+    }
+  },
+  "cooldown": 600,
+  "hud_render": {
+    "should_render": false
+  },
+  "key": {
+    "key": "key.shape-shifter-curse.active_skill_2"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "power.shape-shifter-curse.perks.familiar_fox_reservoir.name",
+  "description": "power.shape-shifter-curse.perks.familiar_fox_reservoir.description",
+  "hidden": true,
+  "type": "apoli:active_self",
+  "key": {
+    "key": "key.shape-shifter-curse.active_skill_3"
+  },
+  "cooldown": 400,
+  "hud_render": {
+    "should_render": false
+  },
+  "condition": {
+    "type": "apoli:food_level",
+    "comparison": ">=",
+    "compare_to": 6
+  },
+  "entity_action": {
+    "type": "shape-shifter-curse:summon_mana_reservoir",
+    "food_cost": 6
+  }
+}

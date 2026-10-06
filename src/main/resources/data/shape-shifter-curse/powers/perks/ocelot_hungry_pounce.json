@@ -1,0 +1,14 @@
+{
+  "name": "power.shape-shifter-curse.perks.ocelot_hungry_pounce.name",
+  "description": "power.shape-shifter-curse.perks.ocelot_hungry_pounce.description",
+  "hidden": true,
+  "type": "shape-shifter-curse:action_on_combat_hit",
+  "event": "pounce",
+  "bientity_action": {
+    "type": "apoli:actor_action",
+    "action": {
+      "type": "shape-shifter-curse:change_food",
+      "amount": 2
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "name": "power.shape-shifter-curse.perks.familiar_fox_siphoning_ring.name",
+  "description": "power.shape-shifter-curse.perks.familiar_fox_siphoning_ring.description",
+  "hidden": true,
+  "type": "shape-shifter-curse:charge_action",
+  "key": {
+    "key": "key.shape-shifter-curse.active_skill_2",
+    "continuous": true
+  },
+  "start_condition": {
+    "type": "shape-shifter-curse:mana_compare",
+    "comparison": ">=",
+    "compare_to": 20
+  },
+  "start_action": {
+    "type": "shape-shifter-curse:consume_mana",
+    "mana": 20
+  },
+  "tier0_enable": true,
+  "tier1_enable": false,
+  "tier0_cooldown": 100,
+  "tier0_tick_action": {
+    "type": "shape-shifter-curse:surface_area",
+    "distance": 20,
+    "radius": 4,
+    "preview": true
+  },
+  "tier0_use_action": {
+    "type": "shape-shifter-curse:surface_area",
+    "distance": 20,
+    "radius": 4,
+    "bientity_condition": {
+      "type": "shape-shifter-curse:enemy"
+    },
+    "bientity_action": {
+      "type": "shape-shifter-curse:damage_on_success",
+      "amount": 8,
+      "bientity_action": {
+        "type": "apoli:actor_action",
+        "action": {
+          "type": "apoli:feed",
+          "food": 6,
+          "saturation": 0.4
+        }
+      }
+    }
+  }
+}

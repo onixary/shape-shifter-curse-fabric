@@ -116,7 +116,7 @@ public abstract class MinionBase extends TameableEntity implements IMinion<Minio
         if (this.getMinionOwnerUUID() != null && this.getWorld().getPlayerByUuid(this.getMinionOwnerUUID()) instanceof IPlayerEntityMinion iPlayerEntityMinion) {
             iPlayerEntityMinion.shape_shifter_curse$removeMinion(this.getMinionTypeID(), this.getUuid());
         }
-        this.setOwner(null);
+        this.setOwnerUuid(null);
         super.onDeath(source);
     }
 }

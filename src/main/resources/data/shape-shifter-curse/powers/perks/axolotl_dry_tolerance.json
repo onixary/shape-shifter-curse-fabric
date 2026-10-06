@@ -1,0 +1,17 @@
+{
+  "name": "power.shape-shifter-curse.perks.axolotl_dry_tolerance.name",
+  "description": "power.shape-shifter-curse.perks.axolotl_dry_tolerance.description",
+  "hidden": true,
+  "type": "apoli:conditioned_attribute",
+  "modifier": {
+    "attribute": "minecraft:generic.max_health",
+    "operation": "addition",
+    "value": 6
+  },
+  "condition": {
+    "type": "apoli:air",
+    "comparison": ">=",
+    "compare_to": 120
+  },
+  "tick_rate": 1
+}

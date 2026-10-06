@@ -1,0 +1,57 @@
+{
+  "name": "power.shape-shifter-curse.perks.familiar_fox_deflection.name",
+  "description": "power.shape-shifter-curse.perks.familiar_fox_deflection.description",
+  "hidden": true,
+  "type": "apoli:multiple",
+  "reduction": {
+    "type": "apoli:modify_damage_taken",
+    "damage_condition": {
+      "type": "apoli:in_tag",
+      "tag": "minecraft:is_projectile"
+    },
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "shape-shifter-curse:mana_compare",
+          "comparison": ">",
+          "compare_to": 5
+        },
+        {
+          "type": "shape-shifter-curse:blocking",
+          "inverted": true
+        }
+      ]
+    },
+    "modifier": {
+      "operation": "multiply_total",
+      "value": -0.5
+    }
+  },
+  "payment": {
+    "type": "apoli:self_action_when_hit",
+    "damage_condition": {
+      "type": "apoli:in_tag",
+      "tag": "minecraft:is_projectile"
+    },
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "shape-shifter-curse:mana_compare",
+          "comparison": ">",
+          "compare_to": 5
+        },
+        {
+          "type": "shape-shifter-curse:blocking",
+          "inverted": true
+        }
+      ]
+    },
+    "entity_action": {
+      "type": "shape-shifter-curse:consume_mana",
+      "mana": 5
+    },
+    "cooldown": 0
+  }
+}

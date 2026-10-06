@@ -1,0 +1,90 @@
+{
+  "name": "power.shape-shifter-curse.perks.bat_echolocation.name",
+  "description": "power.shape-shifter-curse.perks.bat_echolocation.description",
+  "hidden": true,
+  "type": "apoli:multiple",
+  "timer": {
+    "type": "apoli:resource",
+    "min": 0,
+    "max": 240,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "decay": {
+    "type": "apoli:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "apoli:change_resource",
+      "resource": "shape-shifter-curse:perks/bat_echolocation_timer",
+      "change": -1,
+      "operation": "add"
+    },
+    "condition": {
+      "type": "apoli:resource",
+      "resource": "shape-shifter-curse:perks/bat_echolocation_timer",
+      "comparison": ">",
+      "compare_to": 0
+    }
+  },
+  "glow": {
+    "type": "apoli:entity_glow",
+    "use_teams": false,
+    "red": 1.0,
+    "green": 1.0,
+    "blue": 1.0,
+    "condition": {
+      "type": "apoli:resource",
+      "resource": "shape-shifter-curse:perks/bat_echolocation_timer",
+      "comparison": ">",
+      "compare_to": 0
+    },
+    "bientity_condition": {
+      "type": "apoli:distance",
+      "comparison": "<=",
+      "compare_to": 10
+    }
+  },
+  "activate": {
+    "type": "apoli:active_self",
+    "entity_action": {
+      "type": "apoli:and",
+      "actions": [
+        {
+          "type": "apoli:change_resource",
+          "resource": "shape-shifter-curse:perks/bat_echolocation_timer",
+          "change": 240,
+          "operation": "set"
+        },
+        {
+          "type": "apoli:area_of_effect",
+          "radius": 10,
+          "bientity_condition": {
+            "type": "shape-shifter-curse:enemy"
+          },
+          "bientity_action": {
+            "type": "apoli:target_action",
+            "action": {
+              "type": "apoli:apply_effect",
+              "effect": {
+                "effect": "minecraft:weakness",
+                "duration": 240,
+                "amplifier": 0,
+                "show_particles": false,
+                "show_icon": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    "cooldown": 400,
+    "hud_render": {
+      "should_render": false
+    },
+    "key": {
+      "key": "key.shape-shifter-curse.active_skill_2"
+    }
+  }
+}

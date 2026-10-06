@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:grass_block",
+    "minecraft:mycelium",
+    "minecraft:podzol",
+    "minecraft:moss_block",
+    "minecraft:moss_carpet",
+    "minecraft:crimson_nylium",
+    "minecraft:warped_nylium",
+    "minecraft:rooted_dirt",
+    "minecraft:red_mushroom_block",
+    "minecraft:brown_mushroom_block",
+    "minecraft:mushroom_stem",
+    "minecraft:nether_wart_block",
+    "minecraft:warped_wart_block"
+  ]
+}

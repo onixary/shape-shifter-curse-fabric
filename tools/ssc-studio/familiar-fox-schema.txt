@@ -1,0 +1,25 @@
+SSC Studio adapter for familiar_fox_3 perks
+
+The mod content and generated Java are already updated. The sibling SSC_studio
+repository is outside this session's writable workspace, so its schema changes
+are supplied in familiar-fox-schema.patch instead of applied directly.
+
+From the SSC_studio repository, apply the patch with:
+git apply "../shape-shifter-curse-fabric/tools/ssc-studio/familiar-fox-schema.patch"
+
+Added schemas: action_on_shield_block, blocking, fireball_at_target,
+surface_area, summon_mana_reservoir. The explosion_damage_entity schema also
+matches the Java factory fields and accepts the new bientity_action callback.
+
+Validation (2026-10-06):
+- Applied schema changes to a temporary Studio source copy inside the mod build
+  directory. All 502 power resources round-tripped without failures.
+- Existing schema gaps remain: disable_hurt_camera and disable_wither_hearts.
+- Studio generation matches StudioGenerated.java: 38 perks and 5 trees total.
+- All 15 required Fabric GameTests passed, including 7 familiar fox tests.
+- 49 new localization keys exist in lang and rich_lang for zh_cn/en_us/en_gb.
+- Changed Java sources compiled using cached dependencies. A full Gradle build
+  was not completed because the wrapper download was unavailable in this sandbox.
+
+Controls: original fire ring uses skill 1; siphoning ring uses skill 2 for both
+hold and release; mana reservoir uses skill 3. Items/entities use placeholders.

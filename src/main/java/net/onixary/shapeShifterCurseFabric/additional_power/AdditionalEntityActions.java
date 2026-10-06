@@ -8,6 +8,8 @@ import net.minecraft.util.Pair;
 
 public class AdditionalEntityActions {
     public static void register() {
+        FamiliarFoxActions.register();
+        PerkActions.registerActions();
         registerAction(AddInstinctAction.getFactory());
         registerAction(SetFallingDistanceAction.createFactory());
         TransformAction.registerAction(AdditionalEntityActions::registerAction, AdditionalEntityActions::registerBIAction);

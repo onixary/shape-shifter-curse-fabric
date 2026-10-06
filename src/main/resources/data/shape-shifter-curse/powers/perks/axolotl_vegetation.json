@@ -1,0 +1,97 @@
+{
+  "name": "power.shape-shifter-curse.perks.axolotl_vegetation.name",
+  "description": "power.shape-shifter-curse.perks.axolotl_vegetation.description",
+  "hidden": true,
+  "type": "apoli:multiple",
+  "normal": {
+    "type": "apoli:conditioned_attribute",
+    "modifier": {
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "multiply_total",
+      "value": -0.3
+    },
+    "tick_rate": 5,
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:and",
+          "conditions": [
+            {
+              "type": "apoli:on_block"
+            },
+            {
+              "type": "apoli:in_block",
+              "block_condition": {
+                "type": "apoli:block",
+                "block": "minecraft:water"
+              },
+              "inverted": true
+            },
+            {
+              "type": "apoli:sneaking",
+              "inverted": true
+            },
+            {
+              "type": "apoli:sprinting",
+              "inverted": true
+            }
+          ]
+        },
+        {
+          "type": "apoli:on_block",
+          "block_condition": {
+            "type": "apoli:in_tag",
+            "tag": "shape-shifter-curse:perk_vegetation"
+          },
+          "inverted": true
+        }
+      ]
+    }
+  },
+  "vegetation": {
+    "type": "apoli:conditioned_attribute",
+    "modifier": {
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "multiply_total",
+      "value": -0.15
+    },
+    "tick_rate": 5,
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:and",
+          "conditions": [
+            {
+              "type": "apoli:on_block"
+            },
+            {
+              "type": "apoli:in_block",
+              "block_condition": {
+                "type": "apoli:block",
+                "block": "minecraft:water"
+              },
+              "inverted": true
+            },
+            {
+              "type": "apoli:sneaking",
+              "inverted": true
+            },
+            {
+              "type": "apoli:sprinting",
+              "inverted": true
+            }
+          ]
+        },
+        {
+          "type": "apoli:on_block",
+          "block_condition": {
+            "type": "apoli:in_tag",
+            "tag": "shape-shifter-curse:perk_vegetation"
+          }
+        }
+      ]
+    }
+  }
+}

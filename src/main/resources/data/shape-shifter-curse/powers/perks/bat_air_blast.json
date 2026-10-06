@@ -1,0 +1,41 @@
+{
+  "name": "power.shape-shifter-curse.perks.bat_air_blast.name",
+  "description": "power.shape-shifter-curse.perks.bat_air_blast.description",
+  "hidden": true,
+  "type": "apoli:active_self",
+  "entity_action": {
+    "type": "shape-shifter-curse:oriented_box",
+    "width": 4.0,
+    "length": 7.0,
+    "height": 3.0,
+    "centered": false,
+    "particles": true,
+    "bientity_condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "shape-shifter-curse:enemy"
+        },
+        {
+          "type": "apoli:can_see"
+        }
+      ]
+    },
+    "bientity_action": {
+      "type": "shape-shifter-curse:damage_on_success",
+      "amount": 6,
+      "bientity_action": {
+        "type": "apoli:add_velocity",
+        "z": 2,
+        "y": 0.35
+      }
+    }
+  },
+  "cooldown": 100,
+  "hud_render": {
+    "should_render": false
+  },
+  "key": {
+    "key": "key.shape-shifter-curse.active_skill_3"
+  }
+}

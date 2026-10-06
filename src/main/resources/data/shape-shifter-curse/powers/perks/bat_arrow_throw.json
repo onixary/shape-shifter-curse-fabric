@@ -1,0 +1,28 @@
+{
+  "name": "power.shape-shifter-curse.perks.bat_arrow_throw.name",
+  "description": "power.shape-shifter-curse.perks.bat_arrow_throw.description",
+  "hidden": true,
+  "type": "apoli:action_on_item_use",
+  "trigger": "instant",
+  "item_condition": {
+    "type": "apoli:ingredient",
+    "ingredient": {
+      "tag": "minecraft:arrows"
+    }
+  },
+  "condition": {
+    "type": "apoli:equipped_item",
+    "equipment_slot": "mainhand",
+    "item_condition": {
+      "type": "apoli:ingredient",
+      "ingredient": {
+        "tag": "minecraft:arrows"
+      }
+    }
+  },
+  "entity_action": {
+    "type": "shape-shifter-curse:fire_held_arrow",
+    "speed": 3.0,
+    "cooldown": 20
+  }
+}

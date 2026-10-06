@@ -1,0 +1,49 @@
+{
+  "name": "power.shape-shifter-curse.perks.axolotl_propulsion_efficiency.name",
+  "description": "power.shape-shifter-curse.perks.axolotl_propulsion_efficiency.description",
+  "hidden": true,
+  "type": "apoli:active_self",
+  "entity_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "apoli:add_velocity",
+        "z": 1.6,
+        "space": "local"
+      },
+      {
+        "type": "apoli:gain_air",
+        "value": -1
+      }
+    ]
+  },
+  "cooldown": 100,
+  "hud_render": {
+    "should_render": false
+  },
+  "key": {
+    "key": "key.sprint",
+    "continuous": false
+  },
+  "condition": {
+    "type": "apoli:and",
+    "conditions": [
+      {
+        "type": "apoli:and",
+        "conditions": [
+          {
+            "type": "apoli:fluid_height",
+            "fluid": "minecraft:water",
+            "comparison": ">=",
+            "compare_to": 1
+          }
+        ]
+      },
+      {
+        "type": "apoli:air",
+        "comparison": ">=",
+        "compare_to": 1
+      }
+    ]
+  }
+}

@@ -21,6 +21,9 @@ public class AdditionalPowers {
     public static final PowerType<?> TOGGLE_CLIP_AT_LEDGE = new PowerTypeReference<>(ShapeShifterCurseFabric.identifier("toggle_clip_at_ledge"));
 
     public static void register() {
+        register(ActionOnShieldBlockPower.createFactory());
+        register(ActionOnCombatHitPower.createFactory());
+        register(TargetPouncePower.createFactory());
         register(AddSustainedInstinctPower.getFactory());
         register(AddImmediateInstinctPower.getFactory());
         register(CrawlingPower.getFactory());

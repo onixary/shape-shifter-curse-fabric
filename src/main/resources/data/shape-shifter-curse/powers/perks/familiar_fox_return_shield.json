@@ -1,0 +1,34 @@
+{
+  "name": "power.shape-shifter-curse.perks.familiar_fox_return_shield.name",
+  "description": "power.shape-shifter-curse.perks.familiar_fox_return_shield.description",
+  "hidden": true,
+  "type": "shape-shifter-curse:action_on_shield_block",
+  "condition": {
+    "type": "apoli:and",
+    "conditions": [
+      {
+        "type": "apoli:sneaking"
+      },
+      {
+        "type": "shape-shifter-curse:mana_compare",
+        "comparison": ">=",
+        "compare_to": 5
+      }
+    ]
+  },
+  "bientity_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "apoli:actor_action",
+        "action": {
+          "type": "shape-shifter-curse:consume_mana",
+          "mana": 5
+        }
+      },
+      {
+        "type": "shape-shifter-curse:fireball_at_target"
+      }
+    ]
+  }
+}

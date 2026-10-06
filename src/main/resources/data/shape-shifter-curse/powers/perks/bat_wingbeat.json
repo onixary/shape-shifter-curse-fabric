@@ -1,0 +1,54 @@
+{
+  "name": "power.shape-shifter-curse.perks.bat_wingbeat.name",
+  "description": "power.shape-shifter-curse.perks.bat_wingbeat.description",
+  "hidden": true,
+  "type": "apoli:active_self",
+  "entity_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "shape-shifter-curse:change_food",
+        "amount": -1
+      },
+      {
+        "type": "apoli:add_velocity",
+        "z": 1.5,
+        "space": "local",
+        "client": false,
+        "server": true
+      },
+      {
+        "type": "apoli:spawn_particles",
+        "particle": "minecraft:cloud",
+        "count": 8,
+        "force": true,
+        "spread": {
+          "x": 0.5,
+          "y": 0.6,
+          "z": 0.5
+        },
+        "speed": 0.02
+      }
+    ]
+  },
+  "cooldown": 40,
+  "hud_render": {
+    "should_render": false
+  },
+  "key": {
+    "key": "key.shape-shifter-curse.active_skill_1"
+  },
+  "condition": {
+    "type": "apoli:and",
+    "conditions": [
+      {
+        "type": "apoli:fall_flying"
+      },
+      {
+        "type": "apoli:food_level",
+        "comparison": ">=",
+        "compare_to": 1
+      }
+    ]
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "name": "power.shape-shifter-curse.perks.familiar_fox_potion_charms.name",
+  "description": "power.shape-shifter-curse.perks.familiar_fox_potion_charms.description",
+  "hidden": true,
+  "type": "apoli:multiple",
+  "healing": {
+    "type": "apoli:item_on_item",
+    "using_item_condition": {
+      "type": "apoli:ingredient",
+      "ingredient": {
+        "item": "minecraft:paper"
+      }
+    },
+    "on_item_condition": {
+      "type": "apoli:ingredient",
+      "ingredient": {
+        "item": "minecraft:glistering_melon_slice"
+      }
+    },
+    "using_item_action": {
+      "type": "apoli:consume",
+      "amount": 1
+    },
+    "on_item_action": {
+      "type": "apoli:consume",
+      "amount": 1
+    },
+    "result": {
+      "item": "shape-shifter-curse:healing_charm_paper",
+      "amount": 1
+    },
+    "entity_action": {
+      "type": "shape-shifter-curse:consume_mana",
+      "mana": 5
+    },
+    "condition": {
+      "type": "shape-shifter-curse:mana_compare",
+      "comparison": ">=",
+      "compare_to": 5
+    }
+  },
+  "harming": {
+    "type": "apoli:item_on_item",
+    "using_item_condition": {
+      "type": "apoli:ingredient",
+      "ingredient": {
+        "item": "minecraft:paper"
+      }
+    },
+    "on_item_condition": {
+      "type": "apoli:ingredient",
+      "ingredient": {
+        "item": "minecraft:fermented_spider_eye"
+      }
+    },
+    "using_item_action": {
+      "type": "apoli:consume",
+      "amount": 1
+    },
+    "on_item_action": {
+      "type": "apoli:consume",
+      "amount": 1
+    },
+    "result": {
+      "item": "shape-shifter-curse:harming_charm_paper",
+      "amount": 1
+    },
+    "entity_action": {
+      "type": "shape-shifter-curse:consume_mana",
+      "mana": 5
+    },
+    "condition": {
+      "type": "shape-shifter-curse:mana_compare",
+      "comparison": ">=",
+      "compare_to": 5
+    }
+  },
+  "poison": {
+    "type": "apoli:item_on_item",
+    "using_item_condition": {
+      "type": "apoli:ingredient",
+      "ingredient": {
+        "item": "minecraft:paper"
+      }
+    },
+    "on_item_condition": {
+      "type": "apoli:ingredient",
+      "ingredient": {
+        "item": "minecraft:spider_eye"
+      }
+    },
+    "using_item_action": {
+      "type": "apoli:consume",
+      "amount": 1
+    },
+    "on_item_action": {
+      "type": "apoli:consume",
+      "amount": 1
+    },
+    "result": {
+      "item": "shape-shifter-curse:poison_charm_paper",
+      "amount": 1
+    },
+    "entity_action": {
+      "type": "shape-shifter-curse:consume_mana",
+      "mana": 5
+    },
+    "condition": {
+      "type": "shape-shifter-curse:mana_compare",
+      "comparison": ">=",
+      "compare_to": 5
+    }
+  }
+}

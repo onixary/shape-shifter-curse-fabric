@@ -1,0 +1,57 @@
+{
+  "name": "power.shape-shifter-curse.perks.ocelot_metabolic_overload.name",
+  "description": "power.shape-shifter-curse.perks.ocelot_metabolic_overload.description",
+  "hidden": true,
+  "type": "apoli:active_self",
+  "entity_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "shape-shifter-curse:change_food",
+        "amount": -8
+      },
+      {
+        "type": "apoli:apply_effect",
+        "effect": {
+          "effect": "minecraft:absorption",
+          "duration": 600,
+          "amplifier": 1,
+          "show_particles": false,
+          "show_icon": false
+        }
+      },
+      {
+        "type": "apoli:apply_effect",
+        "effect": {
+          "effect": "minecraft:strength",
+          "duration": 300,
+          "amplifier": 0,
+          "show_particles": false,
+          "show_icon": false
+        }
+      },
+      {
+        "type": "apoli:apply_effect",
+        "effect": {
+          "effect": "minecraft:speed",
+          "duration": 600,
+          "amplifier": 0,
+          "show_particles": false,
+          "show_icon": false
+        }
+      }
+    ]
+  },
+  "cooldown": 300,
+  "hud_render": {
+    "should_render": false
+  },
+  "key": {
+    "key": "key.shape-shifter-curse.active_skill_2"
+  },
+  "condition": {
+    "type": "apoli:food_level",
+    "comparison": ">=",
+    "compare_to": 8
+  }
+}

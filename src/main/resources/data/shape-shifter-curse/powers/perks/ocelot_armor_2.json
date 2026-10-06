@@ -1,0 +1,11 @@
+{
+  "name": "power.shape-shifter-curse.perks.ocelot_armor_2.name",
+  "description": "power.shape-shifter-curse.perks.ocelot_armor_2.description",
+  "hidden": true,
+  "type": "apoli:attribute",
+  "modifier": {
+    "attribute": "minecraft:generic.armor",
+    "operation": "addition",
+    "value": 8
+  }
+}

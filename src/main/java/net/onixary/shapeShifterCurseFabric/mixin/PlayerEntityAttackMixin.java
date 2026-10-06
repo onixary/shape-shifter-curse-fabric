@@ -17,9 +17,25 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.*;
 
 import java.util.List;
+import net.onixary.shapeShifterCurseFabric.additional_power.ActionOnCombatHitPower;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityAttackMixin {
+
+    @WrapOperation(method = "attack", at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/entity/Entity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"))
+    private boolean ssc$successfulPrimaryHit(Entity target, DamageSource source, float amount,
+                                             Operation<Boolean> original, @Local(ordinal = 2) boolean critical) {
+        float before = ActionOnCombatHitPower.health(target);
+        boolean success = original.call(target, source, amount + ActionOnCombatHitPower.meleeBonus((PlayerEntity) (Object) this, target));
+        if (success) {
+            float dealt = before - ActionOnCombatHitPower.health(target);
+            PlayerEntity player = (PlayerEntity) (Object) this;
+            ActionOnCombatHitPower.fire(player, target, "melee", dealt);
+            if (critical) ActionOnCombatHitPower.fire(player, target, "critical", dealt);
+        }
+        return success;
+    }
 
     /**
      * This mixin is used to force the sweeping attack effect when the AlwaysSweepingPower is active.

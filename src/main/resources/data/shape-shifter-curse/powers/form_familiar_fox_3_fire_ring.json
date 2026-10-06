@@ -67,22 +67,21 @@
                         }
                     ]
                 },
-                "entity_action":
-                {
+                "entity_action": {
                     "type": "apoli:and",
                     "actions": [
                         {
                             "type": "apoli:set_on_fire",
                             "duration": 10
-                        },
-                        {
-                            "type": "apoli:damage",
-                            "amount": 8,
-                            "damage_type": "minecraft:on_fire"
                         }
                     ]
                 },
-                "explosion_damage_entity" : false
+                "explosion_damage_entity": false,
+                "bientity_action": {
+                    "type": "apoli:damage",
+                    "amount": 8,
+                    "damage_type": "minecraft:on_fire"
+                }
             },
             {
                 "type": "shape-shifter-curse:spawn_particles_in_circle",

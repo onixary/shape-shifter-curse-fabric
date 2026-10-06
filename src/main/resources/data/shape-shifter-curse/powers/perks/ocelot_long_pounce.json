@@ -1,0 +1,132 @@
+{
+  "name": "power.shape-shifter-curse.perks.ocelot_long_pounce.name",
+  "description": "power.shape-shifter-curse.perks.ocelot_long_pounce.description",
+  "hidden": true,
+  "type": "apoli:multiple",
+  "charge": {
+    "type": "shape-shifter-curse:charge_action",
+    "key": {
+      "key": "key.shape-shifter-curse.active_skill_1",
+      "continuous": true
+    },
+    "start_condition": {
+      "type": "apoli:food_level",
+      "comparison": ">=",
+      "compare_to": 4
+    },
+    "start_action": {
+      "type": "shape-shifter-curse:change_food",
+      "amount": -4
+    },
+    "tier0_enable": true,
+    "tier0_charge_time": 0,
+    "tier0_tick_action": {
+      "type": "apoli:and",
+      "actions": [
+        {
+          "type": "apoli:spawn_particles",
+          "particle": {
+            "type": "minecraft:dust",
+            "params": "1.0 0.1 0.05 1.0"
+          },
+          "count": 8,
+          "force": true,
+          "spread": {
+            "x": 0.5,
+            "y": 0.6,
+            "z": 0.5
+          },
+          "speed": 0.02
+        },
+        {
+          "type": "apoli:apply_effect",
+          "effect": {
+            "effect": "minecraft:slowness",
+            "duration": 2,
+            "amplifier": 0,
+            "show_particles": false,
+            "show_icon": false
+          }
+        }
+      ]
+    },
+    "tier0_use_action": {
+      "type": "apoli:raycast",
+      "distance": 10,
+      "block": true,
+      "entity": true,
+      "shape_type": "collider",
+      "fluid_handling": "none",
+      "bientity_condition": {
+        "type": "apoli:target_condition",
+        "condition": {
+          "type": "apoli:health",
+          "comparison": ">",
+          "compare_to": 0
+        }
+      },
+      "bientity_action": {
+        "type": "shape-shifter-curse:start_target_pounce",
+        "power": "shape-shifter-curse:perks/ocelot_long_pounce_flight"
+      }
+    },
+    "tier0_cooldown": 100,
+    "tier1_enable": false
+  },
+  "glow": {
+    "type": "apoli:entity_glow",
+    "use_teams": false,
+    "red": 1.0,
+    "green": 0.45,
+    "blue": 0.05,
+    "condition": {
+      "type": "shape-shifter-curse:charging",
+      "power": "shape-shifter-curse:perks/ocelot_long_pounce_charge"
+    },
+    "bientity_condition": {
+      "type": "shape-shifter-curse:raycast_target",
+      "distance": 10.0
+    }
+  },
+  "flight": {
+    "type": "shape-shifter-curse:target_pounce",
+    "speed": 1.5,
+    "duration": 20,
+    "bientity_action": {
+      "type": "shape-shifter-curse:damage_on_success",
+      "amount": 10,
+      "bientity_action": {
+        "type": "apoli:and",
+        "actions": [
+          {
+            "type": "apoli:add_velocity",
+            "z": 1.5,
+            "y": 0.25
+          },
+          {
+            "type": "apoli:actor_action",
+            "action": {
+              "type": "shape-shifter-curse:change_food",
+              "amount": 6
+            }
+          },
+          {
+            "type": "apoli:target_action",
+            "action": {
+              "type": "apoli:spawn_particles",
+              "particle": "minecraft:crit",
+              "count": 8,
+              "force": true,
+              "spread": {
+                "x": 0.5,
+                "y": 0.6,
+                "z": 0.5
+              },
+              "speed": 0.02
+            }
+          }
+        ]
+      }
+    }
+  }
+}

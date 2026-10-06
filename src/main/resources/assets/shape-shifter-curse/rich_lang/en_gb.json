@@ -1402,5 +1402,464 @@
   "item.shape-shifter-curse.surge_catalyst_core.tooltip": ["It brings to mind hidden, surging currents beneath a calm sea."],
   "item.shape-shifter-curse.dune_catalyst_core.tooltip": ["It brings to mind the faint shapes traced in the sky by dust devils."],
   "item.shape-shifter-curse.night_catalyst_core.tooltip": ["It brings to mind a starless, moonless night, clear as black glass."],
-  "jei.shape-shifter-curse.catalyst_core.info": ["Not consumed when used in the catalyst slot for crafting at the Shape Shifter Altar."]
+  "jei.shape-shifter-curse.catalyst_core.info": ["Not consumed when used in the catalyst slot for crafting at the Shape Shifter Altar."],
+  "ssc_perk.shape-shifter-curse.bat_posture_1.name": [
+    "Posture Adaptation I"
+  ],
+  "ssc_perk.shape-shifter-curse.bat_posture_1.desc": [
+    "Reduces the ground movement speed penalty to 12%."
+  ],
+  "power.shape-shifter-curse.perks.bat_posture_1.name": [
+    "Posture Adaptation I"
+  ],
+  "power.shape-shifter-curse.perks.bat_posture_1.description": [
+    "Reduces the ground movement speed penalty to 12%."
+  ],
+  "ssc_perk.shape-shifter-curse.bat_posture_2.name": [
+    "Posture Adaptation II"
+  ],
+  "ssc_perk.shape-shifter-curse.bat_posture_2.desc": [
+    "Reduces the ground movement speed penalty to 6%."
+  ],
+  "power.shape-shifter-curse.perks.bat_posture_2.name": [
+    "Posture Adaptation II"
+  ],
+  "power.shape-shifter-curse.perks.bat_posture_2.description": [
+    "Reduces the ground movement speed penalty to 6%."
+  ],
+  "ssc_perk.shape-shifter-curse.bat_echolocation.name": [
+    "Echolocation"
+  ],
+  "ssc_perk.shape-shifter-curse.bat_echolocation.desc": [
+    "Active skill 2: highlight entities within 10 blocks in white for 12 seconds and inflict Weakness I on enemies for 12 seconds. Cooldown: 20 seconds."
+  ],
+  "power.shape-shifter-curse.perks.bat_echolocation.name": [
+    "Echolocation"
+  ],
+  "power.shape-shifter-curse.perks.bat_echolocation.description": [
+    "Active skill 2: highlight entities within 10 blocks in white for 12 seconds and inflict Weakness I on enemies for 12 seconds. Cooldown: 20 seconds."
+  ],
+  "ssc_perk.shape-shifter-curse.bat_wingbeat.name": [
+    "Wingbeat"
+  ],
+  "ssc_perk.shape-shifter-curse.bat_wingbeat.desc": [
+    "While gliding, use active skill 1 to spend 1 hunger point and accelerate forward. Cooldown: 2 seconds."
+  ],
+  "power.shape-shifter-curse.perks.bat_wingbeat.name": [
+    "Wingbeat"
+  ],
+  "power.shape-shifter-curse.perks.bat_wingbeat.description": [
+    "While gliding, use active skill 1 to spend 1 hunger point and accelerate forward. Cooldown: 2 seconds."
+  ],
+  "ssc_perk.shape-shifter-curse.bat_arrow_throw.name": [
+    "Arrow Throw"
+  ],
+  "ssc_perk.shape-shifter-curse.bat_arrow_throw.desc": [
+    "Right-click with an arrow in your main hand to throw it at full speed, consuming one arrow and preserving its type and potion effects. Cooldown: 1 second."
+  ],
+  "power.shape-shifter-curse.perks.bat_arrow_throw.name": [
+    "Arrow Throw"
+  ],
+  "power.shape-shifter-curse.perks.bat_arrow_throw.description": [
+    "Right-click with an arrow in your main hand to throw it at full speed, consuming one arrow and preserving its type and potion effects. Cooldown: 1 second."
+  ],
+  "ssc_perk.shape-shifter-curse.bat_air_blast.name": [
+    "Air Blast"
+  ],
+  "ssc_perk.shape-shifter-curse.bat_air_blast.desc": [
+    "Active skill 3: blast a region 4 blocks wide, 7 long and 3 high in front of you, dealing 6 damage and strong knockback to enemies. Cooldown: 5 seconds."
+  ],
+  "power.shape-shifter-curse.perks.bat_air_blast.name": [
+    "Air Blast"
+  ],
+  "power.shape-shifter-curse.perks.bat_air_blast.description": [
+    "Active skill 3: blast a region 4 blocks wide, 7 long and 3 high in front of you, dealing 6 damage and strong knockback to enemies. Cooldown: 5 seconds."
+  ],
+  "ssc_perk.shape-shifter-curse.bat_sun_resistance_1.name": [
+    "Sunlight Resistance I"
+  ],
+  "ssc_perk.shape-shifter-curse.bat_sun_resistance_1.desc": [
+    "Grants +3 unarmed attack damage in sunlight."
+  ],
+  "power.shape-shifter-curse.perks.bat_sun_resistance_1.name": [
+    "Sunlight Resistance I"
+  ],
+  "power.shape-shifter-curse.perks.bat_sun_resistance_1.description": [
+    "Grants +3 unarmed attack damage in sunlight."
+  ],
+  "ssc_perk.shape-shifter-curse.bat_sun_resistance_2.name": [
+    "Sunlight Resistance II"
+  ],
+  "ssc_perk.shape-shifter-curse.bat_sun_resistance_2.desc": [
+    "Grants the full +6 unarmed attack damage bonus in sunlight."
+  ],
+  "power.shape-shifter-curse.perks.bat_sun_resistance_2.name": [
+    "Sunlight Resistance II"
+  ],
+  "power.shape-shifter-curse.perks.bat_sun_resistance_2.description": [
+    "Grants the full +6 unarmed attack damage bonus in sunlight."
+  ],
+  "ssc_perk.shape-shifter-curse.bat_night_veil.name": [
+    "Night Veil"
+  ],
+  "ssc_perk.shape-shifter-curse.bat_night_veil.desc": [
+    "After sneaking in darkness for 3 seconds, gain 1 second of invisibility every 10 ticks. Renewal stops when you leave darkness or stop sneaking."
+  ],
+  "power.shape-shifter-curse.perks.bat_night_veil.name": [
+    "Night Veil"
+  ],
+  "power.shape-shifter-curse.perks.bat_night_veil.description": [
+    "After sneaking in darkness for 3 seconds, gain 1 second of invisibility every 10 ticks. Renewal stops when you leave darkness or stop sneaking."
+  ],
+  "ssc_perk.shape-shifter-curse.axolotl_vegetation.name": [
+    "Vegetation Gait"
+  ],
+  "ssc_perk.shape-shifter-curse.axolotl_vegetation.desc": [
+    "Reduces the walking speed penalty to 15% on grass, mycelium, podzol, moss and specified fungal vegetation."
+  ],
+  "power.shape-shifter-curse.perks.axolotl_vegetation.name": [
+    "Vegetation Gait"
+  ],
+  "power.shape-shifter-curse.perks.axolotl_vegetation.description": [
+    "Reduces the walking speed penalty to 15% on grass, mycelium, podzol, moss and specified fungal vegetation."
+  ],
+  "ssc_perk.shape-shifter-curse.axolotl_dry_tolerance.name": [
+    "Dryness Tolerance"
+  ],
+  "ssc_perk.shape-shifter-curse.axolotl_dry_tolerance.desc": [
+    "Keeps the +6 maximum health bonus while moisture is at least 120. Existing health penalties apply below 120."
+  ],
+  "power.shape-shifter-curse.perks.axolotl_dry_tolerance.name": [
+    "Dryness Tolerance"
+  ],
+  "power.shape-shifter-curse.perks.axolotl_dry_tolerance.description": [
+    "Keeps the +6 maximum health bonus while moisture is at least 120. Existing health penalties apply below 120."
+  ],
+  "ssc_perk.shape-shifter-curse.axolotl_tidal_pull.name": [
+    "Tidal Pull"
+  ],
+  "ssc_perk.shape-shifter-curse.axolotl_tidal_pull.desc": [
+    "Hold active skill 3 to spend 20 moisture and highlight the first living target within 10 blocks in blue. Release to pull it toward you and upward. Cooldown: 5 seconds; cancelling does not refund the cost."
+  ],
+  "power.shape-shifter-curse.perks.axolotl_tidal_pull.name": [
+    "Tidal Pull"
+  ],
+  "power.shape-shifter-curse.perks.axolotl_tidal_pull.description": [
+    "Hold active skill 3 to spend 20 moisture and highlight the first living target within 10 blocks in blue. Release to pull it toward you and upward. Cooldown: 5 seconds; cancelling does not refund the cost."
+  ],
+  "ssc_perk.shape-shifter-curse.axolotl_moisture_return_1.name": [
+    "Moisture Return I"
+  ],
+  "ssc_perk.shape-shifter-curse.axolotl_moisture_return_1.desc": [
+    "Restore 15 moisture when a successful critical hit deals more than 7 actual damage to an enemy."
+  ],
+  "power.shape-shifter-curse.perks.axolotl_moisture_return_1.name": [
+    "Moisture Return I"
+  ],
+  "power.shape-shifter-curse.perks.axolotl_moisture_return_1.description": [
+    "Restore 15 moisture when a successful critical hit deals more than 7 actual damage to an enemy."
+  ],
+  "ssc_perk.shape-shifter-curse.axolotl_moisture_return_2.name": [
+    "Moisture Return II"
+  ],
+  "ssc_perk.shape-shifter-curse.axolotl_moisture_return_2.desc": [
+    "Critical hits restore 30 moisture when below 150 moisture, otherwise 15."
+  ],
+  "power.shape-shifter-curse.perks.axolotl_moisture_return_2.name": [
+    "Moisture Return II"
+  ],
+  "power.shape-shifter-curse.perks.axolotl_moisture_return_2.description": [
+    "Critical hits restore 30 moisture when below 150 moisture, otherwise 15."
+  ],
+  "ssc_perk.shape-shifter-curse.axolotl_collect_water.name": [
+    "Water Gathering"
+  ],
+  "ssc_perk.shape-shifter-curse.axolotl_collect_water.desc": [
+    "Active skill 2: deal 10 damage in a 4 by 4 block region, 3 blocks high, pulling enemies inward and upward. Restore 30 moisture per successful hit. Cooldown: 30 seconds."
+  ],
+  "power.shape-shifter-curse.perks.axolotl_collect_water.name": [
+    "Water Gathering"
+  ],
+  "power.shape-shifter-curse.perks.axolotl_collect_water.description": [
+    "Active skill 2: deal 10 damage in a 4 by 4 block region, 3 blocks high, pulling enemies inward and upward. Restore 30 moisture per successful hit. Cooldown: 30 seconds."
+  ],
+  "ssc_perk.shape-shifter-curse.axolotl_propulsion_efficiency.name": [
+    "Water Propulsion Efficiency"
+  ],
+  "ssc_perk.shape-shifter-curse.axolotl_propulsion_efficiency.desc": [
+    "Underwater propulsion costs 1 moisture per use."
+  ],
+  "power.shape-shifter-curse.perks.axolotl_propulsion_efficiency.name": [
+    "Water Propulsion Efficiency"
+  ],
+  "power.shape-shifter-curse.perks.axolotl_propulsion_efficiency.description": [
+    "Underwater propulsion costs 1 moisture per use."
+  ],
+  "ssc_perk.shape-shifter-curse.axolotl_wave_efficiency.name": [
+    "Wave Riding Efficiency"
+  ],
+  "ssc_perk.shape-shifter-curse.axolotl_wave_efficiency.desc": [
+    "Wave riding consumes 1 moisture every 30 ticks."
+  ],
+  "power.shape-shifter-curse.perks.axolotl_wave_efficiency.name": [
+    "Wave Riding Efficiency"
+  ],
+  "power.shape-shifter-curse.perks.axolotl_wave_efficiency.description": [
+    "Wave riding consumes 1 moisture every 30 ticks."
+  ],
+  "ssc_perk.shape-shifter-curse.axolotl_water_magic_efficiency.name": [
+    "Water Magic Efficiency"
+  ],
+  "ssc_perk.shape-shifter-curse.axolotl_water_magic_efficiency.desc": [
+    "Wave-riding knockback costs 6 moisture; water explosions cost 12 moisture."
+  ],
+  "power.shape-shifter-curse.perks.axolotl_water_magic_efficiency.name": [
+    "Water Magic Efficiency"
+  ],
+  "power.shape-shifter-curse.perks.axolotl_water_magic_efficiency.description": [
+    "Wave-riding knockback costs 6 moisture; water explosions cost 12 moisture."
+  ],
+  "ssc_perk.shape-shifter-curse.ocelot_armor_1.name": [
+    "Natural Armor I"
+  ],
+  "ssc_perk.shape-shifter-curse.ocelot_armor_1.desc": [
+    "Gain 4 additional armor points."
+  ],
+  "power.shape-shifter-curse.perks.ocelot_armor_1.name": [
+    "Natural Armor I"
+  ],
+  "power.shape-shifter-curse.perks.ocelot_armor_1.description": [
+    "Gain 4 additional armor points."
+  ],
+  "ssc_perk.shape-shifter-curse.ocelot_armor_2.name": [
+    "Natural Armor II"
+  ],
+  "ssc_perk.shape-shifter-curse.ocelot_armor_2.desc": [
+    "Increase total additional armor to 8 points."
+  ],
+  "power.shape-shifter-curse.perks.ocelot_armor_2.name": [
+    "Natural Armor II"
+  ],
+  "power.shape-shifter-curse.perks.ocelot_armor_2.description": [
+    "Increase total additional armor to 8 points."
+  ],
+  "ssc_perk.shape-shifter-curse.ocelot_metabolism_1.name": [
+    "Metabolic Adaptation I"
+  ],
+  "ssc_perk.shape-shifter-curse.ocelot_metabolism_1.desc": [
+    "Reduce passive exhaustion to 0.001 per tick, before exhaustion multipliers."
+  ],
+  "power.shape-shifter-curse.perks.ocelot_metabolism_1.name": [
+    "Metabolic Adaptation I"
+  ],
+  "power.shape-shifter-curse.perks.ocelot_metabolism_1.description": [
+    "Reduce passive exhaustion to 0.001 per tick, before exhaustion multipliers."
+  ],
+  "ssc_perk.shape-shifter-curse.ocelot_metabolic_overload.name": [
+    "Metabolic Overload"
+  ],
+  "ssc_perk.shape-shifter-curse.ocelot_metabolic_overload.desc": [
+    "Active skill 2 spends 8 hunger points to grant Absorption II for 30 seconds, Strength I for 15 seconds and Speed I for 30 seconds. Cooldown: 15 seconds."
+  ],
+  "power.shape-shifter-curse.perks.ocelot_metabolic_overload.name": [
+    "Metabolic Overload"
+  ],
+  "power.shape-shifter-curse.perks.ocelot_metabolic_overload.description": [
+    "Active skill 2 spends 8 hunger points to grant Absorption II for 30 seconds, Strength I for 15 seconds and Speed I for 30 seconds. Cooldown: 15 seconds."
+  ],
+  "ssc_perk.shape-shifter-curse.ocelot_metabolism_2.name": [
+    "Metabolic Adaptation II"
+  ],
+  "ssc_perk.shape-shifter-curse.ocelot_metabolism_2.desc": [
+    "Reduce the exhaustion multiplier from 1.6 to 1.2."
+  ],
+  "power.shape-shifter-curse.perks.ocelot_metabolism_2.name": [
+    "Metabolic Adaptation II"
+  ],
+  "power.shape-shifter-curse.perks.ocelot_metabolism_2.description": [
+    "Reduce the exhaustion multiplier from 1.6 to 1.2."
+  ],
+  "ssc_perk.shape-shifter-curse.ocelot_ambush.name": [
+    "Ambush"
+  ],
+  "ssc_perk.shape-shifter-curse.ocelot_ambush.desc": [
+    "While sneaking, primary melee attacks against enemies deal 6 additional damage and spend 1 hunger point on a successful hit."
+  ],
+  "power.shape-shifter-curse.perks.ocelot_ambush.name": [
+    "Ambush"
+  ],
+  "power.shape-shifter-curse.perks.ocelot_ambush.description": [
+    "While sneaking, primary melee attacks against enemies deal 6 additional damage and spend 1 hunger point on a successful hit."
+  ],
+  "ssc_perk.shape-shifter-curse.ocelot_hungry_pounce.name": [
+    "Hungry Pounce"
+  ],
+  "ssc_perk.shape-shifter-curse.ocelot_hungry_pounce.desc": [
+    "Restore 2 hunger points when your normal pounce successfully deals damage, including accessory-enhanced pounces."
+  ],
+  "power.shape-shifter-curse.perks.ocelot_hungry_pounce.name": [
+    "Hungry Pounce"
+  ],
+  "power.shape-shifter-curse.perks.ocelot_hungry_pounce.description": [
+    "Restore 2 hunger points when your normal pounce successfully deals damage, including accessory-enhanced pounces."
+  ],
+  "ssc_perk.shape-shifter-curse.ocelot_long_pounce.name": [
+    "Long-range Pounce"
+  ],
+  "ssc_perk.shape-shifter-curse.ocelot_long_pounce.desc": [
+    "Hold active skill 1 to spend 4 hunger points, highlight the first living target within 10 blocks in orange and gain Slowness I. Release to pounce in a straight line; a successful hit deals 10 damage, knocks the target back and restores 6 hunger points. Cooldown: 5 seconds; cancelling does not refund the cost."
+  ],
+  "power.shape-shifter-curse.perks.ocelot_long_pounce.name": [
+    "Long-range Pounce"
+  ],
+  "power.shape-shifter-curse.perks.ocelot_long_pounce.description": [
+    "Hold active skill 1 to spend 4 hunger points, highlight the first living target within 10 blocks in orange and gain Slowness I. Release to pounce in a straight line; a successful hit deals 10 damage, knocks the target back and restores 6 hunger points. Cooldown: 5 seconds; cancelling does not refund the cost."
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_deflection.name": [
+    "Deflective Protection"
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_deflection.desc": [
+    "While not blocking and above 5 mana, take 50% less projectile damage; a successful hit costs 5 mana."
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_deflection.name": [
+    "Deflective Protection"
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_deflection.description": [
+    "While not blocking and above 5 mana, take 50% less projectile damage; a successful hit costs 5 mana."
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_return_shield.name": [
+    "Returning Shield"
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_return_shield.desc": [
+    "While sneaking and blocking, spend 5 mana to fire a small fireball at the projectile attacker."
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_return_shield.name": [
+    "Returning Shield"
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_return_shield.description": [
+    "While sneaking and blocking, spend 5 mana to fire a small fireball at the projectile attacker."
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_siphon_1.name": [
+    "Reflexive Siphon 1"
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_siphon_1.desc": [
+    "Successful melee, projectile and skill hits against enemies restore 2 mana per target."
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_siphon_1.name": [
+    "Reflexive Siphon 1"
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_siphon_1.description": [
+    "Successful melee, projectile and skill hits against enemies restore 2 mana per target."
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_siphon_2.name": [
+    "Reflexive Siphon 2"
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_siphon_2.desc": [
+    "Successful melee, projectile and skill hits against enemies restore 4 mana per target."
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_siphon_2.name": [
+    "Reflexive Siphon 2"
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_siphon_2.description": [
+    "Successful melee, projectile and skill hits against enemies restore 4 mana per target."
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_siphoning_ring.name": [
+    "Siphoning Flame Ring"
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_siphoning_ring.desc": [
+    "Hold skill 2 to spend 20 mana and preview a surface within 20 blocks. Release to deal 8 damage to enemies within 4 blocks, restoring 6 food and 4.8 saturation per successful hit. Cooldown: 5 seconds."
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_siphoning_ring.name": [
+    "Siphoning Flame Ring"
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_siphoning_ring.description": [
+    "Hold skill 2 to spend 20 mana and preview a surface within 20 blocks. Release to deal 8 damage to enemies within 4 blocks, restoring 6 food and 4.8 saturation per successful hit. Cooldown: 5 seconds."
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_mana_capacity_1.name": [
+    "Mana Capacity 1"
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_mana_capacity_1.desc": [
+    "Increase base maximum mana to 125."
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_mana_capacity_1.name": [
+    "Mana Capacity 1"
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_mana_capacity_1.description": [
+    "Increase base maximum mana to 125."
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_mana_capacity_2.name": [
+    "Mana Capacity 2"
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_mana_capacity_2.desc": [
+    "Increase base maximum mana to 150."
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_mana_capacity_2.name": [
+    "Mana Capacity 2"
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_mana_capacity_2.description": [
+    "Increase base maximum mana to 150."
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_reservoir.name": [
+    "Mana Reservoir"
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_reservoir.desc": [
+    "Skill 3 costs 6 food to summon a floating, pushable reservoir with 10 health. Every second it restores 5 mana to Familiar Fox II/III players within 4 blocks and loses 2 health, even without recipients. Limit: 1. Cooldown: 20 seconds."
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_reservoir.name": [
+    "Mana Reservoir"
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_reservoir.description": [
+    "Skill 3 costs 6 food to summon a floating, pushable reservoir with 10 health. Every second it restores 5 mana to Familiar Fox II/III players within 4 blocks and loses 2 health, even without recipients. Limit: 1. Cooldown: 20 seconds."
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_permeable_field_1.name": [
+    "Permeable Mana Field 1"
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_permeable_field_1.desc": [
+    "Allow Speed, Haste and Invisibility."
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_permeable_field_1.name": [
+    "Permeable Mana Field 1"
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_permeable_field_1.description": [
+    "Allow Speed, Haste and Invisibility."
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_permeable_field_2.name": [
+    "Permeable Mana Field 2"
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_permeable_field_2.desc": [
+    "Also allow Strength, Water Breathing and Night Vision."
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_permeable_field_2.name": [
+    "Permeable Mana Field 2"
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_permeable_field_2.description": [
+    "Also allow Strength, Water Breathing and Night Vision."
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_potion_charms.name": [
+    "Potion Charms"
+  ],
+  "ssc_perk.shape-shifter-curse.familiar_fox_potion_charms.desc": [
+    "Right-click glistering melon, fermented spider eye or spider eye with paper in your inventory. Spend the ingredients and 5 mana for a potion charm. Familiar Fox III can launch it as a strong healing, harming or poison arrow."
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_potion_charms.name": [
+    "Potion Charms"
+  ],
+  "power.shape-shifter-curse.perks.familiar_fox_potion_charms.description": [
+    "Right-click glistering melon, fermented spider eye or spider eye with paper in your inventory. Spend the ingredients and 5 mana for a potion charm. Familiar Fox III can launch it as a strong healing, harming or poison arrow."
+  ],
+  "item.shape-shifter-curse.healing_charm_paper": [
+    "Healing Potion Charm"
+  ],
+  "item.shape-shifter-curse.harming_charm_paper": [
+    "Harming Potion Charm"
+  ],
+  "item.shape-shifter-curse.poison_charm_paper": [
+    "Poison Potion Charm"
+  ],
+  "entity.shape-shifter-curse.mana_reservoir": [
+    "Mana Reservoir"
+  ],
+  "entity.shape-shifter-curse.potion_charm_arrow": [
+    "Potion Charm Arrow"
+  ]
 }

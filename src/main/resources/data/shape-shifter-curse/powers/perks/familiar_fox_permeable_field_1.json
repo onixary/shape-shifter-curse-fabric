@@ -1,0 +1,19 @@
+{
+  "name": "power.shape-shifter-curse.perks.familiar_fox_permeable_field_1.name",
+  "description": "power.shape-shifter-curse.perks.familiar_fox_permeable_field_1.description",
+  "hidden": true,
+  "type": "apoli:effect_immunity",
+  "effects": [
+    "minecraft:poison",
+    "minecraft:hunger",
+    "minecraft:strength",
+    "minecraft:regeneration",
+    "minecraft:fire_resistance",
+    "minecraft:water_breathing",
+    "minecraft:night_vision",
+    "minecraft:resistance",
+    "minecraft:health_boost",
+    "minecraft:wither",
+    "minecraft:absorption"
+  ]
+}

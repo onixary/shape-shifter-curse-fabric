@@ -1,0 +1,18 @@
+{
+  "name": "power.shape-shifter-curse.perks.axolotl_moisture_return_1.name",
+  "description": "power.shape-shifter-curse.perks.axolotl_moisture_return_1.description",
+  "hidden": true,
+  "type": "shape-shifter-curse:action_on_combat_hit",
+  "event": "critical",
+  "min_damage": 7.0,
+  "bientity_condition": {
+    "type": "shape-shifter-curse:enemy"
+  },
+  "bientity_action": {
+    "type": "apoli:actor_action",
+    "action": {
+      "type": "apoli:gain_air",
+      "value": 15
+    }
+  }
+}

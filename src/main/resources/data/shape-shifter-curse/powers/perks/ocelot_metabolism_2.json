@@ -1,0 +1,10 @@
+{
+  "name": "power.shape-shifter-curse.perks.ocelot_metabolism_2.name",
+  "description": "power.shape-shifter-curse.perks.ocelot_metabolism_2.description",
+  "hidden": true,
+  "type": "apoli:modify_exhaustion",
+  "modifier": {
+    "operation": "multiply_base",
+    "value": 0.2
+  }
+}

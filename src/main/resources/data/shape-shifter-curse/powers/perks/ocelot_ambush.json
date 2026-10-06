@@ -1,0 +1,31 @@
+{
+  "name": "power.shape-shifter-curse.perks.ocelot_ambush.name",
+  "description": "power.shape-shifter-curse.perks.ocelot_ambush.description",
+  "hidden": true,
+  "type": "shape-shifter-curse:action_on_combat_hit",
+  "event": "melee",
+  "bonus_damage": 6.0,
+  "condition": {
+    "type": "apoli:and",
+    "conditions": [
+      {
+        "type": "apoli:sneaking"
+      },
+      {
+        "type": "apoli:food_level",
+        "comparison": ">=",
+        "compare_to": 1
+      }
+    ]
+  },
+  "bientity_condition": {
+    "type": "shape-shifter-curse:enemy"
+  },
+  "bientity_action": {
+    "type": "apoli:actor_action",
+    "action": {
+      "type": "shape-shifter-curse:change_food",
+      "amount": -1
+    }
+  }
+}

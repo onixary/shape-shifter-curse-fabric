@@ -49,6 +49,6 @@ public class XPCostType implements IFUSDrawableCostType<XPCostType> {
 
     @Override
     public void pay(@NotNull ICost costObject, @NotNull PlayerEntity player) {
-        player.addExperience(costObject.getAmount());
+        player.addExperience(-costObject.getAmount());
     }
 }

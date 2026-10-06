@@ -215,6 +215,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
 
         // 注册召唤物属性
         MinionRegister.register();
+        net.onixary.shapeShifterCurseFabric.items.FamiliarFoxContent.register();
 
         AttackEntityDataTracker.init();
         ModGameRules.register();

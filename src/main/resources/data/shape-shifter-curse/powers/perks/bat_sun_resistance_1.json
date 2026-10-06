@@ -1,0 +1,45 @@
+{
+  "name": "power.shape-shifter-curse.perks.bat_sun_resistance_1.name",
+  "description": "power.shape-shifter-curse.perks.bat_sun_resistance_1.description",
+  "hidden": true,
+  "type": "apoli:conditioned_attribute",
+  "modifier": {
+    "attribute": "minecraft:generic.attack_damage",
+    "operation": "addition",
+    "value": 3
+  },
+  "condition": {
+    "type": "apoli:and",
+    "conditions": [
+      {
+        "type": "apoli:exposed_to_sun"
+      },
+      {
+        "type": "apoli:or",
+        "conditions": [
+          {
+            "type": "apoli:inventory",
+            "process_mode": "items",
+            "item_condition": {
+              "type": "shape-shifter-curse:is_weapon"
+            },
+            "slots": [
+              "weapon.mainhand"
+            ],
+            "inverted": true
+          },
+          {
+            "type": "apoli:inventory",
+            "process_mode": "items",
+            "comparison": "==",
+            "compare_to": 0,
+            "slots": [
+              "weapon.mainhand"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "tick_rate": 1
+}

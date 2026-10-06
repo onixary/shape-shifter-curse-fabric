@@ -28,19 +28,21 @@ public class ExplosionDamageEntityAction {
         // 参数 power -> 威力 entity_condition -> 实体条件
         // 额外加入可选的EntityAction以及是否对实体应用爆炸伤害的设置
         // entity_action -> 额外的实体action; explosion_damage_entity -> 爆炸是否伤害实体
+        if (entity.getWorld().isClient) return;
         int Power = data.getInt("power");
         float DamageMultiplier = data.getFloat("damage_multiplier");
         float baseDamage = data.getFloat("base_damage");
         ConditionFactory<Pair<Entity, Entity>>.Instance entityCondition = data.get("entity_condition");
         ActionFactory<Entity>.Instance entityAction = data.get("entity_action");
         boolean explosion_damage_entity = data.get("explosion_damage_entity");
-        explosion(entity, Power, entityCondition, entityAction, explosion_damage_entity, baseDamage, DamageMultiplier);
+        explosion(entity, Power, entityCondition, entityAction, data.get("bientity_action"), explosion_damage_entity, baseDamage, DamageMultiplier);
     }
 
     private static void explosion(Entity entity,
                                   int power,
                                   ConditionFactory<Pair<Entity, Entity>>.Instance entityCondition,
                                   ActionFactory<Entity>.Instance entityAction,
+                                  ActionFactory<Pair<Entity, Entity>>.Instance bientityAction,
                                   boolean explosion_damage_entity,
                                   float baseDamage,
                                   float damageMultiplier
@@ -91,6 +93,7 @@ public class ExplosionDamageEntityAction {
                         if (entityAction != null) {
                             entityAction.accept(target_entity);
                         }
+                        if (bientityAction != null) bientityAction.accept(new Pair<>(entity, target_entity));
                         target_entity.velocityModified = true;
                     }
                 }
@@ -107,6 +110,7 @@ public class ExplosionDamageEntityAction {
                         .add("damage_multiplier", SerializableDataTypes.FLOAT, 1.0f)
                         .add("entity_condition", ApoliDataTypes.BIENTITY_CONDITION, null)
                         .add("entity_action", ApoliDataTypes.ENTITY_ACTION, null)
+                        .add("bientity_action", ApoliDataTypes.BIENTITY_ACTION, null)
                         .add("explosion_damage_entity", SerializableDataTypes.BOOLEAN, true),
 
                 ExplosionDamageEntityAction::action

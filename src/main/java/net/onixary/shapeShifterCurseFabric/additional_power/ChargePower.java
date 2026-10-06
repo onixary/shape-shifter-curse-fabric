@@ -121,11 +121,17 @@ public class ChargePower extends Power implements Active {
     public int nowCooldown = 0;
 
     private boolean isCharging = false;
+    private final Predicate<Entity> startCondition;
+    private final ActionFactory<Entity>.Instance startAction;
+    private final ActionFactory<Entity>.Instance endAction;
     private long nowTick = 0;
     private long lastTick = 0;
 
     public ChargePower(PowerType<?> type, LivingEntity entity, SerializableData.Instance data) {
         super(type, entity);
+        startCondition = data.get("start_condition");
+        startAction = data.get("start_action");
+        endAction = data.get("end_action");
         for (int index = 0; index < TierCount; index++) {
             ChargeTier chargeTier = new ChargeTier(data, index);
             if (chargeTier.enable) {
@@ -140,6 +146,7 @@ public class ChargePower extends Power implements Active {
     }
 
     public void fire(boolean AddTick) {
+        if (!isCharging || entity.getWorld().isClient) return;
         this.isCharging = false;
         if (this.ChargeTime > 0) {
             for (ChargeTier chargeTier : ChargeTierList) {
@@ -151,11 +158,17 @@ public class ChargePower extends Power implements Active {
         }
         this.nowTier = 0;
         this.ChargeTime = 0;
+        if (endAction != null) endAction.accept(entity);
         this.updateTier();
     }
 
     @Override
     public void tick() {
+        if (entity.getWorld().isClient) return;
+        if (!isActive() || !entity.isAlive()) {
+            cancelCharge();
+            return;
+        }
         if (nowCooldown > 0) {
             nowCooldown--;
         } else {
@@ -172,13 +185,32 @@ public class ChargePower extends Power implements Active {
 
     @Override
     public void onUse() {
-        if (nowCooldown > 0) {
+        if (entity.getWorld().isClient || !isActive() || nowCooldown > 0) {
             return;
+        }
+        if (!isCharging) {
+            if (startCondition != null && !startCondition.test(entity)) return;
+            if (startAction != null) startAction.accept(entity);
+            this.isCharging = true;
+            updateTier();
         }
         this.lastTick = nowTick;
         this.isCharging = true;
         this.ChargeTime++;
     }
+
+    private void cancelCharge() {
+        if (!isCharging) return;
+        if (isCharging && endAction != null && !entity.getWorld().isClient) endAction.accept(entity);
+        isCharging = false;
+        nowTier = 0;
+        ChargeTime = 0;
+        updateTier();
+    }
+
+    @Override public void onRemoved() { cancelCharge(); }
+
+    public boolean isCharging() { return isCharging; }
 
     @Override
     public Key getKey() {
@@ -198,15 +230,20 @@ public class ChargePower extends Power implements Active {
     public NbtElement toTag() {
         NbtCompound tag = new NbtCompound();
         tag.putInt("renderTier", this.renderTier);
+        tag.putBoolean("charging", this.isCharging);
         return tag;
     }
 
     public void fromTag(NbtElement tag) {
         this.renderTier = ((NbtCompound) tag).getInt("renderTier");
+        if (entity.getWorld().isClient) this.isCharging = ((NbtCompound) tag).getBoolean("charging");
     }
 
     public static PowerFactory<?> createFactory() {
         SerializableData factoryJson = new SerializableData()
+                .add("start_condition", ApoliDataTypes.ENTITY_CONDITION, null)
+                .add("start_action", ApoliDataTypes.ENTITY_ACTION, null)
+                .add("end_action", ApoliDataTypes.ENTITY_ACTION, null)
                 .add("charge_power_id", SerializableDataTypes.IDENTIFIER, null)
                 .add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, new Active.Key());
         for (int index = 0; index < TierCount; index++) {
@@ -231,7 +268,7 @@ public class ChargePower extends Power implements Active {
                         powerType,
                         livingEntity,
                         data
-                ));
+                )).allowCondition();
     }
 
 }

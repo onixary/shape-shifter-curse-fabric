@@ -14,6 +14,8 @@ public class MinionRegisterClient {
     public static final EntityModelLayer WOLF_MINION_LAYER = new EntityModelLayer(AnubisWolfMinionEntity.MinionID, "main");
 
     public static void registerClient() {
+        EntityRendererRegistry.register(net.onixary.shapeShifterCurseFabric.items.FamiliarFoxContent.MANA_RESERVOIR, net.minecraft.client.render.entity.FlyingItemEntityRenderer::new);
+        EntityRendererRegistry.register(net.onixary.shapeShifterCurseFabric.items.FamiliarFoxContent.POTION_CHARM_ARROW, net.minecraft.client.render.entity.FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(MinionRegister.ANUBIS_WOLF_MINION, AnubisWolfMinionEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(WOLF_MINION_LAYER, AnubisWolfMinionEntityModel::getTexturedModelData);
     }

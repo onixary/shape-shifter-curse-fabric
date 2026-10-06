@@ -1,0 +1,37 @@
+--- a/src/renderer/modules/power-blueprint/schema/sscBuiltinSchemas.ts
++++ b/src/renderer/modules/power-blueprint/schema/sscBuiltinSchemas.ts
+@@ -94,6 +94,11 @@
+ 
+ 
+ export const sscBuiltinSchemas: NodeSchema[] = [
++  power(ns("action_on_shield_block"), [slot("bientity_action", "bientity_action", {required: true}), slot("condition", "entity_condition")]),
++  entityCondition(ns("blocking")),
++  bientityAction(ns("fireball_at_target")),
++  entityAction(ns("surface_area"), [float("distance", {defaultValue: 20}), float("radius", {defaultValue: 4}), bool("preview", {defaultValue: false}), slot("bientity_condition", "bientity_condition"), slot("bientity_action", "bientity_action")]),
++  entityAction(ns("summon_mana_reservoir"), [int("food_cost", {defaultValue: 6})]),
+   power(ns("action_on_combat_hit"), [str("event", {defaultValue: "melee"}), float("min_damage", {defaultValue: 0}), float("bonus_damage", {defaultValue: 0}), slot("bientity_condition", "bientity_condition"), slot("bientity_action", "bientity_action", {required: true}), slot("condition", "entity_condition")]),
+   power(ns("target_pounce"), [float("speed", {defaultValue: 1.5}), int("duration", {defaultValue: 20}), slot("bientity_action", "bientity_action", {required: true}), slot("condition", "entity_condition")]),
+   bientityCondition(ns("raycast_target"), [float("distance", {defaultValue: 10})]),
+@@ -560,15 +565,13 @@
+   entityAction(ns("give_custom_transform_effect"), [str("form_id")]),
+ 
+   entityAction(ns("explosion_damage_entity"), [
+-
+-    float("power", { required: true }),
+-
+-    bool("explosion_damage_entity", { defaultValue: true }),
+-
+-    slot("entity_condition", "entity_condition"),
+-
+-    slot("entity_action", "entity_action")
+-
++    int("power", {defaultValue: 0}),
++    float("base_damage", {defaultValue: 0}),
++    float("damage_multiplier", {defaultValue: 1}),
++    bool("explosion_damage_entity", {defaultValue: true}),
++    slot("entity_condition", "bientity_condition"),
++    slot("entity_action", "entity_action"),
++    slot("bientity_action", "bientity_action")
+   ]),
+ 
+   entityAction(ns("summon_anubis_wolf_minion"), minionFields()),

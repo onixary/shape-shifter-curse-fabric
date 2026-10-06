@@ -19,6 +19,7 @@ import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 
 public class AdditionalEntityConditions {
     public static void register() {
+        PerkActions.registerConditions();
         register(DiggingBareHandCondition.getFactory());
         register(InstinctValueCondition.getFactory());
         register(ChanceCondition.getFactory());
