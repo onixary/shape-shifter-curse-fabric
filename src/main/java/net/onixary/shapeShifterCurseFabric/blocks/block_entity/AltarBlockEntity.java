@@ -84,7 +84,10 @@ public class AltarBlockEntity extends LockableContainerBlockEntity implements Si
                         return AltarBlockEntity.this.totalProgress;
                     }
                     case 2 -> {
-                        return AltarBlockEntity.this.fuelTime;
+                        return AltarBlockEntity.this.fuelTime & 0xFFFF;
+                    }
+                    case 3 -> {
+                        return (AltarBlockEntity.this.fuelTime >>> 16) & 0xFFFF;
                     }
                     default -> {
                         return 0;
@@ -96,13 +99,14 @@ public class AltarBlockEntity extends LockableContainerBlockEntity implements Si
                 switch (index) {
                     case 0 -> AltarBlockEntity.this.progress = value;
                     case 1 -> AltarBlockEntity.this.totalProgress = value;
-                    case 2 -> AltarBlockEntity.this.fuelTime = value;
+                    case 2 -> AltarBlockEntity.this.fuelTime = (AltarBlockEntity.this.fuelTime & 0xFFFF0000) | (value & 0xFFFF);
+                    case 3 -> AltarBlockEntity.this.fuelTime = (AltarBlockEntity.this.fuelTime & 0x0000FFFF) | ((value & 0xFFFF) << 16);
                 }
 
             }
 
             public int size() {
-                return 3;
+                return 4;
             }
         };
     }
