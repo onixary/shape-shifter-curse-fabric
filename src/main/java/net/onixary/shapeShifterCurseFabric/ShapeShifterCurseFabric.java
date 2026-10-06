@@ -67,6 +67,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.recipes.BrewingRecipeReloadListener;
 import net.onixary.shapeShifterCurseFabric.recipes.RecipeSerializerRegister;
 import net.onixary.shapeShifterCurseFabric.recipes.RecipeUtils;
+import net.onixary.shapeShifterCurseFabric.recipes.altar.RegBuiltinAlterRecipe;
 import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
@@ -316,6 +317,8 @@ public class ShapeShifterCurseFabric implements ModInitializer {
             }
             return ActionResult.PASS;
         });
+
+        RegBuiltinAlterRecipe.init();
 
 
 

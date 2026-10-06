@@ -70,7 +70,7 @@ public abstract class AltarRecipe implements Recipe<SidedInventory> {
         return remainders;
     }
 
-    private static ItemStack inputRemainder(ItemStack input) {
+    public static ItemStack inputRemainder(ItemStack input) {
         // Unlike fluid buckets, vanilla's powder snow bucket declares no recipe remainder.
         if (input.isOf(Items.POWDER_SNOW_BUCKET)) {
             return new ItemStack(Items.BUCKET);
