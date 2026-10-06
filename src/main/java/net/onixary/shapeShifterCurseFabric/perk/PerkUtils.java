@@ -1,6 +1,7 @@
 package net.onixary.shapeShifterCurseFabric.perk;
 
 import com.google.common.base.Objects;
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -75,6 +76,7 @@ public class PerkUtils {
         }
         component.sync();
         perkData.onGain(player, component.nowForm);
+        PowerHolderComponent.KEY.sync(player);
     }
 
     public static void addPerk(PlayerEntity player, Identifier perkTreeID, Identifier perkID) {
