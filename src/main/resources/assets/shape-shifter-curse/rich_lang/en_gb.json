@@ -1570,11 +1570,11 @@
   "ssc_perk.shape-shifter-curse.axolotl_collect_water.name": [
     "Water Gathering"
   ],
-  "ssc_perk.shape-shifter-curse.axolotl_collect_water.desc": ["Hold active skill 2 to highlight enemies in a surrounding 6×6 area in blue. Release to deal 10 damage and launch enemies upward and away, restoring 30 moisture per successful hit. Cooldown: 30 seconds."],
+  "ssc_perk.shape-shifter-curse.axolotl_collect_water.desc": ["Hold active skill 2 to highlight enemies in a surrounding 18×18 area in blue. Release to deal 10 damage and launch enemies upward and away, restoring 30 moisture per successful hit. Cooldown: 30 seconds."],
   "power.shape-shifter-curse.perks.axolotl_collect_water.name": [
     "Water Gathering"
   ],
-  "power.shape-shifter-curse.perks.axolotl_collect_water.description": ["Hold active skill 2 to highlight enemies in a surrounding 6×6 area in blue. Release to deal 10 damage and launch enemies upward and away, restoring 30 moisture per successful hit. Cooldown: 30 seconds."],
+  "power.shape-shifter-curse.perks.axolotl_collect_water.description": ["Hold active skill 2 to highlight enemies in a surrounding 18×18 area in blue. Release to deal 10 damage and launch enemies upward and away, restoring 30 moisture per successful hit. Cooldown: 30 seconds."],
   "ssc_perk.shape-shifter-curse.axolotl_propulsion_efficiency.name": [
     "Water Propulsion Efficiency"
   ],

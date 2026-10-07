@@ -236,7 +236,7 @@
     {
       "id": "shape-shifter-curse:axolotl_collect_water",
       "name": "集水术",
-      "description": "按住主动技能键2，以蓝色描边显示周围6×6范围内的敌人；松开造成10点伤害，将命中敌人向上并向远离自身的方向击飞，每命中一个敌人回复30湿润度。冷却30秒。",
+      "description": "按住主动技能键2，以蓝色描边显示周围18×18范围内的敌人；松开造成10点伤害，将命中敌人向上并向远离自身的方向击飞，每命中一个敌人回复30湿润度。冷却30秒。",
       "nameKey": "ssc_perk.shape-shifter-curse.axolotl_collect_water.name",
       "descriptionKey": "ssc_perk.shape-shifter-curse.axolotl_collect_water.desc",
       "xp": 0,
