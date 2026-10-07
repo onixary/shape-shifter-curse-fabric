@@ -1,0 +1,11 @@
+{
+  "type": "shape-shifter-curse:wolf_minion_bonus",
+  "minion_action": {
+    "type": "apoli:apply_effect",
+    "effect": {
+      "effect": "minecraft:strength",
+      "duration": 600,
+      "amplifier": 0
+    }
+  }
+}

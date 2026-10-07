@@ -1,0 +1,31 @@
+{
+  "type": "apoli:active_self",
+  "cooldown": 100,
+  "key": {
+    "key": "key.shape-shifter-curse.active_skill_1",
+    "continuous": false
+  },
+  "hud_render": {
+    "should_render": false
+  },
+  "condition": {
+    "type": "apoli:and",
+    "conditions": [
+      {
+        "type": "apoli:on_block"
+      },
+      {
+        "type": "apoli:food_level",
+        "comparison": ">",
+        "compare_to": 6
+      }
+    ]
+  },
+  "entity_action": {
+    "type": "apoli:add_velocity",
+    "z": 1.2,
+    "y": 0.6,
+    "space": "local_horizontal_normalized",
+    "set": true
+  }
+}

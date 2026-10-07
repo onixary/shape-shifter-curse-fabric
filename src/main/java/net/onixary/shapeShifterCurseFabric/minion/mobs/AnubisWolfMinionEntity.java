@@ -188,8 +188,8 @@ public class AnubisWolfMinionEntity extends WolfEntity implements IMinion<Anubis
     @Override
     public void tick() {
         if (!this.getWorld().isClient) {
-            if (!this.shouldExist()) {
-                this.setHealth(0.0f);  // 自动死亡
+            if (this.isAlive() && !this.shouldExist()) {
+                this.kill();  // 自动死亡
             }
             if (!this.hasStatusEffect(StatusEffects.WITHER)) {
                 this.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, -1, 0));
@@ -285,6 +285,7 @@ public class AnubisWolfMinionEntity extends WolfEntity implements IMinion<Anubis
 
     @Override
     public void onDeath(DamageSource source) {
+        net.onixary.shapeShifterCurseFabric.additional_power.WolfMinionPower.onDeath(this.getOwner());
         if (this.getMinionOwnerUUID() != null && this.getWorld().getPlayerByUuid(this.getMinionOwnerUUID()) instanceof IPlayerEntityMinion iPlayerEntityMinion) {
             iPlayerEntityMinion.shape_shifter_curse$removeMinion(this.getMinionTypeID(), this.getUuid());
         }

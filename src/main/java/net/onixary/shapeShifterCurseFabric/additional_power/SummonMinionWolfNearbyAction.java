@@ -38,7 +38,7 @@ public class SummonMinionWolfNearbyAction {
             for (int i = 0; i < MinionCount; i++) {
                 if (player instanceof IPlayerEntityMinion playerEntityMinion) {
                     if (playerEntityMinion.shape_shifter_curse$getMinionsCount(AnubisWolfMinionEntity.MinionID) >= MaxMinionCount) {
-                        return;
+                        break;
                     }
                     if (MinionRegister.IsInCoolDown(AnubisWolfMinionEntity.MinionID, player, Cooldown)) {
                         return;
@@ -56,6 +56,7 @@ public class SummonMinionWolfNearbyAction {
                     AnubisWolfMinionEntity anubisWolfMinionEntity = MinionRegister.SpawnMinion(MinionRegister.ANUBIS_WOLF_MINION, world, targetPos, player);
                     if (anubisWolfMinionEntity != null) {
                         anubisWolfMinionEntity.setMinionLevel(MinionLevel);
+                        WolfMinionPower.onSpawn(player, anubisWolfMinionEntity);
                         IsSummonSuccess = true;
                     } else {
                         ShapeShifterCurseFabric.LOGGER.warn("Can't spawn minion, wolfMinion is null");
@@ -65,7 +66,7 @@ public class SummonMinionWolfNearbyAction {
                 }
             }
             if (IsSummonSuccess) {
-                MinionRegister.SetCoolDown(AnubisWolfMinionEntity.MinionID, player);
+                if (data.getBoolean("apply_cooldown")) MinionRegister.SetCoolDown(AnubisWolfMinionEntity.MinionID, player);
                 if (OwnerAction != null) {
                     OwnerAction.accept(Owner);
                 }
@@ -90,6 +91,7 @@ public class SummonMinionWolfNearbyAction {
                         .add("count", SerializableDataTypes.INT, 1)
                         .add("max_minion_count", SerializableDataTypes.INT, Integer.MAX_VALUE)
                         .add("cooldown", SerializableDataTypes.INT, 0)
+                        .add("apply_cooldown", SerializableDataTypes.BOOLEAN, true)
                         .add("owner_action", ApoliDataTypes.ENTITY_ACTION, null)
                         .add("target_action", ApoliDataTypes.ENTITY_ACTION, null)
                         .add("reverse", SerializableDataTypes.BOOLEAN, false),
@@ -105,6 +107,7 @@ public class SummonMinionWolfNearbyAction {
                         .add("count", SerializableDataTypes.INT, 1)
                         .add("max_minion_count", SerializableDataTypes.INT, Integer.MAX_VALUE)
                         .add("cooldown", SerializableDataTypes.INT, 0)
+                        .add("apply_cooldown", SerializableDataTypes.BOOLEAN, true)
                         .add("owner_action", ApoliDataTypes.ENTITY_ACTION, null)
                         .add("target_action", ApoliDataTypes.ENTITY_ACTION, null)  // 没用 但是防止解析错误 但是会正常执行
                         .add("reverse", SerializableDataTypes.BOOLEAN, false),  // 没用 但是防止解析错误

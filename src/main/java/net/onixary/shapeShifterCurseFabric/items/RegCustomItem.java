@@ -29,6 +29,10 @@ import static net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock.*;
 public class RegCustomItem {
     private RegCustomItem(){}
 
+    public static final Item GRAPHENE_BLADE = register("graphene_blade", new net.minecraft.item.SwordItem(
+            net.minecraft.item.ToolMaterials.DIAMOND, 4, -2.4f, new Item.Settings().maxDamage(128)));
+    public static final Item COMPOUND_KINETIC_BOW = register("compound_kinetic_bow", new net.minecraft.item.BowItem(new Item.Settings().maxDamage(768)));
+
     //public static final Item CURSED_BOOK_OF_SHAPE_SHIFTER = register("cursed_book_of_shape_shifter", new StartBook(new StartBook.Settings()));
     public static final Item BOOK_OF_SHAPE_SHIFTER = register("book_of_shape_shifter", new BookOfShapeShifter(new BookOfShapeShifter.Settings()));
     public static final Item UNTREATED_MOONDUST = register("untreated_moondust", new UntreatedMoonDust(new Item.Settings()));
@@ -107,7 +111,7 @@ public class RegCustomItem {
     // 用于成就图标的占位物品
     public static final Item ICON_CURSED_MOON = register("icon_cursed_moon", new Item(new Item.Settings()));
     // 蛛丝弹占位物品
-    public static final Item WEB_PROJECTILE = register("web_projectile", new Item(new Item.Settings()));
+    public static final Item WEB_PROJECTILE = register("web_projectile", new WebProjectileItem(new Item.Settings()));
     public static final Item SILK_DEW = register("silk_dew", new SilkDew(new Item.Settings()));
 
     public static final Item RIPPLE_MIRROR = register("ripple_mirror", new RippleMirror(new Item.Settings()));
@@ -205,6 +209,8 @@ public class RegCustomItem {
                 entries.add(TRANSFORMATIVE_AXOLOTL_BUCKET);
                 entries.add(SPIDER_FLUID_COCOON);
                 entries.add(AUXILIARY_SWORD);
+                entries.add(GRAPHENE_BLADE);
+                entries.add(COMPOUND_KINETIC_BOW);
                 entries.add(AUXILIARY_PICKAXE);
                 entries.add(AUXILIARY_AXE);
                 entries.add(SELECT_FORM_ITEM);
@@ -274,5 +280,15 @@ public class RegCustomItem {
             entries.add(NETHERITE_MORPHSCALE_ANKLET);
         });
          */
+    }
+
+    @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
+    public static void registerModelPredicates() {
+        net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry.register(
+                COMPOUND_KINETIC_BOW, new Identifier("pull"), (stack, world, entity, seed) ->
+                        entity != null && entity.getActiveItem() == stack ? (stack.getMaxUseTime() - entity.getItemUseTimeLeft()) / 20.0f : 0.0f);
+        net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry.register(
+                COMPOUND_KINETIC_BOW, new Identifier("pulling"), (stack, world, entity, seed) ->
+                        entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0f : 0.0f);
     }
 }

@@ -1,0 +1,51 @@
+{
+  "type": "apoli:action_on_item_use",
+  "trigger": "instant",
+  "priority": 0,
+  "item_condition": {
+    "type": "apoli:ingredient",
+    "ingredient": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "item_action": {
+    "type": "apoli:consume",
+    "amount": 1
+  },
+  "entity_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "apoli:apply_effect",
+        "effect": {
+          "effect": "minecraft:absorption",
+          "duration": 1200,
+          "amplifier": 0
+        }
+      },
+      {
+        "type": "apoli:apply_effect",
+        "effect": {
+          "effect": "minecraft:resistance",
+          "duration": 1200,
+          "amplifier": 0
+        }
+      },
+      {
+        "type": "shape-shifter-curse:set_item_cooldown",
+        "item": "minecraft:iron_ingot",
+        "cooldown": 5
+      },
+      {
+        "type": "shape-shifter-curse:set_item_cooldown",
+        "item": "minecraft:diamond",
+        "cooldown": 5
+      }
+    ]
+  },
+  "condition": {
+    "type": "shape-shifter-curse:is_item_in_cooldown",
+    "item": "minecraft:iron_ingot",
+    "inverted": true
+  }
+}

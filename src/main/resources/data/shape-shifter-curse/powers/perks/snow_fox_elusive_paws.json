@@ -1,0 +1,11 @@
+{
+  "name": "power.shape-shifter-curse.perks.snow_fox_elusive_paws.name",
+  "description": "power.shape-shifter-curse.perks.snow_fox_elusive_paws.description",
+  "hidden": true,
+  "type": "apoli:attribute",
+  "modifier": {
+    "attribute": "reach-entity-attributes:reach",
+    "operation": "multiply_total",
+    "value": 0.5
+  }
+}

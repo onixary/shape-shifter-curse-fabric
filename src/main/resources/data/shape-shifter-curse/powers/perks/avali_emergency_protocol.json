@@ -1,0 +1,82 @@
+{
+  "type": "apoli:multiple",
+  "cooldown": {
+    "type": "apoli:resource",
+    "min": 0,
+    "max": 12000,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "tick": {
+    "type": "apoli:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "apoli:if_else",
+      "condition": {
+        "type": "apoli:resource",
+        "resource": "shape-shifter-curse:perks/avali_emergency_protocol_cooldown",
+        "comparison": ">",
+        "compare_to": 0
+      },
+      "if_action": {
+        "type": "apoli:change_resource",
+        "resource": "shape-shifter-curse:perks/avali_emergency_protocol_cooldown",
+        "change": -1
+      },
+      "else_action": {
+        "type": "apoli:if_else",
+        "condition": {
+          "type": "apoli:and",
+          "conditions": [
+            {
+              "type": "apoli:health",
+              "comparison": ">",
+              "compare_to": 0
+            },
+            {
+              "type": "apoli:health",
+              "comparison": "<=",
+              "compare_to": 6
+            }
+          ]
+        },
+        "if_action": {
+          "type": "apoli:and",
+          "actions": [
+            {
+              "type": "apoli:set_resource",
+              "resource": "shape-shifter-curse:perks/avali_emergency_protocol_cooldown",
+              "value": 12000
+            },
+            {
+              "type": "apoli:apply_effect",
+              "effect": {
+                "effect": "minecraft:speed",
+                "duration": 200,
+                "amplifier": 1
+              }
+            },
+            {
+              "type": "apoli:apply_effect",
+              "effect": {
+                "effect": "minecraft:resistance",
+                "duration": 200,
+                "amplifier": 1
+              }
+            },
+            {
+              "type": "apoli:apply_effect",
+              "effect": {
+                "effect": "minecraft:absorption",
+                "duration": 200,
+                "amplifier": 1
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

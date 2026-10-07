@@ -1,0 +1,32 @@
+{
+  "type": "apoli:multiple",
+  "melee": {
+    "type": "shape-shifter-curse:action_on_combat_hit",
+    "event": "non_critical_melee",
+    "bonus_damage": 4,
+    "bientity_action": {
+      "type": "apoli:and",
+      "actions": []
+    }
+  },
+  "arrows": {
+    "type": "apoli:modify_projectile_damage",
+    "damage_condition": {
+      "type": "apoli:or",
+      "conditions": [
+        {
+          "type": "apoli:projectile",
+          "projectile": "minecraft:arrow"
+        },
+        {
+          "type": "apoli:projectile",
+          "projectile": "minecraft:spectral_arrow"
+        }
+      ]
+    },
+    "modifier": {
+      "operation": "add_base_late",
+      "value": -3
+    }
+  }
+}

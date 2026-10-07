@@ -1,0 +1,18 @@
+{
+  "type": "apoli:action_over_time",
+  "interval": 10,
+  "entity_action": {
+    "type": "apoli:apply_effect",
+    "effect": {
+      "effect": "minecraft:slowness",
+      "duration": 600,
+      "amplifier": 1
+    }
+  },
+  "condition": {
+    "type": "apoli:fluid_height",
+    "fluid": "minecraft:water",
+    "comparison": ">",
+    "compare_to": 0
+  }
+}

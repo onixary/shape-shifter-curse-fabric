@@ -9,7 +9,9 @@
       "xp": 0,
       "icon": "shape-shifter-curse:textures/perk/fallback.png",
       "add": [],
-      "remove": []
+      "remove": [],
+      "nameKey": "ssc_perk.shape-shifter-curse.snowfox_root.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.snowfox_root.desc"
     },
     {
       "id": "shape-shifter-curse:bat_posture_1",
@@ -234,7 +236,7 @@
     {
       "id": "shape-shifter-curse:axolotl_collect_water",
       "name": "集水术",
-      "description": "主动技能2：对周围4×4格、高3格范围敌人造成10点伤害，向上并向自己击飞；每个成功命中的敌人返还30湿润度。冷却30秒。",
+      "description": "按住主动技能键2，以蓝色描边显示周围6×6范围内的敌人；松开造成10点伤害，将命中敌人向上并向远离自身的方向击飞，每命中一个敌人回复30湿润度。冷却30秒。",
       "nameKey": "ssc_perk.shape-shifter-curse.axolotl_collect_water.name",
       "descriptionKey": "ssc_perk.shape-shifter-curse.axolotl_collect_water.desc",
       "xp": 0,
@@ -251,7 +253,7 @@
     {
       "id": "shape-shifter-curse:axolotl_propulsion_efficiency",
       "name": "水流推进效率",
-      "description": "水下水流推进每次消耗1湿润度。",
+      "description": "陆地疾跑跳跃时的水流推进每次消耗1湿润度。",
       "nameKey": "ssc_perk.shape-shifter-curse.axolotl_propulsion_efficiency.name",
       "descriptionKey": "ssc_perk.shape-shifter-curse.axolotl_propulsion_efficiency.desc",
       "xp": 100,
@@ -260,7 +262,7 @@
         "shape-shifter-curse:perks/axolotl_propulsion_efficiency"
       ],
       "remove": [
-        "shape-shifter-curse:form_axolotl_2_water_spurt"
+        "shape-shifter-curse:form_axolotl_3_sprinting_jump"
       ]
     },
     {
@@ -574,6 +576,609 @@
       "itemCost": {
         "item": "shape-shifter-curse:glint_prism",
         "amount": 1
+      }
+    },
+    {
+      "id": "shape-shifter-curse:snow_fox_revenge",
+      "name": "复仇冲动",
+      "description": "对灾厄村民与女巫的攻击伤害提高30%。",
+      "nameKey": "ssc_perk.shape-shifter-curse.snow_fox_revenge.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.snow_fox_revenge.desc",
+      "xp": 200,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/snow_fox_revenge"
+      ],
+      "remove": []
+    },
+    {
+      "id": "shape-shifter-curse:snow_fox_elusive_paws",
+      "name": "迷踪脚爪",
+      "description": "方块交互范围变为1.5倍。",
+      "nameKey": "ssc_perk.shape-shifter-curse.snow_fox_elusive_paws.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.snow_fox_elusive_paws.desc",
+      "xp": 75,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/snow_fox_elusive_paws"
+      ],
+      "remove": []
+    },
+    {
+      "id": "shape-shifter-curse:snow_fox_air_jump",
+      "name": "踏空",
+      "description": "每次腾空可额外按一次跳跃键向上跳跃，不受三连跳加成，也不计入三连跳次数。",
+      "nameKey": "ssc_perk.shape-shifter-curse.snow_fox_air_jump.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.snow_fox_air_jump.desc",
+      "xp": 100,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/snow_fox_air_jump"
+      ],
+      "remove": []
+    },
+    {
+      "id": "shape-shifter-curse:snow_fox_frost_dive",
+      "name": "冰霜俯冲",
+      "description": "空中按技能键2消耗2饥饿值垂直俯冲、灭火并获得10秒霜爪。下降超过4格落地时，对4格内敌人造成6伤害和5秒迟缓Ⅲ。俯冲免摔伤且不能被向上技能打断，冷却8秒。",
+      "nameKey": "ssc_perk.shape-shifter-curse.snow_fox_frost_dive.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.snow_fox_frost_dive.desc",
+      "xp": 0,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/snow_fox_frost_dive"
+      ],
+      "remove": [],
+      "itemCost": {
+        "item": "shape-shifter-curse:glint_prism",
+        "amount": 2
+      }
+    },
+    {
+      "id": "shape-shifter-curse:snow_fox_cold_whirlwind_1",
+      "name": "冷卷风1",
+      "description": "空中按技能键1消耗3饥饿值向上跃升并灭火，冷却5秒。",
+      "nameKey": "ssc_perk.shape-shifter-curse.snow_fox_cold_whirlwind_1.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.snow_fox_cold_whirlwind_1.desc",
+      "xp": 0,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/snow_fox_cold_whirlwind_1"
+      ],
+      "remove": [],
+      "itemCost": {
+        "item": "shape-shifter-curse:glint_prism",
+        "amount": 1
+      }
+    },
+    {
+      "id": "shape-shifter-curse:snow_fox_cold_whirlwind_2",
+      "name": "冷卷风2",
+      "description": "空中按技能键1消耗3饥饿值向上跃升并灭火，冷却5秒。推力增强，并获得5秒伤害吸收Ⅱ。",
+      "nameKey": "ssc_perk.shape-shifter-curse.snow_fox_cold_whirlwind_2.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.snow_fox_cold_whirlwind_2.desc",
+      "xp": 0,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/snow_fox_cold_whirlwind_2"
+      ],
+      "remove": [
+        "shape-shifter-curse:perks/snow_fox_cold_whirlwind_1"
+      ],
+      "itemCost": {
+        "item": "shape-shifter-curse:glint_prism",
+        "amount": 2
+      }
+    },
+    {
+      "id": "shape-shifter-curse:snow_fox_fire_training_1",
+      "name": "避火训练1",
+      "description": "靠近岩浆与篝火时不再因形态弱点扣血。",
+      "nameKey": "ssc_perk.shape-shifter-curse.snow_fox_fire_training_1.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.snow_fox_fire_training_1.desc",
+      "xp": 100,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [],
+      "remove": [
+        "shape-shifter-curse:form_snow_fox_3_near_lava_damage",
+        "shape-shifter-curse:form_snow_fox_3_near_fire_damage"
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:snow_fox_cold_recovery_1",
+      "name": "冷气恢复1",
+      "description": "免疫冻结伤害；在细雪中每3秒恢复2生命值。",
+      "nameKey": "ssc_perk.shape-shifter-curse.snow_fox_cold_recovery_1.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.snow_fox_cold_recovery_1.desc",
+      "xp": 100,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/snow_fox_cold_recovery_1"
+      ],
+      "remove": []
+    },
+    {
+      "id": "shape-shifter-curse:snow_fox_cold_recovery_2",
+      "name": "冷气恢复2",
+      "description": "潜行站在雪块、冰、浮冰或霜冰上时，额外每3秒恢复1生命值。",
+      "nameKey": "ssc_perk.shape-shifter-curse.snow_fox_cold_recovery_2.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.snow_fox_cold_recovery_2.desc",
+      "xp": 100,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/snow_fox_cold_recovery_2"
+      ],
+      "remove": []
+    },
+    {
+      "id": "shape-shifter-curse:snow_fox_fire_training_2",
+      "name": "避火训练2",
+      "description": "着火伤害不再翻倍，仍不会自然熄灭。",
+      "nameKey": "ssc_perk.shape-shifter-curse.snow_fox_fire_training_2.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.snow_fox_fire_training_2.desc",
+      "xp": 100,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [],
+      "remove": [
+        "shape-shifter-curse:form_snow_fox_3_burn_damage_up"
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:anubis_wolf_pack_response_1",
+      "name": "狼群响应Ⅰ",
+      "description": "通常召唤冷却缩短至21秒；每只狼灵死亡时回复主人2点生命值。",
+      "nameKey": "ssc_perk.shape-shifter-curse.anubis_wolf_pack_response_1.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.anubis_wolf_pack_response_1.desc",
+      "xp": 100,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/anubis_wolf_pack_response_1",
+        "shape-shifter-curse:perks/anubis_wolf_summoning_1"
+      ],
+      "remove": [
+        "shape-shifter-curse:form_anubis_wolf_3_summon_wolf_on_hit",
+        "shape-shifter-curse:form_anubis_wolf_3_summon_wolf_when_hit"
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:anubis_wolf_soul_excitation",
+      "name": "魂体激发",
+      "description": "技能键1：获得10秒凋零Ⅰ，并额外召唤一只狼灵。召唤不受上限阻止，但仍占名额。独立冷却30秒。",
+      "nameKey": "ssc_perk.shape-shifter-curse.anubis_wolf_soul_excitation.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.anubis_wolf_soul_excitation.desc",
+      "xp": 0,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/anubis_wolf_soul_excitation"
+      ],
+      "remove": [],
+      "itemCost": {
+        "item": "shape-shifter-curse:glint_prism",
+        "amount": 2
+      }
+    },
+    {
+      "id": "shape-shifter-curse:anubis_wolf_pack_response_2",
+      "name": "狼群响应Ⅱ",
+      "description": "通常召唤上限提高至3只，攻击敌人时尝试召唤3只狼灵。",
+      "nameKey": "ssc_perk.shape-shifter-curse.anubis_wolf_pack_response_2.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.anubis_wolf_pack_response_2.desc",
+      "xp": 200,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/anubis_wolf_summoning_2"
+      ],
+      "remove": [
+        "shape-shifter-curse:perks/anubis_wolf_summoning_1",
+        "shape-shifter-curse:form_anubis_wolf_3_summon_wolf_on_hit",
+        "shape-shifter-curse:form_anubis_wolf_3_summon_wolf_when_hit"
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:anubis_wolf_pack_amplification",
+      "name": "狼群增幅",
+      "description": "召唤的狼灵获得30秒力量Ⅰ。",
+      "nameKey": "ssc_perk.shape-shifter-curse.anubis_wolf_pack_amplification.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.anubis_wolf_pack_amplification.desc",
+      "xp": 0,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/anubis_wolf_pack_amplification"
+      ],
+      "remove": [],
+      "itemCost": {
+        "item": "shape-shifter-curse:glint_prism",
+        "amount": 2
+      }
+    },
+    {
+      "id": "shape-shifter-curse:anubis_wolf_wither_tolerance_1",
+      "name": "凋零耐受Ⅰ",
+      "description": "自身凋零伤害间隔变为1.5倍：Ⅰ级3秒，Ⅱ级1.5秒。",
+      "nameKey": "ssc_perk.shape-shifter-curse.anubis_wolf_wither_tolerance_1.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.anubis_wolf_wither_tolerance_1.desc",
+      "xp": 100,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/anubis_wolf_wither_tolerance_1"
+      ],
+      "remove": []
+    },
+    {
+      "id": "shape-shifter-curse:anubis_wolf_wither_tolerance_2",
+      "name": "凋零耐受Ⅱ",
+      "description": "自身凋零伤害间隔变为2倍：Ⅰ级4秒，Ⅱ级2秒。",
+      "nameKey": "ssc_perk.shape-shifter-curse.anubis_wolf_wither_tolerance_2.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.anubis_wolf_wither_tolerance_2.desc",
+      "xp": 200,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/anubis_wolf_wither_tolerance_2"
+      ],
+      "remove": [
+        "shape-shifter-curse:perks/anubis_wolf_wither_tolerance_1"
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:anubis_wolf_soul_recall",
+      "name": "魂体回收",
+      "description": "技能键2：清除自身凋零，并杀死当前召唤的所有狼灵。冷却10秒。",
+      "nameKey": "ssc_perk.shape-shifter-curse.anubis_wolf_soul_recall.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.anubis_wolf_soul_recall.desc",
+      "xp": 0,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/anubis_wolf_soul_recall"
+      ],
+      "remove": [],
+      "itemCost": {
+        "item": "shape-shifter-curse:glint_prism",
+        "amount": 1
+      }
+    },
+    {
+      "id": "shape-shifter-curse:anubis_wolf_undead_discernment",
+      "name": "亡灵识破",
+      "description": "移除对亡灵生物的伤害削弱。",
+      "nameKey": "ssc_perk.shape-shifter-curse.anubis_wolf_undead_discernment.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.anubis_wolf_undead_discernment.desc",
+      "xp": 200,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [],
+      "remove": [
+        "shape-shifter-curse:form_anubis_wolf_3_undead_damage_down"
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:spider_four_legged_adaptation",
+      "name": "四足适应",
+      "description": "走路与奔跑的移动速度惩罚由20%降低至10%。",
+      "nameKey": "ssc_perk.shape-shifter-curse.spider_four_legged_adaptation.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.spider_four_legged_adaptation.desc",
+      "xp": 100,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/spider_four_legged_adaptation"
+      ],
+      "remove": [
+        "shape-shifter-curse:form_spider_3_speed_down"
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:spider_cocoon_digestion_1",
+      "name": "茧缚消化Ⅰ",
+      "description": "击杀茧缚生物掉落流食囊的概率提高至55%。",
+      "nameKey": "ssc_perk.shape-shifter-curse.spider_cocoon_digestion_1.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.spider_cocoon_digestion_1.desc",
+      "xp": 100,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/spider_cocoon_digestion_1"
+      ],
+      "remove": []
+    },
+    {
+      "id": "shape-shifter-curse:spider_cocoon_digestion_2",
+      "name": "茧缚消化Ⅱ",
+      "description": "击杀茧缚生物掉落流食囊的概率提高至65%。",
+      "nameKey": "ssc_perk.shape-shifter-curse.spider_cocoon_digestion_2.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.spider_cocoon_digestion_2.desc",
+      "xp": 100,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/spider_cocoon_digestion_2"
+      ],
+      "remove": [
+        "shape-shifter-curse:perks/spider_cocoon_digestion_1"
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:spider_bridge_weaver",
+      "name": "织桥者",
+      "description": "织桥三档蓄力缩短至14/28/42 tick，每档总蛛网消耗近似不变。",
+      "nameKey": "ssc_perk.shape-shifter-curse.spider_bridge_weaver.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.spider_bridge_weaver.desc",
+      "xp": 150,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/spider_bridge_weaver"
+      ],
+      "remove": [
+        "shape-shifter-curse:form_spider_3_web_bridge"
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:spider_perceptual_web",
+      "name": "悬丝诊脉",
+      "description": "位于桥梁蛛网中或其上时，以仅自己可见的白色轮廓透视16格内的所有生物。",
+      "nameKey": "ssc_perk.shape-shifter-curse.spider_perceptual_web.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.spider_perceptual_web.desc",
+      "xp": 150,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/spider_perceptual_web"
+      ],
+      "remove": []
+    },
+    {
+      "id": "shape-shifter-curse:spider_rapid_spinner",
+      "name": "快速纺器",
+      "description": "蛛丝弹三档蓄力缩短至14/28/42 tick，每档总蛛网消耗近似不变。",
+      "nameKey": "ssc_perk.shape-shifter-curse.spider_rapid_spinner.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.spider_rapid_spinner.desc",
+      "xp": 200,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/spider_rapid_spinner"
+      ],
+      "remove": [
+        "shape-shifter-curse:form_spider_3_web_projectile"
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:spider_stabilized_projectile",
+      "name": "丝弹稳定化",
+      "description": "在背包内拿取蛛网右键另一个蛛网，消耗2个蛛网与10蛛网值制作丝弹。任何人可使用，效果等于满蓄力丝弹，不受箭毒纺锤影响。",
+      "nameKey": "ssc_perk.shape-shifter-curse.spider_stabilized_projectile.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.spider_stabilized_projectile.desc",
+      "xp": 0,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/spider_stabilized_projectile"
+      ],
+      "remove": [],
+      "itemCost": {
+        "item": "shape-shifter-curse:glint_prism",
+        "amount": 2
+      }
+    },
+    {
+      "id": "shape-shifter-curse:spider_silk_secretion_1",
+      "name": "蛛丝分泌Ⅰ",
+      "description": "蛛网值自然回复提高至0.35/秒。",
+      "nameKey": "ssc_perk.shape-shifter-curse.spider_silk_secretion_1.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.spider_silk_secretion_1.desc",
+      "xp": 150,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/spider_silk_secretion_1"
+      ],
+      "remove": [
+        "shape-shifter-curse:form_spider_3_mana_recover"
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:spider_silk_secretion_2",
+      "name": "蛛丝分泌Ⅱ",
+      "description": "蛛网值自然回复提高至0.5/秒。",
+      "nameKey": "ssc_perk.shape-shifter-curse.spider_silk_secretion_2.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.spider_silk_secretion_2.desc",
+      "xp": 300,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/spider_silk_secretion_2"
+      ],
+      "remove": [
+        "shape-shifter-curse:form_spider_3_mana_recover",
+        "shape-shifter-curse:perks/spider_silk_secretion_1"
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:spider_silk_grapple",
+      "name": "牵丝飞荡",
+      "description": "按住技能键3预付10蛛网值，预览12格内视线表面落点；松开后以1.5格/tick飞向表面法向外一格处。无有效落点返还消耗，成功释放后冷却5秒。",
+      "nameKey": "ssc_perk.shape-shifter-curse.spider_silk_grapple.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.spider_silk_grapple.desc",
+      "xp": 0,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/spider_silk_grapple"
+      ],
+      "remove": [],
+      "itemCost": {
+        "item": "shape-shifter-curse:glint_prism",
+        "amount": 1
+      }
+    },
+    {
+      "id": "shape-shifter-curse:marbled_polecat_double_air_jump",
+      "name": "双重踏空",
+      "description": "每次离地可按空格踏空两次，向上速度0.6；落地重置，不计入连跳。",
+      "nameKey": "ssc_perk.shape-shifter-curse.marbled_polecat_double_air_jump.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.marbled_polecat_double_air_jump.desc",
+      "xp": 150,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/marbled_polecat_double_air_jump"
+      ],
+      "remove": []
+    },
+    {
+      "id": "shape-shifter-curse:marbled_polecat_precise_momentum",
+      "name": "精准势能",
+      "description": "下落暴击的额外伤害倍率上限由2提高至3。",
+      "nameKey": "ssc_perk.shape-shifter-curse.marbled_polecat_precise_momentum.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.marbled_polecat_precise_momentum.desc",
+      "xp": 200,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/marbled_polecat_precise_momentum"
+      ],
+      "remove": [
+        "shape-shifter-curse:form_snow_fox_3_enhanced_falling_attack"
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:marbled_polecat_leaping_dash",
+      "name": "冲跃",
+      "description": "在地面且饥饿值大于6时，技能键1向前冲跃：水平速度1.2、向上速度0.6。不消耗饥饿值，冷却5秒。",
+      "nameKey": "ssc_perk.shape-shifter-curse.marbled_polecat_leaping_dash.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.marbled_polecat_leaping_dash.desc",
+      "xp": 0,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/marbled_polecat_leaping_dash"
+      ],
+      "remove": [],
+      "itemCost": {
+        "item": "shape-shifter-curse:glint_prism",
+        "amount": 1
+      }
+    },
+    {
+      "id": "shape-shifter-curse:marbled_polecat_hunter_metabolism",
+      "name": "猎手代谢",
+      "description": "食用生肉额外回复4点饥饿值和5.6点饱和度，并免疫饥饿效果。",
+      "nameKey": "ssc_perk.shape-shifter-curse.marbled_polecat_hunter_metabolism.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.marbled_polecat_hunter_metabolism.desc",
+      "xp": 75,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/marbled_polecat_hunter_metabolism"
+      ],
+      "remove": []
+    },
+    {
+      "id": "shape-shifter-curse:marbled_polecat_combat_noodle",
+      "name": "战斗面条",
+      "description": "非暴击的主目标近战攻击额外造成4点伤害；射出的箭矢伤害降低3点。",
+      "nameKey": "ssc_perk.shape-shifter-curse.marbled_polecat_combat_noodle.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.marbled_polecat_combat_noodle.desc",
+      "xp": 150,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/marbled_polecat_combat_noodle"
+      ],
+      "remove": []
+    },
+    {
+      "id": "shape-shifter-curse:marbled_polecat_keen_scent",
+      "name": "灵敏嗅觉",
+      "description": "潜行静止3秒后，以橙色轮廓透视8格内实体；移动或结束潜行立即失效。",
+      "nameKey": "ssc_perk.shape-shifter-curse.marbled_polecat_keen_scent.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.marbled_polecat_keen_scent.desc",
+      "xp": 150,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/marbled_polecat_keen_scent"
+      ],
+      "remove": []
+    },
+    {
+      "id": "shape-shifter-curse:avali_nano_coating_1",
+      "name": "临时纳米镀层Ⅰ",
+      "description": "右键使用铁锭，消耗1块铁锭，获得60秒伤害吸收Ⅰ和抗性提升Ⅰ。",
+      "nameKey": "ssc_perk.shape-shifter-curse.avali_nano_coating_1.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.avali_nano_coating_1.desc",
+      "xp": 150,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/avali_nano_coating_1"
+      ],
+      "remove": []
+    },
+    {
+      "id": "shape-shifter-curse:avali_nano_coating_2",
+      "name": "临时纳米镀层Ⅱ",
+      "description": "新增钻石用法：消耗1颗钻石，获得60秒伤害吸收Ⅱ、抗性提升Ⅱ和30秒抗火；保留铁锭用法。",
+      "nameKey": "ssc_perk.shape-shifter-curse.avali_nano_coating_2.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.avali_nano_coating_2.desc",
+      "xp": 200,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/avali_nano_coating_2"
+      ],
+      "remove": []
+    },
+    {
+      "id": "shape-shifter-curse:avali_environmental_protection_1",
+      "name": "环境防护系统Ⅰ",
+      "description": "进水导致的迟缓Ⅱ持续时间缩短至1秒。",
+      "nameKey": "ssc_perk.shape-shifter-curse.avali_environmental_protection_1.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.avali_environmental_protection_1.desc",
+      "xp": 75,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/avali_environmental_protection_1"
+      ],
+      "remove": [
+        "shape-shifter-curse:sub_form_avali_water_slowness"
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:avali_environmental_protection_2",
+      "name": "环境防护系统Ⅱ",
+      "description": "移除炎热环境下最大生命值降低6点的惩罚。",
+      "nameKey": "ssc_perk.shape-shifter-curse.avali_environmental_protection_2.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.avali_environmental_protection_2.desc",
+      "xp": 150,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [],
+      "remove": [
+        "shape-shifter-curse:sub_form_avali_hot_health_down"
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:avali_tool_modification_1",
+      "name": "工具改造Ⅰ",
+      "description": "在背包内用煤炭块右键金剑，消耗两者制作全新的石墨烯薄刃：攻击力8、攻速1.6、耐久128。不保留附魔。",
+      "nameKey": "ssc_perk.shape-shifter-curse.avali_tool_modification_1.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.avali_tool_modification_1.desc",
+      "xp": 200,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/avali_tool_modification_1"
+      ],
+      "remove": []
+    },
+    {
+      "id": "shape-shifter-curse:avali_tool_modification_2",
+      "name": "工具改造Ⅱ",
+      "description": "在背包内用钻石右键弓，消耗两者制作全新的复合动能弓：箭矢基础伤害提高25%，耐久768。不保留附魔。",
+      "nameKey": "ssc_perk.shape-shifter-curse.avali_tool_modification_2.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.avali_tool_modification_2.desc",
+      "xp": 200,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/avali_tool_modification_2"
+      ],
+      "remove": []
+    },
+    {
+      "id": "shape-shifter-curse:avali_emergency_protocol",
+      "name": "紧急救援协议",
+      "description": "生命值不超过6时，获得10秒迅捷Ⅱ、抗性提升Ⅱ和伤害吸收Ⅱ。冷却10分钟；冷却结束后仍低血量即可再次触发。",
+      "nameKey": "ssc_perk.shape-shifter-curse.avali_emergency_protocol.name",
+      "descriptionKey": "ssc_perk.shape-shifter-curse.avali_emergency_protocol.desc",
+      "xp": 0,
+      "icon": "shape-shifter-curse:textures/perk/fallback.png",
+      "add": [
+        "shape-shifter-curse:perks/avali_emergency_protocol"
+      ],
+      "remove": [],
+      "itemCost": {
+        "item": "shape-shifter-curse:glint_prism",
+        "amount": 2
       }
     }
   ],
@@ -894,6 +1499,347 @@
           "perk": "shape-shifter-curse:familiar_fox_potion_charms",
           "tier": 3,
           "y": 320,
+          "requires": []
+        }
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:snow_fox_3_perk_tree",
+      "forms": [
+        "shape-shifter-curse:form_snow_fox_3"
+      ],
+      "maxTier": 4,
+      "nodes": [
+        {
+          "perk": "shape-shifter-curse:snow_fox_revenge",
+          "tier": 2,
+          "y": 0,
+          "requires": []
+        },
+        {
+          "perk": "shape-shifter-curse:snow_fox_elusive_paws",
+          "tier": 1,
+          "y": 80,
+          "requires": []
+        },
+        {
+          "perk": "shape-shifter-curse:snow_fox_air_jump",
+          "tier": 2,
+          "y": 80,
+          "requires": [
+            "shape-shifter-curse:snow_fox_elusive_paws"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:snow_fox_frost_dive",
+          "tier": 4,
+          "y": 80,
+          "requires": [
+            "shape-shifter-curse:snow_fox_air_jump"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:snow_fox_cold_whirlwind_1",
+          "tier": 2,
+          "y": 160,
+          "requires": [
+            "shape-shifter-curse:snow_fox_elusive_paws"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:snow_fox_cold_whirlwind_2",
+          "tier": 3,
+          "y": 160,
+          "requires": [
+            "shape-shifter-curse:snow_fox_cold_whirlwind_1"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:snow_fox_fire_training_1",
+          "tier": 1,
+          "y": 240,
+          "requires": []
+        },
+        {
+          "perk": "shape-shifter-curse:snow_fox_cold_recovery_1",
+          "tier": 2,
+          "y": 240,
+          "requires": [
+            "shape-shifter-curse:snow_fox_fire_training_1"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:snow_fox_cold_recovery_2",
+          "tier": 3,
+          "y": 240,
+          "requires": [
+            "shape-shifter-curse:snow_fox_cold_recovery_1"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:snow_fox_fire_training_2",
+          "tier": 2,
+          "y": 320,
+          "requires": [
+            "shape-shifter-curse:snow_fox_fire_training_1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:anubis_wolf_3_perk_tree",
+      "forms": [
+        "shape-shifter-curse:form_anubis_wolf_3"
+      ],
+      "maxTier": 4,
+      "nodes": [
+        {
+          "perk": "shape-shifter-curse:anubis_wolf_pack_response_1",
+          "tier": 1,
+          "y": 0,
+          "requires": []
+        },
+        {
+          "perk": "shape-shifter-curse:anubis_wolf_soul_excitation",
+          "tier": 2,
+          "y": 0,
+          "requires": [
+            "shape-shifter-curse:anubis_wolf_pack_response_1"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:anubis_wolf_pack_response_2",
+          "tier": 3,
+          "y": 80,
+          "requires": [
+            "shape-shifter-curse:anubis_wolf_pack_response_1"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:anubis_wolf_pack_amplification",
+          "tier": 4,
+          "y": 80,
+          "requires": [
+            "shape-shifter-curse:anubis_wolf_pack_response_2"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:anubis_wolf_wither_tolerance_1",
+          "tier": 1,
+          "y": 160,
+          "requires": []
+        },
+        {
+          "perk": "shape-shifter-curse:anubis_wolf_wither_tolerance_2",
+          "tier": 3,
+          "y": 160,
+          "requires": [
+            "shape-shifter-curse:anubis_wolf_wither_tolerance_1"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:anubis_wolf_soul_recall",
+          "tier": 2,
+          "y": 240,
+          "requires": [
+            "shape-shifter-curse:anubis_wolf_wither_tolerance_1"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:anubis_wolf_undead_discernment",
+          "tier": 1,
+          "y": 320,
+          "requires": []
+        }
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:spider_3_perk_tree",
+      "forms": [
+        "shape-shifter-curse:form_spider_3"
+      ],
+      "maxTier": 4,
+      "nodes": [
+        {
+          "perk": "shape-shifter-curse:spider_four_legged_adaptation",
+          "tier": 1,
+          "y": 0,
+          "requires": []
+        },
+        {
+          "perk": "shape-shifter-curse:spider_cocoon_digestion_1",
+          "tier": 1,
+          "y": 80,
+          "requires": []
+        },
+        {
+          "perk": "shape-shifter-curse:spider_cocoon_digestion_2",
+          "tier": 2,
+          "y": 80,
+          "requires": [
+            "shape-shifter-curse:spider_cocoon_digestion_1"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:spider_bridge_weaver",
+          "tier": 2,
+          "y": 160,
+          "requires": []
+        },
+        {
+          "perk": "shape-shifter-curse:spider_perceptual_web",
+          "tier": 3,
+          "y": 160,
+          "requires": [
+            "shape-shifter-curse:spider_bridge_weaver"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:spider_rapid_spinner",
+          "tier": 3,
+          "y": 240,
+          "requires": [
+            "shape-shifter-curse:spider_bridge_weaver"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:spider_stabilized_projectile",
+          "tier": 4,
+          "y": 240,
+          "requires": [
+            "shape-shifter-curse:spider_rapid_spinner"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:spider_silk_secretion_1",
+          "tier": 1,
+          "y": 320,
+          "requires": []
+        },
+        {
+          "perk": "shape-shifter-curse:spider_silk_secretion_2",
+          "tier": 3,
+          "y": 320,
+          "requires": [
+            "shape-shifter-curse:spider_silk_secretion_1"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:spider_silk_grapple",
+          "tier": 2,
+          "y": 400,
+          "requires": [
+            "shape-shifter-curse:spider_silk_secretion_1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:marbled_polecat_perk_tree",
+      "forms": [
+        "shape-shifter-curse:form_snow_fox_3_sub_marbled_polecat"
+      ],
+      "maxTier": 3,
+      "nodes": [
+        {
+          "perk": "shape-shifter-curse:marbled_polecat_double_air_jump",
+          "tier": 1,
+          "y": 0,
+          "requires": []
+        },
+        {
+          "perk": "shape-shifter-curse:marbled_polecat_precise_momentum",
+          "tier": 2,
+          "y": 0,
+          "requires": [
+            "shape-shifter-curse:marbled_polecat_double_air_jump"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:marbled_polecat_leaping_dash",
+          "tier": 3,
+          "y": 80,
+          "requires": [
+            "shape-shifter-curse:marbled_polecat_double_air_jump"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:marbled_polecat_hunter_metabolism",
+          "tier": 1,
+          "y": 160,
+          "requires": []
+        },
+        {
+          "perk": "shape-shifter-curse:marbled_polecat_combat_noodle",
+          "tier": 2,
+          "y": 160,
+          "requires": [
+            "shape-shifter-curse:marbled_polecat_hunter_metabolism"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:marbled_polecat_keen_scent",
+          "tier": 2,
+          "y": 240,
+          "requires": [
+            "shape-shifter-curse:marbled_polecat_hunter_metabolism"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shape-shifter-curse:avali_perk_tree",
+      "forms": [
+        "shape-shifter-curse:form_bat_3_sub_avali"
+      ],
+      "maxTier": 3,
+      "nodes": [
+        {
+          "perk": "shape-shifter-curse:avali_nano_coating_1",
+          "tier": 1,
+          "y": 0,
+          "requires": []
+        },
+        {
+          "perk": "shape-shifter-curse:avali_nano_coating_2",
+          "tier": 2,
+          "y": 0,
+          "requires": [
+            "shape-shifter-curse:avali_nano_coating_1"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:avali_environmental_protection_1",
+          "tier": 1,
+          "y": 80,
+          "requires": []
+        },
+        {
+          "perk": "shape-shifter-curse:avali_environmental_protection_2",
+          "tier": 2,
+          "y": 80,
+          "requires": [
+            "shape-shifter-curse:avali_environmental_protection_1"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:avali_tool_modification_1",
+          "tier": 2,
+          "y": 160,
+          "requires": []
+        },
+        {
+          "perk": "shape-shifter-curse:avali_tool_modification_2",
+          "tier": 3,
+          "y": 160,
+          "requires": [
+            "shape-shifter-curse:avali_tool_modification_1"
+          ]
+        },
+        {
+          "perk": "shape-shifter-curse:avali_emergency_protocol",
+          "tier": 3,
+          "y": 240,
           "requires": []
         }
       ]

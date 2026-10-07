@@ -53,9 +53,17 @@
         }
       },
       "bientity_action": {
-        "type": "apoli:add_velocity",
-        "z": -1.5,
-        "y": 0.5
+        "type": "apoli:and",
+        "actions": [
+          {
+            "type": "apoli:add_velocity",
+            "z": -1.5,
+            "y": 0.9
+          },
+          {
+
+          }
+        ]
       }
     },
     "tier0_cooldown": 100,
@@ -73,7 +81,7 @@
     },
     "bientity_condition": {
       "type": "shape-shifter-curse:raycast_target",
-      "distance": 10.0
+      "distance": 20.0
     }
   }
 }

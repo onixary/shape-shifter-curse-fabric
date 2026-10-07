@@ -1,0 +1,46 @@
+{
+  "name": "power.shape-shifter-curse.perks.snow_fox_revenge.name",
+  "description": "power.shape-shifter-curse.perks.snow_fox_revenge.description",
+  "hidden": true,
+  "type": "apoli:multiple",
+  "melee": {
+    "type": "apoli:modify_damage_dealt",
+    "target_condition": {
+      "type": "apoli:or",
+      "conditions": [
+        {
+          "type": "apoli:entity_group",
+          "group": "illager"
+        },
+        {
+          "type": "apoli:entity_type",
+          "entity_type": "minecraft:witch"
+        }
+      ]
+    },
+    "modifier": {
+      "operation": "multiply_total",
+      "value": 0.3
+    }
+  },
+  "projectile": {
+    "type": "apoli:modify_projectile_damage",
+    "target_condition": {
+      "type": "apoli:or",
+      "conditions": [
+        {
+          "type": "apoli:entity_group",
+          "group": "illager"
+        },
+        {
+          "type": "apoli:entity_type",
+          "entity_type": "minecraft:witch"
+        }
+      ]
+    },
+    "modifier": {
+      "operation": "multiply_total",
+      "value": 0.3
+    }
+  }
+}

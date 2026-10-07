@@ -15,6 +15,61 @@ import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.util.util.cost.ItemCost;
 
 public class FormPerkCheck {
+    @GameTest(templateName = FabricGameTest.EMPTY_STRUCTURE)
+    public void collectWaterReleaseAndLandPropulsion(TestContext c) {
+        var p=c.createMockSurvivalPlayer();
+        p.setPosition(c.getAbsolute(new net.minecraft.util.math.Vec3d(.5,1,.5)));p.setYaw(0);
+        var holder=PowerHolderComponent.KEY.get(p);
+        var chargeType=PowerTypeRegistry.get(id("perks/axolotl_collect_water_charge"));
+        var glowType=PowerTypeRegistry.get(id("perks/axolotl_collect_water_glow"));
+        holder.addPower(chargeType,SOURCE);holder.addPower(glowType,SOURCE);
+        var charge=(ChargePower)holder.getPower(chargeType);
+        var glow=(io.github.apace100.apoli.power.EntityGlowPower)holder.getPower(glowType);
+        var a=c.spawnEntity(EntityType.ZOMBIE,new net.minecraft.util.math.BlockPos(2,1,0));
+        var b=c.spawnEntity(EntityType.ZOMBIE,new net.minecraft.util.math.BlockPos(-2,1,0));
+        var far=c.spawnEntity(EntityType.ZOMBIE,new net.minecraft.util.math.BlockPos(5,1,0));
+        var friend=c.spawnEntity(EntityType.COW,new net.minecraft.util.math.BlockPos(0,1,2));
+        p.setAir(100);charge.onUse();charge.onUse();
+        c.assertTrue(glow.isActive() && glow.doesApply(a) && glow.doesApply(b),"Hold previews enemies on both sides");
+        c.assertTrue(!glow.doesApply(far) && !glow.doesApply(friend),"Preview excludes distant and friendly targets");
+        c.assertTrue(a.getHealth()==20 && p.getAir()==100,"Holding neither attacks nor refunds");
+        charge.fire(false);
+        c.assertTrue(a.getHealth()<20 && b.getHealth()<20 && far.getHealth()==20 && friend.getHealth()==10,"Release matches preview targets");
+        c.assertTrue(a.getVelocity().x>0 && b.getVelocity().x<0 && a.getVelocity().y>0,"Launches outward and upward");
+        c.assertTrue(p.getAir()==160 && charge.nowCooldown==600 && !glow.isActive(),"Thirty moisture per hit and thirty second cooldown");
+        charge.onUse();c.assertTrue(!charge.isCharging(),"Cooldown blocks restart");
+        var jumpType=PowerTypeRegistry.get(id("perks/axolotl_propulsion_efficiency"));holder.addPower(jumpType,SOURCE);
+        var jump=(ActionOnJumpPower)holder.getPower(jumpType);
+        c.setBlockState(new net.minecraft.util.math.BlockPos(0,0,0),net.minecraft.block.Blocks.STONE);
+        p.setOnGround(true);p.setSprinting(true);p.setVelocity(0,0,0);jump.executeAction();
+        c.assertTrue(p.getAir()==159 && p.getVelocity().z>.29,"Land sprint jump costs one moisture and pushes forward");
+        p.setSprinting(false);jump.executeAction();c.assertTrue(p.getAir()==159,"Ordinary jump does not spend moisture");
+        var perk=(NormalPerk)RegPerks.getPerk(id("axolotl_propulsion_efficiency"));
+        c.assertTrue(perk.powerRemove.contains(id("form_axolotl_3_sprinting_jump")) && !perk.powerRemove.contains(id("form_axolotl_2_water_spurt")),"Replaces land propulsion only");
+        a.discard();b.discard();far.discard();friend.discard();c.complete();
+    }
+    @GameTest(templateName = FabricGameTest.EMPTY_STRUCTURE)
+    public void independentSubformPerkTree(TestContext c) {
+        var parent = new net.onixary.shapeShifterCurseFabric.player_form.NormalForm(id("test_parent"))
+                .perkTree(id("parent_tree"));
+        var child = new net.onixary.shapeShifterCurseFabric.player_form.NormalSubForm(id("test_child"), parent);
+        c.assertTrue(child.getPerkTreeID().equals(RegPerks.EMPTY_PERK_TREE), "Unconfigured subform does not inherit parent tree");
+        child.perkTree(id("child_tree"));
+        c.assertTrue(child.getPerkTreeID().equals(id("child_tree")) && parent.getPerkTreeID().equals(id("parent_tree")), "Subform owns its configured tree");
+
+        var player = c.createMockCreativeServerPlayerInWorld();
+        var tree = RegPlayerForms.SNOW_FOX_3.getPerkTreeID();
+        net.onixary.shapeShifterCurseFabric.perk.PerkUtils.__addPerk(player, tree, id("snow_fox_revenge"));
+        net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils.setForm(player, RegPlayerForms.SNOW_FOX_3);
+        var power = PowerTypeRegistry.get(id("perks/snow_fox_revenge_melee"));
+        c.assertTrue(PowerHolderComponent.KEY.get(player).hasPower(power), "Master perk applies on master form");
+        net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils.setForm(player, RegPlayerForms.SNOW_FOX_3_SUB_MARBLED_POLECAT);
+        c.assertTrue(net.onixary.shapeShifterCurseFabric.perk.PerkUtils.getPlayerNowPerkTreeID(player).equals(id("marbled_polecat_perk_tree")), "Subform selects its own tree");
+        c.assertTrue(!PowerHolderComponent.KEY.get(player).hasPower(power), "Master perk power is removed on subform transition");
+        net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils.setForm(player, RegPlayerForms.SNOW_FOX_3);
+        c.assertTrue(PowerHolderComponent.KEY.get(player).hasPower(power), "Master unlocks are preserved when returning");
+        player.discard(); c.complete();
+    }
     private static Identifier id(String path) { return new Identifier("shape-shifter-curse", path); }
     private static final Identifier SOURCE = id("perk_check");
 
@@ -60,7 +115,7 @@ public class FormPerkCheck {
         context.assertTrue(glow.isActive() && glow.doesApply(near), "Preview chooses nearest living target");
         context.assertTrue(!glow.doesApply(far), "Near target occludes far target");
         charge.fire(false);
-        context.assertTrue(near.getVelocity().z < -1 && near.getVelocity().y > 0, "Apoli release pulls preview target upward");
+        context.assertTrue(Math.abs(near.getVelocity().z + 1) < 0.001 && Math.abs(near.getVelocity().y - 0.5) < 0.001, "Apoli release uses configured pull and upward velocity");
         context.assertTrue(far.getVelocity().lengthSquared() == 0, "Release only affects first target");
         context.assertTrue(!glow.isActive(), "Release clears glow condition");
         context.setBlockState(new net.minecraft.util.math.BlockPos(0, 2, 2), net.minecraft.block.Blocks.STONE);
@@ -113,7 +168,7 @@ public class FormPerkCheck {
             }
         }
         context.assertTrue(nodes == 26 && prisms == 8, "26 perks and 8 prism purchases");
-        context.assertTrue(RegPlayerForms.BAT_3_SUB_AVALI.getPerkTreeID().equals(id("bat_3_perk_tree")), "Avali inherits bat tree");
+        context.assertTrue(RegPlayerForms.BAT_3_SUB_AVALI.getPerkTreeID().equals(id("avali_perk_tree")), "Avali has its independent tree");
         var buyer = context.createMockSurvivalPlayer();
         buyer.addExperience(200);
         var cost = new net.onixary.shapeShifterCurseFabric.util.util.cost.BaseCost(

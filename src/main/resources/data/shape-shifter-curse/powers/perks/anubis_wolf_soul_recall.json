@@ -1,0 +1,23 @@
+{
+  "type": "apoli:active_self",
+  "key": {
+    "key": "key.shape-shifter-curse.active_skill_2",
+    "continuous": false
+  },
+  "cooldown": 200,
+  "hud_render": {
+    "should_render": false
+  },
+  "entity_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "apoli:clear_effect",
+        "effect": "minecraft:wither"
+      },
+      {
+        "type": "shape-shifter-curse:recall_wolf_minions"
+      }
+    ]
+  }
+}

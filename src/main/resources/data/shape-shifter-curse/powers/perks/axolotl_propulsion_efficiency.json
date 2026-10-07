@@ -1,49 +1,75 @@
 {
-  "name": "power.shape-shifter-curse.perks.axolotl_propulsion_efficiency.name",
-  "description": "power.shape-shifter-curse.perks.axolotl_propulsion_efficiency.description",
-  "hidden": true,
-  "type": "apoli:active_self",
+  "type": "shape-shifter-curse:action_on_jump",
   "entity_action": {
     "type": "apoli:and",
     "actions": [
       {
         "type": "apoli:add_velocity",
-        "z": 1.6,
-        "space": "local"
+        "z": 0.3,
+        "space": "local_horizontal_normalized"
+      },
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:entity.axolotl.splash",
+        "volume": 0.5,
+        "pitch": 0.8
       },
       {
         "type": "apoli:gain_air",
         "value": -1
+      },
+      {
+        "type": "apoli:spawn_particles",
+        "particle": "minecraft:rain",
+        "count": 16,
+        "speed": 0.0,
+        "force": true,
+        "spread": {
+          "x": 0.5,
+          "y": 0.5,
+          "z": 0.5
+        }
+      },
+      {
+        "type": "apoli:spawn_particles",
+        "particle": {
+          "type": "minecraft:dust",
+          "params": "0.11 0.18 0.69 2"
+        },
+        "count": 8,
+        "speed": 0.0,
+        "force": true,
+        "spread": {
+          "x": 0.5,
+          "y": 0.5,
+          "z": 0.5
+        }
       }
     ]
   },
-  "cooldown": 100,
-  "hud_render": {
-    "should_render": false
-  },
-  "key": {
-    "key": "key.sprint",
-    "continuous": false
-  },
-  "condition": {
+  "entity_condition": {
     "type": "apoli:and",
     "conditions": [
       {
-        "type": "apoli:and",
-        "conditions": [
-          {
-            "type": "apoli:fluid_height",
-            "fluid": "minecraft:water",
-            "comparison": ">=",
-            "compare_to": 1
-          }
-        ]
+        "type": "apoli:sprinting"
+      },
+      {
+        "type": "apoli:fluid_height",
+        "fluid": "minecraft:water",
+        "comparison": "<=",
+        "compare_to": 0
+      },
+      {
+        "type": "apoli:on_block"
       },
       {
         "type": "apoli:air",
-        "comparison": ">=",
-        "compare_to": 1
+        "comparison": ">",
+        "compare_to": 0
       }
     ]
-  }
+  },
+  "name": "power.shape-shifter-curse.perks.axolotl_propulsion_efficiency.name",
+  "description": "power.shape-shifter-curse.perks.axolotl_propulsion_efficiency.description",
+  "hidden": true
 }

@@ -41,6 +41,8 @@ public class EnchantmentHelperMixin {
             cir.setReturnValue(getLootingLevel(entity, cir.getReturnValue()));
         } else if (enchantment == Enchantments.SOUL_SPEED) {
             cir.setReturnValue(getSoulSpeedLevel(entity, cir.getReturnValue()));
+        } else if (enchantment == Enchantments.FROST_WALKER && entity.hasStatusEffect(net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects.FROST_CLAW)) {
+            cir.setReturnValue(Math.max(1, cir.getReturnValue()));
         }
     }
 

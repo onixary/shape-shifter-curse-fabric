@@ -163,8 +163,5 @@ public class NormalSubForm extends NormalForm implements ISubForm {
         return ISubForm.super.getFormLayer();
     }
 
-    @Override
-    public Identifier getPerkTreeID() {
-        return this.getMasterForm().getPerkTreeID();
-    }
+    // Perk trees use NormalForm's own configuration; only base powers inherit from the master.
 }

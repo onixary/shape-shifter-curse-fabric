@@ -5,6 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "plugin": "net.onixary.shapeShifterCurseFabric.mixin.plugin.MixinConfigPlugin",
   "mixins": [
+    "FrostMovementMixin",
+    "FrostFallDamageMixin",
     "PerkShieldBlockMixin",
     "BreathingUnderWaterMixin",
     "CancelEntityStepSoundMixin",
@@ -79,7 +81,9 @@
     "SU_MinecraftServerMixin",
     "integration.LodeStoneIntegrationMixin",
     "RecipeManagerMixin",
-    "ServerPlayNetworkHandlerMixin"
+    "ServerPlayNetworkHandlerMixin",
+    "WitherIntervalMixin",
+    "CompoundBowMixin"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",

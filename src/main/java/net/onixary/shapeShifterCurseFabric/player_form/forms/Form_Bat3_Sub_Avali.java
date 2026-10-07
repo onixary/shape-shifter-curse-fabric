@@ -41,6 +41,8 @@ public class Form_Bat3_Sub_Avali extends NormalSubForm implements ModifyCapeRend
         this.removePower(ShapeShifterCurseFabric.identifier("no_render_arm"));
         this.addPower(ShapeShifterCurseFabric.identifier("sub_form_avali_side_block_attach"));
         this.addPower(ShapeShifterCurseFabric.identifier("sub_form_avali_step_sound"));
+        this.addPower(ShapeShifterCurseFabric.identifier("sub_form_avali_water_slowness"));
+        this.addPower(ShapeShifterCurseFabric.identifier("sub_form_avali_hot_health_down"));
     }
 
     @Override

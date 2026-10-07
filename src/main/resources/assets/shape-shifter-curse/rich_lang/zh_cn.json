@@ -2913,27 +2913,19 @@
   "ssc_perk.shape-shifter-curse.axolotl_collect_water.name": [
     "集水术"
   ],
-  "ssc_perk.shape-shifter-curse.axolotl_collect_water.desc": [
-    "主动技能2：对周围4×4格、高3格范围敌人造成10点伤害，向上并向自己击飞；每个成功命中的敌人返还30湿润度。冷却30秒。"
-  ],
+  "ssc_perk.shape-shifter-curse.axolotl_collect_water.desc": ["按住主动技能键2，以蓝色描边显示周围6×6范围内的敌人；松开造成10点伤害，将命中敌人向上并向远离自身的方向击飞，每命中一个敌人回复30湿润度。冷却30秒。"],
   "power.shape-shifter-curse.perks.axolotl_collect_water.name": [
     "集水术"
   ],
-  "power.shape-shifter-curse.perks.axolotl_collect_water.description": [
-    "主动技能2：对周围4×4格、高3格范围敌人造成10点伤害，向上并向自己击飞；每个成功命中的敌人返还30湿润度。冷却30秒。"
-  ],
+  "power.shape-shifter-curse.perks.axolotl_collect_water.description": ["按住主动技能键2，以蓝色描边显示周围6×6范围内的敌人；松开造成10点伤害，将命中敌人向上并向远离自身的方向击飞，每命中一个敌人回复30湿润度。冷却30秒。"],
   "ssc_perk.shape-shifter-curse.axolotl_propulsion_efficiency.name": [
     "水流推进效率"
   ],
-  "ssc_perk.shape-shifter-curse.axolotl_propulsion_efficiency.desc": [
-    "水下水流推进每次消耗1湿润度。"
-  ],
+  "ssc_perk.shape-shifter-curse.axolotl_propulsion_efficiency.desc": ["陆地疾跑跳跃时的水流推进每次消耗1湿润度。"],
   "power.shape-shifter-curse.perks.axolotl_propulsion_efficiency.name": [
     "水流推进效率"
   ],
-  "power.shape-shifter-curse.perks.axolotl_propulsion_efficiency.description": [
-    "水下水流推进每次消耗1湿润度。"
-  ],
+  "power.shape-shifter-curse.perks.axolotl_propulsion_efficiency.description": ["陆地疾跑跳跃时的水流推进每次消耗1湿润度。"],
   "ssc_perk.shape-shifter-curse.axolotl_wave_efficiency.name": [
     "踏浪效率"
   ],
@@ -3200,5 +3192,329 @@
   ],
   "entity.shape-shifter-curse.potion_charm_arrow": [
     "魔药符箭"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_revenge.name": [
+    "复仇冲动"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_revenge.desc": [
+    "对灾厄村民与女巫的攻击伤害提高30%。"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_revenge.name": [
+    "复仇冲动"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_revenge.description": [
+    "对灾厄村民与女巫的攻击伤害提高30%。"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_elusive_paws.name": [
+    "迷踪脚爪"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_elusive_paws.desc": [
+    "方块交互范围变为1.5倍。"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_elusive_paws.name": [
+    "迷踪脚爪"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_elusive_paws.description": [
+    "方块交互范围变为1.5倍。"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_air_jump.name": [
+    "踏空"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_air_jump.desc": [
+    "每次腾空可额外按一次跳跃键向上跳跃，不受三连跳加成，也不计入三连跳次数。"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_air_jump.name": [
+    "踏空"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_air_jump.description": [
+    "每次腾空可额外按一次跳跃键向上跳跃，不受三连跳加成，也不计入三连跳次数。"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_frost_dive.name": [
+    "冰霜俯冲"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_frost_dive.desc": [
+    "空中按技能键2消耗2饥饿值垂直俯冲、灭火并获得10秒霜爪。下降超过4格落地时，对4格内敌人造成6伤害和5秒迟缓Ⅲ。俯冲免摔伤且不能被向上技能打断，冷却8秒。"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_frost_dive.name": [
+    "冰霜俯冲"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_frost_dive.description": [
+    "空中按技能键2消耗2饥饿值垂直俯冲、灭火并获得10秒霜爪。下降超过4格落地时，对4格内敌人造成6伤害和5秒迟缓Ⅲ。俯冲免摔伤且不能被向上技能打断，冷却8秒。"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_cold_whirlwind_1.name": [
+    "冷卷风1"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_cold_whirlwind_1.desc": [
+    "空中按技能键1消耗3饥饿值向上跃升并灭火，冷却5秒。"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_cold_whirlwind_1.name": [
+    "冷卷风1"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_cold_whirlwind_1.description": [
+    "空中按技能键1消耗3饥饿值向上跃升并灭火，冷却5秒。"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_cold_whirlwind_2.name": [
+    "冷卷风2"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_cold_whirlwind_2.desc": [
+    "空中按技能键1消耗3饥饿值向上跃升并灭火，冷却5秒。推力增强，并获得5秒伤害吸收Ⅱ。"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_cold_whirlwind_2.name": [
+    "冷卷风2"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_cold_whirlwind_2.description": [
+    "空中按技能键1消耗3饥饿值向上跃升并灭火，冷却5秒。推力增强，并获得5秒伤害吸收Ⅱ。"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_fire_training_1.name": [
+    "避火训练1"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_fire_training_1.desc": [
+    "靠近岩浆与篝火时不再因形态弱点扣血。"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_cold_recovery_1.name": [
+    "冷气恢复1"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_cold_recovery_1.desc": [
+    "免疫冻结伤害；在细雪中每3秒恢复2生命值。"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_cold_recovery_1.name": [
+    "冷气恢复1"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_cold_recovery_1.description": [
+    "免疫冻结伤害；在细雪中每3秒恢复2生命值。"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_cold_recovery_2.name": [
+    "冷气恢复2"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_cold_recovery_2.desc": [
+    "潜行站在雪块、冰、浮冰或霜冰上时，额外每3秒恢复1生命值。"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_cold_recovery_2.name": [
+    "冷气恢复2"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_cold_recovery_2.description": [
+    "潜行站在雪块、冰、浮冰或霜冰上时，额外每3秒恢复1生命值。"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_fire_training_2.name": [
+    "避火训练2"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_fire_training_2.desc": [
+    "着火伤害不再翻倍，仍不会自然熄灭。"
+  ],
+  "effect.shape-shifter-curse.frost_claw": [
+    "霜爪"
+  ],
+  "ssc_perk.shape-shifter-curse.snowfox_root.name": [
+    "snowfox_root"
+  ],
+  "ssc_perk.shape-shifter-curse.snowfox_root.desc": [
+    ""
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_pack_response_1.name": [
+    "狼群响应Ⅰ"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_pack_response_1.desc": [
+    "通常召唤冷却缩短至21秒；每只狼灵死亡时回复主人2点生命值。"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_soul_excitation.name": [
+    "魂体激发"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_soul_excitation.desc": [
+    "技能键1：获得10秒凋零Ⅰ，并额外召唤一只狼灵。召唤不受上限阻止，但仍占名额。独立冷却30秒。"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_pack_response_2.name": [
+    "狼群响应Ⅱ"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_pack_response_2.desc": [
+    "通常召唤上限提高至3只，攻击敌人时尝试召唤3只狼灵。"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_pack_amplification.name": [
+    "狼群增幅"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_pack_amplification.desc": [
+    "召唤的狼灵获得30秒力量Ⅰ。"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_wither_tolerance_1.name": [
+    "凋零耐受Ⅰ"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_wither_tolerance_1.desc": [
+    "自身凋零伤害间隔变为1.5倍：Ⅰ级3秒，Ⅱ级1.5秒。"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_wither_tolerance_2.name": [
+    "凋零耐受Ⅱ"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_wither_tolerance_2.desc": [
+    "自身凋零伤害间隔变为2倍：Ⅰ级4秒，Ⅱ级2秒。"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_soul_recall.name": [
+    "魂体回收"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_soul_recall.desc": [
+    "技能键2：清除自身凋零，并杀死当前召唤的所有狼灵。冷却10秒。"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_undead_discernment.name": [
+    "亡灵识破"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_undead_discernment.desc": [
+    "移除对亡灵生物的伤害削弱。"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_four_legged_adaptation.name": [
+    "四足适应"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_four_legged_adaptation.desc": [
+    "走路与奔跑的移动速度惩罚由20%降低至10%。"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_cocoon_digestion_1.name": [
+    "茧缚消化Ⅰ"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_cocoon_digestion_1.desc": [
+    "击杀茧缚生物掉落流食囊的概率提高至55%。"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_cocoon_digestion_2.name": [
+    "茧缚消化Ⅱ"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_cocoon_digestion_2.desc": [
+    "击杀茧缚生物掉落流食囊的概率提高至65%。"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_bridge_weaver.name": [
+    "织桥者"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_bridge_weaver.desc": [
+    "织桥三档蓄力缩短至14/28/42 tick，每档总蛛网消耗近似不变。"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_perceptual_web.name": [
+    "悬丝诊脉"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_perceptual_web.desc": [
+    "位于桥梁蛛网中或其上时，以仅自己可见的白色轮廓透视16格内的所有生物。"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_rapid_spinner.name": [
+    "快速纺器"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_rapid_spinner.desc": [
+    "蛛丝弹三档蓄力缩短至14/28/42 tick，每档总蛛网消耗近似不变。"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_stabilized_projectile.name": [
+    "丝弹稳定化"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_stabilized_projectile.desc": [
+    "在背包内拿取蛛网右键另一个蛛网，消耗2个蛛网与10蛛网值制作丝弹。任何人可使用，效果等于满蓄力丝弹，不受箭毒纺锤影响。"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_silk_secretion_1.name": [
+    "蛛丝分泌Ⅰ"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_silk_secretion_1.desc": [
+    "蛛网值自然回复提高至0.35/秒。"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_silk_secretion_2.name": [
+    "蛛丝分泌Ⅱ"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_silk_secretion_2.desc": [
+    "蛛网值自然回复提高至0.5/秒。"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_silk_grapple.name": [
+    "牵丝飞荡"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_silk_grapple.desc": [
+    "按住技能键3预付10蛛网值，预览12格内视线表面落点；松开后以1.5格/tick飞向表面法向外一格处。无有效落点返还消耗，成功释放后冷却5秒。"
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_double_air_jump.name": [
+    "双重踏空"
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_double_air_jump.desc": [
+    "每次离地可按空格踏空两次，向上速度0.6；落地重置，不计入连跳。"
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_precise_momentum.name": [
+    "精准势能"
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_precise_momentum.desc": [
+    "下落暴击的额外伤害倍率上限由2提高至3。"
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_leaping_dash.name": [
+    "冲跃"
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_leaping_dash.desc": [
+    "在地面且饥饿值大于6时，技能键1向前冲跃：水平速度1.2、向上速度0.6。不消耗饥饿值，冷却5秒。"
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_hunter_metabolism.name": [
+    "猎手代谢"
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_hunter_metabolism.desc": [
+    "食用生肉额外回复4点饥饿值和5.6点饱和度，并免疫饥饿效果。"
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_combat_noodle.name": [
+    "战斗面条"
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_combat_noodle.desc": [
+    "非暴击的主目标近战攻击额外造成4点伤害；射出的箭矢伤害降低3点。"
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_keen_scent.name": [
+    "灵敏嗅觉"
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_keen_scent.desc": [
+    "潜行静止3秒后，以橙色轮廓透视8格内实体；移动或结束潜行立即失效。"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_nano_coating_1.name": [
+    "临时纳米镀层Ⅰ"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_nano_coating_1.desc": [
+    "右键使用铁锭，消耗1块铁锭，获得60秒伤害吸收Ⅰ和抗性提升Ⅰ。"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_nano_coating_2.name": [
+    "临时纳米镀层Ⅱ"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_nano_coating_2.desc": [
+    "新增钻石用法：消耗1颗钻石，获得60秒伤害吸收Ⅱ、抗性提升Ⅱ和30秒抗火；保留铁锭用法。"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_environmental_protection_1.name": [
+    "环境防护系统Ⅰ"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_environmental_protection_1.desc": [
+    "进水导致的迟缓Ⅱ持续时间缩短至1秒。"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_environmental_protection_2.name": [
+    "环境防护系统Ⅱ"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_environmental_protection_2.desc": [
+    "移除炎热环境下最大生命值降低6点的惩罚。"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_tool_modification_1.name": [
+    "工具改造Ⅰ"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_tool_modification_1.desc": [
+    "在背包内用煤炭块右键金剑，消耗两者制作全新的石墨烯薄刃：攻击力8、攻速1.6、耐久128。不保留附魔。"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_tool_modification_2.name": [
+    "工具改造Ⅱ"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_tool_modification_2.desc": [
+    "在背包内用钻石右键弓，消耗两者制作全新的复合动能弓：箭矢基础伤害提高25%，耐久768。不保留附魔。"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_emergency_protocol.name": [
+    "紧急救援协议"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_emergency_protocol.desc": [
+    "生命值不超过6时，获得10秒迅捷Ⅱ、抗性提升Ⅱ和伤害吸收Ⅱ。冷却10分钟；冷却结束后仍低血量即可再次触发。"
+  ],
+  "item.shape-shifter-curse.graphene_blade": [
+    "石墨烯薄刃"
+  ],
+  "item.shape-shifter-curse.compound_kinetic_bow": [
+    "复合动能弓"
+  ],
+  "command.shape_shifter_curse.perk.empty": [
+    "当前形态没有可调试的技能树。"
+  ],
+  "command.shape_shifter_curse.perk.free": [
+    "形态 %s 的 Perk 免费解锁：%s"
+  ],
+  "command.shape_shifter_curse.perk.tree": [
+    "技能树 %s：已解锁 %s / %s"
+  ],
+  "command.shape_shifter_curse.perk.unlock_all": [
+    "已为技能树 %s 新解锁 %s 个 Perk。"
+  ],
+  "command.shape_shifter_curse.perk.reset_all": [
+    "已重置技能树 %s 的 %s 个 Perk，并恢复形态基础能力。"
   ]
 }

@@ -14,6 +14,7 @@ import net.onixary.shapeShifterCurseFabric.status_effects.other_effects.Immobili
 import net.onixary.shapeShifterCurseFabric.status_effects.other_effects.SimpleStatusEffect;
 
 public class RegOtherStatusEffects {
+    public static final StatusEffect FROST_CLAW = register("frost_claw", new net.onixary.shapeShifterCurseFabric.status_effects.other_effects.FrostClawEffect());
     private RegOtherStatusEffects(){}
 
     //public static final BaseTransformativeStatusEffect EMPTY_EFFECT = register("empty_effect",new BaseTransformativeStatusEffect(null, StatusEffectCategory.NEUTRAL, 0xFFFFFF, false) );

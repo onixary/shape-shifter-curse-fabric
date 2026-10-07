@@ -1574,27 +1574,19 @@
   "ssc_perk.shape-shifter-curse.axolotl_collect_water.name": [
     "Water Gathering"
   ],
-  "ssc_perk.shape-shifter-curse.axolotl_collect_water.desc": [
-    "Active skill 2: deal 10 damage in a 4 by 4 block region, 3 blocks high, pulling enemies inward and upward. Restore 30 moisture per successful hit. Cooldown: 30 seconds."
-  ],
+  "ssc_perk.shape-shifter-curse.axolotl_collect_water.desc": ["Hold active skill 2 to highlight enemies in a surrounding 6×6 area in blue. Release to deal 10 damage and launch enemies upward and away, restoring 30 moisture per successful hit. Cooldown: 30 seconds."],
   "power.shape-shifter-curse.perks.axolotl_collect_water.name": [
     "Water Gathering"
   ],
-  "power.shape-shifter-curse.perks.axolotl_collect_water.description": [
-    "Active skill 2: deal 10 damage in a 4 by 4 block region, 3 blocks high, pulling enemies inward and upward. Restore 30 moisture per successful hit. Cooldown: 30 seconds."
-  ],
+  "power.shape-shifter-curse.perks.axolotl_collect_water.description": ["Hold active skill 2 to highlight enemies in a surrounding 6×6 area in blue. Release to deal 10 damage and launch enemies upward and away, restoring 30 moisture per successful hit. Cooldown: 30 seconds."],
   "ssc_perk.shape-shifter-curse.axolotl_propulsion_efficiency.name": [
     "Water Propulsion Efficiency"
   ],
-  "ssc_perk.shape-shifter-curse.axolotl_propulsion_efficiency.desc": [
-    "Underwater propulsion costs 1 moisture per use."
-  ],
+  "ssc_perk.shape-shifter-curse.axolotl_propulsion_efficiency.desc": ["Water propulsion when jumping while sprinting on land costs 1 moisture."],
   "power.shape-shifter-curse.perks.axolotl_propulsion_efficiency.name": [
     "Water Propulsion Efficiency"
   ],
-  "power.shape-shifter-curse.perks.axolotl_propulsion_efficiency.description": [
-    "Underwater propulsion costs 1 moisture per use."
-  ],
+  "power.shape-shifter-curse.perks.axolotl_propulsion_efficiency.description": ["Water propulsion when jumping while sprinting on land costs 1 moisture."],
   "ssc_perk.shape-shifter-curse.axolotl_wave_efficiency.name": [
     "Wave Riding Efficiency"
   ],
@@ -1861,5 +1853,329 @@
   ],
   "entity.shape-shifter-curse.potion_charm_arrow": [
     "Potion Charm Arrow"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_revenge.name": [
+    "Vengeful Instinct"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_revenge.desc": [
+    "Deal 30% more attack damage to illagers and witches."
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_revenge.name": [
+    "Vengeful Instinct"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_revenge.description": [
+    "Deal 30% more attack damage to illagers and witches."
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_elusive_paws.name": [
+    "Elusive Paws"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_elusive_paws.desc": [
+    "Multiply block interaction reach by 1.5."
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_elusive_paws.name": [
+    "Elusive Paws"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_elusive_paws.description": [
+    "Multiply block interaction reach by 1.5."
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_air_jump.name": [
+    "Air Step"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_air_jump.desc": [
+    "Press jump again while airborne for one extra jump. It neither gains nor advances the triple-jump bonus."
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_air_jump.name": [
+    "Air Step"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_air_jump.description": [
+    "Press jump again while airborne for one extra jump. It neither gains nor advances the triple-jump bonus."
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_frost_dive.name": [
+    "Frost Dive"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_frost_dive.desc": [
+    "Skill 2 spends 2 food to dive, extinguish fire and grant Frost Claw for 10 seconds. Descend over 4 blocks to strike enemies within 4 blocks for 6 damage and Slowness III for 5 seconds. No fall damage during the dive; upward skills cannot interrupt it. Cooldown: 8 seconds."
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_frost_dive.name": [
+    "Frost Dive"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_frost_dive.description": [
+    "Skill 2 spends 2 food to dive, extinguish fire and grant Frost Claw for 10 seconds. Descend over 4 blocks to strike enemies within 4 blocks for 6 damage and Slowness III for 5 seconds. No fall damage during the dive; upward skills cannot interrupt it. Cooldown: 8 seconds."
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_cold_whirlwind_1.name": [
+    "Cold Whirlwind 1"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_cold_whirlwind_1.desc": [
+    "Skill 1 spends 3 food to rise and extinguish fire. Cooldown: 5 seconds."
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_cold_whirlwind_1.name": [
+    "Cold Whirlwind 1"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_cold_whirlwind_1.description": [
+    "Skill 1 spends 3 food to rise and extinguish fire. Cooldown: 5 seconds."
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_cold_whirlwind_2.name": [
+    "Cold Whirlwind 2"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_cold_whirlwind_2.desc": [
+    "Skill 1 spends 3 food to rise and extinguish fire. Cooldown: 5 seconds. Stronger lift; grants Absorption II for 5 seconds."
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_cold_whirlwind_2.name": [
+    "Cold Whirlwind 2"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_cold_whirlwind_2.description": [
+    "Skill 1 spends 3 food to rise and extinguish fire. Cooldown: 5 seconds. Stronger lift; grants Absorption II for 5 seconds."
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_fire_training_1.name": [
+    "Fire Training I"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_fire_training_1.desc": [
+    "Remove the form weakness that damages you near lava and campfires."
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_cold_recovery_1.name": [
+    "Cold Recovery I"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_cold_recovery_1.desc": [
+    "Immune to freezing damage. Restore 2 health every 3 seconds in powder snow."
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_cold_recovery_1.name": [
+    "Cold Recovery I"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_cold_recovery_1.description": [
+    "Immune to freezing damage. Restore 2 health every 3 seconds in powder snow."
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_cold_recovery_2.name": [
+    "Cold Recovery II"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_cold_recovery_2.desc": [
+    "Also restore 1 health every 3 seconds while sneaking on snow blocks, ice, packed ice or frosted ice."
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_cold_recovery_2.name": [
+    "Cold Recovery II"
+  ],
+  "power.shape-shifter-curse.perks.snow_fox_cold_recovery_2.description": [
+    "Also restore 1 health every 3 seconds while sneaking on snow blocks, ice, packed ice or frosted ice."
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_fire_training_2.name": [
+    "Fire Training II"
+  ],
+  "ssc_perk.shape-shifter-curse.snow_fox_fire_training_2.desc": [
+    "Remove doubled fire damage. Fire still does not extinguish naturally."
+  ],
+  "effect.shape-shifter-curse.frost_claw": [
+    "Frost Claw"
+  ],
+  "ssc_perk.shape-shifter-curse.snowfox_root.name": [
+    "snowfox_root"
+  ],
+  "ssc_perk.shape-shifter-curse.snowfox_root.desc": [
+    ""
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_pack_response_1.name": [
+    "Pack Response I"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_pack_response_1.desc": [
+    "Normal summons have a 21-second cooldown. Each spirit wolf heals its owner for 2 health on death."
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_soul_excitation.name": [
+    "Soul Excitation"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_soul_excitation.desc": [
+    "Skill 1: gain Wither I for 10 seconds and summon one spirit wolf beyond the normal cap. It still counts toward that cap. Independent 30-second cooldown."
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_pack_response_2.name": [
+    "Pack Response II"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_pack_response_2.desc": [
+    "Raise the normal summon cap to 3. Attacking attempts to summon 3 spirit wolves."
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_pack_amplification.name": [
+    "Pack Amplification"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_pack_amplification.desc": [
+    "Summoned spirit wolves receive Strength I for 30 seconds."
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_wither_tolerance_1.name": [
+    "Wither Tolerance I"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_wither_tolerance_1.desc": [
+    "Multiply your Wither damage interval by 1.5: 3 seconds at level I, 1.5 seconds at level II."
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_wither_tolerance_2.name": [
+    "Wither Tolerance II"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_wither_tolerance_2.desc": [
+    "Double your Wither damage interval: 4 seconds at level I, 2 seconds at level II."
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_soul_recall.name": [
+    "Soul Recall"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_soul_recall.desc": [
+    "Skill 2: clear your Wither effect and kill all your summoned spirit wolves. 10-second cooldown."
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_undead_discernment.name": [
+    "Undead Discernment"
+  ],
+  "ssc_perk.shape-shifter-curse.anubis_wolf_undead_discernment.desc": [
+    "Remove your damage penalty against undead creatures."
+  ],
+  "ssc_perk.shape-shifter-curse.spider_four_legged_adaptation.name": [
+    "Four-Legged Adaptation"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_four_legged_adaptation.desc": [
+    "Reduce the movement speed penalty while walking and sprinting from 20% to 10%."
+  ],
+  "ssc_perk.shape-shifter-curse.spider_cocoon_digestion_1.name": [
+    "Cocoon Digestion I"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_cocoon_digestion_1.desc": [
+    "Raise the chance of fluid cocoon drops from cocooned kills to 55%."
+  ],
+  "ssc_perk.shape-shifter-curse.spider_cocoon_digestion_2.name": [
+    "Cocoon Digestion II"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_cocoon_digestion_2.desc": [
+    "Raise the chance of fluid cocoon drops from cocooned kills to 65%."
+  ],
+  "ssc_perk.shape-shifter-curse.spider_bridge_weaver.name": [
+    "Bridge Weaver"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_bridge_weaver.desc": [
+    "Charge web bridges in 14/28/42 ticks, with approximately unchanged total web resource costs."
+  ],
+  "ssc_perk.shape-shifter-curse.spider_perceptual_web.name": [
+    "Perceptual Web"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_perceptual_web.desc": [
+    "While in or on a web bridge, see living creatures within 16 blocks outlined in white. Only you see the outlines."
+  ],
+  "ssc_perk.shape-shifter-curse.spider_rapid_spinner.name": [
+    "Rapid Spinner"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_rapid_spinner.desc": [
+    "Charge web projectiles in 14/28/42 ticks, with approximately unchanged total web resource costs."
+  ],
+  "ssc_perk.shape-shifter-curse.spider_stabilized_projectile.name": [
+    "Stabilized Web Projectile"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_stabilized_projectile.desc": [
+    "Right-click a cobweb with another cobweb in your inventory to spend 2 cobwebs and 10 web resource on one projectile. Anyone can fire it with fully charged effects; Venom Spindles do not affect it."
+  ],
+  "ssc_perk.shape-shifter-curse.spider_silk_secretion_1.name": [
+    "Silk Secretion I"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_silk_secretion_1.desc": [
+    "Naturally recover 0.35 web resource per second."
+  ],
+  "ssc_perk.shape-shifter-curse.spider_silk_secretion_2.name": [
+    "Silk Secretion II"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_silk_secretion_2.desc": [
+    "Naturally recover 0.5 web resource per second."
+  ],
+  "ssc_perk.shape-shifter-curse.spider_silk_grapple.name": [
+    "Silk Grapple"
+  ],
+  "ssc_perk.shape-shifter-curse.spider_silk_grapple.desc": [
+    "Hold skill 3 to reserve 10 web resource and preview a surface within 12 blocks. Release to fly at 1.5 blocks/tick to one block outside that surface. Invalid targets refund the cost; successful casts have a 5-second cooldown."
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_double_air_jump.name": [
+    "Double Air Jump"
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_double_air_jump.desc": [
+    "Press Jump for up to two extra airborne impulses at 0.6 upward speed. Landing resets both uses; these do not affect chained jumps."
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_precise_momentum.name": [
+    "Precise Momentum"
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_precise_momentum.desc": [
+    "Raise the maximum additional falling critical damage multiplier from 2 to 3."
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_leaping_dash.name": [
+    "Leaping Dash"
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_leaping_dash.desc": [
+    "Skill 1 launches you forward at 1.2 and upward at 0.6 while grounded with food above 6. Costs no food. 5-second cooldown."
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_hunter_metabolism.name": [
+    "Hunter Metabolism"
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_hunter_metabolism.desc": [
+    "Raw meat grants an extra 4 food and 5.6 saturation. Immune to Hunger."
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_combat_noodle.name": [
+    "Combat Noodle"
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_combat_noodle.desc": [
+    "Non-critical primary melee attacks deal 4 extra damage. Your arrows deal 3 less damage."
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_keen_scent.name": [
+    "Keen Scent"
+  ],
+  "ssc_perk.shape-shifter-curse.marbled_polecat_keen_scent.desc": [
+    "Sneak without moving for 3 seconds to outline entities within 8 blocks in orange. Moving or stopping sneaking ends the effect."
+  ],
+  "ssc_perk.shape-shifter-curse.avali_nano_coating_1.name": [
+    "Temporary Nano Coating I"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_nano_coating_1.desc": [
+    "Use an iron ingot to consume one and gain Absorption I and Resistance I for 60 seconds."
+  ],
+  "ssc_perk.shape-shifter-curse.avali_nano_coating_2.name": [
+    "Temporary Nano Coating II"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_nano_coating_2.desc": [
+    "Also use a diamond to gain Absorption II and Resistance II for 60 seconds and Fire Resistance for 30 seconds. Iron ingots remain usable."
+  ],
+  "ssc_perk.shape-shifter-curse.avali_environmental_protection_1.name": [
+    "Environmental Protection I"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_environmental_protection_1.desc": [
+    "Reduce water-induced Slowness II duration to 1 second."
+  ],
+  "ssc_perk.shape-shifter-curse.avali_environmental_protection_2.name": [
+    "Environmental Protection II"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_environmental_protection_2.desc": [
+    "Remove the 6-point maximum health penalty in hot environments."
+  ],
+  "ssc_perk.shape-shifter-curse.avali_tool_modification_1.name": [
+    "Tool Modification I"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_tool_modification_1.desc": [
+    "Right-click a golden sword with a coal block in your inventory to consume both and make a fresh Graphene Blade: 8 attack damage, 1.6 attack speed, 128 durability. Enchantments are not transferred."
+  ],
+  "ssc_perk.shape-shifter-curse.avali_tool_modification_2.name": [
+    "Tool Modification II"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_tool_modification_2.desc": [
+    "Right-click a bow with a diamond in your inventory to consume both and make a fresh Compound Kinetic Bow: 25% increased base arrow damage and 768 durability. Enchantments are not transferred."
+  ],
+  "ssc_perk.shape-shifter-curse.avali_emergency_protocol.name": [
+    "Emergency Rescue Protocol"
+  ],
+  "ssc_perk.shape-shifter-curse.avali_emergency_protocol.desc": [
+    "At 6 health or less, gain Speed II, Resistance II and Absorption II for 10 seconds. 10-minute cooldown; can trigger again while health remains low."
+  ],
+  "item.shape-shifter-curse.graphene_blade": [
+    "Graphene Blade"
+  ],
+  "item.shape-shifter-curse.compound_kinetic_bow": [
+    "Compound Kinetic Bow"
+  ],
+  "command.shape_shifter_curse.perk.empty": [
+    "The current form has no perks to debug."
+  ],
+  "command.shape_shifter_curse.perk.free": [
+    "Free perk unlocks for form %s: %s"
+  ],
+  "command.shape_shifter_curse.perk.tree": [
+    "Perk tree %s: %s / %s unlocked"
+  ],
+  "command.shape_shifter_curse.perk.unlock_all": [
+    "Tree %s: unlocked %s new perks."
+  ],
+  "command.shape_shifter_curse.perk.reset_all": [
+    "Reset tree %s (%s perks) and restored base form powers."
   ]
 }

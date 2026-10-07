@@ -1,0 +1,43 @@
+{
+  "name": "power.shape-shifter-curse.perks.snow_fox_cold_recovery_2.name",
+  "description": "power.shape-shifter-curse.perks.snow_fox_cold_recovery_2.description",
+  "hidden": true,
+  "type": "apoli:action_over_time",
+  "interval": 60,
+  "condition": {
+    "type": "apoli:and",
+    "conditions": [
+      {
+        "type": "apoli:sneaking"
+      },
+      {
+        "type": "apoli:on_block",
+        "block_condition": {
+          "type": "apoli:or",
+          "conditions": [
+            {
+              "type": "apoli:block",
+              "block": "minecraft:snow_block"
+            },
+            {
+              "type": "apoli:block",
+              "block": "minecraft:ice"
+            },
+            {
+              "type": "apoli:block",
+              "block": "minecraft:packed_ice"
+            },
+            {
+              "type": "apoli:block",
+              "block": "minecraft:frosted_ice"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "entity_action": {
+    "type": "apoli:heal",
+    "amount": 1
+  }
+}

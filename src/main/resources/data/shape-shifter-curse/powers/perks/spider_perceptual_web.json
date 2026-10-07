@@ -1,0 +1,36 @@
+{
+  "type": "apoli:entity_glow",
+  "red": 1,
+  "green": 1,
+  "blue": 1,
+  "use_teams": false,
+  "entity_condition": {
+    "type": "apoli:health",
+    "comparison": ">",
+    "compare_to": 0
+  },
+  "bientity_condition": {
+    "type": "apoli:distance",
+    "comparison": "<=",
+    "compare_to": 16
+  },
+  "condition": {
+    "type": "apoli:or",
+    "conditions": [
+      {
+        "type": "apoli:in_block",
+        "block_condition": {
+          "type": "apoli:block",
+          "block": "shape-shifter-curse:temp_web_bridge"
+        }
+      },
+      {
+        "type": "apoli:on_block",
+        "block_condition": {
+          "type": "apoli:block",
+          "block": "shape-shifter-curse:temp_web_bridge"
+        }
+      }
+    ]
+  }
+}

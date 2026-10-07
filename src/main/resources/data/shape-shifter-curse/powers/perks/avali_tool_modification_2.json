@@ -1,0 +1,27 @@
+{
+  "type": "apoli:item_on_item",
+  "using_item_condition": {
+    "type": "apoli:ingredient",
+    "ingredient": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "on_item_condition": {
+    "type": "apoli:ingredient",
+    "ingredient": {
+      "item": "minecraft:bow"
+    }
+  },
+  "using_item_action": {
+    "type": "apoli:consume",
+    "amount": 1
+  },
+  "on_item_action": {
+    "type": "apoli:consume",
+    "amount": 1
+  },
+  "result": {
+    "item": "shape-shifter-curse:compound_kinetic_bow",
+    "amount": 1
+  }
+}

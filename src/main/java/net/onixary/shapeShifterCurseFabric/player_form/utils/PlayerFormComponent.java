@@ -44,6 +44,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
 
     public Identifier nowPerkTree = RegPerks.EMPTY_PERK_TREE;
     public HashMap<Identifier, List<Identifier>> formPerkMap = new HashMap<>();
+    public final java.util.Set<Identifier> freePerkForms = new java.util.HashSet<>();
 
     // 仅用于(客户端)和(服务器端判断是否需要同步)
     public boolean isFlying;
@@ -84,6 +85,11 @@ public class PlayerFormComponent implements AutoSyncedComponent {
 
     @Override
     public void readFromNbt(NbtCompound tag) {
+        freePerkForms.clear();
+        for (NbtElement entry : tag.getList("free_perk_forms", NbtElement.STRING_TYPE)) {
+            Identifier form = Identifier.tryParse(entry.asString());
+            if (form != null) freePerkForms.add(form);
+        }
         if (tag.contains("no_form_id") && tag.getBoolean("no_form_id")) {
             nowFormID = null;
             nowForm = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
@@ -195,6 +201,9 @@ public class PlayerFormComponent implements AutoSyncedComponent {
 
     @Override
     public void writeToNbt(NbtCompound tag) {
+        NbtList freeForms = new NbtList();
+        for (Identifier form : freePerkForms) freeForms.add(net.minecraft.nbt.NbtString.of(form.toString()));
+        tag.put("free_perk_forms", freeForms);
         if (nowFormID != null) {
             tag.putString("nowFormID", nowFormID.toString());
         } else {
@@ -246,6 +255,7 @@ public class PlayerFormComponent implements AutoSyncedComponent {
     }
 
     public void clear() {
+        freePerkForms.clear();
         this.nowForm = InitialFormUtils.getInitialForm(this.player);
         this.nowFormID = nowForm.getFormID();
         formHistory.clear();

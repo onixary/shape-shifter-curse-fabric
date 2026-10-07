@@ -1,0 +1,21 @@
+{
+  "type": "apoli:multiple",
+  "food": {
+    "type": "apoli:modify_food",
+    "item_condition": {
+      "type": "apoli:ingredient",
+      "ingredient": {
+        "tag": "shape-shifter-curse:raw_meat"
+      }
+    },
+    "entity_action": {
+      "type": "apoli:feed",
+      "food": 4,
+      "saturation": 0.7
+    }
+  },
+  "immunity": {
+    "type": "apoli:effect_immunity",
+    "effect": "minecraft:hunger"
+  }
+}

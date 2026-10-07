@@ -1,0 +1,30 @@
+{
+  "type": "apoli:active_self",
+  "key": {
+    "key": "key.shape-shifter-curse.active_skill_1",
+    "continuous": false
+  },
+  "cooldown": 600,
+  "hud_render": {
+    "should_render": false
+  },
+  "entity_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "apoli:apply_effect",
+        "effect": {
+          "effect": "minecraft:wither",
+          "duration": 200,
+          "amplifier": 0
+        }
+      },
+      {
+        "type": "shape-shifter-curse:summon_anubis_wolf_minion",
+        "minion_level": 3,
+        "count": 1,
+        "apply_cooldown": false
+      }
+    ]
+  }
+}

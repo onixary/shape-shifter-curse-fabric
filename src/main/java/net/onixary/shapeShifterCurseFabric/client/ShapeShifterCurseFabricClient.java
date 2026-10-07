@@ -334,6 +334,7 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		});
 
 		RegCustomBlock.ClientInit();
+		net.onixary.shapeShifterCurseFabric.items.RegCustomItem.registerModelPredicates();
 		PatronUtils.OnClientInit();
 		AuthClient.init();
 		RegMenuScreen.init();

@@ -1,0 +1,83 @@
+{
+  "name": "power.shape-shifter-curse.perks.snow_fox_frost_dive.name",
+  "description": "power.shape-shifter-curse.perks.snow_fox_frost_dive.description",
+  "hidden": true,
+  "type": "shape-shifter-curse:frost_dive",
+  "speed": 0.8,
+  "minimum_height": 4,
+  "cooldown": 160,
+  "key": {
+    "key": "key.shape-shifter-curse.active_skill_2",
+    "continuous": false
+  },
+  "condition": {
+    "type": "apoli:food_level",
+    "comparison": ">=",
+    "compare_to": 2
+  },
+  "start_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "shape-shifter-curse:change_food",
+        "amount": -2
+      },
+      {
+        "type": "apoli:extinguish"
+      },
+      {
+        "type": "apoli:apply_effect",
+        "effect": {
+          "effect": "shape-shifter-curse:frost_claw",
+          "duration": 200,
+          "amplifier": 0
+        }
+      }
+    ]
+  },
+  "landing_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "shape-shifter-curse:spawn_particles_in_circle",
+        "particle": "minecraft:snowflake",
+        "radius": 4,
+        "sample_count": 32,
+        "count": 2,
+        "spread": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "offset_y": 0.15
+      },
+      {
+        "type": "apoli:area_of_effect",
+        "radius": 4,
+        "bientity_condition": {
+          "type": "shape-shifter-curse:enemy"
+        },
+        "bientity_action": {
+          "type": "apoli:and",
+          "actions": [
+            {
+              "type": "shape-shifter-curse:damage_on_success",
+              "amount": 6
+            },
+            {
+              "type": "apoli:target_action",
+              "action": {
+                "type": "apoli:apply_effect",
+                "effect": {
+                  "effect": "minecraft:slowness",
+                  "duration": 100,
+                  "amplifier": 2
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "power.shape-shifter-curse.perks.snow_fox_air_jump.name",
+  "description": "power.shape-shifter-curse.perks.snow_fox_air_jump.description",
+  "hidden": true,
+  "type": "shape-shifter-curse:air_jump",
+  "speed": 0.6,
+  "key": {
+    "key": "key.jump",
+    "continuous": false
+  }
+}

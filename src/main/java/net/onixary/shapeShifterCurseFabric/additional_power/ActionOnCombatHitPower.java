@@ -37,10 +37,15 @@ public class ActionOnCombatHitPower extends Power {
     }
 
     public static float meleeBonus(LivingEntity actor, Entity target) {
+        return meleeBonus(actor, target, false);
+    }
+
+    public static float meleeBonus(LivingEntity actor, Entity target, boolean critical) {
         float bonus = 0;
         Pair<Entity, Entity> pair = new Pair<>(actor, target);
         for (ActionOnCombatHitPower power : PowerHolderComponent.getPowers(actor, ActionOnCombatHitPower.class)) {
-            if (power.event.equals("melee") && (power.condition == null || power.condition.test(pair))) bonus += power.bonusDamage;
+            if ((power.event.equals("melee") || !critical && power.event.equals("non_critical_melee"))
+                    && (power.condition == null || power.condition.test(pair))) bonus += power.bonusDamage;
         }
         return bonus;
     }

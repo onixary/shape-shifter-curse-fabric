@@ -1,0 +1,9 @@
+{
+  "type": "shape-shifter-curse:air_jump",
+  "jumps": 2,
+  "speed": 0.6,
+  "key": {
+    "key": "key.jump",
+    "continuous": false
+  }
+}

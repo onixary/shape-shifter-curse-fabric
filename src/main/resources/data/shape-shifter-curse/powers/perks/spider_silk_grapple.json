@@ -1,0 +1,12 @@
+{
+  "type": "shape-shifter-curse:surface_grapple",
+  "distance": 12,
+  "speed": 1.5,
+  "mana_cost": 10,
+  "mana_type": "shape-shifter-curse:web_resource",
+  "cooldown": 100,
+  "key": {
+    "key": "key.shape-shifter-curse.active_skill_3",
+    "continuous": true
+  }
+}

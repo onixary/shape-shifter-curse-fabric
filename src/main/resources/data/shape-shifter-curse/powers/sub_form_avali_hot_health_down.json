@@ -1,0 +1,51 @@
+{
+    "type": "shape-shifter-curse:delay_attribute",
+    "modifier": {
+        "attribute": "minecraft:generic.max_health",
+        "value": -6.0,
+        "operation": "addition"
+    },
+    "tick_rate": 20,
+    "updateHealth": true,
+    "delay": 5,
+    "condition": {
+        "type": "apoli:or",
+        "conditions": [
+            {
+                "type": "apoli:and",
+                "conditions": [
+                    {
+                        "type": "apoli:biome",
+                        "condition": {
+                            "type": "apoli:temperature",
+                            "comparison": ">=",
+                            "compare_to": 1
+                        }
+                    },
+                    {
+                        "type": "apoli:and",
+                        "conditions": [
+                            {
+                                "type": "apoli:time_of_day",
+                                "comparison": ">=",
+                                "compare_to": 1000
+                            },
+                            {
+                                "type": "apoli:time_of_day",
+                                "comparison": "<=",
+                                "compare_to": 12000
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "apoli:biome",
+                "condition": {
+                    "type": "apoli:in_tag",
+                    "tag": "minecraft:is_nether"
+                }
+            }
+        ]
+    }
+}

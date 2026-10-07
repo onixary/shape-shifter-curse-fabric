@@ -19,6 +19,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class PerkUtils {
+    public static boolean isFreeUnlock(PlayerEntity player) {
+        var component = PlayerFormComponent.COMPONENT.get(player);
+        return player.getAbilities().creativeMode || component.freePerkForms.contains(component.nowForm.getFormID());
+    }
+
     public static HashMap<Identifier, List<Identifier>> getPlayerPerks(PlayerEntity player) {
         PlayerFormComponent component = PlayerFormComponent.COMPONENT.get(player);
         return component.formPerkMap;
@@ -107,7 +112,7 @@ public class PerkUtils {
         if (!perkTree.getAllPerks().contains(perkID)) return;
 
         ICost cost = perkData.getCost();
-        if (!player.getAbilities().creativeMode) {
+        if (!isFreeUnlock(player)) {
             if (!cost.getType().canPay(cost, player)) {
                 return;
             }
@@ -136,7 +141,7 @@ public class PerkUtils {
         }
 
         if (perkData.canGain(player, component.nowForm)) {
-            if (!player.getAbilities().creativeMode) {
+            if (!isFreeUnlock(player)) {
                 cost.getType().pay(cost, player);
             }
             __addPerk(player, perkTreeID, perkID);

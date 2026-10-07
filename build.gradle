@@ -323,7 +323,8 @@ java {
 }
 
 
-// 代码为 MIT，模型/贴图/动画等资源为 CC BY-NC 4.0，两份协议都要随产物分发
+// 代码为 MIT，模型/贴图/动画等资源为 CC BY-NC 4.0（avali 子形态资源为 CC BY-SA 2.0，
+// 见 LICENSING.md / THIRD-PARTY-NOTICES.md），协议文件都要随产物分发
 def licenseFiles = [
         "LICENSE.txt"              : "LICENSE_${project.archivesBaseName}.txt",
         "LICENSE-CC-BY-NC-4.0.txt" : "LICENSE-CC-BY-NC-4.0_${project.archivesBaseName}.txt",

@@ -5,6 +5,12 @@ Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4
 - Scope, exceptions and third-party carve-outs: LICENSING.md in the repository root
 - License page: https://creativecommons.org/licenses/by-nc/4.0/
 
+Exception: the avali sub-form assets - geo/form/form_bat_3_sub_avali.geo.json,
+textures/form/form_bat_3_sub_avali/**, player_animation/avali_*.json and
+ssc_form_model/origins.origin.shape-shifter-curse.form_bat_3_sub_avali.json - follow
+the avali species' own license and are CC BY-SA 2.0
+(https://creativecommons.org/licenses/by-sa/2.0/) instead of CC BY-NC 4.0.
+
 The shader sources in shaders/** are code and are licensed under the MIT License
 instead. The assets of the Origins mod under assets/origins/** keep their own MIT
 license, see THIRD-PARTY-NOTICES.md.
@@ -14,3 +20,9 @@ Copyright (c) 2025 onixary and contributors
 本目录下的文件属于媒体资源，采用 CC BY-NC 4.0 授权，仅限非商业用途，使用时
 需要署名并注明是否修改。shaders/** 内的着色器源码属于代码，采用 MIT 授权；
 assets/origins/** 保留 Origins 模组的 MIT 授权，详见 THIRD-PARTY-NOTICES.md。
+
+例外：avali 子形态相关资源（geo/form/form_bat_3_sub_avali.geo.json、
+textures/form/form_bat_3_sub_avali/**、player_animation/avali_*.json、
+ssc_form_model/origins.origin.shape-shifter-curse.form_bat_3_sub_avali.json）
+跟随 avali 这一开放物种自身的授权，采用 CC BY-SA 2.0
+（https://creativecommons.org/licenses/by-sa/2.0/），不适用上述 CC BY-NC 4.0 许可。
