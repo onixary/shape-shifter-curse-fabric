@@ -14,6 +14,26 @@ import net.onixary.shapeShifterCurseFabric.perk.*;
 
 public class SubformPerkCheck {
     @GameTest(templateName=FabricGameTest.EMPTY_STRUCTURE)
+    public void respawnRestoresUnlockedPerks(TestContext c) {
+        var p=c.createMockCreativeServerPlayerInWorld();
+        var form=net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms.BAT_3_SUB_AVALI;
+        net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils.setForm(p,form);
+        PerkUtils.__addPerk(p,form.getPerkTreeID(),id("avali_environmental_protection_1"));
+        PerkUtils.__addPerk(p,form.getPerkTreeID(),id("avali_nano_coating_1"));
+        var upgraded=PowerTypeRegistry.get(id("perks/avali_environmental_protection_1"));
+        var base=PowerTypeRegistry.get(id("sub_form_avali_water_slowness"));
+        c.assertTrue(PowerHolderComponent.KEY.get(p).hasPower(upgraded),"Perk applies before death");
+        p.setHealth(0);
+        var respawned=c.getWorld().getServer().getPlayerManager().respawnPlayer(p,false);
+        try {
+            c.assertTrue(PerkUtils.getPlayerPerks(respawned,form.getPerkTreeID()).contains(id("avali_environmental_protection_1")),"Unlock record survives real respawn");
+            c.assertTrue(PowerHolderComponent.KEY.get(respawned).hasPower(upgraded),"Unlocked power restored after all respawn component copies");
+            c.assertTrue(!PowerHolderComponent.KEY.get(respawned).hasPower(base),"Replaced base power remains removed after respawn");
+            c.assertTrue(PowerHolderComponent.KEY.get(respawned).hasPower(PowerTypeRegistry.get(id("perks/avali_nano_coating_1"))),"Additional perk restored after respawn");
+        } finally { respawned.discard(); }
+        c.complete();
+    }
+    @GameTest(templateName=FabricGameTest.EMPTY_STRUCTURE)
     public void perkCommands(TestContext c) throws com.mojang.brigadier.exceptions.CommandSyntaxException {
         var p=c.createMockCreativeServerPlayerInWorld();
         var forms=net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent.COMPONENT.get(p);

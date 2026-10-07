@@ -2877,15 +2877,11 @@
   "ssc_perk.shape-shifter-curse.axolotl_tidal_pull.name": [
     "潮汐牵引"
   ],
-  "ssc_perk.shape-shifter-curse.axolotl_tidal_pull.desc": [
-    "按住主动技能3消耗20湿润度，蓝色标记视线10格内首个生物；松开将其向自己拉近并向上击飞。冷却5秒；取消不返还消耗。"
-  ],
+  "ssc_perk.shape-shifter-curse.axolotl_tidal_pull.desc": ["按住主动技能3消耗20湿润度，蓝色标记视线10格内首个生物；松开将其向自己拉近并向上击飞，同时施加5秒缓降。冷却5秒；取消不返还消耗。"],
   "power.shape-shifter-curse.perks.axolotl_tidal_pull.name": [
     "潮汐牵引"
   ],
-  "power.shape-shifter-curse.perks.axolotl_tidal_pull.description": [
-    "按住主动技能3消耗20湿润度，蓝色标记视线10格内首个生物；松开将其向自己拉近并向上击飞。冷却5秒；取消不返还消耗。"
-  ],
+  "power.shape-shifter-curse.perks.axolotl_tidal_pull.description": ["按住主动技能3消耗20湿润度，蓝色标记视线10格内首个生物；松开将其向自己拉近并向上击飞，同时施加5秒缓降。冷却5秒；取消不返还消耗。"],
   "ssc_perk.shape-shifter-curse.axolotl_moisture_return_1.name": [
     "湿气返还Ⅰ"
   ],

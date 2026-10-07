@@ -32,8 +32,8 @@
         },
         {
           "type": "shape-shifter-curse:oriented_box",
-          "width": 6.0,
-          "length": 6.0,
+          "width": 9.0,
+          "length": 9.0,
           "height": 3.0,
           "centered": true,
           "bientity_condition": {

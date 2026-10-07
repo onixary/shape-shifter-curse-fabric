@@ -61,12 +61,20 @@
             "y": 0.9
           },
           {
-
+            "type": "apoli:target_action",
+            "action": {
+              "type": "apoli:apply_effect",
+              "effect": {
+                "effect": "minecraft:slow_falling",
+                "duration": 100,
+                "amplifier": 0
+              }
+            }
           }
         ]
       }
     },
-    "tier0_cooldown": 100,
+    "tier0_cooldown": 20,
     "tier1_enable": false
   },
   "glow": {

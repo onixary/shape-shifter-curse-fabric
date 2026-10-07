@@ -115,7 +115,9 @@ public class FormPerkCheck {
         context.assertTrue(glow.isActive() && glow.doesApply(near), "Preview chooses nearest living target");
         context.assertTrue(!glow.doesApply(far), "Near target occludes far target");
         charge.fire(false);
-        context.assertTrue(Math.abs(near.getVelocity().z + 1) < 0.001 && Math.abs(near.getVelocity().y - 0.5) < 0.001, "Apoli release uses configured pull and upward velocity");
+        context.assertTrue(Math.abs(near.getVelocity().z + 1.5) < 0.001 && Math.abs(near.getVelocity().y - 0.9) < 0.001, "Apoli release uses configured pull and upward velocity");
+        context.assertTrue(near.hasStatusEffect(StatusEffects.SLOW_FALLING) && near.getStatusEffect(StatusEffects.SLOW_FALLING).getDuration() == 100, "Pulled target receives five seconds of slow falling");
+        context.assertTrue(!far.hasStatusEffect(StatusEffects.SLOW_FALLING) && !player.hasStatusEffect(StatusEffects.SLOW_FALLING), "Slow falling only applies to the selected target");
         context.assertTrue(far.getVelocity().lengthSquared() == 0, "Release only affects first target");
         context.assertTrue(!glow.isActive(), "Release clears glow condition");
         context.setBlockState(new net.minecraft.util.math.BlockPos(0, 2, 2), net.minecraft.block.Blocks.STONE);

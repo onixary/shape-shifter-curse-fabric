@@ -1538,15 +1538,11 @@
   "ssc_perk.shape-shifter-curse.axolotl_tidal_pull.name": [
     "Tidal Pull"
   ],
-  "ssc_perk.shape-shifter-curse.axolotl_tidal_pull.desc": [
-    "Hold active skill 3 to spend 20 moisture and highlight the first living target within 10 blocks in blue. Release to pull it toward you and upward. Cooldown: 5 seconds; cancelling does not refund the cost."
-  ],
+  "ssc_perk.shape-shifter-curse.axolotl_tidal_pull.desc": ["Hold active skill 3 to spend 20 moisture and highlight the first living target within 10 blocks in blue. Release to pull it toward you and upward, applying Slow Falling for 5 seconds. Cooldown: 5 seconds; cancelling does not refund the cost."],
   "power.shape-shifter-curse.perks.axolotl_tidal_pull.name": [
     "Tidal Pull"
   ],
-  "power.shape-shifter-curse.perks.axolotl_tidal_pull.description": [
-    "Hold active skill 3 to spend 20 moisture and highlight the first living target within 10 blocks in blue. Release to pull it toward you and upward. Cooldown: 5 seconds; cancelling does not refund the cost."
-  ],
+  "power.shape-shifter-curse.perks.axolotl_tidal_pull.description": ["Hold active skill 3 to spend 20 moisture and highlight the first living target within 10 blocks in blue. Release to pull it toward you and upward, applying Slow Falling for 5 seconds. Cooldown: 5 seconds; cancelling does not refund the cost."],
   "ssc_perk.shape-shifter-curse.axolotl_moisture_return_1.name": [
     "Moisture Return I"
   ],

@@ -115,8 +115,14 @@ public class PlayerEventHandler {
             if (newPlayer.getWorld().isClient()) return;
 
             copyTransformativeEffect(oldPlayer, newPlayer);
-            copyFormAndAbility(oldPlayer, newPlayer);
+            copyFormData(oldPlayer, newPlayer);
             //PlayerTeamHandler.updatePlayerTeam(newPlayer);
+        });
+
+        // Origins/Apoli component copying can remove powers absent from the base Origin.
+        // Restore subform, perk and accessory powers only after every copy has completed.
+        ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
+            FormUtils._loadForm(newPlayer, FormUtils.getPlayerForm(newPlayer));
         });
 
         //load event
@@ -209,13 +215,12 @@ public class PlayerEventHandler {
         newPlayer.addStatusEffect(transformativeStatusInstance);
     }
 
-    private static void copyFormAndAbility(ServerPlayerEntity oldPlayer, ServerPlayerEntity newPlayer) {
+    private static void copyFormData(ServerPlayerEntity oldPlayer, ServerPlayerEntity newPlayer) {
         PlayerFormComponent oldComponent = PlayerFormComponent.COMPONENT.get(oldPlayer);
         PlayerFormComponent newComponent = PlayerFormComponent.COMPONENT.get(newPlayer);
         NbtCompound nbt = new NbtCompound();
         oldComponent.writeToNbt(nbt);
         newComponent.readFromNbt(nbt);
-        FormUtils._loadForm(newPlayer, newComponent.nowForm);
     }
 
     private static void handleEntityTeam(ServerWorld world){
