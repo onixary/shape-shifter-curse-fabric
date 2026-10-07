@@ -1,6 +1,9 @@
 package net.onixary.shapeShifterCurseFabric.items;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
@@ -281,12 +284,12 @@ public class RegCustomItem {
          */
     }
 
-    @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
+    @Environment(EnvType.CLIENT)
     public static void registerModelPredicates() {
-        net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry.register(
+        FabricModelPredicateProviderRegistry.register(
                 COMPOUND_KINETIC_BOW, new Identifier("pull"), (stack, world, entity, seed) ->
                         entity != null && entity.getActiveItem() == stack ? (stack.getMaxUseTime() - entity.getItemUseTimeLeft()) / 20.0f : 0.0f);
-        net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry.register(
+        FabricModelPredicateProviderRegistry.register(
                 COMPOUND_KINETIC_BOW, new Identifier("pulling"), (stack, world, entity, seed) ->
                         entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0f : 0.0f);
     }

@@ -20,7 +20,6 @@ public class RegPerks {
     public static final HashMap<Identifier, IPerk> PerkRegistry = new HashMap<>();
     public static final HashMap<Identifier, PerkTree> PerkTreeRegistry = new HashMap<>();
     public static final HashMap<Identifier, IPerkClient> PerkClientRegistry = new HashMap<>();
-    public static final HashMap<Identifier, Text> PerkTreeNameRegistry = new HashMap<>();
 
     public static final Identifier FALLBACK_PERK_ICON = ShapeShifterCurseFabric.identifier("textures/perk/fallback.png");
     public static final Identifier EMPTY_PERK_TREE = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("empty")));
