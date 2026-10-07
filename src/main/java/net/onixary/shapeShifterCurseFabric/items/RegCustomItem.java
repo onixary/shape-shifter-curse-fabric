@@ -1,6 +1,9 @@
 package net.onixary.shapeShifterCurseFabric.items;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
@@ -29,9 +32,8 @@ import static net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock.*;
 public class RegCustomItem {
     private RegCustomItem(){}
 
-    public static final Item GRAPHENE_BLADE = register("graphene_blade", new net.minecraft.item.SwordItem(
-            net.minecraft.item.ToolMaterials.DIAMOND, 4, -2.4f, new Item.Settings().maxDamage(128)));
-    public static final Item COMPOUND_KINETIC_BOW = register("compound_kinetic_bow", new net.minecraft.item.BowItem(new Item.Settings().maxDamage(768)));
+    public static final Item GRAPHENE_BLADE = register("graphene_blade", new SwordItem(ToolMaterials.DIAMOND, 4, -2.4f, new Item.Settings().maxDamage(128)));
+    public static final Item COMPOUND_KINETIC_BOW = register("compound_kinetic_bow", new BowItem(new Item.Settings().maxDamage(768)));
 
     //public static final Item CURSED_BOOK_OF_SHAPE_SHIFTER = register("cursed_book_of_shape_shifter", new StartBook(new StartBook.Settings()));
     public static final Item BOOK_OF_SHAPE_SHIFTER = register("book_of_shape_shifter", new BookOfShapeShifter(new BookOfShapeShifter.Settings()));
@@ -282,12 +284,12 @@ public class RegCustomItem {
          */
     }
 
-    @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
+    @Environment(EnvType.CLIENT)
     public static void registerModelPredicates() {
-        net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry.register(
+        FabricModelPredicateProviderRegistry.register(
                 COMPOUND_KINETIC_BOW, new Identifier("pull"), (stack, world, entity, seed) ->
                         entity != null && entity.getActiveItem() == stack ? (stack.getMaxUseTime() - entity.getItemUseTimeLeft()) / 20.0f : 0.0f);
-        net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry.register(
+        FabricModelPredicateProviderRegistry.register(
                 COMPOUND_KINETIC_BOW, new Identifier("pulling"), (stack, world, entity, seed) ->
                         entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0f : 0.0f);
     }

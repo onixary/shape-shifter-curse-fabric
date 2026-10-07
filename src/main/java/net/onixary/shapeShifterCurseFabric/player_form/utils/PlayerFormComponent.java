@@ -44,7 +44,8 @@ public class PlayerFormComponent implements AutoSyncedComponent {
 
     public Identifier nowPerkTree = RegPerks.EMPTY_PERK_TREE;
     public HashMap<Identifier, List<Identifier>> formPerkMap = new HashMap<>();
-    public final java.util.Set<Identifier> freePerkForms = new java.util.HashSet<>();
+    // TODO 之后改成玩家全局的吧 这样写感觉不太行
+    public final Set<Identifier> freePerkForms = new HashSet<>();
 
     // 仅用于(客户端)和(服务器端判断是否需要同步)
     public boolean isFlying;
