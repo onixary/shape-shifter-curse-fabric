@@ -39,6 +39,29 @@ Original author's statement:
 > 1-bit Pixel Icons by Nikoichu is marked CC0 1.0
 > All of these icons are licensed under CC0, which means you have absolutely no restrictions on how you can use them. I would still appreciate it if you gave me attribution for my work, but it's not strictly required.
 
+### Avali sub-form models (concept from others)
+
+- Upstream: the avali, an open species whose content is shared by its creator
+  under CC BY-SA 2.0
+- License: Creative Commons Attribution-ShareAlike 2.0 (CC BY-SA 2.0)
+- License page: <https://creativecommons.org/licenses/by-sa/2.0/>
+- Applies to:
+  - `3d_models/player_form/bat_3_sub_avali/**`
+  - `3d_models/anim_speed_scale/bat_3_sub_avali.json`
+  - `src/main/resources/assets/shape-shifter-curse/geo/form/form_bat_3_sub_avali.geo.json`
+  - `src/main/resources/assets/shape-shifter-curse/textures/form/form_bat_3_sub_avali/**`
+  - `src/main/resources/assets/shape-shifter-curse/player_animation/avali_*.json`
+  - `src/main/resources/assets/shape-shifter-curse/ssc_form_model/origins.origin.shape-shifter-curse.form_bat_3_sub_avali.json`
+
+These are this project's own models rather than files taken from another project:
+they are listed here because they depict the avali, a concept that comes from
+someone else, and therefore have to follow the species' share-alike terms. They
+are licensed under CC BY-SA 2.0, **not** under this project's CC BY-NC 4.0 asset
+license even though they sit inside the asset trees listed in `LICENSING.md`
+(which covers them in its section 5). The ShareAlike condition carries over to the
+assets exported from them (listed above; they ship inside the built jar). Keep the
+attribution to this mod and to the avali species when reusing them.
+
 ### tools/SignSystem
 
 - Author: XuHaoNan
@@ -109,7 +132,7 @@ SOFTWARE.
 这些部分**不受**本项目 MIT / CC BY-NC 4.0 授权的约束，适用其原始授权；按其
 授权要求，此处附上原始版权声明。
 
-## 仓库内的第三方文件
+## 仓库内采用其他授权的文件
 
 - **Origins**（<https://github.com/apace100/origins-fabric>），MIT 授权，
   Copyright (c) 2020 apace100，适用于
@@ -121,6 +144,18 @@ SOFTWARE.
   [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)，适用于
   `3d_models/icon/1-bit_Pixel_Icons/**`。该图标包保留原作者的 CC0 1.0 授权，
   不适用本项目的 CC BY-NC 4.0 资源许可。作者欢迎署名，但不强制要求。
+- **avali 子形态模型**（本项目自己的作品，并非取自其他项目的文件；列在此处是因为
+  它们描绘的 avali 是源自他人的概念，须跟随其授权），其内容由原作者按
+  [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) 共享，因此这些
+  模型及其导出的资源采用 CC BY-SA 2.0，**不属于**本项目的 CC BY-NC 4.0 资源许可，
+  即使它们位于 `LICENSING.md` 列出的资源目录内。适用文件：
+  `3d_models/player_form/bat_3_sub_avali/**`、
+  `3d_models/anim_speed_scale/bat_3_sub_avali.json`，以及
+  `src/main/resources/assets/shape-shifter-curse/` 下由它们导出的
+  `geo/form/form_bat_3_sub_avali.geo.json`、`textures/form/form_bat_3_sub_avali/**`、
+  `player_animation/avali_*.json`、`ssc_form_model/origins.origin.shape-shifter-curse.form_bat_3_sub_avali.json`。
+  相同方式共享的条款会延续到这些导出资源上（它们随构建出的 jar 一起分发），
+  复用时请保留对本 mod 与 avali 物种的署名。
 - **tools/SignSystem**，作者 XuHaoNan，按文件头声明为「保留所有权利」，
   不是开源代码，复用或再分发需取得作者许可。见
   `tools/SignSystem/LICENSE.txt`。

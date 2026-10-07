@@ -5,6 +5,14 @@ Exception: icon/1-bit_Pixel_Icons/** contains 1-bit Pixel Icons by Nikoichu,
 licensed under CC0 1.0 Universal. Attribution is appreciated but not required.
 See LICENSE-1-bit-Pixel-Icons.txt and ../THIRD-PARTY-NOTICES.md.
 
+Exception: the avali sub-form files (player_form/bat_3_sub_avali/**,
+anim_speed_scale/bat_3_sub_avali.json) depict the avali, an open species which is
+itself shared under CC BY-SA 2.0. They follow the species' license and are licensed
+under Creative Commons Attribution-ShareAlike 2.0 (CC BY-SA 2.0), not CC BY-NC 4.0;
+the assets exported from them keep that license as well.
+License page: https://creativecommons.org/licenses/by-sa/2.0/
+See ../LICENSING.md and ../THIRD-PARTY-NOTICES.md.
+
 - Full license text: LICENSE-CC-BY-NC-4.0.txt in the repository root
 - Scope, exceptions and third-party carve-outs: LICENSING.md in the repository root
 - License page: https://creativecommons.org/licenses/by-nc/4.0/
@@ -22,3 +30,11 @@ Copyright (c) 2025 onixary and contributors
 例外：icon/1-bit_Pixel_Icons/** 为 Nikoichu 创作的 1-bit Pixel Icons，采用
 CC0 1.0 Universal，不适用上述 CC BY-NC 4.0 许可。作者欢迎署名，但不强制要求。
 详见 LICENSE-1-bit-Pixel-Icons.txt 及仓库根目录的 THIRD-PARTY-NOTICES.md。
+
+例外：avali 子形态相关文件（player_form/bat_3_sub_avali/**、
+anim_speed_scale/bat_3_sub_avali.json）描绘的是 avali 这一开放物种，该物种自身
+按 CC BY-SA 2.0 共享。这些文件跟随物种的授权，采用 CC BY-SA 2.0
+（署名-相同方式共享 2.0），不适用上述 CC BY-NC 4.0 许可；由它们导出的资源
+同样保持该授权。
+协议页面：https://creativecommons.org/licenses/by-sa/2.0/
+详见仓库根目录的 LICENSING.md 与 THIRD-PARTY-NOTICES.md。
