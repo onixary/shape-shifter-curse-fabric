@@ -73,7 +73,6 @@ import net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusPotionEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.attachment.EffectManager;
-import net.onixary.shapeShifterCurseFabric.studio.StudioGenerated;
 import net.onixary.shapeShifterCurseFabric.util.*;
 import net.onixary.shapeShifterCurseFabric.util.Accessory.AccessoryUtils;
 import net.onixary.shapeShifterCurseFabric.util.Accessory.DefaultAccessory;
@@ -196,7 +195,6 @@ public class ShapeShifterCurseFabric implements ModInitializer {
     public void onInitialize() {
         // PlayerDataStorage.initialize(); // 移除这行，因为这里还没有服务器实例
         RegCustomItem.initialize();
-        StudioGenerated.register();
         RegCustomBlock.initialize();
         RegTransformativeEntitySpawnEgg.initialize();
         RegTStatusEffect.initialize();
