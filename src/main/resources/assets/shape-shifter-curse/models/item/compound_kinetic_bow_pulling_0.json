@@ -1,0 +1,6 @@
+{
+    "parent": "item/bow",
+    "textures": {
+        "layer0": "shape-shifter-curse:item/compound_kinetic_bow_pulling_0"
+    }
+}
