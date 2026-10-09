@@ -407,12 +407,13 @@ public class RegPerks {
         return perk != null ? perk.getDesc() : IPerkClient.getDefaultDesc(perkID);
     }
     // SSC Studio: begin perk registrations
-    public static final Identifier SSC_P_shape_shifter_curse_snowfox_root = registerPerkCommon(new NormalPerk(new Identifier("shape-shifter-curse:snowfox_root"))
-            .setName(Text.translatable("ssc_perk.shape-shifter-curse.snowfox_root.name")).setDesc(Text.translatable("ssc_perk.shape-shifter-curse.snowfox_root.desc"))
-            .setIcon(new Identifier("shape-shifter-curse:textures/perk/fallback.png")).cost(new BaseCost(RegCostType.COST_XP, 0))
+    // 既然名字用的是默认值 就不要加进Build链了 测试Perk留个测试的ID 而且都在SSC的Class里 没必要在Field名里加SSC的ID
+    // Field名前的P_/T_是用于IDEA快速填充的 防止填错导致找不到对应的Perk(比如把树的ID填到Perk的ID上)
+    public static final Identifier P_PerkTestRoot = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("_perk_test_root"))
+            .setIcon(FALLBACK_PERK_ICON).cost(new BaseCost(RegCostType.NO_COST, 0))
             .addPower().removePower());
-    public static final Identifier SSC_T_shape_shifter_curse_f_snowfox_tree = registerPerkTree(new PerkTree(new Identifier("shape-shifter-curse:f_snowfox_tree"))
-            .addNode(SSC_P_shape_shifter_curse_snowfox_root, 0, 0)
+    public static final Identifier T_PerkTestTree = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("_perk_test_tree"))
+            .addNode(P_PerkTestRoot, 0, 0)
     );
     // SSC Studio: end perk registrations
 }
