@@ -5,6 +5,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
+import net.onixary.shapeShifterCurseFabric.util.util.ISprite;
 import net.onixary.shapeShifterCurseFabric.util.util.cost.BaseCost;
 import net.onixary.shapeShifterCurseFabric.util.util.cost.ICost;
 import org.jetbrains.annotations.Nullable;
@@ -25,7 +26,7 @@ public class NormalPerk implements IPerk, IPerkClient {
 
     public ICost cost = new BaseCost();
 
-    public @Nullable Identifier Icon = null;
+    public @Nullable ISprite Icon = null;
     public @Nullable Text Name = null;
     public @Nullable Text Desc = null;
 
@@ -111,7 +112,7 @@ public class NormalPerk implements IPerk, IPerkClient {
         return this;
     }
 
-    public NormalPerk setIcon(Identifier icon) {
+    public NormalPerk setIcon(ISprite icon) {
         this.Icon = icon;
         return this;
     }
@@ -127,7 +128,7 @@ public class NormalPerk implements IPerk, IPerkClient {
     }
 
     @Override
-    public @Nullable Identifier getIcon() {
+    public @Nullable ISprite getIcon() {
         if (Icon != null) {
             return Icon;
         }

@@ -387,7 +387,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     // playerGainedPerk 由调用方获取 毕竟drawNode调用频繁
     public void drawNode(DrawContext context, PerkTree.PerkNode perkNode, @Nullable List<Identifier> playerGainedPerk, int mouseX, int mouseY, float delta) {
         // this.drawConnectLine(context, perkNode);
-        Identifier icon = RegPerks.getPerkIcon(perkNode.perkID);
+        ISprite icon = RegPerks.getPerkIcon(perkNode.perkID);
         if (icon == null) {
             icon = RegPerks.FALLBACK_PERK_ICON;
         }
@@ -413,7 +413,8 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         // if (mouseX >= left && mouseX < left + NodeSelectRectWidth && mouseY >= top && mouseY < top + NodeSelectRectHeight) {
         //     context.drawTexture(LABEL_SELECT, NodePosX - 9, NodePosY - 9, 0, 0, 20, 20, 20, 20);
         // }
-        context.drawTexture(icon, NodePosX + NodeDrawStartX, NodePosY + NodeDrawStartY, 0, 0, NodeTextureWidth, NodeTextureHeight, NodeTextureWidth, NodeTextureHeight);
+        icon.draw(context, NodePosX + NodeDrawStartX, NodePosY + NodeDrawStartY);
+        // context.drawTexture(icon, NodePosX + NodeDrawStartX, NodePosY + NodeDrawStartY, 0, 0, NodeTextureWidth, NodeTextureHeight, NodeTextureWidth, NodeTextureHeight);
         // final int PerkNameBoxWidth = 33;
         // Text perkNameText = RegPerks.getPerkName(perkNode.perkID);
         // int perkNameTextWidth = this.textRenderer.getWidth(perkNameText);

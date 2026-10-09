@@ -695,10 +695,7 @@ public class ModPacketsS2C {
 
 
     public static void receiveOpenSelectSubFormMenu(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
-        client.execute(() -> {
-            SubFormSelectScreen screen = new SubFormSelectScreen(Text.literal(""));
-            client.setScreen(screen);
-        });
+        client.execute(SubFormSelectScreen::openSubFormSelectScreen);
     }
 
     public static void sendSetSubForm(Identifier formID) {
