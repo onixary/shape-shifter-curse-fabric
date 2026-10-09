@@ -1,28 +1,28 @@
 {
   "parent": "minecraft:item/bow",
   "textures": {
-    "layer0": "minecraft:item/bow"
+    "layer0": "shape-shifter-curse:item/compound_kinetic_bow"
   },
   "overrides": [
     {
       "predicate": {
         "pulling": 1
       },
-      "model": "minecraft:item/bow_pulling_0"
+      "model": "shape-shifter-curse:item/compound_kinetic_bow_pulling_0"
     },
     {
       "predicate": {
         "pulling": 1,
         "pull": 0.65
       },
-      "model": "minecraft:item/bow_pulling_1"
+      "model": "shape-shifter-curse:item/compound_kinetic_bow_pulling_1"
     },
     {
       "predicate": {
         "pulling": 1,
         "pull": 0.9
       },
-      "model": "minecraft:item/bow_pulling_2"
+      "model": "shape-shifter-curse:item/compound_kinetic_bow_pulling_2"
     }
   ]
 }

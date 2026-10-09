@@ -11,7 +11,7 @@
     },
     "start_action": {
       "type": "apoli:play_sound",
-      "sound": "minecraft:entity.axolotl.splash",
+      "sound": "minecraft:block.conduit.activate",
       "volume": 0.5,
       "pitch": 0.8
     },
@@ -26,14 +26,64 @@
         },
         {
           "type": "apoli:play_sound",
-          "sound": "minecraft:entity.wither.break_block",
+          "sound": "minecraft:entity.warden.attack_impact",
           "volume": 0.5,
           "pitch": 0.8
         },
         {
+          "type": "shape-shifter-curse:spawn_particles_in_circle",
+          "particle": {
+            "type": "minecraft:nautilus"
+          },
+          "count": 1,
+          "speed": 0.01,
+          "force": true,
+          "spread": {
+            "x": 0.4,
+            "y": 0.6,
+            "z": 0.4
+          },
+          "radius": 3.0,
+          "sample_count": 32
+        },
+        {
+          "type": "shape-shifter-curse:spawn_particles_in_circle",
+          "particle": {
+            "type": "minecraft:dust",
+            "params": "0.11 0.18 0.69 2"
+          },
+          "count": 1,
+          "speed": 0.01,
+          "force": true,
+          "spread": {
+            "x": 0.4,
+            "y": 0.6,
+            "z": 0.4
+          },
+          "radius": 6.0,
+          "sample_count": 32
+        },
+        {
+          "type": "shape-shifter-curse:spawn_particles_in_circle",
+          "particle": {
+            "type": "minecraft:dust",
+            "params": "0.11 0.18 0.69 2"
+          },
+          "count": 1,
+          "speed": 0.01,
+          "force": true,
+          "spread": {
+            "x": 0.4,
+            "y": 0.6,
+            "z": 0.4
+          },
+          "radius": 8.0,
+          "sample_count": 32
+        },
+        {
           "type": "shape-shifter-curse:oriented_box",
-          "width": 9.0,
-          "length": 9.0,
+          "width": 18.0,
+          "length": 18.0,
           "height": 3.0,
           "centered": true,
           "bientity_condition": {
@@ -114,12 +164,108 @@
         },
         {
           "type": "shape-shifter-curse:in_oriented_box",
-          "width": 6.0,
-          "length": 6.0,
+          "width": 18.0,
+          "length": 18.0,
           "height": 3.0,
           "centered": true
         }
       ]
     }
+  },
+  "charging_effects": {
+    "type": "origins:action_over_time",
+    "condition": {
+      "type": "shape-shifter-curse:charging",
+      "power": "shape-shifter-curse:perks/axolotl_collect_water_charge"
+    },
+    "entity_action": {
+      "type": "apoli:and",
+      "actions": [
+        {
+          "type": "shape-shifter-curse:spawn_particles_in_circle",
+          "particle": {
+            "type": "minecraft:sculk_charge",
+            "params": "0"
+          },
+          "count": 1,
+          "speed": 0.01,
+          "force": true,
+          "spread": {
+            "x": 0.4,
+            "y": 0.6,
+            "z": 0.4
+          },
+          "radius": 9.0,
+          "sample_count": 32
+        },
+        {
+          "type": "apoli:apply_effect",
+          "effect": {
+            "effect": "minecraft:slowness",
+            "duration": 10,
+            "amplifier": 1,
+            "show_particles": false,
+            "show_icon": false
+          }
+        },
+        {
+          "type": "shape-shifter-curse:oriented_box",
+          "width": 18.0,
+          "length": 18.0,
+          "height": 3.0,
+          "centered": true,
+          "bientity_condition": {
+            "type": "apoli:and",
+            "conditions": [
+              {
+                "type": "shape-shifter-curse:enemy"
+              },
+              {
+                "type": "apoli:can_see"
+              }
+            ]
+          },
+          "bientity_action": {
+            "type": "apoli:and",
+            "actions": [
+              {
+                "type": "shape-shifter-curse:directed_particles",
+                "particle": "minecraft:electric_spark",
+                "direction": "target_to_actor",
+                "actor_offset": {
+                  "x": 0,
+                  "y": 0.5,
+                  "z": 0
+                },
+                "target_offset": {
+                  "x": 0,
+                  "y": 0.5,
+                  "z": 0
+                },
+                "speed": 1.2,
+                "count": 4,
+                "force": true
+              },
+              {
+                "type": "apoli:target_action",
+                "action": {
+                  "type": "apoli:spawn_particles",
+                  "particle": "minecraft:splash",
+                  "count": 8,
+                  "force": true,
+                  "spread": {
+                    "x": 0.5,
+                    "y": 0.6,
+                    "z": 0.5
+                  },
+                  "speed": 0.02
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "interval": 4
   }
 }

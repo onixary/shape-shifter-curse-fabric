@@ -10,6 +10,7 @@ public class AdditionalEntityActions {
     public static void register() {
         FamiliarFoxActions.register();
         PerkActions.registerActions();
+        registerBIAction(DirectedParticlesAction.getFactory());
         registerAction(AddInstinctAction.getFactory());
         registerAction(SetFallingDistanceAction.createFactory());
         TransformAction.registerAction(AdditionalEntityActions::registerAction, AdditionalEntityActions::registerBIAction);

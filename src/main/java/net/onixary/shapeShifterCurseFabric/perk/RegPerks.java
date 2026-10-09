@@ -406,4 +406,13 @@ public class RegPerks {
         IPerkClient perk = getPerkClientData(perkID);
         return perk != null ? perk.getDesc() : IPerkClient.getDefaultDesc(perkID);
     }
+    // SSC Studio: begin perk registrations
+    public static final Identifier SSC_P_shape_shifter_curse_snowfox_root = registerPerkCommon(new NormalPerk(new Identifier("shape-shifter-curse:snowfox_root"))
+            .setName(Text.translatable("ssc_perk.shape-shifter-curse.snowfox_root.name")).setDesc(Text.translatable("ssc_perk.shape-shifter-curse.snowfox_root.desc"))
+            .setIcon(new Identifier("shape-shifter-curse:textures/perk/fallback.png")).cost(new BaseCost(RegCostType.COST_XP, 0))
+            .addPower().removePower());
+    public static final Identifier SSC_T_shape_shifter_curse_f_snowfox_tree = registerPerkTree(new PerkTree(new Identifier("shape-shifter-curse:f_snowfox_tree"))
+            .addNode(SSC_P_shape_shifter_curse_snowfox_root, 0, 0)
+    );
+    // SSC Studio: end perk registrations
 }

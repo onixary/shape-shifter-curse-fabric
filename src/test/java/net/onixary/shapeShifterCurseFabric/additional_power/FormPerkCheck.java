@@ -25,10 +25,12 @@ public class FormPerkCheck {
         holder.addPower(chargeType,SOURCE);holder.addPower(glowType,SOURCE);
         var charge=(ChargePower)holder.getPower(chargeType);
         var glow=(io.github.apace100.apoli.power.EntityGlowPower)holder.getPower(glowType);
-        var a=c.spawnEntity(EntityType.ZOMBIE,new net.minecraft.util.math.BlockPos(2,1,0));
+        var a=c.spawnEntity(EntityType.ZOMBIE,new net.minecraft.util.math.BlockPos(8,1,0));
         var b=c.spawnEntity(EntityType.ZOMBIE,new net.minecraft.util.math.BlockPos(-2,1,0));
-        var far=c.spawnEntity(EntityType.ZOMBIE,new net.minecraft.util.math.BlockPos(5,1,0));
+        var far=c.spawnEntity(EntityType.ZOMBIE,new net.minecraft.util.math.BlockPos(11,1,0));
         var friend=c.spawnEntity(EntityType.COW,new net.minecraft.util.math.BlockPos(0,1,2));
+        // Isolate the enlarged area from entities and walls in neighbouring GameTests.
+        for (var entity : new net.minecraft.entity.Entity[]{p,a,b,far,friend}) entity.setPosition(entity.getPos().add(0,100,0));
         p.setAir(100);charge.onUse();charge.onUse();
         c.assertTrue(glow.isActive() && glow.doesApply(a) && glow.doesApply(b),"Hold previews enemies on both sides");
         c.assertTrue(!glow.doesApply(far) && !glow.doesApply(friend),"Preview excludes distant and friendly targets");
@@ -40,6 +42,7 @@ public class FormPerkCheck {
         charge.onUse();c.assertTrue(!charge.isCharging(),"Cooldown blocks restart");
         var jumpType=PowerTypeRegistry.get(id("perks/axolotl_propulsion_efficiency"));holder.addPower(jumpType,SOURCE);
         var jump=(ActionOnJumpPower)holder.getPower(jumpType);
+        p.setPosition(c.getAbsolute(new net.minecraft.util.math.Vec3d(.5,1,.5)));
         c.setBlockState(new net.minecraft.util.math.BlockPos(0,0,0),net.minecraft.block.Blocks.STONE);
         p.setOnGround(true);p.setSprinting(true);p.setVelocity(0,0,0);jump.executeAction();
         c.assertTrue(p.getAir()==159 && p.getVelocity().z>.29,"Land sprint jump costs one moisture and pushes forward");

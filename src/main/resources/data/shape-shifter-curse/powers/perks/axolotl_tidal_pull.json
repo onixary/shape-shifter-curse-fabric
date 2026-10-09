@@ -39,7 +39,7 @@
     },
     "tier0_use_action": {
       "type": "apoli:raycast",
-      "distance": 10,
+      "distance": 20,
       "block": true,
       "entity": true,
       "shape_type": "collider",
@@ -63,12 +63,43 @@
           {
             "type": "apoli:target_action",
             "action": {
-              "type": "apoli:apply_effect",
-              "effect": {
-                "effect": "minecraft:slow_falling",
-                "duration": 100,
-                "amplifier": 0
-              }
+              "type": "apoli:and",
+              "actions": [
+                {
+                  "type": "apoli:apply_effect",
+                  "effect": {
+                    "effect": "minecraft:slow_falling",
+                    "duration": 100,
+                    "amplifier": 0
+                  }
+                },
+                {
+                  "type": "apoli:spawn_particles",
+                  "particle": "minecraft:splash",
+                  "count": 8,
+                  "force": true,
+                  "spread": {
+                    "x": 0.5,
+                    "y": 0.6,
+                    "z": 0.5
+                  },
+                  "speed": 0.02
+                }
+              ]
+            }
+          },
+          {
+            "type": "apoli:actor_action",
+            "action": {
+              "type": "apoli:and",
+              "actions": [
+                {
+                  "type": "apoli:play_sound",
+                  "sound": "minecraft:entity.squid.squirt",
+                  "volume": 0.5,
+                  "pitch": 0.8
+                }
+              ]
             }
           }
         ]
@@ -90,6 +121,69 @@
     "bientity_condition": {
       "type": "shape-shifter-curse:raycast_target",
       "distance": 20.0
+    }
+  },
+
+  "charging_effects": {
+    "type": "apoli:action_over_time",
+    "interval": 4,
+    "condition": {
+      "type": "shape-shifter-curse:charging",
+      "power": "shape-shifter-curse:perks/axolotl_tidal_pull_charge"
+    },
+    "entity_action": {
+      "type": "apoli:raycast",
+      "distance": 20,
+      "block": true,
+      "entity": true,
+      "shape_type": "collider",
+      "fluid_handling": "none",
+      "bientity_condition": {
+        "type": "apoli:target_condition",
+        "condition": {
+          "type": "apoli:health",
+          "comparison": ">",
+          "compare_to": 0
+        }
+      },
+      "bientity_action": {
+        "type": "apoli:and",
+        "actions": [
+          {
+            "type": "shape-shifter-curse:directed_particles",
+            "particle": "minecraft:electric_spark",
+            "direction": "target_to_actor",
+            "actor_offset": {
+              "x": 0,
+              "y": 0.5,
+              "z": 0
+            },
+            "target_offset": {
+              "x": 0,
+              "y": 0.5,
+              "z": 0
+            },
+            "speed": 1.2,
+            "count": 4,
+            "force": true
+          },
+          {
+            "type": "apoli:target_action",
+            "action": {
+              "type": "apoli:spawn_particles",
+              "particle": "minecraft:splash",
+              "count": 8,
+              "force": true,
+              "spread": {
+                "x": 0.5,
+                "y": 0.6,
+                "z": 0.5
+              },
+              "speed": 0.02
+            }
+          }
+        ]
+      }
     }
   }
 }

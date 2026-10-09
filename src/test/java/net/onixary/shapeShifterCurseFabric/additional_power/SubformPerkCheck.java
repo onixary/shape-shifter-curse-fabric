@@ -14,6 +14,36 @@ import net.onixary.shapeShifterCurseFabric.perk.*;
 
 public class SubformPerkCheck {
     @GameTest(templateName=FabricGameTest.EMPTY_STRUCTURE)
+    public void directedParticleOffsets(TestContext c) {
+        var actor=c.createMockSurvivalPlayer();
+        var target=net.minecraft.entity.EntityType.COW.create(c.getWorld());
+        actor.setPosition(0,1,0);target.setPosition(3,2,4);
+        var factory=DirectedParticlesAction.getFactory();
+        var json=com.google.gson.JsonParser.parseString("""
+                {"particle":"minecraft:flame", "speed":0.5, "count":3,
+                 "actor_offset":{"x":1,"y":2,"z":3},
+                 "target_offset":{"x":-1,"y":1,"z":0}}
+                """).getAsJsonObject();
+        var a=actor.getBoundingBox().getCenter().add(1,2,3);
+        var b=target.getBoundingBox().getCenter().add(-1,1,0);
+        var forward=DirectedParticlesAction.packet(factory.getSerializableData().read(json),actor,target);
+        var velocity=new net.minecraft.util.math.Vec3d(forward.getOffsetX(),forward.getOffsetY(),forward.getOffsetZ()).multiply(forward.getSpeed());
+        c.assertTrue(new net.minecraft.util.math.Vec3d(forward.getX(),forward.getY(),forward.getZ()).distanceTo(a)<1e-6,"Actor offset is relative to its body center");
+        c.assertTrue(velocity.distanceTo(b.subtract(a).normalize().multiply(.5))<1e-6 && forward.getCount()==0,"Packet uses directed velocity mode, not random spread");
+        json.addProperty("direction","target_to_actor");
+        var reverse=DirectedParticlesAction.packet(factory.getSerializableData().read(json),actor,target);
+        c.assertTrue(new net.minecraft.util.math.Vec3d(reverse.getX(),reverse.getY(),reverse.getZ()).distanceTo(b)<1e-6,"Reverse emission starts at target offset");
+        c.assertTrue(Math.abs(reverse.getOffsetX()+forward.getOffsetX())<1e-6 && Math.abs(reverse.getOffsetY()+forward.getOffsetY())<1e-6 && Math.abs(reverse.getOffsetZ()+forward.getOffsetZ())<1e-6,"Reversing retains actor/target offset ownership");
+        json.addProperty("type","shape-shifter-curse:directed_particles");
+        io.github.apace100.apoli.data.ApoliDataTypes.BIENTITY_ACTION.read(json).accept(new net.minecraft.util.Pair<>(actor,target));
+        json.remove("actor_offset");json.remove("target_offset");
+        var zero=DirectedParticlesAction.packet(factory.getSerializableData().read(json),actor,actor);
+        c.assertTrue(zero.getOffsetX()==0 && zero.getOffsetY()==0 && zero.getOffsetZ()==0,"Coincident endpoints have zero velocity");
+        json.addProperty("direction","invalid");boolean rejected=false;
+        try { factory.read(json); } catch (RuntimeException expected) { rejected=true; }
+        c.assertTrue(rejected,"Unknown direction rejected during parsing");c.complete();
+    }
+    @GameTest(templateName=FabricGameTest.EMPTY_STRUCTURE)
     public void respawnRestoresUnlockedPerks(TestContext c) {
         var p=c.createMockCreativeServerPlayerInWorld();
         var form=net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms.BAT_3_SUB_AVALI;
