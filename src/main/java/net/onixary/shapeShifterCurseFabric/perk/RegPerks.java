@@ -23,6 +23,7 @@ public class RegPerks {
     public static final HashMap<Identifier, PerkTree> PerkTreeRegistry = new HashMap<>();
     public static final HashMap<Identifier, IPerkClient> PerkClientRegistry = new HashMap<>();
 
+    public static final SpriteMap _TEST_SpriteMap = new SpriteMap(ShapeShifterCurseFabric.identifier("textures/perk/test_textures.png"), 512, 512, 0, 0, 16, 16);
     public static final SpriteMap PerkSpriteMap = new SpriteMap(ShapeShifterCurseFabric.identifier("textures/perk/textures.png"), 512, 512, 0, 0, 16, 16);
     public static final ISprite FALLBACK_PERK_ICON = PerkSpriteMap.bi(0, 0);
     public static final Identifier EMPTY_PERK_TREE = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("empty")));
@@ -412,29 +413,29 @@ public class RegPerks {
     // SSC Studio: end perk registrations
     // Xu的PerkTree样例
     // 出问题直接注释掉 等我需要演示时再修
-    public static final Identifier P_EXAMPLE_ROOT = registerPerkClientData(new VirtualPerk(ShapeShifterCurseFabric.identifier("_perk_example_root"), PerkSpriteMap.bi(0, 5)));
+    public static final Identifier P_EXAMPLE_ROOT = registerPerkClientData(new VirtualPerk(ShapeShifterCurseFabric.identifier("_perk_example_root"), _TEST_SpriteMap.bi(0, 5)));
     public static final Identifier P_EXAMPLE_MAGIC_0 = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("_perk_example_magic_0"))
-            .setIcon(PerkSpriteMap.bi(0, 1)).cost(new BaseCost(RegCostType.NO_COST, 0)));
+            .setIcon(_TEST_SpriteMap.bi(0, 1)).cost(new BaseCost(RegCostType.NO_COST, 0)));
     public static final Identifier P_EXAMPLE_MAGIC_1 = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("_perk_example_magic_1"))
-            .setIcon(PerkSpriteMap.bi(1, 1)).cost(new BaseCost(RegCostType.NO_COST, 0)));
+            .setIcon(_TEST_SpriteMap.bi(1, 1)).cost(new BaseCost(RegCostType.NO_COST, 0)));
     public static final Identifier P_EXAMPLE_MAGIC_2 = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("_perk_example_magic_2"))
-            .setIcon(PerkSpriteMap.bi(2, 1)).cost(new BaseCost(RegCostType.NO_COST, 0)));
+            .setIcon(_TEST_SpriteMap.bi(2, 1)).cost(new BaseCost(RegCostType.NO_COST, 0)));
     public static final Identifier P_EXAMPLE_MAGIC_3 = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("_perk_example_magic_3"))
-            .setIcon(PerkSpriteMap.bi(3, 1)).cost(new BaseCost(RegCostType.NO_COST, 0)));
+            .setIcon(_TEST_SpriteMap.bi(3, 1)).cost(new BaseCost(RegCostType.NO_COST, 0)));
     public static final Identifier P_EXAMPLE_MAGIC_4 = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("_perk_example_magic_4"))
-            .setIcon(PerkSpriteMap.bi(4, 1)).cost(new BaseCost(RegCostType.NO_COST, 0)));
+            .setIcon(_TEST_SpriteMap.bi(4, 1)).cost(new BaseCost(RegCostType.NO_COST, 0)));
     public static final Identifier P_EXAMPLE_MAGIC_ARMOR_1 = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("_perk_example_magic_armor_1"))
-            .setIcon(PerkSpriteMap.bi(0, 2)).cost(new BaseCost(RegCostType.NO_COST, 0)));
+            .setIcon(_TEST_SpriteMap.bi(0, 2)).cost(new BaseCost(RegCostType.NO_COST, 0)));
     public static final Identifier P_EXAMPLE_MAGIC_ARMOR_2 = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("_perk_example_magic_armor_2"))
-            .setIcon(PerkSpriteMap.bi(1, 2)).cost(new BaseCost(RegCostType.NO_COST, 0)));
+            .setIcon(_TEST_SpriteMap.bi(1, 2)).cost(new BaseCost(RegCostType.NO_COST, 0)));
     public static final Identifier P_EXAMPLE_MAGIC_ARMOR_PSY = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("_perk_example_magic_armor_psy"))
-            .setIcon(PerkSpriteMap.bi(1, 4)).cost(new BaseCost(RegCostType.NO_COST, 0)));
+            .setIcon(_TEST_SpriteMap.bi(1, 4)).cost(new BaseCost(RegCostType.NO_COST, 0)));
     public static final Identifier P_EXAMPLE_MAGIC_ARROW_BOOST_1 = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("_perk_example_magic_arrow_boost_1"))
-            .setIcon(PerkSpriteMap.bi(0, 3)).cost(new BaseCost(RegCostType.NO_COST, 0)));
+            .setIcon(_TEST_SpriteMap.bi(0, 3)).cost(new BaseCost(RegCostType.NO_COST, 0)));
     public static final Identifier P_EXAMPLE_MAGIC_ARROW_BOOST_2 = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("_perk_example_magic_arrow_boost_2"))
-            .setIcon(PerkSpriteMap.bi(1, 3)).cost(new BaseCost(RegCostType.NO_COST, 0)));
+            .setIcon(_TEST_SpriteMap.bi(1, 3)).cost(new BaseCost(RegCostType.NO_COST, 0)));
     public static final Identifier P_EXAMPLE_MAGIC_ARROW_THORN = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("_perk_example_magic_arrow_thorn"))
-            .setIcon(PerkSpriteMap.bi(0, 4)).cost(new BaseCost(RegCostType.NO_COST, 0)));
+            .setIcon(_TEST_SpriteMap.bi(0, 4)).cost(new BaseCost(RegCostType.NO_COST, 0)));
     public static final Identifier T_EXAMPLE_MAGIC = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("_perk_example_magic"))
             .addVirtualNode(P_EXAMPLE_ROOT, -1, 0)
             .addNode(P_EXAMPLE_MAGIC_0, 0, 0, new RootDependent(-1, 0))
