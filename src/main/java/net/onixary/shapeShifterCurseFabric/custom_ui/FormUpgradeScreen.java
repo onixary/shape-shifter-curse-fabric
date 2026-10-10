@@ -339,7 +339,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     // Utils
 
     public void drawConnectLine(DrawContext context, PerkTree.PerkNode perkNode) {
-        List<Identifier> depends = perkNode.dependentPerkIDs;
+        List<Identifier> depends = perkNode.dependents;
         if (depends.isEmpty()) return;
         for (Identifier depend : depends) {
             PerkTree.PerkNode dependNodeMetaData = perkTree.getNode(depend);
@@ -406,7 +406,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         if (this.nowSelectNode != null) {
             if (perkNode == this.nowSelectNode) {
                 SELECTED_SPRITE.draw(context, NodePosX - 9, NodePosY - 9);
-            } else if (this.nowSelectNode.dependentPerkIDs.contains(perkNode.perkID)) {
+            } else if (this.nowSelectNode.dependents.contains(perkNode.perkID)) {
                 DEPEND_SPRITE.draw(context, NodePosX - 9, NodePosY - 9);
             }
         }
@@ -430,6 +430,18 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         //         0xFFFFFFFF,
         //         false
         //         );
+    }
+
+    public void drawVirtualNode(DrawContext context, PerkTree.PerkNode perkNode, @Nullable List<Identifier> playerGainedPerk, int mouseX, int mouseY, float delta) {
+        ISprite icon = RegPerks.getPerkIcon(perkNode.perkID);
+        if (icon == null) {
+            icon = RegPerks.FALLBACK_PERK_ICON;
+        }
+        int virtualNodeX = nodeBaseX + posXPerTier * perkNode.tier;
+        int virtualNodeY = perkNode.y;
+        int NodePosX = nodeCenter.x + virtualNodeX;
+        int NodePosY = nodeCenter.y + virtualNodeY;
+        icon.draw(context, NodePosX + NodeDrawStartX, NodePosY + NodeDrawStartY);
     }
 
     public void drawAllNode(DrawContext context, int mouseX, int mouseY, float delta) {
@@ -478,6 +490,9 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         }
         for (PerkTree.PerkNode perkNode : tree.getAllNodes()) {
             this.drawNode(context, perkNode, playerGainedPerk, vMousePos.x, vMousePos.y, delta);
+        }
+        for (PerkTree.PerkNode perkNode : tree.getAllVirtualNodes()) {
+            this.drawVirtualNode(context, perkNode, playerGainedPerk, vMousePos.x, vMousePos.y, delta);
         }
         matrixStack.pop();
         context.disableScissor();
@@ -561,9 +576,9 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         if (playerGainedPerk != null && playerGainedPerk.contains(this.nowSelectNode.perkID)) {
             return false;
         }
-        if (this.nowSelectNode.dependentPerkIDs != null && !this.nowSelectNode.dependentPerkIDs.isEmpty()) {
+        if (this.nowSelectNode.dependents != null && !this.nowSelectNode.dependents.isEmpty()) {
             if (playerGainedPerk == null) return false;
-            for (Identifier dependentPerkID : this.nowSelectNode.dependentPerkIDs) if (!playerGainedPerk.contains(dependentPerkID)) return false;
+            for (Identifier dependentPerkID : this.nowSelectNode.dependents) if (!playerGainedPerk.contains(dependentPerkID)) return false;
         }
         ICost cost = perkCostMap.get(this.nowSelectNode.perkID);
         if (!PerkUtils.isFreeUnlock(client.player) && cost != null && !cost.getType().canPay_CLIENT(cost, client.player)) {

@@ -12,26 +12,28 @@ public class PerkTree {
         public final Identifier perkID;
         public final int tier;
         public final int y;
-        public final @NotNull ArrayList<@NotNull Identifier> dependentPerkIDs;
+        public final @NotNull ArrayList<@NotNull Identifier> dependents;
 
         public PerkNode(Identifier perkID, int tier, int y) {
             this.perkID = perkID;
             this.tier = tier;
             this.y = y;
-            this.dependentPerkIDs = new ArrayList<>();
+            this.dependents = new ArrayList<>();
         }
 
         public PerkNode(Identifier perkID, int tier, int y, @NotNull Identifier... dependentPerkIDs) {
             this.perkID = perkID;
             this.tier = tier;
             this.y = y;
-            this.dependentPerkIDs = new ArrayList<>(Arrays.asList(dependentPerkIDs));
+            this.dependents = new ArrayList<>(Arrays.asList(dependentPerkIDs));
         }
     }
 
     public final Identifier treeID;
     public final List<PerkNode> perkNodes = new ArrayList<>();
+    public final List<PerkNode> virtualNodes = new ArrayList<>();
     public final Map<Identifier, PerkNode> perkNodeMap = new HashMap<>();
+    public final Map<Identifier, PerkNode> virtualNodeMap = new HashMap<>();
 
     public PerkTree(Identifier treeID) {
         this.treeID = treeID;
@@ -45,8 +47,16 @@ public class PerkTree {
         return this.addNode(new PerkNode(perkID, tier, y));
     }
 
+    public PerkTree addVirtualNode(Identifier perkID, int tier, int y) {
+        return this.addVirtualNode(new PerkNode(perkID, tier, y));
+    }
+
     public PerkTree addNode(Identifier perkID, int tier, int y, Identifier... dependentPerkIDs) {
         return this.addNode(new PerkNode(perkID, tier, y, dependentPerkIDs));
+    }
+
+    public PerkTree addVirtualNode(Identifier perkID, int tier, int y, Identifier... dependentPerkIDs) {
+        return this.addVirtualNode(new PerkNode(perkID, tier, y, dependentPerkIDs));
     }
 
     public PerkTree addNode(PerkNode perkNode) {
@@ -55,14 +65,24 @@ public class PerkTree {
         return this;
     }
 
+    public PerkTree addVirtualNode(PerkNode perkNode) {
+        virtualNodes.add(perkNode);
+        virtualNodeMap.put(perkNode.perkID, perkNode);
+        return this;
+    }
+
     public @Nullable PerkNode getNode(Identifier perkID) {
         return perkNodeMap.get(perkID);
+    }
+
+    public @Nullable PerkNode getVirtualNode(Identifier perkID) {
+        return virtualNodeMap.get(perkID);
     }
 
     public @NotNull List<PerkNode> getDependentNode(Identifier perkID) {
         PerkNode perkNode = getNode(perkID);
         if (perkNode != null) {
-            return perkNodes.stream().filter(perkNode1 -> perkNode1.dependentPerkIDs.contains(perkID)).toList();
+            return perkNodes.stream().filter(perkNode1 -> perkNode1.dependents.contains(perkID)).toList();
         }
         return null;
     }
@@ -71,7 +91,15 @@ public class PerkTree {
         return new ArrayList<>(perkNodeMap.keySet());
     }
 
+    public @NotNull List<Identifier> getAllVirtualPerks() {
+        return new ArrayList<>(virtualNodeMap.keySet());
+    }
+
     public @NotNull List<PerkNode> getAllNodes() {
         return new ArrayList<>(perkNodes);
+    }
+
+    public @NotNull List<PerkNode> getAllVirtualNodes() {
+        return new ArrayList<>(virtualNodes);
     }
 }

@@ -81,6 +81,11 @@ public class RegPlayerForms {
     public static IForm SNOW_FOX_3_SUB_MARBLED_POLECAT = registerPlayerForm(new Form_SnowFox3_Sub_MarbledPolecat(ShapeShifterCurseFabric.identifier("snow_fox_3_sub_marbled_polecat")).perkTree(RegPerks.T_MarbledPolecatPerkTree));
     public static IForm BAT_3_SUB_AVALI = registerPlayerForm(new Form_Bat3_Sub_Avali(ShapeShifterCurseFabric.identifier("bat_3_sub_avali")).applyScaleFunc(NORMAL_SCALE_FUNC_BUILDER.apply(0.65f, 1.0f)).perkTree(RegPerks.T_AvaliPerkTree));
 
+    static {
+        // 一样 仅供开发 发布前得删 这么写虽然不符合标准 但都是开发中的东西 我只需要让开发中的东西能跑就行
+        ((NormalForm)FERAL_CAT_SP).perkTree(RegPerks.T_EXAMPLE_MAGIC);
+    }
+
     public static <T extends IForm> T registerPlayerForm(T form) {
         playerForms.put(form.getFormID(), form);
         form.onRegister();

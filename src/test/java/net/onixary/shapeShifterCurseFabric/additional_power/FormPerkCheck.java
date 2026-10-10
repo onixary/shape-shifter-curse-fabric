@@ -169,7 +169,7 @@ public class FormPerkCheck {
                 }
                 for (var power : perk.powerAdd) context.assertTrue(PowerTypeRegistry.get(power) != null, "Parsed power: " + power);
                 for (var power : perk.powerRemove) context.assertTrue(PowerTypeRegistry.get(power) != null, "Removed power exists: " + power);
-                for (var parent : node.dependentPerkIDs) context.assertTrue(tree.getNode(parent) != null, "Parent exists");
+                for (var parent : node.dependents) context.assertTrue(tree.getNode(parent) != null, "Parent exists");
             }
         }
         context.assertTrue(nodes == 26 && prisms == 8, "26 perks and 8 prism purchases");

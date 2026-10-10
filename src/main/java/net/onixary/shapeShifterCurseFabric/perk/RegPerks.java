@@ -377,8 +377,9 @@ public class RegPerks {
         return PerkTreeRegistry.get(perkTreeID);
     }
 
-    public static void registerPerkClientData(IPerkClient perkClient) {
+    public static Identifier registerPerkClientData(IPerkClient perkClient) {
         PerkClientRegistry.put(perkClient.getID(), perkClient);
+        return perkClient.getID();
     }
 
     public static @Nullable IPerkClient getPerkClientData(Identifier perkID) {
@@ -418,6 +419,7 @@ public class RegPerks {
     // SSC Studio: end perk registrations
     // Xu的PerkTree样例
     // 出问题直接注释掉 等我需要演示时再修
+    public static final Identifier P_EXAMPLE_ROOT = registerPerkClientData(new VirtualPerk(ShapeShifterCurseFabric.identifier("_perk_example_root"), PerkSpriteMap.bi(0, 5)));
     public static final Identifier P_EXAMPLE_MAGIC_0 = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("_perk_example_magic_0"))
             .setIcon(PerkSpriteMap.bi(0, 1)).cost(new BaseCost(RegCostType.NO_COST, 0)));
     public static final Identifier P_EXAMPLE_MAGIC_1 = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("_perk_example_magic_1"))
@@ -441,6 +443,7 @@ public class RegPerks {
     public static final Identifier P_EXAMPLE_MAGIC_ARROW_THORN = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("_perk_example_magic_arrow_thorn"))
             .setIcon(PerkSpriteMap.bi(0, 4)).cost(new BaseCost(RegCostType.NO_COST, 0)));
     public static final Identifier T_EXAMPLE_MAGIC = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("_perk_example_magic"))
+            .addVirtualNode(P_EXAMPLE_ROOT, -1, 0)
             .addNode(P_EXAMPLE_MAGIC_0, 0, 0)
             .addNode(P_EXAMPLE_MAGIC_1, 1, 0, P_EXAMPLE_MAGIC_0)
             .addNode(P_EXAMPLE_MAGIC_2, 2, 0, P_EXAMPLE_MAGIC_1)
