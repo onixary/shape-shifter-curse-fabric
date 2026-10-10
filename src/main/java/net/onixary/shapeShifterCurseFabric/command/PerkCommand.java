@@ -74,7 +74,7 @@ public final class PerkCommand {
                         continue;
                     }
                     IPerk perk = RegPerks.getPerk(node.perkID);
-                    if (perk != null && !perk.canRepeat() && unlocked.containsAll(node.dependentPerkIDs)) {
+                    if (perk != null && !perk.canRepeat() && unlocked.containsAll(node.dependents)) {
                         unlocked.add(node.perkID);
                         perk.onGain(player, component.nowForm);
                         changed++;

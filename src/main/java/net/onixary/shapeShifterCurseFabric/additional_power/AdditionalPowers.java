@@ -105,6 +105,7 @@ public class AdditionalPowers {
         register(WitherIntervalPower.createFactory());
         register(CocoonLootChancePower.createFactory());
         register(SurfaceGrapplePower.createFactory());
+        register(WaterExplosionSkillPower.createFactory());
     }
 
     public static PowerFactory<?> register(PowerFactory<?> powerFactory) {

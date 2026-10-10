@@ -121,10 +121,11 @@ public class PerkUtils {
         PerkTree.PerkNode node = perkTree.getNode(perkID);
         if (node == null) return;
         List<Identifier> playerPerkList = getPlayerPerks(player, perkTreeID);
-        if (!node.dependentPerkIDs.isEmpty()) {
-            if (playerPerkList == null) return;
-            for (Identifier dependentPerkID : node.dependentPerkIDs) {
-                if (!playerPerkList.contains(dependentPerkID)) return;
+        if (!node.dependents.isEmpty()) {
+            for (IDependent dependent : node.dependents) {
+                if (!dependent.isAllDependentGained(player, playerPerkList)) {
+                    return;
+                }
             }
         }
         if (playerPerkList != null && playerPerkList.contains(perkID)) {

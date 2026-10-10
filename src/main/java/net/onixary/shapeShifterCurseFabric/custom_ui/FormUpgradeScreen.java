@@ -15,6 +15,7 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.ScaleScrollTextWidget;
 import net.onixary.shapeShifterCurseFabric.custom_ui.ui_part.WidgetEXUtils;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
+import net.onixary.shapeShifterCurseFabric.perk.IDependent;
 import net.onixary.shapeShifterCurseFabric.perk.PerkTree;
 import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
 import net.onixary.shapeShifterCurseFabric.perk.RegPerks;
@@ -339,48 +340,10 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     // Utils
 
     public void drawConnectLine(DrawContext context, PerkTree.PerkNode perkNode) {
-        List<Identifier> depends = perkNode.dependentPerkIDs;
+        List<IDependent> depends = perkNode.dependents;
         if (depends.isEmpty()) return;
-        for (Identifier depend : depends) {
-            PerkTree.PerkNode dependNodeMetaData = perkTree.getNode(depend);
-            if (dependNodeMetaData == null) return;
-            int ox = nodeCenter.x;
-            int oy = nodeCenter.y;
-            int x1 = nodeBaseX + posXPerTier * perkNode.tier + nodeLineDependXOffset;
-            int x2 = nodeBaseX + posXPerTier * dependNodeMetaData.tier + nodeLineRootXOffset;
-            int y1 = perkNode.y;
-            int y2 = dependNodeMetaData.y;
-            if (perkNode.tier - 1 == dependNodeMetaData.tier) {
-                int halfX = (x1 + x2) / 2;
-                context.fill(
-                        ox + Math.min(x1, halfX), oy + y1,
-                        ox + Math.max(x1, halfX) + 1, oy + y1 + 1,
-                        LineColor);
-                context.fill(
-                        ox + halfX, oy + Math.min(y1, y2),
-                        ox + halfX + 1, oy + Math.max(y1, y2) + 1,
-                        LineColor);
-                context.fill(
-                        ox + Math.min(x2, halfX), oy + y2,
-                        ox + Math.max(x2, halfX) + 1, oy + y2 + 1,
-                        LineColor);
-            } else {
-                // AI整的虚线 看起来应该没有对应的API了 所以尽量别整需要虚线的Perk 这种比较费性能 除非使用贴图 但是这种不太好改
-                int dashLen = posXPerTier / 2 - 10;
-                int dashSize = 2;
-                int gapSize = 1;
-                int lastPixelX = x1;
-                for (int i = 0; i < dashLen; i += dashSize + gapSize) {
-                    int to = Math.min(i + dashSize, dashLen);
-                    if (i >= to) break;
-                    context.fill(
-                            ox + x1 - to, oy + y1,
-                            ox + x1 - i, oy + y1 + 1,
-                            LineColor);
-                    lastPixelX = x1 - to;
-                }
-                context.fill(ox + lastPixelX - 2, oy + y1 - 1, ox + lastPixelX - 1, oy + y1 + 2, LineColor);
-            }
+        for (IDependent depend : depends) {
+            depend.drawDependentLine(context, nodeCenter, perkTree, perkNode);
         }
     }
 
@@ -406,7 +369,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         if (this.nowSelectNode != null) {
             if (perkNode == this.nowSelectNode) {
                 SELECTED_SPRITE.draw(context, NodePosX - 9, NodePosY - 9);
-            } else if (this.nowSelectNode.dependentPerkIDs.contains(perkNode.perkID)) {
+            } else if (this.nowSelectNode.dependents != null && this.nowSelectNode.dependents.stream().anyMatch(d -> d.isDependentPerk(perkNode.perkID))) {
                 DEPEND_SPRITE.draw(context, NodePosX - 9, NodePosY - 9);
             }
         }
@@ -430,6 +393,18 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         //         0xFFFFFFFF,
         //         false
         //         );
+    }
+
+    public void drawVirtualNode(DrawContext context, PerkTree.PerkNode perkNode, @Nullable List<Identifier> playerGainedPerk, int mouseX, int mouseY, float delta) {
+        ISprite icon = RegPerks.getPerkIcon(perkNode.perkID);
+        if (icon == null) {
+            icon = RegPerks.FALLBACK_PERK_ICON;
+        }
+        int virtualNodeX = nodeBaseX + posXPerTier * perkNode.tier;
+        int virtualNodeY = perkNode.y;
+        int NodePosX = nodeCenter.x + virtualNodeX;
+        int NodePosY = nodeCenter.y + virtualNodeY;
+        icon.draw(context, NodePosX + NodeDrawStartX, NodePosY + NodeDrawStartY);
     }
 
     public void drawAllNode(DrawContext context, int mouseX, int mouseY, float delta) {
@@ -478,6 +453,9 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         }
         for (PerkTree.PerkNode perkNode : tree.getAllNodes()) {
             this.drawNode(context, perkNode, playerGainedPerk, vMousePos.x, vMousePos.y, delta);
+        }
+        for (PerkTree.PerkNode perkNode : tree.getAllVirtualNodes()) {
+            this.drawVirtualNode(context, perkNode, playerGainedPerk, vMousePos.x, vMousePos.y, delta);
         }
         matrixStack.pop();
         context.disableScissor();
@@ -561,9 +539,10 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         if (playerGainedPerk != null && playerGainedPerk.contains(this.nowSelectNode.perkID)) {
             return false;
         }
-        if (this.nowSelectNode.dependentPerkIDs != null && !this.nowSelectNode.dependentPerkIDs.isEmpty()) {
-            if (playerGainedPerk == null) return false;
-            for (Identifier dependentPerkID : this.nowSelectNode.dependentPerkIDs) if (!playerGainedPerk.contains(dependentPerkID)) return false;
+        if (this.nowSelectNode.dependents != null && !this.nowSelectNode.dependents.isEmpty()) {
+            for (IDependent dependent : this.nowSelectNode.dependents) {
+                if (!dependent.isAllDependentGained(this.client.player, playerGainedPerk)) return false;
+            }
         }
         ICost cost = perkCostMap.get(this.nowSelectNode.perkID);
         if (!PerkUtils.isFreeUnlock(client.player) && cost != null && !cost.getType().canPay_CLIENT(cost, client.player)) {

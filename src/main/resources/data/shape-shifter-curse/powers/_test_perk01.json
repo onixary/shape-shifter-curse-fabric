@@ -1,9 +1,150 @@
 {
-  "type": "apoli:attribute",
-  "modifier": {
-    "name": "Form ocelot0 health reduction",
-    "attribute": "minecraft:generic.max_health",
-    "value": 4.0,
-    "operation": "addition"
+  "type": "shape-shifter-curse:water_explosion_skill",
+  "cooldown": 60,
+  "hud_render": {
+    "should_render": false
+  },
+  "key": {
+    "key": "key.shape-shifter-curse.active_skill_1"
+  },
+  "pull_radius": 6.0,
+  "pull_strength": 0.3,
+  "pull_duration": 10,
+  "vertical_pull": true,
+  "max_speed": 3.0,
+  "on_pull_action": {
+    "type": "apoli:target_action",
+    "action": {
+      "type": "apoli:and",
+      "actions": [
+        {
+          "type": "apoli:apply_effect",
+          "effect": {
+            "effect": "minecraft:weakness",
+            "amplifier": 4,
+            "duration": 60,
+            "show_particles": false,
+            "show_icon": true
+          }
+        },
+        {
+          "type": "apoli:apply_effect",
+          "effect": {
+            "effect": "minecraft:mining_fatigue",
+            "amplifier": 4,
+            "duration": 60,
+            "show_particles": false,
+            "show_icon": true
+          }
+        },
+        {
+          "type": "apoli:apply_effect",
+          "effect": {
+            "effect": "minecraft:slowness",
+            "amplifier": 4,
+            "duration": 20,
+            "show_particles": false,
+            "show_icon": true
+          }
+        }
+      ]
+    }
+  },
+  "entity_condition": {
+    "type": "apoli:and",
+    "conditions": [
+      {
+        "type": "apoli:target_condition",
+        "condition": {
+          "type": "apoli:in_tag",
+          "tag": "shape-shifter-curse:water_explode_immune"
+        },
+        "inverted": true
+      },
+      {
+        "type": "apoli:owner",
+        "inverted": true
+      }
+    ]
+  },
+  "can_start_condition": {
+    "type": "apoli:air",
+    "comparison": ">",
+    "compare_to": 10
+  },
+  "on_start_action": {
+    "type": "apoli:gain_air",
+    "value": -10
+  },
+  "on_done_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "apoli:gain_air",
+        "value": -10
+      },
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:entity.axolotl.splash",
+        "volume": 0.5,
+        "pitch": 0.8
+      },
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:entity.wither.break_block",
+        "volume": 0.5,
+        "pitch": 0.8
+      },
+      {
+        "type": "shape-shifter-curse:explosion_damage_entity",
+        "power": 2,
+        "baseDamage": 4,
+        "damage_multiplier": 1.5,
+        "entity_condition": {
+          "type": "apoli:and",
+          "conditions": [
+            {
+              "type": "apoli:target_condition",
+              "condition": {
+                "type": "apoli:in_tag",
+                "tag": "shape-shifter-curse:water_explode_immune"
+              },
+              "inverted": true
+            },
+            {
+              "type": "apoli:owner",
+              "inverted": true
+            }
+          ]
+        }
+      },
+      {
+        "type": "apoli:spawn_particles",
+        "particle": "minecraft:rain",
+        "count": 32,
+        "speed": 0.0,
+        "force": true,
+        "spread": {
+          "x": 2.0,
+          "y": 0.5,
+          "z": 2.0
+        }
+      },
+      {
+        "type": "apoli:spawn_particles",
+        "particle": {
+          "type": "minecraft:dust",
+          "params": "0.11 0.18 0.69 2"
+        },
+        "count": 32,
+        "speed": 0.0,
+        "force": true,
+        "spread": {
+          "x": 2.0,
+          "y": 1.0,
+          "z": 2.0
+        }
+      }
+    ]
   }
 }
