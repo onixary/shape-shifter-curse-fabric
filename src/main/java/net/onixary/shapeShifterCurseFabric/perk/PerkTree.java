@@ -12,7 +12,7 @@ public class PerkTree {
         public final Identifier perkID;
         public final int tier;
         public final int y;
-        public final @NotNull ArrayList<@NotNull Identifier> dependents;
+        public final @NotNull ArrayList<@NotNull IDependent> dependents;
 
         public PerkNode(Identifier perkID, int tier, int y) {
             this.perkID = perkID;
@@ -21,7 +21,7 @@ public class PerkTree {
             this.dependents = new ArrayList<>();
         }
 
-        public PerkNode(Identifier perkID, int tier, int y, @NotNull Identifier... dependentPerkIDs) {
+        public PerkNode(Identifier perkID, int tier, int y, @NotNull IDependent... dependentPerkIDs) {
             this.perkID = perkID;
             this.tier = tier;
             this.y = y;
@@ -51,12 +51,12 @@ public class PerkTree {
         return this.addVirtualNode(new PerkNode(perkID, tier, y));
     }
 
-    public PerkTree addNode(Identifier perkID, int tier, int y, Identifier... dependentPerkIDs) {
-        return this.addNode(new PerkNode(perkID, tier, y, dependentPerkIDs));
+    public PerkTree addNode(Identifier perkID, int tier, int y, IDependent... dependents) {
+        return this.addNode(new PerkNode(perkID, tier, y, dependents));
     }
 
-    public PerkTree addVirtualNode(Identifier perkID, int tier, int y, Identifier... dependentPerkIDs) {
-        return this.addVirtualNode(new PerkNode(perkID, tier, y, dependentPerkIDs));
+    public PerkTree addVirtualNode(Identifier perkID, int tier, int y, IDependent... dependents) {
+        return this.addVirtualNode(new PerkNode(perkID, tier, y, dependents));
     }
 
     public PerkTree addNode(PerkNode perkNode) {
