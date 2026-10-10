@@ -4,6 +4,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Vector2i;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public interface IDependent {
 
     boolean isDependentPerk(@NotNull Identifier perk);
 
-    boolean isAllDependentGained(PlayerEntity player, List<Identifier> playerGainedPerk);
+    boolean isAllDependentGained(PlayerEntity player, @Nullable List<Identifier> playerGainedPerk);
 
     default void drawDependentLine(DrawContext drawContext, Vector2i nodeCenter, PerkTree tree, PerkTree.PerkNode perkNode) {
         return;

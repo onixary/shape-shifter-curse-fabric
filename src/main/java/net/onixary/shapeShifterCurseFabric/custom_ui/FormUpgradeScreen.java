@@ -540,7 +540,6 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
             return false;
         }
         if (this.nowSelectNode.dependents != null && !this.nowSelectNode.dependents.isEmpty()) {
-            if (playerGainedPerk == null) return false;
             for (IDependent dependent : this.nowSelectNode.dependents) {
                 if (!dependent.isAllDependentGained(this.client.player, playerGainedPerk)) return false;
             }
