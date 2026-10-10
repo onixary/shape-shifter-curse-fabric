@@ -415,7 +415,9 @@ public class RegPerks {
     // 出问题直接注释掉 等我需要演示时再修
     public static final Identifier P_EXAMPLE_ROOT = registerPerkClientData(new VirtualPerk(ShapeShifterCurseFabric.identifier("_perk_example_root"), _TEST_SpriteMap.bi(0, 5)));
     public static final Identifier P_EXAMPLE_MAGIC_0 = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("_perk_example_magic_0"))
-            .setIcon(_TEST_SpriteMap.bi(0, 1)).cost(new BaseCost(RegCostType.NO_COST, 0)));
+            .setIcon(_TEST_SpriteMap.bi(0, 1)).cost(new BaseCost(RegCostType.NO_COST, 0))
+            .addPower(ShapeShifterCurseFabric.identifier("_test_perk01"))
+    );
     public static final Identifier P_EXAMPLE_MAGIC_1 = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("_perk_example_magic_1"))
             .setIcon(_TEST_SpriteMap.bi(1, 1)).cost(new BaseCost(RegCostType.NO_COST, 0)));
     public static final Identifier P_EXAMPLE_MAGIC_2 = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("_perk_example_magic_2"))
