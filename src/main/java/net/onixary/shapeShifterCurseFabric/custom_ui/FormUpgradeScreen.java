@@ -200,7 +200,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         this.PerkDescWidget = new ScaleScrollTextWidget(baseX + PERK_INFO_DESC_X, baseY + PERK_INFO_DESC_Y, PERK_INFO_DESC_WIDTH, PERK_INFO_DESC_HEIGHT, 1.0f, Text.literal(""), this.textRenderer);
         this.PerkDescWidget.setEnableScrollableIconRender(true);
         this.WidgetList.add(this.PerkDescWidget);
-        this.AcquirePerkButton = ButtonWidget.builder(Text.translatable("gui.shape-shifter-curse.perk.acquire"), button -> {
+        this.AcquirePerkButton = ButtonWidget.builder(Text.translatable("gui.shape-shifter-curse.perk.select_node"), button -> {
             if (this.nowSelectNode != null) {
                 PerkUtils.addPerk(MinecraftClient.getInstance().player, this.perkTree.getID(), this.nowSelectNode.perkID);
                 ModPacketsS2C.sendRequestPerkAvailability();
@@ -552,14 +552,14 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
 
     private @Nullable String getPerkUnavailableReason() {
         if (this.nowSelectNode == null) {
-            return "gui.shape-shifter-curse.perk.unavailable";
-        }
-        if (this.nowSelectNode.tier > this.tier) {
-            return "gui.shape-shifter-curse.perk.insufficient_tier";
+            return "gui.shape-shifter-curse.perk.select_node";
         }
         List<Identifier> playerGainedPerk = PerkUtils.getPlayerPerks(this.client.player, this.perkTree.getID());
         if (playerGainedPerk != null && playerGainedPerk.contains(this.nowSelectNode.perkID)) {
             return "gui.shape-shifter-curse.perk.acquired";
+        }
+        if (this.nowSelectNode.tier > this.tier) {
+            return "gui.shape-shifter-curse.perk.insufficient_tier";
         }
         if (this.nowSelectNode.dependents != null && !this.nowSelectNode.dependents.isEmpty()) {
             for (IDependent dependent : this.nowSelectNode.dependents) {
@@ -586,7 +586,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         if (this.client == null || this.client.player == null) return;
         String reason = this.getPerkUnavailableReason();
         this.AcquirePerkButton.active = reason == null;
-        this.AcquirePerkButton.setMessage(Text.translatable(this.nowSelectNode == null || reason == null
+        this.AcquirePerkButton.setMessage(Text.translatable(reason == null
                 ? "gui.shape-shifter-curse.perk.acquire" : reason));
         ICost cost = this.nowSelectNode == null ? null : perkCostMap.get(this.nowSelectNode.perkID);
         this.PerkCostAmountWidget.setMessage(cost != null && cost.getType() instanceof IFUSDrawableCostType<?> drawable
