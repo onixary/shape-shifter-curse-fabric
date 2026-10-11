@@ -8,6 +8,11 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import net.minecraft.world.BlockView;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
@@ -24,6 +29,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.blocks.block_entity.AltarBlockEntity;
 import org.jetbrains.annotations.Nullable;
+import java.util.List;
 
 
 // 渲染先用透明方案吧 BlockEntity类方块由BlockEntity动态渲染
@@ -33,6 +39,12 @@ public class AltarBlock extends BlockWithEntity {
     protected AltarBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH));
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
+        super.appendTooltip(stack, world, tooltip, context);
+        tooltip.add(Text.translatable(getTranslationKey() + ".tooltip").formatted(Formatting.YELLOW));
     }
 
     @Override

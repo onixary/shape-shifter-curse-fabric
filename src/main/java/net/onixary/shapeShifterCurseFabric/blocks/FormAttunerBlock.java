@@ -9,6 +9,11 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import net.minecraft.world.BlockView;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DyeColor;
@@ -22,6 +27,7 @@ import net.onixary.shapeShifterCurseFabric.util.util.CachedDataMap;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
+import java.util.List;
 
 public class FormAttunerBlock extends BlockWithEntity implements Stainable {
     public static final CachedDataMap<UUID, PlayerEntity, BlockPos> playerLastAttunerPos = new CachedDataMap<>((uuid -> null), Entity::getUuid);
@@ -40,6 +46,12 @@ public class FormAttunerBlock extends BlockWithEntity implements Stainable {
 
     protected FormAttunerBlock(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
+        super.appendTooltip(stack, world, tooltip, context);
+        tooltip.add(Text.translatable(getTranslationKey() + ".tooltip").formatted(Formatting.YELLOW));
     }
 
     public BlockRenderType getRenderType(BlockState state) {
