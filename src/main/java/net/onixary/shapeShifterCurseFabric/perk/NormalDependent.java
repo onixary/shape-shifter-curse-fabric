@@ -9,10 +9,23 @@ import org.joml.Vector2i;
 import java.util.List;
 
 public class NormalDependent implements IDependent {
+    public enum LineConnectMode {
+        LEFT,
+        RIGHT,
+        MIDDLE,
+        NORMAL,
+    }
+
     public final Identifier[] dependentPerkIDs;
+    public final LineConnectMode lineConnectMode;
 
     public NormalDependent(Identifier... dependentPerkIDs) {
+        this(LineConnectMode.NORMAL, dependentPerkIDs);
+    }
+
+    public NormalDependent(LineConnectMode mode, Identifier... dependentPerkIDs) {
         this.dependentPerkIDs = dependentPerkIDs == null ? new Identifier[0] : dependentPerkIDs;
+        this.lineConnectMode = mode;
     }
 
     @Override
@@ -47,21 +60,7 @@ public class NormalDependent implements IDependent {
             int x2 = nowNodeBaseX + posXPerTier * dependNodeMetaData.tier + nodeLineRootXOffset;
             int y1 = perkNode.y;
             int y2 = dependNodeMetaData.y;
-            if (perkNode.tier - 1 == dependNodeMetaData.tier) {
-                int halfX = (x1 + x2) / 2;
-                drawContext.fill(
-                        ox + Math.min(x1, halfX), oy + y1,
-                        ox + Math.max(x1, halfX) + 1, oy + y1 + 1,
-                        LineColor);
-                drawContext.fill(
-                        ox + halfX, oy + Math.min(y1, y2),
-                        ox + halfX + 1, oy + Math.max(y1, y2) + 1,
-                        LineColor);
-                drawContext.fill(
-                        ox + Math.min(x2, halfX), oy + y2,
-                        ox + Math.max(x2, halfX) + 1, oy + y2 + 1,
-                        LineColor);
-            } else {
+            if (lineConnectMode == LineConnectMode.NORMAL && perkNode.tier - 1 != dependNodeMetaData.tier) {
                 // AI整的虚线 看起来应该没有对应的API了 所以尽量别整需要虚线的Perk 这种比较费性能 除非使用贴图 但是这种不太好改
                 int dashLen = posXPerTier / 2 - 10;
                 int dashSize = 2;
@@ -77,7 +76,26 @@ public class NormalDependent implements IDependent {
                     lastPixelX = x1 - to;
                 }
                 drawContext.fill(ox + lastPixelX - 2, oy + y1 - 1, ox + lastPixelX - 1, oy + y1 + 2, LineColor);
+                continue;
             }
+            int halfX;
+            switch (lineConnectMode) {
+                case LEFT -> halfX = nowNodeBaseX + posXPerTier * dependNodeMetaData.tier + posXPerTier / 2;
+                case RIGHT -> halfX = nowNodeBaseX + posXPerTier * perkNode.tier - posXPerTier / 2;
+                default -> halfX = (x1 + x2) / 2;
+            }
+            drawContext.fill(
+                    ox + Math.min(x1, halfX), oy + y1,
+                    ox + Math.max(x1, halfX) + 1, oy + y1 + 1,
+                    LineColor);
+            drawContext.fill(
+                    ox + halfX, oy + Math.min(y1, y2),
+                    ox + halfX + 1, oy + Math.max(y1, y2) + 1,
+                    LineColor);
+            drawContext.fill(
+                    ox + Math.min(x2, halfX), oy + y2,
+                    ox + Math.max(x2, halfX) + 1, oy + y2 + 1,
+                    LineColor);
         }
     }
 }
