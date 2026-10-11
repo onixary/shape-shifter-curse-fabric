@@ -108,9 +108,11 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     public int baseX = 0;
     public int baseY = 0;
 
+    // TODO 此处最好由PerkTree决定用用什么贴图
     public static final ISprite GAINED_SPRITE = new BaseSprite(TEXTURE, TEXTURE_WIDTH, TEXTURE_HEIGHT, 434, 112, 20, 20);
     public static final ISprite SELECTED_SPRITE = new BaseSprite(TEXTURE, TEXTURE_WIDTH, TEXTURE_HEIGHT, 434, 72, 20, 20);
-    public static final ISprite CAN_NOT_GAIN_SPRITE = new BaseSprite(TEXTURE, TEXTURE_WIDTH, TEXTURE_HEIGHT, 434, 132, 20, 20);
+    public static final ISprite NOT_GAINED_SPRITE = new BaseSprite(TEXTURE, TEXTURE_WIDTH, TEXTURE_HEIGHT, 434, 132, 20, 20);
+    public static final ISprite CAN_NOT_GAIN_SPRITE = new BaseSprite(TEXTURE, TEXTURE_WIDTH, TEXTURE_HEIGHT, 434, 152, 20, 20);
     public static final ISprite DEPEND_SPRITE = new BaseSprite(TEXTURE, TEXTURE_WIDTH, TEXTURE_HEIGHT, 434, 92, 20, 20);
 
     public static final HashMap<Identifier, Boolean> perkAvailableMap = new HashMap<>();  // 仅客户端数据 仅影响渲染 仅代表服务器获取这个表时无法获取这个Perk
@@ -369,6 +371,8 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
             GAINED_SPRITE.draw(context, NodePosX - 9, NodePosY - 9);
         } else if (!perkAvailableMap.getOrDefault(perkNode.perkID, true)) {
             CAN_NOT_GAIN_SPRITE.draw(context, NodePosX - 9, NodePosY - 9);
+        } else {
+            NOT_GAINED_SPRITE.draw(context, NodePosX - 9, NodePosY - 9);
         }
 
         if (this.nowSelectNode != null) {
