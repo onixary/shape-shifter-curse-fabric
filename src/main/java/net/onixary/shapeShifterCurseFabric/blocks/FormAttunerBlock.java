@@ -65,7 +65,7 @@ public class FormAttunerBlock extends BlockWithEntity implements Stainable {
 
     @Override
     public DyeColor getColor() {
-        return DyeColor.PURPLE;
+        return DyeColor.PINK;
     }
 
     @Override

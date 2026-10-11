@@ -16,6 +16,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
+import net.onixary.shapeShifterCurseFabric.blocks.FormAttunerBlock;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
 
 import java.util.Arrays;
@@ -54,7 +55,9 @@ public class FormAttunerBlockEntity extends BlockEntity {
             BlockState blockState = world.getBlockState(blockPos);
             Block block = blockState.getBlock();
             if (block instanceof Stainable) {
-                float[] fs = ((Stainable)block).getColor().getColorComponents();
+                float[] fs = block instanceof FormAttunerBlock
+                        ? new float[]{0.902f, 0.373f, 0.945f}
+                        : ((Stainable) block).getColor().getColorComponents();
                 if (blockEntity.beams.size() <= 1) {
                     beamSegment = new BeamSegment(fs);
                     blockEntity.beams.add(beamSegment);
