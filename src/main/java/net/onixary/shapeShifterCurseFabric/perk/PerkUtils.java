@@ -8,7 +8,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.blocks.FormAttunerBlock;
 import net.onixary.shapeShifterCurseFabric.blocks.block_entity.FormAttunerBlockEntity;
-import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2C;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
 import net.onixary.shapeShifterCurseFabric.util.util.cost.ICost;
@@ -132,7 +131,7 @@ public class PerkUtils {
             return;
         }
         int tier = node.tier;
-        // 感觉Tier0在无诅咒之月可以点可以作为特性使用 可以在tier0设置一些特殊的Perk
+        // Tier0保留不受环境限制的行为。
         if (tier > 0 && !isCanGainPerk(player)) {
             return;
         }
@@ -154,9 +153,6 @@ public class PerkUtils {
         // 仅检测从客户端提交的加点请求 服务器端的加点请求直接过 所以这里只能加环境检测
         World world = player.getWorld();
         if (world.getRegistryKey() != World.OVERWORLD) {
-            return false;
-        }
-        if (!CursedMoon.isInCursedMoon(world)) {
             return false;
         }
         return true;
