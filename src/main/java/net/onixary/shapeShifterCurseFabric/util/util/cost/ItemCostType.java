@@ -61,7 +61,9 @@ public class ItemCostType implements IFUSDrawableCostType<ItemCostType> {
         if (!(costObject instanceof ItemCost cost) || player == null) {
             return IFUSDrawableCostType.super.getAmountText(costObject, player);
         }
-        return Text.literal(cost.getAmount() + " of " + getAvailableAmount(cost, player));
+        return Text.literal(String.valueOf(cost.getAmount()))
+                .append(Text.translatable("gui.shape-shifter-curse.perk.cost_separator"))
+                .append(String.valueOf(getAvailableAmount(cost, player)));
     }
 
     private int getAvailableAmount(ItemCost cost, PlayerEntity player) {

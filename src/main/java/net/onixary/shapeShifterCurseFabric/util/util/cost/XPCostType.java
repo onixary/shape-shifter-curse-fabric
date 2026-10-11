@@ -40,7 +40,9 @@ public class XPCostType implements IFUSDrawableCostType<XPCostType> {
         if (player == null) {
             return IFUSDrawableCostType.super.getAmountText(costObject, player);
         }
-        return Text.literal(costObject.getAmount() + " of " + player.totalExperience);
+        return Text.literal(String.valueOf(costObject.getAmount()))
+                .append(Text.translatable("gui.shape-shifter-curse.perk.cost_separator"))
+                .append(String.valueOf(player.totalExperience));
     }
 
     @Override

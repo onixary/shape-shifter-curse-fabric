@@ -7,6 +7,7 @@
   "gui.shape-shifter-curse.perk.acquired": "调谐已解锁",
   "gui.shape-shifter-curse.perk.select_node": "选择调谐节点",
   "gui.shape-shifter-curse.perk.unavailable": "暂不可获取",
+  "gui.shape-shifter-curse.perk.cost_separator": "，已有",
   "advancements.shape-shifter-curse.on_enable_mod.title": "未知的篇章",
   "advancements.shape-shifter-curse.on_enable_mod.description": "发生了什么？",
   "advancements.shape-shifter-curse.on_open_book_of_shape_shifter.title": "阅读时间",

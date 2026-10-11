@@ -7,6 +7,7 @@
     "gui.shape-shifter-curse.perk.acquired": "Perk unlocked",
     "gui.shape-shifter-curse.perk.select_node": "Select perk node",
     "gui.shape-shifter-curse.perk.unavailable": "Unavailable",
+    "gui.shape-shifter-curse.perk.cost_separator": " of ",
     "advancements.shape-shifter-curse.on_enable_mod.title": "Unknown Chapter",
     "advancements.shape-shifter-curse.on_enable_mod.description": "What happened?",
     "advancements.shape-shifter-curse.on_open_book_of_shape_shifter.title": "Reading Time",
