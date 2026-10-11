@@ -24,6 +24,8 @@ import net.onixary.shapeShifterCurseFabric.util.util.ISprite;
 import net.onixary.shapeShifterCurseFabric.util.util.cost.BaseCost;
 import net.onixary.shapeShifterCurseFabric.util.util.cost.ICost;
 import net.onixary.shapeShifterCurseFabric.util.util.cost.IFUSDrawableCostType;
+import net.onixary.shapeShifterCurseFabric.util.util.cost.ItemCostType;
+import net.onixary.shapeShifterCurseFabric.util.util.cost.XPCostType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
@@ -198,7 +200,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         this.PerkDescWidget = new ScaleScrollTextWidget(baseX + PERK_INFO_DESC_X, baseY + PERK_INFO_DESC_Y, PERK_INFO_DESC_WIDTH, PERK_INFO_DESC_HEIGHT, 1.0f, Text.literal(""), this.textRenderer);
         this.PerkDescWidget.setEnableScrollableIconRender(true);
         this.WidgetList.add(this.PerkDescWidget);
-        this.AcquirePerkButton = ButtonWidget.builder(Text.literal("GET"), button -> {
+        this.AcquirePerkButton = ButtonWidget.builder(Text.translatable("gui.shape-shifter-curse.perk.acquire"), button -> {
             if (this.nowSelectNode != null) {
                 PerkUtils.addPerk(MinecraftClient.getInstance().player, this.perkTree.getID(), this.nowSelectNode.perkID);
                 ModPacketsS2C.sendRequestPerkAvailability();
@@ -211,6 +213,13 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         this.addDrawableChild(this.AcquirePerkButton);
         this.addDrawableChild(this.PerkCostAmountWidget);
         super.init();
+        this.refreshSelectedPerkState();
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        this.refreshSelectedPerkState();
     }
 
     @Override
@@ -538,26 +547,50 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     }
 
     public boolean isNowPerkCanGain() {
+        return this.getPerkUnavailableReason() == null;
+    }
+
+    private @Nullable String getPerkUnavailableReason() {
         if (this.nowSelectNode == null) {
-            return false;
+            return "gui.shape-shifter-curse.perk.unavailable";
         }
         if (this.nowSelectNode.tier > this.tier) {
-            return false;
+            return "gui.shape-shifter-curse.perk.insufficient_tier";
         }
         List<Identifier> playerGainedPerk = PerkUtils.getPlayerPerks(this.client.player, this.perkTree.getID());
         if (playerGainedPerk != null && playerGainedPerk.contains(this.nowSelectNode.perkID)) {
-            return false;
+            return "gui.shape-shifter-curse.perk.acquired";
         }
         if (this.nowSelectNode.dependents != null && !this.nowSelectNode.dependents.isEmpty()) {
             for (IDependent dependent : this.nowSelectNode.dependents) {
-                if (!dependent.isAllDependentGained(this.client.player, playerGainedPerk)) return false;
+                if (!dependent.isAllDependentGained(this.client.player, playerGainedPerk)) {
+                    return "gui.shape-shifter-curse.perk.requires_previous";
+                }
             }
         }
         ICost cost = perkCostMap.get(this.nowSelectNode.perkID);
         if (!PerkUtils.isFreeUnlock(client.player) && cost != null && !cost.getType().canPay_CLIENT(cost, client.player)) {
-            return false;
+            if (cost.getType() instanceof ItemCostType) {
+                return "gui.shape-shifter-curse.perk.insufficient_items";
+            }
+            if (cost.getType() instanceof XPCostType) {
+                return "gui.shape-shifter-curse.perk.insufficient_xp";
+            }
+            return "gui.shape-shifter-curse.perk.unavailable";
         }
-        return true;
+        return perkAvailableMap.getOrDefault(this.nowSelectNode.perkID, true)
+                ? null : "gui.shape-shifter-curse.perk.unavailable";
+    }
+
+    private void refreshSelectedPerkState() {
+        if (this.client == null || this.client.player == null) return;
+        String reason = this.getPerkUnavailableReason();
+        this.AcquirePerkButton.active = reason == null;
+        this.AcquirePerkButton.setMessage(Text.translatable(this.nowSelectNode == null || reason == null
+                ? "gui.shape-shifter-curse.perk.acquire" : reason));
+        ICost cost = this.nowSelectNode == null ? null : perkCostMap.get(this.nowSelectNode.perkID);
+        this.PerkCostAmountWidget.setMessage(cost != null && cost.getType() instanceof IFUSDrawableCostType<?> drawable
+                ? drawable.getAmountText(cost, this.client.player) : Text.empty());
     }
 
     public void onNodeSelect() {
@@ -570,19 +603,11 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         if (this.nowSelectNode != null) {
             this.PerkNameWidget.setMessage(RegPerks.getPerkName(this.nowSelectNode.perkID));
             this.PerkDescWidget.reloadText(RegPerks.getPerkDescription(this.nowSelectNode.perkID));
-            ICost cost = perkCostMap.get(this.nowSelectNode.perkID);
-            if (cost != null && cost.getType() instanceof IFUSDrawableCostType<?> ifusDrawableCostType) {
-                this.PerkCostAmountWidget.setMessage(ifusDrawableCostType.getAmountText(cost, client.player));
-            } else {
-                this.PerkCostAmountWidget.setMessage(Text.literal(""));
-            }
-            this.AcquirePerkButton.active = this.isNowPerkCanGain();
         } else {
             this.PerkNameWidget.setMessage(Text.literal(""));
             this.PerkDescWidget.reloadText(Text.literal(""));
-            this.PerkCostAmountWidget.setMessage(Text.literal(""));
-            this.AcquirePerkButton.active = false;
         }
+        this.refreshSelectedPerkState();
         ModPacketsS2C.sendRequestPerkAvailability();
     }
 }

@@ -1,4 +1,11 @@
 {
+  "gui.shape-shifter-curse.perk.acquire": "进行形态调谐",
+  "gui.shape-shifter-curse.perk.insufficient_tier": "调谐器阶数不足",
+  "gui.shape-shifter-curse.perk.requires_previous": "需要前置节点",
+  "gui.shape-shifter-curse.perk.insufficient_items": "需求物品不足",
+  "gui.shape-shifter-curse.perk.insufficient_xp": "需求经验不足",
+  "gui.shape-shifter-curse.perk.acquired": "已获取",
+  "gui.shape-shifter-curse.perk.unavailable": "暂不可获取",
   "advancements.shape-shifter-curse.on_enable_mod.title": "未知的篇章",
   "advancements.shape-shifter-curse.on_enable_mod.description": "发生了什么？",
   "advancements.shape-shifter-curse.on_open_book_of_shape_shifter.title": "阅读时间",

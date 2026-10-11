@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
@@ -32,6 +33,14 @@ public class XPCostType implements IFUSDrawableCostType<XPCostType> {
     @Override
     public void drawOnHover(DrawContext context, @NotNull ICost costObject, @Nullable PlayerEntity player, int x, int y, int z, int mouseX, int mouseY) {
         // NOP
+    }
+
+    @Override
+    public Text getAmountText(@NotNull ICost costObject, @Nullable PlayerEntity player) {
+        if (player == null) {
+            return IFUSDrawableCostType.super.getAmountText(costObject, player);
+        }
+        return Text.literal(costObject.getAmount() + " of " + player.totalExperience);
     }
 
     @Override

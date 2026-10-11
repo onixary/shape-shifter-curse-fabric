@@ -7,6 +7,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
@@ -56,6 +57,26 @@ public class ItemCostType implements IFUSDrawableCostType<ItemCostType> {
     }
 
     @Override
+    public Text getAmountText(@NotNull ICost costObject, @Nullable PlayerEntity player) {
+        if (!(costObject instanceof ItemCost cost) || player == null) {
+            return IFUSDrawableCostType.super.getAmountText(costObject, player);
+        }
+        return Text.literal(cost.getAmount() + " of " + getAvailableAmount(cost, player));
+    }
+
+    private int getAvailableAmount(ItemCost cost, PlayerEntity player) {
+        PlayerInventory inventory = player.getInventory();
+        int total = 0;
+        for (int i = 0; i < inventory.size(); i++) {
+            ItemStack stack = inventory.getStack(i);
+            if (!stack.isEmpty() && ItemStack.canCombine(cost.getExampleStack(), stack)) {
+                total += stack.getCount();
+            }
+        }
+        return total;
+    }
+
+    @Override
     public boolean canPay(@NotNull ICost costObject, @Nullable PlayerEntity player) {
         if (!(costObject instanceof ItemCost cost)) {
             throw new RuntimeException("ItemCostType.canPay costObject must be ItemCost");
@@ -72,18 +93,7 @@ public class ItemCostType implements IFUSDrawableCostType<ItemCostType> {
                 throw new RuntimeException("CostType.canPay Player Argument In ServerSide Must NotNull");
             }
         }
-        PlayerInventory playerInventory = player.getInventory();
-        int total = 0;
-        for (int i = 0; i < playerInventory.size(); i++) {
-            ItemStack stack = playerInventory.getStack(i);
-            if (!stack.isEmpty() && ItemStack.canCombine(exampleStack, stack)) {
-                total += stack.getCount();
-                if (total >= amount) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return getAvailableAmount(cost, player) >= amount;
     }
 
     @Override

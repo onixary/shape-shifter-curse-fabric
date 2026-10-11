@@ -17,7 +17,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.blocks.RegCustomBlock;
-import net.onixary.shapeShifterCurseFabric.cursed_moon.CursedMoon;
 
 import java.util.Arrays;
 import java.util.List;
@@ -107,11 +106,8 @@ public class FormAttunerBlockEntity extends BlockEntity {
     }
 
     private static int updateLevel(World world, int x, int y, int z) {
-        // 设定上需要诅咒之月的力量 So 仅主世界可用
+        // 保留主世界限制；阶数由基座结构决定，不受月相影响。
         if (world.getRegistryKey() != World.OVERWORLD) {
-            return 0;
-        }
-        if (!CursedMoon.isInCursedMoon(world)) {
             return 0;
         }
         int i = 0;

@@ -1,4 +1,11 @@
 {
+    "gui.shape-shifter-curse.perk.acquire": "Obtain Tuning",
+    "gui.shape-shifter-curse.perk.insufficient_tier": "Tuner tier low",
+    "gui.shape-shifter-curse.perk.requires_previous": "Needs prior perk",
+    "gui.shape-shifter-curse.perk.insufficient_items": "Not enough items",
+    "gui.shape-shifter-curse.perk.insufficient_xp": "Not enough XP",
+    "gui.shape-shifter-curse.perk.acquired": "Acquired",
+    "gui.shape-shifter-curse.perk.unavailable": "Unavailable",
     "advancements.shape-shifter-curse.on_enable_mod.title": "Unknown Chapter",
     "advancements.shape-shifter-curse.on_enable_mod.description": "What happened?",
     "advancements.shape-shifter-curse.on_open_book_of_shape_shifter.title": "Reading Time",
