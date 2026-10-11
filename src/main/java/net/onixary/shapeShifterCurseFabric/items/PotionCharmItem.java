@@ -25,10 +25,12 @@ public class PotionCharmItem extends Item {
         if (!world.isClient) {
             var arrow = new PotionCharmArrowEntity(RegCustomEntity.POTION_CHARM_ARROW, world);
             arrow.setOwner(player);
+            arrow.setCharmStack(stack);
             arrow.setPosition(player.getX(), player.getEyeY() - 0.1, player.getZ());
             arrow.initFromStack(PotionUtil.setPotion(new ItemStack(Items.TIPPED_ARROW), potion));
             arrow.setVelocity(player, player.getPitch(), player.getYaw(), 0, 3, 0);
             if (!world.spawnEntity(arrow)) return TypedActionResult.fail(stack);
+            player.getItemCooldownManager().set(this, 20);
             if (!player.isCreative()) stack.decrement(1);
         }
         return TypedActionResult.success(stack, world.isClient);
