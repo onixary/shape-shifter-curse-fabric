@@ -6,6 +6,8 @@ import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.PlayerFormComponent;
+import net.onixary.shapeShifterCurseFabric.util.util.BaseSprite;
+import net.onixary.shapeShifterCurseFabric.util.util.BaseSpriteWithDrawOffset;
 import net.onixary.shapeShifterCurseFabric.util.util.ISprite;
 import net.onixary.shapeShifterCurseFabric.util.util.SpriteMap;
 import net.onixary.shapeShifterCurseFabric.util.util.cost.BaseCost;
@@ -17,6 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class RegPerks {
     public static final HashMap<Identifier, IPerk> PerkRegistry = new HashMap<>();
@@ -27,6 +30,19 @@ public class RegPerks {
     public static final SpriteMap PerkSpriteMap = new SpriteMap(ShapeShifterCurseFabric.identifier("textures/perk/textures.png"), 512, 512, 0, 0, 16, 16);
     public static final ISprite FALLBACK_PERK_ICON = PerkSpriteMap.bi(0, 0);
     public static final Identifier EMPTY_PERK_TREE = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("empty")));
+    public static final ISprite ROOT_SPRITE = new BaseSpriteWithDrawOffset(ShapeShifterCurseFabric.identifier("textures/gui/shape_shifter_tuner_ui.png"), 454, 190, -1, -1, 434, 0, 17, 17);
+
+    public static final Identifier P_ROOT = registerPerkClientData(
+            new VirtualPerk(ShapeShifterCurseFabric.identifier("__root__"), ROOT_SPRITE)
+    );
+    public static final IDependent D_ROOT = new RootDependent(
+            -1, 0
+    );
+    public static final Consumer<PerkTree.PerkNode> U_AddRootDependent = node -> {
+        if (node.dependents.isEmpty()) {
+            node.dependents.add(D_ROOT);
+        }
+    };
 
     public static final Identifier P_BatPosture_1 = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("bat_posture_1"))
             .setIcon(PerkSpriteMap.bi(17, 5)).cost(new BaseCost(RegCostType.COST_XP, 100))
@@ -264,92 +280,110 @@ public class RegPerks {
     //         .addPower(ShapeShifterCurseFabric.identifier("perks/avali_emergency_protocol")).removePower());
 
     public static final Identifier T_Bat3PerkTree = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("bat_3_perk_tree"))
+            .addVirtualNode(P_ROOT, -1, 0)
             .addNode(P_BatPosture_1, 1, 0)
-            .addNode(P_BatPosture_2, 2, 0, new NormalDependent(P_BatPosture_1))
-            .addNode(P_BatEcholocation, 3, 0, new NormalDependent(P_BatPosture_2))
-            .addNode(P_BatWingbeat, 4, 0, new NormalDependent(P_BatEcholocation))
-            .addNode(P_BatArrowThrow, 2, 60, new NormalDependent(P_BatPosture_1))
+            .addNode(P_BatPosture_2, 2, 0, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_BatPosture_1))
+            .addNode(P_BatEcholocation, 3, 0, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_BatPosture_2))
+            .addNode(P_BatWingbeat, 4, 0, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_BatEcholocation))
+            .addNode(P_BatArrowThrow, 2, 60, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_BatPosture_1))
             .addNode(P_BatSunResistance_1, 1, 140)
-            .addNode(P_BatSunResistance_2, 2, 140, new NormalDependent(P_BatSunResistance_1))
+            .addNode(P_BatSunResistance_2, 2, 140, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_BatSunResistance_1))
+            .forEachNode(U_AddRootDependent)
     );
 
     public static final Identifier T_Axolotl3PerkTree = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("axolotl_3_perk_tree"))
+            .addVirtualNode(P_ROOT, -1, 0)
             .addNode(P_AxolotlVegetation, 1, 0)
-            .addNode(P_AxolotlDryTolerance, 2, 0, new NormalDependent(P_AxolotlVegetation))
-            .addNode(P_AxolotlTidalPull, 2, 60, new NormalDependent(P_AxolotlVegetation))
+            .addNode(P_AxolotlDryTolerance, 2, 0, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_AxolotlVegetation))
+            .addNode(P_AxolotlTidalPull, 2, 60, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_AxolotlVegetation))
             .addNode(P_AxolotlMoistureReturn_1, 1, 140)
-            .addNode(P_AxolotlMoistureReturn_2, 2, 140, new NormalDependent(P_AxolotlMoistureReturn_1))
+            .addNode(P_AxolotlMoistureReturn_2, 2, 140, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_AxolotlMoistureReturn_1))
             .addNode(P_AxolotlPropulsionEfficiency, 1, 240)
-            .addNode(P_AxolotlWaveEfficiency, 2, 240, new NormalDependent(P_AxolotlPropulsionEfficiency))
-            .addNode(P_AxolotlWaterMagicEfficiency, 3, 240, new NormalDependent(P_AxolotlWaveEfficiency))
+            .addNode(P_AxolotlWaveEfficiency, 2, 240, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_AxolotlPropulsionEfficiency))
+            .addNode(P_AxolotlWaterMagicEfficiency, 3, 240, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_AxolotlWaveEfficiency))
+            .forEachNode(U_AddRootDependent)
     );
     public static final Identifier T_Ocelot3PerkTree = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("ocelot_3_perk_tree"))
+            .addVirtualNode(P_ROOT, -1, 0)
             .addNode(P_OcelotArmor_1, 1, 0)
-            .addNode(P_OcelotArmor_2, 2, 0, new NormalDependent(P_OcelotArmor_1))
+            .addNode(P_OcelotArmor_2, 2, 0, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_OcelotArmor_1))
             .addNode(P_OcelotMetabolism_1, 1, 80)
-            .addNode(P_OcelotMetabolicOverload, 2, 80, new NormalDependent(P_OcelotMetabolism_1))
-            .addNode(P_OcelotMetabolism_2, 3, 140, new NormalDependent(P_OcelotMetabolism_1))
+            .addNode(P_OcelotMetabolicOverload, 2, 80, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_OcelotMetabolism_1))
+            .addNode(P_OcelotMetabolism_2, 3, 140, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_OcelotMetabolism_1))
             .addNode(P_OcelotAmbush, 2, 220)
-            .addNode(P_OcelotHungryPounce, 3, 220, new NormalDependent(P_OcelotAmbush))
-            .addNode(P_OcelotLongPounce, 3, 280, new NormalDependent(P_OcelotAmbush))
+            .addNode(P_OcelotHungryPounce, 3, 220, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_OcelotAmbush))
+            .addNode(P_OcelotLongPounce, 3, 280, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_OcelotAmbush))
+            .forEachNode(U_AddRootDependent)
     );
     public static final Identifier T_FamiliarFox3PerkTree = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("familiar_fox_3_perk_tree"))
+            .addVirtualNode(P_ROOT, -1, 0)
             .addNode(P_FamiliarFoxDeflection, 2, 0)
-            .addNode(P_FamiliarFoxReturnShield, 3, 0, new NormalDependent(P_FamiliarFoxDeflection))
+            .addNode(P_FamiliarFoxReturnShield, 3, 0, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_FamiliarFoxDeflection))
             .addNode(P_FamiliarFoxSiphon_1, 1, 80)
-            .addNode(P_FamiliarFoxSiphon_2, 3, 80, new NormalDependent(P_FamiliarFoxSiphon_1))
+            .addNode(P_FamiliarFoxSiphon_2, 3, 80, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_FamiliarFoxSiphon_1))
             .addNode(P_FamiliarFoxManaCapacity_1, 1, 160)
-            .addNode(P_FamiliarFoxManaCapacity_2, 3, 160, new NormalDependent(P_FamiliarFoxManaCapacity_1))
-            .addNode(P_FamiliarFoxPermeableField_1, 2, 240, new NormalDependent(P_FamiliarFoxManaCapacity_1))
-            .addNode(P_FamiliarFoxPermeableField_2, 3, 240, new NormalDependent(P_FamiliarFoxPermeableField_1))
+            .addNode(P_FamiliarFoxManaCapacity_2, 3, 160, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_FamiliarFoxManaCapacity_1))
+            .addNode(P_FamiliarFoxPermeableField_1, 2, 240, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_FamiliarFoxManaCapacity_1))
+            .addNode(P_FamiliarFoxPermeableField_2, 3, 240, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_FamiliarFoxPermeableField_1))
             .addNode(P_FamiliarFoxPotionCharms, 3, 320)
+            .forEachNode(U_AddRootDependent)
     );
     public static final Identifier T_SnowFox3PerkTree = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("snow_fox_3_perk_tree"))
+            .addVirtualNode(P_ROOT, -1, 0)
             .addNode(P_SnowFoxRevenge, 2, 0)
             .addNode(P_SnowFoxElusivePaws, 1, 80)
-            .addNode(P_SnowFoxAirJump, 2, 80, new NormalDependent(P_SnowFoxElusivePaws))
-            .addNode(P_SnowFoxFrostDive, 4, 80, new NormalDependent(P_SnowFoxAirJump))
+            .addNode(P_SnowFoxAirJump, 2, 80, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_SnowFoxElusivePaws))
+            .addNode(P_SnowFoxFrostDive, 4, 80, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_SnowFoxAirJump))
             .addNode(P_SnowFoxFireTraining_1, 1, 240)
-            .addNode(P_SnowFoxColdRecovery_1, 2, 240, new NormalDependent(P_SnowFoxFireTraining_1))
-            .addNode(P_SnowFoxColdRecovery_2, 3, 240, new NormalDependent(P_SnowFoxColdRecovery_1))
-            .addNode(P_SnowFoxFireTraining_2, 2, 320, new NormalDependent(P_SnowFoxFireTraining_1))
+            .addNode(P_SnowFoxColdRecovery_1, 2, 240, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_SnowFoxFireTraining_1))
+            .addNode(P_SnowFoxColdRecovery_2, 3, 240, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_SnowFoxColdRecovery_1))
+            .addNode(P_SnowFoxFireTraining_2, 2, 320, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_SnowFoxFireTraining_1))
+            .forEachNode(U_AddRootDependent)
     );
     public static final Identifier T_AnubisWolf3PerkTree = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("anubis_wolf_3_perk_tree"))
+            .addVirtualNode(P_ROOT, -1, 0)
             .addNode(P_AnubisWolfPackResponse_1, 1, 0)
-            .addNode(P_AnubisWolfSoulExcitation, 2, 0, new NormalDependent(P_AnubisWolfPackResponse_1))
-            .addNode(P_AnubisWolfPackResponse_2, 3, 80, new NormalDependent(P_AnubisWolfPackResponse_1))
-            .addNode(P_AnubisWolfPackAmplification, 4, 80, new NormalDependent(P_AnubisWolfPackResponse_2))
+            .addNode(P_AnubisWolfSoulExcitation, 2, 0, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_AnubisWolfPackResponse_1))
+            .addNode(P_AnubisWolfPackResponse_2, 3, 80, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_AnubisWolfPackResponse_1))
+            .addNode(P_AnubisWolfPackAmplification, 4, 80, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_AnubisWolfPackResponse_2))
             .addNode(P_AnubisWolfWitherTolerance_1, 1, 160)
-            .addNode(P_AnubisWolfWitherTolerance_2, 3, 160, new NormalDependent(P_AnubisWolfWitherTolerance_1))
-            .addNode(P_AnubisWolfSoulRecall, 2, 240, new NormalDependent(P_AnubisWolfWitherTolerance_1))
+            .addNode(P_AnubisWolfWitherTolerance_2, 3, 160, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_AnubisWolfWitherTolerance_1))
+            .addNode(P_AnubisWolfSoulRecall, 2, 240, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_AnubisWolfWitherTolerance_1))
             .addNode(P_AnubisWolfUndeadDiscernment, 1, 320)
+            .forEachNode(U_AddRootDependent)
     );
     public static final Identifier T_Spider3PerkTree = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("spider_3_perk_tree"))
+            .addVirtualNode(P_ROOT, -1, 0)
             .addNode(P_SpiderFourLeggedAdaptation, 1, 0)
             .addNode(P_SpiderCocoonDigestion_1, 1, 80)
-            .addNode(P_SpiderCocoonDigestion_2, 2, 80, new NormalDependent(P_SpiderCocoonDigestion_1))
+            .addNode(P_SpiderCocoonDigestion_2, 2, 80, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_SpiderCocoonDigestion_1))
             .addNode(P_SpiderBridgeWeaver, 2, 160)
-            .addNode(P_SpiderPerceptualWeb, 3, 160, new NormalDependent(P_SpiderBridgeWeaver))
-            .addNode(P_SpiderRapidSpinner, 3, 240, new NormalDependent(P_SpiderBridgeWeaver))
-            .addNode(P_SpiderStabilizedProjectile, 4, 240, new NormalDependent(P_SpiderRapidSpinner))
+            .addNode(P_SpiderPerceptualWeb, 3, 160, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_SpiderBridgeWeaver))
+            .addNode(P_SpiderRapidSpinner, 3, 240, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_SpiderBridgeWeaver))
+            .addNode(P_SpiderStabilizedProjectile, 4, 240, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_SpiderRapidSpinner))
             .addNode(P_SpiderSilkSecretion_1, 1, 320)
-            .addNode(P_SpiderSilkSecretion_2, 3, 320, new NormalDependent(P_SpiderSilkSecretion_1))
+            .addNode(P_SpiderSilkSecretion_2, 3, 320, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_SpiderSilkSecretion_1))
+            .forEachNode(U_AddRootDependent)
     );
     public static final Identifier T_MarbledPolecatPerkTree = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("marbled_polecat_perk_tree"))
+            .addVirtualNode(P_ROOT, -1, 0)
             .addNode(P_MarbledPolecatDoubleAirJump, 1, 0)
-            .addNode(P_MarbledPolecatPreciseMomentum, 2, 0, new NormalDependent(P_MarbledPolecatDoubleAirJump))
-            .addNode(P_MarbledPolecatLeapingDash, 3, 80, new NormalDependent(P_MarbledPolecatDoubleAirJump))
+            .addNode(P_MarbledPolecatPreciseMomentum, 2, 0, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_MarbledPolecatDoubleAirJump))
+            .addNode(P_MarbledPolecatLeapingDash, 3, 80, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_MarbledPolecatDoubleAirJump))
             .addNode(P_MarbledPolecatHunterMetabolism, 1, 160)
-            .addNode(P_MarbledPolecatCombatNoodle, 2, 160, new NormalDependent(P_MarbledPolecatHunterMetabolism))
-            .addNode(P_MarbledPolecatKeenScent, 2, 240, new NormalDependent(P_MarbledPolecatHunterMetabolism))
+            .addNode(P_MarbledPolecatCombatNoodle, 2, 160, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_MarbledPolecatHunterMetabolism))
+            .addNode(P_MarbledPolecatKeenScent, 2, 240, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_MarbledPolecatHunterMetabolism))
+            .forEachNode(U_AddRootDependent)
     );
     public static final Identifier T_AvaliPerkTree = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("avali_perk_tree"))
+            .addVirtualNode(P_ROOT, -1, 0)
             .addNode(P_AvaliNanoCoating_1, 1, 0)
-            .addNode(P_AvaliNanoCoating_2, 2, 0, new NormalDependent(P_AvaliNanoCoating_1))
+            .addNode(P_AvaliNanoCoating_2, 2, 0, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_AvaliNanoCoating_1))
             .addNode(P_AvaliEnvironmentalProtection_1, 1, 80)
-            .addNode(P_AvaliEnvironmentalProtection_2, 2, 80, new NormalDependent(P_AvaliEnvironmentalProtection_1))
+            .addNode(P_AvaliEnvironmentalProtection_2, 2, 80, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_AvaliEnvironmentalProtection_1))
             .addNode(P_AvaliToolModification_1, 2, 160)
-            .addNode(P_AvaliToolModification_2, 3, 160, new NormalDependent(P_AvaliToolModification_1))
+            .addNode(P_AvaliToolModification_2, 3, 160, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_AvaliToolModification_1))
+            .forEachNode(U_AddRootDependent)
     );
 
     public static Identifier registerPerk(IPerk perk) {

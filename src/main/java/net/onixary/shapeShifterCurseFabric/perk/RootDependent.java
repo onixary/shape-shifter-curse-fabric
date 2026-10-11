@@ -28,18 +28,18 @@ public class RootDependent implements IDependent {
     }
 
     @Override
-    public void drawDependentLine(DrawContext drawContext, Vector2i nodeCenter, PerkTree tree, PerkTree.PerkNode perkNode) {
+    public void drawDependentLine(DrawContext drawContext, int nowNodeBaseX, Vector2i nodeCenter, PerkTree tree, PerkTree.PerkNode perkNode) {
         int ox = nodeCenter.x;
         int oy = nodeCenter.y;
-        int x1 = nodeBaseX + posXPerTier * perkNode.tier + nodeLineDependXOffset;
-        int x2 = nodeBaseX + posXPerTier * rootTier + nodeLineRootXOffset;
+        int x1 = nowNodeBaseX + posXPerTier * perkNode.tier + nodeLineDependXOffset;
+        int x2 = nowNodeBaseX + posXPerTier * rootTier + nodeLineRootXOffset;
         int y1 = perkNode.y;
         int y2 = rootY;
         // 思考了一下 这个一般接的是虚拟节点 没法显示依赖的框 So 直接不渲染这种特殊情况吧
         if (rootTier >= perkNode.tier) {
             return;
         }
-        int vx = nodeBaseX + posXPerTier * rootTier + posXPerTier / 2;
+        int vx = nowNodeBaseX + posXPerTier * rootTier + posXPerTier / 2;
         drawContext.fill(
                 ox + Math.min(x1, vx), oy + y1,
                 ox + Math.max(x1, vx) + 1, oy + y1 + 1,

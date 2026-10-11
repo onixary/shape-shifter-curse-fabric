@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 // Common Side
 public class PerkTree {
@@ -35,6 +36,9 @@ public class PerkTree {
     public final Map<Identifier, PerkNode> perkNodeMap = new HashMap<>();
     public final Map<Identifier, PerkNode> virtualNodeMap = new HashMap<>();
 
+    // 仅用于渲染
+    public int perkLowestTier_r = 0;
+
     public PerkTree(Identifier treeID) {
         this.treeID = treeID;
     }
@@ -62,12 +66,14 @@ public class PerkTree {
     public PerkTree addNode(PerkNode perkNode) {
         perkNodes.add(perkNode);
         perkNodeMap.put(perkNode.perkID, perkNode);
+        if (perkNode.tier < perkLowestTier_r) perkLowestTier_r = perkNode.tier;
         return this;
     }
 
     public PerkTree addVirtualNode(PerkNode perkNode) {
         virtualNodes.add(perkNode);
         virtualNodeMap.put(perkNode.perkID, perkNode);
+        if (perkNode.tier < perkLowestTier_r) perkLowestTier_r = perkNode.tier;
         return this;
     }
 
@@ -101,5 +107,10 @@ public class PerkTree {
 
     public @NotNull List<PerkNode> getAllVirtualNodes() {
         return new ArrayList<>(virtualNodes);
+    }
+
+    public PerkTree forEachNode(Consumer<PerkNode> consumer) {
+        perkNodes.forEach(consumer);
+        return this;
     }
 }
