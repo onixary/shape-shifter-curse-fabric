@@ -205,6 +205,8 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         this.AcquirePerkButton = ButtonWidget.builder(Text.translatable("gui.shape-shifter-curse.perk.select_node"), button -> {
             if (this.nowSelectNode != null) {
                 PerkUtils.addPerk(MinecraftClient.getInstance().player, this.perkTree.getID(), this.nowSelectNode.perkID);
+                // 因为更新时会自动更新nowCostTicker 所以其实这个参数可以做倒计时更新
+                nowCostTicker = 5;
                 ModPacketsS2C.sendRequestPerkAvailability();
             }
         }).position(baseX + PERK_INFO_GAIN_BUTTON_X, baseY + PERK_INFO_GAIN_BUTTON_Y).size(PERK_INFO_GAIN_BUTTON_WIDTH, PERK_INFO_GAIN_BUTTON_HEIGHT).build();
