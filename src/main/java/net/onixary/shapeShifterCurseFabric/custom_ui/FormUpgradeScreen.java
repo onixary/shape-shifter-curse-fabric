@@ -163,6 +163,8 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     public TextWidget PerkCostAmountWidget;
 
     public int MaxPerkLevel = 0;
+    public int updateCostTicker = 0;
+    public int nowCostTicker = -1;
 
     @Override
     public WidgetEXUtils.WidgetRect getRect() {
@@ -219,7 +221,12 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     @Override
     public void tick() {
         super.tick();
-        this.refreshSelectedPerkState();
+        if (nowCostTicker >= 0) {
+            this.updateCostTicker++;
+            if (updateCostTicker >= nowCostTicker) {
+                this.refreshSelectedPerkState();
+            }
+        }
     }
 
     @Override
@@ -583,14 +590,20 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     }
 
     private void refreshSelectedPerkState() {
+        this.updateCostTicker = 0;
         if (this.client == null || this.client.player == null) return;
         String reason = this.getPerkUnavailableReason();
         this.AcquirePerkButton.active = reason == null;
         this.AcquirePerkButton.setMessage(Text.translatable(reason == null
                 ? "gui.shape-shifter-curse.perk.acquire" : reason));
         ICost cost = this.nowSelectNode == null ? null : perkCostMap.get(this.nowSelectNode.perkID);
-        this.PerkCostAmountWidget.setMessage(cost != null && cost.getType() instanceof IFUSDrawableCostType<?> drawable
-                ? drawable.getAmountText(cost, this.client.player) : Text.empty());
+        if (cost != null && cost.getType() instanceof IFUSDrawableCostType<?> drawable) {
+            this.nowCostTicker = drawable.checkInterval();
+            this.PerkCostAmountWidget.setMessage(drawable.getAmountText(cost, this.client.player));
+        } else {
+            this.nowCostTicker = -1;
+            this.PerkCostAmountWidget.setMessage(Text.empty());
+        }
     }
 
     public void onNodeSelect() {
