@@ -555,49 +555,41 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         cameraScale = newScale;
     }
 
-    public boolean isNowPerkCanGain() {
-        return this.getPerkUnavailableReason() == null;
-    }
-
-    private @Nullable String getPerkUnavailableReason() {
+    private @Nullable Text getPerkUnavailableReason() {
         if (this.nowSelectNode == null) {
-            return "gui.shape-shifter-curse.perk.select_node";
+            return Text.translatable("gui.shape-shifter-curse.perk.select_node");
         }
         List<Identifier> playerGainedPerk = PerkUtils.getPlayerPerks(this.client.player, this.perkTree.getID());
         if (playerGainedPerk != null && playerGainedPerk.contains(this.nowSelectNode.perkID)) {
-            return "gui.shape-shifter-curse.perk.acquired";
+            return Text.translatable("gui.shape-shifter-curse.perk.acquired");
         }
         if (this.nowSelectNode.tier > this.tier) {
-            return "gui.shape-shifter-curse.perk.insufficient_tier";
+            return Text.translatable("gui.shape-shifter-curse.perk.insufficient_tier");
         }
         if (this.nowSelectNode.dependents != null && !this.nowSelectNode.dependents.isEmpty()) {
             for (IDependent dependent : this.nowSelectNode.dependents) {
                 if (!dependent.isAllDependentGained(this.client.player, playerGainedPerk)) {
-                    return "gui.shape-shifter-curse.perk.requires_previous";
+                    return Text.translatable("gui.shape-shifter-curse.perk.requires_previous");
                 }
             }
         }
         ICost cost = perkCostMap.get(this.nowSelectNode.perkID);
         if (!PerkUtils.isFreeUnlock(client.player) && cost != null && !cost.getType().canPay_CLIENT(cost, client.player)) {
-            if (cost.getType() instanceof ItemCostType) {
-                return "gui.shape-shifter-curse.perk.insufficient_items";
+            if (cost.getType() instanceof IFUSDrawableCostType<?> drawable) {
+                return drawable.getResourceNotEnoughText(cost, client.player);
             }
-            if (cost.getType() instanceof XPCostType) {
-                return "gui.shape-shifter-curse.perk.insufficient_xp";
-            }
-            return "gui.shape-shifter-curse.perk.unavailable";
+            return Text.translatable("gui.shape-shifter-curse.perk.unavailable");
         }
         return perkAvailableMap.getOrDefault(this.nowSelectNode.perkID, true)
-                ? null : "gui.shape-shifter-curse.perk.unavailable";
+                ? null : Text.translatable("gui.shape-shifter-curse.perk.unavailable");
     }
 
     private void refreshSelectedPerkState() {
         this.updateCostTicker = 0;
         if (this.client == null || this.client.player == null) return;
-        String reason = this.getPerkUnavailableReason();
-        this.AcquirePerkButton.active = reason == null;
-        this.AcquirePerkButton.setMessage(Text.translatable(reason == null
-                ? "gui.shape-shifter-curse.perk.acquire" : reason));
+        Text reasonText = this.getPerkUnavailableReason();
+        this.AcquirePerkButton.active = reasonText == null;
+        this.AcquirePerkButton.setMessage(reasonText == null ? Text.translatable("gui.shape-shifter-curse.perk.acquire") : reasonText);
         ICost cost = this.nowSelectNode == null ? null : perkCostMap.get(this.nowSelectNode.perkID);
         if (cost != null && cost.getType() instanceof IFUSDrawableCostType<?> drawable) {
             this.nowCostTicker = drawable.checkInterval();
@@ -619,8 +611,8 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
             this.PerkNameWidget.setMessage(RegPerks.getPerkName(this.nowSelectNode.perkID));
             this.PerkDescWidget.reloadText(RegPerks.getPerkDescription(this.nowSelectNode.perkID));
         } else {
-            this.PerkNameWidget.setMessage(Text.literal(""));
-            this.PerkDescWidget.reloadText(Text.literal(""));
+            this.PerkNameWidget.setMessage(Text.empty());
+            this.PerkDescWidget.reloadText(Text.empty());
         }
         this.refreshSelectedPerkState();
         ModPacketsS2C.sendRequestPerkAvailability();

@@ -19,4 +19,8 @@ public interface IFUSDrawableCostType<T extends ICostType<T>> extends ICostType<
     public default Text getAmountText(@NotNull ICost costObject, @Nullable PlayerEntity player) {
         return Text.of(String.valueOf(costObject.getAmount()));
     }
+
+    public default Text getResourceNotEnoughText(@NotNull ICost costObject, @Nullable PlayerEntity player) {
+        return Text.translatable("gui.shape-shifter-curse.perk.unavailable");
+    }
 }

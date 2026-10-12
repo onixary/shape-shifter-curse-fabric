@@ -62,4 +62,9 @@ public class XPCostType implements IFUSDrawableCostType<XPCostType> {
     public void pay(@NotNull ICost costObject, @NotNull PlayerEntity player) {
         player.addExperience(-costObject.getAmount());
     }
+
+    @Override
+    public Text getResourceNotEnoughText(@NotNull ICost costObject, @Nullable PlayerEntity player) {
+        return Text.translatable("gui.shape-shifter-curse.perk.insufficient_xp");
+    }
 }
