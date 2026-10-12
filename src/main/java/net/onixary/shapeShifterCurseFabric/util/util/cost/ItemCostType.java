@@ -125,4 +125,9 @@ public class ItemCostType implements IFUSDrawableCostType<ItemCostType> {
             ShapeShifterCurseFabric.LOGGER.warn("ItemCostType.pay: insufficient items, remaining {}", remaining);
         }
     }
+
+    @Override
+    public Text getResourceNotEnoughText(@NotNull ICost costObject, @Nullable PlayerEntity player) {
+        return Text.translatable("gui.shape-shifter-curse.perk.insufficient_items");
+    }
 }

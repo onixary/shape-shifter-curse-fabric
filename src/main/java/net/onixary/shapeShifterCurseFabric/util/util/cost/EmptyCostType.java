@@ -18,6 +18,11 @@ public class EmptyCostType implements IFUSDrawableCostType<EmptyCostType> {
     private static final ISprite xpIconSprite = new BaseSprite(TEXTURE, TEXTURE_WIDTH, TEXTURE_HEIGHT, 434, 35, 18, 18);
 
     @Override
+    public int checkInterval() {
+        return -1;
+    }
+
+    @Override
     public Identifier getID() {
         return id;
     }
@@ -34,7 +39,7 @@ public class EmptyCostType implements IFUSDrawableCostType<EmptyCostType> {
 
     @Override
     public Text getAmountText(@NotNull ICost costObject, @Nullable PlayerEntity player) {
-        return Text.literal("");
+        return Text.empty();
     }
 
     @Override

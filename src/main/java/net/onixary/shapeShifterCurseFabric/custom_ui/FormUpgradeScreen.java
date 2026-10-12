@@ -163,6 +163,8 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     public TextWidget PerkCostAmountWidget;
 
     public int MaxPerkLevel = 0;
+    public int updateCostTicker = 0;
+    public int nowCostTicker = -1;
 
     @Override
     public WidgetEXUtils.WidgetRect getRect() {
@@ -203,6 +205,8 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         this.AcquirePerkButton = ButtonWidget.builder(Text.translatable("gui.shape-shifter-curse.perk.select_node"), button -> {
             if (this.nowSelectNode != null) {
                 PerkUtils.addPerk(MinecraftClient.getInstance().player, this.perkTree.getID(), this.nowSelectNode.perkID);
+                // 因为更新时会自动更新nowCostTicker 所以其实这个参数可以做倒计时更新
+                nowCostTicker = 5;
                 ModPacketsS2C.sendRequestPerkAvailability();
             }
         }).position(baseX + PERK_INFO_GAIN_BUTTON_X, baseY + PERK_INFO_GAIN_BUTTON_Y).size(PERK_INFO_GAIN_BUTTON_WIDTH, PERK_INFO_GAIN_BUTTON_HEIGHT).build();
@@ -219,7 +223,12 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     @Override
     public void tick() {
         super.tick();
-        this.refreshSelectedPerkState();
+        if (nowCostTicker >= 0) {
+            this.updateCostTicker++;
+            if (updateCostTicker >= nowCostTicker) {
+                this.refreshSelectedPerkState();
+            }
+        }
     }
 
     @Override
@@ -546,51 +555,49 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         cameraScale = newScale;
     }
 
-    public boolean isNowPerkCanGain() {
-        return this.getPerkUnavailableReason() == null;
-    }
-
-    private @Nullable String getPerkUnavailableReason() {
+    private @Nullable Text getPerkUnavailableReason() {
         if (this.nowSelectNode == null) {
-            return "gui.shape-shifter-curse.perk.select_node";
+            return Text.translatable("gui.shape-shifter-curse.perk.select_node");
         }
         List<Identifier> playerGainedPerk = PerkUtils.getPlayerPerks(this.client.player, this.perkTree.getID());
         if (playerGainedPerk != null && playerGainedPerk.contains(this.nowSelectNode.perkID)) {
-            return "gui.shape-shifter-curse.perk.acquired";
+            return Text.translatable("gui.shape-shifter-curse.perk.acquired");
         }
         if (this.nowSelectNode.tier > this.tier) {
-            return "gui.shape-shifter-curse.perk.insufficient_tier";
+            return Text.translatable("gui.shape-shifter-curse.perk.insufficient_tier");
         }
         if (this.nowSelectNode.dependents != null && !this.nowSelectNode.dependents.isEmpty()) {
             for (IDependent dependent : this.nowSelectNode.dependents) {
                 if (!dependent.isAllDependentGained(this.client.player, playerGainedPerk)) {
-                    return "gui.shape-shifter-curse.perk.requires_previous";
+                    return Text.translatable("gui.shape-shifter-curse.perk.requires_previous");
                 }
             }
         }
         ICost cost = perkCostMap.get(this.nowSelectNode.perkID);
         if (!PerkUtils.isFreeUnlock(client.player) && cost != null && !cost.getType().canPay_CLIENT(cost, client.player)) {
-            if (cost.getType() instanceof ItemCostType) {
-                return "gui.shape-shifter-curse.perk.insufficient_items";
+            if (cost.getType() instanceof IFUSDrawableCostType<?> drawable) {
+                return drawable.getResourceNotEnoughText(cost, client.player);
             }
-            if (cost.getType() instanceof XPCostType) {
-                return "gui.shape-shifter-curse.perk.insufficient_xp";
-            }
-            return "gui.shape-shifter-curse.perk.unavailable";
+            return Text.translatable("gui.shape-shifter-curse.perk.unavailable");
         }
         return perkAvailableMap.getOrDefault(this.nowSelectNode.perkID, true)
-                ? null : "gui.shape-shifter-curse.perk.unavailable";
+                ? null : Text.translatable("gui.shape-shifter-curse.perk.unavailable");
     }
 
     private void refreshSelectedPerkState() {
+        this.updateCostTicker = 0;
         if (this.client == null || this.client.player == null) return;
-        String reason = this.getPerkUnavailableReason();
-        this.AcquirePerkButton.active = reason == null;
-        this.AcquirePerkButton.setMessage(Text.translatable(reason == null
-                ? "gui.shape-shifter-curse.perk.acquire" : reason));
+        Text reasonText = this.getPerkUnavailableReason();
+        this.AcquirePerkButton.active = reasonText == null;
+        this.AcquirePerkButton.setMessage(reasonText == null ? Text.translatable("gui.shape-shifter-curse.perk.acquire") : reasonText);
         ICost cost = this.nowSelectNode == null ? null : perkCostMap.get(this.nowSelectNode.perkID);
-        this.PerkCostAmountWidget.setMessage(cost != null && cost.getType() instanceof IFUSDrawableCostType<?> drawable
-                ? drawable.getAmountText(cost, this.client.player) : Text.empty());
+        if (cost != null && cost.getType() instanceof IFUSDrawableCostType<?> drawable) {
+            this.nowCostTicker = drawable.checkInterval();
+            this.PerkCostAmountWidget.setMessage(drawable.getAmountText(cost, this.client.player));
+        } else {
+            this.nowCostTicker = -1;
+            this.PerkCostAmountWidget.setMessage(Text.empty());
+        }
     }
 
     public void onNodeSelect() {
@@ -604,8 +611,8 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
             this.PerkNameWidget.setMessage(RegPerks.getPerkName(this.nowSelectNode.perkID));
             this.PerkDescWidget.reloadText(RegPerks.getPerkDescription(this.nowSelectNode.perkID));
         } else {
-            this.PerkNameWidget.setMessage(Text.literal(""));
-            this.PerkDescWidget.reloadText(Text.literal(""));
+            this.PerkNameWidget.setMessage(Text.empty());
+            this.PerkDescWidget.reloadText(Text.empty());
         }
         this.refreshSelectedPerkState();
         ModPacketsS2C.sendRequestPerkAvailability();

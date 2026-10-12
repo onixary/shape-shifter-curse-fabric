@@ -13,7 +13,6 @@ public interface ICost {
 
     public int getAmount();
 
-
     public void writeToNBT(NbtCompound nbt);
 
     public void readFromNBT(NbtCompound nbt);
