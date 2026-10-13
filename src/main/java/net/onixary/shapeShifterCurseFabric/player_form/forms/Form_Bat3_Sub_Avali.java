@@ -51,25 +51,21 @@ public class Form_Bat3_Sub_Avali extends NormalSubForm implements ModifyCapeRend
     }
 
     // 以下暂时沿用 bat_3 的披风渲染参数
+    // 然而不行 看起来很怪
 
     @Override
     public Vec3d getCapeIdleLoc(AbstractClientPlayerEntity player) {
-        if (player.isOnGround()) {
-            return new Vec3d(0.0f, 0.7f, 0.2f);
-        }
-        else {
-            return new Vec3d(0.0, 0.0, 0.125);
-        }
+        return new Vec3d(0.0, 0.0, 0.125);
     }
 
     @Override
     public float getCapeBaseRotateAngle(AbstractClientPlayerEntity player) {
-        return 100.0f;
+        return 15.0f;
     }
 
     @Override
     public boolean NeedModifyXRotationAngle() {
-        return true;
+        return false;
     }
 
     // avali 专属动画 无 avali 版本的动画(jump/riding)沿用 bat 家族的缺失回退模式
