@@ -1,7 +1,7 @@
 {
     "type": "apoli:modify_break_speed",
     "condition": {
-        "type": "shape-shifter-curse:barehand_digging"
+        "type": "shape-shifter-curse:can_barehand_digging"
     },
     "modifier": {
         "operation": "multiply_base",
