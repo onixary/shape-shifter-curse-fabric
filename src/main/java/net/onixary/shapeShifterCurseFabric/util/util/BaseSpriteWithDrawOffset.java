@@ -14,7 +14,7 @@ public class BaseSpriteWithDrawOffset extends BaseSprite {
     }
 
     @Override
-    public void draw(DrawContext context, int x, int y, int z, int u, int v, int width, int height) {
-        context.drawTexture(getTextureID(), x + drawOffsetX, y + drawOffsetY, z, getTextureX() + u, getTextureY() + v, width, height, getTextureImgWidth(), getTextureImgHeight());
+    public void draw(DrawContext context, int x1, int x2, int y1, int y2, int z, int regionWidth, int regionHeight, float u, float v) {
+        super.draw(context, x1 + drawOffsetX, x2 + drawOffsetX, y1 + drawOffsetY, y2 + drawOffsetY, z, regionWidth, regionHeight, u, v);
     }
 }

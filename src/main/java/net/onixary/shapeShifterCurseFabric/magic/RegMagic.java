@@ -27,17 +27,4 @@ public class RegMagic {
     public static @Nullable IMagic getMagic(Identifier id) {
         return magicRegistry.get(id);
     }
-
-    // 这个函数会被拓展(SSC_Xu_Addon)覆写 其他拓展不要修改 我留着给魔法系统当底子 反正最后也得放入主线中
-    public static boolean shouldShowMagicUI(PlayerEntity player) {
-        // 需要给形态加个Flag 根据Flag判断是否显示UI
-        return false;
-    }
-
-    private static final IMagic[] DEFAULT_MAGIC = {ACTIVE_SKILL_1, ACTIVE_SKILL_2, ACTIVE_SKILL_3, ACTIVE_SKILL_4, ACTIVE_SKILL_5, ACTIVE_SKILL_6};
-
-    // 和上面的一样 会被覆写
-    public static IMagic[] getPlayerMagic(PlayerEntity player) {
-        return DEFAULT_MAGIC;
-    }
 }

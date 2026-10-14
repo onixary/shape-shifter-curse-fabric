@@ -24,6 +24,10 @@ public interface ISprite {
     }
 
     public default void draw(DrawContext context, int x, int y, int z, int u, int v, int width, int height) {
-        context.drawTexture(getTextureID(), x, y, z, getTextureX() + u, getTextureY() + v, width, height, getTextureImgWidth(), getTextureImgHeight());
+        this.draw(context, x, x + width, y, y + height, z, width, height, u, v);
+    }
+
+    public default void draw(DrawContext context, int x1, int x2, int y1, int y2, int z, int regionWidth, int regionHeight, float u, float v) {
+        context.drawTexture(getTextureID(), x1, x2, y1, y2, z, regionWidth, regionHeight, getTextureX() + u, getTextureY() + v, getTextureImgWidth(), getTextureImgHeight());
     }
 }
