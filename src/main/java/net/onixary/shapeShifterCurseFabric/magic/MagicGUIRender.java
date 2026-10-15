@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.magic;
 
+import com.eliotlash.mclib.math.functions.limit.Min;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -7,6 +8,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
+import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.util.UIPositionUtils;
 
 @Environment(EnvType.CLIENT)
@@ -72,5 +74,37 @@ public class MagicGUIRender {
     // 一样 拓展后续实现
     public static float getCooldownPercent(IMagic magic, float tickDelta) {
         return 1.0f;
+    }
+
+    // 有点复杂 不太适合放ShapeShifterCurseFabricClient里面 但又不够但拉一个Class
+    private static boolean lastPASPressed = false;
+    private static boolean lastNASPressed = false;
+    private static double scrollCounter = 0.0f;
+    private static final double scrollStep = -1.0f;
+
+    public static void onClientTick() {
+        if (ShapeShifterCurseFabricClient.prevActiveSkillKeybind.isPressed() && !lastPASPressed) {
+            MagicUtils.nowSelectMagicIndex = (MagicUtils.nowSelectMagicIndex - 1 + MagicUtils.MAGIC_SLOT_COUNT) % MagicUtils.MAGIC_SLOT_COUNT;
+        }
+        if (ShapeShifterCurseFabricClient.nextActiveSkillKeybind.isPressed() && !lastNASPressed) {
+            MagicUtils.nowSelectMagicIndex = (MagicUtils.nowSelectMagicIndex + 1) % MagicUtils.MAGIC_SLOT_COUNT;
+        }
+        lastPASPressed = ShapeShifterCurseFabricClient.prevActiveSkillKeybind.isPressed();
+        lastNASPressed = ShapeShifterCurseFabricClient.nextActiveSkillKeybind.isPressed();
+    }
+
+    public static void onMouseScroll(double amount) {
+        scrollCounter += amount;
+        int step = 0;
+        if (scrollCounter >= scrollStep) {
+            step = (int) Math.floor(scrollCounter / scrollStep);
+        } else if (scrollCounter <= -scrollStep) {
+            step = (int) Math.ceil(scrollCounter / scrollStep);
+        }
+        if (step != 0) {
+            scrollCounter -= step * scrollStep;
+            step = step % MagicUtils.MAGIC_SLOT_COUNT;
+            MagicUtils.nowSelectMagicIndex = (MagicUtils.nowSelectMagicIndex + step + MagicUtils.MAGIC_SLOT_COUNT) % MagicUtils.MAGIC_SLOT_COUNT;
+        }
     }
 }

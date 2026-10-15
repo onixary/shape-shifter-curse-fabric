@@ -123,7 +123,8 @@
     "SU_ClientCommandSourceMixin",
     "SU_ClientPlayerEntityMixin",
     "PlayerListHudMixin",
-    "integration.CarryOnIntegrationMixin"
+    "integration.CarryOnIntegrationMixin",
+    "MouseMixin"
   ],
   "injectors": {
     "defaultRequire": 1
