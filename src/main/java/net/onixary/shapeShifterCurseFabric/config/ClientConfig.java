@@ -109,4 +109,16 @@ public class ClientConfig implements ConfigData {
     @ConfigEntry.Category("UI")
     @Comment("Item Store Power Y Offset. Default: 1")
     public int itemStorePowerPosOffsetY = 1;  // itemStorePower 中间 Y 位置偏移量
+
+    @ConfigEntry.Category("UI")
+    @Comment("Magic GUI Middle Type (1-9). Default: 8")
+    public int magicGUIPosType = 8;
+
+    @ConfigEntry.Category("UI")
+    @Comment("Magic GUI X Offset. Default: -210")
+    public int magicGUIPosOffsetX = -210;
+
+    @ConfigEntry.Category("UI")
+    @Comment("Magic GUI Y Offset. Default: -30")
+    public int magicGUIPosOffsetY = -30;
 }

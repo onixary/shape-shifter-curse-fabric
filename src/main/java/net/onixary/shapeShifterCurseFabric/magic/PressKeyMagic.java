@@ -27,4 +27,9 @@ public class PressKeyMagic implements IMagic {
     public String getKeyBindID() {
         return this.KeyBindID;
     }
+
+    @Override
+    public boolean virtualInvoke() {
+        return true;
+    }
 }

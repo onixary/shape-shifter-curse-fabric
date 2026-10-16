@@ -53,4 +53,4 @@ accessible field net/minecraft/entity/ai/goal/ActiveTargetGoal reciprocalChance 
 accessible field net/minecraft/entity/ai/goal/ActiveTargetGoal targetPredicate Lnet/minecraft/entity/ai/TargetPredicate;
 accessible field net/minecraft/entity/ai/TargetPredicate predicate Ljava/util/function/Predicate;
 accessible method net/minecraft/entity/passive/OcelotEntity isTrusting ()Z
-
+accessible method net/minecraft/client/gui/DrawContext drawTexture (Lnet/minecraft/util/Identifier;IIIIIIIFFII)V
