@@ -10,6 +10,10 @@ public interface IMagic {
 
     public ISprite getSprite();
 
+    public default ISprite getUnselectedSprite() {
+        return getSprite();
+    }
+
     // 这几个个不准备在这个版本实现 留给拓展实现了 等拓展验证完成后再加入主线
     public default void onInvokeCommon(@NotNull PlayerEntity player) { }
 

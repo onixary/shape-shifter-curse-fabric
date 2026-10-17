@@ -8741,26 +8741,119 @@
   "power.shape-shifter-curse.perks.axolotl_collect_water.name": [
     "集水术"
   ],
-  "power.shape-shifter-curse.perks.axolotl_dry_tolerance.description": [
-    "湿润度不低于120时保持+6最大生命值；低于120时恢复原有血量减益。"
-  ],
+  "power.shape-shifter-curse.perks.axolotl_dry_tolerance.description": {
+    "text": "",
+    "extra": [
+      {
+        "text": "你的身体耐受力得到了提升，让你能够更好地在稍微脱水的情况下维持状态\n[在"
+      },
+      {
+        "text": "湿润度高于4格",
+        "color": "#5555ff"
+      },
+      {
+        "text": "时，你的"
+      },
+      {
+        "text": "最大生命值不会因为湿润度下降而降低",
+        "color": "#5555ff"
+      },
+      {
+        "text": "]"
+      }
+    ]
+  },
   "power.shape-shifter-curse.perks.axolotl_dry_tolerance.name": [
     "干燥耐受"
   ],
   "power.shape-shifter-curse.perks.axolotl_moisture_return_1.description": [
-    "暴击成功对敌人造成超过7点实际伤害时，回复15湿润度。"
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "你掌握了通过精准攻击从敌人身上偷取水分的技艺\n\n["
+        },
+        {
+          "text": "暴击",
+          "color": "#5555ff"
+        },
+        {
+          "text": "成功对敌人造成"
+        },
+        {
+          "text": "超过7点",
+          "color": "#5555ff"
+        },
+        {
+          "text": "实际伤害时，可以"
+        },
+        {
+          "text": "回复少许湿润度",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.axolotl_moisture_return_1.name": [
     "湿气返还Ⅰ"
   ],
   "power.shape-shifter-curse.perks.axolotl_moisture_return_2.description": [
-    "湿润度低于150时，暴击返还提升至30；其余情况返还15。"
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "在干燥状态下，你从敌人身上偷取水分的能力会增强\n[湿润度"
+        },
+        {
+          "text": "低于5格",
+          "color": "#5555ff"
+        },
+        {
+          "text": "时，暴击返还水分的效率会"
+        },
+        {
+          "text": "大幅提升",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.axolotl_moisture_return_2.name": [
     "湿气返还Ⅱ"
   ],
   "power.shape-shifter-curse.perks.axolotl_propulsion_efficiency.description": [
-    "陆地疾跑跳跃时的水流推进每次消耗1湿润度。"
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "你对水流魔法的理解加深了，让你可以更高效地利用水流的力量\n[陆地"
+        },
+        {
+          "text": "疾跑跳跃",
+          "color": "#5555ff"
+        },
+        {
+          "text": "时的水流推进的"
+        },
+        {
+          "text": "湿润度",
+          "color": "#5555ff"
+        },
+        {
+          "text": "消耗量减半",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.axolotl_propulsion_efficiency.name": [
     "水流推进效率"
@@ -8772,19 +8865,80 @@
     "潮汐牵引"
   ],
   "power.shape-shifter-curse.perks.axolotl_vegetation.description": [
-    "在草方块、菌丝体、灰化土、苔藓及指定菌类植被表面，行走速度惩罚降低至15%。"
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "在植被表面行走时，你能够清晰察觉到植物体内的水分流动并加以利用\n[在草方块、菌丝体、灰化土、苔藓等植被方块上行动时，你的"
+        },
+        {
+          "text": "行走速度会加快一些",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.axolotl_vegetation.name": [
     "植被步态"
   ],
-  "power.shape-shifter-curse.perks.axolotl_water_magic_efficiency.description": [
-    "踏浪攻击击飞敌人消耗6湿润度，水流爆破消耗12湿润度。"
-  ],
+  "power.shape-shifter-curse.perks.axolotl_water_magic_efficiency.description": {
+    "text": "",
+    "extra": [
+      {
+        "text": "你对水流魔法的理解进一步加深，让你可以更高效地利用水流的力量\n["
+      },
+      {
+        "text": "踏浪击飞",
+        "color": "#5555ff"
+      },
+      {
+        "text": "与"
+      },
+      {
+        "text": "水流爆破",
+        "color": "#5555ff"
+      },
+      {
+        "text": "的湿润度消耗"
+      },
+      {
+        "text": "减半",
+        "color": "#5555ff"
+      },
+      {
+        "text": "]"
+      }
+    ]
+  },
   "power.shape-shifter-curse.perks.axolotl_water_magic_efficiency.name": [
     "水流魔力效率"
   ],
   "power.shape-shifter-curse.perks.axolotl_wave_efficiency.description": [
-    "踏浪的持续湿润度消耗降低至每30 tick 1点。"
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "通过精准地操作水流，你可以高效地让自己向前滑行\n["
+        },
+        {
+          "text": "踏浪",
+          "color": "#5555ff"
+        },
+        {
+          "text": "的持续湿润度消耗"
+        },
+        {
+          "text": "减半",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.axolotl_wave_efficiency.name": [
     "踏浪效率"
@@ -8796,7 +8950,42 @@
     "气流冲击"
   ],
   "power.shape-shifter-curse.perks.bat_arrow_throw.description": [
-    "主手持箭右键投出，消耗1支箭并保留箭的种类与药水效果。冷却1秒。"
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "当你前爪的力量足以直接将箭矢像飞镖一样掷出时，谁还需要弓弩呢？\n[在"
+        },
+        {
+          "text": "主手",
+          "color": "#5555ff"
+        },
+        {
+          "text": "持有"
+        },
+        {
+          "text": "箭矢或药箭",
+          "color": "#5555ff"
+        },
+        {
+          "text": "时，你可以直接右键将其以"
+        },
+        {
+          "text": "最大速度",
+          "color": "#5555ff"
+        },
+        {
+          "text": "投掷射出。"
+        },
+        {
+          "text": "冷却1秒",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.bat_arrow_throw.name": [
     "箭矢投掷"
@@ -8814,67 +9003,298 @@
     "夜色幕帘"
   ],
   "power.shape-shifter-curse.perks.bat_posture_1.description": [
-    "地面移动速度惩罚降低至12%。"
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "你对于自身如今接近四足的姿态更加适应，让你能够更高效地移动\n[你在地面移动时的"
+        },
+        {
+          "text": "速度稍微提升",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.bat_posture_1.name": [
     "姿态适应Ⅰ"
   ],
   "power.shape-shifter-curse.perks.bat_posture_2.description": [
-    "地面移动速度惩罚降低至6%。"
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "你的身体已经记住了如何在接近四足的姿态下高效移动\n[你在地面移动时的速度"
+        },
+        {
+          "text": "进一步提升",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.bat_posture_2.name": [
     "姿态适应Ⅱ"
   ],
   "power.shape-shifter-curse.perks.bat_sun_resistance_1.description": [
-    "日光下空手伤害加成变为+3。"
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "通过将灵魂与如今的身体调谐，你部分掌握了如何在阳光烧灼下保持力量的方法\n[现在在日光下，你依然能获得"
+        },
+        {
+          "text": "一半的空手伤害加成",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.bat_sun_resistance_1.name": [
     "日光抗性Ⅰ"
   ],
   "power.shape-shifter-curse.perks.bat_sun_resistance_2.description": [
-    "日光下也获得完整的空手伤害加成（+6）。"
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "将灵魂与如今的身体调谐，你完全掌握了如何在阳光烧灼下保持力量的方法\n[即使在日光下，你依然能获得"
+        },
+        {
+          "text": "完整的空手伤害加成",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.bat_sun_resistance_2.name": [
     "日光抗性Ⅱ"
   ],
   "power.shape-shifter-curse.perks.bat_wingbeat.description": [
-    "鞘翅飞行时按主动技能1消耗1点饥饿值，沿视线加速。冷却2秒。"
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "翼手目生物的飞行技巧刻印在你的灵魂中，让你可以在高速飞行时使用膜翼向前推进\n[在"
+        },
+        {
+          "text": "鞘翅飞行",
+          "color": "#5555ff"
+        },
+        {
+          "text": "时，按"
+        },
+        {
+          "text": "主动技能1",
+          "color": "#5555ff"
+        },
+        {
+          "text": "可以"
+        },
+        {
+          "text": "消耗少许饥饿值",
+          "color": "#5555ff"
+        },
+        {
+          "text": "并让你向前"
+        },
+        {
+          "text": "推进",
+          "color": "#5555ff"
+        },
+        {
+          "text": "。"
+        },
+        {
+          "text": "冷却2秒",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.bat_wingbeat.name": [
     "振翼"
   ],
   "power.shape-shifter-curse.perks.familiar_fox_deflection.description": [
-    "未举盾且魔力大于5时，投射物伤害降低50%；成功受击消耗5魔力。"
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "随着灵魂调谐的加深，你理解了如何使用自身的魔力来防护投射物的部分伤害\n[在"
+        },
+        {
+          "color": "#5555ff",
+          "text": "未举盾"
+        },
+        {
+          "text": "时，你受到的"
+        },
+        {
+          "text": "投射物伤害降低一半",
+          "color": "#5555ff"
+        },
+        {
+          "text": "。这一过程会消耗"
+        },
+        {
+          "text": "5魔力",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.familiar_fox_deflection.name": [
     "偏折式防护"
   ],
   "power.shape-shifter-curse.perks.familiar_fox_mana_capacity_1.description": [
-    "基础魔力上限提升至125。"
+    {
+      "text": "通过调整体内的魔力循环，你可以存储更多的魔力",
+      "extra": [
+        {
+          "text": "\n[你的基础"
+        },
+        {
+          "text": "魔力上限提升至125",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.familiar_fox_mana_capacity_1.name": [
     "魔力值增幅1"
   ],
   "power.shape-shifter-curse.perks.familiar_fox_mana_capacity_2.description": [
-    "基础魔力上限提升至150。"
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "通过调整体内的魔力循环，你可以进一步存储更多的魔力\n[你的基础"
+        },
+        {
+          "text": "魔力上限提升至150",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.familiar_fox_mana_capacity_2.name": [
     "魔力值增幅2"
   ],
   "power.shape-shifter-curse.perks.familiar_fox_permeable_field_1.description": [
-    "允许速度、急迫和隐身生效。"
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "你理解了如何精准地操控体表的魔力网，让一些有利的效果选择性地透过\n[现在"
+        },
+        {
+          "text": "速度、急迫和隐身",
+          "color": "#5555ff"
+        },
+        {
+          "text": "的状态效果可以对你生效]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.familiar_fox_permeable_field_1.name": [
     "半透法力场1"
   ],
   "power.shape-shifter-curse.perks.familiar_fox_permeable_field_2.description": [
-    "在Ⅰ级基础上，额外允许力量、水下呼吸和夜视生效。"
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "你对体表魔力网的操控愈加熟练，可以让更多的有利效果穿过\n[在Ⅰ级基础上，"
+        },
+        {
+          "text": "力量、水下呼吸和夜视",
+          "color": "#5555ff"
+        },
+        {
+          "text": "的状态效果也可以对你生效]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.familiar_fox_permeable_field_2.name": [
     "半透法力场2"
   ],
   "power.shape-shifter-curse.perks.familiar_fox_potion_charms.description": [
-    "背包中以纸右键点击闪烁西瓜片、发酵蛛眼或蛛眼，消耗原料与5魔力合成对应魔药符纸。仅使魔狐Ⅲ可使用，发射强力治疗、伤害或剧毒药水符箭。"
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "药水并不是魔力的唯一载体。通过对自身魔力的理解与掌控，你发明了一种更便捷地存储与使用魔力效果的方式\n[通过在背包中"
+        },
+        {
+          "text": "拿起纸",
+          "color": "#5555ff"
+        },
+        {
+          "text": "，并"
+        },
+        {
+          "text": "右键点击对应的原料",
+          "color": "#5555ff"
+        },
+        {
+          "text": "，你可以消耗"
+        },
+        {
+          "text": "5魔力",
+          "color": "#5555ff"
+        },
+        {
+          "text": "合成对应的"
+        },
+        {
+          "text": "强力治疗、伤害与剧毒",
+          "color": "#5555ff"
+        },
+        {
+          "text": "魔药"
+        },
+        {
+          "text": "符纸",
+          "color": "#5555ff"
+        },
+        {
+          "text": "。你可以按下右键使用魔药符纸将其以投射物的形式发射出去。这些符纸只有"
+        },
+        {
+          "text": "你的同类",
+          "color": "#5555ff"
+        },
+        {
+          "text": "可以使用]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.familiar_fox_potion_charms.name": [
     "魔药符纸化"
@@ -8885,20 +9305,115 @@
   "power.shape-shifter-curse.perks.familiar_fox_reservoir.name": [
     "魔力储能体"
   ],
-  "power.shape-shifter-curse.perks.familiar_fox_return_shield.description": [
-    "潜行举盾成功格挡投射物时，消耗5魔力，向攻击者发射小火球。"
-  ],
+  "power.shape-shifter-curse.perks.familiar_fox_return_shield.description": {
+    "text": "",
+    "extra": [
+      {
+        "text": "随着调谐的加深，你理解了如何将火焰的魔力附加在盾牌上\n[在"
+      },
+      {
+        "text": "潜行举盾",
+        "color": "#5555ff"
+      },
+      {
+        "text": "成功"
+      },
+      {
+        "text": "格挡投射物",
+        "color": "#5555ff"
+      },
+      {
+        "text": "时，消耗"
+      },
+      {
+        "text": "5魔力",
+        "color": "#5555ff"
+      },
+      {
+        "text": "，向攻击者发射"
+      },
+      {
+        "text": "小火球",
+        "color": "#5555ff"
+      },
+      {
+        "text": "作为回敬"
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "]"
+      }
+    ]
+  },
   "power.shape-shifter-curse.perks.familiar_fox_return_shield.name": [
     "奉还式护盾"
   ],
   "power.shape-shifter-curse.perks.familiar_fox_siphon_1.description": [
-    "近战、火球、火环与箭矢等攻击每成功命中一个敌人，回复2魔力。"
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "魔力的流动不是单向的。随着你对吸取能力的理解进一步增加，你可以将其扩展到更多的适用情况\n[无论是"
+        },
+        {
+          "text": "近战、远程，还是魔法攻击",
+          "color": "#5555ff"
+        },
+        {
+          "text": "，你每"
+        },
+        {
+          "text": "成功命中",
+          "color": "#5555ff"
+        },
+        {
+          "text": "一个敌人，都会为你"
+        },
+        {
+          "text": "回复2魔力",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.familiar_fox_siphon_1.name": [
     "反射式汲取1"
   ],
   "power.shape-shifter-curse.perks.familiar_fox_siphon_2.description": [
-    "近战、火球、火环与箭矢等攻击每成功命中一个敌人，回复4魔力。"
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "你可以更清晰地感知到敌人受击后所溢出的生命力，并将其捕获化为己用\n[无论是"
+        },
+        {
+          "text": "近战、远程，还是魔法攻击",
+          "color": "#5555ff"
+        },
+        {
+          "text": "，你每"
+        },
+        {
+          "text": "成功命中",
+          "color": "#5555ff"
+        },
+        {
+          "text": "一个敌人，都会为你回复"
+        },
+        {
+          "text": "4魔力",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.familiar_fox_siphon_2.name": [
     "反射式汲取2"
