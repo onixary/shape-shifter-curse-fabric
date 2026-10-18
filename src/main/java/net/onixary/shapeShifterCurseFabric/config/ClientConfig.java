@@ -115,10 +115,10 @@ public class ClientConfig implements ConfigData {
     public int magicGUIPosType = 8;
 
     @ConfigEntry.Category("UI")
-    @Comment("Magic GUI X Offset. Default: -210")
-    public int magicGUIPosOffsetX = -210;
+    @Comment("Magic GUI X Offset. Default: -200")
+    public int magicGUIPosOffsetX = -200;
 
     @ConfigEntry.Category("UI")
-    @Comment("Magic GUI Y Offset. Default: -30")
-    public int magicGUIPosOffsetY = -30;
+    @Comment("Magic GUI Y Offset. Default: -35")
+    public int magicGUIPosOffsetY = -35;
 }

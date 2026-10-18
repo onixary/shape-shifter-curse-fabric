@@ -10,6 +10,7 @@ import net.minecraft.util.Pair;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.client.ShapeShifterCurseFabricClient;
 import net.onixary.shapeShifterCurseFabric.util.UIPositionUtils;
+import net.onixary.shapeShifterCurseFabric.util.util.ISprite;
 
 @Environment(EnvType.CLIENT)
 public class MagicGUIRender {
@@ -20,9 +21,9 @@ public class MagicGUIRender {
 
     private static final int CENTER_X = (CENTER_SIZE + SIDE_SIZE) / 2;
     private static final int CENTER_Y = 0;
-    private static final int LEFT_X = 0;
-    private static final int LEFT_Y = 3 * (CENTER_SIZE - SIDE_SIZE) / 2;
-    private static final int RIGHT_X = 2 * CENTER_SIZE;
+    private static final int LEFT_X = 6;
+    private static final int LEFT_Y = (CENTER_SIZE - SIDE_SIZE) / 2;
+    private static final int RIGHT_X = 2 * CENTER_SIZE - 6;
     private static final int RIGHT_Y = LEFT_Y;
 
     private static final int COOLDOWN_COLOR = 0xA0000000;
@@ -57,7 +58,8 @@ public class MagicGUIRender {
         if (index < 0 || index >= magics.length) return;
         IMagic magic = magics[index];
         if (magic == null) return;
-        magic.getSprite().draw(context, x, x + size, y, y + size, 0, magic.getSprite().getTextureWidth(), magic.getSprite().getTextureHeight(), 0, 0);
+        ISprite sprite = index == MagicUtils.nowSelectMagicIndex ? magic.getSprite() : magic.getUnselectedSprite();
+        sprite.draw(context, x, x + size, y, y + size, 0, sprite.getTextureWidth(), sprite.getTextureHeight(), 0, 0);
         float cooldown;
         try {
             cooldown = getCooldownPercent(magic, tickDelta);
