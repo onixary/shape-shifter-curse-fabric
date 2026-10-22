@@ -29,7 +29,13 @@ public interface IMagic {
         return true;
     }
 
-    public default boolean virtualInvoke() { return false; }
+    public default boolean virtualInvoke() {
+        return false;
+    }
+
+    public default boolean continuous() {
+        return false;
+    }
 
     public default int getCooldown() {
         return 0;

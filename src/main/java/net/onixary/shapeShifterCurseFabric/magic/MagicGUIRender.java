@@ -81,6 +81,7 @@ public class MagicGUIRender {
     // 有点复杂 不太适合放ShapeShifterCurseFabricClient里面 但又不够但拉一个Class
     private static boolean lastPASPressed = false;
     private static boolean lastNASPressed = false;
+    private static boolean lastASPressed = false;
     private static double scrollCounter = 0.0f;
     private static final double scrollStep = -1.0f;
 
@@ -91,8 +92,12 @@ public class MagicGUIRender {
         if (ShapeShifterCurseFabricClient.nextActiveSkillKeybind.isPressed() && !lastNASPressed) {
             MagicUtils.nowSelectMagicIndex = (MagicUtils.nowSelectMagicIndex + 1) % MagicUtils.MAGIC_SLOT_COUNT;
         }
+        if (ShapeShifterCurseFabricClient.activeSkillKeybind.isPressed() && mc.player != null) {
+            MagicUtils.invokeNowMagic_CLIENT(mc.player, lastASPressed);
+        }
         lastPASPressed = ShapeShifterCurseFabricClient.prevActiveSkillKeybind.isPressed();
         lastNASPressed = ShapeShifterCurseFabricClient.nextActiveSkillKeybind.isPressed();
+        lastASPressed = ShapeShifterCurseFabricClient.activeSkillKeybind.isPressed();
     }
 
     public static void onMouseScroll(double amount) {
