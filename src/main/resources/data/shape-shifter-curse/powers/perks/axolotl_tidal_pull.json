@@ -6,7 +6,7 @@
   "charge": {
     "type": "shape-shifter-curse:charge_action",
     "key": {
-      "key": "key.shape-shifter-curse.active_skill_3",
+      "key": "key.shape-shifter-curse.active_skill_2",
       "continuous": true
     },
     "start_condition": {
@@ -16,7 +16,7 @@
     },
     "start_action": {
       "type": "apoli:gain_air",
-      "value": -20
+      "value": -5
     },
     "tier0_enable": true,
     "tier0_charge_time": 0,

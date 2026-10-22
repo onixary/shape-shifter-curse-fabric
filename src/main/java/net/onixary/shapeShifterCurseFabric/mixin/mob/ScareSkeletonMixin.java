@@ -8,10 +8,14 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.world.World;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.AdditionalPowers;
+import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
+import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
+import net.onixary.shapeShifterCurseFabric.util.ArrowAimUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -25,6 +29,21 @@ import java.util.function.Predicate;
 public abstract class ScareSkeletonMixin extends HostileEntity implements RangedAttackMob {
     protected ScareSkeletonMixin(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
+    }
+
+    @Redirect(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/projectile/PersistentProjectileEntity;setVelocity(DDDFF)V"))
+    private void aimAtFeralBody(PersistentProjectileEntity arrow, double x, double y, double z,
+                               float speed, float divergence, LivingEntity target, float pullProgress) {
+        if (target instanceof PlayerEntity player
+                && FormUtils.getPlayerForm(player).getBodyType() == PlayerFormBodyType.FERAL) {
+            var direction = ArrowAimUtils.launchDirection(target.getBoundingBox().getCenter().subtract(arrow.getPos()), speed);
+            if (direction != null) {
+                x = direction.x;
+                y = direction.y;
+                z = direction.z;
+            }
+        }
+        arrow.setVelocity(x, y, z, speed, divergence);
     }
 
     @Inject(at = @At("TAIL"), method = "initGoals")

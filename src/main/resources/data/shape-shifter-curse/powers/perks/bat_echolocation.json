@@ -43,7 +43,7 @@
     "bientity_condition": {
       "type": "apoli:distance",
       "comparison": "<=",
-      "compare_to": 10
+      "compare_to": 16
     }
   },
   "activate": {
@@ -52,6 +52,25 @@
       "type": "apoli:and",
       "actions": [
         {
+          "type": "apoli:play_sound",
+          "sound": "minecraft:block.sculk_sensor.clicking",
+          "volume": 1.0,
+          "pitch": 1.0
+        },
+        {
+          "type": "apoli:play_sound",
+          "sound": "minecraft:block.note_block.hat",
+          "volume": 1.0,
+          "pitch": 1.0
+        },
+        {
+          "type": "apoli:area_of_effect",
+          "radius": 16,
+          "bientity_action": {
+            "type": "shape-shifter-curse:echolocation_vibration"
+          }
+        },
+        {
           "type": "apoli:change_resource",
           "resource": "shape-shifter-curse:perks/bat_echolocation_timer",
           "change": 240,
@@ -59,7 +78,7 @@
         },
         {
           "type": "apoli:area_of_effect",
-          "radius": 10,
+          "radius": 16,
           "bientity_condition": {
             "type": "shape-shifter-curse:enemy"
           },

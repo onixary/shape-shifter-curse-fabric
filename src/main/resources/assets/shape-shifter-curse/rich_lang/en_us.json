@@ -6420,7 +6420,56 @@
     "Water Propulsion Efficiency"
   ],
   "power.shape-shifter-curse.perks.axolotl_tidal_pull.description": [
-    "Hold active skill 3 to spend 20 moisture and highlight the first living target within 10 blocks in blue. Release to pull it toward you and upward, applying Slow Falling for 5 seconds. Cooldown: 5 seconds; cancelling does not refund the cost."
+    {
+      "text": "As your mastery of water magic grows, you have learned how to manipulate water currents to pull creatures to your side\n",
+      "extra": [
+        {
+          "text": "["
+        },
+        {
+          "text": "Hold active skill key 2",
+          "color": "#5555ff"
+        },
+        {
+          "text": " to spend "
+        },
+        {
+          "text": "5 moisture",
+          "color": "#5555ff"
+        },
+        {
+          "text": " and mark "
+        },
+        {
+          "text": "a creature your cursor is pointing at within 10 blocks",
+          "color": "#5555ff"
+        },
+        {
+          "text": "; release to "
+        },
+        {
+          "text": "pull it toward you and launch it upward",
+          "color": "#5555ff"
+        },
+        {
+          "text": " while applying "
+        },
+        {
+          "text": "Slow Falling for 5 seconds",
+          "color": "#5555ff"
+        },
+        {
+          "text": ". Cooldown: "
+        },
+        {
+          "text": "5 seconds",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.axolotl_tidal_pull.name": [
     "Tidal Pull"
@@ -6552,7 +6601,49 @@
     "Arrow Throw"
   ],
   "power.shape-shifter-curse.perks.bat_echolocation.description": [
-    "Active skill 2: highlight entities within 10 blocks in white for 12 seconds and inflict Weakness I on enemies for 12 seconds. Cooldown: 20 seconds."
+    {
+      "text": "By attuning your soul with your current form, you have mastered the chiropteran ability to locate targets through echolocation\n",
+      "extra": [
+        {
+          "text": "[Press "
+        },
+        {
+          "text": "active skill key 2",
+          "color": "#5555ff"
+        },
+        {
+          "text": ", and you can see entities through walls within "
+        },
+        {
+          "text": "16 blocks",
+          "color": "#5555ff"
+        },
+        {
+          "text": ""
+        },
+        {
+          "text": " for 12 seconds",
+          "color": "#5555ff"
+        },
+        {
+          "text": "; if the entity is an enemy, you also inflict "
+        },
+        {
+          "text": "the Weakness I effect",
+          "color": "#5555ff"
+        },
+        {
+          "text": ". Cooldown: "
+        },
+        {
+          "text": "20 seconds",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.bat_echolocation.name": [
     "Echolocation"
@@ -7984,7 +8075,56 @@
     "Water Propulsion Efficiency"
   ],
   "ssc_perk.shape-shifter-curse.axolotl_tidal_pull.desc": [
-    "Hold active skill 3 to spend 20 moisture and highlight the first living target within 10 blocks in blue. Release to pull it toward you and upward, applying Slow Falling for 5 seconds. Cooldown: 5 seconds; cancelling does not refund the cost."
+    {
+      "text": "As your mastery of water magic grows, you have learned how to manipulate water currents to pull creatures to your side\n",
+      "extra": [
+        {
+          "text": "["
+        },
+        {
+          "text": "Hold active skill key 2",
+          "color": "#5555ff"
+        },
+        {
+          "text": " to spend "
+        },
+        {
+          "text": "5 moisture",
+          "color": "#5555ff"
+        },
+        {
+          "text": " and mark "
+        },
+        {
+          "text": "a creature your cursor is pointing at within 10 blocks",
+          "color": "#5555ff"
+        },
+        {
+          "text": "; release to "
+        },
+        {
+          "text": "pull it toward you and launch it upward",
+          "color": "#5555ff"
+        },
+        {
+          "text": " while applying "
+        },
+        {
+          "text": "Slow Falling for 5 seconds",
+          "color": "#5555ff"
+        },
+        {
+          "text": ". Cooldown: "
+        },
+        {
+          "text": "5 seconds",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "ssc_perk.shape-shifter-curse.axolotl_tidal_pull.name": [
     "Tidal Pull"
@@ -8116,7 +8256,49 @@
     "Arrow Throw"
   ],
   "ssc_perk.shape-shifter-curse.bat_echolocation.desc": [
-    "Active skill 2: highlight entities within 10 blocks in white for 12 seconds and inflict Weakness I on enemies for 12 seconds. Cooldown: 20 seconds."
+    {
+      "text": "By attuning your soul with your current form, you have mastered the chiropteran ability to locate targets through echolocation\n",
+      "extra": [
+        {
+          "text": "[Press "
+        },
+        {
+          "text": "active skill key 2",
+          "color": "#5555ff"
+        },
+        {
+          "text": ", and you can see entities through walls within "
+        },
+        {
+          "text": "16 blocks",
+          "color": "#5555ff"
+        },
+        {
+          "text": ""
+        },
+        {
+          "text": " for 12 seconds",
+          "color": "#5555ff"
+        },
+        {
+          "text": "; if the entity is an enemy, you also inflict "
+        },
+        {
+          "text": "the Weakness I effect",
+          "color": "#5555ff"
+        },
+        {
+          "text": ". Cooldown: "
+        },
+        {
+          "text": "20 seconds",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "ssc_perk.shape-shifter-curse.bat_echolocation.name": [
     "Echolocation"

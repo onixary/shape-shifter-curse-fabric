@@ -8859,7 +8859,56 @@
     "水流推进效率"
   ],
   "power.shape-shifter-curse.perks.axolotl_tidal_pull.description": [
-    "按住主动技能3消耗20湿润度，蓝色标记视线10格内首个生物；松开将其向自己拉近并向上击飞，同时施加5秒缓降。冷却5秒；取消不返还消耗。"
+    {
+      "text": "随着对水流魔力的精通，你掌握了操控水流将生物牵引到你身旁的方法\n",
+      "extra": [
+        {
+          "text": "["
+        },
+        {
+          "text": "按住主动技能键2",
+          "color": "#5555ff"
+        },
+        {
+          "text": "，消耗"
+        },
+        {
+          "text": "5湿润度",
+          "color": "#5555ff"
+        },
+        {
+          "text": "，标记一个"
+        },
+        {
+          "text": "10格内光标指向的生物",
+          "color": "#5555ff"
+        },
+        {
+          "text": "；松开将其向自己"
+        },
+        {
+          "text": "拉近并向上击飞",
+          "color": "#5555ff"
+        },
+        {
+          "text": "，同时施加"
+        },
+        {
+          "text": "5秒缓降",
+          "color": "#5555ff"
+        },
+        {
+          "text": "。冷却"
+        },
+        {
+          "text": "5秒",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.axolotl_tidal_pull.name": [
     "潮汐牵引"
@@ -8991,7 +9040,49 @@
     "箭矢投掷"
   ],
   "power.shape-shifter-curse.perks.bat_echolocation.description": [
-    "主动技能2：使10格内的实体白色高亮12秒，对敌人施加虚弱Ⅰ12秒。冷却20秒。"
+    {
+      "text": "通过让灵魂与当前的形态相调谐，你掌握了翼手目生物通过回声定位目标的能力\n",
+      "extra": [
+        {
+          "text": "[按下"
+        },
+        {
+          "text": "主动技能键2",
+          "color": "#5555ff"
+        },
+        {
+          "text": "，你可以透视"
+        },
+        {
+          "text": "16格",
+          "color": "#5555ff"
+        },
+        {
+          "text": "内的实体"
+        },
+        {
+          "text": "12秒",
+          "color": "#5555ff"
+        },
+        {
+          "text": "，如果实体是敌人，则同时施加"
+        },
+        {
+          "text": "虚弱Ⅰ效果",
+          "color": "#5555ff"
+        },
+        {
+          "text": "。冷却"
+        },
+        {
+          "text": "20秒",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "power.shape-shifter-curse.perks.bat_echolocation.name": [
     "回声定位"
@@ -10423,7 +10514,56 @@
     "水流推进效率"
   ],
   "ssc_perk.shape-shifter-curse.axolotl_tidal_pull.desc": [
-    "按住主动技能3消耗20湿润度，蓝色标记视线10格内首个生物；松开将其向自己拉近并向上击飞，同时施加5秒缓降。冷却5秒；取消不返还消耗。"
+    {
+      "text": "随着对水流魔力的精通，你掌握了操控水流将生物牵引到你身旁的方法\n",
+      "extra": [
+        {
+          "text": "["
+        },
+        {
+          "text": "按住主动技能键2",
+          "color": "#5555ff"
+        },
+        {
+          "text": "，消耗"
+        },
+        {
+          "text": "5湿润度",
+          "color": "#5555ff"
+        },
+        {
+          "text": "，标记一个"
+        },
+        {
+          "text": "10格内光标指向的生物",
+          "color": "#5555ff"
+        },
+        {
+          "text": "；松开将其向自己"
+        },
+        {
+          "text": "拉近并向上击飞",
+          "color": "#5555ff"
+        },
+        {
+          "text": "，同时施加"
+        },
+        {
+          "text": "5秒缓降",
+          "color": "#5555ff"
+        },
+        {
+          "text": "。冷却"
+        },
+        {
+          "text": "5秒",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "ssc_perk.shape-shifter-curse.axolotl_tidal_pull.name": [
     "潮汐牵引"
@@ -10555,7 +10695,49 @@
     "箭矢投掷"
   ],
   "ssc_perk.shape-shifter-curse.bat_echolocation.desc": [
-    "主动技能2：使10格内的实体白色高亮12秒，对敌人施加虚弱Ⅰ12秒。冷却20秒。"
+    {
+      "text": "通过让灵魂与当前的形态相调谐，你掌握了翼手目生物通过回声定位目标的能力\n",
+      "extra": [
+        {
+          "text": "[按下"
+        },
+        {
+          "text": "主动技能键2",
+          "color": "#5555ff"
+        },
+        {
+          "text": "，你可以透视"
+        },
+        {
+          "text": "16格",
+          "color": "#5555ff"
+        },
+        {
+          "text": "内的实体"
+        },
+        {
+          "text": "12秒",
+          "color": "#5555ff"
+        },
+        {
+          "text": "，如果实体是敌人，则同时施加"
+        },
+        {
+          "text": "虚弱Ⅰ效果",
+          "color": "#5555ff"
+        },
+        {
+          "text": "。冷却"
+        },
+        {
+          "text": "20秒",
+          "color": "#5555ff"
+        },
+        {
+          "text": "]"
+        }
+      ]
+    }
   ],
   "ssc_perk.shape-shifter-curse.bat_echolocation.name": [
     "回声定位"

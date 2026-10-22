@@ -24,9 +24,14 @@
     "D": {
       "item": "minecraft:glass"
     },
-    "E": {
-      "item": "minecraft:sea_lantern"
-    },
+    "E": [
+      {
+        "item": "minecraft:sea_lantern"
+      },
+      {
+        "item": "minecraft:ghast_tear"
+      }
+    ],
     "F": {
       "item": "minecraft:glass"
     },
