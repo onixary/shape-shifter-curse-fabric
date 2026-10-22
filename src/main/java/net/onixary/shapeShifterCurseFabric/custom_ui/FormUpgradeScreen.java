@@ -87,10 +87,10 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     public static final int PERK_INFO_NAME_WIDTH = 91;
     public static final int PERK_INFO_NAME_HEIGHT = 14;
 
-    public static final int PERK_INFO_DESC_X = 316;
-    public static final int PERK_INFO_DESC_Y = 28;
-    public static final int PERK_INFO_DESC_WIDTH = 91;
-    public static final int PERK_INFO_DESC_HEIGHT = 115;
+    public static final int PERK_INFO_DESC_X = 314;
+    public static final int PERK_INFO_DESC_Y = 34;
+    public static final int PERK_INFO_DESC_WIDTH = 98;
+    public static final int PERK_INFO_DESC_HEIGHT = 110;
 
     public static final int PERK_INFO_COST_ICON_X = 315;
     public static final int PERK_INFO_COST_ICON_Y = 144;

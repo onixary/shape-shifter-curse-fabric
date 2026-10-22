@@ -23,8 +23,8 @@
   },
   "entity_action": {
     "type": "apoli:add_velocity",
-    "z": 1.2,
-    "y": 0.6,
+    "z": 0.6,
+    "y": 0.3,
     "space": "local_horizontal_normalized",
     "set": true
   }
