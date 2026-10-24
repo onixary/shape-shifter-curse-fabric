@@ -348,7 +348,7 @@
         "text": "reduced melee damage",
         "color": "#aa0000"
       },
-      ".Your ",
+      ". Your ",
       {
         "text": "maximum health is also reduced greatly.",
         "color": "#aa0000"
@@ -964,7 +964,7 @@
           "text": "essence of the pack",
           "color": "#aa00aa"
         },
-        " begins to merge completely with yours..\nAfter regaining your senses, examining your inner self, you find your ",
+        " begins to merge completely with yours...\nAfter regaining your senses, examining your inner self, you find your ",
         {
           "text": "soul",
           "color": "#aa00aa"
@@ -1410,7 +1410,7 @@
         "text": "maximum health increases",
         "color": "#0000aa"
       },
-      " when you have moisture level\nPowerful regeneration ",
+      " when you have moisture\nPowerful regeneration ",
       {
         "text": "slowly heals you when well-hydrated and above 3 shanks",
         "color": "#0000aa"
@@ -1799,7 +1799,7 @@
     }
   ],
   "codex.form.shape-shifter-curse.bat_1.instincts": [
-    "You increasingly want to",
+    "You increasingly want to ",
     {
       "text": "stay in darkness",
       "color": "#aa00aa"
@@ -2827,7 +2827,7 @@
         "text": "fearing you",
         "color": "#aa0000"
       },
-      ", they ",
+      ", and they ",
       {
         "text": "actively avoid you",
         "color": "#aa0000"
@@ -2896,7 +2896,7 @@
       },
       "...\nFox Firebolt: While holding a stick, consume some mana to right-click and launch a straight-flying fireball that deals moderate damage and ignites the target\n\nBy consuming ",
       {
-        "text": "a small amount of magic",
+        "text": "a small amount of mana",
         "color": "#0000aa"
       },
       " and ",
@@ -3136,7 +3136,7 @@
         "text": "Villagers fear you",
         "color": "#aa0000"
       },
-      ", they ",
+      "; they ",
       {
         "text": "actively avoid you",
         "color": "#aa0000"
@@ -3204,7 +3204,7 @@
       },
       ", consume ",
       {
-        "text": "more magic",
+        "text": "more mana",
         "color": "#0000aa"
       },
       " to release a ",
@@ -4559,7 +4559,7 @@
         "text": "Foxes no longer recognize you",
         "color": "#aa0000"
       },
-      ", and you can no longer get along with them as friends. Sweet berries ",
+      ", and you can no longer get along with them as friends. Sweet Berries ",
       {
         "text": "no longer satisfy you",
         "color": "#aa0000"
