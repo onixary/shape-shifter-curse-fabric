@@ -1608,7 +1608,7 @@
         "text": "sprint swimming without extra hunger drain",
         "color": "#0000aa"
       },
-      ".\nWhen underwater,you can ",
+      ".\nWhen underwater, you can ",
       {
         "text": "see more clearly",
         "color": "#0000aa"
@@ -1811,17 +1811,17 @@
     },
     "\nThe thought of ",
     {
-      "text": "eat more fruits",
+      "text": "eating more fruits",
       "color": "#aa00aa"
     },
     " begins to attract you\nThe thought of ",
     {
-      "text": "jump into air",
+      "text": "jumping into air",
       "color": "#aa00aa"
     },
     " begins to attract you\nThe thought of ",
     {
-      "text": "be surrounded by dripstones",
+      "text": "being surrounded by dripstones",
       "color": "#aa00aa"
     },
     " begins to attract you"
@@ -5184,10 +5184,10 @@
         },
         "], [",
         {
-          "text": "Totem of Undying (Extra Arm Slot",
+          "text": "Totem of Undying (Extra Arm Slot)",
           "color": "#55ffff"
         },
-        ")], [",
+        "], [",
         {
           "text": "Nutrient Sac (Extra Arm Slot)",
           "color": "#55ffff"

@@ -671,7 +671,7 @@
     "- At the cost of a medium amount of moisture, your attacks can launch enemies back greatly.\n",
     "- At the cost of a moderate amount of moisture, you can press Active Skill (1) to release a small non-destructive water explosion.\n\n",
     "You move swiftly in water currents. When fully submerged, you auto-enter sprint swimming without extra hunger drain.\n",
-    "When underwater,you can see more clearly and break blocks unimpeded.\n",
+    "When underwater, you can see more clearly and break blocks unimpeded.\n",
     "You won't sink underwater. When in water, you can press sprint key to propel yourself forward.\n",
     "When surfacing, you can leap out of the water.\n",
     "With moisture, you regenerate health over time.\n",
@@ -743,19 +743,19 @@
     },
     "\nThe thought of ",
     {
-      "text": "eat more fruits",
+      "text": "eating more fruits",
       "color": "#c67681"
     },
     " begins to attract you",
     "\nThe thought of ",
     {
-      "text": "jump into air",
+      "text": "jumping into air",
       "color": "#c67681"
     },
     " begins to attract you",
     "\nThe thought of ",
     {
-      "text": "be surrounded by dripstones",
+      "text": "being surrounded by dripstones",
       "color": "#c67681"
     },
     " begins to attract you"
