@@ -350,7 +350,7 @@
       },
       ".Your ",
       {
-        "text": "maximum health has reduced greatly either",
+        "text": "maximum health is also reduced greatly.",
         "color": "#aa0000"
       },
       "\nFloating ",
@@ -1550,7 +1550,7 @@
       },
       ". Now, even on land, your ",
       {
-        "text": "Moisture no longer depletes over time",
+        "text": "moisture no longer depletes over time",
         "color": "#0000aa"
       },
       ".\n\nYour body grants ",
@@ -1580,7 +1580,7 @@
       },
       ", you can expend ",
       {
-        "text": "Moisture",
+        "text": "moisture",
         "color": "#0000aa"
       },
       " to channel water-based powers:\n- At the cost of a small amount of moisture, you can ",
@@ -2769,7 +2769,7 @@
     "extra": [
       "As an integral part of your body, you need to maintain abundant ",
       {
-        "text": "magic reserves",
+        "text": "mana reserves",
         "color": "#aa0000"
       },
       ":\nYour body ",
@@ -2784,7 +2784,7 @@
       },
       "\nWhen your ",
       {
-        "text": "magic reserves fall below 1/3",
+        "text": "mana reserves fall below 1/3",
         "color": "#aa0000"
       },
       ", your ",
@@ -2794,7 +2794,7 @@
       },
       "\nWhen your ",
       {
-        "text": "magic reserves are depleted",
+        "text": "mana reserves are depleted",
         "color": "#aa0000"
       },
       ", you suffer from ",
@@ -2891,7 +2891,7 @@
       },
       " surging within your body. Now, you have learned how to actively utilize your ",
       {
-        "text": "magic reserves",
+        "text": "mana reserves",
         "color": "#0000aa"
       },
       "...\nFox Firebolt: While holding a stick, consume some mana to right-click and launch a straight-flying fireball that deals moderate damage and ignites the target\n\nBy consuming ",
@@ -2921,7 +2921,7 @@
       },
       ", while also ",
       {
-        "text": "restoring magic reserves",
+        "text": "restoring mana reserves",
         "color": "#0000aa"
       },
       ". You can also ",
@@ -3038,12 +3038,12 @@
     "extra": [
       "As a familiar made of magic, you need to maintain sufficient ",
       {
-        "text": "magic reserves",
+        "text": "mana reserves",
         "color": "#aa0000"
       },
       " at all times:\nWhen your ",
       {
-        "text": "magic reserves fall below 1/3",
+        "text": "mana reserves fall below 1/3",
         "color": "#aa0000"
       },
       ", your ",
@@ -3053,7 +3053,7 @@
       },
       "\nWhen your ",
       {
-        "text": "magic reserves are depleted",
+        "text": "mana reserves are depleted",
         "color": "#aa0000"
       },
       ", you suffer from ",
@@ -3169,7 +3169,7 @@
       },
       "\nThe magic of a fox familiar surges within your body. You have completely mastered the method of using your ",
       {
-        "text": "magic reserves",
+        "text": "mana reserves",
         "color": "#0000aa"
       },
       "...\n",
@@ -3920,7 +3920,7 @@
         "text": "hot environments unbearable",
         "color": "#aa0000"
       },
-      ". During the daytime in hot Desert biome or the scorching Nether, your ",
+      ". During the daytime in the hot Desert biome or the scorching Nether, your ",
       {
         "text": "maximum health is slightly reduced",
         "color": "#aa0000"
@@ -4024,7 +4024,7 @@
         "text": "cold magic",
         "color": "#aa0000"
       },
-      " within.\n\nDuring the daytime in hot Desert biome or the scorching Nether, your ",
+      " within.\n\nDuring the daytime in the hot Desert biome or the scorching Nether, your ",
       {
         "text": "maximum health is further reduced",
         "color": "#aa0000"
@@ -4164,7 +4164,7 @@
         "text": "take additional burning damage",
         "color": "#aa0000"
       },
-      " when on fire.\nDuring daytime in the hot Desert biome or the scorching Nether, your ",
+      " when on fire.\nDuring the daytime in the hot Desert biome or the scorching Nether, your ",
       {
         "text": "maximum health is further reduced",
         "color": "#aa0000"
@@ -4294,7 +4294,7 @@
       },
       " and won't flee.\nYou can now ",
       {
-        "text": "walk safely on powder snow",
+        "text": "walk safely on Powder Snow",
         "color": "#0000aa"
       },
       "."
@@ -4354,7 +4354,7 @@
         "text": "won't extinguish naturally",
         "color": "#aa0000"
       },
-      " unless you enter water or extinguish it with a water bottle.\nDuring the daytime in hot Desert biome or the scorching Nether, your ",
+      " unless you enter water or extinguish it with a water bottle.\nDuring the daytime in the hot Desert biome or the scorching Nether, your ",
       {
         "text": "maximum health is drastically reduced",
         "color": "#aa0000"
@@ -4439,7 +4439,7 @@
       },
       " and even ",
       {
-        "text": "harden lava",
+        "text": "solidify lava",
         "color": "#0000aa"
       },
       ".\n\nQuadrupedal movement grants you extreme ",
@@ -5255,7 +5255,7 @@
         "text": "hand slot",
         "color": "#ffaa00"
       },
-      ", you can gain various beneficial effects.\nYou can eat string to replenish web value. By holding string in your inventory and right-clicking another string, you can craft cobwebs.\nBy holding a cobweb in your inventory and right-clicking a composter, you can create a Nutrient Dissolve Cocoon - Meat placed inside will be converted into Nutrient Sacs that you can consume.\nYour fully transformed multi-legged spider body grants you night vision, immunity to poison, and the ability to step up one block of height. It also grants you the ability to freely climb the sides of blocks.\nYou are unhindered by cobwebs. You can climb cobwebs and sense entities caught within them.\nSpiders do not see you as an enemy."
+      ", you can gain various beneficial effects.\nYou can eat string to replenish web value. By holding string in your inventory and right-clicking another string, you can craft cobwebs.\nBy holding a cobweb in your inventory and right-clicking a composter, you can create a Nutrient Dissolve Cocoon - Meat placed inside will be gradually converted into Nutrient Sacs that you can consume.\nYour fully transformed multi-legged spider body grants you night vision, immunity to poison, and the ability to step up one block of height. It also grants you the ability to freely climb the sides of blocks.\nYou are unhindered by cobwebs. You can climb cobwebs and sense entities caught within them.\nSpiders do not see you as an enemy."
     ]
   },
   "codex.form.shape-shifter-curse.spider_3.title": [
@@ -5347,7 +5347,7 @@
     "Cocooning"
   ],
   "effect.shape-shifter-curse.feed_effect": [
-    "High-density energy, capable of restoring satiety and magic"
+    "High-density energy, capable of restoring hunger value and magic"
   ],
   "effect.shape-shifter-curse.frost_claw": [
     "Frost Claw"
@@ -7292,7 +7292,7 @@
           "text": "; besides that, while you are in "
         },
         {
-          "text": "powder snow",
+          "text": "Powder Snow",
           "color": "#5555ff"
         },
         {
@@ -9116,7 +9116,7 @@
           "text": "; besides that, while you are in "
         },
         {
-          "text": "powder snow",
+          "text": "Powder Snow",
           "color": "#5555ff"
         },
         {
