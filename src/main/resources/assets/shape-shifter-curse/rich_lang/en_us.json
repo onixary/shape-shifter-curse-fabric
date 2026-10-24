@@ -350,7 +350,7 @@
       },
       ".Your ",
       {
-        "text": "max health has reduced greatly either",
+        "text": "maximum health has reduced greatly either",
         "color": "#aa0000"
       },
       "\nFloating ",
@@ -514,7 +514,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in Desert biome",
+      "text": "to stay in the Desert biome",
       "color": "#aa00aa"
     }
   ],
@@ -653,7 +653,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in Desert biome",
+      "text": "to stay in the Desert biome",
       "color": "#aa00aa"
     },
     "\nWithin you arises ",
@@ -1071,7 +1071,7 @@
       },
       " on the target. Due to the nature of your merge as one, ",
       {
-        "text": "Jackal wraiths' attacks now restore 1 health point to you",
+        "text": "Jackal wraiths' attacks now restore 2 health points to you",
         "color": "#0000aa"
       },
       "\nWhen you lose all your health, by tapping into the pack's soul power at a certain cost, you can ",
@@ -1184,7 +1184,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in lush caves biome",
+      "text": "to stay in the Lush Caves biome",
       "color": "#aa00aa"
     }
   ],
@@ -1256,7 +1256,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in lush caves biome",
+      "text": "to stay in the Lush Caves biome",
       "color": "#aa00aa"
     },
     "\nThe urge ",
@@ -1412,7 +1412,7 @@
       },
       " when you have moisture level\nPowerful regeneration ",
       {
-        "text": "slowly heals you when well-hydrated and above 3 hunger shanks",
+        "text": "slowly heals you when well-hydrated and above 3 shanks",
         "color": "#0000aa"
       },
       "\n",
@@ -1483,7 +1483,7 @@
       },
       ".\nMoisture fuels your strength. Your ",
       {
-        "text": "max health now decreases as Moisture drops",
+        "text": "maximum health now decreases as moisture drops",
         "color": "#aa0000"
       },
       "; when your moisture is depleted, you will be unable to support your body's weight and can only ",
@@ -1535,7 +1535,7 @@
       },
       ", and your ",
       {
-        "text": "oxygen bar now indicates your Moisture level",
+        "text": "oxygen bar now indicates your moisture level",
         "color": "#0000aa"
       },
       ".\nIt can be replenished by ",
@@ -1583,17 +1583,17 @@
         "text": "Moisture",
         "color": "#0000aa"
       },
-      " to channel water-based powers:\n- Cost a small amount of moisture, you can ",
+      " to channel water-based powers:\n- At the cost of a small amount of moisture, you can ",
       {
         "text": "press jump to propel yourself forward with a water current",
         "color": "#0000aa"
       },
-      ".\n- Cost a medium amount of moisture, your attacks can ",
+      ".\n- At the cost of a medium amount of moisture, your attacks can ",
       {
         "text": "launch enemies back greatly",
         "color": "#0000aa"
       },
-      ".\n- Cost a moderate amount of moisture, you can ",
+      ".\n- At the cost of a moderate amount of moisture, you can ",
       {
         "text": "press Active Skill (1) to release a small non-destructive water explosion",
         "color": "#0000aa"
@@ -1633,7 +1633,7 @@
         "text": "leap out of the water",
         "color": "#0000aa"
       },
-      ".\nWith Moisture, you ",
+      ".\nWith moisture, you ",
       {
         "text": "regenerate health over time",
         "color": "#0000aa"
@@ -1645,7 +1645,7 @@
       },
       " for tight spaces.\n",
       {
-        "text": "Raw fish provides greater saturation",
+        "text": "Raw fish provides greater hunger value",
         "color": "#0000aa"
       },
       "."
@@ -1704,7 +1704,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in dripstone caves biome",
+      "text": "to stay in the Dripstone Caves biome",
       "color": "#aa00aa"
     }
   ],
@@ -1806,7 +1806,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in dripstone caves biome",
+      "text": "to stay in the Dripstone Caves biome",
       "color": "#aa00aa"
     },
     "\nThe thought of ",
@@ -2541,7 +2541,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in taiga biome",
+      "text": "to stay in the Taiga biome",
       "color": "#aa00aa"
     }
   ],
@@ -2650,7 +2650,7 @@
     },
     " begin attracting you\nYou begin to desire ",
     {
-      "text": "to stay in taiga biome",
+      "text": "to stay in the Taiga biome",
       "color": "#aa00aa"
     },
     "\n",
@@ -2779,7 +2779,7 @@
       },
       ", now most foods provide you with ",
       {
-        "text": "less hunger",
+        "text": "less hunger value",
         "color": "#aa0000"
       },
       "\nWhen your ",
@@ -2894,7 +2894,7 @@
         "text": "magic reserves",
         "color": "#0000aa"
       },
-      "...\nFox Firebolt: While holding a stick, consume some magic to right-click and launch a straight-flying fireball that deals moderate damage and ignites the target\n\nBy consuming ",
+      "...\nFox Firebolt: While holding a stick, consume some mana to right-click and launch a straight-flying fireball that deals moderate damage and ignites the target\n\nBy consuming ",
       {
         "text": "a small amount of magic",
         "color": "#0000aa"
@@ -3182,7 +3182,7 @@
         "text": "holding a stick",
         "color": "#0000aa"
       },
-      ", consume some magic to ",
+      ", consume some mana to ",
       {
         "text": "right-click and launch a straight-flying fireball",
         "color": "#0000aa"
@@ -3331,7 +3331,7 @@
     "extra": [
       "Your body isn't as strong as before - ",
       {
-        "text": "Max health slightly decreased",
+        "text": "Maximum health slightly decreased",
         "color": "#aa0000"
       },
       "\nYour digestive system adapts less to non-meat foods - They provide ",
@@ -3352,7 +3352,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in jungle biome",
+      "text": "to stay in the Jungle biome",
       "color": "#aa00aa"
     }
   ],
@@ -3411,7 +3411,7 @@
       },
       ", as if your body prefers different movement\nWhile more lethal, your body becomes more fragile. ",
       {
-        "text": "Max health decreases further",
+        "text": "Maximum health decreases further",
         "color": "#aa0000"
       },
       "\nOther armor feels too heavy. You can ",
@@ -3437,7 +3437,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in jungle biome",
+      "text": "to stay in the Jungle biome",
       "color": "#aa00aa"
     },
     "\nYou feel an inner urge to ",
@@ -3553,7 +3553,7 @@
       },
       "\nBecoming smaller and lighter ",
       {
-        "text": "further reduces max health",
+        "text": "further reduces maximum health",
         "color": "#aa0000"
       },
       "\nAs a swift lethal hunter, aside helmet, you can ",
@@ -3952,7 +3952,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in Taiga biome",
+      "text": "to stay in the Taiga biome",
       "color": "#aa00aa"
     },
     "\nYou begin to desire ",
@@ -4066,7 +4066,7 @@
     },
     " begins to appeal to you\nYou begin to desire ",
     {
-      "text": "to stay in Taiga biome",
+      "text": "to stay in the Taiga biome",
       "color": "#aa00aa"
     },
     "\nThe idea of ",
@@ -4164,7 +4164,7 @@
         "text": "take additional burning damage",
         "color": "#aa0000"
       },
-      " when on fire.\nDuring daytime in hot Desert biome or the scorching Nether, your ",
+      " when on fire.\nDuring daytime in the hot Desert biome or the scorching Nether, your ",
       {
         "text": "maximum health is further reduced",
         "color": "#aa0000"
@@ -4284,7 +4284,7 @@
       },
       ".\nSweet Berries ",
       {
-        "text": "restore more hunger",
+        "text": "provide higher hunger value",
         "color": "#0000aa"
       },
       ".\n",
@@ -5043,7 +5043,7 @@
         "text": "Nutrient Dissolve Cocoon",
         "color": "#0000aa"
       },
-      " - Meat placed will be converted into ",
+      " - Meat placed inside will be gradually converted into ",
       {
         "text": "Nutrient Sacs that you can consume",
         "color": "#0000aa"
@@ -5215,7 +5215,7 @@
         "text": "primary active power key",
         "color": "#ffaa00"
       },
-      " to charge and release to fire a Web Bullet. Different effects occur based on charge level:\nWhen hitting the side or bottom of block, a non-sticky bridge web structure extends downward from the point of impact, which can be climbed.\nWhen hitting the top of block, a tower bridge web structure can be generated upward.\nWhen hitting a creature, you can inflict ",
+      " to charge and release to fire a Web Bullet. Different effects occur based on charge level:\nWhen hitting the side or bottom of a block, a non-sticky bridge web structure extends downward from the point of impact, which can be climbed.\nWhen hitting the top of a block, a tower bridge web structure can be generated upward.\nWhen hitting a creature, you can inflict ",
       {
         "text": "Slowness",
         "color": "#ff55ff"
@@ -5240,7 +5240,7 @@
         "text": "Cocooning",
         "color": "#ff55ff"
       },
-      "\", make it unable to move.\nMelee attacks against \"",
+      "\", making it unable to move.\nMelee attacks against \"",
       {
         "text": "Cocooning",
         "color": "#ff55ff"
@@ -9513,7 +9513,7 @@
     "Rapid Spinner"
   ],
   "ssc_perk.shape-shifter-curse.spider_silk_grapple.desc": [
-    "Hold skill 3 to reserve 10 web resource and preview a surface within 12 blocks. Release to fly at 1.5 blocks/tick to one block outside that surface. Invalid targets refund the cost; successful casts have a 5-second cooldown."
+    "Hold skill 3 to reserve 10 web value points and preview a surface within 12 blocks. Release to fly at 1.5 blocks/tick to one block outside that surface. Invalid targets refund the cost; successful casts have a 5-second cooldown."
   ],
   "ssc_perk.shape-shifter-curse.spider_silk_grapple.name": [
     "Silk Grapple"
@@ -9526,7 +9526,7 @@
           "text": "The silk glands in your abdomen have been activated by the Tuner's energy, allowing you to produce liquid silk faster\n[Your "
         },
         {
-          "text": "web resource",
+          "text": "web value",
           "color": "#5555ff"
         },
         {
@@ -9553,7 +9553,7 @@
           "text": "The silk glands in your abdomen have been further strengthened by the Tuner's energy, allowing you to produce liquid silk faster\n[Your "
         },
         {
-          "text": "web resource",
+          "text": "web value",
           "color": "#5555ff"
         },
         {
@@ -9594,7 +9594,7 @@
           "text": ", you can spend "
         },
         {
-          "text": "10 web resource",
+          "text": "10 web value points",
           "color": "#5555ff"
         },
         {
