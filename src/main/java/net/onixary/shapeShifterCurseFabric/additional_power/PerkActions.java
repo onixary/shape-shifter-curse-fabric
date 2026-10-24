@@ -21,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.particle.VibrationParticleEffect;
 import net.minecraft.registry.Registry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -29,6 +30,7 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
+import net.minecraft.world.event.EntityPositionSource;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 import java.util.function.Consumer;
@@ -90,6 +92,13 @@ public final class PerkActions {
     }
 
     public static void registerActions() {
+        AdditionalEntityActions.registerBIAction(new ActionFactory<Pair<Entity, Entity>>(ShapeShifterCurseFabric.identifier("echolocation_vibration"),
+                new SerializableData(), (data, pair) -> {
+            if (!(pair.getLeft() instanceof ServerPlayerEntity player)) return;
+            Vec3d origin = pair.getRight().getBoundingBox().getCenter();
+            var particle = new VibrationParticleEffect(new EntityPositionSource(player, player.getStandingEyeHeight()), 10);
+            player.getServerWorld().spawnParticles(player, particle, true, origin.x, origin.y, origin.z, 1, 0, 0, 0, 0);
+        }));
         AdditionalEntityActions.registerAction(new ActionFactory<Entity>(ShapeShifterCurseFabric.identifier("recall_wolf_minions"),
                 new SerializableData(), (data, entity) -> {
             if (!(entity instanceof ServerPlayerEntity player)

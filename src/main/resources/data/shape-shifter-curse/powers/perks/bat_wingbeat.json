@@ -7,6 +7,12 @@
     "type": "apoli:and",
     "actions": [
       {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:entity.bat.takeoff",
+        "volume": 1.0,
+        "pitch": 1.0
+      },
+      {
         "type": "shape-shifter-curse:change_food",
         "amount": -1
       },

@@ -12,7 +12,7 @@
   "bientity_condition": {
     "type": "apoli:distance",
     "comparison": "<=",
-    "compare_to": 16
+    "compare_to": 32
   },
   "condition": {
     "type": "apoli:or",
