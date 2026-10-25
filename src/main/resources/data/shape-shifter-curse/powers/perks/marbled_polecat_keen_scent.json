@@ -15,16 +15,7 @@
     "entity_action": {
       "type": "apoli:if_else",
       "condition": {
-        "type": "apoli:and",
-        "conditions": [
-          {
-            "type": "apoli:sneaking"
-          },
-          {
-            "type": "apoli:moving",
-            "inverted": true
-          }
-        ]
+        "type": "apoli:sneaking"
       },
       "if_action": {
         "type": "apoli:change_resource",
@@ -44,16 +35,7 @@
       "type": "apoli:and",
       "conditions": [
         {
-          "type": "apoli:and",
-          "conditions": [
-            {
-              "type": "apoli:sneaking"
-            },
-            {
-              "type": "apoli:moving",
-              "inverted": true
-            }
-          ]
+          "type": "apoli:sneaking"
         },
         {
           "type": "apoli:resource",

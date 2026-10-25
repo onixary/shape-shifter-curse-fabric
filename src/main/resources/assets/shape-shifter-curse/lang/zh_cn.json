@@ -863,7 +863,7 @@
   "ssc_perk.shape-shifter-curse.marbled_polecat_double_air_jump.name": "双重踏空",
   "ssc_perk.shape-shifter-curse.marbled_polecat_hunter_metabolism.desc": "随着你接受当前形态更偏向捕食者的本性，你的代谢系统也发生了变化\n[食用生肉额外回复4点饥饿值和5.6点饱和度，并免疫饥饿效果]",
   "ssc_perk.shape-shifter-curse.marbled_polecat_hunter_metabolism.name": "猎手代谢",
-  "ssc_perk.shape-shifter-curse.marbled_polecat_keen_scent.desc": "你的嗅觉变的非常灵敏。集中精神，你可以嗅到周围潜在猎物的位置\n[潜行静止3秒后，你可以透视16格范围内的实体]",
+  "ssc_perk.shape-shifter-curse.marbled_polecat_keen_scent.desc": "你的嗅觉变的非常灵敏。集中精神，你可以嗅到周围潜在猎物的位置\n[持续潜行3秒后，你可以透视16格范围内的实体]",
   "ssc_perk.shape-shifter-curse.marbled_polecat_keen_scent.name": "灵敏嗅觉",
   "ssc_perk.shape-shifter-curse.marbled_polecat_leaping_dash.desc": "借助你修长的新形态，你可以用更加具有爆发性的方式进行移动\n[在地面且饥饿值大于6时，你可以使用主动技能键1向前冲跃，不消耗饥饿值。冷却5秒]",
   "ssc_perk.shape-shifter-curse.marbled_polecat_leaping_dash.name": "冲跃",

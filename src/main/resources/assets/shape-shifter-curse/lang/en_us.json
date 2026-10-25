@@ -883,7 +883,7 @@
   "ssc_perk.shape-shifter-curse.marbled_polecat_double_air_jump.name": "Double Air Jump",
   "ssc_perk.shape-shifter-curse.marbled_polecat_hunter_metabolism.desc": "As you accept the more predatory nature of your current form, your metabolic system has also changed\n[Eating raw meat additionally restores 4 hunger points and 5.6 saturation, and you become immune to the Hunger effect]",
   "ssc_perk.shape-shifter-curse.marbled_polecat_hunter_metabolism.name": "Hunter Metabolism",
-  "ssc_perk.shape-shifter-curse.marbled_polecat_keen_scent.desc": "Your sense of smell has become extremely keen. By concentrating, you can smell the location of potential prey around you\n[After sneaking without moving for 3 seconds, you can see entities within 16 blocks through walls]",
+  "ssc_perk.shape-shifter-curse.marbled_polecat_keen_scent.desc": "Your sense of smell has become extremely keen. By concentrating, you can smell the location of potential prey around you\n[After sneaking for 3 seconds, you can see entities within 16 blocks through walls]",
   "ssc_perk.shape-shifter-curse.marbled_polecat_keen_scent.name": "Keen Scent",
   "ssc_perk.shape-shifter-curse.marbled_polecat_leaping_dash.desc": "Thanks to your slender new form, you can move in a more explosive way\n[While on the ground and with hunger above 6, you can use active skill key 1 to dash forward, without consuming hunger. Cooldown: 5 seconds]",
   "ssc_perk.shape-shifter-curse.marbled_polecat_leaping_dash.name": "Leaping Dash",
