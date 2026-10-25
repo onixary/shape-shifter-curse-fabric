@@ -721,5 +721,14 @@
   "tooltip.shape_shifter_curse.morphscale_item": "Мимикрирующий предмет",
   "tooltip.shape_shifter_curse.potion_target_form": "Форма: ",
 
-  "trinket.slot.hand.extra_hand": "Доп. рука"
+  "trinket.slot.hand.extra_hand": "Доп. рука",
+  "gui.shape-shifter-curse.sub_form.title": "Выбор подформы",
+  "gui.shape-shifter-curse.sub_form.select": "Выбрать",
+  "gui.shape-shifter-curse.sub_form.no_forms": "Нет доступных форм",
+  "codex.form.shape-shifter-curse.bat_3.desc": "Описание будет добавлено",
+  "codex.form.shape-shifter-curse.snow_fox_3.desc": "Описание будет добавлено",
+  "codex.form.shape-shifter-curse.bat_3_sub_avali.desc": "Описание будет добавлено",
+  "codex.form.shape-shifter-curse.snow_fox_3_sub_marbled_polecat.desc": "Описание будет добавлено",
+  "codex.form.shape-shifter-curse.bat_3_sub_avali.name": "Авали (подформа)",
+  "codex.form.shape-shifter-curse.snow_fox_3_sub_marbled_polecat.name": "Перевязка (подформа)"
 }

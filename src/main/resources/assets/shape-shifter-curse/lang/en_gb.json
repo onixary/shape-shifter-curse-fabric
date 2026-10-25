@@ -638,8 +638,8 @@
   "item.shape-shifter-curse.powerful_inhibitor.tooltip": "Contains enhanced golden magic",
   "item.shape-shifter-curse.resonant_core": "Resonant Core",
   "item.shape-shifter-curse.resonant_core.tooltip": "[Allay Form] Consuming Amethyst Shards grants regeneration to nearby entities, but no longer restores saturation",
-  "item.shape-shifter-curse.ripple_mirror": "Ripple Fragment",
-  "item.shape-shifter-curse.ripple_mirror.tooltip": "Use to select and unlock a sub-form of your current form.",
+  "item.shape-shifter-curse.ripple_mirror": "Ripple Mirror",
+  "item.shape-shifter-curse.ripple_mirror.tooltip": "As you gaze into the mirror, you see images of other creatures...",
   "item.shape-shifter-curse.select_form_item": "Form Shifting Scroll",
   "item.shape-shifter-curse.select_form_item.tooltip": "(OP) Using on target to set form of yourself or other non-op players",
   "item.shape-shifter-curse.silk_dew": "Silk Dew",
@@ -1032,5 +1032,14 @@
   "tooltip.shape_shifter_curse.morphscale_item": "Morphscaled Item",
   "tooltip.shape_shifter_curse.potion_target_form": "Target Form: ",
 
-  "trinket.slot.hand.extra_hand": "Extra Hand"
+  "trinket.slot.hand.extra_hand": "Extra Hand",
+  "gui.shape-shifter-curse.sub_form.title": "• The Mirror | rorriM ehT •",
+  "gui.shape-shifter-curse.sub_form.select": "Touch Mirror",
+  "gui.shape-shifter-curse.sub_form.no_forms": "No Sub-form available",
+  "codex.form.shape-shifter-curse.bat_3.desc": "The familiar image of a large-eared bat gazes back at you from the other side of the distorted mirror...",
+  "codex.form.shape-shifter-curse.snow_fox_3.desc": "The familiar image of a snow fox with fluffy fur, surrounded by an icy chill, gazes back at you from the other side of the distorted mirror...",
+  "codex.form.shape-shifter-curse.bat_3_sub_avali.desc": "The image of a strange creature with four large ears and two-toned feathers gazes back at you from the other side of the distorted mirror...",
+  "codex.form.shape-shifter-curse.snow_fox_3_sub_marbled_polecat.desc": "The image of a slender-bodied predator with rounded ears and two-toned stripes across its face gazes back at you from the other side of the distorted mirror...",
+  "codex.form.shape-shifter-curse.bat_3_sub_avali.name": "Avali",
+  "codex.form.shape-shifter-curse.snow_fox_3_sub_marbled_polecat.name": "Marbled Polecat"
 }

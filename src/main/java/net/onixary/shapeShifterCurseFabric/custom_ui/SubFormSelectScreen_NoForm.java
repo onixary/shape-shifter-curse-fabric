@@ -45,11 +45,11 @@ public class SubFormSelectScreen_NoForm extends Screen {
         int baseX = (this.width - MENU_WIDTH) / 2;
         int baseY = (this.height - MENU_HEIGHT) / 2;
         // 152 32 116 14 - Label
-        this.addDrawableChild(new TextWidget(baseX + 152, baseY + 32, 116, 14, Text.literal("Sub Form Select Menu"), this.textRenderer));
+        this.addDrawableChild(new TextWidget(baseX + 152, baseY + 32, 116, 14, Text.translatable("gui.shape-shifter-curse.sub_form.title"), this.textRenderer));
         // 393 7 20 20 - Close
         this.addDrawableChild(ButtonWidget.builder(Text.literal("X"), button -> this.close()).position(baseX + 393, baseY + 7).size(20, 20).build());
         // 132 107 156 36 - No Form Can Select Tip
-        this.addDrawableChild(new TextWidget(baseX + 132, baseY + 107, 156, 36, Text.literal("No Form Can Select"), this.textRenderer));
+        this.addDrawableChild(new TextWidget(baseX + 132, baseY + 107, 156, 36, Text.translatable("gui.shape-shifter-curse.sub_form.no_forms"), this.textRenderer));
         super.init();
     }
 

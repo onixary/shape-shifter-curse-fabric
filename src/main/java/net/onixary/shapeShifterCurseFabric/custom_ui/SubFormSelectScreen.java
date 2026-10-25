@@ -91,20 +91,32 @@ public class SubFormSelectScreen extends Screen implements WidgetEXUtils.IWidget
 
     @Override
     public void init() {
+        WidgetList.clear();
         availableForms = getAvailableForms(client);
         int baseX = (this.width - MENU_WIDTH) / 2;
         int baseY = (this.height - MENU_HEIGHT) / 2;
         // 152 32 116 14 - Label
-        this.addDrawableChild(new TextWidget(baseX + 152, baseY + 32, 116, 14, Text.literal("Sub Form Select Menu"), this.textRenderer));
+        this.addDrawableChild(new TextWidget(baseX + 152, baseY + 32, 116, 14, Text.translatable("gui.shape-shifter-curse.sub_form.title"), this.textRenderer));
         // 393 7 20 20 - Close
         this.addDrawableChild(ButtonWidget.builder(Text.literal("X"), button -> this.close()).position(baseX + 393, baseY + 7).size(20, 20).build());
 
         // 223 58 77 14 - FormName
-        formNameText = new TextWidget(baseX + 223, baseY + 58, 77, 14, Text.literal(""), this.textRenderer);
+        formNameText = new TextWidget(baseX + 223, baseY + 58, 77, 14, Text.empty(), this.textRenderer) {
+            @Override
+            public void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
+                if (SubFormSelectScreen.this.textRenderer.getWidth(getMessage()) <= getWidth()) {
+                    super.renderButton(context, mouseX, mouseY, delta);
+                } else {
+                    drawScrollableText(context, SubFormSelectScreen.this.textRenderer, 0, getTextColor());
+                }
+            }
+        };
         // 223 75 77 88 - Form Desc
-        formDescText = new ScaleScrollTextWidget(baseX + 223, baseY + 75, 77, 88, 1.0f, Text.literal(""), this.textRenderer);
+        formDescText = new ScaleScrollTextWidget(baseX + 223, baseY + 75, 77, 88, 1.0f, Text.empty(), this.textRenderer);
+        formDescText.setEnableScrollableIconRender(true);
+        this.addWidget(formDescText);
         // 223 166 77 14 - Select Form Button
-        selectFormButton = ButtonWidget.builder(Text.literal("SELECT"), button -> {
+        selectFormButton = ButtonWidget.builder(Text.translatable("gui.shape-shifter-curse.sub_form.select"), button -> {
             Identifier formID = availableForms.get(nowFormIndex);
             if (formID != null) {
                 SendSetForm(formID);
@@ -203,20 +215,20 @@ public class SubFormSelectScreen extends Screen implements WidgetEXUtils.IWidget
         this.renderBackgroundTexture(context);
         int baseX = (this.width - MENU_WIDTH) / 2;
         int baseY = (this.height - MENU_HEIGHT) / 2;
-        // 120 58 100 133
+        // Keep the enlarged model clipped to the preview frame, like the color selection menu.
         if (client.player != null) {
             int viewportX = baseX + 120;
-            int viewportY = baseY + 50;
+            int viewportY = baseY + 58;
             int entityX = viewportX + 100 / 2;
-            int entityY = viewportY + 133 - 15;
-            int entitySize = 50;
+            int entityY = viewportY + 133 + 30;
+            int entitySize = 80;
             RenderEntityInViewport(
                     context,
                     viewportX, viewportY,
                     100, 133,
                     entityX, entityY,
                     entitySize,
-                    entityX - mouseX, entityY - mouseY - entitySize,
+                    entityX - mouseX, viewportY + 133 / 2 - mouseY,
                     client.player
             );
         }
@@ -251,14 +263,38 @@ public class SubFormSelectScreen extends Screen implements WidgetEXUtils.IWidget
         return this.WidgetList;
     }
 
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        this.onClickWidget(mouseX, mouseY, button);
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        this.onReleaseWidget(mouseX, mouseY, button);
+        return super.mouseReleased(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
+        this.onDragWidget(mouseX, mouseY, button, deltaX, deltaY);
+        return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double mouseZ) {
+        this.onScrollWidget(mouseX, mouseY, mouseZ);
+        return super.mouseScrolled(mouseX, mouseY, mouseZ);
+    }
+
     public void updatePageButtons() {
         prevFormButton.active = nowFormIndex > 0;
         nextFormButton.active = nowFormIndex < availableForms.size() - 1;
     }
 
     public void clearInfo() {
-        formNameText.setMessage(Text.literal(""));
-        formDescText.setMessage(Text.literal(""));
+        formNameText.setMessage(Text.empty());
+        formDescText.reloadText(Text.empty());
         selectFormButton.active = false;
         updatePageButtons();
     }
@@ -279,7 +315,7 @@ public class SubFormSelectScreen extends Screen implements WidgetEXUtils.IWidget
             return;
         }
         formNameText.setMessage(form.getContentText(CodexData.ContentType.NAME));
-        formDescText.setMessage(form.getContentText(CodexData.ContentType.DESC));
+        formDescText.reloadText(form.getContentText(CodexData.ContentType.DESC));
         selectFormButton.active = true;
         updatePageButtons();
     }

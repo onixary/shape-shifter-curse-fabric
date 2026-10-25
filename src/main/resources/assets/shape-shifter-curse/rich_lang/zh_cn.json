@@ -8617,10 +8617,10 @@
     "[悦灵形态]食用紫水晶碎片会对周围的实体施加生命恢复效果，但是不再恢复饱和值"
   ],
   "item.shape-shifter-curse.ripple_mirror": [
-    "波纹碎片"
+    "波纹之镜"
   ],
   "item.shape-shifter-curse.ripple_mirror.tooltip": [
-    "使用后选择并解锁当前形态的子形态。"
+    "凝视镜面时，你会看到其他生物的影像..."
   ],
   "item.shape-shifter-curse.select_form_item": [
     "形态修改卷轴"
@@ -12142,5 +12142,71 @@
   "tooltip.shape_shifter_curse.morphscale_item": "塑形物品",
   "tooltip.shape_shifter_curse.potion_target_form": "目标形态: ",
   "trinket.slot.hand.extra_hand": "额外手",
-  "codex.form.shape-shifter-curse.bat_3_sub_avali.name": "羽族（子形态）"
+  "codex.form.shape-shifter-curse.bat_3_sub_avali.name": "羽族",
+  "gui.shape-shifter-curse.sub_form.title": [
+    "• 镜中倒影 | 影倒中镜 •"
+  ],
+  "gui.shape-shifter-curse.sub_form.select": [
+    "触碰镜面"
+  ],
+  "gui.shape-shifter-curse.sub_form.no_forms": [
+    "无可选子形态"
+  ],
+  "codex.form.shape-shifter-curse.bat_3.desc": [
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "一个你所熟悉的，有着宽大双耳的"
+        },
+        {
+          "text": "翼手目生物",
+          "color": "#ffff55"
+        },
+        {
+          "text": "的影像从扭曲镜面的另一侧回望着你..."
+        }
+      ]
+    }
+  ],
+  "codex.form.shape-shifter-curse.snow_fox_3.desc": [
+    "一只你所熟悉的，有着蓬松皮毛，周身围绕着寒气的雪狐的影像从扭曲镜面的另一侧回望着你..."
+  ],
+  "codex.form.shape-shifter-curse.bat_3_sub_avali.desc": [
+    {
+      "text": "",
+      "extra": [
+        {
+          "text": "一只长着四只宽大耳朵，周身覆盖着双色羽毛的"
+        },
+        {
+          "text": "奇特生物",
+          "color": "#ffff55"
+        },
+        {
+          "text": "的影像从扭曲镜面的另一侧回望着你..."
+        }
+      ]
+    }
+  ],
+  "codex.form.shape-shifter-curse.snow_fox_3_sub_marbled_polecat.desc": [
+    {
+      "text": "某种",
+      "extra": [
+        {
+          "text": "身体细长，有着圆钝双耳，面部覆盖着双色条纹毛发的"
+        },
+        {
+          "color": "#ffff55",
+          "text": "捕食者"
+        },
+        {
+          "text": "的影像从扭曲镜面的另一侧回望着你..."
+        }
+      ]
+    }
+  ],
+  "codex.form.shape-shifter-curse.snow_fox_3_sub_marbled_polecat.name": [
+    "虎鼬"
+  ]
 }
