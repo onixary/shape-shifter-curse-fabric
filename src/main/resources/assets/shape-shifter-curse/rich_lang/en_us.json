@@ -348,9 +348,9 @@
         "text": "reduced melee damage",
         "color": "#aa0000"
       },
-      ".Your ",
+      ". Your ",
       {
-        "text": "max health has reduced greatly either",
+        "text": "maximum health is also reduced greatly.",
         "color": "#aa0000"
       },
       "\nFloating ",
@@ -514,7 +514,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in Desert biome",
+      "text": "to stay in the Desert biome",
       "color": "#aa00aa"
     }
   ],
@@ -653,7 +653,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in Desert biome",
+      "text": "to stay in the Desert biome",
       "color": "#aa00aa"
     },
     "\nWithin you arises ",
@@ -964,7 +964,7 @@
           "text": "essence of the pack",
           "color": "#aa00aa"
         },
-        " begins to merge completely with yours..\nAfter regaining your senses, examining your inner self, you find your ",
+        " begins to merge completely with yours...\nAfter regaining your senses, examining your inner self, you find your ",
         {
           "text": "soul",
           "color": "#aa00aa"
@@ -1071,7 +1071,7 @@
       },
       " on the target. Due to the nature of your merge as one, ",
       {
-        "text": "Jackal wraiths' attacks now restore 1 health point to you",
+        "text": "Jackal wraiths' attacks now restore 2 health points to you",
         "color": "#0000aa"
       },
       "\nWhen you lose all your health, by tapping into the pack's soul power at a certain cost, you can ",
@@ -1184,7 +1184,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in lush caves biome",
+      "text": "to stay in the Lush Caves biome",
       "color": "#aa00aa"
     }
   ],
@@ -1256,7 +1256,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in lush caves biome",
+      "text": "to stay in the Lush Caves biome",
       "color": "#aa00aa"
     },
     "\nThe urge ",
@@ -1410,9 +1410,9 @@
         "text": "maximum health increases",
         "color": "#0000aa"
       },
-      " when you have moisture level\nPowerful regeneration ",
+      " when you have moisture\nPowerful regeneration ",
       {
-        "text": "slowly heals you when well-hydrated and above 3 hunger shanks",
+        "text": "slowly heals you when well-hydrated and above 3 shanks",
         "color": "#0000aa"
       },
       "\n",
@@ -1483,7 +1483,7 @@
       },
       ".\nMoisture fuels your strength. Your ",
       {
-        "text": "max health now decreases as Moisture drops",
+        "text": "maximum health now decreases as moisture drops",
         "color": "#aa0000"
       },
       "; when your moisture is depleted, you will be unable to support your body's weight and can only ",
@@ -1535,7 +1535,7 @@
       },
       ", and your ",
       {
-        "text": "oxygen bar now indicates your Moisture level",
+        "text": "oxygen bar now indicates your moisture level",
         "color": "#0000aa"
       },
       ".\nIt can be replenished by ",
@@ -1550,7 +1550,7 @@
       },
       ". Now, even on land, your ",
       {
-        "text": "Moisture no longer depletes over time",
+        "text": "moisture no longer depletes over time",
         "color": "#0000aa"
       },
       ".\n\nYour body grants ",
@@ -1580,20 +1580,20 @@
       },
       ", you can expend ",
       {
-        "text": "Moisture",
+        "text": "moisture",
         "color": "#0000aa"
       },
-      " to channel water-based powers:\n- Cost a small amount of moisture, you can ",
+      " to channel water-based powers:\n- At the cost of a small amount of moisture, you can ",
       {
         "text": "press jump to propel yourself forward with a water current",
         "color": "#0000aa"
       },
-      ".\n- Cost a medium amount of moisture, your attacks can ",
+      ".\n- At the cost of a medium amount of moisture, your attacks can ",
       {
         "text": "launch enemies back greatly",
         "color": "#0000aa"
       },
-      ".\n- Cost a moderate amount of moisture, you can ",
+      ".\n- At the cost of a moderate amount of moisture, you can ",
       {
         "text": "press Active Skill (1) to release a small non-destructive water explosion",
         "color": "#0000aa"
@@ -1608,7 +1608,7 @@
         "text": "sprint swimming without extra hunger drain",
         "color": "#0000aa"
       },
-      ".\nWhen underwater,you can ",
+      ".\nWhen underwater, you can ",
       {
         "text": "see more clearly",
         "color": "#0000aa"
@@ -1633,7 +1633,7 @@
         "text": "leap out of the water",
         "color": "#0000aa"
       },
-      ".\nWith Moisture, you ",
+      ".\nWith moisture, you ",
       {
         "text": "regenerate health over time",
         "color": "#0000aa"
@@ -1645,7 +1645,7 @@
       },
       " for tight spaces.\n",
       {
-        "text": "Raw fish provides greater saturation",
+        "text": "Raw fish provides greater hunger value",
         "color": "#0000aa"
       },
       "."
@@ -1704,7 +1704,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in dripstone caves biome",
+      "text": "to stay in the Dripstone Caves biome",
       "color": "#aa00aa"
     }
   ],
@@ -1799,29 +1799,29 @@
     }
   ],
   "codex.form.shape-shifter-curse.bat_1.instincts": [
-    "You increasingly want to",
+    "You increasingly want to ",
     {
       "text": "stay in darkness",
       "color": "#aa00aa"
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in dripstone caves biome",
+      "text": "to stay in the Dripstone Caves biome",
       "color": "#aa00aa"
     },
     "\nThe thought of ",
     {
-      "text": "eat more fruits",
+      "text": "eating more fruits",
       "color": "#aa00aa"
     },
     " begins to attract you\nThe thought of ",
     {
-      "text": "jump into air",
+      "text": "jumping into air",
       "color": "#aa00aa"
     },
     " begins to attract you\nThe thought of ",
     {
-      "text": "be surrounded by dripstones",
+      "text": "being surrounded by dripstones",
       "color": "#aa00aa"
     },
     " begins to attract you"
@@ -2323,17 +2323,17 @@
           "text": "strange creature",
           "color": "#aa00aa"
         },
-        " with two pairs of broad ears and a face covered in fine, dense feathers of two colors. As you lean closer to make out its features, the mirror—and the space all around you—seems to suddenly ",
+        " with two pairs of broad ears and a face covered in fine, dense feathers of two colors. As you lean closer to make out its features, the mirror - and the space all around you - seems to suddenly ",
         {
           "text": "ripple",
           "color": "#aa00aa"
         },
-        ", sweeping you into its folds…\n\nA few hazy ",
+        ", sweeping you into its folds...\n\nA few hazy ",
         {
           "text": "fragments of memory",
           "color": "#aa00aa"
         },
-        " flood your mind…\n\n—Reports from this sector describe native organisms whose appearance has changed completely into that of another creature in a very short time. Not even gene editing supported by cutting-edge nanotechnology can do that—\n—The ",
+        " flood your mind...\n\n—Reports from this sector describe native organisms whose appearance has changed completely into that of another creature in a very short time. Not even gene editing supported by cutting-edge nanotechnology can do that—\n—The ",
         {
           "text": "Oracle sect",
           "color": "#aa00aa"
@@ -2541,7 +2541,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in taiga biome",
+      "text": "to stay in the Taiga biome",
       "color": "#aa00aa"
     }
   ],
@@ -2650,7 +2650,7 @@
     },
     " begin attracting you\nYou begin to desire ",
     {
-      "text": "to stay in taiga biome",
+      "text": "to stay in the Taiga biome",
       "color": "#aa00aa"
     },
     "\n",
@@ -2769,7 +2769,7 @@
     "extra": [
       "As an integral part of your body, you need to maintain abundant ",
       {
-        "text": "magic reserves",
+        "text": "mana reserves",
         "color": "#aa0000"
       },
       ":\nYour body ",
@@ -2779,12 +2779,12 @@
       },
       ", now most foods provide you with ",
       {
-        "text": "less hunger",
+        "text": "less hunger value",
         "color": "#aa0000"
       },
       "\nWhen your ",
       {
-        "text": "magic reserves fall below 1/3",
+        "text": "mana reserves fall below 1/3",
         "color": "#aa0000"
       },
       ", your ",
@@ -2794,7 +2794,7 @@
       },
       "\nWhen your ",
       {
-        "text": "magic reserves are depleted",
+        "text": "mana reserves are depleted",
         "color": "#aa0000"
       },
       ", you suffer from ",
@@ -2827,7 +2827,7 @@
         "text": "fearing you",
         "color": "#aa0000"
       },
-      ", they ",
+      ", and they ",
       {
         "text": "actively avoid you",
         "color": "#aa0000"
@@ -2891,12 +2891,12 @@
       },
       " surging within your body. Now, you have learned how to actively utilize your ",
       {
-        "text": "magic reserves",
+        "text": "mana reserves",
         "color": "#0000aa"
       },
-      "...\nFox Firebolt: While holding a stick, consume some magic to right-click and launch a straight-flying fireball that deals moderate damage and ignites the target\n\nBy consuming ",
+      "...\nFox Firebolt: While holding a stick, consume some mana to right-click and launch a straight-flying fireball that deals moderate damage and ignites the target\n\nBy consuming ",
       {
-        "text": "a small amount of magic",
+        "text": "a small amount of mana",
         "color": "#0000aa"
       },
       " and ",
@@ -2921,7 +2921,7 @@
       },
       ", while also ",
       {
-        "text": "restoring magic reserves",
+        "text": "restoring mana reserves",
         "color": "#0000aa"
       },
       ". You can also ",
@@ -3038,12 +3038,12 @@
     "extra": [
       "As a familiar made of magic, you need to maintain sufficient ",
       {
-        "text": "magic reserves",
+        "text": "mana reserves",
         "color": "#aa0000"
       },
       " at all times:\nWhen your ",
       {
-        "text": "magic reserves fall below 1/3",
+        "text": "mana reserves fall below 1/3",
         "color": "#aa0000"
       },
       ", your ",
@@ -3053,7 +3053,7 @@
       },
       "\nWhen your ",
       {
-        "text": "magic reserves are depleted",
+        "text": "mana reserves are depleted",
         "color": "#aa0000"
       },
       ", you suffer from ",
@@ -3136,7 +3136,7 @@
         "text": "Villagers fear you",
         "color": "#aa0000"
       },
-      ", they ",
+      "; they ",
       {
         "text": "actively avoid you",
         "color": "#aa0000"
@@ -3169,7 +3169,7 @@
       },
       "\nThe magic of a fox familiar surges within your body. You have completely mastered the method of using your ",
       {
-        "text": "magic reserves",
+        "text": "mana reserves",
         "color": "#0000aa"
       },
       "...\n",
@@ -3182,7 +3182,7 @@
         "text": "holding a stick",
         "color": "#0000aa"
       },
-      ", consume some magic to ",
+      ", consume some mana to ",
       {
         "text": "right-click and launch a straight-flying fireball",
         "color": "#0000aa"
@@ -3204,7 +3204,7 @@
       },
       ", consume ",
       {
-        "text": "more magic",
+        "text": "more mana",
         "color": "#0000aa"
       },
       " to release a ",
@@ -3331,7 +3331,7 @@
     "extra": [
       "Your body isn't as strong as before - ",
       {
-        "text": "Max health slightly decreased",
+        "text": "Maximum health slightly decreased",
         "color": "#aa0000"
       },
       "\nYour digestive system adapts less to non-meat foods - They provide ",
@@ -3352,7 +3352,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in jungle biome",
+      "text": "to stay in the Jungle biome",
       "color": "#aa00aa"
     }
   ],
@@ -3411,7 +3411,7 @@
       },
       ", as if your body prefers different movement\nWhile more lethal, your body becomes more fragile. ",
       {
-        "text": "Max health decreases further",
+        "text": "Maximum health decreases further",
         "color": "#aa0000"
       },
       "\nOther armor feels too heavy. You can ",
@@ -3437,7 +3437,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in jungle biome",
+      "text": "to stay in the Jungle biome",
       "color": "#aa00aa"
     },
     "\nYou feel an inner urge to ",
@@ -3553,7 +3553,7 @@
       },
       "\nBecoming smaller and lighter ",
       {
-        "text": "further reduces max health",
+        "text": "further reduces maximum health",
         "color": "#aa0000"
       },
       "\nAs a swift lethal hunter, aside helmet, you can ",
@@ -3920,7 +3920,7 @@
         "text": "hot environments unbearable",
         "color": "#aa0000"
       },
-      ". During the daytime in hot Desert biome or the scorching Nether, your ",
+      ". During the daytime in the hot Desert biome or the scorching Nether, your ",
       {
         "text": "maximum health is slightly reduced",
         "color": "#aa0000"
@@ -3952,7 +3952,7 @@
     },
     "\nYou begin to desire ",
     {
-      "text": "to stay in Taiga biome",
+      "text": "to stay in the Taiga biome",
       "color": "#aa00aa"
     },
     "\nYou begin to desire ",
@@ -4024,7 +4024,7 @@
         "text": "cold magic",
         "color": "#aa0000"
       },
-      " within.\n\nDuring the daytime in hot Desert biome or the scorching Nether, your ",
+      " within.\n\nDuring the daytime in the hot Desert biome or the scorching Nether, your ",
       {
         "text": "maximum health is further reduced",
         "color": "#aa0000"
@@ -4066,7 +4066,7 @@
     },
     " begins to appeal to you\nYou begin to desire ",
     {
-      "text": "to stay in Taiga biome",
+      "text": "to stay in the Taiga biome",
       "color": "#aa00aa"
     },
     "\nThe idea of ",
@@ -4164,7 +4164,7 @@
         "text": "take additional burning damage",
         "color": "#aa0000"
       },
-      " when on fire.\nDuring daytime in hot Desert biome or the scorching Nether, your ",
+      " when on fire.\nDuring the daytime in the hot Desert biome or the scorching Nether, your ",
       {
         "text": "maximum health is further reduced",
         "color": "#aa0000"
@@ -4284,7 +4284,7 @@
       },
       ".\nSweet Berries ",
       {
-        "text": "restore more hunger",
+        "text": "provide higher hunger value",
         "color": "#0000aa"
       },
       ".\n",
@@ -4294,7 +4294,7 @@
       },
       " and won't flee.\nYou can now ",
       {
-        "text": "walk safely on powder snow",
+        "text": "walk safely on Powder Snow",
         "color": "#0000aa"
       },
       "."
@@ -4354,7 +4354,7 @@
         "text": "won't extinguish naturally",
         "color": "#aa0000"
       },
-      " unless you enter water or extinguish it with a water bottle.\nDuring the daytime in hot Desert biome or the scorching Nether, your ",
+      " unless you enter water or extinguish it with a water bottle.\nDuring the daytime in the hot Desert biome or the scorching Nether, your ",
       {
         "text": "maximum health is drastically reduced",
         "color": "#aa0000"
@@ -4439,7 +4439,7 @@
       },
       " and even ",
       {
-        "text": "harden lava",
+        "text": "solidify lava",
         "color": "#0000aa"
       },
       ".\n\nQuadrupedal movement grants you extreme ",
@@ -4527,17 +4527,17 @@
           "text": "predator",
           "color": "#aa00aa"
         },
-        " with a long, slender muzzle, black-and-white facial markings, and a pair of blunt, rounded ears standing on either side of its head. As you lean closer to make out its features, the mirror—and the space all around you—seems to suddenly ",
+        " with a long, slender muzzle, black-and-white facial markings, and a pair of blunt, rounded ears standing on either side of its head. As you lean closer to make out its features, the mirror - and the space all around you - seems to suddenly ",
         {
           "text": "ripple",
           "color": "#aa00aa"
         },
-        ", sweeping you into its folds…\n\nA few hazy ",
+        ", sweeping you into its folds...\n\nA few hazy ",
         {
           "text": "fragments of memory",
           "color": "#aa00aa"
         },
-        " flood your mind…\n\n—Sniff, sniff. The scent of prey. A little farther ahead—\n—The surroundings? Night. No danger. The sound of wind rustling through dry grass—\n—Light ahead. Food? A little dazzling—\n—Sniff, sniff. A scent. In the direction of the light? Closer—\n—Water? Ripples. Is it solid? It has warmth—\nJust a little closer…\n\nWhen you regain consciousness, you smack your lips, sensing a faint taste of iron."
+        " flood your mind...\n\n—Sniff, sniff. The scent of prey. A little farther ahead—\n—The surroundings? Night. No danger. The sound of wind rustling through dry grass—\n—Light ahead. Food? A little dazzling—\n—Sniff, sniff. A scent. In the direction of the light? Closer—\n—Water? Ripples. Is it solid? It has warmth—\nJust a little closer...\n\nWhen you regain consciousness, you smack your lips, sensing a faint taste of iron."
       ]
     }
   ],
@@ -4559,7 +4559,7 @@
         "text": "Foxes no longer recognize you",
         "color": "#aa0000"
       },
-      ", and you can no longer get along with them as friends. Sweet berries ",
+      ", and you can no longer get along with them as friends. Sweet Berries ",
       {
         "text": "no longer satisfy you",
         "color": "#aa0000"
@@ -5043,7 +5043,7 @@
         "text": "Nutrient Dissolve Cocoon",
         "color": "#0000aa"
       },
-      " - Meat placed will be converted into ",
+      " - Meat placed inside will be gradually converted into ",
       {
         "text": "Nutrient Sacs that you can consume",
         "color": "#0000aa"
@@ -5184,10 +5184,10 @@
         },
         "], [",
         {
-          "text": "Totem of Undying (Extra Arm Slot",
+          "text": "Totem of Undying (Extra Arm Slot)",
           "color": "#55ffff"
         },
-        ")], [",
+        "], [",
         {
           "text": "Nutrient Sac (Extra Arm Slot)",
           "color": "#55ffff"
@@ -5215,7 +5215,7 @@
         "text": "primary active power key",
         "color": "#ffaa00"
       },
-      " to charge and release to fire a Web Bullet. Different effects occur based on charge level:\nWhen hitting the side or bottom of block, a non-sticky bridge web structure extends downward from the point of impact, which can be climbed.\nWhen hitting the top of block, a tower bridge web structure can be generated upward.\nWhen hitting a creature, you can inflict ",
+      " to charge and release to fire a Web Bullet. Different effects occur based on charge level:\nWhen hitting the side or bottom of a block, a non-sticky bridge web structure extends downward from the point of impact, which can be climbed.\nWhen hitting the top of a block, a tower bridge web structure can be generated upward.\nWhen hitting a creature, you can inflict ",
       {
         "text": "Slowness",
         "color": "#ff55ff"
@@ -5240,7 +5240,7 @@
         "text": "Cocooning",
         "color": "#ff55ff"
       },
-      "\", make it unable to move.\nMelee attacks against \"",
+      "\", making it unable to move.\nMelee attacks against \"",
       {
         "text": "Cocooning",
         "color": "#ff55ff"
@@ -5255,7 +5255,7 @@
         "text": "hand slot",
         "color": "#ffaa00"
       },
-      ", you can gain various beneficial effects.\nYou can eat string to replenish web value. By holding string in your inventory and right-clicking another string, you can craft cobwebs.\nBy holding a cobweb in your inventory and right-clicking a composter, you can create a Nutrient Dissolve Cocoon - Meat placed inside will be converted into Nutrient Sacs that you can consume.\nYour fully transformed multi-legged spider body grants you night vision, immunity to poison, and the ability to step up one block of height. It also grants you the ability to freely climb the sides of blocks.\nYou are unhindered by cobwebs. You can climb cobwebs and sense entities caught within them.\nSpiders do not see you as an enemy."
+      ", you can gain various beneficial effects.\nYou can eat string to replenish web value. By holding string in your inventory and right-clicking another string, you can craft cobwebs.\nBy holding a cobweb in your inventory and right-clicking a composter, you can create a Nutrient Dissolve Cocoon - Meat placed inside will be gradually converted into Nutrient Sacs that you can consume.\nYour fully transformed multi-legged spider body grants you night vision, immunity to poison, and the ability to step up one block of height. It also grants you the ability to freely climb the sides of blocks.\nYou are unhindered by cobwebs. You can climb cobwebs and sense entities caught within them.\nSpiders do not see you as an enemy."
     ]
   },
   "codex.form.shape-shifter-curse.spider_3.title": [
@@ -5347,7 +5347,7 @@
     "Cocooning"
   ],
   "effect.shape-shifter-curse.feed_effect": [
-    "High-density energy, capable of restoring satiety and magic"
+    "High-density energy, capable of restoring hunger value and magic"
   ],
   "effect.shape-shifter-curse.frost_claw": [
     "Frost Claw"
@@ -6403,11 +6403,7 @@
           "text": " on land, the water propulsion's "
         },
         {
-          "text": "moisture",
-          "color": "#5555ff"
-        },
-        {
-          "text": " consumption is halved",
+          "text": "moisture consumption is halved",
           "color": "#5555ff"
         },
         {
@@ -6615,14 +6611,7 @@
           "text": ", and you can see entities through walls within "
         },
         {
-          "text": "16 blocks",
-          "color": "#5555ff"
-        },
-        {
-          "text": ""
-        },
-        {
-          "text": " for 12 seconds",
+          "text": "16 blocks for 12 seconds",
           "color": "#5555ff"
         },
         {
@@ -6989,13 +6978,7 @@
         "color": "#5555ff"
       },
       {
-        "text": " back at the attacker"
-      },
-      {
-        "text": ""
-      },
-      {
-        "text": "]"
+        "text": " back at the attacker]"
       }
     ]
   },
@@ -7292,7 +7275,7 @@
           "text": "; besides that, while you are in "
         },
         {
-          "text": "powder snow",
+          "text": "Powder Snow",
           "color": "#5555ff"
         },
         {
@@ -8058,11 +8041,7 @@
           "text": " on land, the water propulsion's "
         },
         {
-          "text": "moisture",
-          "color": "#5555ff"
-        },
-        {
-          "text": " consumption is halved",
+          "text": "moisture consumption is halved",
           "color": "#5555ff"
         },
         {
@@ -8270,14 +8249,7 @@
           "text": ", and you can see entities through walls within "
         },
         {
-          "text": "16 blocks",
-          "color": "#5555ff"
-        },
-        {
-          "text": ""
-        },
-        {
-          "text": " for 12 seconds",
+          "text": "16 blocks for 12 seconds",
           "color": "#5555ff"
         },
         {
@@ -8644,13 +8616,7 @@
         "color": "#5555ff"
       },
       {
-        "text": " back at the attacker"
-      },
-      {
-        "text": ""
-      },
-      {
-        "text": "]"
+        "text": " back at the attacker]"
       }
     ]
   },
@@ -9116,7 +9082,7 @@
           "text": "; besides that, while you are in "
         },
         {
-          "text": "powder snow",
+          "text": "Powder Snow",
           "color": "#5555ff"
         },
         {
@@ -9513,7 +9479,7 @@
     "Rapid Spinner"
   ],
   "ssc_perk.shape-shifter-curse.spider_silk_grapple.desc": [
-    "Hold skill 3 to reserve 10 web resource and preview a surface within 12 blocks. Release to fly at 1.5 blocks/tick to one block outside that surface. Invalid targets refund the cost; successful casts have a 5-second cooldown."
+    "Hold skill 3 to reserve 10 web value points and preview a surface within 12 blocks. Release to fly at 1.5 blocks/tick to one block outside that surface. Invalid targets refund the cost; successful casts have a 5-second cooldown."
   ],
   "ssc_perk.shape-shifter-curse.spider_silk_grapple.name": [
     "Silk Grapple"
@@ -9526,7 +9492,7 @@
           "text": "The silk glands in your abdomen have been activated by the Tuner's energy, allowing you to produce liquid silk faster\n[Your "
         },
         {
-          "text": "web resource",
+          "text": "web value",
           "color": "#5555ff"
         },
         {
@@ -9553,7 +9519,7 @@
           "text": "The silk glands in your abdomen have been further strengthened by the Tuner's energy, allowing you to produce liquid silk faster\n[Your "
         },
         {
-          "text": "web resource",
+          "text": "web value",
           "color": "#5555ff"
         },
         {
@@ -9594,7 +9560,7 @@
           "text": ", you can spend "
         },
         {
-          "text": "10 web resource",
+          "text": "10 web value points",
           "color": "#5555ff"
         },
         {
