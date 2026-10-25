@@ -3,11 +3,11 @@
   "description": "power.shape-shifter-curse.perks.snow_fox_frost_dive.description",
   "hidden": true,
   "type": "shape-shifter-curse:frost_dive",
-  "speed": 0.8,
+  "speed": 1.6,
   "minimum_height": 4,
   "cooldown": 160,
   "key": {
-    "key": "key.shape-shifter-curse.active_skill_2",
+    "key": "key.shape-shifter-curse.active_skill_1",
     "continuous": false
   },
   "condition": {
@@ -18,6 +18,22 @@
   "start_action": {
     "type": "apoli:and",
     "actions": [
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:entity.evoker.cast_spell"
+      },
+      {
+        "type": "apoli:spawn_particles",
+        "particle": "minecraft:poof",
+        "count": 24,
+        "speed": 0.15,
+        "offset_y": 0.5,
+        "spread": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
       {
         "type": "shape-shifter-curse:change_food",
         "amount": -2
@@ -38,6 +54,24 @@
   "landing_action": {
     "type": "apoli:and",
     "actions": [
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:entity.warden.attack_impact"
+      },
+      {
+        "type": "shape-shifter-curse:spawn_particles_in_circle",
+        "particle": "minecraft:poof",
+        "radius": 4,
+        "sample_count": 32,
+        "count": 2,
+        "speed": 0.05,
+        "spread": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "offset_y": 0.15
+      },
       {
         "type": "shape-shifter-curse:spawn_particles_in_circle",
         "particle": "minecraft:snowflake",

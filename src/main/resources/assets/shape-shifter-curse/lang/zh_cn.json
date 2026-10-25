@@ -915,7 +915,7 @@
   "ssc_perk.shape-shifter-curse.spider_cocoon_digestion_2.name": "茧缚消化Ⅱ",
   "ssc_perk.shape-shifter-curse.spider_four_legged_adaptation.desc": "随着你对用四足支撑身体的感觉更加适应，你可以用更加自然的方式进行移动\n[你走路与奔跑的移动速度惩罚由20%降低至10%]",
   "ssc_perk.shape-shifter-curse.spider_four_legged_adaptation.name": "四足适应",
-  "ssc_perk.shape-shifter-curse.spider_perceptual_web.desc": "通过与你当前的形态进一步调谐，你的身体回忆起了通过蛛网振动定位猎物的方法\n[位于桥梁蛛网中或其上时，你可以透视32格内的所有生物]",
+  "ssc_perk.shape-shifter-curse.spider_perceptual_web.desc": "通过与你当前的形态进一步调谐，你的身体回忆起了通过蛛网振动定位猎物的方法\n[位于桥梁蛛网中或其上时，你可以透视32格内的所有生物，并获得力量2效果]",
   "ssc_perk.shape-shifter-curse.spider_perceptual_web.name": "悬丝诊脉",
   "ssc_perk.shape-shifter-curse.spider_rapid_spinner.desc": "你的纺丝器织出丝线的效率得到大幅提升，让你可以更迅速地压缩蛛丝弹\n[蛛丝弹三档蓄力缩短至14/28/42 tick]",
   "ssc_perk.shape-shifter-curse.spider_rapid_spinner.name": "快速纺器",
