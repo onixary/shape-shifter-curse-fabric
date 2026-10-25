@@ -253,18 +253,9 @@
     "Intensified magic further alters your body. You sense it seeking new equilibrium - completely different from your original self.\nUsing a Golden Apple before progression might be wise..."
   ],
   "codex.desc.appearance_2": [
+    "The magic has nearly remade you. It's stabilised - Even Golden Apples can't help...\nUnless some ",
     {
-      "text": "",
-      "extra": [
-        "The magic has nearly remade you. It's stabilised - Even Golden Apples can't help...\nUnless some ",
-        {
-          "text": "greater",
-          "color": "#ed721d"
-        }
-      ]
-    },
-    {
-      "text": " influence",
+      "text": "greater influence",
       "color": "#ed721d"
     },
     " reignites its flow..."
@@ -354,10 +345,10 @@
       },
       " and deal ",
       {
-        "text": "reduced melee damage.",
+        "text": "reduced melee damage",
         "color": "#aa0000"
       },
-      " Your ",
+      ". Your ",
       {
         "text": "maximum health is also reduced greatly",
         "color": "#aa0000"
@@ -376,34 +367,26 @@
   },
   "codex.form.shape-shifter-curse.allay_sp.equip": [
     {
-      "text": "[Resonant Core]",
-      "color": "#0000aa"
-    }
-  ],
-  "codex.form.shape-shifter-curse.allay_sp.instincts": [
-    {
       "text": "",
       "extra": [
-        "\n\n\nCompared to other forms, you notice this one seems ",
         {
-          "text": "\"special\"",
-          "color": "#0000aa"
-        },
-        ":"
-      ]
-    },
-    "",
-    {
-      "text": "",
-      "extra": [
-        " it barely affects your mind and feels less stable. If desired, you could likely ",
-        {
-          "text": "revert",
+          "text": "[Resonant Core]",
           "color": "#0000aa"
         }
       ]
+    }
+  ],
+  "codex.form.shape-shifter-curse.allay_sp.instincts": [
+    "\n\n\nCompared to other forms, you notice this one seems ",
+    {
+      "text": "\"special\"",
+      "color": "#0000aa"
     },
-    "",
+    ": it barely affects your mind and feels less stable. If desired, you could likely ",
+    {
+      "text": "revert",
+      "color": "#0000aa"
+    },
     " it relatively easily"
   ],
   "codex.form.shape-shifter-curse.allay_sp.name": [
@@ -524,32 +507,14 @@
     ""
   ],
   "codex.form.shape-shifter-curse.anubis_wolf_0.instincts": [
+    "You begin to desire ",
     {
-      "text": "",
-      "extra": [
-        "You begin to desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " eat more rotten flesh",
+      "text": "to eat more rotten flesh",
       "color": "#aa00aa"
     },
+    "\nYou begin to desire ",
     {
-      "text": "",
-      "extra": [
-        "\nYou begin to desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " stay in the Desert biome",
+      "text": "to stay in the Desert biome",
       "color": "#aa00aa"
     }
   ],
@@ -681,60 +646,24 @@
     ""
   ],
   "codex.form.shape-shifter-curse.anubis_wolf_1.instincts": [
+    "You desire ",
     {
-      "text": "",
-      "extra": [
-        "You desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " eat as much rotten flesh as possible",
+      "text": "to eat as much rotten flesh as possible",
       "color": "#aa00aa"
     },
+    "\nYou begin to desire ",
     {
-      "text": "",
-      "extra": [
-        "\nYou begin to desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " stay in the Desert biome",
+      "text": "to stay in the Desert biome",
       "color": "#aa00aa"
     },
+    "\nWithin you arises ",
     {
-      "text": "",
-      "extra": [
-        "\nWithin you arises ",
-        {
-          "text": "the",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " thought of summoning the jackal wraiths within",
+      "text": "the thought of summoning the jackal wraiths within",
       "color": "#aa00aa"
     },
+    "\nWithin you arises ",
     {
-      "text": "",
-      "extra": [
-        "\nWithin you arises ",
-        {
-          "text": "an",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " impulse to be afflicted with Wither",
+      "text": "an impulse to be afflicted with Wither",
       "color": "#aa00aa"
     }
   ],
@@ -746,60 +675,60 @@
     "extra": [
       "The wandering jackal wraiths possessing you have granted new ",
       {
-        "text": "abilities:",
+        "text": "abilities",
         "color": "#0000aa"
       },
-      "\n",
+      ":\n",
       {
-        "text": "When you are attacked, a jackal wraith manifests from within you as a guardian,",
+        "text": "When you are attacked, a jackal wraith manifests from within you as a guardian",
         "color": "#0000aa"
       },
-      " disappearing after a short time. Jackal wraiths' attacks also",
+      ", disappearing after a short time. Jackal wraiths' attacks also ",
       {
-        "text": " inflict the target with 1 second of Wither III",
+        "text": "inflict the target with 1 second of Wither III",
         "color": "#0000aa"
       },
-      "\nYour undead power has further strengthened.",
+      "\nYour undead power has further strengthened. ",
       {
-        "text": " When afflicted with Wither, your attacks spread the Wither effect,",
+        "text": "When afflicted with Wither, your attacks spread the Wither effect",
         "color": "#0000aa"
       },
-      " inflicting the target with",
+      ", inflicting the target with ",
       {
-        "text": " one second of Wither ",
+        "text": "one second of Wither III",
         "color": "#0000aa"
       },
-      "III while ",
+      " while simultaneously ",
       {
-        "text": "simultaneously absorbing a small amount of the target's ",
+        "text": "absorbing a small amount of the target's health",
         "color": "#0000aa"
       },
-      "health\nYou can ",
+      "\nYou can now ",
       {
-        "text": "now move swiftly on soul sand and soul ",
+        "text": "move swiftly on soul sand and soul soil",
         "color": "#0000aa"
       },
-      "soil, equivalent",
+      ", equivalent to ",
       {
-        "text": " to Soul Speed",
+        "text": "Soul Speed I",
         "color": "#0000aa"
       },
-      " I\n",
+      "\nThe ",
       {
-        "text": "The jackal wraiths in the desert no longer actively attack you\n",
+        "text": "jackal wraiths in the desert no longer actively attack you",
         "color": "#0000aa"
       },
-      "\nYou can ",
+      "\n\nYou can ",
       {
-        "text": "eat bones\n",
+        "text": "eat bones",
         "color": "#0000aa"
       },
-      "You are ",
+      "\nYou are ",
       {
-        "text": "no longer affected by the Hunger and Poison effect,",
+        "text": "no longer affected by the Hunger and Poison effect",
         "color": "#0000aa"
       },
-      " and rotten flesh provides ",
+      ", and rotten flesh provides ",
       {
         "text": "greater saturation",
         "color": "#0000aa"
@@ -894,59 +823,36 @@
   },
   "codex.form.shape-shifter-curse.anubis_wolf_2.equip": [
     {
-      "text": "[Withered Bandage]",
-      "color": "#0000aa"
+      "text": "",
+      "extra": [
+        {
+          "text": "[Withered Bandage]",
+          "color": "#0000aa"
+        }
+      ]
     }
   ],
   "codex.form.shape-shifter-curse.anubis_wolf_2.instincts": [
+    "Something inside you ",
     {
-      "text": "",
-      "extra": [
-        "Something inside you ",
-        {
-          "text": "stirs",
-          "color": "#aa00aa"
-        },
-        "..."
-      ]
-    },
-    "",
-    {
-      "text": "",
-      "extra": [
-        " Your transformation hasn't reached its end...\nAn ",
-        {
-          "text": "Echo",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " Catalyst",
+      "text": "stirs",
       "color": "#aa00aa"
     },
+    "... Your transformation hasn't reached its end...\nAn ",
     {
-      "text": "",
-      "extra": [
-        " could take your transformation to the next stage... though this process would likely be ",
-        {
-          "text": "permanent",
-          "color": "#aa00aa"
-        }
-      ]
+      "text": "Echo Catalyst",
+      "color": "#aa00aa"
     },
-    "",
+    " could take your transformation to the next stage... though this process would likely be ",
     {
-      "text": "",
-      "extra": [
-        "\nYou're NOT actually ",
-        {
-          "text": "considering",
-          "color": "#aa00aa"
-        }
-      ]
+      "text": "permanent",
+      "color": "#aa00aa"
     },
-    "",
+    "\nYou're NOT actually ",
+    {
+      "text": "considering",
+      "color": "#aa00aa"
+    },
     " this, are you?"
   ],
   "codex.form.shape-shifter-curse.anubis_wolf_2.name": [
@@ -1125,8 +1031,13 @@
   },
   "codex.form.shape-shifter-curse.anubis_wolf_3.equip": [
     {
-      "text": "[Withered Bandage]",
-      "color": "#0000aa"
+      "text": "",
+      "extra": [
+        {
+          "text": "[Withered Bandage]",
+          "color": "#0000aa"
+        }
+      ]
     }
   ],
   "codex.form.shape-shifter-curse.anubis_wolf_3.instincts": [
@@ -1266,32 +1177,14 @@
     ""
   ],
   "codex.form.shape-shifter-curse.axolotl_0.instincts": [
+    "You begin craving ",
     {
-      "text": "",
-      "extra": [
-        "You begin craving ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " stay in water",
+      "text": "to stay in water",
       "color": "#aa00aa"
     },
+    "\nYou begin to desire ",
     {
-      "text": "",
-      "extra": [
-        "\nYou begin to desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " stay in the Lush Caves biome",
+      "text": "to stay in the Lush Caves biome",
       "color": "#aa00aa"
     }
   ],
@@ -1356,60 +1249,24 @@
     ""
   ],
   "codex.form.shape-shifter-curse.axolotl_1.instincts": [
+    "The desire ",
     {
-      "text": "",
-      "extra": [
-        "The desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " remain in water",
+      "text": "to remain in water",
       "color": "#aa00aa"
     },
+    "\nYou begin to desire ",
     {
-      "text": "",
-      "extra": [
-        "\nYou begin to desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " stay in the Lush Caves biome",
+      "text": "to stay in the Lush Caves biome",
       "color": "#aa00aa"
     },
+    "\nThe urge ",
     {
-      "text": "",
-      "extra": [
-        "\nThe urge ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " hunt down and consume more raw fish",
+      "text": "to hunt down and consume more raw fish",
       "color": "#aa00aa"
     },
+    " intensifies\nThe urge ",
     {
-      "text": "",
-      "extra": [
-        " intensifies\nThe urge ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " wander through drip-leaf clusters",
+      "text": "to wander through drip-leaf clusters",
       "color": "#aa00aa"
     },
     " intensifies"
@@ -1481,10 +1338,10 @@
     "extra": [
       "Moisture is now your lifeline. ",
       {
-        "text": "When dehydrated, maximum health and movement speed drastically decrease,",
+        "text": "When dehydrated, maximum health and movement speed drastically decrease",
         "color": "#aa0000"
       },
-      " nearly immobilising you\n\n",
+      ", nearly immobilising you\n\n",
       {
         "text": "Helmet equipment remains impossible",
         "color": "#aa0000"
@@ -1505,54 +1362,26 @@
     ""
   ],
   "codex.form.shape-shifter-curse.axolotl_2.instincts": [
+    "Something inside you ",
     {
-      "text": "",
-      "extra": [
-        "Something inside you ",
-        {
-          "text": "stirs",
-          "color": "#aa00aa"
-        },
-        "..."
-      ]
-    },
-    "",
-    {
-      "text": "",
-      "extra": [
-        " Your transformation hasn't reached its end...\nAn ",
-        {
-          "text": "Echo",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " Catalyst",
+      "text": "stirs",
       "color": "#aa00aa"
     },
+    "... Your transformation hasn't reached its end...\nAn ",
     {
-      "text": "",
-      "extra": [
-        " could take your transformation to the next stage... though this process would likely be ",
-        {
-          "text": "permanent",
-          "color": "#aa00aa"
-        }
-      ]
+      "text": "Echo Catalyst",
+      "color": "#aa00aa"
     },
-    "",
+    " could take your transformation to the next stage... though this process would likely be ",
     {
-      "text": "",
-      "extra": [
-        "\nYou're NOT actually ",
-        {
-          "text": "considering",
-          "color": "#aa00aa"
-        }
-      ]
+      "text": "permanent",
+      "color": "#aa00aa"
     },
-    "",
+    "\nYou're NOT actually ",
+    {
+      "text": "considering",
+      "color": "#aa00aa"
+    },
     " this, are you?"
   ],
   "codex.form.shape-shifter-curse.axolotl_2.name": [
@@ -1637,9 +1466,10 @@
       "extra": [
         "The further-grown tail has become the main structure of your body, adorned with developed fin membranes that allow swift underwater movement.\nYour blunt-clawed limbs have grown even shorter and are now positioned more towards the front of your torso. When standing still, you can only maintain an upright posture with the support of your tail.\nYour skin is now entirely covered in pale, scale-less tissue. Thanks to the water-storing feathery structure, your skin remains perpetually moist.\n\nTwo new clusters of gill filaments extend from the top of your head. Beyond supplying vital oxygen, you sense they grant you some power to ",
         {
-          "text": "perceive and manipulate water currents...",
+          "text": "perceive and manipulate water currents",
           "color": "#aa00aa"
-        }
+        },
+        "..."
       ]
     }
   ],
@@ -1680,8 +1510,13 @@
   },
   "codex.form.shape-shifter-curse.axolotl_3.equip": [
     {
-      "text": "[Fountain Belt]",
-      "color": "#0000aa"
+      "text": "",
+      "extra": [
+        {
+          "text": "[Fountain Belt]",
+          "color": "#0000aa"
+        }
+      ]
     }
   ],
   "codex.form.shape-shifter-curse.axolotl_3.instincts": [
@@ -1862,32 +1697,14 @@
     }
   ],
   "codex.form.shape-shifter-curse.bat_0.instincts": [
+    "You begin to desire ",
     {
-      "text": "",
-      "extra": [
-        "You begin to desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " stay in darkness",
+      "text": "to stay in darkness",
       "color": "#aa00aa"
     },
+    "\nYou begin to desire ",
     {
-      "text": "",
-      "extra": [
-        "\nYou begin to desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " stay in the Dripstone Caves biome",
+      "text": "to stay in the Dripstone Caves biome",
       "color": "#aa00aa"
     }
   ],
@@ -1982,74 +1799,29 @@
     }
   ],
   "codex.form.shape-shifter-curse.bat_1.instincts": [
+    "You increasingly want to ",
     {
-      "text": "",
-      "extra": [
-        "You increasingly want to ",
-        {
-          "text": "stay",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " in darkness",
+      "text": "stay in darkness",
       "color": "#aa00aa"
     },
+    "\nYou begin to desire ",
     {
-      "text": "",
-      "extra": [
-        "\nYou begin to desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " stay in the Dripstone Caves biome",
+      "text": "to stay in the Dripstone Caves biome",
       "color": "#aa00aa"
     },
+    "\nThe thought of ",
     {
-      "text": "",
-      "extra": [
-        "\nThe thought of ",
-        {
-          "text": "eating",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " more fruits",
+      "text": "eating more fruits",
       "color": "#aa00aa"
     },
+    " begins to attract you\nThe thought of ",
     {
-      "text": "",
-      "extra": [
-        " begins to attract you\nThe thought of ",
-        {
-          "text": "jumping",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " into air",
+      "text": "jumping into air",
       "color": "#aa00aa"
     },
+    " begins to attract you\nThe thought of ",
     {
-      "text": "",
-      "extra": [
-        " begins to attract you\nThe thought of ",
-        {
-          "text": "being",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " surrounded by dripstones",
+      "text": "being surrounded by dripstones",
       "color": "#aa00aa"
     },
     " begins to attract you"
@@ -2211,54 +1983,26 @@
     }
   ],
   "codex.form.shape-shifter-curse.bat_2.instincts": [
+    "Something inside you ",
     {
-      "text": "",
-      "extra": [
-        "Something inside you ",
-        {
-          "text": "stirs",
-          "color": "#aa00aa"
-        },
-        "..."
-      ]
-    },
-    "",
-    {
-      "text": "",
-      "extra": [
-        " Your transformation hasn't reached its end...\nAn ",
-        {
-          "text": "Echo",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " Catalyst",
+      "text": "stirs",
       "color": "#aa00aa"
     },
+    "... Your transformation hasn't reached its end...\nAn ",
     {
-      "text": "",
-      "extra": [
-        " could take your transformation to the next stage... though this process would likely be ",
-        {
-          "text": "permanent",
-          "color": "#aa00aa"
-        }
-      ]
+      "text": "Echo Catalyst",
+      "color": "#aa00aa"
     },
-    "",
+    " could take your transformation to the next stage... though this process would likely be ",
     {
-      "text": "",
-      "extra": [
-        "\nYou're NOT actually ",
-        {
-          "text": "considering",
-          "color": "#aa00aa"
-        }
-      ]
+      "text": "permanent",
+      "color": "#aa00aa"
     },
-    "",
+    "\nYou're NOT actually ",
+    {
+      "text": "considering",
+      "color": "#aa00aa"
+    },
     " this, are you?"
   ],
   "codex.form.shape-shifter-curse.bat_2.name": [
@@ -2353,30 +2097,30 @@
     "extra": [
       "Due to the shift in your centre of gravity, you can now only ",
       {
-        "text": "move slowly on the ground in a nearly quadrupedal posture.",
+        "text": "move slowly on the ground in a nearly quadrupedal posture",
         "color": "#aa0000"
       },
-      "\nSunlight now severely affects you. Under ",
+      ".\nSunlight now severely affects you. Under ",
       {
-        "text": "sunlight,",
+        "text": "sunlight",
         "color": "#aa0000"
       },
-      " your ",
+      ", your ",
       {
-        "text": "maximum health is greatly reduced,",
+        "text": "maximum health is greatly reduced",
         "color": "#aa0000"
       },
-      " and the ",
+      ", and the ",
       {
-        "text": "enhanced melee damage effect cannot be sustained.",
+        "text": "enhanced melee damage effect cannot be sustained",
         "color": "#aa0000"
       },
-      "\nYour foreclaws are no longer suited for grasping bulky ",
+      ".\nYour foreclaws are no longer suited for grasping bulky ",
       {
-        "text": "tools and weapons.",
+        "text": "tools and weapons",
         "color": "#aa0000"
       },
-      " When you use them to ",
+      ". When you use them to ",
       {
         "text": "dig",
         "color": "#aa0000"
@@ -2388,25 +2132,25 @@
       },
       " them to hit monsters, they will merely ",
       {
-        "text": "slip off and drop.",
+        "text": "slip off and drop",
         "color": "#aa0000"
       },
-      " Naturally, you can also ",
+      ". Naturally, you can also ",
       {
-        "text": "no longer operate bows or crossbows.",
+        "text": "no longer operate bows or crossbows",
         "color": "#aa0000"
       },
-      "\nYour membrane wings and digitigrade leg structure make equipping ",
+      ".\nYour membrane wings and digitigrade leg structure make equipping ",
       {
         "text": "chestplates, leggings and boots",
         "color": "#aa0000"
       },
       " impossible.\n",
       {
-        "text": "Meat no longer provides you with energy;",
+        "text": "Meat no longer provides you with energy",
         "color": "#aa0000"
       },
-      " your body has completely lost the ability to digest it."
+      "; your body has completely lost the ability to digest it."
     ]
   },
   "codex.form.shape-shifter-curse.bat_3.equip": [
@@ -2581,10 +2325,10 @@
         },
         " with two pairs of broad ears and a face covered in fine, dense feathers of two colours. As you lean closer to make out its features, the mirror - and the space all around you - seems to suddenly ",
         {
-          "text": "ripple,",
+          "text": "ripple",
           "color": "#aa00aa"
         },
-        " sweeping you into its folds...\n\nA few hazy ",
+        ", sweeping you into its folds...\n\nA few hazy ",
         {
           "text": "fragments of memory",
           "color": "#aa00aa"
@@ -2599,17 +2343,17 @@
           "text": "crystals",
           "color": "#aa00aa"
         },
-        " of an unidentified composition in areas where the effect is concentrated—\n—Similar to the behaviour of light passing through a triangular crystal prism, perhaps this is some kind of ",
+        " of an unidentified composition in areas where the effect is concentrated—\n—Similar to the behaviour of light passing through a triangular crystal prism, perhaps this is some kind of “",
         {
-          "text": "“refraction”",
+          "text": "refraction",
           "color": "#aa00aa"
         },
-        " effect that we do not yet understand—\n—This is an extremely risky decision. Are you really going to—\nYou touched the ",
+        "” effect that we do not yet understand—\n—This is an extremely risky decision. Are you really going to—\nYou touched the ",
         {
-          "text": "crystal.",
+          "text": "crystal",
           "color": "#aa00aa"
         },
-        " Then the experimental observation chamber around you began to ripple.\n\nWhen you regain consciousness, you shake your head hard. What exactly happened?"
+        ". Then the experimental observation chamber around you began to ripple.\n\nWhen you regain consciousness, you shake your head hard. What exactly happened?"
       ]
     }
   ],
@@ -2698,35 +2442,35 @@
     "extra": [
       "You look down at your body, now covered in feathers of two colours. Compared with your former body, it offers some entirely new ",
       {
-        "text": "advantages:",
+        "text": "advantages",
         "color": "#0000aa"
       },
-      "\n\nYou find that you can ",
+      ":\n\nYou find that you can ",
       {
-        "text": "walk on two legs again,",
+        "text": "walk on two legs again",
         "color": "#0000aa"
       },
-      " and your foreclaws are much more dexterous. You ",
+      ", and your foreclaws are much more dexterous. You ",
       {
         "text": "no longer need to hobble slowly across the ground",
         "color": "#0000aa"
       },
       " as you once did, and you can ",
       {
-        "text": "use tools, weapons and bows normally.",
+        "text": "use tools, weapons and bows normally",
         "color": "#0000aa"
       },
-      "\nYour digestive system, now that of a predator, can ",
+      ".\nYour digestive system, now that of a predator, can ",
       {
-        "text": "handle meat.",
+        "text": "handle meat",
         "color": "#0000aa"
       },
-      "\nYou discover that your body is ",
+      ".\nYou discover that your body is ",
       {
-        "text": "no longer hypersensitive to sunlight.",
+        "text": "no longer hypersensitive to sunlight",
         "color": "#0000aa"
       },
-      " Being in sunlight ",
+      ". Being in sunlight ",
       {
         "text": "no longer reduces your maximum health",
         "color": "#0000aa"
@@ -2775,51 +2519,29 @@
   },
   "codex.form.shape-shifter-curse.familiar_fox_0.equip": [
     {
-      "text": "[Amulet Bracelet]",
-      "color": "#0000aa"
+      "text": "",
+      "extra": [
+        {
+          "text": "[Amulet Bracelet]",
+          "color": "#0000aa"
+        }
+      ]
     }
   ],
   "codex.form.shape-shifter-curse.familiar_fox_0.instincts": [
+    "You begin to desire ",
     {
-      "text": "",
-      "extra": [
-        "You begin to desire ",
-        {
-          "text": "Sweet",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " Berries",
+      "text": "Sweet Berries",
       "color": "#aa00aa"
     },
+    "\nYou begin to desire ",
     {
-      "text": "",
-      "extra": [
-        "\nYou begin to desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " run across snowy ground",
+      "text": "to run across snowy ground",
       "color": "#aa00aa"
     },
+    "\nYou begin to desire ",
     {
-      "text": "",
-      "extra": [
-        "\nYou begin to desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " stay in the Taiga biome",
+      "text": "to stay in the Taiga biome",
       "color": "#aa00aa"
     }
   ],
@@ -2846,10 +2568,10 @@
       },
       "\nEnhanced perception helps you ",
       {
-        "text": "find more drops,",
+        "text": "find more drops",
         "color": "#0000aa"
       },
-      " roughly equivalent to ",
+      ", roughly equivalent to ",
       {
         "text": "Looting I",
         "color": "#0000aa"
@@ -2912,8 +2634,13 @@
   },
   "codex.form.shape-shifter-curse.familiar_fox_1.equip": [
     {
-      "text": "[Amulet Bracelet]",
-      "color": "#0000aa"
+      "text": "",
+      "extra": [
+        {
+          "text": "[Amulet Bracelet]",
+          "color": "#0000aa"
+        }
+      ]
     }
   ],
   "codex.form.shape-shifter-curse.familiar_fox_1.instincts": [
@@ -2921,60 +2648,24 @@
       "text": "Thoughts of draining energy from creatures",
       "color": "#aa00aa"
     },
+    " begin attracting you\nYou begin to desire ",
     {
-      "text": "",
-      "extra": [
-        " begin attracting you\nYou begin to desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " stay in the Taiga biome",
+      "text": "to stay in the Taiga biome",
       "color": "#aa00aa"
     },
+    "\n",
     {
-      "text": "",
-      "extra": [
-        "\n",
-        {
-          "text": "Thoughts",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " of staying in Sweet Berry Bushes",
+      "text": "Thoughts of staying in Sweet Berry Bushes",
       "color": "#aa00aa"
     },
+    " begin attracting you\nThe magic of ",
     {
-      "text": "",
-      "extra": [
-        " begin attracting you\nThe magic of ",
-        {
-          "text": "Witches",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " and Evokers",
+      "text": "Witches and Evokers",
       "color": "#aa00aa"
     },
+    " draws you in - You feel compelled to ",
     {
-      "text": "",
-      "extra": [
-        " draws you in - You feel compelled to ",
-        {
-          "text": "approach",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " and observe them",
+      "text": "approach and observe them",
       "color": "#aa00aa"
     }
   ],
@@ -3016,10 +2707,10 @@
       },
       "\nYour ",
       {
-        "text": "running speed increases further,",
+        "text": "running speed increases further",
         "color": "#0000aa"
       },
-      " and your new fur protects you from ",
+      ", and your new fur protects you from ",
       {
         "text": "Sweet Berry Bushes",
         "color": "#0000aa"
@@ -3029,11 +2720,12 @@
         "text": "find more drops",
         "color": "#0000aa"
       },
-      " ",
+      " (~",
       {
-        "text": "(~Looting II)",
+        "text": "Looting II",
         "color": "#0000aa"
-      }
+      },
+      ")"
     ]
   },
   "codex.form.shape-shifter-curse.familiar_fox_1.title": [
@@ -3065,9 +2757,10 @@
         },
         " occasionally appear around your body before slowly fading away\n\nIt's become clear that the ",
         {
-          "text": "magic inherent in this form has been altered by someone else...",
+          "text": "magic inherent in this form has been altered by someone else",
           "color": "#aa00aa"
-        }
+        },
+        "..."
       ]
     }
   ],
@@ -3149,59 +2842,36 @@
   },
   "codex.form.shape-shifter-curse.familiar_fox_2.equip": [
     {
-      "text": "[Amulet Bracelet]",
-      "color": "#0000aa"
+      "text": "",
+      "extra": [
+        {
+          "text": "[Amulet Bracelet]",
+          "color": "#0000aa"
+        }
+      ]
     }
   ],
   "codex.form.shape-shifter-curse.familiar_fox_2.instincts": [
+    "Something inside you ",
     {
-      "text": "",
-      "extra": [
-        "Something inside you ",
-        {
-          "text": "stirs",
-          "color": "#aa00aa"
-        },
-        "..."
-      ]
-    },
-    "",
-    {
-      "text": "",
-      "extra": [
-        " Your transformation hasn't reached its end...\nAn ",
-        {
-          "text": "Echo",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " Catalyst",
+      "text": "stirs",
       "color": "#aa00aa"
     },
+    "... Your transformation hasn't reached its end...\nAn ",
     {
-      "text": "",
-      "extra": [
-        " could take your transformation to the next stage... though this process would likely be ",
-        {
-          "text": "permanent",
-          "color": "#aa00aa"
-        }
-      ]
+      "text": "Echo Catalyst",
+      "color": "#aa00aa"
     },
-    "",
+    " could take your transformation to the next stage... though this process would likely be ",
     {
-      "text": "",
-      "extra": [
-        "\nYou're NOT actually ",
-        {
-          "text": "considering",
-          "color": "#aa00aa"
-        }
-      ]
+      "text": "permanent",
+      "color": "#aa00aa"
     },
-    "",
+    "\nYou're NOT actually ",
+    {
+      "text": "considering",
+      "color": "#aa00aa"
+    },
     " this, are you?"
   ],
   "codex.form.shape-shifter-curse.familiar_fox_2.name": [
@@ -3221,50 +2891,50 @@
       },
       " surging within your body. Now, you have learned how to actively utilise your ",
       {
-        "text": "mana reserves...",
+        "text": "mana reserves",
         "color": "#0000aa"
       },
-      "\nFox Firebolt: While holding a stick, consume some mana to right-click and launch a straight-flying fireball that deals moderate damage and ignites the target\n\nBy consuming ",
+      "...\nFox Firebolt: While holding a stick, consume some mana to right-click and launch a straight-flying fireball that deals moderate damage and ignites the target\n\nBy consuming ",
       {
         "text": "a small amount of magic",
         "color": "#0000aa"
       },
       " and ",
       {
-        "text": "right-clicking with a water bottle on corresponding ingredients,",
+        "text": "right-clicking with a water bottle on corresponding ingredients",
         "color": "#0000aa"
       },
-      " you can directly brew ",
+      ", you can directly brew ",
       {
-        "text": "Splash Potions of Poison, Healing and Harming in your inventory, 3 at a time.",
+        "text": "Splash Potions of Poison, Healing and Harming in your inventory, 3 at a time",
         "color": "#0000aa"
       },
-      " You can now ",
+      ". You can now ",
       {
         "text": "stack 8 identical potions",
         "color": "#0000aa"
       },
       "\nYou can ",
       {
-        "text": "absorb more hunger from stronger creatures by right-clicking them empty-handed,",
+        "text": "absorb more hunger from stronger creatures by right-clicking them empty-handed",
         "color": "#0000aa"
       },
-      " while also ",
+      ", while also ",
       {
-        "text": "restoring mana reserves.",
+        "text": "restoring mana reserves",
         "color": "#0000aa"
       },
-      " You can also ",
+      ". You can also ",
       {
         "text": "sense the location of nearby creatures",
         "color": "#0000aa"
       },
       "\nWhen absolutely necessary, you can ",
       {
-        "text": "drain energy from hostile mobs,",
+        "text": "drain energy from hostile mobs",
         "color": "#0000aa"
       },
-      " though their energy will ",
+      ", though their energy will ",
       {
         "text": "weaken you",
         "color": "#0000aa"
@@ -3276,10 +2946,10 @@
       },
       " seem to have more energy, you can ",
       {
-        "text": "bottle their energy for later use.",
+        "text": "bottle their energy for later use",
         "color": "#0000aa"
       },
-      " Perhaps you should try other targets...\n\n",
+      ". Perhaps you should try other targets...\n\n",
       {
         "text": "Illagers",
         "color": "#0000aa"
@@ -3296,20 +2966,20 @@
       },
       "\nYour ",
       {
-        "text": "running speed increases,",
+        "text": "running speed increases",
         "color": "#0000aa"
       },
-      " and you can ",
+      ", and you can ",
       {
         "text": "move freely through Sweet Berry Bushes",
         "color": "#0000aa"
       },
       "\nYour enhanced perception allows you to ",
       {
-        "text": "discover more drops,",
+        "text": "discover more drops",
         "color": "#0000aa"
       },
-      " roughly equivalent to ",
+      ", roughly equivalent to ",
       {
         "text": "Looting II",
         "color": "#0000aa"
@@ -3346,10 +3016,10 @@
         },
         " swaying behind you\nYour eyes now unmistakably belong to a wild creature. In sunlight, your pupils contract into narrow slits\nYou realise the nature of magic within you has completely changed. The shifting magic has solidified, permanently transformed into something else - something more befitting a ",
         {
-          "text": "familiar...",
+          "text": "familiar",
           "color": "#aa00aa"
         },
-        "\n",
+        "...\n",
         {
           "text": "Azure flames",
           "color": "#00aaaa"
@@ -3475,8 +3145,13 @@
   },
   "codex.form.shape-shifter-curse.familiar_fox_3.equip": [
     {
-      "text": "[Amulet Bracelet]",
-      "color": "#0000aa"
+      "text": "",
+      "extra": [
+        {
+          "text": "[Amulet Bracelet]",
+          "color": "#0000aa"
+        }
+      ]
     }
   ],
   "codex.form.shape-shifter-curse.familiar_fox_3.instincts": [
@@ -3494,20 +3169,20 @@
       },
       "\nThe magic of a fox familiar surges within your body. You have completely mastered the method of using your ",
       {
-        "text": "mana reserves...",
+        "text": "mana reserves",
         "color": "#0000aa"
       },
-      "\n",
+      "...\n",
       {
-        "text": "Fox Firebolt:",
+        "text": "Fox Firebolt",
         "color": "#0000aa"
       },
-      " While ",
+      ": While ",
       {
-        "text": "holding a stick,",
+        "text": "holding a stick",
         "color": "#0000aa"
       },
-      " consume some mana to ",
+      ", consume some mana to ",
       {
         "text": "right-click and launch a straight-flying fireball",
         "color": "#0000aa"
@@ -3519,40 +3194,40 @@
       },
       "\n",
       {
-        "text": "Fox Fire Ring:",
+        "text": "Fox Fire Ring",
         "color": "#0000aa"
       },
-      " Press the ",
+      ": Press the ",
       {
-        "text": "active ability key,",
+        "text": "active ability key",
         "color": "#0000aa"
       },
-      " consume ",
+      ", consume ",
       {
         "text": "more mana",
         "color": "#0000aa"
       },
       " to release a ",
       {
-        "text": "fire ring centred on yourself,",
+        "text": "fire ring centred on yourself",
         "color": "#0000aa"
       },
-      " ",
+      ", ",
       {
         "text": "dealing damage and igniting targets in the area for an extended duration",
         "color": "#0000aa"
       },
       "\n\nYour familiar magic protects you from ",
       {
-        "text": "fire damage,",
+        "text": "fire damage",
         "color": "#0000aa"
       },
-      " when in ",
+      ", when in ",
       {
-        "text": "fire or lava,",
+        "text": "fire or lava",
         "color": "#0000aa"
       },
-      " your ",
+      ", your ",
       {
         "text": "magic is continuously consumed to maintain this effect",
         "color": "#0000aa"
@@ -3574,10 +3249,10 @@
       },
       "\nYour ",
       {
-        "text": "running speed increases.",
+        "text": "running speed increases",
         "color": "#0000aa"
       },
-      " Due to your size, ",
+      ". Due to your size, ",
       {
         "text": "ranged attacks also have difficulty hitting you",
         "color": "#0000aa"
@@ -3589,10 +3264,10 @@
       },
       " and ",
       {
-        "text": "right-clicking with a water bottle on corresponding ingredients,",
+        "text": "right-clicking with a water bottle on corresponding ingredients",
         "color": "#0000aa"
       },
-      " you can directly brew ",
+      ", you can directly brew ",
       {
         "text": "powerful Splash Potions of Poison, Healing and Harming in your inventory, 3 at a time. You can now stack 8 identical potions",
         "color": "#0000aa"
@@ -3670,32 +3345,14 @@
     ""
   ],
   "codex.form.shape-shifter-curse.ocelot_0.instincts": [
+    "You begin to desire ",
     {
-      "text": "",
-      "extra": [
-        "You begin to desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " eat more raw meat",
+      "text": "to eat more raw meat",
       "color": "#aa00aa"
     },
+    "\nYou begin to desire ",
     {
-      "text": "",
-      "extra": [
-        "\nYou begin to desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " stay in the Jungle biome",
+      "text": "to stay in the Jungle biome",
       "color": "#aa00aa"
     }
   ],
@@ -3749,10 +3406,10 @@
     "extra": [
       "A strange uncoordinated feeling ",
       {
-        "text": "slows your sprinting,",
+        "text": "slows your sprinting",
         "color": "#aa0000"
       },
-      " as if your body prefers different movement\nWhile more lethal, your body becomes more fragile. ",
+      ", as if your body prefers different movement\nWhile more lethal, your body becomes more fragile. ",
       {
         "text": "Maximum health decreases further",
         "color": "#aa0000"
@@ -3773,60 +3430,24 @@
     ""
   ],
   "codex.form.shape-shifter-curse.ocelot_1.instincts": [
+    "You increasingly want to ",
     {
-      "text": "",
-      "extra": [
-        "You increasingly want to ",
-        {
-          "text": "eat",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " more raw meat",
+      "text": "eat more raw meat",
       "color": "#aa00aa"
     },
+    "\nYou begin to desire ",
     {
-      "text": "",
-      "extra": [
-        "\nYou begin to desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " stay in the Jungle biome",
+      "text": "to stay in the Jungle biome",
       "color": "#aa00aa"
     },
+    "\nYou feel an inner urge to ",
     {
-      "text": "",
-      "extra": [
-        "\nYou feel an inner urge to ",
-        {
-          "text": "hunt",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " more mobs using your bare claw",
+      "text": "hunt more mobs using your bare claw",
       "color": "#aa00aa"
     },
+    "\nYou feel an inner urge to ",
     {
-      "text": "",
-      "extra": [
-        "\nYou feel an inner urge to ",
-        {
-          "text": "climb",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " to treetops",
+      "text": "climb to treetops",
       "color": "#aa00aa"
     }
   ],
@@ -3962,15 +3583,15 @@
       "text": "",
       "extra": [
         {
-          "text": "[Collar Of Tension],",
+          "text": "[Collar Of Tension]",
           "color": "#0000aa"
         },
-        " ",
+        ", ",
         {
-          "text": "[Collar Of Whiskers],",
+          "text": "[Collar Of Whiskers]",
           "color": "#0000aa"
         },
-        " ",
+        ", ",
         {
           "text": "[Digestion Fibre Ball]",
           "color": "#0000aa"
@@ -3979,54 +3600,26 @@
     }
   ],
   "codex.form.shape-shifter-curse.ocelot_2.instincts": [
+    "Something inside you ",
     {
-      "text": "",
-      "extra": [
-        "Something inside you ",
-        {
-          "text": "stirs",
-          "color": "#aa00aa"
-        },
-        "..."
-      ]
-    },
-    "",
-    {
-      "text": "",
-      "extra": [
-        " Your transformation hasn't reached its end...\nAn ",
-        {
-          "text": "Echo",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " Catalyst",
+      "text": "stirs",
       "color": "#aa00aa"
     },
+    "... Your transformation hasn't reached its end...\nAn ",
     {
-      "text": "",
-      "extra": [
-        " could take your transformation to the next stage... though this process would likely be ",
-        {
-          "text": "permanent",
-          "color": "#aa00aa"
-        }
-      ]
+      "text": "Echo Catalyst",
+      "color": "#aa00aa"
     },
-    "",
+    " could take your transformation to the next stage... though this process would likely be ",
     {
-      "text": "",
-      "extra": [
-        "\nYou're NOT actually ",
-        {
-          "text": "considering",
-          "color": "#aa00aa"
-        }
-      ]
+      "text": "permanent",
+      "color": "#aa00aa"
     },
-    "",
+    "\nYou're NOT actually ",
+    {
+      "text": "considering",
+      "color": "#aa00aa"
+    },
     " this, are you?"
   ],
   "codex.form.shape-shifter-curse.ocelot_2.name": [
@@ -4125,10 +3718,10 @@
       "extra": [
         "Apart from your fur colour and body size, you're nearly indistinguishable from a wild ocelot\nYou're the ",
         {
-          "text": "apex predator of the dense jungle.",
+          "text": "apex predator of the dense jungle",
           "color": "#aa00aa"
         },
-        " With your keen eyes and razor-sharp claws, every creature is potential prey"
+        ". With your keen eyes and razor-sharp claws, every creature is potential prey"
       ]
     }
   ],
@@ -4137,10 +3730,10 @@
     "extra": [
       "Your altered digestive system can ",
       {
-        "text": "no longer get energy from non-raw meat foods.",
+        "text": "no longer get energy from non-raw meat foods",
         "color": "#aa0000"
       },
-      " Even when idle, your hyperactive metabolism ",
+      ". Even when idle, your hyperactive metabolism ",
       {
         "text": "constantly drains hunger",
         "color": "#aa0000"
@@ -4167,15 +3760,15 @@
       "text": "",
       "extra": [
         {
-          "text": "[Collar Of Tension],",
+          "text": "[Collar Of Tension]",
           "color": "#0000aa"
         },
-        " ",
+        ", ",
         {
-          "text": "[Collar Of Whiskers],",
+          "text": "[Collar Of Whiskers]",
           "color": "#0000aa"
         },
-        " ",
+        ", ",
         {
           "text": "[Digestion Fibre Ball]",
           "color": "#0000aa"
@@ -4342,51 +3935,29 @@
   },
   "codex.form.shape-shifter-curse.snow_fox_0.equip": [
     {
-      "text": "[Charm Of Reverse Thermometer]",
-      "color": "#0000aa"
+      "text": "",
+      "extra": [
+        {
+          "text": "[Charm Of Reverse Thermometer]",
+          "color": "#0000aa"
+        }
+      ]
     }
   ],
   "codex.form.shape-shifter-curse.snow_fox_0.instincts": [
+    "You begin to desire ",
     {
-      "text": "",
-      "extra": [
-        "You begin to desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " eat some Sweet Berries",
+      "text": "to eat some Sweet Berries",
       "color": "#aa00aa"
     },
+    "\nYou begin to desire ",
     {
-      "text": "",
-      "extra": [
-        "\nYou begin to desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " stay in the Taiga biome",
+      "text": "to stay in the Taiga biome",
       "color": "#aa00aa"
     },
+    "\nYou begin to desire ",
     {
-      "text": "",
-      "extra": [
-        "\nYou begin to desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " run across snowy ground",
+      "text": "to run across snowy ground",
       "color": "#aa00aa"
     }
   ],
@@ -4473,65 +4044,34 @@
   },
   "codex.form.shape-shifter-curse.snow_fox_1.equip": [
     {
-      "text": "[Charm Of Reverse Thermometer]",
-      "color": "#0000aa"
+      "text": "",
+      "extra": [
+        {
+          "text": "[Charm Of Reverse Thermometer]",
+          "color": "#0000aa"
+        }
+      ]
     }
   ],
   "codex.form.shape-shifter-curse.snow_fox_1.instincts": [
+    "The idea of ",
     {
-      "text": "",
-      "extra": [
-        "The idea of ",
-        {
-          "text": "jump-attacking",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " enemies",
+      "text": "jump-attacking enemies",
       "color": "#aa00aa"
     },
+    " begins to appeal to you\nThe idea of ",
     {
-      "text": "",
-      "extra": [
-        " begins to appeal to you\nThe idea of ",
-        {
-          "text": "jumping",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " while sprinting",
+      "text": "jumping while sprinting",
       "color": "#aa00aa"
     },
+    " begins to appeal to you\nYou begin to desire ",
     {
-      "text": "",
-      "extra": [
-        " begins to appeal to you\nYou begin to desire ",
-        {
-          "text": "to",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " stay in the Taiga biome",
+      "text": "to stay in the Taiga biome",
       "color": "#aa00aa"
     },
+    "\nThe idea of ",
     {
-      "text": "",
-      "extra": [
-        "\nThe idea of ",
-        {
-          "text": "lingering",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " within Sweet Berry Bushes",
+      "text": "lingering within Sweet Berry Bushes",
       "color": "#aa00aa"
     },
     " begins to appeal to you"
@@ -4669,54 +4209,26 @@
     }
   ],
   "codex.form.shape-shifter-curse.snow_fox_2.instincts": [
+    "A faint ",
     {
-      "text": "",
-      "extra": [
-        "A faint ",
-        {
-          "text": "tremor",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    "",
-    {
-      "text": "",
-      "extra": [
-        " resonates deep within you: the transformation upon you has not yet reached its conclusion.\nA dose of ",
-        {
-          "text": "Echo",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " Catalyst",
+      "text": "tremor",
       "color": "#aa00aa"
     },
+    " resonates deep within you: the transformation upon you has not yet reached its conclusion.\nA dose of ",
     {
-      "text": "",
-      "extra": [
-        " could push your transformation to the next stage... but this process would likely be ",
-        {
-          "text": "permanent",
-          "color": "#aa00aa"
-        },
-        "."
-      ]
+      "text": "Echo Catalyst",
+      "color": "#aa00aa"
     },
-    "",
+    " could push your transformation to the next stage... but this process would likely be ",
     {
-      "text": "",
-      "extra": [
-        "\nYou're not seriously ",
-        {
-          "text": "considering",
-          "color": "#aa00aa"
-        }
-      ]
+      "text": "permanent",
+      "color": "#aa00aa"
     },
-    "",
+    ".\nYou're not seriously ",
+    {
+      "text": "considering",
+      "color": "#aa00aa"
+    },
     " this, are you?"
   ],
   "codex.form.shape-shifter-curse.snow_fox_2.name": [
@@ -5017,10 +4529,10 @@
         },
         " with a long, slender muzzle, black-and-white facial markings and a pair of blunt, rounded ears standing on either side of its head. As you lean closer to make out its features, the mirror - and the space all around you - seems to suddenly ",
         {
-          "text": "ripple,",
+          "text": "ripple",
           "color": "#aa00aa"
         },
-        " sweeping you into its folds...\n\nA few hazy ",
+        ", sweeping you into its folds...\n\nA few hazy ",
         {
           "text": "fragments of memory",
           "color": "#aa00aa"
@@ -5039,15 +4551,15 @@
       },
       " you must learn to adapt to:\n\nYou feel that your ice magic has weakened. The snowballs you launch ",
       {
-        "text": "can no longer solidify water or lava.",
+        "text": "can no longer solidify water or lava",
         "color": "#aa0000"
       },
-      "\n",
+      ".\n",
       {
-        "text": "Foxes no longer recognise you,",
+        "text": "Foxes no longer recognise you",
         "color": "#aa0000"
       },
-      " and you can no longer get along with them as friends. Sweet Berries ",
+      ", and you can no longer get along with them as friends. Sweet Berries ",
       {
         "text": "no longer satisfy you",
         "color": "#aa0000"
@@ -5124,14 +4636,15 @@
         },
         " - A new instinct whispers to you: you will need ",
         {
-          "text": "specific catalytic materials,",
+          "text": "specific catalytic materials",
           "color": "#aa00aa"
         },
-        " a safe location and time to achieve a ",
+        ", a safe location and time to achieve a ",
         {
-          "text": "complete transformation.",
+          "text": "complete transformation",
           "color": "#aa00aa"
-        }
+        },
+        "."
       ]
     }
   ],
@@ -5140,104 +4653,54 @@
     "extra": [
       "Your digestive system is shifting towards one better suited for an arthropod predator, ",
       {
-        "text": "reducing the saturation you gain from non-meat foods.",
+        "text": "reducing the saturation you gain from non-meat foods",
         "color": "#aa0000"
       },
-      "\nWeapons enchanted with ",
+      ".\nWeapons enchanted with ",
       {
         "text": "Bane of Arthropods",
         "color": "#aa0000"
       },
       " ",
       {
-        "text": "deal increased damage to you.",
+        "text": "deal increased damage to you",
         "color": "#aa0000"
       },
-      "\nThe appendage protrusions on your rear make it ",
+      ".\nThe appendage protrusions on your rear make it ",
       {
-        "text": "impossible to wear leggings.",
+        "text": "impossible to wear leggings",
         "color": "#aa0000"
-      }
+      },
+      "."
     ]
   },
   "codex.form.shape-shifter-curse.spider_0.equip": [
     ""
   ],
   "codex.form.shape-shifter-curse.spider_0.instincts": [
+    "For some reason, you feel that your form is less influenced by the ",
     {
-      "text": "",
-      "extra": [
-        "For some reason, you feel that your form is less influenced by the ",
-        {
-          "text": "lunar",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": "",
-      "extra": [
-        {
-          "text": " tides",
-          "color": "#aa00aa"
-        },
-        "..."
-      ]
-    },
-    {
-      "text": "",
-      "extra": [
-        " The ",
-        {
-          "text": "Cursed",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " Moon and ordinary catalysts",
+      "text": "lunar tides",
       "color": "#aa00aa"
     },
+    "... The ",
     {
-      "text": "",
-      "extra": [
-        " cannot exert sufficient influence on your current form.\nInstead, the idea of weaving \n",
-        {
-          "text": "[Dew",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " Covered Cobweb]",
+      "text": "Cursed Moon and ordinary catalysts",
       "color": "#aa00aa"
     },
+    " cannot exert sufficient influence on your current form.\nInstead, the idea of weaving \n",
     {
-      "text": "",
-      "extra": [
-        " and using them to construct a ",
-        {
-          "text": "silk",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " nest",
+      "text": "[Dew Covered Cobweb]",
       "color": "#aa00aa"
     },
+    " and using them to construct a ",
     {
-      "text": "",
-      "extra": [
-        " begins to captivate you.\nFirst, you need to collect\n",
-        {
-          "text": "[Silk",
-          "color": "#aa00aa"
-        }
-      ]
+      "text": "silk nest",
+      "color": "#aa00aa"
     },
+    " begins to captivate you.\nFirst, you need to collect\n",
     {
-      "text": " Dew]",
+      "text": "[Silk Dew]",
       "color": "#aa00aa"
     },
     " dropped by Cursed Spiders, and then find a safe and secluded place..."
@@ -5342,38 +4805,17 @@
     ""
   ],
   "codex.form.shape-shifter-curse.spider_1.instincts": [
+    "Wrapped within the silk cocoon, the only thing you can do is wait for the ",
     {
-      "text": "",
-      "extra": [
-        "Wrapped within the silk cocoon, the only thing you can do is wait for the ",
-        {
-          "text": "transformation",
-          "color": "#aa00aa"
-        }
-      ]
+      "text": "transformation",
+      "color": "#aa00aa"
     },
-    "",
+    " to complete, surrounded by ",
     {
-      "text": "",
-      "extra": [
-        " to complete, surrounded by ",
-        {
-          "text": "Dew",
-          "color": "#aa00aa"
-        }
-      ]
+      "text": "Dew Covered Cobweb",
+      "color": "#aa00aa"
     },
-    {
-      "text": "",
-      "extra": [
-        {
-          "text": " Covered Cobweb",
-          "color": "#aa00aa"
-        },
-        "."
-      ]
-    },
-    ""
+    "."
   ],
   "codex.form.shape-shifter-curse.spider_1.name": [
     "Spider Form (Phase 1)"
@@ -5413,10 +4855,10 @@
         },
         " for this purpose has already been etched into your instincts.\n\nUnlike ordinary spiders, your further-developed abdomen is not used to house organs, but to store ",
         {
-          "text": "liquid silk.",
+          "text": "liquid silk",
           "color": "#aa00aa"
         },
-        " Thanks to more specialised spinnerets, you can now weave higher-density compressed silk projectiles - dense enough to form climbable silk towers."
+        ". Thanks to more specialised spinnerets, you can now weave higher-density compressed silk projectiles - dense enough to form climbable silk towers."
       ]
     }
   ],
@@ -5503,89 +4945,36 @@
     }
   ],
   "codex.form.shape-shifter-curse.spider_2.instincts": [
+    "Something inside you ",
     {
-      "text": "",
-      "extra": [
-        "Something inside you ",
-        {
-          "text": "stirs",
-          "color": "#aa00aa"
-        },
-        "..."
-      ]
-    },
-    "",
-    {
-      "text": "",
-      "extra": [
-        " Your transformation hasn't reached its end...\nFor some reason, you feel that your form is less influenced by the ",
-        {
-          "text": "lunar",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": "",
-      "extra": [
-        {
-          "text": " tides",
-          "color": "#aa00aa"
-        },
-        "..."
-      ]
-    },
-    {
-      "text": "",
-      "extra": [
-        "\nThe ",
-        {
-          "text": "Cursed",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " Moon and ordinary catalysts",
+      "text": "stirs",
       "color": "#aa00aa"
     },
+    "... Your transformation hasn't reached its end...\nFor some reason, you feel that your form is less influenced by the ",
     {
-      "text": "",
-      "extra": [
-        " cannot exert sufficient influence on your current form. However, an ",
-        {
-          "text": "Echo",
-          "color": "#aa00aa"
-        }
-      ]
-    },
-    {
-      "text": " Catalyst",
+      "text": "lunar tides",
       "color": "#aa00aa"
     },
+    "...\nThe ",
     {
-      "text": "",
-      "extra": [
-        " should be enough to bring your transformation to the next stage... though this process is likely to be ",
-        {
-          "text": "permanent",
-          "color": "#aa00aa"
-        },
-        "."
-      ]
+      "text": "Cursed Moon and ordinary catalysts",
+      "color": "#aa00aa"
     },
-    "",
+    " cannot exert sufficient influence on your current form. However, an ",
     {
-      "text": "",
-      "extra": [
-        "\nYou're NOT actually ",
-        {
-          "text": "considering",
-          "color": "#aa00aa"
-        }
-      ]
+      "text": "Echo Catalyst",
+      "color": "#aa00aa"
     },
-    "",
+    " should be enough to bring your transformation to the next stage... though this process is likely to be ",
+    {
+      "text": "permanent",
+      "color": "#aa00aa"
+    },
+    ".\nYou're NOT actually ",
+    {
+      "text": "considering",
+      "color": "#aa00aa"
+    },
     " this, are you?"
   ],
   "codex.form.shape-shifter-curse.spider_2.name": [
@@ -5728,40 +5117,40 @@
     "extra": [
       "Your fully transformed multi-legged spider body is no longer suited for sustained actions requiring endurance. Your ",
       {
-        "text": "movement and sprinting speed are greatly reduced,",
+        "text": "movement and sprinting speed are greatly reduced",
         "color": "#aa0000"
       },
-      " and you ",
+      ", and you ",
       {
         "text": "can no longer jump vertically to a height of one block",
         "color": "#aa0000"
       },
       " as before. However, as a replacement, you can lunge forward while sprinting.\nYour spider digestive system means you ",
       {
-        "text": "can only gain hunger from externally digested Nutrient Sacs.",
+        "text": "can only gain hunger from externally digested Nutrient Sacs",
         "color": "#aa0000"
       },
-      " Additionally, weapons enchanted with ",
+      ". Additionally, weapons enchanted with ",
       {
         "text": "Bane of Arthropods",
         "color": "#aa0000"
       },
       " ",
       {
-        "text": "deal increased damage to you.",
+        "text": "deal increased damage to you",
         "color": "#aa0000"
       },
-      "\nYour chitinous carapace and the bristles upon it fear flame - You ",
+      ".\nYour chitinous carapace and the bristles upon it fear flame - You ",
       {
-        "text": "take increased damage from fire.",
+        "text": "take increased damage from fire",
         "color": "#aa0000"
       },
-      "\nAside from a helmet, you ",
+      ".\nAside from a helmet, you ",
       {
-        "text": "cannot wear normal armour.",
+        "text": "cannot wear normal armour",
         "color": "#aa0000"
       },
-      "\nVillage ",
+      ".\nVillage ",
       {
         "text": "Iron Golems",
         "color": "#aa0000"
@@ -5828,45 +5217,45 @@
       },
       " to charge and release to fire a Web Bullet. Different effects occur based on charge level:\nWhen hitting the side or bottom of a block, a non-sticky bridge web structure extends downward from the point of impact, which can be climbed.\nWhen hitting the top of a block, a tower bridge web structure can be generated upward.\nWhen hitting a creature, you can inflict ",
       {
-        "text": "Slowness,",
+        "text": "Slowness",
         "color": "#ff55ff"
       },
-      " ",
+      ", ",
       {
         "text": "Weakness",
         "color": "#ff55ff"
       },
-      " and ",
+      " and \"",
       {
-        "text": "\"Entangled\":",
+        "text": "Entangled",
         "color": "#ff55ff"
       },
-      " as ",
+      "\": as \"",
       {
-        "text": "\"Entangled\"",
+        "text": "Entangled",
         "color": "#ff55ff"
       },
-      " continues to accumulate, it will eventually become ",
+      "\" continues to accumulate, it will eventually become \"",
       {
-        "text": "\"Cocooning\",",
+        "text": "Cocooning",
         "color": "#ff55ff"
       },
-      " making it unable to move.\nMelee attacks against ",
+      "\", making it unable to move.\nMelee attacks against \"",
       {
-        "text": "\"Cocooning\"",
+        "text": "Cocooning",
         "color": "#ff55ff"
       },
-      " creatures fill some web value; creatures that die under the \"Cocooning\" effect may drop Nutrient Sacs.\nHold the secondary active power key to charge and release to generate a horizontal silk bridge. Its length and width vary based on charge level.\n\nYou possess an extra pair of arms. By equipping different special items in the ",
+      "\" creatures fill some web value; creatures that die under the \"Cocooning\" effect may drop Nutrient Sacs.\nHold the secondary active power key to charge and release to generate a horizontal silk bridge. Its length and width vary based on charge level.\n\nYou possess an extra pair of arms. By equipping different special items in the ",
       {
         "text": "Trinkets",
         "color": "#55ff55"
       },
       " extra ",
       {
-        "text": "hand slot,",
+        "text": "hand slot",
         "color": "#ffaa00"
       },
-      " you can gain various beneficial effects.\nYou can eat string to replenish web value. By holding string in your inventory and right-clicking another string, you can craft cobwebs.\nBy holding a cobweb in your inventory and right-clicking a composter, you can create a Nutrient Dissolve Cocoon - Meat placed inside will be gradually converted into Nutrient Sacs that you can consume.\nYour fully transformed multi-legged spider body grants you night vision, immunity to poison, and the ability to step up one block of height. It also grants you the ability to freely climb the sides of blocks.\nYou are unhindered by cobwebs. You can climb cobwebs and sense entities caught within them.\nSpiders do not see you as an enemy."
+      ", you can gain various beneficial effects.\nYou can eat string to replenish web value. By holding string in your inventory and right-clicking another string, you can craft cobwebs.\nBy holding a cobweb in your inventory and right-clicking a composter, you can create a Nutrient Dissolve Cocoon - Meat placed inside will be gradually converted into Nutrient Sacs that you can consume.\nYour fully transformed multi-legged spider body grants you night vision, immunity to poison, and the ability to step up one block of height. It also grants you the ability to freely climb the sides of blocks.\nYou are unhindered by cobwebs. You can climb cobwebs and sense entities caught within them.\nSpiders do not see you as an enemy."
     ]
   },
   "codex.form.shape-shifter-curse.spider_3.title": [
@@ -5909,31 +5298,17 @@
     "You feel magic stirring within. The Cursed Moon will rise next night...\n"
   ],
   "codex.status.infected": [
+    "For unknown reasons, you're overwhelmed by sudden ",
     {
-      "text": "",
-      "extra": [
-        "For unknown reasons, you're overwhelmed by sudden ",
-        {
-          "text": "drowsiness",
-          "color": "#0096FF"
-        },
-        ","
-      ]
+      "text": "drowsiness",
+      "color": "#0096FF"
     },
-    "",
+    ", while sensing magical changes within\nPerhaps you should ",
     {
-      "text": "",
-      "extra": [
-        " while sensing magical changes within\nPerhaps you should ",
-        {
-          "text": "sleep",
-          "color": "yellow"
-        },
-        "?"
-      ]
+      "text": "sleep",
+      "color": "yellow"
     },
-    "",
-    "\n"
+    "?\n"
   ],
   "codex.status.normal": [
     "Currently, you feel nothing unusual\n"
@@ -5991,126 +5366,69 @@
     "Amethyst Shards! They'll be important"
   ],
   "effect.shape-shifter-curse.to_anubis_wolf_0_effect": [
+    "... Strange ",
     {
-      "text": "",
-      "extra": [
-        "... Strange ",
-        {
-          "text": "jackal",
-          "color": "#0096FF"
-        }
-      ]
+      "text": "jackal wraith",
+      "color": "#0096FF"
     },
-    {
-      "text": "",
-      "extra": [
-        {
-          "text": " wraith",
-          "color": "#0096FF"
-        },
-        "?"
-      ]
-    },
-    ""
+    "?"
   ],
   "effect.shape-shifter-curse.to_anubis_wolf_0_potion": [
     "Dark wraith wandering inside it... It's a bit unusual"
   ],
   "effect.shape-shifter-curse.to_axolotl_0_effect": [
+    "... Strange ",
     {
-      "text": "",
-      "extra": [
-        "... Strange ",
-        {
-          "text": "axolotl",
-          "color": "#0096FF"
-        },
-        "?"
-      ]
+      "text": "axolotl",
+      "color": "#0096FF"
     },
-    "",
-    ""
+    "?"
   ],
   "effect.shape-shifter-curse.to_axolotl_0_potion": [
     "Better stay moist"
   ],
   "effect.shape-shifter-curse.to_bat_0_effect": [
+    "... Strange ",
     {
-      "text": "",
-      "extra": [
-        "... Strange ",
-        {
-          "text": "bat",
-          "color": "#0096FF"
-        },
-        "?"
-      ]
+      "text": "bat",
+      "color": "#0096FF"
     },
-    "",
-    ""
+    "?"
   ],
   "effect.shape-shifter-curse.to_bat_0_effect.description": [
+    "You suddenly feel extremely ",
     {
-      "text": "",
-      "extra": [
-        "You suddenly feel extremely ",
-        {
-          "text": "drowsy",
-          "color": "#0096FF"
-        },
-        ","
-      ]
+      "text": "drowsy",
+      "color": "#0096FF"
     },
-    "",
+    ", maybe you should ",
     {
-      "text": "",
-      "extra": [
-        " maybe you should ",
-        {
-          "text": "sleep",
-          "color": "yellow"
-        },
-        "?"
-      ]
+      "text": "sleep",
+      "color": "yellow"
     },
-    "",
-    ""
+    "?"
   ],
   "effect.shape-shifter-curse.to_bat_0_potion": [
     "Squeak!"
   ],
   "effect.shape-shifter-curse.to_custom_statue_effect": [
+    "... Strange ",
     {
-      "text": "",
-      "extra": [
-        "... Strange ",
-        {
-          "text": "Potion",
-          "color": "#0096FF"
-        },
-        "?"
-      ]
+      "text": "Potion",
+      "color": "#0096FF"
     },
-    "",
-    ""
+    "?"
   ],
   "effect.shape-shifter-curse.to_custom_statue_potion": [
     "Custom Form Curse"
   ],
   "effect.shape-shifter-curse.to_familiar_fox_0_effect": [
+    "Witch's ",
     {
-      "text": "",
-      "extra": [
-        "Witch's ",
-        {
-          "text": "potion",
-          "color": "#0096FF"
-        },
-        "...?"
-      ]
+      "text": "potion",
+      "color": "#0096FF"
     },
-    "",
-    ""
+    "...?"
   ],
   "effect.shape-shifter-curse.to_familiar_fox_0_potion": [
     "It has been altered... maybe use Gold Nuggets to purify it?"
@@ -6126,63 +5444,34 @@
     "Meow?"
   ],
   "effect.shape-shifter-curse.to_ocelot_0_effect": [
+    "... Strange ",
     {
-      "text": "",
-      "extra": [
-        "... Strange ",
-        {
-          "text": "ocelot",
-          "color": "#0096FF"
-        },
-        "?"
-      ]
+      "text": "ocelot",
+      "color": "#0096FF"
     },
-    "",
-    ""
+    "?"
   ],
   "effect.shape-shifter-curse.to_ocelot_0_potion": [
     "You'll want to stock up on raw meat"
   ],
   "effect.shape-shifter-curse.to_snow_fox_0_effect": [
+    "Purified ",
     {
-      "text": "",
-      "extra": [
-        "Purified ",
-        {
-          "text": "Witch's",
-          "color": "#0096FF"
-        }
-      ]
+      "text": "Witch's potion",
+      "color": "#0096FF"
     },
-    {
-      "text": "",
-      "extra": [
-        {
-          "text": " potion",
-          "color": "#0096FF"
-        },
-        "...?"
-      ]
-    },
-    ""
+    "...?"
   ],
   "effect.shape-shifter-curse.to_snow_fox_0_potion": [
     "After purification, you feel it's slightly cold to the touch"
   ],
   "effect.shape-shifter-curse.to_spider_0_effect": [
+    "... Strange ",
     {
-      "text": "",
-      "extra": [
-        "... Strange ",
-        {
-          "text": "spider",
-          "color": "#0096FF"
-        },
-        "?"
-      ]
+      "text": "spider",
+      "color": "#0096FF"
     },
-    "",
-    ""
+    "?"
   ],
   "effect.shape-shifter-curse.to_spider_0_potion": [
     "It has a soft silk texture"
@@ -6344,18 +5633,9 @@
     "Your current form is so thoroughly altered that normal catalysts don't have any effect..."
   ],
   "info.shape-shifter-curse.max_form_used_cure": [
+    "Golden magic has no effect on your current form... Only some ",
     {
-      "text": "",
-      "extra": [
-        "Golden magic has no effect on your current form... Only some ",
-        {
-          "text": "greater",
-          "color": "#ed721d"
-        }
-      ]
-    },
-    {
-      "text": " influence",
+      "text": "greater influence",
       "color": "#ed721d"
     },
     " might reverse it"
@@ -7025,17 +6305,23 @@
   "power.shape-shifter-curse.perks.axolotl_dry_tolerance.description": {
     "text": "",
     "extra": [
-      "Your body's tolerance has improved, allowing you to maintain your condition better when slightly dehydrated\n[While ",
+      {
+        "text": "Your body's tolerance has improved, allowing you to maintain your condition better when slightly dehydrated\n[While "
+      },
       {
         "text": "moisture is above 4 bars",
         "color": "#5555ff"
       },
-      ", your ",
+      {
+        "text": ", your "
+      },
       {
         "text": "maximum health will not decrease as your moisture drops",
         "color": "#5555ff"
       },
-      "]"
+      {
+        "text": "]"
+      }
     ]
   },
   "power.shape-shifter-curse.perks.axolotl_dry_tolerance.name": [
@@ -7045,22 +6331,30 @@
     {
       "text": "",
       "extra": [
-        "You have mastered the art of stealing moisture from enemies with precise attacks\n\n[",
+        {
+          "text": "You have mastered the art of stealing moisture from enemies with precise attacks\n\n["
+        },
         {
           "text": "Critical hits",
           "color": "#5555ff"
         },
-        " that deal ",
+        {
+          "text": " that deal "
+        },
         {
           "text": "more than 7 points of",
           "color": "#5555ff"
         },
-        " actual damage to an enemy can ",
+        {
+          "text": " actual damage to an enemy can "
+        },
         {
           "text": "restore a small amount of moisture",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7071,17 +6365,23 @@
     {
       "text": "",
       "extra": [
-        "In a dry state, your ability to steal moisture from enemies is enhanced\n[When moisture is ",
+        {
+          "text": "In a dry state, your ability to steal moisture from enemies is enhanced\n[When moisture is "
+        },
         {
           "text": "below 5 bars",
           "color": "#5555ff"
         },
-        ", the efficiency of moisture restored by critical hits is ",
+        {
+          "text": ", the efficiency of moisture restored by critical hits is "
+        },
         {
           "text": "greatly increased",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7092,17 +6392,23 @@
     {
       "text": "",
       "extra": [
-        "Your understanding of water magic has deepened, allowing you to use the power of water currents more efficiently\n[While ",
+        {
+          "text": "Your understanding of water magic has deepened, allowing you to use the power of water currents more efficiently\n[While "
+        },
         {
           "text": "sprint-jumping",
           "color": "#5555ff"
         },
-        " on land, the water propulsion's ",
+        {
+          "text": " on land, the water propulsion's "
+        },
         {
           "text": "moisture consumption is halved",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7113,35 +6419,50 @@
     {
       "text": "",
       "extra": [
-        "As your mastery of water magic grows, you have learned how to manipulate water currents to pull creatures to your side\n",
         {
-          "text": "[Hold active skill key 2",
+          "text": "As your mastery of water magic grows, you have learned how to manipulate water currents to pull creatures to your side\n["
+        },
+        {
+          "text": "Hold active skill key 2",
           "color": "#5555ff"
         },
-        " to spend ",
+        {
+          "text": " to spend "
+        },
         {
           "text": "5 moisture",
           "color": "#5555ff"
         },
-        " and mark ",
         {
-          "text": "a creature your cursor is pointing at within 10 blocks;",
+          "text": " and mark "
+        },
+        {
+          "text": "a creature your cursor is pointing at within 10 blocks",
           "color": "#5555ff"
         },
-        " release to ",
+        {
+          "text": "; release to "
+        },
         {
           "text": "pull it towards you and launch it upward",
           "color": "#5555ff"
         },
-        " while applying ",
         {
-          "text": "Slow Falling for 5 seconds.",
+          "text": " while applying "
+        },
+        {
+          "text": "Slow Falling for 5 seconds",
           "color": "#5555ff"
         },
-        " Cooldown: ",
         {
-          "text": "5 seconds]",
+          "text": ". Cooldown: "
+        },
+        {
+          "text": "5 seconds",
           "color": "#5555ff"
+        },
+        {
+          "text": "]"
         }
       ]
     }
@@ -7153,12 +6474,16 @@
     {
       "text": "",
       "extra": [
-        "When walking on vegetation, you can clearly sense the flow of water within plants and put it to use\n[When moving on vegetation blocks such as grass blocks, mycelium, podzol and moss, your ",
+        {
+          "text": "When walking on vegetation, you can clearly sense the flow of water within plants and put it to use\n[When moving on vegetation blocks such as grass blocks, mycelium, podzol and moss, your "
+        },
         {
           "text": "walking speed is somewhat increased",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7168,22 +6493,30 @@
   "power.shape-shifter-curse.perks.axolotl_water_magic_efficiency.description": {
     "text": "",
     "extra": [
-      "Your understanding of water magic has deepened further, allowing you to use the power of water currents more efficiently\n[The moisture cost of ",
+      {
+        "text": "Your understanding of water magic has deepened further, allowing you to use the power of water currents more efficiently\n[The moisture cost of "
+      },
       {
         "text": "wave-riding knockback",
         "color": "#5555ff"
       },
-      " and ",
+      {
+        "text": " and "
+      },
       {
         "text": "water explosions",
         "color": "#5555ff"
       },
-      " is ",
+      {
+        "text": " is "
+      },
       {
         "text": "halved",
         "color": "#5555ff"
       },
-      "]"
+      {
+        "text": "]"
+      }
     ]
   },
   "power.shape-shifter-curse.perks.axolotl_water_magic_efficiency.name": [
@@ -7193,17 +6526,23 @@
     {
       "text": "",
       "extra": [
-        "By precisely manipulating water currents, you can efficiently slide yourself forward\n[The ongoing moisture cost of ",
+        {
+          "text": "By precisely manipulating water currents, you can efficiently slide yourself forward\n[The ongoing moisture cost of "
+        },
         {
           "text": "wave riding",
           "color": "#5555ff"
         },
-        " is ",
+        {
+          "text": " is "
+        },
         {
           "text": "halved",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7220,27 +6559,37 @@
     {
       "text": "",
       "extra": [
-        "When the strength of your forepaws is enough to throw an arrow straight like a dart, who needs a bow or crossbow?\n[While your ",
+        {
+          "text": "When the strength of your forepaws is enough to throw an arrow straight like a dart, who needs a bow or crossbow?\n[While your "
+        },
         {
           "text": "main hand",
           "color": "#5555ff"
         },
-        " holds an ",
+        {
+          "text": " holds an "
+        },
         {
           "text": "arrow or tipped arrow",
           "color": "#5555ff"
         },
-        ", you can right-click to throw it at ",
+        {
+          "text": ", you can right-click to throw it at "
+        },
         {
           "text": "maximum speed",
           "color": "#5555ff"
         },
-        ". ",
+        {
+          "text": ". "
+        },
         {
           "text": "Cooldown: 1 second",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7251,27 +6600,37 @@
     {
       "text": "",
       "extra": [
-        "By attuning your soul with your current form, you have mastered the chiropteran ability to locate targets through echolocation\n[Press ",
+        {
+          "text": "By attuning your soul with your current form, you have mastered the chiropteran ability to locate targets through echolocation\n[Press "
+        },
         {
           "text": "active skill key 2",
           "color": "#5555ff"
         },
-        ", and you can see entities through walls within ",
+        {
+          "text": ", and you can see entities through walls within "
+        },
         {
           "text": "16 blocks for 12 seconds",
           "color": "#5555ff"
         },
-        "; if the entity is an enemy, you also inflict ",
+        {
+          "text": "; if the entity is an enemy, you also inflict "
+        },
         {
           "text": "the Weakness I effect",
           "color": "#5555ff"
         },
-        ". Cooldown: ",
+        {
+          "text": ". Cooldown: "
+        },
         {
           "text": "20 seconds",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7288,12 +6647,16 @@
     {
       "text": "",
       "extra": [
-        "You have become more accustomed to your current near-quadrupedal stance, allowing you to move more efficiently\n[While moving on the ground, your ",
+        {
+          "text": "You have become more accustomed to your current near-quadrupedal stance, allowing you to move more efficiently\n[While moving on the ground, your "
+        },
         {
           "text": "speed is slightly increased",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7304,10 +6667,15 @@
     {
       "text": "",
       "extra": [
-        "Your body has memorised how to move efficiently in a near-quadrupedal stance\n[While moving on the ground, your speed ",
         {
-          "text": "is further increased]",
+          "text": "Your body has memorised how to move efficiently in a near-quadrupedal stance\n[While moving on the ground, your speed "
+        },
+        {
+          "text": "is further increased",
           "color": "#5555ff"
+        },
+        {
+          "text": "]"
         }
       ]
     }
@@ -7319,12 +6687,16 @@
     {
       "text": "",
       "extra": [
-        "By attuning your soul with your current body, you have partially mastered how to retain your strength under the sun's burning light\n[Now, in sunlight, you can still gain ",
+        {
+          "text": "By attuning your soul with your current body, you have partially mastered how to retain your strength under the sun's burning light\n[Now, in sunlight, you can still gain "
+        },
         {
           "text": "half of the unarmed damage bonus",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7335,12 +6707,16 @@
     {
       "text": "",
       "extra": [
-        "By attuning your soul with your current body, you have fully mastered how to retain your strength under the sun's burning light\n[Even in sunlight, you can still gain ",
+        {
+          "text": "By attuning your soul with your current body, you have fully mastered how to retain your strength under the sun's burning light\n[Even in sunlight, you can still gain "
+        },
         {
           "text": "the full unarmed damage bonus",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7351,32 +6727,44 @@
     {
       "text": "",
       "extra": [
-        "The flight techniques of chiropterans are engraved in your soul, allowing you to use your membrane wings to propel yourself forward during high-speed flight\n[During ",
+        {
+          "text": "The flight techniques of chiropterans are engraved in your soul, allowing you to use your membrane wings to propel yourself forward during high-speed flight\n[During "
+        },
         {
           "text": "elytra flight",
           "color": "#5555ff"
         },
-        ", press ",
+        {
+          "text": ", press "
+        },
         {
           "text": "active skill 1",
           "color": "#5555ff"
         },
-        " to ",
+        {
+          "text": " to "
+        },
         {
           "text": "consume a small amount of hunger",
           "color": "#5555ff"
         },
-        " and propel yourself ",
+        {
+          "text": " and propel yourself "
+        },
         {
           "text": "forward",
           "color": "#5555ff"
         },
-        ". ",
+        {
+          "text": ". "
+        },
         {
           "text": "Cooldown: 2 seconds",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7387,22 +6775,30 @@
     {
       "text": "",
       "extra": [
-        "As your soul attunement deepens, you have understood how to use your own mana to protect against part of the projectile damage\n[While ",
+        {
+          "text": "As your soul attunement deepens, you have understood how to use your own mana to protect against part of the projectile damage\n[While "
+        },
         {
           "text": "not blocking",
           "color": "#5555ff"
         },
-        ", the ",
+        {
+          "text": ", the "
+        },
         {
           "text": "projectile damage you take is halved",
           "color": "#5555ff"
         },
-        ". This process consumes ",
+        {
+          "text": ". This process consumes "
+        },
         {
           "text": "5 mana",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7413,12 +6809,16 @@
     {
       "text": "",
       "extra": [
-        "By adjusting the mana circulation within your body, you can store more mana\n[Your base ",
+        {
+          "text": "By adjusting the mana circulation within your body, you can store more mana\n[Your base "
+        },
         {
           "text": "maximum mana is increased to 125",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7429,12 +6829,16 @@
     {
       "text": "",
       "extra": [
-        "By adjusting the mana circulation within your body, you can store even more mana\n[Your base ",
+        {
+          "text": "By adjusting the mana circulation within your body, you can store even more mana\n[Your base "
+        },
         {
           "text": "maximum mana is increased to 150",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7445,12 +6849,16 @@
     {
       "text": "",
       "extra": [
-        "You have understood how to precisely manipulate the mana network on your body's surface, letting some beneficial effects selectively pass through\n[Now, the status effects of ",
+        {
+          "text": "You have understood how to precisely manipulate the mana network on your body's surface, letting some beneficial effects selectively pass through\n[Now, the status effects of "
+        },
         {
           "text": "Speed, Haste and Invisibility",
           "color": "#5555ff"
         },
-        " can take effect on you]"
+        {
+          "text": " can take effect on you]"
+        }
       ]
     }
   ],
@@ -7461,12 +6869,16 @@
     {
       "text": "",
       "extra": [
-        "Your control over the mana network on your body's surface has grown more skilled, letting more beneficial effects pass through\n[On top of level I, the status effects of ",
+        {
+          "text": "Your control over the mana network on your body's surface has grown more skilled, letting more beneficial effects pass through\n[On top of level I, the status effects of "
+        },
         {
           "text": "Strength, Water Breathing and Night Vision",
           "color": "#5555ff"
         },
-        " can also take effect on you]"
+        {
+          "text": " can also take effect on you]"
+        }
       ]
     }
   ],
@@ -7477,37 +6889,51 @@
     {
       "text": "",
       "extra": [
-        "Potions are not the only vessel for mana. Through understanding and mastery of your own mana, you have invented a more convenient way to store and use mana effects\n[In your inventory, ",
+        {
+          "text": "Potions are not the only vessel for mana. Through understanding and mastery of your own mana, you have invented a more convenient way to store and use mana effects\n[In your inventory, "
+        },
         {
           "text": "pick up paper",
           "color": "#5555ff"
         },
-        ", and ",
+        {
+          "text": ", and "
+        },
         {
           "text": "right-click the corresponding ingredient",
           "color": "#5555ff"
         },
-        " to spend ",
+        {
+          "text": " to spend "
+        },
         {
           "text": "5 mana",
           "color": "#5555ff"
         },
-        " and craft the corresponding ",
+        {
+          "text": " and craft the corresponding "
+        },
         {
           "text": "powerful Healing, Harming and Poison ",
           "color": "#5555ff"
         },
-        "potion ",
+        {
+          "text": "potion "
+        },
         {
           "text": "charms",
           "color": "#5555ff"
         },
-        ". Right-click to launch the potion charm as a projectile. These charms can only be used by ",
+        {
+          "text": ". Right-click to launch the potion charm as a projectile. These charms can only be used by "
+        },
         {
           "text": "your own kind",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7523,27 +6949,37 @@
   "power.shape-shifter-curse.perks.familiar_fox_return_shield.description": {
     "text": "",
     "extra": [
-      "As your attunement deepens, you have understood how to attach the magic of fire to your shield\n[While ",
+      {
+        "text": "As your attunement deepens, you have understood how to attach the magic of fire to your shield\n[While "
+      },
       {
         "text": "sneaking with your shield raised",
         "color": "#5555ff"
       },
-      " and successfully ",
+      {
+        "text": " and successfully "
+      },
       {
         "text": "blocking a projectile",
         "color": "#5555ff"
       },
-      ", spend ",
+      {
+        "text": ", spend "
+      },
       {
         "text": "5 mana",
         "color": "#5555ff"
       },
-      " to fire ",
+      {
+        "text": " to fire "
+      },
       {
         "text": "a small fireball",
         "color": "#5555ff"
       },
-      " back at the attacker]"
+      {
+        "text": " back at the attacker]"
+      }
     ]
   },
   "power.shape-shifter-curse.perks.familiar_fox_return_shield.name": [
@@ -7553,22 +6989,30 @@
     {
       "text": "",
       "extra": [
-        "The flow of mana is not one-way. As your understanding of absorption deepens further, you can extend it to more situations\n[Whether through ",
+        {
+          "text": "The flow of mana is not one-way. As your understanding of absorption deepens further, you can extend it to more situations\n[Whether through "
+        },
         {
           "text": "melee, ranged or magic attacks",
           "color": "#5555ff"
         },
-        ", each time you ",
+        {
+          "text": ", each time you "
+        },
         {
           "text": "successfully hit",
           "color": "#5555ff"
         },
-        " an enemy, it will ",
+        {
+          "text": " an enemy, it will "
+        },
         {
           "text": "restore 2 mana",
           "color": "#5555ff"
         },
-        " for you]"
+        {
+          "text": " for you]"
+        }
       ]
     }
   ],
@@ -7579,22 +7023,30 @@
     {
       "text": "",
       "extra": [
-        "You can more clearly sense the life force overflowing from enemies when they are struck, and capture it for your own use\n[Whether through ",
+        {
+          "text": "You can more clearly sense the life force overflowing from enemies when they are struck, and capture it for your own use\n[Whether through "
+        },
         {
           "text": "melee, ranged or magic attacks",
           "color": "#5555ff"
         },
-        ", each time you ",
+        {
+          "text": ", each time you "
+        },
         {
           "text": "successfully hit",
           "color": "#5555ff"
         },
-        " an enemy, it will restore ",
+        {
+          "text": " an enemy, it will restore "
+        },
         {
           "text": "4 mana",
           "color": "#5555ff"
         },
-        " for you]"
+        {
+          "text": " for you]"
+        }
       ]
     }
   ],
@@ -7611,17 +7063,23 @@
     {
       "text": "",
       "extra": [
-        "Lie in wait, aim for the weak point, and strike true in one blow\n[While sneaking, hitting an enemy with a melee attack ",
+        {
+          "text": "Lie in wait, aim for the weak point, and strike true in one blow\n[While sneaking, hitting an enemy with a melee attack "
+        },
         {
           "text": "deals 6 extra damage",
           "color": "#5555ff"
         },
-        ". This process consumes ",
+        {
+          "text": ". This process consumes "
+        },
         {
           "text": "1 hunger point",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7632,10 +7090,15 @@
     {
       "text": "",
       "extra": [
-        "By attuning with your current form, your body has been strengthened\n[Gain a total of ",
         {
-          "text": "4 additional armour points]",
+          "text": "By attuning with your current form, your body has been strengthened\n[Gain a total of "
+        },
+        {
+          "text": "4 additional armour points",
           "color": "#5555ff"
+        },
+        {
+          "text": "]"
         }
       ]
     }
@@ -7647,10 +7110,15 @@
     {
       "text": "",
       "extra": [
-        "By attuning with your current form, your body has become even more resilient\n[Gain a total of ",
         {
-          "text": "8 additional armour points]",
+          "text": "By attuning with your current form, your body has become even more resilient\n[Gain a total of "
+        },
+        {
+          "text": "8 additional armour points",
           "color": "#5555ff"
+        },
+        {
+          "text": "]"
         }
       ]
     }
@@ -7662,12 +7130,16 @@
     {
       "text": "",
       "extra": [
-        "You have learned how to bite your target while pouncing\n[When your pounce successfully deals damage, restore ",
+        {
+          "text": "You have learned how to bite your target while pouncing\n[When your pounce successfully deals damage, restore "
+        },
         {
           "text": "2 hunger points",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7684,27 +7156,37 @@
     {
       "text": "",
       "extra": [
-        "As your understanding of the form deepens, you have learned how to actively push your body's metabolism to its limit\n[Press ",
+        {
+          "text": "As your understanding of the form deepens, you have learned how to actively push your body's metabolism to its limit\n[Press "
+        },
         {
           "text": "active skill 1",
           "color": "#5555ff"
         },
-        " and spend ",
+        {
+          "text": " and spend "
+        },
         {
           "text": "8 hunger points",
           "color": "#5555ff"
         },
-        " to gain ",
+        {
+          "text": " to gain "
+        },
         {
           "text": "the effects of Absorption II and Speed I for 30 seconds, plus Strength I for 15 seconds",
           "color": "#5555ff"
         },
-        ". ",
+        {
+          "text": ". "
+        },
         {
           "text": "Cooldown: 15 seconds",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7715,12 +7197,16 @@
     {
       "text": "",
       "extra": [
-        "By attuning with your form, you can tame your body's high-speed metabolism\n[The hunger exhaustion that builds up over time due to your high-speed metabolism is ",
+        {
+          "text": "By attuning with your form, you can tame your body's high-speed metabolism\n[The hunger exhaustion that builds up over time due to your high-speed metabolism is "
+        },
         {
           "text": "halved",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7731,17 +7217,23 @@
     {
       "text": "",
       "extra": [
-        "As you adapt further to your current form, you can use your body's energy more efficiently\n[Your action hunger consumption multiplier is reduced from ",
+        {
+          "text": "As you adapt further to your current form, you can use your body's energy more efficiently\n[Your action hunger consumption multiplier is reduced from "
+        },
         {
           "text": "1.6 times",
           "color": "#5555ff"
         },
-        " to ",
+        {
+          "text": " to "
+        },
         {
           "text": "1.2 times",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7752,12 +7244,16 @@
     {
       "text": "",
       "extra": [
-        "Your body has become more agile, allowing you to make more nimble jumps\n[While airborne, you can perform ",
+        {
+          "text": "Your body has become more agile, allowing you to make more nimble jumps\n[While airborne, you can perform "
+        },
         {
           "text": "one extra midair jump",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7768,22 +7264,30 @@
     {
       "text": "",
       "extra": [
-        "By attuning with your frost magic, you can make your body actively absorb cold to recover itself\n[",
+        {
+          "text": "By attuning with your frost magic, you can make your body actively absorb cold to recover itself\n["
+        },
         {
           "text": "Immunity to freezing damage",
           "color": "#5555ff"
         },
-        "; besides that, while you are in ",
+        {
+          "text": "; besides that, while you are in "
+        },
         {
           "text": "Powder Snow",
           "color": "#5555ff"
         },
-        ", you ",
+        {
+          "text": ", you "
+        },
         {
           "text": "restore 2 health every 3 seconds",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7794,22 +7298,30 @@
     {
       "text": "",
       "extra": [
-        "Your efficiency at absorbing cold to recover yourself has improved further\n[While ",
+        {
+          "text": "Your efficiency at absorbing cold to recover yourself has improved further\n[While "
+        },
         {
           "text": "sneaking",
           "color": "#5555ff"
         },
-        " on ",
+        {
+          "text": " on "
+        },
         {
           "text": "snow blocks, ice, packed ice or frosted ice",
           "color": "#5555ff"
         },
-        ", you additionally ",
+        {
+          "text": ", you additionally "
+        },
         {
           "text": "restore 1 health every 3 seconds",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7832,12 +7344,16 @@
     {
       "text": "",
       "extra": [
-        "Your reactions have become more nimble, allowing you to reach further places\n[Block interaction reach is increased to ",
+        {
+          "text": "Your reactions have become more nimble, allowing you to reach further places\n[Block interaction reach is increased to "
+        },
         {
           "text": "1.5 times its original",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7848,57 +7364,79 @@
     {
       "text": "",
       "extra": [
-        "Your understanding of cold magic has deepened further. By releasing a burst of frost energy downward, you can briefly alter the surrounding environment\n[While airborne, press ",
+        {
+          "text": "Your understanding of cold magic has deepened further. By releasing a burst of frost energy downward, you can briefly alter the surrounding environment\n[While airborne, press "
+        },
         {
           "text": "active skill 1",
           "color": "#5555ff"
         },
-        " to spend ",
+        {
+          "text": " to spend "
+        },
         {
           "text": "2 hunger points",
           "color": "#5555ff"
         },
-        " and ",
+        {
+          "text": " and "
+        },
         {
           "text": "dive vertically",
           "color": "#5555ff"
         },
-        ", ",
+        {
+          "text": ", "
+        },
         {
           "text": "extinguishing fire",
           "color": "#5555ff"
         },
-        " and gaining ",
+        {
+          "text": " and gaining "
+        },
         {
           "text": "Frost Claw for 10 seconds",
           "color": "#5555ff"
         },
-        ". While diving, ",
+        {
+          "text": ". While diving, "
+        },
         {
           "text": "you take no fall damage",
           "color": "#5555ff"
         },
-        ". When descending ",
+        {
+          "text": ". When descending "
+        },
         {
           "text": "more than 4 blocks",
           "color": "#5555ff"
         },
-        ", you deal frost damage around the landing point. ",
+        {
+          "text": ", you deal frost damage around the landing point. "
+        },
         {
           "text": "Cooldown: 8 seconds",
           "color": "#5555ff"
         },
-        "]\n[",
+        {
+          "text": "]\n["
+        },
         {
           "text": "Frost Claw",
           "color": "#5555ff"
         },
-        ": a ",
+        {
+          "text": ": a "
+        },
         {
           "text": "temporary Frost Walker enchantment",
           "color": "#5555ff"
         },
-        " effect that also works in midair]"
+        {
+          "text": " effect that also works in midair]"
+        }
       ]
     }
   ],
@@ -7909,12 +7447,16 @@
     {
       "text": "",
       "extra": [
-        "When facing those enemies who twisted the original magic of your form, an urge for revenge ignites deep within your soul\n[Against illagers and witches, your ",
+        {
+          "text": "When facing those enemies who twisted the original magic of your form, an urge for revenge ignites deep within your soul\n[Against illagers and witches, your "
+        },
         {
           "text": "attack damage is increased by 30%",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7928,45 +7470,20 @@
     "Open the Book of the Shapeshifter"
   ],
   "screen.shape-shifter-curse.book_of_shape_shifter.start_content_text": [
-    "As you attempt to open the book, you feel strange magic flowing into your body through your fingertips with a faint tingling sensation, making you jerk your hand back instinctively\nCould",
+    "As you attempt to open the book, you feel strange magic flowing into your body through your fingertips with a faint tingling sensation, making you jerk your hand back instinctively\n",
+    "Could this be some kind of ",
     {
-      "text": "",
-      "extra": [
-        " this be some kind of ",
-        {
-          "text": "curse",
-          "color": "#0096FF"
-        },
-        "?"
-      ]
+      "text": "curse",
+      "color": "#0096FF"
     },
-    "",
-    " You're not sure\nHowever,",
+    "? You're not sure\n",
+    "However, you're certain that continuing to open this book will lead to ",
     {
-      "text": "",
-      "extra": [
-        " you're certain that continuing to open this book will lead to ",
-        {
-          "text": "unknown",
-          "color": "#0096FF"
-        }
-      ]
+      "text": "unknown consequences\n\n",
+      "color": "#0096FF"
     },
     {
-      "text": "",
-      "extra": [
-        {
-          "text": " consequences\n\n",
-          "color": "#0096FF"
-        },
-        {
-          "text": "Note:",
-          "color": "#ed721d"
-        }
-      ]
-    },
-    {
-      "text": "\nThis will activate the content of the Shape Shifter Curse mod\nThis mod may not be for everyone. Before proceeding, ensure you understand its themes and gameplay",
+      "text": "Note:\nThis will activate the content of the Shape Shifter Curse mod\nThis mod may not be for everyone. Before proceeding, ensure you understand its themes and gameplay",
       "color": "#ed721d"
     }
   ],
@@ -7974,12 +7491,16 @@
     {
       "text": "",
       "extra": [
-        "By fully merging your soul with the pack, the spirit wolves you summon can receive a portion of your power\n[When summoned, your spirit wolves gain ",
+        {
+          "text": "By fully merging your soul with the pack, the spirit wolves you summon can receive a portion of your power\n[When summoned, your spirit wolves gain "
+        },
         {
           "text": "Strength I for 30 seconds",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -7990,17 +7511,23 @@
     {
       "text": "",
       "extra": [
-        "You can more clearly feel the pack within your soul. The spirit wolves respond to your summons more quickly\n[The cooldown of your spirit wolf summons is ",
+        {
+          "text": "You can more clearly feel the pack within your soul. The spirit wolves respond to your summons more quickly\n[The cooldown of your spirit wolf summons is "
+        },
         {
           "text": "shortened to 21 seconds",
           "color": "#5555ff"
         },
-        "; when your spirit wolves die, they ",
+        {
+          "text": "; when your spirit wolves die, they "
+        },
         {
           "text": "restore 2 health",
           "color": "#5555ff"
         },
-        " for you]"
+        {
+          "text": " for you]"
+        }
       ]
     }
   ],
@@ -8011,12 +7538,16 @@
     {
       "text": "",
       "extra": [
-        "You can hear the voices of the pack within your soul more clearly. More spirit wolves will answer your summons\n[Your spirit wolves' ",
+        {
+          "text": "You can hear the voices of the pack within your soul more clearly. More spirit wolves will answer your summons\n[Your spirit wolves' "
+        },
         {
           "text": "summon cap is increased to 3",
           "color": "#5555ff"
         },
-        "; attacking enemies attempts to summon 3 spirit wolves]"
+        {
+          "text": "; attacking enemies attempts to summon 3 spirit wolves]"
+        }
       ]
     }
   ],
@@ -8027,27 +7558,37 @@
     {
       "text": "",
       "extra": [
-        "As your understanding of undead power deepens, you have mastered how to actively stimulate the soul power within your body\n[Press ",
+        {
+          "text": "As your understanding of undead power deepens, you have mastered how to actively stimulate the soul power within your body\n[Press "
+        },
         {
           "text": "skill key 1",
           "color": "#5555ff"
         },
-        ": you gain ",
+        {
+          "text": ": you gain "
+        },
         {
           "text": "Wither I for 10 seconds",
           "color": "#5555ff"
         },
-        ", and ignoring the current cap, ",
+        {
+          "text": ", and ignoring the current cap, "
+        },
         {
           "text": "summon one extra spirit wolf",
           "color": "#5555ff"
         },
-        ". Cooldown: ",
+        {
+          "text": ". Cooldown: "
+        },
         {
           "text": "30 seconds",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8058,27 +7599,37 @@
     {
       "text": "",
       "extra": [
-        "By attuning with the souls of the pack, you have mastered how to actively recall the spirit wolves you have released and calm the surging souls within your body\n[Press ",
+        {
+          "text": "By attuning with the souls of the pack, you have mastered how to actively recall the spirit wolves you have released and calm the surging souls within your body\n[Press "
+        },
         {
           "text": "active skill key 2",
           "color": "#5555ff"
         },
-        ": ",
+        {
+          "text": ": "
+        },
         {
           "text": "clear your own Wither",
           "color": "#5555ff"
         },
-        ", and clear all currently summoned ",
+        {
+          "text": ", and clear all currently summoned "
+        },
         {
           "text": "spirit wolves",
           "color": "#5555ff"
         },
-        ". Cooldown: ",
+        {
+          "text": ". Cooldown: "
+        },
         {
           "text": "10 seconds",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8089,22 +7640,30 @@
     {
       "text": "",
       "extra": [
-        "By focusing the undead power into a single point, you can break through the resistance that undead creatures have against your power\n[",
+        {
+          "text": "By focusing the undead power into a single point, you can break through the resistance that undead creatures have against your power\n["
+        },
         {
           "text": "Remove",
           "color": "#5555ff"
         },
-        " your ",
+        {
+          "text": " your "
+        },
         {
           "text": "damage penalty",
           "color": "#5555ff"
         },
-        " against ",
+        {
+          "text": " against "
+        },
         {
           "text": "undead creatures",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8115,17 +7674,23 @@
     {
       "text": "",
       "extra": [
-        "As you adapt to undead power, your tolerance for Wither has also increased\n[The ",
+        {
+          "text": "As you adapt to undead power, your tolerance for Wither has also increased\n[The "
+        },
         {
           "text": "Wither effect",
           "color": "#5555ff"
         },
-        "'s damage interval against you ",
+        {
+          "text": "'s damage interval against you "
+        },
         {
           "text": "becomes 1.5 times",
           "color": "#5555ff"
         },
-        ": 3 seconds at level I, 1.5 seconds at level II]"
+        {
+          "text": ": 3 seconds at level I, 1.5 seconds at level II]"
+        }
       ]
     }
   ],
@@ -8136,17 +7701,23 @@
     {
       "text": "",
       "extra": [
-        "As your mastery of undead power grows, your body's tolerance for the Wither effect has reached a higher level\n[The ",
+        {
+          "text": "As your mastery of undead power grows, your body's tolerance for the Wither effect has reached a higher level\n[The "
+        },
         {
           "text": "Wither effect",
           "color": "#5555ff"
         },
-        "'s damage interval against you ",
+        {
+          "text": "'s damage interval against you "
+        },
         {
           "text": "doubles",
           "color": "#5555ff"
         },
-        ": 4 seconds at level I, 2 seconds at level II]"
+        {
+          "text": ": 4 seconds at level I, 2 seconds at level II]"
+        }
       ]
     }
   ],
@@ -8163,17 +7734,23 @@
     {
       "text": "",
       "extra": [
-        "---1.3 Not every ecological environment is suitable for the host's survival. The environmental protection system is a basic function of the nano swarm---\n[The duration of ",
+        {
+          "text": "---1.3 Not every ecological environment is suitable for the host's survival. The environmental protection system is a basic function of the nano swarm---\n[The duration of "
+        },
         {
           "text": "Slowness II",
           "color": "#5555ff"
         },
-        " caused by entering water is ",
+        {
+          "text": " caused by entering water is "
+        },
         {
           "text": "shortened to 1 second",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8184,17 +7761,23 @@
     {
       "text": "",
       "extra": [
-        "---1.4 The environmental protection system will do its best to keep the host comfortable and in good condition. This also greatly benefits mission success---\n[In ",
+        {
+          "text": "---1.4 The environmental protection system will do its best to keep the host comfortable and in good condition. This also greatly benefits mission success---\n[In "
+        },
         {
           "text": "hot environments",
           "color": "#5555ff"
         },
-        ", your ",
+        {
+          "text": ", your "
+        },
         {
           "text": "maximum health will no longer be reduced",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8205,17 +7788,23 @@
     {
       "text": "",
       "extra": [
-        "---2.2 The materials are broken down to form a temporary coating on your body's surface, temporarily improving your adaptation to harsh environments---\n[You can right-click to use ",
+        {
+          "text": "---2.2 The materials are broken down to form a temporary coating on your body's surface, temporarily improving your adaptation to harsh environments---\n[You can right-click to use "
+        },
         {
           "text": "an iron ingot",
           "color": "#5555ff"
         },
-        ", consume it and gain ",
+        {
+          "text": ", consume it and gain "
+        },
         {
           "text": "Absorption I and Resistance I for 60 seconds",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8226,17 +7815,23 @@
     {
       "text": "",
       "extra": [
-        "---2.3 Although it consumes more materials than expected, it can effectively improve the host's chances of survival---\n[You can right-click to use ",
+        {
+          "text": "---2.3 Although it consumes more materials than expected, it can effectively improve the host's chances of survival---\n[You can right-click to use "
+        },
         {
           "text": "a diamond",
           "color": "#5555ff"
         },
-        ", consume it and gain ",
+        {
+          "text": ", consume it and gain "
+        },
         {
           "text": "Absorption II and Resistance II for 60 seconds and Fire Resistance for 30 seconds",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8247,32 +7842,44 @@
     {
       "text": "",
       "extra": [
-        "---4.6 Under most circumstances, the host should use the issued equipment as much as possible, rather than abusing this emergency function---\n[In the inventory screen, pick up ",
+        {
+          "text": "---4.6 Under most circumstances, the host should use the issued equipment as much as possible, rather than abusing this emergency function---\n[In the inventory screen, pick up "
+        },
         {
           "text": "a coal block",
           "color": "#5555ff"
         },
-        " and move it onto ",
+        {
+          "text": " and move it onto "
+        },
         {
           "text": "a golden sword",
           "color": "#5555ff"
         },
-        ", then ",
+        {
+          "text": ", then "
+        },
         {
           "text": "right-click",
           "color": "#5555ff"
         },
-        " to craft a ",
+        {
+          "text": " to craft a "
+        },
         {
           "text": "Graphene Blade",
           "color": "#5555ff"
         },
-        ": a high-damage weapon with low durability. ",
+        {
+          "text": ": a high-damage weapon with low durability. "
+        },
         {
           "text": "Enchantments are not preserved",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8283,32 +7890,44 @@
     {
       "text": "",
       "extra": [
-        "---4.7 Equipment constructed by the nano swarm is only guaranteed to reach the minimum usable standard. To ensure mission success, the host should replace it as soon as possible when conditions allow---\n[In the inventory screen, pick up ",
+        {
+          "text": "---4.7 Equipment constructed by the nano swarm is only guaranteed to reach the minimum usable standard. To ensure mission success, the host should replace it as soon as possible when conditions allow---\n[In the inventory screen, pick up "
+        },
         {
           "text": "a diamond",
           "color": "#5555ff"
         },
-        " and move it onto ",
+        {
+          "text": " and move it onto "
+        },
         {
           "text": "a bow",
           "color": "#5555ff"
         },
-        ", then ",
+        {
+          "text": ", then "
+        },
         {
           "text": "right-click",
           "color": "#5555ff"
         },
-        " to craft a ",
+        {
+          "text": " to craft a "
+        },
         {
           "text": "Compound Kinetic Bow",
           "color": "#5555ff"
         },
-        ": higher durability, with base arrow damage increased by 25%. ",
+        {
+          "text": ": higher durability, with base arrow damage increased by 25%. "
+        },
         {
           "text": "Enchantments are not preserved",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8324,17 +7943,23 @@
   "ssc_perk.shape-shifter-curse.axolotl_dry_tolerance.desc": {
     "text": "",
     "extra": [
-      "Your body's tolerance has improved, allowing you to maintain your condition better when slightly dehydrated\n[While ",
+      {
+        "text": "Your body's tolerance has improved, allowing you to maintain your condition better when slightly dehydrated\n[While "
+      },
       {
         "text": "moisture is above 4 bars",
         "color": "#5555ff"
       },
-      ", your ",
+      {
+        "text": ", your "
+      },
       {
         "text": "maximum health will not decrease as your moisture drops",
         "color": "#5555ff"
       },
-      "]"
+      {
+        "text": "]"
+      }
     ]
   },
   "ssc_perk.shape-shifter-curse.axolotl_dry_tolerance.name": [
@@ -8344,22 +7969,30 @@
     {
       "text": "",
       "extra": [
-        "You have mastered the art of stealing moisture from enemies with precise attacks\n\n[",
+        {
+          "text": "You have mastered the art of stealing moisture from enemies with precise attacks\n\n["
+        },
         {
           "text": "Critical hits",
           "color": "#5555ff"
         },
-        " that deal ",
+        {
+          "text": " that deal "
+        },
         {
           "text": "more than 7 points of",
           "color": "#5555ff"
         },
-        " actual damage to an enemy can ",
+        {
+          "text": " actual damage to an enemy can "
+        },
         {
           "text": "restore a small amount of moisture",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8370,17 +8003,23 @@
     {
       "text": "",
       "extra": [
-        "In a dry state, your ability to steal moisture from enemies is enhanced\n[When moisture is ",
+        {
+          "text": "In a dry state, your ability to steal moisture from enemies is enhanced\n[When moisture is "
+        },
         {
           "text": "below 5 bars",
           "color": "#5555ff"
         },
-        ", the efficiency of moisture restored by critical hits is ",
+        {
+          "text": ", the efficiency of moisture restored by critical hits is "
+        },
         {
           "text": "greatly increased",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8391,17 +8030,23 @@
     {
       "text": "",
       "extra": [
-        "Your understanding of water magic has deepened, allowing you to use the power of water currents more efficiently\n[While ",
+        {
+          "text": "Your understanding of water magic has deepened, allowing you to use the power of water currents more efficiently\n[While "
+        },
         {
           "text": "sprint-jumping",
           "color": "#5555ff"
         },
-        " on land, the water propulsion's ",
+        {
+          "text": " on land, the water propulsion's "
+        },
         {
           "text": "moisture consumption is halved",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8412,35 +8057,50 @@
     {
       "text": "",
       "extra": [
-        "As your mastery of water magic grows, you have learned how to manipulate water currents to pull creatures to your side\n",
         {
-          "text": "[Hold active skill key 2",
+          "text": "As your mastery of water magic grows, you have learned how to manipulate water currents to pull creatures to your side\n["
+        },
+        {
+          "text": "Hold active skill key 2",
           "color": "#5555ff"
         },
-        " to spend ",
+        {
+          "text": " to spend "
+        },
         {
           "text": "5 moisture",
           "color": "#5555ff"
         },
-        " and mark ",
         {
-          "text": "a creature your cursor is pointing at within 10 blocks;",
+          "text": " and mark "
+        },
+        {
+          "text": "a creature your cursor is pointing at within 10 blocks",
           "color": "#5555ff"
         },
-        " release to ",
+        {
+          "text": "; release to "
+        },
         {
           "text": "pull it towards you and launch it upward",
           "color": "#5555ff"
         },
-        " while applying ",
         {
-          "text": "Slow Falling for 5 seconds.",
+          "text": " while applying "
+        },
+        {
+          "text": "Slow Falling for 5 seconds",
           "color": "#5555ff"
         },
-        " Cooldown: ",
         {
-          "text": "5 seconds]",
+          "text": ". Cooldown: "
+        },
+        {
+          "text": "5 seconds",
           "color": "#5555ff"
+        },
+        {
+          "text": "]"
         }
       ]
     }
@@ -8452,12 +8112,16 @@
     {
       "text": "",
       "extra": [
-        "When walking on vegetation, you can clearly sense the flow of water within plants and put it to use\n[When moving on vegetation blocks such as grass blocks, mycelium, podzol and moss, your ",
+        {
+          "text": "When walking on vegetation, you can clearly sense the flow of water within plants and put it to use\n[When moving on vegetation blocks such as grass blocks, mycelium, podzol and moss, your "
+        },
         {
           "text": "walking speed is somewhat increased",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8467,22 +8131,30 @@
   "ssc_perk.shape-shifter-curse.axolotl_water_magic_efficiency.desc": {
     "text": "",
     "extra": [
-      "Your understanding of water magic has deepened further, allowing you to use the power of water currents more efficiently\n[The moisture cost of ",
+      {
+        "text": "Your understanding of water magic has deepened further, allowing you to use the power of water currents more efficiently\n[The moisture cost of "
+      },
       {
         "text": "wave-riding knockback",
         "color": "#5555ff"
       },
-      " and ",
+      {
+        "text": " and "
+      },
       {
         "text": "water explosions",
         "color": "#5555ff"
       },
-      " is ",
+      {
+        "text": " is "
+      },
       {
         "text": "halved",
         "color": "#5555ff"
       },
-      "]"
+      {
+        "text": "]"
+      }
     ]
   },
   "ssc_perk.shape-shifter-curse.axolotl_water_magic_efficiency.name": [
@@ -8492,17 +8164,23 @@
     {
       "text": "",
       "extra": [
-        "By precisely manipulating water currents, you can efficiently slide yourself forward\n[The ongoing moisture cost of ",
+        {
+          "text": "By precisely manipulating water currents, you can efficiently slide yourself forward\n[The ongoing moisture cost of "
+        },
         {
           "text": "wave riding",
           "color": "#5555ff"
         },
-        " is ",
+        {
+          "text": " is "
+        },
         {
           "text": "halved",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8519,27 +8197,37 @@
     {
       "text": "",
       "extra": [
-        "When the strength of your forepaws is enough to throw an arrow straight like a dart, who needs a bow or crossbow?\n[While your ",
+        {
+          "text": "When the strength of your forepaws is enough to throw an arrow straight like a dart, who needs a bow or crossbow?\n[While your "
+        },
         {
           "text": "main hand",
           "color": "#5555ff"
         },
-        " holds an ",
+        {
+          "text": " holds an "
+        },
         {
           "text": "arrow or tipped arrow",
           "color": "#5555ff"
         },
-        ", you can right-click to throw it at ",
+        {
+          "text": ", you can right-click to throw it at "
+        },
         {
           "text": "maximum speed",
           "color": "#5555ff"
         },
-        ". ",
+        {
+          "text": ". "
+        },
         {
           "text": "Cooldown: 1 second",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8550,27 +8238,37 @@
     {
       "text": "",
       "extra": [
-        "By attuning your soul with your current form, you have mastered the chiropteran ability to locate targets through echolocation\n[Press ",
+        {
+          "text": "By attuning your soul with your current form, you have mastered the chiropteran ability to locate targets through echolocation\n[Press "
+        },
         {
           "text": "active skill key 2",
           "color": "#5555ff"
         },
-        ", and you can see entities through walls within ",
+        {
+          "text": ", and you can see entities through walls within "
+        },
         {
           "text": "16 blocks for 12 seconds",
           "color": "#5555ff"
         },
-        "; if the entity is an enemy, you also inflict ",
+        {
+          "text": "; if the entity is an enemy, you also inflict "
+        },
         {
           "text": "the Weakness I effect",
           "color": "#5555ff"
         },
-        ". Cooldown: ",
+        {
+          "text": ". Cooldown: "
+        },
         {
           "text": "20 seconds",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8587,12 +8285,16 @@
     {
       "text": "",
       "extra": [
-        "You have become more accustomed to your current near-quadrupedal stance, allowing you to move more efficiently\n[While moving on the ground, your ",
+        {
+          "text": "You have become more accustomed to your current near-quadrupedal stance, allowing you to move more efficiently\n[While moving on the ground, your "
+        },
         {
           "text": "speed is slightly increased",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8603,10 +8305,15 @@
     {
       "text": "",
       "extra": [
-        "Your body has memorised how to move efficiently in a near-quadrupedal stance\n[While moving on the ground, your speed ",
         {
-          "text": "is further increased]",
+          "text": "Your body has memorised how to move efficiently in a near-quadrupedal stance\n[While moving on the ground, your speed "
+        },
+        {
+          "text": "is further increased",
           "color": "#5555ff"
+        },
+        {
+          "text": "]"
         }
       ]
     }
@@ -8618,12 +8325,16 @@
     {
       "text": "",
       "extra": [
-        "By attuning your soul with your current body, you have partially mastered how to retain your strength under the sun's burning light\n[Now, in sunlight, you can still gain ",
+        {
+          "text": "By attuning your soul with your current body, you have partially mastered how to retain your strength under the sun's burning light\n[Now, in sunlight, you can still gain "
+        },
         {
           "text": "half of the unarmed damage bonus",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8634,12 +8345,16 @@
     {
       "text": "",
       "extra": [
-        "By attuning your soul with your current body, you have fully mastered how to retain your strength under the sun's burning light\n[Even in sunlight, you can still gain ",
+        {
+          "text": "By attuning your soul with your current body, you have fully mastered how to retain your strength under the sun's burning light\n[Even in sunlight, you can still gain "
+        },
         {
           "text": "the full unarmed damage bonus",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8650,32 +8365,44 @@
     {
       "text": "",
       "extra": [
-        "The flight techniques of chiropterans are engraved in your soul, allowing you to use your membrane wings to propel yourself forward during high-speed flight\n[During ",
+        {
+          "text": "The flight techniques of chiropterans are engraved in your soul, allowing you to use your membrane wings to propel yourself forward during high-speed flight\n[During "
+        },
         {
           "text": "elytra flight",
           "color": "#5555ff"
         },
-        ", press ",
+        {
+          "text": ", press "
+        },
         {
           "text": "active skill 1",
           "color": "#5555ff"
         },
-        " to ",
+        {
+          "text": " to "
+        },
         {
           "text": "consume a small amount of hunger",
           "color": "#5555ff"
         },
-        " and propel yourself ",
+        {
+          "text": " and propel yourself "
+        },
         {
           "text": "forward",
           "color": "#5555ff"
         },
-        ". ",
+        {
+          "text": ". "
+        },
         {
           "text": "Cooldown: 2 seconds",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8686,22 +8413,30 @@
     {
       "text": "",
       "extra": [
-        "As your soul attunement deepens, you have understood how to use your own mana to protect against part of the projectile damage\n[While ",
+        {
+          "text": "As your soul attunement deepens, you have understood how to use your own mana to protect against part of the projectile damage\n[While "
+        },
         {
           "text": "not blocking",
           "color": "#5555ff"
         },
-        ", the ",
+        {
+          "text": ", the "
+        },
         {
           "text": "projectile damage you take is halved",
           "color": "#5555ff"
         },
-        ". This process consumes ",
+        {
+          "text": ". This process consumes "
+        },
         {
           "text": "5 mana",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8712,12 +8447,16 @@
     {
       "text": "",
       "extra": [
-        "By adjusting the mana circulation within your body, you can store more mana\n[Your base ",
+        {
+          "text": "By adjusting the mana circulation within your body, you can store more mana\n[Your base "
+        },
         {
           "text": "maximum mana is increased to 125",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8728,12 +8467,16 @@
     {
       "text": "",
       "extra": [
-        "By adjusting the mana circulation within your body, you can store even more mana\n[Your base ",
+        {
+          "text": "By adjusting the mana circulation within your body, you can store even more mana\n[Your base "
+        },
         {
           "text": "maximum mana is increased to 150",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8744,12 +8487,16 @@
     {
       "text": "",
       "extra": [
-        "You have understood how to precisely manipulate the mana network on your body's surface, letting some beneficial effects selectively pass through\n[Now, the status effects of ",
+        {
+          "text": "You have understood how to precisely manipulate the mana network on your body's surface, letting some beneficial effects selectively pass through\n[Now, the status effects of "
+        },
         {
           "text": "Speed, Haste and Invisibility",
           "color": "#5555ff"
         },
-        " can take effect on you]"
+        {
+          "text": " can take effect on you]"
+        }
       ]
     }
   ],
@@ -8760,12 +8507,16 @@
     {
       "text": "",
       "extra": [
-        "Your control over the mana network on your body's surface has grown more skilled, letting more beneficial effects pass through\n[On top of level I, the status effects of ",
+        {
+          "text": "Your control over the mana network on your body's surface has grown more skilled, letting more beneficial effects pass through\n[On top of level I, the status effects of "
+        },
         {
           "text": "Strength, Water Breathing and Night Vision",
           "color": "#5555ff"
         },
-        " can also take effect on you]"
+        {
+          "text": " can also take effect on you]"
+        }
       ]
     }
   ],
@@ -8776,37 +8527,51 @@
     {
       "text": "",
       "extra": [
-        "Potions are not the only vessel for mana. Through understanding and mastery of your own mana, you have invented a more convenient way to store and use mana effects\n[In your inventory, ",
+        {
+          "text": "Potions are not the only vessel for mana. Through understanding and mastery of your own mana, you have invented a more convenient way to store and use mana effects\n[In your inventory, "
+        },
         {
           "text": "pick up paper",
           "color": "#5555ff"
         },
-        ", and ",
+        {
+          "text": ", and "
+        },
         {
           "text": "right-click the corresponding ingredient",
           "color": "#5555ff"
         },
-        " to spend ",
+        {
+          "text": " to spend "
+        },
         {
           "text": "5 mana",
           "color": "#5555ff"
         },
-        " and craft the corresponding ",
+        {
+          "text": " and craft the corresponding "
+        },
         {
           "text": "powerful Healing, Harming and Poison ",
           "color": "#5555ff"
         },
-        "potion ",
+        {
+          "text": "potion "
+        },
         {
           "text": "charms",
           "color": "#5555ff"
         },
-        ". Right-click to launch the potion charm as a projectile. These charms can only be used by ",
+        {
+          "text": ". Right-click to launch the potion charm as a projectile. These charms can only be used by "
+        },
         {
           "text": "your own kind",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8822,27 +8587,37 @@
   "ssc_perk.shape-shifter-curse.familiar_fox_return_shield.desc": {
     "text": "",
     "extra": [
-      "As your attunement deepens, you have understood how to attach the magic of fire to your shield\n[While ",
+      {
+        "text": "As your attunement deepens, you have understood how to attach the magic of fire to your shield\n[While "
+      },
       {
         "text": "sneaking with your shield raised",
         "color": "#5555ff"
       },
-      " and successfully ",
+      {
+        "text": " and successfully "
+      },
       {
         "text": "blocking a projectile",
         "color": "#5555ff"
       },
-      ", spend ",
+      {
+        "text": ", spend "
+      },
       {
         "text": "5 mana",
         "color": "#5555ff"
       },
-      " to fire ",
+      {
+        "text": " to fire "
+      },
       {
         "text": "a small fireball",
         "color": "#5555ff"
       },
-      " back at the attacker]"
+      {
+        "text": " back at the attacker]"
+      }
     ]
   },
   "ssc_perk.shape-shifter-curse.familiar_fox_return_shield.name": [
@@ -8852,22 +8627,30 @@
     {
       "text": "",
       "extra": [
-        "The flow of mana is not one-way. As your understanding of absorption deepens further, you can extend it to more situations\n[Whether through ",
+        {
+          "text": "The flow of mana is not one-way. As your understanding of absorption deepens further, you can extend it to more situations\n[Whether through "
+        },
         {
           "text": "melee, ranged or magic attacks",
           "color": "#5555ff"
         },
-        ", each time you ",
+        {
+          "text": ", each time you "
+        },
         {
           "text": "successfully hit",
           "color": "#5555ff"
         },
-        " an enemy, it will ",
+        {
+          "text": " an enemy, it will "
+        },
         {
           "text": "restore 2 mana",
           "color": "#5555ff"
         },
-        " for you]"
+        {
+          "text": " for you]"
+        }
       ]
     }
   ],
@@ -8878,22 +8661,30 @@
     {
       "text": "",
       "extra": [
-        "You can more clearly sense the life force overflowing from enemies when they are struck, and capture it for your own use\n[Whether through ",
+        {
+          "text": "You can more clearly sense the life force overflowing from enemies when they are struck, and capture it for your own use\n[Whether through "
+        },
         {
           "text": "melee, ranged or magic attacks",
           "color": "#5555ff"
         },
-        ", each time you ",
+        {
+          "text": ", each time you "
+        },
         {
           "text": "successfully hit",
           "color": "#5555ff"
         },
-        " an enemy, it will restore ",
+        {
+          "text": " an enemy, it will restore "
+        },
         {
           "text": "4 mana",
           "color": "#5555ff"
         },
-        " for you]"
+        {
+          "text": " for you]"
+        }
       ]
     }
   ],
@@ -8910,22 +8701,30 @@
     {
       "text": "",
       "extra": [
-        "By attuning your soul with your current form, you have mastered how to use your slender body to tangle with enemies\n[",
+        {
+          "text": "By attuning your soul with your current form, you have mastered how to use your slender body to tangle with enemies\n["
+        },
         {
           "text": "Non-critical",
           "color": "#5555ff"
         },
-        " ",
+        {
+          "text": " "
+        },
         {
           "text": "melee attacks deal 4 extra damage",
           "color": "#5555ff"
         },
-        "; your fired ",
+        {
+          "text": "; your fired "
+        },
         {
           "text": "arrows deal 3 less damage",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8936,10 +8735,15 @@
     {
       "text": "",
       "extra": [
-        "Your body is more agile. When leaping into the air, you can perform dazzling manoeuvres\n[Each time you leave the ground, you can perform ",
         {
-          "text": "two extra midair jumps]",
+          "text": "Your body is more agile. When leaping into the air, you can perform dazzling manoeuvres\n[Each time you leave the ground, you can perform "
+        },
+        {
+          "text": "two extra midair jumps",
           "color": "#5555ff"
+        },
+        {
+          "text": "]"
         }
       ]
     }
@@ -8951,17 +8755,23 @@
     {
       "text": "",
       "extra": [
-        "As you accept the more predatory nature of your current form, your metabolic system has also changed\n[Eating raw meat additionally restores ",
+        {
+          "text": "As you accept the more predatory nature of your current form, your metabolic system has also changed\n[Eating raw meat additionally restores "
+        },
         {
           "text": "4 hunger points and 5.6 saturation",
           "color": "#5555ff"
         },
-        ", and ",
+        {
+          "text": ", and "
+        },
         {
           "text": "you become immune to the Hunger effect",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8972,17 +8782,23 @@
     {
       "text": "",
       "extra": [
-        "Your sense of smell has become extremely keen. By concentrating, you can smell the location of potential prey around you\n[After ",
+        {
+          "text": "Your sense of smell has become extremely keen. By concentrating, you can smell the location of potential prey around you\n[After "
+        },
         {
           "text": "sneaking without moving for 3 seconds",
           "color": "#5555ff"
         },
-        ", you can ",
+        {
+          "text": ", you can "
+        },
         {
           "text": "see entities within 16 blocks through walls",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -8993,22 +8809,30 @@
     {
       "text": "",
       "extra": [
-        "Thanks to your slender new form, you can move in a more explosive way\n[While on the ground and with hunger above 6, you can use ",
+        {
+          "text": "Thanks to your slender new form, you can move in a more explosive way\n[While on the ground and with hunger above 6, you can use "
+        },
         {
           "text": "active skill key 1",
           "color": "#5555ff"
         },
-        " to ",
+        {
+          "text": " to "
+        },
         {
           "text": "dash forward",
           "color": "#5555ff"
         },
-        ", without consuming hunger. Cooldown: ",
+        {
+          "text": ", without consuming hunger. Cooldown: "
+        },
         {
           "text": "5 seconds",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9019,17 +8843,23 @@
     {
       "text": "",
       "extra": [
-        "You still retain the muscle memory of hunting targets with the help of gravity, and your nimble new body now brings this ability to its fullest\n[The upper limit of your falling critical hit's ",
+        {
+          "text": "You still retain the muscle memory of hunting targets with the help of gravity, and your nimble new body now brings this ability to its fullest\n[The upper limit of your falling critical hit's "
+        },
         {
           "text": "height damage multiplier",
           "color": "#5555ff"
         },
-        " is raised from ",
+        {
+          "text": " is raised from "
+        },
         {
           "text": "2 times to 3 times",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9040,17 +8870,23 @@
     {
       "text": "",
       "extra": [
-        "Lie in wait, aim for the weak point, and strike true in one blow\n[While sneaking, hitting an enemy with a melee attack ",
+        {
+          "text": "Lie in wait, aim for the weak point, and strike true in one blow\n[While sneaking, hitting an enemy with a melee attack "
+        },
         {
           "text": "deals 6 extra damage",
           "color": "#5555ff"
         },
-        ". This process consumes ",
+        {
+          "text": ". This process consumes "
+        },
         {
           "text": "1 hunger point",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9061,10 +8897,15 @@
     {
       "text": "",
       "extra": [
-        "By attuning with your current form, your body has been strengthened\n[Gain a total of ",
         {
-          "text": "4 additional armour points]",
+          "text": "By attuning with your current form, your body has been strengthened\n[Gain a total of "
+        },
+        {
+          "text": "4 additional armour points",
           "color": "#5555ff"
+        },
+        {
+          "text": "]"
         }
       ]
     }
@@ -9076,10 +8917,15 @@
     {
       "text": "",
       "extra": [
-        "By attuning with your current form, your body has become even more resilient\n[Gain a total of ",
         {
-          "text": "8 additional armour points]",
+          "text": "By attuning with your current form, your body has become even more resilient\n[Gain a total of "
+        },
+        {
+          "text": "8 additional armour points",
           "color": "#5555ff"
+        },
+        {
+          "text": "]"
         }
       ]
     }
@@ -9091,12 +8937,16 @@
     {
       "text": "",
       "extra": [
-        "You have learned how to bite your target while pouncing\n[When your pounce successfully deals damage, restore ",
+        {
+          "text": "You have learned how to bite your target while pouncing\n[When your pounce successfully deals damage, restore "
+        },
         {
           "text": "2 hunger points",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9113,27 +8963,37 @@
     {
       "text": "",
       "extra": [
-        "As your understanding of the form deepens, you have learned how to actively push your body's metabolism to its limit\n[Press ",
+        {
+          "text": "As your understanding of the form deepens, you have learned how to actively push your body's metabolism to its limit\n[Press "
+        },
         {
           "text": "active skill 1",
           "color": "#5555ff"
         },
-        " and spend ",
+        {
+          "text": " and spend "
+        },
         {
           "text": "8 hunger points",
           "color": "#5555ff"
         },
-        " to gain ",
+        {
+          "text": " to gain "
+        },
         {
           "text": "the effects of Absorption II and Speed I for 30 seconds, plus Strength I for 15 seconds",
           "color": "#5555ff"
         },
-        ". ",
+        {
+          "text": ". "
+        },
         {
           "text": "Cooldown: 15 seconds",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9144,12 +9004,16 @@
     {
       "text": "",
       "extra": [
-        "By attuning with your form, you can tame your body's high-speed metabolism\n[The hunger exhaustion that builds up over time due to your high-speed metabolism is ",
+        {
+          "text": "By attuning with your form, you can tame your body's high-speed metabolism\n[The hunger exhaustion that builds up over time due to your high-speed metabolism is "
+        },
         {
           "text": "halved",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9160,17 +9024,23 @@
     {
       "text": "",
       "extra": [
-        "As you adapt further to your current form, you can use your body's energy more efficiently\n[Your action hunger consumption multiplier is reduced from ",
+        {
+          "text": "As you adapt further to your current form, you can use your body's energy more efficiently\n[Your action hunger consumption multiplier is reduced from "
+        },
         {
           "text": "1.6 times",
           "color": "#5555ff"
         },
-        " to ",
+        {
+          "text": " to "
+        },
         {
           "text": "1.2 times",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9181,12 +9051,16 @@
     {
       "text": "",
       "extra": [
-        "Your body has become more agile, allowing you to make more nimble jumps\n[While airborne, you can perform ",
+        {
+          "text": "Your body has become more agile, allowing you to make more nimble jumps\n[While airborne, you can perform "
+        },
         {
           "text": "one extra midair jump",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9197,22 +9071,30 @@
     {
       "text": "",
       "extra": [
-        "By attuning with your frost magic, you can make your body actively absorb cold to recover itself\n[",
+        {
+          "text": "By attuning with your frost magic, you can make your body actively absorb cold to recover itself\n["
+        },
         {
           "text": "Immunity to freezing damage",
           "color": "#5555ff"
         },
-        "; besides that, while you are in ",
+        {
+          "text": "; besides that, while you are in "
+        },
         {
           "text": "Powder Snow",
           "color": "#5555ff"
         },
-        ", you ",
+        {
+          "text": ", you "
+        },
         {
           "text": "restore 2 health every 3 seconds",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9223,22 +9105,30 @@
     {
       "text": "",
       "extra": [
-        "Your efficiency at absorbing cold to recover yourself has improved further\n[While ",
+        {
+          "text": "Your efficiency at absorbing cold to recover yourself has improved further\n[While "
+        },
         {
           "text": "sneaking",
           "color": "#5555ff"
         },
-        " on ",
+        {
+          "text": " on "
+        },
         {
           "text": "snow blocks, ice, packed ice or frosted ice",
           "color": "#5555ff"
         },
-        ", you additionally ",
+        {
+          "text": ", you additionally "
+        },
         {
           "text": "restore 1 health every 3 seconds",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9261,12 +9151,16 @@
     {
       "text": "",
       "extra": [
-        "Your reactions have become more nimble, allowing you to reach further places\n[Block interaction reach is increased to ",
+        {
+          "text": "Your reactions have become more nimble, allowing you to reach further places\n[Block interaction reach is increased to "
+        },
         {
           "text": "1.5 times its original",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9277,12 +9171,16 @@
     {
       "text": "",
       "extra": [
-        "By actively controlling the frost magic within your body, you can improve your resistance to high temperatures\n[When near lava or campfires, you ",
+        {
+          "text": "By actively controlling the frost magic within your body, you can improve your resistance to high temperatures\n[When near lava or campfires, you "
+        },
         {
           "text": "no longer lose health due to your form's weakness",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9293,17 +9191,23 @@
     {
       "text": "",
       "extra": [
-        "By precisely releasing the frost magic within your body, you can better protect yourself in fire\n[Your burning damage ",
+        {
+          "text": "By precisely releasing the frost magic within your body, you can better protect yourself in fire\n[Your burning damage "
+        },
         {
           "text": "is no longer doubled",
           "color": "#5555ff"
         },
-        ", but it ",
+        {
+          "text": ", but it "
+        },
         {
           "text": "still will not extinguish naturally",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9314,57 +9218,79 @@
     {
       "text": "",
       "extra": [
-        "Your understanding of cold magic has deepened further. By releasing a burst of frost energy downward, you can briefly alter the surrounding environment\n[While airborne, press ",
+        {
+          "text": "Your understanding of cold magic has deepened further. By releasing a burst of frost energy downward, you can briefly alter the surrounding environment\n[While airborne, press "
+        },
         {
           "text": "active skill 1",
           "color": "#5555ff"
         },
-        " to spend ",
+        {
+          "text": " to spend "
+        },
         {
           "text": "2 hunger points",
           "color": "#5555ff"
         },
-        " and ",
+        {
+          "text": " and "
+        },
         {
           "text": "dive vertically",
           "color": "#5555ff"
         },
-        ", ",
+        {
+          "text": ", "
+        },
         {
           "text": "extinguishing fire",
           "color": "#5555ff"
         },
-        " and gaining ",
+        {
+          "text": " and gaining "
+        },
         {
           "text": "Frost Claw for 10 seconds",
           "color": "#5555ff"
         },
-        ". While diving, ",
+        {
+          "text": ". While diving, "
+        },
         {
           "text": "you take no fall damage",
           "color": "#5555ff"
         },
-        ". When descending ",
+        {
+          "text": ". When descending "
+        },
         {
           "text": "more than 4 blocks",
           "color": "#5555ff"
         },
-        ", you deal frost damage around the landing point. ",
+        {
+          "text": ", you deal frost damage around the landing point. "
+        },
         {
           "text": "Cooldown: 8 seconds",
           "color": "#5555ff"
         },
-        "]\n[",
+        {
+          "text": "]\n["
+        },
         {
           "text": "Frost Claw",
           "color": "#5555ff"
         },
-        ": a ",
+        {
+          "text": ": a "
+        },
         {
           "text": "temporary Frost Walker enchantment",
           "color": "#5555ff"
         },
-        " effect that also works in midair]"
+        {
+          "text": " effect that also works in midair]"
+        }
       ]
     }
   ],
@@ -9375,12 +9301,16 @@
     {
       "text": "",
       "extra": [
-        "When facing those enemies who twisted the original magic of your form, an urge for revenge ignites deep within your soul\n[Against illagers and witches, your ",
+        {
+          "text": "When facing those enemies who twisted the original magic of your form, an urge for revenge ignites deep within your soul\n[Against illagers and witches, your "
+        },
         {
           "text": "attack damage is increased by 30%",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9397,12 +9327,16 @@
     {
       "text": "",
       "extra": [
-        "As you grow more accustomed to your form, you can weave silk bridges for footholds more quickly\n[The three-tier charge time of your bridge-weaving ability is ",
+        {
+          "text": "As you grow more accustomed to your form, you can weave silk bridges for footholds more quickly\n[The three-tier charge time of your bridge-weaving ability is "
+        },
         {
           "text": "shortened to 14/28/42 ticks",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9413,15 +9347,22 @@
     {
       "text": "",
       "extra": [
-        "By optimising the liquid silk formula, you can put the prey inside the cocoon in an environment more suitable for digestion\n[The chance for creatures killed while affected by ",
+        {
+          "text": "By optimising the liquid silk formula, you can put the prey inside the cocoon in an environment more suitable for digestion\n[The chance for creatures killed while affected by "
+        },
         {
           "text": "Cocooning",
           "color": "#5555ff"
         },
-        " to drop Nutrient Sacs is increased to ",
         {
-          "text": "55%]",
+          "text": " to drop Nutrient Sacs is increased to "
+        },
+        {
+          "text": "55%",
           "color": "#5555ff"
+        },
+        {
+          "text": "]"
         }
       ]
     }
@@ -9433,17 +9374,23 @@
     {
       "text": "",
       "extra": [
-        "Through carefully blending the liquid silk formula, you can greatly improve the efficiency of digesting the prey inside the cocoon\n[The chance for creatures killed while affected by ",
+        {
+          "text": "Through carefully blending the liquid silk formula, you can greatly improve the efficiency of digesting the prey inside the cocoon\n[The chance for creatures killed while affected by "
+        },
         {
           "text": "Cocooning",
           "color": "#5555ff"
         },
-        " to drop Nutrient Sacs is increased to ",
+        {
+          "text": " to drop Nutrient Sacs is increased to "
+        },
         {
           "text": "65%",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9454,17 +9401,23 @@
     {
       "text": "",
       "extra": [
-        "As you grow more accustomed to supporting your body on four legs, you can move in a more natural way\n[Your movement speed penalty while walking and running is reduced from ",
+        {
+          "text": "As you grow more accustomed to supporting your body on four legs, you can move in a more natural way\n[Your movement speed penalty while walking and running is reduced from "
+        },
         {
           "text": "20%",
           "color": "#5555ff"
         },
-        " to ",
+        {
+          "text": " to "
+        },
         {
           "text": "10%",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9475,17 +9428,23 @@
     {
       "text": "",
       "extra": [
-        "By attuning further with your current form, your body recalls how to locate prey through web vibrations\n[While in or on a ",
+        {
+          "text": "By attuning further with your current form, your body recalls how to locate prey through web vibrations\n[While in or on a "
+        },
         {
           "text": "web bridge",
           "color": "#5555ff"
         },
-        ", you can ",
+        {
+          "text": ", you can "
+        },
         {
           "text": "see all living creatures within 32 blocks through walls",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9496,17 +9455,23 @@
     {
       "text": "",
       "extra": [
-        "The efficiency of your spinnerets at weaving silk has greatly increased, allowing you to compress web projectiles more quickly\n[The three-tier charge time of ",
+        {
+          "text": "The efficiency of your spinnerets at weaving silk has greatly increased, allowing you to compress web projectiles more quickly\n[The three-tier charge time of "
+        },
         {
           "text": "web projectiles",
           "color": "#5555ff"
         },
-        " is shortened to ",
+        {
+          "text": " is shortened to "
+        },
         {
           "text": "14/28/42 ticks",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9523,17 +9488,23 @@
     {
       "text": "",
       "extra": [
-        "The silk glands in your abdomen have been activated by the Tuner's energy, allowing you to produce liquid silk faster\n[Your ",
+        {
+          "text": "The silk glands in your abdomen have been activated by the Tuner's energy, allowing you to produce liquid silk faster\n[Your "
+        },
         {
           "text": "web value",
           "color": "#5555ff"
         },
-        " recovery rate is increased to ",
+        {
+          "text": " recovery rate is increased to "
+        },
         {
           "text": "0.35 per second",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9544,17 +9515,23 @@
     {
       "text": "",
       "extra": [
-        "The silk glands in your abdomen have been further strengthened by the Tuner's energy, allowing you to produce liquid silk faster\n[Your ",
+        {
+          "text": "The silk glands in your abdomen have been further strengthened by the Tuner's energy, allowing you to produce liquid silk faster\n[Your "
+        },
         {
           "text": "web value",
           "color": "#5555ff"
         },
-        " recovery rate is increased to ",
+        {
+          "text": " recovery rate is increased to "
+        },
         {
           "text": "0.5 per second",
           "color": "#5555ff"
         },
-        "]"
+        {
+          "text": "]"
+        }
       ]
     }
   ],
@@ -9565,27 +9542,37 @@
     {
       "text": "",
       "extra": [
-        "With your masterful weaving skills, you can use cobwebs to craft stabilised web projectiles and keep them for later use\n[In your inventory, take ",
+        {
+          "text": "With your masterful weaving skills, you can use cobwebs to craft stabilised web projectiles and keep them for later use\n[In your inventory, take "
+        },
         {
           "text": "a cobweb",
           "color": "#5555ff"
         },
-        " and ",
         {
-          "text": "right-click another cobweb,",
+          "text": " and "
+        },
+        {
+          "text": "right-click another cobweb",
           "color": "#5555ff"
         },
-        " you can spend ",
+        {
+          "text": ", you can spend "
+        },
         {
           "text": "10 web value points",
           "color": "#5555ff"
         },
-        " to consume them and craft ",
         {
-          "text": "a web projectile item that anyone can use,",
+          "text": " to consume them and craft "
+        },
+        {
+          "text": "a web projectile item that anyone can use",
           "color": "#5555ff"
         },
-        " with an effect equal to a fully charged web projectile]"
+        {
+          "text": ", with an effect equal to a fully charged web projectile]"
+        }
       ]
     }
   ],
