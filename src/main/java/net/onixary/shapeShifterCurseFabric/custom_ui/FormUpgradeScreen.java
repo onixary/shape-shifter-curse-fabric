@@ -611,12 +611,12 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     }
 
     public void onNodeSelect() {
-        try {
-            MinecraftClient.getInstance().player.sendMessage(Text.literal("Node Selected: " + this.nowSelectNode.perkID.toString()), false);
-            MinecraftClient.getInstance().player.sendMessage(Text.literal("Can Gained (Cache): " + this.perkAvailableMap.getOrDefault(this.nowSelectNode.perkID, true)), false);
-        } catch (Exception e) {
-            MinecraftClient.getInstance().player.sendMessage(Text.literal("No Node Selected"), false);
-        }
+        // try {
+        //     MinecraftClient.getInstance().player.sendMessage(Text.literal("Node Selected: " + this.nowSelectNode.perkID.toString()), false);
+        //     MinecraftClient.getInstance().player.sendMessage(Text.literal("Can Gained (Cache): " + this.perkAvailableMap.getOrDefault(this.nowSelectNode.perkID, true)), false);
+        // } catch (Exception e) {
+        //     MinecraftClient.getInstance().player.sendMessage(Text.literal("No Node Selected"), false);
+        // }
         if (this.nowSelectNode != null) {
             this.PerkNameWidget.setMessage(RegPerks.getPerkName(this.nowSelectNode.perkID));
             this.PerkDescWidget.reloadText(RegPerks.getPerkDescription(this.nowSelectNode.perkID));
