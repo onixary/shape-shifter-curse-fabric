@@ -26,10 +26,10 @@ public final class RegCustomBlock {
     public static final Block WEB_COMPOSTER = register("web_composter", new WebComposterBlock(AbstractBlock.Settings.create().mapColor(MapColor.WHITE_GRAY).instrument(Instrument.BASS).strength(0.6F).sounds(BlockSoundGroup.WOOL).burnable().nonOpaque()));
     public static final Block DEW_COVERED_COBWEB = register("dew_covered_cobweb", new DewCoveredCobwebBlock(AbstractBlock.Settings.create().mapColor(MapColor.WHITE_GRAY).instrument(Instrument.BELL).strength(1.0F).sounds(BlockSoundGroup.WOOL).noCollision().nonOpaque()));
 
-    public static final Block ALTAR_BLOCK = register("altar", new AltarBlock(AbstractBlock.Settings.create().mapColor(MapColor.WHITE_GRAY).instrument(Instrument.BELL).strength(4.0F, 10.0F).sounds(BlockSoundGroup.AMETHYST_BLOCK).nonOpaque()));
+    public static final Block ALTAR_BLOCK = register("altar", new AltarBlock(AbstractBlock.Settings.create().mapColor(MapColor.WHITE_GRAY).instrument(Instrument.BELL).strength(3.0F, 10.0F).requiresTool().sounds(BlockSoundGroup.AMETHYST_BLOCK).nonOpaque()));
     public static final BlockEntityType<AltarBlockEntity> ALTAR_BLOCK_ENTITY = registerBlockEntity("altar_block_entity", BlockEntityType.Builder.create(AltarBlockEntity::new, ALTAR_BLOCK).build(null));
 
-    public static final Block FORM_ATTUNER_BLOCK = register("form_attuner", new FormAttunerBlock(AbstractBlock.Settings.create().mapColor(MapColor.WHITE_GRAY).instrument(Instrument.BELL).luminance((state) -> 15).strength(4.0F, 10.0F).sounds(BlockSoundGroup.GLASS).nonOpaque()));
+    public static final Block FORM_ATTUNER_BLOCK = register("form_attuner", new FormAttunerBlock(AbstractBlock.Settings.create().mapColor(MapColor.WHITE_GRAY).instrument(Instrument.BELL).luminance((state) -> 15).strength(3.0F, 10.0F).requiresTool().sounds(BlockSoundGroup.GLASS).nonOpaque()));
     public static final BlockEntityType<FormAttunerBlockEntity> FORM_ATTUNER_BLOCK_ENTITY = registerBlockEntity("form_attuner_block_entity", BlockEntityType.Builder.create(FormAttunerBlockEntity::new, FORM_ATTUNER_BLOCK).build(null));
 
     public static void ClientInit() {

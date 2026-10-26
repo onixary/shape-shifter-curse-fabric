@@ -5,5 +5,18 @@
   "key": {
     "key": "key.jump",
     "continuous": false
+  },
+  "jump_action": {
+    "type": "apoli:and",
+    "actions": [
+      {
+        "type": "apoli:execute_command",
+        "command": "particle minecraft:crit ~ ~0.5 ~ 0.2 0.2 0.2 0 5"
+      },
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:entity.goat.long_jump"
+      }
+    ]
   }
 }
