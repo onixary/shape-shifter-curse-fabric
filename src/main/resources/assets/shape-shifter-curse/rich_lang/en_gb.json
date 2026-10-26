@@ -350,7 +350,7 @@
       },
       ". Your ",
       {
-        "text": "maximum health is also reduced greatly",
+        "text": "maximum health is also reduced greatly.",
         "color": "#aa0000"
       },
       "\nFloating ",
@@ -588,7 +588,7 @@
     {
       "text": "",
       "extra": [
-        "Mottled short fur, transitioning from black at the centre of your body to light bronze at the ends of your limbs, has spread to most of your torso\nYour hands and feet have transformed into structures more akin to claws. They have become slightly elongated, with leathery pads protruding from your palms\nYour ears have grown larger, their tips pointing upward. Notably, you find two tufts of golden fur growing from behind your ears, looking like some kind of ear ornament from a distance\nYour tail has extended further, becoming more slender. The golden colour at its tip has become more prominent\n\nThe ",
+        "Mottled short fur, transitioning from black at the centre of your body to light bronze at the ends of your limbs, has spread to most of your torso\nYour hands and feet have transformed into structures more akin to claws. They have become slightly elongated, with leathery pads protruding from your palms\nYour ears have grown larger, their tips pointing upwards. Notably, you find two tufts of golden fur growing from behind your ears, looking like some kind of ear ornament from a distance\nYour tail has extended further, becoming more slender. The golden colour at its tip has become more prominent\n\nThe ",
         {
           "text": "whispers",
           "color": "#aa00aa"
@@ -752,7 +752,7 @@
     {
       "text": "",
       "extra": [
-        "Short fur now covers almost your entire body\nYour face protrudes forward, forming an elongated muzzle. Your ear canals have further extended, becoming thin and tough, adapted for efficient heat dissipation in the desert\nCoordinated with your arched back and hind feet that have fully transformed into digitigrade structures, your tail has lengthened to nearly half your body length, allowing you to maintain balance. It bears fluffy golden fur at the tip, somewhat dazzling in the light\nThe tufts of fur behind your ears continue to grow, forming structures on either side of your cheeks resembling some kind of religious headdress\nYou sense the ",
+        "Short fur now covers almost your entire body\nYour face protrudes forwards, forming an elongated muzzle. Your ear canals have further extended, becoming thin and tough, adapted for efficient heat dissipation in the desert\nCoordinated with your arched back and hind feet that have fully transformed into digitigrade structures, your tail has lengthened to nearly half your body length, allowing you to maintain balance. It bears fluffy golden fur at the tip, somewhat dazzling in the light\nThe tufts of fur behind your ears continue to grow, forming structures on either side of your cheeks resembling some kind of religious headdress\nYou sense the ",
         {
           "text": "pack",
           "color": "#aa00aa"
@@ -1430,7 +1430,7 @@
         "text": "leap freely from water surfaces",
         "color": "#0000aa"
       },
-      " and sprint forward underwater by pressing sprint\nFully developed fins act like sails, harnessing water currents for ",
+      " and sprint forwards underwater by pressing sprint\nFully developed fins act like sails, harnessing water currents for ",
       {
         "text": "rapid travel",
         "color": "#0000aa"
@@ -1585,7 +1585,7 @@
       },
       " to channel water-based powers:\n- At the cost of a small amount of moisture, you can ",
       {
-        "text": "press jump to propel yourself forward with a water current",
+        "text": "press jump to propel yourself forwards with a water current",
         "color": "#0000aa"
       },
       ".\n- At the cost of a medium amount of moisture, your attacks can ",
@@ -1625,7 +1625,7 @@
       },
       ". When in water, you can press sprint key to ",
       {
-        "text": "propel yourself forward",
+        "text": "propel yourself forwards",
         "color": "#0000aa"
       },
       ".\nWhen surfacing, you can ",
@@ -1660,13 +1660,13 @@
           "text": "amphibian animal",
           "color": "#aa00aa"
         },
-        ". To maintain an upright posture for walking, you must lean forward to counterbalance the weight of your tail."
+        ". To maintain an upright posture for walking, you must lean forwards to counterbalance the weight of your tail."
       ]
     }
   ],
   "codex.form.shape-shifter-curse.bat_0.appearance": [
     "Membranous appendages extend from your arms' outer sides\n",
-    "Your tailbone protrudes outward forming a small tail\n",
+    "Your tailbone protrudes outwards forming a small tail\n",
     "Beyond this, they seem functionally limited"
   ],
   "codex.form.shape-shifter-curse.bat_0.cons": {
@@ -1685,12 +1685,12 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Night Crystal]",
+          "text": "[Charm of Night Crystal]",
           "color": "#0000aa"
         },
         ", ",
         {
-          "text": "[Charm Of Hollow Fang]",
+          "text": "[Charm of Hollow Fang]",
           "color": "#0000aa"
         }
       ]
@@ -1787,12 +1787,12 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Night Crystal]",
+          "text": "[Charm of Night Crystal]",
           "color": "#0000aa"
         },
         ", ",
         {
-          "text": "[Charm Of Hollow Fang]",
+          "text": "[Charm of Hollow Fang]",
           "color": "#0000aa"
         }
       ]
@@ -1894,7 +1894,7 @@
   ],
   "codex.form.shape-shifter-curse.bat_2.appearance": [
     "Your ears now dominate much head space, detecting minute sounds\n",
-    "Your face extends forward forming a short muzzle with sharp tiny teeth\n",
+    "Your face extends forwards forming a short muzzle with sharp tiny teeth\n",
     "Your arms fully integrate with wing membranes. Though you're still too heavy for free flight, they suffice for gliding and diving\n",
     "Your foreclaws can't handle bulky tools/weapons\n",
     "New foot claws, digitigrade legs and balancing long tail suit diving/gliding. With effort, you can still run\n",
@@ -1961,12 +1961,12 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Night Crystal]",
+          "text": "[Charm of Night Crystal]",
           "color": "#0000aa"
         },
         ", ",
         {
-          "text": "[Charm Of Hollow Fang]",
+          "text": "[Charm of Hollow Fang]",
           "color": "#0000aa"
         },
         ", ",
@@ -2158,12 +2158,12 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Night Crystal]",
+          "text": "[Charm of Night Crystal]",
           "color": "#0000aa"
         },
         ", ",
         {
-          "text": "[Charm Of Hollow Fang]",
+          "text": "[Charm of Hollow Fang]",
           "color": "#0000aa"
         },
         ", ",
@@ -2310,7 +2310,7 @@
           "text": "cool and dark cavern",
           "color": "#aa00aa"
         },
-        " might be more suitable as your new home.."
+        " might be more suitable as your new home..."
       ]
     }
   ],
@@ -2343,12 +2343,12 @@
           "text": "crystals",
           "color": "#aa00aa"
         },
-        " of an unidentified composition in areas where the effect is concentrated—\n—Similar to the behaviour of light passing through a triangular crystal prism, perhaps this is some kind of “",
+        " of an unidentified composition in areas where the effect is concentrated—\n—Similar to the behaviour of light passing through a triangular crystal prism, perhaps this is some kind of \"",
         {
           "text": "refraction",
           "color": "#aa00aa"
         },
-        "” effect that we do not yet understand—\n—This is an extremely risky decision. Are you really going to—\nYou touched the ",
+        "\" effect that we do not yet understand—\n—This is an extremely risky decision. Are you really going to—\nYou touched the ",
         {
           "text": "crystal",
           "color": "#aa00aa"
@@ -2413,12 +2413,12 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Night Crystal]",
+          "text": "[Charm of Night Crystal]",
           "color": "#0000aa"
         },
         ", ",
         {
-          "text": "[Charm Of Hollow Fang]",
+          "text": "[Charm of Hollow Fang]",
           "color": "#0000aa"
         },
         ", ",
@@ -2492,7 +2492,7 @@
     }
   ],
   "codex.form.shape-shifter-curse.familiar_fox_0.appearance": [
-    "Black soft fur grows at your extremities, gradually transitioning to orange-red as it spreads upward\n",
+    "Black soft fur grows at your extremities, gradually transitioning to orange-red as it spreads upwards\n",
     "Your ears have shifted to the top of your head, becoming triangular and covered in black fur\n",
     "Your nails have grown sharper, standing out noticeably against the dark fur\n",
     "Orange-red fur patches appear sporadically across your body, most notably a red-and-white tuft growing from your lower back. When touched, you can feel hidden bony protrusions within"
@@ -2745,7 +2745,7 @@
     {
       "text": "",
       "extra": [
-        "Your hind legs have completely transformed into digitigrade structure, and your face has protruded forward to form a short muzzle, making you appear more beast-like\nExcept for your black paws, triangular ears on your head and the white soft fur on your lower face and chest, your body is now completely covered in thick orange-red fur\n",
+        "Your hind legs have completely transformed into digitigrade structure, and your face has protruded forwards to form a short muzzle, making you appear more beast-like\nExcept for your black paws, triangular ears on your head and the white soft fur on your lower face and chest, your body is now completely covered in thick orange-red fur\n",
         {
           "text": "Two fluffy red tails",
           "color": "#aa00aa"
@@ -2896,7 +2896,7 @@
       },
       "...\nFox Firebolt: While holding a stick, consume some mana to right-click and launch a straight-flying fireball that deals moderate damage and ignites the target\n\nBy consuming ",
       {
-        "text": "a small amount of magic",
+        "text": "a small amount of mana",
         "color": "#0000aa"
       },
       " and ",
@@ -3583,12 +3583,12 @@
       "text": "",
       "extra": [
         {
-          "text": "[Collar Of Tension]",
+          "text": "[Collar of Tension]",
           "color": "#0000aa"
         },
         ", ",
         {
-          "text": "[Collar Of Whiskers]",
+          "text": "[Collar of Whiskers]",
           "color": "#0000aa"
         },
         ", ",
@@ -3760,12 +3760,12 @@
       "text": "",
       "extra": [
         {
-          "text": "[Collar Of Tension]",
+          "text": "[Collar of Tension]",
           "color": "#0000aa"
         },
         ", ",
         {
-          "text": "[Collar Of Whiskers]",
+          "text": "[Collar of Whiskers]",
           "color": "#0000aa"
         },
         ", ",
@@ -3807,7 +3807,7 @@
       },
       " - While sneaking, you can ",
       {
-        "text": "dash forward at tremendous speed",
+        "text": "dash forwards at tremendous speed",
         "color": "#0000aa"
       },
       " and ",
@@ -3938,7 +3938,7 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Reverse Thermometer]",
+          "text": "[Charm of Reverse Thermometer]",
           "color": "#0000aa"
         }
       ]
@@ -4047,7 +4047,7 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Reverse Thermometer]",
+          "text": "[Charm of Reverse Thermometer]",
           "color": "#0000aa"
         }
       ]
@@ -4142,7 +4142,7 @@
     {
       "text": "",
       "extra": [
-        "Your hind feet have become fully digitigrade. Your face has pushed forward into a short muzzle, making you look more like a beast.\nYour tail is now nearly half your body length. Its excessively thick fur causes the tip to droop slightly under gravity.\nApart from the grey-blue paws, the triangular ears on your head and the light grey fur at the tail's tip, your body is completely covered in thick snow-white fur. It serves as excellent camouflage in snowy terrain.\nThe fur ruff around your neck has become fluffier, even adding noticeable weight to your shoulders.\n\nYou feel yourself becoming increasingly accustomed to the presence of that ",
+        "Your hind feet have become fully digitigrade. Your face has pushed forwards into a short muzzle, making you look more like a beast.\nYour tail is now nearly half your body length. Its excessively thick fur causes the tip to droop slightly under gravity.\nApart from the grey-blue paws, the triangular ears on your head and the light grey fur at the tail's tip, your body is completely covered in thick snow-white fur. It serves as excellent camouflage in snowy terrain.\nThe fur ruff around your neck has become fluffier, even adding noticeable weight to your shoulders.\n\nYou feel yourself becoming increasingly accustomed to the presence of that ",
         {
           "text": "cold magic",
           "color": "#aa00aa"
@@ -4192,7 +4192,7 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Reverse Thermometer]",
+          "text": "[Charm of Reverse Thermometer]",
           "color": "#0000aa"
         },
         ", ",
@@ -4397,7 +4397,7 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Reverse Thermometer]",
+          "text": "[Charm of Reverse Thermometer]",
           "color": "#0000aa"
         },
         ", ",
@@ -4572,7 +4572,7 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Reverse Thermometer]",
+          "text": "[Charm of Reverse Thermometer]",
           "color": "#0000aa"
         },
         ", ",
@@ -4728,7 +4728,7 @@
       },
       ", expending web value. Different effects occur based on charge level:\n\nWhen hitting the side or bottom of a block, a ",
       {
-        "text": "non-sticky bridge web structure extends downward from the point of impact, which can be climbed",
+        "text": "non-sticky bridge web structure extends downwards from the point of impact, which can be climbed",
         "color": "#0000aa"
       },
       ".\nWhen hitting a creature, it inflicts ",
@@ -4848,7 +4848,7 @@
     {
       "text": "",
       "extra": [
-        "Your skin has transformed into a chitinous exoskeleton. It has replaced your original bones, supporting the movement of your now-segmented limbs. Pale, bristly hairs have grown from your neck, joints and the tips of your limbs, partially compensating for the tactile sensation you have lost beneath your rigid carapace.\nAn extra pair of eyes has grown above your original eyes, allowing you to see clearly even in darkness. The appendages of your head and mandibles have elongated into two pairs of pedipalps, further enhancing your senses.\nThe protrusions on the sides of your torso have grown into a pair of fully functional extra arms. Though relatively weak, they are strong enough to hold tools and aid you in your adventures. Meanwhile, the protrusions at the junction of your anterior abdomen and posterior abdomen have also developed into an extra pair of hind limbs. However, they cannot yet support your body - They merely cling to your abdomen, curving slightly upward.\nYour body no longer craves solid food; instead, it seeks the liquefied nutrients of prey digested externally. The method of weaving ",
+        "Your skin has transformed into a chitinous exoskeleton. It has replaced your original bones, supporting the movement of your now-segmented limbs. Pale, bristly hairs have grown from your neck, joints and the tips of your limbs, partially compensating for the tactile sensation you have lost beneath your rigid carapace.\nAn extra pair of eyes has grown above your original eyes, allowing you to see clearly even in darkness. The appendages of your head and mandibles have elongated into two pairs of pedipalps, further enhancing your senses.\nThe protrusions on the sides of your torso have grown into a pair of fully functional extra arms. Though relatively weak, they are strong enough to hold tools and aid you in your adventures. Meanwhile, the protrusions at the junction of your anterior abdomen and posterior abdomen have also developed into an extra pair of hind limbs. However, they cannot yet support your body - They merely cling to your abdomen, curving slightly upwards.\nYour body no longer craves solid food; instead, it seeks the liquefied nutrients of prey digested externally. The method of weaving ",
         {
           "text": "Nutrient Dissolve Cocoon",
           "color": "#aa00aa"
@@ -4995,12 +4995,12 @@
       },
       ". Different effects occur based on charge level:\nWhen hitting the side or bottom of a block, a ",
       {
-        "text": "non-sticky bridge web structure extends downward from the point of impact, which can be climbed",
+        "text": "non-sticky bridge web structure extends downwards from the point of impact, which can be climbed",
         "color": "#0000aa"
       },
       ".\nAdditionally, when hitting the top of a block, a ",
       {
-        "text": "tower bridge web structure can be generated upward",
+        "text": "tower bridge web structure can be generated upwards",
         "color": "#0000aa"
       },
       ". When hitting a creature, you can inflict ",
@@ -5098,7 +5098,7 @@
     {
       "text": "",
       "extra": [
-        "Your body has fully metamorphosed into a structure suited for a multi-legged arthropod. To support the added weight, your hind legs no longer hang in the air, and your original bipedal limbs have tilted forward, forming a more stable quadrupedal stance - better suited for explosive forward lunges than sustained movement.\nYour extra pair of arms naturally tuck against the front of your torso when not in use. You have not yet fully grown accustomed to their presence.\nAnother pair of simple eyes has grown from the sides of your head, extending your field of vision to a panoramic view of your surroundings. They allow you to detect even the faintest stirrings around you, even in darkness.\nBeneath the bristly hairs covering your neck, you sense that your mouth has also transformed into a short tubular structure unfit for chewing. Now you can only draw energy from externally digested fluid nutrients.\n\nYour greatly enlarged abdomen stores vast quantities of ",
+        "Your body has fully metamorphosed into a structure suited for a multi-legged arthropod. To support the added weight, your hind legs no longer hang in the air, and your original bipedal limbs have tilted forwards, forming a more stable quadrupedal stance - better suited for explosive forward lunges than sustained movement.\nYour extra pair of arms naturally tuck against the front of your torso when not in use. You have not yet fully grown accustomed to their presence.\nAnother pair of simple eyes has grown from the sides of your head, extending your field of vision to a panoramic view of your surroundings. They allow you to detect even the faintest stirrings around you, even in darkness.\nBeneath the bristly hairs covering your neck, you sense that your mouth has also transformed into a short tubular structure unfit for chewing. Now you can only draw energy from externally digested fluid nutrients.\n\nYour greatly enlarged abdomen stores vast quantities of ",
         {
           "text": "liquid silk",
           "color": "#aa00aa"
@@ -5125,7 +5125,7 @@
         "text": "can no longer jump vertically to a height of one block",
         "color": "#aa0000"
       },
-      " as before. However, as a replacement, you can lunge forward while sprinting.\nYour spider digestive system means you ",
+      " as before. However, as a replacement, you can lunge forwards while sprinting.\nYour spider digestive system means you ",
       {
         "text": "can only gain hunger from externally digested Nutrient Sacs",
         "color": "#aa0000"
@@ -5215,7 +5215,7 @@
         "text": "primary active power key",
         "color": "#ffaa00"
       },
-      " to charge and release to fire a Web Bullet. Different effects occur based on charge level:\nWhen hitting the side or bottom of a block, a non-sticky bridge web structure extends downward from the point of impact, which can be climbed.\nWhen hitting the top of a block, a tower bridge web structure can be generated upward.\nWhen hitting a creature, you can inflict ",
+      " to charge and release to fire a Web Bullet. Different effects occur based on charge level:\nWhen hitting the side or bottom of a block, a non-sticky bridge web structure extends downwards from the point of impact, which can be climbed.\nWhen hitting the top of a block, a tower bridge web structure can be generated upwards.\nWhen hitting a creature, you can inflict ",
       {
         "text": "Slowness",
         "color": "#ff55ff"
@@ -5926,7 +5926,7 @@
     "The magic within you seems to react when you touch this"
   ],
   "item.shape-shifter-curse.charm_of_hollow_fang": [
-    "Charm Of Hollow Fang"
+    "Charm of Hollow Fang"
   ],
   "item.shape-shifter-curse.charm_of_hollow_fang.tooltip": [
     "[Bat Form] Your attacks can drain health and hunger, but you can no longer obtain restoration from food"
@@ -5938,7 +5938,7 @@
     "[Bat Form] Your attacks can drain health and hunger, but you can no longer recover from food +Melee hits also inflict Poison+"
   ],
   "item.shape-shifter-curse.charm_of_night_crystal": [
-    "Charm Of Night Crystal"
+    "Charm of Night Crystal"
   ],
   "item.shape-shifter-curse.charm_of_night_crystal.tooltip": [
     "[Bat Form] You no longer lose maximum health under sunlight"
@@ -5950,7 +5950,7 @@
     "[Bat Form] You no longer lose maximum health under sunlight +Gain Resistance in dark environments+"
   ],
   "item.shape-shifter-curse.charm_of_reverse_thermometer": [
-    "Charm Of Reverse Thermometer"
+    "Charm of Reverse Thermometer"
   ],
   "item.shape-shifter-curse.charm_of_reverse_thermometer.tooltip": [
     "[Snow Fox Form] Reverses the effect of cold and hot biomes on your maximum health"
@@ -5962,13 +5962,13 @@
     "[Snow Fox Form] Reverses the effect of cold and hot biomes on your maximum health +Gain Speed in hot biomes+"
   ],
   "item.shape-shifter-curse.collar_of_tension": [
-    "Collar Of Tension"
+    "Collar of Tension"
   ],
   "item.shape-shifter-curse.collar_of_tension.tooltip": [
     "[Ocelot Form] For true hunters only. Your swipes and pounces deal increased damage, but disable your dodge ability"
   ],
   "item.shape-shifter-curse.collar_of_whiskers": [
-    "Collar Of Whiskers"
+    "Collar of Whiskers"
   ],
   "item.shape-shifter-curse.collar_of_whiskers.tooltip": [
     "[Ocelot Form] For true hunters only. When trigger dodge power, you gain regeneration effect"
@@ -6297,7 +6297,7 @@
     "Unwieldy"
   ],
   "power.shape-shifter-curse.perks.axolotl_collect_water.description": [
-    "Hold active skill 2 to highlight enemies in a surrounding 18×18 area in blue. Release to deal 10 damage and launch enemies upward and away, restoring 30 moisture per successful hit. Cooldown: 30 seconds."
+    "Hold active skill 2 to highlight enemies in a surrounding 18×18 area in blue. Release to deal 10 damage and launch enemies upwards and away, restoring 30 moisture per successful hit. Cooldown: 30 seconds."
   ],
   "power.shape-shifter-curse.perks.axolotl_collect_water.name": [
     "Water Gathering"
@@ -6417,10 +6417,10 @@
   ],
   "power.shape-shifter-curse.perks.axolotl_tidal_pull.description": [
     {
-      "text": "",
+      "text": "As your mastery of water magic grows, you have learned how to manipulate water currents to pull creatures to your side\n",
       "extra": [
         {
-          "text": "As your mastery of water magic grows, you have learned how to manipulate water currents to pull creatures to your side\n["
+          "text": "["
         },
         {
           "text": "Hold active skill key 2",
@@ -6444,7 +6444,7 @@
           "text": "; release to "
         },
         {
-          "text": "pull it towards you and launch it upward",
+          "text": "pull it towards you and launch it upwards",
           "color": "#5555ff"
         },
         {
@@ -6475,7 +6475,7 @@
       "text": "",
       "extra": [
         {
-          "text": "When walking on vegetation, you can clearly sense the flow of water within plants and put it to use\n[When moving on vegetation blocks such as grass blocks, mycelium, podzol and moss, your "
+          "text": "When walking on vegetation, you can clearly sense the flow of water within plants and put it to use\n[When moving on vegetation blocks such as Grass Blocks, Mycelia, Podzols and Moss Blocks, your "
         },
         {
           "text": "walking speed is somewhat increased",
@@ -6527,7 +6527,7 @@
       "text": "",
       "extra": [
         {
-          "text": "By precisely manipulating water currents, you can efficiently slide yourself forward\n[The ongoing moisture cost of "
+          "text": "By precisely manipulating water currents, you can efficiently slide yourself forwards\n[The ongoing moisture cost of "
         },
         {
           "text": "wave riding",
@@ -6598,10 +6598,10 @@
   ],
   "power.shape-shifter-curse.perks.bat_echolocation.description": [
     {
-      "text": "",
+      "text": "By attuning your soul with your current form, you have mastered the chiropteran ability to locate targets through echolocation\n",
       "extra": [
         {
-          "text": "By attuning your soul with your current form, you have mastered the chiropteran ability to locate targets through echolocation\n[Press "
+          "text": "[Press "
         },
         {
           "text": "active skill key 2",
@@ -6728,7 +6728,7 @@
       "text": "",
       "extra": [
         {
-          "text": "The flight techniques of chiropterans are engraved in your soul, allowing you to use your membrane wings to propel yourself forward during high-speed flight\n[During "
+          "text": "The flight techniques of chiropterans are engraved in your soul, allowing you to use your membrane wings to propel yourself forwards during high-speed flight\n[During "
         },
         {
           "text": "elytra flight",
@@ -6752,7 +6752,7 @@
           "text": " and propel yourself "
         },
         {
-          "text": "forward",
+          "text": "forwards",
           "color": "#5555ff"
         },
         {
@@ -6807,10 +6807,10 @@
   ],
   "power.shape-shifter-curse.perks.familiar_fox_mana_capacity_1.description": [
     {
-      "text": "",
+      "text": "By adjusting the mana circulation within your body, you can store more mana\n",
       "extra": [
         {
-          "text": "By adjusting the mana circulation within your body, you can store more mana\n[Your base "
+          "text": "[Your base "
         },
         {
           "text": "maximum mana is increased to 125",
@@ -7088,10 +7088,10 @@
   ],
   "power.shape-shifter-curse.perks.ocelot_armor_1.description": [
     {
-      "text": "",
+      "text": "By attuning with your current form, your body has been strengthened\n",
       "extra": [
         {
-          "text": "By attuning with your current form, your body has been strengthened\n[Gain a total of "
+          "text": "[Gain a total of "
         },
         {
           "text": "4 additional armour points",
@@ -7365,7 +7365,7 @@
       "text": "",
       "extra": [
         {
-          "text": "Your understanding of cold magic has deepened further. By releasing a burst of frost energy downward, you can briefly alter the surrounding environment\n[While airborne, press "
+          "text": "Your understanding of cold magic has deepened further. By releasing a burst of frost energy downwards, you can briefly alter the surrounding environment\n[While airborne, press "
         },
         {
           "text": "active skill 1",
@@ -7935,7 +7935,7 @@
     "Tool Modification II"
   ],
   "ssc_perk.shape-shifter-curse.axolotl_collect_water.desc": [
-    "Hold active skill 2 to highlight enemies in a surrounding 18×18 area in blue. Release to deal 10 damage and launch enemies upward and away, restoring 30 moisture per successful hit. Cooldown: 30 seconds."
+    "Hold active skill 2 to highlight enemies in a surrounding 18×18 area in blue. Release to deal 10 damage and launch enemies upwards and away, restoring 30 moisture per successful hit. Cooldown: 30 seconds."
   ],
   "ssc_perk.shape-shifter-curse.axolotl_collect_water.name": [
     "Water Gathering"
@@ -8082,7 +8082,7 @@
           "text": "; release to "
         },
         {
-          "text": "pull it towards you and launch it upward",
+          "text": "pull it towards you and launch it upwards",
           "color": "#5555ff"
         },
         {
@@ -8113,7 +8113,7 @@
       "text": "",
       "extra": [
         {
-          "text": "When walking on vegetation, you can clearly sense the flow of water within plants and put it to use\n[When moving on vegetation blocks such as grass blocks, mycelium, podzol and moss, your "
+          "text": "When walking on vegetation, you can clearly sense the flow of water within plants and put it to use\n[When moving on vegetation blocks such as Grass Blocks, Mycelia, Podzols and Moss Blocks, your "
         },
         {
           "text": "walking speed is somewhat increased",
@@ -8165,7 +8165,7 @@
       "text": "",
       "extra": [
         {
-          "text": "By precisely manipulating water currents, you can efficiently slide yourself forward\n[The ongoing moisture cost of "
+          "text": "By precisely manipulating water currents, you can efficiently slide yourself forwards\n[The ongoing moisture cost of "
         },
         {
           "text": "wave riding",
@@ -8366,7 +8366,7 @@
       "text": "",
       "extra": [
         {
-          "text": "The flight techniques of chiropterans are engraved in your soul, allowing you to use your membrane wings to propel yourself forward during high-speed flight\n[During "
+          "text": "The flight techniques of chiropterans are engraved in your soul, allowing you to use your membrane wings to propel yourself forwards during high-speed flight\n[During "
         },
         {
           "text": "elytra flight",
@@ -8390,7 +8390,7 @@
           "text": " and propel yourself "
         },
         {
-          "text": "forward",
+          "text": "forwards",
           "color": "#5555ff"
         },
         {
@@ -8820,7 +8820,7 @@
           "text": " to "
         },
         {
-          "text": "dash forward",
+          "text": "dash forwards",
           "color": "#5555ff"
         },
         {
@@ -9219,7 +9219,7 @@
       "text": "",
       "extra": [
         {
-          "text": "Your understanding of cold magic has deepened further. By releasing a burst of frost energy downward, you can briefly alter the surrounding environment\n[While airborne, press "
+          "text": "Your understanding of cold magic has deepened further. By releasing a burst of frost energy downwards, you can briefly alter the surrounding environment\n[While airborne, press "
         },
         {
           "text": "active skill 1",
