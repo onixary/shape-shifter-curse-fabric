@@ -1685,12 +1685,12 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Night Crystal]",
+          "text": "[Charm of Night Crystal]",
           "color": "#0000aa"
         },
         ", ",
         {
-          "text": "[Charm Of Hollow Fang]",
+          "text": "[Charm of Hollow Fang]",
           "color": "#0000aa"
         }
       ]
@@ -1787,12 +1787,12 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Night Crystal]",
+          "text": "[Charm of Night Crystal]",
           "color": "#0000aa"
         },
         ", ",
         {
-          "text": "[Charm Of Hollow Fang]",
+          "text": "[Charm of Hollow Fang]",
           "color": "#0000aa"
         }
       ]
@@ -1961,12 +1961,12 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Night Crystal]",
+          "text": "[Charm of Night Crystal]",
           "color": "#0000aa"
         },
         ", ",
         {
-          "text": "[Charm Of Hollow Fang]",
+          "text": "[Charm of Hollow Fang]",
           "color": "#0000aa"
         },
         ", ",
@@ -2158,12 +2158,12 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Night Crystal]",
+          "text": "[Charm of Night Crystal]",
           "color": "#0000aa"
         },
         ", ",
         {
-          "text": "[Charm Of Hollow Fang]",
+          "text": "[Charm of Hollow Fang]",
           "color": "#0000aa"
         },
         ", ",
@@ -2413,12 +2413,12 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Night Crystal]",
+          "text": "[Charm of Night Crystal]",
           "color": "#0000aa"
         },
         ", ",
         {
-          "text": "[Charm Of Hollow Fang]",
+          "text": "[Charm of Hollow Fang]",
           "color": "#0000aa"
         },
         ", ",
@@ -3583,12 +3583,12 @@
       "text": "",
       "extra": [
         {
-          "text": "[Collar Of Tension]",
+          "text": "[Collar of Tension]",
           "color": "#0000aa"
         },
         ", ",
         {
-          "text": "[Collar Of Whiskers]",
+          "text": "[Collar of Whiskers]",
           "color": "#0000aa"
         },
         ", ",
@@ -3760,12 +3760,12 @@
       "text": "",
       "extra": [
         {
-          "text": "[Collar Of Tension]",
+          "text": "[Collar of Tension]",
           "color": "#0000aa"
         },
         ", ",
         {
-          "text": "[Collar Of Whiskers]",
+          "text": "[Collar of Whiskers]",
           "color": "#0000aa"
         },
         ", ",
@@ -3938,7 +3938,7 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Reverse Thermometer]",
+          "text": "[Charm of Reverse Thermometer]",
           "color": "#0000aa"
         }
       ]
@@ -4047,7 +4047,7 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Reverse Thermometer]",
+          "text": "[Charm of Reverse Thermometer]",
           "color": "#0000aa"
         }
       ]
@@ -4192,7 +4192,7 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Reverse Thermometer]",
+          "text": "[Charm of Reverse Thermometer]",
           "color": "#0000aa"
         },
         ", ",
@@ -4397,7 +4397,7 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Reverse Thermometer]",
+          "text": "[Charm of Reverse Thermometer]",
           "color": "#0000aa"
         },
         ", ",
@@ -4572,7 +4572,7 @@
       "text": "",
       "extra": [
         {
-          "text": "[Charm Of Reverse Thermometer]",
+          "text": "[Charm of Reverse Thermometer]",
           "color": "#0000aa"
         },
         ", ",
@@ -5926,7 +5926,7 @@
     "The magic within you seems to react when you touch this"
   ],
   "item.shape-shifter-curse.charm_of_hollow_fang": [
-    "Charm Of Hollow Fang"
+    "Charm of Hollow Fang"
   ],
   "item.shape-shifter-curse.charm_of_hollow_fang.tooltip": [
     "[Bat Form] Your attacks can drain health and hunger, but you can no longer obtain restoration from food"
@@ -5938,7 +5938,7 @@
     "[Bat Form] Your attacks can drain health and hunger, but you can no longer recover from food +Melee hits also inflict Poison+"
   ],
   "item.shape-shifter-curse.charm_of_night_crystal": [
-    "Charm Of Night Crystal"
+    "Charm of Night Crystal"
   ],
   "item.shape-shifter-curse.charm_of_night_crystal.tooltip": [
     "[Bat Form] You no longer lose maximum health under sunlight"
@@ -5950,7 +5950,7 @@
     "[Bat Form] You no longer lose maximum health under sunlight +Gain Resistance in dark environments+"
   ],
   "item.shape-shifter-curse.charm_of_reverse_thermometer": [
-    "Charm Of Reverse Thermometer"
+    "Charm of Reverse Thermometer"
   ],
   "item.shape-shifter-curse.charm_of_reverse_thermometer.tooltip": [
     "[Snow Fox Form] Reverses the effect of cold and hot biomes on your maximum health"
@@ -5962,13 +5962,13 @@
     "[Snow Fox Form] Reverses the effect of cold and hot biomes on your maximum health +Gain Speed in hot biomes+"
   ],
   "item.shape-shifter-curse.collar_of_tension": [
-    "Collar Of Tension"
+    "Collar of Tension"
   ],
   "item.shape-shifter-curse.collar_of_tension.tooltip": [
     "[Ocelot Form] For true hunters only. Your swipes and pounces deal increased damage, but disable your dodge ability"
   ],
   "item.shape-shifter-curse.collar_of_whiskers": [
-    "Collar Of Whiskers"
+    "Collar of Whiskers"
   ],
   "item.shape-shifter-curse.collar_of_whiskers.tooltip": [
     "[Ocelot Form] For true hunters only. When trigger dodge power, you gain regeneration effect"
