@@ -186,7 +186,7 @@
     "A Special Form?"
   ],
   "advancements.shape-shifter-curse.on_transform_spider_0.description": [
-    "Strange spiders in the mineshaft...?"
+    "Strange spiders in the Mineshaft...?"
   ],
   "advancements.shape-shifter-curse.on_transform_spider_0.title": [
     "Spider"
@@ -715,7 +715,7 @@
       },
       "\nThe ",
       {
-        "text": "jackal wraiths in the desert will no longer actively attack you",
+        "text": "jackal wraiths in the desert no longer actively attack you",
         "color": "#0000aa"
       },
       "\n\nYou can ",
@@ -2343,12 +2343,12 @@
           "text": "crystals",
           "color": "#aa00aa"
         },
-        " of an unidentified composition in areas where the effect is concentrated—\n—Similar to the behavior of light passing through a triangular crystal prism, perhaps this is some kind of “",
+        " of an unidentified composition in areas where the effect is concentrated—\n—Similar to the behavior of light passing through a triangular crystal prism, perhaps this is some kind of \"",
         {
           "text": "refraction",
           "color": "#aa00aa"
         },
-        "” effect that we do not yet understand—\n—This is an extremely risky decision. Are you really going to—\nYou touched the ",
+        "\" effect that we do not yet understand—\n—This is an extremely risky decision. Are you really going to—\nYou touched the ",
         {
           "text": "crystal",
           "color": "#aa00aa"
@@ -3259,7 +3259,7 @@
       },
       "\nBy consuming ",
       {
-        "text": "a small amount of magic",
+        "text": "a small amount of mana",
         "color": "#0000aa"
       },
       " and ",
@@ -3906,9 +3906,9 @@
     "\nOverall, you are a normal human being"
   ],
   "codex.form.shape-shifter-curse.snow_fox_0.appearance": [
-    "Grey-blue soft fur has grown at the ends of your limbs. You notice its color is slightly darker around your hands and feet.\n",
-    "Your ears have shifted towards the top of your head, becoming triangular and covered in pale grey fur.\n",
-    "Your nails have grown sharper, slightly protruding from the grey-blue fur.\n",
+    "Gray-blue soft fur has grown at the ends of your limbs. You notice its color is slightly darker around your hands and feet.\n",
+    "Your ears have shifted toward the top of your head, becoming triangular and covered in pale gray fur.\n",
+    "Your nails have grown sharper, slightly protruding from the gray-blue fur.\n",
     "Fluffy white fur gathers around your neck, resembling a scarf from afar.\n",
     "A tuft of snow-white fur has sprouted at the base of your spine. Touching it, you can feel a bony protrusion hidden within."
   ],
@@ -4002,7 +4002,7 @@
     {
       "text": "",
       "extra": [
-        "White and grey-blue fur spreads further across you. Your limbs and upper torso are now almost completely covered in thick fur.\nThe triangular ears atop your head have enlarged further, allowing you to hear even fainter sounds.\nYour hands and feet have grown larger, becoming more claw-like in structure.\nThe fur around your neck has grown denser, providing excellent warmth... perhaps too much warmth.\nThe white fur tuft at your tailbone has grown into a full, fluffy tail. Its tip is a darker shade and sways gently behind you.\n\nSomething noteworthy: despite being purified, you can still feel a ",
+        "White and gray-blue fur spreads further across you. Your limbs and upper torso are now almost completely covered in thick fur.\nThe triangular ears atop your head have enlarged further, allowing you to hear even fainter sounds.\nYour hands and feet have grown larger, becoming more claw-like in structure.\nThe fur around your neck has grown denser, providing excellent warmth... perhaps too much warmth.\nThe white fur tuft at your tailbone has grown into a full, fluffy tail. Its tip is a darker shade and sways gently behind you.\n\nSomething noteworthy: despite being purified, you can still feel a ",
         {
           "text": "foreign magic",
           "color": "#aa00aa"
@@ -4129,7 +4129,7 @@
     {
       "text": "",
       "extra": [
-        "\nWhite and grey-blue fur spreads further across your body; a ",
+        "\nWhite and gray-blue fur spreads further across your body; a ",
         {
           "text": "fluffy snow-white tail",
           "color": "#aa00aa"
@@ -4142,7 +4142,7 @@
     {
       "text": "",
       "extra": [
-        "Your hind feet have become fully digitigrade. Your face has pushed forward into a short muzzle, making you look more like a beast.\nYour tail is now nearly half your body length. Its excessively thick fur causes the tip to droop slightly under gravity.\nApart from the grey-blue paws, the triangular ears on your head, and the light grey fur at the tail's tip, your body is completely covered in thick snow-white fur. It serves as excellent camouflage in snowy terrain.\nThe fur ruff around your neck has become fluffier, even adding noticeable weight to your shoulders.\n\nYou feel yourself becoming increasingly accustomed to the presence of that ",
+        "Your hind feet have become fully digitigrade. Your face has pushed forward into a short muzzle, making you look more like a beast.\nYour tail is now nearly half your body length. Its excessively thick fur causes the tip to droop slightly under gravity.\nApart from the gray-blue paws, the triangular ears on your head, and the light gray fur at the tail's tip, your body is completely covered in thick snow-white fur. It serves as excellent camouflage in snowy terrain.\nThe fur ruff around your neck has become fluffier, even adding noticeable weight to your shoulders.\n\nYou feel yourself becoming increasingly accustomed to the presence of that ",
         {
           "text": "cold magic",
           "color": "#aa00aa"
