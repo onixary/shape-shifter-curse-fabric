@@ -302,6 +302,9 @@ public class TrinketUtils {
             // PowerHolderComponent.KEY.sync(player);
 
             // 子形态的Bug 不能用这种方式还原了 等之后写双端时改成计数式Power
+            for (Identifier powerID : accessoryPowers) {
+                this.RemovePower(player, powerID, itemID);
+            }
             FormUtils.reApplyPower(player);
         }
     }
