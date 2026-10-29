@@ -48,6 +48,26 @@
         "type": "shape-shifter-curse:set_item_cooldown",
         "item": "minecraft:diamond",
         "cooldown": 5
+      },
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:block.amethyst_cluster.step"
+      },
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:block.amethyst_block.chime"
+      },
+      {
+        "type": "apoli:spawn_particles",
+        "particle": "minecraft:glow",
+        "count": 24,
+        "speed": 0.15,
+        "offset_y": 0.5,
+        "spread": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
       }
     ]
   },

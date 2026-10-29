@@ -119,9 +119,9 @@ public class RegPerks {
     public static final Identifier P_OcelotHungryPounce = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("ocelot_hungry_pounce"))
             .setIcon(PerkSpriteMap.bi(0, 6)).cost(new BaseCost(RegCostType.COST_XP, 200))
             .addPower(ShapeShifterCurseFabric.identifier("perks/ocelot_hungry_pounce")).removePower());
-    public static final Identifier P_OcelotLongPounce = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("ocelot_long_pounce"))
-            .setIcon(PerkSpriteMap.bi(6, 5)).cost(new ItemCost(RegCostType.COST_ITEM, new ItemStack(RegCustomItem.GLINT_PRISM), 2))
-            .addPower(ShapeShifterCurseFabric.identifier("perks/ocelot_long_pounce")).removePower());
+//    public static final Identifier P_OcelotLongPounce = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("ocelot_long_pounce"))
+//            .setIcon(PerkSpriteMap.bi(6, 5)).cost(new ItemCost(RegCostType.COST_ITEM, new ItemStack(RegCustomItem.GLINT_PRISM), 2))
+//            .addPower(ShapeShifterCurseFabric.identifier("perks/ocelot_long_pounce")).removePower());
     public static final Identifier P_FamiliarFoxDeflection = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("familiar_fox_deflection"))
             .setIcon(PerkSpriteMap.bi(21, 4)).cost(new BaseCost(RegCostType.COST_XP, 200))
             .addPower(ShapeShifterCurseFabric.identifier("perks/familiar_fox_deflection")).removePower());
@@ -222,7 +222,7 @@ public class RegPerks {
             .setIcon(PerkSpriteMap.bi(5, 11)).cost(new BaseCost(RegCostType.COST_XP, 150))
             .addPower(ShapeShifterCurseFabric.identifier("perks/spider_bridge_weaver")).removePower(ShapeShifterCurseFabric.identifier("form_spider_3_web_bridge")));
     public static final Identifier P_SpiderPerceptualWeb = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("spider_perceptual_web"))
-            .setIcon(PerkSpriteMap.bi(6, 11)).cost(new BaseCost(RegCostType.COST_XP, 150))
+            .setIcon(PerkSpriteMap.bi(6, 11)).cost(new BaseCost(RegCostType.COST_XP, 250))
             .addPower(ShapeShifterCurseFabric.identifier("perks/spider_perceptual_web")).removePower());
     public static final Identifier P_SpiderRapidSpinner = registerPerkCommon(new NormalPerk(ShapeShifterCurseFabric.identifier("spider_rapid_spinner"))
             .setIcon(PerkSpriteMap.bi(23, 9)).cost(new BaseCost(RegCostType.COST_XP, 200))
@@ -312,7 +312,6 @@ public class RegPerks {
             .addNode(P_OcelotMetabolism_2, 3, 140, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_OcelotMetabolism_1))
             .addNode(P_OcelotAmbush, 2, 220)
             .addNode(P_OcelotHungryPounce, 3, 220, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_OcelotAmbush))
-            .addNode(P_OcelotLongPounce, 3, 280, new NormalDependent(NormalDependent.LineConnectMode.LEFT, P_OcelotAmbush))
             .forEachNode(U_AddRootDependent)
     );
     public static final Identifier T_FamiliarFox3PerkTree = registerPerkTree(new PerkTree(ShapeShifterCurseFabric.identifier("familiar_fox_3_perk_tree"))

@@ -7,6 +7,26 @@
     "type": "apoli:and",
     "actions": [
       {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:entity.evoker.prepare_attack"
+      },
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:entity.polar_bear.warning"
+      },
+      {
+        "type": "apoli:spawn_particles",
+        "particle": "minecraft:enchanted_hit",
+        "count": 40,
+        "speed": 0.5,
+        "offset_y": 0.5,
+        "spread": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      {
         "type": "shape-shifter-curse:change_food",
         "amount": -8
       },
@@ -47,7 +67,7 @@
     "should_render": false
   },
   "key": {
-    "key": "key.shape-shifter-curse.active_skill_2"
+    "key": "key.shape-shifter-curse.active_skill_1"
   },
   "condition": {
     "type": "apoli:food_level",

@@ -198,7 +198,17 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
     public void init() {
         baseX = this.width / 2 - BACKGROUND_WIDTH / 2;
         baseY = this.height / 2 - BACKGROUND_HEIGHT / 2;
-        this.PerkNameWidget = new TextWidget(baseX + PERK_INFO_NAME_X, baseY + PERK_INFO_NAME_Y, PERK_INFO_NAME_WIDTH, PERK_INFO_NAME_HEIGHT, Text.literal(""), this.textRenderer);
+        this.PerkNameWidget = new TextWidget(baseX + PERK_INFO_NAME_X, baseY + PERK_INFO_NAME_Y, PERK_INFO_NAME_WIDTH, PERK_INFO_NAME_HEIGHT, Text.literal(""), this.textRenderer) {
+            @Override
+            public void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
+                if (FormUpgradeScreen.this.textRenderer.getWidth(getMessage()) <= getWidth()) {
+                    super.renderButton(context, mouseX, mouseY, delta);
+                } else {
+                    // Vanilla button marquee clips long titles to the existing name area.
+                    drawScrollableText(context, FormUpgradeScreen.this.textRenderer, 0, getTextColor());
+                }
+            }
+        };
         this.PerkDescWidget = new ScaleScrollTextWidget(baseX + PERK_INFO_DESC_X, baseY + PERK_INFO_DESC_Y, PERK_INFO_DESC_WIDTH, PERK_INFO_DESC_HEIGHT, 1.0f, Text.literal(""), this.textRenderer);
         this.PerkDescWidget.setEnableScrollableIconRender(true);
         this.WidgetList.add(this.PerkDescWidget);
