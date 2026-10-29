@@ -62,6 +62,7 @@ public class DynamicForm implements IForm, ISubForm, NeedCheckUsableForm {
     public IForm masterForm = null;
 
     public Identifier perkTreeID = RegPerks.EMPTY_PERK_TREE;
+    public float eyeScale = 1.0f;
 
     public DynamicForm(@Nullable Identifier formID, JsonObject formData) {
         this.formID = formID;
@@ -183,6 +184,11 @@ public class DynamicForm implements IForm, ISubForm, NeedCheckUsableForm {
         // NormalForm.RESET_SCALE_FUNC.accept(player);
     }
 
+    @Override
+    public float getEyeScale() {
+        return eyeScale;
+    }
+
     public void loadFromJson() {
         if (this.formData.has("FormID")) { this.formID = Identifier.tryParse(this.formData.get("FormID").getAsString()); }
         if (this.formID == null) {
@@ -196,6 +202,10 @@ public class DynamicForm implements IForm, ISubForm, NeedCheckUsableForm {
             group.registerForm(tier, weight, this);
         }
         this.bodyType = PlayerFormBodyType.valueOf(_Gson_GetString(formData, "bodyType", "NORMAL"));
+        this.eyeScale = _Gson_GetFloat(formData, "eyeScale", Float.NaN);
+        if (Float.isNaN(this.eyeScale)) {
+            this.eyeScale = this.bodyType == PlayerFormBodyType.FERAL ? 0.6f : 1.0f;
+        }
         Identifier layerID = Identifier.tryParse(_Gson_GetString(formData, "originLayerID", null));
         Identifier powerFormID = Identifier.tryParse(_Gson_GetString(formData, "originID", null));
         if (layerID != null && powerFormID != null) {
@@ -292,6 +302,13 @@ public class DynamicForm implements IForm, ISubForm, NeedCheckUsableForm {
     private static int _Gson_GetInt(JsonObject data, String key, int defaultValue) {
         if (data.has(key)) {
             return data.get(key).getAsInt();
+        }
+        return defaultValue;
+    }
+
+    private static float _Gson_GetFloat(JsonObject data, String key, float defaultValue) {
+        if (data.has(key)) {
+            return data.get(key).getAsFloat();
         }
         return defaultValue;
     }
