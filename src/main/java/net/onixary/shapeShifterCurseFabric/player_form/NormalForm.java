@@ -24,7 +24,7 @@ public class NormalForm implements IForm {
     private Set<String> formFlag = Set.of();
     private PlayerFormBodyType bodyType = PlayerFormBodyType.NORMAL;
     private @Nullable Consumer<PlayerEntity> applyScaleFunc = null;
-    private float defaultEyeScale = 1.0F;
+    private float formEyeScale = Float.NaN;
     private boolean powerAnimRegistered = false;
     private Identifier perkTreeID = RegPerks.EMPTY_PERK_TREE;
 
@@ -136,16 +136,17 @@ public class NormalForm implements IForm {
         return this;
     }
 
-    // 同时记录基准 eye_scale，供 getDefaultEyeScale() 使用
-    public NormalForm applyScale(float scale, float eyeScale) {
-        this.applyScaleFunc = NORMAL_SCALE_FUNC_BUILDER.apply(scale, eyeScale);
-        this.defaultEyeScale = eyeScale;
+    public NormalForm OverwriteEyeScale(float eyeScale) {
+        this.formEyeScale = eyeScale;
         return this;
     }
 
     @Override
-    public float getDefaultEyeScale() {
-        return this.defaultEyeScale;
+    public float getEyeScale() {
+        if (!Float.isNaN(this.formEyeScale)) {
+            return this.formEyeScale;
+        }
+        return this.getBodyType() == PlayerFormBodyType.FERAL ? 0.6f : 1.0f;
     }
 
     // 所有形态必须重载 equals 函数 由于IForm是接口 没法重载Object的函数

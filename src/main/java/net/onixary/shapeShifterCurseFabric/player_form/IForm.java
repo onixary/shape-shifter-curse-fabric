@@ -145,8 +145,8 @@ public interface IForm {
     public void applyScale(PlayerEntity player);
 
     // 该 Form 在无额外 power 修改时的基准 eye_scale（用于第一人称额外物品锚点补偿等）
-    default float getDefaultEyeScale() {
-        return 1.0F;
+    default float getEyeScale() {
+        return Float.NaN;
     }
 
     // Interface 没法重载boolean equal(Object)函数

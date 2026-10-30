@@ -19,6 +19,7 @@ public class NormalSubForm extends NormalForm implements ISubForm {
     public final @NotNull List<Identifier> power_ADD = new ArrayList<>();
     public final @NotNull List<Identifier> power_REMOVE = new ArrayList<>();
     private @Nullable Consumer<PlayerEntity> applyScaleFunc = null;
+    private float formEyeScale = Float.NaN;
 
     public NormalSubForm(Identifier formID, @NotNull IForm masterForm) {
         super(formID);
@@ -118,12 +119,19 @@ public class NormalSubForm extends NormalForm implements ISubForm {
     }
 
     @Override
-    public float getDefaultEyeScale() {
+    public NormalForm OverwriteEyeScale(float eyeScale) {
+        this.formEyeScale = eyeScale;
+        return this;
+    }
+
+    @Override
+    public float getEyeScale() {
         // 子形态若自行配置了 scale 则用自身的，否则沿用 masterForm 的基准 eye_scale
-        if (this.applyScaleFunc != null) {
-            return super.getDefaultEyeScale();
+        // XuHaoNan: (对上面注释的评论) 不知道AI是怎么想的 applyScaleFunc赋值了也没法代表DefaultEyeScale被修改了
+        if (!Float.isNaN(this.formEyeScale)) {
+            return formEyeScale;
         }
-        return this.getMasterForm().getDefaultEyeScale();
+        return this.getMasterForm().getEyeScale();
     }
 
     @Override
