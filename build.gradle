@@ -352,6 +352,12 @@ tasks.register('checkTooltipWrapping', JavaExec) {
     mainClass = 'net.onixary.shapeShifterCurseFabric.client.ItemTooltipWrappingCheck'
 }
 
+tasks.register('checkFootstepSoundRhythm', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'net.onixary.shapeShifterCurseFabric.additional_power.FootstepSoundRhythmCheck'
+}
+
 publishing {
     publications {
         create("mavenJava", MavenPublication) {

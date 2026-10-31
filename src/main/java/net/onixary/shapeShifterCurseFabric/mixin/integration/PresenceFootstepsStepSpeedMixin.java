@@ -11,12 +11,18 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 // Presence Footsteps 自带步频判定(TerrestrialStepSoundGenerator.simulateFootsteps)，
-// 不经过原版 calculateNextStepSoundDistance，因此需要单独按 power 倍率缩放其步距阈值
+// 不经过原版 calculateNextStepSoundDistance，因此需要单独调整步距和相位。
 @Mixin(targets = "eu.ha3.presencefootsteps.sound.generator.TerrestrialStepSoundGenerator", remap = false)
 public abstract class PresenceFootstepsStepSpeedMixin {
     @Final
     @Shadow(remap = false)
     protected LivingEntity entity;
+
+    @Shadow(remap = false)
+    protected boolean isRightFoot;
+
+    @Shadow(remap = false)
+    protected abstract boolean hasStoppingConditions();
 
     @ModifyExpressionValue(
         method = "simulateFootsteps",
@@ -28,7 +34,12 @@ public abstract class PresenceFootstepsStepSpeedMixin {
         if (entity instanceof PlayerEntity player) {
             var powers = PowerHolderComponent.getPowers(player, ModifyFootstepSoundSpeedPower.class);
             if (!powers.isEmpty()) {
-                return original / powers.get(0).getSpeedMultiplierFor(player);
+                var power = powers.get(0);
+                if (hasStoppingConditions()) {
+                    return original / power.getSpeedMultiplierFor(player);
+                }
+                // PF checks this threshold every frame, but switches feet only when producing a step.
+                return power.getStepSoundDistance(player, original, !isRightFoot);
             }
         }
         return original;
