@@ -8696,6 +8696,11 @@
   "jei.shape-shifter-curse.catalyst_core.info": [
     "在幻形祭坛合成催化槽使用时不会被消耗"
   ],
+  "key.shape-shifter-curse.active_skill": "激活选中的能力绑定",
+  "key.shape-shifter-curse.next_active_skill": "下一个能力绑定",
+  "key.shape-shifter-curse.open_test_ui": "开启技能树界面",
+  "key.shape-shifter-curse.prev_active_skill": "上一个能力绑定",
+  "key.shape-shifter-curse.scroll_active_skill": "激活滚轮切换能力按键（按住）",
   "key.shape-shifter-curse.active_skill_1": "主动能力 (1)",
   "key.shape-shifter-curse.active_skill_2": "主动能力 (2)",
   "key.shape-shifter-curse.active_skill_3": "主动能力 (3)",

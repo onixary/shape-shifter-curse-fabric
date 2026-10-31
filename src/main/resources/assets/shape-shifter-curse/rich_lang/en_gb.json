@@ -6257,6 +6257,11 @@
   "jei.shape-shifter-curse.catalyst_core.info": [
     "Not consumed when used in the catalyst slot for crafting at the Shape Shifter Altar."
   ],
+  "key.shape-shifter-curse.active_skill": "Activate Selected Power Binding",
+  "key.shape-shifter-curse.next_active_skill": "Next Power Binding",
+  "key.shape-shifter-curse.open_test_ui": "Open Skill Tree",
+  "key.shape-shifter-curse.prev_active_skill": "Previous Power Binding",
+  "key.shape-shifter-curse.scroll_active_skill": "Enable Mouse Wheel Power Switching (Hold)",
   "key.shape-shifter-curse.active_skill_1": "Active Power (1)",
   "key.shape-shifter-curse.active_skill_2": "Active Power (2)",
   "key.shape-shifter-curse.active_skill_3": "Active Power (3)",
