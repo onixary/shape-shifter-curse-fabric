@@ -280,10 +280,6 @@ public class AltarShapedRecipe extends AltarRecipe {
     public static class Serializer implements RecipeSerializer<AltarShapedRecipe> {
         public AltarShapedRecipe read(Identifier identifier, JsonObject jsonObject) {
             int time = JsonHelper.getInt(jsonObject, "time", 200);
-            int moondustCost = JsonHelper.getInt(jsonObject, "moondust_cost", -1);
-            if (time <= 0 || moondustCost < -1 || moondustCost > Integer.MAX_VALUE / 800) {
-                throw new com.google.gson.JsonSyntaxException("Invalid altar time or moondust_cost");
-            }
             Ingredient catalyst = null;
             if (jsonObject.has("catalyst")) {
                 catalyst = Ingredient.fromJson(jsonObject.get("catalyst"), true);
@@ -294,7 +290,7 @@ public class AltarShapedRecipe extends AltarRecipe {
             }
             int fuelCost = JsonHelper.getInt(jsonObject, "fuel_cost", 1);
             if (fuelCost < 0 || (long) fuelCost * time > Integer.MAX_VALUE) {
-                throw new com.google.gson.JsonSyntaxException("Invalid altar fuel_cost");
+                throw new JsonSyntaxException("Invalid altar fuel_cost");
             }
             Map<String, Ingredient> map = readSymbols(JsonHelper.getObject(jsonObject, "key"));
             String[] strings = removePadding(getPattern(JsonHelper.getArray(jsonObject, "pattern")));
@@ -303,7 +299,6 @@ public class AltarShapedRecipe extends AltarRecipe {
             DefaultedList<Ingredient> defaultedList = createPatternMatrix(strings, map, i, j);
             ItemStack itemStack = ShapedRecipe.outputFromJson(JsonHelper.getObject(jsonObject, "result"));
             AltarShapedRecipe recipe = new AltarShapedRecipe(identifier, i, j, defaultedList, catalyst, itemStack, time, fuelCost, requireAdvancement);
-            recipe.totalFuelCost = moondustCost < 0 ? -1 : moondustCost * 800;
             return recipe;
         }
 
@@ -325,9 +320,7 @@ public class AltarShapedRecipe extends AltarRecipe {
             ItemStack itemStack = packetByteBuf.readItemStack();
             int time = packetByteBuf.readVarInt();
             int fuelCost = packetByteBuf.readVarInt();
-            AltarShapedRecipe recipe = new AltarShapedRecipe(identifier, i, j, defaultedList, catalyst, itemStack, time, fuelCost, requireAdvancement);
-            recipe.totalFuelCost = packetByteBuf.readVarInt();
-            return recipe;
+            return new AltarShapedRecipe(identifier, i, j, defaultedList, catalyst, itemStack, time, fuelCost, requireAdvancement);
         }
 
         public void write(PacketByteBuf packetByteBuf, AltarShapedRecipe altarRecipe) {
@@ -351,7 +344,6 @@ public class AltarShapedRecipe extends AltarRecipe {
             packetByteBuf.writeItemStack(altarRecipe.output);
             packetByteBuf.writeVarInt(altarRecipe.recipeTime);
             packetByteBuf.writeVarInt(altarRecipe.fuelCostPerTick);
-            packetByteBuf.writeVarInt(altarRecipe.totalFuelCost);
         }
     }
 }

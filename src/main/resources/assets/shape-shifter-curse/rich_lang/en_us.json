@@ -5322,18 +5322,10 @@
   "command.shape_shifter_curse.perk.empty": [
     "The current form has no perks to debug."
   ],
-  "command.shape_shifter_curse.perk.free": [
-    "Free perk unlocks for form %s: %s"
-  ],
-  "command.shape_shifter_curse.perk.reset_all": [
-    "Reset tree %s (%s perks) and restored base form powers."
-  ],
-  "command.shape_shifter_curse.perk.tree": [
-    "Perk tree %s: %s / %s unlocked"
-  ],
-  "command.shape_shifter_curse.perk.unlock_all": [
-    "Tree %s: unlocked %s new perks."
-  ],
+  "command.shape_shifter_curse.perk.free": "Free perk unlocks for form %s: %s",
+  "command.shape_shifter_curse.perk.reset_all": "Reset tree %s (%s perks) and restored base form powers.",
+  "command.shape_shifter_curse.perk.tree": "Perk tree %s: %s / %s unlocked",
+  "command.shape_shifter_curse.perk.unlock_all": "Tree %s: unlocked %s new perks.",
   "commands.shape-shifter-curse.form_not_found": [
     "Specified form not found!"
   ],
@@ -5533,14 +5525,10 @@
   "gui.shape_shifter_curse.category.altar_shaped": "Shape Shifter Altar Shaped Crafting",
   "gui.shape_shifter_curse.category.altar_shapeless": "Shape Shifter Altar Shapeless Crafting",
   "gui.shape_shifter_curse.category.web_compostable": "Digesting",
-  "gui.shape_shifter_curse.jei.altar.moondust": [
-    "Moondust cost: %s"
-  ],
+  "gui.shape_shifter_curse.jei.altar.moondust": "Moondust cost: %s",
   "gui.shape_shifter_curse.jei.altar.recipe_id": "Recipe ID: %s",
   "gui.shape_shifter_curse.jei.altar.requires_advancement": "Requires Advancement: %s",
-  "gui.shape_shifter_curse.jei.altar.time": [
-    "Time: %s seconds"
-  ],
+  "gui.shape_shifter_curse.jei.altar.time": "Time: %s seconds",
   "gui.shape_shifter_curse_fabric.book_2_1.open_fcs_menu": "Custom Color",
   "gui.shape_shifter_curse_fabric.fcs.accent1GreyReverse": "Reverse Accent 1",
   "gui.shape_shifter_curse_fabric.fcs.accent2GreyReverse": "Reverse Accent 2",

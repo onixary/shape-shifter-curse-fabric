@@ -12,24 +12,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.ArrayList;
 
+// 这个AI写的什么玩意啊 和那个EyeScale一样 给我看的血压飙升 之后得重构(不用之后了 现在就得重构)
 public abstract class AltarRecipe implements Recipe<SidedInventory> {
-    // Optional exact fuel budget, in fuel units (one moondust = 800).
-    // -1 preserves existing datapacks' per-tick fuel_cost behavior.
-    public int totalFuelCost = -1;
-
-    public int totalFuelUsage() {
-        return totalFuelCost >= 0 ? totalFuelCost : fuelUsage() * recipeTime();
-    }
-
-    public int fuelUsage(int progress) {
-        if (totalFuelCost < 0) {
-            return fuelUsage();
-        }
-        // Spread the remainder over the recipe without rounding away any fuel.
-        return (int) (((long) (progress + 1) * totalFuelCost / recipeTime())
-                - ((long) progress * totalFuelCost / recipeTime()));
-    }
-
     @Override
     public RecipeType<?> getType() {
         return RecipeUtils.ALTAR_RECIPE;
@@ -81,5 +65,10 @@ public abstract class AltarRecipe implements Recipe<SidedInventory> {
 
     public int fuelUsage() {
         return 1;
+    }
+
+    // 辅助函数 不可重载 除非修改了燃料消耗逻辑
+    public int totalFuelUsage() {
+        return fuelUsage() * recipeTime();
     }
 }
