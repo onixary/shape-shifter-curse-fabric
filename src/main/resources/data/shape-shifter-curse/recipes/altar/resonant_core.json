@@ -1,28 +1,25 @@
 {
   "type": "shape-shifter-curse:altar_shaped",
   "pattern": [
-    " S ",
+    "BAB",
     "AMA",
-    " P "
+    "BAB"
   ],
   "key": {
     "M": {
       "item": "shape-shifter-curse:moondust_crystal_shard"
     },
-    "S": {
-      "item": "minecraft:string"
-    },
     "A": {
       "item": "minecraft:amethyst_shard"
     },
-    "P": {
-      "item": "minecraft:phantom_membrane"
+    "B": {
+      "item": "minecraft:amethyst_block"
     }
   },
   "result": {
-    "item": "shape-shifter-curse:charm_of_night_crystal",
+    "item": "shape-shifter-curse:resonant_core",
     "count": 1
   },
   "time": 100,
-  "moondust_cost": 5
+  "fuel_cost": 40
 }

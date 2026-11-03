@@ -1,28 +1,31 @@
 {
   "type": "shape-shifter-curse:altar_shaped",
   "pattern": [
-    " S ",
-    "MPM",
-    " B "
+    "TMT",
+    "ESE",
+    "WSW"
   ],
   "key": {
     "M": {
       "item": "shape-shifter-curse:moondust_crystal_shard"
     },
-    "S": {
+    "T": {
       "item": "minecraft:string"
     },
-    "P": {
-      "item": "minecraft:prismarine_shard"
+    "E": {
+      "item": "minecraft:spider_eye"
     },
-    "B": {
-      "item": "minecraft:bone_meal"
+    "W": {
+      "item": "minecraft:cobweb"
+    },
+    "S": {
+      "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "shape-shifter-curse:charm_of_hollow_fang",
+    "item": "shape-shifter-curse:venom_spindle",
     "count": 1
   },
   "time": 100,
-  "moondust_cost": 5
+  "fuel_cost": 40
 }

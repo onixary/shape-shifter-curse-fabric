@@ -9,8 +9,8 @@
     "item": "shape-shifter-curse:attach_hook_plus",
     "count": 1
   },
-  "time": 600,
-  "moondust_cost": 16,
+  "time": 800,
+  "fuel_cost": 16,
   "catalyst": {
     "item": "shape-shifter-curse:night_catalyst_core"
   }
