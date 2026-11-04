@@ -1,5 +1,6 @@
 package net.onixary.shapeShifterCurseFabric.render.form_render.sub_controller;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,11 +12,13 @@ import net.onixary.shapeShifterCurseFabric.util.util.CachedDataMap;
 import net.onixary.shapeShifterCurseFabric.util.util.ICachedDataMap;
 import software.bernie.geckolib.cache.object.GeoBone;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
 public final class FormEyeBlinkController {
-    public String EYE_ROOT_BONE = null;
+    public final List<String> EYE_ROOT_BONES = new ArrayList<>();
     public float OPEN_SCALE = 1.0f;
     public float CLOSED_SCALE = 0.01f;
     private static final int DEFAULT_MIN_BLINK_INTERVAL_TICK = 60;
@@ -24,14 +27,24 @@ public final class FormEyeBlinkController {
     private static final ICachedDataMap<UUID, PlayerEntity, BlinkState> STATE_MAP = new CachedDataMap<>(player -> new BlinkState(), Entity::getUuid);
 
     // "eye_blink": {
-    //     "eye": "eyeRoot",
+    //     "eye": ["eyeRoot", "extraEyeRoot"], // 单个骨骼仍可写成 "eye": "eyeRoot"
     //     "open_scale": 1.0,
     //     "close_scale": 0.01
     // }
 
     public FormEyeBlinkController(JsonObject jsonObject) {
         if (jsonObject.has("eye")) {
-            EYE_ROOT_BONE = jsonObject.get("eye").getAsString();
+            JsonElement eye = jsonObject.get("eye");
+            if (eye.isJsonArray()) {
+                for (JsonElement bone : eye.getAsJsonArray()) {
+                    if (!bone.isJsonPrimitive() || !bone.getAsJsonPrimitive().isString()) {
+                        throw new IllegalArgumentException("eye_blink.eye array must contain bone name strings");
+                    }
+                    EYE_ROOT_BONES.add(bone.getAsString());
+                }
+            } else {
+                EYE_ROOT_BONES.add(eye.getAsString());
+            }
         }
         if (jsonObject.has("open_scale")) {
             OPEN_SCALE = jsonObject.get("open_scale").getAsFloat();
@@ -42,16 +55,19 @@ public final class FormEyeBlinkController {
     }
 
     public void update(FormModel model, PlayerEntity player, float tickDelta) {
-        if (EYE_ROOT_BONE == null) {
-            return;
+        BlinkState state = null;
+        for (String boneName : EYE_ROOT_BONES) {
+            GeoBone eyeRoot = model.getCachedGeoBone(boneName);
+            if (eyeRoot == null) {
+                continue;
+            }
+            // 每帧只更新一次眨眼状态，各眼组在自己的枢轴上同步缩放。
+            if (state == null) {
+                state = STATE_MAP.get(player);
+                state.update(player, tickDelta, BlinkConfig.fromClientConfig(), this);
+            }
+            applyScale(eyeRoot, state.currentScaleY);
         }
-        GeoBone eyeRoot = model.getCachedGeoBone(EYE_ROOT_BONE);
-        if (eyeRoot == null) {
-            return;
-        }
-        BlinkState state = STATE_MAP.get(player);
-        state.update(player, tickDelta, BlinkConfig.fromClientConfig(), this);
-        applyScale(eyeRoot, state.currentScaleY);
     }
 
     private void applyScale(GeoBone bone, float scaleY) {

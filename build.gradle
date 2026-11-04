@@ -358,6 +358,12 @@ tasks.register('checkFootstepSoundRhythm', JavaExec) {
     mainClass = 'net.onixary.shapeShifterCurseFabric.additional_power.FootstepSoundRhythmCheck'
 }
 
+tasks.register('checkEyeBlink', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'net.onixary.shapeShifterCurseFabric.render.form_render.sub_controller.FormEyeBlinkCheck'
+}
+
 publishing {
     publications {
         create("mavenJava", MavenPublication) {
