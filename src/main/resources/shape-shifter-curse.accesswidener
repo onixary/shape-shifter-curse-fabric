@@ -54,3 +54,4 @@ accessible field net/minecraft/entity/ai/goal/ActiveTargetGoal targetPredicate L
 accessible field net/minecraft/entity/ai/TargetPredicate predicate Ljava/util/function/Predicate;
 accessible method net/minecraft/entity/passive/OcelotEntity isTrusting ()Z
 accessible method net/minecraft/client/gui/DrawContext drawTexture (Lnet/minecraft/util/Identifier;IIIIIIIFFII)V
+accessible field net/minecraft/client/gl/PostEffectProcessor passes Ljava/util/List;

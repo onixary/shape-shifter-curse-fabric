@@ -195,7 +195,7 @@ dependencies {
     modLocalRuntime "curse.maven:rich-translatable-text-1342784:7440321"
 
     // satin shader
-    modImplementation "org.ladysnake:satin:${satin_version}"
+    // modImplementation "org.ladysnake:satin:${satin_version}"
 
     // Reach Entity Attributes by jamieswhiteshirt
     modImplementation "com.jamieswhiteshirt:reach-entity-attributes:${project.reach_version}"

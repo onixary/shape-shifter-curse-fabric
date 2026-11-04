@@ -44,7 +44,7 @@ import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.InstinctUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.render.form_render.FormRenderUtils;
-import net.onixary.shapeShifterCurseFabric.render.render_layer.FurGradientRenderLayer;
+import net.onixary.shapeShifterCurseFabric.screen_effect.TransformFX_V2;
 import net.onixary.shapeShifterCurseFabric.util.*;
 import net.onixary.shapeShifterCurseFabric.util.Verify.AuthClient;
 import net.onixary.shapeShifterCurseFabric.util.test.NetWorkTest;
@@ -252,7 +252,6 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		ModPacketsS2C.register();
 
 		registerShaderResource();
-		FurGradientRenderLayer.onInitializeClient();
 
 		ManaRegistriesClient.register();
 		RegCustomEntityRenderer.init();
@@ -357,6 +356,8 @@ public class ShapeShifterCurseFabricClient implements ClientModInitializer {
 		RegMenuScreen.init();
 
 		BlockEntityRendererFactories.register(RegCustomBlock.FORM_ATTUNER_BLOCK_ENTITY, FormAttunerBeamRenderer::new);
+
+		TransformFX_V2.INSTANCE.registerCallbacks();
 
 		// NetWorkTest.init();
 	}

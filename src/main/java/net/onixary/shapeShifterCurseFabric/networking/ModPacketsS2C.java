@@ -28,6 +28,7 @@ import net.onixary.shapeShifterCurseFabric.perk.PerkUtils;
 import net.onixary.shapeShifterCurseFabric.player_animation.v3.IPlayerAnimController;
 import net.onixary.shapeShifterCurseFabric.player_form.RegPlayerForms;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
+import net.onixary.shapeShifterCurseFabric.screen_effect.TransformFX_V2;
 import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
 import net.onixary.shapeShifterCurseFabric.util.FormColorData;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
@@ -46,7 +47,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static net.onixary.shapeShifterCurseFabric.networking.ModPackets.*;
-import static net.onixary.shapeShifterCurseFabric.screen_effect.TransformFX.beginTransformEffect;
+import static net.onixary.shapeShifterCurseFabric.screen_effect.TransformFX_V2.beginTransformEffect;
 
 // 应仅在客户端注册
 // This class should only be registered on the client side
@@ -138,7 +139,7 @@ public class ModPacketsS2C {
                     if (isTransforming) {
                         TransformManager.transformTimer = 0;
                         ShapeShifterCurseFabricClient.emitTransformParticle(StaticParams.TRANSFORM_FX_DURATION_IN);
-                        beginTransformEffect();
+                        // TransformFX_V2.beginTransformEffect();
                         TransformOverlay.INSTANCE.setEnableOverlay(true);
                     } else {
                         TransformManager.transformTimer = -1;
