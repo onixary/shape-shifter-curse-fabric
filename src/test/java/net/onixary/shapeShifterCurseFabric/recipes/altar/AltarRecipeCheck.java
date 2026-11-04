@@ -49,7 +49,7 @@ public final class AltarRecipeCheck {
             AltarShapelessRecipe recipe = recipe(example[0], example[1]);
             int total = 0;
             for (int tick = 0; tick < recipe.recipeTime(); tick++) {
-                int cost = recipe.fuelUsage(tick);
+                int cost = recipe.fuelUsage();
                 check(cost >= 0, "Fuel must never be created");
                 total += cost;
             }
@@ -98,7 +98,7 @@ public final class AltarRecipeCheck {
                 {"ingredients":[{"item":"minecraft:stick"}],"result":{"item":"minecraft:emerald"},
                  "time":100,"fuel_cost":3}
                 """).getAsJsonObject());
-        check(legacy.fuelUsage(0) == 3 && legacy.totalFuelUsage() == 300, "Legacy per-tick fuel remains compatible");
+        check(legacy.fuelUsage() == 3 && legacy.totalFuelUsage() == 300, "Legacy per-tick fuel remains compatible");
 
         // Check the actual loaded data, not only the vanilla-item fixtures above.
         int upgradeMappings = 0;

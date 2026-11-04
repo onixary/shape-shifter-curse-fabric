@@ -81,7 +81,7 @@ public class PlayerOriginComponent implements OriginComponent {
         }
     }
 
-    private void grantPowersFromOrigin(Origin origin, PowerHolderComponent powerComponent) {
+    public void grantPowersFromOrigin(Origin origin, PowerHolderComponent powerComponent) {
         Identifier source = origin.getIdentifier();
         for(PowerType<?> powerType : origin.getPowerTypes()) {
             if(!powerComponent.hasPower(powerType, source)) {
@@ -90,7 +90,7 @@ public class PlayerOriginComponent implements OriginComponent {
         }
     }
 
-    private void revokeRemovedPowers(Origin origin, PowerHolderComponent powerComponent) {
+    public void revokeRemovedPowers(Origin origin, PowerHolderComponent powerComponent) {
         Identifier source = origin.getIdentifier();
         List<PowerType<?>> powersByOrigin = powerComponent.getPowersFromSource(source);
         powersByOrigin.stream().filter(p -> !origin.hasPowerType(p)).forEach(p -> powerComponent.removePower(p, source));
