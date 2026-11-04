@@ -1,31 +1,28 @@
 {
   "type": "shape-shifter-curse:altar_shaped",
   "pattern": [
-    "TMT",
-    "ESE",
-    "WSW"
+    " S ",
+    "AMA",
+    " P "
   ],
   "key": {
     "M": {
       "item": "shape-shifter-curse:moondust_crystal_shard"
     },
-    "T": {
+    "S": {
       "item": "minecraft:string"
     },
-    "E": {
-      "item": "minecraft:spider_eye"
+    "A": {
+      "item": "minecraft:amethyst_shard"
     },
-    "W": {
-      "item": "minecraft:cobweb"
-    },
-    "S": {
-      "item": "minecraft:stick"
+    "P": {
+      "item": "minecraft:phantom_membrane"
     }
   },
   "result": {
-    "item": "shape-shifter-curse:venom_spindle",
+    "item": "shape-shifter-curse:charm_of_night_crystal",
     "count": 1
   },
   "time": 100,
-  "moondust_cost": 5
+  "fuel_cost": 40
 }

@@ -226,7 +226,7 @@ public class AltarBlockEntity extends LockableContainerBlockEntity implements Si
         int savedTotal = this.totalProgress;
         this.resumeRecipeId = null;
         if (this.nowRecipe != null) {
-            if (world != null && this.canCraftRecipe(world.getRegistryManager())) {
+            if (this.canCraftRecipe(world.getRegistryManager())) {
                 return;
             }
             this.nowRecipe = null;
@@ -236,7 +236,14 @@ public class AltarBlockEntity extends LockableContainerBlockEntity implements Si
         if (altarRecipe.isPresent()) {
             this.nowRecipe = altarRecipe.get();
             this.totalProgress = this.nowRecipe.recipeTime();
-            if (!(world != null && this.canCraftRecipe(world.getRegistryManager()))) {
+            boolean fuelEnough = true;
+            int requireFuel = nowRecipe.fuelUsage() * nowRecipe.recipeTime();
+            if (requireFuel > 0 && requireFuel <= maxFuel) {
+                if (this.fuelTime < requireFuel) {
+                    fuelEnough = false;
+                }
+            }
+            if (!(this.canCraftRecipe(world.getRegistryManager()) && fuelEnough)) {
                 this.nowRecipe = null;
                 this.totalProgress = 0;
             }
@@ -322,7 +329,7 @@ public class AltarBlockEntity extends LockableContainerBlockEntity implements Si
             }
         }
         if (this.nowRecipe != null) {
-            int fuelCost = nowRecipe.fuelUsage(this.progress);
+            int fuelCost = nowRecipe.fuelUsage();
             if (this.fuelTime >= fuelCost) {
                 this.fuelTime -= fuelCost;
                 this.progress++;

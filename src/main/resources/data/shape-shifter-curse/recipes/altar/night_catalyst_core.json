@@ -5,7 +5,7 @@
     "count": 1
   },
   "time": 1200,
-  "moondust_cost": 9,
+  "fuel_cost": 6,
   "pattern": [
     "ABC",
     "DEF",

@@ -7761,18 +7761,10 @@
   "command.shape_shifter_curse.perk.empty": [
     "当前形态没有可调试的技能树。"
   ],
-  "command.shape_shifter_curse.perk.free": [
-    "形态 %s 的 Perk 免费解锁：%s"
-  ],
-  "command.shape_shifter_curse.perk.reset_all": [
-    "已重置技能树 %s 的 %s 个 Perk，并恢复形态基础能力。"
-  ],
-  "command.shape_shifter_curse.perk.tree": [
-    "技能树 %s：已解锁 %s / %s"
-  ],
-  "command.shape_shifter_curse.perk.unlock_all": [
-    "已为技能树 %s 新解锁 %s 个 Perk。"
-  ],
+  "command.shape_shifter_curse.perk.free": "形态 %s 的 Perk 免费解锁：%s",
+  "command.shape_shifter_curse.perk.reset_all": "已重置技能树 %s 的 %s 个 Perk，并恢复形态基础能力。",
+  "command.shape_shifter_curse.perk.tree": "技能树 %s：已解锁 %s / %s",
+  "command.shape_shifter_curse.perk.unlock_all": "已为技能树 %s 新解锁 %s 个 Perk。",
   "commands.shape-shifter-curse.form_not_found": [
     "未找到指定的形态！"
   ],
@@ -7972,14 +7964,10 @@
   "gui.shape_shifter_curse.category.altar_shaped": "幻形祭坛有序合成",
   "gui.shape_shifter_curse.category.altar_shapeless": "幻形祭坛无序合成",
   "gui.shape_shifter_curse.category.web_compostable": "消化",
-  "gui.shape_shifter_curse.jei.altar.moondust": [
-    "月尘消耗：%s"
-  ],
+  "gui.shape_shifter_curse.jei.altar.moondust": "月尘消耗：%s",
   "gui.shape_shifter_curse.jei.altar.recipe_id": "配方 ID：%s",
   "gui.shape_shifter_curse.jei.altar.requires_advancement": "需要进度：%s",
-  "gui.shape_shifter_curse.jei.altar.time": [
-    "耗时：%s 秒"
-  ],
+  "gui.shape_shifter_curse.jei.altar.time": "耗时：%s 秒",
   "gui.shape_shifter_curse_fabric.book_2_1.open_fcs_menu": "自定义形态配色",
   "gui.shape_shifter_curse_fabric.fcs.accent1GreyReverse": "重点色1灰度反转",
   "gui.shape_shifter_curse_fabric.fcs.accent2GreyReverse": "重点色2灰度反转",

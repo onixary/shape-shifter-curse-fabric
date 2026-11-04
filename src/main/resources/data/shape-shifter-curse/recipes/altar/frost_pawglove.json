@@ -1,28 +1,31 @@
 {
   "type": "shape-shifter-curse:altar_shaped",
   "pattern": [
-    "LLL",
-    "BMI",
-    "   "
+    "  C",
+    "MPI",
+    "NN "
   ],
   "key": {
     "M": {
       "item": "shape-shifter-curse:moondust_crystal_shard"
     },
-    "L": {
-      "item": "minecraft:leather"
-    },
-    "B": {
-      "item": "minecraft:blaze_powder"
+    "P": {
+      "item": "minecraft:packed_ice"
     },
     "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "N": {
       "item": "minecraft:iron_nugget"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
     }
   },
   "result": {
-    "item": "shape-shifter-curse:collar_of_tension",
+    "item": "shape-shifter-curse:frost_pawglove",
     "count": 1
   },
   "time": 100,
-  "moondust_cost": 5
+  "fuel_cost": 40
 }
