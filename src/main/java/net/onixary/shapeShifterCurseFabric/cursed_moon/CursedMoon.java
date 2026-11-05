@@ -54,6 +54,9 @@ public class CursedMoon {
         if (PlayerFormComponent.COMPONENT.get(player).isCursedMoonApplied) {
             return;
         }
+        if (player.isSpectator()) {
+            return;
+        }
         boolean isOverworld = player.getWorld().getRegistryKey() == World.OVERWORLD;
         if (RegPlayerForms.ORIGINAL_BEFORE_ENABLE.isPlayerForm(player)) {
             if (isOverworld) {
