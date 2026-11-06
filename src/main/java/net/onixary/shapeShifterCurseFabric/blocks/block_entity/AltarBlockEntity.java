@@ -237,8 +237,9 @@ public class AltarBlockEntity extends LockableContainerBlockEntity implements Si
             this.nowRecipe = altarRecipe.get();
             this.totalProgress = this.nowRecipe.recipeTime();
             boolean fuelEnough = true;
+            boolean resume = this.nowRecipe.getId().equals(savedRecipe) && savedTotal == this.totalProgress;
             int requireFuel = nowRecipe.fuelUsage() * nowRecipe.recipeTime();
-            if (requireFuel > 0 && requireFuel <= maxFuel) {
+            if (resume || (requireFuel > 0 && requireFuel <= maxFuel)) {
                 if (this.fuelTime < requireFuel) {
                     fuelEnough = false;
                 }

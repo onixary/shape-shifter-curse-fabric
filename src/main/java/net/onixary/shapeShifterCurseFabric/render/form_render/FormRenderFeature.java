@@ -77,6 +77,7 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
                 formModel.AnimationSystem.afterRender(formRenderer, formModel, playerEntityRenderer, abstractClientPlayerEntity, matrices, vertexConsumers, light, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch);
                 matrices.pop();
                 formModel.AnimationSystem.finishRender(formRenderer, formModel, playerEntityRenderer, abstractClientPlayerEntity, matrices, vertexConsumers, light, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch);
+                formRenderer.clearPlayer();
             }
         }
     }
@@ -172,8 +173,10 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
         for (FormRenderer formRenderer : formRendererList) {
             PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = playerEntityRenderer.getModel();
             FormModel formModel = (FormModel) formRenderer.getGeoModel();
+            formRenderer.setPlayer(player, playerEntityModel.thinArms);
             Identifier overlayTexture = formModel.getOverlayTextureResource(playerEntityModel.thinArms);
             Identifier emissiveTexture = formModel.getEmissiveTextureResource(playerEntityModel.thinArms);
+            formRenderer.clearPlayer();
             boolean bl = playerEntityRenderer.isVisible(player);
             boolean bl2 = !bl && !player.isInvisibleTo(MinecraftClient.getInstance().player);
             if (overlayTexture != null) {
@@ -272,6 +275,7 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
             if (geoBone == null) {
                 formModel.AnimationSystem.afterRenderFirstPerson(geoBone, formRenderer, formModel, playerEntityRenderer, player, arm, sleeve);
                 matrices.pop();
+                formRenderer.clearPlayer();
                 continue;
             }
             RenderLayer renderLayerNormal = RenderLayer.getEntityTranslucent(formModel.getTextureResource(formAnimatable));
@@ -297,6 +301,7 @@ public class FormRenderFeature <T extends PlayerEntity, M extends BipedEntityMod
                 arm.render(matrices, vertexConsumers.getBuffer(OverlayLayer), light, OverlayInt, 1.0f, 1.0f, 1.0f, 1.0F);
             }
             formModel.AnimationSystem.afterRenderFirstPerson(geoBone, formRenderer, formModel, playerEntityRenderer, player, arm, sleeve);
+            formRenderer.clearPlayer();
         }
     }
 }

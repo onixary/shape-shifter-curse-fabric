@@ -86,7 +86,10 @@ public class NormalFormSelectScreen extends Screen {
 
     @Override
     public void init() {
+        // 我一直以为init只在渲染时调用一次 没想到改大小竟然也用到了
+        buttonWidgetList.clear();
         availableForms = getAvailableForms();
+        nowPage = Math.max(0, Math.min(nowPage, Math.max(0, (availableForms.size() - 1) / pageSize)));
         // 或许可以对按钮进行排版
         // 修改数量请同时修改pageSize
         // 一列显示8个 共2列

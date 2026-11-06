@@ -1147,6 +1147,24 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
 
     @Override
     public void close() {
+        try {
+            this.saveDataToClient(ShapeShifterCurseFabric.playerCustomConfig.auto_sync_config && ShapeShifterCurseFabric.playerCustomConfig.auto_sync_color_config, ShapeShifterCurseFabric.playerCustomConfig.auto_sync_config);
+            ModPacketsS2C.sendUpdateCustomColor(this.getColorSetting(false), false, true, this.keepOriginalSkin, this.enableFormColorSystem); // 如果没进游戏时会发送失败 懒得做判断了 加一个Try
+        } catch (Exception ignored) {
+        }
+        if (!this.lastLoadDataIsServerSide) {
+            this.saveDataToClient(true, true);
+        }
+        this.saveData();
+        if (this.parsetScreen != null && this.client != null) {
+            this.client.setScreen(this.parsetScreen);
+        } else {
+            super.close();
+        }
+    }
+
+    @Override
+    public void removed() {
         CleanColorSettingCache();
         if (isUsingTempTexture) {
             FormTextureUtils.useTempFormTexture = false;
@@ -1164,20 +1182,7 @@ public class FormColorSelectMenu extends Screen implements FormTextureUtils.Temp
             isUsingTempModel = false;
         }
         instance = null;
-        try {
-            this.saveDataToClient(ShapeShifterCurseFabric.playerCustomConfig.auto_sync_config && ShapeShifterCurseFabric.playerCustomConfig.auto_sync_color_config, ShapeShifterCurseFabric.playerCustomConfig.auto_sync_config);
-            ModPacketsS2C.sendUpdateCustomColor(this.getColorSetting(false), false, true, this.keepOriginalSkin, this.enableFormColorSystem); // 如果没进游戏时会发送失败 懒得做判断了 加一个Try
-        } catch (Exception ignored) {
-        }
-        if (!this.lastLoadDataIsServerSide) {
-            this.saveDataToClient(true, true);
-        }
-        this.saveData();
-        if (this.parsetScreen != null && this.client != null) {
-            this.client.setScreen(this.parsetScreen);
-        } else {
-            super.close();
-        }
+        super.removed();
     }
 
     @Override

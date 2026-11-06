@@ -19,4 +19,9 @@ public class FormRenderer extends GeoObjectRenderer<FormAnimatable> {
         this.realAnimatable.setPlayer(player);
         this.realModel.setPlayer(player, slim);
     }
+
+    public void clearPlayer() {
+        this.realAnimatable.setPlayer(null);
+        this.realModel.__setPlayer(null);
+    }
 }
