@@ -300,16 +300,26 @@ public class FormTextureUtils {
     public static NativeImageBackedTexture BakeTextureNoMemLeak(Identifier texture, Identifier mask, ColorSetting colorSetting, boolean OnlyMultiply) {
         if (texture == null || mask == null) return null;
         NativeImage textureImage = toNativeImage(texture);
-        NativeImage maskImage = toNativeImage(mask);
-        int textureWidth = textureImage.getWidth();
-        int textureHeight = textureImage.getHeight();
-        Triple<Integer, Integer, Integer> MaskLayerAverageGreyScale = getAverageGreyScale(textureImage, maskImage);
-        for (int x = 0; x < textureWidth; x++) {
-            for (int y = 0; y < textureHeight; y++) {
-                textureImage.setColor(x, y, ProcessPixel(textureImage.getColor(x, y), maskImage.getColor(x, y), colorSetting, MaskLayerAverageGreyScale, OnlyMultiply));
+        if (textureImage == null) throw new IllegalArgumentException("Unable to load texture: " + texture);
+        try (NativeImage maskImage = toNativeImage(mask)) {
+            if (maskImage == null) throw new IllegalArgumentException("Unable to load mask: " + mask);
+            int textureWidth = textureImage.getWidth();
+            int textureHeight = textureImage.getHeight();
+            if (textureWidth != maskImage.getWidth() || textureHeight != maskImage.getHeight()) {
+                throw new IllegalArgumentException("Texture and mask dimensions differ: " + texture + " / " + mask);
             }
+            Triple<Integer, Integer, Integer> MaskLayerAverageGreyScale = getAverageGreyScale(textureImage, maskImage);
+            for (int x = 0; x < textureWidth; x++) {
+                for (int y = 0; y < textureHeight; y++) {
+                    textureImage.setColor(x, y, ProcessPixel(textureImage.getColor(x, y), maskImage.getColor(x, y), colorSetting, MaskLayerAverageGreyScale, OnlyMultiply));
+                }
+            }
+            NativeImageBackedTexture result = new NativeImageBackedTexture(textureImage);
+            textureImage = null;
+            return result;
+        } finally {
+            if (textureImage != null) textureImage.close();
         }
-        return new NativeImageBackedTexture(textureImage);
     }
 
     // 仅渲染使用 会处理isEnableFormColor

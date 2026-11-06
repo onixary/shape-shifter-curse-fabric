@@ -16,6 +16,7 @@ public class CrawlingPower extends Power {
     private float originalHitboxHeightScale = 0.0f;
     private float CRAWL_EYE_HEIGHT_SCALE = 0.0f;
     private float CRAWL_HITBOX_HEIGHT_SCALE = 0.0f;
+    private boolean IsPowerActive = false;
 
     public CrawlingPower(PowerType<?> powerType, LivingEntity livingEntity, float scale, float eyeScale, float activeScale, float activeEyeScale) {
         super(powerType, livingEntity);
@@ -29,19 +30,31 @@ public class CrawlingPower extends Power {
     @Override
     public void tick() {
         if (entity instanceof ServerPlayerEntity player) {
-            if(this.isActive()) {
+            boolean isActive = this.isActive();
+            if(isActive && !this.IsPowerActive) {
                 ScaleData scaleDataEyeHeight = ScaleTypes.EYE_HEIGHT.getScaleData(player);
                 ScaleData scaleDataHitboxHeight = ScaleTypes.HITBOX_HEIGHT.getScaleData(player);
                 scaleDataEyeHeight.setScale(CRAWL_EYE_HEIGHT_SCALE);
                 scaleDataHitboxHeight.setScale(CRAWL_HITBOX_HEIGHT_SCALE);
-            } else {
+                this.IsPowerActive = true;
+            } else if (!isActive && this.IsPowerActive) {
                 ScaleData scaleDataEyeHeight = ScaleTypes.EYE_HEIGHT.getScaleData(player);
                 ScaleData scaleDataHitboxHeight = ScaleTypes.HITBOX_HEIGHT.getScaleData(player);
                 scaleDataEyeHeight.setScale(originalEyeHeightScale);
                 scaleDataHitboxHeight.setScale(originalHitboxHeightScale);
+                this.IsPowerActive = false;
             }
         }
     }
+
+    // @Override
+    // public void onRemoved() {
+    //     if (this.IsPowerActive && entity instanceof ServerPlayerEntity player) {
+    //         ScaleTypes.EYE_HEIGHT.getScaleData(player).setScale(originalEyeHeightScale);
+    //         ScaleTypes.HITBOX_HEIGHT.getScaleData(player).setScale(originalHitboxHeightScale);
+    //     }
+    //     this.IsPowerActive = false;
+    // }
 
     public static PowerFactory<?> getFactory() {
         return new PowerFactory<>(

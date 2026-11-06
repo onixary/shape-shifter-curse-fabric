@@ -126,7 +126,7 @@ public class AltarCraftUIHandler extends AbstractRecipeScreenHandler<SidedInvent
         ItemStack slotItem = slot.hasStack() ? slot.getStack() : ItemStack.EMPTY;
         ItemStack slotItemCopy = slotItem.copy();
         if (slotIndex >= 0 && slotIndex < 12) {
-            if (!this.insertItem(slotItem, 12, 47, slotIndex == 10)) {
+            if (!this.insertItem(slotItem, 12, 48, slotIndex == 11)) {
                 return ItemStack.EMPTY;
             }
             if (slotIndex == 0) {
@@ -172,6 +172,6 @@ public class AltarCraftUIHandler extends AbstractRecipeScreenHandler<SidedInvent
 
     @Override
     public boolean canUse(PlayerEntity player) {
-        return canUse(this.context, player, Blocks.CRAFTING_TABLE);
+        return this.altarBlockEntity.canPlayerUse(player);
     }
 }

@@ -24,6 +24,7 @@ public final class TransformFX_V2 implements ClientTickEvents.EndTick {
 
     private PostEffectProcessor processor;
     private GlUniform sliderUniform;
+    private boolean initializationFailed = false;
 
     private static int transformEffectDuration = 0;
     private static boolean doEffectIn = false;
@@ -52,18 +53,27 @@ public final class TransformFX_V2 implements ClientTickEvents.EndTick {
 
     @Override
     public void onEndTick(MinecraftClient client) {
+        if (client.world == null) {
+            doEffectIn = false;
+            doEffectOut = false;
+            transformEffectDuration = 0;
+            return;
+        }
+
+        if (!doEffectIn && !doEffectOut) return;
+
         ensureProcessor(client);
 
-        if (doEffectIn || doEffectOut) {
-            --transformEffectDuration;
-            if (transformEffectDuration <= 0) {
-                finishEffect();
-            }
+        if (client.isPaused()) return;
+
+        --transformEffectDuration;
+        if (transformEffectDuration <= 0) {
+            finishEffect();
         }
     }
 
     private void ensureProcessor(MinecraftClient client) {
-        if (processor != null) return;
+        if (processor != null || initializationFailed) return;
         if (client.getResourceManager() == null) return;
 
         try {
@@ -74,22 +84,25 @@ public final class TransformFX_V2 implements ClientTickEvents.EndTick {
                     client.getFramebuffer(),
                     id
             );
-            System.out.println("[TransformFX] processor created");
 
             List<PostEffectPass> passes = processor.passes;
             for (int i = 0; i < passes.size(); i++) {
                 GlUniform u = passes.get(i).getProgram().getUniformByName("Slider");
-                System.out.println("[TransformFX] pass[" + i + "] Slider = " + (u != null ? "FOUND" : "null"));
                 if (u != null) {
                     sliderUniform = u;
                     break;
                 }
             }
         } catch (IOException | RuntimeException e) {
-            System.out.println("[TransformFX] processor creation FAILED");
-            e.printStackTrace();
+            if (processor != null) {
+                processor.close();
+            }
             processor = null;
             sliderUniform = null;
+            initializationFailed = true;
+            ShapeShifterCurseFabric.LOGGER.error("Transform post effect disabled until resource reload; press F3+T to retry", e);
+        } finally {
+            client.getFramebuffer().beginWrite(true);
         }
     }
 
@@ -124,11 +137,14 @@ public final class TransformFX_V2 implements ClientTickEvents.EndTick {
         RenderSystem.depthMask(false);
         RenderSystem.disableCull();
 
-        processor.render(tickDelta);
-
-        RenderSystem.enableCull();
-        RenderSystem.depthMask(true);
-        RenderSystem.enableDepthTest();
+        try {
+            processor.render(tickDelta);
+        } finally {
+            client.getFramebuffer().beginWrite(true);
+            RenderSystem.enableCull();
+            RenderSystem.depthMask(true);
+            RenderSystem.enableDepthTest();
+        }
     }
 
     private void finishEffect() {
@@ -138,6 +154,7 @@ public final class TransformFX_V2 implements ClientTickEvents.EndTick {
     }
 
     public void onResourceReload() {
+        initializationFailed = false;
         if (processor != null) {
             processor.close();
             processor = null;
