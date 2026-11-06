@@ -23,6 +23,10 @@ public final class KeySegment {
         this.version = buf.readInt();
         this.useMeltdown = buf.readBoolean();
         int supportDataTypeCount = buf.readInt();
+        int trailingKeyBytes = 57 + 114;
+        if (supportDataTypeCount < 0 || supportDataTypeCount > 256 || buf.readableBytes() < trailingKeyBytes || supportDataTypeCount > (buf.readableBytes() - trailingKeyBytes) / Integer.BYTES) {
+            throw new IllegalArgumentException("Invalid supported data type count");
+        }
         int[] supportDataTypes = new int[supportDataTypeCount];
         for (int i = 0; i < supportDataTypeCount; i++) {
             int targetType = buf.readInt();

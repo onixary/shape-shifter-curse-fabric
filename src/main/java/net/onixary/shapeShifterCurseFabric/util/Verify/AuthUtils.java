@@ -66,6 +66,7 @@ import java.util.function.Function;
 // 赞助者子形态功能被废除了 不过感觉验证系统还有点用(比如OTA系统之类的) 先不彻底删除吧
 
 public final class AuthUtils {
+    public static final int MAX_AUTH_FILE_BYTES = 64 * 1024;
     // 密钥处理部分
     static final @NotNull KeyFactory Ed448KeyFactory;
     static final @NotNull KeyPairGenerator Ed448KeyPairGenerator;
@@ -190,6 +191,7 @@ public final class AuthUtils {
     }
 
     public static @Nullable AuthFile readAuthFile(PacketByteBuf buf) {
+        if (buf == null || buf.readableBytes() > MAX_AUTH_FILE_BYTES) return null;
         try {
             return new AuthFile(buf);
         } catch (Exception e) {

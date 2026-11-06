@@ -55,10 +55,16 @@ public final class AuthFile {
         dataBuf.setIndex(0, dataBuf.capacity());
         dataBuf.skipBytes(4);  // dataLength
         int dataCount = dataBuf.readShort();
+        if (dataCount < 0 || dataCount > dataBuf.readableBytes() / 12) {
+            throw new IllegalArgumentException("Invalid data segment count");
+        }
         for (int i = 0; i < dataCount; i++) {
             int dataType = dataBuf.readInt();
             dataBuf.skipBytes(4);  // dataVersion
             int dataLength = dataBuf.readInt();
+            if (dataLength < 12 || dataLength - 12 > dataBuf.readableBytes()) {
+                throw new IllegalArgumentException("Invalid data segment length");
+            }
             dataBuf.skipBytes(dataLength - 12);  // 包含 Header
             AuthUtils.requireTrue(this.keySegment.isDataTypeValid(dataType), "Invalid data type for key: " + dataType);
         }

@@ -4,7 +4,7 @@
   ],
   "passes": [
     {
-      "name": "shape-shifter-curse:transform_effect_v2",
+      "name": "ssc_transform_effect_v2",
       "intarget": "minecraft:main",
       "outtarget": "swap",
       "uniforms": [
