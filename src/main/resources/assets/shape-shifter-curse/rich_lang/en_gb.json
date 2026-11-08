@@ -6114,6 +6114,12 @@
   "item.shape-shifter-curse.morphscale_armor.tooltip": [
     "The moondust magic infused in these armours automatically adapts to your form"
   ],
+  "item.shape-shifter-curse.morphscale_catalyst_core": [
+    "Morphscale Catalyst Core"
+  ],
+  "item.shape-shifter-curse.morphscale_catalyst_core.tooltip": [
+    "Each time you observe it, its shape differs from last time"
+  ],
   "item.shape-shifter-curse.morphscale_core": [
     "Morphscale Core"
   ],

@@ -44,6 +44,29 @@ public final class AltarRecipeCheck {
     }
 
     @GameTest(templateName = FabricGameTest.EMPTY_STRUCTURE)
+    public void morphscaleCatalyst(TestContext context) {
+        AltarBlockEntity altar = new AltarBlockEntity(BlockPos.ORIGIN, RegCustomBlock.ALTAR_BLOCK.getDefaultState());
+        altar.setWorld(context.getWorld());
+        altar.setStack(0, new ItemStack(Items.DIAMOND_CHESTPLATE));
+        var recipe = RegBuiltinAlterRecipe.MorphScaleArmorRecipe;
+        check(!recipe.matches(altar, context.getWorld()), "Morphscale upgrade requires its catalyst");
+        altar.setStack(9, new ItemStack(Items.NETHER_STAR));
+        check(!recipe.matches(altar, context.getWorld()), "A nether star no longer substitutes for the core");
+        altar.setStack(9, new ItemStack(RegCustomItem.MORPHSCALE_CATALYST_CORE));
+        check(recipe.matches(altar, context.getWorld()), "New core enables equipment morphscale upgrades");
+        ItemStack output = recipe.craft(altar, context.getWorld().getRegistryManager());
+        check(output.isOf(Items.DIAMOND_CHESTPLATE) && output.getOrCreateNbt().getBoolean(
+                net.onixary.shapeShifterCurseFabric.additional_power.IsMorphScaleItemCondition.IsMorphScaleArmorTagName),
+                "Output retains equipment and gains the morphscale flag");
+        recipe.consumeInputs(altar);
+        check(altar.getStack(0).isEmpty(), "Equipment input consumed");
+        check(altar.getStack(9).isOf(RegCustomItem.MORPHSCALE_CATALYST_CORE), "Morphscale catalyst retained");
+        altar.setStack(0, output);
+        check(!recipe.matches(altar, context.getWorld()), "Already upgraded equipment is rejected");
+        context.complete();
+    }
+
+    @GameTest(templateName = FabricGameTest.EMPTY_STRUCTURE)
     public void recipes(TestContext context) {
         for (int[] example : new int[][]{{5, 5}, {10, 10}, {30, 16}, {60, 9}, {5, 0}}) {
             AltarShapelessRecipe recipe = recipe(example[0], example[1]);

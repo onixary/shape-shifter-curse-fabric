@@ -49,7 +49,8 @@ public class SSC_JEI_Plugin implements IModPlugin {
                 new ItemStack(RegCustomItem.FOXFIRE_CATALYST_CORE),
                 new ItemStack(RegCustomItem.SURGE_CATALYST_CORE),
                 new ItemStack(RegCustomItem.DUNE_CATALYST_CORE),
-                new ItemStack(RegCustomItem.NIGHT_CATALYST_CORE)
+                new ItemStack(RegCustomItem.NIGHT_CATALYST_CORE),
+                new ItemStack(RegCustomItem.MORPHSCALE_CATALYST_CORE)
         ), Text.translatable("jei.shape-shifter-curse.catalyst_core.info"));
 
         IIngredientManager ingredientManager = registration.getIngredientManager();

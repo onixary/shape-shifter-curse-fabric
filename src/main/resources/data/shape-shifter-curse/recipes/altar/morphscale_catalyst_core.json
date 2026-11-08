@@ -1,0 +1,22 @@
+{
+  "type": "shape-shifter-curse:altar_shaped",
+  "key": {
+    "S": {
+      "item": "minecraft:nether_star"
+    },
+    "M": {
+      "item": "shape-shifter-curse:moondust_crystal_shard"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SMS",
+    " S "
+  ],
+  "result": {
+    "item": "shape-shifter-curse:morphscale_catalyst_core",
+    "count": 1
+  },
+  "time": 1200,
+  "fuel_cost": 6
+}
