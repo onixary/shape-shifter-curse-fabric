@@ -36,7 +36,7 @@ public class Form_Axolotl3 extends NormalForm {
     public static final AbstractAnimStateController FALL_CONTROLLER = new WithSneakAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_3_jump")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_3_crawling_idle")));
     public static final AbstractAnimStateController ATTACK_CONTROLLER = new WithSneakAnimController(null, new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_2_crawling_attack_once")));
     public static final AbstractAnimStateController MINING_CONTROLLER = new WithSneakAnimController(null, new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_2_crawling_tool_swing")));
-    public static final AbstractAnimStateController FLYING_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_3_creative_flight")));
+    public static final AbstractAnimStateController FLYING_CONTROLLER = new WithSneakAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_3_creative_flight")), new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_3_crawling_idle")));
     public static final AbstractAnimStateController SLEEP_CONTROLLER = new OneAnimController(ANIM_SLEEP);
     public static final AbstractAnimStateController CRAWL_CONTROLLER = new OneAnimController(new AnimUtils.AnimationHolderData(ShapeShifterCurseFabric.identifier("axolotl_3_idle")));
     public static final AbstractAnimStateController USE_VANILLA_CONTROLLER = new OneAnimController((AnimUtils.AnimationHolderData) null);
@@ -53,10 +53,11 @@ public class Form_Axolotl3 extends NormalForm {
                             (animItemTags != null && !animItemTags.isEmpty() && animItemTags.contains(AnimItem.NoAnimItemTag))
                     )
             ) {
+                // 奇怪了 我当时给这3个写switch时应该是让这3种情况忽略拔刀剑动画的 我竟然没测出来
                 return switch (animStateEnum) {
-                    case ANIM_STATE_SWIM -> USE_VANILLA_CONTROLLER;
-                    case ANIM_STATE_SLEEP -> USE_VANILLA_CONTROLLER;
-                    case ANIM_STATE_CRAWL -> USE_VANILLA_CONTROLLER;
+                    case ANIM_STATE_SWIM -> SWIM_CONTROLLER;
+                    case ANIM_STATE_SLEEP -> SLEEP_CONTROLLER;
+                    case ANIM_STATE_CRAWL -> CRAWL_CONTROLLER;
                     default -> USE_VANILLA_CONTROLLER;
                 };
             }
