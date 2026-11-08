@@ -1,0 +1,11 @@
+{
+    "avali_chatter": {
+        "sounds": [
+            { "name": "shape-shifter-curse:avali_chatter", "pitch": 0.9 },
+            { "name": "shape-shifter-curse:avali_chatter", "pitch": 0.95 },
+            { "name": "shape-shifter-curse:avali_chatter", "pitch": 1.0 },
+            { "name": "shape-shifter-curse:avali_chatter", "pitch": 1.05 },
+            { "name": "shape-shifter-curse:avali_chatter", "pitch": 1.1 }
+        ]
+    }
+}

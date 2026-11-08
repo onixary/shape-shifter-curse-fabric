@@ -69,6 +69,7 @@ import net.onixary.shapeShifterCurseFabric.recipes.RecipeSerializerRegister;
 import net.onixary.shapeShifterCurseFabric.recipes.RecipeUtils;
 import net.onixary.shapeShifterCurseFabric.recipes.altar.RegBuiltinAlterRecipe;
 import net.onixary.shapeShifterCurseFabric.screen_effect.TransformOverlay;
+import net.onixary.shapeShifterCurseFabric.sound.RegCustomSound;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegOtherStatusEffects;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusEffect;
 import net.onixary.shapeShifterCurseFabric.status_effects.RegTStatusPotionEffect;
@@ -205,6 +206,7 @@ public class ShapeShifterCurseFabric implements ModInitializer {
         TransformativeEntitySpawning.addEntitySpawns();
         BatAttachEventHandler.register();
         RegCustomEntity.init();
+        RegCustomSound.init();
         // 注册动画（需要在服务端也执行以支持变换动画的同步）
         registerAnimations();
 

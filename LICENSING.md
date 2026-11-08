@@ -2,9 +2,11 @@
 
 This repository is **dual-licensed**: source code under MIT, media assets under
 Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0).
-The avali sub-form assets depict a concept that comes from someone else and follow
+The avali sub-form model assets depict a concept that comes from someone else and follow
 that concept's CC BY-SA 2.0 license instead - see
 [section 5](#5-concepts-from-others---cc-by-sa-20).
+The Avali chatter audio instead follows Nefumi's custom no-monetization permission
+(see section 4 and `THIRD-PARTY-NOTICES.md`).
 中文说明见下方 [中文版](#中文版)。
 
 ## Summary
@@ -14,7 +16,7 @@ that concept's CC BY-SA 2.0 license instead - see
 | Source code | MIT | [`LICENSE.txt`](LICENSE.txt) |
 | Media assets (3D models, textures, animations, sounds, fonts, translations) | CC BY-NC 4.0 | [`LICENSE-CC-BY-NC-4.0.txt`](LICENSE-CC-BY-NC-4.0.txt) |
 | Third-party code and assets we reuse | Their upstream license | [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md) |
-| Avali sub-form assets - concepts from others (see [section 5](#5-concepts-from-others---cc-by-sa-20)) | CC BY-SA 2.0 | <https://creativecommons.org/licenses/by-sa/2.0/> |
+| Avali sub-form model assets - concepts from others (see [section 5](#5-concepts-from-others---cc-by-sa-20)) | CC BY-SA 2.0 | <https://creativecommons.org/licenses/by-sa/2.0/> |
 
 Note that CC BY-NC 4.0 is *not* an open-source license, because it forbids
 commercial use. Only the media assets are covered by it; the code stays
@@ -49,7 +51,7 @@ Everything below is licensed under CC BY-NC 4.0 in
 | Path | Content |
 | --- | --- |
 | `3d_models/**`, except `icon/1-bit_Pixel_Icons/**` and the avali sub-form files in [section 5](#5-concepts-from-others---cc-by-sa-20) | Blockbench project files, colormasks, reference art |
-| `src/main/resources/assets/shape-shifter-curse/**`, except `shaders/**` and the avali sub-form assets in [section 5](#5-concepts-from-others---cc-by-sa-20) | textures, GeckoLib geo models, animation JSON, form models, GUI, sounds, `lang/**` and `rich_lang/**` translations |
+| `src/main/resources/assets/shape-shifter-curse/**`, except `shaders/**`, the third-party audio in section 4, and the avali sub-form assets in [section 5](#5-concepts-from-others---cc-by-sa-20) | textures, GeckoLib geo models, animation JSON, form models, GUI, sounds, `lang/**` and `rich_lang/**` translations |
 | `PatronServer/PackRes/**` | patron form packs |
 | `PatronServer/WebRoot/*.zip` | built patron form packs |
 | `custom_form_pack_example/**`, except `*.json` and `*.mcmeta` | example pack textures and models |
@@ -65,19 +67,22 @@ Recommended attribution text:
 
 Exception: the avali sub-form assets listed in
 [section 5](#5-concepts-from-others---cc-by-sa-20) are licensed under CC BY-SA 2.0
-instead of CC BY-NC 4.0.
+instead of CC BY-NC 4.0. Third-party audio in section 4 retains its own terms.
 
 ## 3. What this means for the built mod
 
 The built `jar` and `sources-jar` contain both code and assets, so they are a
 mixed-license distribution: the code portions are MIT, the embedded assets are
-CC BY-NC 4.0, except the avali sub-form assets, which are CC BY-SA 2.0 (see
-[section 5](#5-concepts-from-others---cc-by-sa-20)). Redistributing the unmodified
+CC BY-NC 4.0, except the avali sub-form model assets, which are CC BY-SA 2.0 (see
+[section 5](#5-concepts-from-others---cc-by-sa-20)), and third-party assets under
+their upstream terms (section 4). Redistributing the unmodified
 jar, including bundling it in a modpack or a server pack, is allowed as long as
-the use is non-commercial and the license files shipped inside the jar are kept.
+the use is non-commercial, the license files shipped inside the jar are kept,
+and all upstream conditions are met. The included Nefumi audio prohibits any
+monetization, including paid-access content; see section 4.
 
 Extracting assets from the jar and using them commercially is not allowed, except
-for the avali sub-form assets: those are CC BY-SA 2.0 and may be used commercially
+for the section 5 Avali model assets: those are CC BY-SA 2.0 and may be used commercially
 under that license's terms.
 
 ## 4. Third-party content
@@ -88,6 +93,13 @@ above; the upstream license applies instead. See
 [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md).
 
 Notably:
+
+- `src/main/resources/assets/shape-shifter-curse/sounds/avali_chatter.ogg` and
+  `avali_chatter.mp3` are by Nefumi, from [Avali sounds](https://steamcommunity.com/sharedfiles/filedetails/?id=3164757879).
+  **LicenseRef-Nefumi-Avali-Sounds**: custom permission for free, non-monetized
+  use, requiring visible author credit and source link. These files are not
+  covered by CC BY-NC 4.0 or the Avali models' CC BY-SA 2.0. Full attribution,
+  modifications and upstream conditions are in `THIRD-PARTY-NOTICES.md`.
 
 - `3d_models/icon/1-bit_Pixel_Icons/**` contains 1-bit Pixel Icons by Nikoichu,
   licensed under CC0 1.0 Universal. Attribution is appreciated but not required.
@@ -151,8 +163,8 @@ information is in [`fabric.mod.json`](src/main/resources/fabric.mod.json).
 # 中文版
 
 本仓库采用**双授权**：源代码使用 MIT，媒体资源使用「知识共享 署名-非商业性使用
-4.0 国际」（CC BY-NC 4.0）。avali 子形态资源描绘的是源自他人的概念，跟随该概念
-自身的 CC BY-SA 2.0 授权，详见第 5 节。
+4.0 国际」（CC BY-NC 4.0）。avali 子形态模型资源描绘的是源自他人的概念，跟随该概念
+自身的 CC BY-SA 2.0 授权，详见第 5 节。Avali 叫声音频另按 Nefumi 的无变现自定义许可使用，见第 4 节。
 
 ## 总览
 
@@ -161,10 +173,10 @@ information is in [`fabric.mod.json`](src/main/resources/fabric.mod.json).
 | 源代码 | MIT | [`LICENSE.txt`](LICENSE.txt) |
 | 媒体资源（3D 模型、贴图、动画、音效、字体、翻译文本） | CC BY-NC 4.0 | [`LICENSE-CC-BY-NC-4.0.txt`](LICENSE-CC-BY-NC-4.0.txt) |
 | 第三方代码与资源 | 遵循其原始授权 | [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md) |
-| avali 子形态资源 — 源自他人的概念（见第 5 节） | CC BY-SA 2.0 | <https://creativecommons.org/licenses/by-sa/2.0/> |
+| avali 子形态模型资源 — 源自他人的概念（见第 5 节） | CC BY-SA 2.0 | <https://creativecommons.org/licenses/by-sa/2.0/> |
 
 注意：CC BY-NC 4.0 禁止商业使用，因此它**不属于**开源许可证。只有媒体资源
-受其约束，代码部分仍保持宽松授权。avali 子形态资源跟随该物种自身的 CC BY-SA 2.0
+受其约束，代码部分仍保持宽松授权。avali 子形态模型资源跟随该物种自身的 CC BY-SA 2.0
 授权，详见第 5 节。
 
 ## 1. 代码 — MIT
@@ -195,7 +207,7 @@ information is in [`fabric.mod.json`](src/main/resources/fabric.mod.json).
 | 路径 | 内容 |
 | --- | --- |
 | `3d_models/**`（`icon/1-bit_Pixel_Icons/**` 与第 5 节列出的 avali 子形态文件除外） | Blockbench 工程文件、色掩膜、参考图 |
-| `src/main/resources/assets/shape-shifter-curse/**`（`shaders/**` 与第 5 节列出的 avali 子形态资源除外） | 贴图、GeckoLib 模型、动画 JSON、形态模型、GUI、音效、`lang/**` 与 `rich_lang/**` 翻译 |
+| `src/main/resources/assets/shape-shifter-curse/**`（`shaders/**`、第 4 节的第三方音频与第 5 节列出的 avali 子形态资源除外） | 贴图、GeckoLib 模型、动画 JSON、形态模型、GUI、音效、`lang/**` 与 `rich_lang/**` 翻译 |
 | `PatronServer/PackRes/**` | 赞助者形态包 |
 | `PatronServer/WebRoot/*.zip` | 构建好的赞助者形态包 |
 | `custom_form_pack_example/**`（`*.json`、`*.mcmeta` 除外） | 示例包贴图与模型 |
@@ -208,14 +220,14 @@ information is in [`fabric.mod.json`](src/main/resources/fabric.mod.json).
 > Shape Shifter Curse 资源，作者 onixary 及贡献者，采用 CC BY-NC 4.0 授权。
 > https://github.com/onixary/shape-shifter-curse-fabric
 
-第 5 节列出的 avali 子形态资源采用 CC BY-SA 2.0，不适用上述 CC BY-NC 4.0 授权。
+第 5 节列出的 avali 子形态资源采用 CC BY-SA 2.0，不适用上述 CC BY-NC 4.0 授权。第 4 节的第三方音频适用其原始条件。
 
 ## 3. 构建产物
 
 构建出的 `jar` 与 `sources-jar` 同时包含代码与资源，属于混合授权分发物：
 其中代码部分为 MIT，随包资源为 CC BY-NC 4.0（第 5 节列出的 avali 子形态资源为
-CC BY-SA 2.0）。只要用途非商业、并保留 jar 内附带的协议文件，就可以原样再分发
-（包含放进整合包、服务端包）。
+CC BY-SA 2.0；第 4 节的第三方资源适用其原始条件）。只要用途非商业、并保留 jar 内附带的协议文件，就可以原样再分发
+（包含放进整合包、服务端包），同时必须满足各第三方条件。随包的 Nefumi 音频禁止任何形式的变现，包含付费访问内容，见第 4 节。
 
 不允许把资源从 jar 中提取出来用于商业用途（第 5 节列出的 avali 子形态资源为
 CC BY-SA 2.0，可按该协议的条款用于商业用途）。
@@ -227,6 +239,12 @@ CC BY-SA 2.0，可按该协议的条款用于商业用途）。
 [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md)。
 
 主要例外：
+
+- `src/main/resources/assets/shape-shifter-curse/sounds/avali_chatter.ogg` 与
+  同目录的 `avali_chatter.mp3` 来自 [Nefumi 的 Avali sounds](https://steamcommunity.com/sharedfiles/filedetails/?id=3164757879)。
+  **LicenseRef-Nefumi-Avali-Sounds** 为作者自定义许可：仅允许免费、无变现使用，
+  须显著署名作者并附来源链接；不适用 CC BY-NC 4.0 或 Avali 模型的 CC BY-SA 2.0。
+  原文件、转码说明及使用条件见 `THIRD-PARTY-NOTICES.md`。
 
 - `3d_models/icon/1-bit_Pixel_Icons/**` 为 Nikoichu 创作的 1-bit Pixel Icons，
   采用 CC0 1.0 Universal。作者欢迎署名，但不强制要求。

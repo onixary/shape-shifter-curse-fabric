@@ -1,0 +1,17 @@
+{
+    "type": "apoli:active_self",
+    "entity_action": {
+        "type": "apoli:play_sound",
+        "sound": "shape-shifter-curse:avali_chatter",
+        "pitch": 1.0,
+        "volume": 0.5
+    },
+    "cooldown": 5,
+    "hud_render": {
+        "should_render": false
+    },
+    "key": {
+        "key": "key.shape-shifter-curse.make_sound",
+        "continuous": false
+    }
+}
