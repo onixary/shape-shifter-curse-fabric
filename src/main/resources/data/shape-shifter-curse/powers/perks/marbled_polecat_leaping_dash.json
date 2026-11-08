@@ -33,11 +33,87 @@
       },
       {
         "type": "apoli:play_sound",
-        "sound": "minecraft:entity.phantom.flap"
+        "sound": "minecraft:entity.player.attack.sweep",
+        "volume": 0.8,
+        "pitch": 1.35
       },
       {
-        "type": "apoli:execute_command",
-        "command": "particle minecraft:crit ~ ~0.5 ~ 0.2 0.2 0.2 0 5"
+        "type": "apoli:play_sound",
+        "sound": "minecraft:entity.phantom.flap",
+        "volume": 0.45,
+        "pitch": 1.5
+      },
+      {
+        "type": "apoli:spawn_particles",
+        "particle": "minecraft:cloud",
+        "count": 12,
+        "spread": {
+          "x": 0.55,
+          "y": 0.08,
+          "z": 0.55
+        },
+        "speed": 0.06,
+        "offset_y": 0.12
+      },
+      {
+        "type": "apoli:spawn_particles",
+        "particle": "minecraft:crit",
+        "count": 8,
+        "spread": {
+          "x": 0.35,
+          "y": 0.15,
+          "z": 0.35
+        },
+        "speed": 0.12,
+        "offset_y": 0.35
+      },
+      {
+        "type": "apoli:delay",
+        "ticks": 2,
+        "action": {
+          "type": "apoli:spawn_particles",
+          "particle": "minecraft:cloud",
+          "count": 4,
+          "spread": {
+            "x": 0.2,
+            "y": 0.08,
+            "z": 0.2
+          },
+          "speed": 0.015,
+          "offset_y": 0.2
+        }
+      },
+      {
+        "type": "apoli:delay",
+        "ticks": 4,
+        "action": {
+          "type": "apoli:spawn_particles",
+          "particle": "minecraft:cloud",
+          "count": 3,
+          "spread": {
+            "x": 0.2,
+            "y": 0.08,
+            "z": 0.2
+          },
+          "speed": 0.015,
+          "offset_y": 0.2
+        }
+      },
+      {
+        "type": "apoli:delay",
+        "ticks": 6,
+        "action": {
+          "type": "apoli:spawn_particles",
+          "particle": "minecraft:cloud",
+          "count": 2,
+          "spread": {
+            "x": 0.2,
+            "y": 0.08,
+            "z": 0.2
+          },
+          "speed": 0.015,
+          "offset_y": 0.2
+        }
       }
     ]
   }
