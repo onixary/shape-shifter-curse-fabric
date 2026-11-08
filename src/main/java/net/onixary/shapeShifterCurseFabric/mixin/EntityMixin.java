@@ -4,10 +4,7 @@ import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.tag.FluidTags;
-import net.onixary.shapeShifterCurseFabric.additional_power.AlwaysSprintSwimmingPower;
-import net.onixary.shapeShifterCurseFabric.additional_power.BypassesLandingEffectsPower;
-import net.onixary.shapeShifterCurseFabric.additional_power.BypassesSteppingEffectsPower;
-import net.onixary.shapeShifterCurseFabric.additional_power.ModifyFootstepSoundSpeedPower;
+import net.onixary.shapeShifterCurseFabric.additional_power.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -46,6 +43,13 @@ public class EntityMixin {
                 float multiplier = powers.get(0).getSpeedMultiplierFor(player);
                 cir.setReturnValue(((Entity) (Object) this).distanceTraveled + (1.0f / multiplier));
             }
+        }
+    }
+
+    @Inject(method = "canFreeze", at = @At("HEAD"), cancellable = true)
+    private void canFreeze(CallbackInfoReturnable<Boolean> cir) {
+        if (AdditionalPowers.IMMUNE_FREEZE.isActive((Entity) (Object)this)) {
+            cir.setReturnValue(false);
         }
     }
 
