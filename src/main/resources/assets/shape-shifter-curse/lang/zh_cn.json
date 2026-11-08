@@ -397,6 +397,7 @@
   "gui.shape-shifter-curse.perk.requires_previous": "需要前置节点",
   "gui.shape-shifter-curse.perk.select_node": "选择调谐节点",
   "gui.shape-shifter-curse.perk.unavailable": "暂不可获取",
+  "gui.shape_shifter_curse.altar.remaining_moondust": "剩余月尘燃料：%s / %s",
   "gui.shape_shifter_curse.category.altar_shaped": "幻形祭坛有序合成",
   "gui.shape_shifter_curse.category.altar_shapeless": "幻形祭坛无序合成",
   "gui.shape_shifter_curse.category.web_compostable": "消化",

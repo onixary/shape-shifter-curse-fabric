@@ -408,6 +408,7 @@
   "gui.shape-shifter-curse.perk.select_node": "Select perk node",
   "gui.shape-shifter-curse.perk.unavailable": "Unavailable",
 
+  "gui.shape_shifter_curse.altar.remaining_moondust": "Remaining Moondust fuel: %s / %s",
   "gui.shape_shifter_curse.category.altar_shaped": "Shape Shifter Altar Shaped Crafting",
   "gui.shape_shifter_curse.category.altar_shapeless": "Shape Shifter Altar Shapeless Crafting",
   "gui.shape_shifter_curse.category.web_compostable": "Digesting",

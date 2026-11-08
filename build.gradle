@@ -346,6 +346,12 @@ tasks.register('checkAltarRecipes') {
     dependsOn 'runAltarCheck'
 }
 
+tasks.register('checkAltarFuelTooltip', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'net.onixary.shapeShifterCurseFabric.custom_ui.AltarFuelTooltipCheck'
+}
+
 tasks.register('checkTooltipWrapping', JavaExec) {
     dependsOn testClasses
     classpath = sourceSets.test.runtimeClasspath
