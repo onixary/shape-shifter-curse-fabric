@@ -23,6 +23,7 @@ import net.minecraft.util.math.RotationAxis;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
 import net.onixary.shapeShifterCurseFabric.render.form_render.*;
+import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 import net.onixary.shapeShifterCurseFabric.util.FeralRenderUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 
@@ -42,7 +43,7 @@ public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> &
         if (IS_FIRST_PERSON_MOD_LOADED && MinecraftClient.getInstance().options.getPerspective().isFirstPerson() && livingEntity == MinecraftClient.getInstance().player) {
             // 防止出现双物品
             FirstPersonModelCore fpm = FirstPersonModelCore.instance;
-            if (fpm.isEnabled()) {
+            if (fpm.isEnabled() && !ClientUtils.isOpenInventoryScreen) {
                 return;
             }
         }

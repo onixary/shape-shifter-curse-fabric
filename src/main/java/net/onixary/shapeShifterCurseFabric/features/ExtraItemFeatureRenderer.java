@@ -23,6 +23,7 @@ import net.minecraft.util.math.Vec3d;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.player_form.IForm;
 import net.onixary.shapeShifterCurseFabric.player_form.PlayerFormBodyType;
+import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import virtuoel.pehkui.api.ScaleTypes;
 
@@ -93,7 +94,7 @@ public class ExtraItemFeatureRenderer <T extends LivingEntity, M extends EntityM
                     }
 
                     // 已知Bug 在开启 FirstPersonModel 并启用时 且在第一人称时 物品位置不对
-                    if (fpm.isEnabled()) {
+                    if (fpm.isEnabled() && !ClientUtils.isOpenInventoryScreen) {
                         // 仅限开启FirstPersonModel时渲染额外物品
                         matrices.push();
                         //var eR = (PlayerEntityRenderer) MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(player);
