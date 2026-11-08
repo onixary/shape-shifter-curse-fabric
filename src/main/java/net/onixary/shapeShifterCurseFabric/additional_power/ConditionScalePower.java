@@ -72,6 +72,14 @@ public class ConditionScalePower extends Power {
         this.IsPowerActive = false;
     }
 
+    // @Override
+    // public void onRemoved() {
+    //     if (this.IsPowerActive && entity instanceof ServerPlayerEntity player) {
+    //         this.RemoveScale();
+    //     }
+    //     this.IsPowerActive = false;
+    // }
+
     public static PowerFactory createFactory() {
         return new PowerFactory<>(
                 ShapeShifterCurseFabric.identifier("condition_scale"),

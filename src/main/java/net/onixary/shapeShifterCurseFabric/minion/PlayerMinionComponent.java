@@ -21,6 +21,7 @@ public class PlayerMinionComponent implements Component, AutoSyncedComponent {
     public void readFromNbt(NbtCompound nbtCompound) {
         try {
             NbtCompound minionsNbt = nbtCompound.getCompound("minions");
+            minions.clear();
             for (String key : minionsNbt.getKeys()) {
                 NbtList uuidList = minionsNbt.getList(key, 11);
                 ArrayList<UUID> uuids = new ArrayList<>();
@@ -30,6 +31,7 @@ public class PlayerMinionComponent implements Component, AutoSyncedComponent {
                 this.minions.put(new Identifier(key), uuids);
             }
             NbtCompound minionsCooldownNbt = nbtCompound.getCompound("minionsCooldown");
+            minionsCooldown.clear();
             for (String key : minionsCooldownNbt.getKeys()) {
                 this.minionsCooldown.put(new Identifier(key), minionsCooldownNbt.getLong(key));
             }
@@ -39,6 +41,7 @@ public class PlayerMinionComponent implements Component, AutoSyncedComponent {
         } catch (Exception e) {
             ShapeShifterCurseFabric.LOGGER.error("Error reading minions from NBT", e);
             this.minions = new ConcurrentHashMap<>();
+            this.minionsCooldown = new ConcurrentHashMap<>();
         }
     }
 

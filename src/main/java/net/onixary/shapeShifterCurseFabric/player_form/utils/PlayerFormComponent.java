@@ -149,6 +149,9 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         }
         if (tag.contains("customPotionFormID")) {
             customPotionFormID = Identifier.tryParse(tag.getString("customPotionFormID"));
+            if (customPotionFormID == null) {
+                customPotionFormID = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID();
+            }
         } else {
             customPotionFormID = RegPlayerForms.ORIGINAL_BEFORE_ENABLE.getFormID();
         }
@@ -171,6 +174,9 @@ public class PlayerFormComponent implements AutoSyncedComponent {
         }
         if (tag.contains("now_perk_tree")) {
             nowPerkTree = Identifier.tryParse(tag.getString("now_perk_tree"));
+            if (nowPerkTree == null) {
+                nowPerkTree = RegPerks.EMPTY_PERK_TREE;
+            }
         }
         if (tag.contains("perks")) {
             formPerkMap.clear();

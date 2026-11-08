@@ -237,6 +237,8 @@ public class FormUtils {
     }
 
     public static void _loadForm(PlayerEntity player, IForm form, boolean shouldReload) {
+        // 这个确实是个问题 如果loadForm给整进去个null 整个形态存储估计就重置了
+        if (form == null) form = RegPlayerForms.ORIGINAL_BEFORE_ENABLE;
         PlayerFormComponent playerFormComponent = PlayerFormComponent.COMPONENT.get(player);
         IForm oldForm = playerFormComponent.nowForm;
         playerFormComponent.setForm(form);

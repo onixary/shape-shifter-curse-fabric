@@ -28,6 +28,7 @@ import net.onixary.shapeShifterCurseFabric.player_form.utils.FormUtils;
 import net.onixary.shapeShifterCurseFabric.player_form.utils.TransformManager;
 import net.onixary.shapeShifterCurseFabric.util.FormTextureUtils;
 import net.onixary.shapeShifterCurseFabric.util.Verify.AuthServer;
+import net.onixary.shapeShifterCurseFabric.util.Verify.AuthUtils;
 import org.jetbrains.annotations.Nullable;
 import net.onixary.shapeShifterCurseFabric.util.PatronUtils;
 
@@ -324,7 +325,7 @@ public class ModPacketsC2S {
     }
 
     private static void receivePatronAuthFile(MinecraftServer minecraftServer, ServerPlayerEntity playerEntity, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
-        byte[] data = packetByteBuf.readByteArray();
+        byte[] data = packetByteBuf.readByteArray(AuthUtils.MAX_AUTH_FILE_BYTES);
         if (data != null) {
             minecraftServer.execute(() -> {
                 AuthServer.loadAuthFile(playerEntity, new PacketByteBuf(Unpooled.wrappedBuffer(data)));

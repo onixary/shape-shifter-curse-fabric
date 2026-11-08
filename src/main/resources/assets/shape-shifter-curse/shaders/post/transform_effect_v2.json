@@ -1,0 +1,23 @@
+﻿{
+  "targets": [
+    "swap"
+  ],
+  "passes": [
+    {
+      "name": "ssc_transform_effect_v2",
+      "intarget": "minecraft:main",
+      "outtarget": "swap",
+      "uniforms": [
+        {
+          "name": "Slider",
+          "values": [ 0.0 ]
+        }
+      ]
+    },
+    {
+      "name": "blit",
+      "intarget": "swap",
+      "outtarget": "minecraft:main"
+    }
+  ]
+}

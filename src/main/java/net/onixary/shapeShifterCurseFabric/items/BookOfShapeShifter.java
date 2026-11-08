@@ -36,6 +36,7 @@ public class BookOfShapeShifter extends Item {
             // 服务端逻辑：触发成就
             if (!currentForm.equals(RegPlayerForms.ORIGINAL_BEFORE_ENABLE)) {
                 if (user instanceof ServerPlayerEntity serverPlayer) {
+                    ShapeShifterCurseFabric.ON_ENABLE_MOD.trigger(serverPlayer);
                     ShapeShifterCurseFabric.ON_OPEN_BOOK_OF_SHAPE_SHIFTER.trigger(serverPlayer);
                 }
             }

@@ -156,13 +156,13 @@ public class SubFormSelectScreen extends Screen implements WidgetEXUtils.IWidget
     }
 
     @Override
-    public void close() {
+    public void removed() {
         if (this.isLockTempModelSystem) {
             FormTextureUtils.useTempFormModel = false;
             FormTextureUtils.tempFormModelProcessor = null;
             isLockTempModelSystem = false;
         }
-        super.close();
+        super.removed();
     }
 
     public void renderBackgroundTexture(DrawContext context) {

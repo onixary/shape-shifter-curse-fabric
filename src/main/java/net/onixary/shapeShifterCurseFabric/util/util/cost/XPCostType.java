@@ -6,6 +6,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.util.ClientUtils;
 import net.onixary.shapeShifterCurseFabric.util.util.BaseSprite;
@@ -42,7 +43,7 @@ public class XPCostType implements IFUSDrawableCostType<XPCostType> {
         }
         return Text.literal(String.valueOf(costObject.getAmount()))
                 .append(Text.translatable("gui.shape-shifter-curse.perk.cost_separator"))
-                .append(String.valueOf(player.totalExperience));
+                .append(String.valueOf(getTotalExperience(player.experienceLevel, MathHelper.floor(player.experienceProgress * (float) player.getNextLevelExperience()))));
     }
 
     @Override
@@ -55,12 +56,28 @@ public class XPCostType implements IFUSDrawableCostType<XPCostType> {
                 throw new RuntimeException("CostType.canPay Player Argument In ServerSide Must NotNull");
             }
         }
-        return player.totalExperience >= costAmount;
+        return getTotalExperience(player.experienceLevel, MathHelper.floor(player.experienceProgress * (float) player.getNextLevelExperience())) >= costAmount;
     }
 
     @Override
     public void pay(@NotNull ICost costObject, @NotNull PlayerEntity player) {
         player.addExperience(-costObject.getAmount());
+    }
+
+    // 还是用我很久之前写的代码吧 至少用到现在没炸过
+    public static int getTotalExperience(int level, int xp) {
+        int totalExp;
+        if (level <= 16) {
+            totalExp = level * level + 6 * level;
+        }
+        else if (level <= 31) {
+            totalExp = (int) (2.5 * level * level - 40.5 * level + 360);
+        }
+        else {
+            totalExp = (int) (4.5 * level * level - 162.5 * level + 2220);
+        }
+        int sum = totalExp + xp;
+        return sum < 0 ? totalExp : sum;
     }
 
     @Override
