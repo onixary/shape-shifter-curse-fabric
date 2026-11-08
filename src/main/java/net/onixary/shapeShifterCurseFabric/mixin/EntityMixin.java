@@ -61,7 +61,7 @@ public class EntityMixin {
 
     @Inject(method = "canFreeze", at = @At("HEAD"), cancellable = true)
     private void canFreeze(CallbackInfoReturnable<Boolean> cir) {
-        if (AdditionalPowers.IMMUNE_FREEZE.isActive((Entity) (Object)this)) {
+        if (PowerHolderComponent.hasPower((Entity) (Object) this, ImmuneFreezePower.class)) {
             cir.setReturnValue(false);
         }
     }
