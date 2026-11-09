@@ -83,7 +83,8 @@
     "RecipeManagerMixin",
     "ServerPlayNetworkHandlerMixin",
     "WitherIntervalMixin",
-    "CompoundBowMixin"
+    "CompoundBowMixin",
+    "integration.JEI_Utils_Implement"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",
