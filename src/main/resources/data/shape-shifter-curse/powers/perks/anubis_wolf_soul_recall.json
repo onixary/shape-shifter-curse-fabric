@@ -17,6 +17,79 @@
       },
       {
         "type": "shape-shifter-curse:recall_wolf_minions"
+      },
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:block.beacon.deactivate",
+        "volume": 0.65,
+        "pitch": 1.25
+      },
+      {
+        "type": "apoli:spawn_particles",
+        "particle": "minecraft:reverse_portal",
+        "count": 24,
+        "spread": {
+          "x": 0.65,
+          "y": 0.35,
+          "z": 0.65
+        },
+        "speed": 0.035,
+        "offset_y": 0.5
+      },
+      {
+        "type": "apoli:spawn_particles",
+        "particle": "minecraft:soul",
+        "count": 10,
+        "spread": {
+          "x": 0.45,
+          "y": 0.25,
+          "z": 0.45
+        },
+        "speed": 0.02,
+        "offset_y": 0.4
+      },
+      {
+        "type": "apoli:delay",
+        "ticks": 5,
+        "action": {
+          "type": "apoli:and",
+          "actions": [
+            {
+              "type": "apoli:play_sound",
+              "sound": "minecraft:block.amethyst_block.chime",
+              "volume": 0.9,
+              "pitch": 1.2
+            },
+            {
+              "type": "apoli:spawn_particles",
+              "particle": "minecraft:enchant",
+              "count": 16,
+              "spread": {
+                "x": 0.3,
+                "y": 0.2,
+                "z": 0.3
+              },
+              "speed": 0.2,
+              "offset_y": 0.55
+            }
+          ]
+        }
+      },
+      {
+        "type": "apoli:delay",
+        "ticks": 9,
+        "action": {
+          "type": "apoli:spawn_particles",
+          "particle": "minecraft:enchant",
+          "count": 6,
+          "spread": {
+            "x": 0.15,
+            "y": 0.15,
+            "z": 0.15
+          },
+          "speed": 0.1,
+          "offset_y": 0.55
+        }
       }
     ]
   }

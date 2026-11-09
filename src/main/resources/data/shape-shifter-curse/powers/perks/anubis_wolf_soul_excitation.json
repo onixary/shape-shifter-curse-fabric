@@ -24,6 +24,79 @@
         "minion_level": 3,
         "count": 1,
         "apply_cooldown": false
+      },
+      {
+        "type": "apoli:play_sound",
+        "sound": "minecraft:entity.evoker.prepare_summon",
+        "volume": 0.75,
+        "pitch": 0.85
+      },
+      {
+        "type": "apoli:spawn_particles",
+        "particle": "minecraft:soul_fire_flame",
+        "count": 20,
+        "spread": {
+          "x": 0.65,
+          "y": 0.12,
+          "z": 0.65
+        },
+        "speed": 0.035,
+        "offset_y": 0.12
+      },
+      {
+        "type": "apoli:spawn_particles",
+        "particle": "minecraft:smoke",
+        "count": 8,
+        "spread": {
+          "x": 0.4,
+          "y": 0.25,
+          "z": 0.4
+        },
+        "speed": 0.025,
+        "offset_y": 0.3
+      },
+      {
+        "type": "apoli:delay",
+        "ticks": 4,
+        "action": {
+          "type": "apoli:and",
+          "actions": [
+            {
+              "type": "apoli:play_sound",
+              "sound": "minecraft:entity.wolf.growl",
+              "volume": 0.45,
+              "pitch": 0.8
+            },
+            {
+              "type": "apoli:spawn_particles",
+              "particle": "minecraft:soul",
+              "count": 12,
+              "spread": {
+                "x": 0.45,
+                "y": 0.3,
+                "z": 0.45
+              },
+              "speed": 0.035,
+              "offset_y": 0.45
+            }
+          ]
+        }
+      },
+      {
+        "type": "apoli:delay",
+        "ticks": 8,
+        "action": {
+          "type": "apoli:spawn_particles",
+          "particle": "minecraft:soul_fire_flame",
+          "count": 6,
+          "spread": {
+            "x": 0.25,
+            "y": 0.2,
+            "z": 0.25
+          },
+          "speed": 0.015,
+          "offset_y": 0.65
+        }
       }
     ]
   }

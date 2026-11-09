@@ -1,5 +1,7 @@
 {
   "type": "shape-shifter-curse:modify_footstep_sound_speed",
-  "speed_multiplier": 2.5,
-  "step_sound_offset": 0.35
+  "speed_multiplier": 2.4,
+  "step_sound_offset": 0.35,
+  "adjust_run_individually": true,
+  "run_speed_multiplier": 1.6
 }
