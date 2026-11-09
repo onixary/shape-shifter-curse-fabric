@@ -62,6 +62,27 @@ license even though they sit inside the asset trees listed in `LICENSING.md`
 assets exported from them (listed above; they ship inside the built jar). Keep the
 attribution to this mod and to the avali species when reusing them.
 
+### Avali chatter sound — Nefumi
+
+- Author: Nefumi (the upstream package metadata spells the author `Nefuki`).
+- Source: [Avali sounds](https://steamcommunity.com/sharedfiles/filedetails/?id=3164757879), version 0.2.
+- Original file: `sfx/humanoid/avali_chatter_female03.ogg`.
+- Applies to `src/main/resources/assets/shape-shifter-curse/sounds/avali_chatter.ogg`
+  and `avali_chatter.mp3` in the same directory.
+- Changes: renamed the original OGG without re-encoding; converted an MP3 copy
+  for preview/export. Minecraft plays the OGG with randomized pitch (0.90–1.10).
+- License: **LicenseRef-Nefumi-Avali-Sounds**, identifying the author's custom
+  permission in the linked page's “Can I use this on...” Q/A (checked 2026-11-07).
+  Use in free content for another game is permitted only without monetization,
+  with clearly visible credit to Nefumi and a link to the original mod.
+  Any form of monetization is prohibited. The author also asks users to leave
+  a comment linking or describing their use.
+
+These audio files retain that permission, not the project's CC BY-NC 4.0 or
+its Avali model assets' CC BY-SA 2.0 license. Keep this attribution and source
+link with redistributed copies. Monetized releases or paid-access content
+require separate permission from Nefumi before including this sound.
+
 ### tools/SignSystem
 
 - Author: XuHaoNan
@@ -156,6 +177,15 @@ SOFTWARE.
   `player_animation/avali_*.json`、`ssc_form_model/origins.origin.shape-shifter-curse.form_bat_3_sub_avali.json`。
   相同方式共享的条款会延续到这些导出资源上（它们随构建出的 jar 一起分发），
   复用时请保留对本 mod 与 avali 物种的署名。
+- **Avali 叫声 — Nefumi**（包内元数据拼作 `Nefuki`）：来自
+  [Avali sounds](https://steamcommunity.com/sharedfiles/filedetails/?id=3164757879) 0.2 版，
+  原文件为 `sfx/humanoid/avali_chatter_female03.ogg`。适用于
+  `src/main/resources/assets/shape-shifter-curse/sounds/avali_chatter.ogg` 与同目录的
+  `avali_chatter.mp3`。OGG 仅改名，MP3 为转码副本；游戏使用 OGG，播放音高随机为 0.90–1.10。
+  使用作者自定义许可 **LicenseRef-Nefumi-Avali-Sounds**（2026-11-07 核对原页面 Q/A）：
+  允许用于其他游戏的免费、无变现内容，须显著署名 Nefumi 并链接原模组；禁止任何形式的变现。
+  作者另请使用者留言说明用途。再分发时保留署名、来源链接及这些条件；用于变现发行或付费访问
+  内容前需另获作者许可。这两个音频文件不适用项目默认 CC BY-NC 4.0 或 Avali 模型的 CC BY-SA 2.0。
 - **tools/SignSystem**，作者 XuHaoNan，按文件头声明为「保留所有权利」，
   不是开源代码，复用或再分发需取得作者许可。见
   `tools/SignSystem/LICENSE.txt`。

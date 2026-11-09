@@ -19,9 +19,9 @@ public class AdditionalPowers {
     public static final PowerType<?> HOSTILE_IRON_GOLEM = new PowerTypeReference<>(ShapeShifterCurseFabric.identifier("hostile_iron_golem"));
     public static final PowerType<?> CAT_FRIENDLY = new PowerTypeReference<>(ShapeShifterCurseFabric.identifier("cat_friendly"));
     public static final PowerType<?> TOGGLE_CLIP_AT_LEDGE = new PowerTypeReference<>(ShapeShifterCurseFabric.identifier("toggle_clip_at_ledge"));
-    public static final PowerType<?> IMMUNE_FREEZE = new PowerTypeReference<>(ShapeShifterCurseFabric.identifier("immune_freeze"));
 
     public static void register() {
+        register(ImmuneFreezePower.createFactory());
         register(FrostDivePower.createFactory());
         register(AirJumpPower.createFactory());
         register(ActionOnShieldBlockPower.createFactory());

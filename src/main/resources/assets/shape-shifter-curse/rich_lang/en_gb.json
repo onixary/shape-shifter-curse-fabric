@@ -5522,6 +5522,7 @@
   "gui.shape-shifter-curse.perk.unavailable": [
     "Unavailable"
   ],
+  "gui.shape_shifter_curse.altar.remaining_moondust": "Remaining Moondust fuel: %s / %s",
   "gui.shape_shifter_curse.category.altar_shaped": "Shape Shifter Altar Shaped Crafting",
   "gui.shape_shifter_curse.category.altar_shapeless": "Shape Shifter Altar Shapeless Crafting",
   "gui.shape_shifter_curse.category.web_compostable": "Digesting",
@@ -6114,6 +6115,12 @@
   "item.shape-shifter-curse.morphscale_armor.tooltip": [
     "The moondust magic infused in these armours automatically adapts to your form"
   ],
+  "item.shape-shifter-curse.morphscale_catalyst_core": [
+    "Morphscale Catalyst Core"
+  ],
+  "item.shape-shifter-curse.morphscale_catalyst_core.tooltip": [
+    "Each time you observe it, its shape differs from last time"
+  ],
   "item.shape-shifter-curse.morphscale_core": [
     "Morphscale Core"
   ],
@@ -6245,6 +6252,11 @@
   "jei.shape-shifter-curse.catalyst_core.info": [
     "Not consumed when used in the catalyst slot for crafting at the Shape Shifter Altar."
   ],
+  "key.shape-shifter-curse.active_skill": "Activate Selected Power Binding",
+  "key.shape-shifter-curse.next_active_skill": "Next Power Binding",
+  "key.shape-shifter-curse.open_test_ui": "Open Skill Tree",
+  "key.shape-shifter-curse.prev_active_skill": "Previous Power Binding",
+  "key.shape-shifter-curse.scroll_active_skill": "Enable Mouse Wheel Power Switching (Hold)",
   "key.shape-shifter-curse.active_skill_1": "Active Power (1)",
   "key.shape-shifter-curse.active_skill_2": "Active Power (2)",
   "key.shape-shifter-curse.active_skill_3": "Active Power (3)",

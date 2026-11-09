@@ -8,6 +8,9 @@ import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.blocks.block_entity.AltarBlockEntity;
 import net.onixary.shapeShifterCurseFabric.integration.jei.JEI_Utils;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID;
 
 public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
@@ -34,6 +37,7 @@ public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
 
     public AltarCraftUI(AltarCraftUIHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
+        // 藏的还挺深 要不是我修槽位偏移我都不知道这个
         this.backgroundWidth = WIDTH;
         this.backgroundHeight = HEIGHT;
     }
@@ -49,14 +53,31 @@ public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
         super.render(context, mouseX, mouseY, delta);
         this.drawProcess(context);
         this.drawFuel(context);
-        this.drawMouseoverTooltip(context, mouseX, mouseY);
+        if (isOverFuelBar(mouseX - baseX, mouseY - baseY)) {
+            context.drawTooltip(this.textRenderer, Text.translatable(
+                    "gui.shape_shifter_curse.altar.remaining_moondust",
+                    formatMoondust(this.handler.getNowFuel()), formatMoondust(AltarBlockEntity.maxFuel)), mouseX, mouseY);
+        } else {
+            this.drawMouseoverTooltip(context, mouseX, mouseY);
+        }
         if (JEI_Utils.isJEILoaded && isHoveringProcessBar(mouseX, mouseY)) {
             context.drawTooltip(this.textRenderer, Text.translatable("jei.tooltip.show.recipes"), mouseX, mouseY);
         }
     }
 
+    static boolean isOverFuelBar(int localX, int localY) {
+        return localX >= FUEL_BAR_ORIG_X && localX < FUEL_BAR_ORIG_X + FUEL_BAR_W
+                && localY >= FUEL_BAR_ORIG_Y && localY < FUEL_BAR_ORIG_Y + FUEL_BAR_H;
+    }
+
+    static String formatMoondust(int fuel) {
+        return BigDecimal.valueOf(fuel).divide(BigDecimal.valueOf(800), 2, RoundingMode.HALF_UP)
+                .stripTrailingZeros().toPlainString();
+    }
+
     @Override
     protected void drawForeground(DrawContext context, int mouseX, int mouseY) {
+        // The altar layout omits the default screen and inventory labels.
     }
 
     @Override

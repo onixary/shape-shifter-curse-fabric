@@ -6,7 +6,7 @@
 				"identifier": "geometry.unknown",
 				"texture_width": 128,
 				"texture_height": 64,
-				"visible_bounds_width": 3,
+				"visible_bounds_width": 5,
 				"visible_bounds_height": 5,
 				"visible_bounds_offset": [0, 1.5, 0]
 			},
@@ -174,6 +174,15 @@
 						{"origin": [-0.5, 31.20438, 8.7], "size": [1, 1, 1], "pivot": [0, 31.70438, 9.2], "rotation": [170, 0, 0], "uv": [21, 5]},
 						{"origin": [-1.5, 29.5, 8.2], "size": [3, 2, 2], "pivot": [0, 30.80219, 8.94967], "rotation": [-180, 0, 0], "uv": [15, 0]},
 						{"origin": [-1, 31.8, 7.6], "size": [2, 1, 2], "pivot": [-0.5, 32.10219, 8.34967], "rotation": [152.5, 0, 0], "uv": [6, 0]}
+					]
+				},
+				{
+					"name": "eyeRoot",
+					"parent": "ik_head",
+					"pivot": [0, 32.2, 8.1],
+					"cubes": [
+						{"origin": [-3, 32.2, 8.2], "size": [2, 2, 0], "pivot": [-2, 32.2, 7.2], "rotation": [-5, 0, 0], "uv": [8, 47]},
+						{"origin": [1, 32.2, 8.2], "size": [2, 2, 0], "pivot": [2, 32.2, 7.2], "rotation": [-5, 0, 0], "uv": [12, 47]}
 					]
 				},
 				{

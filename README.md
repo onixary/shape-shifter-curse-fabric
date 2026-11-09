@@ -14,6 +14,7 @@ This mod is open-source and free. Do not trust any third-party channels that cha
   [CC BY-NC 4.0](LICENSE-CC-BY-NC-4.0.txt) - non-commercial use only
 - Avali sub-form assets (the models and the geo models, textures and animations
   exported from them): [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)
+- Avali chatter: [Avali sounds by Nefumi](https://steamcommunity.com/sharedfiles/filedetails/?id=3164757879) — custom permission: free, no monetization, credit and source link required. See [third-party notices](THIRD-PARTY-NOTICES.md).
 - Third-party code and assets: their upstream licenses, see [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)
 
 See [LICENSING.md](LICENSING.md) for the exact list of paths covered by each license.
@@ -35,6 +36,7 @@ mod正在持续开发中。由于我只是业余时间开发，更新可能比�
   [CC BY-NC 4.0](LICENSE-CC-BY-NC-4.0.txt)，仅限非商业用途
 - avali 子形态资源（模型及由它导出的 geo 模型、贴图、动画）：
   [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)
+- Avali 叫声：[Nefumi 的 Avali sounds](https://steamcommunity.com/sharedfiles/filedetails/?id=3164757879)，按作者自定义许可使用：免费、无变现，须署名并链接来源，详见 [第三方声明](THIRD-PARTY-NOTICES.md)。
 - 第三方代码与资源：遵循其原始授权，见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)
 
 各许可证的具体适用范围见 [LICENSING.md](LICENSING.md)。

@@ -46,7 +46,8 @@ public class RegCustomItem {
     public static final Item MOONDUST_MATRIX = register("moondust_matrix", new MoonDustMatrix(new Item.Settings()));
     // morphscale armor
     public static final Item MORPHSCALE_CORE = register("morphscale_core", new Item(new Item.Settings()));
-    public static final Item SUPER_MORPHSCALE_CORE = register("super_morphscale_core", new SuperMorphScaleCore(new Item.Settings().maxDamage(64 * SuperMorphScaleCore.damagePerItem).rarity(Rarity.EPIC)));
+    // 暂时停用超级塑形核心，保留实现以便恢复。
+    // public static final Item SUPER_MORPHSCALE_CORE = register("super_morphscale_core", new SuperMorphScaleCore(new Item.Settings().maxDamage(64 * SuperMorphScaleCore.damagePerItem).rarity(Rarity.EPIC)));
     public static final Item MORPHSCALE_HEADRING = register("morphscale_headring", new MorphScaleArmor(ArmorItem.Type.HELMET));
     public static final Item MORPHSCALE_VEST = register("morphscale_vest", new MorphScaleArmor(ArmorItem.Type.CHESTPLATE));
     public static final Item MORPHSCALE_CUISH = register("morphscale_cuish", new MorphScaleArmor(ArmorItem.Type.LEGGINGS));
@@ -100,6 +101,7 @@ public class RegCustomItem {
     public static final Item FOXFIRE_CATALYST_CORE = register("foxfire_catalyst_core", new CatalystCoreItem(new Item.Settings().maxCount(1).rarity(Rarity.RARE)));
     public static final Item SURGE_CATALYST_CORE = register("surge_catalyst_core", new CatalystCoreItem(new Item.Settings().maxCount(1).rarity(Rarity.RARE)));
     public static final Item DUNE_CATALYST_CORE = register("dune_catalyst_core", new CatalystCoreItem(new Item.Settings().maxCount(1).rarity(Rarity.RARE)));
+    public static final Item MORPHSCALE_CATALYST_CORE = register("morphscale_catalyst_core", new CatalystCoreItem(new Item.Settings().maxCount(1).rarity(Rarity.RARE)));
     public static final Item NIGHT_CATALYST_CORE = register("night_catalyst_core", new CatalystCoreItem(new Item.Settings().maxCount(1).rarity(Rarity.RARE)));
 
     public static final Item TRANSFORMATIVE_AXOLOTL_BUCKET = register("transformative_axolotl_bucket", new EntityBucketItem(ShapeShifterCurseFabric.T_AXOLOTL, Fluids.WATER, SoundEvents.ITEM_BUCKET_EMPTY_AXOLOTL, (new Item.Settings()).maxCount(1)));
@@ -154,7 +156,7 @@ public class RegCustomItem {
                 entries.add(UNTREATED_MOONDUST);
                 entries.add(MOONDUST_MATRIX);
                 entries.add(MORPHSCALE_CORE);
-                entries.add(SUPER_MORPHSCALE_CORE);
+                // entries.add(SUPER_MORPHSCALE_CORE);
                 entries.add(INHIBITOR);
                 entries.add(POWERFUL_INHIBITOR);
                 entries.add(CREATIVE_INHIBITOR);
@@ -206,6 +208,7 @@ public class RegCustomItem {
                 entries.add(SURGE_CATALYST_CORE);
                 entries.add(DUNE_CATALYST_CORE);
                 entries.add(NIGHT_CATALYST_CORE);
+                entries.add(MORPHSCALE_CATALYST_CORE);
                 entries.add(CUSTOM_TRINKET);
                 entries.add(FIRE_CHARM_PAPER);
                 entries.add(TRANSFORMATIVE_AXOLOTL_BUCKET);

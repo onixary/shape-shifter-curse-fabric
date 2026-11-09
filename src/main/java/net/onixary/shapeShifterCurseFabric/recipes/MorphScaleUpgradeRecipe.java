@@ -14,7 +14,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 import net.onixary.shapeShifterCurseFabric.additional_power.IsMorphScaleItemCondition;
-import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 import net.onixary.shapeShifterCurseFabric.items.tools.SuperMorphScaleCore;
 
 import static net.onixary.shapeShifterCurseFabric.recipes.RecipeSerializerRegister.MORPH_SCALE_UPGRADE;
@@ -49,7 +48,7 @@ public class MorphScaleUpgradeRecipe extends UpgradeRecipe {
     @Override
     public ItemStack craft(Inventory inventory, DynamicRegistryManager registryManager) {
         ItemStack coreStack = inventory.getStack(0);
-        if (coreStack.isOf(RegCustomItem.SUPER_MORPHSCALE_CORE)) {
+        if (coreStack.getItem() instanceof SuperMorphScaleCore) {
             ItemStack itemStack = inventory.getStack(1);
             int multiplier = SuperMorphScaleCore.getUpgradeDamageMultiplier(itemStack);
             int canCraftCount = SuperMorphScaleCore.getMaxUseCount(coreStack, multiplier);
@@ -76,7 +75,7 @@ public class MorphScaleUpgradeRecipe extends UpgradeRecipe {
     @Override
     public void onTakeOutput(SmithingScreenHandler screenHandler, PlayerEntity player, ItemStack stack) {
         ItemStack coreStack = screenHandler.input.getStack(0);
-        if (coreStack.isOf(RegCustomItem.SUPER_MORPHSCALE_CORE)) {
+        if (coreStack.getItem() instanceof SuperMorphScaleCore) {
             ItemStack baseStack = screenHandler.input.getStack(1);
             int multiplier = SuperMorphScaleCore.getUpgradeDamageMultiplier(baseStack);
             SuperMorphScaleCore.damageItemAfterUpgrade(coreStack, multiplier);

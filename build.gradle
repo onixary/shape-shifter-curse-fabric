@@ -324,7 +324,7 @@ java {
 
 
 // 代码为 MIT，模型/贴图/动画等资源为 CC BY-NC 4.0（avali 子形态资源为 CC BY-SA 2.0，
-// 见 LICENSING.md / THIRD-PARTY-NOTICES.md），协议文件都要随产物分发
+// Avali 叫声另按 Nefumi 自定义无变现许可；见 LICENSING.md / THIRD-PARTY-NOTICES.md），协议文件都要随产物分发
 def licenseFiles = [
         "LICENSE.txt"              : "LICENSE_${project.archivesBaseName}.txt",
         "LICENSE-CC-BY-NC-4.0.txt" : "LICENSE-CC-BY-NC-4.0_${project.archivesBaseName}.txt",
@@ -346,10 +346,28 @@ tasks.register('checkAltarRecipes') {
     dependsOn 'runAltarCheck'
 }
 
+tasks.register('checkAltarFuelTooltip', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'net.onixary.shapeShifterCurseFabric.custom_ui.AltarFuelTooltipCheck'
+}
+
 tasks.register('checkTooltipWrapping', JavaExec) {
     dependsOn testClasses
     classpath = sourceSets.test.runtimeClasspath
     mainClass = 'net.onixary.shapeShifterCurseFabric.client.ItemTooltipWrappingCheck'
+}
+
+tasks.register('checkFootstepSoundRhythm', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'net.onixary.shapeShifterCurseFabric.additional_power.FootstepSoundRhythmCheck'
+}
+
+tasks.register('checkEyeBlink', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'net.onixary.shapeShifterCurseFabric.render.form_render.sub_controller.FormEyeBlinkCheck'
 }
 
 publishing {

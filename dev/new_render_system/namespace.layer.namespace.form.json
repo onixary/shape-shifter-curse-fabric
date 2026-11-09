@@ -112,7 +112,7 @@
       "max_pitch_down_deg": 60.0
     },
     "eye_blink": {
-      "eye": "eyeRoot",
+      "eye": ["eyeRoot", "extraEyeRoot"],
       "open_scale": 1.0,
       "close_scale": 0.01
     }

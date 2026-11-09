@@ -7,12 +7,13 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.additional_power.IsMorphScaleItemCondition;
 import net.onixary.shapeShifterCurseFabric.event.SSCEvent;
+import net.onixary.shapeShifterCurseFabric.items.RegCustomItem;
 
 public class RegBuiltinAlterRecipe {
     public static final Identifier MorphScaleFood = new Identifier("shape_shifter_curse_fabric", "altar/morph_scale_food");
     public static final Identifier MorphScaleArmor = new Identifier("shape_shifter_curse_fabric", "altar/morph_scale_armor");
 
-    public static final Item MorphScaleArmorCatalyst = Items.NETHER_STAR;
+    public static final Item MorphScaleArmorCatalyst = RegCustomItem.MORPHSCALE_CATALYST_CORE;
 
     public static final BuiltinAltarRecipe.BARecipeConfig MorphScaleFoodConfig = new BuiltinAltarRecipe.BARecipeConfigBuilder()
             .match(
@@ -140,7 +141,7 @@ public class RegBuiltinAlterRecipe {
                         }
                     }
             )
-            .fuelUsage(64)
+            .fuelUsage(32)
             .recipeTime(800)
             .virtualOutput(
                     registryManager -> {

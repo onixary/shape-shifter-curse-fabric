@@ -115,6 +115,32 @@ public class SnowFoxPerkCheck {
         p.discard(); zombie.discard(); c.complete();
     }
     @GameTest(templateName = FabricGameTest.EMPTY_STRUCTURE)
+    public void freezeImmunityByType(TestContext c) {
+        var entity = EntityType.COW.create(c.getWorld());
+        var holder = PowerHolderComponent.KEY.get(entity);
+        var source = id("freeze_test");
+        c.assertTrue(entity.canFreeze(), "Vanilla freezing remains without a power");
+        for (String path : new String[]{"immune_freeze", "perks/snow_fox_cold_recovery_1", "perks/snow_fox_cold_recovery_2"}) {
+            var type = PowerTypeRegistry.get(id(path));
+            holder.addPower(type, source);
+            c.assertTrue(!entity.canFreeze(), "Standalone and multiple powers prevent freezing: " + path);
+            holder.removePower(type, source);
+            c.assertTrue(entity.canFreeze(), "Removing the power restores vanilla freezing: " + path);
+        }
+        var json = com.google.gson.JsonParser.parseString(
+                "{\"condition\":{\"type\":\"apoli:sneaking\"}}").getAsJsonObject();
+        var conditional = new PowerType<>(id("arbitrary_conditional_freeze_test"), ImmuneFreezePower.createFactory().read(json));
+        holder.addPower(conditional, source);
+        c.assertTrue(entity.canFreeze(), "Inactive condition does not prevent freezing");
+        entity.setSneaking(true);
+        c.assertTrue(!entity.canFreeze(), "Active condition works without the original power ID");
+        entity.setSneaking(false);
+        c.assertTrue(entity.canFreeze(), "Condition changes restore vanilla freezing");
+        holder.removePower(conditional, source);
+        c.complete();
+    }
+
+    @GameTest(templateName = FabricGameTest.EMPTY_STRUCTURE)
     public void revengeAndRecovery(TestContext c) {
         var p = player(c, 1); add(p, "revenge_melee"); add(p, "revenge_projectile");
         var witch = c.spawnEntity(EntityType.WITCH, new BlockPos(4, 1, 2));
@@ -123,8 +149,8 @@ public class SnowFoxPerkCheck {
         var arrow = new net.minecraft.entity.projectile.ArrowEntity(c.getWorld(), p); witch.timeUntilRegen = 0;
         before = witch.getHealth(); witch.damage(p.getDamageSources().arrow(arrow, p), 2);
         c.assertTrue(Math.abs(before - witch.getHealth() - 2.6) < 0.01, "Projectile bonus");
-        add(p, "cold_recovery_1_immunity"); p.damage(p.getDamageSources().freeze(), 3);
-        c.assertTrue(p.getHealth() == 20, "Freeze immunity");
+        add(p, "cold_recovery_1_immune_freeze");
+        c.assertTrue(!p.canFreeze(), "Freeze immunity prevents freezing");
         var heal = add(p, "cold_recovery_1_healing"); p.setHealth(10); c.setBlockState(new BlockPos(2, 1, 2), Blocks.POWDER_SNOW);
         heal.tick();
         for (int i = 0; i < 60; i++) { p.age++; heal.tick(); }
