@@ -43,7 +43,7 @@
     "bientity_condition": {
       "type": "apoli:distance",
       "comparison": "<=",
-      "compare_to": 16
+      "compare_to": 32
     }
   },
   "activate": {
@@ -65,7 +65,7 @@
         },
         {
           "type": "apoli:area_of_effect",
-          "radius": 16,
+          "radius": 32,
           "bientity_action": {
             "type": "shape-shifter-curse:echolocation_vibration"
           }
@@ -78,7 +78,7 @@
         },
         {
           "type": "apoli:area_of_effect",
-          "radius": 16,
+          "radius": 32,
           "bientity_condition": {
             "type": "shape-shifter-curse:enemy"
           },
