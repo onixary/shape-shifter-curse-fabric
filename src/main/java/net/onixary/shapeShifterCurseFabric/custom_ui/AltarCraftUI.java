@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.onixary.shapeShifterCurseFabric.blocks.block_entity.AltarBlockEntity;
+import net.onixary.shapeShifterCurseFabric.integration.jei.JEI_Utils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -14,7 +15,7 @@ import static net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric.MOD_ID
 
 public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
 
-    private static final Identifier BACKGROUND = new Identifier(MOD_ID,"textures/gui/altar_craft_ui.png");
+    private static final Identifier BACKGROUND = new Identifier(MOD_ID, "textures/gui/altar_craft_ui.png");
     private static final int WIDTH = 174;
     private static final int HEIGHT = 166;
     private static final int TEXTURE_WIDTH = 256;
@@ -33,8 +34,6 @@ public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
     private static final int FUEL_BAR_H = 3;
     private int baseX;
     private int baseY;
-
-    // 90,60,54,10
 
     public AltarCraftUI(AltarCraftUIHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -60,6 +59,9 @@ public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
                     formatMoondust(this.handler.getNowFuel()), formatMoondust(AltarBlockEntity.maxFuel)), mouseX, mouseY);
         } else {
             this.drawMouseoverTooltip(context, mouseX, mouseY);
+        }
+        if (JEI_Utils.isJEILoaded && isHoveringProcessBar(mouseX, mouseY)) {
+            context.drawTooltip(this.textRenderer, Text.translatable("jei.tooltip.show.recipes"), mouseX, mouseY);
         }
     }
 
@@ -99,5 +101,19 @@ public class AltarCraftUI extends HandledScreen<AltarCraftUIHandler> {
             int FuelWidth = (int) (FUEL_BAR_W * ((float) uiHandler.getNowFuel() / (float) maxFuel));
             context.drawTexture(BACKGROUND, baseX + FUEL_BAR_ORIG_X, baseY + FUEL_BAR_ORIG_Y, FUEL_BAR_FULL_X, FUEL_BAR_FULL_Y, FuelWidth, FUEL_BAR_H, TEXTURE_WIDTH, TEXTURE_HEIGHT);
         }
+    }
+
+    private boolean isHoveringProcessBar(double mouseX, double mouseY) {
+        return mouseX >= baseX + PROCESS_BAR_ORIG_X && mouseX < baseX + PROCESS_BAR_ORIG_X + PROCESS_BAR_W
+                && mouseY >= baseY + PROCESS_BAR_ORIG_Y && mouseY < baseY + PROCESS_BAR_ORIG_Y + PROCESS_BAR_H;
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if (JEI_Utils.isJEILoaded && button == 0 && isHoveringProcessBar(mouseX, mouseY)) {
+            JEI_Utils.openJEIAltarRecipeScreen();
+            return true;
+        }
+        return super.mouseClicked(mouseX, mouseY, button);
     }
 }
