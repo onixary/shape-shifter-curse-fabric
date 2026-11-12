@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "amount": 1,
+  "operation": "set",
+  "order": 2000,
+  "icon": "shape-shifter-curse:gui/slot/extra_hand",
+  "validators": [
+    "accessories:tag",
+    "accessories:component"
+  ]
+}

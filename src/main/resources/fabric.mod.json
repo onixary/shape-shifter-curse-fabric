@@ -139,6 +139,12 @@
         "depends": [
           "curios"
         ]
+      },
+      "accessories": {
+        "priority": 3000,
+        "depends": [
+          "accessories"
+        ]
       }
     }
   },

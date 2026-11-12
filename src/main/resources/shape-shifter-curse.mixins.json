@@ -84,7 +84,10 @@
     "ServerPlayNetworkHandlerMixin",
     "WitherIntervalMixin",
     "CompoundBowMixin",
-    "integration.JEI_Utils_Implement"
+    "integration.JEI_Utils_Implement",
+    "accessory.AccessoriesImpl",
+    "accessory.AccessoriesEventImpl",
+    "accessory.AccessoriesUtilsImpl"
   ],
   "client": [
     "AdjustItemHoldFeatureRendererMixin",
