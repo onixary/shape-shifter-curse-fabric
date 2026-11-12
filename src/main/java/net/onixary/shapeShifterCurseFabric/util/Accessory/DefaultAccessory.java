@@ -156,10 +156,51 @@ public class DefaultAccessory {
             }
         });
 
+        AccessoryUtils.registerAccessoryMod("accessories", new AccessoryUtils.AccessoryIO() {
+            @Override
+            public int priority() {
+                return 3000;
+            }
+
+            @Override
+            public boolean canLoaded() {
+                return FabricLoader.getInstance().isModLoaded("accessories");
+            }
+
+            @Override
+            public Map<Pair<@Nullable String, String>, List<ItemStack>> getEntitySlots(LivingEntity entity) {
+                Map<Pair<@Nullable String, String>, List<ItemStack>> map = new HashMap<>();
+                Map<String, List<ItemStack>> accessoriesData = AccessoriesUtils.getEntitySlots(entity);
+                for (String slotName : accessoriesData.keySet()) {
+                    map.put(new Pair<>(null, slotName), accessoriesData.get(slotName));
+                }
+                return map;
+            }
+
+            @Override
+            public List<ItemStack> getEntitySlot(LivingEntity entity, @Nullable String SlotGroup, String SlotName) {
+                return AccessoriesUtils.getEntitySlot(entity, SlotName);
+            }
+
+            @Override
+            public @Nullable ItemStack getEntitySlot(LivingEntity entity, @Nullable String SlotGroup, String SlotName, int Index) {
+                List<ItemStack> ItemList = AccessoriesUtils.getEntitySlot(entity, SlotName);
+                if (Index >= 0 && Index < ItemList.size()) {
+                    return ItemList.get(Index);
+                }
+                return null;
+            }
+
+            @Override
+            public void setEntitySlot(LivingEntity entity, @Nullable String SlotGroup, String SlotName, int Index, ItemStack stack) {
+                AccessoriesUtils.setEntitySlot(entity, SlotName, Index, stack);
+            }
+        });
+
         AccessoryUtils.reCalcAccessoryMod();
     }
 
     public static void init() {
-        // DO NOTHING
+        // DO NOTHING 或许可以用于Inject?
     }
 }

@@ -1,0 +1,8 @@
+{
+  "entities": [
+    "#accessories:defaulted_targets"
+  ],
+  "slots": [
+    "extra_hand"
+  ]
+}

@@ -282,6 +282,8 @@ dependencies {
     modImplementation "curse.maven:jei-238222:8622779"
     // 调用频率有点高 所以直接项目依赖吧
     modImplementation "curse.maven:carry-on-274259:4882498"
+    // Accessories
+    modCompileOnly "maven.modrinth:jtmvUHXj:mee7rWXz"
 }
 
 processResources {
