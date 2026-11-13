@@ -47,9 +47,18 @@
       "bientity_condition": {
         "type": "apoli:target_condition",
         "condition": {
-          "type": "apoli:health",
-          "comparison": ">",
-          "compare_to": 0
+          "type": "apoli:and",
+          "conditions": [
+            {
+              "type": "apoli:health",
+              "comparison": ">",
+              "compare_to": 0
+            },
+            {
+              "type": "shape-shifter-curse:is_spectator",
+              "inverted": true
+            }
+          ]
         }
       },
       "bientity_action": {
@@ -141,9 +150,18 @@
       "bientity_condition": {
         "type": "apoli:target_condition",
         "condition": {
-          "type": "apoli:health",
-          "comparison": ">",
-          "compare_to": 0
+          "type": "apoli:and",
+          "conditions": [
+            {
+              "type": "apoli:health",
+              "comparison": ">",
+              "compare_to": 0
+            },
+            {
+              "type": "shape-shifter-curse:is_spectator",
+              "inverted": true
+            }
+          ]
         }
       },
       "bientity_action": {
