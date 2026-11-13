@@ -96,6 +96,16 @@ public class AdditionalEntityConditions {
                     return false;
                 }
         ));
+        register(new ConditionFactory<Entity>(
+                ShapeShifterCurseFabric.identifier("is_spectator"),
+                new SerializableData(),
+                (data, e) -> {
+                    if (e instanceof PlayerEntity player) {
+                        return player.isSpectator();
+                    }
+                    return false;
+                }
+        ));
         ItemStorePower.registerCondition(AdditionalEntityConditions::register);
         ItemCooldownCA.registerCondition(AdditionalEntityConditions::register);
     }
