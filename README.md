@@ -1,5 +1,8 @@
 # Shape Shifter Curse Mod for Minecraft Java version
 
+<img width="1920" height="1080" alt="ssc_title_new" src="https://github.com/user-attachments/assets/339da901-17be-4fe6-ba83-586a01e22666" />
+
+
 <p>
   <a href="https://modrinth.com/mod/shape-shifter-curse"><img alt="Modrinth" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg"></a>
   <a href="https://www.curseforge.com/minecraft/mc-mods/shape-shifter-curse"><img alt="CurseForge" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg"></a>
