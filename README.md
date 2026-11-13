@@ -26,25 +26,25 @@ This mod is open-source and free. Do not trust any third-party channels that cha
 ### Progressive Forms
 
 - ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) **Ocelot Form:**<br>
-  A raw-meat-eating hunter that can climb and sweep its claws through prey, but burns through hunger quickly.
+  A hunter that feeds on raw meat, capable of climbing and slashing prey with its claws, but suffers from rapid hunger depletion.
 
 - ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) **Bat Form:**<br>
-  A nocturnal creature that feeds on grains, fruit, and vegetables. It can see in the dark, descend slowly, glide, cling to blocks, and hang upside down, but becomes severely weakened by sunlight.
+  A nocturnal creature that consumes grains, vegetables, and fruits, equipped with night vision, slow falling, gliding, and the ability to cling to or hang from blocks, but grows very weak in sunlight.
 
 - ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) **Axolotl Form:**<br>
-  An amphibian with abundant health and regenerative abilities. It moves nimbly through water and currents, but must stay moist at all times.
-
+  An amphibian with high health and regeneration, highly agile in water and currents, but requires constant moisture.
+  
 - ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) **Familiar Fox Form:**<br>
-  A creature transformed by magic from elsewhere. It keeps company with witches and illagers and feeds on the energy of other creatures.
+  A magical being altered by foreign sorcery, allied with witches and illagers, sustaining itself on the energy of other creatures.
 
 - ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) **Snow Fox Form:**<br>
-  A predator that draws on icy magic, attacking with leaps and empowered snowballs. It bounds swiftly through its surroundings, but is extremely vulnerable to fire.
+  A predator infused with frigid magic, using enhanced leaps and snowballs as its primary attacks, capable of swift environmental traversal, but highly vulnerable to fire.
 
 - ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) **Jackal/Anubis Wolf Form:**<br>
-  A pack leader that calls forth wolf spirits to fight together and harnesses Wither as its own strength.
+  A leader who summons a pack of wolf wraiths to fight and transforms the power of Wither into their own.
 
 - ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) **Spider Form:**<br>
-  A web-spinner that reshapes the terrain with specialized silk projectiles and cobwebs, creating routes for swift movement and traps for enemies.
+  A web weaver that uses special web projectiles and cobwebs to reshape terrain for rapid movement and trap enemies.
 
 - ![In Development](https://img.shields.io/badge/In%20Development-0969da?style=flat-square) **???:**<br>
   Something entirely new…?
@@ -62,10 +62,10 @@ This mod is open-source and free. Do not trust any third-party channels that cha
 ### Special (SP) Forms
 
 - ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) **Allay Form:**<br>
-  An airborne spirit that eats nothing but amethyst shards. Frail yet adept with a bow, it can drain health from its targets with arrows.
+  A floating spectral entity that can only consume amethyst shards. Fragile but skilled with bows, capable of absorbing targets' health through arrows.
 
 - ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) **Feral Cat Form:**<br>
-  A four-legged animal immune to fall damage, with relatively modest advantages and drawbacks.
+  A quadruped animal with conservative strengths and weaknesses, possessing fall damage immunity.
 
 - ![Planned](https://img.shields.io/badge/Planned-orange?style=flat-square) **Phantom Form?**
 
