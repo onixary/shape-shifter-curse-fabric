@@ -1,4 +1,12 @@
 # Shape Shifter Curse Mod for Minecraft Java version
+
+<p>
+  <a href="https://modrinth.com/mod/shape-shifter-curse"><img alt="Modrinth" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg"></a>
+  <a href="https://www.curseforge.com/minecraft/mc-mods/shape-shifter-curse"><img alt="CurseForge" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg"></a>
+</p>
+
+English | [简体中文](README_zh_cn.md)
+
 GitHub repository for the mod Shape Shifter Curse, created for Fabric
 
 This mod is under active development. As I'm only working on it during my spare time, updates may be slow
@@ -19,24 +27,38 @@ This mod is open-source and free. Do not trust any third-party channels that cha
 
 See [LICENSING.md](LICENSING.md) for the exact list of paths covered by each license.
 
-幻形者诅咒 Minecraft java版Mod
----
-幻形者诅咒mod的Github仓库，适用于Fabric端
+## Form Roadmap
 
-mod正在持续开发中。由于我只是业余时间开发，更新可能比较慢
+### Progressive Forms
 
-如果你想要通过数据包与资源包创建自定义形态，请查阅这里的[中文版wiki](https://ssc-wiki.readthedocs.io/zh-cn/latest/)
+- ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) Ocelot Form: A raw-meat-eating hunter that can climb and sweep its claws through prey, but burns through hunger quickly.
+- ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) Bat Form: A nocturnal creature that feeds on grains, fruit, and vegetables. It can see in the dark, descend slowly, glide, cling to blocks, and hang upside down, but becomes severely weakened by sunlight.
+- ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) Axolotl Form: An amphibian with abundant health and regenerative abilities. It moves nimbly through water and currents, but must stay moist at all times.
+- ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) Familiar Fox Form: A creature transformed by magic from elsewhere. It keeps company with witches and illagers and feeds on the energy of other creatures.
+- ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) Snow Fox Form: A predator that draws on icy magic, attacking with leaps and empowered snowballs. It bounds swiftly through its surroundings, but is extremely vulnerable to fire.
+- ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) Jackal/Anubis Wolf Form: A pack leader that calls forth wolf spirits to fight together and harnesses Wither as its own strength.
+- ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) Spider Form: A web-spinner that reshapes the terrain with specialized silk projectiles and cobwebs, creating routes for swift movement and traps for enemies.
+- ![In Development](https://img.shields.io/badge/In%20Development-0969da?style=flat-square) ???: Something entirely new…?
+- ![Planned](https://img.shields.io/badge/Planned-orange?style=flat-square) Bee Form: A grower whose core mechanics revolve around flowers, pollination, and colored pigments.
+- ![Planned](https://img.shields.io/badge/Planned-orange?style=flat-square) ???
+- ![Planned](https://img.shields.io/badge/Planned-orange?style=flat-square) ???
+- ![Planned](https://img.shields.io/badge/Planned-orange?style=flat-square) Ender Dragon Form: A milestone form with **unique mechanics that will reshape SSC’s existing gameplay**. (Addon creators, the Ender Dragon is already spoken for!)
 
-本mod开源免费，请不要相信那些需要你付费下载的第三方渠道
+### Special (SP) Forms
 
-## 授权
+- ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) Allay Form: An airborne spirit that eats nothing but amethyst shards. Frail yet adept with a bow, it can drain health from its targets with arrows.
+- ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) Feral Cat Form: A four-legged animal immune to fall damage, with relatively modest advantages and drawbacks.
+- ![In Development](https://img.shields.io/badge/In%20Development-0969da?style=flat-square) SP Form System Rework:
 
-- 源代码：[MIT 许可证](LICENSE.txt)
-- 媒体资源（3D 模型、贴图、动画、音效、字体、翻译文本）：
-  [CC BY-NC 4.0](LICENSE-CC-BY-NC-4.0.txt)，仅限非商业用途
-- avali 子形态资源（模型及由它导出的 geo 模型、贴图、动画）：
-  [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)
-- Avali 叫声：[Nefumi 的 Avali sounds](https://steamcommunity.com/sharedfiles/filedetails/?id=3164757879)，按作者自定义许可使用：免费、无变现，须署名并链接来源，详见 [第三方声明](THIRD-PARTY-NOTICES.md)。
-- 第三方代码与资源：遵循其原始授权，见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)
+  SP forms currently do not stand out much. What if they offered more extreme advantages and penalties, and there were a way to temporarily switch from any form into an SP form?
 
-各许可证的具体适用范围见 [LICENSING.md](LICENSING.md)。
+  Of course, if you want a challenge, you could still transform into an SP form and try to survive as one!
+
+- ![Planned](https://img.shields.io/badge/Planned-orange?style=flat-square) Phantom Form?
+
+### Subforms
+
+- Snow Fox Form
+  - ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) Marbled Polecat Form: A nimble hunter with a long, slender body and a remarkably flexible neck.
+- Bat Form
+  - ![Completed](https://img.shields.io/badge/Completed-2ea44f?style=flat-square) Avali Form: An alien raptor from another plane of existence🍐. What could have brought them here?
