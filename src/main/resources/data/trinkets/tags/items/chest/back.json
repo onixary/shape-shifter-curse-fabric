@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "shape-shifter-curse:custom_trinket"
+    "#shape-shifter-curse:accessories/back",
+    "#shape-shifter-curse:accessories/wing"
   ]
 }

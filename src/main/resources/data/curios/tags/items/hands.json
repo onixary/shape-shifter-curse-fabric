@@ -1,11 +1,7 @@
 {
   "replace": false,
   "values": [
-    "shape-shifter-curse:attach_hook",
-    "shape-shifter-curse:frost_pawglove",
-    "shape-shifter-curse:resonant_core",
-    "shape-shifter-curse:custom_trinket",
-    "shape-shifter-curse:attach_hook_plus",
-    "shape-shifter-curse:frost_pawglove_plus"
+    "#shape-shifter-curse:accessories/mainhand_glove",
+    "#shape-shifter-curse:accessories/offhand_glove"
   ]
 }

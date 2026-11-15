@@ -1,10 +1,6 @@
 {
   "replace": false,
   "values": [
-    "shape-shifter-curse:withered_bandage",
-    "shape-shifter-curse:fountain_belt",
-    "shape-shifter-curse:custom_trinket",
-    "shape-shifter-curse:withered_bandage_plus",
-    "shape-shifter-curse:fountain_belt_plus"
+    "#shape-shifter-curse:accessories/belt"
   ]
 }

@@ -13,6 +13,8 @@
     "feet/aglet",
     "hand/glove",
     "hand/ring",
-    "hand/extra_hand"
+    "hand/extra_hand",
+    "offhand/glove",
+    "offhand/ring"
   ]
 }
