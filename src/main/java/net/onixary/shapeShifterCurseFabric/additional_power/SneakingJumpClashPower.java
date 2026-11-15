@@ -104,7 +104,7 @@ public class SneakingJumpClashPower extends Power {
         // 查找碰撞的生物实体
         for (LivingEntity target : player.getWorld().getEntitiesByClass(
                 LivingEntity.class, expandedBox, 
-                e -> e != player && e.isAlive() && !e.isRemoved())) {
+                e -> e != player && e.isAlive() && !e.isRemoved() && !e.isSpectator())) {
 
             if (player.getWorld().raycast(new RaycastContext(new Vec3d(player.getX(), player.getBodyY(0.5f), player.getZ()), new Vec3d(target.getX(), target.getBodyY(0.5f), target.getZ()), RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, player)).getType() == HitResult.Type.BLOCK) {
                 continue;
