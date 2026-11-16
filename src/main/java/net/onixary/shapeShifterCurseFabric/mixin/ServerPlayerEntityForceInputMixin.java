@@ -5,14 +5,19 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.onixary.shapeShifterCurseFabric.additional_power.KeepSneakingPower;
 import net.onixary.shapeShifterCurseFabric.networking.ModPacketsS2CServer;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ServerPlayerEntity.class)
 public class ServerPlayerEntityForceInputMixin {
-    private static boolean lastForceSneakState = false;
-    private static int ticker = 0;
+    // 我当时在想什么呢 怎么这里用上static了
+    @Unique
+    private boolean lastForceSneakState = false;
+
+    @Unique
+    private int ticker = 0;
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void onTick(CallbackInfo ci) {
