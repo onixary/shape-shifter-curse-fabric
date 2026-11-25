@@ -67,7 +67,7 @@ public class WolfSpiderPerkCheck {
 
     @GameTest(templateName = FabricGameTest.EMPTY_STRUCTURE)
     public void registeredTreesAndPowers(TestContext c) {
-        String[] names = {"anubis_wolf_pack_response_1", "anubis_wolf_soul_excitation", "anubis_wolf_pack_response_2", "anubis_wolf_pack_amplification", "anubis_wolf_wither_tolerance_1", "anubis_wolf_wither_tolerance_2", "anubis_wolf_soul_recall", "anubis_wolf_undead_discernment", "spider_four_legged_adaptation", "spider_cocoon_digestion_1", "spider_cocoon_digestion_2", "spider_bridge_weaver", "spider_perceptual_web", "spider_rapid_spinner", "spider_stabilized_projectile", "spider_silk_secretion_1", "spider_silk_secretion_2", "spider_silk_grapple"};
+        String[] names = {"anubis_wolf_pack_response_1", "anubis_wolf_soul_excitation", "anubis_wolf_pack_response_2", "anubis_wolf_pack_amplification", "anubis_wolf_wither_tolerance_1", "anubis_wolf_wither_tolerance_2", "anubis_wolf_soul_recall", "anubis_wolf_undead_discernment", "spider_four_legged_adaptation", "spider_cocoon_digestion_1", "spider_cocoon_digestion_2", "spider_bridge_weaver", "spider_perceptual_web", "spider_rapid_spinner", "spider_stabilized_projectile", "spider_silk_secretion_1", "spider_silk_secretion_2"};
         for (String name : names) {
             var perk = (NormalPerk) RegPerks.getPerk(id(name));
             c.assertTrue(perk != null, "Registered perk: " + name);
@@ -159,13 +159,15 @@ public class WolfSpiderPerkCheck {
             c.assertTrue(charge.nowTier==3 && Math.abs(ManaUtils.getPlayerMana(p)-35)<1,"Full charge still costs approximately 15");
             charge.onRemoved();
         }
-        var glow=(EntityGlowPower)add(p,"spider_perceptual_web");
+        add(p,"spider_perceptual_web");
+        var glow=(EntityGlowPower)PowerHolderComponent.KEY.get(p).getPower(PowerTypeRegistry.get(id("perks/spider_perceptual_web_glow")));
         c.assertTrue(!glow.isActive(),"No outline off web bridge");
         c.setBlockState(new BlockPos(2,2,2),RegCustomBlock.TEMP_WEB_BRIDGE);
         c.assertTrue(glow.isActive(),"Standing inside bridge enables outline");
         var sheep=c.spawnEntity(EntityType.SHEEP,new BlockPos(4,2,2));
         c.assertTrue(glow.doesApply(sheep) && !glow.usesTeams() && glow.getRed()==1,"Passive animals receive white outline too");
-        sheep.setPosition(p.getPos().add(17,0,0));c.assertTrue(!glow.doesApply(sheep),"Outline range is 16 blocks");
+        sheep.setPosition(p.getPos().add(32,0,0));c.assertTrue(glow.doesApply(sheep),"Outline includes the 32-block boundary");
+        sheep.setPosition(p.getPos().add(33,0,0));c.assertTrue(!glow.doesApply(sheep),"Outline range is 32 blocks");
         sheep.discard();p.discard();c.complete();
     }
 

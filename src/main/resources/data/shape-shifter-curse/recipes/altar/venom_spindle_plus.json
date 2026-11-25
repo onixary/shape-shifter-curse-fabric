@@ -5,6 +5,9 @@
       "item": "shape-shifter-curse:venom_spindle"
     }
   ],
+  "copy_enchantments_from": {
+    "item": "shape-shifter-curse:venom_spindle"
+  },
   "result": {
     "item": "shape-shifter-curse:venom_spindle_plus",
     "count": 1

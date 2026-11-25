@@ -38,6 +38,34 @@ public class SnowFoxPerkCheck {
         c.assertTrue(lower.getFallMultiplier(20) == 1.0f, "Cap cannot invert the bonus");
         p.discard(); c.complete();
     }
+    @GameTest(templateName = FabricGameTest.EMPTY_STRUCTURE)
+    public void criticalDamageRelativeToNormalAttack(TestContext c) {
+        var p = player(c, 3);
+        var cow = c.spawnEntity(EntityType.COW, new BlockPos(3, 1, 2));
+        var holder = PowerHolderComponent.KEY.get(p);
+        var source = id("snow_test");
+        String[] powers = {null, "form_snow_fox_1_critical_attack_up", "form_snow_fox_3_enhanced_falling_attack", "perks/marbled_polecat_precise_momentum"};
+        float[][] expected = {{1.5f, 1.5f, 1.5f}, {1.3f, 1.3f, 1.3f}, {1, 1.5f, 2}, {1, 2, 3}};
+        float[] falls = {0.5f, 1.5f, 3};
+        for (int i = 0; i < powers.length; i++) {
+            var type = powers[i] == null ? null : PowerTypeRegistry.get(id(powers[i]));
+            if (type != null) holder.addPower(type, source);
+            for (int j = -1; j < falls.length; j++) {
+                for (int tick = 0; tick < 25; tick++) p.playerTick();
+                p.setOnGround(j < 0);
+                p.fallDistance = j < 0 ? 0 : falls[j];
+                cow.setHealth(cow.getMaxHealth());
+                cow.timeUntilRegen = 0;
+                p.attack(cow);
+                float dealt = cow.getMaxHealth() - cow.getHealth();
+                c.assertTrue(Math.abs(dealt - (j < 0 ? 1 : expected[i][j])) < 0.001f,
+                        powers[i] + " at fall sample " + j + " dealt " + dealt);
+            }
+            if (type != null) holder.removePower(type, source);
+        }
+        cow.discard(); p.discard(); c.complete();
+    }
+
     private static Identifier id(String s) { return new Identifier("shape-shifter-curse", s); }
     private static ServerPlayerEntity player(TestContext c, double height) {
         var p = c.createMockCreativeServerPlayerInWorld();
@@ -63,9 +91,13 @@ public class SnowFoxPerkCheck {
     }
     @GameTest(templateName = FabricGameTest.EMPTY_STRUCTURE)
     public void registrations(TestContext c) {
-        for (String key : new String[]{"revenge", "elusive_paws", "air_jump", "frost_dive", "cold_whirlwind_1", "cold_whirlwind_2", "cold_recovery_1", "cold_recovery_2"}) {
-            c.assertTrue(PowerTypeRegistry.contains(id("perks/snow_fox_" + key)), "Power loaded: " + key);
-            c.assertTrue(RegPerks.getPerk(id("snow_fox_" + key)) != null, "Perk registered: " + key);
+        var tree = RegPerks.getPerkTree(RegPerks.T_SnowFox3PerkTree);
+        c.assertTrue(tree.getAllNodes().size() == 8, "Eight current snow fox perks");
+        for (var node : tree.getAllNodes()) {
+            var perk = (net.onixary.shapeShifterCurseFabric.perk.NormalPerk) RegPerks.getPerk(node.perkID);
+            c.assertTrue(perk != null, "Perk registered: " + node.perkID);
+            for (var power : perk.powerAdd) c.assertTrue(PowerTypeRegistry.contains(power), "Power loaded: " + power);
+            for (var power : perk.powerRemove) c.assertTrue(PowerTypeRegistry.contains(power), "Replacement loaded: " + power);
         }
         c.complete();
     }

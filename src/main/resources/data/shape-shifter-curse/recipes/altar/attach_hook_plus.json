@@ -5,6 +5,9 @@
       "item": "shape-shifter-curse:attach_hook"
     }
   ],
+  "copy_enchantments_from": {
+    "item": "shape-shifter-curse:attach_hook"
+  },
   "result": {
     "item": "shape-shifter-curse:attach_hook_plus",
     "count": 1

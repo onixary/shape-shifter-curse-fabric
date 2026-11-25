@@ -31,8 +31,14 @@ public class AltarShapelessRecipe extends AltarRecipe {
     public final int fuelCostPerTick;
 
     public final @Nullable Identifier requireAdvancement;
+    public final Ingredient copyEnchantmentsFrom;
 
     public AltarShapelessRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> input, Ingredient catalyst, int recipeTime, int fuelCostPerTick, Identifier requireAdvancement) {
+        this(id, output, input, catalyst, recipeTime, fuelCostPerTick, requireAdvancement, Ingredient.EMPTY);
+    }
+
+    public AltarShapelessRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> input, Ingredient catalyst, int recipeTime, int fuelCostPerTick, Identifier requireAdvancement, Ingredient copyEnchantmentsFrom) {
+        this.copyEnchantmentsFrom = copyEnchantmentsFrom;
         this.id = id;
         this.output = output;
         this.input = input;
@@ -104,7 +110,7 @@ public class AltarShapelessRecipe extends AltarRecipe {
 
     @Override
     public ItemStack craft(SidedInventory inventory, DynamicRegistryManager registryManager) {
-        return this.output.copy();
+        return copyEnchantments(inventory, this.output, this.copyEnchantmentsFrom);
     }
 
     @Override
@@ -129,6 +135,8 @@ public class AltarShapelessRecipe extends AltarRecipe {
 
     public static class Serializer implements RecipeSerializer<AltarShapelessRecipe> {
         public AltarShapelessRecipe read(Identifier identifier, JsonObject jsonObject) {
+            Ingredient copyEnchantmentsFrom = jsonObject.has("copy_enchantments_from")
+                    ? Ingredient.fromJson(jsonObject.get("copy_enchantments_from"), false) : Ingredient.EMPTY;
             int time = JsonHelper.getInt(jsonObject, "time", 200);
             DefaultedList<Ingredient> defaultedList = getIngredients(JsonHelper.getArray(jsonObject, "ingredients"));
             Ingredient catalyst = null;
@@ -149,7 +157,7 @@ public class AltarShapelessRecipe extends AltarRecipe {
                 throw new JsonParseException("Too many ingredients for altar shapeless recipe");
             } else {
                 ItemStack itemStack = ShapedRecipe.outputFromJson(JsonHelper.getObject(jsonObject, "result"));
-                return new AltarShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time, fuelCost, requireAdvancement);
+                return new AltarShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time, fuelCost, requireAdvancement, copyEnchantmentsFrom);
             }
         }
 
@@ -181,7 +189,8 @@ public class AltarShapelessRecipe extends AltarRecipe {
             ItemStack itemStack = packetByteBuf.readItemStack();
             int time = packetByteBuf.readVarInt();
             int fuelCost = packetByteBuf.readVarInt();
-            return new AltarShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time, fuelCost, requireAdvancement);
+            Ingredient copyEnchantmentsFrom = Ingredient.fromPacket(packetByteBuf);
+            return new AltarShapelessRecipe(identifier, itemStack, defaultedList, catalyst, time, fuelCost, requireAdvancement, copyEnchantmentsFrom);
         }
 
         public void write(PacketByteBuf packetByteBuf, AltarShapelessRecipe shapelessRecipe) {
@@ -204,6 +213,7 @@ public class AltarShapelessRecipe extends AltarRecipe {
             packetByteBuf.writeItemStack(shapelessRecipe.output);
             packetByteBuf.writeVarInt(shapelessRecipe.recipeTime);
             packetByteBuf.writeVarInt(shapelessRecipe.fuelCostPerTick);
+            shapelessRecipe.copyEnchantmentsFrom.write(packetByteBuf);
         }
     }
 }

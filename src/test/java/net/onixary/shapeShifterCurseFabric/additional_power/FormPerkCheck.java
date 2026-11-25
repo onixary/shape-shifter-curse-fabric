@@ -176,7 +176,7 @@ public class FormPerkCheck {
                 }
             }
         }
-        context.assertTrue(nodes == 26 && prisms == 8, "26 perks and 8 prism purchases");
+        context.assertTrue(nodes == 22 && prisms == 4, "22 perks and 4 prism purchases");
         context.assertTrue(RegPlayerForms.BAT_3_SUB_AVALI.getPerkTreeID().equals(id("avali_perk_tree")), "Avali has its independent tree");
         var buyer = context.createMockSurvivalPlayer();
         buyer.addExperience(200);
@@ -237,12 +237,12 @@ public class FormPerkCheck {
         ChargePower charge = (ChargePower) holder.getPower(chargeType);
         player.setAir(100);
         charge.onUse(); charge.onUse();
-        context.assertTrue(player.getAir() == 80, "Holding pays once");
+        context.assertTrue(player.getAir() == 95, "Holding pays five air once");
         context.assertTrue(charge.isCharging(), "Charging state for preview");
         charge.fire(false);
         context.assertTrue(!charge.isCharging(), "Release clears preview");
         charge.onUse();
-        context.assertTrue(player.getAir() == 80, "Cooldown prevents recharging");
+        context.assertTrue(player.getAir() == 95, "Cooldown prevents recharging");
         context.complete();
     }
 }

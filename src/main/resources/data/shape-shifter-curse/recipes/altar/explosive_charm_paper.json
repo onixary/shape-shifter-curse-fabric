@@ -8,6 +8,9 @@
       "item": "minecraft:soul_sand"
     }
   ],
+  "copy_enchantments_from": {
+    "item": "shape-shifter-curse:fire_charm_paper"
+  },
   "result": {
     "item": "shape-shifter-curse:explosive_charm_paper",
     "count": 1

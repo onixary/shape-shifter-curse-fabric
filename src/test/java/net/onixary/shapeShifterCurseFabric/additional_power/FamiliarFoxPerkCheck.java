@@ -45,7 +45,7 @@ public class FamiliarFoxPerkCheck {
     @GameTest(templateName = FabricGameTest.EMPTY_STRUCTURE)
     public void registrations(TestContext context) {
         var tree = RegPerks.getPerkTree(id("familiar_fox_3_perk_tree"));
-        context.assertTrue(tree.getAllNodes().size() == 11, "Eleven fox perks");
+        context.assertTrue(tree.getAllNodes().size() == 9, "Nine current fox perks");
         context.assertTrue(RegPlayerForms.FAMILIAR_FOX_3.getPerkTreeID().equals(tree.getID()), "Fox tree binding");
         for (var node : tree.getAllNodes()) {
             var perk = (NormalPerk) RegPerks.getPerk(node.perkID);

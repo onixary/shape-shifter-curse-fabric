@@ -8,6 +8,9 @@
       "item": "minecraft:end_crystal"
     }
   ],
+  "copy_enchantments_from": {
+    "item": "shape-shifter-curse:bottled_snowfall"
+  },
   "result": {
     "item": "shape-shifter-curse:bottled_snowfall_plus",
     "count": 1

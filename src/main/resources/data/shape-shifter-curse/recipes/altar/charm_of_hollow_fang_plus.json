@@ -5,6 +5,9 @@
       "item": "shape-shifter-curse:charm_of_hollow_fang"
     }
   ],
+  "copy_enchantments_from": {
+    "item": "shape-shifter-curse:charm_of_hollow_fang"
+  },
   "result": {
     "item": "shape-shifter-curse:charm_of_hollow_fang_plus",
     "count": 1

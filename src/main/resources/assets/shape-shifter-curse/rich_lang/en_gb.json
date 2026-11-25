@@ -4122,7 +4122,7 @@
         "text": "jump critical damage",
         "color": "#0000aa"
       },
-      " has increased."
+      " is 1.3 times normal attack damage."
     ]
   },
   "codex.form.shape-shifter-curse.snow_fox_1.title": [
@@ -4269,10 +4269,10 @@
       },
       ", up to ",
       {
-        "text": "2x",
+        "text": "twice",
         "color": "#0000aa"
       },
-      " maximum.\nYour ",
+      " normal attack damage.\nYour ",
       {
         "text": "sprinting speed is faster",
         "color": "#0000aa"
@@ -4464,10 +4464,10 @@
       },
       ", up to a maximum of ",
       {
-        "text": "2 times",
+        "text": "twice",
         "color": "#0000aa"
       },
-      " the normal damage.\n\nYour small size makes you ",
+      " normal attack damage.\n\nYour small size makes you ",
       {
         "text": "harder to hit with ranged attacks",
         "color": "#0000aa"
@@ -8844,17 +8844,17 @@
       "text": "",
       "extra": [
         {
-          "text": "You still retain the muscle memory of hunting targets with the help of gravity, and your nimble new body now brings this ability to its fullest\n[The upper limit of your falling critical hit's "
+          "text": "You still retain the muscle memory of hunting targets with the help of gravity, and your nimble new body now brings this ability to its fullest\n[The maximum damage of your "
         },
         {
-          "text": "height damage multiplier",
+          "text": "falling critical hits",
           "color": "#5555ff"
         },
         {
-          "text": " is raised from "
+          "text": " increases from "
         },
         {
-          "text": "2 times to 3 times",
+          "text": "twice to three times normal attack damage",
           "color": "#5555ff"
         },
         {

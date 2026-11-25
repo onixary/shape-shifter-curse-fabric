@@ -4,6 +4,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeType;
 import net.onixary.shapeShifterCurseFabric.recipes.RecipeUtils;
@@ -17,6 +18,23 @@ public abstract class AltarRecipe implements Recipe<SidedInventory> {
     @Override
     public RecipeType<?> getType() {
         return RecipeUtils.ALTAR_RECIPE;
+    }
+
+    /** Copy only applied enchantments, never unrelated input NBT or catalyst data. */
+    protected static ItemStack copyEnchantments(SidedInventory inventory, ItemStack output, Ingredient source) {
+        ItemStack result = output.copy();
+        if (!source.isEmpty()) {
+            for (int slot = 0; slot < 9; slot++) {
+                ItemStack input = inventory.getStack(slot);
+                if (!input.isEmpty() && source.test(input)) {
+                    if (!input.getEnchantments().isEmpty()) {
+                        result.setSubNbt("Enchantments", input.getEnchantments().copy());
+                    }
+                    break;
+                }
+            }
+        }
+        return result;
     }
 
     public abstract int recipeTime();

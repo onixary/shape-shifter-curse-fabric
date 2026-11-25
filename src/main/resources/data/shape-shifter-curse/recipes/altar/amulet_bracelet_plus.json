@@ -5,6 +5,9 @@
       "item": "shape-shifter-curse:amulet_bracelet"
     }
   ],
+  "copy_enchantments_from": {
+    "item": "shape-shifter-curse:amulet_bracelet"
+  },
   "result": {
     "item": "shape-shifter-curse:amulet_bracelet_plus",
     "count": 1

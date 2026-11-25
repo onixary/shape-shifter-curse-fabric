@@ -41,8 +41,14 @@ public class AltarShapedRecipe extends AltarRecipe {
     public final int fuelCostPerTick;
 
     public final @Nullable Identifier requireAdvancement;
+    public final Ingredient copyEnchantmentsFrom;
 
     public AltarShapedRecipe(Identifier id, int width, int height, DefaultedList<Ingredient> input, Ingredient catalyst, ItemStack output, int recipeTime, int fuelCostPerTick, Identifier requireAdvancement) {
+        this(id, width, height, input, catalyst, output, recipeTime, fuelCostPerTick, requireAdvancement, Ingredient.EMPTY);
+    }
+
+    public AltarShapedRecipe(Identifier id, int width, int height, DefaultedList<Ingredient> input, Ingredient catalyst, ItemStack output, int recipeTime, int fuelCostPerTick, Identifier requireAdvancement, Ingredient copyEnchantmentsFrom) {
+        this.copyEnchantmentsFrom = copyEnchantmentsFrom;
         this.id = id;
         this.width = width;
         this.height = height;
@@ -140,7 +146,7 @@ public class AltarShapedRecipe extends AltarRecipe {
 
     @Override
     public ItemStack craft(SidedInventory inventory, DynamicRegistryManager registryManager) {
-        return this.getOutput(registryManager).copy();
+        return copyEnchantments(inventory, this.getOutput(registryManager), this.copyEnchantmentsFrom);
     }
 
     @Override
@@ -279,6 +285,8 @@ public class AltarShapedRecipe extends AltarRecipe {
 
     public static class Serializer implements RecipeSerializer<AltarShapedRecipe> {
         public AltarShapedRecipe read(Identifier identifier, JsonObject jsonObject) {
+            Ingredient copyEnchantmentsFrom = jsonObject.has("copy_enchantments_from")
+                    ? Ingredient.fromJson(jsonObject.get("copy_enchantments_from"), false) : Ingredient.EMPTY;
             int time = JsonHelper.getInt(jsonObject, "time", 200);
             Ingredient catalyst = null;
             if (jsonObject.has("catalyst")) {
@@ -298,7 +306,7 @@ public class AltarShapedRecipe extends AltarRecipe {
             int j = strings.length;
             DefaultedList<Ingredient> defaultedList = createPatternMatrix(strings, map, i, j);
             ItemStack itemStack = ShapedRecipe.outputFromJson(JsonHelper.getObject(jsonObject, "result"));
-            AltarShapedRecipe recipe = new AltarShapedRecipe(identifier, i, j, defaultedList, catalyst, itemStack, time, fuelCost, requireAdvancement);
+            AltarShapedRecipe recipe = new AltarShapedRecipe(identifier, i, j, defaultedList, catalyst, itemStack, time, fuelCost, requireAdvancement, copyEnchantmentsFrom);
             return recipe;
         }
 
@@ -320,7 +328,8 @@ public class AltarShapedRecipe extends AltarRecipe {
             ItemStack itemStack = packetByteBuf.readItemStack();
             int time = packetByteBuf.readVarInt();
             int fuelCost = packetByteBuf.readVarInt();
-            return new AltarShapedRecipe(identifier, i, j, defaultedList, catalyst, itemStack, time, fuelCost, requireAdvancement);
+            Ingredient copyEnchantmentsFrom = Ingredient.fromPacket(packetByteBuf);
+            return new AltarShapedRecipe(identifier, i, j, defaultedList, catalyst, itemStack, time, fuelCost, requireAdvancement, copyEnchantmentsFrom);
         }
 
         public void write(PacketByteBuf packetByteBuf, AltarShapedRecipe altarRecipe) {
@@ -344,6 +353,7 @@ public class AltarShapedRecipe extends AltarRecipe {
             packetByteBuf.writeItemStack(altarRecipe.output);
             packetByteBuf.writeVarInt(altarRecipe.recipeTime);
             packetByteBuf.writeVarInt(altarRecipe.fuelCostPerTick);
+            altarRecipe.copyEnchantmentsFrom.write(packetByteBuf);
         }
     }
 }

@@ -5,6 +5,9 @@
       "item": "shape-shifter-curse:withered_bandage"
     }
   ],
+  "copy_enchantments_from": {
+    "item": "shape-shifter-curse:withered_bandage"
+  },
   "result": {
     "item": "shape-shifter-curse:withered_bandage_plus",
     "count": 1

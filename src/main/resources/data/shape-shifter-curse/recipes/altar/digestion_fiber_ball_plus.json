@@ -5,6 +5,9 @@
       "item": "shape-shifter-curse:digestion_fiber_ball"
     }
   ],
+  "copy_enchantments_from": {
+    "item": "shape-shifter-curse:digestion_fiber_ball"
+  },
   "result": {
     "item": "shape-shifter-curse:digestion_fiber_ball_plus",
     "count": 1

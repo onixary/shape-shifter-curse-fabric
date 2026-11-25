@@ -13,6 +13,8 @@ import net.onixary.shapeShifterCurseFabric.ShapeShifterCurseFabric;
 
 public class CriticalDamageModifierPower extends Power {
 
+    public static final float VANILLA_CRIT_MULTIPLIER = 1.5f;
+
     private final ActionFactory<Entity>.Instance action;
     private final float multiplier;
 
@@ -37,7 +39,7 @@ public class CriticalDamageModifierPower extends Power {
                 ShapeShifterCurseFabric.identifier("critical_damage_modifier"),
                 new SerializableData()
                         .add("action", ApoliDataTypes.ENTITY_ACTION, null)
-                        .add("multiplier", SerializableDataTypes.FLOAT, 1.0f),
+                        .add("multiplier", SerializableDataTypes.FLOAT, VANILLA_CRIT_MULTIPLIER),
                 data -> (type, entity) -> new CriticalDamageModifierPower(
                         type,
                         entity,

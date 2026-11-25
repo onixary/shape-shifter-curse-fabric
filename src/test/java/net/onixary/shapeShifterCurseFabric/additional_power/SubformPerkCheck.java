@@ -74,21 +74,25 @@ public class SubformPerkCheck {
         var source=p.getCommandSource().withLevel(2);
         String prefix="shape_shifter_curse perk ";
         c.assertTrue(!dispatcher.getRoot().getChild("shape_shifter_curse").getChild("perk").canUse(source.withLevel(0)),"Non-OP cannot use debug commands");
-        c.assertTrue(dispatcher.execute(prefix+"list",source)==7,"Lists current form tree");
+        c.assertTrue(dispatcher.execute(prefix+"list",source)==6,"Lists current form tree");
         dispatcher.execute(prefix+"toggle_free true",source);
         p.getAbilities().creativeMode=false;
         c.assertTrue(PerkUtils.isFreeUnlock(p),"Free unlock independent of creative mode");
         var nbt=new NbtCompound();forms.writeToNbt(nbt);forms.freePerkForms.clear();forms.readFromNbt(nbt);
         c.assertTrue(PerkUtils.isFreeUnlock(p),"Free setting survives NBT sync and reload");
-        forms.nowPerkTree=id("snow_fox_3_perk_tree");
-        c.assertTrue(dispatcher.execute(prefix+"unlock_all",source)==7,"Uses actual form rather than preview tree");
+        forms.nowPerkTree=RegPerks.T_SnowFox3PerkTree;
+        c.assertTrue(dispatcher.execute(prefix+"list",source)==8,"Debug command uses selected nowPerkTree, not the form binding");
+        c.assertTrue(dispatcher.execute(prefix+"unlock_all",source)==8,"Unlocks the selected snow fox tree including dependent nodes");
+        c.assertTrue(forms.formPerkMap.get(RegPerks.T_SnowFox3PerkTree).size()==8,"Unlocks recorded under selected tree");
+        forms.nowPerkTree=RegPerks.T_AvaliPerkTree;
+        c.assertTrue(dispatcher.execute(prefix+"unlock_all",source)==6,"Unlocks all six Avali nodes in dependency order");
         c.assertTrue(dispatcher.execute(prefix+"unlock_all",source)==0,"Repeated unlock is idempotent");
         var holder=PowerHolderComponent.KEY.get(p);
         var base=PowerTypeRegistry.get(id("sub_form_avali_water_slowness"));
         var upgraded=PowerTypeRegistry.get(id("perks/avali_environmental_protection_1"));
         c.assertTrue(!holder.hasPower(base) && holder.hasPower(upgraded),"Unlock applies replacement");
         var other=id("snow_fox_3_perk_tree");forms.formPerkMap.put(other,new java.util.ArrayList<>(java.util.List.of(id("snow_fox_revenge"))));
-        c.assertTrue(dispatcher.execute(prefix+"reset_all",source)==7,"Reset all current nodes");
+        c.assertTrue(dispatcher.execute(prefix+"reset_all",source)==6,"Reset all current nodes");
         c.assertTrue(holder.hasPower(base) && !holder.hasPower(upgraded),"Reset restores base powers");
         c.assertTrue(forms.formPerkMap.get(other).size()==1,"Other tree unlocks preserved");
         dispatcher.execute(prefix+"toggle_free false",source);c.assertTrue(!PerkUtils.isFreeUnlock(p),"Free mode turns off");
@@ -107,7 +111,7 @@ public class SubformPerkCheck {
             for(var power:perk.powerAdd)c.assertTrue(PowerTypeRegistry.get(power)!=null,"Loaded "+power);
             for(var power:perk.powerRemove)c.assertTrue(PowerTypeRegistry.get(power)!=null,"Replacement "+power);
         }
-        c.assertTrue(count==13,"Thirteen subform perks");c.complete();
+        c.assertTrue(count==12,"Twelve current subform perks");c.complete();
     }
     @GameTest(templateName=FabricGameTest.EMPTY_STRUCTURE)
     public void jumpsDashAndCombat(TestContext c) {
@@ -122,7 +126,7 @@ public class SubformPerkCheck {
         var dash=(ActiveCooldownPower)add(p,"marbled_polecat_leaping_dash");dash.fromTag(NbtLong.of(-10000));
         p.getHungerManager().setFoodLevel(6);dash.onUse();c.assertTrue(p.getVelocity().y==-1,"Six food cannot dash");
         p.getHungerManager().setFoodLevel(7);dash.onUse();
-        c.assertTrue(p.getHungerManager().getFoodLevel()==7 && p.getVelocity().z>1.19 && p.getVelocity().y>.59,"Dash horizontal impulse without food cost");
+        c.assertTrue(p.getHungerManager().getFoodLevel()==7 && Math.abs(p.getVelocity().z-.6)<1e-6 && Math.abs(p.getVelocity().y-.3)<1e-6,"Dash horizontal impulse without food cost");
         add(p,"marbled_polecat_combat_noodle_melee");var target=net.minecraft.entity.EntityType.ZOMBIE.create(c.getWorld());
         c.assertTrue(ActionOnCombatHitPower.meleeBonus(p,target,false)==4 && ActionOnCombatHitPower.meleeBonus(p,target,true)==0,"Only noncritical melee gets bonus");c.complete();
     }

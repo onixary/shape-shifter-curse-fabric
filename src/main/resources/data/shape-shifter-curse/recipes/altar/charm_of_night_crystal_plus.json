@@ -5,6 +5,9 @@
       "item": "shape-shifter-curse:charm_of_night_crystal"
     }
   ],
+  "copy_enchantments_from": {
+    "item": "shape-shifter-curse:charm_of_night_crystal"
+  },
   "result": {
     "item": "shape-shifter-curse:charm_of_night_crystal_plus",
     "count": 1
