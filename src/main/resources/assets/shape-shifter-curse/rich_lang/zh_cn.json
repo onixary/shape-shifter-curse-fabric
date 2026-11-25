@@ -7756,6 +7756,7 @@
     "诅咒之月的影响改变了你的身体...\n随着夜晚的结束，这一影响也会消退。不过...也许你应该善用这次机会?\n"
   ],
   "command.shape_shifter_curse.no_permission_dynamic_form": "你没有权限使用这个形态",
+  "command.shape_shifter_curse.target_transforming": "目标玩家正在变形，请等变形结束后再试。",
   "command.shape_shifter_curse.no_permission_form": "你没有权限使用这个形态",
   "command.shape_shifter_curse.no_permission_sub_form": "你没有权限使用这个形态",
   "command.shape_shifter_curse.perk.empty": [

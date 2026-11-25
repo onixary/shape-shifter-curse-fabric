@@ -5021,6 +5021,7 @@
     "저주받은 달이 몸을 바꾸어 놓는다...\n효과는 새벽이 되면 사라진다. 하지만... 이 기회를 활용해 보는 게 좋지 않을까?\n"
   ],
   "command.shape_shifter_curse.no_permission_dynamic_form": "이 형태를 사용할 권한이 없습니다",
+  "command.shape_shifter_curse.target_transforming": "대상 플레이어의 변신이 끝난 후 다시 시도하세요.",
   "command.shape_shifter_curse.no_permission_form": "이 형태를 사용할 권한이 없습니다",
   "command.shape_shifter_curse.no_permission_sub_form": "이 형태를 사용할 권한이 없습니다",
   "command.shape_shifter_curse.perk.empty": [

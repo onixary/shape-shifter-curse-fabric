@@ -7,6 +7,7 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.command.argument.Vec3ArgumentType;
 import net.minecraft.server.command.ServerCommandSource;
@@ -53,42 +54,42 @@ public class ShapeShifterCurseCommand {
                         .then(literal("set_form").requires(cs -> cs.hasPermissionLevel(2))
                                 .then(argument("target", EntityArgumentType.player())
                                         .then(argument("form", new FormArgumentType(FormArgumentType.SET_FORM_ARG))
-                                                .executes(context -> ShapeShifterCurseCommand.setForm(context, Text.translatable("command.shape_shifter_curse.no_permission_form")))
+                                                .executes(context -> changeForm(context, getIdleTarget(context), true, Text.translatable("command.shape_shifter_curse.no_permission_form")))
                                         )
                                 )
                         )
                         .then(literal("transform_to_form").requires(cs -> cs.hasPermissionLevel(2))
                                 .then(argument("target", EntityArgumentType.player())
                                         .then(argument("form", new FormArgumentType(FormArgumentType.SET_FORM_ARG))
-                                                .executes(context -> ShapeShifterCurseCommand.transformToForm(context, Text.translatable("command.shape_shifter_curse.no_permission_form")))
+                                                .executes(context -> changeForm(context, getIdleTarget(context), false, Text.translatable("command.shape_shifter_curse.no_permission_form")))
                                         )
                                 )
                         )
                         .then(literal("set_dynamic_form").requires(cs -> cs.hasPermissionLevel(2))
                                 .then(argument("target", EntityArgumentType.player())
                                         .then(argument("form", new FormArgumentType(FormArgumentType.SET_DYNAMIC_FORM_ARG))
-                                                .executes(context -> ShapeShifterCurseCommand.setForm(context, Text.translatable("command.shape_shifter_curse.no_permission_dynamic_form")))
+                                                .executes(context -> changeForm(context, EntityArgumentType.getPlayer(context, "target"), true, Text.translatable("command.shape_shifter_curse.no_permission_dynamic_form")))
                                         )
                                 )
                         )
                         .then(literal("transform_to_dynamic_form").requires(cs -> cs.hasPermissionLevel(2))
                                 .then(argument("target", EntityArgumentType.player())
                                         .then(argument("form", new FormArgumentType(FormArgumentType.SET_DYNAMIC_FORM_ARG))
-                                                .executes(context -> ShapeShifterCurseCommand.transformToForm(context, Text.translatable("command.shape_shifter_curse.no_permission_dynamic_form")))
+                                                .executes(context -> changeForm(context, EntityArgumentType.getPlayer(context, "target"), false, Text.translatable("command.shape_shifter_curse.no_permission_dynamic_form")))
                                         )
                                 )
                         )
                         .then(literal("set_sub_form").requires(cs -> cs.hasPermissionLevel(2))
                                 .then(argument("target", EntityArgumentType.player())
                                         .then(argument("form", new FormArgumentType(FormArgumentType.SET_SUB_FORM_ARG))
-                                                .executes(context -> ShapeShifterCurseCommand.setForm(context, Text.translatable("command.shape_shifter_curse.no_permission_sub_form")))
+                                                .executes(context -> changeForm(context, EntityArgumentType.getPlayer(context, "target"), true, Text.translatable("command.shape_shifter_curse.no_permission_sub_form")))
                                         )
                                 )
                         )
                         .then(literal("transform_to_sub_form").requires(cs -> cs.hasPermissionLevel(2))
                                 .then(argument("target", EntityArgumentType.player())
                                         .then(argument("form", new FormArgumentType(FormArgumentType.SET_SUB_FORM_ARG))
-                                                .executes(context -> ShapeShifterCurseCommand.transformToForm(context, Text.translatable("command.shape_shifter_curse.no_permission_sub_form")))
+                                                .executes(context -> changeForm(context, EntityArgumentType.getPlayer(context, "target"), false, Text.translatable("command.shape_shifter_curse.no_permission_sub_form")))
                                         )
                                 )
                         )
@@ -242,50 +243,25 @@ public class ShapeShifterCurseCommand {
         );
     }
 
-    private static int setForm(CommandContext<ServerCommandSource> commandContext, Text failText) throws CommandSyntaxException {
-        // set form without transform effect
-        ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
-        IForm form = FormArgumentType.getForm(commandContext, "form");
-        ServerCommandSource serverCommandSource = commandContext.getSource();
-        if (form == null) {
-            commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
-            return 0;
-        }
-        try {
-            boolean success = TransformManager.forceTransform(target, form, true);
-            if (!success) {
-                commandContext.getSource().sendError(failText);
-            }
-        }
-        catch (Exception e){
-            // 调试时在此打断点
-            ShapeShifterCurseFabric.LOGGER.error("Exception when set form", e);
-            throw e;
-        }
+    private static final SimpleCommandExceptionType TARGET_TRANSFORMING = new SimpleCommandExceptionType(
+            Text.translatable("command.shape_shifter_curse.target_transforming"));
 
-        return 1;
-
+    private static ServerPlayerEntity getIdleTarget(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+        ServerPlayerEntity target = EntityArgumentType.getPlayer(context, "target");
+        if (TransformManager.isTransforming(target)) {
+            throw TARGET_TRANSFORMING.create();
+        }
+        return target;
     }
 
-    private static int transformToForm(CommandContext<ServerCommandSource> commandContext, Text failText) throws CommandSyntaxException {
-        // this with transform effect
-        ServerPlayerEntity target = EntityArgumentType.getPlayer(commandContext, "target");
-        IForm form = FormArgumentType.getForm(commandContext, "form");
-        ServerCommandSource serverCommandSource = commandContext.getSource();
+    private static int changeForm(CommandContext<ServerCommandSource> context, ServerPlayerEntity target, boolean immediately, Text failText) throws CommandSyntaxException {
+        IForm form = FormArgumentType.getForm(context, "form");
         if (form == null) {
-            commandContext.getSource().sendError(Text.literal("Invalid Form Id!"));
+            context.getSource().sendError(Text.literal("Invalid Form Id!"));
             return 0;
         }
-        try {
-            boolean success = TransformManager.forceTransform(target, form, false);
-            if (!success) {
-                commandContext.getSource().sendError(failText);
-            }
-        }
-        catch (Exception e){
-            // 调试时在此打断点
-            ShapeShifterCurseFabric.LOGGER.error("Exception when transform form", e);
-            throw e;
+        if (!TransformManager.forceTransform(target, form, immediately)) {
+            context.getSource().sendError(failText);
         }
         return 1;
     }

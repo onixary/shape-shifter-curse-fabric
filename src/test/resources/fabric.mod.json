@@ -6,6 +6,7 @@
   "environment": "server",
   "entrypoints": {
     "fabric-gametest": [
+      "net.onixary.shapeShifterCurseFabric.command.TransformCommandCheck",
       "net.onixary.shapeShifterCurseFabric.additional_power.SnowFoxPerkCheck",
       "net.onixary.shapeShifterCurseFabric.recipes.altar.AltarRecipeCheck",
       "net.onixary.shapeShifterCurseFabric.additional_power.DisableHurtCameraPowerCheck",

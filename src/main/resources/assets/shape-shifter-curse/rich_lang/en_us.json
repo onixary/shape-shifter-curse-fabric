@@ -5317,6 +5317,7 @@
     "The Cursed Moon alters your body...\nIts effects fade at dawn. But... perhaps you should utilize this opportunity?\n"
   ],
   "command.shape_shifter_curse.no_permission_dynamic_form": "You don't have permission to use this form",
+  "command.shape_shifter_curse.target_transforming": "Wait for the target player to finish transforming.",
   "command.shape_shifter_curse.no_permission_form": "You don't have permission to use this form",
   "command.shape_shifter_curse.no_permission_sub_form": "You don't have permission to use this form",
   "command.shape_shifter_curse.perk.empty": [
