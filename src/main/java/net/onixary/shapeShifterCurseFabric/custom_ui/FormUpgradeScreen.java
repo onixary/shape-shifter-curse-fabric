@@ -573,7 +573,7 @@ public class FormUpgradeScreen extends Screen implements WidgetEXUtils.IWidgetEX
         if (playerGainedPerk != null && playerGainedPerk.contains(this.nowSelectNode.perkID)) {
             return Text.translatable("gui.shape-shifter-curse.perk.acquired");
         }
-        if (this.nowSelectNode.tier > this.tier) {
+        if (!PerkUtils.meetsAttunerTier(this.client.player, this.tier, this.nowSelectNode.tier)) {
             return Text.translatable("gui.shape-shifter-curse.perk.insufficient_tier");
         }
         if (this.nowSelectNode.dependents != null && !this.nowSelectNode.dependents.isEmpty()) {

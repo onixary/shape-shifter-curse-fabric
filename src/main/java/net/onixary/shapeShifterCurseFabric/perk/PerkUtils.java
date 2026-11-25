@@ -18,6 +18,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class PerkUtils {
+    public static boolean meetsAttunerTier(PlayerEntity player, int attunerTier, int requiredTier) {
+        // A negative tier denotes the shortcut screen opened without an attuner.
+        return attunerTier >= requiredTier || (attunerTier >= 0 && player.getAbilities().creativeMode);
+    }
+
     public static boolean isFreeUnlock(PlayerEntity player) {
         var component = PlayerFormComponent.COMPONENT.get(player);
         return player.getAbilities().creativeMode || component.freePerkForms.contains(component.nowForm.getFormID());
@@ -136,7 +141,7 @@ public class PerkUtils {
             return;
         }
         @Nullable FormAttunerBlockEntity lastUsedAttuner = FormAttunerBlock.getPlayerLastUsedAttuner(player);
-        if (lastUsedAttuner == null || lastUsedAttuner.level < tier) {
+        if (lastUsedAttuner == null || !meetsAttunerTier(player, lastUsedAttuner.level, tier)) {
             return;
         }
 
