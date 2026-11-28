@@ -72,12 +72,12 @@ public class BookOfShapeShifterScreenV2_P1 extends Screen implements WidgetEXUti
         this.addDrawableChild(ButtonWidget.builder(openFCSMenuButtonLabel, button -> {
                     if (ShapeShifterCurseFabric.clientConfig.fcs_use_v1_menu) {
                         if (FormColorSelectMenu.instance == null) {
-                            Screen screen = new FormColorSelectMenu(Text.literal("text.shape-shifter-curse.config.form_color_select_menu"), this);
+                            Screen screen = new FormColorSelectMenu(Text.translatable("text.shape-shifter-curse.config.form_color_select_menu"), this);
                             client.setScreen(screen);
                         }
                     } else {
                         if (FormColorSelectMenuV2.instance == null) {
-                            Screen screen = new FormColorSelectMenuV2(Text.literal("text.shape-shifter-curse.config.form_color_select_menu_v2"), this);
+                            Screen screen = new FormColorSelectMenuV2(Text.translatable("text.shape-shifter-curse.config.form_color_select_menu_v2"), this);
                             client.setScreen(screen);
                         }
                     }
