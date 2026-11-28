@@ -513,6 +513,7 @@ compileOnly/兼容目标：
 | `AlignLang.py` | 语言文件 key 对齐 |
 | `LangMissingCheck.py` | 语言缺失检查 |
 | `RichLang2Lang.py` | Rich 文本转普通 lang |
+| `align_rich_lang_text_format.py` | 按 en_us 的富文本格式整理 en_gb 的 rich_lang（保留目标文本，只补格式） |
 | `GenEnUdLang.py` | 由 en_gb 生成 en_ud（倒置英语）的 rich_lang 与 lang |
 | `GenerateRideAnim.py` | 骑乘动画生成 |
 | `form_riding_animation.json` | 骑乘动画模板 |
