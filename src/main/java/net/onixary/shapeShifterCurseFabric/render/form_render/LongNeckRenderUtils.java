@@ -16,8 +16,7 @@ public class LongNeckRenderUtils {
         return IS_FIRST_PERSON_MOD_LOADED
                 && !ClientUtils.isOpenInventoryScreen
                 && player.isMainPlayer()
-                && client.options.getPerspective().isFirstPerson()
-                && FirstPersonModelCore.instance.isEnabled();
+                && FirstPersonModelCore.instance.isRenderingPlayer();
     }
 
     public static float lerpAngle(float delta, float start, float end) {
