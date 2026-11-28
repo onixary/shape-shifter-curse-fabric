@@ -1,4 +1,4 @@
-﻿# Shape Shifter Curse Fabric 项目框架文档
+# Shape Shifter Curse Fabric 项目框架文档
 
 > 本文档用于之后快速读取项目实现。更新时间：2026-06-21。  
 > 统计基于当前工作区文件树与 `fabric.mod.json`、`gradle.properties`、主要注册类。
@@ -513,6 +513,7 @@ compileOnly/兼容目标：
 | `AlignLang.py` | 语言文件 key 对齐 |
 | `LangMissingCheck.py` | 语言缺失检查 |
 | `RichLang2Lang.py` | Rich 文本转普通 lang |
+| `GenEnUdLang.py` | 由 en_gb 生成 en_ud（倒置英语）的 rich_lang 与 lang |
 | `GenerateRideAnim.py` | 骑乘动画生成 |
 | `form_riding_animation.json` | 骑乘动画模板 |
 | `MaskProcess.py` | 贴图遮罩处理 |
