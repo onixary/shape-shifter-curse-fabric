@@ -43,7 +43,7 @@ public class MouthItemFeature<T extends LivingEntity, M extends EntityModel<T> &
         if (IS_FIRST_PERSON_MOD_LOADED && MinecraftClient.getInstance().options.getPerspective().isFirstPerson() && livingEntity == MinecraftClient.getInstance().player) {
             // 防止出现双物品
             FirstPersonModelCore fpm = FirstPersonModelCore.instance;
-            if (fpm.isEnabled() && !ClientUtils.isOpenInventoryScreen) {
+            if (fpm.isEnabled() && !ClientUtils.isOpenInventoryScreen && fpm.isRenderingPlayer()) {
                 return;
             }
         }

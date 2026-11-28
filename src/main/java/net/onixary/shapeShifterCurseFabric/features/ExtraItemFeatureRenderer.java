@@ -94,7 +94,7 @@ public class ExtraItemFeatureRenderer <T extends LivingEntity, M extends EntityM
                     }
 
                     // 已知Bug 在开启 FirstPersonModel 并启用时 且在第一人称时 物品位置不对
-                    if (fpm.isEnabled() && !ClientUtils.isOpenInventoryScreen) {
+                    if (fpm.isEnabled() && !ClientUtils.isOpenInventoryScreen && fpm.isRenderingPlayer()) {
                         // 仅限开启FirstPersonModel时渲染额外物品
                         matrices.push();
                         //var eR = (PlayerEntityRenderer) MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(player);
