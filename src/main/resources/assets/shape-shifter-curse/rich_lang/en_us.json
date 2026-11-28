@@ -90,7 +90,7 @@
     "Resurrection of the Dead"
   ],
   "advancements.shape-shifter-curse.on_transform_axolotl_0.description": [
-    "Strange axolotls in the lush caves...?"
+    "Strange Axolotls in the Lush Caves...?"
   ],
   "advancements.shape-shifter-curse.on_transform_axolotl_0.title": [
     "Axolotl"
@@ -102,7 +102,7 @@
     "A Moist New Life"
   ],
   "advancements.shape-shifter-curse.on_transform_bat_0.description": [
-    "Strange bats in the caves...?"
+    "Strange Bats in the caves...?"
   ],
   "advancements.shape-shifter-curse.on_transform_bat_0.title": [
     "Bat"
@@ -186,7 +186,7 @@
     "A Special Form?"
   ],
   "advancements.shape-shifter-curse.on_transform_spider_0.description": [
-    "Strange spiders in the Mineshaft...?"
+    "Strange Spiders in the Mineshaft...?"
   ],
   "advancements.shape-shifter-curse.on_transform_spider_0.title": [
     "Spider"
@@ -247,7 +247,12 @@
   ],
   "category.shape-shifter-curse": "Shape Shifter Curse",
   "codex.desc.appearance_0": [
-    "Magical resonance with creatures causes physical changes. At this stage, a Golden Apple can completely reverse them..."
+    "Magical resonance with creatures causes physical changes. At this stage, a ",
+    {
+      "text": "Golden Apple",
+      "color": "#00aa00"
+    },
+    " can completely reverse them..."
   ],
   "codex.desc.appearance_1": [
     "Intensified magic further alters your body. You sense it seeking new equilibrium - completely different from your original self.\nUsing a Golden Apple before progression might be wise..."
@@ -261,7 +266,12 @@
     " reignites its flow..."
   ],
   "codex.desc.appearance_normal": [
-    "Your body feels no different than usual. Maybe your internal magic needs certain triggers to manifest?"
+    "Your body feels no different than usual. Maybe your internal magic needs certain ",
+    {
+      "text": "triggers",
+      "color": "#aa00aa"
+    },
+    " to manifest?"
   ],
   "codex.desc.cons_0": [
     "Your new form brings inconveniences..."
@@ -276,28 +286,60 @@
     "Currently, the magic within causes no negative effects"
   ],
   "codex.desc.instincts_0": [
-    "New thoughts emerge in your mind..."
+    {
+      "text": "New",
+      "color": "#aa00aa"
+    },
+    " thoughts emerge in your mind..."
   ],
   "codex.desc.instincts_1": [
-    "Creature instincts grow stronger... Maybe resist them"
+    "Creature ",
+    {
+      "text": "instincts",
+      "color": "#aa00aa"
+    },
+    " grow stronger... Maybe resist them"
   ],
   "codex.desc.instincts_2": [
-    "Instincts no longer disturb you - They've become part of you"
+    {
+      "text": "Instincts",
+      "color": "#aa00aa"
+    },
+    " no longer disturb you - They've become part of you"
   ],
   "codex.desc.instincts_3": [
     "Examining yourself, you feel the ever-shifting magic within you has reached a new state of stability - unshaken even by the Cursed Moon\nYour form has been permanently altered"
   ],
   "codex.desc.instincts_normal": [
-    "Examining yourself, you sense shifting magic within your body, but nothing more.\nYour mind remains calm, maintaining awareness of surroundings"
+    "Examining yourself, you sense ",
+    {
+      "text": "shifting magic",
+      "color": "#aa00aa"
+    },
+    " within your body, but nothing more.\nYour mind remains calm, maintaining awareness of surroundings"
   ],
   "codex.desc.pros_0": [
-    "Your new form grants special abilities..."
+    "Your new form grants special ",
+    {
+      "text": "abilities",
+      "color": "#00aa00"
+    },
+    "..."
   ],
   "codex.desc.pros_1": [
-    "Your form grants enhanced abilities..."
+    "Your form grants enhanced ",
+    {
+      "text": "abilities",
+      "color": "#00aa00"
+    },
+    "..."
   ],
   "codex.desc.pros_2": [
-    "Your form possesses these strengths"
+    "Your form possesses these ",
+    {
+      "text": "strengths",
+      "color": "#00aa00"
+    }
   ],
   "codex.desc.pros_normal": [
     "Currently, the magic within grants no noticeable benefits"
@@ -437,7 +479,7 @@
       },
       "\nEnhanced perception ",
       {
-        "text": "increases bow damage",
+        "text": "increases Bow damage",
         "color": "#0000aa"
       },
       "\nYour tiny size lets you ",
@@ -509,7 +551,7 @@
   "codex.form.shape-shifter-curse.anubis_wolf_0.instincts": [
     "You begin to desire ",
     {
-      "text": "to eat more rotten flesh",
+      "text": "to eat more Rotten Flesh",
       "color": "#aa00aa"
     },
     "\nYou begin to desire ",
@@ -559,7 +601,7 @@
         "text": "you are no longer affected by the Hunger and Poison effect",
         "color": "#0000aa"
       },
-      ", and rotten flesh provides ",
+      ", and Rotten Flesh provides ",
       {
         "text": "greater saturation",
         "color": "#0000aa"
@@ -648,7 +690,7 @@
   "codex.form.shape-shifter-curse.anubis_wolf_1.instincts": [
     "You desire ",
     {
-      "text": "to eat as much rotten flesh as possible",
+      "text": "to eat as much Rotten Flesh as possible",
       "color": "#aa00aa"
     },
     "\nYou begin to desire ",
@@ -720,7 +762,7 @@
       },
       "\n\nYou can ",
       {
-        "text": "eat bones",
+        "text": "eat Bones",
         "color": "#0000aa"
       },
       "\nYou are ",
@@ -728,7 +770,7 @@
         "text": "no longer affected by the Hunger and Poison effect",
         "color": "#0000aa"
       },
-      ", and rotten flesh provides ",
+      ", and Rotten Flesh provides ",
       {
         "text": "greater saturation",
         "color": "#0000aa"
@@ -921,14 +963,14 @@
         "text": "undead mobs deal slightly less damage to you",
         "color": "#0000aa"
       },
-      ".\nThe skeletons now fear and ",
+      ".\nThe Skeletons now fear and ",
       {
         "text": "avoid",
         "color": "#0000aa"
       },
       " you.\n\nYou can ",
       {
-        "text": "eat bones",
+        "text": "eat Bones",
         "color": "#0000aa"
       },
       "\nYou are ",
@@ -936,7 +978,7 @@
         "text": "no longer affected by the Hunger and Poison effect",
         "color": "#0000aa"
       },
-      ", and rotten flesh provides ",
+      ", and Rotten Flesh provides ",
       {
         "text": "greater saturation",
         "color": "#0000aa"
@@ -1109,7 +1151,7 @@
         "text": "undead mobs deal slightly less damage to you",
         "color": "#0000aa"
       },
-      ".\nThe skeletons now fear and ",
+      ".\nThe Skeletons now fear and ",
       {
         "text": "avoid",
         "color": "#0000aa"
@@ -1126,7 +1168,7 @@
       },
       "\nYou can ",
       {
-        "text": "eat bones",
+        "text": "eat Bones",
         "color": "#0000aa"
       },
       "\nYou are ",
@@ -1134,7 +1176,7 @@
         "text": "no longer affected by the Hunger and Poison effect",
         "color": "#0000aa"
       },
-      ", and rotten flesh provides ",
+      ", and Rotten Flesh provides ",
       {
         "text": "greater saturation",
         "color": "#0000aa"
@@ -1402,7 +1444,7 @@
       },
       ". It replenishes in water and depletes slowly on land\n",
       {
-        "text": "Consuming water bottles or any potions",
+        "text": "Consuming Water Bottles or any potions",
         "color": "#0000aa"
       },
       " also restores moisture\n\nYour body draws strength from water. Your ",
@@ -1478,7 +1520,7 @@
     "extra": [
       "Your physiology hinders normal locomotion. ",
       {
-        "text": "Outside 'Wave-Step', your movement becomes sluggish",
+        "text": "Outside 'Wave Riding', your movement becomes sluggish",
         "color": "#aa0000"
       },
       ".\nMoisture fuels your strength. Your ",
@@ -1545,7 +1587,7 @@
       },
       " or ",
       {
-        "text": "consuming water bottles/potions",
+        "text": "consuming Water Bottles/Potions",
         "color": "#0000aa"
       },
       ". Now, even on land, your ",
@@ -1563,9 +1605,9 @@
         "text": "sprinting",
         "color": "#0000aa"
       },
-      ", you enter ",
+      ", you enter the ",
       {
-        "text": "'Wave-Step'",
+        "text": "'Wave Riding'",
         "color": "#0000aa"
       },
       " state: ",
@@ -1575,7 +1617,7 @@
       },
       ".\nDuring ",
       {
-        "text": "'Wave-Step'",
+        "text": "'Wave Riding'",
         "color": "#0000aa"
       },
       ", you can expend ",
@@ -1595,7 +1637,7 @@
       },
       ".\n- At the cost of a moderate amount of moisture, you can ",
       {
-        "text": "press Active Skill (1) to release a small non-destructive water explosion",
+        "text": "press Active Skill (1) to release a small non-destructive Water Burst",
         "color": "#0000aa"
       },
       ".\n\nYou move ",
@@ -1655,7 +1697,7 @@
     {
       "text": "",
       "extra": [
-        "Your body has fully transformed into that of an ",
+        "\nYour body has fully transformed into that of an ",
         {
           "text": "amphibian animal",
           "color": "#aa00aa"
@@ -1757,7 +1799,7 @@
     "extra": [
       "Your new finger structure makes ",
       {
-        "text": "using bows/crossbows impossible",
+        "text": "using Bows/Crossbows impossible",
         "color": "#aa0000"
       },
       "\nMembranes and new toe structure prevent ",
@@ -1920,7 +1962,7 @@
       },
       "\nYour foreclaws struggle to even lift ",
       {
-        "text": "bows/crossbows",
+        "text": "Bows/Crossbows",
         "color": "#aa0000"
       },
       ", let alone ",
@@ -2048,7 +2090,7 @@
       },
       ". They function like ",
       {
-        "text": "elytra",
+        "text": "Elytra",
         "color": "#0000aa"
       },
       "\nYour body absorbs ",
@@ -2137,7 +2179,7 @@
       },
       ". Naturally, you can also ",
       {
-        "text": "no longer operate bows or crossbows",
+        "text": "no longer operate Bows or Crossbows",
         "color": "#aa0000"
       },
       ".\nYour membrane wings and digitigrade leg structure make equipping ",
@@ -2285,7 +2327,7 @@
       },
       ". Naturally, they can also serve as ",
       {
-        "text": "elytra",
+        "text": "Elytra",
         "color": "#0000aa"
       },
       ".\nYour body now absorbs ",
@@ -2457,7 +2499,7 @@
       },
       " as you once did, and you can ",
       {
-        "text": "use tools, weapons, and bows normally",
+        "text": "use tools, weapons, and Bows normally",
         "color": "#0000aa"
       },
       ".\nYour digestive system, now that of a predator, can ",
@@ -2622,7 +2664,7 @@
       },
       "\n",
       {
-        "text": "Attacking illagers",
+        "text": "Attacking Illagers",
         "color": "#aa0000"
       },
       " now also causes ",
@@ -2697,7 +2739,7 @@
       },
       "\n\nAll ",
       {
-        "text": "illagers",
+        "text": "Illagers",
         "color": "#0000aa"
       },
       " strangely show ",
@@ -2901,7 +2943,7 @@
       },
       " and ",
       {
-        "text": "right-clicking with a water bottle on corresponding ingredients",
+        "text": "right-clicking with a Water Bottle on corresponding ingredients",
         "color": "#0000aa"
       },
       ", you can directly brew ",
@@ -3264,7 +3306,7 @@
       },
       " and ",
       {
-        "text": "right-clicking with a water bottle on corresponding ingredients",
+        "text": "right-clicking with a Water Bottle on corresponding ingredients",
         "color": "#0000aa"
       },
       ", you can directly brew ",
@@ -3372,7 +3414,7 @@
         "text": "Active Skill (6)",
         "color": "#0000aa"
       },
-      " to toggle whether you stop at block edges while sneaking.\nRotten flesh is trivial for your new digestive system. You ",
+      " to toggle whether you stop at block edges while sneaking.\nRotten Flesh is trivial for your new digestive system. You ",
       {
         "text": "no longer get abnormal hunger",
         "color": "#0000aa"
@@ -3492,7 +3534,7 @@
         "text": "Fresh raw meat provides higher hunger value",
         "color": "#0000aa"
       },
-      ", rotten flesh doesn't cause hunger\n",
+      ", Rotten Flesh doesn't cause hunger\n",
       {
         "text": "Creepers avoid you",
         "color": "#0000aa"
@@ -3563,7 +3605,7 @@
       },
       ". You also ",
       {
-        "text": "can't effectively block damage with shields",
+        "text": "can't effectively block damage with Shields",
         "color": "#aa0000"
       },
       "\nFaster metabolism ",
@@ -3685,7 +3727,7 @@
       },
       "\nYour body grants strong immunity - ",
       {
-        "text": "no hunger or poison effects",
+        "text": "no Hunger or Poison effects",
         "color": "#0000aa"
       },
       "\n",
@@ -3733,7 +3775,7 @@
         "text": "no longer get energy from non-raw meat foods",
         "color": "#aa0000"
       },
-      ". Even when idle, your hyperactive metabolism ",
+      ".\nEven when idle, your hyperactive metabolism ",
       {
         "text": "constantly drains hunger",
         "color": "#aa0000"
@@ -3750,7 +3792,7 @@
       },
       " and ",
       {
-        "text": "cannot properly use shields",
+        "text": "cannot properly use Shields",
         "color": "#aa0000"
       }
     ]
@@ -3835,7 +3877,7 @@
         "text": "instinctively dodge incoming projectiles",
         "color": "#0000aa"
       },
-      "\nNight vision grants ",
+      "\nNight Vision grants ",
       {
         "text": "perfect sight in darkness",
         "color": "#0000aa"
@@ -3857,15 +3899,14 @@
       },
       "\nYour physiology grants strong ",
       {
-        "text": "immunity to both hunger and poison effects",
+        "text": "immunity to both Hunger and Poison effects",
         "color": "#0000aa"
       },
       "\n",
       {
         "text": "Creepers actively avoid you",
         "color": "#0000aa"
-      },
-      "\n"
+      }
     ]
   },
   "codex.form.shape-shifter-curse.ocelot_3.title": [
@@ -3882,7 +3923,7 @@
     }
   ],
   "codex.form.shape-shifter-curse.original_before_enable.name": [
-    "Original (Before enable mod contents)"
+    "Original (Before Enabling Mod Content)"
   ],
   "codex.form.shape-shifter-curse.original_shifter.appearance": [
     " "
@@ -4034,7 +4075,7 @@
         "text": "gradually take damage",
         "color": "#aa0000"
       },
-      ", even with fire resistance effects.\nYour movement speed in water is ",
+      ", even with Fire Resistance effects.\nYour movement speed in water is ",
       {
         "text": "slightly decreased",
         "color": "#aa0000"
@@ -4174,7 +4215,7 @@
         "text": "causes gradual damage",
         "color": "#aa0000"
       },
-      ", even with fire resistance.\n",
+      ", even with Fire Resistance.\n",
       {
         "text": "Leggings and boots",
         "color": "#aa0000"
@@ -4247,7 +4288,7 @@
         "text": "deal more damage",
         "color": "#0000aa"
       },
-      ". Infused with icy magic, your snowballs can ",
+      ". Infused with icy magic, your Snowballs can ",
       {
         "text": "turn water into ice",
         "color": "#0000aa"
@@ -4354,7 +4395,7 @@
         "text": "won't extinguish naturally",
         "color": "#aa0000"
       },
-      " unless you enter water or extinguish it with a water bottle.\nDuring the daytime in the hot Desert biome or the scorching Nether, your ",
+      " unless you enter water or extinguish it with a Water Bottle.\nDuring the daytime in the hot Desert biome or the scorching Nether, your ",
       {
         "text": "maximum health is drastically reduced",
         "color": "#aa0000"
@@ -4374,7 +4415,7 @@
         "text": "gradually take damage",
         "color": "#aa0000"
       },
-      ", even with fire resistance effects.\n",
+      ", even with Fire Resistance effects.\n",
       {
         "text": "Leggings and boots",
         "color": "#aa0000"
@@ -4429,7 +4470,7 @@
       },
       ":\nSnowballs you throw ",
       {
-        "text": "deal immense damage, rivaling arrows",
+        "text": "deal immense damage, rivaling Arrows",
         "color": "#0000aa"
       },
       ". Infused with frost magic, you can use them to ",
@@ -4549,7 +4590,7 @@
         "text": "drawbacks",
         "color": "#aa0000"
       },
-      " you must learn to adapt to:\n\nYou feel that your ice magic has weakened. The snowballs you launch ",
+      " you must learn to adapt to:\n\nYou feel that your ice magic has weakened. The Snowballs you launch ",
       {
         "text": "can no longer solidify water or lava",
         "color": "#aa0000"
@@ -4688,7 +4729,7 @@
       "text": "Cursed Moon and ordinary catalysts",
       "color": "#aa00aa"
     },
-    " cannot exert sufficient influence on your current form.\nInstead, the idea of weaving \n",
+    " cannot exert sufficient influence on your current form.\nInstead, the idea of weaving ",
     {
       "text": "[Dew Covered Cobweb]",
       "color": "#aa00aa"
@@ -4698,7 +4739,7 @@
       "text": "silk nest",
       "color": "#aa00aa"
     },
-    " begins to captivate you.\nFirst, you need to collect\n",
+    " begins to captivate you.\nFirst, you need to collect ",
     {
       "text": "[Silk Dew]",
       "color": "#aa00aa"
@@ -4738,12 +4779,12 @@
       },
       ".\n\nYour body is ",
       {
-        "text": "no longer affected by poison",
+        "text": "no longer affected by Poison",
         "color": "#0000aa"
       },
-      ".\nYou are unhindered by cobwebs. You can ",
+      ".\nYou are unhindered by Cobwebs. You can ",
       {
-        "text": "climb cobwebs",
+        "text": "climb Cobwebs",
         "color": "#0000aa"
       },
       " and ",
@@ -4853,7 +4894,7 @@
           "text": "Nutrient Dissolve Cocoon",
           "color": "#aa00aa"
         },
-        " for this purpose has already been etched into your instincts.\n\nUnlike ordinary spiders, your further-developed abdomen is not used to house organs, but to store ",
+        " for this purpose has already been etched into your instincts.\n\nUnlike ordinary Spiders, your further-developed abdomen is not used to house organs, but to store ",
         {
           "text": "liquid silk",
           "color": "#aa00aa"
@@ -5003,7 +5044,7 @@
         "text": "tower bridge web structure can be generated upward",
         "color": "#0000aa"
       },
-      ". When hitting a creature, you can inflict ",
+      ".\nWhen hitting a creature, you can inflict ",
       {
         "text": "Slowness and Weakness",
         "color": "#0000aa"
@@ -5028,17 +5069,17 @@
         "text": "beneficial effects",
         "color": "#0000aa"
       },
-      ".\nYou can ",
+      ".\n\nYou can ",
       {
-        "text": "eat string to replenish web value",
+        "text": "eat String to replenish web value",
         "color": "#0000aa"
       },
-      ". By holding string in your inventory and right-clicking another string to expend a small amount of web value to ",
+      ". By holding String in your inventory and right-clicking another String to expend a small amount of web value to ",
       {
-        "text": "craft cobwebs",
+        "text": "craft Cobwebs",
         "color": "#0000aa"
       },
-      ".\nBy holding a cobweb in your inventory and right-clicking a composter, you can expend a larger amount of web value to create a ",
+      ".\nBy holding a Cobweb in your inventory and right-clicking a Composter, you can expend a larger amount of web value to create a ",
       {
         "text": "Nutrient Dissolve Cocoon",
         "color": "#0000aa"
@@ -5050,7 +5091,7 @@
       },
       ".\n\nYour transformed spider body grants you ",
       {
-        "text": "immunity to poison",
+        "text": "immunity to Poison",
         "color": "#0000aa"
       },
       " and the ability to ",
@@ -5063,9 +5104,9 @@
         "text": "see clearly even in darkness",
         "color": "#0000aa"
       },
-      ".\nYou are unhindered by cobwebs. You can ",
+      ".\nYou are unhindered by Cobwebs. You can ",
       {
-        "text": "climb cobwebs",
+        "text": "climb Cobwebs",
         "color": "#0000aa"
       },
       " and ",
@@ -5205,7 +5246,7 @@
     " "
   ],
   "codex.form.shape-shifter-curse.spider_3.name": [
-    "Spider Form (Permanent Phase)"
+    "Spider Form (Phase Permanent)"
   ],
   "codex.form.shape-shifter-curse.spider_3.pros": {
     "text": "",
@@ -5255,7 +5296,7 @@
         "text": "hand slot",
         "color": "#ffaa00"
       },
-      ", you can gain various beneficial effects.\nYou can eat string to replenish web value. By holding string in your inventory and right-clicking another string, you can craft cobwebs.\nBy holding a cobweb in your inventory and right-clicking a composter, you can create a Nutrient Dissolve Cocoon - Meat placed inside will be gradually converted into Nutrient Sacs that you can consume.\nYour fully transformed multi-legged spider body grants you night vision, immunity to poison, and the ability to step up one block of height. It also grants you the ability to freely climb the sides of blocks.\nYou are unhindered by cobwebs. You can climb cobwebs and sense entities caught within them.\nSpiders do not see you as an enemy."
+      ", you can gain various beneficial effects.\nYou can eat String to replenish web value. By holding String in your inventory and right-clicking another String, you can craft Cobwebs.\nBy holding a Cobweb in your inventory and right-clicking a Composter, you can create a Nutrient Dissolve Cocoon - Meat placed inside will be gradually converted into Nutrient Sacs that you can consume.\nYour fully transformed multi-legged spider body grants you Night Vision, immunity to Poison, and the ability to step up one block of height. It also grants you the ability to freely climb the sides of blocks.\nYou are unhindered by Cobwebs. You can climb Cobwebs and sense entities caught within them.\nSpiders do not see you as an enemy."
     ]
   },
   "codex.form.shape-shifter-curse.spider_3.title": [
@@ -5346,7 +5387,7 @@
     "Frost Claw"
   ],
   "effect.shape-shifter-curse.moondust_potion": [
-    "The essence of moondust surges within; it requires further processing"
+    "The essence of Moondust surges within; it requires further processing"
   ],
   "effect.shape-shifter-curse.to_allay_sp_effect": [
     {
@@ -5901,13 +5942,13 @@
     "Bottled Snowfall"
   ],
   "item.shape-shifter-curse.bottled_snowfall.tooltip": [
-    "[Snow Fox Form Tool] Requires powerful ice magic. At the cost of some hunger, condense and fire snowballs"
+    "[Snow Fox Form Tool] Requires powerful ice magic. At the cost of some hunger, condense and fire Snowballs"
   ],
   "item.shape-shifter-curse.bottled_snowfall_plus": [
     "Bottled Snowfall+"
   ],
   "item.shape-shifter-curse.bottled_snowfall_plus.tooltip": [
-    "[Snow Fox Tool] Condenses and fires snowballs +No longer consumes hunger+"
+    "[Snow Fox Tool] Condenses and fires Snowballs +No longer consumes hunger+"
   ],
   "item.shape-shifter-curse.catalyst": [
     "Catalyst"
@@ -5961,7 +6002,7 @@
     "Collar of Whiskers"
   ],
   "item.shape-shifter-curse.collar_of_whiskers.tooltip": [
-    "[Ocelot Form] For true hunters only. When trigger dodge power, you gain regeneration effect"
+    "[Ocelot Form] For true hunters only. When trigger dodge power, you gain Regeneration effect"
   ],
   "item.shape-shifter-curse.collar_of_whiskers_plus": [
     "Collar of Whiskers+"
@@ -6042,13 +6083,13 @@
     "Fountain Belt"
   ],
   "item.shape-shifter-curse.fountain_belt.tooltip": [
-    "[Axolotl Form] Requires powerful water power. Water burst no longer deals damage, but launches you and nearby entities into the air"
+    "[Axolotl Form] Requires powerful water power. Water Burst no longer deals damage, but launches you and nearby entities into the air"
   ],
   "item.shape-shifter-curse.fountain_belt_plus": [
     "Fountain Belt+"
   ],
   "item.shape-shifter-curse.fountain_belt_plus.tooltip": [
-    "[Axolotl Form] Requires powerful water magic. Water burst no longer deals damage, but launches you and nearby entities into the air +The launch also grants you and launched entities Slow Falling+"
+    "[Axolotl Form] Requires powerful water magic. Water Burst no longer deals damage, but launches you and nearby entities into the air +The launch also grants you and launched entities Slow Falling+"
   ],
   "item.shape-shifter-curse.foxfire_catalyst_core": [
     "Foxfire Catalyst Core"
@@ -6066,13 +6107,13 @@
     "Frost Pawglove"
   ],
   "item.shape-shifter-curse.frost_pawglove.tooltip": [
-    "[Snow Fox Form] Requires powerful ice magic. Your snowballs inflict slowness in an area, but deal reduced damage"
+    "[Snow Fox Form] Requires powerful ice magic. Your Snowballs inflict Slowness in an area, but deal reduced damage"
   ],
   "item.shape-shifter-curse.frost_pawglove_plus": [
     "Frost Pawglove+"
   ],
   "item.shape-shifter-curse.frost_pawglove_plus.tooltip": [
-    "[Snow Fox Form] Requires powerful ice magic. Your snowballs inflict Slowness in an area, but deal reduced damage +The area Slowness effect is further enhanced+"
+    "[Snow Fox Form] Requires powerful ice magic. Your Snowballs inflict Slowness in an area, but deal reduced damage +The area Slowness effect is further enhanced+"
   ],
   "item.shape-shifter-curse.glint_prism": [
     "Glint Prism"
@@ -6102,7 +6143,7 @@
     "Moondust Crystal Shard"
   ],
   "item.shape-shifter-curse.moondust_crystal_shard.tooltip": [
-    "Refined moondust crystals, used to craft accessories and tools that enhance form abilities"
+    "Refined Moondust crystals, used to craft accessories and tools that enhance form abilities"
   ],
   "item.shape-shifter-curse.moondust_matrix": [
     "Moondust Matrix"
@@ -6114,7 +6155,7 @@
     "Morphscale Anklet"
   ],
   "item.shape-shifter-curse.morphscale_armor.tooltip": [
-    "The moondust magic infused in these armors automatically adapts to your form"
+    "The Moondust magic infused in these armors automatically adapts to your form"
   ],
   "item.shape-shifter-curse.morphscale_catalyst_core": [
     "Morphscale Catalyst Core"
@@ -6171,7 +6212,7 @@
     "Resonant Core"
   ],
   "item.shape-shifter-curse.resonant_core.tooltip": [
-    "[Allay Form] Consuming Amethyst Shards grants regeneration to nearby entities, but no longer restores saturation"
+    "[Allay Form] Consuming Amethyst Shards grants Regeneration to nearby entities, but no longer restores saturation"
   ],
   "item.shape-shifter-curse.ripple_mirror": [
     "Ripple Mirror"
@@ -6217,13 +6258,13 @@
     "Venom Spindle"
   ],
   "item.shape-shifter-curse.venom_spindle.tooltip": [
-    "[Spider Form] Web Bullets now deal damage when hit, and replace its slowness and entangle effects with poison"
+    "[Spider Form] Web Bullets now deal damage when hit, and replace its Slowness and Entangled effects with Poison"
   ],
   "item.shape-shifter-curse.venom_spindle_plus": [
     "Venom Spindle+"
   ],
   "item.shape-shifter-curse.venom_spindle_plus.tooltip": [
-    "[Spider Form] Web projectiles inflict damage, Poison and Weakness, but no longer inflict Slowness +They also inflict Entanglement+"
+    "[Spider Form] Web Bullets inflict damage, Poison and Weakness, but no longer inflict Slowness +They also inflict Entanglement+"
   ],
   "item.shape-shifter-curse.web_catalyst_core": [
     "Web Catalyst Core"
@@ -6274,10 +6315,10 @@
   "message.shape-shifter-curse.select_form_ui.target_uuid": "[ %s ]",
   "message.shapeShifterCurseFabric.authing": "The server is requesting authentication data. This typically occurs when first joining the world (it may also be caused by a bug where a counter wasn't reset, triggering this message on login). If this prompt appears during gameplay, be cautious – the server-side JAR file may have been tampered with. Total requests: %s",
   "power.origins.vegetarian.name": [
-    "vegetarian"
+    "Vegetarian"
   ],
   "power.shape-shifter-curse.form_allay_sp_amethyst_shard_only.name": [
-    "amethyst consumer"
+    "Amethyst Consumer"
   ],
   "power.shape-shifter-curse.form_carnivore.name": [
     "Carnivore"
@@ -6286,13 +6327,13 @@
     "Familiar Constitution"
   ],
   "power.shape-shifter-curse.form_ocelot_2_raw_meat_only.name": [
-    "raw meat consumer"
+    "Raw Meat Consumer"
   ],
   "power.shape-shifter-curse.form_vegetarian.name": [
-    "vegetarian"
+    "Vegetarian"
   ],
   "power.shape-shifter-curse.no_shield.description": [
-    "The way your hands are formed provide no way of holding a shield upright."
+    "The way your hands are formed provide no way of holding a Shield upright."
   ],
   "power.shape-shifter-curse.no_shield.name": [
     "Unwieldy"
@@ -6498,14 +6539,14 @@
         "text": "Your understanding of water magic has deepened further, allowing you to use the power of water currents more efficiently\n[The moisture cost of "
       },
       {
-        "text": "wave-riding knockback",
+        "text": "Wave Riding knockback",
         "color": "#5555ff"
       },
       {
         "text": " and "
       },
       {
-        "text": "water explosions",
+        "text": "Water Burst",
         "color": "#5555ff"
       },
       {
@@ -6531,7 +6572,7 @@
           "text": "By precisely manipulating water currents, you can efficiently slide yourself forward\n[The ongoing moisture cost of "
         },
         {
-          "text": "wave riding",
+          "text": "Wave Riding",
           "color": "#5555ff"
         },
         {
@@ -6561,7 +6602,7 @@
       "text": "",
       "extra": [
         {
-          "text": "When the strength of your forepaws is enough to throw an arrow straight like a dart, who needs a bow or crossbow?\n[While your "
+          "text": "When the strength of your forepaws is enough to throw an Arrow straight like a dart, who needs a Bow or Crossbow?\n[While your "
         },
         {
           "text": "main hand",
@@ -6571,7 +6612,7 @@
           "text": " holds an "
         },
         {
-          "text": "arrow or tipped arrow",
+          "text": "Arrow or Tipped Arrow",
           "color": "#5555ff"
         },
         {
@@ -6732,7 +6773,7 @@
           "text": "The flight techniques of chiropterans are engraved in your soul, allowing you to use your membrane wings to propel yourself forward during high-speed flight\n[During "
         },
         {
-          "text": "elytra flight",
+          "text": "Elytra flight",
           "color": "#5555ff"
         },
         {
@@ -6919,14 +6960,14 @@
           "color": "#5555ff"
         },
         {
-          "text": "potion "
+          "text": "Potion "
         },
         {
-          "text": "charms",
+          "text": "Charms",
           "color": "#5555ff"
         },
         {
-          "text": ". Right-click to launch the potion charm as a projectile. These charms can only be used by "
+          "text": ". Right-click to launch the Potion Charm as a projectile. These charms can only be used by "
         },
         {
           "text": "your own kind",
@@ -6951,10 +6992,10 @@
     "text": "",
     "extra": [
       {
-        "text": "As your attunement deepens, you have understood how to attach the magic of fire to your shield\n[While "
+        "text": "As your attunement deepens, you have understood how to attach the magic of fire to your Shield\n[While "
       },
       {
-        "text": "sneaking with your shield raised",
+        "text": "sneaking with your Shield raised",
         "color": "#5555ff"
       },
       {
@@ -7449,7 +7490,7 @@
       "text": "When facing those enemies who twisted the original magic of your form, an urge for revenge ignites deep within your soul\n",
       "extra": [
         {
-          "text": "[Against illagers and witches, your "
+          "text": "[Against Illagers and Witches, your "
         },
         {
           "text": "attack damage is increased by 30%",
@@ -7847,14 +7888,14 @@
           "text": "---4.6 Under most circumstances, the host should use the issued equipment as much as possible, rather than abusing this emergency function---\n[In the inventory screen, pick up "
         },
         {
-          "text": "a coal block",
+          "text": "a Block of Coal",
           "color": "#5555ff"
         },
         {
           "text": " and move it onto "
         },
         {
-          "text": "a golden sword",
+          "text": "a Golden Sword",
           "color": "#5555ff"
         },
         {
@@ -7902,7 +7943,7 @@
           "text": " and move it onto "
         },
         {
-          "text": "a bow",
+          "text": "a Bow",
           "color": "#5555ff"
         },
         {
@@ -7920,7 +7961,7 @@
           "color": "#5555ff"
         },
         {
-          "text": ": higher durability, with base arrow damage increased by 25%. "
+          "text": ": higher durability, with base Arrow damage increased by 25%. "
         },
         {
           "text": "Enchantments are not preserved",
@@ -8136,14 +8177,14 @@
         "text": "Your understanding of water magic has deepened further, allowing you to use the power of water currents more efficiently\n[The moisture cost of "
       },
       {
-        "text": "wave-riding knockback",
+        "text": "Wave Riding knockback",
         "color": "#5555ff"
       },
       {
         "text": " and "
       },
       {
-        "text": "water explosions",
+        "text": "Water Burst",
         "color": "#5555ff"
       },
       {
@@ -8169,7 +8210,7 @@
           "text": "By precisely manipulating water currents, you can efficiently slide yourself forward\n[The ongoing moisture cost of "
         },
         {
-          "text": "wave riding",
+          "text": "Wave Riding",
           "color": "#5555ff"
         },
         {
@@ -8199,7 +8240,7 @@
       "text": "",
       "extra": [
         {
-          "text": "When the strength of your forepaws is enough to throw an arrow straight like a dart, who needs a bow or crossbow?\n[While your "
+          "text": "When the strength of your forepaws is enough to throw an Arrow straight like a dart, who needs a Bow or Crossbow?\n[While your "
         },
         {
           "text": "main hand",
@@ -8209,7 +8250,7 @@
           "text": " holds an "
         },
         {
-          "text": "arrow or tipped arrow",
+          "text": "Arrow or Tipped Arrow",
           "color": "#5555ff"
         },
         {
@@ -8370,7 +8411,7 @@
           "text": "The flight techniques of chiropterans are engraved in your soul, allowing you to use your membrane wings to propel yourself forward during high-speed flight\n[During "
         },
         {
-          "text": "elytra flight",
+          "text": "Elytra flight",
           "color": "#5555ff"
         },
         {
@@ -8557,14 +8598,14 @@
           "color": "#5555ff"
         },
         {
-          "text": "potion "
+          "text": "Potion "
         },
         {
-          "text": "charms",
+          "text": "Charms",
           "color": "#5555ff"
         },
         {
-          "text": ". Right-click to launch the potion charm as a projectile. These charms can only be used by "
+          "text": ". Right-click to launch the Potion Charm as a projectile. These charms can only be used by "
         },
         {
           "text": "your own kind",
@@ -8589,10 +8630,10 @@
     "text": "",
     "extra": [
       {
-        "text": "As your attunement deepens, you have understood how to attach the magic of fire to your shield\n[While "
+        "text": "As your attunement deepens, you have understood how to attach the magic of fire to your Shield\n[While "
       },
       {
-        "text": "sneaking with your shield raised",
+        "text": "sneaking with your Shield raised",
         "color": "#5555ff"
       },
       {
@@ -8720,7 +8761,7 @@
           "text": "; your fired "
         },
         {
-          "text": "arrows deal 3 less damage",
+          "text": "Arrows deal 3 less damage",
           "color": "#5555ff"
         },
         {
@@ -9303,7 +9344,7 @@
       "text": "When facing those enemies who twisted the original magic of your form, an urge for revenge ignites deep within your soul\n",
       "extra": [
         {
-          "text": "[Against illagers and witches, your "
+          "text": "[Against Illagers and Witches, your "
         },
         {
           "text": "attack damage is increased by 30%",
@@ -9464,10 +9505,10 @@
       "text": "",
       "extra": [
         {
-          "text": "The efficiency of your spinnerets at weaving silk has greatly increased, allowing you to compress web projectiles more quickly\n[The three-tier charge time of "
+          "text": "The efficiency of your spinnerets at weaving silk has greatly increased, allowing you to compress Web Bullets more quickly\n[The three-tier charge time of "
         },
         {
-          "text": "web projectiles",
+          "text": "Web Bullets",
           "color": "#5555ff"
         },
         {
@@ -9551,17 +9592,17 @@
       "text": "With your masterful ",
       "extra": [
         {
-          "text": "weaving skills, you can use cobwebs to craft stabilized web projectiles and keep them for later use\n[In your inventory, take "
+          "text": "weaving skills, you can use Cobwebs to craft stabilized Web Bullets and keep them for later use\n[In your inventory, take "
         },
         {
-          "text": "a cobweb",
+          "text": "a Cobweb",
           "color": "#5555ff"
         },
         {
           "text": " and "
         },
         {
-          "text": "right-click another cobweb",
+          "text": "right-click another Cobweb",
           "color": "#5555ff"
         },
         {
@@ -9575,17 +9616,17 @@
           "text": " to consume them and craft "
         },
         {
-          "text": "a web projectile item that anyone can use",
+          "text": "a Web Bullet item that anyone can use",
           "color": "#5555ff"
         },
         {
-          "text": ", with an effect equal to a fully charged web projectile]"
+          "text": ", with an effect equal to a fully charged Web Bullet]"
         }
       ]
     }
   ],
   "ssc_perk.shape-shifter-curse.spider_stabilized_projectile.name": [
-    "Stabilized Web Projectile"
+    "Stabilized Web Bullet"
   ],
   "text.autoconfig.shape-shifter-curse-client.category.General": "General",
   "text.autoconfig.shape-shifter-curse-client.category.InDevelopment": "In Development",
