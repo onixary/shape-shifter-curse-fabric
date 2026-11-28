@@ -73,7 +73,6 @@
   "advancements.shape-shifter-curse.on_use_golden_apple.title": "Temporary Relief",
   "advancements.shape-shifter-curse.spider_catch_a_bug.description": "As a \"professional\" \"network engineer\": this bug has been try-caught",
   "advancements.shape-shifter-curse.spider_catch_a_bug.title": "Caught: Unknown Exception",
-
   "block.shape-shifter-curse.altar": "Shape Shifter Altar",
   "block.shape-shifter-curse.altar.tooltip": "Powered by Moondust magic to transmute matter",
   "block.shape-shifter-curse.dew_covered_cobweb": "Dew Covered Cobweb",
@@ -82,9 +81,7 @@
   "block.shape-shifter-curse.moondust_crystal_grit": "Moondust Crystal Grit",
   "block.shape-shifter-curse.temp_web_bridge": "Bridge Cobweb",
   "block.shape-shifter-curse.web_composter": "Nutrient Dissolve Cocoon",
-
   "category.shape-shifter-curse": "Shape Shifter Curse",
-
   "codex.desc.appearance_0": "Magical resonance with creatures causes physical changes. At this stage, a Golden Apple can completely reverse them...",
   "codex.desc.appearance_1": "Intensified magic further alters your body. You sense it seeking new equilibrium - completely different from your original self.\nUsing a Golden Apple before progression might be wise...",
   "codex.desc.appearance_2": "The magic has nearly remade you. It's stabilized - Even Golden Apples can't help...\nUnless some greater influence reignites its flow...",
@@ -342,7 +339,6 @@
   "codex.status.infected": "For unknown reasons, you're overwhelmed by sudden drowsiness, while sensing magical changes within\nPerhaps you should sleep?\n",
   "codex.status.normal": "Currently, you feel nothing unusual\n",
   "codex.status.under_moon": "The Cursed Moon alters your body...\nIts effects fade at dawn. But... perhaps you should utilize this opportunity?\n",
-
   "command.shape_shifter_curse.no_permission_dynamic_form": "You don't have permission to use this form",
   "command.shape_shifter_curse.target_transforming": "Wait for the target player to finish transforming.",
   "command.shape_shifter_curse.no_permission_form": "You don't have permission to use this form",
@@ -352,14 +348,10 @@
   "command.shape_shifter_curse.perk.reset_all": "Reset tree %s (%s perks) and restored base form powers.",
   "command.shape_shifter_curse.perk.tree": "Perk tree %s: %s / %s unlocked",
   "command.shape_shifter_curse.perk.unlock_all": "Tree %s: unlocked %s new perks.",
-
   "commands.shape-shifter-curse.form_not_found": "Specified form not found!",
-
   "curios.identifier.extra_hand": "Extra Hand",
-
   "death.attack.ssc_no_water_for_gills": "%1$s didn't manage to keep wet",
   "death.attack.ssc_no_water_for_gills.player": "%1$s didn't manage to keep wet because they were fighting %2$s",
-
   "effect.shape-shifter-curse.entangled_effect": "Entangled",
   "effect.shape-shifter-curse.entangled_full_effect": "Cocooning",
   "effect.shape-shifter-curse.feed_effect": "High-density energy, capable of restoring hunger value and magic",
@@ -386,7 +378,6 @@
   "effect.shape-shifter-curse.to_snow_fox_0_potion": "After purification, you feel it's slightly cold to the touch",
   "effect.shape-shifter-curse.to_spider_0_effect": "... Strange spider?",
   "effect.shape-shifter-curse.to_spider_0_potion": "It has a soft silk texture",
-
   "entity.shape-shifter-curse.anubis_wolf_minion": "Jackal Wraith Guard",
   "entity.shape-shifter-curse.mana_reservoir": "Mana Reservoir",
   "entity.shape-shifter-curse.potion_charm_arrow": "Potion Charm Arrow",
@@ -395,11 +386,9 @@
   "entity.shape-shifter-curse.t_ocelot": "Cursed Ocelot",
   "entity.shape-shifter-curse.t_spider": "Cursed Spider",
   "entity.shape-shifter-curse.t_wolf": "Cursed Wandering Jackal Wraith",
-
   "gamerule.category.ssc_gamerule": "Shape Shifter Curse",
   "gamerule.sscUseInitialForm": "Use SSC custom initial form",
   "gamerule.sscUseInitialForm.description": "When enabled, players who have not chosen a form will immediately transform into the server-configured initial form on join",
-
   "gui.shape-shifter-curse.perk.acquire": "Obtain Tuning",
   "gui.shape-shifter-curse.perk.acquired": "Perk unlocked",
   "gui.shape-shifter-curse.perk.cost_separator": " / ",
@@ -448,7 +437,6 @@
   "gui.shape_shifter_curse_fabric.fcsv2.click_to_modify": "Modify",
   "gui.shape_shifter_curse_fabric.fcsv2.hex_text": "HEX",
   "gui.shape_shifter_curse_fabric.fcsv2.is_enable_layer": "Activate This Layer",
-
   "info.shape-shifter-curse.before_cursed_moon": "You feel magic stirring within you. The Cursed Moon will rise next night...",
   "info.shape-shifter-curse.before_cursed_moon_nether": "You feel magic stirring within you. The Cursed Moon will rise somewhere soon - Even in other dimensions, you can't get rid of it",
   "info.shape-shifter-curse.cursed_moon_forced": "You feel a strange force pushing time forward. The Cursed Moon will rise next night...",
@@ -485,7 +473,6 @@
   "info.shape-shifter-curse.transformed_by_cure_final": "Powerful golden magic nearly completely reversed your transformation! The magic within lies dormant, awaiting the next opportunity...",
   "info.shape-shifter-curse.use_catalyst": "The catalyst further excites the magic within...",
   "info.shape-shifter-curse.use_catalyst_when_ignore": "Your current form is less influenced by the lunar tides, normal catalyst seems not to have any effect...",
-
   "item.minecraft.lingering_potion.effect.feed_potion": "Lingering Compressed Energy Potion",
   "item.minecraft.lingering_potion.effect.moondust_potion": "Lingering Potion of Moondust",
   "item.minecraft.lingering_potion.effect.to_allay_sp_potion": "Lingering Allay Curse Potion",
@@ -668,11 +655,8 @@
   "item.shape-shifter-curse.withered_bandage.tooltip": "[Jackal Form] The Wither effect you gain when hit has a reduced level and lasts longer",
   "item.shape-shifter-curse.withered_bandage_plus": "Withered Bandage+",
   "item.shape-shifter-curse.withered_bandage_plus.tooltip": "[Jackal Form] The Wither effect you gain when hit has a reduced level and lasts longer +Wither on yourself after being hit lasts much longer, giving you more time to attack+",
-
   "itemGroup.shape_shifter_curse.sscitems": "Shape Shifter Curse",
-
   "jei.shape-shifter-curse.catalyst_core.info": "Not consumed when used in the catalyst slot for crafting at the Shape Shifter Altar.",
-
   "key.shape-shifter-curse.active_skill": "Activate Selected Power Binding",
   "key.shape-shifter-curse.next_active_skill": "Next Power Binding",
   "key.shape-shifter-curse.open_test_ui": "Open Skill Tree",
@@ -686,7 +670,6 @@
   "key.shape-shifter-curse.active_skill_6": "Active Power (6)",
   "key.shape-shifter-curse.make_sound": "Make Sound",
   "key.shape-shifter-curse.toggle_clip_at_ledge": "Toggle Clip at Ledge",
-
   "message.shape-shifter-curse.clip_at_ledge.off": "Clip at Ledge: Off",
   "message.shape-shifter-curse.clip_at_ledge.on": "Clip at Ledge: On",
   "message.shape-shifter-curse.enable_default_color": "Form Default Color Feature: %s",
@@ -694,7 +677,6 @@
   "message.shape-shifter-curse.select_form_ui.target_name": "Target: %s",
   "message.shape-shifter-curse.select_form_ui.target_uuid": "[ %s ]",
   "message.shapeShifterCurseFabric.authing": "The server is requesting authentication data. This typically occurs when first joining the world (it may also be caused by a bug where a counter wasn't reset, triggering this message on login). If this prompt appears during gameplay, be cautious – the server-side JAR file may have been tampered with. Total requests: %s",
-
   "power.origins.vegetarian.name": "Vegetarian",
   "power.shape-shifter-curse.form_allay_sp_amethyst_shard_only.name": "Amethyst Consumer",
   "power.shape-shifter-curse.form_carnivore.name": "Carnivore",
@@ -794,10 +776,8 @@
   "power.shape-shifter-curse.perks.snow_fox_revenge.description": "When facing those enemies who twisted the original magic of your form, an urge for revenge ignites deep within your soul\n[Against Illagers and Witches, your attack damage is increased by 30%]",
   "power.shape-shifter-curse.perks.snow_fox_revenge.name": "Vengeful Instinct",
   "power.shape-shifter-curse.prevent_ranged_weapon_use.name": "Prevent Ranged Weapon",
-
   "screen.shape-shifter-curse.book_of_shape_shifter.start_button_text": "Open the Book of the Shapeshifter",
   "screen.shape-shifter-curse.book_of_shape_shifter.start_content_text": "As you attempt to open the book, you feel strange magic flowing into your body through your fingertips with a faint tingling sensation, making you jerk your hand back instinctively\nCould this be some kind of curse? You're not sure\nHowever, you're certain that continuing to open this book will lead to unknown consequences\n\nNote:\nThis will activate the content of the Shape Shifter Curse mod\nThis mod may not be for everyone. Before proceeding, ensure you understand its themes and gameplay",
-
   "ssc_perk.shape-shifter-curse.anubis_wolf_pack_amplification.desc": "By fully merging your soul with the pack, the spirit wolves you summon can receive a portion of your power\n[When summoned, your spirit wolves gain Strength I for 30 seconds]",
   "ssc_perk.shape-shifter-curse.anubis_wolf_pack_amplification.name": "Pack Amplification",
   "ssc_perk.shape-shifter-curse.anubis_wolf_pack_response_1.desc": "You can more clearly feel the pack within your soul. The spirit wolves respond to your summons more quickly\n[The cooldown of your spirit wolf summons is shortened to 21 seconds; when your spirit wolves die, they restore 2 health for you]",
@@ -956,7 +936,6 @@
   "ssc_perk.shape-shifter-curse.spider_silk_secretion_2.name": "Silk Secretion II",
   "ssc_perk.shape-shifter-curse.spider_stabilized_projectile.desc": "With your masterful weaving skills, you can use Cobwebs to craft stabilized Web Bullets and keep them for later use\n[In your inventory, take a Cobweb and right-click another Cobweb, you can spend 10 web value points to consume them and craft a Web Bullet item that anyone can use, with an effect equal to a fully charged Web Bullet]",
   "ssc_perk.shape-shifter-curse.spider_stabilized_projectile.name": "Stabilized Web Bullet",
-
   "text.autoconfig.shape-shifter-curse-client.category.General": "General",
   "text.autoconfig.shape-shifter-curse-client.category.InDevelopment": "In Development",
   "text.autoconfig.shape-shifter-curse-client.category.Integration": "Integration",
@@ -1036,11 +1015,9 @@
   "text.shape-shifter-curse.config.form_color_select_menu": "Form Color Selection Menu (Professional)",
   "text.shape-shifter-curse.config.form_color_select_menu_v2": "Form Color Selection Menu (Standard)",
   "text.shape-shifter-curse.config.title": "Shape Shifter Curse Config Menu",
-
   "tooltip.shape_shifter_curse.morphscale_food": "Morphscaled Food",
   "tooltip.shape_shifter_curse.morphscale_item": "Morphscaled Item",
   "tooltip.shape_shifter_curse.potion_target_form": "Target Form: ",
-
   "trinket.slot.hand.extra_hand": "Extra Hand",
   "gui.shape-shifter-curse.sub_form.title": "• The Mirror | rorriM ehT •",
   "gui.shape-shifter-curse.sub_form.select": "Touch Mirror",
@@ -1050,5 +1027,71 @@
   "codex.form.shape-shifter-curse.bat_3_sub_avali.desc": "The image of a strange creature with four large ears and two-toned feathers gazes back at you from the other side of the distorted mirror...",
   "codex.form.shape-shifter-curse.snow_fox_3_sub_marbled_polecat.desc": "The image of a slender-bodied predator with rounded ears and two-toned stripes across its face gazes back at you from the other side of the distorted mirror...",
   "codex.form.shape-shifter-curse.bat_3_sub_avali.name": "Avali",
-  "codex.form.shape-shifter-curse.snow_fox_3_sub_marbled_polecat.name": "Marbled Polecat"
+  "codex.form.shape-shifter-curse.snow_fox_3_sub_marbled_polecat.name": "Marbled Polecat",
+  "text.autoconfig.shape-shifter-curse-client.option.enableFormModelOnVanillaFirstPersonRender.@Tooltip": "Enable form model on vanilla first person render. Default: true",
+  "text.autoconfig.shape-shifter-curse-client.option.ignoreNoRenderArmPower.@Tooltip": "Ignore noRenderArm power. Default: false",
+  "text.autoconfig.shape-shifter-curse-client.option.minBlinkIntervalTick.@Tooltip": "Minimum blink interval in ticks. Default: 60",
+  "text.autoconfig.shape-shifter-curse-client.option.maxBlinkIntervalTick.@Tooltip": "Maximum blink interval in ticks. Default: 140",
+  "text.autoconfig.shape-shifter-curse-client.option.blinkTick.@Tooltip": "Blink duration in ticks. Default: 4",
+  "text.autoconfig.shape-shifter-curse-client.option.newStartBookForBiggerScreen.@Tooltip": "Use bigger(2x) Book of Shapeshifter interface. Default: false",
+  "text.autoconfig.shape-shifter-curse-client.option.enableChangeFPMConfig.@Tooltip": "Auto-modify FPM config. Default: true",
+  "text.autoconfig.shape-shifter-curse-client.option.disableUnlockCheckInFormColorSelectMenu.@Tooltip": "Disable unlock check in form color selection menu. Default: false",
+  "text.autoconfig.shape-shifter-curse-client.option.fcs_use_v1_menu.@Tooltip": "Use the professional version of the form color selection menu. Default: false",
+  "text.autoconfig.shape-shifter-curse-client.option.unlockAllFormInFormColorSelectMenu.@Tooltip": "Unlock all form for form color selection menu. Default: false",
+  "text.autoconfig.shape-shifter-curse-client.option.clearFormUnlockRecordInFormColorSelectMenu.@Tooltip": "Clear form unlock record for form color selection menu. Default: false",
+  "text.autoconfig.shape-shifter-curse-client.option.enableBetterCombatFix.@Tooltip": "Enable Better Combat fix. Default: true",
+  "text.autoconfig.shape-shifter-curse-client.option.instinctBarPosType.@Tooltip": "Instinct Bar Middle Type (1-9). Default: 8",
+  "text.autoconfig.shape-shifter-curse-client.option.instinctBarPosOffsetX.@Tooltip": "Instinct Bar X Offset. Default: 100",
+  "text.autoconfig.shape-shifter-curse-client.option.instinctBarPosOffsetY.@Tooltip": "Instinct Bar Y Offset. Default: -9",
+  "text.autoconfig.shape-shifter-curse-client.option.manaBarPosType.@Tooltip": "ManaBar Middle Type (1-9). Default: 8",
+  "text.autoconfig.shape-shifter-curse-client.option.manaBarPosOffsetX.@Tooltip": "ManaBar X Offset. Default: 100",
+  "text.autoconfig.shape-shifter-curse-client.option.manaBarPosOffsetY.@Tooltip": "ManaBar Y Offset. Default: -17",
+  "text.autoconfig.shape-shifter-curse-client.option.itemStorePowerPosType.@Tooltip": "Item Store Power Middle Type (1-9). Default: 8",
+  "text.autoconfig.shape-shifter-curse-client.option.itemStorePowerPosOffsetX.@Tooltip": "Item Store Power X Offset. Default: -120",
+  "text.autoconfig.shape-shifter-curse-client.option.itemStorePowerPosOffsetY.@Tooltip": "Item Store Power Y Offset. Default: 1",
+  "text.autoconfig.shape-shifter-curse-client.option.magicGUIPosType": "Magic GUI Middle Type",
+  "text.autoconfig.shape-shifter-curse-client.option.magicGUIPosType.@Tooltip": "Magic GUI Middle Type (1-9). Default: 8",
+  "text.autoconfig.shape-shifter-curse-client.option.magicGUIPosOffsetX": "Magic GUI X Offset",
+  "text.autoconfig.shape-shifter-curse-client.option.magicGUIPosOffsetX.@Tooltip": "Magic GUI X Offset. Default: -200",
+  "text.autoconfig.shape-shifter-curse-client.option.magicGUIPosOffsetY": "Magic GUI Y Offset",
+  "text.autoconfig.shape-shifter-curse-client.option.magicGUIPosOffsetY.@Tooltip": "Magic GUI Y Offset. Default: -35",
+  "text.autoconfig.shape-shifter-curse-common.option.transformativeBatSpawnChance.@Tooltip": "Transformative Bat Spawn Chance, 0 For Disable Spawn. Default: 0.5f [0.0f ~ 1.0f]",
+  "text.autoconfig.shape-shifter-curse-common.option.transformativeAxolotlSpawnChance.@Tooltip": "Transformative Axolotl Spawn Chance, 0 For Disable Spawn. Default: 0.5f [0.0f ~ 1.0f]",
+  "text.autoconfig.shape-shifter-curse-common.option.transformativeOcelotSpawnChance.@Tooltip": "Transformative Ocelot Spawn Chance, 0 For Disable Spawn. Default: 0.5f [0.0f ~ 1.0f]",
+  "text.autoconfig.shape-shifter-curse-common.option.transformativeWolfSpawnChance.@Tooltip": "Transformative Wolf Spawn Chance, 0 For Disable Spawn. Default: 0.5f [0.0f ~ 1.0f]",
+  "text.autoconfig.shape-shifter-curse-common.option.transformativeSpiderSpawnChance.@Tooltip": "Transformative Spider Spawn Chance, 0 For Disable Spawn. Default: 0.5f [0.0f ~ 1.0f]",
+  "text.autoconfig.shape-shifter-curse-common.option.curseMoonPhase.@Tooltip": "Curse Moon Phase (0 ~ 7). Default: [1, 5]",
+  "text.autoconfig.shape-shifter-curse-common.option.allowSleepInCursedMoon.@Tooltip": "Allow players to sleep during Cursed Moon. Default: false",
+  "text.autoconfig.shape-shifter-curse-common.option.enableCursedMoonTransform.@Tooltip": "Enable Cursed Moon Transform. Default: true",
+  "text.autoconfig.shape-shifter-curse-common.option.disableAllDebug.@Tooltip": "Disable All Debug Command And Interface. Default: false",
+  "text.autoconfig.shape-shifter-curse-common.option.enableDebugCommand.@Tooltip": "Enable Debug Command (PermissionLevel = 0). Default: false",
+  "text.autoconfig.shape-shifter-curse-common.option.enableFullStackUpgrade.@Tooltip": "Enable Upgrade Recipe Can Upgrade Full Stack. Default: true",
+  "text.autoconfig.shape-shifter-curse-common.option.enableFoodHabitSystem.@Tooltip": "Enable Food Habit System Default: true",
+  "text.autoconfig.shape-shifter-curse-common.option.immediatelyTransform.@Tooltip": "Immediately Transform Default: false",
+  "text.autoconfig.shape-shifter-curse-common.option.enableInitialForm.@Tooltip": "Enable Initial Form Default: true",
+  "text.autoconfig.shape-shifter-curse-common.option.initialFormIds.@Tooltip": "Initial form IDs. Supports datapack forms. One ID will be picked randomly. Default: [shape-shifter-curse:original_before_enable:1]",
+  "text.autoconfig.shape-shifter-curse-common.option.statusPotionWithCurse.@Tooltip": "Transformative Potion Can Make Pre-Book Transforms Default: false",
+  "text.autoconfig.shape-shifter-curse-common.option.witchPotionForPreBook.@Tooltip": "Witch Can Throw Potion To Pre-Book Player Default: false",
+  "text.autoconfig.shape-shifter-curse-common.option.enablePatronFormSystem.@Tooltip": "[Obsolete] Enable Patron Form System. Default: true",
+  "text.autoconfig.shape-shifter-curse-common.option.DataPackVersionUrl.@Tooltip": "[Obsolete] Data Pack Version Url. Default: ",
+  "text.autoconfig.shape-shifter-curse-common.option.DataPackUrl.@Tooltip": "[Obsolete] Data Pack Download Url. Default: ",
+  "text.autoconfig.shape-shifter-curse-common.option.ResourcePackVersionUrl.@Tooltip": "[Obsolete] Resource Pack Version Url. Default: ",
+  "text.autoconfig.shape-shifter-curse-common.option.ResourcePackUrl.@Tooltip": "[Obsolete] Resource Pack Download Url. Default: ",
+  "text.autoconfig.shape-shifter-curse-common.option.PatronDataUrl.@Tooltip": "[Obsolete] Patron Data Url. Default: ",
+  "text.autoconfig.shape-shifter-curse-common.option.CheckUpdateInterval.@Tooltip": "[Obsolete] Check Update Interval (Seconds). Default: 86400 (1 Day)",
+  "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_config.@Tooltip": "Enable Auto Sync Config. Default: true",
+  "text.autoconfig.shape-shifter-curse-custom.option.enable_server_modify_FCD_config.@Tooltip": "Enable Server Side Modify Form Color Data Config. Default: true",
+  "text.autoconfig.shape-shifter-curse-custom.option.enable_form_default_color_system.@Tooltip": "Enable Form Default Color System. Default: true",
+  "text.autoconfig.shape-shifter-curse-custom.option.auto_sync_color_config.@Tooltip": "Enable Auto Sync Color Config. Default: true",
+  "text.autoconfig.shape-shifter-curse-custom.option.keep_original_skin.@Tooltip": "Keep original skin. Default: false",
+  "text.autoconfig.shape-shifter-curse-custom.option.enable_form_color.@Tooltip": "Enable form color. Default: false",
+  "text.autoconfig.shape-shifter-curse-custom.option.primaryColor.@Tooltip": "Primary color (ARGB). Default: white",
+  "text.autoconfig.shape-shifter-curse-custom.option.accentColor1Color.@Tooltip": "Accent color 1 (ARGB). Default: white",
+  "text.autoconfig.shape-shifter-curse-custom.option.accentColor2Color.@Tooltip": "Accent color 2 (ARGB). Default: white",
+  "text.autoconfig.shape-shifter-curse-custom.option.eyeColorA.@Tooltip": "Eye color A (ARGB). Default: black",
+  "text.autoconfig.shape-shifter-curse-custom.option.eyeColorB.@Tooltip": "Eye color B (ARGB). Default: black",
+  "text.autoconfig.shape-shifter-curse-custom.option.primaryGreyReverse.@Tooltip": "Primary color reverse grey scale mul. Default: false",
+  "text.autoconfig.shape-shifter-curse-custom.option.accent1GreyReverse.@Tooltip": "Accent color 1 reverse grey scale mul. Default: false",
+  "text.autoconfig.shape-shifter-curse-custom.option.accent2GreyReverse.@Tooltip": "Accent color 2 reverse grey scale mul. Default: false",
+  "text.autoconfig.shape-shifter-curse-custom.option.enable_form_random_sound.@Tooltip": "Enable form random sound, Default: true"
 }

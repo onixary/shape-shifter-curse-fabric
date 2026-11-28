@@ -12,51 +12,51 @@ public class ClientConfig implements ConfigData {
 
     // Comment 不知道如何本地化
     @ConfigEntry.Category("General")
-    @Comment("Enable form model on vanilla first person render. Default: true")
+    @ConfigEntry.Gui.Tooltip
     public boolean enableFormModelOnVanillaFirstPersonRender = true;  // 原版第一人称下启用形态模型渲染
 
     @ConfigEntry.Category("General")
-    @Comment("Ignore noRenderArm power. Default: false")
+    @ConfigEntry.Gui.Tooltip
     public boolean ignoreNoRenderArmPower = false;  // 忽略不渲染手臂的Power
 
     @ConfigEntry.Category("General")
-    @Comment("Minimum blink interval in ticks. Default: 60")
+    @ConfigEntry.Gui.Tooltip
     public int minBlinkIntervalTick = 60;
 
     @ConfigEntry.Category("General")
-    @Comment("Maximum blink interval in ticks. Default: 140")
+    @ConfigEntry.Gui.Tooltip
     public int maxBlinkIntervalTick = 140;
 
     @ConfigEntry.Category("General")
-    @Comment("Blink duration in ticks. Default: 4")
+    @ConfigEntry.Gui.Tooltip
     public int blinkTick = 4;
 
     @ConfigEntry.Category("General")
-    @Comment("Use bigger(2x) Book of Shapeshifter interface. Default: false")
+    @ConfigEntry.Gui.Tooltip
     public boolean newStartBookForBiggerScreen = false;  // 菜单缩放至少为4
 
     @ConfigEntry.Category("General")
-    @Comment("Auto-modify FPM config. Default: true")
+    @ConfigEntry.Gui.Tooltip
     public boolean enableChangeFPMConfig = true;  // 启用修改FPM配置
 
     @ConfigEntry.Category("General")
-    @Comment("Disable unlock check in form color selection menu. Default: false")
+    @ConfigEntry.Gui.Tooltip
     public boolean disableUnlockCheckInFormColorSelectMenu = false;  // 禁用颜色选择菜单中的解锁检查
 
     @ConfigEntry.Category("General")
-    @Comment("Use the professional version of the form color selection menu. Default: false")
+    @ConfigEntry.Gui.Tooltip
     public boolean fcs_use_v1_menu = false;  // 是否启用V1版本 那版由于Onixary说有点复杂 所以设计了标准版(V2) 我原本想扔拓展里 最后我决定加个专业版后缀放本体里
 
     @ConfigEntry.Category("Tool")
-    @Comment("Unlock all form for form color selection menu. Default: false")
+    @ConfigEntry.Gui.Tooltip
     public boolean unlockAllFormInFormColorSelectMenu = false;  // 解锁颜色选择菜单中的所有形态
 
     @ConfigEntry.Category("Tool")
-    @Comment("Clear form unlock record for form color selection menu. Default: false")
+    @ConfigEntry.Gui.Tooltip
     public boolean clearFormUnlockRecordInFormColorSelectMenu = false;  // 清除颜色选择菜单中的解锁记录
 
     @ConfigEntry.Category("Integration")
-    @Comment("Enable Better Combat fix. Default: true")
+    @ConfigEntry.Gui.Tooltip
     public boolean enableBetterCombatFix = true;  // 启用Better Combat Fix
 
     // @ConfigEntry.Category("Patron")
@@ -75,50 +75,50 @@ public class ClientConfig implements ConfigData {
     // @ConfigEntry.Category("InDevelopment")
 
     @ConfigEntry.Category("UI")
-    @Comment("Instinct Bar Middle Type (1-9). Default: 8")
+    @ConfigEntry.Gui.Tooltip
     public int instinctBarPosType = 8;  // 本能条中间位置类型 (1-9)
 
     @ConfigEntry.Category("UI")
-    @Comment("Instinct Bar X Offset. Default: 100")
+    @ConfigEntry.Gui.Tooltip
     public int instinctBarPosOffsetX = 100;  // 本能条中间 X 位置偏移量
 
     @ConfigEntry.Category("UI")
-    @Comment("Instinct Bar Y Offset. Default: -9")
+    @ConfigEntry.Gui.Tooltip
     public int instinctBarPosOffsetY = -9;  // 本能条中间 Y 位置偏移量
 
     @ConfigEntry.Category("UI")
-    @Comment("ManaBar Middle Type (1-9). Default: 8")
+    @ConfigEntry.Gui.Tooltip
     public int manaBarPosType = 8;  // 魔力条中间位置类型 (1-9)
 
     @ConfigEntry.Category("UI")
-    @Comment("ManaBar X Offset. Default: 100")
+    @ConfigEntry.Gui.Tooltip
     public int manaBarPosOffsetX = 100;  // 魔力条中间 X 位置偏移量
 
     @ConfigEntry.Category("UI")
-    @Comment("ManaBar Y Offset. Default: -17")
+    @ConfigEntry.Gui.Tooltip
     public int manaBarPosOffsetY = -17;  // 魔力条中间 Y 位置偏移量
 
     @ConfigEntry.Category("UI")
-    @Comment("Item Store Power Middle Type (1-9). Default: 8")
+    @ConfigEntry.Gui.Tooltip
     public int itemStorePowerPosType = 8;  // itemStorePower 中间位置类型 (1-9)
 
     @ConfigEntry.Category("UI")
-    @Comment("Item Store Power X Offset. Default: -120")
+    @ConfigEntry.Gui.Tooltip
     public int itemStorePowerPosOffsetX = -120;  // itemStorePower 中间 X 位置偏移量
 
     @ConfigEntry.Category("UI")
-    @Comment("Item Store Power Y Offset. Default: 1")
+    @ConfigEntry.Gui.Tooltip
     public int itemStorePowerPosOffsetY = 1;  // itemStorePower 中间 Y 位置偏移量
 
     @ConfigEntry.Category("UI")
-    @Comment("Magic GUI Middle Type (1-9). Default: 8")
+    @ConfigEntry.Gui.Tooltip
     public int magicGUIPosType = 8;
 
     @ConfigEntry.Category("UI")
-    @Comment("Magic GUI X Offset. Default: -200")
+    @ConfigEntry.Gui.Tooltip
     public int magicGUIPosOffsetX = -200;
 
     @ConfigEntry.Category("UI")
-    @Comment("Magic GUI Y Offset. Default: -35")
+    @ConfigEntry.Gui.Tooltip
     public int magicGUIPosOffsetY = -35;
 }
