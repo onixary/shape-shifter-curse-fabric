@@ -17,7 +17,35 @@ public class LongNeckRenderUtils {
                 && !ClientUtils.isOpenInventoryScreen
                 && player.isMainPlayer()
                 && client.options.getPerspective().isFirstPerson()
-                && FirstPersonModelCore.instance.isEnabled();
+                && FirstPersonModelCore.instance.isEnabled()
+                && !isTweakerooFreecamActive()
+                && !isFreecamActive()
+                && client.gameRenderer.getCamera().getPos().squaredDistanceTo(player.getEyePos()) < 4.0;
+    }
+
+    private static boolean isTweakerooFreecamActive() {
+        if (!FabricLoader.getInstance().isModLoaded("tweakeroo")) {
+            return false;
+        }
+        try {
+            Class<?> cls = Class.forName("fi.dy.masa.tweakeroo.config.FeatureToggle");
+            Object toggle = cls.getField("TWEAK_FREE_CAMERA").get(null);
+            return (Boolean) toggle.getClass().getMethod("getBooleanValue").invoke(toggle);
+        } catch (Throwable ignored) {
+            return false;
+        }
+    }
+
+    private static boolean isFreecamActive() {
+        if (!FabricLoader.getInstance().isModLoaded("freecam")) {
+            return false;
+        }
+        try {
+            Class<?> cls = Class.forName("net.xolt.freecam.Freecam");
+            return (Boolean) cls.getMethod("isEnabled").invoke(null);
+        } catch (Throwable ignored) {
+            return false;
+        }
     }
 
     public static float lerpAngle(float delta, float start, float end) {
