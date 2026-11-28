@@ -1,3 +1,13 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
+# File          : align_rich_lang_text_format.py
+# Author        : MM-Rabbit
+
+# Description   : 按 en_us 的富文本格式整理 en_gb 的 rich_lang（保留目标文本，仅补格式）
+
+# LICENSE       : MIT (ShapeShifterCurse 开发组 - XuHaoNan & Onixary)
+
 """
 Align rich text format from source localization to target
 localization.
@@ -15,7 +25,6 @@ localization.
 
 The target text is preserved; only formatting (color etc.) is added.
 
-Licensed under MIT.
 """
 import argparse
 import difflib

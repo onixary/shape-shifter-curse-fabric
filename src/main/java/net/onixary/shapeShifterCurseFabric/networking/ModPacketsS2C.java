@@ -459,12 +459,12 @@ public class ModPacketsS2C {
         client.execute(() -> {
             if (ShapeShifterCurseFabric.clientConfig.fcs_use_v1_menu) {
                 if (FormColorSelectMenu.instance == null) {
-                    Screen screen = new FormColorSelectMenu(Text.literal("text.shape-shifter-curse.config.form_color_select_menu"));
+                    Screen screen = new FormColorSelectMenu(Text.translatable("text.shape-shifter-curse.config.form_color_select_menu"));
                     client.setScreen(screen);
                 }
             } else {
                 if (FormColorSelectMenuV2.instance == null) {
-                    Screen screen = new FormColorSelectMenuV2(Text.literal("text.shape-shifter-curse.config.form_color_select_menu_v2"));
+                    Screen screen = new FormColorSelectMenuV2(Text.translatable("text.shape-shifter-curse.config.form_color_select_menu_v2"));
                     client.setScreen(screen);
                 }
             }
